@@ -6,15 +6,20 @@ export function createMetadata({
   path,
   ogImage,
   noIndex = false,
+  ogType,
+  publishedAt,
 }: {
   title: string
   description: string
   path?: string
   ogImage?: string
   noIndex?: boolean
+  ogType?: "website" | "article"
+  publishedAt?: string
 }) {
   const url = path ? `${site.url}${path}` : site.url
   const image = ogImage || `${site.url}/og.png`
+  const isArticle = ogType === "article"
 
   return {
     title: `${title} | ${site.name}`,
@@ -26,7 +31,9 @@ export function createMetadata({
       url,
       siteName: site.name,
       locale: site.locale,
-      type: "website" as const,
+      type: isArticle ? "article" : "website",
+      ...(isArticle && publishedAt ? { publishedTime: publishedAt } : {}),
+      ...(isArticle ? { authors: ["StackPilot Team"] } : {}),
       images: [{ url: image, width: 1200, height: 630 }],
     },
     twitter: {

@@ -31,7 +31,7 @@ export default function AboutPage() {
                 {[
                   { title: "Unbiased", desc: "We never accept payment for reviews or rankings. Every evaluation is independent." },
                   { title: "Thorough", desc: "Each tool is tested across dozens of criteria before receiving a score." },
-                  { title: "Transparent", desc: "Our methodology is public. We show exactly how we reach every conclusion." },
+                  { title: "Transparent", desc: "Our methodology is public. See exactly how we reach every conclusion." },
                   { title: "Helpful", desc: "Every piece of content should help you make a better decision." },
                 ].map((v) => (
                   <div key={v.title} className="p-4 rounded-xl bg-muted-bg">
@@ -39,6 +39,11 @@ export default function AboutPage() {
                     <p className="text-sm text-muted">{v.desc}</p>
                   </div>
                 ))}
+              </div>
+              <div className="mt-12 text-center">
+                <a href="/methodology" className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-primary-foreground h-10 px-6 text-sm font-medium transition-all duration-200 hover:bg-primary/90">
+                  Read our full methodology
+                </a>
               </div>
             </div>
           </div>

@@ -19,6 +19,7 @@ const footerLinks = [
     title: "Company",
     links: [
       { href: "/about", label: "About" },
+      { href: "/methodology", label: "Review Methodology" },
       { href: "/contact", label: "Contact" },
       { href: "/privacy", label: "Privacy Policy" },
       { href: "/terms", label: "Terms of Service" },

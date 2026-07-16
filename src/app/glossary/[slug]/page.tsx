@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, DefinedTermSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { getGlossaryTerm } from "@/lib/content/registry"
 import { getAllGlossaryTerms } from "@/lib/content/registry"
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const item = getGlossaryTerm(slug)
   if (!item) return {}
-  return createMetadata({ title: item.term, description: item.definition, path: `/glossary/${slug}` })
+  return createMetadata({ title: item.term, description: item.definition, path: `/glossary/${slug}`, ogType: "article" })
 }
 
 export default async function GlossaryTermPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -29,6 +29,7 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
 
   return (
     <>
+      <DefinedTermSchema term={item.term} definition={item.definition} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Glossary", href: "/glossary" }, { name: item.term, href: `/glossary/${slug}` }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Glossary", href: "/glossary" }, { name: item.term }]} />

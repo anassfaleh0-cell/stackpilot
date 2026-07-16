@@ -2,9 +2,9 @@ import { Container, Section } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, CollectionPageSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
-import { categories } from "@/lib/constants"
+import { site, categories } from "@/lib/constants"
 import { getAllReviews } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -34,6 +34,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
+      <CollectionPageSchema name={category.name} description={`Best ${category.name.toLowerCase()} software tools`} url={`${site.url}/category/${category.slug}`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: category.name, href: `/category/${slug}` }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Categories", href: "/reviews" }, { name: category.name }]} />

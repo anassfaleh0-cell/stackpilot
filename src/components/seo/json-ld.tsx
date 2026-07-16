@@ -97,6 +97,56 @@ export function SoftwareSchema({ name, description, applicationCategory, operati
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} key="ld-software" />
 }
 
+export function ReviewSchema({ name, description, rating, reviewCount, url }: { name: string; description: string; rating: number; reviewCount: number; url: string }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name,
+    description,
+    url,
+    review: {
+      "@type": "Review",
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: rating,
+        bestRating: 5,
+      },
+      author: {
+        "@type": "Organization",
+        name: "StackPilot",
+      },
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: rating,
+      bestRating: 5,
+      ratingCount: reviewCount,
+    },
+  }
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} key="ld-review" />
+}
+
+export function DefinedTermSchema({ term, definition }: { term: string; definition: string }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    name: term,
+    description: definition,
+  }
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} key="ld-defined-term" />
+}
+
+export function CollectionPageSchema({ name, description, url }: { name: string; description: string; url: string }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name,
+    description,
+    url,
+  }
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} key="ld-collection-page" />
+}
+
 export function FAQSchema({ questions }: { questions: { question: string; answer: string }[] }) {
   const schema = {
     "@context": "https://schema.org",

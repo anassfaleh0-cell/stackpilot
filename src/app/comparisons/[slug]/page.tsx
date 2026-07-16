@@ -86,7 +86,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <h2 className="text-2xl font-bold mb-6">Verdict</h2>
             <Card className="bg-primary/5 border-primary/20">
               <p className="text-lg font-semibold mb-2">
-                Winner: {cmp.winner}
+                {cmp.winner ? `Best for most teams: ${cmp.winner}` : "How they compare"}
               </p>
               <p className="text-muted text-sm">{cmp.verdict}</p>
             </Card>

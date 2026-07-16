@@ -2,6 +2,7 @@ import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, ArticleSchema } from "@/components/seo/json-ld"
+import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getBlogPost } from "@/lib/content/registry"
 import { formatDate } from "@/lib/utils"
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const post = getBlogPost(slug)
   if (!post) return {}
-  return createMetadata({ title: post.title, description: post.description, path: `/blog/${slug}` })
+  return createMetadata({ title: post.title, description: post.description, path: `/blog/${slug}`, ogType: "article", publishedAt: post.publishedAt })
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -27,7 +28,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Blog", href: "/blog" }, { name: post.title, href: `/blog/${slug}` }]} />
-      <ArticleSchema title={post.title} description={post.description} publishedAt={post.publishedAt} author={post.author} />
+      <ArticleSchema title={post.title} description={post.description} publishedAt={post.publishedAt} author={post.author} url={`${site.url}/blog/${post.slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Blog", href: "/blog" }, { name: post.title }]} />
       </Container>

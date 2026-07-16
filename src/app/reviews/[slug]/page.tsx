@@ -1,8 +1,9 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, SoftwareSchema, FAQSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, SoftwareSchema, ReviewSchema, FAQSchema } from "@/components/seo/json-ld"
 import { Card } from "@/components/ui/card"
+import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getReview } from "@/lib/content/registry"
 import { getAllReviews } from "@/lib/content/registry"
@@ -22,6 +23,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${tool.name} Review 2026`,
     description: `Read our in-depth ${tool.name} review. Expert analysis, features, pricing, pros & cons, and alternatives. ${tool.tagline}`,
     path: `/reviews/${tool.slug}`,
+    ogType: "article",
+    publishedAt: tool.lastReviewed,
   })
 }
 
@@ -39,6 +42,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
         { name: "Reviews", href: "/reviews" },
         { name: tool.name, href: `/reviews/${tool.slug}` },
       ]} />
+      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} reviewCount={tool.reviewCount} url={`${site.url}/reviews/${tool.slug}`} />
       <SoftwareSchema name={tool.name} description={tool.tagline} applicationCategory="BusinessApplication" />
       <FAQSchema questions={tool.faqs} />
 
