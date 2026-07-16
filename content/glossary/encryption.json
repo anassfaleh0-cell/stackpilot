@@ -1,0 +1,13 @@
+{
+  "slug": "encryption",
+  "term": "Encryption",
+  "definition": "The process of encoding data so that only authorized parties with the correct decryption key can access and read it.",
+  "extendedDefinition": "Encryption transforms readable plaintext into ciphertext using mathematical algorithms and keys, ensuring data confidentiality even if intercepted. There are two primary states: data at rest (stored on disks or databases) and data in transit (moving across networks), each requiring different encryption strategies. Standards like AES-256 for at-rest and TLS/SSL for in-transit encryption are widely adopted across industries. Encryption is frequently mandated by compliance frameworks such as GDPR, HIPAA, and SOC 2, making it a cornerstone of any secure cloud architecture.",
+  "category": "Security & Compliance",
+  "examples": [
+    "TLS/SSL encrypting data between your browser and websites (HTTPS)",
+    "End-to-end encryption in messaging apps like Signal and WhatsApp",
+    "AES-256 encryption for data at rest in cloud storage services"
+  ],
+  "relatedTerms": ["api", "sla", "saas"]
+}

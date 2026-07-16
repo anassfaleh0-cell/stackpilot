@@ -1,0 +1,66 @@
+{
+  "slug": "linear",
+  "name": "Linear",
+  "tagline": "Issue tracking and project management for high-performance teams.",
+  "description": "Linear is a streamlined issue tracking and project management platform designed specifically for software teams that value speed and efficiency. With its keyboard-first interface and powerful automation engine, Linear helps engineering teams plan, track, and ship software faster while reducing administrative overhead.",
+  "category": "Project Management",
+  "website": "https://linear.app",
+  "pricing": "Free Trial",
+  "rating": 4.8,
+  "reviewCount": 893,
+  "pros": [
+    "Blazing fast performance with instant search and filtering",
+    "Excellent keyboard shortcuts for power users and developers",
+    "Clean, intuitive UI with minimal learning curve for new users",
+    "Powerful AI integration for issue triage and backlog management",
+    "Deep GitHub and GitLab integration with branch-picking workflows"
+  ],
+  "cons": [
+    "Limited customization compared to more mature project management tools",
+    "No native time tracking or resource management features",
+    "Free tier is restrictive for larger teams and extended use"
+  ],
+  "features": [
+    {"name": "Issue Tracking", "description": "Create, assign, and track issues with rich markdown descriptions and attachments", "available": true, "category": "Core"},
+    {"name": "Project Roadmaps", "description": "Visual roadmap views to plan and communicate project timelines", "available": true, "category": "Core"},
+    {"name": "Sprint Planning", "description": "Cycle-based sprint management with automated progress tracking", "available": true, "category": "Core"},
+    {"name": "AI Issue Triage", "description": "Automatic issue labeling, prioritization, and assignment using AI", "available": true, "category": "Core"},
+    {"name": "GitHub Integration", "description": "Link issues to PRs, branches, and commits with automatic status updates", "available": true, "category": "Integrations"},
+    {"name": "GitLab Integration", "description": "Full GitLab support including merge request linking and branch creation", "available": true, "category": "Integrations"},
+    {"name": "Slack Integration", "description": "Create and update issues directly from Slack with rich notifications", "available": true, "category": "Integrations"},
+    {"name": "Figma Integration", "description": "Embed Figma designs and prototypes directly in Linear issues", "available": true, "category": "Integrations"},
+    {"name": "API & GraphQL", "description": "Powerful GraphQL API for custom integrations and automations", "available": true, "category": "Integrations"},
+    {"name": "Keyboard Shortcuts", "description": "Comprehensive keyboard-driven workflow for maximum efficiency", "available": true, "category": "Core"},
+    {"name": "Views & Filters", "description": "Custom views with advanced filtering, sorting, and saved searches", "available": true, "category": "Core"},
+    {"name": "Cycle Analytics", "description": "Team velocity tracking and cycle metrics for continuous improvement", "available": true, "category": "Core"},
+    {"name": "Role-Based Access", "description": "Admin, member, and viewer roles with granular project permissions", "available": true, "category": "Security"},
+    {"name": "Audit Logs", "description": "Detailed audit trail of all changes and actions across the workspace", "available": true, "category": "Security"},
+    {"name": "Mobile App", "description": "Native iOS and Android apps for issue management on the go", "available": true, "category": "Mobile"},
+    {"name": "Push Notifications", "description": "Real-time notifications for mentions, assignments, and status changes", "available": true, "category": "Mobile"},
+    {"name": "Import Tools", "description": "Bulk import from Jira, GitHub Issues, Asana, and Trello", "available": true, "category": "Core"},
+    {"name": "Automation Rules", "description": "Custom workflow automations for issue status changes and assignments", "available": true, "category": "Core"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.6},
+    {"label": "Ease of Use", "score": 4.9},
+    {"label": "Support", "score": 4.5},
+    {"label": "Value", "score": 4.3},
+    {"label": "Performance", "score": 4.9}
+  ],
+  "content": [
+    {"title": "Overview", "body": "Linear has emerged as the go-to issue tracking tool for modern software teams that prioritize speed and developer experience. Built from the ground up with a keyboard-first philosophy, Linear minimizes context switching and allows engineers to manage their work without leaving their flow state. Its clean, minimal interface belies a powerful automation engine that helps teams triage, prioritize, and ship features faster.", "type": "text"},
+    {"title": "Who is it for?", "body": "Linear is designed for engineering teams and technical organizations that value fast, keyboard-driven workflows. It excels in startup and mid-growth environments where speed and efficiency are critical. Product teams working closely with engineering will also appreciate Linear's roadmap and cycle planning features, though non-technical users may find the interface too minimalist.", "type": "text"},
+    {"title": "Key Features", "body": "Linear shines in its speed and developer-centric design. The keyboard-first interface allows users to navigate, create, and update issues without touching a mouse. Its AI-powered issue triage automatically labels and prioritizes incoming work, while deep GitHub and GitLab integrations keep code and tasks in sync. The cycle analytics feature provides actionable insights for team retrospectives.", "type": "list", "items": ["Keyboard-first interface with hundreds of customizable shortcuts for power users", "AI-driven issue triage that automatically labels, prioritizes, and assigns incoming issues", "Deep GitHub and GitLab integration with automatic branch and PR linking", "Cycle-based sprint planning with velocity tracking and burndown charts", "Powerful GraphQL API enabling custom tooling and advanced automations"]},
+    {"title": "Who should avoid it?", "body": "Teams that need extensive customization, custom fields, or complex workflow configurations may find Linear too opinionated and restrictive. Organizations that rely on Gantt charts, resource management, or time tracking will need to supplement Linear with other tools. Non-technical teams or those accustomed to more traditional project management interfaces may struggle with Linear's minimalist, keyboard-driven approach.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is Linear best used for?", "answer": "Linear is best used for software project management and issue tracking in engineering teams. It excels at managing sprints, tracking bugs and feature requests, and planning product roadmaps. Its deep version control integrations make it particularly valuable for development teams that use GitHub or GitLab."},
+    {"question": "How much does Linear cost?", "answer": "Linear offers a free tier limited to 10 users with basic features. The Team plan starts at $8/month per user and includes unlimited projects, cycles, and integrations. The Enterprise plan at $16/month per user adds SAML SSO, audit logs, and dedicated support with a 99.95% uptime SLA."},
+    {"question": "Does Linear integrate with GitHub?", "answer": "Yes, Linear offers deep GitHub integration that allows teams to link issues to branches, pull requests, and commits. When a PR is merged, the linked Linear issue can automatically transition to the Done state, keeping development workflows synchronized without manual updates."},
+    {"question": "Is Linear suitable for large teams?", "answer": "Yes, Linear supports large teams with its Enterprise plan that includes SAML SSO, advanced audit logging, and dedicated support. However, teams that require extensive customization or non-engineering workflows may find Linear's focused scope limiting compared to more general-purpose tools."}
+  ],
+  "alternatives": ["notion", "figma", "vercel", "supabase"],
+  "relatedGuides": ["how-to-choose-project-management-software", "saas-implementation-best-practices"],
+  "lastReviewed": "2026-07-01",
+  "author": "StackPilot Team"
+}

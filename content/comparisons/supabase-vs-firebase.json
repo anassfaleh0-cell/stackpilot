@@ -1,0 +1,39 @@
+{
+  "slug": "supabase-vs-firebase",
+  "title": "Supabase vs Firebase",
+  "description": "Open-source BaaS vs Google's Firebase. Which backend is right for you?",
+  "category": "Developer Tools",
+  "tool1": "Supabase",
+  "tool2": "Firebase",
+  "tool1Slug": "supabase",
+  "tool2Slug": "firebase",
+  "winner": "Supabase",
+  "features": [
+    {"name": "Relational database (SQL)", "tool1": true, "tool2": false},
+    {"name": "NoSQL document store", "tool1": false, "tool2": true},
+    {"name": "Realtime subscriptions", "tool1": true, "tool2": true},
+    {"name": "Authentication & user management", "tool1": true, "tool2": true},
+    {"name": "Row Level Security", "tool1": true, "tool2": false},
+    {"name": "Self-hostable", "tool1": true, "tool2": false},
+    {"name": "Open source", "tool1": true, "tool2": false},
+    {"name": "Cloud Functions", "tool1": true, "tool2": true},
+    {"name": "File storage", "tool1": true, "tool2": true},
+    {"name": "Full-text search", "tool1": true, "tool2": false},
+    {"name": "Analytics dashboard", "tool1": true, "tool2": true},
+    {"name": "Crash reporting", "tool1": false, "tool2": true},
+    {"name": "ML Kit / AI features", "tool1": false, "tool2": true},
+    {"name": "Postgres Extensions", "tool1": true, "tool2": false},
+    {"name": "Offline SDK support", "tool1": false, "tool2": true},
+    {"name": "Database migrations", "tool1": true, "tool2": false},
+    {"name": "Free tier limits", "tool1": true, "tool2": true}
+  ],
+  "verdict": "Supabase wins for projects that need full SQL power, row-level security, and the flexibility of open-source software with self-hosting options. Its PostgreSQL foundation gives developers access to advanced database features like migrations, PostGIS, and custom extensions that Firebase's NoSQL Firestore simply cannot match. Firebase still excels for rapid prototyping with its offline-first SDK, ML Kit integrations, and deep Google Cloud ecosystem, particularly for mobile-first apps. However, for teams that value data ownership, relational modeling, and predictable pricing at scale, Supabase's transparent open-source model and SQL-native approach provide a more sustainable long-term backend.",
+  "faqs": [
+    {"question": "Is Supabase better than Firebase?", "answer": "Supabase is better for projects requiring relational databases, SQL queries, and open-source flexibility. Firebase is better for rapid prototyping, mobile apps with offline support, and teams already invested in the Google Cloud ecosystem."},
+    {"question": "Can I migrate from Firebase to Supabase?", "answer": "Yes, but it requires significant effort due to different data models. Firebase uses NoSQL collections while Supabase uses PostgreSQL tables. You will need to redesign your data schema and rewrite queries during migration."},
+    {"question": "Does Supabase have offline support?", "answer": "Supabase has limited offline support compared to Firebase. Firebase's SDK includes built-in offline persistence, while Supabase currently relies on client-side caching strategies and does not yet have an equivalent offline-first SDK."},
+    {"question": "Is Supabase truly free?", "answer": "Supabase offers a generous free tier with unlimited API requests, 500 MB database, 1 GB file storage, and 2 GB bandwidth. It remains free without requiring a credit card, unlike Firebase which requires billing for some free tier features."}
+  ],
+  "relatedComparisons": ["vercel-vs-netlify", "github-vs-gitlab"],
+  "lastUpdated": "2026-07-01"
+}

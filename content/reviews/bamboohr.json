@@ -1,0 +1,73 @@
+{
+  "slug": "bamboohr",
+  "name": "BambooHR",
+  "tagline": "The leading all-in-one HR platform designed for small and medium businesses to manage people and culture",
+  "description": "BambooHR is a cloud-based human resources software built specifically for small and medium-sized organizations. It centralizes employee data, streamlines time-off tracking, simplifies hiring with an applicant tracking system, and provides powerful reporting. With an intuitive interface and a focus on employee experience, BambooHR helps HR teams move from administrative tasks to strategic people initiatives.",
+  "category": "HR & People",
+  "website": "https://bamboohr.com",
+  "pricing": "Paid",
+  "rating": 4.3,
+  "reviewCount": 3200,
+  "pros": [
+    "Exceptionally intuitive and clean user interface that makes HR tasks approachable for non-technical team members and managers.",
+    "Time-off tracking and PTO management is seamless, with automated accrual rules, carryover policies, and easy approval workflows.",
+    "Applicant tracking system (ATS) integrates recruiting workflows directly into the platform, from job posting to offer letters.",
+    "Powerful reporting and analytics allow HR teams to generate custom reports on turnover, headcount, compensation, and demographics.",
+    "Employee self-service portal empowers staff to update their own information, request time off, and access documents without HR involvement."
+  ],
+  "cons": [
+    "Payroll functionality is limited to US customers only, and even then some advanced payroll scenarios are not well supported.",
+    "Performance management features feel basic compared to dedicated tools, lacking 360-degree reviews and advanced goal tracking.",
+    "Customization options for fields and workflows are somewhat limited, which can frustrate organizations with unique HR processes."
+  ],
+  "features": [
+    {"name": "Employee Records", "description": "Centralized database for employee information including contact details, job history, compensation, and emergency contacts.", "available": true, "category": "Core"},
+    {"name": "Time-Off Tracking", "description": "Automated PTO management with configurable accrual rules, carryover limits, and easy request and approval workflows.", "available": true, "category": "Core"},
+    {"name": "Applicant Tracking System", "description": "Built-in ATS for posting jobs, managing candidates, scheduling interviews, and sending offer letters and onboarding tasks.", "available": true, "category": "Core"},
+    {"name": "Onboarding", "description": "Digital onboarding checklists, new hire portals, and e-signatures that streamline the transition from offer to productive employee.", "available": true, "category": "Core"},
+    {"name": "Offboarding", "description": "Structured offboarding checklists and exit surveys to ensure smooth departures and capture valuable employee feedback.", "available": true, "category": "Core"},
+    {"name": "Employee Self-Service", "description": "Portal allowing employees to update personal details, view pay stubs, request time off, and manage direct deposit information.", "available": true, "category": "Core"},
+    {"name": "Manager Self-Service", "description": "Dashboard for managers to approve time-off, view team org charts, access employee files, and run headcount reports.", "available": true, "category": "Core"},
+    {"name": "HR Reporting & Analytics", "description": "Custom report builder with pre-built templates for turnover, headcount, compensation, and diversity with export options.", "available": true, "category": "Analytics"},
+    {"name": "Compensation Management", "description": "Track salary history, bonuses, and equity with compensation planning tools and benchmarking data integration.", "available": true, "category": "HR"},
+    {"name": "Time Tracking", "description": "Built-in time clock and timesheet functionality for hourly employees with overtime calculations and PTO integration.", "available": true, "category": "HR"},
+    {"name": "Payroll (US Only)", "description": "Native payroll processing for US-based employees with tax filings, direct deposit, and integration with benefits administration.", "available": true, "category": "Payroll"},
+    {"name": "Payroll Integrations", "description": "Syncs with third-party payroll providers like Gusto, ADP, and QuickBooks for organizations using external payroll systems.", "available": true, "category": "Payroll"},
+    {"name": "Performance Reviews", "description": "Customizable performance review cycles with self-evaluations, manager assessments, and goal tracking capabilities.", "available": true, "category": "HR"},
+    {"name": "Goals & OKRs", "description": "Track individual and team goals aligned to company objectives with progress updates and manager check-ins.", "available": true, "category": "HR"},
+    {"name": "Mobile App", "description": "Native iOS and Android apps for employees and managers to request time off, approve requests, and access company directory.", "available": true, "category": "Mobile"},
+    {"name": "Mobile Notifications", "description": "Push notifications for pending approvals, time-off requests, and important announcements to keep everyone in the loop.", "available": true, "category": "Mobile"},
+    {"name": "API Access", "description": "RESTful API for integrating BambooHR data with other business systems like LMS, CRM, and custom internal tools.", "available": true, "category": "Integrations"},
+    {"name": "Slack Integration", "description": "Connect BambooHR to Slack for automated notifications about time-off requests, new hires, and upcoming birthdays.", "available": true, "category": "Integrations"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.2},
+    {"label": "Ease of Use", "score": 4.6},
+    {"label": "Support", "score": 4.1},
+    {"label": "Value", "score": 4.3},
+    {"label": "Performance", "score": 4.4}
+  ],
+  "content": [
+    {"title": "Overview", "body": "BambooHR is one of the most popular HR platforms for small and medium businesses, and for good reason. It replaces spreadsheets and disjointed HR tools with a single, well-designed system that handles employee records, time-off, hiring, and reporting. The platform has earned a loyal following for its ease of use and focus on improving the employee experience from hire to retire.", "type": "text"},
+    {"title": "Who is it for?", "body": "BambooHR is best suited for small to mid-sized businesses with 25 to 2,000 employees that need to modernize their HR operations. It is especially valuable for growing companies that want to move from manual processes to automated workflows without the complexity of enterprise HR suites. HR teams that prioritize user experience and employee self-service will find it a natural fit.", "type": "text"},
+    {"title": "Key Features", "body": "BambooHR covers the full employee lifecycle with features designed to reduce administrative overhead and improve data accuracy.", "type": "list", "items": [
+      "Employee records provide a single source of truth for all personnel data, including custom fields, document storage, and org charts.",
+      "Time-off tracking automates PTO accruals and approval workflows, eliminating the need for spreadsheets and manual tracking.",
+      "The built-in ATS lets HR teams manage job postings, candidate pipelines, and onboarding in one seamless workflow.",
+      "Reporting and analytics offer over 50 pre-built reports plus a custom report builder for turnover, headcount, and compensation analysis.",
+      "The employee self-service portal reduces HR ticket volume by letting staff manage their own info, time-off, and documents.",
+      "Mobile apps for iOS and Android ensure managers can approve requests and access key data on the go."
+    ]},
+    {"title": "Who should avoid it?", "body": "Large enterprises with complex HR needs and multi-country operations may find BambooHR too limited compared to Workday or SAP SuccessFactors. Companies that require advanced performance management features like 360-degree feedback or continuous check-in tools should look at dedicated platforms like Lattice or 15Five. Organizations that need deep payroll functionality outside the US will also need a separate payroll provider.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is BambooHR best used for?", "answer": "BambooHR is best used as a central HRIS for small and medium businesses that need to manage employee records, time-off, hiring, and reporting in one place. It excels at replacing disconnected spreadsheets and email-based processes with a clean, integrated system that empowers both HR teams and employees."},
+    {"question": "How much does BambooHR cost?", "answer": "BambooHR does not publish fixed pricing publicly. Pricing is per employee per month and typically starts around $5.25 per employee per month for the Core plan. The Pro plan adds features like performance management, time tracking, and advanced reporting at a higher per-employee rate. Most organizations receive a custom quote after a demo, and annual contracts are standard."},
+    {"question": "Does BambooHR integrate with other tools?", "answer": "Yes, BambooHR integrates with over 100 third-party applications including payroll providers (Gusto, ADP, QuickBooks), productivity tools (Slack, Google Workspace, Microsoft 365), recruiting platforms (LinkedIn, ZipRecruiter), and learning management systems. It also offers a public API for custom integrations."},
+    {"question": "Is BambooHR suitable for small teams?", "answer": "Absolutely. BambooHR is designed specifically with small and medium businesses in mind. Teams with as few as 25 employees can benefit from its centralized employee database and automated time-off tracking. The intuitive interface means small teams without dedicated HR staff can manage people operations effectively without extensive training."}
+  ],
+  "alternatives": ["gusto"],
+  "relatedGuides": ["saas-implementation-best-practices", "software-evaluation-checklist"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

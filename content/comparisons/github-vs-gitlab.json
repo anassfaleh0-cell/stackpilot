@@ -1,0 +1,52 @@
+{
+  "slug": "github-vs-gitlab",
+  "title": "GitHub vs GitLab",
+  "description": "Compare GitHub and GitLab across repositories, CI/CD, code review, AI features, and DevOps toolchain completeness for development teams.",
+  "category": "Developer Tools",
+  "tool1": "GitHub",
+  "tool2": "GitLab",
+  "tool1Slug": "github",
+  "tool2Slug": "gitlab",
+  "winner": "GitHub",
+  "features": [
+    { "name": "Git repositories", "tool1": true, "tool2": true },
+    { "name": "Pull requests/MRs", "tool1": true, "tool2": true },
+    { "name": "Code review", "tool1": true, "tool2": true },
+    { "name": "CI/CD", "tool1": true, "tool2": true },
+    { "name": "Container registry", "tool1": true, "tool2": true },
+    { "name": "Project management", "tool1": true, "tool2": true },
+    { "name": "Wiki", "tool1": true, "tool2": true },
+    { "name": "Issue tracking", "tool1": true, "tool2": true },
+    { "name": "Code scanning", "tool1": true, "tool2": true },
+    { "name": "Secret detection", "tool1": true, "tool2": true },
+    { "name": "Package registry", "tool1": true, "tool2": true },
+    { "name": "Review apps", "tool1": false, "tool2": true },
+    { "name": "Third-party integrations", "tool1": true, "tool2": true },
+    { "name": "Mobile app", "tool1": true, "tool2": false },
+    { "name": "Community features", "tool1": true, "tool2": false },
+    { "name": "Audit logs", "tool1": true, "tool2": true },
+    { "name": "Premium support SLA", "tool1": true, "tool2": true },
+    { "name": "AI features", "tool1": true, "tool2": true }
+  ],
+  "verdict": "GitHub wins for most development teams thanks to its unmatched open-source community, extensive third-party integration marketplace, and GitHub Copilot which is the leading AI coding assistant. GitHub Actions provides powerful CI/CD that rivals GitLab's built-in pipelines, and GitHub's mobile app and social coding features foster better collaboration. GitLab stands out for teams that need a complete, single-application DevOps lifecycle with built-in CI/CD from the start, review apps, and a robust self-hosted option for enterprises with strict compliance needs. For most public and private projects, GitHub's community and ecosystem are difficult to beat.",
+  "faqs": [
+    {
+      "question": "Can I migrate from GitHub to GitLab or vice versa?",
+      "answer": "Both platforms provide import and export tools that support direct repository migration including issues, pull requests, and wiki content. GitHub offers a GitHub Importer tool for GitLab, while GitLab provides project import from GitHub with comprehensive mapping of metadata."
+    },
+    {
+      "question": "Which platform has better CI/CD capabilities?",
+      "answer": "GitLab offers a more mature built-in CI/CD with native Kubernetes integration and review apps, requiring no external services. GitHub Actions has grown rapidly and offers superior third-party action marketplace, better Windows/macOS runner support, and more flexible workflow configurations."
+    },
+    {
+      "question": "How does pricing compare for private repositories?",
+      "answer": "GitHub offers free private repositories with up to 2000 minutes of Actions per month for individuals. GitLab's free tier also includes private repos and up to 400 CI/CD minutes. Both scale with team size, but GitLab's premium tiers often provide more DevOps features at lower price points."
+    },
+    {
+      "question": "Which is better for enterprise self-hosting?",
+      "answer": "GitLab is widely considered the better option for self-hosting with GitLab Self-Managed providing the full DevOps platform on your own infrastructure. GitHub Enterprise Server is also available but requires more infrastructure management and lacks some features found in the cloud version."
+    }
+  ],
+  "relatedComparisons": ["supabase-vs-firebase", "vercel-vs-netlify"],
+  "lastUpdated": "2026-07-16"
+}

@@ -1,0 +1,102 @@
+{
+  "slug": "jasper",
+  "name": "Jasper",
+  "tagline": "AI content platform built for marketers who need brand-consistent copy at scale",
+  "description": "Jasper is an AI content creation platform specifically designed for marketing teams and businesses that need high-quality, on-brand written content at scale. Unlike general-purpose AI chatbots, Jasper specializes in marketing copy with built-in brand voice customization, SEO optimization tools, and team collaboration features. It offers templates for blog posts, ad copy, email sequences, social media content, and more.",
+  "category": "AI & Machine Learning",
+  "website": "https://www.jasper.ai",
+  "pricing": "Paid",
+  "rating": 4.4,
+  "reviewCount": 8500,
+  "pros": [
+    "Brand Voice feature lets you upload existing content and train the AI to match your exact tone, style, and terminology across all outputs",
+    "Over 50+ pre-built templates for specific content types including blog posts, Google Ads, Facebook ads, emails, and product descriptions",
+    "Boss Mode workflow enables advanced commands and multi-step content generation without switching between modes or interfaces",
+    "Built-in SEO and plagiarism checks ensure content is both search-engine optimized and original before publication",
+    "Team collaboration with shared brand guidelines, campaign folders, and content approval workflows keeps output consistent across contributors"
+  ],
+  "cons": [
+    "Word count limits on lower-tier plans (10,000 words/month on Creator) feel restrictive for teams producing daily content",
+    "Output quality degrades noticeably for long-form content exceeding 1,500 words, requiring significant human editing",
+    "No true free tier limits testing and evaluation before committing to a paid subscription"
+  ],
+  "features": [
+    { "name": "Blog Post Writer", "description": "Generates SEO-optimized blog posts from titles, keywords, or outlines with adjustable tone and length controls", "available": true, "category": "Content Creation" },
+    { "name": "Ad Copy Generator", "description": "Creates Google, Facebook, and LinkedIn ad variants with headline and description options for A/B testing campaigns", "available": true, "category": "Content Creation" },
+    { "name": "Email Writer", "description": "Drafts marketing emails, newsletters, and drip sequences with subject line suggestions and personalization tokens", "available": true, "category": "Content Creation" },
+    { "name": "Social Media Content", "description": "Produces platform-optimized posts for Twitter, LinkedIn, Instagram, and Facebook with hashtag recommendations", "available": true, "category": "Content Creation" },
+    { "name": "Brand Voice", "description": "Trains the AI on your existing brand materials to replicate your unique voice, vocabulary, and style across all content", "available": true, "category": "Branding" },
+    { "name": "Campaigns", "description": "Organizes related content into campaigns with shared settings, brand voice, and output folders for streamlined production", "available": true, "category": "Workflow" },
+    { "name": "SEO Mode", "description": "Integrates target keywords naturally into content and provides real-time SEO scoring against search engine ranking factors", "available": true, "category": "SEO" },
+    { "name": "Plagiarism Checker", "description": "Scans generated content against billions of web pages to ensure originality before publishing or submission", "available": true, "category": "Quality" },
+    { "name": "Content Templates", "description": "Access to 50+ pre-designed templates for specific content formats from press releases to product descriptions", "available": true, "category": "Content Creation" },
+    { "name": "Chrome Extension", "description": "Browser extension that brings Jasper's writing capabilities directly into web apps like Gmail, Google Docs, and Notion", "available": true, "category": "Integration" },
+    { "name": "Zapier Integration", "description": "Connects Jasper to over 3,000 apps via Zapier for automated content workflows and cross-platform publishing", "available": true, "category": "Integration" },
+    { "name": "Grammarly Integration", "description": "Pairs with Grammarly for real-time grammar, spelling, and style corrections on generated content before export", "available": true, "category": "Integration" },
+    { "name": "Surfer SEO Integration", "description": "Deep integration with Surfer SEO for data-driven keyword targeting, NLP terms, and content structure recommendations", "available": true, "category": "Integration" },
+    { "name": "Team Collaboration", "description": "Multi-user workspace with role-based permissions, shared brand guidelines, and content review workflows", "available": true, "category": "Team" },
+    { "name": "Document Sharing", "description": "Generate shareable links for drafts that allow stakeholders to view and comment without a Jasper account", "available": true, "category": "Team" },
+    { "name": "API Access", "description": "REST API for developers to integrate Jasper's content generation directly into custom applications and pipelines", "available": true, "category": "Developer" },
+    { "name": "Analytics Dashboard", "description": "Tracks content output volume, team usage, word counts, and campaign performance metrics across your workspace", "available": true, "category": "Analytics" },
+    { "name": "Mobile Access", "description": "Mobile-optimized web interface allows content creation, editing, and review from smartphones and tablets", "available": true, "category": "Platform" }
+  ],
+  "ratings": [
+    { "label": "Features", "score": 4.6 },
+    { "label": "Ease of Use", "score": 4.3 },
+    { "label": "Support", "score": 4.2 },
+    { "label": "Value", "score": 4.1 },
+    { "label": "Performance", "score": 4.5 }
+  ],
+  "content": [
+    {
+      "title": "Overview",
+      "body": "Jasper stands out in the crowded AI writing space by focusing exclusively on marketing and brand content rather than being a general-purpose chatbot. Its core strength lies in the Brand Voice feature, which allows teams to train the AI on existing copy so every output aligns with established brand guidelines. The platform combines content generation with built-in SEO optimization, plagiarism detection, and team collaboration — positioning itself as an end-to-end content production suite rather than just a text generator.",
+      "type": "text"
+    },
+    {
+      "title": "Who is it for?",
+      "body": "Jasper is built for marketing teams, content agencies, and business owners who produce written content regularly and need to maintain a consistent brand voice across channels. It is particularly well suited for teams creating blog posts, social media content, email campaigns, and ad copy in high volume. The collaboration and brand management features make it a strong fit for agencies managing multiple client accounts. However, individual bloggers or casual writers focused on short-form output may find the pricing steep relative to simpler free alternatives.",
+      "type": "text"
+    },
+    {
+      "title": "Key Features",
+      "body": "Jasper packs a comprehensive set of tools designed to take content from ideation through to publication-ready drafts:",
+      "type": "list",
+      "items": [
+        "Brand Voice trains the AI on your uploaded content to replicate your unique tone, vocabulary, and terminology across every piece of generated copy",
+        "Boss Mode provides an advanced command interface where you can give complex multi-step instructions without switching between menus",
+        "SEO Mode integrates Surfer SEO data to optimize content for target keywords with real-time scoring and NLP term recommendations",
+        "Over 50 templates structure output for specific formats like blog intros, Google Ads, Facebook posts, email sequences, and product descriptions",
+        "Campaign workspaces let you group related content under shared brand voice settings, making multi-asset production consistent and fast",
+        "Plagiarism checker scans each output against the open web so you can verify originality before hitting publish or sending to clients"
+      ]
+    },
+    {
+      "title": "Who should avoid it?",
+      "body": "If you need a free AI writing tool or produce content only occasionally, Jasper's paid plans are hard to justify when ChatGPT and Claude offer capable free tiers. The word count limits on the Creator plan (10,000 words per month) become restrictive within weeks for active teams, and upgrading to the Pro plan is a significant cost increase. Additionally, Jasper struggles with long-form content; anything above 1,500 words tends to lose coherence and requires substantial human rewriting, making it less ideal for white papers or in-depth guides.",
+      "type": "text"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does Jasper's Brand Voice feature work?",
+      "answer": "Brand Voice allows you to upload existing content or paste URLs from your published work, and Jasper analyzes the text to learn your brand's tone, style, vocabulary, and sentence patterns. You can then save this voice profile and apply it to any content generation task. The result is that every blog post, ad copy, or email produced through Jasper reads as if your team wrote it. You can create multiple brand voices for different brands or product lines, which is especially useful for agencies managing multiple clients."
+    },
+    {
+      "question": "Does Jasper check for plagiarism?",
+      "answer": "Yes, Jasper includes a built-in plagiarism checker that scans generated content against a database of billions of web pages. This check runs within the editor on individual outputs, giving you a score and highlighting any flagged passages. It is not a substitute for a dedicated plagiarism tool like Copyscape in all cases, but it provides a solid first line of defense for ensuring your AI-generated work is original before publication."
+    },
+    {
+      "question": "Can Jasper write in languages other than English?",
+      "answer": "Jasper supports content generation in over 25 languages, including Spanish, French, German, Italian, Portuguese, Dutch, and others. The quality varies by language — English outputs are the strongest, while less common languages may produce more awkward phrasing. The Brand Voice feature also works for non-English content, though its accuracy depends on the quality and quantity of training material you provide. For English-only teams, this is a non-issue, but international teams should test carefully."
+    },
+    {
+      "question": "What is the difference between Jasper Creator and Jasper Pro plans?",
+      "answer": "The Creator plan is designed for individual users and small teams, offering 10,000 words per month, one Brand Voice, and access to all templates for $49 per month. The Pro plan starts at $69 per month for 25,000 words, adds unlimited Brand Voices, SEO Mode, and team collaboration features. The Pro plan also includes the plagiarism checker and the ability to create Campaigns. Enterprise tiers offer custom word limits, API access, and dedicated support. The jump from Creator to Pro is necessary for most serious marketing teams."
+    }
+  ],
+  "alternatives": ["chatgpt", "semrush"],
+  "relatedGuides": ["how-to-choose-an-ai-writing-tool", "building-your-seo-toolkit"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

@@ -1,0 +1,66 @@
+{
+  "slug": "supabase",
+  "name": "Supabase",
+  "tagline": "Open-source Firebase alternative with PostgreSQL.",
+  "description": "Supabase is an open-source backend-as-a-service platform that provides a PostgreSQL database, authentication, storage, and real-time subscriptions out of the box. It gives developers a complete backend infrastructure without the complexity of managing servers, while keeping full control over the underlying database with standard SQL and direct database access.",
+  "category": "Developer Tools",
+  "website": "https://supabase.com",
+  "pricing": "Freemium",
+  "rating": 4.5,
+  "reviewCount": 1245,
+  "pros": [
+    "Full PostgreSQL database with SQL access, extensions, and pgvector support",
+    "Generous free tier with 500 MB database, 1 GB storage, and 50,000 monthly active users",
+    "Real-time subscriptions and database webhooks for event-driven architectures",
+    "Built-in authentication with multiple providers and Row Level Security",
+    "Self-hosting option for complete data control and compliance requirements"
+  ],
+  "cons": [
+    "Documentation can be inconsistent as the platform evolves rapidly",
+    "Real-time features have latency limitations in high-throughput scenarios",
+    "Free tier database size is restrictive for production applications with large datasets"
+  ],
+  "features": [
+    {"name": "PostgreSQL Database", "description": "Full-featured PostgreSQL with pgvector, extensions, and SQL editor", "available": true, "category": "Core"},
+    {"name": "Authentication", "description": "User authentication with email/password, OAuth providers, and magic links", "available": true, "category": "Core"},
+    {"name": "Row Level Security", "description": "Database-level security policies that restrict row access per user", "available": true, "category": "Security"},
+    {"name": "Real-Time Subscriptions", "description": "WebSocket-based real-time data sync for live updates and collaboration", "available": true, "category": "Core"},
+    {"name": "File Storage", "description": "S3-compatible object storage with CDN and image transformations", "available": true, "category": "Core"},
+    {"name": "Edge Functions", "description": "Deno-based edge functions for custom backend logic at global locations", "available": true, "category": "Core"},
+    {"name": "Database Webhooks", "description": "Trigger HTTP requests on database insert, update, or delete events", "available": true, "category": "Integrations"},
+    {"name": "GraphQL API", "description": "Auto-generated GraphQL API via pg_graphql extension", "available": true, "category": "Integrations"},
+    {"name": "REST API", "description": "Auto-generated REST API from your database schema with PostgREST", "available": true, "category": "Integrations"},
+    {"name": "Vercel Integration", "description": "Seamless deployment to Vercel with environment variable management", "available": true, "category": "Integrations"},
+    {"name": "GitHub OAuth", "description": "GitHub authentication provider for quick user onboarding", "available": true, "category": "Integrations"},
+    {"name": "CLI & Local Dev", "description": "Local development environment with Supabase CLI and Docker support", "available": true, "category": "Core"},
+    {"name": "Database Backups", "description": "Automated daily backups with point-in-time recovery on paid plans", "available": true, "category": "Security"},
+    {"name": "Encryption at Rest", "description": "AES-256 encryption for all stored data", "available": true, "category": "Security"},
+    {"name": "Mobile SDK", "description": "Client SDKs for Flutter, React Native, Swift, and Kotlin", "available": true, "category": "Mobile"},
+    {"name": "Realtime Presence", "description": "Track user online status and cursor positions for collaborative apps", "available": true, "category": "Mobile"},
+    {"name": "SQL Editor", "description": "Browser-based SQL editor with query history and saved queries", "available": true, "category": "Core"},
+    {"name": "Self-Hosting", "description": "Deploy Supabase on your own infrastructure with Docker Compose", "available": true, "category": "Security"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.7},
+    {"label": "Ease of Use", "score": 4.4},
+    {"label": "Support", "score": 3.9},
+    {"label": "Value", "score": 4.8},
+    {"label": "Performance", "score": 4.5}
+  ],
+  "content": [
+    {"title": "Overview", "body": "Supabase has rapidly grown into one of the most popular backend-as-a-service platforms by combining the power of PostgreSQL with a developer-friendly interface and generous free tier. Unlike proprietary BaaS solutions, Supabase gives developers full SQL access to their database, enabling complex queries, migrations, and integrations with the broader PostgreSQL ecosystem. Its modular architecture means teams can use just the features they need—whether that's authentication, storage, real-time subscriptions, or the database alone.", "type": "text"},
+    {"title": "Who is it for?", "body": "Supabase is ideal for full-stack developers and startups that want a powerful backend without managing infrastructure. It is particularly attractive to teams that value open-source software and want to avoid vendor lock-in. Developers already familiar with PostgreSQL will feel right at home, while those new to SQL can benefit from the auto-generated REST and GraphQL APIs that abstract away much of the complexity.", "type": "text"},
+    {"title": "Key Features", "body": "Supabase's foundation is a managed PostgreSQL database that includes powerful extensions like pgvector for AI applications. The authentication system supports multiple providers and integrates seamlessly with Row Level Security for granular access control. Real-time subscriptions enable live data sync across clients using WebSocket connections, while edge functions allow running custom serverless logic at the edge. The platform also provides S3-compatible storage with CDN delivery.", "type": "list", "items": ["Managed PostgreSQL database with pgvector, full-text search, and PostGIS extensions", "Built-in authentication with email/password, OAuth, magic links, and Row Level Security", "Real-time data synchronization via WebSocket subscriptions and database change tracking", "Auto-generated REST and GraphQL APIs that adapt to your database schema", "Edge functions powered by Deno for globally distributed serverless compute"]},
+    {"title": "Who should avoid it?", "body": "Teams that need a fully managed, hands-off backend solution may find Supabase requires too much database knowledge compared to more abstracted services. Applications with very high throughput real-time requirements may hit latency limitations. Organizations that prefer NoSQL databases or need schema-less data models should consider alternatives like MongoDB or Firebase instead.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is Supabase best used for?", "answer": "Supabase is best used as a backend platform for web and mobile applications that need a PostgreSQL database, authentication, and real-time features. It excels as a Firebase alternative for teams that prefer SQL and want open-source flexibility. Common use cases include SaaS applications, real-time dashboards, collaborative tools, and AI applications leveraging pgvector."},
+    {"question": "How much does Supabase cost?", "answer": "Supabase offers a free tier with 500 MB database, 1 GB storage, and 50,000 monthly active users. The Pro plan starts at $25/month and increases to 8 GB database and 100 GB storage. Team ($599/month) and Enterprise plans add advanced features like SOC 2 compliance, dedicated infrastructure, and priority support."},
+    {"question": "Is Supabase open source?", "answer": "Yes, Supabase is fully open source under the Apache 2.0 license. The entire platform, including the dashboard, API, authentication, and real-time servers, can be self-hosted using Docker Compose. This makes Supabase an excellent choice for organizations that need complete control over their data and infrastructure."},
+    {"question": "Does Supabase work with Vercel?", "answer": "Yes, Supabase has a native Vercel integration that automatically creates environment variables and database connections for your Vercel projects. The two platforms complement each other well, with Vercel handling frontend deployment and Supabase providing the backend infrastructure in a unified workflow."}
+  ],
+  "alternatives": ["notion", "linear", "figma", "vercel"],
+  "relatedGuides": ["how-to-choose-project-management-software", "saas-implementation-best-practices"],
+  "lastReviewed": "2026-07-01",
+  "author": "StackPilot Team"
+}

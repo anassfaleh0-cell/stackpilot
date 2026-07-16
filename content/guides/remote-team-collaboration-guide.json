@@ -1,0 +1,39 @@
+{
+  "slug": "remote-team-collaboration-guide",
+  "title": "Remote Team Collaboration Tools Guide",
+  "description": "Remote work succeeds or fails on the quality of your collaboration toolchain. This guide covers the essential categories — messaging, video, project management, and async workflows — and how to configure them for maximum team adoption.",
+  "category": "Communication",
+  "difficulty": "Beginner",
+  "readingTime": 8,
+  "sections": [
+    {
+      "title": "Real-Time Messaging",
+      "body": "Slack and Microsoft Teams remain the dominant choices for real-time team chat, but your choice should depend on your existing ecosystem — Teams integrates natively with Microsoft 365, while Slack offers deeper third-party app integrations and a more flexible channel structure. Create dedicated channels by project or function (not by team member) and establish a naming convention like #proj-launch or #eng-frontend to keep conversations discoverable. Use Slack's Canvas or Teams' Wiki for persistent documents that would otherwise get lost in chat scroll.",
+      "type": "text"
+    },
+    {
+      "title": "Video Conferencing Best Practices",
+      "body": "Choose a primary video platform (Zoom, Google Meet, or Teams) and standardize on it to reduce confusion from multiple meeting links. Enable live captions and recording by default so absent teammates can catch up without interrupting the team. Establish a no-meeting block of at least four hours per week in each time zone to preserve deep work time, and keep recurring stand-ups to 15 minutes with a strict agenda.",
+      "type": "text"
+    },
+    {
+      "title": "Integrating Project Management with Chat",
+      "body": "Connect your project management tool (Linear, Asana, Notion) to your messaging platform so task updates appear automatically in relevant channels. In Slack, use the Linear or Asana app to create tasks directly from a message using slash commands, eliminating context-switching between tools. Configure notifications so that only status changes on tasks you own or follow trigger alerts — otherwise your PM tool will become another source of noise.",
+      "type": "tip"
+    },
+    {
+      "title": "Async Communication Practices",
+      "body": "Adopt a written-first culture where decisions, updates, and requests are documented in your PM tool or a shared wiki (Notion, Confluence) rather than delivered exclusively in meetings or DMs. Use Loom or mmhmm for async video updates when a written summary would lose nuance, but keep recordings under four minutes. Set team norms around expected response times — for example, 24 hours for non-urgent messages and a designated escalation path for blocking issues.",
+      "type": "text"
+    },
+    {
+      "title": "Security and Access Considerations",
+      "body": "Enable SCIM-based provisioning in your identity provider (Okta, Azure AD) so tool access is automatically granted and revoked based on HR records. Require SSO and hardware-backed two-factor authentication for every collaboration tool your team uses. Run a quarterly access review using a tool like BetterCloud or manual user audits to remove orphaned accounts from former employees or contractors — a single overlooked account can become an entry point for data breaches.",
+      "type": "warning"
+    }
+  ],
+  "author": "StackPilot Team",
+  "lastUpdated": "2026-07-16",
+  "relatedTools": ["slack", "notion", "linear", "asana"],
+  "relatedGuides": ["how-to-choose-an-ai-writing-tool"]
+}

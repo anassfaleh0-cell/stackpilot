@@ -1,0 +1,13 @@
+{
+  "slug": "sla",
+  "term": "Service Level Agreement",
+  "definition": "A commitment between a service provider and a client that specifies the expected level of service performance, availability, and responsibilities.",
+  "extendedDefinition": "SLAs define measurable metrics such as uptime percentages, response times, and resolution timelines, along with remedies or penalties if those targets are not met. They provide a formal framework for accountability, helping both parties align on expectations and establish trust in the service relationship. For SaaS and cloud providers, SLAs are a critical component of their offering, often serving as a key differentiator in competitive markets. Well-crafted SLAs protect customers by ensuring minimum service standards while giving providers clear operational targets to maintain quality.",
+  "category": "Development",
+  "examples": [
+    "99.9% uptime guarantee for cloud infrastructure services",
+    "4-hour response time for critical support tickets",
+    "Maximum 24-hour resolution time for priority bugs"
+  ],
+  "relatedTerms": ["saas", "api"]
+}

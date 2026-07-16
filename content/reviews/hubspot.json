@@ -1,0 +1,102 @@
+{
+  "slug": "hubspot",
+  "name": "HubSpot",
+  "tagline": "The all-in-one CRM platform that aligns your marketing, sales, and service teams",
+  "description": "HubSpot is a comprehensive inbound marketing, sales, and customer service platform built around a shared CRM database that unifies customer data across the entire buyer journey. Unlike point solutions that focus on a single function, HubSpot offers an integrated ecosystem of hubs covering marketing automation, sales engagement, customer service ticketing, content management, and operations. Its flywheel philosophy emphasizes delighting customers to drive growth, and the platform's free CRM tier has made it one of the most widely adopted business software platforms globally.",
+  "category": "CRM & Sales",
+  "website": "https://www.hubspot.com",
+  "pricing": "Freemium",
+  "rating": 4.5,
+  "reviewCount": 12500,
+  "pros": [
+    "Unified CRM database that serves as a single source of truth across marketing, sales, service, and operations teams with seamless data flow",
+    "Generous free CRM tier with unlimited contacts, deals, and tasks that provides genuine value without requiring an upgrade",
+    "Visual pipeline management with drag-and-drop deal staging, meeting scheduling, and email tracking that reduces manual sales admin work",
+    "Marketing automation with email sequences, lead scoring, and campaign analytics that integrates directly with CRM data for attribution",
+    "Extensive library of free academy courses and certifications that accelerates team onboarding and platform proficiency"
+  ],
+  "cons": [
+    "Cost escalates rapidly as you add hubs and scale contacts, with full-stack implementations often exceeding $50,000 annually for mid-sized teams",
+    "Custom reporting capabilities are limited compared to dedicated BI tools, with complex reports requiring the expensive Enterprise tier for custom report builder",
+    "Page load performance in the CRM interface can feel sluggish with large datasets, particularly on the free and Starter tiers with limited infrastructure"
+  ],
+  "features": [
+    {"name": "Contact & Company Management", "description": "Unified CRM database with automatic contact enrichment, company profiles, and complete interaction timeline", "available": true, "category": "Core"},
+    {"name": "Deal Pipeline Management", "description": "Customizable sales pipelines with drag-and-drop deal movement, stage probabilities, and forecasting tools", "available": true, "category": "Sales"},
+    {"name": "Email Tracking & Templates", "description": "Real-time email open and click tracking with reusable templates, snippets, and sequences for sales outreach", "available": true, "category": "Sales"},
+    {"name": "Meeting Scheduling", "description": "Automated meeting scheduler with calendar sync, round-robin assignment, and custom availability rules", "available": true, "category": "Sales"},
+    {"name": "Live Chat & Chatbots", "description": "Website live chat with chatbot automation, conversation routing, and handoff to sales or service teams", "available": true, "category": "Service"},
+    {"name": "Ticketing System", "description": "Customer service ticketing with automated routing, SLA management, and customer portal for case tracking", "available": true, "category": "Service"},
+    {"name": "Knowledge Base", "description": "Self-service knowledge base and help articles with SEO optimization and article performance analytics", "available": true, "category": "Service"},
+    {"name": "Email Marketing", "description": "Drag-and-drop email builder with personalization tokens, A/B testing, and transactional email automation", "available": true, "category": "Marketing"},
+    {"name": "Lead Scoring", "description": "Predictive lead scoring based on demographic fit and behavioral signals with automatic lead rotation", "available": true, "category": "Marketing"},
+    {"name": "Campaign Analytics", "description": "Multi-touch campaign attribution with source tracking, revenue reporting, and ROI analysis across channels", "available": true, "category": "Marketing"},
+    {"name": "Social Media Management", "description": "Social post scheduling, monitoring, and analytics across Facebook, Instagram, LinkedIn, Twitter, and YouTube", "available": true, "category": "Marketing"},
+    {"name": "Ad Management", "description": "LinkedIn, Facebook, Instagram, and Google Ads management with lead sync and conversion tracking", "available": true, "category": "Marketing"},
+    {"name": "Content Management System", "description": "Website CMS with drag-and-drop editor, SEO recommendations, and personalized content experiences", "available": true, "category": "CMS"},
+    {"name": "Landing Pages & Forms", "description": "Optimized landing page builder with A/B testing and customizable forms with smart field logic", "available": true, "category": "CMS"},
+    {"name": "Custom Reports & Dashboards", "description": "Cross-hub custom reporting with multi-object data sources, calculated properties, and scheduled dashboard sharing", "available": true, "category": "Analytics"},
+    {"name": "Salesforce Integration", "description": "Bidirectional syncing with Salesforce for organizations that need both platforms running concurrently", "available": true, "category": "Integrations"},
+    {"name": "Operations Hub", "description": "Data synchronization, custom workflow automation, and data quality automation for cleaning and deduplicating records", "available": true, "category": "Core"},
+    {"name": "Mobile CRM App", "description": "iOS and Android app with contact management, deal updates, logging calls, and push notifications for key events", "available": true, "category": "Core"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.7},
+    {"label": "Ease of Use", "score": 4.5},
+    {"label": "Support", "score": 4.1},
+    {"label": "Value", "score": 3.8},
+    {"label": "Performance", "score": 4.2}
+  ],
+  "content": [
+    {
+      "title": "Overview",
+      "body": "HubSpot pioneered the inbound marketing movement and has since grown into a complete customer platform spanning six integrated hubs: Marketing, Sales, Service, CMS, Operations, and Commerce. The core differentiator is its shared CRM database that provides a unified view of every customer interaction across the entire lifecycle, from first website visit through post-purchase support. Each hub can be purchased individually, but the platform's true power emerges when multiple hubs work together, enabling automated handoffs between marketing-qualified leads, sales follow-ups, and service ticket creation. With over 150,000 customers in 120+ countries, HubSpot has become the default CRM platform for mid-market companies seeking an alternative to complex, siloed enterprise solutions like Salesforce.",
+      "type": "text"
+    },
+    {
+      "title": "Who is it for?",
+      "body": "HubSpot is best suited for small to mid-sized businesses that want a unified platform to manage their entire customer lifecycle without stitching together separate tools for marketing, sales, and service. Marketing teams benefit from the campaign automation, lead scoring, and content optimization tools that are tightly coupled to CRM data. Sales teams gain pipeline visibility, email tracking, and meeting scheduling that reduces administrative overhead. Customer service teams appreciate the shared context with sales conversations when responding to support tickets. The platform is less suited for very small businesses on tight budgets due to the cost of adding multiple hubs, and for large enterprises with complex, customized workflows that exceed HubSpot's opinionated architecture.",
+      "type": "text"
+    },
+    {
+      "title": "Key Features",
+      "body": "HubSpot's integrated hub architecture provides a comprehensive set of tools that work together seamlessly, sharing data through a common CRM foundation. The most impactful capabilities are outlined below.",
+      "type": "list",
+      "items": [
+        "Unified CRM Database: Single source of truth for contacts, companies, deals, and tickets with automatic activity logging, timeline views, and company enrichment from firmographic data",
+        "Marketing Automation: Visual email sequence builder with smart send times, A/B testing, contact list segmentation, and lead scoring that routes hot leads directly to sales",
+        "Sales Engagement Hub: Email tracking with open and click notifications, meeting scheduler with round-robin assignment, call logging, and playbook templates for consistent outreach",
+        "Customer Service Workspace: Shared inbox with ticket automation, SLA dashboards, customer portal, knowledge base, and satisfaction survey tools for measuring CSAT and NPS",
+        "Content Management System: SEO-optimized website CMS with drag-and-drop editing, adaptive testing for personalization, and performance monitoring across all pages",
+        "Operations Hub: Data sync between HubSpot and external systems with field mapping, deduplication automation, and custom workflow triggers that keep data clean and connected"
+      ]
+    },
+    {
+      "title": "Who should avoid it?",
+      "body": "Organizations with fewer than 10 employees may find HubSpot's pricing prohibitive if they need more than the free CRM, as paid hubs start at $20 per month but require Marketing, Sales, and Service hubs for the full integrated experience. Companies with highly complex, industry-specific workflows that require deep customization may find HubSpot's opinionated data models limiting compared to Salesforce's custom object architecture. Businesses already invested in tools like Salesforce, Mailchimp, and Zendesk that are tightly integrated may find the migration effort and switching costs outweigh the benefits of consolidation.",
+      "type": "text"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is HubSpot best used for?",
+      "answer": "HubSpot is best used as an all-in-one CRM platform that aligns marketing, sales, and customer service teams around a unified customer database. It excels at automating the full customer lifecycle from lead generation and qualification through deal closure and ongoing support, with seamless handoffs between teams."
+    },
+    {
+      "question": "How much does HubSpot cost?",
+      "answer": "HubSpot's CRM is free with unlimited users and contacts. Paid hubs start at Marketing Hub Starter ($20/month), Sales Hub Starter ($20/month), and Service Hub Starter ($20/month). Professional tiers are $100/month per hub, and Enterprise tiers range from $150-$3,600/month depending on the hub and contact volume. Most mid-market companies using 2-3 hubs at Professional level spend $4,000-$15,000 annually."
+    },
+    {
+      "question": "Does HubSpot integrate with other tools?",
+      "answer": "HubSpot offers over 1,500 integrations through its App Marketplace, including deep native integrations with Salesforce, Google Workspace, Microsoft 365, Slack, Zoom, Shopify, WordPress, Mailchimp, and LinkedIn. The Operations Hub provides bidirectional data syncing with external systems including SQL databases and custom APIs for organizations needing advanced integration workflows."
+    },
+    {
+      "question": "Is HubSpot suitable for small teams?",
+      "answer": "HubSpot's free CRM is excellent for small teams starting out, offering unlimited contacts and deals with email tracking, meeting scheduling, and live chat at no cost. However, small teams should be aware that adding paid hubs for marketing automation or advanced sales features increases costs quickly, and the true value of the platform requires adopting multiple hubs to eliminate data silos."
+    }
+  ],
+  "alternatives": ["salesforce", "asana", "notion", "linear"],
+  "relatedGuides": ["crm-selection-guide"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

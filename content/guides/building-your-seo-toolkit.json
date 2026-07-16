@@ -1,0 +1,44 @@
+{
+  "slug": "building-your-seo-toolkit",
+  "title": "SEO Stack: Building Your Toolkit",
+  "description": "An effective SEO strategy depends on the right combination of tools for research, auditing, and tracking. This guide breaks down the essential categories and the best tools in each so you can build a stack that scales with your goals.",
+  "category": "Marketing & SEO",
+  "difficulty": "Intermediate",
+  "readingTime": 12,
+  "sections": [
+    {
+      "title": "Keyword Research Tools",
+      "body": "Start with SEMrush or Ahrefs to uncover high-volume, low-competition keywords using their Keyword Magic Tool or Keywords Explorer features. Look beyond search volume — analyze keyword difficulty trends, SERP feature prevalence, and seasonality data to prioritize terms with realistic ranking potential. Supplement your primary tool with Google's Keyword Planner for direct search volume data straight from the source, and export keyword lists into a shared spreadsheet for team alignment.",
+      "type": "text"
+    },
+    {
+      "title": "Technical SEO Auditing",
+      "body": "Run weekly crawls with tools like Screaming Frog or Sitebulb to identify broken links, duplicate meta tags, missing alt text, and crawl budget inefficiencies. Connect your crawl data with Google Search Console's Index Coverage report to spot pages that are discovered but not indexed. Prioritize fixes that block indexing — canonical errors, noindex tags on important pages — before cosmetic issues like missing meta descriptions.",
+      "type": "text"
+    },
+    {
+      "title": "Backlink Analysis and Link Building",
+      "body": "Use Ahrefs' Backlink Profile or SEMrush's Backlink Analytics to audit your domain's link health, looking for sudden drops in referring domains or spikes in toxic backlinks that could trigger a manual penalty. When prospecting for new links, filter for domains with high authority (DR 50+) and topical relevance rather than chasing any available placement. Set up automated alerts for new and lost backlinks so you can react quickly to changes in your profile and disavow harmful domains promptly.",
+      "type": "tip"
+    },
+    {
+      "title": "Content Optimization",
+      "body": "Tools like Surfer SEO or Clearscope analyze top-ranking pages for your target keyword and generate data-driven recommendations for word count, heading structure, and related terms to include. Incorporate their NLP keyword suggestions naturally into your content rather than keyword-stuffing, and use the readability scoring to match the reading level of your target audience. Re-optimize your existing top-20 ranking pages before investing time in new content — a small lift on pages already gaining traction often yields faster ROI.",
+      "type": "text"
+    },
+    {
+      "title": "Rank Tracking and Position Monitoring",
+      "body": "Set up daily rank tracking in SEMrush or Ahrefs for your priority keywords, but understand that rank positions fluctuate due to personalization, location, and device type. Use Google Search Console's average position data as your ground truth since it reflects actual user impressions rather than simulated SERP checks. Segment your keyword tracker by topic clusters so you can identify which content pillars are gaining or losing ground at a glance.",
+      "type": "text"
+    },
+    {
+      "title": "Building Automated Reports",
+      "body": "Combine data from Google Analytics 4, Google Search Console, and your SEO tool into a single Looker Studio dashboard so stakeholders can see traffic, rankings, and conversions in one view. Avoid vanity metrics like total impressions — focus on organic conversion rate, average position for money keywords, and click-through rate trends from branded versus non-branded queries. Schedule automated weekly email reports to keep the team informed without manual data pulls, and annotate the dashboard with major site changes to correlate traffic shifts with specific actions.",
+      "type": "warning"
+    }
+  ],
+  "author": "StackPilot Team",
+  "lastUpdated": "2026-07-16",
+  "relatedTools": ["semrush", "ahrefs", "google-analytics"],
+  "relatedGuides": ["how-to-choose-an-ai-writing-tool"]
+}

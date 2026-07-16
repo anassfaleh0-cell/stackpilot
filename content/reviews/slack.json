@@ -1,0 +1,73 @@
+{
+  "slug": "slack",
+  "name": "Slack",
+  "tagline": "The leading team communication platform that transforms how organizations collaborate with channels and integrations",
+  "description": "Slack is the most widely adopted team messaging and collaboration platform, used by millions of organizations worldwide. It organizes conversations into channels, connects teams through direct messaging, and integrates with hundreds of business tools to centralize workflows. With powerful search, file sharing, and automation capabilities, Slack reduces email overload and keeps teams aligned in real time.",
+  "category": "Communication",
+  "website": "https://slack.com",
+  "pricing": "Freemium",
+  "rating": 4.5,
+  "reviewCount": 28900,
+  "pros": [
+    "Channel-based organization keeps conversations structured and searchable, reducing the chaos of group chats and long email threads.",
+    "Deep integration ecosystem connects with over 2,600 apps including Google Drive, Jira, Salesforce, and GitHub for unified workflows.",
+    "Powerful search functionality can find any message, file, or channel across the entire workspace history in seconds.",
+    "Huddle feature enables instant audio conversations and screen sharing without scheduling meetings or switching contexts.",
+    "Workflow Builder allows teams to automate repetitive tasks like approvals, welcome messages, and form submissions without coding."
+  ],
+  "cons": [
+    "Notification overload is a real problem, and configuring channel-specific notification settings requires deliberate effort from users.",
+    "The free plan is limited to 90 days of message history and 10 app integrations, forcing growing teams into paid plans quickly.",
+    "Video and voice calling capabilities feel basic compared to Zoom or Microsoft Teams, lacking advanced meeting features and recording."
+  ],
+  "features": [
+    {"name": "Channels", "description": "Organize team conversations into dedicated channels for projects, topics, teams, or any purpose with public and private options.", "available": true, "category": "Core"},
+    {"name": "Direct Messages", "description": "Send private one-on-one or group messages with rich formatting, reactions, threads, and read receipts.", "available": true, "category": "Core"},
+    {"name": "Threads", "description": "Keep channel conversations tidy by replying in threads that stay attached to the original message and are searchable.", "available": true, "category": "Core"},
+    {"name": "File & Media Sharing", "description": "Share files, images, videos, and documents with inline previews and drag-and-drop uploads up to 1GB per file.", "available": true, "category": "Core"},
+    {"name": "Search", "description": "Global search across all messages, files, channels, and people with filters for date, sender, channel, and file type.", "available": true, "category": "Core"},
+    {"name": "Huddles", "description": "Start instant voice calls with screen sharing in any channel or DM without scheduling or joining a separate meeting.", "available": true, "category": "Collaboration"},
+    {"name": "Canvas", "description": "Create rich documents that live inside Slack for meeting notes, project plans, and wikis with collaborative editing.", "available": true, "category": "Collaboration"},
+    {"name": "Clips", "description": "Record and share audio and video messages that teammates can watch on their own time, reducing synchronous meeting needs.", "available": true, "category": "Collaboration"},
+    {"name": "Workflow Builder", "description": "Automate multi-step processes like approvals, onboarding tasks, and incident responses using a no-code visual builder.", "available": true, "category": "Automation"},
+    {"name": "Slack Automations", "description": "Build custom workflows and integrations using Slack's automation platform with triggers, conditions, and actions.", "available": true, "category": "Automation"},
+    {"name": "App Directory", "description": "Browse and install over 2,600 apps from the Slack App Directory including Google Drive, Jira, Zoom, and Salesforce.", "available": true, "category": "Integrations"},
+    {"name": "API & Webhooks", "description": "Build custom integrations using Slack's Events API, Web API, and incoming/outgoing webhooks for tailored workflows.", "available": true, "category": "Integrations"},
+    {"name": "Enterprise Grid", "description": "Multi-workspace architecture for large organizations with centralized administration, compliance exports, and data retention.", "available": true, "category": "Security"},
+    {"name": "SCIM Provisioning", "description": "Automated user provisioning and deprovisioning via SCIM integration with identity providers like Okta and Azure AD.", "available": true, "category": "Security"},
+    {"name": "Enterprise Key Management", "description": "Customer-managed encryption keys for enterprise plans with EKM for enhanced data security and compliance controls.", "available": true, "category": "Security"},
+    {"name": "Data Export", "description": "Export workspace data including messages and files for compliance, backup, or migration purposes on paid plans.", "available": true, "category": "Security"},
+    {"name": "Mobile App", "description": "Full-featured iOS and Android apps with push notifications, message search, and the ability to respond from any device.", "available": true, "category": "Mobile"},
+    {"name": "Slack Connect", "description": "Securely collaborate with external organizations, clients, and partners through shared channels within Slack.", "available": true, "category": "Collaboration"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.6},
+    {"label": "Ease of Use", "score": 4.5},
+    {"label": "Support", "score": 4.1},
+    {"label": "Value", "score": 4.0},
+    {"label": "Performance", "score": 4.5}
+  ],
+  "content": [
+    {"title": "Overview", "body": "Slack revolutionized workplace communication by replacing internal email with instant messaging organized around channels. Since its launch, it has grown into a comprehensive collaboration hub that integrates deeply with the tools teams already use. With features like huddles, canvas, and workflow automation, Slack continues to evolve beyond simple messaging into a platform for getting work done.", "type": "text"},
+    {"title": "Who is it for?", "body": "Slack is suitable for teams of any size, from small startups to large enterprises, that want to reduce email overload and improve real-time communication. It is especially valuable for distributed and remote teams that need a persistent digital workspace. Organizations that rely heavily on other SaaS tools will benefit most from Slack's extensive integration ecosystem.", "type": "text"},
+    {"title": "Key Features", "body": "Slack's feature set extends far beyond basic messaging, offering tools that enhance collaboration, automation, and integration.", "type": "list", "items": [
+      "Channels keep conversations organized by project, team, or topic, with the ability to make them public or private as needed.",
+      "Huddles enable spontaneous voice conversations and screen sharing, reducing the friction of scheduling formal meetings.",
+      "Workflow Builder lets anyone automate repetitive tasks like approvals, ticket creation, and status updates with no code.",
+      "The App Directory offers thousands of integrations from Google Drive and Jira to Salesforce and Zoom for connected workflows.",
+      "Canvas provides a collaborative document editor inside Slack for meeting notes, project trackers, and shared knowledge bases.",
+      "Slack Connect allows secure collaboration with external partners, vendors, and clients within shared channels."
+    ]},
+    {"title": "Who should avoid it?", "body": "Teams that are already deeply embedded in the Microsoft ecosystem may prefer Microsoft Teams for tighter Office 365 integration. Organizations that need advanced video conferencing with breakout rooms and call recording will still need a dedicated meeting tool alongside Slack. Very small teams on a tight budget may find the free plan's limitations (10 apps, 90-day history) too restrictive.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is Slack best used for?", "answer": "Slack is best used for real-time team communication and collaboration, replacing internal email with organized channels and direct messaging. It excels at centralizing conversations, files, and tools into one searchable interface, making it especially valuable for remote and distributed teams that need a persistent digital workspace."},
+    {"question": "How much does Slack cost?", "answer": "Slack offers a Free plan with 10 app integrations and 90-day message history. The Pro plan costs $8.75 per user per month (billed annually) and adds unlimited integrations, full message history, and group calls with screen sharing. Business+ is $15 per user per month and adds SAML SSO, data export, and 99.99% uptime SLA. Enterprise Grid has custom pricing for large organizations."},
+    {"question": "Does Slack integrate with other tools?", "answer": "Yes, Slack has the deepest integration ecosystem of any communication platform with over 2,600 apps in its directory. Key integrations include Google Workspace, Microsoft 365, Jira, Asana, Salesforce, GitHub, GitLab, Zoom, and hundreds more. It also offers a powerful API for building custom integrations and bots to connect proprietary tools."},
+    {"question": "Is Slack suitable for small teams?", "answer": "Yes, Slack works well for small teams thanks to its generous free plan and low per-user cost on Pro. Small teams benefit most from its ability to reduce email volume and keep conversations organized. The free plan is a great starting point, though teams will want to upgrade once they need more than 10 app integrations or access to older message history."}
+  ],
+  "alternatives": ["notion", "linear"],
+  "relatedGuides": ["how-to-choose-project-management-software", "saas-implementation-best-practices"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

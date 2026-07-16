@@ -1,0 +1,39 @@
+{
+  "slug": "figma-vs-sketch",
+  "title": "Figma vs Sketch",
+  "description": "Browser-based design collaboration vs veteran Mac design tool.",
+  "category": "Design",
+  "tool1": "Figma",
+  "tool2": "Sketch",
+  "tool1Slug": "figma",
+  "tool2Slug": "sketch",
+  "winner": "Figma",
+  "features": [
+    {"name": "Real-time collaboration", "tool1": true, "tool2": true},
+    {"name": "Browser-based editor", "tool1": true, "tool2": false},
+    {"name": "Native offline editing", "tool1": false, "tool2": true},
+    {"name": "Auto-layout", "tool1": true, "tool2": true},
+    {"name": "Component variants", "tool1": true, "tool2": true},
+    {"name": "Interactive prototyping", "tool1": true, "tool2": true},
+    {"name": "Developer handoff", "tool1": true, "tool2": true},
+    {"name": "Community plugins & widgets", "tool1": true, "tool2": true},
+    {"name": "Cross-platform support", "tool1": true, "tool2": false},
+    {"name": "Vector editing", "tool1": true, "tool2": true},
+    {"name": "Design system management", "tool1": true, "tool2": true},
+    {"name": "Version history", "tool1": true, "tool2": true},
+    {"name": "Free tier", "tool1": true, "tool2": false},
+    {"name": "Open file format", "tool1": false, "tool2": true},
+    {"name": "AI-powered features", "tool1": true, "tool2": true},
+    {"name": "Design token export", "tool1": true, "tool2": true},
+    {"name": "User testing integrations", "tool1": true, "tool2": false}
+  ],
+  "verdict": "Figma wins for most teams due to its browser-based platform, superior real-time collaboration, and cross-platform availability that eliminates the need for a Mac. Sketch remains a capable design tool with excellent offline performance and a mature plugin ecosystem, but its Mac-only limitation is increasingly hard to justify in remote-first teams. Figma's auto-layout, component system, and developer handoff features have become industry standards that Sketch has struggled to match. While Sketch loyalists appreciate its focused native experience, Figma's broader ecosystem and community adoption make it the stronger choice for modern design workflows.",
+  "faqs": [
+    {"question": "Is Figma better than Sketch?", "answer": "For most teams, yes. Figma offers real-time collaboration, works on any platform via the browser, and has a larger community and plugin ecosystem. Sketch is still a strong tool but is limited to macOS."},
+    {"question": "Can I use Figma files in Sketch?", "answer": "Not directly. Figma and Sketch use different file formats. You can export designs to common formats like SVG or PNG, but full file conversion between the two tools is limited and often loses fidelity."},
+    {"question": "Does Figma have offline mode?", "answer": "Figma has a limited offline mode through its desktop app, but it is primarily an online tool. Sketch offers full offline editing since it is a native Mac application."},
+    {"question": "Which tool is better for UI design?", "answer": "Both are excellent for UI design. Figma's component variants, auto-layout, and prototyping tools make it slightly more versatile for responsive designs. Sketch's symbols system is mature but less flexible than Figma's modern approach."}
+  ],
+  "relatedComparisons": ["supabase-vs-firebase", "vercel-vs-netlify"],
+  "lastUpdated": "2026-07-01"
+}

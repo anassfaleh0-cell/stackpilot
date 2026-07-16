@@ -1,0 +1,13 @@
+{
+  "slug": "devops",
+  "term": "DevOps",
+  "definition": "A set of practices that combines software development and IT operations to shorten the development lifecycle and deliver high-quality software continuously.",
+  "extendedDefinition": "DevOps emphasizes collaboration, automation, and monitoring throughout the software delivery pipeline, breaking down traditional silos between development and operations teams. It relies on practices like continuous integration, continuous delivery, infrastructure as code, and observability to enable faster and more reliable releases. Adopting DevOps culture helps organizations respond more quickly to market changes and improve deployment frequency while reducing failure rates. It has become a standard approach for modern software teams aiming for efficiency and resilience.",
+  "category": "Development",
+  "examples": [
+    "Automated CI/CD pipelines using GitHub Actions",
+    "Infrastructure as Code with Terraform",
+    "Containerized deployments with Docker and Kubernetes"
+  ],
+  "relatedTerms": ["api", "open-source"]
+}

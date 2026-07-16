@@ -1,0 +1,73 @@
+{
+  "slug": "quickbooks",
+  "name": "QuickBooks",
+  "tagline": "The most trusted small business accounting software for invoicing, expenses, and tax preparation",
+  "description": "QuickBooks by Intuit is the most widely used accounting software for small businesses in the United States. It simplifies financial management with tools for invoicing, expense tracking, bank reconciliation, payroll, and tax preparation. With both desktop and cloud versions available, QuickBooks helps business owners keep their finances organized and tax-ready year-round.",
+  "category": "Finance & Accounting",
+  "website": "https://quickbooks.intuit.com",
+  "pricing": "Paid",
+  "rating": 4.2,
+  "reviewCount": 15400,
+  "pros": [
+    "Invoicing is fast and professional-looking with customizable templates, recurring invoices, and automatic payment reminders.",
+    "Bank reconciliation is streamlined with direct bank feeds that automatically import and categorize transactions from connected accounts.",
+    "Tax preparation becomes significantly easier with built-in tax categorization, estimated tax calculations, and seamless TurboTax export.",
+    "Expense tracking via mobile app lets users snap receipts, capture mileage, and categorize spending on the go in real time.",
+    "Comprehensive reporting suite includes profit and loss, balance sheets, cash flow statements, and over 50 customizable financial reports."
+  ],
+  "cons": [
+    "Pricing has increased significantly in recent years, with the entry-level Simple Start plan costing $35 per month.",
+    "Customer support quality is inconsistent, with long wait times and limited free support options for lower-tier plans.",
+    "The software can become slow and sluggish with larger company files, especially the desktop version with years of transaction data."
+  ],
+  "features": [
+    {"name": "Invoicing", "description": "Create and send professional invoices with customizable templates, recurring schedules, and automatic payment reminders.", "available": true, "category": "Core"},
+    {"name": "Expense Tracking", "description": "Track business expenses by connecting bank accounts, credit cards, and manually categorizing transactions with tags.", "available": true, "category": "Core"},
+    {"name": "Bank Reconciliation", "description": "Automated bank feed matching for quick reconciliation of transactions against bank and credit card statements.", "available": true, "category": "Core"},
+    {"name": "Sales Tax Management", "description": "Automatically calculate sales tax on invoices, track what is owed, and generate sales tax reports for filing.", "available": true, "category": "Accounting"},
+    {"name": "Accounts Payable", "description": "Manage bills, set up payment schedules, track vendor balances, and automate recurring bill payments.", "available": true, "category": "Accounting"},
+    {"name": "Accounts Receivable", "description": "Track outstanding invoices, send payment reminders, accept online payments, and view aging reports for follow-ups.", "available": true, "category": "Accounting"},
+    {"name": "Chart of Accounts", "description": "Fully customizable chart of accounts to organize income, expenses, assets, liabilities, and equity in your preferred structure.", "available": true, "category": "Accounting"},
+    {"name": "Profit & Loss Reports", "description": "Generate real-time profit and loss statements with year-over-year comparisons and customizable date ranges.", "available": true, "category": "Reporting"},
+    {"name": "Balance Sheet Reports", "description": "View comprehensive balance sheets that show assets, liabilities, and equity at a glance for any reporting period.", "available": true, "category": "Reporting"},
+    {"name": "Cash Flow Reports", "description": "Monitor cash coming in and going out with detailed cash flow statements and forecasting tools.", "available": true, "category": "Reporting"},
+    {"name": "Inventory Tracking", "description": "Track inventory quantities and costs, manage purchase orders, and generate inventory valuation reports for physical products.", "available": true, "category": "Core"},
+    {"name": "Payroll (Paid Add-on)", "description": "Full-service payroll processing with automatic tax calculations, direct deposit, and W-2 preparation for employees.", "available": true, "category": "Payroll"},
+    {"name": "Payroll Tax Filing", "description": "Automatic federal and state payroll tax calculations, filings, and payments handled by Intuit with tax penalty protection.", "available": true, "category": "Payroll"},
+    {"name": "Mobile App", "description": "Full-featured mobile app for iOS and Android to capture receipts, create invoices, and view financial data on the go.", "available": true, "category": "Mobile"},
+    {"name": "Mobile Receipt Capture", "description": "Snap photos of receipts with the mobile app to automatically extract and categorize expense details using OCR technology.", "available": true, "category": "Mobile"},
+    {"name": "Mileage Tracking", "description": "Automatic mileage tracking using GPS on the mobile app to log business trips and calculate deductible miles.", "available": true, "category": "Mobile"},
+    {"name": "TurboTax Integration", "description": "Seamlessly export QuickBooks financial data directly into TurboTax for simplified small business tax filing.", "available": true, "category": "Integrations"},
+    {"name": "Third-Party Integrations", "description": "Connects with over 750 apps including PayPal, Shopify, Square, Stripe, Gusto, and Salesforce for expanded functionality.", "available": true, "category": "Integrations"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.4},
+    {"label": "Ease of Use", "score": 4.0},
+    {"label": "Support", "score": 3.5},
+    {"label": "Value", "score": 3.8},
+    {"label": "Performance", "score": 4.1}
+  ],
+  "content": [
+    {"title": "Overview", "body": "QuickBooks has been the dominant player in small business accounting for over two decades, and it remains the default choice for millions of businesses in the US. The platform covers the essentials: invoicing, expense tracking, bank reconciliation, financial reporting, and payroll. While its recent price increases and inconsistent support have drawn criticism, its feature depth and ecosystem of integrations keep it at the top of the market.", "type": "text"},
+    {"title": "Who is it for?", "body": "QuickBooks is ideal for small to medium-sized business owners who want a comprehensive accounting solution with minimal setup time. It suits solopreneurs, freelancers, and companies with up to 25 employees who need reliable invoicing, expense management, and tax-ready books. Accountants also widely use QuickBooks, making it easy to collaborate with external bookkeepers and CPAs.", "type": "text"},
+    {"title": "Key Features", "body": "QuickBooks Online provides a robust feature set that covers the full accounting lifecycle for most small businesses.", "type": "list", "items": [
+      "Invoicing with automatic reminders and online payment acceptance helps businesses get paid faster without manual follow-ups.",
+      "Bank feeds automatically import transactions from connected accounts and suggest categories based on previous entries.",
+      "Expense tracking includes receipt capture via mobile app, mileage logging, and real-time categorization for accurate books.",
+      "Financial reporting delivers profit and loss, balance sheet, and cash flow statements with customizable date ranges and filters.",
+      "Payroll add-on handles employee payroll, contractor payments, tax calculations, and direct deposit for a flat monthly fee.",
+      "The mobile app allows business owners to manage finances anytime with receipt capture, invoice creation, and dashboard views."
+    ]},
+    {"title": "Who should avoid it?", "body": "Very small businesses or solopreneurs on a tight budget may find QuickBooks too expensive compared to alternatives like Wave or Xero. Businesses with complex multi-currency needs or inventory manufacturing requirements might outgrow QuickBooks and need something like NetSuite or Sage. Users who prioritize responsive customer support may also become frustrated with the long wait times on lower-tier plans.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is QuickBooks best used for?", "answer": "QuickBooks is best used for day-to-day small business accounting including invoicing, expense tracking, bank reconciliation, and financial reporting. It is especially valuable for US-based businesses that want seamless integration with TurboTax and payroll tax filing, making tax season significantly less stressful."},
+    {"question": "How much does QuickBooks cost?", "answer": "QuickBooks Online offers four plans: Simple Start at $35/month (1 user, 1 accountant), Essentials at $65/month (3 users), Plus at $99/month (5 users, inventory tracking), and Advanced at $235/month (25 users, custom reporting). Payroll add-ons start at $45/month plus $5 per employee per month. All plans are discounted for the first 3 months. Desktop versions are also available with one-time purchase pricing."},
+    {"question": "Does QuickBooks integrate with other tools?", "answer": "Yes, QuickBooks integrates with over 750 third-party applications. Key integrations include payment processors (PayPal, Stripe, Square), e-commerce platforms (Shopify, Amazon), POS systems, CRM tools (Salesforce), time tracking apps (TSheets), and payroll services (Gusto). The open API also allows for custom integrations."},
+    {"question": "Is QuickBooks suitable for small teams?", "answer": "Yes, QuickBooks is explicitly designed for small businesses. The Simple Start plan works well for single-user solopreneurs, while Essentials supports up to 3 users and Plus supports up to 5 users plus an accountant. However, each additional user beyond the plan limit requires upgrading to the next tier, which can get expensive as teams grow."}
+  ],
+  "alternatives": ["gusto"],
+  "relatedGuides": ["software-evaluation-checklist", "how-to-choose-project-management-software"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

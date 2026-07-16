@@ -1,0 +1,102 @@
+{
+  "slug": "google-analytics",
+  "name": "Google Analytics",
+  "tagline": "Understand your audience and optimize your business with data-driven insights",
+  "description": "Google Analytics is the most widely deployed web analytics platform in the world, tracking over 50 million websites and providing free, powerful insights into website traffic, user behavior, and conversion performance. Its latest iteration, Google Analytics 4 (GA4), introduces event-based tracking with machine learning-powered predictive metrics, replacing the session-based model of Universal Analytics. The platform is deeply integrated with Google Ads, Search Console, and BigQuery, making it the cornerstone of the Google Marketing Platform ecosystem.",
+  "category": "Analytics & Data",
+  "website": "https://analytics.google.com",
+  "pricing": "Free",
+  "rating": 4.3,
+  "reviewCount": 15000,
+  "pros": [
+    "Completely free for the vast majority of users with generous 10 million monthly events per property and unlimited reporting seats",
+    "Seamless integration with Google Ads, Search Console, BigQuery, and Merchant Center for unified marketing measurement and attribution",
+    "Machine learning-powered insights including churn probability, revenue prediction, and anomaly detection without manual configuration",
+    "Cross-platform and cross-device tracking with Google Signals enables unified user journeys across websites and mobile apps",
+    "Customizable dashboards, reports, and exploration workspaces allow deep, ad-hoc analysis without SQL knowledge for most use cases"
+  ],
+  "cons": [
+    "GA4's event-based data model has a steep learning curve for users migrating from Universal Analytics, with many familiar reports and metrics missing",
+    "Data sampling on standard reports above 10 million events per property can produce inaccurate insights during high-traffic periods",
+    "Privacy restrictions and consent mode dependencies mean data accuracy degrades significantly in regions with strict cookie consent enforcement"
+  ],
+  "features": [
+    {"name": "Real-Time Reporting", "description": "Live view of active users, page views, events, and conversions updating continuously with zero latency", "available": true, "category": "Real-time"},
+    {"name": "Audience Insights", "description": "Demographic, geographic, and interest-based audience segmentation with automatic reporting on user characteristics", "available": true, "category": "Audience"},
+    {"name": "Event-Based Tracking", "description": "Flexible event-driven data model allowing custom event parameters and up to 500 unique event names per property", "available": true, "category": "Core"},
+    {"name": "Conversion Tracking", "description": "Configurable conversion events with attribution modeling across first-click, last-click, linear, time-decay, and data-driven models", "available": true, "category": "Core"},
+    {"name": "Funnel Analysis", "description": "Visual funnel exploration tool for identifying drop-off points across multi-step user journeys and conversion paths", "available": true, "category": "Reporting"},
+    {"name": "Cohort Analysis", "description": "User behavior comparison across acquisition cohorts with retention metrics and lifetime value tracking", "available": true, "category": "Reporting"},
+    {"name": "Segments & Audiences", "description": "Create and apply user segments across all reports with conditions based on behavior, demographics, and custom dimensions", "available": true, "category": "Audience"},
+    {"name": "Predictive Metrics", "description": "ML-generated predictions for purchase probability, churn probability, and revenue forecasts per user segment", "available": true, "category": "Core"},
+    {"name": "Google Ads Integration", "description": "Direct import of Google Ads cost, campaign, and keyword data with export of audiences for remarketing", "available": true, "category": "Integrations"},
+    {"name": "BigQuery Export", "description": "Raw event data export to BigQuery for custom SQL analysis and joining with first-party data sources", "available": true, "category": "Integrations"},
+    {"name": "Search Console Integration", "description": "Organic search performance data including queries, landing pages, and average position linked to user behavior", "available": true, "category": "Integrations"},
+    {"name": "Custom Dashboards", "description": "Build and share custom dashboards with up to 16 cards each, combining multiple visualization types and data sources", "available": true, "category": "Reporting"},
+    {"name": "Exploration Reports", "description": "Free-form analysis workspace with segment filters, calculated metrics, and pivot table functionality beyond standard reports", "available": true, "category": "Reporting"},
+    {"name": "Consent Mode", "description": "Privacy-compliant tracking that adapts to user consent choices with cookieless measurement fallback", "available": true, "category": "Core"},
+    {"name": "Data Filters", "description": "Include, exclude, and search-and-replace filters for cleaning internal traffic and standardizing URL reporting", "available": true, "category": "Core"},
+    {"name": "User Explorer", "description": "Individual user-level activity log with event timestamps, device info, and engagement metrics per pseudonymous ID", "available": true, "category": "Audience"},
+    {"name": "Roll-Up Properties", "description": "Aggregate multiple sub-properties into a single roll-up for consolidated cross-site and cross-app reporting", "available": false, "category": "Core"},
+    {"name": "Data Restore & Deletion", "description": "Tools for managing data retention periods and processing user data deletion requests for compliance", "available": true, "category": "Core"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.6},
+    {"label": "Ease of Use", "score": 3.8},
+    {"label": "Support", "score": 3.5},
+    {"label": "Value", "score": 4.9},
+    {"label": "Performance", "score": 4.4}
+  ],
+  "content": [
+    {
+      "title": "Overview",
+      "body": "Google Analytics remains the undisputed market leader in web analytics, powering data-driven decisions for businesses ranging from solo-run blogs to Fortune 500 enterprises. The transition from Universal Analytics to Google Analytics 4 in 2023 marked the most significant platform evolution in its history, shifting from session-based tracking to a flexible event-based data model designed for modern cross-platform user journeys. While the new interface and metrics have frustrated long-time users, GA4's machine learning capabilities, deeper Google Ads integration, and privacy-forward architecture position it for the cookieless future. The platform processes billions of user interactions daily and its free tier remains one of the most generous analytics offerings available.",
+      "type": "text"
+    },
+    {
+      "title": "Who is it for?",
+      "body": "Google Analytics is ideal for any website or app owner who needs quantitative data about their traffic sources, user behavior, and conversion performance. Digital marketers rely on it to measure campaign ROI, optimize paid search spend, and build remarketing audiences for Google Ads. Product teams use behavioral analytics and funnel exploration to identify usability issues and improve conversion rates. Content publishers analyze page performance and audience engagement to refine content strategy. Enterprise organizations with dedicated analytics teams pair GA4 with BigQuery for custom analysis, but the self-serve interface works well for non-technical stakeholders who need dashboards and scheduled reports.",
+      "type": "text"
+    },
+    {
+      "title": "Key Features",
+      "body": "Google Analytics 4 brings a fundamentally reimagined analytics platform with event-driven tracking, cross-platform measurement, and AI-powered insights. The most impactful capabilities are outlined below.",
+      "type": "list",
+      "items": [
+        "Event-Based Data Model: Flexible event and parameter architecture replaces sessions and pageviews, enabling custom tracking for any user interaction across web and mobile platforms",
+        "Predictive Analytics: Machine learning models automatically score users on purchase probability, churn likelihood, and revenue prediction without requiring data science expertise",
+        "Cross-Platform Reporting: Google Signals aggregates user journeys across devices and platforms, providing unified reporting on multi-session conversion paths",
+        "Exploration Workspace: Ad-hoc analysis tool with free-form segment filtering, calculated metrics, pivot tables, and cohort analysis beyond the constraints of standard reports",
+        "Google Marketing Platform Integration: Native connections to Google Ads, Search Console, Campaign Manager, Display & Video 360, and BigQuery for unified marketing measurement",
+        "Privacy-Centric Design: Consent Mode, cookieless measurement, data retention controls, and automated deletion workflows designed for GDPR, CCPA, and evolving privacy regulations"
+      ]
+    },
+    {
+      "title": "Who should avoid it?",
+      "body": "Businesses that require phone-based technical support will find Google Analytics frustrating, as free-tier support is limited to community forums and documentation with paid support only available for Google Analytics 360 customers at $150,000+ annually. Organizations in highly regulated industries needing on-premises data storage or guaranteed data sovereignty may need enterprise analytics platforms that offer self-hosted deployments. Teams frustrated by GA4's learning curve and missing Universal Analytics reports may prefer purpose-built alternatives like Mixpanel or Amplitude for product analytics, or Plausible and Fathom for simplified privacy-focused analytics.",
+      "type": "text"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is Google Analytics best used for?",
+      "answer": "Google Analytics is best used for understanding website traffic sources, measuring user behavior and engagement, tracking conversions and goal completions, and informing marketing optimization decisions. It provides the most comprehensive free analytics solution for businesses of any size, with deep integration into Google's advertising and marketing ecosystem."
+    },
+    {
+      "question": "How much does Google Analytics cost?",
+      "answer": "Google Analytics Standard is completely free for up to 10 million monthly events per property, with unlimited users and reporting. Google Analytics 360 starts at $150,000 per year and includes 500 million monthly events, service-level agreements, dedicated support, advanced attribution modeling, and integrations with Salesforce and other enterprise platforms."
+    },
+    {
+      "question": "Does Google Analytics integrate with other tools?",
+      "answer": "Google Analytics integrates natively with all Google Marketing Platform products including Google Ads, Search Console, Campaign Manager, Display & Video 360, and BigQuery. It also connects to third-party platforms via Google Tag Manager, the Measurement Protocol API, and partner integrations with Salesforce, Shopify, WordPress, Wix, and most major CMS and e-commerce platforms."
+    },
+    {
+      "question": "Is Google Analytics suitable for small teams?",
+      "answer": "Yes, Google Analytics is an excellent choice for small teams primarily because it is completely free at its standard tier with no usage limits that most small sites will hit. Small teams benefit from the Google Ads integration for tracking campaign performance and the simple dashboard interface for quick weekly reporting without dedicated analytics headcount."
+    }
+  ],
+  "alternatives": ["semrush", "vercel", "supabase", "notion"],
+  "relatedGuides": ["saas-metrics-and-kpis"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

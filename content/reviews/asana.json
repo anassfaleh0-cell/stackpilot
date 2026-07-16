@@ -1,0 +1,72 @@
+{
+  "slug": "asana",
+  "name": "Asana",
+  "tagline": "Work management platform for teams to coordinate projects, track progress, and achieve goals",
+  "description": "Asana is a leading project management and work coordination platform that helps teams plan, organize, and track work across departments. It combines project planning, task management, timelines, and goal-setting in one unified interface, making it ideal for mid-size to large teams looking to replace spreadsheets and email-driven workflows.",
+  "category": "Project Management",
+  "website": "https://asana.com",
+  "pricing": "Freemium",
+  "rating": 4.5,
+  "reviewCount": 16200,
+  "pros": [
+    "Timeline (Gantt) view with automatic dependency management makes complex project scheduling visual and adjustable",
+    "Workload feature shows team member capacity across projects, preventing burnout and uneven task distribution",
+    "Custom fields, templates, and project dashboards allow deep customization without any engineering involvement",
+    "Goals and Objectives module ties daily tasks directly to company OKRs with measurable progress tracking",
+    "Asana Intelligence uses AI to auto-assign tasks, suggest project templates, and summarize status updates"
+  ],
+  "cons": [
+    "Pricing jumps significantly from Premium to Business tier, losing key features like Portfolios and Goals behind higher paywall",
+    "Search functionality struggles with large workspaces, often returning slow or irrelevant results across thousands of tasks",
+    "No native offline mode means lost productivity when internet connectivity is unreliable or unavailable"
+  ],
+  "features": [
+    {"name": "Multiple Project Views", "description": "Switch between List, Board, Timeline, Calendar, and Gantt views to visualize work how teams prefer", "available": true, "category": "Core"},
+    {"name": "Task Dependencies", "description": "Link tasks to define prerequisites and blockers with automatic rescheduling on date changes", "available": true, "category": "Core"},
+    {"name": "Custom Fields", "description": "Add custom tags, drop-downs, numbers, and date fields to tasks for tracking anything unique to your workflow", "available": true, "category": "Core"},
+    {"name": "Workload Management", "description": "View team member capacity across all projects with visual indicators for overallocation", "available": true, "category": "Core"},
+    {"name": "Project Templates", "description": "Start from 200+ pre-built templates for marketing campaigns, product launches, and operational workflows", "available": true, "category": "Core"},
+    {"name": "Timeline (Gantt View)", "description": "Drag-and-drop timeline with automatic dependency mapping for scheduling complex multi-phase projects", "available": true, "category": "Core"},
+    {"name": "Goals & OKRs", "description": "Define company and team goals with measurable milestones linked directly to active projects", "available": true, "category": "Core"},
+    {"name": "Portfolios", "description": "Group related projects into portfolios for cross-project progress tracking and resource allocation", "available": true, "category": "Reporting"},
+    {"name": "Automation Rules", "description": "Build if-this-then-that rules to auto-assign tasks, update statuses, and send notifications", "available": true, "category": "Automation"},
+    {"name": "Asana Intelligence AI", "description": "AI-powered smart suggestions for task creation, status summaries, and project template recommendations", "available": true, "category": "Automation"},
+    {"name": "Real-time Collaboration", "description": "Comment on tasks with @mentions, attach files, and see live updates across the workspace", "available": true, "category": "Collaboration"},
+    {"name": "Team Conversations", "description": "Dedicated project-level chat threads alongside tasks to reduce context-switching to Slack or Teams", "available": true, "category": "Collaboration"},
+    {"name": "Integrations Hub", "description": "Connect with 300+ apps including Slack, Google Drive, Microsoft Teams, Jira, and Salesforce", "available": true, "category": "Integrations"},
+    {"name": "Slack & Outlook Deep Linking", "description": "Create Asana tasks directly from Slack messages or Outlook emails with automatic context retention", "available": true, "category": "Integrations"},
+    {"name": "Admin Controls & Permissions", "description": "Set project-level permissions, guest access policies, and domain-level security restrictions", "available": true, "category": "Security"},
+    {"name": "SAML & SCIM Provisioning", "description": "Enterprise SSO with SAML 2.0 and automatic user provisioning via SCIM for large organizations", "available": true, "category": "Security"},
+    {"name": "Mobile Apps", "description": "Full-featured iOS and Android apps with task creation, comments, and board management on the go", "available": true, "category": "Mobile"},
+    {"name": "Universal Reporting", "description": "Custom dashboards and charts aggregating data from all projects with pivot-table-like filtering", "available": true, "category": "Analytics"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.7},
+    {"label": "Ease of Use", "score": 4.3},
+    {"label": "Support", "score": 4.1},
+    {"label": "Value", "score": 4.0},
+    {"label": "Performance", "score": 4.5}
+  ],
+  "content": [
+    {"title": "Overview", "body": "Asana is one of the most popular work management platforms globally, trusted by over 130,000 paying customers including NASA, Uber, and The New York Times. Its core differentiator is combining project-level task management with organization-wide goal tracking, giving leadership visibility into how daily work connects to strategic outcomes. Unlike lightweight tools like Trello, Asana offers the depth and structure needed for complex, multi-departmental workflows.", "type": "text"},
+    {"title": "Who is it for?", "body": "Asana is best suited for medium to large teams (20-500 people) that need structured project management with dependencies, resource planning, and executive reporting. Marketing teams use it for campaign launches, product teams for roadmaps, and operations for process documentation. It's less ideal for individuals or very small teams who would find the feature set overwhelming compared to simpler tools like Todoist or Notion.", "type": "text"},
+    {"title": "Key Features", "body": "Asana stands out with its combination of flexible project views and enterprise-grade planning tools. These features make it a serious contender for organizations outgrowing simpler task managers.", "type": "list", "items": [
+      "Timeline view with automatic dependency mapping lets you visualize full project schedules and adjust instantly when dates shift",
+      "Workload management provides a bird's-eye view of team capacity, flagging overbooked members before burnout occurs",
+      "Goals module ties tasks and projects to company OKRs with automatic progress tracking from completed work items",
+      "Custom fields and forms let teams capture exactly the data they need without forcing a rigid workflow structure",
+      "Automation rules handle repetitive assignment, notification, and status updates across hundreds of active tasks"
+    ]},
+    {"title": "Who should avoid it?", "body": "Freelancers and solo professionals will find Asana over-engineered for their needs, with most valuable features locked behind paid tiers. Teams that rely heavily on agile methodologies like Scrum may prefer Jira's sprint-oriented tools. Organizations with strict offline requirements will struggle, as Asana has no functional offline mode and becomes read-only without an internet connection.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is Asana best used for?", "answer": "Asana is best used for coordinating cross-functional projects that involve multiple teams, dependencies, and deadlines. It excels at marketing campaign launches, product development cycles, event planning, and operational workflows. Its Timeline and Workload features make it particularly strong for resource planning and visualizing how each task fits into the broader project schedule."},
+    {"question": "How much does Asana cost?", "answer": "Asana has a generous free tier supporting up to 15 teammates with basic task and project management. Premium is $10.99 per user per month (billed annually) and adds Timeline, Workload, and custom fields. Business is $24.99 per user per month for Portfolios, Goals, and advanced reporting. Enterprise pricing is custom and includes SAML/SCIM, data export, and priority support."},
+    {"question": "Does Asana integrate with other tools?", "answer": "Asana integrates with 300+ apps including Slack, Microsoft Teams, Google Drive, Dropbox, Jira, Salesforce, Adobe Creative Cloud, and Zapier. The Slack integration is particularly deep, allowing users to create tasks from messages and sync conversations. The Jira connector bridges engineering and business teams by linking software issues to project tasks."},
+    {"question": "Is Asana suitable for small teams?", "answer": "The free tier works well for teams of up to 15 members with basic needs. However, smaller teams will quickly hit the paywall when wanting dependencies, Timeline, or workload views, which require the Premium plan at $10.99/user/month. Micro-teams and startups on tight budgets may find more value in Notion or Linear, which offer richer free tiers."}
+  ],
+  "alternatives": ["linear", "notion", "monday-com"],
+  "relatedGuides": ["how-to-choose-project-management-software", "software-evaluation-checklist"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

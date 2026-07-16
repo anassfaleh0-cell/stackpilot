@@ -1,0 +1,66 @@
+{
+  "slug": "notion",
+  "name": "Notion",
+  "tagline": "All-in-one workspace for notes, docs, and project management.",
+  "description": "Notion combines note-taking, documentation, knowledge base management, and project tracking into a single, customizable platform. With its modular block-based editor and powerful database functionality, teams can build everything from simple to-do lists to complex project management systems without switching between multiple tools.",
+  "category": "Productivity",
+  "website": "https://notion.so",
+  "pricing": "Freemium",
+  "rating": 4.7,
+  "reviewCount": 1523,
+  "pros": [
+    "Highly customizable workspace with flexible blocks and databases",
+    "Excellent collaboration features with real-time editing and comments",
+    "Powerful database views including table, board, calendar, and gallery",
+    "Generous free tier suitable for individuals and small teams",
+    "Rich template gallery to accelerate setup and onboarding"
+  ],
+  "cons": [
+    "Offline mode is limited and unreliable compared to competitors",
+    "No native Gantt chart or timeline view for project management",
+    "Performance can degrade with very large workspaces and databases"
+  ],
+  "features": [
+    {"name": "Block-Based Editor", "description": "Modular content blocks that can be rearranged and transformed into different types", "available": true, "category": "Core"},
+    {"name": "Database Views", "description": "Multiple view types including table, board, calendar, gallery, list, and timeline", "available": true, "category": "Core"},
+    {"name": "Real-Time Collaboration", "description": "Simultaneous editing with presence indicators and version history", "available": true, "category": "Collaboration"},
+    {"name": "Comments & Mentions", "description": "Inline comments and @mentions to discuss work in context", "available": true, "category": "Collaboration"},
+    {"name": "Knowledge Base", "description": "Create and organize documentation with nested pages and wikis", "available": true, "category": "Core"},
+    {"name": "Templates Gallery", "description": "Pre-built templates for common workflows and use cases", "available": true, "category": "Core"},
+    {"name": "Slack Integration", "description": "Connect Slack channels to Notion for updates and notifications", "available": true, "category": "Integrations"},
+    {"name": "GitHub Integration", "description": "Link GitHub commits, branches, and pull requests to Notion pages", "available": true, "category": "Integrations"},
+    {"name": "API Access", "description": "REST API for building custom integrations and automations", "available": true, "category": "Integrations"},
+    {"name": "Zapier Support", "description": "Connect with thousands of apps via Zapier automations", "available": true, "category": "Integrations"},
+    {"name": "Role-Based Permissions", "description": "Granular access controls with viewer, editor, and admin roles", "available": true, "category": "Security"},
+    {"name": "Page Analytics", "description": "View page-level analytics to see who viewed or edited content", "available": true, "category": "Core"},
+    {"name": "Mobile Apps", "description": "Full-featured mobile applications for iOS and Android", "available": true, "category": "Mobile"},
+    {"name": "Offline Access", "description": "View and edit cached pages without internet connection", "available": true, "category": "Mobile"},
+    {"name": "AI Assistant", "description": "AI-powered writing assistance, summarization, and Q&A", "available": true, "category": "Core"},
+    {"name": "Cross-Database Relations", "description": "Link and reference data across multiple databases", "available": true, "category": "Core"},
+    {"name": "Export Options", "description": "Export pages as Markdown, HTML, PDF, or CSV", "available": true, "category": "Core"},
+    {"name": "Search & Discover", "description": "Full-text search across workspace with quick actions palette", "available": true, "category": "Core"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.8},
+    {"label": "Ease of Use", "score": 4.5},
+    {"label": "Support", "score": 4.2},
+    {"label": "Value", "score": 4.9},
+    {"label": "Performance", "score": 4.3}
+  ],
+  "content": [
+    {"title": "Overview", "body": "Notion has rapidly become one of the most popular productivity platforms, serving as a unified workspace for millions of users worldwide. By combining documents, wikis, databases, and project management into a single tool, Notion eliminates the need to juggle multiple applications. Its block-based architecture allows for extraordinary flexibility, enabling teams to design custom workflows that match their exact needs without requiring any coding knowledge.", "type": "text"},
+    {"title": "Who is it for?", "body": "Notion is ideal for individuals and teams seeking an all-in-one solution for notes, documentation, and project management. It works well for startups, small to medium businesses, and even large enterprises that value flexibility and customization over rigid, structured tools. Remote and hybrid teams particularly benefit from its real-time collaboration and comprehensive knowledge base capabilities.", "type": "text"},
+    {"title": "Key Features", "body": "Notion's standout features include its versatile block-based editor, powerful linked databases with multiple view types, and generous template gallery. The platform excels at knowledge management with nested page hierarchies and wiki-style documentation. Its growing integration ecosystem and AI assistant further extend its utility for modern teams.", "type": "list", "items": ["Block-based editor with support for text, images, databases, embeds, and code blocks", "Multiple database views: table, board, calendar, gallery, list, and timeline", "Real-time collaboration with inline comments, mentions, and page sharing", "Rich template marketplace with hundreds of pre-built workspace templates", "AI-powered writing assistant, summarization, and knowledge Q&A"]},
+    {"title": "Who should avoid it?", "body": "Teams that require advanced project management features like native Gantt charts, resource management, or time tracking may find Notion limiting. Organizations that need robust offline access or work with extremely large datasets may experience performance issues. Users seeking a lightweight, focused note-taking app may also find Notion's feature set overwhelming for their basic needs.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is Notion best used for?", "answer": "Notion is best used as a unified workspace for notes, documentation, knowledge management, and lightweight project management. Its flexibility makes it particularly valuable for creating custom dashboards, wikis, and collaborative databases that adapt to a team's evolving needs without requiring multiple separate tools."},
+    {"question": "How much does Notion cost?", "answer": "Notion offers a generous Free plan with unlimited pages and blocks for up to 10 guests. The Plus plan starts at $10/month per user and adds unlimited file uploads, guest access, and version history. Business ($18/month per user) and Enterprise plans unlock advanced features like SAML SSO and audit logs."},
+    {"question": "Does Notion integrate with other tools?", "answer": "Yes, Notion integrates with a wide range of tools including Slack, GitHub, Google Drive, Figma, Jira, and Trello. It also offers a public API for custom integrations and connects with thousands of additional apps through Zapier and Make automations."},
+    {"question": "Is Notion suitable for small teams?", "answer": "Yes, Notion is exceptionally well-suited for small teams. Its free tier is generous enough for most small teams to use indefinitely, and the platform's flexibility allows them to create custom workflows without investing in expensive, rigid project management solutions."}
+  ],
+  "alternatives": ["linear", "figma", "vercel", "supabase"],
+  "relatedGuides": ["how-to-choose-project-management-software", "saas-implementation-best-practices"],
+  "lastReviewed": "2026-07-01",
+  "author": "StackPilot Team"
+}

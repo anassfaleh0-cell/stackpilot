@@ -1,0 +1,44 @@
+{
+  "slug": "saas-metrics-and-kpis",
+  "title": "SaaS Metrics That Matter",
+  "description": "Revenue, retention, and unit economics define the health of any SaaS business. This guide breaks down the six most critical metrics — MRR, churn, CAC, LTV, conversion rate, and NPS — with formulas and practical examples to help you track what matters.",
+  "category": "Analytics & Data",
+  "difficulty": "Intermediate",
+  "readingTime": 11,
+  "sections": [
+    {
+      "title": "MRR and ARR Explained",
+      "body": "Monthly Recurring Revenue (MRR) is the sum of all subscription fees normalized to a monthly value, calculated as the number of paying customers multiplied by the average revenue per account. Annual Recurring Revenue (ARR) is simply MRR × 12, but be careful to exclude one-time setup fees and non-recurring add-ons. For example, if you have 200 customers paying $50 per month, your MRR is $10,000 and your ARR is $120,000 — track both on a dashboard with a 30-day rolling average to smooth out seasonal anomalies.",
+      "type": "text"
+    },
+    {
+      "title": "Churn Rate Analysis",
+      "body": "Monthly churn rate is calculated as customers lost in a month divided by customers at the start of that month, but gross revenue churn (lost recurring revenue from cancellations and downgrades) is often more telling than logo churn. A healthy SaaS company typically targets less than 5% annualized logo churn and under 2% monthly revenue churn. Segment your churn by customer cohort — acquisition channel, plan type, or signup quarter — to identify which segments are driving attrition and address root causes before they escalate.",
+      "type": "text"
+    },
+    {
+      "title": "Customer Acquisition Cost (CAC)",
+      "body": "CAC equals total sales and marketing expenses over a given period divided by the number of new customers acquired in that period. Include fully loaded costs — salaries, ad spend, software subscriptions, and allocated overhead — to get a realistic picture. For instance, if you spent $80,000 on sales and marketing in a quarter and acquired 40 new customers, your CAC is $2,000. Compare this against your LTV to ensure your payback period stays under 12 months, which is a standard benchmark for healthy SaaS growth.",
+      "type": "text"
+    },
+    {
+      "title": "LTV Estimation Methods",
+      "body": "The simplest LTV formula is Average Revenue Per Account (ARPA) divided by monthly churn rate, but this assumes constant churn over time. A more accurate approach uses cohort-based LTV: track cumulative gross margin from each acquisition cohort until it plateaus. If your ARPA is $100 and monthly churn is 4%, the back-of-envelope LTV is $2,500 — aim for an LTV:CAC ratio of at least 3:1 to signal healthy unit economics and justify your customer acquisition spend.",
+      "type": "tip"
+    },
+    {
+      "title": "Conversion Rate Optimization",
+      "body": "Track conversion rate at every funnel stage: visitor to sign-up, sign-up to activation (first value event), and activation to paid customer. Use tools like HubSpot or Mixpanel to build funnel reports that reveal where the biggest drop-off occurs — a 2% improvement at the highest-traffic stage often yields more revenue than a 20% improvement at a low-traffic stage. Run A/B tests on your pricing page and onboarding flow, letting each variant run until it reaches statistical significance (95% confidence) before declaring a winner.",
+      "type": "text"
+    },
+    {
+      "title": "NPS and Customer Health Scoring",
+      "body": "Net Promoter Score (NPS) is calculated as % Promoters minus % Detractors from the question 'How likely are you to recommend us?' on a 0–10 scale, but NPS alone can be misleading — a high score with low survey response rates hides dissatisfied customers. Build a composite health score that combines product usage frequency, support ticket volume, payment timeliness, and NPS to flag at-risk accounts early. For example, an account that has logged in fewer than three times in 30 days and opened two support tickets should trigger a proactive check-in from your customer success team before they consider canceling.",
+      "type": "warning"
+    }
+  ],
+  "author": "StackPilot Team",
+  "lastUpdated": "2026-07-16",
+  "relatedTools": ["hubspot", "salesforce", "google-analytics"],
+  "relatedGuides": ["software-evaluation-checklist", "saas-implementation-best-practices"]
+}

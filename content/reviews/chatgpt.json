@@ -1,0 +1,73 @@
+{
+  "slug": "chatgpt",
+  "name": "ChatGPT",
+  "tagline": "AI chatbot and content generation platform redefining how we work and create",
+  "description": "ChatGPT is OpenAI's flagship conversational AI tool that generates human-like text responses, code, images, and analysis from natural language prompts. It serves professionals, developers, and creators looking to accelerate writing, research, brainstorming, and problem-solving tasks with state-of-the-art language models.",
+  "category": "AI & Machine Learning",
+  "website": "https://chat.openai.com",
+  "pricing": "Freemium",
+  "rating": 4.7,
+  "reviewCount": 28500,
+  "pros": [
+    "GPT-4o model delivers near-instant responses with vastly improved reasoning, creativity, and accuracy over previous versions",
+    "Multimodal capabilities let you upload images, documents, and audio for analysis, transcription, and summarization",
+    "Custom GPTs marketplace lets users build and share specialized assistants without any coding knowledge",
+    "Code interpreter and Advanced Data Analysis features enable real-time Python execution and data visualization",
+    "Web browsing integration pulls live information from the internet, keeping responses current beyond the training cutoff"
+  ],
+  "cons": [
+    "Free tier is limited to GPT-3.5 and has strict daily usage caps, making it frustrating for heavy users",
+    "Occasionally produces plausible-sounding but factually incorrect information (hallucinations) with high confidence",
+    "Knowledge base is limited to data up to early 2025 unless web browsing is manually enabled each session"
+  ],
+  "features": [
+    {"name": "GPT-4o and GPT-4 Turbo Models", "description": "Access to OpenAI's most advanced language models with superior reasoning, creativity, and speed", "available": true, "category": "Core"},
+    {"name": "Multimodal Input Processing", "description": "Upload and analyze images, PDFs, Word docs, Excel files, and audio recordings within conversations", "available": true, "category": "Core"},
+    {"name": "Custom GPT Builder", "description": "Create tailored AI assistants with custom instructions, knowledge files, and specific capabilities", "available": true, "category": "Core"},
+    {"name": "Advanced Data Analysis", "description": "Upload datasets and run Python code in-browser for cleaning, analysis, visualization, and modeling", "available": true, "category": "Analytics"},
+    {"name": "DALL-E 3 Image Generation", "description": "Generate high-quality images and artwork directly from text prompts within chat conversations", "available": true, "category": "Core"},
+    {"name": "Conversation History Search", "description": "Search through past conversations by keywords and topics to find previous work and ideas", "available": true, "category": "Core"},
+    {"name": "Shared Chat Links", "description": "Generate public shareable links to specific conversations for collaboration and demonstration", "available": false, "category": "Collaboration"},
+    {"name": "Team Workspaces", "description": "Dedicated team spaces with shared GPTs, workspace admin controls, and usage analytics", "available": true, "category": "Collaboration"},
+    {"name": "API Access", "description": "Integrate ChatGPT capabilities into external applications via OpenAI's developer API suite", "available": true, "category": "Integrations"},
+    {"name": "Zapier Integration", "description": "Connect ChatGPT to 5,000+ apps through Zapier for automated workflows and data transfer", "available": true, "category": "Integrations"},
+    {"name": "Web Browsing Mode", "description": "Enable live internet access for up-to-date information retrieval and source citation", "available": true, "category": "Core"},
+    {"name": "Enterprise-Grade Security", "description": "SOC 2 compliance, enterprise admin controls, data retention policies, and SSO authentication", "available": true, "category": "Security"},
+    {"name": "Data Encryption", "description": "End-to-end encryption for data in transit and at rest with enterprise-grade key management", "available": true, "category": "Security"},
+    {"name": "Mobile Apps", "description": "Native iOS and Android apps with voice input, image upload, and cross-device conversation sync", "available": true, "category": "Mobile"},
+    {"name": "Voice Conversations", "description": "Speak naturally with ChatGPT using voice mode on mobile with real-time speech recognition and response", "available": true, "category": "Mobile"},
+    {"name": "GPT Store", "description": "Browse and install thousands of community-built custom GPTs across categories and use cases", "available": true, "category": "Platform"},
+    {"name": "Usage Analytics Dashboard", "description": "Track API usage, token consumption, and team activity metrics through a central dashboard", "available": true, "category": "Analytics"},
+    {"name": "Custom Instructions", "description": "Set persistent preferences and constraints that apply across all conversations without repeating them", "available": true, "category": "Core"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.9},
+    {"label": "Ease of Use", "score": 4.8},
+    {"label": "Support", "score": 4.0},
+    {"label": "Value", "score": 4.5},
+    {"label": "Performance", "score": 4.6}
+  ],
+  "content": [
+    {"title": "Overview", "body": "ChatGPT is the world's most widely adopted AI chatbot, used by over 180 million users across consumer, professional, and enterprise segments. Its key differentiator is the underlying GPT-4o model, which delivers near-human conversational ability, multimodal understanding, and real-time reasoning. From content creators drafting articles to developers debugging code to executives analyzing strategy, ChatGPT has become a universal productivity layer.", "type": "text"},
+    {"title": "Who is it for?", "body": "ChatGPT is ideal for knowledge workers across marketing, engineering, product, design, sales, and operations who need help generating ideas, refining text, analyzing data, or automating repetitive writing tasks. Developers use it for code generation, debugging, and architecture discussions. Small business owners leverage it for customer communication templates and content marketing. Its versatility makes it useful for anyone who works with language or information.", "type": "text"},
+    {"title": "Key Features", "body": "ChatGPT packs an extensive feature set beyond simple question-answering. Here are the standout capabilities that make it the market leader in consumer AI.", "type": "list", "items": [
+      "GPT-4o model delivers multimodal understanding of text, images, audio, and documents in a single unified interface",
+      "Advanced Data Analysis lets you upload CSV files, run Python scripts, and generate publication-ready charts and graphs",
+      "Custom GPTs allow anyone to build a tailored AI assistant with custom knowledge without writing a single line of code",
+      "Web browsing mode pulls real-time information from the internet with source citations for fact-checking",
+      "DALL-E 3 integration generates professional-quality images and illustrations directly from chat prompts",
+      "Voice conversations on mobile enable hands-free interaction with natural back-and-forth speech dialogue"
+    ]},
+    {"title": "Who should avoid it?", "body": "ChatGPT is not suitable for scenarios requiring guaranteed factual accuracy, such as medical diagnosis, legal advice, or financial recommendations. Organizations in highly regulated industries may find the data handling policies insufficient without the Enterprise plan. Users who need entirely offline AI processing will also need to look elsewhere, as ChatGPT requires a persistent internet connection.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is ChatGPT best used for?", "answer": "ChatGPT excels at content generation, brainstorming, code writing and debugging, data analysis, language translation, summarization, and conversational problem-solving. Its multimodal capabilities also make it great for analyzing images, documents, and extracting insights from uploaded files. Professionals use it daily for accelerating writing tasks, exploring ideas, and automating repetitive analytical work."},
+    {"question": "How much does ChatGPT cost?", "answer": "ChatGPT offers a free tier with access to GPT-3.5 and limited GPT-4o messages. ChatGPT Plus costs $20 per month and includes unlimited GPT-4o access, DALL-E 3, web browsing, and Advanced Data Analysis. The Team plan is $25 per user per month with higher message caps and shared workspaces. Enterprise pricing is custom and includes unlimited high-speed GPT-4o, expanded context windows, and SSO."},
+    {"question": "Does ChatGPT integrate with other tools?", "answer": "ChatGPT integrates with Zapier for connections to 5,000+ apps including Google Sheets, Slack, Gmail, and Notion. Developers can access the full API to build custom integrations. The Enterprise plan offers direct SSO integration with Okta, Azure AD, and Google Workspace. The Team workspace also connects to your existing document storage and collaboration tools."},
+    {"question": "Is ChatGPT suitable for small teams?", "answer": "Yes, the Team plan at $25 per user per month is well-suited for small to medium teams needing shared GPTs, higher usage limits, and admin oversight. Freelancers and solo creators can get by with the $20 Plus plan. However, teams requiring guaranteed data privacy, compliance certifications, or unlimited usage should consider the Enterprise plan, which is priced for larger organizations."}
+  ],
+  "alternatives": ["jasper", "notion"],
+  "relatedGuides": ["software-evaluation-checklist", "saas-implementation-best-practices"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

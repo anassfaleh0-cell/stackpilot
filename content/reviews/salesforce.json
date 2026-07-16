@@ -1,0 +1,73 @@
+{
+  "slug": "salesforce",
+  "name": "Salesforce",
+  "tagline": "Enterprise CRM leader powering sales, service, and marketing on a unified AI-driven platform",
+  "description": "Salesforce is the world's leading customer relationship management platform, offering a comprehensive suite of tools for sales automation, customer service, marketing, and analytics. Built on the Einstein AI engine and the customizable Lightning platform, it serves mid-size to enterprise organizations needing a centralized system to manage every customer touchpoint at scale.",
+  "category": "CRM & Sales",
+  "website": "https://salesforce.com",
+  "pricing": "Paid",
+  "rating": 4.4,
+  "reviewCount": 34100,
+  "pros": [
+    "Lightning Platform enables deep customization with custom objects, fields, workflows, and Apex code for any business process",
+    "Einstein AI delivers predictive lead scoring, opportunity insights, and automated activity capture across the entire CRM",
+    "AppExchange marketplace offers 5,000+ pre-built integrations and apps extending functionality without custom development",
+    "Sales Cloud pipeline management with forecasting, territory management, and quote-to-order for full deal lifecycle tracking",
+    "Service Cloud includes omnichannel case management with Knowledge Base, Escalation Rules, and an integrated CTI dialer"
+  ],
+  "cons": [
+    "Implementation costs are steep, requiring certified consultants or internal admins for proper setup and ongoing maintenance",
+    "Interface complexity overwhelms new users, with dense layouts and nested menus that require weeks of training to navigate",
+    "Annual contract lock-in and surprise price escalations upon renewal are common complaints among smaller customers"
+  ],
+  "features": [
+    {"name": "Account & Contact Management", "description": "360-degree view of every customer, prospect, and partner with relationship mapping and activity history", "available": true, "category": "Core"},
+    {"name": "Lead & Opportunity Management", "description": "Track leads through stages with scoring, automated assignment, and probabilistic close forecasting", "available": true, "category": "Core"},
+    {"name": "Pipeline & Forecast Management", "description": "Visual sales pipeline with weighted forecasts, quota tracking, and roll-up reporting across teams", "available": true, "category": "Core"},
+    {"name": "Einstein AI Insights", "description": "AI-powered lead scoring, opportunity recommendations, and automated email sentiment analysis", "available": true, "category": "Analytics"},
+    {"name": "Salesforce Flow Automation", "description": "Build drag-and-drop automated workflows for lead routing, follow-up emails, and record updates", "available": true, "category": "Automation"},
+    {"name": "Omnichannel Service Console", "description": "Unified agent workspace handling cases, calls, live chat, email, and social media in one interface", "available": true, "category": "Core"},
+    {"name": "Knowledge Base", "description": "Centralized self-service knowledge articles with AI-powered article recommendations for agents and customers", "available": true, "category": "Core"},
+    {"name": "Marketing Cloud", "description": "Email journeys, audience segmentation, and multi-channel campaign management with real-time personalization", "available": true, "category": "Core"},
+    {"name": "AppExchange Marketplace", "description": "Browse, install, and manage 5,000+ third-party apps and components for extending Salesforce functionality", "available": true, "category": "Integrations"},
+    {"name": "MuleSoft Integration", "description": "Enterprise integration platform connecting Salesforce to legacy systems, databases, and external APIs", "available": true, "category": "Integrations"},
+    {"name": "Slack Integration", "description": "Native Slack-first workflows for sharing Salesforce records, alerts, and approvals directly in Slack channels", "available": true, "category": "Collaboration"},
+    {"name": "Quip Collaboration", "description": "Real-time document co-editing and commenting with Salesforce records embedded alongside content", "available": true, "category": "Collaboration"},
+    {"name": "Shield Platform Encryption", "description": "Field-level encryption, event monitoring, and platform audit trails for sensitive customer data", "available": true, "category": "Security"},
+    {"name": "Identity & SSO", "description": "Built-in identity provider with SAML 2.0, OAuth, and MFA for secure single sign-on across the ecosystem", "available": true, "category": "Security"},
+    {"name": "Mobile CRM App", "description": "Full-featured Salesforce mobile app with offline access, voice commands, and push notifications for approvals", "available": true, "category": "Mobile"},
+    {"name": "Einstein Analytics", "description": "Advanced analytics platform with pre-built sales and service dashboards, AI forecasting, and interactive lenses", "available": true, "category": "Analytics"},
+    {"name": "Custom Objects & Fields", "description": "Create entirely new data objects and fields with relationships, validation rules, and page layouts", "available": true, "category": "Platform"},
+    {"name": "Apex & Lightning Web Components", "description": "Full programming language and component framework for building custom business logic and user interfaces", "available": true, "category": "Platform"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.8},
+    {"label": "Ease of Use", "score": 3.5},
+    {"label": "Support", "score": 3.9},
+    {"label": "Value", "score": 3.6},
+    {"label": "Performance", "score": 4.4}
+  ],
+  "content": [
+    {"title": "Overview", "body": "Salesforce is the undisputed CRM market leader with over 20% market share and 150,000+ customers worldwide. Its key differentiator is the breadth of the ecosystem: not just sales automation, but a full platform with app development (Lightning), AI (Einstein), messaging (Slack), and data integration (MuleSoft) under one roof. It's purpose-built for enterprises that need a single source of truth across sales, service, and marketing, with the flexibility to model any business process.", "type": "text"},
+    {"title": "Who is it for?", "body": "Salesforce is designed for established businesses with 50+ employees that have dedicated sales operations or CRM administration teams. It's the standard choice for B2B organizations with complex sales cycles involving multiple stakeholders, territory management, and custom approval workflows. Enterprises already using Service Cloud for customer support or Marketing Cloud for campaigns will find the tightest value from the unified ecosystem.", "type": "text"},
+    {"title": "Key Features", "body": "Salesforce's power lies not in any single feature but in the breadth and depth of its integrated platform. These are the capabilities that differentiate it from lighter CRM competitors.", "type": "list", "items": [
+      "Sales Cloud provides end-to-end deal management with lead scoring, pipeline visualization, territory allocation, and revenue forecasting",
+      "Einstein AI analyzes millions of data points to predict which leads are most likely to close and recommend next-best actions",
+      "AppExchange marketplace lets you add CPQ quotes, DocuSign signatures, and Mailchimp campaigns without custom development",
+      "Salesforce Flow replaces legacy process builder with modern point-and-click automation for routing, approvals, and data updates",
+      "Service Cloud unifies phone, email, chat, social, and SMS case handling with automated routing and SLA tracking",
+      "Lightning App Builder enables drag-and-drop custom page creation with reusable components across desktop and mobile"
+    ]},
+    {"title": "Who should avoid it?", "body": "Startups and small businesses should avoid Salesforce until they have dedicated admin resources, as DIY implementation leads to poor data quality and low adoption. Organizations with simple sales processes — a few reps managing a straightforward pipeline — will be overpaying compared to HubSpot or Pipedrive. Teams that need to get up and running in days, not months, should look elsewhere, as typical Salesforce deployments take 3-6 months.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is Salesforce best used for?", "answer": "Salesforce is best used for managing complex B2B sales cycles with multiple stakeholders, approval chains, and territory routing. It also excels as a central customer service platform with omnichannel case management, knowledge bases, and AI-powered deflection. Organizations with dedicated CRM teams who need deep customization, custom objects, and integration with legacy enterprise systems will get the most from the platform."},
+    {"question": "How much does Salesforce cost?", "answer": "Sales Cloud pricing starts at $25 per user per month for the Starter plan (basic CRM) and scales to $300+ per user per month for the Unlimited plan with premium AI and analytics. Service Cloud starts similarly at $25/user/month. Marketing Cloud is priced separately starting around $400/month flat plus per-contact fees. Enterprise and Unlimited tiers require annual contracts and are typically negotiated with sales representatives."},
+    {"question": "Does Salesforce integrate with other tools?", "answer": "Salesforce integrates with thousands of business applications through the AppExchange marketplace. Native integrations include Outlook, Gmail, Slack, DocuSign, QuickBooks, Mailchimp, and LinkedIn Sales Navigator. MuleSoft provides enterprise-grade integration with SAP, Oracle, and legacy on-premise databases. The open API platform means virtually any modern SaaS tool has a pre-built Salesforce connector."},
+    {"question": "Is Salesforce suitable for small teams?", "answer": "Generally no — the complexity, cost, and administrative overhead make Salesforce a poor fit for small teams. The Starter plan at $25/user/month is affordable but still requires setup effort. Micro-businesses and startups are better served by HubSpot's free CRM, Pipedrive, or Freshsales, which offer intuitive interfaces and faster time-to-value without dedicated admin staff."}
+  ],
+  "alternatives": ["hubspot"],
+  "relatedGuides": ["crm-selection-guide", "saas-implementation-best-practices"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

@@ -1,0 +1,102 @@
+{
+  "slug": "gusto",
+  "name": "Gusto",
+  "tagline": "Simple payroll, benefits, and HR for modern small businesses and their teams",
+  "description": "Gusto is a modern all-in-one payroll, benefits, and HR platform designed for small businesses that want to handle employee administration without complexity. It automates payroll processing, tax filings, benefits administration, and new hire onboarding in one integrated system. With over 300,000+ businesses using Gusto, it has become the leading payroll-first HR platform for US-based small companies.",
+  "category": "HR & People",
+  "website": "https://gusto.com",
+  "pricing": "Paid",
+  "rating": 4.5,
+  "reviewCount": 5800,
+  "pros": [
+    "Fully automated payroll with tax filings calculated, filed, and paid automatically on every payroll run with zero manual intervention",
+    "New hire onboarding that auto-populates federal and state tax forms, sends e-signature requests, and creates employee accounts",
+    "Health insurance administration with multi-carrier comparison shopping, enrollment management, and ACA compliance reporting",
+    "Generous partner ecosystem with native integrations to QuickBooks, Xero, and major time-tracking and accounting tools",
+    "Distinct employee experience with a clean, consumer-grade interface and mobile app for viewing pay stubs and PTO balances"
+  ],
+  "cons": [
+    "Limited to US customers only with no international payroll support, excluding growing remote teams with global hires",
+    "Time tracking and PTO management features feel basic compared to dedicated HR platforms like BambooHR",
+    "Higher per-employee pricing than competitors once you exceed 25 employees, making it expensive for growing companies"
+  ],
+  "features": [
+    { "name": "Automated Payroll", "description": "Full-cycle payroll processing with automatic calculations for wages, deductions, and employer taxes across all states", "available": true, "category": "Payroll" },
+    { "name": "Tax Filing", "description": "Federal, state, and local tax filings calculated, filed, and paid automatically on schedule with guaranteed accuracy", "available": true, "category": "Payroll" },
+    { "name": "Direct Deposit", "description": "Next-day or same-day direct deposit to employee bank accounts with detailed pay stub breakdowns and pay history", "available": true, "category": "Payroll" },
+    { "name": "Employee Self-Service", "description": "Employee portal for viewing pay stubs, W-2s, PTO balances, benefit elections, and updating personal information", "available": true, "category": "Employee" },
+    { "name": "New Hire Onboarding", "description": "Guided digital onboarding that collects W-4, I-9, and state tax forms with e-signatures and automatic account creation", "available": true, "category": "HR" },
+    { "name": "Health Benefits Administration", "description": "Medical, dental, and vision plan administration with carrier integrations, enrollment management, and premium deduction handling", "available": true, "category": "Benefits" },
+    { "name": "401(k) Management", "description": "Retirement plan setup and administration with automated payroll deductions, employer matching, and compliance testing", "available": true, "category": "Benefits" },
+    { "name": "Workers' Comp Admin", "description": "Workers' compensation insurance administration with pay-as-you-go premium calculation and audit protection", "available": true, "category": "Compliance" },
+    { "name": "PTO Management", "description": "Configurable paid time off policies with accrual tracking, employee requests, manager approval workflows, and balance reporting", "available": true, "category": "HR" },
+    { "name": "Time Tracking", "description": "Basic time clock functionality with GPS location, overtime calculation, and direct integration with payroll processing", "available": true, "category": "HR" },
+    { "name": "Employee Surveys", "description": "Anonymous employee engagement surveys with template questions and aggregate reporting for culture insights", "available": true, "category": "Culture" },
+    { "name": "HR Reporting", "description": "Customizable reports for payroll summaries, tax liabilities, headcount, turnover, compensation, and compliance audits", "available": true, "category": "Analytics" },
+    { "name": "Compliance Documents", "description": "Automated generation and distribution of W-2s, 1095-Cs, 1099-NECs, and other mandatory compliance forms", "available": true, "category": "Compliance" },
+    { "name": "Integrations (QuickBooks, Xero)", "description": "Two-way sync with QuickBooks Online and Xero for accurate bookkeeping, reconciliation, and journal entry automation", "available": true, "category": "Integration" },
+    { "name": "Mobile Payroll App", "description": "iOS and Android app for running payroll, approving time-off requests, and viewing employee information on the go", "available": true, "category": "Platform" },
+    { "name": "Contractor Management", "description": "1099 contractor onboarding, payment processing, and year-end tax form generation with separate contractor portal", "available": true, "category": "Payroll" },
+    { "name": "Garnishment Management", "description": "Automated processing of wage garnishments including child support, tax levies, and student loan deductions", "available": true, "category": "Compliance" },
+    { "name": "Hire/Onboard API", "description": "API endpoints for programmatic employee onboarding, data synchronization, and custom integration development", "available": true, "category": "Developer" }
+  ],
+  "ratings": [
+    { "label": "Features", "score": 4.4 },
+    { "label": "Ease of Use", "score": 4.7 },
+    { "label": "Support", "score": 4.5 },
+    { "label": "Value", "score": 4.3 },
+    { "label": "Performance", "score": 4.6 }
+  ],
+  "content": [
+    {
+      "title": "Overview",
+      "body": "Gusto has carved out a dominant position in the small business HR space by making payroll genuinely simple. Where traditional payroll providers like ADP and Paychex bury users in complex menus and upselling, Gusto offers a streamlined, consumer-grade experience that guides you through every process step by step. It covers payroll processing, tax filings, benefits administration, hiring, and compliance in a single platform, with a clean interface that both administrators and employees actually enjoy using.",
+      "type": "text"
+    },
+    {
+      "title": "Who is it for?",
+      "body": "Gusto is built for US-based small businesses with 1 to 100 employees that want an all-in-one HR and payroll solution without hiring a dedicated HR person. It is especially valuable for founders and office managers who handle HR as one of many responsibilities and need a system that does not require training to use. The automated tax filing alone saves significant time and eliminates a major source of anxiety for business owners. Companies with international contractors or remote employees abroad will need a supplemental solution, as Gusto only supports US payroll.",
+      "type": "text"
+    },
+    {
+      "title": "Key Features",
+      "body": "Gusto combines essential payroll and HR functionality into an impressively cohesive experience:",
+      "type": "list",
+      "items": [
+        "Automated tax filing handles all federal, state, and local payroll taxes — calculating, filing, and paying them on schedule with a 100% accuracy guarantee",
+        "New hire onboarding walks employees through digital W-4, I-9, and direct deposit setup, auto-creates their accounts, and sends them welcome materials",
+        "Health benefits administration lets you shop plans from multiple carriers, manage open enrollment, and sync deductions directly to payroll",
+        "Contractor management supports 1099-NEC filing, milestone-based invoicing, and a separate contractor portal for payment history",
+        "Integrations with QuickBooks, Xero, and major time-tracking apps ensure payroll data flows into your accounting system without duplicate entry",
+        "Employee self-service portal gives every team member access to pay stubs, W-2s, PTO balances, and benefit documents without bothering HR"
+      ]
+    },
+    {
+      "title": "Who should avoid it?",
+      "body": "Gusto is not the right fit for companies with more than 100 employees, as its per-person pricing becomes significantly more expensive than enterprise competitors like ADP or Paychex at scale. It also does not support international payroll, so any business with remote employees based outside the US will need a separate solution, adding complexity and cost. Companies that need advanced HR features like performance management, learning management, or detailed succession planning should look at BambooHR or Rippling, as Gusto's HR tools beyond payroll and benefits are relatively basic.",
+      "type": "text"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does Gusto handle tax filing and what happens if there is an error?",
+      "answer": "Gusto automatically calculates payroll taxes for every run, files them with the appropriate federal, state, and local agencies on the required schedule, and withdraws the funds from your linked bank account to pay them. The platform handles all quarterly and year-end filings including Form 941, state unemployment tax, and W-2s. Gusto guarantees 100% accuracy for all tax calculations and filings — if they make a mistake, they will pay any resulting penalties and interest. This guarantee is a significant selling point for small business owners who dread tax paperwork."
+    },
+    {
+      "question": "Can I run payroll for salaried and hourly employees on different schedules?",
+      "answer": "Yes, Gusto supports multiple pay schedules simultaneously. You can run monthly payroll for salaried employees while processing weekly or bi-weekly payroll for hourly workers. The platform tracks each employee's pay schedule, calculates overtime automatically based on their hours, and handles accruals for PTO and sick leave. You can also run off-cycle payrolls for bonuses, commissions, or corrections without disrupting the regular schedule. This flexibility makes Gusto suitable for businesses with mixed employee types."
+    },
+    {
+      "question": "Does Gusto offer a free trial?",
+      "answer": "Gusto does not offer a free trial, but it provides a free demo and a 30-day money-back guarantee on your first payroll run if you are not satisfied. The company also offers a free Employer Account that gives you access to state and federal compliance alerts, document templates, and the ability to preview pricing without entering billing details. For actual payroll processing, you will need to subscribe to a paid plan. The Simple plan starts at $40 per month plus $6 per person for employees using the full-service payroll."
+    },
+    {
+      "question": "How does Gusto compare to ADP and Paychex for small businesses?",
+      "answer": "Gusto is significantly easier to use than both ADP and Paychex, with a modern interface that requires minimal training. ADP and Paychex offer more comprehensive features for large enterprises but their small business packages can feel like scaled-down versions of complex enterprise software. Gusto is built ground-up for small businesses, which is evident in its onboarding flow, employee portal, and transparent pricing. However, ADP and Paychex offer better support for multi-state and multi-entity companies and often negotiate lower per-employee pricing at scale."
+    }
+  ],
+  "alternatives": ["bamboohr", "quickbooks"],
+  "relatedGuides": ["saas-implementation-best-practices", "software-evaluation-checklist"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

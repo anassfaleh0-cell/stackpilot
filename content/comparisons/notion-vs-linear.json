@@ -1,0 +1,39 @@
+{
+  "slug": "notion-vs-linear",
+  "title": "Notion vs Linear",
+  "description": "All-in-one workspace vs focused issue tracking. We compare features, pricing, and use cases.",
+  "category": "Productivity",
+  "tool1": "Notion",
+  "tool2": "Linear",
+  "tool1Slug": "notion",
+  "tool2Slug": "linear",
+  "winner": "Notion",
+  "features": [
+    {"name": "Real-time collaboration", "tool1": true, "tool2": true},
+    {"name": "Issue tracking", "tool1": true, "tool2": true},
+    {"name": "Sprint planning", "tool1": false, "tool2": true},
+    {"name": "Velocity tracking", "tool1": false, "tool2": true},
+    {"name": "Documentation & wikis", "tool1": true, "tool2": false},
+    {"name": "Database & spreadsheet views", "tool1": true, "tool2": false},
+    {"name": "Cycle metrics", "tool1": false, "tool2": true},
+    {"name": "Keyboard-first navigation", "tool1": false, "tool2": true},
+    {"name": "Block-based editor", "tool1": true, "tool2": false},
+    {"name": "Template library", "tool1": true, "tool2": false},
+    {"name": "GitHub sync", "tool1": true, "tool2": true},
+    {"name": "API access", "tool1": true, "tool2": true},
+    {"name": "Free tier available", "tool1": true, "tool2": true},
+    {"name": "Offline mode", "tool1": true, "tool2": true},
+    {"name": "Mobile apps", "tool1": true, "tool2": true},
+    {"name": "Roadmap views", "tool1": false, "tool2": true},
+    {"name": "Custom dashboards", "tool1": true, "tool2": false}
+  ],
+  "verdict": "Notion is the better choice for teams that need a flexible all-in-one workspace combining docs, wikis, databases, and project management in a single platform. Linear excels for engineering teams focused on fast-paced issue tracking with sprint planning and velocity metrics, but its narrow scope limits broader use cases. If your primary need is lightweight project management with rich documentation and database capabilities, Notion's broader feature set gives it the edge. For pure issue tracking with a premium developer experience, Linear is the stronger option.",
+  "faqs": [
+    {"question": "Which is better, Notion or Linear?", "answer": "It depends on your needs. Notion is better for general project management, documentation, and all-in-one workspace use cases. Linear is better for teams focused primarily on issue tracking, sprint planning, and engineering workflows."},
+    {"question": "Can Notion and Linear be used together?", "answer": "Yes, many teams use Notion for documentation and wikis while using Linear for day-to-day issue tracking and sprint management. Both have APIs and integrations that make this workflow possible."},
+    {"question": "Is Notion good for software development teams?", "answer": "Notion works well for software teams that need documentation, roadmaps, and lightweight task tracking. However, teams needing advanced agile features like velocity tracking and cycle metrics may prefer Linear's purpose-built approach."},
+    {"question": "Does Linear have a free tier?", "answer": "Yes, Linear offers a free tier for teams of up to 10 users. Notion's free plan is more generous with unlimited blocks and up to 10 collaborators, plus a 7-day page history."}
+  ],
+  "relatedComparisons": ["asana-vs-monday-com", "github-vs-gitlab"],
+  "lastUpdated": "2026-07-01"
+}

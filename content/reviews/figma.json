@@ -1,0 +1,66 @@
+{
+  "slug": "figma",
+  "name": "Figma",
+  "tagline": "Collaborative interface design tool with real-time editing.",
+  "description": "Figma is a cloud-based design and prototyping platform that enables teams to create, share, and iterate on user interfaces in real time. Unlike traditional design tools, Figma runs entirely in the browser, eliminating file management and enabling seamless collaboration between designers, developers, and stakeholders regardless of their operating system.",
+  "category": "Design & Creative",
+  "website": "https://figma.com",
+  "pricing": "Freemium",
+  "rating": 4.8,
+  "reviewCount": 2147,
+  "pros": [
+    "Real-time multiplayer editing with instant syncing across all users",
+    "Cross-platform compatibility with web, macOS, Windows, and mobile apps",
+    "Powerful component system with auto-layout and variants",
+    "Extensive plugin ecosystem with thousands of community extensions",
+    "Developer handoff tools with CSS inspection and asset export"
+  ],
+  "cons": [
+    "Requires internet connection for most features with limited offline mode",
+    "Large files can become sluggish, especially with many embedded images",
+    "Font licensing restrictions can complicate team collaboration"
+  ],
+  "features": [
+    {"name": "Vector Editing", "description": "Professional vector pen tool with boolean operations and path editing", "available": true, "category": "Core"},
+    {"name": "Auto Layout", "description": "Responsive design constraints that automatically adjust to content changes", "available": true, "category": "Core"},
+    {"name": "Component System", "description": "Reusable design components with variants, properties, and instance swapping", "available": true, "category": "Core"},
+    {"name": "Real-Time Collaboration", "description": "Multiplayer editing with cursor presence, comments, and version history", "available": true, "category": "Collaboration"},
+    {"name": "Prototyping", "description": "Interactive prototypes with transitions, overlays, and smart animate", "available": true, "category": "Core"},
+    {"name": "Developer Handoff", "description": "Inspect mode with CSS code generation, asset export, and measurement tools", "available": true, "category": "Collaboration"},
+    {"name": "Plugin Ecosystem", "description": "Thousands of community plugins for icons, illustrations, accessibility, and more", "available": true, "category": "Integrations"},
+    {"name": "Design Systems", "description": "Shared libraries for colors, typography, and components across teams", "available": true, "category": "Core"},
+    {"name": "Branching & Merging", "description": "Version control with branched files and merge requests for design review", "available": true, "category": "Collaboration"},
+    {"name": "Slack Integration", "description": "Receive Figma notifications and preview designs directly in Slack", "available": true, "category": "Integrations"},
+    {"name": "Jira Integration", "description": "Link Figma designs to Jira issues with inline previews", "available": true, "category": "Integrations"},
+    {"name": "GitHub Integration", "description": "Embed Figma files in GitHub pull requests and issues", "available": true, "category": "Integrations"},
+    {"name": "Audit Logs", "description": "Track design file access, edits, and sharing activities", "available": true, "category": "Security"},
+    {"name": "Single Sign-On", "description": "SAML-based SSO for Enterprise accounts with SCIM provisioning", "available": true, "category": "Security"},
+    {"name": "Mobile App", "description": "View, comment, and present designs on iOS and Android devices", "available": true, "category": "Mobile"},
+    {"name": "Offline Mode", "description": "Cache files for offline viewing with sync on reconnection", "available": true, "category": "Mobile"},
+    {"name": "Community Templates", "description": "Thousands of free templates and starter files from the community", "available": true, "category": "Core"},
+    {"name": "Design Tokens", "description": "Export design decisions as platform-agnostic token files", "available": true, "category": "Core"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.9},
+    {"label": "Ease of Use", "score": 4.6},
+    {"label": "Support", "score": 4.3},
+    {"label": "Value", "score": 4.8},
+    {"label": "Performance", "score": 4.5}
+  ],
+  "content": [
+    {"title": "Overview", "body": "Figma revolutionized the design industry by bringing a full-featured interface design tool to the browser, making collaboration a first-class citizen rather than an afterthought. Its vector editing capabilities rival established desktop applications while adding real-time multiplayer editing that transforms how design teams work together. The platform has grown from a simple design tool into a complete design operations hub with prototyping, developer handoff, and design system management.", "type": "text"},
+    {"title": "Who is it for?", "body": "Figma is essential for UI/UX designers, product teams, and design agencies that need collaborative design workflows. It is particularly valuable for remote teams where real-time collaboration eliminates the friction of file sharing and version conflicts. Frontend developers also benefit from Figma's inspection tools and CSS generation capabilities that streamline the handoff process.", "type": "text"},
+    {"title": "Key Features", "body": "Figma's key strengths lie in its collaborative architecture and modern component system. The auto-layout feature makes responsive design intuitive by automatically adjusting elements as content changes. The component system with variants and properties enables teams to build scalable design systems. Real-time multiplayer editing allows multiple designers to work on the same file simultaneously, dramatically reducing iteration cycles.", "type": "list", "items": ["Real-time multiplayer editing with cursor presence, comments, and instant sync", "Auto-layout constraints that create responsive designs without manual adjustments", "Component system with variants, properties, and instance overrides for scalable design systems", "Interactive prototyping with smart animate, overlays, and conditional interactions", "Developer handoff with automatic CSS generation, asset export, and measurement tools"]},
+    {"title": "Who should avoid it?", "body": "Designers who work primarily offline or in environments with unreliable internet connectivity may struggle with Figma's cloud-dependent architecture. Professional illustrators and print designers who need advanced vector manipulation, color management, or print-specific features may prefer dedicated tools like Adobe Illustrator. Organizations with strict data residency requirements should verify Figma's compliance with their regional regulations.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is Figma best used for?", "answer": "Figma is best used for UI/UX design, interface prototyping, and design system management. It excels at collaborative design work where multiple team members need to contribute to the same files simultaneously. Its developer handoff features also make it an excellent bridge between design and engineering teams."},
+    {"question": "How much does Figma cost?", "answer": "Figma offers a free Starter plan with unlimited files and up to 3 projects. The Professional plan is $12/month per editor and adds unlimited projects, version history, and custom templates. Organization ($45/month per editor) and Enterprise ($75/month per editor) plans add design system analytics, branching, and advanced security features."},
+    {"question": "Does Figma work offline?", "answer": "Figma has limited offline capabilities. While you can view previously opened files in a cached state, editing requires an internet connection. Figma's desktop app provides better offline support than the browser version, but the platform is fundamentally designed for cloud-based, real-time collaboration."},
+    {"question": "Is Figma suitable for large design teams?", "answer": "Yes, Figma is well-suited for large design teams, especially with its Organization and Enterprise plans. These plans include shared design system libraries, branching and merging workflows, analytics dashboards, and advanced permission controls that help large teams maintain consistency and scale their design operations."}
+  ],
+  "alternatives": ["notion", "linear", "vercel", "supabase"],
+  "relatedGuides": ["how-to-choose-project-management-software", "saas-implementation-best-practices"],
+  "lastReviewed": "2026-07-01",
+  "author": "StackPilot Team"
+}
