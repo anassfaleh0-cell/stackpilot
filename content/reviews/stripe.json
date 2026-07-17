@@ -1,0 +1,73 @@
+{
+  "slug": "stripe",
+  "name": "Stripe",
+  "tagline": "Developer-first payment infrastructure that lets businesses accept, manage, and optimize online transactions globally",
+  "description": "Stripe is a payment processing platform that provides the technical infrastructure for internet commerce. Instead of building payment systems from scratch, businesses integrate Stripe's APIs to accept payments, manage subscriptions, handle payouts, and prevent fraud across 135+ currencies and 40+ countries. Stripe's differentiating advantage is its developer experience — its API-first design, comprehensive documentation, and client libraries in 10+ languages make it the default choice for technology companies. The platform processes hundreds of billions of dollars annually and serves businesses from one-person startups to publicly traded enterprises.",
+  "category": "Finance & Accounting",
+  "website": "https://stripe.com",
+  "pricing": "Transaction-based",
+  "rating": 4.7,
+  "reviewCount": 18000,
+  "pros": [
+    "API-first design with client libraries in Python, Ruby, Node.js, PHP, Java, Go, .NET, and Swift, enabling full payment workflow integration in hours rather than weeks compared to traditional processors",
+    "Unified API handles 135+ currencies, 40+ payment methods (credit cards, Apple Pay, Google Pay, SEPA, iDEAL, Alipay, WeChat Pay), and local acquiring in 40+ countries from a single integration",
+    "Stripe Radar uses machine learning trained on Stripe's network-wide transaction data to block fraud in real-time with 99.9% availability and configurable rules that require no ML expertise to tune",
+    "Subscription management with Stripe Billing automates proration, dunning, invoicing, and Smart Retries that recover 30-50% of failed recurring payments by retrying at optimal times based on card network data",
+    "Stripe Connect enables marketplace and platform businesses to onboard sub-merchants, split payments, handle KYC/identity verification, and manage payouts to thousands of sellers with a single integration"
+  ],
+  "cons": [
+    "Standard transaction fee of 2.9% + $0.30 per card charge is premium pricing compared to PayPal's 2.59% or Adyen's interchange-plus model, with no volume discounts until processing exceeds $1 million annually",
+    "Account holds and reserve requirements can be imposed without warning on high-risk businesses (crowdfunding, travel bookings, subscription boxes), freezing 10-25% of funds for 90-180 days with limited appeals process",
+    "Customer support for standard accounts is email-only with 24-48 hour response times and no phone support for accounts processing under $1 million per month, creating frustration during time-sensitive payment disputes"
+  ],
+  "features": [
+    {"name": "Payments API", "description": "Accept credit/debit cards, digital wallets, and local payment methods through a single API with 40+ method support", "available": true, "category": "Core"},
+    {"name": "Subscriptions & Billing", "description": "Recurring billing with proration, metered billing, coupons, dunning management, and Smart Retries for failed payments", "available": true, "category": "Core"},
+    {"name": "Connect Platform", "description": "Marketplace payment infrastructure with sub-merchant onboarding, payment splitting, and instant payouts via Stripe Treasury", "available": true, "category": "Platform"},
+    {"name": "Radar Fraud Prevention", "description": "ML-based fraud detection with customizable rules, 3D Secure authentication, and dispute management automation", "available": true, "category": "Risk"},
+    {"name": "Invoicing", "description": "Create and send invoices with automatic collection, payment reminders, and multiple payment method support", "available": true, "category": "Core"},
+    {"name": "Payment Links", "description": "No-code payment page generator for businesses that want to accept payments without API integration", "available": true, "category": "Core"},
+    {"name": "Checkout", "description": "Pre-built, customizable payment page with Apple Pay, Google Pay, and Link autofill for optimized conversion", "available": true, "category": "Core"},
+    {"name": "Terminal", "description": "In-person payment processing with Stripe Reader hardware and SDK for POS and mobile payment applications", "available": true, "category": "Omnichannel"},
+    {"name": "Tax", "description": "Automated sales tax calculation and collection across US states, EU VAT, and international tax jurisdictions", "available": true, "category": "Compliance"},
+    {"name": "Identity", "description": "AI-powered identity verification for KYC compliance, age verification, and fraud prevention use cases", "available": true, "category": "Compliance"},
+    {"name": "Atlas", "description": "Company formation, US bank account, and tax registration for international founders incorporating in Delaware", "available": true, "category": "Business"},
+    {"name": "Treasury", "description": "Banking-as-a-service API for holding funds, making transfers, and issuing cards through Stripe's banking partners", "available": true, "category": "Platform"},
+    {"name": "Climate", "description": "Carbon removal contribution as a percentage of transaction volume, integrated directly into the payments dashboard", "available": true, "category": "Impact"},
+    {"name": "Data Pipeline", "description": "Automated data export to data warehouses (Snowflake, BigQuery, Redshift) for custom analytics and reconciliation", "available": true, "category": "Analytics"},
+    {"name": "Revenue & Finance Automation", "description": "Automated revenue recognition, journal entries, and reconciliation for subscription businesses with GAAP/IFRS compliance", "available": true, "category": "Finance"},
+    {"name": "Sigma", "description": "SQL-based custom query interface for payment data with pre-built reports for MRR, churn, refund rates, and dispute metrics", "available": true, "category": "Analytics"},
+    {"name": "API Keys & Webhooks", "description": "Granular API key permissions, webhook signatures for event verification, and idempotency guarantees for safe retries", "available": true, "category": "Developer"},
+    {"name": "Stripe Apps", "description": "Third-party app marketplace for extending the Stripe dashboard with integrations from QuickBooks, NetSuite, Xero, and Salesforce", "available": true, "category": "Integrations"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.8},
+    {"label": "Ease of Use", "score": 4.5},
+    {"label": "Support", "score": 3.8},
+    {"label": "Value", "score": 4.3},
+    {"label": "Performance", "score": 4.9}
+  ],
+  "content": [
+    {"title": "Overview", "body": "Stripe has become the default payment infrastructure for internet businesses by making online payments as simple as a few lines of code. Unlike traditional payment processors that require lengthy applications, dedicated merchant accounts, and opaque pricing, Stripe provides instant account activation, transparent per-transaction pricing, and a developer experience that has set the industry standard. The platform handles the entire payment lifecycle: accepting funds from customers in 135+ currencies, reconciling settlements, handling disputes, managing recurring billing, and orchestrating payouts to bank accounts. Stripe's moat is not just its API — it is the network effects of Radar fraud detection learning from every transaction across its platform and the expansion into adjacent financial services (Treasury, Tax, Identity, Atlas) that make Stripe progressively more embedded in its customers' operations. Stripe processes hundreds of billions in annual payment volume and is SOC 2 Type II, PCI DSS Level 1, and GDPR compliant.", "type": "text"},
+    {"title": "Who is it for?", "body": "Stripe is the best payment processor for SaaS companies, e-commerce businesses, subscription services, and marketplace platforms that have technical capability on their team. It is especially well-suited for startups that need to launch quickly with a professional payment experience, international businesses that need multi-currency and local payment method support, and subscription businesses that benefit from Stripe Billing's automated dunning and Smart Retry features. Marketplaces and platform businesses using Stripe Connect can onboard sellers across 40+ countries with automated KYC verification. Traditional brick-and-mortar businesses with simple card-present needs may find Square easier to adopt, and very small businesses processing under $5,000 per month may prefer PayPal's simpler setup.", "type": "text"},
+    {"title": "Key Features", "body": "Stripe's product breadth extends well beyond payment processing into financial infrastructure. The following capabilities represent the most impactful features for different business models.", "type": "list", "items": [
+      "Stripe Billing automates subscription lifecycle management including trial-to-paid conversion, plan upgrades/downgrades with prorated credits, dunning emails for failed payments, and Smart Retries that recover 30-50% of otherwise lost recurring revenue",
+      "Stripe Connect handles the complexity of marketplace payments: onboarding sellers with custom KYC requirements, splitting payments between platform and seller, managing escrow holds, and facilitating instant payouts via debit cards",
+      "Radar for Fraud Prevention uses machine learning models trained on Stripe's global transaction network to score each payment for fraud risk in under 100ms, blocking suspicious charges before they reach the issuer",
+      "Stripe Tax automatically determines applicable tax rates across 12,000+ US and EU tax jurisdictions, applies them to transactions, and generates reports for filing — reducing compliance from weeks of engineering work to an API toggle",
+      "Sigma provides direct SQL access to your payment data, enabling custom queries for MRR calculations, churn analysis, refund rate trends, and cohort retention without exporting data to a separate analytics tool"
+    ]},
+    {"title": "Who should avoid it?", "body": "Businesses in high-risk categories (CBD, vaping, adult content, firearms, debt collection) face frequent account freezes and reserve requirements from Stripe with limited appeals options, and may be better served by high-risk payment processors that understand their industry. Non-technical founders who cannot integrate an API and need a simple payment link may find Stripe's self-serve Checkout Pages or Payment Links sufficient, but should evaluate Square or PayPal for simpler setup. Organizations processing over $5 million annually should negotiate custom pricing or evaluate interchange-plus processors like Adyen that can offer lower effective rates. Developers evaluating Stripe should expect 2-3 days to integrate core payments and 1-2 weeks for complex subscription or marketplace implementations.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is Stripe best used for?", "answer": "Stripe is best used as the payment processing infrastructure for internet businesses that need to accept payments online, manage subscriptions, handle marketplace payouts, or operate internationally. Its API-first design makes it the standard choice for SaaS companies, e-commerce platforms, and subscription businesses that want a developer-friendly payment system with global reach."},
+    {"question": "How much does Stripe cost?", "answer": "Stripe charges 2.9% + $0.30 per successful card charge for standard payments. International cards cost an additional 1.5%. ACH direct debit is 0.8% capped at $5. Instant payouts cost 1% ($0.50 minimum). Stripe Billing costs 0.5% of recurring revenue. Radar for Fraud Prevention costs $0.02 per transaction for the standard tier. There are no monthly fees, setup fees, or minimum processing requirements. Volume discounts require negotiation above $1 million annually."},
+    {"question": "Does Stripe integrate with other tools?", "answer": "Stripe integrates with major e-commerce platforms (Shopify, WooCommerce, BigCommerce), accounting software (QuickBooks, Xero, NetSuite, FreshBooks), CRM tools (Salesforce, HubSpot), analytics platforms (Mixpanel, Amplitude), and development tools (GitHub, Vercel, Netlify). The Stripe Apps marketplace offers 200+ third-party plugins, and the REST API enables custom integrations with any platform."},
+    {"question": "Is Stripe secure?", "answer": "Stripe is PCI DSS Level 1 certified, SOC 2 Type II compliant, and GDPR compliant. All card data is tokenized — Stripe never returns full card numbers to your servers. Radar fraud detection evaluates every transaction in real-time. Stripe supports 3D Secure 2 authentication for liability shift on disputed transactions. API keys use granular permissions and can be restricted by IP address. Stripe publishes annual penetration test results and maintains a vulnerability disclosure program."}
+  ],
+  "alternatives": [],
+  "relatedComparisons": ["quickbooks-vs-xero"],
+  "relatedGuides": ["finance-software-buyers-guide", "software-evaluation-checklist", "saas-implementation-best-practices"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

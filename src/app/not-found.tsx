@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Compass } from "lucide-react"
 import type { Metadata } from "next/dist/lib/metadata/types/metadata-interface"
 
-export const metadata: Metadata = { title: "Page Not Found | StackPilot" }
+export const metadata: Metadata = { title: "Page Not Found" }
 
 export default function NotFound() {
   return (

@@ -1,0 +1,73 @@
+{
+  "slug": "firebase",
+  "name": "Firebase",
+  "tagline": "Google-backed mobile and web app platform providing backend services without server management",
+  "description": "Firebase is Google's application development platform that provides backend infrastructure as managed services, eliminating the need for developers to build and operate servers. It includes a NoSQL document database (Firestore), user authentication, file storage, serverless functions, real-time data synchronization, and push notifications — all connected through a unified SDK. Firebase pioneered the BaaS (Backend-as-a-Service) model that Supabase and others have since extended, and its tight integration with Google Cloud and Google Analytics creates a powerful ecosystem for mobile and web applications.",
+  "category": "Developer Tools",
+  "website": "https://firebase.google.com",
+  "pricing": "Freemium",
+  "rating": 4.3,
+  "reviewCount": 15000,
+  "pros": [
+    "Firestore NoSQL database provides real-time data synchronization across all connected clients with automatic scaling, offline persistence, and multi-region replication without any server configuration",
+    "Generous free tier includes 50,000 reads, 20,000 writes, 200,000 database connections, 1 GB storage, 10 GB downloads, and 125,000 Cloud Functions invocations per day — enough to launch and operate a small production application at zero cost",
+    "Authentication SDK supports email/password, phone, Google, Apple, Facebook, Twitter, GitHub, and anonymous auth with a single API call, handling token management and session persistence automatically",
+    "Crashlytics provides real-time crash reporting with stack traces, breadcrumbs, and user journey context for every error, integrated directly into the Firebase console without a separate monitoring setup",
+    "Google Analytics integration with Firebase collects user behavior data automatically, enabling audience segments based on in-app events that feed into Google Ads, Google Marketing Platform, and BigQuery"
+  ],
+  "cons": [
+    "NoSQL document model with a 1 MB document size limit and 20,000 index entries per collection makes relational data modeling difficult and complex queries require manual index creation or denormalization",
+    "Vendor lock-in is significant — migrating away from Firebase requires rewriting large portions of application code including authentication, database queries, storage access patterns, and Cloud Functions",
+    "Query limitations include no native JOIN operations, no aggregate queries (COUNT, SUM, AVG), no text search, and filters limited to compound indexes that must be declared in advance, making ad-hoc analytics queries impractical"
+  ],
+  "features": [
+    {"name": "Cloud Firestore", "description": "NoSQL document database with real-time listeners, offline persistence, multi-region replication, and automatic scaling", "available": true, "category": "Database"},
+    {"name": "Authentication", "description": "Multi-provider auth with email, phone, and federated identity (Google, Apple, Facebook, Twitter, GitHub) using FirebaseUI or SDK", "available": true, "category": "Auth"},
+    {"name": "Cloud Storage", "description": "File storage backed by Google Cloud Storage with Firebase SDK for upload/download, security rules, and CDN delivery", "available": true, "category": "Storage"},
+    {"name": "Cloud Functions", "description": "Serverless Node.js, Python, and Go functions triggered by database changes, auth events, storage operations, and HTTP requests", "available": true, "category": "Compute"},
+    {"name": "Hosting", "description": "Global CDN hosting for web apps and microservices with one-command deployment, custom domains, and automatic HTTPS", "available": true, "category": "Hosting"},
+    {"name": "Cloud Messaging", "description": "Cross-platform push notifications for iOS, Android, and web with topic-based targeting, scheduling, and A/B testing", "available": true, "category": "Messaging"},
+    {"name": "Remote Config", "description": "Server-side feature flags and configuration values that change app behavior without requiring an app store update", "available": true, "category": "App Management"},
+    {"name": "A/B Testing", "description": "Experiment platform for testing changes to Remote Config values across user segments with statistical significance reporting", "available": true, "category": "Experimentation"},
+    {"name": "Crashlytics", "description": "Real-time crash reporting with stack traces, affected user counts, and breadcrumb logging for debugging production issues", "available": true, "category": "Monitoring"},
+    {"name": "Performance Monitoring", "description": "Automatic and custom tracing of app startup time, network requests, screen rendering, and API call latency", "available": true, "category": "Monitoring"},
+    {"name": "Test Lab", "description": "Cloud-based app testing on physical and virtual devices across multiple Android and iOS configurations", "available": true, "category": "Testing"},
+    {"name": "App Distribution", "description": "Internal tester distribution for Android and iOS apps with app bundle upload, tester management, and version tracking", "available": true, "category": "Distribution"},
+    {"name": "ML Kit", "description": "On-device ML APIs for text recognition, barcode scanning, image labeling, object detection, and face detection", "available": true, "category": "AI/ML"},
+    {"name": "Data Connect", "description": "Managed PostgreSQL database with auto-generated GraphQL and SQL APIs, bridging relational data with Firebase's serverless backend", "available": true, "category": "Database"},
+    {"name": "Firebase Extensions", "description": "Pre-built backend solutions for Stripe payments, SendGrid email, image resizing, translations, and Slack notifications", "available": true, "category": "Integrations"},
+    {"name": "BigQuery Integration", "description": "Export Firebase analytics data and raw event logs to BigQuery for custom SQL analysis and data warehouse integration", "available": true, "category": "Analytics"},
+    {"name": "Emulator Suite", "description": "Local emulators for Firestore, Auth, Functions, Storage, and Pub/Sub for offline development and testing without cloud costs", "available": true, "category": "Development"},
+    {"name": "Security Rules", "description": "Declarative access control language for Firestore and Storage that enforces per-document and per-file permissions based on authentication and data conditions", "available": true, "category": "Security"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.5},
+    {"label": "Ease of Use", "score": 4.7},
+    {"label": "Support", "score": 3.8},
+    {"label": "Value", "score": 4.6},
+    {"label": "Performance", "score": 4.2}
+  ],
+  "content": [
+    {"title": "Overview", "body": "Firebase is the platform that made serverless application development accessible to frontend developers. Before Firebase, building a mobile or web app with authentication, a database, file uploads, and push notifications required backend server setup, API development, database administration, and DevOps. Firebase packages these services as SDK calls that run entirely on the client, with Google managing the infrastructure. The platform excels at prototyping and MVP development where speed matters more than data model complexity. Its real-time Firestore database remains one of the easiest ways to build live-updating applications like chat, collaborative editing, or live dashboards. Google's acquisition of Firebase in 2014 has led to increasing integration with Google Cloud, though the platform still maintains its own console and development experience.", "type": "text"},
+    {"title": "Who is it for?", "body": "Firebase is ideal for mobile app developers, indie makers, and startups that need to go from idea to working prototype in days rather than weeks. Its real-time database is perfect for collaborative applications, messaging products, and live dashboards. Frontend developers who want to avoid backend infrastructure entirely can build complete production applications using only Firebase SDKs. Enterprise teams building internal tools benefit from Firebase's quick setup. Applications with complex relational data, advanced search requirements, or custom analytics needs will find Firebase's NoSQL model constraining and should evaluate Supabase or a traditional backend.", "type": "text"},
+    {"title": "Key Features", "body": "Firebase provides a complete backend-as-a-service platform where each product works independently but integrates more powerfully when used together. The following capabilities form the core of the Firebase development experience.", "type": "list", "items": [
+      "Firestore synchronizes data in real-time across all connected clients through WebSocket listeners, so a document update by one user immediately appears on every other user's screen without polling",
+      "Security Rules provide declarative access control written in a JavaScript-like expression language, enforcing per-document, per-field, and per-user permissions at the database layer with no application code required",
+      "Remote Config lets development teams change app behavior — feature flags, UI text, API endpoints — without publishing app store updates, enabling progressive rollouts and dark launches",
+      "Cloud Functions automatically trigger on database writes, auth events, and file uploads, running backend code in a Node.js or Python environment with no server management or scaling configuration",
+      "Emulator Suite enables full offline development with local Firestore, Auth, Functions, and Storage emulators that support hot reloading, making development loops fast and avoiding cloud costs during iteration"
+    ]},
+    {"title": "Who should avoid it?", "body": "Applications that require relational data modeling, SQL queries with JOINs, aggregate functions, or complex reporting should choose Supabase or a traditional backend instead of Firebase. Organizations concerned about Google Cloud vendor lock-in must plan for the significant migration effort required to move off Firebase. Teams that need PostgreSQL, full-text search, or row-level security with SQL will find Supabase's approach more aligned with traditional database practices. Applications handling complex transactional operations should test Firestore's eventual consistency model against their requirements before committing to the platform.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is Firebase best used for?", "answer": "Firebase is best used for rapid application development where speed to market matters more than data model flexibility. It excels at MVPs, mobile apps, real-time collaborative features, and applications where authentication, file storage, push notifications, and a real-time database are needed without backend engineering overhead."},
+    {"question": "How much does Firebase cost?", "answer": "Firebase Spark plan is free with 50,000 Firestore reads/day, 1 GB storage, 125,000 Cloud Functions/month, and 10 GB hosting. The Blaze plan (pay-as-you-go) costs approximately $0.18 per GB of stored data, $0.06 per 100,000 reads, and $0.40 per million Functions invocations. Most small applications cost $0-25 per month on Blaze. Enterprise pricing is available through Google Cloud."},
+    {"question": "Does Firebase integrate with other tools?", "answer": "Firebase integrates with Google Cloud (BigQuery, Pub/Sub, Cloud Run), Google Analytics, Google Ads, Google Marketing Platform, Slack, Stripe (via Extensions), SendGrid, and Algolia (for full-text search). Firebase Extensions provide one-click integrations for common patterns including Stripe billing, image transformations, and email sending."},
+    {"question": "Is Firebase suitable for production use?", "answer": "Yes, Firebase powers major production applications including Alibaba, Trivago, The New York Times, and Halfbrick. Google's infrastructure provides 99.95% uptime SLA for Firestore, and the platform supports automatic scaling to millions of concurrent users. However, production applications should implement proper Security Rules, data validation in Cloud Functions, and have a migration path if their data model requirements outgrow Firebase's NoSQL capabilities."}
+  ],
+  "alternatives": ["supabase"],
+  "relatedComparisons": ["supabase-vs-firebase"],
+  "relatedGuides": ["developer-tools-stack-guide", "software-evaluation-checklist"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

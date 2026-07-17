@@ -22,18 +22,18 @@ export const navLinks = [
 ]
 
 export const categories = [
-  { name: "AI & Machine Learning", slug: "ai-ml", count: 47 },
-  { name: "Project Management", slug: "project-management", count: 38 },
-  { name: "CRM & Sales", slug: "crm-sales", count: 32 },
-  { name: "Marketing & SEO", slug: "marketing-seo", count: 45 },
-  { name: "Design & Creative", slug: "design-creative", count: 29 },
-  { name: "Developer Tools", slug: "developer-tools", count: 52 },
-  { name: "Analytics & Data", slug: "analytics-data", count: 35 },
-  { name: "HR & People", slug: "hr-people", count: 22 },
-  { name: "Finance & Accounting", slug: "finance-accounting", count: 27 },
-  { name: "Productivity", slug: "productivity", count: 41 },
-  { name: "Security & Compliance", slug: "security-compliance", count: 31 },
-  { name: "Communication", slug: "communication", count: 36 },
+  { name: "AI & Machine Learning", slug: "ai-ml", count: 7 },
+  { name: "Project Management", slug: "project-management", count: 8 },
+  { name: "CRM & Sales", slug: "crm-sales", count: 6 },
+  { name: "Marketing & SEO", slug: "marketing-seo", count: 7 },
+  { name: "Design & Creative", slug: "design-creative", count: 4 },
+  { name: "Developer Tools", slug: "developer-tools", count: 17 },
+  { name: "Analytics & Data", slug: "analytics-data", count: 11 },
+  { name: "HR & People", slug: "hr-people", count: 4 },
+  { name: "Finance & Accounting", slug: "finance-accounting", count: 8 },
+  { name: "Productivity", slug: "productivity", count: 7 },
+  { name: "Security & Compliance", slug: "security-compliance", count: 7 },
+  { name: "Communication", slug: "communication", count: 7 },
 ]
 
 export const toolPages = [

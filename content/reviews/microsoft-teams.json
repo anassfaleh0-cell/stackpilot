@@ -1,0 +1,74 @@
+{
+  "slug": "microsoft-teams",
+  "name": "Microsoft Teams",
+  "tagline": "Unified communication hub for Microsoft 365 organizations combining chat, video, calls, and file collaboration",
+  "description": "Microsoft Teams is the communication and collaboration platform at the center of the Microsoft 365 ecosystem. It replaces the need for separate tools by integrating persistent team chat, HD video conferencing, cloud phone calling, and real-time document collaboration into a single application. Unlike standalone communication tools, Teams is natively connected to SharePoint, OneDrive, Outlook, and the Microsoft Office suite, meaning files shared in chat are automatically stored and version-controlled in SharePoint, calendar events sync with Outlook, and documents can be co-authored in real time without leaving the conversation thread.",
+  "category": "Communication",
+  "website": "https://microsoft.com/microsoft-teams",
+  "pricing": "Freemium",
+  "rating": 4.3,
+  "reviewCount": 52000,
+  "pros": [
+    "Deep Microsoft 365 integration means documents shared in chat are stored in SharePoint with version history, metadata, and compliance policies applied automatically without additional configuration",
+    "Together Mode and presenter coaching use AI to composite meeting participants into a shared virtual space and provide real-time speaking pace and filler word feedback during presentations",
+    "Channels with tabs let teams embed SharePoint pages, Power BI dashboards, Planner boards, and third-party apps directly in the conversation thread without switching context or opening new browser tabs",
+    "Enterprise compliance features include legal hold, eDiscovery, retention policies, communication compliance, and information barriers that meet regulatory requirements across finance, healthcare, and government",
+    "Included with Microsoft 365 Business and Enterprise licenses, making the effective cost effectively zero for the millions of organizations already paying for the Microsoft ecosystem"
+  ],
+  "cons": [
+    "Desktop application consumes 500 MB-1.5 GB of RAM on typical workdays and causes significant CPU usage during meetings, making it the most resource-intensive communication client available",
+    "Navigation complexity with multiple layers of teams, channels, tabs, chat, calendar, and apps creates a steep learning curve for new users compared to Slack's simpler channel-first model",
+    "Microsoft 365 license dependency means organizations using Google Workspace or other email/calendar providers face additional costs and integration friction to adopt Teams as a standalone communication tool"
+  ],
+  "features": [
+    {"name": "Chat & Channels", "description": "Persistent direct messaging and team channels with threaded conversations, message formatting, emoji reactions, and @mentions", "available": true, "category": "Core"},
+    {"name": "HD Video Meetings", "description": "Up to 1,000 participants with background blur, custom backgrounds, live captions, recording, and transcript generation", "available": true, "category": "Meetings"},
+    {"name": "Together Mode", "description": "AI-powered scene compositing places meeting participants in a shared virtual auditorium, reducing meeting fatigue by simulating eye contact and spatial audio", "available": true, "category": "AI"},
+    {"name": "Presenter Coach", "description": "Real-time AI feedback on pacing, pitch, filler words, and inclusive language during meeting presentations and rehearsals", "available": true, "category": "AI"},
+    {"name": "Teams Phone", "description": "Cloud PBX with calling plans, auto attendant, call queues, direct routing, and operator connect with local numbers in 100+ countries", "available": true, "category": "Phone"},
+    {"name": "Teams Rooms", "description": "Conference room system with front-row layout, wireless casting, room booking panels, and intelligent audio processing", "available": true, "category": "Hardware"},
+    {"name": "File Sharing & Co-authoring", "description": "SharePoint-backed file storage with real-time co-authoring in Word, Excel, and PowerPoint directly from Teams chat and channels", "available": true, "category": "Collaboration"},
+    {"name": "Tabs & Connectors", "description": "Embedded app tabs for Power BI, Planner, Forms, SharePoint pages, and third-party services directly inside Teams channels", "available": true, "category": "Integrations"},
+    {"name": "Webinars & Live Events", "description": "Large-scale virtual events with registration, attendee reporting, Q&A moderation, and recording for up to 10,000 attendees", "available": true, "category": "Events"},
+    {"name": "Approvals", "description": "Workflow-driven approval requests for documents, purchase orders, and expense reports integrated with Power Automate", "available": true, "category": "Workflow"},
+    {"name": "Shifts & Schedule", "description": "Workforce management for hourly employees including shift scheduling, time-off requests, and clock-in/clock-out tracking", "available": true, "category": "Workforce"},
+    {"name": "Viva Insights", "description": "Personal productivity analytics showing focus time, meeting patterns, and well-being insights integrated into the Teams interface", "available": true, "category": "Analytics"},
+    {"name": "eDiscovery & Legal Hold", "description": "Enterprise compliance tools for legal hold placement on messages and files, content search across Teams, and export for legal review", "available": true, "category": "Compliance"},
+    {"name": "End-to-End Encryption", "description": "One-to-one call encryption with end-to-end encryption support for meetings via Microsoft 365 E5 license", "available": true, "category": "Security"},
+    {"name": "Guest Access", "description": "External collaboration with guest users who can participate in channels, meetings, and document co-authoring without full tenancy", "available": true, "category": "Collaboration"},
+    {"name": "Microsoft 365 Copilot", "description": "AI-powered meeting recaps, chat summaries, message drafting, and action item extraction across Teams conversations", "available": true, "category": "AI"},
+    {"name": "Power Platform Integration", "description": "Create custom apps (Power Apps), workflows (Power Automate), and chatbots (Power Virtual Agents) that run directly inside Teams", "available": true, "category": "Platform"},
+    {"name": "Analytics & Reporting", "description": "Usage analytics showing active users, message volume, meeting adoption, and engagement trends across the organization", "available": true, "category": "Admin"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.8},
+    {"label": "Ease of Use", "score": 3.8},
+    {"label": "Support", "score": 4.0},
+    {"label": "Value", "score": 4.7},
+    {"label": "Performance", "score": 3.5}
+  ],
+  "content": [
+    {"title": "Overview", "body": "Microsoft Teams is the most integrated communication platform available, but that integration comes at a cost. For organizations already running Microsoft 365, Teams provides something no standalone tool can replicate: documents shared in Teams chat are automatically stored, versioned, and governed by SharePoint, calendar events sync bidirectionally with Outlook, and files can be co-authored in real time without ever leaving the conversation. The platform has evolved rapidly since its 2017 launch, adding Together Mode for AI-composited meeting backgrounds, Teams Phone as a cloud PBX replacement, and Copilot integration for AI-powered meeting summaries. However, Teams' desktop client is the heaviest communication app by a significant margin, and its complex navigation deters adoption by new users accustomed to simpler tools.", "type": "text"},
+    {"title": "Who is it for?", "body": "Microsoft Teams is the right choice for organizations already invested in the Microsoft 365 ecosystem. If your company uses Exchange Online, SharePoint, and OneDrive, Teams extends those tools into a unified communication interface at no additional licensing cost. Enterprise organizations with compliance requirements benefit from Teams' legal hold, eDiscovery, and information barrier capabilities. Large organizations with diverse departments benefit from channels, tabs, and the Power Platform integration for building custom workflows. Startups and organizations using Google Workspace will find Teams adds licensing cost and integration friction without the tight ecosystem coupling that makes Teams valuable for Microsoft 365 customers.", "type": "text"},
+    {"title": "Key Features", "body": "Teams' feature depth is unmatched among communication platforms, though not every organization needs the full breadth. The most impactful capabilities are those that leverage the Microsoft 365 ecosystem.", "type": "list", "items": [
+      "File co-authoring in chat lets multiple team members edit a shared Excel spreadsheet or Word document simultaneously with changes visible in real-time, with no separate Office application launch required",
+      "Together Mode uses AI segmentation to place meeting participants in a shared auditorium background, reducing the cognitive load of gallery view by simulating natural eye contact and spatial positioning",
+      "Teams Phone replaces traditional desk phones and PBX systems with cloud calling including auto attendant menus, call queues, and direct routing, all managed from the same Teams interface used for chat and meetings",
+      "Power Apps and Power Automate integration lets organizations build custom business applications and approval workflows that run as tabs inside Teams without writing traditional application code",
+      "Viva Insights provides personal productivity analytics showing how much time each employee spends in meetings, on focused work, and after hours, with nudges to improve meeting habits and protect personal time"
+    ]},
+    {"title": "Who should avoid it?", "body": "Organizations using Google Workspace should not adopt Teams as their primary communication tool — the SharePoint and Outlook integration that makes Teams powerful for Microsoft 365 customers is absent, and the result is an inferior communication experience at additional cost. Small teams on older or resource-constrained hardware will struggle with Teams' memory footprint. Teams that prioritize speed and simplicity over deep integration will find Slack's channel model more intuitive and less resource-intensive. Organizations that need lightweight external collaboration with clients not on Microsoft 365 may find Slack Connect more seamless than Teams guest access.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is Microsoft Teams best used for?", "answer": "Microsoft Teams is best used for unified communication and collaboration within organizations that use Microsoft 365. Its core strength is combining team chat, video meetings, file collaboration, and cloud phone into a single platform where every document, message, and meeting is governed by Microsoft 365 compliance and security policies."},
+    {"question": "How much does Microsoft Teams cost?", "answer": "Microsoft Teams Free supports unlimited chat with 60-minute meeting limits and up to 100 participants. Teams Essentials costs $4 per user per month and removes meeting time limits with 10 GB of cloud storage. Microsoft 365 Business Basic ($6/user/month) includes Teams plus web apps, 1 TB storage, and enterprise email. Microsoft 365 Business Standard ($12.50/user/month) includes desktop Office apps. Enterprise plans E3 and E5 ($32-57/user/month) include advanced compliance and security features."},
+    {"question": "Does Microsoft Teams integrate with other tools?", "answer": "Teams integrates natively with the entire Microsoft 365 suite including SharePoint, OneDrive, Outlook, Planner, Power BI, and Power Platform. Third-party integrations include Salesforce, ServiceNow, Trello, Asana, Jira, Zendesk, and GitHub through the Teams app store. Custom integrations are built via Microsoft Graph API, webhooks, and outgoing webhooks."},
+    {"question": "Is Microsoft Teams secure?", "answer": "Teams is SOC 2, SOC 3, ISO 27001, HIPAA BAA, FedRAMP, and GDPR compliant. Data is encrypted in transit (TLS 1.2+) and at rest (BitLocker/Azure SSE). E5 licenses add end-to-end encryption for meetings, Microsoft Defender for Office 365 integration, and advanced eDiscovery. Data residency is supported through Microsoft 365 multi-geo capabilities for compliance with regional data sovereignty requirements."}
+  ],
+  "alternatives": ["slack"],
+  "relatedComparisons": ["slack-vs-microsoft-teams"],
+  "relatedGuides": ["remote-team-collaboration-guide", "software-evaluation-checklist"],
+  "relatedPosts": ["best-remote-communication-tools"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

@@ -20,6 +20,8 @@ export interface ReviewContent {
   faqs: FAQItem[]
   alternatives: string[]
   relatedGuides: string[]
+  relatedComparisons?: string[]
+  relatedPosts?: string[]
   lastReviewed: string
   author: string
 }
@@ -62,6 +64,8 @@ export interface ComparisonContent {
   verdict: string
   faqs: FAQItem[]
   relatedComparisons: string[]
+  relatedGuides?: string[]
+  relatedPosts?: string[]
   lastUpdated: string
 }
 
@@ -83,6 +87,8 @@ export interface GuideContent {
   lastUpdated: string
   relatedTools: string[]
   relatedGuides: string[]
+  relatedComparisons?: string[]
+  relatedPosts?: string[]
 }
 
 export interface GuideSection {
@@ -104,6 +110,9 @@ export interface BlogContent {
   updatedAt?: string
   readingTime: number
   relatedPosts: string[]
+  relatedGuides?: string[]
+  relatedComparisons?: string[]
+  relatedGlossary?: string[]
 }
 
 export interface GlossaryContent {

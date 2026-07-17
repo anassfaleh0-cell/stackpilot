@@ -35,10 +35,17 @@
       "title": "NPS and Customer Health Scoring",
       "body": "Net Promoter Score (NPS) is calculated as % Promoters minus % Detractors from the question 'How likely are you to recommend us?' on a 0–10 scale, but NPS alone can be misleading — a high score with low survey response rates hides dissatisfied customers. Build a composite health score that combines product usage frequency, support ticket volume, payment timeliness, and NPS to flag at-risk accounts early. For example, an account that has logged in fewer than three times in 30 days and opened two support tickets should trigger a proactive check-in from your customer success team before they consider canceling.",
       "type": "warning"
+    },
+    {
+      "title": "Metrics Action Checklist",
+      "body": "Set up your SaaS metrics tracking in this order: start with MRR segmented by plan tier to understand your revenue composition. Add gross MRR churn rate before logo churn — revenue churn tells you whether you are losing high-value or low-value customers. Calculate CAC by channel (paid ads, organic, referrals, outbound) to identify which acquisition paths are actually profitable. Compute LTV:CAC ratio quarterly; below 3:1 means your unit economics need attention before you scale spend. Configure a health score dashboard combining login frequency, support tickets, and payment history to flag at-risk accounts before they churn. Review all six metrics in a monthly business review with your leadership team, comparing against the prior quarter and same period last year.",
+      "type": "tip"
     }
   ],
   "author": "StackPilot Team",
   "lastUpdated": "2026-07-16",
   "relatedTools": ["hubspot", "salesforce", "google-analytics"],
-  "relatedGuides": ["software-evaluation-checklist", "saas-implementation-best-practices"]
+  "relatedGuides": ["software-evaluation-checklist", "saas-implementation-best-practices"],
+  "relatedComparisons": ["google-analytics-vs-mixpanel"],
+  "relatedPosts": ["saas-metrics-guide"]
 }

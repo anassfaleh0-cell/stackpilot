@@ -1,0 +1,13 @@
+{
+  "slug": "zero-trust",
+  "term": "Zero Trust",
+  "definition": "A security framework that requires continuous verification of every user, device, and request attempting to access resources, regardless of whether the request originates from inside or outside the network perimeter.",
+  "extendedDefinition": "Zero Trust replaces the traditional castle-and-moat security model where everything inside the corporate network was trusted by default. Under Zero Trust, no entity is trusted implicitly — every access request must authenticate, authorize, and encrypt before granting access, with the same scrutiny applied to internal traffic as external traffic. The framework is built on three core principles: verify explicitly (authenticate and authorize based on all available data points), use least-privilege access (limit user access to only what is needed), and assume breach (segment access, enforce end-to-end encryption, and continuously monitor for anomalies). Zero Trust architecture became the security standard for remote and hybrid work environments where there is no clear network perimeter.",
+  "category": "Security & Compliance",
+  "examples": [
+    "Requiring multi-factor authentication for every SaaS application access, not just VPN entry",
+    "Micro-segmentation that isolates workloads so a compromised container cannot access neighboring systems",
+    "Continuous user behavior monitoring that flags and blocks unusual data access patterns from an authenticated session"
+  ],
+  "relatedTerms": ["encryption", "siem"]
+}

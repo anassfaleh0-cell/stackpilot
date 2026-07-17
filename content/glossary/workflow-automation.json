@@ -1,0 +1,13 @@
+{
+  "slug": "workflow-automation",
+  "term": "Workflow Automation",
+  "definition": "The use of software to automate sequences of tasks, approvals, and data transfers across applications according to predefined business rules, reducing manual effort and minimizing human error in repetitive processes.",
+  "extendedDefinition": "Workflow automation transforms manual, multi-step processes into automated sequences that trigger actions based on specific conditions. In SaaS tools, workflow automation typically appears as if-this-then-that rules that can assign tasks, update record statuses, send notifications, create follow-up items, or sync data between systems without human intervention. Popular implementations include: marketing automation (lead capture triggers a welcome email sequence and creates a CRM contact), sales automation (a deal moving to closed-won stage triggers contract generation, accounting notification, and customer success onboarding), HR automation (an employee status change triggers payroll updates, benefits adjustments, and IT access provisioning), and project management automation (a task marked complete triggers the next task assignment and notifies the project lead). Tools like Zapier and Make provide cross-application workflow automation that connects SaaS tools without custom development, while native automation builders in tools like Linear, Asana, and Jira handle within-platform workflows. Effective workflow automation requires careful planning: map the manual process end-to-end, identify decision points and handoffs, then automate only the steps that follow consistent rules — attempting to automate exceptions and edge cases before the base workflow is stable often creates more problems than it solves.",
+  "category": "Productivity",
+  "examples": [
+    "Asana automation that auto-assigns a review task to a senior designer when any task in the design project moves to 'Needs Review' status",
+    "A Zapier workflow that creates a new Slack channel and a shared Google Drive folder whenever a new project is created in Linear",
+    "Salesforce automation that sends a contract document for e-signature when a deal stage changes to 'Negotiation' and the deal value exceeds $10,000"
+  ],
+  "relatedTerms": ["api", "saas", "dashboard"]
+}

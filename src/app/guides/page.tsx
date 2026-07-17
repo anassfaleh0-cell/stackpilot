@@ -6,6 +6,8 @@ import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { getAllGuides } from "@/lib/content/registry"
 import Link from "next/link"
+import { ArrowRight, Clock, Layers } from "lucide-react"
+import { BrandPattern } from "@/components/brand/patterns"
 
 export const metadata = createMetadata({
   title: "Software Guides",
@@ -22,27 +24,41 @@ export default function GuidesPage() {
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Guides" }]} />
       </Container>
-      <Section className="pt-0">
-        <Container>
-          <SectionHeader className="mb-12">
+
+      <section className="relative overflow-hidden border-b border-border">
+        <BrandPattern variant="circuit" opacity={0.15} className="text-primary" />
+        <Container className="relative py-16 sm:py-20">
+          <SectionHeader className="mb-0">
             <Badge variant="default" className="mb-4">Guides</Badge>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Expert guides</h1>
-            <p className="text-lg text-muted">Structured, actionable guides to help you make smarter software decisions at every stage.</p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+              Structured, actionable guides to help you make smarter software decisions at every stage.
+            </p>
           </SectionHeader>
+        </Container>
+      </section>
+
+      <Section>
+        <Container>
           <div className="grid sm:grid-cols-2 gap-6">
             {guides.map((guide) => (
-              <Link key={guide.slug} href={`/guides/${guide.slug}`} className="group">
-                <Card className="h-full hover:border-primary/30">
+              <Link key={guide.slug} href={`/guides/${guide.slug}`} className="group card-hover">
+                <Card className="h-full flex flex-col">
                   <div className="flex items-start justify-between mb-3">
                     <Badge variant="secondary">{guide.category}</Badge>
-                    <span className="text-xs text-muted">{guide.readingTime} min read</span>
+                    <span className="text-xs text-muted-foreground flex items-center gap-1">
+                      <Clock size={12} /> {guide.readingTime} min
+                    </span>
                   </div>
                   <CardTitle className="group-hover:text-primary transition-colors">{guide.title}</CardTitle>
                   <CardDescription className="mt-1.5">{guide.description}</CardDescription>
-                  <div className="mt-4">
+                  <div className="mt-4 flex items-center gap-2 mt-auto pt-4 border-t border-border">
                     <Badge variant={guide.difficulty === "Beginner" ? "success" : guide.difficulty === "Intermediate" ? "warning" : "danger"}>
                       {guide.difficulty}
                     </Badge>
+                    <span className="text-xs text-muted-foreground flex items-center gap-1">
+                      <Layers size={12} /> {guide.sections.length} sections
+                    </span>
                   </div>
                 </Card>
               </Link>

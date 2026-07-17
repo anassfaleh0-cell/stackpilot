@@ -2,13 +2,15 @@ import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, FAQSchema } from "@/components/seo/json-ld"
-import { Card } from "@/components/ui/card"
 import { createMetadata } from "@/lib/metadata"
 import { getComparison } from "@/lib/content/registry"
 import { getAllComparisons } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { Check, X, Star } from "lucide-react"
+import { ArrowRight, CheckCircle2, Target } from "lucide-react"
+import { EditorialHero, EditorialComparison, EditorialCallout, GlassCard, InfoCard } from "@/components/editorial"
+import { RelatedContent } from "@/components/content/related-content"
+import { ScoreBar } from "@/components/brand/patterns"
 
 export function generateStaticParams() {
   return getAllComparisons().map((c) => ({ slug: c.slug }))
@@ -26,6 +28,13 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   const cmp = getComparison(slug)
   if (!cmp) notFound()
 
+  const t1Score = cmp.features.filter((f) => f.tool1 && !f.tool2).length
+  const t2Score = cmp.features.filter((f) => f.tool2 && !f.tool1).length
+  const tieScore = cmp.features.filter((f) => f.tool1 && f.tool2).length
+  const total = cmp.features.length
+  const t1Pct = Math.round((t1Score / total) * 100)
+  const t2Pct = Math.round((t2Score / total) * 100)
+
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Comparisons", href: "/comparisons" }, { name: cmp.title, href: `/comparisons/${slug}` }]} />
@@ -35,74 +44,166 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
       </Container>
       <article className="pb-16">
         <Container>
-          <Badge variant="default" className="mb-4">{cmp.category}</Badge>
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{cmp.title}</h1>
-          <p className="text-lg text-muted mb-8">{cmp.description}</p>
+          {/* Hero */}
+          <div className="mb-8">
+            <EditorialHero
+              slug={cmp.slug}
+              title={cmp.title}
+              subtitle={cmp.description}
+              category={cmp.category}
+              variant="comparison"
+              className="w-full min-h-[200px] sm:min-h-[240px]"
+            />
+          </div>
 
-          <div className="grid sm:grid-cols-2 gap-6 mb-12">
+          {/* Tool Compare Cards */}
+          <div className="grid sm:grid-cols-2 gap-6 mb-8">
             {[
-              { name: cmp.tool1, slug: cmp.tool1Slug, isWinner: cmp.winner === cmp.tool1 },
-              { name: cmp.tool2, slug: cmp.tool2Slug, isWinner: cmp.winner === cmp.tool2 },
+              { name: cmp.tool1, slug: cmp.tool1Slug, isWinner: cmp.winner === cmp.tool1, score: t1Pct },
+              { name: cmp.tool2, slug: cmp.tool2Slug, isWinner: cmp.winner === cmp.tool2, score: t2Pct },
             ].map((tool) => (
-              <Card key={tool.name} className={`text-center ${tool.isWinner ? "ring-2 ring-primary/30 bg-primary/5" : ""}`}>
-                {tool.isWinner && <Badge variant="default" className="mb-2">Winner</Badge>}
-                <Star size={24} className="mx-auto mb-2 text-primary" />
-                <div className="text-xl font-bold">{tool.name}</div>
-                <Link
-                  href={`/reviews/${tool.slug}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-transparent hover:bg-muted-bg h-9 px-4 text-xs font-medium transition-all duration-200 mt-3"
-                >
-                  Read review
-                </Link>
-              </Card>
+              <GlassCard key={tool.name} glow={tool.isWinner}>
+                <div className="p-5 text-center relative">
+                  {tool.isWinner && (
+                    <Badge variant="warning" className="absolute -top-2.5 right-3">
+                      Winner
+                    </Badge>
+                  )}
+                  <div className="text-xl font-bold mb-2">{tool.name}</div>
+                  <div className="text-3xl font-bold text-primary mb-1">{tool.score}%</div>
+                  <div className="text-xs text-muted-foreground mb-3">Feature score</div>
+                  <ScoreBar score={tool.score} max={100} className="mb-3" />
+                  <Link
+                    href={`/reviews/${tool.slug}`}
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-transparent hover:bg-muted-bg h-9 px-4 text-xs font-medium transition-all duration-200 mt-1"
+                  >
+                    Read full review <ArrowRight size={12} />
+                  </Link>
+                </div>
+              </GlassCard>
             ))}
           </div>
 
+          {/* Quick Stats */}
+          <div className="grid sm:grid-cols-3 gap-3 mb-10">
+            <InfoCard icon={
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 3v18h18M7 16l4-8 4 4 4-6" />
+              </svg>
+            } value={cmp.features.length.toString()} title="Features Compared" />
+            <InfoCard icon={
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            } value={cmp.winner || "Tie"} title="Overall Winner" />
+            <InfoCard icon={
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+              </svg>
+            } value={cmp.faqs.length.toString()} title="FAQs Answered" />
+          </div>
+
+          {/* Feature Comparison */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold mb-6">Feature Comparison</h2>
-            <div className="border border-border rounded-xl overflow-hidden">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-muted-bg border-b border-border">
-                    <th className="text-left p-4 font-semibold">Feature</th>
-                    <th className="text-center p-4 font-semibold">{cmp.tool1}</th>
-                    <th className="text-center p-4 font-semibold">{cmp.tool2}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cmp.features.map((f, i) => (
-                    <tr key={f.name} className={i < cmp.features.length - 1 ? "border-b border-border" : ""}>
-                      <td className="p-4 font-medium">{f.name}</td>
-                      <td className="text-center p-4">{f.tool1 ? <Check size={16} className="inline text-emerald-500" /> : <X size={16} className="inline text-red-500" />}</td>
-                      <td className="text-center p-4">{f.tool2 ? <Check size={16} className="inline text-emerald-500" /> : <X size={16} className="inline text-red-500" />}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <h2 className="text-2xl font-bold tracking-tight mb-6">Feature Comparison</h2>
+            <EditorialComparison tool1={cmp.tool1} tool2={cmp.tool2} features={cmp.features} winner={cmp.winner} category={cmp.category} slug={cmp.slug} />
+          </section>
+
+          {/* Decision Framework */}
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold tracking-tight mb-6">Decision Framework</h2>
+            <div className="grid sm:grid-cols-2 gap-6">
+              {/* How to choose */}
+              <GlassCard>
+                <div className="p-5">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Target size={16} className="text-primary" />
+                    <span className="font-semibold text-sm">How to choose</span>
+                  </div>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-2 text-sm">
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">1</span>
+                      <span className="text-muted-foreground">Choose <strong>{cmp.tool1}</strong> if you need better {cmp.features.filter(f => f.tool1 && !f.tool2).map(f => f.name.toLowerCase()).slice(0, 2).join(" and ")}</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-sm">
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">2</span>
+                      <span className="text-muted-foreground">Choose <strong>{cmp.tool2}</strong> if {cmp.features.filter(f => f.tool2 && !f.tool1).slice(0, 1).map(f => f.name.toLowerCase() + " is critical for your workflow")}</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-sm">
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">3</span>
+                      <span className="text-muted-foreground">{cmp.winner ? `${cmp.winner} wins on overall feature coverage` : "Both tools serve different needs — evaluate based on priority features"}</span>
+                    </li>
+                  </ul>
+                </div>
+              </GlassCard>
+
+              {/* Bottom line callout */}
+              <EditorialCallout type="key" title="Bottom Line" category={cmp.category}>
+                <div className="space-y-2">
+                  <p>{cmp.winner
+                    ? `For most teams, ${cmp.winner} is the better choice due to superior feature coverage and value.`
+                    : `Both tools excel in different areas — consider your specific requirements before choosing.`
+                  }</p>
+                  <div className="pt-2 border-t border-current/10">
+                    <span className="text-xs font-medium">Best for: </span>
+                    <span className="text-xs opacity-80">
+                      {cmp.winner === cmp.tool1 ? cmp.tool1 : cmp.tool2} excels for feature-complete teams, while {cmp.winner === cmp.tool1 ? cmp.tool2 : cmp.tool1} works best for specialized needs.
+                    </span>
+                  </div>
+                </div>
+              </EditorialCallout>
             </div>
           </section>
 
+          {/* Verdict */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold mb-6">Verdict</h2>
-            <Card className="bg-primary/5 border-primary/20">
-              <p className="text-lg font-semibold mb-2">
-                {cmp.winner ? `Best for most teams: ${cmp.winner}` : "How they compare"}
-              </p>
-              <p className="text-muted text-sm">{cmp.verdict}</p>
-            </Card>
+            <h2 className="text-2xl font-bold tracking-tight mb-6">Verdict</h2>
+            <GlassCard glow>
+              <div className="p-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <CheckCircle2 size={18} className="text-primary" />
+                  <p className="text-lg font-semibold">
+                    {cmp.winner ? `Best for most teams: ${cmp.winner}` : "How they compare"}
+                  </p>
+                </div>
+                <p className="text-muted-foreground text-sm leading-relaxed">{cmp.verdict}</p>
+                {cmp.winner && (
+                  <div className="mt-4 pt-4 border-t border-border flex items-center gap-2 text-sm">
+                    <span className="text-muted-foreground">Migration complexity:</span>
+                    <span className="font-medium text-foreground">
+                      {t1Score > t2Score ? `${cmp.tool2} → ${cmp.tool1}` : `${cmp.tool1} → ${cmp.tool2}`}
+                    </span>
+                    <span className="text-xs text-muted-foreground">— moderate effort</span>
+                  </div>
+                )}
+              </div>
+            </GlassCard>
           </section>
 
+          {/* FAQ */}
           <section>
-            <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
-            <div className="space-y-4 max-w-3xl">
+            <h2 className="text-2xl font-bold tracking-tight mb-6">Frequently Asked Questions</h2>
+            <div className="grid sm:grid-cols-2 gap-4 max-w-4xl">
               {cmp.faqs.map((faq) => (
-                <Card key={faq.question}>
-                  <h3 className="font-semibold mb-2">{faq.question}</h3>
-                  <p className="text-sm text-muted">{faq.answer}</p>
-                </Card>
+                <GlassCard key={faq.question}>
+                  <div className="p-4">
+                    <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
+                    <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                  </div>
+                </GlassCard>
               ))}
             </div>
           </section>
+
+          <RelatedContent
+            items={[
+              ...(cmp.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const })),
+              ...(cmp.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const })),
+              ...(cmp.relatedPosts || []).map(s => ({ slug: s, type: "blog" as const })),
+            ]}
+            title="Related Resources"
+          />
         </Container>
       </article>
     </>

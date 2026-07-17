@@ -35,10 +35,17 @@
       "title": "Building Automated Reports",
       "body": "Combine data from Google Analytics 4, Google Search Console, and your SEO tool into a single Looker Studio dashboard so stakeholders can see traffic, rankings, and conversions in one view. Avoid vanity metrics like total impressions — focus on organic conversion rate, average position for money keywords, and click-through rate trends from branded versus non-branded queries. Schedule automated weekly email reports to keep the team informed without manual data pulls, and annotate the dashboard with major site changes to correlate traffic shifts with specific actions.",
       "type": "warning"
+    },
+    {
+      "title": "Toolkit Selection Checklist",
+      "body": "Build your SEO toolkit starting with one primary research platform (SEMrush or Ahrefs) for keyword research, competitor analysis, and rank tracking — subscribing to both is redundant at the start. Add a dedicated crawler (Screaming Frog) for technical audits once your site exceeds 500 pages. Introduce a content optimization tool (Surfer SEO or Clearscope) when you begin publishing more than four articles per month — below that threshold, manual analysis of top-ranking pages is sufficient. Set up Google Search Console and Google Analytics 4 on day one regardless of team size, as both are free and provide baseline data every other tool depends on. Reassess your toolkit every six months: remove tools you have not used in 60 days and reinvest the budget into the remaining tools' higher-tier plans.",
+      "type": "tip"
     }
   ],
   "author": "StackPilot Team",
   "lastUpdated": "2026-07-16",
   "relatedTools": ["semrush", "ahrefs", "google-analytics"],
-  "relatedGuides": ["how-to-choose-an-ai-writing-tool"]
+  "relatedGuides": ["how-to-choose-an-ai-writing-tool"],
+  "relatedComparisons": ["semrush-vs-ahrefs"],
+  "relatedPosts": ["build-seo-tech-stack"]
 }

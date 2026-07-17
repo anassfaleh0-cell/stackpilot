@@ -1,0 +1,13 @@
+{
+  "slug": "time-tracking",
+  "term": "Time Tracking",
+  "definition": "The practice of recording how employees or team members spend their working hours on specific tasks, projects, or clients, typically using software that captures start and end times, categorizes activity types, and generates reports for billing, payroll, and productivity analysis.",
+  "extendedDefinition": "Time tracking serves two distinct purposes: billing clients for billable hours (common in agencies, law firms, and consultancies) and measuring how team time is allocated across projects and tasks (relevant for product teams optimizing resource allocation). Modern time tracking tools like Toggl, Harvest, and Clockify offer one-click timers, manual time entry, calendar integration that imports scheduled events as time entries, and idle detection that prompts users to log time after periods of inactivity. For organizations using project management platforms like Linear or Asana, time tracking integrations automatically log time against specific tasks, enabling project-level budget tracking and utilization reporting. The effectiveness of time tracking depends entirely on adoption — teams that treat time tracking as optional or trust individual discipline to capture hours accurately typically see compliance rates below 60%, rendering the data unreliable for billing or resource planning. Setting team norms around when and how time is logged (real-time tracking vs. end-of-day entry, minimum unit of 15-minute increments, and categories for non-billable activities like internal meetings) is essential for generating trustworthy data.",
+  "category": "Productivity",
+  "examples": [
+    "A consultant using Toggl to track 35 billable hours across three client projects, with time automatically categorized by client and project for weekly invoicing",
+    "An engineering team logging time in Harvest against Linear tasks so the project lead can compare estimated vs. actual hours during sprint retrospectives",
+    "A law firm requiring all attorneys to log time in 6-minute increments through a Clio integration, with entries automatically applied to client invoices and trust accounting"
+  ],
+  "relatedTerms": ["saas", "workflow-automation", "kpi"]
+}

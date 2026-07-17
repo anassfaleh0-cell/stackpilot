@@ -30,10 +30,17 @@
       "title": "Payroll Processing",
       "body": "Payroll software handles wage calculation, tax withholding, direct deposit, and year-end W-2 or 1099 filing. Gusto and OnPay are popular choices for small teams because they bundle benefits administration and time tracking alongside payroll. Ensure the tool you select supports your specific state's tax rules and offers automatic payroll tax filing to avoid late-filing penalties.",
       "type": "text"
+    },
+    {
+      "title": "Vendor Selection Checklist",
+      "body": "Before evaluating finance software, map your current workflows: list every manual process (receipt entry, invoice approval, bank reconciliation, tax filing) and note the time each consumes monthly. For accounting platforms, verify bank feed coverage — not all tools support every bank, particularly regional institutions. For invoicing, confirm the tool handles your recurring billing model (flat monthly, usage-based, milestone) before trialing. For expense management, check that mobile receipt scanning works reliably on both iOS and Android — test with a crumpled receipt to gauge OCR quality. For payroll, ensure the provider supports your specific state and local tax jurisdictions, especially if you have remote employees across multiple states. Shortlist three tools that cover your must-haves, run a 14-day trial of each with real data, then select based on which required the least manual workarounds.",
+      "type": "tip"
     }
   ],
   "author": "StackPilot Team",
   "lastUpdated": "2026-07-16",
   "relatedTools": ["quickbooks", "hubspot"],
-  "relatedGuides": ["saas-metrics-and-kpis", "software-evaluation-checklist"]
+  "relatedGuides": ["saas-metrics-and-kpis", "software-evaluation-checklist"],
+  "relatedComparisons": ["quickbooks-vs-xero"],
+  "relatedPosts": ["quickbooks-vs-xero-guide"]
 }

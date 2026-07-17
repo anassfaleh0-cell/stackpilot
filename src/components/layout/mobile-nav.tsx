@@ -34,17 +34,17 @@ export function MobileNav() {
     <div className="md:hidden">
       <button
         onClick={() => setOpen(!open)}
-        className="flex h-9 w-9 items-center justify-center rounded-md text-muted hover:text-foreground hover:bg-muted-bg transition-colors"
+        className="flex h-9 w-9 items-center justify-center rounded-lg text-muted hover:text-foreground hover:bg-muted-bg transition-all duration-200"
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         aria-controls="mobile-menu"
       >
-        {open ? <X size={18} /> : <Menu size={18} />}
+        {open ? <X size={17} /> : <Menu size={17} />}
       </button>
 
       {open && (
         <div
-          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm"
+          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm animate-fade-in"
           onClick={() => setOpen(false)}
           aria-hidden="true"
         />
@@ -56,7 +56,7 @@ export function MobileNav() {
         aria-modal="true"
         aria-label="Navigation menu"
         className={cn(
-          "fixed top-16 right-4 left-4 z-50 rounded-xl border border-border bg-card p-4 shadow-xl",
+          "fixed top-16 right-4 left-4 z-50 rounded-xl border border-border bg-card p-4 shadow-elevated",
           "transition-all duration-200",
           open ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
         )}
@@ -68,7 +68,7 @@ export function MobileNav() {
                 <Link
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block px-3 py-2.5 text-sm font-medium rounded-md transition-colors hover:bg-muted-bg hover:text-foreground"
+                  className="block px-3 py-2.5 text-sm font-medium rounded-lg transition-colors hover:bg-muted-bg hover:text-foreground"
                   tabIndex={open ? 0 : -1}
                 >
                   {link.label}

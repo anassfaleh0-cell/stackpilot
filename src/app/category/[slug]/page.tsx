@@ -8,7 +8,8 @@ import { site, categories } from "@/lib/constants"
 import { getAllReviews } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { Star } from "lucide-react"
+import { Star, ArrowRight } from "lucide-react"
+import { BrandPattern, BrandDivider } from "@/components/brand/patterns"
 
 export async function generateStaticParams() {
   return categories.map((cat) => ({ slug: cat.slug }))
@@ -39,30 +40,45 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Categories", href: "/reviews" }, { name: category.name }]} />
       </Container>
-      <Section className="pt-0">
-        <Container>
+
+      <section className="relative overflow-hidden border-b border-border">
+        <BrandPattern variant="grid" opacity={0.25} className="text-primary" />
+        <Container className="relative py-16 sm:py-20">
           <Badge variant="default" className="mb-4">{category.count} Tools</Badge>
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Best {category.name} Software</h1>
-          <p className="text-lg text-muted mb-12">Our expert picks for the best {category.name.toLowerCase()} tools. Each reviewed and rated by our team.</p>
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Best {category.name} Software</h1>
+          <p className="text-lg text-muted-foreground max-w-2xl text-pretty">
+            Our expert picks for the best {category.name.toLowerCase()} tools. Each reviewed and rated by our team.
+          </p>
+        </Container>
+      </section>
+
+      <Section>
+        <Container>
           {reviews.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {reviews.map((tool) => (
-                <Link key={tool.slug} href={`/reviews/${tool.slug}`} className="group">
-                  <Card className="h-full hover:border-primary/30">
+              {reviews.map((tool, i) => (
+                <Link key={tool.slug} href={`/reviews/${tool.slug}`} className="group card-hover" style={{ animationDelay: `${i * 40}ms` }}>
+                  <Card className="h-full flex flex-col">
                     <div className="flex items-start justify-between mb-3">
                       <Badge variant="secondary">{tool.category}</Badge>
-                      <div className="flex items-center gap-1 text-sm font-medium text-amber-600">
-                        <Star size={14} className="fill-amber-400 text-amber-400" /> {tool.rating}
+                      <div className="flex items-center gap-1 text-sm font-medium text-accent">
+                        <Star size={14} className="fill-accent text-accent" />
+                        {tool.rating}
                       </div>
                     </div>
                     <CardTitle className="group-hover:text-primary transition-colors">{tool.name}</CardTitle>
                     <CardDescription className="mt-1.5">{tool.tagline}</CardDescription>
+                    <div className="mt-4 pt-4 border-t border-border flex items-center gap-1 text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors mt-auto">
+                      Read review <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
+                    </div>
                   </Card>
                 </Link>
               ))}
             </div>
           ) : (
-            <p className="text-center text-muted py-12">No reviews yet in this category. Check back soon.</p>
+            <div className="text-center py-16">
+              <p className="text-muted-foreground">No reviews yet in this category. Check back soon.</p>
+            </div>
           )}
         </Container>
       </Section>

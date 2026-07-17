@@ -1,0 +1,13 @@
+{
+  "slug": "ats",
+  "term": "Applicant Tracking System",
+  "definition": "A human resources software application that automates the recruitment process by managing job postings, application collection, resume parsing, candidate screening, interview scheduling, and offer management in a centralized database.",
+  "extendedDefinition": "An ATS serves as the central system of record for all recruitment activity, replacing the manual process of managing candidates across spreadsheets, email inboxes, and shared folders. The system automatically parses resumes into structured candidate profiles, matches applicants against job requirements, and tracks each candidate's progression through the hiring pipeline from application to offer acceptance. Modern ATS platforms integrate with job boards (LinkedIn, Indeed, Glassdoor) for automated posting, calendar systems for interview scheduling, and HRIS for employee onboarding handoff. Evaluating an ATS requires assessing: resume parsing accuracy for your industry's resume formats, workflow customization for your specific hiring process, compliance features for EEOC/OFCCP reporting, and candidate experience (application completion rate on mobile).",
+  "category": "HR & People",
+  "examples": [
+    "BambooHR ATS posting a job opening to LinkedIn, Indeed, and Glassdoor simultaneously and collecting all applications in one pipeline",
+    "A recruiter using Greenhouse to score candidates against predefined criteria and automatically advance top-scoring applicants to the next round",
+    "Workday ATS triggering an onboarding workflow in the HRIS automatically when a candidate accepts an offer and completes background check"
+  ],
+  "relatedTerms": ["crm", "saas", "kpi"]
+}

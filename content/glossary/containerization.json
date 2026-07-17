@@ -3,7 +3,7 @@
   "term": "Containerization",
   "definition": "A lightweight virtualization method that packages an application and its dependencies together for consistent deployment across environments.",
   "extendedDefinition": "Containerization bundles application code with all required libraries, configuration files, and dependencies into a single portable unit called a container. Unlike virtual machines, containers share the host OS kernel, making them more resource-efficient and faster to start. Docker is the dominant container runtime, while Kubernetes provides orchestration for managing containers at scale across clusters. Containerization has become essential for DevOps workflows, enabling consistent behavior across development, staging, and production environments while simplifying CI/CD pipelines and microservices architectures.",
-  "category": "Development",
+  "category": "Developer Tools",
   "examples": [
     "Docker containers running microservices in production",
     "Kubernetes orchestrating containerized applications at scale",

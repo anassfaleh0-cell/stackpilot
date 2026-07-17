@@ -1,0 +1,73 @@
+{
+  "slug": "gitlab",
+  "name": "GitLab",
+  "tagline": "Complete DevOps platform with integrated CI/CD, security scanning, and self-hosted deployment control",
+  "description": "GitLab is a comprehensive DevOps platform that provides the entire software development lifecycle in a single application — from project planning and source code management through CI/CD, security scanning, monitoring, and deployment. Unlike platforms that integrate best-of-breed tools from different vendors, GitLab delivers a unified experience where every stage of development connects seamlessly. Its self-managed deployment option gives organizations complete data sovereignty and compliance control, making it a preferred choice for regulated industries and enterprises with strict security requirements.",
+  "category": "Developer Tools",
+  "website": "https://gitlab.com",
+  "pricing": "Freemium",
+  "rating": 4.5,
+  "reviewCount": 12000,
+  "pros": [
+    "Single application covers the entire DevOps lifecycle from planning and code review through CI/CD, security scanning, deployment, and monitoring with no toolchain integration overhead",
+    "Self-hosted deployment option (GitLab Self-Managed) gives enterprises complete data sovereignty, on-premises compliance, and air-gapped operation for regulated environments like healthcare and defense",
+    "Built-in security scanning includes SAST, DAST, container scanning, dependency scanning, and secret detection — all configured through a single `.gitlab-ci.yml` file with no third-party services",
+    "Review Apps automatically deploy ephemeral environments for every merge request, enabling visual testing of frontend changes before code reaches production",
+    "Ultimate tier includes compliance management with audit events, compliance pipelines, and separation of duties that satisfy SOC 2, PCI DSS, and HIPAA audit requirements"
+  ],
+  "cons": [
+    "User interface and navigation are less polished than GitHub, with configuration spread across multiple administrative panels and YAML files that create a steeper learning curve",
+    "Free tier CI/CD pipeline minutes are limited to 400 minutes per month, significantly less than GitHub's 2,000 free minutes, pressuring small teams toward paid tiers sooner",
+    "Self-managed instances require dedicated DevOps engineering resources for installation, upgrades, backup management, and performance tuning that cloud-hosted competitors handle transparently"
+  ],
+  "features": [
+    {"name": "Git Repositories", "description": "Unlimited Git repositories with branching, tags, protected branches, and full version control history", "available": true, "category": "Core"},
+    {"name": "Merge Requests", "description": "Code review workflow with inline comments, approval rules, merge conflict resolution, and squash commits", "available": true, "category": "Core"},
+    {"name": "CI/CD Pipelines", "description": "YAML-configured pipelines with parallel jobs, caching, artifacts, manual gates, and multi-project pipelines", "available": true, "category": "CI/CD"},
+    {"name": "Auto DevOps", "description": "Automated CI/CD pipeline configuration that detects language, runs tests, builds containers, and deploys without manual YAML setup", "available": true, "category": "CI/CD"},
+    {"name": "Container Registry", "description": "Integrated Docker container registry attached to each project with retention policies and cleanup policies", "available": true, "category": "CI/CD"},
+    {"name": "Review Apps", "description": "Auto-deployed ephemeral environments per merge request that provide live preview URLs for stakeholder feedback", "available": true, "category": "CI/CD"},
+    {"name": "SAST (Static Analysis)", "description": "Static application security testing integrated into pipelines that scans source code for vulnerabilities before they reach production", "available": true, "category": "Security"},
+    {"name": "DAST (Dynamic Analysis)", "description": "Dynamic application security testing that scans running web applications for common vulnerabilities like XSS and SQL injection", "available": true, "category": "Security"},
+    {"name": "Container Scanning", "description": "Scans Docker images for known vulnerabilities using Trivy engine, integrated directly into the CI/CD pipeline", "available": true, "category": "Security"},
+    {"name": "Dependency Scanning", "description": "Automatically scans project dependencies for known vulnerabilities across npm, pip, Maven, NuGet, and Go modules", "available": true, "category": "Security"},
+    {"name": "Secret Detection", "description": "Scans repositories for accidentally committed API keys, tokens, and credentials with automatic pipeline blocking", "available": true, "category": "Security"},
+    {"name": "Project Management", "description": "Issue tracking with labels, milestones, boards, epics, and time tracking integrated directly with merge requests and pipelines", "available": true, "category": "Collaboration"},
+    {"name": "Wiki & Pages", "description": "Built-in project wiki and GitLab Pages for hosting static documentation with custom domains and HTTPS", "available": true, "category": "Core"},
+    {"name": "Package Registry", "description": "Package registry supporting npm, Maven, PyPI, Conan, NuGet, Composer, and Go modules", "available": true, "category": "CI/CD"},
+    {"name": "Value Stream Analytics", "description": "Flow metrics showing cycle time, lead time, and throughput across the development lifecycle to identify bottlenecks", "available": true, "category": "Analytics"},
+    {"name": "Compliance Management", "description": "Compliance pipelines, audit events, separation of duties, and policy management for regulatory adherence", "available": true, "category": "Admin"},
+    {"name": "Kubernetes Integration", "description": "Native Kubernetes integration for deploying to clusters directly from CI/CD pipelines with monitoring dashboards", "available": true, "category": "Infrastructure"},
+    {"name": "GitOps & Terraform", "description": "Infrastructure-as-code management with built-in Terraform state backend and GitOps workflow for Kubernetes deployments", "available": true, "category": "Infrastructure"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.8},
+    {"label": "Ease of Use", "score": 4.1},
+    {"label": "Support", "score": 4.4},
+    {"label": "Value", "score": 4.5},
+    {"label": "Performance", "score": 4.3}
+  ],
+  "content": [
+    {"title": "Overview", "body": "GitLab differentiates itself from other code hosting platforms by delivering the entire DevOps lifecycle in a single application with a single data store. Rather than stitching together separate CI/CD, security scanning, artifact management, and monitoring tools, GitLab provides all these capabilities natively and integrated. This approach eliminates the integration tax that plagues multi-tool DevOps toolchains — no more configuring webhooks between systems, mapping user identities across platforms, or debugging pipeline failures caused by tool boundary issues. The platform's self-managed option is particularly valuable for organizations in finance, healthcare, and government where data cannot leave on-premises infrastructure.", "type": "text"},
+    {"title": "Who is it for?", "body": "GitLab is best suited for engineering teams that prioritize platform unification and compliance over toolchain flexibility. Organizations in regulated industries (finance, healthcare, defense) choose GitLab Self-Managed because it can run in air-gapped environments with no external dependencies while still providing enterprise CI/CD and security scanning. DevOps platform teams that want a single vendor for the entire development lifecycle rather than managing integrations between GitHub, Jenkins, SonarQube, and Snyk will find GitLab's integrated approach compelling. Teams already invested in Kubernetes benefit from GitLab's native Kubernetes agent and GitOps workflow. Individual developers and small startups may find the interface less intuitive than GitHub and the free CI/CD minutes more constrained.", "type": "text"},
+    {"title": "Key Features", "body": "GitLab's defining advantage is that security scanning, CI/CD, artifact management, and deployment all share the same data store and configuration model. This creates workflow capabilities that multi-tool setups cannot replicate.", "type": "list", "items": [
+      "Single YAML pipeline file controls CI/CD, SAST, DAST, container scanning, dependency scanning, and deployment in one place — no separate tools or service configurations needed",
+      "Review Apps deploy a full environment for every merge request with a unique URL, enabling frontend designers, product managers, and QA to review changes in a production-like setting before merge",
+      "Auto DevOps detects the programming language and automatically generates CI/CD pipelines, container builds, security scans, and deployments without manual YAML authoring",
+      "Compliance pipelines enforce regulatory controls by running separate pipeline configurations on protected branches, ensuring that code merged to production passes additional security and compliance gates",
+      "Value Stream Analytics measures cycle time, lead time, and throughput from idea to production, helping engineering leaders identify bottlenecks without integrating separate analytics tools"
+    ]},
+    {"title": "Who should avoid it?", "body": "Teams that value ecosystem breadth and community scale over platform integration should choose GitHub, which offers a larger marketplace, more third-party integrations, and a larger developer community. Organizations that are happy with their existing CI/CD tool (Jenkins, CircleCI, GitHub Actions) and only need Git hosting will find GitLab's integrated approach adds complexity without proportional benefit. Small teams with limited DevOps expertise may struggle with the operational overhead of self-managed instances, and even the SaaS version requires understanding of GitLab's extensive configuration model to use effectively.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is GitLab best used for?", "answer": "GitLab excels as a single-platform DevOps solution for organizations that want to replace disparate toolchains with an integrated system covering repositories, CI/CD, security scanning, package management, and deployment. It is particularly well-suited for regulated industries that need on-premises deployment, compliance pipelines, and full auditability of the software development lifecycle."},
+    {"question": "How much does GitLab cost?", "answer": "GitLab Free includes unlimited repositories, 400 CI/CD minutes per month, SAST, container scanning, and 5 GB of storage. Premium costs $19 per user per month and adds code review approvals, merge trains, and 10,000 CI/CD minutes. Ultimate costs $29 per user per month and adds DAST, compliance pipelines, dynamic security scanning, and value stream analytics. Self-Managed pricing is $19 (Premium) and $29 (Ultimate) per user per month."},
+    {"question": "Does GitLab integrate with other tools?", "answer": "GitLab integrates with Jira, Slack, Kubernetes, Google Cloud, AWS, Azure, Datadog, PagerDuty, and Grafana. Its REST and GraphQL APIs allow custom integrations, and webhooks support triggering external pipelines on repository events. GitLab also supports external CI/CD integration via its API and can mirror repositories from GitHub and Bitbucket."},
+    {"question": "Is GitLab suitable for small teams?", "answer": "GitLab Free is generous enough for small teams to evaluate the platform, though the 400 monthly CI/CD minutes are restrictive compared to GitHub's 2,000 minutes. Small teams that need CI/CD for multiple projects will likely need the Premium tier almost immediately. The learning curve from GitLab's extensive configuration model can also be steep for teams without dedicated DevOps experience."}
+  ],
+  "alternatives": ["github"],
+  "relatedComparisons": ["github-vs-gitlab"],
+  "relatedGuides": ["developer-tools-stack-guide", "software-evaluation-checklist"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

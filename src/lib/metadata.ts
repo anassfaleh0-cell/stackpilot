@@ -21,12 +21,14 @@ export function createMetadata({
   const image = ogImage || `${site.url}/og.png`
   const isArticle = ogType === "article"
 
+  const fullTitle = `${title} | ${site.name}`
+
   return {
-    title: `${title} | ${site.name}`,
+    title,
     description,
     alternates: { canonical: url },
     openGraph: {
-      title: `${title} | ${site.name}`,
+      title: fullTitle,
       description,
       url,
       siteName: site.name,
@@ -38,7 +40,7 @@ export function createMetadata({
     },
     twitter: {
       card: "summary_large_image" as const,
-      title: `${title} | ${site.name}`,
+      title: fullTitle,
       description,
       images: [image],
     },

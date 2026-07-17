@@ -35,5 +35,7 @@
     {"question": "Which platform has better performance?", "answer": "Vercel generally offers faster edge responses due to its global network and ISR capabilities. Netlify's performance is also excellent, but Vercel has an edge for dynamic content served from the edge."}
   ],
   "relatedComparisons": ["supabase-vs-firebase", "github-vs-gitlab"],
+  "relatedGuides": ["developer-tools-stack-guide"],
+  "relatedPosts": ["frontend-deployment-platforms-comparison"],
   "lastUpdated": "2026-07-01"
 }

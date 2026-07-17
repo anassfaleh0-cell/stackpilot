@@ -1,0 +1,13 @@
+{
+  "slug": "siem",
+  "term": "SIEM",
+  "definition": "Security Information and Event Management (SIEM) is a category of security software that aggregates logs from across an organization's infrastructure, correlates events to detect threats, generates alerts, and supports incident investigation and compliance reporting.",
+  "extendedDefinition": "SIEM systems collect log data from servers, network devices, firewalls, endpoints, and cloud services into a centralized platform where it is normalized, indexed, and analyzed in real time. Correlation rules identify patterns that indicate security incidents — such as a user logging in from two geographically impossible locations within minutes, or a single account attempting access to hundreds of files in rapid succession. SIEM is essential for compliance with regulations like SOC 2, PCI DSS, HIPAA, and GDPR that require centralized logging, alerting, and audit trails. The market has evolved toward SIEM-as-a-service solutions (Splunk Cloud, Microsoft Sentinel, Wazuh) that reduce the infrastructure overhead of on-premises deployments.",
+  "category": "Security & Compliance",
+  "examples": [
+    "Splunk correlating failed login attempts across multiple servers to detect a brute-force attack in progress",
+    "Microsoft Sentinel alerting when a user downloads 500 GB from SharePoint minutes after their termination date",
+    "Wazuh detecting an unauthorized configuration change on a production database server and triggering an automated response"
+  ],
+  "relatedTerms": ["encryption", "zero-trust"]
+}

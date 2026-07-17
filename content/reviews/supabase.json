@@ -9,16 +9,16 @@
   "rating": 4.5,
   "reviewCount": 1245,
   "pros": [
-    "Full PostgreSQL database with SQL access, extensions, and pgvector support",
-    "Generous free tier with 500 MB database, 1 GB storage, and 50,000 monthly active users",
-    "Real-time subscriptions and database webhooks for event-driven architectures",
-    "Built-in authentication with multiple providers and Row Level Security",
-    "Self-hosting option for complete data control and compliance requirements"
+    "Full PostgreSQL database with pgvector for AI embeddings, PostGIS for geospatial queries, and 40+ native extensions accessible via standard SQL without middleware",
+    "Free tier includes 500 MB database, 1 GB file storage, 50,000 monthly active users, 2 GB bandwidth, and unlimited API requests — one of the most generous BaaS free plans available",
+    "Real-time subscriptions stream database changes to connected clients at ~100ms latency via WebSocket, enabling live dashboards, chat, and collaborative features without polling",
+    "Authentication supports Google, GitHub, Discord, Apple, and 20+ OAuth providers plus Row Level Security policies written directly in SQL for granular per-row access control",
+    "Self-hosting via Docker or Kubernetes gives teams full data sovereignty, the ability to audit every query, and zero vendor lock-in for compliance-heavy deployments"
   ],
   "cons": [
-    "Documentation can be inconsistent as the platform evolves rapidly",
-    "Real-time features have latency limitations in high-throughput scenarios",
-    "Free tier database size is restrictive for production applications with large datasets"
+    "Documentation trails rapid releases by 2-3 months on average, with new features often exhibiting undocumented breaking changes that require digging into GitHub discussions or source code",
+    "Real-time subscription latency increases to 500ms-2s under heavy connection loads (5,000+ concurrent channels), limiting suitability for high-frequency trading or real-time gaming backends",
+    "Free tier's 500 MB database fills quickly for production workloads storing user-generated content, images as base64, or time-series data, forcing upgrades to the $25/month Pro plan sooner than expected"
   ],
   "features": [
     {"name": "PostgreSQL Database", "description": "Full-featured PostgreSQL with pgvector, extensions, and SQL editor", "available": true, "category": "Core"},
@@ -60,6 +60,7 @@
     {"question": "Does Supabase work with Vercel?", "answer": "Yes, Supabase has a native Vercel integration that automatically creates environment variables and database connections for your Vercel projects. The two platforms complement each other well, with Vercel handling frontend deployment and Supabase providing the backend infrastructure in a unified workflow."}
   ],
   "alternatives": [],
+  "relatedComparisons": ["supabase-vs-firebase"],
   "relatedGuides": ["how-to-choose-project-management-software", "saas-implementation-best-practices"],
   "lastReviewed": "2026-07-01",
   "author": "StackPilot Team"

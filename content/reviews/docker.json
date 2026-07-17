@@ -1,0 +1,72 @@
+{
+  "slug": "docker",
+  "name": "Docker",
+  "tagline": "Container platform that revolutionized software deployment by packaging applications with their complete runtime environment",
+  "description": "Docker is the platform that popularized containerization — packaging applications with all their dependencies, libraries, and configuration into portable containers that run consistently across any Linux, Windows, or macOS environment. Unlike virtual machines that virtualize entire operating systems, Docker containers share the host OS kernel while isolating application processes, resulting in dramatically lighter weight, faster start times, and more efficient resource utilization. Docker Desktop provides a developer-friendly interface for building, running, and managing containers locally, while Docker Hub serves as the largest container image registry globally.",
+  "category": "Developer Tools",
+  "website": "https://docker.com",
+  "pricing": "Freemium",
+  "rating": 4.6,
+  "reviewCount": 18000,
+  "pros": [
+    "Container start times of seconds versus minutes for VMs, with a typical container consuming 50-200 MB versus 2-10 GB for a virtual machine, enabling far denser server utilization",
+    "Dockerfile-based image creation provides reproducible builds where every dependency, environment variable, and configuration command is explicitly declared and version-controlled",
+    "Docker Hub hosts over 10 million container images including official images for PostgreSQL, Node.js, Python, Nginx, and Redis, providing pre-configured building blocks for any stack",
+    "Docker Compose with a single YAML file defines multi-service applications (web server, database, cache, queue) that start simultaneously with a single docker compose up command",
+    "Works identically across developer laptops, CI/CD pipelines, and production servers, eliminating 'it works on my machine' discrepancies and making environment reproduction deterministic"
+  ],
+  "cons": [
+    "Docker Desktop requires a paid subscription for commercial use by organizations with over 250 employees or $10 million in annual revenue, creating unexpected licensing costs for enterprise teams",
+    "Container lifecycle management for production deployments requires orchestration tools like Kubernetes or Docker Swarm, as Docker alone has no built-in cluster management, auto-scaling, or self-healing",
+    "Persistent data storage in containers requires external volumes or bind mounts, adding complexity for stateful applications like databases that were more straightforward with traditional VM deployments"
+  ],
+  "features": [
+    {"name": "Docker Engine", "description": "Container runtime that builds and runs containers using Linux kernel namespaces and cgroups for isolation and resource limits", "available": true, "category": "Core"},
+    {"name": "Dockerfile", "description": "Declarative script defining the complete build process for a container image with base image, dependencies, environment, and entry point", "available": true, "category": "Core"},
+    {"name": "Docker Compose", "description": "Multi-container application definition using YAML, allowing an entire stack (app, database, cache, queue) to start with a single command", "available": true, "category": "Orchestration"},
+    {"name": "Docker Hub", "description": "Cloud registry for sharing container images with public and private repositories, automated builds, and official base images", "available": true, "category": "Registry"},
+    {"name": "Docker Desktop", "description": "Desktop application for macOS, Windows, and Linux providing container management UI, Kubernetes integration, and volume management", "available": true, "category": "Core"},
+    {"name": "Volumes", "description": "Persistent data storage managed by Docker that outlives container lifecycle with backup, restore, and migration capabilities", "available": true, "category": "Storage"},
+    {"name": "Networking", "description": "Bridge, host, overlay, and macvlan network drivers for container communication across single hosts and multi-host clusters", "available": true, "category": "Networking"},
+    {"name": "Docker Swarm", "description": "Native container orchestration for clustering Docker hosts with service discovery, load balancing, and rolling updates", "available": true, "category": "Orchestration"},
+    {"name": "Multi-stage Builds", "description": "Build optimization technique using multiple FROM statements in a single Dockerfile to separate build tools from runtime dependencies, reducing final image size by 5-10x", "available": true, "category": "Build"},
+    {"name": "Docker BuildKit", "description": "Next-generation build system with parallel build steps, cache mounting, and improved security for building container images", "available": true, "category": "Build"},
+    {"name": "Registry API", "description": "REST API for programmatic push, pull, tag, and delete operations on container images across public and private registries", "available": true, "category": "Registry"},
+    {"name": "Docker Extensions", "description": "Plugin system extending Docker Desktop with tools for disk usage analysis, log viewing, database management, and security scanning", "available": true, "category": "Integrations"},
+    {"name": "Security Scanning", "description": "Vulnerability scanning of container images in Docker Hub using Trivy engine, identifying CVEs in base images and dependencies", "available": true, "category": "Security"},
+    {"name": "Content Trust", "description": "Signature verification using Docker Content Trust ensures container images are signed by trusted publishers and have not been tampered with", "available": true, "category": "Security"},
+    {"name": "Resource Limits", "description": "Per-container CPU, memory, and I/O limits using cgroups to prevent noisy neighbors from degrading performance of other containers", "available": true, "category": "Performance"},
+    {"name": "Health Checks", "description": "Container health check instructions in Dockerfile that enable orchestration tools to automatically restart unhealthy containers", "available": true, "category": "Reliability"},
+    {"name": "Docker Init", "description": "Interactive scaffolding tool that generates Dockerfile, docker-compose.yml, and .dockerignore for common languages including Go, Python, Node.js, and Rust", "available": true, "category": "Core"},
+    {"name": "Integration Plugins", "description": "Credentials helpers, log drivers, and volume plugins for integrating with cloud services including AWS ECR, GCR, and cloud logging providers", "available": true, "category": "Integrations"}
+  ],
+  "ratings": [
+    {"label": "Features", "score": 4.7},
+    {"label": "Ease of Use", "score": 4.3},
+    {"label": "Support", "score": 4.0},
+    {"label": "Value", "score": 4.5},
+    {"label": "Performance", "score": 4.8}
+  ],
+  "content": [
+    {"title": "Overview", "body": "Docker fundamentally changed how software is built, shipped, and run by introducing containerization as a mainstream technology. Before Docker, the standard approach to running applications in production involved virtual machines or bare-metal servers where environment differences between development and production were a constant source of bugs. Docker containerizes each application with its exact runtime environment — the specific version of Node.js, the precise Python library versions, the exact system libraries — all defined in code through a Dockerfile. This makes application environments reproducible across any machine running Docker. The 'docker run' command replaced pages of deployment documentation, and Docker Compose made multi-service local development as simple as a single command. Docker's impact on the software industry is comparable to Git's impact on version control.", "type": "text"},
+    {"title": "Who is it for?", "body": "Docker is essential for every software developer and DevOps engineer. Frontend developers use Docker to run consistent local environments without installing backend dependencies on their host machine. Backend developers build and test their applications in containers that match production configurations exactly. DevOps engineers use Docker Compose for local staging environments and build production container images for Kubernetes deployment. Data scientists use Docker to package models with their specific library versions for reproducible training and inference. Individual developers on personal projects benefit from Docker's free personal use license, while organizations should budget for Docker Desktop subscriptions if they exceed 250 employees.", "type": "text"},
+    {"title": "Key Features", "body": "Docker's core features address the fundamental challenge of making software run the same way everywhere. The capabilities below are what make containerization the standard deployment model for modern applications.", "type": "list", "items": [
+      "Dockerfile defines the complete application environment in code — base OS, system packages, language runtime, application dependencies, and startup command — all version-controlled and reproducible",
+      "Multi-stage builds use separate build and runtime stages in a single Dockerfile, allowing production images to exclude compilers, dev dependencies, and build tools, often reducing image size from 2 GB to under 200 MB",
+      "Docker Compose with a docker-compose.yml file defines multi-service applications including databases, caches, message queues, and workers that start with one command and share a virtual network",
+      "Docker Hub provides access to 10M+ container images including official images for PostgreSQL, MySQL, Nginx, Redis, MongoDB, Node.js, Python, Go, and Ubuntu, eliminating manual software installation",
+      "Resource limits via --cpus and --memory flags prevent any single container from consuming all host resources, enabling dense multi-tenant hosting with predictable performance"
+    ]},
+    {"title": "Who should avoid it?", "body": "Teams running stateful database workloads in production should pair Docker with Kubernetes or use managed database services, as Docker alone does not provide the persistence guarantees databases require. Organizations with fewer than five developers and simple deployment pipelines may find Docker adds unnecessary complexity — deploying via traditional package managers or platform-as-a-service (Heroku, Railway) may be simpler. Teams that have already standardized on Kubernetes may interact directly with Podman, containerd, or other OCI-compatible runtimes and use Docker primarily for local image building rather than runtime.", "type": "text"}
+  ],
+  "faqs": [
+    {"question": "What is Docker best used for?", "answer": "Docker is best used for creating reproducible application environments that work identically across development, testing, and production. Its primary use cases include local development environments, CI/CD pipeline jobs, microservices deployment, and packaging applications for distribution through container registries. Docker Compose is particularly valuable for running full application stacks locally."},
+    {"question": "How much does Docker cost?", "answer": "Docker is free for personal use and for organizations with fewer than 250 employees or under $10 million in annual revenue. Docker Pro costs $5 per month per user. Docker Team costs $9 per month per user and includes team management, audit logs, and image access management. Docker Business costs $15 per month per user and adds SSO, SCIM provisioning, and security reporting. Docker Engine and Docker Compose remain free and open source."},
+    {"question": "Does Docker integrate with other tools?", "answer": "Docker integrates with all major cloud platforms (AWS ECS/EKS, Azure AKS, Google GKE), CI/CD tools (GitHub Actions, GitLab CI, Jenkins, CircleCI), monitoring platforms (Datadog, Prometheus, Grafana), and IDEs (VS Code with Docker extension, JetBrains). Docker Desktop includes built-in Kubernetes, and Docker images are the standard format consumed by Kubernetes clusters worldwide."},
+    {"question": "Is Docker suitable for production use?", "answer": "Yes, Docker containers are the standard deployment unit for production applications, with the majority of cloud-native workloads running in containers. For production use, Docker containers should be orchestrated through Kubernetes or cloud container services (AWS ECS, Google Cloud Run, Azure Container Instances) that provide auto-scaling, load balancing, self-healing, and rolling updates that Docker alone does not provide."}
+  ],
+  "alternatives": ["gitlab"],
+  "relatedGuides": ["developer-tools-stack-guide", "saas-implementation-best-practices", "software-evaluation-checklist"],
+  "lastReviewed": "2026-07-16",
+  "author": "StackPilot Team"
+}

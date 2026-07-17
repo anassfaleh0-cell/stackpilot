@@ -1,0 +1,13 @@
+{
+  "slug": "bi",
+  "term": "Business Intelligence",
+  "definition": "The technology-driven process of collecting, integrating, analyzing, and presenting business data to support better decision-making through interactive dashboards, reports, and data visualizations that transform raw data into actionable insights.",
+  "extendedDefinition": "Business Intelligence (BI) platforms centralize data from multiple sources — databases, SaaS applications, spreadsheets, and APIs — into a unified analytics environment where stakeholders can explore data through visual dashboards, ad-hoc queries, and scheduled reports. Modern BI tools like Looker, Tableau, and Power BI connect directly to data warehouses (Snowflake, BigQuery, Redshift) and allow business users to create reports without writing SQL, while providing governed data models that ensure consistent metric definitions across the organization. BI differs from product analytics (Mixpanel, Amplitude) in scope: product analytics focuses on user behavior within a specific application, while BI covers the entire business including financial data, operational metrics, and cross-system KPIs. The most effective BI implementations establish a single source of truth by defining key metrics in the data warehouse and surfacing them through a governed semantic layer, preventing the common problem of different departments reporting different numbers for the same metric.",
+  "category": "Analytics & Data",
+  "examples": [
+    "A Looker dashboard showing real-time revenue, active users, and customer acquisition cost updated hourly from the data warehouse",
+    "A marketing team using Tableau to visualize campaign performance across Google Ads, LinkedIn, and email channels with attribution modeled in SQL",
+    "A SaaS company combining subscription data from Stripe, product usage data from Mixpanel, and support ticket data from Zendesk into a single Power BI report for the executive team"
+  ],
+  "relatedTerms": ["dashboard", "kpi", "roi", "saas"]
+}

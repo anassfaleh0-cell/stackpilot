@@ -9,16 +9,16 @@
   "rating": 4.8,
   "reviewCount": 2147,
   "pros": [
-    "Real-time multiplayer editing with instant syncing across all users",
-    "Cross-platform compatibility with web, macOS, Windows, and mobile apps",
-    "Powerful component system with auto-layout and variants",
-    "Extensive plugin ecosystem with thousands of community extensions",
-    "Developer handoff tools with CSS inspection and asset export"
+    "Real-time multiplayer editing supports 100+ simultaneous users on a single file with cursor presence and live changes visible instantly across all platforms",
+    "Cross-platform with web, macOS, Windows, and mobile apps, eliminating the Mac-only limitation of Sketch and enabling design participation from any stakeholder",
+    "Component system with auto-layout, interactive components, and variants reduces repetitive work and enforces design consistency across production UI",
+    "Plugin ecosystem of 800+ community extensions covering accessibility checks, icon libraries, design tokens, and workflow automation",
+    "Developer handoff generates CSS, iOS Swift, and Android XML code snippets directly from layers, closing the gap between design and implementation"
   ],
   "cons": [
-    "Requires internet connection for most features with limited offline mode",
-    "Large files can become sluggish, especially with many embedded images",
-    "Font licensing restrictions can complicate team collaboration"
+    "Offline mode is limited to the desktop app with frequent reconnection requirements, making it unreliable for flights or areas with spotty connectivity",
+    "Performance degrades noticeably on files exceeding 100 artboards or 500+ embedded images, requiring page splitting for large design systems",
+    "Font licensing requires every collaborator to have the same fonts installed locally, causing rendering inconsistencies across teams without shared font management"
   ],
   "features": [
     {"name": "Vector Editing", "description": "Professional vector pen tool with boolean operations and path editing", "available": true, "category": "Core"},
@@ -51,7 +51,9 @@
     {"title": "Overview", "body": "Figma revolutionized the design industry by bringing a full-featured interface design tool to the browser, making collaboration a first-class citizen rather than an afterthought. Its vector editing capabilities rival established desktop applications while adding real-time multiplayer editing that transforms how design teams work together. The platform has grown from a simple design tool into a complete design operations hub with prototyping, developer handoff, and design system management.", "type": "text"},
     {"title": "Who is it for?", "body": "Figma is essential for UI/UX designers, product teams, and design agencies that need collaborative design workflows. It is particularly valuable for remote teams where real-time collaboration eliminates the friction of file sharing and version conflicts. Frontend developers also benefit from Figma's inspection tools and CSS generation capabilities that streamline the handoff process.", "type": "text"},
     {"title": "Key Features", "body": "Figma's key strengths lie in its collaborative architecture and modern component system. The auto-layout feature makes responsive design intuitive by automatically adjusting elements as content changes. The component system with variants and properties enables teams to build scalable design systems. Real-time multiplayer editing allows multiple designers to work on the same file simultaneously, dramatically reducing iteration cycles.", "type": "list", "items": ["Real-time multiplayer editing with cursor presence, comments, and instant sync", "Auto-layout constraints that create responsive designs without manual adjustments", "Component system with variants, properties, and instance overrides for scalable design systems", "Interactive prototyping with smart animate, overlays, and conditional interactions", "Developer handoff with automatic CSS generation, asset export, and measurement tools"]},
-    {"title": "Who should avoid it?", "body": "Designers who work primarily offline or in environments with unreliable internet connectivity may struggle with Figma's cloud-dependent architecture. Professional illustrators and print designers who need advanced vector manipulation, color management, or print-specific features may prefer dedicated tools like Adobe Illustrator. Organizations with strict data residency requirements should verify Figma's compliance with their regional regulations.", "type": "text"}
+    {"title": "Who should avoid it?", "body": "Designers who work primarily offline or in environments with unreliable internet connectivity may struggle with Figma's cloud-dependent architecture. Professional illustrators and print designers who need advanced vector manipulation, color management, or print-specific features may prefer dedicated tools like Adobe Illustrator. Organizations with strict data residency requirements should verify Figma's compliance with their regional regulations.", "type": "text"},
+    {"title": "Implementation Tips", "body": "Start your Figma rollout with a single design system file that houses all shared components, color tokens, and typography styles. Publish this as a Team Library so all project files reference the same source of truth. Use auto-layout for every component from day one — retrofitting auto-layout into existing designs is significantly more time-consuming than building with it from the start. Enable branching and merging for your design system file so component changes go through review before reaching production projects.", "type": "text"},
+    {"title": "Common Mistakes", "body": "The most common Figma mistake is inconsistent use of auto-layout. Teams frequently mix auto-layout frames with manually positioned elements, creating components that break when content changes. Another pitfall is ignoring component properties: using separate components for button variants instead of a single button component with property overrides leads to design system bloat. Font licensing is a recurring source of friction — ensure every team member has the same fonts installed, or use a font management service like Fontbase to distribute typefaces across your team.", "type": "warning"}
   ],
   "faqs": [
     {"question": "What is Figma best used for?", "answer": "Figma is best used for UI/UX design, interface prototyping, and design system management. It excels at collaborative design work where multiple team members need to contribute to the same files simultaneously. Its developer handoff features also make it an excellent bridge between design and engineering teams."},
@@ -60,7 +62,8 @@
     {"question": "Is Figma suitable for large design teams?", "answer": "Yes, Figma is well-suited for large design teams, especially with its Organization and Enterprise plans. These plans include shared design system libraries, branching and merging workflows, analytics dashboards, and advanced permission controls that help large teams maintain consistency and scale their design operations."}
   ],
   "alternatives": ["canva"],
-  "relatedGuides": ["how-to-choose-project-management-software", "saas-implementation-best-practices"],
+  "relatedComparisons": ["figma-vs-sketch"],
+  "relatedGuides": ["software-evaluation-checklist", "saas-implementation-best-practices", "design-software-buyers-guide"],
   "lastReviewed": "2026-07-01",
   "author": "StackPilot Team"
 }

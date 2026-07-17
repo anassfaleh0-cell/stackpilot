@@ -1,0 +1,13 @@
+{
+  "slug": "sso",
+  "term": "Single Sign-On",
+  "definition": "An authentication method that allows users to access multiple applications and services with one set of login credentials, typically managed through a central identity provider that authenticates the user once and grants access to all connected tools without requiring repeated logins.",
+  "extendedDefinition": "Single Sign-On (SSO) eliminates the need for users to maintain separate usernames and passwords for each application their organization uses. When a user logs into their identity provider (Okta, Azure AD, Google Workspace), the IdP generates a secure token that downstream applications accept as proof of authentication, allowing the user to access all connected services without additional login prompts. For organizations, SSO provides centralized user lifecycle management — when an employee leaves, revoking their access at the identity provider immediately blocks access to every connected application. SSO is typically implemented using SAML 2.0 for enterprise web applications or OAuth 2.0 / OpenID Connect for modern APIs and mobile apps. Most SaaS platforms reserve SSO for Business or Enterprise pricing tiers, making it a scaling consideration for growing teams that need to enforce consistent authentication policies.",
+  "category": "Security & Compliance",
+  "examples": [
+    "A team member accessing Linear, GitHub, and Slack without re-entering credentials after authenticating through Okta in the morning",
+    "An organization configuring SAML-based SSO in their identity provider so that terminated employee access is revoked across all SaaS tools simultaneously",
+    "A SaaS vendor offering SSO integration on their Enterprise plan using the SAML 2.0 protocol with automatic user provisioning through SCIM"
+  ],
+  "relatedTerms": ["encryption", "saas", "api"]
+}

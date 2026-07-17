@@ -16,9 +16,9 @@
     "Print-ready export options with integrated direct-to-print service for business cards, flyers, signage, and merchandise"
   ],
   "cons": [
-    "Advanced vector illustration and photo manipulation tools are severely limited compared to professional tools like Adobe Illustrator or Photoshop",
-    "Customization depth is constrained for complex print layouts that require precise typography control, bleeds, and color management",
-    "Free version displays watermarks on premium assets and offers only 5GB of cloud storage, forcing upgrades for serious use"
+    "Vector illustration capabilities lack pen tool, anchor point editing, gradient mesh, and custom brushes that Adobe Illustrator provides, making logo creation and detailed illustration work impractical for professional designers",
+    "Print production features lack CMYK color management, bleed controls, trim marks, and color separation settings required for commercial printing, limiting its use for professional-grade magazine layouts and packaging design",
+    "Free tier displays watermarks on 60+ million premium stock photos, elements, and templates while offering only 5GB of cloud storage, requiring Pro upgrade ($12.99/month) for watermark-free branded output"
   ],
   "features": [
     {"name": "Drag-and-Drop Editor", "description": "Visual editor with intuitive positioning, resizing, and layering controls for rapid design creation", "available": true, "category": "Core"},
@@ -73,7 +73,7 @@
     },
     {
       "title": "Who should avoid it?",
-      "body": "Professional graphic designers and illustrators who need precise vector control, advanced typography features, or robust photo manipulation capabilities will find Canva frustratingly limited. The platform deliberately abstracts away fine-grained controls in favor of simplicity, making it unsuitable for complex print production work like multi-page magazine layouts or packaging design. Organizations that require offline access or have strict data sovereignty requirements may also struggle, as Canva is cloud-only with limited offline capabilities on mobile. New users should expect a few hours of learning curve to become proficient.",
+      "body": "Professional graphic designers and illustrators who need precise vector control, advanced typography features, or robust photo manipulation capabilities will find Canva frustratingly limited. The platform deliberately abstracts away fine-grained controls in favor of simplicity, making it unsuitable for complex print production work like multi-page magazine layouts or packaging design. Organizations that require offline access or have strict data sovereignty requirements may also struggle, as Canva is cloud-only with limited offline capabilities on mobile. New users should expect a few hours of learning curve to become proficient. Migrating from Adobe Creative Cloud involves more than learning new tools — Canva cannot replicate Illustrator's vector engine, Photoshop's layer system, or InDesign's typesetting, so teams should identify which workflows can move fully to Canva and which require keeping professional design tools alongside it.",
       "type": "text"
     }
   ],
@@ -96,7 +96,8 @@
     }
   ],
   "alternatives": ["figma"],
-  "relatedGuides": ["software-evaluation-checklist"],
+  "relatedComparisons": ["figma-vs-sketch"],
+  "relatedGuides": ["software-evaluation-checklist", "design-software-buyers-guide"],
   "lastReviewed": "2026-07-16",
   "author": "StackPilot Team"
 }

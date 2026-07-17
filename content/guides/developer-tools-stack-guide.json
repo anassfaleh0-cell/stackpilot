@@ -35,10 +35,17 @@
       "title": "Monitoring & Observability",
       "body": "Instrument your stack with structured logging and distributed tracing to diagnose issues before users notice them. Tools like Datadog, Grafana, and Sentry provide dashboards for error tracking, latency breakdowns, and infrastructure health. Set up alerting on p99 latency and error budgets rather than raw CPU usage to align monitoring with user-facing reliability.",
       "type": "text"
+    },
+    {
+      "title": "Stack Evaluation Framework",
+      "body": "When evaluating a new developer tool for your stack, score it against four criteria: integration effort (hours to connect with existing tools), team adoption friction (learning curve for your least experienced engineer), maintenance burden (upgrade frequency, breaking changes per year), and exit cost (effort to migrate data and workflows to an alternative). A tool scoring below 7 out of 10 on any single criterion needs strong compensating advantages in the others. Prioritize tools with well-documented APIs and public roadmaps — these signals correlate with lower long-term maintenance burden. Start any new tool with a two-week evaluation period where your team uses it on a real but non-critical project before committing to a paid plan.",
+      "type": "warning"
     }
   ],
   "author": "StackPilot Team",
   "lastUpdated": "2026-07-16",
   "relatedTools": ["github", "vercel", "supabase", "linear"],
-  "relatedGuides": ["software-evaluation-checklist", "saas-implementation-best-practices"]
+  "relatedGuides": ["software-evaluation-checklist", "saas-implementation-best-practices"],
+  "relatedComparisons": ["github-vs-gitlab", "vercel-vs-netlify", "supabase-vs-firebase"],
+  "relatedPosts": ["frontend-deployment-platforms-comparison"]
 }

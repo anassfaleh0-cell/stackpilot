@@ -10,7 +10,7 @@ function Container({ className, children, as: Component = "div", ...props }: Rea
 
 function Section({ className, children, ...props }: React.HTMLAttributes<HTMLElement>) {
   return (
-    <section className={cn("py-16 sm:py-24", className)} {...props}>
+    <section className={cn("py-16 sm:py-20 lg:py-24", className)} {...props}>
       {children}
     </section>
   )
