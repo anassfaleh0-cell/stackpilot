@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { Container } from "@/components/ui/container"
-import { Button } from "@/components/ui/button"
 import { Compass } from "lucide-react"
 import type { Metadata } from "next/dist/lib/metadata/types/metadata-interface"
 

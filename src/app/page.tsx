@@ -15,18 +15,18 @@ export const metadata = createMetadata({
   path: "/",
 })
 
-const stats = [
-  { value: "1,200+", label: "Software Reviews" },
-  { value: "250+", label: "Expert Guides" },
-  { value: "35K+", label: "Monthly Readers" },
-  { value: "98%", label: "Reader Satisfaction" },
-]
-
 export default function HomePage() {
   const reviews = getAllReviews()
   const comparisons = getAllComparisons()
   const guides = getAllGuides()
   const posts = getAllBlogPosts()
+
+  const stats = [
+    { value: `${reviews.length}+`, label: "Software Reviews" },
+    { value: `${guides.length}+`, label: "Expert Guides" },
+    { value: "35K+", label: "Monthly Readers" },
+    { value: "98%", label: "Reader Satisfaction" },
+  ]
 
   return (
     <>
