@@ -2,7 +2,8 @@ import { Container, Section, SectionHeader } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/components/seo/json-ld"
+import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllBlogPosts } from "@/lib/content/registry"
 import { formatDate } from "@/lib/utils"
@@ -12,7 +13,7 @@ import { BrandPattern } from "@/components/brand/patterns"
 
 export const metadata = createMetadata({
   title: "Blog",
-  description: "Expert insights, tutorials, and analysis on software tools, productivity, and technology trends.",
+  description: "Expert insights, hands-on tutorials, and in-depth analysis on software tools, productivity strategies, and technology trends to help your business stay ahead.",
   path: "/blog",
 })
 
@@ -24,6 +25,8 @@ export default function BlogPage() {
 
   return (
     <>
+      <CollectionPageSchema name="Blog" description="Expert insights, tutorials, and analysis on software tools and technology trends" url={`${site.url}/blog`} />
+      <ItemListSchema items={posts.map(p => ({ name: p.title, url: `${site.url}/blog/${p.slug}` }))} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Blog", href: "/blog" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Blog" }]} />
@@ -71,6 +74,7 @@ export default function BlogPage() {
           )}
 
           {/* Rest of posts */}
+          {rest.length > 0 ? (
           <div className="grid sm:grid-cols-2 gap-6">
             {rest.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`} className="group card-hover">
@@ -92,6 +96,7 @@ export default function BlogPage() {
               </Link>
             ))}
           </div>
+          ) : null}
         </Container>
       </Section>
     </>

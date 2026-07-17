@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, HowToSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
-import { getGuide } from "@/lib/content/registry"
+import { getGuide, getContentTitle } from "@/lib/content/registry"
 import { getAllGuides } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
 import { EditorialHero, EditorialProcess, EditorialSectionIllustration, GlassCard, InfoCard } from "@/components/editorial"
@@ -109,6 +109,15 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                         ))}
                       </div>
                     </>
+                  ) : section.type === "checklist" && section.body ? (
+                    <div className="space-y-3 pl-11">
+                      {section.body.split("?").filter(Boolean).map((item, j) => (
+                        <div key={j} className="flex items-start gap-3 text-sm">
+                          <CheckCircle2 size={16} className="text-primary shrink-0 mt-0.5" />
+                          <span className="text-foreground">{item}{item.trim().endsWith("?") ? "" : "?"}</span>
+                        </div>
+                      ))}
+                    </div>
                   ) : (
                     <p className="text-muted-foreground leading-relaxed pl-11">{section.body}</p>
                   )}
@@ -159,10 +168,10 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
 
             <RelatedContent
               items={[
-                ...(guide.relatedTools || []).map(s => ({ slug: s, type: "review" as const })),
-                ...(guide.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const })),
-                ...(guide.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const })),
-                ...(guide.relatedPosts || []).map(s => ({ slug: s, type: "blog" as const })),
+                ...(guide.relatedTools || []).map(s => ({ slug: s, type: "review" as const, title: getContentTitle("review", s) ?? undefined })),
+                ...(guide.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
+                ...(guide.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
+                ...(guide.relatedPosts || []).map(s => ({ slug: s, type: "blog" as const, title: getContentTitle("blog", s) ?? undefined })),
               ]}
               title="Related Resources"
             />

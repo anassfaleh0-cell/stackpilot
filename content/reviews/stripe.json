@@ -6,6 +6,7 @@
   "category": "Finance & Accounting",
   "website": "https://stripe.com",
   "pricing": "Transaction-based",
+  "priceRange": "2.9% + $0.30 per transaction",
   "rating": 4.7,
   "reviewCount": 18000,
   "pros": [
@@ -57,7 +58,10 @@
       "Stripe Tax automatically determines applicable tax rates across 12,000+ US and EU tax jurisdictions, applies them to transactions, and generates reports for filing — reducing compliance from weeks of engineering work to an API toggle",
       "Sigma provides direct SQL access to your payment data, enabling custom queries for MRR calculations, churn analysis, refund rate trends, and cohort retention without exporting data to a separate analytics tool"
     ]},
-    {"title": "Who should avoid it?", "body": "Businesses in high-risk categories (CBD, vaping, adult content, firearms, debt collection) face frequent account freezes and reserve requirements from Stripe with limited appeals options, and may be better served by high-risk payment processors that understand their industry. Non-technical founders who cannot integrate an API and need a simple payment link may find Stripe's self-serve Checkout Pages or Payment Links sufficient, but should evaluate Square or PayPal for simpler setup. Organizations processing over $5 million annually should negotiate custom pricing or evaluate interchange-plus processors like Adyen that can offer lower effective rates. Developers evaluating Stripe should expect 2-3 days to integrate core payments and 1-2 weeks for complex subscription or marketplace implementations.", "type": "text"}
+    {"title": "Who should avoid it?", "body": "Businesses in high-risk categories (CBD, vaping, adult content, firearms, debt collection) face frequent account freezes and reserve requirements from Stripe with limited appeals options, and may be better served by high-risk payment processors that understand their industry. Non-technical founders who cannot integrate an API and need a simple payment link may find Stripe's self-serve Checkout Pages or Payment Links sufficient, but should evaluate Square or PayPal for simpler setup. Organizations processing over $5 million annually should negotiate custom pricing or evaluate interchange-plus processors like Adyen that can offer lower effective rates. Developers evaluating Stripe should expect 2-3 days to integrate core payments and 1-2 weeks for complex subscription or marketplace implementations.", "type": "text"},
+    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
+    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
+    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
   ],
   "faqs": [
     {"question": "What is Stripe best used for?", "answer": "Stripe is best used as the payment processing infrastructure for internet businesses that need to accept payments online, manage subscriptions, handle marketplace payouts, or operate internationally. Its API-first design makes it the standard choice for SaaS companies, e-commerce platforms, and subscription businesses that want a developer-friendly payment system with global reach."},
@@ -66,7 +70,7 @@
     {"question": "Is Stripe secure?", "answer": "Stripe is PCI DSS Level 1 certified, SOC 2 Type II compliant, and GDPR compliant. All card data is tokenized — Stripe never returns full card numbers to your servers. Radar fraud detection evaluates every transaction in real-time. Stripe supports 3D Secure 2 authentication for liability shift on disputed transactions. API keys use granular permissions and can be restricted by IP address. Stripe publishes annual penetration test results and maintains a vulnerability disclosure program."}
   ],
   "alternatives": [],
-  "relatedComparisons": ["quickbooks-vs-xero"],
+  "relatedComparisons": [],
   "relatedGuides": ["finance-software-buyers-guide", "software-evaluation-checklist", "saas-implementation-best-practices"],
   "lastReviewed": "2026-07-16",
   "author": "StackPilot Team"

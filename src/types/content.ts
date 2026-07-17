@@ -41,7 +41,7 @@ export interface CategoryRating {
 export interface ContentSection {
   title: string
   body: string
-  type?: "text" | "list" | "table" | "quote" | "tip" | "warning"
+  type?: "text" | "list" | "table" | "quote" | "tip" | "warning" | "checklist" | "diagram"
   items?: string[]
 }
 
@@ -94,7 +94,7 @@ export interface GuideContent {
 export interface GuideSection {
   title: string
   body: string
-  type?: "text" | "tip" | "warning" | "list"
+  type?: "text" | "tip" | "warning" | "list" | "checklist"
   items?: string[]
 }
 

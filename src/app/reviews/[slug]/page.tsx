@@ -4,12 +4,12 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, SoftwareSchema, ReviewSchema, FAQSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getReview } from "@/lib/content/registry"
+import { getReview, getContentTitle } from "@/lib/content/registry"
 import { getAllReviews } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
-import { EditorialHero, EditorialProsCons, EditorialFeatureMatrix, EditorialRatingVisual, EditorialPricing, EditorialWorkflow, EditorialSectionIllustration, GlassCard, InfoCard } from "@/components/editorial"
+import { EditorialHero, EditorialProsCons, EditorialFeatureMatrix, EditorialRatingVisual, EditorialPricing, EditorialPricingLadder, EditorialWorkflow, EditorialFeatureRadar, EditorialImplementationFlow, EditorialSectionIllustration, GlassCard, InfoCard } from "@/components/editorial"
 import { RelatedContent } from "@/components/content/related-content"
 import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
 
@@ -36,6 +36,12 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   if (!tool) notFound()
 
   const allReviews = getAllReviews()
+
+  const bestInCategory = allReviews
+    .filter((r) => r.category === tool.category)
+    .sort((a, b) => b.rating - a.rating)[0]
+  const isBestInCategory = bestInCategory?.slug === tool.slug
+  const isBestValue = tool.pricing === "Freemium" || tool.pricing === "Free" || tool.pricing === "Free Trial"
 
   return (
     <>
@@ -73,6 +79,12 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* Identity & Trust */}
               <div className="flex flex-wrap items-center gap-3 mb-4">
                 <Badge variant="default">{tool.category}</Badge>
+                {isBestInCategory && (
+                  <Badge variant="success">Best in Category</Badge>
+                )}
+                {isBestValue && (
+                  <Badge variant="warning">Best Value</Badge>
+                )}
                 <div className="flex items-center gap-1 text-sm">
                   <Star size={14} className="fill-accent text-accent" />
                   <span className="font-semibold">{tool.rating}</span>
@@ -171,24 +183,35 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* Content Sections */}
               {tool.content.map((section, i) => (
                 <section key={i} className="mb-12 scroll-mt-24" id={`section-${i}`}>
-                  <EditorialSectionIllustration slug={tool.slug} category={tool.category} index={i} />
-                  <h2 className="text-2xl font-bold tracking-tight mb-4">{section.title}</h2>
-                  {section.type === "list" && section.items ? (
+                  {section.type === "diagram" ? (
                     <>
-                      <p className="text-muted-foreground leading-relaxed mb-4">{section.body}</p>
-                      <ul className="space-y-2">
-                        {section.items.map((item, j) => (
-                          <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0">
-                              <polyline points="20 6 9 17 4 12" />
-                            </svg>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      <h2 className="text-2xl font-bold tracking-tight mb-4">{section.title}</h2>
+                      {section.body === "pricing-ladder" && <EditorialPricingLadder tool={tool} />}
+                      {section.body === "feature-radar" && <EditorialFeatureRadar tool={tool} />}
+                      {section.body === "implementation-flow" && <EditorialImplementationFlow tool={tool} />}
                     </>
                   ) : (
-                    <p className="text-muted-foreground leading-relaxed">{section.body}</p>
+                    <>
+                      <EditorialSectionIllustration slug={tool.slug} category={tool.category} index={i} />
+                      <h2 className="text-2xl font-bold tracking-tight mb-4">{section.title}</h2>
+                      {section.type === "list" && section.items ? (
+                        <>
+                          <p className="text-muted-foreground leading-relaxed mb-4">{section.body}</p>
+                          <ul className="space-y-2">
+                            {section.items.map((item, j) => (
+                              <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0">
+                                  <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </>
+                      ) : (
+                        <p className="text-muted-foreground leading-relaxed">{section.body}</p>
+                      )}
+                    </>
                   )}
                 </section>
               ))}
@@ -244,6 +267,20 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                           </div>
                         </div>
                       ))}
+                    </div>
+                  </div>
+                </GlassCard>
+
+                {/* Reading time & last updated */}
+                <GlassCard>
+                  <div className="p-4 space-y-2 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                      <span>{Math.max(5, Math.ceil(tool.content.reduce((a, s) => a + s.body.split(" ").length, 0) / 200))} min read</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
+                      <span>Reviewed {tool.lastReviewed}</span>
                     </div>
                   </div>
                 </GlassCard>
@@ -320,12 +357,37 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
           <RelatedContent
             items={[
-              ...(tool.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const })),
-              ...(tool.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const })),
-              ...(tool.relatedPosts || []).map(s => ({ slug: s, type: "blog" as const })),
+              ...(tool.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
+              ...(tool.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
+              ...(tool.relatedPosts || []).map(s => ({ slug: s, type: "blog" as const, title: getContentTitle("blog", s) ?? undefined })),
             ]}
             title="Related Resources"
           />
+
+          {/* Previous / Next review */}
+          {(() => {
+            const all = allReviews.filter(r => r.category === tool.category)
+            const idx = all.findIndex(r => r.slug === tool.slug)
+            const prev = idx > 0 ? all[idx - 1] : null
+            const next = idx < all.length - 1 ? all[idx + 1] : null
+            if (!prev && !next) return null
+            return (
+              <nav className="mt-16 pt-8 border-t border-border grid grid-cols-2 gap-4" aria-label="Adjacent reviews">
+                {prev ? (
+                  <Link href={`/reviews/${prev.slug}`} className="group text-left">
+                    <span className="text-xs text-muted-foreground">&larr; Previous</span>
+                    <p className="text-sm font-medium group-hover:text-primary transition-colors">{prev.name}</p>
+                  </Link>
+                ) : <div />}
+                {next ? (
+                  <Link href={`/reviews/${next.slug}`} className="group text-right">
+                    <span className="text-xs text-muted-foreground">Next &rarr;</span>
+                    <p className="text-sm font-medium group-hover:text-primary transition-colors">{next.name}</p>
+                  </Link>
+                ) : <div />}
+              </nav>
+            )
+          })()}
         </Container>
       </article>
     </>

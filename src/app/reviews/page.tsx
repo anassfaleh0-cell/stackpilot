@@ -2,7 +2,8 @@ import { Container, Section, SectionHeader } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/components/seo/json-ld"
+import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllReviews } from "@/lib/content/registry"
 import { categories } from "@/lib/constants"
@@ -21,6 +22,8 @@ export default function ReviewsPage() {
 
   return (
     <>
+      <CollectionPageSchema name="Software Reviews" description="In-depth, unbiased reviews of the best software tools" url={`${site.url}/reviews`} />
+      <ItemListSchema items={tools.map(t => ({ name: t.name, url: `${site.url}/reviews/${t.slug}` }))} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Reviews", href: "/reviews" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Reviews" }]} />
@@ -45,7 +48,8 @@ export default function ReviewsPage() {
       {/* Grid */}
       <Section>
         <Container>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {tools.length > 0 ? (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-reveal">
             {tools.map((tool, i) => (
               <Link key={tool.slug} href={`/reviews/${tool.slug}`} className="group card-hover" style={{ animationDelay: `${i * 40}ms` }}>
                 <Card className="h-full flex flex-col">
@@ -65,6 +69,9 @@ export default function ReviewsPage() {
               </Link>
             ))}
           </div>
+          ) : (
+            <p className="text-center text-muted-foreground py-12">No reviews available yet. Check back soon.</p>
+          )}
         </Container>
       </Section>
 

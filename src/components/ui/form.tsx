@@ -14,7 +14,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label htmlFor={inputId} className="block text-sm font-medium">
             {label}
-            {props.required && <span className="text-red-500 ml-0.5">*</span>}
+            {props.required && <span className="text-error ml-0.5">*</span>}
           </label>
         )}
         <input
@@ -23,10 +23,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           className={cn(
             "flex h-11 w-full rounded-lg border border-border bg-background px-3.5 py-2.5 text-sm",
             "placeholder:text-muted/60",
-            "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-primary",
             "disabled:cursor-not-allowed disabled:opacity-50",
             "transition-all duration-200",
-            error && "border-red-500 focus:ring-red-500/20 focus:border-red-500",
+            error && "border-error focus-visible:ring-error/20 focus-visible:border-error",
             className
           )}
           aria-invalid={error ? "true" : undefined}
@@ -34,7 +34,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
         {error && (
-          <p id={`${inputId}-error`} className="text-xs text-red-500" role="alert">
+          <p id={`${inputId}-error`} className="text-xs text-error" role="alert">
             {error}
           </p>
         )}
@@ -57,7 +57,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <label htmlFor={textareaId} className="block text-sm font-medium">
             {label}
-            {props.required && <span className="text-red-500 ml-0.5">*</span>}
+            {props.required && <span className="text-error ml-0.5">*</span>}
           </label>
         )}
         <textarea
@@ -66,10 +66,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           className={cn(
             "flex min-h-[120px] w-full rounded-lg border border-border bg-background px-3.5 py-2.5 text-sm",
             "placeholder:text-muted/60",
-            "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-primary",
             "disabled:cursor-not-allowed disabled:opacity-50",
             "resize-y transition-all duration-200",
-            error && "border-red-500 focus:ring-red-500/20 focus:border-red-500",
+            error && "border-error focus-visible:ring-error/20 focus-visible:border-error",
             className
           )}
           aria-invalid={error ? "true" : undefined}
@@ -77,7 +77,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {...props}
         />
         {error && (
-          <p id={`${textareaId}-error`} className="text-xs text-red-500" role="alert">
+          <p id={`${textareaId}-error`} className="text-xs text-error" role="alert">
             {error}
           </p>
         )}
@@ -102,7 +102,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         {label && (
           <label htmlFor={selectId} className="block text-sm font-medium">
             {label}
-            {props.required && <span className="text-red-500 ml-0.5">*</span>}
+            {props.required && <span className="text-error ml-0.5">*</span>}
           </label>
         )}
         <select
@@ -110,10 +110,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           id={selectId}
           className={cn(
             "flex h-11 w-full rounded-lg border border-border bg-background px-3.5 py-2.5 text-sm",
-            "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-primary",
             "disabled:cursor-not-allowed disabled:opacity-50",
             "transition-all duration-200",
-            error && "border-red-500 focus:ring-red-500/20 focus:border-red-500",
+            error && "border-error focus-visible:ring-error/20 focus-visible:border-error",
             className
           )}
           aria-invalid={error ? "true" : undefined}
@@ -125,7 +125,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ))}
         </select>
         {error && (
-          <p className="text-xs text-red-500" role="alert">{error}</p>
+          <p className="text-xs text-error" role="alert">{error}</p>
         )}
       </div>
     )
@@ -145,7 +145,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(
       {...props}
     >
       {children}
-      {required && <span className="text-red-500 ml-0.5">*</span>}
+      {required && <span className="text-error ml-0.5">*</span>}
     </label>
   )
 )

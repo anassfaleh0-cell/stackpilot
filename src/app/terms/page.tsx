@@ -5,7 +5,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Terms of Service",
-  description: "StackPilot's terms of service govern the use of our website, content, and services.",
+  description: "StackPilot's terms of service govern the use of our website, content, and services. By using StackPilot, you agree to these terms and conditions.",
   path: "/terms",
 })
 

@@ -8,28 +8,33 @@
   "sections": [
     {
       "title": "Plan Before You Deploy",
-      "body": "Begin with a clear implementation roadmap that defines milestones, owners, and success criteria. Identify cross-functional stakeholders and schedule regular check-ins to track progress. A thorough plan prevents scope creep and keeps the entire team aligned.",
+      "body": "Begin with a clear implementation roadmap that defines milestones, owners, and success criteria. For a CRM implementation like Salesforce or HubSpot, this means mapping each sales stage from lead capture through close and identifying which fields, workflows, and automation rules need to exist before day one. Schedule weekly cross-functional check-ins involving sales ops, IT, and the vendor's implementation team. Document every custom field, automation rule, and permission set before writing any configuration code — scope creep in SaaS implementations typically adds 30-50% to the timeline according to Gartner's 2025 implementation benchmarks.",
       "type": "text"
     },
     {
       "title": "Data Migration Strategy",
-      "body": "Audit your existing data to identify what needs to move, what can be archived, and what should be cleaned up before migration. Map fields between old and new systems and run test migrations in a sandbox environment. Validate data integrity at every stage to avoid corruption or loss.",
+      "body": "Audit your existing data to identify what needs to move, what can be archived, and what should be cleaned up before migration. When migrating from Jira to Linear, for example, you must map custom issue types, workflow statuses, and sprint structures — not just issue titles and descriptions. Run at least two full test migrations in a sandbox environment, comparing record counts, field values, and attachment integrity after each pass. Validate that historical data (closed deals in a CRM, past sprint velocity in a PM tool, invoice history in accounting software) preserves its relationships and context, not just raw values. Budget 2-4 weeks for data cleaning before migration begins.",
       "type": "text"
     },
     {
       "title": "Team Training",
-      "body": "Create role-specific training materials so each team member understands how the new software affects their daily workflow. Pair hands-on workshops with written documentation and video walkthroughs for different learning styles. Invest in training up front — it dramatically reduces resistance and support tickets post-launch.",
+      "body": "Create role-specific training materials so each team member understands how the new software affects their daily workflow. For a Slack-to-Teams migration, this means separate guides for end users (channel organization, notification settings, meeting scheduling), power users (custom tabs, bot framework, message formatting), and admins (compliance policies, guest access, data retention). Pair hands-on workshops with written documentation and video walkthroughs. Slack's enterprise migration playbook found that teams investing at least 4 hours per user in structured training achieved 85% adoption within 30 days, compared to 45% for teams relying on self-guided learning.",
       "type": "text"
     },
     {
       "title": "Phased Rollout",
-      "body": "Launch the software to a small pilot group before rolling out to the entire organization. Use the pilot phase to surface bugs, gather feedback, and refine processes. A phased approach reduces risk and gives your team time to adapt without disrupting the whole business.",
+      "body": "Launch the software to a small pilot group before rolling out to the entire organization. When Asana deploys to a 500-person company, a recommended approach is: Week 1-2 configure core data model with 3 power users from different departments, Week 3-4 expand to 20 users across 5 teams with daily standup feedback loops, Week 5-6 incorporate feedback and migrate remaining 300 users in waves of 50 per week. Each wave should include a 2-week overlap period where the old tool remains accessible. Track support ticket volume by wave — an abnormal spike in Wave 3 compared to Wave 2 indicates a training gap that should be addressed before Wave 4.",
       "type": "text"
     },
     {
       "title": "Measure and Optimize",
-      "body": "Define key metrics like adoption rate, time-to-value, and support ticket volume from day one. Review these metrics monthly and survey users to identify friction points. Continuous improvement ensures your SaaS investment delivers lasting value rather than collecting digital dust.",
+      "body": "Define key metrics from day one and track them weekly during the first 90 days. For project management tool adoption, the leading indicator is tasks updated in the past 7 days divided by total active tasks — if this ratio falls below 60%, investigate friction points immediately. For CRM implementations, track deals logged per rep per week and pipeline value created in the new system versus the old one. Run anonymous user satisfaction surveys at week 2, week 6, and week 12, asking specifically about friction points rather than general satisfaction. A Net Promoter Score below 30 at week 12 signals systemic issues that require re-evaluation of the configuration or tool choice.",
       "type": "text"
+    },
+    {
+      "title": "Implementation Decision Checklist",
+      "body": "Before signing your implementation contract, verify each item: Have you identified a dedicated internal implementation lead with at least 10 hours per week? Is your data cleaned and deduplicated before migration begins? Have you built a sandbox environment that mirrors production data volume? Does your vendor provide a named implementation specialist or are you on your own? Have you defined success criteria for each implementation phase with measurable thresholds? Is there a rollback plan if the pilot reveals fundamental mismatches? Do you have executive sponsorship for cross-departmental participation in training? Have you budgeted for 20% overhead above the vendor's timeline estimate? Is there a post-implementation support period included in your contract?",
+      "type": "checklist"
     }
   ],
   "author": "StackPilot Team",

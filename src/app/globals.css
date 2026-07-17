@@ -72,21 +72,21 @@
   --secondary-light: #22C1E5;
   --secondary-subtle: #E6F9FE;
 
-  --accent: #D97706;
-  --accent-dark: #B45D03;
+  --accent: #B45309;
+  --accent-dark: #92400E;
   --accent-subtle: #FEF3E7;
 
   --success: #059669;
   --success-subtle: #E7F9F2;
-  --warning: #D97706;
+  --warning: #B45309;
   --warning-subtle: #FEF3E7;
-  --error: #DC2626;
+  --error: #B91C1C;
   --error-subtle: #FEE7E7;
-  --info: #0284C7;
+  --info: #0369A1;
   --info-subtle: #E6F5FE;
 
   --muted: #6A7283;
-  --muted-foreground: #8A93A6;
+  --muted-foreground: #64748B;
   --muted-bg: #F2F4F8;
 
   --surface: #FFFFFF;
@@ -130,7 +130,7 @@
     --info-subtle: rgba(56, 189, 248, 0.10);
 
     --muted: #8A93A6;
-    --muted-foreground: #6A7283;
+    --muted-foreground: #94A3B8;
     --muted-bg: #131825;
 
     --surface: #0B0F1A;
@@ -636,4 +636,29 @@ h1, h2, h3, h4, h5, h6 {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* ── Print Styles ── */
+
+@media print {
+  header, footer, nav, .mobile-nav, [role="navigation"], [aria-label="Breadcrumb"],
+  .reading-progress, .toast-container, .skip-to-content, .trust-badge,
+  .newsletter-form, [class*="BrandPattern"], [class*="BrandOrb"] {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  a {
+    text-decoration: underline;
+    color: inherit;
+  }
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+  }
+  .gradient-text {
+    -webkit-text-fill-color: initial;
+    color: black;
+  }
 }

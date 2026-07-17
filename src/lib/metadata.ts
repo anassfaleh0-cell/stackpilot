@@ -5,20 +5,26 @@ export function createMetadata({
   description,
   path,
   ogImage,
+  ogImageAlt,
   noIndex = false,
   ogType,
   publishedAt,
+  articleTags,
+  articleSection,
 }: {
   title: string
   description: string
   path?: string
   ogImage?: string
+  ogImageAlt?: string
   noIndex?: boolean
   ogType?: "website" | "article"
   publishedAt?: string
+  articleTags?: string[]
+  articleSection?: string
 }) {
   const url = path ? `${site.url}${path}` : site.url
-  const image = ogImage || `${site.url}/og.png`
+  const imageUrl = ogImage || `${site.url}/og.svg`
   const isArticle = ogType === "article"
 
   const fullTitle = `${title} | ${site.name}`
@@ -36,13 +42,17 @@ export function createMetadata({
       type: isArticle ? "article" : "website",
       ...(isArticle && publishedAt ? { publishedTime: publishedAt } : {}),
       ...(isArticle ? { authors: ["StackPilot Team"] } : {}),
-      images: [{ url: image, width: 1200, height: 630 }],
+      ...(isArticle && articleTags ? { tags: articleTags } : {}),
+      ...(isArticle && articleSection ? { section: articleSection } : {}),
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: ogImageAlt || `${title} | ${site.name}` }],
     },
     twitter: {
       card: "summary_large_image" as const,
+      site: "@stackpilot",
+      creator: "@stackpilot",
       title: fullTitle,
       description,
-      images: [image],
+      images: [imageUrl],
     },
     robots: {
       index: !noIndex,

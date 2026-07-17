@@ -53,7 +53,7 @@ export function EditorialRatingVisual({ ratings, slug, category, className = "" 
               <span className="text-muted">{r.label}</span>
               <span className="font-medium" style={{ color: p.primary }}>{r.score}/5</span>
             </div>
-            <div className="h-1 rounded-full overflow-hidden" style={{ backgroundColor: p.subtle1 }}>
+            <div className="h-1 rounded-full overflow-hidden" style={{ backgroundColor: p.subtle1 }} role="progressbar" aria-valuenow={Math.round((r.score / 5) * 100)} aria-valuemin={0} aria-valuemax={100} aria-label={`${r.label} rating`}>
               <div className="h-full rounded-full transition-all" style={{ width: `${(r.score / 5) * 100}%`, backgroundColor: p.primary }} />
             </div>
           </div>

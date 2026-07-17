@@ -39,7 +39,7 @@ export function EditorialFeatureMatrix({ features, slug, category, className = "
             <div className="divide-y" style={{ borderColor: p.glassBorder }}>
               {group.items.map((f) => (
                 <div key={f.name} className="flex items-center gap-3 px-5 py-3 hover:opacity-80 transition-opacity">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={f.available ? p.primary : "#94A3B8"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={f.available ? p.primary : "var(--muted-foreground)"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
                     {f.available ? (
                       <>
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
@@ -56,8 +56,8 @@ export function EditorialFeatureMatrix({ features, slug, category, className = "
                   <span
                     className="text-xs font-medium px-2 py-0.5 rounded-full"
                     style={{
-                      color: f.available ? p.primary : "#94A3B8",
-                      backgroundColor: f.available ? p.glassBg : "rgba(148,163,184,0.1)",
+                      color: f.available ? p.primary : "var(--muted-foreground)",
+                      backgroundColor: f.available ? p.glassBg : "color-mix(in srgb, var(--muted-foreground) 10%, transparent)",
                     }}
                   >
                     {f.available ? "Available" : "Add-on"}

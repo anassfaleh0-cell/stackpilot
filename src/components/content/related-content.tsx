@@ -1,13 +1,16 @@
 import Link from "next/link"
-import { Card, CardTitle, CardDescription } from "@/components/ui/card"
+import { Card, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Star, ArrowRight } from "lucide-react"
-import type { ReviewContent, ComparisonContent, GuideContent, GlossaryContent, BlogContent } from "@/types/content"
+import { ArrowRight } from "lucide-react"
 
-type ContentItem = ReviewContent | ComparisonContent | GuideContent | GlossaryContent | BlogContent
+interface RelatedItem {
+  slug: string
+  type: string
+  title?: string
+}
 
 interface RelatedContentProps {
-  items: { slug: string; type: string }[]
+  items: RelatedItem[]
   title?: string
   maxItems?: number
 }
@@ -27,7 +30,7 @@ export function RelatedContent({ items, title = "Related Resources", maxItems = 
   )
 }
 
-function RelatedCard({ item }: { item: { slug: string; type: string } }) {
+function RelatedCard({ item }: { item: RelatedItem }) {
   const href = `/${item.type === "review" ? "reviews" : item.type === "blog" ? "blog" : `${item.type}s`}/${item.slug}`
 
   return (
@@ -37,9 +40,9 @@ function RelatedCard({ item }: { item: { slug: string; type: string } }) {
           <Badge variant="secondary" className="text-xs capitalize">{item.type}</Badge>
         </div>
         <CardTitle className="text-sm group-hover:text-primary transition-colors capitalize">
-          {item.slug.replace(/-/g, " ")}
+          {item.title || item.slug.replace(/-/g, " ")}
         </CardTitle>
-        <div className="mt-2 flex items-center text-xs text-primary gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="mt-2 flex items-center text-xs text-primary gap-1">
           Read more <ArrowRight size={12} />
         </div>
       </Card>

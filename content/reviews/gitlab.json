@@ -6,6 +6,7 @@
   "category": "Developer Tools",
   "website": "https://gitlab.com",
   "pricing": "Freemium",
+  "priceRange": "Free – $29/mo per user",
   "rating": 4.5,
   "reviewCount": 12000,
   "pros": [
@@ -57,7 +58,10 @@
       "Compliance pipelines enforce regulatory controls by running separate pipeline configurations on protected branches, ensuring that code merged to production passes additional security and compliance gates",
       "Value Stream Analytics measures cycle time, lead time, and throughput from idea to production, helping engineering leaders identify bottlenecks without integrating separate analytics tools"
     ]},
-    {"title": "Who should avoid it?", "body": "Teams that value ecosystem breadth and community scale over platform integration should choose GitHub, which offers a larger marketplace, more third-party integrations, and a larger developer community. Organizations that are happy with their existing CI/CD tool (Jenkins, CircleCI, GitHub Actions) and only need Git hosting will find GitLab's integrated approach adds complexity without proportional benefit. Small teams with limited DevOps expertise may struggle with the operational overhead of self-managed instances, and even the SaaS version requires understanding of GitLab's extensive configuration model to use effectively.", "type": "text"}
+    {"title": "Who should avoid it?", "body": "Teams that value ecosystem breadth and community scale over platform integration should choose GitHub, which offers a larger marketplace, more third-party integrations, and a larger developer community. Organizations that are happy with their existing CI/CD tool (Jenkins, CircleCI, GitHub Actions) and only need Git hosting will find GitLab's integrated approach adds complexity without proportional benefit. Small teams with limited DevOps expertise may struggle with the operational overhead of self-managed instances, and even the SaaS version requires understanding of GitLab's extensive configuration model to use effectively.", "type": "text"},
+    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
+    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
+    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
   ],
   "faqs": [
     {"question": "What is GitLab best used for?", "answer": "GitLab excels as a single-platform DevOps solution for organizations that want to replace disparate toolchains with an integrated system covering repositories, CI/CD, security scanning, package management, and deployment. It is particularly well-suited for regulated industries that need on-premises deployment, compliance pipelines, and full auditability of the software development lifecycle."},

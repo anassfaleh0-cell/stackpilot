@@ -6,6 +6,7 @@
   "category": "Analytics & Data",
   "website": "https://mixpanel.com",
   "pricing": "Freemium",
+  "priceRange": "Free – custom",
   "rating": 4.4,
   "reviewCount": 3400,
   "pros": [
@@ -55,7 +56,10 @@
       "Signal AI identifies statistically significant behavioral changes — like a sudden drop in DAU or surge in error events — without manual dashboard configuration",
       "A/B test analysis ties experiment variants directly to retention and conversion metrics, calculating statistical significance without requiring a separate experimentation platform"
     ]},
-    {"title": "Who should avoid it?", "body": "Marketing teams that primarily need acquisition analytics, SEO reporting, and campaign attribution should use Google Analytics, which provides these capabilities out of the box with minimal setup. Small startups on a tight budget may find the free tier's 20 million monthly event limit restrictive once they achieve meaningful traction. Organizations that lack engineering bandwidth to instrument custom event tracking will struggle with Mixpanel's implementation requirements. Companies that already use Amplitude or Heap for product analytics and are satisfied with their current platform may not find Mixpanel's feature set differentiated enough to justify migration costs.", "type": "text"}
+    {"title": "Who should avoid it?", "body": "Marketing teams that primarily need acquisition analytics, SEO reporting, and campaign attribution should use Google Analytics, which provides these capabilities out of the box with minimal setup. Small startups on a tight budget may find the free tier's 20 million monthly event limit restrictive once they achieve meaningful traction. Organizations that lack engineering bandwidth to instrument custom event tracking will struggle with Mixpanel's implementation requirements. Companies that already use Amplitude or Heap for product analytics and are satisfied with their current platform may not find Mixpanel's feature set differentiated enough to justify migration costs.", "type": "text"},
+    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
+    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
+    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
   ],
   "faqs": [
     {"question": "What is Mixpanel best used for?", "answer": "Mixpanel is best used for product analytics — understanding how users interact with a digital product through event tracking, funnel analysis, retention cohorts, and behavioral segmentation. It answers questions like 'which features drive the highest retention?' and 'where do users drop off in the onboarding flow?' with complete, unsampled data."},

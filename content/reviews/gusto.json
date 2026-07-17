@@ -6,6 +6,7 @@
   "category": "HR & People",
   "website": "https://gusto.com",
   "pricing": "Paid",
+  "priceRange": "$40/mo + $6/person",
   "rating": 4.5,
   "reviewCount": 5800,
   "pros": [
@@ -73,9 +74,12 @@
     },
     {
       "title": "Who should avoid it?",
-      "body": "Gusto is not the right fit for companies with more than 100 employees, as its per-person pricing becomes significantly more expensive than enterprise competitors like ADP or Paychex at scale. It also does not support international payroll, so any business with remote employees based outside the US will need a separate solution, adding complexity and cost. Companies that need advanced HR features like performance management, learning management, or detailed succession planning should look at BambooHR or Rippling, as Gusto's HR tools beyond payroll and benefits are relatively basic. New users should expect a few hours of learning curve to become proficient.",
+      "body": "Gusto is not the right fit for companies with more than 100 employees, as its per-person pricing becomes significantly more expensive than enterprise competitors like ADP or Paychex at scale. It also does not support international payroll, so any business with remote employees based outside the US will need a separate solution, adding complexity and cost. Companies that need advanced HR features like performance management, learning management, or detailed succession planning should look at BambooHR or Rippling, as Gusto's HR tools beyond payroll and benefits are relatively basic. First-time payroll runs require careful setup of employee profiles and tax settings, but ongoing payroll processing takes only minutes each cycle.",
       "type": "text"
-    }
+    },
+    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
+    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
+    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
   ],
   "faqs": [
     {

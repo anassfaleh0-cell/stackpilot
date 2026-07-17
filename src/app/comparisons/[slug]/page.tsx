@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, FAQSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
-import { getComparison } from "@/lib/content/registry"
+import { getComparison, getContentTitle } from "@/lib/content/registry"
 import { getAllComparisons } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -198,9 +198,9 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
 
           <RelatedContent
             items={[
-              ...(cmp.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const })),
-              ...(cmp.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const })),
-              ...(cmp.relatedPosts || []).map(s => ({ slug: s, type: "blog" as const })),
+              ...(cmp.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
+              ...(cmp.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
+              ...(cmp.relatedPosts || []).map(s => ({ slug: s, type: "blog" as const, title: getContentTitle("blog", s) ?? undefined })),
             ]}
             title="Related Resources"
           />

@@ -20,6 +20,8 @@ const staticPages = [
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticPages,
+    { url: `${siteConfig.url}/rss.xml`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.3 },
+    { url: `${siteConfig.url}/methodology`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.5 },
     ...categories.map((cat) => ({
       url: `${siteConfig.url}/category/${cat.slug}`,
       lastModified: new Date(),
@@ -28,25 +30,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...getAllReviews().map((r) => ({
       url: `${siteConfig.url}/reviews/${r.slug}`,
-      lastModified: new Date(),
+      lastModified: new Date(r.lastReviewed),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     })),
     ...getAllComparisons().map((c) => ({
       url: `${siteConfig.url}/comparisons/${c.slug}`,
-      lastModified: new Date(),
+      lastModified: new Date(c.lastUpdated),
       changeFrequency: "weekly" as const,
       priority: 0.7,
     })),
     ...getAllGuides().map((g) => ({
       url: `${siteConfig.url}/guides/${g.slug}`,
-      lastModified: new Date(),
+      lastModified: new Date(g.lastUpdated),
       changeFrequency: "weekly" as const,
       priority: 0.7,
     })),
     ...getAllBlogPosts().map((p) => ({
       url: `${siteConfig.url}/blog/${p.slug}`,
-      lastModified: new Date(),
+      lastModified: new Date(p.publishedAt),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),

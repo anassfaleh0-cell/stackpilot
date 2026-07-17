@@ -52,8 +52,8 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             key={toast.id}
             className={cn(
               "flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg text-sm font-medium animate-fade-in",
-              toast.type === "success" && "bg-emerald-600 text-white",
-              toast.type === "error" && "bg-red-600 text-white",
+              toast.type === "success" && "bg-success text-white",
+              toast.type === "error" && "bg-error text-white",
               toast.type === "info" && "bg-foreground text-background"
             )}
             role="status"
@@ -61,7 +61,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             <span className="flex-1">{toast.message}</span>
             <button
               onClick={() => removeToast(toast.id)}
-              className="p-0.5 hover:opacity-70 transition-opacity"
+              className="p-0.5 hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded transition-all duration-200"
               aria-label="Dismiss notification"
             >
               <X size={14} />

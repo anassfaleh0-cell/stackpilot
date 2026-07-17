@@ -6,6 +6,7 @@
   "category": "Project Management",
   "website": "https://asana.com",
   "pricing": "Freemium",
+  "priceRange": "Free – $24.99/mo per user",
   "rating": 4.5,
   "reviewCount": 16200,
   "pros": [
@@ -60,7 +61,10 @@
     {"title": "Who should avoid it?", "body": "Freelancers and solo professionals will find Asana over-engineered for their needs, with most valuable features locked behind paid tiers. Teams that rely heavily on agile methodologies like Scrum may prefer Jira's sprint-oriented tools. Organizations with strict offline requirements will struggle, as Asana has no functional offline mode and becomes read-only without an internet connection.", "type": "text"},
     {"title": "Common Mistakes", "body": "Over-building project structures is the most common Asana pitfall. Teams create dozens of custom fields, sections, and tags before running a single project, resulting in a system too complex for daily use. Start with Asana's default project templates and add customizations only when your team explicitly requests them. Notification fatigue is another widespread issue — configure workspace-level notification defaults to summarize daily updates rather than sending real-time alerts for every task change. Without this, team members quickly ignore Asana notifications entirely.", "type": "warning"},
     {"title": "Onboarding Advice", "body": "When bringing a team onto Asana, start with a single project rather than migrating all work at once. Choose a real active project with clear deliverables and ask the project lead to manage it in Asana for two weeks. Record the team's feedback on fields, views, and workflows before expanding to additional projects. Assign a workspace admin to manage templates and permissions from day one — scattered permission settings are the leading cause of Asana adoption friction in mid-size teams.", "type": "text"},
-    {"title": "Security Considerations", "body": "Asana offers SAML-based SSO on Business and Enterprise plans, which should be configured before inviting users beyond your initial team. Enable domain-level guest access restrictions to prevent external collaborators from accessing sensitive projects. Run a quarterly audit of third-party app connections via the Integrations Hub to revoke access for unused or deprecated integrations, particularly those with write permissions to your workspace.", "type": "text"}
+    {"title": "Security Considerations", "body": "Asana offers SAML-based SSO on Business and Enterprise plans, which should be configured before inviting users beyond your initial team. Enable domain-level guest access restrictions to prevent external collaborators from accessing sensitive projects. Run a quarterly audit of third-party app connections via the Integrations Hub to revoke access for unused or deprecated integrations, particularly those with write permissions to your workspace.", "type": "text"},
+    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
+    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
+    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
   ],
   "faqs": [
     {"question": "What is Asana best used for?", "answer": "Asana is best used for coordinating cross-functional projects that involve multiple teams, dependencies, and deadlines. It excels at marketing campaign launches, product development cycles, event planning, and operational workflows. Its Timeline and Workload features make it particularly strong for resource planning and visualizing how each task fits into the broader project schedule."},

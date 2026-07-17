@@ -2,7 +2,8 @@ import { Container, Section, SectionHeader } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/components/seo/json-ld"
+import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllGuides } from "@/lib/content/registry"
 import Link from "next/link"
@@ -11,7 +12,7 @@ import { BrandPattern } from "@/components/brand/patterns"
 
 export const metadata = createMetadata({
   title: "Software Guides",
-  description: "Comprehensive guides to help you choose, implement, and optimize software tools for your business.",
+  description: "Comprehensive software buying guides, implementation tutorials, and best practices to help businesses choose, deploy, and optimize the right tools across every category.",
   path: "/guides",
 })
 
@@ -20,6 +21,8 @@ export default function GuidesPage() {
 
   return (
     <>
+      <CollectionPageSchema name="Expert Guides" description="Comprehensive software buying guides and implementation tutorials" url={`${site.url}/guides`} />
+      <ItemListSchema items={guides.map(g => ({ name: g.title, url: `${site.url}/guides/${g.slug}` }))} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Guides", href: "/guides" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Guides" }]} />
@@ -40,6 +43,7 @@ export default function GuidesPage() {
 
       <Section>
         <Container>
+          {guides.length > 0 ? (
           <div className="grid sm:grid-cols-2 gap-6">
             {guides.map((guide) => (
               <Link key={guide.slug} href={`/guides/${guide.slug}`} className="group card-hover">
@@ -64,6 +68,9 @@ export default function GuidesPage() {
               </Link>
             ))}
           </div>
+          ) : (
+            <p className="text-center text-muted-foreground py-12">No guides available yet. Check back soon.</p>
+          )}
         </Container>
       </Section>
     </>

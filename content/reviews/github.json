@@ -6,11 +6,12 @@
   "category": "Developer Tools",
   "website": "https://github.com",
   "pricing": "Freemium",
+  "priceRange": "Free – $19.25/mo per user",
   "rating": 4.7,
   "reviewCount": 28000,
   "pros": [
     "Unmatched community with over 100 million developers and 200 million repositories, making it the default destination for open-source collaboration",
-    "GitHub Actions provides powerful built-in CI/CD with thousands of pre-built workflows and deep ecosystem integration",
+    "GitHub Actions provides comprehensive built-in CI/CD with thousands of pre-built workflows and deep ecosystem integration",
     "Pull request workflow with inline code review, suggested changes, and status checks enforces rigorous code quality gates",
     "Extensive ecosystem including GitHub Pages, Packages, Copilot, Discussions, and Projects creates a unified developer platform",
     "Enterprise-grade security with Dependabot, secret scanning, code scanning, and SBOM management built directly into the workflow"
@@ -73,9 +74,12 @@
     },
     {
       "title": "Who should avoid it?",
-      "body": "Teams that need on-premises version control with no cloud dependency may prefer self-hosted GitLab or Bitbucket Data Center, as GitHub's self-hosted option requires GitHub Enterprise Server and still phones home for licensing. Organizations with very large monorepos exceeding 10GB may find performance sluggish compared to purpose-built solutions. Teams that want tightly integrated CI/CD without leaving their code host will find GitHub Actions powerful, but those already invested in Jenkins or CircleCI may face migration friction.",
+      "body": "Teams that need on-premises version control with no cloud dependency may prefer self-hosted GitLab or Bitbucket Data Center, as GitHub's self-hosted option requires GitHub Enterprise Server and still phones home for licensing. Organizations with very large monorepos exceeding 10GB may find performance sluggish compared to purpose-built solutions. Teams that want tightly integrated CI/CD without leaving their code host will find GitHub Actions capable, but those already invested in Jenkins or CircleCI may face migration friction.",
       "type": "text"
-    }
+    },
+    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
+    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
+    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
   ],
   "faqs": [
     {

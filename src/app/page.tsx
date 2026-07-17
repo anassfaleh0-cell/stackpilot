@@ -1,3 +1,4 @@
+import { createMetadata } from "@/lib/metadata"
 import Link from "next/link"
 import { Container, Section } from "@/components/ui/container"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
@@ -7,6 +8,12 @@ import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts } from 
 import { ArrowRight, Star, BarChart3, Shield, Zap, Compass, ExternalLink } from "lucide-react"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { BrandPattern, BrandOrb, BrandDivider } from "@/components/brand/patterns"
+
+export const metadata = createMetadata({
+  title: "Software Reviews, Comparisons & Buying Guides",
+  description: "In-depth software reviews, expert comparisons, and actionable buying guides to help businesses choose, implement, and optimize the right tools for every need.",
+  path: "/",
+})
 
 const stats = [
   { value: "1,200+", label: "Software Reviews" },
@@ -329,7 +336,7 @@ export default function HomePage() {
                 placeholder="Enter your email"
                 autoComplete="email"
                 aria-label="Email address for newsletter"
-                className="flex-1 h-12 px-4 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
+                className="flex-1 h-12 px-4 rounded-xl border border-border bg-background text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-primary transition-all duration-200"
                 required
               />
               <button

@@ -6,6 +6,7 @@
   "category": "Developer Tools",
   "website": "https://docker.com",
   "pricing": "Freemium",
+  "priceRange": "Free – $15/mo per user",
   "rating": 4.6,
   "reviewCount": 18000,
   "pros": [
@@ -57,7 +58,10 @@
       "Docker Hub provides access to 10M+ container images including official images for PostgreSQL, MySQL, Nginx, Redis, MongoDB, Node.js, Python, Go, and Ubuntu, eliminating manual software installation",
       "Resource limits via --cpus and --memory flags prevent any single container from consuming all host resources, enabling dense multi-tenant hosting with predictable performance"
     ]},
-    {"title": "Who should avoid it?", "body": "Teams running stateful database workloads in production should pair Docker with Kubernetes or use managed database services, as Docker alone does not provide the persistence guarantees databases require. Organizations with fewer than five developers and simple deployment pipelines may find Docker adds unnecessary complexity — deploying via traditional package managers or platform-as-a-service (Heroku, Railway) may be simpler. Teams that have already standardized on Kubernetes may interact directly with Podman, containerd, or other OCI-compatible runtimes and use Docker primarily for local image building rather than runtime.", "type": "text"}
+    {"title": "Who should avoid it?", "body": "Teams running stateful database workloads in production should pair Docker with Kubernetes or use managed database services, as Docker alone does not provide the persistence guarantees databases require. Organizations with fewer than five developers and simple deployment pipelines may find Docker adds unnecessary complexity — deploying via traditional package managers or platform-as-a-service (Heroku, Railway) may be simpler. Teams that have already standardized on Kubernetes may interact directly with Podman, containerd, or other OCI-compatible runtimes and use Docker primarily for local image building rather than runtime.", "type": "text"},
+    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
+    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
+    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
   ],
   "faqs": [
     {"question": "What is Docker best used for?", "answer": "Docker is best used for creating reproducible application environments that work identically across development, testing, and production. Its primary use cases include local development environments, CI/CD pipeline jobs, microservices deployment, and packaging applications for distribution through container registries. Docker Compose is particularly valuable for running full application stacks locally."},

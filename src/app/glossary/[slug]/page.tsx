@@ -3,11 +3,11 @@ import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, DefinedTermSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
-import { getGlossaryTerm } from "@/lib/content/registry"
-import { getAllGlossaryTerms } from "@/lib/content/registry"
+import { getGlossaryTerm, getAllGlossaryTerms, getAllReviews, getAllGuides, getAllComparisons, getAllBlogPosts } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { EditorialHero, EditorialConcept, EditorialCallout, GlassCard, InfoCard, getPalette } from "@/components/editorial"
+import { RelatedContent } from "@/components/content/related-content"
 
 export function generateStaticParams() {
   return getAllGlossaryTerms().map((t) => ({ slug: t.slug }))
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const item = getGlossaryTerm(slug)
   if (!item) return {}
-  return createMetadata({ title: item.term, description: item.definition, path: `/glossary/${slug}`, ogType: "article" })
+  return createMetadata({ title: item.term, description: item.definition, path: `/glossary/${slug}`, ogType: "article", articleTags: [item.category] })
 }
 
 export default async function GlossaryTermPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -52,7 +52,6 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
         <Container>
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">{item.category}</Badge>
-            <h1 className="text-4xl font-bold tracking-tight mb-4">{item.term}</h1>
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">{item.definition}</p>
 
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
@@ -97,6 +96,23 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
                 </div>
               </div>
             )}
+
+            {/* Same-category content links */}
+            {(() => {
+              const reviews = getAllReviews().filter(r => r.category === item.category)
+              const guides = getAllGuides().filter(g => g.category === item.category)
+              const comparisons = getAllComparisons().filter(c => c.category === item.category)
+              const posts = getAllBlogPosts().filter(p => p.category === item.category)
+              const relatedItems = [
+                ...reviews.map(r => ({ slug: r.slug, type: "review" as const, title: r.name })),
+                ...guides.map(g => ({ slug: g.slug, type: "guide" as const })),
+                ...comparisons.map(c => ({ slug: c.slug, type: "comparison" as const })),
+                ...posts.map(p => ({ slug: p.slug, type: "blog" as const })),
+              ].filter(r => r.slug !== slug)
+              return relatedItems.length > 0 ? (
+                <RelatedContent items={relatedItems.slice(0, 6)} title={`Related ${item.category} Content`} maxItems={6} />
+              ) : null
+            })()}
 
             {item.relatedTerms.length > 0 && (
               <div className="mt-12 pt-8 border-t border-border">

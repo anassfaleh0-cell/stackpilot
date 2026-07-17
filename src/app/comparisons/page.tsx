@@ -2,7 +2,8 @@ import { Container, Section, SectionHeader } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/components/seo/json-ld"
+import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllComparisons } from "@/lib/content/registry"
 import Link from "next/link"
@@ -20,6 +21,8 @@ export default function ComparisonsPage() {
 
   return (
     <>
+      <CollectionPageSchema name="Software Comparisons" description="Side-by-side comparisons of the most popular software tools" url={`${site.url}/comparisons`} />
+      <ItemListSchema items={comparisons.map(c => ({ name: c.title, url: `${site.url}/comparisons/${c.slug}` }))} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Comparisons", href: "/comparisons" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Comparisons" }]} />
@@ -40,6 +43,7 @@ export default function ComparisonsPage() {
 
       <Section>
         <Container>
+          {comparisons.length > 0 ? (
           <div className="grid sm:grid-cols-2 gap-6">
             {comparisons.map((cmp) => (
               <Link key={cmp.slug} href={`/comparisons/${cmp.slug}`} className="group card-hover">
@@ -63,6 +67,9 @@ export default function ComparisonsPage() {
               </Link>
             ))}
           </div>
+          ) : (
+            <p className="text-center text-muted-foreground py-12">No comparisons available yet. Check back soon.</p>
+          )}
         </Container>
       </Section>
     </>

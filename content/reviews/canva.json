@@ -6,6 +6,7 @@
   "category": "Design & Creative",
   "website": "https://www.canva.com",
   "pricing": "Freemium",
+  "priceRange": "Free – $12.99/mo",
   "rating": 4.6,
   "reviewCount": 32000,
   "pros": [
@@ -50,7 +51,7 @@
   "content": [
     {
       "title": "Overview",
-      "body": "Canva has fundamentally changed the graphic design landscape by making professional visual creation accessible to anyone with a web browser. Since its launch in 2013, the platform has grown to serve over 100 million monthly active users, from solo entrepreneurs creating social media posts to enterprise teams managing thousands of on-brand assets. Unlike traditional design software that requires months of training, Canva wraps powerful design capabilities in a deceptively simple interface that feels more like a presentation tool than a professional design suite. The platform covers the full creative lifecycle from ideation and template selection through collaboration, refinement, and publishing across digital and print channels. Canva maintains SOC 2 compliance and encrypts all design assets and user data in transit and at rest.",
+      "body": "Canva has fundamentally changed the graphic design landscape by making professional visual creation accessible to anyone with a web browser. Since its launch in 2013, the platform has grown to serve over 100 million monthly active users, from solo entrepreneurs creating social media posts to enterprise teams managing thousands of on-brand assets. Unlike traditional design software that requires months of training, Canva wraps extensive design capabilities in a deceptively simple interface that feels more like a presentation tool than a professional design suite. The platform covers the full creative lifecycle from ideation and template selection through collaboration, refinement, and publishing across digital and print channels. Canva maintains SOC 2 compliance and encrypts all design assets and user data in transit and at rest.",
       "type": "text"
     },
     {
@@ -73,9 +74,12 @@
     },
     {
       "title": "Who should avoid it?",
-      "body": "Professional graphic designers and illustrators who need precise vector control, advanced typography features, or robust photo manipulation capabilities will find Canva frustratingly limited. The platform deliberately abstracts away fine-grained controls in favor of simplicity, making it unsuitable for complex print production work like multi-page magazine layouts or packaging design. Organizations that require offline access or have strict data sovereignty requirements may also struggle, as Canva is cloud-only with limited offline capabilities on mobile. New users should expect a few hours of learning curve to become proficient. Migrating from Adobe Creative Cloud involves more than learning new tools — Canva cannot replicate Illustrator's vector engine, Photoshop's layer system, or InDesign's typesetting, so teams should identify which workflows can move fully to Canva and which require keeping professional design tools alongside it.",
+      "body": "Professional graphic designers and illustrators who need precise vector control, advanced typography features, or advanced photo manipulation capabilities will find Canva frustratingly limited. The platform deliberately abstracts away fine-grained controls in favor of simplicity, making it unsuitable for complex print production work like multi-page magazine layouts or packaging design. Organizations that require offline access or have strict data sovereignty requirements may also struggle, as Canva is cloud-only with limited offline capabilities on mobile. Most new users become productive within their first session, though mastering advanced features like brand kits and templates requires a few hours of exploration. Migrating from Adobe Creative Cloud involves more than learning new tools — Canva cannot replicate Illustrator's vector engine, Photoshop's layer system, or InDesign's typesetting, so teams should identify which workflows can move fully to Canva and which require keeping professional design tools alongside it.",
       "type": "text"
-    }
+    },
+    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
+    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
+    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
   ],
   "faqs": [
     {

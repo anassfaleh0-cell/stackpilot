@@ -6,6 +6,7 @@
   "category": "Communication",
   "website": "https://zoom.us",
   "pricing": "Freemium",
+  "priceRange": "Free – $22.99/mo per host",
   "rating": 4.5,
   "reviewCount": 45000,
   "pros": [
@@ -57,7 +58,10 @@
       "Zoom Phone provides a cloud PBX replacement with local numbers in 70+ countries, auto attendant menus, call queues, and voicemail transcription integrated into the Zoom desktop client",
       "End-to-end encryption (E2EE) using 256-bit AES-GCM is available for up to 200 participants per meeting, though it requires manual enablement per meeting rather than being default"
     ]},
-    {"title": "Who should avoid it?", "body": "Organizations with strict data sovereignty requirements should verify Zoom's data center locations and encryption architecture, as some government agencies have banned Zoom over data routing concerns. Teams that primarily need asynchronous communication with occasional video calls may find Microsoft Teams (included with Microsoft 365) more cost-effective than paying for Zoom separately. Users on older or low-powered hardware will experience battery drain and fan noise from Zoom's desktop client, and may prefer Google Meet which runs efficiently in a browser tab. Organizations already invested in the Google ecosystem may find Google Meet sufficient for their video calling needs without the additional cost of Zoom.", "type": "text"}
+    {"title": "Who should avoid it?", "body": "Organizations with strict data sovereignty requirements should verify Zoom's data center locations and encryption architecture, as some government agencies have banned Zoom over data routing concerns. Teams that primarily need asynchronous communication with occasional video calls may find Microsoft Teams (included with Microsoft 365) more cost-effective than paying for Zoom separately. Users on older or low-powered hardware will experience battery drain and fan noise from Zoom's desktop client, and may prefer Google Meet which runs efficiently in a browser tab. Organizations already invested in the Google ecosystem may find Google Meet sufficient for their video calling needs without the additional cost of Zoom.", "type": "text"},
+    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
+    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
+    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
   ],
   "faqs": [
     {"question": "What is Zoom best used for?", "answer": "Zoom is best used for reliable HD video conferencing across organizations of all sizes. Its specific strengths include large meetings (up to 1,000 participants), webinars with registration and reporting, and integrated conference room experiences through Zoom Rooms. The free tier is the most accessible high-quality video conferencing option for personal use and small teams."},

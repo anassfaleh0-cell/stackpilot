@@ -75,6 +75,17 @@ export function getAllBlogPosts(): BlogContent[] {
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
 }
 
+export function getContentTitle(type: string, slug: string): string | null {
+  switch (type) {
+    case "review": return getReview(slug)?.name ?? null
+    case "comparison": return getComparison(slug)?.title ?? null
+    case "guide": return getGuide(slug)?.title ?? null
+    case "blog": return getBlogPost(slug)?.title ?? null
+    case "glossary": return getGlossaryTerm(slug)?.term ?? null
+    default: return null
+  }
+}
+
 export function searchContent(query: string): {
   reviews: ReviewContent[]
   comparisons: ComparisonContent[]

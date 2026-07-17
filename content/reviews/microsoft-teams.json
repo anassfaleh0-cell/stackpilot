@@ -6,6 +6,7 @@
   "category": "Communication",
   "website": "https://microsoft.com/microsoft-teams",
   "pricing": "Freemium",
+  "priceRange": "Free – $12.50/mo per user",
   "rating": 4.3,
   "reviewCount": 52000,
   "pros": [
@@ -57,7 +58,10 @@
       "Power Apps and Power Automate integration lets organizations build custom business applications and approval workflows that run as tabs inside Teams without writing traditional application code",
       "Viva Insights provides personal productivity analytics showing how much time each employee spends in meetings, on focused work, and after hours, with nudges to improve meeting habits and protect personal time"
     ]},
-    {"title": "Who should avoid it?", "body": "Organizations using Google Workspace should not adopt Teams as their primary communication tool — the SharePoint and Outlook integration that makes Teams powerful for Microsoft 365 customers is absent, and the result is an inferior communication experience at additional cost. Small teams on older or resource-constrained hardware will struggle with Teams' memory footprint. Teams that prioritize speed and simplicity over deep integration will find Slack's channel model more intuitive and less resource-intensive. Organizations that need lightweight external collaboration with clients not on Microsoft 365 may find Slack Connect more seamless than Teams guest access.", "type": "text"}
+    {"title": "Who should avoid it?", "body": "Organizations using Google Workspace should not adopt Teams as their primary communication tool — the SharePoint and Outlook integration that makes Teams essential for Microsoft 365 customers is absent, and the result is an inferior communication experience at additional cost. Small teams on older or resource-constrained hardware will struggle with Teams' memory footprint. Teams that prioritize speed and simplicity over deep integration will find Slack's channel model more intuitive and less resource-intensive. Organizations that need lightweight external collaboration with clients not on Microsoft 365 may find Slack Connect more seamless than Teams guest access.", "type": "text"},
+    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
+    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
+    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
   ],
   "faqs": [
     {"question": "What is Microsoft Teams best used for?", "answer": "Microsoft Teams is best used for unified communication and collaboration within organizations that use Microsoft 365. Its core strength is combining team chat, video meetings, file collaboration, and cloud phone into a single platform where every document, message, and meeting is governed by Microsoft 365 compliance and security policies."},

@@ -74,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <head>
-        <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name} Blog`} href="/rss.xml" />
+        <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name}`} href="/rss.xml" />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ToastProvider>

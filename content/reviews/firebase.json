@@ -2,10 +2,11 @@
   "slug": "firebase",
   "name": "Firebase",
   "tagline": "Google-backed mobile and web app platform providing backend services without server management",
-  "description": "Firebase is Google's application development platform that provides backend infrastructure as managed services, eliminating the need for developers to build and operate servers. It includes a NoSQL document database (Firestore), user authentication, file storage, serverless functions, real-time data synchronization, and push notifications — all connected through a unified SDK. Firebase pioneered the BaaS (Backend-as-a-Service) model that Supabase and others have since extended, and its tight integration with Google Cloud and Google Analytics creates a powerful ecosystem for mobile and web applications.",
+  "description": "Firebase is Google's application development platform that provides backend infrastructure as managed services, eliminating the need for developers to build and operate servers. It includes a NoSQL document database (Firestore), user authentication, file storage, serverless functions, real-time data synchronization, and push notifications — all connected through a unified SDK. Firebase pioneered the BaaS (Backend-as-a-Service) model that Supabase and others have since extended, and its tight integration with Google Cloud and Google Analytics creates a comprehensive ecosystem for mobile and web applications.",
   "category": "Developer Tools",
   "website": "https://firebase.google.com",
   "pricing": "Freemium",
+  "priceRange": "Free – pay-as-you-go",
   "rating": 4.3,
   "reviewCount": 15000,
   "pros": [
@@ -50,14 +51,17 @@
   "content": [
     {"title": "Overview", "body": "Firebase is the platform that made serverless application development accessible to frontend developers. Before Firebase, building a mobile or web app with authentication, a database, file uploads, and push notifications required backend server setup, API development, database administration, and DevOps. Firebase packages these services as SDK calls that run entirely on the client, with Google managing the infrastructure. The platform excels at prototyping and MVP development where speed matters more than data model complexity. Its real-time Firestore database remains one of the easiest ways to build live-updating applications like chat, collaborative editing, or live dashboards. Google's acquisition of Firebase in 2014 has led to increasing integration with Google Cloud, though the platform still maintains its own console and development experience.", "type": "text"},
     {"title": "Who is it for?", "body": "Firebase is ideal for mobile app developers, indie makers, and startups that need to go from idea to working prototype in days rather than weeks. Its real-time database is perfect for collaborative applications, messaging products, and live dashboards. Frontend developers who want to avoid backend infrastructure entirely can build complete production applications using only Firebase SDKs. Enterprise teams building internal tools benefit from Firebase's quick setup. Applications with complex relational data, advanced search requirements, or custom analytics needs will find Firebase's NoSQL model constraining and should evaluate Supabase or a traditional backend.", "type": "text"},
-    {"title": "Key Features", "body": "Firebase provides a complete backend-as-a-service platform where each product works independently but integrates more powerfully when used together. The following capabilities form the core of the Firebase development experience.", "type": "list", "items": [
+    {"title": "Key Features", "body": "Firebase provides a complete backend-as-a-service platform where each product works independently but integrates more deeply when used together. The following capabilities form the core of the Firebase development experience.", "type": "list", "items": [
       "Firestore synchronizes data in real-time across all connected clients through WebSocket listeners, so a document update by one user immediately appears on every other user's screen without polling",
       "Security Rules provide declarative access control written in a JavaScript-like expression language, enforcing per-document, per-field, and per-user permissions at the database layer with no application code required",
       "Remote Config lets development teams change app behavior — feature flags, UI text, API endpoints — without publishing app store updates, enabling progressive rollouts and dark launches",
       "Cloud Functions automatically trigger on database writes, auth events, and file uploads, running backend code in a Node.js or Python environment with no server management or scaling configuration",
       "Emulator Suite enables full offline development with local Firestore, Auth, Functions, and Storage emulators that support hot reloading, making development loops fast and avoiding cloud costs during iteration"
     ]},
-    {"title": "Who should avoid it?", "body": "Applications that require relational data modeling, SQL queries with JOINs, aggregate functions, or complex reporting should choose Supabase or a traditional backend instead of Firebase. Organizations concerned about Google Cloud vendor lock-in must plan for the significant migration effort required to move off Firebase. Teams that need PostgreSQL, full-text search, or row-level security with SQL will find Supabase's approach more aligned with traditional database practices. Applications handling complex transactional operations should test Firestore's eventual consistency model against their requirements before committing to the platform.", "type": "text"}
+    {"title": "Who should avoid it?", "body": "Applications that require relational data modeling, SQL queries with JOINs, aggregate functions, or complex reporting should choose Supabase or a traditional backend instead of Firebase. Organizations concerned about Google Cloud vendor lock-in must plan for the significant migration effort required to move off Firebase. Teams that need PostgreSQL, full-text search, or row-level security with SQL will find Supabase's approach more aligned with traditional database practices. Applications handling complex transactional operations should test Firestore's eventual consistency model against their requirements before committing to the platform.", "type": "text"},
+    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
+    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
+    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
   ],
   "faqs": [
     {"question": "What is Firebase best used for?", "answer": "Firebase is best used for rapid application development where speed to market matters more than data model flexibility. It excels at MVPs, mobile apps, real-time collaborative features, and applications where authentication, file storage, push notifications, and a real-time database are needed without backend engineering overhead."},
@@ -68,6 +72,7 @@
   "alternatives": ["supabase"],
   "relatedComparisons": ["supabase-vs-firebase"],
   "relatedGuides": ["developer-tools-stack-guide", "software-evaluation-checklist"],
+  "relatedPosts": ["best-developer-tools-2026", "frontend-deployment-platforms-comparison"],
   "lastReviewed": "2026-07-16",
   "author": "StackPilot Team"
 }

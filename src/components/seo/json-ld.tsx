@@ -160,6 +160,20 @@ export function FAQSchema({ questions }: { questions: { question: string; answer
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} key="ld-faq" />
 }
 
+export function ItemListSchema({ items }: { items: { name: string; url: string }[] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      url: item.url,
+    })),
+  }
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} key="ld-item-list" />
+}
+
 export function HowToSchema({ name, description, steps }: { name: string; description: string; steps: { name: string; text: string }[] }) {
   const schema = {
     "@context": "https://schema.org",

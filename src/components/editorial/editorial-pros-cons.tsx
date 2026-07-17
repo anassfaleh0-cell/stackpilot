@@ -25,10 +25,10 @@ export function EditorialProsCons({ pros, cons, slug, className = "" }: Editoria
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M20 6L9 17l-5-5" />
             </svg>
-            <span className="font-semibold text-success">Pros</span>
+            <h3 className="font-semibold text-success text-sm">Pros</h3>
             <span className="text-xs ml-auto font-medium text-success">{proPct}%</span>
           </div>
-          <div className="h-1.5 rounded-full mb-4 overflow-hidden bg-success-subtle">
+          <div className="h-1.5 rounded-full mb-4 overflow-hidden bg-success-subtle" role="progressbar" aria-valuenow={proPct} aria-valuemin={0} aria-valuemax={100} aria-label="Pros percentage">
             <div className="h-full rounded-full bg-success transition-all" style={{ width: `${proPct}%` }} />
           </div>
           <ul className="space-y-2.5">
@@ -55,10 +55,10 @@ export function EditorialProsCons({ pros, cons, slug, className = "" }: Editoria
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--error)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
-            <span className="font-semibold text-error">Cons</span>
+            <h3 className="font-semibold text-error text-sm">Cons</h3>
             <span className="text-xs ml-auto font-medium text-error">{100 - proPct}%</span>
           </div>
-          <div className="h-1.5 rounded-full mb-4 overflow-hidden bg-error-subtle">
+          <div className="h-1.5 rounded-full mb-4 overflow-hidden bg-error-subtle" role="progressbar" aria-valuenow={100 - proPct} aria-valuemin={0} aria-valuemax={100} aria-label="Cons percentage">
             <div className="h-full rounded-full bg-error transition-all" style={{ width: `${100 - proPct}%` }} />
           </div>
           <ul className="space-y-2.5">

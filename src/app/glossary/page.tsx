@@ -10,7 +10,7 @@ import { Book } from "lucide-react"
 
 export const metadata = createMetadata({
   title: "Glossary of Software Terms",
-  description: "Comprehensive glossary of software, SaaS, and technology terms. Clear definitions and explanations for every concept.",
+  description: "Comprehensive glossary of software, SaaS, and technology terms with clear definitions, real-world examples, and related concepts. Understand the terminology that matters for your business.",
   path: "/glossary",
 })
 

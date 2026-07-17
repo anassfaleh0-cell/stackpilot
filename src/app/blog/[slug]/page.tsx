@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, ArticleSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getBlogPost } from "@/lib/content/registry"
+import { getBlogPost, getContentTitle } from "@/lib/content/registry"
 import { formatDate } from "@/lib/utils"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const post = getBlogPost(slug)
   if (!post) return {}
-  return createMetadata({ title: post.title, description: post.description, path: `/blog/${slug}`, ogType: "article", publishedAt: post.publishedAt })
+  return createMetadata({ title: post.title, description: post.description, path: `/blog/${slug}`, ogType: "article", publishedAt: post.publishedAt, articleTags: post.tags, articleSection: post.category })
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -70,7 +70,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               ))}
             </div>
 
-            <h1 className="text-4xl font-bold tracking-tight mb-4">{post.title}</h1>
             <p className="text-lg text-muted-foreground mb-6 text-pretty">{post.description}</p>
 
             {/* Author bar */}
@@ -193,9 +192,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             <RelatedContent
               items={[
-                ...(post.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const })),
-                ...(post.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const })),
-                ...(post.relatedGlossary || []).map(s => ({ slug: s, type: "glossary" as const })),
+                ...(post.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
+                ...(post.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
+                ...(post.relatedGlossary || []).map(s => ({ slug: s, type: "glossary" as const, title: getContentTitle("glossary", s) ?? undefined })),
               ]}
               title="Related Resources"
             />

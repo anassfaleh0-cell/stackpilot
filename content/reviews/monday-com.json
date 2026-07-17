@@ -2,16 +2,17 @@
   "slug": "monday-com",
   "name": "Monday.com",
   "tagline": "Visual work platform that adapts to any team's workflow with customizable boards and automations",
-  "description": "monday.com is a highly visual work and project management platform built on a flexible board-and-column architecture that adapts to virtually any workflow. It combines project management, CRM, and work management in one customizable platform. With vibrant color-coded boards, over 200+ templates, and powerful automation, it helps teams visualize progress and move work forward faster.",
+  "description": "monday.com is a highly visual work and project management platform built on a flexible board-and-column architecture that adapts to virtually any workflow. It combines project management, CRM, and work management in one customizable platform. With vibrant color-coded boards, over 200+ templates, and sophisticated automation, it helps teams visualize progress and move work forward faster.",
   "category": "Project Management",
   "website": "https://monday.com",
   "pricing": "Paid",
+  "priceRange": "$10–$20/seat/mo",
   "rating": 4.4,
   "reviewCount": 12500,
   "pros": [
     "Highly visual and intuitive interface with color-coded boards, columns, and cards that make project status instantly readable at a glance",
     "Over 200 customizable templates spanning marketing, sales, engineering, HR, and operations that jumpstart any workflow",
-    "Powerful automation builder with 100+ recipe templates that eliminate repetitive manual updates and status changes",
+    "Sophisticated automation builder with 100+ recipe templates that eliminate repetitive manual updates and status changes",
     "Multiple view types including Kanban, Gantt (Timeline), Calendar, Map, and Workload views adapt to different team preferences",
     "Cross-board automations and dashboards give leadership real-time visibility into projects across the entire organization"
   ],
@@ -73,9 +74,12 @@
     },
     {
       "title": "Who should avoid it?",
-      "body": "If you are a small team of fewer than five people evaluating project management tools, monday.com's per-seat pricing model becomes expensive relative to Asana's free tier or Notion's generous free plan. The lack of a powerful search function is a genuine pain point for larger workspaces — finding a specific item across dozens of boards can require manual browsing. And while the platform is customizable, that flexibility comes with a learning curve; teams that want to start working immediately without configuration may prefer a more opinionated tool like Linear or Basecamp.",
+      "body": "If you are a small team of fewer than five people evaluating project management tools, monday.com's per-seat pricing model becomes expensive relative to Asana's free tier or Notion's generous free plan. The lack of an effective search function is a genuine pain point for larger workspaces — finding a specific item across dozens of boards can require manual browsing. And while the platform is customizable, that flexibility comes with a learning curve; teams that want to start working immediately without configuration may prefer a more opinionated tool like Linear or Basecamp.",
       "type": "text"
-    }
+    },
+    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
+    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
+    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
   ],
   "faqs": [
     {
@@ -88,7 +92,7 @@
     },
     {
       "question": "Does monday.com work offline?",
-      "answer": "monday.com does not have a robust offline mode in its web application. The mobile apps offer limited offline functionality, allowing you to view previously loaded boards and items, but you cannot make edits that sync later. If your team frequently works in environments with unreliable internet, this is a significant limitation. Competitors like Notion offer better offline support with full local caching and background sync when connectivity is restored."
+      "answer": "monday.com does not have a reliable offline mode in its web application. The mobile apps offer limited offline functionality, allowing you to view previously loaded boards and items, but you cannot make edits that sync later. If your team frequently works in environments with unreliable internet, this is a significant limitation. Competitors like Notion offer better offline support with full local caching and background sync when connectivity is restored."
     },
     {
       "question": "How does monday.com handle data export and migration?",

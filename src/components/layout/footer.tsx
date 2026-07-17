@@ -10,7 +10,7 @@ const footerLinks = [
   },
   {
     title: "Categories",
-    links: categories.slice(0, 8).map((c) => ({
+    links: categories.map((c) => ({
       href: `/category/${c.slug}`,
       label: c.name,
     })),

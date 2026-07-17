@@ -92,7 +92,7 @@ export function EditorialHero({ slug, title, subtitle, category, variant = "revi
   })) : []
 
   return (
-    <div className={`relative overflow-hidden rounded-2xl ${className}`}>
+    <div className={`relative overflow-hidden rounded-2xl bg-card ${className}`}>
       <svg
         viewBox="0 0 100 100"
         className="w-full h-full absolute inset-0"
@@ -118,7 +118,7 @@ export function EditorialHero({ slug, title, subtitle, category, variant = "revi
           </filter>
         </defs>
 
-        <rect width="100" height="100" fill={`url(#${gradId})`} />
+        <rect width="100" height="100" fill="var(--card)" />
         <rect width="100" height="100" fill={`url(#${gridId})`} />
         <rect width="100" height="100" fill={`url(#${glowId})`} />
 
