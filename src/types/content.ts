@@ -96,8 +96,10 @@ export interface GuideContent {
 export interface GuideSection {
   title: string
   body: string
-  type?: "text" | "tip" | "warning" | "list" | "checklist"
+  type?: "text" | "tip" | "warning" | "list" | "checklist" | "table"
   items?: string[]
+  columns?: string[]
+  rows?: string[][]
 }
 
 export interface BlogContent {

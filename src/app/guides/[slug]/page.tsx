@@ -128,6 +128,27 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                         </div>
                       ))}
                     </div>
+                  ) : section.type === "table" && section.columns && section.rows ? (
+                    <div className="overflow-x-auto pl-11">
+                      <table className="w-full text-sm border-collapse">
+                        <thead>
+                          <tr className="border-b border-border">
+                            {section.columns.map((col, j) => (
+                              <th key={j} className="text-left py-2 px-3 font-semibold text-foreground">{col}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {section.rows.map((row, j) => (
+                            <tr key={j} className="border-b border-border/50 hover:bg-accent-subtle/20 transition-colors">
+                              {row.map((cell, k) => (
+                                <td key={k} className="py-2.5 px-3 text-muted-foreground">{cell}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   ) : (
                     <p className="text-muted-foreground leading-relaxed pl-11">{section.body}</p>
                   )}
