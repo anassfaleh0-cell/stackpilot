@@ -74,7 +74,7 @@ export function EditorialFeatureRadar({ tool, className = "" }: EditorialFeature
           })}
           <path d={dataPath} fill={`url(#${gradId})`} stroke={p.primary} strokeWidth="1.5" strokeOpacity="0.6" />
           {dataPoints.map((pt, i) => (
-            <circle key={i} cx={pt.x} cy={pt.y} r="3" fill={p.primary} stroke="white" strokeWidth="1" />
+            <circle key={i} cx={pt.x} cy={pt.y} r="3" fill={p.primary} stroke="var(--card)" strokeWidth="1" />
           ))}
           {values.map((_, i) => {
             const angle = (2 * Math.PI * i) / values.length - Math.PI / 2

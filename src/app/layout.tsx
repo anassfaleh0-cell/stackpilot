@@ -4,6 +4,10 @@ import "./globals.css"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { ToastProvider } from "@/components/ui/toast"
+import { ThemeProvider } from "@/components/theme-provider"
+import { CookieConsent } from "@/components/analytics/cookie-consent"
+import { Analytics } from "@/components/analytics"
+import { ReadingProgress } from "@/components/layout/reading-progress"
 import { OrganizationSchema, WebsiteSchema } from "@/components/seo/json-ld"
 import { siteConfig } from "@/lib/constants"
 
@@ -12,7 +16,7 @@ const geistSans = Geist({
   subsets: ["latin"],
   display: "swap",
   preload: true,
-  fallback: ["system-ui", "Arial", "sans-serif"],
+  fallback: ["Inter", "system-ui", "Arial", "sans-serif"],
 })
 
 const geistMono = Geist_Mono({
@@ -20,15 +24,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
   preload: true,
-  fallback: ["Consolas", "Monaco", "monospace"],
+  fallback: ["JetBrains Mono", "Consolas", "Monaco", "monospace"],
 })
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#5252E8" },
-    { media: "(prefers-color-scheme: dark)", color: "#0F172A" },
+    { media: "(prefers-color-scheme: light)", color: "#5472E8" },
+    { media: "(prefers-color-scheme: dark)", color: "#0C0E14" },
   ],
   colorScheme: "light dark",
 }
@@ -65,30 +69,58 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.svg",
-    apple: "/logo.svg",
+    apple: "/apple-touch-icon.svg",
   },
   manifest: "/manifest.webmanifest",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var t = localStorage.getItem('stackpilot-theme');
+                  var r;
+                  if (t === 'light' || t === 'dark') {
+                    r = t;
+                  } else {
+                    r = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  }
+                  document.documentElement.classList.add(r);
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
         <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name}`} href="/rss.xml" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        {process.env.NEXT_PUBLIC_VERCEL_ANALYTICS && (
+          <script defer src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} />
+        )}
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <ToastProvider>
-        <a href="#main-content" className="skip-to-content">
-          Skip to main content
-        </a>
-        <OrganizationSchema />
-        <WebsiteSchema />
-        <Header />
-        <main id="main-content" className="flex-1 outline-none" tabIndex={-1}>
-          {children}
-        </main>
-        <Footer />
-        </ToastProvider>
+        <ThemeProvider>
+          <ToastProvider>
+            <a href="#main-content" className="skip-to-content">
+              Skip to main content
+            </a>
+            <OrganizationSchema />
+            <WebsiteSchema />
+            <Header />
+            <ReadingProgress />
+          <main id="main-content" className="flex-1 outline-none" tabIndex={-1}>
+              {children}
+            </main>
+            <Footer />
+            <CookieConsent />
+            <Analytics />
+          </ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

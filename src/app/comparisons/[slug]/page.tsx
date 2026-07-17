@@ -1,7 +1,8 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, FAQSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, FAQSchema, ReviewSchema, SoftwareSchema } from "@/components/seo/json-ld"
+import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getComparison, getContentTitle } from "@/lib/content/registry"
 import { getAllComparisons } from "@/lib/content/registry"
@@ -9,6 +10,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowRight, CheckCircle2, Target } from "lucide-react"
 import { EditorialHero, EditorialComparison, EditorialCallout, GlassCard, InfoCard } from "@/components/editorial"
+import { getReview } from "@/lib/content/registry"
 import { RelatedContent } from "@/components/content/related-content"
 import { ScoreBar } from "@/components/brand/patterns"
 
@@ -21,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const cmp = getComparison(slug)
   if (!cmp) return {}
   const titleSuffix = cmp.description.length > 60 ? " Detailed Comparison" : " Comparison"
-  return createMetadata({ title: cmp.title + titleSuffix, description: cmp.description, path: `/comparisons/${slug}` })
+  return createMetadata({ title: cmp.title + titleSuffix, description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated })
 }
 
 export default async function ComparisonPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -36,9 +38,16 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   const t1Pct = Math.round((t1Score / total) * 100)
   const t2Pct = Math.round((t2Score / total) * 100)
 
+  const review1 = getReview(cmp.tool1Slug)
+  const review2 = getReview(cmp.tool2Slug)
+
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Comparisons", href: "/comparisons" }, { name: cmp.title, href: `/comparisons/${slug}` }]} />
+      {review1 && <ReviewSchema name={review1.name} description={review1.description} rating={review1.rating} reviewCount={review1.reviewCount} url={`${site.url}/reviews/${review1.slug}`} />}
+      {review2 && <ReviewSchema name={review2.name} description={review2.description} rating={review2.rating} reviewCount={review2.reviewCount} url={`${site.url}/reviews/${review2.slug}`} />}
+      {review1 && <SoftwareSchema name={review1.name} description={review1.tagline} applicationCategory="BusinessApplication" />}
+      {review2 && <SoftwareSchema name={review2.name} description={review2.tagline} applicationCategory="BusinessApplication" />}
       <FAQSchema questions={cmp.faqs} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Comparisons", href: "/comparisons" }, { name: cmp.title }]} />

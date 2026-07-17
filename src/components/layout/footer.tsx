@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Container } from "@/components/ui/container"
-import { site, navLinks, categories } from "@/lib/constants"
-import { Compass, ArrowUpRight, ExternalLink } from "lucide-react"
+import { site, navLinks, categories, editorialLinks } from "@/lib/constants"
+import { Compass, ArrowUpRight } from "lucide-react"
 
 const footerLinks = [
   {
@@ -16,30 +16,52 @@ const footerLinks = [
     })),
   },
   {
+    title: "Editorial",
+    links: editorialLinks,
+  },
+  {
     title: "Company",
     links: [
       { href: "/about", label: "About" },
-      { href: "/methodology", label: "Review Methodology" },
+      { href: "/authors", label: "Our Authors" },
       { href: "/contact", label: "Contact" },
       { href: "/privacy", label: "Privacy Policy" },
       { href: "/terms", label: "Terms of Service" },
     ],
   },
+  {
+    title: "Policies",
+    links: [
+      { href: "/methodology", label: "Review Methodology" },
+      { href: "/editorial-policy", label: "Editorial Policy" },
+      { href: "/editorial-independence", label: "Editorial Independence" },
+      { href: "/affiliate-disclosure", label: "Affiliate Disclosure" },
+      { href: "/advertising-disclosure", label: "Advertising Disclosure" },
+      { href: "/corrections-policy", label: "Corrections Policy" },
+    ],
+  },
 ]
+
+function Logo() {
+  return (
+    <svg className="h-7 w-7" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <rect x="1" y="1" width="30" height="30" rx="8" className="fill-primary" />
+      <path d="M11 13l5-5 5 5M11 21l5-5 5 5" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </svg>
+  )
+}
 
 export function Footer() {
   return (
     <footer className="border-t border-border bg-surface-secondary">
       <Container className="py-16 lg:py-20">
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
-          <div className="col-span-2 lg:col-span-1">
+        <div className="grid grid-cols-2 gap-10 sm:grid-cols-4 lg:grid-cols-5">
+          <div className="col-span-2 sm:col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2.5 font-semibold text-lg mb-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-secondary text-white shadow-sm">
-                <Compass size={18} />
-              </div>
+              <Logo />
               <span>{site.name}</span>
             </Link>
-            <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
+            <p className="text-sm text-muted-foreground max-w-xs leading-relaxed text-pretty">
               {site.description}
             </p>
             <div className="mt-6 flex items-center gap-3">
@@ -53,7 +75,7 @@ export function Footer() {
           </div>
           {footerLinks.map((group) => (
             <div key={group.title}>
-              <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">{group.title}</h4>
+              <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">{group.title}</h4>
               <ul className="space-y-2.5">
                 {group.links.map((link) => (
                   <li key={link.href}>
@@ -73,7 +95,7 @@ export function Footer() {
           <p className="text-xs text-muted-foreground">
             &copy; 2024-2026 {site.name}. All rights reserved.
           </p>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-muted-foreground text-center sm:text-right">
             Independent reviews and comparisons. We may earn commissions from affiliate links. All reviews follow our <Link href="/methodology" className="underline underline-offset-2 hover:text-foreground">editorial methodology</Link>.
           </p>
         </div>

@@ -15,14 +15,42 @@
       "title": "Core HR Features Evaluation",
       "body": "HR platforms offer varying depth across core capabilities. Use this framework to evaluate each candidate, adjusting weights based on your workload audit results.",
       "type": "table",
-      "columns": ["Capability", "Weight", "What to Evaluate"],
+      "columns": [
+        "Capability",
+        "Weight",
+        "What to Evaluate"
+      ],
       "rows": [
-        ["Payroll Processing", "25%", "Auto tax filing, multi-state support, W-2/1099 generation, garnishment handling, payroll calendar flexibility"],
-        ["Benefits Administration", "20%", "Health insurance integration, 401k deduction sync, HSA/FSA management, self-service enrollment portal"],
-        ["Time & Attendance", "15%", "Paid time off tracking, sick leave policies, time clock integration, overtime calculation, vacation accrual rules"],
-        ["Compliance & Reporting", "15%", "EEO-1 reporting, ACA tracking, state-specific labor law updates, audit trail, document retention policies"],
-        ["Talent Management", "15%", "Performance review templates, goal tracking, 360 feedback, succession planning, skills inventory"],
-        ["Employee Experience", "10%", "Self-service portal, mobile app quality, org chart visualization, company directory, announcement tools"]
+        [
+          "Payroll Processing",
+          "25%",
+          "Auto tax filing, multi-state support, W-2/1099 generation, garnishment handling, payroll calendar flexibility"
+        ],
+        [
+          "Benefits Administration",
+          "20%",
+          "Health insurance integration, 401k deduction sync, HSA/FSA management, self-service enrollment portal"
+        ],
+        [
+          "Time & Attendance",
+          "15%",
+          "Paid time off tracking, sick leave policies, time clock integration, overtime calculation, vacation accrual rules"
+        ],
+        [
+          "Compliance & Reporting",
+          "15%",
+          "EEO-1 reporting, ACA tracking, state-specific labor law updates, audit trail, document retention policies"
+        ],
+        [
+          "Talent Management",
+          "15%",
+          "Performance review templates, goal tracking, 360 feedback, succession planning, skills inventory"
+        ],
+        [
+          "Employee Experience",
+          "10%",
+          "Self-service portal, mobile app quality, org chart visualization, company directory, announcement tools"
+        ]
       ]
     },
     {
@@ -82,8 +110,19 @@
   ],
   "author": "StackPilot Team",
   "lastUpdated": "2026-07-16",
-  "relatedTools": ["bamboohr", "gusto"],
-  "relatedGuides": ["software-evaluation-checklist", "saas-implementation-best-practices"],
-  "relatedComparisons": ["bamboohr-vs-gusto"],
-  "relatedPosts": []
+  "relatedTools": [
+    "bamboohr",
+    "gusto"
+  ],
+  "relatedGuides": [
+    "software-evaluation-checklist",
+    "saas-implementation-best-practices"
+  ],
+  "relatedComparisons": [
+    "bamboohr-vs-gusto"
+  ],
+  "relatedPosts": [
+    "best-hr-software-2026",
+    "hr-tech-stack-2026"
+  ]
 }

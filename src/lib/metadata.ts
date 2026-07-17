@@ -9,6 +9,7 @@ export function createMetadata({
   noIndex = false,
   ogType,
   publishedAt,
+  updatedAt,
   articleTags,
   articleSection,
 }: {
@@ -20,6 +21,7 @@ export function createMetadata({
   noIndex?: boolean
   ogType?: "website" | "article"
   publishedAt?: string
+  updatedAt?: string
   articleTags?: string[]
   articleSection?: string
 }) {
@@ -41,6 +43,7 @@ export function createMetadata({
       locale: site.locale,
       type: isArticle ? "article" : "website",
       ...(isArticle && publishedAt ? { publishedTime: publishedAt } : {}),
+      ...(isArticle && updatedAt ? { modifiedTime: updatedAt } : {}),
       ...(isArticle ? { authors: ["StackPilot Team"] } : {}),
       ...(isArticle && articleTags ? { tags: articleTags } : {}),
       ...(isArticle && articleSection ? { section: articleSection } : {}),

@@ -16,9 +16,14 @@ export const navLinks = [
   { href: "/reviews", label: "Reviews" },
   { href: "/comparisons", label: "Comparisons" },
   { href: "/guides", label: "Guides" },
-  { href: "/blog", label: "Blog" },
+  { href: "/blog", label: "Research" },
   { href: "/glossary", label: "Glossary" },
   { href: "/tools", label: "Free Tools" },
+]
+
+export const secondaryNavLinks = [
+  { href: "/methodology", label: "Methodology" },
+  { href: "/about", label: "About" },
 ]
 
 export const categories = [
@@ -41,6 +46,18 @@ export const toolPages = [
   { slug: "software-comparison", name: "Software Comparison Matrix" },
 ]
 
+export const editorialLinks = [
+  { href: "/editorial-policy", label: "Editorial Policy" },
+  { href: "/editorial-independence", label: "Editorial Independence" },
+  { href: "/research-methodology", label: "Research Methodology" },
+  { href: "/fact-checking-policy", label: "Fact-Checking Policy" },
+  { href: "/corrections-policy", label: "Corrections Policy" },
+  { href: "/how-we-test-software", label: "How We Test Software" },
+  { href: "/affiliate-disclosure", label: "Affiliate Disclosure" },
+  { href: "/advertising-disclosure", label: "Advertising Disclosure" },
+  { href: "/authors", label: "Our Authors" },
+]
+
 export const siteConfig = {
   name: "StackPilot",
   description: site.description,
@@ -50,11 +67,15 @@ export const siteConfig = {
   keywords: [
     "software reviews",
     "SaaS comparison",
-    "best tools",
-    "software buying guide",
-    "B2B software",
-    "productivity tools",
-    "AI tools",
-    "project management software",
+    "best software tools",
+    "B2B software buying guide",
+    "software research",
+    "SaaS reviews",
+    "enterprise software",
+    "project management tools",
+    "CRM software reviews",
+    "AI tools comparison",
+    "dev tools reviews",
+    "analytics platforms",
   ],
 }

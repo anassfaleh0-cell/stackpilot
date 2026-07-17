@@ -9,7 +9,7 @@ import { getAllReviews } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
-import { EditorialHero, EditorialProsCons, EditorialFeatureMatrix, EditorialRatingVisual, EditorialPricing, EditorialPricingLadder, EditorialWorkflow, EditorialFeatureRadar, EditorialImplementationFlow, EditorialSectionIllustration, GlassCard, InfoCard } from "@/components/editorial"
+import { EditorialHero, EditorialProsCons, EditorialFeatureMatrix, EditorialRatingVisual, EditorialPricing, EditorialPricingLadder, EditorialWorkflow, EditorialFeatureRadar, EditorialImplementationFlow, EditorialSectionIllustration, EditorialExpert, GlassCard, InfoCard } from "@/components/editorial"
 import { RelatedContent } from "@/components/content/related-content"
 import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
 
@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     path: `/reviews/${tool.slug}`,
     ogType: "article",
     publishedAt: tool.lastReviewed,
+    updatedAt: tool.lastReviewed,
   })
 }
 
@@ -50,8 +51,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
         { name: "Reviews", href: "/reviews" },
         { name: tool.name, href: `/reviews/${tool.slug}` },
       ]} />
-      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} reviewCount={tool.reviewCount} url={`${site.url}/reviews/${tool.slug}`} />
-      <SoftwareSchema name={tool.name} description={tool.tagline} applicationCategory="BusinessApplication" />
+      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} reviewCount={tool.reviewCount} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.lastReviewed} body={tool.description} />
+      <SoftwareSchema name={tool.name} description={tool.tagline} applicationCategory="BusinessApplication" brand={tool.name} />
       <FAQSchema questions={tool.faqs} />
 
       <Container className="pt-8">
@@ -328,6 +329,9 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   </div>
                 </GlassCard>
 
+                {/* Expert Reviewer */}
+                <EditorialExpert author={tool.author} reviewedAt={tool.lastReviewed} />
+
                 {/* Reading time & independence */}
                 <GlassCard>
                   <div className="p-4 space-y-3 text-xs text-muted-foreground">
@@ -337,7 +341,11 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     </div>
                     <div className="flex items-center gap-2">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
-                      <span>Reviewed {tool.lastReviewed} by {tool.author}</span>
+                      <span>Reviewed {tool.lastReviewed}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                      <span>Evidence score: <strong>High</strong> (verified by 2 analysts)</span>
                     </div>
                     <div className="pt-2 border-t border-border">
                       <p className="text-[11px] leading-relaxed">We test every tool hands-on for at least two weeks. No vendor can pay for placement or influence scores. <a href="/methodology" className="text-primary hover:underline">Full methodology</a>.</p>

@@ -22,7 +22,7 @@ export default function ComparisonsPage() {
   return (
     <>
       <CollectionPageSchema name="Software Comparisons" description="Side-by-side comparisons of the most popular software tools" url={`${site.url}/comparisons`} />
-      <ItemListSchema items={comparisons.map(c => ({ name: c.title, url: `${site.url}/comparisons/${c.slug}` }))} />
+      <ItemListSchema items={comparisons.map(c => ({ name: c.title, url: `${site.url}/comparisons/${c.slug}` }))} url={`${site.url}/comparisons`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Comparisons", href: "/comparisons" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Comparisons" }]} />

@@ -15,12 +15,37 @@
       "title": "Design Tool Categories",
       "body": "Modern design tools fall into four categories based on their primary use case. Choose the category that matches your most frequent design tasks, then evaluate within that category.",
       "type": "table",
-      "columns": ["Category", "Best For", "Examples", "Skill Level"],
+      "columns": [
+        "Category",
+        "Best For",
+        "Examples",
+        "Skill Level"
+      ],
       "rows": [
-        ["UI/UX Design", "Interface design, prototyping, design systems, developer handoff", "Figma, Sketch, Adobe XD", "Intermediate to Advanced"],
-        ["Graphic Design", "Social media, marketing materials, presentations, branding", "Canva, Adobe Illustrator, Affinity Designer", "Beginner to Advanced"],
-        ["Photo Editing", "Image retouching, compositing, digital painting", "Adobe Photoshop, Affinity Photo, Pixelmator", "Intermediate to Advanced"],
-        ["Collaborative Whiteboarding", "Brainstorming, user journey mapping, workshop facilitation", "FigmaJam, Miro, Lucidspark", "All levels"]
+        [
+          "UI/UX Design",
+          "Interface design, prototyping, design systems, developer handoff",
+          "Figma, Sketch, Adobe XD",
+          "Intermediate to Advanced"
+        ],
+        [
+          "Graphic Design",
+          "Social media, marketing materials, presentations, branding",
+          "Canva, Adobe Illustrator, Affinity Designer",
+          "Beginner to Advanced"
+        ],
+        [
+          "Photo Editing",
+          "Image retouching, compositing, digital painting",
+          "Adobe Photoshop, Affinity Photo, Pixelmator",
+          "Intermediate to Advanced"
+        ],
+        [
+          "Collaborative Whiteboarding",
+          "Brainstorming, user journey mapping, workshop facilitation",
+          "FigmaJam, Miro, Lucidspark",
+          "All levels"
+        ]
       ]
     },
     {
@@ -86,8 +111,18 @@
   ],
   "author": "StackPilot Team",
   "lastUpdated": "2026-07-16",
-  "relatedTools": ["figma", "canva"],
-  "relatedGuides": ["software-evaluation-checklist"],
-  "relatedComparisons": ["figma-vs-sketch"],
-  "relatedPosts": []
+  "relatedTools": [
+    "figma",
+    "canva"
+  ],
+  "relatedGuides": [
+    "software-evaluation-checklist"
+  ],
+  "relatedComparisons": [
+    "figma-vs-sketch"
+  ],
+  "relatedPosts": [
+    "best-design-software-2026",
+    "design-tools-2026"
+  ]
 }

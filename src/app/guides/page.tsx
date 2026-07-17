@@ -22,7 +22,7 @@ export default function GuidesPage() {
   return (
     <>
       <CollectionPageSchema name="Expert Guides" description="Comprehensive software buying guides and implementation tutorials" url={`${site.url}/guides`} />
-      <ItemListSchema items={guides.map(g => ({ name: g.title, url: `${site.url}/guides/${g.slug}` }))} />
+      <ItemListSchema items={guides.map(g => ({ name: g.title, url: `${site.url}/guides/${g.slug}` }))} url={`${site.url}/guides`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Guides", href: "/guides" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Guides" }]} />

@@ -15,14 +15,42 @@
       "title": "Build Your Weighted Scoring Matrix",
       "body": "A weighted scoring matrix prevents you from choosing a tool because it has one impressive feature while ignoring critical gaps. List every requirement from your stakeholder interviews, group them into categories, and assign a weight to each category totaling 100%. Then score each candidate tool against every category. Use this framework as a template, modifying categories and weights for your specific evaluation context.",
       "type": "table",
-      "columns": ["Evaluation Category", "Weight", "What to Assess"],
+      "columns": [
+        "Evaluation Category",
+        "Weight",
+        "What to Assess"
+      ],
       "rows": [
-        ["Core Functionality", "25%", "Does the tool handle your primary use case completely? Test with real data, not vendor demos — edge cases reveal gaps that demos hide"],
-        ["Integration Fit", "20%", "Does it connect natively with your existing stack? Count the number of manual data transfers your team will still need after implementation"],
-        ["User Experience & Adoption", "20%", "Can a non-technical team member perform their core task within 5 minutes without training? Test this with actual users from each team"],
-        ["Reliability & Performance", "15%", "Check vendor status page, independent uptime monitoring, and user reviews about speed and availability. Request SLA documentation for paid tiers"],
-        ["Support & Training", "10%", "What support channels are available at your tier? Response times? Self-service knowledge base quality? Onboarding resources?"],
-        ["Total Cost of Ownership", "10%", "Calculate 3-year cost including licensing, training, implementation, integrations, and any anticipated user growth. Include migration costs if replacing an existing tool"]
+        [
+          "Core Functionality",
+          "25%",
+          "Does the tool handle your primary use case completely? Test with real data, not vendor demos — edge cases reveal gaps that demos hide"
+        ],
+        [
+          "Integration Fit",
+          "20%",
+          "Does it connect natively with your existing stack? Count the number of manual data transfers your team will still need after implementation"
+        ],
+        [
+          "User Experience & Adoption",
+          "20%",
+          "Can a non-technical team member perform their core task within 5 minutes without training? Test this with actual users from each team"
+        ],
+        [
+          "Reliability & Performance",
+          "15%",
+          "Check vendor status page, independent uptime monitoring, and user reviews about speed and availability. Request SLA documentation for paid tiers"
+        ],
+        [
+          "Support & Training",
+          "10%",
+          "What support channels are available at your tier? Response times? Self-service knowledge base quality? Onboarding resources?"
+        ],
+        [
+          "Total Cost of Ownership",
+          "10%",
+          "Calculate 3-year cost including licensing, training, implementation, integrations, and any anticipated user growth. Include migration costs if replacing an existing tool"
+        ]
       ]
     },
     {
@@ -78,7 +106,20 @@
   ],
   "author": "StackPilot Team",
   "lastUpdated": "2026-07-16",
-  "relatedTools": ["asana", "linear", "notion"],
-  "relatedGuides": ["saas-implementation-best-practices", "crm-selection-guide"],
-  "relatedPosts": ["software-review-methodology", "saas-pricing-report-2026"]
+  "relatedTools": [
+    "asana",
+    "linear",
+    "notion"
+  ],
+  "relatedGuides": [
+    "saas-implementation-best-practices",
+    "crm-selection-guide"
+  ],
+  "relatedPosts": [
+    "software-review-methodology",
+    "saas-pricing-report-2026"
+  ],
+  "relatedComparisons": [
+    "notion-vs-linear"
+  ]
 }

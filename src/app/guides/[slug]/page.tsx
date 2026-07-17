@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const guide = getGuide(slug)
   if (!guide) return {}
-  return createMetadata({ title: guide.title, description: guide.description, path: `/guides/${slug}` })
+  return createMetadata({ title: guide.title, description: guide.description, path: `/guides/${slug}`, ogType: "article", publishedAt: guide.lastUpdated, updatedAt: guide.lastUpdated })
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {

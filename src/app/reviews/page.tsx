@@ -23,7 +23,7 @@ export default function ReviewsPage() {
   return (
     <>
       <CollectionPageSchema name="Software Reviews" description="In-depth, unbiased reviews of the best software tools" url={`${site.url}/reviews`} />
-      <ItemListSchema items={tools.map(t => ({ name: t.name, url: `${site.url}/reviews/${t.slug}` }))} />
+      <ItemListSchema items={tools.map(t => ({ name: t.name, url: `${site.url}/reviews/${t.slug}` }))} url={`${site.url}/reviews`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Reviews", href: "/reviews" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Reviews" }]} />

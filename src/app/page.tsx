@@ -5,7 +5,7 @@ import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { categories } from "@/lib/constants"
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts } from "@/lib/content/registry"
-import { ArrowRight, Star, BarChart3, Shield, Zap, Compass, ExternalLink } from "lucide-react"
+import { ArrowRight, Star, BarChart3, Shield, BookOpen, Compass } from "lucide-react"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { BrandPattern, BrandOrb, BrandDivider } from "@/components/brand/patterns"
 
@@ -34,13 +34,13 @@ export default function HomePage() {
 
       {/* ── Hero ── */}
       <section className="relative overflow-hidden border-b border-border">
-        <BrandPattern variant="grid" opacity={0.3} className="text-primary" />
-        <BrandOrb size={600} className="top-[-200px] right-[-200px]" />
-        <BrandOrb size={400} color="var(--secondary)" className="bottom-[-150px] left-[-150px]" />
-        <Container className="relative py-24 sm:py-32 lg:py-36">
+        <BrandPattern variant="grid" opacity={0.25} className="text-primary/20" />
+        <BrandOrb size={600} className="top-[-250px] right-[-200px]" color="var(--primary)" />
+        <BrandOrb size={400} color="var(--primary-light)" className="bottom-[-200px] left-[-150px]" />
+        <Container className="relative py-24 sm:py-32 lg:py-40">
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-6 animate-fade-in">
-              <TrustBadge>Independent reviews since 2024</TrustBadge>
+              <span className="trust-badge">Independent reviews since 2024</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.02] mb-6 text-balance">
               Navigate your{" "}
@@ -53,13 +53,13 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/reviews"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-white hover:bg-primary-dark shadow-button hover:shadow-button-hover active:shadow-inner h-12 px-8 text-base font-medium transition-all duration-200"
+                className="button-press inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-white hover:bg-primary-dark shadow-button hover:shadow-button-hover h-12 px-8 text-base font-medium transition-all duration-200"
               >
                 Browse Reviews <ArrowRight size={16} />
               </Link>
               <Link
                 href="/comparisons"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-background/80 hover:bg-muted-bg h-12 px-8 text-base font-medium transition-all duration-200"
+                className="button-press inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-background/80 hover:bg-muted-bg h-12 px-8 text-base font-medium transition-all duration-200"
               >
                 Compare Tools
               </Link>
@@ -87,7 +87,7 @@ export default function HomePage() {
         <Container>
           <div className="flex items-end justify-between mb-12">
             <div>
-              <Badge variant="default" className="mb-4">Featured Tools</Badge>
+              <Badge variant="default" className="mb-4">Featured Reviews</Badge>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-balance">
                 Curated software picks
               </h2>
@@ -101,7 +101,7 @@ export default function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {reviews.slice(0, 6).map((tool, i) => (
-              <Link key={tool.slug} href={`/reviews/${tool.slug}`} className="group card-hover" style={{ animationDelay: `${i * 60}ms` }}>
+              <Link key={tool.slug} href={`/reviews/${tool.slug}`} className="group card-hover-lift" style={{ animationDelay: `${i * 60}ms` }}>
                 <Card className="h-full flex flex-col">
                   <div className="flex items-start justify-between mb-3">
                     <Badge variant="secondary">{tool.category}</Badge>
@@ -122,7 +122,7 @@ export default function HomePage() {
           <div className="mt-10 text-center sm:hidden">
             <Link
               href="/reviews"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-transparent hover:bg-muted-bg h-12 px-8 text-base font-medium transition-all duration-200"
+              className="button-press inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-transparent hover:bg-muted-bg h-12 px-8 text-base font-medium transition-all duration-200"
             >
               View all reviews <ArrowRight size={16} />
             </Link>
@@ -138,7 +138,7 @@ export default function HomePage() {
           <Container>
             <div className="flex items-end justify-between mb-12">
               <div>
-                <Badge variant="default" className="mb-4">Comparisons</Badge>
+                <Badge variant="default" className="mb-4">Head-to-Head</Badge>
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-balance">
                   Side-by-side analysis
                 </h2>
@@ -152,7 +152,7 @@ export default function HomePage() {
             </div>
             <div className="grid sm:grid-cols-2 gap-6">
               {comparisons.slice(0, 4).map((cmp) => (
-                <Link key={cmp.slug} href={`/comparisons/${cmp.slug}`} className="group card-hover">
+                <Link key={cmp.slug} href={`/comparisons/${cmp.slug}`} className="group card-hover-lift">
                   <Card className="h-full flex flex-col">
                     <div className="flex items-start justify-between mb-3">
                       <Badge variant="secondary">{cmp.category}</Badge>
@@ -194,7 +194,7 @@ export default function HomePage() {
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {guides.slice(0, 3).map((guide) => (
-                <Link key={guide.slug} href={`/guides/${guide.slug}`} className="group card-hover">
+                <Link key={guide.slug} href={`/guides/${guide.slug}`} className="group card-hover-lift">
                   <Card className="h-full flex flex-col">
                     <div className="flex items-center gap-2 mb-3">
                       <Badge variant="secondary">{guide.category}</Badge>
@@ -204,8 +204,9 @@ export default function HomePage() {
                     </div>
                     <CardTitle className="group-hover:text-primary transition-colors">{guide.title}</CardTitle>
                     <CardDescription className="mt-1.5">{guide.description}</CardDescription>
-                    <div className="mt-auto pt-4 text-xs text-muted-foreground">
-                      {guide.readingTime} min read · {guide.sections.length} sections
+                    <div className="mt-auto pt-4 flex items-center gap-3 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1"><BookOpen size={12} /> {guide.readingTime} min read</span>
+                      <span>{guide.sections.length} sections</span>
                     </div>
                   </Card>
                 </Link>
@@ -222,7 +223,7 @@ export default function HomePage() {
         <Container>
           <div className="flex items-end justify-between mb-12">
             <div>
-              <Badge variant="default" className="mb-4">Categories</Badge>
+              <Badge variant="default" className="mb-4">Browse</Badge>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-balance">
                 Browse by category
               </h2>
@@ -230,7 +231,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {categories.map((cat) => (
-              <Link key={cat.slug} href={`/category/${cat.slug}`} className="group card-hover">
+              <Link key={cat.slug} href={`/category/${cat.slug}`} className="group card-hover-lift">
                 <Card className="flex items-center justify-between p-4">
                   <span className="font-medium text-sm">{cat.name}</span>
                   <span className="text-xs text-muted-foreground tabular-nums">{cat.count}</span>
@@ -263,7 +264,7 @@ export default function HomePage() {
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {posts.slice(0, 3).map((post) => (
-                <Link key={post.slug} href={`/blog/${post.slug}`} className="group card-hover">
+                <Link key={post.slug} href={`/blog/${post.slug}`} className="group card-hover-lift">
                   <Card className="h-full flex flex-col">
                     <div className="flex items-center gap-2 mb-3">
                       <Badge variant="secondary">{post.category}</Badge>
@@ -281,6 +282,66 @@ export default function HomePage() {
           </Container>
         </Section>
       )}
+
+      <BrandDivider />
+
+      {/* ── E-E-A-T Trust Bar ── */}
+      <Section className="py-0 sm:py-0 lg:py-0">
+        <Container>
+          <div className="border border-border rounded-xl bg-surface-secondary p-6 sm:p-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="flex items-start gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-subtle text-primary">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold mb-0.5">Hands-On Testing</h3>
+                  <p className="text-xs text-muted-foreground">Every tool tested for 2+ weeks by our team</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary-subtle text-secondary">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold mb-0.5">Independent & Unbiased</h3>
+                  <p className="text-xs text-muted-foreground">No paid placements. No vendor influence.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent-subtle text-accent">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold mb-0.5">Transparent Methodology</h3>
+                  <p className="text-xs text-muted-foreground">Our scoring rubric and process are public</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-info-subtle text-info">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold mb-0.5">Regularly Updated</h3>
+                  <p className="text-xs text-muted-foreground">Content reviewed and refreshed quarterly</p>
+                </div>
+              </div>
+            </div>
+            <div className="mt-4 pt-3 border-t border-border flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                <span>38+ reviews</span>
+                <span className="text-border-light">|</span>
+                <span>14 comparisons</span>
+                <span className="text-border-light">|</span>
+                <span>13 guides</span>
+                <span className="text-border-light">|</span>
+                <span>32 glossary terms</span>
+              </div>
+              <Link href="/editorial-policy" className="text-xs text-primary hover:underline">Our editorial standards &rarr;</Link>
+            </div>
+          </div>
+        </Container>
+      </Section>
 
       <BrandDivider />
 
@@ -341,7 +402,7 @@ export default function HomePage() {
               />
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-white hover:bg-primary-dark shadow-button hover:shadow-button-hover h-12 px-6 text-sm font-medium transition-all duration-200 shrink-0"
+                className="button-press inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-white hover:bg-primary-dark shadow-button hover:shadow-button-hover h-12 px-6 text-sm font-medium transition-all duration-200 shrink-0"
               >
                 Subscribe
               </button>
@@ -350,11 +411,5 @@ export default function HomePage() {
         </Container>
       </Section>
     </>
-  )
-}
-
-function TrustBadge({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="trust-badge">{children}</span>
   )
 }

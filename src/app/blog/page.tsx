@@ -26,7 +26,7 @@ export default function BlogPage() {
   return (
     <>
       <CollectionPageSchema name="Blog" description="Expert insights, tutorials, and analysis on software tools and technology trends" url={`${site.url}/blog`} />
-      <ItemListSchema items={posts.map(p => ({ name: p.title, url: `${site.url}/blog/${p.slug}` }))} />
+      <ItemListSchema items={posts.map(p => ({ name: p.title, url: `${site.url}/blog/${p.slug}` }))} url={`${site.url}/blog`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Blog", href: "/blog" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Blog" }]} />

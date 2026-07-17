@@ -87,7 +87,7 @@ export function BrandOrb({
         width: size,
         height: size,
         background: color,
-        opacity: 0.03,
+        opacity: 0.04,
       }}
       aria-hidden="true"
     />
