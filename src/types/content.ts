@@ -122,6 +122,7 @@ export interface BlogContent {
 export interface GlossaryContent {
   slug: string
   term: string
+  description: string
   definition: string
   extendedDefinition: string
   category: string

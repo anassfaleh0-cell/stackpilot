@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const item = getGlossaryTerm(slug)
   if (!item) return {}
-  return createMetadata({ title: item.term, description: item.definition, path: `/glossary/${slug}`, ogType: "article", articleTags: [item.category] })
+  return createMetadata({ title: item.term + " Definition & Best Practices", description: item.description || item.definition, path: `/glossary/${slug}`, ogType: "article", articleTags: [item.category] })
 }
 
 export default async function GlossaryTermPage({ params }: { params: Promise<{ slug: string }> }) {

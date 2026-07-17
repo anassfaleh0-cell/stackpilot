@@ -85,7 +85,7 @@
     {"question": "Is Netlify suitable for large-scale applications?", "answer": "Netlify is suitable for large-scale content and marketing sites but has limitations for applications requiring heavy server-side processing or unpredictable bandwidth. The Business plan provides 99.99% SLA, SAML SSO, and dedicated build infrastructure for production-critical applications. For very large-scale applications with complex server-side requirements, evaluate whether Netlify's function timeout limits (10 seconds on Pro, 26 on Enterprise) and bandwidth pricing ($20/100 GB overage) align with the application's usage patterns."}
   ],
   "alternatives": ["vercel"],
-  "relatedComparisons": [],
+  "relatedComparisons": ["vercel-vs-netlify"],
   "relatedGuides": ["developer-tools-stack-guide", "saas-implementation-best-practices"],
   "relatedPosts": ["frontend-deployment-platforms-comparison"],
   "lastReviewed": "2026-07-16",

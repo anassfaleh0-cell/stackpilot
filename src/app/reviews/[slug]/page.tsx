@@ -22,8 +22,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const tool = getReview(slug)
   if (!tool) return {}
   return createMetadata({
-    title: `${tool.name} Review 2026`,
-    description: `Read our in-depth ${tool.name} review. Expert analysis, features, pricing, pros & cons, and alternatives. ${tool.tagline}`,
+    title: `${tool.name} Review 2026: Pricing, Features, Pros & Cons`,
+    description: `Read our in-depth ${tool.name} review (2026). Expert analysis of features, pricing, pros, cons, and top alternatives. ${tool.tagline}`,
     path: `/reviews/${tool.slug}`,
     ogType: "article",
     publishedAt: tool.lastReviewed,

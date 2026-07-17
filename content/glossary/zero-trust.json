@@ -9,5 +9,9 @@
     "Micro-segmentation that isolates workloads so a compromised container cannot access neighboring systems",
     "Continuous user behavior monitoring that flags and blocks unusual data access patterns from an authenticated session"
   ],
-  "relatedTerms": ["encryption", "siem"]
+  "relatedTerms": [
+    "encryption",
+    "siem"
+  ],
+  "description": "Zero Trust is a security framework that requires continuous verification of every access request. Learn how Zero Trust architecture protects modern enterprises."
 }
