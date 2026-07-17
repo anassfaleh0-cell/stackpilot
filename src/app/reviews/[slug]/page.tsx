@@ -77,7 +77,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
             {/* Main Content */}
             <div className="lg:col-span-2">
               {/* Identity & Trust */}
-              <div className="flex flex-wrap items-center gap-3 mb-4">
+              <div className="flex flex-wrap items-center gap-3 mb-3">
                 <Badge variant="default">{tool.category}</Badge>
                 {isBestInCategory && (
                   <Badge variant="success">Best in Category</Badge>
@@ -91,7 +91,17 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   <span className="text-muted-foreground">/ 5.0</span>
                   <span className="text-xs text-muted-foreground">({tool.reviewCount} reviews)</span>
                 </div>
-                <span className="text-xs text-muted-foreground">Updated {tool.lastReviewed}</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-1">
+                <span className="flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+                  Reviewed by {tool.author}
+                </span>
+                <span className="flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
+                  Updated {tool.lastReviewed}
+                </span>
+                <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we test</a>
               </div>
 
               <p className="text-lg text-muted-foreground leading-relaxed mb-8 text-pretty">{tool.description}</p>
@@ -144,7 +154,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 >
                   Compare alternatives <ChevronRight size={14} />
                 </Link>
-                <span className="trust-badge text-xs">Independent review</span>
+                <span className="trust-badge text-xs">Independent · No paid placement</span>
               </div>
 
               {/* Pros & Cons */}
@@ -271,16 +281,19 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   </div>
                 </GlassCard>
 
-                {/* Reading time & last updated */}
+                {/* Reading time & independence */}
                 <GlassCard>
-                  <div className="p-4 space-y-2 text-xs text-muted-foreground">
+                  <div className="p-4 space-y-3 text-xs text-muted-foreground">
                     <div className="flex items-center gap-2">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
                       <span>{Math.max(5, Math.ceil(tool.content.reduce((a, s) => a + s.body.split(" ").length, 0) / 200))} min read</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
-                      <span>Reviewed {tool.lastReviewed}</span>
+                      <span>Reviewed {tool.lastReviewed} by {tool.author}</span>
+                    </div>
+                    <div className="pt-2 border-t border-border">
+                      <p className="text-[11px] leading-relaxed">We test every tool hands-on for at least two weeks. No vendor can pay for placement or influence scores. <a href="/methodology" className="text-primary hover:underline">Full methodology</a>.</p>
                     </div>
                   </div>
                 </GlassCard>
