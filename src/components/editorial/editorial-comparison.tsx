@@ -71,7 +71,18 @@ export function EditorialComparison({ tool1, tool2, features, winner, category, 
           <tbody>
             {features.map((f, i) => (
               <tr key={f.name} className={i < features.length - 1 ? "" : ""} style={{ borderBottom: i < features.length - 1 ? `1px solid ${p.glassBorder}` : undefined }}>
-                <td className="p-3 font-medium">{f.name}</td>
+                <td className="p-3">
+                  <div className="font-medium">{f.name}</div>
+                  {(f.tool1Detail || f.tool2Detail) && (
+                    <div className="text-[11px] text-muted-foreground mt-0.5 leading-tight">
+                      {f.tool1Detail && !f.tool2 && <span>{f.tool1Detail}</span>}
+                      {f.tool2Detail && !f.tool1 && <span>{f.tool2Detail}</span>}
+                      {f.tool1Detail && f.tool2Detail && <span>{f.tool1Detail} · {f.tool2Detail}</span>}
+                      {f.tool1Detail && f.tool2 && !f.tool2Detail && <span>{f.tool1Detail}</span>}
+                      {f.tool2Detail && f.tool1 && !f.tool1Detail && <span>{f.tool2Detail}</span>}
+                    </div>
+                  )}
+                </td>
                 <td className="text-center p-3">
                   {typeof f.tool1 === "boolean" ? (
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={f.tool1 ? p.primary : "var(--error)"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mx-auto">

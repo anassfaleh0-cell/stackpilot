@@ -72,7 +72,9 @@ export interface ComparisonContent {
 export interface ComparisonFeature {
   name: string
   tool1: boolean | string
+  tool1Detail?: string
   tool2: boolean | string
+  tool2Detail?: string
 }
 
 export interface GuideContent {
