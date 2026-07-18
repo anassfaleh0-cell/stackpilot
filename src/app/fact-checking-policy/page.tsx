@@ -23,10 +23,10 @@ export default function FactCheckingPolicyPage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Accuracy Standards</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Fact-Checking Policy</h1>
-            <p className="text-muted mb-8">Last updated: July 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
 
             <div className="prose prose-slate max-w-none">
-              <p className="text-lg text-muted mb-6">
+              <p className="text-lg text-muted-foreground mb-6">
                 Accuracy is the foundation of trust. StackPilot maintains a rigorous multi-stage fact-checking process for every piece of content we publish.
               </p>
 
@@ -62,7 +62,7 @@ export default function FactCheckingPolicyPage() {
               <p>When errors are found, we correct them promptly and transparently. Our <a href="/corrections-policy">Corrections Policy</a> details our approach. We believe that transparent error correction is a core component of editorial integrity.</p>
               <p>Readers can report potential errors through our <a href="/contact">contact form</a>. We investigate every submission and respond within five business days.</p>
 
-              <p className="text-sm text-muted-foreground mt-8">For questions about our fact-checking process, contact <strong>facts@stackpilot.ai</strong>.</p>
+              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about our fact-checking process, contact <strong>facts@stackpilot.ai</strong>.</p>
             </div>
           </div>
         </Container>

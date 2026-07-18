@@ -1,4 +1,4 @@
-import type { ReviewContent, ComparisonContent, GuideContent, GlossaryContent, BlogContent, CategoryContent } from "@/types/content"
+import type { ReviewContent, ComparisonContent, GuideContent, GlossaryContent, BlogContent, CategoryKnowledge } from "@/types/content"
 import fs from "node:fs"
 import path from "node:path"
 
@@ -73,6 +73,17 @@ export function getAllBlogPosts(): BlogContent[] {
   return readDir(path.join(CONTENT_DIR, "blog"))
     .map((f) => readJson<BlogContent>(path.join(CONTENT_DIR, "blog", f)))
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+}
+
+export function getCategory(slug: string): CategoryKnowledge | null {
+  const file = path.join(CONTENT_DIR, "categories", `${slug}.json`)
+  if (!fs.existsSync(file)) return null
+  return readJson<CategoryKnowledge>(file)
+}
+
+export function getAllCategories(): CategoryKnowledge[] {
+  return readDir(path.join(CONTENT_DIR, "categories"))
+    .map((f) => readJson<CategoryKnowledge>(path.join(CONTENT_DIR, "categories", f)))
 }
 
 export function getContentTitle(type: string, slug: string): string | null {

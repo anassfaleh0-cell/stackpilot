@@ -20,7 +20,9 @@ export function OrganizationSchema() {
     logo: { "@type": "ImageObject", url: `${site.url}/logo.svg` },
     description: site.description,
     sameAs: [site.links.twitter, site.links.github],
-    foundingDate: "2025",
+    foundingDate: "2024",
+    numberOfEmployees: { "@type": "QuantitativeValue", minValue: 5, maxValue: 15 },
+    address: { "@type": "PostalAddress", addressCountry: "US" },
   })
   return ld(schema, "ld-organization")
 }
@@ -83,7 +85,7 @@ export function ArticleSchema({
     "@id": (url || site.url) + "#article",
     headline: title,
     description,
-    author: { "@type": "Person", "@id": `${site.url}/#person`, name: author },
+    author: { "@type": "Person", name: author },
     publisher: { "@id": `${site.url}/#organization` },
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
@@ -111,7 +113,7 @@ export function BlogPostingSchema({
     "@id": (url || site.url) + "#blogposting",
     headline: title,
     description,
-    author: { "@type": "Person", "@id": `${site.url}/#person`, name: author },
+    author: { "@type": "Person", name: author },
     publisher: { "@id": `${site.url}/#organization` },
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
@@ -128,7 +130,7 @@ export function SoftwareSchema({ name, description, applicationCategory, operati
   description: string
   applicationCategory: string
   operatingSystem?: string
-  offers?: { price?: string; priceCurrency?: string; url?: string }
+  offers?: { price: string; priceCurrency: string; url?: string }
   brand?: string
 }) {
   const schema = clean({
@@ -145,7 +147,7 @@ export function SoftwareSchema({ name, description, applicationCategory, operati
   return ld(schema, "ld-software")
 }
 
-export function ReviewSchema({ name, description, rating, reviewCount, url, datePublished, body }: {
+export function ReviewSchema({ name, description, rating, reviewCount, url, datePublished, body, companyInfo }: {
   name: string
   description: string
   rating: number
@@ -153,6 +155,7 @@ export function ReviewSchema({ name, description, rating, reviewCount, url, date
   url: string
   datePublished?: string
   body?: string
+  companyInfo?: { founded?: number; headquarters?: string; employees?: string }
 }) {
   const schema = clean({
     "@context": ctx,
@@ -162,6 +165,8 @@ export function ReviewSchema({ name, description, rating, reviewCount, url, date
     description,
     url,
     brand: { "@type": "Brand", name },
+    ...(companyInfo?.founded ? { productionDate: companyInfo.founded.toString() } : {}),
+    ...(companyInfo?.headquarters ? { countryOfOrigin: companyInfo.headquarters } : {}),
     review: {
       "@type": "Review",
       "@id": url + "#review",
@@ -256,4 +261,43 @@ export function HowToSchema({ name, description, steps }: { name: string; descri
     })),
   })
   return ld(schema, "ld-howto")
+}
+
+export function PersonSchema({ name, url, description, knowsAbout }: {
+  name: string
+  url: string
+  description?: string
+  knowsAbout?: string[]
+}) {
+  const schema = clean({
+    "@context": ctx,
+    "@type": "Person",
+    "@id": url + "#person",
+    name,
+    url,
+    description: description || undefined,
+    knowsAbout: knowsAbout?.map((k) => ({ "@type": "Thing", name: k })) || undefined,
+  })
+  return ld(schema, "ld-person")
+}
+
+export function WebPageSchema({ name, description, url, dateModified }: {
+  name: string
+  description: string
+  url: string
+  dateModified?: string
+}) {
+  const schema = clean({
+    "@context": ctx,
+    "@type": "WebPage",
+    "@id": url + "#webpage",
+    name,
+    description,
+    url,
+    dateModified: dateModified || undefined,
+    inLanguage: "en-US",
+    isPartOf: { "@id": `${site.url}/#website` },
+    about: { "@id": `${site.url}/#organization` },
+  })
+  return ld(schema, "ld-webpage")
 }

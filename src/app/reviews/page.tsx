@@ -8,7 +8,7 @@ import { createMetadata } from "@/lib/metadata"
 import { getAllReviews } from "@/lib/content/registry"
 import { categories } from "@/lib/constants"
 import Link from "next/link"
-import { Star, ArrowRight, Compass } from "lucide-react"
+import { Star, ArrowRight } from "lucide-react"
 import { BrandPattern, BrandDivider } from "@/components/brand/patterns"
 
 export const metadata = createMetadata({

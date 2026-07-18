@@ -22,74 +22,344 @@
     "Free tier's 500 MB database fills quickly for production workloads storing user-generated content, images as base64, or time-series data, forcing upgrades to the $25/month Pro plan sooner than expected"
   ],
   "features": [
-    {"name": "PostgreSQL Database", "description": "Full-featured PostgreSQL with pgvector, extensions, and SQL editor", "available": true, "category": "Core"},
-    {"name": "Authentication", "description": "User authentication with email/password, OAuth providers, and magic links", "available": true, "category": "Core"},
-    {"name": "Row Level Security", "description": "Database-level security policies that restrict row access per user", "available": true, "category": "Security"},
-    {"name": "Real-Time Subscriptions", "description": "WebSocket-based real-time data sync for live updates and collaboration", "available": true, "category": "Core"},
-    {"name": "File Storage", "description": "S3-compatible object storage with CDN and image transformations", "available": true, "category": "Core"},
-    {"name": "Edge Functions", "description": "Deno-based edge functions for custom backend logic at global locations", "available": true, "category": "Core"},
-    {"name": "Database Webhooks", "description": "Trigger HTTP requests on database insert, update, or delete events", "available": true, "category": "Integrations"},
-    {"name": "GraphQL API", "description": "Auto-generated GraphQL API via pg_graphql extension", "available": true, "category": "Integrations"},
-    {"name": "REST API", "description": "Auto-generated REST API from your database schema with PostgREST", "available": true, "category": "Integrations"},
-    {"name": "Vercel Integration", "description": "Seamless deployment to Vercel with environment variable management", "available": true, "category": "Integrations"},
-    {"name": "GitHub OAuth", "description": "GitHub authentication provider for quick user onboarding", "available": true, "category": "Integrations"},
-    {"name": "CLI & Local Dev", "description": "Local development environment with Supabase CLI and Docker support", "available": true, "category": "Core"},
-    {"name": "Database Backups", "description": "Automated daily backups with point-in-time recovery on paid plans", "available": true, "category": "Security"},
-    {"name": "Encryption at Rest", "description": "AES-256 encryption for all stored data", "available": true, "category": "Security"},
-    {"name": "Mobile SDK", "description": "Client SDKs for Flutter, React Native, Swift, and Kotlin", "available": true, "category": "Mobile"},
-    {"name": "Realtime Presence", "description": "Track user online status and cursor positions for collaborative apps", "available": true, "category": "Mobile"},
-    {"name": "SQL Editor", "description": "Browser-based SQL editor with query history and saved queries", "available": true, "category": "Core"},
-    {"name": "Self-Hosting", "description": "Deploy Supabase on your own infrastructure with Docker Compose", "available": true, "category": "Security"}
+    {
+      "name": "PostgreSQL Database",
+      "description": "Full-featured PostgreSQL with pgvector, extensions, and SQL editor",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Authentication",
+      "description": "User authentication with email/password, OAuth providers, and magic links",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Row Level Security",
+      "description": "Database-level security policies that restrict row access per user",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Real-Time Subscriptions",
+      "description": "WebSocket-based real-time data sync for live updates and collaboration",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "File Storage",
+      "description": "S3-compatible object storage with CDN and image transformations",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Edge Functions",
+      "description": "Deno-based edge functions for custom backend logic at global locations",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Database Webhooks",
+      "description": "Trigger HTTP requests on database insert, update, or delete events",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "GraphQL API",
+      "description": "Auto-generated GraphQL API via pg_graphql extension",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "REST API",
+      "description": "Auto-generated REST API from your database schema with PostgREST",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Vercel Integration",
+      "description": "Seamless deployment to Vercel with environment variable management",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "GitHub OAuth",
+      "description": "GitHub authentication provider for quick user onboarding",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "CLI & Local Dev",
+      "description": "Local development environment with Supabase CLI and Docker support",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Database Backups",
+      "description": "Automated daily backups with point-in-time recovery on paid plans",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Encryption at Rest",
+      "description": "AES-256 encryption for all stored data",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Mobile SDK",
+      "description": "Client SDKs for Flutter, React Native, Swift, and Kotlin",
+      "available": true,
+      "category": "Mobile"
+    },
+    {
+      "name": "Realtime Presence",
+      "description": "Track user online status and cursor positions for collaborative apps",
+      "available": true,
+      "category": "Mobile"
+    },
+    {
+      "name": "SQL Editor",
+      "description": "Browser-based SQL editor with query history and saved queries",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Self-Hosting",
+      "description": "Deploy Supabase on your own infrastructure with Docker Compose",
+      "available": true,
+      "category": "Security"
+    }
   ],
   "ratings": [
-    {"label": "Features", "score": 4.7},
-    {"label": "Ease of Use", "score": 4.4},
-    {"label": "Support", "score": 3.9},
-    {"label": "Value", "score": 4.8},
-    {"label": "Performance", "score": 4.5}
+    {
+      "label": "Features",
+      "score": 4.7
+    },
+    {
+      "label": "Ease of Use",
+      "score": 4.4
+    },
+    {
+      "label": "Support",
+      "score": 3.9
+    },
+    {
+      "label": "Value",
+      "score": 4.8
+    },
+    {
+      "label": "Performance",
+      "score": 4.5
+    }
   ],
   "content": [
-    {"title": "Executive Summary", "body": "Supabase has become the fastest-growing backend-as-a-service platform, growing from zero to 3+ million registered developers in under 5 years by positioning itself as the open-source Firebase alternative built on PostgreSQL. Unlike Firebase's proprietary document-store architecture, Supabase gives developers full SQL access to a managed PostgreSQL database with 40+ native extensions (pgvector for AI embeddings, PostGIS for geospatial, pg_cron for scheduling), auto-generated REST and GraphQL APIs, authentication with 20+ OAuth providers, S3-compatible file storage, and real-time subscriptions via WebSocket. The key differentiator is the database freedom — developers keep direct database access, can run raw SQL queries, create custom migrations, and connect any PostgreSQL-compatible tool (Metabase, Retool, Prisma) without going through a proprietary API layer. This architecture makes Supabase ideal for teams that want backend convenience without vendor lock-in, but requires more database knowledge than Firebase's fully abstracted document model. The generous free tier (500 MB database, 1 GB storage, 50,000 monthly active users, 2 GB bandwidth) makes it the most accessible BaaS for prototyping and early-stage applications.", "type": "text"},
-    {"title": "Best For", "body": "Supabase delivers the most value for three scenarios. Full-stack developers and early-stage startups building web and mobile applications that need a relational database backend with authentication, storage, and real-time features — teams can go from schema design to working API in under an hour, bypassing backend development entirely for standard CRUD functionality. AI applications needing vector storage and similarity search leverage pgvector for storing and querying embeddings directly in PostgreSQL alongside relational data, eliminating the operational complexity of managing a separate vector database like Pinecone or Weaviate. Teams building real-time collaborative features (live chat, multiplayer editing, shared dashboards) use Supabase's Realtime engine to subscribe to database changes via WebSocket with ~100ms latency, broadcasting inserts, updates, and deletes to all connected clients without polling or custom WebSocket server infrastructure.", "type": "text"},
-    {"title": "Worst Fit", "body": "Supabase is poorly suited for three scenarios. Applications requiring very high-throughput real-time connections (10,000+ concurrent channels with sub-50ms latency) — Supabase's Realtime server performance degrades under heavy connection loads, with latency increasing to 500ms-2s at scale. High-frequency trading, real-time gaming backends, and live auction platforms need dedicated WebSocket infrastructure. Teams preferring NoSQL or schema-less data models find Supabase's relational architecture restrictive; Firebase's Firestore or MongoDB Atlas provide the document-store flexibility they need without SQL schema constraints. Organizations with zero tolerance for documentation gaps — Supabase's rapid release cadence means new features often ship with incomplete documentation and breaking changes that require investigating GitHub issues or reading source code. Teams that need stable, thoroughly documented APIs for production-critical applications may find the documentation lag frustrating compared to Firebase's mature, comprehensive documentation.", "type": "text"},
-    {"title": "Key Features", "body": "Supabase extends PostgreSQL instead of replacing it: every table auto-generates a REST API and GraphQL endpoint, row-level security policies are written in SQL not a proprietary language, and real-time subscriptions use PostgreSQL replication slots natively.", "type": "list", "items": [
-      "Managed PostgreSQL database with automated backups, point-in-time recovery, 40+ pre-installed extensions (pgvector, PostGIS, pg_graphql, pg_cron, pg_stat_statements), and direct SQL access through the browser-based SQL editor or any PostgreSQL client.",
-      "Authentication with email/password, magic links, phone OTP, and 20+ OAuth providers (Google, GitHub, Discord, Apple, Twitter, Notion, Slack) plus Row Level Security policies written in SQL that restrict row access at the database level per authenticated user.",
-      "Realtime subscriptions broadcast database changes (INSERT, UPDATE, DELETE) to connected clients via WebSocket at ~100ms latency, supporting presence tracking and broadcast channels for collaborative features without custom server infrastructure.",
-      "Auto-generated REST API via PostgREST and GraphQL API via pg_graphql that adapt instantly to schema changes — creating a table automatically generates CRUD endpoints with filtering, pagination, and relationship queries.",
-      "Edge Functions using Deno provide globally distributed serverless compute at 30+ edge locations, supporting TypeScript/JavaScript execution with database access through the Supabase client library.",
-      "File Storage provides S3-compatible object storage with CDN delivery, image transformation (resize, crop, format conversion), and public or authenticated bucket access controlled through RLS policies."
-    ]},
-    {"title": "Real Advantages", "body": "Supabase's three genuine competitive advantages are PostgreSQL access, open-source architecture, and free tier generosity. On PostgreSQL access: no other BaaS provides direct SQL database access with full PostgreSQL capabilities — pgvector for AI embeddings, PostGIS for geospatial analysis, pg_graphql for auto-generated GraphQL, pg_cron for scheduling, and the ability to connect any PostgreSQL-compatible tool (Metabase, Tableau, Retool, Prisma) directly to the production database. Firebase, by contrast, exposes only its proprietary client SDKs with no direct database access. On open-source architecture: Supabase is fully Apache 2.0 licensed and self-hostable via Docker Compose, giving teams zero vendor lock-in. An application built on Supabase can be migrated to any PostgreSQL hosting provider (AWS RDS, Render, Railway) by pointing the application to a new database URL — an option Firebase does not offer. On free tier: Supabase's free tier (500 MB database, 1 GB file storage, 50,000 MAU, 2 GB bandwidth) is the most generous BaaS free plan. Firebase's Spark plan includes 1 GB storage but limits to 10 GB bandwidth and lacks built-in authentication at the free tier level without Blaze pricing considerations. The free tier supports genuine production prototyping without time limits.", "type": "text"},
-    {"title": "Real Limitations", "body": "Three significant limitations affect Supabase users. Documentation quality trails feature releases by 2-3 months on average — new features often ship with API reference pages but incomplete guides, migration paths, and example code, requiring developers to reverse-engineer functionality from GitHub discussions, source code, or community blog posts. The rapid release velocity (bi-weekly releases) means features change frequently, and developers maintaining production applications must carefully review changelog entries for breaking changes before upgrading. Real-time subscription performance under load degrades noticeably — single-node Realtime servers handle approximately 5,000 concurrent channels before latency increases from ~100ms to 500ms-2s. Applications expecting 10,000+ concurrent real-time connections need to architect a distributed Realtime setup or use a dedicated WebSocket service. Free tier resource limits (500 MB database, 50,000 MAU) are generous for prototyping but insufficient for production workloads with user-generated content — a social application with 1,000 users uploading profile images and generating posts may exceed the 500 MB database limit within weeks, requiring proactive upgrade planning to the $25/month Pro plan.", "type": "text"},
-    {"title": "Pricing Explained", "body": "Supabase offers four pricing tiers. Free: 500 MB database, 1 GB file storage, 50,000 monthly active users, 2 GB bandwidth, 500 MB edge function invocations, unlimited API requests, community support. Suitable for prototyping, hackathons, and proof-of-concept applications. Pro at $25/month: 8 GB database, 100 GB storage, 100,000 MAU, 50 GB bandwidth, 2 GB edge function invocations, daily backups with 7-day retention, priority email support. The most cost-effective tier for production applications — increasing MAU costs $0.00325 per additional user. Team at $599/month: 16 GB database, 500 GB storage, 500,000 MAU, 200 GB bandwidth, SOC 2 compliance, SSO/SAML, audit logs, 14-day backup retention, advanced support SLAs, and dedicated infrastructure option. Enterprise: custom pricing with custom database size, unlimited MAU, dedicated infrastructure, multi-region replication, custom retention, and 24/7 support. The Pro tier at $25/month provides the most value for the majority of production applications — the step from Free to Pro removes most platform limitations while remaining affordable for bootstrapped startups.", "type": "text"},
-    {"title": "Hidden Costs", "body": "Three hidden costs affect Supabase users. Bandwidth overage charges apply above tier limits: $0.09 per GB beyond the Pro plan's 50 GB monthly allocation. For applications serving significant media content or large API payloads, bandwidth costs can exceed the base subscription within weeks of achieving product-market fit. Database size management requires active monitoring — the Pro plan's 8 GB database limit is shared across all tables, indexes, materialized views, and system metadata. Applications storing user-generated content, activity feeds, or time-series data can consume this allocation faster than expected, requiring careful data retention policies or upgrade to Team tier. Edge Function execution limits: the Free tier includes 500 MB of edge function invocations, and the Pro tier includes 2 GB. Applications using edge functions for image processing, data transformation, or AI inference may exhaust this allocation on moderate traffic. Supabase does not throttle — it returns errors when limits are exceeded, which can cause unexpected application failures if not monitored. Teams should set up budget alerts and usage monitoring before launching to production.", "type": "text"},
-    {"title": "Learning Curve", "body": "Supabase's learning curve varies significantly by developer background. Developers experienced with PostgreSQL and SQL reach basic proficiency — creating tables in the SQL editor, configuring authentication with OAuth providers, writing Row Level Security policies, and calling the auto-generated REST API — within 4-8 hours. The platform is designed for developers who already understand relational database concepts, so there is minimal new paradigm to learn. Developers coming from Firebase/Firestore need 20-40 hours to adapt — the schema-first relational model requires designing database structure upfront rather than Firestore's schema-less document approach; writing RLS policies in SQL replaces Firebase Security Rules; and understanding PostgreSQL connection pooling, migration management, and extension configuration requires learning new concepts that Firebase abstracts entirely. Advanced proficiency — optimizing query performance with indexing strategies, configuring Realtime broadcast channels with presence tracking, building Deno edge functions with database access, and designing multi-schema database architectures for multi-tenant applications — requires 60-100 hours of hands-on experience. Supabase's documentation provides API references and getting-started guides but is thin on architecture guidance and production-deployment patterns, so developers often supplement with general PostgreSQL best-practice resources.", "type": "text"},
-    {"title": "Setup Time", "body": "Basic Supabase setup — creating a project, defining the database schema in the SQL editor, configuring authentication providers, and generating REST API endpoints — takes 1-2 hours for developers familiar with PostgreSQL. The SQL editor provides a browser-based interface for creating tables, indexes, and views with auto-complete and query history. Authentication configuration requires creating OAuth app credentials with each provider (Google, GitHub, Discord) and adding them to the Supabase dashboard. Full production setup for a web application with 5-10 database tables, Row Level Security policies per table, file storage buckets with access controls, and edge functions for background processing requires 2-4 weeks. The extended timeline is primarily due to: RLS policy writing and testing (3-5 days), edge function development and deployment (2-3 days), storage bucket configuration with CDN and image transformation setup (1-2 days), and integration testing across authentication, database access, and real-time subscriptions (3-5 days). Supabase's CLI provides local development with Docker, enabling schema migration management and environment parity between development and production.", "type": "text"},
-    {"title": "Migration Difficulty", "body": "Migrating from Firebase to Supabase is moderately difficult (6/10) due to fundamental architectural differences. Firestore's document-store data model must be restructured into PostgreSQL tables with normalized schemas — collections become tables, documents become rows, and sub-collections become related tables with foreign keys. Firebase Authentication users can be exported as JSON and imported into Supabase via the Supabase Auth API, but user passwords are not portable (Firebase hashes passwords with a proprietary algorithm), requiring all users to reset their passwords after migration. Firebase Storage files must be downloaded and re-uploaded to Supabase Storage; there is no direct migration path. Firebase Security Rules must be rewritten as PostgreSQL Row Level Security policies — a conceptually similar but syntactically different access control model. Migrating from any PostgreSQL hosting provider (AWS RDS, Render, Railway) to Supabase is straightforward (3/10 difficulty): export the database via pg_dump, import into Supabase via psql, update the database connection string in the application, and reconfigure any PostgreSQL extension dependencies. The pg_dump/pg_restore approach preserves schemas, data, indexes, triggers, functions, and extensions with minimal manual intervention.", "type": "text"},
-    {"title": "Integration Ecosystem", "body": "Supabase's integration ecosystem is built around standard web protocols and the PostgreSQL ecosystem. API access: auto-generated REST API via PostgREST, auto-generated GraphQL API via pg_graphql, and direct PostgreSQL connection via port 5432 for any PostgreSQL-compatible client or ORM (Prisma, Drizzle, Knex, TypeORM). Authentication: supports 20+ OAuth providers plus email/password, magic link, and phone OTP — social login configuration is a dashboard-driven process requiring OAuth app credentials from each provider. Third-party integrations: Vercel (native integration via Supabase Vercel integration that auto-provisions database and environment variables), Next.js (first-class client library with server components support), Flutter/React Native (mobile SDKs with offline data support), and Retool (direct database connection for admin panel building). AI/ML integrations: pgvector enables direct embedding storage and similarity search without a separate vector database, supporting OpenAI, Hugging Face, and custom embedding models. Self-hosting via Docker Compose enables integration with private infrastructure, CI/CD pipelines, and custom monitoring. The Supabase client library supports JavaScript/TypeScript, Dart/Flutter, Swift, Kotlin, and Python — with community SDKs for Go, Rust, and Ruby. The integration ecosystem advantage is that any PostgreSQL-compatible tool connects directly to Supabase without adapter layers; the limitation is that Supabase-specific features (Realtime, Auth, Storage) require the Supabase client library.", "type": "text"},
-    {"title": "Security & Compliance", "body": "Supabase is SOC 2 Type II certified (Team and Enterprise plans) with annual third-party audits. Data in transit is encrypted with TLS 1.3; data at rest uses AES-256 encryption. Supabase hosts on AWS across US East (Virginia), US West (Oregon), EU West (Ireland), EU Central (Frankfurt), Asia Pacific (Singapore), and Asia Pacific (Sydney) regions — data residency can be selected during project creation. HIPAA compliance is available on Enterprise plan with a Business Associate Agreement. GDPR compliance is supported with a Data Processing Agreement available for all plans. The platform supports Row Level Security as the primary access control mechanism — RLS policies are SQL expressions evaluated per row per query, preventing unauthorized data access at the database level regardless of the application layer. Supabase Auth provides email/password, OAuth, and magic link authentication with support for custom JWT, and the auth schema is stored in a separate PostgreSQL schema from application data. API requests are rate-limited per IP address (60 requests per minute for anonymous access, higher limits for authenticated users). Supabase does not currently offer FedRAMP certification. Self-hosting via Docker provides complete data control for organizations with strict sovereignty requirements, but self-hosted deployments do not include the managed dashboard, automatic backups, or SLA support.", "type": "text"},
-    {"title": "Performance", "body": "Supabase performance depends on the database workload and tier. Database query performance on Pro tier (8 GB RAM) handles standard CRUD operations within 5-20ms for tables under 1 million rows. Complex queries with JOINs across 5+ tables on datasets exceeding 10 million rows require proper indexing strategy — unoptimized queries can take 2-10 seconds. Real-time subscription latency averages 100ms for standard workloads but increases to 500ms-2s under heavy connection loads (5,000+ concurrent channels). API response times: REST API via PostgREST averages 10-30ms for standard queries with response caching; GraphQL API via pg_graphql adds 5-15ms overhead for query parsing and validation. Edge Functions cold start times average 50-100ms, with warm invocation times of 5-15ms. File Storage upload throughput averages 5-10 MB/s for files under 100 MB, with CDN delivery for public buckets distributed across 200+ edge locations globally. Service availability was 99.9% in 2025 with periodic scheduled maintenance windows (1-2 hours per quarter for infrastructure upgrades). Supabase maintains a status page at status.supabase.com with real-time incident reporting. The platform does not currently offer read replicas for query offloading, so reporting and analytics queries on production databases compete with application traffic for database resources.", "type": "text"},
-    {"title": "Customer Support", "body": "Supabase support varies by plan tier. Free plan: community support through GitHub Discussions and Discord (active developer community with Supabase team participation). Pro plan ($25/month): priority email support with 24-hour response time, access to private Supabase Discord channel. Team plan ($599/month): priority email support with 8-hour response, dedicated Discord channel, onboarding assistance, and quarterly check-ins. Enterprise plan: 24/7 support with 2-hour critical response, Slack or Teams dedicated channel, named support engineer, custom training, and monthly infrastructure reviews. The Supabase documentation provides API references, getting-started guides, integration tutorials, and migration guides — but documentation quality and completeness vary by feature, with core features (database, auth, storage) well-documented and newer features (edge functions, Realtime broadcast) having thinner coverage. The Supabase GitHub repository serves as the primary channel for bug reports and feature requests, with the core team responsive to issues. Community support quality is high for common use cases, but niche questions about complex RLS policies or advanced PostgreSQL features may receive delayed or incomplete responses.", "type": "text"},
-    {"title": "Real-world Use Cases", "body": "A B2B SaaS startup building a team collaboration tool uses Supabase as their primary backend — storing user accounts, team structures, project data, and activity feeds in PostgreSQL; using Realtime subscriptions to broadcast task updates and comments to all team members in under 200ms; and storing document uploads in Supabase Storage with RLS policies ensuring users can only access files from their own team's projects. Their entire backend infrastructure runs on the Pro plan at $25/month, serving 500 active teams with zero dedicated backend infrastructure management. An AI research group building a semantic document search application uses Supabase with pgvector to store 2 million document embeddings as vector representations alongside their source metadata — running similarity searches in under 100ms without managing a separate vector database infrastructure, and using Supabase's full-text search for hybrid keyword-plus-semantic retrieval. A mobile app developer building a social fitness application uses Supabase Auth for Google and Apple sign-in, Supabase Storage for user-uploaded workout photos with CDN delivery, and Supabase's REST API for leaderboard data — all accessed through the Flutter SDK, with the entire backend on the Free tier during development and a seamless transition to Pro when launching to beta testers.", "type": "text"},
-    {"title": "Common Mistakes", "body": "Five mistakes commonly affect Supabase users. Not writing Row Level Security policies early — teams that skip RLS configuration and rely on application-layer access control during development discover in production that their database is publicly accessible through the auto-generated API. RLS should be the first thing configured after table creation, not the last. Underestimating PostgreSQL connection limits — Supabase's connection pooler (PgBouncer) limits concurrent connections based on RAM allocation. The Pro tier supports 60 direct connections and 200 pooled connections; applications using connection-pooling ORMs like Prisma without configuring connection limits exhaust this pool under moderate load. Forget to set up database migration management — making schema changes directly in the Supabase dashboard without version-controlled migration files leads to unreproducible database states across environments. Teams should use Supabase CLI migrations or their ORM's migration system from day one. Over-relying on the auto-generated API for complex queries — PostgREST generates REST endpoints for standard CRUD but struggles with complex aggregation, reporting, and multi-step transactions. For analytical queries, use database views or Supabase Edge Functions instead of multiple sequential API calls. Not configuring usage alerts — the free and Pro plans have hard resource limits (database size, bandwidth, MAU) that return errors when exceeded. Teams that reach their database size limit at 2 AM on a Saturday face a production outage until they manually upgrade. Setting up monitoring and budget alerts prevents this surprise.", "type": "text"},
-    {"title": "Tips from experienced users", "body": "Experienced Supabase developers recommend five practices. Use the SQL Editor for schema migrations rather than the Table Editor — SQL provides version-controllable, repeatable schema changes; the Table Editor is useful for ad-hoc data inspection but should not be the primary schema management interface. Design RLS policies with the principle of least privilege: start by enabling RLS on every table (which blocks all access by default), then add policies for each operation type (SELECT, INSERT, UPDATE, DELETE) only as needed. Test RLS policies using Supabase's dashboard RLS test tool before deploying to production. Use database functions (PostgreSQL functions/stored procedures) for complex business logic that involves multiple tables — functions execute within the database with full access control and transactional integrity, and can be exposed as API endpoints through Supabase's REST API using PostgREST function endpoints. Configure the connection pooler with appropriate settings for your ORM — Prisma users should set pgBouncer transaction mode with prepared statement disabling, while Knex or direct database clients work better with session mode. Set up daily database backups to an external location even on paid plans — while Supabase provides automated backups with point-in-time recovery on paid plans, having an independent backup in your cloud storage account provides insurance against platform-level incidents.", "type": "text"},
-    {"title": "Alternatives", "body": "Supabase's primary alternatives serve different backend architecture preferences. Firebase (Google, free Spark plan, pay-as-you-go Blaze pricing) provides a NoSQL document database with fully managed infrastructure, client SDKs for web and mobile, and push notifications — the dominant choice for teams that prefer schema-less development and Google Cloud integration, but lacks direct database access and imposes vendor lock-in through proprietary Firebase APIs and SDKs. PocketBase (free, self-hosted open-source) offers a SQLite-based backend with admin UI, file storage, and authentication in a single Go binary — a simpler, single-file alternative for small applications and prototypes that need a quick backend without the complexity of PostgreSQL or Supabase's cloud infrastructure. Appwrite ($0-49/month managed, free self-hosted) provides an open-source BaaS with PostgreSQL storage, authentication, functions, and storage — a closer Supabase competitor that offers similar features with slightly different developer experience and less mature PostgreSQL integration. Convex ($0-50/month) provides a reactive real-time backend with TypeScript-first database queries that automatically update UI when data changes — a newer entrant that focuses on the developer experience of writing backend logic in TypeScript and getting automatic reactivity without WebSocket management. The decision between these alternatives should consider: whether relational database access and SQL skills are priorities (Supabase), Google Cloud ecosystem integration (Firebase), simplicity and self-hosting ease (PocketBase), or TypeScript-first reactive development (Convex).", "type": "text"},
-    {"title": "Final Verdict", "body": "Supabase earns a 4.5/5 rating and is the best backend-as-a-service platform for developers who want PostgreSQL power with managed infrastructure convenience. Its open-source architecture, direct database access, and generous free tier are genuine advantages over Firebase that make it the preferred choice for developers who value data portability and SQL capabilities. The platform is not the right choice for teams that prefer NoSQL data models (Firebase), need the absolute highest real-time throughput (dedicated WebSocket infrastructure), or require fully mature documentation with training resources (Firebase's documentation ecosystem is more comprehensive). The Pro tier at $25/month provides sufficient resources for most production applications, and the self-hosting option ensures zero vendor lock-in for compliance-sensitive deployments. The primary risk is Supabase's rapid development pace — features evolve quickly, documentation lags, and breaking changes require attentive changelog monitoring. Organizations that prioritize stability over velocity should evaluate Supabase's maturity against their tolerance for infrastructure evolution. Buy Supabase for the PostgreSQL access and open-source portability; invest in RLS policy design and migration management from day one to avoid common production pitfalls.", "type": "text"},
-    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
-    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
-    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
+    {
+      "title": "Executive Summary",
+      "body": "Supabase has become the fastest-growing backend-as-a-service platform, growing from zero to 3+ million registered developers in under 5 years by positioning itself as the open-source Firebase alternative built on PostgreSQL. Unlike Firebase's proprietary document-store architecture, Supabase gives developers full SQL access to a managed PostgreSQL database with 40+ native extensions (pgvector for AI embeddings, PostGIS for geospatial, pg_cron for scheduling), auto-generated REST and GraphQL APIs, authentication with 20+ OAuth providers, S3-compatible file storage, and real-time subscriptions via WebSocket. The key differentiator is the database freedom — developers keep direct database access, can run raw SQL queries, create custom migrations, and connect any PostgreSQL-compatible tool (Metabase, Retool, Prisma) without going through a proprietary API layer. This architecture makes Supabase ideal for teams that want backend convenience without vendor lock-in, but requires more database knowledge than Firebase's fully abstracted document model. The generous free tier (500 MB database, 1 GB storage, 50,000 monthly active users, 2 GB bandwidth) makes it the most accessible BaaS for prototyping and early-stage applications.",
+      "type": "text"
+    },
+    {
+      "title": "Best For",
+      "body": "Supabase delivers the most value for three scenarios. Full-stack developers and early-stage startups building web and mobile applications that need a relational database backend with authentication, storage, and real-time features — teams can go from schema design to working API in under an hour, bypassing backend development entirely for standard CRUD functionality. AI applications needing vector storage and similarity search leverage pgvector for storing and querying embeddings directly in PostgreSQL alongside relational data, eliminating the operational complexity of managing a separate vector database like Pinecone or Weaviate. Teams building real-time collaborative features (live chat, multiplayer editing, shared dashboards) use Supabase's Realtime engine to subscribe to database changes via WebSocket with ~100ms latency, broadcasting inserts, updates, and deletes to all connected clients without polling or custom WebSocket server infrastructure.",
+      "type": "text"
+    },
+    {
+      "title": "Worst Fit",
+      "body": "Supabase is poorly suited for three scenarios. Applications requiring very high-throughput real-time connections (10,000+ concurrent channels with sub-50ms latency) — Supabase's Realtime server performance degrades under heavy connection loads, with latency increasing to 500ms-2s at scale. High-frequency trading, real-time gaming backends, and live auction platforms need dedicated WebSocket infrastructure. Teams preferring NoSQL or schema-less data models find Supabase's relational architecture restrictive; Firebase's Firestore or MongoDB Atlas provide the document-store flexibility they need without SQL schema constraints. Organizations with zero tolerance for documentation gaps — Supabase's rapid release cadence means new features often ship with incomplete documentation and breaking changes that require investigating GitHub issues or reading source code. Teams that need stable, thoroughly documented APIs for production-critical applications may find the documentation lag frustrating compared to Firebase's mature, comprehensive documentation.",
+      "type": "text"
+    },
+    {
+      "title": "Key Features",
+      "body": "Supabase extends PostgreSQL instead of replacing it: every table auto-generates a REST API and GraphQL endpoint, row-level security policies are written in SQL not a proprietary language, and real-time subscriptions use PostgreSQL replication slots natively.",
+      "type": "list",
+      "items": [
+        "Managed PostgreSQL database with automated backups, point-in-time recovery, 40+ pre-installed extensions (pgvector, PostGIS, pg_graphql, pg_cron, pg_stat_statements), and direct SQL access through the browser-based SQL editor or any PostgreSQL client.",
+        "Authentication with email/password, magic links, phone OTP, and 20+ OAuth providers (Google, GitHub, Discord, Apple, Twitter, Notion, Slack) plus Row Level Security policies written in SQL that restrict row access at the database level per authenticated user.",
+        "Realtime subscriptions broadcast database changes (INSERT, UPDATE, DELETE) to connected clients via WebSocket at ~100ms latency, supporting presence tracking and broadcast channels for collaborative features without custom server infrastructure.",
+        "Auto-generated REST API via PostgREST and GraphQL API via pg_graphql that adapt instantly to schema changes — creating a table automatically generates CRUD endpoints with filtering, pagination, and relationship queries.",
+        "Edge Functions using Deno provide globally distributed serverless compute at 30+ edge locations, supporting TypeScript/JavaScript execution with database access through the Supabase client library.",
+        "File Storage provides S3-compatible object storage with CDN delivery, image transformation (resize, crop, format conversion), and public or authenticated bucket access controlled through RLS policies."
+      ]
+    },
+    {
+      "title": "Real Advantages",
+      "body": "Supabase's three genuine competitive advantages are PostgreSQL access, open-source architecture, and free tier generosity. On PostgreSQL access: no other BaaS provides direct SQL database access with full PostgreSQL capabilities — pgvector for AI embeddings, PostGIS for geospatial analysis, pg_graphql for auto-generated GraphQL, pg_cron for scheduling, and the ability to connect any PostgreSQL-compatible tool (Metabase, Tableau, Retool, Prisma) directly to the production database. Firebase, by contrast, exposes only its proprietary client SDKs with no direct database access. On open-source architecture: Supabase is fully Apache 2.0 licensed and self-hostable via Docker Compose, giving teams zero vendor lock-in. An application built on Supabase can be migrated to any PostgreSQL hosting provider (AWS RDS, Render, Railway) by pointing the application to a new database URL — an option Firebase does not offer. On free tier: Supabase's free tier (500 MB database, 1 GB file storage, 50,000 MAU, 2 GB bandwidth) is the most generous BaaS free plan. Firebase's Spark plan includes 1 GB storage but limits to 10 GB bandwidth and lacks built-in authentication at the free tier level without Blaze pricing considerations. The free tier supports genuine production prototyping without time limits.",
+      "type": "text"
+    },
+    {
+      "title": "Real Limitations",
+      "body": "Three significant limitations affect Supabase users. Documentation quality trails feature releases by 2-3 months on average — new features often ship with API reference pages but incomplete guides, migration paths, and example code, requiring developers to reverse-engineer functionality from GitHub discussions, source code, or community blog posts. The rapid release velocity (bi-weekly releases) means features change frequently, and developers maintaining production applications must carefully review changelog entries for breaking changes before upgrading. Real-time subscription performance under load degrades noticeably — single-node Realtime servers handle approximately 5,000 concurrent channels before latency increases from ~100ms to 500ms-2s. Applications expecting 10,000+ concurrent real-time connections need to architect a distributed Realtime setup or use a dedicated WebSocket service. Free tier resource limits (500 MB database, 50,000 MAU) are generous for prototyping but insufficient for production workloads with user-generated content — a social application with 1,000 users uploading profile images and generating posts may exceed the 500 MB database limit within weeks, requiring proactive upgrade planning to the $25/month Pro plan.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing Explained",
+      "body": "Supabase offers four pricing tiers. Free: 500 MB database, 1 GB file storage, 50,000 monthly active users, 2 GB bandwidth, 500 MB edge function invocations, unlimited API requests, community support. Suitable for prototyping, hackathons, and proof-of-concept applications. Pro at $25/month: 8 GB database, 100 GB storage, 100,000 MAU, 50 GB bandwidth, 2 GB edge function invocations, daily backups with 7-day retention, priority email support. The most cost-effective tier for production applications — increasing MAU costs $0.00325 per additional user. Team at $599/month: 16 GB database, 500 GB storage, 500,000 MAU, 200 GB bandwidth, SOC 2 compliance, SSO/SAML, audit logs, 14-day backup retention, advanced support SLAs, and dedicated infrastructure option. Enterprise: custom pricing with custom database size, unlimited MAU, dedicated infrastructure, multi-region replication, custom retention, and 24/7 support. The Pro tier at $25/month provides the most value for the majority of production applications — the step from Free to Pro removes most platform limitations while remaining affordable for bootstrapped startups.",
+      "type": "text"
+    },
+    {
+      "title": "Hidden Costs",
+      "body": "Three hidden costs affect Supabase users. Bandwidth overage charges apply above tier limits: $0.09 per GB beyond the Pro plan's 50 GB monthly allocation. For applications serving significant media content or large API payloads, bandwidth costs can exceed the base subscription within weeks of achieving product-market fit. Database size management requires active monitoring — the Pro plan's 8 GB database limit is shared across all tables, indexes, materialized views, and system metadata. Applications storing user-generated content, activity feeds, or time-series data can consume this allocation faster than expected, requiring careful data retention policies or upgrade to Team tier. Edge Function execution limits: the Free tier includes 500 MB of edge function invocations, and the Pro tier includes 2 GB. Applications using edge functions for image processing, data transformation, or AI inference may exhaust this allocation on moderate traffic. Supabase does not throttle — it returns errors when limits are exceeded, which can cause unexpected application failures if not monitored. Teams should set up budget alerts and usage monitoring before launching to production.",
+      "type": "text"
+    },
+    {
+      "title": "Learning Curve",
+      "body": "Supabase's learning curve varies significantly by developer background. Developers experienced with PostgreSQL and SQL reach basic proficiency — creating tables in the SQL editor, configuring authentication with OAuth providers, writing Row Level Security policies, and calling the auto-generated REST API — within 4-8 hours. The platform is designed for developers who already understand relational database concepts, so there is minimal new paradigm to learn. Developers coming from Firebase/Firestore need 20-40 hours to adapt — the schema-first relational model requires designing database structure upfront rather than Firestore's schema-less document approach; writing RLS policies in SQL replaces Firebase Security Rules; and understanding PostgreSQL connection pooling, migration management, and extension configuration requires learning new concepts that Firebase abstracts entirely. Advanced proficiency — optimizing query performance with indexing strategies, configuring Realtime broadcast channels with presence tracking, building Deno edge functions with database access, and designing multi-schema database architectures for multi-tenant applications — requires 60-100 hours of hands-on experience. Supabase's documentation provides API references and getting-started guides but is thin on architecture guidance and production-deployment patterns, so developers often supplement with general PostgreSQL best-practice resources.",
+      "type": "text"
+    },
+    {
+      "title": "Setup Time",
+      "body": "Basic Supabase setup — creating a project, defining the database schema in the SQL editor, configuring authentication providers, and generating REST API endpoints — takes 1-2 hours for developers familiar with PostgreSQL. The SQL editor provides a browser-based interface for creating tables, indexes, and views with auto-complete and query history. Authentication configuration requires creating OAuth app credentials with each provider (Google, GitHub, Discord) and adding them to the Supabase dashboard. Full production setup for a web application with 5-10 database tables, Row Level Security policies per table, file storage buckets with access controls, and edge functions for background processing requires 2-4 weeks. The extended timeline is primarily due to: RLS policy writing and testing (3-5 days), edge function development and deployment (2-3 days), storage bucket configuration with CDN and image transformation setup (1-2 days), and integration testing across authentication, database access, and real-time subscriptions (3-5 days). Supabase's CLI provides local development with Docker, enabling schema migration management and environment parity between development and production.",
+      "type": "text"
+    },
+    {
+      "title": "Migration Difficulty",
+      "body": "Migrating from Firebase to Supabase is moderately difficult (6/10) due to fundamental architectural differences. Firestore's document-store data model must be restructured into PostgreSQL tables with normalized schemas — collections become tables, documents become rows, and sub-collections become related tables with foreign keys. Firebase Authentication users can be exported as JSON and imported into Supabase via the Supabase Auth API, but user passwords are not portable (Firebase hashes passwords with a proprietary algorithm), requiring all users to reset their passwords after migration. Firebase Storage files must be downloaded and re-uploaded to Supabase Storage; there is no direct migration path. Firebase Security Rules must be rewritten as PostgreSQL Row Level Security policies — a conceptually similar but syntactically different access control model. Migrating from any PostgreSQL hosting provider (AWS RDS, Render, Railway) to Supabase is straightforward (3/10 difficulty): export the database via pg_dump, import into Supabase via psql, update the database connection string in the application, and reconfigure any PostgreSQL extension dependencies. The pg_dump/pg_restore approach preserves schemas, data, indexes, triggers, functions, and extensions with minimal manual intervention.",
+      "type": "text"
+    },
+    {
+      "title": "Integration Ecosystem",
+      "body": "Supabase's integration ecosystem is built around standard web protocols and the PostgreSQL ecosystem. API access: auto-generated REST API via PostgREST, auto-generated GraphQL API via pg_graphql, and direct PostgreSQL connection via port 5432 for any PostgreSQL-compatible client or ORM (Prisma, Drizzle, Knex, TypeORM). Authentication: supports 20+ OAuth providers plus email/password, magic link, and phone OTP — social login configuration is a dashboard-driven process requiring OAuth app credentials from each provider. Third-party integrations: Vercel (native integration via Supabase Vercel integration that auto-provisions database and environment variables), Next.js (first-class client library with server components support), Flutter/React Native (mobile SDKs with offline data support), and Retool (direct database connection for admin panel building). AI/ML integrations: pgvector enables direct embedding storage and similarity search without a separate vector database, supporting OpenAI, Hugging Face, and custom embedding models. Self-hosting via Docker Compose enables integration with private infrastructure, CI/CD pipelines, and custom monitoring. The Supabase client library supports JavaScript/TypeScript, Dart/Flutter, Swift, Kotlin, and Python — with community SDKs for Go, Rust, and Ruby. The integration ecosystem advantage is that any PostgreSQL-compatible tool connects directly to Supabase without adapter layers; the limitation is that Supabase-specific features (Realtime, Auth, Storage) require the Supabase client library.",
+      "type": "text"
+    },
+    {
+      "title": "Security & Compliance",
+      "body": "Supabase is SOC 2 Type II certified (Team and Enterprise plans) with annual third-party audits. Data in transit is encrypted with TLS 1.3; data at rest uses AES-256 encryption. Supabase hosts on AWS across US East (Virginia), US West (Oregon), EU West (Ireland), EU Central (Frankfurt), Asia Pacific (Singapore), and Asia Pacific (Sydney) regions — data residency can be selected during project creation. HIPAA compliance is available on Enterprise plan with a Business Associate Agreement. GDPR compliance is supported with a Data Processing Agreement available for all plans. The platform supports Row Level Security as the primary access control mechanism — RLS policies are SQL expressions evaluated per row per query, preventing unauthorized data access at the database level regardless of the application layer. Supabase Auth provides email/password, OAuth, and magic link authentication with support for custom JWT, and the auth schema is stored in a separate PostgreSQL schema from application data. API requests are rate-limited per IP address (60 requests per minute for anonymous access, higher limits for authenticated users). Supabase does not currently offer FedRAMP certification. Self-hosting via Docker provides complete data control for organizations with strict sovereignty requirements, but self-hosted deployments do not include the managed dashboard, automatic backups, or SLA support.",
+      "type": "text"
+    },
+    {
+      "title": "Performance",
+      "body": "Supabase performance depends on the database workload and tier. Database query performance on Pro tier (8 GB RAM) handles standard CRUD operations within 5-20ms for tables under 1 million rows. Complex queries with JOINs across 5+ tables on datasets exceeding 10 million rows require proper indexing strategy — unoptimized queries can take 2-10 seconds. Real-time subscription latency averages 100ms for standard workloads but increases to 500ms-2s under heavy connection loads (5,000+ concurrent channels). API response times: REST API via PostgREST averages 10-30ms for standard queries with response caching; GraphQL API via pg_graphql adds 5-15ms overhead for query parsing and validation. Edge Functions cold start times average 50-100ms, with warm invocation times of 5-15ms. File Storage upload throughput averages 5-10 MB/s for files under 100 MB, with CDN delivery for public buckets distributed across 200+ edge locations globally. Service availability was 99.9% in 2025 with periodic scheduled maintenance windows (1-2 hours per quarter for infrastructure upgrades). Supabase maintains a status page at status.supabase.com with real-time incident reporting. The platform does not currently offer read replicas for query offloading, so reporting and analytics queries on production databases compete with application traffic for database resources.",
+      "type": "text"
+    },
+    {
+      "title": "Customer Support",
+      "body": "Supabase support varies by plan tier. Free plan: community support through GitHub Discussions and Discord (active developer community with Supabase team participation). Pro plan ($25/month): priority email support with 24-hour response time, access to private Supabase Discord channel. Team plan ($599/month): priority email support with 8-hour response, dedicated Discord channel, onboarding assistance, and quarterly check-ins. Enterprise plan: 24/7 support with 2-hour critical response, Slack or Teams dedicated channel, named support engineer, custom training, and monthly infrastructure reviews. The Supabase documentation provides API references, getting-started guides, integration tutorials, and migration guides — but documentation quality and completeness vary by feature, with core features (database, auth, storage) well-documented and newer features (edge functions, Realtime broadcast) having thinner coverage. The Supabase GitHub repository serves as the primary channel for bug reports and feature requests, with the core team responsive to issues. Community support quality is high for common use cases, but niche questions about complex RLS policies or advanced PostgreSQL features may receive delayed or incomplete responses.",
+      "type": "text"
+    },
+    {
+      "title": "Real-world Use Cases",
+      "body": "A B2B SaaS startup building a team collaboration tool uses Supabase as their primary backend — storing user accounts, team structures, project data, and activity feeds in PostgreSQL; using Realtime subscriptions to broadcast task updates and comments to all team members in under 200ms; and storing document uploads in Supabase Storage with RLS policies ensuring users can only access files from their own team's projects. Their entire backend infrastructure runs on the Pro plan at $25/month, serving 500 active teams with zero dedicated backend infrastructure management. An AI research group building a semantic document search application uses Supabase with pgvector to store 2 million document embeddings as vector representations alongside their source metadata — running similarity searches in under 100ms without managing a separate vector database infrastructure, and using Supabase's full-text search for hybrid keyword-plus-semantic retrieval. A mobile app developer building a social fitness application uses Supabase Auth for Google and Apple sign-in, Supabase Storage for user-uploaded workout photos with CDN delivery, and Supabase's REST API for leaderboard data — all accessed through the Flutter SDK, with the entire backend on the Free tier during development and a seamless transition to Pro when launching to beta testers.",
+      "type": "text"
+    },
+    {
+      "title": "Common Mistakes",
+      "body": "Five mistakes commonly affect Supabase users. Not writing Row Level Security policies early — teams that skip RLS configuration and rely on application-layer access control during development discover in production that their database is publicly accessible through the auto-generated API. RLS should be the first thing configured after table creation, not the last. Underestimating PostgreSQL connection limits — Supabase's connection pooler (PgBouncer) limits concurrent connections based on RAM allocation. The Pro tier supports 60 direct connections and 200 pooled connections; applications using connection-pooling ORMs like Prisma without configuring connection limits exhaust this pool under moderate load. Forget to set up database migration management — making schema changes directly in the Supabase dashboard without version-controlled migration files leads to unreproducible database states across environments. Teams should use Supabase CLI migrations or their ORM's migration system from day one. Over-relying on the auto-generated API for complex queries — PostgREST generates REST endpoints for standard CRUD but struggles with complex aggregation, reporting, and multi-step transactions. For analytical queries, use database views or Supabase Edge Functions instead of multiple sequential API calls. Not configuring usage alerts — the free and Pro plans have hard resource limits (database size, bandwidth, MAU) that return errors when exceeded. Teams that reach their database size limit at 2 AM on a Saturday face a production outage until they manually upgrade. Setting up monitoring and budget alerts prevents this surprise.",
+      "type": "text"
+    },
+    {
+      "title": "Tips from experienced users",
+      "body": "Experienced Supabase developers recommend five practices. Use the SQL Editor for schema migrations rather than the Table Editor — SQL provides version-controllable, repeatable schema changes; the Table Editor is useful for ad-hoc data inspection but should not be the primary schema management interface. Design RLS policies with the principle of least privilege: start by enabling RLS on every table (which blocks all access by default), then add policies for each operation type (SELECT, INSERT, UPDATE, DELETE) only as needed. Test RLS policies using Supabase's dashboard RLS test tool before deploying to production. Use database functions (PostgreSQL functions/stored procedures) for complex business logic that involves multiple tables — functions execute within the database with full access control and transactional integrity, and can be exposed as API endpoints through Supabase's REST API using PostgREST function endpoints. Configure the connection pooler with appropriate settings for your ORM — Prisma users should set pgBouncer transaction mode with prepared statement disabling, while Knex or direct database clients work better with session mode. Set up daily database backups to an external location even on paid plans — while Supabase provides automated backups with point-in-time recovery on paid plans, having an independent backup in your cloud storage account provides insurance against platform-level incidents.",
+      "type": "text"
+    },
+    {
+      "title": "Alternatives",
+      "body": "Supabase's primary alternatives serve different backend architecture preferences. Firebase (Google, free Spark plan, pay-as-you-go Blaze pricing) provides a NoSQL document database with fully managed infrastructure, client SDKs for web and mobile, and push notifications — the dominant choice for teams that prefer schema-less development and Google Cloud integration, but lacks direct database access and imposes vendor lock-in through proprietary Firebase APIs and SDKs. PocketBase (free, self-hosted open-source) offers a SQLite-based backend with admin UI, file storage, and authentication in a single Go binary — a simpler, single-file alternative for small applications and prototypes that need a quick backend without the complexity of PostgreSQL or Supabase's cloud infrastructure. Appwrite ($0-49/month managed, free self-hosted) provides an open-source BaaS with PostgreSQL storage, authentication, functions, and storage — a closer Supabase competitor that offers similar features with slightly different developer experience and less mature PostgreSQL integration. Convex ($0-50/month) provides a reactive real-time backend with TypeScript-first database queries that automatically update UI when data changes — a newer entrant that focuses on the developer experience of writing backend logic in TypeScript and getting automatic reactivity without WebSocket management. The decision between these alternatives should consider: whether relational database access and SQL skills are priorities (Supabase), Google Cloud ecosystem integration (Firebase), simplicity and self-hosting ease (PocketBase), or TypeScript-first reactive development (Convex).",
+      "type": "text"
+    },
+    {
+      "title": "Final Verdict",
+      "body": "Supabase earns a 4.5/5 rating and is the best backend-as-a-service platform for developers who want PostgreSQL power with managed infrastructure convenience. Its open-source architecture, direct database access, and generous free tier are genuine advantages over Firebase that make it the preferred choice for developers who value data portability and SQL capabilities. The platform is not the right choice for teams that prefer NoSQL data models (Firebase), need the absolute highest real-time throughput (dedicated WebSocket infrastructure), or require fully mature documentation with training resources (Firebase's documentation ecosystem is more comprehensive). The Pro tier at $25/month provides sufficient resources for most production applications, and the self-hosting option ensures zero vendor lock-in for compliance-sensitive deployments. The primary risk is Supabase's rapid development pace — features evolve quickly, documentation lags, and breaking changes require attentive changelog monitoring. Organizations that prioritize stability over velocity should evaluate Supabase's maturity against their tolerance for infrastructure evolution. Buy Supabase for the PostgreSQL access and open-source portability; invest in RLS policy design and migration management from day one to avoid common production pitfalls.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing at a Glance",
+      "body": "pricing-ladder",
+      "type": "diagram"
+    },
+    {
+      "title": "Feature Radar",
+      "body": "feature-radar",
+      "type": "diagram"
+    },
+    {
+      "title": "Implementation Flow",
+      "body": "implementation-flow",
+      "type": "diagram"
+    }
   ],
   "faqs": [
-    {"question": "What is Supabase best used for?", "answer": "Supabase is best used as a backend platform for web and mobile applications that need a PostgreSQL database, authentication, and real-time features. It excels as a Firebase alternative for teams that prefer SQL and want open-source flexibility. Common use cases include SaaS applications, real-time dashboards, collaborative tools, and AI applications leveraging pgvector."},
-    {"question": "How much does Supabase cost?", "answer": "Supabase offers a free tier with 500 MB database, 1 GB storage, and 50,000 monthly active users. The Pro plan starts at $25/month and increases to 8 GB database and 100 GB storage. Team ($599/month) and Enterprise plans add advanced features like SOC 2 compliance, dedicated infrastructure, and priority support."},
-    {"question": "Is Supabase open source?", "answer": "Yes, Supabase is fully open source under the Apache 2.0 license. The entire platform, including the dashboard, API, authentication, and real-time servers, can be self-hosted using Docker Compose. This makes Supabase an excellent choice for organizations that need complete control over their data and infrastructure."},
-    {"question": "Does Supabase work with Vercel?", "answer": "Yes, Supabase has a native Vercel integration that automatically creates environment variables and database connections for your Vercel projects. The two platforms complement each other well, with Vercel handling frontend deployment and Supabase providing the backend infrastructure in a unified workflow."}
+    {
+      "question": "What is Supabase best used for?",
+      "answer": "Supabase is best used as a backend platform for web and mobile applications that need a PostgreSQL database, authentication, and real-time features. It excels as a Firebase alternative for teams that prefer SQL and want open-source flexibility. Common use cases include SaaS applications, real-time dashboards, collaborative tools, and AI applications leveraging pgvector."
+    },
+    {
+      "question": "How much does Supabase cost?",
+      "answer": "Supabase offers a free tier with 500 MB database, 1 GB storage, and 50,000 monthly active users. The Pro plan starts at $25/month and increases to 8 GB database and 100 GB storage. Team ($599/month) and Enterprise plans add advanced features like SOC 2 compliance, dedicated infrastructure, and priority support."
+    },
+    {
+      "question": "Is Supabase open source?",
+      "answer": "Yes, Supabase is fully open source under the Apache 2.0 license. The entire platform, including the dashboard, API, authentication, and real-time servers, can be self-hosted using Docker Compose. This makes Supabase an excellent choice for organizations that need complete control over their data and infrastructure."
+    },
+    {
+      "question": "Does Supabase work with Vercel?",
+      "answer": "Yes, Supabase has a native Vercel integration that automatically creates environment variables and database connections for your Vercel projects. The two platforms complement each other well, with Vercel handling frontend deployment and Supabase providing the backend infrastructure in a unified workflow."
+    }
   ],
-  "alternatives": ["firebase"],
-  "relatedComparisons": ["supabase-vs-firebase"],
-  "relatedGuides": ["developer-tools-stack-guide", "saas-implementation-best-practices"],
-  "relatedPosts": ["best-developer-tools-2026", "frontend-deployment-platforms-comparison"],
+  "alternatives": [
+    "firebase"
+  ],
+  "relatedComparisons": [
+    "supabase-vs-firebase"
+  ],
+  "relatedGuides": [
+    "developer-tools-stack-guide",
+    "saas-implementation-best-practices"
+  ],
+  "relatedPosts": [
+    "best-developer-tools-2026",
+    "frontend-deployment-platforms-comparison"
+  ],
   "lastReviewed": "2026-07-01",
-  "author": "StackPilot Team"
+  "author": "StackPilot Team",
+  "company": {
+    "founded": 2020,
+    "headquarters": "San Francisco, California",
+    "customers": "500,000+ projects",
+    "employeeCount": "100+",
+    "industries": [
+      "Backend",
+      "Open Source",
+      "Database"
+    ],
+    "targetUsers": [
+      "Full-stack Developers",
+      "Startups",
+      "Mobile Developers",
+      "Indie Hackers"
+    ],
+    "pricingModel": "Freemium with usage-based pricing",
+    "deployment": [
+      "Cloud",
+      "Self-hosted"
+    ],
+    "securityCertifications": [
+      "SOC 2 Type II"
+    ],
+    "compliance": [
+      "GDPR",
+      "CCPA"
+    ],
+    "integrations": [
+      "Vercel",
+      "Netlify",
+      "Next.js",
+      "React",
+      "Flutter",
+      "Swift",
+      "Prisma",
+      "Zapier"
+    ],
+    "apiAvailable": true,
+    "aiFeatures": [
+      "Supabase Vector (pgvector)",
+      "AI embeddings for semantic search",
+      "Edge Functions"
+    ],
+    "mobileApps": [],
+    "learningCurve": "Medium",
+    "migrationComplexity": "Medium",
+    "supportQuality": "4.3/5",
+    "releaseFrequency": "Weekly"
+  }
 }

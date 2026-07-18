@@ -23,10 +23,10 @@ export default function EditorialPolicyPage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Editorial Standards</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Editorial Policy</h1>
-            <p className="text-muted mb-8">Last updated: July 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
 
             <div className="prose prose-slate max-w-none">
-              <p className="text-lg text-muted mb-6">
+              <p className="text-lg text-muted-foreground mb-6">
                 StackPilot is committed to producing the highest quality software research. This editorial policy defines the standards, practices, and principles that govern everything we publish.
               </p>
 
@@ -67,7 +67,7 @@ export default function EditorialPolicyPage() {
               <h2>7. Updates to This Policy</h2>
               <p>This editorial policy is reviewed annually. Material changes are communicated to newsletter subscribers and noted on this page. The "Last updated" date reflects the most recent revision.</p>
 
-              <p className="text-sm text-muted-foreground mt-8">For questions about this editorial policy, contact us at <strong>editorial@stackpilot.ai</strong>.</p>
+              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about this editorial policy, contact us at <strong>editorial@stackpilot.ai</strong>.</p>
             </div>
           </div>
         </Container>

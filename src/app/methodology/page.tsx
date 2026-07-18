@@ -61,12 +61,12 @@ export default function MethodologyPage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Our Process</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">How We Review Software</h1>
-            <p className="text-lg text-muted mb-8">
+            <p className="text-lg text-muted-foreground mb-8">
               Transparency matters. Here is exactly how we test, score, and rank every tool on StackPilot.
             </p>
 
             <div className="prose prose-slate max-w-none mb-12">
-              <p className="text-muted mb-6">
+              <p className="text-muted-foreground mb-6">
                 Every week we receive emails asking how we choose which tools to review and whether our ratings are
                 influenced by vendor relationships. Those are fair questions, and they deserve a transparent answer.
                 This page documents exactly how we evaluate software so you can trust our recommendations and
@@ -81,12 +81,12 @@ export default function MethodologyPage() {
                     <span className="text-primary mr-2">{i + 1}.</span>
                     {stage.title}
                   </h3>
-                  <p className="text-sm text-muted">{stage.body}</p>
+                  <p className="text-sm text-muted-foreground">{stage.body}</p>
                 </Card>
               ))}
 
               <h2 className="text-2xl font-bold mt-12 mb-6">Scoring Rubric</h2>
-              <p className="text-muted mb-4">
+              <p className="text-muted-foreground mb-4">
                 Each tool is scored across five equally weighted dimensions on a 1-5 scale:
               </p>
               <div className="overflow-x-auto">
@@ -103,7 +103,7 @@ export default function MethodologyPage() {
                     {scoringRubric.map((row, i) => (
                       <tr key={row.dimension} className={i < scoringRubric.length - 1 ? "border-b border-border" : ""}>
                         <td className="p-3 font-medium">{row.dimension}</td>
-                        <td className="p-3 text-muted">{row.what}</td>
+                        <td className="p-3 text-muted-foreground">{row.what}</td>
                         <td className="p-3 text-center">{row.weight}</td>
                       </tr>
                     ))}
@@ -113,7 +113,7 @@ export default function MethodologyPage() {
               </div>
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Fact-Checking & Corrections</h2>
-              <p className="text-muted mb-4">
+              <p className="text-muted-foreground mb-4">
                 Every review undergoes a two-person verification process before publication. Screenshots, pricing
                 data, feature claims, and performance benchmarks are independently verified. When a discrepancy
                 is found, the review is held until resolved. Published corrections are documented with the date
@@ -122,7 +122,7 @@ export default function MethodologyPage() {
               </p>
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Review Team & Expertise</h2>
-              <p className="text-muted mb-4">
+              <p className="text-muted-foreground mb-4">
                 Our reviewers bring over 50 years of combined experience across software engineering, product
                 management, digital marketing, and enterprise IT. Each team member specializes in 2-3 software
                 categories and maintains active certifications or hands-on experience in their areas. We conduct
@@ -131,7 +131,7 @@ export default function MethodologyPage() {
               </p>
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Editorial Independence</h2>
-              <p className="text-muted mb-4">
+              <p className="text-muted-foreground mb-4">
                 StackPilot operates independently. We never accept payment for reviews or rankings, and no vendor
                 can influence our scores, ratings, or editorial decisions. We clearly disclose any affiliate
                 relationships, sponsored content, or partnerships. Sponsored content is never included in our
@@ -139,18 +139,18 @@ export default function MethodologyPage() {
                 or premium access in exchange for coverage — all tools are evaluated under the same conditions as
                 any paying customer.
               </p>
-              <p className="text-muted mb-4">
+              <p className="text-muted-foreground mb-4">
                 StackPilot may earn referral fees when readers click affiliate links and make purchases. These
                 fees do not influence our reviews, rankings, or editorial content. Our affiliate relationships
                 are disclosed in individual reviews and on our <a href="/about" className="text-primary hover:underline">about page</a>.
               </p>
-              <p className="text-muted mb-4">
+              <p className="text-muted-foreground mb-4">
                 If you have questions about our methodology or believe an error has been made in a review, please
                 <a href="/contact" className="text-primary hover:underline"> contact us</a>. We review all
                 correction requests and publish clarifications when warranted.
               </p>
 
-              <p className="text-xs text-muted-foreground mt-8">
+              <p className="text-xs text-muted-foreground-foreground mt-8">
                 Methodology last updated: July {currentYear}. We review and update this methodology annually or
                 when industry standards for software reviews evolve.
               </p>

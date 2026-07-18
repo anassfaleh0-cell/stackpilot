@@ -20,7 +20,7 @@ export default function TermsPage() {
         <Container>
           <div className="max-w-3xl mx-auto prose prose-slate">
             <h1 className="text-4xl font-bold tracking-tight mb-6">Terms of Service</h1>
-            <p className="text-muted"><em>Last updated: July 16, 2026</em></p>
+            <p className="text-muted-foreground"><em>Last updated: July 16, 2026</em></p>
 
             <h2>Acceptance of Terms</h2>
             <p>By accessing or using StackPilot ("the Service", "we", "us", "our"), you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use our website. Continued use after any modifications constitutes acceptance of the updated terms.</p>

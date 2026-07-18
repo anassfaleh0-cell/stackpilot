@@ -75,10 +75,10 @@ export default function HowWeTestSoftwarePage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Testing Process</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">How We Test Software</h1>
-            <p className="text-muted mb-8">Last updated: July 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
 
             <div className="prose prose-slate max-w-none">
-              <p className="text-lg text-muted mb-6">
+              <p className="text-lg text-muted-foreground mb-6">
                 Every tool on StackPilot is tested by real people in realistic workflows. We do not rely on vendor demos, specification sheets, or marketing materials. Here is exactly how we test.
               </p>
 
@@ -90,7 +90,7 @@ export default function HowWeTestSoftwarePage() {
                   </h2>
                   <ul className="space-y-2">
                     {phase.steps.map((step, j) => (
-                      <li key={j} className="flex items-start gap-2 text-sm text-muted">
+                      <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
                         <span className="text-primary mt-0.5 shrink-0">•</span>
                         <span>{step}</span>
                       </li>
@@ -114,7 +114,7 @@ export default function HowWeTestSoftwarePage() {
                 <li>We do not publish reviews based solely on vendor demos or specification sheets</li>
               </ul>
 
-              <p className="text-sm text-muted-foreground mt-8">For detailed methodology including our scoring rubric, see our <a href="/methodology">Review Methodology</a> page.</p>
+              <p className="text-sm text-muted-foreground-foreground mt-8">For detailed methodology including our scoring rubric, see our <a href="/methodology">Review Methodology</a> page.</p>
             </div>
           </div>
         </Container>

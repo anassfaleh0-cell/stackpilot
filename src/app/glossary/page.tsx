@@ -28,7 +28,7 @@ export default function GlossaryPage() {
           <SectionHeader className="mb-12">
             <Badge variant="default" className="mb-4">Glossary</Badge>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Software glossary</h1>
-            <p className="text-lg text-muted">Clear, concise definitions of the most important software and technology terms.</p>
+            <p className="text-lg text-muted-foreground">Clear, concise definitions of the most important software and technology terms.</p>
           </SectionHeader>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {terms.map((item) => (
@@ -36,7 +36,7 @@ export default function GlossaryPage() {
                 <Card className="h-full hover:border-primary/30">
                   <div className="flex items-start justify-between mb-2">
                     <Badge variant="secondary">{item.category}</Badge>
-                    <Book size={14} className="text-muted" />
+                    <Book size={14} className="text-muted-foreground" />
                   </div>
                   <CardTitle className="text-base group-hover:text-primary transition-colors">{item.term}</CardTitle>
                   <CardDescription className="mt-1 text-xs">{item.definition}</CardDescription>

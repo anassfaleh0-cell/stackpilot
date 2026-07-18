@@ -18,20 +18,20 @@ export default function ErrorPage({
           </div>
         </div>
         <h1 className="text-2xl font-bold mb-3">Something went wrong</h1>
-        <p className="text-muted mb-8">
+        <p className="text-muted-foreground mb-8">
           An unexpected error occurred. Our team has been notified.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <button
             onClick={reset}
-            className="inline-flex items-center justify-center rounded-lg bg-primary text-white h-10 px-6 text-sm font-medium hover:bg-primary-dark transition-colors"
+            className="button-press inline-flex items-center justify-center rounded-lg bg-primary text-white hover:bg-primary-dark shadow-button h-10 px-6 text-sm font-medium transition-all duration-200"
           >
             Try again
           </button>
-          <Link href="/" className="inline-flex items-center justify-center rounded-lg border border-border bg-card text-foreground h-10 px-6 text-sm font-medium hover:bg-muted transition-colors">
+          <Link href="/" className="button-press inline-flex items-center justify-center rounded-lg border border-border bg-card text-foreground h-10 px-6 text-sm font-medium hover:bg-muted-bg transition-all duration-200">
             Go home
           </Link>
-          <Link href="/reviews" className="inline-flex items-center justify-center rounded-lg border border-border bg-card text-foreground h-10 px-6 text-sm font-medium hover:bg-muted transition-colors">
+          <Link href="/reviews" className="button-press inline-flex items-center justify-center rounded-lg border border-border bg-card text-foreground h-10 px-6 text-sm font-medium hover:bg-muted-bg transition-all duration-200">
             Browse reviews
           </Link>
         </div>

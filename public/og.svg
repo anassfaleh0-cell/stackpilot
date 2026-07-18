@@ -1,32 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
-  <rect width="1200" height="630" fill="#0C0E14" />
-  <rect x="0" y="0" width="1200" height="630" fill="url(#og-bg)" />
-  <rect x="60" y="60" width="160" height="160" rx="40" fill="url(#og-icon)" />
-  <path d="M115 140l25-25 25 25M115 190l25-25 25 25" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-  <text x="260" y="145" font-family="system-ui,-apple-system,sans-serif" font-weight="800" font-size="72" fill="white" letter-spacing="-1.5">StackPilot</text>
-  <text x="260" y="200" font-family="system-ui,-apple-system,sans-serif" font-weight="400" font-size="32" fill="#949EB5" letter-spacing="-0.3">In-depth software reviews &amp; expert comparisons</text>
-  <rect x="60" y="290" width="1080" height="2" fill="#222838" />
-  <rect x="60" y="340" width="320" height="160" rx="16" fill="#131721" stroke="#222838" stroke-width="1" />
-  <text x="100" y="380" font-family="system-ui,-apple-system,sans-serif" font-weight="700" font-size="22" fill="#7C93F5">Reviews</text>
-  <text x="100" y="412" font-family="system-ui,-apple-system,sans-serif" font-weight="400" font-size="16" fill="#8A94A8">38+ tools tested hands-on</text>
-  <text x="100" y="440" font-family="system-ui,-apple-system,sans-serif" font-weight="400" font-size="16" fill="#8A94A8">across 12 categories</text>
-  <rect x="420" y="340" width="320" height="160" rx="16" fill="#131721" stroke="#222838" stroke-width="1" />
-  <text x="460" y="380" font-family="system-ui,-apple-system,sans-serif" font-weight="700" font-size="22" fill="#7C93F5">Comparisons</text>
-  <text x="460" y="412" font-family="system-ui,-apple-system,sans-serif" font-weight="400" font-size="16" fill="#8A94A8">Side-by-side analysis</text>
-  <text x="460" y="440" font-family="system-ui,-apple-system,sans-serif" font-weight="400" font-size="16" fill="#8A94A8">with winner by scenario</text>
-  <rect x="780" y="340" width="320" height="160" rx="16" fill="#131721" stroke="#222838" stroke-width="1" />
-  <text x="820" y="380" font-family="system-ui,-apple-system,sans-serif" font-weight="700" font-size="22" fill="#7C93F5">Guides</text>
-  <text x="820" y="412" font-family="system-ui,-apple-system,sans-serif" font-weight="400" font-size="16" fill="#8A94A8">Expert buying guides</text>
-  <text x="820" y="440" font-family="system-ui,-apple-system,sans-serif" font-weight="400" font-size="16" fill="#8A94A8">&amp; research reports</text>
-  <defs>
-    <linearGradient id="og-bg" x1="0" y1="0" x2="1200" y2="630">
-      <stop offset="0%" stop-color="#0C0E14" />
-      <stop offset="50%" stop-color="#131721" />
-      <stop offset="100%" stop-color="#0C0E14" />
-    </linearGradient>
-    <linearGradient id="og-icon" x1="0" y1="0" x2="160" y2="160">
-      <stop offset="0%" stop-color="#5472E8" />
-      <stop offset="100%" stop-color="#7C93F5" />
-    </linearGradient>
-  </defs>
+  <rect width="1200" height="630" fill="#0C0E14"/>
+  <rect x="60" y="60" width="1080" height="510" rx="24" fill="#131721" stroke="#222838" stroke-width="1"/>
+  <g transform="translate(100, 105)">
+    <rect x="4" y="22" width="24" height="5" rx="2.5" fill="#5472E8"/>
+    <rect x="9" y="14" width="14" height="5" rx="2.5" fill="#5472E8"/>
+    <path d="M16 5 L22 15 L10 15 Z" fill="#5472E8"/>
+  </g>
+  <text x="156" y="138" font-family="system-ui,-apple-system,sans-serif" font-size="48" font-weight="700" fill="#F0F2F6" letter-spacing="-0.03">StackPilot</text>
+  <text x="100" y="220" font-family="system-ui,-apple-system,sans-serif" font-size="32" font-weight="650" fill="#5472E8" letter-spacing="-0.02">Navigate your software stack</text>
+  <text x="100" y="268" font-family="system-ui,-apple-system,sans-serif" font-size="18" fill="#8A94A8">Expert reviews, honest comparisons, actionable buying guides.</text>
+  <rect x="100" y="320" width="200" height="52" rx="26" fill="#5472E8"/>
+  <text x="200" y="353" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="600" fill="white" text-anchor="middle">Browse Reviews</text>
+  <rect x="320" y="320" width="200" height="52" rx="26" fill="none" stroke="#222838"/>
+  <text x="420" y="353" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="600" fill="#8A94A8" text-anchor="middle">Compare Tools</text>
+  <line x1="100" y1="420" x2="500" y2="420" stroke="#222838" stroke-width="1"/>
+  <text x="100" y="455" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#6B7280">Independent reviews · 35K+ monthly readers · Expert methodology</text>
 </svg>

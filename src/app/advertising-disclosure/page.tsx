@@ -23,10 +23,10 @@ export default function AdvertisingDisclosurePage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Transparency</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Advertising Disclosure</h1>
-            <p className="text-muted mb-8">Last updated: July 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
 
             <div className="prose prose-slate max-w-none">
-              <p className="text-lg text-muted mb-6">
+              <p className="text-lg text-muted-foreground mb-6">
                 StackPilot believes in clear separation between editorial content and advertising. This disclosure explains our advertising practices.
               </p>
 

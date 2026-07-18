@@ -24,6 +24,28 @@ export interface ReviewContent {
   relatedPosts?: string[]
   lastReviewed: string
   author: string
+  company?: CompanyInfo
+}
+
+export interface CompanyInfo {
+  founded: number
+  headquarters: string
+  customers: string
+  employeeCount: string
+  industries: string[]
+  targetUsers: string[]
+  pricingModel: string
+  deployment: string[]
+  securityCertifications: string[]
+  compliance: string[]
+  integrations: string[]
+  apiAvailable: boolean
+  aiFeatures: string[]
+  mobileApps: string[]
+  learningCurve: string
+  migrationComplexity: "Low" | "Medium" | "High"
+  supportQuality: string
+  releaseFrequency: string
 }
 
 export interface ReviewFeature {
@@ -130,12 +152,29 @@ export interface GlossaryContent {
   relatedTerms: string[]
 }
 
-export interface CategoryContent {
+export interface CategoryKnowledge {
   slug: string
   name: string
   description: string
-  subcategories: Subcategory[]
+  longDescription: string
+  marketOverview: string
+  buyerConsiderations: string[]
+  commonMistakes: string[]
+  decisionFactors: { factor: string; importance: "Critical" | "High" | "Medium"; description: string }[]
+  buyerJourney: {
+    awareness: string
+    consideration: string
+    decision: string
+  }
+  pricingOverview: string
+  bestFor: {
+    smb: string
+    enterprise: string
+    free: string
+  }
   relatedCategories: string[]
+  internalLinks?: { label: string; href: string }[]
+  faqs: FAQItem[]
 }
 
 export interface Subcategory {
@@ -146,13 +185,22 @@ export interface Subcategory {
 
 export type PricingTier = "Free" | "Freemium" | "Paid" | "Free Trial" | "Contact for Pricing"
 
-export interface PageTemplate {
+export interface EntityLink {
+  slug: string
   name: string
-  description: string
-  sections: string[]
-  seoTemplate: {
-    title: string
-    description: string
-    h1: string
-  }
+  type: "review" | "comparison" | "guide" | "blog" | "glossary"
+  relation: string
+}
+
+export interface EntityNode {
+  slug: string
+  name: string
+  type: "software" | "category" | "concept"
+  relationships: EntityRelationship[]
+}
+
+export interface EntityRelationship {
+  targetSlug: string
+  targetType: string
+  relation: string
 }

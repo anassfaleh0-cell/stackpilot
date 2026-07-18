@@ -22,73 +22,353 @@
     "Cloud licensing costs scale aggressively — Standard ($7.75/user/mo) jumps to Premium ($15.25/user/mo) for advanced features like sandboxes, cross-project reporting, and 99.99% SLA, making Jira expensive compared to Linear or GitHub Projects at equivalent team sizes"
   ],
   "features": [
-    {"name": "Issue Tracking", "description": "Custom issue types with configurable fields, screens, workflows, and permissions per project", "available": true, "category": "Core"},
-    {"name": "Scrum Boards", "description": "Sprint planning, backlog management, velocity tracking, burndown charts, and retrospective boards for agile teams", "available": true, "category": "Methodology"},
-    {"name": "Kanban Boards", "description": "Visual workflow boards with WIP limits, cycle time tracking, cumulative flow diagrams, and swimlanes", "available": true, "category": "Methodology"},
-    {"name": "JQL Query Language", "description": "Sophisticated query language for filtering and aggregating issues with SQL-like syntax, saved as filters and shared across dashboards", "available": true, "category": "Core"},
-    {"name": "Roadmaps", "description": "Timeline-based roadmap view showing epics, dependencies, and milestones across multiple projects and teams", "available": true, "category": "Planning"},
-    {"name": "Advanced Roadmaps", "description": "Cross-project dependency mapping, what-if scenario planning, and capacity planning for portfolio management (Premium tier)", "available": true, "category": "Planning"},
-    {"name": "Automation", "description": "If-this-then-that rules for auto-assigning, transitioning, notifying, and updating issues based on triggers and conditions", "available": true, "category": "Automation"},
-    {"name": "Dashboards", "description": "Customizable dashboards with 20+ gadget types showing burndowns, pie charts, statistics, and saved filters", "available": true, "category": "Reporting"},
-    {"name": "Reports", "description": "Pre-built reports for velocity, sprint burndown, cumulative flow, control charts, time tracking, and epics progress", "available": true, "category": "Reporting"},
-    {"name": "Permissions & Security", "description": "Project-level and system-level permission schemes, issue security levels, and audit logging for enterprise compliance", "available": true, "category": "Admin"},
-    {"name": "SSO & SCIM", "description": "SAML 2.0 and OIDC SSO with SCIM provisioning via Atlassian Access for centralized user lifecycle management", "available": true, "category": "Security"},
-    {"name": "Confluence Integration", "description": "Bidirectional linking between Jira issues and Confluence pages, with issue details rendered inline in documentation", "available": true, "category": "Integrations"},
-    {"name": "Bitbucket & GitHub Integration", "description": "Smart commits, branch/PR creation from issues, and deployment tracking connected to Jira issues automatically", "available": true, "category": "Integrations"},
-    {"name": "Slack & Teams Integration", "description": "Create issues from messages, receive notifications in channels, and update issues without leaving the communication platform", "available": true, "category": "Integrations"},
-    {"name": "Sprint Planning", "description": "Drag-and-drop backlog prioritization, sprint goal setting, capacity estimation, and team workload balancing", "available": true, "category": "Methodology"},
-    {"name": "Service Management", "description": "ITIL-aligned service desk with SLA tracking, request queues, knowledge base integration, and customer portal", "available": true, "category": "Service Desk"},
-    {"name": "Discovery & Goals", "description": "Issue hierarchy from company goals through initiatives to epics and stories with progress tracking at each level", "available": true, "category": "Planning"},
-    {"name": "Sandbox Environments", "description": "Isolated test environments for configuration changes, workflow testing, and automation rule validation before production deployment (Premium tier)", "available": true, "category": "Admin"}
+    {
+      "name": "Issue Tracking",
+      "description": "Custom issue types with configurable fields, screens, workflows, and permissions per project",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Scrum Boards",
+      "description": "Sprint planning, backlog management, velocity tracking, burndown charts, and retrospective boards for agile teams",
+      "available": true,
+      "category": "Methodology"
+    },
+    {
+      "name": "Kanban Boards",
+      "description": "Visual workflow boards with WIP limits, cycle time tracking, cumulative flow diagrams, and swimlanes",
+      "available": true,
+      "category": "Methodology"
+    },
+    {
+      "name": "JQL Query Language",
+      "description": "Sophisticated query language for filtering and aggregating issues with SQL-like syntax, saved as filters and shared across dashboards",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Roadmaps",
+      "description": "Timeline-based roadmap view showing epics, dependencies, and milestones across multiple projects and teams",
+      "available": true,
+      "category": "Planning"
+    },
+    {
+      "name": "Advanced Roadmaps",
+      "description": "Cross-project dependency mapping, what-if scenario planning, and capacity planning for portfolio management (Premium tier)",
+      "available": true,
+      "category": "Planning"
+    },
+    {
+      "name": "Automation",
+      "description": "If-this-then-that rules for auto-assigning, transitioning, notifying, and updating issues based on triggers and conditions",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Dashboards",
+      "description": "Customizable dashboards with 20+ gadget types showing burndowns, pie charts, statistics, and saved filters",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Reports",
+      "description": "Pre-built reports for velocity, sprint burndown, cumulative flow, control charts, time tracking, and epics progress",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Permissions & Security",
+      "description": "Project-level and system-level permission schemes, issue security levels, and audit logging for enterprise compliance",
+      "available": true,
+      "category": "Admin"
+    },
+    {
+      "name": "SSO & SCIM",
+      "description": "SAML 2.0 and OIDC SSO with SCIM provisioning via Atlassian Access for centralized user lifecycle management",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Confluence Integration",
+      "description": "Bidirectional linking between Jira issues and Confluence pages, with issue details rendered inline in documentation",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Bitbucket & GitHub Integration",
+      "description": "Smart commits, branch/PR creation from issues, and deployment tracking connected to Jira issues automatically",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Slack & Teams Integration",
+      "description": "Create issues from messages, receive notifications in channels, and update issues without leaving the communication platform",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Sprint Planning",
+      "description": "Drag-and-drop backlog prioritization, sprint goal setting, capacity estimation, and team workload balancing",
+      "available": true,
+      "category": "Methodology"
+    },
+    {
+      "name": "Service Management",
+      "description": "ITIL-aligned service desk with SLA tracking, request queues, knowledge base integration, and customer portal",
+      "available": true,
+      "category": "Service Desk"
+    },
+    {
+      "name": "Discovery & Goals",
+      "description": "Issue hierarchy from company goals through initiatives to epics and stories with progress tracking at each level",
+      "available": true,
+      "category": "Planning"
+    },
+    {
+      "name": "Sandbox Environments",
+      "description": "Isolated test environments for configuration changes, workflow testing, and automation rule validation before production deployment (Premium tier)",
+      "available": true,
+      "category": "Admin"
+    }
   ],
   "ratings": [
-    {"label": "Features", "score": 4.8},
-    {"label": "Ease of Use", "score": 3.4},
-    {"label": "Support", "score": 3.9},
-    {"label": "Value", "score": 4.0},
-    {"label": "Performance", "score": 4.2}
+    {
+      "label": "Features",
+      "score": 4.8
+    },
+    {
+      "label": "Ease of Use",
+      "score": 3.4
+    },
+    {
+      "label": "Support",
+      "score": 3.9
+    },
+    {
+      "label": "Value",
+      "score": 4
+    },
+    {
+      "label": "Performance",
+      "score": 4.2
+    }
   ],
   "content": [
-    {"title": "Executive Summary", "body": "Jira is the most configurable project management platform available, built for software teams that need structured workflows, compliance tracking, and cross-project portfolio management at enterprise scale. Originally developed as a bug tracker, Jira has evolved into a comprehensive work management platform with Scrum and Kanban boards, roadmaps, automation rules, and a JQL query language that provides SQL-like power over issue data. The platform's core strength — total workflow customization — is also its greatest liability: teams can model any process with custom statuses, transitions, permissions, and fields, but this flexibility comes with significant administrative overhead and a steep learning curve. Jira extends through the Atlassian ecosystem (Confluence, Bitbucket, Opsgenie, Jira Service Management) and the Marketplace offers 3,000+ add-ons. With 35,000+ reviews and a 4.1/5 rating, Jira remains the default choice for engineering organizations at scale, despite growing competition from simpler tools like Linear and GitHub Projects.", "type": "text"},
-    {"title": "Best For", "body": "Jira delivers the most value for engineering organizations with 50+ developers that need structured workflows with approval gates, compliance tracking, and cross-project portfolio management. Organizations in regulated industries — finance, healthcare, government — that require audit trails, permission schemes, separation of duties, and documented process enforcement benefit from Jira's scheme-based permission and workflow architecture. Teams already invested in the Atlassian ecosystem (Confluence for documentation, Bitbucket for code, Opsgenie for incident management) realize deep integration that external tools cannot match. Organizations running multiple scrum teams that need cross-team dependency tracking, capacity planning, and portfolio-level roadmaps will find Advanced Roadmaps (Premium tier) essential. Jira Service Management extends the platform to IT and support teams with ITIL-aligned service desk capabilities, SLA tracking, and customer portals under the same administrative umbrella as software development projects.", "type": "text"},
-    {"title": "Worst Fit", "body": "Jira is a poor fit for three scenarios. Teams under 15 people should avoid Jira — the administrative overhead of maintaining schemes, workflows, permissions, and screens outweighs the benefits of its flexibility, and simpler tools like Linear or Asana will deliver more value with less effort. Organizations that want a single project management tool for the entire company (engineering, marketing, operations, HR) will find Jira's software-engineered workflow model frustrating for non-technical users who need simpler task management with dependencies, timelines, and cross-functional views. Teams already using GitHub Projects or Linear who are satisfied with their current workflow should not migrate to Jira unless they have a specific compliance requirement, as the migration effort — mapping issue types, workflows, permissions, schemes, and custom fields — typically takes 4-8 weeks for mid-sized organizations and generates significant user resistance to the increased process overhead.", "type": "text"},
-    {"title": "Key Features", "body": "Jira's feature depth is unmatched among project management tools, but most capabilities require deliberate configuration to unlock. The following represent what makes Jira uniquely capable for teams that need its scale.", "type": "list", "items": [
-      "Custom workflow engine with conditions, validators, and post-functions enables multi-step approval chains (author → manager → director → VP) that auto-assign approvers based on issue fields, prevent premature transitions, and trigger side-effects like Slack notifications or Confluence page creation.",
-      "JQL (Jira Query Language) provides SQL-like querying over issues, enabling complex cross-project reports like 'all P0 bugs with fix versions in the current quarter by team, excluding security issues under embargo', saved as shareable filters.",
-      "Advanced Roadmaps (Premium tier) models what-if scenarios for resource allocation, showing how adding a new initiative impacts team capacity and delivery timelines across all existing commitments in a drag-and-drop timeline view.",
-      "Automation rules execute 50,000+ actions per month on Standard plans, handling workflows like auto-closing issues when PRs merge, round-robin assignment based on team member workload, and escalating overdue tasks via email or Slack.",
-      "The Atlassian Marketplace adds 3,000+ vetted add-ons extending Jira with time tracking (Tempo), test management (Xray, Zephyr), resource planning, financial management, and documentation (Confluence) without custom development."
-    ]},
-    {"title": "Real Advantages", "body": "Jira's strongest advantage is its workflow engine, which provides a level of process control that no other project management tool matches. The combination of custom statuses, transitions, conditions (who can execute a transition), validators (what must be true to transition), and post-functions (what happens after transition) enables modeling of complex business processes — regulatory approval chains, multi-stage QA gates, compliance audit trails — that simpler tools cannot replicate. JQL is a genuine differentiator for reporting: SQL-literate users can construct queries that filter, sort, and aggregate across any combination of project, issue type, status, custom field value, assignee, sprint, and date range, then save these as shareable filters and dashboard gadgets. The Atlassian Marketplace ecosystem means that gaps in Jira's core functionality — time tracking, test case management, financial planning — are addressable through vetted add-ons rather than requiring a platform switch. For organizations that have outgrown Linear, Asana, or GitHub Projects, Jira is the natural migration target precisely because its flexibility can accommodate growing process complexity.", "type": "text"},
-    {"title": "Real Limitations", "body": "Jira's most significant limitation is its user interface complexity. Settings and configuration are distributed across project settings, system settings, board configuration, permission schemes, notification schemes, issue type schemes, workflow schemes, and screen schemes — a navigation architecture that reflects the product's 20-year evolution from bug tracker to enterprise platform but creates a steep learning curve. New administrators typically need 4-8 weeks to become proficient in configuration management. The second major limitation is performance at scale: Jira Cloud instances with 10,000+ issues and 100+ users experience noticeable page load times (3-7 seconds for board views) and query execution delays during peak usage hours. Self-managed Data Center deployments require significant infrastructure investment — 8-16 GB of RAM for mid-sized deployments, dedicated database servers, and regular index maintenance. The licensing cost curve is also aggressive: Premium at $15.25/user/month is 2x the Standard price, and the features it unlocks (sandboxes, Advanced Roadmaps, cross-project automation) are essential for organizations operating at scale, making the effective per-user cost higher than comparable tools.", "type": "text"},
-    {"title": "Pricing Explained", "body": "Jira uses per-user monthly pricing with four tiers. Free supports up to 10 users with 2 GB storage, 2-week automation runs, and community support. Standard at $7.75/user/month includes 250 GB storage, 99.9% uptime SLA, and 9-5 support. Premium at $15.25/user/month adds Advanced Roadmaps, sandbox environments, cross-project automation, 99.99% SLA, and 24/7 support. Enterprise (Data Center) starts at $42,500 annually for self-managed deployment with unlimited users, 99.999% availability SLA, and dedicated support. Annual billing is required for Premium and Enterprise. A critical pricing detail: Jira charges for every user with active access, not just active users — contractors, managers, and stakeholders who rarely log in still count toward the license total. Organizations using Jira Service Management alongside Jira Software pay separate per-user fees for each product, effectively doubling the cost for users who need both platforms. Automation usage is capped at 50,000 actions/month on Standard and 100,000 on Premium, with overage requiring plan upgrades rather than pay-per-use scaling.", "type": "text"},
-    {"title": "Hidden Costs", "body": "Three hidden costs affect Jira deployments. Atlassian Marketplace add-ons for essential capabilities can double or triple the effective per-user cost. Tempo time tracking adds $3-10/user/month, Xray test management adds $5-15/user/month, and portfolio-level resource planning through Advanced Roadmaps (Premium) or第三方 plugins adds additional costs. For a 100-person team, marketplace add-ons can reach $3,000-6,000/month beyond base licensing. The second hidden cost is administration: Jira requires dedicated configuration management — scheme design, workflow maintenance, permission audits, and plugin compatibility testing — that typically consumes 0.25-0.5 FTE per 200 users, either through internal staffing or Atlassian consulting partners at $150-250/hour. The third hidden cost is migration and integration: connecting Jira to existing CI/CD pipelines, monitoring tools, and communication platforms requires developer time for API integration and webhook configuration. Data Center deployments add infrastructure costs for servers, database licenses (typically PostgreSQL or MySQL), backup storage, and disaster recovery — adding 30-50% to the total cost of ownership over Cloud plans.", "type": "text"},
-    {"title": "Learning Curve", "body": "Basic proficiency — creating and editing issues, using boards, running sprints, and navigating projects — takes 1-2 weeks for most new users. Intermediate proficiency — configuring workflows, building dashboards, creating filters with JQL, setting up automation rules, and managing project permissions — requires 4-8 weeks of hands-on administration. Advanced proficiency — designing custom workflows with conditions, validators, and post-functions, creating issue type schemes and screen schemes, managing cross-project Advanced Roadmaps, and integrating with external tools — takes 3-6 months of regular administration. Jira administration is a recognized specialization: Atlassian offers ACP (Atlassian Certified Professional) certifications for Jira Administration, and experienced Jira admins command premium compensation. The learning investment is substantial but transferable across organizations, as Jira's configuration concepts are consistent across Cloud and Data Center deployments. The JQL learning curve deserves specific attention: while basic filter construction is intuitive, mastering JQL's aggregation functions, time-based queries, and cross-project joins requires dedicated study.", "type": "text"},
-    {"title": "Setup Time", "body": "A basic Jira project for a 10-person scrum team can be operational in 2-4 hours using a default kanban or scrum template with minimal customization. Organization-wide deployment for 100+ users across multiple teams requires 4-8 weeks of planning, configuration, and testing. The critical path includes: scheme design (workflow schemes, issue type schemes, permission schemes, notification schemes, screen schemes), project structure (project categories, component definitions, version naming conventions), permission configuration (project-level vs. system-level permissions, issue security levels), automation rule development and testing, integration setup (Slack, GitHub, CI/CD tools), and user onboarding with role-based training. Importing data from a previous tool is a significant sub-project: Jira's CSV and JSON importers handle basic issue data but custom field mapping, attachment migration, and historical data preservation require careful planning. A typical migration from Trello or Asana to Jira takes 2-4 weeks for data mapping and import validation. The sandbox environment (Premium tier) is strongly recommended for configuration testing before production deployment.", "type": "text"},
-    {"title": "Migration Difficulty", "body": "Migrating to Jira from another project management tool ranges from moderate to very difficult depending on the source platform. Migration from Linear is rated 7/10: Linear's simpler data model (issues with labels and assignees) maps cleanly to Jira's core issue types, but custom workflows, keyboard shortcut reliance, and Linear's speed advantages mean the migration is primarily a change management challenge rather than a technical one. Migration from Asana or Trello is rated 6/10: basic task data transfers through CSV import, but Asana's custom fields and Trello's labels require manual mapping to Jira schemes, and conversation threads embedded in tasks do not transfer. Migration from another Jira instance (Data Center to Cloud, or Cloud to Cloud) is rated 4/10 through Atlassian's migration assistant, but custom plugins and automation rules often require reimplementation. The most difficult migration is from Microsoft Project or Smartsheet to Jira (rated 8/10): Gantt chart dependencies, resource allocation data, and timeline structures have no direct Jira equivalent and require process redesign rather than simple data migration. In all cases, budget 2-4 weeks for data migration and 4-8 weeks for full organizational adoption.", "type": "text"},
-    {"title": "Integration Ecosystem", "body": "Jira's integration ecosystem is the deepest of any project management tool, spanning three layers: native Atlassian integrations, the Atlassian Marketplace, and third-party connectors. Native integrations include Confluence (bidirectional issue-page linking with inline issue data rendering), Bitbucket (smart commits that transition issues based on commit messages, branch/PR creation from issues), Opsgenie (incident alerting with automatic issue creation), and Jira Service Management (cross-project SLA tracking and customer portal integration). The Marketplace offers 3,000+ add-ons categorized into testing (Xray, Zephyr — $5-15/user/month), time tracking (Tempo, Timesheets — $3-10/user/month), documentation (Confluence, Scroll Viewport), reporting (EazyBI, Advanced Roadmaps), and resource management. Third-party integrations via webhooks and REST API connect Jira to Slack, Microsoft Teams, GitHub, GitLab, Jenkins, CircleCI, Datadog, Splunk, and PagerDuty. Jira's REST API is comprehensive and well-documented, supporting issue CRUD, project administration, user management, and automation rule configuration through programmatic access. The API rate limit for Cloud is 1,000 requests per minute, sufficient for most integration scenarios.", "type": "text"},
-    {"title": "Security & Compliance", "body": "Jira Cloud is SOC 2 Type II, SOC 3, ISO 27001, and ISO 27701 certified. Data in transit uses TLS 1.2+ and data at rest is AES-256 encrypted. Atlassian Access (add-on at $2-4/user/month) provides SAML 2.0 and OIDC SSO, SCIM user provisioning, enforced 2FA, and audit logging across all Atlassian products. Data residency is available in US, EU, UK, Germany, and Australia regions for Cloud Enterprise customers. For regulated industries: Jira supports HIPAA compliance through a BAA (available on Premium and Enterprise plans), FedRAMP Tailored authorization for Cloud, and GDPR compliance with a Data Processing Agreement. Self-managed Data Center deployments offer additional security controls including network isolation, custom encryption key management, on-premise deployment, and full control over backup and disaster recovery. Jira provides project-level permission schemes (who can see which projects), issue security levels (who can see individual issues within a project), and audit logging for compliance tracking. However, the complexity of permission scheme management means misconfiguration is common — regular permission audits are essential for maintaining compliance boundaries.", "type": "text"},
-    {"title": "Performance", "body": "Jira Cloud page load times vary significantly by plan and instance scale. Standard plans load board and issue views in 2-4 seconds for instances with under 5,000 issues. Premium plans improve load times by 30-40% through dedicated infrastructure. Instances with 50,000+ issues experience 5-10 second load times for board views during sprint transitions and report generation. JQL query execution varies from sub-second for simple filters to 10-30 seconds for cross-project aggregations with multiple custom field filters. The web application consumes 200-400 MB of browser memory on modern browsers. Data Center (self-managed) performance depends entirely on infrastructure: a properly sized deployment with 16 GB RAM, 4 dedicated CPUs, and SSD storage runs 2-3x faster than Cloud for equivalent issue counts, but requires regular index maintenance (weekly reindexing is recommended for instances with 10,000+ issues). The mobile app provides basic functionality for issue viewing, assignment, and status updates but is not suitable for board management or sprint planning. Jira's performance characteristics are the weakest among major project management tools, reflecting its Java-based architecture and schema complexity.", "type": "text"},
-    {"title": "Customer Support", "body": "Atlassian support varies significantly by plan. Free and Standard plans receive community forum access and email support with 24-48 hour response times. Premium includes 24/7 phone and chat support with 1-hour critical response SLA and a designated support engineer. Enterprise Data Center customers receive 24/7 support with 30-minute critical SLA, dedicated account manager, and quarterly business reviews. Support quality is rated 3.9/5 in user reviews, with common complaints about slow resolution for configuration issues and inconsistent technical depth across support engineers. The Atlassian Community is active with 1M+ members and provides better answers for most configuration questions than official support channels. Atlassian's documentation and knowledge base are comprehensive but can be difficult to navigate due to the product's configuration complexity. Premium and Enterprise customers report better experiences with faster response times and more knowledgeable support staff. For urgent production incidents, Premium's 1-hour response SLA is essential but response does not guarantee resolution within the SLA window.", "type": "text"},
-    {"title": "Real-world Use Cases", "body": "A 200-person SaaS engineering organization runs 12 scrum teams across 3 product lines in a single Jira Cloud Premium instance. Each team uses custom workflow schemes with 5-7 statuses reflecting their development process (Backlog → Ready → In Progress → Code Review → QA → Staging → Done), with transition conditions enforcing peer review completion before Code Review and QA approval before Staging. Automation rules handle 30+ workflows: auto-assigning issues based on team round-robin, transitioning to In Progress when a branch is created, notifying Slack when a PR review is requested, and escalating blockers older than 3 days. Advanced Roadmaps provide the VP of Engineering with a portfolio view of all 12 teams' commitments, dependencies, and capacity utilization. A regulated fintech company with 500 users runs Jira Data Center with permission schemes modeling organizational hierarchy: developers see their team's issues, managers see all issues in their department, compliance officers have read-only access across all projects with audit logging enabled. Workflows include mandatory QA and security approval transitions before production deployments, enforced through condition validators that check user group membership before allowing the transition.", "type": "text"},
-    {"title": "Common Mistakes", "body": "Five mistakes repeatedly surface from Jira administrators. Over-customization before process maturity — teams that design custom workflows with 15+ statuses before they have stable processes create administrative burden without value. Start with Jira's default Scrum or Kanban workflow and add statuses only when a proven process gap exists. Underestimating permission scheme complexity — granting project-level admin to team leads who then inadvertently expose sensitive issues or delete shared configurations. Permission audits should be conducted quarterly. Neglecting scheme consolidation — creating a unique workflow scheme, issue type scheme, and screen scheme for every project results in dozens of schemes that become unmanageable. Standardize on 3-5 shared schemes and create exceptions only when process requirements genuinely differ. Unmanaged automation consumption — teams implement 50+ automation rules without tracking execution volume, hitting the monthly action cap and disrupting critical workflows. Audit automation usage monthly and consolidate or archive rules that execute fewer than 10 times per month. Skipping sandbox testing on Premium — applying workflow changes directly to production instances risks breaking active processes. Always test configuration changes in sandbox environments before production deployment, even for seemingly simple field additions or workflow modifications.", "type": "text"},
-    {"title": "Tips from experienced users", "body": "Power users rely on five strategies. Master JQL early — invest 5-10 hours learning JQL syntax, particularly aggregations (COUNT, SUM), time-based functions (startOfDay(), endOfWeek(), now()), and cross-project joins. A well-constructed JQL filter eliminates the need for custom scripting for common reporting needs. Use shared configuration rather than per-project customization — create shared workflow schemes, issue type schemes, and screen schemes that multiple projects reference, reducing maintenance burden when process changes affect all teams. Leverage automation templates before building custom rules — Jira ships with 100+ automation templates covering common patterns; reviewing available templates before building from scratch reveals capabilities and reduces rule development time. Implement a project lead review process — before creating any new project, require the requestor to define purpose, team membership, permission requirements, and integration needs in a standardized project intake template. Schedule quarterly permission audits — export project permission configurations, review for access bloat (users who left teams but still have project access), and verify that issue security levels remain appropriate.", "type": "text"},
-    {"title": "Alternatives", "body": "Jira's primary competitors address different scales and use cases. Linear offers a keyboard-first, high-performance issue tracking experience for engineering teams under 50 people, with sub-100ms search and a minimalist interface at $8-16/user/month. Linear is the best alternative for teams that find Jira's configuration overhead unnecessary and prioritize speed over customization. Asana provides a more intuitive user experience for cross-functional teams with timeline views, goals, and workload management at $10.99-24.99/user/month, making it the better choice for organizations that need one tool for engineering, marketing, and operations teams. GitHub Projects offers project management directly within the GitHub ecosystem, ideal for open-source and developer-first teams that want code and task management in a single interface at no additional cost for GitHub users. Monday.com provides a visual, customizable work OS with more accessible configuration than Jira at $8-16/user/month, suitable for teams that need customization without Jira's administrative complexity. For each alternative, evaluate the migration cost: Jira's custom workflows, permissions, and integrations represent significant switching costs that should be weighed against the benefits of a simpler tool.", "type": "text"},
-    {"title": "Final Verdict", "body": "Jira earns a 4.1/5 rating and remains the most capable project management platform for engineering organizations that need structured workflows, compliance tracking, and cross-project portfolio management at scale. Its unmatched workflow engine, the power of JQL, and the breadth of the Atlassian Marketplace make it the only choice for organizations with complex approval chains, regulatory compliance requirements, or multi-team dependency management. However, the platform's complexity, performance limitations, and aggressive licensing costs mean it is only the right choice for organizations that genuinely need its capabilities. Teams under 50 users should strongly consider Linear or Asana. Organizations with simple workflows should choose GitHub Projects or Monday.com. Jira's switching costs are substantial — once an organization has invested in workflow schemes, permission structures, marketplace add-ons, and administrator expertise, migrating to another platform represents a significant sunk cost. Buy Jira only when you have outgrown simpler tools and need the process control that only its workflow engine provides. For everyone else, the administrative overhead is not worth the flexibility you will likely never need.", "type": "text"},
-    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
-    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
-    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
+    {
+      "title": "Executive Summary",
+      "body": "Jira is the most configurable project management platform available, built for software teams that need structured workflows, compliance tracking, and cross-project portfolio management at enterprise scale. Originally developed as a bug tracker, Jira has evolved into a comprehensive work management platform with Scrum and Kanban boards, roadmaps, automation rules, and a JQL query language that provides SQL-like power over issue data. The platform's core strength — total workflow customization — is also its greatest liability: teams can model any process with custom statuses, transitions, permissions, and fields, but this flexibility comes with significant administrative overhead and a steep learning curve. Jira extends through the Atlassian ecosystem (Confluence, Bitbucket, Opsgenie, Jira Service Management) and the Marketplace offers 3,000+ add-ons. With 35,000+ reviews and a 4.1/5 rating, Jira remains the default choice for engineering organizations at scale, despite growing competition from simpler tools like Linear and GitHub Projects.",
+      "type": "text"
+    },
+    {
+      "title": "Best For",
+      "body": "Jira delivers the most value for engineering organizations with 50+ developers that need structured workflows with approval gates, compliance tracking, and cross-project portfolio management. Organizations in regulated industries — finance, healthcare, government — that require audit trails, permission schemes, separation of duties, and documented process enforcement benefit from Jira's scheme-based permission and workflow architecture. Teams already invested in the Atlassian ecosystem (Confluence for documentation, Bitbucket for code, Opsgenie for incident management) realize deep integration that external tools cannot match. Organizations running multiple scrum teams that need cross-team dependency tracking, capacity planning, and portfolio-level roadmaps will find Advanced Roadmaps (Premium tier) essential. Jira Service Management extends the platform to IT and support teams with ITIL-aligned service desk capabilities, SLA tracking, and customer portals under the same administrative umbrella as software development projects.",
+      "type": "text"
+    },
+    {
+      "title": "Worst Fit",
+      "body": "Jira is a poor fit for three scenarios. Teams under 15 people should avoid Jira — the administrative overhead of maintaining schemes, workflows, permissions, and screens outweighs the benefits of its flexibility, and simpler tools like Linear or Asana will deliver more value with less effort. Organizations that want a single project management tool for the entire company (engineering, marketing, operations, HR) will find Jira's software-engineered workflow model frustrating for non-technical users who need simpler task management with dependencies, timelines, and cross-functional views. Teams already using GitHub Projects or Linear who are satisfied with their current workflow should not migrate to Jira unless they have a specific compliance requirement, as the migration effort — mapping issue types, workflows, permissions, schemes, and custom fields — typically takes 4-8 weeks for mid-sized organizations and generates significant user resistance to the increased process overhead.",
+      "type": "text"
+    },
+    {
+      "title": "Key Features",
+      "body": "Jira's feature depth is unmatched among project management tools, but most capabilities require deliberate configuration to unlock. The following represent what makes Jira uniquely capable for teams that need its scale.",
+      "type": "list",
+      "items": [
+        "Custom workflow engine with conditions, validators, and post-functions enables multi-step approval chains (author → manager → director → VP) that auto-assign approvers based on issue fields, prevent premature transitions, and trigger side-effects like Slack notifications or Confluence page creation.",
+        "JQL (Jira Query Language) provides SQL-like querying over issues, enabling complex cross-project reports like 'all P0 bugs with fix versions in the current quarter by team, excluding security issues under embargo', saved as shareable filters.",
+        "Advanced Roadmaps (Premium tier) models what-if scenarios for resource allocation, showing how adding a new initiative impacts team capacity and delivery timelines across all existing commitments in a drag-and-drop timeline view.",
+        "Automation rules execute 50,000+ actions per month on Standard plans, handling workflows like auto-closing issues when PRs merge, round-robin assignment based on team member workload, and escalating overdue tasks via email or Slack.",
+        "The Atlassian Marketplace adds 3,000+ vetted add-ons extending Jira with time tracking (Tempo), test management (Xray, Zephyr), resource planning, financial management, and documentation (Confluence) without custom development."
+      ]
+    },
+    {
+      "title": "Real Advantages",
+      "body": "Jira's strongest advantage is its workflow engine, which provides a level of process control that no other project management tool matches. The combination of custom statuses, transitions, conditions (who can execute a transition), validators (what must be true to transition), and post-functions (what happens after transition) enables modeling of complex business processes — regulatory approval chains, multi-stage QA gates, compliance audit trails — that simpler tools cannot replicate. JQL is a genuine differentiator for reporting: SQL-literate users can construct queries that filter, sort, and aggregate across any combination of project, issue type, status, custom field value, assignee, sprint, and date range, then save these as shareable filters and dashboard gadgets. The Atlassian Marketplace ecosystem means that gaps in Jira's core functionality — time tracking, test case management, financial planning — are addressable through vetted add-ons rather than requiring a platform switch. For organizations that have outgrown Linear, Asana, or GitHub Projects, Jira is the natural migration target precisely because its flexibility can accommodate growing process complexity.",
+      "type": "text"
+    },
+    {
+      "title": "Real Limitations",
+      "body": "Jira's most significant limitation is its user interface complexity. Settings and configuration are distributed across project settings, system settings, board configuration, permission schemes, notification schemes, issue type schemes, workflow schemes, and screen schemes — a navigation architecture that reflects the product's 20-year evolution from bug tracker to enterprise platform but creates a steep learning curve. New administrators typically need 4-8 weeks to become proficient in configuration management. The second major limitation is performance at scale: Jira Cloud instances with 10,000+ issues and 100+ users experience noticeable page load times (3-7 seconds for board views) and query execution delays during peak usage hours. Self-managed Data Center deployments require significant infrastructure investment — 8-16 GB of RAM for mid-sized deployments, dedicated database servers, and regular index maintenance. The licensing cost curve is also aggressive: Premium at $15.25/user/month is 2x the Standard price, and the features it unlocks (sandboxes, Advanced Roadmaps, cross-project automation) are essential for organizations operating at scale, making the effective per-user cost higher than comparable tools.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing Explained",
+      "body": "Jira uses per-user monthly pricing with four tiers. Free supports up to 10 users with 2 GB storage, 2-week automation runs, and community support. Standard at $7.75/user/month includes 250 GB storage, 99.9% uptime SLA, and 9-5 support. Premium at $15.25/user/month adds Advanced Roadmaps, sandbox environments, cross-project automation, 99.99% SLA, and 24/7 support. Enterprise (Data Center) starts at $42,500 annually for self-managed deployment with unlimited users, 99.999% availability SLA, and dedicated support. Annual billing is required for Premium and Enterprise. A critical pricing detail: Jira charges for every user with active access, not just active users — contractors, managers, and stakeholders who rarely log in still count toward the license total. Organizations using Jira Service Management alongside Jira Software pay separate per-user fees for each product, effectively doubling the cost for users who need both platforms. Automation usage is capped at 50,000 actions/month on Standard and 100,000 on Premium, with overage requiring plan upgrades rather than pay-per-use scaling.",
+      "type": "text"
+    },
+    {
+      "title": "Hidden Costs",
+      "body": "Three hidden costs affect Jira deployments. Atlassian Marketplace add-ons for essential capabilities can double or triple the effective per-user cost. Tempo time tracking adds $3-10/user/month, Xray test management adds $5-15/user/month, and portfolio-level resource planning through Advanced Roadmaps (Premium) or第三方 plugins adds additional costs. For a 100-person team, marketplace add-ons can reach $3,000-6,000/month beyond base licensing. The second hidden cost is administration: Jira requires dedicated configuration management — scheme design, workflow maintenance, permission audits, and plugin compatibility testing — that typically consumes 0.25-0.5 FTE per 200 users, either through internal staffing or Atlassian consulting partners at $150-250/hour. The third hidden cost is migration and integration: connecting Jira to existing CI/CD pipelines, monitoring tools, and communication platforms requires developer time for API integration and webhook configuration. Data Center deployments add infrastructure costs for servers, database licenses (typically PostgreSQL or MySQL), backup storage, and disaster recovery — adding 30-50% to the total cost of ownership over Cloud plans.",
+      "type": "text"
+    },
+    {
+      "title": "Learning Curve",
+      "body": "Basic proficiency — creating and editing issues, using boards, running sprints, and navigating projects — takes 1-2 weeks for most new users. Intermediate proficiency — configuring workflows, building dashboards, creating filters with JQL, setting up automation rules, and managing project permissions — requires 4-8 weeks of hands-on administration. Advanced proficiency — designing custom workflows with conditions, validators, and post-functions, creating issue type schemes and screen schemes, managing cross-project Advanced Roadmaps, and integrating with external tools — takes 3-6 months of regular administration. Jira administration is a recognized specialization: Atlassian offers ACP (Atlassian Certified Professional) certifications for Jira Administration, and experienced Jira admins command premium compensation. The learning investment is substantial but transferable across organizations, as Jira's configuration concepts are consistent across Cloud and Data Center deployments. The JQL learning curve deserves specific attention: while basic filter construction is intuitive, mastering JQL's aggregation functions, time-based queries, and cross-project joins requires dedicated study.",
+      "type": "text"
+    },
+    {
+      "title": "Setup Time",
+      "body": "A basic Jira project for a 10-person scrum team can be operational in 2-4 hours using a default kanban or scrum template with minimal customization. Organization-wide deployment for 100+ users across multiple teams requires 4-8 weeks of planning, configuration, and testing. The critical path includes: scheme design (workflow schemes, issue type schemes, permission schemes, notification schemes, screen schemes), project structure (project categories, component definitions, version naming conventions), permission configuration (project-level vs. system-level permissions, issue security levels), automation rule development and testing, integration setup (Slack, GitHub, CI/CD tools), and user onboarding with role-based training. Importing data from a previous tool is a significant sub-project: Jira's CSV and JSON importers handle basic issue data but custom field mapping, attachment migration, and historical data preservation require careful planning. A typical migration from Trello or Asana to Jira takes 2-4 weeks for data mapping and import validation. The sandbox environment (Premium tier) is strongly recommended for configuration testing before production deployment.",
+      "type": "text"
+    },
+    {
+      "title": "Migration Difficulty",
+      "body": "Migrating to Jira from another project management tool ranges from moderate to very difficult depending on the source platform. Migration from Linear is rated 7/10: Linear's simpler data model (issues with labels and assignees) maps cleanly to Jira's core issue types, but custom workflows, keyboard shortcut reliance, and Linear's speed advantages mean the migration is primarily a change management challenge rather than a technical one. Migration from Asana or Trello is rated 6/10: basic task data transfers through CSV import, but Asana's custom fields and Trello's labels require manual mapping to Jira schemes, and conversation threads embedded in tasks do not transfer. Migration from another Jira instance (Data Center to Cloud, or Cloud to Cloud) is rated 4/10 through Atlassian's migration assistant, but custom plugins and automation rules often require reimplementation. The most difficult migration is from Microsoft Project or Smartsheet to Jira (rated 8/10): Gantt chart dependencies, resource allocation data, and timeline structures have no direct Jira equivalent and require process redesign rather than simple data migration. In all cases, budget 2-4 weeks for data migration and 4-8 weeks for full organizational adoption.",
+      "type": "text"
+    },
+    {
+      "title": "Integration Ecosystem",
+      "body": "Jira's integration ecosystem is the deepest of any project management tool, spanning three layers: native Atlassian integrations, the Atlassian Marketplace, and third-party connectors. Native integrations include Confluence (bidirectional issue-page linking with inline issue data rendering), Bitbucket (smart commits that transition issues based on commit messages, branch/PR creation from issues), Opsgenie (incident alerting with automatic issue creation), and Jira Service Management (cross-project SLA tracking and customer portal integration). The Marketplace offers 3,000+ add-ons categorized into testing (Xray, Zephyr — $5-15/user/month), time tracking (Tempo, Timesheets — $3-10/user/month), documentation (Confluence, Scroll Viewport), reporting (EazyBI, Advanced Roadmaps), and resource management. Third-party integrations via webhooks and REST API connect Jira to Slack, Microsoft Teams, GitHub, GitLab, Jenkins, CircleCI, Datadog, Splunk, and PagerDuty. Jira's REST API is comprehensive and well-documented, supporting issue CRUD, project administration, user management, and automation rule configuration through programmatic access. The API rate limit for Cloud is 1,000 requests per minute, sufficient for most integration scenarios.",
+      "type": "text"
+    },
+    {
+      "title": "Security & Compliance",
+      "body": "Jira Cloud is SOC 2 Type II, SOC 3, ISO 27001, and ISO 27701 certified. Data in transit uses TLS 1.2+ and data at rest is AES-256 encrypted. Atlassian Access (add-on at $2-4/user/month) provides SAML 2.0 and OIDC SSO, SCIM user provisioning, enforced 2FA, and audit logging across all Atlassian products. Data residency is available in US, EU, UK, Germany, and Australia regions for Cloud Enterprise customers. For regulated industries: Jira supports HIPAA compliance through a BAA (available on Premium and Enterprise plans), FedRAMP Tailored authorization for Cloud, and GDPR compliance with a Data Processing Agreement. Self-managed Data Center deployments offer additional security controls including network isolation, custom encryption key management, on-premise deployment, and full control over backup and disaster recovery. Jira provides project-level permission schemes (who can see which projects), issue security levels (who can see individual issues within a project), and audit logging for compliance tracking. However, the complexity of permission scheme management means misconfiguration is common — regular permission audits are essential for maintaining compliance boundaries.",
+      "type": "text"
+    },
+    {
+      "title": "Performance",
+      "body": "Jira Cloud page load times vary significantly by plan and instance scale. Standard plans load board and issue views in 2-4 seconds for instances with under 5,000 issues. Premium plans improve load times by 30-40% through dedicated infrastructure. Instances with 50,000+ issues experience 5-10 second load times for board views during sprint transitions and report generation. JQL query execution varies from sub-second for simple filters to 10-30 seconds for cross-project aggregations with multiple custom field filters. The web application consumes 200-400 MB of browser memory on modern browsers. Data Center (self-managed) performance depends entirely on infrastructure: a properly sized deployment with 16 GB RAM, 4 dedicated CPUs, and SSD storage runs 2-3x faster than Cloud for equivalent issue counts, but requires regular index maintenance (weekly reindexing is recommended for instances with 10,000+ issues). The mobile app provides basic functionality for issue viewing, assignment, and status updates but is not suitable for board management or sprint planning. Jira's performance characteristics are the weakest among major project management tools, reflecting its Java-based architecture and schema complexity.",
+      "type": "text"
+    },
+    {
+      "title": "Customer Support",
+      "body": "Atlassian support varies significantly by plan. Free and Standard plans receive community forum access and email support with 24-48 hour response times. Premium includes 24/7 phone and chat support with 1-hour critical response SLA and a designated support engineer. Enterprise Data Center customers receive 24/7 support with 30-minute critical SLA, dedicated account manager, and quarterly business reviews. Support quality is rated 3.9/5 in user reviews, with common complaints about slow resolution for configuration issues and inconsistent technical depth across support engineers. The Atlassian Community is active with 1M+ members and provides better answers for most configuration questions than official support channels. Atlassian's documentation and knowledge base are comprehensive but can be difficult to navigate due to the product's configuration complexity. Premium and Enterprise customers report better experiences with faster response times and more knowledgeable support staff. For urgent production incidents, Premium's 1-hour response SLA is essential but response does not guarantee resolution within the SLA window.",
+      "type": "text"
+    },
+    {
+      "title": "Real-world Use Cases",
+      "body": "A 200-person SaaS engineering organization runs 12 scrum teams across 3 product lines in a single Jira Cloud Premium instance. Each team uses custom workflow schemes with 5-7 statuses reflecting their development process (Backlog → Ready → In Progress → Code Review → QA → Staging → Done), with transition conditions enforcing peer review completion before Code Review and QA approval before Staging. Automation rules handle 30+ workflows: auto-assigning issues based on team round-robin, transitioning to In Progress when a branch is created, notifying Slack when a PR review is requested, and escalating blockers older than 3 days. Advanced Roadmaps provide the VP of Engineering with a portfolio view of all 12 teams' commitments, dependencies, and capacity utilization. A regulated fintech company with 500 users runs Jira Data Center with permission schemes modeling organizational hierarchy: developers see their team's issues, managers see all issues in their department, compliance officers have read-only access across all projects with audit logging enabled. Workflows include mandatory QA and security approval transitions before production deployments, enforced through condition validators that check user group membership before allowing the transition.",
+      "type": "text"
+    },
+    {
+      "title": "Common Mistakes",
+      "body": "Five mistakes repeatedly surface from Jira administrators. Over-customization before process maturity — teams that design custom workflows with 15+ statuses before they have stable processes create administrative burden without value. Start with Jira's default Scrum or Kanban workflow and add statuses only when a proven process gap exists. Underestimating permission scheme complexity — granting project-level admin to team leads who then inadvertently expose sensitive issues or delete shared configurations. Permission audits should be conducted quarterly. Neglecting scheme consolidation — creating a unique workflow scheme, issue type scheme, and screen scheme for every project results in dozens of schemes that become unmanageable. Standardize on 3-5 shared schemes and create exceptions only when process requirements genuinely differ. Unmanaged automation consumption — teams implement 50+ automation rules without tracking execution volume, hitting the monthly action cap and disrupting critical workflows. Audit automation usage monthly and consolidate or archive rules that execute fewer than 10 times per month. Skipping sandbox testing on Premium — applying workflow changes directly to production instances risks breaking active processes. Always test configuration changes in sandbox environments before production deployment, even for seemingly simple field additions or workflow modifications.",
+      "type": "text"
+    },
+    {
+      "title": "Tips from experienced users",
+      "body": "Power users rely on five strategies. Master JQL early — invest 5-10 hours learning JQL syntax, particularly aggregations (COUNT, SUM), time-based functions (startOfDay(), endOfWeek(), now()), and cross-project joins. A well-constructed JQL filter eliminates the need for custom scripting for common reporting needs. Use shared configuration rather than per-project customization — create shared workflow schemes, issue type schemes, and screen schemes that multiple projects reference, reducing maintenance burden when process changes affect all teams. Leverage automation templates before building custom rules — Jira ships with 100+ automation templates covering common patterns; reviewing available templates before building from scratch reveals capabilities and reduces rule development time. Implement a project lead review process — before creating any new project, require the requestor to define purpose, team membership, permission requirements, and integration needs in a standardized project intake template. Schedule quarterly permission audits — export project permission configurations, review for access bloat (users who left teams but still have project access), and verify that issue security levels remain appropriate.",
+      "type": "text"
+    },
+    {
+      "title": "Alternatives",
+      "body": "Jira's primary competitors address different scales and use cases. Linear offers a keyboard-first, high-performance issue tracking experience for engineering teams under 50 people, with sub-100ms search and a minimalist interface at $8-16/user/month. Linear is the best alternative for teams that find Jira's configuration overhead unnecessary and prioritize speed over customization. Asana provides a more intuitive user experience for cross-functional teams with timeline views, goals, and workload management at $10.99-24.99/user/month, making it the better choice for organizations that need one tool for engineering, marketing, and operations teams. GitHub Projects offers project management directly within the GitHub ecosystem, ideal for open-source and developer-first teams that want code and task management in a single interface at no additional cost for GitHub users. Monday.com provides a visual, customizable work OS with more accessible configuration than Jira at $8-16/user/month, suitable for teams that need customization without Jira's administrative complexity. For each alternative, evaluate the migration cost: Jira's custom workflows, permissions, and integrations represent significant switching costs that should be weighed against the benefits of a simpler tool.",
+      "type": "text"
+    },
+    {
+      "title": "Final Verdict",
+      "body": "Jira earns a 4.1/5 rating and remains the most capable project management platform for engineering organizations that need structured workflows, compliance tracking, and cross-project portfolio management at scale. Its unmatched workflow engine, the power of JQL, and the breadth of the Atlassian Marketplace make it the only choice for organizations with complex approval chains, regulatory compliance requirements, or multi-team dependency management. However, the platform's complexity, performance limitations, and aggressive licensing costs mean it is only the right choice for organizations that genuinely need its capabilities. Teams under 50 users should strongly consider Linear or Asana. Organizations with simple workflows should choose GitHub Projects or Monday.com. Jira's switching costs are substantial — once an organization has invested in workflow schemes, permission structures, marketplace add-ons, and administrator expertise, migrating to another platform represents a significant sunk cost. Buy Jira only when you have outgrown simpler tools and need the process control that only its workflow engine provides. For everyone else, the administrative overhead is not worth the flexibility you will likely never need.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing at a Glance",
+      "body": "pricing-ladder",
+      "type": "diagram"
+    },
+    {
+      "title": "Feature Radar",
+      "body": "feature-radar",
+      "type": "diagram"
+    },
+    {
+      "title": "Implementation Flow",
+      "body": "implementation-flow",
+      "type": "diagram"
+    }
   ],
   "faqs": [
-    {"question": "What is Jira best used for?", "answer": "Jira is best used for issue tracking and project management in software development teams that need structured workflows, compliance tracking, and cross-project portfolio management at scale. It excels in regulated industries that require audit trails, approval gates, and detailed permission controls that simpler project management tools do not support."},
-    {"question": "How much does Jira cost?", "answer": "Jira Free supports up to 10 users with 2 GB storage. Standard costs $7.75 per user per month with 250 GB storage and 99.9% uptime SLA. Premium costs $15.25 per user per month and adds Advanced Roadmaps, sandboxes, cross-project automation, and 99.99% SLA. Enterprise (Data Center) starts at $42,500 annually for self-managed deployment with unlimited users and 99.999% availability SLA. Annual billing is required for Premium and Enterprise."},
-    {"question": "Does Jira integrate with other tools?", "answer": "Jira integrates natively with Confluence (docs), Bitbucket (code), Opsgenie (incidents), and Jira Service Management (support) within the Atlassian ecosystem. Third-party integrations include GitHub, GitLab, Slack, Microsoft Teams, Okta, Splunk, Datadog, and Salesforce. The Marketplace offers 3,000+ add-ons for time tracking, testing, financial management, and documentation."},
-    {"question": "Is Jira suitable for small teams?", "answer": "Jira Free works for small teams up to 10 users, but the administrative overhead of scheme configuration, workflow design, and permissions management makes it a poor fit for teams that just need simple task tracking. Small teams are better served by Linear (for engineering) or Asana (for cross-functional work) until their workflow complexity outgrows those tools."}
+    {
+      "question": "What is Jira best used for?",
+      "answer": "Jira is best used for issue tracking and project management in software development teams that need structured workflows, compliance tracking, and cross-project portfolio management at scale. It excels in regulated industries that require audit trails, approval gates, and detailed permission controls that simpler project management tools do not support."
+    },
+    {
+      "question": "How much does Jira cost?",
+      "answer": "Jira Free supports up to 10 users with 2 GB storage. Standard costs $7.75 per user per month with 250 GB storage and 99.9% uptime SLA. Premium costs $15.25 per user per month and adds Advanced Roadmaps, sandboxes, cross-project automation, and 99.99% SLA. Enterprise (Data Center) starts at $42,500 annually for self-managed deployment with unlimited users and 99.999% availability SLA. Annual billing is required for Premium and Enterprise."
+    },
+    {
+      "question": "Does Jira integrate with other tools?",
+      "answer": "Jira integrates natively with Confluence (docs), Bitbucket (code), Opsgenie (incidents), and Jira Service Management (support) within the Atlassian ecosystem. Third-party integrations include GitHub, GitLab, Slack, Microsoft Teams, Okta, Splunk, Datadog, and Salesforce. The Marketplace offers 3,000+ add-ons for time tracking, testing, financial management, and documentation."
+    },
+    {
+      "question": "Is Jira suitable for small teams?",
+      "answer": "Jira Free works for small teams up to 10 users, but the administrative overhead of scheme configuration, workflow design, and permissions management makes it a poor fit for teams that just need simple task tracking. Small teams are better served by Linear (for engineering) or Asana (for cross-functional work) until their workflow complexity outgrows those tools."
+    }
   ],
-  "alternatives": ["linear", "asana"],
-  "relatedComparisons": ["asana-vs-monday-com"],
-  "relatedPosts": ["best-project-management-software-2026"],
-  "relatedGuides": ["how-to-choose-project-management-software", "software-evaluation-checklist", "saas-implementation-best-practices"],
+  "alternatives": [
+    "linear",
+    "asana"
+  ],
+  "relatedComparisons": [
+    "asana-vs-monday-com"
+  ],
+  "relatedPosts": [
+    "best-project-management-software-2026"
+  ],
+  "relatedGuides": [
+    "how-to-choose-project-management-software",
+    "software-evaluation-checklist",
+    "saas-implementation-best-practices"
+  ],
   "lastReviewed": "2026-07-16",
-  "author": "StackPilot Team"
+  "author": "StackPilot Team",
+  "company": {
+    "founded": 2002,
+    "headquarters": "Sydney, New South Wales, Australia",
+    "customers": "200,000+ customers",
+    "employeeCount": "12,000+ (Atlassian)",
+    "industries": [
+      "Project Management",
+      "Software Development",
+      "Agile"
+    ],
+    "targetUsers": [
+      "Software Developers",
+      "Project Managers",
+      "Product Managers",
+      "Engineering Teams"
+    ],
+    "pricingModel": "Per-user monthly subscription",
+    "deployment": [
+      "Cloud",
+      "Self-hosted",
+      "On-premises"
+    ],
+    "securityCertifications": [
+      "SOC 2 Type II",
+      "SOC 3",
+      "ISO 27001"
+    ],
+    "compliance": [
+      "GDPR",
+      "CCPA",
+      "HIPAA",
+      "SOX"
+    ],
+    "integrations": [
+      "GitHub",
+      "GitLab",
+      "Bitbucket",
+      "Slack",
+      "Microsoft Teams",
+      "Confluence",
+      "Salesforce",
+      "Zendesk"
+    ],
+    "apiAvailable": true,
+    "aiFeatures": [
+      "Atlassian Intelligence",
+      "AI issue summarization",
+      "AI search",
+      "Smart auto-complete"
+    ],
+    "mobileApps": [
+      "iOS",
+      "Android"
+    ],
+    "learningCurve": "Medium",
+    "migrationComplexity": "High",
+    "supportQuality": "3.9/5",
+    "releaseFrequency": "Monthly"
+  }
 }

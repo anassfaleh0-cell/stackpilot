@@ -20,7 +20,7 @@ export default function PrivacyPage() {
         <Container>
           <div className="max-w-3xl mx-auto prose prose-slate">
             <h1 className="text-4xl font-bold tracking-tight mb-6">Privacy Policy</h1>
-            <p className="text-muted"><em>Last updated: July 16, 2026</em></p>
+            <p className="text-muted-foreground"><em>Last updated: July 16, 2026</em></p>
 
             <h2>Information We Collect</h2>
             <p>We collect only the information necessary to provide and improve StackPilot:</p>

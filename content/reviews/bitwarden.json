@@ -20,74 +20,343 @@
     "Emergency access feature requires the premium plan ($10/year), unlike Apple Passkeys or Google Password Manager which include account recovery at no cost within their ecosystems"
   ],
   "features": [
-    {"name": "Unlimited Vault Storage", "description": "Store unlimited passwords, passkeys, notes, credit cards, and identities across unlimited devices with real-time sync.", "available": true, "category": "Core"},
-    {"name": "Cross-Platform Access", "description": "Native apps for Windows, macOS, Linux, iOS, Android, and browser extensions for Chrome, Firefox, Safari, Edge, Brave, and Vivaldi.", "available": true, "category": "Core"},
-    {"name": "Password Generator", "description": "Generate strong passwords with configurable length, character types, and avoid ambiguous characters with pronounceable password option.", "available": true, "category": "Core"},
-    {"name": "Auto-Fill", "description": "Automatic username and password filling across web and mobile with URI-based matching and field detection.", "available": true, "category": "Core"},
-    {"name": "Bitwarden Send", "description": "Share encrypted text or files with expiration dates, maximum access counts, and password protection that can be disabled after sending.", "available": true, "category": "Core"},
-    {"name": "Passkey Management", "description": "Store and manage passkeys (FIDO2 WebAuthn credentials) alongside passwords for passwordless authentication.", "available": true, "category": "Core"},
-    {"name": "Two-Factor Authentication", "description": "Built-in authenticator key (TOTP) storage on premium plan, plus support for hardware keys (YubiKey, FIDO2), SMS, email, and Duo.", "available": true, "category": "Security"},
-    {"name": "Emergency Access", "description": "Designate trusted contacts who can request vault access with configurable waiting periods and approval workflows.", "available": true, "category": "Security"},
-    {"name": "Vault Health Reports", "description": "Monitor for weak, reused, and compromised passwords through the web vault with actionable remediation recommendations.", "available": true, "category": "Security"},
-    {"name": "Data Breach Scanner", "description": "Monitor email addresses against known breach databases and alert users when credentials appear in publicly exposed data.", "available": true, "category": "Security"},
-    {"name": "Biometric Unlock", "description": "Fingerprint, Face ID, or Windows Hello unlock across mobile and desktop apps for frictionless vault access.", "available": true, "category": "Core"},
-    {"name": "Offline Access", "description": "Full vault access when offline with automatic sync when connectivity is restored — vault contents are cached locally encrypted.", "available": true, "category": "Core"},
-    {"name": "Self-Hosting", "description": "Deploy Bitwarden on your own infrastructure via Docker with full database, API, and web server control.", "available": true, "category": "Enterprise"},
-    {"name": "Directory Sync", "description": "Sync users and groups from Azure AD, Okta, LDAP, G Suite, or OneLogin for automated provisioning and deprovisioning.", "available": true, "category": "Enterprise"},
-    {"name": "SCIM Provisioning", "description": "Automated user provisioning via SCIM 2.0 with supported identity providers for enterprise user lifecycle management.", "available": true, "category": "Enterprise"},
-    {"name": "Event Logging", "description": "Audit log of user authentication events, vault item access, sharing changes, and admin actions with SIEM export capability.", "available": true, "category": "Enterprise"},
-    {"name": "API Access", "description": "RESTful API for programmatic vault management, user administration, and integration with internal security tooling.", "available": true, "category": "Enterprise"},
-    {"name": "Passwordless SSO", "description": "Key Connector enables passwordless SSO for enterprise users by storing encryption keys on organization infrastructure.", "available": true, "category": "Enterprise"}
+    {
+      "name": "Unlimited Vault Storage",
+      "description": "Store unlimited passwords, passkeys, notes, credit cards, and identities across unlimited devices with real-time sync.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Cross-Platform Access",
+      "description": "Native apps for Windows, macOS, Linux, iOS, Android, and browser extensions for Chrome, Firefox, Safari, Edge, Brave, and Vivaldi.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Password Generator",
+      "description": "Generate strong passwords with configurable length, character types, and avoid ambiguous characters with pronounceable password option.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Auto-Fill",
+      "description": "Automatic username and password filling across web and mobile with URI-based matching and field detection.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Bitwarden Send",
+      "description": "Share encrypted text or files with expiration dates, maximum access counts, and password protection that can be disabled after sending.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Passkey Management",
+      "description": "Store and manage passkeys (FIDO2 WebAuthn credentials) alongside passwords for passwordless authentication.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Two-Factor Authentication",
+      "description": "Built-in authenticator key (TOTP) storage on premium plan, plus support for hardware keys (YubiKey, FIDO2), SMS, email, and Duo.",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Emergency Access",
+      "description": "Designate trusted contacts who can request vault access with configurable waiting periods and approval workflows.",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Vault Health Reports",
+      "description": "Monitor for weak, reused, and compromised passwords through the web vault with actionable remediation recommendations.",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Data Breach Scanner",
+      "description": "Monitor email addresses against known breach databases and alert users when credentials appear in publicly exposed data.",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Biometric Unlock",
+      "description": "Fingerprint, Face ID, or Windows Hello unlock across mobile and desktop apps for frictionless vault access.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Offline Access",
+      "description": "Full vault access when offline with automatic sync when connectivity is restored — vault contents are cached locally encrypted.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Self-Hosting",
+      "description": "Deploy Bitwarden on your own infrastructure via Docker with full database, API, and web server control.",
+      "available": true,
+      "category": "Enterprise"
+    },
+    {
+      "name": "Directory Sync",
+      "description": "Sync users and groups from Azure AD, Okta, LDAP, G Suite, or OneLogin for automated provisioning and deprovisioning.",
+      "available": true,
+      "category": "Enterprise"
+    },
+    {
+      "name": "SCIM Provisioning",
+      "description": "Automated user provisioning via SCIM 2.0 with supported identity providers for enterprise user lifecycle management.",
+      "available": true,
+      "category": "Enterprise"
+    },
+    {
+      "name": "Event Logging",
+      "description": "Audit log of user authentication events, vault item access, sharing changes, and admin actions with SIEM export capability.",
+      "available": true,
+      "category": "Enterprise"
+    },
+    {
+      "name": "API Access",
+      "description": "RESTful API for programmatic vault management, user administration, and integration with internal security tooling.",
+      "available": true,
+      "category": "Enterprise"
+    },
+    {
+      "name": "Passwordless SSO",
+      "description": "Key Connector enables passwordless SSO for enterprise users by storing encryption keys on organization infrastructure.",
+      "available": true,
+      "category": "Enterprise"
+    }
   ],
   "ratings": [
-    {"label": "Features", "score": 4.6},
-    {"label": "Ease of Use", "score": 4.3},
-    {"label": "Support", "score": 3.8},
-    {"label": "Value", "score": 4.9},
-    {"label": "Performance", "score": 4.5}
+    {
+      "label": "Features",
+      "score": 4.6
+    },
+    {
+      "label": "Ease of Use",
+      "score": 4.3
+    },
+    {
+      "label": "Support",
+      "score": 3.8
+    },
+    {
+      "label": "Value",
+      "score": 4.9
+    },
+    {
+      "label": "Performance",
+      "score": 4.5
+    }
   ],
   "content": [
-    {"title": "Executive Summary", "body": "Bitwarden is the most transparent password manager on the market — open-source codebase, published security audits, and a free tier that genuinely competes with paid competitors. With over 10 million users across 150+ countries, Bitwarden stores encrypted vaults for passwords, passkeys, credit cards, notes, and identities, synchronized across unlimited devices. Unlike 1Password (proprietary, subscription-only) or LastPass (multiple security incidents), Bitwarden's AGPL-licensed code is publicly auditable, and the platform offers self-hosting via Docker for organizations that cannot trust cloud-based password storage. The free tier — unlimited items, unlimited devices, unlimited sharing with one user — is aggressively generous. Premium at $10/year unlocks TOTP authenticator key storage, emergency access, file attachments up to 500 MB, and advanced vault health reports. Organizations pay $3-6/user/month for admin consoled, SCIM provisioning, directory sync, and event logging. Bitwarden's primary tradeoff is UI polish — the browser extension and apps are functional but lack the visual refinement of 1Password's design-focused interface. For security-conscious users who prioritize auditability, self-hosting capability, and value over brand-name design, Bitwarden is the clear market leader.", "type": "text"},
-    {"title": "Best For", "body": "Bitwarden delivers the most value for three segments. Security-conscious individual users who want a password manager for personal use across unlimited devices without paying a subscription — the free tier provides every feature most individuals need, including auto-fill, password generation, and unlimited storage. Organizations with compliance requirements that mandate self-hosted infrastructure — Bitwarden's Docker-based self-hosting option with directory sync, event logging, and SCIM provisioning enables SOC 2, HIPAA, and GDPR-compliant password management on private infrastructure. IT administrators managing password security for non-technical teams — the admin console provides visibility into organizational password health (weak, reused, compromised passwords) and automated remediation policies without requiring users to change their workflow.", "type": "text"},
-    {"title": "Worst Fit", "body": "Bitwarden is poorly suited for three scenarios. Users who prioritize design and UX polish over functionality — the browser extension and mobile apps are intentionally utilitarian, with dense information layouts and minimal animation. 1Password provides a significantly more refined experience with inline menu integration, rich item categories, and animated vault transitions. Organizations needing phone or live chat support — Bitwarden's support is email-only at all tiers, with 12-48 hour response times. Enterprise customers get priority email but not phone support. Teams looking for a password manager with integrated VPN or dark web monitoring — Bitwarden focuses strictly on password management; it does not bundle VPN (like NordPass) or identity protection features (like Dashlane). Organizations needing these adjacent features must purchase separate subscriptions.", "type": "text"},
-    {"title": "Key Features", "body": "Bitwarden's open-source architecture affects every capability: the code is auditable, self-hosting is built-in rather than an add-on, and the transparent security model has driven adoption to 2 million+ users across 50,000+ organizations.", "type": "list", "items": [
-      "Unlimited vault storage and cross-platform sync across Windows, macOS, Linux, iOS, Android, and all major browsers with real-time encrypted synchronization via the Bitwarden cloud or self-hosted server.",
-      "Bitwarden Send enables encrypted file sharing (up to 500 MB on premium) with configurable expiration, access limits, and password protection — useful for sharing credentials or sensitive documents with contractors or clients.",
-      "Passkey management stores FIDO2 WebAuthn credentials alongside passwords for passwordless authentication on supported websites, with cross-device passkey sync identical to password storage.",
-      "Vault health reports scan for weak, reused, and compromised passwords with actionable recommendations — the compromised password check cross-references hashed credentials against Have I Been Pwned's breach database.",
-      "Self-hosting via Docker Compose provides full infrastructure control with database backups, API management, and the ability to run air-gapped instances on networks without internet connectivity.",
-      "Directory sync and SCIM provisioning integrate with Azure AD, Okta, LDAP, Google Workspace, and OneLogin for automated user provisioning and deprovisioning, ensuring vault access revokes when employees leave the organization."
-    ]},
-    {"title": "Real Advantages", "body": "Bitwarden's three genuine competitive advantages are open-source auditability, self-hosting capability, and free tier value. On open-source auditability: Bitwarden's core codebase is AGPL-licensed and has undergone 10+ independent security audits from Cure53, Insight Risk, and Privacy4Teams, with full reports published on Bitwarden's website. LastPass suffered four publicly disclosed security incidents between 2022 and 2025, and its proprietary codebase prevented independent verification of remediation claims. On self-hosting: Bitwarden is the only major password manager offering a supported self-hosted deployment. Docker images for the API, identity server, web vault, admin console, and event logging system are published and maintained by Bitwarden, with documented upgrade paths. Organizations in defense, healthcare, and finance that require data sovereignty can run Bitwarden entirely on-premise. On free tier: the free plan includes unlimited passwords, unlimited devices, unlimited sharing with one user, and standard two-factor authentication. 1Password's free trial expires after 14 days; Dashlane's free plan limits to 50 passwords on one device; LastPass's free plan restricts to one device type. Bitwarden's free tier is permanently free with no feature gating beyond premium-specific features like TOTP storage and file attachments.", "type": "text"},
-    {"title": "Real Limitations", "body": "Three limitations affect Bitwarden users. The browser extension UI is functional but dated — the popup uses dense text layouts with minimal visual hierarchy, inline autofill suggestions sometimes overlay awkwardly on complex form layouts, and the extension lacks the polished item categorization and thumbnail icons that 1Password provides. Customer support is email-only across all tiers. While enterprise plans receive priority routing, there is no live chat, no phone support, and no dedicated customer success manager below the enterprise tier. Users experiencing urgent issues (broken autofill, sync failures, login lockouts) wait 12-48 hours for email responses. Emergency access requires the premium subscription ($10/year) — users on the free tier who become incapacitated or lose access cannot designate a trusted contact to recover their vault without upgrading. Competitors like Apple Passwords and Google Password Manager include account recovery within their respective ecosystems at no cost.", "type": "text"},
-    {"title": "Pricing Explained", "body": "Bitwarden offers three pricing tiers. Free: unlimited passwords, unlimited devices, unlimited sharing with one user, standard two-factor authentication, and self-hosting option. Premium at $10/year: adds TOTP authenticator key storage, emergency access, Bitwarden Send with file attachments up to 500 MB, advanced vault health reports, and priority support. Families at $3.33/month (billed annually): six premium accounts with unlimited sharing between family members. Teams at $4/user/month: all premium features plus user groups, sharing permissions, and admin console. Enterprise at $6/user/month: adds SCIM provisioning, directory sync, event logging, API access, SSO authentication, and dedicated onboarding. The premium tier at $10/year is exceptional value — 1Password charges $35.88/year for individuals, and Dashlane charges $59.88/year. Organizations comparing Bitwarden Enterprise ($6/user/month) against 1Password Business ($7.99/user/month) save 25% on license costs while gaining self-hosting capability that 1Password does not offer.", "type": "text"},
-    {"title": "Hidden Costs", "body": "Three hidden costs affect Bitwarden users. Self-hosting infrastructure costs for organizations that choose on-premise deployment require dedicated server resources (minimum 4 GB RAM, 2 vCPUs, 40 GB storage), Docker expertise, and ongoing maintenance for updates, backups, and security patching. The annual infrastructure cost for self-hosted Bitwarden — including server hosting, SSL certificate management, and administrative time — ranges from $600-2,400/year depending on deployment scale, offsetting some of the per-user license savings compared to cloud-hosted competitors. Premium features that many competitors include at base tier: TOTP authenticator key storage is standard in 1Password and Dashlane but requires Bitwarden Premium ($10/year) or higher. Emergency access is also premium-only. File attachments on the free tier are limited to text only; file attachments require premium or above. SSO authentication for organizations requires the Enterprise plan ($6/user/month) — Teams plan users cannot use SAML SSO, which may force an upgrade for organizations that standardize on Okta or Azure AD for identity management.", "type": "text"},
-    {"title": "Learning Curve", "body": "Bitwarden's learning curve is shallow for basic use and moderate for advanced features. Basic proficiency — installing the browser extension, creating a master password, saving credentials, and using autofill — takes 10-20 minutes for any user who has used a password manager before. First-time password manager users need 30-60 minutes to understand the master password concept, the importance of not reusing passwords, and the vault organization model. Intermediate proficiency — configuring two-factor authentication, using the password generator with custom rules, organizing items into folders and collections, and using Bitwarden Send for secure sharing — requires 2-4 hours of exploration. Advanced proficiency — deploying and maintaining a self-hosted Bitwarden instance with Docker Compose, configuring directory sync and SCIM provisioning for enterprise user management, setting up event logging with SIEM integration, and implementing Key Connector for passwordless SSO — requires 20-40 hours for IT administrators. Bitwarden's documentation is comprehensive with installation guides, API references, and self-hosting tutorials.", "type": "text"},
-    {"title": "Setup Time", "body": "Individual Bitwarden setup takes under 15 minutes: create an account, install browser extensions on all devices, install mobile app and enable biometric unlock, and configure autofill shortcuts. Importing passwords from another manager (1Password, LastPass, Dashlane, or browser-based storage) via Bitwarden's CSV import tool takes 5-10 minutes with format-specific import templates. Organization setup for a 50-person team requires 2-4 hours: create organization, configure user groups with collection permissions, set up directory sync or invite users, configure password policies (minimum length, complexity, reuse rules), and establish Bitwarden Send sharing policy. Enterprise deployment with self-hosted infrastructure requires 1-3 weeks: server provisioning, Docker deployment, SSL certificate configuration, database setup, backup infrastructure, SSO/SCIM integration configuration, user migration planning, and vault policy enforcement configuration. The critical path for self-hosted deployment is typically DNS and SSL configuration for the Bitwarden domain.", "type": "text"},
-    {"title": "Migration Difficulty", "body": "Migrating from other password managers to Bitwarden is straightforward (3/10 difficulty). Bitwarden provides format-specific import tools for 1Password, LastPass, Dashlane, KeePass, Chrome, Firefox, Safari, and CSV/JSON generic formats. The import process preserves folder structure, item names, usernames, passwords, URIs, and notes. TOTP seeds (authenticator keys) do not transfer between password managers for security reasons — users must re-enroll TOTP for each service after migration. Passkeys are not portable between password managers — users must re-register passkeys on each supported website after migration. The overall migration for an individual user with 200 items takes 30-60 minutes including import, TOTP re-enrollment, and spot-checking critical accounts. Organizational migration from LastPass or 1Password Business requires 2-4 weeks including user communication, CSV export from the legacy platform, staged import per user group, credential rotation for shared accounts, and parallel operation period where both managers are active.", "type": "text"},
-    {"title": "Integration Ecosystem", "body": "Bitwarden's integration ecosystem focuses on browser, identity provider, and developer integrations. Browser extensions cover Chrome, Firefox, Safari, Edge, Brave, Vivaldi, Opera, Tor Browser, and Arc — each providing autofill, password generation, and vault access within the browser. Identity provider integrations for enterprise: Azure AD, Okta, LDAP, Google Workspace, and OneLogin for directory sync and SCIM provisioning — mapping identity provider groups to Bitwarden collections for automated access control. SSO integrations: SAML 2.0 and OpenID Connect authentication with major identity providers through the Enterprise plan. Developer integrations: Bitwarden CLI for command-line vault access and credential injection in development workflows, REST API for programmatic vault management and user administration, and SDK for custom integration in internal applications. Duo Security integration for two-factor authentication on enterprise plans. The CLI tool is particularly valued by developers who need to inject credentials into CI/CD pipelines or development environments without storing secrets in plaintext. Bitwarden does not offer native integrations with HRIS platforms (Rippling, BambooHR) for automated user deprovisioning.", "type": "text"},
-    {"title": "Security & Compliance", "body": "Bitwarden's security architecture is among the most transparent in the industry. The platform uses AES-256 bit encryption for vault data at rest, with PBKDF2 SHA-256 (100,001 iterations on web, 600,000 iterations on mobile) or Argon2 key derivation for master password hashing. The encryption is performed client-side — Bitwarden never has access to user plaintext data. Bitwarden is SOC 2 Type II certified, HIPAA compliant (BAA available on Enterprise plan), and GDPR compliant. The codebase has undergone 10+ independent third-party security audits by Cure53 (2020, 2023), Insight Risk (2022), and Privacy4Teams (2024), with full reports published on bitwarden.com. Bitwarden runs a public bug bounty program through HackerOne. The platform supports FIDO2 WebAuthn for passwordless authentication and hardware security key support (YubiKey, Feitian). Self-hosted instances provide complete data sovereignty — organizations can deploy Bitwarden on air-gapped networks with no internet access. Bitwarden maintains publicly available security documentation including architecture overview, encryption white paper, and incident response policy.", "type": "text"},
-    {"title": "Performance", "body": "Bitwarden's performance is reliable with consistently fast sync and autofill. Vault unlock via master password completes in under 1 second on modern devices (M-series Macs, recent iPhones, Windows 11 PCs). Biometric unlock reduces this to under 0.5 seconds. Autofill detection triggers within 200-500ms of page load, matching credentials against stored URIs. Cloud sync performance between devices averages 2-5 seconds for vault changes — saving a new password on desktop propagates to mobile within this window. Browser extension cold start (unlocking after browser restart) takes 1-3 seconds depending on vault size. Offline vault access is instantaneous — all vault contents are cached locally encrypted upon first sync. Service availability was 99.95% in 2025 with no documented data loss incidents. Self-hosted performance depends entirely on server infrastructure — a Docker instance with 4 GB RAM and SSD storage handles 200+ concurrent users with sub-second response times. The iOS and Android apps open in 2-4 seconds with instant biometric unlock. The web vault (vault.bitwarden.com) loads in 2-3 seconds for organizations with 1,000+ items.", "type": "text"},
-    {"title": "Customer Support", "body": "Bitwarden offers email-only support at all tiers. Free and Premium plans receive email support with 24-48 hour response time. Families and Teams plans receive priority email routing with 12-24 hour response. Enterprise plans receive priority email with 4-8 hour response and dedicated onboarding support. Bitwarden does not offer live chat, phone support, or a support SLA below the Enterprise tier. The Bitwarden Help Center provides 400+ articles, setup guides, and troubleshooting documentation organized by platform and use case. Bitwarden Community forums provide peer support with active developer participation. The Bitwarden GitHub repository serves as the primary channel for bug reports and feature requests. Support quality ratings on G2 average 3.8/5, with common criticism of slow response times for non-Enterprise users and resolution delays for complex self-hosting configuration issues. For organizations requiring guaranteed response times, the Enterprise plan's dedicated support and onboarding are necessary investments.", "type": "text"},
-    {"title": "Real-world Use Cases", "body": "A 200-person managed IT service provider uses Bitwarden Enterprise to manage passwords across 50+ client environments — each client organization is a separate collection with access granted only to the engineers assigned to that account; event logging provides audit trails showing which engineer accessed which client credential and when; SCIM provisioning through Azure AD automatically revokes access when engineers leave the company. A university IT department self-hosts Bitwarden on campus infrastructure to provide password management for 5,000 faculty and staff — the self-hosted deployment ensures student data never leaves campus servers, while directory sync provisions accounts from the university's LDAP directory and collection-based permissions restrict access to authorized administrative systems. A freelance cybersecurity consultant with 200+ client accounts across managed services, cloud platforms, and financial institutions uses Bitwarden Premium with TOTP storage and emergency access — the vault organizes items into folders per client, TOTP codes are generated within Bitwarden eliminating the need for a separate authenticator app, and emergency access designates a partner who can recover the vault in case of incapacitation.", "type": "text"},
-    {"title": "Common Mistakes", "body": "Five mistakes commonly affect Bitwarden users. Using a weak master password — the master password is the single key to the entire vault; a compromised master password exposes every stored credential. Bitwarden's password strength estimator provides feedback, and users should verify their master password scores at least 3/4 on Bitwarden's scale. Forgetting to export the vault before self-hosting migration — users who set up a self-hosted instance without first exporting their cloud vault lose all stored credentials and must reset every password. The export should include passwords and TOTP seeds (premium only) before deactivating the cloud account. Not enabling two-factor authentication on the Bitwarden account itself — the vault is only as secure as the authentication method; enabling TOTP or hardware key 2FA on the Bitwarden account prevents unauthorized vault access even if the master password is compromised. Ignoring vault health reports — Bitwarden's vault health report scans for weak, reused, and compromised passwords, but users who never run these reports continue using insecure credentials indefinitely. Setting a monthly reminder to review vault health prevents password hygiene degradation. Not configuring emergency access — users on the free tier cannot designate emergency contacts; upgrading to Premium ($10/year) and configuring emergency access with trusted contacts ensures vault recovery if the user becomes incapacitated or forgets the master password.", "type": "text"},
-    {"title": "Tips from experienced users", "body": "Experienced Bitwarden users recommend five practices. Use folders and collections for vault organization — folders categorize items for personal organization, while collections enable group-based sharing in team and enterprise plans. A folder hierarchy (Work/Development, Work/Admin, Personal/Banking, Personal/Shopping) prevents vault clutter as the item count grows. Enable biometric unlock on all devices — fingerprint or Face ID unlock reduces the friction of vault access and makes it more likely that users will save new credentials rather than bypassing the manager. Use the password generator for every new account — Bitwarden's generator creates 14+ character random passwords with mixed character types; every new account should use a generated password that is stored in Bitwarden. For shared credentials, check the compromised password history first. Set up emergency access for account recovery — even non-technical users should configure emergency access with one or two trusted contacts who can request vault access after a configurable waiting period (default 7 days). The emergency access feature requires premium but costs only $10/year. Use the CLI for credential injection in development — developers should install the Bitwarden CLI and use `bw get password` in scripts and CI/CD pipelines instead of storing secrets in environment files or configuration repositories.", "type": "text"},
-    {"title": "Alternatives", "body": "Bitwarden's primary competitors serve different segments. 1Password ($2.99/month individual, $7.99/user/month business) provides a more polished UX with inline autofill, Travel Mode for border crossings, and rich item categories — the better choice for design-conscious users and families who prioritize UX over open-source transparency. Dashlane ($4.99/month individual, $8/user/month business) bundles dark web monitoring, VPN (Hotspot Shield), and credit monitoring with password management — suitable for users who want identity protection features bundled in a single subscription. Apple Passwords (included with iOS 18+ and macOS Sequoia+) provides system-level password and passkey management with iCloud Keychain sync — the default choice for users entirely within the Apple ecosystem who need basic password management without a third-party app. Keeper ($2.92/month individual, $3/user/month business) offers a similar feature set to Bitwarden with stronger enterprise compliance certifications (FedRAMP, ITAR) and a more polished UI — the better choice for regulated industries that need FedRAMP authorization but want Bitwarden-like feature sets. The decision between these alternatives should consider whether open-source auditability and self-hosting (Bitwarden), UX polish (1Password), bundled services (Dashlane), ecosystem integration (Apple), or compliance certifications (Keeper) is the highest priority.", "type": "text"},
-    {"title": "Final Verdict", "body": "Bitwarden earns a 4.7/5 rating and is the best password manager for users who prioritize security transparency, self-hosting capability, and value over brand-name UI polish. Its open-source codebase, published security audits, and self-hosting option provide a level of trust and data sovereignty that no proprietary competitor matches. The free tier is genuinely usable for life — unlimited devices, unlimited passwords, unlimited sharing with one user — making it the default recommendation for individual users who do not want to pay for password management. The Enterprise plan at $6/user/month with SCIM provisioning, directory sync, and event logging provides competitive value for organizations that need administrative control without the per-seat cost of 1Password Business or Dashlane Business. The primary reasons to choose 1Password over Bitwarden are UX polish and design (1Password wins decisively) or the need for phone/chat support. For organizations with compliance requirements that mandate self-hosted infrastructure, Bitwarden is the only viable option among major password managers. Buy Bitwarden for the transparency and self-hosting; upgrade to Premium ($10/year) for TOTP storage and emergency access.", "type": "text"},
-    {"title": "Pricing at a Glance", "body": "pricing-ladder", "type": "diagram"},
-    {"title": "Feature Radar", "body": "feature-radar", "type": "diagram"},
-    {"title": "Implementation Flow", "body": "implementation-flow", "type": "diagram"}
+    {
+      "title": "Executive Summary",
+      "body": "Bitwarden is the most transparent password manager on the market — open-source codebase, published security audits, and a free tier that genuinely competes with paid competitors. With over 10 million users across 150+ countries, Bitwarden stores encrypted vaults for passwords, passkeys, credit cards, notes, and identities, synchronized across unlimited devices. Unlike 1Password (proprietary, subscription-only) or LastPass (multiple security incidents), Bitwarden's AGPL-licensed code is publicly auditable, and the platform offers self-hosting via Docker for organizations that cannot trust cloud-based password storage. The free tier — unlimited items, unlimited devices, unlimited sharing with one user — is aggressively generous. Premium at $10/year unlocks TOTP authenticator key storage, emergency access, file attachments up to 500 MB, and advanced vault health reports. Organizations pay $3-6/user/month for admin consoled, SCIM provisioning, directory sync, and event logging. Bitwarden's primary tradeoff is UI polish — the browser extension and apps are functional but lack the visual refinement of 1Password's design-focused interface. For security-conscious users who prioritize auditability, self-hosting capability, and value over brand-name design, Bitwarden is the clear market leader.",
+      "type": "text"
+    },
+    {
+      "title": "Best For",
+      "body": "Bitwarden delivers the most value for three segments. Security-conscious individual users who want a password manager for personal use across unlimited devices without paying a subscription — the free tier provides every feature most individuals need, including auto-fill, password generation, and unlimited storage. Organizations with compliance requirements that mandate self-hosted infrastructure — Bitwarden's Docker-based self-hosting option with directory sync, event logging, and SCIM provisioning enables SOC 2, HIPAA, and GDPR-compliant password management on private infrastructure. IT administrators managing password security for non-technical teams — the admin console provides visibility into organizational password health (weak, reused, compromised passwords) and automated remediation policies without requiring users to change their workflow.",
+      "type": "text"
+    },
+    {
+      "title": "Worst Fit",
+      "body": "Bitwarden is poorly suited for three scenarios. Users who prioritize design and UX polish over functionality — the browser extension and mobile apps are intentionally utilitarian, with dense information layouts and minimal animation. 1Password provides a significantly more refined experience with inline menu integration, rich item categories, and animated vault transitions. Organizations needing phone or live chat support — Bitwarden's support is email-only at all tiers, with 12-48 hour response times. Enterprise customers get priority email but not phone support. Teams looking for a password manager with integrated VPN or dark web monitoring — Bitwarden focuses strictly on password management; it does not bundle VPN (like NordPass) or identity protection features (like Dashlane). Organizations needing these adjacent features must purchase separate subscriptions.",
+      "type": "text"
+    },
+    {
+      "title": "Key Features",
+      "body": "Bitwarden's open-source architecture affects every capability: the code is auditable, self-hosting is built-in rather than an add-on, and the transparent security model has driven adoption to 2 million+ users across 50,000+ organizations.",
+      "type": "list",
+      "items": [
+        "Unlimited vault storage and cross-platform sync across Windows, macOS, Linux, iOS, Android, and all major browsers with real-time encrypted synchronization via the Bitwarden cloud or self-hosted server.",
+        "Bitwarden Send enables encrypted file sharing (up to 500 MB on premium) with configurable expiration, access limits, and password protection — useful for sharing credentials or sensitive documents with contractors or clients.",
+        "Passkey management stores FIDO2 WebAuthn credentials alongside passwords for passwordless authentication on supported websites, with cross-device passkey sync identical to password storage.",
+        "Vault health reports scan for weak, reused, and compromised passwords with actionable recommendations — the compromised password check cross-references hashed credentials against Have I Been Pwned's breach database.",
+        "Self-hosting via Docker Compose provides full infrastructure control with database backups, API management, and the ability to run air-gapped instances on networks without internet connectivity.",
+        "Directory sync and SCIM provisioning integrate with Azure AD, Okta, LDAP, Google Workspace, and OneLogin for automated user provisioning and deprovisioning, ensuring vault access revokes when employees leave the organization."
+      ]
+    },
+    {
+      "title": "Real Advantages",
+      "body": "Bitwarden's three genuine competitive advantages are open-source auditability, self-hosting capability, and free tier value. On open-source auditability: Bitwarden's core codebase is AGPL-licensed and has undergone 10+ independent security audits from Cure53, Insight Risk, and Privacy4Teams, with full reports published on Bitwarden's website. LastPass suffered four publicly disclosed security incidents between 2022 and 2025, and its proprietary codebase prevented independent verification of remediation claims. On self-hosting: Bitwarden is the only major password manager offering a supported self-hosted deployment. Docker images for the API, identity server, web vault, admin console, and event logging system are published and maintained by Bitwarden, with documented upgrade paths. Organizations in defense, healthcare, and finance that require data sovereignty can run Bitwarden entirely on-premise. On free tier: the free plan includes unlimited passwords, unlimited devices, unlimited sharing with one user, and standard two-factor authentication. 1Password's free trial expires after 14 days; Dashlane's free plan limits to 50 passwords on one device; LastPass's free plan restricts to one device type. Bitwarden's free tier is permanently free with no feature gating beyond premium-specific features like TOTP storage and file attachments.",
+      "type": "text"
+    },
+    {
+      "title": "Real Limitations",
+      "body": "Three limitations affect Bitwarden users. The browser extension UI is functional but dated — the popup uses dense text layouts with minimal visual hierarchy, inline autofill suggestions sometimes overlay awkwardly on complex form layouts, and the extension lacks the polished item categorization and thumbnail icons that 1Password provides. Customer support is email-only across all tiers. While enterprise plans receive priority routing, there is no live chat, no phone support, and no dedicated customer success manager below the enterprise tier. Users experiencing urgent issues (broken autofill, sync failures, login lockouts) wait 12-48 hours for email responses. Emergency access requires the premium subscription ($10/year) — users on the free tier who become incapacitated or lose access cannot designate a trusted contact to recover their vault without upgrading. Competitors like Apple Passwords and Google Password Manager include account recovery within their respective ecosystems at no cost.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing Explained",
+      "body": "Bitwarden offers three pricing tiers. Free: unlimited passwords, unlimited devices, unlimited sharing with one user, standard two-factor authentication, and self-hosting option. Premium at $10/year: adds TOTP authenticator key storage, emergency access, Bitwarden Send with file attachments up to 500 MB, advanced vault health reports, and priority support. Families at $3.33/month (billed annually): six premium accounts with unlimited sharing between family members. Teams at $4/user/month: all premium features plus user groups, sharing permissions, and admin console. Enterprise at $6/user/month: adds SCIM provisioning, directory sync, event logging, API access, SSO authentication, and dedicated onboarding. The premium tier at $10/year is exceptional value — 1Password charges $35.88/year for individuals, and Dashlane charges $59.88/year. Organizations comparing Bitwarden Enterprise ($6/user/month) against 1Password Business ($7.99/user/month) save 25% on license costs while gaining self-hosting capability that 1Password does not offer.",
+      "type": "text"
+    },
+    {
+      "title": "Hidden Costs",
+      "body": "Three hidden costs affect Bitwarden users. Self-hosting infrastructure costs for organizations that choose on-premise deployment require dedicated server resources (minimum 4 GB RAM, 2 vCPUs, 40 GB storage), Docker expertise, and ongoing maintenance for updates, backups, and security patching. The annual infrastructure cost for self-hosted Bitwarden — including server hosting, SSL certificate management, and administrative time — ranges from $600-2,400/year depending on deployment scale, offsetting some of the per-user license savings compared to cloud-hosted competitors. Premium features that many competitors include at base tier: TOTP authenticator key storage is standard in 1Password and Dashlane but requires Bitwarden Premium ($10/year) or higher. Emergency access is also premium-only. File attachments on the free tier are limited to text only; file attachments require premium or above. SSO authentication for organizations requires the Enterprise plan ($6/user/month) — Teams plan users cannot use SAML SSO, which may force an upgrade for organizations that standardize on Okta or Azure AD for identity management.",
+      "type": "text"
+    },
+    {
+      "title": "Learning Curve",
+      "body": "Bitwarden's learning curve is shallow for basic use and moderate for advanced features. Basic proficiency — installing the browser extension, creating a master password, saving credentials, and using autofill — takes 10-20 minutes for any user who has used a password manager before. First-time password manager users need 30-60 minutes to understand the master password concept, the importance of not reusing passwords, and the vault organization model. Intermediate proficiency — configuring two-factor authentication, using the password generator with custom rules, organizing items into folders and collections, and using Bitwarden Send for secure sharing — requires 2-4 hours of exploration. Advanced proficiency — deploying and maintaining a self-hosted Bitwarden instance with Docker Compose, configuring directory sync and SCIM provisioning for enterprise user management, setting up event logging with SIEM integration, and implementing Key Connector for passwordless SSO — requires 20-40 hours for IT administrators. Bitwarden's documentation is comprehensive with installation guides, API references, and self-hosting tutorials.",
+      "type": "text"
+    },
+    {
+      "title": "Setup Time",
+      "body": "Individual Bitwarden setup takes under 15 minutes: create an account, install browser extensions on all devices, install mobile app and enable biometric unlock, and configure autofill shortcuts. Importing passwords from another manager (1Password, LastPass, Dashlane, or browser-based storage) via Bitwarden's CSV import tool takes 5-10 minutes with format-specific import templates. Organization setup for a 50-person team requires 2-4 hours: create organization, configure user groups with collection permissions, set up directory sync or invite users, configure password policies (minimum length, complexity, reuse rules), and establish Bitwarden Send sharing policy. Enterprise deployment with self-hosted infrastructure requires 1-3 weeks: server provisioning, Docker deployment, SSL certificate configuration, database setup, backup infrastructure, SSO/SCIM integration configuration, user migration planning, and vault policy enforcement configuration. The critical path for self-hosted deployment is typically DNS and SSL configuration for the Bitwarden domain.",
+      "type": "text"
+    },
+    {
+      "title": "Migration Difficulty",
+      "body": "Migrating from other password managers to Bitwarden is straightforward (3/10 difficulty). Bitwarden provides format-specific import tools for 1Password, LastPass, Dashlane, KeePass, Chrome, Firefox, Safari, and CSV/JSON generic formats. The import process preserves folder structure, item names, usernames, passwords, URIs, and notes. TOTP seeds (authenticator keys) do not transfer between password managers for security reasons — users must re-enroll TOTP for each service after migration. Passkeys are not portable between password managers — users must re-register passkeys on each supported website after migration. The overall migration for an individual user with 200 items takes 30-60 minutes including import, TOTP re-enrollment, and spot-checking critical accounts. Organizational migration from LastPass or 1Password Business requires 2-4 weeks including user communication, CSV export from the legacy platform, staged import per user group, credential rotation for shared accounts, and parallel operation period where both managers are active.",
+      "type": "text"
+    },
+    {
+      "title": "Integration Ecosystem",
+      "body": "Bitwarden's integration ecosystem focuses on browser, identity provider, and developer integrations. Browser extensions cover Chrome, Firefox, Safari, Edge, Brave, Vivaldi, Opera, Tor Browser, and Arc — each providing autofill, password generation, and vault access within the browser. Identity provider integrations for enterprise: Azure AD, Okta, LDAP, Google Workspace, and OneLogin for directory sync and SCIM provisioning — mapping identity provider groups to Bitwarden collections for automated access control. SSO integrations: SAML 2.0 and OpenID Connect authentication with major identity providers through the Enterprise plan. Developer integrations: Bitwarden CLI for command-line vault access and credential injection in development workflows, REST API for programmatic vault management and user administration, and SDK for custom integration in internal applications. Duo Security integration for two-factor authentication on enterprise plans. The CLI tool is particularly valued by developers who need to inject credentials into CI/CD pipelines or development environments without storing secrets in plaintext. Bitwarden does not offer native integrations with HRIS platforms (Rippling, BambooHR) for automated user deprovisioning.",
+      "type": "text"
+    },
+    {
+      "title": "Security & Compliance",
+      "body": "Bitwarden's security architecture is among the most transparent in the industry. The platform uses AES-256 bit encryption for vault data at rest, with PBKDF2 SHA-256 (100,001 iterations on web, 600,000 iterations on mobile) or Argon2 key derivation for master password hashing. The encryption is performed client-side — Bitwarden never has access to user plaintext data. Bitwarden is SOC 2 Type II certified, HIPAA compliant (BAA available on Enterprise plan), and GDPR compliant. The codebase has undergone 10+ independent third-party security audits by Cure53 (2020, 2023), Insight Risk (2022), and Privacy4Teams (2024), with full reports published on bitwarden.com. Bitwarden runs a public bug bounty program through HackerOne. The platform supports FIDO2 WebAuthn for passwordless authentication and hardware security key support (YubiKey, Feitian). Self-hosted instances provide complete data sovereignty — organizations can deploy Bitwarden on air-gapped networks with no internet access. Bitwarden maintains publicly available security documentation including architecture overview, encryption white paper, and incident response policy.",
+      "type": "text"
+    },
+    {
+      "title": "Performance",
+      "body": "Bitwarden's performance is reliable with consistently fast sync and autofill. Vault unlock via master password completes in under 1 second on modern devices (M-series Macs, recent iPhones, Windows 11 PCs). Biometric unlock reduces this to under 0.5 seconds. Autofill detection triggers within 200-500ms of page load, matching credentials against stored URIs. Cloud sync performance between devices averages 2-5 seconds for vault changes — saving a new password on desktop propagates to mobile within this window. Browser extension cold start (unlocking after browser restart) takes 1-3 seconds depending on vault size. Offline vault access is instantaneous — all vault contents are cached locally encrypted upon first sync. Service availability was 99.95% in 2025 with no documented data loss incidents. Self-hosted performance depends entirely on server infrastructure — a Docker instance with 4 GB RAM and SSD storage handles 200+ concurrent users with sub-second response times. The iOS and Android apps open in 2-4 seconds with instant biometric unlock. The web vault (vault.bitwarden.com) loads in 2-3 seconds for organizations with 1,000+ items.",
+      "type": "text"
+    },
+    {
+      "title": "Customer Support",
+      "body": "Bitwarden offers email-only support at all tiers. Free and Premium plans receive email support with 24-48 hour response time. Families and Teams plans receive priority email routing with 12-24 hour response. Enterprise plans receive priority email with 4-8 hour response and dedicated onboarding support. Bitwarden does not offer live chat, phone support, or a support SLA below the Enterprise tier. The Bitwarden Help Center provides 400+ articles, setup guides, and troubleshooting documentation organized by platform and use case. Bitwarden Community forums provide peer support with active developer participation. The Bitwarden GitHub repository serves as the primary channel for bug reports and feature requests. Support quality ratings on G2 average 3.8/5, with common criticism of slow response times for non-Enterprise users and resolution delays for complex self-hosting configuration issues. For organizations requiring guaranteed response times, the Enterprise plan's dedicated support and onboarding are necessary investments.",
+      "type": "text"
+    },
+    {
+      "title": "Real-world Use Cases",
+      "body": "A 200-person managed IT service provider uses Bitwarden Enterprise to manage passwords across 50+ client environments — each client organization is a separate collection with access granted only to the engineers assigned to that account; event logging provides audit trails showing which engineer accessed which client credential and when; SCIM provisioning through Azure AD automatically revokes access when engineers leave the company. A university IT department self-hosts Bitwarden on campus infrastructure to provide password management for 5,000 faculty and staff — the self-hosted deployment ensures student data never leaves campus servers, while directory sync provisions accounts from the university's LDAP directory and collection-based permissions restrict access to authorized administrative systems. A freelance cybersecurity consultant with 200+ client accounts across managed services, cloud platforms, and financial institutions uses Bitwarden Premium with TOTP storage and emergency access — the vault organizes items into folders per client, TOTP codes are generated within Bitwarden eliminating the need for a separate authenticator app, and emergency access designates a partner who can recover the vault in case of incapacitation.",
+      "type": "text"
+    },
+    {
+      "title": "Common Mistakes",
+      "body": "Five mistakes commonly affect Bitwarden users. Using a weak master password — the master password is the single key to the entire vault; a compromised master password exposes every stored credential. Bitwarden's password strength estimator provides feedback, and users should verify their master password scores at least 3/4 on Bitwarden's scale. Forgetting to export the vault before self-hosting migration — users who set up a self-hosted instance without first exporting their cloud vault lose all stored credentials and must reset every password. The export should include passwords and TOTP seeds (premium only) before deactivating the cloud account. Not enabling two-factor authentication on the Bitwarden account itself — the vault is only as secure as the authentication method; enabling TOTP or hardware key 2FA on the Bitwarden account prevents unauthorized vault access even if the master password is compromised. Ignoring vault health reports — Bitwarden's vault health report scans for weak, reused, and compromised passwords, but users who never run these reports continue using insecure credentials indefinitely. Setting a monthly reminder to review vault health prevents password hygiene degradation. Not configuring emergency access — users on the free tier cannot designate emergency contacts; upgrading to Premium ($10/year) and configuring emergency access with trusted contacts ensures vault recovery if the user becomes incapacitated or forgets the master password.",
+      "type": "text"
+    },
+    {
+      "title": "Tips from experienced users",
+      "body": "Experienced Bitwarden users recommend five practices. Use folders and collections for vault organization — folders categorize items for personal organization, while collections enable group-based sharing in team and enterprise plans. A folder hierarchy (Work/Development, Work/Admin, Personal/Banking, Personal/Shopping) prevents vault clutter as the item count grows. Enable biometric unlock on all devices — fingerprint or Face ID unlock reduces the friction of vault access and makes it more likely that users will save new credentials rather than bypassing the manager. Use the password generator for every new account — Bitwarden's generator creates 14+ character random passwords with mixed character types; every new account should use a generated password that is stored in Bitwarden. For shared credentials, check the compromised password history first. Set up emergency access for account recovery — even non-technical users should configure emergency access with one or two trusted contacts who can request vault access after a configurable waiting period (default 7 days). The emergency access feature requires premium but costs only $10/year. Use the CLI for credential injection in development — developers should install the Bitwarden CLI and use `bw get password` in scripts and CI/CD pipelines instead of storing secrets in environment files or configuration repositories.",
+      "type": "text"
+    },
+    {
+      "title": "Alternatives",
+      "body": "Bitwarden's primary competitors serve different segments. 1Password ($2.99/month individual, $7.99/user/month business) provides a more polished UX with inline autofill, Travel Mode for border crossings, and rich item categories — the better choice for design-conscious users and families who prioritize UX over open-source transparency. Dashlane ($4.99/month individual, $8/user/month business) bundles dark web monitoring, VPN (Hotspot Shield), and credit monitoring with password management — suitable for users who want identity protection features bundled in a single subscription. Apple Passwords (included with iOS 18+ and macOS Sequoia+) provides system-level password and passkey management with iCloud Keychain sync — the default choice for users entirely within the Apple ecosystem who need basic password management without a third-party app. Keeper ($2.92/month individual, $3/user/month business) offers a similar feature set to Bitwarden with stronger enterprise compliance certifications (FedRAMP, ITAR) and a more polished UI — the better choice for regulated industries that need FedRAMP authorization but want Bitwarden-like feature sets. The decision between these alternatives should consider whether open-source auditability and self-hosting (Bitwarden), UX polish (1Password), bundled services (Dashlane), ecosystem integration (Apple), or compliance certifications (Keeper) is the highest priority.",
+      "type": "text"
+    },
+    {
+      "title": "Final Verdict",
+      "body": "Bitwarden earns a 4.7/5 rating and is the best password manager for users who prioritize security transparency, self-hosting capability, and value over brand-name UI polish. Its open-source codebase, published security audits, and self-hosting option provide a level of trust and data sovereignty that no proprietary competitor matches. The free tier is genuinely usable for life — unlimited devices, unlimited passwords, unlimited sharing with one user — making it the default recommendation for individual users who do not want to pay for password management. The Enterprise plan at $6/user/month with SCIM provisioning, directory sync, and event logging provides competitive value for organizations that need administrative control without the per-seat cost of 1Password Business or Dashlane Business. The primary reasons to choose 1Password over Bitwarden are UX polish and design (1Password wins decisively) or the need for phone/chat support. For organizations with compliance requirements that mandate self-hosted infrastructure, Bitwarden is the only viable option among major password managers. Buy Bitwarden for the transparency and self-hosting; upgrade to Premium ($10/year) for TOTP storage and emergency access.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing at a Glance",
+      "body": "pricing-ladder",
+      "type": "diagram"
+    },
+    {
+      "title": "Feature Radar",
+      "body": "feature-radar",
+      "type": "diagram"
+    },
+    {
+      "title": "Implementation Flow",
+      "body": "implementation-flow",
+      "type": "diagram"
+    }
   ],
   "faqs": [
-    {"question": "What is Bitwarden best used for?", "answer": "Bitwarden is best used as a cross-platform password manager that securely stores and autofills passwords, passkeys, credit cards, and notes across all devices. It excels as a free, open-source alternative to 1Password and Dashlane, particularly for users who value security transparency, self-hosting capability, and the ability to use one password manager across unlimited devices at no cost. Organizations use it for centralized password management with directory sync, event logging, and compliance reporting."},
-    {"question": "How much does Bitwarden cost?", "answer": "Bitwarden offers a permanent free tier with unlimited passwords and devices. Premium costs $10/year and adds TOTP authenticator key storage, emergency access, and file attachments. Families costs $3.33/month for six premium accounts. Teams costs $4/user/month and Enterprise costs $6/user/month with SCIM provisioning, directory sync, event logging, and SSO authentication. Self-hosting is available at no additional license cost."},
-    {"question": "Is Bitwarden open source?", "answer": "Yes, Bitwarden is fully open source under the AGPL license for the core codebase and server components, with SDKs and client libraries under combined LGPL and GPL licenses. The source code is publicly available on GitHub and has undergone 10+ independent third-party security audits with published reports."},
-    {"question": "Does Bitwarden support self-hosting?", "answer": "Yes, Bitwarden provides a fully supported self-hosted deployment option via Docker Compose. Self-hosted instances include the full API, identity server, web vault, admin console, and event logging system. Organizations can deploy Bitwarden on their own infrastructure with complete data sovereignty, including on air-gapped networks without internet connectivity. Self-hosting is available on all plans including free."}
+    {
+      "question": "What is Bitwarden best used for?",
+      "answer": "Bitwarden is best used as a cross-platform password manager that securely stores and autofills passwords, passkeys, credit cards, and notes across all devices. It excels as a free, open-source alternative to 1Password and Dashlane, particularly for users who value security transparency, self-hosting capability, and the ability to use one password manager across unlimited devices at no cost. Organizations use it for centralized password management with directory sync, event logging, and compliance reporting."
+    },
+    {
+      "question": "How much does Bitwarden cost?",
+      "answer": "Bitwarden offers a permanent free tier with unlimited passwords and devices. Premium costs $10/year and adds TOTP authenticator key storage, emergency access, and file attachments. Families costs $3.33/month for six premium accounts. Teams costs $4/user/month and Enterprise costs $6/user/month with SCIM provisioning, directory sync, event logging, and SSO authentication. Self-hosting is available at no additional license cost."
+    },
+    {
+      "question": "Is Bitwarden open source?",
+      "answer": "Yes, Bitwarden is fully open source under the AGPL license for the core codebase and server components, with SDKs and client libraries under combined LGPL and GPL licenses. The source code is publicly available on GitHub and has undergone 10+ independent third-party security audits with published reports."
+    },
+    {
+      "question": "Does Bitwarden support self-hosting?",
+      "answer": "Yes, Bitwarden provides a fully supported self-hosted deployment option via Docker Compose. Self-hosted instances include the full API, identity server, web vault, admin console, and event logging system. Organizations can deploy Bitwarden on their own infrastructure with complete data sovereignty, including on air-gapped networks without internet connectivity. Self-hosting is available on all plans including free."
+    }
   ],
-  "alternatives": ["1password"],
-  "relatedComparisons": ["1password-vs-bitwarden"],
-  "relatedGuides": ["saas-implementation-best-practices", "software-evaluation-checklist"],
-  "relatedPosts": ["best-remote-communication-tools"],
+  "alternatives": [
+    "1password"
+  ],
+  "relatedComparisons": [
+    "1password-vs-bitwarden"
+  ],
+  "relatedGuides": [
+    "saas-implementation-best-practices",
+    "software-evaluation-checklist"
+  ],
+  "relatedPosts": [
+    "best-remote-communication-tools"
+  ],
   "lastReviewed": "2026-07-16",
-  "author": "StackPilot Team"
+  "author": "StackPilot Team",
+  "company": {
+    "founded": 2016,
+    "headquarters": "Santa Barbara, California",
+    "customers": "100,000+ businesses",
+    "employeeCount": "200+",
+    "industries": [
+      "Security",
+      "Password Management",
+      "Identity Security"
+    ],
+    "targetUsers": [
+      "IT Administrators",
+      "Security Teams",
+      "Developers",
+      "SMBs"
+    ],
+    "pricingModel": "Freemium with per-user monthly subscription",
+    "deployment": [
+      "Cloud",
+      "Self-hosted"
+    ],
+    "securityCertifications": [
+      "SOC 2 Type II",
+      "SOC 3"
+    ],
+    "compliance": [
+      "GDPR",
+      "HIPAA",
+      "CCPA"
+    ],
+    "integrations": [
+      "Okta",
+      "Azure AD",
+      "OneLogin",
+      "Docker",
+      "Kubernetes",
+      "GitHub Actions",
+      "GitLab CI"
+    ],
+    "apiAvailable": true,
+    "aiFeatures": [],
+    "mobileApps": [
+      "iOS",
+      "Android"
+    ],
+    "learningCurve": "Low",
+    "migrationComplexity": "Low",
+    "supportQuality": "4.4/5",
+    "releaseFrequency": "Monthly"
+  }
 }

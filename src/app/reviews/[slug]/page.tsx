@@ -6,6 +6,8 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getReview, getContentTitle } from "@/lib/content/registry"
 import { getAllReviews } from "@/lib/content/registry"
+import { getEntity } from "@/lib/entities/data"
+import { EntityOverview, SecurityTable, CapabilitiesGrid, UseCasePanel, IntegrationDisplay, PricingTable } from "@/components/entity"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
@@ -36,6 +38,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const tool = getReview(slug)
   if (!tool) notFound()
 
+  const entity = getEntity(slug)
+
   const allReviews = getAllReviews()
 
   const bestInCategory = allReviews
@@ -51,7 +55,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
         { name: "Reviews", href: "/reviews" },
         { name: tool.name, href: `/reviews/${tool.slug}` },
       ]} />
-      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} reviewCount={tool.reviewCount} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.lastReviewed} body={tool.description} />
+      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} reviewCount={tool.reviewCount} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.lastReviewed} body={tool.description} companyInfo={tool.company} />
       <SoftwareSchema name={tool.name} description={tool.tagline} applicationCategory="BusinessApplication" brand={tool.name} />
       <FAQSchema questions={tool.faqs} />
 
@@ -211,6 +215,57 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 </div>
               </section>
 
+              {entity && (
+                <>
+                  {entity.company && (
+                    <section className="mb-12 scroll-mt-24" id="company">
+                      <h2 className="text-2xl font-bold tracking-tight mb-6">Company Overview</h2>
+                      <EntityOverview entity={entity} />
+                    </section>
+                  )}
+
+                  {entity.security && (
+                    <section className="mb-12 scroll-mt-24" id="security">
+                      <h2 className="text-2xl font-bold tracking-tight mb-6">Security &amp; Compliance</h2>
+                      <p className="text-muted-foreground text-sm mb-4">Security certifications, compliance standards, and data protection measures for {entity.name}.</p>
+                      <SecurityTable entity={entity} />
+                    </section>
+                  )}
+
+                  {entity.capabilities && (
+                    <section className="mb-12 scroll-mt-24" id="capabilities">
+                      <h2 className="text-2xl font-bold tracking-tight mb-6">Capabilities</h2>
+                      <p className="text-muted-foreground text-sm mb-4">Feature capabilities and platform functionality offered by {entity.name}.</p>
+                      <CapabilitiesGrid entity={entity} />
+                    </section>
+                  )}
+
+                  {entity.useCases && (
+                    <section className="mb-12 scroll-mt-24" id="use-cases">
+                      <h2 className="text-2xl font-bold tracking-tight mb-6">Use Cases &amp; Fit</h2>
+                      <p className="text-muted-foreground text-sm mb-4">Who {entity.name} is best suited for, common workflows, and typical team profiles.</p>
+                      <UseCasePanel entity={entity} />
+                    </section>
+                  )}
+
+                  {entity.integrations && entity.integrations.length > 0 && (
+                    <section className="mb-12 scroll-mt-24" id="integrations">
+                      <h2 className="text-2xl font-bold tracking-tight mb-6">Integrations</h2>
+                      <p className="text-muted-foreground text-sm mb-4">{entity.name} integrates with {entity.integrations.length} platforms and services.</p>
+                      <IntegrationDisplay entity={entity} />
+                    </section>
+                  )}
+
+                  {entity.pricing && entity.pricing.length > 0 && (
+                    <section className="mb-12 scroll-mt-24" id="pricing-plans">
+                      <h2 className="text-2xl font-bold tracking-tight mb-6">Pricing Plans</h2>
+                      <p className="text-muted-foreground text-sm mb-4">Detailed pricing breakdown for {entity.name} plans.</p>
+                      <PricingTable entity={entity} />
+                    </section>
+                  )}
+                </>
+              )}
+
               {/* Before You Buy — Implementation guidance */}
               <section className="mb-12 rounded-xl border border-primary/20 bg-primary-subtle/10 p-5">
                 <div className="flex items-center gap-2 mb-3">
@@ -352,6 +407,29 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     </div>
                   </div>
                 </GlassCard>
+
+                {/* Company Info */}
+                {tool.company && (
+                  <GlassCard>
+                    <div className="p-4">
+                      <h3 className="font-semibold mb-3 text-sm">Company Details</h3>
+                      <div className="space-y-2 text-xs text-muted-foreground">
+                        {tool.company.founded && <p>Founded: <span className="text-foreground">{tool.company.founded}</span></p>}
+                        {tool.company.headquarters && <p>HQ: <span className="text-foreground">{tool.company.headquarters}</span></p>}
+                        {tool.company.customers && <p>Customers: <span className="text-foreground">{tool.company.customers}</span></p>}
+                        {tool.company.employeeCount && <p>Employees: <span className="text-foreground">{tool.company.employeeCount}</span></p>}
+                        {tool.company.pricingModel && <p>Pricing: <span className="text-foreground">{tool.company.pricingModel}</span></p>}
+                        {tool.company.deployment && tool.company.deployment.length > 0 && (
+                          <p>Deployment: <span className="text-foreground">{tool.company.deployment.join(", ")}</span></p>
+                        )}
+                        {tool.company.apiAvailable !== undefined && (
+                          <p>API: <span className={tool.company.apiAvailable ? "text-success" : "text-muted-foreground"}>{tool.company.apiAvailable ? "Available" : "Not available"}</span></p>
+                        )}
+                        {tool.company.migrationComplexity && <p>Migration: <span className="text-foreground">{tool.company.migrationComplexity}</span></p>}
+                      </div>
+                    </div>
+                  </GlassCard>
+                )}
 
                 {/* Section Navigation */}
                 {tool.content.length > 0 && (

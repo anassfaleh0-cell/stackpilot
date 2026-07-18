@@ -23,10 +23,10 @@ export default function CorrectionsPolicyPage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Transparency</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Corrections Policy</h1>
-            <p className="text-muted mb-8">Last updated: July 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
 
             <div className="prose prose-slate max-w-none">
-              <p className="text-lg text-muted mb-6">
+              <p className="text-lg text-muted-foreground mb-6">
                 Despite our rigorous fact-checking process, errors can occur. When they do, we correct them promptly and transparently. This policy governs how we handle corrections.
               </p>
 
@@ -64,7 +64,7 @@ export default function CorrectionsPolicyPage() {
               <h2>Preventing Future Errors</h2>
               <p>Errors are reviewed as part of our editorial process improvement. When patterns of errors emerge, we update our fact-checking checklists, reviewer training materials, and editorial workflows to prevent recurrence.</p>
 
-              <p className="text-sm text-muted-foreground mt-8">Report an error: <strong>corrections@stackpilot.ai</strong></p>
+              <p className="text-sm text-muted-foreground-foreground mt-8">Report an error: <strong>corrections@stackpilot.ai</strong></p>
             </div>
           </div>
         </Container>

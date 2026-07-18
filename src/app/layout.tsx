@@ -97,6 +97,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name}`} href="/rss.xml" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         {process.env.NEXT_PUBLIC_VERCEL_ANALYTICS && (

@@ -41,7 +41,7 @@ export default function ToolsPage() {
           <SectionHeader className="mb-12">
             <Badge variant="default" className="mb-4">Free Tools</Badge>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Smarter decisions, free tools</h1>
-            <p className="text-lg text-muted">Interactive calculators and comparison tools to help you evaluate software with data, not guesswork.</p>
+            <p className="text-lg text-muted-foreground">Interactive calculators and comparison tools to help you evaluate software with data, not guesswork.</p>
           </SectionHeader>
           <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto mb-20">
             {tools.map((tool) => (
@@ -57,14 +57,14 @@ export default function ToolsPage() {
 
           <SectionHeader className="mb-8">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">Explore by category</h2>
-            <p className="text-muted-foreground">Browse our content ecosystem across {categories.length} software categories.</p>
+            <p className="text-muted-foreground-foreground">Browse our content ecosystem across {categories.length} software categories.</p>
           </SectionHeader>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {catCounts.map(c => (
               <Link key={c.slug} href={`/category/${c.slug}`} className="group">
                 <Card className="h-full hover:border-primary/30 transition-all">
                   <CardTitle className="text-sm group-hover:text-primary transition-colors">{c.name}</CardTitle>
-                  <div className="mt-3 flex flex-wrap gap-3 text-xs text-muted-foreground">
+                  <div className="mt-3 flex flex-wrap gap-3 text-xs text-muted-foreground-foreground">
                     {c.reviews > 0 && <span className="flex items-center gap-1"><Star size={11} /> {c.reviews} reviews</span>}
                     {c.guides > 0 && <span className="flex items-center gap-1"><BookOpen size={11} /> {c.guides} guides</span>}
                     {c.comparisons > 0 && <span className="flex items-center gap-1"><GitCompare size={11} /> {c.comparisons} comparisons</span>}

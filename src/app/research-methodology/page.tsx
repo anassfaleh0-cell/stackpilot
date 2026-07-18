@@ -24,10 +24,10 @@ export default function ResearchMethodologyPage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Research Standards</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Research Methodology</h1>
-            <p className="text-muted mb-8">Last updated: July 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
 
             <div className="prose prose-slate max-w-none">
-              <p className="text-lg text-muted mb-6">
+              <p className="text-lg text-muted-foreground mb-6">
                 Beyond individual product reviews, StackPilot produces original research reports, market analyses, pricing benchmarks, and industry trend reports. This page documents how we conduct this research.
               </p>
 
@@ -51,7 +51,7 @@ export default function ResearchMethodologyPage() {
                 ].map((step, i) => (
                   <Card key={step.title} className="p-4">
                     <h3 className="font-semibold text-sm mb-1"><span className="text-primary mr-2">{i + 1}.</span>{step.title}</h3>
-                    <p className="text-sm text-muted">{step.body}</p>
+                    <p className="text-sm text-muted-foreground">{step.body}</p>
                   </Card>
                 ))}
               </div>
@@ -83,7 +83,7 @@ export default function ResearchMethodologyPage() {
                 <li>Our research focuses primarily on English-language tools and North American/European markets</li>
               </ul>
 
-              <p className="text-sm text-muted-foreground mt-8">For questions about our research methodology, contact us at <strong>research@stackpilot.ai</strong>.</p>
+              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about our research methodology, contact us at <strong>research@stackpilot.ai</strong>.</p>
             </div>
           </div>
         </Container>

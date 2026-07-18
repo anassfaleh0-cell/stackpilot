@@ -23,10 +23,10 @@ export default function AffiliateDisclosurePage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Transparency</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Affiliate Disclosure</h1>
-            <p className="text-muted mb-8">Last updated: July 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
 
             <div className="prose prose-slate max-w-none">
-              <p className="text-lg text-muted mb-6">
+              <p className="text-lg text-muted-foreground mb-6">
                 StackPilot participates in affiliate marketing programs. This disclosure explains how affiliate relationships work and how we maintain editorial independence.
               </p>
 

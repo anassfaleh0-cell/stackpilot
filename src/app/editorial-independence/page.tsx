@@ -23,10 +23,10 @@ export default function EditorialIndependencePage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Our Commitment</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Editorial Independence</h1>
-            <p className="text-muted mb-8">Last updated: July 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
 
             <div className="prose prose-slate max-w-none">
-              <p className="text-lg text-muted mb-6">
+              <p className="text-lg text-muted-foreground mb-6">
                 Editorial independence is the cornerstone of StackPilot. Our readers must trust that our reviews, comparisons, and recommendations are based solely on rigorous research and testing — not commercial relationships.
               </p>
 
@@ -43,7 +43,7 @@ export default function EditorialIndependencePage() {
                 ].map((principle) => (
                   <div key={principle.title} className="p-4 rounded-xl bg-muted-bg">
                     <h3 className="font-semibold mb-1">{principle.title}</h3>
-                    <p className="text-sm text-muted">{principle.body}</p>
+                    <p className="text-sm text-muted-foreground">{principle.body}</p>
                   </div>
                 ))}
               </div>
@@ -73,7 +73,7 @@ export default function EditorialIndependencePage() {
               <h2>Governance</h2>
               <p>Editorial independence is reviewed quarterly by our editorial leadership team. Any concerns about editorial independence are escalated to the publisher, who has final authority to ensure separation between editorial and commercial operations.</p>
 
-              <p className="text-sm text-muted-foreground mt-8">For questions about editorial independence, contact <strong>editorial@stackpilot.ai</strong>.</p>
+              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about editorial independence, contact <strong>editorial@stackpilot.ai</strong>.</p>
             </div>
           </div>
         </Container>
