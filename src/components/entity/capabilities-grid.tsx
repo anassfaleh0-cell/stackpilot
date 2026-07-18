@@ -21,6 +21,9 @@ const capabilityMeta: Record<string, { label: string; icon: string }> = {
   versionHistory: { label: "Version History", icon: "clock" },
   offlineSupport: { label: "Offline Support", icon: "wifi-off" },
   ai: { label: "AI Features", icon: "brain" },
+  import: { label: "Import", icon: "download" },
+  export: { label: "Export", icon: "upload" },
+  customFields: { label: "Custom Fields", icon: "edit" },
 }
 
 export function CapabilitiesGrid({ entity }: CapabilitiesGridProps) {

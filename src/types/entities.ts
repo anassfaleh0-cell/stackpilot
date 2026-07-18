@@ -15,8 +15,11 @@ export interface CompanyDetail {
   founded?: number
   headquarters?: string
   founders?: string[]
+  ceo?: string
   ownership?: "Public" | "Private" | "Subsidiary"
   parentCompany?: string
+  stockSymbol?: string
+  funding?: string
   employees?: string
   customers?: string
   industries?: string[]
@@ -59,6 +62,18 @@ export interface Capabilities {
   versionHistoryDescription?: string
   offlineSupport?: boolean
   offlineSupportDescription?: string
+  import?: boolean
+  importDescription?: string
+  export?: boolean
+  exportDescription?: string
+  customFields?: boolean
+  customFieldsDescription?: string
+  mobileApps?: boolean
+  mobileAppsDescription?: string
+  desktopApp?: boolean
+  desktopAppDescription?: string
+  browserExtension?: boolean
+  browserExtensionDescription?: string
 }
 
 export interface SecurityDetail {

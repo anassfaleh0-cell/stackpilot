@@ -1,13 +1,13 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, SoftwareSchema, ReviewSchema, FAQSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, SoftwareSchema, ReviewSchema, FAQSchema, WebPageSchema, ArticleSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getReview, getContentTitle } from "@/lib/content/registry"
 import { getAllReviews } from "@/lib/content/registry"
 import { getEntity } from "@/lib/entities/data"
-import { EntityOverview, SecurityTable, CapabilitiesGrid, UseCasePanel, IntegrationDisplay, PricingTable } from "@/components/entity"
+import { EntityOverview, SecurityTable, CapabilitiesGrid, UseCasePanel, IntegrationDisplay, PricingTable, AutoComparison, SemanticLinks } from "@/components/entity"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
@@ -55,8 +55,10 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
         { name: "Reviews", href: "/reviews" },
         { name: tool.name, href: `/reviews/${tool.slug}` },
       ]} />
-      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} reviewCount={tool.reviewCount} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.lastReviewed} body={tool.description} companyInfo={tool.company} />
-      <SoftwareSchema name={tool.name} description={tool.tagline} applicationCategory="BusinessApplication" brand={tool.name} />
+      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} reviewCount={tool.reviewCount} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.lastReviewed} body={tool.description} companyInfo={entity?.company || tool.company} />
+      <SoftwareSchema name={tool.name} description={tool.tagline} applicationCategory="BusinessApplication" brand={tool.name} operatingSystem={entity?.company?.platforms?.join(", ")} offers={entity?.pricing?.[0] ? { price: entity.pricing[0].price?.toString() || "", priceCurrency: entity.pricing[0].currency || "USD" } : undefined} />
+      <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.lastReviewed} />
+      <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.lastReviewed} updatedAt={tool.lastReviewed} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} />
       <FAQSchema questions={tool.faqs} />
 
       <Container className="pt-8">
@@ -343,6 +345,14 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
               {/* Editorial Workflow */}
               <EditorialWorkflow sections={tool.content} slug={tool.slug} category={tool.category} />
+
+              {entity && (
+                <section className="mb-12 scroll-mt-24" id="alternatives">
+                  <h2 className="text-2xl font-bold tracking-tight mb-6">Top Alternatives</h2>
+                  <p className="text-muted-foreground text-sm mb-4">Auto-generated comparisons based on verified entity data.</p>
+                  <AutoComparison slug={slug} />
+                </section>
+              )}
             </div>
 
             {/* Sidebar */}
@@ -509,6 +519,12 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               </p>
             </div>
           </section>
+
+          {entity && (
+            <section className="mt-16 mb-8">
+              <SemanticLinks slug={slug} />
+            </section>
+          )}
 
           <RelatedContent
             items={[
