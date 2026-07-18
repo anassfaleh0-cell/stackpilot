@@ -1,13 +1,14 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, HowToSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, HowToSchema, WebPageSchema } from "@/components/seo/json-ld"
+import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getGuide, getContentTitle } from "@/lib/content/registry"
 import { getAllGuides } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
-import { EditorialHero, EditorialProcess, EditorialSectionIllustration, GlassCard, InfoCard } from "@/components/editorial"
-import { RelatedContent } from "@/components/content/related-content"
+import { EditorialHero, EditorialSectionIllustration, GlassCard, InfoCard } from "@/components/dynamic"
+import { EditorialProcess, RelatedContent } from "@/components/dynamic-client"
 import { BrandDivider } from "@/components/brand/patterns"
 import { CheckCircle2, BookOpen, Clock, Layers, Lightbulb } from "lucide-react"
 
@@ -31,6 +32,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Guides", href: "/guides" }, { name: guide.title, href: `/guides/${slug}` }]} />
       <HowToSchema name={guide.title} description={guide.description} steps={guide.sections.map((s) => ({ name: s.title, text: s.body }))} />
+      <WebPageSchema name={guide.title} description={guide.description} url={`${site.url}/guides/${slug}`} mainEntity={guide.relatedTools.length > 0 ? { "@type": "ItemList", itemListElement: guide.relatedTools.map((t, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "SoftwareApplication", name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` } })) } : undefined} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Guides", href: "/guides" }, { name: guide.title }]} />
       </Container>

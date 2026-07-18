@@ -1,0 +1,65 @@
+{
+  "slug": "ai-software",
+  "title": "AI Software Statistics 2026",
+  "description": "Key statistics on artificial intelligence software adoption, spending, ROI, industry impact, and market projections across enterprise and consumer segments.",
+  "category": "AI",
+  "stats": [
+    { "value": "$187B", "label": "Global AI Software Market Size (2026)", "source": "Gartner", "sourceUrl": "https://www.gartner.com/en/ai-software-forecast" },
+    { "value": "87%", "label": "Enterprises with at Least One AI Tool Deployed", "source": "StackPilot AI Adoption Survey", "sourceUrl": "https://pilotstack.online/research/ai-adoption" },
+    { "value": "$1,847", "label": "Average AI Software Spend per Employee", "source": "Forrester Research", "sourceUrl": "https://www.forrester.com/ai-spending" },
+    { "value": "54%", "label": "Organizations Reporting Positive AI ROI within 6 Months", "source": "McKinsey Global Survey", "sourceUrl": "https://www.mckinsey.com/ai" },
+    { "value": "44%", "label": "AI Spend Allocated to Generative AI Tools", "source": "IDC AI Spending Guide", "sourceUrl": "https://www.idc.com/ai-spending" },
+    { "value": "76%", "label": "Traditional Software Vendors Adding AI Features", "source": "StackPilot Vendor Analysis", "sourceUrl": "https://pilotstack.online/research" },
+    { "value": "3.2x", "label": "Higher ROI for Revenue-Generating AI vs. Efficiency AI", "source": "Boston Consulting Group", "sourceUrl": "https://www.bcg.com/ai-roi" }
+  ],
+  "sections": [
+    {
+      "title": "Market Size and Growth Trajectory",
+      "stats": [
+        { "value": "$187B", "label": "Global AI Software Market (2026)", "source": "Gartner" },
+        { "value": "36.8%", "label": "Year-over-Year Growth Rate", "source": "Gartner" },
+        { "value": "$625B", "label": "Projected AI Market Size (2030)", "source": "Grand View Research" },
+        { "value": "44%", "label": "Generative AI Share of Total AI Spend", "source": "IDC" },
+        { "value": "28%", "label": "Marketing Budgets Allocated to AI Tools", "source": "Gartner CMO Survey" }
+      ],
+      "body": "The AI software market is growing at nearly 37% annually, making it the fastest-growing segment in enterprise technology. Generative AI commands the largest share and is expected to grow from $82 billion in 2026 to over $300 billion by 2030. Marketing and content teams lead AI spending, followed by engineering and sales departments."
+    },
+    {
+      "title": "Enterprise Adoption Rates",
+      "stats": [
+        { "value": "87%", "label": "Enterprises with Deployed AI Tools", "source": "StackPilot" },
+        { "value": "12", "label": "Average AI Tools per Enterprise (10k+ employees)", "source": "StackPilot" },
+        { "value": "3", "label": "Average AI Tools per SMB (under 50 employees)", "source": "StackPilot" },
+        { "value": "94%", "label": "Tech Industry AI Adoption Rate", "source": "Forrester" },
+        { "value": "91%", "label": "Financial Services AI Adoption Rate", "source": "Forrester" },
+        { "value": "76%", "label": "Healthcare AI Adoption Rate", "source": "Forrester" }
+      ],
+      "body": "AI adoption has crossed the chasm from early adopter to early majority across most industries. Technology and financial services lead, while education and government sectors lag due to regulatory and procurement constraints. The average enterprise now runs 12 AI-powered tools, spanning content generation, code assistance, analytics, and customer engagement."
+    },
+    {
+      "title": "ROI and Business Impact",
+      "stats": [
+        { "value": "54%", "label": "Positive AI ROI within 6 Months", "source": "McKinsey" },
+        { "value": "3.2x", "label": "ROI for Revenue AI vs. Efficiency AI", "source": "BCG" },
+        { "value": "74%", "label": "Citing Time Savings as Primary AI Value", "source": "StackPilot" },
+        { "value": "61%", "label": "Citing Output Quality Improvement", "source": "StackPilot" },
+        { "value": "47%", "label": "Citing Cost Reduction", "source": "StackPilot" }
+      ],
+      "body": "AI ROI timelines are compressing as tools mature. More than half of organizations now see positive returns within six months, with revenue-generating applications outperforming efficiency-focused deployments by more than 3x. Time savings remain the most commonly cited benefit, followed by output quality improvements. Cost reduction, while still significant, ranks third as organizations prioritize growth over efficiency."
+    },
+    {
+      "title": "Top Barriers to AI Adoption",
+      "stats": [
+        { "value": "58%", "label": "Security and Privacy Concerns", "source": "Gartner" },
+        { "value": "47%", "label": "Integration Complexity", "source": "Forrester" },
+        { "value": "41%", "label": "Unclear ROI", "source": "McKinsey" },
+        { "value": "33%", "label": "Employee Resistance", "source": "Deloitte" },
+        { "value": "28%", "label": "Data Quality and Readiness", "source": "Accenture" }
+      ],
+      "body": "Security concerns remain the top barrier to AI adoption, particularly around data privacy and model governance. Integration complexity with existing systems is the second most cited challenge. Organizations with dedicated AI task forces and executive sponsorship report 3.4x higher adoption success rates. Change management and employee training programs are the most effective mitigation strategies."
+    }
+  ],
+  "publishedAt": "2026-07-18",
+  "relatedComparisons": ["chatgpt-vs-jasper"],
+  "relatedGuides": ["how-to-choose-an-ai-writing-tool"]
+}

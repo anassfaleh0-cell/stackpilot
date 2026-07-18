@@ -1,4 +1,4 @@
-# Contributing to StackPilot
+# Contributing to PilotStack
 
 ## Adding Content
 
@@ -36,7 +36,7 @@ Create `content/reviews/{slug}.json` following the `ReviewContent` type:
   "alternatives": ["tool-slug-1", "tool-slug-2"],
   "relatedGuides": ["guide-slug-1"],
   "lastReviewed": "2026-07-01",
-  "author": "StackPilot Team"
+  "author": "PilotStack Team"
 }
 ```
 

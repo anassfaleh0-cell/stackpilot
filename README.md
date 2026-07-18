@@ -1,4 +1,4 @@
-# StackPilot 🧭
+# PilotStack 🧭
 
 Enterprise-grade B2B SaaS reviews platform. In-depth software reviews, expert comparisons, actionable guides, and free interactive tools to help businesses make confident software decisions.
 

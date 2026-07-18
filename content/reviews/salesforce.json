@@ -160,6 +160,11 @@
       "type": "text"
     },
     {
+      "title": "Company Background",
+      "body": "Founded in 1999 by Marc Benioff, Parker Harris, Dave Moellenhoff, and Frank Dominguez in a San Francisco apartment, Salesforce pioneered the software-as-a-service model, challenging incumbent CRM vendors like Siebel Systems with a cloud-first approach. Benioff's vision was to create an \"end of software\" platform where businesses would access CRM functionality through a web browser rather than installing on-premise software. Salesforce went public in 2004 (NYSE: CRM), raising $110 million in its IPO and establishing the cloud computing category. The company has grown through strategic acquisitions: Tableau ($15.7B, 2019) for analytics, MuleSoft ($6.5B, 2018) for integration, Slack ($27.7B, 2021) for collaboration, and ExactTarget ($2.5B, 2013) which became Marketing Cloud. With 73,000+ employees and 150,000+ customers, Salesforce holds the #1 position in global CRM market share at 20.5% (Gartner 2025), more than its next three competitors combined. The company remains headquartered in San Francisco and is publicly traded with a market capitalization exceeding $250 billion.",
+      "type": "text"
+    },
+    {
       "title": "Best For",
       "body": "Salesforce delivers maximum ROI for three organizational profiles. Enterprise B2B sales organizations with 100+ reps managing deal cycles spanning 6-18 months, involving 5-15 stakeholders per opportunity, territory routing across 10+ regions, and multi-level approval chains for discounting and contract terms. Customer service departments handling 10,000+ monthly cases across phone, email, chat, and social channels, requiring omnichannel routing, SLA enforcement, knowledge base deflection, and telephony integration. Regulated industries — financial services, healthcare, insurance — that need field-audit trails, encryption at rest, and compliance with FINRA, HIPAA, or SOX reporting requirements through Salesforce Shield.",
       "type": "text"
@@ -181,6 +186,16 @@
         "Lightning Platform provides drag-and-drop app builder, custom objects and fields, Apex programming language, and Lightning Web Components for tailoring any business process.",
         "MuleSoft integration connects Salesforce to 200+ on-premise and cloud systems including SAP, Oracle, Workday, and legacy databases without custom point-to-point coding."
       ]
+    },
+    {
+      "title": "Feature Deep Dive",
+      "body": "Sales Cloud is the flagship product, designed around the opportunity lifecycle. A typical workflow begins with lead capture from web forms, email, or LinkedIn — leads are automatically scored by Einstein AI and assigned to reps by territory rules. Reps progress qualified leads through pipeline stages, logging activities, attaching documents, and requesting approvals for discounts. Managers monitor pipeline coverage and forecast accuracy on real-time dashboards. Service Cloud transforms customer support with omnichannel case routing. When a customer emails support, the system automatically creates a case, assigns it to the appropriate queue based on product and priority, and surfaces relevant knowledge articles. Agents access a unified console with telephony integration, chat, and social replies in one workspace. Automated escalation rules trigger alerts when SLAs are breached. Marketing Cloud orchestrates cross-channel campaigns. A marketer builds an audience segment based on CRM data (industry, engagement score, lead source), designs a multi-step email journey with conditional branching, and tracks attribution back to pipeline revenue. All three clouds share the same data model, so every team operates from a single customer view.",
+      "type": "text"
+    },
+    {
+      "title": "User Experience",
+      "body": "The Lightning Experience interface provides a component-based dashboard system where users customize their home page with pipeline charts, task lists, and KPIs. The Salesforce mobile app (iOS and Android) offers full CRM functionality offline — reps can view contacts, log calls, update opportunities, and approve requests without internet, syncing automatically when reconnected. The AppExchange marketplace extends the interface with 5,000+ installed components ranging from custom dashboard widgets to full application modules. Onboarding typically involves a 2-week structured program covering navigation, data entry standards, report building, and mobile setup. Despite improvements over the classic interface, the learning curve remains steep — the average user requires 20-30 hours of hands-on practice before achieving basic proficiency, and the 47 configuration areas in the Setup menu can overwhelm new administrators.",
+      "type": "text"
     },
     {
       "title": "Real Advantages",
@@ -214,8 +229,8 @@
       "type": "text"
     },
     {
-      "title": "Migration Difficulty",
-      "body": "Migrating from HubSpot to Salesforce is moderately difficult (7/10). The primary challenges: data model differences (HubSpot's flat object structure vs. Salesforce's relational model with custom objects requires schema redesign), workflow reimplementation (HubSpot workflows are visual and sequential; Salesforce Flow is event-driven with parallel branches and platform events), and automation rebuild (HubSpot sequences, chatbots, and meeting links have no direct Salesforce equivalents, requiring third-party tools like SalesLoft or Outreach). Migration from Microsoft Dynamics is less complex (5/10) because both platforms support relational data models and comparable workflow engines, though custom .NET integrations require redevelopment on the Salesforce platform. Migration from spreadsheets or ACT! is straightforward (3/10) with CSV import wizards, though data quality issues typically surface during validation. Regardless of source system, budget 10-15% of license cost for data migration services in the first year.",
+      "title": "Migration Guide",
+      "body": "Migrating from HubSpot to Salesforce is moderately difficult (7/10). The primary challenges: data model differences (HubSpot's flat object structure vs. Salesforce's relational model with custom objects requires schema redesign), workflow reimplementation (HubSpot workflows are visual and sequential; Salesforce Flow is event-driven with parallel branches and platform events), and automation rebuild (HubSpot sequences, chatbots, and meeting links have no direct Salesforce equivalents, requiring third-party tools like SalesLoft or Outreach). Migration from Microsoft Dynamics is less complex (5/10) because both platforms support relational data models and comparable workflow engines, though custom .NET integrations require redevelopment on the Salesforce platform. Migration from spreadsheets or ACT! is straightforward (3/10) with CSV import wizards, though data quality issues typically surface during validation. Regardless of source system, budget 10-15% of license cost for data migration services in the first year. A structured migration from HubSpot or Zoho follows five phases. Phase 1 (weeks 1-2): audit source data — identify duplicate records, standardize field formats, map objects to Salesforce schema, and document custom workflows needing reimplementation. Phase 2 (weeks 3-4): data cleansing and transformation — deduplicate contacts and companies, normalize phone numbers and addresses, and export to CSV templates matching Salesforce import formats. Phase 3 (weeks 5-8): configure Salesforce org with custom objects, validation rules, workflows, and permission sets before loading data. Phase 4 (weeks 9-12): migrate data in batches (accounts first, then contacts, then opportunities), validate record counts and field mappings after each batch, and run reconciliation reports. Phase 5 (weeks 13-16): user adoption rollout — train power users, conduct department-specific workshops, launch go-live, and provide hyper-care support. Data mapping is the most critical step: each field in HubSpot or Zoho must map to a Salesforce standard or custom field, with transformation rules for picklist values, currency fields, and date formats. User adoption strategy requires executive sponsorship, department champions, gamified data entry targets, and weekly adoption dashboards for the first 90 days. Total migration timeline is typically 3-6 months depending on data volume, integration complexity, and user training requirements.",
       "type": "text"
     },
     {
@@ -240,7 +255,7 @@
     },
     {
       "title": "Real-world Use Cases",
-      "body": "A 500-person B2B SaaS company using Sales Cloud with 15 custom objects: opportunity scoring by product line, automated territory assignment by postal code, approval chains for discounts exceeding 15%, and Einstein forecasting showing 92% accuracy against quarterly targets. A 2,000-agent insurance call center running Service Cloud with IVR integration, automated case routing by policy type, knowledge base deflection rate of 34%, and average handle time reduction of 8 minutes per case after implementation. A global manufacturing company with 50-country operations using MuleSoft to sync Salesforce with SAP ECC, reducing quote-to-order cycle from 5 days to 6 hours through automated pricing, credit checking, and inventory reservation. A healthcare provider using Health Cloud with HIPAA-compliant patient records, automated appointment reminders, and care plan tracking across 200 care coordinators.",
+      "body": "A 500-person B2B SaaS company using Sales Cloud with 15 custom objects: opportunity scoring by product line, automated territory assignment by postal code, approval chains for discounts exceeding 15%, and Einstein forecasting showing 92% accuracy against quarterly targets. A 2,000-agent insurance call center running Service Cloud with IVR integration, automated case routing by policy type, knowledge base deflection rate of 34%, and average handle time reduction of 8 minutes per case after implementation. A global manufacturing company with 50-country operations using MuleSoft to sync Salesforce with SAP ECC, reducing quote-to-order cycle from 5 days to 6 hours through automated pricing, credit checking, and inventory reservation. A healthcare provider using Health Cloud with HIPAA-compliant patient records, automated appointment reminders, and care plan tracking across 200 care coordinators. Startup scenario: a 15-person B2B tech startup uses Sales Cloud Starter to track 200 leads through a simple pipeline, with Einstein lead scoring prioritizing follow-ups and email integration logging all communications automatically — total annual cost under $5,000. Agency scenario: a 40-person digital marketing agency uses Sales Cloud and Marketing Cloud to manage 80 client accounts, each with custom opportunity stages reflecting campaign lifecycles, automated invoice generation via CPQ, and email journeys for client onboarding sequences. Enterprise scenario: a Fortune 500 financial services firm runs Sales Cloud, Service Cloud, and Marketing Cloud across 5,000 users with custom objects for wealth management products, MuleSoft integration with core banking systems, Shield encryption for PII, and 50+ automated approval processes. Sales team scenario: a 200-rep field sales team uses the mobile app to log meetings, capture signatures via DocuSign, and check inventory in real time through ERP integration, with territory management automatically reassigning accounts when reps change regions. Marketing team scenario: a marketing department of 30 uses Marketing Cloud Audience Studio to build 200+ segments from CRM data, execute multi-channel campaigns, and measure attribution through campaign influence reports linked to opportunities. Service team scenario: a support team of 150 agents handles 8,000 monthly cases using Service Cloud omnichannel routing, with chatbots deflecting 25% of inquiries, knowledge base self-service resolving another 20%, and automated case escalation for SLA breaches. Non-profit scenario: a 50-person non-profit uses Salesforce Nonprofit Cloud (donated licenses through the Power of Us program) to manage donor relationships, track grant applications, coordinate volunteer schedules, and run fundraising campaigns — demonstrating Salesforce's discounted access for mission-driven organizations.",
       "type": "text"
     },
     {
@@ -251,6 +266,16 @@
     {
       "title": "Tips from experienced users",
       "body": "Four practices differentiate high-adoption Salesforce orgs from low-adoption ones. Create a weekly operations dashboard showing pipeline coverage by stage, rep activity metrics (calls, emails, meetings logged), and forecast accuracy — visibility drives data quality because reps enter data accurately when they see it reported. Use list views with role-based visibility so reps see only their records, managers see team records, and leadership sees org-wide pipeline — this prevents the data overwhelm that causes CRM abandonment. Configure path settings on opportunity record pages showing the deal stage, expected next step, and close probability — this guides reps through the sales process without requiring them to memorize stage progression rules. Schedule quarterly org cleanup: deactivate inactive users, archive unused custom fields, delete orphaned workflows, and review sharing rules. A 500-user org that skips quarterly cleanup accumulates an average of 200 unused fields and 50 orphaned workflows within 18 months.",
+      "type": "text"
+    },
+    {
+      "title": "Competitors",
+      "body": "HubSpot CRM competes on ease of use and freemium pricing, making it the primary alternative for organizations under 200 employees. Its unified platform combines CRM, marketing hub, and service hub in a single interface, but lacks Salesforce's custom objects depth and multi-cloud integration. Microsoft Dynamics 365 appeals to Microsoft-centric enterprises with native Teams, Outlook, and Power BI integration, plus a shared data model with Dynamics ERP, though customization requires .NET development skills rather than declarative tools. Zoho CRM offers the best price-to-feature ratio for mid-market organizations at $14-65/user/month, with AI assistant Zia and blueprint process management, but its partner ecosystem and enterprise support lag behind Salesforce significantly. Pipedrive focuses exclusively on pipeline management with a visual deal board that sales teams adopt quickly, but lacks the service, marketing, and analytics clouds that make Salesforce a full-platform solution. Each competitor serves a distinct niche, and no single platform matches Salesforce's breadth across sales, service, marketing, analytics, and integration.",
+      "type": "text"
+    },
+    {
+      "title": "Industry Fit",
+      "body": "Enterprise organizations with 500+ employees represent Salesforce's core market — these deployments leverage multiple clouds, custom objects, complex approval workflows, and MuleSoft integration with SAP or Oracle. Mid-market companies (50-500 employees) achieve strong ROI with Sales Cloud and Service Cloud when they have dedicated CRM administration. Financial services firms benefit from Salesforce Shield's field-level encryption, event monitoring, and audit trails, meeting FINRA and SOX compliance requirements while managing complex wealth management and client onboarding workflows. Healthcare organizations use Health Cloud for HIPAA-compliant patient relationship management, care coordination, and appointment scheduling, though HIPAA compliance requires Enterprise edition or above with a signed BAA. Government agencies leverage Government Cloud with FedRAMP authorization, US data residency, and role-based access controls for citizen service management and case tracking. Each vertical benefits from AppExchange-specific solutions like Financial Services Cloud, Health Cloud, and Government Cloud that include pre-built data models and compliance configurations tailored to industry regulations.",
       "type": "text"
     },
     {
@@ -295,6 +320,70 @@
     {
       "question": "Is Salesforce suitable for small teams?",
       "answer": "Generally no — the complexity, cost, and administrative overhead make Salesforce a poor fit for small teams. The Starter plan at $25/user/month is affordable but still requires setup effort. Micro-businesses and startups are better served by HubSpot's free CRM, Pipedrive, or Freshsales, which offer intuitive interfaces and faster time-to-value without dedicated admin staff."
+    },
+    {
+      "question": "How long does implementation take and what are the training costs?",
+      "answer": "A basic Salesforce deployment for 25 users takes 4-8 weeks with a certified partner. Mid-market deployments (100-500 users) require 3-6 months. Enterprise deployments can take 6-18 months. Training costs range from $500-1,500 per user for formal programs. Trailhead, Salesforce's free learning platform, offers 1,500+ modules for self-paced training, though structured programs with manager accountability achieve significantly higher completion rates than self-directed learning."
+    },
+    {
+      "question": "What are AppExchange apps and do I need them?",
+      "answer": "The AppExchange is Salesforce's marketplace with 5,000+ pre-built applications and components that extend native functionality. Popular apps include DocuSign (e-signatures), Conga (document generation), Mailchimp (email marketing), and LinkedIn Sales Navigator (social selling). Most organizations install 5-15 AppExchange apps to address gaps in standard Salesforce functionality. Apps are rated, reviewed, and security-reviewed by Salesforce, reducing integration risk compared to custom development."
+    },
+    {
+      "question": "What are the data storage limits in Salesforce?",
+      "answer": "Salesforce allocates 10 GB of data storage per org for Enterprise edition, plus 100 MB per user license. File storage (attachments, documents, images) starts at 12 GB per org plus 2 GB per user. Additional storage can be purchased in bundles starting at $500/year for 1 GB of data storage or $10/month per GB of file storage. Exceeding limits can block record creation, so monitoring storage usage through the Setup storage dashboard is essential."
+    },
+    {
+      "question": "What are the API call limits?",
+      "answer": "Salesforce enforces daily API call limits based on edition: Professional (15,000 per user per day), Enterprise (100,000 per 24-hour period for the entire org), and Unlimited (1,000,000 per 24-hour period). Exceeding limits results in API throttling or temporary blocks. Organizations with heavy integration workloads should monitor API usage via the API Usage dashboard and consider purchasing additional API call bundles if needed."
+    },
+    {
+      "question": "What are sandbox environments used for?",
+      "answer": "Sandboxes are isolated copies of your Salesforce org used for development, testing, and training. Developer sandboxes (free, 200 MB) work for individual development. Developer Pro ($2,500/year, 1 GB) supports team development. Partial Copy sandboxes ($5,000/year, 5 GB with sample data) are used for integration testing. Full sandboxes ($20,000/year, full data copy) replicate production for performance testing and user acceptance testing. Sandboxes are essential for safe configuration and custom development without risking production data."
+    },
+    {
+      "question": "How do permission sets work?",
+      "answer": "Permission sets extend a user's functional access beyond their profile without changing the profile itself. For example, a Sales Rep profile grants standard opportunity editing, while a \"Discount Authority\" permission set adds the ability to apply discounts above 15%. Permission sets can be assigned to multiple users and combined, allowing flexible access control without creating dozens of profiles. Permission set groups bundle multiple permission sets for role-based assignment efficiency."
+    },
+    {
+      "question": "Can I build workflow automation without coding?",
+      "answer": "Yes — Salesforce Flow provides a drag-and-drop automation builder for creating complex workflows without Apex code. Flows can automate lead assignment, email alerts, field updates, record creation, approval requests, and integration callouts. Flow templates cover common patterns like account scoring, case escalation, and opportunity stage transitions. Approximately 80% of common automation requirements can be met with declarative tools, leaving complex logic for Apex development."
+    },
+    {
+      "question": "What is Einstein AI and how does it work?",
+      "answer": "Einstein AI is Salesforce's embedded artificial intelligence layer that analyzes your org's data to deliver predictions and recommendations. Key features include predictive lead scoring (ranks leads by conversion likelihood), opportunity insights (identifies deals at risk of stalling), activity capture (automatically logs emails and meetings), and email sentiment analysis. Einstein is trained on each customer's unique data — no external data leaves the org. It is included in Unlimited edition or available as an add-on for Enterprise."
+    },
+    {
+      "question": "Can I use Salesforce offline on the mobile app?",
+      "answer": "Yes — the Salesforce mobile app supports offline access for recently viewed records, including accounts, contacts, leads, opportunities, and cases. Users can view, edit, and create records offline, with changes syncing automatically when connectivity is restored. Offline file access and approval actions are also supported. Admins configure which objects and fields are available offline through mobile security policies. The offline cache stores approximately 2,000 records per device."
+    },
+    {
+      "question": "What reporting and dashboard capabilities are included?",
+      "answer": "Salesforce offers four report formats: tabular (simple lists), summary (grouped with subtotals), matrix (cross-tabulation), and joined (multi-object reports). Reports can be scheduled, filtered with relative date ranges, and exported to Excel or CSV. Dashboards display up to 20 components each with chart types including bar, line, pie, funnel, and gauge. Dynamic dashboards show data based on the viewing user's role. Einstein Analytics (Tableau CRM) extends reporting with AI-powered insights, natural language queries, and data volumes up to 10 billion rows."
+    },
+    {
+      "question": "How does Salesforce forecasting work?",
+      "answer": "Salesforce forecasting aggregates opportunity amounts by owner, role hierarchy, and time period to project future revenue. Forecast categories include Commit (deals the rep is confident will close) and Best Case (deals with high probability). Managers can adjust forecasts at each level, and forecast roll-ups follow the role hierarchy. Forecast accuracy reports compare projected versus actual closed revenue. Einstein Forecasting uses AI to predict close probabilities based on historical patterns, achieving reported accuracy of 85-92% in mature implementations."
+    },
+    {
+      "question": "How does lead scoring work in Salesforce?",
+      "answer": "Salesforce offers two lead scoring approaches. Einstein Lead Scoring automatically analyzes historical conversion data to identify patterns and assigns a 0-100 score to every lead — no manual rules required. Standard lead scoring allows admins to configure point-based rules (e.g., +10 points for title contains \"VP\", +5 points for industry = Technology). Scores appear on lead records and can trigger automated actions like assignment to senior reps when scores exceed thresholds."
+    },
+    {
+      "question": "How does email integration and calendar sync work?",
+      "answer": "Salesforce integrates with Outlook (Windows and Mac) and Gmail through the Salesforce Inbox and Email Connection tools. Emails and calendar events sync bidirectionally, with emails automatically linked to the associated contact and opportunity records. Email tracking logs opens and clicks, and templates enable one-click responses. Calendar sync ensures meetings appear on Salesforce activity timelines. The Einstein Activity Capture tool automatically logs emails and events without requiring users to manually BCC Salesforce or install plugins."
+    },
+    {
+      "question": "Does Salesforce integrate with social media?",
+      "answer": "Yes — Social Studio (part of Marketing Cloud) monitors and manages social media engagement across Facebook, X/Twitter, LinkedIn, Instagram, and YouTube. It enables social listening, publishing, and engagement tracking. Service Cloud can create cases from social media mentions and posts. LinkedIn Sales Navigator integrates directly with Sales Cloud, displaying LinkedIn profile data and relationship information on lead and contact records. Social media engagement metrics can be tracked in campaign reports."
+    },
+    {
+      "question": "Can I create a partner portal or customer community?",
+      "answer": "Yes — Salesforce Experience Cloud (formerly Community Cloud) enables branded portals for partners, customers, and employees. Partner portals provide deal registration, lead distribution, co-branded materials, and performance dashboards. Customer communities offer self-service knowledge bases, case submission, and peer discussion forums. Communities integrate with the core CRM data model, so community activity feeds into account and contact records. Experience Cloud starts at $5,000/month per community."
+    },
+    {
+      "question": "How do I export data from Salesforce and what are the contract terms?",
+      "answer": "Data can be exported through the Data Export Service (weekly or monthly automated exports of all objects), the built-in Reports export (Excel or CSV), or third-party tools like Dataloader.io and DemandTools. Enterprise and Unlimited editions include weekly automated exports. Salesforce contracts are annual with automatic renewal clauses. Contract terms include 30-day cancellation windows typically 60-90 days before renewal date. Early termination fees may apply. Price escalations of 3-5% at renewal are standard but negotiable for multi-year commitments."
     }
   ],
   "alternatives": [

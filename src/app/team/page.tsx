@@ -8,7 +8,7 @@ import Link from "next/link"
 
 export const metadata = createMetadata({
   title: "Our Team",
-  description: "Meet the StackPilot team of software researchers, analysts, and industry experts who bring their hands-on expertise to every review and guide.",
+  description: "Meet the PilotStack team of software researchers, analysts, and industry experts who bring their hands-on expertise to every review and guide.",
   path: "/team",
 })
 
@@ -74,7 +74,7 @@ export default function TeamPage() {
         <Container>
           <div className="max-w-3xl mx-auto mb-12">
             <Badge variant="default" className="mb-4">Our People</Badge>
-            <h1 className="text-4xl font-bold tracking-tight mb-4">Meet the StackPilot Team</h1>
+            <h1 className="text-4xl font-bold tracking-tight mb-4">Meet the PilotStack Team</h1>
             <p className="text-lg text-muted-foreground text-pretty">
               Our team brings over 50 years of combined software evaluation experience. Every reviewer specializes in their category and tests tools hands-on before writing a single word.
             </p>

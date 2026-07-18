@@ -177,6 +177,118 @@ export interface CategoryKnowledge {
   faqs: FAQItem[]
 }
 
+export interface AlternativeContent {
+  slug: string
+  title: string
+  description: string
+  category: string
+  toolSlug: string
+  toolName: string
+  alternatives: { slug: string; name: string; rating: number; description: string }[]
+  sections: ContentSection[]
+  selectionCriteria: string[]
+  faqs: FAQItem[]
+  relatedComparisons: string[]
+  relatedGuides?: string[]
+  relatedPosts?: string[]
+  lastUpdated: string
+}
+
+export interface UseCaseContent {
+  slug: string
+  title: string
+  description: string
+  category: string
+  useCase: string
+  useCaseDescription: string
+  recommendations: { toolSlug: string; toolName: string; rating: number; bestFor: string; keyFeatures: string[] }[]
+  selectionCriteria: { factor: string; importance: "Critical" | "High" | "Medium"; description: string }[]
+  commonPitfalls: string[]
+  faqs: FAQItem[]
+  relatedComparisons: string[]
+  relatedGuides?: string[]
+  lastUpdated: string
+}
+
+export interface IndustryContent {
+  slug: string
+  title: string
+  description: string
+  industry: string
+  industryOverview: string
+  softwareNeeds: string[]
+  recommendations: { category: string; toolSlug: string; toolName: string; rating: number; bestFor: string }[]
+  implementationTips: string[]
+  faqs: FAQItem[]
+  relatedComparisons: string[]
+  relatedGuides?: string[]
+  lastUpdated: string
+}
+
+export interface ResearchContent {
+  slug: string
+  title: string
+  description: string
+  category: "Pricing" | "Adoption" | "Market Share" | "Productivity" | "Security" | "AI" | "Benchmark" | "Trends"
+  reportType: string
+  keyFindings: string[]
+  sections: ContentSection[]
+  methodology: string
+  dataSources: { name: string; url: string }[]
+  publishedAt: string
+  updatedAt?: string
+  author: string
+  readingTime: number
+  relatedComparisons?: string[]
+  relatedGuides?: string[]
+  relatedPosts?: string[]
+}
+
+export interface StatisticContent {
+  slug: string
+  title: string
+  description: string
+  category: string
+  stats: { value: string; label: string; source: string; sourceUrl?: string }[]
+  sections: { title: string; stats: { value: string; label: string; source: string; sourceUrl?: string }[]; body?: string }[]
+  publishedAt: string
+  updatedAt?: string
+  relatedComparisons?: string[]
+  relatedGuides?: string[]
+}
+
+export interface BestContent {
+  slug: string
+  title: string
+  description: string
+  category: string
+  criteria: string[]
+  picks: { rank: number; toolSlug: string; toolName: string; rating: number; priceRange: string; bestFor: string; pros: string[]; cons: string[] }[]
+  pricingSummary: string
+  comparisonTable: { columns: string[]; rows: string[][] }
+  faqs: FAQItem[]
+  relatedComparisons: string[]
+  relatedGuides: string[]
+  relatedPosts: string[]
+  lastUpdated: string
+  author: string
+}
+
+export interface HubContent {
+  slug: string
+  title: string
+  description: string
+  audience: string
+  challenges: string[]
+  recommendations: { category: string; toolSlug: string; toolName: string; rating: number; bestFor: string }[]
+  comparisonMatrix: { columns: string[]; rows: string[][] }
+  faqs: FAQItem[]
+  relatedComparisons: string[]
+  relatedGuides: string[]
+  relatedPosts: string[]
+  lastUpdated: string
+}
+
 export interface Subcategory {
   slug: string
   name: string

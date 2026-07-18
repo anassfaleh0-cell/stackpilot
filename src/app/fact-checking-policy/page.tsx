@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Fact-Checking Policy",
-  description: "StackPilot's fact-checking process ensures every review, comparison, and guide meets rigorous accuracy standards before publication.",
+  description: "PilotStack's fact-checking process ensures every review, comparison, and guide meets rigorous accuracy standards before publication.",
   path: "/fact-checking-policy",
 })
 
@@ -27,7 +27,7 @@ export default function FactCheckingPolicyPage() {
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">
-                Accuracy is the foundation of trust. StackPilot maintains a rigorous multi-stage fact-checking process for every piece of content we publish.
+                Accuracy is the foundation of trust. PilotStack maintains a rigorous multi-stage fact-checking process for every piece of content we publish.
               </p>
 
               <h2>Pre-Publication Fact-Checking</h2>
@@ -62,7 +62,7 @@ export default function FactCheckingPolicyPage() {
               <p>When errors are found, we correct them promptly and transparently. Our <a href="/corrections-policy">Corrections Policy</a> details our approach. We believe that transparent error correction is a core component of editorial integrity.</p>
               <p>Readers can report potential errors through our <a href="/contact">contact form</a>. We investigate every submission and respond within five business days.</p>
 
-              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about our fact-checking process, contact <strong>facts@stackpilot.ai</strong>.</p>
+              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about our fact-checking process, contact <strong>facts@pilotstack.online</strong>.</p>
             </div>
           </div>
         </Container>

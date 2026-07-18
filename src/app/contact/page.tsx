@@ -6,7 +6,7 @@ import { ContactForm } from "@/components/pages/contact-form"
 
 export const metadata = createMetadata({
   title: "Contact",
-  description: "Get in touch with the StackPilot team. Have a question about a review, want to suggest a tool for testing, or interested in partnering with us? We'd love to hear from you.",
+  description: "Get in touch with the PilotStack team. Have a question about a review, want to suggest a tool for testing, or interested in partnering with us? We'd love to hear from you.",
   path: "/contact",
 })
 

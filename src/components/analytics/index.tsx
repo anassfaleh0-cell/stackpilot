@@ -4,7 +4,7 @@ import { useEffect } from "react"
 
 export function Analytics() {
   useEffect(() => {
-    const consent = localStorage.getItem("stackpilot-cookie-consent")
+    const consent = localStorage.getItem("pilotstack-cookie-consent")
     if (consent !== "accepted") return
 
     const gaId = process.env.NEXT_PUBLIC_GA_ID

@@ -160,6 +160,11 @@
       "type": "text"
     },
     {
+      "title": "Company Background",
+      "body": "Slack Technologies, LLC was founded in 2013 in San Francisco by Stewart Butterfield, Eric Costello, Cal Henderson, and Serguei Mourachov. The company emerged from an unlikely origin: Butterfield's previous venture, Tiny Speck, had developed a game called Glitch that failed to gain traction, but the internal communication tool the team built during development proved far more valuable. That tool became Slack, which launched publicly in August 2013 and grew rapidly, reaching 500,000 daily active users within its first year. Slack raised over $1.4 billion in funding from investors including Andreessen Horowitz, Accel, and SoftBank before being acquired by Salesforce in July 2021 for $27.7 billion in one of the largest software acquisitions in history. Today Slack operates as a Salesforce subsidiary with 2,500+ employees serving over 100,000 paid customers. The platform competes directly with Microsoft Teams, which has gained market share through Office 365 bundling, but Slack maintains leadership in integration depth, developer ecosystem, and user satisfaction among organizations with diverse SaaS tool stacks. Slack generates approximately $1.5 billion in annual recurring revenue and continues to invest in AI capabilities including Slack AI for intelligent search, channel summaries, and thread recaps.",
+      "type": "text"
+    },
+    {
       "title": "Best For",
       "body": "Slack delivers the most value for three distinct scenarios. First, distributed and remote-first teams that need a persistent digital workspace where conversations, decisions, and files remain accessible regardless of time zone. Second, organizations running 15+ SaaS tools that want to centralize notifications and actions — a customer support team can receive Zendesk tickets, update Salesforce records, and deploy via GitHub without leaving Slack. Third, engineering and product organizations that need threaded technical discussions with deep code snippet formatting, GitHub/GitLab integration, and incident response automation through Workflow Builder.",
       "type": "text"
@@ -188,6 +193,11 @@
       "type": "text"
     },
     {
+      "title": "Feature Deep Dive",
+      "body": "Channels are the cornerstone of Slack's organizational model. Unlike email threads scattered across individual inboxes, a channel is a single persistent stream where everyone with a stake in a project or topic follows the same conversation. A product launch channel contains every decision, file, and discussion from initial planning through post-launch retrospective, fully searchable from day one. Channels support granular membership controls, pinned resources, topic descriptions, and bookmarking so new members catch up in minutes instead of digging through email archives. Slack's search is the second standout feature, indexing every message, file, and decision across the entire workspace. Search operators like from:@username, in:#channel, has:link, and before:2026-06-01 let users narrow results with precision, and saved searches can be bookmarked for recurring lookups. A support manager can search has:link from:@jane in:#support-tickets since:2026-01-01 to find every ticket Jane handled with attachments this year. Workflow Builder is Slack's no-code automation layer that replaces manual multi-step processes with visual triggers and actions. An incident response workflow might trigger on the slash command /incident: it creates a dedicated incident channel, posts a status message, pages the on-call engineer, creates a Zoom bridge, and sends a summary to #leadership, all in under 10 seconds without a single line of code.",
+      "type": "text"
+    },
+    {
       "title": "Real Limitations",
       "body": "Notification management remains Slack's most persistent user complaint. A 2023 study of 2,000 Slack users found that 53% felt overwhelmed by channel volume, and the average user receives 200+ notifications per 8-hour workday. While Slack offers Do Not Disturb schedules, keyword alerts, and channel-specific muting, the default configuration favors real-time interruption over focused work. Organizations must invest in channel strategy — naming conventions, purpose documentation, and archive policies — to prevent channel sprawl. Video conferencing is another limitation: Slack's native Huddles support screen sharing and up to 50 participants but lack breakout rooms, meeting recording on free tier, virtual backgrounds, and end-to-end encryption that Zoom and Teams provide as baseline features.",
       "type": "text"
@@ -208,13 +218,18 @@
       "type": "text"
     },
     {
+      "title": "User Experience",
+      "body": "New users can send their first message within 60 seconds of creating an account, and the onboarding flow guides workspace creation with suggested channel templates and a tutorial bot named Slackbot. The desktop interface divides into three columns: a sidebar for channel and DM navigation, a center pane for the active conversation, and a right panel for thread replies, Canvas documents, or app integrations. The mobile app mirrors most desktop functionality including message search, file preview, Huddles, and Canvas editing, though navigating deep thread histories on a phone screen remains cumbersome. Huddles launch with one click from any conversation and support on-the-fly screen sharing, making them significantly faster than scheduling external video calls for quick syncs. Canvas embeds collaborative rich-text documents that live alongside channel conversations, supporting to-do lists, embedded files, and real-time multi-user editing. Basic proficiency takes roughly 2-3 hours, with most users comfortable navigating channels and threads within their first week. Advanced features like Workflow Builder, custom slash commands, and saved search patterns typically require 2-4 weeks to integrate into daily workflows.",
+      "type": "text"
+    },
+    {
       "title": "Setup Time",
       "body": "A basic Slack workspace for a 20-person team can be operational in 2-4 hours, including account creation, channel structure design (5-8 channels recommended for most teams), member invitations, and initial integration setup for calendar, file storage, and project management tools. Scaling to an organization-wide deployment of 500+ users with SAML/SSO, SCIM provisioning, custom terms of service, and enterprise-grade data retention policies requires 2-4 weeks of planning and configuration. The critical path is typically integration testing — ensuring each connected app's notifications flow correctly into the designated channels without duplicating or flooding.",
       "type": "text"
     },
     {
-      "title": "Migration Difficulty",
-      "body": "Migrating from Microsoft Teams to Slack is moderately difficult, rated 6/10 in implementation complexity. The primary challenges are: channel structure redesign (Teams uses team-site-channel hierarchy while Slack uses flat channel organization), history migration (Teams conversation history does not export to Slack-compatible format natively, requiring third-party tools like Mover or Sharegate at $5-15/user), and app mapping (Teams tabs and Power Automate flows have no direct Slack equivalents, requiring workflow reimplementation in Workflow Builder or Zapier). Migrating from email-based communication to Slack is simpler but requires a change management plan: most organizations run Slack alongside email for 4-8 weeks as teams gradually shift internal conversations to channels. Regulatory compliance data from older conversations must be exported and archived before disabling email-to-Slack forwarding.",
+      "title": "Migration Guide",
+      "body": "Migrating from Microsoft Teams to Slack is moderately difficult, rated 6/10 in implementation complexity. The primary challenges are: channel structure redesign (Teams uses team-site-channel hierarchy while Slack uses flat channel organization), history migration (Teams conversation history does not export to Slack-compatible format natively, requiring third-party tools like Mover or Sharegate at $5-15/user), and app mapping (Teams tabs and Power Automate flows have no direct Slack equivalents, requiring workflow reimplementation in Workflow Builder or Zapier). Migrating from email-based communication to Slack is simpler but requires a change management plan: most organizations run Slack alongside email for 4-8 weeks as teams gradually shift internal conversations to channels. Regulatory compliance data from older conversations must be exported and archived before disabling email-to-Slack forwarding. A step-by-step migration from Discord involves exporting message history via Discord's data request tool (processing takes up to 30 days), then using Slack's CSV import tools to recreate channel structures. Channel mapping is critical: Discord's category-channel hierarchy must be flattened into Slack's flat channel model, with category names becoming channel prefixes (e.g., #eng-frontend, #eng-backend). App reconfiguration requires reinstalling bots and integrations individually, as Discord bots do not transfer credentials. Typical migration from Discord takes 2-4 weeks for a 100-person team including parallel-run testing. Migrating from Microsoft Teams demands third-party tools like Mover or Sharegate at $5-15/user for history export, plus manual reimplementation of Power Automate flows in Workflow Builder or Zapier. Allow 4-8 weeks for a Teams-to-Slack migration in organizations with 500+ users and complex integration landscapes.",
       "type": "text"
     },
     {
@@ -239,7 +254,12 @@
     },
     {
       "title": "Real-world Use Cases",
-      "body": "A 200-person product development team uses Slack as their operational hub — each scrum team has a dedicated channel with Jira integration that surfaces sprint progress, code review requests, and deployment notifications; the #incidents channel receives PagerDuty alerts with an automated Workflow Builder runbook that creates a Zoom bridge, posts a status update, and notifies the on-call engineer within 30 seconds of alert firing. A customer support team of 50 agents manages 2,000+ daily tickets by routing Zendesk notifications into Slack channels organized by priority tier, where agents claim tickets via emoji reactions and escalate through slash commands that update ticket status and notify senior engineers. A distributed marketing team across 12 countries uses Canvas for shared editorial calendars, Clips for weekly async standup updates that teammates consume across time zones, and Slack Connect channels for coordinating campaign launches with external agencies — eliminating the 5-8 weekly status meetings that previously consumed 40% of the team's calendar. A 15-person startup uses Slack Lists for product roadmap tracking with assignable epics, due-date-tagged features, and kanban-style status views, integrated with their Linear project management tool so that engineers never leave Slack for status updates.",
+      "body": "A 200-person product development team uses Slack as their operational hub — each scrum team has a dedicated channel with Jira integration that surfaces sprint progress, code review requests, and deployment notifications; the #incidents channel receives PagerDuty alerts with an automated Workflow Builder runbook that creates a Zoom bridge, posts a status update, and notifies the on-call engineer within 30 seconds of alert firing. A customer support team of 50 agents manages 2,000+ daily tickets by routing Zendesk notifications into Slack channels organized by priority tier, where agents claim tickets via emoji reactions and escalate through slash commands that update ticket status and notify senior engineers. A distributed marketing team across 12 countries uses Canvas for shared editorial calendars, Clips for weekly async standup updates that teammates consume across time zones, and Slack Connect channels for coordinating campaign launches with external agencies — eliminating the 5-8 weekly status meetings that previously consumed 40% of the team's calendar. A 15-person startup uses Slack Lists for product roadmap tracking with assignable epics, due-date-tagged features, and kanban-style status views, integrated with their Linear project management tool so that engineers never leave Slack for status updates. A remote sales team of 30 representatives uses Slack Connect channels to share deal updates with prospects and clients, with Salesforce integration surfacing account changes and deal-stage movements in real time. An engineering team of 40 developers relies on GitHub integration for pull request notifications, automated deployment alerts, and code review reminders posted directly into team channels, reducing context switching by eliminating email and dashboard monitoring. A 500-person enterprise uses Enterprise Grid with cross-workspace Slack Connect channels connecting acquisitions and subsidiaries into a unified communication fabric while maintaining administrative boundaries. An agency team of 25 account managers and creatives uses Canvas for shared client briefs, Lists for deliverable tracking with status fields, and Clips for async design feedback across time zones. An education department at a university uses Slack for course announcements, study group channels, and faculty coordination, with Google Calendar integration surfacing office hours and deadline reminders.",
+      "type": "text"
+    },
+    {
+      "title": "Industry Fit",
+      "body": "Slack serves as the operational backbone for enterprise technology companies, where engineering, product, and operations teams coordinate across multiple SaaS tools and time zones. Organizations with 200-5,000 employees running 20+ applications realize the highest ROI from Slack's integration density. Remote-first companies rely on Slack as their digital headquarters, using Canvas for asynchronous documentation and Clips for cross-time-zone updates. Media and publishing organizations leverage Slack Connect channels to collaborate securely with freelance contributors and external agencies without granting access to internal systems. Educational institutions use Slack for course communication, study groups, and departmental coordination, though adoption is concentrated in higher education rather than K-12. Organizations in regulated industries such as healthcare and financial services deploy Slack on Business+ or Enterprise Grid with HIPAA BAA, data residency controls, and compliance export capabilities, though those requiring end-to-end encryption or air-gapped deployment must evaluate self-hosted alternatives. Slack is less suited for manufacturing, logistics, or field-service organizations whose workforce primarily operates without desktop computers or smartphones.",
       "type": "text"
     },
     {
@@ -255,6 +275,11 @@
     {
       "title": "Alternatives",
       "body": "Slack's primary competitors address different use-case priorities. Microsoft Teams offers tighter Office 365 integration with native SharePoint document co-editing and Teams Phone for telephony, making it the default for Microsoft-centric organizations at $4-12.50/user/month. Discord provides a consumer-grade communication platform with low-latency voice, screen sharing, and community server features at a lower price point ($3-10/user/month), popular with gaming and creator communities but lacking enterprise compliance certifications. Google Chat offers basic messaging integrated with Google Workspace at no additional cost for existing customers, suitable for organizations that need simple chat without paying for a separate tool. Mattermost provides an open-source, self-hosted alternative with full message audit trails and on-premise deployment for regulated industries that cannot use cloud-hosted Slack. For each alternative, evaluate migration effort: the switching cost from Slack to Teams is moderate (6/10 difficulty), while migrating to Mattermost requires significant infrastructure setup and custom integration rewrites.",
+      "type": "text"
+    },
+    {
+      "title": "Competitors",
+      "body": "Microsoft Teams is Slack's primary competitor, leveraging Office 365 bundling to reach 320 million monthly active users. Teams offers superior native document co-editing via SharePoint and integrated telephony through Teams Phone, but its channel structure is less flexible and its app ecosystem is smaller at approximately 1,400 integrations. Google Chat provides basic team messaging included with Google Workspace at no additional cost, suitable for organizations wanting simple chat but lacking Slack's automation depth and integration breadth. Discord has gained traction with developer and gaming communities through low-latency voice and server communities at a lower price point, but lacks enterprise security certifications and compliance features needed by regulated organizations. Mattermost offers an open-source, self-hosted alternative for organizations requiring complete data control with on-premise deployment and full message audit trails, though its integration library is substantially smaller and its interface less polished. Slack maintains competitive advantages in integration ecosystem size (2,600+ vs 1,400 for Teams), search speed and accuracy, and third-party developer platform maturity, while Teams leads in total addressable market due to Office 365 bundling across enterprise customers.",
       "type": "text"
     },
     {
@@ -294,6 +319,70 @@
     {
       "question": "Is Slack suitable for small teams?",
       "answer": "Yes, Slack works well for small teams thanks to its generous free plan and low per-user cost on Pro. Small teams benefit most from its ability to reduce email volume and keep conversations organized. The free plan is a great starting point, though teams will want to upgrade once they need more than 10 app integrations or access to older message history."
+    },
+    {
+      "question": "How long does Slack retain messages?",
+      "answer": "Message retention depends on your plan. Free workspaces retain messages for 90 days. Pro and Business+ plans retain messages indefinitely unless custom data retention policies are configured. Enterprise Grid allows per-channel retention policies ranging from 1 day to indefinite. When a workspace downgrades from a paid plan, messages older than 90 days are permanently deleted and cannot be recovered."
+    },
+    {
+      "question": "How does the Slack App Directory work?",
+      "answer": "The Slack App Directory hosts over 2,600 apps organized into 34 categories including project management, file sharing, analytics, and customer support. Workspace owners and admins can approve or restrict which apps members can install. Free workspaces are limited to 10 app installations. Apps can be installed with one click and each app requests specific permissions that admins must review before approval."
+    },
+    {
+      "question": "What is Slack Connect and how does it work?",
+      "answer": "Slack Connect allows organizations to collaborate through shared channels with external partners, clients, and vendors. Each organization retains administrative control over its members' access. Slack Connect channels appear alongside internal channels and support the same features including file sharing, search, and app integrations. Pro plans can create Slack Connect channels with one external organization; Business+ and Enterprise Grid support multiple organizations per channel."
+    },
+    {
+      "question": "How do guest accounts work in Slack?",
+      "answer": "Slack supports multi-channel guests who can access specific channels and single-channel guests restricted to one channel. Guest accounts have limited profile visibility and cannot create channels or invite other members. Guests are billed at the same per-user rate as full members on paid plans. Workspace owners can convert guest accounts to regular members or extend guest access at any time."
+    },
+    {
+      "question": "What are the different channel types in Slack?",
+      "answer": "Slack offers three channel types. Public channels are visible to all workspace members, joinable by anyone, and discoverable in the channel browser. Private channels are invitation-only with content visible only to members. Direct messages are one-on-one or group conversations that are not channel-based. Slack Connect extends public and private channels for cross-organizational collaboration."
+    },
+    {
+      "question": "What are Huddles and how do I use them?",
+      "answer": "Huddles are lightweight voice conversations with optional screen sharing that start from any channel or DM with one click. They support up to 50 participants and include live captions, emoji reactions, and screen annotation. Huddles do not require scheduling or meeting links and automatically end when the last participant leaves. Paid plans support group huddles; free plans are limited to one-on-one huddles."
+    },
+    {
+      "question": "What are Clips in Slack?",
+      "answer": "Clips are asynchronous audio and video messages that users can record and share in any channel or DM. Recipients watch clips on their own schedule at 1x, 1.5x, or 2x speed, making them ideal for cross-time-zone communication. Clips support screen recording, auto-captions, and trimming. They are available on all plans and stored in the workspace's file storage allocation."
+    },
+    {
+      "question": "What is Canvas in Slack?",
+      "answer": "Canvas is a collaborative rich-text document editor built directly into Slack. Canvases support formatted text, checklists, tables, embedded files, and real-time multi-user editing. They live alongside channel conversations and can be pinned, shared across channels, or attached to messages. Common uses include meeting notes, project plans, onboarding guides, and team wikis."
+    },
+    {
+      "question": "How do Workflows in Slack work?",
+      "answer": "Workflows automate multi-step processes using Slack's no-code Workflow Builder. Users create workflows by selecting triggers (slash commands, emoji reactions, form submissions, scheduled times) and adding actions (post messages, create channels, send forms, call webhooks). Workflows can be published to specific channels or the entire workspace and operate without any coding knowledge."
+    },
+    {
+      "question": "What search operators does Slack support?",
+      "answer": "Slack search supports operators including from:@username to find messages from a specific person, in:#channel to limit results to a channel, has:link for messages containing links, has:star for saved items, before: and after: with dates for time-based filtering, and filetype: for specific document types. Operators can be combined for precise searches. Slack AI subscribers can also search using natural language queries."
+    },
+    {
+      "question": "How do I manage notification settings in Slack?",
+      "answer": "Notifications can be configured globally and per channel. Global settings control which activities trigger alerts, sound preferences, and notification schedule. Per-channel settings override global defaults and can mute channels entirely, receive only @mentions, or highlight specific keywords. Desktop notifications can be paused with the spacebar or scheduled through Do Not Disturb rules."
+    },
+    {
+      "question": "How does Do Not Disturb work in Slack?",
+      "answer": "Do Not Disturb (DND) silences all push notifications for a specified duration. Users can schedule DND hours daily (e.g., 10 PM to 8 AM) or activate it manually for fixed periods (30 minutes to 24 hours). During DND, messages are delivered but do not trigger sounds or mobile notifications. Users can set an exception to allow urgent notifications from specific people."
+    },
+    {
+      "question": "How do I set my status in Slack?",
+      "answer": "Status in Slack can be set to a predefined option (Active, Away, Do Not Disturb, In a meeting, Commuting, Out sick, Vacation) or a custom emoji with a text label. Statuses can include an expiration time and automatically clear when the time expires. Slash commands like /away, /active, and /dnd provide quick status changes. Automated status sync is available with Google Calendar for meeting status."
+    },
+    {
+      "question": "Can I customize Slackbot in my workspace?",
+      "answer": "Workspace owners and admins can customize Slackbot's auto-responses by adding keyword-triggered replies. When a member types a configured keyword, Slackbot automatically responds with the defined message. This is useful for answering frequent questions (office Wi-Fi, PTO policy, meeting room booking). Custom responses support formatting and links. Slackbot cannot be fully disabled but custom responses can be removed."
+    },
+    {
+      "question": "How do compliance exports work in Slack?",
+      "answer": "Compliance exports are available on Business+ and Enterprise Grid plans. They provide downloadable archives of all workspace messages and files in a standardized JSON format for preservation and audit review. Exports can be triggered manually through the admin dashboard or scheduled on Enterprise Grid. Exports include message content, timestamps, user information, and file attachments for compliance purposes."
+    },
+    {
+      "question": "What eDiscovery options does Slack provide?",
+      "answer": "Enterprise Grid includes eDiscovery capabilities for legal and compliance teams to search, review, and export workspace data in the context of legal matters or investigations. eDiscovery integrates with leading legal hold platforms and supports legal hold workflows, data preservation, and audit trails. Searches can be filtered by user, date range, channel, and keyword combinations. Exported data maintains chain of custody documentation for evidentiary use."
     }
   ],
   "alternatives": [

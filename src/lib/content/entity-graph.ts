@@ -1,10 +1,10 @@
-import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms } from "./registry"
+import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms, getAllAlternatives, getAllUseCases, getAllIndustries, getAllResearch, getAllStatistics, getAllBest, getAllHubs } from "./registry"
 import type { EntityRelationship } from "@/types/content"
 
 export interface EntityNode {
   slug: string
   name: string
-  type: "software" | "comparison" | "guide" | "blog" | "glossary" | "category"
+  type: "software" | "comparison" | "guide" | "blog" | "glossary" | "category" | "alternative" | "use-case" | "industry" | "research" | "statistic" | "best" | "hub"
   category: string
   relationships: EntityRelationship[]
 }
@@ -43,6 +43,13 @@ function buildGraph(): EntityGraph {
   const guides = getAllGuides()
   const posts = getAllBlogPosts()
   const glossary = getAllGlossaryTerms()
+  const alternatives = getAllAlternatives()
+  const useCases = getAllUseCases()
+  const industries = getAllIndustries()
+  const research = getAllResearch()
+  const statistics = getAllStatistics()
+  const best = getAllBest()
+  const hubs = getAllHubs()
 
   for (const r of reviews) {
     const rels: EntityRelationship[] = []
@@ -110,6 +117,102 @@ function buildGraph(): EntityGraph {
     add(g.slug, g.term, "glossary", g.category)
   }
 
+  for (const a of alternatives) {
+    const rels: EntityRelationship[] = [
+      { targetSlug: a.toolSlug, targetType: "software", relation: "provides-alternatives" },
+      ...a.alternatives.map((alt) => ({ targetSlug: alt.slug, targetType: "software" as const, relation: "alternative" as const })),
+    ]
+    if (a.relatedComparisons) {
+      for (const c of a.relatedComparisons) rels.push({ targetSlug: c, targetType: "comparison", relation: "has-comparison" })
+    }
+    if (a.relatedGuides) {
+      for (const g of a.relatedGuides) rels.push({ targetSlug: g, targetType: "guide", relation: "has-guide" })
+    }
+    if (a.relatedPosts) {
+      for (const p of a.relatedPosts) rels.push({ targetSlug: p, targetType: "blog", relation: "has-blog" })
+    }
+    add(a.slug, a.title, "alternative", a.category, rels)
+  }
+
+  for (const u of useCases) {
+    const rels: EntityRelationship[] = u.recommendations.map((rec) => ({ targetSlug: rec.toolSlug, targetType: "software", relation: "recommends" }))
+    if (u.relatedComparisons) {
+      for (const c of u.relatedComparisons) rels.push({ targetSlug: c, targetType: "comparison", relation: "has-comparison" })
+    }
+    if (u.relatedGuides) {
+      for (const g of u.relatedGuides) rels.push({ targetSlug: g, targetType: "guide", relation: "has-guide" })
+    }
+    add(u.slug, u.title, "use-case", u.category, rels)
+  }
+
+  for (const ind of industries) {
+    const rels: EntityRelationship[] = ind.recommendations.map((rec) => ({ targetSlug: rec.toolSlug, targetType: "software", relation: "recommends" }))
+    if (ind.relatedComparisons) {
+      for (const c of ind.relatedComparisons) rels.push({ targetSlug: c, targetType: "comparison", relation: "has-comparison" })
+    }
+    if (ind.relatedGuides) {
+      for (const g of ind.relatedGuides) rels.push({ targetSlug: g, targetType: "guide", relation: "has-guide" })
+    }
+    add(ind.slug, ind.title, "industry", ind.industry, rels)
+  }
+
+  for (const r of research) {
+    const rels: EntityRelationship[] = []
+    if (r.relatedComparisons) {
+      for (const c of r.relatedComparisons) rels.push({ targetSlug: c, targetType: "comparison", relation: "has-comparison" })
+    }
+    if (r.relatedGuides) {
+      for (const g of r.relatedGuides) rels.push({ targetSlug: g, targetType: "guide", relation: "has-guide" })
+    }
+    if (r.relatedPosts) {
+      for (const p of r.relatedPosts) rels.push({ targetSlug: p, targetType: "blog", relation: "has-blog" })
+    }
+    add(r.slug, r.title, "research", r.category, rels)
+  }
+
+  for (const s of statistics) {
+    const rels: EntityRelationship[] = []
+    if (s.relatedComparisons) {
+      for (const c of s.relatedComparisons) rels.push({ targetSlug: c, targetType: "comparison", relation: "has-comparison" })
+    }
+    if (s.relatedGuides) {
+      for (const g of s.relatedGuides) rels.push({ targetSlug: g, targetType: "guide", relation: "has-guide" })
+    }
+    add(s.slug, s.title, "statistic", s.category, rels)
+  }
+
+  for (const b of best) {
+    const rels: EntityRelationship[] = [
+      ...b.picks.map((p) => ({ targetSlug: p.toolSlug, targetType: "software" as const, relation: "recommends" as const })),
+    ]
+    if (b.relatedComparisons) {
+      for (const c of b.relatedComparisons) rels.push({ targetSlug: c, targetType: "comparison", relation: "has-comparison" })
+    }
+    if (b.relatedGuides) {
+      for (const g of b.relatedGuides) rels.push({ targetSlug: g, targetType: "guide", relation: "has-guide" })
+    }
+    if (b.relatedPosts) {
+      for (const p of b.relatedPosts) rels.push({ targetSlug: p, targetType: "blog", relation: "has-blog" })
+    }
+    add(b.slug, b.title, "best", b.category, rels)
+  }
+
+  for (const h of hubs) {
+    const rels: EntityRelationship[] = [
+      ...h.recommendations.map((r) => ({ targetSlug: r.toolSlug, targetType: "software" as const, relation: "recommends" as const })),
+    ]
+    if (h.relatedComparisons) {
+      for (const c of h.relatedComparisons) rels.push({ targetSlug: c, targetType: "comparison", relation: "has-comparison" })
+    }
+    if (h.relatedGuides) {
+      for (const g of h.relatedGuides) rels.push({ targetSlug: g, targetType: "guide", relation: "has-guide" })
+    }
+    if (h.relatedPosts) {
+      for (const p of h.relatedPosts) rels.push({ targetSlug: p, targetType: "blog", relation: "has-blog" })
+    }
+    add(h.slug, h.title, "hub", h.audience, rels)
+  }
+
   return {
     nodes,
     getNode(slug: string, type: string) {
@@ -139,9 +242,9 @@ function buildGraph(): EntityGraph {
     getBuyerJourneyPath(category: string) {
       const catNodes = this.getCategoryGraph(category)
       const stages: { stage: string; content: EntityNode[] }[] = [
-        { stage: "awareness", content: catNodes.filter((n) => n.type === "blog" || n.type === "glossary") },
-        { stage: "consideration", content: catNodes.filter((n) => n.type === "guide") },
-        { stage: "evaluation", content: catNodes.filter((n) => n.type === "comparison") },
+        { stage: "awareness", content: catNodes.filter((n) => n.type === "blog" || n.type === "glossary" || n.type === "research" || n.type === "statistic" || n.type === "hub") },
+        { stage: "consideration", content: catNodes.filter((n) => n.type === "guide" || n.type === "use-case" || n.type === "industry" || n.type === "best") },
+        { stage: "evaluation", content: catNodes.filter((n) => n.type === "comparison" || n.type === "alternative") },
         { stage: "decision", content: catNodes.filter((n) => n.type === "software") },
       ]
       return stages.filter((s) => s.content.length > 0)

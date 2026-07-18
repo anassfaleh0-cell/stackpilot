@@ -10,10 +10,10 @@ import { ArrowRight, Star, BookOpen, Calendar } from "lucide-react"
 import { getAllReviews, getAllGuides, getAllBlogPosts } from "@/lib/content/registry"
 
 const authors = {
-  "stackpilot-team": {
-    name: "StackPilot Team",
+  "pilotstack-team": {
+    name: "PilotStack Team",
     role: "Editorial Team",
-    bio: "The StackPilot editorial team brings together experienced software analysts, product managers, and technical writers with over 50 years of combined experience evaluating B2B software across CRM, project management, analytics, developer tools, HR, and marketing categories.",
+    bio: "The PilotStack editorial team brings together experienced software analysts, product managers, and technical writers with over 50 years of combined experience evaluating B2B software across CRM, project management, analytics, developer tools, HR, and marketing categories.",
     avatar: "/logo-icon.svg",
     expertise: ["Software Reviews", "Market Research", "Software Comparison"],
     credentials: ["50+ years combined experience", "Hands-on testing of 100+ tools"],
@@ -45,7 +45,7 @@ const authors = {
   "priya-sharma": {
     name: "Priya Sharma",
     role: "Editorial Director",
-    bio: "Priya oversees editorial quality, fact-checking, and content standards at StackPilot. She ensures every review meets our rigorous methodology and editorial policy before publication. She has 12+ years of experience in B2B content and software journalism.",
+    bio: "Priya oversees editorial quality, fact-checking, and content standards at PilotStack. She ensures every review meets our rigorous methodology and editorial policy before publication. She has 12+ years of experience in B2B content and software journalism.",
     avatar: "/logo-icon.svg",
     expertise: ["Editorial Standards", "Content Strategy", "Quality Assurance"],
     credentials: ["12+ years in B2B content", "Former Editor at tech publications"],
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!author) return {}
   return createMetadata({
     title: `${author.name} - ${author.role}`,
-    description: `${author.name} is ${author.role} at StackPilot. ${author.bio.slice(0, 150)}`,
+    description: `${author.name} is ${author.role} at PilotStack. ${author.bio.slice(0, 150)}`,
     path: `/authors/${slug}`,
   })
 }

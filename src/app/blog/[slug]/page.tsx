@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, BlogPostingSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, BlogPostingSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getBlogPost, getContentTitle } from "@/lib/content/registry"
@@ -9,8 +9,8 @@ import { formatDate } from "@/lib/utils"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { getAllReviews } from "@/lib/content/registry"
-import { EditorialHero, EditorialCallout, GlassCard, InfoCard } from "@/components/editorial"
-import { RelatedContent } from "@/components/content/related-content"
+import { EditorialHero, EditorialCallout, GlassCard, InfoCard } from "@/components/dynamic"
+import { RelatedContent } from "@/components/dynamic-client"
 import { BrandDivider } from "@/components/brand/patterns"
 import { Clock, User, Calendar, Star } from "lucide-react"
 
@@ -43,6 +43,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Blog", href: "/blog" }, { name: post.title, href: `/blog/${slug}` }]} />
       <BlogPostingSchema title={post.title} description={post.description} publishedAt={post.publishedAt} updatedAt={post.updatedAt} author={post.author} url={`${site.url}/blog/${post.slug}`} />
+      <WebPageSchema name={post.title} description={post.description} url={`${site.url}/blog/${slug}`} mainEntity={{ "@type": "Thing", name: post.tags[0] || post.category, description: post.description }} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Blog", href: "/blog" }, { name: post.title }]} />
       </Container>
@@ -181,7 +182,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <div>
                   <div className="font-semibold text-sm mb-1">Written by {post.author}</div>
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    {post.author} is a software expert at StackPilot, specializing in {post.category.toLowerCase()} tools and technology evaluation.
+                    {post.author} is a software expert at PilotStack, specializing in {post.category.toLowerCase()} tools and technology evaluation.
                   </p>
                   <p className="text-xs text-muted-foreground mt-2">
                     Published <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>

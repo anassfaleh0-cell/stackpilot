@@ -7,12 +7,11 @@ import { createMetadata } from "@/lib/metadata"
 import { getReview, getContentTitle } from "@/lib/content/registry"
 import { getAllReviews } from "@/lib/content/registry"
 import { getEntity } from "@/lib/entities/data"
-import { EntityOverview, SecurityTable, CapabilitiesGrid, UseCasePanel, IntegrationDisplay, PricingTable, AutoComparison, SemanticLinks } from "@/components/entity"
+import { EntityOverview, CapabilitiesGrid, UseCasePanel, IntegrationDisplay, PricingTable, AutoComparison, SemanticLinks, EditorialHero, EditorialProsCons, EditorialFeatureMatrix, EditorialRatingVisual, EditorialPricing, EditorialSectionIllustration, EditorialExpert, GlassCard, InfoCard } from "@/components/dynamic"
+import { EditorialPricingLadder, EditorialWorkflow, EditorialFeatureRadar, EditorialImplementationFlow, SecurityTable, RelatedContent } from "@/components/dynamic-client"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
-import { EditorialHero, EditorialProsCons, EditorialFeatureMatrix, EditorialRatingVisual, EditorialPricing, EditorialPricingLadder, EditorialWorkflow, EditorialFeatureRadar, EditorialImplementationFlow, EditorialSectionIllustration, EditorialExpert, GlassCard, InfoCard } from "@/components/editorial"
-import { RelatedContent } from "@/components/content/related-content"
 import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
 
 export function generateStaticParams() {
@@ -495,7 +494,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
           <section className="mt-16 mb-8">
             <h2 className="text-lg font-bold tracking-tight mb-3">Sources &amp; Methodology</h2>
             <div className="text-xs text-muted-foreground leading-relaxed space-y-1.5">
-              <p>This review is based on hands-on testing by the StackPilot team using {tool.name} for at least two weeks in realistic workflows. Ratings reflect our standardized five-dimension rubric. User review counts aggregate data from G2, Capterra, and TrustRadius. Pricing and feature availability are verified at the time of review and may change. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for details on our testing process, scoring rubric, and editorial independence policy.</p>
+              <p>This review is based on hands-on testing by the PilotStack team using {tool.name} for at least two weeks in realistic workflows. Ratings reflect our standardized five-dimension rubric. User review counts aggregate data from G2, Capterra, and TrustRadius. Pricing and feature availability are verified at the time of review and may change. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for details on our testing process, scoring rubric, and editorial independence policy.</p>
               <p>Last reviewed: {tool.lastReviewed} · No vendor payment or sponsorship influenced this review · We may earn affiliate commission on purchases made through links on this site.</p>
             </div>
           </section>

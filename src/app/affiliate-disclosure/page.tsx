@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Affiliate Disclosure",
-  description: "StackPilot's affiliate disclosure explains how we earn commissions through affiliate links while maintaining editorial independence and unbiased reviews.",
+  description: "PilotStack's affiliate disclosure explains how we earn commissions through affiliate links while maintaining editorial independence and unbiased reviews.",
   path: "/affiliate-disclosure",
 })
 
@@ -27,11 +27,11 @@ export default function AffiliateDisclosurePage() {
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">
-                StackPilot participates in affiliate marketing programs. This disclosure explains how affiliate relationships work and how we maintain editorial independence.
+                PilotStack participates in affiliate marketing programs. This disclosure explains how affiliate relationships work and how we maintain editorial independence.
               </p>
 
               <h2>How Affiliate Links Work</h2>
-              <p>When you click on an affiliate link on StackPilot and make a purchase, we may earn a commission at no additional cost to you. These commissions help us maintain and improve our content, pay our team of researchers and writers, and keep our reviews free for all readers.</p>
+              <p>When you click on an affiliate link on PilotStack and make a purchase, we may earn a commission at no additional cost to you. These commissions help us maintain and improve our content, pay our team of researchers and writers, and keep our reviews free for all readers.</p>
 
               <h2>Our Commitment to Independence</h2>
               <p>Affiliate relationships never influence our editorial content:</p>
@@ -51,10 +51,10 @@ export default function AffiliateDisclosurePage() {
                 <li>Links to vendor websites in guides and blog posts</li>
                 <li>Product links in our newsletter (where clearly marked)</li>
               </ul>
-              <p>Not all outbound links on StackPilot are affiliate links. Links to documentation, educational resources, and non-commercial sources are not monetized.</p>
+              <p>Not all outbound links on PilotStack are affiliate links. Links to documentation, educational resources, and non-commercial sources are not monetized.</p>
 
               <h2>Affiliate Programs</h2>
-              <p>StackPilot participates in affiliate programs including, but not limited to:</p>
+                <p>PilotStack participates in affiliate programs including, but not limited to:</p>
               <ul>
                 <li>Vendor-specific affiliate programs (HubSpot, Salesforce, Asana, and others we review)</li>
                 <li>Aggregator affiliate networks</li>
@@ -66,7 +66,7 @@ export default function AffiliateDisclosurePage() {
               <p>Using our affiliate links does not affect the price you pay for any product or service. The commission is paid by the vendor from their marketing budget, not from any customer premium.</p>
 
               <h2>Questions</h2>
-              <p>If you have questions about our affiliate relationships or how they operate, contact us at <strong>disclosures@stackpilot.ai</strong>.</p>
+              <p>If you have questions about our affiliate relationships or how they operate, contact us at <strong>disclosures@pilotstack.online</strong>.</p>
             </div>
           </div>
         </Container>

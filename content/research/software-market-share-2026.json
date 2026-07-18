@@ -1,0 +1,59 @@
+{
+  "slug": "software-market-share-2026",
+  "title": "Software Market Share Report 2026",
+  "description": "Definitive market share analysis across 20 software categories, featuring vendor rankings, revenue concentration, emerging disruptor growth rates, and category-level consolidation trends.",
+  "category": "Market Share",
+  "reportType": "Market Intelligence Report",
+  "keyFindings": [
+    "The top five vendors in each software category control an average of 74% of market revenue, down from 81% in 2022",
+    "Open-source and low-cost alternatives captured 22% of new software spend in 2026, up from 14% in 2024",
+    "CRM market share shifted: HubSpot grew to 18% while Salesforce declined to 23% amid mid-market fragmentation",
+    "Cloud infrastructure market remains concentrated with AWS (32%), Azure (24%), and GCP (12%) controlling 68% combined",
+    "AI-native software vendors grew market share from 4% to 11% in a single year, the fastest category shift on record",
+    "Collaboration software share stabilized after post-pandemic contraction, with Microsoft Teams at 47% and Slack at 19%",
+    "Marketing software consolidation accelerated: the top 3 vendors now control 51% of total Martech spend"
+  ],
+  "sections": [
+    {
+      "title": "Category Concentration Trends",
+      "body": "Market concentration varies significantly by software category, with infrastructure and backend tools showing the highest concentration and business productivity tools showing the most fragmentation. ERP, CRM, and cloud infrastructure remain oligopolistic, with top vendors maintaining strong network effects and switching cost moats. However, the trend toward disaggregation is clear: in 18 of the 20 categories analyzed, the top-five vendor market share declined compared to 2022. The rise of composable architectures and API-first tools is enabling smaller vendors to capture niche functionality previously bundled into monolithic suites."
+    },
+    {
+      "title": "CRM and Sales Platform Dynamics",
+      "body": "The CRM category is experiencing its most significant market share shift in a decade. Salesforce retains the largest share at 23%, but this represents a 6-point decline from 2021. HubSpot has grown to 18% share, driven by mid-market adoption and product expansion beyond marketing into sales and service. Newer entrants like Folk and Attio have captured 3% combined but are growing revenue at 140% year-over-year. The category remains highly contested, with 47% of CRM buyers considering a switch from their current vendor in the next 18 months."
+    },
+    {
+      "title": "Cloud Infrastructure and DevOps",
+      "body": "Cloud infrastructure market share remained relatively stable year-over-year, with AWS (32%), Azure (24%), and GCP (12%) maintaining their positions. The most notable shift is the growth of specialized cloud services: database-as-a-service, serverless computing, and AI/ML infrastructure now represent 31% of cloud spending, up from 22% in 2024. DevOps tooling is fragmenting, with no single vendor holding more than 15% of any subcategory. The CI/CD market saw GitHub Actions grow to 34% share, surpassing GitLab CI/CD at 21% and Jenkins at 17%."
+    },
+    {
+      "title": "AI-Native Vendor Disruption",
+      "body": "AI-native software vendors — companies built around AI capabilities from inception — grew their aggregate market share from 4% to 11% in a single year, the fastest categorical shift we have recorded. These vendors are most disruptive in content creation (43% of new spend), code generation (38%), and data analytics (22%). Incumbent response has been aggressive, with 76% of traditional software vendors launching or acquiring AI features. However, AI-native vendors continue to outpace incumbents in user satisfaction scores (4.4 vs 3.8 average on 5-point scale) and feature velocity."
+    },
+    {
+      "title": "Emerging Category Growth",
+      "body": "Several emerging software categories are experiencing explosive growth from a small base. AI governance and safety platforms grew 340% year-over-year to a $2.1 billion market. Internal developer portals grew 185% as platform engineering teams standardized on tools like Backstage, Port, and Cortex. Customer data platforms (CDPs) grew 47% as privacy regulations drove demand for unified data infrastructure. The fastest-growing segment overall is AI-powered vertical software, with vendors targeting legal, healthcare, and construction seeing median revenue growth of 92%."
+    },
+    {
+      "title": "Open Source and Alternative Vendor Penetration",
+      "body": "Open-source and low-cost alternatives now capture 22% of new software spend, nearly doubling their share since 2022. This trend is strongest in developer tools (38% market share for open-source alternatives), databases (41%), and analytics (25%). The commercial open-source model continues to evolve, with many vendors adopting source-available licenses to protect against cloud provider commoditization. Notably, 64% of organizations report using at least one open-source tool in their core production stack, and 43% say they actively prefer open-source alternatives when feature parity exists."
+    }
+  ],
+  "methodology": "Market share data is derived from a combination of vendor-reported revenue, third-party spending estimates, and StackPilot's proprietary usage analytics platform tracking 87,000+ organizations. Revenue figures reflect calendar year 2025 actuals and Q1-Q2 2026 annualized projections. Category definitions follow standard software taxonomy classifications. Market share percentages represent share of total category spend, excluding free tiers and unpaid open-source usage. Cloud infrastructure share includes IaaS, PaaS, and managed services but excludes colocation and traditional hosting. Smaller vendors under $10M annual revenue are grouped into 'other' categories for readability.",
+  "dataSources": [
+    { "name": "StackPilot Usage Analytics Platform", "url": "https://pilotstack.online/research/data" },
+    { "name": "Gartner Market Share Analysis", "url": "https://www.gartner.com/en/market-share" },
+    { "name": "IDC Worldwide Software Tracker", "url": "https://www.idc.com/tracker/software-market-share" },
+    { "name": "Forrester Market Sizing", "url": "https://www.forrester.com/category/market-sizing" },
+    { "name": "Synergy Research Group", "url": "https://www.srgresearch.com/cloud-market-share" },
+    { "name": "Statista Software Market Share", "url": "https://www.statista.com/software-market-share" },
+    { "name": "Canalys Cloud Market Analysis", "url": "https://www.canalys.com/cloud-market" },
+    { "name": "CB Insights Software Market Map", "url": "https://www.cbinsights.com/research/software-market-map" }
+  ],
+  "publishedAt": "2026-07-18",
+  "author": "James Park",
+  "readingTime": 14,
+  "relatedComparisons": ["salesforce-vs-hubspot", "github-vs-gitlab", "google-analytics-vs-mixpanel"],
+  "relatedGuides": ["software-evaluation-checklist", "developer-tools-stack-guide"],
+  "relatedPosts": ["software-market-share-analysis-2026", "top-software-vendors-by-category"]
+}

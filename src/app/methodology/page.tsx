@@ -8,7 +8,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Review Methodology",
-  description: "How we test, score, and rank every tool on StackPilot. Our transparent, hands-on, two-week review process with standardized rubrics ensures every review is thorough, unbiased, and trustworthy.",
+  description: "How we test, score, and rank every tool on PilotStack. Our transparent, hands-on, two-week review process with standardized rubrics ensures every review is thorough, unbiased, and trustworthy.",
   path: "/methodology",
   ogType: "article",
 })
@@ -48,7 +48,7 @@ export default function MethodologyPage() {
   const currentYear = new Date().getFullYear()
   return (
     <>
-      <ArticleSchema title="Review Methodology" description="How we test, score, and rank every tool on StackPilot — a transparent, two-week review process with standardized rubrics." publishedAt="2026-01-15" author="StackPilot Team" url={`${site.url}/methodology`} />
+      <ArticleSchema title="Review Methodology" description="How we test, score, and rank every tool on PilotStack — a transparent, two-week review process with standardized rubrics." publishedAt="2026-01-15" author="PilotStack Team" url={`${site.url}/methodology`} />
       <BreadcrumbSchema items={[
         { name: "Home", href: "/" },
         { name: "Review Methodology", href: "/methodology" },
@@ -62,7 +62,7 @@ export default function MethodologyPage() {
             <Badge variant="default" className="mb-4">Our Process</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">How We Review Software</h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Transparency matters. Here is exactly how we test, score, and rank every tool on StackPilot.
+              Transparency matters. Here is exactly how we test, score, and rank every tool on PilotStack.
             </p>
 
             <div className="prose prose-slate max-w-none mb-12">
@@ -132,7 +132,7 @@ export default function MethodologyPage() {
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Editorial Independence</h2>
               <p className="text-muted-foreground mb-4">
-                StackPilot operates independently. We never accept payment for reviews or rankings, and no vendor
+                PilotStack operates independently. We never accept payment for reviews or rankings, and no vendor
                 can influence our scores, ratings, or editorial decisions. We clearly disclose any affiliate
                 relationships, sponsored content, or partnerships. Sponsored content is never included in our
                 comparison reviews or treated as editorial content. We do not accept review copies, free trials,
@@ -140,7 +140,7 @@ export default function MethodologyPage() {
                 any paying customer.
               </p>
               <p className="text-muted-foreground mb-4">
-                StackPilot may earn referral fees when readers click affiliate links and make purchases. These
+                PilotStack may earn referral fees when readers click affiliate links and make purchases. These
                 fees do not influence our reviews, rankings, or editorial content. Our affiliate relationships
                 are disclosed in individual reviews and on our <a href="/about" className="text-primary hover:underline">about page</a>.
               </p>

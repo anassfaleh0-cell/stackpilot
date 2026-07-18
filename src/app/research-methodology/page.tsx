@@ -8,7 +8,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Research Methodology",
-  description: "How StackPilot conducts software market research. Our data-driven approach to pricing analysis, market trends, industry benchmarks, and original research reports.",
+  description: "How PilotStack conducts software market research. Our data-driven approach to pricing analysis, market trends, industry benchmarks, and original research reports.",
   path: "/research-methodology",
 })
 
@@ -28,7 +28,7 @@ export default function ResearchMethodologyPage() {
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">
-                Beyond individual product reviews, StackPilot produces original research reports, market analyses, pricing benchmarks, and industry trend reports. This page documents how we conduct this research.
+                Beyond individual product reviews, PilotStack produces original research reports, market analyses, pricing benchmarks, and industry trend reports. This page documents how we conduct this research.
               </p>
 
               <h2>Data Collection</h2>
@@ -83,7 +83,7 @@ export default function ResearchMethodologyPage() {
                 <li>Our research focuses primarily on English-language tools and North American/European markets</li>
               </ul>
 
-              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about our research methodology, contact us at <strong>research@stackpilot.ai</strong>.</p>
+              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about our research methodology, contact us at <strong>research@pilotstack.online</strong>.</p>
             </div>
           </div>
         </Container>

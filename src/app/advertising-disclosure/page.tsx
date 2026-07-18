@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Advertising Disclosure",
-  description: "StackPilot's advertising disclosure explains our approach to sponsored content, native advertising, and the distinction between editorial and promotional content.",
+  description: "PilotStack's advertising disclosure explains our approach to sponsored content, native advertising, and the distinction between editorial and promotional content.",
   path: "/advertising-disclosure",
 })
 
@@ -27,11 +27,11 @@ export default function AdvertisingDisclosurePage() {
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">
-                StackPilot believes in clear separation between editorial content and advertising. This disclosure explains our advertising practices.
+                PilotStack believes in clear separation between editorial content and advertising. This disclosure explains our advertising practices.
               </p>
 
               <h2>Types of Advertising</h2>
-              <p>StackPilot may display the following types of advertising:</p>
+              <p>PilotStack may display the following types of advertising:</p>
               <ul>
                 <li><strong>Display advertising:</strong> Banner advertisements placed in designated ad slots. These are clearly marked as advertisements and are not related to editorial content.</li>
                 <li><strong>Sponsored content:</strong> Content produced in partnership with a sponsor. Sponsored content is clearly labeled as "Sponsored" or "Promoted" at the top of the page and is never included in our comparison reviews, rankings, or editorial content sections.</li>
@@ -48,7 +48,7 @@ export default function AdvertisingDisclosurePage() {
               </ul>
 
               <h2>Sponsored Content Standards</h2>
-              <p>Sponsored content on StackPilot must meet the following standards:</p>
+              <p>Sponsored content on PilotStack must meet the following standards:</p>
               <ul>
                 <li>Clearly labeled as "Sponsored" or "Promoted" at the top of the page</li>
                 <li>Produced or reviewed by our editorial team to ensure accuracy</li>
@@ -60,10 +60,10 @@ export default function AdvertisingDisclosurePage() {
               <p>We do not currently use native advertising that mimics the appearance of editorial content. If we introduce native advertising in the future, it will be clearly labeled and distinguishable from editorial content.</p>
 
               <h2>Adherence to Standards</h2>
-              <p>StackPilot adheres to the Federal Trade Commission (FTC) guidelines on endorsements and advertising, as well as industry standards set by the Interactive Advertising Bureau (IAB).</p>
+              <p>PilotStack adheres to the Federal Trade Commission (FTC) guidelines on endorsements and advertising, as well as industry standards set by the Interactive Advertising Bureau (IAB).</p>
 
               <h2>Questions</h2>
-              <p>For questions about our advertising practices, contact us at <strong>ads@stackpilot.ai</strong>.</p>
+              <p>For questions about our advertising practices, contact us at <strong>ads@pilotstack.online</strong>.</p>
             </div>
           </div>
         </Container>

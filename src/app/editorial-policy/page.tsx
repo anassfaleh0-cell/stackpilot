@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Editorial Policy",
-  description: "StackPilot's editorial policy governs how we produce, review, and maintain all content. Our commitment to accuracy, independence, and transparency in software research.",
+  description: "PilotStack's editorial policy governs how we produce, review, and maintain all content. Our commitment to accuracy, independence, and transparency in software research.",
   path: "/editorial-policy",
 })
 
@@ -27,15 +27,15 @@ export default function EditorialPolicyPage() {
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">
-                StackPilot is committed to producing the highest quality software research. This editorial policy defines the standards, practices, and principles that govern everything we publish.
+                PilotStack is committed to producing the highest quality software research. This editorial policy defines the standards, practices, and principles that govern everything we publish.
               </p>
 
               <h2>1. Editorial Independence</h2>
-              <p>StackPilot operates with complete editorial independence. No vendor, advertiser, sponsor, or affiliate partner can influence our editorial content, ratings, rankings, or recommendations. Our editorial team makes all content decisions based solely on our assessment of what serves our readers' interests.</p>
+              <p>PilotStack operates with complete editorial independence. No vendor, advertiser, sponsor, or affiliate partner can influence our editorial content, ratings, rankings, or recommendations. Our editorial team makes all content decisions based solely on our assessment of what serves our readers' interests.</p>
               <p>We maintain a strict separation between editorial and commercial operations. The editorial team is not informed about which companies are affiliate partners or advertisers when creating content. Revenue considerations never factor into coverage decisions, rating determinations, or the inclusion or exclusion of products from reviews and comparisons.</p>
 
               <h2>2. Content Standards</h2>
-              <p>Every piece of content published on StackPilot must meet the following standards:</p>
+              <p>Every piece of content published on PilotStack must meet the following standards:</p>
               <ul>
                 <li><strong>Accuracy:</strong> All factual claims, statistics, pricing data, and feature descriptions must be verified against primary sources before publication. When accuracy cannot be confirmed, we clearly state the limitation.</li>
                 <li><strong>Originality:</strong> Our reviews are based on hands-on testing by our team. We do not republish vendor-provided content or use AI-generated content without significant human editorial oversight, fact-checking, and original analysis.</li>
@@ -45,7 +45,7 @@ export default function EditorialPolicyPage() {
               </ul>
 
               <h2>3. Review Standards</h2>
-              <p>All software reviews on StackPilot follow a standardized methodology that includes:</p>
+              <p>All software reviews on PilotStack follow a standardized methodology that includes:</p>
               <ul>
                 <li>Hands-on testing by at least two team members for a minimum of two weeks</li>
                 <li>Evaluation across five dimensions: Features, Ease of Use, Support, Value, and Performance</li>
@@ -67,7 +67,7 @@ export default function EditorialPolicyPage() {
               <h2>7. Updates to This Policy</h2>
               <p>This editorial policy is reviewed annually. Material changes are communicated to newsletter subscribers and noted on this page. The "Last updated" date reflects the most recent revision.</p>
 
-              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about this editorial policy, contact us at <strong>editorial@stackpilot.ai</strong>.</p>
+              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about this editorial policy, contact us at <strong>editorial@pilotstack.online</strong>.</p>
             </div>
           </div>
         </Container>

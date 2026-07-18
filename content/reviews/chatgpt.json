@@ -160,6 +160,11 @@
       "type": "text"
     },
     {
+      "title": "Company Background",
+      "body": "OpenAI was founded in December 2015 as a nonprofit AI research company by Sam Altman, Greg Brockman, Elon Musk, Ilya Sutskever, John Schulman, and Wojciech Zaremba, with the mission of ensuring that artificial general intelligence benefits all of humanity. Headquartered in San Francisco, the company transitioned to a capped-profit structure in 2019 and formed a landmark multi-billion-dollar partnership with Microsoft in 2023, integrating OpenAI's models across Microsoft's product ecosystem including Azure, Copilot, and Office 365. ChatGPT launched on November 30, 2022, reaching 100 million monthly active users in just two months — the fastest consumer application growth in history. As of 2026, ChatGPT serves over 400 million weekly active users, operates on GPT-5, and has expanded from a text-only chatbot into a multimodal platform supporting images, documents, audio, code execution, and real-time web browsing. OpenAI now employs over 4,000 people across offices in San Francisco, Seattle, London, Dublin, and Tokyo, has raised more than $20 billion in funding, and is valued at over $150 billion, positioning it as the dominant force in the commercial AI landscape.",
+      "type": "text"
+    },
+    {
       "title": "Best For",
       "body": "ChatGPT delivers the most value for three scenarios. Content professionals — writers, marketers, and communicators — who produce 5,000+ words weekly benefit from drafting, editing, tone adjustment, and idea generation that reduces first-draft time by 40-60% compared to writing from scratch. Developers and data analysts who write code, debug errors, or analyze datasets use ChatGPT's code generation and Advanced Data Analysis to reduce bug-hunting time by 30-50% and generate formatted charts and statistical summaries from raw CSVs in under 30 seconds. Knowledge workers who compose 20+ emails, memos, or internal documents per week save 10-15 minutes per communication by drafting with ChatGPT and then personalizing the output rather than writing from a blank page.",
       "type": "text"
@@ -188,6 +193,16 @@
       "type": "text"
     },
     {
+      "title": "Feature Deep Dive",
+      "body": "**GPT-5 Model Intelligence.** GPT-5 represents a generational leap over GPT-4, scoring 92.3% on MMLU (Massive Multitask Language Understanding) compared to GPT-4's 86.4%, with particular improvements in mathematical reasoning, multilingual accuracy, and long-form coherence. The model demonstrates chain-of-thought reasoning transparency — showing its step-by-step logic before final answers, building user trust and enabling error detection in complex analytical tasks.\n\n**Code Generation.** GPT-5 generates production-quality code across Python, JavaScript, TypeScript, Rust, Go, and 20+ other languages. A developer can paste an error stack trace and receive a fixed function, or describe a feature in plain English and receive complete, runnable code with proper error handling, loading states, and TypeScript types.\n\n**Image Analysis.** ChatGPT analyzes uploaded images, extracting text from screenshots, interpreting charts and graphs, identifying objects, and describing visual layouts. A marketer can upload a competitor's advertisement and receive a breakdown of its copywriting techniques, design elements, and target audience assumptions.\n\n**Voice Mode.** The voice conversation feature on mobile supports natural speech-to-speech dialogue with four voice options, tone detection, interrupt capability, and real-time translation across 50+ languages. Users can dictate emails, practice language pronunciation, or brainstorm ideas hands-free while commuting.\n\n**DALL-E 3 Integration.** DALL-E 3 generates 1024x1024 images from natural language prompts with improved text rendering and prompt adherence. A product manager can describe a landing page image for an A/B test, receive four variations in 20 seconds, and select the best for a designer to refine.",
+      "type": "text"
+    },
+    {
+      "title": "User Experience",
+      "body": "**Onboarding.** ChatGPT's onboarding is frictionless — sign up with email or Google/Microsoft OAuth and immediately start a conversation with a blank chat interface and a single text input. A brief tutorial overlay introduces key features, but experienced users can skip straight to productive use. The entire process takes under 3 minutes from account creation to first query.\n\n**Interface.** The web interface prioritizes simplicity: a left sidebar shows conversation history, the center panel displays the active chat, and a bottom input bar handles text, file uploads, and model selection. The clean, minimal design keeps focus on the conversation rather than chrome elements. The mobile app mirrors this design on smaller screens with bottom-sheet navigation and swipe gestures for history access.\n\n**Mobile App.** ChatGPT's iOS and Android apps provide full functionality including voice conversations, image upload, DALL-E 3 generation, and Advanced Data Analysis — surprising depth for a mobile experience. Voice mode is particularly well-executed on mobile, with speech recognition accuracy exceeding 95% across English, Spanish, Mandarin, and other major languages.\n\n**Learning Curve.** New users achieve basic proficiency within 30 minutes. Intermediate capabilities like prompt engineering and Custom GPT configuration require 5-15 hours of experimentation. Advanced workflows including GPT Actions and multi-tool automation demand 40-80 hours but unlock transformative productivity gains for power users.",
+      "type": "text"
+    },
+    {
       "title": "Real Limitations",
       "body": "Three limitations remain despite GPT-5's improvements. Factual hallucination persists at a 2-5% rate on knowledge-intensive tasks measured against verified sources, particularly for niche topics with limited training data, recent events beyond the knowledge cutoff, and numerical calculations where ChatGPT may invent statistics or citations that appear plausible but are fabricated. Context window limitations: GPT-5 supports 128K tokens (approximately 200 pages) but exhibits reduced performance retrieving and reasoning over information in the middle of long contexts — a phenomenon documented in the Lost in the Middle paper that affects all transformer-based models. Data privacy architecture: free, Plus, and Team plans process user data to improve OpenAI's models by default; the Enterprise plan provides data isolation but at significantly higher cost, creating a tradeoff between AI capability and data security that organizations must evaluate based on their sensitivity requirements.",
       "type": "text"
@@ -213,8 +228,8 @@
       "type": "text"
     },
     {
-      "title": "Migration Difficulty",
-      "body": "Migrating from ChatGPT to an alternative AI platform like Claude, Gemini, or Llama is moderately difficult (5/10). Conversation history does not export to other platforms — ChatGPT exports conversation data via the settings page as JSON files, but these are not importable into any competitor's platform. Teams must manually recreate conversations or lose interaction history. Custom GPTs are not portable — each Custom GPT contains instructions, knowledge files, and actions that are encoded in OpenAI-specific schema and do not translate to other platforms' assistant configuration formats. API-dependent workflows using GPT Actions require complete reimplementation on the target platform. Conversely, migrating from other AI tools to ChatGPT is straightforward (3/10) — most competitors provide chat export, and the learning curve is short enough that team retraining rarely exceeds 1-2 weeks.",
+      "title": "Migration Guide",
+      "body": "Migrating from ChatGPT to an alternative AI platform like Claude, Gemini, or Llama is moderately difficult (5/10). Conversation history does not export to other platforms — ChatGPT exports conversation data via the settings page as JSON files, but these are not importable into any competitor's platform. Teams must manually recreate conversations or lose interaction history. Custom GPTs are not portable — each Custom GPT contains instructions, knowledge files, and actions that are encoded in OpenAI-specific schema and do not translate to other platforms' assistant configuration formats. API-dependent workflows using GPT Actions require complete reimplementation on the target platform. Conversely, migrating from other AI tools to ChatGPT is straightforward (3/10) — most competitors provide chat export, and the learning curve is short enough that team retraining rarely exceeds 1-2 weeks.\n\nWhen switching from other AI tools to ChatGPT, export your conversation history from the source platform — Claude, Gemini, and Copilot all offer JSON or text export — and upload key conversations as reference documents to provide ChatGPT with context about your work patterns. For teams migrating from Claude, note that Claude's artifacts feature has no direct ChatGPT equivalent, but Custom GPTs with uploaded knowledge files serve a similar purpose for persistent reference materials. Data retention policies differ: Enterprise plans store conversation data for 30 days (configurable up to 90), while Free, Plus, and Team plans retain data indefinitely unless manually deleted. For API migration, OpenAI provides comprehensive migration documentation and compatibility layers for common API patterns, though rate limits and pricing models differ significantly between providers. Plan for a 2-4 week transition period running both platforms in parallel to validate that ChatGPT meets your specific workflow requirements before fully committing.",
       "type": "text"
     },
     {
@@ -239,7 +254,7 @@
     },
     {
       "title": "Real-world Use Cases",
-      "body": "A B2B SaaS marketing team of 12 people uses ChatGPT Plus to generate weekly blog posts, email sequences, and social media content, reducing their content production cycle from 5 days to 2 days per piece while maintaining the same editorial review process. A 50-person engineering team uses ChatGPT Team for daily code review assistance, generating unit test templates, explaining legacy code during onboarding, and drafting technical documentation — resulting in a 28% reduction in average pull request review time over 6 months. A solo consultant managing 15 clients across different industries uses Custom GPTs configured per client — each with its own knowledge files containing their industry context, past deliverables, brand voice guidelines, and frequently used frameworks — reducing client deliverable creation time by 55%. A university research group uses Advanced Data Analysis to process 10 years of survey dataset exports (200+ MB per analysis), generating publication-ready statistical summaries, correlation matrices, and visualization figures in under 60 seconds per experiment.",
+      "body": "A B2B SaaS marketing team of 12 people uses ChatGPT Plus to generate weekly blog posts, email sequences, and social media content, reducing their content production cycle from 5 days to 2 days per piece while maintaining the same editorial review process. A 50-person engineering team uses ChatGPT Team for daily code review assistance, generating unit test templates, explaining legacy code during onboarding, and drafting technical documentation — resulting in a 28% reduction in average pull request review time over 6 months. A solo consultant managing 15 clients across different industries uses Custom GPTs configured per client — each with its own knowledge files containing their industry context, past deliverables, brand voice guidelines, and frequently used frameworks — reducing client deliverable creation time by 55%. A university research group uses Advanced Data Analysis to process 10 years of survey dataset exports (200+ MB per analysis), generating publication-ready statistical summaries, correlation matrices, and visualization figures in under 60 seconds per experiment.\n\n**Startup scenario.** A 5-person fintech startup uses ChatGPT Plus for investor pitch decks, Y Combinator applications, unit test generation for their Python backend, and user interview transcript analysis. The founder estimates ChatGPT saves 20 hours per week across the team — equivalent to an additional part-time employee at zero marginal cost beyond the Plus subscription.\n\n**Enterprise scenario.** A Fortune 500 insurance company with 2,000 ChatGPT Enterprise seats uses the platform for claims processing summarization (reducing handling time by 40%), policy document Q&A for customer service agents, and compliance monitoring of agent-customer interactions against regulatory requirements. SSO integration, data isolation, and audit logging satisfy their legal and compliance obligations.\n\n**Freelancer scenario.** A freelance graphic designer uses ChatGPT for client communication drafting, project proposals, invoice follow-ups, and brainstorming visual concepts with DALL-E 3 before moving to professional design tools. By automating administrative tasks, the designer recovers 8-10 hours per week for creative work and client acquisition.\n\n**Education scenario.** A high school teacher generates differentiated lesson plans at three reading levels, creates vocabulary quizzes from any text, and deploys a custom GPT tutor that answers questions about assigned readings without revealing homework answers. The school's Team plan provides shared access across the department with content policy guardrails.\n\n**Healthcare scenario.** A medical research team uses ChatGPT's Advanced Data Analysis for patient survey processing, PubMed summarization, and grant drafting. The team uses de-identified data following institutional protocols, as HIPAA compliance requires Enterprise with a signed BAA.\n\n**Sales team scenario.** A B2B sales team of 8 drafts personalized cold emails from prospect research summaries, generates competitive battle cards, and creates post-call follow-up summaries from conversation notes — saving each sales rep approximately 5 hours per week on administrative writing and allowing more time for actual selling.",
       "type": "text"
     },
     {
@@ -255,6 +270,16 @@
     {
       "title": "Alternatives",
       "body": "ChatGPT's primary competitors serve different segments of the AI market. Claude 3.5 (Anthropic, $20/month Pro, custom Team pricing) offers a larger 200K token context window, stronger performance on nuanced analysis and multi-document reasoning, and a safety-focused architecture that may be preferable for legal, medical, or compliance-sensitive applications. Gemini (Google, $20/month Advanced via Google One) provides native Google Workspace integration (Gmail, Docs, Sheets, Drive) that ChatGPT cannot match, making it the better choice for organizations embedded in the Google ecosystem — but its model intelligence trails GPT-5 on most academic benchmarks by 2-8 percentage points. Llama 3 (Meta, free open-source) offers self-hosted deployment with full data control, offline operation, and no per-token costs, but requires significant ML infrastructure expertise to deploy at scale and does not match GPT-5's multimodal or reasoning capabilities. Jasper ($49-69/month) provides a focused AI writing tool with brand voice configuration, SEO optimization, and campaign templates that may be simpler for marketing teams than building these workflows from scratch in ChatGPT. The decision between these alternatives should be driven by data privacy requirements, ecosystem lock-in, and whether general AI capability or specialized workflow support is the priority.",
+      "type": "text"
+    },
+    {
+      "title": "Industry Fit",
+      "body": "**Enterprise.** Large organizations benefit from ChatGPT Enterprise's SSO integration, data isolation, HIPAA BAA, SOC 2 compliance, audit logging, and 99.9% uptime SLA. Industries with strict compliance requirements can deploy ChatGPT across teams while maintaining regulatory obligations. The 50-seat minimum and annual commitment create a barrier for smaller enterprises.\n\n**Startup.** Early-stage startups get maximum value from the Plus ($20/month) or Team ($25/user/month) plans, using ChatGPT across marketing, product development, customer support, and fundraising. The low cost and zero setup time make it ideal for resource-constrained teams. Startups on the OpenAI API benefit from seamless integration with their development workflow.\n\n**Education.** Schools and universities use ChatGPT Team for faculty and students, with custom GPTs for course-specific tutoring, assignment drafting feedback, and research assistance. Content policy guardrails prevent misuse. Data privacy implications of student interaction data require institutional policy review before deployment.\n\n**Healthcare.** Healthcare organizations require ChatGPT Enterprise with a signed BAA for HIPAA compliance. Use cases include clinical documentation summarization, medical literature research, and administrative workflow automation. Without Enterprise, healthcare workers must use de-identified data only.\n\n**Creative Professionals.** Writers, designers, and content creators use ChatGPT for brainstorming, drafting, editing, and visual ideation with DALL-E 3. The platform accelerates the creative process without replacing human creative direction and editorial judgment.",
+      "type": "text"
+    },
+    {
+      "title": "Competitors",
+      "body": "**Claude (Anthropic).** Claude 3.5 offers a 200K token context window, stronger nuanced analysis for legal and compliance documents, and a safety-first architecture. Weaknesses: limited multimodal support, smaller ecosystem, and less developer tooling. Best for legal, medical, and compliance teams prioritizing safety and context length.\n\n**Gemini (Google).** Gemini Advanced ($20/month via Google One) provides native integration with Gmail, Docs, Sheets, and Drive — a decisive advantage for Google Workspace organizations. Its 1M token context window dwarfs competitors. Weaknesses: trails GPT-5 on academic benchmarks and has weaker code generation. Best for Google-centric organizations and users needing massive context windows.\n\n**Microsoft Copilot.** Copilot natively integrates into Microsoft 365 (Word, Excel, PowerPoint, Teams), making it the default choice for Microsoft-centric enterprises. It runs on GPT-5 under the hood with Microsoft's enterprise security controls. Weaknesses: less flexible standalone chat and limited Custom GPT ecosystem. Best for Microsoft 365 enterprise customers.\n\n**Perplexity.** Perplexity excels as an AI-powered search engine with real-time citations and source links for every claim, reducing hallucination risk. Weaknesses: limited content creation, no image generation, and no custom assistant builder. Best for researchers and fact-checking use cases.",
       "type": "text"
     },
     {
@@ -294,6 +319,70 @@
     {
       "question": "Is ChatGPT suitable for small teams?",
       "answer": "Yes, the Team plan at $25 per user per month is well-suited for small to medium teams needing shared GPTs, higher usage limits, and admin oversight. Freelancers and solo creators can get by with the $20 Plus plan. However, teams requiring guaranteed data privacy, compliance certifications, or unlimited usage should consider the Enterprise plan, which is priced for larger organizations."
+    },
+    {
+      "question": "How does ChatGPT handle data privacy?",
+      "answer": "Data privacy depends on your plan. Free, Plus, and Team plans may use conversations for model training unless disabled in settings. Enterprise plans exclude all data from training by default. OpenAI is SOC 2 Type II certified, GDPR compliant, and offers HIPAA BAA on Enterprise plans. Data is encrypted in transit (TLS 1.3) and at rest (AES-256)."
+    },
+    {
+      "question": "What are the key differences between GPT-5 and GPT-4?",
+      "answer": "GPT-5 delivers significant improvements: MMLU score of 92.3% vs GPT-4's 86.4%, faster response times, better multilingual accuracy, chain-of-thought reasoning, reduced hallucination rates (2-5% vs 5-10%), and enhanced multimodal capabilities including native image, audio, and document understanding. GPT-4 remains as a fallback when limits are reached."
+    },
+    {
+      "question": "How does ChatGPT API pricing work?",
+      "answer": "OpenAI API pricing is per-token: GPT-5 costs approximately $0.01-0.02 per 1,000 input tokens and $0.03-0.06 per 1,000 output tokens. GPT-4 remains available at lower rates. Batch processing offers a 50% discount for asynchronous workloads. API rate limits are separate from ChatGPT interface limits."
+    },
+    {
+      "question": "What is ChatGPT's context window size?",
+      "answer": "GPT-5 supports a 128K token context window, equivalent to approximately 200 pages of text. This allows processing of long documents, entire codebases, or extended conversations in a single session. Performance can degrade in the middle of very long contexts, but for most practical uses the window handles extensive materials without issue."
+    },
+    {
+      "question": "What file types can I upload to ChatGPT?",
+      "answer": "ChatGPT accepts images (PNG, JPG, GIF, WebP), documents (PDF, DOCX, TXT, PPTX), spreadsheets (XLSX, CSV), presentations (PPTX), and audio files (MP3, WAV, M4A, MP4). Uploads can be up to 512 MB per file on Plus and Team plans. The system extracts text from documents, analyzes images, and transcribes audio using Whisper."
+    },
+    {
+      "question": "Is voice mode available on desktop?",
+      "answer": "Voice conversations are available on ChatGPT's iOS and Android mobile apps. Desktop users can use text-to-speech for receiving spoken responses, but the full bidirectional voice conversation mode with natural speech pacing is currently mobile-only. Browser extensions and third-party tools provide limited voice input on desktop through the Web Speech API."
+    },
+    {
+      "question": "Does ChatGPT have web browsing capability?",
+      "answer": "Yes, ChatGPT's web browsing mode (powered by Bing) provides live internet access for up-to-date information. Users must manually enable browsing each session via the model selector. When active, ChatGPT retrieves, processes, and cites relevant web pages with source links. This feature is available on Plus, Team, and Enterprise plans and is limited on the free tier."
+    },
+    {
+      "question": "Does ChatGPT support plugins?",
+      "answer": "ChatGPT's plugin system was deprecated in 2024 and replaced by GPT Actions, which let Custom GPTs connect to external APIs like Zendesk, Stripe, and Salesforce without third-party maintainers. The GPT Store offers millions of Custom GPTs with Actions covering virtually every common integration need."
+    },
+    {
+      "question": "How do team workspaces work?",
+      "answer": "ChatGPT Team provides shared workspaces where admins can create and manage team-exclusive Custom GPTs, view usage analytics across members, set workspace guidelines, and control data training policies. Workspaces support role-based access (admin, member, viewer), shared conversation folders, and organization-wide custom instructions. Team admins can enforce SSO authentication and manage member invitations."
+    },
+    {
+      "question": "What admin controls are available on Enterprise?",
+      "answer": "Enterprise and Team admins have access to SSO enforcement, SCIM provisioning, usage analytics, Custom GPT management workflows, data retention configuration, content policy filters, API key quotas, audit logs, and workspace data export."
+    },
+    {
+      "question": "What is ChatGPT's content policy?",
+      "answer": "ChatGPT operates under OpenAI's Usage Policies, which prohibit hateful content, harassment, sexual content, violence, spam, or illegal activity. GPT-5 includes improved safety classifiers that reduce policy violations by 85% vs GPT-4. Enterprise and Team plans allow admins to set additional content policies."
+    },
+    {
+      "question": "Are there usage limits on ChatGPT?",
+      "answer": "Free tier: approximately 50 GPT-5 messages every 3 hours with unlimited GPT-3.5. Plus: approximately 40 GPT-5 messages every 3 hours (soft cap), after which responses revert to GPT-4o. Team: approximately 100 GPT-5 messages every 3 hours per user. Enterprise: unlimited high-speed GPT-5 with no throttling. All tiers have lower limits for DALL-E 3 generation and Advanced Data Analysis sessions."
+    },
+    {
+      "question": "What is ChatGPT's refund policy?",
+      "answer": "ChatGPT Plus and Team subscriptions are billed monthly with refunds handled case-by-case. OpenAI does not offer prorated refunds for mid-cycle cancellations; subscriptions remain active until the billing period ends. Enterprise plans have custom terms. Contact support within 7 days for accidental charge review."
+    },
+    {
+      "question": "What enterprise security features are available?",
+      "answer": "ChatGPT Enterprise offers SOC 2 Type II, HIPAA compliance via BAA, AES-256 encryption, customer-managed keys, SSO enforcement (SAML 2.0, OIDC), SCIM provisioning, API audit logging, data retention controls, IP restrictions, and 99.9% uptime SLA. FedRAMP certification is in process."
+    },
+    {
+      "question": "What are Custom GPTs and how do I build one?",
+      "answer": "Custom GPTs are tailored AI assistants combining custom instructions, uploaded knowledge files, and optional GPT Actions for API connectivity. Building one requires no coding: describe the purpose, upload references, configure conversation starters, and publish. GPTs can be private, shared via link, or published publicly."
+    },
+    {
+      "question": "Can I fine-tune ChatGPT on my own data?",
+      "answer": "ChatGPT does not support direct fine-tuning. However, OpenAI offers fine-tuning through the API for GPT-4 and GPT-3.5 base models on your own datasets. Custom GPTs with knowledge files provide a no-code alternative for most document-based use cases without requiring ML expertise."
     }
   ],
   "alternatives": [

@@ -1,14 +1,14 @@
 export const site = {
-  name: "StackPilot",
+  name: "PilotStack",
   tagline: "Navigate your software stack with confidence",
   description:
     "In-depth software reviews, expert comparisons, and actionable guides to help businesses choose, implement, and optimize the right tools for every need.",
-  url: "https://stackpilot.com",
+  url: "https://pilotstack.online",
   logo: "/logo.svg",
   locale: "en_US",
   links: {
-    twitter: "https://x.com/stackpilot",
-    github: "https://github.com/stackpilot",
+    twitter: "https://x.com/pilotstack",
+    github: "https://github.com/pilotstack",
   },
 }
 
@@ -16,9 +16,12 @@ export const navLinks = [
   { href: "/reviews", label: "Reviews" },
   { href: "/comparisons", label: "Comparisons" },
   { href: "/guides", label: "Guides" },
+  { href: "/best", label: "Best Software" },
+  { href: "/use-cases", label: "Use Cases" },
+  { href: "/industries", label: "Industries" },
+  { href: "/hubs", label: "By Business Type" },
   { href: "/blog", label: "Research" },
-  { href: "/glossary", label: "Glossary" },
-  { href: "/tools", label: "Free Tools" },
+  { href: "/alternatives", label: "Alternatives" },
 ]
 
 export const secondaryNavLinks = [
@@ -59,11 +62,11 @@ export const editorialLinks = [
 ]
 
 export const siteConfig = {
-  name: "StackPilot",
+  name: "PilotStack",
   description: site.description,
   url: site.url,
   ogImage: `${site.url}/og.svg`,
-  author: "StackPilot Team",
+  author: "PilotStack Team",
   keywords: [
     "software reviews",
     "SaaS comparison",

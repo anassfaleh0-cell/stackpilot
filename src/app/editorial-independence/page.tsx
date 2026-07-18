@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Editorial Independence",
-  description: "StackPilot operates with complete editorial independence. No vendor, advertiser, or affiliate partner influences our reviews, ratings, or recommendations.",
+  description: "PilotStack operates with complete editorial independence. No vendor, advertiser, or affiliate partner influences our reviews, ratings, or recommendations.",
   path: "/editorial-independence",
 })
 
@@ -27,7 +27,7 @@ export default function EditorialIndependencePage() {
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">
-                Editorial independence is the cornerstone of StackPilot. Our readers must trust that our reviews, comparisons, and recommendations are based solely on rigorous research and testing — not commercial relationships.
+                Editorial independence is the cornerstone of PilotStack. Our readers must trust that our reviews, comparisons, and recommendations are based solely on rigorous research and testing — not commercial relationships.
               </p>
 
               <h2>Our Independence Principles</h2>
@@ -49,7 +49,7 @@ export default function EditorialIndependencePage() {
               </div>
 
               <h2>Commercial vs. Editorial Separation</h2>
-              <p>StackPilot maintains a strict organizational separation between editorial and commercial operations:</p>
+              <p>PilotStack maintains a strict organizational separation between editorial and commercial operations:</p>
               <ul>
                 <li>The editorial team operates independently from the commercial team</li>
                 <li>Editorial staff do not participate in advertising sales, affiliate partnership negotiations, or commercial discussions</li>
@@ -58,7 +58,7 @@ export default function EditorialIndependencePage() {
               </ul>
 
               <h2>Revenue Sources</h2>
-              <p>StackPilot generates revenue from the following sources, each with clear separation from editorial:</p>
+              <p>PilotStack generates revenue from the following sources, each with clear separation from editorial:</p>
               <ul>
                 <li><strong>Affiliate commissions:</strong> We earn commissions when readers purchase products through our affiliate links. No editorial influence.</li>
                 <li><strong>Display advertising:</strong> Banner advertisements in designated slots. No editorial influence.</li>
@@ -68,12 +68,12 @@ export default function EditorialIndependencePage() {
               <p>No revenue source influences our editorial content. Our full <a href="/affiliate-disclosure">Affiliate Disclosure</a> and <a href="/advertising-disclosure">Advertising Disclosure</a> provide detailed information.</p>
 
               <h2>Accountability</h2>
-              <p>We welcome scrutiny of our editorial independence. If you believe any content on StackPilot has been influenced by commercial relationships, please report it immediately to <strong>editorial@stackpilot.ai</strong>. We investigate all reports and take corrective action if warranted.</p>
+              <p>We welcome scrutiny of our editorial independence. If you believe any content on PilotStack has been influenced by commercial relationships, please report it immediately to <strong>editorial@pilotstack.online</strong>. We investigate all reports and take corrective action if warranted.</p>
 
               <h2>Governance</h2>
               <p>Editorial independence is reviewed quarterly by our editorial leadership team. Any concerns about editorial independence are escalated to the publisher, who has final authority to ensure separation between editorial and commercial operations.</p>
 
-              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about editorial independence, contact <strong>editorial@stackpilot.ai</strong>.</p>
+              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about editorial independence, contact <strong>editorial@pilotstack.online</strong>.</p>
             </div>
           </div>
         </Container>

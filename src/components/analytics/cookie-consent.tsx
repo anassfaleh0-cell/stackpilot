@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { X } from "lucide-react"
 
-const COOKIE_CONSENT_KEY = "stackpilot-cookie-consent"
+const COOKIE_CONSENT_KEY = "pilotstack-cookie-consent"
 
 type ConsentState = "accepted" | "declined" | null
 

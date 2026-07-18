@@ -38,7 +38,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://stackpilot.com"),
+  metadataBase: new URL("https://pilotstack.online"),
   title: {
     template: `%s | ${siteConfig.name}`,
     default: `${siteConfig.name} - ${siteConfig.description}`,
@@ -83,7 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: `
               (function() {
                 try {
-                  var t = localStorage.getItem('stackpilot-theme');
+                  var t = localStorage.getItem('pilotstack-theme');
                   var r;
                   if (t === 'light' || t === 'dark') {
                     r = t;

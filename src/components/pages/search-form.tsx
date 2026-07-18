@@ -70,13 +70,13 @@ function SearchResults() {
 export function SearchForm() {
   return (
     <div className="max-w-xl mx-auto text-center">
-      <h1 className="text-3xl font-bold mb-6">Search StackPilot</h1>
+      <h1 className="text-3xl font-bold mb-6">Search PilotStack</h1>
       <form action="/search" method="GET" className="flex gap-3 mb-8">
         <input
           type="search"
           name="q"
           placeholder="Search reviews, guides, tools..."
-          aria-label="Search StackPilot"
+          aria-label="Search PilotStack"
           className="flex-1 h-12 px-4 rounded-lg border border-border bg-background text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-primary"
         />
         <Button type="submit" size="lg">Search</Button>

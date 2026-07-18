@@ -386,7 +386,7 @@ export default function HomePage() {
               Expert advice, straight to your inbox
             </h2>
             <p className="text-muted-foreground text-pretty">
-              Join 35,000+ professionals who rely on StackPilot for software buying decisions. No spam, unsubscribe anytime.
+              Join 35,000+ professionals who rely on PilotStack for software buying decisions. No spam, unsubscribe anytime.
             </p>
           </div>
           <div className="mx-auto max-w-md">

@@ -41,7 +41,7 @@ const reports = [
 export default function ResearchPage() {
   return (
     <>
-      <CollectionPageSchema name="Research Reports" description="Original research reports on software pricing, market trends, and industry benchmarks" url="https://stackpilot.com/research" />
+      <CollectionPageSchema name="Research Reports" description="Original research reports on software pricing, market trends, and industry benchmarks" url="https://pilotstack.online/research" />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Research", href: "/research" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Research" }]} />

@@ -281,11 +281,12 @@ export function PersonSchema({ name, url, description, knowsAbout }: {
   return ld(schema, "ld-person")
 }
 
-export function WebPageSchema({ name, description, url, dateModified }: {
+export function WebPageSchema({ name, description, url, dateModified, mainEntity }: {
   name: string
   description: string
   url: string
   dateModified?: string
+  mainEntity?: Record<string, unknown>
 }) {
   const schema = clean({
     "@context": ctx,
@@ -298,6 +299,26 @@ export function WebPageSchema({ name, description, url, dateModified }: {
     inLanguage: "en-US",
     isPartOf: { "@id": `${site.url}/#website` },
     about: { "@id": `${site.url}/#organization` },
+    ...(mainEntity ? { mainEntity } : {}),
   })
   return ld(schema, "ld-webpage")
+}
+
+export function AboutPageSchema({ name, description, url, about }: {
+  name: string
+  description: string
+  url: string
+  about: { "@type": string; name: string; url: string }[]
+}) {
+  const schema = clean({
+    "@context": ctx,
+    "@type": "WebPage",
+    "@id": url + "#about-page",
+    name,
+    description,
+    url,
+    mainEntity: { "@type": "ItemList", itemListElement: about.map((a, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": a["@type"], name: a.name, url: a.url } })) },
+    about: about.map((a) => ({ "@type": a["@type"], name: a.name, url: a.url })),
+  })
+  return ld(schema, "ld-about-page")
 }

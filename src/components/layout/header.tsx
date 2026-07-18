@@ -39,7 +39,7 @@ export function Header() {
           <Link
             href="/search"
             className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"
-            aria-label="Search StackPilot"
+            aria-label="Search PilotStack"
           >
             <Search size={16} />
           </Link>

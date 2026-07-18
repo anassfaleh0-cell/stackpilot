@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, FAQSchema, ReviewSchema, SoftwareSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, FAQSchema, ReviewSchema, SoftwareSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getComparison, getContentTitle } from "@/lib/content/registry"
@@ -9,9 +9,9 @@ import { getAllComparisons } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowRight, CheckCircle2, Target } from "lucide-react"
-import { EditorialHero, EditorialComparison, EditorialCallout, GlassCard, InfoCard } from "@/components/editorial"
+import { EditorialHero, EditorialCallout, GlassCard, InfoCard } from "@/components/dynamic"
+import { EditorialComparison, RelatedContent } from "@/components/dynamic-client"
 import { getReview } from "@/lib/content/registry"
-import { RelatedContent } from "@/components/content/related-content"
 import { ScoreBar } from "@/components/brand/patterns"
 
 export function generateStaticParams() {
@@ -48,6 +48,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
       {review2 && <ReviewSchema name={review2.name} description={review2.description} rating={review2.rating} reviewCount={review2.reviewCount} url={`${site.url}/reviews/${review2.slug}`} />}
       {review1 && <SoftwareSchema name={review1.name} description={review1.tagline} applicationCategory="BusinessApplication" />}
       {review2 && <SoftwareSchema name={review2.name} description={review2.tagline} applicationCategory="BusinessApplication" />}
+      <WebPageSchema name={cmp.title} description={cmp.description} url={`${site.url}/comparisons/${slug}`} mainEntity={{ "@type": "ItemList", itemListElement: [{ "@type": "ListItem", position: 1, item: { "@type": "SoftwareApplication", name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}` } }, { "@type": "ListItem", position: 2, item: { "@type": "SoftwareApplication", name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}` } }] }} />
       <FAQSchema questions={cmp.faqs} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Comparisons", href: "/comparisons" }, { name: cmp.title }]} />
@@ -70,7 +71,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-6 pb-4 border-b border-border">
             <span className="flex items-center gap-1">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-              Reviewed by StackPilot Team
+              Reviewed by PilotStack Team
             </span>
             <span className="flex items-center gap-1">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>

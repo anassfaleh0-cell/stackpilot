@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 
-const COOKIE_CONSENT_KEY = "stackpilot-cookie-consent"
+const COOKIE_CONSENT_KEY = "pilotstack-cookie-consent"
 
 type ConsentChoice = "accepted" | "declined" | null
 

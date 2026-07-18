@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test"
 
 test.describe("Core pages render successfully", () => {
   const pages = [
-    { path: "/", title: "StackPilot" },
+    { path: "/", title: "PilotStack" },
     { path: "/reviews", title: "Reviews" },
     { path: "/reviews/notion", title: "Notion Review" },
     { path: "/comparisons", title: "Comparisons" },

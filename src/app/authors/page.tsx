@@ -9,12 +9,12 @@ import { ArrowRight } from "lucide-react"
 
 export const metadata = createMetadata({
   title: "Our Authors & Editorial Team",
-  description: "Meet the StackPilot editorial team — experienced software analysts, researchers, and industry specialists who test and review every tool on our platform.",
+  description: "Meet the PilotStack editorial team — experienced software analysts, researchers, and industry specialists who test and review every tool on our platform.",
   path: "/authors",
 })
 
 const authors = [
-  { slug: "stackpilot-team", name: "StackPilot Team", role: "Editorial Team", bio: "Collective expertise of our editorial team spanning software engineering, product management, digital marketing, and enterprise IT." },
+  { slug: "pilotstack-team", name: "PilotStack Team", role: "Editorial Team", bio: "Collective expertise of our editorial team spanning software engineering, product management, digital marketing, and enterprise IT." },
   { slug: "alex-chen", name: "Alex Chen", role: "Senior Software Analyst", bio: "Developer tools, AI platforms, and productivity software specialist with a software engineering background." },
   { slug: "sarah-mitchell", name: "Sarah Mitchell", role: "CRM & Marketing Analyst", bio: "CRM, marketing automation, and sales tools expert with hands-on marketing operations experience." },
   { slug: "jordan-park", name: "Jordan Park", role: "Research Analyst", bio: "Market research and data analysis lead with expertise in pricing research and industry benchmarks." },
@@ -34,7 +34,7 @@ export default function AuthorsPage() {
             <Badge variant="default" className="mb-4">Our Team</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Meet Our Editorial Team</h1>
             <p className="text-lg text-muted-foreground mb-10 max-w-2xl">
-              Every review on StackPilot is written by experienced analysts who test software hands-on. Our team brings together expertise across software engineering, product management, marketing, and data science.
+              Every review on PilotStack is written by experienced analysts who test software hands-on. Our team brings together expertise across software engineering, product management, marketing, and data science.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6">

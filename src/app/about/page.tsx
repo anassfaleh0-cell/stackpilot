@@ -6,7 +6,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "About",
-  description: "StackPilot helps businesses navigate the complex software landscape with expert reviews, honest comparisons, and actionable guides.",
+  description: "PilotStack helps businesses navigate the complex software landscape with expert reviews, honest comparisons, and actionable guides.",
   path: "/about",
 })
 
@@ -23,9 +23,9 @@ export default function AboutPage() {
             <Badge variant="default" className="mb-4">About</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-6">Navigating software shouldn&apos;t be hard</h1>
             <div className="prose prose-slate max-w-none">
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">StackPilot was founded with a simple mission: help businesses choose the right software, every time.</p>
-              <p className="text-muted-foreground mb-4">With thousands of tools launching every year, the software landscape has become overwhelming. Buying decisions that once took days now take weeks of research. We built StackPilot to change that.</p>
-              <p className="text-muted-foreground mb-4">Founded in 2024, StackPilot has grown from a two-person research project into a dedicated team of product analysts, industry specialists, and technical writers across the US and Europe. Collectively, our team has over 50 years of experience evaluating B2B software across CRM, project management, analytics, developer tools, HR, and marketing categories.</p>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-6">PilotStack was founded with a simple mission: help businesses choose the right software, every time.</p>
+              <p className="text-muted-foreground mb-4">With thousands of tools launching every year, the software landscape has become overwhelming. Buying decisions that once took days now take weeks of research. We built PilotStack to change that.</p>
+              <p className="text-muted-foreground mb-4">Founded in 2024, PilotStack has grown from a two-person research project into a dedicated team of product analysts, industry specialists, and technical writers across the US and Europe. Collectively, our team has over 50 years of experience evaluating B2B software across CRM, project management, analytics, developer tools, HR, and marketing categories.</p>
               <p className="text-muted-foreground mb-4">Our team of experienced researchers and industry experts rigorously evaluates every tool we review. We test features, benchmark performance, analyze pricing, and aggregate real user feedback from over 100,000 verified G2, Capterra, and TrustRadius reviews to deliver comprehensive, unbiased assessments. Every reviewer completes a standardized two-week testing protocol and their findings are independently verified by a second team member before publication.</p>
               <p className="text-muted-foreground mb-4">We review approximately 60-80 tools annually across 12 categories. We do not accept payment for reviews, placement in comparison tables, or links from our content. Our revenue comes from affiliate commissions and sponsored newsletter placements — always clearly disclosed. If we cannot recommend a tool honestly, we will say so plainly.</p>
               <h2 className="text-2xl font-bold mt-12 mb-4">Our values</h2>

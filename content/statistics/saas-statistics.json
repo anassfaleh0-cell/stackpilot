@@ -1,0 +1,64 @@
+{
+  "slug": "saas-statistics",
+  "title": "SaaS Industry Statistics 2026",
+  "description": "Essential statistics on the SaaS industry including market size, growth metrics, pricing trends, churn benchmarks, and public company performance.",
+  "category": "SaaS",
+  "stats": [
+    { "value": "$317B", "label": "Global SaaS Market Size (2026)", "source": "Gartner", "sourceUrl": "https://www.gartner.com/en/saas-market" },
+    { "value": "18.4%", "label": "SaaS Industry Year-over-Year Growth Rate", "source": "Statista", "sourceUrl": "https://www.statista.com/saas-market" },
+    { "value": "73%", "label": "SaaS Companies with Usage-Based Pricing", "source": "OpenView SaaS Benchmarks", "sourceUrl": "https://openviewpartners.com/saas-benchmarks" },
+    { "value": "92%", "label": "Net Revenue Retention for Top-Quartile SaaS", "source": "KeyBanc SaaS Survey", "sourceUrl": "https://www.keybanc.com/saas" },
+    { "value": "5.2%", "label": "Median Monthly SaaS Churn Rate", "source": "Recurly Research", "sourceUrl": "https://www.recurly.com/research" },
+    { "value": "3.8%", "label": "Free Tier to Paid Conversion Rate", "source": "ProfitWell", "sourceUrl": "https://www.profitwell.com/saas-benchmarks" },
+    { "value": "15%", "label": "Average Annual Contract Discount (2026)", "source": "Vendr SaaS Insights", "sourceUrl": "https://www.vendr.com/saas-insights" }
+  ],
+  "sections": [
+    {
+      "title": "Market Size and Growth",
+      "stats": [
+        { "value": "$317B", "label": "Global SaaS Market Size (2026)", "source": "Gartner" },
+        { "value": "18.4%", "label": "Year-over-Year Growth Rate", "source": "Statista" },
+        { "value": "$525B", "label": "Projected SaaS Market Size (2030)", "source": "Grand View Research" },
+        { "value": "64%", "label": "Enterprise Software Delivered via SaaS", "source": "IDC" },
+        { "value": "47%", "label": "SaaS Revenue from North America", "source": "Statista" }
+      ],
+      "body": "The SaaS market continues its robust growth trajectory, with 18.4% year-over-year expansion driven by cloud migration, AI integration, and new category creation. Nearly two-thirds of enterprise software is now delivered via SaaS, with the remaining on-premises and hybrid deployments declining 8% annually. North America remains the largest market, though Asia-Pacific is the fastest-growing region at 26% CAGR."
+    },
+    {
+      "title": "Pricing and Revenue Metrics",
+      "stats": [
+        { "value": "73%", "label": "Companies Using Usage-Based Pricing", "source": "OpenView" },
+        { "value": "14%", "label": "Average Per-Seat Price Increase YoY", "source": "StackPilot Pricing Data" },
+        { "value": "15%", "label": "Average Annual Discount Rate", "source": "Vendr" },
+        { "value": "42%", "label": "New Products Using Usage-Based Models", "source": "OpenView" },
+        { "value": "67%", "label": "Vendors Charging AI Feature Surcharges", "source": "StackPilot Pricing Data" }
+      ],
+      "body": "Usage-based pricing has become the dominant model for new SaaS products, while established vendors increasingly adopt hybrid pricing combining per-seat, consumption, and AI surcharge components. Average per-seat costs rose 14% year-over-year, but contract discounts have tightened as vendors prioritize predictable recurring revenue. AI feature surcharges have become standard, adding average costs of $25 per user per month."
+    },
+    {
+      "title": "Retention and Churn Benchmarks",
+      "stats": [
+        { "value": "92%", "label": "Top-Quartile Net Revenue Retention", "source": "KeyBanc" },
+        { "value": "5.2%", "label": "Median Monthly Gross Churn (SMB)", "source": "Recurly" },
+        { "value": "1.8%", "label": "Median Monthly Gross Churn (Enterprise)", "source": "Recurly" },
+        { "value": "84%", "label": "Average AI Software Annual Retention", "source": "StackPilot" },
+        { "value": "76%", "label": "Average AI Software Retention (2024)", "source": "StackPilot" }
+      ],
+      "body": "Net revenue retention (NRR) has become the most-watched SaaS metric, with top-quartile public companies maintaining 92% NRR through expansion revenue. Enterprise churn remains significantly lower than SMB churn, reflecting deeper integration and switching costs. AI software retention has notably improved from 76% to 84% as tools become more embedded in daily workflows."
+    },
+    {
+      "title": "Public SaaS Company Performance",
+      "stats": [
+        { "value": "7.8x", "label": "Median SaaS EV/Revenue Multiple", "source": "Bessemer Cloud Index" },
+        { "value": "24%", "label": "Median SaaS EBITDA Margin", "source": "KeyBanc" },
+        { "value": "65%", "label": "Median SaaS Gross Margin", "source": "Meritech Capital" },
+        { "value": "$12.4M", "label": "Median SaaS ARR at IPO (2026)", "source": "IPO Research" },
+        { "value": "38%", "label": "SaaS Companies with Self-Serve Revenue >50%", "source": "BVP Cloud Index" }
+      ],
+      "body": "Public SaaS company valuations have stabilized at a median 7.8x enterprise value to revenue multiple after the correction from 2021 highs. Profitability has improved dramatically, with median EBITDA margins reaching 24%. The trend toward capital efficiency is driving later IPOs, with companies reaching a median $12.4 million ARR before going public. Self-serve revenue models continue to expand, with 38% of public SaaS companies generating over half their revenue through self-serve channels."
+    }
+  ],
+  "publishedAt": "2026-07-18",
+  "relatedComparisons": ["salesforce-vs-hubspot", "quickbooks-vs-xero"],
+  "relatedGuides": ["saas-metrics-and-kpis", "saas-implementation-best-practices"]
+}

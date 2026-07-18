@@ -4,7 +4,7 @@ import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { SearchForm } from "@/components/pages/search-form"
 
-export const metadata = createMetadata({ title: "Search", description: "Search StackPilot for software reviews, comparisons, guides and more.", path: "/search", noIndex: true })
+export const metadata = createMetadata({ title: "Search", description: "Search PilotStack for software reviews, comparisons, guides and more.", path: "/search", noIndex: true })
 
 export default function SearchPage() {
   return (

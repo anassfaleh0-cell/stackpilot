@@ -56,7 +56,7 @@ const statCategories = [
 export default function StatisticsPage() {
   return (
     <>
-      <CollectionPageSchema name="Software Statistics & Market Data" description="Verified software statistics with original sources" url="https://stackpilot.com/statistics" />
+      <CollectionPageSchema name="Software Statistics & Market Data" description="Verified software statistics with original sources" url="https://pilotstack.online/statistics" />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Statistics", href: "/statistics" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Statistics" }]} />

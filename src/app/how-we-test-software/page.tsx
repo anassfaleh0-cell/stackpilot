@@ -79,7 +79,7 @@ export default function HowWeTestSoftwarePage() {
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">
-                Every tool on StackPilot is tested by real people in realistic workflows. We do not rely on vendor demos, specification sheets, or marketing materials. Here is exactly how we test.
+                Every tool on PilotStack is tested by real people in realistic workflows. We do not rely on vendor demos, specification sheets, or marketing materials. Here is exactly how we test.
               </p>
 
               {steps.map((phase, i) => (

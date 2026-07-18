@@ -5,7 +5,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Privacy Policy",
-  description: "StackPilot's privacy policy explains how we collect, use, protect, and manage your personal data in compliance with GDPR and CCPA.",
+  description: "PilotStack's privacy policy explains how we collect, use, protect, and manage your personal data in compliance with GDPR and CCPA.",
   path: "/privacy",
 })
 
@@ -23,7 +23,7 @@ export default function PrivacyPage() {
             <p className="text-muted-foreground"><em>Last updated: July 16, 2026</em></p>
 
             <h2>Information We Collect</h2>
-            <p>We collect only the information necessary to provide and improve StackPilot:</p>
+            <p>We collect only the information necessary to provide and improve PilotStack:</p>
             <ul>
               <li><strong>Information you provide:</strong> Name and email address when you subscribe to our newsletter, submit a contact form, or respond to a survey.</li>
               <li><strong>Information collected automatically:</strong> Page visits, referral source, browser type, device type, and approximate geographic region via analytics cookies. We do not collect precise location data or fingerprint your device.</li>
@@ -66,7 +66,7 @@ export default function PrivacyPage() {
               <li><strong>Right to data portability:</strong> Request a machine-readable copy of your data to transfer to another service.</li>
               <li><strong>Right to object:</strong> Object to processing of your data for analytics or marketing purposes.</li>
             </ul>
-            <p>To exercise any of these rights, contact us at privacy@stackpilot.ai. We will respond within 30 days as required by GDPR.</p>
+            <p>To exercise any of these rights, contact us at privacy@pilotstack.online. We will respond within 30 days as required by GDPR.</p>
 
             <h2>Your Rights (CCPA)</h2>
             <p>If you are a resident of California, you have the following rights under the California Consumer Privacy Act (CCPA):</p>
@@ -76,7 +76,7 @@ export default function PrivacyPage() {
               <li><strong>Right to opt out:</strong> Opt out of the sale of your personal information. We do not sell personal information, so no action is needed.</li>
               <li><strong>Right to non-discrimination:</strong> We will not discriminate against you for exercising any of your CCPA rights.</li>
             </ul>
-            <p>To exercise your CCPA rights, contact us at privacy@stackpilot.ai. We will verify your identity before processing your request.</p>
+            <p>To exercise your CCPA rights, contact us at privacy@pilotstack.online. We will verify your identity before processing your request.</p>
 
             <h2>Data Security</h2>
             <p>We implement appropriate technical and organizational measures to protect your personal data, including:</p>
@@ -100,10 +100,10 @@ export default function PrivacyPage() {
             <p>If we transfer personal data from the EEA to countries not deemed adequate by the European Commission, we rely on Standard Contractual Clauses (SCCs) as the transfer mechanism under GDPR Article 46.</p>
 
             <h2>Changes to This Policy</h2>
-            <p>We will notify subscribers of material changes to this privacy policy via email. The "Last updated" date at the top of this page reflects the most recent revision. Continued use of StackPilot after changes constitutes acceptance of the updated policy.</p>
+            <p>We will notify subscribers of material changes to this privacy policy via email. The "Last updated" date at the top of this page reflects the most recent revision. Continued use of PilotStack after changes constitutes acceptance of the updated policy.</p>
 
             <h2>Contact</h2>
-            <p>For privacy-related inquiries or to exercise your data rights, contact us at <strong>privacy@stackpilot.ai</strong>. We aim to respond to all requests within 30 days.</p>
+            <p>For privacy-related inquiries or to exercise your data rights, contact us at <strong>privacy@pilotstack.online</strong>. We aim to respond to all requests within 30 days.</p>
           </div>
         </Container>
       </Section>

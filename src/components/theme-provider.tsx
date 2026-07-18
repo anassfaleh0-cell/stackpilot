@@ -27,7 +27,7 @@ function resolveTheme(theme: Theme): "light" | "dark" {
   return theme === "system" ? getSystemTheme() : theme
 }
 
-const STORAGE_KEY = "stackpilot-theme"
+const STORAGE_KEY = "pilotstack-theme"
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>("system")
