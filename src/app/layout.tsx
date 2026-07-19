@@ -120,6 +120,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             strategy="afterInteractive"
             data-cfasync="false"
           />
+          <Script
+            src="https://n6wxm.com/vignette.min.js"
+            strategy="afterInteractive"
+            data-zone="11346128"
+          />
         </ThemeProvider>
       </body>
     </html>
