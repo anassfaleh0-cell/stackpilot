@@ -21,7 +21,7 @@ export function Header() {
             className="flex items-center gap-2.5 font-semibold text-lg tracking-tight hover:opacity-80 transition-opacity"
             aria-label={`${site.name} - Home`}
           >
-            <img src="/logo.svg" alt="" className="h-7 w-7" width={28} height={28} aria-hidden="true" />
+            <img src="/favicon.svg" alt="" className="h-7 w-7" width={28} height={28} aria-hidden="true" />
             <span>{site.name}</span>
           </Link>
           <Navigation />

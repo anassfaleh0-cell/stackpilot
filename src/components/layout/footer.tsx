@@ -45,7 +45,7 @@ const footerLinks = [
 
 function Logo() {
   return (
-    <img src="/logo.svg" alt="" className="h-7 w-7" width={28} height={28} aria-hidden="true" />
+    <img src="/favicon.svg" alt="" className="h-7 w-7" width={28} height={28} aria-hidden="true" />
   )
 }
 

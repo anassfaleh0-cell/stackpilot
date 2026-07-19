@@ -4,7 +4,7 @@ export const site = {
   description:
     "In-depth software reviews, expert comparisons, and actionable guides to help businesses choose, implement, and optimize the right tools for every need.",
   url: "https://www.pilotstack.online",
-  logo: "/logo.svg",
+  logo: "/favicon.svg",
   locale: "en_US",
   links: {
     twitter: "https://x.com/pilotstackon",

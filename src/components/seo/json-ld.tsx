@@ -17,7 +17,7 @@ export function OrganizationSchema() {
     "@id": `${site.url}/#organization`,
     name: site.name,
     url: site.url,
-    logo: { "@type": "ImageObject", url: `${site.url}/logo.svg`, width: 512, height: 512 },
+    logo: { "@type": "ImageObject", url: `${site.url}/favicon.svg`, width: 512, height: 512 },
     description: site.description,
     sameAs: [site.links.twitter, site.links.github, site.links.reddit],
     foundingDate: "2024",
