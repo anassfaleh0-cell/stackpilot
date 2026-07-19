@@ -99,13 +99,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
-        <link rel="dns-prefetch" href="https://5gvci.com" />
-        <link rel="dns-prefetch" href="https://n6wxm.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="preconnect" href="https://www.clarity.ms" />
+        <link rel="dns-prefetch" href="https://quge5.com" />
+        <link rel="dns-prefetch" href="https://5gvci.com" />
+        <link rel="dns-prefetch" href="https://n6wxm.com" />
+        <link rel="preconnect" href="https://quge5.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://5gvci.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://n6wxm.com" crossOrigin="anonymous" />
+
+        <script src="https://quge5.com/88/tag.min.js" data-zone="261263" async data-cfasync="false"></script>
+        <script src="https://5gvci.com/act/files/tag.min.js?z=11346121" data-cfasync="false" async></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "(function(s){s.dataset.zone='11346128',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))",
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider>
@@ -123,22 +133,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <GAScript />
           <ClarityScript />
         </ThemeProvider>
-
-        <script
-          src="https://5gvci.com/act/files/tag.min.js?z=11346121"
-          data-cfasync="false"
-          async
-        />
-        <script
-          src="https://5gvci.com/act/files/tag.min.js?z=11345405"
-          data-cfasync="false"
-          async
-        />
-        <script
-          src="https://n6wxm.com/vignette.min.js"
-          data-zone="11346128"
-          async
-        />
       </body>
     </html>
   )

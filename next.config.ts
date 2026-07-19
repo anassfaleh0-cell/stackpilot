@@ -16,32 +16,16 @@ const analytics = [
 ]
 
 const monetag = [
-  "https://tzegilo.com",
-  "https://*.tzegilo.com",
   "https://quge5.com",
   "https://*.quge5.com",
-  "https://venetrue.com",
-  "https://*.venetrue.com",
-  "https://dolohen.com",
-  "https://*.dolohen.com",
-  "https://srclick.com",
-  "https://*.srclick.com",
-  "https://loaztee.com",
-  "https://*.loaztee.com",
   "https://5gvci.com",
   "https://*.5gvci.com",
   "https://n6wxm.com",
   "https://*.n6wxm.com",
-  "https://3nbf4.com",
-  "https://*.3nbf4.com",
-  "https://my.rtmark.net",
-  "https://*.rtmark.net",
-  "https://ldrws.com",
-  "https://*.ldrws.com",
 ]
 
 const scriptSrc = [...analytics, ...monetag].join(" ")
-const monetagStr = monetag.join(" ")
+const workerSrc = [...analytics, ...monetag, "blob:"].join(" ")
 
 const csp = [
   "default-src 'self'",
@@ -54,9 +38,9 @@ const csp = [
   `img-src 'self' data: blob: ${scriptSrc}`,
   `font-src 'self' https://fonts.gstatic.com`,
   `connect-src 'self' ${scriptSrc}`,
-  `frame-src 'self' ${monetagStr}`,
-  `worker-src 'self' blob: ${scriptSrc}`,
-  `child-src 'self' blob: ${monetagStr}`,
+  `frame-src 'self' ${scriptSrc}`,
+  `worker-src 'self' ${workerSrc}`,
+  "child-src 'self' blob:",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",

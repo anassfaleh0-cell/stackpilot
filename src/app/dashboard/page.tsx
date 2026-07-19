@@ -47,7 +47,7 @@ const sections = [
     title: "Revenue & Monetization",
     cards: [
       { label: "Affiliate Revenue", value: "$0", subtitle: "monthly commission", icon: DollarSign },
-      { label: "Monetag Revenue", value: "$0", subtitle: "ad network revenue", icon: BarChart3 },
+      { label: "Ad Revenue", value: "$0", subtitle: "network revenue", icon: BarChart3 },
       { label: "RPM", value: "$0.00", subtitle: "revenue per 1k visits", icon: Gauge },
     ],
     grid: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
