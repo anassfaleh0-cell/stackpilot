@@ -3,6 +3,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { ContactForm } from "@/components/pages/contact-form"
+import { ToastProvider } from "@/components/ui/toast"
 import { SocialLinkList } from "@/components/brand/social-icons"
 
 export const metadata = createMetadata({
@@ -18,7 +19,9 @@ export default function ContactPage() {
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Contact" }]} />
       </Container>
-      <ContactForm />
+      <ToastProvider>
+        <ContactForm />
+      </ToastProvider>
       <Container className="pb-16 sm:pb-20 lg:pb-24">
         <div className="max-w-2xl mx-auto mt-16 p-6 rounded-xl bg-muted-bg border border-border">
           <h2 className="text-lg font-bold mb-2">Official Community</h2>

@@ -27,7 +27,7 @@ export function EditorialConcept({ term, slug, category, className = "" }: Edito
           <circle cx="12" cy="12" r="10" />
           <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
         </svg>
-        <span className="font-semibold text-sm" style={{ color: p.primary }}>Concept Visualization</span>
+        <h3 className="font-semibold text-sm" style={{ color: p.primary }}>Concept Visualization</h3>
       </div>
       <svg viewBox="0 0 100 100" className="w-full h-auto max-h-36" role="img" aria-label={`${term} concept visualization`}>
         {nodes.map((n, i) => {

@@ -26,7 +26,7 @@ export function EditorialCallout({ type, title, children, category = "Productivi
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={p.primary} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d={c.icon} />
         </svg>
-        <span className="text-sm font-semibold">{title}</span>
+        <h4 className="text-sm font-semibold">{title}</h4>
       </div>
       <div className="text-sm text-muted leading-relaxed">{children}</div>
     </div>

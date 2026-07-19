@@ -4,7 +4,7 @@ import { ChevronRight, Home } from "lucide-react"
 export function Breadcrumbs({ items }: { items: { name: string; href?: string }[] }) {
   return (
     <nav aria-label="Breadcrumb" className="mb-6">
-      <ol role="list" className="flex items-center gap-1.5 text-sm text-muted flex-wrap">
+      <ol className="flex items-center gap-1.5 text-sm text-muted flex-wrap">
         <li>
           <Link href="/" className="hover:text-foreground transition-colors flex items-center gap-1">
             <Home size={14} aria-hidden="true" />

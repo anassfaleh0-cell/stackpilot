@@ -43,7 +43,6 @@ export function EditorialSectionIllustration({ slug, category, index, className 
     <svg
       viewBox="0 0 100 30"
       className={`w-full h-auto max-h-8 ${className}`}
-      role="presentation"
       aria-hidden="true"
     >
       {style === 0 && (

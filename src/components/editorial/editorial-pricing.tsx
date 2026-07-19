@@ -43,7 +43,7 @@ export function EditorialPricing({ tool, className = "" }: EditorialPricingProps
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={p.primary} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
         </svg>
-        <span className="font-semibold text-sm" style={{ color: p.primary }}>Pricing: {tool.pricing}</span>
+        <h3 className="font-semibold text-sm" style={{ color: p.primary }}>Pricing: {tool.pricing}</h3>
       </div>
       <div className="grid sm:grid-cols-3 gap-3">
         {plans.map((plan) => (

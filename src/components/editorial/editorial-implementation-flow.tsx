@@ -28,7 +28,7 @@ export function EditorialImplementationFlow({ tool, className = "" }: EditorialI
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={p.primary} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
         </svg>
-        <span className="font-semibold text-sm" style={{ color: p.primary }}>Implementation Flow</span>
+        <h3 className="font-semibold text-sm" style={{ color: p.primary }}>Implementation Flow</h3>
       </div>
       <svg viewBox={`0 0 ${totalW} ${height}`} className="w-full h-auto" role="img" aria-label="Implementation process flow diagram">
         <defs>

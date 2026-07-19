@@ -26,7 +26,7 @@ export function EditorialPricingLadder({ tool, className = "" }: EditorialPricin
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={p.primary} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
         </svg>
-        <span className="font-semibold text-sm" style={{ color: p.primary }}>Pricing Ladder</span>
+        <h3 className="font-semibold text-sm" style={{ color: p.primary }}>Pricing Ladder</h3>
       </div>
       <svg viewBox={`0 0 ${barW + 80} ${height}`} className="w-full h-auto" role="img" aria-label="Pricing tier comparison ladder">
         <defs>

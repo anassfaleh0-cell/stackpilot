@@ -66,18 +66,19 @@ export function Footer() {
               <Link
                 href="/about"
                 className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Learn more about PilotStack"
               >
                 Learn more <ArrowUpRight size={12} />
               </Link>
             </div>
             <div className="mt-6">
-              <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">Follow PilotStack</h4>
+              <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">Follow PilotStack</h2>
               <SocialFooterIcons />
             </div>
           </div>
           {footerLinks.map((group) => (
             <div key={group.title}>
-              <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">{group.title}</h4>
+              <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">{group.title}</h2>
               <ul className="space-y-2.5">
                 {group.links.map((link) => (
                   <li key={link.href}>

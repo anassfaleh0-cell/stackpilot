@@ -44,7 +44,7 @@ export function PricingTable({ entity }: PricingTableProps) {
   return (
     <div className="rounded-xl border border-border overflow-hidden">
       <div className="overflow-x-auto">
-        <table className="w-full" role="table" aria-label={`${entity.name} pricing plans`}>
+        <table className="w-full" aria-label={`${entity.name} pricing plans`}>
           <thead>
             <tr className="bg-muted-bg border-b border-border">
               <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">Plan</th>

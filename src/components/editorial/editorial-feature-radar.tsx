@@ -51,7 +51,7 @@ export function EditorialFeatureRadar({ tool, className = "" }: EditorialFeature
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={p.primary} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 20V10M18 20V4M6 20v-4" />
         </svg>
-        <span className="font-semibold text-sm" style={{ color: p.primary }}>Feature Radar</span>
+        <h3 className="font-semibold text-sm" style={{ color: p.primary }}>Feature Radar</h3>
       </div>
       <svg viewBox={`0 0 ${size} ${size + values.length * 18 + 10}`} className="w-full h-auto max-w-xs mx-auto" role="img" aria-label="Feature category radar chart">
         <defs>

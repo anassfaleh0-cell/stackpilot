@@ -134,7 +134,7 @@ export function SecurityTable({ entity }: SecurityTableProps) {
 
   return (
     <div className="rounded-xl border border-border overflow-hidden">
-      <table className="w-full" role="table" aria-label={`${entity.name} security and compliance details`}>
+      <table className="w-full" aria-label={`${entity.name} security and compliance details`}>
         <thead>
           <tr className="bg-muted-bg border-b border-border">
             <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">Category</th>

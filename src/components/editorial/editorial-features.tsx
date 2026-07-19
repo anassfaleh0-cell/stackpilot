@@ -33,7 +33,7 @@ export function EditorialFeatureMatrix({ features, slug, category, className = "
         return (
           <div key={group.label} className="rounded-xl overflow-hidden" style={{ border: `1px solid ${p.glassBorder}` }}>
             <div className="flex items-center gap-2 px-5 py-3" style={{ backgroundColor: p.subtle1, borderBottom: `1px solid ${p.glassBorder}` }}>
-              <span className="text-sm font-semibold" style={{ color: p.primary }}>{group.label} Features</span>
+              <h3 className="text-sm font-semibold" style={{ color: p.primary }}>{group.label} Features</h3>
               <span className="text-xs ml-auto" style={{ color: p.secondary }}>{availCount}/{group.items.length} available</span>
             </div>
             <div className="divide-y" style={{ borderColor: p.glassBorder }}>

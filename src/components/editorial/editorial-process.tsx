@@ -32,7 +32,7 @@ export function EditorialProcess({ sections, slug, category, className = "" }: E
           <rect x="14" y="14" width="7" height="7" />
           <rect x="3" y="14" width="7" height="7" />
         </svg>
-        <span className="font-semibold text-sm" style={{ color: p.primary }}>Process Architecture</span>
+        <h3 className="font-semibold text-sm" style={{ color: p.primary }}>Process Architecture</h3>
       </div>
       <svg viewBox="0 0 100 80" className="w-full h-auto max-h-40" role="img" aria-label="Process architecture diagram">
         <defs>

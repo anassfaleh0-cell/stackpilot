@@ -30,7 +30,7 @@ export function EditorialComparison({ tool1, tool2, features, winner, category, 
           border: `1px solid ${winner === tool1 ? p.primary : p.glassBorder}`,
           backgroundColor: winner === tool1 ? p.glassBg : undefined,
         }}>
-          <div className="font-semibold" style={{ color: p.primary }}>{tool1}</div>
+          <div className="font-semibold text-sm" style={{ color: p.primary }}>{tool1}</div>
           <div className="text-2xl font-bold mt-1" style={{ color: p.primary }}>{t1w}</div>
           <div className="text-xs text-muted">wins</div>
         </div>

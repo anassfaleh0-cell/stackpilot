@@ -5,6 +5,7 @@ import Script from "next/script"
 import { usePathname } from "next/navigation"
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-WZ6LVYH8ML"
+const CLARITY_ID = "xooildcs2r"
 
 declare global {
   interface Window {
@@ -27,6 +28,20 @@ export function Analytics() {
   }, [pathname])
 
   return null
+}
+
+export function ClarityScript() {
+  return (
+    <Script id="clarity-init" strategy="afterInteractive">
+      {`
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "${CLARITY_ID}");
+      `}
+    </Script>
+  )
 }
 
 export function GAScript() {
@@ -56,11 +71,6 @@ export function GAScript() {
             anonymize_ip: true,
             link_attribution: true
           });
-
-          if (window.console) {
-            console.log('[GA4] tag initialized:', '${GA_ID}');
-            console.log('[GA4] dataLayer:', window.dataLayer);
-          }
         `}
       </Script>
     </>

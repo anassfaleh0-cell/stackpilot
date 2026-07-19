@@ -55,7 +55,7 @@ export function CapabilitiesGrid({ entity }: CapabilitiesGridProps) {
               <MinusCircle size={16} className="text-muted-foreground mt-0.5 shrink-0" aria-hidden="true" />
             )}
             <div className="min-w-0">
-              <div className="text-sm font-medium">{item.label}</div>
+              <h3 className="text-sm font-medium">{item.label}</h3>
               {item.description && (
                 <div className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{item.description}</div>
               )}

@@ -24,7 +24,7 @@ export function UseCasePanel({ entity }: UseCasePanelProps) {
         {useCases.primary.length > 0 && (
           <GlassCard>
             <div className="p-4">
-              <h4 className="text-sm font-semibold mb-2">Primary Use Cases</h4>
+              <h3 className="text-sm font-semibold mb-2">Primary Use Cases</h3>
               <ul className="space-y-1.5">
                 {useCases.primary.map((uc) => (
                   <li key={uc} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -39,7 +39,7 @@ export function UseCasePanel({ entity }: UseCasePanelProps) {
         {useCases.secondary && useCases.secondary.length > 0 && (
           <GlassCard>
             <div className="p-4">
-              <h4 className="text-sm font-semibold mb-2">Secondary Use Cases</h4>
+              <h3 className="text-sm font-semibold mb-2">Secondary Use Cases</h3>
               <ul className="space-y-1.5">
                 {useCases.secondary.map((uc) => (
                   <li key={uc} className="flex items-start gap-2 text-sm text-muted-foreground">
