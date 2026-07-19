@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next/dist/lib/metadata/types/metadata-interface"
 import { Geist, Geist_Mono } from "next/font/google"
-import Script from "next/script"
 import "./globals.css"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
@@ -121,22 +120,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <GAScript />
           <ClarityScript />
-          <Script
-            src="https://5gvci.com/act/files/tag.min.js?z=11346121"
-            data-cfasync="false"
-            strategy="afterInteractive"
-          />
-          <Script
-            src="https://5gvci.com/act/files/tag.min.js?z=11345405"
-            data-cfasync="false"
-            strategy="afterInteractive"
-          />
-          <Script
-            src="https://n6wxm.com/vignette.min.js"
-            data-zone="11346128"
-            strategy="afterInteractive"
-          />
         </ThemeProvider>
+
+        <script
+          src="https://5gvci.com/act/files/tag.min.js?z=11346121"
+          data-cfasync="false"
+          async
+        />
+        <script
+          src="https://5gvci.com/act/files/tag.min.js?z=11345405"
+          data-cfasync="false"
+          async
+        />
+        <script
+          src="https://n6wxm.com/vignette.min.js"
+          data-zone="11346128"
+          async
+        />
       </body>
     </html>
   )
