@@ -3,11 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
-import { ToastProvider } from "@/components/ui/toast"
 import { ThemeProvider } from "@/components/theme-provider"
-import { CookieConsent } from "@/components/analytics/cookie-consent"
-import { Analytics, GAScript } from "@/components/analytics"
-import { ReadingProgress } from "@/components/layout/reading-progress"
+import { GAScript, ClarityScript } from "@/components/analytics"
+import { ClientLayout } from "@/components/layout/client-layout"
+import Script from "next/script"
 import { OrganizationSchema, WebsiteSchema } from "@/components/seo/json-ld"
 import { siteConfig } from "@/lib/constants"
 
@@ -23,7 +22,7 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
-  preload: true,
+  preload: false,
   fallback: ["JetBrains Mono", "Consolas", "Monaco", "monospace"],
 })
 
@@ -75,8 +74,6 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const isDev = process.env.NODE_ENV !== "production"
-
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
@@ -98,37 +95,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
-        <script
-          src="https://quge5.com/88/tag.min.js"
-          data-zone="261263"
-          data-cfasync="false"
-          async
-        />
 
         <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name}`} href="/rss.xml" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider>
-          <ToastProvider>
-            <a href="#main-content" className="skip-to-content">
-              Skip to main content
-            </a>
-            <OrganizationSchema />
-            <WebsiteSchema />
-            <Header />
-            <ReadingProgress />
+          <a href="#main-content" className="skip-to-content">
+            Skip to main content
+          </a>
+          <OrganizationSchema />
+          <WebsiteSchema />
+          <Header />
+          <ClientLayout />
           <main id="main-content" className="flex-1 outline-none" tabIndex={-1}>
-              {children}
-            </main>
-            <Footer />
-            <GAScript />
-            <CookieConsent />
-            <Analytics />
-          </ToastProvider>
+            {children}
+          </main>
+          <Footer />
+          <GAScript />
+          <ClarityScript />
+          <Script
+            src="https://5gvci.com/act/files/tag.min.js?z=11346121"
+            strategy="afterInteractive"
+            data-cfasync="false"
+          />
         </ThemeProvider>
       </body>
     </html>
