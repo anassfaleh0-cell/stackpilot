@@ -28,6 +28,18 @@ const monetag = [
   "https://*.rtmark.net",
   "https://ldrws.com",
   "https://*.ldrws.com",
+  "https://tzegilo.com",
+  "https://*.tzegilo.com",
+  "https://auqot.com",
+  "https://*.auqot.com",
+  "https://ekhay.com",
+  "https://*.ekhay.com",
+  "https://b3mny.com",
+  "https://*.b3mny.com",
+  "https://aichouphaugn.com",
+  "https://*.aichouphaugn.com",
+  "https://fleraprt.com",
+  "https://*.fleraprt.com",
 ]
 
 const scriptSrc = [...analytics, ...monetag].join(" ")
