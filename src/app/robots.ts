@@ -11,18 +11,14 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "GPTBot",
-        disallow: "/",
-      },
-      {
-        userAgent: "CCBot",
-        disallow: "/",
+        allow: "/",
       },
       {
         userAgent: "OAI-SearchBot",
         allow: "/",
       },
       {
-        userAgent: "PerplexityBot",
+        userAgent: "ChatGPT-User",
         allow: "/",
       },
       {
@@ -30,11 +26,35 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
       {
+        userAgent: "PerplexityBot",
+        allow: "/",
+      },
+      {
+        userAgent: "Google-Extended",
+        allow: "/",
+      },
+      {
         userAgent: "GoogleOther",
         allow: "/",
       },
       {
+        userAgent: "Applebot-Extended",
+        allow: "/",
+      },
+      {
         userAgent: "Bingbot",
+        allow: "/",
+      },
+      {
+        userAgent: "CCBot",
+        allow: "/",
+      },
+      {
+        userAgent: "Bytespider",
+        allow: "/",
+      },
+      {
+        userAgent: "meta-externalagent",
         allow: "/",
       },
     ],
