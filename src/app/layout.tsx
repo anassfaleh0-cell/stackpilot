@@ -104,6 +104,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="preconnect" href="https://www.clarity.ms" />
+        <link rel="preconnect" href="https://5gvci.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://n6wxm.com" crossOrigin="anonymous" />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider>

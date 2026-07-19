@@ -15,6 +15,8 @@ const monetagDomains = [
   "https://*.5gvci.com",
   "https://n6wxm.com",
   "https://*.n6wxm.com",
+  "https://3nbf4.com",
+  "https://*.3nbf4.com",
 ].join(" ")
 
 const csp = [
