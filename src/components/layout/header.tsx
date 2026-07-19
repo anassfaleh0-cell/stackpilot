@@ -7,6 +7,7 @@ import { MobileNav } from "./mobile-nav"
 import { site } from "@/lib/constants"
 import { Search, Sun, Moon } from "lucide-react"
 import { useTheme } from "@/components/theme-provider"
+import { SocialHeaderIcons } from "@/components/brand/social-icons"
 
 export function Header() {
   const { resolved, toggle } = useTheme()
@@ -33,6 +34,7 @@ export function Header() {
           >
             {resolved === "dark" ? <Sun size={16} /> : <Moon size={16} />}
           </button>
+          <SocialHeaderIcons />
           <Link
             href="/search"
             className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"

@@ -8,6 +8,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowRight, Star, BookOpen, Calendar } from "lucide-react"
 import { getAllReviews, getAllGuides, getAllBlogPosts } from "@/lib/content/registry"
+import { SocialFooterIcons } from "@/components/brand/social-icons"
 
 const authors = {
   "pilotstack-team": {
@@ -180,6 +181,10 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
               {allReviews.length === 0 && allGuides.length === 0 && allPosts.length === 0 && (
                 <p className="text-muted-foreground text-sm">No content published yet.</p>
               )}
+            </div>
+            <div className="mt-12 p-6 rounded-xl bg-muted-bg border border-border">
+              <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-3">Follow PilotStack</h2>
+              <SocialFooterIcons />
             </div>
           </div>
         </Container>

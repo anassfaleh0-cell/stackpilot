@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
+import { SocialLinkList } from "@/components/brand/social-icons"
 
 export const metadata = createMetadata({
   title: "About",
@@ -41,6 +42,11 @@ export default function AboutPage() {
                     <p className="text-sm text-muted-foreground">{v.desc}</p>
                   </div>
                 ))}
+              </div>
+              <div className="mt-12 p-6 rounded-xl bg-muted-bg border border-border">
+                <h2 className="text-lg font-bold mb-2">Official Community</h2>
+                <p className="text-sm text-muted-foreground mb-4">Join the PilotStack community:</p>
+                <SocialLinkList />
               </div>
               <div className="mt-12 text-center">
                 <a href="/methodology" className="button-press inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-white hover:bg-primary-dark shadow-button h-10 px-6 text-sm font-medium transition-all duration-200">

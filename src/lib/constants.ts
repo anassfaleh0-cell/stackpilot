@@ -7,8 +7,9 @@ export const site = {
   logo: "/logo.svg",
   locale: "en_US",
   links: {
-    twitter: "https://x.com/pilotstack",
+    twitter: "https://x.com/pilotstackon",
     github: "https://github.com/pilotstack",
+    reddit: "https://reddit.com/u/Pilotstackonline",
   },
 }
 

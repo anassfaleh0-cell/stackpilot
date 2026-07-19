@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Container } from "@/components/ui/container"
 import { site, navLinks, categories, editorialLinks } from "@/lib/constants"
 import { Compass, ArrowUpRight } from "lucide-react"
+import { SocialFooterIcons } from "@/components/brand/social-icons"
 
 const footerLinks = [
   {
@@ -68,6 +69,10 @@ export function Footer() {
               >
                 Learn more <ArrowUpRight size={12} />
               </Link>
+            </div>
+            <div className="mt-6">
+              <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">Follow PilotStack</h4>
+              <SocialFooterIcons />
             </div>
           </div>
           {footerLinks.map((group) => (
