@@ -5,8 +5,8 @@ const analytics = [
   "https://www.google-analytics.com",
   "https://analytics.google.com",
   "https://www.clarity.ms",
-  "https://scripts.clarity.ms",
-  "https://img.clarity.ms",
+  "https://*.clarity.ms",
+  "https://c.bing.com",
   "https://static.cloudflareinsights.com",
   "https://fonts.googleapis.com",
   "https://fonts.gstatic.com",
@@ -31,6 +31,10 @@ const monetag = [
   "https://*.n6wxm.com",
   "https://3nbf4.com",
   "https://*.3nbf4.com",
+  "https://my.rtmark.net",
+  "https://*.rtmark.net",
+  "https://ldrws.com",
+  "https://*.ldrws.com",
 ]
 
 const scriptSrc = [...analytics, ...monetag].join(" ")
@@ -48,8 +52,8 @@ const csp = [
   `font-src 'self' https://fonts.gstatic.com`,
   `connect-src 'self' ${scriptSrc}`,
   `frame-src 'self' ${monetagStr}`,
-  `worker-src 'self' blob: ${monetagStr}`,
-  "child-src 'self' blob:",
+  `worker-src 'self' blob: ${scriptSrc}`,
+  `child-src 'self' blob: ${monetagStr}`,
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
