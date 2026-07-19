@@ -25,7 +25,14 @@ export function CookieConsent() {
     localStorage.setItem(COOKIE_CONSENT_KEY, "accepted")
     setConsent("accepted")
     setVisible(false)
-    loadAnalytics()
+    if (typeof window.gtag === "function") {
+      window.gtag("consent", "update", {
+        analytics_storage: "granted",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+      })
+    }
   }
 
   function handleDecline() {
@@ -33,32 +40,6 @@ export function CookieConsent() {
     setConsent("declined")
     setVisible(false)
   }
-
-  function loadAnalytics() {
-    const gaId = process.env.NEXT_PUBLIC_GA_ID
-    if (gaId && typeof window !== "undefined") {
-      const script1 = document.createElement("script")
-      script1.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`
-      script1.async = true
-      document.head.appendChild(script1)
-      const script2 = document.createElement("script")
-      script2.innerHTML = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}',{anonymize_ip:true});`
-      document.head.appendChild(script2)
-    }
-
-    const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID
-    if (clarityId && typeof window !== "undefined") {
-      const script = document.createElement("script")
-      script.innerHTML = `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,'clarity','script','${clarityId}');`
-      document.head.appendChild(script)
-    }
-  }
-
-  useEffect(() => {
-    if (consent === "accepted") {
-      loadAnalytics()
-    }
-  }, [consent])
 
   if (!visible) return null
 

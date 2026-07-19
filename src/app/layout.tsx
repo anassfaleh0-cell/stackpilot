@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/footer"
 import { ToastProvider } from "@/components/ui/toast"
 import { ThemeProvider } from "@/components/theme-provider"
 import { CookieConsent } from "@/components/analytics/cookie-consent"
-import { Analytics } from "@/components/analytics"
+import { Analytics, GAScript } from "@/components/analytics"
 import { ReadingProgress } from "@/components/layout/reading-progress"
 import { OrganizationSchema, WebsiteSchema } from "@/components/seo/json-ld"
 import { siteConfig } from "@/lib/constants"
@@ -110,9 +110,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
-        {process.env.NEXT_PUBLIC_VERCEL_ANALYTICS && (
-          <script defer src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} />
-        )}
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider>
@@ -128,6 +125,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {children}
             </main>
             <Footer />
+            <GAScript />
             <CookieConsent />
             <Analytics />
           </ToastProvider>

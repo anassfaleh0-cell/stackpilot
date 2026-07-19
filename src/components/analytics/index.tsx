@@ -1,31 +1,62 @@
 "use client"
 
 import { useEffect } from "react"
+import Script from "next/script"
+import { usePathname } from "next/navigation"
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-WZ6LVYH8ML"
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void
+    dataLayer?: unknown[]
+    clarity?: (...args: unknown[]) => void
+  }
+}
 
 export function Analytics() {
+  const pathname = usePathname()
+
   useEffect(() => {
-    const consent = localStorage.getItem("pilotstack-cookie-consent")
-    if (consent !== "accepted") return
-
-    const gaId = process.env.NEXT_PUBLIC_GA_ID
-    if (gaId && !document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${gaId}"]`)) {
-      const script = document.createElement("script")
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`
-      script.async = true
-      document.head.appendChild(script)
-
-      const inline = document.createElement("script")
-      inline.textContent = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}',{anonymize_ip:true,link_attribution:true});`
-      document.head.appendChild(inline)
-    }
-
-    const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID
-    if (clarityId && !document.querySelector(`script[src*="clarity.ms"]`)) {
-      const script = document.createElement("script")
-      script.textContent = `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,'clarity','script','${clarityId}');`
-      document.head.appendChild(script)
-    }
-  }, [])
+    if (!GA_ID || typeof window.gtag !== "function") return
+    window.gtag("config", GA_ID, {
+      page_path: pathname,
+      page_location: window.location.href,
+      page_title: document.title,
+    })
+  }, [pathname])
 
   return null
+}
+
+export function GAScript() {
+  if (!GA_ID) return null
+
+  return (
+    <>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="ga-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+
+          gtag('consent', 'default', {
+            ad_storage: 'denied',
+            analytics_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          });
+
+          gtag('js', new Date());
+          gtag('config', '${GA_ID}', {
+            anonymize_ip: true,
+            link_attribution: true
+          });
+        `}
+      </Script>
+    </>
+  )
 }

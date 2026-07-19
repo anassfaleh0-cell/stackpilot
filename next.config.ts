@@ -15,11 +15,11 @@ const monetagDomains = [
 
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-eval' 'unsafe-inline' ${monetagDomains}`,
+  `script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com ${monetagDomains}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https:",
+  "img-src 'self' data: blob: https: https://www.google-analytics.com",
   "font-src 'self'",
-  `connect-src 'self' ${monetagDomains} https:`,
+  `connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com ${monetagDomains} https:`,
   `frame-src 'self' ${monetagDomains} https:`,
   "worker-src 'self' blob:",
   "child-src 'self' blob:",
