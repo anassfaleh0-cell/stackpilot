@@ -6,11 +6,7 @@ export const metadata: Metadata = { title: "Page Not Found" }
 
 function LogoMark() {
   return (
-    <svg className="h-8 w-8" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <rect x="4" y="22" width="24" height="5" rx="2.5" className="fill-primary"/>
-      <rect x="9" y="14" width="14" height="5" rx="2.5" className="fill-primary"/>
-      <path d="M16 5 L22 15 L10 15 Z" className="fill-primary"/>
-    </svg>
+    <img src="/logo.svg" alt="" className="h-8 w-8" width={32} height={32} aria-hidden="true" />
   )
 }
 

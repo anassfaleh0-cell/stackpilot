@@ -20,10 +20,7 @@ export function Header() {
             className="flex items-center gap-2.5 font-semibold text-lg tracking-tight hover:opacity-80 transition-opacity"
             aria-label={`${site.name} - Home`}
           >
-            <svg className="h-7 w-7" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-              <rect x="1" y="1" width="30" height="30" rx="8" className="fill-primary" />
-              <path d="M11 13l5-5 5 5M11 21l5-5 5 5" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-            </svg>
+            <img src="/logo.svg" alt="" className="h-7 w-7" width={28} height={28} aria-hidden="true" />
             <span>{site.name}</span>
           </Link>
           <Navigation />
