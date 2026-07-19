@@ -10,6 +10,7 @@ import { Analytics } from "@/components/analytics"
 import { ReadingProgress } from "@/components/layout/reading-progress"
 import { OrganizationSchema, WebsiteSchema } from "@/components/seo/json-ld"
 import { siteConfig } from "@/lib/constants"
+import Script from "next/script"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -121,6 +122,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
             <CookieConsent />
             <Analytics />
+            <Script
+              src="https://quge5.com/88/tag.min.js"
+              data-zone="261263"
+              data-cfasync="false"
+              strategy="afterInteractive"
+            />
           </ToastProvider>
         </ThemeProvider>
       </body>
