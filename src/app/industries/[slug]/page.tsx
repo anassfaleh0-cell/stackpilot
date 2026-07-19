@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, AboutPageSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, AboutPageSchema, NewsArticleSchema, ArticleSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getIndustry, getAllIndustries, getContentTitle } from "@/lib/content/registry"
@@ -19,7 +19,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const ind = getIndustry(slug)
   if (!ind) return {}
-  return createMetadata({ title: ind.title, description: ind.description, path: `/industries/${ind.slug}` })
+  const readingTime = Math.max(5, Math.ceil((ind.description.split(/\s+/).length + ind.recommendations.length * 15) / 200))
+  return createMetadata({ title: ind.title, description: ind.description, path: `/industries/${ind.slug}`, ogType: "article", publishedAt: ind.lastUpdated, updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime })
 }
 
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -37,6 +38,8 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Industries", href: "/industries" }, { name: ind.title, href: `/industries/${slug}` }]} />
+      <NewsArticleSchema title={ind.title} description={ind.description} publishedAt={ind.lastUpdated} updatedAt={ind.lastUpdated} author="PilotStack Team" url={`${site.url}/industries/${slug}`} wordCount={ind.description.split(/\s+/).length + ind.recommendations.length * 15} category={ind.industry} />
+      <ArticleSchema title={ind.title} description={ind.description} publishedAt={ind.lastUpdated} updatedAt={ind.lastUpdated} author="PilotStack Team" url={`${site.url}/industries/${slug}`} wordCount={ind.description.split(/\s+/).length + ind.recommendations.length * 15} category={ind.industry} />
       <CollectionPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} />
       <AboutPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} about={ind.recommendations.map((rec) => ({ "@type": "SoftwareApplication", name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` }))} />
       <FAQSchema questions={ind.faqs} />

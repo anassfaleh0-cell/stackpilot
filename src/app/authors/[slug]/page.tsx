@@ -2,7 +2,8 @@ import { Container, Section } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, PersonSchema } from "@/components/seo/json-ld"
+import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -18,6 +19,9 @@ const authors = {
     avatar: "/logo-icon.svg",
     expertise: ["Software Reviews", "Market Research", "Software Comparison"],
     credentials: ["50+ years combined experience", "Hands-on testing of 100+ tools"],
+    social: { twitter: "https://x.com/pilotstackon", github: "https://github.com/pilotstack" },
+    worksFor: "PilotStack",
+    knowsAbout: ["Software Reviews", "Market Research", "B2B SaaS"],
   },
   "alex-chen": {
     name: "Alex Chen",
@@ -26,6 +30,9 @@ const authors = {
     avatar: "/logo-icon.svg",
     expertise: ["Developer Tools", "AI & Machine Learning", "Productivity"],
     credentials: ["Former Senior Engineer at SaaS companies", "10+ years in software development"],
+    social: { twitter: "https://x.com/pilotstackon", github: "https://github.com/pilotstack" },
+    worksFor: "PilotStack",
+    knowsAbout: ["Developer Tools", "AI Platforms", "Productivity Software", "Software Engineering"],
   },
   "sarah-mitchell": {
     name: "Sarah Mitchell",
@@ -34,6 +41,9 @@ const authors = {
     avatar: "/logo-icon.svg",
     expertise: ["CRM & Sales", "Marketing & SEO", "Analytics"],
     credentials: ["Former Marketing Operations Lead", "8+ years in B2B marketing"],
+    social: { twitter: "https://x.com/pilotstackon", linkedin: "https://linkedin.com/company/pilotstack" },
+    worksFor: "PilotStack",
+    knowsAbout: ["CRM", "Marketing Automation", "Sales Tools", "B2B Marketing"],
   },
   "jordan-park": {
     name: "Jordan Park",
@@ -42,6 +52,9 @@ const authors = {
     avatar: "/logo-icon.svg",
     expertise: ["Market Research", "Data Analysis", "Pricing Analysis"],
     credentials: ["MS in Data Science", "5+ years in tech market research"],
+    social: { twitter: "https://x.com/pilotstackon", github: "https://github.com/pilotstack" },
+    worksFor: "PilotStack",
+    knowsAbout: ["Market Research", "Data Analysis", "Pricing Strategy", "Data Science"],
   },
   "priya-sharma": {
     name: "Priya Sharma",
@@ -50,6 +63,9 @@ const authors = {
     avatar: "/logo-icon.svg",
     expertise: ["Editorial Standards", "Content Strategy", "Quality Assurance"],
     credentials: ["12+ years in B2B content", "Former Editor at tech publications"],
+    social: { twitter: "https://x.com/pilotstackon", linkedin: "https://linkedin.com/company/pilotstack" },
+    worksFor: "PilotStack",
+    knowsAbout: ["Editorial Standards", "Content Strategy", "Software Journalism", "Quality Assurance"],
   },
 }
 
@@ -80,6 +96,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Authors", href: "/authors" }, { name: author.name, href: `/authors/${slug}` }]} />
+      <PersonSchema name={author.name} url={`${site.url}/authors/${slug}`} description={author.bio} knowsAbout={author.knowsAbout} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Authors", href: "/authors" }, { name: author.name }]} />
       </Container>
@@ -100,10 +117,17 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
                   ))}
                 </div>
                 <div className="mt-3 text-xs text-muted-foreground">
-                  {author.credentials.map((c, i) => (
+                  {author.credentials.map((c) => (
                     <span key={c} className="flex items-center gap-1">
                       <span className="text-primary">•</span> {c}
                     </span>
+                  ))}
+                </div>
+                <div className="flex items-center gap-3 mt-4">
+                  {Object.entries(author.social).map(([platform, url]) => (
+                    <a key={platform} href={url} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-muted-foreground hover:text-primary transition-colors capitalize">
+                      {platform === "twitter" ? "X" : platform} ↗
+                    </a>
                   ))}
                 </div>
               </div>

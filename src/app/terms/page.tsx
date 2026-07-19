@@ -1,6 +1,7 @@
 import { Container, Section } from "@/components/ui/container"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
+import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
@@ -13,6 +14,7 @@ export default function TermsPage() {
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Terms of Service", href: "/terms" }]} />
+      <WebPageSchema name="Terms of Service" description="PilotStack's terms of service governing use of our website and content." url={`${site.url}/terms`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Terms of Service" }]} />
       </Container>

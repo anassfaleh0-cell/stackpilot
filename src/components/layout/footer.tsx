@@ -1,8 +1,9 @@
 import Link from "next/link"
 import { Container } from "@/components/ui/container"
 import { site, navLinks, categories, editorialLinks } from "@/lib/constants"
-import { Compass, ArrowUpRight } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 import { SocialFooterIcons } from "@/components/brand/social-icons"
+import { NewsletterSignup } from "@/components/newsletter"
 
 const footerLinks = [
   {
@@ -25,8 +26,12 @@ const footerLinks = [
     links: [
       { href: "/about", label: "About" },
       { href: "/authors", label: "Our Authors" },
+      { href: "/brand-assets", label: "Brand Assets" },
+      { href: "/media-kit", label: "Media Kit" },
+      { href: "/press", label: "Press & Media" },
       { href: "/contact", label: "Contact" },
       { href: "/privacy", label: "Privacy Policy" },
+      { href: "/cookies", label: "Cookie Policy" },
       { href: "/terms", label: "Terms of Service" },
     ],
   },
@@ -62,16 +67,10 @@ export function Footer() {
             <p className="text-sm text-muted-foreground max-w-xs leading-relaxed text-pretty">
               {site.description}
             </p>
-            <div className="mt-6 flex items-center gap-3">
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Learn more about PilotStack"
-              >
-                Learn more <ArrowUpRight size={12} />
-              </Link>
+            <div className="mt-4">
+              <NewsletterSignup variant="footer" />
             </div>
-            <div className="mt-6">
+            <div className="mt-4">
               <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">Follow PilotStack</h2>
               <SocialFooterIcons />
             </div>

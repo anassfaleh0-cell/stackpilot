@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, AboutPageSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, AboutPageSchema, NewsArticleSchema, ArticleSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getUseCase, getAllUseCases, getContentTitle } from "@/lib/content/registry"
@@ -19,7 +19,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const uc = getUseCase(slug)
   if (!uc) return {}
-  return createMetadata({ title: uc.title, description: uc.description, path: `/use-cases/${uc.slug}` })
+  const readingTime = Math.max(5, Math.ceil((uc.description.split(/\s+/).length + uc.recommendations.length * 20) / 200))
+  return createMetadata({ title: uc.title, description: uc.description, path: `/use-cases/${uc.slug}`, ogType: "article", publishedAt: uc.lastUpdated, updatedAt: uc.lastUpdated, articleSection: uc.category, readingTime })
 }
 
 export default async function UseCasePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -30,6 +31,8 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Use Cases", href: "/use-cases" }, { name: uc.title, href: `/use-cases/${slug}` }]} />
+      <NewsArticleSchema title={uc.title} description={uc.description} publishedAt={uc.lastUpdated} updatedAt={uc.lastUpdated} author="PilotStack Team" url={`${site.url}/use-cases/${slug}`} wordCount={uc.description.split(/\s+/).length + uc.recommendations.length * 15} category={uc.category} />
+      <ArticleSchema title={uc.title} description={uc.description} publishedAt={uc.lastUpdated} updatedAt={uc.lastUpdated} author="PilotStack Team" url={`${site.url}/use-cases/${slug}`} wordCount={uc.description.split(/\s+/).length + uc.recommendations.length * 15} category={uc.category} />
       <CollectionPageSchema name={uc.title} description={uc.description} url={`${site.url}/use-cases/${slug}`} />
       <AboutPageSchema name={uc.title} description={uc.description} url={`${site.url}/use-cases/${slug}`} about={uc.recommendations.map((rec) => ({ "@type": "SoftwareApplication", name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` }))} />
       <FAQSchema questions={uc.faqs} />

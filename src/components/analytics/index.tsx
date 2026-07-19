@@ -27,6 +27,25 @@ export function Analytics() {
     })
   }, [pathname])
 
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const handler = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      const link = target.closest("a")
+      if (!link?.href) return
+      const isAffiliate = link.rel === "nofollow" || link.href.includes("affiliate") || link.href.includes("ref=") || link.href.includes("tag=")
+      const isOutbound = link.hostname !== window.location.hostname
+      if (isAffiliate && window.gtag) {
+        window.gtag("event", "affiliate_click", { affiliate_url: link.href, link_text: link.textContent?.slice(0, 100) })
+      }
+      if (isOutbound && window.gtag) {
+        window.gtag("event", "outbound_click", { outbound_url: link.href, link_text: link.textContent?.slice(0, 100) })
+      }
+    }
+    document.addEventListener("click", handler, { passive: true })
+    return () => document.removeEventListener("click", handler)
+  }, [])
+
   return null
 }
 

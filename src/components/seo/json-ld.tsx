@@ -69,7 +69,7 @@ export function BreadcrumbSchema({ items }: { items: { name: string; href: strin
 }
 
 export function ArticleSchema({
-  title, description, publishedAt, updatedAt, author, image, url,
+  title, description, publishedAt, updatedAt, author, image, url, wordCount, category,
 }: {
   title: string
   description: string
@@ -78,6 +78,8 @@ export function ArticleSchema({
   author: string
   image?: string
   url?: string
+  wordCount?: number
+  category?: string
 }) {
   const schema = clean({
     "@context": ctx,
@@ -89,11 +91,51 @@ export function ArticleSchema({
     publisher: { "@id": `${site.url}/#organization` },
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
-    image: { "@type": "ImageObject", url: image || `${site.url}/og.svg` },
+    image: { "@type": "ImageObject", url: image || `${site.url}/og.png` },
     mainEntityOfPage: { "@type": "WebPage", "@id": url || site.url },
     inLanguage: "en-US",
+    wordCount: wordCount || undefined,
+    articleSection: category || undefined,
+    isBasedOn: `${site.url}/methodology`,
+    about: { "@id": `${site.url}/#organization` },
+    speakable: { "@type": "SpeakableSpecification", cssSelector: [".article-summary", ".article-content"] },
   })
   return ld(schema, "ld-article")
+}
+
+export function NewsArticleSchema({
+  title, description, publishedAt, updatedAt, author, image, url, wordCount, category,
+}: {
+  title: string
+  description: string
+  publishedAt: string
+  updatedAt?: string
+  author: string
+  image?: string
+  url?: string
+  wordCount?: number
+  category?: string
+}) {
+  const schema = clean({
+    "@context": ctx,
+    "@type": "NewsArticle",
+    "@id": (url || site.url) + "#newsarticle",
+    headline: title,
+    description,
+    author: { "@type": "Person", name: author },
+    publisher: { "@id": `${site.url}/#organization` },
+    datePublished: publishedAt,
+    dateModified: updatedAt || publishedAt,
+    image: image || `${site.url}/og.png`,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url || site.url },
+    inLanguage: "en-US",
+    wordCount: wordCount || undefined,
+    articleSection: category || undefined,
+    isBasedOn: `${site.url}/methodology`,
+    about: { "@id": `${site.url}/#organization` },
+    speakable: { "@type": "SpeakableSpecification", cssSelector: [".article-summary", ".article-content"] },
+  })
+  return ld(schema, "ld-newsarticle")
 }
 
 export function BlogPostingSchema({

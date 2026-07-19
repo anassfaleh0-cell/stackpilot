@@ -12,6 +12,7 @@ export function createMetadata({
   updatedAt,
   articleTags,
   articleSection,
+  readingTime,
 }: {
   title: string
   description: string
@@ -24,12 +25,15 @@ export function createMetadata({
   updatedAt?: string
   articleTags?: string[]
   articleSection?: string
+  readingTime?: number
 }) {
   const url = path ? `${site.url}${path}` : site.url
   const imageUrl = ogImage || `${site.url}/og.svg`
   const isArticle = ogType === "article"
 
   const fullTitle = `${title} | ${site.name}`
+  const now = new Date().toISOString()
+  const displayDate = updatedAt || publishedAt || now
 
   return {
     title,
@@ -42,11 +46,12 @@ export function createMetadata({
       siteName: site.name,
       locale: site.locale,
       type: isArticle ? "article" : "website",
-      ...(isArticle && publishedAt ? { publishedTime: publishedAt } : {}),
-      ...(isArticle && updatedAt ? { modifiedTime: updatedAt } : {}),
+      ...(isArticle && publishedAt ? { publishedTime: publishedAt } : isArticle ? { publishedTime: now } : {}),
+      ...(isArticle && updatedAt ? { modifiedTime: updatedAt } : isArticle ? { modifiedTime: now } : {}),
       ...(isArticle ? { authors: ["PilotStack Team"] } : {}),
       ...(isArticle && articleTags ? { tags: articleTags } : {}),
       ...(isArticle && articleSection ? { section: articleSection } : {}),
+      ...(isArticle ? { } : {}),
       images: [{ url: imageUrl, width: 1200, height: 630, alt: ogImageAlt || `${title} | ${site.name}` }],
     },
     twitter: {
@@ -67,6 +72,11 @@ export function createMetadata({
         "max-image-preview": "large",
         "max-snippet": -1,
       },
+    },
+    other: {
+      ...(readingTime ? { "twitter:label1": "Reading time", "twitter:data1": `${readingTime} min` } : {}),
+      "twitter:label2": "Category",
+      "twitter:data2": articleSection || "Software Reviews",
     },
   }
 }

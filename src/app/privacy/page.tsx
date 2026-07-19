@@ -1,6 +1,7 @@
 import { Container, Section } from "@/components/ui/container"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
+import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
@@ -13,6 +14,7 @@ export default function PrivacyPage() {
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Privacy Policy", href: "/privacy" }]} />
+      <WebPageSchema name="Privacy Policy" description="PilotStack's privacy policy — how we collect, use, and protect your data." url={`${site.url}/privacy`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Privacy Policy" }]} />
       </Container>

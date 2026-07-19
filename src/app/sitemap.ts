@@ -26,6 +26,11 @@ const staticPages = [
   { url: `${siteConfig.url}/privacy`, lastModified: new Date(), changeFrequency: "yearly" as const, priority: 0.2 },
   { url: `${siteConfig.url}/terms`, lastModified: new Date(), changeFrequency: "yearly" as const, priority: 0.2 },
   { url: `${siteConfig.url}/search`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.1 },
+  { url: `${siteConfig.url}/press`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.4 },
+  { url: `${siteConfig.url}/brand-assets`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.3 },
+  { url: `${siteConfig.url}/media-kit`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.3 },
+  { url: `${siteConfig.url}/cookies`, lastModified: new Date(), changeFrequency: "yearly" as const, priority: 0.2 },
+  { url: `${siteConfig.url}/dashboard`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.1 },
   { url: `${siteConfig.url}/methodology`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.5 },
   ...editorialLinks.map((l) => ({
     url: `${siteConfig.url}${l.href}`,

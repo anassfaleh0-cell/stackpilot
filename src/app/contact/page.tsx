@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/container"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
+import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { ContactForm } from "@/components/pages/contact-form"
 import { ToastProvider } from "@/components/ui/toast"
@@ -16,6 +17,7 @@ export default function ContactPage() {
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Contact", href: "/contact" }]} />
+      <WebPageSchema name="Contact PilotStack" description="Get in touch with the PilotStack team." url={`${site.url}/contact`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Contact" }]} />
       </Container>

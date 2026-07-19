@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, SoftwareSchema, ReviewSchema, FAQSchema, WebPageSchema, ArticleSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, SoftwareSchema, ReviewSchema, FAQSchema, WebPageSchema, ArticleSchema, NewsArticleSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getReview, getContentTitle } from "@/lib/content/registry"
@@ -22,13 +22,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const tool = getReview(slug)
   if (!tool) return {}
+  const wordCount = tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)
   return createMetadata({
-    title: `${tool.name} Review 2026`,
-    description: `Read our in-depth ${tool.name} review (2026). Expert analysis of features, pricing, pros, cons, and top alternatives. ${tool.tagline}`,
+    title: `${tool.name} Review 2026: Expert Analysis, Pricing & Top Alternatives`,
+    description: `Read our hands-on ${tool.name} review. Expert analysis of features, pricing, pros, cons, security, and alternatives. Updated for 2026.`,
     path: `/reviews/${tool.slug}`,
     ogType: "article",
     publishedAt: tool.lastReviewed,
     updatedAt: tool.lastReviewed,
+    articleSection: tool.category,
+    readingTime: Math.max(3, Math.ceil(wordCount / 200)),
   })
 }
 
@@ -57,7 +60,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
       <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} reviewCount={tool.reviewCount} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.lastReviewed} body={tool.description} companyInfo={entity?.company || tool.company} />
       <SoftwareSchema name={tool.name} description={tool.tagline} applicationCategory="BusinessApplication" brand={tool.name} operatingSystem={entity?.company?.platforms?.join(", ")} offers={entity?.pricing?.[0] ? { price: entity.pricing[0].price?.toString() || "", priceCurrency: entity.pricing[0].currency || "USD" } : undefined} />
       <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.lastReviewed} />
-      <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.lastReviewed} updatedAt={tool.lastReviewed} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} />
+      <NewsArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.lastReviewed} updatedAt={tool.lastReviewed} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} />
+      <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.lastReviewed} updatedAt={tool.lastReviewed} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} />
       <FAQSchema questions={tool.faqs} />
 
       <Container className="pt-8">
