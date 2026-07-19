@@ -121,20 +121,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <GAScript />
           <ClarityScript />
-          <script
+          <Script
             src="https://5gvci.com/act/files/tag.min.js?z=11346121"
             data-cfasync="false"
-            async
+            strategy="afterInteractive"
           />
-          <script
+          <Script
             src="https://5gvci.com/act/files/tag.min.js?z=11345405"
             data-cfasync="false"
-            async
+            strategy="afterInteractive"
           />
-          <script
+          <Script
             src="https://n6wxm.com/vignette.min.js"
             data-zone="11346128"
-            async
+            strategy="afterInteractive"
           />
         </ThemeProvider>
       </body>
