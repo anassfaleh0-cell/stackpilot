@@ -44,17 +44,23 @@ export function GAScript() {
           function gtag(){window.dataLayer.push(arguments);}
 
           gtag('consent', 'default', {
+            analytics_storage: 'granted',
             ad_storage: 'denied',
-            analytics_storage: 'denied',
             ad_user_data: 'denied',
             ad_personalization: 'denied'
           });
 
           gtag('js', new Date());
           gtag('config', '${GA_ID}', {
+            send_page_view: true,
             anonymize_ip: true,
             link_attribution: true
           });
+
+          if (window.console) {
+            console.log('[GA4] tag initialized:', '${GA_ID}');
+            console.log('[GA4] dataLayer:', window.dataLayer);
+          }
         `}
       </Script>
     </>

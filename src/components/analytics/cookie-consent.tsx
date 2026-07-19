@@ -25,20 +25,20 @@ export function CookieConsent() {
     localStorage.setItem(COOKIE_CONSENT_KEY, "accepted")
     setConsent("accepted")
     setVisible(false)
-    if (typeof window.gtag === "function") {
-      window.gtag("consent", "update", {
-        analytics_storage: "granted",
-        ad_storage: "denied",
-        ad_user_data: "denied",
-        ad_personalization: "denied",
-      })
-    }
   }
 
   function handleDecline() {
     localStorage.setItem(COOKIE_CONSENT_KEY, "declined")
     setConsent("declined")
     setVisible(false)
+    if (typeof window.gtag === "function") {
+      window.gtag("consent", "update", {
+        analytics_storage: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+      })
+    }
   }
 
   if (!visible) return null
@@ -53,7 +53,7 @@ export function CookieConsent() {
       <div className="rounded-xl border border-border bg-card p-4 shadow-modal">
         <div className="flex items-start justify-between gap-3">
           <div className="text-xs leading-relaxed text-muted-foreground">
-            We use essential cookies for site functionality and analytics cookies (with your consent) to understand how visitors use our site.{" "}
+            We use essential cookies for site functionality and analytics cookies to understand how visitors use our site.{" "}
             <a href="/privacy" className="text-primary hover:underline">Learn more</a>.
           </div>
           <button
