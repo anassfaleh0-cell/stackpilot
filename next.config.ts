@@ -1,13 +1,28 @@
 import type { NextConfig } from "next/dist/server/config-shared"
 
+const monetagDomains = [
+  "https://quge5.com",
+  "https://*.quge5.com",
+  "https://venetrue.com",
+  "https://*.venetrue.com",
+  "https://dolohen.com",
+  "https://*.dolohen.com",
+  "https://srclick.com",
+  "https://*.srclick.com",
+  "https://loaztee.com",
+  "https://*.loaztee.com",
+].join(" ")
+
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://quge5.com https://*.quge5.com https://venetrue.com https://*.venetrue.com https://dolohen.com https://*.dolohen.com https://srclick.com https://*.srclick.com https://loaztee.com https://*.loaztee.com",
+  `script-src 'self' 'unsafe-eval' 'unsafe-inline' ${monetagDomains}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self'",
-  "connect-src 'self' https://quge5.com https://*.quge5.com https://venetrue.com https://*.venetrue.com https://dolohen.com https://*.dolohen.com",
-  "frame-src 'self' https://quge5.com https://*.quge5.com https://venetrue.com https://*.venetrue.com https://dolohen.com https://*.dolohen.com",
+  `connect-src 'self' ${monetagDomains} https:`,
+  `frame-src 'self' ${monetagDomains} https:`,
+  "worker-src 'self' blob:",
+  "child-src 'self' blob:",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",

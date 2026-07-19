@@ -10,7 +10,6 @@ import { Analytics } from "@/components/analytics"
 import { ReadingProgress } from "@/components/layout/reading-progress"
 import { OrganizationSchema, WebsiteSchema } from "@/components/seo/json-ld"
 import { siteConfig } from "@/lib/constants"
-import Script from "next/script"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -76,6 +75,8 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const isDev = process.env.NODE_ENV !== "production"
+
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
@@ -97,12 +98,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
-        <Script
+        <script
           src="https://quge5.com/88/tag.min.js"
           data-zone="261263"
           data-cfasync="false"
-          strategy="beforeInteractive"
+          async
         />
+
         <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name}`} href="/rss.xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
