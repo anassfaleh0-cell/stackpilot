@@ -121,6 +121,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             data-cfasync="false"
           />
           <Script
+            src="https://5gvci.com/act/files/tag.min.js?z=11345405"
+            strategy="afterInteractive"
+            data-cfasync="false"
+          />
+          <Script
             src="https://n6wxm.com/vignette.min.js"
             strategy="afterInteractive"
             data-zone="11346128"
