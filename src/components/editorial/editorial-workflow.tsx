@@ -40,7 +40,7 @@ export function EditorialWorkflow({ sections, slug, category, className = "" }: 
               {i < steps.length - 1 && (
                 <>
                   <line x1="175" y1={y + 18} x2="175" y2={(i + 1) * 60 + 12} stroke={p.primary} strokeOpacity="0.15" strokeWidth="1.5" strokeDasharray="3,3" />
-                  <polygon points="171,nextY+4 175,nextY+14 179,nextY+4" fill={p.primary} fillOpacity="0.2" />
+                  <polygon points={`171,${(i + 1) * 60 + 34} 175,${(i + 1) * 60 + 44} 179,${(i + 1) * 60 + 34}`} fill={p.primary} fillOpacity="0.2" />
                 </>
               )}
               <rect x={100} y={y - 14} width="150" height="28" rx="6" fill={p.primary} fillOpacity="0.04" stroke={p.primary} strokeWidth="0.5" />

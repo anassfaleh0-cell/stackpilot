@@ -2,8 +2,11 @@ import type { NextConfig } from "next/dist/server/config-shared"
 
 const analytics = [
   "https://www.googletagmanager.com",
+  "https://*.googletagmanager.com",
   "https://www.google-analytics.com",
+  "https://*.google-analytics.com",
   "https://analytics.google.com",
+  "https://stats.g.doubleclick.net",
   "https://www.clarity.ms",
   "https://*.clarity.ms",
   "https://c.bing.com",
