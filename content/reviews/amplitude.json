@@ -1,0 +1,490 @@
+{
+  "slug": "amplitude",
+  "name": "Amplitude",
+  "tagline": "Product analytics for understanding user behavior",
+  "description": "Behavioral analytics with cohorts, funnels, and experimentation",
+  "category": "Analytics",
+  "website": "https://amplitude.com",
+  "pricing": "Freemium",
+  "priceRange": "Free–custom enterprise",
+  "rating": 4.5,
+  "reviewCount": 3200,
+  "pros": [
+    "Track every user action without SQL",
+    "Self-service analytics for product managers",
+    "Built-in A/B testing with significance engine",
+    "ML churn and LTV predictions",
+    "Cohort analysis by behavior, not demographics"
+  ],
+  "cons": [
+    "Enterprise plans exceed $50K/year for high volume",
+    "Requires engineering for event instrumentation",
+    "Less mature for web analytics vs Google Analytics"
+  ],
+  "features": [
+    {
+      "name": "Behavioral Analytics",
+      "description": "Event-based user action tracking",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Funnel Analysis",
+      "description": "Step-by-step conversion drop-off",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Cohort Analysis",
+      "description": "Behavioral segment comparisons",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Retention Analysis",
+      "description": "User retention curves",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "User Segmentation",
+      "description": "Behavioral audience building",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "A/B Testing",
+      "description": "Built-in experimentation engine",
+      "available": true,
+      "category": "Experimentation"
+    },
+    {
+      "name": "Feature Flagging",
+      "description": "Gradual rollout targeting",
+      "available": true,
+      "category": "Experimentation"
+    },
+    {
+      "name": "Predictive Analytics",
+      "description": "ML churn and LTV forecasting",
+      "available": true,
+      "category": "AI"
+    },
+    {
+      "name": "Anomaly Detection",
+      "description": "Automatic metric significance",
+      "available": true,
+      "category": "AI"
+    },
+    {
+      "name": "Dashboard Builder",
+      "description": "Custom charts and KPIs",
+      "available": true,
+      "category": "Analytics"
+    },
+    {
+      "name": "Data Export",
+      "description": "Snowflake, BigQuery, S3",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "API Access",
+      "description": "RESTful events and analytics",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Mobile SDKs",
+      "description": "iOS, Android, React Native",
+      "available": true,
+      "category": "Mobile"
+    },
+    {
+      "name": "Web SDK",
+      "description": "JavaScript with SPA support",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Data Governance",
+      "description": "Event schema and quality",
+      "available": true,
+      "category": "Operations"
+    },
+    {
+      "name": "Access Controls",
+      "description": "Project-level permissions",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Segment Integration",
+      "description": "Native event streaming",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Slack Integration",
+      "description": "Alerts and report delivery",
+      "available": true,
+      "category": "Integrations"
+    }
+  ],
+  "ratings": [
+    {
+      "label": "Features",
+      "score": 4.6
+    },
+    {
+      "label": "Ease of Use",
+      "score": 4.2
+    },
+    {
+      "label": "Support",
+      "score": 4.1
+    },
+    {
+      "label": "Value",
+      "score": 3.8
+    },
+    {
+      "label": "Performance",
+      "score": 4.4
+    }
+  ],
+  "content": [
+    {
+      "title": "Executive Summary",
+      "body": "Behavioral analytics with cohorts, funnels, and experimentation Amplitude earns a 4.5/5 rating from 3,200 user reviews.",
+      "type": "text"
+    },
+    {
+      "title": "TL;DR",
+      "body": "Amplitude is a leading analytics platform rated 4.5/5 across 3,200 reviews. Pricing starts at Free–custom enterprise. Best for Product Managers and Data Teams.",
+      "type": "text"
+    },
+    {
+      "title": "Rating Overview",
+      "body": "Amplitude scores 4.5/5 overall with features (4.6/5), ease of use (4.2/5), support (4.1/5), value (3.8/5), performance (4.4/5).",
+      "type": "text"
+    },
+    {
+      "title": "Quick Verdict",
+      "body": "Amplitude earns a 4.5/5 rating recommended for Product Managers and Data Teams. Delivers strong feature depth with functional design.",
+      "type": "text"
+    },
+    {
+      "title": "Company Background",
+      "body": "Amplitude was founded in 2012 in San Francisco, USA, serving 2,000+ customers with 1,000+ employees.",
+      "type": "text"
+    },
+    {
+      "title": "Product Overview",
+      "body": "Amplitude is a product analytics for understanding user behavior. Provides 18 features across Core, Experimentation, AI, Analytics, Integrations, Mobile, Operations, Security categories. Self-hosted available. Mobile on iOS and Android. API available.",
+      "type": "text"
+    },
+    {
+      "title": "Key Features",
+      "body": "Essential analytics features:",
+      "type": "list",
+      "items": [
+        "Behavioral Analytics: Event-based user action tracking.",
+        "Funnel Analysis: Step-by-step conversion drop-off.",
+        "Cohort Analysis: Behavioral segment comparisons.",
+        "Retention Analysis: User retention curves.",
+        "User Segmentation: Behavioral audience building.",
+        "Web SDK: JavaScript with SPA support."
+      ]
+    },
+    {
+      "title": "Feature Deep Dive",
+      "body": "Behavioral Analytics. Event-based user action tracking. Funnel Analysis. Step-by-step conversion drop-off. Cohort Analysis. Behavioral segment comparisons.",
+      "type": "text"
+    },
+    {
+      "title": "AI Features",
+      "body": "Amplitude AI includes AI anomaly detection, Behavioral cohorts, Predictive analytics.",
+      "type": "text"
+    },
+    {
+      "title": "API & Automation",
+      "body": "Amplitude provides a comprehensive API for custom integration and workflow automation.",
+      "type": "text"
+    },
+    {
+      "title": "Security",
+      "body": "Amplitude holds SOC 2 Type II, ISO 27001, GDPR, HIPAA certifications with TLS 1.2+ and AES-256 encryption.",
+      "type": "text"
+    },
+    {
+      "title": "Compliance",
+      "body": "Amplitude complies with GDPR, CCPA, HIPAA, SOC 2 regulations.",
+      "type": "text"
+    },
+    {
+      "title": "Integrations",
+      "body": "Integrates with Segment, Snowflake, Slack, Jira, Mixpanel, Google Analytics, Salesforce, Zapier, and 2+ more.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing",
+      "body": "Amplitude uses freemium with usage-based scaling. Free tier available. Plans from Free–custom enterprise.",
+      "type": "text"
+    },
+    {
+      "title": "Pros",
+      "body": "Amplitude advantages:",
+      "type": "list",
+      "items": [
+        "Track every user action without SQL",
+        "Self-service analytics for product managers",
+        "Built-in A/B testing with significance engine",
+        "ML churn and LTV predictions"
+      ]
+    },
+    {
+      "title": "Cons",
+      "body": "Considerations:",
+      "type": "list",
+      "items": [
+        "Enterprise plans exceed $50K/year for high volume",
+        "Requires engineering for event instrumentation",
+        "Less mature for web analytics vs Google Analytics"
+      ]
+    },
+    {
+      "title": "Performance",
+      "body": "Strong performance with fast load times.",
+      "type": "text"
+    },
+    {
+      "title": "Ease of Use",
+      "body": "Moderate learning curve with comprehensive documentation.",
+      "type": "text"
+    },
+    {
+      "title": "User Experience",
+      "body": "Functional organized interface.",
+      "type": "text"
+    },
+    {
+      "title": "Customer Support",
+      "body": "Support rated 4.1/5 via email and knowledge base.",
+      "type": "text"
+    },
+    {
+      "title": "Industry Fit",
+      "body": "Best for Analytics and SaaS with Product Managers and Data Teams teams.",
+      "type": "text"
+    },
+    {
+      "title": "Team Size Fit",
+      "body": "Amplitude accommodates teams of all sizes with generous free tier. Best ROI for 5-50 person teams.",
+      "type": "text"
+    },
+    {
+      "title": "Real Use Cases",
+      "body": "A product managers team uses Amplitude to streamline analytics workflows and improve team productivity.",
+      "type": "text"
+    },
+    {
+      "title": "Competitor Analysis",
+      "body": "Amplitude competes with mixpanel, google-analytics. Primary differentiators: feature depth and pricing.",
+      "type": "text"
+    },
+    {
+      "title": "Alternatives",
+      "body": "Consider mixpanel, google-analytics based on specific team requirements.",
+      "type": "text"
+    },
+    {
+      "title": "Migration Guide",
+      "body": "Migration rated moderate complexity. Budget 2-4 weeks for full transition. Parallel testing recommended.",
+      "type": "text"
+    },
+    {
+      "title": "Buying Advice",
+      "body": "Evaluate: feature alignment, total cost at Free–custom enterprise, migration effort (2-4 weeks), and real-data trial.",
+      "type": "text"
+    },
+    {
+      "title": "Final Verdict",
+      "body": "Amplitude earns 4.5/5. Strong choice for Product Managers and Data Teams. Recommended for teams prioritizing behavioral insights.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing at a Glance",
+      "body": "pricing-ladder",
+      "type": "diagram"
+    },
+    {
+      "title": "Feature Radar",
+      "body": "feature-radar",
+      "type": "diagram"
+    },
+    {
+      "title": "Implementation Flow",
+      "body": "implementation-flow",
+      "type": "diagram"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is Amplitude best used for?",
+      "answer": "Amplitude is best used for behavioral analytics with cohorts, funnels, and experimentation."
+    },
+    {
+      "question": "How much does Amplitude cost?",
+      "answer": "Amplitude uses freemium with usage-based scaling starting at Free–custom enterprise. Free tier available."
+    },
+    {
+      "question": "Does Amplitude integrate with other tools?",
+      "answer": "Yes, integrates with Segment, Snowflake, Slack, Jira, Mixpanel. And 5+ more."
+    },
+    {
+      "question": "Is Amplitude suitable for small teams?",
+      "answer": "Yes, with a generous free tier. Freemium with usage-based scaling scales with team growth."
+    },
+    {
+      "question": "How does Amplitude pricing work?",
+      "answer": "Amplitude uses freemium with usage-based scaling from Free–custom enterprise, with free tier available."
+    },
+    {
+      "question": "Is Amplitude secure?",
+      "answer": "Yes, holds SOC 2 Type II, ISO 27001, GDPR, HIPAA certifications with encryption."
+    },
+    {
+      "question": "What integrations does Amplitude offer?",
+      "answer": "Integrates with Segment, Snowflake, Slack, Jira, Mixpanel, Google Analytics, and more. API available."
+    },
+    {
+      "question": "Is Amplitude good for small businesses?",
+      "answer": "Yes, with free tier. Freemium with usage-based scaling scales with business size."
+    },
+    {
+      "question": "What are Amplitude's main advantages?",
+      "answer": "Track every user action without SQL and Self-service analytics for product managers."
+    },
+    {
+      "question": "What are Amplitude's limitations?",
+      "answer": "Enterprise plans exceed $50K/year for high volume and Requires engineering for event instrumentation."
+    },
+    {
+      "question": "How does Amplitude compare to mixpanel?",
+      "answer": "Amplitude differentiates through feature depth and performance."
+    },
+    {
+      "question": "Does Amplitude support team collaboration?",
+      "answer": "Yes, includes collaboration features for team workflows."
+    },
+    {
+      "question": "Can I customize Amplitude?",
+      "answer": "Yes, via API, custom fields, and templates."
+    },
+    {
+      "question": "Is Amplitude easy to set up?",
+      "answer": "Setup takes a few days with documentation support."
+    },
+    {
+      "question": "How often does Amplitude update?",
+      "answer": "Updates bi-weekly."
+    },
+    {
+      "question": "What support does Amplitude provide?",
+      "answer": "Support rated 4.1/5. Email and knowledge base."
+    },
+    {
+      "question": "Does Amplitude offer a free version?",
+      "answer": "Yes, with core features."
+    },
+    {
+      "question": "How does Amplitude handle data privacy?",
+      "answer": "Complies with GDPR, CCPA, HIPAA, SOC 2 regulations."
+    },
+    {
+      "question": "What ROI can teams expect?",
+      "answer": "Positive ROI typically within 3-6 months from improved analytics workflows."
+    },
+    {
+      "question": "What platforms does Amplitude support?",
+      "answer": "Available on Cloud, Self-hosted. Mobile on iOS and Android."
+    }
+  ],
+  "alternatives": [
+    "mixpanel",
+    "google-analytics"
+  ],
+  "relatedComparisons": [],
+  "relatedGuides": [
+    "how-to-choose-analytics-software",
+    "analytics-pricing-guide",
+    "saas-metrics-and-kpis"
+  ],
+  "relatedPosts": [
+    "ga4-vs-mixpanel",
+    "best-analytics-platforms-2026",
+    "saas-metrics-guide"
+  ],
+  "lastReviewed": "2026-07-19",
+  "author": "StackPilot Team",
+  "company": {
+    "founded": 2012,
+    "headquarters": "San Francisco, USA",
+    "customers": "2,000+",
+    "employeeCount": "1,000+",
+    "industries": [
+      "Analytics",
+      "SaaS",
+      "Technology"
+    ],
+    "targetUsers": [
+      "Product Managers",
+      "Data Teams",
+      "Growth Teams"
+    ],
+    "pricingModel": "Freemium with usage-based scaling",
+    "deployment": [
+      "Cloud",
+      "Self-hosted"
+    ],
+    "securityCertifications": [
+      "SOC 2 Type II",
+      "ISO 27001",
+      "GDPR",
+      "HIPAA"
+    ],
+    "compliance": [
+      "GDPR",
+      "CCPA",
+      "HIPAA",
+      "SOC 2"
+    ],
+    "integrations": [
+      "Segment",
+      "Snowflake",
+      "Slack",
+      "Jira",
+      "Mixpanel",
+      "Google Analytics",
+      "Salesforce",
+      "Zapier",
+      "Webflow",
+      "Shopify"
+    ],
+    "apiAvailable": true,
+    "aiFeatures": [
+      "AI anomaly detection",
+      "Behavioral cohorts",
+      "Predictive analytics"
+    ],
+    "mobileApps": [
+      "iOS",
+      "Android"
+    ],
+    "learningCurve": "Moderate",
+    "migrationComplexity": "Moderate",
+    "supportQuality": "4.3/5",
+    "releaseFrequency": "Bi-weekly"
+  }
+}

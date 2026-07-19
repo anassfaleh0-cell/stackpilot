@@ -12,6 +12,44 @@
                  ],
     "picks":  [
 
+                  {
+                       "rank": 1,
+                       "toolSlug": "shopify",
+                       "toolName": "Shopify",
+                       "rating": 4.5,
+                       "priceRange": "$29\u2013$299/month + fees",
+                       "bestFor": "Businesses wanting a reliable hosted platform with extensive app ecosystem",
+                       "pros": [
+                           "Complete e-commerce solution eliminating the need for 5-10 separate services and tools",
+                           "8,000+ app ecosystem for adding any functionality without custom development",
+                           "Shopify Payments at 2.4% + $0.30 competitive rates with no third-party gateway fees",
+                           "Multi-channel selling from single inventory across online store, marketplaces, and social"
+                       ],
+                       "cons": [
+                           "Transaction costs on $100K revenue can exceed $2,400 per month with payment processing fees",
+                           "Customization requires learning Liquid template language for theme modifications",
+                           "Migration difficulty rated 7/10 making it challenging to switch platforms after buildout"
+                       ]
+                   },
+                   {
+                       "rank": 2,
+                       "toolSlug": "woocommerce",
+                       "toolName": "WooCommerce",
+                       "rating": 4.3,
+                       "priceRange": "Free plugin + hosting costs",
+                       "bestFor": "Businesses wanting complete ownership with WordPress integration flexibility",
+                       "pros": [
+                           "Complete ownership of store data, code, and hosting environment with no platform lock-in",
+                           "WordPress integration leveraging existing content management and blogging capabilities",
+                           "Extensive plugin ecosystem with thousands of free and premium extensions available",
+                           "No monthly subscription fees with hosting costs typically $10-$50 per month shared"
+                       ],
+                       "cons": [
+                           "Requires technical expertise for setup, maintenance, security updates, and performance optimization",
+                           "Security responsibility falls on the merchant including PCI compliance and plugin vulnerabilities",
+                           "Hosting costs and premium plugin subscriptions can approach Shopify subscription pricing"
+                       ]
+                   }
               ],
     "pricingSummary":  "Ecommerce platform pricing varies significantly based on whether you choose a hosted solution with predictable monthly fees or a self-hosted solution with hosting and maintenance costs. Shopify offers five plan tiers starting at $29 per month for Basic with essential features, $79 per month for Shopify with professional reports and lower transaction fees, $299 per month for Advanced with advanced reporting and the lowest transaction fees, and custom pricing for Shopify Plus starting around $2,300 per month for enterprise merchants with high volume and custom requirements. Transaction fees range from 2.9 percent plus 30 cents on Basic to 2.4 percent plus 30 cents on Advanced for online credit card rates when using Shopify Payments, with additional 0.5 to 2 percent surcharge when using third-party gateways. BigCommerce offers four plans at $29.95 per month for Standard, $79.95 per month for Plus with abandoned cart recovery and customer segmentation, $149.95 per month for Pro with Google customer reviews and product filtering, and $299.95 per month for Enterprise with custom pricing for high-volume merchants. BigCommerce charges no transaction fees on any plan, making it attractive for merchants with high average order values. WooCommerce itself is free as a WordPress plugin, but merchants must pay for web hosting typically ranging from $10 to $50 per month for shared hosting and $50 to $200 per month for managed WooCommerce hosting, domain registration at approximately $15 per year, SSL certificate at $0 to $100 per year, premium extensions and themes that can add $100 to $1,000 annually, and payment processing fees typically 2.9 percent plus 30 cents per transaction. Adobe Commerce pricing requires a sales consultation and typically starts at approximately $2,000 per month for the on-premise edition, with cloud editions and additional modules costing more. Wix eCommerce plans start at $27 per month for Business Basic, $32 per month for Business Unlimited with subscriptions and reviews, and $59 per month for Business VIP with priority support and custom reports. Most platforms offer annual billing discounts of 15 to 25 percent and free trials of 14 to 30 days for paid plans.",
     "comparisonTable":  {

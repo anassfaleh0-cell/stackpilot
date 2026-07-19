@@ -1,0 +1,479 @@
+{
+  "slug": "hotjar",
+  "name": "Hotjar",
+  "tagline": "Behavioral analytics with heatmaps and session recordings",
+  "description": "Heatmaps, recordings, and surveys for understanding website users",
+  "category": "Analytics",
+  "website": "https://www.hotjar.com",
+  "pricing": "Freemium",
+  "priceRange": "Free–$99/mo (Scale)",
+  "rating": 4.1,
+  "reviewCount": 8400,
+  "pros": [
+    "Visual heatmaps revealing UX issues",
+    "Session recordings with rage click detection",
+    "Feedback widgets at moment of experience",
+    "10-minute single-snippet deployment",
+    "Generous free tier with 35 daily sessions"
+  ],
+  "cons": [
+    "Lower plans capture only 1-3% of visitors",
+    "Form PII masking must be configured",
+    "Business plan at $99/month for advanced features"
+  ],
+  "features": [
+    {
+      "name": "Heatmaps",
+      "description": "Click, move, scroll visualizations",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Session Recordings",
+      "description": "User playback with rage clicks",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Feedback Widgets",
+      "description": "On-page NPS and rating surveys",
+      "available": true,
+      "category": "Feedback"
+    },
+    {
+      "name": "Surveys",
+      "description": "Targeted campaigns with branching",
+      "available": true,
+      "category": "Feedback"
+    },
+    {
+      "name": "Incoming Feedback",
+      "description": "Persistent suggestion tab",
+      "available": true,
+      "category": "Feedback"
+    },
+    {
+      "name": "Funnel Analysis",
+      "description": "Drop-off with recording links",
+      "available": true,
+      "category": "Analytics"
+    },
+    {
+      "name": "Form Analysis",
+      "description": "Field-level abandonment",
+      "available": true,
+      "category": "Analytics"
+    },
+    {
+      "name": "Dashboard",
+      "description": "Heatmap and survey combos",
+      "available": true,
+      "category": "Analytics"
+    },
+    {
+      "name": "Event Tracking",
+      "description": "Custom interaction tagging",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Data Filters",
+      "description": "URL, device, browser filters",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "User Attributes",
+      "description": "Anonymous segmentation",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Privacy Controls",
+      "description": "Automatic PII masking",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Tagging",
+      "description": "Recording organization",
+      "available": true,
+      "category": "Productivity"
+    },
+    {
+      "name": "GA Integration",
+      "description": "Bidirectional analytics linking",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Zapier Integration",
+      "description": "5,000+ app connectivity",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Slack Integration",
+      "description": "Survey response notifications",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "CSS Selectors",
+      "description": "Element targeting",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "API Access",
+      "description": "REST API for data",
+      "available": true,
+      "category": "Integrations"
+    }
+  ],
+  "ratings": [
+    {
+      "label": "Features",
+      "score": 4
+    },
+    {
+      "label": "Ease of Use",
+      "score": 4.5
+    },
+    {
+      "label": "Support",
+      "score": 3.9
+    },
+    {
+      "label": "Value",
+      "score": 4.2
+    },
+    {
+      "label": "Performance",
+      "score": 4.1
+    }
+  ],
+  "content": [
+    {
+      "title": "Executive Summary",
+      "body": "Heatmaps, recordings, and surveys for understanding website users Hotjar earns a 4.1/5 rating from 8,400 user reviews.",
+      "type": "text"
+    },
+    {
+      "title": "TL;DR",
+      "body": "Hotjar is a leading analytics platform rated 4.1/5 across 8,400 reviews. Pricing starts at Free–$99/mo (Scale). Best for UX Designers and Product Managers.",
+      "type": "text"
+    },
+    {
+      "title": "Rating Overview",
+      "body": "Hotjar scores 4.1/5 overall with features (4/5), ease of use (4.5/5), support (3.9/5), value (4.2/5), performance (4.1/5).",
+      "type": "text"
+    },
+    {
+      "title": "Quick Verdict",
+      "body": "Hotjar earns a 4.1/5 rating recommended for UX Designers and Product Managers. Delivers solid functionality with intuitive interface.",
+      "type": "text"
+    },
+    {
+      "title": "Company Background",
+      "body": "Hotjar was founded in 2014 in Sliema, Malta, serving 900,000+ customers with 300+ employees.",
+      "type": "text"
+    },
+    {
+      "title": "Product Overview",
+      "body": "Hotjar is a behavioral analytics with heatmaps and session recordings. Provides 18 features across Core, Feedback, Analytics, Security, Productivity, Integrations categories. API available.",
+      "type": "text"
+    },
+    {
+      "title": "Key Features",
+      "body": "Essential analytics features:",
+      "type": "list",
+      "items": [
+        "Heatmaps: Click, move, scroll visualizations.",
+        "Session Recordings: User playback with rage clicks.",
+        "Event Tracking: Custom interaction tagging.",
+        "Data Filters: URL, device, browser filters.",
+        "User Attributes: Anonymous segmentation.",
+        "CSS Selectors: Element targeting."
+      ]
+    },
+    {
+      "title": "Feature Deep Dive",
+      "body": "Heatmaps. Click, move, scroll visualizations. Session Recordings. User playback with rage clicks. Feedback Widgets. On-page NPS and rating surveys.",
+      "type": "text"
+    },
+    {
+      "title": "AI Features",
+      "body": "Hotjar AI includes AI heatmap analysis, Session replay highlights.",
+      "type": "text"
+    },
+    {
+      "title": "API & Automation",
+      "body": "Hotjar provides a comprehensive API for custom integration and workflow automation.",
+      "type": "text"
+    },
+    {
+      "title": "Security",
+      "body": "Hotjar holds SOC 2 Type II, GDPR certifications with TLS 1.2+ and AES-256 encryption.",
+      "type": "text"
+    },
+    {
+      "title": "Compliance",
+      "body": "Hotjar complies with GDPR, CCPA regulations.",
+      "type": "text"
+    },
+    {
+      "title": "Integrations",
+      "body": "Integrates with Google Analytics, Slack, Jira, Shopify, WordPress, Zapier, HubSpot, Segment, and 2+ more.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing",
+      "body": "Hotjar uses freemium with usage-based tiers. Free tier available. Plans from Free–$99/mo (Scale).",
+      "type": "text"
+    },
+    {
+      "title": "Pros",
+      "body": "Hotjar advantages:",
+      "type": "list",
+      "items": [
+        "Visual heatmaps revealing UX issues",
+        "Session recordings with rage click detection",
+        "Feedback widgets at moment of experience",
+        "10-minute single-snippet deployment"
+      ]
+    },
+    {
+      "title": "Cons",
+      "body": "Considerations:",
+      "type": "list",
+      "items": [
+        "Lower plans capture only 1-3% of visitors",
+        "Form PII masking must be configured",
+        "Business plan at $99/month for advanced features"
+      ]
+    },
+    {
+      "title": "Performance",
+      "body": "Adequate performance for most use cases.",
+      "type": "text"
+    },
+    {
+      "title": "Ease of Use",
+      "body": "Hotjar has a low learning curve with intuitive interface.",
+      "type": "text"
+    },
+    {
+      "title": "User Experience",
+      "body": "Streamlined modern interface.",
+      "type": "text"
+    },
+    {
+      "title": "Customer Support",
+      "body": "Support rated 3.9/5 via email and knowledge base.",
+      "type": "text"
+    },
+    {
+      "title": "Industry Fit",
+      "body": "Best for Analytics and UX Research with UX Designers and Product Managers teams.",
+      "type": "text"
+    },
+    {
+      "title": "Team Size Fit",
+      "body": "Hotjar accommodates teams of all sizes with generous free tier. Best ROI for 5-50 person teams.",
+      "type": "text"
+    },
+    {
+      "title": "Real Use Cases",
+      "body": "A ux designers team uses Hotjar to streamline analytics workflows and improve team productivity.",
+      "type": "text"
+    },
+    {
+      "title": "Competitor Analysis",
+      "body": "Hotjar competes with amplitude, google-analytics. Primary differentiators: core functionality and ease of use.",
+      "type": "text"
+    },
+    {
+      "title": "Alternatives",
+      "body": "Consider amplitude, google-analytics based on specific team requirements.",
+      "type": "text"
+    },
+    {
+      "title": "Migration Guide",
+      "body": "Migration rated low complexity. Most teams transition within 1-2 weeks. Parallel testing recommended.",
+      "type": "text"
+    },
+    {
+      "title": "Buying Advice",
+      "body": "Evaluate: feature alignment, total cost at Free–$99/mo (Scale), migration effort (1-2 weeks), and real-data trial.",
+      "type": "text"
+    },
+    {
+      "title": "Final Verdict",
+      "body": "Hotjar earns 4.1/5. Solid option for most teams. Recommended for teams prioritizing behavioral insights.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing at a Glance",
+      "body": "pricing-ladder",
+      "type": "diagram"
+    },
+    {
+      "title": "Feature Radar",
+      "body": "feature-radar",
+      "type": "diagram"
+    },
+    {
+      "title": "Implementation Flow",
+      "body": "implementation-flow",
+      "type": "diagram"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is Hotjar best used for?",
+      "answer": "Hotjar is best used for heatmaps, recordings, and surveys for understanding website users."
+    },
+    {
+      "question": "How much does Hotjar cost?",
+      "answer": "Hotjar uses freemium with usage-based tiers starting at Free–$99/mo (Scale). Free tier available."
+    },
+    {
+      "question": "Does Hotjar integrate with other tools?",
+      "answer": "Yes, integrates with Google Analytics, Slack, Jira, Shopify, WordPress. And 5+ more."
+    },
+    {
+      "question": "Is Hotjar suitable for small teams?",
+      "answer": "Yes, with a generous free tier. Freemium with usage-based tiers scales with team growth."
+    },
+    {
+      "question": "How does Hotjar pricing work?",
+      "answer": "Hotjar uses freemium with usage-based tiers from Free–$99/mo (Scale), with free tier available."
+    },
+    {
+      "question": "Is Hotjar secure?",
+      "answer": "Yes, holds SOC 2 Type II, GDPR certifications with encryption."
+    },
+    {
+      "question": "What integrations does Hotjar offer?",
+      "answer": "Integrates with Google Analytics, Slack, Jira, Shopify, WordPress, Zapier, and more. API available."
+    },
+    {
+      "question": "Is Hotjar good for small businesses?",
+      "answer": "Yes, with free tier. Freemium with usage-based tiers scales with business size."
+    },
+    {
+      "question": "What are Hotjar's main advantages?",
+      "answer": "Visual heatmaps revealing UX issues and Session recordings with rage click detection."
+    },
+    {
+      "question": "What are Hotjar's limitations?",
+      "answer": "Lower plans capture only 1-3% of visitors and Form PII masking must be configured."
+    },
+    {
+      "question": "How does Hotjar compare to amplitude?",
+      "answer": "Hotjar differentiates through pricing and usability."
+    },
+    {
+      "question": "Does Hotjar support team collaboration?",
+      "answer": "Yes, includes collaboration features for team workflows."
+    },
+    {
+      "question": "Can I customize Hotjar?",
+      "answer": "Yes, via API, custom fields, and templates."
+    },
+    {
+      "question": "Is Hotjar easy to set up?",
+      "answer": "Yes, most teams start within hours."
+    },
+    {
+      "question": "How often does Hotjar update?",
+      "answer": "Updates bi-weekly."
+    },
+    {
+      "question": "What support does Hotjar provide?",
+      "answer": "Support rated 3.9/5. Email and knowledge base."
+    },
+    {
+      "question": "Does Hotjar offer a free version?",
+      "answer": "Yes, with core features."
+    },
+    {
+      "question": "How does Hotjar handle data privacy?",
+      "answer": "Complies with GDPR, CCPA regulations."
+    },
+    {
+      "question": "What ROI can teams expect?",
+      "answer": "Positive ROI typically within 3-6 months from improved analytics workflows."
+    },
+    {
+      "question": "What platforms does Hotjar support?",
+      "answer": "Available on Cloud."
+    }
+  ],
+  "alternatives": [
+    "google-analytics"
+  ],
+  "relatedComparisons": [],
+  "relatedGuides": [
+    "how-to-choose-analytics-software",
+    "analytics-pricing-guide",
+    "saas-metrics-and-kpis"
+  ],
+  "relatedPosts": [
+    "ga4-vs-mixpanel",
+    "best-analytics-platforms-2026"
+  ],
+  "lastReviewed": "2026-07-19",
+  "author": "StackPilot Team",
+  "company": {
+    "founded": 2014,
+    "headquarters": "Sliema, Malta",
+    "customers": "900,000+",
+    "employeeCount": "300+",
+    "industries": [
+      "Analytics",
+      "UX Research",
+      "SaaS"
+    ],
+    "targetUsers": [
+      "UX Designers",
+      "Product Managers",
+      "Marketers"
+    ],
+    "pricingModel": "Freemium with usage-based tiers",
+    "deployment": [
+      "Cloud"
+    ],
+    "securityCertifications": [
+      "SOC 2 Type II",
+      "GDPR"
+    ],
+    "compliance": [
+      "GDPR",
+      "CCPA"
+    ],
+    "integrations": [
+      "Google Analytics",
+      "Slack",
+      "Jira",
+      "Shopify",
+      "WordPress",
+      "Zapier",
+      "HubSpot",
+      "Segment",
+      "Webflow",
+      "Mailchimp"
+    ],
+    "apiAvailable": true,
+    "aiFeatures": [
+      "AI heatmap analysis",
+      "Session replay highlights"
+    ],
+    "mobileApps": [],
+    "learningCurve": "Low",
+    "migrationComplexity": "Low",
+    "supportQuality": "4.0/5",
+    "releaseFrequency": "Bi-weekly"
+  }
+}

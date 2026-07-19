@@ -1,9 +1,11 @@
 import { revalidatePath } from "next/cache"
+import { submitUrl } from "@/lib/indexnow"
+import { site } from "@/lib/constants"
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { path, secret } = body
+    const { path, secret, contentType, slug } = body
 
     if (secret !== process.env.REVALIDATION_SECRET) {
       return new Response(JSON.stringify({ error: "Invalid secret" }), {
@@ -14,6 +16,14 @@ export async function POST(request: Request) {
 
     if (path) {
       revalidatePath(path)
+    }
+
+    if (contentType && slug) {
+      const url = `${site.url}/${contentType}/${slug}`
+      submitUrl(url)
+    } else if (path && path.startsWith("/")) {
+      const url = `${site.url}${path}`
+      submitUrl(url)
     }
 
     return new Response(JSON.stringify({ revalidated: true }), {

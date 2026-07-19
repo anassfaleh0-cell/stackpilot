@@ -1,0 +1,473 @@
+{
+  "slug": "make",
+  "name": "Make",
+  "tagline": "Visual automation platform for complex workflows",
+  "description": "Advanced no-code automation with visual scenario builder",
+  "category": "Automation",
+  "website": "https://www.make.com",
+  "pricing": "Freemium",
+  "priceRange": "Free–$29/mo",
+  "rating": 4.3,
+  "reviewCount": 4800,
+  "pros": [
+    "Visual scenario builder with unlimited branching and loops",
+    "2,000+ app connectors with granular trigger/action options",
+    "Built-in data store for operational databases",
+    "Parallel processing and queue management for enterprise throughput",
+    "Version history and rollback for automation scenarios"
+  ],
+  "cons": [
+    "2,000+ connectors vs Zapier's 7,000+ limits integration reach",
+    "Scenario builder learning curve steeper than Zapier's linear wizard",
+    "Operations-based pricing less predictable than Zapier's task model"
+  ],
+  "features": [
+    {
+      "name": "Scenario Builder",
+      "description": "Visual drag-and-drop workflow",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Templates",
+      "description": "Pre-built automation recipes",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Data Store",
+      "description": "Built-in key-value storage",
+      "available": true,
+      "category": "Advanced"
+    },
+    {
+      "name": "Router",
+      "description": "Conditional path branching",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Iterator",
+      "description": "Array item processing loops",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Aggregator",
+      "description": "Batch data collection",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Error Handler",
+      "description": "Custom failure responses",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Webhooks",
+      "description": "Inbound/outbound HTTP triggers",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Scheduler",
+      "description": "Time-based scenario execution",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Search",
+      "description": "App-specific query actions",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "API",
+      "description": "RESTful with SDK",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Connectors",
+      "description": "2,000+ app connectors",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Scenario Inspector",
+      "description": "Visual debug tool",
+      "available": true,
+      "category": "Analytics"
+    },
+    {
+      "name": "Teams",
+      "description": "Collaborative scenario management",
+      "available": true,
+      "category": "Productivity"
+    },
+    {
+      "name": "Permissions",
+      "description": "Role-based access",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Execution History",
+      "description": "30-day searchable logs",
+      "available": true,
+      "category": "Analytics"
+    },
+    {
+      "name": "FTP",
+      "description": "File transfer automation",
+      "available": true,
+      "category": "Advanced"
+    },
+    {
+      "name": "Email Module",
+      "description": "IMAP/SMTP integration",
+      "available": true,
+      "category": "Core"
+    }
+  ],
+  "ratings": [
+    {
+      "label": "Ease of Use",
+      "score": 3.9
+    },
+    {
+      "label": "Features",
+      "score": 4.5
+    },
+    {
+      "label": "Performance",
+      "score": 4.3
+    },
+    {
+      "label": "Support",
+      "score": 3.9
+    },
+    {
+      "label": "Value",
+      "score": 4.3
+    }
+  ],
+  "content": [
+    {
+      "title": "Executive Summary",
+      "body": "Advanced no-code automation with visual scenario builder Make earns a 4.3/5 rating from 4,800 user reviews.",
+      "type": "text"
+    },
+    {
+      "title": "TL;DR",
+      "body": "Make is a leading automation platform rated 4.3/5 across 4,800 reviews. Pricing starts at Free–$29/mo. Best for Power Users and Operations Teams.",
+      "type": "text"
+    },
+    {
+      "title": "Rating Overview",
+      "body": "Make scores 4.3/5 overall with ease of use (3.9/5), features (4.5/5), performance (4.3/5), support (3.9/5), value (4.3/5).",
+      "type": "text"
+    },
+    {
+      "title": "Quick Verdict",
+      "body": "Make earns a 4.3/5 rating recommended for Power Users and Operations Teams. Delivers strong feature depth with functional design.",
+      "type": "text"
+    },
+    {
+      "title": "Company Background",
+      "body": "Make was founded in 2016 in Prague, Czechia, serving 1M+ users customers with 300+ employees.",
+      "type": "text"
+    },
+    {
+      "title": "Product Overview",
+      "body": "Make is a visual automation platform for complex workflows. Provides 18 features across Core, Advanced, Integrations, Analytics, Productivity, Security categories. Mobile on iOS and Android. API available.",
+      "type": "text"
+    },
+    {
+      "title": "Key Features",
+      "body": "Essential automation features:",
+      "type": "list",
+      "items": [
+        "Scenario Builder: Visual drag-and-drop workflow.",
+        "Templates: Pre-built automation recipes.",
+        "Router: Conditional path branching.",
+        "Iterator: Array item processing loops.",
+        "Aggregator: Batch data collection.",
+        "Error Handler: Custom failure responses."
+      ]
+    },
+    {
+      "title": "Feature Deep Dive",
+      "body": "Scenario Builder. Visual drag-and-drop workflow. Templates. Pre-built automation recipes. Data Store. Built-in key-value storage.",
+      "type": "text"
+    },
+    {
+      "title": "AI Features",
+      "body": "Make AI includes AI scenario builder, Data mapping suggestions.",
+      "type": "text"
+    },
+    {
+      "title": "API & Automation",
+      "body": "Make provides a comprehensive API for custom integration and workflow automation.",
+      "type": "text"
+    },
+    {
+      "title": "Security",
+      "body": "Make holds SOC 2 Type II, GDPR certifications with TLS 1.2+ and AES-256 encryption.",
+      "type": "text"
+    },
+    {
+      "title": "Compliance",
+      "body": "Make complies with GDPR, CCPA regulations.",
+      "type": "text"
+    },
+    {
+      "title": "Integrations",
+      "body": "Integrates with Slack, Google Workspace, Salesforce, HubSpot, Notion, Jira, GitHub, Shopify, and 2+ more.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing",
+      "body": "Make uses freemium with operation-based tiers. Free tier available. Plans from Free–$29/mo.",
+      "type": "text"
+    },
+    {
+      "title": "Pros",
+      "body": "Make advantages:",
+      "type": "list",
+      "items": [
+        "Visual scenario builder with unlimited branching and loops",
+        "2,000+ app connectors with granular trigger/action options",
+        "Built-in data store for operational databases",
+        "Parallel processing and queue management for enterprise throughput"
+      ]
+    },
+    {
+      "title": "Cons",
+      "body": "Considerations:",
+      "type": "list",
+      "items": [
+        "2,000+ connectors vs Zapier's 7,000+ limits integration reach",
+        "Scenario builder learning curve steeper than Zapier's linear wizard",
+        "Operations-based pricing less predictable than Zapier's task model"
+      ]
+    },
+    {
+      "title": "Performance",
+      "body": "Strong performance with fast load times.",
+      "type": "text"
+    },
+    {
+      "title": "Ease of Use",
+      "body": "Moderate learning curve with comprehensive documentation.",
+      "type": "text"
+    },
+    {
+      "title": "User Experience",
+      "body": "Functional organized interface.",
+      "type": "text"
+    },
+    {
+      "title": "Customer Support",
+      "body": "Support rated 3.9/5 via email and knowledge base.",
+      "type": "text"
+    },
+    {
+      "title": "Industry Fit",
+      "body": "Best for Automation and Productivity with Power Users and Operations Teams teams.",
+      "type": "text"
+    },
+    {
+      "title": "Team Size Fit",
+      "body": "Make accommodates teams of all sizes with generous free tier. Best ROI for 5-50 person teams.",
+      "type": "text"
+    },
+    {
+      "title": "Real Use Cases",
+      "body": "A power users team uses Make to streamline automation workflows and improve team productivity.",
+      "type": "text"
+    },
+    {
+      "title": "Competitor Analysis",
+      "body": "Make competes with other platforms. Primary differentiators: feature depth and pricing.",
+      "type": "text"
+    },
+    {
+      "title": "Alternatives",
+      "body": "Consider alternatives based on specific team requirements.",
+      "type": "text"
+    },
+    {
+      "title": "Migration Guide",
+      "body": "Migration rated moderate complexity. Budget 2-4 weeks for full transition. Parallel testing recommended.",
+      "type": "text"
+    },
+    {
+      "title": "Buying Advice",
+      "body": "Evaluate: feature alignment, total cost at Free–$29/mo, migration effort (2-4 weeks), and real-data trial.",
+      "type": "text"
+    },
+    {
+      "title": "Final Verdict",
+      "body": "Make earns 4.3/5. Strong choice for Power Users and Operations Teams. Recommended for teams prioritizing automation.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing at a Glance",
+      "body": "pricing-ladder",
+      "type": "diagram"
+    },
+    {
+      "title": "Feature Radar",
+      "body": "feature-radar",
+      "type": "diagram"
+    },
+    {
+      "title": "Implementation Flow",
+      "body": "implementation-flow",
+      "type": "diagram"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is Make best used for?",
+      "answer": "Make is best used for advanced no-code automation with visual scenario builder."
+    },
+    {
+      "question": "How much does Make cost?",
+      "answer": "Make uses freemium with operation-based tiers starting at Free–$29/mo. Free tier available."
+    },
+    {
+      "question": "Does Make integrate with other tools?",
+      "answer": "Yes, integrates with Slack, Google Workspace, Salesforce, HubSpot, Notion. And 5+ more."
+    },
+    {
+      "question": "Is Make suitable for small teams?",
+      "answer": "Yes, with a generous free tier. Freemium with operation-based tiers scales with team growth."
+    },
+    {
+      "question": "How does Make pricing work?",
+      "answer": "Make uses freemium with operation-based tiers from Free–$29/mo, with free tier available."
+    },
+    {
+      "question": "Is Make secure?",
+      "answer": "Yes, holds SOC 2 Type II, GDPR certifications with encryption."
+    },
+    {
+      "question": "What integrations does Make offer?",
+      "answer": "Integrates with Slack, Google Workspace, Salesforce, HubSpot, Notion, Jira, and more. API available."
+    },
+    {
+      "question": "Is Make good for small businesses?",
+      "answer": "Yes, with free tier. Freemium with operation-based tiers scales with business size."
+    },
+    {
+      "question": "What are Make's main advantages?",
+      "answer": "Visual scenario builder with unlimited branching and loops and 2,000+ app connectors with granular trigger/action options."
+    },
+    {
+      "question": "What are Make's limitations?",
+      "answer": "2,000+ connectors vs Zapier's 7,000+ limits integration reach and Scenario builder learning curve steeper than Zapier's linear wizard."
+    },
+    {
+      "question": "How does Make compare to similar tools?",
+      "answer": "Make differentiates through feature depth and performance."
+    },
+    {
+      "question": "Does Make support team collaboration?",
+      "answer": "Yes, includes collaboration features for team workflows."
+    },
+    {
+      "question": "Can I customize Make?",
+      "answer": "Yes, via API, custom fields, and templates."
+    },
+    {
+      "question": "Is Make easy to set up?",
+      "answer": "Setup takes a few days with documentation support."
+    },
+    {
+      "question": "How often does Make update?",
+      "answer": "Updates bi-weekly."
+    },
+    {
+      "question": "What support does Make provide?",
+      "answer": "Support rated 3.9/5. Email and knowledge base."
+    },
+    {
+      "question": "Does Make offer a free version?",
+      "answer": "Yes, with core features."
+    },
+    {
+      "question": "How does Make handle data privacy?",
+      "answer": "Complies with GDPR, CCPA regulations."
+    },
+    {
+      "question": "What ROI can teams expect?",
+      "answer": "Positive ROI typically within 3-6 months from improved automation workflows."
+    },
+    {
+      "question": "What platforms does Make support?",
+      "answer": "Available on Cloud. Mobile on iOS and Android."
+    }
+  ],
+  "alternatives": [],
+  "relatedComparisons": [],
+  "relatedGuides": [],
+  "relatedPosts": [],
+  "lastReviewed": "2026-07-19",
+  "author": "StackPilot Team",
+  "company": {
+    "founded": 2016,
+    "headquarters": "Prague, Czechia",
+    "customers": "1M+ users",
+    "employeeCount": "300+",
+    "industries": [
+      "Automation",
+      "Productivity",
+      "SaaS"
+    ],
+    "targetUsers": [
+      "Power Users",
+      "Operations Teams",
+      "Developers"
+    ],
+    "pricingModel": "Freemium with operation-based tiers",
+    "deployment": [
+      "Cloud"
+    ],
+    "securityCertifications": [
+      "SOC 2 Type II",
+      "GDPR"
+    ],
+    "compliance": [
+      "GDPR",
+      "CCPA"
+    ],
+    "integrations": [
+      "Slack",
+      "Google Workspace",
+      "Salesforce",
+      "HubSpot",
+      "Notion",
+      "Jira",
+      "GitHub",
+      "Shopify",
+      "Mailchimp",
+      "Zapier"
+    ],
+    "apiAvailable": true,
+    "aiFeatures": [
+      "AI scenario builder",
+      "Data mapping suggestions"
+    ],
+    "mobileApps": [
+      "iOS",
+      "Android"
+    ],
+    "learningCurve": "Moderate",
+    "migrationComplexity": "Moderate",
+    "supportQuality": "4.1/5",
+    "releaseFrequency": "Bi-weekly"
+  }
+}

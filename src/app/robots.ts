@@ -17,6 +17,26 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "CCBot",
         disallow: "/",
       },
+      {
+        userAgent: "OAI-SearchBot",
+        allow: "/",
+      },
+      {
+        userAgent: "PerplexityBot",
+        allow: "/",
+      },
+      {
+        userAgent: "ClaudeBot",
+        allow: "/",
+      },
+      {
+        userAgent: "GoogleOther",
+        allow: "/",
+      },
+      {
+        userAgent: "Bingbot",
+        allow: "/",
+      },
     ],
     sitemap: `${siteConfig.url}/sitemap.xml`,
   }

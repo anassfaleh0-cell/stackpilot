@@ -1,0 +1,476 @@
+{
+  "slug": "typeform",
+  "name": "Typeform",
+  "tagline": "Beautiful online forms and surveys that engage users",
+  "description": "Interactive form builder with conversational UX and rich logic",
+  "category": "Productivity",
+  "website": "https://www.typeform.com",
+  "pricing": "Freemium",
+  "priceRange": "Free–$83/mo",
+  "rating": 4.4,
+  "reviewCount": 14200,
+  "pros": [
+    "Conversational one-question-at-a-time interface boosting completion rates 30%+",
+    "Rich logic jumps and calculations for dynamic forms",
+    "AI question generator producing complete forms from prompts",
+    "60+ professionally designed templates",
+    "Video, photo, and GIF question types for engaging surveys"
+  ],
+  "cons": [
+    "Free tier limited to 10 responses/month severely restricts evaluation",
+    "100+ field logic limit broken across forms for complex workflows",
+    "Export options limited vs dedicated survey tools like SurveyMonkey"
+  ],
+  "features": [
+    {
+      "name": "Form Builder",
+      "description": "Drag-and-drop question editor",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Logic Jumps",
+      "description": "Conditional question paths",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Calculations",
+      "description": "Behind-the-scenes field math",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "AI Questions",
+      "description": "Prompt-based form generation",
+      "available": true,
+      "category": "AI"
+    },
+    {
+      "name": "Templates",
+      "description": "60+ design templates",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Themes",
+      "description": "Custom branding and styling",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Video Questions",
+      "description": "Video-based question types",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Photo Questions",
+      "description": "Image selection questions",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Multiple Choice",
+      "description": "Single and multi-select",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Rating Scales",
+      "description": "Star, NPS, and smiley ratings",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "File Upload",
+      "description": "Respondent file submissions",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Hidden Fields",
+      "description": "Pre-populated data passing",
+      "available": true,
+      "category": "Advanced"
+    },
+    {
+      "name": "Quiz Mode",
+      "description": "Auto-scored assessments",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Payment",
+      "description": "Stripe payment collection",
+      "available": true,
+      "category": "Advanced"
+    },
+    {
+      "name": "Integrations",
+      "description": "140+ native connections",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "API",
+      "description": "RESTful with SDKs",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Webhooks",
+      "description": "Real-time submission events",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Reports",
+      "description": "Response analytics dashboard",
+      "available": true,
+      "category": "Analytics"
+    }
+  ],
+  "ratings": [
+    {
+      "label": "Ease of Use",
+      "score": 4.5
+    },
+    {
+      "label": "Features",
+      "score": 4.2
+    },
+    {
+      "label": "Performance",
+      "score": 4.3
+    },
+    {
+      "label": "Support",
+      "score": 3.9
+    },
+    {
+      "label": "Value",
+      "score": 4.2
+    }
+  ],
+  "content": [
+    {
+      "title": "Executive Summary",
+      "body": "Interactive form builder with conversational UX and rich logic Typeform earns a 4.4/5 rating from 14,200 user reviews.",
+      "type": "text"
+    },
+    {
+      "title": "TL;DR",
+      "body": "Typeform is a leading productivity platform rated 4.4/5 across 14,200 reviews. Pricing starts at Free–$83/mo. Best for Marketers and Product Teams.",
+      "type": "text"
+    },
+    {
+      "title": "Rating Overview",
+      "body": "Typeform scores 4.4/5 overall with ease of use (4.5/5), features (4.2/5), performance (4.3/5), support (3.9/5), value (4.2/5).",
+      "type": "text"
+    },
+    {
+      "title": "Quick Verdict",
+      "body": "Typeform earns a 4.4/5 rating recommended for Marketers and Product Teams. Delivers strong feature depth with intuitive interface.",
+      "type": "text"
+    },
+    {
+      "title": "Company Background",
+      "body": "Typeform was founded in 2012 in Barcelona, Spain, serving 3M+ users customers with 300+ employees.",
+      "type": "text"
+    },
+    {
+      "title": "Product Overview",
+      "body": "Typeform is a beautiful online forms and surveys that engage users. Provides 18 features across Core, AI, Advanced, Integrations, Analytics categories. Mobile on iOS and Android. API available.",
+      "type": "text"
+    },
+    {
+      "title": "Key Features",
+      "body": "Essential productivity features:",
+      "type": "list",
+      "items": [
+        "Form Builder: Drag-and-drop question editor.",
+        "Logic Jumps: Conditional question paths.",
+        "Calculations: Behind-the-scenes field math.",
+        "Templates: 60+ design templates.",
+        "Themes: Custom branding and styling.",
+        "Video Questions: Video-based question types."
+      ]
+    },
+    {
+      "title": "Feature Deep Dive",
+      "body": "Form Builder. Drag-and-drop question editor. Logic Jumps. Conditional question paths. Calculations. Behind-the-scenes field math.",
+      "type": "text"
+    },
+    {
+      "title": "AI Features",
+      "body": "Typeform AI includes AI question generator, Smart skip logic, AI scoring.",
+      "type": "text"
+    },
+    {
+      "title": "API & Automation",
+      "body": "Typeform provides a comprehensive API for custom integration and workflow automation.",
+      "type": "text"
+    },
+    {
+      "title": "Security",
+      "body": "Typeform holds SOC 2 Type II, GDPR, CCPA certifications with TLS 1.2+ and AES-256 encryption.",
+      "type": "text"
+    },
+    {
+      "title": "Compliance",
+      "body": "Typeform complies with GDPR, CCPA, SOC 2 regulations.",
+      "type": "text"
+    },
+    {
+      "title": "Integrations",
+      "body": "Integrates with Google Sheets, Slack, Mailchimp, HubSpot, Salesforce, Zapier, Airtable, Notion, and 2+ more.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing",
+      "body": "Typeform uses freemium with response-based tiers. Free tier available. Plans from Free–$83/mo.",
+      "type": "text"
+    },
+    {
+      "title": "Pros",
+      "body": "Typeform advantages:",
+      "type": "list",
+      "items": [
+        "Conversational one-question-at-a-time interface boosting completion rates 30%+",
+        "Rich logic jumps and calculations for dynamic forms",
+        "AI question generator producing complete forms from prompts",
+        "60+ professionally designed templates"
+      ]
+    },
+    {
+      "title": "Cons",
+      "body": "Considerations:",
+      "type": "list",
+      "items": [
+        "Free tier limited to 10 responses/month severely restricts evaluation",
+        "100+ field logic limit broken across forms for complex workflows",
+        "Export options limited vs dedicated survey tools like SurveyMonkey"
+      ]
+    },
+    {
+      "title": "Performance",
+      "body": "Strong performance with fast load times.",
+      "type": "text"
+    },
+    {
+      "title": "Ease of Use",
+      "body": "Typeform has a low learning curve with intuitive interface.",
+      "type": "text"
+    },
+    {
+      "title": "User Experience",
+      "body": "Streamlined modern interface.",
+      "type": "text"
+    },
+    {
+      "title": "Customer Support",
+      "body": "Support rated 3.9/5 via email and knowledge base.",
+      "type": "text"
+    },
+    {
+      "title": "Industry Fit",
+      "body": "Best for Forms and Productivity with Marketers and Product Teams teams.",
+      "type": "text"
+    },
+    {
+      "title": "Team Size Fit",
+      "body": "Typeform accommodates teams of all sizes with generous free tier. Best ROI for 5-50 person teams.",
+      "type": "text"
+    },
+    {
+      "title": "Real Use Cases",
+      "body": "A marketers team uses Typeform to streamline productivity workflows and improve team productivity.",
+      "type": "text"
+    },
+    {
+      "title": "Competitor Analysis",
+      "body": "Typeform competes with other platforms. Primary differentiators: core functionality and ease of use.",
+      "type": "text"
+    },
+    {
+      "title": "Alternatives",
+      "body": "Consider alternatives based on specific team requirements.",
+      "type": "text"
+    },
+    {
+      "title": "Migration Guide",
+      "body": "Migration rated low complexity. Most teams transition within 1-2 weeks. Parallel testing recommended.",
+      "type": "text"
+    },
+    {
+      "title": "Buying Advice",
+      "body": "Evaluate: feature alignment, total cost at Free–$83/mo, migration effort (1-2 weeks), and real-data trial.",
+      "type": "text"
+    },
+    {
+      "title": "Final Verdict",
+      "body": "Typeform earns 4.4/5. Strong choice for Marketers and Product Teams. Recommended for teams prioritizing productivity.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing at a Glance",
+      "body": "pricing-ladder",
+      "type": "diagram"
+    },
+    {
+      "title": "Feature Radar",
+      "body": "feature-radar",
+      "type": "diagram"
+    },
+    {
+      "title": "Implementation Flow",
+      "body": "implementation-flow",
+      "type": "diagram"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is Typeform best used for?",
+      "answer": "Typeform is best used for interactive form builder with conversational ux and rich logic."
+    },
+    {
+      "question": "How much does Typeform cost?",
+      "answer": "Typeform uses freemium with response-based tiers starting at Free–$83/mo. Free tier available."
+    },
+    {
+      "question": "Does Typeform integrate with other tools?",
+      "answer": "Yes, integrates with Google Sheets, Slack, Mailchimp, HubSpot, Salesforce. And 5+ more."
+    },
+    {
+      "question": "Is Typeform suitable for small teams?",
+      "answer": "Yes, with a generous free tier. Freemium with response-based tiers scales with team growth."
+    },
+    {
+      "question": "How does Typeform pricing work?",
+      "answer": "Typeform uses freemium with response-based tiers from Free–$83/mo, with free tier available."
+    },
+    {
+      "question": "Is Typeform secure?",
+      "answer": "Yes, holds SOC 2 Type II, GDPR, CCPA certifications with encryption."
+    },
+    {
+      "question": "What integrations does Typeform offer?",
+      "answer": "Integrates with Google Sheets, Slack, Mailchimp, HubSpot, Salesforce, Zapier, and more. API available."
+    },
+    {
+      "question": "Is Typeform good for small businesses?",
+      "answer": "Yes, with free tier. Freemium with response-based tiers scales with business size."
+    },
+    {
+      "question": "What are Typeform's main advantages?",
+      "answer": "Conversational one-question-at-a-time interface boosting com and Rich logic jumps and calculations for dynamic forms."
+    },
+    {
+      "question": "What are Typeform's limitations?",
+      "answer": "Free tier limited to 10 responses/month severely restricts evaluation and 100+ field logic limit broken across forms for complex workflows."
+    },
+    {
+      "question": "How does Typeform compare to similar tools?",
+      "answer": "Typeform differentiates through pricing and usability."
+    },
+    {
+      "question": "Does Typeform support team collaboration?",
+      "answer": "Yes, includes collaboration features for team workflows."
+    },
+    {
+      "question": "Can I customize Typeform?",
+      "answer": "Yes, via API, custom fields, and templates."
+    },
+    {
+      "question": "Is Typeform easy to set up?",
+      "answer": "Yes, most teams start within hours."
+    },
+    {
+      "question": "How often does Typeform update?",
+      "answer": "Updates bi-weekly."
+    },
+    {
+      "question": "What support does Typeform provide?",
+      "answer": "Support rated 3.9/5. Email and knowledge base."
+    },
+    {
+      "question": "Does Typeform offer a free version?",
+      "answer": "Yes, with core features."
+    },
+    {
+      "question": "How does Typeform handle data privacy?",
+      "answer": "Complies with GDPR, CCPA, SOC 2 regulations."
+    },
+    {
+      "question": "What ROI can teams expect?",
+      "answer": "Positive ROI typically within 3-6 months from improved productivity workflows."
+    },
+    {
+      "question": "What platforms does Typeform support?",
+      "answer": "Available on Cloud. Mobile on iOS and Android."
+    }
+  ],
+  "alternatives": [],
+  "relatedComparisons": [],
+  "relatedGuides": [],
+  "relatedPosts": [],
+  "lastReviewed": "2026-07-19",
+  "author": "StackPilot Team",
+  "company": {
+    "founded": 2012,
+    "headquarters": "Barcelona, Spain",
+    "customers": "3M+ users",
+    "employeeCount": "300+",
+    "industries": [
+      "Forms",
+      "Productivity",
+      "SaaS"
+    ],
+    "targetUsers": [
+      "Marketers",
+      "Product Teams",
+      "Researchers"
+    ],
+    "pricingModel": "Freemium with response-based tiers",
+    "deployment": [
+      "Cloud"
+    ],
+    "securityCertifications": [
+      "SOC 2 Type II",
+      "GDPR",
+      "CCPA"
+    ],
+    "compliance": [
+      "GDPR",
+      "CCPA",
+      "SOC 2"
+    ],
+    "integrations": [
+      "Google Sheets",
+      "Slack",
+      "Mailchimp",
+      "HubSpot",
+      "Salesforce",
+      "Zapier",
+      "Airtable",
+      "Notion",
+      "Calendly",
+      "Asana"
+    ],
+    "apiAvailable": true,
+    "aiFeatures": [
+      "AI question generator",
+      "Smart skip logic",
+      "AI scoring"
+    ],
+    "mobileApps": [
+      "iOS",
+      "Android"
+    ],
+    "learningCurve": "Low",
+    "migrationComplexity": "Low",
+    "supportQuality": "4.3/5",
+    "releaseFrequency": "Bi-weekly"
+  }
+}

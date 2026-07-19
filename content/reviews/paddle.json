@@ -1,0 +1,479 @@
+{
+  "slug": "paddle",
+  "name": "Paddle",
+  "tagline": "Global payment infrastructure for SaaS businesses",
+  "description": "Merchant of record handling taxes, compliance, and payments",
+  "category": "Finance & Accounting",
+  "website": "https://www.paddle.com",
+  "pricing": "Paid",
+  "priceRange": "2.9% + $0.50/transaction",
+  "rating": 4.2,
+  "reviewCount": 1800,
+  "pros": [
+    "Merchant of record handling global tax compliance and remittance",
+    "Subscription management with metered billing and usage pricing",
+    "Checkout optimization with 100+ currencies and localized payment methods",
+    "Smart dunning with retry logic recovering 10-15% failed payments",
+    "Integrated fraud detection and chargeback protection"
+  ],
+  "cons": [
+    "2.9% + $0.50 transaction fee above Stripe's 2.7% + $0.05 base",
+    "Requires full migration to Paddle as merchant of record",
+    "Limited customization for complex subscription discounting"
+  ],
+  "features": [
+    {
+      "name": "Merchant of Record",
+      "description": "Tax compliance and liability handling",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Checkout",
+      "description": "Optimized 100+ currency checkout",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Subscription Management",
+      "description": "Billing, plans, and upgrades",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Usage Billing",
+      "description": "Metered and per-unit pricing",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Invoicing",
+      "description": "Automated recurring invoices",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Tax Compliance",
+      "description": "Global VAT and sales tax",
+      "available": true,
+      "category": "Compliance"
+    },
+    {
+      "name": "Smart Dunning",
+      "description": "Retry logic for failed payments",
+      "available": true,
+      "category": "Revenue"
+    },
+    {
+      "name": "Revenue Reporting",
+      "description": "Financial dashboards and exports",
+      "available": true,
+      "category": "Analytics"
+    },
+    {
+      "name": "Fraud Protection",
+      "description": "AI-based transaction screening",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Webhooks",
+      "description": "Real-time event notifications",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "API",
+      "description": "RESTful payment API",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Payouts",
+      "description": "Automated seller settlements",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Customer Portal",
+      "description": "Subscriber self-service",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Sandbox Environment",
+      "description": "Test mode for development",
+      "available": true,
+      "category": "Developer"
+    },
+    {
+      "name": "Multi-Currency",
+      "description": "100+ currency support",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Local Payment Methods",
+      "description": "APM support per region",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Churn Prediction",
+      "description": "AI at-risk subscriber alerts",
+      "available": true,
+      "category": "AI"
+    },
+    {
+      "name": "Revenue Forecasting",
+      "description": "Projected revenue modeling",
+      "available": true,
+      "category": "AI"
+    }
+  ],
+  "ratings": [
+    {
+      "label": "Ease of Use",
+      "score": 4.2
+    },
+    {
+      "label": "Features",
+      "score": 4.1
+    },
+    {
+      "label": "Performance",
+      "score": 4.3
+    },
+    {
+      "label": "Support",
+      "score": 4
+    },
+    {
+      "label": "Value",
+      "score": 4
+    }
+  ],
+  "content": [
+    {
+      "title": "Executive Summary",
+      "body": "Merchant of record handling taxes, compliance, and payments Paddle earns a 4.2/5 rating from 1,800 user reviews.",
+      "type": "text"
+    },
+    {
+      "title": "TL;DR",
+      "body": "Paddle is a leading finance & accounting platform rated 4.2/5 across 1,800 reviews. Pricing starts at 2.9% + $0.50/transaction. Best for SaaS Companies and B2B Software.",
+      "type": "text"
+    },
+    {
+      "title": "Rating Overview",
+      "body": "Paddle scores 4.2/5 overall with ease of use (4.2/5), features (4.1/5), performance (4.3/5), support (4/5), value (4/5).",
+      "type": "text"
+    },
+    {
+      "title": "Quick Verdict",
+      "body": "Paddle earns a 4.2/5 rating recommended for SaaS Companies and B2B Software. Delivers solid functionality with functional design.",
+      "type": "text"
+    },
+    {
+      "title": "Company Background",
+      "body": "Paddle was founded in 2012 in London, UK, serving 5,000+ customers with 500+ employees.",
+      "type": "text"
+    },
+    {
+      "title": "Product Overview",
+      "body": "Paddle is a global payment infrastructure for saas businesses. Provides 18 features across Core, Compliance, Revenue, Analytics, Security, Integrations, Developer, AI categories. Mobile on iOS and Android. API available.",
+      "type": "text"
+    },
+    {
+      "title": "Key Features",
+      "body": "Essential finance & accounting features:",
+      "type": "list",
+      "items": [
+        "Merchant of Record: Tax compliance and liability handling.",
+        "Checkout: Optimized 100+ currency checkout.",
+        "Subscription Management: Billing, plans, and upgrades.",
+        "Usage Billing: Metered and per-unit pricing.",
+        "Invoicing: Automated recurring invoices.",
+        "Payouts: Automated seller settlements."
+      ]
+    },
+    {
+      "title": "Feature Deep Dive",
+      "body": "Merchant of Record. Tax compliance and liability handling. Checkout. Optimized 100+ currency checkout. Subscription Management. Billing, plans, and upgrades.",
+      "type": "text"
+    },
+    {
+      "title": "AI Features",
+      "body": "Paddle AI includes AI churn prediction, Revenue forecasting, Smart dunning.",
+      "type": "text"
+    },
+    {
+      "title": "API & Automation",
+      "body": "Paddle provides a comprehensive API for custom integration and workflow automation.",
+      "type": "text"
+    },
+    {
+      "title": "Security",
+      "body": "Paddle holds SOC 2 Type II, PCI DSS Level 1, GDPR, ISO 27001 certifications with TLS 1.2+ and AES-256 encryption.",
+      "type": "text"
+    },
+    {
+      "title": "Compliance",
+      "body": "Paddle complies with GDPR, CCPA, PCI DSS, VAT, Sales Tax regulations.",
+      "type": "text"
+    },
+    {
+      "title": "Integrations",
+      "body": "Integrates with Stripe, Chargebee, Recurly, HubSpot, Salesforce, QuickBooks, Xero, Slack, and 2+ more.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing",
+      "body": "Paddle uses revenue-based transaction fee. Free trial available. Plans from 2.9% + $0.50/transaction.",
+      "type": "text"
+    },
+    {
+      "title": "Pros",
+      "body": "Paddle advantages:",
+      "type": "list",
+      "items": [
+        "Merchant of record handling global tax compliance and remittance",
+        "Subscription management with metered billing and usage pricing",
+        "Checkout optimization with 100+ currencies and localized payment methods",
+        "Smart dunning with retry logic recovering 10-15% failed payments"
+      ]
+    },
+    {
+      "title": "Cons",
+      "body": "Considerations:",
+      "type": "list",
+      "items": [
+        "2.9% + $0.50 transaction fee above Stripe's 2.7% + $0.05 base",
+        "Requires full migration to Paddle as merchant of record",
+        "Limited customization for complex subscription discounting"
+      ]
+    },
+    {
+      "title": "Performance",
+      "body": "Strong performance with fast load times.",
+      "type": "text"
+    },
+    {
+      "title": "Ease of Use",
+      "body": "Paddle has a low learning curve with intuitive interface.",
+      "type": "text"
+    },
+    {
+      "title": "User Experience",
+      "body": "Functional organized interface.",
+      "type": "text"
+    },
+    {
+      "title": "Customer Support",
+      "body": "Support rated 4/5 via email and knowledge base.",
+      "type": "text"
+    },
+    {
+      "title": "Industry Fit",
+      "body": "Best for Payments and SaaS with SaaS Companies and B2B Software teams.",
+      "type": "text"
+    },
+    {
+      "title": "Team Size Fit",
+      "body": "Paddle accommodates teams of all sizes. Best ROI for 5-50 person teams.",
+      "type": "text"
+    },
+    {
+      "title": "Real Use Cases",
+      "body": "A saas companies team uses Paddle to streamline finance & accounting workflows and improve team productivity.",
+      "type": "text"
+    },
+    {
+      "title": "Competitor Analysis",
+      "body": "Paddle competes with other platforms. Primary differentiators: core functionality and pricing.",
+      "type": "text"
+    },
+    {
+      "title": "Alternatives",
+      "body": "Consider alternatives based on specific team requirements.",
+      "type": "text"
+    },
+    {
+      "title": "Migration Guide",
+      "body": "Migration rated moderate complexity. Budget 2-4 weeks for full transition. Parallel testing recommended.",
+      "type": "text"
+    },
+    {
+      "title": "Buying Advice",
+      "body": "Evaluate: feature alignment, total cost at 2.9% + $0.50/transaction, migration effort (2-4 weeks), and real-data trial.",
+      "type": "text"
+    },
+    {
+      "title": "Final Verdict",
+      "body": "Paddle earns 4.2/5. Solid option for most teams. Recommended for teams prioritizing finance & accounting.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing at a Glance",
+      "body": "pricing-ladder",
+      "type": "diagram"
+    },
+    {
+      "title": "Feature Radar",
+      "body": "feature-radar",
+      "type": "diagram"
+    },
+    {
+      "title": "Implementation Flow",
+      "body": "implementation-flow",
+      "type": "diagram"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is Paddle best used for?",
+      "answer": "Paddle is best used for merchant of record handling taxes, compliance, and payments."
+    },
+    {
+      "question": "How much does Paddle cost?",
+      "answer": "Paddle uses revenue-based transaction fee starting at 2.9% + $0.50/transaction. Free trial available."
+    },
+    {
+      "question": "Does Paddle integrate with other tools?",
+      "answer": "Yes, integrates with Stripe, Chargebee, Recurly, HubSpot, Salesforce. And 5+ more."
+    },
+    {
+      "question": "Is Paddle suitable for small teams?",
+      "answer": "Yes. Revenue-based transaction fee scales with team growth."
+    },
+    {
+      "question": "How does Paddle pricing work?",
+      "answer": "Paddle uses revenue-based transaction fee from 2.9% + $0.50/transaction."
+    },
+    {
+      "question": "Is Paddle secure?",
+      "answer": "Yes, holds SOC 2 Type II, PCI DSS Level 1, GDPR, ISO 27001 certifications with encryption."
+    },
+    {
+      "question": "What integrations does Paddle offer?",
+      "answer": "Integrates with Stripe, Chargebee, Recurly, HubSpot, Salesforce, QuickBooks, and more. API available."
+    },
+    {
+      "question": "Is Paddle good for small businesses?",
+      "answer": "Yes. Revenue-based transaction fee scales with business size."
+    },
+    {
+      "question": "What are Paddle's main advantages?",
+      "answer": "Merchant of record handling global tax compliance and remitt and Subscription management with metered billing and usage prici."
+    },
+    {
+      "question": "What are Paddle's limitations?",
+      "answer": "2.9% + $0.50 transaction fee above Stripe's 2.7% + $0.05 base and Requires full migration to Paddle as merchant of record."
+    },
+    {
+      "question": "How does Paddle compare to similar tools?",
+      "answer": "Paddle differentiates through pricing and performance."
+    },
+    {
+      "question": "Does Paddle support team collaboration?",
+      "answer": "Yes, includes collaboration features for team workflows."
+    },
+    {
+      "question": "Can I customize Paddle?",
+      "answer": "Yes, via API, custom fields, and templates."
+    },
+    {
+      "question": "Is Paddle easy to set up?",
+      "answer": "Yes, most teams start within hours."
+    },
+    {
+      "question": "How often does Paddle update?",
+      "answer": "Updates bi-weekly."
+    },
+    {
+      "question": "What support does Paddle provide?",
+      "answer": "Support rated 4/5. Email and knowledge base."
+    },
+    {
+      "question": "Does Paddle offer a free version?",
+      "answer": "Free trial available for evaluation."
+    },
+    {
+      "question": "How does Paddle handle data privacy?",
+      "answer": "Complies with GDPR, CCPA, PCI DSS, VAT, Sales Tax regulations."
+    },
+    {
+      "question": "What ROI can teams expect?",
+      "answer": "Positive ROI typically within 3-6 months from improved finance & accounting workflows."
+    },
+    {
+      "question": "What platforms does Paddle support?",
+      "answer": "Available on Cloud. Mobile on iOS and Android."
+    }
+  ],
+  "alternatives": [],
+  "relatedComparisons": [],
+  "relatedGuides": [],
+  "relatedPosts": [],
+  "lastReviewed": "2026-07-19",
+  "author": "StackPilot Team",
+  "company": {
+    "founded": 2012,
+    "headquarters": "London, UK",
+    "customers": "5,000+",
+    "employeeCount": "500+",
+    "industries": [
+      "Payments",
+      "SaaS",
+      "Fintech"
+    ],
+    "targetUsers": [
+      "SaaS Companies",
+      "B2B Software",
+      "Digital Products"
+    ],
+    "pricingModel": "Revenue-based transaction fee",
+    "deployment": [
+      "Cloud"
+    ],
+    "securityCertifications": [
+      "SOC 2 Type II",
+      "PCI DSS Level 1",
+      "GDPR",
+      "ISO 27001"
+    ],
+    "compliance": [
+      "GDPR",
+      "CCPA",
+      "PCI DSS",
+      "VAT",
+      "Sales Tax"
+    ],
+    "integrations": [
+      "Stripe",
+      "Chargebee",
+      "Recurly",
+      "HubSpot",
+      "Salesforce",
+      "QuickBooks",
+      "Xero",
+      "Slack",
+      "Zapier",
+      "Webflow"
+    ],
+    "apiAvailable": true,
+    "aiFeatures": [
+      "AI churn prediction",
+      "Revenue forecasting",
+      "Smart dunning"
+    ],
+    "mobileApps": [
+      "iOS",
+      "Android"
+    ],
+    "learningCurve": "Low",
+    "migrationComplexity": "Moderate",
+    "supportQuality": "4.0/5",
+    "releaseFrequency": "Bi-weekly"
+  }
+}
