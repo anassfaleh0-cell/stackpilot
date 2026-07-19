@@ -97,6 +97,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+        <Script
+          src="https://quge5.com/88/tag.min.js"
+          data-zone="261263"
+          data-cfasync="false"
+          strategy="beforeInteractive"
+        />
         <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name}`} href="/rss.xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -122,12 +128,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
             <CookieConsent />
             <Analytics />
-            <Script
-              src="https://quge5.com/88/tag.min.js"
-              data-zone="261263"
-              data-cfasync="false"
-              strategy="afterInteractive"
-            />
           </ToastProvider>
         </ThemeProvider>
       </body>
