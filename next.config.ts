@@ -1,6 +1,20 @@
 import type { NextConfig } from "next/dist/server/config-shared"
 
-const monetagDomains = [
+const analytics = [
+  "https://www.googletagmanager.com",
+  "https://www.google-analytics.com",
+  "https://analytics.google.com",
+  "https://www.clarity.ms",
+  "https://scripts.clarity.ms",
+  "https://img.clarity.ms",
+  "https://static.cloudflareinsights.com",
+  "https://fonts.googleapis.com",
+  "https://fonts.gstatic.com",
+]
+
+const monetag = [
+  "https://tzegilo.com",
+  "https://*.tzegilo.com",
   "https://quge5.com",
   "https://*.quge5.com",
   "https://venetrue.com",
@@ -17,21 +31,30 @@ const monetagDomains = [
   "https://*.n6wxm.com",
   "https://3nbf4.com",
   "https://*.3nbf4.com",
-].join(" ")
+]
+
+const scriptSrc = [...analytics, ...monetag].join(" ")
+const monetagStr = monetag.join(" ")
 
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms https://static.cloudflareinsights.com https://tzegilo.com https://*.tzegilo.com ${monetagDomains}`,
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "img-src 'self' data: blob: https: https://www.google-analytics.com https://www.clarity.ms https://*.tzegilo.com",
-  "font-src 'self' https://fonts.gstatic.com",
-  `connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms https://static.cloudflareinsights.com https://tzegilo.com https://*.tzegilo.com ${monetagDomains} https:`,
-  `frame-src 'self' https://*.tzegilo.com ${monetagDomains} https:`,
-  `worker-src 'self' blob: https://*.tzegilo.com ${monetagDomains}`,
+  `script-src 'self' 'unsafe-eval' 'unsafe-inline' ${scriptSrc}`,
+  `script-src-elem 'self' 'unsafe-inline' ${scriptSrc}`,
+  "script-src-attr 'none'",
+  `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com`,
+  `style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com`,
+  "style-src-attr 'unsafe-inline'",
+  `img-src 'self' data: blob: ${scriptSrc}`,
+  `font-src 'self' https://fonts.gstatic.com`,
+  `connect-src 'self' ${scriptSrc}`,
+  `frame-src 'self' ${monetagStr}`,
+  `worker-src 'self' blob: ${monetagStr}`,
   "child-src 'self' blob:",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
+  "frame-ancestors 'none'",
+  "manifest-src 'self'",
 ].join("; ")
 
 const nextConfig: NextConfig = {
