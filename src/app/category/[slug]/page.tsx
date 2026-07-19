@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!category) return {}
   const knowledge = getCategoryKnowledge(slug)
   return createMetadata({
-    title: `Best ${category.name} Software 2026: Reviews, Comparisons & Buying Guide`,
+    title: `Best ${category.name} Software 2026`,
     description: knowledge?.description || `Discover the best ${category.name.toLowerCase()} software tools. Expert reviews, comparisons, and buying guides to help you choose the right solution.`,
     path: `/category/${slug}`,
   })

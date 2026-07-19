@@ -5,12 +5,12 @@ import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { categories } from "@/lib/constants"
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts } from "@/lib/content/registry"
-import { ArrowRight, Star, BarChart3, Shield, BookOpen, Compass } from "lucide-react"
+import { ArrowRight, Star, BarChart3, Shield, BookOpen } from "lucide-react"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { BrandPattern, BrandOrb, BrandDivider } from "@/components/brand/patterns"
 
 export const metadata = createMetadata({
-  title: "Software Reviews, Comparisons & Buying Guides",
+  title: "Software Reviews & Buying Guides",
   description: "In-depth software reviews, expert comparisons, and actionable buying guides to help businesses choose, implement, and optimize the right tools for every need.",
   path: "/",
 })
@@ -95,6 +95,7 @@ export default function HomePage() {
             <Link
               href="/reviews"
               className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              aria-label="View all software reviews"
             >
               View all <ArrowRight size={14} />
             </Link>
@@ -123,6 +124,7 @@ export default function HomePage() {
             <Link
               href="/reviews"
               className="button-press inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-transparent hover:bg-muted-bg h-12 px-8 text-base font-medium transition-all duration-200"
+              aria-label="View all software reviews"
             >
               View all reviews <ArrowRight size={16} />
             </Link>
@@ -146,6 +148,7 @@ export default function HomePage() {
               <Link
                 href="/comparisons"
                 className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                aria-label="View all software comparisons"
               >
                 View all <ArrowRight size={14} />
               </Link>
@@ -188,6 +191,7 @@ export default function HomePage() {
               <Link
                 href="/guides"
                 className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                aria-label="View all expert buying guides"
               >
                 View all <ArrowRight size={14} />
               </Link>
@@ -258,6 +262,7 @@ export default function HomePage() {
               <Link
                 href="/blog"
                 className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                aria-label="View all blog posts and research"
               >
                 View all <ArrowRight size={14} />
               </Link>

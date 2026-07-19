@@ -52,13 +52,37 @@
       "title": "Tool Selection Scorecard",
       "body": "When evaluating collaboration tools, score each candidate against five weighted criteria. Adoption probability (weight 25%): how quickly will the team adopt this tool — measured by the number of peers already using it and the learning curve from signup to daily use? Ecosystem fit (weight 20%): how well does it integrate with the tools your team already uses — messaging, calendar, identity provider, and document storage? Async capability (weight 20%): does the tool support non-real-time collaboration including threaded discussions, searchable history, and push notification batching for time-zone distributed teams? Admin and security controls (weight 20%): does it offer SCIM provisioning, SSO, audit logs, and data export for compliance requirements? Cost per active user (weight 15%): what is the approximate monthly cost divided by predicted active users, accounting for free tier availability and per-user pricing? A collaboration tool scoring below 6/10 on adoption probability should not be selected regardless of feature depth — the best tool is the one the team actually uses.",
       "type": "table",
-      "columns": ["Criterion", "Weight", "Evaluation Question"],
+      "columns": [
+        "Criterion",
+        "Weight",
+        "Evaluation Question"
+      ],
       "rows": [
-        ["Adoption Probability", "25%", "Will the team actually use it? How many peers already use it?"],
-        ["Ecosystem Fit", "20%", "Does it integrate with messaging, calendar, SSO, and docs?"],
-        ["Async Capability", "20%", "Threaded discussions, searchable history, push batching for time zones?"],
-        ["Admin & Security", "20%", "SCIM, SSO, audit logs, data export for compliance?"],
-        ["Cost per Active User", "15%", "Monthly cost divided by predicted active users including free tier?"]
+        [
+          "Adoption Probability",
+          "25%",
+          "Will the team actually use it? How many peers already use it?"
+        ],
+        [
+          "Ecosystem Fit",
+          "20%",
+          "Does it integrate with messaging, calendar, SSO, and docs?"
+        ],
+        [
+          "Async Capability",
+          "20%",
+          "Threaded discussions, searchable history, push batching for time zones?"
+        ],
+        [
+          "Admin & Security",
+          "20%",
+          "SCIM, SSO, audit logs, data export for compliance?"
+        ],
+        [
+          "Cost per Active User",
+          "15%",
+          "Monthly cost divided by predicted active users including free tier?"
+        ]
       ]
     },
     {
@@ -69,8 +93,24 @@
   ],
   "author": "StackPilot Team",
   "lastUpdated": "2026-07-16",
-  "relatedTools": ["slack", "notion", "linear", "asana", "zoom", "confluence"],
-  "relatedGuides": ["how-to-choose-an-ai-writing-tool", "software-evaluation-checklist", "saas-implementation-best-practices"],
-  "relatedComparisons": ["slack-vs-microsoft-teams", "asana-vs-monday-com"],
-  "relatedPosts": ["best-remote-communication-tools", "project-management-tools-2026"]
+  "relatedTools": [
+    "slack",
+    "notion",
+    "linear",
+    "asana",
+    "zoom",
+    "confluence"
+  ],
+  "relatedGuides": [
+    "how-to-choose-an-ai-writing-tool",
+    "software-evaluation-checklist",
+    "saas-implementation-best-practices"
+  ],
+  "relatedComparisons": [
+    "slack-vs-microsoft-teams",
+    "asana-vs-monday-com"
+  ],
+  "relatedPosts": [
+    "best-remote-communication-tools"
+  ]
 }

@@ -6,8 +6,6 @@ import {
   getAllBest, getAllHubs,
 } from "@/lib/content/registry"
 
-const statSlugs = ["crm-software", "project-management", "ai-software", "developer-tools", "marketing-software", "hr-software"]
-
 const staticPages = [
   { url: siteConfig.url, lastModified: new Date(), changeFrequency: "daily" as const, priority: 1.0 },
   { url: `${siteConfig.url}/reviews`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.9 },
@@ -121,8 +119,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
-    ...statSlugs.map((s) => ({
-      url: `${siteConfig.url}/statistics/${s}`,
+    ...getAllStatistics().map((s) => ({
+      url: `${siteConfig.url}/statistics/${s.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.6,

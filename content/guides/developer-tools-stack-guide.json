@@ -58,12 +58,32 @@
       "title": "Stack Evaluation Scorecard",
       "body": "Score each candidate developer tool against four weighted criteria. Integration effort (weight 25%): how many engineer-hours does it take to connect the tool with your existing stack — includes API setup, authentication, and data migration? Team adoption friction (weight 25%): what is the learning curve for your least experienced engineer — measured as the time from introduction to productive daily use? Maintenance burden (weight 25%): how often does the tool ship breaking changes, and what is the typical upgrade effort per release? Exit cost (weight 25%): if you need to switch vendors, how difficult is it to migrate data and workflows to an alternative — rated on a 1-10 scale where 10 means starting from scratch? A tool scoring below 7/10 on any single criterion needs strong compensating advantages in the others. Prioritize tools with well-documented APIs, public roadmaps, and active open-source communities — these signals correlate with lower long-term maintenance burden. Start any new tool with a two-week evaluation period on a non-critical project before committing to a paid plan.",
       "type": "table",
-      "columns": ["Criterion", "Weight", "What to Measure"],
+      "columns": [
+        "Criterion",
+        "Weight",
+        "What to Measure"
+      ],
       "rows": [
-        ["Integration Effort", "25%", "Engineer-hours to connect with existing stack: API setup, auth, migration"],
-        ["Team Adoption Friction", "25%", "Time from introduction to productive daily use for least experienced engineer"],
-        ["Maintenance Burden", "25%", "Breaking change frequency per year; upgrade effort per release"],
-        ["Exit Cost", "25%", "How hard to migrate data and workflows? (1-10 where 10 = start from scratch)"]
+        [
+          "Integration Effort",
+          "25%",
+          "Engineer-hours to connect with existing stack: API setup, auth, migration"
+        ],
+        [
+          "Team Adoption Friction",
+          "25%",
+          "Time from introduction to productive daily use for least experienced engineer"
+        ],
+        [
+          "Maintenance Burden",
+          "25%",
+          "Breaking change frequency per year; upgrade effort per release"
+        ],
+        [
+          "Exit Cost",
+          "25%",
+          "How hard to migrate data and workflows? (1-10 where 10 = start from scratch)"
+        ]
       ]
     },
     {
@@ -74,8 +94,25 @@
   ],
   "author": "StackPilot Team",
   "lastUpdated": "2026-07-16",
-  "relatedTools": ["github", "vercel", "supabase", "netlify", "sentry", "gitlab"],
-  "relatedGuides": ["software-evaluation-checklist", "saas-implementation-best-practices", "saas-metrics-and-kpis"],
-  "relatedComparisons": ["github-vs-gitlab", "vercel-vs-netlify", "supabase-vs-firebase"],
-  "relatedPosts": ["frontend-deployment-platforms-comparison", "monitoring-tools-2026"]
+  "relatedTools": [
+    "github",
+    "vercel",
+    "supabase",
+    "netlify",
+    "sentry",
+    "gitlab"
+  ],
+  "relatedGuides": [
+    "software-evaluation-checklist",
+    "saas-implementation-best-practices",
+    "saas-metrics-and-kpis"
+  ],
+  "relatedComparisons": [
+    "github-vs-gitlab",
+    "vercel-vs-netlify",
+    "supabase-vs-firebase"
+  ],
+  "relatedPosts": [
+    "frontend-deployment-platforms-comparison"
+  ]
 }

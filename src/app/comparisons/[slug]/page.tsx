@@ -22,8 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const cmp = getComparison(slug)
   if (!cmp) return {}
-  const titleSuffix = cmp.description.length > 60 ? " Detailed Comparison" : " Comparison"
-  return createMetadata({ title: cmp.title + titleSuffix, description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated })
+  return createMetadata({ title: cmp.title, description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated })
 }
 
 export default async function ComparisonPage({ params }: { params: Promise<{ slug: string }> }) {

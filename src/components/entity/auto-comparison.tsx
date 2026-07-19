@@ -1,5 +1,6 @@
 import { compareEntities } from "@/lib/entities/comparison"
 import { getEntity, getAllEntities } from "@/lib/entities/data"
+import { getComparison } from "@/lib/content/registry"
 import Link from "next/link"
 import { GlassCard } from "@/components/editorial/glass-card"
 import { Badge } from "@/components/ui/badge"
@@ -22,6 +23,8 @@ export function AutoComparison({ slug, className = "" }: AutoComparisonProps) {
       {alternatives.map((alt) => {
         const comp = compareEntities(slug, alt.slug)
         if (!comp) return null
+        const compSlug = `${slug}-vs-${alt.slug}`
+        const hasComparison = getComparison(compSlug)
         return (
           <GlassCard key={alt.slug}>
             <div className="p-5">
@@ -52,12 +55,14 @@ export function AutoComparison({ slug, className = "" }: AutoComparisonProps) {
                 <p>{comp.pricingDiff}</p>
                 <p>{comp.securityDiff}</p>
               </div>
-              <Link
-                href={`/comparisons/${slug}-vs-${alt.slug}`}
-                className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline mt-3"
-              >
-                Full comparison <ArrowRight size={10} />
-              </Link>
+              {hasComparison && (
+                <Link
+                  href={`/comparisons/${compSlug}`}
+                  className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline mt-3"
+                >
+                  Full comparison <ArrowRight size={10} />
+                </Link>
+              )}
             </div>
           </GlassCard>
         )

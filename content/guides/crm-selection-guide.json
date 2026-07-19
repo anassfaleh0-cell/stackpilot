@@ -1,6 +1,6 @@
 {
   "slug": "crm-selection-guide",
-  "title": "CRM Selection Guide: How to Choose the Right Sales Platform",
+  "title": "CRM Selection Guide",
   "description": "A structured framework for evaluating CRM platforms with weighted criteria, integration assessment, migration planning, and common pitfalls to avoid for small to mid-sized businesses.",
   "category": "CRM & Sales",
   "difficulty": "Beginner",
@@ -15,14 +15,42 @@
       "title": "Define Your CRM Requirements",
       "body": "Create a weighted scoring matrix customized to your business needs. Assign higher weights to capabilities that directly address the bottlenecks identified in your sales process assessment. Use the following criteria framework as a starting point, adjusting weights based on your specific priorities.",
       "type": "table",
-      "columns": ["Criterion", "Weight", "What to Evaluate"],
+      "columns": [
+        "Criterion",
+        "Weight",
+        "What to Evaluate"
+      ],
       "rows": [
-        ["Core CRM Features", "25%", "Contact management, deal pipeline, activity tracking, email sync, calendar integration, mobile app usability"],
-        ["Automation & Workflows", "20%", "Email sequencing, lead assignment rules, task automation, follow-up reminders, workflow builder flexibility"],
-        ["Integration Ecosystem", "20%", "Native integrations with email (Gmail, Outlook), marketing tools, accounting software, Zapier/API support"],
-        ["Reporting & Analytics", "15%", "Custom report builder, pipeline velocity, conversion rates, forecast accuracy, dashboard shareability"],
-        ["Ease of Use & Adoption", "10%", "Interface intuitiveness, onboarding time, mobile experience, data entry friction, admin simplicity"],
-        ["Total Cost of Ownership", "10%", "Per-seat pricing, tier upgrades, storage limits, API costs, training needs, migration expenses"]
+        [
+          "Core CRM Features",
+          "25%",
+          "Contact management, deal pipeline, activity tracking, email sync, calendar integration, mobile app usability"
+        ],
+        [
+          "Automation & Workflows",
+          "20%",
+          "Email sequencing, lead assignment rules, task automation, follow-up reminders, workflow builder flexibility"
+        ],
+        [
+          "Integration Ecosystem",
+          "20%",
+          "Native integrations with email (Gmail, Outlook), marketing tools, accounting software, Zapier/API support"
+        ],
+        [
+          "Reporting & Analytics",
+          "15%",
+          "Custom report builder, pipeline velocity, conversion rates, forecast accuracy, dashboard shareability"
+        ],
+        [
+          "Ease of Use & Adoption",
+          "10%",
+          "Interface intuitiveness, onboarding time, mobile experience, data entry friction, admin simplicity"
+        ],
+        [
+          "Total Cost of Ownership",
+          "10%",
+          "Per-seat pricing, tier upgrades, storage limits, API costs, training needs, migration expenses"
+        ]
       ]
     },
     {
@@ -78,8 +106,18 @@
   ],
   "author": "StackPilot Team",
   "lastUpdated": "2026-07-16",
-  "relatedTools": ["hubspot", "salesforce"],
-  "relatedGuides": ["software-evaluation-checklist", "saas-implementation-best-practices"],
-  "relatedComparisons": ["salesforce-vs-hubspot"],
-  "relatedPosts": ["best-crm-small-business"]
+  "relatedTools": [
+    "hubspot",
+    "salesforce"
+  ],
+  "relatedGuides": [
+    "software-evaluation-checklist",
+    "saas-implementation-best-practices"
+  ],
+  "relatedComparisons": [
+    "salesforce-vs-hubspot"
+  ],
+  "relatedPosts": [
+    "best-crm-small-business"
+  ]
 }
