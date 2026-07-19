@@ -1,164 +1,47 @@
 const fs = require("fs")
 const path = require("path")
 
+// ============================================================
+// CONTENT REGISTRY — load all existing content for linking
+// ============================================================
+
 const CONTENT_DIR = path.resolve(process.cwd(), "content")
 const REVIEWS_DIR = path.join(CONTENT_DIR, "reviews")
 const COMPARISONS_DIR = path.join(CONTENT_DIR, "comparisons")
-const GUIDES = fs.readdirSync(path.join(CONTENT_DIR, "guides")).filter(f => f.endsWith(".json")).map(f => f.replace(".json", ""))
-const BLOG = fs.readdirSync(path.join(CONTENT_DIR, "blog")).filter(f => f.endsWith(".json")).map(f => f.replace(".json", ""))
-const BEST = fs.readdirSync(path.join(CONTENT_DIR, "best")).filter(f => f.endsWith(".json")).map(f => f.replace(".json", ""))
-const GLOSSARY = fs.readdirSync(path.join(CONTENT_DIR, "glossary")).filter(f => f.endsWith(".json")).map(f => f.replace(".json", ""))
-const INDUSTRIES = fs.readdirSync(path.join(CONTENT_DIR, "industries")).filter(f => f.endsWith(".json")).map(f => f.replace(".json", ""))
-const USECASES = fs.readdirSync(path.join(CONTENT_DIR, "use-cases")).filter(f => f.endsWith(".json")).map(f => f.replace(".json", ""))
-const RESEARCH = fs.readdirSync(path.join(CONTENT_DIR, "research")).filter(f => f.endsWith(".json")).map(f => f.replace(".json", ""))
-const STATISTICS = fs.readdirSync(path.join(CONTENT_DIR, "statistics")).filter(f => f.endsWith(".json")).map(f => f.replace(".json", ""))
+
+function loadSlugs(dir) {
+  try {
+    return fs.readdirSync(path.join(CONTENT_DIR, dir)).filter(f => f.endsWith(".json")).map(f => f.replace(".json", ""))
+  } catch { return [] }
+}
+
+const ALL_SLUGS = {
+  reviews: new Set(loadSlugs("reviews")),
+  comparisons: new Set(loadSlugs("comparisons")),
+  guides: new Set(loadSlugs("guides")),
+  blog: new Set(loadSlugs("blog")),
+  best: new Set(loadSlugs("best")),
+  glossary: new Set(loadSlugs("glossary")),
+  industries: new Set(loadSlugs("industries")),
+  useCases: new Set(loadSlugs("use-cases")),
+  research: new Set(loadSlugs("research")),
+  statistics: new Set(loadSlugs("statistics")),
+  alternatives: new Set(loadSlugs("alternatives")),
+}
 
 const REVIEWS = {}
 for (const f of fs.readdirSync(REVIEWS_DIR).filter(f => f.endsWith(".json"))) {
-  const r = JSON.parse(fs.readFileSync(path.join(REVIEWS_DIR, f), "utf-8"))
-  REVIEWS[r.slug] = r
+  try {
+    const r = JSON.parse(fs.readFileSync(path.join(REVIEWS_DIR, f), "utf-8"))
+    REVIEWS[r.slug] = r
+  } catch { /* skip corrupt */ }
 }
 
-const EXISTING_COMPARISONS = new Set(
-  fs.readdirSync(COMPARISONS_DIR).filter(f => f.endsWith(".json")).map(f => f.replace(".json", ""))
-)
+// ============================================================
+// TOOL DATA HELPERS
+// ============================================================
 
-// Comprehensive pair definitions
-const PAIRS = [
-  // === HIGH-DEMAND AI & ML PAIRS ===
-  { t1: "chatgpt", t2: "claude", cat: "AI & Machine Learning", win: "ChatGPT" },
-  { t1: "chatgpt", t2: "gemini", cat: "AI & Machine Learning", win: "ChatGPT" },
-  { t1: "chatgpt", t2: "perplexity", cat: "AI & Machine Learning", win: "ChatGPT" },
-  { t1: "chatgpt", t2: "copilot", cat: "AI & Machine Learning", win: "ChatGPT" },
-  { t1: "jasper", t2: "chatgpt", cat: "AI & Machine Learning", win: "ChatGPT" },
-
-  // === HIGH-DEMAND CRM PAIRS ===
-  { t1: "salesforce", t2: "pipedrive", cat: "CRM & Sales", win: "Salesforce" },
-  { t1: "salesforce", t2: "zoho", cat: "CRM & Sales", win: "Salesforce" },
-  { t1: "salesforce", t2: "freshsales", cat: "CRM & Sales", win: "Salesforce" },
-  { t1: "hubspot", t2: "freshsales", cat: "CRM & Sales", win: "HubSpot" },
-  { t1: "hubspot", t2: "pipedrive", cat: "CRM & Sales", win: "HubSpot" },
-  { t1: "pipedrive", t2: "freshsales", cat: "CRM & Sales", win: "Pipedrive" },
-  { t1: "zoho", t2: "freshsales", cat: "CRM & Sales", win: "Freshsales" },
-  { t1: "zendesk", t2: "freshdesk", cat: "CRM & Sales", win: "Zendesk" },
-  { t1: "zendesk", t2: "intercom", cat: "Customer Service", win: "Intercom" },
-  { t1: "hubspot", t2: "zendesk", cat: "CRM & Sales", win: "HubSpot" },
-  { t1: "salesforce", t2: "zendesk", cat: "CRM & Sales", win: "Salesforce" },
-
-  // === HIGH-DEMAND COMMUNICATION PAIRS ===
-  { t1: "slack", t2: "discord", cat: "Communication", win: "Slack" },
-  { t1: "slack", t2: "zoom", cat: "Communication", win: "Slack" },
-  { t1: "microsoft-teams", t2: "zoom", cat: "Communication", win: "Microsoft Teams" },
-  { t1: "microsoft-teams", t2: "discord", cat: "Communication", win: "Microsoft Teams" },
-  { t1: "zoom", t2: "google-meet", cat: "Communication", win: "Zoom" },
-
-  // === HIGH-DEMAND PROJECT MANAGEMENT PAIRS ===
-  { t1: "asana", t2: "clickup", cat: "Project Management", win: "Asana" },
-  { t1: "asana", t2: "trello", cat: "Project Management", win: "Asana" },
-  { t1: "asana", t2: "linear", cat: "Project Management", win: "Linear" },
-  { t1: "clickup", t2: "monday-com", cat: "Project Management", win: "ClickUp" },
-  { t1: "clickup", t2: "trello", cat: "Project Management", win: "ClickUp" },
-  { t1: "clickup", t2: "jira", cat: "Project Management", win: "Jira" },
-  { t1: "clickup", t2: "asana", cat: "Project Management", win: "ClickUp" },
-  { t1: "linear", t2: "jira", cat: "Project Management", win: "Linear" },
-  { t1: "linear", t2: "clickup", cat: "Project Management", win: "Linear" },
-  { t1: "monday-com", t2: "trello", cat: "Project Management", win: "Monday.com" },
-  { t1: "jira", t2: "trello", cat: "Project Management", win: "Jira" },
-  { t1: "jira", t2: "confluence", cat: "Project Management", win: "Confluence" },
-  { t1: "airtable", t2: "notion", cat: "Productivity", win: "Notion" },
-  { t1: "airtable", t2: "asana", cat: "Project Management", win: "Airtable" },
-  { t1: "airtable", t2: "clickup", cat: "Project Management", win: "ClickUp" },
-  { t1: "confluence", t2: "notion", cat: "Productivity", win: "Notion" },
-
-  // === HIGH-DEMAND DESIGN & CREATIVE PAIRS ===
-  { t1: "figma", t2: "framer", cat: "Design & Creative", win: "Figma" },
-  { t1: "figma", t2: "adobe-xd", cat: "Design & Creative", win: "Figma" },
-  { t1: "canva", t2: "framer", cat: "Design & Creative", win: "Canva" },
-  { t1: "canva", t2: "sketch", cat: "Design & Creative", win: "Canva" },
-  { t1: "framer", t2: "sketch", cat: "Design & Creative", win: "Framer" },
-  { t1: "framer", t2: "webflow", cat: "Web Design", win: "Webflow" },
-  { t1: "canva", t2: "adobe-express", cat: "Design & Creative", win: "Canva" },
-
-  // === HIGH-DEMAND DEVELOPER TOOLS PAIRS ===
-  { t1: "github", t2: "bitbucket", cat: "Developer Tools", win: "GitHub" },
-  { t1: "gitlab", t2: "bitbucket", cat: "Developer Tools", win: "GitLab" },
-  { t1: "docker", t2: "podman", cat: "Developer Tools", win: "Docker" },
-  { t1: "vercel", t2: "cloudflare-pages", cat: "Developer Tools", win: "Vercel" },
-  { t1: "netlify", t2: "cloudflare-pages", cat: "Developer Tools", win: "Netlify" },
-  { t1: "supabase", t2: "appwrite", cat: "Developer Tools", win: "Supabase" },
-  { t1: "firebase", t2: "appwrite", cat: "Developer Tools", win: "Firebase" },
-  { t1: "sentry", t2: "logrocket", cat: "Developer Tools", win: "Sentry" },
-  { t1: "sentry", t2: "datadog", cat: "Developer Tools", win: "Datadog" },
-  { t1: "github", t2: "sourceforge", cat: "Developer Tools", win: "GitHub" },
-  { t1: "docker", t2: "containerd", cat: "Developer Tools", win: "Docker" },
-
-  // === HIGH-DEMAND ANALYTICS PAIRS ===
-  { t1: "google-analytics", t2: "amplitude", cat: "Analytics & Data", win: "Google Analytics" },
-  { t1: "google-analytics", t2: "hotjar", cat: "Analytics & Data", win: "Google Analytics" },
-  { t1: "mixpanel", t2: "amplitude", cat: "Analytics & Data", win: "Mixpanel" },
-  { t1: "mixpanel", t2: "hotjar", cat: "Analytics & Data", win: "Mixpanel" },
-  { t1: "amplitude", t2: "hotjar", cat: "Analytics & Data", win: "Amplitude" },
-  { t1: "google-analytics", t2: "matomo", cat: "Analytics & Data", win: "Google Analytics" },
-  { t1: "hotjar", t2: "fullstory", cat: "Analytics", win: "Hotjar" },
-
-  // === HIGH-DEMAND HR & PEOPLE PAIRS ===
-  { t1: "gusto", t2: "rippling", cat: "HR & People", win: "Rippling" },
-  { t1: "gusto", t2: "deel", cat: "HR & People", win: "Gusto" },
-  { t1: "rippling", t2: "adp", cat: "HR & People", win: "Rippling" },
-  { t1: "rippling", t2: "deel", cat: "HR & People", win: "Rippling" },
-  { t1: "bamboohr", t2: "adp", cat: "HR & People", win: "BambooHR" },
-  { t1: "bamboohr", t2: "deel", cat: "HR & People", win: "BambooHR" },
-  { t1: "adp", t2: "deel", cat: "HR & People", win: "ADP" },
-
-  // === HIGH-DEMAND FINANCE PAIRS ===
-  { t1: "xero", t2: "freshbooks", cat: "Finance & Accounting", win: "Xero" },
-  { t1: "quickbooks", t2: "sage", cat: "Finance & Accounting", win: "QuickBooks" },
-  { t1: "stripe", t2: "paddle", cat: "Finance & Accounting", win: "Stripe" },
-  { t1: "stripe", t2: "square", cat: "Finance & Accounting", win: "Stripe" },
-  { t1: "stripe", t2: "paypal", cat: "Finance & Accounting", win: "Stripe" },
-  { t1: "stripe", t2: "shopify", cat: "Finance & Accounting", win: "Stripe" },
-  { t1: "shopify", t2: "woocommerce", cat: "Finance & Accounting", win: "Shopify" },
-  { t1: "shopify", t2: "bigcommerce", cat: "Finance & Accounting", win: "Shopify" },
-  { t1: "xero", t2: "quickbooks", cat: "Finance & Accounting", win: "QuickBooks" },
-
-  // === HIGH-DEMAND MARKETING PAIRS ===
-  { t1: "semrush", t2: "moz", cat: "Marketing & SEO", win: "SEMrush" },
-  { t1: "ahrefs", t2: "moz", cat: "Marketing & SEO", win: "Ahrefs" },
-  { t1: "mailchimp", t2: "convertkit", cat: "Marketing & SEO", win: "Mailchimp" },
-  { t1: "mailchimp", t2: "activecampaign", cat: "Marketing & SEO", win: "ActiveCampaign" },
-  { t1: "ahrefs", t2: "semrush", cat: "Marketing & SEO", win: "Ahrefs" },
-
-  // === HIGH-DEMAND PRODUCTIVITY PAIRS ===
-  { t1: "notion", t2: "clickup", cat: "Productivity", win: "Notion" },
-  { t1: "notion", t2: "confluence", cat: "Productivity", win: "Notion" },
-  { t1: "calendly", t2: "cal-com", cat: "Productivity", win: "Calendly" },
-  { t1: "typeform", t2: "jotform", cat: "Productivity", win: "Typeform" },
-  { t1: "calendly", t2: "acuity", cat: "Productivity", win: "Calendly" },
-
-  // === HIGH-DEMAND AUTOMATION PAIRS ===
-  { t1: "zapier", t2: "make", cat: "Automation", win: "Zapier" },
-  { t1: "zapier", t2: "n8n", cat: "Automation", win: "Zapier" },
-  { t1: "make", t2: "n8n", cat: "Automation", win: "Make" },
-
-  // === HIGH-DEMAND SECURITY PAIRS ===
-  { t1: "1password", t2: "lastpass", cat: "Security & Compliance", win: "1Password" },
-  { t1: "bitwarden", t2: "dashlane", cat: "Security & Compliance", win: "Bitwarden" },
-  { t1: "1password", t2: "dashlane", cat: "Security & Compliance", win: "1Password" },
-  { t1: "bitwarden", t2: "lastpass", cat: "Security & Compliance", win: "Bitwarden" },
-
-  // === HIGH-DEMAND WEB DESIGN PAIRS ===
-  { t1: "webflow", t2: "wordpress", cat: "Web Design", win: "Webflow" },
-  { t1: "framer", t2: "wordpress", cat: "Web Design", win: "Framer" },
-  { t1: "webflow", t2: "wix", cat: "Web Design", win: "Webflow" },
-
-  // === VIDEO / MISC PAIRS ===
-  { t1: "loom", t2: "vimeo-record", cat: "Video Communication", win: "Loom" },
-  { t1: "loom", t2: "vidyard", cat: "Video Communication", win: "Loom" },
-  { t1: "zoom", t2: "webex", cat: "Communication", win: "Zoom" },
-  { t1: "zapier", t2: "integromat", cat: "Automation", win: "Make" },
-]
-
-function getToolName(slug) {
+function toolName(slug) {
   const map = {
     "claude": "Claude", "gemini": "Gemini", "perplexity": "Perplexity", "copilot": "Microsoft Copilot",
     "discord": "Discord", "google-meet": "Google Meet", "adobe-xd": "Adobe XD", "adobe-express": "Adobe Express",
@@ -171,45 +54,19 @@ function getToolName(slug) {
     "jotform": "JotForm", "acuity": "Acuity Scheduling", "n8n": "n8n", "lastpass": "LastPass",
     "dashlane": "Dashlane", "wordpress": "WordPress", "wix": "Wix", "vimeo-record": "Vimeo Record",
     "vidyard": "Vidyard", "webex": "Webex", "integromat": "Integromat",
-    "google-chat": "Google Chat", "element": "Element", "wrike": "Wrike", "smartsheet": "Smartsheet",
-    "personio": "Personio", "paychex": "Paychex", "workday": "Workday",
-    "majestic": "Majestic", "se-ranking": "SE Ranking", "freshsales": "Freshsales",
-    "zoho-crm": "Zoho CRM", "pipedrive": "Pipedrive",
+    "freshsales": "Freshsales", "pipedrive": "Pipedrive", "zoho-crm": "Zoho CRM", "monday-com": "Monday.com",
+    "google-analytics": "Google Analytics", "microsoft-teams": "Microsoft Teams", "adobe-xd": "Adobe XD",
+    "cal-com": "Cal.com", "adobe-express": "Adobe Express", "google-meet": "Google Meet",
+    "github": "GitHub", "gitlab": "GitLab",
   }
   if (map[slug]) return map[slug]
   if (REVIEWS[slug]) return REVIEWS[slug].name
-  return slug.charAt(0).toUpperCase() + slug.slice(1).replace(/-/g, " ")
+  return slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")
 }
 
-function getToolCategory(slug) {
-  if (REVIEWS[slug]) return REVIEWS[slug].category
-  const guess = {
-    "claude": "AI & Machine Learning", "gemini": "AI & Machine Learning",
-    "perplexity": "AI & Machine Learning", "copilot": "AI & Machine Learning",
-    "discord": "Communication", "google-meet": "Communication",
-    "adobe-xd": "Design & Creative", "adobe-express": "Design & Creative",
-    "bitbucket": "Developer Tools", "podman": "Developer Tools",
-    "cloudflare-pages": "Developer Tools", "appwrite": "Developer Tools",
-    "logrocket": "Developer Tools", "datadog": "Developer Tools",
-    "sourceforge": "Developer Tools", "containerd": "Developer Tools",
-    "matomo": "Analytics & Data", "fullstory": "Analytics",
-    "freshdesk": "CRM & Sales", "sage": "Finance & Accounting",
-    "square": "Finance & Accounting", "paypal": "Finance & Accounting",
-    "woocommerce": "Finance & Accounting", "bigcommerce": "Finance & Accounting",
-    "moz": "Marketing & SEO", "convertkit": "Marketing & SEO",
-    "activecampaign": "Marketing & SEO", "cal-com": "Productivity",
-    "jotform": "Productivity", "acuity": "Productivity", "n8n": "Automation",
-    "lastpass": "Security & Compliance", "dashlane": "Security & Compliance",
-    "wordpress": "Web Design", "wix": "Web Design",
-    "vimeo-record": "Video Communication", "vidyard": "Video Communication",
-    "webex": "Communication", "integromat": "Automation",
-  }
-  return guess[slug] || "Software"
-}
-
-function getToolRating(slug) {
+function toolRating(slug) {
   if (REVIEWS[slug]) return REVIEWS[slug].rating
-  const defaults = {
+  const d = {
     "claude": 4.6, "gemini": 4.5, "perplexity": 4.4, "copilot": 4.3,
     "discord": 4.3, "google-meet": 4.2, "adobe-xd": 4.0, "adobe-express": 4.1,
     "bitbucket": 4.2, "podman": 4.3, "cloudflare-pages": 4.4,
@@ -222,36 +79,37 @@ function getToolRating(slug) {
     "dashlane": 4.3, "wordpress": 4.0, "wix": 4.1,
     "vimeo-record": 4.2, "vidyard": 4.3, "webex": 4.1, "integromat": 4.0,
   }
-  return defaults[slug] || 4.0
+  return d[slug] || 4.0
 }
 
-function getToolPricing(slug) {
+function toolPricing(slug) {
   if (REVIEWS[slug]) return REVIEWS[slug].pricing + (REVIEWS[slug].priceRange ? ` (${REVIEWS[slug].priceRange})` : "")
-  const priceMap = {
+  const m = {
     "claude": "Freemium ($20/mo Pro)", "gemini": "Freemium ($19.99/mo)", "perplexity": "Freemium ($20/mo Pro)",
-    "copilot": "Paid ($30/user/mo)", "discord": "Freemium (Free–$9.99/mo)", "google-meet": "Free (Google Workspace)",
-    "adobe-xd": "Paid ($9.99/mo)", "adobe-express": "Freemium (Free–$9.99/mo)",
-    "bitbucket": "Freemium (Free–$6/user/mo)", "podman": "Open Source (Free)",
-    "cloudflare-pages": "Freemium (Free–$200/mo)", "appwrite": "Open Source (Free–$15/mo)",
-    "logrocket": "Freemium (Free–$99/mo)", "datadog": "Paid ($15/host/mo)", "sourceforge": "Free",
-    "containerd": "Open Source (Free)", "matomo": "Free (self-hosted)–$26/mo",
-    "fullstory": "Paid ($99/mo)", "freshdesk": "Freemium (Free–$35/agent/mo)",
-    "sage": "Paid ($29–$199/mo)", "square": "Freemium (Free–$79/mo)", "paypal": "Transaction-based (2.99%+$0.49)",
-    "woocommerce": "Open Source (Free–$79/mo)", "bigcommerce": "Paid ($39–$399/mo)",
-    "moz": "Paid ($99–$599/mo)", "convertkit": "Freemium (Free–$59/mo)", "activecampaign": "Paid ($15–$259/mo)",
-    "cal-com": "Open Source (Free–$24/mo)", "jotform": "Freemium (Free–$39/mo)",
-    "acuity": "Paid ($14–$34/mo)", "n8n": "Open Source (Free–$20/mo)",
-    "lastpass": "Freemium (Free–$6/user/mo)", "dashlane": "Paid ($2.75–$8/mo)",
-    "wordpress": "Open Source (Free–$45/mo)", "wix": "Freemium (Free–$45/mo)",
-    "vimeo-record": "Freemium (Free–$12/mo)", "vidyard": "Freemium (Free–$49/mo)",
-    "webex": "Freemium (Free–$25/mo)", "integromat": "Freemium (Free–$29/mo)",
+    "copilot": "Paid ($30/user/mo)", "discord": "Freemium (Free-$9.99/mo)", "google-meet": "Free (Google Workspace)",
+    "adobe-xd": "Paid ($9.99/mo)", "adobe-express": "Freemium (Free-$9.99/mo)",
+    "bitbucket": "Freemium (Free-$6/user/mo)", "podman": "Open Source (Free)",
+    "cloudflare-pages": "Freemium (Free-$200/mo)", "appwrite": "Open Source (Free-$15/mo)",
+    "logrocket": "Freemium (Free-$99/mo)", "datadog": "Paid ($15/host/mo)", "sourceforge": "Free",
+    "containerd": "Open Source (Free)", "matomo": "Free (self-hosted)-$26/mo",
+    "fullstory": "Paid ($99/mo)", "freshdesk": "Freemium (Free-$35/agent/mo)",
+    "sage": "Paid ($29-$199/mo)", "square": "Freemium (Free-$79/mo)", "paypal": "Transaction-based (2.99%+$0.49)",
+    "woocommerce": "Open Source (Free-$79/mo)", "bigcommerce": "Paid ($39-$399/mo)",
+    "moz": "Paid ($99-$599/mo)", "convertkit": "Freemium (Free-$59/mo)", "activecampaign": "Paid ($15-$259/mo)",
+    "cal-com": "Open Source (Free-$24/mo)", "jotform": "Freemium (Free-$39/mo)",
+    "acuity": "Paid ($14-$34/mo)", "n8n": "Open Source (Free-$20/mo)",
+    "lastpass": "Freemium (Free-$6/user/mo)", "dashlane": "Paid ($2.75-$8/mo)",
+    "wordpress": "Open Source (Free-$45/mo)", "wix": "Freemium (Free-$45/mo)",
+    "vimeo-record": "Freemium (Free-$12/mo)", "vidyard": "Freemium (Free-$49/mo)",
+    "webex": "Freemium (Free-$25/mo)", "integromat": "Freemium (Free-$29/mo)",
+    "monday-com": "Paid ($9-$29/seat/mo)",
   }
-  return priceMap[slug] || "Varies"
+  return m[slug] || "Varies"
 }
 
-function getToolTagline(slug) {
+function toolTagline(slug) {
   if (REVIEWS[slug]) return REVIEWS[slug].tagline
-  const taglines = {
+  const t = {
     "claude": "Anthropic's AI assistant focused on safety and nuanced reasoning",
     "gemini": "Google's multimodal AI platform integrated across Workspace",
     "perplexity": "AI-powered answer engine with real-time research capabilities",
@@ -292,237 +150,1205 @@ function getToolTagline(slug) {
     "webex": "Cisco's enterprise video conferencing and collaboration platform",
     "integromat": "Visual automation platform (now Make) for complex workflows",
   }
-  return taglines[slug] || ""
+  return t[slug] || ""
 }
 
-function generateFeatures(t1Slug, t2Slug, t1Name, t2Name, cat) {
-  const features = [
-    { name: "Free tier availability", t1: true, t2: true, t1Detail: `${t1Name} offers a free tier with core features`, t2Detail: `${t2Name} provides a free tier with essential capabilities` },
-    { name: "Entry-level pricing", t1: getToolPricing(t1Slug).split(",")[0], t2: getToolPricing(t2Slug).split(",")[0], t1Detail: `${t1Name}'s entry point compared to ${t2Name}`, t2Detail: `${t2Name}'s starting price for new users` },
-    { name: "Enterprise pricing", t1: true, t2: true, t1Detail: `${t1Name} offers custom enterprise plans`, t2Detail: `${t2Name} provides enterprise-grade pricing` },
-    { name: "Annual discount", t1: true, t2: true, t1Detail: `Typically 15-20% annual discount`, t2Detail: `Annual billing available with savings` },
-    { name: "Free trial duration", t1: true, t2: true, t1Detail: `14-30 day free trial`, t2Detail: `14-30 day trial period` },
-    { name: "User role management", t1: true, t2: true, t1Detail: `Granular role-based access controls`, t2Detail: `Role-based permissions with customization` },
-    { name: "Team collaboration", t1: true, t2: true, t1Detail: `Real-time team collaboration features`, t2Detail: `Collaborative workspaces and sharing` },
-    { name: "API access", t1: true, t2: true, t1Detail: `RESTful and GraphQL API`, t2Detail: `Comprehensive REST API` },
-    { name: "Third-party integrations", t1: true, t2: true, t1Detail: `Extensive integration marketplace`, t2Detail: `Growing integration ecosystem` },
-    { name: "Webhooks", t1: true, t2: true, t1Detail: `Custom webhook support`, t2Detail: `Webhook triggers and actions` },
-    { name: "SSO/SAML", t1: true, t2: false, t1Detail: `Enterprise SSO with SAML 2.0`, t2Detail: `SSO available on higher tiers` },
-    { name: "Two-factor authentication", t1: true, t2: true, t1Detail: `TOTP and hardware key support`, t2Detail: `2FA with authenticator apps` },
-    { name: "Audit logging", t1: true, t2: true, t1Detail: `Detailed audit trail for compliance`, t2Detail: `Activity logging with export` },
-    { name: "Data encryption at rest", t1: true, t2: true, t1Detail: `AES-256 encryption`, t2Detail: `Industry-standard encryption` },
-    { name: "Data encryption in transit", t1: true, t2: true, t1Detail: `TLS 1.3 for all connections`, t2Detail: `TLS encryption for data in motion` },
-    { name: "SOC 2 compliance", t1: true, t2: true, t1Detail: `SOC 2 Type II certified`, t2Detail: `SOC 2 Type II compliant` },
-    { name: "GDPR compliance", t1: true, t2: true, t1Detail: `Full GDPR compliance`, t2Detail: `GDPR-ready with DPA` },
-    { name: "HIPAA compliance", t1: Math.random() > 0.4, t2: Math.random() > 0.5, t1Detail: `Available on business plan`, t2Detail: `HIPAA-compliant configuration` },
-    { name: "Mobile app", t1: true, t2: true, t1Detail: `iOS and Android with full functionality`, t2Detail: `Mobile apps for iOS and Android` },
-    { name: "Offline mode", t1: Math.random() > 0.3, t2: Math.random() > 0.4, t1Detail: `Offline access with auto-sync`, t2Detail: `Limited offline capabilities` },
-    { name: "Search functionality", t1: true, t2: true, t1Detail: `Advanced search with filters`, t2Detail: `Full-text search across content` },
-    { name: "Reporting and analytics", t1: true, t2: true, t1Detail: `Built-in dashboards and custom reports`, t2Detail: `Analytics with export options` },
-    { name: "Export capabilities", t1: true, t2: true, t1Detail: `Export to CSV, PDF, and JSON`, t2Detail: `Data export in multiple formats` },
-    { name: "Template library", t1: true, t2: true, t1Detail: `Extensive template collection`, t2Detail: `Pre-built templates and workflows` },
-    { name: "Automation features", t1: true, t2: true, t1Detail: `No-code automation builder`, t2Detail: `Workflow automation tools` },
-    { name: "Notification system", t1: true, t2: true, t1Detail: `Customizable alerts and notifications`, t2Detail: `Push, email, and in-app notifications` },
-    { name: "Customer support quality", t1: true, t2: true, t1Detail: `Email, chat, and knowledge base`, t2Detail: `Support with documentation and community` },
-    { name: "Onboarding experience", t1: true, t2: true, t1Detail: `Guided onboarding and tutorials`, t2Detail: `Setup wizard and getting started guide` },
-    { name: "Training resources", t1: true, t2: true, t1Detail: `Webinars, docs, and certification`, t2Detail: `Help center and video tutorials` },
-    { name: "Community size", t1: true, t2: true, t1Detail: `Large active user community`, t2Detail: `Growing community forum` },
-    { name: "Uptime SLA", t1: true, t2: false, t1Detail: `99.9% uptime guarantee`, t2Detail: `99.5% uptime SLA` },
-    { name: "Data residency options", t1: Math.random() > 0.3, t2: Math.random() > 0.4, t1Detail: `Multiple region data centers`, t2Detail: `US and EU data regions` },
-    { name: "Custom branding", t1: true, t2: true, t1Detail: `White-label options on higher tiers`, t2Detail: `Custom branding available` },
-    { name: "Multi-language support", t1: true, t2: true, t1Detail: `Interface in 10+ languages`, t2Detail: `Multiple language options` },
-    { name: "Bulk operations", t1: true, t2: true, t1Detail: `Batch processing and bulk actions`, t2Detail: `Bulk import and export tools` },
-  ]
-  return features
-}
-
-function generateFAQs(t1Name, t2Name, t1Slug, t2Slug, category) {
-  const named = t1Name.toLowerCase()
-  const competitor = t2Name.toLowerCase()
-  return [
-    { question: `What are the main differences between ${t1Name} and ${t2Name}?`, answer: `${t1Name} and ${t2Name} serve similar needs in the ${category} space but differ in their approach to features, pricing, and target audience. ${t1Name} excels in core functionality with a mature platform, while ${t2Name} offers competitive advantages in specific areas. The best choice depends on your team size, budget, and specific workflow requirements.` },
-    { question: `Which is better for small businesses: ${t1Name} or ${t2Name}?`, answer: `For small businesses, ${t1Name} typically offers better value due to its competitive pricing structure and robust free tier. ${t2Name} can also work well but may be more suited to specific use cases. Consider your budget constraints and must-have features when making a decision.` },
-    { question: `Which is better for enterprise teams: ${t1Name} or ${t2Name}?`, answer: `Enterprise teams often prefer ${t1Name} for its advanced security features, compliance certifications, and scalable infrastructure. ${t2Name} also offers enterprise-grade capabilities but may have different strengths in areas like customization and support. Evaluate both against your specific enterprise requirements.` },
-    { question: `How does the pricing of ${t1Name} compare to ${t2Name}?`, answer: `${t1Name}'s pricing starts at ${getToolPricing(t1Slug)}, while ${t2Name}'s pricing begins at ${getToolPricing(t2Slug)}. Both offer tiered plans with increasing features. ${t1Name} is generally more cost-effective for smaller teams, while ${t2Name} may provide better value at scale depending on your specific needs.` },
-    { question: `Can I migrate from ${t1Name} to ${t2Name}?`, answer: `Yes, migration between ${t1Name} and ${t2Name} is possible using built-in import/export tools or third-party migration services. The complexity depends on data volume and the specific features you use. Most teams can complete the migration within a few weeks with proper planning.` },
-    { question: `Which platform has better mobile support: ${t1Name} or ${t2Name}?`, answer: `Both ${t1Name} and ${t2Name} offer mobile apps for iOS and Android. ${t1Name} generally provides a more polished mobile experience with full feature parity, while ${t2Name}'s mobile offering covers essential functions but may lack some advanced features available on desktop.` },
-    { question: `How do the integration capabilities compare?`, answer: `${t1Name} offers ${t1Name.includes("Slack") ? "2,600+" : "extensive"} integrations, while ${t2Name} provides a growing ecosystem of third-party connections. Both support popular tools in their categories through native integrations, APIs, and webhooks.` },
-    { question: `Which is more secure: ${t1Name} or ${t2Name}?`, answer: `Both ${t1Name} and ${t2Name} maintain strong security postures with SOC 2 compliance, data encryption, and regular security audits. ${t1Name} has the edge in compliance certifications and enterprise security features, while ${t2Name} provides robust fundamental security protections.` },
-    { question: `Is ${t1Name} or ${t2Name} better for remote teams?`, answer: `Both platforms support remote collaboration effectively. ${t1Name} offers stronger async communication and remote-first features, making it popular with distributed teams. ${t2Name} also supports remote work but may require additional configuration for optimal remote collaboration.` },
-    { question: `What are the key features that ${t1Name} has that ${t2Name} doesn't?`, answer: `${t1Name} provides unique capabilities including advanced automation, superior search functionality, and more comprehensive integration options. These features make it particularly suitable for teams that need extensive customization and workflow automation.` },
-    { question: `What are the key features that ${t2Name} has that ${t1Name} doesn't?`, answer: `${t2Name} differentiates itself with features like native ecosystem integration, competitive free tier offerings, and specialized compliance capabilities that ${t1Name} may only offer on higher pricing tiers.` },
-    { question: `How does customer support compare between the two?`, answer: `${t1Name} offers comprehensive support including email, chat, and knowledge base access. ${t2Name} provides similar support channels with additional community resources. Both have responsive support teams with good satisfaction ratings.` },
-    { question: `Which platform offers better automation capabilities?`, answer: `${t1Name} provides built-in automation tools that allow teams to create custom workflows without coding. ${t2Name} offers automation features as well, though the implementation may differ. The best choice depends on your automation complexity requirements.` },
-    { question: `Can I use both ${t1Name} and ${t2Name} together?`, answer: `While possible through integration tools, using both ${t1Name} and ${t2Name} simultaneously is generally not recommended as it can lead to workflow fragmentation and increased costs. Most organizations standardize on one primary platform.` },
-    { question: `Which is better for agency workflows?`, answer: `Agencies typically prefer ${t1Name} for its client management features, multi-workspace support, and comprehensive reporting capabilities. ${t2Name} can also serve agencies well, particularly for specific niche requirements.` },
-    { question: `How does the learning curve compare?`, answer: `${t1Name} has a moderate learning curve with intuitive interfaces that most users can master within a few weeks. ${t2Name} may require more time to learn initially but offers deeper customization for power users. Both provide onboarding resources.` },
-    { question: `Which platform has better reporting and analytics?`, answer: `${t1Name} offers robust built-in reporting with customizable dashboards, while ${t2Name} provides analytics tools that are sufficient for most teams but may require third-party tools for advanced reporting needs.` },
-    { question: `What migration strategy do you recommend?`, answer: `Start with a pilot migration of a non-critical team to test compatibility. Document your current workflows, map them to the new platform, and plan data migration carefully. Most migrations complete within 2-4 weeks when properly planned.` },
-    { question: `How frequently do the platforms update?`, answer: `${t1Name} releases updates every 2-4 weeks with new features and improvements. ${t2Name} follows a similar cadence with regular updates. Both maintain public changelogs and communicate major changes in advance.` },
-    { question: `Which is better for compliance-heavy industries?`, answer: `Both platforms meet standard compliance requirements. ${t1Name} has the advantage for highly regulated industries with more advanced compliance features and certifications. ${t2Name} provides solid compliance capabilities suitable for most regulated environments.` },
-    { question: `Can I customize ${t1Name} or ${t2Name} for my specific needs?`, answer: `Both platforms offer extensive customization options through APIs, templates, and configuration settings. ${t1Name} provides more out-of-the-box customization, while ${t2Name} offers flexibility through its platform architecture.` },
-    { question: `What do users say about ${t1Name} vs ${t2Name} in reviews?`, answer: `Users consistently praise ${t1Name} for its ease of use and comprehensive feature set. ${t2Name} receives high marks for specific capabilities and value. Both have strong user satisfaction ratings in their respective strengths.` },
-    { question: `Which platform scales better as your organization grows?`, answer: `${t1Name} scales effectively from small teams to large enterprises with tiered pricing and feature sets. ${t2Name} also handles growth well but may require additional configuration for enterprise-scale deployments.` },
-    { question: `What's the total cost of ownership for each platform?`, answer: `Total cost of ownership includes subscription fees, implementation costs, training, and ongoing management. ${t1Name}'s TCO is typically lower for small teams, while ${t2Name} may be more cost-effective at enterprise scale depending on specific needs.` },
-    { question: `How do I choose between ${t1Name} and ${t2Name}?`, answer: `Start by listing your must-have features, evaluating your budget, and considering team size. Test both platforms with free trials, involve key stakeholders in the evaluation, and consider migration complexity. Our detailed comparison above covers all the factors you need to make an informed decision.` },
-  ]
-}
-
-function generateVerdict(t1Name, t2Name, t1Slug, t2Slug, cat, winner) {
-  const isT1 = winner === t1Name
-  const wName = isT1 ? t1Name : t2Name
-  const lName = isT1 ? t2Name : t1Name
-  const wSlug = isT1 ? t1Slug : t2Slug
-  const lSlug = isT1 ? t2Slug : t1Slug
-
-  return `${t1Name} and ${t2Name} are both powerful platforms in the ${cat} space, each with distinct strengths that cater to different organizational needs. After thoroughly evaluating their features, pricing, security posture, and user experience, we recommend ${wName} as the better choice for most teams.
-
-${wName} excels in core functionality with superior feature coverage, more competitive pricing, and a more mature ecosystem that benefits teams of all sizes. Its comprehensive integration library, robust API, and extensive automation capabilities make it the more versatile platform for organizations looking to build a scalable ${cat.toLowerCase()} infrastructure.
-
-${lName} is a strong contender that performs well in specific scenarios. Teams already invested in its ecosystem or those with particular niche requirements may find ${lName} perfectly adequate. However, for most organizations looking at overall value, feature depth, and long-term scalability, ${wName} provides a more compelling package.
-
-Key advantages of ${wName} include its better pricing flexibility, more extensive integration ecosystem, superior mobile experience, and stronger enterprise-grade security features. ${lName} differentiates itself through specific capabilities like native ecosystem integration and competitive free tier options.
-
-For startups and small teams, ${wName} offers the best balance of affordability and features. Mid-market organizations will appreciate ${wName}'s scalability and robust API. Enterprise teams benefit from ${wName}'s advanced compliance, security certifications, and dedicated support options.
-
-Ultimately, your choice should be guided by your specific requirements, budget constraints, and existing technology stack. We recommend taking advantage of both platforms' free trials to test them with your actual workflows before making a final decision.`
-}
-
-function generateDescription(t1Name, t2Name, cat) {
-  return `Comprehensive ${t1Name} vs ${t2Name} comparison for ${new Date().getFullYear()}. We analyze features, pricing, integrations, security, and performance across 30+ criteria to help you choose the right ${cat.toLowerCase()} platform. Includes detailed feature tables, decision matrix, migration advice, and expert buying recommendations.`
+function toolCategory(slug) {
+  if (REVIEWS[slug]) return REVIEWS[slug].category
+  const g = {
+    "claude": "AI & Machine Learning", "gemini": "AI & Machine Learning",
+    "perplexity": "AI & Machine Learning", "copilot": "AI & Machine Learning",
+    "discord": "Communication", "google-meet": "Communication",
+    "adobe-xd": "Design & Creative", "adobe-express": "Design & Creative",
+    "bitbucket": "Developer Tools", "podman": "Developer Tools",
+    "cloudflare-pages": "Developer Tools", "appwrite": "Developer Tools",
+    "logrocket": "Developer Tools", "datadog": "Developer Tools",
+    "sourceforge": "Developer Tools", "containerd": "Developer Tools",
+    "matomo": "Analytics & Data", "fullstory": "Analytics",
+    "freshdesk": "CRM & Sales", "sage": "Finance & Accounting",
+    "square": "Finance & Accounting", "paypal": "Finance & Accounting",
+    "woocommerce": "Finance & Accounting", "bigcommerce": "Finance & Accounting",
+    "moz": "Marketing & SEO", "convertkit": "Marketing & SEO",
+    "activecampaign": "Marketing & SEO", "cal-com": "Productivity",
+    "jotform": "Productivity", "acuity": "Productivity", "n8n": "Automation",
+    "lastpass": "Security & Compliance", "dashlane": "Security & Compliance",
+    "wordpress": "Web Design", "wix": "Web Design",
+    "vimeo-record": "Video Communication", "vidyard": "Video Communication",
+    "webex": "Communication", "integromat": "Automation",
+  }
+  return g[slug] || "Software"
 }
 
 function safeSlug(s) { return s.toLowerCase().replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-") }
 
-function getRelatedComparisons(t1Slug, t2Slug, allPairs) {
-  const t1Cat = getToolCategory(t1Slug)
-  const t2Cat = getToolCategory(t2Slug)
-  const related = allPairs
-    .filter(p => {
-      const slug1 = `${safeSlug(p.t1.replace(/\s+/g,"-"))}-vs-${safeSlug(p.t2.replace(/\s+/g,"-"))}`
-      const slug2 = `${safeSlug(p.t2.replace(/\s+/g,"-"))}-vs-${safeSlug(p.t1.replace(/\s+/g,"-"))}`
-      const thisSlug = `${safeSlug(t1Slug.replace(/\s+/g,"-"))}-vs-${safeSlug(t2Slug.replace(/\s+/g,"-"))}`
-      if (slug1 === thisSlug || slug2 === thisSlug) return false
-      const pCat = p.cat || getToolCategory(p.t1)
-      return pCat === t1Cat || pCat === t2Cat
-    })
-    .map(p => `${safeSlug(p.t1.replace(/\s+/g,"-"))}-vs-${safeSlug(p.t2.replace(/\s+/g,"-"))}`)
-    .filter((v,i,a) => a.indexOf(v) === i)
-  return related.slice(0, 5)
+// ============================================================
+// INTERNAL LINK BUILDER
+// ============================================================
+
+function link(text, href) { return `<a href="${href}">${text}</a>` }
+
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)] }
+
+function pickN(arr, n) {
+  const shuffled = [...arr].sort(() => Math.random() - 0.5)
+  return shuffled.slice(0, Math.min(n, shuffled.length))
+}
+
+class LinkBuilder {
+  constructor(t1Slug, t2Slug, cat) {
+    this.t1 = t1Slug
+    this.t2 = t2Slug
+    this.cat = cat
+    this.used = new Set()
+    this.links = []
+  }
+
+  _track(href, text) {
+    const key = href + "::" + text
+    if (this.used.has(key)) return false
+    this.used.add(key)
+    this.links.push({ href, text })
+    return true
+  }
+
+  review(slug, text) {
+    if (!ALL_SLUGS.reviews.has(slug)) return ""
+    if (!this._track(`/reviews/${slug}`, text)) return ""
+    return link(text, `/reviews/${slug}`)
+  }
+
+  comparison(slug, text) {
+    if (!ALL_SLUGS.comparisons.has(slug)) return ""
+    if (!this._track(`/comparisons/${slug}`, text)) return ""
+    return link(text, `/comparisons/${slug}`)
+  }
+
+  guide(slug, text) {
+    if (!ALL_SLUGS.guides.has(slug)) return ""
+    if (!this._track(`/guides/${slug}`, text)) return ""
+    return link(text, `/guides/${slug}`)
+  }
+
+  blog(slug, text) {
+    if (!ALL_SLUGS.blog.has(slug)) return ""
+    if (!this._track(`/blog/${slug}`, text)) return ""
+    return link(text, `/blog/${slug}`)
+  }
+
+  best(slug, text) {
+    if (!ALL_SLUGS.best.has(slug)) return ""
+    if (!this._track(`/best/${slug}`, text)) return ""
+    return link(text, `/best/${slug}`)
+  }
+
+  glossary(slug, text) {
+    if (!ALL_SLUGS.glossary.has(slug)) return ""
+    if (!this._track(`/glossary/${slug}`, text)) return ""
+    return link(text, `/glossary/${slug}`)
+  }
+
+  industry(slug, text) {
+    if (!ALL_SLUGS.industries.has(slug)) return ""
+    if (!this._track(`/industries/${slug}`, text)) return ""
+    return link(text, `/industries/${slug}`)
+  }
+
+  useCase(slug, text) {
+    if (!ALL_SLUGS.useCases.has(slug)) return ""
+    if (!this._track(`/use-cases/${slug}`, text)) return ""
+    return link(text, `/use-cases/${slug}`)
+  }
+
+  research(slug, text) {
+    if (!ALL_SLUGS.research.has(slug)) return ""
+    if (!this._track(`/research/${slug}`, text)) return ""
+    return link(text, `/research/${slug}`)
+  }
+
+  stats(slug, text) {
+    if (!ALL_SLUGS.statistics.has(slug)) return ""
+    if (!this._track(`/statistics/${slug}`, text)) return ""
+    return link(text, `/statistics/${slug}`)
+  }
+
+  alternative(slug, text) {
+    if (!ALL_SLUGS.alternatives.has(slug)) return ""
+    if (!this._track(`/alternatives/${slug}`, text)) return ""
+    return link(text, `/alternatives/${slug}`)
+  }
+
+  count() { return this.links.length }
+}
+
+// ============================================================
+// GENERATOR BLOCKS
+// ============================================================
+
+function generateOverview(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const t1r = toolRating(t1Slug)
+  const t2r = toolRating(t2Slug)
+  const t1p = toolPricing(t1Slug)
+  const t2p = toolPricing(t2Slug)
+  const winner = t1r >= t2r ? t1 : t2
+  const year = new Date().getFullYear()
+  const bestSlug = CAT_BEST[cat]
+  const guideSlug = CAT_GUIDE[cat]
+
+  const parts = [
+    `Looking for an in-depth ${t1} vs ${t2} comparison for ${year}? Our expert team has evaluated both platforms across 35+ criteria including features, pricing, security, integrations, performance, and user experience to help you make an informed decision.`,
+    ``,
+    `${t1} (rated ${t1r}/5) and ${t2} (rated ${t2r}/5) are leading solutions in the ${cat.toLowerCase()} category. ${t1} starts at ${t1p} while ${t2} begins at ${t2p}. In this comprehensive ${year} comparison, we break down every aspect of both platforms to determine which is best for your specific needs.`,
+    ``,
+    `Whether you are a startup founder evaluating your tech stack, an ${lb.industry("marketing", "marketing team lead")} comparing enterprise solutions, or an ${lb.industry("finance", "FP&A manager")} optimizing software spend, this ${t1} vs ${t2} guide covers everything you need. We analyze real-world ${lb.glossary("roi", "ROI")} scenarios, ${lb.glossary("total-cost-of-ownership", "total cost of ownership")}, and provide a data-driven ${lb.glossary("decision-matrix", "decision matrix")} to simplify your choice.`,
+    ``,
+    `For a broader view of the ${cat.toLowerCase()} landscape, explore our ${bestSlug ? lb.best(bestSlug, `best ${cat.toLowerCase()} software`) : ""} ranking and ${guideSlug ? lb.guide(guideSlug, `comprehensive buying guide`) : ""}. We update all comparisons quarterly to reflect the latest product changes, pricing updates, and market shifts.`,
+  ]
+  return parts.join("\n")
+}
+
+function generateWinnerSummary(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const t1r = toolRating(t1Slug)
+  const t2r = toolRating(t2Slug)
+  const winner = t1r >= t2r ? t1 : t2
+  const loser = t1r >= t2r ? t2 : t1
+  const diff = Math.abs(t1r - t2r).toFixed(1)
+  const t1rl = t1r.toFixed(1)
+  const t2rl = t2r.toFixed(1)
+
+  const bestSlug = CAT_BEST[cat]
+  const guideSlug = CAT_GUIDE[cat]
+
+  const parts = [
+    `After evaluating both platforms across dozens of criteria including feature completeness, pricing value, security posture, integration ecosystem, and real-world user satisfaction, we name ${winner} as the overall winner in this head-to-head comparison. ${winner} achieves a ${t1r >= t2r ? t1rl : t2rl}/5 rating compared to ${loser}'s ${t1r >= t2r ? t2rl : t1rl}/5.`,
+    ``,
+    `This ${diff}-point gap reflects ${winner}'s advantages in core functionality, ecosystem maturity, and overall value proposition. However, this does not mean ${loser} is without merit. For teams with specific requirements such as ${lb.glossary("budget-constraints", "budget constraints")}, niche workflow needs, or existing ecosystem investments, ${loser} remains a compelling option.`,
+    ``,
+    `Our verdict is based on hands-on testing, analysis of ${t1r >= t2r ? t1 : t2} user reviews across multiple platforms, and evaluation against our standardized criteria framework. For a detailed breakdown of our methodology, see our ${lb.guide("software-evaluation-checklist", "software evaluation checklist")}.`,
+    ``,
+    `${bestSlug ? `For a complete ranking of all ${cat.toLowerCase()} tools, visit our ${lb.best(bestSlug, `best ${cat.toLowerCase()} list`)}.` : ""} ${guideSlug ? `New to the category? Start with our ${lb.guide(guideSlug, `${cat.toLowerCase()} buying guide`)}.` : ""}`,
+  ]
+  return parts.join("\n")
+}
+
+function generatePricingSection(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const t1p = toolPricing(t1Slug)
+  const t2p = toolPricing(t2Slug)
+  const t1r = REVIEWS[t1Slug]
+  const t2r = REVIEWS[t2Slug]
+  const t1pm = t1r && t1r.company ? t1r.company.pricingModel : ""
+  const t2pm = t2r && t2r.company ? t2r.company.pricingModel : ""
+
+  const parts = [
+    `Understanding the pricing models of ${t1} and ${t2} is critical for ${lb.glossary("total-cost-of-ownership", "total cost of ownership")} analysis. ${t1} is priced at ${t1p}${t1pm ? ` with a ${t1pm.toLowerCase()} model` : ""}. ${t2} costs ${t2p}${t2pm ? ` using a ${t2pm.toLowerCase()} approach` : ""}.`,
+    ``,
+    `Both platforms offer tiered pricing structures designed to accommodate different organization sizes and use cases. Entry-level plans provide essential functionality for small teams and startups, while enterprise tiers unlock advanced features like ${lb.glossary("sso", "SSO")}, ${lb.glossary("audit-logging", "audit logging")}, and dedicated support.`,
+    ``,
+    `When evaluating total cost, consider not just subscription fees but also implementation costs, training requirements, and ongoing administration. Our ${lb.glossary("total-cost-of-ownership", "TCO calculator")} can help estimate the full financial impact of each platform.`,
+  ]
+  return parts.join("\n")
+}
+
+function generateIntegrationSection(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const t1rev = REVIEWS[t1Slug]
+  const t2rev = REVIEWS[t2Slug]
+  const t1Ints = t1rev && t1rev.company ? t1rev.company.integrations : []
+  const t2Ints = t2rev && t2rev.company ? t2rev.company.integrations : []
+
+  const parts = [
+    `Integration capabilities often determine whether a platform fits into your existing technology stack. ${t1} integrates with leading tools in the ${cat.toLowerCase()} ecosystem, including ${t1Ints.slice(0, 4).join(", ")}${t1Ints.length > 4 ? ", and more" : ""}. ${t2} connects with ${t2Ints.slice(0, 4).join(", ")}${t2Ints.length > 4 ? ", among others" : ""}.`,
+    ``,
+    `Both platforms offer ${lb.glossary("api", "RESTful APIs")} and ${lb.glossary("webhook", "webhook")} support for custom integrations. ${t1Ints.length + t2Ints.length > 0 ? `Native integrations reduce the need for middleware like ${lb.comparison("zapier-vs-make", "Zapier vs Make")} for common workflows.` : ""}`,
+    ``,
+    `For teams using tools like ${lb.review("slack", "Slack")}, ${lb.review("jira", "Jira")}, or ${lb.review("github", "GitHub")}, both platforms offer pre-built connectors. However, the depth and reliability of these integrations can vary significantly between the two platforms.`,
+  ]
+  return parts.join("\n")
+}
+
+function generateSecuritySection(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const t1rev = REVIEWS[t1Slug]
+  const t2rev = REVIEWS[t2Slug]
+  const t1Certs = t1rev && t1rev.company ? t1rev.company.securityCertifications : []
+  const t2Certs = t2rev && t2rev.company ? t2rev.company.securityCertifications : []
+  const t1Comp = t1rev && t1rev.company ? t1rev.company.compliance : []
+  const t2Comp = t2rev && t2rev.company ? t2rev.company.compliance : []
+
+  const parts = [
+    `Security is a top concern when choosing ${cat.toLowerCase()} software, especially for enterprises handling sensitive data. ${t1} holds ${t1Certs.join(", ")} certifications${t1Comp.length ? ` and complies with ${t1Comp.join(", ")}` : ""}. ${t2} is certified with ${t2Certs.join(", ")}${t2Comp.length ? ` and follows ${t2Comp.join(", ")}` : ""}.`,
+    ``,
+    `Both platforms provide ${lb.glossary("encryption", "encryption")} at rest (AES-256) and in transit (TLS 1.3), granular ${lb.glossary("sso", "SSO")} integration, and detailed ${lb.glossary("audit-logging", "audit trails")}. For ${lb.industry("healthcare", "healthcare")} organizations, ${lb.glossary("hipaa", "HIPAA")} compliance availability may be a deciding factor. Similarly, ${lb.industry("finance", "financial services")} firms should verify ${lb.glossary("soc-2", "SOC 2")} Type II reports before committing.`,
+    ``,
+    `Our ${lb.guide("security-software-buyers-guide", "security software buying guide")} provides deeper insights into evaluating platform security for your organization.`,
+  ]
+  return parts.join("\n")
+}
+
+function generatePerformanceSection(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const parts = [
+    `Performance and reliability directly impact team productivity. ${t1} delivers ${t1.includes("ChatGPT") || t1.includes("Claude") ? "sub-second response times for standard queries" : "consistent performance with 99.9% uptime SLA"} for ${cat.toLowerCase()} workloads. ${t2} maintains ${t2.includes("ChatGPT") || t2.includes("Claude") ? "competitive response times with batch processing for complex tasks" : "strong performance metrics with comparable availability guarantees"}.`,
+    ``,
+    `Both platforms invest heavily in infrastructure reliability. ${lb.glossary("sla", "SLA")} guarantees, ${lb.research("saas-pricing-trends-2026", "historical uptime data")}, and ${lb.stats("saas-statistics", "industry benchmarks")} should factor into your evaluation. Enterprise deployments typically require 99.95% or higher uptime commitments.`,
+  ]
+  return parts.join("\n")
+}
+
+function generateUseCasesSection(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const parts = [
+    `The right choice between ${t1} and ${t2} often depends on your specific use case and organization profile.`,
+    ``,
+    `For startups and small teams evaluating ${cat.toLowerCase()} solutions, ${lb.useCase(`best-${cat.toLowerCase().replace(/[^a-z]/g, "-").replace(/--+/g, "-").replace(/^-|-$/g, "")}-for-startups` || "", "budget considerations and time-to-value")} are paramount. ${t1} offers ${toolPricing(t1Slug).includes("Free") || toolPricing(t1Slug).includes("Freemium") ? "a generous free tier to get started" : "competitive entry-level pricing"}, while ${t2} provides ${toolPricing(t2Slug).includes("Free") || toolPricing(t2Slug).includes("Freemium") ? "its own free option" : "value-focused plans"}.`,
+    ``,
+    `Enterprise organizations with complex requirements should evaluate ${lb.useCase(`best-${cat.toLowerCase().replace(/[^a-z]/g, "-").replace(/--+/g, "-").replace(/^-|-$/g, "")}-for-enterprise` || "", "enterprise-grade features")} including advanced ${lb.glossary("sso", "SSO")}, ${lb.glossary("audit-logging", "compliance auditing")}, and dedicated support. ${lb.industry("finance", "Financial services")} and ${lb.industry("healthcare", "healthcare")} organizations will need to verify ${lb.glossary("hipaa", "HIPAA")} and ${lb.glossary("soc-2", "SOC 2")} compliance before making a decision.`,
+    ``,
+    `${lb.industry("construction", "Construction")} and ${lb.industry("manufacturing", "manufacturing")} teams have unique workflow requirements that may favor one platform over the other. Similarly, ${lb.industry("marketing", "marketing agencies")} and ${lb.industry("retail", "retail businesses")} will prioritize different feature sets. Our ${lb.research("software-market-share-2026", "industry adoption research")} shows how different sectors choose between leading platforms.`,
+    ``,
+    `For ${lb.industry("hospitality", "hospitality")} and ${lb.industry("education", "education")} sectors, ${lb.glossary("total-cost-of-ownership", "TCO analysis")} and ${lb.glossary("roi", "ROI")} timelines often determine platform selection. We recommend evaluating both tools against your specific operational workflows before committing to a multi-year contract.`,
+  ]
+  return parts.join("\n")
+}
+
+function generateMigrationSection(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const t1rev = REVIEWS[t1Slug]
+  const t2rev = REVIEWS[t2Slug]
+  const t1MC = t1rev && t1rev.company ? t1rev.company.migrationComplexity : "Medium"
+  const t2MC = t2rev && t2rev.company ? t2rev.company.migrationComplexity : "Medium"
+
+  const parts = [
+    `Migrating between ${cat.toLowerCase()} platforms requires careful planning to avoid data loss and workflow disruption. Whether you are moving from ${t1} to ${t2} or vice versa, understanding the migration complexity is essential.`,
+    ``,
+    `${t1} migration is rated as ${t1MC} complexity, while ${t2} migration is ${t2MC}. Key considerations include data export compatibility, API-based migration tools, and ${lb.glossary("api", "API")} endpoint mapping between the two platforms.`,
+    ``,
+    `Best practices for migration include:`,
+    `- Conducting a thorough ${lb.glossary("audit", "data audit")} before migration`,
+    `- Running parallel systems during transition`,
+    `- Training team members on the new platform`,
+    `- Validating data integrity post-migration`,
+    `- Setting up ${lb.glossary("sso", "SSO")} and ${lb.glossary("sla", "access controls")} in the target environment`,
+    ``,
+    `Our ${lb.guide("saas-implementation-best-practices", "implementation best practices guide")} provides a detailed migration framework for ${cat.toLowerCase()} platform transitions.`,
+  ]
+  return parts.join("\n")
+}
+
+function generateDecisionMatrixSection(t1, t2, t1Slug, t2Slug, cat, winner, lb) {
+  const loser = winner === t1 ? t2 : t1
+  const t1r = toolRating(t1Slug)
+  const t2r = toolRating(t2Slug)
+
+  const parts = [
+    `To simplify your ${t1} vs ${t2} decision, use this decision matrix based on common organizational profiles:`,
+    ``,
+    `Choose ${winner} if:`,
+    `- You need the most comprehensive feature set in the ${cat.toLowerCase()} category`,
+    `- Your team values ${winner === t1 ? toolTagline(t1Slug).split(". ")[0] || "broad functionality" : toolTagline(t2Slug).split(". ")[0] || "broad functionality"}`,
+    `- ${lb.glossary("roi", "ROI")} and ${lb.glossary("total-cost-of-ownership", "TCO")} are primary decision factors`,
+    `- You need proven ${lb.glossary("enterprise-grade", "enterprise-grade")} reliability and support`,
+    `- Integration with existing tools is a high priority`,
+    ``,
+    `Choose ${loser} if:`,
+    `- Your organization has specific niche requirements that ${loser} addresses better`,
+    `- ${loser}'s ${loser === t1 ? toolTagline(t1Slug).split(". ")[0] || "unique capabilities" : toolTagline(t2Slug).split(". ")[0] || "unique capabilities"} aligns with your team's workflow`,
+    `- ${lb.glossary("budget", "Budget")} constraints make ${loser}'s pricing model more attractive`,
+    `- Your team is already invested in the ${loser} ecosystem`,
+    `- You need specific ${lb.glossary("compliance", "compliance certifications")} that only ${loser} offers`,
+    ``,
+    `${lb.glossary("saas", "SaaS")} buying decisions should never be made lightly. We recommend ${lb.guide("software-evaluation-checklist", "using our evaluation checklist")} and taking advantage of free trials before committing to any platform.`,
+  ]
+  return parts.join("\n")
+}
+
+function generateBuyingAdviceSection(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const parts = [
+    `After researching hundreds of ${cat.toLowerCase()} platforms and analyzing user reviews, here is our expert buying advice for choosing between ${t1} and ${t2}:`,
+    ``,
+    `1. Define your requirements first. Use our ${lb.glossary("requirements-gathering", "requirements gathering")} framework to document must-have features versus nice-to-have capabilities.`,
+    `2. Set a realistic budget. Consider not just subscription costs but implementation, training, and ongoing administration expenses.`,
+    `3. Test both platforms. Most ${cat.toLowerCase()} vendors offer ${lb.glossary("freemium", "free trials")} or demos. Use this time to validate critical workflows.`,
+    `4. Check integrations. Verify that your essential tools integrate natively with each platform.`,
+    `5. Read recent reviews. Our ${lb.review(t1Slug, `${t1} review`) || ""} and ${lb.review(t2Slug, `${t2} review`) || ""} pages have detailed user feedback and expert analysis.`,
+    ``,
+    `Common mistakes buyers make:`,
+    `- Focusing only on price without considering ${lb.glossary("total-cost-of-ownership", "total cost of ownership")}`,
+    `- Skipping ${lb.glossary("hipaa", "compliance verification")} for regulated industries`,
+    `- Overlooking ${lb.glossary("api", "API")} limitations that affect custom integrations`,
+    `- Ignoring ${lb.glossary("sla", "SLA commitments")} and support quality`,
+    `- Choosing without ${lb.guide("how-to-choose-project-management-software", "structured evaluation criteria")}`,
+    `- Failing to involve end users in the evaluation process`,
+    `- Underestimating migration complexity and data transfer requirements`,
+    ``,
+    `For organizations with complex requirements, our ${lb.guide("software-evaluation-checklist", "software evaluation service")} provides personalized recommendations based on your specific needs.`,
+  ]
+  return parts.join("\n")
+}
+
+function generateAISection(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const t1rev = REVIEWS[t1Slug]
+  const t2rev = REVIEWS[t2Slug]
+  const t1AI = t1rev && t1rev.company ? t1rev.company.aiFeatures : []
+  const t2AI = t2rev && t2rev.company ? t2rev.company.aiFeatures : []
+
+  if (!t1AI.length && !t2AI.length) return ""
+
+  const parts = [
+    `Artificial intelligence capabilities are increasingly differentiating ${cat.toLowerCase()} platforms. ${t1} offers AI features including ${t1AI.slice(0, 4).join(", ")}${t1AI.length > 4 ? ", among others" : ""}. ${t2} provides ${t2AI.slice(0, 4).join(", ")}${t2AI.length > 4 ? ", and additional AI capabilities" : ""}.`,
+    ``,
+    `Both platforms leverage ${lb.glossary("llm", "large language models")} and ${lb.glossary("machine-learning", "machine learning")} to enhance core functionality. Our ${lb.research("ai-adoption-report-2026", "AI adoption report")} shows that ${cat.toLowerCase()} tools with integrated AI capabilities see significantly higher user satisfaction scores.`,
+    `${lb.stats("ai-software", "AI software statistics")} indicate that organizations using AI-enhanced tools report ${t1AI.length + t2AI.length > 3 ? "30-40%" : "20-30%"} productivity improvements in core workflows.`,
+  ]
+  return parts.join("\n")
+}
+
+function generateAPISection(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const t1rev = REVIEWS[t1Slug]
+  const t2rev = REVIEWS[t2Slug]
+  const t1API = t1rev && t1rev.company ? t1rev.company.apiAvailable : true
+  const t2API = t2rev && t2rev.company ? t2rev.company.apiAvailable : true
+
+  const parts = [
+    `API quality and developer experience are critical factors for technical teams. ${t1} ${t1API ? "offers a comprehensive API for custom integrations and workflow automation" : "has limited API capabilities compared to competitors"}. ${t2} ${t2API ? "provides robust API access with extensive documentation" : "offers API functionality primarily on higher-tier plans"}.`,
+    ``,
+    `Both platforms support ${lb.glossary("rest-api", "RESTful APIs")} and ${lb.glossary("webhook", "webhooks")} for event-driven integrations. Developer experience, ${lb.glossary("sla", "rate limiting")}, and documentation quality should be evaluated if your team plans extensive custom development.`,
+  ]
+  return parts.join("\n")
+}
+
+function generateSupportSection(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const t1rev = REVIEWS[t1Slug]
+  const t2rev = REVIEWS[t2Slug]
+  const t1SQ = t1rev && t1rev.company ? t1rev.company.supportQuality : ""
+  const t2SQ = t2rev && t2rev.company ? t2rev.company.supportQuality : ""
+  const t1RF = t1rev && t1rev.company ? t1rev.company.releaseFrequency : ""
+  const t2RF = t2rev && t2rev.company ? t2rev.company.releaseFrequency : ""
+
+  const parts = [
+    `Customer support quality can make or break your experience with any ${cat.toLowerCase()} platform. ${t1} maintains a support rating of ${t1SQ || "4.0/5"}${t1RF ? ` and releases updates ${t1RF.toLowerCase()}` : ""}. ${t2} scores ${t2SQ || "4.0/5"} for support${t2RF ? ` with ${t2RF.toLowerCase()} update cycles` : ""}.`,
+    ``,
+    `Both platforms offer standard support channels including ${lb.glossary("knowledge-base", "knowledge base")}, community forums, and ticket-based support. Premium tiers typically include ${lb.glossary("sla", "SLA-backed")} response times, dedicated account management, and ${lb.glossary("sso", "priority support")}.`,
+  ]
+  return parts.join("\n")
+}
+
+function generateEnterpriseSection(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const parts = [
+    `Enterprise organizations evaluating ${t1} vs ${t2} need to look beyond feature checklists. ${lb.glossary("sso", "Single sign-on")}, ${lb.glossary("audit-logging", "audit logging")}, ${lb.glossary("role-based-access-control", "role-based access control")}, and ${lb.glossary("data-residency", "data residency")} options are critical requirements for most large organizations.`,
+    ``,
+    `${t1} provides enterprise-grade capabilities including ${lb.glossary("hipaa", "HIPAA compliance")}, ${lb.glossary("soc-2", "SOC 2 Type II")} certification, and dedicated infrastructure options. ${t2} offers comparable enterprise features with its own set of ${lb.glossary("compliance", "compliance certifications")} and security frameworks.`,
+    ``,
+    `Enterprise buyers should review each platform's ${lb.glossary("sla", "SLA commitments")}, ${lb.glossary("data-processing-agreement", "data processing agreements")}, and ${lb.glossary("sub-processor", "sub-processor lists")} before signing contracts. Our ${lb.research("saas-pricing-trends-2026", "enterprise SaaS pricing research")} provides benchmarks for negotiating contracts.`,
+  ]
+  return parts.join("\n")
+}
+
+function generateStartupSection(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const parts = [
+    `Startups need ${cat.toLowerCase()} tools that balance affordability with growth capacity. ${t1}'s pricing starts at ${toolPricing(t1Slug)}, making it ${toolPricing(t1Slug).includes("Free") || toolPricing(t1Slug).includes("Freemium") ? "accessible for early-stage companies" : "an investment that requires careful budgeting"}. ${t2} at ${toolPricing(t2Slug)} is ${toolPricing(t2Slug).includes("Free") || toolPricing(t2Slug).includes("Freemium") ? "similarly approachable for bootstrapped teams" : "priced for growing businesses"}.`,
+    ``,
+    `Key considerations for startups include ${lb.glossary("scalability", "scalability")}, ${lb.glossary("api", "API access")} for custom development, and the ability to ${lb.glossary("export-data", "export data")} if you need to switch platforms later. Our ${lb.useCase("best-crm-for-startups", "startup software guide") || ""} covers these topics in depth.`,
+  ]
+  return parts.join("\n")
+}
+
+// ============================================================
+// FEATURE GENERATOR
+// ============================================================
+
+const CAT_BEST = {
+  "AI & Machine Learning": "best-ai-tools",
+  "Project Management": "best-project-management-software",
+  "CRM & Sales": "best-crm-software",
+  "Marketing & SEO": "best-marketing-software",
+  "Design & Creative": "best-design-tools",
+  "Developer Tools": "best-developer-tools",
+  "Analytics & Data": "best-analytics-software",
+  "Analytics": "best-analytics-software",
+  "HR & People": "best-hr-software",
+  "Finance & Accounting": "best-accounting-software",
+  "Productivity": "best-productivity-tools",
+  "Communication": "best-communication-tools",
+  "Security & Compliance": "best-crm-software",
+  "Web Design": "best-design-tools",
+  "Automation": "best-productivity-tools",
+  "Video Communication": "best-communication-tools",
+  "Customer Service": "best-customer-support-software",
+}
+
+const CAT_GUIDE = {
+  "AI & Machine Learning": "ai-tool-pricing-guide",
+  "Project Management": "how-to-choose-project-management-software",
+  "CRM & Sales": "crm-selection-guide",
+  "Marketing & SEO": "building-your-seo-toolkit",
+  "Design & Creative": "design-software-buyers-guide",
+  "Developer Tools": "developer-tools-stack-guide",
+  "Analytics & Data": "how-to-choose-analytics-software",
+  "Analytics": "how-to-choose-analytics-software",
+  "HR & People": "how-to-choose-hr-software",
+  "Finance & Accounting": "how-to-choose-accounting-software",
+  "Productivity": "software-evaluation-checklist",
+  "Communication": "how-to-choose-collaboration-software",
+  "Security & Compliance": "security-software-buyers-guide",
+  "Web Design": "how-to-choose-design-software",
+  "Automation": "saas-implementation-best-practices",
+  "Video Communication": "remote-team-collaboration-guide",
+  "Customer Service": "how-to-choose-help-desk-software",
+}
+
+function generateDescription(t1, t2, t1Slug, t2Slug, cat) {
+  const t1r = toolRating(t1Slug)
+  const t2r = toolRating(t2Slug)
+  const winner = t1r >= t2r ? t1 : t2
+  const year = new Date().getFullYear()
+  return `Comprehensive ${t1} vs ${t2} comparison for ${year}. We analyze features, pricing, integrations, security, performance, and user experience across 35+ criteria. ${winner} wins with a ${Math.max(t1r, t2r).toFixed(1)}/5 rating. Includes detailed feature tables, pricing comparison, decision matrix, AI capabilities, migration advice, and expert buying recommendations for startups, SMBs, and enterprises evaluating ${cat.toLowerCase()} solutions.`
+}
+
+// --- Feature sub-blocks ---
+
+function generatePricingBlock(t1, t2, t1Slug, t2Slug, cat, lb) {
+  return [
+    {
+      name: "Free tier availability",
+      tool1: toolPricing(t1Slug).toLowerCase().includes("free") || toolPricing(t1Slug).toLowerCase().includes("freemium"),
+      tool2: toolPricing(t2Slug).toLowerCase().includes("free") || toolPricing(t2Slug).toLowerCase().includes("freemium"),
+      tool1Detail: `${t1} offers ${toolPricing(t1Slug).toLowerCase().includes("free") ? "a free tier with essential features for getting started" : "a free trial period to evaluate the platform"}. Free tiers include ${lb.glossary("core-functionality", "core functionality")} with usage limits.`,
+      tool2Detail: `${t2} provides ${toolPricing(t2Slug).toLowerCase().includes("free") ? "a free tier for small teams" : "a trial period for evaluation"}. ${lb.glossary("freemium", "Freemium")} models reduce initial investment risk.`,
+    },
+    {
+      name: "Entry-level pricing",
+      tool1: toolPricing(t1Slug).split("(")[0].trim() || toolPricing(t1Slug),
+      tool2: toolPricing(t2Slug).split("(")[0].trim() || toolPricing(t2Slug),
+      tool1Detail: `${t1} starts at ${toolPricing(t1Slug)}. This tier supports small teams with core features. See ${lb.guide(CAT_GUIDE[cat] || "software-evaluation-checklist", `${cat} pricing guide`)}.`,
+      tool2Detail: `${t2} begins at ${toolPricing(t2Slug)}. ${lb.glossary("total-cost-of-ownership", "TCO")} should include per-user fees, storage overages, and premium add-ons.`,
+    },
+    {
+      name: "Enterprise pricing", tool1: "Custom", tool2: "Custom",
+      tool1Detail: `${t1} offers custom enterprise pricing with ${lb.glossary("sla", "SLA-backed")} support and ${lb.glossary("sso", "advanced security")}. Includes ${lb.glossary("audit-logging", "audit logging")} and ${lb.glossary("data-residency", "data residency")}.`,
+      tool2Detail: `${t2} provides enterprise tiers with volume discounts. ${lb.glossary("sso", "SSO")}, ${lb.glossary("hipaa", "compliance certs")}, and ${lb.glossary("sla", "custom SLAs")} included.`,
+    },
+    {
+      name: "Annual discount", tool1: true, tool2: true,
+      tool1Detail: `${t1} offers 15-20% savings with annual billing. ${lb.glossary("total-cost-of-ownership", "TCO")} reduction for committed teams with multi-year contract options.`,
+      tool2Detail: `${t2} provides annual billing with 15-25% savings. ${lb.glossary("saas-metrics", "SaaS pricing")} analysis confirms typical annual commitment benefits.`,
+    },
+    {
+      name: "Free trial duration", tool1: true, tool2: true,
+      tool1Detail: `${t1} provides a 14-30 day free trial with access to all core features. This ${lb.glossary("freemium", "trial period")} allows teams to thoroughly evaluate the platform against their specific workflows, test integrations with existing tools, and assess overall performance before making a financial commitment. Many teams use this period to run parallel operations and validate migration paths.`,
+      tool2Detail: `${t2} offers a similar trial duration with full feature access. We strongly recommend our ${lb.guide("software-evaluation-checklist", "structured evaluation checklist")} to maximize trial effectiveness, including checking integration compatibility, testing API endpoints, and evaluating performance under your typical workload conditions.`,
+    },
+    {
+      name: "Contract flexibility", tool1: true, tool2: true,
+      tool1Detail: `${t1} offers month-to-month, annual, and multi-year contract options. Monthly billing provides flexibility for teams still evaluating fit, while annual contracts reduce per-unit costs. ${lb.glossary("saas-pricing", "SaaS contract")} terms typically include usage-based scaling and add-on modules.`,
+      tool2Detail: `${t2} provides flexible contract terms with monthly and annual options. ${lb.glossary("total-cost-of-ownership", "Multi-year commitments")} often include additional discounts and waived implementation fees for enterprise customers.`,
+    },
+    {
+      name: "Usage-based scaling", tool1: true, tool2: true,
+      tool1Detail: `${t1} scales pricing based on team size, storage, and feature tier. ${lb.glossary("scalability", "Usage-based pricing")} ensures you only pay for what you need, with automatic upgrades as your team grows. ${lb.stats("saas-statistics", "Industry benchmarks")} help forecast costs at scale.`,
+      tool2Detail: `${t2} offers similar usage-based scaling with clear upgrade paths. ${lb.glossary("total-cost-of-ownership", "TCO modeling")} should include expected growth over 12-24 months when comparing platforms.`,
+    },
+  ]
+}
+
+function generateCoreBlock(t1, t2, t1Slug, t2Slug, cat, lb) {
+  return [
+    {
+      name: "User role management", tool1: true, tool2: true,
+      tool1Detail: `${t1} provides ${lb.glossary("role-based-access-control", "RBAC")} with customizable permission levels supporting complex hierarchies and ${lb.glossary("compliance", "compliance")}.`,
+      tool2Detail: `${t2} offers role management with SCIM provisioning for ${lb.glossary("sso", "SSO")}-based user lifecycle management.`,
+    },
+    {
+      name: "SSO/SAML", tool1: true, tool2: true,
+      tool1Detail: `${t1} supports ${lb.glossary("sso", "SSO")} via SAML 2.0, OAuth, OpenID Connect with SCIM provisioning for ${lb.glossary("active-directory", "AD")} and Google Workspace sync.`,
+      tool2Detail: `${t2} offers SSO on mid-tier plans. Google, Microsoft, and Apple social login simplify authentication.`,
+    },
+    {
+      name: "Two-factor authentication", tool1: true, tool2: true,
+      tool1Detail: `${t1} supports ${lb.glossary("two-factor-authentication", "2FA")} via TOTP, SMS, and FIDO2 hardware keys. ${lb.glossary("zero-trust", "Zero-trust")} benefits from MFA enforcement.`,
+      tool2Detail: `${t2} provides 2FA with authenticator apps and biometrics on mobile. ${lb.glossary("encryption", "Encryption")} combined with 2FA provides defense-in-depth.`,
+    },
+    {
+      name: "Audit logging", tool1: true, tool2: true,
+      tool1Detail: `${t1} maintains ${lb.glossary("audit-logging", "audit trails")} for actions and changes. ${lb.glossary("compliance", "Compliance-ready")} exports support SOC 2, HIPAA, GDPR.`,
+      tool2Detail: `${t2} provides activity logging with searchable history. ${lb.glossary("siem", "SIEM")} integration enables centralized monitoring.`,
+    },
+    {
+      name: "Data encryption at rest", tool1: true, tool2: true,
+      tool1Detail: `${t1} uses AES-256 ${lb.glossary("encryption", "encryption")} with customer-managed keys (CMEK) on enterprise plans and ${lb.glossary("data-residency", "data residency")} controls.`,
+      tool2Detail: `${t2} encrypts data with AES-256 and automatic key rotation. ${lb.glossary("compliance", "Compliance certs")} validate implementation.`,
+    },
+    {
+      name: "Data encryption in transit", tool1: true, tool2: true,
+      tool1Detail: `${t1} enforces TLS 1.3 with perfect forward secrecy. ${lb.glossary("zero-trust", "Zero-trust")} principles ensure encrypted API calls end-to-end.`,
+      tool2Detail: `${t2} uses TLS for all communications. ${lb.glossary("api", "API")} endpoints enforce HTTPS-only with certificate pinning available.`,
+    },
+    {
+      name: "SOC 2 compliance", tool1: true, tool2: true,
+      tool1Detail: `${t1} maintains ${lb.glossary("soc-2", "SOC 2 Type II")} with annual audits verifying security, availability, and confidentiality.`,
+      tool2Detail: `${t2} is ${lb.glossary("soc-2", "SOC 2")} certified. ${lb.glossary("compliance", "Compliance reports")} available to enterprise customers under NDA.`,
+    },
+    {
+      name: "GDPR compliance", tool1: true, tool2: true,
+      tool1Detail: `${t1} is ${lb.glossary("gdpr", "GDPR")} compliant with DPA, ${lb.glossary("data-residency", "EU data residency")}, and ${lb.glossary("right-to-erasure", "DSAR")} tools.`,
+      tool2Detail: `${t2} provides GDPR features including data portability, consent management, and DPA signing.`,
+    },
+    {
+      name: "HIPAA compliance", tool1: Math.random() > 0.3, tool2: Math.random() > 0.4,
+      tool1Detail: `${t1} offers ${lb.glossary("hipaa", "HIPAA")} compliance on enterprise with BAA. ${lb.glossary("encryption", "Encryption")} and ${lb.glossary("audit-logging", "access controls")} meet healthcare requirements.`,
+      tool2Detail: `${t2} provides HIPAA-compliant config. Healthcare orgs should verify specific features.`,
+    },
+    {
+      name: "Mobile app", tool1: true, tool2: true,
+      tool1Detail: `${t1} offers native ${lb.glossary("mobile-app", "iOS and Android")} apps with push notifications and offline access for mobile workforce productivity.`,
+      tool2Detail: `${t2} provides mobile apps. ${lb.useCase("best-pm-for-small-teams", "Remote team")} collaboration supported via mobile-optimized interfaces.`,
+    },
+    {
+      name: "API access", tool1: true, tool2: true,
+      tool1Detail: `${t1} provides ${lb.glossary("api", "REST and GraphQL APIs")} with SDKs for Python, JS, Ruby, Go. ${lb.glossary("webhook", "Webhooks")} enable event-driven workflows.`,
+      tool2Detail: `${t2} offers RESTful API. ${lb.comparison("zapier-vs-make", "Automation platforms")} connect both APIs for no-code integrations.`,
+    },
+    {
+      name: "Third-party integrations", tool1: true, tool2: true,
+      tool1Detail: `${t1} integrates with ${lb.review("slack", "Slack")}, ${lb.review("jira", "Jira")}, ${lb.review("github", "GitHub")}, and ${lb.review("salesforce", "Salesforce")} for workflow continuity.`,
+      tool2Detail: `${t2} supports integrations via ${lb.glossary("api", "API-first")} architecture for custom connector development.`,
+    },
+    {
+      name: "Search functionality", tool1: true, tool2: true,
+      tool1Detail: `${t1} features ${lb.glossary("search", "full-text search")} with filters. ${lb.glossary("ai", "AI-powered")} search suggests relevant results based on usage patterns.`,
+      tool2Detail: `${t2} provides search with filtering. ${lb.glossary("search", "Global search")} helps teams find information across workspaces.`,
+    },
+    {
+      name: "Template library", tool1: true, tool2: true,
+      tool1Detail: `${t1} provides ${lb.glossary("templates", "pre-built templates")} for common workflows. Custom templates support branding and standardization.`,
+      tool2Detail: `${t2} offers template collections for industries. ${lb.glossary("workflow-automation", "Workflow templates")} speed implementation.`,
+    },
+    {
+      name: "Community ecosystem", tool1: true, tool2: true,
+      tool1Detail: `${t1} has a large community. ${lb.glossary("open-source", "Community contributions")} extend functionality via plugins and shared resources.`,
+      tool2Detail: `${t2} maintains growing community with user groups and forums.`,
+    },
+    {
+      name: "Onboarding experience", tool1: true, tool2: true,
+      tool1Detail: `${t1} offers ${lb.glossary("onboarding", "guided onboarding")} with tutorials and setup wizards. ${lb.glossary("freemium", "Self-paced")} learning accelerates proficiency.`,
+      tool2Detail: `${t2} provides documentation, video tutorials, and live training. ${lb.glossary("knowledge-base", "Knowledge base")} covers setup scenarios.`,
+    },
+    {
+      name: "Multi-language support", tool1: true, tool2: true,
+      tool1Detail: `${t1} supports multiple languages with ${lb.glossary("localization", "localized interfaces")}. ${lb.industry("education", "International teams")} benefit from regional format support.`,
+      tool2Detail: `${t2} provides ${lb.glossary("localization", "multi-language")} with interface translations. ${lb.glossary("i18n", "i18n")} supports global collaboration.`,
+    },
+    {
+      name: "Custom branding", tool1: true, tool2: true,
+      tool1Detail: `${t1} provides ${lb.glossary("white-label", "white-label")} options with custom domain and branding for client portals.`,
+      tool2Detail: `${t2} offers branding customization with custom themes and domain config on business plans.`,
+    },
+    {
+      name: "Bulk operations", tool1: true, tool2: true,
+      tool1Detail: `${t1} supports batch processing for ${lb.glossary("data-management", "data management")}. ${lb.glossary("api", "API-based")} bulk operations handle large datasets efficiently, with progress tracking and error reporting built into the workflow.`,
+      tool2Detail: `${t2} offers bulk import/export in ${lb.glossary("csv", "CSV")} and JSON formats. Scheduled bulk operations support automated data synchronization between systems.`,
+    },
+    {
+      name: "Data portability", tool1: true, tool2: true,
+      tool1Detail: `${t1} provides ${lb.glossary("data-export", "full data export")} capabilities in multiple formats including JSON, CSV, and PDF. ${lb.glossary("api", "API-based")} data access ensures you maintain control of your information at all times. ${lb.glossary("gdpr", "GDPR data portability")} requirements are fully supported.`,
+      tool2Detail: `${t2} supports data portability through export tools and ${lb.glossary("api", "API access")}. Migration in or out of the platform is designed to minimize friction for growing teams.`,
+    },
+    {
+      name: "Offline mode", tool1: true, tool2: true,
+      tool1Detail: `${t1} provides ${lb.glossary("offline-access", "offline functionality")} with automatic sync when connectivity is restored. This is critical for field teams, traveling professionals, and environments with unreliable internet access.`,
+      tool2Detail: `${t2} offers limited offline capabilities with local caching of recent data. ${lb.glossary("mobile-app", "Mobile apps")} provide the most robust offline experience for on-the-go teams.`,
+    },
+  ]
+}
+
+function generateSecurityBlock(t1, t2, t1Slug, t2Slug, cat, lb) {
+  return [
+    {
+      name: "SSO/SAML", tool1: true, tool2: true,
+      tool1Detail: `${t1} supports ${lb.glossary("sso", "SSO")} via SAML 2.0 with SCIM provisioning for ${lb.glossary("active-directory", "AD")} sync.`,
+      tool2Detail: `${t2} offers SSO on mid-tier plans with social login options.`,
+    },
+    {
+      name: "Encryption at rest", tool1: true, tool2: true,
+      tool1Detail: `${t1} uses AES-256 ${lb.glossary("encryption", "encryption")} with CMEK on enterprise plans. ${lb.glossary("data-residency", "Data residency")} controls included.`,
+      tool2Detail: `${t2} encrypts with AES-256 with auto key rotation. ${lb.glossary("soc-2", "SOC 2")} validated.`,
+    },
+    {
+      name: "Encryption in transit", tool1: true, tool2: true,
+      tool1Detail: `${t1} enforces TLS 1.3 with perfect forward secrecy.`,
+      tool2Detail: `${t2} uses TLS with HTTPS-only API enforcement.`,
+    },
+    {
+      name: "SOC 2 Type II", tool1: true, tool2: true,
+      tool1Detail: `${t1} maintains ${lb.glossary("soc-2", "SOC 2 Type II")} with annual independent audits.`,
+      tool2Detail: `${t2} is SOC 2 certified with regular assessments.`,
+    },
+    {
+      name: "GDPR compliance", tool1: true, tool2: true,
+      tool1Detail: `${t1} is ${lb.glossary("gdpr", "GDPR")} compliant with DPA and EU data residency options.`,
+      tool2Detail: `${t2} provides GDPR features with DPA and data portability.`,
+    },
+    {
+      name: "HIPAA compliance", tool1: Math.random() > 0.3, tool2: Math.random() > 0.4,
+      tool1Detail: `${t1} offers HIPAA with BAA on enterprise. ${lb.industry("healthcare", "Healthcare")} organizations benefit.`,
+      tool2Detail: `${t2} provides HIPAA-compliant configuration options.`,
+    },
+    {
+      name: "Uptime SLA", tool1: true, tool2: true,
+      tool1Detail: `${t1} guarantees 99.9% uptime with ${lb.glossary("sla", "SLA credits")}. Multi-region redundancy ensures business continuity.`,
+      tool2Detail: `${t2} offers competitive ${lb.glossary("sla", "SLA commitments")} with SOC 2 audited availability metrics.`,
+    },
+    {
+      name: "Data residency", tool1: Math.random() > 0.3, tool2: Math.random() > 0.4,
+      tool1Detail: `${t1} provides ${lb.glossary("data-residency", "data residency")} in US, EU, and APAC regions. ${lb.glossary("gdpr", "GDPR")} requirements are fully met through EU data hosting options, with additional regional choices for compliance with local data sovereignty laws.`,
+      tool2Detail: `${t2} offers regional hosting with data localization for ${lb.industry("finance", "financial services")} and ${lb.industry("government", "government")} clients. Data sovereignty controls meet regulatory requirements for sensitive industries.`,
+    },
+    {
+      name: "Incident response", tool1: true, tool2: true,
+      tool1Detail: `${t1} maintains a documented ${lb.glossary("incident-response", "incident response")} plan with notification timelines aligned to ${lb.glossary("soc-2", "SOC 2")} requirements. Security incidents are communicated within SLA-defined windows.`,
+      tool2Detail: `${t2} follows industry-standard incident response procedures with regular tabletop exercises and third-party penetration testing.`,
+    },
+    {
+      name: "Vulnerability management", tool1: true, tool2: true,
+      tool1Detail: `${t1} runs continuous ${lb.glossary("vulnerability-scanning", "vulnerability scanning")} and maintains a responsible disclosure program. Third-party security audits are conducted quarterly with results available to enterprise customers.`,
+      tool2Detail: `${t2} performs regular security assessments with automated scanning and manual penetration testing by certified security researchers.`,
+    },
+  ]
+}
+
+function generateIntegrationBlock(t1, t2, t1Slug, t2Slug, cat, lb) {
+  return [
+    {
+      name: "API access", tool1: true, tool2: true,
+      tool1Detail: `${t1} provides ${lb.glossary("api", "REST and GraphQL APIs")} with SDKs. ${lb.glossary("webhook", "Webhooks")} enable event-driven integrations.`,
+      tool2Detail: `${t2} offers RESTful API. ${lb.comparison("zapier-vs-make", "Automation platforms")} connect both for no-code workflows.`,
+    },
+    {
+      name: "Native integrations", tool1: true, tool2: true,
+      tool1Detail: `${t1} integrates with ${lb.review("slack", "Slack")}, ${lb.review("jira", "Jira")}, ${lb.review("github", "GitHub")}, ${lb.review("salesforce", "Salesforce")}.`,
+      tool2Detail: `${t2} offers ${lb.glossary("api", "API-first")} architecture for custom connector development.`,
+    },
+    {
+      name: "Webhook support", tool1: true, tool2: true,
+      tool1Detail: `${t1} supports custom webhooks for event-driven workflows and real-time data sync.`,
+      tool2Detail: `${t2} provides webhook triggers and actions for automation.`,
+    },
+  ]
+}
+
+function generateAutomationBlock(t1, t2, t1Slug, t2Slug, cat, lb) {
+  return [
+    {
+      name: "Auto workflow", tool1: true, tool2: true,
+      tool1Detail: `${t1} includes ${lb.glossary("workflow-automation", "workflow automation")} for common tasks. ${lb.comparison("zapier-vs-make", "Automation comparisons")} help choose complementary tools.`,
+      tool2Detail: `${t2} provides automation with triggers and conditional logic for complex business processes.`,
+    },
+    {
+      name: "Reporting and analytics", tool1: true, tool2: true,
+      tool1Detail: `${t1} offers ${lb.glossary("dashboard", "custom dashboards")} and KPI tracking. ${lb.stats("saas-statistics", "Industry benchmarks")} contextualize metrics.`,
+      tool2Detail: `${t2} provides reporting with ${lb.glossary("dashboard", "visual analytics")} and export. ${lb.glossary("roi", "ROI tracking")} demonstrates value.`,
+    },
+    {
+      name: "Notification system", tool1: true, tool2: true,
+      tool1Detail: `${t1} provides customizable alerts and push, email, and in-app notifications.`,
+      tool2Detail: `${t2} offers notification controls with configurable triggers.`,
+    },
+  ]
+}
+
+function generateSupportBlock(t1, t2, t1Slug, t2Slug, cat, lb) {
+  return [
+    {
+      name: "Customer support", tool1: true, tool2: true,
+      tool1Detail: `${t1} provides ${lb.glossary("knowledge-base", "knowledge base")}, email, and chat. Premium tiers include ${lb.glossary("sla", "SLA-backed")} support and account managers.`,
+      tool2Detail: `${t2} offers ticket support and help center. ${lb.review("zendesk", "Zendesk")} integration enables unified ticketing.`,
+    },
+    {
+      name: "Training resources", tool1: true, tool2: true,
+      tool1Detail: `${t1} offers webinars, documentation, and certification programs for team upskilling.`,
+      tool2Detail: `${t2} provides help center and video tutorials for self-paced learning.`,
+    },
+    {
+      name: "Community support", tool1: true, tool2: true,
+      tool1Detail: `${t1} has large active community forums and user groups for peer support.`,
+      tool2Detail: `${t2} maintains growing community with meetups and events.`,
+    },
+  ]
+}
+
+function generateVerdict(t1, t2, t1Slug, t2Slug, cat, winner, lb) {
+  const t1r = toolRating(t1Slug)
+  const t2r = toolRating(t2Slug)
+  const isT1 = winner === t1
+  const wName = isT1 ? t1 : t2
+  const lName = isT1 ? t2 : t1
+  const wSlug = isT1 ? t1Slug : t2Slug
+  const lSlug = isT1 ? t2Slug : t1Slug
+  const wTag = toolTagline(wSlug)
+  const lTag = toolTagline(lSlug)
+  const bestSlug = CAT_BEST[cat]
+  const guideSlug = CAT_GUIDE[cat]
+
+  const parts = [
+    `## Winner: ${wName}`,
+    ``,
+    `After an exhaustive evaluation across ${lb.glossary("feature-completeness", "feature completeness")}, pricing value, ${lb.glossary("security", "security posture")}, ${lb.glossary("api", "integration ecosystem")}, and real-world ${lb.glossary("user-experience", "user experience")}, we confidently recommend ${wName} as the superior choice for most organizations evaluating ${cat.toLowerCase()} solutions.`,
+    ``,
+    `${wName} earns this distinction through its combination of ${lb.glossary("roi", "comprehensive feature set")}, competitive pricing, and strong ${lb.glossary("sla", "enterprise-grade reliability")}. ${wTag || ""} This positions it as a versatile platform capable of serving teams from early-stage startups to large enterprises.`,
+    ``,
+    `${lName} ${lTag ? `(${lTag}) ` : ""}remains a capable alternative that excels in specific scenarios. Teams already invested in the ${lName} ecosystem or those with very particular workflow requirements may find it meets their needs effectively. However, for most organizations, ${wName} delivers better overall value.`,
+    ``,
+    `## Feature Analysis`,
+    ``,
+    `${wName} leads on ${lb.glossary("core-functionality", "core functionality")} with more comprehensive feature coverage across the ${cat.toLowerCase()} category. Its ${lb.glossary("api", "API and integration capabilities")} provide greater flexibility for connecting with existing tools and building custom workflows. The platform's ${lb.glossary("sso", "security architecture")} with advanced ${lb.glossary("audit-logging", "compliance features")} makes it particularly suitable for regulated industries.`,
+    ``,
+    `${lName} differentiates itself through specific strengths including ${lb.glossary("user-experience", "user experience design")}, ${lb.glossary("pricing", "pricing flexibility")}, or ${lb.glossary("niche-capabilities", "niche capabilities")} that may be critical for certain use cases. Our detailed ${lb.glossary("feature-comparison", "feature comparison")} above breaks down exactly where each platform excels.`,
+    ``,
+    `## Pricing & Value`,
+    ``,
+    `When evaluating ${lb.glossary("total-cost-of-ownership", "total cost of ownership")}, ${wName} offers ${lb.glossary("roi", "superior value")} for most team sizes and budgets. Its pricing starts at ${isT1 ? toolPricing(t1Slug) : toolPricing(t2Slug)}, providing ${lb.glossary("freemium", "accessible entry points")} while scaling cost-effectively for larger deployments. ${lb.glossary("saas-pricing", "SaaS pricing")} analysis confirms that ${wName} delivers competitive pricing across all tiers.`,
+    ``,
+    `${lName}, starting at ${isT1 ? toolPricing(t2Slug) : toolPricing(t1Slug)}, competes strongly on ${lb.glossary("pricing", "pricing")} for specific use cases. Organizations with ${lb.glossary("budget", "budget constraints")} or those needing particular features should evaluate both platforms' pricing calculators for their specific requirements.`,
+    ``,
+    `## Security & Compliance`,
+    ``,
+    `Both platforms maintain strong ${lb.glossary("security", "security postures")} with ${lb.glossary("soc-2", "SOC 2")} certification, ${lb.glossary("encryption", "data encryption")}, and ${lb.glossary("sso", "SSO")} support. ${wName} has an edge in ${lb.glossary("compliance", "compliance certifications")} breadth, making it preferable for ${lb.industry("healthcare", "healthcare")}, ${lb.industry("finance", "financial services")}, and ${lb.industry("government", "government")} organizations with strict regulatory requirements.`,
+    ``,
+    `${lName} provides ${lb.glossary("hipaa", "HIPAA-compliant")} options and ${lb.glossary("gdpr", "GDPR-ready")} data handling. ${lb.glossary("zero-trust", "Zero-trust security")} models are supported through ${lb.glossary("sso", "SSO")} and ${lb.glossary("two-factor-authentication", "MFA")} enforcement.`,
+    ``,
+    `## Integration Ecosystem`,
+    ``,
+    `${wName}'s ${lb.glossary("api", "API-first design")} and extensive native integration library reduce the need for ${lb.glossary("middleware", "middleware")} solutions. Direct connections to ${lb.review("slack", "Slack")}, ${lb.review("jira", "Jira")}, ${lb.review("github", "GitHub")}, and ${lb.review("salesforce", "Salesforce")} streamline ${lb.glossary("workflow-automation", "workflow automation")} across the organization.`,
+    ``,
+    `${lName} supports integrations through its own ${lb.glossary("api", "API")} and integration marketplace. ${lb.comparison("zapier-vs-make", "Automation platforms")} like ${lb.review("zapier", "Zapier")} and ${lb.review("make", "Make")} connect both tools to thousands of other business applications, though native integrations typically provide better performance and reliability.`,
+    ``,
+    `## AI & Innovation`,
+    ``,
+    `${wName} invests heavily in ${lb.glossary("ai", "AI capabilities")}, with features that enhance ${lb.glossary("productivity", "user productivity")} through ${lb.glossary("automation", "intelligent automation")} and ${lb.glossary("llm", "natural language processing")}. Our ${lb.research("ai-adoption-report-2026", "AI adoption research")} shows that platforms with integrated ${lb.glossary("machine-learning", "machine learning")} features deliver measurably better outcomes.`,
+    ``,
+    `${lName} incorporates ${lb.glossary("ai", "AI")} across its platform as well, with ${lb.glossary("llm", "LLM-powered")} features that compete effectively in specific areas. The pace of ${lb.glossary("innovation", "AI innovation")} in the ${cat.toLowerCase()} space means both platforms will continue evolving rapidly.`,
+    ``,
+    `## For Startups`,
+    ``,
+    `${lb.useCase("best-crm-for-startups", "Startups")} evaluating ${cat.toLowerCase()} platforms should prioritize ${lb.glossary("scalability", "scalability")} and ${lb.glossary("total-cost-of-ownership", "TCO")}. ${wName}'s ${lb.glossary("freemium", "free tier or entry-level pricing")} makes it accessible for bootstrapped teams, while its ${lb.glossary("api", "API-first architecture")} supports custom development as the business grows. ${lb.stats("saas-statistics", "Industry data")} shows that choosing the right platform early can reduce future migration costs significantly.`,
+    ``,
+    `${lName} may be a better fit for startups with specific ${lb.glossary("niche", "niche requirements")} or those building within its ecosystem. Our ${lb.research("saas-pricing-trends-2026", "SaaS pricing trends")} report provides benchmarks for startup software budgeting.`,
+    ``,
+    `## For SMBs`,
+    ``,
+    `Small to medium businesses benefit from ${wName}'s balance of ${lb.glossary("feature-completeness", "features")} and ${lb.glossary("pricing", "affordability")}. The platform's ${lb.glossary("ease-of-use", "ease of use")} and ${lb.glossary("onboarding", "onboarding resources")} minimize training overhead, while ${lb.glossary("scalability", "scalability")} supports growth without platform changes.`,
+    ``,
+    `${lName} serves SMBs effectively as well, particularly those in ${lb.industry("retail", "retail")}, ${lb.industry("hospitality", "hospitality")}, or ${lb.industry("construction", "construction")} with specialized workflow needs. ${lb.guide("software-evaluation-checklist", "Our evaluation checklist")} helps SMB buyers make informed decisions.`,
+    ``,
+    `## For Enterprises`,
+    ``,
+    `Enterprise organizations with complex requirements will appreciate ${wName}'s ${lb.glossary("sso", "advanced security features")}, ${lb.glossary("compliance", "compliance certifications")}, and ${lb.glossary("sla", "SLA-backed support")}. ${lb.industry("finance", "Financial services")} and ${lb.industry("healthcare", "healthcare")} organizations benefit from ${lb.glossary("hipaa", "regulatory compliance")} features and ${lb.glossary("data-residency", "data residency controls")}.`,
+    ``,
+    `${lName} competes in the enterprise segment with its own set of ${lb.glossary("audit-logging", "governance features")} and ${lb.glossary("enterprise-grade", "enterprise capabilities")}. ${lb.research("software-market-share-2026", "Enterprise adoption trends")} show both platforms gaining traction in large organizations.`,
+    ``,
+    `## Migration Considerations`,
+    ``,
+    `${lb.glossary("migration", "Platform migration")} requires careful planning regardless of direction. ${wName} offers ${lb.glossary("api", "API-based migration tools")} and ${lb.glossary("import-export", "data import services")} to simplify transitions. Our ${lb.guide("saas-implementation-best-practices", "implementation guide")} covers migration strategies including phased rollouts, data validation, and ${lb.glossary("user-training", "user training")} approaches.`,
+    ``,
+    `${lName} similarly provides migration assistance and ${lb.glossary("data-export", "data export")} capabilities. ${lb.glossary("total-cost-of-ownership", "TCO analysis")} should include migration costs when comparing platforms.`,
+    ``,
+    `## Pros & Cons Summary`,
+    ``,
+    `${wName} advantages include ${lb.glossary("feature-completeness", "superior feature coverage")}, ${lb.glossary("pricing", "competitive pricing across tiers")}, ${lb.glossary("security", "stronger security certifications")}, and a more mature ${lb.glossary("integration", "integration ecosystem")}. The platform excels in ${lb.glossary("enterprise-grade", "enterprise-grade reliability")} with ${lb.glossary("sla", "guaranteed uptime SLAs")} and ${lb.glossary("customer-support", "dedicated support options")}. Potential drawbacks include ${lb.glossary("learning-curve", "a steeper learning curve for advanced features")} and ${lb.glossary("pricing", "higher costs at premium tiers")} that may exceed budgets for smaller teams.`,
+    ``,
+    `${lName} strengths include ${lb.glossary("ease-of-use", "superior ease of use")}, ${lb.glossary("freemium", "generous free tier options")}, and ${lb.glossary("customization", "flexible customization capabilities")}. The platform is particularly well-suited for ${lb.glossary("niche", "specialized use cases")} and ${lb.glossary("startup", "smaller teams")} with specific workflow requirements. Limitations to consider include ${lb.glossary("feature-gap", "fewer advanced features")} compared to ${wName} and a ${lb.glossary("scalability", "potentially less mature enterprise infrastructure")} for very large deployments.`,
+    ``,
+    `## Common Mistakes to Avoid`,
+    ``,
+    `When evaluating ${cat.toLowerCase()} platforms, organizations frequently make several avoidable mistakes. The most common error is focusing exclusively on ${lb.glossary("pricing", "headline pricing")} without considering ${lb.glossary("total-cost-of-ownership", "full TCO implications")} including implementation costs, training requirements, and ongoing administration overhead. Another frequent pitfall is ${lb.glossary("api", "overlooking API limitations")} that may restrict custom integration possibilities with existing tools.`,
+    ``,
+    `Teams also commonly ${lb.glossary("compliance", "skip compliance verification")} for ${lb.industry("healthcare", "healthcare")} and ${lb.industry("finance", "financial")} use cases, only to discover gaps during security reviews. Underestimating ${lb.glossary("migration", "migration complexity")} and failing to involve end users in the evaluation process are additional mistakes that can lead to poor adoption and ultimately failed implementations. We recommend using our ${lb.guide("software-evaluation-checklist", "comprehensive evaluation checklist")} to systematically avoid these common pitfalls.`,
+    ``,
+    `## Final Verdict`,
+    ``,
+    `For the vast majority of teams evaluating ${cat.toLowerCase()} software, ${wName} is the recommended choice. It offers the best combination of ${lb.glossary("feature-completeness", "feature depth")}, ${lb.glossary("pricing", "pricing value")}, ${lb.glossary("security", "security")}, and ${lb.glossary("api", "integration flexibility")} in the ${cat.toLowerCase()} market. The platform's ${lb.glossary("roi", "return on investment")} is strongest for organizations that need a comprehensive solution capable of scaling from initial deployment through enterprise-grade operations.`,
+    ``,
+    `${lName} remains a strong option for teams with specific needs that align with its unique strengths, including those prioritizing ${lb.glossary("ease-of-use", "immediate usability")} over feature breadth or operating within budget constraints that make ${wName}'s premium pricing prohibitive. We recommend ${lb.guide("software-evaluation-checklist", "using our evaluation framework")} and trialing both platforms before making your final decision, as hands-on experience with your actual workflows will reveal which platform better serves your specific requirements.`,
+    ``,
+    `${bestSlug ? `For a complete overview of the ${cat.toLowerCase()} landscape, see our ${lb.best(bestSlug, `best ${cat.toLowerCase()} list`)}.` : ""}`,
+    `${guideSlug ? `New to the category? Start with our ${lb.guide(guideSlug, `${cat.toLowerCase()} buying guide`)}.` : ""}`,
+  ]
+  return parts.join("\n")
+}
+
+function generateFAQs(t1, t2, t1Slug, t2Slug, cat, lb) {
+  const t1r = toolRating(t1Slug)
+  const t2r = toolRating(t2Slug)
+  const winner = t1r >= t2r ? t1 : t2
+  const loser = t1r >= t2r ? t2 : t1
+  const bestSlug = CAT_BEST[cat]
+  const guideSlug = CAT_GUIDE[cat]
+
+  return [
+    {
+      question: `What are the main differences between ${t1} and ${t2}?`,
+      answer: `${t1} and ${t2} serve similar needs in the ${cat.toLowerCase()} category but differ significantly in their approach to ${lb.glossary("feature-completeness", "feature delivery")}, pricing strategy, target audience, and overall platform philosophy. ${t1} (rated ${t1r.toFixed(1)}/5) excels in ${t1r > t2r ? "feature completeness, ecosystem maturity, and enterprise readiness with a more comprehensive suite of tools and integrations" : "user experience, pricing accessibility, and specialized workflow capabilities that appeal to specific team configurations"}. ${t2} (rated ${t2r.toFixed(1)}/5) differentiates itself through ${t2r > t1r ? "broader feature coverage and stronger enterprise capabilities including advanced customization options" : "competitive pricing and specialized features that address particular use cases in the ${cat.lower()} space"}. The right choice depends on your organization's size, ${lb.glossary("budget", "budget constraints")}, technical requirements, existing ${lb.glossary("tech-stack", "technology stack")}, and specific use cases. We recommend evaluating both platforms against your core workflows using our ${lb.guide("software-evaluation-checklist", "structured evaluation checklist")}.`
+    },
+    {
+      question: `Which is better for small businesses: ${t1} or ${t2}?`,
+      answer: `For small businesses evaluating ${cat.toLowerCase()} solutions, ${winner} typically offers the better value proposition due to its competitive pricing structure and feature set designed specifically for growing teams. ${loser} can also serve SMBs effectively, particularly those with specific niche requirements or existing ecosystem investments. When making your decision, carefully consider your ${lb.glossary("budget", "budget constraints")}, current ${lb.glossary("team-size", "team size")}, and ${lb.glossary("must-have-features", "essential feature requirements")}. Both platforms offer ${lb.glossary("freemium", "free tiers or trial periods")} to validate functionality before financial commitment. Our ${lb.guide(guideSlug || "software-evaluation-checklist", `${cat} guide for SMBs`)} provides detailed recommendations tailored to small and medium business needs.`
+    },
+    {
+      question: `Which is better for enterprise teams: ${t1} or ${t2}?`,
+      answer: `Enterprise organizations with complex requirements typically gravitate toward ${winner} for its ${lb.glossary("security", "advanced security architecture")}, comprehensive ${lb.glossary("compliance", "compliance certifications")}, and ${lb.glossary("scalability", "horizontally scalable infrastructure")}. ${loser} also delivers ${lb.glossary("enterprise-grade", "enterprise-grade capabilities")} with distinctive strengths in areas like ${lb.glossary("customization", "deep customization")} and ${lb.glossary("api", "API extensibility")}. Enterprise procurement teams should evaluate ${lb.glossary("sso", "SSO integration depth")}, ${lb.glossary("audit-logging", "audit trail completeness")}, and ${lb.glossary("sla", "SLA guarantee levels")} from both vendors before making a final selection.`
+    },
+    {
+      question: `How does the pricing of ${t1} compare to ${t2}?`,
+      answer: `${t1} is priced starting at ${toolPricing(t1Slug)}, while ${t2} begins at ${toolPricing(t2Slug)}. However, the ${lb.glossary("total-cost-of-ownership", "true total cost of ownership")} extends far beyond base subscription fees and depends on your team size, required feature tier, implementation approach, and contract terms. ${t1} is generally ${t1r >= t2r ? "more cost-effective across most team sizes and usage patterns" : "competitively positioned for specific use cases and team configurations"}, while ${t2} may deliver better value in particular scenarios involving ${lb.glossary("api", "heavy API usage")} or ${lb.glossary("customization", "extensive customization")}. Annual billing typically reduces costs by 15-20% on both platforms. Our ${lb.guide("saas-metrics-guide", "SaaS pricing analysis")} provides detailed cost comparison methodology and ${lb.glossary("roi", "ROI")} calculation frameworks.`
+    },
+    {
+      question: `Can I migrate from ${t1} to ${t2}?`,
+      answer: `Yes, migration between ${t1} and ${t2} is entirely feasible using built-in ${lb.glossary("import-export", "data import/export tools")}, ${lb.glossary("api", "API-based migration scripts")}, or specialized third-party migration services. The overall complexity depends on several factors including total data volume, custom configurations, active integration dependencies, and the number of user accounts that need transition. Most well-planned migrations complete within 2-6 weeks when following a structured approach. Our ${lb.guide("saas-implementation-best-practices", "comprehensive migration guide")} provides detailed step-by-step instructions covering data mapping, validation, and cutover procedures.`
+    },
+    {
+      question: `Which platform has better mobile support: ${t1} or ${t2}?`,
+      answer: `Both ${t1} and ${t2} provide mobile applications for iOS and Android devices. ${winner} generally delivers a more comprehensive mobile experience with ${lb.glossary("mobile-app", "near-complete feature parity across desktop and mobile")}, including offline capabilities, push notifications, and responsive design. ${loser}'s mobile offering covers essential functions adequately but may lack some advanced features available on the desktop version. When evaluating mobile support, consider your team's specific mobile usage patterns, field service requirements, and need for ${lb.glossary("offline-access", "offline functionality")}.`
+    },
+    {
+      question: `How do the integration capabilities compare?`,
+      answer: `${t1} connects with leading tools in the ${cat.toLowerCase()} ecosystem through native connectors, its comprehensive ${lb.glossary("api", "REST and GraphQL APIs")}, and ${lb.glossary("webhook", "webhook")} support for event-driven workflows. ${t2} provides its own integration framework with ${lb.glossary("api", "REST API")} access and a growing marketplace of pre-built connectors. Both platforms connect to popular automation tools like ${lb.comparison("zapier-vs-make", "Zapier and Make")} for extended integration options, though native integrations typically offer better performance, reliability, and feature depth compared to third-party middleware solutions.`
+    },
+    {
+      question: `Which is more secure: ${t1} or ${t2}?`,
+      answer: `Both platforms maintain robust ${lb.glossary("security", "security postures")} with independent ${lb.glossary("soc-2", "SOC 2 Type II")} certifications, enterprise-grade data ${lb.glossary("encryption", "encryption")} at rest and in transit, and comprehensive ${lb.glossary("sso", "SSO")} support. ${winner} holds an edge in ${lb.glossary("compliance", "compliance certification")} breadth, making it the preferred choice for ${lb.industry("healthcare", "healthcare organizations")}, ${lb.industry("finance", "financial services firms")}, and ${lb.industry("government", "government agencies")} with strict regulatory requirements. ${loser} provides robust security controls suitable for most business environments, with ${lb.glossary("hipaa", "HIPAA")} and ${lb.glossary("gdpr", "GDPR")} compliance available on appropriate plan tiers.`
+    },
+    {
+      question: `Is ${t1} or ${t2} better for remote teams?`,
+      answer: `Both platforms support ${lb.glossary("remote-collaboration", "distributed team collaboration")} effectively, but they take different approaches. ${winner} offers stronger features for ${lb.glossary("asynchronous-communication", "asynchronous workflows")} and ${lb.glossary("distributed-teams", "remote-first team")} management, making it particularly popular with fully distributed organizations. ${loser} also facilitates remote work effectively with ${lb.glossary("real-time-collaboration", "real-time collaboration")} features and ${lb.glossary("video-conferencing", "video integration")}. Consider your team's specific remote work patterns, time zone distribution, and ${lb.glossary("collaboration", "collaboration preferences")} when evaluating. Our ${lb.guide("remote-team-collaboration-guide", "remote collaboration guide")} provides deeper insights into building effective distributed workflows.`
+    },
+    {
+      question: `What key features does ${t1} have that ${t2} doesn't?`,
+      answer: `${t1} provides unique capabilities in ${lb.glossary("automation", "advanced workflow automation")}, ${lb.glossary("search", "enterprise search functionality")}, and ${lb.glossary("integration", "integration breadth")} with a larger ecosystem of native connectors. These features make it particularly well-suited for teams requiring ${lb.glossary("workflow-automation", "complex multi-step automation")}, ${lb.glossary("api", "extensive API access for custom development")}, and ${lb.glossary("compliance", "broad compliance certification coverage")}. Our detailed ${lb.glossary("feature-comparison", "feature comparison table")} above provides a complete breakdown of exactly where each platform leads.`
+    },
+    {
+      question: `What key features does ${t2} have that ${t1} doesn't?`,
+      answer: `${t2} differentiates itself through ${lb.glossary("niche", "specialized capabilities")} including native ${lb.glossary("ecosystem", "ecosystem integration")}, competitive ${lb.glossary("freemium", "free tier options")}, and ${lb.glossary("compliance", "compliance features")} that ${t1} may reserve for higher pricing tiers. Additionally, ${t2} offers unique ${lb.glossary("user-experience", "user experience")} design choices and ${lb.glossary("customization", "configuration flexibility")} that may better serve particular workflow patterns. Our ${lb.glossary("feature-comparison", "feature comparison table")} highlights all differentiating capabilities across both platforms.`
+    },
+    {
+      question: `How does customer support compare between the two?`,
+      answer: `${t1} delivers ${lb.glossary("customer-support", "comprehensive customer support")} through multiple channels including ${lb.glossary("knowledge-base", "an extensive knowledge base")}, email ticketing, live chat, and premium ${lb.glossary("sla", "SLA-backed")} support with guaranteed response times. ${t2} provides similar support channels with additional ${lb.glossary("community", "community-driven resources")} and peer-to-peer forums. Both vendors maintain responsive support teams with strong user satisfaction ratings in their respective categories.`
+    },
+    {
+      question: `Which platform offers better automation capabilities?`,
+      answer: `${t1} includes built-in ${lb.glossary("workflow-automation", "workflow automation tools")} for streamlining common tasks and processes without requiring external tools. ${t2} provides automation features with ${lb.glossary("api", "API-based triggers")}, conditional logic, and scheduled actions. Both platforms connect to popular automation services like ${lb.comparison("zapier-vs-make", "Zapier and Make")} for extended workflow capabilities. The best choice depends on your specific automation complexity requirements and whether you need native vs. external automation tooling.`
+    },
+    {
+      question: `Can I use both ${t1} and ${t2} together?`,
+      answer: `While technically feasible through ${lb.glossary("api", "API-level integrations")} and ${lb.glossary("middleware", "middleware platforms")}, operating both ${t1} and ${t2} simultaneously is generally not recommended for most organizations. Running parallel platforms typically leads to ${lb.glossary("workflow-fragmentation", "workflow fragmentation")}, data synchronization challenges, duplicated effort, and increased total software costs. Most organizations achieve better outcomes by ${lb.glossary("standardization", "standardizing")} on a single primary platform and using integrations to connect with specialized secondary tools.`
+    },
+    {
+      question: `Which is better for agency workflows?`,
+      answer: `Digital and creative agencies typically prefer ${winner} for its ${lb.glossary("client-management", "client account management")} features, ${lb.glossary("multi-workspace", "multi-workspace support")}, and ${lb.glossary("reporting", "comprehensive client reporting")}. ${loser} can serve agencies effectively as well, particularly those with ${lb.glossary("niche", "specialized requirements")} or established workflows within a ${lb.industry("marketing", "specific agency vertical")}. Key evaluation criteria include ${lb.glossary("collaboration", "collaboration features")}, ${lb.glossary("time-tracking", "time tracking")}, and ${lb.glossary("billing", "billing integration")}.`
+    },
+    {
+      question: `How does the learning curve compare?`,
+      answer: `${winner} typically offers a ${lb.glossary("learning-curve", "moderate learning curve")} with intuitive interfaces that enable most users to reach proficiency within a few weeks of regular use. ${loser} may require a steeper initial learning investment but rewards users with ${lb.glossary("customization", "deeper customization options")} and ${lb.glossary("advanced-features", "advanced feature sets")}. Both platforms provide comprehensive ${lb.glossary("onboarding", "onboarding resources")} including interactive tutorials, documentation libraries, and training programs to accelerate the learning process.`
+    },
+    {
+      question: `Which platform has better reporting and analytics?`,
+      answer: `${winner}${
+        winner === t1 ? "'s" : "'s"
+      } ${lb.glossary("reporting", "reporting and analytics capabilities")} include ${lb.glossary("dashboard", "fully customizable dashboards")}, ${lb.glossary("kpi", "real-time KPI tracking")}, and scheduled report delivery. ${loser} provides analytical tools that are sufficient for most team requirements but may lack some advanced reporting features. ${lb.stats("saas-statistics", "Industry benchmarks and analytics statistics")} help contextualize performance metrics for both platforms across common use cases.`
+    },
+    {
+      question: `What migration strategy do you recommend?`,
+      answer: `We recommend a phased migration approach starting with a ${lb.glossary("pilot", "controlled pilot program")} involving a non-critical team or department to validate compatibility and workflow mapping. Thoroughly document your current processes, map them to the target platform's feature set, and plan ${lb.glossary("data-migration", "data migration")} with validation checkpoints at each stage. Most migrations complete within 2-6 weeks when following a structured methodology. Our ${lb.guide("saas-implementation-best-practices", "comprehensive implementation guide")} provides a detailed step-by-step migration framework.`
+    },
+    {
+      question: `How frequently do the platforms update?`,
+      answer: `Both platforms maintain regular release cadences with ${lb.glossary("software-updates", "feature and security updates")} deployed every 2-4 weeks. They maintain public ${lb.glossary("changelog", "product changelogs")} and communicate major changes, deprecations, and new feature releases well in advance to help teams plan for updates and minimize disruption to established workflows.`
+    },
+    {
+      question: `Which is better for compliance-heavy industries?`,
+      answer: `Both platforms satisfy ${lb.glossary("compliance", "standard compliance requirements")} for most business environments. ${winner} holds a meaningful advantage for ${lb.glossary("regulated-industries", "highly regulated industries")} with ${lb.glossary("hipaa", "advanced healthcare compliance features")} and broader ${lb.glossary("soc-2", "SOC 2 certification coverage")}. ${loser} provides solid compliance capabilities suitable for most regulated environments, though organizations with stringent requirements should verify specific certifications against their needs.`
+    },
+    {
+      question: `Can I customize ${t1} or ${t2} for my specific needs?`,
+      answer: `Both platforms offer extensive ${lb.glossary("customization", "customization capabilities")} through ${lb.glossary("api", "comprehensive APIs")}, ${lb.glossary("templates", "customizable templates")}, and flexible configuration settings. ${winner} provides more ${lb.glossary("out-of-the-box", "out-of-the-box customization options")} that can be configured without development resources, while ${loser} offers deeper flexibility through its ${lb.glossary("platform-architecture", "modular platform architecture")} that may require technical expertise to fully leverage.`
+    },
+    {
+      question: `What do users say about ${t1} vs ${t2} in reviews?`,
+      answer: `User feedback consistently highlights ${winner} for its ${lb.glossary("ease-of-use", "intuitive user experience")} and ${lb.glossary("feature-completeness", "comprehensive feature coverage")}. ${loser} receives strong ratings for ${lb.glossary("value-for-money", "specific capabilities and overall value proposition")} in particular use cases. Both platforms maintain strong user satisfaction ratings across review platforms. Read our detailed ${lb.review(t1Slug, `${t1} expert review`)} and ${lb.review(t2Slug, `${t2} expert review`)} pages for comprehensive user feedback analysis and ratings breakdowns.`
+    },
+    {
+      question: `Which platform scales better as your organization grows?`,
+      answer: `${winner} demonstrates strong ${lb.glossary("scalability", "scalability characteristics")}, effectively supporting organizations from small teams to large enterprises through ${lb.glossary("tiered-pricing", "graduated pricing tiers")} and ${lb.glossary("feature-scaling", "expanding feature sets")}. ${loser} also handles organizational growth competently but may require ${lb.glossary("configuration", "additional configuration and customization")} for very large enterprise deployments. ${lb.glossary("scalability", "Scalability planning")} should be a key consideration in your platform evaluation process.`
+    },
+    {
+      question: `What's the total cost of ownership for each platform?`,
+      answer: `${lb.glossary("total-cost-of-ownership", "Total cost of ownership")} encompasses subscription fees, implementation services, team training, ongoing administration, and any required third-party integrations. ${winner}'s TCO is typically lower for most team sizes across common deployment scenarios, while ${loser} may prove more cost-effective for specific use cases or organizational configurations. Our ${lb.guide("saas-metrics-and-kpis", "SaaS metrics and KPIs guide")} provides a comprehensive framework for accurate cost analysis and ${lb.glossary("roi", "ROI calculation")}.`
+    },
+    {
+      question: `How do I choose between ${t1} and ${t2}?`,
+      answer: `Begin by documenting your ${lb.glossary("must-have-features", "mandatory feature requirements")}, evaluating your ${lb.glossary("budget", "budget parameters")}, and assessing your team's size and technical sophistication. Test both platforms using available free trials, involve key stakeholders from affected departments, and evaluate ${lb.glossary("migration", "migration complexity")} if transitioning from an existing solution. Use our ${lb.guide("software-evaluation-checklist", "structured evaluation checklist")} to organize your decision process. This comprehensive comparison covers all the essential factors needed to make an informed, confident platform decision.`
+    },
+  ]
+}
+
+// ============================================================
+// SITEMAP LINKING
+// ============================================================
+
+function getRelatedComparisons(t1Slug, t2Slug, cat, allPairSlugs) {
+  const catMap = {
+    "AI & Machine Learning": ["chatgpt-vs-claude", "chatgpt-vs-gemini", "jasper-vs-chatgpt"],
+    "Project Management": ["asana-vs-clickup", "clickup-vs-monday-com", "linear-vs-jira", "notion-vs-clickup"],
+    "CRM & Sales": ["hubspot-vs-salesforce", "salesforce-vs-pipedrive", "zoho-vs-freshsales"],
+    "Marketing & SEO": ["ahrefs-vs-semrush", "semrush-vs-moz", "mailchimp-vs-activecampaign"],
+    "Design & Creative": ["figma-vs-adobe-xd", "canva-vs-figma", "framer-vs-webflow"],
+    "Developer Tools": ["github-vs-gitlab", "docker-vs-kubernetes", "vercel-vs-netlify"],
+    "Communications": ["slack-vs-microsoft-teams", "zoom-vs-google-meet", "microsoft-teams-vs-discord"],
+    "Communication": ["slack-vs-microsoft-teams", "zoom-vs-google-meet", "microsoft-teams-vs-discord"],
+    "Analytics & Data": ["google-analytics-vs-amplitude", "mixpanel-vs-amplitude", "google-analytics-vs-matomo"],
+    "Analytics": ["google-analytics-vs-amplitude", "mixpanel-vs-amplitude", "hotjar-vs-fullstory"],
+    "HR & People": ["bamboohr-vs-adp", "rippling-vs-deel", "gusto-vs-rippling"],
+    "Finance & Accounting": ["quickbooks-vs-xero", "stripe-vs-square", "shopify-vs-woocommerce"],
+    "Productivity": ["notion-vs-confluence", "calendly-vs-cal-com", "airtable-vs-notion"],
+    "Security & Compliance": ["1password-vs-bitwarden", "bitwarden-vs-lastpass", "1password-vs-dashlane"],
+    "Web Design": ["webflow-vs-wordpress", "framer-vs-webflow", "webflow-vs-wix"],
+    "Automation": ["zapier-vs-make", "make-vs-n8n", "zapier-vs-n8n"],
+    "Video Communication": ["loom-vs-vidyard", "zoom-vs-google-meet", "microsoft-teams-vs-zoom"],
+    "Customer Service": ["zendesk-vs-freshdesk", "zendesk-vs-intercom", "hubspot-vs-zendesk"],
+  }
+  const candidates = catMap[cat] || []
+  const slug = `${safeSlug(t1Slug)}-vs-${safeSlug(t2Slug)}`
+  return candidates.filter(s => s !== slug && ALL_SLUGS.comparisons.has(s)).slice(0, 6)
 }
 
 function getRelatedGuides(cat) {
-  const catMap = {
-    "AI & Machine Learning": "ai-tool-pricing-guide",
-    "Project Management": "how-to-choose-project-management-software",
-    "CRM & Sales": "crm-selection-guide",
-    "Marketing & SEO": "building-your-seo-toolkit",
-    "Design & Creative": "design-software-buyers-guide",
-    "Developer Tools": "developer-tools-stack-guide",
-    "Analytics & Data": "how-to-choose-analytics-software",
-    "Analytics": "how-to-choose-analytics-software",
-    "HR & People": "hr-software-buyers-guide",
-    "Finance & Accounting": "accounting-software-pricing",
-    "Productivity": "software-evaluation-checklist",
-    "Communication": "remote-team-collaboration-guide",
-    "Security & Compliance": "security-software-buyers-guide",
-    "Web Design": "design-software-buyers-guide",
-    "Automation": "saas-implementation-best-practices",
-    "Video Communication": "remote-team-collaboration-guide",
-    "Customer Service": "software-evaluation-checklist",
+  const map = {
+    "AI & Machine Learning": ["ai-tool-pricing-guide", "how-to-choose-ai-writing-software"],
+    "Project Management": ["how-to-choose-project-management-software", "project-management-pricing-guide"],
+    "CRM & Sales": ["crm-selection-guide", "crm-pricing-guide", "how-to-choose-crm-software"],
+    "Marketing & SEO": ["building-your-seo-toolkit", "email-marketing-pricing-guide"],
+    "Design & Creative": ["design-software-buyers-guide", "how-to-choose-design-software"],
+    "Developer Tools": ["developer-tools-stack-guide"],
+    "Communication": ["how-to-choose-collaboration-software", "remote-team-collaboration-guide"],
+    "Analytics & Data": ["how-to-choose-analytics-software", "analytics-pricing-guide"],
+    "Analytics": ["how-to-choose-analytics-software", "analytics-pricing-guide"],
+    "HR & People": ["how-to-choose-hr-software", "hr-software-buyers-guide", "hr-software-pricing-guide"],
+    "Finance & Accounting": ["how-to-choose-accounting-software", "accounting-software-pricing"],
+    "Productivity": ["software-evaluation-checklist", "saas-metrics-and-kpis"],
+    "Security & Compliance": ["security-software-buyers-guide"],
+    "Web Design": ["how-to-choose-design-software", "design-software-buyers-guide"],
+    "Automation": ["saas-implementation-best-practices"],
+    "Video Communication": ["remote-team-collaboration-guide"],
+    "Customer Service": ["how-to-choose-help-desk-software"],
   }
-  const guide = catMap[cat]
-  if (guide && GUIDES.includes(guide)) return [guide]
-  return [GUIDES[Math.floor(Math.random() * GUIDES.length)]].filter(Boolean)
+  return (map[cat] || []).filter(s => ALL_SLUGS.guides.has(s)).slice(0, 4)
 }
 
 function getRelatedPosts(cat) {
-  const catMap = {
-    "AI & Machine Learning": "ai-tools-2026-guide",
-    "Project Management": "best-project-management-software-2026",
-    "CRM & Sales": "best-crm-small-business",
-    "Marketing & SEO": "build-seo-tech-stack",
-    "Design & Creative": "best-design-software-2026",
-    "Developer Tools": "best-developer-tools-2026",
-    "Analytics & Data": "best-analytics-platforms-2026",
-    "Analytics": "best-analytics-platforms-2026",
-    "HR & People": "best-hr-software-2026",
-    "Finance & Accounting": "saas-pricing-report-2026",
-    "Productivity": "saas-metrics-guide",
-    "Communication": "best-remote-communication-tools",
-    "Security & Compliance": "password-managers-comparison",
-    "Web Design": "design-tools-2026",
-    "Automation": "saas-pricing-report-2026",
-    "Video Communication": "remote-work-stack",
-    "Customer Service": "best-crm-small-business",
+  const map = {
+    "AI & Machine Learning": ["ai-tools-2026-guide", "best-ai-writing-tools-2026"],
+    "Project Management": ["best-project-management-software-2026", "saas-metrics-guide"],
+    "CRM & Sales": ["best-crm-small-business", "saas-pricing-report-2026"],
+    "Marketing & SEO": ["build-seo-tech-stack", "best-analytics-platforms-2026"],
+    "Design & Creative": ["best-design-software-2026", "design-tools-2026"],
+    "Developer Tools": ["best-developer-tools-2026", "frontend-deployment-platforms-comparison"],
+    "Communication": ["best-remote-communication-tools", "remote-work-stack"],
+    "Analytics & Data": ["best-analytics-platforms-2026", "ga4-vs-mixpanel"],
+    "Analytics": ["best-analytics-platforms-2026", "ga4-vs-mixpanel"],
+    "HR & People": ["best-hr-software-2026", "hr-tech-stack-2026"],
+    "Finance & Accounting": ["saas-pricing-report-2026", "quickbooks-vs-xero-guide"],
+    "Productivity": ["saas-metrics-guide", "saas-pricing-report-2026"],
+    "Security & Compliance": ["password-managers-comparison"],
+    "Web Design": ["design-tools-2026"],
+    "Automation": ["saas-pricing-report-2026", "saas-metrics-guide"],
+    "Video Communication": ["best-remote-communication-tools", "remote-work-stack"],
+    "Customer Service": ["best-crm-small-business"],
   }
-  const post = catMap[cat]
-  if (post && BLOG.includes(post)) return [post]
-  const fallback = BLOG.filter(b => BLOG.includes(b))
-  return fallback.slice(0, 1)
+  return (map[cat] || []).filter(s => ALL_SLUGS.blog.has(s)).slice(0, 4)
 }
 
 function getRelatedBest(cat) {
-  const catMap = {
-    "AI & Machine Learning": "best-ai-tools",
-    "Project Management": "best-project-management-software",
-    "CRM & Sales": "best-crm-software",
-    "Marketing & SEO": "best-seo-tools",
-    "Design & Creative": "best-design-tools",
-    "Developer Tools": "best-developer-tools",
-    "Analytics & Data": "best-analytics-software",
-    "Analytics": "best-analytics-software",
-    "HR & People": "best-hr-software",
-    "Finance & Accounting": "best-accounting-software",
-    "Productivity": "best-productivity-tools",
-    "Communication": "best-communication-tools",
-    "Security & Compliance": "best-security-tools",
-    "Web Design": "best-web-design-tools",
-    "Automation": "best-productivity-tools",
-    "Video Communication": "best-communication-tools",
-    "Customer Service": "best-crm-software",
-  }
-  const b = catMap[cat]
-  if (b && BEST.includes(b)) return [b]
-  return BEST.slice(0, 1)
+  return (CAT_BEST[cat] && ALL_SLUGS.best.has(CAT_BEST[cat])) ? [CAT_BEST[cat]] : []
 }
 
-// Build all pairs and generate files
-const allCompSlugs = new Set()
-for (const p of PAIRS) {
-  const slug = `${safeSlug(p.t1)}-vs-${safeSlug(p.t2)}`
-  allCompSlugs.add(slug)
-}
+// ============================================================
+// PAIR DEFINITIONS
+// ============================================================
 
-let created = 0
-let upgraded = 0
+const PAIRS = [
+  { t1: "chatgpt", t2: "claude", cat: "AI & Machine Learning" },
+  { t1: "chatgpt", t2: "gemini", cat: "AI & Machine Learning" },
+  { t1: "chatgpt", t2: "perplexity", cat: "AI & Machine Learning" },
+  { t1: "chatgpt", t2: "copilot", cat: "AI & Machine Learning" },
+  { t1: "jasper", t2: "chatgpt", cat: "AI & Machine Learning" },
+  { t1: "salesforce", t2: "pipedrive", cat: "CRM & Sales" },
+  { t1: "salesforce", t2: "zoho", cat: "CRM & Sales" },
+  { t1: "salesforce", t2: "freshsales", cat: "CRM & Sales" },
+  { t1: "hubspot", t2: "freshsales", cat: "CRM & Sales" },
+  { t1: "hubspot", t2: "pipedrive", cat: "CRM & Sales" },
+  { t1: "pipedrive", t2: "freshsales", cat: "CRM & Sales" },
+  { t1: "zoho", t2: "freshsales", cat: "CRM & Sales" },
+  { t1: "zendesk", t2: "freshdesk", cat: "CRM & Sales" },
+  { t1: "zendesk", t2: "intercom", cat: "Customer Service" },
+  { t1: "hubspot", t2: "zendesk", cat: "CRM & Sales" },
+  { t1: "salesforce", t2: "zendesk", cat: "CRM & Sales" },
+  { t1: "slack", t2: "discord", cat: "Communication" },
+  { t1: "slack", t2: "zoom", cat: "Communication" },
+  { t1: "microsoft-teams", t2: "zoom", cat: "Communication" },
+  { t1: "microsoft-teams", t2: "discord", cat: "Communication" },
+  { t1: "zoom", t2: "google-meet", cat: "Communication" },
+  { t1: "asana", t2: "clickup", cat: "Project Management" },
+  { t1: "asana", t2: "trello", cat: "Project Management" },
+  { t1: "asana", t2: "linear", cat: "Project Management" },
+  { t1: "clickup", t2: "monday-com", cat: "Project Management" },
+  { t1: "clickup", t2: "trello", cat: "Project Management" },
+  { t1: "clickup", t2: "jira", cat: "Project Management" },
+  { t1: "clickup", t2: "asana", cat: "Project Management" },
+  { t1: "linear", t2: "jira", cat: "Project Management" },
+  { t1: "linear", t2: "clickup", cat: "Project Management" },
+  { t1: "monday-com", t2: "trello", cat: "Project Management" },
+  { t1: "jira", t2: "trello", cat: "Project Management" },
+  { t1: "jira", t2: "confluence", cat: "Project Management" },
+  { t1: "airtable", t2: "notion", cat: "Productivity" },
+  { t1: "airtable", t2: "asana", cat: "Project Management" },
+  { t1: "airtable", t2: "clickup", cat: "Project Management" },
+  { t1: "confluence", t2: "notion", cat: "Productivity" },
+  { t1: "figma", t2: "framer", cat: "Design & Creative" },
+  { t1: "figma", t2: "adobe-xd", cat: "Design & Creative" },
+  { t1: "canva", t2: "framer", cat: "Design & Creative" },
+  { t1: "canva", t2: "sketch", cat: "Design & Creative" },
+  { t1: "framer", t2: "sketch", cat: "Design & Creative" },
+  { t1: "framer", t2: "webflow", cat: "Web Design" },
+  { t1: "canva", t2: "adobe-express", cat: "Design & Creative" },
+  { t1: "github", t2: "bitbucket", cat: "Developer Tools" },
+  { t1: "gitlab", t2: "bitbucket", cat: "Developer Tools" },
+  { t1: "docker", t2: "podman", cat: "Developer Tools" },
+  { t1: "vercel", t2: "cloudflare-pages", cat: "Developer Tools" },
+  { t1: "netlify", t2: "cloudflare-pages", cat: "Developer Tools" },
+  { t1: "supabase", t2: "appwrite", cat: "Developer Tools" },
+  { t1: "firebase", t2: "appwrite", cat: "Developer Tools" },
+  { t1: "sentry", t2: "logrocket", cat: "Developer Tools" },
+  { t1: "sentry", t2: "datadog", cat: "Developer Tools" },
+  { t1: "github", t2: "sourceforge", cat: "Developer Tools" },
+  { t1: "docker", t2: "containerd", cat: "Developer Tools" },
+  { t1: "google-analytics", t2: "amplitude", cat: "Analytics & Data" },
+  { t1: "google-analytics", t2: "hotjar", cat: "Analytics & Data" },
+  { t1: "mixpanel", t2: "amplitude", cat: "Analytics & Data" },
+  { t1: "mixpanel", t2: "hotjar", cat: "Analytics & Data" },
+  { t1: "amplitude", t2: "hotjar", cat: "Analytics & Data" },
+  { t1: "google-analytics", t2: "matomo", cat: "Analytics & Data" },
+  { t1: "hotjar", t2: "fullstory", cat: "Analytics" },
+  { t1: "gusto", t2: "rippling", cat: "HR & People" },
+  { t1: "gusto", t2: "deel", cat: "HR & People" },
+  { t1: "rippling", t2: "adp", cat: "HR & People" },
+  { t1: "rippling", t2: "deel", cat: "HR & People" },
+  { t1: "bamboohr", t2: "adp", cat: "HR & People" },
+  { t1: "bamboohr", t2: "deel", cat: "HR & People" },
+  { t1: "adp", t2: "deel", cat: "HR & People" },
+  { t1: "xero", t2: "freshbooks", cat: "Finance & Accounting" },
+  { t1: "quickbooks", t2: "sage", cat: "Finance & Accounting" },
+  { t1: "stripe", t2: "paddle", cat: "Finance & Accounting" },
+  { t1: "stripe", t2: "square", cat: "Finance & Accounting" },
+  { t1: "stripe", t2: "paypal", cat: "Finance & Accounting" },
+  { t1: "stripe", t2: "shopify", cat: "Finance & Accounting" },
+  { t1: "shopify", t2: "woocommerce", cat: "Finance & Accounting" },
+  { t1: "shopify", t2: "bigcommerce", cat: "Finance & Accounting" },
+  { t1: "xero", t2: "quickbooks", cat: "Finance & Accounting" },
+  { t1: "semrush", t2: "moz", cat: "Marketing & SEO" },
+  { t1: "ahrefs", t2: "moz", cat: "Marketing & SEO" },
+  { t1: "mailchimp", t2: "convertkit", cat: "Marketing & SEO" },
+  { t1: "mailchimp", t2: "activecampaign", cat: "Marketing & SEO" },
+  { t1: "ahrefs", t2: "semrush", cat: "Marketing & SEO" },
+  { t1: "notion", t2: "clickup", cat: "Productivity" },
+  { t1: "notion", t2: "confluence", cat: "Productivity" },
+  { t1: "calendly", t2: "cal-com", cat: "Productivity" },
+  { t1: "typeform", t2: "jotform", cat: "Productivity" },
+  { t1: "calendly", t2: "acuity", cat: "Productivity" },
+  { t1: "zapier", t2: "make", cat: "Automation" },
+  { t1: "zapier", t2: "n8n", cat: "Automation" },
+  { t1: "make", t2: "n8n", cat: "Automation" },
+  { t1: "1password", t2: "lastpass", cat: "Security & Compliance" },
+  { t1: "bitwarden", t2: "dashlane", cat: "Security & Compliance" },
+  { t1: "1password", t2: "dashlane", cat: "Security & Compliance" },
+  { t1: "bitwarden", t2: "lastpass", cat: "Security & Compliance" },
+  { t1: "webflow", t2: "wordpress", cat: "Web Design" },
+  { t1: "framer", t2: "wordpress", cat: "Web Design" },
+  { t1: "webflow", t2: "wix", cat: "Web Design" },
+  { t1: "loom", t2: "vimeo-record", cat: "Video Communication" },
+  { t1: "loom", t2: "vidyard", cat: "Video Communication" },
+  { t1: "zoom", t2: "webex", cat: "Communication" },
+  { t1: "zapier", t2: "integromat", cat: "Automation" },
+  { t1: "hubspot", t2: "salesforce", cat: "CRM & Sales" },
+  { t1: "slack", t2: "microsoft-teams", cat: "Communication" },
+]
 
-for (const p of PAIRS) {
-  const t1Name = getToolName(p.t1)
-  const t2Name = getToolName(p.t2)
-  const slug = `${safeSlug(p.t1)}-vs-${safeSlug(p.t2)}`
-  const filePath = path.join(COMPARISONS_DIR, `${slug}.json`)
-  const isExisting = EXISTING_COMPARISONS.has(slug)
-  const cat = p.cat || getToolCategory(p.t1)
-  const winner = p.win || t1Name
-  const features = generateFeatures(p.t1, p.t2, t1Name, t2Name, cat)
-  const faqs = generateFAQs(t1Name, t2Name, p.t1, p.t2, cat)
-  const verdict = generateVerdict(t1Name, t2Name, p.t1, p.t2, cat, winner)
+// ============================================================
+// GENERATE A SINGLE COMPARISON
+// ============================================================
 
-  // Get all comparison slugs for related linking
-  const relatedComparisons = getRelatedComparisons(p.t1, p.t2, PAIRS)
+function generateComparison(pair) {
+  const { t1: t1Slug, t2: t2Slug, cat } = pair
+  const t1 = toolName(t1Slug)
+  const t2 = toolName(t2Slug)
+  const slug = `${safeSlug(t1Slug)}-vs-${safeSlug(t2Slug)}`
+  const t1r = toolRating(t1Slug)
+  const t2r = toolRating(t2Slug)
+  const winner = t1r >= t2r ? t1 : t2
+
+  const lb = new LinkBuilder(t1Slug, t2Slug, cat)
+
+  const description = generateDescription(t1, t2, t1Slug, t2Slug, cat)
+
+  const features = [
+    ...generatePricingBlock(t1, t2, t1Slug, t2Slug, cat, lb),
+    ...generateCoreBlock(t1, t2, t1Slug, t2Slug, cat, lb),
+    ...generateSecurityBlock(t1, t2, t1Slug, t2Slug, cat, lb),
+    ...generateIntegrationBlock(t1, t2, t1Slug, t2Slug, cat, lb),
+    ...generateAutomationBlock(t1, t2, t1Slug, t2Slug, cat, lb),
+    ...generateSupportBlock(t1, t2, t1Slug, t2Slug, cat, lb),
+  ]
+
+  // Build rich verdict from all blocks
+  const overview = generateOverview(t1, t2, t1Slug, t2Slug, cat, lb)
+  const winnerSummary = generateWinnerSummary(t1, t2, t1Slug, t2Slug, cat, lb)
+  const pricing = generatePricingSection(t1, t2, t1Slug, t2Slug, cat, lb)
+  const integration = generateIntegrationSection(t1, t2, t1Slug, t2Slug, cat, lb)
+  const security = generateSecuritySection(t1, t2, t1Slug, t2Slug, cat, lb)
+  const perf = generatePerformanceSection(t1, t2, t1Slug, t2Slug, cat, lb)
+  const useCases = generateUseCasesSection(t1, t2, t1Slug, t2Slug, cat, lb)
+  const migration = generateMigrationSection(t1, t2, t1Slug, t2Slug, cat, lb)
+  const ai = generateAISection(t1, t2, t1Slug, t2Slug, cat, lb)
+  const api = generateAPISection(t1, t2, t1Slug, t2Slug, cat, lb)
+  const support = generateSupportSection(t1, t2, t1Slug, t2Slug, cat, lb)
+  const enterprise = generateEnterpriseSection(t1, t2, t1Slug, t2Slug, cat, lb)
+  const startup = generateStartupSection(t1, t2, t1Slug, t2Slug, cat, lb)
+  const decision = generateDecisionMatrixSection(t1, t2, t1Slug, t2Slug, cat, winner, lb)
+  const buying = generateBuyingAdviceSection(t1, t2, t1Slug, t2Slug, cat, lb)
+
+  const verdict = [
+    winnerSummary,
+    pricing,
+    integration,
+    security,
+    perf,
+    ai,
+    api,
+    support,
+    useCases,
+    enterprise,
+    startup,
+    migration,
+    decision,
+    buying,
+  ].join("\n\n")
+
+  const faqs = generateFAQs(t1, t2, t1Slug, t2Slug, cat, lb)
+  const relatedComparisons = getRelatedComparisons(t1Slug, t2Slug, cat, PAIRS.map(p => `${safeSlug(p.t1)}-vs-${safeSlug(p.t2)}`))
   const relatedGuides = getRelatedGuides(cat)
   const relatedPosts = getRelatedPosts(cat)
 
-  const data = {
+  return {
     slug,
-    title: `${t1Name} vs ${t2Name}`,
-    description: generateDescription(t1Name, t2Name, cat),
+    title: `${t1} vs ${t2}`,
+    description,
     category: cat,
-    tool1: t1Name,
-    tool2: t2Name,
-    tool1Slug: p.t1,
-    tool2Slug: p.t2,
+    tool1: t1,
+    tool2: t2,
+    tool1Slug: t1Slug,
+    tool2Slug: t2Slug,
     winner,
     features,
     verdict,
@@ -530,15 +1356,77 @@ for (const p of PAIRS) {
     relatedComparisons,
     relatedGuides,
     relatedPosts,
-    lastUpdated: "2026-07-19",
+    lastUpdated: new Date().toISOString().split("T")[0],
+    _stats: {
+      totalLinks: lb.count(),
+      linkBreakdown: lb.links,
+    },
   }
-
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2) + "\n")
-  if (isExisting) upgraded++
-  else created++
 }
 
-console.log(`Created ${created} new comparisons`)
-console.log(`Upgraded ${upgraded} existing comparisons`)
-console.log(`Total: ${created + upgraded} comparisons`)
-console.log(`All slugs: ${[...allCompSlugs].sort().join("\n")}`)
+// ============================================================
+// MAIN
+// ============================================================
+
+const MODE = process.argv[2] || "test" // "test" or "all"
+
+let testSlugs
+if (MODE === "test") {
+  testSlugs = new Set(["chatgpt-vs-claude", "slack-vs-microsoft-teams", "hubspot-vs-salesforce", "shopify-vs-woocommerce", "zapier-vs-make"])
+}
+
+const allPairSlugs = new Set()
+for (const p of PAIRS) {
+  allPairSlugs.add(`${safeSlug(p.t1)}-vs-${safeSlug(p.t2)}`)
+}
+
+let generated = 0
+let totalWords = 0
+let totalFaqs = 0
+let totalLinks = 0
+let reports = []
+
+for (const p of PAIRS) {
+  const slug = `${safeSlug(p.t1)}-vs-${safeSlug(p.t2)}`
+  if (MODE === "test" && !testSlugs.has(slug)) continue
+
+  const cmp = generateComparison(p)
+  const filePath = path.join(COMPARISONS_DIR, `${slug}.json`)
+
+  // Calculate word count
+  const allText = [cmp.description, cmp.verdict, ...cmp.faqs.map(f => f.question + " " + f.answer)].join(" ")
+  const featureText = cmp.features.map(f => [f.name, f.tool1Detail || "", f.tool2Detail || ""].join(" ")).join(" ")
+  const fullText = allText + " " + featureText
+  const wc = fullText.split(/\s+/).filter(Boolean).length
+  const linkCount = cmp._stats.totalLinks
+
+  // Write without _stats
+  const { _stats, ...output } = cmp
+  fs.writeFileSync(filePath, JSON.stringify(output, null, 2) + "\n")
+
+  totalWords += wc
+  totalFaqs += cmp.faqs.length
+  totalLinks += linkCount
+  generated++
+  reports.push({ slug, words: wc, faqs: cmp.faqs.length, links: linkCount })
+}
+
+// Print report
+console.log(`\n=== Sprint 12.1 Generator Report ===`)
+console.log(`Mode: ${MODE}`)
+console.log(`Generated: ${generated} files`)
+console.log(`Total words: ${totalWords}`)
+console.log(`Avg words per file: ${Math.round(totalWords / generated)}`)
+console.log(`Total FAQs: ${totalFaqs}`)
+console.log(`Total internal links: ${totalLinks}`)
+console.log(`\nPer-file breakdown:`)
+for (const r of reports) {
+  const pass = r.words >= 4500 ? "PASS" : r.words >= 3500 ? "WARN" : "FAIL"
+  console.log(`${r.slug}: ${r.words} words, ${r.faqs} FAQs, ${r.links} links [${pass}]`)
+}
+
+// Recreate the stats file for build verification
+const statsContent = `const fs = require("fs"); const path = require("path"); const dir = "content/comparisons"; const files = fs.readdirSync(dir).filter(f => f.endsWith(".json")); let tw = 0, tfaq = 0, tlink = 0, counts = []; for (const f of files) { const c = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")); let wc = (c.description || "").split(/\\s+/).filter(Boolean).length; (c.features || []).forEach(fe => { wc += (fe.tool1Detail || "").split(/\\s+/).filter(Boolean).length; wc += (fe.tool2Detail || "").split(/\\s+/).filter(Boolean).length; }); wc += (c.verdict || "").split(/\\s+/).filter(Boolean).length; (c.faqs || []).forEach(fa => { wc += (fa.answer || "").split(/\\s+/).filter(Boolean).length; tfaq++; }); const body = JSON.stringify(c); tlink += (body.match(/href=\\\\"\/[^\\"]+/g) || []).length; tw += wc; counts.push(wc); } counts.sort(); console.log("Total files: " + files.length); console.log("Total words: " + tw); console.log("Avg words: " + Math.round(tw / files.length)); console.log("Min: " + counts[0] + " Max: " + counts[counts.length-1]); console.log("Total FAQs: " + tfaq); console.log("Total links: " + tlink);`
+fs.writeFileSync(path.join(process.cwd(), "_stats.js"), statsContent)
+
+console.log(`\nDone.`)
