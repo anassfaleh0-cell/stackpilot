@@ -154,14 +154,3 @@ export const adPlacements: Record<string, PageAdProfile> = {
   },
 }
 
-export const monetagConfig = {
-  publisherId: "", // Set after Monetag account creation
-  adRefreshIntervalMs: 60_000,
-  lazyLoadOffset: "200px",
-  respectReducedMotion: true,
-  minPageWidthForDisplay: 320,
-  respectDNT: true,
-  gdprCompliant: true,
-  noAdBlockOverlay: true,
-  viewabilityThreshold: 0.5,
-}
