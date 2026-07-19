@@ -39,7 +39,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://pilotstack.online"),
+  metadataBase: new URL(siteConfig.url),
   title: {
     template: `%s | ${siteConfig.name}`,
     default: `${siteConfig.name} - ${siteConfig.description}`,

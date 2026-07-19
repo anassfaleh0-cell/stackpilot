@@ -3,7 +3,7 @@ export const site = {
   tagline: "Navigate your software stack with confidence",
   description:
     "In-depth software reviews, expert comparisons, and actionable guides to help businesses choose, implement, and optimize the right tools for every need.",
-  url: "https://pilotstack.online",
+  url: "https://www.pilotstack.online",
   logo: "/logo.svg",
   locale: "en_US",
   links: {

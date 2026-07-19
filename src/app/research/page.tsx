@@ -7,6 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 import Link from "next/link"
 import { ArrowRight, FileText } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
+import { site } from "@/lib/constants"
 
 export const metadata = createMetadata({
   title: "Research Reports",
@@ -41,7 +42,7 @@ const reports = [
 export default function ResearchPage() {
   return (
     <>
-      <CollectionPageSchema name="Research Reports" description="Original research reports on software pricing, market trends, and industry benchmarks" url="https://pilotstack.online/research" />
+      <CollectionPageSchema name="Research Reports" description="Original research reports on software pricing, market trends, and industry benchmarks" url={`${site.url}/research`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Research", href: "/research" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Research" }]} />

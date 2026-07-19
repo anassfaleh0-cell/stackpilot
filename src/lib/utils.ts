@@ -28,5 +28,5 @@ export function truncate(str: string, length: number) {
 }
 
 export function absoluteUrl(path: string) {
-  return `${process.env.NEXT_PUBLIC_SITE_URL || "https://pilotstack.online"}${path}`
+  return `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.pilotstack.online"}${path}`
 }

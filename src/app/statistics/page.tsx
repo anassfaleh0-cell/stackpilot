@@ -7,6 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 import Link from "next/link"
 import { ArrowRight, BarChart3 } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
+import { site } from "@/lib/constants"
 
 export const metadata = createMetadata({
   title: "Software Statistics & Market Data",
@@ -56,7 +57,7 @@ const statCategories = [
 export default function StatisticsPage() {
   return (
     <>
-      <CollectionPageSchema name="Software Statistics & Market Data" description="Verified software statistics with original sources" url="https://pilotstack.online/statistics" />
+      <CollectionPageSchema name="Software Statistics & Market Data" description="Verified software statistics with original sources" url={`${site.url}/statistics`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Statistics", href: "/statistics" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Statistics" }]} />
