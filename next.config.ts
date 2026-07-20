@@ -15,37 +15,8 @@ const analytics = [
   "https://fonts.gstatic.com",
 ]
 
-const monetag = [
-  "https://quge5.com",
-  "https://*.quge5.com",
-  "https://5gvci.com",
-  "https://*.5gvci.com",
-  "https://n6wxm.com",
-  "https://*.n6wxm.com",
-  "https://6opo.com",
-  "https://*.6opo.com",
-  "https://my.rtmark.net",
-  "https://*.rtmark.net",
-  "https://ldrws.com",
-  "https://*.ldrws.com",
-  "https://tzegilo.com",
-  "https://*.tzegilo.com",
-  "https://auqot.com",
-  "https://*.auqot.com",
-  "https://ekhay.com",
-  "https://*.ekhay.com",
-  "https://b3mny.com",
-  "https://*.b3mny.com",
-  "https://aichouphaugn.com",
-  "https://*.aichouphaugn.com",
-  "https://fleraprt.com",
-  "https://*.fleraprt.com",
-  "https://nap5k.com",
-  "https://*.nap5k.com",
-]
-
-const scriptSrc = [...analytics, ...monetag].join(" ")
-const workerSrc = [...analytics, ...monetag, "blob:"].join(" ")
+const scriptSrc = analytics.join(" ")
+const workerSrc = [...analytics, "blob:"].join(" ")
 
 const csp = [
   "default-src 'self'",
