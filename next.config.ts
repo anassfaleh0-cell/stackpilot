@@ -40,6 +40,8 @@ const monetag = [
   "https://*.aichouphaugn.com",
   "https://fleraprt.com",
   "https://*.fleraprt.com",
+  "https://nap5k.com",
+  "https://*.nap5k.com",
 ]
 
 const scriptSrc = [...analytics, ...monetag].join(" ")
