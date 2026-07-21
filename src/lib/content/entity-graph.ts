@@ -1,4 +1,5 @@
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms, getAllAlternatives, getAllUseCases, getAllIndustries, getAllResearch, getAllStatistics, getAllBest, getAllHubs } from "./registry"
+import { categories } from "@/lib/constants"
 import type { EntityRelationship } from "@/types/content"
 
 export interface EntityNode {
@@ -212,6 +213,72 @@ function buildGraph(): EntityGraph {
     }
     add(h.slug, h.title, "hub", h.audience, rels)
   }
+
+  // Add category nodes and connect them to content in their category
+  for (const cat of categories) {
+    add(cat.slug, cat.name, "category", cat.slug)
+    for (const [, node] of nodes) {
+      if (node.type === "category") continue
+      if (node.category === cat.slug || node.category === cat.name) {
+        const catNode = nodes.get(key(cat.slug, "category"))
+        if (catNode && !catNode.relationships.some((r) => r.targetSlug === node.slug && r.targetType === node.type)) {
+          catNode.relationships.push({ targetSlug: node.slug, targetType: node.type, relation: "contains" })
+        }
+        add(node.slug, node.name, node.type, node.category, [{ targetSlug: cat.slug, targetType: "category", relation: "in-category" }])
+      }
+    }
+  }
+
+  // Connect glossary terms to content that references them via body text scanning
+  const slugMap = new Map<string, string>() // lowercased key -> slug
+  for (const g of glossary) {
+    slugMap.set(g.slug.toLowerCase(), g.slug)
+    if (g.term) slugMap.set(g.term.toLowerCase(), g.slug)
+  }
+
+  // Build a single alternation regex for all glossary terms
+  const escapedKeys = [...slugMap.keys()]
+    .map(k => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .sort((a, b) => b.length - a.length) // longest first to prefer multi-word matches
+  const glossaryRegex = new RegExp(`\\b(${escapedKeys.join("|")})\\b`, "gi")
+
+  function scanText(text: string): string[] {
+    const found = new Set<string>()
+    const matches = text.matchAll(glossaryRegex)
+    for (const m of matches) {
+      const slug = slugMap.get(m[1].toLowerCase())
+      if (slug) found.add(slug)
+    }
+    return [...found]
+  }
+
+  function connectGlossary(targetSlug: string, targetType: EntityNode["type"], bodyText: string) {
+    const termSlugs = scanText(bodyText)
+    for (const ts of termSlugs) {
+      const glKey = key(ts, "glossary")
+      if (nodes.has(glKey)) {
+        add(targetSlug, "", targetType, "", [{ targetSlug: ts, targetType: "glossary", relation: "references" }])
+        add(ts, "", "glossary", "", [{ targetSlug, targetType, relation: "referenced-by" }])
+      }
+    }
+  }
+
+  function collectTexts(r: { description?: string; content?: { body: string }[]; faqs?: { answer: string }[]; sections?: { body: string }[]; verdict?: string; body?: string }): string[] {
+    const texts: string[] = []
+    if (r.description) texts.push(r.description)
+    if (r.verdict) texts.push(r.verdict)
+    if (r.body) texts.push(r.body)
+    if (r.content) for (const s of r.content) if (s.body) texts.push(s.body)
+    if (r.sections) for (const s of r.sections) if (s.body) texts.push(s.body)
+    if (r.faqs) for (const f of r.faqs) if (f.answer) texts.push(f.answer)
+    return texts
+  }
+
+  for (const r of reviews) for (const t of collectTexts(r)) connectGlossary(r.slug, "software", t)
+  for (const g of guides) for (const t of collectTexts(g)) connectGlossary(g.slug, "guide", t)
+  for (const p of posts) for (const t of collectTexts(p)) connectGlossary(p.slug, "blog", t)
+  for (const c of comparisons) for (const t of collectTexts(c)) connectGlossary(c.slug, "comparison", t)
+  for (const r of research) for (const t of collectTexts(r)) connectGlossary(r.slug, "research", t)
 
   return {
     nodes,
