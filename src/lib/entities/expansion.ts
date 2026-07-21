@@ -26,7 +26,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -68,7 +68,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -110,7 +110,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -152,7 +152,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -194,7 +194,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -236,7 +236,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -278,7 +278,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -320,7 +320,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -362,7 +362,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -404,7 +404,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -446,7 +446,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -488,7 +488,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -530,7 +530,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -572,7 +572,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -614,7 +614,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -656,7 +656,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -698,7 +698,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -740,7 +740,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -782,7 +782,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -824,7 +824,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -866,7 +866,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -908,7 +908,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -950,7 +950,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -992,7 +992,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1034,7 +1034,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1076,7 +1076,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1118,7 +1118,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1160,7 +1160,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1202,7 +1202,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1244,7 +1244,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1286,7 +1286,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1328,7 +1328,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1370,7 +1370,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1412,7 +1412,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1454,7 +1454,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1496,7 +1496,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1538,7 +1538,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1580,7 +1580,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1622,7 +1622,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1664,7 +1664,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1706,7 +1706,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1748,7 +1748,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1790,7 +1790,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1832,7 +1832,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1874,7 +1874,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1916,7 +1916,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -1958,7 +1958,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2000,7 +2000,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2042,7 +2042,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2084,7 +2084,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2126,7 +2126,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2168,7 +2168,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2210,7 +2210,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2252,7 +2252,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2294,7 +2294,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2336,7 +2336,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2378,7 +2378,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2420,7 +2420,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2462,7 +2462,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2504,7 +2504,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2546,7 +2546,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",
@@ -2588,7 +2588,7 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     security: {
       soc2: null, // TODO: Verify real compliance status
       gdpr: null, // TODO: Verify real compliance status
-      ccpa: null // TODO: Verify real compliance status
+      ccpa: null, // TODO: Verify real compliance status
       encryption: "AES-256 at rest, TLS 1.3 in transit",
       dataResidency: [
         "United States",

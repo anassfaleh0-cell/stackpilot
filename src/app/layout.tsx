@@ -4,6 +4,7 @@ import "./globals.css"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { ThemeProvider } from "@/components/theme-provider"
+import { GTMScript } from "@/components/analytics/gtm"
 import { GAScript, ClarityScript } from "@/components/analytics"
 import { ClientLayout } from "@/components/layout/client-layout"
 import { OrganizationSchema, WebsiteSchema } from "@/components/seo/json-ld"
@@ -95,6 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
 
+        <GTMScript />
         <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name}`} href="/rss.xml" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
@@ -105,6 +107,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <noscript>
+          <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KMQBGRJW"
+            height="0" width="0" style={{ display: "none", visibility: "hidden" }}>
+          </iframe>
+        </noscript>
         <ThemeProvider>
           <a href="#main-content" className="skip-to-content">
             Skip to main content

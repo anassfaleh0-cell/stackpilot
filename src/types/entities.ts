@@ -77,11 +77,11 @@ export interface Capabilities {
 }
 
 export interface SecurityDetail {
-  soc2?: boolean
+  soc2?: boolean | null
   iso27001?: boolean
-  gdpr?: boolean
+  gdpr?: boolean | null
   hipaa?: boolean
-  ccpa?: boolean
+  ccpa?: boolean | null
   pciDss?: boolean
   saml?: boolean
   samlDescription?: string
