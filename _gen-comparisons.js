@@ -2,6 +2,37 @@ const fs = require("fs")
 const path = require("path")
 
 // ============================================================
+// COMPLIANCE DATA — sourced from hand-curated entity data.ts
+// null = not independently verified; real boolean = verified
+// ============================================================
+
+const ENTITY_SECURITY = JSON.parse(fs.readFileSync(path.join(__dirname, "src/data/entity-security.json"), "utf-8"))
+
+function toolCompliance(slug) {
+  return ENTITY_SECURITY[slug] || null
+}
+
+function hasCompliance(slug, field) {
+  const c = toolCompliance(slug)
+  if (!c) return null
+  return c[field] !== undefined ? c[field] : null
+}
+
+function complianceText(slug, field, label) {
+  const val = hasCompliance(slug, field)
+  if (val === true) return `${label} — verified`
+  if (val === false) return `${label} — not available`
+  return `${label} — not independently verified; contact vendor`
+}
+
+function complianceDetail(slug, field, toolName, fieldLabel) {
+  const val = hasCompliance(slug, field)
+  if (val === true) return `${toolName} offers ${fieldLabel} compliance with BAA on enterprise.`
+  if (val === false) return `${toolName} does not offer ${fieldLabel} compliance at this time.`
+  return `${toolName} has not independently verified ${fieldLabel} compliance — contact vendor for current status.`
+}
+
+// ============================================================
 // CONTENT REGISTRY — load all existing content for linking
 // ============================================================
 
@@ -520,7 +551,7 @@ function generateSupportSection(t1, t2, t1Slug, t2Slug, cat, lb) {
   const t2RF = t2rev && t2rev.company ? t2rev.company.releaseFrequency : ""
 
   const parts = [
-    `Customer support quality can make or break your experience with any ${cat.toLowerCase()} platform. ${t1} maintains a support rating of ${t1SQ || "4.0/5"}${t1RF ? ` and releases updates ${t1RF.toLowerCase()}` : ""}. ${t2} scores ${t2SQ || "4.0/5"} for support${t2RF ? ` with ${t2RF.toLowerCase()} update cycles` : ""}.`,
+    `Customer support quality can make or break your experience with any ${cat.toLowerCase()} platform. ${t1} maintains a support rating of ${t1SQ || toolRating(t1Slug).toString() + "/5"}${t1RF ? ` and releases updates ${t1RF.toLowerCase()}` : ""}. ${t2} scores ${t2SQ || toolRating(t2Slug).toString() + "/5"} for support${t2RF ? ` with ${t2RF.toLowerCase()} update cycles` : ""}.`,
     ``,
     `Both platforms offer standard support channels including ${lb.glossary("knowledge-base", "knowledge base")}, community forums, and ticket-based support. Premium tiers typically include ${lb.glossary("sla", "SLA-backed")} response times, dedicated account management, and ${lb.glossary("sso", "priority support")}.`,
   ]
@@ -678,9 +709,9 @@ function generateCoreBlock(t1, t2, t1Slug, t2Slug, cat, lb) {
       tool2Detail: `${t2} provides GDPR features including data portability, consent management, and DPA signing.`,
     },
     {
-      name: "HIPAA compliance", tool1: Math.random() > 0.3, tool2: Math.random() > 0.4,
-      tool1Detail: `${t1} offers ${lb.glossary("hipaa", "HIPAA")} compliance on enterprise with BAA. ${lb.glossary("encryption", "Encryption")} and ${lb.glossary("audit-logging", "access controls")} meet healthcare requirements.`,
-      tool2Detail: `${t2} provides HIPAA-compliant config. Healthcare orgs should verify specific features.`,
+      name: "HIPAA compliance", tool1: hasCompliance(t1Slug, "hipaa"), tool2: hasCompliance(t2Slug, "hipaa"),
+      tool1Detail: complianceDetail(t1Slug, "hipaa", t1, "HIPAA"),
+      tool2Detail: complianceDetail(t2Slug, "hipaa", t2, "HIPAA"),
     },
     {
       name: "Mobile app", tool1: true, tool2: true,
@@ -773,9 +804,9 @@ function generateSecurityBlock(t1, t2, t1Slug, t2Slug, cat, lb) {
       tool2Detail: `${t2} provides GDPR features with DPA and data portability.`,
     },
     {
-      name: "HIPAA compliance", tool1: Math.random() > 0.3, tool2: Math.random() > 0.4,
-      tool1Detail: `${t1} offers HIPAA with BAA on enterprise. ${lb.industry("healthcare", "Healthcare")} organizations benefit.`,
-      tool2Detail: `${t2} provides HIPAA-compliant configuration options.`,
+      name: "HIPAA compliance", tool1: hasCompliance(t1Slug, "hipaa"), tool2: hasCompliance(t2Slug, "hipaa"),
+      tool1Detail: complianceDetail(t1Slug, "hipaa", t1, "HIPAA"),
+      tool2Detail: complianceDetail(t2Slug, "hipaa", t2, "HIPAA"),
     },
     {
       name: "Uptime SLA", tool1: true, tool2: true,
@@ -783,9 +814,9 @@ function generateSecurityBlock(t1, t2, t1Slug, t2Slug, cat, lb) {
       tool2Detail: `${t2} offers competitive ${lb.glossary("sla", "SLA commitments")} with SOC 2 audited availability metrics.`,
     },
     {
-      name: "Data residency", tool1: Math.random() > 0.3, tool2: Math.random() > 0.4,
-      tool1Detail: `${t1} provides ${lb.glossary("data-residency", "data residency")} in US, EU, and APAC regions. ${lb.glossary("gdpr", "GDPR")} requirements are fully met through EU data hosting options, with additional regional choices for compliance with local data sovereignty laws.`,
-      tool2Detail: `${t2} offers regional hosting with data localization for ${lb.industry("finance", "financial services")} and ${lb.industry("government", "government")} clients. Data sovereignty controls meet regulatory requirements for sensitive industries.`,
+      name: "Data residency", tool1: hasCompliance(t1Slug, "dataResidency"), tool2: hasCompliance(t2Slug, "dataResidency"),
+      tool1Detail: complianceText(t1Slug, "dataResidency", `${t1} data residency options`),
+      tool2Detail: complianceText(t2Slug, "dataResidency", `${t2} data residency options`),
     },
     {
       name: "Incident response", tool1: true, tool2: true,

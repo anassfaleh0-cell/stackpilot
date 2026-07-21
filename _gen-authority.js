@@ -349,10 +349,10 @@ function generateBestPage(page) {
   const rows = [
     ["Rating", ...picks.map(p => p.rating.toFixed(1) + "/5")],
     ["Pricing", ...picks.map(p => p.priceRange)],
-    ["Free Trial", ...picks.map(p => Math.random() > 0.3 ? "Yes" : "No")],
-    ["API Access", ...picks.map(p => Math.random() > 0.2 ? "Yes" : "Limited")],
-    ["Mobile App", ...picks.map(p => Math.random() > 0.2 ? "Yes" : "No")],
-    ["Enterprise Grade", ...picks.map(p => Math.random() > 0.2 ? "Yes" : "Contact Sales")],
+    ["Free Trial", ...picks.map(p => p.pricing && p.pricing.some(pr => pr.price === 0) ? "Yes" : "Contact Sales")],
+    ["API Access", ...picks.map(p => p.capabilities?.api ? "Yes" : "Limited")],
+    ["Mobile App", ...picks.map(p => p.company?.mobileApps ? "Yes" : "No")],
+    ["Enterprise Grade", ...picks.map(p => p.useCases?.enterpriseSuitability === "High" ? "Yes" : "Contact Sales")],
   ]
 
   const desc = `Looking for the best ${cat.toLowerCase()} software? Our experts evaluated ${picks.length} leading platforms across ${picks.length * 5}+ criteria to bring you the definitive ranking for ${new Date().getFullYear()}. ${page.title} covers features, pricing, integrations, and real user reviews.`
@@ -621,16 +621,41 @@ const RESEARCH_PAGES = [
 ]
 
 function generateResearchPage(page) {
-  const findings = [
-    `The ${page.cat.toLowerCase()} segment shows ${Math.floor(15 + Math.random() * 25)}% year-over-year growth in ${new Date().getFullYear()}`,
-    `Enterprise adoption of ${page.cat.toLowerCase()} solutions increased by ${Math.floor(20 + Math.random() * 30)}% compared to last year`,
-    `${Math.floor(50 + Math.random() * 30)}% of organizations report improved outcomes after implementing ${page.cat.toLowerCase()} software`,
-    `Small and medium businesses account for ${Math.floor(40 + Math.random() * 20)}% of ${page.cat.toLowerCase()} software spending`,
-    `AI-powered features are the top consideration for ${Math.floor(55 + Math.random() * 25)}% of buyers evaluating ${page.cat.toLowerCase()} platforms`,
-    `Cloud-based deployment represents ${Math.floor(70 + Math.random() * 20)}% of new ${page.cat.toLowerCase()} software installations`,
-    `Integration capabilities influence ${Math.floor(60 + Math.random() * 25)}% of purchasing decisions`,
-    `${page.cat.toLowerCase()} software budgets increased by an average of ${Math.floor(10 + Math.random() * 20)}% in ${new Date().getFullYear()}`,
+  const statsPath = path.join(process.cwd(), "src/data/authority-stats.json")
+  let statsData = { categories: {} }
+  try { statsData = JSON.parse(fs.readFileSync(statsPath, "utf-8")) } catch {}
+  const catStats = statsData.categories[page.cat] || null
+
+  const findings = catStats ? [
+    `The ${page.cat.toLowerCase()} segment shows ${catStats.yoyGrowthPercent}% year-over-year growth in ${new Date().getFullYear()} (Source: ${catStats.source})`,
+    `Enterprise adoption of ${page.cat.toLowerCase()} solutions increased significantly compared to last year`,
+    `Organizations report improved outcomes after implementing ${page.cat.toLowerCase()} software`,
+    `${page.cat.toLowerCase()} software continues to be a priority investment area`,
+    `AI-powered features are a top consideration for buyers evaluating ${page.cat.toLowerCase()} platforms`,
+    `Cloud-based deployment represents the majority of new ${page.cat.toLowerCase()} software installations`,
+    `Integration capabilities influence purchasing decisions in this category`,
+    `${page.cat.toLowerCase()} software budgets continue to grow year over year`,
+  ] : []
+
+  const sections = catStats ? [
+    { title: "Market Overview", body: `The ${page.cat.toLowerCase()} software market continues to evolve rapidly in ${new Date().getFullYear()}. Our research indicates significant shifts in buying patterns, deployment preferences, and feature priorities. Organizations increasingly prioritize integrated platforms over point solutions.`, type: "text" },
+    { title: "Market Size & Growth", body: `The global ${page.cat.toLowerCase()} software market is valued at $${(catStats.marketSizeUSD / 1e9).toFixed(1)} billion in ${new Date().getFullYear()}, growing at ${catStats.yoyGrowthPercent}% year over year (Source: ${catStats.source}).`, type: "text" },
+    { title: "Adoption Trends", body: `Adoption rates for ${page.cat.toLowerCase()} software have accelerated across all organization sizes. Enterprise deployments show the strongest growth, driven by digital transformation initiatives and the need for operational efficiency.`, type: "text" },
+    { title: "Spending Patterns", body: `Organizations are allocating larger portions of their IT budgets to ${page.cat.toLowerCase()} software. The average enterprise spends significantly on ${page.cat.toLowerCase()} solutions, with mid-market companies also increasing investment.`, type: "text" },
+    { title: "Key Buying Criteria", body: `Organizations evaluating ${page.cat.toLowerCase()} software prioritize feature completeness, total cost of ownership, security compliance, integration capabilities, and vendor reputation.`, type: "text" },
+    { title: "Recommendations", body: `Based on our research, organizations evaluating ${page.cat.toLowerCase()} software should prioritize platforms with strong API ecosystems, robust security certifications, and proven scalability. We recommend a structured evaluation process with defined criteria and stakeholder involvement.`, type: "text" },
+  ] : []
+
+  const methodology = catStats
+    ? `This research incorporates data from ${catStats.source}, market analyst reports, vendor financial disclosures, and user review aggregators. Data is current as of ${catStats.publishedDate || new Date().getFullYear()}.`
+    : `This research incorporates data from market analyst reports, vendor financial disclosures, and user review aggregators. Specific market sizing data is pending verification and will be updated with cited sources.`
+
+  const finalSections = sections.length > 0 ? sections : [
+    { title: "Market Overview", body: `The ${page.cat.toLowerCase()} software market continues to evolve rapidly in ${new Date().getFullYear()}. Our research indicates significant shifts in buying patterns, deployment preferences, and feature priorities. Organizations increasingly prioritize integrated platforms over point solutions.`, type: "text" },
+    { title: "Key Considerations", body: `Organizations evaluating ${page.cat.toLowerCase()} software should consider feature requirements, budget parameters, team size, integration needs, and security compliance requirements. A structured evaluation process with stakeholder involvement is recommended.`, type: "text" },
   ]
+
+  const allText = (findings.length > 0 ? findings.join(" ") : "") + " " + finalSections.map(s => s.body).join(" ") + " " + methodology
 
   return {
     slug: page.slug,
@@ -638,29 +663,18 @@ function generateResearchPage(page) {
     description: `Comprehensive ${page.cat.toLowerCase()} research report for ${new Date().getFullYear()}. Market analysis, adoption trends, spending patterns, and strategic recommendations for ${page.cat.toLowerCase()} software buyers.`,
     category: page.cat,
     reportType: page.type,
-    keyFindings: findings,
-    sections: [
-      { title: "Market Overview", body: `The ${page.cat.toLowerCase()} software market continues to evolve rapidly in ${new Date().getFullYear()}. Our research indicates significant shifts in buying patterns, deployment preferences, and feature priorities. Organizations increasingly prioritize integrated platforms over point solutions.`, type: "text" },
-      { title: "Adoption Trends", body: `Adoption rates for ${page.cat.toLowerCase()} software have accelerated across all organization sizes. Enterprise deployments show the strongest growth, driven by digital transformation initiatives and the need for operational efficiency.`, type: "text" },
-      { title: "Spending Patterns", body: `Organizations are allocating larger portions of their IT budgets to ${page.cat.toLowerCase()} software. The average enterprise spends $500,000-2,000,000 annually on ${page.cat.toLowerCase()} solutions, with mid-market companies investing $50,000-500,000.`, type: "text" },
-      { title: "Key Buying Criteria", body: `Our survey of ${Math.floor(500 + Math.random() * 1500)} organizations identified the top factors driving ${page.cat.toLowerCase()} software purchases: feature completeness (85%), total cost of ownership (78%), security compliance (72%), integration capabilities (68%), and vendor reputation (55%).`, type: "text" },
-      { title: "Regional Analysis", body: `North America leads ${page.cat.toLowerCase()} software adoption with 45% market share, followed by Europe at 30%, Asia-Pacific at 18%, and Rest of World at 7%. Emerging markets show the fastest growth rates.`, type: "text" },
-      { title: "Recommendations", body: `Based on our research, organizations evaluating ${page.cat.toLowerCase()} software should prioritize platforms with strong API ecosystems, robust security certifications, and proven scalability. We recommend a structured evaluation process with defined criteria and stakeholder involvement.`, type: "text" },
-    ],
-    methodology: `This research is based on a survey of ${Math.floor(1000 + Math.random() * 2000)} IT decision-makers, analysis of ${Math.floor(50 + Math.random() * 150)} software vendors, and secondary research from industry analysts. Data was collected in Q1-Q2 ${new Date().getFullYear()}.`,
+    keyFindings: findings.length > 0 ? findings : [`Research report on ${page.cat.toLowerCase()} software market`],
+    sections: finalSections,
+    methodology,
     dataSources: [
-      { name: "Industry Analyst Reports", url: "https://example.com/analyst" },
-      { name: "Vendor Financial Disclosures", url: "https://example.com/vendor-financials" },
-      { name: "User Review Aggregators", url: "https://example.com/user-reviews" },
-      { name: "PilotStack Research Survey", url: "https://example.com/survey" },
-      { name: "Public Market Data", url: "https://example.com/market-data" },
-      { name: "Regulatory Filings", url: "https://example.com/regulatory" },
-      { name: "Industry Association Reports", url: "https://example.com/industry-assoc" },
-      { name: "Academic Research", url: "https://example.com/academic" },
-    ],
+      catStats ? { name: catStats.source, url: catStats.sourceUrl || "#" } : null,
+      { name: "Market Analyst Reports", url: "#" },
+      { name: "Vendor Financial Disclosures", url: "#" },
+      { name: "User Review Aggregators", url: "#" },
+    ].filter(Boolean),
     publishedAt: "2026-07-19",
     author: "PilotStack Research Team",
-    readingTime: Math.floor(10 + Math.random() * 15),
+    readingTime: Math.max(1, Math.round(allText.split(/\s+/).filter(Boolean).length / 200)),
     relatedComparisons: [],
     relatedGuides: [],
     relatedPosts: [],
@@ -776,63 +790,33 @@ const STAT_CATEGORIES = {
 }
 
 function generateStatsPage(slug, catData) {
-  const n = Math.floor(1000 + Math.random() * 9000)
-  const pct = Math.floor(50 + Math.random() * 40)
+  const statName = catData.desc || catData.title.toLowerCase()
   const sections = [
-    {
-      title: `${catData.title} Market Size`, body: `The ${catData.desc} market has experienced significant growth.`,
-      stats: [
-        { value: `$${Math.floor(10 + Math.random() * 90)}B+`, label: `Global ${catData.title} Market Size ${new Date().getFullYear()}`, source: "Industry Analyst Reports" },
-        { value: `${Math.floor(15 + Math.random() * 25)}%`, label: `Year-over-Year Growth Rate`, source: "Market Research" },
-        { value: `${n}+`, label: `Organizations Using ${catData.title} Software`, source: "PilotStack Research" },
-        { value: `${Math.floor(5000 + Math.random() * 95000)}`, label: `${catData.title} Software Vendors Worldwide`, source: "Industry Database" },
-        { value: `${Math.floor(5 + Math.random() * 15)}M+`, label: `Professionals Using ${catData.title} Tools`, source: "Labor Statistics" },
-      ]
+    { title: `Market Overview`, body: `The ${statName} market is a significant and growing segment of the software industry. Below are the currently verified statistics and trends for this category.`,
+      stats: []
     },
-    {
-      title: `Adoption & Usage`, body: `Adoption rates for ${catData.desc} continue to accelerate across all sectors.`,
-      stats: [
-        { value: `${Math.floor(60 + Math.random() * 30)}%`, label: `Enterprise Adoption Rate`, source: "Enterprise Technology Survey" },
-        { value: `${Math.floor(40 + Math.random() * 30)}%`, label: `SMB Adoption Rate`, source: "Small Business Technology Survey" },
-        { value: `${pct}%`, label: `Organizations Planning to Increase Investment`, source: "PilotStack Buyer Intent Data" },
-        { value: `${Math.floor(3 + Math.random() * 5)}`, label: `Average Number of ${catData.title} Tools per Organization`, source: "Tech Stack Analysis" },
-      ]
+    { title: `Usage & Adoption`, body: `Adoption rates for ${statName} vary by organization size and industry. Data is being collected for this category.`,
+      stats: []
     },
-    {
-      title: `ROI & Business Impact`, body: `Organizations report significant returns from ${catData.desc} investments.`,
-      stats: [
-        { value: `${Math.floor(150 + Math.random() * 200)}%`, label: `Average ROI Within 12 Months`, source: "Customer Success Reports" },
-        { value: `${Math.floor(20 + Math.random() * 30)}%`, label: `Average Productivity Improvement`, source: "PilotStack Productivity Study" },
-        { value: `${Math.floor(15 + Math.random() * 25)}%`, label: `Cost Reduction After Implementation`, source: "Operational Efficiency Reports" },
-        { value: `${Math.floor(3 + Math.random() * 6)} months`, label: `Average Time to Positive ROI`, source: "Financial Analysis" },
-      ]
+    { title: `Business Impact`, body: `Organizations invest in ${statName} to improve efficiency and outcomes. Verified ROI data will be available once research is complete.`,
+      stats: []
     },
-    {
-      title: `Key Trends`, body: `${Math.floor(5 + Math.random() * 5)} key trends shaping ${catData.desc} in ${new Date().getFullYear()}.`,
-      stats: [
-        { value: `${Math.floor(60 + Math.random() * 30)}%`, label: `AI Integration in ${catData.title} Platforms`, source: "AI Adoption Study" },
-        { value: `${Math.floor(50 + Math.random() * 30)}%`, label: `Cloud-Native Deployments`, source: "Cloud Infrastructure Report" },
-        { value: `${Math.floor(40 + Math.random() * 30)}%`, label: `Mobile-First ${catData.title} Solutions`, source: "Mobile Technology Survey" },
-      ]
-    },
-    {
-      title: `Budget Allocation`, body: `${catData.title} software spending patterns by organization size.`,
-      stats: [
-        { value: `$${Math.floor(50 + Math.random() * 450)}K+`, label: `Enterprise Annual ${catData.title} Budget`, source: "Enterprise IT Spending Report" },
-        { value: `$${Math.floor(10 + Math.random() * 40)}K+`, label: `Mid-Market Annual Budget`, source: "Mid-Market Technology Survey" },
-        { value: `$${Math.floor(1 + Math.random() * 9)}K+`, label: `Small Business Annual Budget`, source: "SMB Software Spending" },
-      ]
+    { title: `Key Trends`, body: `This market continues to evolve with new technologies and changing buyer behaviors.`,
+      stats: []
     },
   ]
 
   return {
     slug,
-    title: `${catData.title} Software Statistics ${new Date().getFullYear()}`,
-    description: `Comprehensive ${catData.desc} statistics for ${new Date().getFullYear()}. Market size, adoption rates, ROI data, and key trends for ${catData.title} software buyers and vendors.`,
+    title: `${catData.title} Statistics ${new Date().getFullYear()}`,
+    description: `${catData.title} statistics for ${new Date().getFullYear()}. Market data and trends pending verified research.`,
     category: catData.title,
-    stats: sections[0].stats.slice(0, 3),
+    stats: [],
     sections,
-    publishedAt: "2026-07-19",
+    publishedAt: "2026-07-21",
+    readingTime: 2,
+    lastUpdated: "2026-07-21",
+    methodology: "Market statistics in this report are based on verified third-party sources. Specific data is pending and will be added once sourced.",
     relatedComparisons: [],
     relatedGuides: [],
   }
