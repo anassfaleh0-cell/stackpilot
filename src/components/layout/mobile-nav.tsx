@@ -3,36 +3,66 @@
 import Link from "next/link"
 import { X, Menu } from "lucide-react"
 import { navLinks, categories } from "@/lib/constants"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
 
 export function MobileNav() {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
+  const menuRef = useRef<HTMLDivElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     setOpen(false)
   }, [pathname])
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === "Escape") setOpen(false)
+    if (e.key === "Escape") {
+      setOpen(false)
+      buttonRef.current?.focus()
+      return
+    }
+    if (e.key === "Tab" && menuRef.current) {
+      const focusable = menuRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault()
+          last?.focus()
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault()
+          first?.focus()
+        }
+      }
+    }
   }, [])
 
   useEffect(() => {
     if (open) {
       document.addEventListener("keydown", handleKeyDown)
       document.body.style.overflow = "hidden"
-    }
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown)
-      document.body.style.overflow = ""
+      const timer = setTimeout(() => {
+        const first = menuRef.current?.querySelector<HTMLElement>('a[href]')
+        first?.focus()
+      }, 50)
+      return () => {
+        clearTimeout(timer)
+        document.removeEventListener("keydown", handleKeyDown)
+        document.body.style.overflow = ""
+      }
     }
   }, [open, handleKeyDown])
 
   return (
     <div className="md:hidden">
       <button
+        ref={buttonRef}
         onClick={() => setOpen(!open)}
         className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"
         aria-label={open ? "Close menu" : "Open menu"}
@@ -51,6 +81,7 @@ export function MobileNav() {
       )}
 
       <div
+        ref={menuRef}
         id="mobile-menu"
         role="dialog"
         aria-modal="true"

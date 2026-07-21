@@ -4,7 +4,7 @@ import { Container, Section } from "@/components/ui/container"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { categories } from "@/lib/constants"
-import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts } from "@/lib/content/registry"
+import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms } from "@/lib/content/registry"
 import { ArrowRight, Star, BarChart3, Shield, BookOpen } from "lucide-react"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { BrandPattern, BrandOrb, BrandDivider } from "@/components/brand/patterns"
@@ -20,6 +20,7 @@ export default function HomePage() {
   const comparisons = getAllComparisons()
   const guides = getAllGuides()
   const posts = getAllBlogPosts()
+  const glossary = getAllGlossaryTerms()
 
   const stats = [
     { value: `${reviews.length}+`, label: "Software Reviews" },
@@ -297,7 +298,7 @@ export default function HomePage() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="flex items-start gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-subtle text-primary">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold mb-0.5">Hands-On Testing</h3>
@@ -306,7 +307,7 @@ export default function HomePage() {
               </div>
               <div className="flex items-start gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary-subtle text-secondary">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold mb-0.5">Independent & Unbiased</h3>
@@ -315,7 +316,7 @@ export default function HomePage() {
               </div>
               <div className="flex items-start gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent-subtle text-accent">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+                  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold mb-0.5">Transparent Methodology</h3>
@@ -324,7 +325,7 @@ export default function HomePage() {
               </div>
               <div className="flex items-start gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-info-subtle text-info">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold mb-0.5">Regularly Updated</h3>
@@ -334,13 +335,13 @@ export default function HomePage() {
             </div>
             <div className="mt-4 pt-3 border-t border-border flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                <span>38+ reviews</span>
+                <span>{reviews.length}+ reviews</span>
                 <span className="text-border-light">|</span>
-                <span>14 comparisons</span>
+                <span>{comparisons.length}+ comparisons</span>
                 <span className="text-border-light">|</span>
-                <span>13 guides</span>
+                <span>{guides.length}+ guides</span>
                 <span className="text-border-light">|</span>
-                <span>32 glossary terms</span>
+                <span>{glossary.length} glossary terms</span>
               </div>
               <Link href="/editorial-policy" className="text-xs text-primary hover:underline">Our editorial standards &rarr;</Link>
             </div>

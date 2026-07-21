@@ -1,15 +1,17 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, AboutPageSchema, NewsArticleSchema, ArticleSchema } from "@/components/seo/json-ld"
-import { site } from "@/lib/constants"
+import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, AboutPageSchema, NewsArticleSchema, ArticleSchema, WebPageSchema, ItemListSchema, OrganizationSchema } from "@/components/seo/json-ld"
+import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getIndustry, getAllIndustries, getContentTitle } from "@/lib/content/registry"
+import { InternalLinks } from "@/components/content/internal-links"
+import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, Lightbulb } from "lucide-react"
 import { EditorialHero, GlassCard, InfoCard } from "@/components/dynamic"
-import { RelatedContent } from "@/components/dynamic-client"
+import { EEATProcess } from "@/components/seo/editorial-process"
 
 export function generateStaticParams() {
   return getAllIndustries().map((i) => ({ slug: i.slug }))
@@ -20,7 +22,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const ind = getIndustry(slug)
   if (!ind) return {}
   const readingTime = Math.max(5, Math.ceil((ind.description.split(/\s+/).length + ind.recommendations.length * 15) / 200))
-  return createMetadata({ title: ind.title, description: ind.description, path: `/industries/${ind.slug}`, ogType: "article", publishedAt: ind.lastUpdated, updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime })
+  const shortTitle = ind.title.length > 58 ? ind.title.slice(0, 55) + "..." : ind.title
+  return createMetadata({ title: shortTitle, description: `Best software for ${ind.industry.toLowerCase()} businesses. Expert picks with ratings, pricing, and implementation tips for 2026.`, path: `/industries/${ind.slug}`, ogType: "article", publishedAt: ind.lastUpdated, updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime })
 }
 
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -40,8 +43,11 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Industries", href: "/industries" }, { name: ind.title, href: `/industries/${slug}` }]} />
       <NewsArticleSchema title={ind.title} description={ind.description} publishedAt={ind.lastUpdated} updatedAt={ind.lastUpdated} author="PilotStack Team" url={`${site.url}/industries/${slug}`} wordCount={ind.description.split(/\s+/).length + ind.recommendations.length * 15} category={ind.industry} />
       <ArticleSchema title={ind.title} description={ind.description} publishedAt={ind.lastUpdated} updatedAt={ind.lastUpdated} author="PilotStack Team" url={`${site.url}/industries/${slug}`} wordCount={ind.description.split(/\s+/).length + ind.recommendations.length * 15} category={ind.industry} />
+      <WebPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} dateModified={ind.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: ind.recommendations.map((rec, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "SoftwareApplication", name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` } })) }} />
+      <ItemListSchema items={ind.recommendations.map(rec => ({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` }))} url={`${site.url}/industries/${slug}`} />
       <CollectionPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} />
       <AboutPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} about={ind.recommendations.map((rec) => ({ "@type": "SoftwareApplication", name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` }))} />
+      <OrganizationSchema />
       <FAQSchema questions={ind.faqs} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Industries", href: "/industries" }, { name: ind.title }]} />
@@ -55,7 +61,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-8 pb-4 border-b border-border">
             <Badge variant="default">{ind.industry}</Badge>
             <span>{ind.recommendations.length} software recommendations</span>
-            <span className="ml-auto text-[11px]">Last updated {ind.lastUpdated}</span>
+            <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>By PilotStack Team</span>
+            <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>Updated {ind.lastUpdated}</span>
+            <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we test</a>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-12">
@@ -163,16 +171,17 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                     </div>
                   </div>
                 </GlassCard>
+
+                <EEATProcess category={ind.industry} />
               </div>
             </aside>
           </div>
 
-          <RelatedContent
-            items={[
-              ...(ind.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
-              ...(ind.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
-            ]}
-            title="Related Resources"
+          <InternalLinks category={ind.industry} excludeSlug={ind.slug} />
+          
+          <EnhancedRelatedContent
+            title="More Resources"
+            maxItems={6}
           />
         </Container>
       </article>

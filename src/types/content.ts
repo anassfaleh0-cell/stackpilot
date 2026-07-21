@@ -77,6 +77,7 @@ export interface ComparisonContent {
   title: string
   description: string
   category: string
+  secondaryCategories?: string[]
   tool1: string
   tool2: string
   tool1Slug: string

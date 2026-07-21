@@ -12,7 +12,9 @@
   "pros": [
     "Free tier includes unlimited devices and unlimited passwords with no feature restrictions, unlike competitors that limit free users to one device type or 50 passwords",
     "Open-source AGPL codebase with published third-party security audits from Cure53, Privacy4Teams, and independent researchers — every cryptographic implementation is publicly verifiable",
-    "Self-hosting option via Docker provides complete data sovereignty for organizations with compliance requirements that prohibit cloud-based password storage"
+    "Self-hosting option via Docker provides complete data sovereignty for organizations with compliance requirements that prohibit cloud-based password storage",
+    "Comprehensive documentation and training resources",
+    "Active user community for knowledge sharing and best practices"
   ],
   "cons": [
     "Browser extension UI feels less polished than 1Password or Dashlane, with a functional but utilitarian design that prioritizes information density over visual refinement",
@@ -472,5 +474,9 @@
     "migrationComplexity": "Low",
     "supportQuality": "4.4/5",
     "releaseFrequency": "Monthly"
-  }
+  },
+  "difficulty": "Advanced",
+  "learningCurve": "Steep — requires dedicated training time for full proficiency",
+  "whoShouldUse": "Bitwarden is perfect for freelancers and independent professionals who need an affordable, easy-to-use security & compliance tool. Its simplicity and core feature set make it ideal for solo practitioners.",
+  "whoShouldNotUse": "Bitwarden may be overwhelming for users who only need basic security & compliance functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
 }

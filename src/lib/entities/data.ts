@@ -1,6 +1,8 @@
 import type { SoftwareEntity } from "@/types/entities"
+import { expansionEntities } from "./expansion"
 
 const entities: Record<string, SoftwareEntity> = {
+  ...expansionEntities,
   "1password": {
     slug: "1password",
     name: "1Password",

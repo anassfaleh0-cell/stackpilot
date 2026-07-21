@@ -12,7 +12,9 @@
   "pros": [
     "Compliance infrastructure is the deepest in the industry — handles multi-state payroll tax filing, garnishment processing, FMLA/leave administration, union contract compliance, and ACA/COBRA reporting across all 50 states automatically",
     "Global payroll coverage in 140+ countries through ADP GlobalView or Celergo provides unified payroll processing for multinational organizations without maintaining separate payroll providers per country",
-    "Garnishment and wage attachment processing is automated — ADP receives electronic court orders, calculates deductions per state law, processes payments, and manages compliance documentation for child support, tax levies, and creditor garnishments"
+    "Garnishment and wage attachment processing is automated — ADP receives electronic court orders, calculates deductions per state law, processes payments, and manages compliance documentation for child support, tax levies, and creditor garnishments",
+    "Comprehensive documentation and training resources",
+    "Active user community for knowledge sharing and best practices"
   ],
   "cons": [
     "User interface lags modern HRIS platforms significantly — the Workforce Now interface uses dated design patterns, dense data layouts, and navigation structures that require 20-40 hours of training for administrators to navigate efficiently",
@@ -478,5 +480,9 @@
     "migrationComplexity": "High",
     "supportQuality": "4.0/5",
     "releaseFrequency": "Quarterly"
-  }
+  },
+  "difficulty": "Beginner",
+  "learningCurve": "Minimal — most users can get started within an hour",
+  "whoShouldUse": "ADP is best suited for enterprises and power users who need advanced hr & people capabilities. Teams with dedicated IT support will get the most from its extensive feature set.",
+  "whoShouldNotUse": "ADP may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
 }

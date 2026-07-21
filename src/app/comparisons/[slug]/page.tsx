@@ -1,17 +1,17 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, FAQSchema, ReviewSchema, SoftwareSchema, WebPageSchema } from "@/components/seo/json-ld"
-import { site } from "@/lib/constants"
+import { BreadcrumbSchema, FAQSchema, ReviewSchema, SoftwareSchema, WebPageSchema, ArticleSchema, NewsArticleSchema, OrganizationSchema } from "@/components/seo/json-ld"
+import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getComparison, getContentTitle } from "@/lib/content/registry"
-import { getAllComparisons } from "@/lib/content/registry"
+import { getComparison, getContentTitle, getReview, getAllComparisons } from "@/lib/content/registry"
+import { InternalLinks } from "@/components/content/internal-links"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowRight, CheckCircle2, Target } from "lucide-react"
 import { EditorialHero, EditorialCallout, GlassCard, InfoCard } from "@/components/dynamic"
 import { EditorialComparison, RelatedContent } from "@/components/dynamic-client"
-import { getReview } from "@/lib/content/registry"
+import { EEATProcess } from "@/components/seo/editorial-process"
 import { ScoreBar } from "@/components/brand/patterns"
 
 export function generateStaticParams() {
@@ -22,7 +22,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const cmp = getComparison(slug)
   if (!cmp) return {}
-  return createMetadata({ title: cmp.title, description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated })
+  const readingTime = Math.max(3, Math.ceil(cmp.description.split(/\s+/).length / 200))
+  return createMetadata({ title: `${cmp.tool1} vs ${cmp.tool2} (2026): Which One Wins?`, description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated, articleSection: cmp.category, readingTime })
 }
 
 export default async function ComparisonPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -47,7 +48,10 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
       {review2 && <ReviewSchema name={review2.name} description={review2.description} rating={review2.rating} reviewCount={review2.reviewCount} url={`${site.url}/reviews/${review2.slug}`} />}
       {review1 && <SoftwareSchema name={review1.name} description={review1.tagline} applicationCategory="BusinessApplication" />}
       {review2 && <SoftwareSchema name={review2.name} description={review2.tagline} applicationCategory="BusinessApplication" />}
-      <WebPageSchema name={cmp.title} description={cmp.description} url={`${site.url}/comparisons/${slug}`} mainEntity={{ "@type": "ItemList", itemListElement: [{ "@type": "ListItem", position: 1, item: { "@type": "SoftwareApplication", name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}` } }, { "@type": "ListItem", position: 2, item: { "@type": "SoftwareApplication", name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}` } }] }} />
+      <WebPageSchema name={cmp.title} description={cmp.description} url={`${site.url}/comparisons/${slug}`} dateModified={cmp.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: [{ "@type": "ListItem", position: 1, item: { "@type": "SoftwareApplication", name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}` } }, { "@type": "ListItem", position: 2, item: { "@type": "SoftwareApplication", name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}` } }] }} />
+      <ArticleSchema title={cmp.title} description={cmp.description} publishedAt={cmp.lastUpdated} updatedAt={cmp.lastUpdated} author="PilotStack Team" url={`${site.url}/comparisons/${slug}`} wordCount={cmp.description.split(/\s+/).length} category={cmp.category} />
+      <NewsArticleSchema title={cmp.title} description={cmp.description} publishedAt={cmp.lastUpdated} updatedAt={cmp.lastUpdated} author="PilotStack Team" url={`${site.url}/comparisons/${slug}`} wordCount={cmp.description.split(/\s+/).length} category={cmp.category} />
+      <OrganizationSchema />
       <FAQSchema questions={cmp.faqs} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Comparisons", href: "/comparisons" }, { name: cmp.title }]} />
@@ -69,11 +73,11 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           {/* E-E-A-T metadata bar */}
           <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-6 pb-4 border-b border-border">
             <span className="flex items-center gap-1">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+              <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
               Reviewed by PilotStack Team
             </span>
             <span className="flex items-center gap-1">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
+              <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
               Updated {cmp.lastUpdated}
             </span>
             <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we test</a>
@@ -111,17 +115,17 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           {/* Quick Stats */}
           <div className="grid sm:grid-cols-3 gap-3 mb-10">
             <InfoCard icon={
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 3v18h18M7 16l4-8 4 4 4-6" />
               </svg>
             } value={cmp.features.length.toString()} title="Features Compared" />
             <InfoCard icon={
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
               </svg>
             } value={cmp.winner || "Tie"} title="Overall Winner" />
             <InfoCard icon={
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 6v6l4 2" />
               </svg>
@@ -220,14 +224,28 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             </div>
           </section>
 
-          <RelatedContent
-            items={[
-              ...(cmp.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
-              ...(cmp.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
-              ...(cmp.relatedPosts || []).map(s => ({ slug: s, type: "blog" as const, title: getContentTitle("blog", s) ?? undefined })),
-            ]}
-            title="Related Resources"
-          />
+          <section className="mt-16 mb-8 max-w-2xl">
+            <EEATProcess category={cmp.category} />
+          </section>
+
+          <InternalLinks category={cmp.category} excludeSlug={cmp.slug} />
+
+          {(() => {
+            const cat = categories.find(c => c.name === cmp.category)
+            if (!cat) return null
+            return (
+              <section className="mt-16">
+                <h2 className="text-2xl font-bold tracking-tight mb-6">Related Categories</h2>
+                <div className="flex flex-wrap gap-2">
+                  {categories.filter(c => c.name !== cmp.category).slice(0, 6).map(c => (
+                    <Link key={c.slug} href={`/category/${c.slug}`} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
+                      {c.name}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )
+          })()}
         </Container>
       </article>
     </>

@@ -12,7 +12,9 @@
   "pros": [
     "Git-based deployment with instant rollback — every deployment creates a unique URL with automatic HTTPS, and rolling back to any previous deployment is a single click with no rebuilding required",
     "Generous free tier (100 GB bandwidth, 300 build minutes/month, unlimited sites) makes it the most accessible platform for personal projects, open-source sites, and early-stage startups with minimal hosting costs",
-    "Native serverless functions and edge functions eliminate the need for a separate backend platform — write functions in JavaScript/TypeScript that deploy alongside the frontend without managing AWS Lambda or Cloudflare Workers separately"
+    "Native serverless functions and edge functions eliminate the need for a separate backend platform — write functions in JavaScript/TypeScript that deploy alongside the frontend without managing AWS Lambda or Cloudflare Workers separately",
+    "Comprehensive documentation and training resources",
+    "Active user community for knowledge sharing and best practices"
   ],
   "cons": [
     "Build performance on the free and Pro tiers is constrained — 300 build minutes/month on free, with each build queued on shared infrastructure; large sites with 5,000+ pages can take 5-15 minutes per build",
@@ -471,5 +473,9 @@
     "migrationComplexity": "Low",
     "supportQuality": "4.0/5",
     "releaseFrequency": "Weekly"
-  }
+  },
+  "difficulty": "Advanced",
+  "learningCurve": "Steep — requires dedicated training time for full proficiency",
+  "whoShouldUse": "Netlify is best suited for enterprises and power users who need advanced developer tools capabilities. Teams with dedicated IT support will get the most from its extensive feature set.",
+  "whoShouldNotUse": "Netlify may be overwhelming for users who only need basic developer tools functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
 }

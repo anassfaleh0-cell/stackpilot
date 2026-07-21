@@ -1,15 +1,17 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, ArticleSchema, FAQSchema, ItemListSchema, WebPageSchema } from "@/components/seo/json-ld"
-import { site } from "@/lib/constants"
+import { BreadcrumbSchema, ArticleSchema, FAQSchema, ItemListSchema, WebPageSchema, NewsArticleSchema, OrganizationSchema } from "@/components/seo/json-ld"
+import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getHub, getAllHubs, getContentTitle } from "@/lib/content/registry"
+import { InternalLinks } from "@/components/content/internal-links"
+import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, AlertTriangle } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
-import { RelatedContent } from "@/components/dynamic-client"
+import { EEATProcess } from "@/components/seo/editorial-process"
 
 export function generateStaticParams() {
   return getAllHubs().map((h) => ({ slug: h.slug }))
@@ -19,7 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const hub = getHub(slug)
   if (!hub) return {}
-  return createMetadata({ title: hub.title, description: hub.description, path: `/hubs/${hub.slug}`, ogType: "article", publishedAt: hub.lastUpdated })
+  const shortTitle = hub.title.length > 58 ? hub.title.slice(0, 55) + "..." : hub.title
+  return createMetadata({ title: shortTitle, description: `Best software for ${hub.audience.toLowerCase()}. Expert recommendations, comparison matrix, and buying guide for 2026.`, path: `/hubs/${hub.slug}`, ogType: "article", publishedAt: hub.lastUpdated, articleSection: hub.audience })
 }
 
 export default async function HubPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -36,9 +39,11 @@ export default async function HubPage({ params }: { params: Promise<{ slug: stri
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "By Business Type", href: "/hubs" }, { name: hub.title, href: `/hubs/${slug}` }]} />
-      <ArticleSchema title={hub.title} description={hub.description} publishedAt={hub.lastUpdated} author="PilotStack Team" url={`${site.url}/hubs/${slug}`} />
+      <NewsArticleSchema title={hub.title} description={hub.description} publishedAt={hub.lastUpdated} updatedAt={hub.lastUpdated} author="PilotStack Team" url={`${site.url}/hubs/${slug}`} category={hub.audience} />
+      <ArticleSchema title={hub.title} description={hub.description} publishedAt={hub.lastUpdated} updatedAt={hub.lastUpdated} author="PilotStack Team" url={`${site.url}/hubs/${slug}`} category={hub.audience} />
+      <OrganizationSchema />
       <ItemListSchema items={hub.recommendations.map(r => ({ name: r.toolName, url: `${site.url}/reviews/${r.toolSlug}` }))} url={`${site.url}/hubs/${slug}`} />
-      <WebPageSchema name={hub.title} description={hub.description} url={`${site.url}/hubs/${slug}`} mainEntity={{ "@type": "ItemList", itemListElement: hub.recommendations.map((r, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "SoftwareApplication", name: r.toolName, url: `${site.url}/reviews/${r.toolSlug}` } })) }} />
+      <WebPageSchema name={hub.title} description={hub.description} url={`${site.url}/hubs/${slug}`} dateModified={hub.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: hub.recommendations.map((r, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "SoftwareApplication", name: r.toolName, url: `${site.url}/reviews/${r.toolSlug}` } })) }} />
       <FAQSchema questions={hub.faqs} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "By Business Type", href: "/hubs" }, { name: hub.title }]} />
@@ -52,7 +57,9 @@ export default async function HubPage({ params }: { params: Promise<{ slug: stri
           <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-8 pb-4 border-b border-border">
             <Badge variant="default">{hub.audience}</Badge>
             <span>{hub.recommendations.length} recommendations</span>
-            <span className="ml-auto text-[11px]">Updated {hub.lastUpdated}</span>
+            <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>By PilotStack Team</span>
+            <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>Updated {hub.lastUpdated}</span>
+            <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we test</a>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-12">
@@ -163,17 +170,17 @@ export default async function HubPage({ params }: { params: Promise<{ slug: stri
                     </div>
                   </div>
                 </GlassCard>
+
+                <EEATProcess category={hub.audience} />
               </div>
             </aside>
           </div>
 
-          <RelatedContent
-            items={[
-              ...(hub.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
-              ...(hub.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
-              ...(hub.relatedPosts || []).map(s => ({ slug: s, type: "blog" as const, title: getContentTitle("blog", s) ?? undefined })),
-            ]}
-            title="Related Resources"
+          <InternalLinks category={hub.audience} excludeSlug={hub.slug} />
+          
+          <EnhancedRelatedContent
+            title="More Resources"
+            maxItems={6}
           />
         </Container>
       </article>

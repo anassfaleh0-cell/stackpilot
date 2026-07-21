@@ -56,12 +56,12 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
 
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
               <InfoCard icon={
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3" />
                 </svg>
               } value={item.term} title="Glossary Term" description={item.category} />
               <InfoCard icon={
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10" />
                   <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                 </svg>
@@ -80,7 +80,7 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
               <div className="mt-8">
                 <div className="rounded-xl border border-success-subtle bg-success-subtle/30 p-4">
                   <div className="flex items-center gap-2 mb-3">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
                     </svg>
                     <span className="font-semibold text-sm text-success">Real-World Examples</span>
@@ -117,7 +117,7 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
             {item.relatedTerms.length > 0 && (
               <div className="mt-12 pt-8 border-t border-border">
                 <div className="flex items-center gap-2 mb-4">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M16 12H8" />
                   </svg>
@@ -127,7 +127,7 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
                   {item.relatedTerms.map((r) => (
                     <Link key={r} href={`/glossary/${r}`} className="inline-flex items-center gap-1 rounded-lg border border-primary/20 px-3 py-1.5 text-sm transition-colors text-primary hover:bg-primary-subtle">
                       {termMap[r] || r}
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M7 17l9.2-9.2M17 17V7H7" />
                       </svg>
                     </Link>

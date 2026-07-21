@@ -1,15 +1,17 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, AboutPageSchema } from "@/components/seo/json-ld"
-import { site } from "@/lib/constants"
+import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, AboutPageSchema, WebPageSchema, OrganizationSchema, ArticleSchema } from "@/components/seo/json-ld"
+import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAlternative, getAllAlternatives, getContentTitle } from "@/lib/content/registry"
+import { InternalLinks } from "@/components/content/internal-links"
+import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Star, ExternalLink, ArrowRight, CheckCircle2 } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
-import { RelatedContent } from "@/components/dynamic-client"
+import { EEATProcess } from "@/components/seo/editorial-process"
 
 export function generateStaticParams() {
   return getAllAlternatives().map((a) => ({ slug: a.slug }))
@@ -19,7 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const alt = getAlternative(slug)
   if (!alt) return {}
-  return createMetadata({ title: alt.title, description: alt.description, path: `/alternatives/${alt.slug}` })
+  const shortTitle = alt.title.length > 58 ? alt.title.slice(0, 55) + "..." : alt.title
+  return createMetadata({ title: shortTitle, description: `Looking for ${alt.toolName} alternatives? Compare the top ${alt.alternatives.length} competitors with ratings, pricing, and expert analysis.`, path: `/alternatives/${alt.slug}`, ogType: "article", publishedAt: alt.lastUpdated, updatedAt: alt.lastUpdated, articleSection: alt.category })
 }
 
 export default async function AlternativePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -31,6 +34,10 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Alternatives", href: "/alternatives" }, { name: alt.title, href: `/alternatives/${slug}` }]} />
       <CollectionPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} />
+      <ItemListSchema items={alt.alternatives.map(a => ({ name: a.name, url: `${site.url}/reviews/${a.slug}` }))} url={`${site.url}/alternatives/${slug}`} />
+      <WebPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} dateModified={alt.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: alt.alternatives.map((a, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "SoftwareApplication", name: a.name, url: `${site.url}/reviews/${a.slug}` } })) }} />
+      <OrganizationSchema />
+      <ArticleSchema title={alt.title} description={alt.description} publishedAt={alt.lastUpdated} updatedAt={alt.lastUpdated} author="PilotStack Team" url={`${site.url}/alternatives/${slug}`} wordCount={alt.description.split(/\s+/).length} category={alt.category} />
       <AboutPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} about={alt.alternatives.map((a) => ({ "@type": "SoftwareApplication", name: a.name, url: `${site.url}/reviews/${a.slug}` }))} />
       <FAQSchema questions={alt.faqs} />
       <Container className="pt-8">
@@ -45,7 +52,9 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
           <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-8 pb-4 border-b border-border">
             <Badge variant="default">{alt.category}</Badge>
             <span>Based on {alt.alternatives.length} alternatives</span>
-            <span className="ml-auto text-[11px]">Last updated {alt.lastUpdated}</span>
+            <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>Researched by PilotStack Team</span>
+            <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>Updated {alt.lastUpdated}</span>
+            <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we compare</a>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-12">
@@ -161,17 +170,17 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                     </div>
                   </GlassCard>
                 )}
+
+                <EEATProcess category={alt.category} />
               </div>
             </aside>
           </div>
 
-          <RelatedContent
-            items={[
-              ...(alt.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
-              ...(alt.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
-              ...(alt.relatedPosts || []).map(s => ({ slug: s, type: "blog" as const, title: getContentTitle("blog", s) ?? undefined })),
-            ]}
-            title="Related Resources"
+          <InternalLinks category={alt.category} excludeSlug={alt.slug} />
+          
+          <EnhancedRelatedContent
+            title="More Resources"
+            maxItems={6}
           />
         </Container>
       </article>

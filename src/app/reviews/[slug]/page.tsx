@@ -1,14 +1,15 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, SoftwareSchema, ReviewSchema, FAQSchema, WebPageSchema, ArticleSchema, NewsArticleSchema } from "@/components/seo/json-ld"
-import { site } from "@/lib/constants"
+import { BreadcrumbSchema, SoftwareSchema, ReviewSchema, FAQSchema, WebPageSchema, ArticleSchema, NewsArticleSchema, OrganizationSchema } from "@/components/seo/json-ld"
+import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getReview, getContentTitle } from "@/lib/content/registry"
-import { getAllReviews } from "@/lib/content/registry"
+import { getReview, getContentTitle, getAllReviews, getAllComparisons, getAllBest } from "@/lib/content/registry"
 import { getEntity } from "@/lib/entities/data"
 import { EntityOverview, CapabilitiesGrid, UseCasePanel, IntegrationDisplay, PricingTable, AutoComparison, SemanticLinks, EditorialHero, EditorialProsCons, EditorialFeatureMatrix, EditorialRatingVisual, EditorialPricing, EditorialSectionIllustration, EditorialExpert, GlassCard, InfoCard } from "@/components/dynamic"
+import { EEATProcess } from "@/components/seo/editorial-process"
 import { EditorialPricingLadder, EditorialWorkflow, EditorialFeatureRadar, EditorialImplementationFlow, SecurityTable, RelatedContent } from "@/components/dynamic-client"
+import { InternalLinks } from "@/components/content/internal-links"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
@@ -24,8 +25,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!tool) return {}
   const wordCount = tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)
   return createMetadata({
-    title: `${tool.name} Review 2026: Expert Analysis, Pricing & Top Alternatives`,
-    description: `Read our hands-on ${tool.name} review. Expert analysis of features, pricing, pros, cons, security, and alternatives. Updated for 2026.`,
+    title: `${tool.name} Review (2026): Pricing, Pros, Cons & Top Alternatives`,
+    description: `Hands-on ${tool.name} review. See real pros, cons, pricing details, and the best alternatives before you buy. Expert-tested for 2026.`,
     path: `/reviews/${tool.slug}`,
     ogType: "article",
     publishedAt: tool.lastReviewed,
@@ -62,6 +63,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
       <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.lastReviewed} />
       <NewsArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.lastReviewed} updatedAt={tool.lastReviewed} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} />
       <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.lastReviewed} updatedAt={tool.lastReviewed} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} />
+      <OrganizationSchema />
       <FAQSchema questions={tool.faqs} />
 
       <Container className="pt-8">
@@ -104,11 +106,11 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               </div>
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-1">
                 <span className="flex items-center gap-1">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+                  <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                   Reviewed by {tool.author}
                 </span>
                 <span className="flex items-center gap-1">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
+                  <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
                   Updated {tool.lastReviewed}
                 </span>
                 <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we test</a>
@@ -179,15 +181,15 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 <p className="text-sm text-muted-foreground mb-4">We verify our hands-on testing against aggregated user reviews from major platforms. {tool.name} holds a {tool.rating}/5 across {tool.reviewCount.toLocaleString()} reviews on G2, Capterra, and TrustRadius.</p>
                 <div className="flex flex-wrap gap-3">
                   <a href={`https://www.g2.com/products/${tool.slug}/review`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     Read G2 reviews
                   </a>
                   <a href={`https://www.capterra.com/p/${tool.slug}/`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                     Read Capterra reviews
                   </a>
                   <a href={`https://www.trustradius.com/products/${tool.slug}/reviews`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+                    <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
                     Read TrustRadius reviews
                   </a>
                 </div>
@@ -199,17 +201,17 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
                   <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={tool.rating.toString()} title="Overall Rating" description={`Based on ${tool.reviewCount.toLocaleString()} reviews`} />
                   <InfoCard icon={
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   } value={`${tool.features.filter((f) => f.available).length}`} title="Available Features" description={`Out of ${tool.features.length} total`} />
                   <InfoCard icon={
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                     </svg>
                   } value={tool.pricing} title="Pricing Model" />
                   <InfoCard icon={
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <circle cx="12" cy="12" r="10" />
                       <path d="M12 6v6l4 2" />
                     </svg>
@@ -274,7 +276,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* Before You Buy — Implementation guidance */}
               <section className="mb-12 rounded-xl border border-primary/20 bg-primary-subtle/10 p-5">
                 <div className="flex items-center gap-2 mb-3">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707"/></svg>
+                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707"/></svg>
                   <h2 className="text-lg font-bold">Before You Buy</h2>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-3 text-sm">
@@ -318,7 +320,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                           <ul className="space-y-2">
                             {section.items.map((item, j) => (
                               <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0">
+                                <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0">
                                   <polyline points="20 6 9 17 4 12" />
                                 </svg>
                                 <span>{item}</span>
@@ -365,7 +367,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 <GlassCard>
                   <div className="p-4">
                     <div className="flex items-center gap-2 mb-3">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M9 12l2 2 4-4" />
                         <circle cx="12" cy="12" r="10" />
                       </svg>
@@ -400,26 +402,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 {/* Expert Reviewer */}
                 <EditorialExpert author={tool.author} reviewedAt={tool.lastReviewed} />
 
-                {/* Reading time & independence */}
-                <GlassCard>
-                  <div className="p-4 space-y-3 text-xs text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
-                      <span>{Math.max(5, Math.ceil(tool.content.reduce((a, s) => a + s.body.split(" ").length, 0) / 200))} min read</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
-                      <span>Reviewed {tool.lastReviewed}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                      <span>Evidence score: <strong>High</strong> (verified by 2 analysts)</span>
-                    </div>
-                    <div className="pt-2 border-t border-border">
-                      <p className="text-[11px] leading-relaxed">We test every tool hands-on for at least two weeks. No vendor can pay for placement or influence scores. <a href="/methodology" className="text-primary hover:underline">Full methodology</a>.</p>
-                    </div>
-                  </div>
-                </GlassCard>
+                {/* EEAT Process */}
+                <EEATProcess category={tool.category} />
 
                 {/* Company Info */}
                 {tool.company && (
@@ -529,14 +513,23 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
             </section>
           )}
 
-          <RelatedContent
-            items={[
-              ...(tool.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
-              ...(tool.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
-              ...(tool.relatedPosts || []).map(s => ({ slug: s, type: "blog" as const, title: getContentTitle("blog", s) ?? undefined })),
-            ]}
-            title="Related Resources"
-          />
+          <InternalLinks category={tool.category} excludeSlug={tool.slug} />
+          {(() => {
+            const cat = categories.find(c => c.name === tool.category)
+            if (!cat) return null
+            return (
+              <section className="mt-16">
+                <h2 className="text-2xl font-bold tracking-tight mb-6">Related Categories</h2>
+                <div className="flex flex-wrap gap-2">
+                  {categories.filter(c => c.name !== tool.category).slice(0, 6).map(c => (
+                    <Link key={c.slug} href={`/category/${c.slug}`} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
+                      {c.name}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )
+          })()}
 
           {/* Previous / Next review */}
           {(() => {

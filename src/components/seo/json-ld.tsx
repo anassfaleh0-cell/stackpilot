@@ -126,7 +126,7 @@ export function NewsArticleSchema({
     publisher: { "@id": `${site.url}/#organization` },
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
-    image: image || `${site.url}/og.png`,
+    image: { "@type": "ImageObject", url: image || `${site.url}/og.png` },
     mainEntityOfPage: { "@type": "WebPage", "@id": url || site.url },
     inLanguage: "en-US",
     wordCount: wordCount || undefined,
@@ -354,7 +354,7 @@ export function AboutPageSchema({ name, description, url, about }: {
 }) {
   const schema = clean({
     "@context": ctx,
-    "@type": "WebPage",
+    "@type": "AboutPage",
     "@id": url + "#about-page",
     name,
     description,

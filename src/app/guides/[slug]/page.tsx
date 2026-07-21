@@ -1,14 +1,17 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, HowToSchema, WebPageSchema } from "@/components/seo/json-ld"
-import { site } from "@/lib/constants"
+import { BreadcrumbSchema, HowToSchema, WebPageSchema, ArticleSchema, NewsArticleSchema, FAQSchema, OrganizationSchema } from "@/components/seo/json-ld"
+import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getGuide, getContentTitle } from "@/lib/content/registry"
 import { getAllGuides } from "@/lib/content/registry"
+import { InternalLinks } from "@/components/content/internal-links"
 import { notFound } from "next/navigation"
+import Link from "next/link"
 import { EditorialHero, EditorialSectionIllustration, GlassCard, InfoCard } from "@/components/dynamic"
 import { EditorialProcess, RelatedContent } from "@/components/dynamic-client"
+import { EEATProcess } from "@/components/seo/editorial-process"
 import { BrandDivider } from "@/components/brand/patterns"
 import { CheckCircle2, BookOpen, Clock, Layers, Lightbulb } from "lucide-react"
 
@@ -20,7 +23,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const guide = getGuide(slug)
   if (!guide) return {}
-  return createMetadata({ title: guide.title, description: guide.description, path: `/guides/${slug}`, ogType: "article", publishedAt: guide.lastUpdated, updatedAt: guide.lastUpdated })
+  const seoDesc = guide.description.length > 155 ? guide.description.slice(0, 152) + "..." : guide.description
+  return createMetadata({ title: guide.title.length > 58 ? guide.title.slice(0, 55) + "..." : guide.title, description: seoDesc, path: `/guides/${slug}`, ogType: "article", publishedAt: guide.lastUpdated, updatedAt: guide.lastUpdated, articleSection: guide.category, readingTime: guide.readingTime })
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -32,7 +36,11 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Guides", href: "/guides" }, { name: guide.title, href: `/guides/${slug}` }]} />
       <HowToSchema name={guide.title} description={guide.description} steps={guide.sections.map((s) => ({ name: s.title, text: s.body }))} />
-      <WebPageSchema name={guide.title} description={guide.description} url={`${site.url}/guides/${slug}`} mainEntity={guide.relatedTools.length > 0 ? { "@type": "ItemList", itemListElement: guide.relatedTools.map((t, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "SoftwareApplication", name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` } })) } : undefined} />
+      <ArticleSchema title={guide.title} description={guide.description} publishedAt={guide.lastUpdated} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={guide.sections.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={guide.category} />
+      <NewsArticleSchema title={guide.title} description={guide.description} publishedAt={guide.lastUpdated} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={guide.sections.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={guide.category} />
+      <OrganizationSchema />
+      <FAQSchema questions={guide.sections.slice(0, 5).map(s => ({ question: s.title, answer: s.body.slice(0, 120) }))} />
+      <WebPageSchema name={guide.title} description={guide.description} url={`${site.url}/guides/${slug}`} dateModified={guide.lastUpdated} mainEntity={guide.relatedTools.length > 0 ? { "@type": "ItemList", itemListElement: guide.relatedTools.map((t, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "SoftwareApplication", name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` } })) } : undefined} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Guides", href: "/guides" }, { name: guide.title }]} />
       </Container>
@@ -68,11 +76,11 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             {/* Author & metadata */}
             <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-6">
               <span className="flex items-center gap-1">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+                <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                 By {guide.author}
               </span>
               <span className="flex items-center gap-1">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
+                <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
                 Updated {guide.lastUpdated}
               </span>
               <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">Our methodology</a>
@@ -82,16 +90,19 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             <div className="grid sm:grid-cols-3 gap-3 mb-8">
               <InfoCard icon={<Clock size={16} stroke="var(--primary)" />} value={`${guide.readingTime} min`} title="Reading Time" />
               <InfoCard icon={
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M3 3v18h18M7 16l4-8 4 4 4-6" />
                 </svg>
               } value={guide.sections.length.toString()} title="Sections" />
               <InfoCard icon={
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707" />
                 </svg>
               } value={guide.difficulty} title="Difficulty" />
             </div>
+
+            {/* EEAT Process */}
+            <EEATProcess category={guide.category} />
 
             {/* Process architecture */}
             <EditorialProcess sections={guide.sections} slug={guide.slug} category={guide.category} />
@@ -199,15 +210,24 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
               </GlassCard>
             </div>
 
-            <RelatedContent
-              items={[
-                ...(guide.relatedTools || []).map(s => ({ slug: s, type: "review" as const, title: getContentTitle("review", s) ?? undefined })),
-                ...(guide.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
-                ...(guide.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
-                ...(guide.relatedPosts || []).map(s => ({ slug: s, type: "blog" as const, title: getContentTitle("blog", s) ?? undefined })),
-              ]}
-              title="Related Resources"
-            />
+            <InternalLinks category={guide.category} excludeSlug={guide.slug} />
+
+            {(() => {
+              const cat = categories.find(c => c.name === guide.category)
+              if (!cat) return null
+              return (
+                <section className="mt-16">
+                  <h2 className="text-2xl font-bold tracking-tight mb-6">Related Categories</h2>
+                  <div className="flex flex-wrap gap-2">
+                    {categories.filter(c => c.name !== guide.category).slice(0, 6).map(c => (
+                      <Link key={c.slug} href={`/category/${c.slug}`} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
+                        {c.name}
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )
+            })()}
           </div>
         </Container>
       </article>

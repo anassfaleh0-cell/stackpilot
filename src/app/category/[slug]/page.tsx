@@ -2,7 +2,8 @@ import { Container, Section } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, ArticleSchema } from "@/components/seo/json-ld"
+import { InternalLinks } from "@/components/content/internal-links"
+import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, ArticleSchema, WebPageSchema, OrganizationSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { site, categories } from "@/lib/constants"
 import { getAllReviews, getAllGuides, getAllComparisons, getAllBlogPosts, getAllGlossaryTerms } from "@/lib/content/registry"
@@ -24,10 +25,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const category = categories.find((c) => c.slug === slug)
   if (!category) return {}
   const knowledge = getCategoryKnowledge(slug)
+  const catReviews = getAllReviews().filter((r) => r.category === category.name)
   return createMetadata({
-    title: `Best ${category.name} Software 2026`,
-    description: knowledge?.description || `Discover the best ${category.name.toLowerCase()} software tools. Expert reviews, comparisons, and buying guides to help you choose the right solution.`,
+    title: `Best ${category.name} Software 2026: Reviews & Buying Guide`,
+    description: `Find the best ${category.name.toLowerCase()} software with expert reviews, pricing comparisons, and buying tips. ${catReviews.length} tools tested and rated for 2026.`,
     path: `/category/${slug}`,
+    articleSection: category.name,
   })
 }
 
@@ -39,7 +42,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const knowledge = getCategoryKnowledge(slug)
   const reviews = getAllReviews().filter((r) => r.category === category.name)
   const guides = getAllGuides().filter((g) => g.category === category.name)
-  const comparisons = getAllComparisons().filter((c) => c.category === category.name)
+  const comparisons = getAllComparisons().filter((c) => c.category === category.name || c.secondaryCategories?.includes(category.name))
   const posts = getAllBlogPosts().filter((p) => p.category === category.name)
   const glossary = getAllGlossaryTerms().filter((t) => t.category === category.name)
   const bestPick = [...reviews].sort((a, b) => b.rating - a.rating)[0]
@@ -54,8 +57,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
+      <WebPageSchema name={`Best ${category.name} Software 2026`} description={knowledge?.description || `Best ${category.name.toLowerCase()} software tools`} url={`${site.url}/category/${category.slug}`} />
       <CollectionPageSchema name={category.name} description={`Best ${category.name.toLowerCase()} software tools`} url={`${site.url}/category/${category.slug}`} />
       {reviews.length > 0 && <ItemListSchema items={reviews.map(r => ({ name: r.name, url: `${site.url}/reviews/${r.slug}` }))} url={`${site.url}/category/${category.slug}`} />}
+      <OrganizationSchema />
       {knowledge?.faqs && <FAQSchema questions={knowledge.faqs} />}
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: category.name, href: `/category/${slug}` }]} />
       <Container className="pt-8">
@@ -505,6 +510,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           </div>
         </aside>
       </div>
+
+      <InternalLinks category={category.name} excludeSlug={category.slug} />
     </>
   )
 }

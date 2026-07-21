@@ -93,12 +93,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <div className="grid sm:grid-cols-3 gap-3 mb-10">
               <InfoCard icon={<Clock size={16} stroke="var(--primary)" />} value={`${post.readingTime} min`} title="Reading Time" />
               <InfoCard icon={
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3" />
                 </svg>
               } value={post.category} title="Category" />
               <InfoCard icon={
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                 </svg>
               } value={post.tags.length > 0 ? post.tags[0] : "Featured"} title="Topic" />
@@ -132,7 +132,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <GlassCard>
                 <div className="p-5">
                   <div className="flex items-center gap-2 mb-4">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
                     </svg>
                     <span className="font-semibold text-sm">Key Takeaways</span>
