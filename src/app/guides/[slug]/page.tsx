@@ -1,9 +1,10 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, HowToSchema, WebPageSchema, ArticleSchema, NewsArticleSchema, FAQSchema, OrganizationSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, HowToSchema, WebPageSchema, ArticleSchema, FAQSchema, OrganizationSchema } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
+import { truncate, formatDate } from "@/lib/utils"
 import { getGuide, getContentTitle } from "@/lib/content/registry"
 import { getAllGuides } from "@/lib/content/registry"
 import { InternalLinks } from "@/components/content/internal-links"
@@ -23,8 +24,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const guide = getGuide(slug)
   if (!guide) return {}
-  const seoDesc = guide.description.length > 155 ? guide.description.slice(0, 152) + "..." : guide.description
-  return createMetadata({ title: guide.title.length > 58 ? guide.title.slice(0, 55) + "..." : guide.title, description: seoDesc, path: `/guides/${slug}`, ogType: "article", publishedAt: guide.lastUpdated, updatedAt: guide.lastUpdated, articleSection: guide.category, readingTime: guide.readingTime })
+  const seoDesc = truncate(guide.description, 160)
+  return createMetadata({ title: truncate(guide.title, 60), description: seoDesc, path: `/guides/${slug}`, ogType: "article", publishedAt: guide.lastUpdated, updatedAt: guide.lastUpdated, articleSection: guide.category, readingTime: guide.readingTime })
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -37,9 +38,8 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Guides", href: "/guides" }, { name: guide.title, href: `/guides/${slug}` }]} />
       <HowToSchema name={guide.title} description={guide.description} steps={guide.sections.map((s) => ({ name: s.title, text: s.body }))} />
       <ArticleSchema title={guide.title} description={guide.description} publishedAt={guide.lastUpdated} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={guide.sections.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={guide.category} />
-      <NewsArticleSchema title={guide.title} description={guide.description} publishedAt={guide.lastUpdated} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={guide.sections.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={guide.category} />
       <OrganizationSchema />
-      <FAQSchema questions={guide.sections.slice(0, 5).map(s => ({ question: s.title, answer: s.body.slice(0, 120) }))} />
+      <FAQSchema questions={guide.sections.slice(0, 5).map(s => ({ question: s.title, answer: truncate(s.body, 120) }))} path={`/guides/${slug}`} />
       <WebPageSchema name={guide.title} description={guide.description} url={`${site.url}/guides/${slug}`} dateModified={guide.lastUpdated} mainEntity={guide.relatedTools.length > 0 ? { "@type": "ItemList", itemListElement: guide.relatedTools.map((t, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "SoftwareApplication", name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` } })) } : undefined} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Guides", href: "/guides" }, { name: guide.title }]} />
@@ -81,7 +81,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
               </span>
               <span className="flex items-center gap-1">
                 <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
-                Updated {guide.lastUpdated}
+                Updated {formatDate(guide.lastUpdated)}
               </span>
               <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">Our methodology</a>
             </div>

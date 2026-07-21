@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { X, Menu } from "lucide-react"
-import { navLinks, categories } from "@/lib/constants"
+import { navConfig, categories } from "@/lib/constants"
 import { useState, useEffect, useCallback, useRef } from "react"
 import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
@@ -94,16 +94,35 @@ export function MobileNav() {
       >
         <nav aria-label="Mobile navigation">
           <ul className="space-y-1">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block px-3 py-2.5 text-sm font-medium rounded-lg transition-colors hover:bg-muted-bg hover:text-foreground"
-                  tabIndex={open ? 0 : -1}
-                >
-                  {link.label}
-                </Link>
+            {navConfig.map((section) => (
+              <li key={section.label}>
+                {section.children.length === 0 ? (
+                  <Link
+                    href={section.href}
+                    onClick={() => setOpen(false)}
+                    className="block px-3 py-2.5 text-sm font-medium rounded-lg transition-colors hover:bg-muted-bg hover:text-foreground"
+                    tabIndex={open ? 0 : -1}
+                  >
+                    {section.label}
+                  </Link>
+                ) : (
+                  <>
+                    <p className="px-3 pt-1 pb-0.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      {section.label}
+                    </p>
+                    {section.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        onClick={() => setOpen(false)}
+                        className="block px-3 py-2 text-sm rounded-lg transition-colors hover:bg-muted-bg hover:text-foreground text-muted-foreground"
+                        tabIndex={open ? 0 : -1}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </>
+                )}
               </li>
             ))}
           </ul>

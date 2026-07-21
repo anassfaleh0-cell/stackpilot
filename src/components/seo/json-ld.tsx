@@ -189,6 +189,36 @@ export function SoftwareSchema({ name, description, applicationCategory, operati
   return ld(schema, "ld-software")
 }
 
+export function ProductSchema({ name, description, image, brand, offers, aggregateRating }: {
+  name: string
+  description: string
+  image?: string
+  brand?: string
+  offers?: { price: number; priceCurrency: string }[]
+  aggregateRating?: { ratingValue: number; reviewCount: number }
+}) {
+  const schema = clean({
+    "@context": ctx,
+    "@type": "Product",
+    "@id": `${site.url}/#product-${name.toLowerCase().replace(/\s+/g, "-")}`,
+    name,
+    description,
+    ...(image ? { image: { "@type": "ImageObject", url: image } } : {}),
+    ...(brand ? { brand: { "@type": "Brand", name: brand } } : {}),
+    ...(offers && offers.length > 0 ? { offers: offers.map(o => ({ "@type": "Offer", price: o.price, priceCurrency: o.priceCurrency })) } : {}),
+    ...(aggregateRating ? {
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: aggregateRating.ratingValue,
+        bestRating: 5,
+        worstRating: 1,
+        ratingCount: aggregateRating.reviewCount,
+      },
+    } : {}),
+  })
+  return ld(schema, "ld-product")
+}
+
 export function ReviewSchema({ name, description, rating, reviewCount, url, datePublished, body, companyInfo }: {
   name: string
   description: string
@@ -259,11 +289,11 @@ export function CollectionPageSchema({ name, description, url }: { name: string;
   return ld(schema, "ld-collection-page")
 }
 
-export function FAQSchema({ questions }: { questions: { question: string; answer: string }[] }) {
+export function FAQSchema({ questions, path }: { questions: { question: string; answer: string }[]; path?: string }) {
   const schema = clean({
     "@context": ctx,
     "@type": "FAQPage",
-    "@id": `${site.url}/#faq`,
+    "@id": (path ? `${site.url}${path}` : `${site.url}/`) + "#faq",
     mainEntity: questions.map((q) => ({
       "@type": "Question",
       name: q.question,

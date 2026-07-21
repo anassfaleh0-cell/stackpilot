@@ -5,6 +5,7 @@ import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, Abou
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAlternative, getAllAlternatives, getContentTitle } from "@/lib/content/registry"
+import { formatDate } from "@/lib/utils"
 import { InternalLinks } from "@/components/content/internal-links"
 import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound } from "next/navigation"
@@ -39,7 +40,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
       <OrganizationSchema />
       <ArticleSchema title={alt.title} description={alt.description} publishedAt={alt.lastUpdated} updatedAt={alt.lastUpdated} author="PilotStack Team" url={`${site.url}/alternatives/${slug}`} wordCount={alt.description.split(/\s+/).length} category={alt.category} />
       <AboutPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} about={alt.alternatives.map((a) => ({ "@type": "SoftwareApplication", name: a.name, url: `${site.url}/reviews/${a.slug}` }))} />
-      <FAQSchema questions={alt.faqs} />
+      <FAQSchema questions={alt.faqs} path={`/alternatives/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Alternatives", href: "/alternatives" }, { name: alt.title }]} />
       </Container>
@@ -53,7 +54,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
             <Badge variant="default">{alt.category}</Badge>
             <span>Based on {alt.alternatives.length} alternatives</span>
             <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>Researched by PilotStack Team</span>
-            <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>Updated {alt.lastUpdated}</span>
+            <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>Updated {formatDate(alt.lastUpdated)}</span>
             <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we compare</a>
           </div>
 

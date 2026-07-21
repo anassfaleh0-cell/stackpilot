@@ -4,9 +4,23 @@ import path from "node:path"
 
 const CONTENT_DIR = path.resolve(process.cwd(), "content")
 
+const DATE_FIELDS = new Set(["lastUpdated", "lastReviewed", "publishedAt", "updatedAt", "datePublished", "dateModified"])
+
+function toISODate(date: string): string {
+  const d = new Date(date)
+  if (isNaN(d.getTime())) return date
+  return d.toISOString().slice(0, 10)
+}
+
 function readJson<T>(filePath: string): T {
   const raw = fs.readFileSync(filePath, "utf-8")
-  return JSON.parse(raw) as T
+  const data = JSON.parse(raw) as Record<string, unknown>
+  for (const key of Object.keys(data)) {
+    if (DATE_FIELDS.has(key) && typeof data[key] === "string") {
+      data[key] = toISODate(data[key])
+    }
+  }
+  return data as T
 }
 
 function readDir(dir: string): string[] {

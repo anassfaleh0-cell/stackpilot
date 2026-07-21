@@ -1,5 +1,12 @@
 import { site } from "./constants"
 
+function truncateAtWordBoundary(text: string, maxLen: number): string {
+  if (text.length <= maxLen) return text
+  const truncated = text.slice(0, maxLen)
+  const lastSpace = truncated.lastIndexOf(" ")
+  return (lastSpace > 0 ? truncated.slice(0, lastSpace) : truncated) + "…"
+}
+
 export function createMetadata({
   title,
   description,
@@ -31,16 +38,16 @@ export function createMetadata({
   const imageUrl = ogImage || `${site.url}/og.svg`
   const isArticle = ogType === "article"
 
-  const fullTitle = title
-  const now = new Date().toISOString()
+  const fullTitle = truncateAtWordBoundary(title, 60)
+  const fullDescription = truncateAtWordBoundary(description, 160)
 
   return {
     title: fullTitle,
-    description,
+    description: fullDescription,
     alternates: { canonical: url },
     openGraph: {
       title: fullTitle,
-      description,
+      description: fullDescription,
       url,
       siteName: site.name,
       locale: site.locale,
@@ -55,7 +62,7 @@ export function createMetadata({
       site: "@pilotstack",
       creator: "@pilotstack",
       title: fullTitle,
-      description,
+      description: fullDescription,
       images: [imageUrl],
     },
     robots: {
@@ -73,6 +80,9 @@ export function createMetadata({
       ...(readingTime ? { "twitter:label1": "Reading time", "twitter:data1": `${readingTime} min` } : {}),
       "twitter:label2": "Category",
       "twitter:data2": articleSection || "Software Reviews",
+      ...(isArticle && articleTags && articleTags.length > 0
+        ? Object.fromEntries(articleTags.map((tag, i) => [i === 0 ? "article:tag" : `article:tag:${i}`, tag]))
+        : {}),
     },
   }
 }

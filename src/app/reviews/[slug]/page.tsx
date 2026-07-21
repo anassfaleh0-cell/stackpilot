@@ -1,11 +1,12 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, SoftwareSchema, ReviewSchema, FAQSchema, WebPageSchema, ArticleSchema, NewsArticleSchema, OrganizationSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, SoftwareSchema, ReviewSchema, ProductSchema, FAQSchema, WebPageSchema, ArticleSchema, OrganizationSchema } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getReview, getContentTitle, getAllReviews, getAllComparisons, getAllBest } from "@/lib/content/registry"
 import { getEntity } from "@/lib/entities/data"
+import { formatDate } from "@/lib/utils"
 import { EntityOverview, CapabilitiesGrid, UseCasePanel, IntegrationDisplay, PricingTable, AutoComparison, SemanticLinks, EditorialHero, EditorialProsCons, EditorialFeatureMatrix, EditorialRatingVisual, EditorialPricing, EditorialSectionIllustration, EditorialExpert, GlassCard, InfoCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { EditorialPricingLadder, EditorialWorkflow, EditorialFeatureRadar, EditorialImplementationFlow, SecurityTable, RelatedContent } from "@/components/dynamic-client"
@@ -58,13 +59,13 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
         { name: "Reviews", href: "/reviews" },
         { name: tool.name, href: `/reviews/${tool.slug}` },
       ]} />
+      <ProductSchema name={tool.name} description={tool.description} image={tool.logo ? `${site.url}${tool.logo}` : undefined} brand={tool.name} offers={entity?.pricing?.map(p => ({ price: p.price || 0, priceCurrency: p.currency || "USD" }))} aggregateRating={{ ratingValue: tool.rating, reviewCount: tool.reviewCount }} />
       <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} reviewCount={tool.reviewCount} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.lastReviewed} body={tool.description} companyInfo={entity?.company || tool.company} />
       <SoftwareSchema name={tool.name} description={tool.tagline} applicationCategory="BusinessApplication" brand={tool.name} operatingSystem={entity?.company?.platforms?.join(", ")} offers={entity?.pricing?.[0] ? { price: entity.pricing[0].price?.toString() || "", priceCurrency: entity.pricing[0].currency || "USD" } : undefined} />
       <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.lastReviewed} />
-      <NewsArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.lastReviewed} updatedAt={tool.lastReviewed} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} />
       <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.lastReviewed} updatedAt={tool.lastReviewed} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} />
       <OrganizationSchema />
-      <FAQSchema questions={tool.faqs} />
+      <FAQSchema questions={tool.faqs} path={`/reviews/${tool.slug}`} />
 
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Reviews", href: "/reviews" }, { name: tool.name }]} />
@@ -111,7 +112,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 </span>
                 <span className="flex items-center gap-1">
                   <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
-                  Updated {tool.lastReviewed}
+                  Updated {formatDate(tool.lastReviewed)}
                 </span>
                 <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we test</a>
               </div>

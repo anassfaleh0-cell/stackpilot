@@ -61,7 +61,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
       <CollectionPageSchema name={category.name} description={`Best ${category.name.toLowerCase()} software tools`} url={`${site.url}/category/${category.slug}`} />
       {reviews.length > 0 && <ItemListSchema items={reviews.map(r => ({ name: r.name, url: `${site.url}/reviews/${r.slug}` }))} url={`${site.url}/category/${category.slug}`} />}
       <OrganizationSchema />
-      {knowledge?.faqs && <FAQSchema questions={knowledge.faqs} />}
+      {knowledge?.faqs && <FAQSchema questions={knowledge.faqs} path={`/category/${slug}`} />}
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: category.name, href: `/category/${slug}` }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Software Categories", href: "/reviews" }, { name: category.name }]} />

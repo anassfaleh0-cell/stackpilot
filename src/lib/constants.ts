@@ -25,6 +25,40 @@ export const navLinks = [
   { href: "/alternatives", label: "Alternatives" },
 ]
 
+export const navConfig = [
+  {
+    label: "Compare Tools",
+    href: "/comparisons",
+    children: [
+      { label: "Comparisons", href: "/comparisons" },
+      { label: "Best Software", href: "/best" },
+      { label: "Alternatives", href: "/alternatives" },
+    ],
+  },
+  {
+    label: "Find by Need",
+    href: "/use-cases",
+    children: [
+      { label: "Use Cases", href: "/use-cases" },
+      { label: "Industries", href: "/industries" },
+      { label: "By Business Type", href: "/hubs" },
+    ],
+  },
+  {
+    label: "Guides & Research",
+    href: "/guides",
+    children: [
+      { label: "Guides", href: "/guides" },
+      { label: "Research", href: "/blog" },
+    ],
+  },
+  {
+    label: "Reviews",
+    href: "/reviews",
+    children: [],
+  },
+]
+
 export const secondaryNavLinks = [
   { href: "/methodology", label: "Methodology" },
   { href: "/about", label: "About" },

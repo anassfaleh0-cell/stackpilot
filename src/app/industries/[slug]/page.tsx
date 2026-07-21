@@ -1,10 +1,11 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, AboutPageSchema, NewsArticleSchema, ArticleSchema, WebPageSchema, ItemListSchema, OrganizationSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, AboutPageSchema, ArticleSchema, WebPageSchema, ItemListSchema, OrganizationSchema } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getIndustry, getAllIndustries, getContentTitle } from "@/lib/content/registry"
+import { formatDate } from "@/lib/utils"
 import { InternalLinks } from "@/components/content/internal-links"
 import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound } from "next/navigation"
@@ -41,14 +42,13 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Industries", href: "/industries" }, { name: ind.title, href: `/industries/${slug}` }]} />
-      <NewsArticleSchema title={ind.title} description={ind.description} publishedAt={ind.lastUpdated} updatedAt={ind.lastUpdated} author="PilotStack Team" url={`${site.url}/industries/${slug}`} wordCount={ind.description.split(/\s+/).length + ind.recommendations.length * 15} category={ind.industry} />
       <ArticleSchema title={ind.title} description={ind.description} publishedAt={ind.lastUpdated} updatedAt={ind.lastUpdated} author="PilotStack Team" url={`${site.url}/industries/${slug}`} wordCount={ind.description.split(/\s+/).length + ind.recommendations.length * 15} category={ind.industry} />
       <WebPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} dateModified={ind.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: ind.recommendations.map((rec, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "SoftwareApplication", name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` } })) }} />
       <ItemListSchema items={ind.recommendations.map(rec => ({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` }))} url={`${site.url}/industries/${slug}`} />
       <CollectionPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} />
       <AboutPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} about={ind.recommendations.map((rec) => ({ "@type": "SoftwareApplication", name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` }))} />
       <OrganizationSchema />
-      <FAQSchema questions={ind.faqs} />
+      <FAQSchema questions={ind.faqs} path={`/industries/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Industries", href: "/industries" }, { name: ind.title }]} />
       </Container>
@@ -62,7 +62,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <Badge variant="default">{ind.industry}</Badge>
             <span>{ind.recommendations.length} software recommendations</span>
             <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>By PilotStack Team</span>
-            <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>Updated {ind.lastUpdated}</span>
+            <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>Updated {formatDate(ind.lastUpdated)}</span>
             <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we test</a>
           </div>
 
