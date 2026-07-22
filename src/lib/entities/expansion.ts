@@ -2606,4 +2606,34 @@ export const expansionEntities: Record<string, SoftwareEntity> = {
     useCases: {primary:["Use Telegram for communication workflows","Team collaboration and communication"],secondary:["Process automation","Reporting and analytics"],idealCompanySize:["1-1,000 employees"],bestIndustries:["Technology","SaaS","Professional Services"],typicalTeams:["Communication"],commonWorkflows:["Daily communication management","Team coordination"],beginnerSuitability:"High",enterpriseSuitability:"Medium"},
   },
 
+  "moz": {
+    slug: "moz", name: "Moz",
+    company: { website: "https://moz.com", industries: ["Marketing & SEO"] },
+    // pricing unverified — do not use specific figures in content; hedge to vendor page
+    pricing: [],
+  },
+
+  "buffer": {
+    slug: "buffer", name: "Buffer",
+    company: { website: "https://buffer.com", industries: ["Marketing & SEO", "Social Media"] },
+    pricing: [],
+  },
+
+  "hootsuite": {
+    slug: "hootsuite", name: "Hootsuite",
+    company: { website: "https://hootsuite.com", industries: ["Marketing & SEO", "Social Media"] },
+    pricing: [],
+  },
+
+  "sprout-social": {
+    slug: "sprout-social", name: "Sprout Social",
+    company: { website: "https://sproutsocial.com", industries: ["Marketing & SEO", "Social Media"] },
+    pricing: [],
+  },
+
+  "activecampaign": {
+    slug: "activecampaign", name: "ActiveCampaign",
+    company: { website: "https://activecampaign.com", industries: ["Marketing & SEO", "Email Marketing"] },
+    pricing: [],
+  },
 }
