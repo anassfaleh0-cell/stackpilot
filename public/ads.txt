@@ -1,8 +1,9 @@
 # Ads.txt for www.pilotstack.online
-# This file declares authorized sellers of inventory on this domain.
-# Populate with your ad network's publisher ID when ad partnerships are established.
-#
-# Example formats:
-# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
-#
+# This file declares authorized sellers of digital inventory.
+# Replace the EXAMPLE publisher-ID below with your actual ad network details.
 # Contact: ads@pilotstack.online
+
+# OWNER: PilotStack
+# --- REPLACE THE PUB-ID BELOW BEFORE GOING LIVE ---
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+# --- END REPLACEABLE SECTION ---

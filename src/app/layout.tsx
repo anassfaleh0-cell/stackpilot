@@ -5,7 +5,6 @@ import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { GTMScript } from "@/components/analytics/gtm"
-import { GAScript, ClarityScript } from "@/components/analytics"
 import { ClientLayout } from "@/components/layout/client-layout"
 import { OrganizationSchema, WebsiteSchema } from "@/components/seo/json-ld"
 import { siteConfig } from "@/lib/constants"
@@ -96,14 +95,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
 
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){window.dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                analytics_storage: 'denied',
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied'
+              });
+            `,
+          }}
+        />
         <GTMScript />
         <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name}`} href="/rss.xml" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://www.clarity.ms" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.google-analytics.com" />
-        <link rel="preconnect" href="https://www.clarity.ms" />
 
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
@@ -124,8 +131,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <Footer />
-          <GAScript />
-          <ClarityScript />
         </ThemeProvider>
       </body>
     </html>
