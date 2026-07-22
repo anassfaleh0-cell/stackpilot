@@ -5,6 +5,7 @@ export interface SoftwareEntity {
   capabilities?: Capabilities
   security?: SecurityDetail
   pricing?: PricingDetail[]
+  pricingVerifiedDate?: string
   integrations?: string[]
   useCases?: UseCases
 }
@@ -98,6 +99,11 @@ export interface SecurityDetail {
   securityPage?: string
 }
 
+// AI/ML tool pricing is HIGH-VOLATILITY data. Pricing structures change
+// frequently (new tiers, discontinued plans, bundling changes, price adjustments).
+// The pricingVerifiedDate field on SoftwareEntity MUST be updated quarterly
+// for any entity in the AI & Machine Learning category at minimum.
+// Do not treat a one-time "verified" check as sufficient for AI-tool pricing.
 export interface PricingDetail {
   plan: string
   billing: "Monthly" | "Annual" | "One-time" | "Custom"

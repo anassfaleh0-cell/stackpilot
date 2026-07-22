@@ -6,7 +6,7 @@
   "category": "AI & Machine Learning",
   "website": "https://www.jasper.ai",
   "pricing": "Paid",
-  "priceRange": "$49–$69/mo",
+  "priceRange": "$69/mo (Pro) – custom (Business)",
   "rating": 4.4,
   "reviewCount": 8500,
   "pros": [
@@ -17,7 +17,7 @@
     "Team collaboration with shared brand guidelines, campaign folders, and content approval workflows keeps output consistent across contributors"
   ],
   "cons": [
-    "Word count limits on lower-tier plans (10,000 words/month on Creator) feel restrictive for teams producing daily content",
+    "Word count limits on the Pro plan (25,000 words/month) feel restrictive for teams producing daily content at scale; Business plan required for unlimited words",
     "Output quality degrades noticeably for long-form content exceeding 1,500 words, requiring significant human editing",
     "No true free tier limits testing and evaluation before committing to a paid subscription"
   ],
@@ -219,17 +219,17 @@
     },
     {
       "title": "Real Limitations",
-      "body": "Jasper's most significant limitation is word count governance on lower plans. The Creator plan caps output at 10,000 words per month, which a single marketer writing three blog posts per week will exhaust within two weeks. Upgrading to Pro at $69/month unlocks 25,000 words, but heavy users generating ad variants, email sequences, and social posts in volume will still hit limits. Output quality degrades noticeably on pieces longer than 1,500 words — Jasper tends to repeat arguments, introduce contradictions in multi-section content, and lose thematic coherence beyond 2,000 words. The platform lacks a true free tier; the 7-day trial is time-boxed rather than usage-capped, forcing evaluation teams to rush testing. Jasper also lacks native image generation, video scripting, or presentation creation capabilities that competing all-in-one platforms are beginning to offer. Teams that need a single tool for both written and visual content will need to supplement Jasper with Canva, DALL-E, or Midjourney.",
+      "body": "Jasper's most significant limitation is word count governance on the Pro plan. The Pro plan caps output at 25,000 words per month, which a single marketer writing three blog posts per week will exhaust within two to three weeks. Heavy users generating ad variants, email sequences, and social posts in volume will still hit limits. The Business plan with unlimited words is required for high-volume teams. Output quality degrades noticeably on pieces longer than 1,500 words — Jasper tends to repeat arguments, introduce contradictions in multi-section content, and lose thematic coherence beyond 2,000 words. The platform lacks a true free tier; the 7-day trial is time-boxed rather than usage-capped, forcing evaluation teams to rush testing. Jasper also lacks native image generation, video scripting, or presentation creation capabilities that competing all-in-one platforms are beginning to offer. Teams that need a single tool for both written and visual content will need to supplement Jasper with Canva, DALL-E, or Midjourney.",
       "type": "text"
     },
     {
       "title": "Pricing Explained",
-      "body": "Jasper uses user-based monthly pricing with three tiers. Creator at $49/month includes 10,000 words, one Brand Voice, access to all 50+ templates, and basic integrations. Pro at $69/month increases the word limit to 25,000, adds unlimited Brand Voices, SEO Mode, Campaign workspaces, the plagiarism checker, and team collaboration features. Business tier has custom pricing for organizations needing unlimited words, API access, custom templates, dedicated support, and enterprise SSO. Annual billing saves approximately 17% on Creator and Pro. A critical pricing detail: word counts track output, not input prompts, but edited output counts toward the limit even if only minor changes were made. Overage costs approximately $0.02 per additional word on Pro plans, which accumulates rapidly for teams running multiple content campaigns. The absence of a free tier — even a limited one — makes competitive evaluation against ChatGPT, Copy.ai, and Writesonic difficult without a credit card commitment.",
+      "body": "Jasper uses simplified pricing with two core tiers. The Creator plan at $49/month was discontinued for new signups as of early 2026; existing Creator users remain on legacy billing but cannot re-enroll. Pro at $69/month for a single seat includes 25,000 words, unlimited Brand Voices, SEO Mode, Campaign workspaces, plagiarism checker, team collaboration features, and access to all 50+ templates. Add-on seats are available at additional cost. The Business tier uses custom pricing typically ranging from $900 to over $6,000 per month depending on team size, with unlimited words, API access, custom templates, dedicated support, and enterprise SSO. Annual billing saves approximately 17% on the Pro plan. A critical pricing detail: word counts track output, not input prompts, but edited output counts toward the limit even if only minor changes were made. Overage costs approximately $0.02 per additional word on Pro plans, which accumulates rapidly for teams running multiple content campaigns. The absence of a free tier — even a limited one — makes competitive evaluation against ChatGPT, Copy.ai, and Writesonic difficult without a credit card commitment.",
       "type": "text"
     },
     {
       "title": "Hidden Costs",
-      "body": "Three hidden costs affect Jasper users. Surfer SEO integration requires a separate Surfer subscription at $69-$199/month to unlock the full SEO Mode functionality; without it, Jasper provides only basic keyword suggestions rather than the data-driven scoring that differentiates the platform. Template customization for non-standard formats often requires upgrading to Pro or Business tiers; Creator users locked into Jasper's default template structures may find outputs don't match their exact format requirements. Team seats on the Business plan are priced per user, but administrative overhead for managing brand voices across multiple client accounts scales with account complexity; each new client requires uploading 5-10 training samples and validating output consistency, a process that consumes 2-3 hours per brand. Additionally, the plagiarism checker is only available on Pro and above, meaning Creator users must rely on external tools like Copyscape ($0.05 per scan) to verify content originality before publication.",
+      "body": "Three hidden costs affect Jasper users. Surfer SEO integration requires a separate Surfer subscription at $69-$199/month to unlock the full SEO Mode functionality; without it, Jasper provides only basic keyword suggestions rather than the data-driven scoring that differentiates the platform. Template customization for non-standard formats requires upgrading to Pro or Business tiers; users locked into Jasper's default template structures may find outputs don't match their exact format requirements. Team seats on the Business plan are priced per user, but administrative overhead for managing brand voices across multiple client accounts scales with account complexity; each new client requires uploading 5-10 training samples and validating output consistency, a process that consumes 2-3 hours per brand. Additionally, the plagiarism checker is only available on Pro and above, meaning entry-level users must rely on external tools like Copyscape ($0.05 per scan) to verify content originality before publication.",
       "type": "text"
     },
     {
@@ -299,12 +299,12 @@
     },
     {
       "title": "Buying Advice",
-      "body": "When evaluating Jasper, consider four factors. First, assess feature alignment: 18 available features covering Content Creation, Branding, Workflow, SEO, Quality, Integration, Team, Developer, Analytics, Platform should be mapped against your team's specific workflow requirements. Second, evaluate total cost: $49–$69/mo with paid pricing, plus costs for alternatives like chatgpt that may offer different value propositions. Third, plan the migration: data migration from existing systems, workflow reconfiguration, and team training typically require 2-6 weeks depending on organizational complexity. Fourth, test with real data: a trial period using actual team workflows reveals integration gaps, performance bottlenecks, and adoption friction that demo environments hide. Jasper's 4.4/5 rating suggests it delivers on its core promises, but only hands-on testing with your specific use cases will confirm fit.",
+      "body": "When evaluating Jasper, consider four factors. First, assess feature alignment: 18 available features covering Content Creation, Branding, Workflow, SEO, Quality, Integration, Team, Developer, Analytics, Platform should be mapped against your team's specific workflow requirements. Second, evaluate total cost: $69/mo (Pro) to custom (Business), with paid pricing, plus costs for alternatives like chatgpt that may offer different value propositions. Third, plan the migration: data migration from existing systems, workflow reconfiguration, and team training typically require 2-6 weeks depending on organizational complexity. Fourth, test with real data: a trial period using actual team workflows reveals integration gaps, performance bottlenecks, and adoption friction that demo environments hide. Jasper's 4.4/5 rating suggests it delivers on its core promises, but only hands-on testing with your specific use cases will confirm fit.",
       "type": "text"
     },
     {
       "title": "Final Verdict",
-      "body": "Jasper earns a 4.4/5 rating and remains the leading AI content platform for marketing teams that prioritize brand consistency and SEO optimization at scale. Its Brand Voice system, Boss Mode interface, and Surfer SEO integration create a genuinely differentiated workflow that general-purpose AI tools cannot replicate without significant prompt engineering discipline. However, the value equation depends heavily on content volume: teams producing fewer than 20 pieces per month will struggle to justify $49-69/month when ChatGPT offers capable free writing assistance. The word count limits and quality ceiling on long-form content mean Jasper is a specialized tool for high-volume short-to-medium format marketing content rather than a universal AI writing solution. Buy Jasper if your team produces 20+ monthly assets across blog, social, and email channels and needs consistent brand voice. Skip it if your content strategy centers on long-form thought leadership or if your budget can't absorb the premium over free AI alternatives. Organizations with 3+ team members producing daily content will realize the strongest ROI, particularly when combined with the Surfer SEO integration for organic search-focused content strategies.",
+      "body": "Jasper earns a 4.4/5 rating and remains the leading AI content platform for marketing teams that prioritize brand consistency and SEO optimization at scale. Its Brand Voice system, Boss Mode interface, and Surfer SEO integration create a genuinely differentiated workflow that general-purpose AI tools cannot replicate without significant prompt engineering discipline. However, the value equation depends heavily on content volume: teams producing fewer than 20 pieces per month will struggle to justify $69/month when ChatGPT offers capable free writing assistance. The word count limits and quality ceiling on long-form content mean Jasper is a specialized tool for high-volume short-to-medium format marketing content rather than a universal AI writing solution. Buy Jasper if your team produces 20+ monthly assets across blog, social, and email channels and needs consistent brand voice. Skip it if your content strategy centers on long-form thought leadership or if your budget can't absorb the premium over free AI alternatives. Organizations with 3+ team members producing daily content will realize the strongest ROI, particularly when combined with the Surfer SEO integration for organic search-focused content strategies.",
       "type": "text"
     },
     {
@@ -343,7 +343,7 @@
     },
     {
       "question": "What is the difference between Jasper Creator and Jasper Pro plans?",
-      "answer": "The Creator plan is designed for individual users and small teams, offering 10,000 words per month, one Brand Voice, and access to all templates for $49 per month. The Pro plan starts at $69 per month for 25,000 words, adds unlimited Brand Voices, SEO Mode, and team collaboration features. The Pro plan also includes the plagiarism checker and the ability to create Campaigns. Enterprise tiers offer custom word limits, API access, and dedicated support. The jump from Creator to Pro is necessary for most serious marketing teams."
+      "answer": "The Creator plan at $49 per month was discontinued for new signups in early 2026. Existing Creator users remain on legacy plans but new customers must sign up for Pro or Business. The Pro plan is $69 per month for a single seat with 25,000 words, unlimited Brand Voices, SEO Mode, plagiarism checker, Campaigns, and team collaboration features. The Business tier offers custom pricing from approximately $900 to over $6,000 per month with unlimited words, API access, and dedicated support. For most marketing teams, the Pro plan is the recommended entry point."
     },
     {
       "question": "What platforms does Jasper support?",
@@ -351,7 +351,7 @@
     },
     {
       "question": "How does Jasper pricing work?",
-      "answer": "Jasper uses Monthly subscription per plan pricing, ranging from $49–$69/mo. Most plans include a free trial or demo period for evaluation purposes. Enterprise plans typically include additional features like SSO, audit logs, and dedicated support."
+      "answer": "Jasper uses monthly subscription pricing. The Pro plan is $69 per month for a single seat. The Business tier uses custom pricing, typically $900 to over $6,000 per month depending on team size. The legacy Creator plan at $49/month was discontinued for new signups. Most plans include a 7-day free trial for evaluation. Enterprise plans include SSO, audit logs, and dedicated support."
     },
     {
       "question": "Is Jasper secure?",
@@ -371,7 +371,7 @@
     },
     {
       "question": "What are Jasper's limitations?",
-      "answer": "Word count limits on lower-tier plans (10,000 words/month on Creator) feel restrictive for teams producing daily content. This limitation affects organizations with specific requirements in these areas. Additionally, Output quality degrades noticeably for long-form content exceeding 1,500 words, requiring significant human editing. Understanding these constraints before purchasing helps set realistic expectations."
+      "answer": "Word count limits on the Pro plan (25,000 words/month) feel restrictive for teams producing daily content at scale; the Business plan with unlimited words is required for high-volume teams. Output quality degrades noticeably for long-form content exceeding 1,500 words, requiring significant human editing. Understanding these constraints before purchasing helps set realistic expectations."
     },
     {
       "question": "How does Jasper compare to chatgpt?",
