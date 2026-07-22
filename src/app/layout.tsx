@@ -110,6 +110,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <GTMScript />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6523926892521982" crossOrigin="anonymous"></script>
         <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name}`} href="/rss.xml" />
 
       </head>

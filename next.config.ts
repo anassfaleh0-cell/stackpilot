@@ -13,6 +13,9 @@ const analytics = [
   "https://static.cloudflareinsights.com",
   "https://fonts.googleapis.com",
   "https://fonts.gstatic.com",
+  "https://pagead2.googlesyndication.com",
+  "https://*.googlesyndication.com",
+  "https://*.google.com",
 ]
 
 const scriptSrc = analytics.join(" ")
