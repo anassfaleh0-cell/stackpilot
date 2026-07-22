@@ -11,6 +11,12 @@ import { ArrowRight, Star, BookOpen, Calendar } from "lucide-react"
 import { getAllReviews, getAllGuides, getAllBlogPosts } from "@/lib/content/registry"
 import { SocialFooterIcons } from "@/components/brand/social-icons"
 
+const authorSocial = {
+  twitter: site.links.twitter,
+  github: site.links.github,
+  linkedin: site.links.linkedin,
+}
+
 const authors = {
   "pilotstack-team": {
     name: "PilotStack Team",
@@ -19,7 +25,7 @@ const authors = {
     avatar: "/logo-icon.svg",
     expertise: ["Software Reviews", "Market Research", "Software Comparison"],
     credentials: ["50+ years combined experience", "Hands-on testing of 100+ tools"],
-    social: { twitter: "https://x.com/pilotstackon", github: "https://github.com/pilotstack" },
+    social: { twitter: authorSocial.twitter, github: authorSocial.github },
     worksFor: "PilotStack",
     knowsAbout: ["Software Reviews", "Market Research", "B2B SaaS"],
   },
@@ -30,7 +36,7 @@ const authors = {
     avatar: "/logo-icon.svg",
     expertise: ["Developer Tools", "AI & Machine Learning", "Productivity"],
     credentials: ["Former Senior Engineer at SaaS companies", "10+ years in software development"],
-    social: { twitter: "https://x.com/pilotstackon", github: "https://github.com/pilotstack" },
+    social: { twitter: authorSocial.twitter, github: authorSocial.github },
     worksFor: "PilotStack",
     knowsAbout: ["Developer Tools", "AI Platforms", "Productivity Software", "Software Engineering"],
   },
@@ -41,7 +47,7 @@ const authors = {
     avatar: "/logo-icon.svg",
     expertise: ["CRM & Sales", "Marketing & SEO", "Analytics"],
     credentials: ["Former Marketing Operations Lead", "8+ years in B2B marketing"],
-    social: { twitter: "https://x.com/pilotstackon", linkedin: "https://linkedin.com/company/pilotstack" },
+    social: { twitter: authorSocial.twitter, linkedin: authorSocial.linkedin },
     worksFor: "PilotStack",
     knowsAbout: ["CRM", "Marketing Automation", "Sales Tools", "B2B Marketing"],
   },
@@ -52,7 +58,7 @@ const authors = {
     avatar: "/logo-icon.svg",
     expertise: ["Market Research", "Data Analysis", "Pricing Analysis"],
     credentials: ["MS in Data Science", "5+ years in tech market research"],
-    social: { twitter: "https://x.com/pilotstackon", github: "https://github.com/pilotstack" },
+    social: { twitter: authorSocial.twitter, github: authorSocial.github },
     worksFor: "PilotStack",
     knowsAbout: ["Market Research", "Data Analysis", "Pricing Strategy", "Data Science"],
   },
@@ -63,7 +69,7 @@ const authors = {
     avatar: "/logo-icon.svg",
     expertise: ["Editorial Standards", "Content Strategy", "Quality Assurance"],
     credentials: ["12+ years in B2B content", "Former Editor at tech publications"],
-    social: { twitter: "https://x.com/pilotstackon", linkedin: "https://linkedin.com/company/pilotstack" },
+    social: { twitter: authorSocial.twitter, linkedin: authorSocial.linkedin },
     worksFor: "PilotStack",
     knowsAbout: ["Editorial Standards", "Content Strategy", "Software Journalism", "Quality Assurance"],
   },
