@@ -3,20 +3,10 @@
   "title": "JFrog vs Vercel",
   "description": "Compare JFrog vs Vercel in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "JFrog",
-    "slug": "jfrog",
-    "rating": 4.1,
-    "priceRange": "$75-149/mo",
-    "tagline": "Universal artifact repository manager for DevOps pipelines."
-  },
-  "tool2": {
-    "name": "Vercel",
-    "slug": "vercel",
-    "rating": 4.6,
-    "priceRange": "Varies",
-    "tagline": "Frontend deployment platform for modern web applications."
-  },
+  "tool1": "JFrog",
+  "tool2": "Vercel",
+  "tool1Slug": "jfrog",
+  "tool2Slug": "vercel",
   "winner": "vercel",
   "features": [
     {

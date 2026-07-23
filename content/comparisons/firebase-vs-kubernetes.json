@@ -3,20 +3,10 @@
   "title": "Firebase vs Kubernetes",
   "description": "Compare Firebase vs Kubernetes in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "Firebase",
-    "slug": "firebase",
-    "rating": 4.3,
-    "priceRange": "Free – pay-as-you-go",
-    "tagline": "Google-backed mobile and web app platform providing backend services without server management"
-  },
-  "tool2": {
-    "name": "Kubernetes",
-    "slug": "kubernetes",
-    "rating": 4.3,
-    "priceRange": "Free (self-managed)–$100+/cluster/mo",
-    "tagline": "Container orchestration for automated deployment and scaling"
-  },
+  "tool1": "Firebase",
+  "tool2": "Kubernetes",
+  "tool1Slug": "firebase",
+  "tool2Slug": "kubernetes",
   "winner": "firebase",
   "features": [
     {

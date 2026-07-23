@@ -3,20 +3,10 @@
   "title": "Appwrite vs Kubernetes",
   "description": "Compare Appwrite vs Kubernetes in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "Appwrite",
-    "slug": "appwrite",
-    "rating": 4.2,
-    "priceRange": "Free – $15/mo",
-    "tagline": "Open-source backend server for web and mobile development"
-  },
-  "tool2": {
-    "name": "Kubernetes",
-    "slug": "kubernetes",
-    "rating": 4.3,
-    "priceRange": "Free (self-managed)–$100+/cluster/mo",
-    "tagline": "Container orchestration for automated deployment and scaling"
-  },
+  "tool1": "Appwrite",
+  "tool2": "Kubernetes",
+  "tool1Slug": "appwrite",
+  "tool2Slug": "kubernetes",
   "winner": "kubernetes",
   "features": [
     {

@@ -3,20 +3,10 @@
   "title": "Firebase vs Vercel",
   "description": "Compare Firebase vs Vercel in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "Firebase",
-    "slug": "firebase",
-    "rating": 4.3,
-    "priceRange": "Free – pay-as-you-go",
-    "tagline": "Google-backed mobile and web app platform providing backend services without server management"
-  },
-  "tool2": {
-    "name": "Vercel",
-    "slug": "vercel",
-    "rating": 4.6,
-    "priceRange": "Varies",
-    "tagline": "Frontend deployment platform for modern web applications."
-  },
+  "tool1": "Firebase",
+  "tool2": "Vercel",
+  "tool1Slug": "firebase",
+  "tool2Slug": "vercel",
   "winner": "vercel",
   "features": [
     {

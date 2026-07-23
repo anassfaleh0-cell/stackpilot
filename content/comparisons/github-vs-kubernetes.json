@@ -3,20 +3,10 @@
   "title": "GitHub vs Kubernetes",
   "description": "Compare GitHub vs Kubernetes in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "GitHub",
-    "slug": "github",
-    "rating": 4.7,
-    "priceRange": "Free – $19.25/mo per user",
-    "tagline": "The home for all developers: host, review, and ship code at scale"
-  },
-  "tool2": {
-    "name": "Kubernetes",
-    "slug": "kubernetes",
-    "rating": 4.3,
-    "priceRange": "Free (self-managed)–$100+/cluster/mo",
-    "tagline": "Container orchestration for automated deployment and scaling"
-  },
+  "tool1": "GitHub",
+  "tool2": "Kubernetes",
+  "tool1Slug": "github",
+  "tool2Slug": "kubernetes",
   "winner": "github",
   "features": [
     {

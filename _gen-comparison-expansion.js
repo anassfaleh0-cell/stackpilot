@@ -57,8 +57,8 @@ Object.entries(byCategory).forEach(([cat, catTools]) => {
       
       const page = {
         slug, title, description: desc, category: cat,
-        tool1: { name: a.name, slug: a.slug, rating: a.rating, priceRange: aPrice, tagline: a.tagline || "" },
-        tool2: { name: b.name, slug: b.slug, rating: b.rating, priceRange: bPrice, tagline: b.tagline || "" },
+        tool1: a.name, tool2: b.name,
+        tool1Slug: a.slug, tool2Slug: b.slug,
         winner: a.rating >= b.rating ? a.slug : b.slug,
         features: [
           { name: "User Rating", tool1: `${a.rating}/5`, tool2: `${b.rating}/5`, winner: a.rating >= b.rating ? "tool1" : "tool2" },

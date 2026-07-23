@@ -3,20 +3,10 @@
   "title": "GitLab vs Vercel",
   "description": "Compare GitLab vs Vercel in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "GitLab",
-    "slug": "gitlab",
-    "rating": 4.5,
-    "priceRange": "Free – $29/mo per user",
-    "tagline": "Complete DevOps platform with integrated CI/CD, security scanning, and self-hosted deployment control"
-  },
-  "tool2": {
-    "name": "Vercel",
-    "slug": "vercel",
-    "rating": 4.6,
-    "priceRange": "Varies",
-    "tagline": "Frontend deployment platform for modern web applications."
-  },
+  "tool1": "GitLab",
+  "tool2": "Vercel",
+  "tool1Slug": "gitlab",
+  "tool2Slug": "vercel",
   "winner": "vercel",
   "features": [
     {

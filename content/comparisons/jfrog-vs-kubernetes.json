@@ -3,20 +3,10 @@
   "title": "JFrog vs Kubernetes",
   "description": "Compare JFrog vs Kubernetes in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "JFrog",
-    "slug": "jfrog",
-    "rating": 4.1,
-    "priceRange": "$75-149/mo",
-    "tagline": "Universal artifact repository manager for DevOps pipelines."
-  },
-  "tool2": {
-    "name": "Kubernetes",
-    "slug": "kubernetes",
-    "rating": 4.3,
-    "priceRange": "Free (self-managed)–$100+/cluster/mo",
-    "tagline": "Container orchestration for automated deployment and scaling"
-  },
+  "tool1": "JFrog",
+  "tool2": "Kubernetes",
+  "tool1Slug": "jfrog",
+  "tool2Slug": "kubernetes",
   "winner": "kubernetes",
   "features": [
     {

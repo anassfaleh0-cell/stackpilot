@@ -3,20 +3,10 @@
   "title": "GitLab vs Kubernetes",
   "description": "Compare GitLab vs Kubernetes in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "GitLab",
-    "slug": "gitlab",
-    "rating": 4.5,
-    "priceRange": "Free – $29/mo per user",
-    "tagline": "Complete DevOps platform with integrated CI/CD, security scanning, and self-hosted deployment control"
-  },
-  "tool2": {
-    "name": "Kubernetes",
-    "slug": "kubernetes",
-    "rating": 4.3,
-    "priceRange": "Free (self-managed)–$100+/cluster/mo",
-    "tagline": "Container orchestration for automated deployment and scaling"
-  },
+  "tool1": "GitLab",
+  "tool2": "Kubernetes",
+  "tool1Slug": "gitlab",
+  "tool2Slug": "kubernetes",
   "winner": "gitlab",
   "features": [
     {

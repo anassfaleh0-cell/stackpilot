@@ -3,20 +3,10 @@
   "title": "Grafana vs Vercel",
   "description": "Compare Grafana vs Vercel in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "Grafana",
-    "slug": "grafana",
-    "rating": 4.5,
-    "priceRange": "$29-200/mo",
-    "tagline": "Open-source analytics and monitoring platform for metrics visualization."
-  },
-  "tool2": {
-    "name": "Vercel",
-    "slug": "vercel",
-    "rating": 4.6,
-    "priceRange": "Varies",
-    "tagline": "Frontend deployment platform for modern web applications."
-  },
+  "tool1": "Grafana",
+  "tool2": "Vercel",
+  "tool1Slug": "grafana",
+  "tool2Slug": "vercel",
   "winner": "vercel",
   "features": [
     {

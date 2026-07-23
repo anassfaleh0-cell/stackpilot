@@ -3,20 +3,10 @@
   "title": "Grafana vs Kubernetes",
   "description": "Compare Grafana vs Kubernetes in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "Grafana",
-    "slug": "grafana",
-    "rating": 4.5,
-    "priceRange": "$29-200/mo",
-    "tagline": "Open-source analytics and monitoring platform for metrics visualization."
-  },
-  "tool2": {
-    "name": "Kubernetes",
-    "slug": "kubernetes",
-    "rating": 4.3,
-    "priceRange": "Free (self-managed)–$100+/cluster/mo",
-    "tagline": "Container orchestration for automated deployment and scaling"
-  },
+  "tool1": "Grafana",
+  "tool2": "Kubernetes",
+  "tool1Slug": "grafana",
+  "tool2Slug": "kubernetes",
   "winner": "grafana",
   "features": [
     {

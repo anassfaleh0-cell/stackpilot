@@ -3,20 +3,10 @@
   "title": "Cloudflare Pages vs Kubernetes",
   "description": "Compare Cloudflare Pages vs Kubernetes in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "Cloudflare Pages",
-    "slug": "cloudflare-pages",
-    "rating": 4.4,
-    "priceRange": "Free – $200/mo",
-    "tagline": "Cloudflare's Jamstack deployment platform with global edge network"
-  },
-  "tool2": {
-    "name": "Kubernetes",
-    "slug": "kubernetes",
-    "rating": 4.3,
-    "priceRange": "Free (self-managed)–$100+/cluster/mo",
-    "tagline": "Container orchestration for automated deployment and scaling"
-  },
+  "tool1": "Cloudflare Pages",
+  "tool2": "Kubernetes",
+  "tool1Slug": "cloudflare-pages",
+  "tool2Slug": "kubernetes",
   "winner": "cloudflare-pages",
   "features": [
     {

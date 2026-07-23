@@ -3,20 +3,10 @@
   "title": "Datadog vs Kubernetes",
   "description": "Compare Datadog vs Kubernetes in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "Datadog",
-    "slug": "datadog",
-    "rating": 4.6,
-    "priceRange": "$15/host/mo",
-    "tagline": "Cloud-scale monitoring and observability platform"
-  },
-  "tool2": {
-    "name": "Kubernetes",
-    "slug": "kubernetes",
-    "rating": 4.3,
-    "priceRange": "Free (self-managed)–$100+/cluster/mo",
-    "tagline": "Container orchestration for automated deployment and scaling"
-  },
+  "tool1": "Datadog",
+  "tool2": "Kubernetes",
+  "tool1Slug": "datadog",
+  "tool2Slug": "kubernetes",
   "winner": "datadog",
   "features": [
     {

@@ -3,20 +3,10 @@
   "title": "Kubernetes vs Vercel",
   "description": "Compare Kubernetes vs Vercel in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "Kubernetes",
-    "slug": "kubernetes",
-    "rating": 4.3,
-    "priceRange": "Free (self-managed)–$100+/cluster/mo",
-    "tagline": "Container orchestration for automated deployment and scaling"
-  },
-  "tool2": {
-    "name": "Vercel",
-    "slug": "vercel",
-    "rating": 4.6,
-    "priceRange": "Varies",
-    "tagline": "Frontend deployment platform for modern web applications."
-  },
+  "tool1": "Kubernetes",
+  "tool2": "Vercel",
+  "tool1Slug": "kubernetes",
+  "tool2Slug": "vercel",
   "winner": "vercel",
   "features": [
     {

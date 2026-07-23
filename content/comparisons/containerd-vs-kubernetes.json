@@ -3,20 +3,10 @@
   "title": "containerd vs Kubernetes",
   "description": "Compare containerd vs Kubernetes in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "containerd",
-    "slug": "containerd",
-    "rating": 4.2,
-    "priceRange": "Open Source (Free)",
-    "tagline": "Industry-standard container runtime for production workloads"
-  },
-  "tool2": {
-    "name": "Kubernetes",
-    "slug": "kubernetes",
-    "rating": 4.3,
-    "priceRange": "Free (self-managed)–$100+/cluster/mo",
-    "tagline": "Container orchestration for automated deployment and scaling"
-  },
+  "tool1": "containerd",
+  "tool2": "Kubernetes",
+  "tool1Slug": "containerd",
+  "tool2Slug": "kubernetes",
   "winner": "kubernetes",
   "features": [
     {

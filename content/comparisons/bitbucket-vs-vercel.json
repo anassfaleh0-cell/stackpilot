@@ -3,20 +3,10 @@
   "title": "Bitbucket vs Vercel",
   "description": "Compare Bitbucket vs Vercel in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "Bitbucket",
-    "slug": "bitbucket",
-    "rating": 4.2,
-    "priceRange": "Free – $6/user/mo",
-    "tagline": "Atlassian's Git repository hosting with Jira integration"
-  },
-  "tool2": {
-    "name": "Vercel",
-    "slug": "vercel",
-    "rating": 4.6,
-    "priceRange": "Varies",
-    "tagline": "Frontend deployment platform for modern web applications."
-  },
+  "tool1": "Bitbucket",
+  "tool2": "Vercel",
+  "tool1Slug": "bitbucket",
+  "tool2Slug": "vercel",
   "winner": "vercel",
   "features": [
     {

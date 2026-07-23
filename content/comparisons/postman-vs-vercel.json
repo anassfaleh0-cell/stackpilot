@@ -3,20 +3,10 @@
   "title": "Postman vs Vercel",
   "description": "Compare Postman vs Vercel in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "Postman",
-    "slug": "postman",
-    "rating": 4.6,
-    "priceRange": "$14-39/mo",
-    "tagline": "API development and testing platform for developers."
-  },
-  "tool2": {
-    "name": "Vercel",
-    "slug": "vercel",
-    "rating": 4.6,
-    "priceRange": "Varies",
-    "tagline": "Frontend deployment platform for modern web applications."
-  },
+  "tool1": "Postman",
+  "tool2": "Vercel",
+  "tool1Slug": "postman",
+  "tool2Slug": "vercel",
   "winner": "postman",
   "features": [
     {

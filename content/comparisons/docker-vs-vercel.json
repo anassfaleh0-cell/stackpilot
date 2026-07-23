@@ -3,20 +3,10 @@
   "title": "Docker vs Vercel",
   "description": "Compare Docker vs Vercel in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "Docker",
-    "slug": "docker",
-    "rating": 4.6,
-    "priceRange": "Free – $15/mo per user",
-    "tagline": "Container platform that revolutionized software deployment by packaging applications with their complete runtime environment"
-  },
-  "tool2": {
-    "name": "Vercel",
-    "slug": "vercel",
-    "rating": 4.6,
-    "priceRange": "Varies",
-    "tagline": "Frontend deployment platform for modern web applications."
-  },
+  "tool1": "Docker",
+  "tool2": "Vercel",
+  "tool1Slug": "docker",
+  "tool2Slug": "vercel",
   "winner": "docker",
   "features": [
     {

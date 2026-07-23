@@ -3,20 +3,10 @@
   "title": "Sentry vs Vercel",
   "description": "Compare Sentry vs Vercel in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "Sentry",
-    "slug": "sentry",
-    "rating": 4.5,
-    "priceRange": "Free–$26/user/mo",
-    "tagline": "Application performance monitoring and error tracking"
-  },
-  "tool2": {
-    "name": "Vercel",
-    "slug": "vercel",
-    "rating": 4.6,
-    "priceRange": "Varies",
-    "tagline": "Frontend deployment platform for modern web applications."
-  },
+  "tool1": "Sentry",
+  "tool2": "Vercel",
+  "tool1Slug": "sentry",
+  "tool2Slug": "vercel",
   "winner": "vercel",
   "features": [
     {

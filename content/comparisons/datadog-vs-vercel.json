@@ -3,20 +3,10 @@
   "title": "Datadog vs Vercel",
   "description": "Compare Datadog vs Vercel in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "Datadog",
-    "slug": "datadog",
-    "rating": 4.6,
-    "priceRange": "$15/host/mo",
-    "tagline": "Cloud-scale monitoring and observability platform"
-  },
-  "tool2": {
-    "name": "Vercel",
-    "slug": "vercel",
-    "rating": 4.6,
-    "priceRange": "Varies",
-    "tagline": "Frontend deployment platform for modern web applications."
-  },
+  "tool1": "Datadog",
+  "tool2": "Vercel",
+  "tool1Slug": "datadog",
+  "tool2Slug": "vercel",
   "winner": "datadog",
   "features": [
     {

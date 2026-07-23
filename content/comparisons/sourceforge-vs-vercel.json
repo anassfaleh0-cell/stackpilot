@@ -3,20 +3,10 @@
   "title": "SourceForge vs Vercel",
   "description": "Compare SourceForge vs Vercel in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "SourceForge",
-    "slug": "sourceforge",
-    "rating": 3.5,
-    "priceRange": "Free",
-    "tagline": "Legacy open-source code hosting and project management"
-  },
-  "tool2": {
-    "name": "Vercel",
-    "slug": "vercel",
-    "rating": 4.6,
-    "priceRange": "Varies",
-    "tagline": "Frontend deployment platform for modern web applications."
-  },
+  "tool1": "SourceForge",
+  "tool2": "Vercel",
+  "tool1Slug": "sourceforge",
+  "tool2Slug": "vercel",
   "winner": "vercel",
   "features": [
     {

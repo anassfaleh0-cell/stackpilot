@@ -3,20 +3,10 @@
   "title": "Supabase vs Vercel",
   "description": "Compare Supabase vs Vercel in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "Supabase",
-    "slug": "supabase",
-    "rating": 4.5,
-    "priceRange": "Free – $25/mo",
-    "tagline": "Open-source Firebase alternative with PostgreSQL."
-  },
-  "tool2": {
-    "name": "Vercel",
-    "slug": "vercel",
-    "rating": 4.6,
-    "priceRange": "Varies",
-    "tagline": "Frontend deployment platform for modern web applications."
-  },
+  "tool1": "Supabase",
+  "tool2": "Vercel",
+  "tool1Slug": "supabase",
+  "tool2Slug": "vercel",
   "winner": "vercel",
   "features": [
     {

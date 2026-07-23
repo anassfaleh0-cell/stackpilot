@@ -3,20 +3,10 @@
   "title": "containerd vs Vercel",
   "description": "Compare containerd vs Vercel in July 20. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right developer tools tool.",
   "category": "Developer Tools",
-  "tool1": {
-    "name": "containerd",
-    "slug": "containerd",
-    "rating": 4.2,
-    "priceRange": "Open Source (Free)",
-    "tagline": "Industry-standard container runtime for production workloads"
-  },
-  "tool2": {
-    "name": "Vercel",
-    "slug": "vercel",
-    "rating": 4.6,
-    "priceRange": "Varies",
-    "tagline": "Frontend deployment platform for modern web applications."
-  },
+  "tool1": "containerd",
+  "tool2": "Vercel",
+  "tool1Slug": "containerd",
+  "tool2Slug": "vercel",
   "winner": "vercel",
   "features": [
     {
