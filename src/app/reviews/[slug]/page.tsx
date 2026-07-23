@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 import { getReview, getContentTitle, getAllReviews, getAllComparisons, getAllBest } from "@/lib/content/registry"
 import { getEntity } from "@/lib/entities/data"
 import { formatDate } from "@/lib/utils"
-import { EntityOverview, CapabilitiesGrid, UseCasePanel, IntegrationDisplay, PricingTable, AutoComparison, SemanticLinks, EditorialHero, EditorialProsCons, EditorialFeatureMatrix, EditorialRatingVisual, EditorialPricing, EditorialSectionIllustration, EditorialExpert, GlassCard, InfoCard } from "@/components/dynamic"
+import { EntityOverview, CapabilitiesGrid, UseCasePanel, IntegrationDisplay, PricingTable, AutoComparison, SemanticLinks, EditorialHero, EditorialProsCons, EditorialFeatureMatrix, EditorialRatingVisual, EditorialSectionIllustration, EditorialExpert, GlassCard, InfoCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { EditorialPricingLadder, EditorialWorkflow, EditorialFeatureRadar, EditorialImplementationFlow, SecurityTable, RelatedContent } from "@/components/dynamic-client"
 import { InternalLinks } from "@/components/content/internal-links"
@@ -302,15 +302,21 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               </section>
 
               {/* Content Sections */}
-              {tool.content.map((section, i) => (
+              {tool.content.map((section, i) => {
+                const diagramBody = section.type === "diagram" ? section.body : null
+                const diagramKey = diagramBody === "pricing-ladder" || diagramBody === "feature-radar" || diagramBody === "implementation-flow" ? diagramBody : null
+                const hasDiagramContent = diagramKey !== null
+                return (
                 <section key={i} className="mb-12 scroll-mt-24" id={`section-${i}`}>
                   {section.type === "diagram" ? (
+                    hasDiagramContent ? (
                     <>
                       <h2 className="text-2xl font-bold tracking-tight mb-4">{section.title}</h2>
-                      {section.body === "pricing-ladder" && <EditorialPricingLadder tool={tool} />}
-                      {section.body === "feature-radar" && <EditorialFeatureRadar tool={tool} />}
-                      {section.body === "implementation-flow" && <EditorialImplementationFlow tool={tool} />}
+                      {diagramKey === "pricing-ladder" && <EditorialPricingLadder tool={tool} />}
+                      {diagramKey === "feature-radar" && <EditorialFeatureRadar tool={tool} />}
+                      {diagramKey === "implementation-flow" && <EditorialImplementationFlow tool={tool} />}
                     </>
+                    ) : null
                   ) : (
                     <>
                       <EditorialSectionIllustration slug={tool.slug} category={tool.category} index={i} />
@@ -335,18 +341,12 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     </>
                   )}
                 </section>
-              ))}
+                )})}
 
               {/* Feature Breakdown */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Feature Breakdown</h2>
                 <EditorialFeatureMatrix features={tool.features} slug={tool.slug} category={tool.category} />
-              </section>
-
-              {/* Pricing */}
-              <section className="mb-12">
-                <h2 className="text-2xl font-bold tracking-tight mb-6">Pricing</h2>
-                <EditorialPricing tool={tool} />
               </section>
 
               {/* Editorial Workflow */}

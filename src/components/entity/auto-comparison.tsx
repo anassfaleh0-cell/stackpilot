@@ -15,7 +15,7 @@ export function AutoComparison({ slug, className = "" }: AutoComparisonProps) {
   const entity = getEntity(slug)
   if (!entity) return null
 
-  const allEntities = getAllEntities().filter((e) => e.slug !== slug)
+  const allEntities = getAllEntities().filter((e) => e.slug !== slug && e.category === entity.category)
   const alternatives = allEntities.slice(0, 3)
 
   return (

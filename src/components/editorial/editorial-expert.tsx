@@ -7,6 +7,7 @@ const reviewerProfiles: Record<string, { name: string; role: string; expertise: 
   "Priya Patel": { name: "Priya Patel", role: "Research Analyst", expertise: "Analytics, Data Platforms, BI Tools", initials: "PP" },
   "James O'Brien": { name: "James O'Brien", role: "Technical Writer", expertise: "Developer Tools, DevOps, Security", initials: "JO" },
   "Elena Torres": { name: "Elena Torres", role: "Research Analyst", expertise: "HR Tech, Finance, Compliance", initials: "ET" },
+  "PilotStack Team": { name: "PilotStack Team", role: "Editorial Team", expertise: "Software Evaluation, Pricing Analysis, Market Research", initials: "PT" },
 }
 
 export function EditorialExpert({ author, reviewedAt }: { author: string; reviewedAt: string }) {

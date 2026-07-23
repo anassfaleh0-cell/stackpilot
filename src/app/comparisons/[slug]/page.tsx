@@ -5,7 +5,7 @@ import { BreadcrumbSchema, FAQSchema, ReviewSchema, SoftwareSchema, WebPageSchem
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getComparison, getContentTitle, getReview, getAllComparisons } from "@/lib/content/registry"
-import { comparisonRenderedWordCount } from "@/lib/content/word-count"
+import { countRenderedWords, THIN_THRESHOLD } from "@/lib/content/word-count"
 import { formatDate } from "@/lib/utils"
 import { InternalLinks } from "@/components/content/internal-links"
 import { notFound } from "next/navigation"
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const cmp = getComparison(slug)
   if (!cmp) return {}
   const readingTime = Math.max(3, Math.ceil(cmp.description.split(/\s+/).length / 200))
-  const isThin = comparisonRenderedWordCount(cmp) < 300
+  const isThin = countRenderedWords(cmp) < THIN_THRESHOLD
   return {
     ...createMetadata({ title: `${cmp.tool1} vs ${cmp.tool2} (2026): Which One Wins?`, description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated, articleSection: cmp.category, readingTime }),
     robots: {

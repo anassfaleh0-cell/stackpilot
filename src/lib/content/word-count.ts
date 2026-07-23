@@ -7,13 +7,17 @@ function wordCount(text: string | undefined | null): number {
   return stripHtml(text).split(/\s+/).filter(Boolean).length
 }
 
-export function comparisonRenderedWordCount(data: {
+export interface CountableFields {
   title?: string | null
   description?: string | null
   verdict?: string | null
   features?: Array<{ tool1Detail?: string | null; tool2Detail?: string | null }>
   faqs?: Array<{ question?: string | null; answer?: string | null }>
-}): number {
+}
+
+export const THIN_THRESHOLD = 300
+
+export function countRenderedWords(data: CountableFields): number {
   let total = 0
   total += wordCount(data.title)
   total += wordCount(data.description)
