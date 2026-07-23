@@ -136,24 +136,24 @@ export function CookieConsent() {
           <>
             <div className="text-xs leading-relaxed text-muted-foreground">
               We use essential cookies for site functionality. We also use analytics cookies to understand how visitors use our site.{" "}
-              <a href="/privacy" className="text-primary hover:underline">Learn more</a>.
+              <a href="/privacy" className="text-primary-dark hover:underline">Learn more about our privacy policy</a>.
             </div>
             <div className="flex items-center gap-2 mt-4">
               <button
                 onClick={handleAccept}
-                className="flex-1 h-10 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors"
+                className="flex-1 h-10 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-[background-color,color] duration-200"
               >
                 Accept All
               </button>
               <button
                 onClick={() => { setCustomizing(true); setDraft(ALL_OFF) }}
-                className="h-10 px-3 rounded-lg border border-border text-muted-foreground text-sm font-medium hover:bg-muted-bg transition-colors"
+                className="h-10 px-3 rounded-lg border border-border text-muted-foreground text-sm font-medium hover:bg-muted-bg transition-[background-color,color] duration-200"
               >
                 Customize
               </button>
               <button
                 onClick={handleReject}
-                className="flex-1 h-10 rounded-lg border border-border text-muted-foreground text-sm font-medium hover:bg-muted-bg transition-colors"
+                className="flex-1 h-10 rounded-lg border border-border text-muted-foreground text-sm font-medium hover:bg-muted-bg transition-[background-color,color] duration-200"
               >
                 Reject All
               </button>
@@ -184,13 +184,13 @@ export function CookieConsent() {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleCustomizeSave}
-                className="flex-1 h-10 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors"
+                className="flex-1 h-10 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-[background-color,color] duration-200"
               >
                 Save Preferences
               </button>
               <button
                 onClick={() => setCustomizing(false)}
-                className="h-10 px-3 rounded-lg border border-border text-muted-foreground text-sm font-medium hover:bg-muted-bg transition-colors"
+                className="h-10 px-3 rounded-lg border border-border text-muted-foreground text-sm font-medium hover:bg-muted-bg transition-[background-color,color] duration-200"
               >
                 Back
               </button>

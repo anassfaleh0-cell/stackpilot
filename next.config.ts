@@ -16,6 +16,8 @@ const analytics = [
   "https://pagead2.googlesyndication.com",
   "https://*.googlesyndication.com",
   "https://*.google.com",
+  "https://ep1.adtrafficquality.google",
+  "https://*.adtrafficquality.google",
 ]
 
 const scriptSrc = analytics.join(" ")
@@ -62,6 +64,7 @@ const nextConfig: NextConfig = {
         { key: "X-Frame-Options", value: "DENY" },
         { key: "X-XSS-Protection", value: "1; mode=block" },
         { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+        { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
         { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
         { key: "Content-Security-Policy", value: csp },
       ],
@@ -88,6 +91,18 @@ const nextConfig: NextConfig = {
       source: "/robots.txt",
       headers: [
         { key: "Cache-Control", value: "public, max-age=86400" },
+      ],
+    },
+    {
+      source: "/:path*.svg",
+      headers: [
+        { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+      ],
+    },
+    {
+      source: "/og.png",
+      headers: [
+        { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
       ],
     },
   ],

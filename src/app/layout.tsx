@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next/dist/lib/metadata/types/metadata-interface"
 import { Geist, Geist_Mono } from "next/font/google"
+import Script from "next/script"
 import "./globals.css"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
@@ -95,6 +96,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
 
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://ep1.adtrafficquality.google" />
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -110,7 +115,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <GTMScript />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6523926892521982" crossOrigin="anonymous"></script>
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6523926892521982"
+          strategy="lazyOnload"
+          crossOrigin="anonymous"
+        />
         <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name}`} href="/rss.xml" />
 
       </head>

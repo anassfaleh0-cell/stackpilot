@@ -51,7 +51,7 @@ export function Analytics() {
 
 export function ClarityScript() {
   return (
-    <Script id="clarity-init" strategy="afterInteractive">
+    <Script id="clarity-init" strategy="lazyOnload">
       {`
         (function(c,l,a,r,i,t,y){
           c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -70,9 +70,9 @@ export function GAScript() {
     <>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
-      <Script id="ga-init" strategy="afterInteractive">
+      <Script id="ga-init" strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){window.dataLayer.push(arguments);}
