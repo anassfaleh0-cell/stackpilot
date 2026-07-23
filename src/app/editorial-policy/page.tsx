@@ -6,7 +6,7 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
-  title: "Editorial Policy",
+  title: "Editorial Policy | Content Standards & Independence",
   description: "PilotStack's editorial policy governs how we produce, review, and maintain all content. Our commitment to accuracy, independence, and transparency in software research.",
   path: "/editorial-policy",
 })
@@ -14,6 +14,7 @@ export const metadata = createMetadata({
 export default function EditorialPolicyPage() {
   return (
     <>
+      <ArticleSchema title="Editorial Policy | Content Standards & Independence" description="PilotStack's editorial policy — accuracy, independence, and transparency standards for all software research and reviews." publishedAt="2026-01-15" author="PilotStack Team" url={`${site.url}/editorial-policy`} keywords={["editorial policy", "content standards", "editorial independence", "review guidelines", "fact-checking"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Editorial Policy", href: "/editorial-policy" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Editorial Policy" }]} />
@@ -24,6 +25,38 @@ export default function EditorialPolicyPage() {
             <Badge variant="default" className="mb-4">Editorial Standards</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Editorial Policy</h1>
             <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
+
+            <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
+              <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
+              <p className="text-sm text-muted-foreground">
+                PilotStack maintains complete editorial independence. No vendor, advertiser, or affiliate partner influences our ratings, rankings, or content decisions. Every review is based on hands-on testing, follows a standardized methodology, and undergoes two-person verification before publication. We clearly disclose all affiliate relationships and correct errors transparently.
+              </p>
+            </div>
+
+            <div className="tl-dr mb-8 p-4 bg-muted-bg rounded-xl border border-border">
+              <h2 className="text-lg font-semibold mb-2">TL;DR</h2>
+              <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
+                <li>Complete separation between editorial and commercial operations</li>
+                <li>All reviews based on hands-on testing — not vendor demos or specifications</li>
+                <li>Every factual claim verified against primary sources before publication</li>
+                <li>Both strengths and limitations addressed in every review</li>
+                <li>Corrections published promptly and transparently</li>
+              </ul>
+            </div>
+
+            <div className="key-takeaways mb-8 p-4 bg-muted-bg rounded-xl border border-border">
+              <h2 className="text-lg font-semibold mb-2">Key Takeaways</h2>
+              <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
+                <li>Editorial team is never informed about affiliate or advertiser relationships when creating content</li>
+                <li>Revenue considerations never factor into coverage decisions or ratings</li>
+                <li>All content includes publication dates and last-reviewed dates for currency transparency</li>
+                <li>Content more than 12 months old is flagged for review and potential removal</li>
+                <li>We distinguish factual reporting from analysis and opinion throughout</li>
+                <li>Standardized methodology applied consistently across all reviews</li>
+                <li>Third-party user reviews from G2, Capterra, TrustRadius cross-referenced for validation</li>
+                <li>Diverse perspectives considered including accessibility, internationalization, and multi-currency pricing</li>
+              </ul>
+            </div>
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">

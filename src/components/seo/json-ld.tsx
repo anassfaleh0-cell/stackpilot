@@ -69,7 +69,7 @@ export function BreadcrumbSchema({ items }: { items: { name: string; href: strin
 }
 
 export function ArticleSchema({
-  title, description, publishedAt, updatedAt, author, image, url, wordCount, category,
+  title, description, publishedAt, updatedAt, author, image, url, wordCount, category, keywords, mentions, mainEntity,
 }: {
   title: string
   description: string
@@ -80,6 +80,9 @@ export function ArticleSchema({
   url?: string
   wordCount?: number
   category?: string
+  keywords?: string[]
+  mentions?: { name: string; url: string }[]
+  mainEntity?: Record<string, unknown>
 }) {
   const schema = clean({
     "@context": ctx,
@@ -96,9 +99,13 @@ export function ArticleSchema({
     inLanguage: "en-US",
     wordCount: wordCount || undefined,
     articleSection: category || undefined,
+    keywords: keywords?.join(", ") || undefined,
     isBasedOn: `${site.url}/methodology`,
     about: { "@id": `${site.url}/#organization` },
-    speakable: { "@type": "SpeakableSpecification", cssSelector: [".article-summary", ".article-content"] },
+    speakable: { "@type": "SpeakableSpecification", cssSelector: [".article-summary", ".article-content", ".quick-answer", ".tl-dr", ".key-takeaways"] },
+    ...(mentions && mentions.length > 0 ? { mentions: mentions.map((m) => ({ "@type": "Thing", name: m.name, url: m.url })) } : {}),
+    ...(mainEntity ? { mainEntity } : {}),
+    citation: [{ "@type": "CreativeWork", name: "Methodology", url: `${site.url}/methodology` }],
   })
   return ld(schema, "ld-article")
 }
@@ -167,13 +174,14 @@ export function BlogPostingSchema({
   return ld(schema, "ld-blogposting")
 }
 
-export function SoftwareSchema({ name, description, applicationCategory, operatingSystem, offers, brand }: {
+export function SoftwareSchema({ name, description, applicationCategory, operatingSystem, offers, brand, keywords }: {
   name: string
   description: string
   applicationCategory: string
   operatingSystem?: string
   offers?: { price: string; priceCurrency: string; url?: string }
   brand?: string
+  keywords?: string[]
 }) {
   const schema = clean({
     "@context": ctx,
@@ -185,6 +193,7 @@ export function SoftwareSchema({ name, description, applicationCategory, operati
     operatingSystem: operatingSystem || undefined,
     brand: brand ? { "@type": "Brand", name: brand } : undefined,
     offers: offers ? { "@type": "Offer", ...offers } : undefined,
+    keywords: keywords?.join(", ") || undefined,
   })
   return ld(schema, "ld-software")
 }
@@ -351,12 +360,13 @@ export function PersonSchema({ name, url, description, knowsAbout }: {
   return ld(schema, "ld-person")
 }
 
-export function WebPageSchema({ name, description, url, dateModified, mainEntity }: {
+export function WebPageSchema({ name, description, url, dateModified, mainEntity, keywords }: {
   name: string
   description: string
   url: string
   dateModified?: string
   mainEntity?: Record<string, unknown>
+  keywords?: string[]
 }) {
   const schema = clean({
     "@context": ctx,
@@ -369,6 +379,8 @@ export function WebPageSchema({ name, description, url, dateModified, mainEntity
     inLanguage: "en-US",
     isPartOf: { "@id": `${site.url}/#website` },
     about: { "@id": `${site.url}/#organization` },
+    keywords: keywords?.join(", ") || undefined,
+    speakable: { "@type": "SpeakableSpecification", cssSelector: [".quick-answer", ".tl-dr", ".key-takeaways"] },
     ...(mainEntity ? { mainEntity } : {}),
   })
   return ld(schema, "ld-webpage")

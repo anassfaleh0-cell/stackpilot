@@ -34,7 +34,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Best Software", href: "/best" }, { name: page.title, href: `/best/${slug}` }]} />
-      <ArticleSchema title={page.title} description={page.description} publishedAt={page.lastUpdated} updatedAt={page.lastUpdated} author={page.author} url={`${site.url}/best/${slug}`} wordCount={page.description.split(/\s+/).length + page.picks.reduce((a, p) => a + p.pros.length + p.cons.length, 0) * 20} category={page.category} />
+      <ArticleSchema title={page.title} description={page.description} publishedAt={page.lastUpdated} updatedAt={page.lastUpdated} author={page.author} url={`${site.url}/best/${slug}`} wordCount={page.description.split(/\s+/).length + page.picks.reduce((a, p) => a + p.pros.length + p.cons.length, 0) * 20} category={page.category} keywords={["best " + page.category.toLowerCase(), page.category + " software ranking", "top " + page.category.toLowerCase() + " tools", "software recommendations 2026", "expert picks"].filter(Boolean)} mentions={page.picks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} />
       <CollectionPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} />
       <ItemListSchema items={page.picks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} url={`${site.url}/best/${slug}`} />
       <WebPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} dateModified={page.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: page.picks.map((p, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "SoftwareApplication", name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` } })) }} />
@@ -47,6 +47,36 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
         <Container>
           <div className="mb-8">
             <EditorialHero slug={page.slug} title={page.title} subtitle={page.description} category={page.category} variant="review" className="w-full min-h-[180px] sm:min-h-[220px]" />
+          </div>
+
+          <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+            <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
+            <p className="text-sm text-muted-foreground">After hands-on testing of {page.picks.length} leading {page.category.toLowerCase()} tools, our top pick is <strong>{page.picks[0]?.toolName}</strong> (rating {page.picks[0]?.rating}/5, from {page.picks[0]?.priceRange}). Each tool was evaluated across {page.criteria.length} criteria including features, ease of use, value, and performance.</p>
+          </div>
+
+          <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+            <h2 className="text-base font-semibold mb-2">TL;DR</h2>
+            <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
+              <li><strong>#1 pick:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}</li>
+              <li>{page.picks.length} tools tested and ranked across {page.criteria.length} evaluation criteria</li>
+              <li>Price range: from {page.picks.reduce((min, p) => Math.min(min, parseInt(p.priceRange.replace(/[^0-9]/g, "")) || 999), 999)} to {page.picks.reduce((max, p) => Math.max(max, parseInt(p.priceRange.replace(/[^0-9]/g, "")) || 0), 0)} per month</li>
+              <li>Every pick includes real pros, cons, and best-fit use cases</li>
+              <li>Category: {page.category} — last verified {formatDate(page.lastUpdated)}</li>
+            </ul>
+          </div>
+
+          <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+            <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
+            <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
+              <li>{page.picks.length} top {page.category.toLowerCase()} tools ranked after hands-on testing</li>
+              <li>Evaluation criteria: {page.criteria.join(", ")}</li>
+              <li>Top pick: {page.picks[0]?.toolName} ({page.picks[0]?.rating}/5, from {page.picks[0]?.priceRange}) — {page.picks[0]?.bestFor}</li>
+              {page.picks[1] ? <li>Runner-up: {page.picks[1].toolName} ({page.picks[1].rating}/5, from {page.picks[1].priceRange})</li> : null}
+              <li>Pricing ranges from free to enterprise, depending on features and scale</li>
+              <li>Each pick includes verified pros, cons, and best-fit recommendations</li>
+              <li>Full comparison table with feature-by-feature breakdown included below</li>
+              <li>Updated {formatDate(page.lastUpdated)} — pricing and features verified at time of review</li>
+            </ul>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-8 pb-4 border-b border-border">

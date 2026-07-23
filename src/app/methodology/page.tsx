@@ -7,7 +7,7 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
-  title: "Review Methodology",
+  title: "Review Methodology | How We Test & Rank Software",
   description: "How we test, score, and rank every tool on PilotStack. Our transparent, hands-on, two-week review process with standardized rubrics ensures every review is thorough, unbiased, and trustworthy.",
   path: "/methodology",
   ogType: "article",
@@ -48,7 +48,7 @@ export default function MethodologyPage() {
   const currentYear = new Date().getFullYear()
   return (
     <>
-      <ArticleSchema title="Review Methodology" description="How we test, score, and rank every tool on PilotStack — a transparent, two-week review process with standardized rubrics." publishedAt="2026-01-15" author="PilotStack Team" url={`${site.url}/methodology`} />
+      <ArticleSchema title="Review Methodology | How We Test & Rank Software" description="How we test, score, and rank every tool on PilotStack — a transparent, two-week review process with standardized rubrics." publishedAt="2026-01-15" author="PilotStack Team" url={`${site.url}/methodology`} keywords={["software review methodology", "product testing process", "scoring rubric", "hands-on testing", "editorial standards"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
       <BreadcrumbSchema items={[
         { name: "Home", href: "/" },
         { name: "Review Methodology", href: "/methodology" },
@@ -64,6 +64,38 @@ export default function MethodologyPage() {
             <p className="text-lg text-muted-foreground mb-8">
               Transparency matters. Here is exactly how we test, score, and rank every tool on PilotStack.
             </p>
+
+            <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
+              <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
+              <p className="text-sm text-muted-foreground">
+                PilotStack tests every software tool hands-on for a minimum of two weeks using realistic workflows. Each tool is scored across five equally weighted dimensions (Features, Ease of Use, Support, Value, Performance) on a 1-5 scale. Reviews are independently verified by a second team member and cross-referenced against G2, Capterra, and TrustRadius. We never accept payment for reviews.
+              </p>
+            </div>
+
+            <div className="tl-dr mb-8 p-4 bg-muted-bg rounded-xl border border-border">
+              <h2 className="text-lg font-semibold mb-2">TL;DR</h2>
+              <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
+                <li>Every tool is tested hands-on for at least 2 weeks by 2+ team members</li>
+                <li>Five equally weighted scoring dimensions: Features, Ease of Use, Support, Value, Performance</li>
+                <li>Independent peer verification and cross-referencing against 3 third-party review platforms</li>
+                <li>No vendor payments, previews, or influence on ratings or rankings</li>
+                <li>Reviews updated within 2 weeks of major product changes; flagged if not refreshed in 12+ months</li>
+              </ul>
+            </div>
+
+            <div className="key-takeaways mb-8 p-4 bg-muted-bg rounded-xl border border-border">
+              <h2 className="text-lg font-semibold mb-2">Key Takeaways</h2>
+              <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
+                <li>We review only tools readers actively evaluate — no paid placements</li>
+                <li>Top 5-8 tools per category selected for full end-to-end testing</li>
+                <li>Realistic workflows (e.g., real projects, real data sources) used for every test</li>
+                <li>Scoring is fully transparent with published rubrics and equal dimension weighting</li>
+                <li>Second team member independently replicates every test to verify findings</li>
+                <li>Aggregated user sentiment from G2, Capterra, and TrustRadius validates our assessments</li>
+                <li>Last-reviewed date visible on every review; stale content flagged at 12 months</li>
+                <li>Quarterly calibration sessions ensure rating consistency across reviewers</li>
+              </ul>
+            </div>
 
             <div className="prose prose-slate max-w-none mb-12">
               <p className="text-muted-foreground mb-6">

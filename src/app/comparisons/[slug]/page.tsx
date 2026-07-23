@@ -58,7 +58,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
       {review1 && <SoftwareSchema name={review1.name} description={review1.tagline} applicationCategory="BusinessApplication" />}
       {review2 && <SoftwareSchema name={review2.name} description={review2.tagline} applicationCategory="BusinessApplication" />}
       <WebPageSchema name={cmp.title} description={cmp.description} url={`${site.url}/comparisons/${slug}`} dateModified={cmp.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: [{ "@type": "ListItem", position: 1, item: { "@type": "SoftwareApplication", name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}` } }, { "@type": "ListItem", position: 2, item: { "@type": "SoftwareApplication", name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}` } }] }} />
-      <ArticleSchema title={cmp.title} description={cmp.description} publishedAt={cmp.lastUpdated} updatedAt={cmp.lastUpdated} author="PilotStack Team" url={`${site.url}/comparisons/${slug}`} wordCount={cmp.description.split(/\s+/).length} category={cmp.category} />
+      <ArticleSchema title={cmp.title} description={cmp.description} publishedAt={cmp.lastUpdated} updatedAt={cmp.lastUpdated} author="PilotStack Team" url={`${site.url}/comparisons/${slug}`} wordCount={cmp.description.split(/\s+/).length} category={cmp.category} keywords={[`${cmp.tool1} vs ${cmp.tool2}`, `${cmp.tool1} comparison`, `${cmp.tool2} comparison`, cmp.category, "software comparison 2026"]} mentions={[{ name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}` }, { name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}` }]} />
       <OrganizationSchema />
       <FAQSchema questions={cmp.faqs} path={`/comparisons/${slug}`} />
       <Container className="pt-8">
@@ -76,6 +76,36 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
               variant="comparison"
               className="w-full min-h-[200px] sm:min-h-[240px]"
             />
+          </div>
+
+          <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+            <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
+            <p className="text-sm text-muted-foreground">{cmp.description}</p>
+          </div>
+
+          <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+            <h2 className="text-base font-semibold mb-2">TL;DR</h2>
+            <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
+              <li>{cmp.winner ? `${cmp.winner} wins overall` : `${cmp.tool1} vs ${cmp.tool2}: depends on your priorities`}</li>
+              <li>{cmp.tool1} leads in {cmp.features.filter(f => f.tool1 && !f.tool2).map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "several feature areas"}</li>
+              <li>{cmp.tool2} leads in {cmp.features.filter(f => f.tool2 && !f.tool1).map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "several feature areas"}</li>
+              <li>{cmp.features.filter(f => f.tool1 && f.tool2).length} features are shared equally between both tools</li>
+              <li>Consider your specific workflow needs when choosing between them</li>
+            </ul>
+          </div>
+
+          <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+            <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
+            <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
+              <li>Category: {cmp.category}</li>
+              <li>Total features compared: {cmp.features.length}</li>
+              <li>{cmp.tool1} exclusive features: {cmp.features.filter(f => f.tool1 && !f.tool2).length}</li>
+              <li>{cmp.tool2} exclusive features: {cmp.features.filter(f => f.tool2 && !f.tool1).length}</li>
+              <li>Shared features: {cmp.features.filter(f => f.tool1 && f.tool2).length}</li>
+              <li>{cmp.winner ? `Winner: ${cmp.winner}` : "No clear winner — depends on use case"}</li>
+              <li>FAQs answered: {cmp.faqs.length}</li>
+              <li>Last updated: {formatDate(cmp.lastUpdated)}</li>
+            </ul>
           </div>
 
           {/* E-E-A-T metadata bar */}

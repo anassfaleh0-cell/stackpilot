@@ -37,7 +37,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Guides", href: "/guides" }, { name: guide.title, href: `/guides/${slug}` }]} />
       <HowToSchema name={guide.title} description={guide.description} steps={guide.sections.map((s) => ({ name: s.title, text: s.body }))} />
-      <ArticleSchema title={guide.title} description={guide.description} publishedAt={guide.lastUpdated} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={guide.sections.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={guide.category} />
+      <ArticleSchema title={guide.title} description={guide.description} publishedAt={guide.lastUpdated} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={guide.sections.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={guide.category} keywords={[guide.category, "software guide", guide.title, "buying guide", "software selection"].filter(Boolean)} mentions={guide.relatedTools.length > 0 ? guide.relatedTools.map(t => ({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` })) : undefined} />
       <OrganizationSchema />
       <FAQSchema questions={guide.sections.slice(0, 5).map(s => ({ question: s.title, answer: truncate(s.body, 120) }))} path={`/guides/${slug}`} />
       <WebPageSchema name={guide.title} description={guide.description} url={`${site.url}/guides/${slug}`} dateModified={guide.lastUpdated} mainEntity={guide.relatedTools.length > 0 ? { "@type": "ItemList", itemListElement: guide.relatedTools.map((t, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "SoftwareApplication", name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` } })) } : undefined} />
@@ -57,6 +57,36 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                 variant="guide"
                 className="w-full min-h-[180px] sm:min-h-[220px]"
               />
+            </div>
+
+            <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+              <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
+              <p className="text-sm text-muted-foreground">{guide.description}</p>
+            </div>
+
+            <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+              <h2 className="text-base font-semibold mb-2">TL;DR</h2>
+              <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
+                <li>Difficulty: {guide.difficulty} — designed for {guide.difficulty === "Beginner" ? "newcomers" : guide.difficulty === "Intermediate" ? "experienced users" : "advanced professionals"}</li>
+                <li>{guide.sections.length} comprehensive sections covering key aspects of {guide.category.toLowerCase()}</li>
+                <li>{guide.readingTime} minute read — estimated time to complete</li>
+                <li>Includes actionable recommendations and expert insights throughout</li>
+                <li>Last updated: {formatDate(guide.lastUpdated)}</li>
+              </ul>
+            </div>
+
+            <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+              <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
+              <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
+                <li>Category: {guide.category}</li>
+                <li>Reading time: {guide.readingTime} minutes</li>
+                <li>Difficulty level: {guide.difficulty}</li>
+                <li>Total sections: {guide.sections.length}</li>
+                <li>{guide.relatedTools.length > 0 ? `${guide.relatedTools.length} related tools covered` : "Practical guidance for software selection"}</li>
+                <li>Includes expert tips, checklists, and comparison tables</li>
+                <li>Based on hands-on testing and verified data sources</li>
+                <li>Regularly updated to reflect market changes</li>
+              </ul>
             </div>
 
             {/* Meta bar */}

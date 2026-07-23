@@ -63,7 +63,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
       <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} reviewCount={tool.reviewCount} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.lastReviewed} body={tool.description} companyInfo={entity?.company || tool.company} />
       <SoftwareSchema name={tool.name} description={tool.tagline} applicationCategory="BusinessApplication" brand={tool.name} operatingSystem={entity?.company?.platforms?.join(", ")} offers={entity?.pricing?.[0] ? { price: entity.pricing[0].price?.toString() || "", priceCurrency: entity.pricing[0].currency || "USD" } : undefined} />
       <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.lastReviewed} />
-      <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.lastReviewed} updatedAt={tool.lastReviewed} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} />
+      <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.lastReviewed} updatedAt={tool.lastReviewed} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} keywords={[`${tool.name} review`, `${tool.name} pricing`, `${tool.name} pros and cons`, `${tool.category} software`, `${tool.name} alternatives`]} mentions={[{ name: tool.name, url: tool.website || `${site.url}/reviews/${tool.slug}` }]} />
       <OrganizationSchema />
       <FAQSchema questions={tool.faqs} path={`/reviews/${tool.slug}`} />
 
@@ -118,6 +118,36 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               </div>
 
               <p className="text-lg text-muted-foreground leading-relaxed mb-8 text-pretty">{tool.description}</p>
+
+              <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+                <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
+                <p className="text-sm text-muted-foreground">{tool.tagline}</p>
+              </div>
+
+              <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+                <h2 className="text-base font-semibold mb-2">TL;DR</h2>
+                <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
+                  {tool.pros.slice(0, 3).map((pro, i) => (
+                    <li key={i}>{pro}</li>
+                  ))}
+                  {tool.cons.slice(0, 2).map((con, i) => (
+                    <li key={`c${i}`}>{con}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+                <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
+                <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
+                  <li>Overall rating: {tool.rating}/5 from {tool.reviewCount.toLocaleString()} reviews</li>
+                  <li>Pricing: {tool.priceRange} ({tool.pricing})</li>
+                  <li>Best for: {tool.pros[0]?.toLowerCase().startsWith("best") ? tool.pros[0] : `${tool.name} excels at ${tool.features.filter(f => f.available).slice(0, 2).map(f => f.name.toLowerCase()).join(" and ")}`}</li>
+                  <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `Suitable for most ${tool.category} use cases`}</li>
+                  <li>{entity?.useCases?.primary?.slice(0, 2).join(", ") ? `Common use cases: ${entity.useCases.primary.slice(0, 2).join(", ")}` : `Category: ${tool.category}`}</li>
+                  <li>Alternatives exist — see comparison section below</li>
+                  <li>Rated on Features, Ease of Use, Support, Value, and Performance</li>
+                </ul>
+              </div>
 
               {/* Decision Summary — Who Should Buy */}
               <div className="grid sm:grid-cols-2 gap-4 mb-10">

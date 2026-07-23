@@ -7,7 +7,7 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
-  title: "Research Methodology",
+  title: "Research Methodology | Data Collection & Analysis",
   description: "How PilotStack conducts software market research. Our data-driven approach to pricing analysis, market trends, industry benchmarks, and original research reports.",
   path: "/research-methodology",
 })
@@ -15,6 +15,7 @@ export const metadata = createMetadata({
 export default function ResearchMethodologyPage() {
   return (
     <>
+      <ArticleSchema title="Research Methodology | Data Collection & Analysis" description="How PilotStack conducts software market research — data collection, analysis, validation, and publication standards for pricing analysis, benchmarks, and market trends." publishedAt="2026-01-15" author="PilotStack Team" url={`${site.url}/research-methodology`} keywords={["research methodology", "market research", "data collection", "pricing analysis", "industry benchmarks"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }, { name: "Gartner", url: "https://www.gartner.com" }, { name: "Forrester", url: "https://www.forrester.com" }]} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Research Methodology", href: "/research-methodology" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Research Methodology" }]} />
@@ -25,6 +26,38 @@ export default function ResearchMethodologyPage() {
             <Badge variant="default" className="mb-4">Research Standards</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Research Methodology</h1>
             <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
+
+            <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+              <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
+              <p className="text-sm text-muted-foreground">
+                PilotStack produces original software market research using primary surveys, hands-on testing data, and secondary sources including G2, Capterra, and analyst reports. Every research project follows a 6-stage process: question definition, data collection, analysis, peer review, publication, and updates. A minimum 20% of all data points are independently validated.
+              </p>
+            </div>
+
+            <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+              <h2 className="text-base font-semibold mb-2">TL;DR</h2>
+              <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
+                <li>Research draws from primary surveys, hands-on testing, and secondary sources (G2, Capterra, analyst reports)</li>
+                <li>6-stage process: question definition, data collection, analysis, peer review, publication, updates</li>
+                <li>Minimum 20% of data points independently validated by second researcher</li>
+                <li>Pricing data verified against vendor websites at time of collection</li>
+                <li>All limitations and methodology notes published transparently with each report</li>
+              </ul>
+            </div>
+
+            <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+              <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
+              <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
+                <li>Each research project starts with a specific question or hypothesis before data collection begins</li>
+                <li>Data collected systematically with documented collection dates and methods for every data point</li>
+                <li>Pricing data includes multiple tiers and regions where available</li>
+                <li>Outliers investigated and documented; 20% sample independently validated</li>
+                <li>Peer review by researcher not involved in original collection</li>
+                <li>Detailed methodology, sample sizes, and limitations published with every report</li>
+                <li>Research updated annually or when significant market changes occur</li>
+                <li>Data visualizations include source attribution, collection dates, and accessible text alternatives</li>
+              </ul>
+            </div>
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">
