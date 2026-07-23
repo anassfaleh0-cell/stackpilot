@@ -59,7 +59,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
         { name: "Reviews", href: "/reviews" },
         { name: tool.name, href: `/reviews/${tool.slug}` },
       ]} />
-      <ProductSchema name={tool.name} description={tool.description} image={tool.logo ? `${site.url}${tool.logo}` : undefined} brand={tool.name} offers={entity?.pricing?.map(p => ({ price: p.price || 0, priceCurrency: p.currency || "USD" }))} aggregateRating={{ ratingValue: tool.rating, reviewCount: tool.reviewCount }} />
+      <ProductSchema name={tool.name} description={tool.description} image={tool.logo ? `${site.url}${tool.logo}` : undefined} brand={tool.name} aggregateRating={{ ratingValue: tool.rating, reviewCount: tool.reviewCount }} />
       <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} reviewCount={tool.reviewCount} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.lastReviewed} body={tool.description} companyInfo={entity?.company || tool.company} />
       <SoftwareSchema name={tool.name} description={tool.tagline} applicationCategory="BusinessApplication" brand={tool.name} operatingSystem={entity?.company?.platforms?.join(", ")} offers={entity?.pricing?.[0] ? { price: entity.pricing[0].price?.toString() || "", priceCurrency: entity.pricing[0].currency || "USD" } : undefined} />
       <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.lastReviewed} />

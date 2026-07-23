@@ -189,12 +189,11 @@ export function SoftwareSchema({ name, description, applicationCategory, operati
   return ld(schema, "ld-software")
 }
 
-export function ProductSchema({ name, description, image, brand, offers, aggregateRating }: {
+export function ProductSchema({ name, description, image, brand, aggregateRating }: {
   name: string
   description: string
   image?: string
   brand?: string
-  offers?: { price: number; priceCurrency: string }[]
   aggregateRating?: { ratingValue: number; reviewCount: number }
 }) {
   const schema = clean({
@@ -205,7 +204,6 @@ export function ProductSchema({ name, description, image, brand, offers, aggrega
     description,
     ...(image ? { image: { "@type": "ImageObject", url: image } } : {}),
     ...(brand ? { brand: { "@type": "Brand", name: brand } } : {}),
-    ...(offers && offers.length > 0 ? { offers: offers.map(o => ({ "@type": "Offer", price: o.price, priceCurrency: o.priceCurrency })) } : {}),
     ...(aggregateRating ? {
       aggregateRating: {
         "@type": "AggregateRating",
