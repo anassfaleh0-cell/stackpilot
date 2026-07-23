@@ -14,6 +14,7 @@ export function createMetadata({
   ogImage,
   ogImageAlt,
   noIndex = false,
+  noFollow,
   ogType,
   publishedAt,
   updatedAt,
@@ -27,6 +28,7 @@ export function createMetadata({
   ogImage?: string
   ogImageAlt?: string
   noIndex?: boolean
+  noFollow?: boolean
   ogType?: "website" | "article"
   publishedAt?: string
   updatedAt?: string
@@ -40,6 +42,8 @@ export function createMetadata({
 
   const fullTitle = truncateAtWordBoundary(title, 60)
   const fullDescription = truncateAtWordBoundary(description, 160)
+
+  const follow = noFollow ?? !noIndex
 
   return {
     title: fullTitle,
@@ -67,10 +71,10 @@ export function createMetadata({
     },
     robots: {
       index: !noIndex,
-      follow: !noIndex,
+      follow,
       googleBot: {
         index: !noIndex,
-        follow: !noIndex,
+        follow,
         "max-video-preview": -1,
         "max-image-preview": "large",
         "max-snippet": -1,
