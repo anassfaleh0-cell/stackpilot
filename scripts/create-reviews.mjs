@@ -110,7 +110,7 @@ for (const [slug, t] of Object.entries(toolsData)) {
     relatedComparisons: t.relatedComparisons.filter(s => existingComparisons.includes(s)),
     relatedGuides: t.relatedGuides.filter(s => existingGuides.includes(s)),
     relatedPosts: t.relatedPosts.filter(s => existingBlog.includes(s)),
-    lastReviewed: '2026-07-19', author: 'StackPilot Team',
+    lastReviewed: '2026-07-19', author: 'PilotStack Team',
     company: makeCompany(t)
   }
   writeFileSync(join(reviewsDir, slug + '.json'), JSON.stringify(review, null, 2), 'utf-8')

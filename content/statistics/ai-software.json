@@ -5,11 +5,11 @@
   "category": "AI",
   "stats": [
     { "value": "$187B", "label": "Global AI Software Market Size (2026)", "source": "Gartner", "sourceUrl": "https://www.gartner.com/en/ai-software-forecast" },
-    { "value": "87%", "label": "Enterprises with at Least One AI Tool Deployed", "source": "StackPilot AI Adoption Survey", "sourceUrl": "https://www.pilotstack.online/research/ai-adoption" },
+    { "value": "87%", "label": "Enterprises with at Least One AI Tool Deployed", "source": "PilotStack AI Adoption Survey", "sourceUrl": "https://www.pilotstack.online/research/ai-adoption" },
     { "value": "$1,847", "label": "Average AI Software Spend per Employee", "source": "Forrester Research", "sourceUrl": "https://www.forrester.com/ai-spending" },
     { "value": "54%", "label": "Organizations Reporting Positive AI ROI within 6 Months", "source": "McKinsey Global Survey", "sourceUrl": "https://www.mckinsey.com/ai" },
     { "value": "44%", "label": "AI Spend Allocated to Generative AI Tools", "source": "IDC AI Spending Guide", "sourceUrl": "https://www.idc.com/ai-spending" },
-    { "value": "76%", "label": "Traditional Software Vendors Adding AI Features", "source": "StackPilot Vendor Analysis", "sourceUrl": "https://www.pilotstack.online/research" },
+    { "value": "76%", "label": "Traditional Software Vendors Adding AI Features", "source": "PilotStack Vendor Analysis", "sourceUrl": "https://www.pilotstack.online/research" },
     { "value": "3.2x", "label": "Higher ROI for Revenue-Generating AI vs. Efficiency AI", "source": "Boston Consulting Group", "sourceUrl": "https://www.bcg.com/ai-roi" }
   ],
   "sections": [
@@ -27,9 +27,9 @@
     {
       "title": "Enterprise Adoption Rates",
       "stats": [
-        { "value": "87%", "label": "Enterprises with Deployed AI Tools", "source": "StackPilot" },
-        { "value": "12", "label": "Average AI Tools per Enterprise (10k+ employees)", "source": "StackPilot" },
-        { "value": "3", "label": "Average AI Tools per SMB (under 50 employees)", "source": "StackPilot" },
+        { "value": "87%", "label": "Enterprises with Deployed AI Tools", "source": "PilotStack" },
+        { "value": "12", "label": "Average AI Tools per Enterprise (10k+ employees)", "source": "PilotStack" },
+        { "value": "3", "label": "Average AI Tools per SMB (under 50 employees)", "source": "PilotStack" },
         { "value": "94%", "label": "Tech Industry AI Adoption Rate", "source": "Forrester" },
         { "value": "91%", "label": "Financial Services AI Adoption Rate", "source": "Forrester" },
         { "value": "76%", "label": "Healthcare AI Adoption Rate", "source": "Forrester" }
@@ -41,9 +41,9 @@
       "stats": [
         { "value": "54%", "label": "Positive AI ROI within 6 Months", "source": "McKinsey" },
         { "value": "3.2x", "label": "ROI for Revenue AI vs. Efficiency AI", "source": "BCG" },
-        { "value": "74%", "label": "Citing Time Savings as Primary AI Value", "source": "StackPilot" },
-        { "value": "61%", "label": "Citing Output Quality Improvement", "source": "StackPilot" },
-        { "value": "47%", "label": "Citing Cost Reduction", "source": "StackPilot" }
+        { "value": "74%", "label": "Citing Time Savings as Primary AI Value", "source": "PilotStack" },
+        { "value": "61%", "label": "Citing Output Quality Improvement", "source": "PilotStack" },
+        { "value": "47%", "label": "Citing Cost Reduction", "source": "PilotStack" }
       ],
       "body": "AI ROI timelines are compressing as tools mature. More than half of organizations now see positive returns within six months, with revenue-generating applications outperforming efficiency-focused deployments by more than 3x. Time savings remain the most commonly cited benefit, followed by output quality improvements. Cost reduction, while still significant, ranks third as organizations prioritize growth over efficiency."
     },

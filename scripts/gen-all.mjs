@@ -108,7 +108,7 @@ for (const t of T) {
   
   const company = {founded:fd,headquarters:hq,customers:cu,employeeCount:em,industries:ins,targetUsers:tu,pricingModel:pm,deployment:dp,securityCertifications:sc,compliance:co,integrations:ig,apiAvailable:ap,aiFeatures:ai,mobileApps:ma,learningCurve:lc,migrationComplexity:mc,supportQuality:sq,releaseFrequency:rf}
   
-  const j = {slug:s,name:n,tagline:tg,description:de,category:c,website:we,pricing:pr,priceRange:ps,rating:r,reviewCount:rc,pros,cons,features,ratings,content,faqs,alternatives:al.filter(x=>ex.includes(x)),relatedComparisons:cp.filter(x=>x.includes(s)),relatedGuides:rg.filter(x=>g.includes(x)),relatedPosts:rp.filter(x=>b.includes(x)),lastReviewed:'2026-07-19',author:'StackPilot Team',company}
+  const j = {slug:s,name:n,tagline:tg,description:de,category:c,website:we,pricing:pr,priceRange:ps,rating:r,reviewCount:rc,pros,cons,features,ratings,content,faqs,alternatives:al.filter(x=>ex.includes(x)),relatedComparisons:cp.filter(x=>x.includes(s)),relatedGuides:rg.filter(x=>g.includes(x)),relatedPosts:rp.filter(x=>b.includes(x)),lastReviewed:'2026-07-19',author:'PilotStack Team',company}
   
   writeFileSync(join(d,s+'.json'),JSON.stringify(j,null,2),'utf-8')
   const w = content.reduce((a,x)=>a+(x.body?x.body.split(/\s+/).filter(Boolean).length:0),0)+faqs.reduce((a,x)=>a+x.question.split(/\s+/).filter(Boolean).length+x.answer.split(/\s+/).filter(Boolean).length,0)
