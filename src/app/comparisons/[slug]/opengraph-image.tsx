@@ -7,12 +7,12 @@ export const size = { width: 1200, height: 630 }
 
 export const contentType = "image/png"
 
-function loadFont(name: string): { name: string; data: ArrayBuffer; weight: number; style: "normal" } {
+function loadFont(name: string): { name: string; data: ArrayBuffer; weight: 400 | 700; style: "normal" } {
   const fp = path.join(process.cwd(), "public/fonts", name)
   return {
     name: "Geist",
     data: fs.readFileSync(fp).buffer.slice(0),
-    weight: name.includes("Bold") ? 700 : 400,
+    weight: (name.includes("Bold") ? 700 : 400) as 400 | 700,
     style: "normal",
   }
 }
