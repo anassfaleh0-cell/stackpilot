@@ -46,7 +46,7 @@ export function NewsletterSignup({ variant = "inline", className = "" }: Newslet
           <div className="flex items-center gap-2 text-xs text-success"><CheckCircle2 size={14} /> {message}</div>
         ) : (
           <form onSubmit={handleSubmit} className="flex gap-2">
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com" aria-label="Email address for newsletter" required className="flex-1 h-8 px-2 text-xs rounded-lg border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary" />
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com" aria-label="Email address for newsletter" required className="flex-1 min-w-0 h-8 px-2 text-xs rounded-lg border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary" />
             <button type="submit" disabled={status === "submitting"} className="h-8 px-3 rounded-lg bg-primary text-white text-xs font-medium hover:bg-primary-dark transition-colors disabled:opacity-50">{status === "submitting" ? "..." : "Subscribe"}</button>
           </form>
         )}
@@ -65,7 +65,7 @@ export function NewsletterSignup({ variant = "inline", className = "" }: Newslet
         <div className="flex items-center gap-2 text-sm text-success"><CheckCircle2 size={16} /> {message}</div>
       ) : (
         <form onSubmit={handleSubmit} className="flex gap-2">
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com" aria-label="Email address for newsletter" required className="flex-1 h-9 px-3 text-sm rounded-lg border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary" />
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com" aria-label="Email address for newsletter" required className="flex-1 min-w-0 h-9 px-3 text-sm rounded-lg border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary" />
           <button type="submit" disabled={status === "submitting"} className="inline-flex items-center gap-1 h-9 px-4 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors disabled:opacity-50">
             {status === "submitting" ? "..." : <><span>Subscribe</span><ArrowRight size={14} /></>}
           </button>
