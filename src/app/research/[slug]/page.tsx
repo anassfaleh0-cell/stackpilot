@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const report = getResearch(slug)
   if (!report) return {}
-  return createMetadata({ title: report.title, description: report.description, path: `/research/${report.slug}`, ogType: "article", publishedAt: report.publishedAt, updatedAt: report.updatedAt })
+  return createMetadata({ title: report.title, description: report.description, path: `/research/${report.slug}`, ogType: "article", publishedAt: report.publishedAt, updatedAt: report.updatedAt, articleSection: report.category })
 }
 
 export default async function ResearchPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -41,12 +41,17 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
             <EditorialHero slug={report.slug} title={report.title} subtitle={report.description} category={report.category} variant="review" className="w-full min-h-[200px] sm:min-h-[240px]" />
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-6 pb-4 border-b border-border">
+          <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-4 pb-4 border-b border-border">
             <Badge variant="default">{report.reportType}</Badge>
             <span className="flex items-center gap-1"><User size={12} />{report.author}</span>
             <span className="flex items-center gap-1"><Calendar size={12} />{report.publishedAt}</span>
             <span className="flex items-center gap-1"><Clock size={12} />{report.readingTime} min read</span>
             <a href="/research-methodology" className="hover:text-primary transition-colors underline underline-offset-2">Methodology</a>
+          </div>
+
+          <div className="mb-6 p-3 rounded-lg bg-primary-subtle/10 border border-primary/20 text-xs text-muted-foreground">
+            <span className="font-semibold text-foreground">Data compiled by PilotStack</span>
+            {" — "}Original research with verified data sources. Free to cite with attribution.
           </div>
 
           <div className="grid lg:grid-cols-3 gap-12">

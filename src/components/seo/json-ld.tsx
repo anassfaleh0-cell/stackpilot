@@ -386,6 +386,35 @@ export function WebPageSchema({ name, description, url, dateModified, mainEntity
   return ld(schema, "ld-webpage")
 }
 
+export function DatasetSchema({ name, description, url, datePublished, dateModified, keywords, variablesMeasured }: {
+  name: string
+  description: string
+  url: string
+  datePublished?: string
+  dateModified?: string
+  keywords?: string[]
+  variablesMeasured?: string[]
+}) {
+  const schema = clean({
+    "@context": ctx,
+    "@type": "Dataset",
+    "@id": url + "#dataset",
+    name,
+    description,
+    url,
+    datePublished: datePublished || undefined,
+    dateModified: dateModified || datePublished || undefined,
+    keywords: keywords?.join(", ") || undefined,
+    ...(variablesMeasured && variablesMeasured.length > 0 ? { variableMeasured: variablesMeasured.map(v => ({ "@type": "PropertyValue", name: v })) } : {}),
+    publisher: { "@type": "Organization", "@id": `${site.url}/#organization` },
+    inLanguage: "en-US",
+    isAccessibleForFree: true,
+    license: "https://creativecommons.org/licenses/by/4.0/",
+    mainEntityOfPage: { "@type": "WebPage", "@id": url + "#webpage" },
+  })
+  return ld(schema, "ld-dataset")
+}
+
 export function AboutPageSchema({ name, description, url, about }: {
   name: string
   description: string
