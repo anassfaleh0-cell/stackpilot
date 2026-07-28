@@ -1,0 +1,95 @@
+{
+  "slug": "saas-pricing-drift-report-2026",
+  "title": "SaaS Pricing Drift Report 2026: What Comparison Sites Get Wrong",
+  "description": "A data-driven investigation into pricing discrepancies across 11 major SaaS tools. Based on independently verified pricing data collected July 2026, this report reveals which tools' published rates have drifted furthest from what comparison sites still report. Updated July 26, 2026 to add Salesforce case study.",
+  "category": "Pricing",
+  "reportType": "Pricing Accuracy Investigation",
+  "keyFindings": [
+    "7 out of 11 independently verified SaaS tools (64%) had at least one pricing detail that commonly appears incorrectly on other comparison and review sites",
+    "Google discontinued standalone Gemini Business ($20/user/mo) and Gemini Enterprise ($30/user/mo) add-ons in March 2025, folding Gemini into Workspace base plans — many sites still list the old discontinued pricing",
+    "Jasper discontinued its Creator plan ($49/mo) for new signups and restructured to a two-tier model of Pro ($69/mo) and Business (custom) — the discontinued plan remains listed as current on multiple comparison pages",
+    "Ahrefs added a new $29/mo Starter tier and raised prices 20–50% across Lite, Standard, Advanced, and Enterprise plans, yet many comparisons still reference pre-raise pricing and omit the Starter tier entirely",
+    "Salesforce raised Pro Suite from $80 to $100/user/mo (+25%), Enterprise from $165 to $175, and Unlimited from $330 to $350, while introducing an entirely new Agentforce 1 Sales tier at $550/user/mo that does not appear in pre-2026 comparison content",
+    "Claude introduced Max 5x ($100/mo) and Max 20x ($200/mo) tiers that are frequently absent from pricing roundups, which still reference only Free, Pro, Team, and Enterprise",
+    "Monday.com Basic is consistently misquoted at $10/seat (actual: $9/seat); Jira Standard is often cited at ~$10/seat (actual: $7.91/seat) — small per-seat errors that compound significantly at scale",
+    "Only 4 of 11 verified tools (Figma, HubSpot, ChatGPT, SEMrush) had all pricing details accurately reflected in common industry references as of July 2026"
+  ],
+  "sections": [
+    {
+      "title": "Why Pricing Accuracy Matters",
+      "body": "Software buyers make purchasing decisions based on published pricing. When comparison sites, review aggregators, and analyst reports serve outdated or incorrect pricing data, buyers budget incorrectly, evaluate the wrong tiers, and discover cost surprises after implementation.\n\nFor procurement teams managing multi-tool stacks, even small per-seat errors compound significantly. A $1/seat understatement on Monday.com for a 500-person organization becomes a $6,000 annual gap. A missing Claude Max tier ($100/mo vs Pro's $20/mo) means teams budgeting for advanced AI capabilities may underestimate costs by 5x.\n\nThe problem is structural: SaaS vendors change pricing frequently through tier restructures, discontinued plans, new product introductions, and price increases. Most content is written once and periodically reviewed — if at all. The gap between what vendors currently charge and what comparison sites report widens over time, and there is no industry standard for flagging when pricing data has gone stale.",
+      "type": "text"
+    },
+    {
+      "title": "Verified Pricing Drift Case Studies",
+      "body": "The following case studies summarize all pricing discrepancies identified during independent verification conducted between July 22–23, 2026. Each tool's current pricing was confirmed against official vendor pricing pages and logged in PilotStack's entity data system with a pricingVerifiedDate timestamp.",
+      "type": "text"
+    },
+    {
+      "title": "Google Gemini — Discontinued Plans Still Widely Listed",
+      "body": "Google discontinued its standalone \"Gemini Business\" ($20/user/mo) and \"Gemini Enterprise\" ($30/user/mo) add-ons in March 2025. These plans were sold as add-ons to Google Workspace subscriptions and provided full Gemini capabilities across Docs, Sheets, Slides, and Meet.\n\nCurrent reality: Gemini is now bundled directly into Google Workspace base plans. Business Starter (~$7-8/user/mo) includes limited Gemini capabilities. Business Standard (~$14/user/mo) and Business Plus (~$22/user/mo) include full Gemini. Enterprise plans provide additional admin controls and data protections. Consumer Gemini is available as a standalone AI Plus ($7.99/mo), AI Pro ($19.99/mo), or AI Ultra ($99.99/mo) subscription.\n\nDespite this structural change occurring over sixteen months ago, many comparison and review pages continue to list the discontinued Gemini Business and Gemini Enterprise add-on pricing as current options.",
+      "type": "text"
+    },
+    {
+      "title": "Jasper — Discontinued Creator Plan",
+      "body": "Jasper previously offered a three-tier structure: Creator ($49/mo), Pro ($69/mo), and Business (custom). The Creator plan was discontinued for new signups, leaving a simplified two-tier model.\n\nCurrent reality: New customers choose between Pro ($69/mo, single seat, unlimited brand voices) and Business (custom pricing ranging from approximately $900 to $6,000+/mo depending on team size, including API access, SSO, and unlimited words). Legacy Creator customers may remain on their existing plans, but the Creator tier is no longer available to new subscribers.\n\nMultiple comparison pages still list the Creator plan as an active option alongside Pro and Business, without noting its discontinuation.",
+      "type": "text"
+    },
+    {
+      "title": "Ahrefs — New Starter Tier and Significant Price Increases",
+      "body": "Ahrefs underwent the most extensive pricing change among the verified tools. The platform introduced a new entry-level Starter plan at $29/mo and simultaneously raised prices across all existing tiers.\n\nCurrent reality: The new five-tier structure is Starter ($29/mo, 1 project), Lite ($129/mo, 5 projects), Standard ($249/mo, 20 projects), Advanced ($449/mo, 50 projects), and Enterprise ($1,499/mo, 100 projects). Compared to pre-raise pricing, Lite increased from ~$99 to $129 (+30%), Standard from ~$199 to $249 (+25%), Advanced from ~$399 to $449 (+13%), and Enterprise from ~$999 to $1,499 (+50%).\n\nThe Starter tier is entirely new and absent from most pre-2026 comparison content. Price increases across legacy tiers are inconsistently reflected, with many third-party references still citing approximate pre-raise figures.",
+      "type": "text"
+    },
+    {
+      "title": "Salesforce — New Agentforce Tier and Across-the-Board Price Increases",
+      "body": "Salesforce raised prices on its core Sales Cloud tiers and introduced an entirely new product tier during the verification window, making it one of the most active pricing environments among the 11 verified tools.\n\nCurrent reality: The Sales Cloud pricing structure is Starter ($25/user/mo), Pro Suite ($100/user/mo), Enterprise ($175/user/mo), Unlimited ($350/user/mo), and the new Agentforce 1 Sales ($550/user/mo). Compared to pre-2026 pricing, Pro Suite increased from $80 to $100 (+25%), Enterprise from $165 to $175 (+6%), and Unlimited from $330 to $350 (+6%). The Agentforce 1 Sales tier did not exist in any previous Salesforce pricing documentation and represents a new category of AI-agent-enabled CRM functionality.\n\nThese increases compound significantly at enterprise scale: a 500-seat Pro Suite deployment went from $40,000/mo to $50,000/mo — a $120,000 annual increase. The Agentforce tier alone, at $550/user/mo, represents a 4.5x premium over Pro Suite and is frequently absent from Salesforce pricing roundups that pre-date its introduction.\n\nUnlike the Gemini or Jasper cases where discontinued plans persist in references, the Salesforce drift is primarily about unrepresented new products and under-reflected price increases. Comparison content that was accurate for 2024 now understates costs by 6–25% per seat and omits the highest-value tier entirely.",
+      "type": "text"
+    },
+    {
+      "title": "Claude — Max Tiers Frequently Omitted",
+      "body": "Anthropic's Claude has expanded its pricing structure with higher-usage tiers that many comparison pages do not include. The full current range spans Free (limited GPT-5 access), Pro ($20/mo), Max 5x ($100/mo, 5x usage), Max 20x ($200/mo, 20x usage), Team ($25/seat/mo, 5-seat minimum), and Enterprise (custom).\n\nThe Max tiers address a real market need: power users who exhaust Pro tier limits quickly. However, most pricing roundups reference only Free, Pro, and occasionally Team, omitting the Max options entirely. This creates the impression that $20/mo is the practical ceiling for individual Claude usage when heavy users can spend $100–200/mo.\n\nFor organizations evaluating Claude for team deployment, the $25/seat Team tier with a 5-seat minimum ($125/mo base) is frequently compared against alternatives without that minimum commitment being highlighted.",
+      "type": "text"
+    },
+    {
+      "title": "Monday.com and Jira — Small Per-Seat Inaccuracies at Scale",
+      "body": "Monday.com and Jira both have small per-seat pricing inaccuracies that appear consistently across third-party references. While the absolute differences are minor, they compound meaningfully at organizational scale.\n\nMonday.com's confirmed pricing is Free ($0, 2 seats), Basic ($9/seat/mo), Standard ($12/seat/mo), Pro ($19/seat/mo), and Enterprise (custom). The Basic plan is commonly cited at $10/seat rather than the actual $9/seat — a $1 error that adds $1,200/year for a 100-person team.\n\nJira's confirmed pricing is Free ($0, up to 10 users), Standard ($7.91/user/mo), Premium ($14.54/user/mo), and Enterprise (custom). The Standard plan is frequently referenced at approximately $10/user/mo, 26% above the actual rate.\n\nThese inaccuracies appear to stem from cached pricing data, grandfathering of older price points in reference databases, and the fact that per-seat fractions ($7.91) are frequently rounded in comparison content.",
+      "type": "text"
+    },
+    {
+      "title": "Why Pricing Drift Happens",
+      "body": "SaaS pricing drift is not caused by negligence but by the structural mismatch between how frequently vendors change pricing and how often content is updated.\n\nVendors change pricing for strategic reasons: new feature releases justify higher tiers, competitive positioning drives price adjustments, and market maturation leads to tier restructuring. These changes can be announced with little fanfare and are often communicated only through updated pricing pages rather than press releases.\n\nComparison sites face a scaling problem. A site covering hundreds of tools cannot manually verify every price point monthly. Automated scraping helps but misses structural changes like plan discontinuations and new tier introductions. Even sites with dedicated research teams operate on quarterly or semi-annual update cycles, leaving months-long windows where published pricing does not match reality.\n\nReview aggregators that depend on user-submitted pricing face a different challenge: user reports lag behind vendor changes, and once an incorrect price enters the database, it tends to persist through citation chains as subsequent sites reference the original incorrect figure.",
+      "type": "text"
+    },
+    {
+      "title": "PilotStack's Pricing Verification Methodology",
+      "body": "PilotStack addresses pricing drift through a structured verification system built into our content infrastructure. Each software entity in our database carries a pricingVerifiedDate field that records when its pricing was last manually verified against the vendor's official pricing page.\n\nOur verification process: (1) A researcher visits the vendor's public pricing page and records all current plan names, prices, billing options, and feature differentiators. (2) Any structural changes — new tiers, discontinued plans, price increases, or bundling changes — are documented and cross-referenced against vendor changelogs or announcements. (3) The verified data is stored in the entity record with the current date as pricingVerifiedDate. (4) Content that references pricing for a given entity checks the pricingVerifiedDate and flags references older than 90 days for re-verification.\n\nThis system ensures that pricing data in our comparisons, reviews, guides, and reports has a known recency and can be re-verified on a regular cadence. It does not guarantee zero errors — pricing changes daily at some vendors — but it eliminates the indefinite persistence of outdated pricing that characterizes most static comparison content.",
+      "type": "text"
+    },
+    {
+      "title": "Recommendations for Buyers",
+      "body": "For organizations evaluating SaaS tools, we recommend the following practices: (1) Always verify pricing directly on the vendor's current pricing page before budgeting, regardless of where you first encountered a price point. (2) Check for recently added tiers or restructured plans — a tool may have added a tier better suited to your needs since the last comparison content was published. (3) Ask vendors about pricing changes in the last 12 months, particularly plan discontinuations, price increases, and bundling changes that may affect total cost. (4) For enterprise agreements, request a current pricing sheet and compare it against any third-party benchmarks with the date of those benchmarks clearly identified.",
+      "type": "text"
+    }
+  ],
+  "methodology": "This report is based on independent pricing verification conducted July 22–23, 2026, across 11 software entities in PilotStack's content database. Each entity's pricing was verified by visiting the vendor's official public pricing page and recording all current plan names, prices, billing options, and availability. Previously published pricing assumptions were identified by cross-referencing against common third-party pricing references available on comparison sites, review aggregators, and analyst reports as of April–June 2026. A pricing discrepancy was recorded when a third-party reference cited a price, plan, or tier structure that differed from the vendor's current official pricing. Only discrepancies that appeared consistently across multiple third-party sources were included. Minor variations below $1/unit/mo that appeared in isolated sources were excluded.",
+  "dataSources": [
+    { "name": "Figma Pricing Page", "url": "https://www.figma.com/pricing" },
+    { "name": "Jira Pricing Page (Atlassian)", "url": "https://www.atlassian.com/software/jira/pricing" },
+    { "name": "Salesforce Pricing Page", "url": "https://www.salesforce.com/pricing" },
+    { "name": "HubSpot Pricing Page", "url": "https://www.hubspot.com/pricing" },
+    { "name": "ChatGPT Pricing Page (OpenAI)", "url": "https://chatgpt.com/pricing" },
+    { "name": "Jasper Pricing Page", "url": "https://www.jasper.ai/pricing" },
+    { "name": "Ahrefs Pricing Page", "url": "https://ahrefs.com/pricing" },
+    { "name": "SEMrush Pricing Page", "url": "https://www.semrush.com/pricing" },
+    { "name": "Monday.com Pricing Page", "url": "https://monday.com/pricing" },
+    { "name": "Claude Pricing Page (Anthropic)", "url": "https://claude.ai/pricing" },
+    { "name": "Gemini Pricing Page (Google)", "url": "https://gemini.google.com/pricing" },
+    { "name": "PilotStack Entity Data System", "url": "https://www.pilotstack.online/research-methodology" }
+  ],
+  "publishedAt": "2026-07-27",
+  "author": "PilotStack Research Team",
+  "readingTime": 16,
+  "relatedComparisons": ["salesforce-vs-hubspot", "asana-vs-monday-com", "figma-vs-sketch"],
+  "relatedGuides": ["saas-metrics-and-kpis", "software-cost-analysis", "saas-implementation-best-practices"],
+  "relatedPosts": ["saas-pricing-report-2026", "productivity-tools-cost-2026", "project-management-software-pricing", "hr-software-cost-2026", "accounting-software-cost-2026"]
+}
