@@ -46,12 +46,15 @@ export function getAllReviews(): ReviewContent[] {
 export function getComparison(slug: string): ComparisonContent | null {
   const file = path.join(CONTENT_DIR, "comparisons", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<ComparisonContent>(file)
+  const cmp = readJson<ComparisonContent>(file)
+  if (cmp.published === false) return null
+  return cmp
 }
 
 export function getAllComparisons(): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
     .map((f) => readJson<ComparisonContent>(path.join(CONTENT_DIR, "comparisons", f)))
+    .filter((c) => c.published !== false)
 }
 
 export function getGuide(slug: string): GuideContent | null {
