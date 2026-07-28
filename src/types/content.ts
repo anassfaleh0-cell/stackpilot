@@ -90,6 +90,7 @@ export interface ComparisonContent {
   relatedGuides?: string[]
   relatedPosts?: string[]
   lastUpdated: string
+  published?: boolean
 }
 
 export interface ComparisonFeature {
