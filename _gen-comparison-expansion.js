@@ -2,7 +2,7 @@
 const fs = require("node:fs")
 
 const CONTENT_DIR = "C:/Users/user/Desktop/DEEPSK/content"
-const now = "July 20, 2026"
+const now = new Date().toISOString().slice(0, 10)
 
 // Load all tools from reviews
 const tools = {}
@@ -32,6 +32,20 @@ Object.values(tools).forEach(t => {
   byCategory[t.category].push(t)
 })
 
+// Build tool1→competitors map
+const tool1Comps = {}
+Object.values(byCategory).forEach(catTools => {
+  for (let i = 0; i < catTools.length; i++) {
+    for (let j = i + 1; j < catTools.length; j++) {
+      const a = catTools[i], b = catTools[j]
+      if (!tool1Comps[a.slug]) tool1Comps[a.slug] = []
+      if (!tool1Comps[b.slug]) tool1Comps[b.slug] = []
+      tool1Comps[a.slug].push(b.slug)
+      tool1Comps[b.slug].push(a.slug)
+    }
+  }
+})
+
 const hash = s => { let h=0; for(let i=0;i<s.length;i++) h=((h<<5)-h)+s.charCodeAt(i)|0; return Math.abs(h) }
 let count = 0
 
@@ -50,7 +64,27 @@ Object.entries(byCategory).forEach(([cat, catTools]) => {
       if (existingComps.has(slug)) continue
       
       const title = `${a.name} vs ${b.name}`
-      const desc = `Compare ${a.name} vs ${b.name} in ${now.split(",")[0]}. We analyzed features, pricing, user ratings, and real-world performance to help you choose the right ${cat.toLowerCase()} tool.`
+      const aTag = a.tagline ? a.tagline.split(".")[0] : `${a.name}'s features`
+      const bTag = b.tagline ? b.tagline.split(".")[0] : `${b.name}'s features`
+      const aRate = a.rating || 4.0
+      const bRate = b.rating || 4.0
+      const winnerName = aRate >= bRate ? a.name : b.name
+      const gap = Math.abs(aRate - bRate).toFixed(1)
+      const comps = tool1Comps[a.slug] || []
+      const compIdx = comps.indexOf(b.slug)
+      const tIdx = compIdx >= 0 ? (compIdx % 8) : (hash(a.slug + b.slug) % 8)
+
+      const DESCS = [
+        () => `${a.name} vs ${b.name} comparison for ${now}: ${a.name} (${aTag}) vs ${b.name} (${bTag}). ${winnerName} leads with ${Math.max(aRate, bRate).toFixed(1)}/5. Features, pricing, and reviews compared.`,
+        () => `Compare ${a.name} and ${b.name} for ${cat.toLowerCase()}. ${aTag}. ${bTag}. ${aRate >= bRate ? a.name : b.name} scores higher in our analysis with a ${gap}-point rating edge.`,
+        () => `${a.name} (${a.priceRange || "Varies"}) vs ${b.name} (${b.priceRange || "Varies"}) — which ${cat.toLowerCase()} tool fits your needs? ${aTag.slice(0, 50)}. ${bTag.slice(0, 50)}. Winner: ${winnerName}.`,
+        () => `${a.name} vs ${b.name} detailed review. ${aTag}. ${bTag}. ${gap > 0.5 ? `${winnerName} leads by ${gap} stars` : `Both score within ${gap} of each other`}. ${a.priceRange || "Contact for pricing"} vs ${b.priceRange || "Contact for pricing"}.`,
+        () => `Read our ${a.name} vs ${b.name} comparison for ${cat.toLowerCase()} buyers. ${a.name} brings ${aTag.toLowerCase()}. ${b.name} offers ${bTag.toLowerCase()}. ${Math.max(aRate, bRate).toFixed(1)}/5 — ${winnerName}.`,
+        () => `${a.name} (${aRate}/5) and ${b.name} (${bRate}/5) go head-to-head in ${cat.toLowerCase()}. ${a.priceRange || "Contact for pricing"}. ${b.priceRange || "Contact for pricing"}. ${aTag.slice(0, 40)}... key differentiators analyzed.`,
+        () => `Which ${cat.toLowerCase()} tool is right for you? ${a.name} focuses on ${aTag.toLowerCase().slice(0, 40)}. ${b.name} prioritizes ${bTag.toLowerCase().slice(0, 40)}. ${winnerName} wins our recommendation.`,
+        () => `${a.name} vs ${b.name}: ${winnerName} has the edge (${Math.max(aRate, bRate).toFixed(1)}/${Math.min(aRate, bRate).toFixed(1)}). ${a.priceRange || "Pricing varies"} from ${a.name}, ${b.priceRange || "pricing varies"} from ${b.name}. Full ${cat.toLowerCase()} comparison below.`,
+      ]
+      const desc = DESCS[tIdx]()
       const h = hash(slug)
       const aPrice = a.priceRange || "$0-99/mo"
       const bPrice = b.priceRange || "$0-99/mo"
@@ -126,7 +160,16 @@ adjacentCats.forEach(([cat1, cat2]) => {
     if (existingComps.has(slug)) continue
     
     const title = `${a.name} vs ${b.name}`
-    const desc = `Compare ${a.name} vs ${b.name} — a ${cat1.toLowerCase()} platform versus a ${cat2.toLowerCase()} solution. Find out which tool better suits your workflow.`
+    const aTag2 = a.tagline ? a.tagline.split(".")[0] : `${a.name}`
+    const bTag2 = b.tagline ? b.tagline.split(".")[0] : `${b.name}`
+    const aRate2 = a.rating || 4.0
+    const bRate2 = b.rating || 4.0
+    const wName = aRate2 >= bRate2 ? a.name : b.name
+    const descTemplates = [
+      () => `${a.name} (${cat1}) vs ${b.name} (${cat2}). ${aTag2}. ${bTag2}. ${wName} wins with ${Math.max(aRate2, bRate2).toFixed(1)}/5. Find the best tool for your cross-category needs.`,
+      () => `Compare ${a.name} (${cat1.toLowerCase()}) and ${b.name} (${cat2.toLowerCase()}). ${a.name}: ${aTag2.slice(0, 50)}. ${b.name}: ${bTag2.slice(0, 50)}. Pricing, features, and user ratings analyzed.`,
+    ]
+    const desc = descTemplates[hash(a.slug + b.slug) % descTemplates.length]()
     const aPrice = a.priceRange || "$0-99/mo"
     const bPrice = b.priceRange || "$0-99/mo"
     

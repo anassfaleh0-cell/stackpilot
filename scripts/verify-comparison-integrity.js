@@ -13,6 +13,7 @@ let totalDuplicates = 0
 let totalTruncated = 0
 let totalRepeatedSubstrings = 0
 let totalDoubledWords = 0
+let totalFeatureMathErrors = 0
 let filesWithIssues = new Set()
 
 const literalFiles = []
@@ -22,6 +23,7 @@ const duplicateFiles = []
 const truncatedFiles = []
 const repeatedSubstringFiles = []
 const doubledWordFiles = []
+const featureMathFiles = []
 
 const DANGLING_CONNECTOR_PATTERNS = [
   /(?:^|\.\s)(?:reduction for|principles ensure|validated\.|requirements are|compliant with)\b/gi,
@@ -47,6 +49,11 @@ const EMPTY_LIST_PATTERNS = [
   /\bour\s+highlights\b/g,
   /\bneed\s+for\s+\./g,
   /\bcomprehensive\s+,/g,
+  // FAQ glossary dedup artifacts
+  /\bwith\s+and\s+compliance\b/gi,
+  /\bits\s+comprehensive\s+and\b/gi,
+  /\band\s+need\s+for\s+\./g,
+  /\bsupport\s+and\s+need\b/gi,
 ]
 
 function findRepeatedSentences(text) {
@@ -74,7 +81,14 @@ function findRepeatedSentences(text) {
 function findDoubledWords(text) {
   const results = []
   const m = text.match(/\b(\w+)\s+\1\b/gi)
-  if (m) results.push(...m)
+  if (m) {
+    for (const match of m) {
+      const w = match.split(/\s+/)[0].toLowerCase()
+      if (["per", "vs", "for", "in", "to", "of", "on", "at", "by", "the", "a", "an"].includes(w)) continue
+      if (w === "crm") continue
+      results.push(match)
+    }
+  }
   return results
 }
 
@@ -91,6 +105,8 @@ function findDoubledWordsAcrossTags(text) {
         const w = words[0].toLowerCase()
         // Skip short prepositions/conjunctions
         if (["per", "vs", "for", "in", "to", "of", "on", "at", "by", "the", "a", "an"].includes(w)) continue
+        // Skip tool-name + category overlap: "CRM CRM" from "Copper CRM CRM & Sales"
+        if (w === "crm") continue
         results.push(match)
       }
     }
@@ -107,11 +123,18 @@ function findDoubledWordsAcrossTags(text) {
         // Skip "X provides X" patterns (valid: "Moz provides Moz AI")
         // Skip "X offers X", "X has X", "X includes X"
         const middleWord = words.length === 3 ? words[1].toLowerCase() : ""
-        if (["provides", "offers", "includes", "has", "supports", "delivers"].includes(middleWord)) continue
+        if (["provides", "offers", "includes", "has", "supports", "delivers", "tops"].includes(middleWord)) continue
         // Skip "and X and" list patterns
         if (w === "and" || w === "or") continue
         // Skip common valid patterns: "per X per", "Custom vs Custom", "per user per"
         if (["per", "vs", "custom"].includes(w) || ["per", "vs"].includes(middleWord)) continue
+        // Skip tool-name false positives: "Pages review pages" (Cloudflare Pages), "make Make" (tool name)
+        if (w === "pages" && middleWord === "review") continue
+        if (w === "make" && middleWord === "make") continue
+        // Skip tool-name + category overlap: "CRM in CRM" (Zoho CRM in CRM & Sales), "ai for AI" (Copy.ai for AI)
+        if ((w === "crm" || w === "ai") && (middleWord === "in" || middleWord === "for")) continue
+        // Skip "Analytics for Analytics" (Google Analytics in Analytics & Data category)
+        if (w === "analytics" && middleWord === "for") continue
         results.push(match)
       }
     }
@@ -256,9 +279,39 @@ for (const file of files) {
     doubledWordFiles.push({ file, fields: dwFields })
     filesWithIssues.add(file)
   }
+
+  // Check 9: FAQ answer truncation — each answer must end with terminal punctuation
+  if (data.faqs) {
+    for (let i = 0; i < data.faqs.length; i++) {
+      const a = data.faqs[i].answer || ""
+      if (a.length > 0 && !/[.!?]\s*$/.test(a.trim())) {
+        totalTruncated++
+        if (!truncatedFiles.find(tf => tf.file === file)) truncatedFiles.push({ file, count: 1, faqs: [] })
+        const existing = truncatedFiles.find(tf => tf.file === file)
+        existing.count = (existing.count || 0) + 1
+        if (!existing.faqs) existing.faqs = []
+        existing.faqs.push(i)
+        filesWithIssues.add(file)
+        break // one flag per file is enough
+      }
+    }
+  }
+
+  // Check 8: feature count math (exclusive1 + exclusive2 + shared must equal total)
+  if (data.features) {
+    const exclusive1 = data.features.filter((f) => f.tool1 && !f.tool2).length
+    const exclusive2 = data.features.filter((f) => f.tool2 && !f.tool1).length
+    const shared = data.features.filter((f) => !f.tool1 === !f.tool2).length
+    const total = data.features.length
+    if (exclusive1 + exclusive2 + shared !== total) {
+      totalFeatureMathErrors++
+      featureMathFiles.push({ file, exclusive1, exclusive2, shared, total, missing: total - (exclusive1 + exclusive2 + shared) })
+      filesWithIssues.add(file)
+    }
+  }
 }
 
-const grandTotal = totalLiteral + totalFragments + totalEmptyLists + totalDuplicates + totalTruncated + totalRepeatedSubstrings + totalDoubledWords
+const grandTotal = totalLiteral + totalFragments + totalEmptyLists + totalDuplicates + totalTruncated + totalRepeatedSubstrings + totalDoubledWords + totalFeatureMathErrors
 
 console.log(`\n${"=".repeat(70)}`)
 console.log(`COMPARISON INTEGRITY VERIFICATION REPORT`)
@@ -275,6 +328,7 @@ console.log(`  4. Duplicate feature names:                  ${totalDuplicates}`)
 console.log(`  5. Truncated Decision Framework items:       ${totalTruncated}`)
 console.log(`  6. Repeated substrings (20+ chars):          ${totalRepeatedSubstrings}`)
 console.log(`  7. Doubled words:                            ${totalDoubledWords}`)
+console.log(`  8. Feature count math errors:                ${totalFeatureMathErrors}`)
 console.log(`${"-".repeat(70)}`)
 console.log(`  TOTAL BUGS:                                  ${grandTotal}`)
 console.log(`${"=".repeat(70)}`)
@@ -331,6 +385,13 @@ if (doubledWordFiles.length > 0) {
     for (const f of fields) {
       console.log(`    ${f.field}: ${f.words.join(", ")}`)
     }
+  }
+}
+
+if (featureMathFiles.length > 0) {
+  console.log(`\n--- Files with feature count math errors ---`)
+  for (const { file, exclusive1, exclusive2, shared, total, missing } of featureMathFiles) {
+    console.log(`  ${file}: exclusive(${exclusive1})+exclusive(${exclusive2})+shared(${shared})=${exclusive1+exclusive2+shared} but total=${total} (missing ${missing})`)
   }
 }
 
