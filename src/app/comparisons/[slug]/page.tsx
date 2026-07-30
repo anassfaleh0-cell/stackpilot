@@ -15,6 +15,8 @@ import { EditorialComparison, RelatedContent } from "@/components/dynamic-client
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { ScoreBar } from "@/components/brand/patterns"
 
+export const dynamicParams = false
+
 export function generateStaticParams() {
   return getAllComparisons().map((c) => ({ slug: c.slug }))
 }
