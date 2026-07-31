@@ -1,5 +1,6 @@
 import { slugSeed, seededRandom } from "./seed"
 import { getPalette } from "./palette"
+import { RichText } from "@/components/content/rich-text"
 import type { ComparisonFeature } from "@/types/content"
 
 interface EditorialComparisonProps {
@@ -75,11 +76,9 @@ export function EditorialComparison({ tool1, tool2, features, winner, category, 
                   <div className="font-medium">{f.name}</div>
                   {(f.tool1Detail || f.tool2Detail) && (
                     <div className="text-[11px] text-muted-foreground mt-0.5 leading-tight">
-                      {f.tool1Detail && !f.tool2 && <span>{f.tool1Detail}</span>}
-                      {f.tool2Detail && !f.tool1 && <span>{f.tool2Detail}</span>}
-                      {f.tool1Detail && f.tool2Detail && <span>{f.tool1Detail} · {f.tool2Detail}</span>}
-                      {f.tool1Detail && f.tool2 && !f.tool2Detail && <span>{f.tool1Detail}</span>}
-                      {f.tool2Detail && f.tool1 && !f.tool1Detail && <span>{f.tool2Detail}</span>}
+                      {f.tool1Detail && f.tool2Detail && <RichText text={`${f.tool1Detail} · ${f.tool2Detail}`} />}
+                      {f.tool1Detail && !f.tool2Detail && <RichText text={f.tool1Detail} />}
+                      {!f.tool1Detail && f.tool2Detail && <RichText text={f.tool2Detail} />}
                     </div>
                   )}
                 </td>

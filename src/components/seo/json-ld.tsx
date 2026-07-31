@@ -304,7 +304,7 @@ export function FAQSchema({ questions, path }: { questions: { question: string; 
     mainEntity: questions.map((q) => ({
       "@type": "Question",
       name: q.question,
-      acceptedAnswer: { "@type": "Answer", text: q.answer },
+      acceptedAnswer: { "@type": "Answer", text: q.answer.replace(/<[^>]*>/g, "") },
     })),
   })
   return ld(schema, "ld-faq")

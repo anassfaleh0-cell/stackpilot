@@ -7,11 +7,13 @@ import { createMetadata } from "@/lib/metadata"
 import { getComparison, getContentTitle, getReview, getAllComparisons } from "@/lib/content/registry"
 import { formatDate } from "@/lib/utils"
 import { InternalLinks } from "@/components/content/internal-links"
+import { RichText } from "@/components/content/rich-text"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowRight, CheckCircle2, Target } from "lucide-react"
 import { EditorialHero, EditorialCallout, GlassCard, InfoCard } from "@/components/dynamic"
-import { EditorialComparison, RelatedContent } from "@/components/dynamic-client"
+import { EditorialComparison } from "@/components/editorial/editorial-comparison"
+import { RelatedContent } from "@/components/dynamic-client"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { ScoreBar } from "@/components/brand/patterns"
 
@@ -233,7 +235,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                     {cmp.winner ? `Best for most teams: ${cmp.winner}` : "How they compare"}
                   </p>
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed">{cmp.verdict}</p>
+                <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={cmp.verdict} /></p>
                 {cmp.winner && (
                   <div className="mt-4 pt-4 border-t border-border flex items-center gap-2 text-sm">
                     <span className="text-muted-foreground">Migration complexity:</span>
@@ -255,7 +257,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                 <GlassCard key={faq.question}>
                   <div className="p-4">
                     <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
-                    <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                    <p className="text-sm text-muted-foreground"><RichText text={faq.answer} /></p>
                   </div>
                 </GlassCard>
               ))}
