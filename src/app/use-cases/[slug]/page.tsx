@@ -5,7 +5,7 @@ import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, AboutPageSchema, Art
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getUseCase, getAllUseCases, getContentTitle, getReview } from "@/lib/content/registry"
-import { formatDate } from "@/lib/utils"
+import { truncate, formatDate } from "@/lib/utils"
 import { InternalLinks } from "@/components/content/internal-links"
 import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound } from "next/navigation"
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!uc) return {}
   const readingTime = Math.max(5, Math.ceil((uc.description.split(/\s+/).length + uc.recommendations.length * 20) / 200))
   const shortTitle = uc.title.length > 58 ? uc.title.slice(0, 55) + "..." : uc.title
-  return createMetadata({ title: shortTitle, description: `Best software for ${uc.category.toLowerCase()}. Expert picks, selection criteria, and common pitfalls to avoid for 2026.`, path: `/use-cases/${uc.slug}`, ogType: "article", publishedAt: uc.lastUpdated, updatedAt: uc.lastUpdated, articleSection: uc.category, readingTime })
+  return createMetadata({ title: shortTitle, description: truncate(uc.description, 160), path: `/use-cases/${uc.slug}`, ogType: "article", publishedAt: uc.lastUpdated, updatedAt: uc.lastUpdated, articleSection: uc.category, readingTime })
 }
 
 export default async function UseCasePage({ params }: { params: Promise<{ slug: string }> }) {

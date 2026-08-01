@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const page = getBest(slug)
   if (!page) return {}
   const readingTime = Math.max(5, Math.ceil((page.description.split(/\s+/).length + page.picks.reduce((a, p) => a + p.pros.length + p.cons.length, 0) * 20) / 200))
-  return createMetadata({ title: truncate(page.title, 60), description: `Compare the top ${page.picks.length} ${page.category.toLowerCase()} tools. Expert picks with pros, cons, pricing, and buying advice for 2026.`, path: `/best/${page.slug}`, ogType: "article", publishedAt: page.lastUpdated, updatedAt: page.lastUpdated, articleSection: page.category, readingTime })
+  return createMetadata({ title: truncate(page.title, 60), description: truncate(page.description, 160), path: `/best/${page.slug}`, ogType: "article", publishedAt: page.lastUpdated, updatedAt: page.lastUpdated, articleSection: page.category, readingTime })
 }
 
 export default async function BestPage({ params }: { params: Promise<{ slug: string }> }) {
