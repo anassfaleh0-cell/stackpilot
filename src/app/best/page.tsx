@@ -53,7 +53,7 @@ export default function BestPage() {
                     </span>
                   </div>
                   <CardTitle className="group-hover:text-primary transition-colors">{page.title}</CardTitle>
-                  <CardDescription className="mt-1.5">{page.description}</CardDescription>
+                  <CardDescription className="mt-1.5 line-clamp-4">{page.description}</CardDescription>
                 </Card>
               </Link>
             ))}
