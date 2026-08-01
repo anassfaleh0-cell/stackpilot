@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, ArticleSchema, FAQSchema, ItemListSchema, WebPageSchema, OrganizationSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, ArticleSchema, FAQSchema, ItemListSchema, WebPageSchema, OrganizationSchema, softwareApp } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getHub, getAllHubs, getContentTitle } from "@/lib/content/registry"
@@ -43,7 +43,7 @@ export default async function HubPage({ params }: { params: Promise<{ slug: stri
       <ArticleSchema title={hub.title} description={hub.description} publishedAt={hub.lastUpdated} updatedAt={hub.lastUpdated} author="PilotStack Team" url={`${site.url}/hubs/${slug}`} category={hub.audience} />
       <OrganizationSchema />
       <ItemListSchema items={hub.recommendations.map(r => ({ name: r.toolName, url: `${site.url}/reviews/${r.toolSlug}` }))} url={`${site.url}/hubs/${slug}`} />
-      <WebPageSchema name={hub.title} description={hub.description} url={`${site.url}/hubs/${slug}`} dateModified={hub.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: hub.recommendations.map((r, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "SoftwareApplication", name: r.toolName, url: `${site.url}/reviews/${r.toolSlug}` } })) }} />
+      <WebPageSchema name={hub.title} description={hub.description} url={`${site.url}/hubs/${slug}`} dateModified={hub.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: hub.recommendations.map((r, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: r.toolName, url: `${site.url}/reviews/${r.toolSlug}`, category: r.category, rating: r.rating }) })) }} />
       <FAQSchema questions={hub.faqs} path={`/hubs/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "By Business Type", href: "/hubs" }, { name: hub.title }]} />

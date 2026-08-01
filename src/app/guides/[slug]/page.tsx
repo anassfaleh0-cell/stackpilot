@@ -1,11 +1,11 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, HowToSchema, WebPageSchema, ArticleSchema, FAQSchema, OrganizationSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, HowToSchema, WebPageSchema, ArticleSchema, FAQSchema, OrganizationSchema, softwareApp } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { truncate, formatDate } from "@/lib/utils"
-import { getGuide, getContentTitle } from "@/lib/content/registry"
+import { getGuide, getContentTitle, getReview } from "@/lib/content/registry"
 import { getAllGuides } from "@/lib/content/registry"
 import { InternalLinks } from "@/components/content/internal-links"
 import { notFound } from "next/navigation"
@@ -40,7 +40,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       <ArticleSchema title={guide.title} description={guide.description} publishedAt={guide.lastUpdated} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={guide.sections.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={guide.category} keywords={[guide.category, "software guide", guide.title, "buying guide", "software selection"].filter(Boolean)} mentions={guide.relatedTools.length > 0 ? guide.relatedTools.map(t => ({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` })) : undefined} />
       <OrganizationSchema />
       <FAQSchema questions={guide.sections.slice(0, 5).map(s => ({ question: s.title, answer: truncate(s.body, 120) }))} path={`/guides/${slug}`} />
-      <WebPageSchema name={guide.title} description={guide.description} url={`${site.url}/guides/${slug}`} dateModified={guide.lastUpdated} mainEntity={guide.relatedTools.length > 0 ? { "@type": "ItemList", itemListElement: guide.relatedTools.map((t, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "SoftwareApplication", name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` } })) } : undefined} />
+      <WebPageSchema name={guide.title} description={guide.description} url={`${site.url}/guides/${slug}`} dateModified={guide.lastUpdated} mainEntity={guide.relatedTools.length > 0 ? { "@type": "ItemList", itemListElement: guide.relatedTools.map((t, i) => ({ "@type": "ListItem", position: i + 1, item: (() => { const rv = getReview(t); return softwareApp({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}`, category: rv?.category || guide.category, description: rv?.tagline, rating: rv?.rating, reviewCount: rv?.reviewCount }) })() })) } : undefined} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Guides", href: "/guides" }, { name: guide.title }]} />
       </Container>

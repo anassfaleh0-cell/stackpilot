@@ -174,26 +174,174 @@ export function BlogPostingSchema({
   return ld(schema, "ld-blogposting")
 }
 
-export function SoftwareSchema({ name, description, applicationCategory, operatingSystem, offers, brand, keywords }: {
+const VALID_APP_CATEGORIES = new Set([
+  "BusinessApplication", "GameApplication", "SocialNetworkingApplication", "TravelApplication",
+  "ShoppingApplication", "SportsApplication", "LifestyleApplication", "DesignApplication",
+  "DeveloperApplication", "DriverApplication", "EducationalApplication", "HealthApplication",
+  "FinanceApplication", "SecurityApplication", "BrowserApplication", "CommunicationApplication",
+  "DesktopApplication", "EntertainmentApplication", "HomeApplication", "MultimediaApplication",
+  "MobileApplication", "ReferenceApplication", "ScienceApplication", "UtilitiesApplication",
+  "VideoApplication", "WebApplication", "ProjectManagementApplication",
+])
+
+// Keyword map (normalized, most specific first) from site/product category
+// names to Schema.org SoftwareApplication applicationCategory values.
+// Anything not matched falls back to BusinessApplication.
+const APP_CATEGORY_KEYWORDS: [string[], string][] = [
+  [["project management", "projectmanager", "project manager"], "ProjectManagementApplication"],
+  [["video communication", "video conferencing", "video meeting", "webinar"], "CommunicationApplication"],
+  [["design creative", "web design", "graphic design", "design", "creative", "prototyping", "ui ux"], "DesignApplication"],
+  [["developer tools", "developer", "devops", "dev tool", "software development", "ci cd", "cloud computing", "api"], "DeveloperApplication"],
+  [["security compliance", "security", "cybersecurity", "compliance", "endpoint", "vulnerability", "identity"], "SecurityApplication"],
+  [["communication", "messaging", "chat", "phone", "ucaa"], "CommunicationApplication"],
+  [["finance accounting", "finance", "accounting", "bookkeeping", "banking", "payroll", "expense", "invoicing"], "FinanceApplication"],
+  [["health", "medical", "healthcare"], "HealthApplication"],
+  [["education", "e learning", "learning management", "lms", "course", "school"], "EducationalApplication"],
+  [["game", "gaming"], "GameApplication"],
+  [["travel", "booking"], "TravelApplication"],
+  [["shopping", "ecommerce", "e commerce", "retail", "store"], "ShoppingApplication"],
+  [["sports", "fitness"], "SportsApplication"],
+  [["lifestyle"], "LifestyleApplication"],
+  [["social networking", "social network", "social media"], "SocialNetworkingApplication"],
+  [["video", "video editing"], "VideoApplication"],
+  [["multimedia", "photo", "audio", "image editing"], "MultimediaApplication"],
+  [["entertainment", "streaming", "music"], "EntertainmentApplication"],
+  [["home"], "HomeApplication"],
+  [["browser", "browsing"], "BrowserApplication"],
+  [["reference"], "ReferenceApplication"],
+  [["science"], "ScienceApplication"],
+  [["utilities", "utility"], "UtilitiesApplication"],
+  [["driver"], "DriverApplication"],
+  [["desktop"], "DesktopApplication"],
+  [["mobile app", "mobile"], "MobileApplication"],
+  [["web application", "web"], "WebApplication"],
+]
+
+// Maps a site/product category name to a valid Schema.org applicationCategory.
+// Accepts an already-valid Schema.org value as-is; keyword-matches otherwise;
+// defaults to BusinessApplication when no mapping exists.
+function mapAppCategory(cat?: string): string {
+  const raw = (cat || "").trim()
+  const bare = raw.replace(/^https:\/\/schema\.org\//, "")
+  if (VALID_APP_CATEGORIES.has(bare)) return `https://schema.org/${bare}`
+  const haystack = " " + raw.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim() + " "
+  for (const [keywords, mapped] of APP_CATEGORY_KEYWORDS) {
+    for (const kw of keywords) {
+      if (haystack.includes(` ${kw} `)) return `https://schema.org/${mapped}`
+    }
+  }
+  return "https://schema.org/BusinessApplication"
+}
+
+// Resolves operatingSystem for a software product. Uses an explicitly
+// provided value when present; otherwise derives from platform/deployment
+// data — "Web" is the default unless the product is desktop-only or
+// mobile-only.
+function resolveOperatingSystem(operatingSystem?: string, platforms?: string[]): string {
+  const explicit = (operatingSystem || "").trim()
+  if (explicit) return explicit
+  const joined = (platforms || []).join(" ").toLowerCase()
+  if (joined === "") return "Web"
+  const hasWeb = /(^|[\s,|/])web($|[\s,|/])/.test(joined) || /cloud|saas|browser|hosted|online/.test(joined)
+  const hasDesktop = /windows|macos|mac os|linux|desktop/.test(joined)
+  const hasMobile = /ios|android|iphone|ipad|mobile/.test(joined)
+  if (hasWeb) return "Web"
+  if (hasMobile && !hasDesktop) return "iOS, Android"
+  if (hasDesktop && !hasMobile) return "Windows, macOS, Linux"
+  return "Web"
+}
+
+function validPrice(p: unknown): number | null {
+  if (typeof p === "number") return Number.isFinite(p) && p >= 0 ? p : null
+  if (typeof p !== "string") return null
+  const s = p.trim()
+  if (s === "") return null
+  const stripped = s.replace(/[^0-9.+-]/g, "")
+  if (stripped === "") return null
+  const n = Number(stripped)
+  return Number.isFinite(n) && n >= 0 ? n : null
+}
+
+function validCurrency(c?: string): string | undefined {
+  const cur = (c || "").trim().toUpperCase()
+  return /^[A-Z]{3}$/.test(cur) ? cur : undefined
+}
+
+function offerNode(offers?: { price: number | string; priceCurrency: string; url?: string }): Record<string, unknown> | undefined {
+  const price = validPrice(offers?.price)
+  const currency = validCurrency(offers?.priceCurrency)
+  if (price === null || !currency) return undefined
+  return {
+    "@type": "Offer",
+    price,
+    priceCurrency: currency,
+    ...(offers?.url ? { url: offers.url } : {}),
+  }
+}
+
+function aggregateRatingNode(ratingValue?: number, reviewCount?: number): Record<string, unknown> | undefined {
+  if (typeof ratingValue !== "number" || typeof reviewCount !== "number" || !Number.isFinite(ratingValue) || !Number.isFinite(reviewCount)) return undefined
+  if (ratingValue <= 0 || ratingValue > 5 || reviewCount <= 0) return undefined
+  return { "@type": "AggregateRating", ratingValue, bestRating: 5, worstRating: 1, ratingCount: reviewCount }
+}
+
+export function softwareApp({ name, url, description, category, platforms, applicationCategory, operatingSystem, image, rating, reviewCount, offers }: {
   name: string
-  description: string
-  applicationCategory: string
+  url: string
+  description?: string
+  category?: string
+  platforms?: string[]
+  applicationCategory?: string
   operatingSystem?: string
-  offers?: { price: string; priceCurrency: string; url?: string }
+  image?: string
+  rating?: number
+  reviewCount?: number
+  offers?: { price: number | string; priceCurrency: string; url?: string }
+}): { "@type": string; name: string; url: string; [key: string]: unknown } {
+  const node: Record<string, unknown> = {
+    "@type": "SoftwareApplication",
+    name,
+    url,
+    applicationCategory: mapAppCategory(applicationCategory || category),
+    operatingSystem: resolveOperatingSystem(operatingSystem, platforms),
+  }
+  if (description) node.description = description
+  if (image) node.image = { "@type": "ImageObject", url: image }
+  const ar = aggregateRatingNode(rating, reviewCount)
+  if (ar) node.aggregateRating = ar
+  const offer = offerNode(offers)
+  if (offer) node.offers = offer
+  return node as { "@type": string; name: string; url: string; [key: string]: unknown }
+}
+
+export function SoftwareSchema({ name, description, category, platforms, applicationCategory, operatingSystem, offers, brand, keywords, url, image, aggregateRating }: {
+  name: string
+  description?: string
+  category?: string
+  platforms?: string[]
+  applicationCategory?: string
+  operatingSystem?: string
+  offers?: { price: number | string; priceCurrency: string; url?: string }
   brand?: string
   keywords?: string[]
+  url?: string
+  image?: string
+  aggregateRating?: { ratingValue: number; reviewCount: number }
 }) {
   const schema = clean({
     "@context": ctx,
     "@type": "SoftwareApplication",
-    "@id": `${site.url}/#software-${name.toLowerCase().replace(/\s+/g, "-")}`,
+    "@id": `${site.url}/#software-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")}`,
     name,
-    description,
-    applicationCategory: `https://schema.org/${applicationCategory}`,
-    operatingSystem: operatingSystem || undefined,
-    brand: brand ? { "@type": "Brand", name: brand } : undefined,
-    offers: offers ? { "@type": "Offer", ...offers } : undefined,
-    keywords: keywords?.join(", ") || undefined,
+    ...(description ? { description } : {}),
+    ...(url ? { url } : {}),
+    applicationCategory: mapAppCategory(applicationCategory || category),
+    operatingSystem: resolveOperatingSystem(operatingSystem, platforms),
+    ...(brand ? { brand: { "@type": "Brand", name: brand } } : {}),
+    ...(offerNode(offers) ? { offers: offerNode(offers) } : {}),
+    ...(aggregateRatingNode(aggregateRating?.ratingValue, aggregateRating?.reviewCount) ? { aggregateRating: aggregateRatingNode(aggregateRating?.ratingValue, aggregateRating?.reviewCount) } : {}),
+    ...(keywords && keywords.length > 0 ? { keywords: keywords.join(", ") } : {}),
+    ...(image ? { image: { "@type": "ImageObject", url: image } } : {}),
   })
   return ld(schema, "ld-software")
 }
@@ -419,7 +567,7 @@ export function AboutPageSchema({ name, description, url, about }: {
   name: string
   description: string
   url: string
-  about: { "@type": string; name: string; url: string }[]
+  about: { "@type": string; name: string; url: string; [key: string]: unknown }[]
 }) {
   const schema = clean({
     "@context": ctx,
@@ -428,8 +576,8 @@ export function AboutPageSchema({ name, description, url, about }: {
     name,
     description,
     url,
-    mainEntity: { "@type": "ItemList", itemListElement: about.map((a, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": a["@type"], name: a.name, url: a.url } })) },
-    about: about.map((a) => ({ "@type": a["@type"], name: a.name, url: a.url })),
+    mainEntity: { "@type": "ItemList", itemListElement: about.map((a, i) => ({ "@type": "ListItem", position: i + 1, item: { ...a } })) },
+    about: about.map((a) => ({ ...a })),
   })
   return ld(schema, "ld-about-page")
 }

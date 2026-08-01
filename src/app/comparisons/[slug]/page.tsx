@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, FAQSchema, ReviewSchema, SoftwareSchema, WebPageSchema, ArticleSchema, OrganizationSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, FAQSchema, ReviewSchema, SoftwareSchema, softwareApp, WebPageSchema, ArticleSchema, OrganizationSchema } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getComparison, getContentTitle, getReview, getAllComparisons } from "@/lib/content/registry"
@@ -57,9 +57,9 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Comparisons", href: "/comparisons" }, { name: cmp.title, href: `/comparisons/${slug}` }]} />
       {review1 && <ReviewSchema name={review1.name} description={review1.description} rating={review1.rating} reviewCount={review1.reviewCount} url={`${site.url}/reviews/${review1.slug}`} />}
       {review2 && <ReviewSchema name={review2.name} description={review2.description} rating={review2.rating} reviewCount={review2.reviewCount} url={`${site.url}/reviews/${review2.slug}`} />}
-      {review1 && <SoftwareSchema name={review1.name} description={review1.tagline} applicationCategory="BusinessApplication" />}
-      {review2 && <SoftwareSchema name={review2.name} description={review2.tagline} applicationCategory="BusinessApplication" />}
-      <WebPageSchema name={cmp.title} description={cmp.description} url={`${site.url}/comparisons/${slug}`} dateModified={cmp.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: [{ "@type": "ListItem", position: 1, item: { "@type": "SoftwareApplication", name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}` } }, { "@type": "ListItem", position: 2, item: { "@type": "SoftwareApplication", name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}` } }] }} />
+      {review1 && <SoftwareSchema name={review1.name} description={review1.tagline} category={review1.category || cmp.category} url={`${site.url}/reviews/${review1.slug}`} aggregateRating={{ ratingValue: review1.rating, reviewCount: review1.reviewCount }} />}
+      {review2 && <SoftwareSchema name={review2.name} description={review2.tagline} category={review2.category || cmp.category} url={`${site.url}/reviews/${review2.slug}`} aggregateRating={{ ratingValue: review2.rating, reviewCount: review2.reviewCount }} />}
+      <WebPageSchema name={cmp.title} description={cmp.description} url={`${site.url}/comparisons/${slug}`} dateModified={cmp.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: [{ "@type": "ListItem", position: 1, item: softwareApp({ name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}`, category: review1?.category || cmp.category, description: review1?.tagline, rating: review1?.rating, reviewCount: review1?.reviewCount }) }, { "@type": "ListItem", position: 2, item: softwareApp({ name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}`, category: review2?.category || cmp.category, description: review2?.tagline, rating: review2?.rating, reviewCount: review2?.reviewCount }) }] }} />
       <ArticleSchema title={cmp.title} description={cmp.description} publishedAt={cmp.lastUpdated} updatedAt={cmp.lastUpdated} author="PilotStack Team" url={`${site.url}/comparisons/${slug}`} wordCount={cmp.description.split(/\s+/).length} category={cmp.category} keywords={[`${cmp.tool1} vs ${cmp.tool2}`, `${cmp.tool1} comparison`, `${cmp.tool2} comparison`, cmp.category, "software comparison 2026"]} mentions={[{ name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}` }, { name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}` }]} />
       <OrganizationSchema />
       <FAQSchema questions={cmp.faqs} path={`/comparisons/${slug}`} />

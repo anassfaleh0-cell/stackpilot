@@ -1,11 +1,11 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, ArticleSchema, FAQSchema, ItemListSchema, WebPageSchema, CollectionPageSchema, OrganizationSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, ArticleSchema, FAQSchema, ItemListSchema, WebPageSchema, CollectionPageSchema, OrganizationSchema, softwareApp } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { truncate, formatDate } from "@/lib/utils"
-import { getBest, getAllBest, getContentTitle } from "@/lib/content/registry"
+import { getBest, getAllBest, getContentTitle, getReview } from "@/lib/content/registry"
 import { InternalLinks } from "@/components/content/internal-links"
 import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound } from "next/navigation"
@@ -37,7 +37,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
       <ArticleSchema title={page.title} description={page.description} publishedAt={page.lastUpdated} updatedAt={page.lastUpdated} author={page.author} url={`${site.url}/best/${slug}`} wordCount={page.description.split(/\s+/).length + page.picks.reduce((a, p) => a + p.pros.length + p.cons.length, 0) * 20} category={page.category} keywords={["best " + page.category.toLowerCase(), page.category + " software ranking", "top " + page.category.toLowerCase() + " tools", "software recommendations 2026", "expert picks"].filter(Boolean)} mentions={page.picks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} />
       <CollectionPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} />
       <ItemListSchema items={page.picks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} url={`${site.url}/best/${slug}`} />
-      <WebPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} dateModified={page.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: page.picks.map((p, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "SoftwareApplication", name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` } })) }} />
+      <WebPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} dateModified={page.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: page.picks.map((p, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}`, category: getReview(p.toolSlug)?.category || page.category, rating: p.rating }) })) }} />
       <OrganizationSchema />
       <FAQSchema questions={page.faqs} path={`/best/${slug}`} />
       <Container className="pt-8">
