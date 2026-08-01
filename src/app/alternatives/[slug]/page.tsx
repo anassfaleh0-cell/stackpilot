@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, AboutPageSchema, WebPageSchema, OrganizationSchema, ArticleSchema, softwareApp } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, AboutPageSchema, WebPageSchema, ArticleSchema, softwareApp } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAlternative, getAllAlternatives, getContentTitle, getReview } from "@/lib/content/registry"
@@ -37,7 +37,6 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
       <CollectionPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} />
       <ItemListSchema items={alt.alternatives.map(a => ({ name: a.name, url: `${site.url}/reviews/${a.slug}` }))} url={`${site.url}/alternatives/${slug}`} />
       <WebPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} dateModified={alt.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: alt.alternatives.map((a, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: a.name, url: `${site.url}/reviews/${a.slug}`, category: getReview(a.slug)?.category || alt.category, description: a.description, rating: a.rating }) })) }} />
-      <OrganizationSchema />
       <ArticleSchema title={alt.title} description={alt.description} publishedAt={alt.lastUpdated} updatedAt={alt.lastUpdated} author="PilotStack Team" url={`${site.url}/alternatives/${slug}`} wordCount={alt.description.split(/\s+/).length} category={alt.category} />
       <AboutPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} about={alt.alternatives.map((a) => softwareApp({ name: a.name, url: `${site.url}/reviews/${a.slug}`, category: getReview(a.slug)?.category || alt.category, description: a.description, rating: a.rating }))} />
       <FAQSchema questions={alt.faqs} path={`/alternatives/${slug}`} />

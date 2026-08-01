@@ -1,7 +1,7 @@
 import { Container, Section } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, ArticleSchema, WebPageSchema, OrganizationSchema, DatasetSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, ArticleSchema, WebPageSchema, DatasetSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getStatistic, getAllStatistics } from "@/lib/content/registry"
@@ -111,7 +111,6 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
 
   return (
     <>
-      <OrganizationSchema />
       <ArticleSchema title={page.title} description={page.description} publishedAt={registry?.publishedAt || "2026-01-15"} author="PilotStack Team" url={`${site.url}/statistics/${slug}`} />
       <WebPageSchema name={page.title} description={page.description} url={`${site.url}/statistics/${slug}`} mainEntity={{ "@type": "Dataset", name: page.title, description: page.description }} />
       <DatasetSchema name={page.title} description={page.description} url={`${site.url}/statistics/${slug}`} datePublished={registry?.publishedAt || undefined} dateModified={registry?.updatedAt || undefined} keywords={[page.title, "software statistics", "market data"]} />

@@ -20,7 +20,7 @@ export function OrganizationSchema() {
     logo: { "@type": "ImageObject", url: `${site.url}/favicon.svg`, width: 512, height: 512 },
     description: site.description,
     sameAs: [site.links.twitter, site.links.github, site.links.reddit],
-    foundingDate: "2024",
+    foundingDate: "2024-01-01",
     numberOfEmployees: { "@type": "QuantitativeValue", minValue: 5, maxValue: 15 },
     address: { "@type": "PostalAddress", addressCountry: "US" },
   })
@@ -392,7 +392,7 @@ export function ReviewSchema({ name, description, rating, reviewCount, url, date
     description,
     url,
     brand: { "@type": "Brand", name },
-    ...(companyInfo?.founded ? { productionDate: companyInfo.founded.toString() } : {}),
+    ...(companyInfo?.founded ? { brand: { "@type": "Brand", name, foundingDate: `${companyInfo.founded}-01-01` } } : {}),
     ...(companyInfo?.headquarters ? { countryOfOrigin: companyInfo.headquarters } : {}),
     review: {
       "@type": "Review",

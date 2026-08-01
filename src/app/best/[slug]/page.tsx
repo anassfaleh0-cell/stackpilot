@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, ArticleSchema, FAQSchema, ItemListSchema, WebPageSchema, CollectionPageSchema, OrganizationSchema, softwareApp } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, ArticleSchema, FAQSchema, ItemListSchema, WebPageSchema, CollectionPageSchema, softwareApp } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { truncate, formatDate } from "@/lib/utils"
@@ -38,7 +38,6 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
       <CollectionPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} />
       <ItemListSchema items={page.picks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} url={`${site.url}/best/${slug}`} />
       <WebPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} dateModified={page.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: page.picks.map((p, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}`, category: getReview(p.toolSlug)?.category || page.category, rating: p.rating }) })) }} />
-      <OrganizationSchema />
       <FAQSchema questions={page.faqs} path={`/best/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Best Software", href: "/best" }, { name: page.title }]} />

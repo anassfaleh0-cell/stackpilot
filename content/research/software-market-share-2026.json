@@ -41,19 +41,49 @@
   ],
   "methodology": "Market share data is derived from a combination of vendor-reported revenue, third-party spending estimates, and PilotStack's proprietary usage analytics platform tracking 87,000+ organizations. Revenue figures reflect calendar year 2025 actuals and Q1-Q2 2026 annualized projections. Category definitions follow standard software taxonomy classifications. Market share percentages represent share of total category spend, excluding free tiers and unpaid open-source usage. Cloud infrastructure share includes IaaS, PaaS, and managed services but excludes colocation and traditional hosting. Smaller vendors under $10M annual revenue are grouped into 'other' categories for readability.",
   "dataSources": [
-    { "name": "PilotStack Usage Analytics Platform", "url": "https://www.pilotstack.online/research/data" },
-    { "name": "Gartner Market Share Analysis", "url": "https://www.gartner.com/en/market-share" },
-    { "name": "IDC Worldwide Software Tracker", "url": "https://www.idc.com/tracker/software-market-share" },
-    { "name": "Forrester Market Sizing", "url": "https://www.forrester.com/category/market-sizing" },
-    { "name": "Synergy Research Group", "url": "https://www.srgresearch.com/cloud-market-share" },
-    { "name": "Statista Software Market Share", "url": "https://www.statista.com/software-market-share" },
-    { "name": "Canalys Cloud Market Analysis", "url": "https://www.canalys.com/cloud-market" },
-    { "name": "CB Insights Software Market Map", "url": "https://www.cbinsights.com/research/software-market-map" }
+    {
+      "name": "Gartner Market Share Analysis",
+      "url": "https://www.gartner.com/en/market-share"
+    },
+    {
+      "name": "IDC Worldwide Software Tracker",
+      "url": "https://www.idc.com/tracker/software-market-share"
+    },
+    {
+      "name": "Forrester Market Sizing",
+      "url": "https://www.forrester.com/category/market-sizing"
+    },
+    {
+      "name": "Synergy Research Group",
+      "url": "https://www.srgresearch.com/cloud-market-share"
+    },
+    {
+      "name": "Statista Software Market Share",
+      "url": "https://www.statista.com/software-market-share"
+    },
+    {
+      "name": "Canalys Cloud Market Analysis",
+      "url": "https://www.canalys.com/cloud-market"
+    },
+    {
+      "name": "CB Insights Software Market Map",
+      "url": "https://www.cbinsights.com/research/software-market-map"
+    }
   ],
   "publishedAt": "2026-07-18",
   "author": "James Park",
   "readingTime": 14,
-  "relatedComparisons": ["salesforce-vs-hubspot", "github-vs-gitlab", "google-analytics-vs-mixpanel"],
-  "relatedGuides": ["software-evaluation-checklist", "developer-tools-stack-guide"],
-  "relatedPosts": ["software-market-share-analysis-2026", "top-software-vendors-by-category"]
+  "relatedComparisons": [
+    "salesforce-vs-hubspot",
+    "github-vs-gitlab",
+    "google-analytics-vs-mixpanel"
+  ],
+  "relatedGuides": [
+    "software-evaluation-checklist",
+    "developer-tools-stack-guide"
+  ],
+  "relatedPosts": [
+    "software-market-share-analysis-2026",
+    "top-software-vendors-by-category"
+  ]
 }

@@ -17,24 +17,24 @@ export const metadata = createMetadata({
 
 const reports = [
   {
-    title: "SaaS Pricing Report 2026",
-    description: "Comprehensive analysis of SaaS pricing trends across 12 categories. Includes pricing model distribution, average seat costs, and enterprise vs. SMB pricing analysis.",
-    slug: "saas-pricing-report-2026",
-    date: "June 2026",
-    readTime: "15 min",
+    title: "SaaS Pricing Drift Report 2026",
+    description: "Independent pricing verification across 11 software entities revealing how comparison sites get SaaS pricing wrong. Includes plan structure analysis and discrepancy records.",
+    slug: "saas-pricing-drift-report-2026",
+    date: "July 2026",
+    readTime: "16 min",
   },
   {
-    title: "Developer Tools Market Report 2026",
-    description: "Market analysis of the developer tools ecosystem including CI/CD, cloud platforms, version control, and monitoring tool adoption rates and spending patterns.",
-    slug: "developer-tools-market-2026",
-    date: "May 2026",
-    readTime: "12 min",
+    title: "DevOps Tool Trends 2026",
+    description: "Analysis of the DevOps tool ecosystem including CI/CD, containerization, observability, and infrastructure-as-code adoption rates and spending patterns.",
+    slug: "devops-trends-2026",
+    date: "July 2026",
+    readTime: "23 min",
   },
   {
-    title: "AI Software Adoption Benchmarks 2026",
-    description: "Benchmark data on AI software adoption across industries including spending per employee, ROI timelines, and tool selection criteria.",
-    slug: "ai-adoption-benchmarks-2026",
-    date: "April 2026",
+    title: "AI Software Adoption Report 2026",
+    description: "Survey-based benchmark data on AI software adoption across industries including adoption rates, spending per employee, ROI timelines, and tool selection criteria.",
+    slug: "ai-adoption-report-2026",
+    date: "July 2026",
     readTime: "18 min",
   },
 ]

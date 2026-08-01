@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { InternalLinks } from "@/components/content/internal-links"
-import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, ArticleSchema, WebPageSchema, OrganizationSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, ArticleSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { site, categories } from "@/lib/constants"
 import { getAllReviews, getAllGuides, getAllComparisons, getAllBlogPosts, getAllGlossaryTerms } from "@/lib/content/registry"
@@ -15,6 +15,24 @@ import Link from "next/link"
 import { Star, ArrowRight, BookOpen, GitCompare, FileText, Brain, Building2, DollarSign, Shield, Users, Search, CheckCircle2, XCircle, Lightbulb, TrendingUp, AlertTriangle, HelpCircle, ChevronRight, Sparkles } from "lucide-react"
 import { BrandPattern, BrandDivider } from "@/components/brand/patterns"
 import { getContentTitle } from "@/lib/content/registry"
+
+const ROUTE_FOR_TYPE: Record<string, string> = {
+  software: "reviews",
+  review: "reviews",
+  blog: "blog",
+  guide: "guides",
+  comparison: "comparisons",
+  alternative: "alternatives",
+  best: "best",
+  glossary: "glossary",
+  research: "research",
+  statistics: "statistics",
+  statistic: "statistics",
+  "use-case": "use-cases",
+  industry: "industries",
+  hub: "hubs",
+  category: "category",
+}
 
 export async function generateStaticParams() {
   return categories.map((cat) => ({ slug: cat.slug }))
@@ -60,7 +78,6 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
       <WebPageSchema name={`Best ${category.name} Software 2026`} description={knowledge?.description || `Best ${category.name.toLowerCase()} software tools`} url={`${site.url}/category/${category.slug}`} />
       <CollectionPageSchema name={category.name} description={`Best ${category.name.toLowerCase()} software tools`} url={`${site.url}/category/${category.slug}`} />
       {reviews.length > 0 && <ItemListSchema items={reviews.map(r => ({ name: r.name, url: `${site.url}/reviews/${r.slug}` }))} url={`${site.url}/category/${category.slug}`} />}
-      <OrganizationSchema />
       {knowledge?.faqs && <FAQSchema questions={knowledge.faqs} path={`/category/${slug}`} />}
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: category.name, href: `/category/${slug}` }]} />
       <Container className="pt-8">
@@ -187,7 +204,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                       </summary>
                       <div className="p-4 pt-0 border-t border-border space-y-2">
                         {stage.content.map((item) => {
-                          const path = item.type === "software" ? "reviews" : `${item.type}s`
+                          const path = ROUTE_FOR_TYPE[item.type] ?? `${item.type}s`
                           return (
                             <Link key={item.slug} href={`/${path}/${item.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-1 px-2 rounded hover:bg-muted-bg">
                               {item.name}

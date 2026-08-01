@@ -39,6 +39,22 @@ const typeLabels: Record<string, string> = {
   statistics: "Statistics",
 }
 
+const ROUTE_FOR_TYPE: Record<string, string> = {
+  review: "reviews",
+  blog: "blog",
+  guide: "guides",
+  comparison: "comparisons",
+  alternative: "alternatives",
+  best: "best",
+  glossary: "glossary",
+  research: "research",
+  statistics: "statistics",
+  "use-case": "use-cases",
+  industry: "industries",
+  hub: "hubs",
+  category: "category",
+}
+
 export function EnhancedRelatedContent({
   items,
   title = "Related Resources",
@@ -66,7 +82,7 @@ export function EnhancedRelatedContent({
 }
 
 function RelatedCard({ item, showIcon }: { item: RelatedItem; showIcon: boolean }) {
-  const href = `/${item.type === "review" ? "reviews" : item.type === "blog" ? "blog" : `${item.type}s`}/${item.slug}`
+  const href = `/${ROUTE_FOR_TYPE[item.type] ?? `${item.type}s`}/${item.slug}`
 
   return (
     <Link href={href} className="group">

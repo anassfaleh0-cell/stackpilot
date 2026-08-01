@@ -15,6 +15,22 @@ interface RelatedContentProps {
   maxItems?: number
 }
 
+const ROUTE_FOR_TYPE: Record<string, string> = {
+  review: "reviews",
+  blog: "blog",
+  guide: "guides",
+  comparison: "comparisons",
+  alternative: "alternatives",
+  best: "best",
+  glossary: "glossary",
+  research: "research",
+  statistics: "statistics",
+  "use-case": "use-cases",
+  industry: "industries",
+  hub: "hubs",
+  category: "category",
+}
+
 export function RelatedContent({ items, title = "Related Resources", maxItems = 3 }: RelatedContentProps) {
   if (!items.length) return null
 
@@ -31,7 +47,7 @@ export function RelatedContent({ items, title = "Related Resources", maxItems = 
 }
 
 function RelatedCard({ item }: { item: RelatedItem }) {
-  const href = `/${item.type === "review" ? "reviews" : item.type === "blog" ? "blog" : `${item.type}s`}/${item.slug}`
+  const href = `/${ROUTE_FOR_TYPE[item.type] ?? `${item.type}s`}/${item.slug}`
 
   return (
     <Link href={href} className="group">

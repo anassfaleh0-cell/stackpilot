@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { GlassCard } from "@/components/editorial/glass-card"
-import { getAllReviews, getContentTitle } from "@/lib/content/registry"
+import { getAllReviews, getAllComparisons, getContentTitle } from "@/lib/content/registry"
 import { BookOpen, GitCompare, FileText, BookMarked } from "lucide-react"
 
 interface SemanticLinksProps {
@@ -10,10 +10,11 @@ interface SemanticLinksProps {
 
 export function SemanticLinks({ slug, className = "" }: SemanticLinksProps) {
   const allReviews = getAllReviews()
+  const publishedComparisons = new Set(getAllComparisons().map((c) => c.slug))
   const review = allReviews.find((r) => r.slug === slug)
   if (!review) return null
 
-  const comparisons = (review.relatedComparisons || []).filter(Boolean)
+  const comparisons = (review.relatedComparisons || []).filter((c) => publishedComparisons.has(c))
   const guides = (review.relatedGuides || []).filter(Boolean)
   const posts = (review.relatedPosts || []).filter(Boolean)
   const alternatives = (review.alternatives || []).filter(Boolean)

@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/container"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, OrganizationSchema, WebPageSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, getAllUseCases, getAllIndustries, getAllHubs, getAllBlogPosts } from "@/lib/content/registry"
@@ -26,7 +26,6 @@ export default function SitemapPage() {
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Sitemap", href: "/sitemap-html" }]} />
-      <OrganizationSchema />
       <WebPageSchema name="Sitemap — All Pages" description="Complete sitemap of all pages on PilotStack." url={`${site.url}/sitemap-html`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Sitemap" }]} />

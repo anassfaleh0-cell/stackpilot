@@ -38,19 +38,46 @@
   ],
   "methodology": "This report is based on a survey of 2,184 technology decision-makers conducted between March and May 2026, supplemented by usage data from 847 software vendors. Respondents include CIOs, CTOs, IT directors, and department heads across 12 industries and company sizes from 10 to 50,000+ employees. Adoption rates are self-reported and validated against vendor telemetry data where available. Spending figures are normalized using company size and industry segment. ROI data reflects self-reported estimates using standardized framework categories. Margin of error is +-2.4% at a 95% confidence interval.",
   "dataSources": [
-    { "name": "PilotStack AI Adoption Survey 2026", "url": "https://www.pilotstack.online/research/ai-adoption-methodology" },
-    { "name": "McKinsey Global AI Survey", "url": "https://www.mckinsey.com/capabilities/artificial-intelligence" },
-    { "name": "Gartner AI Software Forecast", "url": "https://www.gartner.com/en/information-technology/insights/ai-software" },
-    { "name": "IDC Worldwide AI Spending Guide", "url": "https://www.idc.com/promo/ai-spending-guide" },
-    { "name": "Stanford AI Index Report", "url": "https://aiindex.stanford.edu/report" },
-    { "name": "Forrester AI Adoption Wave", "url": "https://www.forrester.com/category/ai-adoption" },
-    { "name": "CB Insights AI State of the Market", "url": "https://www.cbinsights.com/research/ai-market" },
-    { "name": "Statista Enterprise AI Adoption", "url": "https://www.statista.com/enterprise-ai-adoption" }
+    {
+      "name": "McKinsey Global AI Survey",
+      "url": "https://www.mckinsey.com/capabilities/artificial-intelligence"
+    },
+    {
+      "name": "Gartner AI Software Forecast",
+      "url": "https://www.gartner.com/en/information-technology/insights/ai-software"
+    },
+    {
+      "name": "IDC Worldwide AI Spending Guide",
+      "url": "https://www.idc.com/promo/ai-spending-guide"
+    },
+    {
+      "name": "Stanford AI Index Report",
+      "url": "https://aiindex.stanford.edu/report"
+    },
+    {
+      "name": "Forrester AI Adoption Wave",
+      "url": "https://www.forrester.com/category/ai-adoption"
+    },
+    {
+      "name": "CB Insights AI State of the Market",
+      "url": "https://www.cbinsights.com/research/ai-market"
+    },
+    {
+      "name": "Statista Enterprise AI Adoption",
+      "url": "https://www.statista.com/enterprise-ai-adoption"
+    }
   ],
   "publishedAt": "2026-07-18",
   "author": "Maya Rodriguez",
   "readingTime": 18,
-  "relatedComparisons": ["chatgpt-vs-jasper"],
-  "relatedGuides": ["how-to-choose-an-ai-writing-tool"],
-  "relatedPosts": ["ai-adoption-strategies-2026", "enterprise-ai-roi-calculator"]
+  "relatedComparisons": [
+    "chatgpt-vs-jasper"
+  ],
+  "relatedGuides": [
+    "how-to-choose-an-ai-writing-tool"
+  ],
+  "relatedPosts": [
+    "ai-adoption-strategies-2026",
+    "enterprise-ai-roi-calculator"
+  ]
 }

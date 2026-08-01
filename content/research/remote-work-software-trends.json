@@ -38,19 +38,46 @@
   ],
   "methodology": "This report synthesizes data from PilotStack's usage analytics platform (monitoring 34,000+ organizations), a survey of 1,876 remote and hybrid workers conducted in May 2026, and financial filings from publicly traded collaboration and productivity software vendors. Spending figures represent total addressable market for remote and hybrid work software, including collaboration, communication, project management, virtual events, digital wellness, and hybrid workplace management tools. Excluded from this analysis: hardware, furniture, internet infrastructure, and cybersecurity tools not specific to remote work. Adoption percentages represent the share of organizations using at least one tool in a given category.",
   "dataSources": [
-    { "name": "PilotStack Remote Work Analytics", "url": "https://www.pilotstack.online/research/remote-work-methodology" },
-    { "name": "Gartner Digital Workplace Survey", "url": "https://www.gartner.com/en/workplace-technology" },
-    { "name": "Forrester Future of Work Report", "url": "https://www.forrester.com/category/future-of-work" },
-    { "name": "McKinsey American Opportunity Survey", "url": "https://www.mckinsey.com/remote-work-survey" },
-    { "name": "Gallup State of the Workplace", "url": "https://www.gallup.com/workplace" },
-    { "name": "Buffer State of Remote Work", "url": "https://buffer.com/state-of-remote-work" },
-    { "name": "Owl Labs State of Remote Work", "url": "https://owllabs.com/state-of-remote-work" },
-    { "name": "Statista Remote Work Software", "url": "https://www.statista.com/remote-work-software" }
+    {
+      "name": "Gartner Digital Workplace Survey",
+      "url": "https://www.gartner.com/en/workplace-technology"
+    },
+    {
+      "name": "Forrester Future of Work Report",
+      "url": "https://www.forrester.com/category/future-of-work"
+    },
+    {
+      "name": "McKinsey American Opportunity Survey",
+      "url": "https://www.mckinsey.com/remote-work-survey"
+    },
+    {
+      "name": "Gallup State of the Workplace",
+      "url": "https://www.gallup.com/workplace"
+    },
+    {
+      "name": "Buffer State of Remote Work",
+      "url": "https://buffer.com/state-of-remote-work"
+    },
+    {
+      "name": "Owl Labs State of Remote Work",
+      "url": "https://owllabs.com/state-of-remote-work"
+    },
+    {
+      "name": "Statista Remote Work Software",
+      "url": "https://www.statista.com/remote-work-software"
+    }
   ],
   "publishedAt": "2026-07-18",
   "author": "Sarah Mitchell",
   "readingTime": 13,
-  "relatedComparisons": ["slack-vs-microsoft-teams"],
-  "relatedGuides": ["remote-team-collaboration-guide"],
-  "relatedPosts": ["remote-work-trends-2026", "best-hybrid-work-tools"]
+  "relatedComparisons": [
+    "slack-vs-microsoft-teams"
+  ],
+  "relatedGuides": [
+    "remote-team-collaboration-guide"
+  ],
+  "relatedPosts": [
+    "remote-work-trends-2026",
+    "best-hybrid-work-tools"
+  ]
 }

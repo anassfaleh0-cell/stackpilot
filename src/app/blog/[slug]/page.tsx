@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, BlogPostingSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getBlogPost, getContentTitle } from "@/lib/content/registry"
+import { getBlogPost, getContentTitle, getAllComparisons } from "@/lib/content/registry"
 import { formatDate } from "@/lib/utils"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -193,9 +193,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             <RelatedContent
               items={[
-                ...(post.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
-                ...(post.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
-                ...(post.relatedGlossary || []).map(s => ({ slug: s, type: "glossary" as const, title: getContentTitle("glossary", s) ?? undefined })),
+                ...(post.relatedGuides || []).filter(s => getContentTitle("guide", s)).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
+                ...(post.relatedComparisons || []).filter(s => getAllComparisons().some(c => c.slug === s)).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
+                ...(post.relatedGlossary || []).filter(s => getContentTitle("glossary", s)).map(s => ({ slug: s, type: "glossary" as const, title: getContentTitle("glossary", s) ?? undefined })),
               ]}
               title="Related Resources"
             />

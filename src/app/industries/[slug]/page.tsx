@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, AboutPageSchema, ArticleSchema, WebPageSchema, ItemListSchema, OrganizationSchema, softwareApp } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, AboutPageSchema, ArticleSchema, WebPageSchema, ItemListSchema, softwareApp } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getIndustry, getAllIndustries, getContentTitle } from "@/lib/content/registry"
@@ -47,7 +47,6 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       <ItemListSchema items={ind.recommendations.map(rec => ({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` }))} url={`${site.url}/industries/${slug}`} />
       <CollectionPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} />
       <AboutPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} about={ind.recommendations.map((rec) => softwareApp({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}`, category: rec.category, rating: rec.rating }))} />
-      <OrganizationSchema />
       <FAQSchema questions={ind.faqs} path={`/industries/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Industries", href: "/industries" }, { name: ind.title }]} />

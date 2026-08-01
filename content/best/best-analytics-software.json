@@ -114,21 +114,21 @@
     },
     {
       "rank": 6,
-      "toolSlug": "looker",
-      "toolName": "Looker",
+      "toolSlug": "power-bi",
+      "toolName": "Microsoft Power BI",
       "rating": 4.3,
-      "priceRange": "~$3,000+/month",
-      "bestFor": "Data-driven organizations needing a governed semantic layer for self-service analytics",
+      "priceRange": "-20/user/month",
+      "bestFor": "Microsoft-centric organizations needing enterprise-grade self-service BI with Excel and Azure integration",
       "pros": [
-        "LookML semantic layer creates a single source of truth for metrics definitions and business logic",
-        "Embedded analytics capabilities enable integrating reports directly into customer-facing applications",
-        "Version-controlled modeling with Git integration for analytics-as-code workflows",
-        "Comprehensive API and developer tools for custom analytics application development"
+        "Natural-language querying and AI-powered data visualization from Copilot in Power BI",
+        "Deep integration with Excel, Azure, SharePoint, and the Microsoft 365 ecosystem",
+        "Generous free tier with a Pro license under  per user per month",
+        "Row-level security and enterprise governance controls via Power BI Premium capacity"
       ],
       "cons": [
-        "Typical enterprise pricing starts around $3,000 per month requiring significant budget commitment",
-        "LookML modeling language requires dedicated training for analytics team members",
-        "Heavier infrastructure requirements compared to SaaS analytics tools like Amplitude"
+        "Pro licensing limits 1GB dataset size per workspace requiring Premium for larger models",
+        "Less flexible semantic modeling than dedicated platforms like LookML-based tools",
+        "Complex DAX formula language requires training for advanced calculations"
       ]
     }
   ],

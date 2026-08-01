@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, ArticleSchema, FAQSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getResearch, getAllResearch, getContentTitle } from "@/lib/content/registry"
+import { getResearch, getAllResearch, getAllComparisons, getContentTitle } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ExternalLink, Clock, User, Calendar, ArrowRight, CheckCircle2, Lightbulb } from "lucide-react"
@@ -156,9 +156,9 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
 
           <RelatedContent
             items={[
-              ...(report.relatedComparisons || []).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
-              ...(report.relatedGuides || []).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
-              ...(report.relatedPosts || []).map(s => ({ slug: s, type: "blog" as const, title: getContentTitle("blog", s) ?? undefined })),
+              ...(report.relatedComparisons || []).filter(s => getAllComparisons().some(c => c.slug === s)).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
+              ...(report.relatedGuides || []).filter(s => getContentTitle("guide", s)).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
+              ...(report.relatedPosts || []).filter(s => getContentTitle("blog", s)).map(s => ({ slug: s, type: "blog" as const, title: getContentTitle("blog", s) ?? undefined })),
             ]}
             title="Related Resources"
           />
