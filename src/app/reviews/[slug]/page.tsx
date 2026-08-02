@@ -9,7 +9,7 @@ import { getEntity } from "@/lib/entities/data"
 import { formatDate } from "@/lib/utils"
 import { EntityOverview, CapabilitiesGrid, UseCasePanel, IntegrationDisplay, PricingTable, AutoComparison, SemanticLinks, EditorialHero, EditorialProsCons, EditorialFeatureMatrix, EditorialRatingVisual, EditorialSectionIllustration, EditorialExpert, GlassCard, InfoCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
-import { EditorialPricingLadder, EditorialWorkflow, EditorialFeatureRadar, EditorialImplementationFlow, SecurityTable, RelatedContent } from "@/components/dynamic-client"
+import { EditorialPricingLadder, EditorialFeatureRadar, EditorialImplementationFlow, SecurityTable, RelatedContent } from "@/components/dynamic-client"
 import { InternalLinks } from "@/components/content/internal-links"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -377,9 +377,6 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Feature Breakdown</h2>
                 <EditorialFeatureMatrix features={tool.features} slug={tool.slug} category={tool.category} />
               </section>
-
-              {/* Editorial Workflow */}
-              <EditorialWorkflow sections={tool.content} slug={tool.slug} category={tool.category} />
 
               {entity && (
                 <section className="mb-12 scroll-mt-24" id="alternatives">
