@@ -35,6 +35,8 @@ export function generateStaticParams() {
   return Object.keys(authors).map((slug) => ({ slug }))
 }
 
+export const dynamicParams = false
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const author = authors[slug as keyof typeof authors]
