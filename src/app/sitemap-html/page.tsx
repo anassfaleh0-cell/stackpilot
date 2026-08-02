@@ -3,7 +3,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, getAllUseCases, getAllIndustries, getAllHubs, getAllBlogPosts } from "@/lib/content/registry"
+import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, getAllUseCases, getAllIndustries, getAllHubs, getAllBlogPosts, getAllResearch, getAllStatistics } from "@/lib/content/registry"
 import Link from "next/link"
 
 export const metadata = createMetadata({
@@ -22,6 +22,8 @@ export default function SitemapPage() {
   const industries = getAllIndustries()
   const hubs = getAllHubs()
   const blog = getAllBlogPosts()
+  const research = getAllResearch()
+  const statistics = getAllStatistics()
 
   return (
     <>
@@ -92,10 +94,21 @@ export default function SitemapPage() {
               ))}
             </Section>
 
-            <Section title={`Research & Blog (${blog.length})`}>
+            <Section title={`Research & Blog (${blog.length + research.length})`}>
               <Link href="/blog" className="text-sm text-primary hover:underline block mb-2">All Research</Link>
               {blog.map(b => (
                 <Link key={b.slug} href={`/blog/${b.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{b.title}</Link>
+              ))}
+              <Link href="/research" className="text-sm text-primary hover:underline block mb-2 mt-4">Research Reports</Link>
+              {research.map(r => (
+                <Link key={r.slug} href={`/research/${r.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{r.title}</Link>
+              ))}
+            </Section>
+
+            <Section title={`Statistics (${statistics.length})`}>
+              <Link href="/statistics" className="text-sm text-primary hover:underline block mb-2">All Statistics</Link>
+              {statistics.map(s => (
+                <Link key={s.slug} href={`/statistics/${s.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{s.title}</Link>
               ))}
             </Section>
           </div>

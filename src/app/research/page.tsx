@@ -4,6 +4,7 @@ import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, CollectionPageSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
+import { getAllResearch } from "@/lib/content/registry"
 import Link from "next/link"
 import { ArrowRight, FileText } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
@@ -15,31 +16,23 @@ export const metadata = createMetadata({
   path: "/research",
 })
 
-const reports = [
-  {
-    title: "SaaS Pricing Drift Report 2026",
-    description: "Independent pricing verification across 11 software entities revealing how comparison sites get SaaS pricing wrong. Includes plan structure analysis and discrepancy records.",
-    slug: "saas-pricing-drift-report-2026",
-    date: "July 2026",
-    readTime: "16 min",
-  },
-  {
-    title: "DevOps Tool Trends 2026",
-    description: "Analysis of the DevOps tool ecosystem including CI/CD, containerization, observability, and infrastructure-as-code adoption rates and spending patterns.",
-    slug: "devops-trends-2026",
-    date: "July 2026",
-    readTime: "23 min",
-  },
-  {
-    title: "AI Software Adoption Report 2026",
-    description: "Survey-based benchmark data on AI software adoption across industries including adoption rates, spending per employee, ROI timelines, and tool selection criteria.",
-    slug: "ai-adoption-report-2026",
-    date: "July 2026",
-    readTime: "18 min",
-  },
-]
+function formatDate(iso?: string) {
+  if (!iso) return ""
+  const d = new Date(iso)
+  return d.toLocaleDateString("en-US", { month: "long", year: "numeric" })
+}
 
 export default function ResearchPage() {
+  const reports = getAllResearch()
+    .map((r) => ({
+      title: r.title,
+      description: r.description,
+      slug: r.slug,
+      date: formatDate(r.publishedAt),
+      readTime: r.readingTime ? `${r.readingTime} min` : "",
+    }))
+    .sort((a, b) => (b.date || "").localeCompare(a.date || ""))
+
   return (
     <>
       <CollectionPageSchema name="Research Reports" description="Original research reports on software pricing, market trends, and industry benchmarks" url={`${site.url}/research`} />

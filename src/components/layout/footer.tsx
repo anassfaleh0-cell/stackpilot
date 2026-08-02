@@ -8,7 +8,11 @@ import { NewsletterSignup } from "@/components/newsletter"
 const footerLinks = [
   {
     title: "Explore",
-    links: navLinks,
+    links: [
+      ...navLinks,
+      { href: "/research", label: "Research Reports" },
+      { href: "/statistics", label: "Statistics" },
+    ],
   },
   {
     title: "Categories",

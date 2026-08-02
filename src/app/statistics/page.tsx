@@ -4,6 +4,7 @@ import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, CollectionPageSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
+import { getAllStatistics } from "@/lib/content/registry"
 import Link from "next/link"
 import { ArrowRight, BarChart3 } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
@@ -15,46 +16,14 @@ export const metadata = createMetadata({
   path: "/statistics",
 })
 
-const statCategories = [
-  {
-    title: "CRM Software Statistics",
-    description: "Market size, adoption rates, ROI data, and usage statistics for the CRM industry. Updated 2026.",
-    slug: "crm-software",
-    count: 7,
-  },
-  {
-    title: "Project Management Statistics",
-    description: "Project management software adoption, productivity gains, and market trends with verified data sources.",
-    slug: "project-management",
-    count: 7,
-  },
-  {
-    title: "AI Software Statistics",
-    description: "Artificial intelligence software adoption rates, spending trends, and business impact statistics for 2026.",
-    slug: "ai-software",
-    count: 7,
-  },
-  {
-    title: "DevOps Software Statistics",
-    description: "DevOps tool adoption, CI/CD pipeline metrics, containerization, and observability usage statistics with verified data sources.",
-    slug: "devops-software",
-    count: 3,
-  },
-  {
-    title: "Marketing Software Statistics",
-    description: "Marketing technology adoption, Martech stack spending, and ROI statistics for digital marketing tools.",
-    slug: "marketing-software",
-    count: 3,
-  },
-  {
-    title: "HR Software Statistics",
-    description: "HR technology adoption, HRIS spending, and workforce management statistics with original sources.",
-    slug: "hr-software",
-    count: 3,
-  },
-]
-
 export default function StatisticsPage() {
+  const statCategories = getAllStatistics().map((s) => ({
+    title: s.title,
+    description: s.description,
+    slug: s.slug,
+    count: s.stats ? s.stats.length : 0,
+  }))
+
   return (
     <>
       <CollectionPageSchema name="Software Statistics & Market Data" description="Verified software statistics with original sources" url={`${site.url}/statistics`} />
