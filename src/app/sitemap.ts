@@ -41,7 +41,7 @@ const staticPages = [
   })),
 ]
 
-const authorSlugs = ["pilotstack-team", "alex-chen", "sarah-mitchell", "jordan-park", "priya-sharma"]
+const authorSlugs = ["pilotstack-team"]
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
