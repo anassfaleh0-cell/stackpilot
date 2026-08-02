@@ -1,19 +1,13 @@
 import { GlassCard } from "./glass-card"
 
 const reviewerProfiles: Record<string, { name: string; role: string; expertise: string; initials: string }> = {
-  "Alex Chen": { name: "Alex Chen", role: "Editorial Director", expertise: "Developer Tools, Cloud Platforms, AI/ML", initials: "AC" },
-  "Sarah Mitchell": { name: "Sarah Mitchell", role: "Senior Research Analyst", expertise: "CRM, Sales, Marketing Automation", initials: "SM" },
-  "Marcus Williams": { name: "Marcus Williams", role: "Research Analyst", expertise: "Project Management, Productivity, Collaboration", initials: "MW" },
-  "Priya Patel": { name: "Priya Patel", role: "Research Analyst", expertise: "Analytics, Data Platforms, BI Tools", initials: "PP" },
-  "James O'Brien": { name: "James O'Brien", role: "Technical Writer", expertise: "Developer Tools, DevOps, Security", initials: "JO" },
-  "Elena Torres": { name: "Elena Torres", role: "Research Analyst", expertise: "HR Tech, Finance, Compliance", initials: "ET" },
   "PilotStack Team": { name: "PilotStack Team", role: "Editorial Team", expertise: "Software Evaluation, Pricing Analysis, Market Research", initials: "PT" },
 }
 
 export function EditorialExpert({ author, reviewedAt }: { author: string; reviewedAt: string }) {
   const profile = reviewerProfiles[author] || {
     name: author,
-    role: "Research Analyst",
+    role: "Editorial Team",
     expertise: "Software Evaluation",
     initials: author.split(" ").map((w: string) => w[0]).join("").slice(0, 2).toUpperCase(),
   }

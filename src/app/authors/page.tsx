@@ -9,16 +9,17 @@ import { ArrowRight } from "lucide-react"
 
 export const metadata = createMetadata({
   title: "Our Authors & Editorial Team",
-  description: "Meet the PilotStack editorial team — experienced software analysts, researchers, and industry specialists who test and review every tool on our platform.",
+  description: "PilotStack content is produced by a small, independent team following a published methodology — hands-on testing, transparent scoring, and no vendor-paid placement.",
   path: "/authors",
 })
 
 const authors = [
-  { slug: "pilotstack-team", name: "PilotStack Team", role: "Editorial Team", bio: "Collective expertise of our editorial team spanning software engineering, product management, digital marketing, and enterprise IT." },
-  { slug: "alex-chen", name: "Alex Chen", role: "Senior Software Analyst", bio: "Developer tools, AI platforms, and productivity software specialist with a software engineering background." },
-  { slug: "sarah-mitchell", name: "Sarah Mitchell", role: "CRM & Marketing Analyst", bio: "CRM, marketing automation, and sales tools expert with hands-on marketing operations experience." },
-  { slug: "jordan-park", name: "Jordan Park", role: "Research Analyst", bio: "Market research and data analysis lead with expertise in pricing research and industry benchmarks." },
-  { slug: "priya-sharma", name: "Priya Sharma", role: "Editorial Director", bio: "Editorial quality, fact-checking, and content standards overseer with 12+ years in B2B content." },
+  {
+    slug: "pilotstack-team",
+    name: "PilotStack Team",
+    role: "Editorial Team",
+    bio: "Every review on PilotStack is produced by our small, independent team following our published methodology: hands-on testing for a minimum of two weeks, scored against a five-dimension rubric, and cross-checked against public user feedback from G2, Capterra, and TrustRadius.",
+  },
 ]
 
 export default function AuthorsPage() {
@@ -34,7 +35,8 @@ export default function AuthorsPage() {
             <Badge variant="default" className="mb-4">Our Team</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Meet Our Editorial Team</h1>
             <p className="text-lg text-muted-foreground mb-10 max-w-2xl">
-              Every review on PilotStack is written by experienced analysts who test software hands-on. Our team brings together expertise across software engineering, product management, marketing, and data science.
+              PilotStack is run by a small, independent team. We don&apos;t publish individual bios at
+              this stage, but our full testing process is public.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6">
@@ -43,7 +45,7 @@ export default function AuthorsPage() {
                   <Card className="p-6 h-full flex flex-col">
                     <div className="flex items-start gap-4 mb-4">
                       <div className="w-12 h-12 rounded-xl bg-muted-bg flex items-center justify-center shrink-0 border border-border">
-                        <span className="text-lg font-bold text-primary">{author.name.charAt(0)}</span>
+                        <span className="text-lg font-bold text-primary">PT</span>
                       </div>
                       <div>
                         <CardTitle className="text-base group-hover:text-primary transition-colors">{author.name}</CardTitle>
@@ -57,6 +59,16 @@ export default function AuthorsPage() {
                   </Card>
                 </Link>
               ))}
+            </div>
+
+            <div className="mt-10 p-6 rounded-xl bg-muted-bg border border-border">
+              <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-2">How we test</h2>
+              <p className="text-sm text-muted-foreground">
+                Every review follows our published methodology: hands-on testing for a minimum of two
+                weeks, scored against a five-dimension rubric, and cross-checked against public user
+                feedback from G2, Capterra, and TrustRadius.{" "}
+                <Link href="/methodology" className="text-primary hover:underline">Read the full methodology →</Link>
+              </p>
             </div>
           </div>
         </Container>

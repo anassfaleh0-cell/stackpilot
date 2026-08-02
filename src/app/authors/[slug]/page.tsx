@@ -2,12 +2,12 @@ import { Container, Section } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, PersonSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { ArrowRight, Star, BookOpen, Calendar } from "lucide-react"
+import { Star, BookOpen, Calendar } from "lucide-react"
 import { getAllReviews, getAllGuides, getAllBlogPosts } from "@/lib/content/registry"
 import { SocialFooterIcons } from "@/components/brand/social-icons"
 
@@ -21,57 +21,13 @@ const authors = {
   "pilotstack-team": {
     name: "PilotStack Team",
     role: "Editorial Team",
-    bio: "The PilotStack editorial team brings together experienced software analysts, product managers, and technical writers with over 50 years of combined experience evaluating B2B software across CRM, project management, analytics, developer tools, HR, and marketing categories.",
+    bio: "PilotStack is run by a small, independent team. Every review follows our published methodology: hands-on testing for a minimum of two weeks, scored against a five-dimension rubric, and cross-checked against public user feedback from G2, Capterra, and TrustRadius. We don't publish individual bios at this stage, but our full testing process is public.",
     avatar: "/logo-icon.svg",
     expertise: ["Software Reviews", "Market Research", "Software Comparison"],
-    credentials: ["50+ years combined experience", "Hands-on testing of 100+ tools"],
+    credentials: ["Hands-on testing of 150+ tools", "Published methodology"],
     social: { twitter: authorSocial.twitter, github: authorSocial.github },
     worksFor: "PilotStack",
     knowsAbout: ["Software Reviews", "Market Research", "B2B SaaS"],
-  },
-  "alex-chen": {
-    name: "Alex Chen",
-    role: "Senior Software Analyst",
-    bio: "Alex specializes in developer tools, AI platforms, and productivity software. With a background in software engineering and product management, he brings a practitioner's perspective to every review. He has tested over 40 developer tools and AI platforms hands-on.",
-    avatar: "/logo-icon.svg",
-    expertise: ["Developer Tools", "AI & Machine Learning", "Productivity"],
-    credentials: ["Former Senior Engineer at SaaS companies", "10+ years in software development"],
-    social: { twitter: authorSocial.twitter, github: authorSocial.github },
-    worksFor: "PilotStack",
-    knowsAbout: ["Developer Tools", "AI Platforms", "Productivity Software", "Software Engineering"],
-  },
-  "sarah-mitchell": {
-    name: "Sarah Mitchell",
-    role: "CRM & Marketing Analyst",
-    bio: "Sarah covers CRM, marketing automation, and sales tools. She previously led marketing operations at a B2B SaaS company where she managed a tech stack of 30+ tools. She evaluates tools based on real-world workflows, not just feature checklists.",
-    avatar: "/logo-icon.svg",
-    expertise: ["CRM & Sales", "Marketing & SEO", "Analytics"],
-    credentials: ["Former Marketing Operations Lead", "8+ years in B2B marketing"],
-    social: { twitter: authorSocial.twitter, linkedin: authorSocial.linkedin },
-    worksFor: "PilotStack",
-    knowsAbout: ["CRM", "Marketing Automation", "Sales Tools", "B2B Marketing"],
-  },
-  "jordan-park": {
-    name: "Jordan Park",
-    role: "Research Analyst",
-    bio: "Jordan leads our market research and data analysis. He designs and executes our pricing research, market benchmarks, and trend reports. His background in data science ensures our research methodology meets academic rigor standards.",
-    avatar: "/logo-icon.svg",
-    expertise: ["Market Research", "Data Analysis", "Pricing Analysis"],
-    credentials: ["MS in Data Science", "5+ years in tech market research"],
-    social: { twitter: authorSocial.twitter, github: authorSocial.github },
-    worksFor: "PilotStack",
-    knowsAbout: ["Market Research", "Data Analysis", "Pricing Strategy", "Data Science"],
-  },
-  "priya-sharma": {
-    name: "Priya Sharma",
-    role: "Editorial Director",
-    bio: "Priya oversees editorial quality, fact-checking, and content standards at PilotStack. She ensures every review meets our rigorous methodology and editorial policy before publication. She has 12+ years of experience in B2B content and software journalism.",
-    avatar: "/logo-icon.svg",
-    expertise: ["Editorial Standards", "Content Strategy", "Quality Assurance"],
-    credentials: ["12+ years in B2B content", "Former Editor at tech publications"],
-    social: { twitter: authorSocial.twitter, linkedin: authorSocial.linkedin },
-    worksFor: "PilotStack",
-    knowsAbout: ["Editorial Standards", "Content Strategy", "Software Journalism", "Quality Assurance"],
   },
 }
 
@@ -102,7 +58,6 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Authors", href: "/authors" }, { name: author.name, href: `/authors/${slug}` }]} />
-      <PersonSchema name={author.name} url={`${site.url}/authors/${slug}`} description={author.bio} knowsAbout={author.knowsAbout} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Authors", href: "/authors" }, { name: author.name }]} />
       </Container>

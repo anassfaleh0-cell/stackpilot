@@ -15,16 +15,14 @@ export const metadata = createMetadata({
 const stats = [
   { value: "695+", label: "Published pages" },
   { value: "1.1M+", label: "Words of research" },
-  { value: "100+", label: "Tools reviewed" },
+  { value: "150+", label: "In-depth tool reviews" },
   { value: "12", label: "Software categories" },
-  { value: "5", label: "Expert analysts" },
-  { value: "50+", label: "Years combined experience" },
-  { value: "100,000+", label: "Aggregated user reviews analyzed" },
+  { value: "616", label: "Published comparisons" },
   { value: "2024", label: "Founded" },
 ]
 
 const milestones = [
-  { year: "2024 Q1", event: "PilotStack founded by industry analysts" },
+  { year: "2024 Q1", event: "PilotStack founded" },
   { year: "2024 Q2", event: "First 25 software reviews published" },
   { year: "2024 Q3", event: "Expanded to 6 categories; launched comparisons" },
   { year: "2024 Q4", event: "Added AI/ML and developer tools categories" },
@@ -34,13 +32,6 @@ const milestones = [
   { year: "2025 Q4", event: "Published 500+ pages of software research" },
   { year: "2026 Q1", event: "Launched statistics and data pages" },
   { year: "2026 Q2", event: "695+ pages, 1.1M+ words, full category coverage" },
-]
-
-const teamHighlights = [
-  { name: "Alex Chen", role: "Senior Software Analyst", expertise: "Developer tools, AI platforms, productivity" },
-  { name: "Sarah Mitchell", role: "CRM & Marketing Analyst", expertise: "CRM, marketing automation, sales tools" },
-  { name: "Jordan Park", role: "Research Analyst", expertise: "Market research, data analysis, pricing" },
-  { name: "Priya Sharma", role: "Editorial Director", expertise: "Content standards, fact-checking, quality" },
 ]
 
 export default function MediaKitPage() {
@@ -69,7 +60,7 @@ export default function MediaKitPage() {
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4">About PilotStack</h2>
             <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is an independent software review and research platform that helps businesses make informed software purchasing decisions. Founded in 2024, the platform provides in-depth, hands-on reviews of B2B SaaS tools across 12 major categories.</p>
-            <p className="text-muted-foreground leading-relaxed mb-4">Unlike aggregate review sites, PilotStack tests every product extensively before publishing verified ratings and comparisons. Our team of product analysts, industry specialists, and technical writers brings over 50 years of combined experience evaluating B2B software.</p>
+            <p className="text-muted-foreground leading-relaxed mb-4">Unlike aggregate review sites, PilotStack tests every product extensively before publishing verified ratings and comparisons. The site is run by a small, independent team following a published methodology — individual bios are not published at this stage, but the full testing process is public on our <Link href="/methodology" className="text-primary hover:underline">methodology page</Link>.</p>
             <p className="text-muted-foreground leading-relaxed">Our editorial independence policy guarantees that no vendor can pay for placement, ratings, or positive coverage. Revenue comes from clearly disclosed affiliate commissions and sponsored newsletter placements.</p>
           </section>
 
@@ -77,7 +68,7 @@ export default function MediaKitPage() {
             <h2 className="text-2xl font-bold tracking-tight mb-4">Editorial Standards</h2>
             <div className="space-y-3">
               {[
-                { title: "Independent Testing", desc: "Every tool is tested hands-on by expert analysts before receiving a rating. No vendor can influence scores." },
+                { title: "Independent Testing", desc: "Every tool is tested hands-on by our team before receiving a rating. No vendor can influence scores." },
                 { title: "Standardized Methodology", desc: "All reviews follow a consistent two-week testing protocol with independently verified findings." },
                 { title: "Transparent Criteria", desc: "Our scoring rubric evaluates features, pricing, usability, support, security, and performance on a 1-5 scale." },
                 { title: "Regular Updates", desc: "Reviews are updated at least annually to reflect product changes, pricing updates, and market developments." },
@@ -92,17 +83,9 @@ export default function MediaKitPage() {
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4">Team</h2>
-            <div className="space-y-3">
-              {teamHighlights.map((t) => (
-                <div key={t.name} className="p-4 rounded-xl border border-border">
-                  <div className="font-medium text-sm">{t.name}</div>
-                  <div className="text-xs text-muted-foreground">{t.role}</div>
-                  <div className="text-xs text-muted-foreground mt-1">{t.expertise}</div>
-                </div>
-              ))}
-            </div>
+            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is run by a small, independent team. Every review follows our published methodology: hands-on testing for a minimum of two weeks, scored against a five-dimension rubric, and cross-checked against public user feedback from G2, Capterra, and TrustRadius. We don&apos;t publish individual bios at this stage.</p>
             <div className="mt-4 text-sm">
-              <Link href="/authors" className="text-primary hover:underline font-medium">View full team profiles →</Link>
+              <Link href="/methodology" className="text-primary hover:underline">Read our testing methodology →</Link>
             </div>
           </section>
 

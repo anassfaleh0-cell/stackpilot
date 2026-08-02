@@ -155,11 +155,12 @@ export default function MethodologyPage() {
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Review Team & Expertise</h2>
               <p className="text-muted-foreground mb-4">
-                Our reviewers bring over 50 years of combined experience across software engineering, product
-                management, digital marketing, and enterprise IT. Each team member specializes in 2-3 software
-                categories and maintains active certifications or hands-on experience in their areas. We conduct
-                quarterly calibration sessions where team members independently score the same tool to ensure
-                rating consistency across the team.
+                PilotStack is run by a small, independent team. We don&apos;t publish individual bios at
+                this stage, but every review follows our published methodology: hands-on testing for a
+                minimum of two weeks, scored against a five-dimension rubric, and cross-checked against
+                public user feedback from G2, Capterra, and TrustRadius. We conduct quarterly
+                calibration sessions where reviewers independently score the same tool to ensure rating
+                consistency.
               </p>
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Editorial Independence</h2>

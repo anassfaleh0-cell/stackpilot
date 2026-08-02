@@ -41,7 +41,7 @@ export default function PressPage() {
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center gap-2"><Newspaper size={20} /> About PilotStack</h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is an independent software review and research platform. We provide in-depth, hands-on reviews of B2B SaaS tools across 12 categories, helping businesses make informed software purchasing decisions. Our team of expert analysts tests every product extensively before publishing verified ratings and comparisons.</p>
+            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is an independent software review and research platform. We provide in-depth, hands-on reviews of B2B SaaS tools across 12 categories, helping businesses make informed software purchasing decisions. Our small, independent team tests every product extensively per our published methodology before publishing verified ratings and comparisons.</p>
             <div className="grid sm:grid-cols-3 gap-4 text-sm">
               <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">695+</div><div className="text-muted-foreground">Published pages</div></div>
               <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">1.1M+</div><div className="text-muted-foreground">Words of research</div></div>
