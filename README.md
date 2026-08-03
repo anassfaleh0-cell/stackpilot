@@ -2,6 +2,14 @@
 
 Enterprise-grade B2B SaaS reviews platform. In-depth software reviews, expert comparisons, actionable guides, and free interactive tools to help businesses make confident software decisions.
 
+## Live
+
+- **Site:** https://www.pilotstack.online
+- **Software Evaluation Playbook:** https://www.pilotstack.online/blog/software-evaluation-playbook-2026
+- **RSS:** https://www.pilotstack.online/rss.xml
+- **Toolkit repo:** https://github.com/anassfaleh0-cell/pilotstack-toolkit (scorecard, trial checklists, methodology)
+- **Content:** 600+ expert comparisons, 150+ reviews, 100+ guides, and a 2-week evaluation protocol — no vendor-paid placement
+
 ## Tech Stack
 
 | Layer | Technology |
