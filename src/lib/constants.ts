@@ -8,7 +8,7 @@ export const site = {
   locale: "en_US",
   links: {
     twitter: "https://x.com/pilotstackon",
-    github: "https://github.com/pilotstack",
+    github: "https://github.com/anassfaleh0-cell",
     reddit: "https://www.reddit.com/user/TestandKeep/",
     linkedin: "https://linkedin.com/in/pilotstack",
   },
