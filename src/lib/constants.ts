@@ -9,8 +9,9 @@ export const site = {
   links: {
     twitter: "https://x.com/pilotstackon",
     github: "https://github.com/anassfaleh0-cell",
-    reddit: "https://www.reddit.com/user/TestandKeep/",
-    linkedin: "https://linkedin.com/in/pilotstack",
+    facebook: "https://www.facebook.com/people/PilotStack/61592100153225/",
+    linkedin: "https://www.linkedin.com/in/pilotstack",
+    pinterest: "https://www.pinterest.com/Pilotstack/",
   },
 }
 
