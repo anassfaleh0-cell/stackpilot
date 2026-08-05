@@ -58,7 +58,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
             <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we compare</a>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               <section className="mb-10">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Top Alternatives to {alt.toolName}</h2>

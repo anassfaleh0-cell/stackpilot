@@ -104,7 +104,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         </Container>
       </section>
 
-      <div className="grid lg:grid-cols-[1fr_300px] gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8">
         {/* Main Content */}
         <div>
           {/* Market Overview */}

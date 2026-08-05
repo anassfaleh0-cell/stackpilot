@@ -66,7 +66,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we test</a>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">{ind.industryOverview}</p>
 

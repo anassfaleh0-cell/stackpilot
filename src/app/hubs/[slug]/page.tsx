@@ -62,7 +62,7 @@ export default async function HubPage({ params }: { params: Promise<{ slug: stri
             <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we test</a>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               {hub.challenges.length > 0 && (
                 <section className="mb-10 p-5 rounded-xl border border-error/20 bg-error-subtle/10">

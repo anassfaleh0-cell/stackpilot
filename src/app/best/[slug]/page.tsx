@@ -91,7 +91,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
           {/* Ad: video slider (desktop only) */}
           <HilltopVideoSlider id="best-video-slider" />
 
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               {page.criteria.length > 0 && (
                 <section className="mb-10 p-5 rounded-xl border border-primary/20 bg-primary-subtle/10">
