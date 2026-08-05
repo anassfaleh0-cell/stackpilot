@@ -34,6 +34,7 @@ const adAssets = [
   "https://www.hateful-medium.pro",
   "https://www.obvious-convert.pro",
   "https://www.carefuldependent.pro",
+  "https://www.cornyband.pro",
 ]
 
 const scriptSrc = analytics.join(" ")
@@ -49,7 +50,7 @@ const csp = [
   "style-src-attr 'unsafe-inline'",
   `img-src 'self' data: blob: ${scriptSrc} ${adAssets.join(" ")}`,
   `font-src 'self' https://fonts.gstatic.com`,
-  `media-src 'self' https://difficultblock.com https://www.silent-basis.pro https://www.hateful-medium.pro https://www.obvious-convert.pro https://www.carefuldependent.pro`,
+  `media-src 'self' https://difficultblock.com https://www.silent-basis.pro https://www.hateful-medium.pro https://www.obvious-convert.pro https://www.carefuldependent.pro https://www.cornyband.pro`,
   `connect-src 'self' ${scriptSrc} ${adAssets.join(" ")}`,
   `frame-src 'self' ${scriptSrc} ${adScripts.join(" ")} https://googleads.g.doubleclick.net`,
   `worker-src 'self' ${workerSrc}`,
