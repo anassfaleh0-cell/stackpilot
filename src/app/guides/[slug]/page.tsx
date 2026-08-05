@@ -13,6 +13,7 @@ import Link from "next/link"
 import { EditorialHero, EditorialSectionIllustration, GlassCard, InfoCard } from "@/components/dynamic"
 import { EditorialProcess, RelatedContent } from "@/components/dynamic-client"
 import { EEATProcess } from "@/components/seo/editorial-process"
+import { HilltopBanner } from "@/components/ads/hilltop-banner"
 import { BrandDivider } from "@/components/brand/patterns"
 import { CheckCircle2, BookOpen, Clock, Layers, Lightbulb } from "lucide-react"
 
@@ -128,6 +129,11 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                   <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707" />
                 </svg>
               } value={guide.difficulty} title="Difficulty" />
+            </div>
+
+            {/* Ad */}
+            <div className="mb-8">
+              <HilltopBanner id="guides-intro-ad" />
             </div>
 
             {/* EEAT Process */}

@@ -30,6 +30,8 @@ const adAssets = [
   "https://difficultblock.com",
   "https://phoroglopsu.com",
   "https://www.silent-basis.pro",
+  "https://www.hateful-medium.pro",
+  "https://www.obvious-convert.pro",
 ]
 
 const scriptSrc = analytics.join(" ")
@@ -45,9 +47,9 @@ const csp = [
   "style-src-attr 'unsafe-inline'",
   `img-src 'self' data: blob: ${scriptSrc} ${adAssets.join(" ")}`,
   `font-src 'self' https://fonts.gstatic.com`,
-  `media-src 'self' https://difficultblock.com https://www.silent-basis.pro`,
+  `media-src 'self' https://difficultblock.com https://www.silent-basis.pro https://www.hateful-medium.pro https://www.obvious-convert.pro`,
   `connect-src 'self' ${scriptSrc} ${adAssets.join(" ")}`,
-  `frame-src 'self' ${scriptSrc} ${adScripts.join(" ")}`,
+  `frame-src 'self' ${scriptSrc} ${adScripts.join(" ")} https://googleads.g.doubleclick.net`,
   `worker-src 'self' ${workerSrc}`,
   "child-src 'self' blob:",
   "object-src 'none'",

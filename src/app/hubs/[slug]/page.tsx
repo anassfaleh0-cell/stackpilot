@@ -13,6 +13,7 @@ import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, AlertTriangle } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
+import { HilltopBanner } from "@/components/ads/hilltop-banner"
 
 export function generateStaticParams() {
   return getAllHubs().map((h) => ({ slug: h.slug }))
@@ -169,6 +170,9 @@ export default async function HubPage({ params }: { params: Promise<{ slug: stri
                     </div>
                   </div>
                 </GlassCard>
+
+                {/* Ad */}
+                <HilltopBanner id="hubs-sidebar-ad" />
 
                 <EEATProcess category={hub.audience} />
               </div>

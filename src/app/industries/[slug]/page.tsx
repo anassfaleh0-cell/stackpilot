@@ -13,6 +13,7 @@ import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, Lightbulb } from "lucide-react"
 import { EditorialHero, GlassCard, InfoCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
+import { HilltopBanner } from "@/components/ads/hilltop-banner"
 
 export function generateStaticParams() {
   return getAllIndustries().map((i) => ({ slug: i.slug }))
@@ -170,6 +171,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                     </div>
                   </div>
                 </GlassCard>
+
+                {/* Ad */}
+                <HilltopBanner id="industries-sidebar-ad" />
 
                 <EEATProcess category={ind.industry} />
               </div>

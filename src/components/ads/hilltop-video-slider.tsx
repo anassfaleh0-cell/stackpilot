@@ -1,7 +1,6 @@
 "use client"
 
-import { useSyncExternalStore } from "react"
-import Script from "next/script"
+import { useRef, useSyncExternalStore } from "react"
 import { LazyAd } from "./lazy-ad"
 
 const SLIDER_SCRIPT = "https://prizefamily.com/b.XxVxsZduGclv0aYIWWc-/xe/mf9Au/ZbUGlRkSP-TIczyRO/TMAo4vM/TOM/tqNPzYIc5NMDDwgnxxNKy/ZVsfawWw1GpYdCDK0JxR"
@@ -26,14 +25,30 @@ function getSnapshot() {
 
 export function HilltopVideoSlider({ id = "hilltop-video-slider" }: { id?: string }) {
   const allowed = useSyncExternalStore(subscribe, getSnapshot, () => false)
+  const hostRef = useRef<HTMLDivElement>(null)
+  const mountedRef = useRef(false)
 
   if (!allowed) return null
 
   return (
-    <LazyAd id={id}>
-      <Script id={`${id}-script`} strategy="lazyOnload">
-        {`(function(x){var d=document,s=d.createElement('script'),l=d.scripts[d.scripts.length-1];s.settings=x||{};s.src="${SLIDER_SCRIPT}";s.async=true;s.referrerPolicy='no-referrer-when-downgrade';l.parentNode.insertBefore(s,l);})({})`}
-      </Script>
+    <LazyAd
+      id={id}
+      className="ad-slot flex justify-center"
+      onVisible={() => {
+        const host = hostRef.current
+        if (!host || mountedRef.current) return
+        mountedRef.current = true
+        const s = document.createElement("script") as HTMLScriptElement & {
+          settings?: Record<string, unknown>
+        }
+        s.settings = { appendTo: `#${id}`, options: { uniqueID: `${id}-unit` } }
+        s.async = true
+        s.referrerPolicy = "no-referrer-when-downgrade"
+        s.src = SLIDER_SCRIPT
+        host.appendChild(s)
+      }}
+    >
+      <div ref={hostRef} />
     </LazyAd>
   )
 }
