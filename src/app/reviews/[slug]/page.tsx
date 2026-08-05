@@ -15,6 +15,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
 import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
+import { HilltopBanner } from "@/components/ads/hilltop-banner"
 
 export function generateStaticParams() {
   return getAllReviews().map((r) => ({ slug: r.slug }))
@@ -406,6 +407,9 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   </div>
                 </GlassCard>
 
+                {/* Ad */}
+                <HilltopBanner id="reviews-sidebar-ad" />
+
                 {/* Rating Breakdown */}
                 <GlassCard>
                   <div className="p-4">
@@ -513,6 +517,11 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <p>Last reviewed: {tool.lastReviewed} · No vendor payment or sponsorship influenced this review · We may earn affiliate commission on purchases made through links on this site.</p>
             </div>
           </section>
+
+          {/* Ad */}
+          <div className="mt-16">
+            <HilltopBanner id="reviews-faq-ad" />
+          </div>
 
           {/* FAQ */}
           <section className="mt-16 mb-16 scroll-mt-24" id="faq">

@@ -12,6 +12,8 @@ import { getAllReviews } from "@/lib/content/registry"
 import { EditorialHero, EditorialCallout, GlassCard, InfoCard } from "@/components/dynamic"
 import { RelatedContent } from "@/components/dynamic-client"
 import { BrandDivider } from "@/components/brand/patterns"
+import { HilltopBanner } from "@/components/ads/hilltop-banner"
+import { HilltopVast } from "@/components/ads/hilltop-vast"
 import { Clock, User, Calendar, Star } from "lucide-react"
 
 export async function generateStaticParams() {
@@ -155,6 +157,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </GlassCard>
             </div>
 
+            {/* Ad: VAST video (click to play) */}
+            <div className="mt-10 mb-2">
+              <HilltopVast id="blog-vast" />
+            </div>
+
             {/* Related Reviews */}
             {relatedReviews.length > 0 && (
               <div className="mt-10 pt-8 border-t border-border">
@@ -189,6 +196,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   </p>
                 </div>
               </div>
+            </div>
+
+            {/* Ad */}
+            <div className="mt-10">
+              <HilltopBanner id="blog-related-ad" />
             </div>
 
             <RelatedContent

@@ -20,21 +20,34 @@ const analytics = [
   "https://*.adtrafficquality.google",
 ]
 
+const adScripts = [
+  "https://prizefamily.com",
+  "https://difficultblock.com",
+]
+
+const adAssets = [
+  "https://prizefamily.com",
+  "https://difficultblock.com",
+  "https://phoroglopsu.com",
+  "https://www.silent-basis.pro",
+]
+
 const scriptSrc = analytics.join(" ")
 const workerSrc = [...analytics, "blob:"].join(" ")
 
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-eval' 'unsafe-inline' ${scriptSrc}`,
-  `script-src-elem 'self' 'unsafe-inline' ${scriptSrc}`,
+  `script-src 'self' 'unsafe-eval' 'unsafe-inline' ${scriptSrc} ${adScripts.join(" ")}`,
+  `script-src-elem 'self' 'unsafe-inline' ${scriptSrc} ${adScripts.join(" ")}`,
   "script-src-attr 'none'",
   `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com`,
   `style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com`,
   "style-src-attr 'unsafe-inline'",
-  `img-src 'self' data: blob: ${scriptSrc}`,
+  `img-src 'self' data: blob: ${scriptSrc} ${adAssets.join(" ")}`,
   `font-src 'self' https://fonts.gstatic.com`,
-  `connect-src 'self' ${scriptSrc}`,
-  `frame-src 'self' ${scriptSrc}`,
+  `media-src 'self' https://difficultblock.com https://www.silent-basis.pro`,
+  `connect-src 'self' ${scriptSrc} ${adAssets.join(" ")}`,
+  `frame-src 'self' ${scriptSrc} ${adScripts.join(" ")}`,
   `worker-src 'self' ${workerSrc}`,
   "child-src 'self' blob:",
   "object-src 'none'",
