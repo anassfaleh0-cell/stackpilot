@@ -14,7 +14,6 @@ import { Star, ArrowRight, CheckCircle2, XCircle } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { HilltopBanner } from "@/components/ads/hilltop-banner"
-import { HilltopVideoSlider } from "@/components/ads/hilltop-video-slider"
 
 export function generateStaticParams() {
   return getAllBest().map((b) => ({ slug: b.slug }))
@@ -88,8 +87,8 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we review</a>
           </div>
 
-          {/* Ad: video slider (desktop only) */}
-          <HilltopVideoSlider id="best-video-slider" />
+          {/* Ad */}
+          <HilltopBanner id="best-intro-ad" />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
