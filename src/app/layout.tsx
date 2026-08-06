@@ -113,6 +113,45 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           dangerouslySetInnerHTML={{
             __html: `
+              (function() {
+                try {
+                  var AD_FRAME_RE = /prizefamily\\.com|difficultblock\\.com|phoroglopsu\\.com/;
+                  var hardened = new WeakSet();
+                  var harden = function(f) {
+                    if (hardened.has(f)) return;
+                    hardened.add(f);
+                    var s = f.getAttribute('src') || f.getAttribute('srcdoc') || '';
+                    if (!AD_FRAME_RE.test(s) && s) return;
+                    f.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+                    f.setAttribute('referrerpolicy', 'no-referrer');
+                    if (!f.hasAttribute('loading')) f.setAttribute('loading', 'lazy');
+                  };
+                  var scan = function(root) {
+                    var frames = root.querySelectorAll('iframe');
+                    for (var i = 0; i < frames.length; i++) harden(frames[i]);
+                  };
+                  var mo = new MutationObserver(function(muts) {
+                    for (var i = 0; i < muts.length; i++) {
+                      var added = muts[i].addedNodes;
+                      for (var j = 0; j < added.length; j++) {
+                        var n = added[j];
+                        if (n.nodeType !== 1) continue;
+                        if (n.tagName === 'IFRAME') harden(n);
+                        if (n.querySelectorAll) scan(n);
+                      }
+                    }
+                  });
+                  mo.observe(document.documentElement, { childList: true, subtree: true });
+                  scan(document);
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){window.dataLayer.push(arguments);}
               gtag('consent', 'default', {

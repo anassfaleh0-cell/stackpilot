@@ -30,14 +30,9 @@ const adAssets = [
   "https://prizefamily.com",
   "https://difficultblock.com",
   "https://phoroglopsu.com",
-  "https://www.silent-basis.pro",
-  "https://www.hateful-medium.pro",
-  "https://www.obvious-convert.pro",
-  "https://www.carefuldependent.pro",
-  "https://www.cornyband.pro",
-  "https://www.outstanding-purpose.pro",
-  "https://www.scarce-variety.pro",
 ]
+
+const proAssets = ["https://*.pro"]
 
 const scriptSrc = analytics.join(" ")
 const workerSrc = [...analytics, "blob:"].join(" ")
@@ -50,9 +45,9 @@ const csp = [
   `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com`,
   `style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com`,
   "style-src-attr 'unsafe-inline'",
-  `img-src 'self' data: blob: ${scriptSrc} ${adAssets.join(" ")}`,
+  `img-src 'self' data: blob: ${scriptSrc} ${adAssets.join(" ")} ${proAssets.join(" ")}`,
   `font-src 'self' https://fonts.gstatic.com`,
-  `media-src 'self' https://difficultblock.com https://www.silent-basis.pro https://www.hateful-medium.pro https://www.obvious-convert.pro https://www.carefuldependent.pro https://www.cornyband.pro https://www.outstanding-purpose.pro https://www.scarce-variety.pro`,
+  `media-src 'self' https://difficultblock.com ${proAssets.join(" ")}`,
   `connect-src 'self' ${scriptSrc} ${adAssets.join(" ")}`,
   `frame-src 'self' ${scriptSrc} ${adScripts.join(" ")} https://googleads.g.doubleclick.net`,
   `worker-src 'self' ${workerSrc}`,
