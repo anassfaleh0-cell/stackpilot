@@ -50,10 +50,8 @@ export function LazyAd({
     const hideIfEmpty = () => {
       if (!el.querySelector("iframe")) el.hidden = true
     }
-    const absolute = window.setTimeout(hideIfEmpty, 15000)
-    const afterVisible = visible ? window.setTimeout(hideIfEmpty, 8000) : 0
+    const afterVisible = visible ? window.setTimeout(hideIfEmpty, 12000) : 0
     return () => {
-      window.clearTimeout(absolute)
       if (afterVisible) window.clearTimeout(afterVisible)
     }
   }, [visible])
