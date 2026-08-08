@@ -4,7 +4,7 @@ import { Container, Section } from "@/components/ui/container"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { categories } from "@/lib/constants"
-import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms } from "@/lib/content/registry"
+import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms, getAllResearch } from "@/lib/content/registry"
 import { ArrowRight, Star, BarChart3, Shield, BookOpen } from "lucide-react"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { BrandPattern, BrandOrb, BrandDivider } from "@/components/brand/patterns"
@@ -21,12 +21,13 @@ export default function HomePage() {
   const guides = getAllGuides()
   const posts = getAllBlogPosts()
   const glossary = getAllGlossaryTerms()
+  const allResearch = getAllResearch()
 
   const stats = [
     { value: `${reviews.length}+`, label: "Software Reviews" },
+    { value: `${comparisons.length}+`, label: "Expert Comparisons" },
     { value: `${guides.length}+`, label: "Expert Guides" },
-    { value: "35K+", label: "Monthly Readers" },
-    { value: "98%", label: "Reader Satisfaction" },
+    { value: `${allResearch.length}+`, label: "Research Reports" },
   ]
 
   return (
@@ -392,7 +393,7 @@ export default function HomePage() {
               Expert advice, straight to your inbox
             </h2>
             <p className="text-muted-foreground text-pretty">
-              Join 35,000+ professionals who rely on PilotStack for software buying decisions. No spam, unsubscribe anytime.
+              Independent research and hands-on software reviews, straight to your inbox. No spam, unsubscribe anytime.
             </p>
           </div>
           <div className="mx-auto max-w-md">
