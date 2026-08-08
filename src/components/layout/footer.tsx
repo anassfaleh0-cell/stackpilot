@@ -29,6 +29,7 @@ const footerLinks = [
     title: "Company",
     links: [
       { href: "/about", label: "About" },
+      { href: "/team", label: "Our Team" },
       { href: "/authors", label: "Our Authors" },
       { href: "/brand-assets", label: "Brand Assets" },
       { href: "/media-kit", label: "Media Kit" },

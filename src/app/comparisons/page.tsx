@@ -1,13 +1,11 @@
 import { Container, Section, SectionHeader } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllComparisons } from "@/lib/content/registry"
-import Link from "next/link"
-import { ArrowRight, Crosshair, Shield } from "lucide-react"
+import { ComparisonGrid } from "@/components/entity/comparison-grid"
 import { BrandPattern } from "@/components/brand/patterns"
 
 export const metadata = createMetadata({
@@ -44,29 +42,7 @@ export default function ComparisonsPage() {
       <Section>
         <Container>
           {comparisons.length > 0 ? (
-          <div className="grid sm:grid-cols-2 gap-6">
-            {comparisons.map((cmp) => (
-              <Link key={cmp.slug} href={`/comparisons/${cmp.slug}`} className="group card-hover">
-                <Card className="h-full flex flex-col">
-                  <div className="flex items-start justify-between mb-3">
-                    <Badge variant="secondary">{cmp.category}</Badge>
-                    {cmp.winner ? (
-                      <span className="text-xs font-medium text-success flex items-center gap-1">
-                        <Shield size={12} /> {cmp.winner} wins
-                      </span>
-                    ) : (
-                      <Crosshair size={16} className="text-muted-foreground" />
-                    )}
-                  </div>
-                  <CardTitle className="group-hover:text-primary transition-colors">{cmp.title}</CardTitle>
-                  <CardDescription className="mt-1.5">{cmp.description}</CardDescription>
-                  <div className="mt-4 pt-4 border-t border-border flex items-center gap-1 text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors mt-auto">
-                    View comparison <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
-                  </div>
-                </Card>
-              </Link>
-            ))}
-          </div>
+            <ComparisonGrid items={comparisons.map((c) => ({ slug: c.slug, title: c.title, category: c.category, winner: c.winner, description: c.description }))} />
           ) : (
             <p className="text-center text-muted-foreground py-12">No comparisons available yet. Check back soon.</p>
           )}

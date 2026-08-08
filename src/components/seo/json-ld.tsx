@@ -380,11 +380,10 @@ export function ProductSchema({ name, description, image, brand, aggregateRating
   return ld(schema, "ld-product")
 }
 
-export function ReviewSchema({ name, description, rating, reviewCount, url, datePublished, body, companyInfo }: {
+export function ReviewSchema({ name, description, rating, url, datePublished, body, companyInfo }: {
   name: string
   description: string
   rating: number
-  reviewCount: number
   url: string
   datePublished?: string
   body?: string
@@ -412,14 +411,6 @@ export function ReviewSchema({ name, description, rating, reviewCount, url, date
       author: { "@type": "Organization", "@id": `${site.url}/#organization` },
       datePublished: datePublished || undefined,
       reviewBody: body || undefined,
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      "@id": url + "#rating",
-      ratingValue: rating,
-      bestRating: 5,
-      worstRating: 1,
-      ratingCount: reviewCount,
     },
   })
   return ld(schema, "ld-review")

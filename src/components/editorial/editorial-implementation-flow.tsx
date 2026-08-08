@@ -141,7 +141,7 @@ function getImplementationSteps(slug: string): { phase: string; duration: string
       { phase: "Configure", duration: "1-2 weeks", desc: "Custom fields, permissions, policies" },
       { phase: "Go Live", duration: "1-2 weeks", desc: "Training, parallel processing" },
     ],
-    "calndly": [
+    "calendly": [
       { phase: "Create Account", duration: "10 min", desc: "Calendar connection, profile setup" },
       { phase: "Event Types", duration: "20 min", desc: "Duration, buffer, availability rules" },
       { phase: "Team Setup", duration: "1-2 hrs", desc: "Round-robin, routing forms" },

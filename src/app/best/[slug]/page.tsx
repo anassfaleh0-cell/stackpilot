@@ -24,7 +24,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const page = getBest(slug)
   if (!page) return {}
   const readingTime = Math.max(5, Math.ceil((page.description.split(/\s+/).length + page.picks.reduce((a, p) => a + p.pros.length + p.cons.length, 0) * 20) / 200))
-  return createMetadata({ title: truncate(page.title, 60), description: truncate(page.description, 160), path: `/best/${page.slug}`, ogType: "article", publishedAt: page.lastUpdated, updatedAt: page.lastUpdated, articleSection: page.category, readingTime })
+  const metaDescription = page.description.length < 120
+    ? `${page.description} We ranked the top options with detailed pros and cons, pricing, and the best alternatives to help you choose.`
+    : page.description
+  return createMetadata({ title: truncate(page.title, 60), description: truncate(metaDescription, 160), path: `/best/${page.slug}`, ogType: "article", publishedAt: page.lastUpdated, updatedAt: page.lastUpdated, articleSection: page.category, readingTime })
 }
 
 export default async function BestPage({ params }: { params: Promise<{ slug: string }> }) {

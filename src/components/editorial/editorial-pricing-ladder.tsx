@@ -127,7 +127,7 @@ function getPricingTiers(tool: ReviewContent): { name: string; price: string; fe
       { name: "Core", price: "~$5.25/ee/mo", features: "Records, time-off, self-service" },
       { name: "Pro", price: "~$7-10/ee/mo", features: "ATS, performance, reporting" },
     ],
-    "calndly": [
+    "calendly": [
       { name: "Free", price: "$0", features: "1 event type, basic calendar" },
       { name: "Essentials", price: "$10/user/mo", features: "Unlimited events, payments" },
       { name: "Teams", price: "$16/user/mo", features: "Round-robin, workflows, CRM" },

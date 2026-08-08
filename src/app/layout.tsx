@@ -40,7 +40,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    template: `%s | ${siteConfig.name}`,
+    template: `%s`,
     default: `${siteConfig.name} - ${siteConfig.description}`,
   },
   description: siteConfig.description,

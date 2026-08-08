@@ -10,14 +10,14 @@ import { Calculator, Scale, ArrowRight, type LucideIcon } from "lucide-react"
 
 const toolsData: Record<string, { name: string; description: string; icon: LucideIcon; content: string[] }> = {
   "tco-calculator": {
-    name: "TCO Calculator", description: "Calculate the total cost of ownership for any software tool.", icon: Calculator,
+    name: "TCO Calculator", description: "Calculate the total cost of ownership for any software tool, including implementation, training, integration, and maintenance costs over 1 and 3 years.", icon: Calculator,
     content: [
       "Our TCO (Total Cost of Ownership) Calculator helps you estimate the true cost of adopting a new software tool. Beyond the subscription price, factor in implementation costs, training time, integration expenses, and ongoing maintenance.",
       "To get started, enter your expected number of users, the monthly subscription cost per user, and estimated implementation hours. The calculator will provide a comprehensive 1-year and 3-year total cost projection.",
     ],
   },
   "software-comparison": {
-    name: "Software Comparison Matrix", description: "Compare multiple tools side by side across dozens of criteria.", icon: Scale,
+    name: "Software Comparison Matrix", description: "Compare multiple tools side by side across features, pricing, ease of use, support, and integrations with weighted scoring.", icon: Scale,
     content: [
       "Our Software Comparison Matrix helps you evaluate multiple tools side by side across the criteria that matter most to your business. Score each tool on features, pricing, ease of use, support, and integrations.",
       "Simply add the tools you're considering, rate them across our standardized criteria, and the matrix will automatically calculate weighted scores to help you identify the best option.",

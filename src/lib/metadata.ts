@@ -40,7 +40,7 @@ export function createMetadata({
   const imageUrl = ogImage || `${site.url}/og.svg`
   const isArticle = ogType === "article"
 
-  const fullTitle = truncateAtWordBoundary(title, 60)
+  const fullTitle = truncateAtWordBoundary(title, 58)
   const fullDescription = truncateAtWordBoundary(description, 160)
 
   const follow = noFollow ?? !noIndex

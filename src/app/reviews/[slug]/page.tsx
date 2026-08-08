@@ -61,8 +61,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
         { name: tool.name, href: `/reviews/${tool.slug}` },
       ]} />
       <ProductSchema name={tool.name} description={tool.description} image={tool.logo ? `${site.url}${tool.logo}` : undefined} brand={tool.name} aggregateRating={{ ratingValue: tool.rating, reviewCount: tool.reviewCount }} />
-      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} reviewCount={tool.reviewCount} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.lastReviewed} body={tool.description} companyInfo={entity?.company || tool.company} />
-      <SoftwareSchema name={tool.name} description={tool.tagline} category={tool.category} brand={tool.name} platforms={entity?.company?.platforms || tool.company?.deployment} url={`${site.url}/reviews/${tool.slug}`} image={tool.logo ? `${site.url}${tool.logo}` : undefined} aggregateRating={{ ratingValue: tool.rating, reviewCount: tool.reviewCount }} offers={entity?.pricing?.[0]?.price !== undefined && entity.pricing[0].price !== null ? { price: entity.pricing[0].price, priceCurrency: entity.pricing[0].currency || "USD", url: tool.website || undefined } : undefined} />
+      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.lastReviewed} body={tool.description} companyInfo={entity?.company || tool.company} />
+      <SoftwareSchema name={tool.name} description={tool.tagline} category={tool.category} brand={tool.name} platforms={entity?.company?.platforms || tool.company?.deployment} url={`${site.url}/reviews/${tool.slug}`} image={tool.logo ? `${site.url}${tool.logo}` : undefined} offers={entity?.pricing?.[0]?.price !== undefined && entity.pricing[0].price !== null ? { price: entity.pricing[0].price, priceCurrency: entity.pricing[0].currency || "USD", url: tool.website || undefined } : undefined} />
       <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.lastReviewed} />
       <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.lastReviewed} updatedAt={tool.lastReviewed} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} keywords={[`${tool.name} review`, `${tool.name} pricing`, `${tool.name} pros and cons`, `${tool.category} software`, `${tool.name} alternatives`]} mentions={[{ name: tool.name, url: tool.website || `${site.url}/reviews/${tool.slug}` }]} />
       <FAQSchema questions={tool.faqs} path={`/reviews/${tool.slug}`} />
@@ -108,7 +108,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-1">
                 <span className="flex items-center gap-1">
                   <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                  Reviewed by {tool.author}
+                  Reviewed by <Link href="/authors/pilotstack-team" className="text-primary hover:underline">{tool.author}</Link>
                 </span>
                 <span className="flex items-center gap-1">
                   <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>

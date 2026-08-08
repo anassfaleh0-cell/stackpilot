@@ -347,7 +347,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                 <Link href="/reviews" className="text-sm text-primary hover:underline hidden sm:inline-flex items-center gap-1">View all <ArrowRight size={12} /></Link>
               </div>
               {reviews.length > 0 ? (
-                <ReviewFilter reviews={reviews.filter(r => r.slug !== bestPick?.slug)} category={category.name} />
+                <ReviewFilter reviews={reviews.filter(r => r.slug !== bestPick?.slug).map(r => ({ slug: r.slug, name: r.name, tagline: r.tagline, category: r.category, rating: r.rating, priceRange: r.priceRange, pricing: r.pricing }))} category={category.name} />
               ) : (
                 <div className="text-center py-16">
                   <p className="text-muted-foreground">No reviews yet in this category. Check back soon.</p>
