@@ -6,9 +6,8 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getResearch, getAllResearch, getAllComparisons, getContentTitle } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
-import Link from "next/link"
-import { ExternalLink, Clock, User, Calendar, ArrowRight, CheckCircle2, Lightbulb } from "lucide-react"
-import { EditorialHero, GlassCard, InfoCard } from "@/components/dynamic"
+import { ExternalLink, Clock, User, Calendar, CheckCircle2, Lightbulb } from "lucide-react"
+import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { RelatedContent } from "@/components/dynamic-client"
 
 export function generateStaticParams() {
@@ -32,6 +31,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Research", href: "/research" }, { name: report.title, href: `/research/${slug}` }]} />
       <ArticleSchema title={report.title} description={report.description} publishedAt={report.publishedAt} updatedAt={report.updatedAt || report.publishedAt} author={report.author} url={`${site.url}/research/${slug}`} />
       <WebPageSchema name={report.title} description={report.description} url={`${site.url}/research/${slug}`} mainEntity={{ "@type": "Report", name: report.title, description: report.description, category: report.category }} />
+      {report.faqs && report.faqs.length > 0 && <FAQSchema questions={report.faqs} path={`/research/${slug}`} />}
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Research", href: "/research" }, { name: report.title }]} />
       </Container>
@@ -88,6 +88,30 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
                         ))}
                       </ul>
                     </>
+                  ) : section.type === "table" && section.columns && section.rows ? (
+                    <>
+                      {section.body && <p className="text-muted-foreground leading-relaxed mb-4">{section.body}</p>}
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm border-collapse">
+                          <thead>
+                            <tr className="border-b border-border">
+                              {section.columns.map((col, j) => (
+                                <th key={j} scope="col" className="text-left py-2 px-3 font-semibold text-foreground">{col}</th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {section.rows.map((row, j) => (
+                              <tr key={j} className="border-b border-border/50 hover:bg-accent-subtle/20 transition-colors">
+                                {row.map((cell, k) => (
+                                  <td key={k} className="py-2.5 px-3 text-muted-foreground">{cell}</td>
+                                ))}
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </>
                   ) : (
                     <p className="text-muted-foreground leading-relaxed">{section.body}</p>
                   )}
@@ -112,6 +136,20 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
                   </div>
                 )}
               </section>
+
+              {report.faqs && report.faqs.length > 0 && (
+                <section className="mb-10">
+                  <h2 className="text-2xl font-bold tracking-tight mb-4">Frequently Asked Questions</h2>
+                  <div className="space-y-4">
+                    {report.faqs.map((faq, i) => (
+                      <div key={i} className="p-4 rounded-xl border border-border">
+                        <h3 className="font-semibold text-sm mb-2">{faq.question}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{faq.answer}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
 
             <aside className="lg:col-span-1">

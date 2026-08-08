@@ -5,7 +5,7 @@ import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { categories } from "@/lib/constants"
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms, getAllResearch } from "@/lib/content/registry"
-import { ArrowRight, Star, BarChart3, Shield, BookOpen } from "lucide-react"
+import { ArrowRight, Star, BarChart3, Shield, BookOpen, FileText } from "lucide-react"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { BrandPattern, BrandOrb, BrandDivider } from "@/components/brand/patterns"
 
@@ -22,6 +22,9 @@ export default function HomePage() {
   const posts = getAllBlogPosts()
   const glossary = getAllGlossaryTerms()
   const allResearch = getAllResearch()
+  const research = allResearch
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+    .slice(0, 3)
 
   const stats = [
     { value: `${reviews.length}+`, label: "Software Reviews" },
@@ -281,6 +284,48 @@ export default function HomePage() {
                     <CardDescription className="mt-1.5">{post.description}</CardDescription>
                     <div className="mt-auto pt-4 text-xs text-muted-foreground">
                       {post.author}
+                    </div>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      <BrandDivider />
+
+      {/* ── Featured Research ── */}
+      {research.length > 0 && (
+        <Section>
+          <Container>
+            <div className="flex items-end justify-between mb-12">
+              <div>
+                <Badge variant="default" className="mb-4">Original Research</Badge>
+                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-balance">
+                  Data-driven research
+                </h2>
+              </div>
+              <Link
+                href="/research"
+                className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                aria-label="View all research reports"
+              >
+                View all reports <ArrowRight size={14} />
+              </Link>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {research.map((report) => (
+                <Link key={report.slug} href={`/research/${report.slug}`} className="group card-hover-lift">
+                  <Card className="h-full flex flex-col">
+                    <div className="flex items-center gap-2 mb-3">
+                      <FileText size={16} className="text-primary" />
+                      <Badge variant="secondary">{report.reportType}</Badge>
+                    </div>
+                    <CardTitle className="group-hover:text-primary transition-colors">{report.title}</CardTitle>
+                    <CardDescription className="mt-1.5">{report.description}</CardDescription>
+                    <div className="mt-auto pt-4 text-xs text-muted-foreground">
+                      {report.readingTime} min read · {report.publishedAt}
                     </div>
                   </Card>
                 </Link>

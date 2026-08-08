@@ -65,6 +65,8 @@ export interface ContentSection {
   body: string
   type?: "text" | "list" | "table" | "quote" | "tip" | "warning" | "checklist" | "diagram"
   items?: string[]
+  columns?: string[]
+  rows?: string[][]
 }
 
 export interface FAQItem {
@@ -241,6 +243,7 @@ export interface ResearchContent {
   updatedAt?: string
   author: string
   readingTime: number
+  faqs?: FAQItem[]
   relatedComparisons?: string[]
   relatedGuides?: string[]
   relatedPosts?: string[]
