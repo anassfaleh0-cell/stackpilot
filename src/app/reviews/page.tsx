@@ -1,14 +1,15 @@
 import { Container, Section, SectionHeader } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardTitle, CardDescription } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllReviews } from "@/lib/content/registry"
 import { categories } from "@/lib/constants"
+import { ReviewCardGrid } from "@/components/entity/review-card-grid"
 import Link from "next/link"
-import { Star, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { BrandPattern, BrandDivider } from "@/components/brand/patterns"
 
 export const metadata = createMetadata({
@@ -49,26 +50,7 @@ export default function ReviewsPage() {
       <Section>
         <Container>
           {tools.length > 0 ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-reveal">
-            {tools.map((tool, i) => (
-              <Link key={tool.slug} href={`/reviews/${tool.slug}`} className="group card-hover" style={{ animationDelay: `${i * 40}ms` }}>
-                <Card className="h-full flex flex-col">
-                  <div className="flex items-start justify-between mb-3">
-                    <Badge variant="secondary">{tool.category}</Badge>
-                    <div className="flex items-center gap-1 text-sm font-medium text-accent">
-                      <Star size={14} className="fill-accent text-accent" />
-                      {tool.rating}
-                    </div>
-                  </div>
-                  <CardTitle className="group-hover:text-primary transition-colors">{tool.name}</CardTitle>
-                  <CardDescription className="mt-1.5">{tool.tagline}</CardDescription>
-                  <div className="mt-4 pt-4 border-t border-border flex items-center gap-1 text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors mt-auto">
-                    Read review <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
-                  </div>
-                </Card>
-              </Link>
-            ))}
-          </div>
+            <ReviewCardGrid items={tools.map(t => ({ slug: t.slug, name: t.name, category: t.category, rating: t.rating, tagline: t.tagline }))} />
           ) : (
             <p className="text-center text-muted-foreground py-12">No reviews available yet. Check back soon.</p>
           )}

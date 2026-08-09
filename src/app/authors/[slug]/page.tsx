@@ -7,8 +7,9 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { Star, BookOpen, Calendar } from "lucide-react"
+import { BookOpen, Calendar } from "lucide-react"
 import { getAllReviews, getAllGuides, getAllBlogPosts } from "@/lib/content/registry"
+import { ReviewCardGrid } from "@/components/entity/review-card-grid"
 import { SocialFooterIcons } from "@/components/brand/social-icons"
 
 const authorSocial = {
@@ -100,23 +101,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
               {allReviews.length > 0 && (
                 <section>
                   <h2 className="text-xl font-bold mb-4">Reviews by {author.name}</h2>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {allReviews.map((r) => (
-                      <Link key={r.slug} href={`/reviews/${r.slug}`} className="group card-hover-lift">
-                        <Card className="p-4">
-                          <div className="flex items-start justify-between mb-2">
-                            <Badge variant="secondary" className="text-xs">{r.category}</Badge>
-                            <div className="flex items-center gap-1 text-sm font-medium text-accent">
-                              <Star size={12} className="fill-accent text-accent" />
-                              {r.rating}
-                            </div>
-                          </div>
-                          <CardTitle className="text-base group-hover:text-primary transition-colors">{r.name}</CardTitle>
-                          <CardDescription className="text-xs mt-1">{r.tagline}</CardDescription>
-                        </Card>
-                      </Link>
-                    ))}
-                  </div>
+                  <ReviewCardGrid items={allReviews.map(r => ({ slug: r.slug, name: r.name, category: r.category, rating: r.rating, tagline: r.tagline }))} />
                 </section>
               )}
 

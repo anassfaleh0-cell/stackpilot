@@ -5,7 +5,7 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
-  title: "Cookie Policy",
+  title: "Cookie Policy — How PilotStack Uses Cookies",
   description: "PilotStack's cookie policy explains how we use cookies and similar tracking technologies to operate and improve our website, in compliance with GDPR and ePrivacy regulations.",
   path: "/cookies",
 })

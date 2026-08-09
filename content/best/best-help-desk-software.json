@@ -10,7 +10,65 @@
     "Self-service features including knowledge base management, customer portal, community forums, and AI-powered search that help customers find answers independently and reduce support ticket volume.",
     "Reporting and analytics depth with dashboards for ticket volume trends, agent performance, customer satisfaction, response and resolution times, SLA compliance, and the ability to create custom reports."
   ],
-  "picks": [],
+  "picks": [
+    {
+      "rank": 1,
+      "toolSlug": "intercom",
+      "toolName": "Intercom",
+      "rating": 4.3,
+      "priceRange": "$39–$139/seat/mo",
+      "bestFor": "Teams wanting modern conversational support platform",
+      "pros": [
+        "Fin AI chatbot resolving 30-50% of conversations without agent",
+        "Live chat with proactive multi-channel messaging (email, push, in-app)",
+        "Help center with AI article suggestions and content blocks",
+        "Custom chatbot builder for complex conversational flows"
+      ],
+      "cons": [
+        "$39/seat/month minimum; 10-agent team costs $4,680/year",
+        "Requires 2-4 weeks for full help center setup and chatbot training",
+        "Analytics depth trails dedicated tools like Mixpanel for product insights"
+      ]
+    },
+    {
+      "rank": 2,
+      "toolSlug": "zendesk",
+      "toolName": "Zendesk",
+      "rating": 4.3,
+      "priceRange": "$55–$115/agent/mo",
+      "bestFor": "Growing businesses needing scalable omnichannel support",
+      "pros": [
+        "Omnichannel ticketing consolidating all channels",
+        "Answer Bot auto-resolves 30-50% of questions",
+        "Self-service knowledge base with AI suggestions",
+        "1,200+ integration marketplace"
+      ],
+      "cons": [
+        "$55/agent/month; 50-person team costs $33K/year",
+        "Form customization requires 4-8 weeks",
+        "AI add-on at $50/agent/month doubles cost"
+      ]
+    },
+    {
+      "rank": 3,
+      "toolSlug": "freshdesk",
+      "toolName": "Freshdesk",
+      "rating": 4.3,
+      "priceRange": "Free – $35/agent/mo",
+      "bestFor": "SMBs needing affordable help desk with omnichannel",
+      "pros": [
+        "Freshworks' customer support ticketing platform",
+        "Enterprise-grade reliability with SOC 2 Type II certification",
+        "AI-powered features including Freddy AI",
+        "Flexible API for custom integrations and workflow automation"
+      ],
+      "cons": [
+        "Support quality rated 3.9/5 is below category average",
+        "Advanced features may require technical expertise to fully leverage",
+        "Some advanced features only available on higher pricing tiers"
+      ]
+    }
+  ],
   "pricingSummary": "Help desk software pricing varies widely based on feature sets, agent counts, channel support, and AI capabilities. Intercom positions at the higher end of the market with pricing starting at $74 per month for the Essential plan with basic ticketing and shared inbox features. The Advanced plan at $155 per month adds custom bots, SLAs, and multi-channel support. The Expert plan at $249 per month includes multiple message types, advanced permissions, and data export. Intercom Enterprise at $499 per month adds dedicated infrastructure, custom roles, and premium support. All Intercom plans are billed monthly with per-user or per-month costs varying based on contact volume. Zendesk Suite pricing starts at $55 per agent per month for the Team plan with ticketing, help center, and up to 50 agents. The Growth plan at $89 per agent per month adds automation, SLA management, satisfaction surveys, and multilingual support. The Professional plan at $115 per agent per month includes skills-based routing, custom analytics, and sandbox environments. Zendesk Enterprise is custom priced with unlimited agents, advanced security, and AI-powered features. Freshdesk offers one of the best free tiers in the industry supporting up to 10 agents with ticketing, knowledge base, email support, and mobile app access. The Growth plan at $18 per agent per month adds automation, marketplace apps, and collision detection. The Pro plan at $59 per agent per month adds round-robin routing, CSAT surveys, and marketplace integrations. The Enterprise plan at $95 per agent per month adds skill-based routing, sandbox, and advanced permissions. Help Scout provides simple per-user pricing starting at $25 per user per month for the Standard plan with ticketing, knowledge base, and Beacon widget. The Plus plan at $40 per user per month adds advanced permissions, Salesforce app, and priority support. The Pro plan at $60 per user per month adds API access, custom data attributes, and single sign-on. LiveAgent offers a unique free tier with lifetime access for unlimited agents including basic ticketing and email. The Ticket plan at $15 per agent per month adds chat and call center features. The All-Inclusive plan at $30 per agent per month adds the full feature set including social media and CRM integration. Most platforms offer annual billing discounts of 15 to 25 percent and free trials of 14 to 30 days for paid plans.",
   "comparisonTable": {
     "columns": [

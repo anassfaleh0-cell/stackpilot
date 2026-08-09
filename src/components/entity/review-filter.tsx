@@ -24,6 +24,7 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
   const [minRating, setMinRating] = useState(0)
   const [priceFilter, setPriceFilter] = useState<string>("all")
   const [showFilters, setShowFilters] = useState(false)
+  const [visible, setVisible] = useState(96)
 
   const filtered = useMemo(() => {
     return reviews.filter((r) => {
@@ -36,6 +37,7 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
   }, [reviews, searchQuery, minRating, priceFilter])
 
   const hasActiveFilters = searchQuery || minRating > 0 || priceFilter !== "all"
+  const shown = hasActiveFilters ? filtered : filtered.slice(0, visible)
 
   return (
     <div>
@@ -102,9 +104,9 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
         </div>
       )}
 
-      {filtered.length > 0 ? (
+      {shown.length > 0 ? (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((tool) => (
+          {shown.map((tool) => (
             <Link key={tool.slug} href={`/reviews/${tool.slug}`} className="group card-hover">
               <Card className="h-full flex flex-col">
                 <div className="flex items-start justify-between mb-3">
@@ -127,6 +129,17 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
       ) : (
         <div className="text-center py-12">
           <p className="text-muted-foreground">No tools match your filters. Try adjusting your search.</p>
+        </div>
+      )}
+
+      {!hasActiveFilters && visible < filtered.length && (
+        <div className="mt-10 text-center">
+          <button
+            onClick={() => setVisible((v) => v + 48)}
+            className="inline-flex items-center gap-2 rounded-xl border border-border bg-card hover:bg-muted-bg px-6 py-2.5 text-sm font-medium transition-colors"
+          >
+            Show more tools ({filtered.length - visible} remaining)
+          </button>
         </div>
       )}
 

@@ -88,6 +88,31 @@ const nextConfig: NextConfig = {
       destination: "/reviews/calendly",
       permanent: true,
     },
+    {
+      source: "/comparisons/close-crm-vs-zoho-crm",
+      destination: "/comparisons/close-crm-vs-zoho",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/outreach-io-vs-zoho",
+      destination: "/comparisons/outreach-io-vs-zoho-crm",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/pipedrive-vs-zoho",
+      destination: "/comparisons/pipedrive-vs-zoho-crm",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/salesloft-vs-zoho",
+      destination: "/comparisons/salesloft-vs-zoho-crm",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/zendesk-vs-zoho",
+      destination: "/comparisons/zendesk-vs-zoho-crm",
+      permanent: true,
+    },
   ],
   images: {
     formats: ["image/avif", "image/webp"],

@@ -7,7 +7,7 @@ import Link from "next/link"
 import { ExternalLink, Mail } from "lucide-react"
 
 export const metadata = createMetadata({
-  title: "Media Kit",
+  title: "Media Kit — PilotStack Brand Assets & Press Guidelines",
   description: "Comprehensive media kit for PilotStack — company fact sheet, editorial statistics, leadership information, and media resources for journalists and analysts.",
   path: "/media-kit",
 })

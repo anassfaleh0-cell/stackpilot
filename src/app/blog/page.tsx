@@ -12,7 +12,7 @@ import { ArrowRight, Clock, User } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
 
 export const metadata = createMetadata({
-  title: "Blog",
+  title: "Software Blog — Expert Reviews, Research & Buying Guides",
   description: "Expert insights, hands-on tutorials, and in-depth analysis on software tools, productivity strategies, and technology trends to help your business stay ahead.",
   path: "/blog",
 })

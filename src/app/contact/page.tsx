@@ -8,7 +8,7 @@ import { ToastProvider } from "@/components/ui/toast"
 import { SocialLinkList } from "@/components/brand/social-icons"
 
 export const metadata = createMetadata({
-  title: "Contact",
+  title: "Contact PilotStack — Feedback, Corrections & Partnerships",
   description: "Get in touch with the PilotStack team. Have a question about a review, want to suggest a tool for testing, or interested in partnering with us? We'd love to hear from you.",
   path: "/contact",
 })

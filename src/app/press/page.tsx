@@ -7,7 +7,7 @@ import Link from "next/link"
 import { Download, ExternalLink, Users, Newspaper, FileText, Image as ImageIcon } from "lucide-react"
 
 export const metadata = createMetadata({
-  title: "Press & Media",
+  title: "Press & Media — PilotStack News, Logos & Interviews",
   description: "Press kit, media assets, brand guidelines, and editorial resources for journalists, analysts, and partners covering PilotStack.",
   path: "/press",
 })

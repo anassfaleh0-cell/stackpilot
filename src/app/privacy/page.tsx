@@ -5,7 +5,7 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
-  title: "Privacy Policy",
+  title: "Privacy Policy — How PilotStack Handles Your Data",
   description: "PilotStack's privacy policy explains how we collect, use, protect, and manage your personal data in compliance with GDPR and CCPA.",
   path: "/privacy",
 })

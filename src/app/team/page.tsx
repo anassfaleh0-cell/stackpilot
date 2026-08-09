@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 import Link from "next/link"
 
 export const metadata = createMetadata({
-  title: "Our Team",
+  title: "Our Team — Meet the PilotStack Editorial Team",
   description: "PilotStack is run by a small, independent team. Every review follows our published methodology: hands-on testing, transparent scoring, and no vendor-paid placement.",
   path: "/team",
 })

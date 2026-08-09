@@ -5,6 +5,7 @@ export const metadata = createMetadata({
   title: "Dashboard — Growth & Traffic Metrics",
   description: "PilotStack growth monitoring dashboard tracking search performance, authority, revenue, and technical metrics.",
   path: "/dashboard",
+  noIndex: true,
 })
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"

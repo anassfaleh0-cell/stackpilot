@@ -15,7 +15,7 @@ import { EditorialProcess, RelatedContent } from "@/components/dynamic-client"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { HilltopBanner } from "@/components/ads/hilltop-banner"
 import { BrandDivider } from "@/components/brand/patterns"
-import { CheckCircle2, BookOpen, Clock, Layers, Lightbulb } from "lucide-react"
+import { CheckCircle2, BookOpen, Clock, Layers, Lightbulb, Scale } from "lucide-react"
 
 export function generateStaticParams() {
   return getAllGuides().map((g) => ({ slug: g.slug }))
@@ -240,6 +240,28 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                         <p className="text-xs text-muted-foreground leading-relaxed ml-7">{s.body.slice(0, 100).trim()}...</p>
                       </div>
                     ))}
+                  </div>
+                </div>
+              </GlassCard>
+            </div>
+
+            {/* Free tools */}
+            <div className="mt-4">
+              <GlassCard>
+                <div className="p-5">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Scale size={16} className="text-primary" />
+                    <span className="font-semibold text-sm">Free comparison tools</span>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <Link href="/tools/tco-calculator" className="group rounded-xl border border-border p-4 hover:border-primary/30 transition-colors">
+                      <p className="text-sm font-semibold group-hover:text-primary transition-colors">TCO Calculator</p>
+                      <p className="text-xs text-muted-foreground mt-1">Estimate the true total cost of ownership of any software tool over 1 and 3 years.</p>
+                    </Link>
+                    <Link href="/tools/software-comparison" className="group rounded-xl border border-border p-4 hover:border-primary/30 transition-colors">
+                      <p className="text-sm font-semibold group-hover:text-primary transition-colors">Software Comparison Matrix</p>
+                      <p className="text-xs text-muted-foreground mt-1">Score multiple tools side by side with weighted criteria to pick the right one.</p>
+                    </Link>
                   </div>
                 </div>
               </GlassCard>

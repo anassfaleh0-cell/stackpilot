@@ -33,7 +33,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const tool = toolsData[slug]
   if (!tool) return {}
-  return createMetadata({ title: tool.name, description: tool.description, path: `/tools/${slug}` })
+  const toolTitle = slug === "tco-calculator" ? "TCO Calculator — Compare Total Cost of Ownership" : tool.name
+  return createMetadata({ title: toolTitle, description: tool.description, path: `/tools/${slug}` })
 }
 
 export default async function ToolPage({ params }: { params: Promise<{ slug: string }> }) {

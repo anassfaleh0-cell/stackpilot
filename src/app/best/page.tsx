@@ -7,7 +7,7 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllBest } from "@/lib/content/registry"
 import Link from "next/link"
-import { ArrowRight, Star } from "lucide-react"
+import { Star } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
 
 export const metadata = createMetadata({
@@ -42,22 +42,22 @@ export default function BestPage() {
       <Section>
         <Container>
           {pages.length > 0 ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {pages.map((page) => (
-              <Link key={page.slug} href={`/best/${page.slug}`} className="group card-hover">
-                <Card className="h-full flex flex-col">
-                  <div className="flex items-start justify-between mb-3">
-                    <Badge variant="secondary">{page.category}</Badge>
-                    <span className="text-xs text-muted-foreground flex items-center gap-1">
-                      <Star size={12} /> {page.picks.length} picks
-                    </span>
-                  </div>
-                  <CardTitle className="group-hover:text-primary transition-colors">{page.title}</CardTitle>
-                  <CardDescription className="mt-1.5 line-clamp-4">{page.description}</CardDescription>
-                </Card>
-              </Link>
-            ))}
-          </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {pages.map((page) => (
+                <Link key={page.slug} href={`/best/${page.slug}`} className="group card-hover">
+                  <Card className="h-full flex flex-col">
+                    <div className="flex items-start justify-between mb-3">
+                      <Badge variant="secondary">{page.category}</Badge>
+                      <span className="text-xs text-muted-foreground flex items-center gap-1">
+                        <Star size={12} /> {page.picks.length} picks
+                      </span>
+                    </div>
+                    <CardTitle className="group-hover:text-primary transition-colors">{page.title}</CardTitle>
+                    <CardDescription className="mt-1.5 line-clamp-4">{page.description}</CardDescription>
+                  </Card>
+                </Link>
+              ))}
+            </div>
           ) : (
             <p className="text-center text-muted-foreground py-12">No pages available yet.</p>
           )}

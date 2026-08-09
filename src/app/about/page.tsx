@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 import { SocialLinkList } from "@/components/brand/social-icons"
 
 export const metadata = createMetadata({
-  title: "About",
+  title: "About PilotStack — Our Mission, Team & Editorial Standards",
   description: "PilotStack helps businesses navigate the complex software landscape with expert reviews, honest comparisons, and actionable guides.",
   path: "/about",
 })
