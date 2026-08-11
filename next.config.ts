@@ -21,53 +21,22 @@ const analytics = [
   "https://csi.gstatic.com",
 ]
 
-const adScripts = [
-  "https://prizefamily.com",
-  "https://difficultblock.com",
-]
-
-const adAssets = [
-  "https://prizefamily.com",
-  "https://difficultblock.com",
-  "https://phoroglopsu.com",
-]
-
-// NOTE (2026-08-07): https://*.pro wildcard scope — READ BEFORE CLEANING UP.
-// HilltopAds' creative SDK serves ALL ad assets (banner images, push-widget
-// images, VAST video/audio files) from an unbounded fleet of rotating
-// "adjective-noun" .pro CDN domains. The fleet changes per impression and
-// cannot be enumerated, so per-domain whitelisting never converges.
-// Therefore *.pro is allowed ONLY in img-src and media-src:
-//   - It can load image/video FILES and nothing else. script-src,
-//     script-src-elem, connect-src, frame-src, worker-src and object-src
-//     DO NOT include *.pro, so the wildcard cannot execute scripts, make
-//     fetch/XHR/WebSocket requests, or navigate anything.
-//   - Ad content renders inside SDK-created iframes that the interceptor
-//     in src/app/layout.tsx sandboxes (allow-scripts allow-same-origin,
-//     NO allow-popups / allow-top-navigation / allow-popups-to-escape-sandbox)
-//     with referrerpolicy="no-referrer", structurally preventing
-//     popunder/popup behavior regardless of what the network serves.
-//   - DO NOT add *.pro (or any .pro domain) to connect-src or script-src:
-//     that would lift this restriction. The old per-domain entries were
-//     deliberately removed from adAssets (which feeds connect-src).
-const proAssets = ["https://*.pro"]
-
 const scriptSrc = analytics.join(" ")
 const workerSrc = [...analytics, "blob:"].join(" ")
 
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-eval' 'unsafe-inline' ${scriptSrc} ${adScripts.join(" ")}`,
-  `script-src-elem 'self' 'unsafe-inline' ${scriptSrc} ${adScripts.join(" ")}`,
+  `script-src 'self' 'unsafe-eval' 'unsafe-inline' ${scriptSrc}`,
+  `script-src-elem 'self' 'unsafe-inline' ${scriptSrc}`,
   "script-src-attr 'none'",
   `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com`,
   `style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com`,
   "style-src-attr 'unsafe-inline'",
-  `img-src 'self' data: blob: ${scriptSrc} ${adAssets.join(" ")} ${proAssets.join(" ")}`,
+  `img-src 'self' data: blob: ${scriptSrc}`,
   `font-src 'self' https://fonts.gstatic.com`,
-  `media-src 'self' https://difficultblock.com ${proAssets.join(" ")}`,
-  `connect-src 'self' ${scriptSrc} ${adAssets.join(" ")}`,
-  `frame-src 'self' ${scriptSrc} ${adScripts.join(" ")} https://googleads.g.doubleclick.net`,
+  `media-src 'self'`,
+  `connect-src 'self' ${scriptSrc}`,
+  `frame-src 'self' ${scriptSrc} https://googleads.g.doubleclick.net`,
   `worker-src 'self' ${workerSrc}`,
   "child-src 'self' blob:",
   "object-src 'none'",

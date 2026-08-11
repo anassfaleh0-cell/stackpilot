@@ -13,7 +13,6 @@ import Link from "next/link"
 import { Star, ExternalLink, ArrowRight, CheckCircle2 } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
-import { HilltopBanner } from "@/components/ads/hilltop-banner"
 
 export function generateStaticParams() {
   return getAllAlternatives().map((a) => ({ slug: a.slug }))
@@ -121,11 +120,6 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                 </section>
               ))}
 
-              {/* Ad */}
-              <div className="mb-10">
-                <HilltopBanner id="alternatives-faq-ad" />
-              </div>
-
               <section>
                 <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -156,9 +150,6 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                     </div>
                   </div>
                 </GlassCard>
-
-                {/* Ad */}
-                <HilltopBanner id="alternatives-sidebar-ad" />
 
                 <GlassCard>
                   <div className="p-4">

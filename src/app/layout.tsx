@@ -6,7 +6,6 @@ import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { GTMScript } from "@/components/analytics/gtm"
-import { HilltopProvider } from "@/components/ads/hilltop-provider"
 import { ClientLayout } from "@/components/layout/client-layout"
 import { OrganizationSchema, WebsiteSchema } from "@/components/seo/json-ld"
 import { siteConfig } from "@/lib/constants"
@@ -103,51 +102,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://ep1.adtrafficquality.google" />
-        <link rel="preconnect" href="https://prizefamily.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://difficultblock.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://prizefamily.com" />
-        <link rel="dns-prefetch" href="https://difficultblock.com" />
-        <link rel="dns-prefetch" href="https://phoroglopsu.com" />
-        <link rel="dns-prefetch" href="https://www.silent-basis.pro" />
-
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var AD_FRAME_RE = /prizefamily\\.com|difficultblock\\.com|phoroglopsu\\.com/;
-                  var hardened = new WeakSet();
-                  var harden = function(f) {
-                    if (hardened.has(f)) return;
-                    hardened.add(f);
-                    var s = f.getAttribute('src') || f.getAttribute('srcdoc') || '';
-                    if (!AD_FRAME_RE.test(s) && s) return;
-                    f.setAttribute('sandbox', 'allow-scripts allow-same-origin');
-                    f.setAttribute('referrerpolicy', 'no-referrer');
-                    if (!f.hasAttribute('loading')) f.setAttribute('loading', 'lazy');
-                  };
-                  var scan = function(root) {
-                    var frames = root.querySelectorAll('iframe');
-                    for (var i = 0; i < frames.length; i++) harden(frames[i]);
-                  };
-                  var mo = new MutationObserver(function(muts) {
-                    for (var i = 0; i < muts.length; i++) {
-                      var added = muts[i].addedNodes;
-                      for (var j = 0; j < added.length; j++) {
-                        var n = added[j];
-                        if (n.nodeType !== 1) continue;
-                        if (n.tagName === 'IFRAME') harden(n);
-                        if (n.querySelectorAll) scan(n);
-                      }
-                    }
-                  });
-                  mo.observe(document.documentElement, { childList: true, subtree: true });
-                  scan(document);
-                } catch(e) {}
-              })();
-            `,
-          }}
-        />
 
         <script
           dangerouslySetInnerHTML={{
@@ -186,7 +140,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <WebsiteSchema />
           <Header />
           <ClientLayout />
-          <HilltopProvider />
           <main id="main-content" className="flex-1 outline-none" tabIndex={-1}>
             {children}
           </main>

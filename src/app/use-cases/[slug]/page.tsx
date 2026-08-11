@@ -13,7 +13,6 @@ import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, AlertTriangle, Lightbulb } from "lucide-react"
 import { EditorialHero, GlassCard, InfoCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
-import { HilltopBanner } from "@/components/ads/hilltop-banner"
 
 export function generateStaticParams() {
   return getAllUseCases().map((u) => ({ slug: u.slug }))
@@ -162,9 +161,6 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
                     </div>
                   </div>
                 </GlassCard>
-
-                {/* Ad */}
-                <HilltopBanner id="use-cases-sidebar-ad" />
 
                 <EEATProcess category={uc.category} />
               </div>

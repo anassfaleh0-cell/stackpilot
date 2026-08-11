@@ -13,7 +13,6 @@ import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, XCircle } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
-import { HilltopBanner } from "@/components/ads/hilltop-banner"
 
 export function generateStaticParams() {
   return getAllBest().map((b) => ({ slug: b.slug }))
@@ -89,9 +88,6 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>Updated {formatDate(page.lastUpdated)}</span>
             <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we review</a>
           </div>
-
-          {/* Ad */}
-          <HilltopBanner id="best-intro-ad" />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
@@ -182,11 +178,6 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                 </table>
               </section>
 
-              {/* Ad */}
-              <div className="mb-10">
-                <HilltopBanner id="best-faq-ad" />
-              </div>
-
               <section>
                 <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -217,9 +208,6 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                     </div>
                   </div>
                 </GlassCard>
-
-                {/* Ad */}
-                <HilltopBanner id="best-sidebar-ad" />
 
                 <EEATProcess category={page.category} />
               </div>

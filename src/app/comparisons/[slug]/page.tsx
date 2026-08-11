@@ -16,7 +16,6 @@ import { EditorialComparison } from "@/components/editorial/editorial-comparison
 import { RelatedContent } from "@/components/dynamic-client"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { ScoreBar } from "@/components/brand/patterns"
-import { HilltopBanner } from "@/components/ads/hilltop-banner"
 
 export const dynamicParams = false
 
@@ -122,11 +121,6 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             </span>
             <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we test</a>
             <span className="ml-auto text-[11px]">Independent comparison · No paid placement</span>
-          </div>
-
-          {/* Ad */}
-          <div className="mb-8">
-            <HilltopBanner id="comparison-hero-ad" />
           </div>
 
           {/* Tool Compare Cards */}
@@ -253,11 +247,6 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
               </div>
             </GlassCard>
           </section>
-
-          {/* Ad */}
-          <div className="mb-12">
-            <HilltopBanner id="comparison-faq-ad" />
-          </div>
 
           {/* FAQ */}
           <section>
