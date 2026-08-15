@@ -2,7 +2,7 @@
   "slug": "csv",
   "term": "CSV",
   "definition": "Comma-Separated Values — a simple file format used to store tabular data, commonly used for data import and export between applications.",
-  "extendedDefinition": "Comma-Separated Values — a simple file format used to store tabular data, commonly used for data import and export between applications.",
+  "extendedDefinition": "Comma-Separated Values — a simple file format used to store tabular data, commonly used for data import and export between applications. CSV is the common language of data exchange: virtually every platform can import and export comma-separated values, making it the default vehicle for migrations, integrations, and reporting. Despite its simplicity, CSV handling hides real complexity: encoding differences, delimiters, quoting rules, and data type loss create surprises when files cross systems. Buyers should test CSV import and export with realistic data, including special characters, dates, and large volumes, since brochure support rarely matches edge-case behavior. Field mapping and validation during import separate good products from weak ones, as does error reporting that identifies failing rows without losing the whole file. For regulated data, exports should respect access controls, and buyers should confirm what data CSV export includes. As a standard, CSV remains the pragmatic baseline for data portability.",
   "category": "Developer Tools",
   "examples": [],
   "relatedTerms": [

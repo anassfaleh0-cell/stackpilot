@@ -2,7 +2,7 @@
   "slug": "webhook",
   "term": "Webhook",
   "definition": "An automated callback that sends real-time data from one application to another when a specific event occurs, enabling event-driven integrations.",
-  "extendedDefinition": "An automated callback that sends real-time data from one application to another when a specific event occurs, enabling event-driven integrations.",
+  "extendedDefinition": "An automated callback that sends real-time data from one application to another when a specific event occurs, enabling event-driven integrations. Webhooks are HTTP callbacks that push data to other systems the moment an event happens, such as a new order, ticket update, or payment, making integrations event-driven instead of polling-based. For buyers, webhook support signals integration versatility: it enables real-time syncing with dashboards, notifications, and downstream systems without custom connectors. Evaluation should cover delivery reliability, since webhooks can fail silently; maturity is measured by retry policies, delivery logs, and replay or dead-letter handling. Security matters equally: endpoints should use signed or authenticated payloads to prevent injection, and buyers should check how secrets are managed. Deployment considerations include rate limits, payload size limits, and whether the vendor documents event catalogues clearly. Teams relying on webhooks should test failure scenarios during the pilot, because silent data loss surfaces later as unexplained discrepancies between systems.",
   "category": "Developer Tools",
   "examples": [],
   "relatedTerms": [

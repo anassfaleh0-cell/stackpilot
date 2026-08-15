@@ -2,7 +2,7 @@
   "slug": "scalability",
   "term": "Scalability",
   "definition": "The ability of a software system to handle growing amounts of work, users, or data without degrading performance.",
-  "extendedDefinition": "The ability of a software system to handle growing amounts of work, users, or data without degrading performance.",
+  "extendedDefinition": "Scalability is a system's ability to handle growing users, data, or workload without degrading performance, and it determines whether a product bought for today still works for tomorrow. Cloud-native architectures generally scale more smoothly than legacy deployments, but scaling claims should be tested rather than assumed. Buyers should assess scalability at their realistic growth trajectory, including peak seasons, expanding headcount, and increasing data volume, since products that fail at scale force emergency migrations. Questions worth asking cover performance under concurrent load, data limits at normal tiers, and whether higher tiers deliver genuine architecture improvements rather than quota increases. Contracts should address how capacity increases are priced, since scaling costs can surprise. Organizations should also consider the reverse: whether minimum commitments and enterprise designs create overkill for small, stable teams. The right scalable product matches capacity growth with predictable cost.",
   "category": "Developer Tools",
   "examples": [],
   "relatedTerms": [

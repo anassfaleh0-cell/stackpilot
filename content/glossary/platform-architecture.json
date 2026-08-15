@@ -2,7 +2,7 @@
   "slug": "platform-architecture",
   "term": "Platform Architecture",
   "definition": "The structural design and organization of a software platform's components, including its data flow, security model, and extensibility.",
-  "extendedDefinition": "The structural design and organization of a software platform's components, including its data flow, security model, and extensibility.",
+  "extendedDefinition": "Platform architecture is the structural design of a software system, covering data flow, security boundaries, extensibility, and how components interact. Architecture determines operational outcomes: a well-designed platform delivers reliable performance, adapts to new requirements, and accommodates integrations, while fragile architecture produces outages, slow releases, and limits. Buyers rarely inspect internal architecture directly, so evaluation relies on signals: cloud-native design, API quality, documented security model, and the ability to extend without custom forks. Architecture also shapes lock-in and portability; standards-based designs keep options open, while proprietary data models raise switching costs. During proof-of-concept, teams should probe architecture through realistic tests, such as large data volumes, failure recovery, and integration edge cases. Contracts should capture support for the architecture decisions that matter, including scalability commitments and extensibility expectations.",
   "category": "Developer Tools",
   "examples": [],
   "relatedTerms": [

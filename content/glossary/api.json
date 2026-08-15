@@ -2,7 +2,7 @@
   "slug": "api",
   "term": "API",
   "definition": "Application Programming Interface — a set of rules that allows one piece of software to interact with another.",
-  "extendedDefinition": "APIs define the methods and data formats that applications use to request and exchange information. They enable developers to integrate third-party services, access platform features, and build modular systems without understanding internal implementation details. REST and GraphQL are the most common API architectures used in modern web development. A well-designed API is the backbone of any extensible SaaS platform.",
+  "extendedDefinition": "APIs define the methods and data formats that applications use to request and exchange information. They enable developers to integrate third-party services, access platform features, and build modular systems without understanding internal implementation details. REST and GraphQL are the most common API architectures used in modern web development. A well-designed API is the backbone of any extensible SaaS platform. Buyers should review documentation quality, authentication, rate limits, and versioning policy, then prototype the integrations they actually need before committing. Solid API access reduces integration cost and protects future flexibility, while restrictive APIs push teams toward brittle workarounds. Documentation quality and versioning discipline directly reduce integration cost over the life of the contract.",
   "category": "Developer Tools",
   "examples": [
     "Stripe API",

@@ -2,7 +2,7 @@
   "slug": "data-export",
   "term": "Data Export",
   "definition": "The process of extracting data from a system in a portable format for backup, migration, or analysis purposes.",
-  "extendedDefinition": "The process of extracting data from a system in a portable format for backup, migration, or analysis purposes.",
+  "extendedDefinition": "Data export is the ability to extract data from a platform in a portable format such as CSV, Excel, or JSON for backup, migration, or analysis, and it is the practical expression of data ownership. Strong export support keeps options open: organizations can move platforms, feed analytics systems, and satisfy audit requests without vendor friction. Buyers should test export completeness across all data types they hold, including attachments, history, and configuration, since export functions often cover only the primary records. Export scheduling and formats matter for ongoing operations, because manual export workflows become recurring effort in many organizations. Contracts should confirm that data and derived materials are exportable at contract end and that export does not depend on paid add-ons. Export quality also reveals engineering discipline, since vendors that invest in portable data usually build more interoperable products overall.",
   "category": "Developer Tools",
   "examples": [],
   "relatedTerms": [

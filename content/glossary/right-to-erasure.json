@@ -2,7 +2,7 @@
   "slug": "right-to-erasure",
   "term": "Right to Erasure",
   "definition": "A data privacy right that allows individuals to request the deletion of their personal data held by an organization, also known as the right to be forgotten.",
-  "extendedDefinition": "A data privacy right that allows individuals to request the deletion of their personal data held by an organization, also known as the right to be forgotten.",
+  "extendedDefinition": "A data privacy right that allows individuals to request the deletion of their personal data held by an organization, also known as the right to be forgotten. The right to erasure obliges organizations to remove personal data on request, within defined timeframes, unless retention is justified by law or legitimate interest. For software buyers, erasure support is an operational and architectural requirement: the platform must be able to find, delete, and confirm removal of an individual's data across records, logs, backups, and third-party systems. Evaluation should cover the deletion workflow, whether it is automated and auditable, how linked records and references are handled, and what evidence the system produces for the request. Erasure interacts with other obligations, such as legal holds and security logs, so policy decisions need legal input before configuration. Vendors that build erasure into product design reduce compliance workload, while those treating it as a manual task create recurring risk.",
   "category": "Security & Compliance",
   "examples": [],
   "relatedTerms": [

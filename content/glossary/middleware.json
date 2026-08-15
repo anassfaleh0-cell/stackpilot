@@ -2,7 +2,7 @@
   "slug": "middleware",
   "term": "Middleware",
   "definition": "Software that acts as a bridge between different applications, databases, or systems to enable communication and data exchange.",
-  "extendedDefinition": "Software that acts as a bridge between different applications, databases, or systems to enable communication and data exchange.",
+  "extendedDefinition": "Middleware is software that connects applications, databases, and services so they can exchange data and trigger actions, including message queues, API gateways, integration platforms, and enterprise service buses. For buyers, middleware is the layer that determines how smoothly products fit into an existing architecture. Pre-built middleware and connectors reduce integration cost and risk, while weak or proprietary integration points force custom development with ongoing maintenance burden. Evaluation should focus on supported protocols, data transformation capabilities, reliability, and monitoring, since integration failures surface as silent data gaps. Middleware choices also influence procurement flexibility: standards-based approaches keep future options open, while deep vendor lock-in raises switching costs. Teams should assess middleware directly during proof-of-concept, testing real volumes and failure cases, because integration behavior under load is rarely visible in demonstrations.",
   "category": "Developer Tools",
   "examples": [],
   "relatedTerms": [

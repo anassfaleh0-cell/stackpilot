@@ -2,7 +2,7 @@
   "slug": "offline-access",
   "term": "Offline Access",
   "definition": "The ability to use software features and access data without an active internet connection.",
-  "extendedDefinition": "The ability to use software features and access data without an active internet connection.",
+  "extendedDefinition": "Offline access lets users open documentation, data, and application features without a live internet connection, with changes synchronized once connectivity returns. It is essential for field teams, remote facilities, travelling professionals, and anyone operating in environments with unreliable networks. The main technical considerations are sync conflict handling, data freshness, and storage security, since local copies inherit the device's risk profile. Buyers should verify which features remain functional offline, how conflicts are resolved when multiple users edit the same record, and whether sync is full or selective. For teams that work in regulated industries, check that offline copies are encrypted and subject to remote wipe capabilities. Evaluating offline support during a trial, under realistic low-connectivity conditions, prevents the shortfall of approving a tool that stalls exactly where work happens.",
   "category": "Developer Tools",
   "examples": [],
   "relatedTerms": [

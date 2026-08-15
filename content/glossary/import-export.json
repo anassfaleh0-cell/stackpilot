@@ -2,7 +2,7 @@
   "slug": "import-export",
   "term": "Import/Export",
   "definition": "The ability to bring data into or extract data from a software platform using standard file formats.",
-  "extendedDefinition": "The ability to bring data into or extract data from a software platform using standard file formats.",
+  "extendedDefinition": "Import and export refer to moving data into and out of a platform using standard formats such as CSV, Excel, or JSON, and this capability is central to both adopting and leaving a product. Strong import support reduces migration cost, enabling clean transfers of records, history, and configuration with validation and mapping guidance. Strong export support protects the buyer's freedom: data that cannot be extracted in usable form turns a subscription into a trap. Buyers should test the specific data volumes and formats they hold, including attachments and nested records, since brochure claims of import and export support often hide limitations. Export quality matters beyond the exit scenario, because reporting tools, audits, and cross-system workflows depend on reliable extraction. Organizations should define data ownership expectations in contracts and verify export completeness during trials. The practical rule is to test the worst-case export before signing, not after.",
   "category": "Developer Tools",
   "examples": [],
   "relatedTerms": [

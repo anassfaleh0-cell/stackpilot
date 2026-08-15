@@ -2,7 +2,7 @@
   "slug": "data-migration",
   "term": "Data Migration",
   "definition": "The process of transferring data from one system, format, or storage location to another.",
-  "extendedDefinition": "The process of transferring data from one system, format, or storage location to another.",
+  "extendedDefinition": "Data migration is the transfer of information between systems, formats, or storage locations, typically during an upgrade, merger, or platform replacement. Because data underpins operations, migration risk is a leading cause of failed software rollouts. A successful migration starts with discovery: inventorying sources, mapping fields, agreeing on transformation rules, and defining what moves versus what is archived. Validation is critical both during and after the move, comparing row counts, sample records, and business-critical totals. Organizations should also plan for downtime windows, rollback paths, and stakeholder communication, since migrations often touch multiple systems at once. Buyers evaluating vendors should ask how many similar migrations they have completed, what tooling supports mapping and validation, and how conflicts and duplicates are resolved. A migration plan that is testable on a subset first dramatically reduces risk.",
   "category": "Developer Tools",
   "examples": [],
   "relatedTerms": [

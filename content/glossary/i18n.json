@@ -2,7 +2,7 @@
   "slug": "i18n",
   "term": "Internationalization (i18n)",
   "definition": "The process of designing software so it can be adapted to various languages and regions without engineering changes.",
-  "extendedDefinition": "The process of designing software so it can be adapted to various languages and regions without engineering changes.",
+  "extendedDefinition": "Internationalization (i18n) is the engineering practice of designing software so it can be adapted to different languages and regions without rewriting code, making localization a configuration step rather than a redesign. Core mechanisms include separating user-facing text from logic, supporting multiple character sets, and handling regional formats for dates, numbers, and currencies. For buyers, i18n depth predicts how easily a product can serve global operations: products built international-first localize quickly and correctly, while products adding languages later tend to ship uneven quality. Evaluation should test secondary-language workflows with real users, including dates, reports, and exports, not just menu translations. i18n also intersects with data handling and regulatory compliance, since regional operation often implies regional data rules. Organizations expanding internationally should prioritize products whose internationalization is mature, because retrofitting language and region support is significantly more expensive than buying it ready-made.",
   "category": "Developer Tools",
   "examples": [],
   "relatedTerms": [

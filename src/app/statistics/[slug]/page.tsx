@@ -11,7 +11,7 @@ import { ArrowRight, ExternalLink, Code } from "lucide-react"
 
 const legacyStats: Record<string, {
   title: string; description: string; lastUpdated: string;
-  sections: { title: string; stats: { value: string; label: string; source: string; sourceUrl: string }[] }[]
+  sections: { title: string; body?: string; stats: { value: string; label: string; source: string; sourceUrl: string }[] }[]
 }> = {
   "crm-software": {
     title: "CRM Software Statistics 2026",
@@ -103,6 +103,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
     lastUpdated: registry.updatedAt || registry.publishedAt,
     sections: registry.sections.map((s) => ({
       title: s.title,
+      body: s.body,
       stats: s.stats.map((st) => ({ value: st.value, label: st.label, source: st.source, sourceUrl: st.sourceUrl || "#" })),
     })),
   } : legacy
@@ -141,6 +142,13 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
             {page.sections.map((section) => (
               <section key={section.title} className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">{section.title}</h2>
+                {section.body ? (
+                  <div className="mb-5 text-sm text-muted-foreground leading-relaxed space-y-3">
+                    {section.body.split(/\n+/).filter(Boolean).map((para, idx) => (
+                      <p key={idx}>{para}</p>
+                    ))}
+                  </div>
+                ) : null}
                 <div className="grid sm:grid-cols-2 gap-4">
                   {section.stats.map((stat) => (
                     <div key={stat.label} className="rounded-xl border border-border bg-card p-5 hover:border-primary/20 transition-colors">

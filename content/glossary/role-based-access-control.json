@@ -2,7 +2,7 @@
   "slug": "role-based-access-control",
   "term": "Role-Based Access Control (RBAC)",
   "definition": "A security model that restricts system access based on the roles and responsibilities of individual users within an organization.",
-  "extendedDefinition": "A security model that restricts system access based on the roles and responsibilities of individual users within an organization.",
+  "extendedDefinition": "A security model that restricts system access based on the roles and responsibilities of individual users within an organization. Role-based access control (RBAC) assigns permissions through roles rather than per-user settings, so access reflects job function and changes as people move between responsibilities. RBAC reduces risk by enforcing least privilege: users can act only within their role, and provisioning, offboarding, and audit become manageable across large user bases. Buyers should examine role granularity, whether custom roles can be created, how roles interact with groups and external users, and whether permission changes apply immediately. RBAC also supports compliance, since approval chains, segregation of duties, and reviewable access logs depend on a solid role model. Poor role design creates two failure modes: over-permissive access that invites incident, and over-restrictive setup that blocks work and drives shadow processes. Testing should cover real user journeys, including temporary access and role changes, because permission mechanics surface in daily operations long before they appear in audits.",
   "category": "Security & Compliance",
   "examples": [],
   "relatedTerms": [

@@ -23,7 +23,7 @@
   "sections": [
     {
       "title": "Product Analytics Market Size",
-      "body": "The product usage analytics market has experienced significant growth.",
+      "body": "Product analytics is a $36B+ market growing 28% year over year, with 3,254+ adopting organizations, a large vendor field of roughly 52,000 products, and a compact 7M+ professional base. The market's high vendor-to-org ratio reflects many tools chasing product teams. Buyers should prioritize implementation reality over demo polish — product analytics value depends on event instrumentation quality and governance, which vary sharply between vendors. Expect continuing convergence between product analytics and broader customer-analytics platforms as vendors absorb session and experimentation tooling. In practice, selection begins with instrumentation quality and event-volume fit, since those two factors decide whether the 258% return is reproducible at your scale.",
       "stats": [
         {
           "value": "$36B+",
@@ -54,7 +54,7 @@
     },
     {
       "title": "Adoption & Usage",
-      "body": "Adoption rates for product usage analytics continue to accelerate across all sectors.",
+      "body": "Product analytics adoption is 68% among enterprises and 49% among SMBs, with 77% planning to increase investment and a wide seven-tool average stack. The heavy stack warns that product teams accumulate instrumentation and funnel tools faster than they retire them. Buyers should select a primary product-analytics platform and route new spend through it rather than buying adjacent point solutions that fragment the source of truth. The 77% investment intent is the strongest buyer signal in this dataset — product teams clearly plan to fund more, so routing every new instrumentation need through one primary platform matters more than the seven-tool average suggests.",
       "stats": [
         {
           "value": "68%",
@@ -80,7 +80,7 @@
     },
     {
       "title": "ROI & Business Impact",
-      "body": "Organizations report significant returns from product usage analytics investments.",
+      "body": "Product analytics returns a 258% average 12-month ROI with a strong 42% productivity improvement, a 25% cost reduction, and positive ROI in just three months. The fast, productivity-led return fits analytics feeding better product decisions — engineering and design effort stops going into features users do not use. Buyers should sustain the return by keeping instrumentation clean and tied to decisions, since analytics value decays with event data rot. Funnel behavior and retention cohorts are where that 42% productivity gain concentrates in practice — audit event-taxonomy hygiene quarterly, retire deprecated events, and tie releases to feature-usage signals to protect the three-month payback and the 258% headline.",
       "stats": [
         {
           "value": "258%",
@@ -106,7 +106,7 @@
     },
     {
       "title": "Key Trends",
-      "body": "7 key trends shaping product usage analytics in 2026.",
+      "body": "Seven trends shape product usage analytics in 2026, led by AI integration in product-analytics platforms at 72% adoption, cloud-native deployments at 61%, and mobile-first solutions at 57%. Funnel and journey analytics, retention cohorting, behavioral-segmentation, and automated feature-experimentation feed the set, with event-governance standards running across all seven. The contents below detail the full adoption and investment picture for 2026. Automated feature-experimentation is the trend to watch: teams that pair clean instrumentation with automated testing see the fastest compounding of the 72% AI base, so fold experimentation and journey analytics into the primary platform rather than licensing separate point tools.",
       "stats": [
         {
           "value": "72%",
@@ -127,7 +127,7 @@
     },
     {
       "title": "Budget Allocation",
-      "body": "Product Analytics software spending patterns by organization size.",
+      "body": "Product analytics budgets are $167K per year at enterprises, $15K in mid-market, and $9K for small businesses — an unusually flat lower tier. The accessible entry pricing reflects vendors competing for product teams of every size, keeping small-business spend respectable. Buyers should expect event-volume-based pricing to creep upward as instrumentation scales, so load-model fit belongs in the business case from day one. The flat $15K and $9K lower tiers mean mid-market and SMB teams get near-equivalent capability — compare event-volume limits, sampling rules, and retention windows rather than tier labels when modeling costs.",
       "stats": [
         {
           "value": "$167K+",

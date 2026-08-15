@@ -2,7 +2,7 @@
   "slug": "data-residency",
   "term": "Data Residency",
   "definition": "The physical or geographic location where an organization's data is stored and processed, often subject to local regulations.",
-  "extendedDefinition": "The physical or geographic location where an organization's data is stored and processed, often subject to local regulations.",
+  "extendedDefinition": "Data residency is the geographic location where an organization's data is stored and processed, and it matters because regulations increasingly require data to stay within specific borders. Residency requirements vary by industry and region, covering personal data, health records, and public-sector information, and violating them carries legal and reputational consequences. Buyers should verify that vendor infrastructure offers residency in the regions where their data obligations apply, and should probe sub-processor arrangements, since data may move during backups or support. Residency also affects latency, availability, and disaster-recovery design, so regional coverage should be mapped to operational needs. Vendors should document where data lives, how transfers occur, and what happens to data at contract end. Contracts should state residency commitments clearly, including any regions the vendor cannot serve. Data residency evaluation belongs early in vendor screening, because a mismatch is rarely fixable after purchase.",
   "category": "Security & Compliance",
   "examples": [],
   "relatedTerms": [

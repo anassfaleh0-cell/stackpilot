@@ -2,7 +2,7 @@
   "slug": "audit-logging",
   "term": "Audit Logging",
   "definition": "The practice of recording chronological records of user activities, system events, and data changes within a software platform for security monitoring and compliance purposes.",
-  "extendedDefinition": "The practice of recording chronological records of user activities, system events, and data changes within a software platform for security monitoring and compliance purposes.",
+  "extendedDefinition": "The practice of recording chronological records of user activities, system events, and data changes within a software platform for security monitoring and compliance purposes. Audit logging creates the evidence trail that security investigations, compliance audits, and incident response depend on, capturing who did what, when, and from where. Buyers should evaluate log coverage, whether critical actions such as permission changes, data exports, and configuration edits are tracked, and whether logs are tamper-resistant and retained per policy. The practical value is compromised when logs exist but are never reviewed, so evaluation should cover alerting, searchability, and export to the organization's SIEM. Log retention balances cost against obligations: retention periods should satisfy regulatory and legal requirements without storing more than necessary. Multi-tenant environments add a question of segmentation: whether logs are isolated per customer. Vendors that treat logging as a first-class feature typically support compliance programs with less manual assembly.",
   "category": "Security & Compliance",
   "examples": [],
   "relatedTerms": [

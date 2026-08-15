@@ -2,7 +2,7 @@
   "slug": "feature-scaling",
   "term": "Feature Scaling",
   "definition": "The ability of a software platform to maintain performance and usability as the number of users, data volume, or complexity increases.",
-  "extendedDefinition": "The ability of a software platform to maintain performance and usability as the number of users, data volume, or complexity increases.",
+  "extendedDefinition": "The ability of a software platform to maintain performance and usability as the number of users, data volume, or complexity increases. Feature scaling is different from raw server scaling: it asks whether the product's capabilities keep working well as organizations grow, such as searches staying fast at large record counts, dashboards rendering at higher data volumes, and automation rules handling busier workloads. Buyers should probe scaling through realistic tests during trials, including maximum expected user counts, concurrent activity, and historical data imports, since performance issues surface only under load. Tier boundaries are part of the story: many products scale only to a plan limit, after which cost jumps sharply. Contracts should state capacity limits, expansion pricing, and what happens at sustained limits. Scaling failures typically appear as degraded experience before outages, so monitoring response times during the pilot across growing workloads reveals whether the platform will grow with the organization.",
   "category": "Developer Tools",
   "examples": [],
   "relatedTerms": [

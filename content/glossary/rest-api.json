@@ -2,7 +2,7 @@
   "slug": "rest-api",
   "term": "REST API",
   "definition": "Representational State Transfer API — a architectural style for designing networked applications using HTTP requests to access and manipulate data.",
-  "extendedDefinition": "Representational State Transfer API — a architectural style for designing networked applications using HTTP requests to access and manipulate data.",
+  "extendedDefinition": "Representational State Transfer API — an architectural style for designing networked applications using HTTP requests to access and manipulate data. REST APIs expose a product's data and actions over HTTP, enabling custom integrations, automation, and system-to-system workflows beyond the official connector catalog. For buyers, API quality determines how far the product can be extended and how easily the organization's stack will interoperate. Evaluation should cover documentation quality, authentication, rate limits, and versioning policies, since these dictate integration cost and durability. Thorough API access to records and events supports reporting, data exports, and automation, while restrictive APIs push teams toward brittle workarounds. API changes break integrations, so vendors' deprecation practices and communication matter as much as the endpoints they expose. Teams planning serious integrations should build a proof-of-concept against the API early, validating response structure, latency, and error handling with realistic data before committing.",
   "category": "Developer Tools",
   "examples": [],
   "relatedTerms": [

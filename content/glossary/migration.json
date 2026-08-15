@@ -2,7 +2,7 @@
   "slug": "migration",
   "term": "Migration",
   "definition": "The process of moving data, applications, or workloads from one system or environment to another.",
-  "extendedDefinition": "The process of moving data, applications, or workloads from one system or environment to another.",
+  "extendedDefinition": "Migration is the process of moving data, applications, or workloads from one system or environment to another, such as from on-premises infrastructure to the cloud or from one vendor to a competitor. Migrations are high-risk moments in any software lifecycle because they interrupt production, expose data quality problems, and consume significant team capacity. Successful migrations follow a repeatable sequence: assessment of the source environment, planning and mapping, pilot migration, cutover, and post-migration validation. Organizations should define rollback criteria before starting, so that a failed cutover can be reversed cleanly rather than patched under pressure. Buyers should treat migration capability as a selection criterion: how automated is the vendor's migration tooling, what validation reports are provided, and is there specialist support during busy windows. Well-executed migrations preserve data integrity and protect the business case of the original purchase.",
   "category": "Developer Tools",
   "examples": [],
   "relatedTerms": [

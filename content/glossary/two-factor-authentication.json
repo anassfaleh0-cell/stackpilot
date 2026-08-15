@@ -2,7 +2,7 @@
   "slug": "two-factor-authentication",
   "term": "Two-Factor Authentication (2FA)",
   "definition": "A security method that requires users to provide two different authentication factors to verify their identity before accessing an account.",
-  "extendedDefinition": "A security method that requires users to provide two different authentication factors to verify their identity before accessing an account.",
+  "extendedDefinition": "A security method that requires users to provide two different authentication factors to verify their identity before accessing an account. Two-factor authentication (2FA) is one of the most effective controls against credential-based attacks, because even a stolen password cannot unlock an account alone. The second factor typically comes from something the user has, such as an authenticator app, security key, or one-time code, or something inherent like biometrics. Buyers should verify that products support modern 2FA and, ideally, passkeys or hardware keys, since SMS-based codes are increasingly considered weaker. Deployment questions cover enforcement policies, whether 2FA can be mandated for all users, how recovery and account takeover are handled, and integration with single sign-on. 2FA is not optional for organizations handling sensitive data: it should be a baseline requirement in evaluation checklists, with enforcement rather than mere availability as the deciding factor.",
   "category": "Security & Compliance",
   "examples": [],
   "relatedTerms": [
