@@ -196,6 +196,7 @@ export interface AlternativeContent {
   relatedGuides?: string[]
   relatedPosts?: string[]
   lastUpdated: string
+  published?: boolean
 }
 
 export interface UseCaseContent {
@@ -277,6 +278,7 @@ export interface BestContent {
   relatedPosts: string[]
   lastUpdated: string
   author: string
+  published?: boolean
 }
 
 export interface HubContent {

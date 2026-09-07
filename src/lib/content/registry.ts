@@ -106,12 +106,15 @@ export function getAllCategories(): CategoryKnowledge[] {
 export function getAlternative(slug: string): AlternativeContent | null {
   const file = path.join(CONTENT_DIR, "alternatives", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<AlternativeContent>(file)
+  const alt = readJson<AlternativeContent>(file)
+  if (alt.published === false) return null
+  return alt
 }
 
 export function getAllAlternatives(): AlternativeContent[] {
   return readDir(path.join(CONTENT_DIR, "alternatives"))
     .map((f) => readJson<AlternativeContent>(path.join(CONTENT_DIR, "alternatives", f)))
+    .filter((a) => a.published !== false)
 }
 
 export function getUseCase(slug: string): UseCaseContent | null {
@@ -161,12 +164,15 @@ export function getAllStatistics(): StatisticContent[] {
 export function getBest(slug: string): BestContent | null {
   const file = path.join(CONTENT_DIR, "best", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<BestContent>(file)
+  const best = readJson<BestContent>(file)
+  if (best.published === false) return null
+  return best
 }
 
 export function getAllBest(): BestContent[] {
   return readDir(path.join(CONTENT_DIR, "best"))
     .map((f) => readJson<BestContent>(path.join(CONTENT_DIR, "best", f)))
+    .filter((b) => b.published !== false)
 }
 
 export function getHub(slug: string): HubContent | null {
