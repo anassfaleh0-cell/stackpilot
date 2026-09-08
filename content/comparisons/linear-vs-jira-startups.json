@@ -1,0 +1,32 @@
+{
+  "slug": "linear-vs-jira-startups",
+  "title": "Linear vs Jira for Startups 2026: Issue Tracking Showdown",
+  "description": "Linear vs Jira for startups compared: setup speed, pricing for small teams, feature depth, and which tool your engineering team will actually enjoy using.",
+  "category": "Development Tools",
+  "tool1": "Linear",
+  "tool2": "Jira",
+  "tool1Slug": "linear",
+  "tool2Slug": "jira",
+  "winner": "Linear",
+  "published": true,
+  "features": [
+    {"name":"Setup Time","tool1":"30 minutes","tool2":"1-2 days","tool1Detail":"Linear is designed for instant setup","tool2Detail":"Jira requires project configuration and workflow design"},
+    {"name":"Free Tier","tool1":"Yes (unlimited issues)","tool2":"Yes (10 users)","tool1Detail":"Linear free for unlimited issues and up to 250 items","tool2Detail":"Jira free for up to 10 users"},
+    {"name":"Starting Price","tool1":"8 dollars/user/mo","tool2":"0-7.75 dollars/user/mo","tool1Detail":"Linear Standard at 8 dollars/user/mo","tool2Detail":"Jira Free (10 users) or Standard at 7.75 dollars/user/mo"},
+    {"name":"Speed","tool1":"Blazing fast","tool2":"Slow","tool1Detail":"Linear is built for speed with keyboard-first design","tool2Detail":"Jira is known for slow page loads and complex UI"},
+    {"name":"Best For","tool1":"Engineering teams (5-50)","tool2":"Large organizations (50+)","tool1Detail":"Linear excels for small to mid engineering teams","tool2Detail":"Jira excels for enterprise workflows and compliance"},
+    {"name":"Integrations","tool1":"GitHub, Slack, Figma","tool2":"2000+ marketplace apps","tool1Detail":"Linear focuses on essential dev tool integrations","tool2Detail":"Jira has the largest integration marketplace"}
+  ],
+  "verdict": "For startups with engineering teams under 50 people, Linear wins. It is faster, simpler, and your team will actually enjoy using it. Jira is better for enterprises needing compliance, audit trails, and complex workflows. Start with Linear. Only switch to Jira when you hit 100+ engineers or need enterprise features.",
+  "faqs": [
+    {"question":"Is Linear free for startups?","answer":"Yes, Linear free tier supports unlimited issues and up to 250 items. For startups with fewer than 50 engineers, the free tier is sufficient. Standard plan at 8 dollars/user/mo adds priority support and advanced features."},
+    {"question":"How does Linear compare to Jira pricing?","answer":"Linear Standard is 8 dollars/user/mo. Jira Standard is 7.75 dollars/user/mo. Jira Free supports up to 10 users. For small teams, Jira is slightly cheaper. For teams wanting speed and simplicity, Linear is worth the premium."},
+    {"question":"Can I migrate from Jira to Linear?","answer":"Yes, Linear has a Jira importer that brings over issues, projects, and labels. Migration takes 1-2 days for most teams. Some custom Jira workflows may need recreation in Linear. Plan for 10-20 hours of work."},
+    {"question":"Which tool is better for product management?","answer":"Linear is better for product management at startups. It has built-in roadmaps, cycle planning, and project tracking. Jira requires add-ons for product management features. Linear purpose-built product workflows save hours per week."},
+    {"question":"Do big companies use Linear?","answer":"Yes, companies like Vercel, Coinbase, and Ramp use Linear. It scales well up to 500+ engineers. Beyond that, Jira enterprise features like compliance and audit trails become necessary."}
+  ],
+  "relatedComparisons": ["linear-vs-jira", "clickup-vs-linear"],
+  "relatedGuides": [],
+  "relatedPosts": [],
+  "lastUpdated": "2026-09-08"
+}
