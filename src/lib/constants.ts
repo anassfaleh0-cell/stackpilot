@@ -95,6 +95,7 @@ export const editorialLinks = [
   { href: "/how-we-test-software", label: "How We Test Software" },
   { href: "/affiliate-disclosure", label: "Affiliate Disclosure" },
   { href: "/advertising-disclosure", label: "Advertising Disclosure" },
+  { href: "/dmca", label: "DMCA Policy" },
   { href: "/authors", label: "Our Authors" },
 ]
 

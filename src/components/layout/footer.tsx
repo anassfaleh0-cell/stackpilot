@@ -49,6 +49,7 @@ const footerLinks = [
       { href: "/affiliate-disclosure", label: "Affiliate Disclosure" },
       { href: "/advertising-disclosure", label: "Advertising Disclosure" },
       { href: "/corrections-policy", label: "Corrections Policy" },
+      { href: "/dmca", label: "DMCA Policy" },
       { href: "/sitemap-html", label: "Sitemap" },
     ],
   },

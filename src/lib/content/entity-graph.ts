@@ -121,7 +121,7 @@ function buildGraph(): EntityGraph {
   for (const a of alternatives) {
     const rels: EntityRelationship[] = [
       { targetSlug: a.toolSlug, targetType: "software", relation: "provides-alternatives" },
-      ...a.alternatives.map((alt) => ({ targetSlug: alt.slug, targetType: "software" as const, relation: "alternative" as const })),
+      ...(a.alternatives || []).map((alt) => ({ targetSlug: alt.slug, targetType: "software" as const, relation: "alternative" as const })),
     ]
     if (a.relatedComparisons) {
       for (const c of a.relatedComparisons) rels.push({ targetSlug: c, targetType: "comparison", relation: "has-comparison" })
@@ -136,7 +136,7 @@ function buildGraph(): EntityGraph {
   }
 
   for (const u of useCases) {
-    const rels: EntityRelationship[] = u.recommendations.map((rec) => ({ targetSlug: rec.toolSlug, targetType: "software", relation: "recommends" }))
+    const rels: EntityRelationship[] = (u.recommendations || []).map((rec) => ({ targetSlug: rec.toolSlug, targetType: "software", relation: "recommends" }))
     if (u.relatedComparisons) {
       for (const c of u.relatedComparisons) rels.push({ targetSlug: c, targetType: "comparison", relation: "has-comparison" })
     }
@@ -147,7 +147,7 @@ function buildGraph(): EntityGraph {
   }
 
   for (const ind of industries) {
-    const rels: EntityRelationship[] = ind.recommendations.map((rec) => ({ targetSlug: rec.toolSlug, targetType: "software", relation: "recommends" }))
+    const rels: EntityRelationship[] = (ind.recommendations || []).map((rec) => ({ targetSlug: rec.toolSlug, targetType: "software", relation: "recommends" }))
     if (ind.relatedComparisons) {
       for (const c of ind.relatedComparisons) rels.push({ targetSlug: c, targetType: "comparison", relation: "has-comparison" })
     }
@@ -200,7 +200,7 @@ function buildGraph(): EntityGraph {
 
   for (const h of hubs) {
     const rels: EntityRelationship[] = [
-      ...h.recommendations.map((r) => ({ targetSlug: r.toolSlug, targetType: "software" as const, relation: "recommends" as const })),
+      ...(h.recommendations || []).map((r) => ({ targetSlug: r.toolSlug, targetType: "software" as const, relation: "recommends" as const })),
     ]
     if (h.relatedComparisons) {
       for (const c of h.relatedComparisons) rels.push({ targetSlug: c, targetType: "comparison", relation: "has-comparison" })

@@ -8,6 +8,7 @@ import { getStatistic, getAllStatistics } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowRight, ExternalLink, Code } from "lucide-react"
+import { isNoindexed } from "@/lib/noindex"
 
 const legacyStats: Record<string, {
   title: string; description: string; lastUpdated: string;
@@ -87,7 +88,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const registry = getStatistic(slug)
-  if (registry) return createMetadata({ title: registry.title, description: registry.description, path: `/statistics/${slug}`, ogType: "article", publishedAt: registry.publishedAt, updatedAt: registry.updatedAt, articleSection: registry.category })
+  if (registry) {
+    const noindexed = isNoindexed("statistics", slug)
+    return createMetadata({ title: registry.title, description: registry.description, path: `/statistics/${slug}`, ogType: "article", publishedAt: registry.publishedAt, updatedAt: registry.updatedAt, articleSection: registry.category, noIndex: noindexed })
+  }
   const legacy = legacyStats[slug]
   if (legacy) return createMetadata({ title: legacy.title, description: legacy.description, path: `/statistics/${slug}`, ogType: "article", publishedAt: legacy.lastUpdated, articleSection: "Research Data" })
   return {}

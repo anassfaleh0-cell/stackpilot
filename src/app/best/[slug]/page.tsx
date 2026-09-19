@@ -13,6 +13,7 @@ import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, XCircle } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
+import { isNoindexed } from "@/lib/noindex"
 
 export function generateStaticParams() {
   return getAllBest().map((b) => ({ slug: b.slug }))
@@ -26,7 +27,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const metaDescription = page.description.length < 120
     ? `${page.description} We ranked the top options with detailed pros and cons, pricing, and the best alternatives to help you choose.`
     : page.description
-  return createMetadata({ title: truncate(page.title, 60), description: truncate(metaDescription, 160), path: `/best/${page.slug}`, ogType: "article", publishedAt: page.lastUpdated, updatedAt: page.lastUpdated, articleSection: page.category, readingTime })
+  const noindexed = isNoindexed("best", slug)
+  return createMetadata({ title: truncate(page.title, 60), description: truncate(metaDescription, 160), path: `/best/${page.slug}`, ogType: "article", publishedAt: page.lastUpdated, updatedAt: page.lastUpdated, articleSection: page.category, readingTime, noIndex: noindexed })
 }
 
 export default async function BestPage({ params }: { params: Promise<{ slug: string }> }) {

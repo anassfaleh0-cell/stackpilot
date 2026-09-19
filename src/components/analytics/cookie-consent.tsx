@@ -135,8 +135,9 @@ export function CookieConsent() {
         {!customizing ? (
           <>
             <div className="text-xs leading-relaxed text-muted-foreground">
-              We use essential cookies for site functionality. We also use analytics cookies to understand how visitors use our site.{" "}
-              <a href="/privacy" className="text-primary-dark hover:underline">Learn more about our privacy policy</a>.
+              We use essential cookies for site functionality. We also use analytics cookies to understand how visitors use our site, and advertising cookies to serve relevant ads.{" "}
+              <a href="/privacy" className="text-primary-dark hover:underline">Privacy Policy</a>{" · "}
+              <a href="/cookies" className="text-primary-dark hover:underline">Cookie Policy</a>.
             </div>
             <div className="flex items-center gap-2 mt-4">
               <button
@@ -176,9 +177,14 @@ export function CookieConsent() {
                 />
                 <span>Analytics (GA4, Clarity) — Helps us improve</span>
               </label>
-              <label className="flex items-center gap-3 text-xs text-muted-foreground opacity-50">
-                <input type="checkbox" disabled className="accent-primary size-3.5" />
-                <span>Advertising — Coming soon</span>
+              <label className="flex items-center gap-3 text-xs text-muted-foreground">
+                <input
+                  type="checkbox"
+                  checked={draft.advertising}
+                  onChange={(e) => setDraft((p) => ({ ...p, advertising: e.target.checked }))}
+                  className="accent-primary size-3.5"
+                />
+                <span>Advertising (AdSense) — Supports our free content</span>
               </label>
             </div>
             <div className="flex items-center gap-2">

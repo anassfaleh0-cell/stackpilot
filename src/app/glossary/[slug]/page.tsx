@@ -8,6 +8,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { EditorialHero, EditorialConcept, EditorialCallout, GlassCard, InfoCard, getPalette } from "@/components/editorial"
 import { RelatedContent } from "@/components/content/related-content"
+import { isNoindexed } from "@/lib/noindex"
 
 export function generateStaticParams() {
   return getAllGlossaryTerms().map((t) => ({ slug: t.slug }))
@@ -17,7 +18,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const item = getGlossaryTerm(slug)
   if (!item) return {}
-  return createMetadata({ title: item.term, description: item.description || item.definition, path: `/glossary/${slug}`, ogType: "article", articleSection: item.category, articleTags: [item.category] })
+  const noindexed = isNoindexed("glossary", slug)
+  return createMetadata({ title: item.term, description: item.description || item.definition, path: `/glossary/${slug}`, ogType: "article", articleSection: item.category, articleTags: [item.category], noIndex: noindexed })
 }
 
 export default async function GlossaryTermPage({ params }: { params: Promise<{ slug: string }> }) {

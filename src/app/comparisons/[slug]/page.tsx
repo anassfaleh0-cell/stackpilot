@@ -6,6 +6,7 @@ import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getComparison, getContentTitle, getReview, getAllComparisons } from "@/lib/content/registry"
 import { formatDate } from "@/lib/utils"
+import { isNoindexed } from "@/lib/noindex"
 import { InternalLinks } from "@/components/content/internal-links"
 import { RichText } from "@/components/content/rich-text"
 import { notFound } from "next/navigation"
@@ -28,12 +29,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const cmp = getComparison(slug)
   if (!cmp) return {}
   const readingTime = Math.max(3, Math.ceil(cmp.description.split(/\s+/).length / 200))
+  const noindexed = isNoindexed("comparisons", slug)
+
   return {
     ...createMetadata({ title: `${cmp.tool1} vs ${cmp.tool2} (2026): Which One Wins?`, description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated, articleSection: cmp.category, readingTime }),
-    robots: {
-      index: true,
-      follow: true,
-    },
+    robots: noindexed
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
   }
 }
 

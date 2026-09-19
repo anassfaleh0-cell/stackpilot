@@ -15,6 +15,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
 import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
+import { isNoindexed } from "@/lib/noindex"
 
 export function generateStaticParams() {
   return getAllReviews().map((r) => ({ slug: r.slug }))
@@ -25,6 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const tool = getReview(slug)
   if (!tool) return {}
   const wordCount = tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)
+  const noindexed = isNoindexed("reviews", slug)
   return createMetadata({
     title: `${tool.name} Review (2026): Pricing, Pros, Cons & Top Alternatives`,
     description: `Hands-on ${tool.name} review. See real pros, cons, pricing details, and the best alternatives before you buy. Expert-tested for 2026.`,
@@ -34,6 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     updatedAt: tool.lastReviewed,
     articleSection: tool.category,
     readingTime: Math.max(3, Math.ceil(wordCount / 200)),
+    noIndex: noindexed,
   })
 }
 
