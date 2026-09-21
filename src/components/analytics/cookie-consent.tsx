@@ -66,10 +66,23 @@ function injectClarityScript() {
   document.head.appendChild(s)
 }
 
+function injectAdSenseScript() {
+  if (document.getElementById("adsense-script")) return
+  const s = document.createElement("script")
+  s.id = "adsense-script"
+  s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6523926892521982"
+  s.async = true
+  s.crossOrigin = "anonymous"
+  document.head.appendChild(s)
+}
+
 function injectScripts(prefs: ConsentPrefs) {
   if (prefs.analytics) {
     injectGAScript()
     injectClarityScript()
+  }
+  if (prefs.advertising) {
+    injectAdSenseScript()
   }
 }
 

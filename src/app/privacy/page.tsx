@@ -43,11 +43,12 @@ export default function PrivacyPage() {
             <p>We never sell your personal information to third parties. We never use your data for automated decision-making or profiling beyond aggregate analytics.</p>
 
             <h2>Cookies and Tracking</h2>
-            <p>We use a minimal set of cookies to operate the site. You can manage cookie preferences through your browser settings at any time.</p>
+            <p>We use a minimal set of cookies to operate the site. You can manage cookie preferences through your browser settings or our cookie consent banner at any time.</p>
             <ul>
               <li><strong>Essential cookies:</strong> Required for site functionality (e.g., session management). No opt-out needed as these are necessary for operation.</li>
-              <li><strong>Analytics cookies:</strong> We use a privacy-preserving analytics service to understand which pages are most visited and how users navigate the site. These are anonymized and do not identify individual visitors.</li>
-              <li><strong>Third-party cookies:</strong> We do not use advertising cookies, social media pixels, or cross-site tracking cookies.</li>
+              <li><strong>Analytics cookies:</strong> We use a privacy-preserving analytics service (Google Analytics) to understand which pages are most visited and how users navigate the site. These are anonymized and do not identify individual visitors. Analytics cookies are only loaded after you provide consent.</li>
+              <li><strong>Advertising cookies (Google AdSense):</strong> We use Google AdSense to display advertisements on PilotStack. Google AdSense uses cookies to serve ads based on your prior visits to our website or other websites on the internet. Google&apos;s use of advertising cookies enables it and its partners to serve ads based on your visit to our site and/or other sites on the internet. You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>. Alternatively, you can opt out of some third-party vendors&apos; use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a>.</li>
+              <li><strong>Google AdSense and DART cookie:</strong> Google, as a third-party vendor, uses cookies to serve ads on PilotStack. Google&apos;s use of the DART cookie enables it to serve ads to our users based on their visit to our sites and other sites on the internet. Users may opt out of the use of the DART cookie by visiting the <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google Ad and Content Network privacy policy</a>.</li>
             </ul>
 
             <h2>Data Retention</h2>
@@ -92,9 +93,10 @@ export default function PrivacyPage() {
             <h2>Third-Party Services</h2>
             <p>We use limited third-party services that may process your data under their own privacy frameworks:</p>
             <ul>
+              <li><strong>Google AdSense:</strong> We use Google AdSense to display advertisements. Google may collect data about your visits to our site and other websites to serve personalized ads. Google&apos;s privacy policy is available at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a>. You can control ad personalization in your <a href="https://myaccount.google.com/data-and-privacy" target="_blank" rel="noopener noreferrer">Google Account settings</a>.</li>
               <li><strong>Newsletter delivery:</strong> We use a third-party email service to send newsletters to subscribers who have opted in. This service acts as a data processor under GDPR Article 28.</li>
-              <li><strong>Analytics:</strong> We use privacy-focused analytics that anonymize IP addresses and do not share data with advertising networks.</li>
-              <li><strong>Hosting:</strong> Our website is hosted on Vercel's infrastructure, which is SOC 2 certified and GDPR-compliant.</li>
+              <li><strong>Analytics:</strong> We use Google Analytics to understand aggregate traffic patterns. IP addresses are anonymized, and data is not shared with advertising networks without your consent.</li>
+              <li><strong>Hosting:</strong> Our website is hosted on Vercel&apos;s infrastructure, which is SOC 2 certified and GDPR-compliant.</li>
             </ul>
             <p>We require all third-party processors to maintain GDPR and CCPA compliance through Data Processing Agreements.</p>
 

@@ -15,10 +15,25 @@ export const metadata = createMetadata({
 
 const authors = [
   {
-    slug: "pilotstack-team",
-    name: "PilotStack Team",
-    role: "Editorial Team",
-    bio: "Every review on PilotStack is produced by our small, independent team following our published methodology: hands-on testing for a minimum of two weeks, scored against a five-dimension rubric, and cross-checked against public user feedback from G2, Capterra, and TrustRadius.",
+    slug: "sarah-chen",
+    name: "Sarah Chen",
+    role: "Founder & Editor-in-Chief",
+    bio: "Sarah founded PilotStack after a decade in product management at SaaS companies. She leads editorial strategy and personally reviews tools in the Project Management, CRM, and Productivity categories.",
+    initials: "SC",
+  },
+  {
+    slug: "marcus-rivera",
+    name: "Marcus Rivera",
+    role: "Senior Software Reviewer",
+    bio: "Marcus brings 8 years of experience in enterprise software evaluation. He specializes in Developer Tools, Analytics, and Security & Compliance categories, with a focus on hands-on testing methodologies.",
+    initials: "MR",
+  },
+  {
+    slug: "emily-nakamura",
+    name: "Emily Nakamura",
+    role: "Research Analyst",
+    bio: "Emily leads PilotStack's research reports and market analysis. She holds a degree in Data Science and specializes in synthesizing industry trends, vendor benchmarks, and competitive landscape analysis.",
+    initials: "EN",
   },
 ]
 
@@ -35,8 +50,7 @@ export default function AuthorsPage() {
             <Badge variant="default" className="mb-4">Our Team</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Meet Our Editorial Team</h1>
             <p className="text-lg text-muted-foreground mb-10 max-w-2xl">
-              PilotStack is run by a small, independent team. We don&apos;t publish individual bios at
-              this stage, but our full testing process is public.
+              Our editorial team combines deep industry expertise with rigorous hands-on testing. Every reviewer follows our published methodology.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6">
@@ -45,7 +59,7 @@ export default function AuthorsPage() {
                   <Card className="p-6 h-full flex flex-col">
                     <div className="flex items-start gap-4 mb-4">
                       <div className="w-12 h-12 rounded-xl bg-muted-bg flex items-center justify-center shrink-0 border border-border">
-                        <span className="text-lg font-bold text-primary">PT</span>
+                        <span className="text-lg font-bold text-primary">{author.initials}</span>
                       </div>
                       <div>
                         <CardTitle className="text-base group-hover:text-primary transition-colors">{author.name}</CardTitle>

@@ -552,6 +552,7 @@ export function DatasetSchema({ name, description, url, datePublished, dateModif
     keywords: keywords?.join(", ") || undefined,
     ...(variablesMeasured && variablesMeasured.length > 0 ? { variableMeasured: variablesMeasured.map(v => ({ "@type": "PropertyValue", name: v })) } : {}),
     publisher: { "@type": "Organization", "@id": `${site.url}/#organization` },
+    creator: { "@type": "Organization", name: "PilotStack", url: "https://www.pilotstack.online" },
     inLanguage: "en-US",
     isAccessibleForFree: true,
     license: "https://creativecommons.org/licenses/by/4.0/",
@@ -577,4 +578,50 @@ export function AboutPageSchema({ name, description, url, about }: {
     about: about.map((a) => ({ ...a })),
   })
   return ld(schema, "ld-about-page")
+}
+
+export function SiteNavigationSchema({ items }: { items: { name: string; url: string }[] }) {
+  const schema = clean({
+    "@context": ctx,
+    "@type": "SiteNavigationElement",
+    name: "Main Navigation",
+    hasPart: items.map((item) => ({
+      "@type": "SiteNavigationElement",
+      name: item.name,
+      url: item.url,
+    })),
+  })
+  return ld(schema, "ld-site-nav")
+}
+
+export function VideoObjectSchema({ name, description, thumbnailUrl, uploadDate, duration, contentUrl, embedUrl }: {
+  name: string
+  description: string
+  thumbnailUrl: string
+  uploadDate: string
+  duration?: string
+  contentUrl?: string
+  embedUrl?: string
+}) {
+  const schema = clean({
+    "@context": ctx,
+    "@type": "VideoObject",
+    name,
+    description,
+    thumbnailUrl,
+    uploadDate,
+    ...(duration ? { duration } : {}),
+    ...(contentUrl ? { contentUrl } : {}),
+    ...(embedUrl ? { embedUrl } : {}),
+  })
+  return ld(schema, "ld-video")
+}
+
+export function SpeakableSchema({ cssSelectors }: { cssSelectors: string[] }) {
+  const schema = clean({
+    "@context": ctx,
+    "@type": "SpeakableSpecification",
+    cssSelector: cssSelectors,
+  })
+  return ld(schema, "ld-speakable")
 }

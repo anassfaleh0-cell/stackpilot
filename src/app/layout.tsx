@@ -1,14 +1,15 @@
 import type { Metadata, Viewport } from "next/dist/lib/metadata/types/metadata-interface"
 import { Geist, Geist_Mono } from "next/font/google"
-import Script from "next/script"
 import "./globals.css"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { GTMScript } from "@/components/analytics/gtm"
 import { ClientLayout } from "@/components/layout/client-layout"
-import { OrganizationSchema, WebsiteSchema } from "@/components/seo/json-ld"
-import { siteConfig } from "@/lib/constants"
+import { OrganizationSchema, WebsiteSchema, SiteNavigationSchema } from "@/components/seo/json-ld"
+import { siteConfig, navLinks } from "@/lib/constants"
+import { CookieConsent } from "@/components/analytics/cookie-consent"
+import { WebVitals } from "@/components/analytics/web-vitals"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -71,6 +72,13 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: "/manifest.webmanifest",
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || "",
+    other: {
+      "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION || "",
+    },
+  },
   other: {
     "28268a6a251530303d949cd943c51fdd81c045be": "28268a6a251530303d949cd943c51fdd81c045be",
   },
@@ -118,11 +126,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <GTMScript />
-        <Script
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6523926892521982"
-          strategy="lazyOnload"
-          crossOrigin="anonymous"
-        />
         <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name}`} href="/rss.xml" />
 
       </head>
@@ -136,14 +139,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <a href="#main-content" className="skip-to-content">
             Skip to main content
           </a>
-          <OrganizationSchema />
-          <WebsiteSchema />
+        <OrganizationSchema />
+        <WebsiteSchema />
+        <SiteNavigationSchema items={navLinks.map((l) => ({ name: l.label, url: `${siteConfig.url}${l.href}` }))} />
           <Header />
           <ClientLayout />
           <main id="main-content" className="flex-1 outline-none" tabIndex={-1}>
             {children}
           </main>
           <Footer />
+          <CookieConsent />
+          <WebVitals />
         </ThemeProvider>
       </body>
     </html>

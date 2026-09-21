@@ -26,6 +26,21 @@ export default function ContactPage() {
       </ToastProvider>
       <Container className="pb-16 sm:pb-20 lg:pb-24">
         <div className="max-w-2xl mx-auto mt-16 p-6 rounded-xl bg-muted-bg border border-border">
+          <h2 className="text-lg font-bold mb-2">Other ways to reach us</h2>
+          <p className="text-sm text-muted-foreground mb-4">
+            Prefer email? Write to us directly at{" "}
+            <a href="mailto:hello@pilotstack.online" className="text-primary hover:underline font-medium">
+              hello@pilotstack.online
+            </a>
+          </p>
+          <p className="text-sm text-muted-foreground mb-4">
+            For privacy-related inquiries, contact us at{" "}
+            <a href="mailto:privacy@pilotstack.online" className="text-primary hover:underline font-medium">
+              privacy@pilotstack.online
+            </a>
+          </p>
+        </div>
+        <div className="max-w-2xl mx-auto mt-6 p-6 rounded-xl bg-muted-bg border border-border">
           <h2 className="text-lg font-bold mb-2">Official Community</h2>
           <p className="text-sm text-muted-foreground mb-4">Join the PilotStack community:</p>
           <SocialLinkList />

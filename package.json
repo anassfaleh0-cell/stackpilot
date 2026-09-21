@@ -27,6 +27,8 @@
     "check:links": "npx linkinator http://localhost:3000 --recurse --skip 'mailto:|tel:|linkedin.com'",
     "lint:content": "node scripts/lint-content.js",
     "check:all": "npm run test && npm run build",
+    "seo:audit": "node scripts/seo-health-check.js",
+    "seo:links": "node scripts/linking-audit.js",
     "postinstall": "node scripts/copy-og-assets.js"
   },
   "dependencies": {

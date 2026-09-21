@@ -122,6 +122,13 @@ const nextConfig: NextConfig = {
       ],
     },
     {
+      source: "/ads.txt",
+      headers: [
+        { key: "Cache-Control", value: "public, max-age=3600, s-maxage=86400" },
+        { key: "Content-Type", value: "text/plain" },
+      ],
+    },
+    {
       source: "/robots.txt",
       headers: [
         { key: "Cache-Control", value: "public, max-age=86400" },

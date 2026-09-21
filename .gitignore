@@ -40,3 +40,36 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# temporary / diagnostic / backup
+_backup-content-before/
+_backup-*/
+_backup-*
+_*.cjs
+_*.js
+_*.json
+_*.log
+_*.txt
+_*.html
+_*.png
+*.log
+*.pid
+*.tgz
+!_noindex-list.json
+!_sitemap-urls.json
+scripts/
+audit-server.pid
+build-*.log
+build-*.txt
+crawl-*.jsonl
+crawl-*.json
+final-*.txt
+final-*.json
+mobile-*.png
+server-*.log
+server-*.pid
+server-*.err
+resvg-*.tgz
+vercel-og-*.tgz
+node_trace.*.log
+_build/
+

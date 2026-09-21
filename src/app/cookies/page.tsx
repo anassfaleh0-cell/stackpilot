@@ -31,7 +31,7 @@ export default function CookiesPage() {
             <p>Similar technologies include local storage, session storage, and web beacons (small transparent images used to track page views and email opens).</p>
 
             <h2>Cookies We Use</h2>
-            <p>We minimize cookie usage to what is strictly necessary for site operation and basic analytics. We do <strong>not</strong> use advertising cookies, social media pixels, or cross-site tracking cookies.</p>
+            <p>We minimize cookie usage to what is strictly necessary for site operation and basic analytics. We use a cookie consent banner that lets you control which categories of cookies are enabled.</p>
 
             <h3>Essential Cookies</h3>
             <p>These cookies are necessary for the website to function and cannot be disabled. They are set automatically when you access our site and do not store any personally identifiable information.</p>
@@ -50,6 +50,7 @@ export default function CookiesPage() {
             <h3>Third-Party Cookies</h3>
             <p>Some third-party services we use may set their own cookies:</p>
             <ul>
+              <li><strong>Google AdSense:</strong> If you consent to advertising cookies, Google AdSense may use cookies to serve personalized ads based on your browsing history. You can opt out via <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a> or <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener">www.aboutads.info</a>.</li>
               <li><strong>Vercel Analytics:</strong> Edge network analytics — privacy-friendly, cookie-less by default for basic metrics.</li>
               <li><strong>Monetization scripts:</strong> Our ad and affiliate partners may set cookies to track impressions and clicks. These are third-party controlled and their use is governed by their respective privacy policies. We require all partners to comply with GDPR and ePrivacy regulations.</li>
             </ul>
@@ -65,10 +66,9 @@ export default function CookiesPage() {
             </ul>
             <p>We never use cookie data for:</p>
             <ul>
-              <li>Targeted advertising or retargeting</li>
-              <li>Building user profiles for commercial purposes</li>
+              <li>Building user profiles for commercial purposes beyond what AdSense provides with your consent</li>
               <li>Selling or sharing data with data brokers</li>
-              <li>Cross-site tracking or fingerprinting</li>
+              <li>Cross-site tracking or fingerprinting outside of consented advertising</li>
             </ul>
 
             <h2>Cookie Duration</h2>
