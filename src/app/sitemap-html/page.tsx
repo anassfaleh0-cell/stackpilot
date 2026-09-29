@@ -4,6 +4,7 @@ import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, getAllUseCases, getAllIndustries, getAllHubs, getAllBlogPosts, getAllResearch, getAllStatistics } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 import Link from "next/link"
 
 export const metadata = createMetadata({
@@ -14,7 +15,7 @@ export const metadata = createMetadata({
 
 export default function SitemapPage() {
   const reviews = getAllReviews()
-  const comparisons = getAllComparisons()
+  const comparisons = getAllComparisons().filter(c => !isNoindexed("comparisons", c.slug))
   const guides = getAllGuides()
   const best = getAllBest()
   const alternatives = getAllAlternatives()

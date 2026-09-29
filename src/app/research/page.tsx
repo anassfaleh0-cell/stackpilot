@@ -9,6 +9,7 @@ import Link from "next/link"
 import { ArrowRight, FileText } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
 import { site } from "@/lib/constants"
+import { BannerAd } from "@/components/ads"
 
 export const metadata = createMetadata({
   title: "Research Reports",
@@ -52,6 +53,14 @@ export default function ResearchPage() {
           </div>
         </Container>
       </section>
+
+      {/* Ad: After section header */}
+      <Section>
+        <Container>
+          <BannerAd className="mx-auto max-w-[728px]" />
+        </Container>
+      </Section>
+
       <Section>
         <Container>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

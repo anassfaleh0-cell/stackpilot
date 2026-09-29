@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Card, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Star, Scale, BookOpen, Layers, GitCompare } from "lucide-react"
+import { isContentAvailable } from "@/lib/content/registry"
 
 interface RelatedItem {
   slug: string
@@ -55,6 +56,28 @@ const ROUTE_FOR_TYPE: Record<string, string> = {
   category: "category",
 }
 
+const TYPE_FOR_ROUTE: Record<string, string> = {
+  reviews: "review",
+  comparisons: "comparison",
+  guides: "guide",
+  blog: "blog",
+  glossary: "glossary",
+  alternatives: "alternative",
+  best: "best",
+  research: "research",
+  statistics: "statistic",
+  "use-cases": "use-case",
+  industries: "industry",
+  hubs: "hub",
+}
+
+function isLinkable(item: RelatedItem): boolean {
+  const route = ROUTE_FOR_TYPE[item.type] ?? `${item.type}s`
+  const type = TYPE_FOR_ROUTE[route]
+  if (!type) return true
+  return isContentAvailable(type, item.slug)
+}
+
 export function EnhancedRelatedContent({
   items,
   title = "Related Resources",
@@ -62,7 +85,8 @@ export function EnhancedRelatedContent({
   category,
   showTypeIcons = true,
 }: EnhancedRelatedContentProps) {
-  if (!items || !items.length) return null
+  const shown = (items || []).filter(isLinkable)
+  if (!shown.length) return null
 
   return (
     <section className="mt-16 pt-8 border-t border-border" aria-label={`Related ${category || "resources"}`}>
@@ -73,7 +97,7 @@ export function EnhancedRelatedContent({
         </p>
       )}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.slice(0, maxItems).map((item) => (
+        {shown.slice(0, maxItems).map((item) => (
           <RelatedCard key={`${item.type}-${item.slug}`} item={item} showIcon={showTypeIcons} />
         ))}
       </div>

@@ -8,6 +8,7 @@ import { truncate, formatDate } from "@/lib/utils"
 import { getGuide, getContentTitle, getReview } from "@/lib/content/registry"
 import { getAllGuides } from "@/lib/content/registry"
 import { InternalLinks } from "@/components/content/internal-links"
+import { RelatedReading } from "@/components/content/related-reading"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { EditorialHero, EditorialSectionIllustration, GlassCard, InfoCard } from "@/components/dynamic"
@@ -15,9 +16,46 @@ import { EditorialProcess, RelatedContent } from "@/components/dynamic-client"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { BrandDivider } from "@/components/brand/patterns"
 import { CheckCircle2, BookOpen, Clock, Layers, Lightbulb, Scale } from "lucide-react"
+import { InFeedAd } from "@/components/ads"
+import { isNoindexed } from "@/lib/noindex"
+import type { GuideContent } from "@/types/content"
+
+/**
+ * Real FAQ Q/A pairs for a guide. Prefers the explicit `faqs` block, otherwise derives them from
+ * a "Frequently Asked Questions…" list section, so FAQPage schema never advertises plain section
+ * titles as questions (which search engines reject as non-genuine FAQ markup).
+ */
+function deriveGuideFaqs(guide: GuideContent): { question: string; answer: string }[] {
+  if (guide.faqs && guide.faqs.length > 0) return guide.faqs
+  const section = guide.sections.find(
+    (s) => s.type === "list" && /frequently asked/i.test(s.title) && (s.items?.length ?? 0) > 0
+  )
+  if (!section?.items) return []
+  const out: { question: string; answer: string }[] = []
+  for (const raw of section.items) {
+    const text = raw.trim().replace(/^\*\*/, "")
+    const bold = text.match(/^\*\*(.+?)\*\*\s*([\s\S]+)$/)
+    let question = ""
+    let answer = ""
+    if (bold) {
+      question = bold[1].trim()
+      answer = bold[2].trim()
+    } else {
+      const end = text.indexOf("? ")
+      if (end > 0) {
+        question = text.slice(0, end + 1).trim()
+        answer = text.slice(end + 2).trim()
+      }
+    }
+    if (question && answer && /\?$/.test(question)) out.push({ question, answer })
+  }
+  return out
+}
 
 export function generateStaticParams() {
-  return getAllGuides().map((g) => ({ slug: g.slug }))
+  return getAllGuides()
+    .filter((g) => !isNoindexed("guides", g.slug))
+    .map((g) => ({ slug: g.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -33,12 +71,21 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   const guide = getGuide(slug)
   if (!guide) notFound()
 
+  const faqs = deriveGuideFaqs(guide)
+
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Guides", href: "/guides" }, { name: guide.title, href: `/guides/${slug}` }]} />
       <HowToSchema name={guide.title} description={guide.description} steps={guide.sections.map((s) => ({ name: s.title, text: s.body }))} />
       <ArticleSchema title={guide.title} description={guide.description} publishedAt={guide.lastUpdated} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={guide.sections.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={guide.category} keywords={[guide.category, "software guide", guide.title, "buying guide", "software selection"].filter(Boolean)} mentions={guide.relatedTools.length > 0 ? guide.relatedTools.map(t => ({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` })) : undefined} />
-      <FAQSchema questions={guide.sections.slice(0, 5).map(s => ({ question: s.title, answer: truncate(s.body, 120) }))} path={`/guides/${slug}`} />
+      <FAQSchema
+        questions={
+          faqs.length > 0
+            ? faqs
+            : guide.sections.slice(0, 5).map((s) => ({ question: s.title, answer: truncate(s.body, 120) }))
+        }
+        path={`/guides/${slug}`}
+      />
       <WebPageSchema name={guide.title} description={guide.description} url={`${site.url}/guides/${slug}`} dateModified={guide.lastUpdated} mainEntity={guide.relatedTools.length > 0 ? { "@type": "ItemList", itemListElement: guide.relatedTools.map((t, i) => ({ "@type": "ListItem", position: i + 1, item: (() => { const rv = getReview(t); return softwareApp({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}`, category: rv?.category || guide.category, description: rv?.tagline, rating: rv?.rating, reviewCount: rv?.reviewCount }) })() })) } : undefined} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Guides", href: "/guides" }, { name: guide.title }]} />
@@ -141,7 +188,13 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             {/* Content sections with timeline */}
             <div className="space-y-12 mt-4">
               {guide.sections.map((section, i) => (
-                <section key={i} className="scroll-mt-24" id={`section-${i}`}>
+                <>
+                  {i === 2 && guide.sections.length >= 4 && (
+                    <section className="scroll-mt-24" id="ad-in-feed">
+                      <InFeedAd className="mx-auto max-w-[728px]" />
+                    </section>
+                  )}
+                  <section key={i} className="scroll-mt-24" id={`section-${i}`}>
                   <EditorialSectionIllustration slug={guide.slug} category={guide.category} index={i} />
                   <h2 className="text-xl font-semibold tracking-tight mb-4 flex items-center gap-3">
                     <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white text-sm font-bold shrink-0">{i + 1}</span>
@@ -161,14 +214,28 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                         ))}
                       </div>
                     </>
-                  ) : section.type === "checklist" && section.body ? (
+                  ) : section.type === "checklist" && (section.body || (section.items?.length ?? 0) > 0) ? (
                     <div className="space-y-3 pl-11">
-                      {section.body.split("?").filter(Boolean).map((item, j) => (
-                        <div key={j} className="flex items-start gap-3 text-sm">
-                          <CheckCircle2 size={16} className="text-primary shrink-0 mt-0.5" />
-                          <span className="text-foreground">{item}{item.trim().endsWith("?") ? "" : "?"}</span>
-                        </div>
-                      ))}
+                      {section.items && section.items.length > 0 ? (
+                        <>
+                          {section.body && (
+                            <p className="text-muted-foreground leading-relaxed">{section.body}</p>
+                          )}
+                          {section.items.map((item, j) => (
+                            <div key={j} className="flex items-start gap-3 text-sm">
+                              <CheckCircle2 size={16} className="text-primary shrink-0 mt-0.5" />
+                              <span className="text-foreground">{item}</span>
+                            </div>
+                          ))}
+                        </>
+                      ) : (
+                        section.body.split("?").filter(Boolean).map((item, j) => (
+                          <div key={j} className="flex items-start gap-3 text-sm">
+                            <CheckCircle2 size={16} className="text-primary shrink-0 mt-0.5" />
+                            <span className="text-foreground">{item}{item.trim().endsWith("?") ? "" : "?"}</span>
+                          </div>
+                        ))
+                      )}
                     </div>
                   ) : section.type === "table" && section.columns && section.rows ? (
                     <div className="overflow-x-auto pl-11">
@@ -211,8 +278,25 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                     </div>
                   )}
                 </section>
+                </>
               ))}
             </div>
+
+            {guide.faqs && guide.faqs.length > 0 && (
+              <section className="mt-12 scroll-mt-24" id="faq">
+                <h2 className="text-2xl font-bold tracking-tight mb-6">Frequently Asked Questions</h2>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {guide.faqs.map((faq) => (
+                    <GlassCard key={faq.question}>
+                      <div className="p-4">
+                        <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
+                        <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                      </div>
+                    </GlassCard>
+                  ))}
+                </div>
+              </section>
+            )}
 
             <BrandDivider />
 
@@ -260,6 +344,15 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                 </div>
               </GlassCard>
             </div>
+
+            <RelatedReading
+              title="Keep Reading"
+              excludeSlug={guide.slug}
+              reviews={guide.relatedTools}
+              guides={guide.relatedGuides}
+              comparisons={guide.relatedComparisons}
+              posts={guide.relatedPosts}
+            />
 
             <InternalLinks category={guide.category} excludeSlug={guide.slug} />
 

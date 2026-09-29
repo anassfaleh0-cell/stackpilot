@@ -6,6 +6,7 @@ import { createMetadata } from "@/lib/metadata"
 import { getAllUseCases } from "@/lib/content/registry"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
+import { BannerAd } from "@/components/ads"
 
 export const metadata = createMetadata({
   title: "Software Use Cases & Buyer Guides 2026",
@@ -28,6 +29,10 @@ export default async function UseCasesPage() {
       <Container className="pt-8 pb-16">
         <Breadcrumbs items={[{ name: "Use Cases" }]} />
         <h1 className="text-3xl font-bold tracking-tight mt-4 mb-2">Software Use Cases</h1>
+        <p className="text-muted-foreground mb-8">Expert-curated recommendations for every use case. Find the right software for your specific needs.</p>
+
+        {/* Ad: After section header */}
+        <BannerAd className="mx-auto max-w-[728px] mb-8" />
         <p className="text-muted-foreground mb-8">Expert-curated recommendations for every use case. Find the right software for your specific needs.</p>
         {Object.entries(grouped).map(([cat, useCases]) => (
           <section key={cat} className="mb-10">

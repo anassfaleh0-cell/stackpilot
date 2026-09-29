@@ -5,9 +5,11 @@ import { BreadcrumbSchema, FAQSchema, ReviewSchema, SoftwareSchema, softwareApp,
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getComparison, getContentTitle, getReview, getAllComparisons } from "@/lib/content/registry"
+import { stripDeadContentLinks } from "@/lib/content/link-guard"
 import { formatDate } from "@/lib/utils"
 import { isNoindexed } from "@/lib/noindex"
 import { InternalLinks } from "@/components/content/internal-links"
+import { RelatedReading } from "@/components/content/related-reading"
 import { RichText } from "@/components/content/rich-text"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -17,11 +19,14 @@ import { EditorialComparison } from "@/components/editorial/editorial-comparison
 import { RelatedContent } from "@/components/dynamic-client"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { ScoreBar } from "@/components/brand/patterns"
+import { NativeAd } from "@/components/ads"
 
 export const dynamicParams = false
 
 export function generateStaticParams() {
-  return getAllComparisons().map((c) => ({ slug: c.slug }))
+  return getAllComparisons()
+    .filter((c) => !isNoindexed("comparisons", c.slug))
+    .map((c) => ({ slug: c.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -53,6 +58,12 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
 
   const review1 = getReview(cmp.tool1Slug)
   const review2 = getReview(cmp.tool2Slug)
+
+  const safeFeatures = cmp.features.map((f) => ({
+    ...f,
+    tool1Detail: f.tool1Detail ? stripDeadContentLinks(f.tool1Detail) : f.tool1Detail,
+    tool2Detail: f.tool2Detail ? stripDeadContentLinks(f.tool2Detail) : f.tool2Detail,
+  }))
 
   return (
     <>
@@ -176,7 +187,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           {/* Feature Comparison */}
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-6">Feature Comparison</h2>
-            <EditorialComparison tool1={cmp.tool1} tool2={cmp.tool2} features={cmp.features} winner={cmp.winner} category={cmp.category} slug={cmp.slug} />
+            <EditorialComparison tool1={cmp.tool1} tool2={cmp.tool2} features={safeFeatures} winner={cmp.winner} category={cmp.category} slug={cmp.slug} />
           </section>
 
           {/* Decision Framework */}
@@ -236,7 +247,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                     {cmp.winner ? `Best for most teams: ${cmp.winner}` : "How they compare"}
                   </p>
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={cmp.verdict} /></p>
+                <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={stripDeadContentLinks(cmp.verdict)} /></p>
                 {cmp.winner && (
                   <div className="mt-4 pt-4 border-t border-border flex items-center gap-2 text-sm">
                     <span className="text-muted-foreground">Migration complexity:</span>
@@ -250,6 +261,13 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             </GlassCard>
           </section>
 
+          {/* Ad: After verdict card */}
+          <section className="mb-12">
+            <Container>
+              <NativeAd className="mx-auto max-w-[300px]" />
+            </Container>
+          </section>
+
           {/* FAQ */}
           <section>
             <h2 className="text-2xl font-bold tracking-tight mb-6">Frequently Asked Questions</h2>
@@ -258,7 +276,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                 <GlassCard key={faq.question}>
                   <div className="p-4">
                     <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
-                    <p className="text-sm text-muted-foreground"><RichText text={faq.answer} /></p>
+                    <p className="text-sm text-muted-foreground"><RichText text={stripDeadContentLinks(faq.answer)} /></p>
                   </div>
                 </GlassCard>
               ))}
@@ -270,6 +288,14 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           </section>
 
           <InternalLinks category={cmp.category} excludeSlug={cmp.slug} />
+
+          <RelatedReading
+            title="Related Comparisons & Guides"
+            excludeSlug={cmp.slug}
+            comparisons={cmp.relatedComparisons}
+            guides={cmp.relatedGuides}
+            posts={cmp.relatedPosts}
+          />
 
           {(() => {
             const cat = categories.find(c => c.name === cmp.category)

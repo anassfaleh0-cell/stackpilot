@@ -1,4 +1,4 @@
-import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives } from "./registry"
+import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, isContentAvailable } from "./registry"
 import type { ReviewContent, ComparisonContent, GuideContent, BestContent, AlternativeContent } from "@/types/content"
 
 export interface RelatedItem {
@@ -27,7 +27,7 @@ export function getRelatedByCategory(
     .slice(0, maxPerType)
 
   const comparisons: RelatedItem[] = getAllComparisons()
-    .filter((c) => (c.category === category || c.secondaryCategories?.includes(category)) && c.slug !== excludeSlug)
+    .filter((c) => isContentAvailable("comparison", c.slug) && (c.category === category || c.secondaryCategories?.includes(category)) && c.slug !== excludeSlug)
     .sort((a, b) => (b.lastUpdated || "").localeCompare(a.lastUpdated || ""))
     .map((c) => ({ slug: c.slug, title: c.title, type: "comparison" as const, category: c.category }))
     .slice(0, maxPerType)

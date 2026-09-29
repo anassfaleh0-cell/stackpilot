@@ -1,6 +1,6 @@
 import { compareEntities } from "@/lib/entities/comparison"
 import { getEntity, getAllEntities } from "@/lib/entities/data"
-import { getComparison } from "@/lib/content/registry"
+import { isContentAvailable } from "@/lib/content/registry"
 import Link from "next/link"
 import { GlassCard } from "@/components/editorial/glass-card"
 import { Badge } from "@/components/ui/badge"
@@ -24,7 +24,7 @@ export function AutoComparison({ slug, className = "" }: AutoComparisonProps) {
         const comp = compareEntities(slug, alt.slug)
         if (!comp) return null
         const compSlug = `${slug}-vs-${alt.slug}`
-        const hasComparison = getComparison(compSlug)
+        const hasComparison = isContentAvailable("comparison", compSlug)
         return (
           <GlassCard key={alt.slug}>
             <div className="p-5">

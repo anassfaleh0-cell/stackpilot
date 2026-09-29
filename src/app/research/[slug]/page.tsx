@@ -1,17 +1,22 @@
+import React from "react"
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, ArticleSchema, FAQSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getResearch, getAllResearch, getAllComparisons, getContentTitle } from "@/lib/content/registry"
+import { getResearch, getAllResearch, getContentTitle, isContentAvailable } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
 import { ExternalLink, Clock, User, Calendar, CheckCircle2, Lightbulb } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { RelatedContent } from "@/components/dynamic-client"
+import { InFeedAd } from "@/components/ads"
+import { isNoindexed } from "@/lib/noindex"
 
 export function generateStaticParams() {
-  return getAllResearch().map((r) => ({ slug: r.slug }))
+  return getAllResearch()
+    .filter((r) => !isNoindexed("research", r.slug))
+    .map((r) => ({ slug: r.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -74,48 +79,55 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
               )}
 
               {report.sections.map((section, i) => (
-                <section key={i} className="mb-10">
-                  <h2 className="text-2xl font-bold tracking-tight mb-4">{section.title}</h2>
-                  {section.type === "list" && section.items ? (
-                    <>
-                      <p className="text-muted-foreground leading-relaxed mb-4">{section.body}</p>
-                      <ul className="space-y-2">
-                        {section.items.map((item, j) => (
-                          <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <CheckCircle2 size={14} className="text-success mt-0.5 shrink-0" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  ) : section.type === "table" && section.columns && section.rows ? (
-                    <>
-                      {section.body && <p className="text-muted-foreground leading-relaxed mb-4">{section.body}</p>}
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-sm border-collapse">
-                          <thead>
-                            <tr className="border-b border-border">
-                              {section.columns.map((col, j) => (
-                                <th key={j} scope="col" className="text-left py-2 px-3 font-semibold text-foreground">{col}</th>
-                              ))}
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {section.rows.map((row, j) => (
-                              <tr key={j} className="border-b border-border/50 hover:bg-accent-subtle/20 transition-colors">
-                                {row.map((cell, k) => (
-                                  <td key={k} className="py-2.5 px-3 text-muted-foreground">{cell}</td>
+                <React.Fragment key={i}>
+                  <section className="mb-10">
+                    <h2 className="text-2xl font-bold tracking-tight mb-4">{section.title}</h2>
+                    {section.type === "list" && section.items ? (
+                      <>
+                        <p className="text-muted-foreground leading-relaxed mb-4">{section.body}</p>
+                        <ul className="space-y-2">
+                          {section.items.map((item, j) => (
+                            <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
+                              <CheckCircle2 size={14} className="text-success mt-0.5 shrink-0" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    ) : section.type === "table" && section.columns && section.rows ? (
+                      <>
+                        {section.body && <p className="text-muted-foreground leading-relaxed mb-4">{section.body}</p>}
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-sm border-collapse">
+                            <thead>
+                              <tr className="border-b border-border">
+                                {section.columns.map((col, j) => (
+                                  <th key={j} scope="col" className="text-left py-2 px-3 font-semibold text-foreground">{col}</th>
                                 ))}
                               </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    </>
-                  ) : (
-                    <p className="text-muted-foreground leading-relaxed">{section.body}</p>
+                            </thead>
+                            <tbody>
+                              {section.rows.map((row, j) => (
+                                <tr key={j} className="border-b border-border/50 hover:bg-accent-subtle/20 transition-colors">
+                                  {row.map((cell, k) => (
+                                    <td key={k} className="py-2.5 px-3 text-muted-foreground">{cell}</td>
+                                  ))}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </>
+                    ) : (
+                      <p className="text-muted-foreground leading-relaxed">{section.body}</p>
+                    )}
+                  </section>
+                  {i === Math.floor(report.sections.length / 2) - 1 && report.sections.length >= 3 && (
+                    <section className="my-10">
+                      <InFeedAd className="mx-auto max-w-[728px]" />
+                    </section>
                   )}
-                </section>
+                </React.Fragment>
               ))}
 
               <section className="mb-10 p-5 rounded-xl border border-border">
@@ -194,7 +206,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
 
           <RelatedContent
             items={[
-              ...(report.relatedComparisons || []).filter(s => getAllComparisons().some(c => c.slug === s)).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
+              ...(report.relatedComparisons || []).filter(s => isContentAvailable("comparison", s)).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
               ...(report.relatedGuides || []).filter(s => getContentTitle("guide", s)).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
               ...(report.relatedPosts || []).filter(s => getContentTitle("blog", s)).map(s => ({ slug: s, type: "blog" as const, title: getContentTitle("blog", s) ?? undefined })),
             ]}

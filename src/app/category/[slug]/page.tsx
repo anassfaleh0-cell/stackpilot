@@ -6,15 +6,16 @@ import { InternalLinks } from "@/components/content/internal-links"
 import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, ArticleSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { site, categories } from "@/lib/constants"
-import { getAllReviews, getAllGuides, getAllComparisons, getAllBlogPosts, getAllGlossaryTerms } from "@/lib/content/registry"
+import { getAllReviews, getAllGuides, getAllComparisons, getAllBlogPosts, getAllGlossaryTerms, isContentAvailable } from "@/lib/content/registry"
 import { getCategoryKnowledge } from "@/lib/content/category-knowledge"
 import { entityGraph } from "@/lib/content/entity-graph"
 import { ReviewFilter } from "@/components/entity/review-filter"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { Star, ArrowRight, BookOpen, GitCompare, FileText, Brain, Building2, DollarSign, Shield, Users, Search, CheckCircle2, XCircle, Lightbulb, TrendingUp, AlertTriangle, HelpCircle, ChevronRight, Sparkles } from "lucide-react"
+import { Star, ArrowRight, BookOpen, GitCompare, FileText, Brain, Building2, DollarSign, Shield, Users, Search, CheckCircle2, XCircle, Lightbulb, TrendingUp, AlertTriangle, HelpCircle, ChevronRight, Sparkles, Layers } from "lucide-react"
 import { BrandPattern, BrandDivider } from "@/components/brand/patterns"
 import { getContentTitle } from "@/lib/content/registry"
+import { BannerAd } from "@/components/ads"
 
 const ROUTE_FOR_TYPE: Record<string, string> = {
   software: "reviews",
@@ -45,8 +46,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const knowledge = getCategoryKnowledge(slug)
   const catReviews = getAllReviews().filter((r) => r.category === category.name)
   return createMetadata({
-    title: `Best ${category.name} Software 2026: Reviews & Buying Guide`,
-    description: `Find the best ${category.name.toLowerCase()} software with expert reviews, pricing comparisons, and buying tips. ${catReviews.length} tools tested and rated for 2026.`,
+    title: knowledge?.seoTitle || `Best ${category.name} Software 2026: Reviews & Buying Guide`,
+    description: knowledge?.seoDescription || `Find the best ${category.name.toLowerCase()} software with expert reviews, pricing comparisons, and buying tips. ${catReviews.length} tools tested and rated for 2026.`,
     path: `/category/${slug}`,
     articleSection: category.name,
   })
@@ -60,7 +61,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const knowledge = getCategoryKnowledge(slug)
   const reviews = getAllReviews().filter((r) => r.category === category.name)
   const guides = getAllGuides().filter((g) => g.category === category.name)
-  const comparisons = getAllComparisons().filter((c) => c.category === category.name || c.secondaryCategories?.includes(category.name))
+  const comparisons = getAllComparisons().filter((c) => isContentAvailable("comparison", c.slug) && (c.category === category.name || c.secondaryCategories?.includes(category.name)))
   const posts = getAllBlogPosts().filter((p) => p.category === category.name)
   const glossary = getAllGlossaryTerms().filter((t) => t.category === category.name)
   const bestPick = [...reviews].sort((a, b) => b.rating - a.rating)[0]
@@ -107,6 +108,31 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8">
         {/* Main Content */}
         <div>
+          {/* Curated in-category navigation */}
+          {knowledge?.internalLinks && knowledge.internalLinks.length > 0 && (
+            <Section>
+              <Container>
+                <div className="flex items-center gap-2 mb-4">
+                  <Layers size={20} className="text-primary" />
+                  <h2 className="text-2xl font-bold">Start Here</h2>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Hand-picked {category.name.toLowerCase()} resources covering the tools, buying decisions and pricing questions teams ask most often.
+                </p>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {knowledge.internalLinks.map((link) => (
+                    <Link key={link.href} href={link.href} className="group card-hover">
+                      <Card className="p-4 flex items-center gap-3 h-full">
+                        <ChevronRight size={18} className="text-primary shrink-0" />
+                        <CardTitle className="text-sm group-hover:text-primary transition-colors">{link.label}</CardTitle>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              </Container>
+            </Section>
+          )}
+
           {/* Market Overview */}
           {knowledge?.marketOverview && (
             <Section>
@@ -140,6 +166,13 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
               </Container>
             </Section>
           )}
+
+          {/* Ad: After best pick, before grid */}
+          <Section>
+            <Container>
+              <BannerAd className="mx-auto max-w-[728px]" />
+            </Container>
+          </Section>
 
           {/* AI Search Overview */}
           <Section>
@@ -448,10 +481,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                 <h2 className="text-2xl font-bold mb-6">Related Categories</h2>
                 <div className="flex flex-wrap gap-2">
                   {knowledge.relatedCategories.map((rcSlug) => {
-                    const rc = categories.find((c) => c.slug === rcSlug)
+                    const rc = categories.find((c) => c.slug === rcSlug || c.name === rcSlug)
                     if (!rc) return null
                     return (
-                      <Link key={rcSlug} href={`/category/${rcSlug}`} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
+                      <Link key={rc.slug} href={`/category/${rc.slug}`} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
                         {rc.name}
                       </Link>
                     )

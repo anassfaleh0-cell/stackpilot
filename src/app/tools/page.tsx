@@ -8,6 +8,7 @@ import { site, categories } from "@/lib/constants"
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts } from "@/lib/content/registry"
 import Link from "next/link"
 import { Calculator, Scale, ArrowRight, Star, BookOpen, GitCompare, FileText } from "lucide-react"
+import { BannerAd } from "@/components/ads"
 
 export const metadata = createMetadata({
   title: "Free Software Tools",
@@ -54,6 +55,13 @@ export default function ToolsPage() {
               </Link>
             ))}
           </div>
+
+          {/* Ad: After section header */}
+          <Section>
+            <Container>
+              <BannerAd className="mx-auto max-w-[728px]" />
+            </Container>
+          </Section>
 
           <SectionHeader className="mb-8">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">Explore by category</h2>

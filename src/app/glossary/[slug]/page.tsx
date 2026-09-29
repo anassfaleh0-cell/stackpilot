@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, DefinedTermSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
-import { getGlossaryTerm, getAllGlossaryTerms, getAllReviews, getAllGuides, getAllComparisons, getAllBlogPosts } from "@/lib/content/registry"
+import { getGlossaryTerm, getAllGlossaryTerms, getAllReviews, getAllGuides, getAllComparisons, getAllBlogPosts, isContentAvailable } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { EditorialHero, EditorialConcept, EditorialCallout, GlassCard, InfoCard, getPalette } from "@/components/editorial"
@@ -11,7 +11,9 @@ import { RelatedContent } from "@/components/content/related-content"
 import { isNoindexed } from "@/lib/noindex"
 
 export function generateStaticParams() {
-  return getAllGlossaryTerms().map((t) => ({ slug: t.slug }))
+  return getAllGlossaryTerms()
+    .filter((t) => !isNoindexed("glossary", t.slug))
+    .map((t) => ({ slug: t.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -103,7 +105,7 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
             {(() => {
               const reviews = getAllReviews().filter(r => r.category === item.category)
               const guides = getAllGuides().filter(g => g.category === item.category)
-              const comparisons = getAllComparisons().filter(c => c.category === item.category)
+              const comparisons = getAllComparisons().filter(c => isContentAvailable("comparison", c.slug) && c.category === item.category)
               const posts = getAllBlogPosts().filter(p => p.category === item.category)
               const relatedItems = [
                 ...reviews.map(r => ({ slug: r.slug, type: "review" as const, title: r.name })),

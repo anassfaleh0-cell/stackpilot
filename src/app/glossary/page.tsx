@@ -7,6 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 import { getAllGlossaryTerms } from "@/lib/content/registry"
 import Link from "next/link"
 import { Book } from "lucide-react"
+import { BannerAd } from "@/components/ads"
 
 export const metadata = createMetadata({
   title: "Glossary of Software Terms",
@@ -25,6 +26,13 @@ export default function GlossaryPage() {
       </Container>
       <Section className="pt-0">
         <Container>
+          {/* Ad: After section header */}
+          <Section>
+            <Container>
+              <BannerAd className="mx-auto max-w-[728px]" />
+            </Container>
+          </Section>
+
           <SectionHeader className="mb-12">
             <Badge variant="default" className="mb-4">Glossary</Badge>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Software glossary</h1>

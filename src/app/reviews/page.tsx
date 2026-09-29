@@ -11,6 +11,7 @@ import { ReviewCardGrid } from "@/components/entity/review-card-grid"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { BrandPattern, BrandDivider } from "@/components/brand/patterns"
+import { BannerAd } from "@/components/ads"
 
 export const metadata = createMetadata({
   title: "Software Reviews",
@@ -45,6 +46,13 @@ export default function ReviewsPage() {
           </SectionHeader>
         </Container>
       </section>
+
+      {/* Ad: After section header */}
+      <Section>
+        <Container>
+          <BannerAd className="mx-auto max-w-[728px]" />
+        </Container>
+      </Section>
 
       {/* Grid */}
       <Section>

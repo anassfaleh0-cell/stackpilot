@@ -25,6 +25,10 @@ export interface ReviewContent {
   lastReviewed: string
   author: string
   company?: CompanyInfo
+  /** Optional per-page search title. Falls back to the shared review title template. */
+  seoTitle?: string
+  /** Optional per-page meta description. Falls back to the shared review description template. */
+  seoDescription?: string
 }
 
 export interface CompanyInfo {
@@ -117,6 +121,8 @@ export interface GuideContent {
   relatedGuides: string[]
   relatedComparisons?: string[]
   relatedPosts?: string[]
+  /** Optional real FAQ block. When present it is rendered and used for FAQPage schema. */
+  faqs?: FAQItem[]
 }
 
 export interface GuideSection {
@@ -179,6 +185,10 @@ export interface CategoryKnowledge {
   relatedCategories: string[]
   internalLinks?: { label: string; href: string }[]
   faqs: FAQItem[]
+  /** Optional per-page search title. Falls back to the shared category title template. */
+  seoTitle?: string
+  /** Optional per-page meta description. Falls back to the shared category description template. */
+  seoDescription?: string
 }
 
 export interface AlternativeContent {
@@ -212,6 +222,7 @@ export interface UseCaseContent {
   faqs: FAQItem[]
   relatedComparisons: string[]
   relatedGuides?: string[]
+  relatedPosts?: string[]
   lastUpdated: string
 }
 

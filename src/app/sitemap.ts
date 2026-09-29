@@ -68,7 +68,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const research = getAllResearch()
   const statistics = getAllStatistics().filter((s) => isQuality(s.slug, "statistics"))
 
-  return [
+  const entries: MetadataRoute.Sitemap = [
     ...staticPages,
     { url: `${siteConfig.url}/rss.xml`, lastModified: LISTING_DATE, changeFrequency: "weekly", priority: 0.3 },
     ...authorSlugs.map((slug) => ({
@@ -175,4 +175,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     })),
   ]
+
+  const seen = new Set<string>()
+  return entries.filter((entry) => {
+    if (seen.has(entry.url)) return false
+    seen.add(entry.url)
+    return true
+  })
 }

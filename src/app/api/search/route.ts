@@ -1,4 +1,4 @@
-import { getAllReviews, getAllComparisons, getAllGuides, getAllGlossaryTerms, getAllBlogPosts } from "@/lib/content/registry"
+import { getAllReviews, getAllComparisons, getAllGuides, getAllGlossaryTerms, getAllBlogPosts, isContentAvailable } from "@/lib/content/registry"
 import { categories } from "@/lib/constants"
 
 interface SearchResult {
@@ -25,7 +25,7 @@ export async function GET(request: Request) {
     ...getAllReviews().map((r) => ({
       title: r.name, description: r.tagline, url: `/reviews/${r.slug}`, category: r.category, type: "review" as const,
     })),
-    ...getAllComparisons().map((c) => ({
+    ...getAllComparisons().filter((c) => isContentAvailable("comparison", c.slug)).map((c) => ({
       title: c.title, description: c.description, url: `/comparisons/${c.slug}`, category: c.category, type: "comparison" as const,
     })),
     ...getAllGuides().map((g) => ({

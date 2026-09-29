@@ -9,6 +9,7 @@ import { getAllGuides } from "@/lib/content/registry"
 import Link from "next/link"
 import { ArrowRight, Clock, Layers } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
+import { BannerAd } from "@/components/ads"
 
 export const metadata = createMetadata({
   title: "Software Guides",
@@ -40,6 +41,13 @@ export default function GuidesPage() {
           </SectionHeader>
         </Container>
       </section>
+
+      {/* Ad: After section header */}
+      <Section>
+        <Container>
+          <BannerAd className="mx-auto max-w-[728px]" />
+        </Container>
+      </Section>
 
       <Section>
         <Container>

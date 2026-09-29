@@ -1,4 +1,26 @@
 {
+    "faqs":  [
+        {
+            "question":  "Which SEO tool should I start with?",
+            "answer":  "Start with one primary research platform — SEMrush or Ahrefs — for keyword research, competitor analysis and rank tracking. Subscribing to both is redundant at the start, so pick one and reassess after six months."
+        },
+        {
+            "question":  "How often should I run a technical SEO audit?",
+            "answer":  "Run weekly crawls with a tool such as Screaming Frog or Sitebulb to catch broken links, duplicate meta tags, missing alt text and crawl budget problems, then cross-check the results against Google Search Console's Index Coverage report."
+        },
+        {
+            "question":  "What should I fix first when a crawl finds errors?",
+            "answer":  "Fix anything that blocks indexing first — canonical errors and noindex tags on important pages — before cosmetic issues such as missing meta descriptions."
+        },
+        {
+            "question":  "When is a content optimization tool worth paying for?",
+            "answer":  "Introduce a tool like Surfer SEO or Clearscope once you publish more than four articles per month. Below that threshold, manual analysis of top-ranking pages is sufficient."
+        },
+        {
+            "question":  "Which rank tracking data should I trust?",
+            "answer":  "Treat Google Search Console's average position as ground truth because it reflects real user impressions rather than simulated SERP checks, and segment your keyword tracker by topic clusters so you can see which content pillars are gaining or losing ground."
+        }
+    ],
     "slug":  "building-your-seo-toolkit",
     "title":  "SEO Stack: Building Your Toolkit",
     "description":  "Intermediate Marketing \u0026 SEO guide (~12 min read): how to evaluate the right SEO Stack. Start with SEMrush or Ahrefs to uncover high-volume,.",
@@ -53,7 +75,7 @@
                           "how-to-choose-an-ai-writing-tool"
                       ],
     "relatedComparisons":  [
-                               "semrush-vs-ahrefs"
+                               "ahrefs-vs-semrush"
                            ],
     "relatedPosts":  [
                          "build-seo-tech-stack"

@@ -4,10 +4,11 @@ import { Container, Section } from "@/components/ui/container"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { categories } from "@/lib/constants"
-import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms, getAllResearch } from "@/lib/content/registry"
+import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms, getAllResearch, isContentAvailable } from "@/lib/content/registry"
 import { ArrowRight, Star, BarChart3, Shield, BookOpen, FileText } from "lucide-react"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { BrandPattern, BrandOrb, BrandDivider } from "@/components/brand/patterns"
+import { BannerAd, NativeAd } from "@/components/ads"
 
 export const metadata = createMetadata({
   title: "Software Reviews & Buying Guides",
@@ -70,6 +71,13 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
+        </Container>
+      </section>
+
+      {/* Ad: Below hero banner */}
+      <section className="border-b border-border">
+        <Container className="py-8">
+          <BannerAd className="mx-auto max-w-[728px]" />
         </Container>
       </section>
 
@@ -137,6 +145,13 @@ export default function HomePage() {
         </Container>
       </Section>
 
+      {/* Ad: Between reviews and guides */}
+      <section className="border-b border-border">
+        <Container className="py-8">
+          <NativeAd className="mx-auto max-w-[300px]" />
+        </Container>
+      </section>
+
       <BrandDivider />
 
       {/* ── Trending Comparisons ── */}
@@ -159,7 +174,7 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="grid sm:grid-cols-2 gap-6">
-              {comparisons.slice(0, 4).map((cmp) => (
+              {comparisons.filter((cmp) => isContentAvailable("comparison", cmp.slug)).slice(0, 4).map((cmp) => (
                 <Link key={cmp.slug} href={`/comparisons/${cmp.slug}`} className="group card-hover-lift">
                   <Card className="h-full flex flex-col">
                     <div className="flex items-start justify-between mb-3">

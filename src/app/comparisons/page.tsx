@@ -5,8 +5,10 @@ import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/compon
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllComparisons } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 import { ComparisonGrid } from "@/components/entity/comparison-grid"
 import { BrandPattern } from "@/components/brand/patterns"
+import { BannerAd } from "@/components/ads"
 
 export const metadata = createMetadata({
   title: "Software Comparisons",
@@ -15,7 +17,7 @@ export const metadata = createMetadata({
 })
 
 export default function ComparisonsPage() {
-  const comparisons = getAllComparisons()
+  const comparisons = getAllComparisons().filter((c) => !isNoindexed("comparisons", c.slug))
 
   return (
     <>
@@ -38,6 +40,13 @@ export default function ComparisonsPage() {
           </SectionHeader>
         </Container>
       </section>
+
+      {/* Ad: After section header */}
+      <Section>
+        <Container>
+          <BannerAd className="mx-auto max-w-[728px]" />
+        </Container>
+      </Section>
 
       <Section>
         <Container>

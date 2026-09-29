@@ -16,7 +16,9 @@ import { EEATProcess } from "@/components/seo/editorial-process"
 import { isNoindexed } from "@/lib/noindex"
 
 export function generateStaticParams() {
-  return getAllBest().map((b) => ({ slug: b.slug }))
+  return getAllBest()
+    .filter((b) => !isNoindexed("best", b.slug))
+    .map((b) => ({ slug: b.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -36,13 +38,16 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   const page = getBest(slug)
   if (!page) notFound()
 
+  const linkedPicks = page.picks.filter((p) => getReview(p.toolSlug) !== null)
+  const reviewHref = (toolSlug: string) => (getReview(toolSlug) ? `/reviews/${toolSlug}` : null)
+
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Best Software", href: "/best" }, { name: page.title, href: `/best/${slug}` }]} />
-      <ArticleSchema title={page.title} description={page.description} publishedAt={page.lastUpdated} updatedAt={page.lastUpdated} author={page.author} url={`${site.url}/best/${slug}`} wordCount={page.description.split(/\s+/).length + page.picks.reduce((a, p) => a + p.pros.length + p.cons.length, 0) * 20} category={page.category} keywords={["best " + page.category.toLowerCase(), page.category + " software ranking", "top " + page.category.toLowerCase() + " tools", "software recommendations 2026", "expert picks"].filter(Boolean)} mentions={page.picks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} />
+      <ArticleSchema title={page.title} description={page.description} publishedAt={page.lastUpdated} updatedAt={page.lastUpdated} author={page.author} url={`${site.url}/best/${slug}`} wordCount={page.description.split(/\s+/).length + page.picks.reduce((a, p) => a + p.pros.length + p.cons.length, 0) * 20} category={page.category} keywords={["best " + page.category.toLowerCase(), page.category + " software ranking", "top " + page.category.toLowerCase() + " tools", "software recommendations 2026", "expert picks"].filter(Boolean)} mentions={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} />
       <CollectionPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} />
-      <ItemListSchema items={page.picks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} url={`${site.url}/best/${slug}`} />
-      <WebPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} dateModified={page.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: page.picks.map((p, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}`, category: getReview(p.toolSlug)?.category || page.category, rating: p.rating }) })) }} />
+      <ItemListSchema items={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} url={`${site.url}/best/${slug}`} />
+      <WebPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} dateModified={page.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: linkedPicks.map((p, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}`, category: getReview(p.toolSlug)?.category || page.category, rating: p.rating }) })) }} />
       <FAQSchema questions={page.faqs} path={`/best/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Best Software", href: "/best" }, { name: page.title }]} />
@@ -116,7 +121,11 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-3">
                             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white text-sm font-bold shrink-0">{pick.rank}</span>
-                            <Link href={`/reviews/${pick.toolSlug}`} className="text-lg font-bold hover:text-primary transition-colors">{pick.toolName}</Link>
+                            {reviewHref(pick.toolSlug) ? (
+                              <Link href={`/reviews/${pick.toolSlug}`} className="text-lg font-bold hover:text-primary transition-colors">{pick.toolName}</Link>
+                            ) : (
+                              <span className="text-lg font-bold">{pick.toolName}</span>
+                            )}
                           </div>
                           <div className="flex items-center gap-1 text-sm">
                             <Star size={14} className="fill-accent text-accent" />
@@ -144,9 +153,11 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                             </ul>
                           </div>
                         </div>
-                        <Link href={`/reviews/${pick.toolSlug}`} className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
-                          Read full review <ArrowRight size={12} />
-                        </Link>
+                        {reviewHref(pick.toolSlug) && (
+                          <Link href={`/reviews/${pick.toolSlug}`} className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
+                            Read full review <ArrowRight size={12} />
+                          </Link>
+                        )}
                       </div>
                     </GlassCard>
                   ))}
@@ -201,11 +212,16 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                   <div className="p-4">
                     <h3 className="font-semibold mb-3 text-sm">Top Picks</h3>
                     <div className="space-y-2">
-                      {page.picks.slice(0, 5).map((pick) => (
+                      {page.picks.slice(0, 5).map((pick) => reviewHref(pick.toolSlug) ? (
                         <Link key={pick.toolSlug} href={`/reviews/${pick.toolSlug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                           <span>{pick.rank}. {pick.toolName}</span>
                           <span className="text-xs font-medium">{pick.rating}/5</span>
                         </Link>
+                      ) : (
+                        <div key={pick.toolSlug} className="flex items-center justify-between text-sm text-muted-foreground py-1">
+                          <span>{pick.rank}. {pick.toolName}</span>
+                          <span className="text-xs font-medium">{pick.rating}/5</span>
+                        </div>
                       ))}
                     </div>
                   </div>

@@ -1,3 +1,4 @@
+import React from "react"
 import { Container, Section } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
@@ -9,6 +10,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowRight, ExternalLink, Code } from "lucide-react"
 import { isNoindexed } from "@/lib/noindex"
+import { InFeedAd } from "@/components/ads"
 
 const legacyStats: Record<string, {
   title: string; description: string; lastUpdated: string;
@@ -80,8 +82,13 @@ const legacyStats: Record<string, {
 }
 
 export function generateStaticParams() {
-  const registrySlugs = getAllStatistics().map((s) => ({ slug: s.slug }))
-  const legacySlugs = Object.keys(legacyStats).filter((slug) => !registrySlugs.some((r) => r.slug === slug)).map((slug) => ({ slug }))
+  const registrySlugs = getAllStatistics()
+    .filter((s) => !isNoindexed("statistics", s.slug))
+    .map((s) => ({ slug: s.slug }))
+  const legacySlugs = Object.keys(legacyStats)
+    .filter((slug) => !registrySlugs.some((r) => r.slug === slug))
+    .filter((slug) => !isNoindexed("statistics", slug))
+    .map((slug) => ({ slug }))
   return [...registrySlugs, ...legacySlugs]
 }
 
@@ -143,28 +150,35 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
               {" — "}Verified statistics with original source links. Free to cite with attribution. Last updated {page.lastUpdated}.
             </div>
 
-            {page.sections.map((section) => (
-              <section key={section.title} className="mb-12">
-                <h2 className="text-2xl font-bold tracking-tight mb-6">{section.title}</h2>
-                {section.body ? (
-                  <div className="mb-5 text-sm text-muted-foreground leading-relaxed space-y-3">
-                    {section.body.split(/\n+/).filter(Boolean).map((para, idx) => (
-                      <p key={idx}>{para}</p>
+            {page.sections.map((section, i) => (
+              <React.Fragment key={section.title}>
+                <section className="mb-12">
+                  <h2 className="text-2xl font-bold tracking-tight mb-6">{section.title}</h2>
+                  {section.body ? (
+                    <div className="mb-5 text-sm text-muted-foreground leading-relaxed space-y-3">
+                      {section.body.split(/\n+/).filter(Boolean).map((para, idx) => (
+                        <p key={idx}>{para}</p>
+                      ))}
+                    </div>
+                  ) : null}
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {section.stats.map((stat) => (
+                      <div key={stat.label} className="rounded-xl border border-border bg-card p-5 hover:border-primary/20 transition-colors">
+                        <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">{stat.value}</div>
+                        <p className="text-sm text-muted-foreground mb-3">{stat.label}</p>
+                        <a href={stat.sourceUrl} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 text-xs text-primary hover:underline">
+                          Source: {stat.source} <ExternalLink size={10} />
+                        </a>
+                      </div>
                     ))}
                   </div>
-                ) : null}
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {section.stats.map((stat) => (
-                    <div key={stat.label} className="rounded-xl border border-border bg-card p-5 hover:border-primary/20 transition-colors">
-                      <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">{stat.value}</div>
-                      <p className="text-sm text-muted-foreground mb-3">{stat.label}</p>
-                      <a href={stat.sourceUrl} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 text-xs text-primary hover:underline">
-                        Source: {stat.source} <ExternalLink size={10} />
-                      </a>
-                    </div>
-                  ))}
-                </div>
-              </section>
+                </section>
+                {i === Math.floor(page.sections.length / 2) - 1 && page.sections.length >= 3 && (
+                  <section className="my-10">
+                    <InFeedAd className="mx-auto max-w-[728px]" />
+                  </section>
+                )}
+              </React.Fragment>
             ))}
 
             <div className="mt-12 p-5 rounded-xl bg-surface-secondary border border-border text-xs text-muted-foreground">

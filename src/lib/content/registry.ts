@@ -1,8 +1,43 @@
 import type { ReviewContent, ComparisonContent, GuideContent, GlossaryContent, BlogContent, CategoryKnowledge, AlternativeContent, UseCaseContent, IndustryContent, ResearchContent, StatisticContent, BestContent, HubContent } from "@/types/content"
 import fs from "node:fs"
 import path from "node:path"
+import { isNoindexed } from "@/lib/noindex"
 
 const CONTENT_DIR = path.resolve(process.cwd(), "content")
+
+const DIR_FOR_TYPE: Record<string, string> = {
+  review: "reviews",
+  comparison: "comparisons",
+  guide: "guides",
+  blog: "blog",
+  glossary: "glossary",
+  alternative: "alternatives",
+  best: "best",
+  "use-case": "use-cases",
+  industry: "industries",
+  research: "research",
+  statistic: "statistics",
+  hub: "hubs",
+}
+
+// Content types whose templates emit a real noindex meta tag and that sitemap.ts filters.
+// Guides, blog, research, use-cases, industries and hubs are not noindexed by their templates,
+// so their slugs stay linkable even when listed in noindex-list.json (which for guides only
+// controls generateStaticParams).
+const NOINDEX_ENFORCED = new Set(["review", "comparison", "best", "alternative", "glossary", "statistic"])
+
+/**
+ * True when a content slug resolves to a page that is published, reachable and indexable.
+ * Use this before emitting an internal link so we never send users or crawlers to
+ * unpublished or suppressed content.
+ */
+export function isContentAvailable(type: string, slug: string): boolean {
+  const dir = DIR_FOR_TYPE[type]
+  if (!dir || !slug) return false
+  if (getContentTitle(type, slug) === null) return false
+  if (!NOINDEX_ENFORCED.has(type)) return true
+  return !isNoindexed(dir, slug)
+}
 
 const DATE_FIELDS = new Set(["lastUpdated", "lastReviewed", "publishedAt", "updatedAt", "datePublished", "dateModified"])
 
@@ -12,7 +47,22 @@ function toISODate(date: string): string {
   return d.toISOString().slice(0, 10)
 }
 
+// Content templates call the getAll* helpers once per component, and the link-availability
+// guards call the single-slug helpers once per candidate. Without a cache each of those calls
+// re-reads every file in the directory, which pushes static generation past the per-page
+// timeout. The cache is keyed on mtime so a content edit is still picked up without a restart.
+const jsonCache = new Map<string, { mtimeMs: number; data: unknown }>()
+
 function readJson<T>(filePath: string): T {
+  let mtimeMs = -1
+  try {
+    mtimeMs = fs.statSync(filePath).mtimeMs
+  } catch {
+    // Missing file — fall through to readFileSync so it throws exactly as before.
+  }
+  const cached = jsonCache.get(filePath)
+  if (cached && cached.mtimeMs === mtimeMs) return cached.data as T
+
   const raw = fs.readFileSync(filePath, "utf-8")
   const data = JSON.parse(raw) as Record<string, unknown>
   for (const key of Object.keys(data)) {
@@ -20,6 +70,7 @@ function readJson<T>(filePath: string): T {
       data[key] = toISODate(data[key])
     }
   }
+  if (mtimeMs !== -1) jsonCache.set(filePath, { mtimeMs, data })
   return data as T
 }
 

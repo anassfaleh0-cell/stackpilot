@@ -13,12 +13,16 @@ import { EditorialPricingLadder, EditorialFeatureRadar, EditorialImplementationF
 import { InternalLinks } from "@/components/content/internal-links"
 import { notFound } from "next/navigation"
 import Link from "next/link"
+import { authorSlugs } from "@/app/authors/[slug]/page"
 import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
 import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
 import { isNoindexed } from "@/lib/noindex"
+import { BannerAd, NativeAd, InFeedAd } from "@/components/ads"
 
 export function generateStaticParams() {
-  return getAllReviews().map((r) => ({ slug: r.slug }))
+  return getAllReviews()
+    .filter((r) => !isNoindexed("reviews", r.slug))
+    .map((r) => ({ slug: r.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -28,8 +32,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const wordCount = tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)
   const noindexed = isNoindexed("reviews", slug)
   return createMetadata({
-    title: `${tool.name} Review (2026): Pricing, Pros, Cons & Top Alternatives`,
-    description: `Hands-on ${tool.name} review. See real pros, cons, pricing details, and the best alternatives before you buy. Expert-tested for 2026.`,
+    title: tool.seoTitle || `${tool.name} Review (2026): Pricing, Pros, Cons & Top Alternatives`,
+    description:
+      tool.seoDescription ||
+      `Hands-on ${tool.name} review. See real pros, cons, pricing details, and the best alternatives before you buy. Expert-tested for 2026.`,
     path: `/reviews/${tool.slug}`,
     ogType: "article",
     publishedAt: tool.lastReviewed,
@@ -46,6 +52,9 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   if (!tool) notFound()
 
   const entity = getEntity(slug)
+
+  const authorSlug = tool.author ? tool.author.trim().toLowerCase().replace(/\s+/g, "-") : ""
+  const authorHref = authorSlug && authorSlugs.includes(authorSlug) ? `/authors/${authorSlug}` : null
 
   const allReviews = getAllReviews()
 
@@ -110,7 +119,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-1">
                 <span className="flex items-center gap-1">
                   <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                  Reviewed by <Link href="/authors/pilotstack-team" className="text-primary hover:underline">{tool.author}</Link>
+                  Reviewed by {authorHref ? <Link href={authorHref} className="text-primary hover:underline">{tool.author}</Link> : tool.author}
                 </span>
                 <span className="flex items-center gap-1">
                   <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
@@ -338,8 +347,18 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 const diagramBody = section.type === "diagram" ? section.body : null
                 const diagramKey = diagramBody === "pricing-ladder" || diagramBody === "feature-radar" || diagramBody === "implementation-flow" ? diagramBody : null
                 const hasDiagramContent = diagramKey !== null
+
+                // In-feed ad between 2nd and 3rd section (index 1 and 2) if 4+ sections
+                const showInFeedAd = i === 2 && tool.content.length >= 4
+
                 return (
-                <section key={i} className="mb-12 scroll-mt-24" id={`section-${i}`}>
+                  <>
+                    {showInFeedAd && (
+                      <section className="mb-12 scroll-mt-24" id="ad-in-feed">
+                        <InFeedAd className="mx-auto max-w-[728px]" />
+                      </section>
+                    )}
+                    <section key={i} className="mb-12 scroll-mt-24" id={`section-${i}`}>
                   {section.type === "diagram" ? (
                     hasDiagramContent ? (
                     <>
@@ -373,6 +392,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     </>
                   )}
                 </section>
+                  </>
                 )})}
 
               {/* Feature Breakdown */}
@@ -504,6 +524,11 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     </div>
                   </GlassCard>
                 )}
+
+                {/* Ad: Sidebar below verdict */}
+                <div className="ad-sidebar">
+                  <NativeAd className="w-full" />
+                </div>
               </div>
             </aside>
           </div>
@@ -535,6 +560,13 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 Prices and ratings are approximate and may vary. Last updated {tool.lastReviewed}.
               </p>
             </div>
+          </section>
+
+          {/* Ad: After FAQ section */}
+          <section className="mt-16 mb-16">
+            <Container>
+              <BannerAd className="mx-auto max-w-[728px]" />
+            </Container>
           </section>
 
           {entity && (

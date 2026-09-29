@@ -4,19 +4,23 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, BlogPostingSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getBlogPost, getContentTitle, getAllComparisons } from "@/lib/content/registry"
+import { getBlogPost, getContentTitle, isContentAvailable } from "@/lib/content/registry"
 import { formatDate } from "@/lib/utils"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { getAllReviews } from "@/lib/content/registry"
 import { EditorialHero, EditorialCallout, GlassCard, InfoCard } from "@/components/dynamic"
-import { RelatedContent } from "@/components/dynamic-client"
+import { RelatedContent } from "@/components/content/related-content"
 import { BrandDivider } from "@/components/brand/patterns"
 import { Clock, User, Calendar, Star } from "lucide-react"
+import { InFeedAd } from "@/components/ads"
 
 export async function generateStaticParams() {
   const { getAllBlogPosts } = await import("@/lib/content/registry")
-  return getAllBlogPosts().map((p) => ({ slug: p.slug }))
+  const { isNoindexed } = await import("@/lib/noindex")
+  return getAllBlogPosts()
+    .filter((p) => !isNoindexed("blog", p.slug))
+    .map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -37,7 +41,57 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   ).slice(0, 3)
 
   const paragraphs = post.body.split("\n\n").filter(Boolean)
-  const midPoint = Math.floor(paragraphs.length / 2)
+  const isStructural = (b: string) => b.startsWith("##") || b.startsWith("|")
+  const proseIndices = paragraphs
+    .map((b, i) => (isStructural(b) ? -1 : i))
+    .filter((i) => i >= 0 && paragraphs[i].length > 80)
+  const midPoint = proseIndices.length > 0 ? proseIndices[Math.floor(proseIndices.length / 2)] : Math.floor(paragraphs.length / 2)
+
+  const renderInline = (text: string, keyBase: string) => {
+    const segments = text.split(/\*\*([^*]+)\*\*/g)
+    return segments.map((segment, i) =>
+      i % 2 === 1 ? <strong key={`${keyBase}-b${i}`}>{segment}</strong> : <span key={`${keyBase}-t${i}`}>{segment}</span>
+    )
+  }
+
+  const renderBlock = (block: string, keyBase: string) => {
+    const lines = block.split("\n").filter(Boolean)
+    const first = lines[0] ?? ""
+    if (first.startsWith("### ")) {
+      return <h3 key={keyBase} className="text-lg font-semibold tracking-tight mt-8 mb-3">{first.slice(4)}</h3>
+    }
+    if (first.startsWith("## ")) {
+      return <h2 key={keyBase} className="text-2xl font-bold tracking-tight mt-10 mb-4">{first.slice(3)}</h2>
+    }
+    if (first.startsWith("|") && lines.length >= 2) {
+      const cells = (line: string) => line.replace(/^\||\|$/g, "").split("|").map((c) => c.trim())
+      const header = cells(first)
+      const bodyRows = lines.filter((l) => !/^\|[\s:|-]+\|?$/.test(l)).slice(1)
+      return (
+        <div key={keyBase} className="overflow-x-auto my-6">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b border-border">
+                {header.map((col, j) => (
+                  <th key={j} className="text-left py-2 px-3 font-semibold text-foreground">{col}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {bodyRows.map((row, i) => (
+                <tr key={i} className="border-b border-border/50">
+                  {cells(row).map((cell, j) => (
+                    <td key={j} className="py-2.5 px-3 text-muted-foreground">{renderInline(cell, `r${i}c${j}`)}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )
+    }
+    return <p key={keyBase}>{renderInline(block, keyBase)}</p>
+  }
 
   return (
     <>
@@ -107,21 +161,26 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {/* First half of content */}
             <div className="space-y-5 leading-relaxed text-foreground/85">
               {paragraphs.slice(0, midPoint).map((paragraph, i) => (
-                <p key={i}>{paragraph.trim()}</p>
+                <div key={i} className="space-y-5">{renderBlock(paragraph, `a${i}`)}</div>
               ))}
             </div>
+
+            {/* Ad: In-feed mid-article */}
+            <section className="my-10">
+              <InFeedAd className="mx-auto max-w-[728px]" />
+            </section>
 
             {/* Pull quote (midpoint callout) */}
             <div className="my-10">
               <div className="pull-quote">
-                {paragraphs[midPoint]?.slice(0, 150).trim() || "Key insight from this analysis."}
+                {(paragraphs[midPoint] || "").replace(/^#{1,6}\s*/, "").replace(/\*\*/g, "").slice(0, 150).trim() || "Key insight from this analysis."}
               </div>
             </div>
 
             {/* Second half of content */}
             <div className="mt-6 space-y-5 leading-relaxed text-foreground/85">
               {paragraphs.slice(midPoint + 1).map((paragraph, i) => (
-                <p key={i}>{paragraph.trim()}</p>
+                <div key={i} className="space-y-5">{renderBlock(paragraph, `b${i}`)}</div>
               ))}
             </div>
 
@@ -194,10 +253,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <RelatedContent
               items={[
                 ...(post.relatedGuides || []).filter(s => getContentTitle("guide", s)).map(s => ({ slug: s, type: "guide" as const, title: getContentTitle("guide", s) ?? undefined })),
-                ...(post.relatedComparisons || []).filter(s => getAllComparisons().some(c => c.slug === s)).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
+                ...(post.relatedComparisons || []).filter(s => isContentAvailable("comparison", s)).map(s => ({ slug: s, type: "comparison" as const, title: getContentTitle("comparison", s) ?? undefined })),
+                ...(post.relatedPosts || []).filter(s => s !== post.slug && getContentTitle("blog", s)).map(s => ({ slug: s, type: "blog" as const, title: getContentTitle("blog", s) ?? undefined })),
                 ...(post.relatedGlossary || []).filter(s => getContentTitle("glossary", s)).map(s => ({ slug: s, type: "glossary" as const, title: getContentTitle("glossary", s) ?? undefined })),
               ]}
               title="Related Resources"
+              maxItems={8}
             />
           </div>
         </Container>

@@ -1,4 +1,4 @@
-import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms, getAllAlternatives, getAllUseCases, getAllIndustries, getAllResearch, getAllStatistics, getAllBest, getAllHubs } from "./registry"
+import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms, getAllAlternatives, getAllUseCases, getAllIndustries, getAllResearch, getAllStatistics, getAllBest, getAllHubs, isContentAvailable } from "./registry"
 import { categories } from "@/lib/constants"
 import type { EntityRelationship } from "@/types/content"
 
@@ -40,7 +40,7 @@ function buildGraph(): EntityGraph {
   }
 
   const reviews = getAllReviews()
-  const comparisons = getAllComparisons()
+  const comparisons = getAllComparisons().filter((c) => isContentAvailable("comparison", c.slug))
   const guides = getAllGuides()
   const posts = getAllBlogPosts()
   const glossary = getAllGlossaryTerms()

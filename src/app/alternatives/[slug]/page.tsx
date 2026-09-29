@@ -16,7 +16,9 @@ import { EEATProcess } from "@/components/seo/editorial-process"
 import { isNoindexed } from "@/lib/noindex"
 
 export function generateStaticParams() {
-  return getAllAlternatives().map((a) => ({ slug: a.slug }))
+  return getAllAlternatives()
+    .filter((a) => !isNoindexed("alternatives", a.slug))
+    .map((a) => ({ slug: a.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {

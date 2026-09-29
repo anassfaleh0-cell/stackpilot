@@ -4,15 +4,16 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, AboutPageSchema, ArticleSchema, WebPageSchema, ItemListSchema, softwareApp } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getUseCase, getAllUseCases, getContentTitle, getReview } from "@/lib/content/registry"
+import { getUseCase, getAllUseCases, getReview } from "@/lib/content/registry"
 import { truncate, formatDate } from "@/lib/utils"
 import { InternalLinks } from "@/components/content/internal-links"
-import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
+import { RelatedReading } from "@/components/content/related-reading"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, AlertTriangle, Lightbulb } from "lucide-react"
 import { EditorialHero, GlassCard, InfoCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
+import { InFeedAd } from "@/components/ads"
 
 export function generateStaticParams() {
   return getAllUseCases().map((u) => ({ slug: u.slug }))
@@ -63,6 +64,46 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">{uc.useCaseDescription}</p>
 
               <section className="mb-10">
+                <h2 className="text-2xl font-bold tracking-tight mb-4">At a Glance</h2>
+                <div className="overflow-x-auto rounded-xl border border-border">
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="border-b border-border bg-muted-bg">
+                        <th className="text-left py-2.5 px-3 font-semibold">Tool</th>
+                        <th className="text-left py-2.5 px-3 font-semibold">Rating</th>
+                        <th className="text-left py-2.5 px-3 font-semibold">Best for</th>
+                        <th className="text-left py-2.5 px-3 font-semibold">Pricing</th>
+                        <th className="text-left py-2.5 px-3 font-semibold"><span className="sr-only">Review</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {uc.recommendations.map((rec) => {
+                        const review = getReview(rec.toolSlug)
+                        return (
+                          <tr key={rec.toolSlug} className="border-b border-border/50 hover:bg-accent-subtle/20 transition-colors">
+                            <td className="py-2.5 px-3 font-medium">
+                              <Link href={`/reviews/${rec.toolSlug}`} className="hover:text-primary transition-colors">{rec.toolName}</Link>
+                            </td>
+                            <td className="py-2.5 px-3 text-muted-foreground">{rec.rating}/5</td>
+                            <td className="py-2.5 px-3 text-muted-foreground">{rec.bestFor}</td>
+                            <td className="py-2.5 px-3 text-muted-foreground">
+                              {review?.priceRange ? `${review.priceRange} (${review.pricing})` : review?.pricing || "See review"}
+                            </td>
+                            <td className="py-2.5 px-3">
+                              <Link href={`/reviews/${rec.toolSlug}`} className="text-primary hover:underline whitespace-nowrap">Read review</Link>
+                            </td>
+                          </tr>
+                        )
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Ratings and pricing ranges are taken from our published hands-on reviews and may change when vendors update their plans.
+                </p>
+              </section>
+
+              <section className="mb-10">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Top Recommendations</h2>
                 <div className="space-y-4">
                   {uc.recommendations.map((rec) => (
@@ -92,6 +133,11 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
                     </GlassCard>
                   ))}
                 </div>
+              </section>
+
+              {/* Ad: In-feed between sections */}
+              <section className="my-10">
+                <InFeedAd className="mx-auto max-w-[728px]" />
               </section>
 
               {uc.selectionCriteria.length > 0 && (
@@ -169,9 +215,12 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
 
           <InternalLinks category={uc.category} excludeSlug={uc.slug} />
           
-          <EnhancedRelatedContent
-            title="More Resources"
-            maxItems={6}
+          <RelatedReading
+            title="Keep Reading"
+            excludeSlug={uc.slug}
+            comparisons={uc.relatedComparisons}
+            guides={uc.relatedGuides}
+            posts={uc.relatedPosts}
           />
         </Container>
       </article>

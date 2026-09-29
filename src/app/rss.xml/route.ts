@@ -1,9 +1,9 @@
 import { site } from "@/lib/constants"
-import { getAllBlogPosts, getAllReviews, getAllGuides, getAllComparisons, getAllResearch } from "@/lib/content/registry"
+import { getAllBlogPosts, getAllReviews, getAllGuides, getAllComparisons, getAllResearch, isContentAvailable } from "@/lib/content/registry"
 
 export async function GET() {
   const reviews = getAllReviews().slice(0, 20)
-  const comparisons = getAllComparisons().slice(0, 20)
+  const comparisons = getAllComparisons().filter((c) => isContentAvailable("comparison", c.slug)).slice(0, 20)
   const guides = getAllGuides().slice(0, 15)
   const posts = getAllBlogPosts().slice(0, 15)
   const research = getAllResearch().slice(0, 10)
