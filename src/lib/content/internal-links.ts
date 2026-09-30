@@ -21,7 +21,7 @@ export function getRelatedByCategory(
   alternatives: RelatedItem[]
 } {
   const reviews: RelatedItem[] = getAllReviews()
-    .filter((r) => r.category === category && r.slug !== excludeSlug)
+    .filter((r) => isContentAvailable("review", r.slug) && r.category === category && r.slug !== excludeSlug)
     .sort((a, b) => (b.rating || 0) - (a.rating || 0))
     .map((r) => ({ slug: r.slug, title: r.name, type: "review" as const, category: r.category, rating: r.rating }))
     .slice(0, maxPerType)
@@ -33,7 +33,7 @@ export function getRelatedByCategory(
     .slice(0, maxPerType)
 
   const guides: RelatedItem[] = getAllGuides()
-    .filter((g) => g.category === category && g.slug !== excludeSlug)
+    .filter((g) => isContentAvailable("guide", g.slug) && g.category === category && g.slug !== excludeSlug)
     .sort((a, b) => (b.lastUpdated || "").localeCompare(a.lastUpdated || ""))
     .map((g) => ({ slug: g.slug, title: g.title, type: "guide" as const, category: g.category }))
     .slice(0, maxPerType)

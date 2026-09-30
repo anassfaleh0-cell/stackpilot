@@ -6,6 +6,7 @@ import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/compon
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllGuides } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 import Link from "next/link"
 import { ArrowRight, Clock, Layers } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
@@ -18,7 +19,7 @@ export const metadata = createMetadata({
 })
 
 export default function GuidesPage() {
-  const guides = getAllGuides()
+  const guides = getAllGuides().filter((g) => !isNoindexed("guides", g.slug))
 
   return (
     <>

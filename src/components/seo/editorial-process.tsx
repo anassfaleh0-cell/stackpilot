@@ -4,8 +4,8 @@ import { CheckCircle2, FileText, Star, Calendar, Users, Shield } from "lucide-re
 
 const steps = [
   { icon: <FileText size={14} />, label: "Research", description: "We analyze market data, vendor documentation, and user reviews before testing." },
-  { icon: <Users size={14} />, label: "Hands-on Testing", description: "Every tool is tested for at least two weeks in realistic workflows by our team." },
-  { icon: <Star size={14} />, label: "Scoring", description: "Nine-dimension rubric covering features, usability, pricing, support, security, integrations, performance, documentation, and scalability." },
+  { icon: <Users size={14} />, label: "Testing Protocol", description: "Our published protocol specifies at least two weeks of evaluation in realistic workflows before a rating is issued." },
+  { icon: <Star size={14} />, label: "Scoring", description: "Five-dimension rubric covering features, ease of use, support, value, and performance, each weighted 20%." },
   { icon: <CheckCircle2 size={14} />, label: "Verification", description: "Findings cross-referenced against G2, Capterra, and TrustRadius user reviews." },
   { icon: <Calendar size={14} />, label: "Review", description: "Each review is reviewed by a second analyst before publication." },
   { icon: <Shield size={14} />, label: "Independence", description: "No vendor can pay for placement or influence ratings." },

@@ -5,6 +5,9 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import Link from "next/link"
 import { Download, ExternalLink, Users, Newspaper, FileText, Image as ImageIcon } from "lucide-react"
+import sitemapRoute from "@/app/sitemap"
+
+const publishedPages = sitemapRoute().length
 
 export const metadata = createMetadata({
   title: "Press & Media — PilotStack News, Logos & Interviews",
@@ -43,7 +46,7 @@ export default function PressPage() {
             <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center gap-2"><Newspaper size={20} /> About PilotStack</h2>
             <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is an independent software review and research platform. We provide in-depth, hands-on reviews of B2B SaaS tools across 12 categories, helping businesses make informed software purchasing decisions. Our small, independent team tests every product extensively per our published methodology before publishing verified ratings and comparisons.</p>
             <div className="grid sm:grid-cols-3 gap-4 text-sm">
-              <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">695+</div><div className="text-muted-foreground">Published pages</div></div>
+              <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">{publishedPages}</div><div className="text-muted-foreground">Published pages</div></div>
               <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">1.1M+</div><div className="text-muted-foreground">Words of research</div></div>
               <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">12</div><div className="text-muted-foreground">Software categories</div></div>
             </div>

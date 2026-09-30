@@ -207,7 +207,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </li>
                     <li className="flex items-start gap-3 text-sm">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">3</span>
-                      <span className="text-muted-foreground">Based on real testing and expert evaluation by {post.author}</span>
+                      <span className="text-muted-foreground">Written and edited by {post.author} under our published methodology</span>
                     </li>
                   </ul>
                 </div>

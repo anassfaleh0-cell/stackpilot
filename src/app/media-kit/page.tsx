@@ -5,6 +5,11 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import Link from "next/link"
 import { ExternalLink, Mail } from "lucide-react"
+import sitemapRoute from "@/app/sitemap"
+
+const sitemapEntries = sitemapRoute()
+const countIn = (segment: string) => sitemapEntries.filter((e) => e.url.includes(segment)).length
+const totalUrls = sitemapEntries.length
 
 export const metadata = createMetadata({
   title: "Media Kit — PilotStack Brand Assets & Press Guidelines",
@@ -13,11 +18,11 @@ export const metadata = createMetadata({
 })
 
 const stats = [
-  { value: "695+", label: "Published pages" },
+  { value: String(totalUrls), label: "Published pages" },
   { value: "1.1M+", label: "Words of research" },
-  { value: "150+", label: "In-depth tool reviews" },
+  { value: String(countIn("/reviews/")), label: "In-depth tool reviews" },
   { value: "12", label: "Software categories" },
-  { value: "616", label: "Published comparisons" },
+  { value: String(countIn("/comparisons/")), label: "Published comparisons" },
   { value: "2024", label: "Founded" },
 ]
 
@@ -31,7 +36,7 @@ const milestones = [
   { year: "2025 Q3", event: "Expanded to 12 categories; launched industry pages" },
   { year: "2025 Q4", event: "Published 500+ pages of software research" },
   { year: "2026 Q1", event: "Launched statistics and data pages" },
-  { year: "2026 Q2", event: "695+ pages, 1.1M+ words, full category coverage" },
+  { year: "2026 Q2", event: "Full category coverage across reviews, comparisons, and guides" },
 ]
 
 export default function MediaKitPage() {
@@ -70,7 +75,7 @@ export default function MediaKitPage() {
               {[
                 { title: "Independent Testing", desc: "Every tool is tested hands-on by our team before receiving a rating. No vendor can influence scores." },
                 { title: "Standardized Methodology", desc: "All reviews follow a consistent two-week testing protocol with independently verified findings." },
-                { title: "Transparent Criteria", desc: "Our scoring rubric evaluates features, pricing, usability, support, security, and performance on a 1-5 scale." },
+                { title: "Transparent Criteria", desc: "Our scoring rubric evaluates features, ease of use, support, value, and performance on a 1-5 scale, each dimension weighted 20%." },
                 { title: "Regular Updates", desc: "Reviews are updated at least annually to reflect product changes, pricing updates, and market developments." },
               ].map((s) => (
                 <div key={s.title} className="p-4 rounded-xl border border-border">

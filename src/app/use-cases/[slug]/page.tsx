@@ -99,7 +99,7 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
                   </table>
                 </div>
                 <p className="text-xs text-muted-foreground mt-2">
-                  Ratings and pricing ranges are taken from our published hands-on reviews and may change when vendors update their plans.
+                  Ratings and pricing ranges are taken from our published reviews and may change when vendors update their plans.
                 </p>
               </section>
 

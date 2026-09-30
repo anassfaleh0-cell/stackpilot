@@ -14,9 +14,9 @@ export const metadata = createMetadata({
 })
 
 export default function SitemapPage() {
-  const reviews = getAllReviews()
+  const reviews = getAllReviews().filter(r => !isNoindexed("reviews", r.slug))
   const comparisons = getAllComparisons().filter(c => !isNoindexed("comparisons", c.slug))
-  const guides = getAllGuides()
+  const guides = getAllGuides().filter(g => !isNoindexed("guides", g.slug))
   const best = getAllBest()
   const alternatives = getAllAlternatives()
   const useCases = getAllUseCases()

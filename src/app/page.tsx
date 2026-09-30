@@ -17,9 +17,9 @@ export const metadata = createMetadata({
 })
 
 export default function HomePage() {
-  const reviews = getAllReviews()
+  const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug))
   const comparisons = getAllComparisons()
-  const guides = getAllGuides()
+  const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug))
   const posts = getAllBlogPosts()
   const glossary = getAllGlossaryTerms()
   const allResearch = getAllResearch()
@@ -54,7 +54,7 @@ export default function HomePage() {
               {" "}with confidence
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10 text-pretty">
-              Expert reviews, honest comparisons, and practical guides — every tool tested and evaluated by our team so you can choose with certainty.
+              Expert reviews, honest comparisons, and practical guides — every review scored against the same published rubric so you can choose with certainty.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
@@ -362,8 +362,8 @@ export default function HomePage() {
                   <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold mb-0.5">Hands-On Testing</h3>
-                  <p className="text-xs text-muted-foreground">Every tool tested for 2+ weeks by our team</p>
+                  <h3 className="text-sm font-semibold mb-0.5">Standardized Reviews</h3>
+                  <p className="text-xs text-muted-foreground">Every review follows the same published rubric</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -453,7 +453,7 @@ export default function HomePage() {
               Expert advice, straight to your inbox
             </h2>
             <p className="text-muted-foreground text-pretty">
-              Independent research and hands-on software reviews, straight to your inbox. No spam, unsubscribe anytime.
+              Independent research and software reviews, straight to your inbox. No spam, unsubscribe anytime.
             </p>
           </div>
           <div className="mx-auto max-w-md">

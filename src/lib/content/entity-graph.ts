@@ -39,9 +39,9 @@ function buildGraph(): EntityGraph {
     }
   }
 
-  const reviews = getAllReviews()
+  const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug))
   const comparisons = getAllComparisons().filter((c) => isContentAvailable("comparison", c.slug))
-  const guides = getAllGuides()
+  const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug))
   const posts = getAllBlogPosts()
   const glossary = getAllGlossaryTerms()
   const alternatives = getAllAlternatives()

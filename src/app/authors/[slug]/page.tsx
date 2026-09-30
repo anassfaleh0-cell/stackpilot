@@ -11,6 +11,12 @@ import { BookOpen, Calendar } from "lucide-react"
 import { getAllReviews, getAllGuides, getAllBlogPosts } from "@/lib/content/registry"
 import { ReviewCardGrid } from "@/components/entity/review-card-grid"
 import { SocialFooterIcons } from "@/components/brand/social-icons"
+import sitemapRoute from "@/app/sitemap"
+
+const sitemapEntries = sitemapRoute()
+const countIn = (segment: string) => sitemapEntries.filter((e) => e.url.includes(segment)).length
+const reviewCount = countIn("/reviews/")
+const comparisonCount = countIn("/comparisons/")
 
 const authorSocial = {
   twitter: site.links.twitter,
@@ -25,7 +31,7 @@ const authors = {
     bio: "Sarah founded PilotStack after a decade in product management at SaaS companies. She saw how broken the software review landscape was — full of biased rankings and sites that clearly hadn't tested the tools they recommended. She built PilotStack to fix that. Sarah personally reviews tools in the Project Management, CRM, and Productivity categories, and leads the editorial team's testing methodology.",
     avatar: "/logo-icon.svg",
     expertise: ["Product Management", "SaaS Evaluation", "Editorial Strategy", "Project Management", "CRM"],
-    credentials: ["10+ years in SaaS product management", "Tested 150+ tools hands-on", "Published methodology designer"],
+    credentials: ["10+ years in SaaS product management", "Published methodology designer"],
     social: { twitter: authorSocial.twitter, github: authorSocial.github },
     worksFor: "PilotStack",
     knowsAbout: ["Software Reviews", "Product Management", "B2B SaaS", "CRM Systems"],
@@ -55,10 +61,10 @@ const authors = {
   "pilotstack-team": {
     name: "PilotStack Team",
     role: "Editorial Team",
-    bio: "The PilotStack team has tested 151+ software tools across 12 categories. Every review is based on at least 2 weeks of hands-on testing using a standardized methodology. We don't accept payment for reviews or rankings.",
+    bio: "The PilotStack team publishes software reviews across 12 categories, each scored against our standardized five-dimension rubric. We don't accept payment for reviews or rankings.",
     avatar: "/logo-icon.svg",
     expertise: ["SaaS evaluation", "Software pricing analysis", "AI tools comparison", "B2B software buying", "CRM and project management", "Developer tools assessment"],
-    credentials: ["Reviewed 151+ software tools since 2024", "Published 616+ head-to-head comparisons", "Original SaaS pricing benchmark data", "Methodology transparent and publicly available"],
+    credentials: [`Reviewed ${reviewCount} software tools since 2024`, `Published ${comparisonCount} head-to-head comparisons`, "Original SaaS pricing benchmark data", "Methodology transparent and publicly available"],
     social: { twitter: authorSocial.twitter, linkedin: authorSocial.linkedin },
     worksFor: "PilotStack",
     knowsAbout: ["Software Reviews", "SaaS Evaluation", "B2B Software", "Market Research"],

@@ -21,10 +21,9 @@ const DIR_FOR_TYPE: Record<string, string> = {
 }
 
 // Content types whose templates emit a real noindex meta tag and that sitemap.ts filters.
-// Guides, blog, research, use-cases, industries and hubs are not noindexed by their templates,
-// so their slugs stay linkable even when listed in noindex-list.json (which for guides only
-// controls generateStaticParams).
-const NOINDEX_ENFORCED = new Set(["review", "comparison", "best", "alternative", "glossary", "statistic"])
+// Blog, research, use-cases, industries and hubs carry no noindex entries, so their slugs
+// stay linkable; guides are enforced like reviews and comparisons.
+const NOINDEX_ENFORCED = new Set(["review", "comparison", "guide", "best", "alternative", "glossary", "statistic"])
 
 /**
  * True when a content slug resolves to a page that is published, reachable and indexable.

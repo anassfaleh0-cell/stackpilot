@@ -60,14 +60,14 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
           <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-            <p className="text-sm text-muted-foreground">After hands-on testing of {page.picks.length} leading {page.category.toLowerCase()} tools, our top pick is <strong>{page.picks[0]?.toolName}</strong> (rating {page.picks[0]?.rating}/5, from {page.picks[0]?.priceRange}). Each tool was evaluated across {page.criteria.length} criteria including features, ease of use, value, and performance.</p>
+            <p className="text-sm text-muted-foreground">Our top pick from {page.picks.length} leading {page.category.toLowerCase()} tools is <strong>{page.picks[0]?.toolName}</strong> (rating {page.picks[0]?.rating}/5, from {page.picks[0]?.priceRange}). Each tool was assessed across {page.criteria.length} criteria including features, ease of use, value, and performance.</p>
           </div>
 
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">TL;DR</h2>
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
               <li><strong>#1 pick:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}</li>
-              <li>{page.picks.length} tools tested and ranked across {page.criteria.length} evaluation criteria</li>
+              <li>{page.picks.length} tools compared and ranked across {page.criteria.length} evaluation criteria</li>
               <li>Price range: from {page.picks.reduce((min, p) => Math.min(min, parseInt(p.priceRange.replace(/[^0-9]/g, "")) || 999), 999)} to {page.picks.reduce((max, p) => Math.max(max, parseInt(p.priceRange.replace(/[^0-9]/g, "")) || 0), 0)} per month</li>
               <li>Every pick includes real pros, cons, and best-fit use cases</li>
               <li>Category: {page.category} — last verified {formatDate(page.lastUpdated)}</li>
@@ -77,7 +77,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
           <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
             <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-              <li>{page.picks.length} top {page.category.toLowerCase()} tools ranked after hands-on testing</li>
+              <li>{page.picks.length} top {page.category.toLowerCase()} tools ranked against our published criteria</li>
               <li>Evaluation criteria: {page.criteria.join(", ")}</li>
               <li>Top pick: {page.picks[0]?.toolName} ({page.picks[0]?.rating}/5, from {page.picks[0]?.priceRange}) — {page.picks[0]?.bestFor}</li>
               {page.picks[1] ? <li>Runner-up: {page.picks[1].toolName} ({page.picks[1].rating}/5, from {page.picks[1].priceRange})</li> : null}

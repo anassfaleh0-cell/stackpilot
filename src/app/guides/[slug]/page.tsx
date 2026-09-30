@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const guide = getGuide(slug)
   if (!guide) return {}
   const seoDesc = truncate(guide.description, 160)
-  return createMetadata({ title: truncate(guide.title, 60), description: seoDesc, path: `/guides/${slug}`, ogType: "article", publishedAt: guide.lastUpdated, updatedAt: guide.lastUpdated, articleSection: guide.category, readingTime: guide.readingTime })
+  return createMetadata({ title: truncate(guide.title, 60), description: seoDesc, path: `/guides/${slug}`, ogType: "article", publishedAt: guide.lastUpdated, updatedAt: guide.lastUpdated, articleSection: guide.category, readingTime: guide.readingTime, noIndex: isNoindexed("guides", slug) })
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -129,8 +129,8 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                 <li>Difficulty level: {guide.difficulty}</li>
                 <li>Total sections: {guide.sections.length}</li>
                 <li>{guide.relatedTools.length > 0 ? `${guide.relatedTools.length} related tools covered` : "Practical guidance for software selection"}</li>
-                <li>Includes expert tips, checklists, and comparison tables</li>
-                <li>Based on hands-on testing and verified data sources</li>
+                {guide.sections.some((s) => s.type === "checklist" || s.type === "table") && <li>Includes checklists and comparison tables</li>}
+                <li>Written against our published editorial methodology</li>
                 <li>Regularly updated to reflect market changes</li>
               </ul>
             </div>

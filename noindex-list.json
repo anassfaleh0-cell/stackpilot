@@ -2,8 +2,8 @@
   "generatedAt": "2026-09-19T01:24:35.342Z",
   "summary": {
     "totalFiles": 1799,
-    "totalKeep": 448,
-    "totalNoindex": 1351
+    "totalKeep": 344,
+    "totalNoindex": 1455
   },
   "directories": {
     "comparisons": {
@@ -11,54 +11,16 @@
       "keep": [
         "1password-vs-dashlane",
         "1password-vs-lastpass",
-        "adp-vs-deel",
-        "ahrefs-vs-moz",
-        "ahrefs-vs-semrush",
-        "airtable-vs-asana",
-        "airtable-vs-clickup",
-        "airtable-vs-notion",
-        "amplitude-vs-hotjar",
-        "asana-vs-clickup",
-        "asana-vs-linear",
-        "asana-vs-trello",
-        "bamboohr-vs-adp",
-        "bamboohr-vs-deel",
         "bitwarden-vs-dashlane",
-        "bitwarden-vs-lastpass",
-        "calendly-vs-acuity",
-        "calendly-vs-cal-com",
-        "canva-vs-adobe-express",
-        "canva-vs-framer",
-        "canva-vs-sketch",
-        "chatgpt-vs-claude",
-        "chatgpt-vs-copilot",
-        "chatgpt-vs-gemini",
-        "chatgpt-vs-perplexity",
-        "clickup-vs-asana",
-        "clickup-vs-jira",
-        "clickup-vs-monday-com",
-        "clickup-vs-trello",
-        "confluence-vs-notion",
-        "docker-vs-containerd",
-        "docker-vs-podman",
-        "figma-vs-adobe-xd",
-        "figma-vs-framer",
         "firebase-vs-appwrite",
-        "framer-vs-sketch",
-        "framer-vs-webflow",
-        "framer-vs-wordpress",
-        "github-vs-bitbucket",
-        "github-vs-sourceforge",
         "gitlab-vs-bitbucket",
-        "google-analytics-vs-amplitude",
-        "google-analytics-vs-hotjar",
-        "google-analytics-vs-matomo",
-        "gusto-vs-deel",
-        "gusto-vs-rippling",
         "hotjar-vs-fullstory",
-        "hubspot-vs-freshsales",
-        "hubspot-vs-pipedrive",
-        "hubspot-vs-salesforce"
+        "clickup-vs-notion-small-teams",
+        "hubspot-vs-salesforce-startups",
+        "linear-vs-jira-startups",
+        "notion-vs-obsidian-for-teams",
+        "slack-vs-microsoft-teams-remote",
+        "trello-vs-asana-personal-use"
       ],
       "noindex": [
         "hubspot-vs-zendesk",
@@ -376,7 +338,6 @@
         "clickup-vs-evernote",
         "clickup-vs-gusto",
         "clickup-vs-microsoft-teams",
-        "clickup-vs-notion-small-teams",
         "clickup-vs-smartsheet",
         "clickup-vs-wrike",
         "close-crm-vs-copper-crm",
@@ -693,7 +654,6 @@
         "hubspot-vs-mailchimp",
         "hubspot-vs-marketo",
         "hubspot-vs-outreach-io",
-        "hubspot-vs-salesforce-startups",
         "hubspot-vs-salesloft",
         "hubspot-vs-zoho-crm",
         "integromat-vs-make",
@@ -738,7 +698,6 @@
         "lever-vs-rippling",
         "lever-vs-workday",
         "lever-vs-zoho-people",
-        "linear-vs-jira-startups",
         "linear-vs-smartsheet",
         "linear-vs-trello",
         "linear-vs-wrike",
@@ -793,7 +752,6 @@
         "new-relic-vs-supabase",
         "new-relic-vs-terraform",
         "new-relic-vs-vercel",
-        "notion-vs-obsidian-for-teams",
         "notion-vs-roam-research",
         "notion-vs-todoist",
         "notion-vs-typeform",
@@ -897,7 +855,6 @@
         "shopify-vs-xero",
         "shopify-vs-zoho-books",
         "sketch-vs-zeplin",
-        "slack-vs-microsoft-teams-remote",
         "slack-vs-telegram",
         "slack-vs-vonage",
         "slack-vs-webex",
@@ -923,7 +880,6 @@
         "telegram-vs-zoom",
         "terraform-vs-vercel",
         "todoist-vs-typeform",
-        "trello-vs-asana-personal-use",
         "trello-vs-wrike",
         "vidyard-vs-vimeo-record",
         "vonage-vs-webex",
@@ -938,7 +894,51 @@
         "xero-vs-zoho-books",
         "zendesk-vs-zoho-crm",
         "zendesk-vs-zoho",
-        "zoho-vs-zoho-crm"
+        "zoho-vs-zoho-crm",
+        "adp-vs-deel",
+        "ahrefs-vs-moz",
+        "ahrefs-vs-semrush",
+        "airtable-vs-asana",
+        "airtable-vs-clickup",
+        "airtable-vs-notion",
+        "amplitude-vs-hotjar",
+        "asana-vs-clickup",
+        "asana-vs-linear",
+        "asana-vs-trello",
+        "bamboohr-vs-adp",
+        "bamboohr-vs-deel",
+        "bitwarden-vs-lastpass",
+        "calendly-vs-acuity",
+        "calendly-vs-cal-com",
+        "canva-vs-adobe-express",
+        "canva-vs-framer",
+        "canva-vs-sketch",
+        "chatgpt-vs-claude",
+        "chatgpt-vs-copilot",
+        "chatgpt-vs-gemini",
+        "chatgpt-vs-perplexity",
+        "clickup-vs-asana",
+        "clickup-vs-jira",
+        "clickup-vs-monday-com",
+        "clickup-vs-trello",
+        "confluence-vs-notion",
+        "docker-vs-containerd",
+        "docker-vs-podman",
+        "figma-vs-adobe-xd",
+        "figma-vs-framer",
+        "framer-vs-sketch",
+        "framer-vs-webflow",
+        "framer-vs-wordpress",
+        "github-vs-bitbucket",
+        "github-vs-sourceforge",
+        "google-analytics-vs-amplitude",
+        "google-analytics-vs-hotjar",
+        "google-analytics-vs-matomo",
+        "gusto-vs-deel",
+        "gusto-vs-rippling",
+        "hubspot-vs-freshsales",
+        "hubspot-vs-pipedrive",
+        "hubspot-vs-salesforce"
       ],
       "keepTop": 50,
       "stats": {
@@ -1560,21 +1560,7 @@
         "feature-management-platforms",
         "sales-enablement-platforms",
         "sales-engagement-platform-guide",
-        "agile-transformation-guide",
-        "ai-implementation-guide",
-        "ai-risk-management",
-        "api-development-tools-guide",
-        "api-security-best-practices",
-        "application-monitoring-guide",
-        "building-your-seo-toolkit",
-        "business-intelligence-platform-guide",
-        "business-phone-system-buyers-guide",
-        "ci-cd-pipeline-setup",
-        "cloud-accounting-software-guide",
-        "cloud-communications-platform-guide",
-        "cloud-migration-planning",
-        "compliance-automation-software",
-        "content-strategy-tools"
+        "building-your-seo-toolkit"
       ],
       "noindex": [
         "contract-management-software",
@@ -1626,7 +1612,21 @@
         "ux-research-tools-guide",
         "vendor-risk-assessment",
         "web-design-platform-selection",
-        "workflow-automation-guide"
+        "workflow-automation-guide",
+        "agile-transformation-guide",
+        "ai-implementation-guide",
+        "ai-risk-management",
+        "api-development-tools-guide",
+        "api-security-best-practices",
+        "application-monitoring-guide",
+        "business-intelligence-platform-guide",
+        "business-phone-system-buyers-guide",
+        "ci-cd-pipeline-setup",
+        "cloud-accounting-software-guide",
+        "cloud-communications-platform-guide",
+        "cloud-migration-planning",
+        "compliance-automation-software",
+        "content-strategy-tools"
       ],
       "keepTop": 50,
       "stats": {
@@ -1824,52 +1824,6 @@
         "wix",
         "woocommerce",
         "wordpress",
-        "affinity",
-        "auth0",
-        "basecamp",
-        "circleci",
-        "close-crm",
-        "copper-crm",
-        "crowdstrike",
-        "dialpad",
-        "evernote",
-        "expensify",
-        "fathom",
-        "grafana",
-        "greenhouse",
-        "heap",
-        "hi-bob",
-        "invision",
-        "jfrog",
-        "lever",
-        "marketo",
-        "new-relic",
-        "obsidian",
-        "okta",
-        "optimizely",
-        "outreach-io",
-        "plausible",
-        "postman",
-        "power-bi",
-        "ringcentral",
-        "roam-research",
-        "sage-intacct",
-        "salesloft",
-        "sentinelone",
-        "smartsheet",
-        "survey-monkey",
-        "tableau",
-        "telegram",
-        "terraform",
-        "todoist",
-        "vonage",
-        "wave",
-        "workday",
-        "wrike",
-        "zeplin",
-        "zoho-books",
-        "zoho-crm",
-        "zoho-people",
         "airtable",
         "amplitude",
         "clickup",
@@ -1891,15 +1845,62 @@
         "webflow",
         "zapier",
         "zendesk",
-        "zoho",
-        "copy-ai",
-        "grammarly",
-        "midjourney",
-        "runway",
-        "synthesia",
-        "writesonic"
+        "zoho"
       ],
-      "noindex": [],
+      "noindex": [
+        "affinity",
+        "auth0",
+        "basecamp",
+        "circleci",
+        "close-crm",
+        "copper-crm",
+        "copy-ai",
+        "crowdstrike",
+        "dialpad",
+        "evernote",
+        "expensify",
+        "fathom",
+        "grafana",
+        "grammarly",
+        "greenhouse",
+        "heap",
+        "hi-bob",
+        "invision",
+        "jfrog",
+        "lever",
+        "marketo",
+        "midjourney",
+        "new-relic",
+        "obsidian",
+        "okta",
+        "optimizely",
+        "outreach-io",
+        "plausible",
+        "postman",
+        "power-bi",
+        "ringcentral",
+        "roam-research",
+        "runway",
+        "sage-intacct",
+        "salesloft",
+        "sentinelone",
+        "smartsheet",
+        "survey-monkey",
+        "synthesia",
+        "tableau",
+        "telegram",
+        "terraform",
+        "todoist",
+        "vonage",
+        "wave",
+        "workday",
+        "wrike",
+        "writesonic",
+        "zeplin",
+        "zoho-books",
+        "zoho-crm",
+        "zoho-people"
+      ],
       "keepTop": 151,
       "stats": {
         "avgScore": 82,
@@ -2999,7 +3000,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "auth0",
@@ -3013,7 +3014,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "basecamp",
@@ -3027,7 +3028,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "circleci",
@@ -3041,7 +3042,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "close-crm",
@@ -3055,7 +3056,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "copper-crm",
@@ -3069,7 +3070,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "crowdstrike",
@@ -3083,7 +3084,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "dialpad",
@@ -3097,7 +3098,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "evernote",
@@ -3111,7 +3112,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "expensify",
@@ -3125,7 +3126,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "fathom",
@@ -3139,7 +3140,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "grafana",
@@ -3153,7 +3154,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "greenhouse",
@@ -3167,7 +3168,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "heap",
@@ -3181,7 +3182,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "hi-bob",
@@ -3195,7 +3196,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "invision",
@@ -3209,7 +3210,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "jfrog",
@@ -3223,7 +3224,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "lever",
@@ -3237,7 +3238,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "marketo",
@@ -3251,7 +3252,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "new-relic",
@@ -3265,7 +3266,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "obsidian",
@@ -3279,7 +3280,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "okta",
@@ -3293,7 +3294,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "optimizely",
@@ -3307,7 +3308,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "outreach-io",
@@ -3321,7 +3322,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "plausible",
@@ -3335,7 +3336,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "postman",
@@ -3349,7 +3350,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "power-bi",
@@ -3363,7 +3364,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "ringcentral",
@@ -3377,7 +3378,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "roam-research",
@@ -3391,7 +3392,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "sage-intacct",
@@ -3405,7 +3406,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "salesloft",
@@ -3419,7 +3420,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "sentinelone",
@@ -3433,7 +3434,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "smartsheet",
@@ -3447,7 +3448,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "survey-monkey",
@@ -3461,7 +3462,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "tableau",
@@ -3475,7 +3476,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "telegram",
@@ -3489,7 +3490,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "terraform",
@@ -3503,7 +3504,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "todoist",
@@ -3517,7 +3518,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "vonage",
@@ -3531,7 +3532,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "wave",
@@ -3545,7 +3546,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "workday",
@@ -3559,7 +3560,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "wrike",
@@ -3573,7 +3574,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "zeplin",
@@ -3587,7 +3588,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "zoho-books",
@@ -3601,7 +3602,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "zoho-crm",
@@ -3615,7 +3616,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "zoho-people",
@@ -3629,7 +3630,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "how-to-choose-collaboration-software",
@@ -5281,7 +5282,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "grammarly",
@@ -5295,7 +5296,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "midjourney",
@@ -5309,7 +5310,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "runway",
@@ -5323,7 +5324,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "synthesia",
@@ -5337,7 +5338,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "writesonic",
@@ -5351,7 +5352,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-accounting-software",
@@ -6093,7 +6094,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "ahrefs-vs-moz",
@@ -6107,7 +6108,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "ahrefs-vs-semrush",
@@ -6121,7 +6122,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "airtable-vs-asana",
@@ -6135,7 +6136,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "airtable-vs-clickup",
@@ -6149,7 +6150,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "airtable-vs-notion",
@@ -6163,7 +6164,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "amplitude-vs-hotjar",
@@ -6177,7 +6178,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "asana-vs-clickup",
@@ -6191,7 +6192,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "asana-vs-linear",
@@ -6205,7 +6206,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "asana-vs-trello",
@@ -6219,7 +6220,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "bamboohr-vs-adp",
@@ -6233,7 +6234,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "bamboohr-vs-deel",
@@ -6247,7 +6248,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "bitwarden-vs-dashlane",
@@ -6275,7 +6276,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "calendly-vs-acuity",
@@ -6289,7 +6290,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "calendly-vs-cal-com",
@@ -6303,7 +6304,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "canva-vs-adobe-express",
@@ -6317,7 +6318,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "canva-vs-framer",
@@ -6331,7 +6332,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "canva-vs-sketch",
@@ -6345,7 +6346,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "chatgpt-vs-claude",
@@ -6359,7 +6360,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "chatgpt-vs-copilot",
@@ -6373,7 +6374,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "chatgpt-vs-gemini",
@@ -6387,7 +6388,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "chatgpt-vs-perplexity",
@@ -6401,7 +6402,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "clickup-vs-asana",
@@ -6415,7 +6416,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "clickup-vs-jira",
@@ -6429,7 +6430,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "clickup-vs-monday-com",
@@ -6443,7 +6444,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "clickup-vs-trello",
@@ -6457,7 +6458,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "confluence-vs-notion",
@@ -6471,7 +6472,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "docker-vs-containerd",
@@ -6485,7 +6486,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "docker-vs-podman",
@@ -6499,7 +6500,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "figma-vs-adobe-xd",
@@ -6513,7 +6514,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "figma-vs-framer",
@@ -6527,7 +6528,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "firebase-vs-appwrite",
@@ -6555,7 +6556,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "framer-vs-webflow",
@@ -6569,7 +6570,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "framer-vs-wordpress",
@@ -6583,7 +6584,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "github-vs-bitbucket",
@@ -6597,7 +6598,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "github-vs-sourceforge",
@@ -6611,7 +6612,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "gitlab-vs-bitbucket",
@@ -6639,7 +6640,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "google-analytics-vs-hotjar",
@@ -6653,7 +6654,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "google-analytics-vs-matomo",
@@ -6667,7 +6668,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "gusto-vs-deel",
@@ -6681,7 +6682,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "gusto-vs-rippling",
@@ -6695,7 +6696,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "hotjar-vs-fullstory",
@@ -6723,7 +6724,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "hubspot-vs-pipedrive",
@@ -6737,7 +6738,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "hubspot-vs-salesforce",
@@ -6751,7 +6752,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "hubspot-vs-zendesk",
@@ -8095,7 +8096,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "ai-implementation-guide",
@@ -8109,7 +8110,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "ai-risk-management",
@@ -8123,7 +8124,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "api-development-tools-guide",
@@ -8137,7 +8138,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "api-security-best-practices",
@@ -8151,7 +8152,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "application-monitoring-guide",
@@ -8165,7 +8166,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "building-your-seo-toolkit",
@@ -8193,7 +8194,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "business-phone-system-buyers-guide",
@@ -8207,7 +8208,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "ci-cd-pipeline-setup",
@@ -8221,7 +8222,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "cloud-accounting-software-guide",
@@ -8235,7 +8236,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "cloud-communications-platform-guide",
@@ -8249,7 +8250,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "cloud-migration-planning",
@@ -8263,7 +8264,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "compliance-automation-software",
@@ -8277,7 +8278,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "content-strategy-tools",
@@ -8291,7 +8292,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "contract-management-software",
@@ -16131,7 +16132,7 @@
       "sections": 0,
       "isThin": true,
       "isDuplicate": true,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "clickup-vs-smartsheet",
@@ -20569,7 +20570,7 @@
       "sections": 0,
       "isThin": true,
       "isDuplicate": true,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "hubspot-vs-salesloft",
@@ -21199,7 +21200,7 @@
       "sections": 0,
       "isThin": true,
       "isDuplicate": true,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "linear-vs-smartsheet",
@@ -21969,7 +21970,7 @@
       "sections": 0,
       "isThin": true,
       "isDuplicate": true,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "notion-vs-roam-research",
@@ -23425,7 +23426,7 @@
       "sections": 0,
       "isThin": true,
       "isDuplicate": true,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "slack-vs-telegram",
@@ -23789,7 +23790,7 @@
       "sections": 0,
       "isThin": true,
       "isDuplicate": true,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "trello-vs-wrike",

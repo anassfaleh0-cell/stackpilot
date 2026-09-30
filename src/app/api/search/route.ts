@@ -22,13 +22,13 @@ export async function GET(request: Request) {
   const match = (text: string) => text.toLowerCase().includes(query)
 
   const searchableContent: SearchResult[] = [
-    ...getAllReviews().map((r) => ({
+    ...getAllReviews().filter((r) => isContentAvailable("review", r.slug)).map((r) => ({
       title: r.name, description: r.tagline, url: `/reviews/${r.slug}`, category: r.category, type: "review" as const,
     })),
     ...getAllComparisons().filter((c) => isContentAvailable("comparison", c.slug)).map((c) => ({
       title: c.title, description: c.description, url: `/comparisons/${c.slug}`, category: c.category, type: "comparison" as const,
     })),
-    ...getAllGuides().map((g) => ({
+    ...getAllGuides().filter((g) => isContentAvailable("guide", g.slug)).map((g) => ({
       title: g.title, description: g.description, url: `/guides/${g.slug}`, category: g.category, type: "guide" as const,
     })),
     ...getAllGlossaryTerms().map((t) => ({

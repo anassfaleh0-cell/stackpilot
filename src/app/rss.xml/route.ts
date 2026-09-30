@@ -2,9 +2,9 @@ import { site } from "@/lib/constants"
 import { getAllBlogPosts, getAllReviews, getAllGuides, getAllComparisons, getAllResearch, isContentAvailable } from "@/lib/content/registry"
 
 export async function GET() {
-  const reviews = getAllReviews().slice(0, 20)
+  const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug)).slice(0, 20)
   const comparisons = getAllComparisons().filter((c) => isContentAvailable("comparison", c.slug)).slice(0, 20)
-  const guides = getAllGuides().slice(0, 15)
+  const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug)).slice(0, 15)
   const posts = getAllBlogPosts().slice(0, 15)
   const research = getAllResearch().slice(0, 10)
 
@@ -14,7 +14,7 @@ export async function GET() {
     <item>
       <title>${escapeXml(r.name)} Review (2026): Pricing, Features, Pros &amp; Cons</title>
       <description>${escapeXml(r.description)}</description>
-      <content:encoded><![CDATA[<p>${escapeXml(r.description)}</p><p>Read the full hands-on review at ${site.url}/reviews/${r.slug}</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>${escapeXml(r.description)}</p><p>Read the full review at ${site.url}/reviews/${r.slug}</p>]]></content:encoded>
       <link>${site.url}/reviews/${r.slug}</link>
       <guid isPermaLink="true">${site.url}/reviews/${r.slug}</guid>
       <pubDate>${new Date(r.lastReviewed).toUTCString()}</pubDate>

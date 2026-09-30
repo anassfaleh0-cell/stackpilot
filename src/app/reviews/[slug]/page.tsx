@@ -19,6 +19,8 @@ import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
 import { isNoindexed } from "@/lib/noindex"
 import { BannerAd, NativeAd, InFeedAd } from "@/components/ads"
 
+const TOTAL_REVIEWS = getAllReviews().length
+
 export function generateStaticParams() {
   return getAllReviews()
     .filter((r) => !isNoindexed("reviews", r.slug))
@@ -35,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: tool.seoTitle || `${tool.name} Review (2026): Pricing, Pros, Cons & Top Alternatives`,
     description:
       tool.seoDescription ||
-      `Hands-on ${tool.name} review. See real pros, cons, pricing details, and the best alternatives before you buy. Expert-tested for 2026.`,
+      `A ${tool.name} review covering pricing, pros, cons, and the top alternatives to consider before you buy.`,
     path: `/reviews/${tool.slug}`,
     ogType: "article",
     publishedAt: tool.lastReviewed,
@@ -220,7 +222,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* External reviews / social proof */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-4">Third-Party Reviews</h2>
-                <p className="text-sm text-muted-foreground mb-4">We verify our hands-on testing against aggregated user reviews from major platforms. {tool.name} holds a {tool.rating}/5 across {tool.reviewCount.toLocaleString()} reviews on G2, Capterra, and TrustRadius.</p>
+                <p className="text-sm text-muted-foreground mb-4">{tool.name} carries a {tool.rating}/5 rating across {tool.reviewCount.toLocaleString()} reviews in the PilotStack dataset. Compare independent user feedback on G2, Capterra, and TrustRadius before deciding.</p>
                 <div className="flex flex-wrap gap-3">
                   <a href={`https://www.g2.com/products/${tool.slug}/review`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -339,7 +341,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     <p className="text-muted-foreground text-xs leading-relaxed">Most organizations underestimate implementation time by 2-3x. Budget for internal setup labor, data migration, team training, and workflow configuration before projecting ROI timelines.</p>
                   </div>
                 </div>
-                <p className="text-[11px] text-muted-foreground mt-3">Based on our testing methodology and reviews of 38 B2B SaaS tools across 12 categories.</p>
+                <p className="text-[11px] text-muted-foreground mt-3">Compiled under our published methodology from a library of {TOTAL_REVIEWS} B2B SaaS reviews across {categories.length} categories.</p>
               </section>
 
               {/* Content Sections */}
@@ -537,7 +539,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
           <section className="mt-16 mb-8">
             <h2 className="text-lg font-bold tracking-tight mb-3">Sources &amp; Methodology</h2>
             <div className="text-xs text-muted-foreground leading-relaxed space-y-1.5">
-              <p>This review is based on hands-on testing by the PilotStack team using {tool.name} for at least two weeks in realistic workflows. Ratings reflect our standardized five-dimension rubric. User review counts aggregate data from G2, Capterra, and TrustRadius. Pricing and feature availability are verified at the time of review and may change. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for details on our testing process, scoring rubric, and editorial independence policy.</p>
+              <p>Ratings follow our published five-dimension rubric: Features, Ease of Use, Support, Value and Performance, each weighted 20% on a 1-5 scale. Review counts are drawn from the PilotStack dataset at the time of writing. Pricing and feature availability are recorded at the time of review and may change. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for details on our evaluation process, scoring rubric, and editorial independence policy.</p>
               <p>Last reviewed: {tool.lastReviewed} · No vendor payment or sponsorship influenced this review · We may earn affiliate commission on purchases made through links on this site.</p>
             </div>
           </section>

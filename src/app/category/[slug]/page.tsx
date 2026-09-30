@@ -8,6 +8,7 @@ import { createMetadata } from "@/lib/metadata"
 import { site, categories } from "@/lib/constants"
 import { getAllReviews, getAllGuides, getAllComparisons, getAllBlogPosts, getAllGlossaryTerms, isContentAvailable } from "@/lib/content/registry"
 import { getCategoryKnowledge } from "@/lib/content/category-knowledge"
+import { isInternalLinkAvailable } from "@/lib/content/link-guard"
 import { entityGraph } from "@/lib/content/entity-graph"
 import { ReviewFilter } from "@/components/entity/review-filter"
 import { notFound } from "next/navigation"
@@ -44,7 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const category = categories.find((c) => c.slug === slug)
   if (!category) return {}
   const knowledge = getCategoryKnowledge(slug)
-  const catReviews = getAllReviews().filter((r) => r.category === category.name)
+  const catReviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && r.category === category.name)
   return createMetadata({
     title: knowledge?.seoTitle || `Best ${category.name} Software 2026: Reviews & Buying Guide`,
     description: knowledge?.seoDescription || `Find the best ${category.name.toLowerCase()} software with expert reviews, pricing comparisons, and buying tips. ${catReviews.length} tools tested and rated for 2026.`,
@@ -59,8 +60,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   if (!category) notFound()
 
   const knowledge = getCategoryKnowledge(slug)
-  const reviews = getAllReviews().filter((r) => r.category === category.name)
-  const guides = getAllGuides().filter((g) => g.category === category.name)
+  const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && r.category === category.name)
+  const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug) && g.category === category.name)
   const comparisons = getAllComparisons().filter((c) => isContentAvailable("comparison", c.slug) && (c.category === category.name || c.secondaryCategories?.includes(category.name)))
   const posts = getAllBlogPosts().filter((p) => p.category === category.name)
   const glossary = getAllGlossaryTerms().filter((t) => t.category === category.name)
@@ -120,7 +121,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                   Hand-picked {category.name.toLowerCase()} resources covering the tools, buying decisions and pricing questions teams ask most often.
                 </p>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  {knowledge.internalLinks.map((link) => (
+                  {knowledge.internalLinks.filter((link) => isInternalLinkAvailable(link.href)).map((link) => (
                     <Link key={link.href} href={link.href} className="group card-hover">
                       <Card className="p-4 flex items-center gap-3 h-full">
                         <ChevronRight size={18} className="text-primary shrink-0" />

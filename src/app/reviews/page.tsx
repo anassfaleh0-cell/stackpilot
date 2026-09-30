@@ -6,6 +6,7 @@ import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/compon
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllReviews } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 import { categories } from "@/lib/constants"
 import { ReviewCardGrid } from "@/components/entity/review-card-grid"
 import Link from "next/link"
@@ -20,7 +21,7 @@ export const metadata = createMetadata({
 })
 
 export default function ReviewsPage() {
-  const tools = getAllReviews()
+  const tools = getAllReviews().filter((t) => !isNoindexed("reviews", t.slug))
 
   return (
     <>
