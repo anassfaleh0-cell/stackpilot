@@ -1,6 +1,6 @@
 import { site } from "./constants"
 
-function truncateAtWordBoundary(text: string, maxLen: number): string {
+export function truncateAtWordBoundary(text: string, maxLen: number): string {
   if (text.length <= maxLen) return text
   const truncated = text.slice(0, maxLen)
   const lastSpace = truncated.lastIndexOf(" ")
@@ -40,7 +40,7 @@ export function createMetadata({
   const imageUrl = ogImage || `${site.url}/og.svg`
   const isArticle = ogType === "article"
 
-  const fullTitle = truncateAtWordBoundary(title, 58)
+  const fullTitle = truncateAtWordBoundary(title, 70)
   const fullDescription = truncateAtWordBoundary(description, 160)
 
   const follow = noFollow ?? !noIndex

@@ -1,6 +1,7 @@
 import { slugSeed, seededRandom } from "./seed"
 import { getPalette } from "./palette"
 import type { CategoryRating } from "@/types/content"
+import { formatScore, scorePercent, scoreWidth } from "@/lib/format"
 
 interface EditorialRatingVisualProps {
   ratings: CategoryRating[]
@@ -33,7 +34,7 @@ export function EditorialRatingVisual({ ratings, slug, category, className = "" 
         </defs>
         {ratings.map((r, i) => {
           const x = 8 + i * 18
-          const barH = (r.score / 5) * 60
+          const barH = (Number(scorePercent(r.score)) / 100) * 60
           return (
             <g key={i}>
               <rect x={x} y={70 - barH} width="10" height={barH} rx="2" fill={`url(#${gradId})`} />
@@ -51,10 +52,10 @@ export function EditorialRatingVisual({ ratings, slug, category, className = "" 
           <div key={r.label}>
             <div className="flex justify-between text-xs mb-0.5">
               <span className="text-muted">{r.label}</span>
-              <span className="font-medium" style={{ color: p.primary }}>{r.score}/5</span>
+              <span className="font-medium" style={{ color: p.primary }}>{formatScore(r.score)}/5</span>
             </div>
-            <div className="h-1 rounded-full overflow-hidden" style={{ backgroundColor: p.subtle1 }} role="progressbar" aria-valuenow={Math.round((r.score / 5) * 100)} aria-valuemin={0} aria-valuemax={100} aria-label={`${r.label} rating`}>
-              <div className="h-full rounded-full transition-all" style={{ width: `${(r.score / 5) * 100}%`, backgroundColor: p.primary }} />
+            <div className="h-1 rounded-full overflow-hidden" style={{ backgroundColor: p.subtle1 }} role="progressbar" aria-valuenow={Number(scorePercent(r.score))} aria-valuemin={0} aria-valuemax={100} aria-label={`${r.label} rating`}>
+              <div className="h-full rounded-full transition-all" style={{ width: scoreWidth(r.score), backgroundColor: p.primary }} />
             </div>
           </div>
         ))}

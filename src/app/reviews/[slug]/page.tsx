@@ -1,12 +1,14 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, SoftwareSchema, ReviewSchema, ProductSchema, FAQSchema, WebPageSchema, ArticleSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, SoftwareSchema, ReviewSchema, FAQSchema, WebPageSchema, ArticleSchema } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getReview, getContentTitle, getAllReviews, getAllComparisons, getAllBest } from "@/lib/content/registry"
 import { getEntity } from "@/lib/entities/data"
 import { formatDate } from "@/lib/utils"
+import { formatScore, scoreWidth, editorialPros, reviewMetaTitle, reviewMetaDescription } from "@/lib/format"
+import { resolveCompanyFacts, hasCompanyFacts } from "@/lib/company-facts"
 import { EntityOverview, CapabilitiesGrid, UseCasePanel, IntegrationDisplay, PricingTable, AutoComparison, SemanticLinks, EditorialHero, EditorialProsCons, EditorialFeatureMatrix, EditorialRatingVisual, EditorialSectionIllustration, EditorialExpert, GlassCard, InfoCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { EditorialPricingLadder, EditorialFeatureRadar, EditorialImplementationFlow, SecurityTable, RelatedContent } from "@/components/dynamic-client"
@@ -34,10 +36,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const wordCount = tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)
   const noindexed = isNoindexed("reviews", slug)
   return createMetadata({
-    title: tool.seoTitle || `${tool.name} Review (2026): Pricing, Pros, Cons & Top Alternatives`,
+    title: tool.seoTitle || reviewMetaTitle(tool.name),
     description:
       tool.seoDescription ||
-      `A ${tool.name} review covering pricing, pros, cons, and the top alternatives to consider before you buy.`,
+      reviewMetaDescription(tool.name, tool.tagline, tool.category),
     path: `/reviews/${tool.slug}`,
     ogType: "article",
     publishedAt: tool.lastReviewed,
@@ -54,6 +56,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   if (!tool) notFound()
 
   const entity = getEntity(slug)
+  const companyFacts = resolveCompanyFacts(tool, entity)
+  const pros = editorialPros(tool.pros)
 
   const authorSlug = tool.author ? tool.author.trim().toLowerCase().replace(/\s+/g, "-") : ""
   const authorHref = authorSlug && authorSlugs.includes(authorSlug) ? `/authors/${authorSlug}` : null
@@ -73,8 +77,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
         { name: "Reviews", href: "/reviews" },
         { name: tool.name, href: `/reviews/${tool.slug}` },
       ]} />
-      <ProductSchema name={tool.name} description={tool.description} image={tool.logo ? `${site.url}${tool.logo}` : undefined} brand={tool.name} aggregateRating={{ ratingValue: tool.rating, reviewCount: tool.reviewCount }} />
-      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.lastReviewed} body={tool.description} companyInfo={entity?.company || tool.company} />
+      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.lastReviewed} body={tool.description} image={tool.logo ? `${site.url}${tool.logo}` : undefined} companyInfo={companyFacts} />
       <SoftwareSchema name={tool.name} description={tool.tagline} category={tool.category} brand={tool.name} platforms={entity?.company?.platforms || tool.company?.deployment} url={`${site.url}/reviews/${tool.slug}`} image={tool.logo ? `${site.url}${tool.logo}` : undefined} offers={entity?.pricing?.[0]?.price !== undefined && entity.pricing[0].price !== null ? { price: entity.pricing[0].price, priceCurrency: entity.pricing[0].currency || "USD", url: tool.website || undefined } : undefined} />
       <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.lastReviewed} />
       <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.lastReviewed} updatedAt={tool.lastReviewed} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} keywords={[`${tool.name} review`, `${tool.name} pricing`, `${tool.name} pros and cons`, `${tool.category} software`, `${tool.name} alternatives`]} mentions={[{ name: tool.name, url: tool.website || `${site.url}/reviews/${tool.slug}` }]} />
@@ -113,7 +116,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 )}
                 <div className="flex items-center gap-1 text-sm">
                   <Star size={14} className="fill-accent text-accent" />
-                  <span className="font-semibold">{tool.rating}</span>
+                  <span className="font-semibold">{formatScore(tool.rating)}</span>
                   <span className="text-muted-foreground">/ 5.0</span>
                   <span className="text-xs text-muted-foreground">({tool.reviewCount} reviews)</span>
                 </div>
@@ -127,7 +130,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
                   Updated {formatDate(tool.lastReviewed)}
                 </span>
-                <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we test</a>
+                <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we score</a>
               </div>
 
               <p className="text-lg text-muted-foreground leading-relaxed mb-8 text-pretty">{tool.description}</p>
@@ -140,7 +143,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
                 <h2 className="text-base font-semibold mb-2">TL;DR</h2>
                 <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-                  {tool.pros.slice(0, 3).map((pro, i) => (
+                  {pros.slice(0, 3).map((pro, i) => (
                     <li key={i}>{pro}</li>
                   ))}
                   {tool.cons.slice(0, 2).map((con, i) => (
@@ -152,13 +155,17 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
                 <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
                 <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                  <li>Overall rating: {tool.rating}/5 from {tool.reviewCount.toLocaleString()} reviews</li>
+                  <li>Overall rating: {formatScore(tool.rating)}/5 from {tool.reviewCount.toLocaleString()} reviews</li>
                   <li>Pricing: {tool.priceRange} ({tool.pricing})</li>
-                  <li>Best for: {tool.pros[0]?.toLowerCase().startsWith("best") ? tool.pros[0] : `${tool.name} excels at ${tool.features.filter(f => f.available).slice(0, 2).map(f => f.name.toLowerCase()).join(" and ")}`}</li>
+                  <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : `${tool.name} excels at ${tool.features.filter(f => f.available).slice(0, 2).map(f => f.name.toLowerCase()).join(" and ")}`}</li>
                   <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `Suitable for most ${tool.category} use cases`}</li>
                   <li>{entity?.useCases?.primary?.slice(0, 2).join(", ") ? `Common use cases: ${entity.useCases.primary.slice(0, 2).join(", ")}` : `Category: ${tool.category}`}</li>
-                  <li>Alternatives exist — see comparison section below</li>
-                  <li>Rated on Features, Ease of Use, Support, Value, and Performance</li>
+                  {tool.alternatives.length > 0 ? (
+                    <li>Alternatives: {tool.alternatives.slice(0, 3).map((altSlug) => allReviews.find((r) => r.slug === altSlug)?.name).filter(Boolean).join(", ")}</li>
+                  ) : (
+                    <li>Comparison section below: how {tool.name} sits against other tools</li>
+                  )}
+                  <li>Scored across {tool.ratings.length} recorded categories on a 1-5 scale — the overall rating is their mean</li>
                 </ul>
               </div>
 
@@ -170,7 +177,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     <span className="font-semibold text-sm text-success">Who should buy</span>
                   </div>
                   <ul className="space-y-2">
-                    {tool.pros.slice(0, 3).map((pro, i) => (
+                    {pros.slice(0, 3).map((pro, i) => (
                       <li key={i} className="text-sm text-foreground flex items-start gap-2">
                         <span className="text-success mt-0.5 shrink-0">•</span>
                         <span>{pro}</span>
@@ -216,13 +223,13 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* Pros & Cons */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Pros &amp; Cons</h2>
-                <EditorialProsCons pros={tool.pros} cons={tool.cons} slug={tool.slug} />
+                <EditorialProsCons pros={pros} cons={tool.cons} slug={tool.slug} />
               </section>
 
               {/* External reviews / social proof */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-4">Third-Party Reviews</h2>
-                <p className="text-sm text-muted-foreground mb-4">{tool.name} carries a {tool.rating}/5 rating across {tool.reviewCount.toLocaleString()} reviews in the PilotStack dataset. Compare independent user feedback on G2, Capterra, and TrustRadius before deciding.</p>
+                <p className="text-sm text-muted-foreground mb-4">{tool.name} carries a {formatScore(tool.rating)}/5 rating across {tool.reviewCount.toLocaleString()} reviews in the PilotStack dataset. Compare independent user feedback on G2, Capterra, and TrustRadius before deciding.</p>
                 <div className="flex flex-wrap gap-3">
                   <a href={`https://www.g2.com/products/${tool.slug}/review`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -243,7 +250,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Rating Overview</h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-                  <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={tool.rating.toString()} title="Overall Rating" description={`Based on ${tool.reviewCount.toLocaleString()} reviews`} />
+                  <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={formatScore(tool.rating)} title="Overall Rating" description={`Mean of ${tool.ratings.length} category ratings`} />
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
@@ -268,10 +275,10 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
               {entity && (
                 <>
-                  {entity.company && (
+                  {entity.company && hasCompanyFacts(companyFacts) && (
                     <section className="mb-12 scroll-mt-24" id="company">
                       <h2 className="text-2xl font-bold tracking-tight mb-6">Company Overview</h2>
-                      <EntityOverview entity={entity} />
+                      <EntityOverview entity={entity} facts={companyFacts} />
                     </section>
                   )}
 
@@ -405,8 +412,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
               {entity && (
                 <section className="mb-12 scroll-mt-24" id="alternatives">
-                  <h2 className="text-2xl font-bold tracking-tight mb-6">Top Alternatives</h2>
-                  <p className="text-muted-foreground text-sm mb-4">Auto-generated comparisons based on verified entity data.</p>
+                  <h2 className="text-2xl font-bold tracking-tight mb-6">How {tool.name} Compares</h2>
+                  <p className="text-muted-foreground text-sm mb-4">Comparison cards generated from this site&apos;s recorded tool profiles. Ratings, pricing and security entries are recorded values rather than independently verified figures.</p>
                   <AutoComparison slug={slug} />
                 </section>
               )}
@@ -425,9 +432,9 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                       </svg>
                       <h3 className="font-semibold text-sm">Verdict</h3>
                     </div>
-                    <div className="text-lg font-bold text-primary mb-1">{tool.rating}/5</div>
+                    <div className="text-lg font-bold text-primary mb-1">{formatScore(tool.rating)}/5</div>
                     <ScoreBar score={tool.rating} className="mb-3" />
-                    <p className="text-sm text-muted-foreground">{tool.name} earns a {tool.rating}/5 for its exceptional feature set and user experience.</p>
+                    <p className="text-sm text-muted-foreground">{tool.name} scores {formatScore(tool.rating)}/5 — the mean of {tool.ratings.length} recorded category ratings.</p>
                   </div>
                 </GlassCard>
 
@@ -440,10 +447,10 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                         <div key={item.label}>
                           <div className="flex justify-between text-xs mb-0.5">
                             <span className="text-muted-foreground">{item.label}</span>
-                            <span className="font-medium">{item.score}/5</span>
+                            <span className="font-medium">{formatScore(item.score)}/5</span>
                           </div>
                           <div className="h-1.5 rounded-full bg-muted-bg overflow-hidden">
-                            <div className="h-full rounded-full bg-primary transition-all duration-500" style={{ width: `${(item.score / 5) * 100}%` }} />
+                            <div className="h-full rounded-full bg-primary transition-all duration-500" style={{ width: scoreWidth(item.score) }} />
                           </div>
                         </div>
                       ))}
@@ -458,23 +465,23 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 <EEATProcess category={tool.category} />
 
                 {/* Company Info */}
-                {tool.company && (
+                {(companyFacts.founded || companyFacts.headquarters || companyFacts.customers || companyFacts.employeeCount || companyFacts.pricingModel || (companyFacts.deployment && companyFacts.deployment.length > 0) || companyFacts.apiAvailable !== undefined || companyFacts.migrationComplexity) && (
                   <GlassCard>
                     <div className="p-4">
                       <h3 className="font-semibold mb-3 text-sm">Company Details</h3>
                       <div className="space-y-2 text-xs text-muted-foreground">
-                        {tool.company.founded && <p>Founded: <span className="text-foreground">{tool.company.founded}</span></p>}
-                        {tool.company.headquarters && <p>HQ: <span className="text-foreground">{tool.company.headquarters}</span></p>}
-                        {tool.company.customers && <p>Customers: <span className="text-foreground">{tool.company.customers}</span></p>}
-                        {tool.company.employeeCount && <p>Employees: <span className="text-foreground">{tool.company.employeeCount}</span></p>}
-                        {tool.company.pricingModel && <p>Pricing: <span className="text-foreground">{tool.company.pricingModel}</span></p>}
-                        {tool.company.deployment && tool.company.deployment.length > 0 && (
-                          <p>Deployment: <span className="text-foreground">{tool.company.deployment.join(", ")}</span></p>
+                        {companyFacts.founded && <p>Founded: <span className="text-foreground">{companyFacts.founded}</span></p>}
+                        {companyFacts.headquarters && <p>HQ: <span className="text-foreground">{companyFacts.headquarters}</span></p>}
+                        {companyFacts.customers && <p>Customers: <span className="text-foreground">{companyFacts.customers}</span></p>}
+                        {companyFacts.employeeCount && <p>Employees: <span className="text-foreground">{companyFacts.employeeCount}</span></p>}
+                        {companyFacts.pricingModel && <p>Pricing: <span className="text-foreground">{companyFacts.pricingModel}</span></p>}
+                        {companyFacts.deployment && companyFacts.deployment.length > 0 && (
+                          <p>Deployment: <span className="text-foreground">{companyFacts.deployment.join(", ")}</span></p>
                         )}
-                        {tool.company.apiAvailable !== undefined && (
-                          <p>API: <span className={tool.company.apiAvailable ? "text-success" : "text-muted-foreground"}>{tool.company.apiAvailable ? "Available" : "Not available"}</span></p>
+                        {companyFacts.apiAvailable !== undefined && (
+                          <p>API: <span className={companyFacts.apiAvailable ? "text-success" : "text-muted-foreground"}>{companyFacts.apiAvailable ? "Available" : "Not available"}</span></p>
                         )}
-                        {tool.company.migrationComplexity && <p>Migration: <span className="text-foreground">{tool.company.migrationComplexity}</span></p>}
+                        {companyFacts.migrationComplexity && <p>Migration: <span className="text-foreground">{companyFacts.migrationComplexity}</span></p>}
                       </div>
                     </div>
                   </GlassCard>
@@ -518,7 +525,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                           return (
                             <Link key={altSlug} href={`/reviews/${altSlug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                               <span>{alt.name}</span>
-                              <span className="text-xs font-medium">{alt.rating}/5</span>
+                              <span className="text-xs font-medium">{formatScore(alt.rating)}/5</span>
                             </Link>
                           )
                         })}
@@ -539,7 +546,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
           <section className="mt-16 mb-8">
             <h2 className="text-lg font-bold tracking-tight mb-3">Sources &amp; Methodology</h2>
             <div className="text-xs text-muted-foreground leading-relaxed space-y-1.5">
-              <p>Ratings follow our published five-dimension rubric: Features, Ease of Use, Support, Value and Performance, each weighted 20% on a 1-5 scale. Review counts are drawn from the PilotStack dataset at the time of writing. Pricing and feature availability are recorded at the time of review and may change. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for details on our evaluation process, scoring rubric, and editorial independence policy.</p>
+              <p>Each page shows an overall rating plus {tool.ratings.length} recorded category ratings on a 1-5 scale, all drawn from the PilotStack dataset. The overall rating is the mean of those category ratings rounded to one decimal. Review counts, pricing and feature availability are recorded as of the review date and may change. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for how ratings are calculated, what each page is sourced from, and our editorial independence policy.</p>
               <p>Last reviewed: {tool.lastReviewed} · No vendor payment or sponsorship influenced this review · We may earn affiliate commission on purchases made through links on this site.</p>
             </div>
           </section>

@@ -29,7 +29,7 @@ export default function EditorialPolicyPage() {
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                PilotStack maintains complete editorial independence. No vendor, advertiser, or affiliate partner influences our ratings, rankings, or content decisions. Every review is based on hands-on testing, follows a standardized methodology, and undergoes two-person verification before publication. We clearly disclose all affiliate relationships and correct errors transparently.
+                PilotStack maintains complete editorial independence. No vendor, advertiser, or affiliate partner influences our ratings, rankings, or content decisions. Every page follows a standardized methodology: one recorded source per figure, nine equally weighted category scores, and any fact we cannot source left off the page rather than asserted. We clearly disclose all affiliate relationships and correct errors transparently.
               </p>
             </div>
 
@@ -37,8 +37,8 @@ export default function EditorialPolicyPage() {
               <h2 className="text-lg font-semibold mb-2">TL;DR</h2>
               <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
                 <li>Complete separation between editorial and commercial operations</li>
-                <li>All reviews based on hands-on testing — not vendor demos or specifications</li>
-                <li>Every factual claim verified against primary sources before publication</li>
+                <li>Every published figure traces to a source we hold, or it is left off the page</li>
+                <li>One recorded source per figure, reused everywhere a tool appears</li>
                 <li>Both strengths and limitations addressed in every review</li>
                 <li>Corrections published promptly and transparently</li>
               </ul>
@@ -53,7 +53,7 @@ export default function EditorialPolicyPage() {
                 <li>Content more than 12 months old is flagged for review and potential removal</li>
                 <li>We distinguish factual reporting from analysis and opinion throughout</li>
                 <li>Standardized methodology applied consistently across all reviews</li>
-                <li>Third-party user reviews from G2, Capterra, TrustRadius cross-referenced for validation</li>
+                <li>Third-party user reviews on G2, Capterra and TrustRadius are linked so readers can check independent feedback directly</li>
                 <li>Diverse perspectives considered including accessibility, internationalization, and multi-currency pricing</li>
               </ul>
             </div>
@@ -70,8 +70,8 @@ export default function EditorialPolicyPage() {
               <h2>2. Content Standards</h2>
               <p>Every piece of content published on PilotStack must meet the following standards:</p>
               <ul>
-                <li><strong>Accuracy:</strong> All factual claims, statistics, pricing data, and feature descriptions must be verified against primary sources before publication. When accuracy cannot be confirmed, we clearly state the limitation.</li>
-                <li><strong>Originality:</strong> Our reviews are based on hands-on testing by our team. We do not republish vendor-provided content or use AI-generated content without significant human editorial oversight, fact-checking, and original analysis.</li>
+                <li><strong>Accuracy:</strong> All published figures must be tied to a source we hold before publication. When accuracy cannot be confirmed, we leave the figure off the page or mark it unverified rather than assert it.</li>
+                <li><strong>Originality:</strong> Our pages are written by our editorial team from the sources described in our methodology. We do not republish vendor-provided content, and editorial review is applied before publication.</li>
                 <li><strong>Comprehensiveness:</strong> Reviews must address both strengths and limitations. We explicitly state who each product is best for and who should consider alternatives.</li>
                 <li><strong>Currency:</strong> All content includes publication dates and last-reviewed dates. Content that is more than 12 months old is flagged for review.</li>
                 <li><strong>Clarity:</strong> We distinguish factual reporting from analysis and opinion. Our scoring methodology is transparent and applied consistently across all reviews.</li>
@@ -80,10 +80,10 @@ export default function EditorialPolicyPage() {
               <h2>3. Review Standards</h2>
               <p>All software reviews on PilotStack follow a standardized methodology that includes:</p>
               <ul>
-                <li>Hands-on testing by at least two team members for a minimum of two weeks</li>
-                <li>Evaluation across five dimensions: Features, Ease of Use, Support, Value, and Performance</li>
-                <li>Independent verification of findings by a second team member</li>
-                <li>Cross-referencing against aggregated user reviews from G2, Capterra, and TrustRadius</li>
+                <li>One recorded source per figure, reused everywhere a tool appears</li>
+                <li>Nine equally weighted category scores on a 1-5 scale, with the overall rating as their mean</li>
+                <li>Facts we cannot source are omitted or marked unverified, never stated as confirmed</li>
+                <li>Third-party user reviews on G2, Capterra and TrustRadius are linked for readers who want independent feedback</li>
                 <li>Documentation of pricing, feature availability, and setup requirements at the time of review</li>
               </ul>
               <p>Full details are available on our <a href="/methodology">Review Methodology</a> page.</p>

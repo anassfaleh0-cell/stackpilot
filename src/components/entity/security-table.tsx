@@ -1,5 +1,5 @@
 import type { SoftwareEntity } from "@/types/entities"
-import { CheckCircle2, XCircle } from "lucide-react"
+import { CheckCircle2, HelpCircle, XCircle } from "lucide-react"
 
 interface SecurityTableProps {
   entity: SoftwareEntity
@@ -16,6 +16,39 @@ const certLabels: Record<string, string> = {
 
 const sortedCerts = ["soc2", "iso27001", "gdpr", "hipaa", "ccpa", "pciDss"] as const
 
+type CertState = "certified" | "not-certified" | "unverified"
+
+function certState(value: unknown): CertState | null {
+  if (value === undefined) return null
+  if (value === null) return "unverified"
+  return value ? "certified" : "not-certified"
+}
+
+function CertStatus({ state }: { state: CertState }) {
+  if (state === "certified") {
+    return (
+      <span className="inline-flex items-center gap-1.5 text-success">
+        <CheckCircle2 size={14} aria-hidden="true" />
+        <span>Recorded as certified</span>
+      </span>
+    )
+  }
+  if (state === "not-certified") {
+    return (
+      <span className="inline-flex items-center gap-1.5 text-muted-foreground">
+        <XCircle size={14} aria-hidden="true" />
+        <span>Recorded as not certified</span>
+      </span>
+    )
+  }
+  return (
+    <span className="inline-flex items-center gap-1.5 text-muted-foreground">
+      <HelpCircle size={14} aria-hidden="true" />
+      <span>Certification information not verified</span>
+    </span>
+  )
+}
+
 export function SecurityTable({ entity }: SecurityTableProps) {
   const { security } = entity
   if (!security) return null
@@ -23,21 +56,11 @@ export function SecurityTable({ entity }: SecurityTableProps) {
   const features: { label: string; value: React.ReactNode }[] = []
 
   for (const key of sortedCerts) {
-    const val = security[key as keyof typeof security]
-    if (val === undefined) continue
+    const state = certState(security[key as keyof typeof security])
+    if (state === null) continue
     features.push({
       label: certLabels[key] || key,
-      value: val ? (
-        <span className="inline-flex items-center gap-1.5 text-success">
-          <CheckCircle2 size={14} aria-hidden="true" />
-          <span>Compliant</span>
-        </span>
-      ) : (
-        <span className="inline-flex items-center gap-1.5 text-muted-foreground">
-          <XCircle size={14} aria-hidden="true" />
-          <span>Not certified</span>
-        </span>
-      ),
+      value: <CertStatus state={state} />,
     })
   }
 
@@ -104,12 +127,12 @@ export function SecurityTable({ entity }: SecurityTableProps) {
       value: security.penetrationTesting ? (
         <span className="inline-flex items-center gap-1.5 text-success">
           <CheckCircle2 size={14} aria-hidden="true" />
-          <span>Regular testing</span>
+          <span>Recorded: regular testing</span>
         </span>
       ) : (
         <span className="inline-flex items-center gap-1.5 text-muted-foreground">
           <XCircle size={14} aria-hidden="true" />
-          <span>Not disclosed</span>
+          <span>Not disclosed in our records</span>
         </span>
       ),
     })
@@ -121,12 +144,12 @@ export function SecurityTable({ entity }: SecurityTableProps) {
       value: security.bugBounty ? (
         <span className="inline-flex items-center gap-1.5 text-success">
           <CheckCircle2 size={14} aria-hidden="true" />
-          <span>Active program</span>
+          <span>Recorded: active program</span>
         </span>
       ) : (
         <span className="inline-flex items-center gap-1.5 text-muted-foreground">
           <XCircle size={14} aria-hidden="true" />
-          <span>No program</span>
+          <span>No program recorded</span>
         </span>
       ),
     })
@@ -150,6 +173,9 @@ export function SecurityTable({ entity }: SecurityTableProps) {
           ))}
         </tbody>
       </table>
+      <p className="px-4 py-3 text-[11px] leading-relaxed text-muted-foreground bg-muted-bg/40 border-t border-border">
+        Statuses reflect this site&apos;s own records only. &quot;Certification information not verified&quot; means we hold no source for that certification — it is not a statement that the vendor does or does not hold it.
+      </p>
     </div>
   )
 }

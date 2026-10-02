@@ -1,49 +1,55 @@
 import type { SoftwareEntity } from "@/types/entities"
 import { Badge } from "@/components/ui/badge"
+import { resolveCompanyFacts, hasCompanyFacts, type CompanyFacts } from "@/lib/company-facts"
 
 interface EntityOverviewProps {
   entity: SoftwareEntity
+  facts?: CompanyFacts
 }
 
-export function EntityOverview({ entity }: EntityOverviewProps) {
-  const { company } = entity
-  if (!company) return null
+function present(value: unknown): boolean {
+  return value !== undefined && value !== null && value !== ""
+}
+
+export function EntityOverview({ entity, facts }: EntityOverviewProps) {
+  const company = facts ?? resolveCompanyFacts(undefined, entity)
+  if (!hasCompanyFacts(company)) return null
 
   return (
     <div className="rounded-xl border border-border bg-card p-6 space-y-5">
       <h2 className="text-xl font-bold">About {entity.name}</h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {company.legalName && (
+        {present(company.legalName) && (
           <div>
             <div className="text-xs text-muted-foreground mb-0.5">Legal Name</div>
             <div className="text-sm font-medium">{company.legalName}</div>
           </div>
         )}
-        {company.founded && (
+        {present(company.founded) && (
           <div>
             <div className="text-xs text-muted-foreground mb-0.5">Founded</div>
             <div className="text-sm font-medium">{company.founded}</div>
           </div>
         )}
-        {company.headquarters && (
+        {present(company.headquarters) && (
           <div>
             <div className="text-xs text-muted-foreground mb-0.5">Headquarters</div>
             <div className="text-sm font-medium">{company.headquarters}</div>
           </div>
         )}
-        {company.ownership && (
+        {present(company.ownership) && (
           <div>
             <div className="text-xs text-muted-foreground mb-0.5">Ownership</div>
             <div className="text-sm font-medium">{company.ownership}{company.parentCompany ? ` (${company.parentCompany})` : ""}</div>
           </div>
         )}
-        {company.employees && (
+        {present(company.employeeCount) && (
           <div>
             <div className="text-xs text-muted-foreground mb-0.5">Employees</div>
-            <div className="text-sm font-medium">{company.employees}</div>
+            <div className="text-sm font-medium">{company.employeeCount}</div>
           </div>
         )}
-        {company.customers && (
+        {present(company.customers) && (
           <div>
             <div className="text-xs text-muted-foreground mb-0.5">Customers</div>
             <div className="text-sm font-medium">{company.customers}</div>

@@ -31,23 +31,24 @@ export default function FactCheckingPolicyPage() {
               </p>
 
               <h2>Pre-Publication Fact-Checking</h2>
-              <p>Every article undergoes verification before publication. Our fact-checking process covers:</p>
+              <p>Every page is checked against its sources before publication. Our fact-checking process covers:</p>
               <ul>
-                <li><strong>Pricing verification:</strong> Pricing data is verified against the vendor's official website and, where possible, confirmed through direct inquiry with sales teams. We document the date and source of all pricing data.</li>
-                <li><strong>Feature claims:</strong> Feature availability and descriptions are verified through hands-on testing. We do not rely on vendor-provided feature lists without independent verification.</li>
+                <li><strong>Pricing verification:</strong> Pricing data is recorded from the vendor&apos;s official pricing page, together with the date it was read.</li>
+                <li><strong>Feature claims:</strong> Feature availability is recorded from vendor documentation. Where we cannot confirm availability, the claim is left off the page.</li>
                 <li><strong>Statistical claims:</strong> All statistics, market data, and numerical claims are traced to their original source. We link to primary sources whenever possible.</li>
                 <li><strong>Quotes and attributions:</strong> Quotes from individuals, publications, or studies are verified against the original source.</li>
                 <li><strong>Links and references:</strong> All hyperlinks are tested at the time of publication to ensure they resolve to the intended destination.</li>
               </ul>
 
-              <h2>Two-Person Verification</h2>
-              <p>Every review undergoes a two-person verification process before publication:</p>
+              <h2>Source Discipline</h2>
+              <p>Each figure on a page has one recorded source:</p>
               <ol>
-                <li><strong>Initial research and writing:</strong> The primary reviewer conducts hands-on testing and writes the initial review.</li>
-                <li><strong>Independent verification:</strong> A second team member independently replicates key aspects of the testing workflow to verify findings.</li>
-                <li><strong>Review and approval:</strong> An editor reviews the complete content for accuracy, clarity, and completeness before publication.</li>
+                <li><strong>Recording:</strong> The figure and its source are recorded together — our dataset, vendor documentation, or a published pricing page.</li>
+                <li><strong>Conflict handling:</strong> If two sources we hold disagree, neither value is published.</li>
+                <li><strong>Unsourced facts:</strong> A fact with no source is omitted or marked unverified rather than stated as confirmed.</li>
+                <li><strong>Editorial review:</strong> An editor reviews the complete page for accuracy, clarity, and completeness before publication.</li>
               </ol>
-              <p>Discrepancies between the primary reviewer and the verifying reviewer are resolved through discussion and, if necessary, additional testing before publication.</p>
+              <p>Where a reader or a later source shows a recorded figure to be wrong, the page is corrected and its last-reviewed date updated.</p>
 
               <h2>Post-Publication Fact-Checking</h2>
               <p>Our commitment to accuracy continues after publication:</p>

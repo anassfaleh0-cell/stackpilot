@@ -1,6 +1,6 @@
 import { compareEntities } from "@/lib/entities/comparison"
 import { getEntity, getAllEntities } from "@/lib/entities/data"
-import { isContentAvailable } from "@/lib/content/registry"
+import { getReview, isContentAvailable } from "@/lib/content/registry"
 import Link from "next/link"
 import { GlassCard } from "@/components/editorial/glass-card"
 import { Badge } from "@/components/ui/badge"
@@ -15,8 +15,12 @@ export function AutoComparison({ slug, className = "" }: AutoComparisonProps) {
   const entity = getEntity(slug)
   if (!entity) return null
 
-  const allEntities = getAllEntities().filter((e) => e.slug !== slug)
-  const alternatives = allEntities.slice(0, 3)
+  const source = getReview(slug)
+  const candidates = getAllEntities().filter((e) => e.slug !== slug)
+  const inCategory = source
+    ? candidates.filter((e) => getReview(e.slug)?.category === source.category)
+    : []
+  const alternatives = (inCategory.length > 0 ? inCategory : candidates).slice(0, 3)
 
   return (
     <div className={`space-y-6 ${className}`}>

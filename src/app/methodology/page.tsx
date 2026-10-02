@@ -5,10 +5,11 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, ArticleSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
+import Link from "next/link"
 
 export const metadata = createMetadata({
-  title: "Review Methodology | How We Test & Rank Software",
-  description: "How we test, score, and rank every tool on PilotStack. Our transparent, hands-on, two-week review process with standardized rubrics ensures every review is thorough, unbiased, and trustworthy.",
+  title: "Review Methodology | How We Score Software",
+  description: "How every PilotStack page is built: the nine recorded category scores behind each rating, where our figures come from, what we leave out when we cannot source it, and how we stay independent.",
   path: "/methodology",
   ogType: "article",
 })
@@ -16,39 +17,43 @@ export const metadata = createMetadata({
 const stages = [
   {
     title: "Selection & Scoping",
-    body: "We do not review every tool. We focus on categories where our readers are actively evaluating options based on search trends, reader surveys, and questions we receive via email and social media. Within each category, we identify the top 10 to 15 tools based on market share, community traction, and analyst reports. We narrow that list to 5 to 8 tools we actually test end-to-end, prioritizing a mix of market leaders, promising challengers, and notable open-source alternatives. We never accept payment to include or exclude a tool from our reviews.",
+    body: "We do not review every tool. We cover categories where readers are actively evaluating options, and each tool page records the same fixed set of fields: pricing model, deployment, API availability, migration complexity, security entries, integrations, and nine category scores. We never accept payment to include or exclude a tool from our coverage.",
   },
   {
-    title: "Hands-On Testing",
-    body: "Every tool we review is tested by at least two team members who use it in realistic workflows for a minimum of two weeks. For project management tools, we run a real project from kickoff to retrospective. For AI coding assistants, we build a small but complete feature across multiple files. For analytics platforms, we connect real data sources and build dashboards. We document setup friction, learning curve, performance under realistic data volumes, and output quality throughout the process.",
+    title: "Evidence & Sourcing",
+    body: "Every figure on a page comes from a source we hold: our recorded review dataset, vendor documentation, or a published pricing page. Review counts, ratings, and pricing are recorded as of the review date shown on the page. Where two sources we hold disagree — for example on a founding date or headcount — we publish neither value rather than pick one.",
   },
   {
     title: "Scoring & Ratings",
-    body: "Each tool is scored across five dimensions: Features, Ease of Use, Support, Value, and Performance. Every dimension is scored on a 1-5 scale based on a standardized rubric. Features evaluates breadth, depth, and innovation. Ease of Use considers onboarding time, interface clarity, and discoverability. Support weighs response times, documentation quality, and community resources. Value compares pricing against feature set. Performance measures speed, reliability, and uptime. The overall rating is the average of these five scores.",
+    body: "Each tool carries nine recorded category scores: Features, Usability, Pricing, Support, Security, Integrations, Performance, Documentation, and Scalability. Every category is scored on a 1-5 scale with equal weight. The overall rating shown on a page is the mean of those nine scores, rounded to one decimal place — you can check it yourself on any review page.",
   },
   {
-    title: "Verification & Peer Review",
-    body: "After initial testing, a second team member replicates the workflow independently to verify findings. Discrepancies are discussed and resolved through consensus. We also aggregate user reviews from verified sources, including G2, Capterra, and TrustRadius, to ensure our assessments align with broader market sentiment. If our hands-on experience significantly differs from user consensus, we investigate further and note the discrepancy in our review.",
+    title: "Consistency & Limits",
+    body: "A tool's rating, review count, and category scores are held once and reused everywhere that tool appears, so the same figure shows up on its review, category, and comparison pages. Certification statuses and other facts we cannot source are shown as unverified or omitted entirely instead of being stated as confirmed.",
   },
   {
     title: "Updates & Revisions",
-    body: "Software changes constantly, and so do our reviews. Every review includes a last-reviewed date, and we monitor major releases, pricing changes, and feature additions for all tools in our library. When a significant update occurs, we retest the affected aspects and update the review within two weeks. Reviews of tools that have not been updated in over 12 months are flagged as needing verification and may be removed if we cannot confirm accuracy.",
+    body: "Software changes constantly, and so do our pages. Every page carries a last-reviewed date, and we revisit pages when pricing, features, or product positioning change materially. Pages whose recorded figures we can no longer support are corrected or removed rather than left to stand.",
   },
 ]
 
 const scoringRubric = [
-  { dimension: "Features", what: "Breadth, depth, and innovation of the tool's capabilities", weight: "20%" },
-  { dimension: "Ease of Use", what: "Onboarding time, interface clarity, and feature discoverability", weight: "20%" },
-  { dimension: "Support", what: "Response times, documentation quality, and community resources", weight: "20%" },
-  { dimension: "Value", what: "Pricing relative to feature set and market alternatives", weight: "20%" },
-  { dimension: "Performance", what: "Speed, reliability, uptime, and scalability under load", weight: "20%" },
+  { dimension: "Features", what: "What the product can do — recorded as a 1-5 score", weight: "1/9" },
+  { dimension: "Usability", what: "Onboarding and day-to-day clarity — recorded as a 1-5 score", weight: "1/9" },
+  { dimension: "Pricing", what: "Price relative to what is included — recorded as a 1-5 score", weight: "1/9" },
+  { dimension: "Support", what: "Support channels and responsiveness — recorded as a 1-5 score", weight: "1/9" },
+  { dimension: "Security", what: "Security controls and disclosures — recorded as a 1-5 score", weight: "1/9" },
+  { dimension: "Integrations", what: "Integration coverage — recorded as a 1-5 score", weight: "1/9" },
+  { dimension: "Performance", what: "Speed and reliability — recorded as a 1-5 score", weight: "1/9" },
+  { dimension: "Documentation", what: "Help material and guides — recorded as a 1-5 score", weight: "1/9" },
+  { dimension: "Scalability", what: "Behaviour as usage grows — recorded as a 1-5 score", weight: "1/9" },
 ]
 
 export default function MethodologyPage() {
   const currentYear = new Date().getFullYear()
   return (
     <>
-      <ArticleSchema title="Review Methodology | How We Test & Rank Software" description="How we test, score, and rank every tool on PilotStack — a transparent, two-week review process with standardized rubrics." publishedAt="2026-01-15" author="PilotStack Team" url={`${site.url}/methodology`} keywords={["software review methodology", "product testing process", "scoring rubric", "hands-on testing", "editorial standards"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
+      <ArticleSchema title="Review Methodology | How We Score Software" description="How every PilotStack page is built — the nine recorded category scores behind each rating, where our figures come from, and what we leave out when we cannot source it." publishedAt="2026-01-15" author="PilotStack Team" url={`${site.url}/methodology`} keywords={["software review methodology", "scoring rubric", "editorial standards", "review transparency"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
       <BreadcrumbSchema items={[
         { name: "Home", href: "/" },
         { name: "Review Methodology", href: "/methodology" },
@@ -62,38 +67,36 @@ export default function MethodologyPage() {
             <Badge variant="default" className="mb-4">Our Process</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">How We Review Software</h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Transparency matters. Here is exactly how we test, score, and rank every tool on PilotStack.
+              Transparency matters. Here is exactly how every page on PilotStack is built, scored, and sourced.
             </p>
 
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                PilotStack tests every software tool hands-on for a minimum of two weeks using realistic workflows. Each tool is scored across five equally weighted dimensions (Features, Ease of Use, Support, Value, Performance) on a 1-5 scale. Reviews are independently verified by a second team member and cross-referenced against G2, Capterra, and TrustRadius. We never accept payment for reviews.
+                Every tool carries nine recorded category scores on a 1-5 scale. The overall rating on a review page is the mean of those nine scores, rounded to one decimal. Figures come from our recorded dataset, vendor documentation, and published pricing pages. Where we cannot source a fact, we leave it off or mark it unverified. We never accept payment for coverage.
               </p>
             </div>
 
             <div className="tl-dr mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">TL;DR</h2>
               <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-                <li>Every tool is tested hands-on for at least 2 weeks by 2+ team members</li>
-                <li>Five equally weighted scoring dimensions: Features, Ease of Use, Support, Value, Performance</li>
-                <li>Independent peer verification and cross-referencing against 3 third-party review platforms</li>
+                <li>Nine equally weighted category scores on a 1-5 scale; overall = their mean, rounded to one decimal</li>
+                <li>The same rating and review count is reused everywhere a tool appears</li>
+                <li>Every page shows when it was last reviewed</li>
+                <li>Facts we cannot source are omitted or marked unverified, never asserted</li>
                 <li>No vendor payments, previews, or influence on ratings or rankings</li>
-                <li>Reviews updated within 2 weeks of major product changes; flagged if not refreshed in 12+ months</li>
               </ul>
             </div>
 
             <div className="key-takeaways mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Key Takeaways</h2>
               <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                <li>We review only tools readers actively evaluate — no paid placements</li>
-                <li>Top 5-8 tools per category selected for full end-to-end testing</li>
-                <li>Realistic workflows (e.g., real projects, real data sources) used for every test</li>
-                <li>Scoring is fully transparent with published rubrics and equal dimension weighting</li>
-                <li>Second team member independently replicates every test to verify findings</li>
-                <li>Aggregated user sentiment from G2, Capterra, and TrustRadius validates our assessments</li>
-                <li>Last-reviewed date visible on every review; stale content flagged at 12 months</li>
-                <li>Quarterly calibration sessions ensure rating consistency across reviewers</li>
+                <li>We cover tools readers actively evaluate — no paid placements</li>
+                <li>Every page draws from the same recorded fields, so figures agree across the site</li>
+                <li>Ratings are arithmetic you can check on any review page</li>
+                <li>Certification and company facts with no source are shown as unverified or left out</li>
+                <li>Last-reviewed date visible on every page</li>
+                <li>Published independence policy: no vendor can pay for placement</li>
               </ul>
             </div>
 
@@ -119,7 +122,7 @@ export default function MethodologyPage() {
 
               <h2 className="text-2xl font-bold mt-12 mb-6">Scoring Rubric</h2>
               <p className="text-muted-foreground mb-4">
-                Each tool is scored across five equally weighted dimensions on a 1-5 scale:
+                Each review page carries nine equally weighted category scores on a 1-5 scale. The overall rating is their mean, rounded to one decimal:
               </p>
               <div className="overflow-x-auto">
               <div className="border border-border rounded-xl overflow-hidden mb-8 min-w-[300px]">
@@ -146,21 +149,20 @@ export default function MethodologyPage() {
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Fact-Checking & Corrections</h2>
               <p className="text-muted-foreground mb-4">
-                Every review undergoes a two-person verification process before publication. Screenshots, pricing
-                data, feature claims, and performance benchmarks are independently verified. When a discrepancy
-                is found, the review is held until resolved. Published corrections are documented with the date
-                and nature of the change. Readers can report errors via our <a href="/contact" className="text-primary hover:underline">contact form</a>,
-                and we investigate every submission within five business days.
+                Figures on a page come from a source we hold: our recorded dataset, vendor documentation, or a
+                published pricing page. When two sources we hold disagree, we publish neither value rather than
+                choose one, and certification statuses with no source are shown as unverified instead of asserted.
+                When a correction is made the page&apos;s last-reviewed date is updated. Readers can report errors
+                via our <Link href="/contact" className="text-primary hover:underline">contact form</Link>.
               </p>
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Review Team & Expertise</h2>
               <p className="text-muted-foreground mb-4">
-                PilotStack is run by a small, independent team. We don&apos;t publish individual bios at
-                this stage, but every review follows our published methodology: hands-on testing for a
-                minimum of two weeks, scored against a five-dimension rubric, and cross-checked against
-                public user feedback from G2, Capterra, and TrustRadius. We conduct quarterly
-                calibration sessions where reviewers independently score the same tool to ensure rating
-                consistency.
+                PilotStack is run by a small, independent team. Editorial roles are listed on our{" "}
+                <Link href="/authors" className="text-primary hover:underline">authors</Link> pages. Every page follows the
+                same published rules: nine equally weighted category scores on a 1-5 scale, one recorded source per
+                figure, and the overall rating as the mean of those nine scores. Because a single set of recorded
+                figures is reused everywhere a tool appears, ratings do not drift between pages.
               </p>
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Editorial Independence</h2>

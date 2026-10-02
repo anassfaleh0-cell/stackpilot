@@ -64,8 +64,8 @@ export default function MediaKitPage() {
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4">About PilotStack</h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is an independent software review and research platform that helps businesses make informed software purchasing decisions. Founded in 2024, the platform provides in-depth, hands-on reviews of B2B SaaS tools across 12 major categories.</p>
-            <p className="text-muted-foreground leading-relaxed mb-4">Unlike aggregate review sites, PilotStack tests every product extensively before publishing verified ratings and comparisons. The site is run by a small, independent team following a published methodology — individual bios are not published at this stage, but the full testing process is public on our <Link href="/methodology" className="text-primary hover:underline">methodology page</Link>.</p>
+            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is an independent software review and research platform that helps businesses make informed software purchasing decisions. Founded in 2024, the platform publishes in-depth reviews of B2B SaaS tools across 12 major categories.</p>
+            <p className="text-muted-foreground leading-relaxed mb-4">Unlike aggregate review sites, PilotStack records every figure once and reuses it everywhere a tool appears, so ratings and review counts agree across the site. The site is run by a small, independent team following a published methodology — editorial roles are listed on our <Link href="/authors" className="text-primary hover:underline">authors page</Link>, and the full scoring process is public on our <Link href="/methodology" className="text-primary hover:underline">methodology page</Link>.</p>
             <p className="text-muted-foreground leading-relaxed">Our editorial independence policy guarantees that no vendor can pay for placement, ratings, or positive coverage. Revenue comes from clearly disclosed affiliate commissions and sponsored newsletter placements.</p>
           </section>
 
@@ -73,10 +73,10 @@ export default function MediaKitPage() {
             <h2 className="text-2xl font-bold tracking-tight mb-4">Editorial Standards</h2>
             <div className="space-y-3">
               {[
-                { title: "Independent Testing", desc: "Every tool is tested hands-on by our team before receiving a rating. No vendor can influence scores." },
-                { title: "Standardized Methodology", desc: "All reviews follow a consistent two-week testing protocol with independently verified findings." },
-                { title: "Transparent Criteria", desc: "Our scoring rubric evaluates features, ease of use, support, value, and performance on a 1-5 scale, each dimension weighted 20%." },
-                { title: "Regular Updates", desc: "Reviews are updated at least annually to reflect product changes, pricing updates, and market developments." },
+                { title: "Independent Coverage", desc: "No vendor can pay for placement, ratings, or coverage. Scores are never adjusted for commercial relationship." },
+                { title: "Standardized Methodology", desc: "Every page follows the same published scoring and sourcing rules, applied consistently across categories." },
+                { title: "Transparent Criteria", desc: "Nine recorded category scores on a 1-5 scale, each equally weighted, with the overall rating as their mean." },
+                { title: "Regular Updates", desc: "Pages are revisited when pricing, features, or product positioning change materially, and carry a last-reviewed date." },
               ].map((s) => (
                 <div key={s.title} className="p-4 rounded-xl border border-border">
                   <div className="font-medium text-sm mb-1">{s.title}</div>
@@ -88,9 +88,9 @@ export default function MediaKitPage() {
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4">Team</h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is run by a small, independent team. Every review follows our published methodology: hands-on testing for a minimum of two weeks, scored against a five-dimension rubric, and cross-checked against public user feedback from G2, Capterra, and TrustRadius. We don&apos;t publish individual bios at this stage.</p>
+            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is run by a small, independent team. Every page follows our published methodology: nine recorded category scores on a 1-5 scale with the overall rating as their mean, one recorded source per figure, and no unsourced fact stated as confirmed. Editorial roles are listed on our <Link href="/authors" className="text-primary hover:underline">authors page</Link>.</p>
             <div className="mt-4 text-sm">
-              <Link href="/methodology" className="text-primary hover:underline">Read our testing methodology →</Link>
+              <Link href="/methodology" className="text-primary hover:underline">Read our full methodology →</Link>
             </div>
           </section>
 

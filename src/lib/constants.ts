@@ -92,7 +92,7 @@ export const editorialLinks = [
   { href: "/research-methodology", label: "Research Methodology" },
   { href: "/fact-checking-policy", label: "Fact-Checking Policy" },
   { href: "/corrections-policy", label: "Corrections Policy" },
-  { href: "/how-we-test-software", label: "How We Test Software" },
+  { href: "/how-we-test-software", label: "How We Evaluate Software" },
   { href: "/affiliate-disclosure", label: "Affiliate Disclosure" },
   { href: "/advertising-disclosure", label: "Advertising Disclosure" },
   { href: "/dmca", label: "DMCA Policy" },

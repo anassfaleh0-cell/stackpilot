@@ -1,26 +1,27 @@
 import Link from "next/link"
 import { GlassCard } from "@/components/dynamic"
-import { CheckCircle2, FileText, Star, Calendar, Users, Shield } from "lucide-react"
+import { CheckCircle2, FileText, Star, Calendar, ListChecks, Shield } from "lucide-react"
 
 const steps = [
-  { icon: <FileText size={14} />, label: "Research", description: "We analyze market data, vendor documentation, and user reviews before testing." },
-  { icon: <Users size={14} />, label: "Testing Protocol", description: "Our published protocol specifies at least two weeks of evaluation in realistic workflows before a rating is issued." },
-  { icon: <Star size={14} />, label: "Scoring", description: "Five-dimension rubric covering features, ease of use, support, value, and performance, each weighted 20%." },
-  { icon: <CheckCircle2 size={14} />, label: "Verification", description: "Findings cross-referenced against G2, Capterra, and TrustRadius user reviews." },
-  { icon: <Calendar size={14} />, label: "Review", description: "Each review is reviewed by a second analyst before publication." },
+  { icon: <FileText size={14} />, label: "Sources", description: "Each page is assembled from material we hold: our recorded review dataset, vendor documentation, and published pricing pages." },
+  { icon: <Star size={14} />, label: "Scoring", description: "Nine recorded category ratings on a 1-5 scale. The overall score is their mean, rounded to one decimal." },
+  { icon: <ListChecks size={14} />, label: "Consistency", description: "The same figure is used wherever a tool appears, so ratings and review counts agree across the site." },
+  { icon: <Calendar size={14} />, label: "Dating", description: "Every page shows the date it was last reviewed." },
+  { icon: <CheckCircle2 size={14} />, label: "Limits", description: "Facts we cannot source are left off the page or marked unverified rather than stated as confirmed." },
   { icon: <Shield size={14} />, label: "Independence", description: "No vendor can pay for placement or influence ratings." },
 ]
 
 export function EEATProcess({ category }: { category?: string }) {
+  void category
   return (
     <GlassCard>
       <div className="p-4">
         <h3 className="font-semibold mb-3 text-sm flex items-center gap-1.5">
           <FileText size={14} className="text-primary" />
-          Our Editorial Process
+          How This Page Is Built
         </h3>
         <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-          Every review on PilotStack follows a standardized six-step editorial process designed to ensure accuracy, fairness, and usefulness.
+          Every page on PilotStack follows the same published scoring rules, sourcing policy, and independence policy.
         </p>
         <div className="space-y-2.5">
           {steps.map((step, i) => (

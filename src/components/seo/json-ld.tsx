@@ -380,13 +380,14 @@ export function ProductSchema({ name, description, image, brand, aggregateRating
   return ld(schema, "ld-product")
 }
 
-export function ReviewSchema({ name, description, rating, url, datePublished, body, companyInfo }: {
+export function ReviewSchema({ name, description, rating, url, datePublished, body, image, companyInfo }: {
   name: string
   description: string
   rating: number
   url: string
   datePublished?: string
   body?: string
+  image?: string
   companyInfo?: { founded?: number; headquarters?: string; employees?: string }
 }) {
   const schema = clean({
@@ -396,6 +397,7 @@ export function ReviewSchema({ name, description, rating, url, datePublished, bo
     name,
     description,
     url,
+    ...(image ? { image: { "@type": "ImageObject", url: image } } : {}),
     brand: { "@type": "Brand", name },
     ...(companyInfo?.founded ? { brand: { "@type": "Brand", name, foundingDate: `${companyInfo.founded}-01-01` } } : {}),
     ...(companyInfo?.headquarters ? { countryOfOrigin: companyInfo.headquarters } : {}),

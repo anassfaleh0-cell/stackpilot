@@ -8,7 +8,7 @@ import Link from "next/link"
 
 export const metadata = createMetadata({
   title: "Our Team — Meet the PilotStack Editorial Team",
-  description: "PilotStack is run by a small, independent team. Every review follows our published methodology: hands-on testing, transparent scoring, and no vendor-paid placement.",
+  description: "PilotStack is run by a small, independent team. Every page follows our published methodology: recorded scoring, transparent sourcing, and no vendor-paid placement.",
   path: "/team",
 })
 
@@ -25,9 +25,8 @@ export default function TeamPage() {
             <Badge variant="default" className="mb-4">Our People</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Meet the PilotStack Team</h1>
             <p className="text-lg text-muted-foreground text-pretty mb-8">
-              PilotStack is run by a small, independent team. Every review follows our published
-              methodology — no individual bios are published at this stage, but the process behind
-              every score is public.
+              PilotStack is run by a small, independent team. Editorial roles are published on our{" "}
+              <Link href="/authors">authors</Link> pages, and the process behind every score is public.
             </p>
             <Card className="p-6">
               <div className="flex items-center gap-4 mb-4">
@@ -40,10 +39,10 @@ export default function TeamPage() {
                 </div>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                Every review on PilotStack follows our published methodology: hands-on testing for a
-                minimum of two weeks, scored against a five-dimension rubric, and cross-checked
-against public user feedback from G2, Capterra, and TrustRadius. We don&apos;t publish
-individual bios at this stage, but our full testing process is public.
+                Every page on PilotStack follows our published methodology: nine recorded category
+                scores on a 1-5 scale with the overall rating as their mean, one recorded source per
+                figure reused everywhere a tool appears, and no unsourced fact stated as confirmed.
+                We don&apos;t accept payment for coverage.
               </p>
               <Link href="/methodology" className="text-sm text-primary hover:underline">
                 Read our full methodology →

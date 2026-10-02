@@ -9,7 +9,7 @@ import { ArrowRight } from "lucide-react"
 
 export const metadata = createMetadata({
   title: "Our Authors & Editorial Team",
-  description: "PilotStack content is produced by a small, independent team following a published methodology — hands-on testing, transparent scoring, and no vendor-paid placement.",
+  description: "PilotStack content is produced by a small, independent team following a published methodology — recorded scoring, transparent sourcing, and no vendor-paid placement.",
   path: "/authors",
 })
 
@@ -18,21 +18,21 @@ const authors = [
     slug: "sarah-chen",
     name: "Sarah Chen",
     role: "Founder & Editor-in-Chief",
-    bio: "Sarah founded PilotStack after a decade in product management at SaaS companies. She leads editorial strategy and personally reviews tools in the Project Management, CRM, and Productivity categories.",
+    bio: "Sarah founded PilotStack and edits coverage in the Project Management, CRM & Sales, and Productivity categories, working to the site's published scoring and sourcing rules.",
     initials: "SC",
   },
   {
     slug: "marcus-rivera",
     name: "Marcus Rivera",
     role: "Senior Software Reviewer",
-    bio: "Marcus brings 8 years of experience in enterprise software evaluation. He specializes in Developer Tools, Analytics, and Security & Compliance categories, with a focus on hands-on testing methodologies.",
+    bio: "Marcus writes PilotStack's coverage of Developer Tools, Analytics, and Security & Compliance, recording how products are documented and configured alongside the site's nine category scores.",
     initials: "MR",
   },
   {
     slug: "emily-nakamura",
     name: "Emily Nakamura",
     role: "Research Analyst",
-    bio: "Emily leads PilotStack's research reports and market analysis. She holds a degree in Data Science and specializes in synthesizing industry trends, vendor benchmarks, and competitive landscape analysis.",
+    bio: "Emily leads PilotStack's research and market analysis pages, covering Finance, HR, Marketing, Communication and Design tools with an emphasis on recorded pricing and category data.",
     initials: "EN",
   },
 ]
@@ -50,7 +50,7 @@ export default function AuthorsPage() {
             <Badge variant="default" className="mb-4">Our Team</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Meet Our Editorial Team</h1>
             <p className="text-lg text-muted-foreground mb-10 max-w-2xl">
-              Our editorial team combines deep industry expertise with rigorous hands-on testing. Every reviewer follows our published methodology.
+              Our editorial team publishes coverage across 12 categories. Every page follows the same published scoring and sourcing rules.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6">
@@ -76,12 +76,12 @@ export default function AuthorsPage() {
             </div>
 
             <div className="mt-10 p-6 rounded-xl bg-muted-bg border border-border">
-              <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-2">How we test</h2>
+              <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-2">How we score</h2>
               <p className="text-sm text-muted-foreground">
-                Every review follows our published methodology: hands-on testing for a minimum of two
-                weeks, scored against a five-dimension rubric, and cross-checked against public user
-                feedback from G2, Capterra, and TrustRadius.{" "}
-                <Link href="/methodology" className="text-primary hover:underline">Read the full methodology →</Link>
+                Every page carries nine recorded category scores on a 1-5 scale, with the overall rating as their
+                mean rounded to one decimal. Figures come from one recorded source each, reused everywhere a tool
+                appears, and facts we cannot source are omitted or marked unverified.{" "}
+                <Link href="/methodology" className="text-primary hover:underline">Read the full methodology</Link>
               </p>
             </div>
           </div>

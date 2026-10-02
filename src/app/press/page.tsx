@@ -44,7 +44,7 @@ export default function PressPage() {
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center gap-2"><Newspaper size={20} /> About PilotStack</h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is an independent software review and research platform. We provide in-depth, hands-on reviews of B2B SaaS tools across 12 categories, helping businesses make informed software purchasing decisions. Our small, independent team tests every product extensively per our published methodology before publishing verified ratings and comparisons.</p>
+            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is an independent software review and research platform. We publish in-depth coverage of B2B SaaS tools across 12 categories, helping businesses make informed software purchasing decisions. Our small, independent team follows a published methodology in which every figure is recorded once, sourced, and reused across the site before ratings and comparisons go live.</p>
             <div className="grid sm:grid-cols-3 gap-4 text-sm">
               <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">{publishedPages}</div><div className="text-muted-foreground">Published pages</div></div>
               <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">1.1M+</div><div className="text-muted-foreground">Words of research</div></div>
@@ -70,11 +70,11 @@ export default function PressPage() {
             <div className="grid sm:grid-cols-2 gap-3">
               {[
                 { title: "Editorial Policy", desc: "Our standards and practices", href: "/editorial-policy" },
-                { title: "Review Methodology", desc: "How we test and rate software", href: "/methodology" },
+                { title: "Review Methodology", desc: "How we score and rate software", href: "/methodology" },
                 { title: "Research Methodology", desc: "Our research approach", href: "/research-methodology" },
                 { title: "Fact-Checking Policy", desc: "Accuracy and verification", href: "/fact-checking-policy" },
                 { title: "Editorial Independence", desc: "No paid placements policy", href: "/editorial-independence" },
-                { title: "How We Test Software", desc: "Hands-on testing process", href: "/how-we-test-software" },
+                { title: "How We Evaluate Software", desc: "Our evaluation process", href: "/how-we-test-software" },
               ].map((r) => (
                 <Link key={r.title} href={r.href} className="flex items-center gap-3 p-4 rounded-xl border border-border hover:bg-muted-bg transition-colors group">
                   <div className="font-medium text-sm group-hover:text-primary transition-colors">{r.title}</div>
