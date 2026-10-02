@@ -152,6 +152,13 @@ describe("CD-5 / CD-6: review metadata", () => {
     for (const c of cases) expect(c.description.toLowerCase()).not.toContain("alternatives")
   })
 
+  it("never doubles the category noun or leaves a double space", () => {
+    for (const c of cases) {
+      expect(c.description).not.toMatch(/tools tools/i)
+      expect(c.description).not.toMatch(/ {2,}/)
+    }
+  })
+
   it("prefixes the description with a correct article and the tool name", () => {
     for (const c of cases) expect(c.description.startsWith(`${withArticle(c.name)} review:`)).toBe(true)
   })

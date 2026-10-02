@@ -58,6 +58,8 @@ export function reviewMetaTitle(name: string): string {
 export function reviewMetaDescription(name: string, tagline: string, category: string): string {
   const core = `${withArticle(name)} review: ${String(tagline).trim()}`
   if (core.length >= 90) return truncateAtWordBoundary(core, META_DESCRIPTION_MAX)
-  const tail = ` Pricing, pros, cons, and where ${name} sits among ${category.toLowerCase()} tools.`
+  const categoryBase = String(category).trim().replace(/\s*tools$/i, "").trim()
+  const place = categoryBase ? `${categoryBase.toLowerCase()} tools` : "software tools"
+  const tail = ` Pricing, pros, cons, and where ${name} sits among ${place}.`
   return truncateAtWordBoundary(`${core}${tail}`, META_DESCRIPTION_MAX)
 }
