@@ -2,7 +2,7 @@
   "slug": "wave",
   "name": "Wave",
   "tagline": "Free accounting and invoicing software for small businesses.",
-  "description": "Free accounting and invoicing software for small businesses.",
+  "description": "Wave is free accounting and invoicing for small businesses: unlimited invoices with a Pay Now button, expense tracking, and bank reconciliation.",
   "category": "Finance & Accounting",
   "website": "https://waveapps.com",
   "pricing": "Free",
@@ -10,65 +10,65 @@
   "rating": 4.1,
   "reviewCount": 600,
   "pros": [
-    "Excellent finance & accounting capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "The core is recorded as genuinely free — invoicing, expense tracking, and bank reconciliation at no cost, with unlimited invoicing named in this repository's freelancer ranking",
+    "Invoices end in a prominent Pay Now button linking to Stripe or PayPal, so payment is requested from the document itself",
+    "Revenue is drawn from payment processing fees and premium add-ons rather than from seats, so a light user carries no subscription for the accounting itself",
+    "Six ranking pages in this repository name Wave as the starting point for small teams entering a category",
+    "The finance buyers' guide pairs Wave with FreshBooks as the fastest route from time entry to a paid invoice for service businesses"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "This repository's QuickBooks-versus-Xero guide recommends Wave only for very basic accounting under five invoices and ten transactions a month, which sets a documented volume ceiling",
+    "Processing fees replace the subscription as the cost, so heavy card volume funds the account through transactions rather than a flat rate",
+    "The dataset holds no compliance certification and no support-tier description for Wave, so an evaluation depending on either must be settled with the vendor"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured finance & accounting platform with comprehensive tooling",
+      "name": "Unlimited invoicing on free",
+      "description": "Our freelancer ranking records Wave as the only truly free option with unlimited invoicing.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Pay Now button on invoices",
+      "description": "Each invoice closes with a prominent Pay Now button that links out to Stripe or PayPal so the customer pays from the document.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
+      "name": "Bank reconciliation workflow",
+      "description": "Bank reconciliation is named alongside invoicing and expense tracking as one of the three things the free product covers.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Expense tracking for the small business",
+      "description": "Expense tracking sits in the recorded free core, paired with invoicing and reconciliation rather than sold as a separate module.",
       "available": true,
-      "category": "Security"
+      "category": "Core"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Card and bank processing fees",
+      "description": "The accounting ranking records a percentage-plus-fixed charge on credit card transactions and a percentage charge on bank payments.",
+      "available": true,
+      "category": "Pricing"
+    },
+    {
+      "name": "Premium add-ons beside the free core",
+      "description": "The pricing guide records revenue from premium add-ons, which is the paid part attached to an otherwise free product.",
+      "available": true,
+      "category": "Pricing"
+    },
+    {
+      "name": "Time entry into a paid invoice",
+      "description": "Our finance buyers' guide records a path from time entry to paid invoice for service businesses billing hourly or by project.",
       "available": true,
       "category": "Usability"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Cloud delivery with recorded API",
+      "description": "This page's dataset records Wave as a cloud-delivered product with an API field marked available and nothing held on a local install.",
       "available": true,
       "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
-      "available": true,
-      "category": "Core"
     }
   ],
   "ratings": [
@@ -111,71 +111,78 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Wave across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your finance & accounting needs.",
+      "title": "What Wave carries at no cost",
+      "body": "Wave is filed here as free accounting and invoicing software for small businesses, and this repository's accounting ranking describes it as a genuinely free platform covering invoicing, expense tracking, and bank reconciliation at the entry level. The pricing guide places that model beside other freemium products: basic accounting features at no cost, with revenue drawn from payment processing fees and premium add-ons instead of a subscription. The description on this page comes from records the repository already holds — rankings, guides, comparison pages, and the fields stored alongside this review — rather than from anyone having opened a Wave account.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Wave serves the finance & accounting category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "Invoices with a Pay Now button",
+      "body": "Wave's invoicing surface is described in this repository's freelancer hub in practical terms: an invoice carries line items, rates, and payment terms, and ends with a prominent Pay Now button linking to Stripe or PayPal. That button is the piece connecting billing to cash, since the customer pays from the invoice rather than after a reminder, and it is also where the product's revenue model enters the transaction. The same hub groups Wave with FreshBooks and HoneyBook as the quick route to a professional invoice, while the freelancer ranking adds unlimited invoicing on the free option. The recorded invoice features are:",
+      "type": "list",
+      "items": [
+        "Line items, rates, and payment terms laid out on the invoice",
+        "A prominent Pay Now button linking to Stripe or PayPal",
+        "Unlimited invoicing recorded on Wave's free option",
+        "A path from time entry to a paid invoice for service businesses",
+        "Expense tracking and bank reconciliation sitting beside the billing"
+      ]
+    },
+    {
+      "title": "Bank reconciliation as the recorded core",
+      "body": "Bank reconciliation sits in the same recorded trio as invoicing and expense tracking, which is what makes Wave a set of books rather than an invoice generator. This repository's accounting-selection guide lists reconciliation among the month-end steps a business should document before buying software, and the accounting ranking names it as one of the three things the free Wave covers. The shape implied by those records is a bank feed matched against recorded income and expenses, with the reconciled result feeding whatever statements the business needs. Nothing in the dataset describes inventory, project profitability, or multi-entity consolidation for Wave, which lines up with the guide that places it at the entry level for sole proprietors with simple finances.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Wave excels in this area.",
+      "title": "How a free product earns revenue",
+      "body": "This page records Wave's pricing model as free, with a price range of Free, and the repository's pricing guide explains how products of this shape pay for themselves: basic accounting features at no cost, generating revenue through payment processing fees and premium add-ons. The accounting ranking records the fee side more specifically, attaching a percentage-plus-fixed charge to credit card transactions and a percentage charge to bank payments, so cost rises with money collected rather than with seats. A business sending a handful of invoices therefore runs the tool for nothing, while a business in heavy payment volume funds the account through transactions. The free record and the add-on record are not in conflict: the core is free, and the paid part attaches to payments.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Wave excels in this area.",
+      "title": "The ceiling our guides put on Wave",
+      "body": "The clearest limit in this repository is written into a guide rather than a plan table: the QuickBooks-versus-Xero article tells readers to consider Wave for very basic accounting when a business is sending under five invoices and ten transactions a month. That sentence is the closest thing on file to a documented capacity boundary for the product, and it sits alongside the accounting-selection guide, which groups Wave with ZipBooks as free or very low-cost accounting for sole proprietors and freelancers with simple finances. Beyond volume, our records do not describe inventory, project profitability, or consolidation for Wave — gaps in what the dataset holds, rather than statements that the product lacks those things.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Wave excels in this area.",
+      "title": "Where small teams start with Wave",
+      "body": "Six ranking pages in this repository repeat the same position: small teams typically start with Wave, which carries the most accessible entry point in those rankings. The line appears across the budgeting, expense management, free accounting, expense tracking, cloud ERP, and ERP lists, which makes it a consistent editorial stance rather than a stray sentence. The freelancer content agrees from another angle, naming Wave among the tools that produce professional invoices quickly, and the finance buyers' guide pairs it with FreshBooks as the fastest path from time entry to a paid invoice. Read together, the record describes Wave as the default first stop rather than the tool a growing finance function graduates into.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Wave excels in this area.",
+      "title": "Wave against the paid entry-level tools",
+      "body": "Fourteen comparison records in this repository pair Wave with other products, and their pattern is unusually consistent. Wave is not recorded as the overall pick in any of the fourteen, the user-rating row goes against it every time, and the only criterion rows it takes are starting price against FreshBooks and QuickBooks. On this page it carries a rating of 4.1 out of 5 from 600 reviews. The alternatives pages tell the same story from both directions: Wave is recommended as an alternative to Expensify, Zoho Books, and Sage Intacct, and it names those same three as its own alternatives — a grouping that reads as a category match rather than a like-for-like recommendation.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Wave excels in this area.",
+      "title": "Delivery, support, and what is not on file",
+      "body": "What the material behind this page records Wave as delivered from the cloud with an API field marked available, which fits a product whose bank data and invoices are held by the service rather than on a local install. What the repository stores nowhere for Wave is a certification entry together with support-tier wording: no attestation appears alongside this product, and no record states what channels, response commitments, or paid support plans exist. Both are gaps in the dataset rather than findings about the product, so neither can be used to argue a standard is met or missed. A buyer whose approval depends on certification evidence or a support commitment should confirm those with the vendor before relying on this page.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "Wave achieves a 4.1/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable finance & accounting capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Wave enables teams to Free accounting and invoicing software f through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Wave supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Wave's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Who Wave fits",
+      "body": "The record points at a specific first customer: a sole trader, freelancer, or very small business sending a modest number of invoices and wanting books a bookkeeper can open without translation. The accounting-selection guide says as much by grouping Wave with entry-level tools for sole proprietors, and the ranking pages cast it as the starting point rather than the destination. The fit weakens for a business that needs inventory, project profitability, or a second legal entity, none of which our records describe for Wave, and it does not survive an evaluation that requires certification evidence, because this dataset holds none. Rated 4.1 out of 5 from 600 reviews here, it is the cheapest recorded route into a real set of books.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Wave different from other finance & accounting tools?",
-      "answer": "Wave differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Wave ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Is Wave genuinely free to use?",
+      "answer": "This page records the pricing model as free with a range of Free, and the repository's pricing guide explains the shape: core accounting at no cost, with revenue drawn from payment processing fees and premium add-ons."
     },
     {
-      "question": "Can Wave handle enterprise-scale requirements?",
-      "answer": "Yes, Wave supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "What usage limits does this repository record for Wave?",
+      "answer": "A guide here recommends Wave for very basic accounting only, under five invoices and ten transactions a month, while the selection guide places it with sole proprietors whose finances are simple."
     },
     {
-      "question": "How long does it take to implement Wave?",
-      "answer": "Most teams can get started with Wave within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "How does Wave collect payment from an invoice?",
+      "answer": "Each invoice carries a prominent Pay Now button linking to Stripe or PayPal, and the accounting ranking records processing charges on card and bank payments in place of a subscription."
     },
     {
-      "question": "Does Wave offer a free trial or money-back guarantee?",
-      "answer": "Wave provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "How does Wave fare against paid entry-level tools?",
+      "answer": "Across fourteen comparison records it is never the overall pick and loses the user-rating row every time, while the starting-price row goes its way against FreshBooks and QuickBooks."
     },
     {
-      "question": "What kind of support does Wave offer?",
-      "answer": "Wave provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Who should start with Wave according to these rankings?",
+      "answer": "Small teams and freelancers: six of this repository's ranking pages name Wave as the entry point for teams starting in a category, and the finance guide pairs it with FreshBooks for time-to-invoice work."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +208,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Beginner",
-  "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "Wave is best suited for enterprises and power users who need advanced finance & accounting capabilities. Teams with dedicated IT support will get the most from its extensive feature set.",
-  "whoShouldNotUse": "Wave may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
+  "learningCurve": "Gentle — a working setup is reachable within the first hour",
+  "whoShouldUse": "Sole proprietors, freelancers, and very small businesses sending a modest number of invoices, including teams whose first requirement is a set of books at no fixed cost that a bookkeeper can open without translation.",
+  "whoShouldNotUse": "Businesses past the under-five-invoice guidance recorded in this repository's guide, teams needing inventory or project profitability, and buyers who must see certification evidence or support tiers before signing."
 }

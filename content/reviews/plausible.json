@@ -1,8 +1,8 @@
 {
   "slug": "plausible",
   "name": "Plausible",
-  "tagline": "Privacy-first web analytics platform without cookies.",
-  "description": "Privacy-first web analytics platform without cookies.",
+  "tagline": "Open-source web analytics that collects without cookies.",
+  "description": "Plausible is cookieless web analytics with an open-source build and a dashboard you can publish on a public link.",
   "category": "Analytics & Data",
   "website": "https://plausible.io",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.6,
   "reviewCount": 2160,
   "pros": [
-    "Excellent analytics & data capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "The dashboard can be published on a shared address, so a report goes out as a link instead of an export with permissions attached.",
+    "Collection is cookieless and stores nothing on the visitor's device, which is why this repository's consent-management page records that no banner is required.",
+    "The server code is open, so an operator can read what the tracking script and the backend actually do before trusting either.",
+    "Install is one script tag, with no event taxonomy, tag manager, or release cycle needed to start recording visits.",
+    "The recorded band of $9-69/mo sits in ordinary subscription territory, and the file lists the pricing model as paid rather than per seat."
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "The single page stops at site-level questions, so there is no cohort, funnel, or account view to move into when a figure needs explaining.",
+    "With nothing persisted on the device, cross-session identity is deliberately weak and returning-visitor detail is thinner than in cookie-based tools.",
+    "Running the open-source build yourself moves upgrades, backups, and uptime onto whoever administers the server."
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured analytics & data platform with comprehensive tooling",
+      "name": "Cookieless visit tracking",
+      "description": "Visits are recorded without cookies or personal data, which is what allows an install with no consent banner.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "One-line script install",
+      "description": "A single script tag in the site's template is the whole integration, with no per-event code to maintain.",
       "available": true,
       "category": "Usability"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Public dashboard links",
+      "description": "The current dashboard can be opened by anyone holding its address, with no accounts or exports involved.",
       "available": true,
-      "category": "Integrations"
+      "category": "Collaboration"
     },
     {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Custom event goals",
+      "description": "Actions beyond page views can be recorded as goals and counted alongside the pages they sit on.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Open-source server code",
+      "description": "The code behind the tracking script and the hosted service is published, so its behavior can be inspected.",
       "available": true,
       "category": "Core"
+    },
+    {
+      "name": "Self-hosted deployment",
+      "description": "The service can be run on infrastructure the operator controls, keeping the traffic data on their own machine.",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Source and campaign breakdown",
+      "description": "Visits are grouped by referrer and by campaign parameters, so the origin of traffic is readable at a glance.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Paid band of $9-69/mo",
+      "description": "This file records Plausible as paid with a $9-69/mo range and no tier detail beyond that figure.",
+      "available": true,
+      "category": "Pricing"
     }
   ],
   "ratings": [
@@ -111,71 +111,68 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Plausible across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your analytics & data needs.",
+      "title": "Dashboard links you can hand out",
+      "body": "Plausible's most distinctive habit is treating the dashboard as something you can publish. A shared address opens the current numbers for anyone holding it, which turns reporting into a link rather than an export with permissions attached. That model works only because the figures are site-level and carry no personal detail: there is nothing sensitive in a pageview chart to expose along with the URL. For an agency, an open-source project, or a team reporting upward, it removes the seats-and-permissions step that normally sits between a report and its audience.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Plausible serves the analytics & data category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "The script and what it does not set",
+      "body": "Installation is a script tag in the site's template, and the collection behind it is cookieless. This repository's consent-management listing records that Plausible needs no cookie consent banner precisely because it does not use cookies, while a cost blog adds that it collects no personal data at all. Nothing is written to the visitor's device, which is what keeps that privacy claim structural rather than a policy promise. The tradeoff sits in identity: with no persistent identifier stored, close cross-session tracking of individuals is not what the product is for.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Plausible excels in this area.",
+      "title": "Single-page reporting and its ceiling",
+      "body": "The dashboard is one page, and the items below are what it puts on it. Each one is a site-level question: how much traffic arrived, from where, and doing what. The ceiling is deliberate. Plausible answers what happened on the site without accumulating the individual-level detail that would turn the same page into a privacy problem.",
+      "type": "list",
+      "items": [
+        "Page views and unique visitors for the current period",
+        "Entry pages and the routes taken through the site",
+        "Traffic sources, referrers, and campaign tags",
+        "Devices, browsers, and countries of origin",
+        "Goal and event completions counted against pages"
+      ]
+    },
+    {
+      "title": "Recorded price band and directory rankings",
+      "body": "The record here has Plausible marked as paid, $9-69/mo, and that band is the only price information our records contain; no tier breakdown or feature gating appears anywhere. The repository's best-privacy-analytics page ranks Plausible first for teams wanting analytics without cookies and consent banners, quoting the same rating and band this file holds. Those directory rankings are generated from dataset scores rather than from any testing, so they describe how Plausible is filed here rather than how it performed against anything.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Plausible excels in this area.",
+      "title": "Self-hosting and the open-source route",
+      "body": "Plausible publishes its server code, so the same product can be run on infrastructure you control instead of on the vendor's service. That option reframes the privacy question: the traffic data never leaves a machine you own, and retention becomes your policy rather than someone else's. It also moves the operational load, because upgrades, backups, and uptime stop being another party's job. Our dataset records Plausible as a cloud deployment and says nothing about the self-hosted path in detail, so its current shape should be checked against the project's own documentation.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Plausible excels in this area.",
+      "title": "Plausible against the other cookieless tools",
+      "body": "Of the nine comparison records in this file, three matter for a shortlist: Fathom, Matomo, and Google Analytics. Two blog entries in this repository list Plausible beside Fathom as the cookie-free pair, and the split between them is posture rather than principle, since Plausible centers on a shareable dashboard and inspectable code while Fathom centers on a flat single-screen install. Matomo is the self-hosted option for teams that want control without running a server themselves. Google Analytics appears as the incumbent the entire category defines itself against.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Plausible excels in this area.",
-      "type": "text"
-    },
-    {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Plausible excels in this area.",
-      "type": "text"
-    },
-    {
-      "title": "Conclusion",
-      "body": "Plausible achieves a 4.6/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable analytics & data capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Plausible enables teams to Privacy-first web analytics platform wit through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Plausible supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Plausible's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Scope limits and the basis for this page",
+      "body": "Plausible suits a site owner who wants a public number, a script install, and a file that never touches the visitor's device. It does not suit anyone who needs to follow a person across sessions or break traffic down by account, because the product's design declines that data. Our file scores it 4.6 from 2,160 entries; those are directory figures rather than measurements. The observations above are assembled from Plausible's published documentation and this repository's files, and the software itself was not run for this review. No compliance certifications appear anywhere in these records, so confirm them with the vendor.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Plausible different from other analytics & data tools?",
-      "answer": "Plausible differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Plausible ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Does Plausible really need no consent banner?",
+      "answer": "This repository's consent-management listing says so and gives the reason: the script sets no cookies. Whether a banner is still required on your site depends on everything else that site loads, not on Plausible alone."
     },
     {
-      "question": "Can Plausible handle enterprise-scale requirements?",
-      "answer": "Yes, Plausible supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "Can Plausible be run on our own server?",
+      "answer": "The product is open source, so a self-hosted deployment is possible. This file, however, records only a cloud deployment and gives no detail on the self-hosted route, so check the project's current documentation."
     },
     {
-      "question": "How long does it take to implement Plausible?",
-      "answer": "Most teams can get started with Plausible within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "How does Plausible differ from Fathom?",
+      "answer": "Both are cookieless and script-installed, and two blogs in this repository list them together. The recorded difference is posture: Plausible centers on a shareable dashboard and open code, Fathom on a flat single-screen install."
     },
     {
-      "question": "Does Plausible offer a free trial or money-back guarantee?",
-      "answer": "Plausible provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "What questions will Plausible's dashboard not answer?",
+      "answer": "Anything about an identified person, an account, or a journey spanning several sessions. The product declines that data by design, so retention, cohort, and revenue questions belong to a different tool."
     },
     {
-      "question": "What kind of support does Plausible offer?",
-      "answer": "Plausible provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "What compliance records does this dataset hold for Plausible?",
+      "answer": "None. No certification appears in our records, so a compliance review starts with the vendor's or the project's own current documentation rather than with this record."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +198,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Beginner",
-  "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "Plausible is designed for fast-growing startups that need a scalable analytics & data platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Plausible may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
+  "learningCurve": "Very short — one script tag and a single page; the only real learning is which questions the tool deliberately will not answer.",
+  "whoShouldUse": "Site owners, open-source projects, and agencies that want traffic figures on a public link and a tracking script that never writes to the visitor's device.",
+  "whoShouldNotUse": "Teams that need person-level or account-level analysis, or that require durable cross-session identity, since Plausible's cookieless design gives that data up."
 }

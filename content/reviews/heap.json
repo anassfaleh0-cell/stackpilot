@@ -1,8 +1,8 @@
 {
   "slug": "heap",
   "name": "Heap",
-  "tagline": "Digital insights platform with auto-captured product analytics.",
-  "description": "Digital insights platform with auto-captured product analytics.",
+  "tagline": "Product analytics built on automatically captured events.",
+  "description": "Heap is product analytics built on automatic event capture, so questions can be asked of data that was already collected.",
   "category": "Analytics & Data",
   "website": "https://heap.io",
   "pricing": "Freemium",
@@ -10,65 +10,65 @@
   "rating": 4.2,
   "reviewCount": 1380,
   "pros": [
-    "Excellent analytics & data capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Auto-capture removes the instrumentation backlog: events are collected before anyone has decided which questions matter.",
+    "Retroactive segmentation answers questions from data that was already recorded, instead of waiting for a release to start collecting it.",
+    "Heap's value compounds quietly, because history keeps accumulating and later questions have more to work with than earlier ones did.",
+    "Funnels, retention, and cohorts all read from one captured stream, so the same event carries the same meaning in every view.",
+    "This dataset holds direct comparison records against Amplitude, Mixpanel, Matomo, FullStory, and Google Analytics, which makes a shortlist easy to build."
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Capture breadth creates a governance job: with every interaction stored, someone has to decide which events and definitions are trustworthy.",
+    "Retroactive questions only reach back to the moment Heap's script was first installed, and history from before that does not exist to analyze.",
+    "The recorded $5k-10k/yr band is an annual mid-market commitment, a different purchase from a site-traffic tool billed by the month."
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured analytics & data platform with comprehensive tooling",
+      "name": "Automatic event capture",
+      "description": "Heap's script records interactions across the product without each one being defined in advance by an engineer.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Retroactive event definitions",
+      "description": "Events and segments can be defined after the fact and applied to data that had already been collected.",
       "available": true,
       "category": "Reporting"
     },
     {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
+      "name": "Funnel and retention views",
+      "description": "Funnels, retention curves, and cohort comparisons run over the same captured event stream.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Path analysis across steps",
+      "description": "The sequence of actions users actually took can be read as a path rather than reconstructed by hand.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Shared metric definitions",
+      "description": "A team can settle on one definition of a funnel so separate analyses report the same figure.",
+      "available": true,
+      "category": "Collaboration"
+    },
+    {
+      "name": "Free tier for evaluation",
+      "description": "This repository's analytics pricing guide records a Heap free tier covering 10,000 sessions per month.",
+      "available": true,
+      "category": "Pricing"
+    },
+    {
+      "name": "Cloud-hosted event store",
+      "description": "Collection, storage, and querying run in Heap's own cloud service rather than on the customer's hardware.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Role-scoped workspace access",
+      "description": "Access to analyses can be restricted by role, so the captured stream reaches only permitted users.",
       "available": true,
       "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
-      "available": true,
-      "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
-      "available": true,
-      "category": "Core"
     }
   ],
   "ratings": [
@@ -111,71 +111,78 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Heap across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your analytics & data needs.",
+      "title": "Automatic event capture",
+      "body": "Heap's central design choice is that interactions are collected before anyone decides which ones matter. Rather than a developer instrumenting each click, form submission, and page view against a written tracking plan, Heap's own script gathers activity continuously and leaves interpretation to a later date. That reverses the usual order of operations in product analytics: measurement first, questions second. The practical effect is that the size of an engineering backlog stops setting the ceiling on what a team is able to measure.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Heap serves the analytics & data category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "Retroactive analysis and the tracking-plan tradeoff",
+      "body": "Because properties are stored as they are captured, an analyst can define an event today and apply it to history that already exists. A question that would normally start with an instrumentation ticket, such as splitting upgrades by the feature a user first touched, can be answered from what was recorded. The cost moves from engineering to governance: once everything is captured, someone has to decide which definitions are authoritative. Teams that skip that decision end up with several funnels that disagree with one another.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Heap excels in this area.",
+      "title": "Analysis surfaces on the captured stream",
+      "body": "Heap's analysis layer runs on a single captured event stream, so every item below draws from the same underlying record instead of from separately instrumented reports. This is what a product team usually asks for first, and the part that matters is that all of it can be pointed at events nobody planned when the script was originally installed.",
+      "type": "list",
+      "items": [
+        "Funnels built from any captured event, including ones defined after the fact",
+        "Retention and cohort views over that same event stream",
+        "Path analysis across the steps users actually took",
+        "Segments by user, account, or session context",
+        "Shared definitions so a reported funnel means one thing"
+      ]
+    },
+    {
+      "title": "The team that gets value from auto-capture",
+      "body": "Heap fits product and growth teams that ask new questions frequently and do not want to queue behind an engineering release to ask them. The model rewards organizations willing to collect broadly and then curate, because auto-capture only shows its value once somebody is doing the sorting. A team with a fixed measurement plan of the same twelve metrics every month captures less of that value, since manual instrumentation would have covered those anyway. This repository's category listing places Heap across the SMB-to-enterprise range, which describes the dataset more than it guarantees a fit.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Heap excels in this area.",
+      "title": "Pricing recorded for Heap",
+      "body": "Our dataset files Heap as freemium with a list price band of $5k-10k/yr, and no exact current price is confirmed anywhere in our records. Separately, this repository's analytics pricing guide states that Heap offers a free tier covering 10,000 sessions per month alongside basic analytics features. The two records sit together without contradicting each other, but neither should be quoted to a vendor as fact. This assessment rests on Heap's own product documentation and the comparison records held in this repository; nobody here ran the software to produce it.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Heap excels in this area.",
+      "title": "Connections to the wider data stack",
+      "body": "In this dataset's comparison rows, Heap is marked present on the integration criteria against every product-analytics peer it is matched with, including Amplitude, Mixpanel, Matomo, FullStory, and Google Analytics. Those rows are generated checkmarks rather than measured tests, so read them as a statement that integrations exist rather than as confirmation that any particular connector was validated. What the record does establish is that Heap is positioned as one node in a stack: events arrive from the product, and analysis or downstream tools consume them afterwards.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Heap excels in this area.",
+      "title": "Data handling and deployment posture",
+      "body": "Heap runs as a cloud service, which means the captured event stream lives on Heap's own infrastructure rather than on the customer's machines. That shape has a plain consequence: retention, residency, and access decisions are questions for the vendor's documentation, not settings a team can settle locally. Nothing in the file assembled for this review records a compliance certification for Heap of any kind, and the machine-generated company record attached to this file is not treated as a source here. Readers running a formal security review should confirm current attestations with the vendor and read this gap as missing records rather than a missing attestation.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Heap excels in this area.",
+      "title": "Peers in these comparison records",
+      "body": "Thirteen comparison records in this repository pair Heap with other tools. Five of them sit in the same product-analytics field, namely Amplitude, Mixpanel, Matomo, FullStory, and Google Analytics, and those carry the signal for a shortlist because each is a different answer to the same question about measuring user behavior. Others pair Heap with website analytics or BI products such as Fathom and Tableau, where the useful comparison is scope rather than capability. The records that pair Heap with Mailchimp, Paddle, or Copy.ai mostly restate that tools in different categories serve different purposes, so weight them least.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "Heap achieves a 4.2/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable analytics & data capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Heap enables teams to Digital insights platform with auto-capt through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Heap supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Heap's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Assessment",
+      "body": "Heap is the right shape of tool for a team whose measurement questions outnumber its engineering capacity, and the wrong shape for a team that already knows exactly what it will track. The recorded rating of 4.2 from 1,380 entries sits below several product-analytics peers in this dataset, but those scores are directory figures rather than anything validated here. The decision underneath the rating is simpler: do you want answers drawn from data already collected, or a curated plan where every number was argued over first? Heap chooses the former.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Heap different from other analytics & data tools?",
-      "answer": "Heap differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Heap ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "What can Heap answer that a manually instrumented tool cannot?",
+      "answer": "Questions nobody anticipated when the tracking plan was written. Because interactions are stored as they happen, a segment defined next month can be applied to data collected before the question existed."
     },
     {
-      "question": "Can Heap handle enterprise-scale requirements?",
-      "answer": "Yes, Heap supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "What happens if Heap's script only covers part of the product?",
+      "answer": "Only what is being captured can be analyzed later. Pages and actions outside the script's coverage leave no history to define events against, which makes install scope a data-quality decision."
     },
     {
-      "question": "How long does it take to implement Heap?",
-      "answer": "Most teams can get started with Heap within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "What pricing does this dataset actually record for Heap?",
+      "answer": "Freemium pricing with a $5k-10k/yr list band, plus a separate note in this repository's pricing guide of a free tier at 10,000 sessions per month. Neither is confirmed current; check the vendor."
     },
     {
-      "question": "Does Heap offer a free trial or money-back guarantee?",
-      "answer": "Heap provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "Which products does this repository compare Heap against?",
+      "answer": "Amplitude, Mixpanel, Matomo, FullStory, Google Analytics, Fathom, Plausible, Power BI, and Tableau, alongside several cross-category pairings that carry less signal for a product-analytics shortlist."
     },
     {
-      "question": "What kind of support does Heap offer?",
-      "answer": "Heap provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Does our dataset record security certifications for Heap?",
+      "answer": "No. Nothing in our records captures an attestation of any kind for Heap. The product runs as a cloud service, so data handling and access controls should be confirmed against current vendor documentation."
     }
   ],
   "relatedComparisons": [],
@@ -200,8 +207,8 @@
     "apiAvailable": true,
     "migrationComplexity": "Medium"
   },
-  "difficulty": "Beginner",
-  "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "Heap is ideal for small to mid-size teams that need a reliable analytics & data solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
-  "whoShouldNotUse": "Heap may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
+  "difficulty": "Intermediate",
+  "learningCurve": "Moderate — reading reports is quick, while learning which captured events to trust takes longer.",
+  "whoShouldUse": "Product and growth teams whose list of questions grows faster than their engineering capacity to instrument them, and who are willing to curate a broadly captured event stream.",
+  "whoShouldNotUse": "Teams that need reporting on history from before Heap's script was installed, or organizations that only want page-level website traffic rather than product-level behavior."
 }

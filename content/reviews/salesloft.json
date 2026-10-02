@@ -2,7 +2,7 @@
   "slug": "salesloft",
   "name": "Salesloft",
   "tagline": "Sales engagement platform for enterprise revenue teams.",
-  "description": "Sales engagement platform for enterprise revenue teams.",
+  "description": "Salesloft is a sales engagement platform organized around cadences, conversation review, coaching, and forecasting for revenue teams.",
   "category": "CRM & Sales",
   "website": "https://salesloft.com",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.3,
   "reviewCount": 560,
   "pros": [
-    "Excellent crm & sales capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Cadences turn outreach into a repeatable queue, so a rep's day starts with what is due rather than with a plan to construct",
+    "Conversation review hands managers evidence for coaching instead of asking them to rely on a rep's recollection of a call",
+    "Forecast roll-ups read the same activity record the cadences produce, tying the quarter's number to observable work",
+    "The entry band this repository records, $75-200/mo, sits below the band it holds for Outreach",
+    "Engagement work stays separate from the CRM, which suits organizations that already have a system of record they trust"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Cadence quality depends on an internal owner; without one the queues decay into steps nobody on the team trusts",
+    "The category notes in this repository record major CRMs adding native engagement features, so some buyers pay for capability they already hold",
+    "No entry for certification, retention terms, or residency options exists in this repository's record for Salesloft"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured crm & sales platform with comprehensive tooling",
+      "name": "Cadence builder and queues",
+      "description": "Scheduled email, call, and task steps that place prospects into a repeating rhythm. Step limits and template rules are not recorded here.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Dialer and call capture",
+      "description": "Calls placed from the platform and returned to the cadence record. Number coverage and recording policy are not itemized in this dataset.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Conversation review and scoring",
+      "description": "Recorded conversations reviewed against criteria the team sets, feeding coaching conversations. Default scoring models are not documented here.",
       "available": true,
       "category": "Reporting"
     },
     {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
+      "name": "Forecast roll-ups",
+      "description": "Aggregates deal expectations into a manager's view of the quarter. How the number is derived, and which plan carries it, is not captured here.",
       "available": true,
-      "category": "Core"
+      "category": "Reporting"
     },
     {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Email and reply tracking",
+      "description": "Measures opens, clicks, and replies at the step level. The report inventory and retention windows are not listed in this repository.",
       "available": true,
-      "category": "Security"
+      "category": "Reporting"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
-      "available": true,
-      "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Activity write-back to CRM",
+      "description": "Returns cadence activity to the system of record so the CRM timeline stays current. Named CRM connectors are not enumerated here.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Rep task inbox",
+      "description": "Presents the day's due actions across prospects in one queue. Triage and prioritization behavior are not documented in this dataset.",
       "available": true,
-      "category": "Core"
+      "category": "Usability"
+    },
+    {
+      "name": "API and event webhooks",
+      "description": "Programmatic access for activity and record data between Salesloft and other systems. Endpoint coverage is not recorded in these fields.",
+      "available": true,
+      "category": "Integrations"
     }
   ],
   "ratings": [
@@ -111,71 +111,83 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Salesloft across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your crm & sales needs.",
-      "type": "text"
+      "title": "Salesloft's cadence operating model",
+      "type": "text",
+      "body": "Salesloft is a sales engagement platform built around the cadence: a repeating rhythm of emails, calls, and tasks that keeps a rep's book of business moving on a schedule. What distinguishes it inside this category is where the emphasis falls — not only on executing touches, but on what managers do with the record of them. This repository files Salesloft under CRM & Sales, describes it as a sales engagement platform for enterprise revenue teams, and records a paid band of $75-200/mo. Its own guidance on the category groups Salesloft with platforms that automate outbound sequences, track opens and clicks, and manage sales call activity."
     },
     {
-      "title": "What Is This Tool",
-      "body": "Salesloft serves the crm & sales category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
-      "type": "text"
+      "title": "Cadences and the rep's working day",
+      "type": "list",
+      "body": "A cadence assigns a prospect a sequence of scheduled actions: an email on day one, a call on day two, a break, another attempt later. The rep works from a queue of what is due rather than from a plan they maintain themselves, and completing a step either advances the prospect or drops them out of the rhythm. That queue is the daily surface of the product, and its quality depends entirely on how the cadences were designed. Someone owns the templates, the timing, and the retirement of steps that stop earning replies — which is a management job, not a setup task.",
+      "items": [
+        "An email step that sends or drafts on a scheduled day",
+        "A call step that drops a number into the rep's queue",
+        "A task step for research, follow-up, or a hand-written note",
+        "Breaks between attempts so a prospect is not contacted continuously",
+        "Exit rules that pull a prospect out once a reply arrives"
+      ]
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Salesloft excels in this area.",
-      "type": "text"
+      "title": "Conversation intelligence and manager coaching",
+      "type": "text",
+      "body": "Recorded conversations and written communication become material for review: calls captured, transcribed, and scored against what good looks like in that organization, so a coaching conversation starts from evidence rather than recollection. Salesloft's position in this repository's field is consistent with that emphasis, since the platform is filed as a revenue-team product where conversation review and manager workflow matter as much as send volume. The picture drawn here is assembled from Salesloft's published documentation and this repository's stored records about the product. Which scoring criteria ship by default, and how much configuration they require, is not captured in these fields."
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Salesloft excels in this area.",
-      "type": "text"
+      "title": "Forecasting from the activity record",
+      "type": "text",
+      "body": "The forecasting view reads the same activity and pipeline data toward a different question: what is this quarter going to land at. Deals carry expectations and next steps, roll-ups aggregate what reps report, and the activity record underneath gives a manager a basis for adjusting a number rather than defending one. This repository's category notes describe revenue intelligence as capturing activity automatically and identifying at-risk deals, which is the frame Salesloft's forecasting sits in. The dataset does not record how the forecasting output is derived, how a rep's number and a manager's number reconcile, or which plan carries it."
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Salesloft excels in this area.",
-      "type": "text"
+      "title": "Where a cadence platform stops paying off",
+      "type": "text",
+      "body": "Cadence platforms lose their edge in three situations. A small team with a handful of prospects does not need a queue engine — a shared task list does the job with less administration. An organization whose CRM already includes native engagement features is buying overlapping capability, and this repository's own guide observes that modern CRMs are adding exactly those features. And a team unwilling to assign an owner for cadence design will watch the product decay into ignored steps, because the value sits in the upkeep rather than in the installation."
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Salesloft excels in this area.",
-      "type": "text"
+      "title": "What the $75-200/mo record leaves out",
+      "type": "text",
+      "body": "Recorded under a paid model, Salesloft carries a band of $75-200/mo in this repository — lower at the entry point than the band held for Outreach, and well above the pipeline CRMs the same comparison files cover. Missing from the field: whether the figure is per user, what conversation review costs, and which capabilities require a higher tier. The repository's alternatives file scores Salesloft at 4.3/5, which agrees with this review's own rating field — one of the cleaner alignments in the dataset. Check the vendor’s current published price list before budgeting."
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Salesloft excels in this area.",
-      "type": "text"
+      "title": "Sitting beside the CRM rather than replacing it",
+      "type": "text",
+      "body": "Salesloft executes against a record it does not own. Contacts and opportunities come from the CRM, cadence activity returns to it, and the connection between the two is where data quality is won or lost. The guide stored in this repository puts the boundary in plain terms: many CRMs include basic engagement features, but dedicated platforms offer deeper automation for high-volume outbound teams. That is the honest sales pitch — depth in exchange for another integration to maintain. Named connectors are not itemized here, though the comparison files show Salesloft measured against Close CRM, Copper CRM, Pipedrive, Zoho CRM, HubSpot, Salesforce, Freshsales, Zendesk, and Outreach."
     },
     {
-      "title": "Conclusion",
-      "body": "Salesloft achieves a 4.3/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable crm & sales capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
+      "title": "Hosting and the certification gap",
+      "type": "text",
+      "body": "The product is delivered from the vendor's cloud, which is what allows cadence data, recordings, and coaching material to follow reps across devices. What this repository does not hold for Salesloft is a certification, a retention schedule, a residency term, or an identity detail — and coaching material, meaning recordings and transcripts of customer conversations, is precisely the category of data that draws the most scrutiny in a security review. Treat that question as open, answer it from the vendor’s current documentation set set, and do not let the cloud delivery model stand in for it."
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Salesloft enables teams to Sales engagement platform for enterprise through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Salesloft supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Salesloft's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
-      "type": "text"
+      "title": "Salesloft beside Outreach, Close, and Pipedrive",
+      "type": "text",
+      "body": "Salesloft's nearest neighbour in this dataset is Outreach: the same category, 4.3/5 against 4.2/5, and $75-200/mo against a higher band held for Outreach. The recorded emphasis differs on each side — Salesloft as a platform for enterprise revenue teams with coaching and forecasting at the center, Outreach as sequence automation and analytics — which reads as a manager-facing product against an execution-facing one. Underneath that pair sit Pipedrive and Close CRM, pipeline tools that do not attempt cadence orchestration, and Zoho CRM, a suite carried at its own recorded band. The Salesloft alternatives file names Pipedrive, Zoho CRM, Close CRM, Outreach, and Copper CRM."
+    },
+    {
+      "title": "Who should shortlist Salesloft",
+      "type": "text",
+      "body": "Shortlist Salesloft when the constraint is managerial visibility into a team that already has volume: a manager who wants evidence for coaching, a forecast that rests on recorded activity rather than on opinion, and a cadence structure that keeps reps from improvising their own outreach. It is the wrong purchase for a team of three, for an organization whose CRM already ships engagement features it will actually use, and for buyers who need certification evidence before signature, which these records do not carry. The dataset holds 4.3/5 for Salesloft across 560 recorded reviews."
     }
   ],
   "faqs": [
     {
-      "question": "What makes Salesloft different from other crm & sales tools?",
-      "answer": "Salesloft differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Salesloft ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Is Salesloft a CRM or an engagement platform?",
+      "answer": "An engagement platform. It runs cadences, calls, and coaching against contacts and deals that live in a CRM; this repository's category notes describe the pair as system of record and system of action."
     },
     {
-      "question": "Can Salesloft handle enterprise-scale requirements?",
-      "answer": "Yes, Salesloft supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "How does Salesloft differ from Outreach?",
+      "answer": "Both are engagement platforms here. Salesloft is filed as a platform for enterprise revenue teams at $75-200/mo and 4.3/5, with coaching and forecasting emphasized; Outreach as sequence automation and analytics, carried at a higher band, with 4.2/5."
     },
     {
-      "question": "How long does it take to implement Salesloft?",
-      "answer": "Most teams can get started with Salesloft within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Does Salesloft replace the CRM?",
+      "answer": "No. Activity executes in Salesloft and returns to the CRM, so an organization without a record system needs one alongside it. Named connectors are not itemized in this repository."
     },
     {
-      "question": "Does Salesloft offer a free trial or money-back guarantee?",
-      "answer": "Salesloft provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "What is recorded for Salesloft's price?",
+      "answer": "A paid model with a band of $75-200/mo, with no indication of per-user structure or of which features require higher tiers. Confirm current list pricing and packaging with the vendor."
     },
     {
-      "question": "What kind of support does Salesloft offer?",
-      "answer": "Salesloft provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "What does this repository record about Salesloft security?",
+      "answer": "Certifications, retention schedules, and residency terms are missing from the fields held for Salesloft. Coaching recordings make that a question to answer early with the vendor."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +213,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Advanced",
-  "learningCurve": "Steep — requires dedicated training time for full proficiency",
-  "whoShouldUse": "Salesloft is designed for fast-growing startups that need a scalable crm & sales platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Salesloft may be overwhelming for users who only need basic crm & sales functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
+  "learningCurve": "Reps pick up the daily queue quickly; cadence design, conversation scoring criteria, and forecast configuration are where the time goes.",
+  "whoShouldUse": "Revenue teams with real outbound volume and a manager whose job includes coaching, organizations that want a forecast grounded in recorded activity, and enterprises that prefer engagement tooling kept separate from their CRM.",
+  "whoShouldNotUse": "Small teams that need little more than a shared task list, buyers whose CRM already ships engagement features they will use, and organizations that require certification evidence before purchase, which this dataset does not carry."
 }

@@ -1,8 +1,8 @@
 {
   "slug": "tableau",
   "name": "Tableau",
-  "tagline": "Enterprise business intelligence and data visualization platform.",
-  "description": "Enterprise business intelligence and data visualization platform.",
+  "tagline": "Enterprise BI centered on visual exploration and published workbooks.",
+  "description": "Tableau is enterprise BI built on drag-and-drop exploration, with workbooks published to a server for others to open.",
   "category": "Analytics & Data",
   "website": "https://tableau.com",
   "pricing": "Paid",
@@ -10,63 +10,63 @@
   "rating": 4.4,
   "reviewCount": 2220,
   "pros": [
-    "Excellent analytics & data capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Exploration happens by direct manipulation, so a follow-up question becomes another drag rather than another query to write.",
+    "The workbook is a reviewable artifact with a publish step, which gives an analysis an owner and a version instead of leaving it a loose chart.",
+    "This repository's enterprise hub records Tableau as a Salesforce acquisition, which gives an existing Salesforce customer a single procurement path.",
+    "An AI-industry blog in this repository records natural-language questioning as part of Tableau's current shape, adding a second way into the same workbook.",
+    "The BI glossary places Tableau over Snowflake, BigQuery, and Redshift with governed models behind the visuals, so it reports on data a warehouse already holds."
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Our own records disagree on price: this file holds a $15-75/user/mo band while a repository pricing page names Viewer, Explorer, and Creator roles at figures outside it.",
+    "Content does not reach readers until someone publishes the workbook to a server, which adds an administrative surface and a release step to every analysis.",
+    "Drag-and-drop covers how a chart is drawn, not whether the tables behind it were shaped correctly, so modeling mistakes surface as confident wrong numbers."
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured analytics & data platform with comprehensive tooling",
+      "name": "Drag-and-drop canvas",
+      "description": "Fields are placed on shelves and marks to build a view directly, without writing a query for each step.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Workbook publishing",
+      "description": "A workbook is published to a server so colleagues open the analysis instead of receiving a copy of it.",
+      "available": true,
+      "category": "Collaboration"
+    },
+    {
+      "name": "Viewer Explorer Creator roles",
+      "description": "This repository's pricing page names three per-user license roles, defined by what a person does with published content.",
+      "available": true,
+      "category": "Pricing"
+    },
+    {
+      "name": "Natural-language questions",
+      "description": "This repository's AI guide records copilots for Tableau that let users ask questions of their data in ordinary words.",
+      "available": true,
+      "category": "AI"
+    },
+    {
+      "name": "Warehouse connections",
+      "description": "The BI glossary records Tableau connecting directly to Snowflake, BigQuery, and Redshift for source data.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Governed data models",
+      "description": "The glossary describes governed models behind the visuals so a metric keeps one definition across the organization.",
+      "available": true,
+      "category": "Collaboration"
+    },
+    {
+      "name": "Dashboards across sources",
+      "description": "This repository's choosing guide describes Tableau dashboards carrying high-level business metrics from multiple data sources.",
       "available": true,
       "category": "Reporting"
     },
     {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
-      "available": true,
-      "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Local data extracts",
+      "description": "Source data can be pulled into an extract so exploration runs against a local copy rather than the live connection.",
       "available": true,
       "category": "Core"
     }
@@ -111,71 +111,89 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Tableau across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your analytics & data needs.",
+      "title": "Drag-and-drop exploration as the core loop",
+      "body": "Tableau is built around direct manipulation: fields are dragged onto a canvas, and the view redraws as they land. The loop it rewards is exploratory. Something looks odd in the chart, it gets broken down by another dimension, and the inquiry continues until the question answers itself, with no query written along the way. This is how this repository's guide to choosing analytics software describes the category: dashboards and reporting for high-level business metrics across multiple data sources, aimed at business users rather than engineers. The cost of that loop is that somebody still has to have shaped the data correctly before the dragging begins.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Tableau serves the analytics & data category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "Workbooks, sheets, and the published artifact",
+      "body": "An analysis in Tableau has a concrete form: a workbook containing sheets, and sheets containing the views someone built. That object matters more than it sounds, because it is what travels. A workbook is what gets published, reviewed, revised, and republished, which gives an analysis a lifecycle instead of leaving it as a chart in a slide deck. This repository's glossary makes the related point about the category: governed models behind the visuals keep metric definitions consistent, and the workbook is where that governance meets the drawing.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Tableau excels in this area.",
+      "title": "The publish step and who owns it",
+      "body": "The route from author to audience runs through a publish step. A workbook built on a desktop is moved to a Tableau server or hosted site, after which readers open it without holding authoring licenses. This repository's enterprise hub places Tableau alongside Slack and MuleSoft as part of how a Salesforce-owning company assembles a reporting layer, which is where the publish step sits in a larger estate. Publication is a workflow with an owner and a moment of release rather than a save operation, and organizations that already review deliverables tend to absorb it faster than those used to sharing a file link.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Tableau excels in this area.",
+      "title": "Where Tableau lands in an organization",
+      "body": "Tableau lands where a business has outgrown ad-hoc spreadsheets but has not handed every question to a data team. Its natural users are analysts who think visually and the managers who read what they publish, a wider group than the modeling specialists that a code-first tool assumes. This repository's choosing guide draws the line cleanly: BI platforms like Tableau serve high-level business metrics across multiple sources, which is a different job from product analytics entirely. A team measuring in-application behavior belongs on the other side of that line.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Tableau excels in this area.",
+      "title": "What this repository's files record about Tableau",
+      "body": "Nine files outside this review record mention Tableau, and the list below is what they actually say. None of it is a test result; it is documentation of how the product is described across this dataset, and it is the evidentiary basis for everything else on this page. Where a claim rests on one file only, it is flagged as such rather than repeated as fact.",
+      "type": "list",
+      "items": [
+        "The BI glossary groups Tableau with Looker and Power BI over Snowflake, BigQuery, and Redshift",
+        "The choosing-a-tool guide files it under dashboards and reporting for high-level business metrics",
+        "An AI-industry blog records BI copilots that let users ask natural-language questions of the data",
+        "Project-management and help-desk roundups name Tableau as a reporting destination for their data",
+        "An enterprise hub records Tableau as a Salesforce acquisition alongside Slack and MuleSoft",
+        "A per-user pricing page names Viewer, Explorer, and Creator roles, at figures that conflict with this file"
+      ]
+    },
+    {
+      "title": "Licensing roles and a price conflict in our records",
+      "body": "This review file prices Tableau at $15-75/user/mo under a paid model. A separate repository page contradicts it, describing a per-user arrangement with three named roles at price points outside that band. Because the rules for this dataset forbid quoting an exact price that is not the file's own band, neither set of figures is restated here; the honest summary is that our records disagree and the vendor's current page is the only authority. The role names remain useful, because they show the product is licensed by what a person does with content rather than by access alone.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Tableau excels in this area.",
+      "title": "Natural-language questions and the copilot layer",
+      "body": "This repository's AI guide records that traditional BI tools, Tableau named first among them, have taken on copilots letting users ask questions of their data in ordinary language. Read alongside the drag-and-drop model, that is a second front door into the same workbook: one path builds a view by manipulation, the other requests it in a sentence. How far that capability goes in Tableau's current releases is not documented anywhere in our records, so the guide's claim is recorded here as a direction rather than as a specification.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Tableau excels in this area.",
+      "title": "Data sources and governed models",
+      "body": "The BI glossary in this repository says the category connects directly to warehouses such as Snowflake, BigQuery, and Redshift and carries governed data models so that a metric means one thing across the organization. For Tableau specifically, that positions the product as a layer over data someone else has already stored: it reports, and it does not become the system of record. Beyond those three warehouse names the files are silent, and how governance is administered in practice is not documented here either, so both questions belong in a vendor conversation.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "Tableau achieves a 4.4/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable analytics & data capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
+      "title": "Deployment, ownership, and unrecorded certifications",
+      "body": "Ownership is documented: this repository's enterprise hub records Tableau as acquired by Salesforce, which is material to any procurement that already carries a Salesforce relationship and to anyone standardizing vendors across an estate. Beyond that, our records are thin. The company record attached to this review is machine-generated and is not used as a source here, no compliance certification of any kind appears anywhere in these records, and deployment details rest on what the vendor currently publishes. Readers running a formal security review should start from Salesforce's documentation rather than from this dataset.",
       "type": "text"
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Tableau enables teams to Enterprise business intelligence and dat through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Tableau supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Tableau's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "What drag-and-drop does not fix",
+      "body": "Drag-and-drop lowers the barrier to drawing a chart and does nothing for the modeling behind it, since a workbook still depends on someone having shaped the tables correctly upstream. Publication adds a second discipline: content lives on a server that has to be maintained, organized, and permissioned, so a Tableau deployment acquires an administrative surface alongside the analytical one. Add the price conflict in our own records, which leaves cost visibility poor from this dataset alone, and it becomes clear that the reporting burden sits with the adopting organization.",
+      "type": "text"
+    },
+    {
+      "title": "Alternatives and the final read",
+      "body": "Ten comparison records sit in this file; the useful ones are Power BI, which the rows place ahead of Tableau on pricing value while leaving ease of use tied, plus Amplitude, Mixpanel, Matomo, Google Analytics, and Grafana for adjacent jobs. Tableau suits an organization that wants visual exploration with a governed publish step and can absorb the licensing questions that follow, and it is not the tool for someone who wants a pageview chart, which is a different category entirely. We did not open Tableau to write this; it follows from vendor material, the pricing record held in this repository, and the files that mention the product. Our dataset scores it 4.4 from 2,220 entries.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Tableau different from other analytics & data tools?",
-      "answer": "Tableau differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Tableau ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Which Tableau license role fits a reader?",
+      "answer": "This repository's pricing page names Viewer, Explorer, and Creator, ordered from reading content to authoring it. The figures it quotes conflict with the $15-75/user/mo band held in this file, so check Salesforce's current pricing before budgeting."
     },
     {
-      "question": "Can Tableau handle enterprise-scale requirements?",
-      "answer": "Yes, Tableau supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "Why do the Tableau price records in this dataset disagree?",
+      "answer": "One page in this repository lists per-user prices outside the band held in this review file, and nothing in the dataset reconciles them. Neither should be quoted; the vendor's page is the only authority on the matter."
     },
     {
-      "question": "How long does it take to implement Tableau?",
-      "answer": "Most teams can get started with Tableau within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "How does Tableau's publish step compare with Power BI's workspace?",
+      "answer": "Both move an authored artifact onto shared infrastructure. This dataset's rows place Power BI ahead on pricing value and leave ease of use tied, so workflow and cost separate them more than capability does."
     },
     {
-      "question": "Does Tableau offer a free trial or money-back guarantee?",
-      "answer": "Tableau provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "Does Tableau connect directly to our warehouse?",
+      "answer": "Snowflake, BigQuery, and Redshift are the three named in this repository's glossary entry for the category. The files hold no fuller inventory, so a connector you depend on should be confirmed with the vendor."
     },
     {
-      "question": "What kind of support does Tableau offer?",
-      "answer": "Tableau provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "What does this dataset record about Tableau's certifications?",
+      "answer": "Nothing. No certification appears in any of our records, and the company record attached to the review is machine-generated and unused as a source. Start from Salesforce's current documentation instead."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +219,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Advanced",
-  "learningCurve": "Steep — requires dedicated training time for full proficiency",
-  "whoShouldUse": "Tableau is perfect for freelancers and independent professionals who need an affordable, easy-to-use analytics & data tool. Its simplicity and core feature set make it ideal for solo practitioners.",
-  "whoShouldNotUse": "Tableau may be overwhelming for users who only need basic analytics & data functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
+  "learningCurve": "Long — the canvas is approachable within days, while workbooks, extracts, publishing, and permissions take considerably more practice.",
+  "whoShouldUse": "Organizations with a business-analysis function that want visual exploration plus a governed publish step, and that can absorb per-user licensing arranged by role.",
+  "whoShouldNotUse": "Teams that only need website pageview reporting, or groups with nobody prepared to own the server where published workbooks live."
 }

@@ -2,7 +2,7 @@
   "slug": "sentinelone",
   "name": "SentinelOne",
   "tagline": "AI-powered endpoint protection and cybersecurity platform.",
-  "description": "AI-powered endpoint protection and cybersecurity platform.",
+  "description": "SentinelOne puts detection and response on the endpoint agent itself, with behavioral analysis, autonomous action, and attack rollback.",
   "category": "Security & Compliance",
   "website": "https://sentinelone.com",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.2,
   "reviewCount": 1820,
   "pros": [
-    "Excellent security & compliance capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Detection and response decisions are made on the agent itself, so the endpoint acts on what it observes rather than waiting on a console decision.",
+    "Rollback reverses changes an attack made to a host, which shortens the cleanup work after a ransomware-style event.",
+    "The recorded band of $5-8/device/mo sits below CrowdStrike's band in the same dataset, at a rating of 4.2 against 4.4.",
+    "Activity history is retained with the endpoint, so a record exists to replay when reconstructing how an incident unfolded.",
+    "Response behavior is set centrally and applied across enrolled agents, so one policy change reaches the whole fleet."
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Autonomous action is the default posture: the agent can terminate a process and quarantine a file without an operator approving it first.",
+    "Per-device licensing bills every enrolled machine, and this file records the product as paid with no free tier in the pricing field.",
+    "An agent cannot see activity on machines it was never installed on, so servers, network gear, and unmanaged devices stay outside its view."
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured security & compliance platform with comprehensive tooling",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "On-agent behavioral detection",
+      "description": "Process behavior is scored on the endpoint by the agent itself, which is where the detection decision is made.",
       "available": true,
       "category": "Security"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Ransomware rollback",
+      "description": "Changes made during a detected attack are reversed on the host so affected files return to their prior state.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Local activity history",
+      "description": "Process, file, and connection records are kept with the endpoint, giving responders a sequence to replay during an investigation.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Central policy distribution",
+      "description": "Response behavior, scan schedules, and exclusion lists are defined centrally and pushed to every enrolled agent.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Quarantine and process kill",
+      "description": "When detection confidence crosses the policy threshold, the agent stops the process and isolates the file without an operator step.",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Per-group response modes",
+      "description": "Different groups of machines can be assigned different response settings, so some act immediately while others wait for review.",
       "available": true,
       "category": "Usability"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Cloud console for the fleet",
+      "description": "Agents report to a hosted console where enrollment, policy, and alerts for the entire estate are managed in one place.",
       "available": true,
       "category": "Core"
+    },
+    {
+      "name": "Offline agent operation",
+      "description": "An agent that loses its console link keeps enforcing the policy it holds and reconciles once the connection returns.",
+      "available": true,
+      "category": "Usability"
     }
   ],
   "ratings": [
@@ -111,71 +111,78 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates SentinelOne across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your security & compliance needs.",
+      "title": "Detection that runs on the endpoint itself",
+      "body": "SentinelOne is recorded in this repository as an \"AI-powered endpoint protection and cybersecurity platform,\" and the distinguishing part of that description is where the work happens. A resident agent on each machine evaluates activity locally, while the cloud console aggregates what the fleet reports and holds the policy that governs each agent. Prevention, detection, and response are therefore properties of the installed software as much as of the service behind it, which has consequences for coverage, for behavior without a console link, and for the speed of a response action. That architecture is what separates this product from the identity tools it is sometimes listed beside in this dataset.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "SentinelOne serves the security & compliance category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "Behavioral analysis instead of matching alone",
+      "body": "Signature matching answers a narrow question: has this exact thing been seen before? The agent's behavioral layer asks what a process is doing — spawning interpreters, rewriting files it does not own, reaching for credentials — and scores the pattern where that pattern appears. The distinction matters most on a machine facing something new, because nothing has to be published upstream before the host can react to what it sees. It also carries the trade-off every behavioral product carries: judgment calls now run on the endpoint, so what counts as suspicious, and what happens when a score crosses the line, has to be set deliberately rather than inherited by default.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. SentinelOne excels in this area.",
+      "title": "Autonomous response and rollback",
+      "body": "Two capabilities define this product's response story. The first is autonomy: once detection confidence crosses the configured threshold, the agent can terminate a process and isolate a file without waiting for an operator to approve the action. The second is rollback, where changes an attack made to a host are reversed so the machine returns to a prior state instead of being rebuilt by hand. Together they shorten the gap between detection and recovery, and together they justify a careful policy review before deployment, because an autonomous system makes the same decision at three in the morning that it makes at three in the afternoon.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. SentinelOne excels in this area.",
+      "title": "What the agent keeps on the host",
+      "body": "The host-side record is what makes both investigation and rollback possible, since it exists on the machine rather than only in a vendor's database. What an agent of this type retains for each endpoint, in broad terms, is listed below. The account on this page was written from SentinelOne's published product documentation and from the comparison and ranking records held elsewhere in this repository; nothing here was installed on a machine to produce it.",
+      "type": "list",
+      "items": [
+        "A process tree showing parent and child relationships for each execution",
+        "File operations and the paths they touched, in sequence",
+        "Connection attempts observed while processes ran",
+        "Configuration and persistence changes made over time",
+        "A local history that survives a loss of the console link"
+      ]
+    },
+    {
+      "title": "Where an agent-based product cannot see",
+      "body": "The boundaries here come from the same place as the strengths. Coverage is per machine: servers or contractor devices without the agent contribute nothing, and a gap in rollout reads as quiet rather than as an alarm. Autonomous action is a policy choice rather than an inherent good — an organization that requires human approval before a process is killed has to configure for that, and doing so gives back some of the response speed being paid for. Management still depends on the console, so fleet-wide changes, reporting, and investigation all route through the vendor's service even where local enforcement continues without it.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. SentinelOne excels in this area.",
+      "title": "The price band, with a disagreement in the record",
+      "body": "This file records SentinelOne as paid at $5-8/device/mo. The repository's endpoint ranking repeats that band at rank four of four, while the security category page records a wider per-device band for the same product, and nothing in our records reconciles the two. Both are list figures recorded when our records were written, neither is confirmed current, and no free tier appears in the pricing field. Per-device units mean cost follows the machines enrolled, so a pilot covering one department reads differently on an invoice than a full-estate rollout, even at the identical rate.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. SentinelOne excels in this area.",
+      "title": "SentinelOne next to CrowdStrike",
+      "body": "This repository holds seven comparison records pairing SentinelOne with other tools, and only one of them describes a genuine substitute. CrowdStrike sits in the same agent-and-cloud field: its rating is recorded at 4.4 to the 4.2 held here, its band reads above this file's $5-8/device/mo, and the head-to-head verdict falls to CrowdStrike. Two further products also sit above SentinelOne in our records — Auth0 at 4.4 and Okta at 4.3 — but both sell identity rather than endpoint coverage and would not be chosen instead of this one. The remaining four records compare SentinelOne with password managers, which tells a buyer nothing about machines.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. SentinelOne excels in this area.",
+      "title": "Agent footprint and certification status",
+      "body": "SentinelOne's deployment unit is the endpoint: an agent is installed on each machine the product is to protect, policy is distributed from a hosted console, and no on-premises management server is part of the arrangement. Because enforcement happens on the device, some protection continues when the console link does not, while fleet-wide visibility depends on agents reporting back. Data handling, retention, and administrative access questions therefore sit with the vendor's documentation rather than with local infrastructure. No compliance certification for SentinelOne exists anywhere in our records, and the gap is a property of this repository rather than a finding about the product; readers with an attestation requirement should request current documents from the vendor.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "SentinelOne achieves a 4.2/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable security & compliance capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: SentinelOne enables teams to AI-powered endpoint protection and cyber through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, SentinelOne supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate SentinelOne's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Who this agent suits",
+      "body": "SentinelOne fits organizations that want response handled on the endpoint, including teams without the staff to work every alert the moment it appears. The recorded 4.2/5 from 1,820 entries places it below CrowdStrike in this dataset's endpoint ranking, but those figures are directory entries rather than measurements made here, and the $5-8/device/mo band against CrowdStrike's wider band is a real difference in the files rather than a rounding one. The decision underneath is whether on-device analysis, autonomous action, and rollback match how this particular team wants incidents handled. Where a human approval step is required for every response, configure for that expectation first, then decide whether the recorded trade-off still holds.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes SentinelOne different from other security & compliance tools?",
-      "answer": "SentinelOne differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, SentinelOne ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "What happens when a machine loses its connection to the SentinelOne console?",
+      "answer": "The agent runs from the policy it already holds, so detection and response continue locally and reconcile when the link returns. The exact limits of that window are not recorded in this dataset."
     },
     {
-      "question": "Can SentinelOne handle enterprise-scale requirements?",
-      "answer": "Yes, SentinelOne supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "How does the recorded SentinelOne price compare with CrowdStrike's?",
+      "answer": "Our files list SentinelOne at $5-8/device/mo against CrowdStrike at a higher band, and the head-to-head record favors CrowdStrike at 4.4 to 4.2. The security category page in this repository lists wider bands for both products."
     },
     {
-      "question": "How long does it take to implement SentinelOne?",
-      "answer": "Most teams can get started with SentinelOne within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Is SentinelOne an agent-based product?",
+      "answer": "Yes, and that defines its reach: detection decisions, response actions, and rollback all execute on installed software, so any machine without the agent — network gear included — contributes nothing to the picture."
     },
     {
-      "question": "Does SentinelOne offer a free trial or money-back guarantee?",
-      "answer": "SentinelOne provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "Is any compliance certification recorded here for SentinelOne?",
+      "answer": "No attestation appears anywhere in this repository for SentinelOne. The agent runs on your machines while policy and reporting sit with a cloud service the vendor operates, which is where questions about records and access should be directed."
     },
     {
-      "question": "What kind of support does SentinelOne offer?",
-      "answer": "SentinelOne provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Can SentinelOne reverse an attack's changes to a host?",
+      "answer": "Rollback is part of the product surface: files altered during a detected attack are restored on the machine. The records behind this page do not say which file types or situations are covered, so that boundary is a vendor question."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +208,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Advanced",
-  "learningCurve": "Steep — requires dedicated training time for full proficiency",
-  "whoShouldUse": "SentinelOne is perfect for freelancers and independent professionals who need an affordable, easy-to-use security & compliance tool. Its simplicity and core feature set make it ideal for solo practitioners.",
-  "whoShouldNotUse": "SentinelOne may be overwhelming for users who only need basic security & compliance functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
+  "learningCurve": "Enrollment and policy rollout are straightforward; deciding how autonomous each response mode should be takes real deliberation.",
+  "whoShouldUse": "Teams that want the endpoint to act on detections without waiting for an analyst, and that can plan an agent rollout across every machine they need covered, with a policy review completed before autonomy is turned up.",
+  "whoShouldNotUse": "Organizations that require a human approval step before any response action, environments with devices that cannot host an agent, or buyers whose need is employee sign-in rather than machine protection."
 }

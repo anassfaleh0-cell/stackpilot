@@ -1,8 +1,8 @@
 {
   "slug": "roam-research",
   "name": "Roam Research",
-  "tagline": "Networked thought note-taking platform for research and knowledge work.",
-  "description": "Networked thought note-taking platform for research and knowledge work.",
+  "tagline": "Outliner for networked thought: daily notes, bidirectional links, and block references.",
+  "description": "Roam Research is an outliner for networked thought: daily notes, bidirectional links, and block references that any page can quote.",
   "category": "Productivity",
   "website": "https://roamresearch.com",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.3,
   "reviewCount": 2200,
   "pros": [
-    "Excellent productivity capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Daily notes make capture the default action, so a thought can be written before deciding where it belongs",
+    "Block references let one passage be quoted from another page while staying attached to its origin",
+    "Bidirectional links mean a page is found from every page that mentions it, without filing anything twice",
+    "The outline model keeps a research draft and its supporting fragments in one continuous, indentable structure",
+    "Rated 4.3 out of 5 from 2,200 reviews in this repository's recorded data"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "The habit is the cost: links and daily capture only pay off with discipline, and an unlinked graph becomes a second pile of unread pages",
+    "Structured layouts, databases, and task boards sit outside the outline model, so formatted output is produced somewhere else",
+    "The corpus lives in a hosted service with a limited free plan recorded, and this repository stores no compliance certifications for Roam Research"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured productivity platform with comprehensive tooling",
+      "name": "Daily notes",
+      "description": "A dated page is the default entry point, recorded in this repository as where a Roam session starts, with pages created as needed.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
+      "name": "Block-level references",
+      "description": "Any block of text can be referenced from any other note, so a passage can be quoted elsewhere while staying tied to its origin.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Bidirectional linking",
+      "description": "Links run both ways between pages, recorded as one of the two ideas Roam Research pioneered alongside block-level referencing.",
       "available": true,
-      "category": "Security"
+      "category": "Core"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Outline hierarchy by indentation",
+      "description": "Structure comes from indentation inside an outliner, the approach this repository records Roam as pioneering.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Unlimited blocks on paid plans",
+      "description": "Paid plans are recorded as including unlimited blocks, while the free plan is described as limited in functionality.",
+      "available": true,
+      "category": "Pricing"
+    },
+    {
+      "name": "File uploads on paid plans",
+      "description": "File uploads are recorded as part of the paid plans rather than the limited free tier.",
+      "available": true,
+      "category": "Pricing"
+    },
+    {
+      "name": "Collaboration features on paid plans",
+      "description": "The note-taking comparison in this repository records collaboration features alongside blocks and uploads on paid plans.",
+      "available": true,
+      "category": "Collaboration"
+    },
+    {
+      "name": "Browser-based hosted workspace",
+      "description": "Roam runs as a hosted service reached through a browser rather than as a folder of files on the device.",
       "available": true,
       "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
-      "available": true,
-      "category": "Core"
     }
   ],
   "ratings": [
@@ -111,71 +111,74 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Roam Research across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your productivity needs.",
+      "title": "Daily notes as the entry point",
+      "body": "Roam starts each day on a dated page. The note-taking comparison in this repository records daily notes as the default entry point, with pages created as needed as writing continues, which inverts the usual habit of deciding where a note belongs before writing it. Capture happens first and structure emerges afterward: a thought lands under today, gets indented, and later acquires links to pages elsewhere. For research work that arrives in fragments, readings, interviews, half-formed arguments, that is a lower-friction starting point than choosing a notebook.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Roam Research serves the productivity category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "Blocks, links, and how a page is built",
+      "body": "The unit below the page is the block. This repository records Roam Research as pioneering the outliner approach with bidirectional linking and block-level referencing, and describes block referencing as allowing any block of text to be referenced from any other note. The consequence is that a passage can be quoted somewhere else while staying attached to its origin, so an argument assembled from scattered sources keeps its provenance. The recorded mechanics of a page are listed below.",
+      "type": "list",
+      "items": [
+        "Daily notes as the default place to start",
+        "Indentation defining hierarchy inside a page",
+        "Bidirectional links between pages",
+        "Block references quoting a passage elsewhere",
+        "Pages created as needed while writing",
+        "Unlimited blocks and file uploads on paid plans"
+      ]
+    },
+    {
+      "title": "An outline, not a document",
+      "body": "Because everything is an outline, structure comes from indentation and links alone; formatted layouts and structured databases are not part of the model. That is workable for prose still being figured out and awkward for material that wants columns, properties, or a fixed template. The same repository entry that credits Roam with pioneering block-level referencing is describing a tool optimized for thinking in progress rather than for producing finished, formatted artifacts. Buyers should read that as a commitment: if the output has to look like something, this is the drafting layer, not the publishing one.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Roam Research excels in this area.",
+      "title": "What networked thought asks of you",
+      "body": "The features are cheap to start and expensive to sustain. Daily capture only pays off if links are made consistently, and a graph built without discipline becomes a second pile of unread pages, because the tool records connections but does not tidy them. Block references also make pages demanding to maintain: a note that quotes six other places needs attention when those places change. This repository positions Roam for knowledge workers who benefit from bidirectional linking and daily notes, which describes the reader it wants as accurately as it describes the habit it demands.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Roam Research excels in this area.",
+      "title": "What the subscription record shows",
+      "body": "This page records Roam Research as paid with a band of $15-50/mo, and that is the one figure the record quotes for this product. The note-taking comparison in this repository adds the model behind it: a subscription, with a free plan of limited functionality and paid plans that include unlimited blocks, file uploads, and collaboration features. Because blocks are the unit of work, the free ceiling is felt quickly by anyone writing daily. Confirm current list pricing with the vendor before committing a research budget to it.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Roam Research excels in this area.",
+      "title": "Hosted notes, and what is not on file",
+      "body": "Roam is delivered as a hosted service: the graph lives on the vendor's infrastructure and is reached through a browser rather than as a folder on your machine. The dataset returns no compliance certification when searched for Roam Research and no such entry is written here; readers refer to the documentation the vendor currently publishes. For a user whose entire research corpus sits in one hosted graph, the questions worth pressing are about how complete an export is, what happens to linked references if the subscription lapses, and where the data resides.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Roam Research excels in this area.",
+      "title": "Evernote, Obsidian, Notion, and the stray pairings",
+      "body": "Nine pages of comparisons in this repository feature Roam Research. Four are the real argument, Evernote, Obsidian, Notion, and Todoist, where the choice is between a capture store, a local vault, a workspace database, and a task list. The remaining pages pair Roam with Acuity Scheduling, Cal.com, Calendly, JotForm, and Typeform, which sell scheduling and forms, so they read as directory breadth rather than rivalry. The Roam Research alternatives file lists Todoist, Evernote, and Obsidian as the closest substitutes on record.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Roam Research excels in this area.",
-      "type": "text"
-    },
-    {
-      "title": "Conclusion",
-      "body": "Roam Research achieves a 4.3/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable productivity capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Roam Research enables teams to Networked thought note-taking platform f through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Roam Research supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Roam Research's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Who should write in Roam",
+      "body": "Roam suits researchers, PhD writers, and analysts whose material arrives as fragments and who will keep linking it, which is the audience this repository's note-taking guidance names directly. It suits individuals who want capture and connection in the same surface and do not need a formatted deliverable out of the other end. It does not suit teams that need shared documents with permissions, or buyers who want their notes as local files. This reading is based on this repository's stored records and Roam's published product material; nobody here has written inside Roam. Those records show 4.3 out of 5 from 2,200 reviews.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Roam Research different from other productivity tools?",
-      "answer": "Roam Research differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Roam Research ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "What is a block reference in Roam?",
+      "answer": "Any block of text can be referenced from any other note, per this repository's note-taking comparison, so a passage can be quoted elsewhere while staying tied to its origin."
     },
     {
-      "question": "Can Roam Research handle enterprise-scale requirements?",
-      "answer": "Yes, Roam Research supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "Where does a Roam session start?",
+      "answer": "The daily notes page. This repository records daily notes as Roam's default entry point, with pages created as needed as the writing continues."
     },
     {
-      "question": "How long does it take to implement Roam Research?",
-      "answer": "Most teams can get started with Roam Research within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Is there a free version of Roam Research?",
+      "answer": "A limited one. This page records Roam as paid with a band of $15-50/mo, and the comparison records a free plan of limited functionality alongside paid unlimited blocks and uploads."
     },
     {
-      "question": "Does Roam Research offer a free trial or money-back guarantee?",
-      "answer": "Roam Research provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "How is Roam different from Obsidian?",
+      "answer": "Both link notes bidirectionally. Roam is an outliner of hosted pages built on daily notes and block references, while Obsidian edits a folder of Markdown files stored on your own device."
     },
     {
-      "question": "What kind of support does Roam Research offer?",
-      "answer": "Roam Research provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "What is Roam actually for?",
+      "answer": "This repository's note-taking guidance positions it for knowledge workers who benefit from bidirectional linking and daily notes: research, synthesis, and long-form argument built from fragments."
     }
   ],
   "relatedComparisons": [],
@@ -200,8 +203,8 @@
     "apiAvailable": true,
     "migrationComplexity": "Medium"
   },
-  "difficulty": "Beginner",
-  "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "Roam Research is best suited for enterprises and power users who need advanced productivity capabilities. Teams with dedicated IT support will get the most from its extensive feature set.",
-  "whoShouldNotUse": "Roam Research may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
+  "difficulty": "Intermediate",
+  "learningCurve": "High relative to a notebook, because the daily-notes and block-linking habit has to be learned before the graph is worth anything",
+  "whoShouldUse": "Researchers, writers, and analysts who work in fragments and will keep linking them: people who want capture and connection on the same surface and do not need a formatted deliverable at the end.",
+  "whoShouldNotUse": "Teams that need shared documents with permissions, buyers who want notes as local files, and individuals who will not maintain the daily-linking habit the model rewards."
 }

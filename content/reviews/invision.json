@@ -2,7 +2,7 @@
   "slug": "invision",
   "name": "InVision",
   "tagline": "Digital product design and prototyping platform for teams.",
-  "description": "Digital product design and prototyping platform for teams.",
+  "description": "InVision is a design review and collaboration platform, formerly prototyping-led, with a freemium band of $9.95-100/mo and no simultaneous editing support.",
   "category": "Design & Creative",
   "website": "https://invisionapp.com",
   "pricing": "Freemium",
@@ -10,65 +10,65 @@
   "rating": 4.2,
   "reviewCount": 2360,
   "pros": [
-    "Excellent design & creative capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "The review and feedback ecosystem is the recorded strength, named in this repository's prototyping comparison as the reason teams keep the tool",
+    "Pricing is recorded as freemium with a band of $9.95-100/mo, and the starting-price row in this repository's comparison is marked in its favor against Figma",
+    "The product's direction is documented rather than assumed: two separate pricing entries record a shift from prototyping toward design review and collaboration",
+    "Seven comparison records and four alternative listings place it squarely against Figma, Zeplin, Sketch, Affinity, Framer, and Webflow, so a shortlist builds from this repository alone",
+    "The dataset records InVision as cloud-delivered with a recorded API, which suits a review artifact that has to reach more than one person"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Simultaneous design editing is recorded as unsupported, so live co-authoring on one canvas is out of scope by our records",
+    "The recorded direction has moved from prototyping to design review, which leaves the tagline's prototyping promise describing the older shape of the product",
+    "Rating records disagree inside the repository: this page carries 4.2 out of 5 while four alternative pages list InVision at 4.3"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured design & creative platform with comprehensive tooling",
+      "name": "Design review and feedback",
+      "description": "The prototyping comparison names a review and feedback ecosystem as what teams rely on InVision for.",
+      "available": true,
+      "category": "Collaboration"
+    },
+    {
+      "name": "Prototyping as the recorded origin",
+      "description": "The product is filed here as a prototyping platform, and the cost blog records the shift away from that as its center.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Review without simultaneous editing",
+      "description": "The collaboration write-up records that simultaneous design editing is unsupported, so review runs on a shared artifact instead of a live canvas.",
       "available": true,
       "category": "Usability"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Collaboration as the recorded focus",
+      "description": "Two pricing entries record pricing that reflects a focus on design review and collaboration rather than on design surface area.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Cloud delivery with a recorded API",
+      "description": "This page's dataset records InVision as recorded as a hosted product whose API field is marked available, with nothing held on a local install.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Freemium band of $9.95-100/mo",
+      "description": "This page holds a freemium pricing model with a list band of $9.95-100/mo.",
       "available": true,
-      "category": "Core"
+      "category": "Pricing"
+    },
+    {
+      "name": "Segment among four prototyping tools",
+      "description": "The prototyping comparison assigns InVision the review-and-feedback segment, separate from Figma's collaboration, Sketch's Mac-native work, and Framer's landing pages.",
+      "available": true,
+      "category": "Usability"
+    },
+    {
+      "name": "Pricing that follows the review focus",
+      "description": "The UI/UX pricing entry records that the product's pricing reflects its design review and collaboration focus.",
+      "available": true,
+      "category": "Pricing"
     }
   ],
   "ratings": [
@@ -111,71 +111,77 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates InVision across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your design & creative needs.",
+      "title": "From prototyping tool to review tool",
+      "body": "This repository files InVision as a digital product design and prototyping platform for teams, and its own write-ups describe a product that has moved. The design software cost blog records that InVision's pricing evolved significantly as the tool shifted from a prototyping platform to a design review and collaboration tool, and the UI/UX pricing entry repeats the conclusion: pricing that reflects a focus on design review and collaboration. Read together, those records describe a tool whose original job is no longer its center of gravity, which leaves this page describing the review product while the tagline above it still names prototyping.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "InVision serves the design & creative category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "The review and feedback ecosystem",
+      "body": "What remains recorded as InVision's center is a review and feedback ecosystem, and the prototyping comparison in this repository is the source for that phrase. It uses the ecosystem as the distinguishing claim rather than a feature list: among four prototyping tools it assigns each one a distinct job, and InVision's is the team that still relies on its review loop. The distinction is about who stays rather than what is newest, which describes a team with an established process around review rather than a team selecting a design tool from scratch. That is a different buying situation, and it is the one this product is recorded as serving.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. InVision excels in this area.",
+      "title": "The four tools our prototyping comparison names",
+      "body": "One comparison in this repository sets the market this product sits in, and it does so by segment rather than by ranking: each of the four tools is given a different job, which is more useful for a shortlist than a score would be. InVision's entry is the one tied to an existing review process rather than to a design surface, which is also the clearest statement of its recorded position. The segments are:",
+      "type": "list",
+      "items": [
+        "Figma, recorded for cross-functional team collaboration",
+        "Sketch, recorded for Mac-native design workflows",
+        "Framer, recorded for marketing and landing page prototyping",
+        "InVision, recorded for teams that still rely on its review and feedback ecosystem"
+      ]
+    },
+    {
+      "title": "What our records say it does not do",
+      "body": "One limitation is stated outright in this repository rather than inferred: the collaboration write-up records that InVision does not support simultaneous design editing. That is a structural boundary rather than a missing toggle — two people cannot work the same canvas at the same moment, so review happens on a shared artifact instead of inside a live one. The shift described in the pricing entries points the same direction, since a tool oriented around review and collaboration is read and commented on more than it is co-authored. A buyer whose requirement is real-time co-editing already has the answer in that single sentence from our records.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. InVision excels in this area.",
+      "title": "A pricing band that has moved with the product",
+      "body": "This page records InVision as freemium with a band of $9.95-100/mo. That band sits beside a record of change: the cost blog states that pricing evolved significantly during the shift from prototyping to design review, and the UI/UX pricing entry describes pricing that reflects a design review and collaboration focus rather than a prototyping seat. The readings on this page were taken from this repository's stored write-ups — cost guides, comparison pages, and the fields attached to the review — without anyone in this project using the product. The band is the figure our dataset currently holds, and the history around it is the reason it should be confirmed against the vendor's own pricing page.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. InVision excels in this area.",
+      "title": "Cloud delivery, with certifications off the record",
+      "body": "The dataset records InVision as run from vendor infrastructure with its API interface marked available, which matches a review workflow in which a shared artifact has to be visible to more than one person. What the repository does not store for InVision is any compliance evidence plus wording about support tiers: no attestation accompanies this product, and nothing here states support channels or response commitments. That silence marks a gap in our records rather than a verdict on the product, so it can be used neither to clear nor to fail a security review. Buyers with certification requirements take the question to the vendor and read their published documentation rather than resolving the question from this page.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. InVision excels in this area.",
+      "title": "InVision next to Figma, Zeplin, and Sketch",
+      "body": "Seven comparison records in this repository pair InVision with another product. The rows place it ahead of Adobe Express, Adobe XD, and Sketch on user rating, and behind Affinity, Canva, Figma, and Zeplin, with starting price marked in its favor against Figma and the other way against Zeplin. This page carries 4.2 out of 5 from 2,360 reviews. The alternatives pages run both ways: InVision recommends Framer, Webflow, Zeplin, and Affinity, while Affinity, Webflow, Framer, and Zeplin each list InVision among theirs — and those lists record it at 4.3 out of 5 rather than the 4.2 held here.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. InVision excels in this area.",
+      "title": "Who still standardizes on it",
+      "body": "The phrasing in this repository's prototyping comparison is the clearest statement of fit on record: teams that still rely on its review and feedback ecosystem. That describes an installed-base buyer — an organization where designers, product managers, and stakeholders already review work here, and where moving the review habit would cost more than the subscription does. The recorded shift from prototyping toward design review points the same way from the vendor's side. It is a weaker proposition for a team choosing its first design tool, since the comparison records place Figma, Zeplin, and Affinity ahead of InVision on user rating.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "InVision achieves a 4.2/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable design & creative capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: InVision enables teams to Digital product design and prototyping p through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, InVision supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate InVision's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Fit, and the record behind it",
+      "body": "Together the records describe a cloud design review and collaboration product, freemium here at $9.95-100/mo, rated 4.2 out of 5 from 2,360 reviews, and explicitly recorded as not supporting simultaneous design editing. It fits a team whose review process already lives in this tool, and it does not fit a requirement for live co-authoring on a single canvas. Three questions stay open in the dataset: the plan structure behind the band, the certification status the repository does not hold, and the source of the differing rating its alternative pages carry. None of the three resolves from this page.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes InVision different from other design & creative tools?",
-      "answer": "InVision differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, InVision ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Is InVision still a prototyping tool?",
+      "answer": "The tagline here says prototyping, but two pricing entries record a shift: the product has moved from a prototyping platform to a design review and collaboration tool, and its pricing now reflects that focus."
     },
     {
-      "question": "Can InVision handle enterprise-scale requirements?",
-      "answer": "Yes, InVision supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "Can two designers edit the same design at once?",
+      "answer": "Not by our records: the collaboration write-up states that InVision does not support simultaneous design editing, so review happens on a shared artifact rather than inside a live canvas."
     },
     {
-      "question": "How long does it take to implement InVision?",
-      "answer": "Most teams can get started with InVision within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "What price does this page record for InVision?",
+      "answer": "A freemium model with a band of $9.95-100/mo, alongside a cost-blog note that pricing evolved significantly while the product shifted toward design review and collaboration."
     },
     {
-      "question": "Does InVision offer a free trial or money-back guarantee?",
-      "answer": "InVision provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "How does InVision compare with Figma and Zeplin here?",
+      "answer": "Seven comparison records place it behind Figma, Zeplin, Affinity, and Canva and ahead of Adobe Express, Adobe XD, and Sketch, with the starting-price row going its way against Figma."
     },
     {
-      "question": "What kind of support does InVision offer?",
-      "answer": "InVision provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Which alternatives does this repository list for InVision?",
+      "answer": "Its own alternatives page names Framer, Webflow, Zeplin, and Affinity, and each of those four lists InVision among its alternatives — recorded there at 4.3 out of 5 rather than the 4.2 here."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +207,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Beginner",
-  "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "InVision is best suited for enterprises and power users who need advanced design & creative capabilities. Teams with dedicated IT support will get the most from its extensive feature set.",
-  "whoShouldNotUse": "InVision may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
+  "learningCurve": "Beginner — the first useful output comes within an hour",
+  "whoShouldUse": "Teams whose design review process already runs through InVision, where designers, product managers, and stakeholders read and comment on work rather than co-authoring a single canvas together.",
+  "whoShouldNotUse": "Buyers who need simultaneous editing of one design file, or teams choosing a first design tool where this repository's comparison records place Figma, Zeplin, and Affinity ahead on user rating."
 }

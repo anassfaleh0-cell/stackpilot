@@ -2,7 +2,7 @@
   "slug": "sage-intacct",
   "name": "Sage Intacct",
   "tagline": "Cloud financial management platform for growing enterprises.",
-  "description": "Cloud financial management platform for growing enterprises.",
+  "description": "Sage Intacct runs multi-entity groups: consolidation, multi-currency ledgers, project accounting, and role-based permissions on a cloud financial platform.",
   "category": "Finance & Accounting",
   "website": "https://sage.com/intacct",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.2,
   "reviewCount": 2200,
   "pros": [
-    "Excellent finance & accounting capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Multi-entity consolidation, multi-currency management, project accounting, and advanced inventory are recorded together, covering the close work of a group that has outgrown one ledger",
+    "Restricted fund portfolios are the case where this repository names Sage Intacct directly, placing it beside Blackbaud Financial Edge and Abila MIP for nonprofits with complex funds",
+    "Role-based permissions are part of the recorded capability set, so access to the ledger can follow a finance function spread across several entities",
+    "Expensify expense data is recorded as transferring into Sage Intacct, so approved claims arrive structured instead of as a file someone must re-key",
+    "The cost blog records the target as mid-market and enterprise operations with multi-entity, multi-currency needs, which keeps the product's scope legible before any sales conversation"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Price records disagree: this page carries a $15-40/mo band while the repository's pricing guide states that enterprise products such as Sage Intacct are quoted rather than published",
+    "The pricing model is paid with no free tier on record, and the finance category attaches implementation fees to platforms of this class, which makes the purchase a project rather than a sign-up",
+    "Positioning at 50-500 employees with multi-entity needs means a single-entity business would carry entity-management machinery it has no structure to use"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured finance & accounting platform with comprehensive tooling",
+      "name": "Multi-entity consolidation",
+      "description": "Holding several legal entities in one system with a combined view, recorded as the first capability of this class of platform.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
+      "name": "Multi-currency financial management",
+      "description": "The repository's cost blog records multi-currency handling as part of the product's mid-market and enterprise description.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Project accounting",
+      "description": "Cost and revenue tracked against projects inside the ledger, listed alongside consolidation in the accounting-selection guide.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Advanced inventory tracking",
+      "description": "Advanced inventory is recorded as one of the capabilities that separates mid-market platforms from entry-level accounting.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Role-based permissions",
+      "description": "Named access across the finance function, recorded as part of the same capability set for organizations with 50-500 employees.",
       "available": true,
       "category": "Security"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Restricted fund accounting",
+      "description": "Our nonprofits hub points organizations with complex restricted fund portfolios at Sage Intacct rather than at small-business ledgers.",
       "available": true,
-      "category": "Usability"
+      "category": "Core"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Expense transfers from Expensify",
+      "description": "Expense data from Expensify is recorded as moving into Sage Intacct alongside QuickBooks and Xero.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Paid model with a $15-40/mo band",
+      "description": "This page records a paid pricing model and a band of $15-40/mo, which the repository's pricing guide contradicts by describing quoted pricing.",
       "available": true,
-      "category": "Core"
+      "category": "Pricing"
     }
   ],
   "ratings": [
@@ -111,71 +111,88 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Sage Intacct across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your finance & accounting needs.",
+      "title": "Where Sage Intacct is placed in this repository",
+      "body": "This repository files Sage Intacct as a cloud financial management platform for growing enterprises, and its accounting cost blog places the product with mid-market and enterprise organizations running multi-entity, multi-currency finances. The accounting-selection guide defines the operating range more sharply: platforms of this class are described as adding multi-entity consolidation, advanced inventory, project accounting, and role-based permissions for organizations with 50-500 employees. Two other entries situate it above the small-business ledgers, with basic fund accounting for small nonprofits assigned to QuickBooks Online or Xero and the finance category describing mid-market platforms as where operations outgrow those tools. The consistent reading is of a general ledger bought once the structure of the business has itself become the problem.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Sage Intacct serves the finance & accounting category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "Multi-entity consolidation and multi-currency ledgers",
+      "body": "Consolidation is the capability this repository's guides attach to Sage Intacct first, and it is the one that determines whether a group closes its books or reconciles them by hand. The accounting-selection guide lists four additions that separate this class of platform from entry-level accounting, and the cost blog adds multi-currency handling to the same description of the product. For a company holding several legal entities, the recorded shape is one system carrying the ledgers and producing the combined view instead of a shared sheet into which each entity's trial balance is pasted. The capability set on record is:",
+      "type": "list",
+      "items": [
+        "Multi-entity consolidation producing one combined view from several ledgers",
+        "Multi-currency financial management recorded for the same product",
+        "Project accounting keeping cost and revenue attached to the work",
+        "Advanced inventory tracking sitting alongside the general ledger",
+        "Role-based permissions splitting access across the finance function"
+      ]
+    },
+    {
+      "title": "Restricted funds and nonprofit portfolios",
+      "body": "The software-for-nonprofits hub in this repository draws a clean line across the market. Small organizations are told that QuickBooks Online with its Nonprofit edition, or Xero with a nonprofit-specific add-on such as Aplos, can handle basic fund accounting; organizations carrying complex restricted fund portfolios are pointed instead at Blackbaud Financial Edge, Sage Intacct, or Abila MIP. Restricted funds are the constraint behind that split — donations and grants whose permitted use travels with the money and has to stay visible through the year. Sage Intacct appears in that sentence as the general-ledger choice for a fund structure a small-business product cannot carry.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Sage Intacct excels in this area.",
+      "title": "Role-based permissions across the group",
+      "body": "Role-based permissions sit in the same recorded capability set as consolidation and project accounting, and the two are related: the more entities a ledger holds, the more people need to reach part of it without reaching all of it. The guide that describes this class of platform names permissions as one of the four additions separating mid-market software from entry-level accounting. What that buys is the difference between a shared login that everyone in finance uses and named access, where a project accountant sees project entries, a controller sees the consolidated statements, and an entity manager sees one company. The dataset also records an API as available for Sage Intacct, which is the second route into those records — programmatic rather than through the console.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Sage Intacct excels in this area.",
+      "title": "A band on this page, a quote everywhere else",
+      "body": "This review records Sage Intacct as paid with a list band of $15-40/mo. Two other records in the repository point somewhere else. The accounting pricing guide states that larger and multi-entity operations move into enterprise products such as NetSuite and Sage Intacct, where pricing is quoted rather than published and the structure of multi-entity licensing matters more than the headline rate; the finance category page describes mid-market platforms of that class as carrying a monthly cost far above this page's figure, with implementation fees attached. The reading offered here comes from the repository's written records — guides, category pages, and comparison files — rather than from anyone having sat in front of the product. On price, the honest summary is that the band on this page is unconfirmed and a quote is the expected path.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Sage Intacct excels in this area.",
+      "title": "What Sage Intacct is not asked to do",
+      "body": "Three boundaries follow from where the product is placed. The pricing model is recorded as paid and no free tier appears anywhere in these records, so evaluation runs through a commercial conversation rather than a sign-up, which matches the quoted-pricing note in the pricing guide. The recorded employee range of 50-500 and the multi-entity framing put a single-incorporation business on the wrong side of the design, carrying entity machinery it has no structure to use. And nothing in the dataset positions this product as a place to capture expenses: the one expense record available runs in the other direction, with Expensify sending data into Sage Intacct rather than the ledger collecting receipts itself.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Sage Intacct excels in this area.",
+      "title": "Cloud delivery and the certification question",
+      "body": "The tagline on this page describes cloud financial management, the dataset records cloud deployment with an API recorded as available, and no installation on a customer's own infrastructure appears anywhere in the material behind this review. What the repository does not hold is a compliance certification for Sage Intacct — no attestation of any kind is stored alongside this product, so no such assertion appears here. That is a gap in the dataset rather than a finding about the product, and it cuts both ways: nothing here can be used to argue that the platform meets a standard, and nothing here can be used to argue that it fails one. A buyer whose approval depends on certification evidence should use the vendor’s current documentation as the source for that answer.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Sage Intacct excels in this area.",
+      "title": "What flows into Sage Intacct from elsewhere",
+      "body": "Ecosystem evidence for Sage Intacct in this repository is thin and specific. The expense-management blog records that Expensify's integration with QuickBooks, Xero, and Sage Intacct enables expense data transfer into accounting systems, which places Sage Intacct at the receiving end of an expense run that was captured and approved elsewhere. Beyond that named flow, the dataset records an API as available but names no other partner for this product, so any connector a buyer depends on should be verified rather than assumed from this page. The gap matters for evaluation: integration breadth usually decides a mid-market purchase, and here the record supports one connection plus a programmatic surface.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "Sage Intacct achieves a 4.2/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable finance & accounting capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
+      "title": "How the comparison records place Sage Intacct",
+      "body": "Fourteen comparison records in this repository pair Sage Intacct with another product. The rows place it ahead of BigCommerce, PayPal, Wave, WooCommerce, and Sage, and behind Expensify, FreshBooks, Paddle, QuickBooks, Shopify, Square, Stripe, Xero, and Zoho Books — several of those being tools aimed at smaller or differently shaped work, which is itself a signal about where the comparison data thinks this product belongs. The alternatives pages repeat the pattern from the other side: Sage Intacct is listed as an alternative on the Expensify, Wave, and Zoho Books pages, and its own alternatives page recommends Expensify, Wave, and Zoho Books as the three to weigh instead.",
       "type": "text"
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Sage Intacct enables teams to Cloud financial management platform for  through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Sage Intacct supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Sage Intacct's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Fit inside an organization",
+      "body": "The recorded buyer is a finance function rather than an individual: a controller or group accountant responsible for more than one legal entity, or a nonprofit finance team whose restricted funds have to stay auditable. That maps onto the repository's stated range of 50-500 employees and onto the capability list — consolidation, multi-currency, project accounting, permissions — because each of those problems appears only once an organization has structure. The product also sits downstream of the rest of the business instead of replacing it: expenses arrive from a tool like Expensify, and the ledger reports on what other systems have already recorded. Buying it is closer to choosing an accounting spine than choosing an application.",
+      "type": "text"
+    },
+    {
+      "title": "What this page can and cannot settle",
+      "body": "Taken together, the records describe a mid-market general ledger for multi-entity, multi-currency organizations, with restricted funds and project accounting inside the same system and a rating of 4.2 out of 5 from 2,200 reviews on this page. Two questions stay open in the dataset: the current price, where the band on this page and the quoted-pricing note in the guide contradict each other, and the certification status, where the repository holds nothing at all. Both belong in a conversation with the vendor, and neither should be settled from this page.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Sage Intacct different from other finance & accounting tools?",
-      "answer": "Sage Intacct differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Sage Intacct ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "What size organization does this repository place Sage Intacct for?",
+      "answer": "Mid-market and enterprise: the accounting-selection guide describes platforms like it for organizations with 50-500 employees, and the cost blog records multi-entity, multi-currency operations as the center of gravity."
     },
     {
-      "question": "Can Sage Intacct handle enterprise-scale requirements?",
-      "answer": "Yes, Sage Intacct supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "Does Sage Intacct handle restricted funds?",
+      "answer": "Our nonprofits hub groups it with Blackbaud Financial Edge and Abila MIP for organizations with complex restricted fund portfolios, while smaller nonprofits are pointed at QuickBooks Online or Xero with a nonprofit add-on."
     },
     {
-      "question": "How long does it take to implement Sage Intacct?",
-      "answer": "Most teams can get started with Sage Intacct within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "What price does this record show for Sage Intacct?",
+      "answer": "This page records a paid model with a band of $15-40/mo, but the repository's pricing guide says enterprise products such as Sage Intacct are quoted rather than published, so the band is unconfirmed."
     },
     {
-      "question": "Does Sage Intacct offer a free trial or money-back guarantee?",
-      "answer": "Sage Intacct provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "What data flows into Sage Intacct from other tools?",
+      "answer": "The one named flow is expense data from Expensify, recorded as transferring into Sage Intacct alongside QuickBooks and Xero. The dataset also flags an API as available, with no other partner named."
     },
     {
-      "question": "What kind of support does Sage Intacct offer?",
-      "answer": "Sage Intacct provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "How does Sage Intacct fare in this repository's comparisons?",
+      "answer": "Across fourteen comparison records the rows place it ahead of BigCommerce, PayPal, Wave, WooCommerce, and Sage, and behind Xero, Zoho Books, QuickBooks, FreshBooks, Expensify, Stripe, Square, and Shopify."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +218,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Beginner",
-  "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "Sage Intacct is best suited for enterprises and power users who need advanced finance & accounting capabilities. Teams with dedicated IT support will get the most from its extensive feature set.",
-  "whoShouldNotUse": "Sage Intacct may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
+  "learningCurve": "Shallow — most people are productive inside the first hour",
+  "whoShouldUse": "Finance functions running more than one legal entity or complex restricted funds: mid-market organizations near the 50-500 employee range this repository records, nonprofits whose grants must stay auditable, and groups needing project accounting beside the consolidated ledger.",
+  "whoShouldNotUse": "Sole traders and single-entity businesses whose finances fit QuickBooks Online or Xero, and buyers who need a published list price rather than a quote before they can evaluate."
 }

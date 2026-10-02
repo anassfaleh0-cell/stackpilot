@@ -2,7 +2,7 @@
   "slug": "expensify",
   "name": "Expensify",
   "tagline": "Expense management platform with receipt scanning and reporting.",
-  "description": "Expense management platform with receipt scanning and reporting.",
+  "description": "Expensify reads receipts with SmartScan, runs them through multi-level approval chains, and posts finished expense data to your accounting system.",
   "category": "Finance & Accounting",
   "website": "https://expensify.com",
   "pricing": "Freemium",
@@ -10,65 +10,65 @@
   "rating": 4.2,
   "reviewCount": 1360,
   "pros": [
-    "Excellent finance & accounting capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "SmartScan reads merchant name, date, amount, and category off a receipt photo, so submission does not start with typing",
+    "Approval chains, policy enforcement rules, and automatic categorization are recorded as one workflow engine rather than three separate settings",
+    "Expense data transfers to QuickBooks, Xero, and Sage Intacct, leaving the general ledger in the accounting system the company already runs",
+    "Corporate card reconciliation, mileage tracking, and per-diem management sit alongside receipt capture instead of in a second tool",
+    "The finance buyers' guide in this repository models Expensify at $9 per user per month inside a 20-person stack, which stays inside the recorded band"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Expensify carries expenses, not the books: invoicing, bank reconciliation, and financial statements stay in whatever ledger receives its transfers",
+    "Price records disagree — this page holds a $5-9/mo band while the repository's expense comparison states that none of the platforms it covers had verified pricing",
+    "This dataset stores no compliance certification for Expensify, so a buyer whose sign-off depends on certification evidence has nothing here to check it against"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured finance & accounting platform with comprehensive tooling",
+      "name": "SmartScan receipt capture",
+      "description": "Receipt photos are read for merchant name, date, amount, and category, which removes manual entry from the submission path.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Multi-level approval chains",
+      "description": "Expenses route past more than one reviewer, with the chain recorded as part of the approval workflow engine.",
       "available": true,
-      "category": "Integrations"
+      "category": "Automation"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Policy enforcement rules",
+      "description": "Policy is recorded as enforcement applied during approval rather than a document consulted after the fact.",
       "available": true,
       "category": "Security"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Automatic expense categorization",
+      "description": "Categories are filled in automatically once a receipt has been scanned, alongside the approval decision.",
       "available": true,
-      "category": "Usability"
+      "category": "Automation"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Corporate card reconciliation",
+      "description": "Card transactions are matched against the receipts that document them, recorded as part of the same capture flow.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Mileage and per-diem entries",
+      "description": "Mileage claims and per-diem expenses are handled beside receipt-based submissions rather than in a separate process.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Transfers to QuickBooks and Xero",
+      "description": "Expense data moves into QuickBooks, Xero, and Sage Intacct, so the accounting system keeps the ledger.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Freemium band of $5-9/mo",
+      "description": "This page stores a freemium pricing model with a list price band of $5-9/mo, with plan boundaries left unstated.",
       "available": true,
-      "category": "Core"
+      "category": "Pricing"
     }
   ],
   "ratings": [
@@ -111,71 +111,83 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Expensify across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your finance & accounting needs.",
+      "title": "Where Expensify sits in a finance stack",
+      "body": "This repository's finance buyers' guide describes a small-business stack as four layers — accounting, invoicing, expense, and payroll — and keeps dedicated expense tools on their own layer rather than inside the ledger. The same guide argues that receipt capture built into an accounting product is sufficient while a team stays under roughly 25 employees, and that larger teams move to a dedicated expense tool such as Expensify. Our finance category page draws the line from the other direction, recording spend management as a category that combines corporate cards, expense management, and accounts payable automation, with Expensify named beside Brex and Ramp as one of the platforms that created it. Read from that position, Expensify is the part of the stack that collects and polices spending before it reaches the books.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Expensify serves the finance & accounting category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "SmartScan and what comes off a receipt",
+      "body": "The expense-management comparison stored in this repository makes SmartScan the defining capability: a receipt photo is read, and the merchant name, date, amount, and category are pulled off it, which removes typed entry from the submission path. The same entry records the capture options wrapped around it — corporate card reconciliation, mileage tracking, and per-diem expense management — so a claim travels with whatever evidence documents it. Our accounting-selection guide describes the buyer-side version of the problem: a business where many employees submit expenses needs expense handling of its own, or an integration with a dedicated expense tool. What no record here shows is the product exercising judgment on an employee's behalf; scanning produces fields, and approval is still the step that decides.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Expensify excels in this area.",
+      "title": "Approval chains and policy rules",
+      "body": "Submission is only the half of the expense flow that the comparison in this repository describes; the other half is what happens afterward. Its approval workflow engine is recorded as supporting multi-level chains, enforcing policy rules, and filling in expense categories automatically — the portion a finance lead audits before money leaves the account. The workflow pieces on file are:",
+      "type": "list",
+      "items": [
+        "Multi-level approval chains routing an expense past more than one reviewer",
+        "Policy enforcement rules checked while expenses are submitted",
+        "Automatic categorization applied once a receipt has been scanned",
+        "Corporate card transactions reconciled against the receipts behind them",
+        "Mileage and per-diem claims carried through the same approval path"
+      ]
+    },
+    {
+      "title": "Sending finished expenses to the ledger",
+      "body": "An expense tool that cannot reach the accounting system leaves someone retyping totals, which is why the recorded integration path carries weight. The expense comparison in this repository names three destinations for Expensify data — QuickBooks, Xero, and Sage Intacct — and describes the transfer as moving expense data into those accounting systems. That list matches how the rest of this repository treats them: QuickBooks and Xero as small-business ledgers, Sage Intacct as the multi-entity option for larger operations. The accounting-selection guide makes the same dependency explicit, framing expense capture as either native to the accounting product or connected through a dedicated tool, and it is in the second route that Expensify is filed.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Expensify excels in this area.",
+      "title": "What the price record says about Expensify",
+      "body": "This review's own fields record Expensify as freemium with a list band of $5-9/mo. Two other records in the repository qualify that figure instead of confirming it: the expense-management comparison states that none of the platforms it covers carried published pricing verification at the time of writing and directs readers to each vendor's current pricing page, while the finance buyers' guide models Expensify at $9 per user per month inside an example stack for a 20-person company, which sits at the top of the recorded band. Several of Expensify's own comparison records in this dataset store no starting price at all. The result is a band held by this page and a warning attached to it, so treat the range as recorded rather than quoted.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Expensify excels in this area.",
+      "title": "What expense capture does not do",
+      "body": "Three limits follow from what Expensify is. It does not hold the general ledger: invoicing, bank reconciliation, and financial statements belong to whichever accounting system receives its transfers, which is why this repository's guides discuss Expensify as an addition to a ledger rather than a replacement for one. The boundaries of the free tier are not established anywhere in these records, so a buyer evaluating cost has a band and no documented plan structure behind it. Nothing on file answers what happens to a receipt image after its fields are extracted — retention, storage location, and deletion are unrecorded here — so that question belongs in the vendor conversation rather than on this page.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Expensify excels in this area.",
+      "title": "Cloud delivery, API, and the certification record",
+      "body": "The data assembled for this page records Expensify as delivered from the cloud with an API field that is marked available, which fits an expense flow that begins on a phone and ends in someone else's accounting system: receipt images leave the submitting device, and the approval record is held by the vendor rather than on a local install. What this repository does not carry is a compliance certification of any kind for Expensify, and no security or privacy attestation appears in the records behind this page either. Absence here means the dataset holds nothing, not that the product fails any standard. A buyer whose sign-off depends on certification evidence should request current documentation directly from the vendor.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Expensify excels in this area.",
+      "title": "How the comparison records read Expensify",
+      "body": "Sixteen comparison records in this repository pair Expensify with another product. The rows place it ahead of BigCommerce, FullStory, Paddle, PayPal, QuickBooks, Sage Intacct, Sage, Wave, and WooCommerce, and behind BambooHR, FreshBooks, Shopify, Square, Stripe, Xero, and Zoho Books — a mixed field where several of the losses are category mismatches, since Stripe, Shopify, and Square are payments or commerce products rather than expense tools. The alternatives pages cut the same ground differently: Expensify appears as a suggested alternative on the QuickBooks, Xero, FreshBooks, Stripe, Sage Intacct, Zoho Books, and Wave pages, while its own alternatives page names Wave, Zoho Books, and Sage Intacct as the three to weigh instead.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "Expensify achieves a 4.2/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable finance & accounting capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
+      "title": "Who should put expenses on Expensify",
+      "body": "The recorded buyer is an organization where expense submission is a recurring problem rather than an occasional one: this repository's finance guide raises Expensify only after a team passes roughly 25 employees, and the accounting-selection guide raises it when many employees are submitting expenses. Inside a company that points at three roles — staff who travel or buy on a company card, a manager who signs off on those claims, and a finance function that wants categorized entries arriving in the ledger instead of a shoebox of photos. The recorded integration list narrows the fit again: a company already running QuickBooks, Xero, or Sage Intacct follows the documented path, while one on an unlisted accounting product would be depending on an integration these records do not describe.",
       "type": "text"
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Expensify enables teams to Expense management platform with receipt through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Expensify supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Expensify's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Fit, and where these statements come from",
+      "body": "Expensify's fit is narrow and consistent across the records: a receipt-and-approval layer feeding an existing ledger, filed here as freemium at $5-9/mo, carrying a rating of 4.2 out of 5 from 1,360 reviews on this page. It is the wrong instrument for a company that needs the books themselves, and an unnecessary one for a very small team whose accounting product already photographs receipts. The statements above were assembled from stored material rather than from use — the expense-management comparison, the finance and accounting guides, the alternatives pages, and the fields attached to this review. Where two of those records disagree, the disagreement is stated rather than resolved.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Expensify different from other finance & accounting tools?",
-      "answer": "Expensify differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Expensify ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Does Expensify replace accounting software?",
+      "answer": "No. The finance guide in this repository treats it as a dedicated expense layer, and the expense comparison records transfers into QuickBooks, Xero, and Sage Intacct rather than a general ledger of its own."
     },
     {
-      "question": "Can Expensify handle enterprise-scale requirements?",
-      "answer": "Yes, Expensify supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "What does SmartScan read from a receipt?",
+      "answer": "Four fields are recorded: merchant name, date, amount, and category, extracted from a receipt photo so the employee does not retype them before approval."
     },
     {
-      "question": "How long does it take to implement Expensify?",
-      "answer": "Most teams can get started with Expensify within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Who approves an expense in Expensify before it posts?",
+      "answer": "Approval chains are recorded as multi-level, with policy enforcement rules running alongside them and categorization filled in automatically once a receipt has been scanned."
     },
     {
-      "question": "Does Expensify offer a free trial or money-back guarantee?",
-      "answer": "Expensify provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "What price does this page record for Expensify?",
+      "answer": "A freemium model with a band of $5-9/mo, alongside a warning from the repository's expense comparison that none of the platforms it covers had verified pricing and that the vendor's current page should be checked."
     },
     {
-      "question": "What kind of support does Expensify offer?",
-      "answer": "Expensify provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Which alternatives does this repository suggest for Expensify?",
+      "answer": "Its alternatives page names Wave, Zoho Books, and Sage Intacct, and Expensify itself is listed as an alternative on the QuickBooks, Xero, FreshBooks, Stripe, Sage Intacct, Zoho Books, and Wave pages."
     }
   ],
   "relatedComparisons": [],
@@ -202,6 +214,6 @@
   },
   "difficulty": "Intermediate",
   "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "Expensify is designed for fast-growing startups that need a scalable finance & accounting platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Expensify is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "whoShouldUse": "Organizations where many employees submit expenses and a ledger already exists elsewhere: the recorded path runs receipt capture, approval under policy rules, and transfer into QuickBooks, Xero, or Sage Intacct.",
+  "whoShouldNotUse": "Teams under roughly 25 people whose accounting product already photographs receipts, and buyers who need a general ledger, invoicing, or financial statements rather than an expense layer feeding one."
 }

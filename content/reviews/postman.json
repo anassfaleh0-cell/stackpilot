@@ -2,7 +2,7 @@
   "slug": "postman",
   "name": "Postman",
   "tagline": "API development and testing platform for developers.",
-  "description": "API development and testing platform for developers.",
+  "description": "Postman is an API workspace built on collections of requests, with environments, mock servers, JavaScript test scripts, and scheduled monitors.",
   "category": "Developer Tools",
   "website": "https://postman.com",
   "pricing": "Freemium",
@@ -10,65 +10,65 @@
   "rating": 4.6,
   "reviewCount": 1180,
   "pros": [
-    "Excellent developer tools capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Requests, scripts, assertions, and environment variables live in one collection that teammates can fork and edit.",
+    "Mock servers let frontend work proceed against a stable response while the real endpoint is still being built.",
+    "Documentation renders from the collection itself, so published examples cannot quietly diverge from the requests being sent.",
+    "Monitors execute a collection against live endpoints on a schedule, turning request definitions into checks on production behavior.",
+    "Pre-request scripts and JavaScript assertions sit on the request itself, so signed headers and response checks repeat across a whole set."
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "The free tier limits team collaboration and paid tiers are priced per user, so cost tracks the number of engineers in a workspace.",
+    "Collections are stored in Postman's own database or cloud workspace rather than as files, which puts API definitions outside repository review.",
+    "It is a client rather than a gateway: authentication, rate limiting, and versioning policy for the APIs themselves stay on the server side."
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured developer tools platform with comprehensive tooling",
+      "name": "Request collections",
+      "description": "Requests are grouped into reusable sets with parameterized variables, shared through workspaces and published to public collections.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
+      "name": "Environment variable substitution",
+      "description": "Selecting an environment swaps the values a request uses, so one collection targets local, staging, and production hosts.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Pre-request scripts",
+      "description": "Scripts run before a request to compute values such as timestamps or signatures that the call depends on.",
       "available": true,
-      "category": "Security"
+      "category": "Automation"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "JavaScript response assertions",
+      "description": "Checks on the response are written in JavaScript and stored alongside the request that produced the response.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Mock servers from collections",
+      "description": "A collection can be served as a mock endpoint so client development continues before the real API exists.",
       "available": true,
       "category": "Usability"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Generated API documentation",
+      "description": "Documentation is produced from the collection, keeping examples aligned with the requests actually defined.",
       "available": true,
-      "category": "Integrations"
+      "category": "Reporting"
     },
     {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Scheduled endpoint monitors",
+      "description": "Collections can be executed against live endpoints on a schedule to watch production behavior without opening the client.",
       "available": true,
-      "category": "Core"
+      "category": "Automation"
+    },
+    {
+      "name": "Public workspace sharing",
+      "description": "Collections can be published for others to read, fork, and adapt, which is how popular APIs get reused rather than rebuilt.",
+      "available": true,
+      "category": "Collaboration"
     }
   ],
   "ratings": [
@@ -111,71 +111,83 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Postman across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your developer tools needs.",
+      "title": "Postman as an API workspace",
+      "body": "Postman began as a request builder and now functions as a workspace around API work: collections hold requests, environments swap the values they use, scripts run before and after each call, and documentation, mocks, and monitors are derived from the same definitions. This repository records it at 4.6/5 from 1,180 reviews, ranks it first on its API management page, and describes it in the API tooling comparison here as the platform covering the full API lifecycle for teams that need design, testing, documentation, and monitoring in one tool.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Postman serves the developer tools category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "Collections, environments, and variables",
+      "body": "A collection is the unit of work. Requests are grouped into reusable sets, each parameterized so the same definition can point at local, staging, or production by selecting an environment, and variable substitution happens at send time — which is what keeps a large collection maintainable across three deployments of the same API. The comparison stored in this repository notes that collections live in Postman's own storage rather than in the project repository, a choice that makes sharing through a workspace easy and makes reviewing a collection through a pull request impossible without an export step.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Postman excels in this area.",
+      "title": "Scripts that run around each request",
+      "body": "Two extension points sit on every request. Pre-request scripts compute what the call needs — timestamps, signed headers, tokens fetched elsewhere — and test scripts assert on the response once it arrives, written in JavaScript and stored with the request. Because both live in the collection, a check defined for one endpoint can be reused across the set, and a failure surfaces as a test result rather than as something a person has to notice by eye. The API tooling comparison in this repository lists variable substitution, environment management, pre-request scripts, and JavaScript assertions as the core scripting surface.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Postman excels in this area.",
+      "title": "Mock servers and rendered documentation",
+      "body": "A mock server answers requests with recorded or scripted responses, which lets frontend work proceed against a stable contract while the backend is still moving; parallel frontend development is the reason mocks are named in this repository's tooling comparison. Generated documentation renders the same requests as a reference for whoever consumes the API, so published examples cannot drift away from what the team actually sends. Both features appear in that comparison among the reasons Postman is described as the broadest option in the category.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Postman excels in this area.",
+      "title": "Monitors against live endpoints",
+      "body": "Beyond design-time work, a collection can be executed on a schedule against an environment that is running. That turns a test suite written during development into a set of checks on production behavior, running whether or not anyone has the client open. Monitoring is named in this repository's API tooling comparison alongside documentation, mock servers, and workspaces as the capability that lifts Postman from request builder to lifecycle platform. Because a monitor executes the same collection, the definitions serve development and checking without being written twice.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Postman excels in this area.",
+      "title": "How collections move between people",
+      "body": "Postman's collaboration surface is where much of the product's design sits. Requests travel through an account rather than through files, which is why sharing, forking, and workspace membership are the mechanisms used to move a collection between people instead of attaching it to a pull request. The sharing paths recorded across this repository's notes are these:",
+      "type": "list",
+      "items": [
+        "Workspaces: collections are shared among members of an account, with the extent of that sharing shaped by the plan limits recorded in this repository's comparison.",
+        "Public collections: popular APIs are published as collections that teams fork and customize instead of rebuilding from scratch.",
+        "Forking: a copy lands in your workspace with its scripts and variables intact, ready to edit against your own endpoints.",
+        "Generated documentation: the rendered reference is what gets handed to whoever consumes the API.",
+        "Monitors: a scheduled run can be attached to a collection so endpoints keep being checked after the workspace is closed."
+      ]
+    },
+    {
+      "title": "Seats, not request volume",
+      "body": "Pricing on this page comes from the dataset: Postman is stored as Freemium with a list price band of $14-39/mo, and the API management ranking here repeats that band beside a 4.6/5 rating. The structural point from this repository's tooling comparison is that collaboration is what a plan gates — the free tier supports limited team sharing, and paid tiers add per-user cost as more engineers join. Budgeting therefore follows headcount in the workspace rather than request volume. Stored bands on this site are recorded figures, not quotes, so confirm current rates with the vendor.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Postman excels in this area.",
+      "title": "Where Postman stops",
+      "body": "Three boundaries are worth stating. Postman is a client and workspace, not an API gateway: authentication, rate limiting, versioning policy, and the servers themselves stay outside it. Collections are stored in Postman rather than in the project repository, so teams that want API definitions reviewed through pull requests need a file-based tool or an explicit export step. And per-user pricing means a workspace-wide rollout costs more than one team's seat count suggests, which the comparison in this repository flags as the limitation of its collaboration model.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "Postman achieves a 4.6/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable developer tools capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
+      "title": "Insomnia, Bruno, and OpenAPI tooling",
+      "body": "The alternatives recorded in this repository's API tooling comparison are specific. Insomnia is the lighter client: quicker to open, smaller feature set, and without the built-in documentation, mocks, or monitoring. Bruno stores collections as plain files in the project repository, which brings version control and pull-request review but no cloud workspace and less mature scripting. Specification-first teams are advised there to build on OpenAPI and reach for Postman for ad-hoc requests. In the stored head-to-head files Postman at 4.6/5 sits above most neighbors and below GitHub at 4.7.",
       "type": "text"
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Postman enables teams to API development and testing platform for through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Postman supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Postman's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Where these judgments come from",
+      "body": "This page was written from the vendor's own documentation, this repository's API tooling comparison, its ranking pages, and the stored head-to-head records; no requests were sent through Postman to produce it. The evidence describes a tool that fits teams wanting one place to build, test, document, and monitor HTTP APIs, and fits less well teams that require definitions to live as files in the repository or that need a gateway in front of their services. Stored rating: 4.6/5 from 1,180 reviews.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Postman different from other developer tools tools?",
-      "answer": "Postman differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Postman ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Where are Postman collections stored?",
+      "answer": "In Postman's application database or cloud workspace rather than as files on disk — a distinction this repository's API tooling comparison draws when contrasting Postman with file-based clients."
     },
     {
-      "question": "Can Postman handle enterprise-scale requirements?",
-      "answer": "Yes, Postman supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "What does the Postman free plan cover?",
+      "answer": "This repository records limited team collaboration on the free tier, with paid tiers priced per user. The stored price band for Postman is $14-39/mo, recorded rather than quoted."
     },
     {
-      "question": "How long does it take to implement Postman?",
-      "answer": "Most teams can get started with Postman within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Can Postman replace an OpenAPI workflow?",
+      "answer": "Not for specification-first teams. The comparison here recommends building on OpenAPI as the foundation and using Postman for ad-hoc requests, test runs, and monitoring."
     },
     {
-      "question": "Does Postman offer a free trial or money-back guarantee?",
-      "answer": "Postman provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "How does Postman compare with Insomnia and Bruno?",
+      "answer": "The same comparison places Insomnia as the lighter request builder and Bruno as the file-based client that lives in the repository, while Postman covers docs, mocks, and monitoring."
     },
     {
-      "question": "What kind of support does Postman offer?",
-      "answer": "Postman provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Where does Postman rank in this repository?",
+      "answer": "First among four picks on the API management page, second among four on API testing behind GitHub, and fourth on the overall developer tools ranking stored here."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +213,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Intermediate",
-  "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "Postman is perfect for freelancers and independent professionals who need an affordable, easy-to-use developer tools tool. Its simplicity and core feature set make it ideal for solo practitioners.",
-  "whoShouldNotUse": "Postman is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "learningCurve": "Requests are immediate; scripting, environments, and monitor design reward practice over days rather than hours",
+  "whoShouldUse": "Backend and frontend developers who design, test, document, and monitor HTTP APIs in one place, and teams that share collections across an account.",
+  "whoShouldNotUse": "Organizations requiring API definitions to live as files under version control, and teams needing a gateway in front of their services for auth or rate limiting."
 }

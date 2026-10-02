@@ -1,8 +1,8 @@
 {
   "slug": "todoist",
   "name": "Todoist",
-  "tagline": "Task management platform with smart scheduling and organization.",
-  "description": "Task management platform with smart scheduling and organization.",
+  "tagline": "Task manager built around projects, labels, filters, and natural-language due dates.",
+  "description": "Todoist is a task manager built for capture and planning: projects, labels, filters, recurring due dates, and natural-language entry.",
   "category": "Productivity",
   "website": "https://todoist.com",
   "pricing": "Freemium",
@@ -10,65 +10,65 @@
   "rating": 4.5,
   "reviewCount": 1620,
   "pros": [
-    "Excellent productivity capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Tasks can be entered in natural language with the due date parsed inline, which keeps capture to one field",
+    "Labels, filters, and priorities give layers of view over one list without duplicating the tasks underneath",
+    "Recurring due dates are first-class, so repeating work is defined once instead of re-entered each week",
+    "Records held here place Todoist on freelance and personal-use lists as well as in task management, so the same tool scales down",
+    "Rated 4.5 out of 5 from 1,620 reviews in this repository's recorded data"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Depth is deliberately limited: no Gantt charts, resource management, or roll-up reporting, which is why the Smartsheet and enterprise records treat it as out of scope",
+    "Collaboration stops at shared projects, comments, and assignments rather than structured workflows with statuses and permissions",
+    "Priorities and filters can become their own maintenance layer when a personal list grows into a team backlog"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured productivity platform with comprehensive tooling",
+      "name": "Natural-language task entry",
+      "description": "Due dates and recurring patterns are parsed as the task is typed, so capture stays a single field instead of a date picker.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
+      "name": "Projects and sections",
+      "description": "Tasks sit in projects with optional sections, the structure this repository's task management record treats as the basic unit of organization.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Labels and filters",
+      "description": "Labels tag tasks across projects while filters save a query over them, giving views of one dataset without copying it.",
       "available": true,
-      "category": "Security"
+      "category": "Core"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Recurring due dates",
+      "description": "Patterns such as weekly or on a weekday repeat automatically, recorded alongside priorities as one of the core task features.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Priority levels",
+      "description": "Multiple priority levels rank tasks inside a project, recorded in this repository's task management feature list.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Task assignments in shared projects",
+      "description": "Work can be assigned to a person in a shared project, which is the extent of the collaboration model recorded for the product.",
+      "available": true,
+      "category": "Collaboration"
+    },
+    {
+      "name": "Comments on tasks",
+      "description": "Discussion attaches to the task itself, so context travels with the item instead of sitting in a separate thread.",
+      "available": true,
+      "category": "Collaboration"
+    },
+    {
+      "name": "Cross-device sync",
+      "description": "Lists sync across devices through the vendor's service, which is what makes capture from anywhere practical.",
       "available": true,
       "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
-      "available": true,
-      "category": "Core"
     }
   ],
   "ratings": [
@@ -111,71 +111,78 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Todoist across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your productivity needs.",
+      "title": "Capture first, with due dates in the same line",
+      "body": "Todoist's center of gravity is capture. Tasks are typed into a single field, due dates and recurring patterns are parsed from what is typed, and the item lands in a project without a form to fill out. The task management guidance held in this repository describes exactly that shape: projects, sections, assignees, priorities, due dates, and recurring tasks as the core feature set. Nothing in the model asks for a schema before the first task exists, which is why the same tool appears on this repository's personal-use and freelance lists as well as in its task management category.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Todoist serves the productivity category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "Labels, filters, and one list read differently",
+      "body": "Organization comes from a few orthogonal layers rather than a deep hierarchy. Projects hold work by area, labels tag items across projects, filters save a query over them, and priorities rank what is left. The effect is that one set of tasks can be read as a day, a project, or a question without being duplicated, because the filter reads the same records. For a personal list this is lightweight; for a team it means the same discipline applies, someone has to keep the labels and filters tidy or the views start disagreeing with each other.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Todoist excels in this area.",
+      "title": "Recurring work, defined once",
+      "body": "Recurring due dates are where a task manager earns its keep over a calendar. A repeating item is defined once and returns on its own, so weekly reviews, invoice runs, and report drafts stop being re-entered. Priorities sit on top of that, letting a recurring backlog distinguish the urgent from the merely scheduled. The recorded feature set for Todoist in this repository pairs these with due dates and assignees, which is a compact description of a tool built for execution rather than for planning a program of work.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Todoist excels in this area.",
+      "title": "Where the record says it stops",
+      "body": "This is the part a buyer should weigh before assuming a task list will grow into a project system. Nothing in this repository's records shows Gantt charts, resource management, or roll-up reporting for Todoist; the enterprise and Smartsheet material in this repository treats those as the province of heavier tools, and the Asana review places Todoist alongside personal and lightweight use rather than as a portfolio system. The recorded collaboration surface is shared projects, assignments, and comments, not configurable workflows. The gaps this repository's records show are listed below.",
+      "type": "list",
+      "items": [
+        "No Gantt or timeline planning in this repository's records",
+        "No resource or workload management recorded",
+        "No roll-up reporting across projects recorded",
+        "No configurable status workflows recorded",
+        "No permission depth beyond shared projects recorded"
+      ]
+    },
+    {
+      "title": "Freelance, personal, and team use in one tool",
+      "body": "The breadth of where Todoist appears in this repository is itself evidence about its positioning. It is listed under task management, under software for freelancers, and in guidance on choosing project management software for personal use, which means the vendor is not asking buyers to pick between a personal and a professional edition to start. A freelancer can keep one account from first client to small team. What changes at the team boundary is the conversation about shared structure, because labels and filters that one person keeps in their head have to be named for everyone.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Todoist excels in this area.",
+      "title": "The price band on record, and what it brackets",
+      "body": "This page records Todoist as freemium with a band of $5-8/mo, and that band is the only price the dataset puts on this page. The repository's task management category carries a slightly higher band for comparable tools, so Todoist sits at the lower end of what this record shows for the category. Because the recorded feature set is task-focused rather than program-focused, the honest question is not whether the paid tier is worth it, but whether the ceiling on depth is acceptable. Confirm current list pricing with the vendor before rollout.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Todoist excels in this area.",
+      "title": "Hosted lists, and what is not on file",
+      "body": "Todoist is a hosted service: lists sync through the vendor's infrastructure and are reached through browsers and clients. This page is built from records that hold no compliance certification for Todoist and this review states none; readers confirm it from the vendor’s current published documentation. Since tasks accumulate personal commitments, client names, and internal dates, the questions worth asking are about data residency, what export produces, and what happens to shared projects if an owner's account lapses.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Todoist excels in this area.",
+      "title": "Against Asana, Notion, and the note tools",
+      "body": "Asana is the recorded peer in this repository's task management material, and its review is where Todoist is named, at a comparable layer of execution-focused work rather than portfolio planning. Notion sits to one side as the workspace that absorbed databases and documents into the same product. On the other side are the capture stores: Evernote, Obsidian, and Roam Research, which the Todoist alternatives file lists as the closest substitutes on record, a reminder that for many buyers the competitor is not another task manager but a notes app holding a to-do list.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "Todoist achieves a 4.5/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable productivity capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Todoist enables teams to Task management platform with smart sche through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Todoist supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Todoist's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Who should list things in Todoist",
+      "body": "Todoist fits individuals, freelancers, and small teams who want capture fast and structure light: people who will use natural-language dates, a handful of projects, and filters rather than a configured process. It does not fit program-level planning with dependencies and resource loading, or organizations that need roll-up reporting and permission depth, for which this repository's project management material is the place to look. The assessment above comes from published product material and the entries held here for Todoist; nobody on this page has run a Todoist account. Those records show 4.5 out of 5 from 1,620 reviews.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Todoist different from other productivity tools?",
-      "answer": "Todoist differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Todoist ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "What is Todoist for?",
+      "answer": "Capturing and executing tasks. This repository's task management guidance records its core set as projects, sections, assignees, priorities, due dates, and recurring tasks."
     },
     {
-      "question": "Can Todoist handle enterprise-scale requirements?",
-      "answer": "Yes, Todoist supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "Does Todoist understand natural-language dates?",
+      "answer": "The model supports due dates and recurring patterns set inline while typing, which keeps task capture to a single field rather than a date picker."
     },
     {
-      "question": "How long does it take to implement Todoist?",
-      "answer": "Most teams can get started with Todoist within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Can Todoist replace project management software?",
+      "answer": "Not for program-level work. This repository records no Gantt charts, resource management, or roll-up reporting for Todoist, and place collaboration at shared projects, assignments, and comments."
     },
     {
-      "question": "Does Todoist offer a free trial or money-back guarantee?",
-      "answer": "Todoist provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "Is Todoist free?",
+      "answer": "This page records it as freemium with a paid band of $5-8/mo, sitting at the lower end of the range this repository shows for task management tools."
     },
     {
-      "question": "What kind of support does Todoist offer?",
-      "answer": "Todoist provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "How does Todoist differ from Evernote or Obsidian?",
+      "answer": "They are capture stores for reference material; Todoist is an execution list. The Todoist alternatives file in this repository names Evernote, Obsidian, and Roam Research as the closest recorded substitutes."
     }
   ],
   "relatedComparisons": [],
@@ -200,8 +207,8 @@
     "apiAvailable": true,
     "migrationComplexity": "Medium"
   },
-  "difficulty": "Intermediate",
-  "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "Todoist is ideal for small to mid-size teams that need a reliable productivity solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
-  "whoShouldNotUse": "Todoist is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "difficulty": "Beginner",
+  "learningCurve": "Low: a task can be typed the moment the app opens, and labels and filters can be learned later without re-entering anything",
+  "whoShouldUse": "Individuals, freelancers, and small teams who want capture fast and structure light: natural-language dates, a handful of projects, and filters instead of a configured process.",
+  "whoShouldNotUse": "Program-level planning with dependencies and resource loading; organizations needing roll-up reporting and permission depth; teams whose process has to be defined before work can start."
 }

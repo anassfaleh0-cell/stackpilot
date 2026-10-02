@@ -1,8 +1,8 @@
 {
   "slug": "dialpad",
   "name": "Dialpad",
-  "tagline": "AI-powered business communication platform with cloud phone system.",
-  "description": "AI-powered business communication platform with cloud phone system.",
+  "tagline": "Cloud business phone system with real-time transcription and call assist for sales and support teams.",
+  "description": "Dialpad is a cloud business phone system that transcribes live calls and produces written summaries for sales and support teams.",
   "category": "Communication",
   "website": "https://dialpad.com",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.3,
   "reviewCount": 1360,
   "pros": [
-    "Excellent communication capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Live transcription produces a text record of a call before anyone opens a notes document",
+    "Voice, SMS, and team messaging share one business number instead of three separate tools",
+    "Positioned for sales and support teams that want call analytics attached to conversations",
+    "Admins assign numbers, routing rules, and users from one web console rather than a telecom system",
+    "The recorded band of $15-35/mo gives a buyer a starting figure before contacting sales"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Cloud-only deployment leaves no path for organizations that must keep call processing on-premises",
+    "Every user who places or receives calls needs a paid subscription, which punishes occasional phone use",
+    "This repository records no certifications or transcription coverage for Dialpad, so both must be verified with the vendor"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured communication platform with comprehensive tooling",
+      "name": "Real-time call transcription",
+      "description": "Converts speech to text while a call is still running, so a transcript is ready when the conversation ends. Language coverage is not recorded in this dataset.",
+      "available": true,
+      "category": "AI"
+    },
+    {
+      "name": "Post-call written summaries",
+      "description": "Condenses what was discussed and agreed into a short recap attached to the call record, so commitments are not left in someone’s memory.",
+      "available": true,
+      "category": "AI"
+    },
+    {
+      "name": "Outbound power dialer",
+      "description": "Lets a representative work a list of numbers from the same workspace that holds transcripts and recordings. Exact dialer modes are not itemized here.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "IVR menus and call routing",
+      "description": "Greets callers with menu options and hunts across users or queues until someone answers. Multi-site and department routing is configured from the admin side.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "SMS and team messaging",
+      "description": "Business texting and internal chat share the workspace with voice, so a customer conversation can continue on the same number after a call ends.",
       "available": true,
-      "category": "Integrations"
+      "category": "Collaboration"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Business number administration",
+      "description": "Assigns and reassigns company numbers, extensions, and departments from a web console. Porting timelines are not recorded in this dataset.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Call analytics and recording",
+      "description": "Call logs, recording, and reporting surface usage patterns for managers reviewing team calling. The dataset does not enumerate the available report types.",
       "available": true,
       "category": "Reporting"
     },
     {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Desktop, web, and mobile apps",
+      "description": "The same dialer and history are available from desktop, browser, and mobile clients, which is what lets a business number follow a user off the desk.",
       "available": true,
       "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
-      "available": true,
-      "category": "Core"
     }
   ],
   "ratings": [
@@ -111,71 +111,78 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Dialpad across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your communication needs.",
-      "type": "text"
+      "title": "Dialpad at a glance",
+      "type": "text",
+      "body": "Dialpad is a cloud business phone system. Call control sits in the vendor’s infrastructure, employees dial from a desktop, web, or mobile client, and a pool of business numbers takes the place of an on-site PBX. The layer that separates it from plain hosted telephony is speech-to-text: transcription runs while a conversation is still unfolding, and a written recap follows the call. Our dataset files Dialpad under Communication with a paid pricing model and a recorded band of $15-35/mo. Everything below is drawn from published Dialpad documentation and the fields stored in this repository’s dataset; nobody here used the product to produce this page."
     },
     {
-      "title": "What Is This Tool",
-      "body": "Dialpad serves the communication category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
-      "type": "text"
+      "title": "Transcription on live calls",
+      "type": "text",
+      "body": "For a sales or support conversation, the artifact worth keeping is the text of what was said rather than an audio file nobody replays. Dialpad converts speech to text during the call, so a transcript exists by the time the rep hangs up, and a post-call summary condenses commitments and next steps into a short record. Because the processing happens on the cloud side, the transcript lands in the same workspace as call history and recordings. What this repository does not record is which languages transcription covers, how long recordings or transcripts are kept, or what deletion rules apply — those details need confirmation from the vendor."
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Dialpad excels in this area.",
-      "type": "text"
+      "title": "Outbound dialer, routing, and IVR",
+      "type": "text",
+      "body": "The phone side covers the mechanics a buyer actually audits: an outbound dialer for high-volume calling, ring rules that hunt across devices, queue and overflow behavior for support lines, and IVR menus that route a caller to a department before a person picks up. Numbers can be assigned per user, per department, or per location from the admin side, which is what makes a multi-site setup manageable without a telecom contractor. Our dataset records the existence of these controls at a category level only; specific routing logic, queue options, and dialer modes are not itemized here, so they should be checked against vendor documentation."
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Dialpad excels in this area.",
-      "type": "text"
+      "title": "Where the dialer earns its keep",
+      "type": "list",
+      "body": "The product shape points at a particular buyer, and this repository’s own alternative listing agrees: Dialpad is described here as messaging with voice intelligence, aimed at sales and support teams that want chat connected to call analytics. These are the situations that match what the product is built to do.",
+      "items": [
+        "Sales teams running high call volumes who want every conversation transcribed without a note-taker in the room",
+        "Support desks that need a written record of what was promised during a call",
+        "Managers who coach from transcripts and call reviews rather than from memory",
+        "Small and mid-sized businesses swapping an on-site PBX for cloud-hosted numbers",
+        "Companies that want voice, SMS, and team messaging attached to one business number"
+      ]
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Dialpad excels in this area.",
-      "type": "text"
+      "title": "Pricing recorded for Dialpad",
+      "type": "text",
+      "body": "Our dataset records a list price band of $15-35/mo under a paid pricing model, with no free tier in these fields. Plan structure, whether the figure is per user or per line, and any add-on costs beyond core telephony are not captured, so the band should be treated as an entry reference rather than a quote. Buyers weighing Dialpad against meeting-led or messaging-led tools should price the whole headcount, because a phone system licenses every user who needs to place or receive calls. Confirm current list pricing and packaging directly with the vendor before budgeting."
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Dialpad excels in this area.",
-      "type": "text"
+      "title": "Pushing call events into other systems",
+      "type": "text",
+      "body": "Like most hosted phone systems, Dialpad is expected to sit beside the tools a company already runs rather than replace them: call events can be forwarded to other applications over published APIs and webhooks, and a call log entry is far more useful when it lands on the customer record it belongs to. This dataset records that an API is available but does not enumerate named connectors, so any specific CRM, helpdesk, or directory integration has to be checked against the vendor’s current marketplace. Directory synchronization and calendar-driven presence are the follow-up questions IT usually raises next."
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Dialpad excels in this area.",
-      "type": "text"
+      "title": "Cloud-only deployment and the data path",
+      "type": "text",
+      "body": "The deployment recorded for Dialpad is cloud only, which follows from the design: transcription and call routing happen in the vendor’s infrastructure, so audio leaves the customer network on every call. That is a clean fit for distributed workforces and a poor one for organizations required to keep voice processing inside their own perimeter. This repository records no security certifications, data-residency terms, or retention policies for Dialpad, and none should be inferred from category labels or pricing fields; confirm current documentation and contractual terms with the vendor."
     },
     {
-      "title": "Conclusion",
-      "body": "Dialpad achieves a 4.3/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable communication capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
+      "title": "Limits that follow from the design",
+      "type": "text",
+      "body": "Three limitations follow from what Dialpad is. There is no on-premises deployment path, so air-gapped or strictly local voice requirements end the conversation early. Every user who needs to call is a licensed user, which is awkward for occasional or seasonal phone needs. And the suite is voice-first: teams whose daily work is meetings and channels will find more room in a collaboration-led platform, while organizations wanting contact center depth will be looking at specialist vendors. The dataset’s silence on certifications and transcription coverage compounds the first point rather than offsetting it."
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Dialpad enables teams to AI-powered business communication platfo through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Dialpad supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Dialpad's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
-      "type": "text"
+      "title": "Alternatives and the verdict on Dialpad",
+      "type": "text",
+      "body": "Within this repository, Dialpad is measured against RingCentral, which carries a broader estate including video meetings, devices, and contact center add-ons, and against meeting-led tools such as Microsoft Teams and Zoom that approach communication from the calendar outward. Telegram sits at the opposite end — free, consumer-shaped messaging with no phone system at all — while Vonage sells communications APIs rather than a ready application. Our dataset carries an overall score of 4.3/5 for Dialpad across 1,360 recorded reviews. The honest read: it fits buyers whose problem is business calling with transcription attached, and fits poorly when the problem is meetings, channels, or developer embeds."
     }
   ],
   "faqs": [
     {
-      "question": "What makes Dialpad different from other communication tools?",
-      "answer": "Dialpad differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Dialpad ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Does Dialpad transcribe calls in real time?",
+      "answer": "Yes. Dialpad publishes live transcription during calls plus a written recap afterward. Which languages are covered, and how long transcripts are retained, are not recorded in this dataset, so confirm both with the vendor."
     },
     {
-      "question": "Can Dialpad handle enterprise-scale requirements?",
-      "answer": "Yes, Dialpad supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "Is Dialpad a phone system or a meeting tool?",
+      "answer": "It is a business phone system first: numbers, dialer, routing, IVR, and SMS, with meetings and messaging alongside it. Our dataset records a paid band of $15-35/mo for Dialpad."
     },
     {
-      "question": "How long does it take to implement Dialpad?",
-      "answer": "Most teams can get started with Dialpad within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Can Dialpad run on our own servers?",
+      "answer": "No. The recorded deployment for Dialpad is cloud only, and transcription depends on call audio reaching the vendor’s infrastructure, so there is no local deployment path."
     },
     {
-      "question": "Does Dialpad offer a free trial or money-back guarantee?",
-      "answer": "Dialpad provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "How does Dialpad differ from RingCentral?",
+      "answer": "RingCentral sells a wider estate — phone, video meetings, messaging, devices, and contact center add-ons — while Dialpad concentrates on calling with transcription and call analysis for sales and support teams."
     },
     {
-      "question": "What kind of support does Dialpad offer?",
-      "answer": "Dialpad provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "What does this dataset leave out about Dialpad pricing?",
+      "answer": "It records a band of $15-35/mo and nothing about plan tiers, add-ons, or per-line structure. Treat it as an entry reference and check the vendor’s published pricing for an actual quote."
     }
   ],
   "relatedComparisons": [],
@@ -200,8 +207,8 @@
     "apiAvailable": true,
     "migrationComplexity": "Medium"
   },
-  "difficulty": "Advanced",
-  "learningCurve": "Steep — requires dedicated training time for full proficiency",
-  "whoShouldUse": "Dialpad is designed for fast-growing startups that need a scalable communication platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Dialpad may be overwhelming for users who only need basic communication functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
+  "difficulty": "Moderate",
+  "learningCurve": "Day-to-day calling is quick to pick up; routing, IVR trees, and reporting configuration are where the real setup time goes.",
+  "whoShouldUse": "Sales and support organizations that live on the phone and want transcripts and summaries attached to every conversation, plus small and mid-sized businesses replacing an on-site PBX with cloud-hosted numbers.",
+  "whoShouldNotUse": "Teams whose daily work is meetings and channels rather than calls, organizations that require on-premises voice processing, and buyers who need certification evidence this dataset does not carry."
 }

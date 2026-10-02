@@ -1,8 +1,8 @@
 {
   "slug": "power-bi",
   "name": "Microsoft Power BI",
-  "tagline": "Microsoft's business analytics service for interactive data visualization.",
-  "description": "Microsoft's business analytics service for interactive data visualization.",
+  "tagline": "Microsoft's business analytics service with desktop modeling and workspace publishing.",
+  "description": "Microsoft Power BI models data in a desktop app, then publishes the finished report to a workspace for colleagues to read.",
   "category": "Analytics & Data",
   "website": "https://powerbi.microsoft.com",
   "pricing": "Freemium",
@@ -10,65 +10,65 @@
   "rating": 4.3,
   "reviewCount": 1280,
   "pros": [
-    "Excellent analytics & data capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "The workspace model separates who shapes the data from who reads it, which suits a central analytics team serving a broad audience.",
+    "DAX and Power Query build on Excel instincts an analytics team already holds, shortening the ramp for spreadsheet-heavy organizations.",
+    "This repository's BI glossary records Power BI connecting directly to Snowflake, BigQuery, and Redshift, with governed models keeping metric definitions consistent.",
+    "Comparison rows against Tableau in this dataset mark Power BI ahead on pricing value while leaving ease of use tied between the two.",
+    "Excel appears beside Power BI in this repository's reporting-integration notes, so spreadsheet output stays inside the same reporting story instead of becoming an export."
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "The model lives in a desktop file before it lives anywhere shared, so version history and handover between authors are the team's own responsibility.",
+    "DAX is a separate language from spreadsheet formulas, and measures that roll up across a model behave differently from cell references, which takes real practice.",
+    "This file records a $10-20/user/mo band but no capability tiers, so which features sit behind which level is not established in our records."
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured analytics & data platform with comprehensive tooling",
+      "name": "Desktop model authoring",
+      "description": "Tables are related and measures written in a desktop application before any report exists for anyone else.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "DAX measure language",
+      "description": "Calculated columns and measures are written in DAX rather than entered as worksheet formulas.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Power Query reshaping",
+      "description": "Data is cleaned and reshaped in Power Query on its way into the model, before a visual is built on top.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Workspace publishing",
+      "description": "A finished report is published to a workspace, where colleagues open it in a browser without the authoring tool.",
+      "available": true,
+      "category": "Collaboration"
+    },
+    {
+      "name": "Excel-side reporting",
+      "description": "This repository's project-management listing names Excel beside Power BI as a place report data consolidates.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Direct warehouse queries",
+      "description": "The BI glossary records Power BI connecting directly to Snowflake, BigQuery, and Redshift for its source data.",
       "available": true,
-      "category": "Reporting"
+      "category": "Integrations"
     },
     {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Role-scoped workspace access",
+      "description": "Permissions are held at workspace level, so membership decides which published reports a person can open.",
       "available": true,
       "category": "Security"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Freemium entry with paid band",
+      "description": "This file records a freemium model and a $10-20/user/mo band, with no tier contents recorded anywhere.",
       "available": true,
-      "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
-      "available": true,
-      "category": "Core"
+      "category": "Pricing"
     }
   ],
   "ratings": [
@@ -111,71 +111,83 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Microsoft Power BI across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your analytics & data needs.",
+      "title": "Desktop model, published report",
+      "body": "Power BI splits the work in two. A report is authored in a desktop application, where tables are related, measures are written, and visuals are arranged against a model someone has deliberately shaped. That file is then published to a workspace, and colleagues open it in a browser without needing the authoring tool at all. The split is the product's organizing idea: modelling is a craft done in one place, reading is a routine done in another, and the boundary between them is a publishing step rather than an email attachment.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Microsoft Power BI serves the analytics & data category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "DAX, Power Query, and the Excel lineage",
+      "body": "Three pieces of vocabulary carry most of the modelling work. DAX is the expression language where calculated columns and measures live; Power Query is where data is reshaped on the way in; and Excel is the ancestor both descend from, which is why an analyst who has spent years in spreadsheets arrives with transferable instincts rather than a blank page. This repository's project-management listing names Excel beside Power BI as a reporting destination, and its BI glossary describes the category as letting business users build reports without writing SQL.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Microsoft Power BI excels in this area.",
+      "title": "Publishing to a workspace",
+      "body": "Publication moves a finished report from one person's machine into shared space, and the items below are what changes hands when it does. Access is then granted at the workspace level, so an audience receives the reports built for it rather than a shared drive of files. Teams accustomed to emailing spreadsheets generally find this step the largest change in habit, more than any feature of the visuals themselves.",
+      "type": "list",
+      "items": [
+        "A desktop file that one author shaped and still owns",
+        "A publish step that moves it out of that person's machine",
+        "Workspace membership that decides who can open the report",
+        "A browser-based reading experience for everyone else",
+        "A version colleagues see only when someone republishes"
+      ]
+    },
+    {
+      "title": "Analysts who already live in Excel",
+      "body": "Power BI fits organizations where the analysts already think in spreadsheets and the readers already live in Microsoft-adjacent workflows. It rewards a central data team that models once and serves many consumers, because the workspace model assumes a clear line between who shapes the data and who reads it. Smaller teams without that split can still use it, but they will be playing both roles and should expect the desktop step to become shared territory. Our dataset files it across the SMB-to-enterprise range, a spread wide enough to be nearly uninformative on its own.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Microsoft Power BI excels in this area.",
+      "title": "Where Power BI sits in this repository's BI field",
+      "body": "Nine comparison records exist for Power BI in this file, and the one that matters most is Tableau, where the rows give Power BI the edge on pricing value while marking neither product ahead on ease of use. That split matches how the category is usually described: both tools are capable and neither is casual. The records pairing Power BI with Amplitude, Mixpanel, and Google Analytics set a BI product against product and marketing analytics, so they illustrate a difference in scope rather than a verdict. Read the Tableau record as the real head-to-head and the rest as context.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Microsoft Power BI excels in this area.",
+      "title": "Warehouse connections recorded in the glossary",
+      "body": "This repository's BI glossary states that modern BI tools, naming Looker, Tableau, and Power BI, connect directly to data warehouses including Snowflake, BigQuery, and Redshift, and that they carry governed data models so a metric keeps one definition across the organization. That is the integration story worth reading: Power BI's connectors put a reporting layer over data that already lives somewhere else rather than storing the source data itself. Anything beyond those three warehouse names would be our invention, so it has been left out of this review.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Microsoft Power BI excels in this area.",
+      "title": "Cost signals and a claim we will not repeat",
+      "body": "The record for Power BI is freemium at $10-20/user/mo, and no tier breakdown appears anywhere in our records, so what each level unlocks is not established here. One repository page does assert a market-share lead for Power BI over Tableau and Looker; the figure behind it is a statistic this review will not repeat, nothing else in the dataset corroborates it, and it should be treated as an unverified note on a category page. This section and the rest of the write-up come from Microsoft's published material and repository records rather than from a live Power BI session.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Microsoft Power BI excels in this area.",
+      "title": "Where access control lives, and what is unverified",
+      "body": "Access in Power BI is administered through workspaces: permissions sit with the workspace, so membership determines who sees which published reports. That is a structural statement about where the control lives, and it is as far as our records go. No attestation of any kind is recorded in our data for Power BI, none of any kind, and the machine-generated company record attached to this file is not treated here as a source for such claims. Whatever a security review needs in the way of attestations, residency, or subprocessors has to come from Microsoft's current documentation.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "Microsoft Power BI achieves a 4.3/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable analytics & data capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
+      "title": "What the desktop-first model costs",
+      "body": "Two limitations follow from what Power BI is. The model lives in a desktop file first, so continuity between authors depends on file discipline rather than on a shared editing history, and every handover is a real event. DAX also rewards a particular way of thinking: spreadsheet habits transfer part of the way, but measures that aggregate across a model behave differently from cell formulas, and debugging them is a skill learned separately. Readers of published reports feel neither cost; authors feel both within the first month.",
       "type": "text"
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Microsoft Power BI enables teams to Microsoft's business analytics service f through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Microsoft Power BI supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Microsoft Power BI's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Verdict, with caveats",
+      "body": "Power BI is the choice that assumes your analysts came from Excel and your data already sits in a warehouse or in files someone has to relate. It is the wrong choice for site-traffic questions or for a team that wants a public dashboard link, which are different products entirely. The file's score of 4.3 from 1,280 entries places it mid-field among the analytics records here, with its pricing-value row marked in its favor against Tableau. The decision underneath that rating is whether a model-first, publish-second workflow matches how your organization already works.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Microsoft Power BI different from other analytics & data tools?",
-      "answer": "Microsoft Power BI differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Microsoft Power BI ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Does building a Power BI report require SQL?",
+      "answer": "Not for report building. This repository's BI glossary describes the category as letting business users create reports without writing SQL; DAX is the language used when a measure has to be written instead."
     },
     {
-      "question": "Can Microsoft Power BI handle enterprise-scale requirements?",
-      "answer": "Yes, Microsoft Power BI supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "How does Power BI's publish step differ from Tableau's workflow?",
+      "answer": "Both move an authored file onto shared infrastructure. This dataset's rows put Power BI ahead of Tableau on pricing value and leave ease of use tied, so cost and daily workflow separate them more than the presence of publishing does."
     },
     {
-      "question": "How long does it take to implement Microsoft Power BI?",
-      "answer": "Most teams can get started with Microsoft Power BI within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "What pricing is recorded for Power BI here?",
+      "answer": "Freemium with a $10-20/user/mo band in this file. No tier breakdown appears anywhere in these records, so current editions and their contents have to be confirmed with Microsoft."
     },
     {
-      "question": "Does Microsoft Power BI offer a free trial or money-back guarantee?",
-      "answer": "Microsoft Power BI provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "Which warehouses does this repository say Power BI connects to?",
+      "answer": "The BI glossary names Snowflake, BigQuery, and Redshift while describing the category as a whole. Those three are the only warehouse names tied to Power BI anywhere in this dataset."
     },
     {
-      "question": "What kind of support does Microsoft Power BI offer?",
-      "answer": "Microsoft Power BI provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Are security certifications recorded for Power BI?",
+      "answer": "No. This dataset holds no certification of any kind for Power BI, and the company record attached to the file is machine-generated and unused as a source. Check Microsoft's current documentation."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +213,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Intermediate",
-  "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "Microsoft Power BI is designed for fast-growing startups that need a scalable analytics & data platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Microsoft Power BI is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "learningCurve": "Reading published reports is quick; authoring adds a desktop tool, a modeling discipline, and DAX, which takes considerably longer.",
+  "whoShouldUse": "Analysts who already work in Excel, and organizations that want a model shaped once and then published to colleagues across a Microsoft-centric estate.",
+  "whoShouldNotUse": "Teams after a public site-traffic dashboard, or groups with nobody willing to own a desktop modeling file as the source of truth for reports."
 }

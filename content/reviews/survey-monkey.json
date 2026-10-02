@@ -2,7 +2,7 @@
   "slug": "survey-monkey",
   "name": "SurveyMonkey",
   "tagline": "Online survey platform for market research and feedback.",
-  "description": "Online survey platform for market research and feedback.",
+  "description": "SurveyMonkey is a survey and feedback platform for building questionnaires, collecting responses, and reporting on the answers received.",
   "category": "Marketing & SEO",
   "website": "https://surveymonkey.com",
   "pricing": "Freemium",
@@ -10,65 +10,65 @@
   "rating": 4.2,
   "reviewCount": 1180,
   "pros": [
-    "Excellent marketing & seo capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Templates and a question library shorten the path from a feedback need to a survey that can go out the same day",
+    "Skip logic routes respondents past questions that do not apply to them, which is what keeps completion usable on longer instruments",
+    "Panel recruitment is available for teams that need answers from people outside their own contact list",
+    "Results accumulate into tables while the survey is still open, so a program can be read mid-flight",
+    "The freemium model with a recorded band of $39-99/mo gives an entry point before any vendor conversation"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Analysis stops at breakdowns and cross-tabs: research needing weighting or advanced statistics has to move to another tool",
+    "Responses do not attach to a customer record on their own, so findings must be carried into a system of record to affect decisions",
+    "Certification, retention terms, and residency options are all missing from this repository's record for SurveyMonkey"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured marketing & seo platform with comprehensive tooling",
+      "name": "Survey and question builder",
+      "description": "Assembles instruments from question types with option sets and validation. The full type inventory is not listed in this dataset.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Skip logic and branching",
+      "description": "Routes respondents around questions that do not apply, based on prior answers. per-plan ceilings are absent from the material used here.",
       "available": true,
-      "category": "Integrations"
+      "category": "Automation"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Link, email, and embed distribution",
+      "description": "Shares a survey by URL, by invitation, or by placement on a page. Invitation limits are not captured in these fields.",
       "available": true,
       "category": "Usability"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Panel response recruitment",
+      "description": "Buys responses from respondents recruited to a profile when the existing list cannot answer. Panel pricing is not recorded in this repository.",
       "available": true,
       "category": "Core"
+    },
+    {
+      "name": "Live results tables",
+      "description": "Answers aggregate into charts and tables while the survey is open. Cross-tab depth is not itemized in this dataset.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Filtering by respondent attributes",
+      "description": "Cuts results by respondent attributes or by answers to see subgroups. The available filter types are not listed here.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Raw response export",
+      "description": "Moves response rows out for analysis in another system. File formats and row limits are not enumerated in these fields.",
+      "available": true,
+      "category": "Migration"
+    },
+    {
+      "name": "API for response data",
+      "description": "Programmatic endpoints for pulling responses into other systems. Endpoint coverage and named connectors are not itemized in this repository.",
+      "available": true,
+      "category": "Integrations"
     }
   ],
   "ratings": [
@@ -111,71 +111,67 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates SurveyMonkey across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your marketing & seo needs.",
-      "type": "text"
+      "title": "SurveyMonkey as the survey layer",
+      "type": "text",
+      "body": "SurveyMonkey is a survey and feedback platform, and the whole product is the questionnaire, its distribution, and the answers that come back. That puts it in a different job from the marketing automation this repository files in the same category: Marketo moves people through nurture programs, while SurveyMonkey asks them a question and reports what they said. This dataset files SurveyMonkey under Marketing & SEO with a freemium pricing model, a band of $39-99/mo, and a descriptor of an online survey platform for market research and feedback."
     },
     {
-      "title": "What Is This Tool",
-      "body": "SurveyMonkey serves the marketing & seo category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
-      "type": "text"
+      "title": "Templates, question types, and skip logic",
+      "type": "text",
+      "body": "Construction starts from a template or a blank page: question types for rating, choice, ranking, and free text, with skip logic that routes a respondent past the questions that do not apply to them. The question library is the part of a survey tool that pays off over years, because carefully worded questions get reused across feedback cycles rather than rewritten each time. This repository does not itemize which question types or logic rules ship in which plan, so the depth of branching and validation belongs on a vendor checklist rather than in an assumption."
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. SurveyMonkey excels in this area.",
-      "type": "text"
+      "title": "Panels, links, and how responses arrive",
+      "type": "list",
+      "body": "Responses arrive through one of several doors, and the door changes what the answers mean. A recruited panel answers a general question in exchange for the incentive, while an invited list answers about a relationship the organization already has, which is usually the more actionable of the two. This dataset records neither panel pricing nor recruitment controls, so the difference between collecting from your own audience and buying a sample has to be priced with the vendor rather than inferred from the plan fields.",
+      "items": [
+        "A shared link posted anywhere the audience already reads",
+        "An email invitation sent to a list the organization already holds",
+        "An embedded survey placed on a page or inside a message",
+        "A panel of recruited respondents bought for the question at hand"
+      ]
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. SurveyMonkey excels in this area.",
-      "type": "text"
+      "title": "Reading the results: reports and exports",
+      "type": "text",
+      "body": "Results land in tables and charts as answers accumulate, with filtering by respondent attributes and an export for anyone who wants the raw rows. Export quality is the quiet differentiator in this repository's records: the Typeform review held in this dataset notes export options limited compared with dedicated survey tools like SurveyMonkey, which puts this product on the stronger side of that particular comparison. Where responses go next — into a CRM, a spreadsheet, or a reporting tool — depends on connectors this repository does not enumerate, so confirm the current integration list with the vendor."
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. SurveyMonkey excels in this area.",
-      "type": "text"
+      "title": "Free tier and the $39-99/mo record",
+      "type": "text",
+      "body": "SurveyMonkey is recorded here under a freemium pricing model with a band of $39-99/mo: a free entry point followed by paid tiers. What the band does not say is what the free tier caps — responses, questions, or collaborators — nor what a panel costs when a team buys a sample. The same band appears in this repository's survey-tools and form-builders listings, so the figure is at least consistent across the dataset. This page is assembled from SurveyMonkey's published documentation and the records this repository holds for the product, so treat the band as a stored reference and check current published pricing before budgeting."
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. SurveyMonkey excels in this area.",
-      "type": "text"
+      "title": "Limits that come with a form-first tool",
+      "type": "text",
+      "body": "A form-first tool has boundaries worth naming. It is the wrong shape for longitudinal research that needs panel management, sophisticated weighting, or statistical treatment beyond basic breakdowns, and it does not own the customer record the way a CRM does, so findings have to be carried elsewhere before they change a decision. The security posture is a second boundary: this repository holds no certification entry, no retention schedule, no residency term, or identity detail for SurveyMonkey, and survey responses frequently include personal or employee data. Neither boundary is resolved by the pricing fields."
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. SurveyMonkey excels in this area.",
-      "type": "text"
-    },
-    {
-      "title": "Conclusion",
-      "body": "SurveyMonkey achieves a 4.2/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable marketing & seo capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: SurveyMonkey enables teams to Online survey platform for market resear through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, SurveyMonkey supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate SurveyMonkey's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
-      "type": "text"
+      "title": "Typeform, Marketo, and where SurveyMonkey fits",
+      "type": "text",
+      "body": "In this dataset SurveyMonkey is compared against Marketo, Optimizely, ActiveCampaign, Ahrefs, ConvertKit, Mailchimp, Moz, and SEMrush, with Typeform as the closest recorded counterpart in the form-and-survey space; its alternatives file names Marketo, Hotjar, Typeform, and Optimizely. The scores conflict across the repository: this review's field holds 4.2/5 while alternatives listings elsewhere score SurveyMonkey at 4.4/5, so treat the number as one reading among inconsistent records. The fit question is simpler. SurveyMonkey suits teams whose immediate need is to ask a defined group a question and see the answers — recurring feedback, candidate and employee surveys, event follow-up — and does not suit research programs that need sampling rigor or buyers who need certification evidence this dataset does not carry."
     }
   ],
   "faqs": [
     {
-      "question": "What makes SurveyMonkey different from other marketing & seo tools?",
-      "answer": "SurveyMonkey differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, SurveyMonkey ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "How does SurveyMonkey differ from Marketo?",
+      "answer": "Marketo runs nurture programs and lead scoring; SurveyMonkey collects answers to questions. Both sit in this repository's Marketing & SEO category, but a team buying one is not replacing the other."
     },
     {
-      "question": "Can SurveyMonkey handle enterprise-scale requirements?",
-      "answer": "Yes, SurveyMonkey supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "Is there a free version of SurveyMonkey?",
+      "answer": "This dataset records SurveyMonkey under a freemium model with a band of $39-99/mo. What the free tier limits — responses, questions, or collaborators — is not captured here; check the vendor's current packaging."
     },
     {
-      "question": "How long does it take to implement SurveyMonkey?",
-      "answer": "Most teams can get started with SurveyMonkey within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Can SurveyMonkey recruit respondents for us?",
+      "answer": "Panel recruitment is available for teams that need answers from people outside their own list. Panel pricing and screening controls are not recorded in this repository, so price them with the vendor."
     },
     {
-      "question": "Does SurveyMonkey offer a free trial or money-back guarantee?",
-      "answer": "SurveyMonkey provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "How does SurveyMonkey compare with Typeform?",
+      "answer": "Typeform is recorded here as stronger on question presentation, while this repository's Typeform review notes that its export options are limited compared with dedicated survey tools like SurveyMonkey."
     },
     {
-      "question": "What kind of support does SurveyMonkey offer?",
-      "answer": "SurveyMonkey provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "What does this repository record about SurveyMonkey security?",
+      "answer": "Nothing in the way of certification, retention schedule, or residency term appears in the fields held for SurveyMonkey. Since responses often carry personal data, check it against documentation the vendor currently publishes."
     }
   ],
   "relatedComparisons": [],
@@ -200,8 +196,8 @@
     "apiAvailable": true,
     "migrationComplexity": "Medium"
   },
-  "difficulty": "Advanced",
-  "learningCurve": "Steep — requires dedicated training time for full proficiency",
-  "whoShouldUse": "SurveyMonkey is perfect for freelancers and independent professionals who need an affordable, easy-to-use marketing & seo tool. Its simplicity and core feature set make it ideal for solo practitioners.",
-  "whoShouldNotUse": "SurveyMonkey may be overwhelming for users who only need basic marketing & seo functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
+  "difficulty": "Beginner",
+  "learningCurve": "Building and sending a survey is quick; question design, logic, and analysis rigor are where experience shows.",
+  "whoShouldUse": "Teams that need to ask a defined audience a question and get structured answers back — recurring feedback, employee and candidate surveys, event follow-up — including organizations that may buy panel responses.",
+  "whoShouldNotUse": "Research programs that need sampling control, weighting, or statistical treatment beyond basic breakdowns, teams that need responses attached automatically to a customer record, and buyers requiring documentation of certification this repository does not hold."
 }

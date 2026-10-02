@@ -1,8 +1,8 @@
 {
   "slug": "evernote",
   "name": "Evernote",
-  "tagline": "Note-taking and knowledge management platform for professionals.",
-  "description": "Note-taking and knowledge management platform for professionals.",
+  "tagline": "Note manager built on notebooks and tags, with a web clipper, scanning, and search inside attachments.",
+  "description": "Evernote is a notebook-and-tag note manager built around capture: a web clipper, scanning, audio notes, and search that reads inside attachments.",
   "category": "Productivity",
   "website": "https://evernote.com",
   "pricing": "Freemium",
@@ -10,65 +10,65 @@
   "rating": 4.2,
   "reviewCount": 2100,
   "pros": [
-    "Excellent productivity capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "The web clipper captures full pages, articles, and screenshots straight into the notebook, per the note-taking comparison held in this repository",
+    "Search reaches inside attached documents and images, so a keyword can surface a PDF or a screenshot rather than only note titles",
+    "Notebooks plus tags give two independent ways to file the same material, which suits long-lived reference libraries",
+    "Capture spans text, scanned documents, audio notes, and clipped pages, keeping different source types on one shelf",
+    "Rated 4.2 out of 5 from 2,100 reviews in this repository's recorded data"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Structure is applied at filing time and stays put: tags do not map onto hierarchical tools, which is why the Notion review held in this repository records that migration as its hardest path",
+    "The free plan is limited to two devices, with offline access and larger attachment limits recorded as paid-plan additions",
+    "Notes are filed rather than linked, so the library does not accumulate connections between ideas the way a linked or block-based tool does"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured productivity platform with comprehensive tooling",
+      "name": "Notebook and tag organization",
+      "description": "The note-taking comparison in this repository records Evernote as known for its notebook and tag organization system, the filing model everything else hangs from.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
+      "name": "Web clipper capture",
+      "description": "A browser extension captures full web pages, articles, and screenshots for offline reference, recorded as one of the product's core capture paths.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Search inside attachments",
+      "description": "Search reaches within attached documents and images rather than stopping at note titles and tags, which is what makes a clipped library usable.",
       "available": true,
-      "category": "Security"
+      "category": "Core"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Document scanning",
+      "description": "Paper documents can be scanned into notes, recorded alongside text notes, web clipping, and audio notes as supported capture types.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Audio notes",
+      "description": "Recordings are kept as notes in the same notebook structure, so meeting audio sits beside the written material it belongs to.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Cross-device sync",
+      "description": "The library syncs across devices through the vendor's service, which is what the recorded multi-device model rests on.",
       "available": true,
       "category": "Usability"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Offline access on paid plans",
+      "description": "This repository records offline access as one of the things paid plans add beyond the free tier.",
       "available": true,
-      "category": "Integrations"
+      "category": "Usability"
     },
     {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Device limits by plan",
+      "description": "The same comparison records the free plan as limited to two devices, with paid plans removing that restriction.",
       "available": true,
-      "category": "Core"
+      "category": "Pricing"
     }
   ],
   "ratings": [
@@ -111,71 +111,79 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Evernote across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your productivity needs.",
+      "title": "Notebooks, tags, and where clipping lands",
+      "body": "Evernote's model is a filing one: notes live in notebooks, notebooks carry tags, and retrieval depends on both. The note-taking comparison in this repository calls it the most established dedicated note taking application and describes its organization as a notebook and tag system rather than a database or a linked graph. That decision has a consequence worth naming early: structure is applied when a note is filed, and it stays where it was put. The Notion review held in this repository records the same problem on the way out, noting that tags do not map onto a page hierarchy and that notebooks become pages rather than databases.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Evernote serves the productivity category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "The web clipper as the capture path",
+      "body": "The clipper is how most material gets in. This repository records a browser extension that captures full web pages, articles, and screenshots for offline reference, alongside text notes, document scanning, and audio notes. Capture is therefore where the product puts its weight: Evernote is bought to hold things found elsewhere, pages, PDFs, images, and meeting audio, and the notebook is the shelf they land on. Teams that live in links and reference material get the most from that shape, while teams producing their own documents usually keep drafting somewhere else.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Evernote excels in this area.",
+      "title": "Search that reads inside attachments",
+      "body": "Retrieval is the counterweight to capture, and this is where the record is strongest. The same comparison describes Evernote's search as reaching inside attached documents and images, so a keyword can surface a PDF or a screenshot rather than only note titles. For a library built from clipping, that is the difference between a store and an archive anyone can use. The capture and retrieval surfaces recorded for the product are listed below.",
+      "type": "list",
+      "items": [
+        "Full-page and article capture from the browser",
+        "Screenshot capture alongside clipped pages",
+        "Document scanning into note attachments",
+        "Audio notes kept in the same notebook",
+        "Search across attached documents and images",
+        "Tags and notebooks as the retrieval structure"
+      ]
+    },
+    {
+      "title": "What the free plan withholds",
+      "body": "This page records Evernote as freemium with a band of $10-20/mo, which is the sole price this page carries. The note-taking comparison in this repository adds the shape of the free tier: it is limited to two devices, while paid plans remove the device restriction, add offline access, and raise attachment size limits. In practice the free tier is a trial of the capture habit rather than a durable home for it, because a third device or a flight without connectivity is where the limit first shows up.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Evernote excels in this area.",
+      "title": "What Evernote is not trying to be",
+      "body": "Evernote is a store with a strong retrieval layer, not a linked thinking environment and not a shared workspace. Notes are filed rather than linked, so no graph of connections grows between them, and there is no block-level referencing that lets one passage appear in several places. This repository files the linked and local-first approaches under Roam Research and Obsidian, and databases plus pages under Notion. Buyers wanting a network of ideas should read those pages instead. Buyers wanting a searchable shelf of captured material are in the right place.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Evernote excels in this area.",
+      "title": "Sync, storage, and the certifications not on file",
+      "body": "Evernote is a hosted service: notes sync across devices through the vendor's infrastructure, which is what makes multi-device access and clipping from any browser possible. The fields assembled for this review contain no certification entry for Evernote and nothing in that field is offered here; use the vendor’s current documentation as the source for that answer. Because a library like this tends to accumulate contracts, articles, and scanned documents, the questions worth asking are about how stored content is protected, how long deleted material is retained, and what export produces when the library leaves.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Evernote excels in this area.",
+      "title": "Notion, Obsidian, Roam, and the stray pairings",
+      "body": "In this repository eleven comparison pages feature Evernote. Four are the ones that matter, Notion, Obsidian, Roam Research, and Todoist, where the argument is about organization and retrieval. The rest pair it with Calendly, Cal.com, Acuity Scheduling, JotForm, Typeform, Microsoft Teams, and ClickUp, which sell scheduling, forms, meetings, or project tracking, so those pages read as directory breadth rather than real rivalry. The Evernote alternatives file lists Todoist, Obsidian, and Roam Research as the closest substitutes on record.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Evernote excels in this area.",
+      "title": "Moving out of notebooks, as this repository records it",
+      "body": "Migration is worth reading about before adoption rather than after. The Notion review in this repository rates importing a large Evernote library as the hardest of the import paths it describes, because tags have no counterpart in a page hierarchy, notebooks become pages instead of databases, and attachments lose their organizational context. The same logic runs in reverse: whatever a team chooses next, its structure should be settled before a decade of clipped pages are exported into it. A shelf is easy to fill and awkward to re-shelve.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "Evernote achieves a 4.2/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable productivity capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Evernote enables teams to Note-taking and knowledge management pla through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Evernote supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Evernote's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Who should keep a notebook",
+      "body": "Evernote fits researchers, analysts, and reference-heavy professionals whose material arrives from the web, from PDFs, and from meetings, and who value finding it again over linking it into anything. It fits individuals who want the same library on a phone, a laptop, and a browser. It does not fit teams that need shared live documents, or thinkers who want notes connected in a graph. This assessment is assembled from published product material and the entries this repository holds for Evernote; nobody on this page has worked inside an Evernote account. Those records show 4.2 out of 5 from 2,100 reviews.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Evernote different from other productivity tools?",
-      "answer": "Evernote differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Evernote ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "How is Evernote organized?",
+      "answer": "Notebooks and tags. The note-taking comparison in this repository describes Evernote as the most established dedicated note taking application, known for its notebook and tag organization system and search."
     },
     {
-      "question": "Can Evernote handle enterprise-scale requirements?",
-      "answer": "Yes, Evernote supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "What does the Evernote web clipper capture?",
+      "answer": "Full web pages, articles, and screenshots, recorded as saved for offline reference. Text notes, document scanning, and audio notes are recorded alongside it as the other capture types."
     },
     {
-      "question": "How long does it take to implement Evernote?",
-      "answer": "Most teams can get started with Evernote within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Can Evernote search inside PDFs and images?",
+      "answer": "Yes, per this repository's comparison, which records search reaching within attached documents and images rather than stopping at note titles and tags."
     },
     {
-      "question": "Does Evernote offer a free trial or money-back guarantee?",
-      "answer": "Evernote provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "What does Evernote's free plan limit?",
+      "answer": "Two devices, according to the note-taking comparison held in this repository. Paid plans are recorded as removing the device restriction, adding offline access, and raising attachment size limits."
     },
     {
-      "question": "What kind of support does Evernote offer?",
-      "answer": "Evernote provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "How does Evernote differ from Obsidian and Roam Research?",
+      "answer": "Obsidian is a local-first Markdown vault with a graph of links; Roam is an outliner built on block references. Evernote is a notebook-and-tag store centered on capture and search."
     }
   ],
   "relatedComparisons": [],
@@ -200,8 +208,8 @@
     "apiAvailable": true,
     "migrationComplexity": "Medium"
   },
-  "difficulty": "Advanced",
-  "learningCurve": "Steep — requires dedicated training time for full proficiency",
-  "whoShouldUse": "Evernote is ideal for small to mid-size teams that need a reliable productivity solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
-  "whoShouldNotUse": "Evernote may be overwhelming for users who only need basic productivity functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
+  "difficulty": "Beginner",
+  "learningCurve": "Low for capture and filing; the judgment cost appears later, when notebooks and tags have to stay consistent across years of accumulated material",
+  "whoShouldUse": "Researchers, analysts, and reference-heavy professionals whose material arrives from the web, from PDFs, and from meetings, and who care more about retrieving it than about linking it into a structure.",
+  "whoShouldNotUse": "Teams that need shared live documents; thinkers who want notes connected in a graph; buyers who need a free tier across more than two devices, or a documented compliance record on file."
 }

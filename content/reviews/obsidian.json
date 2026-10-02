@@ -1,8 +1,8 @@
 {
   "slug": "obsidian",
   "name": "Obsidian",
-  "tagline": "Local-first knowledge management and note-taking application.",
-  "description": "Local-first knowledge management and note-taking application.",
+  "tagline": "Local-first Markdown knowledge base with backlinks, a graph view, and community plugins.",
+  "description": "Obsidian stores notes as plain Markdown files on your own device, linked by backlinks and a graph, with community plugins and no required cloud.",
   "category": "Productivity",
   "website": "https://obsidian.md",
   "pricing": "Free",
@@ -10,65 +10,65 @@
   "rating": 4.6,
   "reviewCount": 2080,
   "pros": [
-    "Excellent productivity capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Notes are plain Markdown files on the user's device, so the library is readable and movable without the vendor",
+    "Bidirectional linking creates a graph view that reveals connections folder-based organization hides, per the note-taking comparison held in this repository",
+    "A community plugin marketplace extends the core app, so capability arrives without waiting on the vendor's roadmap",
+    "Local files can sit under git-based version control, a fit the developer guide in this repository calls out explicitly",
+    "Rated 4.6 out of 5 from 2,080 reviews in this repository's recorded data"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Local-first is single-player by default: real-time editing, shared workspaces, and team permissions are the axis the Notion-versus-Obsidian pages in this repository are written around",
+    "Community plugins mean vault behavior can depend on third-party code of uneven quality, with upkeep falling on whoever installed it",
+    "The app is recorded as free while sync and publish are paid additions, so multi-device convenience is not part of the free tier"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured productivity platform with comprehensive tooling",
+      "name": "Local Markdown vault",
+      "description": "Notes are plain Markdown files stored in a folder on the user's device, recorded as the defining property of the application.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Backlinks and bidirectional links",
+      "description": "A note is reachable from every note that mentions it. This repository records bidirectional linking as creating a knowledge graph between notes.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Knowledge graph view",
+      "description": "The graph view visualizes connections between notes and reveals patterns that folder-based organization hides, per this repository's comparison.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Community plugin marketplace",
+      "description": "Functionality is extended through community-developed plugins, recorded as one of the product's core value propositions.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Sync across devices",
+      "description": "Paid plans are recorded as providing sync across devices, which is optional because the files already live on disk.",
       "available": true,
       "category": "Usability"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Publish to the web",
+      "description": "Paid plans are recorded as providing publish functionality, so selected notes can be put online without leaving the vault.",
       "available": true,
-      "category": "Integrations"
+      "category": "Usability"
     },
     {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Code block rendering",
+      "description": "The developer-productivity guide in this repository lists code block rendering among the note-taking capabilities Obsidian provides for technical writing.",
       "available": true,
-      "category": "Core"
+      "category": "Usability"
+    },
+    {
+      "name": "Commercial licensing on paid plans",
+      "description": "The note-taking comparison in this repository records commercial licensing as one of the things paid plans include.",
+      "available": true,
+      "category": "Pricing"
     }
   ],
   "ratings": [
@@ -111,71 +111,79 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Obsidian across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your productivity needs.",
+      "title": "Plain files in a folder on your disk",
+      "body": "Obsidian's storage model is the product. Notes are Markdown files sitting in a folder on the user's device, which this repository records as the defining property of the app alongside privacy, longevity, and extensibility. Nothing has to be uploaded for the tool to work, and the folder stays readable in any editor if the application disappears. The developer-productivity guide in this repository draws the contrast directly: a file-based approach where notes are local Markdown, against a structured database approach where notes are rows in someone else's system.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Obsidian serves the productivity category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "Backlinks, the graph, and how notes connect",
+      "body": "Because files can reference each other freely, the collection becomes a network rather than a filing tree. This repository records bidirectional linking in Obsidian as creating a knowledge graph, with a graph view showing connections that folder-based organization hides. Practically, a note can point at another and be found from it without either being filed anywhere; a topic page grows by accumulating links instead of being moved between folders. The knowledge-management material held here positions that as the reason to choose a local vault over a database.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Obsidian excels in this area.",
+      "title": "Community plugins and what they add",
+      "body": "Extensibility is recorded as one of Obsidian's value propositions, and it runs through a marketplace of community-developed plugins. The practical effect is that the core app stays small while capability is added by whoever maintains a plugin, which is also where the trade-off lives: plugin quality is uneven, upkeep falls on the person who installed it, and a vault's behavior can end up depending on third-party code. The surfaces below sit alongside that marketplace in the recorded feature set.",
+      "type": "list",
+      "items": [
+        "Community plugin marketplace extending the core app",
+        "Graph view over linked notes",
+        "Backlinks panel on every note",
+        "Markdown files readable outside the application",
+        "Paid sync between devices",
+        "Paid publish for putting notes online"
+      ]
+    },
+    {
+      "title": "Version control over your own notes",
+      "body": "Local files open an option the hosted note tools do not: the developer-productivity guide in this repository notes that Obsidian's file-based approach suits developers who prefer local Markdown with git-based version control. A vault can be committed, branched, and diffed like source, which turns note history into something reviewable and makes backups a copy operation rather than a vendor export. The same property pushes care onto the user, because a folder of files is only as safe as the machine and the backup routine behind it.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Obsidian excels in this area.",
+      "title": "What a local vault does not give you",
+      "body": "A local-first app is single-player by default. Real-time editing across a team, shared workspaces, and the permission model that comes with them are the axis the Notion-versus-Obsidian pages in this repository are written around, which tells a buyer where to look: collaboration features, pricing for ten or more users, real-time editing, and migration paths. Obsidian suits individuals and quiet small groups more than departments that need documents co-edited live. Teams that need that should read the Notion pages in this repository instead.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Obsidian excels in this area.",
+      "title": "Free app, paid sync and publish",
+      "body": "This page records Obsidian as free, and that is the only price statement here. The note-taking comparison in this repository adds the shape behind it: the application is free for personal use, while paid plans provide sync across devices, publish functionality, and commercial licensing. Because the notes already live on disk, sync is an optional convenience rather than the way the product works, which is unusual in this category and worth weighing against a tool whose data exists only on a vendor's servers.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Obsidian excels in this area.",
+      "title": "What this repository does not record about security",
+      "body": "Obsidian's local model answers part of the security question structurally: content sits on the user's device, so exposure depends on the device, its backups, and whatever sync the user switches on. The material collected for this page lists no compliance certification for Obsidian and no such assertion appears here; organizations that need a documented record work from the vendor’s published documentation rather than from this page. The practical questions for a team are different ones, namely how plugin code is vetted, where synced copies live, and who owns the vault when a contributor leaves.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Obsidian excels in this area.",
+      "title": "Obsidian next to Notion, Roam, and Evernote",
+      "body": "Notion is compared with Obsidian on two separate pages in this repository, both written around collaboration, shared workspaces, and migration, which is where the two tools actually diverge. Roam Research is the closer cousin in idea: linked notes, but hosted and outliner-shaped rather than a folder of files. Evernote is the capture-and-search store filed on the opposite side of the same category. Obsidian's alternatives file lists Todoist, Evernote, and Roam Research as the closest substitutes on record, a reminder that buyers often arrive from task tools as well as note tools.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "Obsidian achieves a 4.6/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable productivity capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Obsidian enables teams to Local-first knowledge management and not through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Obsidian supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Obsidian's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Who should keep a vault",
+      "body": "Obsidian fits writers, developers, and researchers who want their notes to outlive the application that made them, and who are comfortable owning files rather than renting a workspace. It fits privacy-conscious users who would rather keep material on their own machine, and individuals who want a graph of links without a subscription. It does not fit departments that need live co-editing and permissions out of the box, or buyers who want a vendor-held compliance record on file. The reading above comes from this repository's stored records and the product's published material, not from any session spent using Obsidian. Those records show 4.6 out of 5 from 2,080 reviews.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Obsidian different from other productivity tools?",
-      "answer": "Obsidian differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Obsidian ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Where are my notes stored with Obsidian?",
+      "answer": "On your device, as plain Markdown files in a folder. This repository records local-first storage as the defining property of the app, alongside privacy, longevity, and extensibility."
     },
     {
-      "question": "Can Obsidian handle enterprise-scale requirements?",
-      "answer": "Yes, Obsidian supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "Is Obsidian free?",
+      "answer": "This page records it as free. The note-taking comparison in this repository adds that the application is free for personal use, while paid plans provide device sync, publishing, and commercial licensing."
     },
     {
-      "question": "How long does it take to implement Obsidian?",
-      "answer": "Most teams can get started with Obsidian within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Does Obsidian have a graph?",
+      "answer": "Yes. This repository records bidirectional linking as creating a knowledge graph, with a graph view showing connections that traditional folder-based organization hides."
     },
     {
-      "question": "Does Obsidian offer a free trial or money-back guarantee?",
-      "answer": "Obsidian provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "How does Obsidian differ from Roam Research?",
+      "answer": "Both link notes bidirectionally. Roam is an outliner with daily notes and block references in a hosted service; Obsidian edits a folder of Markdown files stored on your own machine."
     },
     {
-      "question": "What kind of support does Obsidian offer?",
-      "answer": "Obsidian provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Can a team share an Obsidian vault?",
+      "answer": "The Notion-versus-Obsidian pages in this repository are written around collaboration, real-time editing, shared workspaces, and migration, which is where a team buyer should look before committing."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +209,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Intermediate",
-  "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "Obsidian is designed for fast-growing startups that need a scalable productivity platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Obsidian is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "learningCurve": "Low to start writing, higher to design: links, plugins, and folder conventions need decisions before a vault is pleasant to live in",
+  "whoShouldUse": "Writers, developers, researchers, and privacy-conscious individuals who want notes as local files, links instead of folders, and the option to extend the application with community plugins.",
+  "whoShouldNotUse": "Departments that need real-time co-editing, shared workspaces, and permissions out of the box; teams that require a vendor-held compliance record; buyers who want sync included with the free tier."
 }

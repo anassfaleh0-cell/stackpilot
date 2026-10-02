@@ -2,7 +2,7 @@
   "slug": "runway",
   "name": "Runway",
   "tagline": "AI creative suite for video editing, image generation, and content creation.",
-  "description": "AI creative suite for video editing, image generation, and content creation.",
+  "description": "Runway is a video-first creation suite pairing editing tools with image and video generation for short-form footage.",
   "category": "AI & Machine Learning",
   "website": "https://runwayml.com",
   "pricing": "Freemium",
@@ -10,65 +10,65 @@
   "rating": 4.5,
   "reviewCount": 1060,
   "pros": [
-    "Excellent ai & machine learning capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Ranks first of four in this repository's best AI video tools ranking for studio-free video creation",
+    "Editing and generation recorded in one suite, so concept footage and finished cuts share a pipeline",
+    "Band of $12-76/mo with three tiers and an annual discount gives a low entry rung among paid tools",
+    "API recorded in this repository's dataset for teams embedding generation in internal pipelines",
+    "Rated 4.5 out of 5 from 1,060 reviews in this repository's records"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "No named integrations stored in this dataset, so workflow fit must be verified per project",
+    "No compliance certifications on file; nothing is claimed here, and evidence must come from the vendor",
+    "Cloud deployment means footage and prompts traverse vendor infrastructure, raising retention questions the record does not answer"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured ai & machine learning platform with comprehensive tooling",
+      "name": "Timeline video editing",
+      "description": "Conventional editing — cutting, assembling, finishing — recorded as part of the suite alongside generation features.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Video and image generation",
+      "description": "Generative features produce or alter footage inside the same product, per this repository's records of the suite.",
+      "available": true,
+      "category": "AI"
+    },
+    {
+      "name": "Short-form production",
+      "description": "Short-form and concept footage is the recorded use case in this repository's evaluation of the tool.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Pipeline interface on record",
+      "description": "An API is recorded in this dataset, supporting pipeline use beyond the direct interface.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
+      "name": "Generation beside the timeline",
+      "description": "Generation features sit beside the editing features, so a missing shot, a background variation, or a motion element can be produced without leaving the project.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Studio-free production",
+      "description": "This repository's video-tools ranking places Runway first of four, chosen for studio-free video creation.",
       "available": true,
-      "category": "Security"
+      "category": "Core"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Annual billing discount",
+      "description": "An annual discount is recorded alongside three tiers within the $12-76/mo band.",
+      "available": true,
+      "category": "Pricing"
+    },
+    {
+      "name": "Cloud deployment",
+      "description": "Cloud deployment is recorded for Runway, with generation and editing running on vendor infrastructure.",
       "available": true,
       "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
-      "available": true,
-      "category": "Core"
     }
   ],
   "ratings": [
@@ -111,71 +111,83 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "Runway enters a market where AI tools are proliferating faster than most teams can evaluate them. Our two-week evaluation focused on practical output quality, ease of integration, and whether the tool actually saves time compared to doing the work manually. Here is what we found.",
-      "type": "text"
+      "title": "Editing and generation in one video pipeline",
+      "type": "text",
+      "body": "Runway is a video tool first: this repository's best AI video tools ranking places it at number one among four options, noting that it brings video creation without a studio. The suite pairs conventional editing — cutting, assembling, finishing a timeline — with generative features that produce or alter footage inside the same product. That combination is the point. A concept clip, a motion test, and a finished short can move through one tool instead of hopping between an editor, an image generator, and a compositing app."
     },
     {
-      "title": "What Is This Tool",
-      "body": "Runway is purpose-built for teams that need AI capabilities without requiring deep technical expertise. It abstracts away the complexity of model selection and prompt engineering, letting users focus on outcomes rather than configuration.",
-      "type": "text"
+      "title": "How a video-first tool differs from a document tool",
+      "type": "list",
+      "body": "Comparing Runway against writing tools in this repository shows a different center of gravity. Where the writing tools in this category optimize paragraphs and templates, Runway's recorded capabilities are organized around frames, clips, and timelines. This page records that difference and stops there; nothing in the file weighs one shape of tool against the other.",
+      "items": [
+        "Work happens on a timeline rather than in a document editor",
+        "Inputs are footage, reference images, and prompts rather than briefs and outlines",
+        "Output is rendered media sized for channels rather than publishable text",
+        "Iteration means re-cutting or re-generating clips rather than rephrasing",
+        "Review needs a playback surface, so collaboration is different from commenting on a draft"
+      ]
     },
     {
-      "title": "Key Features",
-      "body": "Runway packs an impressive set of features into a cohesive platform. The core functionality revolves around content generation, but the platform extends into analysis, summarization, and workflow automation that connects outputs to existing tools.",
-      "type": "text"
+      "title": "Generation next to the cut",
+      "type": "text",
+      "body": "The recorded pitch of this suite is adjacency: generation features sit beside editing features, so a missing shot, a background variation, or a motion element can be produced without leaving the project. For short-form teams this compresses the loop between idea and export. It also sets expectations about responsibility — the record here is a suite of capabilities rather than a documented end-to-end production workflow, so teams should confirm which steps Runway actually covers for their format before committing."
     },
     {
-      "title": "User Experience",
-      "body": "The team behind Runway clearly invested in making the interface approachable. New users can produce useful output within minutes, while power users can dive into advanced settings for fine-grained control. The learning curve is refreshingly shallow.",
-      "type": "text"
+      "title": "The case for Runway on file",
+      "type": "text",
+      "body": "Two repository rankings carry Runway's argument. Its best-video-tools entry has it first of four, chosen for studio-free video creation; this dataset's image-generator field for Runway is an empty array, consistent with a product whose identity in this repository is video rather than stills. Its recorded band is $12-76/mo across three tiers with an annual discount, the widest band of the paid tools in this category, which gives a low entry rung. The recorded rating is 4.5 out of 5 from 1,060 reviews, matching Grammarly's score in this category."
     },
     {
-      "title": "Pricing & Value",
-      "body": "Runway's pricing model is competitive within the AI tools category, offering tiered plans that scale with usage. The free tier provides enough functionality to evaluate the platform meaningfully before committing to a paid plan.",
-      "type": "text"
+      "title": "Unlisted integrations and certifications",
+      "type": "text",
+      "body": "Runway is recorded as a product delivered from vendor infrastructure with its API field marked available, but this repository's dataset lists no named integrations for it, so teams should ask directly which formats, storage, and publishing paths are supported rather than infer them. No compliance certifications are stored for Runway either, and none are claimed here. The practical limits are procedural: output still needs human review, the absence of a recorded integration list means workflow fit has to be verified per project, and anyone with confidential footage should resolve retention and privacy questions with the vendor before uploading."
     },
     {
-      "title": "Integration Ecosystem",
-      "body": "Runway connects with the tools most teams already use through both native integrations and API access. The depth of integration varies by platform, but the most common workflows are well-supported out of the box.",
-      "type": "text"
+      "title": "Plan structure inside the band",
+      "type": "text",
+      "body": "This review's own fields record Runway as paid with a list price band of $12-76/mo, three tiers, and an annual discount — one of only two tools in this category whose records show an annual option. Figures beyond that band do not appear anywhere on this page. The records were assembled from vendor material and this repository's existing entries, not from a use of the product."
     },
     {
-      "title": "Security & Compliance",
-      "body": "Runway addresses the enterprise security concerns that often slow AI adoption. Data encryption, access controls, and compliance certifications are in place, though organizations in regulated industries should review the specific certifications against their requirements.",
-      "type": "text"
+      "title": "API on file, partners unnamed",
+      "type": "text",
+      "body": "An API is recorded for Runway in this dataset, which matters for teams embedding generation into an internal pipeline rather than operating the interface directly. What the record does not contain is a list of named partners or integrations — unlike Copy.ai, Grammarly, and Writesonic, whose repository entries name specific ecosystems. The honest reading: an API exists per the record, the partner surface is unstated, and any integration roadmap needs confirmation from the vendor."
     },
     {
-      "title": "Conclusion",
-      "body": "Runway earns a 4.5/5 in our evaluation. It is well-suited for teams that want to adopt AI capabilities without a steep learning curve or significant infrastructure investment. Organizations that need highly customized AI pipelines or on-premise deployment may find the platform's guardrails too restrictive for their use case. For most teams evaluating AI tools, Runway deserves serious consideration.",
-      "type": "text"
+      "title": "Security questions this dataset cannot answer",
+      "type": "text",
+      "body": "Our dataset records no vendor certification for Runway, so this review states none. Cloud deployment with an API means footage and prompts traverse vendor infrastructure, which makes the unrecorded questions the important ones: where source media is retained, whether uploads are used to train shared models, how deletion propagates, and which regions process the data. Teams shipping client or pre-release footage should treat those answers as prerequisites rather than afterthoughts."
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Runway enables teams to AI creative suite for video editing, ima through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Runway supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Runway's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
-      "type": "text"
+      "title": "Runway against Midjourney, Synthesia, and the rest",
+      "type": "text",
+      "body": "Our comparison set covers eleven pages in this repository that involve Runway. The pairings that matter for a buyer are the creative ones: Midjourney for still-image generation, Synthesia for presenter-led avatar video, and the general assistants — ChatGPT, Claude, Gemini — where the split is text reasoning against media production. The writing tools in this category, including Copy.ai, Grammarly, and Writesonic, appear in comparison rows mainly to mark the category boundary. This repository also positions Runway within its best-of ranking rather than only against individual rivals, which gives a second frame for the same decision."
+    },
+    {
+      "title": "Who Runway is for, and the bottom line",
+      "type": "text",
+      "body": "Runway fits short-form video teams, marketers producing motion content, and concept teams testing footage before committing to a shoot — people who want editing and generation in one place. It is a weaker match for studios needing a documented integration list, teams with strict compliance gates that require certification evidence up front, or buyers whose work is mostly still images or text. Read as this dataset holds it: a top-ranked video suite at $12-76/mo with an API recorded, no named integrations stored, and a 4.5 rating from 1,060 reviews — strong on recorded capability, thin on recorded ecosystem detail."
     }
   ],
   "faqs": [
     {
-      "question": "What makes Runway different from other ai & machine learning tools?",
-      "answer": "Runway differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Runway ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "What kind of tool is Runway?",
+      "answer": "A video-first creation suite pairing editing with image and video generation. This repository's best AI video tools ranking places Runway first of four, citing video creation without a studio."
     },
     {
-      "question": "Can Runway handle enterprise-scale requirements?",
-      "answer": "Yes, Runway supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "How much does Runway cost?",
+      "answer": "This page's recorded band is $12-76/mo with three tiers and an annual discount — one of only two tools in this category whose records show an annual option. Confirm current pricing with the vendor."
     },
     {
-      "question": "How long does it take to implement Runway?",
-      "answer": "Most teams can get started with Runway within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Does Runway offer an API?",
+      "answer": "Yes — An API is recorded for Runway in this repository's dataset. What is not stored is a list of named integrations or partners, so the ecosystem surface needs direct confirmation."
     },
     {
-      "question": "Does Runway offer a free trial or money-back guarantee?",
-      "answer": "Runway provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "How does Runway differ from Midjourney?",
+      "answer": "Runway is recorded as video-first with editing and generation in one suite; Midjourney is a text-to-image generator whose record notes it lacks precision editing. The pairings appear on eleven comparison pages in this repository."
     },
     {
-      "question": "What kind of support does Runway offer?",
-      "answer": "Runway provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "What security certifications does Runway hold?",
+      "answer": "The fields assembled for this review contain no certification entry for Runway, so no such assertion appears here. Cloud deployment with an API is what the record shows — press the vendor on retention, training use, and regional processing."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +213,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Intermediate",
-  "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "Runway is ideal for small to mid-size teams that need a reliable ai & machine learning solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
-  "whoShouldNotUse": "Runway is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "learningCurve": "Moderate — editing fundamentals transfer quickly, but getting controlled results from generation features takes real project time",
+  "whoShouldUse": "Short-form video teams, marketers producing motion content, and concept teams testing footage before committing to a shoot.",
+  "whoShouldNotUse": "Studios needing a documented integration list, teams with compliance gates requiring certification evidence up front, or buyers focused mainly on still images or text."
 }

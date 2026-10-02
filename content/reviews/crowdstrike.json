@@ -2,7 +2,7 @@
   "slug": "crowdstrike",
   "name": "CrowdStrike",
   "tagline": "Cloud-delivered endpoint protection and threat intelligence.",
-  "description": "Cloud-delivered endpoint protection and threat intelligence.",
+  "description": "CrowdStrike pairs a per-endpoint agent with cloud-delivered analysis, threat intelligence, and managed response services for security teams.",
   "category": "Security & Compliance",
   "website": "https://crowdstrike.com",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.4,
   "reviewCount": 1760,
   "pros": [
-    "Excellent security & compliance capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Detections and threat intelligence are delivered from the cloud, so agents pick up new indicators without an upgrade project on the customer's side.",
+    "The repository's endpoint security ranking places CrowdStrike first of four picks with a recorded 4.4/5 and a per-device band of $8-12/device/mo.",
+    "Managed detection-and-response engagements let an in-house team hand triage and containment work to responders working for the vendor.",
+    "Incidents are assembled from the endpoint's own events, so an investigation starts on one machine's record rather than on several disconnected logs.",
+    "Billing follows devices, which ties the bill to the fleet actually protected and keeps a partial rollout cheaper than a full-estate one."
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Coverage begins at agent installation, so any machine the sensor has not reached produces nothing and stays dark to detections.",
+    "Detection analysis runs in the vendor's cloud, so a site that cannot reach the service loses the correlation and blocking stage, not just a dashboard.",
+    "This repository records no free tier for CrowdStrike, and its two price records disagree: the file says one band while the category page says a wider one, and nothing reconciles them."
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured security & compliance platform with comprehensive tooling",
+      "name": "Cloud-managed sensor rollout",
+      "description": "Agents are deployed and updated from the cloud console, so no management server has to be maintained on the customer's network.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Indicator and behavior detections",
+      "description": "Known malicious artifacts and suspicious process behavior are matched against agent telemetry as events occur on the host.",
       "available": true,
       "category": "Security"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Threat intelligence feed",
+      "description": "Research on adversaries and campaigns is published into the same cloud service that evaluates agent telemetry.",
       "available": true,
-      "category": "Usability"
+      "category": "Security"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Managed response engagement",
+      "description": "A service option places vendor-side responders alongside the customer's team for triage, hunting, and containment.",
       "available": true,
-      "category": "Integrations"
+      "category": "Collaboration"
     },
     {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Incident case tracking",
+      "description": "Related alerts are grouped into a case with a timeline, so an investigation has one place to be worked.",
       "available": true,
       "category": "Core"
+    },
+    {
+      "name": "Endpoint event search",
+      "description": "Process, file, and network records collected by the agent can be searched to reconstruct what ran on a machine.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Remote response actions",
+      "description": "Responders can open a live session from the console and run commands on an affected endpoint while an incident is open.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "API alert export",
+      "description": "Detections can be pushed out over an API so a SIEM, orchestration layer, or ticketing queue receives them without screen scraping.",
+      "available": true,
+      "category": "Integrations"
     }
   ],
   "ratings": [
@@ -111,71 +111,83 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates CrowdStrike across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your security & compliance needs.",
+      "title": "Endpoint protection delivered from the cloud",
+      "body": "CrowdStrike is recorded in this dataset as cloud-delivered endpoint protection and threat intelligence, and the shape behind that phrase is direct: a small agent runs on each machine, activity on that machine streams to the vendor's cloud, and detection and response are operated from there. There is no console to install on your own hardware, which changes both the rollout and the failure mode. Deployment is a package pushed to endpoints through whatever software distribution already exists, while the analysis layer is a service the organization depends on rather than one it administers.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "CrowdStrike serves the security & compliance category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "What the agent reports",
+      "body": "Detection quality follows from what reaches the cloud, so the agent's collection scope is the first thing a buyer should evaluate. The categories below are the standard telemetry set for a product of this class; each becomes a record an analyst can search later, and each is also a place where a noisy environment forces tuning decisions. Coverage matters more than it does for a hosted application, because anything the sensor never sees cannot be correlated afterwards.",
+      "type": "list",
+      "items": [
+        "Process execution, including the command lines a program was started with",
+        "File writes, modifications, and deletions on the host",
+        "Script and interpreter activity that leaves little on disk",
+        "Network connections observed while a process was running",
+        "Persistence and configuration changes made to the machine"
+      ]
+    },
+    {
+      "title": "Threat intelligence wired into detections",
+      "body": "The second half of the tagline is intelligence, and in this dataset it is not a separate product: research on adversaries, campaigns, and indicators is published into the same cloud that scores agent telemetry, so a described indicator can reach deployed machines without a customer-side content update. That loop is the argument for a cloud-delivered design, since detection content is maintained centrally and every enrolled machine receives it. The claim has a boundary worth stating plainly. Nothing in this repository measures detection quality for any vendor, and no file here compares false-positive rates or response times between endpoint products.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. CrowdStrike excels in this area.",
+      "title": "Managed detection and response as an option",
+      "body": "Beyond the console itself, the platform is offered with vendor-side responders attached: an engagement in which triage, hunting, and containment can be handed to people working for CrowdStrike instead of waiting for an internal analyst. That option is what turns an endpoint product into an endpoint service, and it is a procurement question rather than a configuration setting, because scope is contractual. Our dataset does not record what any such engagement includes, which capabilities are bundled into it, or how it is priced. Treat it as part of the documented product surface and get the boundaries in writing.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. CrowdStrike excels in this area.",
+      "title": "Where the coverage stops",
+      "body": "An agent-based product is defined as much by what it cannot see as by what it stops. Machines the sensor has not reached produce nothing: servers awaiting rollout, contractor laptops outside management, and network devices are invisible to detections until an agent lands. Connectivity is the second boundary, because detection content and the event store sit in the vendor's cloud, so a site that cannot reach CrowdStrike's service loses the loop that content updates and hunting depend on. The third boundary is economic rather than technical: each protected machine is a billed device, which makes an asset inventory part of the purchase decision.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. CrowdStrike excels in this area.",
+      "title": "Per-device pricing in this dataset",
+      "body": "The pricing field for CrowdStrike reads paid, and attached to that record is a band of $8-12/device/mo, a figure the repository's endpoint ranking quotes beside its first-place pick. A second record disagrees: the security category page lists a wider per-device range for the same product, a discrepancy this repository does not reconcile. Neither figure is confirmed current here, and no free tier appears anywhere in our records. The unit deserves more attention than the digits, since per-device billing ties cost to the protected fleet and makes a partial rollout cheaper than a full-estate one.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. CrowdStrike excels in this area.",
+      "title": "Where the alerts go",
+      "body": "An endpoint product rarely has the last word on an incident. Detections have to reach whatever already holds the organization's work: a SIEM for correlation, an orchestration layer for automated steps, or a ticketing queue where an analyst picks the item up. Across this repository's comparison tables, the integration criterion is marked present for CrowdStrike in every pairing it appears in, from Auth0 and Okta to Dashlane and LastPass; those marks are generated rather than measured: they signal that a connection exists, not that any specific route was proven in testing. The practical question for a buyer is direction of travel: whether detections can leave over an API, and whether policy can be set from outside the console.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. CrowdStrike excels in this area.",
+      "title": "The agent's deployment model",
+      "body": "CrowdStrike runs as a cloud service with a local agent: policy, version updates, and blocking content are issued from the vendor's console, and no management server has to be kept on the customer's own network. Telemetry and detection work happen off-host, which keeps the load on customer infrastructure light and moves retention and access questions into the vendor's hands. Compliance certifications are not recorded in this repository — not for CrowdStrike, and not for any product in this repository — so no framework of any kind is evidenced on this page. Buyers with an attestation requirement should ask the vendor for current documents, and treat this section as an absence of records rather than a finding either way.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "CrowdStrike achieves a 4.4/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable security & compliance capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
+      "title": "CrowdStrike against SentinelOne and the identity pair",
+      "body": "CrowdStrike appears in nine comparison records across this repository, and three of them belong on an endpoint shortlist. SentinelOne is the direct one: recorded at 4.2 against CrowdStrike's 4.4, with a band below this file's $8-12/device/mo, and a verdict that picks CrowdStrike on those numbers. Okta at 4.3 and Auth0 at 4.4 are matched against CrowdStrike as well, but both are identity products — one for employees, one for customers — and neither competes for the same budget line. The remaining six run against password managers and cross-category tools, where the records mostly restate that different categories serve different purposes.",
       "type": "text"
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: CrowdStrike enables teams to Cloud-delivered endpoint protection and  through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, CrowdStrike supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate CrowdStrike's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "What the record supports",
+      "body": "CrowdStrike enters this dataset at rank one of four in the endpoint security ranking, with a recorded 4.4/5 from 1,760 entries and the higher rating of the two endpoint products compared here. Those are directory figures and this repository holds no measurement behind them, so weight them accordingly. The structural case is clearer than the score: an agent-and-cloud product suits an organization that wants detections and threat intelligence delivered to it, and that accepts per-device cost plus the work of keeping coverage complete machine by machine. Where that describes the situation, CrowdStrike is the shape of tool to evaluate. This assessment comes from CrowdStrike's published product materials and the ranking, comparison, and category records held in this repository, with nothing installed or exercised on our side to produce it.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes CrowdStrike different from other security & compliance tools?",
-      "answer": "CrowdStrike differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, CrowdStrike ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Does CrowdStrike need an agent on every machine?",
+      "answer": "Yes. Protection, telemetry, and response all run through software installed on each endpoint, so machines without the sensor produce no records and are outside detections until rollout reaches them."
     },
     {
-      "question": "Can CrowdStrike handle enterprise-scale requirements?",
-      "answer": "Yes, CrowdStrike supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "How does CrowdStrike's per-device band compare with SentinelOne's?",
+      "answer": "This file records CrowdStrike at $8-12/device/mo with SentinelOne carried at a lower band in its own file, and the comparison record between them picks CrowdStrike at 4.4 against 4.2. The category page records wider bands for both."
     },
     {
-      "question": "How long does it take to implement CrowdStrike?",
-      "answer": "Most teams can get started with CrowdStrike within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "What does the managed response service include?",
+      "answer": "Not something our records capture. The product surface includes managed detection-and-response style engagements, but scope, coverage hours, and pricing are absent from this dataset and belong in a direct conversation with the vendor."
     },
     {
-      "question": "Does CrowdStrike offer a free trial or money-back guarantee?",
-      "answer": "CrowdStrike provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "Where in this dataset are CrowdStrike's certifications recorded?",
+      "answer": "They are not recorded. Our records name no attestation for CrowdStrike, and no framework appears against it anywhere in the repository. Telemetry is processed in the vendor's cloud, so ask for current documents rather than relying on this page."
     },
     {
-      "question": "What kind of support does CrowdStrike offer?",
-      "answer": "CrowdStrike provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Which does this repository rank higher, CrowdStrike or SentinelOne?",
+      "answer": "CrowdStrike, at rank one of four in the endpoint security ranking with 4.4/5, against SentinelOne at rank four with 4.2/5. Both ranking entries quote per-device bands, and this file's is the wider of the two."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +213,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Intermediate",
-  "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "CrowdStrike is designed for fast-growing startups that need a scalable security & compliance platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "CrowdStrike is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "learningCurve": "Agent rollout and console navigation are learnable quickly; tuning detections so the queue stays readable is the part that takes experience.",
+  "whoShouldUse": "Security teams protecting a managed estate of laptops, desktops, and servers who want detection content and threat intelligence delivered to them, and who can either staff triage themselves or contract the vendor's response service.",
+  "whoShouldNotUse": "Organizations with no way to install and maintain agents across their machines, teams looking for employee single sign-on rather than device protection, or buyers who cannot accept a per-device billing model."
 }

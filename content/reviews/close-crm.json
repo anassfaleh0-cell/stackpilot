@@ -2,7 +2,7 @@
   "slug": "close-crm",
   "name": "Close CRM",
   "tagline": "Built-in phone and email sales CRM for SMBs and startups.",
-  "description": "Built-in phone and email sales CRM for SMBs and startups.",
+  "description": "Close CRM is a sales CRM for small and growing teams that places calls, email, and pipeline work inside one customer record.",
   "category": "CRM & Sales",
   "website": "https://close.com",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.3,
   "reviewCount": 2480,
   "pros": [
-    "Excellent crm & sales capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Calls and emails are placed from the record and write back to it, so activity history does not depend on manual entry",
+    "Sequences mix email and call steps, letting a rep work a list without re-planning each individual touch",
+    "Pipeline rules attach tasks and ownership to stage changes, which removes the follow-up spreadsheet a small team would otherwise run",
+    "The paid band this dataset records, $25-79/mo, is narrow enough to budget before a conversation with sales",
+    "Phone and inbox are part of the CRM rather than two more vendors, which suits a team that does not want to run three tools for one conversation"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Nurture programs, landing pages, and campaign attribution sit outside the product, so campaign-heavy buyers will run a second platform",
+    "Telephony is part of the design, which means an organization already standardized on another dialer is overlapping rather than integrating",
+    "This repository records no certifications, retention terms, or data-residency detail for Close CRM, leaving the security review to vendor documentation"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured crm & sales platform with comprehensive tooling",
+      "name": "Built-in phone dialer",
+      "description": "Places calls from inside the CRM and writes them to the same timeline the deal lives on. Number provisioning and call-recording options are not itemized in this dataset.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Email sending and logging",
+      "description": "Send from the CRM and keep the thread attached to the contact record, so replies sit with the deal. Mailbox-specific behavior is not documented here.",
       "available": true,
-      "category": "Integrations"
+      "category": "Core"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Multi-step sales sequences",
+      "description": "Runs scheduled email and call steps across a list of prospects so outreach continues between manual touches. no per-plan ceiling is recorded in the data behind this review.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Pipeline and deal tracking",
+      "description": "Stages, values, and owners sit on a board that reflects what each rep is working. Custom stage sets are configurable per team.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Workflow rules on records",
+      "description": "Triggers on record changes assign work, update fields, or move deals, so a stage change is not left to memory. Rule counts are not captured here.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Activity and pipeline reports",
+      "description": "Summaries of calls, emails, and pipeline movement by rep or team. The report inventory is not enumerated in this repository.",
       "available": true,
       "category": "Reporting"
     },
     {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Mobile client for calling",
+      "description": "Dialing and record access from a phone client, which is what lets a rep work a call list away from the desk. Feature parity is not stated here.",
       "available": true,
       "category": "Usability"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "API and extension marketplace",
+      "description": "A documented API plus an extensions marketplace for wiring Close to systems outside it. Named partners are not listed in this dataset.",
       "available": true,
       "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
-      "available": true,
-      "category": "Core"
     }
   ],
   "ratings": [
@@ -111,71 +111,79 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Close CRM across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your crm & sales needs.",
-      "type": "text"
+      "title": "A CRM that answers its own phone",
+      "type": "text",
+      "body": "Close CRM is a customer relationship management system built for small and growing sales teams, and its distinguishing decision is that the conversation tools live inside the CRM rather than beside it. Dialing, email, and message history attach to the same contact record the pipeline is drawn on, so a rep does not keep a separate dialer, a separate inbox, and a separate deal tracker in sync by hand. This repository files Close under CRM & Sales with a paid pricing model and a recorded band of $25-79/mo, and its one-line descriptor here is a built-in phone and email sales CRM aimed at SMBs and startups. The design consequence runs through everything below: communication and storage share one system."
     },
     {
-      "title": "What Is This Tool",
-      "body": "Close CRM serves the crm & sales category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
-      "type": "text"
+      "title": "Calling and email inside the record",
+      "type": "text",
+      "body": "The record is where work happens. A call placed through Close writes to the timeline, an email sent from the CRM logs against the same contact, and the next task sits one screen away from the conversation that produced it. High-volume teams get a power dialer for working through a list of numbers, and sequences can mix email and call steps so outreach continues when a rep is heads-down on something else. Because the conversation tools and the storage are the same product, handoff questions reduce to reading a single timeline rather than reconciling a telephony log, a shared mailbox, and a deal board that each tell half the story."
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Close CRM excels in this area.",
-      "type": "text"
+      "title": "Pipeline stages and the rules behind them",
+      "type": "list",
+      "body": "Close's pipeline automation is the part most buyers audit first: stages move, and rules attached to those stages do the follow-up work that usually ends up in a spreadsheet. The surfaces below are the ones a small team would configure in the opening weeks, and because they all act on the same records, none of them needs a second system to hold state.",
+      "items": [
+        "Deal stages that advance a record and set the next task when something moves",
+        "Email sequences that keep sending steps on a set cadence between manual touches",
+        "A power dialer for working a call list from the same screen as the record",
+        "Assignment rules that route a new lead to a rep or a rotation",
+        "Saved views that filter leads by stage, last activity, or a custom field",
+        "Activity reporting that shows calls, emails, and meetings per rep"
+      ]
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Close CRM excels in this area.",
-      "type": "text"
+      "title": "What Close CRM deliberately leaves out",
+      "type": "text",
+      "body": "Three absences follow from the product shape. It is not a marketing automation suite: nurture programs, landing pages, and campaign attribution are not the center here, so a buyer who needs them will pair Close with another system. It is not a support desk either — there is no ticket queue, which keeps service conversations in a dedicated tool. And it is not a data warehouse; reporting covers pipeline and activity inside Close, while cross-system analysis needs an export path or a connector. The alternatives file stored in this repository frames the same point generically, noting that Close may lack advanced features found in dedicated alternatives."
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Close CRM excels in this area.",
-      "type": "text"
+      "title": "The price band our dataset holds for Close",
+      "type": "text",
+      "body": "Our dataset records a paid pricing model for Close CRM with a list band of $25-79/mo, and no free tier appears in these fields. What the band does not say is whether the figure is per seat or flat, what telephony costs beyond a base plan, or how numbers and messaging are billed — variable communication charges are the usual surprise in a CRM of this shape, and none of that is captured here. Treat the range as an entry reference rather than a quote, and confirm the live list price with the vendor before budgeting."
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Close CRM excels in this area.",
-      "type": "text"
+      "title": "How Close sits in this repository's comparison set",
+      "type": "text",
+      "body": "Close is a system of record first, which shapes what it connects to: mail and calendar on one side, telephony on another, and reporting or data tooling downstream. This repository's comparison files place Close against thirteen counterparts — ActiveCampaign, Copper CRM, Dialpad, Freshdesk, Freshsales, HubSpot, Outreach, Pipedrive, Salesforce, Salesloft, Zendesk, Zoho CRM, and Zoho — while its alternatives file names Pipedrive, Zoho CRM, Salesloft, Outreach, and Copper CRM as the closest recorded substitutes. Named connectors are not itemized in the dataset, so any specific pairing has to be checked against the vendor's current app list."
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Close CRM excels in this area.",
-      "type": "text"
+      "title": "Hosting, data handling, and what is unrecorded",
+      "type": "text",
+      "body": "Close is delivered as a hosted service: records, call audio, and email copy sit in the vendor's infrastructure rather than on customer hardware, which is what lets a browser or a phone client reach the record from any network. What this repository does not carry for Close is a certification, a data-residency term, a retention schedule, or an identity-policy detail, and none of them should be inferred from the cloud delivery model or the category field. A buyer running a formal security review needs those answers from the documentation the vendor currently publishes and contract terms; this page cannot supply them."
     },
     {
-      "title": "Conclusion",
-      "body": "Close CRM achieves a 4.3/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable crm & sales capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
+      "title": "Close against Pipedrive, Zoho, and the engagement tools",
+      "type": "text",
+      "body": "The comparison records give Close a clear position in the field. Pipedrive and Zoho CRM are pipeline-first CRMs carried in this dataset at 4.4/5 and 4.2/5 with bands recorded in their own files; HubSpot and Salesforce are suite platforms at 4.5/5 and 4.4/5 with far more surface area and far more administration; Outreach and Salesloft are engagement systems that assume a CRM already exists. Close sits narrower and lower-touch than all of them: one record, built-in communication, a band of $25-79/mo. This repository holds an overall score of 4.3/5 for Close across 2,480 recorded reviews."
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Close CRM enables teams to Built-in phone and email sales CRM for S through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Close CRM supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Close CRM's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
-      "type": "text"
+      "title": "Who should sell out of Close CRM",
+      "type": "text",
+      "body": "Close fits small and mid-sized selling teams that want calls, email, and pipeline in one system and do not want to administer a separate dialer. It fits founders and first sellers who will live in one screen, and teams whose motion is outbound conversation rather than campaign marketing. It fits poorly where the CRM must absorb marketing automation, ticketing, or cross-system analytics, and poorly where a security review demands certification material that this repository does not carry. This assessment rests on documented product information and the records kept in this repository for Close CRM."
     }
   ],
   "faqs": [
     {
-      "question": "What makes Close CRM different from other crm & sales tools?",
-      "answer": "Close CRM differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Close CRM ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Does Close CRM include a phone system?",
+      "answer": "Yes. Dialing is part of the product rather than a third-party add-on: calls are placed from the record and written to the contact timeline. Number and recording details are not captured in this repository."
     },
     {
-      "question": "Can Close CRM handle enterprise-scale requirements?",
-      "answer": "Yes, Close CRM supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "Is there a free plan recorded for Close CRM?",
+      "answer": "No. Our dataset records Close under a paid pricing model with a band of $25-79/mo and no free tier. Plan structure is not captured either, so confirm current packaging with the vendor."
     },
     {
-      "question": "How long does it take to implement Close CRM?",
-      "answer": "Most teams can get started with Close CRM within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "How does Close CRM differ from Copper CRM?",
+      "answer": "Both are small-team CRMs here, but Close centers communication inside its own record — phone, email, sequences — while Copper centers the Google Workspace relationship and surfaces context in Gmail and Calendar."
     },
     {
-      "question": "Does Close CRM offer a free trial or money-back guarantee?",
-      "answer": "Close CRM provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "Can Close CRM replace a sales engagement platform?",
+      "answer": "Partly. Close handles sequenced email and calling for a smaller team; Outreach is a dedicated engagement system with heavier analytics, recorded here at a band above Close's own."
     },
     {
-      "question": "What kind of support does Close CRM offer?",
-      "answer": "Close CRM provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "What does this repository record about Close security?",
+      "answer": "Nothing beyond a hosted delivery model: no certification, retention term, or residency option shows up in these fields. Buyers with formal reviews verify the answer against the vendor’s current documentation."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +209,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Intermediate",
-  "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "Close CRM is designed for fast-growing startups that need a scalable crm & sales platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Close CRM is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "learningCurve": "Calling and pipeline work are approachable quickly; sequences, workflow rules, and report setup are where configuration time goes.",
+  "whoShouldUse": "Small and mid-sized sales teams that want calling, email, and pipeline in one system, first sellers who would rather not administer a separate dialer, and outbound-led organizations that value a narrow tool over a suite.",
+  "whoShouldNotUse": "Marketing teams that need nurture programs and landing pages, service organizations that require a ticket queue, and enterprises whose security review demands attestation evidence this repository does not record."
 }

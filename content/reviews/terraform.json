@@ -2,7 +2,7 @@
   "slug": "terraform",
   "name": "Terraform",
   "tagline": "Infrastructure as code platform by HashiCorp for cloud provisioning.",
-  "description": "Infrastructure as code platform by HashiCorp for cloud provisioning.",
+  "description": "Terraform declares infrastructure in HCL, records real resources in a state file, and changes them through a reviewed plan and apply cycle.",
   "category": "Developer Tools",
   "website": "https://terraform.io",
   "pricing": "Freemium",
@@ -10,65 +10,65 @@
   "rating": 4.5,
   "reviewCount": 980,
   "pros": [
-    "Excellent developer tools capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Changes are proposed as a plan first, so reviewers see additions, deletions, and replacements before anything is touched.",
+    "The state file records what actually exists, which is what lets a plan report drift between configuration and reality.",
+    "Providers express many platforms through one set of verbs, so cloud resources and service configuration follow the same workflow.",
+    "This repository's GitLab review documents a Terraform state backend built into GitLab and a provider that manages GitLab projects, groups, and CI/CD variables as code.",
+    "Configuration is declarative: files state the desired end state and the tool derives the steps needed to reach it."
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "State has to be stored, locked, and shared, and a bad edit there misdirects every plan that follows.",
+    "What can be expressed is bounded by provider schemas, so an unsupported resource means a workaround or a wait.",
+    "Apply acts on live systems, which makes a mistaken resource reference a production event rather than a failed build."
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured developer tools platform with comprehensive tooling",
+      "name": "Declarative HCL configuration",
+      "description": "Files state the desired infrastructure and Terraform derives the steps required to reach that state.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "State file tracking",
+      "description": "The state file maps declared resources to real ones, which is what allows a plan to compare intent with what exists.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Plan and apply workflow",
+      "description": "A plan previews additions, changes, and deletions; apply executes that proposal against live systems.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Provider ecosystem",
+      "description": "Cloud and service platforms are reached through provider plugins that share one workflow and one vocabulary.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Reusable configuration modules",
+      "description": "Blocks are packaged into modules so an environment can be assembled from shared, versioned parts.",
       "available": true,
       "category": "Usability"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Drift surfaced by plan",
+      "description": "Running a plan against live APIs reveals resources changed or removed outside the configuration.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "GitLab state backend",
+      "description": "The GitLab review in this repository records a built-in Terraform state backend for infrastructure managed from pipelines.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "GitLab instance as code",
+      "description": "The same review documents a Terraform provider managing GitLab projects, groups, CI/CD variables, and integrations declaratively.",
       "available": true,
-      "category": "Core"
+      "category": "Migration"
     }
   ],
   "ratings": [
@@ -111,71 +111,88 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Terraform across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your developer tools needs.",
+      "title": "Terraform in brief",
+      "body": "Terraform is infrastructure as code: networks, compute, storage, DNS, and similar resources are described in configuration files, and one workflow reads that description and compares it with what exists before changing anything. This repository records Terraform as a Freemium product at 4.5/5 from 980 reviews, ranks it second on its infrastructure-as-code page behind Docker, and lists infrastructure as code with Terraform as a standard practice in its DevOps glossary. The descriptor held on this page — infrastructure as code for cloud provisioning — is the accurate one.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Terraform serves the developer tools category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "Declarative configuration in HCL",
+      "body": "Configuration is written in HashiCorp's configuration language: blocks declare resources and their attributes, and the file describes the end state rather than a sequence of API calls to perform. That inversion is the point — a reviewer reads what the infrastructure should look like instead of a script that might execute halfway and stop. Modules package repeated blocks so an environment can be assembled from shared parts. This repository does not document the language's syntax, so specific constructs should come from the vendor's language documentation rather than from this page.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Terraform excels in this area.",
+      "title": "The state file and what it records",
+      "body": "Between configuration and the real world sits state: a file that maps declared resources to actual ones, holds their attributes, and makes it possible for a plan to say this exists, this changed, this will be replaced. Because state is that mapping, it must be stored somewhere shared and locked while a change is in flight, which is a workflow constraint as much as a feature. The GitLab review stored in this repository documents one such arrangement, noting a Terraform state backend built into GitLab for teams that keep state alongside their pipelines.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Terraform excels in this area.",
+      "title": "Plan, apply, and review",
+      "body": "The working cycle has two commands. Plan reads state plus the current condition of the provider's APIs and prints what would be added, changed, or destroyed; apply executes that proposal. The gap between them is where review happens, since plan output is the artifact a teammate reads before infrastructure moves. It also means apply is not a sandboxed event: those commands act on live systems, so the safer pattern is to run plan inside a controlled pipeline and treat its output as required reading rather than as log noise.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Terraform excels in this area.",
+      "title": "Providers, modules, and where they come from",
+      "body": "Providers are the plugins that translate resource blocks into API calls against a specific platform, and the size of that ecosystem is the product's reach: cloud vendors, DNS and delivery services, and hosted application configuration all arrive as providers using the same vocabulary. Modules are shared bundles of configuration that teams publish internally or take from the public registry. This repository's GitLab review gives a concrete instance of both directions, since GitLab ships a Terraform state backend and GitLab itself is manageable through a Terraform provider.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Terraform excels in this area.",
+      "title": "Drift, locking, and other limits",
+      "body": "Three structural limits come with the model. State drifts from reality when someone edits infrastructure by hand, and until the next plan reads the live APIs, the configuration still describes the old world. State handling is its own operational problem: it must be stored, locked, and protected, because a wrong value there misdirects everything after it. And what Terraform can express is bounded by its providers, so an unsupported resource means a workaround or a wait rather than something the language itself lets you build around.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Terraform excels in this area.",
+      "title": "Working alongside CI/CD systems",
+      "body": "Terraform does not replace the pipeline that builds and ships software; it runs as another step in it, and this repository's neighboring reviews record several concrete couplings between the two. Because configuration lives in Git, the natural place for a plan is inside the same review flow that governs code, with state handled by a backend the team already operates. The couplings documented here are these:",
+      "type": "list",
+      "items": [
+        "GitLab state backend: the GitLab review records infrastructure state stored inside GitLab for pipelines that manage it.",
+        "GitLab as a target: the same review documents a Terraform provider for projects, group structure, CI/CD variables, and integration configuration.",
+        "GitHub: the GitHub review lists Terraform among the tools covered by its integrations.",
+        "Infrastructure code review: plan output is read by reviewers before apply, matching how the configuration itself is version-controlled.",
+        "Glossary placement: this repository's DevOps glossary lists infrastructure as code with Terraform beside automated pipelines and containerized deployments."
+      ]
+    },
+    {
+      "title": "What the dataset stores for price",
+      "body": "The dataset stores Terraform as Freemium with a list price band of $20-100/user/mo, and this repository's infrastructure-as-code ranking repeats that band next to a 4.5/5 rating. No other pricing is recorded here — no tier structure, no free-tier limits, no enterprise terms — so the band should be treated as stored data and the vendor's current pricing page as the authority. State backend hosting and plan execution inside a pipeline also consume resources that a seat price does not cover.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "Terraform achieves a 4.5/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable developer tools capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
+      "title": "Where state lives, and what is recorded about security",
+      "body": "A state file is a map of real infrastructure and often carries the values that connect to it, which makes whatever store holds it a security-relevant component: access to state is close to access to a description of production. Teams therefore place it in a backend with restricted access and locking rather than on a laptop. No attestation of any kind is recorded in our data for Terraform and no details of its hosted state options, so anything a security review requires — encryption, access logging, residency — must come from the vendor’s live documentation.",
       "type": "text"
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Terraform enables teams to Infrastructure as code platform by Hashi through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Terraform supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Terraform's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Terraform against the alternatives",
+      "body": "Ranked on this repository's infrastructure-as-code page, Terraform sits second of five, behind Docker and ahead of Kubernetes, Podman, and containerd, a spread that shows how loosely the category is drawn since those tools run infrastructure rather than declare it. In the stored head-to-head files Terraform at 4.5/5 beats CircleCI at 4.3 and JFrog at 4.1 and matches Grafana at 4.5, while Datadog at 4.6, Docker at 4.6, GitHub at 4.7, Postman at 4.6, and GitLab at 4.5 score above it. The meaningful alternatives would be other configuration tools, and this repository reviews none of them.",
+      "type": "text"
+    },
+    {
+      "title": "Who this fits, and where the notes come from",
+      "body": "Taken together, the evidence points at teams with real infrastructure to manage, a habit of reviewing changes before making them, and someone willing to own state storage; a project with one static server has little to gain from that ceremony. These notes were built from vendor documentation on the model plus this repository's rankings, glossary, neighboring reviews, and stored comparison files — nothing here comes from running a plan or an apply. The dataset holds 4.5/5 from 980 reviews and no certification records.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Terraform different from other developer tools tools?",
-      "answer": "Terraform differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Terraform ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "What problem does the state file solve?",
+      "answer": "It maps configuration to real resources, which is how Terraform knows what exists, what changed outside it, and what a plan must do. State therefore has to be stored and locked centrally."
     },
     {
-      "question": "Can Terraform handle enterprise-scale requirements?",
-      "answer": "Yes, Terraform supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "How does Terraform change infrastructure?",
+      "answer": "Through plan and apply: a plan reads state and live APIs to propose additions, changes, and deletions, and apply executes them. This repository's glossary lists Terraform as the standard example of infrastructure as code."
     },
     {
-      "question": "How long does it take to implement Terraform?",
-      "answer": "Most teams can get started with Terraform within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Can Terraform manage the GitLab instance running our pipelines?",
+      "answer": "Yes, per the GitLab review in this repository, which documents a Terraform provider covering projects, group structure, CI/CD variables, and integration configuration."
     },
     {
-      "question": "Does Terraform offer a free trial or money-back guarantee?",
-      "answer": "Terraform provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "How is Terraform priced in this dataset?",
+      "answer": "Our dataset stores a Freemium model with a list price band of $20-100/user/mo. Treat it as a recorded band rather than a quote and check the vendor's published pricing."
     },
     {
-      "question": "What kind of support does Terraform offer?",
-      "answer": "Terraform provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "How does Terraform score against the tools around it?",
+      "answer": "The stored head-to-head files put Terraform at 4.5/5, above CircleCI at 4.3 and JFrog at 4.1 and level with Grafana at 4.5, while Datadog, Docker, GitHub, Postman, and GitLab score higher."
     }
   ],
   "relatedComparisons": [],
@@ -200,8 +217,8 @@
     "apiAvailable": true,
     "migrationComplexity": "Medium"
   },
-  "difficulty": "Intermediate",
-  "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "Terraform is ideal for small to mid-size teams that need a reliable developer tools solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
-  "whoShouldNotUse": "Terraform is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "difficulty": "Advanced",
+  "learningCurve": "The plan and apply cycle reads simply; state backends, modules, and provider behavior are where experience is required",
+  "whoShouldUse": "Teams managing real cloud infrastructure who want changes proposed for review before execution, with state stored centrally and configuration under version control.",
+  "whoShouldNotUse": "Environments with one or two static servers where the state and plan machinery adds process without much to manage, or teams unwilling to operate a state backend."
 }

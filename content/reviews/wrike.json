@@ -1,8 +1,8 @@
 {
   "slug": "wrike",
   "name": "Wrike",
-  "tagline": "Enterprise project management platform with robust reporting.",
-  "description": "Enterprise project management platform with robust reporting.",
+  "tagline": "Configurable work management with a space hierarchy, structured request forms, and roll-up reporting.",
+  "description": "Wrike is configurable work management: spaces and folders hold the work, request forms turn intake into tasks, and reporting rolls up projects.",
   "category": "Project Management",
   "website": "https://wrike.com",
   "pricing": "Freemium",
@@ -10,65 +10,65 @@
   "rating": 4.2,
   "reviewCount": 2420,
   "pros": [
-    "Excellent project management capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Request forms make intake structured work, so demand arrives in the right space instead of as ad hoc messages",
+    "Time tracking and resource management sit next to the schedule, which is what professional services and marketing teams are recorded as using it for",
+    "Reporting reads the folder and space hierarchy, giving roll-ups across projects rather than only within one",
+    "A freemium entry means lighter tracking can start without a paid plan, per this page's recorded pricing model",
+    "Rated 4.2 out of 5 from 2,420 reviews in this repository's recorded data"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Configuration is an ongoing responsibility: statuses, fields, forms, and folder structure need an owner, and changes ripple into saved reports",
+    "The recorded price band is wide, so real cost depends on which tier the configuration a team chooses actually requires",
+    "The hierarchy has to be designed before work starts, which makes Wrike slower to stand up than a fixed board or a flat to-do list"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured project management platform with comprehensive tooling",
+      "name": "Space and folder hierarchy",
+      "description": "Spaces hold domains of work with folders and projects beneath them, so a program, a team queue, and a single task each sit at their own depth.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Request form intake",
+      "description": "Forms collect what a task needs up front and file the result in the right space. This repository records request forms as one of the capabilities Wrike is known for.",
       "available": true,
-      "category": "Integrations"
+      "category": "Core"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Custom workflows and statuses",
+      "description": "An administrator defines how work moves, which this repository records alongside request forms as the configurable core of the product.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Time tracking",
+      "description": "Hours are logged against the work itself. The Asana review held in this repository records detailed time tracking as part of what Wrike offers.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Resource and workload views",
+      "description": "Capacity sits beside the schedule so commitments are visible before new work is accepted, recorded alongside time tracking in that same review.",
       "available": true,
       "category": "Reporting"
     },
     {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
+      "name": "Cross-project reporting",
+      "description": "Roll-ups read folders and spaces rather than only single projects, which is the reporting depth this page's tagline records for Wrike.",
       "available": true,
-      "category": "Core"
+      "category": "Reporting"
     },
     {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Saved filters and views",
+      "description": "A saved filter reshapes one dataset for a particular audience, so intake queues and status views can differ without duplicating tasks.",
       "available": true,
       "category": "Usability"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Admin permissions by space",
+      "description": "Access is granted at the levels of the hierarchy, so a space's contents are not automatically visible across the whole account.",
       "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
-      "available": true,
-      "category": "Core"
+      "category": "Security"
     }
   ],
   "ratings": [
@@ -111,71 +111,78 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Wrike across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your project management needs.",
+      "title": "Spaces, folders, and where work is kept",
+      "body": "Wrike keeps work in a hierarchy: spaces hold whole domains, with folders and projects beneath them, so a program, a team queue, and a single task can each sit at the depth they belong to. That hierarchy is where the configurability comes from, because an administrator decides what a space contains and how its items are structured before anyone fills them in. Teams arriving from one shared board often find the setup stage longer than expected. Teams arriving from folders of spreadsheets tend to find the shape familiar, since the object is still a container with things inside it.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Wrike serves the project management category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "Request forms that turn intake into tasks",
+      "body": "Intake becomes structured work instead of a message in someone's inbox. A request form asks for what the task needs up front and files the result in the right space, which is how demand enters the system consistently. The Asana review held in this repository records Wrike as offering custom workflows and request forms at comparable pricing, and describes it as popular with marketing and professional services teams that need detailed time tracking and resource management. Read together, those entries describe a tool built around recurring internal service work rather than ad hoc projects.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Wrike excels in this area.",
+      "title": "Time tracking and resource management",
+      "body": "Because the same review records time tracking as part of the appeal, measured work can be compared with the plan instead of being reported separately from it. Resource management follows the same logic: capacity sits next to the schedule, so a manager can see who is committed before accepting another request. For professional services and marketing teams that bill or must justify effort, keeping hours, assignments, and intake inside one configured system is the practical reason to accept the setup cost. It is also the part of Wrike that simpler task lists do not attempt.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Wrike excels in this area.",
+      "title": "Roll-up reporting across projects",
+      "body": "Reporting is the part of Wrike that this page's tagline puts first, and it depends on the hierarchy underneath: roll-ups read folders and spaces rather than only single projects, which is what lets a manager see several workstreams at once. The surfaces below are the ones a buyer should ask to see during an evaluation, because their depth is what separates Wrike from a shared task list, and because every one of them is a product of configuration decisions made earlier.",
+      "type": "list",
+      "items": [
+        "Roll-ups that read folders and spaces",
+        "Status reporting from task to space",
+        "Time reports drawn from logged work",
+        "Workload reading across assignments",
+        "Saved filter views for different audiences"
+      ]
+    },
+    {
+      "title": "Where configuration turns into upkeep",
+      "body": "The same choices that make Wrike fit a process make it expensive to change. Statuses, custom fields, request forms, and folder structures are maintained by whoever administers the account, and every change ripples through saved reports and automations built on the old shape. Organizations that reorganize often will pay that cost repeatedly. Buyers should also know that the records held here for Wrike are shallower than for some peers: the comparison files carry pricing and positioning but little on how configuration behaves at scale, so that question belongs in a vendor conversation.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Wrike excels in this area.",
+      "title": "A freemium entry and a wide price band",
+      "body": "This page records Wrike as freemium with a band of $9.80-34.80/mo, and that band is the only price figure in the record. The spread is the point: entry paid plans and deeper configuration sit far apart, so the cost of Wrike depends on which capabilities a team actually turns on. The Wrike alternatives file held in this repository also notes that free alternatives exist for buyers who only need lighter tracking, which is a useful sanity check on whether the paid band is justified at all. Confirm current list pricing with the vendor before a rollout.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Wrike excels in this area.",
+      "title": "Deployment, and what this repository does not record",
+      "body": "Wrike is delivered as a hosted service, so spaces, folders, and reports live on the vendor's infrastructure and reach people through browsers and clients. Nothing behind this review documents a compliance certification for Wrike and this review will not assert one; readers get that answer out of the vendor’s current documentation. Because Wrike tends to accumulate intake forms, time records, and cross-project reporting, the questions worth pressing are about permission depth inside the hierarchy, audit history for configuration changes, and what export produces if the account is restructured later.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Wrike excels in this area.",
+      "title": "Wrike against Smartsheet, Basecamp, and Jira",
+      "body": "Smartsheet, compared with Wrike on a page held in this repository, offers a governed grid instead of a configured hierarchy: structure lives in cells, and standardization comes from templates rather than from spaces and forms. Basecamp goes the other way entirely, a fixed project container with message boards, bought to avoid configuration. Jira keeps appearing where agile rituals matter more than intake forms. The Wrike alternatives file names ClickUp, Trello, Airtable, and Basecamp as the closest substitutes on record, which places Wrike in the configurable middle of this field.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "Wrike achieves a 4.2/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable project management capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Wrike enables teams to Enterprise project management platform w through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Wrike supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Wrike's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Who should configure Wrike",
+      "body": "Wrike suits mid-market and enterprise groups that run recurring internal work, such as marketing, professional services, and operations, and are willing to have someone own the configuration: spaces, forms, statuses, and the reports built on them. It does not suit a team that wants to start working the same afternoon with no administrator, or a buyer who needs a single confirmed price and a documented compliance record before signing. Everything above is read from this repository's stored records and published product material for Wrike; nobody here has operated a Wrike account. Those records show 4.2 out of 5 from 2,420 reviews.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Wrike different from other project management tools?",
-      "answer": "Wrike differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Wrike ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "What are request forms in Wrike?",
+      "answer": "Structured intake: a form collects what a task needs up front and files it in the right space. This repository records request forms and custom workflows as core to how Wrike is positioned."
     },
     {
-      "question": "Can Wrike handle enterprise-scale requirements?",
-      "answer": "Yes, Wrike supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "How does Wrike differ from Smartsheet?",
+      "answer": "Smartsheet standardizes through a spreadsheet grid with cell formulas and templates. Wrike standardizes through a configured hierarchy of spaces, folders, forms, and statuses."
     },
     {
-      "question": "How long does it take to implement Wrike?",
-      "answer": "Most teams can get started with Wrike within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Is Wrike free to start?",
+      "answer": "This page records Wrike as freemium with a paid band of $9.80-34.80/mo, and the Wrike alternatives file held in this repository notes that free alternatives exist for lighter needs."
     },
     {
-      "question": "Does Wrike offer a free trial or money-back guarantee?",
-      "answer": "Wrike provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "What kinds of teams are recorded as using Wrike?",
+      "answer": "The Asana review held in this repository describes Wrike as popular with marketing and professional services teams that need detailed time tracking and resource management."
     },
     {
-      "question": "What kind of support does Wrike offer?",
-      "answer": "Wrike provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Does this repository record certifications for Wrike?",
+      "answer": "No. It stores no certification entries for Wrike, so no such claim is made here. Confirm current documentation with the vendor before procurement or a security review."
     }
   ],
   "relatedComparisons": [],
@@ -200,8 +207,8 @@
     "apiAvailable": true,
     "migrationComplexity": "Medium"
   },
-  "difficulty": "Beginner",
-  "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "Wrike is ideal for small to mid-size teams that need a reliable project management solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
-  "whoShouldNotUse": "Wrike may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
+  "difficulty": "Intermediate",
+  "learningCurve": "Steeper than a board-based tool, because the hierarchy, forms, and statuses have to be designed before the reporting layer has anything worth reading",
+  "whoShouldUse": "Mid-market and enterprise groups running recurring internal work, such as marketing, professional services, and operations, with someone willing to own configuration: spaces, forms, statuses, and the reports built on them.",
+  "whoShouldNotUse": "Teams that want to start the same afternoon with no administrator, buyers who need a single confirmed list price before procurement, and organizations that require a documented compliance record on file."
 }

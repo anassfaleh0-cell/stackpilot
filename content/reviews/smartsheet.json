@@ -1,8 +1,8 @@
 {
   "slug": "smartsheet",
   "name": "Smartsheet",
-  "tagline": "Spreadsheet-based work management platform for enterprises.",
-  "description": "Spreadsheet-based work management platform for enterprises.",
+  "tagline": "Spreadsheet-shaped work management built on sheets, cell formulas, reports, and enterprise governance.",
+  "description": "Smartsheet treats work as rows on a sheet, with cell formulas, Gantt views, reports, and Control Center governance for enterprise rollout.",
   "category": "Project Management",
   "website": "https://smartsheet.com",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.3,
   "reviewCount": 1660,
   "pros": [
-    "Excellent project management capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Rows, columns, and formulas are the control surface, so spreadsheet-literate teams plan without learning a new object model",
+    "Gantt charts, critical path analysis, and resource management are recorded in the enterprise guide held in this repository",
+    "Control Center is recorded as scaling governance across repeated projects, which is what a PMO standardizing many teams needs",
+    "One sheet can be read as a grid, a timeline, or a report, so the plan and its views come from the same rows",
+    "Rated 4.3 out of 5 from 1,660 reviews in this repository's recorded data"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Structure lives in cells, so formulas, cross-sheet references, and naming conventions accumulate until a sheet needs cleanup by someone other than its author",
+    "A task is a row: threaded discussion, nested ownership, and long-form documentation are weaker in grid semantics than in tools built around a task object",
+    "This page's band and a separate enterprise pricing record held in this repository disagree, so budgeting needs direct confirmation with the vendor"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured project management platform with comprehensive tooling",
+      "name": "Sheet grid with cell formulas",
+      "description": "Work is rows and columns with formulas evaluated in cells, which is why the product reads as a spreadsheet first and a project tool second.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Gantt chart timeline views",
+      "description": "The same rows can be presented as a timeline. The enterprise guide in this repository records Gantt charts among the project capabilities it lists for Smartsheet.",
       "available": true,
-      "category": "Integrations"
+      "category": "Core"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Critical path analysis",
+      "description": "Dependency chains across rows can be surfaced as a critical path, recorded alongside Gantt charts in the same repository file.",
       "available": true,
       "category": "Reporting"
     },
     {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
+      "name": "Resource management views",
+      "description": "Assignments and capacity are read off the sheet, recorded in the enterprise guide held in this repository as part of the structured work management picture.",
       "available": true,
-      "category": "Core"
+      "category": "Reporting"
     },
     {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Reports across multiple sheets",
+      "description": "A report reads rows from several sheets into one surface, so a portfolio view does not require copying rows between files.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Control Center governance",
+      "description": "This repository records Smartsheet Control Center on the enterprise plan as a way to scale governance across multiple projects.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Admin and permission controls",
+      "description": "The enterprise plan is recorded as carrying advanced admin and security controls for rollout across departments.",
       "available": true,
       "category": "Security"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Row comments and attachments",
+      "description": "Rows carry threaded comments and attached files, so context stays on the row it concerns instead of in a separate thread.",
       "available": true,
-      "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
-      "available": true,
-      "category": "Core"
+      "category": "Collaboration"
     }
   ],
   "ratings": [
@@ -111,71 +111,79 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Smartsheet across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your project management needs.",
+      "title": "Sheets, rows, and the grid you already know",
+      "body": "Smartsheet's unit of work is a sheet: rows are items, columns are attributes, and the grid behaves like the spreadsheet most of its users already know. The enterprise guide in this repository records the product as combining familiar spreadsheet-like interfaces with project management capability, which is the whole adoption argument. People do not have to learn a new object model, only a new set of views over one they already use. That also explains why Smartsheet keeps appearing in this repository's enterprise, agency, and OKR lists: it is the standardization tool for organizations that already think in rows.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Smartsheet serves the project management category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "Gantt, critical path, and resource views",
+      "body": "The same rows can be presented as a timeline. This repository records Smartsheet's project capabilities as Gantt charts, critical path analysis, and resource management, which is the layer separating a shared grid from a planning tool. Each view reads the underlying sheet, so a plan and its schedule cannot drift apart the way a separate document and tracker can. The surfaces below are what a buyer should ask to see during an evaluation, because their depth is what separates Smartsheet from a shared spreadsheet.",
+      "type": "list",
+      "items": [
+        "Gantt charts drawn from the sheet's dates",
+        "Critical path analysis across dependent rows",
+        "Resource views over assignments and capacity",
+        "Reports reading rows from several sheets",
+        "Cell-level formulas and rollups",
+        "Control Center templates for repeated projects"
+      ]
+    },
+    {
+      "title": "Control Center and repeated project structures",
+      "body": "For organizations running the same project shape many times, this repository records Smartsheet Control Center on the enterprise plan, described as a way to scale governance across multiple projects. The pattern matters more than the name: sheets are instantiated from a standard structure under central control, while teams keep editing at row level. Buyers weighing Smartsheet against single-project tools should ask whether repeatable deployment is what they are actually buying, because that is where the governance claim either holds or collapses into manual policing.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Smartsheet excels in this area.",
+      "title": "Where the grid stops helping",
+      "body": "A spreadsheet model carries spreadsheet problems. Because structure lives in cells, sheets accumulate formulas, cross-sheet references, and hand-maintained conventions that only their original author understands, and cleanup becomes a project of its own. Grid semantics also ask teams to treat a task as a row: nested ownership, threaded discussion, and long documentation are weaker there than in a tool built around a task object. Neither issue is a defect, and both follow from choosing a grid. Teams that want the grid usually accept that trade consciously.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Smartsheet excels in this area.",
+      "title": "Two price records that do not line up",
+      "body": "This page records Smartsheet as paid with a band of $7-25/mo, and no other figure appears here. A separate file in this repository places Smartsheet among enterprise platforms that start materially higher per user per month, which suggests the two records describe different tiers or different periods. Treat the band as indicative and ask the vendor for their current price list, particularly when budgeting a rollout across a whole PMO rather than a handful of sheets. The discrepancy is worth resolving before seat counts are agreed.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Smartsheet excels in this area.",
+      "title": "Admin controls, and the certifications not on file",
+      "body": "Smartsheet is delivered as a hosted service, and the enterprise material in this repository records advanced admin and security controls on the enterprise plan without naming specific certifications. Our records hold no compliance certification entry for Smartsheet and this review will not assert one; read the current documentation the vendor publishes. For a grid holding plans across departments, the questions worth asking are about permission granularity at sheet and row level, audit history for structural changes, and where the underlying data resides.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Smartsheet excels in this area.",
+      "title": "Ten comparison pages, and what they argue about",
+      "body": "This repository holds ten comparison pages featuring Smartsheet, and every one pairs it with another project tool: Airtable, Asana, Basecamp, ClickUp, Confluence, Jira, Linear, Monday.com, Trello, and Wrike. The recurring argument across those files is structure against flexibility, grids and governance on one side, task objects and boards on the other. The record also positions Smartsheet as the enterprise-side choice in several of these pairings, which is consistent with the tagline this page holds for it.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Smartsheet excels in this area.",
+      "title": "Smartsheet next to Basecamp, Wrike, and Jira",
+      "body": "Basecamp, compared with Smartsheet on a page held in this repository, is the flat, opinionated alternative: no grid, no formulas, and communication built into a project instead of configuration. Wrike is the configurable middle, with request forms and reporting depth for teams that model their process first. Jira keeps appearing where agile rituals matter more than governed rows. Smartsheet wins when the requirement is a repeatable structure that non-technical departments can still edit, and loses when the requirement is fast setup or rich discussion attached to each item.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "Smartsheet achieves a 4.3/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable project management capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Smartsheet enables teams to Spreadsheet-based work management platfo through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Smartsheet supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Smartsheet's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Who should standardize on Smartsheet",
+      "body": "Smartsheet suits PMOs and operations groups that need one governed structure across many departments, and teams whose members already think in rows and formulas. It suits enterprises running repeated project shapes where Control Center-style governance is the actual requirement. It does not suit groups that want discussion, tasks, and files as first-class objects rather than cells, or buyers who need a single confirmed list price before signing. This assessment comes from published vendor material and the stored records this repository holds for Smartsheet; nothing here is based on operating the product. Those records show 4.3 out of 5 from 1,660 reviews.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Smartsheet different from other project management tools?",
-      "answer": "Smartsheet differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Smartsheet ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Is Smartsheet a spreadsheet or a project tool?",
+      "answer": "Both, by design. This repository records it as spreadsheet-like interfaces combined with project management capability, including Gantt charts, critical path analysis, and resource management over rows."
     },
     {
-      "question": "Can Smartsheet handle enterprise-scale requirements?",
-      "answer": "Yes, Smartsheet supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "What is Smartsheet Control Center?",
+      "answer": "The enterprise governance layer. This repository records it as scaling control across multiple projects, so sheets can be created from a standard structure while teams continue editing rows."
     },
     {
-      "question": "How long does it take to implement Smartsheet?",
-      "answer": "Most teams can get started with Smartsheet within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "How does Smartsheet differ from Basecamp and Wrike?",
+      "answer": "Basecamp is a fixed project container with message boards; Wrike is configurable, with request forms and reporting depth. Smartsheet is a governed grid where structure lives in cells and formulas."
     },
     {
-      "question": "Does Smartsheet offer a free trial or money-back guarantee?",
-      "answer": "Smartsheet provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "How much does Smartsheet cost?",
+      "answer": "This page's recorded band is $7-25/mo. A separate file in this repository places Smartsheet among enterprise platforms starting higher per user per month, so take list pricing straight from the vendor."
     },
     {
-      "question": "What kind of support does Smartsheet offer?",
-      "answer": "Smartsheet provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Does this repository record certifications for Smartsheet?",
+      "answer": "No. It records advanced admin and security controls on the enterprise plan but stores no compliance certifications, so no such claim is made here and readers should confirm current documentation."
     }
   ],
   "relatedComparisons": [],
@@ -200,8 +208,8 @@
     "apiAvailable": true,
     "migrationComplexity": "Medium"
   },
-  "difficulty": "Beginner",
-  "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "Smartsheet is perfect for freelancers and independent professionals who need an affordable, easy-to-use project management tool. Its simplicity and core feature set make it ideal for solo practitioners.",
-  "whoShouldNotUse": "Smartsheet may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
+  "difficulty": "Intermediate",
+  "learningCurve": "Moderate for authors: reading a sheet is instant, but building formulas, cross-sheet reports, and governance that other people can safely edit takes real setup",
+  "whoShouldUse": "PMOs, operations groups, and enterprises that need a governed, repeatable structure across departments, and teams whose members are already comfortable in rows, columns, and formulas.",
+  "whoShouldNotUse": "Groups that want tasks, threads, and documents as first-class objects rather than cells; teams that need fast setup without an administrator maintaining formulas; buyers who require a single confirmed price before procurement."
 }

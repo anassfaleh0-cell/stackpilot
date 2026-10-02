@@ -2,7 +2,7 @@
   "slug": "new-relic",
   "name": "New Relic",
   "tagline": "Full-stack observability platform for monitoring and troubleshooting.",
-  "description": "Full-stack observability platform for monitoring and troubleshooting.",
+  "description": "New Relic ingests application, infrastructure, and log telemetry into one account, then serves dashboards, queries, and alerts from it.",
   "category": "Developer Tools",
   "website": "https://newrelic.com",
   "pricing": "Freemium",
@@ -10,65 +10,65 @@
   "rating": 4.2,
   "reviewCount": 1580,
   "pros": [
-    "Excellent developer tools capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Billing counts users and ingested data rather than hosts, which suits environments with many machines and a small monitoring group.",
+    "The free tier is recorded here with 100 GB of monthly ingestion, one full-platform user, and basic APM features.",
+    "Deployment events line up against performance data: the GitHub review in this repository records New Relic integrations that correlate the two.",
+    "Serverless and frontend signals reach the same account — the Netlify review records function performance via log streaming, the Vercel review records source maps uploaded at build time.",
+    "Dashboards, custom queries, and alert thresholds sit on the same stored telemetry, so one instrumented service answers several questions."
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Ingestion volume drives cost, and this repository's pricing analysis names exceeding the included data allowance as the trap that inflates the bill.",
+    "The stored price band of $0.25/hour does not match a conventional subscription list price, so this page cannot confirm what a plan costs.",
+    "Value arrives only after instrumentation: applications, hosts, and log sources must be sending data before queries and alerts mean anything."
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured developer tools platform with comprehensive tooling",
+      "name": "Application performance monitoring",
+      "description": "Agents instrument services, and the free tier covers basic APM while code-level visibility is recorded as a paid-tier capability.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Metered data ingestion",
+      "description": "Monthly ingested volume is metered per plan, and overages are charged when the included allowance is exceeded.",
       "available": true,
-      "category": "Integrations"
+      "category": "Pricing"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Custom dashboards",
+      "description": "Dashboards are assembled over stored telemetry; this repository's pricing analysis lists them among paid-tier capabilities.",
       "available": true,
       "category": "Reporting"
     },
     {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
+      "name": "AI-driven alerting",
+      "description": "Alert rules can be configured to flag anomalies, filed under paid tiers in the monitoring pricing analysis here.",
       "available": true,
-      "category": "Core"
+      "category": "Automation"
     },
     {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
-      "available": true,
-      "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Deployment correlation",
+      "description": "The GitHub review in this repository records New Relic integrations that line deployments up against performance data.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Serverless function telemetry",
+      "description": "Function performance reaches New Relic through log streaming, as recorded in the Netlify review stored with this dataset.",
       "available": true,
-      "category": "Core"
+      "category": "Integrations"
+    },
+    {
+      "name": "Build-time source map upload",
+      "description": "The Vercel review records source maps uploaded during builds so stack traces stay readable after deployment.",
+      "available": true,
+      "category": "Usability"
+    },
+    {
+      "name": "Grouped error tracking",
+      "description": "New Relic appears on this repository's error tracking ranking, covering grouped errors alongside metrics and logs.",
+      "available": true,
+      "category": "Reporting"
     }
   ],
   "ratings": [
@@ -111,71 +111,79 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates New Relic across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your developer tools needs.",
+      "title": "New Relic in brief",
+      "body": "New Relic is a full-stack observability service: agents and integrations send application, infrastructure, and log data to the vendor's cloud, and dashboards, queries, and alerts are drawn from that stored telemetry. This repository files it under Developer Tools at 4.2/5 from 1,580 reviews, names it as an example of the monitoring segment of that category, ranks it fifth on its monitoring tools page, and places it fourth among error tracking tools. Its recorded audience runs from small teams to enterprise.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "New Relic serves the developer tools category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "What this repository records New Relic ingesting",
+      "body": "New Relic's scope is easiest to read off the integration notes this repository holds in other reviews, which describe several distinct entry points feeding a single account. Application, host, log, and frontend signals arrive separately and are then queried together, which is what the word full-stack is referring to here. The specific channels recorded across those files are these:",
+      "type": "list",
+      "items": [
+        "Application monitoring: the free tier is recorded with basic APM features, and code-level visibility is recorded as a paid-tier capability.",
+        "Dashboards: custom dashboards appear in the monitoring pricing analysis as a paid-tier capability.",
+        "Alerts: AI-driven alerts appear in the same analysis among the features paid tiers add.",
+        "Deployments: the GitHub review records New Relic integrations that correlate deployments with performance data.",
+        "Serverless functions: the Netlify review records function performance reaching New Relic through log streaming.",
+        "Frontend builds: the Vercel review records New Relic connecting through Vercel's integration marketplace with source maps uploaded during builds."
+      ]
+    },
+    {
+      "title": "Billing by user and by volume",
+      "body": "The monitoring pricing analysis in this repository describes New Relic as having moved from per-server pricing to a per-user model with data ingestion limits. In that shape a large fleet watched by a small group bills against the group rather than the fleet, which is the advantage the analysis records for teams with many hosts and few engineers. The limit works the other way: ingested data is metered monthly, and the analysis names exceeding that allowance as the pricing trap, because overage charges accumulate on top of the subscription.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. New Relic excels in this area.",
+      "title": "Querying and alerting on stored telemetry",
+      "body": "Once telemetry is stored, it is exposed to queries. New Relic's query language, NRQL, is a SQL-style syntax for selecting metrics, events, and logs over a time window, and dashboards are assembled from those queries rather than from pre-built reports. Alerts attach to the same language, so a threshold written for a chart and a threshold written for a notification describe one series rather than two definitions that can disagree. This repository documents neither query performance nor retention windows, so both should be checked with the vendor rather than assumed.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. New Relic excels in this area.",
+      "title": "Ingestion cost and coverage limits",
+      "body": "Constraints worth stating before an evaluation. Ingestion comes first: because data volume drives cost, teams should estimate logs, metrics, and traces before selecting a tier, and the analysis in this repository recommends exactly that. Coverage versus depth comes second — the product spans applications, hosts, logs, errors, and serverless functions, which is broad, but each surface still needs instrumentation before it produces anything worth reading. The stored band on this page, $0.25/hour, does not map to a normal subscription, so budgeting has to start from the vendor's current numbers.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. New Relic excels in this area.",
+      "title": "Delivery model and what the dataset omits",
+      "body": "New Relic is delivered as a vendor-hosted cloud service: telemetry leaves your infrastructure and is queried from systems the vendor operates, which is the first question a security review asks about a product of this type. Agents and account access are controlled centrally rather than on hardware you own. Nothing behind this review documents a compliance certification for New Relic — nothing about audit reports, data residency, or sub-processors is stored here — so those must be read from current vendor documentation and confirmed against the tier under consideration.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. New Relic excels in this area.",
+      "title": "New Relic next to Grafana and Datadog",
+      "body": "The head-to-head files stored with this review place New Relic at 4.2/5 above JFrog at 4.1 and SourceForge at 3.5, and below Grafana at 4.5, CircleCI at 4.3, Datadog at 4.6, Docker at 4.6, and GitHub at 4.7. The architecturally useful comparison is Grafana: New Relic sells collection together with the interface, while Grafana sits over stores you already operate. Datadog leads this repository's monitoring ranking with New Relic fifth, and the pricing blog here treats per-host, per-user, and per-event billing as the axis that actually separates these products.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. New Relic excels in this area.",
+      "title": "Who this points at",
+      "body": "The per-user-plus-ingestion model points at a specific buyer: an organization with substantial infrastructure and few people watching it, where charging by engineer rather than by machine is the cheaper shape. Teams that already run their own metrics and log stores and only want a query layer fit less naturally, because the product's value starts with data arriving in its cloud. Projects carrying heavy log volume against a fixed budget should model ingestion first; this repository's pricing analysis treats that number as the one that decides the bill.",
       "type": "text"
     },
     {
-      "title": "Conclusion",
-      "body": "New Relic achieves a 4.2/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable developer tools capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: New Relic enables teams to Full-stack observability platform for mo through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, New Relic supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate New Relic's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Basis of this page",
+      "body": "Every statement above is drawn from this repository's monitoring pricing analysis, its category and ranking pages, integration notes in neighboring reviews, and vendor-published description material; none of it comes from operating New Relic. The evidence supports a clear shape — a cloud observability service billing by user and by ingested data — and leaves several specifics unrecorded, including current list pricing and certifications. The stored rating is 4.2/5 across 1,580 reviews.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes New Relic different from other developer tools tools?",
-      "answer": "New Relic differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, New Relic ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "How does New Relic charge?",
+      "answer": "By users and by data ingested. The monitoring pricing analysis in this repository records a move from per-server pricing to a per-user model with monthly ingestion limits applied on top."
     },
     {
-      "question": "Can New Relic handle enterprise-scale requirements?",
-      "answer": "Yes, New Relic supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "What does New Relic include without paying?",
+      "answer": "The same analysis records 100 GB of monthly ingestion, one full-platform user, and basic APM features on the free tier, with paid tiers raising limits and adding members."
     },
     {
-      "question": "How long does it take to implement New Relic?",
-      "answer": "Most teams can get started with New Relic within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Why does the New Relic price band on this page look unusual?",
+      "answer": "Our dataset stores $0.25/hour for New Relic, which does not match a standard subscription list price. Treat it as unconfirmed and check the vendor's published pricing instead."
     },
     {
-      "question": "Does New Relic offer a free trial or money-back guarantee?",
-      "answer": "New Relic provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "How does New Relic compare with Grafana here?",
+      "answer": "New Relic scores 4.2/5 against Grafana's 4.5 in the stored head-to-head records, and the two differ in shape: New Relic sells collection with the interface, Grafana visualizes stores you run."
     },
     {
-      "question": "What kind of support does New Relic offer?",
-      "answer": "New Relic provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Does New Relic fit a small team?",
+      "answer": "The per-user model described in this repository's analysis is cheapest when hosts outnumber monitoring engineers, which points at infrastructure-heavy teams with few users."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +209,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Advanced",
-  "learningCurve": "Steep — requires dedicated training time for full proficiency",
-  "whoShouldUse": "New Relic is perfect for freelancers and independent professionals who need an affordable, easy-to-use developer tools tool. Its simplicity and core feature set make it ideal for solo practitioners.",
-  "whoShouldNotUse": "New Relic may be overwhelming for users who only need basic developer tools functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
+  "learningCurve": "Instrumentation is straightforward; the query language, alert conditions, and ingestion budgeting take sustained work",
+  "whoShouldUse": "Infrastructure-heavy organizations with few monitoring engineers, where billing by user and by ingested data is cheaper than billing by host.",
+  "whoShouldNotUse": "Teams that already run their own metrics and log stores and only want a query layer, and projects carrying heavy log volume against a fixed budget."
 }

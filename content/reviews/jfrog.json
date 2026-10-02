@@ -2,7 +2,7 @@
   "slug": "jfrog",
   "name": "JFrog",
   "tagline": "Universal artifact repository manager for DevOps pipelines.",
-  "description": "Universal artifact repository manager for DevOps pipelines.",
+  "description": "JFrog holds built binaries in a universal artifact repository, moves them through release stages, and scans them for vulnerabilities.",
   "category": "Developer Tools",
   "website": "https://jfrog.com",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.1,
   "reviewCount": 620,
   "pros": [
-    "Excellent developer tools capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "This repository's GitLab review treats JFrog Artifactory as the dedicated artifact manager that general-purpose package registries trail in depth.",
+    "Binaries of different package types — Docker images, npm packages, Maven artifacts — sit in one store instead of one server per format.",
+    "Scanning runs against artifacts that are already stored, so findings surface before promotion rather than after deployment.",
+    "Promotion advances a built artifact through environments instead of rebuilding it at each stage.",
+    "Build and deploy scripts talk to the repository over ordinary HTTP endpoints for upload, download, and metadata lookups."
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Our dataset lists JFrog's pricing model as Paid, so no free tier is recorded here and evaluation begins with a paid conversation.",
+    "Adding JFrog to a multi-tool stack adds a user directory, an authentication surface, and more webhooks — the overhead this repository's GitLab review describes.",
+    "Pricing is recorded inconsistently in this repository, as a $75-149/mo band here against an enterprise-tier treatment in the stack guide, so budgeting needs vendor confirmation."
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured developer tools platform with comprehensive tooling",
+      "name": "Universal artifact storage",
+      "description": "Binaries in several package formats are held in one repository that both build and deploy steps can query.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Multiple package formats",
+      "description": "Container images, language packages, and generic release files are served from the same installation rather than separate servers.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Release promotion paths",
+      "description": "An artifact built once can be advanced through environments without being rebuilt, so what was tested is what ships.",
       "available": true,
-      "category": "Reporting"
+      "category": "Automation"
     },
     {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Artifact vulnerability scanning",
+      "description": "Stored binaries are checked for known vulnerabilities before they move to the next stage of a release.",
       "available": true,
       "category": "Security"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
-      "available": true,
-      "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Build integration endpoints",
+      "description": "Pipeline steps upload artifacts, download them, and read metadata through standard HTTP calls.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Storage retention policies",
+      "description": "Rules decide how long superseded binaries remain on disk, which is what keeps a long-lived repository from filling indefinitely.",
       "available": true,
-      "category": "Core"
+      "category": "Automation"
+    },
+    {
+      "name": "Artifact permissions",
+      "description": "Repository-level permissions decide who may read from, write to, or delete stored binaries.",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Metadata search across binaries",
+      "description": "Stored artifacts can be located by package, version, or build information instead of by browsing directory trees.",
+      "available": true,
+      "category": "Usability"
     }
   ],
   "ratings": [
@@ -111,71 +111,68 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates JFrog across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your developer tools needs.",
+      "title": "What JFrog is for",
+      "body": "JFrog's central product, Artifactory, is a universal artifact repository: one store that build jobs upload to, deployments download from, and release steps query for metadata along the way. This page's dataset describes it as a universal artifact repository manager for DevOps pipelines and records a 4.1/5 rating from 620 reviews. It is not a CI system and not a container registry alone; it is the layer where built artifacts live between the pipeline that produced them and the environments that consume them.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "JFrog serves the developer tools category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "One repository, many package formats",
+      "body": "The word universal in that descriptor refers to format coverage. Instead of standing up a separate server for each package type, build and deploy steps point at one repository. The formats and consumers that matter in a typical release pipeline, described generically rather than as a vendor checklist, are these:",
+      "type": "list",
+      "items": [
+        "Container images: builds push images to a hosted registry and deploys pull the same artifact later.",
+        "Language packages: npm, Maven, NuGet, and similar client libraries are served to build agents from the same store.",
+        "Generic binaries: release archives, installers, and firmware files that no language registry claims.",
+        "Deployment inputs: charts and configuration consumed by the release step rather than by a developer's editor.",
+        "Metadata: version, build, and scan information attached to each stored artifact so a deployment traces back to the pipeline that produced it."
+      ]
+    },
+    {
+      "title": "Moving a binary through release stages",
+      "body": "Promotion is the workflow that separates an artifact repository from a bucket. A build produces one artifact, that artifact is verified, and then the same bytes are advanced toward production instead of being rebuilt at each step, so what ran in staging is what ships. Teams model this either as repositories per stage or as paths and properties on a single store, with permissions that allow promotion but not edits. Because the artifact does not change between stages, promotion also shortens a release: the deploy step downloads something that already exists.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. JFrog excels in this area.",
+      "title": "Scanning what is already stored",
+      "body": "An artifact repository is the last place a binary passes before deployment, which is why scanning belongs there. Vulnerability checks run against stored artifacts and their metadata, so a dependency published after a build can still be flagged before that version moves onward. JFrog's scanning capability is documented by the vendor as a companion to Artifactory, though this repository records no packaging or bundling details — buyers should confirm what is included at the tier they are quoted rather than assume it here.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. JFrog excels in this area.",
+      "title": "Pricing recorded on this page",
+      "body": "Our dataset marks JFrog as a Paid product with a list price band of $75-149/mo, and no free tier is recorded, so the first conversation with the vendor is a paid one. The same repository holds a conflicting signal: its developer-tools stack guide treats Artifactory as an enterprise-tier line item and recommends that smaller teams use a bundled registry instead. Both entries were written at different times for different purposes and neither should be quoted as current. Nothing on this page comes from operating JFrog; it is drawn from repository records and vendor-published material, so confirm pricing with the vendor before budgeting.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. JFrog excels in this area.",
+      "title": "Standing in this repository's records",
+      "body": "JFrog appears in twenty comparison files stored with this review and wins one of them, the SourceForge record. It is scored below CircleCI at 4.3, Grafana at 4.5, Postman at 4.6, and Datadog at 4.6, though those products do different jobs and the score is a weak guide to fit. On this site's CI/CD ranking JFrog sits eighth of eight entries, which reads as a category mismatch rather than a verdict on artifact storage: prose on that same page treats JFrog as the specialist that bundled registries are measured against.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. JFrog excels in this area.",
-      "type": "text"
-    },
-    {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. JFrog excels in this area.",
-      "type": "text"
-    },
-    {
-      "title": "Conclusion",
-      "body": "JFrog achieves a 4.1/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable developer tools capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: JFrog enables teams to Universal artifact repository manager fo through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, JFrog supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate JFrog's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Fit, and what this repository does not say",
+      "body": "Evidence for JFrog in this repository is thinner than for most neighboring pages: outside the comparison files, substantive prose about it appears only in the GitLab review and in the developer-tools stack guide, so this closing section stays short rather than padded. What it does support: teams with mature pipelines that need binaries stored, scanned, and promoted across environments, at a budget consistent with an enterprise-tier purchase. It fits less well for a small team that only needs somewhere to push images, where the stack guide's advice to use the code host's bundled registry applies directly.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes JFrog different from other developer tools tools?",
-      "answer": "JFrog differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, JFrog ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "What does JFrog replace in a toolchain?",
+      "answer": "The separate per-format package stores. This repository's GitLab review frames JFrog Artifactory as the dedicated artifact manager that a bundled package registry imitates without matching in performance or depth."
     },
     {
-      "question": "Can JFrog handle enterprise-scale requirements?",
-      "answer": "Yes, JFrog supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "Is there a free tier in JFrog?",
+      "answer": "Our dataset lists JFrog's pricing model as Paid with a $75-149/mo band and no free tier recorded. Another file here treats Artifactory as an enterprise-tier item, so confirm current plans with the vendor."
     },
     {
-      "question": "How long does it take to implement JFrog?",
-      "answer": "Most teams can get started with JFrog within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Why scan artifacts that were already scanned in CI?",
+      "answer": "Scanning stored binaries catches vulnerabilities disclosed after a build was produced, and it holds at the point where a version is promoted rather than only where it was compiled."
     },
     {
-      "question": "Does JFrog offer a free trial or money-back guarantee?",
-      "answer": "JFrog provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "How does JFrog score in this dataset's comparisons?",
+      "answer": "JFrog holds 4.1/5 from 620 reviews here and wins one of the twenty head-to-head records stored against it, the SourceForge comparison; most others go to products in adjacent categories."
     },
     {
-      "question": "What kind of support does JFrog offer?",
-      "answer": "JFrog provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Which teams is JFrog aimed at?",
+      "answer": "The stack guide in this repository treats Artifactory as an enterprise-tier purchase and advises smaller teams toward a bundled registry instead, which indicates the buyer size it expects."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +198,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Advanced",
-  "learningCurve": "Steep — requires dedicated training time for full proficiency",
-  "whoShouldUse": "JFrog is perfect for freelancers and independent professionals who need an affordable, easy-to-use developer tools tool. Its simplicity and core feature set make it ideal for solo practitioners.",
-  "whoShouldNotUse": "JFrog may be overwhelming for users who only need basic developer tools functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
+  "learningCurve": "Upload and download are simple; repository layout, promotion rules, and scan policy take real practice",
+  "whoShouldUse": "Engineering organizations with mature pipelines that need binaries stored, scanned, and promoted across environments at an enterprise-tier budget.",
+  "whoShouldNotUse": "Small teams that only need somewhere to push container images; this repository's stack guide advises using the code host's bundled registry below enterprise scale."
 }

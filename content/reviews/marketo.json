@@ -2,7 +2,7 @@
   "slug": "marketo",
   "name": "Marketo",
   "tagline": "Enterprise marketing automation platform by Adobe.",
-  "description": "Enterprise marketing automation platform by Adobe.",
+  "description": "Marketo is Adobe's enterprise marketing automation platform for nurture programs, lead scoring, and email and landing page construction.",
   "category": "Marketing & SEO",
   "website": "https://business.adobe.com/products/marketo",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.1,
   "reviewCount": 1840,
   "pros": [
-    "Excellent marketing & seo capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Programs hold segments, triggers, and success criteria together, so a campaign is a structure rather than a one-off send",
+    "Behavior-based scoring hands sales a ranked queue instead of a flat list of signups",
+    "Emails, landing pages, and forms are built in the same system as the nurture logic, removing handoffs between tools",
+    "Adobe ownership places documentation, contracting, and roadmap under one large vendor's processes",
+    "The band this dataset records, $895-3195/mo, gives a buyer a starting figure before any vendor conversation"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "The recorded entry band sits above every email-led alternative in this repository's comparison set, which prices out first-tool buyers",
+    "Administration is a real job: scoring models, program structures, and list hygiene need an owner with dedicated time",
+    "No certification, retention term, or residency option shows up in this repository's fields for Marketo"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured marketing & seo platform with comprehensive tooling",
+      "name": "Nurture program builder",
+      "description": "Campaigns built as programs with segments, triggers, and success criteria. Program types and limits are not itemized in this dataset.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Lead scoring models",
+      "description": "Points accumulate from engagement and fall when a contact goes quiet, producing a threshold for sales handoff. Default models are not recorded here.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Email campaign editor",
+      "description": "Emails created from templates and sent as part of a program or as a standalone campaign. Editor capabilities are not detailed in these fields.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Landing pages and forms",
+      "description": "Pages and forms that capture responses into lists feeding the nurture logic. Form and template inventory is not captured here.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Segment and list rules",
+      "description": "Audiences defined by attributes and behavior and refreshed as records change. Rule syntax and volume limits are not recorded in this repository.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Behavioral triggers",
+      "description": "Campaign steps that fire on activity rather than on a fixed send schedule. Trigger coverage is not enumerated in this dataset.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "API for CRM and analytics links",
+      "description": "Programmatic access for moving lead and activity data between Marketo and other systems. This repository names only one such partner, in its analytics records.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Program performance reporting",
+      "description": "Reports over program engagement and campaign results. Report types, attribution models, and history windows are not captured here.",
       "available": true,
       "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
-      "available": true,
-      "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
-      "available": true,
-      "category": "Core"
     }
   ],
   "ratings": [
@@ -111,71 +111,78 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Marketo across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your marketing & seo needs.",
-      "type": "text"
+      "title": "The nurture program as Marketo's unit of work",
+      "type": "text",
+      "body": "Marketo is enterprise marketing automation, and the object it organizes is the nurture program: a sustained sequence of emails, content, and branch decisions that moves a person from first interest toward a sales-ready state. Campaigns are built as programs with segments, triggers, and success criteria rather than as one-off sends. This repository files Marketo under Marketing & SEO with a paid model and a band of $895-3195/mo, describes it as an enterprise marketing automation platform by Adobe, and its category notes place Marketo among the all-in-one marketing suites alongside HubSpot."
     },
     {
-      "title": "What Is This Tool",
-      "body": "Marketo serves the marketing & seo category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
-      "type": "text"
+      "title": "Lead scoring and the handoff to sales",
+      "type": "text",
+      "body": "Scoring is the mechanism that turns behavior into a routing decision: opens, visits, form fills, and downloads accumulate points against a model the organization defines, and a person crosses a threshold into the sales queue. The same model can demote contacts who have gone quiet, which keeps a database from filling with names nobody has heard from in a year. What this dataset does not record is which scoring actions ship by default, how attribution is handled, or how a score is meant to reconcile with sales's own judgment — the practical detail a marketing operations hire would ask for first."
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Marketo excels in this area.",
-      "type": "text"
+      "title": "Landing pages, emails, and program building",
+      "type": "list",
+      "body": "The construction surface covers the assets a campaign needs, and they are built next to the logic that uses them rather than exported into it. Triggers react to behavior as it happens rather than on a fixed send schedule, which is what separates automation from a newsletter tool. None of the specific editors, template counts, or form capabilities are itemized in this repository, so the depth question has to be put to the vendor directly. The through-line is that asset and logic live in one system, so a campaign change does not require moving between tools.",
+      "items": [
+        "Emails built from templates and attached to a program",
+        "Landing pages with forms feeding the same audience lists",
+        "Lists and segments refreshed from attributes and behavior",
+        "Triggers that start a step when a person acts",
+        "Success criteria that define when a program step is won"
+      ]
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Marketo excels in this area.",
-      "type": "text"
+      "title": "Adobe ownership and what it changes",
+      "type": "text",
+      "body": "Marketo's ownership sits inside Adobe, and the buying conversation follows from that. Documentation, release cadence, support packaging, and roadmap run through a large vendor's processes; the website field recorded for Marketo in this dataset points at Adobe's business domain rather than a standalone company site. For a buyer, the practical questions concern how Marketo is packaged alongside other Adobe products, what contracting looks like through that channel, and how much of the roadmap is shared with the wider suite. This repository records none of those terms."
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Marketo excels in this area.",
-      "type": "text"
+      "title": "What Marketo will not solve",
+      "type": "text",
+      "body": "What Marketo does not do is the point of comparing it carefully. It is not an experimentation platform: it will not run A/B tests across a product surface or manage staged feature rollouts, which is Optimizely's problem rather than Marketo's. It is not a survey tool, so structured feedback collection belongs elsewhere — this repository pairs Marketo with SurveyMonkey on that axis. And it is not an entry-level purchase: the recorded band of $895-3195/mo sits above the bands this dataset holds for ActiveCampaign, Mailchimp, and ConvertKit, which makes it a difficult fit for a team buying its first marketing tool."
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Marketo excels in this area.",
-      "type": "text"
+      "title": "The $895-3195/mo record, read carefully",
+      "type": "text",
+      "body": "Read from the stored fields, Marketo is carried as a paid product with a band of $895-3195/mo — an entry figure near the top of the bands this repository holds for its marketing counterparts, and above every email-led alternative in the same comparison set. The field does not say whether the band is per instance, priced against contact volume, or charged per seat, nor which modules it includes. Everything in this page is read from Adobe's published Marketo documentation and the records this repository holds for the product, so the band should be treated as a stored reference and checked against the vendor's current published pricing."
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Marketo excels in this area.",
-      "type": "text"
+      "title": "An all-in-one suite's ecosystem, and the certification silence",
+      "type": "text",
+      "body": "Suite products are expected to carry their own integration surface rather than depend on a connector market: a documented API for programmatic access, connections to CRM and analytics systems, and a named position in this repository's wider dataset, where the analytics review lists Marketo as an integration target alongside Salesforce. On the security side the record is empty — no certification, retention term, residency option, or identity detail is stored for Marketo here, and none follows from Adobe ownership. Buyers should confirm both the current connector list and the compliance documentation directly."
     },
     {
-      "title": "Conclusion",
-      "body": "Marketo achieves a 4.1/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable marketing & seo capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
+      "title": "Marketo next to Optimizely: two different problems",
+      "type": "text",
+      "body": "The comparison that matters most for this file is Marketo against Optimizely, and it is not a like-for-like contest: Marketo builds nurture programs and scores leads, while Optimizely runs experiments and staged releases across a site or a product. Both sit under Marketing & SEO here at 4.1/5, yet a team needing both would be buying two platforms for two jobs. The rest of Marketo's recorded comparison set is the email-led field — ActiveCampaign, Mailchimp, ConvertKit — plus HubSpot as the all-in-one suite and the SEO tools Ahrefs, Moz, and SEMrush, which solve a third problem. The alternatives file for Marketo names Hotjar, Typeform, SurveyMonkey, and Optimizely."
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Marketo enables teams to Enterprise marketing automation platform through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Marketo supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Marketo's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
-      "type": "text"
+      "title": "Who Marketo is for",
+      "type": "text",
+      "body": "Marketo suits marketing operations teams with a real nurture program, a lead-handoff process with sales, and the staff to administer both — usually organizations where the recorded band is a small line against the revenue the program is expected to move. It also suits buyers already standardizing on Adobe tooling. It does not suit a small team buying its first email platform, a product team that needs experimentation rather than nurture, or a buyer whose security review must start from certification evidence, which this repository does not hold. The dataset carries 4.1/5 for Marketo across 1,840 recorded reviews."
     }
   ],
   "faqs": [
     {
-      "question": "What makes Marketo different from other marketing & seo tools?",
-      "answer": "Marketo differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Marketo ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "What is Marketo's core unit of work?",
+      "answer": "A nurture program: segmented audiences, scheduled or triggered email steps, and success criteria, with landing pages and forms feeding the same structure. That is how it differs from a standalone email tool."
     },
     {
-      "question": "Can Marketo handle enterprise-scale requirements?",
-      "answer": "Yes, Marketo supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "How does Marketo differ from Optimizely?",
+      "answer": "They solve different problems. Marketo runs nurture programs and lead scoring; Optimizely runs A/B tests and feature rollouts. This repository files both under Marketing & SEO at 4.1/5, but neither replaces the other."
     },
     {
-      "question": "How long does it take to implement Marketo?",
-      "answer": "Most teams can get started with Marketo within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Is Marketo owned by Adobe?",
+      "answer": "Yes. This dataset's website field for Marketo points to Adobe's business domain, and the product is described here as an enterprise marketing automation platform by Adobe."
     },
     {
-      "question": "Does Marketo offer a free trial or money-back guarantee?",
-      "answer": "Marketo provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "What does this repository record for Marketo's price?",
+      "answer": "A paid model with a band of $895-3195/mo. What that band covers — per instance, per contact volume, or per seat — is not recorded, so confirm current published pricing with the vendor."
     },
     {
-      "question": "What kind of support does Marketo offer?",
-      "answer": "Marketo provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Are security certifications listed for Marketo?",
+      "answer": "No. The certification, retention, residency, and identity entries for Marketo in this repository, so compliance questions must go to the vendor's current documentation."
     }
   ],
   "relatedComparisons": [],
@@ -200,8 +207,8 @@
     "apiAvailable": true,
     "migrationComplexity": "Medium"
   },
-  "difficulty": "Beginner",
-  "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "Marketo is designed for fast-growing startups that need a scalable marketing & seo platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Marketo may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
+  "difficulty": "Advanced",
+  "learningCurve": "Sending is straightforward; program structure, scoring models, and attribution are learned over weeks of administration rather than hours.",
+  "whoShouldUse": "Marketing operations teams running sustained nurture programs with a defined lead handoff to sales, organizations already buying through Adobe, and mid-to-large teams with the staff to administer scoring and program structure.",
+  "whoShouldNotUse": "Small teams buying a first email platform, product teams that need experimentation rather than nurture, and buyers whose security review requires proof of certification this repository does not carry."
 }

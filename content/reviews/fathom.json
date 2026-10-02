@@ -1,8 +1,8 @@
 {
   "slug": "fathom",
   "name": "Fathom",
-  "tagline": "Simple, privacy-focused website analytics platform.",
-  "description": "Simple, privacy-focused website analytics platform.",
+  "tagline": "Lightweight website analytics that runs without cookies.",
+  "description": "Fathom is lightweight website analytics: one script tag, one dashboard, and no cookie banner between the site and its traffic.",
   "category": "Analytics & Data",
   "website": "https://fathomanalytics.com",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.5,
   "reviewCount": 640,
   "pros": [
-    "Excellent analytics & data capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Installation is one script tag, so putting Fathom on a site does not need a release cycle for each metric.",
+    "Collection is cookie-free, so the consent-banner step most analytics tools require does not apply to a Fathom install.",
+    "The dashboard is one screen of figures that a new reader can interpret without being taught a report builder.",
+    "Pricing is recorded as a fixed monthly band of $14-54/mo on a pageview unit, tying cost to traffic rather than to seats.",
+    "Two blog entries in this repository list Fathom beside Plausible, which keeps the cookieless shortlist down to two names."
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "One dashboard is also one level of depth: funnel, retention, and cohort questions have nowhere in Fathom to be answered.",
+    "Because the billing unit is pageviews, a traffic spike raises the bill even though the site itself has not changed.",
+    "Scope stops at the website, so in-app events, account-level reporting, and journeys across an application are outside what is collected."
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured analytics & data platform with comprehensive tooling",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
-      "available": true,
-      "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Single-tag installation",
+      "description": "One script in the page template is the entire install; there is no event taxonomy to define first.",
       "available": true,
       "category": "Usability"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Cookie-free visit collection",
+      "description": "Visits are recorded without writing cookies to the visitor's device, which removes the consent-banner requirement.",
       "available": true,
       "category": "Core"
+    },
+    {
+      "name": "One-page traffic dashboard",
+      "description": "Visits, pages, referrers, and devices are read from a single screen with no report builder in front of them.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Pageview-based pricing",
+      "description": "This repository's cost blog records Fathom as billing against pageviews, in the $14-54/mo band held in this file.",
+      "available": true,
+      "category": "Pricing"
+    },
+    {
+      "name": "Bot traffic filtering",
+      "description": "Automated requests are kept out of the totals so the counts describe human visits rather than crawlers.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Referrer and campaign breakdown",
+      "description": "Each visit is attributed to the source that sent it, including campaign parameters carried in the URL.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Multiple sites per account",
+      "description": "More than one site can be tracked from the same account, with each keeping its own set of figures.",
+      "available": true,
+      "category": "Usability"
+    },
+    {
+      "name": "Period comparison on traffic",
+      "description": "The current window can be set against a previous one so changes in visits are visible without exporting anything.",
+      "available": true,
+      "category": "Reporting"
     }
   ],
   "ratings": [
@@ -111,71 +111,73 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Fathom across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your analytics & data needs.",
+      "title": "One script, one dashboard",
+      "body": "Fathom is a website analytics service built to be installed once and then left alone. A single script tag is the whole integration surface: there is no event taxonomy to design, no tag manager to maintain, and no per-metric code to ship. What comes back is one dashboard of traffic figures, kept deliberately flat so that reading it does not require training. Nothing in this write-up comes from installing Fathom; it is assembled from vendor documentation and the repository entries that mention the product, so the setup claims above should be read as documentation rather than field notes.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Fathom serves the analytics & data category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "Cookieless collection and the consent question",
+      "body": "Fathom records visits without placing cookies on the visitor's device, and that is the property which removes the usual consent-banner conversation. Two entries in this repository make the point independently: one cost blog describes Fathom as cookie-free tracking with simple dashboards and pageview-based pricing, and an alternatives blog describes it as privacy-focused analytics taking the same approach. The distinction matters legally as well as technically, because a site that writes no identifiers has a different consent posture from one that does. Exact obligations still depend on jurisdiction, which no dataset here can settle.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Fathom excels in this area.",
+      "title": "Reading the single dashboard",
+      "body": "The reporting surface is a single page, and the items below are what it is built to show. Everything is arranged for a site owner who wants an answer in a glance rather than for an analyst assembling a model, so there is nothing to configure before the figures are legible. The same constraint sets the ceiling: when a number needs explaining there is no drill-down to reach for, because the dashboard reports rather than diagnoses.",
+      "type": "list",
+      "items": [
+        "Visit counts for the current period against the one before it",
+        "The pages that received the traffic",
+        "Referrers and campaign sources behind each visit",
+        "Device and browser breakdown of visitors",
+        "Automated bot traffic kept out of the totals"
+      ]
+    },
+    {
+      "title": "Pageview-based pricing",
+      "body": "Our file lists Fathom under paid pricing at $14-54/mo, and this repository's analytics cost blog independently describes its pricing as pageview-based. Read together, the bill tracks how much traffic a site receives rather than how many people hold an account, which is a simpler unit than seats but a less predictable one during a launch or a press spike. No tier breakdown appears anywhere in our records, so what sits at each end of that band is not established here.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Fathom excels in this area.",
+      "title": "Fathom next to Google Analytics",
+      "body": "This repository holds a direct comparison record between Fathom and Google Analytics, plus an alternatives blog dedicated to Google Analytics in which Fathom is named. The structural difference those pages imply is scope: Fathom's dashboard answers what happened on the site, while a general-purpose analytics suite carries user-level and event-level machinery that Fathom does not attempt. The comparison rows mark both products present on most criteria, which is generated boilerplate rather than a measured result; the useful signal is that the pages address a buyer looking to leave a large analytics suite.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Fathom excels in this area.",
+      "title": "A namesake worth ruling out",
+      "body": "One entry in this repository's remote-work research groups Fathom with Otter.ai and Fireflies under meeting-assistant consolidation. That is a different product trading under the same name, and the market-share figure recorded alongside it belongs to that market rather than to web analytics. This review covers only the website analytics service documented elsewhere in our records. Anyone shortlisting tools from repository search results should check the domain first, so that two mentions of a name are not assumed to be one product.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Fathom excels in this area.",
+      "title": "Where a lightweight analyzer stops",
+      "body": "Fathom's limits follow from its design rather than from unfinished work. A tool that declines to model individual behavior cannot answer retention, funnel, or account-level questions, and no amount of dashboard polish changes that. The pageview billing unit also means traffic volume drives cost while the feature set stays fixed. Teams expecting their site metrics to grow into product analytics outgrow Fathom quickly, and the honest answer at that point is a different category of tool rather than a larger Fathom plan.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Fathom excels in this area.",
-      "type": "text"
-    },
-    {
-      "title": "Conclusion",
-      "body": "Fathom achieves a 4.5/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable analytics & data capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Fathom enables teams to Simple, privacy-focused website analytic through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Fathom supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Fathom's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Fit, caveats, and the record we hold",
+      "body": "Fathom suits a site that wants clean traffic numbers, a privacy posture that does not depend on a consent banner, and a subscription priced in tens of dollars rather than by seat. It is the wrong instrument for anyone who needs to follow a visitor across an application or compare cohorts. Our file scores it 4.5 from 640 entries, and four of its thirteen comparison records pair it with tools from entirely different categories, so the pairings matter less than the rating does. Our records hold no security certifications for Fathom, so any compliance question has to go to the vendor directly.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Fathom different from other analytics & data tools?",
-      "answer": "Fathom differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Fathom ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Does Fathom really work without a consent banner?",
+      "answer": "This repository describes Fathom as cookie-free tracking, which is what removes the banner requirement. Whether your site still needs one depends on everything else it loads, and on the rules that apply to you, not on Fathom alone."
     },
     {
-      "question": "Can Fathom handle enterprise-scale requirements?",
-      "answer": "Yes, Fathom supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "Is the Fathom in this repository the analytics product or the meeting tool?",
+      "answer": "The review file, the blog entries, and the comparison records all describe the website analytics service. One remote-work research file mentions a same-named meeting assistant, and its market-share note does not apply to this product."
     },
     {
-      "question": "How long does it take to implement Fathom?",
-      "answer": "Most teams can get started with Fathom within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "How does Fathom's price behave as traffic grows?",
+      "answer": "Our file records $14-54/mo and this repository's cost blog records pageview-based billing, so the bill follows traffic volume. No tier breakdown exists in our records to show where the steps fall."
     },
     {
-      "question": "Does Fathom offer a free trial or money-back guarantee?",
-      "answer": "Fathom provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "Can Fathom stand in for Google Analytics?",
+      "answer": "This repository holds a Fathom-versus-Google Analytics comparison and an alternatives blog naming Fathom. It covers site traffic well and does not attempt the user-level and event-level analysis a general suite carries."
     },
     {
-      "question": "What kind of support does Fathom offer?",
-      "answer": "Fathom provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "What compliance records does this dataset hold for Fathom?",
+      "answer": "None. No certification or attestation appears anywhere in our records for Fathom, so a compliance review has to start with the vendor's current documentation rather than with this record."
     }
   ],
   "relatedComparisons": [],
@@ -200,8 +202,8 @@
     "apiAvailable": true,
     "migrationComplexity": "Medium"
   },
-  "difficulty": "Intermediate",
-  "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "Fathom is designed for fast-growing startups that need a scalable analytics & data platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Fathom is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "difficulty": "Beginner",
+  "learningCurve": "Very short — one script and one screen, with almost nothing to learn before the figures are readable.",
+  "whoShouldUse": "Site owners, publishers, and small teams that want traffic figures without a consent banner and without a report builder in front of them.",
+  "whoShouldNotUse": "Teams that need funnel, retention, or account-level product analysis, or anyone who must follow a single visitor beyond the page view."
 }

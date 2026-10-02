@@ -2,7 +2,7 @@
   "slug": "optimizely",
   "name": "Optimizely",
   "tagline": "A/B testing and experimentation platform for digital optimization.",
-  "description": "A/B testing and experimentation platform for digital optimization.",
+  "description": "Optimizely is an experimentation platform covering A/B and multivariate testing, feature flags, and staged rollouts across web and product.",
   "category": "Marketing & SEO",
   "website": "https://optimizely.com",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.1,
   "reviewCount": 860,
   "pros": [
-    "Excellent marketing & seo capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Experiments and staged rollouts run on the same mechanism, so a winning test can graduate into a controlled release without changing tools",
+    "Traffic splits and targeting let a question be asked about a page, a segment, or a product surface rather than about the whole audience at once",
+    "Multivariate testing carries several changes at once for teams with enough traffic to read the result",
+    "The annual band of $36k-72k/yr recorded here gives a buyer a scale reference before contacting the vendor",
+    "Measurement sits with the experiment itself, so product changes get evaluated through the same process marketing changes do"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Results depend on traffic volume: below a certain level, tests run so long that the decision they inform has already been made",
+    "Variants usually need engineering work to ship, which caps the platform's value at the team's release capacity",
+    "This repository records no certifications, retention terms, or residency options for Optimizely"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured marketing & seo platform with comprehensive tooling",
+      "name": "A/B and multivariate testing",
+      "description": "Splits traffic between variants of a page or surface and reports which performed. Stopping rules and significance settings are not recorded here.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Targeting and audience rules",
+      "description": "Restricts a test to segments defined by attribute or behavior. The available targeting dimensions are not itemized in this dataset.",
       "available": true,
-      "category": "Integrations"
+      "category": "Core"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Feature flags",
+      "description": "Ships a change behind a switch so exposure can be controlled independently of release. Flag governance features are not documented here.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Staged percentage rollouts",
+      "description": "Moves exposure outward from a small share of users as confidence builds. Ramp granularity and kill-switch behavior are not captured here.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Web page experimentation",
+      "description": "Tests on marketing and product pages, including content and layout changes. Editor capabilities are not detailed in this repository.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Product surface experiments",
+      "description": "Tests aimed at flows and events inside an application rather than at page visits. Instrumentation requirements are not recorded here.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Variant results reporting",
+      "description": "Reports performance for a test at page, funnel, or segment level. The report inventory and history windows are not listed in these fields.",
       "available": true,
       "category": "Reporting"
     },
     {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
-      "available": true,
-      "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "Client SDKs and endpoints",
+      "description": "Client libraries and programmatic endpoints for connecting tests to the surface under change. Named platforms are not enumerated in this dataset.",
       "available": true,
       "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
-      "available": true,
-      "category": "Core"
     }
   ],
   "ratings": [
@@ -111,71 +111,82 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Optimizely across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your marketing & seo needs.",
-      "type": "text"
+      "title": "Experimentation as the product, not a feature",
+      "type": "text",
+      "body": "Optimizely is an experimentation platform: its job is to let a team pose a question about a digital surface, split traffic, and read which variant performed. The scope covers marketing pages and product behavior alike, which makes it a different purchase from the campaign tooling this repository files in the same category — Marketo automates nurture, while Optimizely measures alternatives to what is already live. This dataset records Optimizely under Marketing & SEO with a paid model, an annual band of $36k-72k/yr, and a descriptor of an A/B testing and experimentation platform for digital optimization."
     },
     {
-      "title": "What Is This Tool",
-      "body": "Optimizely serves the marketing & seo category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
-      "type": "text"
+      "title": "A/B and multivariate tests on a site",
+      "type": "text",
+      "body": "A test starts with a hypothesis and a surface: change the headline, the pricing table, the checkout step, and divide visitors between the original and the variant. Multivariate work runs several changes at once, which needs more traffic before a result means anything at all. The mechanics that matter during evaluation are how variants are targeted, what the stopping rules look like, and whether results are read at the level of a page, a funnel, or a segment. None of those specifics are itemized in this repository, so they belong on a demonstration checklist rather than in an assumption."
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Optimizely excels in this area.",
-      "type": "text"
+      "title": "Feature flags and staged rollouts",
+      "type": "text",
+      "body": "Flags and rollouts extend the same idea to software itself: a change ships behind a flag, a percentage of users sees it, and the percentage moves outward as confidence grows. That makes experimentation and release management adjacent rather than identical — the flag is both a test control and a safety lever, and teams frequently arrive for one and end up relying on the other. The records behind this page do not say which flag-management capabilities ship at which tier, so the boundary between the experimentation surface and the delivery surface has to be confirmed with the vendor."
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Optimizely excels in this area.",
-      "type": "text"
+      "title": "Product experiments beyond the marketing page",
+      "type": "text",
+      "body": "Beyond the marketing page, experimentation attaches to product surfaces: onboarding steps, feature adoption, search behavior, and the points where a flow leaks users. This is where web experimentation and product experimentation part company with campaign work — the unit of analysis is a screen or an event rather than a visit, and the person reading the result is usually a product manager rather than a marketer. This repository does not record which instrumentation approach Optimizely currently requires, which is the first technical question a product team will ask before anything else."
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Optimizely excels in this area.",
-      "type": "text"
+      "title": "Where an experimentation program stalls",
+      "type": "list",
+      "body": "Experimentation programs stall for structural reasons rather than software ones, and the pattern repeats often enough to be predictable. Each item below is a failure mode the platform cannot fix, because none of them is a defect in the tooling. The recorded annual band assumes a team has already solved these four, which is why an evaluation that stops at the feature list tends to end in a renewal argument a year later.",
+      "items": [
+        "Traffic too thin for a test to resolve while the decision still matters",
+        "No owner for the hypothesis backlog, so tests get configured and never read",
+        "No release capacity to ship the variant, leaving ideas parked on the board",
+        "Audiences that never reach the test, which weakens every result read from it"
+      ]
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Optimizely excels in this area.",
-      "type": "text"
+      "title": "The annual band this dataset records",
+      "type": "text",
+      "body": "An annual band of $36k-72k/yr under a paid model is what this dataset holds for Optimizely — the only figure of its kind in the repository's marketing files, stated per year rather than per month. What it does not identify is what that band buys: traffic volume, experiment count, the surface it covers, or whether flags and rollouts are included. Read as an entry reference rather than a quote, it signals an enterprise commitment rather than a monthly subscription. Confirm current published pricing and packaging with the vendor before budgeting."
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Optimizely excels in this area.",
-      "type": "text"
+      "title": "SDKs, APIs, and the engineering dependency",
+      "type": "text",
+      "body": "An experimentation platform reaches into whatever surface is being tested, which makes the integration story a technical one: a script or client library on the web side, endpoints for anything programmatic, and a route for variants to reach application code when the test is not a simple content swap. That dependency is why Optimizely purchases usually involve engineering alongside marketing. This repository does not enumerate the SDKs, languages, or named connectors available for this product, so a product team should confirm the current client list and version compatibility with the vendor."
     },
     {
-      "title": "Conclusion",
-      "body": "Optimizely achieves a 4.1/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable marketing & seo capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
+      "title": "Hosting, data path, and unrecorded certifications",
+      "type": "text",
+      "body": "Optimizely runs as a hosted service, and testing implies data leaving the page: assignment decisions, exposure events, and results are processed on the vendor side. What this repository holds beyond that structural picture is nothing — no compliance certification, no retention schedule, no residency term, or identity control appears in these fields, and none follows from a hosted delivery label. Because experiment data overlaps with customer behavior data, the security review here deserves the same weight as the analytics review, and both have to come from current vendor documentation."
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Optimizely enables teams to A/B testing and experimentation platform through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Optimizely supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Optimizely's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
-      "type": "text"
+      "title": "Optimizely beside Marketo, and why they are not substitutes",
+      "type": "text",
+      "body": "The Marketo and Optimizely records in this repository both read 4.1/5, with Marketo's band recorded in its own file and $36k-72k/yr here — but the products answer different questions. Marketo decides who should receive the next message and sends it; Optimizely decides which version of a surface performs better and measures it. A team can run both without overlap. Elsewhere in this dataset Optimizely is compared against the email-led tools ActiveCampaign, Mailchimp, and ConvertKit and the SEO tools Ahrefs, Moz, and SEMrush, none of which own experimentation, and its alternatives file names Marketo, Hotjar, Typeform, and SurveyMonkey."
+    },
+    {
+      "title": "Who should own an Optimizely rollout",
+      "type": "text",
+      "body": "Optimizely suits teams with enough traffic to reach a conclusion, an engineering partner able to ship variants, and a person who owns the question list: growth and product groups measuring changes rather than announcing them. It suits organizations prepared for an annual commitment of the scale this dataset records. It fits poorly where traffic is thin, where nobody will own the hypothesis backlog, and where the security review needs the certification record this repository does not carry. The dataset holds 4.1/5 for Optimizely across 860 recorded reviews. These notes rest on Optimizely's published documentation and on the record this repository keeps for the product."
     }
   ],
   "faqs": [
     {
-      "question": "What makes Optimizely different from other marketing & seo tools?",
-      "answer": "Optimizely differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Optimizely ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Is Optimizely a marketing tool or a product tool?",
+      "answer": "Both are in scope. It runs A/B and multivariate tests on marketing pages and on product surfaces, and it also manages feature flags and staged rollouts, which is a release concern rather than a campaign one."
     },
     {
-      "question": "Can Optimizely handle enterprise-scale requirements?",
-      "answer": "Yes, Optimizely supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "How does Optimizely differ from Marketo?",
+      "answer": "Marketo runs nurture programs and lead scoring; Optimizely measures which version of a surface performs better and manages rollout. This repository files both under Marketing & SEO at 4.1/5, and they sit in the same category without solving the same problem."
     },
     {
-      "question": "How long does it take to implement Optimizely?",
-      "answer": "Most teams can get started with Optimizely within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "What pricing does this repository record for Optimizely?",
+      "answer": "A paid model with an annual band of $36k-72k/yr, stated per year rather than per month. What the band covers is not captured, so confirm current packaging with the vendor."
     },
     {
-      "question": "Does Optimizely offer a free trial or money-back guarantee?",
-      "answer": "Optimizely provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "Do we need engineers to run Optimizely?",
+      "answer": "Usually. Variants beyond a content swap require changes in the application code, and this repository does not enumerate the SDKs or platforms available, so confirm the current client list with the vendor."
     },
     {
-      "question": "What kind of support does Optimizely offer?",
-      "answer": "Optimizely provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Are certifications recorded for Optimizely?",
+      "answer": "No. The certification, retention, residency, and identity entries for Optimizely here, so compliance has to be answered from the vendor’s live documentation."
     }
   ],
   "relatedComparisons": [],
@@ -200,8 +211,8 @@
     "apiAvailable": true,
     "migrationComplexity": "Medium"
   },
-  "difficulty": "Beginner",
-  "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "Optimizely is perfect for freelancers and independent professionals who need an affordable, easy-to-use marketing & seo tool. Its simplicity and core feature set make it ideal for solo practitioners.",
-  "whoShouldNotUse": "Optimizely may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
+  "difficulty": "Advanced",
+  "learningCurve": "Basic page tests are approachable; flag governance, traffic sizing, and product instrumentation take considerably longer.",
+  "whoShouldUse": "Growth and product teams with enough traffic to reach conclusions and an engineering partner able to ship variants, plus organizations ready for an annual commitment of the scale this dataset records.",
+  "whoShouldNotUse": "Low-traffic properties where tests cannot resolve, teams with no release capacity to implement variants, and buyers who need certification detail this repository does not hold."
 }

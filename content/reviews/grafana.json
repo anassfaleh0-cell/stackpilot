@@ -2,7 +2,7 @@
   "slug": "grafana",
   "name": "Grafana",
   "tagline": "Open-source analytics and monitoring platform for metrics visualization.",
-  "description": "Open-source analytics and monitoring platform for metrics visualization.",
+  "description": "Grafana draws dashboards from pluggable data sources and layers alerting on top of the same queries that feed those panels.",
   "category": "Developer Tools",
   "website": "https://grafana.com",
   "pricing": "Freemium",
@@ -10,65 +10,65 @@
   "rating": 4.5,
   "reviewCount": 2260,
   "pros": [
-    "Excellent developer tools capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Metrics, logs, and traces held in separate stores can be drawn on one dashboard without first being copied into a single database.",
+    "The self-hosted build carries no license fee, and this repository's pricing analysis records no built-in caps on users or retention for it.",
+    "Grafana Cloud's free tier is documented here with metrics series, log volume, and retention allowances plus pre-built dashboards for common stacks.",
+    "Alert rules attach to the query that renders a panel, so a threshold and its chart cannot end up describing different things.",
+    "Dashboards built on Prometheus carry forward when logs and traces are added to the same view later."
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Running the open-source build yourself moves cost into operations: servers, database management, backups, and upgrades all land on the team.",
+    "Grafana displays telemetry rather than producing it, so Prometheus, Loki, Tempo, or equivalent collectors have to run alongside it.",
+    "A data source without a maintained plug-in becomes a development project before its numbers can appear on any panel."
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured developer tools platform with comprehensive tooling",
+      "name": "Dashboard panel layouts",
+      "description": "Panels are arranged on dashboards, and each panel is bound to one query against one data source.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Data source plug-ins",
+      "description": "New backends are added through the plug-in model rather than through a fixed list of supported connectors.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Query-driven alert rules",
+      "description": "Thresholds attach to the expression behind a panel, so alerting and visualization read the same definition.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Grafana Cloud free tier",
+      "description": "The stack guide in this repository records a free tier with metrics series, log volume, retention, and pre-built dashboards for common application stacks.",
+      "available": true,
+      "category": "Pricing"
+    },
+    {
+      "name": "Prometheus metric rendering",
+      "description": "Prometheus time series are rendered beside logs and traces so a single screen covers the three signal types.",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Self-hosted deployment",
+      "description": "The open-source build runs on infrastructure the team manages, with the operational work that implies.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Dashboards embedded elsewhere",
+      "description": "The Docker and GitLab reviews in this repository both record Grafana dashboards appearing inside those products.",
+      "available": true,
+      "category": "Collaboration"
+    },
+    {
+      "name": "Logs and traces alongside metrics",
+      "description": "Log output and trace spans can sit next to metric panels on the same dashboard instead of in separate tools.",
       "available": true,
       "category": "Reporting"
-    },
-    {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
-      "available": true,
-      "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
-      "available": true,
-      "category": "Core"
     }
   ],
   "ratings": [
@@ -111,71 +111,74 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Grafana across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your developer tools needs.",
+      "title": "What Grafana is",
+      "body": "Grafana is a visualization and alerting layer for telemetry that already lives somewhere else: metrics stores, log systems, trace backends, and other sources are reached through plug-ins and drawn as panels on dashboards. This repository files it under Developer Tools at 4.5/5 from 2,260 reviews and ranks it second on its monitoring tools page, behind Datadog. The audience recorded for it runs from small teams to enterprise, and because the open-source base is free, the entry cost is engineering time rather than a license.",
       "type": "text"
     },
     {
-      "title": "What Is This Tool",
-      "body": "Grafana serves the developer tools category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
+      "title": "Panels, dashboards, and the query behind each one",
+      "body": "A Grafana dashboard is a grid of panels, and each panel is bound to a query against a single data source. Layout, time range, and template variables are set at the dashboard level, which is how one screen can put request latency from a metrics store beside error text from a log store beside spans from a trace store. The data stays where it already lives and the dashboard is simply the place it meets. The consequence runs the other way too: panel quality depends entirely on the queries written behind each panel.",
       "type": "text"
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Grafana excels in this area.",
+      "title": "Data sources and the plug-in model",
+      "body": "Grafana does not own a data store for your telemetry; it reaches out to sources you already run, and the plug-in model is how new ones are added. That positioning explains the rest of this page, because dashboards, panels, and alert rules are all downstream of a connection that already works. The connections recorded across this repository, spanning the products whose reviews happen to mention Grafana, look like this:",
+      "type": "list",
+      "items": [
+        "Prometheus: the open-source write-up here describes Grafana as the visualization half of a Grafana-Prometheus monitoring stack.",
+        "Logs and traces: the same article has Grafana rendering Prometheus data alongside logs, with Loki and Tempo named as companion stores elsewhere in this repository.",
+        "Kubernetes: the Kubernetes review lists Grafana among its monitoring integrations.",
+        "Docker: the Docker review records Grafana used for container dashboard visualizations.",
+        "GitLab: the GitLab review records Grafana dashboards embedded inside GitLab for performance monitoring.",
+        "Anything else: a source without a bundled connector is added through the plug-in model rather than rejected by a fixed list."
+      ]
+    },
+    {
+      "title": "Alerting written from panel queries",
+      "body": "Grafana's alerting runs on the expressions that draw the panels. A threshold set on a query therefore describes exactly what the chart shows, and alert configuration cannot drift away from its dashboard through a second, parallel definition maintained somewhere else. This is also how the product earns a monitoring role rather than a reporting one: rules evaluate on a schedule and notify through configured channels, so the same dashboard a person reads during the day is the definition that produces the notification at night.",
       "type": "text"
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Grafana excels in this area.",
+      "title": "Self-hosted build or Grafana Cloud",
+      "body": "Two deployment shapes sit under one name. The open-source build runs on infrastructure the team manages; this repository's monitoring pricing analysis records it as free with no built-in user or retention caps, and lists server capacity, database management, backups, and upgrade work as costs the license price does not cover. Grafana Cloud is the managed alternative, offered in tiers with increasing retention, user limits, and support, and its free tier is recorded in the stack guide here with specific metrics, log, and retention allowances. The dataset stores a list price band of $29-200/mo for the paid side.",
       "type": "text"
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Grafana excels in this area.",
+      "title": "Limits that follow from the plug-in shape",
+      "body": "Because Grafana displays rather than collects, an organization needs telemetry pipelines in place before dashboards mean anything, and those pipelines need owners of their own. Plug-in coverage then decides what can be charted: an unmanaged source becomes custom development rather than a checkbox. A self-hosted install converts a license line into operational work, since upgrades, database care, and backups fall to whoever runs it. None of these read as defects; they are the shape of a tool positioned between your data and the people reading it.",
       "type": "text"
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Grafana excels in this area.",
+      "title": "Grafana next to Datadog, New Relic, and the open-source stack",
+      "body": "The head-to-head records stored with this review place Grafana at 4.5/5 above New Relic at 4.2, CircleCI at 4.3, and JFrog at 4.1, and below Datadog at 4.6, Docker at 4.6, GitHub at 4.7, and Postman at 4.6 — the last three being neighbors rather than substitutes. Datadog and New Relic sell collection together with the interface. The best-of-breed note in this repository instead pairs Grafana with Loki for logs and Tempo for tracing, aimed at teams willing to do the configuring. That difference, not the rating, is the real fork.",
       "type": "text"
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Grafana excels in this area.",
-      "type": "text"
-    },
-    {
-      "title": "Conclusion",
-      "body": "Grafana achieves a 4.5/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable developer tools capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Grafana enables teams to Open-source analytics and monitoring pla through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Grafana supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Grafana's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
+      "title": "Basis of these notes",
+      "body": "These judgments come from the vendor's published material and from this repository's stored comparisons, monitoring pricing analysis, and category notes; no Grafana instance was operated to write them. What the evidence supports is a specific reader: a team holding several telemetry backends that wants one place to draw and alert on them, with either the appetite to self-host or a managed tier to pay for. Our dataset holds 4.5/5 from 2,260 reviews, and records no compliance certifications for the product.",
       "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What makes Grafana different from other developer tools tools?",
-      "answer": "Grafana differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Grafana ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Is Grafana free to run on our own hardware?",
+      "answer": "The open-source build is free to self-host. The pricing analysis in this repository notes the tradeoff: servers, database management, backups, and upgrades become costs the license price does not cover."
     },
     {
-      "question": "Can Grafana handle enterprise-scale requirements?",
-      "answer": "Yes, Grafana supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "What does Grafana Cloud include at no cost?",
+      "answer": "The stack guide here records a free tier with 10,000 metrics series, 50 GB of logs, 14-day retention, and pre-built dashboards for Node.js, Postgres, and Next.js stacks."
     },
     {
-      "question": "How long does it take to implement Grafana?",
-      "answer": "Most teams can get started with Grafana within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Does Grafana collect metrics itself?",
+      "answer": "No. Prometheus, Loki, Tempo, or other collectors feed it. The open-source write-up in this repository describes Grafana as the visualization layer of that stack rather than the collection layer."
     },
     {
-      "question": "Does Grafana offer a free trial or money-back guarantee?",
-      "answer": "Grafana provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "How does Grafana compare with New Relic in this dataset?",
+      "answer": "Grafana holds 4.5/5 against New Relic's 4.2 in the stored comparison records, and the two use different billing shapes: a $29-200/mo band here against New Relic's per-user and ingestion model."
     },
     {
-      "question": "What kind of support does Grafana offer?",
-      "answer": "Grafana provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Can a dashboard query raise an alert?",
+      "answer": "Yes. Alert rules are written against the same query that draws the panel, which is how Grafana's role extends past displaying charts into notifying on them."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +204,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Advanced",
-  "learningCurve": "Steep — requires dedicated training time for full proficiency",
-  "whoShouldUse": "Grafana is ideal for small to mid-size teams that need a reliable developer tools solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
-  "whoShouldNotUse": "Grafana may be overwhelming for users who only need basic developer tools functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
+  "learningCurve": "Dashboards come quickly; alert routing, plug-in configuration, and query work take substantially longer",
+  "whoShouldUse": "Organizations holding several telemetry backends — Prometheus, logs, traces — that want one place to draw dashboards and define alerts, with the option to self-host.",
+  "whoShouldNotUse": "Teams with no telemetry pipelines in place yet, or those that want collection and interface from one vendor instead of a visualization layer over stores they run."
 }

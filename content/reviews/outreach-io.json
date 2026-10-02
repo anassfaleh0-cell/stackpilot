@@ -2,7 +2,7 @@
   "slug": "outreach-io",
   "name": "Outreach",
   "tagline": "Sales engagement platform with sequence automation and analytics.",
-  "description": "Sales engagement platform with sequence automation and analytics.",
+  "description": "Outreach is a sales engagement platform for building sequences, dialing prospects, and reading how each step of a campaign performs.",
   "category": "CRM & Sales",
   "website": "https://outreach.io",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.2,
   "reviewCount": 2460,
   "pros": [
-    "Excellent crm & sales capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Sequences mix email, call, and task steps and keep running without the rep re-planning each individual touch",
+    "A dialer sits inside the platform, so calling belongs to the sequence instead of becoming a detour to a separate system",
+    "Step-level analytics show where a cadence loses replies — a question a shared mailbox cannot answer",
+    "Deal and pipeline analytics re-read execution data to comment on revenue rather than only on sends",
+    "The band this repository records, $100-250/mo, gives a buyer a starting figure before contacting the vendor"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Sequences require an owner: someone must design the steps, keep them current, and retire the ones that stop earning replies",
+    "The platform assumes a CRM exists elsewhere, so an organization with no record system buys two systems to obtain one workflow",
+    "Certification, retention schedule, and residency terms are all absent from this repository's fields for Outreach"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured crm & sales platform with comprehensive tooling",
+      "name": "Sequence builder and steps",
+      "description": "Ordered email, call, and task steps with conditions that stop or branch a sequence. No per-plan ceiling for that is recorded in the data used here.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Built-in calling dialer",
+      "description": "Dials prospects from the engagement workspace and returns call activity to the sequence. Number coverage and recording rules are not itemized.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Email and sequence analytics",
+      "description": "Open, click, and reply measurement at step and sequence level. Report types and history windows are not listed in this dataset.",
       "available": true,
       "category": "Reporting"
     },
     {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
+      "name": "Deal and pipeline analytics",
+      "description": "Reads execution activity alongside pipeline to flag movement and risk. The individual signals available are not enumerated in this repository.",
       "available": true,
-      "category": "Core"
+      "category": "Reporting"
     },
     {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
+      "name": "Rep task and inbox queue",
+      "description": "Surfaces the day's next actions so reps work from a queue rather than from a plan they maintain. Triage behavior is not documented here.",
       "available": true,
       "category": "Usability"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "CRM synchronization",
+      "description": "Keeps contacts, accounts, and outcomes aligned with the system of record. Named CRM partners are not listed in this dataset.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Team activity dashboards",
+      "description": "Manager views over rep activity and sequence performance for review conversations. Metric definitions are not captured in these fields.",
       "available": true,
-      "category": "Core"
+      "category": "Collaboration"
+    },
+    {
+      "name": "Webhooks and REST endpoints",
+      "description": "Programmatic access for moving activity and record data between systems. Endpoint coverage and limits are not recorded here.",
+      "available": true,
+      "category": "Integrations"
     }
   ],
   "ratings": [
@@ -111,71 +111,83 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Outreach across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your crm & sales needs.",
-      "type": "text"
+      "title": "Outreach as a sequence engine",
+      "type": "text",
+      "body": "Outreach is a sales engagement platform: it does not hold the customer record, it executes the touches that go onto one. Teams build sequences — ordered steps of email, calls, and tasks — and Outreach runs them across a list of prospects, keeping each rep's day supplied with the next action. This repository's descriptor for the product is a sales engagement platform with sequence automation and analytics, recorded under CRM & Sales with a paid model and a band of $100-250/mo. The category guidance stored here draws the boundary plainly: a CRM answers what is happening, while platforms like Outreach answer how to execute."
     },
     {
-      "title": "What Is This Tool",
-      "body": "Outreach serves the crm & sales category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
-      "type": "text"
+      "title": "Steps, cadences, and the built-in dialer",
+      "type": "text",
+      "body": "A sequence is a script with a schedule. Steps fire in order, stop when a prospect replies, and hand the rep a task when a person is required. Alongside that sits a dialer, so calling is not a detour out to a separate telephony tool, and call activity writes back to the sequence that prompted it. The catalog of step types and their conditions is where most of the product's power sits, and it is also where the administration lives — every rule a manager writes becomes a rule that governs a rep's day, which is a reason to design sequences as carefully as the messaging inside them."
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Outreach excels in this area.",
-      "type": "text"
+      "title": "Reading the sequence analytics",
+      "type": "list",
+      "body": "Sequence analytics answer questions no single mailbox can see, which is why they are the reporting surface this category is bought for. This repository's category file points at that surface directly, describing sales engagement platforms as tracking email opens, clicks, and call activity. What the dataset does not itemize for Outreach is which of the reports below actually ship, what the export formats are, or how far back history runs, so the list is a starting point for a vendor checklist rather than a confirmed inventory.",
+      "items": [
+        "Open, click, and reply counts measured at each step",
+        "The step where a sequence most often loses a reply",
+        "Output compared across reps and across weeks",
+        "Call activity returned from the dialer into the sequence",
+        "Replies routed back so a sequence stops when a person answers"
+      ]
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Outreach excels in this area.",
-      "type": "text"
+      "title": "The revenue intelligence layer on top",
+      "type": "text",
+      "body": "Above the sequences sits a layer that treats deals and pipeline as the object of analysis: opportunity movement, signals about which deals are stalling, and coaching inputs drawn from recorded activity. That layer is what separates an engagement platform from an email-sending tool, because the same execution data is re-read to say something about revenue. The category notes stored in this repository describe revenue intelligence as capturing activity automatically and identifying at-risk deals, which is the framing in which Outreach's analytics sit. The dataset does not enumerate the individual signals or the models behind them."
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Outreach excels in this area.",
-      "type": "text"
+      "title": "Where the orchestration stops",
+      "type": "text",
+      "body": "Orchestration has a price that shows up organizationally rather than in the interface. Sequences and rules need an owner: someone to design the steps, keep them compliant, and retire the ones that stop working, which amounts to a part-time administrator at minimum. Outreach also assumes a CRM holds the record elsewhere, so a team without one is buying two systems. And because execution data is the raw material for every report the platform produces, the analytics are only as good as the rollout — a team that runs half its conversations through Outreach reads conclusions built on the other half."
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Outreach excels in this area.",
-      "type": "text"
+      "title": "The $100-250/mo record and what it hides",
+      "type": "text",
+      "body": "The band held for Outreach in this dataset is $100-250/mo under a paid pricing model, the highest entry figure among the engagement and pipeline tools this repository compares it against apart from the suite platforms. The field does not capture whether the band is per user, what telephony costs, or which analytics sit behind higher tiers. The comparison records quote the same band when weighing Outreach against Close CRM and Salesloft, each carried at its own recorded band — useful context even though none of the figures is a quote. Ask the vendor for its current published list before budgeting."
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Outreach excels in this area.",
-      "type": "text"
+      "title": "CRM sync and the system-of-record split",
+      "type": "text",
+      "body": "Outreach sits downstream of a system of record: contacts, accounts, and opportunities are synchronized from a CRM, executed on in Outreach, and written back. This repository's category guidance makes the arrangement explicit, describing many organizations as running a CRM as the system of record and an engagement platform as the system of action, integrated together — and it notes that major CRMs are adding native engagement features, which is the strategic pressure standing over standalone tools in this category. Named connectors are not itemized here; the comparison files show Outreach measured against Pipedrive, Salesforce, HubSpot, Zoho CRM, Close CRM, Copper CRM, Freshsales, Zendesk, and Salesloft."
     },
     {
-      "title": "Conclusion",
-      "body": "Outreach achieves a 4.2/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable crm & sales capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
+      "title": "Deployment, data path, and the missing certifications",
+      "type": "text",
+      "body": "Outreach runs as a hosted service: sequences, recordings, and analytics live in the vendor's infrastructure, which is what lets a team run the same cadence from laptops and phones. The dataset carries nothing further on this product's security posture — no certification, no retention schedule, no residency option, no identity-policy detail — and a hosted delivery model implies none of them. Call recordings and reply threads are among the more sensitive material a revenue team holds, so this is a gap to close with vendor documentation before procurement rather than after it."
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Outreach enables teams to Sales engagement platform with sequence  through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Outreach supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Outreach's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
-      "type": "text"
+      "title": "Outreach against Salesloft and the CRM field",
+      "type": "text",
+      "body": "The closest recorded counterpart is Salesloft: the same category, 4.3/5 against Outreach's 4.2/5, and a band below the $100-250/mo held here. The emphasis this repository records differs — Salesloft as a platform for enterprise revenue teams with coaching and forecasting at the center, Outreach as sequence automation and analytics — which reads as a manager-facing product against an execution-facing one. Below that pair sit the CRMs, Pipedrive, Close CRM, Zoho CRM, HubSpot, and Salesforce, which own the record instead of the sequence. The alternatives file for Outreach names Pipedrive, Zoho CRM, Close CRM, Salesloft, and Copper CRM."
+    },
+    {
+      "title": "Who runs Outreach, and the basis for this page",
+      "type": "text",
+      "body": "Outreach fits revenue teams whose problem is execution volume: a defined book of accounts, a known set of touches, and a need to see which touches work. It suits organizations that already own a CRM and want the outbound machinery beside it, and managers who intend to coach from activity data rather than from memory. It fits poorly as a first system for a company with no CRM, poorly for teams too small to maintain sequences, and poorly where the budget cannot absorb a band recorded at $100-250/mo. What is written here comes from vendor documentation and the comparison and category records this repository holds for Outreach."
     }
   ],
   "faqs": [
     {
-      "question": "What makes Outreach different from other crm & sales tools?",
-      "answer": "Outreach differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Outreach ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "What is the difference between Outreach and a CRM?",
+      "answer": "A CRM holds contacts, accounts, and deals; Outreach executes sequenced touches on top of them. This repository's category notes describe the pair as system of record and system of action, usually integrated together."
     },
     {
-      "question": "Can Outreach handle enterprise-scale requirements?",
-      "answer": "Yes, Outreach supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "How does Outreach differ from Salesloft?",
+      "answer": "Both are engagement platforms here. Outreach is filed as sequence automation and analytics at $100-250/mo with 4.2/5; Salesloft as a platform for enterprise revenue teams, carried at a lower band, with 4.3/5 emphasizing coaching and forecasting."
     },
     {
-      "question": "How long does it take to implement Outreach?",
-      "answer": "Most teams can get started with Outreach within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Does Outreach include a dialer?",
+      "answer": "Yes, calling sits inside the platform so dial activity returns to the sequence. Number provisioning, recording, and coverage details are not recorded in this repository."
     },
     {
-      "question": "Does Outreach offer a free trial or money-back guarantee?",
-      "answer": "Outreach provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "What does our dataset say about Outreach pricing?",
+      "answer": "A paid model with a band of $100-250/mo. Whether that is per seat, and what telephony or advanced analytics cost beyond it, is not captured — use the vendor’s published price list instead."
     },
     {
-      "question": "What kind of support does Outreach offer?",
-      "answer": "Outreach provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Are security certifications recorded for Outreach?",
+      "answer": "No. Nothing in the certification, retention, residency, or identity fields for Outreach here, so those questions must go to the vendor's current documentation."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +213,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Advanced",
-  "learningCurve": "Steep — requires dedicated training time for full proficiency",
-  "whoShouldUse": "Outreach is perfect for freelancers and independent professionals who need an affordable, easy-to-use crm & sales tool. Its simplicity and core feature set make it ideal for solo practitioners.",
-  "whoShouldNotUse": "Outreach may be overwhelming for users who only need basic crm & sales functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
+  "learningCurve": "Sequences are quick to grasp; designing step logic, keeping analytics clean, and administering the platform is where the real work sits.",
+  "whoShouldUse": "Revenue teams with a defined outbound motion and a CRM already in place, organizations that push real volume through sequenced email and calling, and managers who intend to coach from activity data.",
+  "whoShouldNotUse": "Companies without a system of record to sync against, teams too small to own and maintain sequence logic, and buyers whose budget cannot cover a band this repository records at $100-250/mo."
 }

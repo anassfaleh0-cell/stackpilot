@@ -2,7 +2,7 @@
   "slug": "greenhouse",
   "name": "Greenhouse",
   "tagline": "Enterprise hiring platform with structured interviewing.",
-  "description": "Enterprise hiring platform with structured interviewing.",
+  "description": "Greenhouse is recorded as an enterprise hiring platform built on structured interviewing, where interview kits and scorecards feed a handoff to the HRIS.",
   "category": "HR & People",
   "website": "https://greenhouse.io",
   "pricing": "Paid",
@@ -10,63 +10,63 @@
   "rating": 4.3,
   "reviewCount": 1360,
   "pros": [
-    "Excellent hr & people capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Structured interview kits and scorecard-based evaluation are the capabilities our own guides attach to this class of hiring tool, keeping every interviewer on the same rubric",
+    "Reporting on source quality and time-to-hire arrives with the platform per our HR technology guide, so recruiting spend can be read against where candidates actually came from",
+    "The onboarding handoff is described concretely in our glossary: an accepted offer starts IT provisioning, payroll setup, and benefits enrollment in the HRIS without a manual relay",
+    "It holds the number two spot in our recruiting software ranking, and our small-team question names it first among the entry points buyers typically start with",
+    "Ten head-to-head records give it five wins, including the category pairings against Lever, Workday, and Zoho People"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "Our HR category page prices recruiting-specific tools on annual contracts while this page carries a monthly band, so the recorded unit for Greenhouse's price disagrees with itself",
+    "It is a hiring layer rather than the employee record: our guides assume a separate HRIS receives the handoff, leaving payroll and core HR to another vendor",
+    "Support tiers, uptime commitments, data residency options, and certifications are absent from our files, so a security review has to begin with the vendor's own documentation"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured hr & people platform with comprehensive tooling",
+      "name": "Structured interview kits",
+      "description": "Our HR technology guide lists structured interview kits among the capabilities of dedicated platforms like this one, giving each interviewer the same questions and rubric.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Scorecard-based candidate evaluation",
+      "description": "Our guide names scorecard-based candidate evaluation as a core capability, and our ATS glossary describes candidates being scored against predefined criteria before advancement.",
       "available": true,
-      "category": "Integrations"
+      "category": "Core"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Source and time-to-hire reporting",
+      "description": "Reporting on source quality and time-to-hire is recorded for this class of tool in our HR technology stack guide, tying recruiting spend to where candidates came from.",
       "available": true,
       "category": "Reporting"
     },
     {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
+      "name": "Automatic candidate advancement",
+      "description": "Our ATS glossary describes top-scoring applicants advancing automatically to the next round once a recruiter has scored them against the predefined criteria.",
       "available": true,
-      "category": "Core"
+      "category": "Automation"
     },
     {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Offer-triggered onboarding workflows",
+      "description": "When a candidate accepts an offer, our employee onboarding glossary says platforms like this one start onboarding in the HRIS so provisioning, payroll setup, and enrollment begin.",
       "available": true,
-      "category": "Security"
+      "category": "Automation"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
-      "available": true,
-      "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
+      "name": "HRIS handoff for accepted candidates",
+      "description": "The handoff to the HRIS is the key integration point our HR technology guide names, which is why Greenhouse sits between the requisition and the employee record.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Cloud delivery with a recorded API",
+      "description": "Our dataset records cloud as the deployment for Greenhouse and marks an API available, which is the structural delivery picture we are able to state.",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Applicant pipeline and job postings",
+      "description": "Our recruiting pricing guide describes this class of product managing job postings, resume collection, candidate communication, interview scheduling, and offer management.",
       "available": true,
       "category": "Core"
     }
@@ -111,71 +111,84 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Greenhouse across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your hr & people needs.",
-      "type": "text"
+      "title": "Where Greenhouse sits in a hiring stack",
+      "type": "text",
+      "body": "Our records place Greenhouse as an enterprise hiring platform built around structured interviewing, and our HR technology guide treats it as the dedicated applicant tracking system a company graduates to once hiring volume outgrows a lightweight tool. In that framing Greenhouse is not the system of record for employees. It runs requisitions through to accepted offers and then hands off: the same guide names the handoff into the HRIS as the key integration point, which is why our onboarding glossary describes platforms of this type triggering onboarding workflows the moment an offer is accepted."
     },
     {
-      "title": "What Is This Tool",
-      "body": "Greenhouse serves the hr & people category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
-      "type": "text"
+      "title": "Interview kits and scorecards",
+      "type": "text",
+      "body": "The capabilities our blog attributes to dedicated platforms of this kind are structured interview kits, scorecard-based candidate evaluation, and reporting on source quality and time-to-hire. Our ATS glossary adds the concrete workflow: a recruiter scoring candidates against predefined criteria and automatically advancing the top-scoring applicants to the next round. Read together, these sources describe a product whose center of gravity is the interview loop itself — the kit the interviewer works from, the scorecard they file, and the reporting that shows where candidates came from and how long each stage took."
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Greenhouse excels in this area.",
-      "type": "text"
+      "title": "From application to onboarding handoff",
+      "type": "list",
+      "body": "Our guides describe the path a candidate takes through this platform, from the posting that opens the requisition to the workflow it starts in another system once the offer is signed. It is the sequence our HR technology guide places at the center of the applicant-tracking layer, and every recorded step below is a point where one of our own pages describes the product working:",
+      "items": [
+        "Job posting distribution and applicant pipeline tracking, the base functions our recruiting pricing guide lists for this class of tool",
+        "Structured interview kits that put the same questions and rubric in front of every interviewer",
+        "Scorecard-based evaluation, with top-scoring candidates advancing automatically to the next round",
+        "Reporting on source quality and time-to-hire, so recruiting spend can be read against channel performance",
+        "The HRIS handoff: an accepted offer triggers onboarding there, starting IT provisioning, payroll setup, and benefits enrollment",
+        "Cloud delivery with an API our dataset marks as available for connecting the surrounding stack"
+      ]
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Greenhouse excels in this area.",
-      "type": "text"
+      "title": "The two pricing pictures in our data",
+      "type": "text",
+      "body": "Three of our pages describe what Greenhouse costs and none quite the same way. This page records a list band of $150-200/mo. Our HR category page prices recruiting-specific tools on annual contracts rather than monthly seats, which contradicts the unit carried here. Our recruiting pricing guide then cuts the other direction: none of the platforms it evaluates carry published pricing verification, and it tells readers to check the vendor's own pricing page for exact rates. Treat the band above as a recorded figure for comparison purposes, not as a confirmed quote."
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Greenhouse excels in this area.",
-      "type": "text"
+      "title": "What the rankings say about Greenhouse",
+      "type": "text",
+      "body": "Greenhouse appears in more of our rankings than any other applicant tracking system in this cluster. It holds the number two position in our recruiting software ranking, described there as aimed at fast-growing startups that need a scalable platform, and the number five position in our HR platforms list. The segment pages for agencies, enterprise teams, freelancers, remote teams, small businesses, and startups all carry it at the same rank. Our recruiting ranking names it first among the entry points small teams typically start with, and separately calls it one of the strongest candidates for larger organizations."
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Greenhouse excels in this area.",
-      "type": "text"
+      "title": "How the head-to-head records read Greenhouse",
+      "type": "text",
+      "body": "Ten comparison files pair Greenhouse with another product. It is the recorded winner against ADP, Basecamp, Lever, Workday, and Zoho People, and the recorded loser against BambooHR, FreshBooks, Gusto, HiBob, and Rippling. Two of those pairings — Basecamp and FreshBooks — sit outside the HR category entirely, where the verdict turns on category fit rather than shared features. Inside the category the split is even, and every loss goes to an opponent with a higher recorded rating; our comparison pages do not itemize a single capability Greenhouse lacks."
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Greenhouse excels in this area.",
-      "type": "text"
+      "title": "Deployment and the certification record",
+      "type": "text",
+      "body": "Our dataset records Greenhouse as a cloud-delivered product with an API marked available, and that is the structural part of the deployment picture we can state with confidence. What no page in this repository records is a vendor certification: no compliance attestation for Greenhouse appears anywhere in our files. Buyers with a security review ahead of them check the vendor’s published documentation for the current position rather than infer anything from this page. Support tiers, uptime commitments, and data residency options are likewise absent from our records."
     },
     {
-      "title": "Conclusion",
-      "body": "Greenhouse achieves a 4.3/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable hr & people capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
+      "title": "What Greenhouse is recorded as not covering",
+      "type": "text",
+      "body": "Greenhouse is recorded as a paid product, so the free-tier language our generated notes once attached to it does not survive contact with the pricing fields. It is also not a payroll or core HR system: the same guide that places it in the stack describes a handoff to an HRIS, which only matters if something else holds the employee record. Beyond the hiring loop our files are silent on module scope — no benefits administration, time tracking, or performance features are recorded for Greenhouse either way — so a buyer comparing suites should treat those questions as open with the vendor."
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Greenhouse enables teams to Enterprise hiring platform with structur through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Greenhouse supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Greenhouse's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
-      "type": "text"
+      "title": "Who the guides point toward Greenhouse",
+      "type": "text",
+      "body": "The clearest fit statement in our files comes from the HR technology stack guide: companies hiring more than twenty people a year should evaluate dedicated platforms of this kind, and at seventy-five to two hundred employees it names Greenhouse as the upgrade path when recruiting volume demands it. Our recruiting ranking points the same way for small teams and separately lists it among the strongest candidates for larger organizations. Companies that hire only a few people a year, or that want payroll and employee records handled in the same system, sit outside what our records describe this product as being."
+    },
+    {
+      "title": "Basis of this assessment",
+      "type": "text",
+      "body": "This page reads back what our own reviews, rankings, comparisons, guides, and glossary entries record about Greenhouse; no one here has run a requisition through it. The rating and review count stored on the page — 4.3 out of 5 from 1,360 reviews — match what our comparison files use for Greenhouse, and the alternatives pages that list it carry the same figure. Where our pages disagree, as they do on the unit of its pricing, the disagreement is left standing rather than resolved in favor of one source."
     }
   ],
   "faqs": [
     {
-      "question": "What makes Greenhouse different from other hr & people tools?",
-      "answer": "Greenhouse differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Greenhouse ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Is Greenhouse an applicant tracking system or a full HR suite?",
+      "answer": "Our records file it as an enterprise hiring platform with structured interviewing — an ATS, not a payroll or core HR system. Our HR technology guide treats the handoff into a separate HRIS as the key integration point."
     },
     {
-      "question": "Can Greenhouse handle enterprise-scale requirements?",
-      "answer": "Yes, Greenhouse supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "What does Greenhouse cost according to this dataset?",
+      "answer": "This page records a list band of $150-200/mo. Our category page prices recruiting tools on annual contracts instead, and our pricing guide says none of the platforms it covers carry published pricing verification."
     },
     {
-      "question": "How long does it take to implement Greenhouse?",
-      "answer": "Most teams can get started with Greenhouse within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "How does Greenhouse do in the recorded comparisons?",
+      "answer": "It wins five of ten pairings — against ADP, Basecamp, Lever, Workday, and Zoho People — and loses five, to BambooHR, FreshBooks, Gusto, HiBob, and Rippling. Every recorded loss went to a product with a higher rating."
     },
     {
-      "question": "Does Greenhouse offer a free trial or money-back guarantee?",
-      "answer": "Greenhouse provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "Does Greenhouse start onboarding in another system?",
+      "answer": "Yes, per our employee onboarding glossary: when a candidate accepts an offer, platforms like this one trigger onboarding workflows in the HRIS so IT provisioning, payroll setup, and benefits enrollment begin without a manual relay."
     },
     {
-      "question": "What kind of support does Greenhouse offer?",
-      "answer": "Greenhouse provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Which of our rankings include Greenhouse?",
+      "answer": "It is number two in our recruiting software ranking and number five in our HR platforms list, and it carries the same rank across our segment pages for agencies, enterprise teams, freelancers, remote teams, small businesses, and startups."
     }
   ],
   "relatedComparisons": [],
@@ -201,7 +214,7 @@
     "migrationComplexity": "Medium"
   },
   "difficulty": "Intermediate",
-  "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "Greenhouse is designed for fast-growing startups that need a scalable hr & people platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Greenhouse is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "learningCurve": "Team-dependent — interview kits and scorecards must be configured before the first requisition opens",
+  "whoShouldUse": "Companies hiring more than twenty people a year that need a dedicated applicant tracking layer in front of an HRIS, and larger organizations our recruiting ranking names among the strongest candidates for enterprise use.",
+  "whoShouldNotUse": "Teams that hire only occasionally and want payroll or employee records handled in the same system, plus buyers who need published support terms or certifications on file before signing."
 }

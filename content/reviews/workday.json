@@ -2,7 +2,7 @@
   "slug": "workday",
   "name": "Workday",
   "tagline": "Enterprise cloud HCM and finance management platform.",
-  "description": "Enterprise cloud HCM and finance management platform.",
+  "description": "Workday is recorded as an enterprise cloud HCM and finance platform that our pricing guide says rarely publishes list prices, quoting by company size.",
   "category": "HR & People",
   "website": "https://workday.com",
   "pricing": "Paid",
@@ -10,65 +10,65 @@
   "rating": 4.1,
   "reviewCount": 1680,
   "pros": [
-    "Excellent hr & people capabilities with intuitive interface and powerful features",
-    "Strong integration ecosystem connecting with major platforms and services",
-    "Competitive pricing structure with good value for the feature set offered",
-    "Regular product updates and improvements based on user feedback",
-    "Responsive customer support team with expertise in the product"
+    "Our pricing guide groups Workday with vendors that quote by company size, geography, industry complexity, and modules — a model that suits multi-country operations better than a fixed band",
+    "The category page records Workday as the leader of the enterprise HR cloud market ahead of SAP SuccessFactors, Oracle HCM, and UKG",
+    "Our enterprise hub lists Workday among the major providers offering regional instance deployment, where data runs in designated geographic data centers",
+    "Payroll sits inside the platform: our best HR software page describes Workday as a full HCM that includes payroll while still integrating third-party providers",
+    "Our ATS glossary carries a Workday-specific workflow: an accepted offer plus a completed background check triggering onboarding in the HRIS automatically"
   ],
   "cons": [
-    "Learning curve for advanced features may require dedicated training time",
-    "Some enterprise features only available on higher-tier plans or custom pricing",
-    "Limited offline capabilities in the current version"
+    "No list price exists anywhere in our records — the pricing guide says Workday rarely publishes one — so no budget can be built from this repository alone",
+    "The recorded comparison record is one win against seven losses, all decided on rating, which sits awkwardly beside the market-leadership claim on our category page",
+    "Our HR technology guide places suites this size beyond two hundred employees, with migration cost and an implementation timeline long enough to make the move its own project"
   ],
   "features": [
     {
-      "name": "Core Platform",
-      "description": "Full-featured hr & people platform with comprehensive tooling",
+      "name": "Full HCM with payroll",
+      "description": "Our best HR software page describes Workday as a full HCM platform that includes payroll, placing payroll inside the product rather than beside it.",
       "available": true,
       "category": "Core"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and automation",
+      "name": "Third-party payroll integration",
+      "description": "The same page records that Workday can also integrate with third-party payroll providers, so an organization can keep an existing payroll relationship under the HCM.",
       "available": true,
       "category": "Integrations"
     },
     {
-      "name": "Analytics",
-      "description": "Built-in analytics and reporting dashboards",
+      "name": "Custom quote pricing model",
+      "description": "Our pricing guide says Workday rarely publishes list prices and quotes by company size, geography, industry complexity, required modules, and integration needs.",
       "available": true,
-      "category": "Reporting"
+      "category": "Pricing"
     },
     {
-      "name": "Collaboration",
-      "description": "Team collaboration and sharing capabilities",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Security Controls",
-      "description": "Role-based access and security configurations",
+      "name": "Regional instance deployment",
+      "description": "Our enterprise software hub lists Workday among major providers offering regional instances, where data runs in designated geographic data centers.",
       "available": true,
       "category": "Security"
     },
     {
-      "name": "Mobile Access",
-      "description": "Mobile application for on-the-go access",
-      "available": true,
-      "category": "Usability"
-    },
-    {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and services",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Export & Migration",
-      "description": "Data export tools for backup and migration",
+      "name": "Finance management scope",
+      "description": "The recorded tagline pairs enterprise cloud HCM with finance management, and our category page describes platforms of this class as integrating with other enterprise systems.",
       "available": true,
       "category": "Core"
+    },
+    {
+      "name": "ATS-triggered onboarding workflow",
+      "description": "Our ATS glossary carries a Workday example where an accepted offer and a completed background check automatically trigger an onboarding workflow in the HRIS.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Multi-state and multi-country operations",
+      "description": "Our buying guide points enterprises with complex multi-state or multi-country operations to platforms of this depth, which handle the structural complexity that comes with them.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Cloud delivery with a recorded API",
+      "description": "This repository records Workday as a cloud-hosted service with an API field marked available, the delivery and integration shape our dataset carries for it.",
+      "available": true,
+      "category": "Integrations"
     }
   ],
   "ratings": [
@@ -111,71 +111,83 @@
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates Workday across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your hr & people needs.",
-      "type": "text"
+      "title": "Workday as a full HCM platform",
+      "type": "text",
+      "body": "Our best HR software page describes Workday as a full HCM platform that includes payroll but can also integrate with third-party payroll providers, and its recorded tagline adds finance management to the same cloud product. That combination sets the scale of everything else on this page: our HR technology guide places suites like Workday beyond two hundred employees, where migration cost and an implementation timeline long enough to deserve their own budget line make the move a deliberate one. The category page backs the positioning, describing enterprise HCM clouds of this kind as serving global capabilities, deep configurability, and integration with other enterprise systems."
     },
     {
-      "title": "What Is This Tool",
-      "body": "Workday serves the hr & people category with a focused set of capabilities designed to address specific pain points that teams in this space commonly face.",
-      "type": "text"
+      "title": "Custom quotes instead of published prices",
+      "type": "text",
+      "body": "Our HR software pricing guide is explicit about how Workday is sold: it rarely publishes list prices, offering custom quotes built from company size, geographic distribution, industry complexity, required modules, and integration needs. This page's own price field says the same thing in one word — Custom. The buyers' guide adds that enterprise suites like this one scale on per-employee pricing with cost rising as more modules are added, which is why two organizations with the same headcount can receive very different quotes. Budgeting from this repository alone is not possible; the guide's own advice is to check the vendor's pricing page."
     },
     {
-      "title": "Core Capabilities",
-      "body": "The platform delivers essential functionality through a well-designed interface and robust feature set. Workday excels in this area.",
-      "type": "text"
+      "title": "Where the pairings land for Workday",
+      "type": "list",
+      "body": "Eight comparison files pair Workday with another product, and the recorded outcomes run heavily one way: only one pairing ends in Workday's favor, and the deciding row in every file is the stored user rating rather than any recorded capability gap — with starting price marked for both sides throughout, since Workday quotes custom rather than publishing a band. The set, as our files hold it:",
+      "items": [
+        "One recorded win, against ADP, decided on the rating row where Workday sits at 4.1 against 4",
+        "Seven recorded losses, to BambooHR, Greenhouse, Gusto, HiBob, Lever, Rippling, and Zoho People",
+        "Every loss decided on the rating row: no comparison file records a capability Workday lacks",
+        "Starting price marked for both sides in all eight pairings, since Workday quotes custom rather than publishing a band",
+        "A recorded rating of 4.1 out of 5 from 1,680 reviews, below every product in this set except ADP"
+      ]
     },
     {
-      "title": "User Interface & Experience",
-      "body": "The platform emphasizes usability with clean design, logical workflows, and minimal learning curve. Workday excels in this area.",
-      "type": "text"
+      "title": "Market position against comparison verdicts",
+      "type": "text",
+      "body": "Our HR category page leads with Workday: it records Workday as the leader of the enterprise HR cloud market, ahead of SAP SuccessFactors, Oracle HCM, and UKG, and describes enterprises choosing platforms of this type for global scope and configurability. The comparison record reads differently. Out of eight pairings Workday wins one, and the losses run to mid-market HR suites as well as to dedicated recruiting platforms. Both statements are ours, and nothing in the repository reconciles them: market position and stored ratings measure different things, drawn from different sources — but a buyer should notice that our own pages do not point in the same direction."
     },
     {
-      "title": "Pricing Analysis",
-      "body": "Pricing is structured to provide value across different organization sizes and use cases. Workday excels in this area.",
-      "type": "text"
+      "title": "What our guides ask buyers to weigh",
+      "type": "text",
+      "body": "Three of our guides address when Workday fits. The buying guide says larger enterprises with complex multi-state or multi-country operations typically need the depth of platforms like this one, and notes that vendors charge separately for modules — payroll usually sits in the base price while benefits administration, time tracking, talent management, and advanced reporting are often add-ons. The HR technology guide puts suites of this kind beyond two hundred employees, with migration cost and implementation timeline making the jump deliberate rather than routine. The pricing guide adds that quotes run on a fixed validity window, so renewal timing belongs in the cost picture."
     },
     {
-      "title": "Customer Support",
-      "body": "Support options include comprehensive documentation, community forums, and direct support channels. Workday excels in this area.",
-      "type": "text"
+      "title": "Onboarding automation in the ATS example",
+      "type": "text",
+      "body": "One recorded Workday workflow is specific enough to quote: our applicant tracking glossary carries an example of a Workday ATS triggering an onboarding workflow in the HRIS automatically when a candidate accepts an offer and completes a background check. That example matters for two reasons. It confirms the offer-acceptance trigger is part of how Workday's recruiting side is described in our files, and it shows the automation crossing from recruiting into the employee record rather than stopping at the signed offer — the boundary where handoffs between systems usually break. No further workflow detail for Workday is recorded elsewhere in this repository."
     },
     {
-      "title": "Security & Data Protection",
-      "body": "The platform implements security best practices including encryption and access controls. Workday excels in this area.",
-      "type": "text"
+      "title": "Regional instances and the certification record",
+      "type": "text",
+      "body": "For deployment, our enterprise software hub lists Workday among the major providers offering regional instance deployment, where data runs in designated geographic data centers — a data residency option our files state structurally but do not detail further. The same hub treats Workday as a platform-level vendor relationship worth budgeting alongside Salesforce or SAP-class systems, consistent with the enterprise positioning elsewhere in our records. What is missing is certifications: no compliance attestation for Workday appears anywhere in this repository. Support tiers and uptime commitments are likewise absent, so security review material has to come from the vendor."
     },
     {
-      "title": "Conclusion",
-      "body": "Workday achieves a 4.1/5 rating in our comprehensive evaluation. It is an excellent choice for teams that need reliable hr & people capabilities with strong user experience. The platform's main limitation is that its broad feature set may include capabilities some teams do not need. We recommend it for organizations that value usability and integration quality.",
-      "type": "text"
+      "title": "Where Workday does not fit",
+      "type": "text",
+      "body": "The fit limits our records place around Workday start with scale. Our HR technology guide reserves suites of this kind for beyond two hundred employees and flags migration cost and implementation timeline as reasons to move only when the current stack creates measurable friction. Published pricing does not exist for it in our files, which makes small-budget evaluation hard: there is no band to compare against. The comparison record adds a second limit — seven of eight pairings go against Workday, each decided on rating, so our own pages consistently recommend other products head-to-head. In fairness, several of our small-team ranking answers do name Workday among the starting options."
     },
     {
-      "title": "Real-World Use Cases",
-      "body": "Team Collaboration: Workday enables teams to Enterprise cloud HCM and finance managem through its core platform, making it ideal for cross-functional teams that need centralized workflows.\n\nRemote Work: With its cloud-based architecture, Workday supports distributed teams that need access to tools and data from anywhere, with reliable performance across devices.\n\nScalability: Organizations planning for growth will appreciate Workday's ability to scale from small teams to enterprise deployments without major infrastructure changes.",
-      "type": "text"
+      "title": "The rating rows that disagree",
+      "type": "text",
+      "body": "This page records Workday at 4.1 out of 5 from 1,680 reviews, and all eight comparison descriptions use the same 4.1. The alternatives pages do not: every alternatives file that lists Workday shows 4.9, a figure that appears nowhere else in the repository for this product. The same pages differ for other products too — HiBob at 4.5 against its recorded 4.4, Zoho People at 4 against its recorded 4.2 — which suggests the alternatives descriptions carry their own rating set rather than reading it from the review files. Nothing in our data says which is current, so both figures stand as found."
+    },
+    {
+      "title": "What this page rests on for Workday",
+      "type": "text",
+      "body": "What precedes is this repository's written record of Workday — guides, rankings, comparisons, category pages, and glossary entries — with nothing added from a deployment anyone here has run. The 4.1 rating and 1,680-review count are the fields stored on this page. Where our pages conflict — on the rating above, or on market position against comparison verdicts — both readings are carried forward rather than chosen between, and no capability has been inferred from the category to fill gaps the record leaves."
     }
   ],
   "faqs": [
     {
-      "question": "What makes Workday different from other hr & people tools?",
-      "answer": "Workday differentiates itself through its focus on user experience and integration quality. Unlike competitors that prioritize feature quantity, Workday ensures that every capability is polished and genuinely useful for daily workflows."
+      "question": "Why does this page show Custom instead of a price?",
+      "answer": "Our pricing guide says Workday rarely publishes list prices and quotes by company size, geography, industry complexity, required modules, and integration needs, so the price field on this file reads Custom."
     },
     {
-      "question": "Can Workday handle enterprise-scale requirements?",
-      "answer": "Yes, Workday supports enterprise deployments with features like SSO, role-based access control, audit logging, and dedicated support options. Organizations with complex compliance requirements should verify specific certifications against their needs during a trial."
+      "question": "Is Workday the market leader, and does it win its comparisons?",
+      "answer": "Our category page records it leading the enterprise HR cloud market ahead of SAP SuccessFactors, Oracle HCM, and UKG. Our comparison files pick Workday in one of eight pairings — against ADP — with every loss decided on rating."
     },
     {
-      "question": "How long does it take to implement Workday?",
-      "answer": "Most teams can get started with Workday within a day for basic use cases. Full deployment across an organization with integrations, user training, and custom configuration typically takes one to three weeks depending on team size and complexity."
+      "question": "Why do the alternatives pages show 4.9 for Workday?",
+      "answer": "This page and all eight comparison files record 4.1 out of 5. The alternatives descriptions show 4.9, a figure that appears nowhere else here. Our dataset does not say which is current."
     },
     {
-      "question": "Does Workday offer a free trial or money-back guarantee?",
-      "answer": "Workday provides a trial period that gives you full access to evaluate the platform. We recommend using this time to test with real data and involve multiple team members in the evaluation process."
+      "question": "Does Workday include payroll?",
+      "answer": "Yes, per our best HR software page: Workday is described as a full HCM platform that includes payroll and can also integrate third-party payroll providers when an organization prefers to keep them."
     },
     {
-      "question": "What kind of support does Workday offer?",
-      "answer": "Workday provides tiered support starting with documentation and community resources, progressing to email and priority support on higher-tier plans. Enterprise customers typically receive dedicated account management and faster response SLAs."
+      "question": "Should a small team consider Workday?",
+      "answer": "Our HR technology guide places suites like Workday beyond two hundred employees, but several of our small-team ranking answers name it anyway. Both statements are ours; the fit question is the buyer's to settle."
     }
   ],
   "relatedComparisons": [],
@@ -200,8 +212,8 @@
     "apiAvailable": true,
     "migrationComplexity": "Medium"
   },
-  "difficulty": "Beginner",
-  "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "Workday is designed for fast-growing startups that need a scalable hr & people platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Workday may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
+  "difficulty": "Advanced",
+  "learningCurve": "Enterprise implementation scale: our HR technology guide describes migration cost and a long timeline as reasons to move only when the current stack forces it",
+  "whoShouldUse": "Enterprises with complex multi-state or multi-country operations that need deep configurability and can run a quote-based buying process, typically beyond two hundred employees per our HR technology guide.",
+  "whoShouldNotUse": "Organizations that need a published price to build a budget, small teams evaluating tools at a glance, and buyers who want our head-to-head records to pick a winner — seven of eight go against Workday."
 }
