@@ -17,7 +17,7 @@ export async function GET() {
       <content:encoded><![CDATA[<p>${escapeXml(r.description)}</p><p>Read the full review at ${site.url}/reviews/${r.slug}</p>]]></content:encoded>
       <link>${site.url}/reviews/${r.slug}</link>
       <guid isPermaLink="true">${site.url}/reviews/${r.slug}</guid>
-      <pubDate>${new Date(r.lastReviewed).toUTCString()}</pubDate>
+      <pubDate>${new Date(r.contentPublished).toUTCString()}</pubDate>
       <dc:creator>${escapeXml(r.author)}</dc:creator>
       <category>${escapeXml(r.category)}</category>
       <category>Software Review</category>
@@ -74,20 +74,21 @@ export async function GET() {
     .join("")
 
   const researchItems = research
-    .map(
-      (r) => `
+    .map((r) => {
+      const pubDate = r.publishedAt || r.updatedAt
+      return `
     <item>
       <title>${escapeXml(r.title)}</title>
       <description>${escapeXml(r.description)}</description>
       <content:encoded><![CDATA[<p>${escapeXml(r.description)}</p><p>Read the full research report at ${site.url}/research/${r.slug}</p>]]></content:encoded>
       <link>${site.url}/research/${r.slug}</link>
-      <guid isPermaLink="true">${site.url}/research/${r.slug}</guid>
-      <pubDate>${new Date(r.publishedAt || r.updatedAt || new Date().toISOString()).toUTCString()}</pubDate>
+      <guid isPermaLink="true">${site.url}/research/${r.slug}</guid>${pubDate ? `
+      <pubDate>${new Date(pubDate).toUTCString()}</pubDate>` : ""}
       <dc:creator>${escapeXml(r.author || "PilotStack Team")}</dc:creator>
       <category>${escapeXml(r.category)}</category>
       <category>Research Report</category>
     </item>`
-    )
+    })
     .join("")
 
   const rss = `<?xml version="1.0" encoding="UTF-8"?>

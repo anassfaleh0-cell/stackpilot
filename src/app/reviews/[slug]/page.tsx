@@ -42,8 +42,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       reviewMetaDescription(tool.name, tool.tagline, tool.category),
     path: `/reviews/${tool.slug}`,
     ogType: "article",
-    publishedAt: tool.lastReviewed,
-    updatedAt: tool.lastReviewed,
+    publishedAt: tool.contentPublished,
+    updatedAt: tool.contentModified,
     articleSection: tool.category,
     readingTime: Math.max(3, Math.ceil(wordCount / 200)),
     noIndex: noindexed,
@@ -77,10 +77,10 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
         { name: "Reviews", href: "/reviews" },
         { name: tool.name, href: `/reviews/${tool.slug}` },
       ]} />
-      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.lastReviewed} body={tool.description} image={tool.logo ? `${site.url}${tool.logo}` : undefined} companyInfo={companyFacts} />
+      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.contentPublished} body={tool.description} image={tool.logo ? `${site.url}${tool.logo}` : undefined} companyInfo={companyFacts} />
       <SoftwareSchema name={tool.name} description={tool.tagline} category={tool.category} brand={tool.name} platforms={entity?.company?.platforms || tool.company?.deployment} url={`${site.url}/reviews/${tool.slug}`} image={tool.logo ? `${site.url}${tool.logo}` : undefined} offers={entity?.pricing?.[0]?.price !== undefined && entity.pricing[0].price !== null ? { price: entity.pricing[0].price, priceCurrency: entity.pricing[0].currency || "USD", url: tool.website || undefined } : undefined} />
-      <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.lastReviewed} />
-      <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.lastReviewed} updatedAt={tool.lastReviewed} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} keywords={[`${tool.name} review`, `${tool.name} pricing`, `${tool.name} pros and cons`, `${tool.category} software`, `${tool.name} alternatives`]} mentions={[{ name: tool.name, url: tool.website || `${site.url}/reviews/${tool.slug}` }]} />
+      <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.contentModified} />
+      <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.contentPublished} updatedAt={tool.contentModified} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} keywords={[`${tool.name} review`, `${tool.name} pricing`, `${tool.name} pros and cons`, `${tool.category} software`, `${tool.name} alternatives`]} mentions={[{ name: tool.name, url: tool.website || `${site.url}/reviews/${tool.slug}` }]} />
       <FAQSchema questions={tool.faqs} path={`/reviews/${tool.slug}`} />
 
       <Container className="pt-8">
@@ -128,7 +128,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 </span>
                 <span className="flex items-center gap-1">
                   <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
-                  Updated {formatDate(tool.lastReviewed)}
+                  Published {formatDate(tool.contentPublished)}
                 </span>
                 <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we score</a>
               </div>
@@ -459,7 +459,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 </GlassCard>
 
                 {/* Expert Reviewer */}
-                <EditorialExpert author={tool.author} reviewedAt={tool.lastReviewed} />
+                <EditorialExpert author={tool.author} />
 
                 {/* EEAT Process */}
                 <EEATProcess category={tool.category} />
@@ -546,8 +546,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
           <section className="mt-16 mb-8">
             <h2 className="text-lg font-bold tracking-tight mb-3">Sources &amp; Methodology</h2>
             <div className="text-xs text-muted-foreground leading-relaxed space-y-1.5">
-              <p>Each page shows an overall rating plus {tool.ratings.length} recorded category ratings on a 1-5 scale, all drawn from the PilotStack dataset. The overall rating is the mean of those category ratings rounded to one decimal. Review counts, pricing and feature availability are recorded as of the review date and may change. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for how ratings are calculated, what each page is sourced from, and our editorial independence policy.</p>
-              <p>Last reviewed: {tool.lastReviewed} · No vendor payment or sponsorship influenced this review · We may earn affiliate commission on purchases made through links on this site.</p>
+              <p>Each page shows an overall rating plus {tool.ratings.length} recorded category ratings on a 1-5 scale, all drawn from the PilotStack dataset. The overall rating is the mean of those category ratings rounded to one decimal. Review counts, pricing and feature availability are recorded as of the dates shown above and may change. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for how ratings are calculated, what each page is sourced from, and our editorial independence policy.</p>
+              <p>Content updated: {formatDate(tool.contentModified)} · No vendor payment or sponsorship influenced this review · We may earn affiliate commission on purchases made through links on this site.</p>
             </div>
           </section>
 
@@ -566,7 +566,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
             </div>
             <div className="mt-4 text-center">
               <p className="text-xs text-muted-foreground">
-                Prices and ratings are approximate and may vary. Last updated {tool.lastReviewed}.
+                Prices and ratings are approximate and may vary.
               </p>
             </div>
           </section>

@@ -83,10 +83,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       priority: 0.8,
     })),
-    // Reviews: use lastReviewed as lastModified
+    // Reviews: use contentModified as lastModified
     ...reviews.map((r) => ({
       url: `${siteConfig.url}/reviews/${r.slug}`,
-      lastModified: new Date(r.lastReviewed),
+      lastModified: new Date(r.contentModified),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     })),

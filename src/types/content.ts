@@ -22,7 +22,10 @@ export interface ReviewContent {
   relatedGuides: string[]
   relatedComparisons?: string[]
   relatedPosts?: string[]
-  lastReviewed: string
+  /** First git-added date of this review file (ISO, YYYY-MM-DD). */
+  contentPublished: string
+  /** Latest git commit date touching this review file (ISO, YYYY-MM-DD). */
+  contentModified: string
   author: string
   company?: CompanyInfo
   /** Optional per-page search title. Falls back to the shared review title template. */

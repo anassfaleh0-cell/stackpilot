@@ -4,7 +4,7 @@ const reviewerProfiles: Record<string, { name: string; role: string; expertise: 
   "PilotStack Team": { name: "PilotStack Team", role: "Editorial Team", expertise: "Software Evaluation, Pricing Analysis, Market Research", initials: "PT" },
 }
 
-export function EditorialExpert({ author, reviewedAt }: { author: string; reviewedAt: string }) {
+export function EditorialExpert({ author }: { author: string }) {
   const profile = reviewerProfiles[author] || {
     name: author,
     role: "Editorial Team",
@@ -28,7 +28,6 @@ export function EditorialExpert({ author, reviewedAt }: { author: string; review
         <p className="text-xs text-muted-foreground">
           <span className="font-medium text-foreground">Expertise:</span> {profile.expertise}
         </p>
-        <p className="text-xs text-muted-foreground mt-1">Reviewed: {reviewedAt}</p>
       </div>
     </GlassCard>
   )

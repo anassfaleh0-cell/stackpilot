@@ -38,7 +38,7 @@ export function isContentAvailable(type: string, slug: string): boolean {
   return !isNoindexed(dir, slug)
 }
 
-const DATE_FIELDS = new Set(["lastUpdated", "lastReviewed", "publishedAt", "updatedAt", "datePublished", "dateModified"])
+const DATE_FIELDS = new Set(["lastUpdated", "contentPublished", "contentModified", "publishedAt", "updatedAt", "datePublished", "dateModified"])
 
 function toISODate(date: string): string {
   const d = new Date(date)
