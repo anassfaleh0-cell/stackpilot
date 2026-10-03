@@ -103,9 +103,9 @@ describe("T-PROV-01: every review slug has provenance and coverage is numeric", 
     }
   })
 
-  it("represents all 728 expected claim paths", () => {
-    expect(PROVENANCE_CLAIM_PATHS).toHaveLength(14)
-    expect(PROVENANCE_CLAIM_COUNT).toBe(728)
+  it("represents all 676 expected claim paths", () => {
+    expect(PROVENANCE_CLAIM_PATHS).toHaveLength(13)
+    expect(PROVENANCE_CLAIM_COUNT).toBe(676)
 
     let total = 0
     for (const entry of stored) {
@@ -116,7 +116,7 @@ describe("T-PROV-01: every review slug has provenance and coverage is numeric", 
       total += entry.claims.length
     }
     expect(total).toBe(PROVENANCE_CLAIM_COUNT)
-    expect(total).toBe(728)
+    expect(total).toBe(676)
   })
 
   it("reports record coverage and source-linked coverage as separate numbers", () => {
@@ -125,15 +125,15 @@ describe("T-PROV-01: every review slug has provenance and coverage is numeric", 
     expect(typeof coverage.recordCoveragePercent).toBe("number")
     expect(typeof coverage.sourceLinkedCoveragePercent).toBe("number")
 
-    expect(coverage.totalExpectedClaims).toBe(728)
-    expect(coverage.claimsWithProvenance).toBe(728)
+    expect(coverage.totalExpectedClaims).toBe(676)
+    expect(coverage.claimsWithProvenance).toBe(676)
     expect(coverage.claimsMissingProvenance).toBe(0)
     expect(coverage.recordCoveragePercent).toBe(100)
     expect(coverage.recordsComplete).toBe(true)
 
     expect(coverage.claimsWithValidSourceRefs).toBe(14)
-    expect(coverage.claimsWithoutSourceRefs).toBe(714)
-    expect(coverage.sourceLinkedCoveragePercent).toBe(1.92)
+    expect(coverage.claimsWithoutSourceRefs).toBe(662)
+    expect(coverage.sourceLinkedCoveragePercent).toBe(2.07)
     expect(coverage.sourceLinksComplete).toBe(false)
 
     expect(coverage.recordCoveragePercent).toBeGreaterThan(coverage.sourceLinkedCoveragePercent)
@@ -142,17 +142,17 @@ describe("T-PROV-01: every review slug has provenance and coverage is numeric", 
 
   it("does not describe incomplete coverage as verified", () => {
     const coverage = getCoverage()
-    expect(coverage.byStatus).toEqual({ MISSING: 728 })
+    expect(coverage.byStatus).toEqual({ MISSING: 676 })
     expect(coverage.byStatus.VERIFIED).toBeUndefined()
     expect(coverage.sourceLinksComplete).toBe(false)
   })
 
-  it("computes per-slug coverage against 14 expected claims", () => {
+  it("computes per-slug coverage against 13 expected claims", () => {
     const coverage = getCoverage("okta")
     expect(coverage.scope).toBe("review")
     expect(coverage.slug).toBe("okta")
-    expect(coverage.totalExpectedClaims).toBe(14)
-    expect(coverage.claimsWithProvenance).toBe(14)
+    expect(coverage.totalExpectedClaims).toBe(13)
+    expect(coverage.claimsWithProvenance).toBe(13)
     expect(coverage.claimsMissingProvenance).toBe(0)
     expect(coverage.recordCoveragePercent).toBe(100)
     expect(coverage.sourceLinkedCoveragePercent).toBeGreaterThan(0)
@@ -164,16 +164,21 @@ describe("T-PROV-01: every review slug has provenance and coverage is numeric", 
     const phase5b = JSON.parse(fs.readFileSync(PHASE5B_FILE, "utf8")) as {
       provenance_claims: { slug: string; fact: string; class: string; phase4_status: string; recommended_handling: string }[]
     }
+    expect(phase5b.provenance_claims).toHaveLength(728)
+
+    const activePaths = new Set<string>(PROVENANCE_CLAIM_PATHS)
     const expected = new Map(
-      phase5b.provenance_claims.map(record => [`${record.slug}#${record.fact}`, record])
+      phase5b.provenance_claims
+        .filter(record => activePaths.has(record.fact))
+        .map(record => [`${record.slug}#${record.fact}`, record])
     )
-    expect(expected.size).toBe(728)
+    expect(expected.size).toBe(676)
 
     const actual = new Map<string, ProvenanceClaim>()
     for (const entry of stored) {
       for (const claim of entry.claims) actual.set(claim.claim_id, claim)
     }
-    expect(actual.size).toBe(728)
+    expect(actual.size).toBe(676)
     expect([...actual.keys()].sort()).toEqual([...expected.keys()].sort())
 
     for (const [claimId, claim] of actual) {
@@ -223,9 +228,9 @@ describe("T-PROV-02: source references resolve and readers fail soft", () => {
     expect(getClaim("no-such-review-slug", "rating")).toBeNull()
 
     const coverage = getCoverage("no-such-review-slug")
-    expect(coverage.totalExpectedClaims).toBe(14)
+    expect(coverage.totalExpectedClaims).toBe(13)
     expect(coverage.claimsWithProvenance).toBe(0)
-    expect(coverage.claimsMissingProvenance).toBe(14)
+    expect(coverage.claimsMissingProvenance).toBe(13)
     expect(coverage.recordCoveragePercent).toBe(0)
     expect(coverage.recordsComplete).toBe(false)
     expect(() => getClaims("")).not.toThrow()
@@ -301,8 +306,22 @@ describe("T-PROV-03: schema, enums, deterministic identity", () => {
         ids.push(claim.claim_id)
       }
     }
-    expect(ids).toHaveLength(728)
-    expect(new Set(ids).size).toBe(728)
+    expect(ids).toHaveLength(676)
+    expect(new Set(ids).size).toBe(676)
+  })
+
+  it("keeps the retired last_reviewed path and its date replacements out of the store", () => {
+    const retired = new Set<string>(["last_reviewed", "content_published", "content_modified"])
+    for (const entry of stored) {
+      for (const claim of entry.claims) {
+        expect(retired.has(claim.claim_path)).toBe(false)
+        expect(retired.has(claim.claim_id.replace(`${entry.slug}#`, ""))).toBe(false)
+      }
+    }
+    expect(PROVENANCE_CLAIM_PATHS).not.toContain("last_reviewed" as never)
+    expect(PROVENANCE_CLAIM_PATHS).not.toContain("content_published" as never)
+    expect(PROVENANCE_CLAIM_PATHS).not.toContain("content_modified" as never)
+    expect(PROVENANCE_CLAIM_COUNT).toBe(PROVENANCE_REVIEW_SLUG_COUNT * PROVENANCE_CLAIM_PATHS.length)
   })
 
   it("derives deterministic source ids from the canonical url", () => {

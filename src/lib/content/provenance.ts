@@ -13,7 +13,6 @@ export const PROVENANCE_CLAIM_PATHS = [
   "price_range",
   "pricing_object",
   "author",
-  "last_reviewed",
   "pros",
   "cons",
   "features",
