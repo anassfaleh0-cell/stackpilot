@@ -271,3 +271,11 @@ export function searchContent(query: string): {
     blog: getAllBlogPosts().filter((b) => match(b.title) || match(b.description)),
   }
 }
+
+export {
+  getClaims,
+  getClaim,
+  getSources,
+  getSource,
+  getCoverage,
+} from "@/lib/content/provenance"

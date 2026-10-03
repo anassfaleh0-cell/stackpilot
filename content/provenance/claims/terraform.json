@@ -1,0 +1,156 @@
+[
+  {
+    "claim_id": "terraform#rating",
+    "claim_path": "rating",
+    "provenance_class": "B",
+    "status": "MISSING",
+    "handling": "KEEP",
+    "source_ids": [],
+    "conflict_group": null,
+    "last_checked": "2026-10-03T00:00:00Z",
+    "next_check_due": "2027-10-03T00:00:00Z"
+  },
+  {
+    "claim_id": "terraform#review_count",
+    "claim_path": "review_count",
+    "provenance_class": "A",
+    "status": "MISSING",
+    "handling": "REMAIN_UNVERIFIED",
+    "source_ids": [],
+    "conflict_group": null,
+    "last_checked": "2026-10-03T00:00:00Z",
+    "next_check_due": "2027-10-03T00:00:00Z"
+  },
+  {
+    "claim_id": "terraform#price_range",
+    "claim_path": "price_range",
+    "provenance_class": "A",
+    "status": "MISSING",
+    "handling": "REQUIRE_MANUAL_REVIEW",
+    "source_ids": [],
+    "conflict_group": null,
+    "last_checked": "2026-10-03T00:00:00Z",
+    "next_check_due": "2027-01-01T00:00:00Z"
+  },
+  {
+    "claim_id": "terraform#pricing_object",
+    "claim_path": "pricing_object",
+    "provenance_class": "A",
+    "status": "MISSING",
+    "handling": "REQUIRE_MANUAL_REVIEW",
+    "source_ids": [],
+    "conflict_group": null,
+    "last_checked": "2026-10-03T00:00:00Z",
+    "next_check_due": "2027-01-01T00:00:00Z"
+  },
+  {
+    "claim_id": "terraform#author",
+    "claim_path": "author",
+    "provenance_class": "D",
+    "status": "MISSING",
+    "handling": "ADD_PROVENANCE",
+    "source_ids": [],
+    "conflict_group": null,
+    "last_checked": "2026-10-03T00:00:00Z",
+    "next_check_due": "2027-10-03T00:00:00Z"
+  },
+  {
+    "claim_id": "terraform#last_reviewed",
+    "claim_path": "last_reviewed",
+    "provenance_class": "D",
+    "status": "MISSING",
+    "handling": "REQUIRE_MANUAL_REVIEW",
+    "source_ids": [],
+    "conflict_group": null,
+    "last_checked": "2026-10-03T00:00:00Z",
+    "next_check_due": "2027-10-03T00:00:00Z"
+  },
+  {
+    "claim_id": "terraform#pros",
+    "claim_path": "pros",
+    "provenance_class": "C",
+    "status": "MISSING",
+    "handling": "ADD_PROVENANCE",
+    "source_ids": [],
+    "conflict_group": null,
+    "last_checked": "2026-10-03T00:00:00Z",
+    "next_check_due": "2027-10-03T00:00:00Z"
+  },
+  {
+    "claim_id": "terraform#cons",
+    "claim_path": "cons",
+    "provenance_class": "C",
+    "status": "MISSING",
+    "handling": "ADD_PROVENANCE",
+    "source_ids": [],
+    "conflict_group": null,
+    "last_checked": "2026-10-03T00:00:00Z",
+    "next_check_due": "2027-10-03T00:00:00Z"
+  },
+  {
+    "claim_id": "terraform#features",
+    "claim_path": "features",
+    "provenance_class": "C",
+    "status": "MISSING",
+    "handling": "ADD_PROVENANCE",
+    "source_ids": [],
+    "conflict_group": null,
+    "last_checked": "2026-10-03T00:00:00Z",
+    "next_check_due": "2027-10-03T00:00:00Z"
+  },
+  {
+    "claim_id": "terraform#faqs",
+    "claim_path": "faqs",
+    "provenance_class": "C",
+    "status": "MISSING",
+    "handling": "ADD_PROVENANCE",
+    "source_ids": [],
+    "conflict_group": null,
+    "last_checked": "2026-10-03T00:00:00Z",
+    "next_check_due": "2027-10-03T00:00:00Z"
+  },
+  {
+    "claim_id": "terraform#difficulty",
+    "claim_path": "difficulty",
+    "provenance_class": "C",
+    "status": "MISSING",
+    "handling": "ADD_PROVENANCE",
+    "source_ids": [],
+    "conflict_group": null,
+    "last_checked": "2026-10-03T00:00:00Z",
+    "next_check_due": "2027-10-03T00:00:00Z"
+  },
+  {
+    "claim_id": "terraform#learning_curve",
+    "claim_path": "learning_curve",
+    "provenance_class": "C",
+    "status": "MISSING",
+    "handling": "ADD_PROVENANCE",
+    "source_ids": [],
+    "conflict_group": null,
+    "last_checked": "2026-10-03T00:00:00Z",
+    "next_check_due": "2027-10-03T00:00:00Z"
+  },
+  {
+    "claim_id": "terraform#who_should_use",
+    "claim_path": "who_should_use",
+    "provenance_class": "E",
+    "status": "MISSING",
+    "handling": "ADD_PROVENANCE",
+    "source_ids": [],
+    "conflict_group": null,
+    "last_checked": "2026-10-03T00:00:00Z",
+    "next_check_due": "2027-10-03T00:00:00Z"
+  },
+  {
+    "claim_id": "terraform#who_should_not_use",
+    "claim_path": "who_should_not_use",
+    "provenance_class": "E",
+    "status": "MISSING",
+    "handling": "ADD_PROVENANCE",
+    "source_ids": [],
+    "conflict_group": null,
+    "last_checked": "2026-10-03T00:00:00Z",
+    "next_check_due": "2027-10-03T00:00:00Z"
+  }
+]
