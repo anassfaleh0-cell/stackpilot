@@ -8,7 +8,6 @@ import { GTMScript } from "@/components/analytics/gtm"
 import { ClientLayout } from "@/components/layout/client-layout"
 import { OrganizationSchema, WebsiteSchema, SiteNavigationSchema } from "@/components/seo/json-ld"
 import { siteConfig, navLinks } from "@/lib/constants"
-import { CookieConsent } from "@/components/analytics/cookie-consent"
 import { WebVitals } from "@/components/analytics/web-vitals"
 
 const geistSans = Geist({
@@ -154,7 +153,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <Footer />
-          <CookieConsent />
           <WebVitals />
         </ThemeProvider>
       </body>
