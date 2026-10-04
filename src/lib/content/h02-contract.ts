@@ -2,7 +2,9 @@ export const H02_ID = "H-02"
 
 export const H02_TITLE = "alternatives publication decision"
 
-export const H02_CONTRACT_VERSION = "1.0.0"
+export const H02_CONTRACT_VERSION = "1.1.0"
+
+export const H02_CONTRACT_PREVIOUS_VERSION = "1.0.0"
 
 export const H02_PHASE_5A_REQUIREMENT = 5
 
@@ -134,6 +136,7 @@ export const H02_PROSE_SCOPE_SLUGS = [
 export const H02_PROSE_SCOPE_SIZE = 23
 
 export const H02_PROSE_FIELDS = [
+  "content[].title",
   "content[].body",
   "faqs[].question",
   "faqs[].answer",
@@ -142,7 +145,7 @@ export const H02_PROSE_FIELDS = [
 ] as const
 
 export const H02_PROSE_FIELD_RATIONALE =
-  "All five groups render as body prose on /reviews/<slug> (content[].body, faqs[].question and faqs[].answer in the FAQ block; pros[] through EditorialProsCons; cons[] at reviews/[slug]/page.tsx:149, :161, :194 and :226). description and tagline are metadata surfaces and carry zero artefact references across all 29 Phase 5B cases."
+  "content[].body, faqs[].question, faqs[].answer, pros[] and cons[] render as body prose on /reviews/<slug> (content[].body; faqs[].question and faqs[].answer in the FAQ block; pros[] through EditorialProsCons; cons[] at reviews/[slug]/page.tsx:149, :161, :194 and :226). content[].title is the sixth field added by contract v1.1.0: a section title is rendered user-visible prose emitted as the <h2> at reviews/[slug]/page.tsx:374 and :383, and it can carry the same H02_PROSE_REFERENCE_PATTERNS as body prose, so the enumeration must include it for T-H02-05 to cover every reference. description and tagline are metadata surfaces and carry zero artefact references across all 29 Phase 5B cases."
 
 export const H02_PROSE_REFERENCE_PATTERNS = [
   "alternatives\\s+files?\\b",
@@ -158,6 +161,32 @@ export const H02_PROSE_REFERENCE_SOURCE = "Phase 5B F2 pointer sentence matched 
 
 export const H02_PROSE_REFERENCE_PREDICATE =
   "A prose sentence is in scope when it matches one of H02_PROSE_REFERENCE_PATTERNS AND resolves either to at least one of the 52 object-set records or to no record at all. The sentence is the unit of work: rewriting or removing it clears every target it names, including targets outside the object set. published:undefined records are already reachable through getAlternative() (registry.ts drops published === false only), so they are never treated as unpublished targets."
+
+export interface H02ContractChangelogEntry {
+  version: string
+  date: string
+  summary: string
+  reason: string
+}
+
+export const H02_CONTRACT_CHANGELOG: readonly H02ContractChangelogEntry[] = Object.freeze([
+  {
+    version: "1.1.0",
+    date: "2026-10-04",
+    summary:
+      "Reopens the prose enumeration: content[].title joins H02_PROSE_FIELDS and T-H02-05 is restated so it covers every rendered prose field rather than only the five v1.0.0 fields.",
+    reason:
+      "The v1.0.0 five-field enumeration omitted rendered section titles even though a title is user-visible prose emitted as an <h2> and can match H02_PROSE_REFERENCE_PATTERNS; content/reviews/zoho-people.json content[5].title proved the omission on an in-scope page. The 52-file object set, the 23-page prose scope, decision B, approval status GRANTED and every H-01 posture are unchanged.",
+  },
+  {
+    version: "1.0.0",
+    date: "2026-10-04",
+    summary:
+      "Initial versioned H-02 contract: decision B, the 52-file object set, the 23-page prose scope with 6 documented exclusions, MODEL 1 for T-ALT-03 and ten safety clauses.",
+    reason:
+      "Established in Phase 5F to freeze the resolved scope so Phase 5G does not re-derive it.",
+  },
+])
 
 export interface H02CrossReferenceNote {
   page: string
@@ -378,9 +407,9 @@ export const H02_ACCEPTANCE_TESTS: readonly H02AcceptanceTest[] = Object.freeze(
   },
   {
     id: "T-H02-05",
-    name: "prose definition covers every reference",
+    name: "prose definition covers every rendered prose field",
     asserts:
-      "H02_PROSE_FIELDS covers content[].body, faqs[].question, faqs[].answer, pros[] and cons[]; H02_PROSE_REFERENCE_PATTERNS is non-empty and H02_PROSE_REFERENCE_PREDICATE states the published === false reachability rule explicitly.",
+      "H02_PROSE_FIELDS enumerates content[].title, content[].body, faqs[].question, faqs[].answer, pros[] and cons[] — every field that renders user-visible prose on /reviews/<slug>, section titles included — and H02_PROSE_REFERENCE_PATTERNS is non-empty while H02_PROSE_REFERENCE_PREDICATE states the published === false reachability rule explicitly.",
     catches: "B-H02-02 prose-definition ambiguity",
   },
   {
@@ -532,6 +561,7 @@ export interface H02Contract {
     contractVersion: string
     note: string
   }
+  changelog: H02ContractChangelogEntry[]
   acceptanceCriteria: string[]
 }
 
@@ -661,13 +691,15 @@ export const H02_CONTRACT: H02Contract = Object.freeze({
     note:
       "H-02 grants exactly what H-01 lists under approvalEffect.doesNotGrant as 'publication of content/alternatives/*.json' and then declines to exercise it. P5C-AL-03 moves from declaredUnder: ['H-02'] to decided-under, without touching H01_EXCLUDED_ITEMS.",
   },
+  changelog: [...H02_CONTRACT_CHANGELOG],
   acceptanceCriteria: [
     "H-02 id, title, a semver contract version and an explicit decision id are present and parseable",
     "approval status is GRANTED explicitly and is never inferred from a blocking_reason string",
     "the object set is exactly 52 cohort slugs, each with an existing published:false alternatives file",
     "the 75-file and 101-file candidate sets are excluded with a written reason",
     "the prose scope is exactly 23 fixed slugs, each a real noindex review inside the object set",
-    "the prose definition names every field that renders body prose and states the published === false reachability rule",
+    "the prose definition names every field that renders user-visible prose, section titles included, and states the published === false reachability rule",
+    "the contract changelog records v1.1.0 as the explicit reopen that added content[].title to the five-field v1.0.0 enumeration",
     "the 23 in-scope cases plus the 6 documented exclusions reconcile to the 29 Phase 5B F2 cases",
     "cross-references outside the object set are documented and cleared by the same sentence edit",
     "decision B publishes nothing and adds no /alternatives/* URL",

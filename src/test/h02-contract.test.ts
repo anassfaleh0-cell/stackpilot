@@ -5,6 +5,8 @@ import {
   H02_ACCEPTANCE_TESTS,
   H02_ALT_T3_MODEL,
   H02_CONTRACT,
+  H02_CONTRACT_CHANGELOG,
+  H02_CONTRACT_PREVIOUS_VERSION,
   H02_CONTRACT_VERSION,
   H02_CROSS_REFERENCE_NOTES,
   H02_DECISION,
@@ -162,18 +164,42 @@ describe("H-02 prose scope", () => {
     }
   })
 
-  it("names every rendered prose field and states the reachability rule", () => {
+  it("names every rendered prose field, section titles included, and states the reachability rule", () => {
     expect(H02_PROSE_FIELDS).toEqual([
+      "content[].title",
       "content[].body",
       "faqs[].question",
       "faqs[].answer",
       "pros[]",
       "cons[]",
     ])
+    expect(H02_CONTRACT.proseScope.fields).toEqual([...H02_PROSE_FIELDS])
     expect(H02_CONTRACT.proseScope.fieldRationale).toContain("render as body prose")
+    expect(H02_CONTRACT.proseScope.fieldRationale).toContain("content[].title")
+    expect(H02_CONTRACT.proseScope.fieldRationale).toContain("<h2>")
     expect(H02_PROSE_REFERENCE_PATTERNS.length).toBeGreaterThan(4)
     expect(H02_CONTRACT.proseScope.referencePredicate).toContain("published === false")
     expect(H02_CONTRACT.proseScope.referenceSource).toContain("Phase 5B")
+  })
+
+  it("records v1.1.0 as the explicit reopen that added content[].title", () => {
+    expect(H02_CONTRACT_VERSION).toBe("1.1.0")
+    expect(H02_CONTRACT_PREVIOUS_VERSION).toBe("1.0.0")
+    expect(H02_CONTRACT.contractVersion).toBe("1.1.0")
+    expect(H02_CONTRACT_CHANGELOG.map(entry => entry.version)).toEqual(["1.1.0", "1.0.0"])
+    expect(H02_CONTRACT.changelog).toHaveLength(2)
+    expect(H02_CONTRACT.changelog[0].version).toBe(H02_CONTRACT_VERSION)
+    expect(H02_CONTRACT.changelog[0].summary).toContain("content[].title")
+    expect(H02_CONTRACT.changelog[0].summary).toContain("T-H02-05")
+    expect(H02_CONTRACT.changelog[0].reason).toContain("five-field")
+    expect(H02_CONTRACT.changelog[0].reason).toContain("unchanged")
+    for (const entry of H02_CONTRACT_CHANGELOG) {
+      expect(entry.version).toMatch(SEMVER)
+      expect(entry.date).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+      expect(entry.summary.length).toBeGreaterThan(40)
+      expect(entry.reason.length).toBeGreaterThan(40)
+    }
+    expect(H02_CONTRACT.acceptanceCriteria.some(item => item.includes("content[].title"))).toBe(true)
   })
 
   it("reconciles the 23 in-scope pages with the 6 documented exclusions to the 29 F2 cases", () => {
