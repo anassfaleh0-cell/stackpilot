@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
+import { AuthorAvatar } from "@/components/editorial/author-avatar"
 import Link from "next/link"
 
 export const metadata = createMetadata({
@@ -30,9 +31,7 @@ export default function TeamPage() {
             </p>
             <Card className="p-6">
               <div className="flex items-center gap-4 mb-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary text-white text-sm font-bold shrink-0">
-                  PT
-                </div>
+                <AuthorAvatar name="PilotStack Team" size="md" />
                 <div>
                   <h2 className="font-semibold">PilotStack Team</h2>
                   <p className="text-xs text-muted-foreground">Editorial & Research</p>

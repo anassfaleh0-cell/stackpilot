@@ -6,6 +6,7 @@ import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { isPublicAuthor } from "@/lib/authors"
+import { AuthorAvatar } from "@/components/editorial/author-avatar"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { BookOpen, Calendar } from "lucide-react"
@@ -30,7 +31,7 @@ const authors = {
     name: "Sarah Chen",
     role: "Founder & Editor-in-Chief",
     bio: "Sarah founded PilotStack and edits the site's coverage in the Project Management, CRM & Sales, and Productivity categories. She owns the published scoring and sourcing rules every page follows: one recorded source per figure, and no paid placement.",
-    avatar: "/logo-icon.svg",
+    avatar: null,
     expertise: ["Product Management", "SaaS Evaluation", "Editorial Strategy", "Project Management", "CRM"],
     credentials: ["Edits Project Management, CRM & Sales and Productivity coverage"],
     social: { twitter: authorSocial.twitter, github: authorSocial.github },
@@ -41,7 +42,7 @@ const authors = {
     name: "Marcus Rivera",
     role: "Senior Software Reviewer",
     bio: "Marcus writes PilotStack's coverage of Developer Tools, Analytics, and Security & Compliance. His pages record how products are documented and configured, alongside the same nine category scores used across the site.",
-    avatar: "/logo-icon.svg",
+    avatar: null,
     expertise: ["Enterprise Software", "Developer Tools", "Security & Compliance", "Analytics Platforms"],
     credentials: ["Covers Developer Tools, Analytics and Security & Compliance"],
     social: { twitter: authorSocial.twitter, linkedin: authorSocial.linkedin },
@@ -52,7 +53,7 @@ const authors = {
     name: "Emily Nakamura",
     role: "Research Analyst",
     bio: "Emily leads PilotStack's research and market analysis pages. Her coverage spans Finance & Accounting, HR & People, Marketing & SEO, Communication, and Design tools, with an emphasis on recorded pricing and category data.",
-    avatar: "/logo-icon.svg",
+    avatar: null,
     expertise: ["Market Research", "Data Analysis", "Industry Trends", "Competitive Intelligence"],
     credentials: ["Covers Finance, HR, Marketing and Communication categories"],
     social: { twitter: authorSocial.twitter, linkedin: authorSocial.linkedin },
@@ -63,7 +64,7 @@ const authors = {
     name: "PilotStack Team",
     role: "Editorial Team",
     bio: "The PilotStack team publishes software reviews across 12 categories. Every page carries the same nine recorded category scores on a 1-5 scale, with the overall rating as their mean. We don't accept payment for reviews or rankings.",
-    avatar: "/logo-icon.svg",
+    avatar: null,
     expertise: ["SaaS evaluation", "Software pricing analysis", "AI tools comparison", "B2B software buying", "CRM and project management", "Developer tools assessment"],
     credentials: [`Published reviews for ${reviewCount} software tools since 2024`, `Published ${comparisonCount} head-to-head comparisons`, "Methodology transparent and publicly available"],
     social: { twitter: authorSocial.twitter, linkedin: authorSocial.linkedin },
@@ -111,9 +112,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
         <Container>
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-col sm:flex-row items-start gap-6 mb-10">
-              <div className="w-20 h-20 rounded-2xl bg-muted-bg flex items-center justify-center shrink-0 border border-border">
-                <span className="text-2xl font-bold text-primary">{author.name.charAt(0)}</span>
-              </div>
+              <AuthorAvatar name={author.name} src={author.avatar} size="lg" />
               <div>
                 <Badge variant="secondary" className="mb-2">{author.role}</Badge>
                 <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-2">{author.name}</h1>

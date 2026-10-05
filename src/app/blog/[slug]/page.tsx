@@ -11,6 +11,7 @@ import Link from "next/link"
 import { getAllReviews } from "@/lib/content/registry"
 import { EditorialHero, EditorialCallout, GlassCard, InfoCard } from "@/components/dynamic"
 import { RelatedContent } from "@/components/content/related-content"
+import { AuthorAvatar } from "@/components/editorial/author-avatar"
 import { BrandDivider } from "@/components/brand/patterns"
 import { Clock, User, Calendar, Star } from "lucide-react"
 import { InFeedAd } from "@/components/ads"
@@ -235,9 +236,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {/* Author Block */}
             <div className="mt-10 rounded-xl border border-border bg-card p-5">
               <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-subtle text-primary font-bold shrink-0">
-                  {post.author.charAt(0)}
-                </div>
+                <AuthorAvatar name={post.author} size="md" />
                 <div>
                   <div className="font-semibold text-sm mb-1">Written by {post.author}</div>
                   <p className="text-xs text-muted-foreground leading-relaxed">

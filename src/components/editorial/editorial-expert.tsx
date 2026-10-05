@@ -1,7 +1,8 @@
 import { GlassCard } from "./glass-card"
+import { AuthorAvatar } from "./author-avatar"
 
-const reviewerProfiles: Record<string, { name: string; role: string; expertise: string; initials: string }> = {
-  "PilotStack Team": { name: "PilotStack Team", role: "Editorial Team", expertise: "Software Evaluation, Pricing Analysis, Market Research", initials: "PT" },
+const reviewerProfiles: Record<string, { name: string; role: string; expertise: string }> = {
+  "PilotStack Team": { name: "PilotStack Team", role: "Editorial Team", expertise: "Software Evaluation, Pricing Analysis, Market Research" },
 }
 
 export function EditorialExpert({ author }: { author: string }) {
@@ -9,7 +10,6 @@ export function EditorialExpert({ author }: { author: string }) {
     name: author,
     role: "Editorial Team",
     expertise: "Software Evaluation",
-    initials: author.split(" ").map((w: string) => w[0]).join("").slice(0, 2).toUpperCase(),
   }
 
   return (
@@ -17,9 +17,7 @@ export function EditorialExpert({ author }: { author: string }) {
       <div className="p-4">
         <h3 className="font-semibold text-xs text-muted-foreground uppercase tracking-wider mb-3">Reviewer</h3>
         <div className="flex items-center gap-3 mb-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary text-white text-xs font-bold shrink-0">
-            {profile.initials}
-          </div>
+          <AuthorAvatar name={profile.name} size="sm" />
           <div>
             <p className="font-semibold text-sm">{profile.name}</p>
             <p className="text-xs text-muted-foreground">{profile.role}</p>

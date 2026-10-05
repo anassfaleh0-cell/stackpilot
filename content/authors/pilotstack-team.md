@@ -3,7 +3,6 @@ slug: pilotstack-team
 name: PilotStack Team
 role: Editorial Team
 bio: "The PilotStack team has tested 151+ software tools across 12 categories. Every review is based on at least 2 weeks of hands-on testing using a standardized methodology. We don't accept payment for reviews or rankings."
-avatar: /images/authors/pilotstack-team.png
 social:
   twitter: https://x.com/pilotstackon
   linkedin: https://www.linkedin.com/in/pilotstack

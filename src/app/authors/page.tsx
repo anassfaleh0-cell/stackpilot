@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { isPublicAuthor } from "@/lib/authors"
+import { AuthorAvatar } from "@/components/editorial/author-avatar"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
@@ -20,21 +21,18 @@ const authors = [
     name: "Sarah Chen",
     role: "Founder & Editor-in-Chief",
     bio: "Sarah founded PilotStack and edits coverage in the Project Management, CRM & Sales, and Productivity categories, working to the site's published scoring and sourcing rules.",
-    initials: "SC",
   },
   {
     slug: "marcus-rivera",
     name: "Marcus Rivera",
     role: "Senior Software Reviewer",
     bio: "Marcus writes PilotStack's coverage of Developer Tools, Analytics, and Security & Compliance, recording how products are documented and configured alongside the site's nine category scores.",
-    initials: "MR",
   },
   {
     slug: "emily-nakamura",
     name: "Emily Nakamura",
     role: "Research Analyst",
     bio: "Emily leads PilotStack's research and market analysis pages, covering Finance, HR, Marketing, Communication and Design tools with an emphasis on recorded pricing and category data.",
-    initials: "EN",
   },
 ]
 
@@ -59,9 +57,7 @@ export default function AuthorsPage() {
                 <Link key={author.slug} href={`/authors/${author.slug}`} className="group card-hover-lift">
                   <Card className="p-6 h-full flex flex-col">
                     <div className="flex items-start gap-4 mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-muted-bg flex items-center justify-center shrink-0 border border-border">
-                        <span className="text-lg font-bold text-primary">{author.initials}</span>
-                      </div>
+                      <AuthorAvatar name={author.name} size="md" />
                       <div>
                         <CardTitle className="text-base group-hover:text-primary transition-colors">{author.name}</CardTitle>
                         <Badge variant="secondary" className="mt-1 text-xs">{author.role}</Badge>
