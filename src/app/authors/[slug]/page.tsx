@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
+import { isPublicAuthor } from "@/lib/authors"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { BookOpen, Calendar } from "lucide-react"
@@ -87,6 +88,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${author.name} - ${author.role}`,
     description: `${author.name} is ${author.role} at PilotStack. ${author.bio.slice(0, 150)}`,
     path: `/authors/${slug}`,
+    noIndex: !isPublicAuthor(slug),
   })
 }
 

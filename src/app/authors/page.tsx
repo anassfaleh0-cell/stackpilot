@@ -4,6 +4,7 @@ import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
+import { isPublicAuthor } from "@/lib/authors"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
@@ -54,7 +55,7 @@ export default function AuthorsPage() {
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6">
-              {authors.map((author) => (
+              {authors.filter((author) => isPublicAuthor(author.slug)).map((author) => (
                 <Link key={author.slug} href={`/authors/${author.slug}`} className="group card-hover-lift">
                   <Card className="p-6 h-full flex flex-col">
                     <div className="flex items-start gap-4 mb-4">

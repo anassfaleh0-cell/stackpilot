@@ -6,6 +6,7 @@ import {
   getAllBest, getAllHubs,
 } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
+import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
 
 function isQuality(slug: string, dir: string): boolean {
   return !isNoindexed(dir, slug)
@@ -51,8 +52,6 @@ const staticPages: MetadataRoute.Sitemap = [
   })),
 ]
 
-const authorSlugs = ["sarah-chen", "marcus-rivera", "emily-nakamura"]
-
 export default function sitemap(): MetadataRoute.Sitemap {
   // Derive actual lastModified dates from content for content pages
   const reviews = getAllReviews().filter((r) => isQuality(r.slug, "reviews"))
@@ -71,7 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [
     ...staticPages,
     { url: `${siteConfig.url}/rss.xml`, lastModified: LISTING_DATE, changeFrequency: "weekly", priority: 0.3 },
-    ...authorSlugs.map((slug) => ({
+    ...PUBLIC_AUTHOR_SLUGS.map((slug) => ({
       url: `${siteConfig.url}/authors/${slug}`,
       lastModified: new Date(POLICY_DATE),
       changeFrequency: "monthly" as const,
