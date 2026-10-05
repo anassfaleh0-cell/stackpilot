@@ -3,7 +3,7 @@ import fs from "node:fs"
 import path from "node:path"
 import ComparisonPage, { generateMetadata, generateStaticParams } from "@/app/comparisons/[slug]/page"
 import { getContentTitle, getComparison } from "@/lib/content/registry"
-import { isNoindexed } from "@/lib/noindex"
+import { isNoindexed, getKeepSlugs } from "@/lib/noindex"
 import sitemap from "@/app/sitemap"
 
 // Phase 5K-C regression contract.
@@ -231,5 +231,199 @@ describe("P5K-C2: llms.txt stale URLs removed", () => {
 
   it("still lists no comparison detail pages", () => {
     expect(paths.filter((p) => p.startsWith("/comparisons/"))).toEqual([])
+  })
+})
+
+// Phase 5K-D2 contract: keep must never contain an unpublished record.
+// The Phase 5K audit found 46 URLs where `keep` declared a route indexable while its
+// content record was published:false, so the route could never serve 200 + index,follow.
+// The records stay published:false (and therefore 404 by design); only the false keep
+// declaration was removed.
+
+const REMOVED_KEEP_COLLISIONS: Record<string, string[]> = {
+  comparisons: ["1password-vs-dashlane", "1password-vs-lastpass", "bitwarden-vs-dashlane"],
+  best: [
+    "best-ai-machine-learning-agencies",
+    "best-ai-machine-learning-enterprise",
+    "best-ai-machine-learning-freelancers",
+    "best-ai-machine-learning-remote-teams",
+    "best-ai-machine-learning-small-business",
+    "best-ai-machine-learning-startups",
+    "best-analytics-data-agencies",
+    "best-analytics-data-enterprise",
+    "best-analytics-data-freelancers",
+    "best-analytics-data-remote-teams",
+    "best-analytics-data-small-business",
+    "best-analytics-data-startups",
+    "best-automation-agencies",
+    "best-automation-enterprise",
+    "best-automation-freelancers",
+    "best-automation-remote-teams",
+    "best-automation-small-business",
+    "best-automation-startups",
+    "best-communication-agencies",
+    "best-communication-enterprise",
+  ],
+  alternatives: [
+    "slack-alternatives",
+    "1password-alternatives",
+    "affinity-alternatives",
+    "ahrefs-alternatives",
+    "airtable-alternatives",
+    "amplitude-alternatives",
+    "auth0-alternatives",
+    "basecamp-alternatives",
+    "bitwarden-alternatives",
+    "calendly-alternatives",
+    "canva-alternatives",
+    "circleci-alternatives",
+    "clickup-alternatives",
+    "close-crm-alternatives",
+    "copper-crm-alternatives",
+    "copy-ai-alternatives",
+    "crowdstrike-alternatives",
+    "dialpad-alternatives",
+    "evernote-alternatives",
+    "expensify-alternatives",
+    "fathom-alternatives",
+    "figma-alternatives",
+    "framer-alternatives",
+  ],
+}
+
+// The keep entries that must survive untouched in the three reconciled families.
+const SURVIVING_KEEP: Record<string, string[]> = {
+  comparisons: [
+    "firebase-vs-appwrite",
+    "gitlab-vs-bitbucket",
+    "hotjar-vs-fullstory",
+    "clickup-vs-notion-small-teams",
+    "hubspot-vs-salesforce-startups",
+    "linear-vs-jira-startups",
+    "notion-vs-obsidian-for-teams",
+    "slack-vs-microsoft-teams-remote",
+    "trello-vs-asana-personal-use",
+  ],
+  best: ["best-marketing-seo-enterprise"],
+  alternatives: [
+    "free-alternatives-to-slack",
+    "adp-alternatives",
+    "asana-alternatives",
+    "bamboohr-alternatives",
+    "chatgpt-alternatives",
+    "docker-alternatives",
+    "firebase-alternatives",
+  ],
+}
+
+// Frozen noindex-list.json contract measured before the D2 edit.
+const FROZEN_KEEP_COUNTS: Record<string, number> = {
+  comparisons: 9,
+  best: 1,
+  alternatives: 7,
+  glossary: 30,
+  statistics: 20,
+  guides: 36,
+  blog: 97,
+  reviews: 99,
+}
+const FROZEN_NOINDEX_COUNTS: Record<string, number> = {
+  comparisons: 916,
+  best: 175,
+  alternatives: 71,
+  glossary: 92,
+  statistics: 84,
+  guides: 64,
+  blog: 0,
+  reviews: 52,
+}
+const FROZEN_TOTAL_KEEP = 299
+const FROZEN_TOTAL_NOINDEX = 1454
+const REMOVED_COLLISION_COUNT = 46
+
+const NOINDEX_LIST_FILE = path.join(process.cwd(), "noindex-list.json")
+const KEEP_FAMILIES = ["comparisons", "best", "alternatives", "glossary", "statistics", "guides", "blog", "reviews"]
+
+function rawDirectories(): Record<string, { keep?: string[]; noindex?: string[] }> {
+  return JSON.parse(fs.readFileSync(NOINDEX_LIST_FILE, "utf-8")).directories
+}
+
+function publishedOf(fam: string, slug: string): boolean | undefined {
+  const file = path.join(process.cwd(), "content", fam, `${slug}.json`)
+  if (!fs.existsSync(file)) return undefined
+  return JSON.parse(fs.readFileSync(file, "utf-8")).published
+}
+
+describe("P5K-D2: keep/published:false collisions removed", () => {
+  it("removes exactly the 46 audited collisions from keep", () => {
+    const removedTotal = Object.values(REMOVED_KEEP_COLLISIONS).reduce((n, s) => n + s.length, 0)
+    expect(removedTotal).toBe(REMOVED_COLLISION_COUNT)
+    expect(REMOVED_KEEP_COLLISIONS.comparisons).toHaveLength(3)
+    expect(REMOVED_KEEP_COLLISIONS.best).toHaveLength(20)
+    expect(REMOVED_KEEP_COLLISIONS.alternatives).toHaveLength(23)
+  })
+
+  it("leaves none of those 46 URLs in keep", () => {
+    for (const [fam, slugs] of Object.entries(REMOVED_KEEP_COLLISIONS)) {
+      const keep = getKeepSlugs(fam)
+      for (const slug of slugs) expect(keep).not.toContain(slug)
+    }
+  })
+
+  it("keeps every audited record published:false (nothing was published to satisfy keep)", () => {
+    for (const [fam, slugs] of Object.entries(REMOVED_KEEP_COLLISIONS)) {
+      for (const slug of slugs) expect(publishedOf(fam, slug)).toBe(false)
+    }
+  })
+
+  it("brings the keep contract to exactly 299", () => {
+    const total = KEEP_FAMILIES.reduce((n, fam) => n + getKeepSlugs(fam).length, 0)
+    expect(total).toBe(FROZEN_TOTAL_KEEP)
+  })
+
+  it("leaves zero published:false records in keep across every family", () => {
+    const collisions: string[] = []
+    for (const fam of KEEP_FAMILIES) {
+      for (const slug of getKeepSlugs(fam)) {
+        if (publishedOf(fam, slug) === false) collisions.push(`${fam}/${slug}`)
+      }
+    }
+    expect(collisions).toEqual([])
+  })
+
+  it("leaves every surviving keep entry in the three reconciled families untouched", () => {
+    for (const [fam, slugs] of Object.entries(SURVIVING_KEEP)) {
+      const keep = getKeepSlugs(fam)
+      expect(keep).toHaveLength(slugs.length)
+      for (const slug of slugs) expect(keep).toContain(slug)
+    }
+  })
+
+  it("leaves the surviving keep entries resolvable and publishable", () => {
+    for (const [fam, slugs] of Object.entries(SURVIVING_KEEP)) {
+      for (const slug of slugs) expect(publishedOf(fam, slug)).not.toBe(false)
+    }
+  })
+
+  it("changes no unrelated noindex-list entry", () => {
+    const dirs = rawDirectories()
+    for (const fam of KEEP_FAMILIES) {
+      expect(getKeepSlugs(fam)).toHaveLength(FROZEN_KEEP_COUNTS[fam])
+      expect((dirs[fam].noindex || []).length).toBe(FROZEN_NOINDEX_COUNTS[fam])
+    }
+    const totalKeep = KEEP_FAMILIES.reduce((n, fam) => n + getKeepSlugs(fam).length, 0)
+    const totalNoindex = KEEP_FAMILIES.reduce((n, fam) => n + (dirs[fam].noindex || []).length, 0)
+    expect(totalKeep).toBe(FROZEN_TOTAL_KEEP)
+    expect(totalNoindex).toBe(FROZEN_TOTAL_NOINDEX)
+  })
+
+  it("removes only the collisions and nothing else from the three keep lists", () => {
+    for (const [fam, survivors] of Object.entries(SURVIVING_KEEP)) {
+      expect(getKeepSlugs(fam).slice().sort()).toEqual(survivors.slice().sort())
+      const removed = REMOVED_KEEP_COLLISIONS[fam]
+      expect(survivors).toHaveLength(FROZEN_KEEP_COUNTS[fam])
+      expect(survivors.filter((s) => removed.includes(s))).toEqual([])
+      expect(survivors.length + removed.length).toBe(FROZEN_KEEP_COUNTS[fam] + removed.length)
+    }
   })
 })

@@ -289,7 +289,7 @@ describe("H-02 decision B consequences", () => {
     expect(noindex.directories.reviews.keep.length + noindex.directories.reviews.noindex.length).toBe(
       H02_SEO_INVARIANT.reviewsTotal,
     )
-    expect(noindex.directories.alternatives.keep).toHaveLength(30)
+    expect(noindex.directories.alternatives.keep).toHaveLength(H02_SEO_INVARIANT.sitemapAlternatives)
     expect(noindex.directories.alternatives.noindex).toHaveLength(71)
 
     const sitemapAlternatives = getAllAlternatives().filter(
