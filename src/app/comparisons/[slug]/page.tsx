@@ -21,8 +21,6 @@ import { EEATProcess } from "@/components/seo/editorial-process"
 import { ScoreBar } from "@/components/brand/patterns"
 import { NativeAd } from "@/components/ads"
 
-export const dynamicParams = false
-
 export function generateStaticParams() {
   return getAllComparisons()
     .filter((c) => !isNoindexed("comparisons", c.slug))
