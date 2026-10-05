@@ -6,7 +6,8 @@ import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getHub, getAllHubs, getContentTitle } from "@/lib/content/registry"
 import { formatDate } from "@/lib/utils"
-import { InternalLinks } from "@/components/content/internal-links"
+import { getRelatedByCategory } from "@/lib/content/internal-links"
+import { InternalLinks, LEGACY_RELATED_TYPES, extendedRelatedItems } from "@/components/content/internal-links"
 import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -36,6 +37,8 @@ export default async function HubPage({ params }: { params: Promise<{ slug: stri
     if (!byCategory[rec.category]) byCategory[rec.category] = []
     byCategory[rec.category].push(rec)
   })
+
+  const relatedLinks = getRelatedByCategory(hub.audience, hub.slug, 4)
 
   return (
     <>
@@ -175,11 +178,12 @@ export default async function HubPage({ params }: { params: Promise<{ slug: stri
             </aside>
           </div>
 
-          <InternalLinks category={hub.audience} excludeSlug={hub.slug} />
+          <InternalLinks category={hub.audience} excludeSlug={hub.slug} families={LEGACY_RELATED_TYPES} />
           
           <EnhancedRelatedContent
             title="More Resources"
             maxItems={6}
+            items={extendedRelatedItems(relatedLinks)}
           />
         </Container>
       </article>

@@ -2,7 +2,21 @@
 import Link from "next/link"
 import { Card, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Star, Scale, BookOpen, Layers, GitCompare } from "lucide-react"
+import {
+  ArrowRight,
+  Star,
+  Scale,
+  BookOpen,
+  Layers,
+  GitCompare,
+  Target,
+  LayoutGrid,
+  Building2,
+  FlaskConical,
+  BarChart3,
+  Newspaper,
+  BookMarked,
+} from "lucide-react"
 import { isContentAvailable } from "@/lib/content/registry"
 
 interface RelatedItem {
@@ -27,6 +41,13 @@ const typeIcons: Record<string, React.ReactNode> = {
   guide: <BookOpen size={12} className="text-primary" />,
   best: <Layers size={12} className="text-primary" />,
   alternative: <GitCompare size={12} className="text-primary" />,
+  "use-case": <Target size={12} className="text-primary" />,
+  hub: <LayoutGrid size={12} className="text-primary" />,
+  industry: <Building2 size={12} className="text-primary" />,
+  research: <FlaskConical size={12} className="text-primary" />,
+  statistic: <BarChart3 size={12} className="text-primary" />,
+  blog: <Newspaper size={12} className="text-primary" />,
+  glossary: <BookMarked size={12} className="text-primary" />,
 }
 
 const typeLabels: Record<string, string> = {
@@ -35,9 +56,13 @@ const typeLabels: Record<string, string> = {
   guide: "Guide",
   best: "Best Of",
   alternative: "Alternatives",
-  blog: "Article",
+  "use-case": "Use Case",
+  hub: "Hub",
+  industry: "Industry",
   research: "Research",
-  statistics: "Statistics",
+  statistic: "Statistics",
+  blog: "Article",
+  glossary: "Glossary",
 }
 
 const ROUTE_FOR_TYPE: Record<string, string> = {

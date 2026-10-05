@@ -6,7 +6,8 @@ import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAlternative, getAllAlternatives, getContentTitle, getReview } from "@/lib/content/registry"
 import { formatDate } from "@/lib/utils"
-import { InternalLinks } from "@/components/content/internal-links"
+import { getRelatedByCategory } from "@/lib/content/internal-links"
+import { InternalLinks, LEGACY_RELATED_TYPES, extendedRelatedItems } from "@/components/content/internal-links"
 import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -34,6 +35,8 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
   const { slug } = await params
   const alt = getAlternative(slug)
   if (!alt) notFound()
+
+  const relatedLinks = getRelatedByCategory(alt.category, alt.slug, 4)
 
   return (
     <>
@@ -180,11 +183,12 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
             </aside>
           </div>
 
-          <InternalLinks category={alt.category} excludeSlug={alt.slug} />
+          <InternalLinks category={alt.category} excludeSlug={alt.slug} families={LEGACY_RELATED_TYPES} />
           
           <EnhancedRelatedContent
             title="More Resources"
             maxItems={6}
+            items={extendedRelatedItems(relatedLinks)}
           />
         </Container>
       </article>

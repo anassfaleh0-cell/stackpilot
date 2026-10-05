@@ -6,7 +6,8 @@ import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { truncate, formatDate } from "@/lib/utils"
 import { getBest, getAllBest, getContentTitle, getReview } from "@/lib/content/registry"
-import { InternalLinks } from "@/components/content/internal-links"
+import { getRelatedByCategory } from "@/lib/content/internal-links"
+import { InternalLinks, LEGACY_RELATED_TYPES, extendedRelatedItems } from "@/components/content/internal-links"
 import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -40,6 +41,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
   const linkedPicks = page.picks.filter((p) => getReview(p.toolSlug) !== null)
   const reviewHref = (toolSlug: string) => (getReview(toolSlug) ? `/reviews/${toolSlug}` : null)
+  const relatedLinks = getRelatedByCategory(page.category, page.slug, 4)
 
   return (
     <>
@@ -232,11 +234,12 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             </aside>
           </div>
 
-          <InternalLinks category={page.category} excludeSlug={page.slug} />
+          <InternalLinks category={page.category} excludeSlug={page.slug} families={LEGACY_RELATED_TYPES} />
           
           <EnhancedRelatedContent
             title="More Resources"
             maxItems={6}
+            items={extendedRelatedItems(relatedLinks)}
           />
 
           {(() => {

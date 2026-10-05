@@ -6,7 +6,8 @@ import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getIndustry, getAllIndustries, getContentTitle } from "@/lib/content/registry"
 import { formatDate } from "@/lib/utils"
-import { InternalLinks } from "@/components/content/internal-links"
+import { getRelatedByCategory } from "@/lib/content/internal-links"
+import { InternalLinks, LEGACY_RELATED_TYPES, extendedRelatedItems } from "@/components/content/internal-links"
 import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -38,6 +39,8 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
     if (!byCategory[rec.category]) byCategory[rec.category] = []
     byCategory[rec.category].push(rec)
   })
+
+  const relatedLinks = getRelatedByCategory(ind.industry, ind.slug, 4)
 
   return (
     <>
@@ -176,11 +179,12 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             </aside>
           </div>
 
-          <InternalLinks category={ind.industry} excludeSlug={ind.slug} />
+          <InternalLinks category={ind.industry} excludeSlug={ind.slug} families={LEGACY_RELATED_TYPES} />
           
           <EnhancedRelatedContent
             title="More Resources"
             maxItems={6}
+            items={extendedRelatedItems(relatedLinks)}
           />
         </Container>
       </article>
