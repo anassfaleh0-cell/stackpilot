@@ -17,14 +17,15 @@ const REGISTRY_FILE = path.join(ROOT, "src", "lib", "content", "registry.ts")
 
 const ISO = /^\d{4}-\d{2}-\d{2}$/
 const EXPECTED_REVIEW_COUNT = 151
-const EXPECTED_INDEXABLE = 99
-const EXPECTED_NOINDEXED = 52
+const EXPECTED_INDEXABLE = 138
+const EXPECTED_NOINDEXED = 13
 
 // Frozen before the H-09A migration: the review slug set and its indexability split
-// must not move as part of a date-semantics change.
+// must not move as part of a date-semantics change. The split hashes were re-frozen by
+// Phase INDEX-01 after exactly the approved 39 review recoveries (151 total unchanged).
 const EXPECTED_ALL_HASH = "ad1f5547a64c4dc2"
-const EXPECTED_INDEXABLE_HASH = "55a5001bcb17a6ea"
-const EXPECTED_NOINDEX_HASH = "2bf86872cbf7a3b3"
+const EXPECTED_INDEXABLE_HASH = "32f68eb41ed3dc83"
+const EXPECTED_NOINDEX_HASH = "e2c85693b32a936a"
 
 function read(file: string): string {
   return fs.readFileSync(file, "utf8")
@@ -296,7 +297,7 @@ describe("H-09A seo safety", () => {
     expect(reviewPageSrc).not.toContain("reviewRating={")
   })
 
-  it("15. review URL and indexability set are unchanged", () => {
+  it("15. review URL set is unchanged and the indexability split matches the Phase INDEX-01 freeze", () => {
     expect(slugs.length).toBe(EXPECTED_REVIEW_COUNT)
     expect(keepSlugs).toHaveLength(EXPECTED_INDEXABLE)
     expect(noindexSlugs).toHaveLength(EXPECTED_NOINDEXED)

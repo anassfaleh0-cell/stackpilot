@@ -2,9 +2,9 @@ export const H02_ID = "H-02"
 
 export const H02_TITLE = "alternatives publication decision"
 
-export const H02_CONTRACT_VERSION = "1.1.0"
+export const H02_CONTRACT_VERSION = "1.2.0"
 
-export const H02_CONTRACT_PREVIOUS_VERSION = "1.0.0"
+export const H02_CONTRACT_PREVIOUS_VERSION = "1.1.0"
 
 export const H02_PHASE_5A_REQUIREMENT = 5
 
@@ -171,6 +171,14 @@ export interface H02ContractChangelogEntry {
 
 export const H02_CONTRACT_CHANGELOG: readonly H02ContractChangelogEntry[] = Object.freeze([
   {
+    version: "1.2.0",
+    date: "2026-10-05",
+    summary:
+      "Records the approved Phase INDEX-01 noindex recovery: exactly the 52 evidence-backed B-class slugs move from directories.*.noindex to directories.*.keep, H02_SEO_INVARIANT follows the observed post-recovery sitemap and review split, and T-H02-04 / T-H02-08 are restated against the post-recovery file with T-H02-11 added to police the recovery set itself.",
+    reason:
+      "Phase GSC-01 proved that 52 published, non-duplicate, 300+ word pages with recorded GSC impressions or clicks were suppressed by noindex-list.json, so the approved recovery removes noindex from exactly those 52 and nothing else. Decision B, the 52-file object set, the 23-page prose scope, robots.txt, canonical rules, sitemap quality rules, the 135 thin / 97 duplicate / 171 no-evidence classifications and every H-01 posture are unchanged; sitemapExpansion stays 0 because it measures decision-B expansion only, while the +52 observed growth is recorded in H02_INDEX01_RECOVERY.",
+  },
+  {
     version: "1.1.0",
     date: "2026-10-04",
     summary:
@@ -300,15 +308,129 @@ export const H02_REVIEW_ALTERNATIVES_ARRAY = Object.freeze({
 
 export const H02_SEO_INVARIANT = Object.freeze({
   sitemapAlternatives: 7,
-  sitemapReviews: 99,
-  sitemapTotal: 493,
+  sitemapReviews: 138,
+  sitemapTotal: 545,
   reviewsTotal: 151,
-  reviewsIndexable: 99,
-  reviewsNoindex: 52,
+  reviewsIndexable: 138,
+  reviewsNoindex: 13,
   alternativesTotal: 101,
   alternativesRenderable: 26,
   newAlternativesUrls: 0,
   sitemapExpansion: 0,
+})
+
+export interface H02Index01Recovery {
+  phase: string
+  action: string
+  approvedCount: number
+  baselineCommit: string
+  hashBasis: string
+  baseline: {
+    noindexListSha256: string
+    sitemapTotal: number
+    keep: Record<string, number>
+    noindex: Record<string, number>
+  }
+  after: {
+    noindexListSha256: string
+    sitemapTotal: number
+    keep: Record<string, number>
+    noindex: Record<string, number>
+  }
+  slugs: Record<string, string[]>
+  unchangedDirectories: Record<string, { keep: number; noindex: number }>
+  classification: { thin: number; duplicate: number; noEvidence: number }
+  protectedNoindex: string[]
+}
+
+/**
+ * Phase INDEX-01 recovery record. Both hashes are sha256 over the canonical
+ * 2-space JSON serialization of noindex-list.json, so they are independent of
+ * git line-ending normalisation. Values are observed, never assumed.
+ */
+export const H02_INDEX01_RECOVERY: H02Index01Recovery = Object.freeze({
+  phase: "INDEX-01",
+  action: "MOVE_NOINDEX_TO_KEEP_ONLY",
+  approvedCount: 52,
+  baselineCommit: "3908cca962f1ebbe9ad6a88e4ededbb08cf58c79",
+  hashBasis: "sha256 of JSON.stringify(JSON.parse(noindex-list.json), null, 2)",
+  baseline: {
+    noindexListSha256: "28715ee5e2facf7509b57c5289c6c4cca0d3221ac3f5acb7de13a9787839be3f",
+    sitemapTotal: 493,
+    keep: { reviews: 99, best: 1, guides: 36, statistics: 20 },
+    noindex: { reviews: 52, best: 175, guides: 64, statistics: 84 },
+  },
+  after: {
+    noindexListSha256: "d823cc56067e4d7ee47ac97ca311007f6cdb641ef85cd57f7fbe672e17c9a2a9",
+    sitemapTotal: 545,
+    keep: { reviews: 138, best: 6, guides: 40, statistics: 24 },
+    noindex: { reviews: 13, best: 170, guides: 60, statistics: 80 },
+  },
+  slugs: {
+    reviews: [
+      "auth0",
+      "basecamp",
+      "circleci",
+      "close-crm",
+      "copper-crm",
+      "crowdstrike",
+      "evernote",
+      "expensify",
+      "fathom",
+      "grafana",
+      "grammarly",
+      "greenhouse",
+      "heap",
+      "jfrog",
+      "lever",
+      "marketo",
+      "midjourney",
+      "new-relic",
+      "obsidian",
+      "okta",
+      "optimizely",
+      "outreach-io",
+      "plausible",
+      "postman",
+      "power-bi",
+      "ringcentral",
+      "roam-research",
+      "runway",
+      "sage-intacct",
+      "salesloft",
+      "sentinelone",
+      "smartsheet",
+      "survey-monkey",
+      "tableau",
+      "wave",
+      "workday",
+      "wrike",
+      "writesonic",
+      "zeplin",
+    ],
+    best: [
+      "best-accounting-software",
+      "best-crm-software",
+      "best-ecommerce-platforms",
+      "best-erp-software",
+      "best-project-management-software",
+    ],
+    guides: [
+      "project-management-software-buyers-guide",
+      "security-software-buyers-guide",
+      "vendor-risk-assessment",
+      "web-design-platform-selection",
+    ],
+    statistics: ["dental-software", "manufacturing-software", "productanalytics-software", "saas-statistics"],
+  },
+  unchangedDirectories: {
+    comparisons: { keep: 9, noindex: 916 },
+    alternatives: { keep: 7, noindex: 71 },
+    glossary: { keep: 30, noindex: 92 },
+    blog: { keep: 97, noindex: 0 },
+  },
+  classification: { thin: 135, duplicate: 97, noEvidence: 171 },
+  protectedNoindex: ["/search", "/dashboard", "/authors/pilotstack-team"],
 })
 
 export interface H02SafetyClause {
@@ -330,7 +452,7 @@ export const H02_SAFETY_CLAUSES: readonly H02SafetyClause[] = Object.freeze([
   {
     id: "SC-03",
     clause:
-      "noindex-list.json, src/app/robots.ts, src/app/sitemap.ts, next.config.ts and every canonical URL are byte-identical before and after.",
+      "H-02 itself edits none of these surfaces: noindex-list.json, src/app/robots.ts, src/app/sitemap.ts, next.config.ts and every canonical URL stay byte-identical across H-02's own execution. The only later change to noindex-list.json is the separately approved Phase INDEX-01 recovery of exactly 52 slugs recorded in H02_INDEX01_RECOVERY.",
   },
   {
     id: "SC-04",
@@ -402,7 +524,7 @@ export const H02_ACCEPTANCE_TESTS: readonly H02AcceptanceTest[] = Object.freeze(
     id: "T-H02-04",
     name: "prose scope is a fixed list",
     asserts:
-      "H02_PROSE_SCOPE_SLUGS has exactly 23 unique members, each is a real content/reviews/<slug>.json, each is inside the object set, and each is listed in noindex-list.json#/directories/reviews/noindex.",
+      "H02_PROSE_SCOPE_SLUGS has exactly 23 unique members, each is a real content/reviews/<slug>.json, each is inside the object set, and each is declared in noindex-list.json#/directories/reviews (keep or noindex): the 17 prose pages inside the Phase INDEX-01 recovery set are now listed under keep, the other 6 stay under noindex.",
     catches: "B-H02-02 prose-scope drift",
   },
   {
@@ -430,7 +552,7 @@ export const H02_ACCEPTANCE_TESTS: readonly H02AcceptanceTest[] = Object.freeze(
     id: "T-H02-08",
     name: "SEO surfaces are unchanged",
     asserts:
-      "Sitemap membership stays 493 total / 99 reviews / 7 alternatives, the review split stays 151 / 99 / 52, and noindex-list.json plus robots.ts are unmodified.",
+      "Sitemap membership stays 545 total / 138 reviews / 7 alternatives, the review split stays 151 / 138 / 13, no noindexed URL appears in the sitemap, robots.ts is unmodified, and noindex-list.json differs from its Phase INDEX-01 baseline only by the approved 52-slug recovery recorded in H02_INDEX01_RECOVERY.",
     catches: "B-H02-02 downstream indexation change",
   },
   {
@@ -446,6 +568,13 @@ export const H02_ACCEPTANCE_TESTS: readonly H02AcceptanceTest[] = Object.freeze(
     asserts:
       "H01_CONTRACT keeps version 1.0.0, approval status GRANTED, 17 approved and 13 excluded remediation ids, the doesNotGrant entry 'publication of content/alternatives/*.json', and H-02 records that it does not amend H-01.",
     catches: "H-01 amendment by inference",
+  },
+  {
+    id: "T-H02-11",
+    name: "INDEX-01 recovery set is exactly the approved 52",
+    asserts:
+      "H02_INDEX01_RECOVERY lists the approved 52 slugs by family with before/after sha256 and counts; the post-recovery noindex-list.json moved exactly those slugs from noindex[] to keep[], no other slug changed state, no unpublished slug is declared keep, and the 135 thin, 97 duplicate and 171 no-evidence classifications are untouched.",
+    catches: "unapproved indexation recovery",
   },
 ])
 
@@ -545,6 +674,7 @@ export interface H02Contract {
     canonicalMayChange: boolean
     robotsMayChange: boolean
   }
+  index01Recovery: H02Index01Recovery
   provenancePosture: {
     touched: boolean
     claimPathCount: number
@@ -674,6 +804,7 @@ export const H02_CONTRACT: H02Contract = Object.freeze({
     canonicalMayChange: false,
     robotsMayChange: false,
   },
+  index01Recovery: { ...H02_INDEX01_RECOVERY },
   provenancePosture: {
     touched: false,
     claimPathCount: 13,
@@ -697,13 +828,14 @@ export const H02_CONTRACT: H02Contract = Object.freeze({
     "approval status is GRANTED explicitly and is never inferred from a blocking_reason string",
     "the object set is exactly 52 cohort slugs, each with an existing published:false alternatives file",
     "the 75-file and 101-file candidate sets are excluded with a written reason",
-    "the prose scope is exactly 23 fixed slugs, each a real noindex review inside the object set",
+    "the prose scope is exactly 23 fixed slugs, each a real declared review inside the object set, 17 of which Phase INDEX-01 recovered from noindex to keep",
     "the prose definition names every field that renders user-visible prose, section titles included, and states the published === false reachability rule",
     "the contract changelog records v1.1.0 as the explicit reopen that added content[].title to the five-field v1.0.0 enumeration",
     "the 23 in-scope cases plus the 6 documented exclusions reconcile to the 29 Phase 5B F2 cases",
     "cross-references outside the object set are documented and cleared by the same sentence edit",
     "decision B publishes nothing and adds no /alternatives/* URL",
-    "sitemap membership, noindex policy, canonical URLs and robots.txt are unchanged",
+    "robots.txt, canonical URLs, sitemap quality rules, follow policy, link guards, unpublished 404 behaviour, the content files and the C / D / E classification decisions are unchanged",
+    "sitemap membership and noindex policy changed only by the approved 52-slug Phase INDEX-01 recovery recorded in H02_INDEX01_RECOVERY, and no noindexed URL is sitemapped",
     "T-ALT-03 is MODEL 1 with no VERIFIED requirement, no alternatives provenance path, no renderer gate and no content suppression",
     "no provenance path, record, status or source changes",
     "H-01 is neither modified, bypassed nor amended",

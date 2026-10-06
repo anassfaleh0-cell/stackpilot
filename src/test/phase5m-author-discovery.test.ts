@@ -28,8 +28,8 @@ describe("P5M-W1: one authoritative author slug source", () => {
     expect(authorPaths).not.toContain("/authors/pilotstack-team")
   })
 
-  it("keeps the frozen sitemap total of 493", () => {
-    expect(sitemap()).toHaveLength(493)
+  it("keeps the frozen sitemap total of 545 (493 + 52 Phase INDEX-01 recoveries)", () => {
+    expect(sitemap()).toHaveLength(545)
   })
 
   it("prerenders every author identity, listed or not", () => {

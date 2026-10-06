@@ -2,8 +2,8 @@
   "generatedAt": "2026-09-19T01:24:35.342Z",
   "summary": {
     "totalFiles": 1799,
-    "totalKeep": 345,
-    "totalNoindex": 1454
+    "totalKeep": 351,
+    "totalNoindex": 1448
   },
   "directories": {
     "comparisons": {
@@ -947,7 +947,12 @@
     "best": {
       "total": 196,
       "keep": [
-        "best-marketing-seo-enterprise"
+        "best-marketing-seo-enterprise",
+        "best-accounting-software",
+        "best-crm-software",
+        "best-ecommerce-platforms",
+        "best-erp-software",
+        "best-project-management-software"
       ],
       "noindex": [
         "best-communication-freelancers",
@@ -1018,7 +1023,6 @@
         "best-web-design-remote-teams",
         "best-web-design-small-business",
         "best-web-design-startups",
-        "best-accounting-software",
         "best-ai-tools",
         "best-ai-writing-tools",
         "best-analytics-software",
@@ -1030,15 +1034,12 @@
         "best-collaboration-software",
         "best-communication-tools",
         "best-consent-management-platforms",
-        "best-crm-software",
         "best-customer-data-platforms",
         "best-customer-support-software",
         "best-data-analytics-platforms",
         "best-design-tools",
         "best-developer-tools",
-        "best-ecommerce-platforms",
         "best-email-marketing-software",
-        "best-erp-software",
         "best-expense-management-software",
         "best-form-builders",
         "best-freelance-platforms",
@@ -1054,7 +1055,6 @@
         "best-password-managers",
         "best-payment-platforms",
         "best-productivity-tools",
-        "best-project-management-software",
         "best-proposal-software",
         "best-real-estate-software",
         "best-remote-work-tools",
@@ -1290,7 +1290,11 @@
         "cloudsecurity-software",
         "communication-software",
         "construction-software",
-        "consulting-software"
+        "consulting-software",
+        "dental-software",
+        "manufacturing-software",
+        "productanalytics-software",
+        "saas-statistics"
       ],
       "noindex": [
         "customeranalytics-software",
@@ -1300,7 +1304,6 @@
         "dataprivacy-software",
         "datascience-software",
         "datavisualization-software",
-        "dental-software",
         "design-software",
         "devops-software",
         "e-commerce-software",
@@ -1332,7 +1335,6 @@
         "legal-software",
         "legaltech-software",
         "logistics-software",
-        "manufacturing-software",
         "maritime-software",
         "marketing-software",
         "marketinganalytics-software",
@@ -1349,7 +1351,6 @@
         "pharmacy-software",
         "photography-software",
         "pr-software",
-        "productanalytics-software",
         "projectmanagement-software",
         "proptech-software",
         "prtech-software",
@@ -1375,8 +1376,7 @@
         "ai-software",
         "crm-software",
         "marketing-statistics",
-        "project-management",
-        "saas-statistics"
+        "project-management"
       ],
       "keepTop": 20,
       "stats": {
@@ -1514,7 +1514,11 @@
         "feature-management-platforms",
         "sales-enablement-platforms",
         "sales-engagement-platform-guide",
-        "building-your-seo-toolkit"
+        "building-your-seo-toolkit",
+        "project-management-software-buyers-guide",
+        "security-software-buyers-guide",
+        "vendor-risk-assessment",
+        "web-design-platform-selection"
       ],
       "noindex": [
         "contract-management-software",
@@ -1549,12 +1553,10 @@
         "password-management-enterprise-guide",
         "privacy-analytics-guide",
         "product-analytics-implementation",
-        "project-management-software-buyers-guide",
         "recruiting-software-selection",
         "remote-work-software-stack",
         "revenue-operations-platforms",
         "saas-procurement-guide",
-        "security-software-buyers-guide",
         "social-media-management-guide",
         "software-cost-analysis",
         "software-evaluation-framework",
@@ -1564,8 +1566,6 @@
         "team-collaboration-tools-guide",
         "total-cost-ownership-saas",
         "ux-research-tools-guide",
-        "vendor-risk-assessment",
-        "web-design-platform-selection",
         "workflow-automation-guide",
         "agile-transformation-guide",
         "ai-implementation-guide",
@@ -1799,18 +1799,13 @@
         "webflow",
         "zapier",
         "zendesk",
-        "zoho"
-      ],
-      "noindex": [
-        "affinity",
+        "zoho",
         "auth0",
         "basecamp",
         "circleci",
         "close-crm",
         "copper-crm",
-        "copy-ai",
         "crowdstrike",
-        "dialpad",
         "evernote",
         "expensify",
         "fathom",
@@ -1818,8 +1813,6 @@
         "grammarly",
         "greenhouse",
         "heap",
-        "hi-bob",
-        "invision",
         "jfrog",
         "lever",
         "marketo",
@@ -1840,17 +1833,24 @@
         "sentinelone",
         "smartsheet",
         "survey-monkey",
-        "synthesia",
         "tableau",
-        "telegram",
-        "terraform",
-        "todoist",
-        "vonage",
         "wave",
         "workday",
         "wrike",
         "writesonic",
-        "zeplin",
+        "zeplin"
+      ],
+      "noindex": [
+        "affinity",
+        "copy-ai",
+        "dialpad",
+        "hi-bob",
+        "invision",
+        "synthesia",
+        "telegram",
+        "terraform",
+        "todoist",
+        "vonage",
         "zoho-books",
         "zoho-crm",
         "zoho-people"
@@ -2968,7 +2968,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "basecamp",
@@ -2982,7 +2982,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "circleci",
@@ -2996,7 +2996,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "close-crm",
@@ -3010,7 +3010,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "copper-crm",
@@ -3024,7 +3024,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "crowdstrike",
@@ -3038,7 +3038,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "dialpad",
@@ -3066,7 +3066,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "expensify",
@@ -3080,7 +3080,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "fathom",
@@ -3094,7 +3094,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "grafana",
@@ -3108,7 +3108,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "greenhouse",
@@ -3122,7 +3122,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "heap",
@@ -3136,7 +3136,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "hi-bob",
@@ -3178,7 +3178,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "lever",
@@ -3192,7 +3192,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "marketo",
@@ -3206,7 +3206,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "new-relic",
@@ -3220,7 +3220,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "obsidian",
@@ -3234,7 +3234,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "okta",
@@ -3248,7 +3248,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "optimizely",
@@ -3262,7 +3262,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "outreach-io",
@@ -3276,7 +3276,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "plausible",
@@ -3290,7 +3290,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "postman",
@@ -3304,7 +3304,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "power-bi",
@@ -3318,7 +3318,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "ringcentral",
@@ -3332,7 +3332,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "roam-research",
@@ -3346,7 +3346,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "sage-intacct",
@@ -3360,7 +3360,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "salesloft",
@@ -3374,7 +3374,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "sentinelone",
@@ -3388,7 +3388,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "smartsheet",
@@ -3402,7 +3402,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "survey-monkey",
@@ -3416,7 +3416,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "tableau",
@@ -3430,7 +3430,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "telegram",
@@ -3500,7 +3500,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "workday",
@@ -3514,7 +3514,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "wrike",
@@ -3528,7 +3528,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "zeplin",
@@ -3542,7 +3542,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "zoho-books",
@@ -3738,7 +3738,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-ai-machine-learning-enterprise",
@@ -3752,7 +3752,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-ai-machine-learning-freelancers",
@@ -3766,7 +3766,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-ai-machine-learning-remote-teams",
@@ -3780,7 +3780,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-ai-machine-learning-small-business",
@@ -3794,7 +3794,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-ai-machine-learning-startups",
@@ -3808,7 +3808,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-analytics-data-agencies",
@@ -3822,7 +3822,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-analytics-data-enterprise",
@@ -3836,7 +3836,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-analytics-data-freelancers",
@@ -3850,7 +3850,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-analytics-data-remote-teams",
@@ -3864,7 +3864,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-analytics-data-small-business",
@@ -3878,7 +3878,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-analytics-data-startups",
@@ -3892,7 +3892,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-automation-agencies",
@@ -3906,7 +3906,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-automation-enterprise",
@@ -3920,7 +3920,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-automation-freelancers",
@@ -3934,7 +3934,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-automation-remote-teams",
@@ -3948,7 +3948,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-automation-small-business",
@@ -3962,7 +3962,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-automation-startups",
@@ -3976,7 +3976,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-communication-agencies",
@@ -3990,7 +3990,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-communication-enterprise",
@@ -4004,7 +4004,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "best-communication-freelancers",
@@ -5250,7 +5250,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "midjourney",
@@ -5264,7 +5264,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "runway",
@@ -5278,7 +5278,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "synthesia",
@@ -5306,7 +5306,7 @@
       "sections": 9,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "best-accounting-software",
@@ -5320,7 +5320,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "best-ai-tools",
@@ -5488,7 +5488,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "best-customer-data-platforms",
@@ -5572,7 +5572,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "best-email-marketing-software",
@@ -5600,7 +5600,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "best-expense-management-software",
@@ -5824,7 +5824,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "best-proposal-software",
@@ -6020,7 +6020,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "1password-vs-lastpass",
@@ -6034,7 +6034,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "adp-vs-deel",
@@ -6216,7 +6216,7 @@
       "sections": 0,
       "isThin": false,
       "isDuplicate": true,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "bitwarden-vs-lastpass",
@@ -8708,7 +8708,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "recruiting-software-selection",
@@ -8778,7 +8778,7 @@
       "sections": 8,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "social-media-management-guide",
@@ -8918,7 +8918,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "web-design-platform-selection",
@@ -8932,7 +8932,7 @@
       "sections": 7,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "workflow-automation-guide",
@@ -10052,7 +10052,7 @@
       "sections": 5,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "design-software",
@@ -10500,7 +10500,7 @@
       "sections": 5,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "maritime-software",
@@ -10738,7 +10738,7 @@
       "sections": 5,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "projectmanagement-software",
@@ -11578,7 +11578,7 @@
       "sections": 4,
       "isThin": false,
       "isDuplicate": false,
-      "keep": false
+      "keep": true
     },
     {
       "slug": "best-design-software-small-business",
@@ -11704,7 +11704,7 @@
       "sections": 2,
       "isThin": false,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "1password-vs-bitwarden",
@@ -23968,7 +23968,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "adp-alternatives",
@@ -23996,7 +23996,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "ahrefs-alternatives",
@@ -24010,7 +24010,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "airtable-alternatives",
@@ -24024,7 +24024,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "amplitude-alternatives",
@@ -24038,7 +24038,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "asana-alternatives",
@@ -24066,7 +24066,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "bamboohr-alternatives",
@@ -24094,7 +24094,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "bitwarden-alternatives",
@@ -24108,7 +24108,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "calendly-alternatives",
@@ -24122,7 +24122,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "canva-alternatives",
@@ -24136,7 +24136,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "chatgpt-alternatives",
@@ -24164,7 +24164,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "clickup-alternatives",
@@ -24178,7 +24178,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "close-crm-alternatives",
@@ -24192,7 +24192,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "copper-crm-alternatives",
@@ -24206,7 +24206,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "copy-ai-alternatives",
@@ -24220,7 +24220,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "crowdstrike-alternatives",
@@ -24234,7 +24234,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "dialpad-alternatives",
@@ -24248,7 +24248,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "docker-alternatives",
@@ -24276,7 +24276,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "expensify-alternatives",
@@ -24290,7 +24290,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "fathom-alternatives",
@@ -24304,7 +24304,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "figma-alternatives",
@@ -24318,7 +24318,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "firebase-alternatives",
@@ -24346,7 +24346,7 @@
       "sections": 2,
       "isThin": true,
       "isDuplicate": false,
-      "keep": true
+      "keep": false
     },
     {
       "slug": "freshbooks-alternatives",

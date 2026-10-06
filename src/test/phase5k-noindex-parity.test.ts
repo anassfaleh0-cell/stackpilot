@@ -190,8 +190,8 @@ describe("P5K-C1/D: sitemap invariants", () => {
   const entries = sitemap()
   const paths = entries.map((e) => new URL(e.url).pathname)
 
-  it("emits exactly 493 URLs", () => {
-    expect(entries).toHaveLength(493)
+  it("emits exactly 545 URLs (493 + the 52 Phase INDEX-01 recoveries)", () => {
+    expect(entries).toHaveLength(545)
   })
 
   it("keeps /comparisons/zoom-vs-webex absent", () => {
@@ -291,7 +291,9 @@ const REMOVED_KEEP_COLLISIONS: Record<string, string[]> = {
   ],
 }
 
-// The keep entries that must survive untouched in the three reconciled families.
+// The keep entries that must be present in the three reconciled families.
+// comparisons and alternatives are still exactly the Phase 5K-D2 survivors; best now
+// also carries the 5 Phase INDEX-01 recoveries alongside its D2 survivor.
 const SURVIVING_KEEP: Record<string, string[]> = {
   comparisons: [
     "firebase-vs-appwrite",
@@ -304,7 +306,14 @@ const SURVIVING_KEEP: Record<string, string[]> = {
     "slack-vs-microsoft-teams-remote",
     "trello-vs-asana-personal-use",
   ],
-  best: ["best-marketing-seo-enterprise"],
+  best: [
+    "best-accounting-software",
+    "best-crm-software",
+    "best-ecommerce-platforms",
+    "best-erp-software",
+    "best-project-management-software",
+    "best-marketing-seo-enterprise",
+  ],
   alternatives: [
     "free-alternatives-to-slack",
     "adp-alternatives",
@@ -316,30 +325,34 @@ const SURVIVING_KEEP: Record<string, string[]> = {
   ],
 }
 
-// Frozen noindex-list.json contract measured before the D2 edit.
+// Frozen noindex-list.json contract measured before the D2 edit, then re-frozen by
+// Phase INDEX-01 after exactly the approved 52 B-class slugs moved noindex -> keep
+// (reviews 39, best 5, guides 4, statistics 4). Every other family is untouched.
+
 const FROZEN_KEEP_COUNTS: Record<string, number> = {
   comparisons: 9,
-  best: 1,
+  best: 6,
   alternatives: 7,
   glossary: 30,
-  statistics: 20,
-  guides: 36,
+  statistics: 24,
+  guides: 40,
   blog: 97,
-  reviews: 99,
+  reviews: 138,
 }
 const FROZEN_NOINDEX_COUNTS: Record<string, number> = {
   comparisons: 916,
-  best: 175,
+  best: 170,
   alternatives: 71,
   glossary: 92,
-  statistics: 84,
-  guides: 64,
+  statistics: 80,
+  guides: 60,
   blog: 0,
-  reviews: 52,
+  reviews: 13,
 }
-const FROZEN_TOTAL_KEEP = 299
-const FROZEN_TOTAL_NOINDEX = 1454
+const FROZEN_TOTAL_KEEP = 351
+const FROZEN_TOTAL_NOINDEX = 1402
 const REMOVED_COLLISION_COUNT = 46
+const INDEX01_RECOVERED_COUNT = 52
 
 const NOINDEX_LIST_FILE = path.join(process.cwd(), "noindex-list.json")
 const KEEP_FAMILIES = ["comparisons", "best", "alternatives", "glossary", "statistics", "guides", "blog", "reviews"]
@@ -376,9 +389,25 @@ describe("P5K-D2: keep/published:false collisions removed", () => {
     }
   })
 
-  it("brings the keep contract to exactly 299", () => {
+  it("brings the keep contract to exactly 351", () => {
     const total = KEEP_FAMILIES.reduce((n, fam) => n + getKeepSlugs(fam).length, 0)
     expect(total).toBe(FROZEN_TOTAL_KEEP)
+  })
+
+  it("grew by exactly the 52 Phase INDEX-01 recoveries and nothing else", () => {
+    const keepBeforeIndex01 = 299
+    const noindexBeforeIndex01 = 1454
+    expect(INDEX01_RECOVERED_COUNT).toBe(52)
+    expect(FROZEN_TOTAL_KEEP).toBe(keepBeforeIndex01 + INDEX01_RECOVERED_COUNT)
+    expect(FROZEN_TOTAL_NOINDEX).toBe(noindexBeforeIndex01 - INDEX01_RECOVERED_COUNT)
+    expect(FROZEN_KEEP_COUNTS.reviews - 99).toBe(39)
+    expect(FROZEN_KEEP_COUNTS.best - 1).toBe(5)
+    expect(FROZEN_KEEP_COUNTS.guides - 36).toBe(4)
+    expect(FROZEN_KEEP_COUNTS.statistics - 20).toBe(4)
+    expect(FROZEN_NOINDEX_COUNTS.comparisons).toBe(916)
+    expect(FROZEN_NOINDEX_COUNTS.alternatives).toBe(71)
+    expect(FROZEN_NOINDEX_COUNTS.glossary).toBe(92)
+    expect(FROZEN_NOINDEX_COUNTS.blog).toBe(0)
   })
 
   it("leaves zero published:false records in keep across every family", () => {

@@ -258,7 +258,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
         { category: "Design & Creative", href: "/reviews/affinity" },
         { category: "Productivity", href: "/comparisons/airtable-vs-notion" },
         { category: "CRM & Sales", href: "/guides/crm-migration-checklist" },
-        { category: "Marketing & SEO", href: "/best/best-ecommerce-platforms" },
+        { category: "Marketing & SEO", href: "/best/best-marketing-software" },
         { category: "HR & People", href: "/alternatives/gusto-alternatives" },
         { category: "Developer Tools", href: "/glossary/devops" },
         { category: "Data Engineering", href: "/statistics/dataengineering-software" },

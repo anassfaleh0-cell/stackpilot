@@ -108,7 +108,7 @@ describe("Phase 5O-B-1: internal link discovery", () => {
       { type: "review", category: "Design & Creative", slug: "affinity", keep: "figma" },
       { type: "comparison", category: "Productivity", slug: "airtable-vs-notion", keep: "clickup-vs-notion-small-teams" },
       { type: "guide", category: "CRM & Sales", slug: "crm-migration-checklist", keep: "crm-pricing-guide" },
-      { type: "best", category: "Marketing & SEO", slug: "best-ecommerce-platforms", keep: "best-marketing-seo-enterprise" },
+      { type: "best", category: "Marketing & SEO", slug: "best-marketing-software", keep: "best-marketing-seo-enterprise" },
       { type: "alternative", category: "HR & People", slug: "gusto-alternatives", keep: "bamboohr-alternatives" },
       { type: "glossary", category: "Developer Tools", slug: "devops", keep: "api" },
       { type: "statistic", category: "Data Engineering", slug: "dataengineering-software", keep: "" },
