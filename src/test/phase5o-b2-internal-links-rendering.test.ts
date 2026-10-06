@@ -256,7 +256,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
     () => {
       const forbidden = [
         { category: "Design & Creative", href: "/reviews/affinity" },
-        { category: "Productivity", href: "/comparisons/airtable-vs-notion" },
+        { category: "Productivity", href: "/comparisons/notion-vs-confluence" },
         { category: "CRM & Sales", href: "/guides/crm-migration-checklist" },
         { category: "Marketing & SEO", href: "/best/best-marketing-software" },
         { category: "HR & People", href: "/alternatives/gusto-alternatives" },

@@ -2,9 +2,9 @@ export const H02_ID = "H-02"
 
 export const H02_TITLE = "alternatives publication decision"
 
-export const H02_CONTRACT_VERSION = "1.2.0"
+export const H02_CONTRACT_VERSION = "1.3.0"
 
-export const H02_CONTRACT_PREVIOUS_VERSION = "1.1.0"
+export const H02_CONTRACT_PREVIOUS_VERSION = "1.2.0"
 
 export const H02_PHASE_5A_REQUIREMENT = 5
 
@@ -171,6 +171,14 @@ export interface H02ContractChangelogEntry {
 
 export const H02_CONTRACT_CHANGELOG: readonly H02ContractChangelogEntry[] = Object.freeze([
   {
+    version: "1.3.0",
+    date: "2026-10-06",
+    summary:
+      "Records the approved Phase INDEX-02A wave 1 noindex recovery: exactly the 31 P0 RECOVER slugs (29 comparisons and 2 alternatives) move from directories.*.noindex to directories.*.keep, H02_SEO_INVARIANT follows the observed post-recovery sitemap of 576 with 9 alternatives, and T-H02-12 is added to police the wave-1 recovery set itself.",
+    reason:
+      "Phase INDEX-02 re-derived the indexation classes from the read-only audit and proved that 31 published, 300+ word, non-duplicate pages with recorded GSC impressions (1-18) and live HTTP 200 responses were suppressed by noindex-list.json, so the approved wave 1 removes noindex from exactly those 31 and nothing else. The 52-file object set, the 23-page prose scope, decision B, robots.txt, canonical rules, the 135 thin / 97 duplicate / 171 no-evidence classifications measured at the Phase INDEX-01 baseline and every H-01 posture are unchanged; sitemapExpansion stays 0 because it measures decision-B expansion only, while the +31 observed growth is recorded in H02_INDEX02A_RECOVERY.",
+  },
+  {
     version: "1.2.0",
     date: "2026-10-05",
     summary:
@@ -307,9 +315,9 @@ export const H02_REVIEW_ALTERNATIVES_ARRAY = Object.freeze({
 })
 
 export const H02_SEO_INVARIANT = Object.freeze({
-  sitemapAlternatives: 7,
+  sitemapAlternatives: 9,
   sitemapReviews: 138,
-  sitemapTotal: 545,
+  sitemapTotal: 576,
   reviewsTotal: 151,
   reviewsIndexable: 138,
   reviewsNoindex: 13,
@@ -433,6 +441,104 @@ export const H02_INDEX01_RECOVERY: H02Index01Recovery = Object.freeze({
   protectedNoindex: ["/search", "/dashboard", "/authors/pilotstack-team"],
 })
 
+export interface H02Index02aRecovery {
+  phase: string
+  wave: string
+  action: string
+  approvedCount: number
+  baselineCommit: string
+  hashBasis: string
+  selectionBasis: string
+  baseline: {
+    noindexListSha256: string
+    sitemapTotal: number
+    keep: Record<string, number>
+    noindex: Record<string, number>
+  }
+  after: {
+    noindexListSha256: string
+    sitemapTotal: number
+    keep: Record<string, number>
+    noindex: Record<string, number>
+  }
+  slugs: Record<string, string[]>
+  unaffectedDirectories: Record<string, { keep: number; noindex: number }>
+  protectedNoindex: string[]
+}
+
+/**
+ * Phase INDEX-02A wave 1 recovery record. baseline is the exact post-INDEX-01
+ * state (its sha256 equals H02_INDEX01_RECOVERY.after.noindexListSha256) and
+ * after is the observed canonical sha256 of noindex-list.json once exactly the
+ * approved 31 P0 RECOVER slugs moved noindex -> keep. Values are observed,
+ * never assumed.
+ */
+export const H02_INDEX02A_RECOVERY: H02Index02aRecovery = Object.freeze({
+  phase: "INDEX-02A",
+  wave: "WAVE_1",
+  action: "MOVE_NOINDEX_TO_KEEP_ONLY",
+  approvedCount: 31,
+  baselineCommit: "3ee40abe275506dc46c3969e4bbdc9be1fc3366c",
+  hashBasis: "sha256 of JSON.stringify(JSON.parse(noindex-list.json), null, 2)",
+  selectionBasis:
+    "Phase INDEX-02 read-only audit rows with class RECOVER and priority P0: published, live HTTP 200, 300+ words, GSC impressions > 0, verified non-duplicate by shingle and title analysis; 29 comparisons plus the 2 alternatives cluster primaries",
+  baseline: {
+    noindexListSha256: "d823cc56067e4d7ee47ac97ca311007f6cdb641ef85cd57f7fbe672e17c9a2a9",
+    sitemapTotal: 545,
+    keep: { comparisons: 9, alternatives: 7 },
+    noindex: { comparisons: 916, alternatives: 71 },
+  },
+  after: {
+    noindexListSha256: "87e2cef4d8c93490ee4590d4968378b83042deac33fbb0ef1da3b6ddc2aa8411",
+    sitemapTotal: 576,
+    keep: { comparisons: 38, alternatives: 9 },
+    noindex: { comparisons: 887, alternatives: 69 },
+  },
+  slugs: {
+    alternatives: ["monday-com-alternatives", "semrush-alternatives"],
+    comparisons: [
+      "ahrefs-vs-moz",
+      "airtable-vs-asana",
+      "airtable-vs-clickup",
+      "airtable-vs-notion",
+      "amplitude-vs-hotjar",
+      "asana-vs-clickup",
+      "asana-vs-linear",
+      "bamboohr-vs-adp",
+      "bitwarden-vs-lastpass",
+      "calendly-vs-acuity",
+      "canva-vs-adobe-express",
+      "confluence-vs-notion",
+      "docker-vs-podman",
+      "github-vs-bitbucket",
+      "github-vs-sourceforge",
+      "google-analytics-vs-amplitude",
+      "google-analytics-vs-matomo",
+      "hubspot-vs-pipedrive",
+      "jira-vs-confluence",
+      "mailchimp-vs-activecampaign",
+      "microsoft-teams-vs-discord",
+      "netlify-vs-cloudflare-pages",
+      "rippling-vs-adp",
+      "salesforce-vs-freshsales",
+      "salesforce-vs-zoho",
+      "sentry-vs-datadog",
+      "slack-vs-zoom",
+      "stripe-vs-paddle",
+      "supabase-vs-appwrite",
+    ],
+  },
+  unaffectedDirectories: {
+    best: { keep: 6, noindex: 170 },
+    blog: { keep: 97, noindex: 0 },
+    glossary: { keep: 30, noindex: 92 },
+    guides: { keep: 40, noindex: 60 },
+    reviews: { keep: 138, noindex: 13 },
+    statistics: { keep: 24, noindex: 80 },
+  },
+  protectedNoindex: ["/search", "/dashboard", "/authors/pilotstack-team"],
+})
+
 export interface H02SafetyClause {
   id: string
   clause: string
@@ -447,12 +553,12 @@ export const H02_SAFETY_CLAUSES: readonly H02SafetyClause[] = Object.freeze([
   {
     id: "SC-02",
     clause:
-      "No /alternatives/* URL is added. getAllAlternatives() keeps returning the same 26 records and sitemap.ts keeps emitting the same 7 alternatives URLs.",
+      "No /alternatives/* URL is added. getAllAlternatives() keeps returning the same 26 renderable records and sitemap.ts keeps emitting alternatives URLs only for non-noindexed slugs - 9 after the approved Phase INDEX-02A wave 1 recoveries, with no URL created by H-02.",
   },
   {
     id: "SC-03",
     clause:
-      "H-02 itself edits none of these surfaces: noindex-list.json, src/app/robots.ts, src/app/sitemap.ts, next.config.ts and every canonical URL stay byte-identical across H-02's own execution. The only later change to noindex-list.json is the separately approved Phase INDEX-01 recovery of exactly 52 slugs recorded in H02_INDEX01_RECOVERY.",
+      "H-02 itself edits none of these surfaces: noindex-list.json, src/app/robots.ts, src/app/sitemap.ts, next.config.ts and every canonical URL stay byte-identical across H-02's own execution. The only later changes to noindex-list.json are the separately approved Phase INDEX-01 recovery of exactly 52 slugs recorded in H02_INDEX01_RECOVERY and the separately approved Phase INDEX-02A wave 1 recovery of exactly 31 slugs recorded in H02_INDEX02A_RECOVERY.",
   },
   {
     id: "SC-04",
@@ -552,7 +658,7 @@ export const H02_ACCEPTANCE_TESTS: readonly H02AcceptanceTest[] = Object.freeze(
     id: "T-H02-08",
     name: "SEO surfaces are unchanged",
     asserts:
-      "Sitemap membership stays 545 total / 138 reviews / 7 alternatives, the review split stays 151 / 138 / 13, no noindexed URL appears in the sitemap, robots.ts is unmodified, and noindex-list.json differs from its Phase INDEX-01 baseline only by the approved 52-slug recovery recorded in H02_INDEX01_RECOVERY.",
+      "Sitemap membership stays 576 total / 138 reviews / 9 alternatives, the review split stays 151 / 138 / 13, no noindexed URL appears in the sitemap, robots.ts is unmodified, and noindex-list.json differs from its Phase INDEX-01 baseline only by the approved recoveries recorded in H02_INDEX01_RECOVERY (52 slugs) and H02_INDEX02A_RECOVERY (31 slugs).",
     catches: "B-H02-02 downstream indexation change",
   },
   {
@@ -575,6 +681,13 @@ export const H02_ACCEPTANCE_TESTS: readonly H02AcceptanceTest[] = Object.freeze(
     asserts:
       "H02_INDEX01_RECOVERY lists the approved 52 slugs by family with before/after sha256 and counts; the post-recovery noindex-list.json moved exactly those slugs from noindex[] to keep[], no other slug changed state, no unpublished slug is declared keep, and the 135 thin, 97 duplicate and 171 no-evidence classifications are untouched.",
     catches: "unapproved indexation recovery",
+  },
+  {
+    id: "T-H02-12",
+    name: "INDEX-02A wave 1 recovery set is exactly the approved 31",
+    asserts:
+      "H02_INDEX02A_RECOVERY lists the approved 31 slugs by family (29 comparisons and 2 alternatives) with before/after sha256 and counts; noindex-list.json differs from the Phase INDEX-01 post-recovery state by exactly those 31 slugs moving noindex[] to keep[], every unaffected family keeps its Phase INDEX-01 counts, the post-wave sitemap is 576, and no unpublished slug is declared keep.",
+    catches: "unapproved wave-1 indexation recovery",
   },
 ])
 
@@ -675,6 +788,7 @@ export interface H02Contract {
     robotsMayChange: boolean
   }
   index01Recovery: H02Index01Recovery
+  index02aRecovery: H02Index02aRecovery
   provenancePosture: {
     touched: boolean
     claimPathCount: number
@@ -805,6 +919,7 @@ export const H02_CONTRACT: H02Contract = Object.freeze({
     robotsMayChange: false,
   },
   index01Recovery: { ...H02_INDEX01_RECOVERY },
+  index02aRecovery: { ...H02_INDEX02A_RECOVERY },
   provenancePosture: {
     touched: false,
     claimPathCount: 13,
@@ -835,7 +950,7 @@ export const H02_CONTRACT: H02Contract = Object.freeze({
     "cross-references outside the object set are documented and cleared by the same sentence edit",
     "decision B publishes nothing and adds no /alternatives/* URL",
     "robots.txt, canonical URLs, sitemap quality rules, follow policy, link guards, unpublished 404 behaviour, the content files and the C / D / E classification decisions are unchanged",
-    "sitemap membership and noindex policy changed only by the approved 52-slug Phase INDEX-01 recovery recorded in H02_INDEX01_RECOVERY, and no noindexed URL is sitemapped",
+    "sitemap membership and noindex policy changed only by the approved 52-slug Phase INDEX-01 recovery recorded in H02_INDEX01_RECOVERY and the approved 31-slug Phase INDEX-02A wave 1 recovery recorded in H02_INDEX02A_RECOVERY, and no noindexed URL is sitemapped",
     "T-ALT-03 is MODEL 1 with no VERIFIED requirement, no alternatives provenance path, no renderer gate and no content suppression",
     "no provenance path, record, status or source changes",
     "H-01 is neither modified, bypassed nor amended",

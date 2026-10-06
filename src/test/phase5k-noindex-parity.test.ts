@@ -152,8 +152,8 @@ describe("P5K-C1: indexable comparisons stay indexable", () => {
     await expect(ComparisonPage(params(INDEXABLE_SLUG))).resolves.toBeTruthy()
   })
 
-  it("keeps exactly nine published + indexable comparisons", () => {
-    expect(generateStaticParams().length).toBe(9)
+  it("keeps exactly 38 published + indexable comparisons (9 plus the 29 Phase INDEX-02A wave 1 recoveries)", () => {
+    expect(generateStaticParams().length).toBe(38)
   })
 })
 
@@ -190,8 +190,8 @@ describe("P5K-C1/D: sitemap invariants", () => {
   const entries = sitemap()
   const paths = entries.map((e) => new URL(e.url).pathname)
 
-  it("emits exactly 545 URLs (493 + the 52 Phase INDEX-01 recoveries)", () => {
-    expect(entries).toHaveLength(545)
+  it("emits exactly 576 URLs (493 + the 52 Phase INDEX-01 recoveries + the 31 Phase INDEX-02A wave 1 recoveries)", () => {
+    expect(entries).toHaveLength(576)
   })
 
   it("keeps /comparisons/zoom-vs-webex absent", () => {
@@ -292,8 +292,9 @@ const REMOVED_KEEP_COLLISIONS: Record<string, string[]> = {
 }
 
 // The keep entries that must be present in the three reconciled families.
-// comparisons and alternatives are still exactly the Phase 5K-D2 survivors; best now
-// also carries the 5 Phase INDEX-01 recoveries alongside its D2 survivor.
+// comparisons and alternatives carry the Phase 5K-D2 survivors plus the approved
+// Phase INDEX-02A wave 1 recoveries (29 comparisons, 2 alternatives); best also
+// carries the 5 Phase INDEX-01 recoveries alongside its D2 survivor.
 const SURVIVING_KEEP: Record<string, string[]> = {
   comparisons: [
     "firebase-vs-appwrite",
@@ -305,6 +306,35 @@ const SURVIVING_KEEP: Record<string, string[]> = {
     "notion-vs-obsidian-for-teams",
     "slack-vs-microsoft-teams-remote",
     "trello-vs-asana-personal-use",
+    "github-vs-sourceforge",
+    "mailchimp-vs-activecampaign",
+    "asana-vs-clickup",
+    "google-analytics-vs-amplitude",
+    "asana-vs-linear",
+    "bamboohr-vs-adp",
+    "ahrefs-vs-moz",
+    "airtable-vs-asana",
+    "google-analytics-vs-matomo",
+    "salesforce-vs-freshsales",
+    "supabase-vs-appwrite",
+    "bitwarden-vs-lastpass",
+    "canva-vs-adobe-express",
+    "hubspot-vs-pipedrive",
+    "netlify-vs-cloudflare-pages",
+    "rippling-vs-adp",
+    "salesforce-vs-zoho",
+    "airtable-vs-clickup",
+    "airtable-vs-notion",
+    "amplitude-vs-hotjar",
+    "calendly-vs-acuity",
+    "confluence-vs-notion",
+    "docker-vs-podman",
+    "github-vs-bitbucket",
+    "jira-vs-confluence",
+    "microsoft-teams-vs-discord",
+    "sentry-vs-datadog",
+    "slack-vs-zoom",
+    "stripe-vs-paddle",
   ],
   best: [
     "best-accounting-software",
@@ -322,17 +352,21 @@ const SURVIVING_KEEP: Record<string, string[]> = {
     "chatgpt-alternatives",
     "docker-alternatives",
     "firebase-alternatives",
+    "monday-com-alternatives",
+    "semrush-alternatives",
   ],
 }
 
 // Frozen noindex-list.json contract measured before the D2 edit, then re-frozen by
 // Phase INDEX-01 after exactly the approved 52 B-class slugs moved noindex -> keep
-// (reviews 39, best 5, guides 4, statistics 4). Every other family is untouched.
+// (reviews 39, best 5, guides 4, statistics 4), then re-frozen again by Phase
+// INDEX-02A wave 1 after exactly the approved 31 slugs moved noindex -> keep
+// (comparisons 29, alternatives 2). Every other family is untouched.
 
 const FROZEN_KEEP_COUNTS: Record<string, number> = {
-  comparisons: 9,
+  comparisons: 38,
   best: 6,
-  alternatives: 7,
+  alternatives: 9,
   glossary: 30,
   statistics: 24,
   guides: 40,
@@ -340,19 +374,20 @@ const FROZEN_KEEP_COUNTS: Record<string, number> = {
   reviews: 138,
 }
 const FROZEN_NOINDEX_COUNTS: Record<string, number> = {
-  comparisons: 916,
+  comparisons: 887,
   best: 170,
-  alternatives: 71,
+  alternatives: 69,
   glossary: 92,
   statistics: 80,
   guides: 60,
   blog: 0,
   reviews: 13,
 }
-const FROZEN_TOTAL_KEEP = 351
-const FROZEN_TOTAL_NOINDEX = 1402
+const FROZEN_TOTAL_KEEP = 382
+const FROZEN_TOTAL_NOINDEX = 1371
 const REMOVED_COLLISION_COUNT = 46
 const INDEX01_RECOVERED_COUNT = 52
+const INDEX02A_WAVE1_RECOVERED_COUNT = 31
 
 const NOINDEX_LIST_FILE = path.join(process.cwd(), "noindex-list.json")
 const KEEP_FAMILIES = ["comparisons", "best", "alternatives", "glossary", "statistics", "guides", "blog", "reviews"]
@@ -389,23 +424,28 @@ describe("P5K-D2: keep/published:false collisions removed", () => {
     }
   })
 
-  it("brings the keep contract to exactly 351", () => {
+  it("brings the keep contract to exactly 382", () => {
     const total = KEEP_FAMILIES.reduce((n, fam) => n + getKeepSlugs(fam).length, 0)
     expect(total).toBe(FROZEN_TOTAL_KEEP)
   })
 
-  it("grew by exactly the 52 Phase INDEX-01 recoveries and nothing else", () => {
+  it("grew by exactly the 52 Phase INDEX-01 recoveries plus the 31 Phase INDEX-02A wave 1 recoveries and nothing else", () => {
     const keepBeforeIndex01 = 299
     const noindexBeforeIndex01 = 1454
     expect(INDEX01_RECOVERED_COUNT).toBe(52)
-    expect(FROZEN_TOTAL_KEEP).toBe(keepBeforeIndex01 + INDEX01_RECOVERED_COUNT)
-    expect(FROZEN_TOTAL_NOINDEX).toBe(noindexBeforeIndex01 - INDEX01_RECOVERED_COUNT)
+    expect(INDEX02A_WAVE1_RECOVERED_COUNT).toBe(31)
+    expect(FROZEN_TOTAL_KEEP).toBe(keepBeforeIndex01 + INDEX01_RECOVERED_COUNT + INDEX02A_WAVE1_RECOVERED_COUNT)
+    expect(FROZEN_TOTAL_NOINDEX).toBe(
+      noindexBeforeIndex01 - INDEX01_RECOVERED_COUNT - INDEX02A_WAVE1_RECOVERED_COUNT,
+    )
     expect(FROZEN_KEEP_COUNTS.reviews - 99).toBe(39)
     expect(FROZEN_KEEP_COUNTS.best - 1).toBe(5)
     expect(FROZEN_KEEP_COUNTS.guides - 36).toBe(4)
     expect(FROZEN_KEEP_COUNTS.statistics - 20).toBe(4)
-    expect(FROZEN_NOINDEX_COUNTS.comparisons).toBe(916)
-    expect(FROZEN_NOINDEX_COUNTS.alternatives).toBe(71)
+    expect(FROZEN_KEEP_COUNTS.comparisons - 9).toBe(29)
+    expect(FROZEN_KEEP_COUNTS.alternatives - 7).toBe(2)
+    expect(FROZEN_NOINDEX_COUNTS.comparisons).toBe(887)
+    expect(FROZEN_NOINDEX_COUNTS.alternatives).toBe(69)
     expect(FROZEN_NOINDEX_COUNTS.glossary).toBe(92)
     expect(FROZEN_NOINDEX_COUNTS.blog).toBe(0)
   })

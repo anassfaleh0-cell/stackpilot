@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest"
 import fs from "node:fs"
 import path from "node:path"
 import { execFileSync } from "node:child_process"
-import { H02_INDEX01_RECOVERY } from "@/lib/content/h02-contract"
+import { H02_INDEX01_RECOVERY, H02_INDEX02A_RECOVERY } from "@/lib/content/h02-contract"
 import { isNoindexed } from "@/lib/noindex"
 import sitemap from "@/app/sitemap"
 import { getContentTitle, getReview, getBest, getGuide, getStatistic } from "@/lib/content/registry"
@@ -87,7 +87,7 @@ function diff(a: string[], b: string[]): string[] {
 }
 
 describe("INDEX-01 approved recovery set", () => {
-  it("1 and 2. the approved 52 are the only slugs that moved, and each is now keep", () => {
+  it("1 and 2. the approved 52 are all keep, with only the approved INDEX-02A wave-1 growth on top", () => {
     const dirs = readList()
     expect(APPROVED).toHaveLength(52)
     expect(new Set(APPROVED.map((e) => e.url)).size).toBe(52)
@@ -100,8 +100,18 @@ describe("INDEX-01 approved recovery set", () => {
     }
 
     for (const [dir, counts] of Object.entries(RECOVERY.unchangedDirectories)) {
-      expect(dirs[dir].keep, `${dir} keep changed`).toHaveLength(counts.keep)
-      expect(dirs[dir].noindex, `${dir} noindex changed`).toHaveLength(counts.noindex)
+      const wave1 = H02_INDEX02A_RECOVERY.slugs[dir]
+      if (wave1) {
+        expect(dirs[dir].keep, `${dir} keep must carry the approved wave-1 growth`).toHaveLength(
+          counts.keep + wave1.length,
+        )
+        expect(dirs[dir].noindex, `${dir} noindex must carry the approved wave-1 shrink`).toHaveLength(
+          counts.noindex - wave1.length,
+        )
+      } else {
+        expect(dirs[dir].keep, `${dir} keep changed`).toHaveLength(counts.keep)
+        expect(dirs[dir].noindex, `${dir} noindex changed`).toHaveLength(counts.noindex)
+      }
     }
     for (const [dir, slugs] of Object.entries(RECOVERY.slugs)) {
       expect(dirs[dir].keep).toHaveLength(RECOVERY.after.keep[dir])
@@ -167,7 +177,7 @@ describe("INDEX-01 approved recovery set", () => {
 
   it("12. the sitemap carries all 52 and no noindexed URL", () => {
     const paths = sitemap().map((entry) => new URL(entry.url).pathname)
-    expect(new Set(paths).size).toBe(545)
+    expect(new Set(paths).size).toBe(576)
     for (const { url } of APPROVED) expect(paths, `${url} missing from sitemap`).toContain(url)
 
     const overlap = paths.filter((p) => {
@@ -201,7 +211,11 @@ try {
 }
 
 function baselineList(): { directories: DirLists; allFiles: AllFile[] } {
-  const raw = execFileSync("git", ["show", `${RECOVERY.baselineCommit}:noindex-list.json`], {
+  return listAt(RECOVERY.baselineCommit)
+}
+
+function listAt(commit: string): { directories: DirLists; allFiles: AllFile[] } {
+  const raw = execFileSync("git", ["show", `${commit}:noindex-list.json`], {
     cwd: ROOT,
     encoding: "utf8",
     maxBuffer: 1 << 25,
@@ -209,22 +223,38 @@ function baselineList(): { directories: DirLists; allFiles: AllFile[] } {
   return JSON.parse(raw)
 }
 
+const WAVE1_KEYS = Object.entries(H02_INDEX02A_RECOVERY.slugs).flatMap(([dir, slugs]) =>
+  slugs.map((slug) => `${dir}/${slug}`),
+)
+
 describe.skipIf(!hasGit)("INDEX-01 transition against the pinned baseline", () => {
-  it("1, 2, 16 and 17. keep and noindex differ from the baseline by exactly the approved 52", () => {
-    const current = readList()
+  it("1, 2, 16 and 17. the INDEX-01 commit moved exactly the approved 52, and wave 1 moved exactly the approved 31", () => {
+    const index01 = listAt("3ee40abe275506dc46c3969e4bbdc9be1fc3366c")
     const baseline = baselineList()
 
-    for (const dir of Object.keys(current)) {
+    for (const dir of Object.keys(index01.directories)) {
       const before = baseline.directories[dir]
-      const after = current[dir]
-      expect(diff(after.keep, before.keep), `${dir} keep additions`).toEqual(approvedOf(dir))
-      expect(diff(before.keep, after.keep), `${dir} keep removals`).toEqual([])
-      expect(diff(before.noindex, after.noindex), `${dir} noindex removals`).toEqual(approvedOf(dir))
-      expect(diff(after.noindex, before.noindex), `${dir} noindex additions`).toEqual([])
+      const after = index01.directories[dir]
+      expect(diff(after.keep, before.keep), `${dir} INDEX-01 keep additions`).toEqual(approvedOf(dir))
+      expect(diff(before.keep, after.keep), `${dir} INDEX-01 keep removals`).toEqual([])
+      expect(diff(before.noindex, after.noindex), `${dir} INDEX-01 noindex removals`).toEqual(approvedOf(dir))
+      expect(diff(after.noindex, before.noindex), `${dir} INDEX-01 noindex additions`).toEqual([])
     }
+
+    const current = readList()
+    const preWave = index01.directories
+    for (const dir of Object.keys(current)) {
+      const wave1Of = [...(H02_INDEX02A_RECOVERY.slugs[dir] || [])].sort()
+      expect(diff(current[dir].keep, preWave[dir].keep).sort(), `${dir} wave-1 keep additions`).toEqual(wave1Of)
+      expect(diff(preWave[dir].keep, current[dir].keep), `${dir} wave-1 keep removals`).toEqual([])
+      expect(diff(preWave[dir].noindex, current[dir].noindex).sort(), `${dir} wave-1 noindex removals`).toEqual(wave1Of)
+      expect(diff(current[dir].noindex, preWave[dir].noindex), `${dir} wave-1 noindex additions`).toEqual([])
+    }
+    expect(WAVE1_KEYS).toHaveLength(31)
+    expect(new Set(WAVE1_KEYS).size).toBe(31)
   })
 
-  it("4, 5 and 6. the 135 thin, 97 duplicate and 171 no-evidence pages stay noindexed", () => {
+  it("4, 5 and 6. the 135 thin, 97 duplicate and 171 no-evidence pages stay noindexed bar the approved 31", () => {
     const current = readList()
     const baseline = baselineList()
     const approvedKeys = new Set(APPROVED.map((e) => `${e.dir}/${e.slug}`))
@@ -258,11 +288,30 @@ describe.skipIf(!hasGit)("INDEX-01 transition against the pinned baseline", () =
     expect(classes.E).toHaveLength(RECOVERY.classification.noEvidence)
     expect([...classes.B].sort()).toEqual([...approvedKeys].sort())
 
+    // Phase INDEX-02A wave 1 overrides exactly the approved 31 rows: 2 thin
+    // alternatives and 29 duplicate-flagged comparisons re-audited as RECOVER.
+    const wave1 = new Set(WAVE1_KEYS)
+    const classOf = new Map<string, string>()
+    for (const cls of ["B", "C", "D", "E"] as const) for (const key of classes[cls]) classOf.set(key, cls)
+    const wave1Classes = [...wave1].map((key) => classOf.get(key) ?? "not-classified")
+    expect(wave1Classes.filter((cls) => cls === "C")).toHaveLength(2)
+    expect(wave1Classes.filter((cls) => cls === "D")).toHaveLength(29)
+    expect(wave1Classes.filter((cls) => cls === "E")).toHaveLength(0)
+    expect(classes.C.filter((key) => wave1.has(key))).toHaveLength(2)
+    expect(classes.D.filter((key) => wave1.has(key))).toHaveLength(29)
+
     for (const key of [...classes.C, ...classes.D, ...classes.E]) {
       const [dir, slug] = key.split("/")
-      expect(current[dir].noindex, `${key} must stay noindexed`).toContain(slug)
-      expect(current[dir].keep, `${key} must not be keep`).not.toContain(slug)
+      if (wave1.has(key)) {
+        expect(current[dir].keep, `${key} is approved keep under INDEX-02A wave 1`).toContain(slug)
+        expect(current[dir].noindex, `${key} must have left noindex`).not.toContain(slug)
+      } else {
+        expect(current[dir].noindex, `${key} must stay noindexed`).toContain(slug)
+        expect(current[dir].keep, `${key} must not be keep`).not.toContain(slug)
+      }
     }
+    expect(classes.C.filter((key) => !wave1.has(key))).toHaveLength(RECOVERY.classification.thin - 2)
+    expect(classes.D.filter((key) => !wave1.has(key))).toHaveLength(RECOVERY.classification.duplicate - 29)
     for (const key of classes.A) {
       const [dir, slug] = key.split("/")
       expect(current[dir].keep, `${key} must stay indexable`).toContain(slug)
