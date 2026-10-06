@@ -16,6 +16,7 @@ import {
   H02_ID,
   H02_INDEX01_RECOVERY,
   H02_INDEX02A_RECOVERY,
+  H02_INDEX02A_WAVE2_RECOVERY,
   H02_OBJECT_SET_SLUGS,
   H02_OBJECT_SET_SIZE,
   H02_PROSE_EXCLUSIONS,
@@ -159,7 +160,7 @@ describe("H-02 prose scope", () => {
     const objectSet = new Set(H02_OBJECT_SET_SLUGS)
     const noindex = readJson<NoindexList>("noindex-list.json")
     const declaredReviews = new Set([...noindex.directories.reviews.keep, ...noindex.directories.reviews.noindex])
-    const recovered = new Set(H02_INDEX01_RECOVERY.slugs.reviews)
+    const recovered = new Set([...H02_INDEX01_RECOVERY.slugs.reviews, ...H02_INDEX02A_WAVE2_RECOVERY.slugs.reviews])
     let recoveredInScope = 0
     for (const slug of H02_PROSE_SCOPE_SLUGS) {
       expect(fs.existsSync(path.join(ROOT, "content", "reviews", `${slug}.json`))).toBe(true)
@@ -172,7 +173,7 @@ describe("H-02 prose scope", () => {
         expect(isNoindexed("reviews", slug)).toBe(true)
       }
     }
-    expect(recoveredInScope).toBe(17)
+    expect(recoveredInScope).toBe(19)
   })
 
   it("names every rendered prose field, section titles included, and states the reachability rule", () => {
@@ -193,24 +194,34 @@ describe("H-02 prose scope", () => {
     expect(H02_CONTRACT.proseScope.referenceSource).toContain("Phase 5B")
   })
 
-  it("records v1.3.0 as the INDEX-02A wave 1 recovery, v1.2.0 as the INDEX-01 recovery and v1.1.0 as the explicit reopen that added content[].title", () => {
-    expect(H02_CONTRACT_VERSION).toBe("1.3.0")
-    expect(H02_CONTRACT_PREVIOUS_VERSION).toBe("1.2.0")
-    expect(H02_CONTRACT.contractVersion).toBe("1.3.0")
-    expect(H02_CONTRACT_CHANGELOG.map(entry => entry.version)).toEqual(["1.3.0", "1.2.0", "1.1.0", "1.0.0"])
-    expect(H02_CONTRACT.changelog).toHaveLength(4)
+  it("records v1.4.0 as the INDEX-02A wave 2 recovery, v1.3.0 as the wave 1 recovery, v1.2.0 as the INDEX-01 recovery and v1.1.0 as the explicit reopen that added content[].title", () => {
+    expect(H02_CONTRACT_VERSION).toBe("1.4.0")
+    expect(H02_CONTRACT_PREVIOUS_VERSION).toBe("1.3.0")
+    expect(H02_CONTRACT.contractVersion).toBe("1.4.0")
+    expect(H02_CONTRACT_CHANGELOG.map(entry => entry.version)).toEqual([
+      "1.4.0",
+      "1.3.0",
+      "1.2.0",
+      "1.1.0",
+      "1.0.0",
+    ])
+    expect(H02_CONTRACT.changelog).toHaveLength(5)
     expect(H02_CONTRACT.changelog[0].version).toBe(H02_CONTRACT_VERSION)
     expect(H02_CONTRACT.changelog[0].summary).toContain("INDEX-02A")
-    expect(H02_CONTRACT.changelog[0].summary).toContain("T-H02-12")
-    expect(H02_CONTRACT.changelog[0].summary).toContain("31")
-    expect(H02_CONTRACT.changelog[1].version).toBe("1.2.0")
-    expect(H02_CONTRACT.changelog[1].summary).toContain("INDEX-01")
-    expect(H02_CONTRACT.changelog[1].summary).toContain("T-H02-11")
-    expect(H02_CONTRACT.changelog[1].reason).toContain("52 published")
-    expect(H02_CONTRACT.changelog[2].summary).toContain("content[].title")
-    expect(H02_CONTRACT.changelog[2].summary).toContain("T-H02-05")
-    expect(H02_CONTRACT.changelog[2].reason).toContain("five-field")
-    expect(H02_CONTRACT.changelog[2].reason).toContain("unchanged")
+    expect(H02_CONTRACT.changelog[0].summary).toContain("T-H02-13")
+    expect(H02_CONTRACT.changelog[0].summary).toContain("85")
+    expect(H02_CONTRACT.changelog[1].version).toBe("1.3.0")
+    expect(H02_CONTRACT.changelog[1].summary).toContain("INDEX-02A")
+    expect(H02_CONTRACT.changelog[1].summary).toContain("T-H02-12")
+    expect(H02_CONTRACT.changelog[1].summary).toContain("31")
+    expect(H02_CONTRACT.changelog[2].version).toBe("1.2.0")
+    expect(H02_CONTRACT.changelog[2].summary).toContain("INDEX-01")
+    expect(H02_CONTRACT.changelog[2].summary).toContain("T-H02-11")
+    expect(H02_CONTRACT.changelog[2].reason).toContain("52 published")
+    expect(H02_CONTRACT.changelog[3].summary).toContain("content[].title")
+    expect(H02_CONTRACT.changelog[3].summary).toContain("T-H02-05")
+    expect(H02_CONTRACT.changelog[3].reason).toContain("five-field")
+    expect(H02_CONTRACT.changelog[3].reason).toContain("unchanged")
     for (const entry of H02_CONTRACT_CHANGELOG) {
       expect(entry.version).toMatch(SEMVER)
       expect(entry.date).toMatch(/^\d{4}-\d{2}-\d{2}$/)
@@ -308,13 +319,13 @@ describe("H-02 decision B consequences", () => {
       H02_SEO_INVARIANT.reviewsTotal,
     )
     expect(noindex.directories.alternatives.keep).toHaveLength(H02_SEO_INVARIANT.sitemapAlternatives)
-    expect(noindex.directories.alternatives.noindex).toHaveLength(69)
+    expect(noindex.directories.alternatives.noindex).toHaveLength(56)
 
     const sitemapAlternatives = getAllAlternatives().filter(
       alternative => !isNoindexed("alternatives", alternative.slug),
     )
     expect(sitemapAlternatives).toHaveLength(H02_SEO_INVARIANT.sitemapAlternatives)
-    expect(H02_SEO_INVARIANT.sitemapTotal).toBe(576)
+    expect(H02_SEO_INVARIANT.sitemapTotal).toBe(661)
     expect(H02_CONTRACT.seoSafety.sitemapMayChange).toBe(false)
     expect(H02_CONTRACT.seoSafety.noindexMayChange).toBe(false)
     expect(H02_CONTRACT.seoSafety.canonicalMayChange).toBe(false)
@@ -366,10 +377,12 @@ describe("H-02 Phase INDEX-01 recovery record", () => {
       "noindex-list.json",
     )
     const recovery = H02_INDEX01_RECOVERY
+    const wave2 = H02_INDEX02A_WAVE2_RECOVERY.slugs
 
     for (const family of Object.keys(recovery.slugs)) {
-      expect(list.directories[family].keep).toHaveLength(recovery.after.keep[family])
-      expect(list.directories[family].noindex).toHaveLength(recovery.after.noindex[family])
+      const later = wave2[family as keyof typeof wave2] ?? []
+      expect(list.directories[family].keep).toHaveLength(recovery.after.keep[family] + later.length)
+      expect(list.directories[family].noindex).toHaveLength(recovery.after.noindex[family] - later.length)
       expect(recovery.after.keep[family]).toBe(recovery.baseline.keep[family] + recovery.slugs[family].length)
       expect(recovery.after.noindex[family]).toBe(recovery.baseline.noindex[family] - recovery.slugs[family].length)
       expect(list.directories[family].keep.length + list.directories[family].noindex.length).toBe(
@@ -383,21 +396,23 @@ describe("H-02 Phase INDEX-01 recovery record", () => {
     }
 
     for (const [family, counts] of Object.entries(recovery.unchangedDirectories)) {
-      const wave1 = H02_INDEX02A_RECOVERY.slugs[family]
-      if (wave1) {
-        expect(list.directories[family].keep).toHaveLength(counts.keep + wave1.length)
-        expect(list.directories[family].noindex).toHaveLength(counts.noindex - wave1.length)
-      } else {
-        expect(list.directories[family].keep).toHaveLength(counts.keep)
-        expect(list.directories[family].noindex).toHaveLength(counts.noindex)
-      }
+      const wave1 = H02_INDEX02A_RECOVERY.slugs[family as keyof typeof H02_INDEX02A_RECOVERY.slugs] ?? []
+      const later = wave2[family as keyof typeof wave2] ?? []
+      expect(list.directories[family].keep).toHaveLength(counts.keep + wave1.length + later.length)
+      expect(list.directories[family].noindex).toHaveLength(counts.noindex - wave1.length - later.length)
     }
   })
 
-  it("pins the canonical sha256 of noindex-list.json before INDEX-01, after INDEX-01 and after INDEX-02A wave 1", () => {
+  it("pins the canonical sha256 of noindex-list.json before INDEX-01, after INDEX-01, after wave 1 and after wave 2", () => {
     const canonical = JSON.stringify(JSON.parse(read("noindex-list.json")), null, 2)
     const actual = createHash("sha256").update(canonical, "utf8").digest("hex")
-    expect(actual).toBe(H02_INDEX02A_RECOVERY.after.noindexListSha256)
+    expect(actual).toBe(H02_INDEX02A_WAVE2_RECOVERY.after.noindexListSha256)
+    expect(H02_INDEX02A_WAVE2_RECOVERY.baseline.noindexListSha256).toBe(
+      H02_INDEX02A_RECOVERY.after.noindexListSha256,
+    )
+    expect(H02_INDEX02A_WAVE2_RECOVERY.baseline.noindexListSha256).toMatch(/^[0-9a-f]{64}$/)
+    expect(H02_INDEX02A_WAVE2_RECOVERY.after.noindexListSha256).toMatch(/^[0-9a-f]{64}$/)
+    expect(H02_INDEX02A_WAVE2_RECOVERY.hashBasis).toContain("sha256")
     expect(H02_INDEX02A_RECOVERY.baseline.noindexListSha256).toBe(H02_INDEX01_RECOVERY.after.noindexListSha256)
     expect(H02_INDEX02A_RECOVERY.baseline.noindexListSha256).toMatch(/^[0-9a-f]{64}$/)
     expect(H02_INDEX02A_RECOVERY.after.noindexListSha256).toMatch(/^[0-9a-f]{64}$/)
@@ -409,6 +424,8 @@ describe("H-02 Phase INDEX-01 recovery record", () => {
     expect(H02_INDEX01_RECOVERY.after.sitemapTotal).toBe(545)
     expect(H02_INDEX02A_RECOVERY.baseline.sitemapTotal).toBe(545)
     expect(H02_INDEX02A_RECOVERY.after.sitemapTotal).toBe(576)
+    expect(H02_INDEX02A_WAVE2_RECOVERY.baseline.sitemapTotal).toBe(576)
+    expect(H02_INDEX02A_WAVE2_RECOVERY.after.sitemapTotal).toBe(661)
   })
 })
 
@@ -440,10 +457,12 @@ describe("H-02 Phase INDEX-02A wave 1 recovery record", () => {
       "noindex-list.json",
     )
     const recovery = H02_INDEX02A_RECOVERY
+    const wave2 = H02_INDEX02A_WAVE2_RECOVERY.slugs
 
     for (const family of Object.keys(recovery.slugs)) {
-      expect(list.directories[family].keep).toHaveLength(recovery.after.keep[family])
-      expect(list.directories[family].noindex).toHaveLength(recovery.after.noindex[family])
+      const later = wave2[family as keyof typeof wave2] ?? []
+      expect(list.directories[family].keep).toHaveLength(recovery.after.keep[family] + later.length)
+      expect(list.directories[family].noindex).toHaveLength(recovery.after.noindex[family] - later.length)
       expect(recovery.after.keep[family]).toBe(recovery.baseline.keep[family] + recovery.slugs[family].length)
       expect(recovery.after.noindex[family]).toBe(recovery.baseline.noindex[family] - recovery.slugs[family].length)
       expect(list.directories[family].keep.length + list.directories[family].noindex.length).toBe(
@@ -457,8 +476,9 @@ describe("H-02 Phase INDEX-02A wave 1 recovery record", () => {
     }
 
     for (const [family, counts] of Object.entries(recovery.unaffectedDirectories)) {
-      expect(list.directories[family].keep).toHaveLength(counts.keep)
-      expect(list.directories[family].noindex).toHaveLength(counts.noindex)
+      const later = wave2[family as keyof typeof wave2] ?? []
+      expect(list.directories[family].keep).toHaveLength(counts.keep + later.length)
+      expect(list.directories[family].noindex).toHaveLength(counts.noindex - later.length)
     }
 
     for (const family of Object.keys(recovery.slugs)) {
@@ -468,6 +488,89 @@ describe("H-02 Phase INDEX-02A wave 1 recovery record", () => {
           `${family}/${slug} must be published`,
         ).not.toBe(false)
       }
+    }
+  })
+})
+
+describe("H-02 Phase INDEX-02A wave 2 recovery record", () => {
+  it("records exactly 85 approved slugs across six families", () => {
+    const slugs = H02_INDEX02A_WAVE2_RECOVERY.slugs
+    expect(H02_INDEX02A_WAVE2_RECOVERY.phase).toBe("INDEX-02A")
+    expect(H02_INDEX02A_WAVE2_RECOVERY.wave).toBe("WAVE_2")
+    expect(H02_INDEX02A_WAVE2_RECOVERY.action).toBe("MOVE_NOINDEX_TO_KEEP_ONLY")
+    expect(H02_INDEX02A_WAVE2_RECOVERY.approvedCount).toBe(85)
+    expect(H02_INDEX02A_WAVE2_RECOVERY.baselineCommit).toBe("eed9d3951a361bd5f6344e670d59e7748827eced")
+    expect(H02_INDEX02A_WAVE2_RECOVERY.baselineWave).toBe("WAVE_1")
+    expect(Object.keys(slugs).sort()).toEqual([
+      "alternatives",
+      "best",
+      "comparisons",
+      "guides",
+      "reviews",
+      "statistics",
+    ])
+    expect(slugs.comparisons).toHaveLength(21)
+    expect(slugs.guides).toHaveLength(36)
+    expect(slugs.alternatives).toHaveLength(13)
+    expect(slugs.best).toHaveLength(9)
+    expect(slugs.reviews).toHaveLength(5)
+    expect(slugs.statistics).toHaveLength(1)
+    const all = [...Object.values(slugs).flat()]
+    expect(all).toHaveLength(85)
+    expect(new Set(all).size).toBe(85)
+    for (const list of Object.values(slugs)) expect([...list]).toEqual([...list].sort())
+    expect(H02_INDEX02A_WAVE2_RECOVERY.excludedProtected).toEqual([
+      "reviews/affinity",
+      "best/best-marketing-software",
+      "alternatives/gusto-alternatives",
+    ])
+    expect(H02_INDEX02A_WAVE2_RECOVERY.protectedNoindex).toEqual([
+      "/search",
+      "/dashboard",
+      "/authors/pilotstack-team",
+    ])
+    expect(H02_INDEX02A_WAVE2_RECOVERY.unaffectedDirectories).toEqual({
+      blog: { keep: 97, noindex: 0 },
+      glossary: { keep: 30, noindex: 92 },
+    })
+    expect(H02_INDEX02A_WAVE2_RECOVERY.selectionBasis).toContain("P1")
+    expect(H02_INDEX02A_WAVE2_RECOVERY.baseline.noindexListSha256).toBe(
+      H02_INDEX02A_RECOVERY.after.noindexListSha256,
+    )
+    expect(H02_CONTRACT.index02aWave2Recovery).toEqual(H02_INDEX02A_WAVE2_RECOVERY)
+  })
+
+  it("matches the post-wave-2 noindex-list.json counts, membership and published content", () => {
+    const list = readJson<{ directories: Record<string, { keep: string[]; noindex: string[] }> }>(
+      "noindex-list.json",
+    )
+    const recovery = H02_INDEX02A_WAVE2_RECOVERY
+
+    for (const family of Object.keys(recovery.slugs)) {
+      expect(list.directories[family].keep).toHaveLength(recovery.after.keep[family])
+      expect(list.directories[family].noindex).toHaveLength(recovery.after.noindex[family])
+      expect(recovery.after.keep[family]).toBe(recovery.baseline.keep[family] + recovery.slugs[family].length)
+      expect(recovery.after.noindex[family]).toBe(recovery.baseline.noindex[family] - recovery.slugs[family].length)
+      expect(list.directories[family].keep.length + list.directories[family].noindex.length).toBe(
+        recovery.baseline.keep[family] + recovery.baseline.noindex[family],
+      )
+      for (const slug of recovery.slugs[family]) {
+        expect(list.directories[family].keep).toContain(slug)
+        expect(list.directories[family].noindex).not.toContain(slug)
+        expect(isNoindexed(family, slug)).toBe(false)
+        expect(JSON.parse(read(`content/${family}/${slug}.json`)).published).not.toBe(false)
+      }
+    }
+
+    for (const [family, counts] of Object.entries(recovery.unaffectedDirectories)) {
+      expect(list.directories[family].keep).toHaveLength(counts.keep)
+      expect(list.directories[family].noindex).toHaveLength(counts.noindex)
+    }
+
+    for (const fixture of recovery.excludedProtected) {
+      const [family, slug] = fixture.split("/")
+      expect(isNoindexed(family, slug)).toBe(true)
+      expect(list.directories[family].noindex).toContain(slug)
     }
   })
 })
@@ -549,8 +652,8 @@ describe("H-02 safety clauses and acceptance tests", () => {
     expect(H02_CONTRACT.safetyClauses).toHaveLength(10)
   })
 
-  it("defines T-H02-01 through T-H02-12", () => {
-    expect(H02_ACCEPTANCE_TESTS).toHaveLength(12)
+  it("defines T-H02-01 through T-H02-13", () => {
+    expect(H02_ACCEPTANCE_TESTS).toHaveLength(13)
     expect(H02_ACCEPTANCE_TESTS.map(test => test.id)).toEqual([
       "T-H02-01",
       "T-H02-02",
@@ -564,13 +667,14 @@ describe("H-02 safety clauses and acceptance tests", () => {
       "T-H02-10",
       "T-H02-11",
       "T-H02-12",
+      "T-H02-13",
     ])
     for (const test of H02_ACCEPTANCE_TESTS) {
       expect(test.name.length).toBeGreaterThan(3)
       expect(test.asserts.length).toBeGreaterThan(30)
       expect(test.catches.length).toBeGreaterThan(3)
     }
-    expect(H02_CONTRACT.acceptanceTests).toHaveLength(12)
+    expect(H02_CONTRACT.acceptanceTests).toHaveLength(13)
   })
 
   it("lists acceptance criteria covering every resolved blocker", () => {

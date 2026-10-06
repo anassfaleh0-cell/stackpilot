@@ -183,7 +183,7 @@ describe("H-01 contract", () => {
     expect(criteria).toContain("17 / 30 / 44 / 161 / 251 / 295")
     expect(criteria).toContain("ADVISORY_ONLY")
     expect(criteria).toContain("no renderer gate")
-    expect(criteria).toContain("151 total / 138 indexable / 13 noindex")
+    expect(criteria).toContain("151 total / 143 indexable / 8 noindex")
   })
 })
 
@@ -679,7 +679,7 @@ describe("H-01 external evidence", () => {
 })
 
 describe("H-01 SEO safety", () => {
-  it("keeps the review indexability invariant at 151 / 138 / 13", () => {
+  it("keeps the review indexability invariant at 151 / 143 / 8", () => {
     const invariant = H01_CONTRACT.seoSafety.invariant
     const noindex = JSON.parse(read("noindex-list.json")) as {
       directories: { reviews: { keep: string[]; noindex: string[] } }
@@ -688,11 +688,11 @@ describe("H-01 SEO safety", () => {
     const noindexed = new Set(noindex.directories.reviews.noindex)
     const reviewFiles = jsonFilesUnder("content/reviews")
 
-    expect(keep.size).toBe(138)
-    expect(noindexed.size).toBe(13)
+    expect(keep.size).toBe(143)
+    expect(noindexed.size).toBe(8)
     expect(keep.size + noindexed.size).toBe(151)
     expect(reviewFiles).toHaveLength(151)
-    expect(invariant).toEqual({ totalReviews: 151, indexable: 138, noindex: 13 })
+    expect(invariant).toEqual({ totalReviews: 151, indexable: 143, noindex: 8 })
     expect(H01_CONTRACT.seoSafety.indexabilityMayChange).toBe(false)
   })
 

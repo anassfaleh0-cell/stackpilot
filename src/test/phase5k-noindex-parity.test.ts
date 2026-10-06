@@ -152,8 +152,8 @@ describe("P5K-C1: indexable comparisons stay indexable", () => {
     await expect(ComparisonPage(params(INDEXABLE_SLUG))).resolves.toBeTruthy()
   })
 
-  it("keeps exactly 38 published + indexable comparisons (9 plus the 29 Phase INDEX-02A wave 1 recoveries)", () => {
-    expect(generateStaticParams().length).toBe(38)
+  it("keeps exactly 59 published + indexable comparisons (9 plus the 29 Phase INDEX-02A wave 1 recoveries and the 21 Phase INDEX-02A wave 2 recoveries)", () => {
+    expect(generateStaticParams().length).toBe(59)
   })
 })
 
@@ -190,8 +190,8 @@ describe("P5K-C1/D: sitemap invariants", () => {
   const entries = sitemap()
   const paths = entries.map((e) => new URL(e.url).pathname)
 
-  it("emits exactly 576 URLs (493 + the 52 Phase INDEX-01 recoveries + the 31 Phase INDEX-02A wave 1 recoveries)", () => {
-    expect(entries).toHaveLength(576)
+  it("emits exactly 661 URLs (493 + the 52 Phase INDEX-01 recoveries + the 31 Phase INDEX-02A wave 1 recoveries + the 85 Phase INDEX-02A wave 2 recoveries)", () => {
+    expect(entries).toHaveLength(661)
   })
 
   it("keeps /comparisons/zoom-vs-webex absent", () => {
@@ -293,8 +293,9 @@ const REMOVED_KEEP_COLLISIONS: Record<string, string[]> = {
 
 // The keep entries that must be present in the three reconciled families.
 // comparisons and alternatives carry the Phase 5K-D2 survivors plus the approved
-// Phase INDEX-02A wave 1 recoveries (29 comparisons, 2 alternatives); best also
-// carries the 5 Phase INDEX-01 recoveries alongside its D2 survivor.
+// Phase INDEX-02A wave 1 recoveries (29 comparisons, 2 alternatives) and wave 2
+// recoveries (21 comparisons, 13 alternatives, 9 best); best also carries the
+// 5 Phase INDEX-01 recoveries alongside its D2 survivor.
 const SURVIVING_KEEP: Record<string, string[]> = {
   comparisons: [
     "firebase-vs-appwrite",
@@ -335,6 +336,27 @@ const SURVIVING_KEEP: Record<string, string[]> = {
     "sentry-vs-datadog",
     "slack-vs-zoom",
     "stripe-vs-paddle",
+    "adp-vs-deel",
+    "ahrefs-vs-semrush",
+    "bamboohr-vs-deel",
+    "canva-vs-framer",
+    "canva-vs-sketch",
+    "chatgpt-vs-claude",
+    "chatgpt-vs-copilot",
+    "chatgpt-vs-gemini",
+    "chatgpt-vs-perplexity",
+    "docker-vs-containerd",
+    "figma-vs-adobe-xd",
+    "google-analytics-vs-hotjar",
+    "gusto-vs-deel",
+    "hubspot-vs-freshsales",
+    "loom-vs-vidyard",
+    "loom-vs-vimeo-record",
+    "mailchimp-vs-convertkit",
+    "quickbooks-vs-sage",
+    "shopify-vs-bigcommerce",
+    "shopify-vs-woocommerce",
+    "zapier-vs-make",
   ],
   best: [
     "best-accounting-software",
@@ -343,6 +365,15 @@ const SURVIVING_KEEP: Record<string, string[]> = {
     "best-erp-software",
     "best-project-management-software",
     "best-marketing-seo-enterprise",
+    "best-ai-tools",
+    "best-analytics-software",
+    "best-backend-platforms",
+    "best-collaboration-software",
+    "best-developer-tools",
+    "best-expense-management-software",
+    "best-hr-software",
+    "best-no-code-platforms",
+    "best-productivity-tools",
   ],
   alternatives: [
     "free-alternatives-to-slack",
@@ -354,6 +385,19 @@ const SURVIVING_KEEP: Record<string, string[]> = {
     "firebase-alternatives",
     "monday-com-alternatives",
     "semrush-alternatives",
+    "freshbooks-alternatives",
+    "github-alternatives",
+    "gitlab-alternatives",
+    "google-analytics-alternatives",
+    "jasper-alternatives",
+    "jira-alternatives",
+    "linear-alternatives",
+    "mailchimp-alternatives",
+    "mixpanel-alternatives",
+    "quickbooks-alternatives",
+    "rippling-alternatives",
+    "stripe-alternatives",
+    "xero-alternatives",
   ],
 }
 
@@ -361,33 +405,37 @@ const SURVIVING_KEEP: Record<string, string[]> = {
 // Phase INDEX-01 after exactly the approved 52 B-class slugs moved noindex -> keep
 // (reviews 39, best 5, guides 4, statistics 4), then re-frozen again by Phase
 // INDEX-02A wave 1 after exactly the approved 31 slugs moved noindex -> keep
-// (comparisons 29, alternatives 2). Every other family is untouched.
+// (comparisons 29, alternatives 2), then re-frozen again by Phase INDEX-02A
+// wave 2 after exactly the approved 85 slugs moved noindex -> keep (comparisons
+// 21, guides 36, alternatives 13, best 9, reviews 5, statistics 1).
+// Every other family is untouched.
 
 const FROZEN_KEEP_COUNTS: Record<string, number> = {
-  comparisons: 38,
-  best: 6,
-  alternatives: 9,
+  comparisons: 59,
+  best: 15,
+  alternatives: 22,
   glossary: 30,
-  statistics: 24,
-  guides: 40,
+  statistics: 25,
+  guides: 76,
   blog: 97,
-  reviews: 138,
+  reviews: 143,
 }
 const FROZEN_NOINDEX_COUNTS: Record<string, number> = {
-  comparisons: 887,
-  best: 170,
-  alternatives: 69,
+  comparisons: 866,
+  best: 161,
+  alternatives: 56,
   glossary: 92,
-  statistics: 80,
-  guides: 60,
+  statistics: 79,
+  guides: 24,
   blog: 0,
-  reviews: 13,
+  reviews: 8,
 }
-const FROZEN_TOTAL_KEEP = 382
-const FROZEN_TOTAL_NOINDEX = 1371
+const FROZEN_TOTAL_KEEP = 467
+const FROZEN_TOTAL_NOINDEX = 1286
 const REMOVED_COLLISION_COUNT = 46
 const INDEX01_RECOVERED_COUNT = 52
 const INDEX02A_WAVE1_RECOVERED_COUNT = 31
+const INDEX02A_WAVE2_RECOVERED_COUNT = 85
 
 const NOINDEX_LIST_FILE = path.join(process.cwd(), "noindex-list.json")
 const KEEP_FAMILIES = ["comparisons", "best", "alternatives", "glossary", "statistics", "guides", "blog", "reviews"]
@@ -424,28 +472,31 @@ describe("P5K-D2: keep/published:false collisions removed", () => {
     }
   })
 
-  it("brings the keep contract to exactly 382", () => {
+  it("brings the keep contract to exactly 467", () => {
     const total = KEEP_FAMILIES.reduce((n, fam) => n + getKeepSlugs(fam).length, 0)
     expect(total).toBe(FROZEN_TOTAL_KEEP)
   })
 
-  it("grew by exactly the 52 Phase INDEX-01 recoveries plus the 31 Phase INDEX-02A wave 1 recoveries and nothing else", () => {
+  it("grew by exactly the 52 Phase INDEX-01 recoveries plus the 31 Phase INDEX-02A wave 1 recoveries plus the 85 Phase INDEX-02A wave 2 recoveries and nothing else", () => {
     const keepBeforeIndex01 = 299
     const noindexBeforeIndex01 = 1454
     expect(INDEX01_RECOVERED_COUNT).toBe(52)
     expect(INDEX02A_WAVE1_RECOVERED_COUNT).toBe(31)
-    expect(FROZEN_TOTAL_KEEP).toBe(keepBeforeIndex01 + INDEX01_RECOVERED_COUNT + INDEX02A_WAVE1_RECOVERED_COUNT)
-    expect(FROZEN_TOTAL_NOINDEX).toBe(
-      noindexBeforeIndex01 - INDEX01_RECOVERED_COUNT - INDEX02A_WAVE1_RECOVERED_COUNT,
+    expect(INDEX02A_WAVE2_RECOVERED_COUNT).toBe(85)
+    expect(FROZEN_TOTAL_KEEP).toBe(
+      keepBeforeIndex01 + INDEX01_RECOVERED_COUNT + INDEX02A_WAVE1_RECOVERED_COUNT + INDEX02A_WAVE2_RECOVERED_COUNT,
     )
-    expect(FROZEN_KEEP_COUNTS.reviews - 99).toBe(39)
-    expect(FROZEN_KEEP_COUNTS.best - 1).toBe(5)
-    expect(FROZEN_KEEP_COUNTS.guides - 36).toBe(4)
-    expect(FROZEN_KEEP_COUNTS.statistics - 20).toBe(4)
-    expect(FROZEN_KEEP_COUNTS.comparisons - 9).toBe(29)
-    expect(FROZEN_KEEP_COUNTS.alternatives - 7).toBe(2)
-    expect(FROZEN_NOINDEX_COUNTS.comparisons).toBe(887)
-    expect(FROZEN_NOINDEX_COUNTS.alternatives).toBe(69)
+    expect(FROZEN_TOTAL_NOINDEX).toBe(
+      noindexBeforeIndex01 - INDEX01_RECOVERED_COUNT - INDEX02A_WAVE1_RECOVERED_COUNT - INDEX02A_WAVE2_RECOVERED_COUNT,
+    )
+    expect(FROZEN_KEEP_COUNTS.reviews).toBe(99 + 39 + 5)
+    expect(FROZEN_KEEP_COUNTS.best).toBe(1 + 5 + 9)
+    expect(FROZEN_KEEP_COUNTS.guides).toBe(36 + 4 + 36)
+    expect(FROZEN_KEEP_COUNTS.statistics).toBe(20 + 4 + 1)
+    expect(FROZEN_KEEP_COUNTS.comparisons).toBe(9 + 29 + 21)
+    expect(FROZEN_KEEP_COUNTS.alternatives).toBe(7 + 2 + 13)
+    expect(FROZEN_NOINDEX_COUNTS.comparisons).toBe(866)
+    expect(FROZEN_NOINDEX_COUNTS.alternatives).toBe(56)
     expect(FROZEN_NOINDEX_COUNTS.glossary).toBe(92)
     expect(FROZEN_NOINDEX_COUNTS.blog).toBe(0)
   })

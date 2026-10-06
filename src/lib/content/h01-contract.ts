@@ -535,7 +535,7 @@ export const H01_CONTRACT: H01Contract = Object.freeze({
     h08AdvisoryOnlyCompatible: true,
   },
   seoSafety: {
-    invariant: { totalReviews: 151, indexable: 138, noindex: 13 },
+    invariant: { totalReviews: 151, indexable: 143, noindex: 8 },
     forbiddenSurfaces: [
       "src/app/robots.ts",
       "noindex-list.json",
@@ -566,7 +566,7 @@ export const H01_CONTRACT: H01Contract = Object.freeze({
     "no status is promoted to VERIFIED automatically and MANUALLY_REVIEWED stays unrecorded",
     "provenance enforcement is ADVISORY_ONLY with no renderer gate and no content suppression",
     "missing, stale and conflicting provenance never suppress rendered review content",
-    "the review indexability invariant stays 151 total / 138 indexable / 13 noindex after the approved Phase INDEX-01 recovery of exactly 52 evidence-backed review pages (was 151 / 99 / 52)",
+    "the review indexability invariant stays 151 total / 143 indexable / 8 noindex after the approved Phase INDEX-01 recovery of exactly 52 evidence-backed review pages and the approved Phase INDEX-02A wave 2 recovery of exactly 5 further review pages (was 151 / 99 / 52)",
     "no SEO surface references the H-01 contract or the provenance module",
   ],
 })

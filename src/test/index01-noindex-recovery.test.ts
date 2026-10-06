@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest"
 import fs from "node:fs"
 import path from "node:path"
 import { execFileSync } from "node:child_process"
-import { H02_INDEX01_RECOVERY, H02_INDEX02A_RECOVERY } from "@/lib/content/h02-contract"
+import { H02_INDEX01_RECOVERY, H02_INDEX02A_RECOVERY, H02_INDEX02A_WAVE2_RECOVERY } from "@/lib/content/h02-contract"
 import { isNoindexed } from "@/lib/noindex"
 import sitemap from "@/app/sitemap"
 import { getContentTitle, getReview, getBest, getGuide, getStatistic } from "@/lib/content/registry"
@@ -87,7 +87,7 @@ function diff(a: string[], b: string[]): string[] {
 }
 
 describe("INDEX-01 approved recovery set", () => {
-  it("1 and 2. the approved 52 are all keep, with only the approved INDEX-02A wave-1 growth on top", () => {
+  it("1 and 2. the approved 52 are all keep, with only the approved INDEX-02A wave-1 and wave-2 growth on top", () => {
     const dirs = readList()
     expect(APPROVED).toHaveLength(52)
     expect(new Set(APPROVED.map((e) => e.url)).size).toBe(52)
@@ -100,22 +100,19 @@ describe("INDEX-01 approved recovery set", () => {
     }
 
     for (const [dir, counts] of Object.entries(RECOVERY.unchangedDirectories)) {
-      const wave1 = H02_INDEX02A_RECOVERY.slugs[dir]
-      if (wave1) {
-        expect(dirs[dir].keep, `${dir} keep must carry the approved wave-1 growth`).toHaveLength(
-          counts.keep + wave1.length,
-        )
-        expect(dirs[dir].noindex, `${dir} noindex must carry the approved wave-1 shrink`).toHaveLength(
-          counts.noindex - wave1.length,
-        )
-      } else {
-        expect(dirs[dir].keep, `${dir} keep changed`).toHaveLength(counts.keep)
-        expect(dirs[dir].noindex, `${dir} noindex changed`).toHaveLength(counts.noindex)
-      }
+      const wave1 = H02_INDEX02A_RECOVERY.slugs[dir] ?? []
+      const wave2 = H02_INDEX02A_WAVE2_RECOVERY.slugs[dir] ?? []
+      expect(dirs[dir].keep, `${dir} keep must carry the approved wave-1 + wave-2 growth`).toHaveLength(
+        counts.keep + wave1.length + wave2.length,
+      )
+      expect(dirs[dir].noindex, `${dir} noindex must carry the approved wave-1 + wave-2 shrink`).toHaveLength(
+        counts.noindex - wave1.length - wave2.length,
+      )
     }
     for (const [dir, slugs] of Object.entries(RECOVERY.slugs)) {
-      expect(dirs[dir].keep).toHaveLength(RECOVERY.after.keep[dir])
-      expect(dirs[dir].noindex).toHaveLength(RECOVERY.after.noindex[dir])
+      const wave2 = H02_INDEX02A_WAVE2_RECOVERY.slugs[dir] ?? []
+      expect(dirs[dir].keep).toHaveLength(RECOVERY.after.keep[dir] + wave2.length)
+      expect(dirs[dir].noindex).toHaveLength(RECOVERY.after.noindex[dir] - wave2.length)
       expect(slugs.length).toBe(RECOVERY.after.keep[dir] - RECOVERY.baseline.keep[dir])
     }
   })
@@ -177,7 +174,7 @@ describe("INDEX-01 approved recovery set", () => {
 
   it("12. the sitemap carries all 52 and no noindexed URL", () => {
     const paths = sitemap().map((entry) => new URL(entry.url).pathname)
-    expect(new Set(paths).size).toBe(576)
+    expect(new Set(paths).size).toBe(661)
     for (const { url } of APPROVED) expect(paths, `${url} missing from sitemap`).toContain(url)
 
     const overlap = paths.filter((p) => {
@@ -227,8 +224,12 @@ const WAVE1_KEYS = Object.entries(H02_INDEX02A_RECOVERY.slugs).flatMap(([dir, sl
   slugs.map((slug) => `${dir}/${slug}`),
 )
 
+const WAVE2_KEYS = Object.entries(H02_INDEX02A_WAVE2_RECOVERY.slugs).flatMap(([dir, slugs]) =>
+  slugs.map((slug) => `${dir}/${slug}`),
+)
+
 describe.skipIf(!hasGit)("INDEX-01 transition against the pinned baseline", () => {
-  it("1, 2, 16 and 17. the INDEX-01 commit moved exactly the approved 52, and wave 1 moved exactly the approved 31", () => {
+  it("1, 2, 16 and 17. the INDEX-01 commit moved exactly the approved 52, and waves 1 + 2 moved exactly the approved 31 + 85", () => {
     const index01 = listAt("3ee40abe275506dc46c3969e4bbdc9be1fc3366c")
     const baseline = baselineList()
 
@@ -244,17 +245,23 @@ describe.skipIf(!hasGit)("INDEX-01 transition against the pinned baseline", () =
     const current = readList()
     const preWave = index01.directories
     for (const dir of Object.keys(current)) {
-      const wave1Of = [...(H02_INDEX02A_RECOVERY.slugs[dir] || [])].sort()
-      expect(diff(current[dir].keep, preWave[dir].keep).sort(), `${dir} wave-1 keep additions`).toEqual(wave1Of)
-      expect(diff(preWave[dir].keep, current[dir].keep), `${dir} wave-1 keep removals`).toEqual([])
-      expect(diff(preWave[dir].noindex, current[dir].noindex).sort(), `${dir} wave-1 noindex removals`).toEqual(wave1Of)
-      expect(diff(current[dir].noindex, preWave[dir].noindex), `${dir} wave-1 noindex additions`).toEqual([])
+      const moved = [
+        ...(H02_INDEX02A_RECOVERY.slugs[dir] ?? []),
+        ...(H02_INDEX02A_WAVE2_RECOVERY.slugs[dir] ?? []),
+      ].sort()
+      expect(diff(current[dir].keep, preWave[dir].keep).sort(), `${dir} keep additions since INDEX-01`).toEqual(moved)
+      expect(diff(preWave[dir].keep, current[dir].keep), `${dir} keep removals since INDEX-01`).toEqual([])
+      expect(diff(preWave[dir].noindex, current[dir].noindex).sort(), `${dir} noindex removals since INDEX-01`).toEqual(moved)
+      expect(diff(current[dir].noindex, preWave[dir].noindex), `${dir} noindex additions since INDEX-01`).toEqual([])
     }
     expect(WAVE1_KEYS).toHaveLength(31)
     expect(new Set(WAVE1_KEYS).size).toBe(31)
+    expect(WAVE2_KEYS).toHaveLength(85)
+    expect(new Set(WAVE2_KEYS).size).toBe(85)
+    expect(new Set([...WAVE1_KEYS, ...WAVE2_KEYS]).size).toBe(116)
   })
 
-  it("4, 5 and 6. the 135 thin, 97 duplicate and 171 no-evidence pages stay noindexed bar the approved 31", () => {
+  it("4, 5 and 6. the 135 thin, 97 duplicate and 171 no-evidence pages stay noindexed bar the approved 31 + 85", () => {
     const current = readList()
     const baseline = baselineList()
     const approvedKeys = new Set(APPROVED.map((e) => `${e.dir}/${e.slug}`))
@@ -300,18 +307,36 @@ describe.skipIf(!hasGit)("INDEX-01 transition against the pinned baseline", () =
     expect(classes.C.filter((key) => wave1.has(key))).toHaveLength(2)
     expect(classes.D.filter((key) => wave1.has(key))).toHaveLength(29)
 
+    // Phase INDEX-02A wave 2 overrides exactly the approved 85 P1 rows on top of wave 1.
+    const wave2 = new Set(WAVE2_KEYS)
+    const wave2C = classes.C.filter((key) => wave2.has(key)).length
+    const wave2D = classes.D.filter((key) => wave2.has(key)).length
+    const wave2E = classes.E.filter((key) => wave2.has(key)).length
+    for (const key of wave2) expect(classOf.has(key), `${key} must sit in a baseline C/D/E class`).toBe(true)
+    expect(wave2C + wave2D + wave2E).toBe(85)
+
     for (const key of [...classes.C, ...classes.D, ...classes.E]) {
       const [dir, slug] = key.split("/")
       if (wave1.has(key)) {
         expect(current[dir].keep, `${key} is approved keep under INDEX-02A wave 1`).toContain(slug)
+        expect(current[dir].noindex, `${key} must have left noindex`).not.toContain(slug)
+      } else if (wave2.has(key)) {
+        expect(current[dir].keep, `${key} is approved keep under INDEX-02A wave 2`).toContain(slug)
         expect(current[dir].noindex, `${key} must have left noindex`).not.toContain(slug)
       } else {
         expect(current[dir].noindex, `${key} must stay noindexed`).toContain(slug)
         expect(current[dir].keep, `${key} must not be keep`).not.toContain(slug)
       }
     }
-    expect(classes.C.filter((key) => !wave1.has(key))).toHaveLength(RECOVERY.classification.thin - 2)
-    expect(classes.D.filter((key) => !wave1.has(key))).toHaveLength(RECOVERY.classification.duplicate - 29)
+    expect(classes.C.filter((key) => !wave1.has(key) && !wave2.has(key))).toHaveLength(
+      RECOVERY.classification.thin - 2 - wave2C,
+    )
+    expect(classes.D.filter((key) => !wave1.has(key) && !wave2.has(key))).toHaveLength(
+      RECOVERY.classification.duplicate - 29 - wave2D,
+    )
+    expect(classes.E.filter((key) => !wave1.has(key) && !wave2.has(key))).toHaveLength(
+      RECOVERY.classification.noEvidence - wave2E,
+    )
     for (const key of classes.A) {
       const [dir, slug] = key.split("/")
       expect(current[dir].keep, `${key} must stay indexable`).toContain(slug)
