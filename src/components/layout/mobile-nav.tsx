@@ -62,6 +62,11 @@ export function MobileNav() {
     }
   }, [open, handleKeyDown])
 
+  function isActive(href: string) {
+    if (href === "/") return pathname === "/"
+    return pathname === href || pathname.startsWith(href + "/")
+  }
+
   return (
     <div className="md:hidden">
       <button
@@ -91,7 +96,7 @@ export function MobileNav() {
         aria-hidden={!open}
         aria-label="Navigation menu"
         className={cn(
-          "fixed top-16 right-4 left-4 z-50 rounded-xl border border-border bg-card p-5 shadow-elevated",
+          "fixed top-16 right-4 left-4 z-50 max-h-[calc(100vh-5rem)] overflow-y-auto rounded-xl border border-border bg-card p-5 shadow-elevated",
           "transition-all duration-200",
           open ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
         )}
@@ -104,14 +109,20 @@ export function MobileNav() {
                   <Link
                     href={section.href}
                     onClick={() => setOpen(false)}
-                    className="block px-3 py-2.5 text-sm font-medium rounded-lg transition-colors hover:bg-muted-bg hover:text-foreground"
+                    aria-current={isActive(section.href) ? "page" : undefined}
+                    className={cn(
+                      "block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                      isActive(section.href)
+                        ? "bg-primary-subtle text-primary"
+                        : "hover:bg-muted-bg hover:text-foreground"
+                    )}
                     tabIndex={open ? 0 : -1}
                   >
                     {section.label}
                   </Link>
                 ) : (
                   <>
-                    <p className="px-3 pt-1 pb-0.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    <p className="px-3 pt-2 pb-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                       {section.label}
                     </p>
                     {section.children.map((child) => (
@@ -119,7 +130,13 @@ export function MobileNav() {
                         key={child.href}
                         href={child.href}
                         onClick={() => setOpen(false)}
-                        className="block px-3 py-2 text-sm rounded-lg transition-colors hover:bg-muted-bg text-muted-foreground hover:text-foreground"
+                        aria-current={isActive(child.href) ? "page" : undefined}
+                        className={cn(
+                          "block rounded-lg px-3 py-2.5 text-sm transition-colors",
+                          isActive(child.href)
+                            ? "bg-primary-subtle text-primary font-medium"
+                            : "text-muted-foreground hover:bg-muted-bg hover:text-foreground"
+                        )}
                         tabIndex={open ? 0 : -1}
                       >
                         {child.label}
@@ -138,7 +155,13 @@ export function MobileNav() {
                 <Link
                   href={`/category/${cat.slug}`}
                   onClick={() => setOpen(false)}
-                  className="block px-3 py-2 text-sm rounded-lg transition-colors hover:bg-muted-bg text-muted-foreground hover:text-foreground"
+                  aria-current={isActive(`/category/${cat.slug}`) ? "page" : undefined}
+                  className={cn(
+                    "block rounded-lg px-3 py-2.5 text-sm transition-colors",
+                    isActive(`/category/${cat.slug}`)
+                      ? "bg-primary-subtle text-primary font-medium"
+                      : "text-muted-foreground hover:bg-muted-bg hover:text-foreground"
+                  )}
                   tabIndex={open ? 0 : -1}
                 >
                   {cat.name}
