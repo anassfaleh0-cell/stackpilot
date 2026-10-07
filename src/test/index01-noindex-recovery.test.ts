@@ -471,6 +471,9 @@ describe.skipIf(!hasGit)("INDEX-01 transition against the pinned baseline", () =
       "src/app/api/revalidate/route.ts",
       "src/test/indexnow-egress.test.ts",
       "README.md",
+      // P5O final 404 elimination: route-family regression + Cloudflare email opt-out
+      "src/test/route-families-404.test.ts",
+      "src/test/cloudflare-email-off.test.ts",
     ]
     expect(changed.filter((file) => !allowed.includes(file))).toEqual([])
     expect(changed).toContain("noindex-list.json")

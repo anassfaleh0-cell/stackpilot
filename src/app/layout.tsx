@@ -135,6 +135,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <span dangerouslySetInnerHTML={{ __html: "<!--email_off-->" }} />
         <noscript>
           <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KMQBGRJW"
             height="0" width="0" style={{ display: "none", visibility: "hidden" }}>
@@ -155,6 +156,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <WebVitals />
         </ThemeProvider>
+        <span dangerouslySetInnerHTML={{ __html: "<!--/email_off-->" }} />
       </body>
     </html>
   )
