@@ -127,9 +127,9 @@ export function InternalLinks({
   return (
     <section className="mt-16">
       <h2 className="text-2xl font-bold tracking-tight mb-6">Related Software &amp; Resources</h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {columns.map((defs, index) => (
-          <div key={index} className="space-y-4">
+          <div key={index} className="space-y-4 min-w-0">
             {defs.map((def) => (
               <SectionGroup key={def.family} title={def.title} icon={def.icon} items={result[def.bucket]} />
             ))}

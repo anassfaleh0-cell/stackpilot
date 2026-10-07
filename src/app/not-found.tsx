@@ -1,22 +1,17 @@
 import Link from "next/link"
 import { Container } from "@/components/ui/container"
+import { LogoSymbol } from "@/components/brand/logo"
 import type { Metadata } from "next/dist/lib/metadata/types/metadata-interface"
 
 export const metadata: Metadata = { title: "Page Not Found" }
-
-function LogoMark() {
-  return (
-    <img src="/favicon.svg" alt="" className="h-8 w-8" width={32} height={32} aria-hidden="true" />
-  )
-}
 
 export default function NotFound() {
   return (
     <Container className="flex flex-1 items-center justify-center py-32">
       <div className="text-center max-w-md">
         <div className="flex justify-center mb-6">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-muted-bg">
-            <LogoMark />
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-muted-bg border border-border">
+            <LogoSymbol className="h-8 w-8" title="PilotStack" />
           </div>
         </div>
         <h1 className="text-4xl font-bold mb-3">404</h1>

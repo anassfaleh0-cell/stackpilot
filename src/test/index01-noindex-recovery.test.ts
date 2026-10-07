@@ -457,6 +457,11 @@ describe.skipIf(!hasGit)("INDEX-01 transition against the pinned baseline", () =
       "src/components/layout/footer.tsx",
       "src/components/layout/header.tsx",
       "src/test/logo.test.tsx",
+      "e2e/brand.spec.ts",
+      // BRAND-01 responsive QA fixes (layout classes only, no content or metadata)
+      "src/app/page.tsx",
+      "src/components/content/internal-links.tsx",
+      "src/components/pages/search-form.tsx",
       // pre-existing local audit artefact that must never be staged
       "_gsc-indexation-recovery-final.md",
     ]

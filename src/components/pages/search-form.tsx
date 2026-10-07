@@ -77,7 +77,7 @@ export function SearchForm() {
           name="q"
           placeholder="Search reviews, guides, tools..."
           aria-label="Search PilotStack"
-          className="flex-1 h-12 px-4 rounded-lg border border-border bg-background text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-primary"
+          className="flex-1 min-w-0 h-12 px-4 rounded-lg border border-border bg-background text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-primary"
         />
         <Button type="submit" size="lg">Search</Button>
       </form>

@@ -39,7 +39,7 @@ export function SocialHeaderIcons() {
         href={site.links.facebook}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"
+        className="hidden sm:flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"
         aria-label="PilotStack on Facebook"
       >
         <FacebookIcon className="h-4 w-4" />
@@ -48,7 +48,7 @@ export function SocialHeaderIcons() {
         href={site.links.linkedin}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"
+        className="hidden sm:flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"
         aria-label="PilotStack on LinkedIn"
       >
         <LinkedinIcon className="h-4 w-4" />
@@ -57,7 +57,7 @@ export function SocialHeaderIcons() {
         href={site.links.pinterest}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"
+        className="hidden sm:flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"
         aria-label="PilotStack on Pinterest"
       >
         <PinterestIcon className="h-4 w-4" />
@@ -66,7 +66,7 @@ export function SocialHeaderIcons() {
         href={site.links.twitter}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"
+        className="hidden sm:flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"
         aria-label="PilotStack on X"
       >
         <XIcon className="h-4 w-4" />

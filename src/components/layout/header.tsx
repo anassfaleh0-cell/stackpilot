@@ -6,19 +6,19 @@ import { ThemeToggle } from "./theme-toggle"
 import { site } from "@/lib/constants"
 import { Search } from "lucide-react"
 import { SocialHeaderIcons } from "@/components/brand/social-icons"
+import { Logo } from "@/components/brand/logo"
 
 export function Header() {
   return (
     <header className="sticky top-0 z-30 w-full border-b border-border bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
-      <Container className="flex h-16 items-center justify-between">
-        <div className="flex items-center gap-10">
+      <Container className="flex h-16 items-center justify-between gap-4">
+        <div className="flex min-w-0 items-center gap-6 lg:gap-10">
           <Link
             href="/"
-            className="flex items-center gap-2.5 font-semibold text-lg tracking-tight hover:opacity-80 transition-opacity"
+            className="flex shrink-0 items-center transition-opacity hover:opacity-85"
             aria-label={`${site.name} - Home`}
           >
-            <img src="/favicon.svg" alt="" className="h-7 w-7" width={28} height={28} aria-hidden="true" fetchPriority="high" />
-            <span>{site.name}</span>
+            <Logo />
           </Link>
           <Navigation />
         </div>

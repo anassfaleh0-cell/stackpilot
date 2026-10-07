@@ -37,12 +37,12 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#0C0E14",
+        backgroundColor: "#0F172A",
         fontFamily: "Geist",
         padding: "60px",
       }}
     >
-      <div style={{ display: "flex", padding: "8px 20px", borderRadius: "999px", border: "1px solid rgba(124, 147, 245, 0.35)", color: "#7C93F5", fontSize: "18px", marginBottom: "28px", letterSpacing: "0.02em" }}>
+      <div style={{ display: "flex", padding: "8px 20px", borderRadius: "999px", border: "1px solid rgba(96, 165, 250, 0.35)", color: "#60A5FA", fontSize: "18px", marginBottom: "28px", letterSpacing: "0.02em" }}>
         {tool.category}
       </div>
 

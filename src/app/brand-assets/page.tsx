@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/container"
+import { Logo, LogoSymbol } from "@/components/brand"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
@@ -12,12 +13,15 @@ export const metadata = createMetadata({
 })
 
 const brandColors = [
-  { name: "Primary Blue", hex: "#5472E8", role: "Primary brand color — used for buttons, links, and key UI elements" },
-  { name: "Primary Dark", hex: "#3B5BCC", role: "Hover state for primary elements" },
-  { name: "Accent", hex: "#F59E0B", role: "Accent color — used for ratings, stars, and highlights" },
+  { name: "Primary Blue", hex: "#2563EB", role: "Primary brand color — buttons, links, and key UI elements" },
+  { name: "Primary Dark", hex: "#1D4ED8", role: "Hover state for primary elements" },
+  { name: "Primary Light", hex: "#60A5FA", role: "Tertiary highlights and dark-mode primary" },
+  { name: "Indigo", hex: "#6366F1", role: "Secondary brand color — gradients and supporting accents" },
+  { name: "Purple", hex: "#8B5CF6", role: "Accent brand color — gradients and layer highlights" },
+  { name: "Dark Navy", hex: "#0F172A", role: "Dark surfaces, logo tile, and dark-mode background" },
+  { name: "Light Neutral", hex: "#F8FAFC", role: "Light-mode surface and dark-mode foreground" },
+  { name: "Accent", hex: "#F59E0B", role: "Functional accent — ratings, stars, and highlights" },
   { name: "Background", hex: "#FFFFFF", role: "Light mode page background" },
-  { name: "Dark Background", hex: "#0C0E14", role: "Dark mode page background" },
-  { name: "Surface", hex: "#F8F9FC", role: "Light mode card/section backgrounds" },
   { name: "Border", hex: "#E2E6F0", role: "Border color for cards, dividers, and inputs" },
   { name: "Foreground", hex: "#1A1D2E", role: "Primary text color (light mode)" },
   { name: "Muted", hex: "#6B7280", role: "Secondary/muted text" },
@@ -27,6 +31,7 @@ const assets = [
   { name: "Logo (SVG)", file: "logo.svg", desc: "Full color logo on transparent background", category: "Logos" },
   { name: "Logo Horizontal", file: "logo-horizontal.svg", desc: "Horizontal layout for wide formats", category: "Logos" },
   { name: "Logo Vertical", file: "logo-vertical.svg", desc: "Vertical layout for square formats", category: "Logos" },
+  { name: "Logo Dark", file: "logo-dark.svg", desc: "Light-on-dark variant for navy backgrounds", category: "Logos" },
   { name: "Logo Icon", file: "logo-icon.svg", desc: "Icon-only variant for avatars and favicons", category: "Logos" },
   { name: "Logo Monochrome", file: "logo-monochrome.svg", desc: "Single-color version for grayscale printing", category: "Logos" },
   { name: "OG Image", file: "og.png", desc: "Default social sharing image (1200x630)", category: "Social" },
@@ -44,6 +49,30 @@ export default function BrandAssetsPage() {
         <div className="max-w-3xl mx-auto mt-8">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Brand Assets &amp; Guidelines</h1>
           <p className="text-lg text-muted-foreground mb-10">Resources for partners, media, and contributors using the PilotStack brand.</p>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold tracking-tight mb-4">Logo</h2>
+            <p className="text-sm text-muted-foreground mb-4">
+              Three stacked layers form the PilotStack mark: a vertical stack of insights that narrows from signal to
+              decision. The wordmark pairs a semibold &ldquo;Pilot&rdquo; with an extrabold &ldquo;Stack&rdquo;.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div className="flex items-center justify-center p-8 rounded-xl border border-border bg-white">
+                <Logo size="lg" />
+              </div>
+              <div className="flex items-center justify-center p-8 rounded-xl border border-border" style={{ backgroundColor: "#0F172A" }}>
+                <Logo size="lg" variant="dark" />
+              </div>
+              <div className="flex items-center justify-center p-8 rounded-xl border border-border bg-muted-bg">
+                <LogoSymbol className="h-14 w-14" />
+              </div>
+              <div className="flex flex-col items-center justify-center p-8 rounded-xl border border-border bg-muted-bg gap-2">
+                <Logo size="md" variant="mono" />
+                <span className="text-xs text-muted-foreground">Monochrome</span>
+              </div>
+            </div>
+            <p className="text-sm font-medium mt-4">Better tools. Smarter decisions.</p>
+          </section>
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4">Color Palette</h2>

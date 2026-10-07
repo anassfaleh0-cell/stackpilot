@@ -32,6 +32,13 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-muted-bg: var(--muted-bg);
 
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-indigo: var(--brand-indigo);
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-neutral: var(--brand-neutral);
+  --color-brand-ink: var(--brand-ink);
+
   --color-surface: var(--surface);
   --color-surface-secondary: var(--surface-secondary);
   --color-border: var(--border);
@@ -60,14 +67,28 @@
 }
 
 :root {
+  /* ── Brand identity tokens (Concept 1 — Modern & Clean) ── */
+  --brand-blue: #2563EB;
+  --brand-indigo: #6366F1;
+  --brand-purple: #8B5CF6;
+  --brand-navy: #0F172A;
+  --brand-neutral: #F8FAFC;
+  --brand-ink: #0F172A;
+  --brand-accent-ink: #2563EB;
+  --brand-gradient: linear-gradient(90deg, #2563EB 0%, #6366F1 52%, #8B5CF6 100%);
+  --brand-gradient-text: linear-gradient(120deg, #2563EB 0%, #6366F1 55%, #8B5CF6 100%);
+  --logo-blue: #2563EB;
+  --logo-indigo: #6366F1;
+  --logo-purple: #8B5CF6;
+
   --background: #FFFFFF;
   --foreground: #141927;
 
-  --primary: #5472E8;
-  --primary-dark: #3F58C4;
-  --primary-light: #7C93F5;
-  --primary-lighter: #A5B5F9;
-  --primary-subtle: rgba(84, 114, 232, 0.08);
+  --primary: #2563EB;
+  --primary-dark: #1D4ED8;
+  --primary-light: #60A5FA;
+  --primary-lighter: #93C5FD;
+  --primary-subtle: rgba(37, 99, 235, 0.08);
 
   --secondary: #0D121C;
   --secondary-dark: #090D15;
@@ -92,25 +113,32 @@
   --muted-bg: #F3F4F8;
 
   --surface: #FFFFFF;
-  --surface-secondary: #F7F8FB;
+  --surface-secondary: #F8FAFC;
   --border: #E6E8F0;
   --border-light: #EFF0F5;
   --card: #FFFFFF;
   --card-hover: #F7F8FB;
-  --ring: #5472E8;
+  --ring: #2563EB;
 
   color-scheme: light;
 }
 
 .dark {
-  --background: #0C0E14;
+  --background: #0F172A;
   --foreground: #F0F2F6;
 
-  --primary: #7C93F5;
-  --primary-dark: #5472E8;
-  --primary-light: #A5B5F9;
-  --primary-lighter: #C8D1FB;
-  --primary-subtle: rgba(124, 147, 245, 0.10);
+  --brand-ink: #F8FAFC;
+  --brand-accent-ink: #60A5FA;
+  --brand-gradient-text: linear-gradient(120deg, #60A5FA 0%, #818CF8 55%, #A78BFA 100%);
+  --logo-blue: #3B82F6;
+  --logo-indigo: #818CF8;
+  --logo-purple: #A78BFA;
+
+  --primary: #3B82F6;
+  --primary-dark: #2563EB;
+  --primary-light: #60A5FA;
+  --primary-lighter: #93C5FD;
+  --primary-subtle: rgba(59, 130, 246, 0.14);
 
   --secondary: #F0F2F6;
   --secondary-dark: #D1D6E0;
@@ -140,21 +168,28 @@
   --border-light: #1C2130;
   --card: #131721;
   --card-hover: #181D28;
-  --ring: #7C93F5;
+  --ring: #60A5FA;
 
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not(.light) {
-    --background: #0C0E14;
+    --background: #0F172A;
     --foreground: #F0F2F6;
 
-    --primary: #7C93F5;
-    --primary-dark: #5472E8;
-    --primary-light: #A5B5F9;
-    --primary-lighter: #C8D1FB;
-    --primary-subtle: rgba(124, 147, 245, 0.10);
+    --brand-ink: #F8FAFC;
+    --brand-accent-ink: #60A5FA;
+    --brand-gradient-text: linear-gradient(120deg, #60A5FA 0%, #818CF8 55%, #A78BFA 100%);
+    --logo-blue: #3B82F6;
+    --logo-indigo: #818CF8;
+    --logo-purple: #A78BFA;
+
+    --primary: #3B82F6;
+    --primary-dark: #2563EB;
+    --primary-light: #60A5FA;
+    --primary-lighter: #93C5FD;
+    --primary-subtle: rgba(59, 130, 246, 0.14);
 
     --secondary: #F0F2F6;
     --secondary-dark: #D1D6E0;
@@ -184,7 +219,7 @@
     --border-light: #1C2130;
     --card: #131721;
     --card-hover: #181D28;
-    --ring: #7C93F5;
+    --ring: #60A5FA;
 
     color-scheme: dark;
   }
@@ -261,7 +296,7 @@ small, .text-sm {
 /* ── Brand Gradient ── */
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  background-image: var(--brand-gradient-text);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

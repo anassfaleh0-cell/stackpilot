@@ -19,6 +19,7 @@ const brandAssets = [
   { name: "Logo (SVG)", url: "/logo.svg", desc: "Full color logo on transparent background" },
   { name: "Logo Horizontal", url: "/logo-horizontal.svg", desc: "Horizontal layout for wide formats" },
   { name: "Logo Vertical", url: "/logo-vertical.svg", desc: "Vertical layout for square formats" },
+  { name: "Logo Dark", url: "/logo-dark.svg", desc: "Light-on-dark variant for navy backgrounds" },
   { name: "Logo Icon", url: "/logo-icon.svg", desc: "Icon-only variant for avatars" },
   { name: "Logo Monochrome", url: "/logo-monochrome.svg", desc: "Single-color version for grayscale" },
   { name: "OG Image", url: "/og.png", desc: "Default social sharing image (1200x630)" },

@@ -464,7 +464,7 @@ export default function HomePage() {
                 placeholder="Enter your email"
                 autoComplete="email"
                 aria-label="Email address for newsletter"
-                className="flex-1 h-12 px-4 rounded-xl border border-border bg-background text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-primary transition-all duration-200"
+                className="flex-1 min-w-0 h-12 px-4 rounded-xl border border-border bg-background text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-primary transition-all duration-200"
                 required
               />
               <button

@@ -40,7 +40,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "#0C0E14",
+        backgroundColor: "#0F172A",
         fontFamily: "Geist",
         padding: "60px",
       }}
@@ -64,10 +64,10 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             width: "60px",
             height: "60px",
             borderRadius: "999px",
-            backgroundColor: "rgba(124, 147, 245, 0.15)",
+            backgroundColor: "rgba(96, 165, 250, 0.15)",
             fontSize: "24px",
             fontWeight: 700,
-            color: "#7C93F5",
+            color: "#60A5FA",
             margin: "0 20px",
           }}
         >
@@ -94,11 +94,11 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             marginTop: "40px",
             padding: "12px 32px",
             borderRadius: "12px",
-            background: "linear-gradient(135deg, rgba(84, 114, 232, 0.2), rgba(124, 147, 245, 0.1))",
-            border: "1px solid rgba(124, 147, 245, 0.3)",
+            background: "linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(96, 165, 250, 0.1))",
+            border: "1px solid rgba(96, 165, 250, 0.3)",
             fontSize: "22px",
             fontWeight: 700,
-            color: "#7C93F5",
+            color: "#60A5FA",
           }}
         >
           {cmp.winner} wins — Best for most teams

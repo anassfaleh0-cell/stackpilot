@@ -15,11 +15,11 @@ export interface EditorialPalette {
 
 const palettes: Record<string, EditorialPalette> = {
   "AI & Machine Learning": {
-    primary: "#5472E8", secondary: "#7C93F5", accent: "#A5B5F9",
-    gradientFrom: "rgba(84,114,232,0.06)", gradientVia: "rgba(84,114,232,0.04)", gradientTo: "rgba(84,114,232,0.02)",
-    glassBg: "rgba(84,114,232,0.06)", glassBorder: "rgba(84,114,232,0.12)",
-    subtle1: "rgba(84,114,232,0.08)", subtle2: "rgba(84,114,232,0.04)",
-    dotColor: "#5472E8", glowColor: "#A5B5F9",
+    primary: "#2563EB", secondary: "#60A5FA", accent: "#93C5FD",
+    gradientFrom: "rgba(37,99,235,0.06)", gradientVia: "rgba(37,99,235,0.04)", gradientTo: "rgba(37,99,235,0.02)",
+    glassBg: "rgba(37,99,235,0.06)", glassBorder: "rgba(37,99,235,0.12)",
+    subtle1: "rgba(37,99,235,0.08)", subtle2: "rgba(37,99,235,0.04)",
+    dotColor: "#2563EB", glowColor: "#93C5FD",
   },
   "Project Management": {
     primary: "#0F766E", secondary: "#2DD4BF", accent: "#5EEAD4",
@@ -78,11 +78,11 @@ const palettes: Record<string, EditorialPalette> = {
     dotColor: "#047857", glowColor: "#6EE7B7",
   },
   "Productivity": {
-    primary: "#3F58C4", secondary: "#7C93F5", accent: "#A5B5F9",
-    gradientFrom: "rgba(63,88,196,0.06)", gradientVia: "rgba(63,88,196,0.04)", gradientTo: "rgba(63,88,196,0.02)",
-    glassBg: "rgba(63,88,196,0.06)", glassBorder: "rgba(63,88,196,0.12)",
-    subtle1: "rgba(63,88,196,0.08)", subtle2: "rgba(63,88,196,0.04)",
-    dotColor: "#3F58C4", glowColor: "#A5B5F9",
+    primary: "#1D4ED8", secondary: "#60A5FA", accent: "#93C5FD",
+    gradientFrom: "rgba(29,78,216,0.06)", gradientVia: "rgba(29,78,216,0.04)", gradientTo: "rgba(29,78,216,0.02)",
+    glassBg: "rgba(29,78,216,0.06)", glassBorder: "rgba(29,78,216,0.12)",
+    subtle1: "rgba(29,78,216,0.08)", subtle2: "rgba(29,78,216,0.04)",
+    dotColor: "#1D4ED8", glowColor: "#93C5FD",
   },
   "Security & Compliance": {
     primary: "#B91C1C", secondary: "#EF4444", accent: "#FCA5A5",
@@ -101,11 +101,11 @@ const palettes: Record<string, EditorialPalette> = {
 }
 
 const defaultPalette: EditorialPalette = {
-  primary: "#3F58C4", secondary: "#7C93F5", accent: "#A5B5F9",
-  gradientFrom: "rgba(63,88,196,0.06)", gradientVia: "rgba(63,88,196,0.04)", gradientTo: "rgba(63,88,196,0.02)",
-  glassBg: "rgba(63,88,196,0.06)", glassBorder: "rgba(63,88,196,0.12)",
-  subtle1: "rgba(63,88,196,0.08)", subtle2: "rgba(63,88,196,0.04)",
-  dotColor: "#3F58C4", glowColor: "#A5B5F9",
+  primary: "#1D4ED8", secondary: "#60A5FA", accent: "#93C5FD",
+  gradientFrom: "rgba(29,78,216,0.06)", gradientVia: "rgba(29,78,216,0.04)", gradientTo: "rgba(29,78,216,0.02)",
+  glassBg: "rgba(29,78,216,0.06)", glassBorder: "rgba(29,78,216,0.12)",
+  subtle1: "rgba(29,78,216,0.08)", subtle2: "rgba(29,78,216,0.04)",
+  dotColor: "#1D4ED8", glowColor: "#93C5FD",
 }
 
 export function getPalette(category: string): EditorialPalette {

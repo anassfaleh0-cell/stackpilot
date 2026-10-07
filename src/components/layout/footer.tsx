@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { Container } from "@/components/ui/container"
 import { site, navLinks, categories, editorialLinks } from "@/lib/constants"
-import { ArrowUpRight } from "lucide-react"
 import { SocialFooterIcons } from "@/components/brand/social-icons"
 import { NewsletterSignup } from "@/components/newsletter"
+import { Logo } from "@/components/brand/logo"
 
 const footerLinks = [
   {
@@ -55,21 +55,14 @@ const footerLinks = [
   },
 ]
 
-function Logo() {
-  return (
-    <img src="/favicon.svg" alt="" className="h-7 w-7" width={28} height={28} aria-hidden="true" />
-  )
-}
-
 export function Footer() {
   return (
     <footer className="border-t border-border bg-surface-secondary">
       <Container className="py-16 lg:py-20">
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-4 lg:grid-cols-5">
           <div className="col-span-2 sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5 font-semibold text-lg mb-4">
-              <Logo />
-              <span>{site.name}</span>
+            <Link href="/" className="mb-4 flex w-fit items-center transition-opacity hover:opacity-85" aria-label={`${site.name} - Home`}>
+              <Logo size="lg" />
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs leading-relaxed text-pretty">
               {site.description}
