@@ -115,9 +115,9 @@ function Dropdown({ item, pathname }: { item: (typeof navConfig)[number]; pathna
         id={panelId}
         hidden={!open}
         className={cn(
-          "absolute top-full left-0 mt-1 w-48 rounded-xl border border-border bg-popover shadow-lg backdrop-blur-xl z-50 py-1.5",
-          // Hover bridge: fills the mt-1 gap between the trigger and the panel so
-          // the pointer never leaves the <li> while travelling between them.
+          "absolute top-full left-0 mt-1 w-52 rounded-xl border border-border bg-card shadow-elevated z-50 py-1.5",
+          // Opaque surface + hover bridge: keeps dropdown content readable and
+          // prevents the site background from showing through the menu.
           "before:absolute before:inset-x-0 before:-top-1 before:h-1 before:content-['']"
         )}
       >
@@ -127,7 +127,7 @@ function Dropdown({ item, pathname }: { item: (typeof navConfig)[number]; pathna
             href={child.href}
             onClick={() => setOpen(false)}
             className={cn(
-              "block px-4 py-2 text-sm transition-colors",
+              "block px-4 py-2.5 text-sm transition-colors",
               isActive(child.href)
                 ? "text-primary bg-primary-subtle font-medium"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted-bg"
