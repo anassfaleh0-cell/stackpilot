@@ -151,7 +151,8 @@ Components in `src/components/ui/` form the design system:
 | `/api/contact` | POST | Contact form with validation + rate limiting |
 | `/api/newsletter` | POST | Email subscription with validation + rate limiting |
 | `/api/search` | GET | Content search across all types |
-| `/api/revalidate` | POST | ISR revalidation webhook |
+| `/api/revalidate` | POST | ISR revalidation webhook; requires `REVALIDATION_SECRET` (401 when unset) |
+| `/api/indexnow` | GET, POST | Search-engine URL submission; only canonical-origin sitemap URLs are accepted |
 
 ## Performance Optimizations
 

@@ -464,6 +464,13 @@ describe.skipIf(!hasGit)("INDEX-01 transition against the pinned baseline", () =
       "src/components/pages/search-form.tsx",
       // pre-existing local audit artefact that must never be staged
       "_gsc-indexation-recovery-final.md",
+      // P5O master SEO recovery: canonical host in llms.txt + engine-egress gate
+      "public/llms.txt",
+      "src/lib/indexnow.ts",
+      "src/app/api/indexnow/route.ts",
+      "src/app/api/revalidate/route.ts",
+      "src/test/indexnow-egress.test.ts",
+      "README.md",
     ]
     expect(changed.filter((file) => !allowed.includes(file))).toEqual([])
     expect(changed).toContain("noindex-list.json")
