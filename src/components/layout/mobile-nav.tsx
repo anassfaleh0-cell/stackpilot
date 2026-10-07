@@ -57,6 +57,9 @@ export function MobileNav() {
         document.body.style.overflow = ""
       }
     }
+    if (menuRef.current?.contains(document.activeElement)) {
+      buttonRef.current?.focus()
+    }
   }, [open, handleKeyDown])
 
   return (
@@ -64,7 +67,7 @@ export function MobileNav() {
       <button
         ref={buttonRef}
         onClick={() => setOpen(!open)}
-        className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"
+        className="relative z-50 flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         aria-controls="mobile-menu"
@@ -74,7 +77,7 @@ export function MobileNav() {
 
       {open && (
         <div
-          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm animate-fade-in"
+          className="absolute inset-x-0 top-0 h-screen z-40 bg-black/20 backdrop-blur-sm animate-fade-in"
           onClick={() => setOpen(false)}
           aria-hidden="true"
         />
@@ -84,7 +87,8 @@ export function MobileNav() {
         ref={menuRef}
         id="mobile-menu"
         role="dialog"
-        aria-modal="true"
+        aria-modal={open}
+        aria-hidden={!open}
         aria-label="Navigation menu"
         className={cn(
           "fixed top-16 right-4 left-4 z-50 rounded-xl border border-border bg-card p-5 shadow-elevated",
@@ -115,7 +119,7 @@ export function MobileNav() {
                         key={child.href}
                         href={child.href}
                         onClick={() => setOpen(false)}
-                        className="block px-3 py-2 text-sm rounded-lg transition-colors hover:bg-muted-bg hover:text-foreground text-muted-foreground"
+                        className="block px-3 py-2 text-sm rounded-lg transition-colors hover:bg-muted-bg text-muted-foreground hover:text-foreground"
                         tabIndex={open ? 0 : -1}
                       >
                         {child.label}
@@ -134,7 +138,7 @@ export function MobileNav() {
                 <Link
                   href={`/category/${cat.slug}`}
                   onClick={() => setOpen(false)}
-                  className="block px-3 py-2 text-sm rounded-lg transition-colors hover:bg-muted-bg hover:text-foreground text-muted-foreground"
+                  className="block px-3 py-2 text-sm rounded-lg transition-colors hover:bg-muted-bg text-muted-foreground hover:text-foreground"
                   tabIndex={open ? 0 : -1}
                 >
                   {cat.name}
