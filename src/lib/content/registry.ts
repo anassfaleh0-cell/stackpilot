@@ -23,7 +23,7 @@ const DIR_FOR_TYPE: Record<string, string> = {
 // Content types whose templates emit a real noindex meta tag and that sitemap.ts filters.
 // Blog, research, use-cases, industries and hubs carry no noindex entries, so their slugs
 // stay linkable; guides are enforced like reviews and comparisons.
-const NOINDEX_ENFORCED = new Set(["review", "comparison", "guide", "best", "alternative", "glossary", "statistic"])
+const NOINDEX_ENFORCED = new Set(["review", "comparison", "guide", "best", "alternative", "glossary", "statistic", "use-case", "industry", "research", "hub"])
 
 /**
  * True when a content slug resolves to a page that is published, reachable and indexable.
@@ -63,6 +63,10 @@ const GENERIC_BOILERPLATE_PATTERNS = [
   /tested in realistic workflows by our team/i,
   /after researching hundreds of/i,
   /our expert buying advice/i,
+  /enterprise deployments consistently demonstrate/i,
+  /this approach enables teams to maximize their software investment/i,
+  /organizations see measurable improvements in efficiency and user satisfaction within the first quarter/i,
+  /organizations see measurable improvements in efficiency and team productivity/i,
 ]
 
 const UNSUPPORTED_CLAIM_PATTERNS = [
