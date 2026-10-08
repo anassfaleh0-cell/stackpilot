@@ -34,6 +34,12 @@ const authors = [
     role: "Research Analyst",
     bio: "Emily leads PilotStack's research and market analysis pages, covering Finance, HR, Marketing, Communication and Design tools with an emphasis on recorded pricing and category data.",
   },
+  {
+    slug: "pilotstack-team",
+    name: "PilotStack Team",
+    role: "Editorial Team",
+    bio: "The PilotStack editorial team maintains software reviews, comparisons, guides, and research using the site's published scoring, sourcing, and update policies.",
+  },
 ]
 
 export default function AuthorsPage() {
