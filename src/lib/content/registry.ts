@@ -260,15 +260,44 @@ function normalizeComparisonWinner(value: string | null, tool1: string, tool2: s
 }
 
 function buildComparisonNarrative(tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
-  const exclusive1 = features.filter((f) => Boolean(f.tool1) && !Boolean(f.tool2)).map((f) => f.name)
-  const exclusive2 = features.filter((f) => Boolean(f.tool2) && !Boolean(f.tool1)).map((f) => f.name)
-  const shared = features.filter((f) => Boolean(f.tool1) && Boolean(f.tool2)).length
-  const winnerLine = winner ? winner + " is the recorded winner in this dataset." : "The dataset does not record a clear overall winner."
-  const lead1 = exclusive1.length ? tool1 + " leads on " + exclusive1.slice(0, 3).join(", ") + (exclusive1.length > 3 ? ", and more." : ".") : tool1 + " has no exclusive criteria in the recorded feature set."
-  const lead2 = exclusive2.length ? tool2 + " leads on " + exclusive2.slice(0, 3).join(", ") + (exclusive2.length > 3 ? ", and more." : ".") : tool2 + " has no exclusive criteria in the recorded feature set."
-  return winnerLine + " The page compares " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, with " + shared + " criteria marked as available for both tools. " + lead1 + " " + lead2 + " Use the feature rows, pricing information, and linked reviews to validate the areas that matter most to your workflow. This page reflects the data stored in PilotStack and does not claim hands-on product testing unless a source is explicitly identified elsewhere on the page."
-}
+  const exclusive1 = features.filter((f) => Boolean(f.tool1) && !Boolean(f.tool2))
+  const exclusive2 = features.filter((f) => Boolean(f.tool2) && !Boolean(f.tool1))
+  const shared = features.filter((f) => Boolean(f.tool1) && Boolean(f.tool2))
+  const review1 = getReview(features.length ? String((features[0] as ComparisonFeature & { tool1Slug?: string }).tool1Slug || "") : "")
+  const winnerLine = winner
+    ? `${winner} is the recorded winner in this dataset.`
+    : "The dataset does not record a clear overall winner."
 
+  const evidence = (items: ComparisonFeature[], key: "tool1Detail" | "tool2Detail") =>
+    items
+      .slice(0, 5)
+      .map((f) => `${f.name}: ${String(f[key] || "recorded as available.")}`)
+      .join(" ")
+
+  const lead1 = exclusive1.length
+    ? `${tool1} has exclusive coverage for ${exclusive1.slice(0, 5).map((f) => f.name.toLowerCase()).join(", ")}.`
+    : `${tool1} has no exclusive criteria in the recorded feature set.`
+  const lead2 = exclusive2.length
+    ? `${tool2} has exclusive coverage for ${exclusive2.slice(0, 5).map((f) => f.name.toLowerCase()).join(", ")}.`
+    : `${tool2} has no exclusive criteria in the recorded feature set.`
+
+  const pricingContext = [review1].filter(Boolean).map((review) =>
+    `${review!.name} is recorded at ${review!.rating}/5 with ${review!.pricing.toLowerCase()} pricing${review!.priceRange ? ` (${review!.priceRange})` : ""}.`
+  ).join(" ")
+
+  const featureEvidence1 = evidence(exclusive1, "tool1Detail")
+  const featureEvidence2 = evidence(exclusive2, "tool2Detail")
+  const switching = `Before switching between ${tool1} and ${tool2}, verify the workflows represented by the criteria above, confirm current pricing on the vendor sites, and check export/import support, authentication, integrations, and user migration requirements. Recorded feature coverage is a comparison signal, not proof that one product is better for every team.`
+
+  return [
+    winnerLine,
+    `This comparison covers ${features.length} recorded criteria. ${shared.length} criteria are marked as available for both products, ${exclusive1.length} are exclusive to ${tool1}, and ${exclusive2.length} are exclusive to ${tool2}. The most useful way to read the table is to focus on the criteria that map directly to the workflow you are replacing or improving.`,
+    lead1 + (featureEvidence1 ? ` In the recorded detail, ${featureEvidence1}` : "") + " " + lead2 + (featureEvidence2 ? ` In the recorded detail, ${featureEvidence2}` : ""),
+    pricingContext,
+    `For the final choice, separate must-have requirements from preferences. A product with more recorded criteria is not automatically the better fit if the additional capabilities are irrelevant to your team. Likewise, a smaller feature footprint can be an advantage when it reduces configuration or training effort.`,
+    switching,
+  ].filter(Boolean).join("\n\n")
+}
 function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
   const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
   if (cleaned.length >= 80 && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(cleaned)) return trimText(cleaned, 700)
