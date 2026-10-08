@@ -486,13 +486,14 @@ export function getHub(slug: string): HubContent | null {
   const file = path.join(CONTENT_DIR, "hubs", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const hub = readJson<HubContent>(file)
+  hub.description = trimText(`${hub.description} ${buildHubAnalysis(hub)}`, 1100)
   hub.faqs = sanitizeFaqs(hub.faqs)
   return hub
 }
 
 export function getAllHubs(): HubContent[] {
   return readDir(path.join(CONTENT_DIR, "hubs"))
-    .map((f) => { const h = readJson<HubContent>(path.join(CONTENT_DIR, "hubs", f)); h.faqs = sanitizeFaqs(h.faqs); return h })
+    .map((f) => { const h = readJson<HubContent>(path.join(CONTENT_DIR, "hubs", f)); h.description = trimText(`${h.description} ${buildHubAnalysis(h)}`, 1100); h.faqs = sanitizeFaqs(h.faqs); return h })
 }
 
 export function getContentTitle(type: string, slug: string): string | null {
