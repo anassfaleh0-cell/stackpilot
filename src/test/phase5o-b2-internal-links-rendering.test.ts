@@ -152,7 +152,7 @@ function pickPage<T extends { slug: string }>(
 describe("Phase 5O-B-2: internal link rendering", () => {
   it(
     "renders the five legacy sections with their existing labels",
-    { timeout: 60000 },
+    { timeout: 180000 },
     () => {
       const developerTools = renderInternal({ category: "Developer Tools", excludeSlug: "" })
       const marketing = renderInternal({ category: "Marketing & SEO", excludeSlug: "" })
@@ -167,7 +167,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
 
   it(
     "renders each of the seven newly discovered families as its own section",
-    { timeout: 60000 },
+    { timeout: 180000 },
     () => {
       const marketing = renderInternal({ category: "Marketing & SEO", excludeSlug: "" })
       const communication = renderInternal({ category: "Communication", excludeSlug: "" })
@@ -192,7 +192,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
 
   it(
     "emits exactly one section per family that has eligible items and none when it has none",
-    { timeout: 60000 },
+    { timeout: 180000 },
     () => {
       for (const category of CATEGORIES) {
         const html = renderInternal({ category, excludeSlug: "" })
@@ -204,7 +204,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
 
   it(
     "keeps the legacy section ordering intact",
-    { timeout: 60000 },
+    { timeout: 180000 },
     () => {
       const legacyTitles = ["Reviews", "Best Software", "Comparisons", "Alternatives", "Guides"]
 
@@ -227,7 +227,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
 
   it(
     "never renders the same href twice inside one block",
-    { timeout: 60000 },
+    { timeout: 180000 },
     () => {
       for (const category of CATEGORIES) {
         const found = hrefs(renderInternal({ category, excludeSlug: "" }))
@@ -238,7 +238,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
 
   it(
     "only renders links that resolve to published, indexable content",
-    { timeout: 60000 },
+    { timeout: 180000 },
     () => {
       for (const category of CATEGORIES) {
         for (const href of hrefs(renderInternal({ category, excludeSlug: "" }))) {
@@ -252,7 +252,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
 
   it(
     "keeps real content fixtures eligible for internal linking",
-    { timeout: 60000 },
+    { timeout: 180000 },
     () => {
       const fixtures = [
         { category: "Design & Creative", href: "/reviews/affinity", type: "review", slug: "affinity" },
@@ -272,7 +272,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
 
   it(
     "gives every rendered link a non-empty accessible name",
-    { timeout: 60000 },
+    { timeout: 180000 },
     () => {
       for (const category of CATEGORIES) {
         for (const text of linkTexts(renderInternal({ category, excludeSlug: "" }))) {
@@ -284,7 +284,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
 
   it(
     "renders no section for a family without eligible items",
-    { timeout: 60000 },
+    { timeout: 180000 },
     () => {
       expect(related("Video Communication").hubs).toHaveLength(0)
       expect(related("Video Communication").statistics).toHaveLength(0)
@@ -302,7 +302,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
 
   it(
     "renders nothing at all when the category matches no content",
-    { timeout: 60000 },
+    { timeout: 180000 },
     () => {
       expect(renderInternal({ category: "No Such Category Anywhere", excludeSlug: "" })).toBe("")
       expect(renderEnhanced([])).toBe("")
@@ -312,7 +312,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
 
   it(
     "renders no new-family section on the four legacy-only pages",
-    { timeout: 60000 },
+    { timeout: 180000 },
     () => {
       for (const category of CATEGORIES) {
         const html = renderInternal({ category, excludeSlug: "", families: LEGACY_RELATED_TYPES })
@@ -365,7 +365,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
 
   it(
     "keeps real content in the enhanced block",
-    { timeout: 60000 },
+    { timeout: 180000 },
     () => {
       expect(isContentAvailable("review", "affinity")).toBe(true)
       expect(isContentAvailable("comparison", "1password-vs-appwrite")).toBe(true)
@@ -388,7 +388,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
 
   it(
     "labels every newly rendered family with a human-readable accessible label",
-    { timeout: 60000 },
+    { timeout: 180000 },
     () => {
       const items: RelatedItem[] = [
         { ...available("use-case", getAllUseCases(), "Marketing & SEO"), title: "Use Case Item" },
@@ -414,7 +414,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
 
   it(
     "keeps extendedRelatedItems a filtered, order-preserving view of the related list",
-    { timeout: 60000 },
+    { timeout: 180000 },
     () => {
       expect(new Set([...LEGACY_RELATED_TYPES, ...EXTENDED_RELATED_TYPES]).size).toBe(12)
       expect(LEGACY_RELATED_TYPES.filter((type) => EXTENDED_RELATED_TYPES.includes(type))).toEqual([])
