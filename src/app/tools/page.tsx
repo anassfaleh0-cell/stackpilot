@@ -7,18 +7,22 @@ import { createMetadata } from "@/lib/metadata"
 import { site, categories } from "@/lib/constants"
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts } from "@/lib/content/registry"
 import Link from "next/link"
-import { Calculator, Scale, ArrowRight, Star, BookOpen, GitCompare, FileText } from "lucide-react"
+import { Calculator, Scale, ArrowRight, Star, BookOpen, GitCompare, FileText, TrendingUp, Target, Layers, DollarSign } from "lucide-react"
 import { BannerAd } from "@/components/ads"
 
 export const metadata = createMetadata({
   title: "Free Software Tools",
-  description: "Free interactive tools to help you compare software, calculate TCO, and make better buying decisions across 12 software categories.",
+  description: "Free software decision tools to compare options, estimate total cost, calculate ROI, score vendors, and model your SaaS stack before you buy.",
   path: "/tools",
 })
 
 const tools = [
-  { slug: "tco-calculator", name: "TCO Calculator", description: "Calculate the total cost of ownership for any software tool.", icon: Calculator },
-  { slug: "software-comparison", name: "Software Comparison Matrix", description: "Compare multiple tools side by side across dozens of criteria.", icon: Scale },
+  { slug: "tco-calculator", name: "TCO Calculator", description: "Estimate the true 1-year and 3-year cost of software beyond the subscription price.", icon: Calculator },
+  { slug: "software-comparison", name: "Software Comparison Matrix", description: "Compare multiple tools side by side across the criteria that matter to your team.", icon: Scale },
+  { slug: "roi-calculator", name: "Software ROI Calculator", description: "Estimate payback, annual savings, and return on investment from a software purchase.", icon: TrendingUp },
+  { slug: "software-scorecard", name: "Software Scorecard", description: "Weight your priorities and score software options against a consistent buying framework.", icon: Target },
+  { slug: "saas-stack-cost-calculator", name: "SaaS Stack Cost Calculator", description: "Add your software subscriptions and see your total monthly and annual stack cost.", icon: Layers },
+  { slug: "software-pricing-calculator", name: "Software Pricing Calculator", description: "Model per-user pricing, seats, billing periods, and add-ons before you buy.", icon: DollarSign },
 ]
 
 export default function ToolsPage() {
@@ -41,10 +45,10 @@ export default function ToolsPage() {
         <Container>
           <SectionHeader className="mb-12">
             <Badge variant="default" className="mb-4">Free Tools</Badge>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Smarter decisions, free tools</h1>
-            <p className="text-lg text-muted-foreground">Interactive calculators and comparison tools to help you evaluate software with data, not guesswork.</p>
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Free Software Decision Tools</h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Compare software, estimate total cost, calculate ROI, score your options, and model your SaaS stack before you commit.</p>
           </SectionHeader>
-          <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto mb-20">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-20">
             {tools.map((tool) => (
               <Link key={tool.slug} href={`/tools/${tool.slug}`} className="group">
                 <Card className="h-full hover:border-primary/30 text-center">
