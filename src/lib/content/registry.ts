@@ -252,6 +252,33 @@ export function getAllReviews(): ReviewContent[] {
     .sort((a, b) => b.rating - a.rating)
 }
 
+function sectionWordCount(sections: Array<{ body?: string; items?: string[] }>): number {
+  return sections.reduce((total, section) =>
+    total + String(section.body ?? "").split(/\s+/).filter(Boolean).length +
+    (section.items || []).reduce((n, item) => n + String(item).split(/\s+/).filter(Boolean).length, 0),
+  0)
+}
+
+function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: ComparisonFeature[]): ComparisonFeature[] {
+  const r1 = getReview(cmp.tool1Slug)
+  const r2 = getReview(cmp.tool2Slug)
+  if (!r1 && !r2) return base
+  const genericNames = new Set(["user rating", "category", "starting price", "best for", "core strength", "ease of use", "integration ecosystem"])
+  const looksGeneric = base.length <= 6 && base.every((f) => genericNames.has(f.name.toLowerCase()))
+  if (!looksGeneric && base.length > 5) return base
+  const derived: ComparisonFeature[] = [
+    { name: "User Rating", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.rating}/5 across ${r1.reviewCount.toLocaleString()} recorded reviews` : undefined, tool2Detail: r2 ? `${r2.rating}/5 across ${r2.reviewCount.toLocaleString()} recorded reviews` : undefined },
+    { name: "Pricing", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.pricing}${r1.priceRange ? `: ${r1.priceRange}` : ""}` : undefined, tool2Detail: r2 ? `${r2.pricing}${r2.priceRange ? `: ${r2.priceRange}` : ""}` : undefined },
+    { name: "Category & Positioning", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.category}. ${r1.tagline}` : cmp.category, tool2Detail: r2 ? `${r2.category}. ${r2.tagline}` : cmp.secondaryCategories?.[0] || cmp.category },
+    { name: "Key Capabilities", tool1: Boolean(r1?.features?.length), tool2: Boolean(r2?.features?.length), tool1Detail: r1 ? r1.features.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") : undefined, tool2Detail: r2 ? r2.features.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") : undefined },
+    { name: "Integrations", tool1: Boolean(r1?.company?.integrations?.length), tool2: Boolean(r2?.company?.integrations?.length), tool1Detail: r1?.company?.integrations?.slice(0, 6).join(", "), tool2Detail: r2?.company?.integrations?.slice(0, 6).join(", ") },
+    { name: "API", tool1: Boolean(r1?.company), tool2: Boolean(r2?.company), tool1Detail: r1?.company ? (r1.company.apiAvailable ? "API available in the recorded profile." : "API is not marked available in the recorded profile.") : undefined, tool2Detail: r2?.company ? (r2.company.apiAvailable ? "API available in the recorded profile." : "API is not marked available in the recorded profile.") : undefined },
+    { name: "Security & Compliance", tool1: Boolean(r1?.company), tool2: Boolean(r2?.company), tool1Detail: r1?.company ? [...r1.company.securityCertifications, ...r1.company.compliance].slice(0, 8).join(", ") || "No specific certifications recorded." : undefined, tool2Detail: r2?.company ? [...r2.company.securityCertifications, ...r2.company.compliance].slice(0, 8).join(", ") || "No specific certifications recorded." : undefined },
+    { name: "Migration", tool1: Boolean(r1?.company), tool2: Boolean(r2?.company), tool1Detail: r1?.company ? r1.company.migrationComplexity : undefined, tool2Detail: r2?.company ? r2.company.migrationComplexity : undefined },
+  ]
+  const existingNames = new Set(base.map((f) => f.name.toLowerCase()))
+  return [...base, ...derived.filter((f) => !existingNames.has(f.name.toLowerCase()))].slice(0, 20)
+}
 function normalizeComparisonWinner(value: string | null, tool1: string, tool2: string): string | null {
   if (!value) return null
   if (value.toLowerCase() === tool1.toLowerCase()) return tool1
@@ -308,12 +335,13 @@ export function getComparison(slug: string): ComparisonContent | null {
   const file = path.join(CONTENT_DIR, "comparisons", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const cmp = readJson<ComparisonContent>(file)
-  const features = cmp.features.slice(0, 20).map((f) => ({
+  const baseFeatures = cmp.features.slice(0, 20).map((f) => ({
     ...f,
     name: trimText(f.name, 140),
     tool1Detail: sanitizeUnsupportedClaims(trimText(f.tool1Detail, 320)),
     tool2Detail: sanitizeUnsupportedClaims(trimText(f.tool2Detail, 320)),
   }))
+  const features = buildDerivedComparisonFeatures(cmp, baseFeatures)
   const winner = normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2)
   return {
     ...cmp,
