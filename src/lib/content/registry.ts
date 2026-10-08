@@ -452,6 +452,19 @@ export function getAllCategories(): CategoryKnowledge[] {
     .map((f) => { const c = readJson<CategoryKnowledge>(path.join(CONTENT_DIR, "categories", f)); c.faqs = sanitizeFaqs(c.faqs); return c })
 }
 
+function sanitizeAlternativeTitle(title: string, toolName: string, count: number): string {
+  const cleaned = title.replace(/\s+/g, " ").trim()
+  if (!cleaned || /save\s*\+|\+\/year|\+\s*\/\s*year|\btested\b/i.test(cleaned)) {
+    return `${toolName} Alternatives (2026): ${count} Options to Consider`
+  }
+  return trimText(cleaned, 70)
+}
+
+function sanitizeAlternativeDescription(description: string, toolName: string, count: number): string {
+  const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
+  if (cleaned.length >= 90 && !/save\s*\+|\+\/year|\btested\b/i.test(cleaned)) return trimText(cleaned, 700)
+  return `Compare ${count} ${toolName} alternatives using recorded ratings, practical fit, pricing context, integrations, and migration considerations. Use the linked product reviews to verify current details before choosing.`
+}
 function buildAlternativeSections(alt: AlternativeContent): ContentSection[] {
   const sections = sanitizeSections(alt.sections)
   if (sectionWordCount(sections) >= 900) return sections
@@ -468,7 +481,8 @@ export function getAlternative(slug: string): AlternativeContent | null {
   const file = path.join(CONTENT_DIR, "alternatives", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const alt = readJson<AlternativeContent>(file)
-  return { ...alt, sections: buildAlternativeSections(alt), faqs: sanitizeFaqs(alt.faqs) }
+  const cleaned = { ...alt, title: sanitizeAlternativeTitle(alt.title, alt.toolName, alt.alternatives.length), description: sanitizeAlternativeDescription(alt.description, alt.toolName, alt.alternatives.length), sections: buildAlternativeSections(alt), faqs: sanitizeFaqs(alt.faqs) }
+  return cleaned
 }
 
 export function getAllAlternatives(): AlternativeContent[] {
