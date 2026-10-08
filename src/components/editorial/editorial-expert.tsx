@@ -8,8 +8,8 @@ const reviewerProfiles: Record<string, { name: string; role: string; expertise: 
 export function EditorialExpert({ author }: { author: string }) {
   const profile = reviewerProfiles[author] || {
     name: author,
-    role: "Editorial Team",
-    expertise: "Software Evaluation",
+    role: "Editorial contributor",
+    expertise: "Software coverage and buying research",
   }
 
   return (

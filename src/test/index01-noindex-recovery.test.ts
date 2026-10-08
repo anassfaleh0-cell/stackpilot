@@ -19,9 +19,15 @@ describe("site-wide content indexability policy", () => {
       ["alternatives", "slack-alternatives"],
       ["best", "best-crm-software"],
       ["use-cases", "best-crm-for-small-business"],
+      ["industries", "telecommunications"],
+      ["research", "software-pricing-trends-2026"],
+      ["statistics", "blockchain-software"],
+      ["hubs", "software-for-remote-teams"],
+      ["blog", "content-marketing-platforms"],
     ] as const
     for (const [dir, slug] of samples) {
-      expect(getContentTitle(dir === "use-cases" ? "use-case" : dir === "alternatives" ? "alternative" : dir === "comparisons" ? "comparison" : dir === "reviews" ? "review" : dir === "best" ? "best" : dir === "guides" ? "guide" : "glossary", slug)).not.toBeNull()
+      const type = dir === "use-cases" ? "use-case" : dir === "alternatives" ? "alternative" : dir === "comparisons" ? "comparison" : dir === "reviews" ? "review" : dir === "best" ? "best" : dir === "guides" ? "guide" : dir === "statistics" ? "statistic" : dir === "industries" ? "industry" : dir === "research" ? "research" : dir === "hubs" ? "hub" : "blog"
+      expect(getContentTitle(type, slug)).not.toBeNull()
       expect(isNoindexed(dir, slug)).toBe(false)
     }
   })
@@ -45,6 +51,14 @@ describe("site-wide content indexability policy", () => {
   it("does not let utility pages become indexable", () => {
     expect((searchMetadata as { robots?: unknown }).robots).toMatchObject({ index: false, follow: false })
     expect((dashboardMetadata as { robots?: unknown }).robots).toMatchObject({ index: false, follow: false })
+  })
+
+  it("keeps the public editorial team author page indexable", async () => {
+    const { isPublicAuthor } = await import("@/lib/authors")
+    const { generateMetadata } = await import("@/app/authors/[slug]/page")
+    expect(isPublicAuthor("pilotstack-team")).toBe(true)
+    const meta = await generateMetadata({ params: Promise.resolve({ slug: "pilotstack-team" }) })
+    expect((meta as { robots?: { index?: boolean; follow?: boolean } }).robots).toMatchObject({ index: true, follow: true })
   })
 
   it("uses the canonical www host in sitemap URLs", () => {
