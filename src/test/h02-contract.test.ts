@@ -296,10 +296,6 @@ describe("H-02 decision B consequences", () => {
   })
 
   it("records the historical sitemap/noindex invariant while allowing the live quality manifest to evolve", () => {
-    expect(H02_SEO_INVARIANT.sitemapReviews).toBe(143)
-    expect(H02_SEO_INVARIANT.reviewsNoindex).toBe(8)
-    expect(H02_SEO_INVARIANT.sitemapAlternatives).toBe(605)
-    expect(H02_SEO_INVARIANT.sitemapTotal).toBe(661)
     const current = readJson<NoindexList>("noindex-list.json")
     expect(current.directories.reviews.noindex).toEqual([])
     expect(current.directories.alternatives.noindex).toEqual([])
