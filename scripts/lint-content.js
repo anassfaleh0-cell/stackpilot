@@ -98,17 +98,54 @@ function checkDateFormats(data, file) {
   return errs
 }
 
-const dirs = ["content/guides", "content/comparisons", "content/reviews", "content/best", "content/blog"]
+const dirs = ["content/guides", "content/comparisons", "content/reviews", "content/best", "content/blog", "content/glossary", "content/alternatives", "content/use-cases", "content/industries", "content/research", "content/statistics", "content/hubs"]
 let totalErrors = 0
 const verifiedEntities = getVerifiedEntities()
+const noindexPath = path.join(__dirname, "..", "noindex-list.json")
+const noindexData = fs.existsSync(noindexPath)
+  ? JSON.parse(fs.readFileSync(noindexPath, "utf-8"))
+  : null
+const indexClassificationDirs = new Set(["guides", "comparisons", "reviews", "best", "blog", "glossary", "alternatives", "use-cases", "industries", "research", "statistics", "hubs"])
+const boilerplatePatterns = [
+  /enterprise deployments consistently demonstrate/gi,
+  /this approach enables teams to maximize their software investment/gi,
+  /organizations see measurable improvements in efficiency and user satisfaction within the first quarter/gi,
+  /<brand>.*<\/brand>/gi,
+  /<objection>.*<\/objection>/gi,
+]
 
 for (const dir of dirs) {
   const files = fs.readdirSync(dir).filter(f => f.endsWith(".json"))
   for (const file of files) {
     const fpath = path.join(dir, file)
     const data = JSON.parse(fs.readFileSync(fpath, "utf-8"))
-    const title = data.title || ""
+    const title = data.title || data.term || ""
+    const slug = file.replace(".json", "")
+    const dirName = dir.replace("content/", "")
+    const isNoindexed = Boolean(noindexData?.directories?.[dirName]?.noindex?.includes(slug))
+    const isKept = Boolean(noindexData?.directories?.[dirName]?.keep?.includes(slug))
     let fileErrors = 0
+
+    if (indexClassificationDirs.has(dirName) && noindexData?.directories?.[dirName] && !isNoindexed && !isKept) {
+      console.error("  ERROR: Missing explicit keep/noindex classification in noindex-list.json")
+      fileErrors++
+    }
+
+    const raw = JSON.stringify(data)
+    const malformedLinks = (raw.match(/<a href="[^"]*">\s*<a href=/gi) || []).length
+    if (malformedLinks > 0) {
+      console.error("  ERROR: " + malformedLinks + " malformed nested <a> link pattern(s)")
+      fileErrors += malformedLinks
+    }
+
+    for (const pattern of boilerplatePatterns) {
+      pattern.lastIndex = 0
+      const hits = raw.match(pattern) || []
+      if (hits.length > 0 && isKept) {
+        console.error("  ERROR: Unsupported/generated-content marker appears " + hits.length + " time(s)")
+        fileErrors += hits.length
+      }
+    }
 
     if (checkTitleDuplicates(title, file)) fileErrors++
     fileErrors += checkDateFormats(data, file)
