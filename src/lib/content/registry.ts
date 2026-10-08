@@ -256,7 +256,6 @@ export function getComparison(slug: string): ComparisonContent | null {
   const file = path.join(CONTENT_DIR, "comparisons", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const cmp = readJson<ComparisonContent>(file)
-  if (cmp.published === false) return null
   return {
     ...cmp,
     description: trimText(cmp.description, 700),
@@ -269,7 +268,6 @@ export function getComparison(slug: string): ComparisonContent | null {
 export function getAllComparisons(): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
     .map((f) => { const c = readJson<ComparisonContent>(path.join(CONTENT_DIR, "comparisons", f)); c.faqs = sanitizeFaqs(c.faqs); return c })
-    .filter((c) => c.published !== false)
 }
 
 export function getGuide(slug: string): GuideContent | null {
@@ -325,14 +323,12 @@ export function getAlternative(slug: string): AlternativeContent | null {
   const file = path.join(CONTENT_DIR, "alternatives", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const alt = readJson<AlternativeContent>(file)
-  if (alt.published === false) return null
   return { ...alt, sections: sanitizeSections(alt.sections), faqs: sanitizeFaqs(alt.faqs) }
 }
 
 export function getAllAlternatives(): AlternativeContent[] {
   return readDir(path.join(CONTENT_DIR, "alternatives"))
     .map((f) => { const a = readJson<AlternativeContent>(path.join(CONTENT_DIR, "alternatives", f)); return { ...a, sections: sanitizeSections(a.sections), faqs: sanitizeFaqs(a.faqs) } })
-    .filter((a) => a.published !== false)
 }
 
 export function getUseCase(slug: string): UseCaseContent | null {
@@ -402,7 +398,6 @@ export function getBest(slug: string): BestContent | null {
   const file = path.join(CONTENT_DIR, "best", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const best = readJson<BestContent>(file)
-  if (best.published === false) return null
   return {
     ...best,
     description: trimText(best.description, 700),
@@ -417,7 +412,6 @@ export function getBest(slug: string): BestContent | null {
 export function getAllBest(): BestContent[] {
   return readDir(path.join(CONTENT_DIR, "best"))
     .map((f) => readJson<BestContent>(path.join(CONTENT_DIR, "best", f)))
-    .filter((b) => b.published !== false)
 }
 
 export function getHub(slug: string): HubContent | null {
