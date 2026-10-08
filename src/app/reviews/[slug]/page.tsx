@@ -1,3 +1,4 @@
+import type { ContentSection } from "@/types/content"
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
@@ -23,6 +24,31 @@ import { BannerAd, NativeAd, InFeedAd } from "@/components/ads"
 
 const TOTAL_REVIEWS = getAllReviews().length
 
+// Keep review pages focused on substantive, tool-specific sections.
+// These legacy sections duplicate structured fields and were generated at scale.
+const HIDDEN_REVIEW_SECTION_TITLES = new Set([
+  "Rating Overview",
+  "Key Features",
+  "Hidden Costs",
+  "Learning Curve",
+  "Setup Time",
+  "Migration Difficulty",
+  "Industry Fit",
+  "Common Mistakes",
+  "Tips from experienced users",
+  "Buying Advice",
+])
+
+function getVisibleReviewContent(content: ContentSection[]) {
+  return content.filter((section) => {
+    if (HIDDEN_REVIEW_SECTION_TITLES.has(section.title)) return false
+    if (section.type === "diagram") {
+      return ["pricing-ladder", "feature-radar", "implementation-flow"].includes(section.body)
+    }
+    return true
+  })
+}
+
 export function generateStaticParams() {
   return getAllReviews()
     .filter((r) => !isNoindexed("reviews", r.slug))
@@ -33,7 +59,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const tool = getReview(slug)
   if (!tool) return {}
-  const wordCount = tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)
+  const visibleContent = getVisibleReviewContent(tool.content)
+  const wordCount = visibleContent.reduce((a, s) => a + s.body.split(/\s+/).length, 0)
   const noindexed = isNoindexed("reviews", slug)
   return createMetadata({
     title: tool.seoTitle || reviewMetaTitle(tool.name),
@@ -58,6 +85,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const entity = getEntity(slug)
   const companyFacts = resolveCompanyFacts(tool, entity)
   const pros = editorialPros(tool.pros)
+  const visibleFaqs = tool.faqs.slice(0, 8)
+  const visibleContent = getVisibleReviewContent(tool.content)
 
   const authorSlug = tool.author ? tool.author.trim().toLowerCase().replace(/\s+/g, "-") : ""
   const authorHref = authorSlug && authorSlugs.includes(authorSlug) ? `/authors/${authorSlug}` : null
@@ -80,8 +109,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
       <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.contentPublished} body={tool.description} image={tool.logo ? `${site.url}${tool.logo}` : undefined} companyInfo={companyFacts} />
       <SoftwareSchema name={tool.name} description={tool.tagline} category={tool.category} brand={tool.name} platforms={entity?.company?.platforms || tool.company?.deployment} url={`${site.url}/reviews/${tool.slug}`} image={tool.logo ? `${site.url}${tool.logo}` : undefined} offers={entity?.pricing?.[0]?.price !== undefined && entity.pricing[0].price !== null ? { price: entity.pricing[0].price, priceCurrency: entity.pricing[0].currency || "USD", url: tool.website || undefined } : undefined} />
       <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.contentModified} />
-      <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.contentPublished} updatedAt={tool.contentModified} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={tool.content.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} keywords={[`${tool.name} review`, `${tool.name} pricing`, `${tool.name} pros and cons`, `${tool.category} software`, `${tool.name} alternatives`]} mentions={[{ name: tool.name, url: tool.website || `${site.url}/reviews/${tool.slug}` }]} />
-      <FAQSchema questions={tool.faqs} path={`/reviews/${tool.slug}`} />
+      <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.contentPublished} updatedAt={tool.contentModified} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={visibleContent.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} keywords={[`${tool.name} review`, `${tool.name} pricing`, `${tool.name} pros and cons`, `${tool.category} software`, `${tool.name} alternatives`]} mentions={[{ name: tool.name, url: tool.website || `${site.url}/reviews/${tool.slug}` }]} />
+      <FAQSchema questions={visibleFaqs} path={`/reviews/${tool.slug}`} />
 
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Reviews", href: "/reviews" }, { name: tool.name }]} />
@@ -352,13 +381,13 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               </section>
 
               {/* Content Sections */}
-              {tool.content.map((section, i) => {
+              {visibleContent.map((section, i) => {
                 const diagramBody = section.type === "diagram" ? section.body : null
                 const diagramKey = diagramBody === "pricing-ladder" || diagramBody === "feature-radar" || diagramBody === "implementation-flow" ? diagramBody : null
                 const hasDiagramContent = diagramKey !== null
 
                 // In-feed ad between 2nd and 3rd section (index 1 and 2) if 4+ sections
-                const showInFeedAd = i === 2 && tool.content.length >= 4
+                const showInFeedAd = i === 2 && visibleContent.length >= 4
 
                 return (
                   <>
@@ -555,7 +584,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
           <section className="mt-16 mb-16 scroll-mt-24" id="faq">
             <h2 className="text-2xl font-bold tracking-tight mb-6">Frequently Asked Questions</h2>
             <div className="grid sm:grid-cols-2 gap-4 max-w-4xl">
-              {tool.faqs.map((faq) => (
+              {visibleFaqs.map((faq) => (
                 <GlassCard key={faq.question}>
                   <div className="p-4">
                     <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>

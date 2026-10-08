@@ -70,7 +70,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
               <li><strong>#1 pick:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}</li>
               <li>{page.picks.length} tools compared and ranked across {page.criteria.length} evaluation criteria</li>
-              <li>Price range: from {page.picks.reduce((min, p) => Math.min(min, parseInt(p.priceRange.replace(/[^0-9]/g, "")) || 999), 999)} to {page.picks.reduce((max, p) => Math.max(max, parseInt(p.priceRange.replace(/[^0-9]/g, "")) || 0), 0)} per month</li>
+              <li>Pricing: {page.pricingSummary}</li>
               <li>Every pick includes real pros, cons, and best-fit use cases</li>
               <li>Category: {page.category} — last verified {formatDate(page.lastUpdated)}</li>
             </ul>

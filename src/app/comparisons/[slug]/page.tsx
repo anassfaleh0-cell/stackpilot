@@ -57,6 +57,8 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   const review1 = getReview(cmp.tool1Slug)
   const review2 = getReview(cmp.tool2Slug)
 
+  const visibleFaqs = cmp.faqs.slice(0, 8)
+
   const safeFeatures = cmp.features.map((f) => ({
     ...f,
     tool1Detail: f.tool1Detail ? stripDeadContentLinks(f.tool1Detail) : f.tool1Detail,
@@ -72,7 +74,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
       {review2 && <SoftwareSchema name={review2.name} description={review2.tagline} category={review2.category || cmp.category} url={`${site.url}/reviews/${review2.slug}`} aggregateRating={{ ratingValue: review2.rating, reviewCount: review2.reviewCount }} />}
       <WebPageSchema name={cmp.title} description={cmp.description} url={`${site.url}/comparisons/${slug}`} dateModified={cmp.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: [{ "@type": "ListItem", position: 1, item: softwareApp({ name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}`, category: review1?.category || cmp.category, description: review1?.tagline }) }, { "@type": "ListItem", position: 2, item: softwareApp({ name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}`, category: review2?.category || cmp.category, description: review2?.tagline }) }] }} />
       <ArticleSchema title={cmp.title} description={cmp.description} publishedAt={cmp.lastUpdated} updatedAt={cmp.lastUpdated} author="PilotStack Team" url={`${site.url}/comparisons/${slug}`} wordCount={cmp.description.split(/\s+/).length} category={cmp.category} keywords={[`${cmp.tool1} vs ${cmp.tool2}`, `${cmp.tool1} comparison`, `${cmp.tool2} comparison`, cmp.category, "software comparison 2026"]} mentions={[{ name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}` }, { name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}` }]} />
-      <FAQSchema questions={cmp.faqs} path={`/comparisons/${slug}`} />
+      <FAQSchema questions={visibleFaqs} path={`/comparisons/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Comparisons", href: "/comparisons" }, { name: cmp.title }]} />
       </Container>
@@ -270,7 +272,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           <section>
             <h2 className="text-2xl font-bold tracking-tight mb-6">Frequently Asked Questions</h2>
             <div className="grid sm:grid-cols-2 gap-4 max-w-4xl">
-              {cmp.faqs.map((faq) => (
+              {visibleFaqs.map((faq) => (
                 <GlassCard key={faq.question}>
                   <div className="p-4">
                     <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
