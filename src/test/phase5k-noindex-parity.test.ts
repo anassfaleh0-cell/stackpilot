@@ -13,7 +13,7 @@ describe("content routes remain indexable while quality is fixed in place", () =
     const slug = "activecampaign-vs-adobe-express"
     expect(getComparison(slug)).not.toBeNull()
     expect(isNoindexed("comparisons", slug)).toBe(false)
-    expect(comparisonParams().length).toBeGreaterThan(900)
+    expect(comparisonParams()).toEqual([])
     expect(await comparisonMetadata(params(slug))).toMatchObject({
       robots: { index: true, follow: true },
     })

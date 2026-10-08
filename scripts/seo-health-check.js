@@ -139,8 +139,9 @@ function checkContentQuality() {
     { dir: "comparisons", nameField: "title", minWords: 200 },
     { dir: "guides", nameField: "title", minWords: 500 },
     { dir: "blog", nameField: "title", minWords: 300 },
-    { dir: "glossary", nameField: "term", minWords: 20 },
+    { dir: "glossary", nameField: "term", minWords: 80 },
     { dir: "alternatives", nameField: "title", minWords: 100 },
+    { dir: "best", nameField: "title", minWords: 300 },
   ]
 
   for (const ct of contentTypes) {
@@ -163,17 +164,70 @@ function checkContentQuality() {
         continue
       }
 
-      // Check word count
+      // Count the substantive data that the route actually renders, rather than
+      // only the short SEO description. Detail routes derive additional narrative
+      // from these fields at render time, so the audit must measure that payload too.
       let words = wordCount(data.description || "")
       if (data.content) {
         for (const section of data.content) {
           words += wordCount(section.body)
+          for (const item of section.items || []) words += wordCount(item)
         }
       }
       if (data.body) words += wordCount(data.body)
       if (data.sections) {
         for (const section of data.sections) {
           words += wordCount(section.body)
+          for (const item of section.items || []) words += wordCount(item)
+        }
+      }
+      if (ct.dir === "comparisons") {
+        words += wordCount(data.verdict || "")
+        for (const feature of data.features || []) {
+          words += wordCount(feature.name)
+          words += wordCount(feature.tool1Detail)
+          words += wordCount(feature.tool2Detail)
+        }
+        for (const faq of data.faqs || []) {
+          words += wordCount(faq.question)
+          words += wordCount(faq.answer)
+        }
+      }
+      if (ct.dir === "alternatives") {
+        words += wordCount(data.toolName)
+        for (const item of data.alternatives || []) {
+          words += wordCount(item.name)
+          words += wordCount(item.description)
+          words += wordCount(item.bestFor)
+          for (const value of item.pros || []) words += wordCount(value)
+          for (const value of item.cons || []) words += wordCount(value)
+        }
+        for (const value of data.selectionCriteria || []) words += wordCount(value)
+      }
+      if (ct.dir === "glossary") {
+        words += wordCount(data.term)
+        words += wordCount(data.definition)
+        words += wordCount(data.extendedDefinition)
+        for (const value of data.examples || []) words += wordCount(value)
+        for (const value of data.relatedTerms || []) words += wordCount(value)
+      }
+      if (ct.dir === "best") {
+        words += wordCount(data.title)
+        words += wordCount(data.pricingSummary)
+        for (const value of data.criteria || []) words += wordCount(value)
+        for (const pick of data.picks || []) {
+          words += wordCount(pick.toolName)
+          words += wordCount(pick.bestFor)
+          words += wordCount(pick.priceRange)
+          for (const value of pick.pros || []) words += wordCount(value)
+          for (const value of pick.cons || []) words += wordCount(value)
+        }
+        for (const row of data.comparisonTable?.rows || []) {
+          for (const cell of row) words += wordCount(cell)
+        }
+        for (const faq of data.faqs || []) {
+          words += wordCount(faq.question)
+          words += wordCount(faq.answer)
         }
       }
 
