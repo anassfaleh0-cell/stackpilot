@@ -21,7 +21,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const item = getGlossaryTerm(slug)
   if (!item) return {}
   const noindexed = isNoindexed("glossary", slug)
-  return createMetadata({ title: item.term, description: item.description || item.definition, path: `/glossary/${slug}`, ogType: "article", articleSection: item.category, articleTags: [item.category], noIndex: noindexed })
+  const seoTitle = `${item.term}: Definition, Examples & How It Works`
+  const seoDescription = item.description || `${item.term} explained: definition, practical examples, software context, and related concepts in ${item.category}.`
+  return createMetadata({ title: seoTitle, description: seoDescription, path: `/glossary/${slug}`, ogType: "article", articleSection: item.category, articleTags: [item.category], noIndex: noindexed })
 }
 
 export default async function GlossaryTermPage({ params }: { params: Promise<{ slug: string }> }) {
