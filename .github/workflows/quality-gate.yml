@@ -29,6 +29,9 @@ jobs:
       - name: Content quality lint
         run: npm run lint:content
 
+      - name: SEO content audit
+        run: npm run seo:audit
+
       - name: Unit tests
         run: npm test
 
