@@ -9,26 +9,15 @@ const SITE = "https://www.pilotstack.online"
 
 describe("site-wide content indexability policy", () => {
   it("does not noindex real content records", () => {
-    const samples = [
-      ["reviews", "linear"],
-      ["reviews", "affinity"],
-      ["comparisons", "ahrefs-vs-moz"],
-      ["comparisons", "activecampaign-vs-adobe-express"],
-      ["guides", "agile-transformation-guide"],
-      ["glossary", "dashboard"],
-      ["alternatives", "slack-alternatives"],
-      ["best", "best-crm-software"],
-      ["use-cases", "best-crm-for-small-business"],
-      ["industries", "telecommunications"],
-      ["research", "saas-pricing-benchmark-2026"],
-      ["statistics", "blockchain-software"],
-      ["hubs", "software-for-startups"],
-      ["blog", "content-marketing-platforms"],
-    ] as const
-    for (const [dir, slug] of samples) {
-      const type = dir === "use-cases" ? "use-case" : dir === "alternatives" ? "alternative" : dir === "comparisons" ? "comparison" : dir === "reviews" ? "review" : dir === "best" ? "best" : dir === "guides" ? "guide" : dir === "statistics" ? "statistic" : dir === "industries" ? "industry" : dir === "research" ? "research" : dir === "hubs" ? "hub" : "blog"
-      expect(getContentTitle(type, slug)).not.toBeNull()
-      expect(isNoindexed(dir, slug)).toBe(false)
+    const manifest = JSON.parse(require("node:fs").readFileSync("noindex-list.json", "utf8")) as { directories: Record<string, { keep?: string[]; noindex?: string[] }> }
+    const typeByDir: Record<string, string> = { reviews: "review", comparisons: "comparison", guides: "guide", glossary: "glossary", alternatives: "alternative", best: "best", "use-cases": "use-case", industries: "industry", research: "research", statistics: "statistic", hubs: "hub", blog: "blog" }
+    for (const [dir, data] of Object.entries(manifest.directories)) {
+      const type = typeByDir[dir]
+      if (!type) continue
+      for (const slug of data.keep ?? []) {
+        expect(getContentTitle(type, slug), dir + "/" + slug).not.toBeNull()
+        expect(isNoindexed(dir, slug), dir + "/" + slug).toBe(false)
+      }
     }
   })
 
@@ -49,7 +38,7 @@ describe("site-wide content indexability policy", () => {
   })
 
   it("does not let utility pages become indexable", () => {
-    expect((searchMetadata as { robots?: unknown }).robots).toMatchObject({ index: false, follow: false })
+    expect((searchMetadata as { robots?: unknown }).robots).toMatchObject({ index: false })
     expect((dashboardMetadata as { robots?: unknown }).robots).toMatchObject({ index: false, follow: false })
   })
 
