@@ -28,8 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const post = getBlogPost(slug)
   if (!post) return {}
-  const wordCount = post.body.split(/\s+/).filter(Boolean).length
-  return createMetadata({ title: post.title, description: post.description, path: `/blog/${slug}`, ogType: "article", publishedAt: post.publishedAt, updatedAt: post.updatedAt, articleTags: post.tags, articleSection: post.category, noIndex: wordCount < 600 })
+  return createMetadata({ title: post.title, description: post.description, path: `/blog/${slug}`, ogType: "article", publishedAt: post.publishedAt, updatedAt: post.updatedAt, articleTags: post.tags, articleSection: post.category })
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
