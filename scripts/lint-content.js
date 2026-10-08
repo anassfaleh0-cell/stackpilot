@@ -120,6 +120,21 @@ const boilerplatePatterns = [
   /organizations see measurable improvements in efficiency and user satisfaction within the first quarter/gi,
   /<brand>.*<\/brand>/gi,
   /<objection>.*<\/objection>/gi,
+  /organizations see measurable improvements in efficiency and user satisfaction within the first quarter/gi,
+  /organizations see measurable improvements in efficiency and team productivity/gi,
+  /our methodology combines hands-on product testing/gi,
+  /case study [123] - (?:aerospace|healthcare|finance)/gi,
+  /response times: sub-second p50/gi,
+  /break-even typically 3-6 months/gi,
+  /first-year roi of 150-300%/gi,
+  /1000\+ pre-built connectors/gi,
+  /week 1: discovery, planning, requirements gathering/gi,
+  /weighted criteria: features 25%, ease of use 20%/gi,
+  /cloud-native deployment on aws\/gcp\/azure/gi,
+  /regular product updates/gi,
+  /strong customer support/gi,
+  /good mobile experience/gi,
+  /active user community/gi,
 ]
 
 const unsupportedClaimPatterns = [
