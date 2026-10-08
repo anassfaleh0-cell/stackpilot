@@ -129,7 +129,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
               Updated {formatDate(cmp.lastUpdated)}
             </span>
             <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we score</a>
-            <span className="ml-auto text-[11px]">Independent comparison · No paid placement</span>
+            <span className="ml-auto text-[11px]">Editorial comparison · Based on recorded page data</span>
           </div>
 
           {/* Tool Compare Cards */}
@@ -218,13 +218,13 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
               <EditorialCallout type="key" title="Bottom Line" category={cmp.category}>
                 <div className="space-y-2">
                   <p>{cmp.winner
-                    ? `For most teams, ${cmp.winner} is the better choice due to superior feature coverage and value.`
-                    : `Both tools excel in different areas — consider your specific requirements before choosing.`
+                    ? `${cmp.winner} is the recorded winner in the PilotStack comparison dataset. Use the feature rows and linked reviews to confirm whether that result matches your workflow.`
+                    : `The recorded criteria do not produce a single overall winner. Compare the feature rows and linked reviews against your priorities.`
                   }</p>
                   <div className="pt-2 border-t border-current/10">
                     <span className="text-xs font-medium">Best for: </span>
                     <span className="text-xs opacity-80">
-                      {cmp.winner === cmp.tool1 ? cmp.tool1 : cmp.tool2} excels for feature-complete teams, while {cmp.winner === cmp.tool1 ? cmp.tool2 : cmp.tool1} works best for specialized needs.
+                      {cmp.winner ? `The recorded winner is ${cmp.winner}; the other option may still be a better fit where its exclusive criteria matter more.` : `Both options have trade-offs; prioritize the criteria most important to your workflow.`}
                     </span>
                   </div>
                 </div>
@@ -250,7 +250,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                     <span className="font-medium text-foreground">
                       {t1Score > t2Score ? `${cmp.tool2} → ${cmp.tool1}` : `${cmp.tool1} → ${cmp.tool2}`}
                     </span>
-                    <span className="text-xs text-muted-foreground">— moderate effort</span>
+                    <span className="text-xs text-muted-foreground">— compare migration requirements before switching</span>
                   </div>
                 )}
               </div>
