@@ -22,9 +22,7 @@ import { ScoreBar } from "@/components/brand/patterns"
 import { NativeAd } from "@/components/ads"
 
 export function generateStaticParams() {
-  return getAllComparisons()
-    .filter((c) => !isNoindexed("comparisons", c.slug))
-    .map((c) => ({ slug: c.slug }))
+  return []
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
