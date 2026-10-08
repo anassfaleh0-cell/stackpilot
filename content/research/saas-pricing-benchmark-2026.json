@@ -15,7 +15,7 @@
   "sections": [
     {
       "title": "Why Pricing Benchmarks Matter",
-      "body": "Software buyers face a structural information problem: vendor pricing pages change frequently, comparison sites serve stale data, and there is no industry standard for reporting what software actually costs. Our 2026 SaaS Pricing Drift Report found 7 of 11 independently verified tools had at least one pricing detail commonly misreported elsewhere.\n\nThis benchmark takes a different approach. Instead of aggregating third-party claims, it computes statistics directly from PilotStack's own review database — 151 tools that our team has tested hands-on, each carrying a structured pricing model and a price range verified at review time. The result is a defensible, reproducible snapshot of where software pricing actually stands in 2026.",
+      "body": "Software buyers face a structural information problem: vendor pricing pages change frequently, comparison sites serve stale data, and there is no industry standard for reporting what software actually costs. Our 2026 SaaS Pricing Drift Report found 7 of 11 independently verified tools had at least one pricing detail commonly misreported elsewhere.\n\nThis benchmark takes a different approach. Instead of aggregating third-party claims, it computes statistics directly from PilotStack's own review database — 151 tools carrying a structured pricing model and a price range recorded at review time. The result is a defensible, reproducible snapshot of where software pricing actually stands in 2026.",
       "type": "text"
     },
     {
@@ -37,20 +37,98 @@
       "title": "Starting Price Benchmarks by Category",
       "body": "Median minimum monthly price for tools in each category with at least 8 reviewed tools and a parseable numeric price range. Small-sample categories (fewer than 8 tools) are listed separately below.",
       "type": "table",
-      "columns": ["Category", "Tools reviewed", "Median starting price", "Free tier share", "Paid-only tools"],
+      "columns": [
+        "Category",
+        "Tools reviewed",
+        "Median starting price",
+        "Free tier share",
+        "Paid-only tools"
+      ],
       "rows": [
-        ["Marketing & SEO", "9", "$99/mo", "22%", "6 of 9"],
-        ["Developer Tools", "23", "$29/mo", "48%", "2 of 23"],
-        ["CRM & Sales", "12", "$25/mo", "17%", "5 of 12"],
-        ["Communication", "10", "$21/mo", "50%", "3 of 10"],
-        ["AI & Machine Learning", "12", "$20/mo", "33%", "3 of 12"],
-        ["Productivity", "10", "$18/mo", "40%", "2 of 10"],
-        ["Finance & Accounting", "15", "$17/mo", "13%", "7 of 15"],
-        ["Project Management", "11", "$15/mo", "55%", "3 of 11"],
-        ["Analytics & Data", "9", "$12/mo", "11%", "4 of 9"],
-        ["Design & Creative", "8", "$10/mo", "38%", "3 of 8"],
-        ["HR & People", "9", "$8/mo", "0%", "8 of 9"],
-        ["Security & Compliance", "8", "$7/mo", "25%", "5 of 8"]
+        [
+          "Marketing & SEO",
+          "9",
+          "$99/mo",
+          "22%",
+          "6 of 9"
+        ],
+        [
+          "Developer Tools",
+          "23",
+          "$29/mo",
+          "48%",
+          "2 of 23"
+        ],
+        [
+          "CRM & Sales",
+          "12",
+          "$25/mo",
+          "17%",
+          "5 of 12"
+        ],
+        [
+          "Communication",
+          "10",
+          "$21/mo",
+          "50%",
+          "3 of 10"
+        ],
+        [
+          "AI & Machine Learning",
+          "12",
+          "$20/mo",
+          "33%",
+          "3 of 12"
+        ],
+        [
+          "Productivity",
+          "10",
+          "$18/mo",
+          "40%",
+          "2 of 10"
+        ],
+        [
+          "Finance & Accounting",
+          "15",
+          "$17/mo",
+          "13%",
+          "7 of 15"
+        ],
+        [
+          "Project Management",
+          "11",
+          "$15/mo",
+          "55%",
+          "3 of 11"
+        ],
+        [
+          "Analytics & Data",
+          "9",
+          "$12/mo",
+          "11%",
+          "4 of 9"
+        ],
+        [
+          "Design & Creative",
+          "8",
+          "$10/mo",
+          "38%",
+          "3 of 8"
+        ],
+        [
+          "HR & People",
+          "9",
+          "$8/mo",
+          "0%",
+          "8 of 9"
+        ],
+        [
+          "Security & Compliance",
+          "8",
+          "$7/mo",
+          "25%",
+          "5 of 8"
+        ]
       ]
     },
     {
@@ -81,12 +159,24 @@
       ]
     }
   ],
-  "methodology": "All statistics were computed from PilotStack's review corpus: 151 product reviews published at https://www.pilotstack.online/reviews, each containing a structured pricing model field (Paid / Freemium / Free Trial / Free / Open Source / Transaction-based) and a price range field verified at review time. The computation is fully scripted in scripts/compute-pricing-benchmark.js and was run on August 7, 2026. 133 of 151 tools (88%) had a parseable numeric price range; 10 tools (6.6%) were custom-priced only and excluded from price-ladder statistics; 8 tools had unparseable formats. Monthly-anchorable tools (132) are those with a monthly price or a free tier; one-time-purchase tools were excluded from monthly medians. The median starting price uses the lower bound of each tool's price range; per-user prices use their lower bound per user. Category medians are reported only for categories with at least 8 reviewed tools and at least 6 parseable price ranges. All prices are point-in-time as recorded in each review's price range field and should be re-verified on vendor pricing pages before purchasing decisions.",
+  "methodology": "All statistics are computed from PilotStack's review corpus: 151 product reviews published at https://www.pilotstack.online/reviews, each containing a structured pricing model field (Paid / Freemium / Free Trial / Free / Open Source / Transaction-based) and a price range field verified at review time. The computation is fully scripted in scripts/compute-pricing-benchmark.js and was run on August 7, 2026. 133 of 151 tools (88%) had a parseable numeric price range; 10 tools (6.6%) were custom-priced only and excluded from price-ladder statistics; 8 tools had unparseable formats. Monthly-anchorable tools (132) are those with a monthly price or a free tier; one-time-purchase tools were excluded from monthly medians. The median starting price uses the lower bound of each tool's price range; per-user prices use their lower bound per user. Category medians are reported only for categories with at least 8 reviewed tools and at least 6 parseable price ranges. All prices are point-in-time as recorded in each review's price range field and should be re-verified on vendor pricing pages before purchasing decisions.",
   "dataSources": [
-    { "name": "PilotStack Review Database (151 tools)", "url": "https://www.pilotstack.online/reviews" },
-    { "name": "PilotStack Evaluation Toolkit", "url": "https://github.com/anassfaleh0-cell/pilotstack-toolkit" },
-    { "name": "PilotStack Research Methodology", "url": "https://www.pilotstack.online/research-methodology" },
-    { "name": "SaaS Pricing Drift Report 2026", "url": "https://www.pilotstack.online/research/saas-pricing-drift-report-2026" }
+    {
+      "name": "PilotStack Review Database (151 tools)",
+      "url": "https://www.pilotstack.online/reviews"
+    },
+    {
+      "name": "PilotStack Evaluation Toolkit",
+      "url": "https://github.com/anassfaleh0-cell/pilotstack-toolkit"
+    },
+    {
+      "name": "PilotStack Research Methodology",
+      "url": "https://www.pilotstack.online/research-methodology"
+    },
+    {
+      "name": "SaaS Pricing Drift Report 2026",
+      "url": "https://www.pilotstack.online/research/saas-pricing-drift-report-2026"
+    }
   ],
   "publishedAt": "2026-08-07",
   "updatedAt": "2026-08-07",
@@ -114,7 +204,24 @@
       "answer": "Statistics are computed directly from PilotStack's review database via a versioned, reproducible script (scripts/compute-pricing-benchmark.js). Each reviewed tool contributes its verified pricing model and price range; the median starting price uses the lower bound of each tool's monthly price range. Category medians include only categories with at least 8 reviewed tools."
     }
   ],
-  "relatedComparisons": ["semrush-vs-ahrefs", "quickbooks-vs-xero", "asana-vs-monday-com", "salesforce-vs-hubspot", "figma-vs-sketch"],
-  "relatedGuides": ["software-cost-analysis", "accounting-software-pricing", "crm-pricing-guide", "analytics-pricing-guide", "project-management-pricing-guide"],
-  "relatedPosts": ["saas-pricing-report-2026", "ai-pricing-models-explained", "seo-tools-pricing-guide", "productivity-tools-cost-2026"]
+  "relatedComparisons": [
+    "semrush-vs-ahrefs",
+    "quickbooks-vs-xero",
+    "asana-vs-monday-com",
+    "salesforce-vs-hubspot",
+    "figma-vs-sketch"
+  ],
+  "relatedGuides": [
+    "software-cost-analysis",
+    "accounting-software-pricing",
+    "crm-pricing-guide",
+    "analytics-pricing-guide",
+    "project-management-pricing-guide"
+  ],
+  "relatedPosts": [
+    "saas-pricing-report-2026",
+    "ai-pricing-models-explained",
+    "seo-tools-pricing-guide",
+    "productivity-tools-cost-2026"
+  ]
 }
