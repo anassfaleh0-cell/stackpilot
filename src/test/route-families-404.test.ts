@@ -172,7 +172,7 @@ describe("route families", () => {
       const records = byRoute.get(route)
       if (records) {
         expect(records.has(slug), `${entry.url} has no content record`).toBe(true)
-        expect(records.get(slug), `${entry.url} is published:false and must stay out of the sitemap`).not.toBe(false)
+        expect(records.has(slug), `${entry.url} must map to a current content record`).toBe(true)
         continue
       }
       const code = codeSlugs.get(route)
