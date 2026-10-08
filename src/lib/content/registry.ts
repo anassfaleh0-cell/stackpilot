@@ -63,8 +63,6 @@ const GENERIC_BOILERPLATE_PATTERNS = [
   /tested in realistic workflows by our team/i,
   /after researching hundreds of/i,
   /our expert buying advice/i,
-  /verified picks?/i,
-  /thorough evaluation/i,
   /enterprise deployments consistently demonstrate/i,
   /this approach enables teams to maximize their software investment/i,
   /organizations see measurable improvements in efficiency and user satisfaction within the first quarter/i,
@@ -87,7 +85,10 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
 function sanitizeUnsupportedClaims(value: string | undefined): string {
   const raw = String(value ?? "").trim()
   if (!raw) return ""
-  return raw
+  const normalized = raw
+    .replace(/\\bverified picks?\\b/gi, "selected picks")
+    .replace(/\\bafter thorough evaluation\\b/gi, "based on the comparison criteria")
+  return normalized
     .split("\n")
     .map((line) =>
       line
