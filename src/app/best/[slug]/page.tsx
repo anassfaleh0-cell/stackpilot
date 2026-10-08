@@ -9,7 +9,7 @@ import { getBest, getAllBest, getContentTitle, getReview } from "@/lib/content/r
 import { getRelatedByCategory } from "@/lib/content/internal-links"
 import { InternalLinks, LEGACY_RELATED_TYPES, extendedRelatedItems } from "@/components/content/internal-links"
 import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
-import { notFound } from "next/navigation"
+import { notFound, permanentRedirect } from "next/navigation"
 import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, XCircle } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
@@ -37,7 +37,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function BestPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const page = getBest(slug)
-  if (!page) notFound()
+  if (!page) {
+    const legacyRedirects: Record<string, string> = {
+      "best-crm-sales-small-business": "/best/best-crm-for-small-business",
+      "best-enterprise-analytics": "/best/best-analytics-software",
+      "best-project-management-small-business": "/best/best-project-management-software",
+    }
+    const redirectTarget = legacyRedirects[slug]
+    if (redirectTarget) permanentRedirect(redirectTarget)
+    notFound()
+  }
 
   const linkedPicks = page.picks.filter((p) => getReview(p.toolSlug) !== null)
   const reviewHref = (toolSlug: string) => (getReview(toolSlug) ? `/reviews/${toolSlug}` : null)
