@@ -2,6 +2,7 @@ const fs = require("node:fs")
 const path = require("node:path")
 
 const ROOT = path.join(__dirname, "..")
+// One-shot cleanup is intentionally idempotent so it can safely run after content or test changes.
 const CONTENT_DIRS = [
   "content/guides","content/comparisons","content/reviews","content/best","content/blog",
   "content/glossary","content/alternatives","content/use-cases","content/industries",

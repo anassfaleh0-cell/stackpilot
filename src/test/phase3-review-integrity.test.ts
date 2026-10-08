@@ -534,13 +534,15 @@ describe("CD-14: author claims", () => {
     })
   }
 
-  it("keeps every author identity in place", () => {
-    for (const slug of ["sarah-chen", "marcus-rivera", "emily-nakamura", "pilotstack-team"]) {
-      expect(authors).toContain(`"${slug}"`)
-    }
-    expect(authorsIndex).toContain("sarah-chen")
-    expect(authorsIndex).toContain("marcus-rivera")
-    expect(authorsIndex).toContain("emily-nakamura")
+  it("keeps the published author identity in place", () => {
+    expect(authors).toContain('"pilotstack-team"')
+    expect(authors).not.toContain('"sarah-chen"')
+    expect(authors).not.toContain('"marcus-rivera"')
+    expect(authors).not.toContain('"emily-nakamura"')
+    expect(authorsIndex).toContain("PilotStack Team")
+    expect(authorsIndex).not.toContain("sarah-chen")
+    expect(authorsIndex).not.toContain("marcus-rivera")
+    expect(authorsIndex).not.toContain("emily-nakamura")
   })
 
   it("no author bio claims unpublished biographical facts", () => {

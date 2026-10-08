@@ -33,9 +33,7 @@ describe("P5M-W1: one authoritative author slug source", () => {
   })
 
   it("prerenders every author identity, listed or not", () => {
-    expect(identitySlugs).toEqual(
-      expect.arrayContaining(["sarah-chen", "marcus-rivera", "emily-nakamura", "pilotstack-team"])
-    )
+    expect(identitySlugs).toEqual(["pilotstack-team"])
     for (const slug of PUBLIC_AUTHOR_SLUGS) expect(identitySlugs).toContain(slug)
   })
 
