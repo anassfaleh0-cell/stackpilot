@@ -19,24 +19,13 @@ export const metadata = createMetadata({
 
 const stats = [
   { value: String(totalUrls), label: "Published pages" },
-  { value: "1.1M+", label: "Words of research" },
-  { value: String(countIn("/reviews/")), label: "In-depth tool reviews" },
+    { value: String(countIn("/reviews/")), label: "In-depth tool reviews" },
   { value: "12", label: "Software categories" },
   { value: String(countIn("/comparisons/")), label: "Published comparisons" },
-  { value: "2024", label: "Founded" },
-]
+  ]
 
 const milestones = [
-  { year: "2024 Q1", event: "PilotStack founded" },
-  { year: "2024 Q2", event: "First 25 software reviews published" },
-  { year: "2024 Q3", event: "Expanded to 6 categories; launched comparisons" },
-  { year: "2024 Q4", event: "Added AI/ML and developer tools categories" },
-  { year: "2025 Q1", event: "100+ reviews; launched research reports" },
-  { year: "2025 Q2", event: "Built entity knowledge graph for structured content" },
-  { year: "2025 Q3", event: "Expanded to 12 categories; launched industry pages" },
-  { year: "2025 Q4", event: "Published 500+ pages of software research" },
-  { year: "2026 Q1", event: "Launched statistics and data pages" },
-  { year: "2026 Q2", event: "Full category coverage across reviews, comparisons, and guides" },
+  { year: "2026", event: "Expanded coverage across reviews, comparisons, guides, research, and software categories" },
 ]
 
 export default function MediaKitPage() {
@@ -64,9 +53,9 @@ export default function MediaKitPage() {
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4">About PilotStack</h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is an independent software review and research platform that helps businesses make informed software purchasing decisions. Founded in 2024, the platform publishes in-depth reviews of B2B SaaS tools across 12 major categories.</p>
-            <p className="text-muted-foreground leading-relaxed mb-4">Unlike aggregate review sites, PilotStack records every figure once and reuses it everywhere a tool appears, so ratings and review counts agree across the site. The site is run by a small, independent team following a published methodology — editorial roles are listed on our <Link href="/authors" className="text-primary hover:underline">authors page</Link>, and the full scoring process is public on our <Link href="/methodology" className="text-primary hover:underline">methodology page</Link>.</p>
-            <p className="text-muted-foreground leading-relaxed">Our editorial independence policy guarantees that no vendor can pay for placement, ratings, or positive coverage. Revenue comes from clearly disclosed affiliate commissions and sponsored newsletter placements.</p>
+            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is a software review and research platform that helps businesses evaluate software purchasing options. The platform publishes reviews, comparisons, guides, and research across a broad set of software categories.</p>
+            <p className="text-muted-foreground leading-relaxed mb-4">Unlike aggregate review sites, PilotStack records every figure once and reuses it everywhere a tool appears, so ratings and review counts agree across the site. The site is maintained by a small editorial team following a published methodology — editorial roles are listed on our <Link href="/authors" className="text-primary hover:underline">authors page</Link>, and the full scoring process is public on our <Link href="/methodology" className="text-primary hover:underline">methodology page</Link>.</p>
+            <p className="text-muted-foreground leading-relaxed">Commercial relationships are disclosed where applicable. Editorial scores and conclusions are based on the published methodology and are not intended to be determined by commercial relationships.</p>
           </section>
 
           <section className="mb-12">
