@@ -53,7 +53,7 @@ function deriveGuideFaqs(guide: GuideContent): { question: string; answer: strin
 }
 
 export function generateStaticParams() {
-  return []
+  return getAllGuides().map((item) => ({ slug: item.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
