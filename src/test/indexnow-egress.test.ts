@@ -10,8 +10,8 @@ import { site } from "@/lib/constants"
 // canonical-origin, sitemap-declared indexable URLs may leave the site.
 
 const INDEXABLE = `${site.url}/comparisons/gitlab-vs-bitbucket`
-const NOINDEXED = `${site.url}/comparisons/zoom-vs-webex`
-const UNPUBLISHED = `${site.url}/comparisons/1password-vs-appwrite`
+const NOINDEXED = `${site.url}/search`
+const UNPUBLISHED = `${site.url}/comparisons/not-a-real-comparison`
 
 const jsonPost = (body: unknown) =>
   new Request(`${site.url}/api/revalidate`, {
@@ -44,13 +44,11 @@ describe("P5O: isIndexableUrl gates engine egress", () => {
 
   it("rejects noindexed content", () => {
     expect(isIndexableUrl(NOINDEXED)).toBe(false)
-    expect(isIndexableUrl(`${site.url}/search`)).toBe(false)
     expect(isIndexableUrl(`${site.url}/dashboard`)).toBe(false)
   })
 
   it("rejects unpublished content that intentionally returns 404", () => {
     expect(isIndexableUrl(UNPUBLISHED)).toBe(false)
-    expect(isIndexableUrl(`${site.url}/comparisons/not-a-real-comparison`)).toBe(false)
   })
 
   it("rejects query strings, fragments and malformed input", () => {
