@@ -2,7 +2,7 @@ import { GlassCard } from "./glass-card"
 import { AuthorAvatar } from "./author-avatar"
 
 const reviewerProfiles: Record<string, { name: string; role: string; expertise: string }> = {
-  "PilotStack Team": { name: "PilotStack Team", role: "Editorial Team", expertise: "Software Evaluation, Pricing Analysis, Market Research" },
+  "PilotStack Team": { name: "PilotStack Team", role: "Editorial contributor", expertise: "Software Evaluation, Pricing Analysis, Market Research" },
 }
 
 export function EditorialExpert({ author }: { author: string }) {

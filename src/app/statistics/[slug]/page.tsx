@@ -139,8 +139,8 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
             </div>
 
             <div className="mb-6 p-3 rounded-lg bg-primary-subtle/10 border border-primary/20 text-xs text-muted-foreground">
-              <span className="font-semibold text-foreground">Data compiled by PilotStack</span>
-              {" — "}Verified statistics with original source links. Free to cite with attribution. Last updated {page.lastUpdated}.
+              <span className="font-semibold text-foreground">Source-linked statistics</span>
+              {" — "}Data compiled from the sources listed on this page. Verify time-sensitive figures against the cited source. Last updated {page.lastUpdated}.
             </div>
 
             {page.sections.map((section, i) => (

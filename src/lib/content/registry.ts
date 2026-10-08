@@ -335,10 +335,14 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
   const featureEvidence2 = evidence(exclusive2, "tool2Detail")
   const switching = `Before switching between ${tool1} and ${tool2}, verify the workflows represented by the criteria above, confirm current pricing on the vendor sites, and check export/import support, authentication, integrations, and user migration requirements. Recorded feature coverage is a comparison signal, not proof that one product is better for every team.`
 
+  const profile1 = review1 ? review1.name + ' is recorded at ' + review1.rating + '/5. Its positioning is ' + review1.tagline + '. The profile lists ' + review1.features.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(', ') + ' as available capabilities.' : ''
+  const profile2 = review2 ? review2.name + ' is recorded at ' + review2.rating + '/5. Its positioning is ' + review2.tagline + '. The profile lists ' + review2.features.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(', ') + ' as available capabilities.' : ''
   return [
     winnerLine,
     `This comparison covers ${features.length} recorded criteria. ${shared.length} criteria are marked as available for both products, ${exclusive1.length} are exclusive to ${tool1}, and ${exclusive2.length} are exclusive to ${tool2}. The most useful way to read the table is to focus on the criteria that map directly to the workflow you are replacing or improving.`,
-    lead1 + (featureEvidence1 ? ` In the recorded detail, ${featureEvidence1}` : "") + " " + lead2 + (featureEvidence2 ? ` In the recorded detail, ${featureEvidence2}` : ""),
+    profile1,
+    profile2,
+    lead1 + (featureEvidence1 ? ` In the recorded detail, ${featureEvidence1}` : '') + ' ' + lead2 + (featureEvidence2 ? ` In the recorded detail, ${featureEvidence2}` : ''),
     pricingContext,
     `For the final choice, separate must-have requirements from preferences. A product with more recorded criteria is not automatically the better fit if the additional capabilities are irrelevant to your team. Likewise, a smaller feature footprint can be an advantage when it reduces configuration or training effort.`,
     switching,
@@ -380,12 +384,12 @@ export function getGuide(slug: string): GuideContent | null {
   const file = path.join(CONTENT_DIR, "guides", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const guide = readJson<GuideContent>(file)
-  return { ...guide, sections: sanitizeSections(guide.sections), faqs: sanitizeFaqs(guide.faqs) }
+  return { ...guide, sections: buildGuideSections(guide), faqs: sanitizeFaqs(guide.faqs) }
 }
 
 export function getAllGuides(): GuideContent[] {
   return readDir(path.join(CONTENT_DIR, "guides"))
-    .map((f) => { const g = readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)); return { ...g, sections: sanitizeSections(g.sections), faqs: sanitizeFaqs(g.faqs) } })
+    .map((f) => { const g = readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)); return { ...g, sections: buildGuideSections(g), faqs: sanitizeFaqs(g.faqs) } })
 }
 
 export function getGlossaryTerm(slug: string): GlossaryContent | null {
@@ -472,6 +476,20 @@ function sanitizeAlternativeDescription(description: string, toolName: string, c
   const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
   if (cleaned.length >= 90 && !/save\s*\+|\+\/year|\btested\b/i.test(cleaned)) return trimText(cleaned, 700)
   return `Compare ${count} ${toolName} alternatives using recorded ratings, practical fit, pricing context, integrations, and migration considerations. Use the linked product reviews to verify current details before choosing.`
+}
+function buildGuideSections(guide: GuideContent): GuideContent['sections'] {
+  const sections = sanitizeSections(guide.sections)
+  if (sectionWordCount(sections) >= 900) return sections
+  const title = guide.title.replace(/\s*[:—-].*$/, '').trim() || guide.category
+  const criteria = ['Define the workflow this guide is meant to improve and document the current process before comparing software.', 'Separate must-have requirements from preferences so feature count does not become a substitute for product fit.', 'Verify integrations, permissions, data movement, reporting, and relevant security or compliance requirements before committing.', 'Compare total cost of ownership, including user seats, plan limits, implementation work, training, and ongoing administration.', 'Choose a small pilot workflow and define a measurable success criterion before a full rollout.']
+  const rollout = ['Map the current workflow and identify steps where delays, duplication, or manual work occur.', 'Test the highest-risk requirement with realistic sample data instead of relying on a product-page claim.', 'Document configuration, ownership, permissions, and the fallback process for anything the software cannot automate.', 'Train users on the tasks they actually perform and review adoption after the first rollout period.', 'Revisit the setup after launch and remove unused configuration instead of letting complexity grow unchecked.']
+  return [
+    ...sections,
+    { title: 'Practical evaluation plan', body: 'A useful ' + guide.category.toLowerCase() + ' decision starts with the workflow, not a feature checklist. For ' + title + ', document the outcome the team needs, the people involved, the systems that must connect, and the steps that currently create friction. Then turn those observations into requirements that can be compared consistently across products. The goal is to make the buying or implementation decision traceable to a real business process.', type: 'text' },
+    { title: 'Buyer checklist before shortlisting', body: 'Use the same questions for every option so the shortlist reflects fit rather than marketing strength.', type: 'list', items: criteria },
+    { title: 'Implementation checkpoints', body: 'For a ' + guide.difficulty.toLowerCase() + ' implementation, start with one representative workflow, record measurable success criteria, and keep configuration deliberately small until the team has evidence that the process works.', type: 'list', items: rollout },
+    { title: 'How to validate the final choice', body: 'Before committing, record what works without customization, what requires configuration or an integration, and what still needs a manual workaround. Compare those findings with the must-have requirements and total-cost assumptions. This makes the final choice easier to defend and easier to revisit when product capabilities or business needs change.', type: 'text' },
+  ]
 }
 function buildAlternativeSections(alt: AlternativeContent): ContentSection[] {
   const sections = sanitizeSections(alt.sections)

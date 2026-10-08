@@ -53,8 +53,8 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
           </div>
 
           <div className="mb-6 p-3 rounded-lg bg-primary-subtle/10 border border-primary/20 text-xs text-muted-foreground">
-            <span className="font-semibold text-foreground">Data compiled by PilotStack</span>
-            {" — "}Original research with verified data sources. Free to cite with attribution.
+            <span className="font-semibold text-foreground">Research compiled by PilotStack</span>
+            {" — "}Source-linked research with a published methodology. Verify time-sensitive figures against the cited source.
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
