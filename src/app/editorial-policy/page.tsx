@@ -49,7 +49,7 @@ export default function EditorialPolicyPage() {
               <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
                 <li>Editorial team is never informed about affiliate or advertiser relationships when creating content</li>
                 <li>Revenue considerations never factor into coverage decisions or ratings</li>
-                <li>All content includes publication dates and last-reviewed dates for currency transparency</li>
+                <li>Content pages expose publication or update dates where those fields are maintained</li>
                 <li>Content more than 12 months old is flagged for review and potential removal</li>
                 <li>We distinguish factual reporting from analysis and opinion throughout</li>
                 <li>Standardized methodology applied consistently across all reviews</li>
@@ -92,7 +92,7 @@ export default function EditorialPolicyPage() {
               <p>When we discover an error in published content, we correct it promptly and transparently. Our <a href="/corrections-policy">Corrections Policy</a> details how errors are classified, corrected, and communicated to readers. We encourage readers to report potential errors via our <a href="/contact">contact form</a>.</p>
 
               <h2>5. Sources and Attribution</h2>
-              <p>We attribute all sources used in our research. When we cite data from third-party studies, analyst reports, or user review platforms, we link to the original source whenever possible. Our internal testing data and methodology are documented in each review and on our methodology pages.</p>
+              <p>We attribute all sources used in our research. When we cite data from third-party studies, analyst reports, or user review platforms, we link to the original source whenever possible. Our published methodology and recorded sources are described on the relevant review and methodology pages.</p>
 
               <h2>6. Diversity and Inclusion</h2>
               <p>We are committed to representing diverse perspectives in our content. Our tool reviews consider accessibility features, internationalization support, and pricing in multiple currencies and regions. We strive to include products that serve organizations of different sizes, industries, and geographic locations.</p>
