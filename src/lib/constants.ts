@@ -84,6 +84,10 @@ export const categories = [
 export const toolPages = [
   { slug: "tco-calculator", name: "TCO Calculator" },
   { slug: "software-comparison", name: "Software Comparison Matrix" },
+  { slug: "roi-calculator", name: "Software ROI Calculator" },
+  { slug: "software-scorecard", name: "Software Scorecard" },
+  { slug: "saas-stack-cost-calculator", name: "SaaS Stack Cost Calculator" },
+  { slug: "software-pricing-calculator", name: "Software Pricing Calculator" },
 ]
 
 export const editorialLinks = [
