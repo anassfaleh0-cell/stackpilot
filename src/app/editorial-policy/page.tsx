@@ -29,7 +29,7 @@ export default function EditorialPolicyPage() {
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                PilotStack maintains complete editorial independence. No vendor, advertiser, or affiliate partner influences our ratings, rankings, or content decisions. Every page follows a standardized methodology: one recorded source per figure, nine equally weighted category scores, and any fact we cannot source left off the page rather than asserted. We clearly disclose all affiliate relationships and correct errors transparently.
+                PilotStack separates editorial decisions from commercial relationships. Affiliate and advertising relationships are disclosed where applicable and are not intended to determine ratings, rankings, or content decisions. Every page follows a standardized methodology: one recorded source per figure, nine equally weighted category scores, and any fact we cannot source left off the page rather than asserted. We clearly disclose all affiliate relationships and correct errors transparently.
               </p>
             </div>
 
@@ -64,8 +64,8 @@ export default function EditorialPolicyPage() {
               </p>
 
               <h2>1. Editorial Independence</h2>
-              <p>PilotStack operates with complete editorial independence. No vendor, advertiser, sponsor, or affiliate partner can influence our editorial content, ratings, rankings, or recommendations. Our editorial team makes all content decisions based solely on our assessment of what serves our readers' interests.</p>
-              <p>We maintain a strict separation between editorial and commercial operations. The editorial team is not informed about which companies are affiliate partners or advertisers when creating content. Revenue considerations never factor into coverage decisions, rating determinations, or the inclusion or exclusion of products from reviews and comparisons.</p>
+              <p>PilotStack's editorial guidance is developed according to its published methodology. Commercial relationships are disclosed where applicable and are not intended to determine editorial content, ratings, rankings, or recommendations.</p>
+              <p>We keep commercial disclosures separate from the published editorial criteria. Revenue considerations are not intended to determine coverage decisions, rating determinations, or inclusion or exclusion decisions.</p>
 
               <h2>2. Content Standards</h2>
               <p>Every piece of content published on PilotStack must meet the following standards:</p>
