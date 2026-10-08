@@ -147,6 +147,15 @@ const unsupportedClaimPatterns = [
   /our testing methodology/gi,
   /after researching hundreds of/gi,
   /our expert buying advice/gi,
+  /hands[- ]on review/gi,
+  /we tested \d+\+?/gi,
+  /tested \d+\+? (?:software )?tools/gi,
+  /approximately \d+[-–]\d+ tools annually/gi,
+  /every week we receive emails/gi,
+  /after working in (?:product management|operations)/gi,
+  /hi, i(?:'|&apos;)m [^,]+, the founder/gi,
+  /independently evaluated and would recommend/gi,
+  /evaluated under the same conditions as/gi,
 ]
 function sanitizeForValidation(value) {
   if (typeof value === "string") {
