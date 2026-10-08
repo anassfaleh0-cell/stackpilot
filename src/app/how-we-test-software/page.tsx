@@ -18,8 +18,8 @@ export default function HowWeTestSoftwarePage() {
       steps: [
         "Cover categories where readers are actively evaluating options",
         "Record the same fixed set of fields for every tool: pricing model, deployment, API availability, migration complexity, security entries, integrations, and category scores",
-        "Document selection criteria so no vendor relationship influences inclusion or exclusion",
-        "Never accept payment to include or exclude a tool",
+        "Document the editorial criteria used for inclusion and exclusion",
+        "Do not sell inclusion or exclusion as an editorial outcome",
       ],
     },
     {
@@ -37,7 +37,7 @@ export default function HowWeTestSoftwarePage() {
         "Nine equally weighted category scores on a 1-5 scale: Features, Usability, Pricing, Support, Security, Integrations, Performance, Documentation, Scalability",
         "The overall rating is the mean of those nine scores, rounded to one decimal",
         "The calculation is published and checkable on any review page",
-        "Ratings are not adjusted for placement, sponsorship, or commercial relationship",
+        "Ratings are based on the published scoring criteria rather than commercial placement",
       ],
     },
     {
@@ -52,9 +52,9 @@ export default function HowWeTestSoftwarePage() {
       phase: "Publication & Upkeep",
       steps: [
         "Every page carries a last-reviewed date",
-        "Pages are revisited when pricing, features or positioning change materially",
+        "Pages are updated when material changes are identified",
         "Corrections are made in place and the last-reviewed date is updated",
-        "Pages whose recorded figures we can no longer support are corrected or removed",
+        "Pages with unsupported recorded figures are corrected or, where appropriate, removed",
       ],
     },
   ]
@@ -130,7 +130,7 @@ export default function HowWeTestSoftwarePage() {
               <ul>
                 <li>We do not sell editorial ratings or placement</li>
                 <li>We do not allow vendors to preview or approve pages before publication</li>
-                <li>We do not accept review copies or premium access in exchange for coverage</li>
+                <li>We do not describe access arrangements as evidence of editorial quality</li>
                 <li>We do not publish a figure we cannot tie to a source we hold</li>
                 <li>We do not present an unverified certification or company fact as confirmed</li>
               </ul>
