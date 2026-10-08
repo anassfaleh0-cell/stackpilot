@@ -268,7 +268,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                     <div className="mt-6 ml-11 rounded-xl border border-accent/20 bg-accent-subtle/30 p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <Lightbulb size={14} className="text-accent" />
-                        <span className="text-xs font-semibold text-accent">Expert tip</span>
+                        <span className="text-xs font-semibold text-accent">Practical tip</span>
                       </div>
                       <p className="text-sm text-foreground">
                         {section.items
