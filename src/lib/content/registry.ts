@@ -137,6 +137,12 @@ function buildBlogEditorialNote(blog: BlogContent): string {
   return `This PilotStack article focuses on ${blog.category.toLowerCase()} and is intended to help readers make a practical software decision. The page's topic tags are ${tags || "not specified"}. ${related ? `Related reading includes ${related}.` : ""} Use the article's recommendations alongside current vendor documentation before making a purchase decision.`
 }
 
+function buildBestAnalysis(best: BestContent): string {
+  const criteria = best.criteria.slice(0, 6).join(", ")
+  const picks = best.picks.slice(0, 5).map((p) => p.toolName).join(", ")
+  return `This shortlist should be read as a decision aid rather than a universal ranking. The selection criteria recorded for this page include ${criteria || "feature fit, usability, value and scalability"}. The current shortlist includes ${picks || "the products shown above"}. Buyers should validate the top requirements with a real workflow, check current pricing and limits, and compare migration and integration effort before choosing a tool.`
+}
+
 function buildUseCaseAnalysis(useCase: UseCaseContent): string {
   const names = useCase.recommendations.slice(0, 5).map((r) => r.toolName).join(", ")
   const criteria = useCase.selectionCriteria.slice(0, 5).map((r) => r.factor).join(", ")
@@ -461,7 +467,7 @@ export function getBest(slug: string): BestContent | null {
   if (best.published === false) return null
   return {
     ...best,
-    description: trimText(best.description, 700),
+    description: trimText(`${best.description} ${buildBestAnalysis(best)}`, 1200),
     criteria: sanitizeList(best.criteria, 8),
     picks: best.picks.slice(0, 10).map((p) => ({ ...p, bestFor: trimText(p.bestFor, 360), pros: sanitizeList(p.pros, 5), cons: sanitizeList(p.cons, 5) })),
     pricingSummary: trimText(best.pricingSummary, 900),
