@@ -14,9 +14,10 @@ import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, AlertTriangle } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
+import { isNoindexed } from "@/lib/noindex"
 
 export function generateStaticParams() {
-  return getAllHubs().map((h) => ({ slug: h.slug }))
+  return getAllHubs().filter((h) => !isNoindexed("hub", h.slug)).map((h) => ({ slug: h.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const hub = getHub(slug)
   if (!hub) return {}
   const shortTitle = hub.title.length > 58 ? hub.title.slice(0, 55) + "..." : hub.title
-  return createMetadata({ title: shortTitle, description: `Best software for ${hub.audience.toLowerCase()}, with recommendations, a comparison matrix, and a buying guide for 2026.`, path: `/hubs/${hub.slug}`, ogType: "article", publishedAt: hub.lastUpdated, articleSection: hub.audience })
+  return createMetadata({ title: shortTitle, description: `Best software for ${hub.audience.toLowerCase()}, with recommendations, a comparison matrix, and a buying guide for 2026.`, path: `/hubs/${hub.slug}`, ogType: "article", publishedAt: hub.lastUpdated, articleSection: hub.audience, noIndex: isNoindexed("hub", hub.slug) })
 }
 
 export default async function HubPage({ params }: { params: Promise<{ slug: string }> }) {
