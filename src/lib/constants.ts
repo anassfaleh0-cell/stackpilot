@@ -52,7 +52,7 @@ export const navConfig = [
     href: "/guides",
     children: [
       { label: "Guides", href: "/guides" },
-      { label: "Research", href: "/blog" },
+      { label: "Insights", href: "/blog" },
     ],
   },
   {
