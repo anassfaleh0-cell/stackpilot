@@ -74,6 +74,12 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const enterprisePick = comparisons.length > 0 ? comparisons[0] : null
   const aiPick = reviews.find((r) => r.name.toLowerCase().includes("ai") || r.category.toLowerCase().includes("ai"))
   const freePick = reviews.find((r) => r.pricing === "Free" || r.pricing === "Freemium")
+  // Keep category pages useful without generating enormous static HTML from the full corpus.
+  const displayedReviews = reviews.filter((r) => r.slug !== bestPick?.slug).slice(0, 48)
+  const displayedComparisons = comparisons.slice(0, 48)
+  const displayedGuides = guides.slice(0, 24)
+  const displayedGlossary = glossary.slice(0, 80)
+  const displayedBuyerJourney = buyerJourney.map((stage) => ({ ...stage, content: stage.content.slice(0, 24) }))
 
   return (
     <>
@@ -216,7 +222,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           </Section>
 
           {/* Buyer Journey */}
-          {buyerJourney.length > 0 && (
+          {displayedBuyerJourney.length > 0 && (
             <Section>
               <Container>
                 <div className="flex items-center gap-2 mb-6">
@@ -224,7 +230,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                   <h2 className="text-2xl font-bold">Your Buying Journey</h2>
                 </div>
                 <div className="space-y-4">
-                  {buyerJourney.map((stage) => (
+                  {displayedBuyerJourney.map((stage) => (
                     <details key={stage.stage} className="group rounded-xl border border-border overflow-hidden">
                       <summary className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted-bg transition-colors font-medium capitalize">
                         <span className="flex items-center gap-2">
@@ -376,12 +382,12 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h2 className="text-2xl font-bold">All {category.name} Reviews</h2>
-                  <p className="text-sm text-muted-foreground mt-1">{reviews.length} tools tested and rated</p>
+                  <p className="text-sm text-muted-foreground mt-1">{reviews.length} tools reviewed · showing the most relevant {Math.min(reviews.length, 48)}</p>
                 </div>
                 <Link href="/reviews" className="text-sm text-primary hover:underline hidden sm:inline-flex items-center gap-1">View all <ArrowRight size={12} /></Link>
               </div>
               {reviews.length > 0 ? (
-                <ReviewFilter reviews={reviews.filter(r => r.slug !== bestPick?.slug).map(r => ({ slug: r.slug, name: r.name, tagline: r.tagline, category: r.category, rating: r.rating, priceRange: r.priceRange, pricing: r.pricing }))} category={category.name} />
+                <ReviewFilter reviews={displayedReviews.map(r => ({ slug: r.slug, name: r.name, tagline: r.tagline, category: r.category, rating: r.rating, priceRange: r.priceRange, pricing: r.pricing }))} category={category.name} />
               ) : (
                 <div className="text-center py-16">
                   <p className="text-muted-foreground">No reviews yet in this category. Check back soon.</p>
@@ -395,8 +401,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             <Section>
               <Container>
                 <h2 className="text-2xl font-bold mb-6">{category.name} Comparisons</h2>
+                {comparisons.length > 48 && <p className="text-sm text-muted-foreground -mt-4 mb-4">Showing 48 featured comparisons from {comparisons.length} available comparisons.</p>}
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {comparisons.map((c) => (
+                  {displayedComparisons.map((c) => (
                     <Link key={c.slug} href={`/comparisons/${c.slug}`} className="group card-hover">
                       <Card className="p-4 flex items-center gap-3">
                         <GitCompare size={20} className="text-primary shrink-0" />
@@ -417,8 +424,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             <Section>
               <Container>
                 <h2 className="text-2xl font-bold mb-6">{category.name} Buying Guides</h2>
+                {guides.length > 24 && <p className="text-sm text-muted-foreground -mt-4 mb-4">Showing 24 featured guides from {guides.length} available guides.</p>}
                 <div className="grid sm:grid-cols-2 gap-6">
-                  {guides.map(g => (
+                  {displayedGuides.map(g => (
                     <Link key={g.slug} href={`/guides/${g.slug}`} className="group card-hover">
                       <Card className="h-full">
                         <div className="flex items-center gap-2 mb-2">
@@ -441,8 +449,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             <Section>
               <Container>
                 <h2 className="text-2xl font-bold mb-6">Related {category.name} Terms</h2>
+                {glossary.length > 80 && <p className="text-sm text-muted-foreground -mt-4 mb-4">Showing 80 featured terms from {glossary.length} related terms.</p>}
                 <div className="flex flex-wrap gap-2">
-                  {glossary.map((t) => (
+                  {displayedGlossary.map((t) => (
                     <Link key={t.slug} href={`/glossary/${t.slug}`} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
                       {t.term}
                     </Link>
