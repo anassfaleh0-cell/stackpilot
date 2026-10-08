@@ -238,7 +238,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                 <div className="flex items-center gap-2 mb-3">
                   <CheckCircle2 size={18} className="text-primary" />
                   <p className="text-lg font-semibold">
-                    {cmp.winner ? `Best for most teams: ${cmp.winner}` : "How they compare"}
+                    {cmp.winner ? `Recorded winner: ${cmp.winner}` : "How they compare"}
                   </p>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={stripDeadContentLinks(cmp.verdict)} /></p>
