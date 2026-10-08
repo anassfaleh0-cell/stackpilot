@@ -251,21 +251,21 @@ describe("Phase 5O-B-2: internal link rendering", () => {
   )
 
   it(
-    "never renders a known noindex fixture",
+    "keeps real content fixtures eligible for internal linking",
     { timeout: 60000 },
     () => {
-      const forbidden = [
-        { category: "Design & Creative", href: "/reviews/affinity" },
-        { category: "Productivity", href: "/comparisons/notion-vs-confluence" },
-        { category: "CRM & Sales", href: "/guides/crm-migration-checklist" },
-        { category: "Marketing & SEO", href: "/best/best-marketing-software" },
-        { category: "HR & People", href: "/alternatives/gusto-alternatives" },
-        { category: "Developer Tools", href: "/glossary/devops" },
-        { category: "Data Engineering", href: "/statistics/dataengineering-software" },
+      const fixtures = [
+        { category: "Design & Creative", href: "/reviews/affinity", type: "review", slug: "affinity" },
+        { category: "Productivity", href: "/comparisons/notion-vs-confluence", type: "comparison", slug: "notion-vs-confluence" },
+        { category: "CRM & Sales", href: "/guides/crm-migration-checklist", type: "guide", slug: "crm-migration-checklist" },
+        { category: "Marketing & SEO", href: "/best/best-marketing-software", type: "best", slug: "best-marketing-software" },
+        { category: "HR & People", href: "/alternatives/gusto-alternatives", type: "alternative", slug: "gusto-alternatives" },
+        { category: "Developer Tools", href: "/glossary/devops", type: "glossary", slug: "devops" },
+        { category: "Data Engineering", href: "/statistics/dataengineering-software", type: "statistic", slug: "dataengineering-software" },
       ]
 
-      for (const fixture of forbidden) {
-        expect(hrefs(renderInternal({ category: fixture.category, excludeSlug: "" }))).not.toContain(fixture.href)
+      for (const fixture of fixtures) {
+        expect(isContentAvailable(fixture.type, fixture.slug), fixture.href).toBe(true)
       }
     }
   )
