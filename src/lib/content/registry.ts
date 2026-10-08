@@ -63,6 +63,8 @@ const GENERIC_BOILERPLATE_PATTERNS = [
   /tested in realistic workflows by our team/i,
   /after researching hundreds of/i,
   /our expert buying advice/i,
+  /verified picks?/i,
+  /thorough evaluation/i,
   /enterprise deployments consistently demonstrate/i,
   /this approach enables teams to maximize their software investment/i,
   /organizations see measurable improvements in efficiency and user satisfaction within the first quarter/i,
