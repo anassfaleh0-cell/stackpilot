@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const catReviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && r.category === category.name)
   return createMetadata({
     title: knowledge?.seoTitle || `Best ${category.name} Software 2026: Reviews & Buying Guide`,
-    description: knowledge?.seoDescription || `Find the best ${category.name.toLowerCase()} software with expert reviews, pricing comparisons, and buying tips. ${catReviews.length} tools tested and rated for 2026.`,
+    description: knowledge?.seoDescription || `Find the best ${category.name.toLowerCase()} software with detailed reviews, pricing comparisons, and buying tips. ${catReviews.length} tools reviewed and rated for 2026.`,
     path: `/category/${slug}`,
     articleSection: category.name,
   })
@@ -106,7 +106,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             </p>
           ) : (
             <p className="text-lg text-muted-foreground max-w-2xl text-pretty">
-              Our expert picks for the best {category.name.toLowerCase()} tools. Each reviewed and rated by our team.
+              Our selected picks for the best {category.name.toLowerCase()} tools. Each reviewed and rated by our team.
             </p>
           )}
         </Container>
