@@ -10,8 +10,13 @@ import { EditorialHero, EditorialConcept, EditorialCallout, GlassCard, InfoCard,
 import { RelatedContent } from "@/components/content/related-content"
 import { isNoindexed } from "@/lib/noindex"
 
+export const dynamicParams = true
+export const revalidate = 86400
+
 export function generateStaticParams() {
-  return getAllGlossaryTerms().map((item) => ({ slug: item.slug }))
+  // Keep the full corpus indexable without forcing 2,000+ pages through every production build.
+  // Pages are rendered on first request and cached for 24h.
+  return []
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
