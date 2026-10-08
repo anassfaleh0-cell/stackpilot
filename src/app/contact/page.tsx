@@ -9,7 +9,7 @@ import { SocialLinkList } from "@/components/brand/social-icons"
 
 export const metadata = createMetadata({
   title: "Contact PilotStack — Feedback, Corrections & Partnerships",
-  description: "Get in touch with the PilotStack team. Have a question about a review, want to suggest a tool for testing, or interested in partnering with us? We'd love to hear from you.",
+  description: "Get in touch with the PilotStack team. Send feedback about a review, report an error, suggest a topic or tool for future coverage, or ask about partnerships.",
   path: "/contact",
 })
 
