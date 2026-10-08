@@ -6,7 +6,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Privacy Policy — How PilotStack Handles Your Data",
-  description: "PilotStack's privacy policy explains how we collect, use, protect, and manage your personal data in compliance with GDPR and CCPA.",
+  description: "PilotStack's privacy policy explains how we collect, use, protect, and manage personal data, including the rights and choices that may apply under privacy laws.",
   path: "/privacy",
 })
 
@@ -55,7 +55,7 @@ export default function PrivacyPage() {
             <ul>
               <li>Newsletter subscriber data is retained until you unsubscribe, at which point it is deleted within 30 days.</li>
               <li>Contact form submissions are retained for 12 months and then deleted.</li>
-              <li>Anonymized analytics data is retained for 26 months per standard anonymization practices.</li>
+              <li>Analytics retention depends on the service and configuration described in this policy.</li>
             </ul>
 
             <h2>Your Rights (GDPR)</h2>
@@ -68,7 +68,7 @@ export default function PrivacyPage() {
               <li><strong>Right to data portability:</strong> Request a machine-readable copy of your data to transfer to another service.</li>
               <li><strong>Right to object:</strong> Object to processing of your data for analytics or marketing purposes.</li>
             </ul>
-            <p>To exercise any of these rights, contact us at privacy@pilotstack.online. We will respond within 30 days as required by GDPR.</p>
+            <p>To exercise any of these rights, contact us at privacy@pilotstack.online. We aim to respond within the time required by applicable privacy law.</p>
 
             <h2>Your Rights (CCPA)</h2>
             <p>If you are a resident of California, you have the following rights under the California Consumer Privacy Act (CCPA):</p>
@@ -83,7 +83,7 @@ export default function PrivacyPage() {
             <h2>Data Security</h2>
             <p>We implement appropriate technical and organizational measures to protect your personal data, including:</p>
             <ul>
-              <li>Encryption in transit via TLS 1.3 for all site traffic</li>
+              <li>Encryption in transit is used for site traffic through the hosting and network infrastructure.</li>
               <li>Encryption at rest for any stored personal data</li>
               <li>Regular security reviews of our infrastructure and dependencies</li>
               <li>Access controls limiting data access to authorized personnel only</li>
@@ -95,7 +95,7 @@ export default function PrivacyPage() {
               <li><strong>Google AdSense:</strong> We use Google AdSense to display advertisements. Google may collect data about your visits to our site and other websites to serve personalized ads. Google&apos;s privacy policy is available at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a>. You can control ad personalization in your <a href="https://myaccount.google.com/data-and-privacy" target="_blank" rel="noopener noreferrer">Google Account settings</a>.</li>
               <li><strong>Newsletter delivery:</strong> We use a third-party email service to send newsletters to subscribers who have opted in. This service acts as a data processor under GDPR Article 28.</li>
               <li><strong>Analytics:</strong> We use Google Analytics to understand aggregate traffic patterns. IP addresses are anonymized, and data is not shared with advertising networks without your consent.</li>
-              <li><strong>Hosting:</strong> Our website is hosted on Vercel&apos;s infrastructure, which is SOC 2 certified and GDPR-compliant.</li>
+              <li><strong>Hosting:</strong> Our website is hosted on Vercel&apos;s infrastructure, which provides security and privacy documentation for its infrastructure and processing services.</li>
             </ul>
             <p>Where required, we use appropriate contractual safeguards with third-party processors and review their published privacy and data-processing terms.
 
