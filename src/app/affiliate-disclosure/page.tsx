@@ -38,8 +38,8 @@ export default function AffiliateDisclosurePage() {
               <ul>
                 <li>We do not accept payment for positive reviews, placement in comparison tables, or specific rankings</li>
                 <li>Our ratings and recommendations are determined solely by our editorial process as described on our <a href="/methodology">Methodology page</a></li>
-                <li>We only participate in affiliate programs for products we have independently evaluated and would recommend regardless of compensation</li>
-                <li>The editorial team is not informed about affiliate partnership status when creating or updating content</li>
+                <li>Affiliate relationships do not determine the ratings, rankings, or inclusion criteria described in our published methodology</li>
+                <li>Affiliate and advertising relationships are disclosed separately from editorial guidance</li>
                 <li>We clearly mark affiliate links where they appear in our content</li>
               </ul>
 
