@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, AboutPageSchema, ArticleSchema, WebPageSchema, ItemListSchema, softwareApp } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, ArticleSchema, WebPageSchema, ItemListSchema, softwareApp } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getUseCase, getAllUseCases, getReview } from "@/lib/content/registry"
@@ -37,10 +37,9 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Use Cases", href: "/use-cases" }, { name: uc.title, href: `/use-cases/${slug}` }]} />
       <ArticleSchema title={uc.title} description={uc.description} publishedAt={uc.lastUpdated} updatedAt={uc.lastUpdated} author="PilotStack Team" url={`${site.url}/use-cases/${slug}`} wordCount={uc.description.split(/\s+/).length + uc.useCaseDescription.split(/\s+/).filter(Boolean).length + uc.recommendations.reduce((n, r) => n + r.toolName.split(/\s+/).length + r.bestFor.split(/\s+/).filter(Boolean).length + r.keyFeatures.join(" ").split(/\s+/).filter(Boolean).length, 0) + uc.selectionCriteria.reduce((n, r) => n + r.factor.split(/\s+/).length + r.description.split(/\s+/).filter(Boolean).length, 0) + uc.commonPitfalls.join(" ").split(/\s+/).filter(Boolean).length + uc.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={uc.category} />
-      <WebPageSchema name={uc.title} description={uc.description} url={`${site.url}/use-cases/${slug}`} dateModified={uc.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: uc.recommendations.map((rec, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}`, category: getReview(rec.toolSlug)?.category || uc.category, rating: rec.rating }) })) }} />
+      <WebPageSchema name={uc.title} description={uc.description} url={`${site.url}/use-cases/${slug}`} dateModified={uc.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: uc.recommendations.map((rec, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}`, category: getReview(rec.toolSlug)?.category || uc.category }) })) }} />
       <ItemListSchema items={uc.recommendations.map(rec => ({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` }))} url={`${site.url}/use-cases/${slug}`} />
       <CollectionPageSchema name={uc.title} description={uc.description} url={`${site.url}/use-cases/${slug}`} />
-      <AboutPageSchema name={uc.title} description={uc.description} url={`${site.url}/use-cases/${slug}`} about={uc.recommendations.map((rec) => softwareApp({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}`, category: getReview(rec.toolSlug)?.category || uc.category, rating: rec.rating }))} />
       <FAQSchema questions={uc.faqs} path={`/use-cases/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Use Cases", href: "/use-cases" }, { name: uc.title }]} />
