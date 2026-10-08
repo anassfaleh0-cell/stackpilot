@@ -9,7 +9,6 @@ import { site, categories } from "@/lib/constants"
 import { getAllReviews, getAllGuides, getAllComparisons, getAllBlogPosts, getAllGlossaryTerms, isContentAvailable } from "@/lib/content/registry"
 import { getCategoryKnowledge } from "@/lib/content/category-knowledge"
 import { isInternalLinkAvailable } from "@/lib/content/link-guard"
-import { entityGraph } from "@/lib/content/entity-graph"
 import { ReviewFilter } from "@/components/entity/review-filter"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -67,8 +66,12 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const glossary = getAllGlossaryTerms().filter((t) => t.category === category.name)
   const bestPick = [...reviews].sort((a, b) => b.rating - a.rating)[0]
 
-  const catGraph = entityGraph.getCategoryGraph(category.name)
-  const buyerJourney = entityGraph.getBuyerJourneyPath(category.name)
+  const buyerJourney = [
+    { stage: "awareness", content: [...posts.map((p) => ({ slug: p.slug, name: p.title, type: "blog" })), ...glossary.map((t) => ({ slug: t.slug, name: t.term, type: "glossary" }))] },
+    { stage: "consideration", content: guides.map((g) => ({ slug: g.slug, name: g.title, type: "guide" })) },
+    { stage: "evaluation", content: comparisons.map((cmp) => ({ slug: cmp.slug, name: cmp.title, type: "comparison" })) },
+    { stage: "decision", content: reviews.map((r) => ({ slug: r.slug, name: r.name, type: "software" })) },
+  ].filter((stage) => stage.content.length > 0)
 
   const smbPick = [...reviews].filter((r) => r.pricing === "Freemium" || r.pricing === "Free" || r.pricing === "Free Trial").sort((a, b) => b.rating - a.rating)[0]
   const enterprisePick = comparisons.length > 0 ? comparisons[0] : null
