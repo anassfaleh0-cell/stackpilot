@@ -26,9 +26,10 @@ function loadNoindexList(dir: string): Set<string> {
   return set
 }
 
-export function isNoindexed(dir: string, slug: string): boolean {
-  const list = loadNoindexList(dir)
-  return list.has(slug)
+// Indexability is intentionally not driven by the legacy quality manifest.
+// Content quality must be improved in place rather than hidden from search.
+export function isNoindexed(_dir: string, _slug: string): boolean {
+  return false
 }
 
 export function getNoindexSlugs(dir: string): string[] {
