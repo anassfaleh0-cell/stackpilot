@@ -11,6 +11,7 @@ const footerLinks = [
     links: [
       ...navLinks,
       { href: "/research", label: "Research Reports" },
+      { href: site.links.youtube, label: "YouTube Reviews" },
       { href: "/statistics", label: "Statistics" },
     ],
   },
