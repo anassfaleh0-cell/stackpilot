@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Affiliate Disclosure",
-  description: "PilotStack's affiliate disclosure explains how we earn commissions through affiliate links while maintaining editorial independence and unbiased reviews.",
+  description: "PilotStack's affiliate disclosure explains how we earn commissions through affiliate links while keeping commercial disclosures separate from the published editorial methodology.",
   path: "/affiliate-disclosure",
 })
 
@@ -34,9 +34,9 @@ export default function AffiliateDisclosurePage() {
               <p>When you click on an affiliate link on PilotStack and make a purchase, we may earn a commission at no additional cost to you. These commissions help us maintain and improve our content, pay our team of researchers and writers, and keep our reviews free for all readers.</p>
 
               <h2>Our Commitment to Independence</h2>
-              <p>Affiliate relationships never influence our editorial content:</p>
+              <p>Affiliate relationships are not intended to determine our editorial content:</p>
               <ul>
-                <li>We do not accept payment for positive reviews, placement in comparison tables, or specific rankings</li>
+                <li>We do not sell positive reviews, placement in comparison tables, or specific rankings</li>
                 <li>Our ratings and recommendations are determined solely by our editorial process as described on our <a href="/methodology">Methodology page</a></li>
                 <li>Affiliate relationships do not determine the ratings, rankings, or inclusion criteria described in our published methodology</li>
                 <li>Affiliate and advertising relationships are disclosed separately from editorial guidance</li>
@@ -60,7 +60,7 @@ export default function AffiliateDisclosurePage() {
                 <li>Aggregator affiliate networks</li>
                 <li>Platform referral programs</li>
               </ul>
-              <p>This list may change as we add or remove affiliate partnerships. Our editorial independence commitments apply to all affiliate relationships.</p>
+              <p>This list may change as we add or remove affiliate partnerships. Our disclosure and editorial methodology apply across affiliate relationships.</p>
 
               <h2>No Impact on Pricing</h2>
               <p>Using our affiliate links does not affect the price you pay for any product or service. The commission is paid by the vendor from their marketing budget, not from any customer premium.</p>
