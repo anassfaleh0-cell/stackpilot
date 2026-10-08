@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, AboutPageSchema, WebPageSchema, ArticleSchema, softwareApp } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, WebPageSchema, ArticleSchema, softwareApp } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAlternative, getAllAlternatives, getContentTitle, getReview } from "@/lib/content/registry"
@@ -44,8 +44,22 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
       <CollectionPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} />
       <ItemListSchema items={(alt.alternatives || []).map(a => ({ name: a.name, url: `${site.url}/reviews/${a.slug}` }))} url={`${site.url}/alternatives/${slug}`} />
       <WebPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} dateModified={alt.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: (alt.alternatives || []).map((a, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: a.name, url: `${site.url}/reviews/${a.slug}`, category: getReview(a.slug)?.category || alt.category, description: a.description, rating: a.rating }) })) }} />
-      <ArticleSchema title={alt.title} description={alt.description} publishedAt={alt.lastUpdated} updatedAt={alt.lastUpdated} author="PilotStack Team" url={`${site.url}/alternatives/${slug}`} wordCount={alt.description.split(/\s+/).length} category={alt.category} />
-      <AboutPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} about={(alt.alternatives || []).map((a) => softwareApp({ name: a.name, url: `${site.url}/reviews/${a.slug}`, category: getReview(a.slug)?.category || alt.category, description: a.description, rating: a.rating }))} />
+      <ArticleSchema
+        title={alt.title}
+        description={alt.description}
+        publishedAt={alt.lastUpdated}
+        updatedAt={alt.lastUpdated}
+        author="PilotStack Team"
+        url={`${site.url}/alternatives/${slug}`}
+        wordCount={
+          alt.description.split(/\s+/).length +
+          (alt.alternatives || []).reduce((n, x) => n + x.description.split(/\s+/).length, 0) +
+          (alt.selectionCriteria || []).join(" ").split(/\s+/).filter(Boolean).length +
+          (alt.sections || []).reduce((n, x) => n + String(x.body || "").split(/\s+/).length + (x.items || []).join(" ").split(/\s+/).filter(Boolean).length, 0) +
+          (alt.faqs || []).reduce((n, x) => n + x.question.split(/\s+/).length + x.answer.split(/\s+/).length, 0)
+        }
+        category={alt.category}
+      />
       <FAQSchema questions={alt.faqs} path={`/alternatives/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Alternatives", href: "/alternatives" }, { name: alt.title }]} />
@@ -66,7 +80,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
-              <section className="mb-10">
+              <section id="top-alternatives" className="mb-10">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Top Alternatives to {alt.toolName}</h2>
                 <div className="space-y-4">
                   {(alt.alternatives || []).map((item) => (
@@ -91,7 +105,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
               </section>
 
               {(alt.selectionCriteria || []).length > 0 && (
-                <section className="mb-10">
+                <section id="how-to-choose" className="mb-10">
                   <h2 className="text-2xl font-bold tracking-tight mb-6">How to Choose</h2>
                   <div className="space-y-3">
                     {(alt.selectionCriteria || []).map((criteria, i) => (
@@ -127,7 +141,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                 </section>
               ))}
 
-              <section>
+              <section id="faq">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {alt.faqs.map((faq) => (
