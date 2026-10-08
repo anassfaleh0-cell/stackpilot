@@ -2,6 +2,16 @@ import { site } from "@/lib/constants"
 
 const ctx = "https://schema.org"
 
+function organizationRef() {
+  return {
+    "@type": "Organization",
+    "@id": `${site.url}/#organization`,
+    name: site.name,
+    url: site.url,
+    logo: { "@type": "ImageObject", url: `${site.url}/favicon.svg`, width: 512, height: 512 },
+  }
+}
+
 function ld<T>(schema: T, key: string) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} key={key} />
 }
@@ -26,9 +36,6 @@ export function OrganizationSchema() {
       site.links.linkedin,
       site.links.pinterest,
     ],
-    foundingDate: "2024-01-01",
-    numberOfEmployees: { "@type": "QuantitativeValue", minValue: 5, maxValue: 15 },
-    address: { "@type": "PostalAddress", addressCountry: "US" },
   })
   return ld(schema, "ld-organization")
 }
@@ -42,7 +49,7 @@ export function WebsiteSchema() {
     url: site.url,
     description: site.description,
     inLanguage: "en-US",
-    publisher: { "@id": `${site.url}/#organization` },
+    publisher: organizationRef(),
     potentialAction: {
       "@type": "SearchAction",
       target: {
@@ -97,7 +104,7 @@ export function ArticleSchema({
     headline: title,
     description,
     author: { "@type": "Person", name: author },
-    publisher: { "@id": `${site.url}/#organization` },
+    publisher: organizationRef(),
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
     image: { "@type": "ImageObject", url: image || `${site.url}/og.png` },
@@ -136,7 +143,7 @@ export function NewsArticleSchema({
     headline: title,
     description,
     author: { "@type": "Person", name: author },
-    publisher: { "@id": `${site.url}/#organization` },
+    publisher: organizationRef(),
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
     image: { "@type": "ImageObject", url: image || `${site.url}/og.png` },
@@ -169,7 +176,7 @@ export function BlogPostingSchema({
     headline: title,
     description,
     author: { "@type": "Person", name: author },
-    publisher: { "@id": `${site.url}/#organization` },
+    publisher: organizationRef(),
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
     image: { "@type": "ImageObject", url: image || `${site.url}/og.svg` },
@@ -410,7 +417,7 @@ export function ReviewSchema({ name, description, rating, url, datePublished, bo
         bestRating: 5,
         worstRating: 1,
       },
-      author: { "@type": "Organization", "@id": `${site.url}/#organization` },
+      author: organizationRef(),
       datePublished: datePublished || undefined,
       reviewBody: body || undefined,
     },
@@ -554,7 +561,7 @@ export function DatasetSchema({ name, description, url, datePublished, dateModif
     keywords: keywords?.join(", ") || undefined,
     ...(variablesMeasured && variablesMeasured.length > 0 ? { variableMeasured: variablesMeasured.map(v => ({ "@type": "PropertyValue", name: v })) } : {}),
     publisher: { "@type": "Organization", "@id": `${site.url}/#organization` },
-    creator: { "@type": "Organization", name: "PilotStack", url: "https://www.pilotstack.online" },
+    creator: organizationRef(),
     inLanguage: "en-US",
     isAccessibleForFree: true,
     license: "https://creativecommons.org/licenses/by/4.0/",
