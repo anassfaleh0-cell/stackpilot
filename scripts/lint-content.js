@@ -117,7 +117,6 @@ const verifiedEntities = getVerifiedEntities()
 const boilerplatePatterns = [
   /enterprise deployments consistently demonstrate/gi,
   /this approach enables teams to maximize their software investment/gi,
-  /organizations see measurable improvements in efficiency and user satisfaction within the first quarter/gi,
   /<brand>.*<\/brand>/gi,
   /<objection>.*<\/objection>/gi,
   /organizations see measurable improvements in efficiency and user satisfaction within the first quarter/gi,
