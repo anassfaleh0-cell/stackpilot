@@ -76,11 +76,11 @@ export default function ResearchMethodologyPage() {
               <div className="space-y-4 mb-8">
                 {[
                   { title: "Research Question Definition", body: "Each research project begins with a specific research question or hypothesis aligned with our editorial mission. We define the scope, methodology, and data sources before data collection begins." },
-                  { title: "Data Collection", body: "Data is collected systematically according to the project-specific methodology. For pricing research, we collect data from vendor websites, verify with sales teams where possible, and document the collection date and method for every data point." },
+                  { title: "Data Collection", body: "Data is collected systematically according to the project-specific methodology. For pricing research, we collect data from vendor websites, record the collection date and method for each data point where available." },
                   { title: "Analysis & Validation", body: "Data is analyzed using appropriate statistical methods where applicable. Material limitations, assumptions, and notable outliers are documented when relevant." },
                   { title: "Peer Review", body: "Every research report undergoes internal peer review by at least one researcher not involved in the original data collection. The reviewer evaluates methodology, data accuracy, and interpretation." },
                   { title: "Publication & Transparency", body: "Published research includes detailed methodology notes, data collection dates, sample sizes, and limitations. We clearly distinguish between findings supported by our data and interpretive analysis." },
-                  { title: "Updates", body: "Research reports include publication dates and are updated annually or when significant market changes warrant earlier revision. Updates are noted with the date and nature of changes." },
+                  { title: "Updates", body: "Research reports include publication dates and may be updated when significant changes or corrections warrant revision. Updates are noted with the date and nature of changes." },
                 ].map((step, i) => (
                   <Card key={step.title} className="p-4">
                     <h3 className="font-semibold text-sm mb-1"><span className="text-primary mr-2">{i + 1}.</span>{step.title}</h3>
@@ -99,7 +99,7 @@ export default function ResearchMethodologyPage() {
               </ul>
 
               <h2>Original Charts and Visualizations</h2>
-              <p>Charts and data visualizations in our research reports are created by our team using verified data. Each chart includes:</p>
+              <p>Charts and data visualizations in our research reports are generated from the underlying datasets and source notes available for the report. Each chart includes:</p>
               <ul>
                 <li>Clear title and axis labels</li>
                 <li>Data source attribution with collection date</li>
