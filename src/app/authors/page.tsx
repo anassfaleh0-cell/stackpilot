@@ -17,24 +17,6 @@ export const metadata = createMetadata({
 
 const authors = [
   {
-    slug: "sarah-chen",
-    name: "Sarah Chen",
-    role: "Founder & Editor-in-Chief",
-    bio: "Sarah founded PilotStack and edits coverage in the Project Management, CRM & Sales, and Productivity categories, working to the site's published scoring and sourcing rules.",
-  },
-  {
-    slug: "marcus-rivera",
-    name: "Marcus Rivera",
-    role: "Senior Software Reviewer",
-    bio: "Marcus writes PilotStack's coverage of Developer Tools, Analytics, and Security & Compliance, recording how products are documented and configured alongside the site's nine category scores.",
-  },
-  {
-    slug: "emily-nakamura",
-    name: "Emily Nakamura",
-    role: "Research Analyst",
-    bio: "Emily leads PilotStack's research and market analysis pages, covering Finance, HR, Marketing, Communication and Design tools with an emphasis on recorded pricing and category data.",
-  },
-  {
     slug: "pilotstack-team",
     name: "PilotStack Team",
     role: "Editorial Team",
@@ -53,7 +35,7 @@ export default function AuthorsPage() {
         <Container>
           <div className="max-w-4xl mx-auto">
             <Badge variant="default" className="mb-4">Our Team</Badge>
-            <h1 className="text-4xl font-bold tracking-tight mb-4">Meet Our Editorial Team</h1>
+            <h1 className="text-4xl font-bold tracking-tight mb-4">Meet the PilotStack Editorial Team</h1>
             <p className="text-lg text-muted-foreground mb-10 max-w-2xl">
               Our editorial team publishes coverage across 12 categories. Every page follows the same published scoring and sourcing rules.
             </p>
