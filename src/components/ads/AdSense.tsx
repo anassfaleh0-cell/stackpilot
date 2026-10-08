@@ -15,11 +15,11 @@ interface AdSenseProps {
 
 const AD_CLIENT = "ca-pub-6523926892521982"
 
-const DEFAULT_SLOTS: Record<string, string> = {
-  banner: "1234567890",
-  native: "2345678901",
-  "in-feed": "3456789012",
-  anchor: "4567890123",
+const ENV_SLOTS: Record<string, string | undefined> = {
+  banner: process.env.NEXT_PUBLIC_ADSENSE_BANNER_SLOT,
+  native: process.env.NEXT_PUBLIC_ADSENSE_NATIVE_SLOT,
+  "in-feed": process.env.NEXT_PUBLIC_ADSENSE_IN_FEED_SLOT,
+  anchor: process.env.NEXT_PUBLIC_ADSENSE_ANCHOR_SLOT,
 }
 
 export function AdSense({
@@ -63,11 +63,10 @@ export function AdSense({
     }
   }
 
-  const getAdSlot = () => {
-    if (adSlot) return adSlot
-    if (slot) return slot
-    return DEFAULT_SLOTS[format] || DEFAULT_SLOTS.banner
-  }
+  const getAdSlot = () => adSlot || slot || ENV_SLOTS[format] || ""
+
+  const resolvedSlot = getAdSlot()
+  if (!resolvedSlot) return null
 
   return (
     <ins
