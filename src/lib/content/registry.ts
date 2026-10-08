@@ -117,7 +117,7 @@ function sanitizeContentValue(value: unknown): unknown {
   if (value && typeof value === "object") {
     const out: Record<string, unknown> = {}
     for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
-      out[key] = sanitizeContentValue(child)
+      out[key] = key === "author" && typeof child === "string" ? "PilotStack Team" : sanitizeContentValue(child)
     }
     return out
   }
