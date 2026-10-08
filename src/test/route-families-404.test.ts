@@ -143,6 +143,16 @@ describe("route families", () => {
     }
   })
 
+  it("keeps the current GSC 404 examples resolvable as real content", async () => {
+    const gscExamples: Array<{ route: string; mod: PageModule; slugs: string[] }> = [
+      { route: "comparisons", mod: Comparisons, slugs: ["square-vs-xero", "cloudflare-pages-vs-firebase", "circleci-vs-netlify", "expensify-vs-sage-intacct", "google-meet-vs-slack", "gitlab-vs-jfrog"] },
+      { route: "best", mod: Best, slugs: ["best-marketing-seo-startups", "best-ai-video-tools", "best-developer-tools-agencies", "best-business-intelligence"] },
+    ]
+    for (const family of gscExamples) {
+      for (const slug of family.slugs) await expectResolves(family, slug)
+    }
+  }, 120000)
+
   it("renders every author and tool the site ships", async () => {
     for (const slug of PUBLIC_AUTHOR_SLUGS) await expectResolves({ route: "authors", mod: Authors }, slug)
     for (const param of Tools.generateStaticParams!()) await expectResolves({ route: "tools", mod: Tools }, param.slug)
