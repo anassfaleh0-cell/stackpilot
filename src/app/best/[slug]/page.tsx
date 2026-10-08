@@ -17,9 +17,7 @@ import { EEATProcess } from "@/components/seo/editorial-process"
 import { isNoindexed } from "@/lib/noindex"
 
 export function generateStaticParams() {
-  return getAllBest()
-    .filter((b) => !isNoindexed("best", b.slug))
-    .map((b) => ({ slug: b.slug }))
+  return []
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
