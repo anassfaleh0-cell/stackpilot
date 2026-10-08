@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, type ReactNode } from "react"
 
 type ToolKind = "tco" | "comparison" | "roi" | "scorecard" | "stack" | "pricing"
 
@@ -55,6 +55,6 @@ export function DecisionTool({ kind }: { kind: ToolKind }) {
   return <div className="space-y-6"><p className="text-sm text-muted-foreground">Use the matrix below to give each option a consistent score from 1 to 5.</p><div className="overflow-x-auto"><table className="w-full text-sm"><thead><tr className="border-b border-border"><th className="text-left py-3">Criterion</th><th className="text-center">Tool A</th><th className="text-center">Tool B</th><th className="text-center">Tool C</th></tr></thead><tbody>{["Features", "Pricing", "Ease of use", "Integrations", "Support"].map((x) => <tr key={x} className="border-b border-border"><td className="py-3 font-medium">{x}</td>{[0,1,2].map(i => <td key={i} className="text-center py-3"><input aria-label={x + " tool " + (i+1)} className="w-16 h-9 rounded border border-border bg-background text-center" type="number" min="1" max="5" defaultValue="3" /></td>)}</tr>)}</tbody></table></div></div>
 }
 
-function Result({ title, items }: { title: string; items: [string, React.ReactNode][] }) {
+function Result({ title, items }: { title: string; items: [string, ReactNode][] }) {
   return <div className="rounded-xl border border-border bg-surface-secondary p-6"><h2 className="text-xl font-bold mb-5">{title}</h2><div className="space-y-4">{items.map(([label, value]) => <div key={label} className="flex items-center justify-between border-b border-border pb-3 last:border-0 last:pb-0"><span className="text-sm text-muted-foreground">{label}</span><strong className="text-lg">{value}</strong></div>)}</div></div>
 }
