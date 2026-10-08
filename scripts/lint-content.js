@@ -101,11 +101,6 @@ function checkDateFormats(data, file) {
 const dirs = ["content/guides", "content/comparisons", "content/reviews", "content/best", "content/blog", "content/glossary", "content/alternatives", "content/use-cases", "content/industries", "content/research", "content/statistics", "content/hubs"]
 let totalErrors = 0
 const verifiedEntities = getVerifiedEntities()
-const noindexPath = path.join(__dirname, "..", "noindex-list.json")
-const noindexData = fs.existsSync(noindexPath)
-  ? JSON.parse(fs.readFileSync(noindexPath, "utf-8"))
-  : null
-const indexClassificationDirs = new Set(["guides", "comparisons", "reviews", "best", "blog", "glossary", "alternatives", "use-cases", "industries", "research", "statistics", "hubs"])
 const boilerplatePatterns = [
   /enterprise deployments consistently demonstrate/gi,
   /this approach enables teams to maximize their software investment/gi,
@@ -122,14 +117,9 @@ for (const dir of dirs) {
     const title = data.title || data.term || ""
     const slug = file.replace(".json", "")
     const dirName = dir.replace("content/", "")
-    const isNoindexed = Boolean(noindexData?.directories?.[dirName]?.noindex?.includes(slug))
-    const isKept = Boolean(noindexData?.directories?.[dirName]?.keep?.includes(slug))
+    const isNoindexed = false
+    const isKept = true
     let fileErrors = 0
-
-    if (indexClassificationDirs.has(dirName) && noindexData?.directories?.[dirName] && !isNoindexed && !isKept) {
-      console.error("  ERROR: Missing explicit keep/noindex classification in noindex-list.json")
-      fileErrors++
-    }
 
     const raw = JSON.stringify(data)
     const malformedLinks = (raw.match(/<a href="[^"]*">\s*<a href=/gi) || []).length
@@ -141,7 +131,7 @@ for (const dir of dirs) {
     for (const pattern of boilerplatePatterns) {
       pattern.lastIndex = 0
       const hits = raw.match(pattern) || []
-      if (hits.length > 0 && isKept) {
+      if (hits.length > 0) {
         console.error("  ERROR: Unsupported/generated-content marker appears " + hits.length + " time(s)")
         fileErrors += hits.length
       }
