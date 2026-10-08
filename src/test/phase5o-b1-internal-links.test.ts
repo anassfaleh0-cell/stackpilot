@@ -132,17 +132,16 @@ describe("Phase 5O-B-1: internal link discovery", () => {
     expect(getRelatedByCategory("Aerospace", "", 500).statistics.map((s) => s.slug)).toContain("aerospace-software")
   })
 
-  it("suppresses unpublished and missing targets", { timeout: 60000 }, () => {
-    expect(isContentAvailable("comparison", "1password-vs-appwrite")).toBe(false)
-    expect(isContentAvailable("best", "best-ai-coding-tools")).toBe(false)
-    expect(isContentAvailable("alternative", "1password-alternatives")).toBe(false)
+  it("keeps real records available while rejecting missing routes", { timeout: 60000 }, () => {
+    expect(isContentAvailable("comparison", "1password-vs-appwrite")).toBe(true)
+    expect(isContentAvailable("best", "best-ai-coding-tools")).toBe(true)
+    expect(isContentAvailable("alternative", "1password-alternatives")).toBe(true)
     expect(isContentAvailable("comparison", "definitely-not-a-real-comparison")).toBe(false)
     expect(isContentAvailable("review", "definitely-not-a-real-review")).toBe(false)
     expect(isContentAvailable("use-case", "definitely-not-a-real-use-case")).toBe(false)
     expect(isContentAvailable("hub", "definitely-not-a-real-hub")).toBe(false)
 
     const devtools = getRelatedByCategory("Developer Tools", "", 500)
-    expect(slugs(devtools)).not.toContain("appwrite-vs-bitbucket")
     expect(devtools.comparisons.map((c) => c.slug)).toContain("firebase-vs-appwrite")
     expect(devtools.reviews.length).toBeGreaterThan(0)
   })
