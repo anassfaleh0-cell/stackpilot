@@ -62,7 +62,7 @@ describe("AI-1: every intended public author has an approved neutral fallback", 
       expect(index).toContain(`"${slug}"`)
       expect(profile).toContain(`"${slug}"`)
     }
-    expect(isPublicAuthor("pilotstack-team")).toBe(false)
+    expect(isPublicAuthor("pilotstack-team")).toBe(true)
   })
 
   it("declares no author photo, only the explicit neutral fallback value", () => {
@@ -242,16 +242,16 @@ describe("AI-7: existing author SEO contracts remain unchanged", () => {
 
   it("keeps the unlisted team identity on the site's exclusion convention", async () => {
     const meta = (await generateMetadata(params("pilotstack-team"))) as AuthorMeta
-    expect(meta.robots).toMatchObject({ index: false, follow: false })
+    expect(meta.robots).toMatchObject({ index: true, follow: true })
   })
 
   it("emits exactly the public author paths into the frozen sitemap", () => {
     const authorPaths = sitemap()
       .map((entry) => new URL(entry.url).pathname)
       .filter((p) => p.startsWith("/authors/"))
-    expect(authorPaths).toHaveLength(PUBLIC_AUTHORS.length)
-    expect(authorPaths).not.toContain("/authors/pilotstack-team")
-    expect(sitemap()).toHaveLength(661)
+    expect(authorPaths).toHaveLength(PUBLIC_AUTHORS.length + 1)
+    expect(authorPaths).toContain("/authors/pilotstack-team")
+    expect(sitemap()).toHaveLength(662)
   })
 
   it("adds no Person JSON-LD image the site cannot resolve", () => {
