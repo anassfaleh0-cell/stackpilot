@@ -52,8 +52,13 @@ function deriveGuideFaqs(guide: GuideContent): { question: string; answer: strin
   return out
 }
 
+export const dynamicParams = true
+export const revalidate = 86400
+
 export function generateStaticParams() {
-  return getAllGuides().map((item) => ({ slug: item.slug }))
+  // Keep the full corpus indexable without forcing 2,000+ pages through every production build.
+  // Pages are rendered on first request and cached for 24h.
+  return []
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
