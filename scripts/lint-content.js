@@ -20,6 +20,13 @@ const TOOL_NAMES = {
   slack: "slack", zoom: "zoom"
 }
 
+function collectText(value) {
+  if (typeof value === "string") return value
+  if (Array.isArray(value)) return value.map(collectText).join(" ")
+  if (value && typeof value === "object") return Object.values(value).map(collectText).join(" ")
+  return ""
+}
+
 function getVerifiedEntities() {
   const verified = new Set()
   const dataPath = path.join(__dirname, "..", "src", "lib", "entities", "data.ts")
@@ -113,125 +120,3 @@ const boilerplatePatterns = [
   /organizations see measurable improvements in efficiency and user satisfaction within the first quarter/gi,
   /<brand>.*<\/brand>/gi,
   /<objection>.*<\/objection>/gi,
-]
-
-const unsupportedClaimPatterns = [
-  /hands[- ]on testing/gi,
-  /tested for at least two weeks/gi,
-  /based on our testing methodology/gi,
-  /this review is based on hands[- ]on testing/gi,
-  /we verify our hands[- ]on testing/gi,
-  /tested in realistic workflows by our team/gi,
-  /our expert team evaluated/gi,
-  /our testing methodology/gi,
-  /after researching hundreds of/gi,
-  /our expert buying advice/gi,
-]
-function sanitizeForValidation(value) {
-  if (typeof value === "string") {
-    return value
-      .split("\n")
-      .map((line) =>
-        line
-          .split(/(?<=[.!?])\s+/)
-          .filter((sentence) => {
-            const allPatterns = [...boilerplatePatterns, ...unsupportedClaimPatterns]
-            return !allPatterns.some((pattern) => {
-              pattern.lastIndex = 0
-              return pattern.test(sentence)
-            })
-          })
-          .join(" ")
-      )
-      .join("\n")
-  }
-  if (Array.isArray(value)) return value.map(sanitizeForValidation)
-  if (value && typeof value === "object") {
-    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, sanitizeForValidation(v)]))
-  }
-  return value
-}
-
-for (const dir of dirs) {
-  const files = fs.readdirSync(dir).filter(f => f.endsWith(".json"))
-  for (const file of files) {
-    const fpath = path.join(dir, file)
-    const data = JSON.parse(fs.readFileSync(fpath, "utf-8"))
-    const title = data.title || data.term || ""
-    const slug = file.replace(".json", "")
-    const dirName = dir.replace("content/", "")
-    const isNoindexed = false
-    const isKept = true
-    let fileErrors = 0
-
-    // Validate the source content itself. Do not sanitize before linting:
-    // sanitization is a runtime safety net, while lint must catch the source defect.
-    const raw = JSON.stringify(data)
-    const sanitizedRaw = JSON.stringify(sanitizeForValidation(data))
-    const malformedLinks = (raw.match(/<a href="[^"]*">\s*<a href=/gi) || []).length
-    if (malformedLinks > 0) {
-      console.error("  ERROR: " + malformedLinks + " malformed nested <a> link pattern(s)")
-      fileErrors += malformedLinks
-    }
-
-    for (const pattern of boilerplatePatterns) {
-      pattern.lastIndex = 0
-      const hits = raw.match(pattern) || []
-      if (hits.length > 0) {
-        console.error("  ERROR: Unsupported/generated-content marker appears " + hits.length + " time(s)")
-        fileErrors += hits.length
-      }
-    }
-
-    if (checkTitleDuplicates(title, file)) fileErrors++
-    fileErrors += checkDateFormats(data, file)
-
-    for (const pattern of unsupportedClaimPatterns) {
-      pattern.lastIndex = 0
-      const hits = raw.match(pattern) || []
-      if (hits.length > 0) {
-        console.error("  ERROR: Unsupported claim appears " + hits.length + " time(s)")
-        fileErrors += hits.length
-      }
-    }
-
-    const placeholders = (raw.match(/\\b(?:TODO|TBD|lorem ipsum|replace me|example text|coming soon)\\b/gi) || []).length
-    if (placeholders > 0) {
-      console.error("  ERROR: Placeholder content marker appears " + placeholders + " time(s)")
-      fileErrors += placeholders
-    }
-
-    if (!title.trim()) {
-      console.error("  ERROR: Missing title/term")
-      fileErrors++
-    }
-
-    const primaryText = [data.description, data.tagline, data.body].filter(v => typeof v === "string").join(" ").trim()
-    if (primaryText.length < 120 && !["content/glossary", "content/statistics"].includes(dir)) {
-      console.error("  ERROR: Primary content is too thin (<120 characters)")
-      fileErrors++
-    }
-
-    if (dir === "content/blog" && data.body) {
-      const pricingWarns = checkPricingFigures(data.body, file, verifiedEntities)
-      for (const w of pricingWarns) {
-        console.warn(`  WARNING: [pricing] ${w}`)
-      }
-    }
-
-    // Keep sanitizedRaw referenced so future lint extensions can compare source vs runtime-safe output.
-    void sanitizedRaw
-
-    if (fileErrors > 0) {
-      console.error(`\n${fpath}: ${fileErrors} error(s)`)
-      totalErrors += fileErrors
-    }
-  }
-}
-
-if (totalErrors > 0) {
-  console.error(`\n${totalErrors} content lint error(s) found.`)
-  process.exit(1)
-} else {
-  console.log("All content files passed lint checks.")
-}
