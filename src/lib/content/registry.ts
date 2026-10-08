@@ -259,11 +259,12 @@ function normalizeComparisonWinner(value: string | null, tool1: string, tool2: s
   return null
 }
 
-function buildComparisonNarrative(tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
+function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: string, tool2Slug: string, features: ComparisonFeature[], winner: string | null): string {
   const exclusive1 = features.filter((f) => Boolean(f.tool1) && !Boolean(f.tool2))
   const exclusive2 = features.filter((f) => Boolean(f.tool2) && !Boolean(f.tool1))
   const shared = features.filter((f) => Boolean(f.tool1) && Boolean(f.tool2))
-  const review1 = getReview(features.length ? String((features[0] as ComparisonFeature & { tool1Slug?: string }).tool1Slug || "") : "")
+  const review1 = getReview(tool1Slug)
+  const review2 = getReview(tool2Slug)
   const winnerLine = winner
     ? `${winner} is the recorded winner in this dataset.`
     : "The dataset does not record a clear overall winner."
@@ -281,7 +282,7 @@ function buildComparisonNarrative(tool1: string, tool2: string, features: Compar
     ? `${tool2} has exclusive coverage for ${exclusive2.slice(0, 5).map((f) => f.name.toLowerCase()).join(", ")}.`
     : `${tool2} has no exclusive criteria in the recorded feature set.`
 
-  const pricingContext = [review1].filter(Boolean).map((review) =>
+  const pricingContext = [review1, review2].filter(Boolean).map((review) =>
     `${review!.name} is recorded at ${review!.rating}/5 with ${review!.pricing.toLowerCase()} pricing${review!.priceRange ? ` (${review!.priceRange})` : ""}.`
   ).join(" ")
 
@@ -318,7 +319,7 @@ export function getComparison(slug: string): ComparisonContent | null {
     ...cmp,
     winner,
     description: sanitizeComparisonDescription(cmp.description, cmp.tool1, cmp.tool2, features, winner),
-    verdict: buildComparisonNarrative(cmp.tool1, cmp.tool2, features, winner),
+    verdict: buildComparisonNarrative(cmp.tool1, cmp.tool2, cmp.tool1Slug, cmp.tool2Slug, features, winner),
     features,
     faqs: sanitizeFaqs(cmp.faqs),
   }
