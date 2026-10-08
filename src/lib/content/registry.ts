@@ -61,7 +61,52 @@ const GENERIC_BOILERPLATE_PATTERNS = [
   /this review is based on hands-on testing/i,
   /we verify our hands-on testing/i,
   /tested in realistic workflows by our team/i,
+  /after researching hundreds of/i,
+  /our expert buying advice/i,
 ]
+
+const UNSUPPORTED_CLAIM_PATTERNS = [
+  /hands[- ]on testing/i,
+  /tested for at least two weeks/i,
+  /based on our testing methodology/i,
+  /this review is based on hands[- ]on testing/i,
+  /we verify our hands[- ]on testing/i,
+  /tested in realistic workflows by our team/i,
+  /our expert team evaluated/i,
+  /our testing methodology/i,
+  /after researching hundreds of/i,
+  /our expert buying advice/i,
+]
+
+function sanitizeUnsupportedClaims(value: string | undefined): string {
+  const raw = String(value ?? "").trim()
+  if (!raw) return ""
+  return raw
+    .split("\n")
+    .map((line) =>
+      line
+        .split(/(?<=[.!?])\s+/)
+        .map((sentence) => sentence.trim())
+        .filter((sentence) => sentence && !UNSUPPORTED_CLAIM_PATTERNS.some((pattern) => pattern.test(sentence)))
+        .join(" ")
+    )
+    .filter(Boolean)
+    .join("\n")
+    .trim()
+}
+
+function sanitizeContentValue(value: unknown): unknown {
+  if (typeof value === "string") return value.length >= 40 ? sanitizeUnsupportedClaims(value) : value
+  if (Array.isArray(value)) return value.map(sanitizeContentValue)
+  if (value && typeof value === "object") {
+    const out: Record<string, unknown> = {}
+    for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
+      out[key] = sanitizeContentValue(child)
+    }
+    return out
+  }
+  return value
+}
 
 const GENERIC_LIST_ITEM_PATTERNS = [
   /^regular product updates$/i,
@@ -84,8 +129,8 @@ function sanitizeFaqs(faqs: FAQItem[] | undefined): FAQItem[] {
   const seen = new Set<string>()
   const cleaned: FAQItem[] = []
   for (const faq of faqs) {
-    const question = String(faq?.question ?? "").trim()
-    const answer = String(faq?.answer ?? "").trim()
+    const question = sanitizeUnsupportedClaims(String(faq?.question ?? "").trim())
+    const answer = sanitizeUnsupportedClaims(String(faq?.answer ?? "").trim())
     const key = question.toLowerCase().replace(/\s+/g, " ")
     if (!question || !answer || !question.endsWith("?") || seen.has(key)) continue
     if (GENERIC_FAQ_PATTERNS.some((pattern) => pattern.test(key))) continue
@@ -100,6 +145,10 @@ function sanitizeFaqs(faqs: FAQItem[] | undefined): FAQItem[] {
 function sanitizeSections<T extends { title: string; body: string }>(sections: T[] | undefined): T[] {
   if (!Array.isArray(sections)) return []
   return sections
+    .map((section) => ({
+      ...section,
+      body: sanitizeUnsupportedClaims(section?.body),
+    }))
     .filter((section) => {
       if (!section?.title || !section?.body) return false
       if (GENERIC_REVIEW_SECTION_TITLES.has(section.title)) return false
@@ -168,12 +217,13 @@ function readJson<T>(filePath: string): T {
   if (cached && cached.mtimeMs === mtimeMs) return cached.data as T
 
   const raw = fs.readFileSync(filePath, "utf-8")
-  const data = JSON.parse(raw) as Record<string, unknown>
-  for (const key of Object.keys(data)) {
-    if (DATE_FIELDS.has(key) && typeof data[key] === "string") {
-      data[key] = toISODate(data[key])
+  const parsed = JSON.parse(raw) as Record<string, unknown>
+  for (const key of Object.keys(parsed)) {
+    if (DATE_FIELDS.has(key) && typeof parsed[key] === "string") {
+      parsed[key] = toISODate(parsed[key] as string)
     }
   }
+  const data = sanitizeContentValue(parsed) as Record<string, unknown>
   if (mtimeMs !== -1) jsonCache.set(filePath, { mtimeMs, data })
   return data as T
 }
