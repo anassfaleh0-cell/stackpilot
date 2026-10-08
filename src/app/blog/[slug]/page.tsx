@@ -16,8 +16,8 @@ import { BrandDivider } from "@/components/brand/patterns"
 import { Clock, User, Calendar, Star } from "lucide-react"
 import { InFeedAd } from "@/components/ads"
 
-export async function generateStaticParams() {
-  return []
+export function generateStaticParams() {
+  return getAllBlogPosts().map((item) => ({ slug: item.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
