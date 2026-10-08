@@ -364,7 +364,8 @@ export function getComparison(slug: string): ComparisonContent | null {
 }
 export function getAllComparisons(): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
-    .map((f) => { const c = readJson<ComparisonContent>(path.join(CONTENT_DIR, "comparisons", f)); c.faqs = sanitizeFaqs(c.faqs); return c })
+    .map((f) => getComparison(f.replace(/\.json$/, "")))
+    .filter((x): x is ComparisonContent => Boolean(x))
 }
 
 export function getGuide(slug: string): GuideContent | null {
@@ -472,7 +473,8 @@ export function getAlternative(slug: string): AlternativeContent | null {
 
 export function getAllAlternatives(): AlternativeContent[] {
   return readDir(path.join(CONTENT_DIR, "alternatives"))
-    .map((f) => { const a = readJson<AlternativeContent>(path.join(CONTENT_DIR, "alternatives", f)); return { ...a, sections: buildAlternativeSections(a), faqs: sanitizeFaqs(a.faqs) } })
+    .map((f) => getAlternative(f.replace(/\.json$/, "")))
+    .filter((x): x is AlternativeContent => Boolean(x))
 }
 
 export function getUseCase(slug: string): UseCaseContent | null {
@@ -563,7 +565,8 @@ export function getBest(slug: string): BestContent | null {
 
 export function getAllBest(): BestContent[] {
   return readDir(path.join(CONTENT_DIR, "best"))
-    .map((f) => readJson<BestContent>(path.join(CONTENT_DIR, "best", f)))
+    .map((f) => getBest(f.replace(/\.json$/, "")))
+    .filter((x): x is BestContent => Boolean(x))
 }
 
 export function getHub(slug: string): HubContent | null {
