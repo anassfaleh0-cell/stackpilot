@@ -369,8 +369,8 @@ describe("CD-3 / CD-8: review JSON-LD", () => {
     })
   )
 
-  it("emits a single Product node", () => {
-    expect(schema["@type"]).toBe("Product")
+  it("emits a single Review node", () => {
+    expect(schema["@type"]).toBe("Review")
   })
 
   it("carries the image that used to live on the removed Product block", () => {
@@ -382,9 +382,9 @@ describe("CD-3 / CD-8: review JSON-LD", () => {
   })
 
   it("keeps the editorial review rating", () => {
-    const review = schema.review as { reviewRating: { ratingValue: number; bestRating: number } }
-    expect(review.reviewRating.ratingValue).toBe(4.6)
-    expect(review.reviewRating.bestRating).toBe(5)
+    const reviewRating = schema.reviewRating as { ratingValue: number; bestRating: number }
+    expect(reviewRating.ratingValue).toBe(4.6)
+    expect(reviewRating.bestRating).toBe(5)
   })
 
   it("does not publish a countryOfOrigin when the company sources disagree", () => {
@@ -406,7 +406,7 @@ describe("CD-3 / CD-8: review JSON-LD", () => {
     expect(JSON.stringify(out)).not.toContain("foundingDate")
   })
 
-  it("publishes countryOfOrigin only when the sources agree", () => {
+  it("does not invent company geography or founding dates in Review JSON-LD", () => {
     const agreed = schemaJson(
       ReviewSchema({
         name: "Affinity",
@@ -416,8 +416,8 @@ describe("CD-3 / CD-8: review JSON-LD", () => {
         companyInfo: { founded: 2014, headquarters: "United Kingdom" },
       })
     )
-    expect(JSON.stringify(agreed)).toContain("countryOfOrigin")
-    expect(JSON.stringify(agreed)).toContain("foundingDate")
+    expect(JSON.stringify(agreed)).not.toContain("countryOfOrigin")
+    expect(JSON.stringify(agreed)).not.toContain("foundingDate")
   })
 
   it("the review page no longer renders a second Product block", () => {
