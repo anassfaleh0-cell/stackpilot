@@ -60,11 +60,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const blogPosts = getAllBlogPosts()
   const glossary = getAllGlossaryTerms().filter((t) => isQuality(t.slug, "glossary"))
   const alternatives = getAllAlternatives().filter((a) => isQuality(a.slug, "alternatives"))
-  const useCases = getAllUseCases()
-  const industries = getAllIndustries()
+  const useCases = getAllUseCases().filter((u) => isQuality(u.slug, "use-cases"))
+  const industries = getAllIndustries().filter((i) => isQuality(i.slug, "industries"))
   const best = getAllBest().filter((b) => isQuality(b.slug, "best"))
-  const hubs = getAllHubs()
-  const research = getAllResearch()
+  const hubs = getAllHubs().filter((h) => isQuality(h.slug, "hubs"))
+  const research = getAllResearch().filter((r) => isQuality(r.slug, "research"))
   const statistics = getAllStatistics().filter((s) => isQuality(s.slug, "statistics"))
 
   const entries: MetadataRoute.Sitemap = [
