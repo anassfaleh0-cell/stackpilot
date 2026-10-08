@@ -53,9 +53,7 @@ function deriveGuideFaqs(guide: GuideContent): { question: string; answer: strin
 }
 
 export function generateStaticParams() {
-  return getAllGuides()
-    .filter((g) => !isNoindexed("guides", g.slug))
-    .map((g) => ({ slug: g.slug }))
+  return []
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
