@@ -174,6 +174,16 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
               </React.Fragment>
             ))}
 
+            <section className="mb-10 p-5 rounded-xl border border-primary/20 bg-primary-subtle/10">
+              <h2 className="text-lg font-bold mb-3">How to interpret these statistics</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                The figures above are comparison points, not a single performance benchmark. Before using a statistic in a buying or strategy decision, check the reporting period, geography, sample or market definition, and whether the source measures vendors, organizations, users, or revenue.
+              </p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Sources can use different methodologies and time windows. A higher or lower figure should therefore be interpreted in context rather than combined with another source as though both measured exactly the same population. For decisions about a specific vendor, use these industry figures as background and verify the vendor's current documentation separately.
+              </p>
+            </section>
+
             <div className="mt-12 p-5 rounded-xl bg-surface-secondary border border-border text-xs text-muted-foreground">
               <p className="font-semibold text-foreground mb-2">Methodology & Data Sources</p>
               <p className="leading-relaxed">Statistics on this page are compiled from publicly available industry reports, analyst research, and vendor-published data. All sources are linked for verification. Data is updated annually or when new reports are published. PilotStack does not guarantee the accuracy of third-party data. See our <Link href="/methodology" className="text-primary hover:underline">research methodology</Link> for details.</p>
