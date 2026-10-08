@@ -15,7 +15,7 @@ export function EditorialExpert({ author }: { author: string }) {
   return (
     <GlassCard>
       <div className="p-4">
-        <h3 className="font-semibold text-xs text-muted-foreground uppercase tracking-wider mb-3">Reviewer</h3>
+        <h3 className="font-semibold text-xs text-muted-foreground uppercase tracking-wider mb-3">Editorial reviewer</h3>
         <div className="flex items-center gap-3 mb-2">
           <AuthorAvatar name={profile.name} size="sm" />
           <div>
@@ -24,7 +24,7 @@ export function EditorialExpert({ author }: { author: string }) {
           </div>
         </div>
         <p className="text-xs text-muted-foreground">
-          <span className="font-medium text-foreground">Expertise:</span> {profile.expertise}
+          <span className="font-medium text-foreground">Editorial focus:</span> {profile.expertise}
         </p>
       </div>
     </GlassCard>
