@@ -36,7 +36,7 @@ export default function EditorialPolicyPage() {
             <div className="tl-dr mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">TL;DR</h2>
               <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-                <li>Complete separation between editorial and commercial operations</li>
+                <li>Editorial criteria are kept separate from commercial disclosures</li>
                 <li>Every published figure traces to a source we hold, or it is left off the page</li>
                 <li>One recorded source per figure, reused everywhere a tool appears</li>
                 <li>Both strengths and limitations addressed in every review</li>
@@ -47,8 +47,8 @@ export default function EditorialPolicyPage() {
             <div className="key-takeaways mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Key Takeaways</h2>
               <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                <li>Editorial team is never informed about affiliate or advertiser relationships when creating content</li>
-                <li>Revenue considerations never factor into coverage decisions or ratings</li>
+                <li>Commercial relationships are disclosed separately from editorial criteria</li>
+                <li>Ratings and coverage are based on published editorial criteria</li>
                 <li>Content pages expose publication or update dates where those fields are maintained</li>
                 <li>Content more than 12 months old is flagged for review and potential removal</li>
                 <li>We distinguish factual reporting from analysis and opinion throughout</li>
@@ -71,9 +71,9 @@ export default function EditorialPolicyPage() {
               <p>Every piece of content published on PilotStack must meet the following standards:</p>
               <ul>
                 <li><strong>Accuracy:</strong> All published figures must be tied to a source we hold before publication. When accuracy cannot be confirmed, we leave the figure off the page or mark it unverified rather than assert it.</li>
-                <li><strong>Originality:</strong> Our pages are written by our editorial team from the sources described in our methodology. We do not republish vendor-provided content, and editorial review is applied before publication.</li>
+                <li><strong>Originality:</strong> Our pages are developed from the sources described in our methodology. Vendor-provided material may inform research, but we aim to add editorial context, comparison, and decision guidance rather than republish it as-is.</li>
                 <li><strong>Comprehensiveness:</strong> Reviews must address both strengths and limitations. We explicitly state who each product is best for and who should consider alternatives.</li>
-                <li><strong>Currency:</strong> All content includes publication dates and last-reviewed dates. Content that is more than 12 months old is flagged for review.</li>
+                <li><strong>Currency:</strong> Content includes publication or update dates where those fields are maintained, and older material is reviewed as part of ongoing maintenance.</li>
                 <li><strong>Clarity:</strong> We distinguish factual reporting from analysis and opinion. Our scoring methodology is transparent and applied consistently across all reviews.</li>
               </ul>
 
@@ -98,7 +98,7 @@ export default function EditorialPolicyPage() {
               <p>We are committed to representing diverse perspectives in our content. Our tool reviews consider accessibility features, internationalization support, and pricing in multiple currencies and regions. We strive to include products that serve organizations of different sizes, industries, and geographic locations.</p>
 
               <h2>7. Updates to This Policy</h2>
-              <p>This editorial policy is reviewed annually. Material changes are communicated to newsletter subscribers and noted on this page. The "Last updated" date reflects the most recent revision.</p>
+              <p>This editorial policy may be updated when our practices materially change. The last-updated date reflects the most recent revision. The "Last updated" date reflects the most recent revision.</p>
 
               <p className="text-sm text-muted-foreground-foreground mt-8">For questions about this editorial policy, contact us at <strong>editorial@pilotstack.online</strong>.</p>
             </div>
