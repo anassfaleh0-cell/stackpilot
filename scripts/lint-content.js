@@ -225,7 +225,9 @@ for (const dir of dirs) {
       }
     }
 
-    const placeholders =\n      (raw.match(/\\b(?:TODO|TBD)\\b/g) || []).length +\n      (raw.match(/\\b(?:replace me|example text|coming soon)\\b/gi) || []).length
+    const placeholders =
+      (raw.match(/\b(?:TODO|TBD)\b/g) || []).length +
+      (raw.match(/\b(?:replace me|example text|coming soon)\b/gi) || []).length
     if (placeholders > 0) {
       console.error("  ERROR: Placeholder content marker appears " + placeholders + " time(s)")
       fileErrors += placeholders
