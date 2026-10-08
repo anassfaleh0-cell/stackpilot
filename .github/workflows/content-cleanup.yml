@@ -44,17 +44,17 @@ jobs:
       - name: Unit tests
         run: npm test
 
-      - name: Production build
-        run: npm run build
-
-      - name: Commit cleanup
+      - name: Commit content cleanup
         run: |
           git config user.name "PilotStack"
           git config user.email "pilotstack@users.noreply.github.com"
           git add content _gen-expand.js _gen-comparisons.js _gen-best-expansion.js
           if git diff --cached --quiet; then
             echo "No cleanup changes to commit."
-            exit 0
+          else
+            git commit -m "fix(content): clean unsupported and generated-content claims"
+            git push
           fi
-          git commit -m "fix(content): clean unsupported and generated-content claims"
-          git push
+
+      - name: Production build
+        run: npm run build
