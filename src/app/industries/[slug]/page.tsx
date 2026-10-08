@@ -10,13 +10,14 @@ import { getRelatedByCategory } from "@/lib/content/internal-links"
 import { InternalLinks, LEGACY_RELATED_TYPES, extendedRelatedItems } from "@/components/content/internal-links"
 import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound } from "next/navigation"
+import { isNoindexed } from "@/lib/noindex"
 import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, Lightbulb } from "lucide-react"
 import { EditorialHero, GlassCard, InfoCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 
 export function generateStaticParams() {
-  return getAllIndustries().map((i) => ({ slug: i.slug }))
+  return getAllIndustries().filter((i) => !isNoindexed("industries", i.slug)).map((i) => ({ slug: i.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!ind) return {}
   const readingTime = Math.max(5, Math.ceil((ind.description.split(/\s+/).length + ind.recommendations.length * 15) / 200))
   const shortTitle = ind.title.length > 58 ? ind.title.slice(0, 55) + "..." : ind.title
-  return createMetadata({ title: shortTitle, description: `Best software for ${ind.industry.toLowerCase()} businesses, with ratings, pricing context, and implementation tips for 2026.`, path: `/industries/${ind.slug}`, ogType: "article", publishedAt: ind.lastUpdated, updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime })
+  return createMetadata({ title: shortTitle, description: `Best software for ${ind.industry.toLowerCase()} businesses, with ratings, pricing context, and implementation tips for 2026.`, path: `/industries/${ind.slug}`, ogType: "article", publishedAt: ind.lastUpdated, updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime , noIndex: isNoindexed("industries", ind.slug) })
 }
 
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {
