@@ -17,11 +17,7 @@ import { Clock, User, Calendar, Star } from "lucide-react"
 import { InFeedAd } from "@/components/ads"
 
 export async function generateStaticParams() {
-  const { getAllBlogPosts } = await import("@/lib/content/registry")
-  const { isNoindexed } = await import("@/lib/noindex")
-  return getAllBlogPosts()
-    .filter((p) => !isNoindexed("blog", p.slug))
-    .map((p) => ({ slug: p.slug }))
+  return []
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
