@@ -102,11 +102,19 @@ function sanitizeSections<T extends { title: string; body: string }>(sections: T
     })
 }
 
-function sanitizeList(items: string[] | undefined): string[] {
+function trimText(value: string | undefined, max: number): string {
+  const text = String(value ?? "").trim()
+  if (text.length <= max) return text
+  const cut = text.slice(0, max)
+  const boundary = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("! "), cut.lastIndexOf("? "))
+  return (boundary > Math.floor(max * 0.65) ? cut.slice(0, boundary + 1) : cut).trim()
+}
+
+function sanitizeList(items: string[] | undefined, max = 5): string[] {
   if (!Array.isArray(items)) return []
   const seen = new Set<string>()
   return items
-    .map((item) => String(item ?? "").trim())
+    .map((item) => trimText(String(item ?? ""), 360))
     .filter((item) => item.length >= 12 && !GENERIC_LIST_ITEM_PATTERNS.some((pattern) => pattern.test(item)))
     .filter((item) => {
       const key = item.toLowerCase()
@@ -114,15 +122,18 @@ function sanitizeList(items: string[] | undefined): string[] {
       seen.add(key)
       return true
     })
-    .slice(0, 5)
+    .slice(0, max)
 }
 
 function sanitizeReview(review: ReviewContent): ReviewContent {
   return {
     ...review,
     content: sanitizeSections(review.content).filter((section) => !(section.type === "diagram" && !["pricing-ladder","feature-radar","implementation-flow"].includes(section.body))),
+    description: trimText(review.description, 700),
+    tagline: trimText(review.tagline, 220),
     pros: sanitizeList(review.pros),
     cons: sanitizeList(review.cons),
+    features: review.features.map((feature) => ({ ...feature, name: trimText(feature.name, 120), description: trimText(feature.description, 360) })).slice(0, 20),
     faqs: sanitizeFaqs(review.faqs),
   }
 }
@@ -185,9 +196,14 @@ export function getComparison(slug: string): ComparisonContent | null {
   const file = path.join(CONTENT_DIR, "comparisons", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const cmp = readJson<ComparisonContent>(file)
-  cmp.faqs = sanitizeFaqs(cmp.faqs)
   if (cmp.published === false) return null
-  return cmp
+  return {
+    ...cmp,
+    description: trimText(cmp.description, 700),
+    verdict: trimText(cmp.verdict, 1600),
+    features: cmp.features.slice(0, 20).map((f) => ({ ...f, name: trimText(f.name, 140), tool1Detail: trimText(f.tool1Detail, 320), tool2Detail: trimText(f.tool2Detail, 320) })),
+    faqs: sanitizeFaqs(cmp.faqs),
+  }
 }
 
 export function getAllComparisons(): ComparisonContent[] {
@@ -263,7 +279,15 @@ export function getUseCase(slug: string): UseCaseContent | null {
   const file = path.join(CONTENT_DIR, "use-cases", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const useCase = readJson<UseCaseContent>(file)
-  return { ...useCase, faqs: sanitizeFaqs(useCase.faqs) }
+  return {
+    ...useCase,
+    description: trimText(useCase.description, 700),
+    useCaseDescription: trimText(useCase.useCaseDescription, 1200),
+    recommendations: useCase.recommendations.slice(0, 12).map((x) => ({ ...x, bestFor: trimText(x.bestFor, 360), keyFeatures: sanitizeList(x.keyFeatures, 6) })),
+    selectionCriteria: useCase.selectionCriteria.slice(0, 10).map((x) => ({ ...x, description: trimText(x.description, 360) })),
+    commonPitfalls: sanitizeList(useCase.commonPitfalls, 8),
+    faqs: sanitizeFaqs(useCase.faqs),
+  }
 }
 
 export function getAllUseCases(): UseCaseContent[] {
@@ -275,7 +299,15 @@ export function getIndustry(slug: string): IndustryContent | null {
   const file = path.join(CONTENT_DIR, "industries", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const industry = readJson<IndustryContent>(file)
-  return { ...industry, faqs: sanitizeFaqs(industry.faqs) }
+  return {
+    ...industry,
+    description: trimText(industry.description, 700),
+    industryOverview: trimText(industry.industryOverview, 1600),
+    softwareNeeds: sanitizeList(industry.softwareNeeds, 10),
+    recommendations: industry.recommendations.slice(0, 12).map((x) => ({ ...x, bestFor: trimText(x.bestFor, 360) })),
+    implementationTips: sanitizeList(industry.implementationTips, 10),
+    faqs: sanitizeFaqs(industry.faqs),
+  }
 }
 
 export function getAllIndustries(): IndustryContent[] {
@@ -311,7 +343,15 @@ export function getBest(slug: string): BestContent | null {
   if (!fs.existsSync(file)) return null
   const best = readJson<BestContent>(file)
   if (best.published === false) return null
-  return best
+  return {
+    ...best,
+    description: trimText(best.description, 700),
+    criteria: sanitizeList(best.criteria, 8),
+    picks: best.picks.slice(0, 10).map((p) => ({ ...p, bestFor: trimText(p.bestFor, 360), pros: sanitizeList(p.pros, 5), cons: sanitizeList(p.cons, 5) })),
+    pricingSummary: trimText(best.pricingSummary, 900),
+    comparisonTable: { ...best.comparisonTable, columns: best.comparisonTable.columns.map((x) => trimText(x, 160)), rows: best.comparisonTable.rows.slice(0, 12).map((row) => row.map((x) => trimText(x, 360))) },
+    faqs: sanitizeFaqs(best.faqs),
+  }
 }
 
 export function getAllBest(): BestContent[] {
