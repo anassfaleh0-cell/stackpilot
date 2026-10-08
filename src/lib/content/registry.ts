@@ -146,119 +146,6 @@ function sanitizeFaqs(faqs: FAQItem[] | undefined): FAQItem[] {
   return cleaned
 }
 
-function contentWordCount(value: string): number {
-  return value.split(/\s+/).filter(Boolean).length
-}
-
-function sectionWordCount(sections: Array<{ body?: string; items?: string[] }>): number {
-  return sections.reduce((total, section) =>
-    total + contentWordCount(String(section.body ?? "")) +
-    (section.items || []).reduce((n, item) => n + contentWordCount(String(item)), 0), 0)
-}
-
-function enrichGuideSections(guide: GuideContent): GuideContent["sections"] {
-  const sections = sanitizeSections(guide.sections)
-  if (sectionWordCount(sections) >= 900) return sections
-
-  const topic = guide.title.replace(/\s*[:—-].*$/, "").trim() || guide.category
-  const category = guide.category
-  const difficultyNote =
-    guide.difficulty === "Beginner"
-      ? "Keep the first implementation deliberately small so the team can learn the workflow before adding optional features."
-      : guide.difficulty === "Intermediate"
-        ? "Use the existing workflow as the baseline, then validate which advanced capabilities are actually worth the added configuration."
-        : "Treat governance, ownership, integrations, migration, and change management as part of the decision rather than leaving them until rollout."
-
-  const criteria = [
-    "Define the problem that " + topic + " is meant to solve and write down the current workflow before comparing products.",
-    "Separate must-have requirements from preferences so a long feature list does not hide a poor fit for the " + category.toLowerCase() + " use case.",
-    "Check integrations and data movement early; a feature that cannot connect to the systems the team already uses may create more work than it removes.",
-    "Compare total cost over the period you expect to use the tool, including users, required plans, implementation effort, training, and any add-ons.",
-    "Decide who will own configuration, permissions, documentation, and ongoing review after launch.",
-  ]
-
-  const rollout = [
-    "Start with one representative workflow and a small group of users rather than changing every process at once.",
-    "Set measurable success criteria such as adoption, cycle time, error rate, reporting coverage, or time saved before the wider rollout.",
-    "Use real sample data where practical, and document any gaps discovered during the trial so they become explicit buying or implementation decisions.",
-    "Train users on the workflow they actually need to perform, not on every feature available in the product.",
-    "Schedule a post-launch review to remove unused configuration and confirm that the platform is still solving the original problem.",
-  ]
-
-  return [
-    ...sections,
-    {
-      title: "Practical Evaluation Plan",
-      body: "A strong " + category.toLowerCase() + " decision starts with evidence from the workflow, not from a feature checklist alone. For " + topic + ", begin by writing down the current process, the points where work slows down, the information that must move between systems, and the people responsible for each step. Then translate those observations into requirements that can be compared consistently across vendors. " + difficultyNote,
-      type: "text",
-    },
-    {
-      title: "Buyer Checklist Before Shortlisting",
-      body: "Use the following questions to turn this guide into a concrete shortlist. Each answer should be specific enough that two products can be assessed against the same requirement.",
-      type: "list",
-      items: criteria,
-    },
-    {
-      title: "Implementation Checkpoints",
-      body: "Choosing a product is only the first part of a successful " + category.toLowerCase() + " rollout. These checkpoints keep the implementation tied to the outcome the team is trying to improve.",
-      type: "list",
-      items: rollout,
-    },
-    {
-      title: "How to Validate the Final Choice",
-      body: "Before committing, run a short validation using the highest-value workflow described in this guide. Record what the product can do without customization, what requires configuration or an integration, and what still needs a manual workaround. Compare those findings with your must-have requirements and total-cost assumptions. A useful final decision is one that the team can explain in terms of workflow fit, evidence, cost, and implementation effort — not simply a vendor feature count or headline rating.",
-      type: "text",
-    },
-  ]
-}
-
-function enrichAlternativeSections(alternative: AlternativeContent): AlternativeContent["sections"] {
-  const sections = sanitizeSections(alternative.sections)
-  if (sectionWordCount(sections) >= 900) return sections
-
-  const names = alternative.alternatives.map((item) => item.name)
-  const shortlist = alternative.alternatives.slice(0, 6).map((item) =>
-    item.name + " (" + item.rating + "/5): " + item.description
-  )
-  const criteria = alternative.selectionCriteria.slice(0, 8)
-
-  return [
-    ...sections,
-    {
-      title: "What to look for beyond " + alternative.toolName,
-      body: "An alternative is useful only when it solves the reason you are considering a switch. For " + alternative.toolName + ", start by identifying whether the main issue is price, a missing workflow, an integration gap, administration, scalability, or a different product model. Then compare the shortlisted options against that specific problem. The alternatives recorded on this page cover " + names.length + " options, so the goal is not to find the platform with the most features; it is to find the closest fit for the work your team actually needs to perform.",
-      type: "text",
-    },
-    {
-      title: "Shortlist at a Glance",
-      body: "These descriptions give the reader a practical first-pass shortlist. Ratings are shown as the values recorded in the PilotStack dataset and should be treated as a comparison signal, not proof that one product is universally better.",
-      type: "list",
-      items: shortlist,
-    },
-    {
-      title: "Migration Questions to Answer",
-      body: "Before switching from " + alternative.toolName + ", map the information and integrations that must survive the move. Check export formats, import support, authentication, user provisioning, historical records, reporting continuity, and the effort required to train users on the new workflow. A migration that looks inexpensive at the licence level can become expensive when data cleanup, integration work, and retraining are added.",
-      type: "text",
-    },
-    {
-      title: "Decision Checklist",
-      body: "Use these selection criteria to score the finalists consistently:",
-      type: "list",
-      items: criteria.length > 0 ? criteria : [
-        "Core feature fit for the workflow you need to replace",
-        "Total cost of ownership at your expected team size",
-        "Compatibility with the tools and data sources you already use",
-        "Ease of adoption and administration",
-        "Migration effort and long-term scalability",
-      ],
-    },
-    {
-      title: "Final Selection Test",
-      body: "Put the top two or three alternatives through the same short scenario using realistic requirements. Record which option completes the task with the fewest workarounds, which one creates the clearest ownership model for administrators, and which one remains affordable as usage grows. This produces a decision tied to the actual switching case rather than to a generic best-alternative claim.",
-      type: "text",
-    },
-  ]
-}
 function sanitizeSections<T extends { title: string; body: string }>(sections: T[] | undefined): T[] {
   if (!Array.isArray(sections)) return []
   return sections
@@ -387,12 +274,12 @@ export function getGuide(slug: string): GuideContent | null {
   const file = path.join(CONTENT_DIR, "guides", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const guide = readJson<GuideContent>(file)
-  return { ...guide, sections: enrichGuideSections(guide), faqs: sanitizeFaqs(guide.faqs) }
+  return { ...guide, sections: sanitizeSections(guide.sections), faqs: sanitizeFaqs(guide.faqs) }
 }
 
 export function getAllGuides(): GuideContent[] {
   return readDir(path.join(CONTENT_DIR, "guides"))
-    .map((f) => { const g = readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)); return { ...g, sections: enrichGuideSections(g), faqs: sanitizeFaqs(g.faqs) } })
+    .map((f) => { const g = readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)); return { ...g, sections: sanitizeSections(g.sections), faqs: sanitizeFaqs(g.faqs) } })
 }
 
 export function getGlossaryTerm(slug: string): GlossaryContent | null {
@@ -436,12 +323,12 @@ export function getAlternative(slug: string): AlternativeContent | null {
   const file = path.join(CONTENT_DIR, "alternatives", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const alt = readJson<AlternativeContent>(file)
-  return { ...alt, sections: enrichAlternativeSections(alt), faqs: sanitizeFaqs(alt.faqs) }
+  return { ...alt, sections: sanitizeSections(alt.sections), faqs: sanitizeFaqs(alt.faqs) }
 }
 
 export function getAllAlternatives(): AlternativeContent[] {
   return readDir(path.join(CONTENT_DIR, "alternatives"))
-    .map((f) => { const a = readJson<AlternativeContent>(path.join(CONTENT_DIR, "alternatives", f)); return { ...a, sections: enrichAlternativeSections(a), faqs: sanitizeFaqs(a.faqs) } })
+    .map((f) => { const a = readJson<AlternativeContent>(path.join(CONTENT_DIR, "alternatives", f)); return { ...a, sections: sanitizeSections(a.sections), faqs: sanitizeFaqs(a.faqs) } })
 }
 
 export function getUseCase(slug: string): UseCaseContent | null {
