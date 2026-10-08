@@ -485,7 +485,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   </div>
                 </GlassCard>
 
-                {/* Expert Reviewer */}
+                {/* Editorial Reviewer */}
                 <EditorialExpert author={tool.author} />
 
                 {/* EEAT Process */}
