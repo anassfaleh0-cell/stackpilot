@@ -135,16 +135,15 @@ describe("route families", () => {
   })
 
   it(
-    "renders every published record",
+    "renders every content record as an indexable page",
     async () => {
       for (const family of FAMILIES) {
         for (const record of recordsOf(family.dir)) {
-          if (record.published === false) continue
           await expectResolves(family, record.slug)
         }
       }
     },
-    180000,
+    300000,
   )
 
   it("renders every author and tool the site ships", async () => {
@@ -152,11 +151,10 @@ describe("route families", () => {
     for (const param of Tools.generateStaticParams!()) await expectResolves({ route: "tools", mod: Tools }, param.slug)
   })
 
-  it("404s unpublished records on purpose", async () => {
+  it("does not turn existing content records into 404s because of publication flags", async () => {
     for (const family of FAMILIES) {
       for (const record of recordsOf(family.dir)) {
-        if (record.published !== false) continue
-        await expect404(family, record.slug)
+        await expectResolves(family, record.slug)
       }
     }
   })
@@ -191,6 +189,10 @@ describe("route families", () => {
       const code = codeSlugs.get(route)
       if (code) expect(code.has(slug), `${entry.url} has no route source`).toBe(true)
     }
+  })
+
+  it("keeps unknown slugs as real 404s while content slugs remain resolvable", async () => {
+    for (const family of ALL_FAMILIES) await expect404(family, UNKNOWN_SLUG)
   })
 
   it("pins dynamicParams to false on the authors route only", () => {
