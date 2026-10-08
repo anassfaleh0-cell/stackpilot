@@ -111,6 +111,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://ep1.adtrafficquality.google" />
 
         <script
+          id="adsense-script"
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6523926892521982"
           crossOrigin="anonymous"
