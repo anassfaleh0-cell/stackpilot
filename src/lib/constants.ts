@@ -12,6 +12,7 @@ export const site = {
     facebook: "https://www.facebook.com/people/PilotStack/61592100153225/",
     linkedin: "https://www.linkedin.com/in/pilotstack",
     pinterest: "https://www.pinterest.com/Pilotstack/",
+    youtube: "https://www.youtube.com/@PilotstackReviews",
   },
 }
 
