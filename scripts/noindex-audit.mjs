@@ -3,8 +3,8 @@
 /**
  * noindex-audit.mjs
  * 
- * Scans content directories, scores each file, and outputs a noindex-list.json
- * with slugs that should be noindexed (low quality).
+ * Scans content directories and reports quality signals.
+ * The generated manifest is diagnostic only; it never suppresses content from indexing.
  * 
  * Usage: node scripts/noindex-audit.mjs
  * 
@@ -148,8 +148,10 @@ function main() {
       return scoreFile(filePath, dir)
     }).sort((a, b) => b.score - a.score)
 
-    const keepSlugs = scored.slice(0, keepTop).map((s) => s.slug)
-    const noindexSlugs = scored.slice(keepTop).map((s) => s.slug)
+    // Quality is fixed in place; this audit is diagnostic only.
+    // Every existing content page remains eligible for indexing.
+    const keepSlugs = scored.map((s) => s.slug)
+    const noindexSlugs = []
 
     results[dir] = {
       total: files.length,
