@@ -43,7 +43,7 @@ describe("site-wide content quality gate", () => {
     ["industry/healthcare", getIndustry("healthcare")],
     ["research/ai-adoption-report-2026", getResearch("ai-adoption-report-2026")],
     ["best/best-project-management-software", getBest("best-project-management-software")],
-    ["blog/software-selection", getBlogPost("software-selection-guide")],
+    ["blog/software-selection", getBlogPost("ai-implementation-roi-guide")],
   ] as const
 
   it("does not expose unsupported first-hand or expert-testing claims", () => {
