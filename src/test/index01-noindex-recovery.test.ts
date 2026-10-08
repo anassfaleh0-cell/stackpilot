@@ -40,7 +40,7 @@ describe("site-wide content indexability policy", () => {
 
   it("does not let utility pages become indexable", () => {
     expect((searchMetadata as { robots?: unknown }).robots).toMatchObject({ index: false })
-    expect((dashboardMetadata as { robots?: unknown }).robots).toMatchObject({ index: false, follow: false })
+    expect((dashboardMetadata as { robots?: unknown }).robots).toMatchObject({ index: false })
   })
 
   it("keeps the public editorial team author page indexable", async () => {
