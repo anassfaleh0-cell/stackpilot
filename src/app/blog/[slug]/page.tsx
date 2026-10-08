@@ -240,7 +240,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <div>
                   <div className="font-semibold text-sm mb-1">Written by {post.author}</div>
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    {post.author} is a software expert at PilotStack, specializing in {post.category.toLowerCase()} tools and technology evaluation.
+                    {post.author} is an editorial contributor at PilotStack, covering {post.category.toLowerCase()} tools and software-buying decisions.
                   </p>
                   <p className="text-xs text-muted-foreground mt-2">
                     Published <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
