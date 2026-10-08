@@ -451,11 +451,14 @@ export function CollectionPageSchema({ name, description, url }: { name: string;
 }
 
 export function FAQSchema({ questions, path }: { questions: { question: string; answer: string }[]; path?: string }) {
+  const validQuestions = questions.filter((q) => q.question.trim() && q.answer.trim())
+  if (validQuestions.length === 0) return null
+
   const schema = clean({
     "@context": ctx,
     "@type": "FAQPage",
     "@id": (path ? `${site.url}${path}` : `${site.url}/`) + "#faq",
-    mainEntity: questions.map((q) => ({
+    mainEntity: validQuestions.map((q) => ({
       "@type": "Question",
       name: q.question,
       acceptedAnswer: { "@type": "Answer", text: q.answer.replace(/<[^>]*>/g, "") },
