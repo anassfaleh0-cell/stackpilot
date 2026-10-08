@@ -17,7 +17,7 @@ import { EEATProcess } from "@/components/seo/editorial-process"
 import { InFeedAd } from "@/components/ads"
 
 export function generateStaticParams() {
-  return []
+  return getAllUseCases().map((item) => ({ slug: item.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
