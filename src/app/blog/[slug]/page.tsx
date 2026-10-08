@@ -16,8 +16,13 @@ import { BrandDivider } from "@/components/brand/patterns"
 import { Clock, User, Calendar, Star } from "lucide-react"
 import { InFeedAd } from "@/components/ads"
 
+export const dynamicParams = true
+export const revalidate = 86400
+
 export function generateStaticParams() {
-  return getAllBlogPosts().map((item) => ({ slug: item.slug }))
+  // Keep the full corpus indexable without forcing 2,000+ pages through every production build.
+  // Pages are rendered on first request and cached for 24h.
+  return []
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
