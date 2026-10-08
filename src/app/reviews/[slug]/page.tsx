@@ -50,9 +50,7 @@ function getVisibleReviewContent(content: ContentSection[]) {
 }
 
 export function generateStaticParams() {
-  // Render detail pages on demand so the full review corpus remains indexable
-  // without forcing every URL through each production build.
-  return []
+  return getAllReviews().map((item) => ({ slug: item.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
