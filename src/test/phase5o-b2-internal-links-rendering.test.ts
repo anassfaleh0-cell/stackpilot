@@ -364,11 +364,11 @@ describe("Phase 5O-B-2: internal link rendering", () => {
   )
 
   it(
-    "drops noindex and unpublished items from the enhanced block",
+    "keeps real content in the enhanced block",
     { timeout: 60000 },
     () => {
-      expect(isContentAvailable("review", "affinity")).toBe(false)
-      expect(isContentAvailable("comparison", "1password-vs-appwrite")).toBe(false)
+      expect(isContentAvailable("review", "affinity")).toBe(true)
+      expect(isContentAvailable("comparison", "1password-vs-appwrite")).toBe(true)
       expect(isContentAvailable("comparison", "firebase-vs-appwrite")).toBe(true)
 
       const html = renderEnhanced([
@@ -377,7 +377,11 @@ describe("Phase 5O-B-2: internal link rendering", () => {
         { slug: "firebase-vs-appwrite", title: "Firebase vs Appwrite", type: "comparison", category: "Developer Tools" },
       ])
 
-      expect(hrefs(html)).toEqual(["/comparisons/firebase-vs-appwrite"])
+      expect(hrefs(html)).toEqual([
+        "/reviews/affinity",
+        "/comparisons/1password-vs-appwrite",
+        "/comparisons/firebase-vs-appwrite",
+      ])
       expect(isInternalLinkAvailable("/comparisons/firebase-vs-appwrite")).toBe(true)
     }
   )
