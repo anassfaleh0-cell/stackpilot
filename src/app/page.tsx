@@ -54,7 +54,7 @@ export default function HomePage() {
               {" "}with confidence
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10 text-pretty">
-              Expert reviews, honest comparisons, and practical guides — every review scored against the same published rubric so you can choose with certainty.
+              Detailed reviews, practical comparisons, and useful guides — every review scored against the same published rubric so you can compare tools with more context.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
@@ -197,7 +197,7 @@ export default function HomePage() {
 
       <BrandDivider />
 
-      {/* ── Expert Guides ── */}
+      {/* ── Buying Guides ── */}
       {guides.length > 0 && (
         <Section className="py-0 sm:py-0 lg:py-0">
           <Container>
@@ -205,13 +205,13 @@ export default function HomePage() {
               <div>
                 <Badge variant="default" className="mb-4">Guides</Badge>
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-balance">
-                  Expert buying guides
+                  Practical buying guides
                 </h2>
               </div>
               <Link
                 href="/guides"
                 className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-                aria-label="View all expert buying guides"
+                aria-label="View all buying guides"
               >
                 View all <ArrowRight size={14} />
               </Link>
