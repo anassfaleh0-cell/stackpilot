@@ -31,8 +31,8 @@ describe("P5O: isIndexableUrl gates engine egress", () => {
     expect(isIndexableUrl(`${site.url}/guides/`)).toBe(true)
   })
 
-  it("rejects the non-www mirror, whose URLs all answer 308", () => {
-    expect(isIndexableUrl(`https://pilotstack.online/comparisons/gitlab-vs-bitbucket`)).toBe(false)
+  it("rejects the non-canonical www mirror and HTTP origin", () => {
+    expect(isIndexableUrl(`https://www.pilotstack.online/comparisons/gitlab-vs-bitbucket`)).toBe(false)
     expect(isIndexableUrl(`http://www.pilotstack.online/comparisons/gitlab-vs-bitbucket`)).toBe(false)
     expect(isIndexableUrl(`http://pilotstack.online/`)).toBe(false)
   })
