@@ -119,6 +119,15 @@ const GENERIC_LIST_ITEM_PATTERNS = [
   /^active user community$/i,
 ]
 
+const GENERIC_FAQ_ANSWER_PATTERNS = [
+  /based on our detailed comparison/i,
+  /our analysis incorporates thousands/i,
+  /hands-on assessments/i,
+  /after researching hundreds/i,
+  /we tested/i,
+  /our experts?/i,
+]
+
 const GENERIC_FAQ_PATTERNS = [
   /^what is the best .* software\??$/i,
   /^how much does .* software cost\??$/i,
@@ -138,6 +147,7 @@ function sanitizeFaqs(faqs: FAQItem[] | undefined): FAQItem[] {
     const key = question.toLowerCase().replace(/\s+/g, " ")
     if (!question || !answer || !question.endsWith("?") || seen.has(key)) continue
     if (GENERIC_FAQ_PATTERNS.some((pattern) => pattern.test(key))) continue
+    if (GENERIC_FAQ_ANSWER_PATTERNS.some((pattern) => pattern.test(answer))) continue
     if (answer.length < 40 || answer.length > 700) continue
     seen.add(key)
     cleaned.push({ question, answer })
