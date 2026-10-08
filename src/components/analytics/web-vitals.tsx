@@ -110,8 +110,8 @@ export function WebVitals() {
           sendToDataLayer({
             name: metricName,
             value: metricName === "INP" ? (duration || delay) : delay,
-            rating: getRating(metricName, delay),
-            delta: delay,
+            rating: getRating(metricName, metricName === "INP" ? (duration || delay) : delay),
+            delta: metricName === "INP" ? (duration || delay) : delay,
             id: String(e.id || ""),
           })
         }
