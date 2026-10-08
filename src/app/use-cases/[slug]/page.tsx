@@ -9,6 +9,7 @@ import { truncate, formatDate } from "@/lib/utils"
 import { InternalLinks } from "@/components/content/internal-links"
 import { RelatedReading } from "@/components/content/related-reading"
 import { notFound } from "next/navigation"
+import { isNoindexed } from "@/lib/noindex"
 import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, AlertTriangle, Lightbulb } from "lucide-react"
 import { EditorialHero, GlassCard, InfoCard } from "@/components/dynamic"
@@ -16,7 +17,7 @@ import { EEATProcess } from "@/components/seo/editorial-process"
 import { InFeedAd } from "@/components/ads"
 
 export function generateStaticParams() {
-  return getAllUseCases().map((u) => ({ slug: u.slug }))
+  return getAllUseCases().filter((u) => !isNoindexed("use-cases", u.slug)).map((u) => ({ slug: u.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!uc) return {}
   const readingTime = Math.max(5, Math.ceil((uc.description.split(/\s+/).length + uc.recommendations.length * 20) / 200))
   const shortTitle = uc.title.length > 58 ? uc.title.slice(0, 55) + "..." : uc.title
-  return createMetadata({ title: shortTitle, description: truncate(uc.description, 160), path: `/use-cases/${uc.slug}`, ogType: "article", publishedAt: uc.lastUpdated, updatedAt: uc.lastUpdated, articleSection: uc.category, readingTime })
+  return createMetadata({ title: shortTitle, description: truncate(uc.description, 160), path: `/use-cases/${uc.slug}`, ogType: "article", publishedAt: uc.lastUpdated, updatedAt: uc.lastUpdated, articleSection: uc.category, readingTime , noIndex: isNoindexed("use-cases", uc.slug) })
 }
 
 export default async function UseCasePage({ params }: { params: Promise<{ slug: string }> }) {
