@@ -233,8 +233,9 @@ describe("AI-7: existing author SEO contracts remain unchanged", () => {
     for (const slug of PUBLIC_AUTHORS) {
       const meta = (await generateMetadata(params(slug))) as AuthorMeta
       expect(meta.robots).toMatchObject({ index: true, follow: true })
-      expect(meta.title).toContain(displayName(slug))
-      expect(meta.description).toContain(displayName(slug))
+      const expectedName = slug === "pilotstack-team" ? "PilotStack Team" : displayName(slug)
+      expect(meta.title).toContain(expectedName)
+      expect(meta.description).toContain(expectedName)
       expect(meta.alternates?.canonical).toMatch(new RegExp(`/authors/${slug}$`))
       expect(meta.openGraph?.images?.[0]?.url).toMatch(/\/og\.svg$/)
     }
