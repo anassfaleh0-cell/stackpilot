@@ -125,10 +125,56 @@ function sanitizeList(items: string[] | undefined, max = 5): string[] {
     .slice(0, max)
 }
 
+function buildReviewEditorialAnalysis(review: ReviewContent): ContentSection[] {
+  const strengths = review.pros.slice(0, 3).join("; ")
+  const limitations = review.cons.slice(0, 3).join("; ")
+  const ratingNotes = review.ratings.slice(0, 5).map((r) => `${r.label}: ${r.score}/5`).join(", ")
+  const featureGroups = [...new Set(review.features.map((f) => f.category).filter(Boolean))].slice(0, 6).join(", ")
+  const audience = review.company?.targetUsers?.slice(0, 3).join(", ") || review.category
+  return [
+    {
+      title: "PilotStack decision analysis",
+      body: `${review.name} is easiest to evaluate by separating its strongest capabilities from the areas where its trade-offs matter. The current PilotStack record shows ${review.features.length} documented capabilities across ${featureGroups || "its core product areas"}. The category ratings are ${ratingNotes || "not available in the current record"}. This analysis is intended to help a buyer interpret the available evidence rather than treat the headline score as a universal recommendation.`,
+      type: "text",
+    },
+    {
+      title: "Where it fits",
+      body: `${review.name} is most relevant to ${audience}. The strongest recorded advantages are: ${strengths || "the capabilities listed in the feature matrix"}. Those strengths matter most when they map directly to the team's workflow, integrations and operating constraints.`,
+      type: "text",
+    },
+    {
+      title: "Trade-offs to check before choosing",
+      body: `The main limitations recorded for ${review.name} are: ${limitations || "no specific limitations are recorded yet"}. Before committing, buyers should validate the workflows that are hardest to change later, including data portability, permissions, integrations, usage limits and the total cost at the expected team size.`,
+      type: "text",
+    },
+  ]
+}
+
+function buildComparisonEditorialAnalysis(cmp: ComparisonContent): string {
+  const t1 = cmp.features.filter((f) => f.tool1 && !f.tool2).map((f) => f.name).slice(0, 4)
+  const t2 = cmp.features.filter((f) => f.tool2 && !f.tool1).map((f) => f.name).slice(0, 4)
+  const shared = cmp.features.filter((f) => f.tool1 && f.tool2).map((f) => f.name).slice(0, 4)
+  const parts = [
+    `This comparison covers ${cmp.features.length} decision factors. ${cmp.tool1} has the recorded advantage in ${t1.length ? t1.join(", ") : "no exclusive feature area in the current matrix"}, while ${cmp.tool2} leads in ${t2.length ? t2.join(", ") : "no exclusive feature area in the current matrix"}.`,
+    shared.length ? `Both products cover ${shared.join(", ")}, so those areas should be evaluated on workflow fit, implementation effort and the quality of each product's execution rather than feature-count alone.` : "",
+    cmp.winner ? `The stored overall result is ${cmp.winner}, but the practical choice still depends on which decision factors carry the most weight for the buyer.` : `There is no stored universal winner, which is appropriate when the trade-off depends on the buyer's priorities.`,
+  ]
+  return parts.filter(Boolean).join(" ")
+}
+
+function buildGuideEditorialSection(guide: GuideContent): GuideSection {
+  const tools = guide.relatedTools.slice(0, 5).map((slug) => slug.replace(/-/g, " ")).join(", ")
+  return {
+    title: "Practical decision checklist",
+    body: `Use this guide to make a decision, not just to collect definitions. Start with the workflow described above, write down the constraints that cannot be compromised, then test the shortlist against real tasks. ${tools ? `Relevant tools already connected to this guide include ${tools}.` : ""} Before adopting a platform, verify pricing at your expected usage, data export, permissions, integrations, onboarding effort and the fallback plan if the tool no longer fits.`,
+    type: "checklist",
+  }
+}
+
 function sanitizeReview(review: ReviewContent): ReviewContent {
   return {
     ...review,
-    content: sanitizeSections(review.content).filter((section) => !(section.type === "diagram" && !["pricing-ladder","feature-radar","implementation-flow"].includes(section.body))),
+    content: [...sanitizeSections(review.content).filter((section) => !(section.type === "diagram" && !["pricing-ladder","feature-radar","implementation-flow"].includes(section.body))), ...buildReviewEditorialAnalysis(review)],
     description: trimText(review.description, 700),
     tagline: trimText(review.tagline, 220),
     pros: sanitizeList(review.pros),
@@ -200,7 +246,7 @@ export function getComparison(slug: string): ComparisonContent | null {
   return {
     ...cmp,
     description: trimText(cmp.description, 700),
-    verdict: trimText(cmp.verdict, 1600),
+    verdict: trimText(`${cmp.verdict} ${buildComparisonEditorialAnalysis(cmp)}`, 2200),
     features: cmp.features.slice(0, 20).map((f) => ({ ...f, name: trimText(f.name, 140), tool1Detail: trimText(f.tool1Detail, 320), tool2Detail: trimText(f.tool2Detail, 320) })),
     faqs: sanitizeFaqs(cmp.faqs),
   }
@@ -216,12 +262,12 @@ export function getGuide(slug: string): GuideContent | null {
   const file = path.join(CONTENT_DIR, "guides", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const guide = readJson<GuideContent>(file)
-  return { ...guide, sections: sanitizeSections(guide.sections), faqs: sanitizeFaqs(guide.faqs) }
+  return { ...guide, sections: [...sanitizeSections(guide.sections), buildGuideEditorialSection(guide)], faqs: sanitizeFaqs(guide.faqs) }
 }
 
 export function getAllGuides(): GuideContent[] {
   return readDir(path.join(CONTENT_DIR, "guides"))
-    .map((f) => { const g = readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)); return { ...g, sections: sanitizeSections(g.sections), faqs: sanitizeFaqs(g.faqs) } })
+    .map((f) => { const g = readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)); return { ...g, sections: [...sanitizeSections(g.sections), buildGuideEditorialSection(g)], faqs: sanitizeFaqs(g.faqs) } })
 }
 
 export function getGlossaryTerm(slug: string): GlossaryContent | null {
