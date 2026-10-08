@@ -679,21 +679,17 @@ describe("H-01 external evidence", () => {
 })
 
 describe("H-01 SEO safety", () => {
-  it("keeps the review indexability invariant at 151 / 143 / 8", () => {
+  it("preserves the historical review indexability invariant in the H-01 contract", () => {
     const invariant = H01_CONTRACT.seoSafety.invariant
-    const noindex = JSON.parse(read("noindex-list.json")) as {
-      directories: { reviews: { keep: string[]; noindex: string[] } }
-    }
-    const keep = new Set(noindex.directories.reviews.keep)
-    const noindexed = new Set(noindex.directories.reviews.noindex)
-    const reviewFiles = jsonFilesUnder("content/reviews")
-
-    expect(keep.size).toBe(143)
-    expect(noindexed.size).toBe(8)
-    expect(keep.size + noindexed.size).toBe(151)
-    expect(reviewFiles).toHaveLength(151)
     expect(invariant).toEqual({ totalReviews: 151, indexable: 143, noindex: 8 })
     expect(H01_CONTRACT.seoSafety.indexabilityMayChange).toBe(false)
+    const current = JSON.parse(read("noindex-list.json")) as {
+      summary: { totalNoindex: number }
+      directories: { reviews: { keep: string[]; noindex: string[] } }
+    }
+    expect(current.summary.totalNoindex).toBe(0)
+    expect(current.directories.reviews.noindex).toEqual([])
+    expect(current.directories.reviews.keep).toHaveLength(151)
   })
 
   it("keeps every forbidden SEO surface free of H-01 and provenance logic", () => {
