@@ -26,7 +26,7 @@ export default function TeamPage() {
             <Badge variant="default" className="mb-4">Our People</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Meet the PilotStack Team</h1>
             <p className="text-lg text-muted-foreground text-pretty mb-8">
-              PilotStack is run by a small, independent team. Editorial roles are published on our{" "}
+              PilotStack is maintained by a small editorial team. Editorial roles are published on our{" "}
               <Link href="/authors">authors</Link> pages, and the process behind every score is public.
             </p>
             <Card className="p-6">
@@ -38,10 +38,9 @@ export default function TeamPage() {
                 </div>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                Every page on PilotStack follows our published methodology: nine recorded category
-                scores on a 1-5 scale with the overall rating as their mean, one recorded source per
-                figure reused everywhere a tool appears, and no unsourced fact stated as confirmed.
-                We don&apos;t accept payment for coverage.
+                PilotStack publishes its scoring and sourcing methodology so readers can understand how pages are structured.
+                Commercial relationships, including affiliate relationships or advertising where applicable, are
+                disclosed and are not intended to determine editorial scores or conclusions.
               </p>
               <Link href="/methodology" className="text-sm text-primary hover:underline">
                 Read our full methodology →
