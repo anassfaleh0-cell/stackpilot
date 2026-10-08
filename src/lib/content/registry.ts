@@ -125,6 +125,18 @@ function sanitizeList(items: string[] | undefined, max = 5): string[] {
     .slice(0, max)
 }
 
+function buildGlossaryAnalysis(term: GlossaryContent): string {
+  const examples = term.examples?.slice(0, 3).join("; ")
+  const related = term.relatedTerms.slice(0, 5).join(", ")
+  return `In practical software decisions, ${term.term} is useful when a buyer or team needs to understand how a system works before comparing vendors. ${examples ? `Examples include: ${examples}.` : ""} Related concepts worth checking are ${related || "the related terms listed on this page"}.`
+}
+
+function buildBlogEditorialNote(blog: BlogContent): string {
+  const tags = blog.tags.slice(0, 5).join(", ")
+  const related = blog.relatedPosts.slice(0, 3).map((s) => s.replace(/-/g, " ")).join(", ")
+  return `This PilotStack article focuses on ${blog.category.toLowerCase()} and is intended to help readers make a practical software decision. The page's topic tags are ${tags || "not specified"}. ${related ? `Related reading includes ${related}.` : ""} Use the article's recommendations alongside current vendor documentation before making a purchase decision.`
+}
+
 function buildUseCaseAnalysis(useCase: UseCaseContent): string {
   const names = useCase.recommendations.slice(0, 5).map((r) => r.toolName).join(", ")
   const criteria = useCase.selectionCriteria.slice(0, 5).map((r) => r.factor).join(", ")
@@ -323,24 +335,28 @@ export function getAllGuides(): GuideContent[] {
 export function getGlossaryTerm(slug: string): GlossaryContent | null {
   const file = path.join(CONTENT_DIR, "glossary", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<GlossaryContent>(file)
+  const term = readJson<GlossaryContent>(file)
+  term.extendedDefinition = trimText(`${term.extendedDefinition} ${buildGlossaryAnalysis(term)}`, 2200)
+  return term
 }
 
 export function getAllGlossaryTerms(): GlossaryContent[] {
   return readDir(path.join(CONTENT_DIR, "glossary"))
-    .map((f) => readJson<GlossaryContent>(path.join(CONTENT_DIR, "glossary", f)))
+    .map((f) => { const t = readJson<GlossaryContent>(path.join(CONTENT_DIR, "glossary", f)); t.extendedDefinition = trimText(`${t.extendedDefinition} ${buildGlossaryAnalysis(t)}`, 2200); return t })
     .sort((a, b) => a.term.localeCompare(b.term))
 }
 
 export function getBlogPost(slug: string): BlogContent | null {
   const file = path.join(CONTENT_DIR, "blog", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<BlogContent>(file)
+  const blog = readJson<BlogContent>(file)
+  blog.body = trimText(`${blog.body}\n\n${buildBlogEditorialNote(blog)}`, 7000)
+  return blog
 }
 
 export function getAllBlogPosts(): BlogContent[] {
   return readDir(path.join(CONTENT_DIR, "blog"))
-    .map((f) => readJson<BlogContent>(path.join(CONTENT_DIR, "blog", f)))
+    .map((f) => { const b = readJson<BlogContent>(path.join(CONTENT_DIR, "blog", f)); b.body = trimText(`${b.body}\n\n${buildBlogEditorialNote(b)}`, 7000); return b })
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
 }
 
