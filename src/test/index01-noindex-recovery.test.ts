@@ -20,9 +20,9 @@ describe("site-wide content indexability policy", () => {
       ["best", "best-crm-software"],
       ["use-cases", "best-crm-for-small-business"],
       ["industries", "telecommunications"],
-      ["research", "software-pricing-trends-2026"],
+      ["research", "saas-pricing-benchmark-2026"],
       ["statistics", "blockchain-software"],
-      ["hubs", "software-for-remote-teams"],
+      ["hubs", "software-for-startups"],
       ["blog", "content-marketing-platforms"],
     ] as const
     for (const [dir, slug] of samples) {
