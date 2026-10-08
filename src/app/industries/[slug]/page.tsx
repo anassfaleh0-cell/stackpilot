@@ -115,6 +115,31 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                 </section>
               ))}
 
+              <section className="mb-10">
+                <h2 className="text-2xl font-bold tracking-tight mb-4">Industry buying checklist</h2>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  For {ind.industry} teams, the shortlist should be tested against the operational requirements recorded on this page rather than against a generic feature count. Start with {ind.softwareNeeds.slice(0, 3).join(", ") || "the core workflow requirements"} and then compare how each recommended product fits the actual people, processes, data, and integrations involved.
+                </p>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <GlassCard>
+                    <div className="p-4">
+                      <h3 className="font-semibold text-sm mb-2">Validate before purchase</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        Confirm the highest-risk workflow, integration, permissions, reporting, and migration requirements with current vendor documentation or a representative trial. Record any requirement that still needs a workaround.
+                      </p>
+                    </div>
+                  </GlassCard>
+                  <GlassCard>
+                    <div className="p-4">
+                      <h3 className="font-semibold text-sm mb-2">Compare total effort</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        Compare subscription cost alongside implementation, training, administration, integration work, and the time required for users to adopt the new workflow. The lowest headline price is not automatically the lowest total cost.
+                      </p>
+                    </div>
+                  </GlassCard>
+                </div>
+              </section>
+
               {ind.implementationTips.length > 0 && (
                 <section className="mb-10 p-5 rounded-xl border border-success/20 bg-success-subtle/10">
                   <div className="flex items-center gap-2 mb-3">
