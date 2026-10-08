@@ -57,7 +57,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const reviews = getAllReviews().filter((r) => isQuality(r.slug, "reviews"))
   const comparisons = getAllComparisons().filter((c) => isQuality(c.slug, "comparisons"))
   const guides = getAllGuides().filter((g) => isQuality(g.slug, "guides"))
-  const blogPosts = getAllBlogPosts().filter((p) => p.body.split(/\s+/).filter(Boolean).length >= 600)
+  const blogPosts = getAllBlogPosts()
   const glossary = getAllGlossaryTerms().filter((t) => isQuality(t.slug, "glossary"))
   const alternatives = getAllAlternatives().filter((a) => isQuality(a.slug, "alternatives"))
   const useCases = getAllUseCases().filter((u) => isQuality(u.slug, "use-cases"))
