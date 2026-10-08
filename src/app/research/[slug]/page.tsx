@@ -14,7 +14,7 @@ import { InFeedAd } from "@/components/ads"
 import { isNoindexed } from "@/lib/noindex"
 
 export function generateStaticParams() {
-  return []
+  return getAllResearch().map((item) => ({ slug: item.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
