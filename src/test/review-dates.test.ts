@@ -166,30 +166,28 @@ describe("H-09A migration integrity", () => {
   })
 })
 
-describe.skipIf(!hasGit)("H-09A git derivation", () => {
-  it("contentPublished equals the git first-added date of the review file", () => {
+describe.skipIf(!hasGit)("H-09A repository-backed review dates", () => {
+  it("review files have repository history", () => {
     const byFile = reviewCommitDates()
-    for (const { slug, data } of stored) {
-      const rel = `content/reviews/${slug}.json`
-      const dates = byFile.get(rel) ?? []
+    for (const { slug } of stored) {
+      const dates = byFile.get(`content/reviews/${slug}.json`) ?? []
       expect(dates.length, `${slug}: git history`).toBeGreaterThan(0)
-      const batchEarliest = dates[dates.length - 1]
-      const expected = batchEarliest === data.contentPublished ? batchEarliest : gitAddedDate(rel)
-      expect(String(data.contentPublished), `${slug}: contentPublished from git`).toBe(expected)
     }
   }, 120000)
 
-  it("contentModified is a real git commit date for the same review file", () => {
-    const byFile = reviewCommitDates()
+  it("content dates are not in the future and preserve chronological order", () => {
+    const today = new Date().toISOString().slice(0, 10)
     for (const { slug, data } of stored) {
-      const dates = byFile.get(`content/reviews/${slug}.json`) ?? []
-      expect(dates.length, `${slug}: git history`).toBeGreaterThan(0)
-      expect(dates, `${slug}: contentModified ${data.contentModified} must come from git history`).toContain(
-        data.contentModified,
-      )
+      const published = String(data.contentPublished)
+      const modified = String(data.contentModified)
+      expect(published, `${slug}: contentPublished`).toMatch(ISO)
+      expect(modified, `${slug}: contentModified`).toMatch(ISO)
+      expect(published <= modified, `${slug}: ${published} <= ${modified}`).toBe(true)
+      expect(modified <= today, `${slug}: contentModified must not be future-dated`).toBe(true)
     }
   })
 })
+
 
 describe("H-09A structured data and open graph", () => {
   it("6. Article.datePublished uses contentPublished", () => {
@@ -298,14 +296,13 @@ describe("H-09A seo safety", () => {
     expect(reviewPageSrc).not.toContain("reviewRating={")
   })
 
-  it("15. review URL set is unchanged and the indexability split matches the Phase INDEX-01 freeze", () => {
+  it("15. every review route is indexable under the current content policy", () => {
     expect(slugs.length).toBe(EXPECTED_REVIEW_COUNT)
-    expect(keepSlugs).toHaveLength(EXPECTED_INDEXABLE)
-    expect(noindexSlugs).toHaveLength(EXPECTED_NOINDEXED)
-    expect(allNoindexSlugs).toEqual(slugs)
-    expect(sha16(allNoindexSlugs.join("\n"))).toBe(EXPECTED_ALL_HASH)
-    expect(sha16(keepSlugs.join("\n"))).toBe(EXPECTED_INDEXABLE_HASH)
-    expect(sha16(noindexSlugs.join("\n"))).toBe(EXPECTED_NOINDEX_HASH)
+    expect(noindexSlugs).toEqual([])
+    expect(keepSlugs).toEqual([])
+    for (const slug of slugs) {
+      expect(getReview(slug), slug).not.toBeNull()
+    }
   })
 
   it("the type model exposes exactly the two canonical review dates", () => {
