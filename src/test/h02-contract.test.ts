@@ -369,9 +369,6 @@ describe("H-02 Phase INDEX-01 recovery record", () => {
   })
 })
 
-describe("H-02 Phase INDEX-02A wave 1 recovery record"  })
-})
-
 describe("H-02 Phase INDEX-02A wave 1 recovery record", () => {
   it("records exactly 31 approved slugs across two families", () => {
     const slugs = H02_INDEX02A_RECOVERY.slugs
@@ -402,9 +399,6 @@ describe("H-02 Phase INDEX-02A wave 1 recovery record", () => {
       expect(recovery.after.noindex[family]).toBe(recovery.baseline.noindex[family] - recovery.slugs[family].length)
     }
   })
-})
-
-describe("H-02 Phase INDEX-02A wave 2 recovery record"  })
 })
 
 describe("H-02 Phase INDEX-02A wave 2 recovery record", () => {
