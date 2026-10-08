@@ -8,7 +8,7 @@ const steps = [
   { icon: <ListChecks size={14} />, label: "Consistency", description: "The same figure is used wherever a tool appears, so ratings and review counts agree across the site." },
   { icon: <Calendar size={14} />, label: "Dating", description: "Every page shows the date it was last reviewed." },
   { icon: <CheckCircle2 size={14} />, label: "Limits", description: "Facts we cannot source are left off the page or marked unverified rather than stated as confirmed." },
-  { icon: <Shield size={14} />, label: "Independence", description: "No vendor can pay for placement or influence ratings." },
+  { icon: <Shield size={14} />, label: "Editorial separation", description: "Commercial relationships do not determine editorial ratings, rankings, or inclusion criteria." },
 ]
 
 export function EEATProcess({ category }: { category?: string }) {
