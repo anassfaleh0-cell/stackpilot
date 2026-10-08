@@ -55,6 +55,12 @@ const GENERIC_BOILERPLATE_PATTERNS = [
   /week 1: discovery, planning, requirements gathering/i,
   /weighted criteria: features 25%, ease of use 20%/i,
   /cloud-native deployment on aws\/gcp\/azure/i,
+  /hands-on testing/i,
+  /tested for at least two weeks/i,
+  /based on our testing methodology/i,
+  /this review is based on hands-on testing/i,
+  /we verify our hands-on testing/i,
+  /tested in realistic workflows by our team/i,
 ]
 
 const GENERIC_LIST_ITEM_PATTERNS = [
