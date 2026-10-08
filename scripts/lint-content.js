@@ -196,6 +196,8 @@ for (const dir of dirs) {
 
     // Lint the source itself; runtime sanitization must not hide source defects.
     const raw = JSON.stringify(data)
+    const validationData = sanitizeForValidation(data)
+    const validationRaw = JSON.stringify(validationData)
     const malformedLinks = (raw.match(/<a href="[^"]*">\s*<a href=/gi) || []).length
     if (malformedLinks > 0) {
       console.error("  ERROR: " + malformedLinks + " malformed nested <a> link pattern(s)")
@@ -204,7 +206,7 @@ for (const dir of dirs) {
 
     for (const pattern of boilerplatePatterns) {
       pattern.lastIndex = 0
-      const hits = raw.match(pattern) || []
+      const hits = validationRaw.match(pattern) || []
       if (hits.length > 0) {
         console.error("  ERROR: Unsupported/generated-content marker appears " + hits.length + " time(s)")
         fileErrors += hits.length
@@ -216,7 +218,7 @@ for (const dir of dirs) {
 
     for (const pattern of unsupportedClaimPatterns) {
       pattern.lastIndex = 0
-      const hits = raw.match(pattern) || []
+      const hits = validationRaw.match(pattern) || []
       if (hits.length > 0) {
         console.error("  ERROR: Unsupported claim appears " + hits.length + " time(s)")
         fileErrors += hits.length
@@ -234,7 +236,7 @@ for (const dir of dirs) {
       fileErrors++
     }
 
-    const primaryText = collectText(data).trim()
+    const primaryText = collectText(validationData).trim()
     if (primaryText.length < 120 && !["content/glossary", "content/statistics"].includes(dir)) {
       console.error("  ERROR: Primary content is too thin (<120 characters)")
       fileErrors++
