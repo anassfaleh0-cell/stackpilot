@@ -41,10 +41,10 @@ export default function CookiesPage() {
             </ul>
 
             <h3>Analytics Cookies</h3>
-            <p>We use privacy-preserving analytics to understand how visitors interact with our site. These cookies collect aggregated, anonymized data and do not identify individual users.</p>
+            <p>We use analytics tools, including Google Analytics and Microsoft Clarity, to understand how visitors interact with our site. These services may process usage and device information according to their own privacy policies and are loaded only after analytics consent.</p>
             <ul>
               <li><strong>Google Analytics 4 (GA4):</strong> Collects anonymized page views, session duration, and traffic source data. IP addresses are anonymized. Data retained for 26 months. <em>Opt-out available via <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out browser add-on</a>.</em></li>
-              <li><strong>Microsoft Clarity:</strong> Provides anonymized session replays and heatmaps to help us understand how users navigate the site. Does not capture keystrokes, passwords, or personally identifiable information. <em>Opt-out available via the <a href="https://privacy.microsoft.com/en-US/privacystatement" target="_blank" rel="noopener">Microsoft Privacy Statement</a>.</em></li>
+              <li><strong>Microsoft Clarity:</strong> Provides session-replay and heatmap features to help us understand how users navigate the site. We configure it for analytics use and do not intentionally use it to collect passwords or other sensitive form data. <em>Opt-out available via the <a href="https://privacy.microsoft.com/en-US/privacystatement" target="_blank" rel="noopener">Microsoft Privacy Statement</a>.</em></li>
             </ul>
 
             <h3>Third-Party Cookies</h3>
@@ -52,7 +52,7 @@ export default function CookiesPage() {
             <ul>
               <li><strong>Google AdSense:</strong> If you consent to advertising cookies, Google AdSense may use cookies to serve personalized ads based on your browsing history. You can opt out via <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a> or <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener">www.aboutads.info</a>.</li>
               <li><strong>Vercel Analytics:</strong> Edge network analytics — privacy-friendly, cookie-less by default for basic metrics.</li>
-              <li><strong>Monetization scripts:</strong> Our ad and affiliate partners may set cookies to track impressions and clicks. These are third-party controlled and their use is governed by their respective privacy policies. We require all partners to comply with GDPR and ePrivacy regulations.</li>
+              <li><strong>Monetization scripts:</strong> Our ad and affiliate partners may set cookies to track impressions and clicks. These are third-party controlled and their use is governed by their respective privacy policies. Third-party partners may have their own privacy and consent requirements, which are described in their respective policies.</li>
             </ul>
 
             <h2>How We Use Cookie Data</h2>
