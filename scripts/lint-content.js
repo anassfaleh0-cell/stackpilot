@@ -157,29 +157,9 @@ const unsupportedClaimPatterns = [
   /independently evaluated and would recommend/gi,
   /evaluated under the same conditions as/gi,
 ]
-function sanitizeForValidation(value) {
-  if (typeof value === "string") {
-    return value
-      .split("\n")
-      .map((line) =>
-        line
-          .split(/(?<=[.!?])\s+/)
-          .filter((sentence) => {
-            const allPatterns = [...boilerplatePatterns, ...unsupportedClaimPatterns]
-            return !allPatterns.some((pattern) => {
-              pattern.lastIndex = 0
-              return pattern.test(sentence)
-            })
-          })
-          .join(" ")
-      )
-      .join("\n")
-  }
-  if (Array.isArray(value)) return value.map(sanitizeForValidation)
-  if (value && typeof value === "object") {
-    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, sanitizeForValidation(v)]))
-  }
-  return value
+function describeMatches(raw, pattern) {
+  pattern.lastIndex = 0
+  return (raw.match(pattern) || []).slice(0, 3).map((match) => match.slice(0, 180))
 }
 
 for (const dir of dirs) {
@@ -208,7 +188,7 @@ for (const dir of dirs) {
       pattern.lastIndex = 0
       const hits = validationRaw.match(pattern) || []
       if (hits.length > 0) {
-        console.error("  ERROR: Unsupported/generated-content marker appears " + hits.length + " time(s)")
+        console.error("  ERROR: Unsupported/generated-content marker appears " + hits.length + " time(s): " + describeMatches(validationRaw, pattern).map((m) => JSON.stringify(m)).join(" | "))
         fileErrors += hits.length
       }
     }
@@ -220,7 +200,7 @@ for (const dir of dirs) {
       pattern.lastIndex = 0
       const hits = validationRaw.match(pattern) || []
       if (hits.length > 0) {
-        console.error("  ERROR: Unsupported claim appears " + hits.length + " time(s)")
+        console.error("  ERROR: Unsupported claim appears " + hits.length + " time(s): " + describeMatches(validationRaw, pattern).map((m) => JSON.stringify(m)).join(" | "))
         fileErrors += hits.length
       }
     }
