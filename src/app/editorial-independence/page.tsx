@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Editorial Independence",
-  description: "PilotStack operates with complete editorial independence. No vendor, advertiser, or affiliate partner influences our reviews, ratings, or recommendations.",
+  description: "PilotStack separates editorial guidance from commercial relationships. Commercial relationships are disclosed where applicable and are not intended to determine reviews, ratings, or recommendations.",
   path: "/editorial-independence",
 })
 
@@ -34,10 +34,10 @@ export default function EditorialIndependencePage() {
 
               <div className="space-y-6 mb-8">
                 {[
-                  { title: "No Paid Reviews", body: "We never accept payment for reviews or rankings. No vendor can pay to be included in our reviews, receive a higher rating, or be excluded from comparison tables." },
+                  { title: "No Paid Reviews", body: "We do not sell editorial ratings or rankings. Commercial relationships are disclosed and are not intended to determine whether a tool is covered or how it is rated." },
                   { title: "No Vendor Approval", body: "Vendors do not review or approve our content before publication. Our reviews are written for our readers, not for the companies we evaluate." },
                   { title: "No Editorial Influence", body: "No advertiser, sponsor, or affiliate partner has any influence over our editorial decisions, including which products we review, how we rate them, or what we write." },
-                  { title: "No Review Copies", body: "We do not accept review copies, free trials, or premium access in exchange for coverage. Our reviewers evaluate tools under the same conditions as paying customers unless temporary access is the only available option (clearly noted in the review)." },
+                  { title: "No Review Copies", body: "Access arrangements can vary by product. Where access, pricing, or promotional relationships could affect how a page is interpreted, relevant context is disclosed." },
                   { title: "Transparent Disclosure", body: "We clearly disclose all affiliate relationships, sponsored content, and partnerships. Sponsored content is clearly labeled and never included in our comparison reviews." },
                   { title: "Reader First", body: "Every editorial decision is made with our readers' interests as the primary consideration. If we cannot recommend a product honestly, we say so plainly." },
                 ].map((principle) => (
@@ -65,7 +65,7 @@ export default function EditorialIndependencePage() {
                 <li><strong>Sponsored content:</strong> Clearly labeled content produced in partnership with sponsors. Never included in reviews or comparisons.</li>
                 <li><strong>Newsletter sponsorships:</strong> Clearly marked sponsored placements in our email newsletter.</li>
               </ul>
-              <p>No revenue source influences our editorial content. Our full <a href="/affiliate-disclosure">Affiliate Disclosure</a> and <a href="/advertising-disclosure">Advertising Disclosure</a> provide detailed information.</p>
+              <p>Commercial relationships are intended to remain separate from editorial scoring and conclusions. Our full <a href="/affiliate-disclosure">Affiliate Disclosure</a> and <a href="/advertising-disclosure">Advertising Disclosure</a> provide detailed information.</p>
 
               <h2>Accountability</h2>
               <p>We welcome scrutiny of our editorial independence. If you believe any content on PilotStack has been influenced by commercial relationships, please report it immediately to <strong>editorial@pilotstack.online</strong>. We investigate all reports and take corrective action if warranted.</p>
