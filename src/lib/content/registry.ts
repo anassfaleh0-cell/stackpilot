@@ -491,7 +491,16 @@ export function getAlternative(slug: string): AlternativeContent | null {
   const file = path.join(CONTENT_DIR, "alternatives", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const alt = readJson<AlternativeContent>(file)
-  const cleaned = { ...alt, title: sanitizeAlternativeTitle(alt.title, alt.toolName, alt.alternatives.length), description: sanitizeAlternativeDescription(alt.description, alt.toolName, alt.alternatives.length), sections: buildAlternativeSections(alt), faqs: sanitizeFaqs(alt.faqs) }
+  const alternatives = Array.isArray(alt.alternatives) ? alt.alternatives : []
+  const cleaned = {
+    ...alt,
+    alternatives,
+    selectionCriteria: Array.isArray(alt.selectionCriteria) ? alt.selectionCriteria : [],
+    title: sanitizeAlternativeTitle(alt.title, alt.toolName, alternatives.length),
+    description: sanitizeAlternativeDescription(alt.description, alt.toolName, alternatives.length),
+    sections: buildAlternativeSections(alt),
+    faqs: sanitizeFaqs(alt.faqs),
+  }
   return cleaned
 }
 
