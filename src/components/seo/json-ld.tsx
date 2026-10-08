@@ -399,27 +399,23 @@ export function ReviewSchema({ name, description, rating, url, datePublished, bo
 }) {
   const schema = clean({
     "@context": ctx,
-    "@type": "Product",
-    "@id": url + "#product",
-    name,
-    description,
-    url,
-    ...(image ? { image: { "@type": "ImageObject", url: image } } : {}),
-    brand: { "@type": "Brand", name },
-    ...(companyInfo?.founded ? { brand: { "@type": "Brand", name, foundingDate: `${companyInfo.founded}-01-01` } } : {}),
-    ...(companyInfo?.headquarters ? { countryOfOrigin: companyInfo.headquarters } : {}),
-    review: {
-      "@type": "Review",
-      "@id": url + "#review",
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: rating,
-        bestRating: 5,
-        worstRating: 1,
-      },
-      author: organizationRef(),
-      datePublished: datePublished || undefined,
-      reviewBody: body || undefined,
+    "@type": "Review",
+    "@id": url + "#review",
+    name: `${name} Review`,
+    reviewBody: body || description,
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: rating,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    author: organizationRef(),
+    datePublished: datePublished || undefined,
+    itemReviewed: {
+      "@type": "SoftwareApplication",
+      name,
+      url,
+      image: { "@type": "ImageObject", url: image || `${site.url}/og.svg` },
     },
   })
   return ld(schema, "ld-review")
