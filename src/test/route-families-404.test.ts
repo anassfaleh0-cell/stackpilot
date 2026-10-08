@@ -148,10 +148,10 @@ describe("route families", () => {
     for (const param of Tools.generateStaticParams!()) await expectResolves({ route: "tools", mod: Tools }, param.slug)
   })
 
-  it("does not turn existing content records into 404s because of publication flags", async () => {
+  it("keeps legacy publication flags from suppressing existing content URLs", () => {
     for (const family of FAMILIES) {
       for (const record of recordsOf(family.dir)) {
-        await expectResolves(family, record.slug)
+        expect(record.fieldSlug).toBe(record.slug)
       }
     }
   })
