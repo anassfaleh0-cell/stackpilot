@@ -65,9 +65,9 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
   const author = authors[slug as keyof typeof authors]
   if (!author) notFound()
 
-  const allReviews = getAllReviews().filter((r) => r.author === author.name)
-  const allGuides = getAllGuides().filter((g) => g.author === author.name)
-  const allPosts = getAllBlogPosts().filter((p) => p.author === author.name)
+  const allReviews = getAllReviews()
+  const allGuides = getAllGuides()
+  const allPosts = getAllBlogPosts()
 
   return (
     <>
