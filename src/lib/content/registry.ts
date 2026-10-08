@@ -252,19 +252,48 @@ export function getAllReviews(): ReviewContent[] {
     .sort((a, b) => b.rating - a.rating)
 }
 
+function normalizeComparisonWinner(value: string | null, tool1: string, tool2: string): string | null {
+  if (!value) return null
+  if (value.toLowerCase() === tool1.toLowerCase()) return tool1
+  if (value.toLowerCase() === tool2.toLowerCase()) return tool2
+  return null
+}
+
+function buildComparisonNarrative(tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
+  const exclusive1 = features.filter((f) => Boolean(f.tool1) && !Boolean(f.tool2)).map((f) => f.name)
+  const exclusive2 = features.filter((f) => Boolean(f.tool2) && !Boolean(f.tool1)).map((f) => f.name)
+  const shared = features.filter((f) => Boolean(f.tool1) && Boolean(f.tool2)).length
+  const winnerLine = winner ? winner + " is the recorded winner in this dataset." : "The dataset does not record a clear overall winner."
+  const lead1 = exclusive1.length ? tool1 + " leads on " + exclusive1.slice(0, 3).join(", ") + (exclusive1.length > 3 ? ", and more." : ".") : tool1 + " has no exclusive criteria in the recorded feature set."
+  const lead2 = exclusive2.length ? tool2 + " leads on " + exclusive2.slice(0, 3).join(", ") + (exclusive2.length > 3 ? ", and more." : ".") : tool2 + " has no exclusive criteria in the recorded feature set."
+  return winnerLine + " The page compares " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, with " + shared + " criteria marked as available for both tools. " + lead1 + " " + lead2 + " Use the feature rows, pricing information, and linked reviews to validate the areas that matter most to your workflow. This page reflects the data stored in PilotStack and does not claim hands-on product testing unless a source is explicitly identified elsewhere on the page."
+}
+
+function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
+  const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
+  if (cleaned.length >= 80 && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(cleaned)) return trimText(cleaned, 700)
+  return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the recorded overall winner." : "The dataset records no single overall winner.") + " Read the detailed rows and linked reviews before making a decision.", 700)
+}
 export function getComparison(slug: string): ComparisonContent | null {
   const file = path.join(CONTENT_DIR, "comparisons", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const cmp = readJson<ComparisonContent>(file)
+  const features = cmp.features.slice(0, 20).map((f) => ({
+    ...f,
+    name: trimText(f.name, 140),
+    tool1Detail: sanitizeUnsupportedClaims(trimText(f.tool1Detail, 320)),
+    tool2Detail: sanitizeUnsupportedClaims(trimText(f.tool2Detail, 320)),
+  }))
+  const winner = normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2)
   return {
     ...cmp,
-    description: trimText(cmp.description, 700),
-    verdict: trimText(cmp.verdict, 1600),
-    features: cmp.features.slice(0, 20).map((f) => ({ ...f, name: trimText(f.name, 140), tool1Detail: trimText(f.tool1Detail, 320), tool2Detail: trimText(f.tool2Detail, 320) })),
+    winner,
+    description: sanitizeComparisonDescription(cmp.description, cmp.tool1, cmp.tool2, features, winner),
+    verdict: buildComparisonNarrative(cmp.tool1, cmp.tool2, features, winner),
+    features,
     faqs: sanitizeFaqs(cmp.faqs),
   }
 }
-
 export function getAllComparisons(): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
     .map((f) => { const c = readJson<ComparisonContent>(path.join(CONTENT_DIR, "comparisons", f)); c.faqs = sanitizeFaqs(c.faqs); return c })
