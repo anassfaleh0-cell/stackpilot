@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "How We Evaluate Software | PilotStack Process",
-  description: "How every PilotStack page is produced: which sources we draw from, the nine recorded category scores behind each rating, what we omit when a fact has no source, and how we stay independent.",
+  description: "How PilotStack pages are produced: which sources we draw from, the nine recorded category scores behind each rating, what we omit when a fact has no source, and how we stay independent.",
   path: "/how-we-test-software",
 })
 
@@ -76,7 +76,7 @@ export default function HowWeTestSoftwarePage() {
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                Every PilotStack page runs through five stages: selection, sourcing, scoring, consistency, and upkeep. Each tool carries nine recorded category scores on a 1-5 scale, and the overall rating on a page is their mean rounded to one decimal. Figures come from sources we hold; facts without a source are omitted or marked unverified. We never accept payment for coverage.
+                Every PilotStack page runs through five stages: selection, sourcing, scoring, consistency, and upkeep. Each tool carries nine recorded category scores on a 1-5 scale, and the overall rating on a page is their mean rounded to one decimal. Figures come from sources we hold; facts without a source are omitted or marked unverified. Commercial relationships are disclosed where applicable and are not intended to determine coverage.
               </p>
             </div>
 
@@ -87,14 +87,14 @@ export default function HowWeTestSoftwarePage() {
                 <li>Nine equally weighted category scores on a 1-5 scale; overall is their mean</li>
                 <li>One recorded source per figure, reused everywhere a tool appears</li>
                 <li>Unsourced facts are omitted or shown as unverified — never asserted</li>
-                <li>No vendor payments, previews, or influence on ratings</li>
+                <li>Commercial relationships do not determine ratings</li>
               </ul>
             </div>
 
             <div className="key-takeaways mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Key Takeaways</h2>
               <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                <li>Coverage is chosen on reader need, not vendor payment</li>
+                <li>Coverage is guided by reader usefulness and editorial priorities</li>
                 <li>Ratings are arithmetic you can check on any review page</li>
                 <li>Conflicting internal sources result in no published value, not a guess</li>
                 <li>Certification statuses without a source read as &quot;not verified&quot;</li>
@@ -128,7 +128,7 @@ export default function HowWeTestSoftwarePage() {
 
               <h2>What We Do Not Do</h2>
               <ul>
-                <li>We do not accept payment for reviews, ratings or placement</li>
+                <li>We do not sell editorial ratings or placement</li>
                 <li>We do not allow vendors to preview or approve pages before publication</li>
                 <li>We do not accept review copies or premium access in exchange for coverage</li>
                 <li>We do not publish a figure we cannot tie to a source we hold</li>
