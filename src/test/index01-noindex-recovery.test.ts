@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest"
+import fs from "node:fs"
 import { isNoindexed } from "@/lib/noindex"
 import { getContentTitle } from "@/lib/content/registry"
 import sitemap from "@/app/sitemap"
@@ -9,7 +10,7 @@ const SITE = "https://www.pilotstack.online"
 
 describe("site-wide content indexability policy", () => {
   it("does not noindex real content records", () => {
-    const manifest = JSON.parse(require("node:fs").readFileSync("noindex-list.json", "utf8")) as { directories: Record<string, { keep?: string[]; noindex?: string[] }> }
+    const manifest = JSON.parse(fs.readFileSync("noindex-list.json", "utf8")) as { directories: Record<string, { keep?: string[]; noindex?: string[] }> }
     const typeByDir: Record<string, string> = { reviews: "review", comparisons: "comparison", guides: "guide", glossary: "glossary", alternatives: "alternative", best: "best", "use-cases": "use-case", industries: "industry", research: "research", statistics: "statistic", hubs: "hub", blog: "blog" }
     for (const [dir, data] of Object.entries(manifest.directories)) {
       const type = typeByDir[dir]
