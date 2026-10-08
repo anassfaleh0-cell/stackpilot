@@ -17,7 +17,7 @@ import { EditorialHero, GlassCard, InfoCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 
 export function generateStaticParams() {
-  return getAllIndustries().filter((i) => !isNoindexed("industries", i.slug)).map((i) => ({ slug: i.slug }))
+  return []
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
