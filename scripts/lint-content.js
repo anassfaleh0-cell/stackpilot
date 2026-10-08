@@ -164,8 +164,10 @@ for (const dir of dirs) {
     const isKept = true
     let fileErrors = 0
 
-    const validatedData = sanitizeForValidation(data)
-    const raw = JSON.stringify(validatedData)
+    // Validate the source content itself. Do not sanitize before linting:
+    // sanitization is a runtime safety net, while lint must catch the source defect.
+    const raw = JSON.stringify(data)
+    const sanitizedRaw = JSON.stringify(sanitizeForValidation(data))
     const malformedLinks = (raw.match(/<a href="[^"]*">\s*<a href=/gi) || []).length
     if (malformedLinks > 0) {
       console.error("  ERROR: " + malformedLinks + " malformed nested <a> link pattern(s)")
@@ -184,12 +186,41 @@ for (const dir of dirs) {
     if (checkTitleDuplicates(title, file)) fileErrors++
     fileErrors += checkDateFormats(data, file)
 
+    for (const pattern of unsupportedClaimPatterns) {
+      pattern.lastIndex = 0
+      const hits = raw.match(pattern) || []
+      if (hits.length > 0) {
+        console.error("  ERROR: Unsupported claim appears " + hits.length + " time(s)")
+        fileErrors += hits.length
+      }
+    }
+
+    const placeholders = (raw.match(/\\b(?:TODO|TBD|lorem ipsum|replace me|example text|coming soon)\\b/gi) || []).length
+    if (placeholders > 0) {
+      console.error("  ERROR: Placeholder content marker appears " + placeholders + " time(s)")
+      fileErrors += placeholders
+    }
+
+    if (!title.trim()) {
+      console.error("  ERROR: Missing title/term")
+      fileErrors++
+    }
+
+    const primaryText = [data.description, data.tagline, data.body].filter(v => typeof v === "string").join(" ").trim()
+    if (primaryText.length < 120 && !["content/glossary", "content/statistics"].includes(dir)) {
+      console.error("  ERROR: Primary content is too thin (<120 characters)")
+      fileErrors++
+    }
+
     if (dir === "content/blog" && data.body) {
       const pricingWarns = checkPricingFigures(data.body, file, verifiedEntities)
       for (const w of pricingWarns) {
         console.warn(`  WARNING: [pricing] ${w}`)
       }
     }
+
+    // Keep sanitizedRaw referenced so future lint extensions can compare source vs runtime-safe output.
+    void sanitizedRaw
 
     if (fileErrors > 0) {
       console.error(`\n${fpath}: ${fileErrors} error(s)`)
