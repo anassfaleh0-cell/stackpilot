@@ -6,9 +6,10 @@ import { createMetadata } from "@/lib/metadata"
 import { toolPages } from "@/lib/constants"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { Calculator, Scale, ArrowRight, type LucideIcon } from "lucide-react"
+import { Calculator, Scale, ArrowRight, TrendingUp, Target, Layers, DollarSign, type LucideIcon } from "lucide-react"
+import { DecisionTool } from "@/components/tools/decision-tool"
 
-const toolsData: Record<string, { name: string; description: string; icon: LucideIcon; content: string[] }> = {
+const toolsData: Record<string, { name: string; description: string; icon: LucideIcon; kind: "tco" | "comparison" | "roi" | "scorecard" | "stack" | "pricing"; content: string[] }> = {
   "tco-calculator": {
     name: "TCO Calculator", description: "Calculate the total cost of ownership for any software tool, including implementation, training, integration, and maintenance costs over 1 and 3 years.", icon: Calculator,
     content: [
@@ -59,6 +60,10 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
               {tool.content.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
+            </div>
+            <div className="rounded-xl border border-border bg-card p-8 mb-8">
+              <h2 className="text-xl font-bold mb-4">Interactive Calculator</h2>
+              <DecisionTool kind={tool.kind} />
             </div>
             <div className="rounded-xl border border-border bg-card p-8">
               <h2 className="text-xl font-bold mb-4">How to Use This Tool</h2>
