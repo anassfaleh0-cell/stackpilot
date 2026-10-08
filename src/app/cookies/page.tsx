@@ -6,7 +6,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Cookie Policy — How PilotStack Uses Cookies",
-  description: "PilotStack's cookie policy explains how we use cookies and similar tracking technologies to operate and improve our website, in compliance with GDPR and ePrivacy regulations.",
+  description: "PilotStack's cookie policy explains how we use cookies and similar tracking technologies to operate and improve our website.",
   path: "/cookies",
 })
 
@@ -37,13 +37,12 @@ export default function CookiesPage() {
             <p>These cookies are necessary for the website to function and cannot be disabled. They are set automatically when you access our site and do not store any personally identifiable information.</p>
             <ul>
               <li><strong>Theme preference:</strong> Stores your light/dark mode preference in local storage. No expiration — persists until you change your preference or clear site data.</li>
-              <li><strong>Session token:</strong> A temporary session identifier used for basic site operations. Expires when you close your browser.</li>
-            </ul>
+                          </ul>
 
             <h3>Analytics Cookies</h3>
             <p>We use analytics tools, including Google Analytics and Microsoft Clarity, to understand how visitors interact with our site. These services may process usage and device information according to their own privacy policies and are loaded only after analytics consent.</p>
             <ul>
-              <li><strong>Google Analytics 4 (GA4):</strong> Collects anonymized page views, session duration, and traffic source data. IP addresses are anonymized. Data retained for 26 months. <em>Opt-out available via <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out browser add-on</a>.</em></li>
+              <li><strong>Google Analytics 4 (GA4):</strong> Collects anonymized page views, session duration, and traffic source data. IP addresses are anonymized. Retention periods depend on the analytics configuration and applicable Google settings. <em>Opt-out available via <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out browser add-on</a>.</em></li>
               <li><strong>Microsoft Clarity:</strong> Provides session-replay and heatmap features to help us understand how users navigate the site. We configure it for analytics use and do not intentionally use it to collect passwords or other sensitive form data. <em>Opt-out available via the <a href="https://privacy.microsoft.com/en-US/privacystatement" target="_blank" rel="noopener">Microsoft Privacy Statement</a>.</em></li>
             </ul>
 
@@ -74,7 +73,7 @@ export default function CookiesPage() {
             <h2>Cookie Duration</h2>
             <ul>
               <li><strong>Session cookies:</strong> Expire when you close your browser. Used for temporary session management.</li>
-              <li><strong>Persistent cookies:</strong> Remain on your device for a set period or until manually deleted. Our longest-running cookies expire after 26 months (GA4 data retention limit).</li>
+              <li><strong>Persistent cookies:</strong> Remain on your device for a set period or until manually deleted. Retention periods vary by service and configuration.</li>
             </ul>
 
             <h2>Managing Cookies</h2>
@@ -88,7 +87,7 @@ export default function CookiesPage() {
             <p>Please note that blocking essential cookies may affect site functionality, including theme persistence and basic session management.</p>
 
             <h2>Updates to This Policy</h2>
-            <p>We may update this Cookie Policy from time to time to reflect changes in technology, regulation, or our practices. Material changes will be communicated via email to subscribers and by posting a notice on our website. The "Last updated" date at the top reflects the most recent revision.</p>
+            <p>We may update this Cookie Policy from time to time to reflect changes in technology, regulation, or our practices. Material changes will be reflected on this page with an updated date. The "Last updated" date at the top reflects the most recent revision.</p>
 
             <h2>Contact</h2>
             <p>For questions about this Cookie Policy or our data practices, contact us at <strong>privacy@pilotstack.online</strong>.</p>
