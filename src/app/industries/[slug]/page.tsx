@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!ind) return {}
   const readingTime = Math.max(5, Math.ceil((ind.description.split(/\s+/).length + ind.recommendations.length * 15) / 200))
   const shortTitle = ind.title.length > 58 ? ind.title.slice(0, 55) + "..." : ind.title
-  return createMetadata({ title: shortTitle, description: `Best software for ${ind.industry.toLowerCase()} businesses. Expert picks with ratings, pricing, and implementation tips for 2026.`, path: `/industries/${ind.slug}`, ogType: "article", publishedAt: ind.lastUpdated, updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime })
+  return createMetadata({ title: shortTitle, description: `Best software for ${ind.industry.toLowerCase()} businesses, with ratings, pricing context, and implementation tips for 2026.`, path: `/industries/${ind.slug}`, ogType: "article", publishedAt: ind.lastUpdated, updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime })
 }
 
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {

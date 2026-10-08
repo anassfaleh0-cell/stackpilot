@@ -80,9 +80,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       <ArticleSchema title={guide.title} description={guide.description} publishedAt={guide.lastUpdated} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={guide.sections.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={guide.category} keywords={[guide.category, "software guide", guide.title, "buying guide", "software selection"].filter(Boolean)} mentions={guide.relatedTools.length > 0 ? guide.relatedTools.map(t => ({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` })) : undefined} />
       <FAQSchema
         questions={
-          faqs.length > 0
-            ? faqs
-            : guide.sections.slice(0, 5).map((s) => ({ question: s.title, answer: truncate(s.body, 120) }))
+          faqs
         }
         path={`/guides/${slug}`}
       />
@@ -116,7 +114,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                 <li>Difficulty: {guide.difficulty} — designed for {guide.difficulty === "Beginner" ? "newcomers" : guide.difficulty === "Intermediate" ? "experienced users" : "advanced professionals"}</li>
                 <li>{guide.sections.length} comprehensive sections covering key aspects of {guide.category.toLowerCase()}</li>
                 <li>{guide.readingTime} minute read — estimated time to complete</li>
-                <li>Includes actionable recommendations and expert insights throughout</li>
+                <li>Includes actionable recommendations and practical guidance throughout</li>
                 <li>Last updated: {formatDate(guide.lastUpdated)}</li>
               </ul>
             </div>
@@ -131,7 +129,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                 <li>{guide.relatedTools.length > 0 ? `${guide.relatedTools.length} related tools covered` : "Practical guidance for software selection"}</li>
                 {guide.sections.some((s) => s.type === "checklist" || s.type === "table") && <li>Includes checklists and comparison tables</li>}
                 <li>Written against our published editorial methodology</li>
-                <li>Regularly updated to reflect market changes</li>
+                <li>Updated when the underlying content is reviewed</li>
               </ul>
             </div>
 
@@ -262,7 +260,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                     <p className="text-muted-foreground leading-relaxed pl-11">{section.body}</p>
                   )}
 
-                  {/* Expert tip every 3 sections */}
+                  {/* Practical tip every 3 sections */}
                   {i % 3 === 2 && (
                     <div className="mt-6 ml-11 rounded-xl border border-accent/20 bg-accent-subtle/30 p-4">
                       <div className="flex items-center gap-2 mb-2">

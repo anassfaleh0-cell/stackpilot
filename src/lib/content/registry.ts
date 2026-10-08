@@ -40,6 +40,44 @@ export function isContentAvailable(type: string, slug: string): boolean {
 
 const DATE_FIELDS = new Set(["lastUpdated", "contentPublished", "contentModified", "publishedAt", "updatedAt", "datePublished", "dateModified"])
 
+const GENERIC_REVIEW_SECTION_TITLES = new Set(["Rating Overview","Key Features","Hidden Costs","Learning Curve","Setup Time","Migration Difficulty","Industry Fit","Common Mistakes","Tips from experienced users","Buying Advice"])
+
+const GENERIC_FAQ_PATTERNS = [
+  /^what is the best .* software\??$/i,
+  /^how much does .* software cost\??$/i,
+  /^what features should i look for in .* software\??$/i,
+  /^how do i choose the right .* (tool|software)\??$/i,
+  /^is free .* software good enough\??$/i,
+  /^how often should i reevaluate .* (tool|software)\??$/i,
+]
+
+function sanitizeFaqs(faqs: FAQItem[] | undefined): FAQItem[] {
+  if (!Array.isArray(faqs)) return []
+  const seen = new Set<string>()
+  const cleaned: FAQItem[] = []
+  for (const faq of faqs) {
+    const question = String(faq?.question ?? "").trim()
+    const answer = String(faq?.answer ?? "").trim()
+    const key = question.toLowerCase().replace(/\s+/g, " ")
+    if (!question || !answer || !question.endsWith("?") || seen.has(key)) continue
+    if (GENERIC_FAQ_PATTERNS.some((pattern) => pattern.test(key))) continue
+    if (answer.length < 40 || answer.length > 700) continue
+    seen.add(key)
+    cleaned.push({ question, answer })
+    if (cleaned.length >= 5) break
+  }
+  return cleaned
+}
+
+function sanitizeReview(review: ReviewContent): ReviewContent {
+  return {
+    ...review,
+    content: review.content.filter((section) => !GENERIC_REVIEW_SECTION_TITLES.has(section.title) && !(section.type === "diagram" && !["pricing-ladder","feature-radar","implementation-flow"].includes(section.body))),
+    faqs: sanitizeFaqs(review.faqs),
+  }
+}
+
+
 function toISODate(date: string): string {
   const d = new Date(date)
   if (isNaN(d.getTime())) return date
@@ -84,12 +122,12 @@ function readDir(dir: string): string[] {
 export function getReview(slug: string): ReviewContent | null {
   const file = path.join(CONTENT_DIR, "reviews", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<ReviewContent>(file)
+  return sanitizeReview(readJson<ReviewContent>(file))
 }
 
 export function getAllReviews(): ReviewContent[] {
   return readDir(path.join(CONTENT_DIR, "reviews"))
-    .map((f) => readJson<ReviewContent>(path.join(CONTENT_DIR, "reviews", f)))
+    .map((f) => sanitizeReview(readJson<ReviewContent>(path.join(CONTENT_DIR, "reviews", f))))
     .sort((a, b) => b.rating - a.rating)
 }
 
@@ -97,25 +135,28 @@ export function getComparison(slug: string): ComparisonContent | null {
   const file = path.join(CONTENT_DIR, "comparisons", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const cmp = readJson<ComparisonContent>(file)
+  cmp.faqs = sanitizeFaqs(cmp.faqs)
   if (cmp.published === false) return null
   return cmp
 }
 
 export function getAllComparisons(): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
-    .map((f) => readJson<ComparisonContent>(path.join(CONTENT_DIR, "comparisons", f)))
+    .map((f) => { const c = readJson<ComparisonContent>(path.join(CONTENT_DIR, "comparisons", f)); c.faqs = sanitizeFaqs(c.faqs); return c })
     .filter((c) => c.published !== false)
 }
 
 export function getGuide(slug: string): GuideContent | null {
   const file = path.join(CONTENT_DIR, "guides", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<GuideContent>(file)
+  const guide = readJson<GuideContent>(file)
+  guide.faqs = sanitizeFaqs(guide.faqs)
+  return guide
 }
 
 export function getAllGuides(): GuideContent[] {
   return readDir(path.join(CONTENT_DIR, "guides"))
-    .map((f) => readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)))
+    .map((f) => { const g = readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)); g.faqs = sanitizeFaqs(g.faqs); return g })
 }
 
 export function getGlossaryTerm(slug: string): GlossaryContent | null {
@@ -145,59 +186,68 @@ export function getAllBlogPosts(): BlogContent[] {
 export function getCategory(slug: string): CategoryKnowledge | null {
   const file = path.join(CONTENT_DIR, "categories", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<CategoryKnowledge>(file)
+  const category = readJson<CategoryKnowledge>(file)
+  category.faqs = sanitizeFaqs(category.faqs)
+  return category
 }
 
 export function getAllCategories(): CategoryKnowledge[] {
   return readDir(path.join(CONTENT_DIR, "categories"))
-    .map((f) => readJson<CategoryKnowledge>(path.join(CONTENT_DIR, "categories", f)))
+    .map((f) => { const c = readJson<CategoryKnowledge>(path.join(CONTENT_DIR, "categories", f)); c.faqs = sanitizeFaqs(c.faqs); return c })
 }
 
 export function getAlternative(slug: string): AlternativeContent | null {
   const file = path.join(CONTENT_DIR, "alternatives", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const alt = readJson<AlternativeContent>(file)
+  alt.faqs = sanitizeFaqs(alt.faqs)
   if (alt.published === false) return null
   return alt
 }
 
 export function getAllAlternatives(): AlternativeContent[] {
   return readDir(path.join(CONTENT_DIR, "alternatives"))
-    .map((f) => readJson<AlternativeContent>(path.join(CONTENT_DIR, "alternatives", f)))
+    .map((f) => { const a = readJson<AlternativeContent>(path.join(CONTENT_DIR, "alternatives", f)); a.faqs = sanitizeFaqs(a.faqs); return a })
     .filter((a) => a.published !== false)
 }
 
 export function getUseCase(slug: string): UseCaseContent | null {
   const file = path.join(CONTENT_DIR, "use-cases", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<UseCaseContent>(file)
+  const useCase = readJson<UseCaseContent>(file)
+  useCase.faqs = sanitizeFaqs(useCase.faqs)
+  return useCase
 }
 
 export function getAllUseCases(): UseCaseContent[] {
   return readDir(path.join(CONTENT_DIR, "use-cases"))
-    .map((f) => readJson<UseCaseContent>(path.join(CONTENT_DIR, "use-cases", f)))
+    .map((f) => { const u = readJson<UseCaseContent>(path.join(CONTENT_DIR, "use-cases", f)); u.faqs = sanitizeFaqs(u.faqs); return u })
 }
 
 export function getIndustry(slug: string): IndustryContent | null {
   const file = path.join(CONTENT_DIR, "industries", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<IndustryContent>(file)
+  const industry = readJson<IndustryContent>(file)
+  industry.faqs = sanitizeFaqs(industry.faqs)
+  return industry
 }
 
 export function getAllIndustries(): IndustryContent[] {
   return readDir(path.join(CONTENT_DIR, "industries"))
-    .map((f) => readJson<IndustryContent>(path.join(CONTENT_DIR, "industries", f)))
+    .map((f) => { const i = readJson<IndustryContent>(path.join(CONTENT_DIR, "industries", f)); i.faqs = sanitizeFaqs(i.faqs); return i })
 }
 
 export function getResearch(slug: string): ResearchContent | null {
   const file = path.join(CONTENT_DIR, "research", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<ResearchContent>(file)
+  const research = readJson<ResearchContent>(file)
+  research.faqs = sanitizeFaqs(research.faqs)
+  return research
 }
 
 export function getAllResearch(): ResearchContent[] {
   return readDir(path.join(CONTENT_DIR, "research"))
-    .map((f) => readJson<ResearchContent>(path.join(CONTENT_DIR, "research", f)))
+    .map((f) => { const r = readJson<ResearchContent>(path.join(CONTENT_DIR, "research", f)); r.faqs = sanitizeFaqs(r.faqs); return r })
 }
 
 export function getStatistic(slug: string): StatisticContent | null {
@@ -228,12 +278,14 @@ export function getAllBest(): BestContent[] {
 export function getHub(slug: string): HubContent | null {
   const file = path.join(CONTENT_DIR, "hubs", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<HubContent>(file)
+  const hub = readJson<HubContent>(file)
+  hub.faqs = sanitizeFaqs(hub.faqs)
+  return hub
 }
 
 export function getAllHubs(): HubContent[] {
   return readDir(path.join(CONTENT_DIR, "hubs"))
-    .map((f) => readJson<HubContent>(path.join(CONTENT_DIR, "hubs", f)))
+    .map((f) => { const h = readJson<HubContent>(path.join(CONTENT_DIR, "hubs", f)); h.faqs = sanitizeFaqs(h.faqs); return h })
 }
 
 export function getContentTitle(type: string, slug: string): string | null {

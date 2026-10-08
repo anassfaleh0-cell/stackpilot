@@ -46,7 +46,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Best Software", href: "/best" }, { name: page.title, href: `/best/${slug}` }]} />
-      <ArticleSchema title={page.title} description={page.description} publishedAt={page.lastUpdated} updatedAt={page.lastUpdated} author={page.author} url={`${site.url}/best/${slug}`} wordCount={page.description.split(/\s+/).length + page.picks.reduce((a, p) => a + p.pros.length + p.cons.length, 0) * 20} category={page.category} keywords={["best " + page.category.toLowerCase(), page.category + " software ranking", "top " + page.category.toLowerCase() + " tools", "software recommendations 2026", "expert picks"].filter(Boolean)} mentions={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} />
+      <ArticleSchema title={page.title} description={page.description} publishedAt={page.lastUpdated} updatedAt={page.lastUpdated} author={page.author} url={`${site.url}/best/${slug}`} wordCount={page.description.split(/\s+/).length + page.picks.reduce((a, p) => a + p.pros.length + p.cons.length, 0) * 20} category={page.category} keywords={["best " + page.category.toLowerCase(), page.category + " software ranking", "top " + page.category.toLowerCase() + " tools", "software recommendations 2026"].filter(Boolean)} mentions={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} />
       <CollectionPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} />
       <ItemListSchema items={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} url={`${site.url}/best/${slug}`} />
       <WebPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} dateModified={page.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: linkedPicks.map((p, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}`, category: getReview(p.toolSlug)?.category || page.category, rating: p.rating }) })) }} />
@@ -71,8 +71,8 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
               <li><strong>#1 pick:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}</li>
               <li>{page.picks.length} tools compared and ranked across {page.criteria.length} evaluation criteria</li>
               <li>Pricing: {page.pricingSummary}</li>
-              <li>Every pick includes real pros, cons, and best-fit use cases</li>
-              <li>Category: {page.category} — last verified {formatDate(page.lastUpdated)}</li>
+              <li>Each pick includes pros, cons, and a best-fit use case</li>
+              <li>Category: {page.category} — updated {formatDate(page.lastUpdated)}</li>
             </ul>
           </div>
 
@@ -84,9 +84,9 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
               <li>Top pick: {page.picks[0]?.toolName} ({page.picks[0]?.rating}/5, from {page.picks[0]?.priceRange}) — {page.picks[0]?.bestFor}</li>
               {page.picks[1] ? <li>Runner-up: {page.picks[1].toolName} ({page.picks[1].rating}/5, from {page.picks[1].priceRange})</li> : null}
               <li>Pricing ranges from free to enterprise, depending on features and scale</li>
-              <li>Each pick includes verified pros, cons, and best-fit recommendations</li>
+              <li>Each pick includes recorded pros, cons, and best-fit recommendations</li>
               <li>Full comparison table with feature-by-feature breakdown included below</li>
-              <li>Updated {formatDate(page.lastUpdated)} — pricing and features verified at time of review</li>
+              <li>Updated {formatDate(page.lastUpdated)} — pricing and feature details can change</li>
             </ul>
           </div>
 
