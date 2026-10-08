@@ -24,7 +24,7 @@ export const navLinks = [
   { href: "/use-cases", label: "Use Cases" },
   { href: "/industries", label: "Industries" },
   { href: "/hubs", label: "By Business Type" },
-  { href: "/blog", label: "Research" },
+  { href: "/blog", label: "Insights" },
   { href: "/alternatives", label: "Alternatives" },
 ]
 
