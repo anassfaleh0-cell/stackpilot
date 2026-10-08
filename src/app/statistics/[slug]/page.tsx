@@ -82,14 +82,7 @@ const legacyStats: Record<string, {
 }
 
 export function generateStaticParams() {
-  const registrySlugs = getAllStatistics()
-    .filter((s) => !isNoindexed("statistics", s.slug))
-    .map((s) => ({ slug: s.slug }))
-  const legacySlugs = Object.keys(legacyStats)
-    .filter((slug) => !registrySlugs.some((r) => r.slug === slug))
-    .filter((slug) => !isNoindexed("statistics", slug))
-    .map((slug) => ({ slug }))
-  return [...registrySlugs, ...legacySlugs]
+  return []
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
