@@ -194,10 +194,10 @@ for (const dir of dirs) {
     const isKept = true
     let fileErrors = 0
 
-    // Lint the source itself; runtime sanitization must not hide source defects.
+    // Lint the actual source payload; runtime sanitization must never hide source defects.
     const raw = JSON.stringify(data)
-    const validationData = sanitizeForValidation(data)
-    const validationRaw = JSON.stringify(validationData)
+    const validationData = data
+    const validationRaw = raw
     const malformedLinks = (raw.match(/<a href="[^"]*">\s*<a href=/gi) || []).length
     if (malformedLinks > 0) {
       console.error("  ERROR: " + malformedLinks + " malformed nested <a> link pattern(s)")
@@ -238,7 +238,7 @@ for (const dir of dirs) {
       fileErrors++
     }
 
-    const primaryText = collectText(validationData).trim()
+    const primaryText = collectText(data).trim()
     if (primaryText.length < 120 && !["content/glossary", "content/statistics"].includes(dir)) {
       console.error("  ERROR: Primary content is too thin (<120 characters)")
       fileErrors++
