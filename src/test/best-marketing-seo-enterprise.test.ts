@@ -14,7 +14,7 @@ describe("/best/best-marketing-seo-enterprise recovery", () => {
     const page = getBest(SLUG)
     expect(page).not.toBeNull()
     expect(page!.slug).toBe(SLUG)
-    expect(page!.title).toBe("Best Marketing & SEO Software for Enterprise")
+    expect(page!.title).toBe("Best Enterprise SEO Software 2026: Top Platforms Compared")
     expect(page!.category).toBe("Marketing & SEO")
   })
 
@@ -77,14 +77,14 @@ describe("/best/best-marketing-seo-enterprise recovery", () => {
     expect(isContentAvailable("best", SLUG)).toBe(true)
   })
 
-  it("leaves /best/best-marketing-software unchanged", () => {
+  it("keeps the sibling Marketing & SEO best page indexable", () => {
     const sibling = getBest("best-marketing-software")
     expect(sibling).not.toBeNull()
     expect(sibling!.slug).toBe("best-marketing-software")
-    expect(isNoindexed("best", "best-marketing-software")).toBe(true)
+    expect(isNoindexed("best", "best-marketing-software")).toBe(false)
   })
 
-  it("does not mass-publish the sibling Marketing & SEO best routes", () => {
+  it("keeps the sibling Marketing & SEO best routes resolvable and indexable", () => {
     const siblings = [
       "best-marketing-seo-agencies",
       "best-marketing-seo-freelancers",
@@ -93,7 +93,8 @@ describe("/best/best-marketing-seo-enterprise recovery", () => {
       "best-marketing-seo-startups",
     ]
     for (const slug of siblings) {
-      expect(getBest(slug), `${slug} should stay unpublished`).toBeNull()
+      expect(getBest(slug), `${slug} should resolve`).not.toBeNull()
+      expect(isNoindexed("best", slug), slug).toBe(false)
     }
   })
 
