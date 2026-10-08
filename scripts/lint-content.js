@@ -187,7 +187,7 @@ for (const dir of dirs) {
   for (const file of files) {
     const fpath = path.join(dir, file)
     const data = JSON.parse(fs.readFileSync(fpath, "utf-8"))
-    const title = data.title || data.term || ""
+    const title = data.title || data.term || data.name || ""
     const slug = file.replace(".json", "")
     const dirName = dir.replace("content/", "")
     const isNoindexed = false
