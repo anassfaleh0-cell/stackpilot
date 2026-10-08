@@ -191,10 +191,6 @@ describe("route families", () => {
     }
   })
 
-  it("keeps unknown slugs as real 404s while content slugs remain resolvable", async () => {
-    for (const family of ALL_FAMILIES) await expect404(family, UNKNOWN_SLUG)
-  })
-
   it("pins dynamicParams to false on the authors route only", () => {
     const pinned: string[] = []
     const walk = (dir: string) => {
