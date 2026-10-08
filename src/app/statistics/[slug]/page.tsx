@@ -82,7 +82,7 @@ const legacyStats: Record<string, {
 }
 
 export function generateStaticParams() {
-  return []
+  return getAllStatistics().map((item) => ({ slug: item.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
