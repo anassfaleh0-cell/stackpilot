@@ -43,7 +43,6 @@ export const metadata: Metadata = {
     default: `${siteConfig.name} - ${siteConfig.description}`,
   },
   description: siteConfig.description,
-  keywords: siteConfig.keywords,
   authors: [{ name: siteConfig.author }],
   creator: siteConfig.author,
   openGraph: {
