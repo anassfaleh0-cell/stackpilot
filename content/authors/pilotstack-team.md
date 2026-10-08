@@ -2,7 +2,7 @@
 slug: pilotstack-team
 name: PilotStack Team
 role: Editorial Team
-bio: "The PilotStack team has tested 151+ software tools across 12 categories. Every review is based on at least 2 weeks of hands-on testing using a standardized methodology. We don't accept payment for reviews or rankings."
+bio: "PilotStack is an editorial team publishing structured software reviews, comparisons, and buying guidance. Our methodology explains how ratings, pricing information, criteria, and editorial conclusions are handled."
 social:
   twitter: https://x.com/pilotstackon
   linkedin: https://www.linkedin.com/in/pilotstack
@@ -15,11 +15,10 @@ expertise:
   - CRM and project management
   - Developer tools assessment
 credentials:
-  - "Reviewed 151+ software tools since 2024"
-  - "Published 616+ head-to-head comparisons"
-  - "Original SaaS pricing benchmark data"
+  - "Published software reviews and comparisons"
+  - "Structured software pricing information"
   - "Methodology transparent and publicly available"
-  - "Independent — no vendor payment for reviews"
+  - "Editorial and commercial disclosures are provided"
 publishedReviews: 151
 publishedComparisons: 616
 publishedGuides: 100
@@ -39,7 +38,7 @@ import { PersonSchema } from "@/components/seo/json-ld"
 <PersonSchema
   name="PilotStack Team"
   url={`${site.url}/authors/pilotstack-team`}
-  description="Software review team that has tested 151+ tools across 12 categories."
+  description="Editorial team publishing software reviews, comparisons, and buying guidance."
   knowsAbout={[
     "Software Reviews",
     "SaaS Comparison",
@@ -63,9 +62,7 @@ import { PersonSchema } from "@/components/seo/json-ld"
         Written by <a href="/authors/pilotstack-team" className="text-primary hover:underline">PilotStack Team</a>
       </div>
       <p className="text-xs text-muted-foreground leading-relaxed">
-        The PilotStack team has tested 151+ software tools across 12 categories.
-        Every review is based on at least 2 weeks of hands-on testing.
-        We don&apos;t accept payment for reviews or rankings.
+        PilotStack publishes structured software reviews, comparisons, and buying guidance. See our methodology and disclosures to understand how we handle evidence, ratings, and commercial relationships.
       </p>
       <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
         <span>151+ reviews</span>

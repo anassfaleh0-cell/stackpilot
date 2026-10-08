@@ -38,11 +38,11 @@ export default function TermsPage() {
 
             <h2>Content and Editorial Independence</h2>
             <p>All content on PilotStack, including tool reviews, comparisons, ratings, and recommendations, is provided for informational purposes only. We strive for accuracy through our editorial process (detailed on our <a href="/methodology">Methodology page</a>), but make no warranties about the completeness, timeliness, or reliability of our content.</p>
-            <p>Tool ratings and reviews represent the independent opinions of our editorial team. We follow strict editorial guidelines that prohibit sponsors, advertisers, or tool vendors from influencing our ratings or review content.</p>
+            <p>Tool ratings and reviews represent PilotStack's editorial conclusions based on the information and criteria described in our methodology. Commercial relationships are disclosed and are not intended to determine editorial scores or conclusions.</p>
 
             <h2>Affiliate Disclosure</h2>
             <p>PilotStack may earn affiliate commissions from some of the products and services we review. When you click an affiliate link on our site and make a purchase, we may receive a commission at no additional cost to you. This does not affect our editorial independence — we do not accept payment for positive reviews, and our ratings are determined solely by our editorial process as described on our <a href="/methodology">Methodology page</a>.</p>
-            <p>We only participate in affiliate programs for products we have independently evaluated and would recommend regardless of compensation. Affiliate relationships are disclosed on individual review and comparison pages where applicable.</p>
+            <p>We disclose affiliate relationships on applicable pages. Affiliate links may provide revenue to PilotStack when a reader makes a qualifying purchase, but the presence of an affiliate relationship is not presented as a substitute for the editorial information on the page.</p>
 
             <h2>User Submissions</h2>
             <p>If you submit comments, feedback, or other content to PilotStack, you grant us a non-exclusive, royalty-free license to use, display, and distribute that content in connection with the Service. You represent that your submissions do not infringe on any third-party rights.</p>

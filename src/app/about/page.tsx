@@ -8,7 +8,7 @@ import { SocialLinkList } from "@/components/brand/social-icons"
 
 export const metadata = createMetadata({
   title: "About PilotStack — Our Mission, Team & Editorial Standards",
-  description: "PilotStack helps businesses navigate the complex software landscape with expert reviews, honest comparisons, and actionable guides.",
+  description: "PilotStack helps businesses navigate the software landscape with detailed reviews, practical comparisons, and actionable buying guides.",
   path: "/about",
 })
 
@@ -26,16 +26,16 @@ export default function AboutPage() {
             <Badge variant="default" className="mb-4">About</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-6">Navigating software shouldn&apos;t be hard</h1>
             <div className="prose prose-slate max-w-none">
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">Hi, I&apos;m Sarah Chen, the founder of PilotStack. I started this site in 2024 because I was frustrated with how hard it is to choose the right software for your business.</p>
-              <p className="text-muted-foreground mb-4">After working in product management and operations at SaaS companies, I saw the same problem everywhere: teams would spend weeks researching tools, read dozens of biased &quot;top 10&quot; lists, and still end up choosing the wrong software. The review landscape was broken — full of affiliate-driven rankings, outdated information, and sites that clearly hadn&apos;t tested the tools they recommended.</p>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-6">PilotStack was created to make software research easier to navigate. The site brings reviews, comparisons, guides, and structured product information into one place so readers can evaluate options without having to piece together the basics from many sources.</p>
+              <p className="text-muted-foreground mb-4">Software research can be difficult because pricing, features, positioning, and product capabilities change over time. PilotStack focuses on making those decision factors easier to compare, while clearly separating recorded information from editorial guidance.</p>
               <p className="text-muted-foreground mb-4">I built PilotStack to fix that. Every figure on this site is recorded once and reused everywhere it appears, each tool carries nine category scores on a 1-5 scale with the overall rating as their mean, and where we cannot source a fact we leave it off the page instead of asserting it. We publish our methodology so you can check how every conclusion is reached.</p>
-              <p className="text-muted-foreground mb-4">Our small, independent team covers approximately 60-80 tools annually across 12 categories. We do not accept payment for reviews, placement in comparison tables, or links from our content. Our revenue comes from affiliate commissions and sponsored newsletter placements — always clearly disclosed. If we cannot recommend a tool honestly, we will say so plainly.</p>
+              <p className="text-muted-foreground mb-4">PilotStack may earn revenue from affiliate relationships and other clearly disclosed commercial relationships. Commercial relationships do not determine editorial scores or conclusions. Where a page contains an affiliate relationship, the relationship is disclosed so readers can understand the commercial context.</p>
               <p className="text-muted-foreground mb-4">The same published rules apply to every page: one recorded source per figure, the overall rating as the mean of nine category scores, and no unsourced fact stated as confirmed. We believe that consistency is what makes PilotStack different — and what helps our readers make confident, informed decisions.</p>
               <h2 className="text-2xl font-bold mt-12 mb-4">Our values</h2>
               <div className="grid sm:grid-cols-2 gap-6 mb-12">
                 {[
-                  { title: "Unbiased", desc: "We never accept payment for reviews or rankings. Every evaluation is independent." },
-                  { title: "Thorough", desc: "Each tool is scored across nine recorded categories before it receives an overall rating." },
+                  { title: "Independent", desc: "Commercial relationships are disclosed and are not intended to determine editorial scores or conclusions." },
+                  { title: "Evidence-led", desc: "Where ratings are shown, the methodology explains the criteria and calculation used." },
                   { title: "Transparent", desc: "Our methodology is public. See exactly how we reach every conclusion." },
                   { title: "Helpful", desc: "Every piece of content should help you make a better decision." },
                 ].map((v) => (
