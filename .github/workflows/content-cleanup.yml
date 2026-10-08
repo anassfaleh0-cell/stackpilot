@@ -1,0 +1,60 @@
+name: content-cleanup
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "scripts/content-quality-cleanup.js"
+      - ".github/workflows/content-cleanup.yml"
+      - "content/**"
+      - "_gen-expand.js"
+      - "_gen-comparisons.js"
+      - "_gen-best-expansion.js"
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Apply content cleanup
+        run: node scripts/content-quality-cleanup.js
+
+      - name: Content quality lint
+        run: npm run lint:content
+
+      - name: SEO content audit
+        run: npm run seo:audit
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Production build
+        run: npm run build
+
+      - name: Commit cleanup
+        run: |
+          git config user.name "PilotStack"
+          git config user.email "pilotstack@users.noreply.github.com"
+          git add content _gen-expand.js _gen-comparisons.js _gen-best-expansion.js
+          if git diff --cached --quiet; then
+            echo "No cleanup changes to commit."
+            exit 0
+          fi
+          git commit -m "fix(content): clean unsupported and generated-content claims"
+          git push
