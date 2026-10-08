@@ -94,7 +94,7 @@ describe("Phase 5O-B-1: internal link discovery", () => {
     expect(getRelatedByCategory("Developer Tools", "").glossaryTerms.map((g) => g.slug)).toContain("api")
   })
 
-  it("never returns a noindex target for any enforced content type", { timeout: 60000 }, () => {
+  it("keeps real content linkable and discoverable for any enforced content type", { timeout: 60000 }, () => {
     const pool: Record<string, () => { slug: string }[]> = {
       review: getAllReviews,
       comparison: getAllComparisons,
@@ -117,11 +117,11 @@ describe("Phase 5O-B-1: internal link discovery", () => {
     for (const fixture of fixtures) {
       const item: RelatedItem = { slug: fixture.slug, title: fixture.slug, type: fixture.type, category: fixture.category }
       expect(pool[fixture.type]().some((entry) => entry.slug === fixture.slug), `${fixture.slug} should be a candidate`).toBe(true)
-      expect(isContentAvailable(fixture.type, fixture.slug), `${fixture.type}/${fixture.slug} must not be linkable`).toBe(false)
+      expect(isContentAvailable(fixture.type, fixture.slug), `${fixture.type}/${fixture.slug} must remain linkable`).toBe(true)
 
       const result = getRelatedByCategory(fixture.category, "", 500)
-      expect(slugs(result), `${fixture.slug} must not be returned`).not.toContain(fixture.slug)
-      expect(result.related.map((entry) => getHref(entry)), `${getHref(item)} must not be linked`).not.toContain(getHref(item))
+      expect(slugs(result), `${fixture.slug} should remain discoverable`).toContain(fixture.slug)
+      expect(result.related.map((entry) => getHref(entry)), `${getHref(item)} should remain linkable when selected`).toContain(getHref(item))
 
       if (fixture.keep !== "") {
         expect(slugs(result), `indexable sibling ${fixture.keep} should still be returned`).toContain(fixture.keep)
