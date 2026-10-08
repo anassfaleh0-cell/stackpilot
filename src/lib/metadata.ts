@@ -43,7 +43,7 @@ export function createMetadata({
   const fullTitle = truncateAtWordBoundary(title, 70)
   const fullDescription = truncateAtWordBoundary(description, 160)
 
-  const follow = noFollow ?? !noIndex
+  const follow = noFollow ?? true
 
   return {
     title: fullTitle,
