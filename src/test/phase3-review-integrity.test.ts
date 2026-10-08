@@ -493,7 +493,7 @@ describe("CD-10: methodology and EEAT claims", () => {
   it("the review sidebar explains how the page is built instead of claiming tests", () => {
     const src = readSrc("src/components/seo/editorial-process.tsx")
     expect(src).toContain("recorded category ratings")
-    expect(src).toContain("No vendor can pay for placement")
+    expect(src).toContain("Commercial relationships do not determine editorial ratings, rankings, or inclusion criteria.")
   })
 
   it("methodology publishes a checkable scoring rule", () => {
