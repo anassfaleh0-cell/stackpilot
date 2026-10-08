@@ -125,6 +125,56 @@ function sanitizeList(items: string[] | undefined, max = 5): string[] {
     .slice(0, max)
 }
 
+function buildUseCaseAnalysis(useCase: UseCaseContent): string {
+  const names = useCase.recommendations.slice(0, 5).map((r) => r.toolName).join(", ")
+  const criteria = useCase.selectionCriteria.slice(0, 5).map((r) => r.factor).join(", ")
+  return `For this use case, the shortlist should be judged against the actual workflow rather than rating alone. The current recommendations include ${names || "the listed tools"}. The decision factors recorded for this page are ${criteria || "fit, usability and total cost"}. A practical evaluation should test the highest-risk workflow with representative data, confirm integrations and permissions, and calculate total cost at the expected scale before rollout.`
+}
+
+function buildIndustryAnalysis(industry: IndustryContent): string {
+  const needs = industry.softwareNeeds.slice(0, 5).join(", ")
+  const tips = industry.implementationTips.slice(0, 4).join("; ")
+  return `For ${industry.industry} teams, software selection should start with the operating requirements rather than a generic feature checklist. The page identifies ${needs || "security, workflow, integration and scalability"} as key needs. The implementation guidance is practical: ${tips || "pilot the workflow, validate integrations and define measurable adoption criteria"}.`
+}
+
+function buildHubAnalysis(hub: HubContent): string {
+  const challenges = hub.challenges.slice(0, 4).join(", ")
+  const recs = hub.recommendations.slice(0, 5).map((r) => r.toolName).join(", ")
+  return `The purpose of this hub is to narrow a broad software decision into a manageable shortlist. The main challenges recorded here are ${challenges || "workflow fit, adoption, integration and cost"}. The current shortlist includes ${recs || "the recommended tools on this page"}. Buyers should validate the highest-impact workflow first and treat the matrix as a starting point, not a substitute for a product trial or vendor review.`
+}
+
+function buildCategoryAnalysis(category: CategoryKnowledge): string {
+  const factors = category.buyerConsiderations.slice(0, 5).join(" ")
+  return `A useful buying approach for ${category.name} is to rank requirements before comparing vendors. PilotStack's buyer considerations emphasize: ${factors || "workflow fit, usability, integrations, security and total cost"}. Use those requirements to score a shortlist consistently, then validate the most important workflows with realistic data before adopting a platform.`
+}
+
+function buildAlternativeAnalysis(alt: AlternativeContent): ContentSection {
+  const names = alt.alternatives.slice(0, 6).map((a) => a.name).join(", ")
+  return {
+    title: "How to choose among these alternatives",
+    body: `The right alternative depends on why you are moving away from ${alt.toolName}. The current shortlist includes ${names || "the alternatives shown above"}. Compare them against the selection criteria on this page, then check migration effort, data portability, integrations, permissions, support and total cost at your expected usage. A cheaper or higher-rated option is not automatically the better replacement if it creates more operational work.`,
+    type: "text",
+  }
+}
+
+function buildResearchAnalysis(research: ResearchContent): ContentSection {
+  const findings = research.keyFindings.slice(0, 3).join(" ")
+  const sources = research.dataSources.slice(0, 4).map((s) => s.name).join(", ")
+  return {
+    title: "How to interpret this research",
+    body: `Use the findings as evidence for a decision, not as a universal rule. The key findings on this report are: ${findings || "see the findings above"}. The listed source set includes ${sources || "the sources cited on this page"}. Check the publication dates, definitions and population behind each figure before applying it to a different company, market or time period.`,
+    type: "text",
+  }
+}
+
+function buildStatisticAnalysis(statistic: StatisticContent): { title: string; body: string } {
+  const labels = statistic.stats.slice(0, 5).map((s) => s.label).join(", ")
+  return {
+    title: "How to use these numbers",
+    body: `These statistics are most useful when their definitions, source and time period are kept together. This page covers ${labels || "the measures shown above"}. Before using a figure in a business case or article, open the cited source, confirm the measurement definition and check whether the underlying population and date match your situation.`,
+  }
+}
+
 function buildReviewEditorialAnalysis(review: ReviewContent): ContentSection[] {
   const strengths = review.pros.slice(0, 3).join("; ")
   const limitations = review.cons.slice(0, 3).join("; ")
@@ -298,13 +348,14 @@ export function getCategory(slug: string): CategoryKnowledge | null {
   const file = path.join(CONTENT_DIR, "categories", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const category = readJson<CategoryKnowledge>(file)
+  category.longDescription = trimText(`${category.longDescription} ${buildCategoryAnalysis(category)}`, 2600)
   category.faqs = sanitizeFaqs(category.faqs)
   return category
 }
 
 export function getAllCategories(): CategoryKnowledge[] {
   return readDir(path.join(CONTENT_DIR, "categories"))
-    .map((f) => { const c = readJson<CategoryKnowledge>(path.join(CONTENT_DIR, "categories", f)); c.faqs = sanitizeFaqs(c.faqs); return c })
+    .map((f) => { const c = readJson<CategoryKnowledge>(path.join(CONTENT_DIR, "categories", f)); c.longDescription = trimText(`${c.longDescription} ${buildCategoryAnalysis(c)}`, 2600); c.faqs = sanitizeFaqs(c.faqs); return c })
 }
 
 export function getAlternative(slug: string): AlternativeContent | null {
@@ -312,7 +363,7 @@ export function getAlternative(slug: string): AlternativeContent | null {
   if (!fs.existsSync(file)) return null
   const alt = readJson<AlternativeContent>(file)
   if (alt.published === false) return null
-  return { ...alt, sections: sanitizeSections(alt.sections), faqs: sanitizeFaqs(alt.faqs) }
+  return { ...alt, sections: [...sanitizeSections(alt.sections), buildAlternativeAnalysis(alt)], faqs: sanitizeFaqs(alt.faqs) }
 }
 
 export function getAllAlternatives(): AlternativeContent[] {
@@ -328,7 +379,7 @@ export function getUseCase(slug: string): UseCaseContent | null {
   return {
     ...useCase,
     description: trimText(useCase.description, 700),
-    useCaseDescription: trimText(useCase.useCaseDescription, 1200),
+    useCaseDescription: trimText(`${useCase.useCaseDescription} ${buildUseCaseAnalysis(useCase)}`, 1800),
     recommendations: useCase.recommendations.slice(0, 12).map((x) => ({ ...x, bestFor: trimText(x.bestFor, 360), keyFeatures: sanitizeList(x.keyFeatures, 6) })),
     selectionCriteria: useCase.selectionCriteria.slice(0, 10).map((x) => ({ ...x, description: trimText(x.description, 360) })),
     commonPitfalls: sanitizeList(useCase.commonPitfalls, 8),
@@ -348,7 +399,7 @@ export function getIndustry(slug: string): IndustryContent | null {
   return {
     ...industry,
     description: trimText(industry.description, 700),
-    industryOverview: trimText(industry.industryOverview, 1600),
+    industryOverview: trimText(`${industry.industryOverview} ${buildIndustryAnalysis(industry)}`, 2100),
     softwareNeeds: sanitizeList(industry.softwareNeeds, 10),
     recommendations: industry.recommendations.slice(0, 12).map((x) => ({ ...x, bestFor: trimText(x.bestFor, 360) })),
     implementationTips: sanitizeList(industry.implementationTips, 10),
@@ -365,23 +416,26 @@ export function getResearch(slug: string): ResearchContent | null {
   const file = path.join(CONTENT_DIR, "research", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const research = readJson<ResearchContent>(file)
-  return { ...research, sections: sanitizeSections(research.sections), faqs: sanitizeFaqs(research.faqs) }
+  return { ...research, sections: [...sanitizeSections(research.sections), buildResearchAnalysis(research)], faqs: sanitizeFaqs(research.faqs) }
 }
 
 export function getAllResearch(): ResearchContent[] {
   return readDir(path.join(CONTENT_DIR, "research"))
-    .map((f) => { const r = readJson<ResearchContent>(path.join(CONTENT_DIR, "research", f)); return { ...r, sections: sanitizeSections(r.sections), faqs: sanitizeFaqs(r.faqs) } })
+    .map((f) => { const r = readJson<ResearchContent>(path.join(CONTENT_DIR, "research", f)); return { ...r, sections: [...sanitizeSections(r.sections), buildResearchAnalysis(r)], faqs: sanitizeFaqs(r.faqs) } })
 }
 
 export function getStatistic(slug: string): StatisticContent | null {
   const file = path.join(CONTENT_DIR, "statistics", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<StatisticContent>(file)
+  const statistic = readJson<StatisticContent>(file)
+  const analysis = buildStatisticAnalysis(statistic)
+  statistic.sections = [...statistic.sections, analysis]
+  return statistic
 }
 
 export function getAllStatistics(): StatisticContent[] {
   return readDir(path.join(CONTENT_DIR, "statistics"))
-    .map((f) => readJson<StatisticContent>(path.join(CONTENT_DIR, "statistics", f)))
+    .map((f) => { const s = readJson<StatisticContent>(path.join(CONTENT_DIR, "statistics", f)); s.sections = [...s.sections, buildStatisticAnalysis(s)]; return s })
 }
 
 export function getBest(slug: string): BestContent | null {
