@@ -80,6 +80,15 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
   /our testing methodology/i,
   /after researching hundreds of/i,
   /our expert buying advice/i,
+  /based on our detailed comparison/i,
+  /our analysis incorporates thousands/i,
+  /our experts?\\b/i,
+  /we tested\\b/i,
+  /tested by our team/i,
+  /user(s)? consistently report/i,
+  /organizations see measurable improvements/i,
+  /typical roi payback/i,
+  /first-year roi/i,
 ]
 
 function sanitizeUnsupportedClaims(value: string | undefined): string {
@@ -103,7 +112,7 @@ function sanitizeUnsupportedClaims(value: string | undefined): string {
 }
 
 function sanitizeContentValue(value: unknown): unknown {
-  if (typeof value === "string") return value.length >= 40 ? sanitizeUnsupportedClaims(value) : value
+  if (typeof value === "string") return sanitizeUnsupportedClaims(value)
   if (Array.isArray(value)) return value.map(sanitizeContentValue)
   if (value && typeof value === "object") {
     const out: Record<string, unknown> = {}
@@ -499,7 +508,17 @@ function buildAlternativeSections(alt: AlternativeContent): ContentSection[] {
   if (sectionWordCount(sections) >= 900) return sections
   const alternatives = Array.isArray(alt.alternatives) ? alt.alternatives : []
   const criteria = Array.isArray(alt.selectionCriteria) ? alt.selectionCriteria : []
-  const shortlist = alternatives.slice(0, 8).map((item) => `${item.name} (${item.rating}/5): ${sanitizeUnsupportedClaims(item.description)}`)
+  const enriched = alternatives.slice(0, 8).map((item) => {
+    const review = getReview(item.slug)
+    if (!review) return item
+    const capabilities = review.features.filter((f) => f.available).slice(0, 4).map((f) => f.name).join(", ")
+    const fit = review.tagline || review.description
+    return {
+      ...item,
+      description: sanitizeUnsupportedClaims(`${review.name} is a ${review.category.toLowerCase()} option. ${fit} Recorded strengths include ${capabilities || "the capabilities listed in its review"}.`),
+    }
+  })
+  const shortlist = enriched.map((item) => `${item.name} (${item.rating}/5): ${sanitizeUnsupportedClaims(item.description)}`)
   return [
     ...sections,
     { title: `What to look for beyond ${alt.toolName}`, body: `A useful alternative solves the reason you are considering a change. For ${alt.toolName}, compare the shortlist against the workflow you need to replace, the integrations your team already depends on, administration effort, and total cost at your expected usage. The recorded ratings are comparison signals rather than universal rankings.`, type: "text" },
