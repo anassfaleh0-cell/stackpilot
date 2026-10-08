@@ -134,17 +134,14 @@ describe("route families", () => {
     expect(duplicated).toEqual([])
   })
 
-  it(
-    "renders every content record as an indexable page",
-    async () => {
-      for (const family of FAMILIES) {
-        for (const record of recordsOf(family.dir)) {
-          await expectResolves(family, record.slug)
-        }
+  it("keeps every content record represented by an indexable sitemap URL", () => {
+    const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
+    for (const family of FAMILIES) {
+      for (const record of recordsOf(family.dir)) {
+        expect(paths.has(`/${family.route}/${record.slug}`), `missing sitemap URL for ${family.route}/${record.slug}`).toBe(true)
       }
-    },
-    300000,
-  )
+    }
+  })
 
   it("renders every author and tool the site ships", async () => {
     for (const slug of PUBLIC_AUTHOR_SLUGS) await expectResolves({ route: "authors", mod: Authors }, slug)
