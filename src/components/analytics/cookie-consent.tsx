@@ -142,32 +142,32 @@ export function CookieConsent() {
       role="dialog"
       aria-label="Cookie consent"
       aria-modal="true"
-      className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-lg animate-slide-up"
+      className="fixed bottom-3 left-3 right-3 z-50 mx-auto max-h-[calc(100vh-1.5rem)] max-w-xl overflow-y-auto animate-slide-up sm:bottom-4 sm:left-4 sm:right-4 sm:max-w-2xl"
     >
-      <div className="rounded-xl border border-border bg-card p-4 shadow-modal">
+      <div className="rounded-xl border border-border bg-card p-3 shadow-modal sm:p-4">
         {!customizing ? (
           <>
-            <div className="text-xs leading-relaxed text-muted-foreground">
+            <div className="text-[11px] leading-relaxed text-muted-foreground sm:text-xs">
               We use essential cookies for site functionality. We also use analytics cookies to understand how visitors use our site, and advertising cookies to serve relevant ads.{" "}
               <a href="/privacy" className="text-primary-dark hover:underline">Privacy Policy</a>{" · "}
               <a href="/cookies" className="text-primary-dark hover:underline">Cookie Policy</a>.
             </div>
-            <div className="flex items-center gap-2 mt-4">
+            <div className="mt-3 flex items-center gap-1.5 sm:mt-4 sm:gap-2">
               <button
                 onClick={handleAccept}
-                className="flex-1 h-10 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-[background-color,color] duration-200"
+                className="flex-1 h-9 rounded-lg bg-primary text-white text-xs font-medium hover:bg-primary-dark transition-[background-color,color] duration-200 sm:h-10 sm:text-sm"
               >
                 Accept All
               </button>
               <button
                 onClick={() => { setCustomizing(true); setDraft(ALL_OFF) }}
-                className="h-10 px-3 rounded-lg border border-border text-muted-foreground text-sm font-medium hover:bg-muted-bg transition-[background-color,color] duration-200"
+                className="h-9 px-2.5 rounded-lg border border-border text-muted-foreground text-xs font-medium hover:bg-muted-bg transition-[background-color,color] duration-200 sm:h-10 sm:px-3 sm:text-sm"
               >
                 Customize
               </button>
               <button
                 onClick={handleReject}
-                className="flex-1 h-10 rounded-lg border border-border text-muted-foreground text-sm font-medium hover:bg-muted-bg transition-[background-color,color] duration-200"
+                className="flex-1 h-9 rounded-lg border border-border text-muted-foreground text-xs font-medium hover:bg-muted-bg transition-[background-color,color] duration-200 sm:h-10 sm:text-sm"
               >
                 Reject All
               </button>
