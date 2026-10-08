@@ -10,11 +10,11 @@ const CONTENT_DIRS = [
 ]
 
 const replacements = [
-  [/After researching hundreds of ([^,]+) platforms and analyzing user reviews, here is our expert buying advice for choosing between ([^:]+):/gi,
+  [/After reviewing available information on ([^,]+) platforms and analyzing user reviews, here is our buying guidance for choosing between ([^:]+):/gi,
     (_m, a, b) => `When comparing ${a} platforms and reviewing available user feedback, here is our buying guidance for choosing between ${b}:`],
-  [/our expert buying advice/gi, "our buying guidance"],
-  [/our expert team has evaluated/gi, "our editorial comparison covers"],
-  [/our expert team evaluated/gi, "our editorial comparison covers"],
+  [/our buying guidance/gi, "our buying guidance"],
+  [/our editorial team has evaluated/gi, "our editorial comparison covers"],
+  [/our editorial team evaluated/gi, "our editorial comparison covers"],
   [/independently evaluated and would recommend/gi, "compared against the published criteria"],
   [/evaluated under the same conditions as/gi, "compared using consistent published criteria with"],
   [/tested in realistic workflows by our team/gi, "reviewed against representative workflow criteria"],
