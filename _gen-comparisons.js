@@ -369,7 +369,7 @@ function generateOverview(t1, t2, t1Slug, t2Slug, cat, lb) {
   const guideSlug = CAT_GUIDE[cat]
 
   const parts = [
-    `Looking for an in-depth ${t1} vs ${t2} comparison for ${year}? Our expert team has evaluated both platforms across 35+ criteria including features, pricing, security, integrations, performance, and user experience to help you make an informed decision.`,
+    `Looking for an in-depth ${t1} vs ${t2} comparison for ${year}? the editorial comparison team has evaluated both platforms across 35+ criteria including features, pricing, security, integrations, performance, and user experience to help you make an informed decision.`,
     ``,
     `${t1} (rated ${t1r}/5) and ${t2} (rated ${t2r}/5) are leading solutions in the ${cat.toLowerCase()} category. ${t1} starts at ${t1p} while ${t2} begins at ${t2p}. In this comprehensive ${year} comparison, we break down every aspect of both platforms to determine which is best for your specific needs.`,
     ``,
@@ -397,7 +397,7 @@ function generateWinnerSummary(t1, t2, t1Slug, t2Slug, cat, lb) {
     ``,
     `This ${diff}-point gap reflects ${winner}'s advantages in core functionality, ecosystem maturity, and overall value proposition. However, this does not mean ${loser} is without merit. For teams with specific requirements such as ${lb.glossaryText("budget-constraints", "budget constraints")}, niche workflow needs, or existing ecosystem investments, ${loser} remains a compelling option.`,
     ``,
-    `Our verdict is based on hands-on testing, analysis of ${t1r >= t2r ? t1 : t2} user reviews across multiple platforms, and evaluation against our standardized criteria framework. For a detailed breakdown of our methodology, see our ${lb.guideText("software-evaluation-checklist", "software evaluation checklist")}.`,
+    `Our verdict is based on structured product review, analysis of ${t1r >= t2r ? t1 : t2} user reviews across multiple platforms, and evaluation against our standardized criteria framework. For a detailed breakdown of our methodology, see our ${lb.guideText("software-evaluation-checklist", "software evaluation checklist")}.`,
     ``,
     `${bestSlug ? `For a complete ranking of all ${cat.toLowerCase().replace(/ tools$/i, "")} tools, visit our ${lb.best(bestSlug, `best ${cat.toLowerCase()} list`)}.` : ""} ${guideSlug ? `New to the category? Start with our ${lb.guide(guideSlug, `${cat.toLowerCase()} buying guide`)}.` : ""}`,
   ]
@@ -554,7 +554,7 @@ function generateDecisionMatrixSection(t1, t2, t1Slug, t2Slug, cat, winner, lb) 
 
 function generateBuyingAdviceSection(t1, t2, t1Slug, t2Slug, cat, lb) {
   const parts = [
-    `After researching hundreds of ${cat.toLowerCase()} platforms and analyzing user reviews, here is our expert buying advice for choosing between ${t1} and ${t2}:`,
+    `after reviewing available information on ${cat.toLowerCase()} platforms and analyzing user reviews, here is buyer-focused guidance for choosing between ${t1} and ${t2}:`,
     ``,
     `1. Define your requirements first. Use our ${lb.glossary("requirements-gathering", "requirements gathering")} framework to document must-have features versus nice-to-have capabilities.`,
     `2. Set a realistic budget. Consider not just subscription costs but implementation, training, and ongoing administration expenses.`,

@@ -176,7 +176,7 @@ function genReview(tool, idx) {
   const seed = hash(slug)
   const rn = (n) => ((seed * (n + 1)) % 100) / 100
   const secs = (cat === "AI & Machine Learning" ? templates.ai : templates.standard).map(([title, body]) => ({
-    title, body: `${body} ${name} excels in this area based on our hands-on testing.`,
+    title, body: `${body} ${name} excels in this area based on our structured product review.`,
     type: "text",
   }))
   secs.push({ title: "Conclusion", body: `${name} is a compelling option in the ${cat} space with strong ratings and competitive pricing. We recommend it for teams that prioritize the features it excels at.`, type: "text" })
@@ -184,7 +184,7 @@ function genReview(tool, idx) {
     `Excellent ${cat.toLowerCase()} capabilities with intuitive interface and powerful features`,
     `Strong integration ecosystem connecting with major platforms and services`,
     `Competitive pricing structure with good value for the feature set offered`,
-    `Regular product updates and improvements based on user feedback`,
+    `ongoing product changes and improvements based on user feedback`,
     `Responsive customer support team with expertise in the product`,
   ]
   const cons = [
@@ -336,7 +336,7 @@ function genGuide(slug, name, cat, idx) {
   const topics = ["Getting Started", "Selection Criteria", "Implementation Guide", "Best Practices", "Common Pitfalls", "ROI Analysis", "Future Trends"]
   const sections = topics.map((t, i) => ({
     title: t,
-    body: `This section covers ${t.toLowerCase()} for ${name.toLowerCase()} software in the ${cat.toLowerCase()} space. Based on our research and hands-on testing, we provide actionable advice for making informed decisions.`,
+    body: `This section covers ${t.toLowerCase()} for ${name.toLowerCase()} software in the ${cat.toLowerCase()} space. Based on our research and structured product review, we provide actionable advice for making informed decisions.`,
     type: "text",
   }))
   return {
