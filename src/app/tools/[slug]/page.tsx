@@ -11,17 +11,57 @@ import { DecisionTool } from "@/components/tools/decision-tool"
 
 const toolsData: Record<string, { name: string; description: string; icon: LucideIcon; kind: "tco" | "comparison" | "roi" | "scorecard" | "stack" | "pricing"; content: string[] }> = {
   "tco-calculator": {
-    name: "TCO Calculator", description: "Calculate the total cost of ownership for any software tool, including implementation, training, integration, and maintenance costs over 1 and 3 years.", icon: Calculator,
+    kind: "tco", name: "TCO Calculator", description: "Calculate the total cost of ownership for any software tool, including implementation, training, integration, and maintenance costs over 1 and 3 years.", icon: Calculator,
     content: [
       "Our TCO (Total Cost of Ownership) Calculator helps you estimate the true cost of adopting a new software tool. Beyond the subscription price, factor in implementation costs, training time, integration expenses, and ongoing maintenance.",
       "To get started, enter your expected number of users, the monthly subscription cost per user, and estimated implementation hours. The calculator will provide a comprehensive 1-year and 3-year total cost projection.",
     ],
   },
   "software-comparison": {
-    name: "Software Comparison Matrix", description: "Compare multiple tools side by side across features, pricing, ease of use, support, and integrations with weighted scoring.", icon: Scale,
+    kind: "comparison", name: "Software Comparison Matrix", description: "Compare multiple tools side by side across features, pricing, ease of use, support, and integrations with weighted scoring.", icon: Scale,
     content: [
       "Our Software Comparison Matrix helps you evaluate multiple tools side by side across the criteria that matter most to your business. Score each tool on features, pricing, ease of use, support, and integrations.",
       "Simply add the tools you're considering, rate them across our standardized criteria, and the matrix will automatically calculate weighted scores to help you identify the best option.",
+    ],
+  },
+  "roi-calculator": {
+    kind: "roi",
+    name: "Software ROI Calculator",
+    description: "Estimate annual savings, return on investment, and payback period for a software purchase.",
+    icon: TrendingUp,
+    content: [
+      "Estimate whether a software investment can pay for itself by comparing annual software cost with the value of time saved and other measurable benefits.",
+      "Use conservative assumptions. The result is an estimate, not a guarantee, and should be compared with your actual business case.",
+    ],
+  },
+  "software-scorecard": {
+    kind: "scorecard",
+    name: "Software Scorecard",
+    description: "Score software options against the criteria that matter most to your team.",
+    icon: Target,
+    content: [
+      "Turn subjective software research into a repeatable scorecard. Rate features, price, ease of use, integrations, and support from 1 to 5.",
+      "Use the same criteria for every vendor so the result reflects fit rather than marketing claims.",
+    ],
+  },
+  "saas-stack-cost-calculator": {
+    kind: "stack",
+    name: "SaaS Stack Cost Calculator",
+    description: "Estimate your total monthly and annual software stack cost.",
+    icon: Layers,
+    content: [
+      "Add the recurring cost of major software categories to see how much your stack costs each month and year.",
+      "Use the total to identify overlapping subscriptions, unused tools, and areas where consolidation may reduce spend.",
+    ],
+  },
+  "software-pricing-calculator": {
+    kind: "pricing",
+    name: "Software Pricing Calculator",
+    description: "Model software subscription costs based on seats, per-user pricing, and add-ons.",
+    icon: DollarSign,
+    content: [
+      "Estimate what a software plan could cost at your expected seat count instead of relying only on the advertised starting price.",
+      "Add recurring or annual extras to get a more realistic budget estimate.",
     ],
   },
 }
