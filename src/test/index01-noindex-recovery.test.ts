@@ -6,7 +6,7 @@ import sitemap from "@/app/sitemap"
 import { metadata as searchMetadata } from "@/app/search/page"
 import { metadata as dashboardMetadata } from "@/app/dashboard/page"
 
-const SITE = "https://www.pilotstack.online"
+const SITE = "https://pilotstack.online"
 
 describe("site-wide content indexability policy", () => {
   it("does not noindex real content records", () => {
@@ -60,7 +60,7 @@ describe("site-wide content indexability policy", () => {
     }
   })
 
-  it("uses the canonical www host in sitemap URLs", () => {
+  it("uses the canonical apex host in sitemap URLs", () => {
     const paths = sitemap()
     expect(paths.length).toBeGreaterThan(0)
     for (const entry of paths.slice(0, 20)) expect(entry.url.startsWith(SITE)).toBe(true)
