@@ -476,13 +476,15 @@ function sanitizeAlternativeDescription(description: string, toolName: string, c
 function buildAlternativeSections(alt: AlternativeContent): ContentSection[] {
   const sections = sanitizeSections(alt.sections)
   if (sectionWordCount(sections) >= 900) return sections
-  const shortlist = alt.alternatives.slice(0, 8).map((item) => `${item.name} (${item.rating}/5): ${sanitizeUnsupportedClaims(item.description)}`)
+  const alternatives = Array.isArray(alt.alternatives) ? alt.alternatives : []
+  const criteria = Array.isArray(alt.selectionCriteria) ? alt.selectionCriteria : []
+  const shortlist = alternatives.slice(0, 8).map((item) => `${item.name} (${item.rating}/5): ${sanitizeUnsupportedClaims(item.description)}`)
   return [
     ...sections,
     { title: `What to look for beyond ${alt.toolName}`, body: `A useful alternative solves the reason you are considering a change. For ${alt.toolName}, compare the shortlist against the workflow you need to replace, the integrations your team already depends on, administration effort, and total cost at your expected usage. The recorded ratings are comparison signals rather than universal rankings.`, type: "text" },
     { title: "Shortlist and fit", body: `The alternatives recorded on this page provide a practical starting point. Read each description next to its rating and then open the linked product review before making a final choice.`, type: "list", items: shortlist },
     { title: "Migration checks", body: `Before switching, document the data that must move, integrations that must remain operational, authentication and user-provisioning requirements, reporting continuity, and training effort. Run a representative proof-of-concept before a full migration when the data is business-critical.`, type: "text" },
-    { title: "Decision checklist", body: "Use the recorded criteria as the common scorecard for the final options.", type: "list", items: alt.selectionCriteria.slice(0, 8).length ? alt.selectionCriteria.slice(0, 8) : ["Core workflow fit", "Pricing and total cost of ownership", "Integrations and data portability", "Administration and adoption", "Migration effort and support"] },
+    { title: "Decision checklist", body: "Use the recorded criteria as the common scorecard for the final options.", type: "list", items: criteria.slice(0, 8).length ? criteria.slice(0, 8) : ["Core workflow fit", "Pricing and total cost of ownership", "Integrations and data portability", "Administration and adoption", "Migration effort and support"] },
   ]
 }
 export function getAlternative(slug: string): AlternativeContent | null {
