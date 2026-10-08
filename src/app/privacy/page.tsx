@@ -97,7 +97,7 @@ export default function PrivacyPage() {
               <li><strong>Analytics:</strong> We use Google Analytics to understand aggregate traffic patterns. IP addresses are anonymized, and data is not shared with advertising networks without your consent.</li>
               <li><strong>Hosting:</strong> Our website is hosted on Vercel&apos;s infrastructure, which provides security and privacy documentation for its infrastructure and processing services.</li>
             </ul>
-            <p>Where required, we use appropriate contractual safeguards with third-party processors and review their published privacy and data-processing terms.
+            <p>Where required, we use appropriate contractual safeguards with third-party processors and review their published privacy and data-processing terms.</p>
 
             <h2>International Data Transfers</h2>
             <p>If we transfer personal data from the EEA to countries not deemed adequate by the European Commission, we rely on Standard Contractual Clauses (SCCs) as the transfer mechanism under GDPR Article 46.</p>
