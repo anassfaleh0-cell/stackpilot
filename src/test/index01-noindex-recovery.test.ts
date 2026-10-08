@@ -61,6 +61,15 @@ describe("site-wide content indexability policy", () => {
     expect((meta as { robots?: { index?: boolean; follow?: boolean } }).robots).toMatchObject({ index: true, follow: true })
   })
 
+  it("keeps the quality manifest free of legacy noindex suppressions", async () => {
+    const fs = await import("node:fs/promises")
+    const manifest = JSON.parse(await fs.readFile("noindex-list.json", "utf8"))
+    expect(manifest.summary.totalNoindex).toBe(0)
+    for (const [dir, data] of Object.entries(manifest.directories as Record<string, { noindex?: string[] }>)) {
+      expect(data.noindex ?? [], dir).toEqual([])
+    }
+  })
+
   it("uses the canonical www host in sitemap URLs", () => {
     const paths = sitemap()
     expect(paths.length).toBeGreaterThan(0)
