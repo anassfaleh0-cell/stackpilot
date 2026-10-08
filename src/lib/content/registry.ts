@@ -276,14 +276,22 @@ function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: Comparison
   const genericNames = new Set(["user rating", "category", "starting price", "best for", "core strength", "ease of use", "integration ecosystem"])
   const looksGeneric = base.length <= 6 && base.every((f) => genericNames.has(f.name.toLowerCase()))
   if (!looksGeneric && base.length > 5) return base
+  const integrations1 = Array.isArray(r1?.company?.integrations) ? r1.company.integrations : []
+  const integrations2 = Array.isArray(r2?.company?.integrations) ? r2.company.integrations : []
+  const certifications1 = Array.isArray(r1?.company?.securityCertifications) ? r1.company.securityCertifications : []
+  const certifications2 = Array.isArray(r2?.company?.securityCertifications) ? r2.company.securityCertifications : []
+  const compliance1 = Array.isArray(r1?.company?.compliance) ? r1.company.compliance : []
+  const compliance2 = Array.isArray(r2?.company?.compliance) ? r2.company.compliance : []
+  const features1 = Array.isArray(r1?.features) ? r1.features : []
+  const features2 = Array.isArray(r2?.features) ? r2.features : []
   const derived: ComparisonFeature[] = [
     { name: "User Rating", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.rating}/5 across ${r1.reviewCount.toLocaleString()} recorded reviews` : undefined, tool2Detail: r2 ? `${r2.rating}/5 across ${r2.reviewCount.toLocaleString()} recorded reviews` : undefined },
     { name: "Pricing", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.pricing}${r1.priceRange ? `: ${r1.priceRange}` : ""}` : undefined, tool2Detail: r2 ? `${r2.pricing}${r2.priceRange ? `: ${r2.priceRange}` : ""}` : undefined },
     { name: "Category & Positioning", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.category}. ${r1.tagline}` : cmp.category, tool2Detail: r2 ? `${r2.category}. ${r2.tagline}` : cmp.secondaryCategories?.[0] || cmp.category },
-    { name: "Key Capabilities", tool1: Boolean(r1?.features?.length), tool2: Boolean(r2?.features?.length), tool1Detail: r1 ? r1.features.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") : undefined, tool2Detail: r2 ? r2.features.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") : undefined },
-    { name: "Integrations", tool1: Boolean(r1?.company?.integrations?.length), tool2: Boolean(r2?.company?.integrations?.length), tool1Detail: r1?.company?.integrations?.slice(0, 6).join(", "), tool2Detail: r2?.company?.integrations?.slice(0, 6).join(", ") },
+    { name: "Key Capabilities", tool1: Boolean(r1?.features?.length), tool2: Boolean(r2?.features?.length), tool1Detail: features1.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || undefined, tool2Detail: features2.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || undefined },
+    { name: "Integrations", tool1: Boolean(r1?.company?.integrations?.length), tool2: Boolean(r2?.company?.integrations?.length), tool1Detail: integrations1.slice(0, 6).join(", "), tool2Detail: integrations2.slice(0, 6).join(", ") },
     { name: "API", tool1: Boolean(r1?.company), tool2: Boolean(r2?.company), tool1Detail: r1?.company ? (r1.company.apiAvailable ? "API available in the recorded profile." : "API is not marked available in the recorded profile.") : undefined, tool2Detail: r2?.company ? (r2.company.apiAvailable ? "API available in the recorded profile." : "API is not marked available in the recorded profile.") : undefined },
-    { name: "Security & Compliance", tool1: Boolean(r1?.company), tool2: Boolean(r2?.company), tool1Detail: r1?.company ? [...r1.company.securityCertifications, ...r1.company.compliance].slice(0, 8).join(", ") || "No specific certifications recorded." : undefined, tool2Detail: r2?.company ? [...r2.company.securityCertifications, ...r2.company.compliance].slice(0, 8).join(", ") || "No specific certifications recorded." : undefined },
+    { name: "Security & Compliance", tool1: Boolean(r1?.company), tool2: Boolean(r2?.company), tool1Detail: r1?.company ? [...certifications1, ...compliance1].slice(0, 8).join(", ") || "No specific certifications recorded." : undefined, tool2Detail: r2?.company ? [...certifications2, ...compliance2].slice(0, 8).join(", ") || "No specific certifications recorded." : undefined },
     { name: "Migration", tool1: Boolean(r1?.company), tool2: Boolean(r2?.company), tool1Detail: r1?.company ? r1.company.migrationComplexity : undefined, tool2Detail: r2?.company ? r2.company.migrationComplexity : undefined },
   ]
   const existingNames = new Set(base.map((f) => f.name.toLowerCase()))
