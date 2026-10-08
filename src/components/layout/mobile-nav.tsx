@@ -150,7 +150,7 @@ export function MobileNav() {
           <hr className="section-divider my-4" />
           <p className="px-3 pb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Categories</p>
           <ul className="space-y-1">
-            {categories.slice(0, 6).map((cat) => (
+            {categories.map((cat) => (
               <li key={cat.slug}>
                 <Link
                   href={`/category/${cat.slug}`}
