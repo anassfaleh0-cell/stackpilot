@@ -4,6 +4,7 @@ import path from "node:path"
 import crypto from "node:crypto"
 import { execFileSync } from "node:child_process"
 import { getReview } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 
 const ROOT = process.cwd()
 const REVIEWS_DIR = path.join(ROOT, "content", "reviews")
@@ -298,10 +299,9 @@ describe("H-09A seo safety", () => {
 
   it("15. every review route is indexable under the current content policy", () => {
     expect(slugs.length).toBe(EXPECTED_REVIEW_COUNT)
-    expect(noindexSlugs).toEqual([])
-    expect(keepSlugs).toEqual([])
     for (const slug of slugs) {
       expect(getReview(slug), slug).not.toBeNull()
+      expect(isNoindexed("reviews", slug), slug).toBe(false)
     }
   })
 
