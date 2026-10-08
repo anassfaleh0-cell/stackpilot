@@ -11,7 +11,7 @@ import { RelatedContent } from "@/components/content/related-content"
 import { isNoindexed } from "@/lib/noindex"
 
 export function generateStaticParams() {
-  return []
+  return getAllGlossaryTerms().map((item) => ({ slug: item.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
