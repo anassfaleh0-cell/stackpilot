@@ -51,10 +51,10 @@ const GENERIC_BOILERPLATE_PATTERNS = [
   /response times: sub-second p50/i,
   /break-even typically 3-6 months/i,
   /first-year roi of 150-300%/i,
-  /1000\\+ pre-built connectors/i,
+  /1000\+ pre-built connectors/i,
   /week 1: discovery, planning, requirements gathering/i,
   /weighted criteria: features 25%, ease of use 20%/i,
-  /cloud-native deployment on aws\\/gcp\\/azure/i,
+  /cloud-native deployment on aws\/gcp\/azure/i,
 ]
 
 const GENERIC_LIST_ITEM_PATTERNS = [
