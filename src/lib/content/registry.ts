@@ -441,16 +441,28 @@ export function getAllCategories(): CategoryKnowledge[] {
     .map((f) => { const c = readJson<CategoryKnowledge>(path.join(CONTENT_DIR, "categories", f)); c.faqs = sanitizeFaqs(c.faqs); return c })
 }
 
+function buildAlternativeSections(alt: AlternativeContent): ContentSection[] {
+  const sections = sanitizeSections(alt.sections)
+  if (sectionWordCount(sections) >= 900) return sections
+  const shortlist = alt.alternatives.slice(0, 8).map((item) => `${item.name} (${item.rating}/5): ${sanitizeUnsupportedClaims(item.description)}`)
+  return [
+    ...sections,
+    { title: `What to look for beyond ${alt.toolName}`, body: `A useful alternative solves the reason you are considering a change. For ${alt.toolName}, compare the shortlist against the workflow you need to replace, the integrations your team already depends on, administration effort, and total cost at your expected usage. The recorded ratings are comparison signals rather than universal rankings.`, type: "text" },
+    { title: "Shortlist and fit", body: `The alternatives recorded on this page provide a practical starting point. Read each description next to its rating and then open the linked product review before making a final choice.`, type: "list", items: shortlist },
+    { title: "Migration checks", body: `Before switching, document the data that must move, integrations that must remain operational, authentication and user-provisioning requirements, reporting continuity, and training effort. Run a representative proof-of-concept before a full migration when the data is business-critical.`, type: "text" },
+    { title: "Decision checklist", body: "Use the recorded criteria as the common scorecard for the final options.", type: "list", items: alt.selectionCriteria.slice(0, 8).length ? alt.selectionCriteria.slice(0, 8) : ["Core workflow fit", "Pricing and total cost of ownership", "Integrations and data portability", "Administration and adoption", "Migration effort and support"] },
+  ]
+}
 export function getAlternative(slug: string): AlternativeContent | null {
   const file = path.join(CONTENT_DIR, "alternatives", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const alt = readJson<AlternativeContent>(file)
-  return { ...alt, sections: sanitizeSections(alt.sections), faqs: sanitizeFaqs(alt.faqs) }
+  return { ...alt, sections: buildAlternativeSections(alt), faqs: sanitizeFaqs(alt.faqs) }
 }
 
 export function getAllAlternatives(): AlternativeContent[] {
   return readDir(path.join(CONTENT_DIR, "alternatives"))
-    .map((f) => { const a = readJson<AlternativeContent>(path.join(CONTENT_DIR, "alternatives", f)); return { ...a, sections: sanitizeSections(a.sections), faqs: sanitizeFaqs(a.faqs) } })
+    .map((f) => { const a = readJson<AlternativeContent>(path.join(CONTENT_DIR, "alternatives", f)); return { ...a, sections: buildAlternativeSections(a), faqs: sanitizeFaqs(a.faqs) } })
 }
 
 export function getUseCase(slug: string): UseCaseContent | null {
@@ -524,7 +536,15 @@ export function getBest(slug: string): BestContent | null {
     ...best,
     description: trimText(best.description, 700),
     criteria: sanitizeList(best.criteria, 8),
-    picks: best.picks.slice(0, 10).map((p) => ({ ...p, bestFor: trimText(p.bestFor, 360), pros: sanitizeList(p.pros, 5), cons: sanitizeList(p.cons, 5) })),
+    picks: best.picks.slice(0, 10).map((p) => {
+      const review = getReview(p.toolSlug)
+      return {
+        ...p,
+        bestFor: trimText(p.bestFor, 360),
+        pros: sanitizeList(review?.pros?.length ? review.pros : p.pros, 5),
+        cons: sanitizeList(review?.cons?.length ? review.cons : p.cons, 5),
+      }
+    }),
     pricingSummary: trimText(best.pricingSummary, 900),
     comparisonTable: { ...best.comparisonTable, columns: best.comparisonTable.columns.map((x) => trimText(x, 160)), rows: best.comparisonTable.rows.slice(0, 12).map((row) => row.map((x) => trimText(x, 360))) },
     faqs: sanitizeFaqs(best.faqs),
