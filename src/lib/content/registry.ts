@@ -86,8 +86,8 @@ function sanitizeUnsupportedClaims(value: string | undefined): string {
   const raw = String(value ?? "").trim()
   if (!raw) return ""
   const normalized = raw
-    .replace(/\\bverified picks?\\b/gi, "selected picks")
-    .replace(/\\bafter thorough evaluation\\b/gi, "based on the comparison criteria")
+    .replace(/\bverified picks?\b/gi, "selected picks")
+    .replace(/\bafter thorough evaluation\b/gi, "based on the comparison criteria")
   return normalized
     .split("\n")
     .map((line) =>
