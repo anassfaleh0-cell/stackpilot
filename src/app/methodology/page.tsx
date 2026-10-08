@@ -73,7 +73,7 @@ export default function MethodologyPage() {
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                Every tool carries nine recorded category scores on a 1-5 scale. The overall rating on a review page is the mean of those nine scores, rounded to one decimal. Figures come from our recorded dataset, vendor documentation, and published pricing pages. Where we cannot source a fact, we leave it off or mark it unverified. We never accept payment for coverage.
+                Every tool carries nine recorded category scores on a 1-5 scale. The overall rating on a review page is the mean of those nine scores, rounded to one decimal. Figures come from our recorded dataset, vendor documentation, and published pricing pages. Where we cannot source a fact, we leave it off or mark it unverified. We do not sell editorial placement in our coverage.
               </p>
             </div>
 
@@ -102,10 +102,7 @@ export default function MethodologyPage() {
 
             <div className="prose prose-slate max-w-none mb-12">
               <p className="text-muted-foreground mb-6">
-                Every week we receive emails asking how we choose which tools to review and whether our ratings are
-                influenced by vendor relationships. Those are fair questions, and they deserve a transparent answer.
-                This page documents exactly how we evaluate software so you can trust our recommendations and
-                understand the context behind every score.
+                Readers reasonably want to know how tools are selected, how ratings are calculated, and how commercial relationships are handled. This page documents the process so readers can understand the context behind each score.
               </p>
 
               <h2 className="text-2xl font-bold mt-12 mb-6">Our Five-Stage Methodology</h2>
@@ -167,12 +164,7 @@ export default function MethodologyPage() {
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Editorial Independence</h2>
               <p className="text-muted-foreground mb-4">
-                PilotStack operates independently. We never accept payment for reviews or rankings, and no vendor
-                can influence our scores, ratings, or editorial decisions. We clearly disclose any affiliate
-                relationships, sponsored content, or partnerships. Sponsored content is never included in our
-                comparison reviews or treated as editorial content. We do not accept review copies, free trials,
-                or premium access in exchange for coverage — all tools are evaluated under the same conditions as
-                any paying customer.
+                PilotStack keeps editorial decisions separate from commercial relationships. Affiliate relationships and other commercial arrangements are disclosed where applicable. Paid promotional material, if present, is kept distinct from editorial reviews and comparisons. Our methodology describes the recorded sources and criteria used for editorial pages.
               </p>
               <p className="text-muted-foreground mb-4">
                 PilotStack may earn referral fees when readers click affiliate links and make purchases. These
