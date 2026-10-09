@@ -104,13 +104,13 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
 function sanitizeMalformedPricingText(value: string): string {
   let text = value
     // Some imported ranges contain a curly quote instead of a range separator.
-    .replace(/(\\$?\\d[\\d,.]*)\\s*[“”]\\s*(?=\\$?\\d)/g, "$1–")
-    .replace(/\\bFree\\s*[“”]\\s*(?=\\$)/gi, "Free–")
+    .replace(/(\$?\d[\d,.]*)\s*[“”]\s*(?=\$?\d)/g, "$1–")
+    .replace(/\bFree\s*[“”]\s*(?=\$)/gi, "Free–")
     // Never publish obviously corrupted generated price ranges as numeric facts.
-    .replace(/from\\s+\\d+\\s+to\\s+\\d{7,}\\s+per month/gi, "pricing varies by plan")
-    .replace(/\\bdoing \\+\\/month revenue\\b/gi, "with order volume and customer value that justify advanced automation")
-    .replace(/\\b(?:from|starting at|starts at)\\s+\\$?\\/mo\\b/gi, "pricing not verified")
-  if (/^\\s*\\/mo\\s*$/i.test(text)) {
+    .replace(/from\s+\d+\s+to\s+\d{7,}\s+per month/gi, "pricing varies by plan")
+    .replace(/\bdoing \+\/month revenue\b/gi, "with order volume and customer value that justify advanced automation")
+    .replace(/\b(?:from|starting at|starts at)\s+\$?\/mo\b/gi, "pricing not verified")
+  if (/^\s*\/mo\s*$/i.test(text)) {
     return "Pricing not verified — check the vendor's current pricing"
   }
   return text
