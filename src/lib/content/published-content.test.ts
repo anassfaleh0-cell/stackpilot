@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { isNoindexed } from "@/lib/noindex"
-import { getBest, getComparison, getGuide, getReview } from "@/lib/content/registry"
+import { getAlternative, getBest, getComparison, getGuide, getReview } from "@/lib/content/registry"
 
 describe("content indexability guards", () => {
   it("honors the explicit noindex manifest", () => {
@@ -13,6 +13,8 @@ describe("content indexability guards", () => {
     expect(isNoindexed("reviews", "webex")).toBe(false)
     expect(isNoindexed("best", "best-ai-coding-tools")).toBe(true)
     expect(isNoindexed("best", "best-accounting-software")).toBe(false)
+    expect(isNoindexed("alternatives", "1password-alternatives")).toBe(true)
+    expect(isNoindexed("alternatives", "notion-alternatives")).toBe(false)
   })
 
   it("does not expose a comparison explicitly marked unpublished", () => {
@@ -86,4 +88,21 @@ describe("rewritten best-page quality floor", () => {
       expect(page!.picks.every((pick) => pick.bestFor.length > 30 && pick.pros.length > 0 && pick.cons.length > 0)).toBe(true)
     })
   }
+})
+
+describe("rewritten alternative-page quality floor", () => {
+  for (const slug of ["linear-alternatives", "notion-alternatives", "clickup-alternatives"]) {
+    it(`${slug} has relevant alternatives and actionable selection guidance`, () => {
+      const page = getAlternative(slug)
+      expect(page).not.toBeNull()
+      expect(page!.alternatives.length).toBeGreaterThanOrEqual(5)
+      expect(page!.selectionCriteria.length).toBeGreaterThanOrEqual(5)
+      expect(page!.sections.map((section) => section.body).join(" ").split(/\s+/).filter(Boolean).length).toBeGreaterThanOrEqual(300)
+    })
+  }
+  it("does not recommend scheduling and task-list tools as Notion workspace alternatives", () => {
+    const page = getAlternative("notion-alternatives")
+    expect(page!.alternatives.map((item) => item.name)).not.toContain("Calendly")
+    expect(page!.alternatives.map((item) => item.name)).not.toContain("Todoist")
+  })
 })
