@@ -50,12 +50,17 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   const cmp = getComparison(slug)
   if (!cmp) notFound()
 
-  const t1Score = cmp.features.filter((f) => f.tool1 && !f.tool2).length
-  const t2Score = cmp.features.filter((f) => f.tool2 && !f.tool1).length
-  const tieScore = cmp.features.filter((f) => f.tool1 && f.tool2).length
-  const total = cmp.features.length
-  const t1Pct = Math.round((t1Score / total) * 100)
-  const t2Pct = Math.round((t2Score / total) * 100)
+  // Only explicit boolean availability values are scoreable; strings such as "Paid" are descriptive.
+  const scoredFeatures = cmp.features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean")
+  const tool1Only = scoredFeatures.filter((f) => f.tool1 === true && f.tool2 === false)
+  const tool2Only = scoredFeatures.filter((f) => f.tool2 === true && f.tool1 === false)
+  const sharedFeatures = scoredFeatures.filter((f) => f.tool1 === true && f.tool2 === true)
+  const t1Score = scoredFeatures.filter((f) => f.tool1 === true).length
+  const t2Score = scoredFeatures.filter((f) => f.tool2 === true).length
+  const tieScore = sharedFeatures.length
+  const total = scoredFeatures.length
+  const t1Pct = total ? Math.round((t1Score / total) * 100) : null
+  const t2Pct = total ? Math.round((t2Score / total) * 100) : null
 
   const review1 = getReview(cmp.tool1Slug)
   const review2 = getReview(cmp.tool2Slug)
@@ -100,9 +105,9 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <h2 className="text-base font-semibold mb-2">TL;DR</h2>
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
               <li>{cmp.winner ? `${cmp.winner} wins overall` : `${cmp.tool1} vs ${cmp.tool2}: depends on your priorities`}</li>
-              <li>{cmp.tool1} leads in {cmp.features.filter(f => f.tool1 && !f.tool2).map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "several feature areas"}</li>
-              <li>{cmp.tool2} leads in {cmp.features.filter(f => f.tool2 && !f.tool1).map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "several feature areas"}</li>
-              <li>{cmp.features.filter(f => f.tool1 && f.tool2).length} features are shared equally between both tools</li>
+              <li>{cmp.tool1} leads in {tool1Only.map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "several feature areas"}</li>
+              <li>{cmp.tool2} leads in {tool2Only.map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "several feature areas"}</li>
+              <li>{sharedFeatures.length} features are shared equally between both tools</li>
               <li>Consider your specific workflow needs when choosing between them</li>
             </ul>
           </div>
@@ -112,8 +117,8 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
               <li>Category: {cmp.category}</li>
               <li>Total features compared: {cmp.features.length}</li>
-              <li>{cmp.tool1} exclusive features: {cmp.features.filter(f => f.tool1 && !f.tool2).length}</li>
-              <li>{cmp.tool2} exclusive features: {cmp.features.filter(f => f.tool2 && !f.tool1).length}</li>
+              <li>{cmp.tool1} exclusive features: {tool1Only.length}</li>
+              <li>{cmp.tool2} exclusive features: {tool2Only.length}</li>
               <li>Shared features: {cmp.features.filter(f => f.tool1 && f.tool2).length}</li>
               <li>{cmp.winner ? `Winner: ${cmp.winner}` : "No clear winner — depends on use case"}</li>
               <li>FAQs answered: {cmp.faqs.length}</li>
@@ -149,9 +154,9 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                     </Badge>
                   )}
                   <div className="text-xl font-bold mb-2">{tool.name}</div>
-                  <div className="text-3xl font-bold text-primary mb-1">{tool.score}%</div>
-                  <div className="text-xs text-muted-foreground mb-3">Feature score</div>
-                  <ScoreBar score={tool.score} max={100} className="mb-3" />
+                  <div className="text-3xl font-bold text-primary mb-1">{tool.score === null ? "—" : `${tool.score}%`}</div>
+                  <div className="text-xs text-muted-foreground mb-3">{tool.score === null ? "No comparable availability data" : `Availability across ${total} boolean checks`}</div>
+                  {tool.score !== null && <ScoreBar score={tool.score} max={100} className="mb-3" />}
                   <Link
                     href={`/reviews/${tool.slug}`}
                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-transparent hover:bg-muted-bg h-9 px-4 text-xs font-medium transition-all duration-200 mt-1"
