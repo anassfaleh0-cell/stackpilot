@@ -9,51 +9,32 @@ import Link from "next/link"
 
 export const metadata = createMetadata({
   title: "Review Methodology | How We Score Software",
-  description: "How every PilotStack page is built: the nine recorded category scores behind each rating, where our figures come from, what we leave out when we cannot source it, and how we stay independent.",
+  description: "How PilotStack builds software profiles, distinguishes editorial judgments from sourced facts, handles uncertainty, and corrects unsupported claims.",
   path: "/methodology",
   ogType: "article",
 })
 
 const stages = [
-  {
-    title: "Selection & Scoping",
-    body: "We do not review every tool. We cover categories where readers are actively evaluating options, and each tool page records the same fixed set of fields: pricing model, deployment, API availability, migration complexity, security entries, integrations, and nine category scores. We never accept payment to include or exclude a tool from our coverage.",
-  },
-  {
-    title: "Evidence & Sourcing",
-    body: "Every figure on a page comes from a source we hold: our recorded review dataset, vendor documentation, or a published pricing page. Review counts, ratings, and pricing are recorded as of the review date shown on the page. Where two sources we hold disagree — for example on a founding date or headcount — we publish neither value rather than pick one.",
-  },
-  {
-    title: "Scoring & Ratings",
-    body: "Each tool carries nine recorded category scores: Features, Usability, Pricing, Support, Security, Integrations, Performance, Documentation, and Scalability. Every category is scored on a 1-5 scale with equal weight. The overall rating shown on a page is the mean of those nine scores, rounded to one decimal place — you can check it yourself on any review page.",
-  },
-  {
-    title: "Consistency & Limits",
-    body: "A tool's rating, review count, and category scores are held once and reused everywhere that tool appears, so the same figure shows up on its review, category, and comparison pages. Certification statuses and other facts we cannot source are shown as unverified or omitted entirely instead of being stated as confirmed.",
-  },
-  {
-    title: "Updates & Revisions",
-    body: "Software changes constantly, and so do our pages. Every page carries a last-reviewed date, and we revisit pages when pricing, features, or product positioning change materially. Pages whose recorded figures we can no longer support are corrected or removed rather than left to stand.",
-  },
+  { title: "Selection & Scoping", body: "We select products based on the workflows and buying questions readers are likely to evaluate. Profiles may record pricing, deployment, integrations, capabilities, and security information, but the presence of a field does not mean it has been independently verified. We do not sell inclusion or exclusion in editorial coverage." },
+  { title: "Evidence & Sourcing", body: "Some legacy records do not yet have sufficient source-level provenance for every numerical or product-specific claim. We are auditing those records and removing unsupported user-review counts, exact performance claims, and unverified certification statements. Vendor documentation and published pricing pages are preferred for current product facts; when evidence is missing or conflicting, the claim should be omitted or clearly marked unverified." },
+  { title: "Editorial Scores & Ratings", body: "Some profiles include an editorial score calculated as the mean of the category scores currently recorded for that product. Available dimensions are not identical across every legacy profile, so the score is not a standardized laboratory benchmark and should not be treated as directly comparable across all products. It is not an aggregate of third-party user reviews. We do not claim hands-on testing unless a page explicitly documents the test and its scope." },
+  { title: "Consistency & Limits", body: "Consistency matters, but reusing a field does not make it verified. Product facts, pricing, security claims, and scores must be interpreted with their evidence and limitations. Unsupported third-party review counts should not be presented as real, and unverified certifications or performance claims should be removed rather than repeated across pages." },
+  { title: "Updates & Revisions", body: "Software changes constantly. We prioritize corrections when pricing, features, security disclosures, or product positioning change. Dates describe the latest editorial revision, not a guarantee that every vendor fact is current. If a claim cannot be supported, it should be corrected, marked as unverified, or removed." },
 ]
 
 const scoringRubric = [
-  { dimension: "Features", what: "What the product can do — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Usability", what: "Onboarding and day-to-day clarity — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Pricing", what: "Price relative to what is included — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Support", what: "Support channels and responsiveness — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Security", what: "Security controls and disclosures — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Integrations", what: "Integration coverage — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Performance", what: "Speed and reliability — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Documentation", what: "Help material and guides — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Scalability", what: "Behaviour as usage grows — recorded as a 1-5 score", weight: "1/9" },
+  { dimension: "Feature coverage", what: "Capabilities and constraints recorded for the product; verify against current vendor documentation", weight: "Contextual" },
+  { dimension: "Usability and workflow fit", what: "Editorial judgment about likely fit for the stated use case; not a hands-on usability study", weight: "Contextual" },
+  { dimension: "Value and pricing", what: "Plan structure and cost considerations; pricing may change and should be verified before purchase", weight: "Contextual" },
+  { dimension: "Integrations and extensibility", what: "Documented integrations, APIs, and automation options where evidence is available", weight: "Contextual" },
+  { dimension: "Security and administration", what: "Published controls and disclosures; unknown or unsupported claims should remain unverified", weight: "Contextual" },
 ]
 
 export default function MethodologyPage() {
   const currentYear = new Date().getFullYear()
   return (
     <>
-      <ArticleSchema title="Review Methodology | How We Score Software" description="How every PilotStack page is built — the nine recorded category scores behind each rating, where our figures come from, and what we leave out when we cannot source it." publishedAt="2026-01-15" author="PilotStack Team" url={`${site.url}/methodology`} keywords={["software review methodology", "scoring rubric", "editorial standards", "review transparency"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
+      <ArticleSchema title="Review Methodology | How We Score Software" description="How PilotStack builds software profiles, distinguishes editorial judgments from sourced facts, and handles uncertainty." publishedAt="2026-01-15" author="PilotStack Team" url={`${site.url}/methodology`} keywords={["software review methodology", "scoring rubric", "editorial standards", "review transparency"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
       <BreadcrumbSchema items={[
         { name: "Home", href: "/" },
         { name: "Review Methodology", href: "/methodology" },
@@ -67,21 +48,21 @@ export default function MethodologyPage() {
             <Badge variant="default" className="mb-4">Our Process</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">How We Review Software</h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Transparency matters. Here is exactly how every page on PilotStack is built, scored, and sourced.
+              Transparency matters. This page explains our editorial approach, the limits of legacy data, and how we handle claims that still need verification.
             </p>
 
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                Every tool carries nine recorded category scores on a 1-5 scale. The overall rating on a review page is the mean of those nine scores, rounded to one decimal. Figures come from our recorded dataset, vendor documentation, and published pricing pages. Where we cannot source a fact, we leave it off or mark it unverified. We do not sell editorial placement in our coverage.
+                Some product pages include a provisional editorial score based on the dimensions recorded for that profile. It is not a third-party user-review average or a standardized hands-on benchmark, and scores may not be directly comparable when dimensions differ. We are auditing older content for unsupported claims and removing facts that cannot be substantiated. Paid placement does not determine editorial inclusion or score.
               </p>
             </div>
 
             <div className="tl-dr mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">TL;DR</h2>
               <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-                <li>Nine equally weighted category scores on a 1-5 scale; overall = their mean, rounded to one decimal</li>
-                <li>The same rating and review count is reused everywhere a tool appears</li>
+                <li>Where present, the profile score is the mean of recorded editorial dimensions; dimensions may vary by product</li>
+                <li>Scores are editorial profile summaries, not external user-review counts</li>
                 <li>Every page shows when it was last reviewed</li>
                 <li>Facts we cannot source are omitted or marked unverified, never asserted</li>
                 <li>No vendor payments, previews, or influence on ratings or rankings</li>
@@ -119,7 +100,7 @@ export default function MethodologyPage() {
 
               <h2 className="text-2xl font-bold mt-12 mb-6">Scoring Rubric</h2>
               <p className="text-muted-foreground mb-4">
-                Each review page carries nine equally weighted category scores on a 1-5 scale. The overall rating is their mean, rounded to one decimal:
+                A profile may include an editorial score calculated as the mean of the dimensions currently recorded for that product. Dimensions can differ, so treat scores as a navigation aid—not a standardized cross-vendor benchmark:
               </p>
               <div className="overflow-x-auto">
               <div className="border border-border rounded-xl overflow-hidden mb-8 min-w-[300px]">
@@ -146,20 +127,14 @@ export default function MethodologyPage() {
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Fact-Checking & Corrections</h2>
               <p className="text-muted-foreground mb-4">
-                Figures on a page come from a source we hold: our recorded dataset, vendor documentation, or a
-                published pricing page. When two sources we hold disagree, we publish neither value rather than
-                choose one, and certification statuses with no source are shown as unverified instead of asserted.
-                When a correction is made the page&apos;s last-reviewed date is updated. Readers can report errors
+                Our legacy corpus is being audited because not every older claim has a traceable source. Current pricing and product facts should be checked against vendor documentation; unsupported review counts, exact performance claims, and unverified certification claims are removed or marked clearly. When a correction is made, the editorial revision date is updated. Readers can report errors
                 via our <Link href="/contact" className="text-primary hover:underline">contact form</Link>.
               </p>
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Review Team & Expertise</h2>
               <p className="text-muted-foreground mb-4">
                 PilotStack is run by a small, independent team. Editorial roles are listed on our{" "}
-                <Link href="/authors" className="text-primary hover:underline">authors</Link> pages. Every page follows the
-                same published rules: nine equally weighted category scores on a 1-5 scale, one recorded source per
-                figure, and the overall rating as the mean of those nine scores. Because a single set of recorded
-                figures is reused everywhere a tool appears, ratings do not drift between pages.
+                <Link href="/authors" className="text-primary hover:underline">authors</Link> pages. Our editorial team is improving source provenance and correcting legacy records. Profile scores, where present, are editorial summaries—not third-party user ratings or proof of hands-on testing. Product facts should carry evidence and dates where available; repeating a field across pages is not a substitute for verification.
               </p>
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Editorial Independence</h2>
@@ -178,7 +153,7 @@ export default function MethodologyPage() {
               </p>
 
               <p className="text-xs text-muted-foreground-foreground mt-8">
-                Methodology last updated: July {currentYear}. We review and update this methodology annually or
+                Methodology last updated: October {currentYear}. We review and update this methodology annually or
                 when industry standards for software reviews evolve.
               </p>
             </div>
