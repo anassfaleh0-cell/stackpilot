@@ -390,7 +390,7 @@ export function ProductSchema({ name, description, image, brand, aggregateRating
 export function ReviewSchema({ name, description, rating, url, datePublished, body, image, companyInfo }: {
   name: string
   description: string
-  rating: number
+  rating?: number
   url: string
   datePublished?: string
   body?: string
@@ -403,12 +403,14 @@ export function ReviewSchema({ name, description, rating, url, datePublished, bo
     "@id": url + "#review",
     name: `${name} Review`,
     reviewBody: body || description,
-    reviewRating: {
-      "@type": "Rating",
-      ratingValue: rating,
-      bestRating: 5,
-      worstRating: 1,
-    },
+    ...(rating != null ? {
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    } : {}),
     author: organizationRef(),
     datePublished: datePublished || undefined,
     itemReviewed: {
