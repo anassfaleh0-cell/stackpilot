@@ -80,6 +80,10 @@ const GENERIC_BOILERPLATE_PATTERNS = [
 ]
 
 const UNSUPPORTED_CLAIM_PATTERNS = [
+  /\bwe (?:evaluated|tested|reviewed|researched|compared)\b/i,
+  /\b(?:our|the) evaluation process\b/i,
+  /\b(?:tested|evaluated) in real[- ]world\b/i,
+  /\buser reviews from (?:G2|Capterra|TrustRadius)\b/i,
   /hands[- ]on testing/i,
   /tested for at least two weeks/i,
   /based on our testing methodology/i,
