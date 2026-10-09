@@ -1,5 +1,6 @@
 // Sprint 19 Phase 2: Money Keywords Expansion — Best Pages for Audiences
 const fs = require("node:fs")
+const path = require("node:path")
 
 const CONTENT_DIR = path.join(__dirname, "content")
 const now = new Date().toISOString().slice(0, 10)
