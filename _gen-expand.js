@@ -270,7 +270,7 @@ function genReview(tool, idx) {
   }
 }
 
-function genAlt(slug, name, cat, allTools, existingComparisons = new Set(), existingGuides = new Set()) {
+function genAlt(slug, name, cat, allTools, existingComparisons = new Set(), existingGuides = new Set(), existingPosts = new Set()) {
   const profiles = {
     "asana": "cross-functional project plans, ownership, dependencies, and progress visibility",
     "linear": "product and engineering issue tracking, cycles, and roadmap coordination",
@@ -315,7 +315,7 @@ function genAlt(slug, name, cat, allTools, existingComparisons = new Set(), exis
     .map(([otherSlug]) => [slug, otherSlug].sort().join("-vs-"))
     .filter((comparisonSlug) => existingComparisons.has(comparisonSlug))
     .slice(0, 4)
-  const relatedPosts = cat === "Project Management" && existingGuides.has("migrating-project-management-tools")
+  const relatedPosts = cat === "Project Management" && existingPosts.has("migrating-project-management-tools")
     ? ["migrating-project-management-tools"] : []
   return {
     slug: `${slug}-alternatives`,
@@ -494,6 +494,7 @@ const existingAlts = loadExisting("alternatives")
 const existingBest = loadExisting("best")
 const existingGuides = loadExisting("guides")
 const existingComparisons = loadExisting("comparisons")
+const existingPosts = loadExisting("blog")
 
 // Track counts
 let newReviews = 0, newAlts = 0, newBest = 0, newGuides = 0, newComps = 0
@@ -511,7 +512,7 @@ for (const tool of tools) {
 for (const tool of tools) {
   const [slug, name, cat] = tool
   if (existingAlts.has(`${slug}-alternatives`)) continue
-  const alt = genAlt(slug, name, cat, tools, existingComparisons, existingGuides)
+  const alt = genAlt(slug, name, cat, tools, existingComparisons, existingGuides, existingPosts)
   fs.writeFileSync(path.join(contentDir, "alternatives", `${slug}-alternatives.json`), JSON.stringify(alt, null, 2))
   newAlts++
 }
