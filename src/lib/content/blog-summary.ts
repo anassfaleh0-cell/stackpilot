@@ -7,15 +7,15 @@ export function getBlogKeyTakeaways(body: string, limit = MAX_TAKEAWAYS): string
 
   const seen = new Set<string>()
   const candidates = body
-    .split(/\\n\\s*\\n/)
+    .split(/\n\s*\n/)
     .map((block) => block.trim())
-    .filter((block) => block.length > 0 && !/^#{1,6}\\s/.test(block) && !/^\\|/.test(block))
+    .filter((block) => block.length > 0 && !/^#{1,6}\s/.test(block) && !/^\|/.test(block))
     .map((block) => block
-      .replace(/\\*\\*(.*?)\\*\\*/g, "$1")
-      .replace(/\\*(.*?)\\*/g, "$1")
-      .replace(/\\[([^\\]]+)\\]\\([^)]*\\)/g, "$1")
-      .replace(/^[-*+]\\s+/, "")
-      .replace(/\\s+/g, " ")
+      .replace(/\*\*(.*?)\*\*/g, "$1")
+      .replace(/\*(.*?)\*/g, "$1")
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+      .replace(/^[-*+]\s+/, "")
+      .replace(/\s+/g, " ")
       .trim())
     .filter((text) => text.length >= 55)
 
@@ -24,7 +24,7 @@ export function getBlogKeyTakeaways(body: string, limit = MAX_TAKEAWAYS): string
     const normalized = candidate.toLowerCase()
     if (seen.has(normalized)) continue
     seen.add(normalized)
-    const firstSentence = candidate.match(/^.{35,}?[.!?](?=\\s|$)/)?.[0] ?? candidate
+    const firstSentence = candidate.match(/^.{35,}?[.!?](?=\s|$)/)?.[0] ?? candidate
     const summary = firstSentence.length > MAX_TAKEAWAY_LENGTH
       ? firstSentence.slice(0, MAX_TAKEAWAY_LENGTH - 1).trimEnd() + "…"
       : firstSentence
