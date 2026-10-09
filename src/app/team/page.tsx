@@ -36,7 +36,7 @@ export default function TeamPage() {
                 </div>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                This byline represents the PilotStack publication rather than an individual biography. Pages are prepared from recorded product information and the published methodology; we do not claim hands-on testing unless a page explicitly says so.
+                This byline represents the PilotStack publication rather than an individual biography. Pages are prepared from recorded product information and the published methodology; we do not describe a product as directly tested unless a page explicitly says so.
                 Commercial relationships, when present, are disclosed and do not determine editorial scores or conclusions.
               </p>
               <Link href="/methodology" className="text-sm text-primary hover:underline">
