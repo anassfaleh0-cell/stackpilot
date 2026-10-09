@@ -511,17 +511,156 @@ function sanitizeAlternativeDescription(description: string, toolName: string, c
   return `Compare ${count} ${toolName} alternatives using recorded ratings, practical fit, pricing context, integrations, and migration considerations. Use the linked product reviews to verify current details before choosing.`
 }
 function buildGuideSections(guide: GuideContent): GuideContent['sections'] {
-  const sections = sanitizeSections(guide.sections)
+  const rawSections = sanitizeSections(guide.sections)
+  const boilerplatePatterns = [
+    /Choosing the right .* software starts with understanding your specific requirements/i,
+    /take stock of your team size, budget, existing tool stack/i,
+    /focus on these criteria: feature completeness relative to your needs/i,
+    /This guide walks through the key considerations/i,
+    /Most teams see positive ROI within 3-6 months/i,
+    /The most common mistakes teams make with/i,
+    /This section is foundational — take time to understand it/i,
+  ]
+  const sections = rawSections.filter((section) =>
+    !boilerplatePatterns.some((pattern) => pattern.test(section.body))
+  )
   if (sectionWordCount(sections) >= 900) return sections
-  const title = guide.title.replace(/\s*[:—-].*$/, '').trim() || guide.category
-  const criteria = ['Define the workflow this guide is meant to improve and document the current process before comparing software.', 'Separate must-have requirements from preferences so feature count does not become a substitute for product fit.', 'Verify integrations, permissions, data movement, reporting, and relevant security or compliance requirements before committing.', 'Compare total cost of ownership, including user seats, plan limits, implementation work, training, and ongoing administration.', 'Choose a small pilot workflow and define a measurable success criterion before a full rollout.']
-  const rollout = ['Map the current workflow and identify steps where delays, duplication, or manual work occur.', 'Test the highest-risk requirement with realistic sample data instead of relying on a product-page claim.', 'Document configuration, ownership, permissions, and the fallback process for anything the software cannot automate.', 'Train users on the tasks they actually perform and review adoption after the first rollout period.', 'Revisit the setup after launch and remove unused configuration instead of letting complexity grow unchecked.']
+
+  const category = guide.category || "software"
+  const slug = guide.slug.toLowerCase()
+  const topic = guide.title.replace(/\s*[:—-].*$/, "").trim() || category
+  const categoryProfiles: Record<string, { evidence: string; checks: string; risks: string }> = {
+    "AI & Machine Learning": {
+      evidence: "model quality on representative tasks, repeatability, data retention, human review, model or prompt versioning, and usage limits",
+      checks: "quality against a held-out sample, handling of sensitive data, failure behavior, latency under realistic load, monitoring, and the cost of retries",
+      risks: "unreviewed outputs entering customer workflows, sensitive data reaching an unapproved provider, model changes altering results, and usage costs growing without alerts",
+    },
+    "Project Management": {
+      evidence: "dependencies, workload capacity, recurring work, portfolio reporting, guest permissions, automation limits, and how task status is maintained",
+      checks: "a real project with dependencies, a recurring workflow, cross-team visibility, access roles, notifications, exports, and reporting accuracy",
+      risks: "duplicated task systems, dashboards no one maintains, automations that hide ownership, and plans whose limits break the team's normal workflow",
+    },
+    "CRM & Sales": {
+      evidence: "contact and account quality, pipeline definitions, activity capture, forecasting, permissions, reporting, and synchronization with marketing or support",
+      checks: "deduplication, ownership changes, pipeline stages, imports and exports, audit history, role permissions, and the handoff between teams",
+      risks: "migrating dirty records, changing pipeline definitions without agreement, over-permissioned data, and measuring activity instead of sales outcomes",
+    },
+    "Marketing & SEO": {
+      evidence: "measurement goals, consent-aware tracking, channel definitions, conversion quality, attribution windows, CRM handoffs, and reconciliation with source data",
+      checks: "a known test conversion, campaign tagging, consent behavior, cross-domain journeys, bot filtering, export access, and the difference between modeled and observed data",
+      risks: "double-counted conversions, broken tags, unclear attribution windows, privacy gaps, and optimizing for cheap leads rather than qualified outcomes",
+    },
+    "Design & Creative": {
+      evidence: "component reuse, review and handoff, asset ownership, accessibility, version history, export formats, and design-to-development collaboration",
+      checks: "a representative file, shared libraries, permission boundaries, revision recovery, developer handoff, and exports that preserve required details",
+      risks: "design systems that drift, inaccessible components, unclear asset ownership, and workflows that depend on manual copying between tools",
+    },
+    "Developer Tools": {
+      evidence: "repository and CI integration, access control, API limits, test reliability, observability, rollback paths, and operational ownership",
+      checks: "a real repository or service, failed-build handling, secrets management, permissions, API quotas, alert routing, and recovery from a bad change",
+      risks: "flaky automation, exposed credentials, noisy alerts, hidden usage limits, and tools that only work when one engineer maintains them",
+    },
+    "Analytics & Data": {
+      evidence: "event and metric definitions, data freshness, lineage, access controls, exportability, governance, and storage or query costs",
+      checks: "reconciling a known number against its source, late-arriving data, permissions, refresh failures, schema changes, and exporting usable records",
+      risks: "conflicting metric definitions, stale dashboards, untracked schema changes, excess access to sensitive data, and surprise compute costs",
+    },
+    "HR & People": {
+      evidence: "employee-data permissions, payroll or HRIS integration, regional requirements, manager workflows, reporting access, and employee self-service",
+      checks: "role changes, onboarding and offboarding, approvals, data exports, audit history, regional settings, and access to sensitive employee records",
+      risks: "incorrect employee records, excessive manager access, missed offboarding, unclear retention rules, and integrations that silently stop syncing",
+    },
+    "Finance & Accounting": {
+      evidence: "approval controls, audit trails, reconciliation, accounting-system integration, regional requirements, data export, and total cost of ownership",
+      checks: "a representative reconciliation, approval separation, tax or currency handling, close-period reporting, audit logs, exports, and recovery procedures",
+      risks: "duplicate transactions, untraceable edits, weak approval separation, incorrect mappings, and selecting a plan that lacks a required control",
+    },
+    "Productivity": {
+      evidence: "capture and retrieval, collaboration, permissions, search quality, portability, recurring workflows, and whether the tool reduces process overhead",
+      checks: "finding a known item, sharing with the right audience, moving data out, recurring tasks, mobile or offline needs, and notification controls",
+      risks: "information scattered across too many spaces, poor ownership, inaccessible records, and workflows that add more administration than they remove",
+    },
+    "Security & Compliance": {
+      evidence: "threat coverage, identity and access controls, audit logs, incident response, deployment requirements, compliance evidence, and alert workload",
+      checks: "a controlled test, role boundaries, log retention, alert triage, integration permissions, incident export, and the evidence behind compliance statements",
+      risks: "alert fatigue, unreviewed exceptions, broad service-account access, missing audit records, and treating a vendor badge as proof of your own compliance",
+    },
+    "Communication": {
+      evidence: "call or message quality, admin controls, guest access, retention, integrations, accessibility, and behavior across devices and network conditions",
+      checks: "a typical meeting or support call, guest join flow, captions, recording permissions, retention, calendar integration, and low-bandwidth behavior",
+      risks: "external guests unable to join, unclear recording consent, fragmented conversations, and retention settings that conflict with company policy",
+    },
+  }
+  const profile = categoryProfiles[category] || {
+    evidence: "workflow fit, integrations, permissions, reporting, data portability, support boundaries, and total cost at expected usage",
+    checks: "a representative workflow, role permissions, export quality, integration failure handling, reporting, and current plan limits",
+    risks: "unclear ownership, untested assumptions, avoidable manual work, weak access controls, and costs that rise as usage expands",
+  }
+  const topicProfiles: Array<[RegExp, string]> = [
+    [/migration|migrate|transition/i, "Treat migration as a controlled data change: inventory source fields, map ownership and identifiers, clean duplicates, rehearse a small import, reconcile record counts, and keep a rollback copy until users validate the destination."],
+    [/pricing|cost|budget|total-cost/i, "Build a cost model for the expected number of users and usage volume. Include required tiers, add-ons, implementation, migration, training, administration, overages, and the cost of leaving; label each assumption and confirm changing prices with the vendor."],
+    [/security|risk|privacy|identity|password|endpoint|devsecops/i, "Start from the threat or control the team must address. Define what is in scope, who owns alerts and exceptions, what evidence is retained, and how the team will respond when a control fails; avoid treating a certification as a substitute for configuration review."],
+    [/api|ci-cd|pipeline|infrastructure|monitoring|error-tracking|engineering/i, "Validate the complete operational path, including authentication, failure handling, retries, observability, rate limits, deployment or rollback, and the person responsible for keeping the integration healthy after the initial setup."],
+    [/analytics|attribution|intelligence|data-governance|data-engineering|reporting/i, "Write down the source of truth for each important metric, its owner, update frequency, allowed filters, and known limitations. Reconcile a sample result to raw records before using a dashboard for decisions."],
+    [/onboarding|recruiting|hr|payroll|employee/i, "Map the employee lifecycle and the permissions at each step. Test a joiner, a role change, and a leaver; check data minimization, approvals, regional rules, audit history, and the process for correcting a mistaken record."],
+    [/project-management|task-management|agile|okr|collaboration|remote-work/i, "Model one real work cycle from intake through assignment, dependency changes, review, and completion. Confirm who updates status, which notifications are useful, how capacity is represented, and how reports avoid rewarding activity over outcomes."],
+    [/ai-|ai_|artificial-intelligence|machine-learning/i, "Evaluate the system on representative inputs that include ordinary cases, edge cases, and cases where it should refuse or escalate. Record the expected output, error tolerance, review owner, data restrictions, and cost per useful result."],
+    [/accessibility|design-system|ux-research|web-design|website-builder/i, "Test the full user journey rather than a single screenshot: keyboard operation, focus order, screen-reader labels where relevant, responsive layouts, collaboration handoff, export fidelity, and how defects are recorded and fixed."],
+  ]
+  const topicSpecific = topicProfiles.find(([pattern]) => pattern.test(slug + " " + topic))?.[1]
+    || "Choose a representative end-to-end workflow and define the input, expected result, responsible owner, exception path, and evidence that would show the process is working. Keep this test small enough to repeat when requirements or product versions change."
+  const criteria = [
+    "Record the must-have outcome, the current workaround, and the baseline time or error rate before comparing options.",
+    "Mark every requirement as verified, partially verified, unavailable, or not yet checked; do not treat missing evidence as a confirmed capability.",
+    "Check role permissions, data export and deletion, integration failure behavior, accessibility needs, and the support path for incidents.",
+    "Estimate full cost for the intended team and usage level, including setup, training, administration, and contract renewal.",
+    "Define a pilot pass/fail threshold in advance and ask the people doing the work to validate it.",
+  ]
+  const rollout = [
+    "Assign one owner for the workflow, one technical or administrative owner, and a named person who can approve changes.",
+    "Use a limited pilot with representative data and a written rollback plan before moving business-critical work.",
+    "Capture defects, workarounds, training questions, and unresolved vendor claims in one decision log.",
+    "Review adoption and failure cases after launch; fix the process before expanding to more teams.",
+  ]
   return [
     ...sections,
-    { title: 'Practical evaluation plan', body: 'A useful ' + guide.category.toLowerCase() + ' decision starts with the workflow, not a feature checklist. For ' + title + ', document the outcome the team needs, the people involved, the systems that must connect, and the steps that currently create friction. Then turn those observations into requirements that can be compared consistently across products. The goal is to make the buying or implementation decision traceable to a real business process.', type: 'text' },
-    { title: 'Buyer checklist before shortlisting', body: 'Use the same questions for every option so the shortlist reflects fit rather than marketing strength.', type: 'list', items: criteria },
-    { title: 'Implementation checkpoints', body: 'For a ' + guide.difficulty.toLowerCase() + ' implementation, start with one representative workflow, record measurable success criteria, and keep configuration deliberately small until the team has evidence that the process works.', type: 'list', items: rollout },
-    { title: 'How to validate the final choice', body: 'Before committing, record what works without customization, what requires configuration or an integration, and what still needs a manual workaround. Compare those findings with the must-have requirements and total-cost assumptions. This makes the final choice easier to defend and easier to revisit when product capabilities or business needs change.', type: 'text' },
+    {
+      title: "Define the job this guide must solve",
+      body: `Use this ${topic} guide to make a decision about a real workflow, not to collect a longer feature checklist. Describe who performs the work, what starts it, what result is required, which systems or people it depends on, and where the current process breaks down. Record a baseline—such as time per task, rework, missed handoffs, or reporting delay—so the team can compare the proposed change with the current process. Separate the outcome from the preferred tool: if a requirement cannot be tied to a user need, risk, or operating constraint, keep it as a preference rather than a purchase blocker.`,
+      type: "text",
+    },
+    {
+      title: "Category-specific evaluation criteria",
+      body: `For ${category.toLowerCase()}, prioritize ${profile.evidence}. Ask each vendor or implementation owner to demonstrate the same requirements against your scenario. The most useful evidence is a current product document, a reproducible test, or a written answer that describes the relevant plan and limitation. Record the date and source for any time-sensitive claim. If an important capability is unclear, mark it as unverified and resolve it before making a commitment rather than assuming it is included.`,
+      type: "text",
+    },
+    {
+      title: "Practical validation for this topic",
+      body: `${topicSpecific} For this ${topic.toLowerCase()} decision, also verify ${profile.checks}. Keep the test narrow enough that another person can repeat it, and preserve the input, expected result, observed result, and any workaround. A successful demo is not sufficient if it uses prepared data or avoids the exception paths the team encounters in normal work.`,
+      type: "text",
+    },
+    {
+      title: "Cost, ownership, and operational risk",
+      body: `Compare the full operating cost, not only the headline subscription. Include configuration, migration, training, ongoing administration, required integrations, usage limits, and the effort needed to review or correct outputs. Name the person who will own updates, access reviews, incident handling, and renewal decisions. For ${category.toLowerCase()}, specifically watch for ${profile.risks}. Confirm how data can be exported or deleted and what happens if the product, integration, or vendor becomes unavailable.`,
+      type: "text",
+    },
+    {
+      title: "Pilot plan and acceptance checklist",
+      body: "Before rollout, agree on a small test with a named owner, a time limit, representative users, realistic data, and an explicit pass/fail rule. Use the checklist below as evidence to collect, not as claims that a vendor has already passed.",
+      type: "list",
+      items: criteria,
+    },
+    {
+      title: "Implementation and review checkpoints",
+      body: `Use a staged rollout rather than switching every team at once. For ${topic.toLowerCase()}, the implementation checkpoints are:`,
+      type: "list",
+      items: rollout,
+    },
+    {
+      title: "Decision record and next review",
+      body: "Keep a concise decision record containing the requirements, evidence links, test results, unresolved risks, cost assumptions, selected option, and reason alternatives were rejected. After launch, compare actual use with the baseline and revisit the choice when workflows, team size, pricing, security requirements, or product limits change. If the pilot fails a must-have criterion, pause expansion and fix the gap or reassess the option instead of lowering the acceptance standard after the fact.",
+      type: "text",
+    },
   ]
 }
 function buildAlternativeSections(alt: AlternativeContent): ContentSection[] {
