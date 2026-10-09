@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!alt) return {}
   const shortTitle = alt.title.length > 58 ? alt.title.slice(0, 55) + "..." : alt.title
   const noindexed = isNoindexed("alternatives", slug)
-  return createMetadata({ title: shortTitle, description: `Looking for ${alt.toolName} alternatives? Compare ${(alt.alternatives || []).length} competitors with ratings, pricing context, and practical differences.`, path: `/alternatives/${alt.slug}`, ogType: "article", publishedAt: alt.lastUpdated, updatedAt: alt.lastUpdated, articleSection: alt.category, noIndex: noindexed })
+  return createMetadata({ title: shortTitle, description: `Compare alternatives to ${alt.toolName} by workflow fit, trade-offs, and selection criteria.`, path: `/alternatives/${alt.slug}`, ogType: "article", publishedAt: alt.lastUpdated, updatedAt: alt.lastUpdated, articleSection: alt.category, noIndex: noindexed })
 }
 
 export default async function AlternativePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -171,7 +171,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                       {(alt.alternatives || []).filter((item) => isReviewIndexable(item.slug)).slice(0, 5).map((item) => (
                         <Link key={item.slug} href={`/reviews/${item.slug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                           <span>{item.name}</span>
-                          <span className="text-xs font-medium">{item.rating}/5</span>
+                          <span className="text-xs text-muted-foreground">Review available</span>
                         </Link>
                       ))}
                     </div>
