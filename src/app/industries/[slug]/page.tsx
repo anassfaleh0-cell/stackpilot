@@ -11,6 +11,7 @@ import { InternalLinks, LEGACY_RELATED_TYPES, extendedRelatedItems } from "@/com
 import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound } from "next/navigation"
 import { isNoindexed } from "@/lib/noindex"
+import { getVisibleEditorialFaqs } from "@/lib/content/review-faqs"
 import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, Lightbulb } from "lucide-react"
 import { EditorialHero, GlassCard, InfoCard } from "@/components/dynamic"
@@ -33,6 +34,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
   const { slug } = await params
   const ind = getIndustry(slug)
   if (!ind) notFound()
+  const visibleFaqs = getVisibleEditorialFaqs(ind.faqs, 8)
 
   // Group recommendations by category
   const byCategory: Record<string, typeof ind.recommendations> = {}
@@ -50,7 +52,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       <WebPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} dateModified={ind.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: ind.recommendations.map((rec, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}`, category: rec.category,  }) })) }} />
       <ItemListSchema items={ind.recommendations.map(rec => ({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` }))} url={`${site.url}/industries/${slug}`} />
       <CollectionPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} />
-      <FAQSchema questions={ind.faqs} path={`/industries/${slug}`} />
+      {visibleFaqs.length > 0 && <FAQSchema questions={visibleFaqs} path={`/industries/${slug}`} />}
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Industries", href: "/industries" }, { name: ind.title }]} />
       </Container>
@@ -157,19 +159,21 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                 </section>
               )}
 
+              {visibleFaqs.length > 0 && (
               <section>
-                <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {ind.faqs.map((faq) => (
-                    <GlassCard key={faq.question}>
-                      <div className="p-4">
-                        <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
-                        <p className="text-sm text-muted-foreground">{faq.answer}</p>
-                      </div>
-                    </GlassCard>
-                  ))}
-                </div>
-              </section>
+                  <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {visibleFaqs.map((faq) => (
+                      <GlassCard key={faq.question}>
+                        <div className="p-4">
+                          <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
+                          <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                        </div>
+                      </GlassCard>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
 
             <aside className="lg:col-span-1">
