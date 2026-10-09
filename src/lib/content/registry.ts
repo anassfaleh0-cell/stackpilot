@@ -566,6 +566,7 @@ export function getAllAlternatives(): AlternativeContent[] {
 }
 
 export function getUseCase(slug: string): UseCaseContent | null {
+  if (isNoindexed("use-cases", slug)) return null
   const file = path.join(CONTENT_DIR, "use-cases", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const useCase = readJson<UseCaseContent>(file)
@@ -582,6 +583,7 @@ export function getUseCase(slug: string): UseCaseContent | null {
 
 export function getAllUseCases(): UseCaseContent[] {
   return readDir(path.join(CONTENT_DIR, "use-cases"))
+    .filter((file) => !isNoindexed("use-cases", file.replace(/\.json$/, "")))
     .map((f) => { const u = readJson<UseCaseContent>(path.join(CONTENT_DIR, "use-cases", f)); return { ...u, faqs: sanitizeFaqs(u.faqs) } })
 }
 
@@ -606,6 +608,7 @@ export function getAllIndustries(): IndustryContent[] {
 }
 
 export function getResearch(slug: string): ResearchContent | null {
+  if (isNoindexed("research", slug)) return null
   const file = path.join(CONTENT_DIR, "research", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const research = readJson<ResearchContent>(file)
@@ -614,10 +617,12 @@ export function getResearch(slug: string): ResearchContent | null {
 
 export function getAllResearch(): ResearchContent[] {
   return readDir(path.join(CONTENT_DIR, "research"))
+    .filter((file) => !isNoindexed("research", file.replace(/\.json$/, "")))
     .map((f) => { const r = readJson<ResearchContent>(path.join(CONTENT_DIR, "research", f)); return { ...r, sections: sanitizeSections(r.sections), faqs: sanitizeFaqs(r.faqs) } })
 }
 
 export function getStatistic(slug: string): StatisticContent | null {
+  if (isNoindexed("statistics", slug)) return null
   const file = path.join(CONTENT_DIR, "statistics", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   return readJson<StatisticContent>(file)
@@ -625,6 +630,7 @@ export function getStatistic(slug: string): StatisticContent | null {
 
 export function getAllStatistics(): StatisticContent[] {
   return readDir(path.join(CONTENT_DIR, "statistics"))
+    .filter((file) => !isNoindexed("statistics", file.replace(/\.json$/, "")))
     .map((f) => readJson<StatisticContent>(path.join(CONTENT_DIR, "statistics", f)))
 }
 
