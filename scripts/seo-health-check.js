@@ -74,23 +74,27 @@ function checkSitemap() {
 
   const content = fs.readFileSync(sitemapPath, "utf-8")
 
-  // Check for new Date() abuse - should not be used for all pages
-  const newDateCount = (content.match(/lastModified:\s*new Date\(\)/g) || []).length
-  if (newDateCount > 5) {
-    log("warn", `Sitemap uses "new Date()" ${newDateCount} times - consider using actual content dates for better crawl efficiency`)
+  // Static-source diagnostics only: a source scan cannot prove runtime XML validity.
+  const dynamicDateFallbacks = (content.match(/(?:const\s+\w*DATE\s*=\s*new Date\(\)|lastModified:\s*new Date\([^)]*LISTING_DATE)/g) || []).length
+  if (dynamicDateFallbacks > 0) {
+    log("warn", `Sitemap source contains ${dynamicDateFallbacks} dynamic date/fallback pattern(s); verify generated <lastmod> values against real content update dates`)
   } else {
-    log("pass", "No excessive repeated new Date() lastModified values detected; verify individual content dates separately")
+    log("pass", "No known dynamic sitemap-date fallback patterns detected in source")
   }
 
-  // Check for priority distribution
-  const highPriority = (content.match(/priority:\s*0\.[89]/g) || []).length
+  // Check for priority distribution as a source-level heuristic, not a per-URL count.
+  const highPriority = (content.match(/priority:\s*0\.[89]|priority:\s*1\.0/g) || []).length
   if (highPriority > 20) {
-    log("warn", `${highPriority} pages have priority >= 0.8 - too many high-priority pages dilutes crawl priority signals`)
+    log("warn", `${highPriority} high-priority declarations exist in sitemap source; inspect actual generated URL priorities before changing them`)
   } else {
-    log("pass", "Sitemap priority distribution looks reasonable")
+    log("info", `${highPriority} high-priority declarations found in sitemap source (not a generated URL count)`)
   }
 
-  log("pass", "sitemap.ts exists and is parseable")
+  if (content.includes("export default function sitemap") && content.includes("MetadataRoute.Sitemap")) {
+    log("pass", "sitemap.ts contains the expected Next.js sitemap function/type markers; generated XML still requires runtime validation")
+  } else {
+    log("fail", "sitemap.ts is missing expected Next.js sitemap function/type markers")
+  }
 }
 
 // ─── 2. Robots.txt ──────────────────────────────────────────────────────────
@@ -112,13 +116,25 @@ function checkRobots() {
     log("pass", "Robots.txt references sitemap")
   }
 
-  // Check AI bot access (good for backlinks from AI citations)
+  // Source-level checks must not emit an unconditional PASS.
   const aiBots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "PerplexityBot"]
-  const missingAiBotRules = aiBots.filter((bot) => !content.includes(`userAgent: "${bot}"`))
+  const missingAiBotRules = aiBots.filter((bot) => !new RegExp(`userAgent\\s*:\\s*["']${bot}["']`).test(content))
   if (missingAiBotRules.length > 0) {
-    log("warn", `AI crawler user-agent rules are not explicitly declared: ${missingAiBotRules.join(", ")}; review the generated robots.txt before changing access policy`)
+    log("warn", `AI crawler user-agent rules are not explicitly declared: ${missingAiBotRules.join(", ")}`)
   } else {
-    log("pass", "AI crawler user-agent rules are explicitly declared in robots.ts; generated robots.txt still requires output verification")
+    log("pass", "All configured AI crawler names have explicit user-agent rules")
+  }
+
+  const privatePaths = ["/api/", "/admin/", "/dashboard", "/search", "/_global-error"]
+  const namedCrawlerRules = [...content.matchAll(/userAgent\\s*:\\s*["']([^"']+)["']([\\s\\S]*?)(?=userAgent\\s*:|sitemap\\s*:|$)/g)]
+    .filter((match) => match[1] !== "*")
+  const missingPrivatePathBlocks = namedCrawlerRules
+    .filter((match) => privatePaths.some((route) => !match[2].includes(route)))
+    .map((match) => match[1])
+  if (missingPrivatePathBlocks.length > 0) {
+    log("warn", `Named crawler rules do not visibly repeat all private/search path exclusions: ${missingPrivatePathBlocks.join(", ")}; inspect the generated robots.txt rule groups`)
+  } else if (namedCrawlerRules.length > 0) {
+    log("pass", "Named crawler rules visibly include the configured internal-path exclusions")
   }
 }
 
@@ -134,6 +150,17 @@ function checkContentQuality() {
     }
   }
 
+  // Comparison pages render a concise evidence profile from each linked review.
+  // Include only the fields actually shown there so the audit does not call a
+  // page thin solely because that copy lives in the linked review record.
+  const reviewsBySlug = new Map()
+  const crossCategoryComparisons = []
+  const reviewsDir = path.join(CONTENT_DIR, "reviews")
+  for (const file of readDir(reviewsDir)) {
+    const review = readJson(path.join(reviewsDir, file))
+    if (review && typeof review.slug === "string") reviewsBySlug.set(review.slug, review)
+  }
+
   const contentTypes = [
     { dir: "reviews", nameField: "name", minWords: 300 },
     { dir: "comparisons", nameField: "title", minWords: 200 },
@@ -144,14 +171,13 @@ function checkContentQuality() {
     { dir: "best", nameField: "title", minWords: 300 },
   ]
 
-  // Exact high-confidence filler patterns seen in generated editorial content.
-  // This is a diagnostic, not a search-engine word-count rule or automatic noindex decision.
+  // Diagnostic patterns for known generic editorial filler; this is not an automatic noindex rule.
   const genericTemplatePatterns = [
     /most successful deployments follow a phased approach/i,
     /this topic is most useful when it is connected to a real decision/i,
-    /choosing the right marketing\s*&\s*seo software/i,
-    /adequate performance for most use cases\./i,
-    /functional organized interface\./i,
+    /choosing the right marketing\\s*&\\s*seo software/i,
+    /adequate performance for most use cases\\./i,
+    /functional organized interface\\./i,
     /written against our published editorial methodology/i,
     /updated when the underlying content is reviewed/i,
   ]
@@ -165,6 +191,7 @@ function checkContentQuality() {
     let missingFaq = 0
     let genericTemplateCount = 0
     const genericTemplateExamples = []
+    const thinSamples = []
 
     for (const file of files) {
       const data = readJson(path.join(dir, file))
@@ -185,12 +212,13 @@ function checkContentQuality() {
         if (genericTemplateExamples.length < 8) genericTemplateExamples.push(slug)
       }
 
-      // Count the substantive data that the route actually renders, rather than
-      // only the short SEO description. Detail routes derive additional narrative
-      // from these fields at render time, so the audit must measure that payload too.
+      // Count audited source fields, not the final rendered page. Some routes
+      // derive additional copy at runtime; this source-level heuristic deliberately
+      // reports its scope so it is not mistaken for a rendered-page word count.
       let words = wordCount(data.description || "")
       if (data.content) {
         for (const section of data.content) {
+          words += wordCount(section.title)
           words += wordCount(section.body)
           for (const item of section.items || []) words += wordCount(item)
         }
@@ -198,6 +226,7 @@ function checkContentQuality() {
       if (data.body) words += wordCount(data.body)
       if (data.sections) {
         for (const section of data.sections) {
+          words += wordCount(section.title)
           words += wordCount(section.body)
           for (const item of section.items || []) words += wordCount(item)
         }
@@ -213,17 +242,47 @@ function checkContentQuality() {
           words += wordCount(faq.question)
           words += wordCount(faq.answer)
         }
+        const linkedReviews = [data.tool1Slug, data.tool2Slug].map((slug) => typeof slug === "string" ? reviewsBySlug.get(slug) : null)
+        for (const review of linkedReviews) {
+          if (!review) continue
+          words += wordCount(review.name)
+          words += wordCount(review.description || review.tagline)
+          words += wordCount(review.category)
+          words += wordCount(review.priceRange || review.pricing)
+          for (const value of (review.pros || []).slice(0, 2)) words += wordCount(value)
+          for (const value of (review.cons || []).slice(0, 2)) words += wordCount(value)
+        }
+        const [review1, review2] = linkedReviews
+        if (review1?.category && review2?.category && review1.category !== review2.category) {
+          crossCategoryComparisons.push({
+            slug: data.slug,
+            tool1: data.tool1,
+            category1: review1.category,
+            tool2: data.tool2,
+            category2: review2.category,
+            recordedWinner: data.winner || null,
+          })
+        }
       }
       if (ct.dir === "alternatives") {
-        words += wordCount(data.toolName)
-        for (const item of data.alternatives || []) {
+        words += wordCount(data.toolName || data.title || "")
+        words += wordCount(data.verdict || "")
+        // The alternatives corpus has used both `tools` and `alternatives`
+        // as the list key; count whichever schema the record actually contains.
+        const options = Array.isArray(data.tools) ? data.tools : Array.isArray(data.alternatives) ? data.alternatives : []
+        for (const item of options) {
           words += wordCount(item.name)
           words += wordCount(item.description)
           words += wordCount(item.bestFor)
+          words += wordCount(item.priceRange)
           for (const value of item.pros || []) words += wordCount(value)
           for (const value of item.cons || []) words += wordCount(value)
         }
         for (const value of data.selectionCriteria || []) words += wordCount(value)
+        for (const faq of data.faqs || []) {
+          words += wordCount(faq.question)
+          words += wordCount(faq.answer)
+        }
       }
       if (ct.dir === "glossary") {
         words += wordCount(data.term)
@@ -254,6 +313,11 @@ function checkContentQuality() {
 
       if (words < ct.minWords) {
         thinCount++
+        thinSamples.push({
+          slug,
+          title: String(data[ct.nameField] || slug),
+          sourceWords: words,
+        })
       }
 
       // Check description
@@ -267,20 +331,24 @@ function checkContentQuality() {
       }
     }
 
-    const indexed = files.length - noindexCount
-    if (thinCount > 0 && indexed > 0) {
-      const pct = ((thinCount / indexed) * 100).toFixed(1)
-      log("warn", `${ct.dir}: ${thinCount}/${indexed} indexed pages are thin content (<${ct.minWords} words) [${pct}%]`)
+    const eligibleRecords = files.length - noindexCount
+    if (thinCount > 0 && eligibleRecords > 0) {
+      const pct = ((thinCount / eligibleRecords) * 100).toFixed(1)
+      log("warn", ct.dir + ": " + thinCount + "/" + eligibleRecords + " eligible source records have fewer than " + ct.minWords + " words in audited fields [" + pct + "%]. This is a source-data signal, not a rendered-page word count; runtime-derived copy is not measured. Samples: " + JSON.stringify(thinSamples.slice(0, 8)))
     } else {
-      log("pass", `${ct.dir}: Content depth is adequate (${indexed} indexed pages)`)
+      log("pass", ct.dir + ": Audited source fields meet the configured word threshold (" + eligibleRecords + " eligible records)")
     }
 
-    if (missingDescription > 0 && indexed > 0) {
-      log("warn", `${ct.dir}: ${missingDescription} pages missing adequate description`)
+    if (missingDescription > 0 && eligibleRecords > 0) {
+      log("warn", ct.dir + ": " + missingDescription + " source records missing an adequate description")
     }
-    if (missingFaq > 0 && indexed > 0) {
-      log("warn", `${ct.dir}: ${missingFaq} pages missing FAQ schema opportunity`)
+    if (missingFaq > 0 && eligibleRecords > 0) {
+      log("warn", ct.dir + ": " + missingFaq + " source records missing a FAQ data opportunity")
     }
+  }
+
+  if (crossCategoryComparisons.length > 0) {
+    log("warn", `comparisons: ${crossCategoryComparisons.length} pair products from different linked-review categories; pages should explain distinct use cases rather than present a universal winner. Samples: ${JSON.stringify(crossCategoryComparisons.slice(0, 10))}`)
     if (genericTemplateCount > 0) {
       log("warn", `${ct.dir}: ${genericTemplateCount} indexed pages contain known generic filler phrases; examples: ${genericTemplateExamples.join(", ")}`)
     } else {
