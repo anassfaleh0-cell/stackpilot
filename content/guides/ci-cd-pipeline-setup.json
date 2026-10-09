@@ -1,7 +1,7 @@
 {
   "slug": "ci-cd-pipeline-setup",
   "title": "CI/CD Pipeline Setup: A Practical Selection and Implementation Guide",
-  "description": "A practical guide to ci/cd pipeline setup in Developer Tools: requirements, integrations, pilot checks, rollout risks, and total-cost decisions.",
+  "description": "A practical CI/CD pipeline setup guide covering source control triggers, automated tests, build artifacts, staged deployments, secrets, rollback, and measurable release safeguards.",
   "category": "Developer Tools",
   "difficulty": "Advanced",
   "author": "Marcus Rivera",
@@ -11,39 +11,34 @@
   "lastUpdated": "2026-10-09",
   "sections": [
     {
-      "title": "Define the Real Use Case",
-      "type": "text",
-      "body": "Build the pipeline around small, reproducible steps: install dependencies, lint, test, build, scan, and deploy. Make failure messages actionable and keep secrets out of logs. Add caching only after correctness is clear. Record who uses the workflow, what decision or task it supports, which systems provide inputs, and what a failure costs. Separate mandatory requirements from preferences and avoid buying features without a named use case."
+      "title": "Define the release path",
+      "body": "Map the path from a code change to production before selecting a CI/CD product. Identify the repository event that starts a run, the checks required before merge, how an artifact is built, who can approve production, and how a failed release is reversed. Keep pull-request validation separate from deployment permissions: contributors should be able to run tests without gaining access to production credentials. Document the current manual release steps first, then automate one repeatable step at a time.",
+      "type": "text"
     },
     {
-      "title": "Requirements and Evidence",
-      "type": "text",
-      "body": "For ci/cd pipeline setup, validate branch and release strategy, CI duration, test reliability, secrets management, deployment approvals, observability, rollback behavior, and who responds when a pipeline fails. Create a checklist with an observable pass/fail condition for each requirement. Record the evidence source, date checked, relevant plan or deployment tier, and any unknowns. Distinguish documented capability from a roadmap promise or a claim that has not been tested in your environment."
+      "title": "Build a reliable pipeline",
+      "body": "A maintainable pipeline normally has explicit stages for dependency installation, formatting and static analysis, unit tests, integration tests, artifact creation, and deployment. Cache dependencies to reduce repeated work, but do not let a cache substitute for a clean reproducible build. Pin runtime and tool versions, lock dependencies, and publish test reports even when a later stage fails. Use parallel jobs only where they do not create hidden dependencies or consume more runner minutes than the team can justify.",
+      "type": "text"
     },
     {
-      "title": "Architecture and Integration",
-      "type": "text",
-      "body": "Draw the flow of data and control between the proposed tool and existing systems. Identify authentication, permissions, synchronization frequency, failure handling, API or usage limits, and who owns each integration. Test the error path as well as the happy path, and document which tasks will remain manual after rollout."
+      "title": "Protect secrets and permissions",
+      "body": "Store deployment credentials in the CI provider's secret store or a supported short-lived identity integration; never commit tokens into workflow files, logs, artifacts, or test fixtures. Grant each job only the repository and cloud permissions it needs. Prefer short-lived credentials, restrict production deployment to protected branches or approved environments, and rotate any credential that appears in a log. Review third-party actions and reusable workflows before trusting them with write permissions.",
+      "type": "text"
     },
     {
-      "title": "Pilot and Acceptance Tests",
-      "type": "text",
-      "body": "Choose one realistic workflow and run it with representative test data and intended users. Include a common exception, an access-control check, and an export or recovery test. Agree on acceptance thresholds before the pilot and record elapsed time, errors, workarounds, and administration effort. Do not expand until critical requirements pass or an explicit risk owner accepts the gap."
+      "title": "Test before production",
+      "body": "Choose tests according to failure impact. Unit tests cover deterministic logic; integration tests verify databases and external-service boundaries; end-to-end tests cover a small number of critical user journeys. Add smoke tests after deployment and verify important endpoints, authentication, and background jobs. Avoid flaky tests that randomly block releases: capture diagnostics, fix instability, and make any temporary quarantine visible with an owner and expiry date.",
+      "type": "text"
     },
     {
-      "title": "Migration, Security, and Operations",
-      "type": "text",
-      "body": "Plan ownership, data migration, permissions, retention, monitoring, training, support, and rollback before launch. Use least-privilege access and confirm how data can be exported or deleted at exit. Assign an operational owner and define how incidents, vendor changes, failed syncs, or unexpected usage costs will be detected and handled."
+      "title": "Use staged deployment and rollback",
+      "body": "Deploy to a preview or staging environment with production-like configuration, then promote the same built artifact where the platform supports it. Use health checks and a short observation window for high-risk changes. Define rollback triggers before the release, such as elevated error rates, failed critical journeys, or a broken migration. Database changes need an explicit compatibility plan; reverting application code alone may not reverse a destructive schema change.",
+      "type": "text"
     },
     {
-      "title": "Cost and Trade-Offs",
-      "type": "text",
-      "body": "Compare total cost over the expected period of use, including seats or usage, minimum commitments, add-ons, setup, migration, training, integration maintenance, administration, and exit work. Document the trade-offs between candidates and identify costs that depend on scale or a higher plan. Use internal baseline data for any savings estimate and label assumptions instead of presenting estimates as guaranteed outcomes."
-    },
-    {
-      "title": "Decision and Review",
-      "type": "text",
-      "body": "Summarize why the selected option fits the requirements, what evidence supports the choice, which risks remain, and what would trigger reconsideration. Verify current plan limits and contract terms with vendor documentation before committing. After launch, compare actual quality, adoption, operating effort, and cost with the baseline; revise the setup if the tool adds complexity without improving the intended workflow."
+      "title": "Measure and improve the pipeline",
+      "body": "Track lead time from merge to production, deployment frequency, failed-deployment rate, recovery time, and pipeline duration. Split duration by queueing, dependency installation, tests, and deployment so optimization targets the real bottleneck. Set a baseline before introducing new tools, and review results after several releases. The goal is a repeatable, auditable path to safe delivery—not the largest number of pipeline stages or the fastest build at any cost.",
+      "type": "text"
     }
   ]
 }
