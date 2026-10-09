@@ -98,6 +98,8 @@ export interface ComparisonContent {
   tool1Slug: string
   tool2Slug: string
   winner: string | null
+  /** True only when the winner is backed by a documented, auditable comparison. */
+  winnerVerified?: boolean
   features: ComparisonFeature[]
   verdict: string
   faqs: FAQItem[]
