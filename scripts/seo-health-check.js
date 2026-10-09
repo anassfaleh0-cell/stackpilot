@@ -150,6 +150,16 @@ function checkContentQuality() {
     }
   }
 
+  // Comparison pages render a concise evidence profile from each linked review.
+  // Include only the fields actually shown there so the audit does not call a
+  // page thin solely because that copy lives in the linked review record.
+  const reviewsBySlug = new Map()
+  const reviewsDir = path.join(CONTENT_DIR, "reviews")
+  for (const file of readDir(reviewsDir)) {
+    const review = readJson(path.join(reviewsDir, file))
+    if (review && typeof review.slug === "string") reviewsBySlug.set(review.slug, review)
+  }
+
   const contentTypes = [
     { dir: "reviews", nameField: "name", minWords: 300 },
     { dir: "comparisons", nameField: "title", minWords: 200 },
@@ -208,6 +218,16 @@ function checkContentQuality() {
         for (const faq of data.faqs || []) {
           words += wordCount(faq.question)
           words += wordCount(faq.answer)
+        }
+        for (const slug of [data.tool1Slug, data.tool2Slug]) {
+          const review = typeof slug === "string" ? reviewsBySlug.get(slug) : null
+          if (!review) continue
+          words += wordCount(review.name)
+          words += wordCount(review.description || review.tagline)
+          words += wordCount(review.category)
+          words += wordCount(review.priceRange || review.pricing)
+          for (const value of (review.pros || []).slice(0, 2)) words += wordCount(value)
+          for (const value of (review.cons || []).slice(0, 2)) words += wordCount(value)
         }
       }
       if (ct.dir === "alternatives") {
