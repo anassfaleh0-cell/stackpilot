@@ -8,8 +8,8 @@ import { createMetadata } from "@/lib/metadata"
 import Link from "next/link"
 
 export const metadata = createMetadata({
-  title: "Review Methodology | How We Score Software",
-  description: "How every PilotStack page is built: the nine recorded category scores behind each rating, where our figures come from, what we leave out when we cannot source it, and how we stay independent.",
+  title: "Review Methodology | Evidence, Scoring & Editorial Standards",
+  description: "How PilotStack evaluates software, handles sources and corrections, and audits older ratings and review-count figures for verifiable provenance.",
   path: "/methodology",
   ogType: "article",
 })
@@ -17,36 +17,36 @@ export const metadata = createMetadata({
 const stages = [
   {
     title: "Selection & Scoping",
-    body: "We do not review every tool. We cover categories where readers are actively evaluating options, and each tool page records the same fixed set of fields: pricing model, deployment, API availability, migration complexity, security entries, integrations, and nine category scores. We never accept payment to include or exclude a tool from our coverage.",
+    body: "We select software topics based on practical buyer needs. Review pages discuss product fit, pricing considerations, feature availability, integrations, administration, and limitations. Some older records contain numeric scores or review counts whose source trail is still being audited; those figures should not be treated as independently verified until their provenance is documented. We do not accept payment to include or exclude a tool from our coverage.",
   },
   {
     title: "Evidence & Sourcing",
-    body: "Every figure on a page comes from a source we hold: our recorded review dataset, vendor documentation, or a published pricing page. Review counts, ratings, and pricing are recorded as of the review date shown on the page. Where two sources we hold disagree — for example on a founding date or headcount — we publish neither value rather than pick one.",
+    body: "We prefer primary vendor documentation for product capabilities and pricing, and independent sources for third-party ratings or review counts. A stored value is not proof of sourcing by itself: the source URL, date checked, and relevant context must be recorded before a numeric claim is described as verified. Where sources disagree, we explain the uncertainty or omit the claim.",
   },
   {
     title: "Scoring & Ratings",
-    body: "Each tool carries nine recorded category scores: Features, Usability, Pricing, Support, Security, Integrations, Performance, Documentation, and Scalability. Every category is scored on a 1-5 scale with equal weight. The overall rating shown on a page is the mean of those nine scores, rounded to one decimal place — you can check it yourself on any review page.",
+    body: "Numeric ratings are being audited for source provenance, consistent dimensions, and reproducible calculations. A score should be displayed as verified only when the evidence and calculation can be checked. Until that audit is complete, use the written criteria and vendor-confirmed facts rather than assuming that a stored number represents independent user sentiment or hands-on testing.",
   },
   {
     title: "Consistency & Limits",
-    body: "A tool's rating, review count, and category scores are held once and reused everywhere that tool appears, so the same figure shows up on its review, category, and comparison pages. Certification statuses and other facts we cannot source are shown as unverified or omitted entirely instead of being stated as confirmed.",
+    body: "Content may be reused across reviews, comparisons, and recommendation pages, so corrections must be checked across every place a claim appears. A figure is not verified merely because it is consistent across pages. Certification statuses, ratings, review counts, and other unsupported facts should be omitted or explicitly labelled unverified until evidence is available.",
   },
   {
     title: "Updates & Revisions",
-    body: "Software changes constantly, and so do our pages. Every page carries a last-reviewed date, and we revisit pages when pricing, features, or product positioning change materially. Pages whose recorded figures we can no longer support are corrected or removed rather than left to stand.",
+    body: "Software changes constantly. We update pages when pricing, features, or product positioning materially change, and correct claims when readers or our own audits identify problems. A displayed date alone does not prove that every claim on a page was rechecked on that date.",
   },
 ]
 
 const scoringRubric = [
-  { dimension: "Features", what: "What the product can do — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Usability", what: "Onboarding and day-to-day clarity — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Pricing", what: "Price relative to what is included — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Support", what: "Support channels and responsiveness — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Security", what: "Security controls and disclosures — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Integrations", what: "Integration coverage — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Performance", what: "Speed and reliability — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Documentation", what: "Help material and guides — recorded as a 1-5 score", weight: "1/9" },
-  { dimension: "Scalability", what: "Behaviour as usage grows — recorded as a 1-5 score", weight: "1/9" },
+  { dimension: "Features", what: "Confirm the capability in current vendor documentation and the plan being evaluated", weight: "Evidence first" },
+  { dimension: "Usability", what: "Assess workflow fit with a representative task and clear acceptance criteria", weight: "Evidence first" },
+  { dimension: "Pricing", what: "Check current regional pricing, billing terms, limits, and add-on costs", weight: "Evidence first" },
+  { dimension: "Support", what: "Verify support channels, response commitments, and plan eligibility", weight: "Evidence first" },
+  { dimension: "Security", what: "Check published controls, certifications, and scope directly with the vendor", weight: "Evidence first" },
+  { dimension: "Integrations", what: "Verify required integrations and their plan or configuration limits", weight: "Evidence first" },
+  { dimension: "Performance", what: "Use dated, reproducible evidence; do not infer performance from marketing copy", weight: "Evidence first" },
+  { dimension: "Documentation", what: "Check current documentation coverage for the workflows you need", weight: "Evidence first" },
+  { dimension: "Scalability", what: "Validate limits, administration, and cost at expected usage levels", weight: "Evidence first" },
 ]
 
 export default function MethodologyPage() {
@@ -73,17 +73,17 @@ export default function MethodologyPage() {
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                Every tool carries nine recorded category scores on a 1-5 scale. The overall rating on a review page is the mean of those nine scores, rounded to one decimal. Figures come from our recorded dataset, vendor documentation, and published pricing pages. Where we cannot source a fact, we leave it off or mark it unverified. We do not sell editorial placement in our coverage.
+                PilotStack evaluates software using practical buyer criteria and vendor documentation. Some older numeric scores and review-count figures are still undergoing a source audit; they should not be treated as verified unless the page provides a checkable source and calculation. We omit unsupported claims as they are identified and do not sell editorial placement in our coverage.
               </p>
             </div>
 
             <div className="tl-dr mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">TL;DR</h2>
               <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-                <li>Nine equally weighted category scores on a 1-5 scale; overall = their mean, rounded to one decimal</li>
-                <li>The same rating and review count is reused everywhere a tool appears</li>
-                <li>Every page shows when it was last reviewed</li>
-                <li>Facts we cannot source are omitted or marked unverified, never asserted</li>
+                <li>Buyer-relevant criteria guide reviews and comparisons</li>
+                <li>Numeric scores and review counts require a documented source and reproducible calculation</li>
+                <li>A displayed update date does not mean every claim was rechecked</li>
+                <li>Unsupported claims are corrected, qualified, or omitted</li>
                 <li>No vendor payments, previews, or influence on ratings or rankings</li>
               </ul>
             </div>
@@ -92,10 +92,10 @@ export default function MethodologyPage() {
               <h2 className="text-lg font-semibold mb-2">Key Takeaways</h2>
               <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
                 <li>We cover tools readers actively evaluate — no paid placements</li>
-                <li>Every page draws from the same recorded fields, so figures agree across the site</li>
-                <li>Ratings are arithmetic you can check on any review page</li>
-                <li>Certification and company facts with no source are shown as unverified or left out</li>
-                <li>Last-reviewed date visible on every page</li>
+                <li>Consistent data is useful, but consistency alone does not prove a claim is sourced</li>
+                <li>Scores are not presented as independent user ratings unless their provenance is documented</li>
+                <li>Certification and company facts with no source should be omitted or labelled unverified</li>
+                <li>Readers can report errors through the contact page</li>
                 <li>Published independence policy: no vendor can pay for placement</li>
               </ul>
             </div>
@@ -119,7 +119,7 @@ export default function MethodologyPage() {
 
               <h2 className="text-2xl font-bold mt-12 mb-6">Scoring Rubric</h2>
               <p className="text-muted-foreground mb-4">
-                Each review page carries nine equally weighted category scores on a 1-5 scale. The overall rating is their mean, rounded to one decimal:
+                The following dimensions are useful prompts for evaluating software. They are not a claim that every product has a verified numeric score; scores remain unpublished as verified until source evidence and calculation can be checked:
               </p>
               <div className="overflow-x-auto">
               <div className="border border-border rounded-xl overflow-hidden mb-8 min-w-[300px]">
@@ -146,9 +146,7 @@ export default function MethodologyPage() {
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Fact-Checking & Corrections</h2>
               <p className="text-muted-foreground mb-4">
-                Figures on a page come from a source we hold: our recorded dataset, vendor documentation, or a
-                published pricing page. When two sources we hold disagree, we publish neither value rather than
-                choose one, and certification statuses with no source are shown as unverified instead of asserted.
+                We prioritize vendor documentation for capabilities and pricing, and independent source pages for external ratings and review counts. A source must be recorded with enough context to check the claim. If the source is missing, stale, or contradictory, we qualify or omit the claim rather than imply it is confirmed.
                 When a correction is made the page&apos;s last-reviewed date is updated. Readers can report errors
                 via our <Link href="/contact" className="text-primary hover:underline">contact form</Link>.
               </p>
@@ -157,9 +155,9 @@ export default function MethodologyPage() {
               <p className="text-muted-foreground mb-4">
                 PilotStack is run by a small, independent team. Editorial roles are listed on our{" "}
                 <Link href="/authors" className="text-primary hover:underline">authors</Link> pages. Every page follows the
-                same published rules: nine equally weighted category scores on a 1-5 scale, one recorded source per
-                figure, and the overall rating as the mean of those nine scores. Because a single set of recorded
-                figures is reused everywhere a tool appears, ratings do not drift between pages.
+                same published rules: prioritize buyer-relevant criteria, record source details for factual claims,
+                and correct unsupported statements when found. Older score and review-count data is under audit; a
+                value repeated across pages is not independently verified merely because it is consistent.
               </p>
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Editorial Independence</h2>
