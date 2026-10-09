@@ -379,6 +379,8 @@ export function getComparison(slug: string): ComparisonContent | null {
   const file = path.join(CONTENT_DIR, "comparisons", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const cmp = readJson<ComparisonContent>(file)
+  // Explicitly unpublished comparisons must never be rendered, linked, or included in the sitemap.
+  if (cmp.published === false) return null
   const baseFeatures = cmp.features.slice(0, 20).map((f) => ({
     ...f,
     name: trimText(f.name, 140),
@@ -552,6 +554,7 @@ export function getAlternative(slug: string): AlternativeContent | null {
   const file = path.join(CONTENT_DIR, "alternatives", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const alt = readJson<AlternativeContent>(file)
+  if (alt.published === false) return null
   const alternatives = Array.isArray(alt.alternatives) ? alt.alternatives : []
   const cleaned = {
     ...alt,
@@ -638,6 +641,7 @@ export function getBest(slug: string): BestContent | null {
   const file = path.join(CONTENT_DIR, "best", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const best = readJson<BestContent>(file)
+  if (best.published === false) return null
   return {
     ...best,
     description: trimText(best.description, 700),
