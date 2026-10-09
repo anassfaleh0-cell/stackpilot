@@ -516,12 +516,12 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 )}
 
                 {/* Section Navigation */}
-                {tool.content.length > 0 && (
+                {visibleContent.length > 0 && (
                   <GlassCard>
                     <div className="p-4">
                       <h3 className="font-semibold mb-3 text-sm">On this page</h3>
                       <nav className="space-y-1.5">
-                        {tool.content.map((section, i) => (
+                        {visibleContent.map((section, i) => (
                           <a
                             key={i}
                             href={`#section-${i}`}
