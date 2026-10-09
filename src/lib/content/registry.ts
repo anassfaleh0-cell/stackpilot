@@ -613,32 +613,56 @@ function enrichBlogBody(post: BlogContent): string {
   const words = body.split(/\s+/).filter(Boolean).length
   if (words >= 850) return body
 
-  const tags = post.tags.filter(Boolean).slice(0, 4).join(", ")
-  const pricing = /pricing|price|cost|budget|roi|spend/i.test(post.title + " " + body)
-  const comparison = /\bvs\b|versus|comparison|compare/i.test(post.title)
-  const focus = pricing
-    ? "total cost, plan limits, usage assumptions, and the implementation effort that sits outside the headline subscription price"
-    : comparison
-      ? "workflow fit, meaningful feature differences, integrations, adoption effort, and the trade-offs behind the headline winner"
-      : "workflow fit, integration requirements, administration, adoption, and the evidence a buyer should check before choosing"
+  const title = post.title.toLowerCase()
+  const tags = (post.tags || []).filter(Boolean).slice(0, 5).join(", ")
+  const category = String(post.category || "software").toLowerCase()
+  const intentText = title + " " + tags.toLowerCase()
+  const supplements: Record<string, Array<{ title: string; body: string }>> = {
+    pricing: [
+      { title: "Build a comparable cost estimate", body: "Compare the same number of users and the same billing period for every option. Include minimum seats, annual commitments, add-ons, usage or API limits, storage, onboarding, migration, training, administration, and integration maintenance. Keep quoted prices separate from estimates, record the date and source for each price, and mark unknown fees rather than filling gaps with assumptions." },
+      { title: "Model cost at realistic usage", body: "Create low, expected, and high-usage scenarios using your own expected team size and activity. Check which plan limits trigger an upgrade and whether discounts depend on annual prepayment or a longer contract. Confirm renewal terms, price increases, cancellation notice, export charges, and what happens to data when a subscription ends. Recalculate when headcount or usage changes." }
+    ],
+    roi: [
+      { title: "Set a baseline before estimating returns", body: "Record the current cost and outcome before introducing a tool: staff time, error or rework rate, turnaround time, conversion quality, and volume handled. Choose one or two measures the tool could realistically influence and decide how to collect them. Avoid crediting the software for changes caused by seasonality, staffing, new campaigns, or other process changes." },
+      { title: "Calculate net value conservatively", body: "Include subscription fees, implementation, data cleanup, training, integration work, review time, and ongoing administration. Estimate benefits using the portion of time or errors that can reasonably be reduced, not the maximum advertised by a vendor. Compare low, expected, and high scenarios, document assumptions, and revisit the estimate after a representative operating cycle. Treat payback as a hypothesis to test, not a guaranteed result." }
+    ],
+    security: [
+      { title: "Check the data and access path", body: "List the information users will enter, upload, connect, or generate, then identify where it is stored, who can access it, and how long it is retained. Verify role-based permissions, multi-factor authentication, audit logs, encryption statements, data export and deletion, and whether customer data may be used to train models. Check current vendor documentation and contract terms rather than relying on a security badge alone." },
+      { title: "Test the response to failure", body: "Ask who is notified after a suspected incident, how access can be revoked, how evidence is retained, and what support the vendor provides during investigation. Test least-privilege access and offboarding with a non-production account. For sensitive workflows, document the threat model, approved data types, retention rules, escalation owner, and fallback process if the service is unavailable or a control fails." }
+    ],
+    implementation: [
+      { title: "Prepare the rollout before migrating", body: "Inventory the data, integrations, user roles, reports, and recurring workflows that must survive the change. Clean duplicates and define field mappings before importing records. Choose a pilot group that represents normal use, set acceptance criteria, and assign owners for training, permissions, support, and data validation. Keep the old process available until the new one has passed the agreed checks." },
+      { title: "Validate and keep a rollback path", body: "After migration, reconcile record counts, ownership, permissions, attachments, history, and key reports against the source system. Test a failed integration and a user offboarding case, not just the happy path. Record known gaps and manual workarounds, then expand in stages. Keep a dated export and a clear rollback decision owner until the new workflow is stable and critical data is confirmed intact." }
+    ],
+    comparison: [
+      { title: "Compare the same workflow in every product", body: "Use one realistic scenario and the same test data for each candidate. Score must-have requirements separately from optional features, and record the evidence behind each score. Compare usability for everyday users as well as administration, permissions, reporting, integrations, data portability, support, and plan limits. Do not treat a text label such as Paid or Custom as proof that a feature is better." },
+      { title: "Verify claims that change over time", body: "Feature availability, prices, free-plan limits, and trial terms can change. Confirm time-sensitive details in current vendor documentation and note the date checked. If a capability could not be tested or documented, mark it as unknown rather than assuming it is available. A useful verdict explains which type of team fits each option and the trade-off that could change the recommendation." }
+    ],
+    methodology: [
+      { title: "Make the evaluation reproducible", body: "Publish the criteria, weights, evidence sources, and date of review so readers can understand how the conclusion was reached. Distinguish vendor-documented facts, direct observations, third-party feedback, and assumptions. If a product was not independently tested, do not imply hands-on experience. If a commercial relationship or affiliate link exists, disclose it clearly and keep compensation separate from the scoring rules." },
+      { title: "Keep the review current and accountable", body: "Record material changes to pricing, plan limits, integrations, ownership, and security documentation. Recheck important claims before updating a recommendation, and preserve a short change log so readers can see what changed. Where evidence is missing or conflicting, state the limitation rather than inventing certainty. Invite corrections with a source link and review them against the same published criteria." }
+    ],
+    tools: [
+      { title: "Build a stack around jobs, not feature lists", body: "Start with the workflow and the output the team needs, then map which existing tool already handles each step. Prefer fewer overlapping subscriptions when one product meets the requirement without creating unacceptable compromises. Check whether data moves between tools reliably, who owns each integration, and how failures are detected. A new product should remove a clear bottleneck or provide a capability the current stack cannot reasonably deliver." },
+      { title: "Validate fit with a small pilot", body: "Select one team and one measurable workflow, define the baseline, and test the highest-risk requirements with realistic data. Record setup effort, usability issues, integration failures, and the time needed to maintain the workflow. Check current pricing and plan limits before expanding. Review the pilot with both users and the person responsible for administration, then document why you will adopt, defer, or reject the tool." }
+    ],
+    general: [
+      { title: "Turn the topic into a decision checklist", body: "Use this article to define the problem, identify who owns the workflow, and list the constraints a solution must meet. For " + category + " software, include the systems that must connect, data and permission requirements, adoption effort, support needs, and total cost at expected usage. Separate must-haves from preferences so a polished demo or long feature list does not decide the outcome by itself." },
+      { title: "Verify the details before acting", body: "For " + (tags || "the tools covered here") + ", confirm current capabilities, pricing, limits, and contract terms with official vendor documentation. Test important requirements in a trial when possible and record what remains unknown. A decision is stronger when the evidence and trade-offs are written down, the people who will use the tool take part, and success is checked after rollout instead of assumed at purchase." }
+    ]
+  }
 
-  const sections = [
-    `## What matters when evaluating ${post.category.toLowerCase()} software
-
-This topic is most useful when it is connected to a real decision rather than treated as a feature checklist. For this article, the main evaluation lens should be ${focus}. Start with the job the software needs to perform, identify the steps that are currently slow or manual, and then map those requirements to the products or approaches discussed here. The important question is not whether a platform has a long feature list; it is whether the features reduce meaningful work for the people who will use and administer the product.`,
-    `## Questions to verify before you choose
-
-Use the article as a starting point and verify the details that can change over time. Check the vendor's current pricing and plan limits, the integrations your workflow actually depends on, export or migration options, permissions and administrative controls, and any security or compliance requirements that apply to your organization. Where this article references ${tags || "specific tools"}, treat the recorded information as a comparison aid and confirm time-sensitive facts against the linked primary source before signing a contract.`,
-    `## Practical decision framework
-
-A useful shortlist normally has a clear must-have set, a small group of preferred capabilities, and explicit reasons to reject an option. Define the critical workflow first, test the highest-risk requirement with realistic sample data, estimate the total cost at your expected team size, and document what would still require a workaround. Revisit the decision after rollout: adoption, support burden, integration reliability, and actual usage are stronger signals of fit than a product's marketing claims alone.`,
-    `## Keeping this decision current
-
-Software products change frequently. Recheck pricing, feature availability, integrations, security documentation, and product limits when the buying decision becomes active. The article's publication date and linked sources provide context, while the current vendor documentation should be the final authority for contractual or technical details.`,
-  ]
-  return [body, ...sections].filter(Boolean).join("\n\n")
+  const intent = /roi|return on investment|payback|cost savings/.test(intentText) ? "roi"
+    : /security|privacy|compliance|risk|threat/.test(intentText) ? "security"
+      : /pricing|price|cost|budget|spend|expense/.test(intentText) ? "pricing"
+        : /migration|implementation|onboarding|rollout|deployment/.test(intentText) ? "implementation"
+          : /vs\b|versus|comparison|compare|alternatives/.test(intentText) ? "comparison"
+            : /methodology|how we review|evaluation playbook|review process/.test(intentText) ? "methodology"
+              : /tools|tool stack|tech stack|platforms|software/.test(intentText) ? "tools"
+                : "general"
+  const sections = supplements[intent]
+  return [body, ...sections.map((section) => "## " + section.title + "\n\n" + section.body)].filter(Boolean).join("\n\n")
 }
-
 export function getBlogPost(slug: string): BlogContent | null {
   const file = path.join(CONTENT_DIR, "blog", `${slug}.json`)
   if (!fs.existsSync(file)) return null
