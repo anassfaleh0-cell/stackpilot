@@ -32,7 +32,7 @@ for (const file of files) {
   let words = count(data.title) + count(data.description)
   const editorialText = [data.title, data.description]
   for (const section of data.sections) {
-    if (!section || typeof section.title !== "string" || typeof section.body !== "string") {
+    if (!section || typeof section.title !== "string" || typeof section.body !== "string" || !section.title.trim() || !section.body.trim()) {
       issues.push({ file, issue: "section missing title/body strings" })
       continue
     }
