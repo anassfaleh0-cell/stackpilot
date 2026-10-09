@@ -274,6 +274,35 @@ function checkNoindex() {
   }
 
   const summary = noindexData.summary
+  const directoryEntries = Object.entries(noindexData.directories || {})
+  const actualFiles = directoryEntries.reduce((sum, [, data]) => sum + (Number(data.total) || 0), 0)
+  const actualKeep = directoryEntries.reduce((sum, [, data]) => sum + (Array.isArray(data.keep) ? data.keep.length : 0), 0)
+  const actualNoindex = directoryEntries.reduce((sum, [, data]) => sum + (Array.isArray(data.noindex) ? data.noindex.length : 0), 0)
+
+  if (summary) {
+    for (const [key, actual] of [["totalFiles", actualFiles], ["totalKeep", actualKeep], ["totalNoindex", actualNoindex]]) {
+      if (Number(summary[key]) !== actual) {
+        log("fail", `noindex-list.json summary mismatch for ${key}: recorded ${summary[key]}, actual ${actual}`)
+      }
+    }
+  }
+
+  for (const [dir, data] of directoryEntries) {
+    const keep = Array.isArray(data.keep) ? data.keep : []
+    const noindex = Array.isArray(data.noindex) ? data.noindex : []
+    const keepSet = new Set(keep)
+    const noindexSet = new Set(noindex)
+    const overlap = keep.filter((slug) => noindexSet.has(slug))
+    if (overlap.length > 0) {
+      log("fail", `${dir}: ${overlap.length} slugs appear in both keep and noindex lists`)
+    }
+    if (keepSet.size !== keep.length || noindexSet.size !== noindex.length) {
+      log("fail", `${dir}: duplicate slugs found in keep or noindex list`)
+    }
+    if (Number(data.total) !== keep.length + noindex.length) {
+      log("fail", `${dir}: total ${data.total} does not equal keep + noindex (${keep.length + noindex.length})`)
+    }
+  }
   if (summary) {
     const ratio = ((summary.totalNoindex / summary.totalFiles) * 100).toFixed(1)
     log("info", `Noindex ratio: ${summary.totalNoindex}/${summary.totalFiles} files (${ratio}%)`)
