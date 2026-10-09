@@ -6,6 +6,7 @@ import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/compon
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllHubs } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
@@ -17,7 +18,7 @@ export const metadata = createMetadata({
 })
 
 export default function HubsPage() {
-  const hubs = getAllHubs()
+  const hubs = getAllHubs().filter((hub) => !isNoindexed("hubs", hub.slug))
 
   return (
     <>
