@@ -5,6 +5,17 @@ const path = require("node:path")
 const CONTENT_DIR = path.join(__dirname, "content")
 const now = new Date().toISOString().slice(0, 10)
 
+function countWordsFromHtml(html) {
+  return String(html || "")
+    .replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script>/gi, " ")
+    .replace(/<style\\b[^>]*>[\\s\\S]*?<\\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&(?:nbsp|amp|quot|#39|lt|gt);/gi, " ")
+    .trim()
+    .split(/\\s+/)
+    .filter(Boolean).length
+}
+
 // Load all tools from reviews
 const tools = []
 const reviewDir = CONTENT_DIR + "/reviews"
@@ -124,7 +135,7 @@ categories.forEach(cat => {
     const page = {
       slug, title, description: desc, category: cat, criteria: crit,
       picks,
-      pricingSummary: `${cTools[0].name} starts at ${cTools[0].priceRange}, while most ${aud.toLowerCase()}-friendly options offer competitive pricing.`,
+      pricingSummary: `Pricing varies by vendor, plan, billing term, and usage. Verify current prices, seat limits, feature restrictions, add-ons, and renewal terms on each vendor’s official pricing page before comparing total cost.`,
       comparisonTable: {
         columns: ["Tool", "Rating", "Price From", "Best For", "Key Strength"],
         rows: picks.map(p => [p.toolName, p.rating.toString(), p.priceRange, p.bestFor, strengths[0]])
@@ -185,7 +196,7 @@ ${picks.map(p => `
 <p class="text-sm text-muted-foreground">Last updated: ${now}</p>
 </section>
 </article>`,
-      wordCount: 800 + (h % 200)
+      wordCount: countWordsFromHtml(page.body)
     }
     fs.writeFileSync(CONTENT_DIR + "/best/" + slug + ".json", JSON.stringify(page, null, 2))
     console.log(`  [${++count}] ${title}`)
@@ -226,7 +237,7 @@ categories.forEach(cat => {
   const page = {
     slug, title, description: desc, category: cat, criteria: crit,
     picks,
-    pricingSummary: `Pricing for ${qual} tools ranges from free to enterprise plans. ${cTools[0].name} starts at ${cTools[0].priceRange}.`,
+    pricingSummary: `Pricing varies by vendor, plan, billing term, and usage. Verify current prices, seat limits, feature restrictions, add-ons, and renewal terms on each vendor’s official pricing page before comparing total cost.`,
     comparisonTable: {
       columns: ["Tool", "Rating", "Price From", "Best For", "Key Strength"],
       rows: picks.map(p => [p.toolName, p.rating.toString(), p.priceRange, p.bestFor, crit[0]])
@@ -267,7 +278,7 @@ categories.forEach(cat => {
 <p class="text-sm text-muted-foreground">Last updated: ${now}</p>
 </section>
 </article>`,
-    wordCount: 600 + (hash(slug) % 150)
+    wordCount: countWordsFromHtml(page.body)
   }
   fs.writeFileSync(CONTENT_DIR + "/best/" + slug + ".json", JSON.stringify(page, null, 2))
   console.log(`  [${++count}] ${title} (${slug})`)
