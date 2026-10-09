@@ -2,7 +2,7 @@
   "slug": "slack",
   "name": "Slack",
   "tagline": "The leading team communication platform that transforms how organizations collaborate with channels and integrations",
-  "description": "Slack is the most widely adopted team messaging and collaboration platform, used by millions of organizations worldwide. It organizes conversations into channels, connects teams through direct messaging, and integrates with hundreds of business tools to centralize workflows. With extensive search, file sharing, and automation capabilities, Slack reduces email overload and keeps teams aligned in real time.",
+  "description": "Slack is a workplace messaging platform built around channels, direct messages, search, and integrations. Teams use it to keep conversations organized and connect communication with their existing tools. This review focuses on day-to-day workflows, administration, plan limits, security and retention settings, integrations, and total cost. Features and entitlements can change by plan, so confirm current details with Slack before purchase.",
   "category": "Communication",
   "website": "https://slack.com",
   "pricing": "Freemium",
@@ -306,83 +306,83 @@
   "faqs": [
     {
       "question": "What is Slack best used for?",
-      "answer": "Slack is best used for real-time team communication and collaboration, replacing internal email with organized channels and direct messaging. It excels at centralizing conversations, files, and tools into one searchable interface, making it especially valuable for remote and distributed teams that need a persistent digital workspace."
+      "answer": "Slack is primarily used for persistent team messaging through channels and direct messages, with search and integrations that can bring work updates into conversations. It may fit teams that need asynchronous communication across projects or time zones. Test how your team organizes channels, handles notifications, searches older discussions, and shares information with external partners."
     },
     {
       "question": "How much does Slack cost?",
-      "answer": "Slack offers a Free plan with 10 app integrations and 90-day message history. The Pro plan costs $8.75 per user per month (billed annually) and adds unlimited integrations, full message history, and group calls with screen sharing. Business+ is $15 per user per month and adds SAML SSO, data export, and 99.99% uptime SLA. Enterprise Grid has custom pricing for large organizations."
+      "answer": "Slack offers free and paid plans, and prices and included features can change by region and billing term. Verify current prices directly with Slack and confirm billing frequency, message and file history, app and workflow limits, AI features, security controls, support, and any minimum seat requirements before budgeting."
     },
     {
       "question": "Does Slack integrate with other tools?",
-      "answer": "Yes, Slack has the deepest integration ecosystem of any communication platform with over 2,600 apps in its directory. Key integrations include Google Workspace, Microsoft 365, Jira, Asana, Salesforce, GitHub, GitLab, Zoom, and hundreds more. It also offers an extensive API for building custom integrations and bots to connect proprietary tools."
+      "answer": "Slack provides an app directory and APIs for connecting other tools, but supported functionality varies by integration and plan. Check the current directory for your required apps, confirm what data each app can access, and test key workflows such as ticket updates, calendar notifications, or CRM activity before rollout."
     },
     {
       "question": "Is Slack suitable for small teams?",
-      "answer": "Yes, Slack works well for small teams thanks to its generous free plan and low per-user cost on Pro. Small teams benefit most from its ability to reduce email volume and keep conversations organized. The free plan is a great starting point, though teams will want to upgrade once they need more than 10 app integrations or access to older message history."
+      "answer": "Slack may suit a small team that values organized messaging and integrations. Before relying on the free or lowest-cost plan, check current limits for history, apps, workflows, administration, and security. Compare the cost of the plan you actually need with alternatives and include the time required to configure channels and notification practices."
     },
     {
       "question": "How long does Slack retain messages?",
-      "answer": "Message retention depends on your plan. Free workspaces retain messages for 90 days. Pro and Business+ plans retain messages indefinitely unless custom data retention policies are configured. Enterprise Grid allows per-channel retention policies ranging from 1 day to indefinite. When a workspace downgrades from a paid plan, messages older than 90 days are permanently deleted and cannot be recovered."
+      "answer": "Message and file retention depend on the workspace plan and administrator settings. Before adopting Slack, confirm the current default history available on your plan, whether custom retention is supported, what happens after a downgrade, and how exports or deletion requests work. Align the configuration with your legal, privacy, and records-management obligations."
     },
     {
       "question": "How does the Slack App Directory work?",
-      "answer": "The Slack App Directory hosts over 2,600 apps organized into 34 categories including project management, file sharing, analytics, and customer support. Workspace owners and admins can approve or restrict which apps members can install. Free workspaces are limited to 10 app installations. Apps can be installed with one click and each app requests specific permissions that admins must review before approval."
+      "answer": "The Slack App Directory lets teams discover integrations, while workspace owners and administrators can apply installation and permission controls. Review each app’s publisher, requested scopes, data access, maintenance status, and plan requirements. For critical integrations, test failure handling and document who owns ongoing support."
     },
     {
       "question": "What is Slack Connect and how does it work?",
-      "answer": "Slack Connect allows organizations to collaborate through shared channels with external partners, clients, and vendors. Each organization retains administrative control over its members' access. Slack Connect channels appear alongside internal channels and support the same features including file sharing, search, and app integrations. Pro plans can create Slack Connect channels with one external organization; Business+ and Enterprise Grid support multiple organizations per channel."
+      "answer": "Slack Connect supports collaboration with people outside your workspace through shared communication spaces, subject to product and plan rules. Before enabling it, define who may invite external organizations, how access is approved and revoked, what data can be shared, and how retention and compliance requirements apply across organizations."
     },
     {
       "question": "How do guest accounts work in Slack?",
-      "answer": "Slack supports multi-channel guests who can access specific channels and single-channel guests restricted to one channel. Guest accounts have limited profile visibility and cannot create channels or invite other members. Guests are billed at the same per-user rate as full members on paid plans. Workspace owners can convert guest accounts to regular members or extend guest access at any time."
+      "answer": "Guest access can let external collaborators participate in selected parts of a workspace, but available guest types, permissions, and billing rules may vary by plan. Confirm current limits and charges, restrict access to the channels needed for the project, set an expiry or review date, and remove access promptly when the work ends."
     },
     {
       "question": "What are the different channel types in Slack?",
-      "answer": "Slack offers three channel types. Public channels are visible to all workspace members, joinable by anyone, and discoverable in the channel browser. Private channels are invitation-only with content visible only to members. Direct messages are one-on-one or group conversations that are not channel-based. Slack Connect extends public and private channels for cross-organizational collaboration."
+      "answer": "Public channels help members discover conversations, private channels restrict access to invited members, and direct messages are for person-to-person or small-group conversations. Establish naming and access conventions so important work is discoverable without exposing sensitive discussions to the wrong audience."
     },
     {
       "question": "What are Huddles and how do I use them?",
-      "answer": "Huddles are lightweight voice conversations with optional screen sharing that start from any channel or DM with one click. They support up to 50 participants and include live captions, emoji reactions, and screen annotation. Huddles do not require scheduling or meeting links and automatically end when the last participant leaves. Paid plans support group huddles; free plans are limited to one-on-one huddles."
+      "answer": "Huddles provide a way to start live audio conversations, with additional capabilities depending on the current plan and client. Test participant limits, screen sharing, captions, recording or note-taking options, and accessibility before relying on Huddles for a recurring workflow. Confirm current entitlements in Slack’s documentation."
     },
     {
       "question": "What are Clips in Slack?",
-      "answer": "Clips are asynchronous audio and video messages that users can record and share in any channel or DM. Recipients watch clips on their own schedule at 1x, 1.5x, or 2x speed, making them ideal for cross-time-zone communication. Clips support screen recording, auto-captions, and trimming. They are available on all plans and stored in the workspace's file storage allocation."
+      "answer": "Slack Clips support asynchronous audio or video messages in supported workflows. Check current recording, playback, storage, caption, and plan limits before making Clips part of team processes. For important decisions, agree on where the outcome will be documented so information is not lost in a long conversation history."
     },
     {
       "question": "What is Canvas in Slack?",
-      "answer": "Canvas is a collaborative rich-text document editor built directly into Slack. Canvases support formatted text, checklists, tables, embedded files, and real-time multi-user editing. They live alongside channel conversations and can be pinned, shared across channels, or attached to messages. Common uses include meeting notes, project plans, onboarding guides, and team wikis."
+      "answer": "Slack Canvas provides a place to organize information alongside conversations. Test permissions, sharing, editing, search, and retention behavior for the plan you use. Decide when teams should use a Canvas versus a channel message or an external document, and set an owner for information that must remain current."
     },
     {
       "question": "How do Workflows in Slack work?",
-      "answer": "Workflows automate multi-step processes using Slack's no-code Workflow Builder. Users create workflows by selecting triggers (slash commands, emoji reactions, form submissions, scheduled times) and adding actions (post messages, create channels, send forms, call webhooks). Workflows can be published to specific channels or the entire workspace and operate without any coding knowledge."
+      "answer": "Workflow Builder and related Slack automation features can help standardize routine requests and notifications. Confirm which triggers, actions, connectors, and usage limits are available on your plan. Start with one process, restrict access to sensitive data, test error handling, and document who maintains the workflow when the process changes."
     },
     {
       "question": "What search operators does Slack support?",
-      "answer": "Slack search supports operators including from:@username to find messages from a specific person, in:#channel to limit results to a channel, has:link for messages containing links, has:star for saved items, before: and after: with dates for time-based filtering, and filetype: for specific document types. Operators can be combined for precise searches. Slack AI subscribers can also search using natural language queries."
+      "answer": "Search supports ways to narrow results, but operators and AI-assisted search capabilities can change. Consult Slack’s current search guidance and test common queries your team needs, such as finding a decision, a file, or a message in a specific channel. Train users to use clear channel names and document important decisions where they can be found later."
     },
     {
       "question": "How do I manage notification settings in Slack?",
-      "answer": "Notifications can be configured globally and per channel. Global settings control which activities trigger alerts, sound preferences, and notification schedule. Per-channel settings override global defaults and can mute channels entirely, receive only @mentions, or highlight specific keywords. Desktop notifications can be paused with the spacebar or scheduled through Do Not Disturb rules."
+      "answer": "Slack notification settings help users control alerts across the workspace and individual channels. Agree on team norms for mentions, urgent requests, quiet hours, and channels that can be muted. Test the settings on desktop and mobile so users do not miss critical messages or receive unnecessary interruptions."
     },
     {
       "question": "How does Do Not Disturb work in Slack?",
-      "answer": "Do Not Disturb (DND) silences all push notifications for a specified duration. Users can schedule DND hours daily (e.g., 10 PM to 8 AM) or activate it manually for fixed periods (30 minutes to 24 hours). During DND, messages are delivered but do not trigger sounds or mobile notifications. Users can set an exception to allow urgent notifications from specific people."
+      "answer": "Do Not Disturb can reduce interruptions while leaving messages available for later review. Check the current scheduling and exception options in your client, and agree on an emergency escalation route that does not depend on bypassing everyone’s quiet hours."
     },
     {
       "question": "How do I set my status in Slack?",
-      "answer": "Status in Slack can be set to a predefined option (Active, Away, Do Not Disturb, In a meeting, Commuting, Out sick, Vacation) or a custom emoji with a text label. Statuses can include an expiration time and automatically clear when the time expires. Slash commands like /away, /active, and /dnd provide quick status changes. Automated status sync is available with Google Calendar for meeting status."
+      "answer": "Slack status can signal availability or context, but exact options and automatic status integrations may vary. Encourage people to use statuses consistently and avoid treating them as a guarantee of immediate response. If calendar status sync is important, test its permissions and behavior with your organization’s calendar system."
     },
     {
       "question": "Can I customize Slackbot in my workspace?",
-      "answer": "Workspace owners and admins can customize Slackbot's auto-responses by adding keyword-triggered replies. When a member types a configured keyword, Slackbot automatically responds with the defined message. This is useful for answering frequent questions (office Wi-Fi, PTO policy, meeting room booking). Custom responses support formatting and links. Slackbot cannot be fully disabled but custom responses can be removed."
+      "answer": "Slackbot and other automation options can support recurring answers or simple workflows, but available customization may change. Use approved, maintained responses for common questions, keep policy links current, and avoid putting sensitive information into automatic replies. Confirm what is supported in the current Slack experience before documenting a process."
     },
     {
       "question": "How do compliance exports work in Slack?",
-      "answer": "Compliance exports are available on Business+ and Enterprise Grid plans. They provide downloadable archives of all workspace messages and files in a standardized JSON format for preservation and audit review. Exports can be triggered manually through the admin dashboard or scheduled on Enterprise Grid. Exports include message content, timestamps, user information, and file attachments for compliance purposes."
+      "answer": "Compliance export capabilities vary by plan, workspace configuration, and the type of data requested. If your organization needs exports for legal or records purposes, confirm eligibility, scope, format, timing, retention, and approval steps with Slack and your legal or compliance team. Test a sample export before relying on it operationally."
     },
     {
       "question": "What eDiscovery options does Slack provide?",
-      "answer": "Enterprise Grid includes eDiscovery capabilities for legal and compliance teams to search, review, and export workspace data in the context of legal matters or investigations. eDiscovery integrates with leading legal hold platforms and supports legal hold workflows, data preservation, and audit trails. Searches can be filtered by user, date range, channel, and keyword combinations. Exported data maintains chain of custody documentation for evidentiary use."
+      "answer": "eDiscovery and legal-hold needs require careful validation of the specific Slack plan and any connected compliance tools. Confirm supported search and preservation workflows, permissions, audit records, export formats, and contractual scope with Slack and your legal team. Do not assume every capability is included in every Enterprise subscription."
     }
   ],
   "alternatives": [
@@ -466,5 +466,6 @@
   "difficulty": "Intermediate",
   "learningCurve": "Moderate — expect 1-3 days to become productive",
   "whoShouldUse": "Slack is ideal for small to mid-size teams that need a reliable communication solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
-  "whoShouldNotUse": "Slack is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "whoShouldNotUse": "Slack is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives.",
+  "wordCount": 4795
 }
