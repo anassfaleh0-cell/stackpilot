@@ -283,15 +283,16 @@ function repairGenericGuideData(data: Record<string, unknown>, filePath: string)
     .replace(/:\s*How to Choose the Right.*$/i, "")
     .replace(/\s+(?:buyer's\s+)?guide$/i, "")
     .trim() || "software"
+  const slug = String(data.slug ?? "")
   const category = String(data.category ?? "software")
   const categoryChecks: Record<string, string> = {
-    "AI & Machine Learning": "model quality on representative tasks, data handling, human review, model versioning, usage limits, and inference cost at expected volume",
-    "Project Management": "dependencies, workload capacity, recurring work, reporting, guest permissions, automation limits, and how teams update task status",
+    "AI & Machine Learning": "output quality on representative tasks, data handling, human review, model/version control, usage limits, latency, and inference cost at expected volume",
+    "Project Management": "dependencies, workload capacity, recurring work, reporting, guest permissions, automation limits, cross-project views, and how teams update task status",
     "CRM & Sales": "contact and account data quality, pipeline definitions, activity capture, forecasting, permissions, reporting, and synchronization with marketing and support systems",
     "Marketing & SEO": "measurement goals, consent-aware tracking, channel definitions, conversion quality, attribution windows, CRM handoffs, and whether reports reconcile with source data",
     "Design & Creative": "handoff to engineering, component reuse, collaboration and review, asset ownership, accessibility, version history, and export formats",
     "Developer Tools": "repository and CI integration, access control, API limits, test reliability, observability, rollback paths, and operational ownership",
-    "Analytics & Data": "event and metric definitions, data freshness, lineage, access controls, exportability, governance, and storage or query costs",
+    "Analytics & Data": "metric definitions, data freshness, lineage, access controls, exportability, governance, and storage or query costs",
     "HR & People": "employee-data permissions, payroll or HRIS integration, regional requirements, manager workflows, reporting access, and employee self-service",
     "Finance & Accounting": "approval controls, audit trails, reconciliation, accounting-system integration, regional requirements, data export, and total cost of ownership",
     "Productivity": "capture and retrieval of information, collaboration, permissions, search quality, portability, recurring workflows, and process overhead",
@@ -299,53 +300,96 @@ function repairGenericGuideData(data: Record<string, unknown>, filePath: string)
     "Communication": "call or message quality, admin controls, guest access, retention, integrations, accessibility, and behavior across devices and network conditions",
   }
   const checks = categoryChecks[category] || "workflow fit, integrations, permissions, reporting, data portability, support boundaries, and total cost at expected usage"
+  const topicPlaybooks: Record<string, { workflow: string; evidence: string; risk: string }> = {
+    "marketing-attribution-guide": {
+      workflow: "Start with one decision, such as which channels deserve budget, and define the conversion event and attribution window before comparing models. Check how the system handles direct traffic, cross-device journeys, long sales cycles, consent restrictions, and offline revenue. Reconcile a sample of conversions against the analytics platform and CRM rather than treating a dashboard total as ground truth.",
+      evidence: "Ask vendors to show the raw event path for a sample conversion, explain identity stitching, and document how modeled or missing data is handled. Compare first-touch, last-touch, and position-based views against a clearly stated business question; no model proves causation by itself.",
+      risk: "Watch for double-counted conversions, inconsistent channel naming, opaque modeled data, and reports that cannot be reconciled to finance. Record the source, timestamp, consent basis, and transformation behind each important metric."
+    },
+    "marketing-automation-buyers-guide": {
+      workflow: "Pilot one lifecycle journey, such as welcome, abandoned-form follow-up, or lead nurture. Test entry and exit conditions, duplicate contacts, unsubscribe handling, suppression lists, time zones, retries, and what happens when a CRM field changes during a journey. Use test contacts and confirm that no real customer receives unintended messages.",
+      evidence: "Verify the available triggers, branching limits, contact billing rules, sending limits, deliverability controls, consent records, and CRM sync direction. Ask for exportable logs and test how quickly a changed consent status prevents future sends.",
+      risk: "Common risks include sending after opt-out, loops caused by sync updates, duplicate contacts inflating costs, and automations nobody owns. Require a named owner, change history, and a rollback procedure before turning a workflow on."
+    },
+    "project-management-software-buyers-guide": {
+      workflow: "Model a real project with dependencies, milestones, recurring work, cross-team ownership, and one delayed task. Test whether a manager can spot blocked work without manually rebuilding a report, and whether an individual can update status quickly. Include guests and mobile users if they are part of the real workflow.",
+      evidence: "Compare task hierarchy, timeline behavior, capacity planning, custom fields, permissions, automation quotas, export formats, and reporting limits at the plan you would actually buy. Validate the same scenario in each candidate and note any workaround.",
+      risk: "A feature-rich workspace can still fail if teams do not maintain it. Watch for excessive custom fields, duplicate task sources, unclear status definitions, and reports that depend on manual cleanup. Define the minimum process the team will keep current."
+    },
+    "ai-implementation-guide": {
+      workflow: "Choose one bounded task with a measurable baseline, such as classifying support requests or drafting internal summaries. Build a representative test set that includes difficult and ambiguous cases, then measure quality, latency, human correction time, and cost per successful result. Keep a human approval step for consequential outputs.",
+      evidence: "Document the model and version, prompts, retrieval sources, evaluation set, access controls, retention terms, and fallback behavior. Test prompt injection, unsupported answers, sensitive-data exposure, and performance when source documents are stale or missing.",
+      risk: "Do not equate fluent output with correctness or estimate savings from model speed alone. Include review time, integration work, monitoring, and failure handling in the business case; define conditions that automatically route work to a person."
+    },
+    "software-evaluation-framework": {
+      workflow: "Create a weighted scorecard before scheduling demos. Label each requirement as mandatory, important, or optional; give every vendor the same scenario; and score the evidence rather than the presentation. Keep separate ratings for product capability, operational fit, commercial risk, and user adoption.",
+      evidence: "For each score, store a link to current documentation, a trial result, or an explicit unknown. Have end users and the system owner score independently, then discuss differences. Include data export, integration failure behavior, permissions, support response, and contract exit terms.",
+      risk: "Avoid changing weights after seeing vendor results, counting the same capability twice, or treating an unknown as a pass. A higher weighted score should not override a failed mandatory requirement or an unacceptable security/legal issue."
+    },
+    "api-security-best-practices": {
+      workflow: "Inventory public and internal API endpoints, data sensitivity, authentication methods, and service owners. Test authorization at object and function level, rate limits, input validation, secret handling, and logging of sensitive fields. Include negative tests for expired tokens, cross-tenant access, oversized requests, and repeated failed authentication.",
+      evidence: "Review the threat model, API inventory, dependency and secret scanning, access logs, key rotation, and incident response path. Confirm which controls are enforced in production and which are only recommendations or available on higher tiers.",
+      risk: "A passing scanner is not proof that an API is secure. Watch for broken object-level authorization, overly broad service accounts, exposed secrets in logs, and rate limits that can be bypassed across keys or IPs. Assign remediation owners and retest fixes."
+    },
+    "how-to-choose-ai-tools": {
+      workflow: "Define the job the tool should do, what a good result looks like, and what data it may access. Compare candidates on the same prompt set, including ordinary tasks, edge cases, and requests where the correct response is to abstain. Record output quality, edit time, speed, privacy terms, and cost at realistic usage.",
+      evidence: "Check model/version transparency, file and context limits, data retention and training terms, admin controls, export options, integration permissions, and how the product handles citations or source links. Confirm claims in the current vendor documentation rather than relying on marketing labels.",
+      risk: "Do not choose only by a public benchmark or the most impressive demo. Watch for fabricated citations, sensitive data entering personal accounts, usage limits that change the economics, and vendor lock-in around prompts or stored work. Re-test after material model changes."
+    },
+    "total-cost-ownership-saas": {
+      workflow: "Estimate cost over a realistic 12- or 36-month period using expected seats, usage growth, add-ons, and renewal terms. Include implementation, migration, training, administration, integrations, support, security review, and the time spent correcting or exporting data. Model a low, expected, and high-usage scenario.",
+      evidence: "Confirm seat minimums, annual billing, feature gates, API quotas, storage limits, overage rates, renewal increases, cancellation notice, and data-export charges in the contract or official pricing documentation. Keep assumptions separate from verified prices.",
+      risk: "Avoid comparing only the advertised starting price or treating a free tier as equivalent to a paid plan. The cheapest subscription may cost more if it requires manual work, extra connectors, or a difficult exit. Recalculate when headcount, usage, or plan terms change."
+    }
+  }
+  const playbook = topicPlaybooks[slug]
   const repairedSections = [
     {
       title: "Define the Decision",
-      body: "Before comparing " + topic.toLowerCase() + " options, write down the decision the software must improve and who will use it. Map the current workflow, including manual work, handoffs, failure points, and systems that must remain. Turn the main problems into observable requirements so a vendor demo does not define success for you.",
+      body: "Before comparing " + topic.toLowerCase() + " options, write down the decision the software must improve and who will use it. Map the current workflow from trigger to outcome, including manual work, handoffs, failure points, and systems that must remain. Identify the cost of the current problem and a measurable result that would justify changing tools. Use the same scenario to assess every candidate rather than letting a vendor demo define success.",
       type: "text",
     },
     {
       title: "Selection Criteria",
-      body: "Evaluate " + topic.toLowerCase() + " using checks relevant to " + category + ": " + checks + ". Separate essential requirements from preferences and score every candidate against the same criteria. Record whether each important claim is confirmed in documentation, verified in a trial, unclear, or unavailable.",
+      body: "Evaluate " + topic.toLowerCase() + " using checks relevant to " + category + ": " + checks + ". Separate mandatory requirements from preferences and assign weights before looking at scores. For each requirement, record the evidence source and whether it is confirmed in current documentation, reproduced in a trial, unclear, or unavailable. A candidate should not pass a mandatory requirement because it scores highly on unrelated features.",
       type: "text",
     },
     {
-      title: "Validate a Real Workflow",
-      body: "Run a time-boxed pilot using a realistic " + topic.toLowerCase() + " task rather than relying on a guided demo. Use representative data, include administrators and everyday users, and test both the normal path and a likely exception. Record setup time, failed steps, workarounds, and what would be needed before rollout.",
+      title: "Test a Real Workflow",
+      body: playbook?.workflow || ("Run a time-boxed pilot using a realistic " + topic.toLowerCase() + " task rather than relying on a guided demo. Use representative data, include administrators and everyday users, and test both the normal path and a likely exception. Record setup time, failed steps, workarounds, output quality, and what would be needed before rollout. Repeat the same test with each shortlisted product so the results are comparable."),
       type: "text",
     },
     {
-      title: "Plan Implementation",
-      body: "Start with one team or workflow, name an accountable owner, and define migration, permissions, training, and support before expanding. Confirm how data is imported and exported, how access is removed when roles change, and how the rollout can be reversed if a critical workflow fails. Expand only after the pilot meets written acceptance criteria.",
+      title: "Verify the Evidence",
+      body: playbook?.evidence || ("Ask each vendor to demonstrate the capabilities that matter to your workflow and provide documentation for plan limits, integrations, permissions, reporting, and data handling. Validate the result yourself with a trial or sample export. Keep notes and links for important claims, and mark anything that could not be verified as an open question instead of assuming it is supported."),
       type: "text",
     },
     {
-      title: "Risks to Check",
-      body: "Do not choose " + topic.toLowerCase() + " software based only on feature count, a polished demo, or a temporary discount. Check for unclear ownership, untested integrations, poor data quality, overly broad permissions, and success measures that are defined only after purchase. Keep a decision log of trade-offs, open questions, and why the selected option fits better than the alternatives.",
+      title: "Risks and Failure Modes",
+      body: playbook?.risk || ("Do not choose " + topic.toLowerCase() + " software based only on feature count, a polished demo, or a temporary discount. Check for unclear ownership, untested integrations, poor data quality, overly broad permissions, and success measures defined only after purchase. Keep a decision log of trade-offs, open questions, and the reason the selected option fits better than the alternatives. Name an owner for each unresolved risk."),
       type: "text",
     },
     {
       title: "Calculate Total Cost",
-      body: "Compare the full cost over the period you expect to use the tool: subscription or usage fees, minimum seats, add-ons, implementation, migration, training, administration, and integration maintenance. Estimate benefits using your own baseline, such as time spent on the current workflow and the realistic portion a new system could remove. Treat payback as an estimate with stated assumptions, not a guarantee.",
+      body: "Compare the full cost over the period you expect to use the tool: subscription or usage fees, minimum seats, add-ons, implementation, migration, training, administration, integration maintenance, and the effort required to review or correct outputs. Estimate benefits using your own baseline and a conservative improvement assumption. Show low, expected, and high scenarios, and label assumptions clearly; payback is an estimate, not a guaranteed outcome.",
       type: "text",
     },
     {
-      title: "Before You Commit",
-      body: "Confirm current feature and pricing limits in the vendor's own documentation, check support commitments, and verify data export and deletion procedures. After launch, review usage, cost, user feedback, and unresolved risks against the original requirements. Reassess when workflows, team size, compliance needs, or pricing change.",
+      title: "Decision and Rollout Plan",
+      body: "Before signing, confirm current feature and pricing limits in vendor documentation, support commitments, data export and deletion procedures, renewal terms, and cancellation notice. Start with one team or workflow, assign an accountable owner, and define acceptance criteria and a rollback plan. After launch, review adoption, quality, cost, and unresolved risks against the baseline. Reassess when workflows, team size, compliance needs, or pricing change.",
       type: "text",
     },
   ]
   const wordCount = repairedSections.reduce((total, section) => total + String(section.body).split(/\s+/).filter(Boolean).length, 0)
   return {
     ...data,
-    description: "Practical buyer's guide to " + topic + " in " + category + ", with selection checks, pilot steps, implementation risks, and total-cost guidance.",
+    title: topic + ": Practical " + category + " Guide",
+    description: "A practical guide to " + topic.toLowerCase() + " in " + category + ", with evaluation criteria, a workflow test, evidence checks, implementation risks, and total-cost guidance.",
     sections: repairedSections,
-    readingTime: Math.max(2, Math.ceil(wordCount / 220)),
+    readingTime: Math.max(4, Math.ceil(wordCount / 220)),
     lastUpdated: new Date().toISOString().slice(0, 10),
   }
 }
-
 function readJson<T>(filePath: string): T {
   let mtimeMs = -1
   try {
