@@ -8,16 +8,17 @@
   "pricing": "Freemium",
   "priceRange": "Pricing varies by plan and region; verify current terms with the vendor.",
   "pros": [
-    "Channel-based organization reduces internal email volume by an average of 32% according to published case studies, with threaded conversations keeping discussions attached to their source message for context preservation",
-    "Integration ecosystem of 2,600+ apps including Google Drive, Jira, Salesforce, GitHub, and Zoom lets teams centralize notifications and actions from every tool without switching between 10+ browser tabs",
-    "Global search returns results across all messages, files, channels, and people within 2-3 seconds even on workspaces with 100,000+ messages, with filters for date range, sender, channel, and file type",
-    "Huddles launch voice conversations with screen sharing in one click from any channel or DM, eliminating the 3-5 minute overhead of scheduling a Zoom or Teams meeting for quick syncs",
-    "Workflow Builder automates multi-step processes (approvals, onboarding tasks, incident response) using a no-code drag-and-drop interface, reducing manual handoff steps by up to 60% for common team workflows"
+    "Channel-based conversations can keep project discussions discoverable and separate from direct messages when teams use clear naming and ownership.",
+    "Slack integrations can bring notifications and selected actions from other business tools into shared channels; verify each integration’s permissions and plan requirements.",
+    "Search and saved items can help teams recover decisions and files, subject to the workspace’s retention, access, and plan settings.",
+    "Huddles and messaging can support quick collaboration when users agree when an informal conversation should become a documented decision.",
+    "Workflow automation may reduce repetitive handoffs for supported use cases, but teams should pilot permissions, error handling, and maintenance before depending on it."
   ],
   "cons": [
-    "Notification overload affects 45% of surveyed users per Slack's own research, requiring deliberate configuration of Do Not Disturb hours, channel muting, and keyword alerts to maintain focus without missing critical messages",
-    "Free plan limits message history to 90 days and app integrations to 10, forcing growing teams to upgrade to Pro ($8.75/user/month) or lose access to older conversations that may be important for context and compliance",
-    "Video calling lacks breakout rooms, meeting recording on the free tier, end-to-end encryption, and virtual backgrounds without third-party integrations, making Zoom or Teams necessary complements for most organizations"
+    "High message volume and notifications can interrupt focused work unless teams configure preferences and agree on channel practices.",
+    "Message history, app access, workflow features, AI capabilities, and administration controls vary by plan; confirm current entitlements before purchasing.",
+    "Teams may need a separate meeting or calling product if Slack does not meet their requirements for large meetings, recording, room systems, or specialized communications.",
+    "Integrations can increase administration and data-access complexity; review scopes, ownership, retention, and the cost of apps alongside the subscription."
   ],
   "features": [
     {
@@ -195,7 +196,7 @@
     },
     {
       "title": "User Experience",
-      "body": "New users can send their first message within 60 seconds of creating an account, and the onboarding flow guides workspace creation with suggested channel templates and a tutorial bot named Slackbot. The desktop interface divides into three columns: a sidebar for channel and DM navigation, a center pane for the active conversation, and a right panel for thread replies, Canvas documents, or app integrations. The mobile app mirrors most desktop functionality including message search, file preview, Huddles, and Canvas editing, though navigating deep thread histories on a phone screen remains cumbersome. Huddles launch with one click from any conversation and support on-the-fly screen sharing, making them significantly faster than scheduling external video calls for quick syncs. Canvas embeds collaborative rich-text documents that live alongside channel conversations, supporting to-do lists, embedded files, and real-time multi-user editing. Basic proficiency takes roughly 2-3 hours, with most users comfortable navigating channels and threads within their first week. Advanced features like Workflow Builder, custom slash commands, and saved search patterns typically require 2-4 weeks to integrate into daily workflows.",
+      "body": "Test Slack with a real project rather than a blank workspace. Ask users to find an existing decision, share a file, join the right channel, mute a noisy conversation, and hand off an issue. Define when to use channels, threads, direct messages, and huddles so information does not disappear into private conversations. Check accessibility and mobile workflows, and measure whether search and notifications support the team’s daily habits.",
       "type": "text"
     },
     {
@@ -245,7 +246,7 @@
     },
     {
       "title": "Tips from experienced users",
-      "body": "Power users rely on four patterns. Use the quick switcher (Cmd+K on Mac, Ctrl+K on Windows) as your primary navigation — typing the first 3-4 characters of any channel, person, or file retrieves it in under a second, eliminating sidebar scrolling. Set channel-specific notification preferences: mute high-volume channels (company-announcements, random) and configure keyword alerts for your name, team name, and project-specific terms in channels you monitor less frequently. Create saved items (bookmark icon on any message) for decisions, links, and configuration details you reference repeatedly — Saved Items is searchable and persists across devices. Use the /collapse and /expand commands to manage large message threads efficiently, and set reminder messages with /remind for follow-ups you need to track without leaving Slack.",
+      "body": "Use a small number of purposeful channels with clear names and owners. Tune notification settings for role and urgency, use threads when they preserve context, and summarize important decisions where the team can find them later. Review app permissions before enabling integrations, and test workflow automations with sample data and a clear owner. Revisit channel activity and app usage periodically to remove clutter.",
       "type": "text"
     },
     {
@@ -275,7 +276,7 @@
     },
     {
       "title": "Implementation Flow",
-      "body": "implementation-flow",
+      "body": "1. Identify the team workflows Slack should support and what remains in other systems. 2. Design a small channel structure with naming and ownership rules. 3. Check plan limits for history, apps, automation, AI, guests, and administration. 4. Pilot search, notifications, mobile access, integrations, and huddles with representative users. 5. Document security and data-retention expectations. 6. Roll out gradually and review channel health, adoption, and total cost.",
       "type": "diagram"
     }
   ],
@@ -377,7 +378,7 @@
     "saas-pricing-report-2026"
   ],
   "contentPublished": "2026-07-16",
-  "contentModified": "2026-09-21",
+  "contentModified": "2026-10-10",
   "author": "Emily Nakamura",
   "company": {
     "founded": 2013,
