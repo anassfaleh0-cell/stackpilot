@@ -39,6 +39,16 @@
       "title": "Check fit with your stack and operating budget",
       "body": "Run a short pilot using two or three representative APIs: one with authentication, one with pagination or webhooks, and one that calls an external service. Measure setup time, test maintainability, onboarding effort, CI integration, exportability, and the cost at expected team size. Confirm whether data can be exported in an open format and whether the workflow remains usable if the subscription changes. Choose the smallest toolset that covers the lifecycle reliably.",
       "type": "text"
+    },
+    {
+      "title": "Compare tools with a repeatable scorecard",
+      "body": "Score candidates against the same tasks: import an API contract, authenticate to a test service, create a reusable request, assert a response schema, run the suite in CI, share it with a teammate, and export the work. Record limitations and the time required for each task. Also check accessibility, offline needs, supported operating systems, data residency, and whether a team can keep working with exported files if the subscription ends. A consistent pilot is more useful than comparing feature pages.",
+      "type": "text"
+    },
+    {
+      "title": "Avoid building tool sprawl",
+      "body": "Assign one authoritative location for API contracts and one repeatable method for running critical tests. Duplicated collections, undocumented environment variables, and conflicting examples create drift even when every tool is individually capable. Decide which assets belong in version control, how credentials are injected, who reviews changes, and how deprecations are communicated. Revisit the toolset when team size or API architecture changes, but do not migrate merely because a new product has a longer feature list.",
+      "type": "text"
     }
   ]
 }
