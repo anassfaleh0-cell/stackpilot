@@ -41,6 +41,7 @@ const HIDDEN_REVIEW_SECTION_TITLES = new Set([
 
 function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false) {
   return content.filter((section) => {
+    if (!showVerifiedPricing && section.type === "diagram" && section.body === "pricing-ladder") return false
     if (!showVerifiedPricing && /pricing|plans/i.test(section.title)) return false
     if (HIDDEN_REVIEW_SECTION_TITLES.has(section.title)) return false
     if (section.type === "diagram") {
@@ -369,8 +370,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     <p className="text-muted-foreground text-xs leading-relaxed">{tool.category === "Developer Tools" ? "Create a sample project with real code to test the platform end-to-end before committing to a team rollout." : tool.category === "CRM & Sales" ? "Import a subset of your actual contacts and deals into the trial — testing with sample data hides the migration pain points." : "Import real data from your current tool rather than starting from scratch in the trial. This reveals migration friction points early."}</p>
                   </div>
                   <div className="p-3 rounded-lg bg-card">
-                    <div className="font-semibold text-xs mb-1">{tool.category === "Developer Tools" ? "Involve your team" : "Test with 3+ team members"}</div>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{tool.category === "Developer Tools" ? "Have at least three engineers from different skill levels use the trial independently. A tool that only your senior dev can configure creates bus-factor risk." : "Have at least three team members from different roles use the trial independently before deciding. The admin experience often differs from the daily user experience."}</p>
+                    <div className="font-semibold text-xs mb-1">{tool.category === "Developer Tools" ? "Involve your team" : "Include the people who will use it"}</div>
+                    <p className="text-muted-foreground text-xs leading-relaxed">{tool.category === "Developer Tools" ? "Have at least three engineers from different skill levels use the trial independently. A tool that only your senior dev can configure creates bus-factor risk." : "Ask people in the roles that will use or administer the tool to test the same workflows independently. The admin experience can differ from the daily user experience."}</p>
                   </div>
                   <div className="p-3 rounded-lg bg-card">
                     <div className="font-semibold text-xs mb-1">Check the exit</div>
@@ -378,7 +379,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   </div>
                   <div className="p-3 rounded-lg bg-card">
                     <div className="font-semibold text-xs mb-1">Budget for setup</div>
-                    <p className="text-muted-foreground text-xs leading-relaxed">Most organizations underestimate implementation time by 2-3x. Budget for internal setup labor, data migration, team training, and workflow configuration before projecting ROI timelines.</p>
+                    <p className="text-muted-foreground text-xs leading-relaxed">Estimate implementation effort before projecting ROI. Include internal setup labor, data migration, team training, workflow configuration, and ongoing administration.</p>
                   </div>
                 </div>
                 <p className="text-[11px] text-muted-foreground mt-3">Compiled under our published methodology from a library of {TOTAL_REVIEWS} B2B SaaS reviews across {categories.length} categories.</p>
