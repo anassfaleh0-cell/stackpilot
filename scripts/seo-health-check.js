@@ -79,7 +79,7 @@ function checkSitemap() {
   if (newDateCount > 5) {
     log("warn", `Sitemap uses "new Date()" ${newDateCount} times - consider using actual content dates for better crawl efficiency`)
   } else {
-    log("pass", "Sitemap uses actual content dates for lastModified")
+    log("pass", "No excessive repeated new Date() lastModified values detected; verify individual content dates separately")
   }
 
   // Check for priority distribution
@@ -114,12 +114,12 @@ function checkRobots() {
 
   // Check AI bot access (good for backlinks from AI citations)
   const aiBots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "PerplexityBot"]
-  for (const bot of aiBots) {
-    if (!content.includes(bot)) {
-      log("warn", `AI bot ${bot} not explicitly allowed - missing potential traffic source`)
-    }
+  const missingAiBotRules = aiBots.filter((bot) => !content.includes(`userAgent: "${bot}"`))
+  if (missingAiBotRules.length > 0) {
+    log("warn", `AI crawler user-agent rules are not explicitly declared: ${missingAiBotRules.join(", ")}; review the generated robots.txt before changing access policy`)
+  } else {
+    log("pass", "AI crawler user-agent rules are explicitly declared in robots.ts; generated robots.txt still requires output verification")
   }
-  log("pass", "Robots.txt allows AI search bots")
 }
 
 // ─── 3. Content Quality ─────────────────────────────────────────────────────
