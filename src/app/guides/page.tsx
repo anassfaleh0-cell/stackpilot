@@ -11,6 +11,8 @@ import Link from "next/link"
 import { ArrowRight, Clock, Layers } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
 import { BannerAd } from "@/components/ads"
+import { getPagination, parsePageParam } from "@/lib/pagination"
+import { PaginationNav } from "@/components/ui/pagination-nav"
 
 export const metadata = createMetadata({
   title: "Software Guides",
@@ -18,13 +20,16 @@ export const metadata = createMetadata({
   path: "/guides",
 })
 
-export default function GuidesPage() {
+export default async function GuidesPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
+  const params = await searchParams
   const guides = getAllGuides().filter((g) => !isNoindexed("guides", g.slug))
+  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: guides.length })
+  const pageGuides = guides.slice(pagination.start, pagination.end)
 
   return (
     <>
       <CollectionPageSchema name="Expert Guides" description="Comprehensive software buying guides and implementation tutorials" url={`${site.url}/guides`} />
-      <ItemListSchema items={guides.map(g => ({ name: g.title, url: `${site.url}/guides/${g.slug}` }))} url={`${site.url}/guides`} />
+      <ItemListSchema items={pageGuides.map(g => ({ name: g.title, url: `${site.url}/guides/${g.slug}` }))} url={`${site.url}/guides`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Guides", href: "/guides" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Guides" }]} />
@@ -52,9 +57,9 @@ export default function GuidesPage() {
 
       <Section>
         <Container>
-          {guides.length > 0 ? (
+          {pageGuides.length > 0 ? (
           <div className="grid sm:grid-cols-2 gap-6">
-            {guides.map((guide) => (
+            {pageGuides.map((guide) => (
               <Link key={guide.slug} href={`/guides/${guide.slug}`} className="group card-hover">
                 <Card className="h-full flex flex-col">
                   <div className="flex items-start justify-between mb-3">
@@ -80,6 +85,7 @@ export default function GuidesPage() {
           ) : (
             <p className="text-center text-muted-foreground py-12">No guides available yet. Check back soon.</p>
           )}
+          <PaginationNav basePath="/guides" pagination={pagination} />
         </Container>
       </Section>
     </>

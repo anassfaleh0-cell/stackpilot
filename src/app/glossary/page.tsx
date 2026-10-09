@@ -5,6 +5,8 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { getAllGlossaryTerms } from "@/lib/content/registry"
+import { getPagination, parsePageParam } from "@/lib/pagination"
+import { PaginationNav } from "@/components/ui/pagination-nav"
 import Link from "next/link"
 import { Book } from "lucide-react"
 import { BannerAd } from "@/components/ads"
@@ -15,8 +17,11 @@ export const metadata = createMetadata({
   path: "/glossary",
 })
 
-export default function GlossaryPage() {
+export default async function GlossaryPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
+  const params = await searchParams
   const terms = getAllGlossaryTerms()
+  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: terms.length })
+  const pageTerms = terms.slice(pagination.start, pagination.end)
 
   return (
     <>
@@ -39,7 +44,7 @@ export default function GlossaryPage() {
             <p className="text-lg text-muted-foreground">Clear, concise definitions of the most important software and technology terms.</p>
           </SectionHeader>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {terms.map((item) => (
+            {pageTerms.map((item) => (
               <Link key={item.slug} href={`/glossary/${item.slug}`} className="group">
                 <Card className="h-full hover:border-primary/30">
                   <div className="flex items-start justify-between mb-2">
@@ -52,6 +57,7 @@ export default function GlossaryPage() {
               </Link>
             ))}
           </div>
+          <PaginationNav basePath="/glossary" pagination={pagination} />
         </Container>
       </Section>
     </>

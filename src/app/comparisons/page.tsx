@@ -9,6 +9,8 @@ import { isNoindexed } from "@/lib/noindex"
 import { ComparisonGrid } from "@/components/entity/comparison-grid"
 import { BrandPattern } from "@/components/brand/patterns"
 import { BannerAd } from "@/components/ads"
+import { getPagination, parsePageParam } from "@/lib/pagination"
+import { PaginationNav } from "@/components/ui/pagination-nav"
 
 export const metadata = createMetadata({
   title: "Software Comparisons",
@@ -16,13 +18,16 @@ export const metadata = createMetadata({
   path: "/comparisons",
 })
 
-export default function ComparisonsPage() {
+export default async function ComparisonsPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
+  const params = await searchParams
   const comparisons = getAllComparisons().filter((c) => !isNoindexed("comparisons", c.slug))
+  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: comparisons.length })
+  const pageComparisons = comparisons.slice(pagination.start, pagination.end)
 
   return (
     <>
       <CollectionPageSchema name="Software Comparisons" description="Side-by-side comparisons of the most popular software tools" url={`${site.url}/comparisons`} />
-      <ItemListSchema items={comparisons.map(c => ({ name: c.title, url: `${site.url}/comparisons/${c.slug}` }))} url={`${site.url}/comparisons`} />
+      <ItemListSchema items={pageComparisons.map(c => ({ name: c.title, url: `${site.url}/comparisons/${c.slug}` }))} url={`${site.url}/comparisons`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Comparisons", href: "/comparisons" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Comparisons" }]} />
@@ -51,10 +56,11 @@ export default function ComparisonsPage() {
       <Section>
         <Container>
           {comparisons.length > 0 ? (
-            <ComparisonGrid items={comparisons.map((c) => ({ slug: c.slug, title: c.title, category: c.category, winner: c.winner, description: c.description }))} />
+            <ComparisonGrid items={pageComparisons.map((c) => ({ slug: c.slug, title: c.title, category: c.category, winner: c.winner, description: c.description }))} />
           ) : (
             <p className="text-center text-muted-foreground py-12">No comparisons available yet. Check back soon.</p>
           )}
+          <PaginationNav basePath="/comparisons" pagination={pagination} />
         </Container>
       </Section>
     </>

@@ -6,6 +6,8 @@ import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/compon
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllBest } from "@/lib/content/registry"
+import { getPagination, parsePageParam } from "@/lib/pagination"
+import { PaginationNav } from "@/components/ui/pagination-nav"
 import Link from "next/link"
 import { Star } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
@@ -16,13 +18,16 @@ export const metadata = createMetadata({
   path: "/best",
 })
 
-export default function BestPage() {
+export default async function BestPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
+  const params = await searchParams
   const pages = getAllBest()
+  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: pages.length })
+  const pageItems = pages.slice(pagination.start, pagination.end)
 
   return (
     <>
       <CollectionPageSchema name="Best Software Tools" description="Editor-reviewed best software recommendations by category" url={`${site.url}/best`} />
-      <ItemListSchema items={pages.map(p => ({ name: p.title, url: `${site.url}/best/${p.slug}` }))} url={`${site.url}/best`} />
+      <ItemListSchema items={pageItems.map(p => ({ name: p.title, url: `${site.url}/best/${p.slug}` }))} url={`${site.url}/best`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Best Software", href: "/best" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Best Software" }]} />
@@ -41,9 +46,9 @@ export default function BestPage() {
       </section>
       <Section>
         <Container>
-          {pages.length > 0 ? (
+          {pageItems.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {pages.map((page) => (
+              {pageItems.map((page) => (
                 <Link key={page.slug} href={`/best/${page.slug}`} className="group card-hover">
                   <Card className="h-full flex flex-col">
                     <div className="flex items-start justify-between mb-3">
@@ -61,6 +66,7 @@ export default function BestPage() {
           ) : (
             <p className="text-center text-muted-foreground py-12">No pages available yet.</p>
           )}
+          <PaginationNav basePath="/best" pagination={pagination} />
         </Container>
       </Section>
     </>

@@ -13,6 +13,8 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { BrandPattern, BrandDivider } from "@/components/brand/patterns"
 import { BannerAd } from "@/components/ads"
+import { getPagination, parsePageParam } from "@/lib/pagination"
+import { PaginationNav } from "@/components/ui/pagination-nav"
 
 export const metadata = createMetadata({
   title: "Software Reviews",
@@ -20,13 +22,16 @@ export const metadata = createMetadata({
   path: "/reviews",
 })
 
-export default function ReviewsPage() {
+export default async function ReviewsPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
+  const params = await searchParams
   const tools = getAllReviews().filter((t) => !isNoindexed("reviews", t.slug))
+  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: tools.length })
+  const pageTools = tools.slice(pagination.start, pagination.end)
 
   return (
     <>
       <CollectionPageSchema name="Software Reviews" description="In-depth, unbiased reviews of the best software tools" url={`${site.url}/reviews`} />
-      <ItemListSchema items={tools.map(t => ({ name: t.name, url: `${site.url}/reviews/${t.slug}` }))} url={`${site.url}/reviews`} />
+      <ItemListSchema items={pageTools.map(t => ({ name: t.name, url: `${site.url}/reviews/${t.slug}` }))} url={`${site.url}/reviews`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Reviews", href: "/reviews" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Reviews" }]} />
@@ -59,10 +64,11 @@ export default function ReviewsPage() {
       <Section>
         <Container>
           {tools.length > 0 ? (
-            <ReviewCardGrid items={tools.map(t => ({ slug: t.slug, name: t.name, category: t.category, rating: t.rating, tagline: t.tagline }))} />
+            <ReviewCardGrid items={pageTools.map(t => ({ slug: t.slug, name: t.name, category: t.category, rating: t.rating, tagline: t.tagline }))} />
           ) : (
             <p className="text-center text-muted-foreground py-12">No reviews available yet. Check back soon.</p>
           )}
+          <PaginationNav basePath="/reviews" pagination={pagination} />
         </Container>
       </Section>
 

@@ -10,6 +10,8 @@ import { ArrowRight, FileText } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
 import { site } from "@/lib/constants"
 import { BannerAd } from "@/components/ads"
+import { getPagination, parsePageParam } from "@/lib/pagination"
+import { PaginationNav } from "@/components/ui/pagination-nav"
 
 export const metadata = createMetadata({
   title: "Research Reports",
@@ -23,7 +25,8 @@ function formatDate(iso?: string) {
   return d.toLocaleDateString("en-US", { month: "long", year: "numeric" })
 }
 
-export default function ResearchPage() {
+export default async function ResearchPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
+  const params = await searchParams
   const reports = getAllResearch()
     .map((r) => ({
       title: r.title,
@@ -33,6 +36,8 @@ export default function ResearchPage() {
       readTime: r.readingTime ? `${r.readingTime} min` : "",
     }))
     .sort((a, b) => (b.date || "").localeCompare(a.date || ""))
+  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: reports.length })
+  const pageReports = reports.slice(pagination.start, pagination.end)
 
   return (
     <>
@@ -64,7 +69,7 @@ export default function ResearchPage() {
       <Section>
         <Container>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {reports.length > 0 ? reports.map((report) => (
+            {pageReports.length > 0 ? pageReports.map((report) => (
               <Link key={report.slug} href={`/research/${report.slug}`} className="group card-hover">
                 <Card className="h-full flex flex-col">
                   <div className="flex items-center gap-2 mb-3">
@@ -86,6 +91,7 @@ export default function ResearchPage() {
               </div>
             )}
           </div>
+          <PaginationNav basePath="/research" pagination={pagination} />
         </Container>
       </Section>
     </>
