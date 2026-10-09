@@ -612,7 +612,7 @@ function sanitizeAlternativeDescription(description: string, toolName: string, c
 }
 function buildGuideSections(guide: GuideContent): GuideContent['sections'] {
   const sections = sanitizeSections(guide.sections)
-  if (sectionWordCount(sections) >= 900) return sections
+  if (sectionWordCount(sections) >= 900 || sections.some((section) => section.title === "Define the Decision")) return sections
   const title = guide.title.replace(/\s*[:—-].*$/, '').trim() || guide.category
   const criteria = ['Define the workflow this guide is meant to improve and document the current process before comparing software.', 'Separate must-have requirements from preferences so feature count does not become a substitute for product fit.', 'Verify integrations, permissions, data movement, reporting, and relevant security or compliance requirements before committing.', 'Compare total cost of ownership, including user seats, plan limits, implementation work, training, and ongoing administration.', 'Choose a small pilot workflow and define a measurable success criterion before a full rollout.']
   const rollout = ['Map the current workflow and identify steps where delays, duplication, or manual work occur.', 'Test the highest-risk requirement with realistic sample data instead of relying on a product-page claim.', 'Document configuration, ownership, permissions, and the fallback process for anything the software cannot automate.', 'Train users on the tasks they actually perform and review adoption after the first rollout period.', 'Revisit the setup after launch and remove unused configuration instead of letting complexity grow unchecked.']
