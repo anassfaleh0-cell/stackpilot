@@ -52,7 +52,7 @@ const CONTENT_ROOT = path.join(process.cwd(), "content")
 const APP_ROOT = path.join(process.cwd(), "src", "app")
 const UNKNOWN_SLUG = "no-such-record-on-this-site"
 
-type RecordEntry = { file: string; slug: string; fieldSlug: string; published: unknown }
+type RecordEntry = { file: string; slug: string; fieldSlug: string; published: unknown; publicationStatus: unknown }
 
 function recordsOf(dir: string): RecordEntry[] {
   const folder = path.join(CONTENT_ROOT, dir)
@@ -67,6 +67,7 @@ function recordsOf(dir: string): RecordEntry[] {
         slug: file.replace(/\.json$/, ""),
         fieldSlug: typeof data.slug === "string" ? data.slug : "",
         published: data.published,
+        publicationStatus: data.publicationStatus,
       }
     })
 }
@@ -138,6 +139,7 @@ describe("route families", () => {
     const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
     for (const family of FAMILIES) {
       for (const record of recordsOf(family.dir)) {
+        if (record.publicationStatus === "draft") continue
         expect(paths.has(`/${family.route}/${record.slug}`), `missing sitemap URL for ${family.route}/${record.slug}`).toBe(true)
       }
     }
