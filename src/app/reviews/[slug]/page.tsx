@@ -20,7 +20,7 @@ import { authorSlugs } from "@/app/authors/[slug]/page"
 import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
 import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
 import { isNoindexed } from "@/lib/noindex"
-import { getVisibleReviewFaqs } from "@/lib/content/review-faqs"
+import { getVisibleEditorialFaqs } from "@/lib/content/review-faqs"
 import { BannerAd, NativeAd, InFeedAd } from "@/components/ads"
 
 const TOTAL_REVIEWS = getAllReviews().length
