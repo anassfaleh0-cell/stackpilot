@@ -107,7 +107,7 @@ export function ArticleSchema({
     publisher: organizationRef(),
     datePublished: publishedAt || undefined,
     dateModified: updatedAt || publishedAt || undefined,
-    image: { "@type": "ImageObject", url: `${site.url}/og.png` },
+    image: { "@type": "ImageObject", url: image || `${site.url}/og.png` },
     mainEntityOfPage: { "@type": "WebPage", "@id": url || site.url },
     inLanguage: "en-US",
     wordCount: wordCount || undefined,
