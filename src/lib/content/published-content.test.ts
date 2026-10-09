@@ -9,6 +9,8 @@ describe("content indexability guards", () => {
     expect(isNoindexed("reviews", "asana")).toBe(true)
     expect(isNoindexed("reviews", "linear")).toBe(false)
     expect(isNoindexed("reviews", "quickbooks")).toBe(false)
+    expect(isNoindexed("reviews", "zoom")).toBe(false)
+    expect(isNoindexed("reviews", "webex")).toBe(false)
     expect(isNoindexed("best", "best-ai-coding-tools")).toBe(true)
     expect(isNoindexed("best", "best-accounting-software")).toBe(false)
   })
@@ -16,6 +18,7 @@ describe("content indexability guards", () => {
   it("does not expose a comparison explicitly marked unpublished", () => {
     expect(getComparison("activecampaign-vs-adobe-express")).toBeNull()
     expect(getComparison("adp-vs-airtable")).toBeNull()
+    expect(getComparison("zoom-vs-webex")).not.toBeNull()
   })
 })
 
@@ -60,7 +63,7 @@ describe("rewritten guide quality floor", () => {
 })
 
 describe("rewritten review quality floor", () => {
-  for (const slug of ["linear", "notion", "clickup", "quickbooks", "xero", "freshbooks"]) {
+  for (const slug of ["linear", "notion", "clickup", "quickbooks", "xero", "freshbooks", "zoom", "webex"]) {
     it(`${slug} review avoids unsupported review-count claims and has substantive guidance`, () => {
       const review = getReview(slug)
       expect(review).not.toBeNull()
