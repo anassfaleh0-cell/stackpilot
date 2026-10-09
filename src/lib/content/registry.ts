@@ -385,7 +385,6 @@ function repairGenericGuideData(data: Record<string, unknown>, filePath: string)
       body: "Before signing, confirm current feature and pricing limits in vendor documentation, support commitments, data export and deletion procedures, renewal terms, and cancellation notice. Start with one team or workflow, assign an accountable owner, and define acceptance criteria and a rollback plan. After launch, review adoption, quality, cost, and unresolved risks against the baseline. Reassess when workflows, team size, compliance needs, or pricing change.",
       type: "text",
     },
-  ]
     {
       title: "Questions to Ask the Vendor",
       body: "Ask for a demonstration of the exact workflow you will use, not a generic tour. Confirm which features are included in the quoted plan, what usage limits apply, how permissions and audit logs work, what support response is promised, and how quickly data can be exported. Ask the vendor to identify known limitations and recent material changes. Keep answers in writing, link them to the requirement they address, and distinguish contractual commitments from informal sales statements.",
@@ -401,6 +400,7 @@ function repairGenericGuideData(data: Record<string, unknown>, filePath: string)
       body: "Schedule a review after the first few weeks and again after the first full operating cycle. Compare actual usage, time saved, correction work, support requests, and total cost with the baseline recorded before purchase. Ask users which steps remain awkward and whether work has shifted elsewhere instead of disappearing. Keep, change, or retire the tool based on this evidence, and update the evaluation notes so the next renewal or procurement decision starts with real operating experience.",
       type: "text",
     },
+  ]
   const wordCount = repairedSections.reduce((total, section) => total + String(section.body).split(/\s+/).filter(Boolean).length, 0)
   const currentRelatedTools = Array.isArray(data.relatedTools) ? data.relatedTools.filter((item): item is string => typeof item === "string") : []
   const relatedTools = currentRelatedTools.length > 0 ? currentRelatedTools : readDir(path.join(CONTENT_DIR, "reviews"))
