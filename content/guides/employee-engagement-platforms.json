@@ -5,7 +5,7 @@
   "category": "HR & People",
   "difficulty": "Advanced",
   "author": "Emily Nakamura",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "workday",
     "slack",
@@ -56,6 +56,11 @@
     {
       "title": "Selection checklist",
       "body": "Choose a platform that protects employee trust, supports useful feedback methods, and makes follow-up accountable. Verify anonymity, permissions, exports, and reporting with test data. Review the program after each cycle and retire questions that no longer support a decision.",
+      "type": "text"
+    },
+    {
+      "title": "Protect anonymity and close the feedback loop",
+      "body": "Before sending a survey, document who can see raw responses, what minimum group size is used for reporting, how free-text comments are handled, and how long data is retained. Test the report with a small team to check whether individuals could be inferred from filters or comments. Publish the actions that follow feedback and tell employees what changed. Repeated surveys without visible action can reduce trust and participation even when the software works correctly.",
       "type": "text"
     }
   ]
