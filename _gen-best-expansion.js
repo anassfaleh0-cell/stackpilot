@@ -16,7 +16,9 @@ fs.readdirSync(reviewDir).filter(f => f.endsWith(".json")).forEach(f => {
       name: r.name,
       category: r.category,
       rating: r.rating,
-      priceRange: r.priceRange || "$0-99/mo",
+      priceRange: r.priceRange || "Pricing not verified — check the vendor’s current pricing",
+      pros: Array.isArray(r.pros) ? r.pros : [],
+      cons: Array.isArray(r.cons) ? r.cons : [],
       tagline: r.tagline || r.description?.substring(0,120) || ""
     })
   } catch(e) {}
@@ -103,7 +105,7 @@ categories.forEach(cat => {
     if (existingBest.has(slug)) { count++; return }
 
     const title = `Best ${cat} Software for ${aud}`
-    const desc = `Find the best ${qual} tools for ${aud.toLowerCase()}. We evaluated the top solutions for ${audienceDesc[aud]} based on pricing, features, and real user reviews.`
+    const desc = `Compare ${qual} tools for ${aud.toLowerCase()} using practical selection criteria, current vendor documentation, pricing fit, integrations, and workflow requirements. Verify details with each vendor before purchasing.`
     const h = hash(slug)
     const strengths = useCaseStrength[aud] || ["core functionality", "value", "usability"]
     const pickCount = Math.min(6, cTools.length)
@@ -115,8 +117,8 @@ categories.forEach(cat => {
       rating: t.rating,
       priceRange: t.priceRange,
       bestFor: i === 0 ? `Best overall for ${aud.toLowerCase()}` : i === 1 ? `Best value for ${aud.toLowerCase()}` : i === 2 ? `Best features for ${aud.toLowerCase()}` : i === 3 ? `Best for growing ${aud.toLowerCase()}` : i === 4 ? `Best for ${aud.toLowerCase()} teams` : `Best for scaling ${aud.toLowerCase()}`,
-      pros: [`Excellent ${strengths[0]} that ${aud.toLowerCase()} teams consistently praise`, `Strong ${strengths[1]} makes it accessible for ${aud.toLowerCase()} users`, `Reliable ${strengths[2]} with regular updates and improvements`, `Positive user reviews across ${t.rating}/5 rating`, `Good integration ecosystem for ${aud.toLowerCase()} workflows`],
-      cons: [`May require initial setup time for ${aud.toLowerCase()} teams`, `Some advanced features may not be needed by all ${aud.toLowerCase()} users`, `Premium pricing could be a consideration for budget-conscious ${aud.toLowerCase()} teams`, `Learning curve for full feature utilization`, `Mobile experience could be improved`]
+      pros: (t.pros || []).slice(0, 5),
+      cons: (t.cons || []).slice(0, 5)
     }))
 
     const page = {
@@ -128,11 +130,11 @@ categories.forEach(cat => {
         rows: picks.map(p => [p.toolName, p.rating.toString(), p.priceRange, p.bestFor, strengths[0]])
       },
       faqs: [
-        { question: `What is the best ${qual} tool for ${aud.toLowerCase()}?`, answer: `Based on our comprehensive evaluation, ${picks[0].toolName} is the best ${qual} tool for ${aud.toLowerCase()} in ${now.split(",")[0]}. It earned a ${picks[0].rating}/5 rating and excels at meeting the specific needs of ${audienceDesc[aud].toLowerCase()}.` },
-        { question: `How much does ${qual} software cost for ${aud.toLowerCase()}?`, answer: `${qual} tools for ${aud.toLowerCase()} range from free tiers to enterprise plans. ${picks[0].toolName} starts at ${picks[0].priceRange}, while budget-friendly alternatives starting from lower price points are available.` },
+        { question: `What is the best ${qual} tool for ${aud.toLowerCase()}?`, answer: `${picks[0].toolName} is one option to assess for ${aud.toLowerCase()}. Compare its recorded rating and features with your requirements, and verify current details directly with the vendor before deciding.` },
+        { question: `How much does ${qual} software cost for ${aud.toLowerCase()}?`, answer: `${qual} pricing varies by product, plan, billing term, and usage. Confirm the current price, seat minimums, feature limits, and add-ons on each vendor’s official pricing page.` },
         { question: `What features should ${aud.toLowerCase()} look for in ${qual} software?`, answer: `When evaluating ${qual} tools for ${aud.toLowerCase()}, prioritize ${crit.slice(0,3).join(", ").toLowerCase()}. These factors most directly impact daily productivity and return on investment for ${aud.toLowerCase()} teams.` },
         { question: `Can ${aud.toLowerCase()} use free ${qual} tools effectively?`, answer: `Yes, several ${qual} platforms offer generous free tiers suitable for ${aud.toLowerCase()}. We recommend testing free versions to evaluate fit before committing to paid plans.` },
-        { question: `What is the easiest ${qual} tool for ${aud.toLowerCase()} to implement?`, answer: `Implementation difficulty varies, but ${picks[0].toolName} is known for straightforward setup, making it an excellent choice for ${aud.toLowerCase()} teams that want to get started quickly.` },
+        { question: `What is the easiest ${qual} tool for ${aud.toLowerCase()} to implement?`, answer: `Implementation effort depends on your data, integrations, permissions, and workflow complexity. Use a small pilot to measure setup time before committing.` },
         { question: `How do I choose between different ${qual} tools for ${aud.toLowerCase()}?`, answer: `Consider your team size, budget, technical expertise, and specific workflow needs. Our comparison table above shows how each top pick stacks up across key criteria.` },
         { question: `Are there ${qual} tools designed specifically for ${aud.toLowerCase()}?`, answer: `Yes, many ${qual} platforms offer features tailored to ${aud.toLowerCase()}. Our reviews detail which tools work best for different types of ${aud.toLowerCase()} teams.` },
         { question: `How often should ${aud.toLowerCase()} review their ${qual} tool choice?`, answer: `We recommend evaluating your ${qual} stack annually or when your team grows significantly. The software landscape evolves rapidly with new features and entrants.` },
@@ -146,13 +148,13 @@ categories.forEach(cat => {
 </div>
 <section class="mb-10">
 <h2 class="text-2xl font-bold mb-4">Why Trust Our ${qual} Recommendations for ${aud}</h2>
-<p class="mb-3">Our team has spent hundreds of hours researching, testing, and comparing ${qual} platforms specifically for ${aud.toLowerCase()}. We combine structured product review with analysis of thousands of user reviews to deliver unbiased, actionable recommendations.</p>
-<p class="mb-3">Each tool was evaluated against ${crit.length} key criteria: ${crit.join(", ").toLowerCase()}. Our methodology ensures comprehensive coverage of what matters most to ${aud.toLowerCase()} buyers.</p>
+<p class="mb-3">This shortlist organizes options against common requirements for ${aud.toLowerCase()}. It is a starting point for your own evaluation, not a claim that every product has been independently tested. Check each vendor’s documentation and run a pilot with your own workflow.</p>
+<p class="mb-3">Use these criteria to compare candidates consistently: ${crit.join(", ").toLowerCase()}. Weight them according to your team’s constraints, and record evidence from current vendor documentation or your own trial.</p>
 </section>
 <section class="mb-10">
 <h2 class="text-2xl font-bold mb-4">How We Chose the Best ${qual} Tools for ${aud}</h2>
-<p class="mb-3">Our evaluation process focused on what ${aud.toLowerCase()} teams need most: ${strengths.join(", ")}. Each tool was tested in real-world ${aud.toLowerCase()} scenarios to ensure our recommendations are practical.</p>
-<p class="mb-3">We analyzed user reviews from G2, Capterra, and TrustRadius to validate our findings and ensure our picks reflect real user satisfaction.</p>
+<p class="mb-3">Our evaluation process focused on what ${aud.toLowerCase()} teams need most: ${strengths.join(", ")}. For a practical decision, test the candidate with a representative ${aud.toLowerCase()} workflow and record the result against your acceptance criteria.</p>
+<p class="mb-3">If third-party reviews matter to your decision, compare recent reviews across more than one independent source and look for recurring themes that match your own use case.</p>
 </section>
 <section class="mb-10">
 <h2 class="text-2xl font-bold mb-4">What ${aud} Should Consider Before Buying ${qual} Software</h2>
@@ -207,7 +209,7 @@ categories.forEach(cat => {
   if (existingBest.has(slug)) return
   
   const title = `Best ${cat} Software`
-  const desc = `Find the best ${qual} software. We reviewed and compared the top platforms based on features, pricing, user ratings, and real-world testing to help you choose the right tool.`
+  const desc = `Compare ${qual} software using practical selection criteria, vendor documentation, pricing fit, integrations, and workflow requirements. Verify details with each vendor before purchasing.`
   const topPicks = cTools.slice(0, 6)
   
   const picks = topPicks.map((t, i) => ({
@@ -217,8 +219,8 @@ categories.forEach(cat => {
     rating: t.rating,
     priceRange: t.priceRange,
     bestFor: i === 0 ? "Best overall" : i === 1 ? "Best value" : i === 2 ? "Best features" : i === 3 ? "Best for teams" : i === 4 ? "Best enterprise" : "Best for beginners",
-    pros: [`Industry-leading ${crit[0].toLowerCase()}`, `Excellent ${crit[1].toLowerCase()} for most users`, `Strong ${crit[2].toLowerCase()} capabilities`, `Positive user feedback with ${t.rating}/5 rating`, `Comprehensive feature set for the category`],
-    cons: [`Premium pricing may not suit all budgets`, `Learning curve for advanced features`, `Some users report occasional performance issues`, `Mobile experience could be enhanced`, `Limited customization in some areas`]
+    pros: (t.pros || []).slice(0, 5),
+    cons: (t.cons || []).slice(0, 5)
   }))
   
   const page = {
@@ -230,7 +232,7 @@ categories.forEach(cat => {
       rows: picks.map(p => [p.toolName, p.rating.toString(), p.priceRange, p.bestFor, crit[0]])
     },
     faqs: [
-      { question: `What is the best ${qual} software?`, answer: `Based on our evaluation, ${picks[0].toolName} is the best ${qual} platform with a ${picks[0].rating}/5 rating. It excels across all key criteria.` },
+      { question: `What is the best ${qual} software?`, answer: `${picks[0].toolName} is one candidate to compare against your requirements. Check the underlying review and confirm current features, pricing, and limitations with the vendor.` },
       { question: `What is the most affordable ${qual} software?`, answer: `Several ${qual} platforms offer competitive pricing. Check our detailed comparison table to find the best value option.` },
       { question: `What features should I look for in ${qual} software?`, answer: `Key features include ${crit.slice(0,4).join(", ").toLowerCase()}. The right tool depends on your team size and requirements.` },
       { question: `Is free ${qual} software good enough?`, answer: `Free tiers can be excellent for individuals and small teams. Our reviews evaluate free options to help you decide when to upgrade.` },
@@ -248,12 +250,12 @@ categories.forEach(cat => {
 </div>
 <section class="mb-10">
 <h2 class="text-2xl font-bold mb-4">Why Trust Our ${qual} Recommendations</h2>
-<p class="mb-3">Our team has spent hundreds of hours researching, testing, and comparing ${qual} platforms. We combine structured product review with analysis of thousands of user reviews to deliver unbiased recommendations.</p>
+<p class="mb-3">Use this page as a starting shortlist, then verify product details with official documentation and a trial. Recommendations should be based on your requirements and evidence available for each candidate.</p>
 <p class="mb-3">Each platform was evaluated across ${crit.length} dimensions: ${crit.join(", ").toLowerCase()}. Our methodology ensures comprehensive coverage of what matters most to buyers.</p>
 </section>
 <section class="mb-10">
 <h2 class="text-2xl font-bold mb-4">How We Evaluated ${qual} Platforms</h2>
-<p class="mb-3">Each platform was scored across ${crit.length} key dimensions. We conducted structured product review, analyzed user reviews, and compared feature sets to produce accurate rankings.</p>
+<p class="mb-3">Each platform was scored across ${crit.length} key dimensions. Compare the same workflow and criteria across products. Record which claims are documented, which were confirmed in your trial, and which remain uncertain.</p>
 </section>
 <section class="mb-10">
 <h2 class="text-2xl font-bold mb-4">What to Consider When Choosing ${qual} Software</h2>
@@ -261,7 +263,7 @@ categories.forEach(cat => {
 </section>
 <section class="mb-10">
 <h2 class="text-2xl font-bold mb-4">Final Verdict</h2>
-<p class="mb-3">${picks[0].toolName} earns our top recommendation for ${qual} software based on outstanding ${crit[0].toLowerCase()}, strong ${crit[1].toLowerCase()}, and excellent value.</p>
+<p class="mb-3">Choose the option that best meets your must-have requirements at an acceptable total cost. Validate key workflows and contract terms before committing.</p>
 <p class="text-sm text-muted-foreground">Last updated: ${now}</p>
 </section>
 </article>`,
