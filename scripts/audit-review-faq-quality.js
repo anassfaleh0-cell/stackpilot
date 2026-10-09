@@ -50,17 +50,17 @@ for (const { dir, name: file } of files) {
       findings.brokenAnswers.push({ file: relativePath, question, excerpt: answer.slice(0, 140) })
     }
     if (genericPatterns.some((pattern) => pattern.test(answer))) {
-      findings.genericAnswers.push({ file, question, excerpt: answer.slice(0, 140) })
+      findings.genericAnswers.push({ file: relativePath, question, excerpt: answer.slice(0, 140) })
     }
-    if (qKey && questions.has(qKey)) findings.duplicateQuestions.push({ file, question })
-    if (aKey && answers.has(aKey)) findings.duplicateAnswers.push({ file, question, excerpt: answer.slice(0, 140) })
+    if (qKey && questions.has(qKey)) findings.duplicateQuestions.push({ file: relativePath, question })
+    if (aKey && answers.has(aKey)) findings.duplicateAnswers.push({ file: relativePath, question, excerpt: answer.slice(0, 140) })
     if (qKey) questions.add(qKey)
     if (aKey) answers.add(aKey)
   }
 }
 const sample = (list) => list.slice(0, 10)
 console.log("[editorial-faq-audit] REPORT ONLY — no files modified; findings require editorial review")
-console.log("Review files:", findings.files)
+console.log("Editorial files scanned:", findings.files)
 for (const [key, values] of Object.entries(findings)) {
   if (key === "files") continue
   console.log(key + ":", values.length, "sample:", JSON.stringify(sample(values)))
