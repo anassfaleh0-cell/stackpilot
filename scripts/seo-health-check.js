@@ -58,6 +58,13 @@ function stripHtml(text) {
   return (text || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
 }
 
+function collectText(value) {
+  if (typeof value === "string" || typeof value === "number") return String(value)
+  if (Array.isArray(value)) return value.map(collectText).join(" ")
+  if (value && typeof value === "object") return Object.values(value).map(collectText).join(" ")
+  return ""
+}
+
 function wordCount(text) {
   return stripHtml(text).split(/\s+/).filter(Boolean).length
 }
