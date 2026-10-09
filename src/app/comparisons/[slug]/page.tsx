@@ -68,7 +68,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   const tool1Evidence = cmp.features.find((feature) => typeof feature.tool1Detail === "string" && feature.tool1Detail.trim())
   const tool2Evidence = cmp.features.find((feature) => typeof feature.tool2Detail === "string" && feature.tool2Detail.trim())
   const conciseEvidence = (value: unknown) => {
-    const text = typeof value === "string" ? value.replace(/\\s+/g, " ").trim() : ""
+    const text = typeof value === "string" ? value.replace(/\s+/g, " ").trim() : ""
     return text.length > 180 ? `${text.slice(0, 177).trimEnd()}…` : text
   }
 
@@ -245,6 +245,58 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             </div>
           </section>
 
+          {/* Product context from the linked review records */}
+          {(review1 || review2) && (
+            <section className="mb-12">
+              <h2 className="text-2xl font-bold tracking-tight mb-2">Product context from linked reviews</h2>
+              <p className="text-sm text-muted-foreground mb-6">
+                These summaries come from PilotStack&apos;s linked review records, not a claim that the products were tested side by side. Confirm current features, limits, and pricing with each vendor.
+              </p>
+              <div className="grid gap-6 md:grid-cols-2">
+                {[
+                  { review: review1, name: cmp.tool1, href: `/reviews/${cmp.tool1Slug}` },
+                  { review: review2, name: cmp.tool2, href: `/reviews/${cmp.tool2Slug}` },
+                ].map(({ review, name, href }) => review ? (
+                  <GlassCard key={href}>
+                    <div className="p-5">
+                      <h3 className="font-semibold text-lg mb-2">{name}</h3>
+                      <p className="text-sm text-muted-foreground mb-3">{review.description || review.tagline || `Read the PilotStack review of ${name} for product-specific context.`}</p>
+                      <dl className="grid grid-cols-2 gap-3 mb-4 text-sm">
+                        <div>
+                          <dt className="text-xs text-muted-foreground">Category</dt>
+                          <dd className="font-medium">{review.category || "Not specified"}</dd>
+                        </div>
+                        <div>
+                          <dt className="text-xs text-muted-foreground">Pricing record</dt>
+                          <dd className="font-medium">{review.priceRange || review.pricing || "Verify with vendor"}</dd>
+                        </div>
+                      </dl>
+                      {Array.isArray(review.pros) && review.pros.length > 0 && (
+                        <div className="mb-3">
+                          <h4 className="text-sm font-semibold mb-2">Recorded strengths</h4>
+                          <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+                            {review.pros.slice(0, 2).map((item: string) => <li key={item}>{item}</li>)}
+                          </ul>
+                        </div>
+                      )}
+                      {Array.isArray(review.cons) && review.cons.length > 0 && (
+                        <div className="mb-4">
+                          <h4 className="text-sm font-semibold mb-2">Recorded limitations</h4>
+                          <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+                            {review.cons.slice(0, 2).map((item: string) => <li key={item}>{item}</li>)}
+                          </ul>
+                        </div>
+                      )}
+                      <Link href={href} className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline">
+                        Read full review <ArrowRight size={14} />
+                      </Link>
+                    </div>
+                  </GlassCard>
+                ) : null)}
+              </div>
+            </section>
+          )}
+
           {/* Verdict */}
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-6">Verdict</h2>
@@ -253,7 +305,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                 <div className="flex items-center gap-2 mb-3">
                   <CheckCircle2 size={18} className="text-primary" />
                   <p className="text-lg font-semibold">
-                    {cmp.winner ? `Recorded winner: ${cmp.winner}` : "How they compare"}
+                    {cmp.winner ? `Recorded winner: ${cmp.winner === cmp.tool1Slug ? cmp.tool1 : cmp.winner === cmp.tool2Slug ? cmp.tool2 : cmp.winner}` : "How they compare"}
                   </p>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={stripDeadContentLinks(cmp.verdict)} /></p>
@@ -263,7 +315,6 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                     <span className="font-medium text-foreground">
                       Check the available export/import options, integration dependencies, and data fields before switching; test with a small representative dataset first.
                     </span>
-                    <span className="text-xs text-muted-foreground">Check export/import options and run a small migration test before switching.</span>
                   </div>
                 )}
               </div>
