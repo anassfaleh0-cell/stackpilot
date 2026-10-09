@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-09T06:47:08.892Z",
+  "generatedAt": "2026-10-09T06:48:32.778Z",
   "summary": {
     "totalFiles": 1940,
-    "totalKeep": 1150,
-    "totalNoindex": 790
+    "totalKeep": 1100,
+    "totalNoindex": 840
   },
   "directories": {
     "reviews": {
@@ -1701,7 +1701,8 @@
     },
     "industries": {
       "total": 50,
-      "keep": [
+      "keep": [],
+      "noindex": [
         "aerospace",
         "automotive",
         "biotechnology",
@@ -1752,8 +1753,7 @@
         "transportation",
         "travel",
         "veterinary"
-      ],
-      "noindex": []
+      ]
     },
     "research": {
       "total": 32,
