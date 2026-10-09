@@ -24,7 +24,7 @@ const stages = [
 
 const scoringRubric = [
   { dimension: "Feature coverage", what: "Capabilities and constraints recorded for the product; verify against current vendor documentation", weight: "Contextual" },
-  { dimension: "Usability and workflow fit", what: "Editorial judgment about likely fit for the stated use case; not a hands-on usability study", weight: "Contextual" },
+  { dimension: "Usability and workflow fit", what: "Editorial judgment about likely fit for the stated use case; not a directly observed usability study", weight: "Contextual" },
   { dimension: "Value and pricing", what: "Plan structure and cost considerations; pricing may change and should be verified before purchase", weight: "Contextual" },
   { dimension: "Integrations and extensibility", what: "Documented integrations, APIs, and automation options where evidence is available", weight: "Contextual" },
   { dimension: "Security and administration", what: "Published controls and disclosures; unknown or unsupported claims should remain unverified", weight: "Contextual" },
@@ -134,7 +134,7 @@ export default function MethodologyPage() {
               <h2 className="text-2xl font-bold mt-12 mb-4">Review Team & Expertise</h2>
               <p className="text-muted-foreground mb-4">
                 PilotStack is run by a small, independent team. Editorial roles are listed on our{" "}
-                <Link href="/authors" className="text-primary hover:underline">authors</Link> pages. Our editorial team is improving source provenance and correcting legacy records. Profile scores, where present, are editorial summaries—not third-party user ratings or proof of hands-on testing. Product facts should carry evidence and dates where available; repeating a field across pages is not a substitute for verification.
+                <Link href="/authors" className="text-primary hover:underline">authors</Link> pages. Our editorial team is improving source provenance and correcting legacy records. Profile scores, where present, are editorial summaries—not third-party user ratings or proof that PilotStack directly tested the product. Product facts should carry evidence and dates where available; repeating a field across pages is not a substitute for verification.
               </p>
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Editorial Independence</h2>
