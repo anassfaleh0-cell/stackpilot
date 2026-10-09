@@ -1,53 +1,62 @@
 {
-    "slug":  "employee-onboarding-software-guide",
-    "title":  "Employee Onboarding Guide: How to Choose the Right HR \u0026 People Platform",
-    "description":  "Intermediate HR \u0026 People guide (~13 min read): how to evaluate the right Employee Onboarding. Choosing the right hr \u0026 people software starts with.",
-    "category":  "HR \u0026 People",
-    "difficulty":  "Intermediate",
-    "author": "Emily Nakamura",
-    "readingTime":  13,
-    "relatedTools":  [
-
-                     ],
-    "relatedGuides":  [
-
-                      ],
-    "lastUpdated":  "2026-07-20",
-    "sections":  [
-                     {
-                         "title":  "Getting Started",
-                         "body":  "Choosing the right hr \u0026 people software starts with understanding your specific requirements. Before evaluating Employee Onboarding Guide: How to Choose the Right HR \u0026 People Platform, take stock of your team size, budget, existing tool stack, and the primary problems you need to solve. This guide walks through the key considerations.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Selection Criteria",
-                         "body":  "When evaluating Employee Onboarding Guide: How to Choose the Right HR \u0026 People Platform and other hr \u0026 people platforms, focus on these criteria: feature completeness relative to your needs, integration compatibility with your existing tools, total cost of ownership including implementation and training, vendor reputation and support quality, and scalability for future growth.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Implementation Guide",
-                         "body":  "Implementing Employee Onboarding Guide: How to Choose the Right HR \u0026 People Platform successfully requires planning beyond the technical setup. Start with a clear use case, involve stakeholders early, allocate time for data migration and testing, and plan for team training. Most successful deployments follow a phased approach rather than a big-bang rollout.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Best Practices",
-                         "body":  "Teams that get the most value from Employee Onboarding Guide: How to Choose the Right HR \u0026 People Platform share common practices: they invest in initial configuration and customization, establish clear workflows and naming conventions, train all users before full rollout, regularly review usage patterns to optimize settings, and keep the platform updated.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Common Pitfalls",
-                         "body":  "The most common mistakes teams make with Employee Onboarding Guide: How to Choose the Right HR \u0026 People Platform include underinvesting in the initial setup, skipping user training, trying to migrate too much data at once, not defining clear success metrics upfront, and failing to get buy-in from all stakeholders before deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "ROI Analysis",
-                         "body":  "Calculating ROI for Employee Onboarding Guide: How to Choose the Right HR \u0026 People Platform involves both tangible savings like reduced licensing costs from tool consolidation and productivity gains from streamlined workflows, and intangible benefits like improved team satisfaction and better data-driven decision making. Most teams see positive ROI within 3-6 months of full deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Future Trends",
-                         "body":  "The hr \u0026 people category continues to evolve rapidly. Employee Onboarding Guide: How to Choose the Right HR \u0026 People Platform is positioned to benefit from trends like AI-powered automation, deeper integration ecosystems, and increased focus on security and compliance. Organizations should evaluate how well the platform\u0027s roadmap aligns with their own technology strategy.",
-                         "type":  "text"
-                     }
-                 ]
+  "slug": "employee-onboarding-software-guide",
+  "title": "Employee Onboarding Guide: How to Choose the Right HR & People Platform",
+  "description": "Practical employee onboarding guidance with workflow planning, measurement, data controls, and implementation checks.",
+  "category": "HR & People",
+  "difficulty": "Intermediate",
+  "author": "Emily Nakamura",
+  "readingTime": 2,
+  "relatedTools": [
+    "workday",
+    "greenhouse",
+    "microsoft-teams"
+  ],
+  "relatedGuides": [
+    "how-to-choose-hr-software",
+    "hr-software-buyers-guide",
+    "recruiting-software-selection"
+  ],
+  "lastUpdated": "2026-10-09",
+  "sections": [
+    {
+      "title": "Map the employee journey",
+      "body": "Document what happens from offer acceptance through the first weeks or months: paperwork, identity and device setup, access requests, training, introductions, role expectations, and manager check-ins. Identify who owns each task and what blocks the employee from being productive. Onboarding software should make responsibilities and progress visible rather than create another checklist disconnected from the actual work.",
+      "type": "text"
+    },
+    {
+      "title": "Automate tasks with clear owners",
+      "body": "Test role-based task templates, deadlines, reminders, dependencies, approvals, and escalation. Include remote employees, contractors, transfers, and rehires. Verify what happens when a start date changes or a task owner is unavailable. Keep human judgment for exceptions and make it clear who can override a workflow and why.",
+      "type": "text"
+    },
+    {
+      "title": "Connect HR and IT systems",
+      "body": "Map HRIS, identity, device management, payroll, learning, calendar, and collaboration tools. Define which system owns employee details and how updates propagate. Test duplicate records, missing manager information, and delayed provisioning. Make sure access is granted only after the required approvals and removed when onboarding is canceled or an employee leaves.",
+      "type": "text"
+    },
+    {
+      "title": "Provide role-specific learning",
+      "body": "Check support for learning paths, policy acknowledgements, documentation, quizzes, and manager check-ins. Ensure content is current, accessible, and relevant to the employee's role and location. Record completion without treating a click as proof of understanding. Assign an owner and review date to critical training and make it easy to update material after policy changes.",
+      "type": "text"
+    },
+    {
+      "title": "Protect personal and employment data",
+      "body": "Review access to identity documents, tax forms, compensation, background-check results, and other sensitive records. Test least-privilege access, audit logs, retention, deletion, and secure export. Confirm vendor data-processing terms and relevant regional requirements with HR or legal owners. Keep sensitive documents out of general project spaces and notifications.",
+      "type": "text"
+    },
+    {
+      "title": "Measure readiness and experience",
+      "body": "Track task completion before the start date, time to provision access, missed dependencies, employee questions, manager check-in completion, and feedback after the first month. Distinguish administrative completion from readiness to perform the role. Review a sample of onboarding journeys with new hires to find confusing instructions and unnecessary steps.",
+      "type": "text"
+    },
+    {
+      "title": "Plan rollout and ownership",
+      "body": "Pilot with one department or location, then review how templates vary by role, seniority, and region. Assign owners for HR policy, IT access, learning content, and workflow maintenance. Include the cost of integrations, training, support, and change management. Ensure that the process still works if a key administrator leaves.",
+      "type": "text"
+    },
+    {
+      "title": "Go-live checklist",
+      "body": "Proceed when the full journey is tested, access rules are approved, integrations work, content is current, and exception handling is clear. Keep a manual fallback for system outages and define who communicates with a new hire. Review the workflow after policy, identity, or organizational changes.",
+      "type": "text"
+    }
+  ]
 }
