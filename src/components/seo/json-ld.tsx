@@ -320,8 +320,8 @@ export function softwareApp({ name, url, description, category, platforms, appli
   }
   if (description) node.description = description
   if (image) node.image = { "@type": "ImageObject", url: image }
-  const ar = aggregateRatingNode(rating, reviewCount)
-  if (ar) node.aggregateRating = ar
+  // Legacy profile scores and review counts lack consistent third-party provenance.
+  // Do not publish them as Schema.org aggregateRating until verified source data exists.
   const offer = offerNode(offers)
   if (offer) node.offers = offer
   return node as { "@type": string; name: string; url: string; [key: string]: unknown }
