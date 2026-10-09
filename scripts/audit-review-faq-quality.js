@@ -2,7 +2,8 @@
 const fs = require("node:fs")
 const path = require("node:path")
 
-const root = path.resolve(process.cwd(), "content/reviews")
+const contentRoot = path.resolve(process.cwd(), "content")
+const contentDirs = ["reviews", "comparisons", "alternatives", "best", "use-cases", "industries", "guides"]
 const brokenPatterns = [
   /\bcombines\s*\./i,
   /\bintermittent connect\b/i,
@@ -16,23 +17,29 @@ const genericPatterns = [
   /^teams should assess their needs against free tier limitations before upgrading\.?$/i,
 ]
 const normalize = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim()
-const files = fs.existsSync(root) ? fs.readdirSync(root).filter((name) => name.endsWith(".json")).sort() : []
+const files = contentDirs.flatMap((dir) => {
+  const folder = path.join(contentRoot, dir)
+  return fs.existsSync(folder)
+    ? fs.readdirSync(folder).filter((name) => name.endsWith(".json")).sort().map((name) => ({ dir, name }))
+    : []
+})
 const findings = { files: files.length, brokenAnswers: [], genericAnswers: [], duplicateQuestions: [], duplicateAnswers: [] }
 
-for (const file of files) {
-  const fullPath = path.join(root, file)
+for (const { dir, name: file } of files) {
+  const fullPath = path.join(contentRoot, dir, file)
+  const relativePath = path.relative(process.cwd(), fullPath)
   let data
   try {
     data = JSON.parse(fs.readFileSync(fullPath, "utf8"))
   } catch (error) {
-    findings.brokenAnswers.push({ file, issue: "invalid JSON" })
+    findings.brokenAnswers.push({ file: relativePath, issue: "invalid JSON" })
     continue
   }
   const questions = new Set()
   const answers = new Set()
   for (const faq of Array.isArray(data.faqs) ? data.faqs : []) {
     if (!faq || typeof faq.question !== "string" || typeof faq.answer !== "string") {
-      findings.brokenAnswers.push({ file, question: String(faq?.question || ""), issue: "missing question or answer" })
+      findings.brokenAnswers.push({ file: relativePath, question: String(faq?.question || ""), issue: "missing question or answer" })
       continue
     }
     const question = faq.question.trim()
@@ -40,7 +47,7 @@ for (const file of files) {
     const qKey = normalize(question)
     const aKey = normalize(answer)
     if (brokenPatterns.some((pattern) => pattern.test(answer))) {
-      findings.brokenAnswers.push({ file, question, excerpt: answer.slice(0, 140) })
+      findings.brokenAnswers.push({ file: relativePath, question, excerpt: answer.slice(0, 140) })
     }
     if (genericPatterns.some((pattern) => pattern.test(answer))) {
       findings.genericAnswers.push({ file, question, excerpt: answer.slice(0, 140) })
@@ -52,7 +59,7 @@ for (const file of files) {
   }
 }
 const sample = (list) => list.slice(0, 10)
-console.log("[review-faq-audit] REPORT ONLY — no files modified; findings require editorial review")
+console.log("[editorial-faq-audit] REPORT ONLY — no files modified; findings require editorial review")
 console.log("Review files:", findings.files)
 for (const [key, values] of Object.entries(findings)) {
   if (key === "files") continue
