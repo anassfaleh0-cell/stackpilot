@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getBest, getBlogPost, getGuide, getReview } from "@/lib/content/registry"
+import { getAlternative, getBest, getBlogPost, getGuide, getReview } from "@/lib/content/registry"
 
 describe("content quality repairs", () => {
   it("replaces repetitive generated guide filler with practical buyer guidance", () => {
@@ -64,6 +64,28 @@ describe("content quality repairs", () => {
     expect(body.split(/\s+/).filter(Boolean).length).toBeGreaterThanOrEqual(900)
     expect(body).toContain("The recorded integration list includes")
     expect(review?.content.some((section) => section.title === "A practical pilot checklist")).toBe(true)
+  })
+
+  it("replaces generic Asana alternatives copy with differentiated buyer guidance", () => {
+    const page = getAlternative("asana-alternatives")
+    expect(page).not.toBeNull()
+    const body = page?.sections.map((section) => section.body + " " + (section.items || []).join(" ")).join(" ") ?? ""
+    expect(body.split(/\\s+/).filter(Boolean).length).toBeGreaterThanOrEqual(650)
+    expect(page?.alternatives.find((item) => item.name === "Linear")?.description).toContain("product and engineering")
+    expect(page?.alternatives.find((item) => item.name === "Trello")?.description).toContain("Kanban")
+    expect(page?.relatedGuides?.length).toBeGreaterThan(0)
+    expect(body).not.toContain("leading project management platform offering competitive features")
+  })
+
+  it("gives Jira and Monday.com alternatives distinct, practical selection criteria", () => {
+    const jira = getAlternative("jira-alternatives")
+    const monday = getAlternative("monday-com-alternatives")
+    expect(jira?.sections[0]?.body).toContain("issue tracking")
+    expect(jira?.sections.some((section) => section.body.includes("issue types"))).toBe(true)
+    expect(monday?.sections[0]?.body).toContain("configurable work boards")
+    expect(monday?.sections.some((section) => section.body.includes("automation limits"))).toBe(true)
+    expect(jira?.alternatives.every((item) => !item.description.includes("leading project management platform offering competitive features"))).toBe(true)
+    expect(monday?.alternatives.every((item) => !item.description.includes("leading project management platform offering competitive features"))).toBe(true)
   })
 
 })
