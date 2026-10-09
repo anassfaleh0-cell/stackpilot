@@ -122,6 +122,32 @@ function checkRobots() {
   log("pass", "Robots.txt allows AI search bots")
 }
 
+// ─── ads.txt ─────────────────────────────────────────────────────────────────
+function checkAdsTxt() {
+  console.log("\n\x1b[1m3. ads.txt Validation\x1b[0m")
+
+  const adsTxtPath = path.resolve(process.cwd(), "public/ads.txt")
+  if (!fs.existsSync(adsTxtPath)) {
+    log("fail", "public/ads.txt not found — AdSense crawlers may not discover the publisher declaration")
+    return
+  }
+
+  const lines = fs.readFileSync(adsTxtPath, "utf-8")
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith("#"))
+  const googleLines = lines.filter((line) => /^google\.com\s*,/i.test(line))
+  const validGoogleLines = googleLines.filter((line) => /^google\.com\s*,\s*pub-\d+\s*,\s*DIRECT\s*,\s*[a-f0-9]{16}\s*$/i.test(line))
+
+  if (googleLines.length === 0) {
+    log("fail", "ads.txt has no Google AdSense seller declaration")
+  } else if (validGoogleLines.length !== googleLines.length) {
+    log("fail", "One or more Google ads.txt declarations have an invalid format")
+  } else {
+    log("pass", `public/ads.txt contains ${validGoogleLines.length} valid Google seller declaration(s)`)
+  }
+}
+
 // ─── 3. Content Quality ─────────────────────────────────────────────────────
 function checkContentQuality() {
   console.log("\n\x1b[1m3. Content Quality (Thin Content Detection)\x1b[0m")
@@ -522,6 +548,7 @@ function main() {
 
   checkSitemap()
   checkRobots()
+  checkAdsTxt()
   checkContentQuality()
   checkNoindex()
   checkStructuredData()
