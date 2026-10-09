@@ -22,6 +22,27 @@ describe("site-wide content indexability policy", () => {
     }
   })
 
+  it("keeps the noindex manifest summary and per-directory partitions consistent", () => {
+    const manifest = JSON.parse(fs.readFileSync("noindex-list.json", "utf8")) as {
+      summary: { totalFiles: number; totalKeep: number; totalNoindex: number }
+      directories: Record<string, { total: number; keep?: string[]; noindex?: string[] }>
+    }
+    const directories = Object.values(manifest.directories)
+    const totalFiles = directories.reduce((sum, dir) => sum + dir.total, 0)
+    const totalKeep = directories.reduce((sum, dir) => sum + (dir.keep?.length ?? 0), 0)
+    const totalNoindex = directories.reduce((sum, dir) => sum + (dir.noindex?.length ?? 0), 0)
+
+    expect(manifest.summary).toMatchObject({ totalFiles, totalKeep, totalNoindex })
+    for (const [name, dir] of Object.entries(manifest.directories)) {
+      const keep = dir.keep ?? []
+      const noindex = dir.noindex ?? []
+      expect(new Set(keep).size, name + " duplicate keep slugs").toBe(keep.length)
+      expect(new Set(noindex).size, name + " duplicate noindex slugs").toBe(noindex.length)
+      expect(keep.filter((slug) => noindex.includes(slug)), name + " keep/noindex overlap").toEqual([])
+      expect(dir.total, name + " partition count").toBe(keep.length + noindex.length)
+    }
+  })
+
   it("keeps real content discoverable in the sitemap", () => {
     const paths = sitemap().map((entry) => new URL(entry.url).pathname)
     for (const path of [
