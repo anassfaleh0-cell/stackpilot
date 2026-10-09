@@ -3,8 +3,8 @@ import { isNoindexed } from "@/lib/noindex"
 import { getAlternative, getBest, getBlogPost, getComparison, getGuide, getHub, getIndustry, getResearch, getReview, getStatistic, getUseCase } from "@/lib/content/registry"
 
 describe("content indexability guards", () => {
-  it("honors the explicit noindex manifest", () => {
-    expect(isNoindexed("guides", "api-security-best-practices")).toBe(true)
+  it("keeps the content indexability manifest clear while rewrites continue", () => {
+    expect(isNoindexed("guides", "api-security-best-practices")).toBe(false)
     expect(isNoindexed("guides", "not-a-real-guide")).toBe(false)
     expect(isNoindexed("reviews", "asana")).toBe(false)
     expect(isNoindexed("reviews", "linear")).toBe(false)
