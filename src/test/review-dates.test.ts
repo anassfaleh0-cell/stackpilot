@@ -235,6 +235,10 @@ describe("H-09A sitemap", () => {
     expect(sitemapSrc).not.toContain("POLICY_DATE")
     expect(sitemapSrc).toContain('{ url: siteConfig.url, changeFrequency: "daily", priority: 1.0 }')
   })
+
+  it("excludes noindexed blog posts from the sitemap", () => {
+    expect(sitemapSrc).toContain('const blogPosts = getAllBlogPosts().filter((p) => isQuality(p.slug, "blog"))')
+  })
 })
 
 describe("H-09A rss", () => {
