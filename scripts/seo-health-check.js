@@ -74,23 +74,27 @@ function checkSitemap() {
 
   const content = fs.readFileSync(sitemapPath, "utf-8")
 
-  // Check for new Date() abuse - should not be used for all pages
-  const newDateCount = (content.match(/lastModified:\s*new Date\(\)/g) || []).length
-  if (newDateCount > 5) {
-    log("warn", `Sitemap uses "new Date()" ${newDateCount} times - consider using actual content dates for better crawl efficiency`)
+  // Static-source diagnostics only: a source scan cannot prove runtime XML validity.
+  const dynamicDateFallbacks = (content.match(/(?:const\s+\w*DATE\s*=\s*new Date\(\)|lastModified:\s*new Date\([^)]*LISTING_DATE)/g) || []).length
+  if (dynamicDateFallbacks > 0) {
+    log("warn", `Sitemap source contains ${dynamicDateFallbacks} dynamic date/fallback pattern(s); verify generated <lastmod> values against real content update dates`)
   } else {
-    log("pass", "Sitemap uses actual content dates for lastModified")
+    log("pass", "No known dynamic sitemap-date fallback patterns detected in source")
   }
 
-  // Check for priority distribution
-  const highPriority = (content.match(/priority:\s*0\.[89]/g) || []).length
+  // Check for priority distribution as a source-level heuristic, not a per-URL count.
+  const highPriority = (content.match(/priority:\s*0\.[89]|priority:\s*1\.0/g) || []).length
   if (highPriority > 20) {
-    log("warn", `${highPriority} pages have priority >= 0.8 - too many high-priority pages dilutes crawl priority signals`)
+    log("warn", `${highPriority} high-priority declarations exist in sitemap source; inspect actual generated URL priorities before changing them`)
   } else {
-    log("pass", "Sitemap priority distribution looks reasonable")
+    log("info", `${highPriority} high-priority declarations found in sitemap source (not a generated URL count)`)
   }
 
-  log("pass", "sitemap.ts exists and is parseable")
+  if (content.includes("export default function sitemap") && content.includes("MetadataRoute.Sitemap")) {
+    log("pass", "sitemap.ts contains the expected Next.js sitemap function/type markers; generated XML still requires runtime validation")
+  } else {
+    log("fail", "sitemap.ts is missing expected Next.js sitemap function/type markers")
+  }
 }
 
 // ─── 2. Robots.txt ──────────────────────────────────────────────────────────
@@ -112,14 +116,26 @@ function checkRobots() {
     log("pass", "Robots.txt references sitemap")
   }
 
-  // Check AI bot access (good for backlinks from AI citations)
+  // Source-level checks must not emit an unconditional PASS.
   const aiBots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "PerplexityBot"]
-  for (const bot of aiBots) {
-    if (!content.includes(bot)) {
-      log("warn", `AI bot ${bot} not explicitly allowed - missing potential traffic source`)
-    }
+  const missingAiBotRules = aiBots.filter((bot) => !new RegExp(`userAgent\\s*:\\s*["']${bot}["']`).test(content))
+  if (missingAiBotRules.length > 0) {
+    log("warn", `AI crawler user-agent rules are not explicitly declared: ${missingAiBotRules.join(", ")}`)
+  } else {
+    log("pass", "All configured AI crawler names have explicit user-agent rules")
   }
-  log("pass", "Robots.txt allows AI search bots")
+
+  const privatePaths = ["/api/", "/admin/", "/dashboard", "/search", "/_global-error"]
+  const namedCrawlerRules = [...content.matchAll(/userAgent\\s*:\\s*["']([^"']+)["']([\\s\\S]*?)(?=userAgent\\s*:|sitemap\\s*:|$)/g)]
+    .filter((match) => match[1] !== "*")
+  const missingPrivatePathBlocks = namedCrawlerRules
+    .filter((match) => privatePaths.some((route) => !match[2].includes(route)))
+    .map((match) => match[1])
+  if (missingPrivatePathBlocks.length > 0) {
+    log("warn", `Named crawler rules do not visibly repeat all private/search path exclusions: ${missingPrivatePathBlocks.join(", ")}; inspect the generated robots.txt rule groups`)
+  } else if (namedCrawlerRules.length > 0) {
+    log("pass", "Named crawler rules visibly include the configured internal-path exclusions")
+  }
 }
 
 // ─── 3. Content Quality ─────────────────────────────────────────────────────
