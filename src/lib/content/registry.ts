@@ -515,9 +515,16 @@ function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: Comparison
   const r1 = getReview(cmp.tool1Slug)
   const r2 = getReview(cmp.tool2Slug)
   if (!r1 && !r2) return base
-  const genericNames = new Set(["user rating", "category", "starting price", "best for", "core strength", "ease of use", "integration ecosystem"])
-  const looksGeneric = base.length <= 6 && base.every((f) => genericNames.has(f.name.toLowerCase()))
-  if (!looksGeneric && base.length > 5) return base
+
+  const genericNames = new Set([
+    "user rating", "category", "starting price", "best for", "core strength",
+    "ease of use", "integration ecosystem", "core features", "user experience",
+    "pricing value", "api & integrations", "customer support", "security & compliance",
+    "scalability", "mobile app", "analytics & reporting", "api", "security",
+  ])
+  const looksGenerated = base.length > 0 && base.every((f) => genericNames.has(f.name.toLowerCase().trim()))
+  if (!looksGenerated && base.length > 5) return base
+
   const integrations1 = Array.isArray(r1?.company?.integrations) ? r1.company.integrations : []
   const integrations2 = Array.isArray(r2?.company?.integrations) ? r2.company.integrations : []
   const certifications1 = Array.isArray(r1?.company?.securityCertifications) ? r1.company.securityCertifications : []
@@ -527,17 +534,17 @@ function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: Comparison
   const features1 = Array.isArray(r1?.features) ? r1.features : []
   const features2 = Array.isArray(r2?.features) ? r2.features : []
   const derived: ComparisonFeature[] = [
-    { name: "User Rating", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.rating}/5 across ${r1.reviewCount.toLocaleString()} recorded reviews` : undefined, tool2Detail: r2 ? `${r2.rating}/5 across ${r2.reviewCount.toLocaleString()} recorded reviews` : undefined },
-    { name: "Pricing", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.pricing}${r1.priceRange ? `: ${r1.priceRange}` : ""}` : undefined, tool2Detail: r2 ? `${r2.pricing}${r2.priceRange ? `: ${r2.priceRange}` : ""}` : undefined },
-    { name: "Category & Positioning", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.category}. ${r1.tagline}` : cmp.category, tool2Detail: r2 ? `${r2.category}. ${r2.tagline}` : cmp.secondaryCategories?.[0] || cmp.category },
-    { name: "Key Capabilities", tool1: Boolean(r1?.features?.length), tool2: Boolean(r2?.features?.length), tool1Detail: features1.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || undefined, tool2Detail: features2.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || undefined },
-    { name: "Integrations", tool1: Boolean(r1?.company?.integrations?.length), tool2: Boolean(r2?.company?.integrations?.length), tool1Detail: integrations1.slice(0, 6).join(", "), tool2Detail: integrations2.slice(0, 6).join(", ") },
-    { name: "API", tool1: Boolean(r1?.company), tool2: Boolean(r2?.company), tool1Detail: r1?.company ? (r1.company.apiAvailable ? "API available in the recorded profile." : "API is not marked available in the recorded profile.") : undefined, tool2Detail: r2?.company ? (r2.company.apiAvailable ? "API available in the recorded profile." : "API is not marked available in the recorded profile.") : undefined },
-    { name: "Security & Compliance", tool1: Boolean(r1?.company), tool2: Boolean(r2?.company), tool1Detail: r1?.company ? [...certifications1, ...compliance1].slice(0, 8).join(", ") || "No specific certifications recorded." : undefined, tool2Detail: r2?.company ? [...certifications2, ...compliance2].slice(0, 8).join(", ") || "No specific certifications recorded." : undefined },
-    { name: "Migration", tool1: Boolean(r1?.company), tool2: Boolean(r2?.company), tool1Detail: r1?.company ? r1.company.migrationComplexity : undefined, tool2Detail: r2?.company ? r2.company.migrationComplexity : undefined },
+    { name: "Recorded rating", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.rating}/5 across ${r1.reviewCount.toLocaleString()} reviews recorded in this site's dataset; check the review count and source before relying on it.` : undefined, tool2Detail: r2 ? `${r2.rating}/5 across ${r2.reviewCount.toLocaleString()} reviews recorded in this site's dataset; check the review count and source before relying on it.` : undefined },
+    { name: "Pricing information", tool1: Boolean(r1?.pricing), tool2: Boolean(r2?.pricing), tool1Detail: r1 ? `${r1.pricing}${r1.priceRange ? `: ${r1.priceRange}` : ""}. Confirm current plans and limits with the vendor.` : undefined, tool2Detail: r2 ? `${r2.pricing}${r2.priceRange ? `: ${r2.priceRange}` : ""}. Confirm current plans and limits with the vendor.` : undefined },
+    { name: "Positioning", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.category}. ${r1.tagline}` : cmp.category, tool2Detail: r2 ? `${r2.category}. ${r2.tagline}` : cmp.secondaryCategories?.[0] || cmp.category },
+    { name: "Capabilities listed in review", tool1: Boolean(features1.length), tool2: Boolean(features2.length), tool1Detail: features1.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || undefined, tool2Detail: features2.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || undefined },
+    { name: "Integrations recorded", tool1: Boolean(integrations1.length), tool2: Boolean(integrations2.length), tool1Detail: integrations1.slice(0, 6).join(", ") || "No integration list recorded in the current profile.", tool2Detail: integrations2.slice(0, 6).join(", ") || "No integration list recorded in the current profile." },
+    { name: "API information", tool1: Boolean(r1?.company?.apiAvailable), tool2: Boolean(r2?.company?.apiAvailable), tool1Detail: r1?.company ? (r1.company.apiAvailable ? "API marked available in the current profile; verify current access and limits." : "API not marked available in the current profile; verify with the vendor.") : undefined, tool2Detail: r2?.company ? (r2.company.apiAvailable ? "API marked available in the current profile; verify current access and limits." : "API not marked available in the current profile; verify with the vendor.") : undefined },
+    { name: "Security and compliance information", tool1: Boolean(r1?.company), tool2: Boolean(r2?.company), tool1Detail: r1?.company ? [...certifications1, ...compliance1].slice(0, 8).join(", ") || "No specific certification or compliance details recorded; request current documentation." : undefined, tool2Detail: r2?.company ? [...certifications2, ...compliance2].slice(0, 8).join(", ") || "No specific certification or compliance details recorded; request current documentation." : undefined },
+    { name: "Migration notes", tool1: Boolean(r1?.company?.migrationComplexity), tool2: Boolean(r2?.company?.migrationComplexity), tool1Detail: r1?.company?.migrationComplexity || undefined, tool2Detail: r2?.company?.migrationComplexity || undefined },
   ]
-  const existingNames = new Set(base.map((f) => f.name.toLowerCase()))
-  return [...base, ...derived.filter((f) => !existingNames.has(f.name.toLowerCase()))].slice(0, 20)
+  const existingNames = new Set(base.map((f) => f.name.toLowerCase().trim()))
+  return [...(looksGenerated ? [] : base), ...derived.filter((f) => !existingNames.has(f.name.toLowerCase().trim()))].slice(0, 20)
 }
 function normalizeComparisonWinner(value: string | null, tool1: string, tool2: string): string | null {
   if (!value) return null
@@ -754,18 +761,50 @@ function sanitizeAlternativeDescription(description: string, toolName: string, c
   if (cleaned.length >= 90 && !/save\s*\+|\+\/year|\btested\b/i.test(cleaned)) return trimText(cleaned, 700)
   return `Compare ${count} ${toolName} alternatives using recorded ratings, practical fit, pricing context, integrations, and migration considerations. Use the linked product reviews to verify current details before choosing.`
 }
-function buildGuideSections(guide: GuideContent): GuideContent['sections'] {
+function buildGuideSections(guide: GuideContent): GuideContent["sections"] {
   const sections = sanitizeSections(guide.sections)
-  if (sectionWordCount(sections) >= 900 || sections.some((section) => section.title === "Define the Decision")) return sections
-  const title = guide.title.replace(/\s*[:—-].*$/, '').trim() || guide.category
-  const criteria = ['Define the workflow this guide is meant to improve and document the current process before comparing software.', 'Separate must-have requirements from preferences so feature count does not become a substitute for product fit.', 'Verify integrations, permissions, data movement, reporting, and relevant security or compliance requirements before committing.', 'Compare total cost of ownership, including user seats, plan limits, implementation work, training, and ongoing administration.', 'Choose a small pilot workflow and define a measurable success criterion before a full rollout.']
-  const rollout = ['Map the current workflow and identify steps where delays, duplication, or manual work occur.', 'Test the highest-risk requirement with realistic sample data instead of relying on a product-page claim.', 'Document configuration, ownership, permissions, and the fallback process for anything the software cannot automate.', 'Train users on the tasks they actually perform and review adoption after the first rollout period.', 'Revisit the setup after launch and remove unused configuration instead of letting complexity grow unchecked.']
+  if (sectionWordCount(sections) >= 900) return sections
+
+  const title = guide.title.replace(/\\s*[:—-].*$/, "").trim() || guide.category
+  const category = String(guide.category || "").toLowerCase()
+  const focus = category.includes("ai")
+    ? "model behavior on representative examples, data retention and training terms, human review, version changes, latency, and cost at expected usage"
+    : category.includes("project") || category.includes("productivity")
+      ? "work intake, dependencies, work-in-progress limits, ownership, recurring workflows, reporting, and adoption by the people doing the work"
+      : category.includes("developer")
+        ? "repository and CI integration, reproducible tests, permissions, API limits, observability, rollback, and ownership during incidents"
+        : category.includes("security")
+          ? "identity and access controls, threat coverage, audit evidence, data retention, incident response, and the workload created by alerts"
+          : category.includes("analytics") || category.includes("data")
+            ? "metric definitions, source reconciliation, data freshness, lineage, permissions, exportability, and storage or query cost"
+            : category.includes("marketing")
+              ? "measurement goals, consent-aware tracking, channel definitions, conversion quality, attribution windows, and CRM handoffs"
+              : category.includes("finance") || category.includes("accounting")
+                ? "approval controls, reconciliation, audit trails, accounting integrations, role permissions, and the full cost of maintaining the workflow"
+                : category.includes("communication")
+                  ? "call or message quality in real conditions, guest access, admin controls, retention, accessibility, and calendar or work-system integration"
+                  : "workflow fit, integrations, permissions, reporting, portability, support boundaries, and total cost at expected usage"
+  const criteria = [
+    "Write down the current workflow and its baseline before comparing products.",
+    "Mark each requirement as mandatory, important, or optional and define evidence for a pass.",
+    "Verify " + focus + ".",
+    "Test the riskiest requirement with realistic sample data instead of relying on a marketing claim.",
+    "Check current vendor documentation for plan limits, security terms, data export, and support boundaries."
+  ]
+  const rollout = [
+    "Select one representative workflow and assign an accountable owner.",
+    "Agree on measurable acceptance criteria before the pilot begins.",
+    "Test a normal case, an edge case, and a failure or recovery scenario.",
+    "Document access, migration, training, support, and rollback responsibilities.",
+    "Review results after launch and expand only when the evidence supports it."
+  ]
   return [
     ...sections,
-    { title: 'Practical evaluation plan', body: 'A useful ' + guide.category.toLowerCase() + ' decision starts with the workflow, not a feature checklist. For ' + title + ', document the outcome the team needs, the people involved, the systems that must connect, and the steps that currently create friction. Then turn those observations into requirements that can be compared consistently across products. The goal is to make the buying or implementation decision traceable to a real business process.', type: 'text' },
-    { title: 'Buyer checklist before shortlisting', body: 'Use the same questions for every option so the shortlist reflects fit rather than marketing strength.', type: 'list', items: criteria },
-    { title: 'Implementation checkpoints', body: 'For a ' + guide.difficulty.toLowerCase() + ' implementation, start with one representative workflow, record measurable success criteria, and keep configuration deliberately small until the team has evidence that the process works.', type: 'list', items: rollout },
-    { title: 'How to validate the final choice', body: 'Before committing, record what works without customization, what requires configuration or an integration, and what still needs a manual workaround. Compare those findings with the must-have requirements and total-cost assumptions. This makes the final choice easier to defend and easier to revisit when product capabilities or business needs change.', type: 'text' },
+    { title: "A practical evaluation plan", body: "Use this " + guide.category.toLowerCase() + " guide for a specific decision, not as a generic feature checklist. For " + title + ", define the outcome the team needs, the people involved, the systems that must connect, and the current source of friction. Record the baseline and turn it into requirements that can be tested consistently across options. The decision should be traceable to a workflow and evidence, rather than a vendor's presentation or a single headline score.", type: "text" },
+    { title: "Buyer checklist before shortlisting", body: "Apply the same checks to each option and keep the evidence beside the score.", type: "list", items: criteria },
+    { title: "Pilot and implementation checkpoints", body: "A controlled pilot reveals configuration effort, adoption issues, and failure modes before the organization commits to a full rollout.", type: "list", items: rollout },
+    { title: "Total cost and operational ownership", body: "Compare subscription or usage charges, minimum seats, add-ons, migration, implementation, training, administration, integration maintenance, and support. Estimate benefits from your own baseline and use conservative assumptions. Assign an owner for permissions, configuration, issue handling, and periodic review. A tool that appears inexpensive at purchase can become costly when manual workarounds, data cleanup, or specialist administration are included.", type: "text" },
+    { title: "How to validate the final choice", body: "Before committing, record what works without customization, what requires configuration or an integration, and what still needs a manual workaround. Confirm that important data can be exported, access can be revoked, current vendor terms have been checked, and the team has a fallback if a critical workflow fails. After launch, review task success, quality, adoption, cost, and unresolved risks at 30, 60, and 90 days. Revisit the decision when the workflow or vendor terms change.", type: "text" },
   ]
 }
 function buildAlternativeSections(alt: AlternativeContent): ContentSection[] {
