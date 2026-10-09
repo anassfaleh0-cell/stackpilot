@@ -18,6 +18,7 @@ import { BrandDivider } from "@/components/brand/patterns"
 import { CheckCircle2, BookOpen, Clock, Layers, Lightbulb, Scale } from "lucide-react"
 import { InFeedAd } from "@/components/ads"
 import { isNoindexed } from "@/lib/noindex"
+import { getGuideKeyTakeaways } from "@/lib/content/guide-summary"
 import type { GuideContent } from "@/types/content"
 
 /**
@@ -75,6 +76,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   if (!guide) notFound()
 
   const faqs = deriveGuideFaqs(guide)
+  const keyTakeaways = getGuideKeyTakeaways(guide.sections)
 
   return (
     <>
@@ -124,12 +126,12 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
               <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-4">
-                {guide.sections.slice(0, 5).map((section) => (
-                  <li key={section.title}>
-                    <strong>{section.title}:</strong> {truncate(section.body, 180)}
+                {keyTakeaways.map((takeaway) => (
+                  <li key={takeaway.title}>
+                    <strong>{takeaway.title}:</strong> {takeaway.summary}
                   </li>
                 ))}
-                {guide.sections.length === 0 && <li>Use the guide description above to frame the decision before reviewing vendor documentation and testing your workflow.</li>}
+                {keyTakeaways.length === 0 && <li>Use the guide description above to frame the decision before reviewing vendor documentation and testing your workflow.</li>}
               </ul>
             </div>
 
