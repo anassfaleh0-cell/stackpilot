@@ -111,7 +111,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
-    // Glossary: use lastUpdated if available, otherwise a fixed date
+    // Glossary: use a source date when available; otherwise omit lastModified
     ...glossary.map((t) => ({
       url: `${siteConfig.url}/glossary/${t.slug}`,
       lastModified: getSitemapLastModified("lastUpdated" in t ? (t as { lastUpdated?: string }).lastUpdated : undefined),
