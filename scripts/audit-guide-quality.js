@@ -10,6 +10,9 @@ const templateHits = []
 const emptyRelations = []
 const staleDates = []
 const readingTimeMismatches = []
+const invalidRelatedGuides = []
+const duplicateRelatedGuides = []
+const knownGuideSlugs = new Set(files.map((name) => name.replace(/\\.json$/, "")))
 const count = (value) => typeof value === "string" ? value.replace(/<[^>]*>/g, " ").split(/\s+/).filter(Boolean).length : 0
 const templatePatterns = [
   /choosing the right .* software starts with understanding your specific requirements/i,
@@ -44,6 +47,15 @@ for (const file of files) {
     editorialText.push(section.title, section.body, ...(section.items || []))
   }
   if (words < 500) thin.push({ slug: data.slug, words, lastUpdated: data.lastUpdated || null })
+  const relatedGuides = Array.isArray(data.relatedGuides) ? data.relatedGuides : []
+  const seenRelatedGuides = new Set()
+  for (const relatedSlug of relatedGuides) {
+    if (typeof relatedSlug !== "string" || !knownGuideSlugs.has(relatedSlug) || relatedSlug === data.slug) {
+      invalidRelatedGuides.push({ slug: data.slug, relatedSlug })
+    }
+    if (seenRelatedGuides.has(relatedSlug)) duplicateRelatedGuides.push({ slug: data.slug, relatedSlug })
+    seenRelatedGuides.add(relatedSlug)
+  }
   if ((!Array.isArray(data.relatedTools) || data.relatedTools.length === 0) &&
       (!Array.isArray(data.relatedGuides) || data.relatedGuides.length === 0)) {
     emptyRelations.push({ slug: data.slug, relatedTools: data.relatedTools || [], relatedGuides: data.relatedGuides || [] })
@@ -67,6 +79,8 @@ console.log("Schema/JSON errors:", issues.length, JSON.stringify(issues.slice(0,
 console.log("Guides below 500 audited source words:", thin.length, JSON.stringify(thin.slice(0, 30)))
 console.log("Known template phrase matches:", templateHits.length, JSON.stringify(templateHits.slice(0, 30)))
 console.log("Guides without related tools/guides:", emptyRelations.length, JSON.stringify(emptyRelations.slice(0, 30)))
+console.log("Invalid/self related-guide references:", invalidRelatedGuides.length, JSON.stringify(invalidRelatedGuides.slice(0, 30)))
+console.log("Duplicate related-guide references:", duplicateRelatedGuides.length, JSON.stringify(duplicateRelatedGuides.slice(0, 30)))
 console.log("Guides with missing, stale, or malformed lastUpdated dates:", staleDates.length, JSON.stringify(staleDates.slice(0, 30)))
 console.log("Reading-time values needing review:", readingTimeMismatches.length, JSON.stringify(readingTimeMismatches.slice(0, 30)))
 if (issues.length > 0) process.exitCode = 1
