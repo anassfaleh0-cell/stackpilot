@@ -852,7 +852,7 @@ export function getBest(slug: string): BestContent | null {
       return {
         ...p,
         bestFor: sanitizeUnsupportedClaims(trimText(p.bestFor, 360)),
-        priceRange: sanitizeMalformedPricingText(String(p.priceRange || "Pricing not verified — check the vendor’s current pricing")),
+        priceRange: sanitizeMalformedPricingText(String(p.priceRange || "Pricing not verified — check the vendor's current pricing")),
         pros: sanitizeList(review?.pros?.length ? review.pros : p.pros, 5),
         cons: sanitizeList(review?.cons?.length ? review.cons : p.cons, 5),
       }
