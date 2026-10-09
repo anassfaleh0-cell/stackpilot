@@ -141,14 +141,20 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                               <span className="text-lg font-bold">{pick.toolName}</span>
                             )}
                           </div>
-                          <div className="flex items-center gap-1 text-sm">
-                            <Star size={14} className="fill-accent text-accent" />
-                            <span className="font-semibold">{pick.rating}</span>
-                            <span className="text-muted-foreground">/5</span>
-                          </div>
+                          {typeof pick.rating === "number" && Number.isFinite(pick.rating) && pick.rating > 0 && (
+                            <div className="flex items-center gap-1 text-sm">
+                              <Star size={14} className="fill-accent text-accent" />
+                              <span className="font-semibold">{pick.rating}</span>
+                              <span className="text-muted-foreground">/5</span>
+                            </div>
+                          )}
                         </div>
                         <p className="text-sm font-medium text-primary mb-2">{pick.bestFor}</p>
-                        <p className="text-xs text-muted-foreground mb-3">From {pick.priceRange}</p>
+                        {pick.priceRange && pick.priceRange !== "Not independently verified" ? (
+                          <p className="text-xs text-muted-foreground mb-3">Listed pricing: {pick.priceRange}. Verify current plans, limits, and billing terms with the vendor.</p>
+                        ) : (
+                          <p className="text-xs text-muted-foreground mb-3">Pricing not independently verified here; check the vendor's current plans and usage limits.</p>
+                        )}
                         <div className="grid sm:grid-cols-2 gap-2 mb-3">
                           <div>
                             <p className="text-xs font-semibold text-success mb-1 flex items-center gap-1"><CheckCircle2 size={12} /> Pros</p>
