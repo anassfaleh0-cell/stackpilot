@@ -298,7 +298,7 @@ function aggregateRatingNode(ratingValue?: number, reviewCount?: number): Record
   return { "@type": "AggregateRating", ratingValue, bestRating: 5, worstRating: 1, ratingCount: reviewCount }
 }
 
-export function softwareApp({ name, url, description, category, platforms, applicationCategory, operatingSystem, image, rating, reviewCount, offers }: {
+export function softwareApp({ name, url, description, category, platforms, applicationCategory, operatingSystem, image, offers }: {
   name: string
   url: string
   description?: string
