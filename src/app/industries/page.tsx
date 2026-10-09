@@ -4,6 +4,7 @@ import { BreadcrumbSchema, CollectionPageSchema } from "@/components/seo/json-ld
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllIndustries } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 import { getPagination, parsePageParam } from "@/lib/pagination"
 import { PaginationNav } from "@/components/ui/pagination-nav"
 import Link from "next/link"
@@ -17,7 +18,7 @@ export const metadata = createMetadata({
 
 export default async function IndustriesPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
   const params = await searchParams
-  const industries = getAllIndustries()
+  const industries = getAllIndustries().filter((item) => !isNoindexed("industries", item.slug))
   const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: industries.length })
   const pageIndustries = industries.slice(pagination.start, pagination.end)
 
