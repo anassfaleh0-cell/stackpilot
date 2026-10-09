@@ -17,10 +17,13 @@ export function EditorialComparison({ tool1, tool2, features, winner, category, 
   const seed = slugSeed(slug)
   const rand = seededRandom(seed)
   const p = getPalette(category)
-  const t1w = features.filter((f) => f.tool1 && !f.tool2).length
-  const t2w = features.filter((f) => f.tool2 && !f.tool1).length
-  const tie = features.filter((f) => f.tool1 && f.tool2).length
-  const total = features.length
+  // Only explicit boolean availability values can contribute to a feature score.
+  // Text values describe plan tiers or unknowns and must not be treated as truthy wins.
+  const scoredFeatures = features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean")
+  const t1w = scoredFeatures.filter((f) => f.tool1 === true && f.tool2 === false).length
+  const t2w = scoredFeatures.filter((f) => f.tool2 === true && f.tool1 === false).length
+  const tie = scoredFeatures.filter((f) => f.tool1 === true && f.tool2 === true).length
+  const total = scoredFeatures.length
 
   const gradId = `comp-grad-${slug}`
 
@@ -32,12 +35,12 @@ export function EditorialComparison({ tool1, tool2, features, winner, category, 
           backgroundColor: winner === tool1 ? p.glassBg : undefined,
         }}>
           <div className="font-semibold text-sm" style={{ color: p.primary }}>{tool1}</div>
-          <div className="text-2xl font-bold mt-1" style={{ color: p.primary }}>{t1w}</div>
+          <div className="text-2xl font-bold mt-1" style={{ color: p.primary }}>{total > 0 ? t1w : "—"}</div>
           <div className="text-xs text-muted">wins</div>
         </div>
         <div className="rounded-xl p-3" style={{ border: `1px solid ${p.glassBorder}` }}>
           <div className="font-semibold text-muted">Tie</div>
-          <div className="text-2xl font-bold mt-1 text-accent">{tie}</div>
+          <div className="text-2xl font-bold mt-1 text-accent">{total > 0 ? tie : "—"}</div>
           <div className="text-xs text-muted">both</div>
         </div>
         <div className="rounded-xl p-3" style={{
@@ -45,21 +48,25 @@ export function EditorialComparison({ tool1, tool2, features, winner, category, 
           backgroundColor: winner === tool2 ? p.glassBg : undefined,
         }}>
           <div className="font-semibold" style={{ color: p.primary }}>{tool2}</div>
-          <div className="text-2xl font-bold mt-1" style={{ color: p.primary }}>{t2w}</div>
+          <div className="text-2xl font-bold mt-1" style={{ color: p.primary }}>{total > 0 ? t2w : "—"}</div>
           <div className="text-xs text-muted">wins</div>
         </div>
       </div>
-      <svg viewBox="0 0 100 8" className="w-full h-auto" role="img" aria-label="Feature comparison bar">
-        <defs>
-          <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset={`${(t1w / total) * 100}%`} stopColor={p.primary} stopOpacity="0.6" />
-            <stop offset={`${(t1w / total) * 100}%`} stopColor="var(--accent)" stopOpacity="0.02" />
-            <stop offset={`${((t1w + tie) / total) * 100}%`} stopColor="var(--accent)" stopOpacity="0.02" />
-            <stop offset={`${((t1w + tie) / total) * 100}%`} stopColor={p.primary} stopOpacity="0.3" />
-          </linearGradient>
-        </defs>
-        <rect width="100" height="8" rx="4" fill={`url(#${gradId})`} />
-      </svg>
+      {total > 0 ? (
+        <svg viewBox="0 0 100 8" className="w-full h-auto" role="img" aria-label="Feature comparison bar">
+          <defs>
+            <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset={`${(t1w / total) * 100}%`} stopColor={p.primary} stopOpacity="0.6" />
+              <stop offset={`${(t1w / total) * 100}%`} stopColor="var(--accent)" stopOpacity="0.02" />
+              <stop offset={`${((t1w + tie) / total) * 100}%`} stopColor="var(--accent)" stopOpacity="0.02" />
+              <stop offset={`${((t1w + tie) / total) * 100}%`} stopColor={p.primary} stopOpacity="0.3" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="8" rx="4" fill={`url(#${gradId})`} />
+        </svg>
+      ) : (
+        <p className="text-xs text-muted-foreground">No scored winner is shown: the rows below describe plan availability and items to verify rather than unsupported feature scores.</p>
+      )}
       <div className="rounded-xl overflow-hidden" style={{ border: `1px solid ${p.glassBorder}` }}>
         <table className="w-full text-sm">
           <thead>
