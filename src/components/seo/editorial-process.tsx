@@ -4,7 +4,7 @@ import { CheckCircle2, FileText, Star, Calendar, ListChecks, Shield } from "luci
 
 const steps = [
   { icon: <FileText size={14} />, label: "Sources", description: "Pages draw on PilotStack’s recorded tool dataset. Vendor documentation is the preferred source for current plan details; fields without a verified source should be treated as unconfirmed." },
-  { icon: <Star size={14} />, label: "Scoring", description: "Recorded category ratings are averaged into the displayed overall score. See the methodology for the calculation and the limits of the underlying data." },
+  { icon: <Star size={14} />, label: "Scoring", description: "The displayed overall score is calculated from the recorded category ratings. See the methodology for the calculation and the limits of the underlying data." },
   { icon: <ListChecks size={14} />, label: "Consistency", description: "The same figure is used wherever a tool appears, so ratings and review counts agree across the site." },
   { icon: <Calendar size={14} />, label: "Dating", description: "Pages display the recorded update date; that date does not guarantee every product fact was independently rechecked." },
   { icon: <CheckCircle2 size={14} />, label: "Limits", description: "Facts we cannot source are left off the page or marked unverified rather than stated as confirmed." },
