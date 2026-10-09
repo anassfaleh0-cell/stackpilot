@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!page) return {}
   const readingTime = Math.max(5, Math.ceil((page.description.split(/\s+/).length + page.picks.reduce((a, p) => a + p.pros.length + p.cons.length, 0) * 20) / 200))
   const metaDescription = page.description.length < 120
-    ? `${page.description} We ranked the top options with detailed pros and cons, pricing, and the best alternatives to help you choose.`
+    ? `${page.description} Compare the listed options using the recorded details, criteria, and pricing context below. Verify current features and plan terms with each vendor.`
     : page.description
   const noindexed = isNoindexed("best", slug)
   return createMetadata({ title: truncate(page.title, 60), description: truncate(metaDescription, 160), path: `/best/${page.slug}`, ogType: "article", publishedAt: page.lastUpdated, updatedAt: page.lastUpdated, articleSection: page.category, readingTime, noIndex: noindexed })
@@ -74,14 +74,14 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
           <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-            <p className="text-sm text-muted-foreground">Our top pick from {page.picks.length} leading {page.category.toLowerCase()} tools is <strong>{page.picks[0]?.toolName}</strong> (rating {page.picks[0]?.rating}/5, from {page.picks[0]?.priceRange}). Each tool was assessed across {page.criteria.length} criteria including features, ease of use, value, and performance.</p>
+            <p className="text-sm text-muted-foreground">The first listed option is <strong>{page.picks[0]?.toolName}</strong> (recorded rating {page.picks[0]?.rating}/5, pricing {page.picks[0]?.priceRange}). Use this shortlist as a starting point, verify current details with the vendor, and compare each option against your workflow.</p>
           </div>
 
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">TL;DR</h2>
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
               <li><strong>#1 pick:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}</li>
-              <li>{page.picks.length} tools compared and ranked across {page.criteria.length} evaluation criteria</li>
+              <li>{page.picks.length} listed tools with recorded details; compare them using {page.criteria.length} criteria</li>
               <li>Pricing: {page.pricingSummary}</li>
               <li>Each pick includes pros, cons, and a best-fit use case</li>
               <li>Category: {page.category} — updated {formatDate(page.lastUpdated)}</li>
@@ -91,7 +91,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
           <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
             <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-              <li>{page.picks.length} top {page.category.toLowerCase()} tools ranked against our published criteria</li>
+              <li>{page.picks.length} options organized around the criteria shown on this page</li>
               <li>Evaluation criteria: {page.criteria.join(", ")}</li>
               <li>Top pick: {page.picks[0]?.toolName} ({page.picks[0]?.rating}/5, from {page.picks[0]?.priceRange}) — {page.picks[0]?.bestFor}</li>
               {page.picks[1] ? <li>Runner-up: {page.picks[1].toolName} ({page.picks[1].rating}/5, from {page.picks[1].priceRange})</li> : null}
@@ -141,14 +141,20 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                               <span className="text-lg font-bold">{pick.toolName}</span>
                             )}
                           </div>
-                          <div className="flex items-center gap-1 text-sm">
-                            <Star size={14} className="fill-accent text-accent" />
-                            <span className="font-semibold">{pick.rating}</span>
-                            <span className="text-muted-foreground">/5</span>
-                          </div>
+                          {typeof pick.rating === "number" && Number.isFinite(pick.rating) && pick.rating > 0 && (
+                            <div className="flex items-center gap-1 text-sm">
+                              <Star size={14} className="fill-accent text-accent" />
+                              <span className="font-semibold">{pick.rating}</span>
+                              <span className="text-muted-foreground">/5</span>
+                            </div>
+                          )}
                         </div>
                         <p className="text-sm font-medium text-primary mb-2">{pick.bestFor}</p>
-                        <p className="text-xs text-muted-foreground mb-3">From {pick.priceRange}</p>
+                        {pick.priceRange && pick.priceRange !== "Not independently verified" ? (
+                          <p className="text-xs text-muted-foreground mb-3">Listed pricing: {pick.priceRange}. Verify current plans, limits, and billing terms with the vendor.</p>
+                        ) : (
+                          <p className="text-xs text-muted-foreground mb-3">Pricing not independently verified here; check the vendor's current plans and usage limits.</p>
+                        )}
                         <div className="grid sm:grid-cols-2 gap-2 mb-3">
                           <div>
                             <p className="text-xs font-semibold text-success mb-1 flex items-center gap-1"><CheckCircle2 size={12} /> Pros</p>
