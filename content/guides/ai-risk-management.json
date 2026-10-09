@@ -39,6 +39,16 @@
       "title": "Monitor, respond, and reassess",
       "body": "Track quality, latency, cost, user feedback, safety incidents, drift, and override rates after launch. Protect monitoring data from unnecessary exposure and make retention rules explicit. Maintain an incident process for disabling a model or tool, notifying affected stakeholders, preserving evidence, and restoring a safe operating mode. Reassess risk on material changes and at a regular cadence; keep a record of limitations, test results, owners, and unresolved risks.",
       "type": "text"
+    },
+    {
+      "title": "Document evidence and residual risk",
+      "body": "For each safeguard, record what evidence shows that it works, which scenarios were tested, what remains uncertain, and who accepts the residual risk. Keep evaluation results tied to the exact model version, prompt configuration, retrieval index, tool permissions, and deployment environment. A general statement that the system was tested is not enough to reproduce the result. Restrict access to sensitive evaluation examples and review whether logs themselves introduce privacy or security risk.",
+      "type": "text"
+    },
+    {
+      "title": "Use a staged release decision",
+      "body": "Start with a limited deployment when possible, using clear entry and exit criteria, a named incident owner, and a way to disable risky capabilities quickly. Review failures and user reports before increasing exposure. Reassess when the intended use, user population, model provider, data sources, or available tools change. Keep a record of unresolved issues and do not present a risk register as proof that the system is safe; it is a way to make decisions and follow up on evidence.",
+      "type": "text"
     }
   ]
 }
