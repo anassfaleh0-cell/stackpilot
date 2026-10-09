@@ -1,7 +1,7 @@
 {
   "slug": "cloud-migration-planning",
   "title": "Cloud Migration Planning: A Practical Selection and Implementation Guide",
-  "description": "A practical guide to cloud migration planning in Developer Tools: requirements, integrations, pilot checks, rollout risks, and total-cost decisions.",
+  "description": "A step-by-step cloud migration planning guide for inventory, dependencies, security, data transfer, cutover, rollback, cost control, and post-migration validation.",
   "category": "Developer Tools",
   "difficulty": "Beginner",
   "author": "Marcus Rivera",
@@ -11,39 +11,34 @@
   "lastUpdated": "2026-10-09",
   "sections": [
     {
-      "title": "Define the Real Use Case",
-      "type": "text",
-      "body": "Inventory applications, dependencies, data stores, identity, network paths, and operational owners before choosing a migration pattern. Classify each workload by downtime tolerance, data sensitivity, rollback needs, and measurable acceptance criteria. Record who uses the workflow, what decision or task it supports, which systems provide inputs, and what a failure costs. Separate mandatory requirements from preferences and avoid buying features without a named use case."
+      "title": "Build an accurate inventory",
+      "body": "List applications, databases, file stores, scheduled jobs, identities, network dependencies, external APIs, certificates, and operational owners. For each workload, record business criticality, data sensitivity, peak demand, recovery objectives, support status, and maintenance windows. Discover dependencies from configuration and runtime telemetry where possible instead of relying only on interviews. An incomplete inventory is a common reason migrations miss hidden batch jobs, integrations, or licensing constraints.",
+      "type": "text"
     },
     {
-      "title": "Requirements and Evidence",
-      "type": "text",
-      "body": "For cloud migration planning, validate branch and release strategy, CI duration, test reliability, secrets management, deployment approvals, observability, rollback behavior, and who responds when a pipeline fails. Create a checklist with an observable pass/fail condition for each requirement. Record the evidence source, date checked, relevant plan or deployment tier, and any unknowns. Distinguish documented capability from a roadmap promise or a claim that has not been tested in your environment."
+      "title": "Choose a migration approach per workload",
+      "body": "Classify each workload according to whether it should be rehosted, replatformed, refactored, replaced, retained temporarily, or retired. Rehosting can reduce initial change but may preserve inefficiencies; refactoring can improve long-term fit but usually increases scope and testing effort. Record the reason, expected benefit, cost, risks, and rollback options for each decision. Avoid forcing every application into the same pattern simply to make the plan look consistent.",
+      "type": "text"
     },
     {
-      "title": "Architecture and Integration",
-      "type": "text",
-      "body": "Draw the flow of data and control between the proposed tool and existing systems. Identify authentication, permissions, synchronization frequency, failure handling, API or usage limits, and who owns each integration. Test the error path as well as the happy path, and document which tasks will remain manual after rollout."
+      "title": "Design identity, network, and security",
+      "body": "Define account or subscription boundaries, network connectivity, DNS, identity federation, privileged access, secret management, encryption, logging, backup, and incident response before moving production data. Identify any public endpoints and make their access requirements explicit. Test least-privilege roles and service identities in the target environment. Map data residency, retention, and regulatory requirements to the actual services and regions being selected.",
+      "type": "text"
     },
     {
-      "title": "Pilot and Acceptance Tests",
-      "type": "text",
-      "body": "Choose one realistic workflow and run it with representative test data and intended users. Include a common exception, an access-control check, and an export or recovery test. Agree on acceptance thresholds before the pilot and record elapsed time, errors, workarounds, and administration effort. Do not expand until critical requirements pass or an explicit risk owner accepts the gap."
+      "title": "Plan data movement and integrity checks",
+      "body": "Measure data volume, change rate, transfer bandwidth, downtime tolerance, and the consistency guarantees of the source and destination. Decide whether data will move in one transfer, incremental batches, replication, or a maintenance-window cutover. Validate record counts, checksums where appropriate, schema compatibility, permissions, and application-level invariants. Preserve a known-good source copy until reconciliation is complete and the business owner accepts the migrated data.",
+      "type": "text"
     },
     {
-      "title": "Migration, Security, and Operations",
-      "type": "text",
-      "body": "Plan ownership, data migration, permissions, retention, monitoring, training, support, and rollback before launch. Use least-privilege access and confirm how data can be exported or deleted at exit. Assign an operational owner and define how incidents, vendor changes, failed syncs, or unexpected usage costs will be detected and handled."
+      "title": "Rehearse cutover and rollback",
+      "body": "Write a runbook with named owners, time estimates, communication steps, decision points, and exact validation commands. Rehearse the procedure in a staging environment using production-like volumes. Define a go/no-go checkpoint and rollback triggers such as failed integrity checks, unacceptable latency, or broken critical transactions. Rollback must account for writes made after cutover; switching DNS back does not automatically reconcile divergent data.",
+      "type": "text"
     },
     {
-      "title": "Cost and Trade-Offs",
-      "type": "text",
-      "body": "Compare total cost over the expected period of use, including seats or usage, minimum commitments, add-ons, setup, migration, training, integration maintenance, administration, and exit work. Document the trade-offs between candidates and identify costs that depend on scale or a higher plan. Use internal baseline data for any savings estimate and label assumptions instead of presenting estimates as guaranteed outcomes."
-    },
-    {
-      "title": "Decision and Review",
-      "type": "text",
-      "body": "Summarize why the selected option fits the requirements, what evidence supports the choice, which risks remain, and what would trigger reconsideration. Verify current plan limits and contract terms with vendor documentation before committing. After launch, compare actual quality, adoption, operating effort, and cost with the baseline; revise the setup if the tool adds complexity without improving the intended workflow."
+      "title": "Control cost and validate operations",
+      "body": "Estimate compute, storage, network egress, managed services, backup, observability, support, and licensing under normal and peak load. Configure budgets, alerts, resource tags, and ownership before workloads arrive. After cutover, validate user journeys, performance, access controls, backups, restore tests, monitoring, and support escalation. Compare actual cost and reliability with the baseline after the first billing cycle, then close the migration only when the operational owner accepts the service.",
+      "type": "text"
     }
   ]
 }
