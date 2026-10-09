@@ -25,10 +25,8 @@ const DIR_FOR_TYPE: Record<string, string> = {
   hub: "hubs",
 }
 
-// Content types whose templates emit a real noindex meta tag and that sitemap.ts filters.
-// Blog, research, use-cases, industries and hubs carry no noindex entries, so their slugs
-// stay linkable; guides are enforced like reviews and comparisons.
-const NOINDEX_ENFORCED = new Set(["review", "comparison", "guide", "best", "alternative", "glossary", "statistic", "use-case", "industry", "research", "hub"])
+// Content types whose route metadata and sitemap both honor explicit noindex decisions.
+const NOINDEX_ENFORCED = new Set(["review", "comparison", "guide", "blog", "best", "alternative", "glossary", "statistic", "use-case", "industry", "research", "hub"])
 
 /**
  * True when a content slug resolves to a page that is published, reachable and indexable.
