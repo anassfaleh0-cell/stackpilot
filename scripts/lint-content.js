@@ -3,6 +3,13 @@ const path = require("path")
 
 const CONTENT_DIRS = ["content/guides", "content/comparisons", "content/reviews", "content/best", "content/blog"]
 const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/
+const NOINDEX_MANIFEST_PATH = path.join(__dirname, "..", "noindex-list.json")
+const noindexManifest = fs.existsSync(NOINDEX_MANIFEST_PATH)
+  ? JSON.parse(fs.readFileSync(NOINDEX_MANIFEST_PATH, "utf-8"))
+  : { directories: {} }
+const noindexSets = Object.fromEntries(
+  Object.entries(noindexManifest.directories || {}).map(([name, entry]) => [name, new Set(entry.noindex || [])])
+)
 
 const DOLLAR_RE = /\$[\d,]+\.?\d*(?:\/\w+)?/g
 
