@@ -4,8 +4,6 @@ const BROKEN_CONTENT_PATTERNS = [
   /\bcombines\s*\./i,
   /\bintermittent connect\b/i,
   /\bdependency mapp\b/i,
-  /\bfeature superiority rather than absolute feature superiority\b/i,
-  /\bwith minimal training overhead\.?/i,
 ]
 
 const GENERIC_ANSWER_PATTERNS = [
