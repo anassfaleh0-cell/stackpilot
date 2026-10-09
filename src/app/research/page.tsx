@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, CollectionPageSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { getAllResearch } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 import Link from "next/link"
 import { ArrowRight, FileText } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
@@ -27,7 +28,7 @@ function formatDate(iso?: string) {
 
 export default async function ResearchPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
   const params = await searchParams
-  const reports = getAllResearch()
+  const reports = getAllResearch().filter((item) => !isNoindexed("research", item.slug))
     .map((r) => ({
       title: r.title,
       description: r.description,
