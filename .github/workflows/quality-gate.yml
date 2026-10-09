@@ -41,6 +41,9 @@ jobs:
       - name: SEO content audit
         run: npm run seo:audit
 
+      - name: Review FAQ quality audit (report only)
+        run: npm run audit:review-faqs
+
       - name: Unit tests
         run: npm test
 
