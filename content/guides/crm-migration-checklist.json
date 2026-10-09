@@ -1,53 +1,62 @@
 {
-    "slug":  "crm-migration-checklist",
-    "title":  "CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform",
-    "description":  "Intermediate CRM \u0026 Sales guide (~14 min read): how to evaluate the right CRM Migration. Choosing the right crm \u0026 sales software starts with.",
-    "category":  "CRM \u0026 Sales",
-    "difficulty":  "Intermediate",
-    "author": "Sarah Chen",
-    "readingTime":  14,
-    "relatedTools":  [
-
-                     ],
-    "relatedGuides":  [
-
-                      ],
-    "lastUpdated":  "2026-07-20",
-    "sections":  [
-                     {
-                         "title":  "Getting Started",
-                         "body":  "Choosing the right crm \u0026 sales software starts with understanding your specific requirements. Before evaluating CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform, take stock of your team size, budget, existing tool stack, and the primary problems you need to solve. This guide walks through the key considerations.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Selection Criteria",
-                         "body":  "When evaluating CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform and other crm \u0026 sales platforms, focus on these criteria: feature completeness relative to your needs, integration compatibility with your existing tools, total cost of ownership including implementation and training, vendor reputation and support quality, and scalability for future growth.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Implementation Guide",
-                         "body":  "Implementing CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform successfully requires planning beyond the technical setup. Start with a clear use case, involve stakeholders early, allocate time for data migration and testing, and plan for team training. Most successful deployments follow a phased approach rather than a big-bang rollout.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Best Practices",
-                         "body":  "Teams that get the most value from CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform share common practices: they invest in initial configuration and customization, establish clear workflows and naming conventions, train all users before full rollout, regularly review usage patterns to optimize settings, and keep the platform updated.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Common Pitfalls",
-                         "body":  "The most common mistakes teams make with CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform include underinvesting in the initial setup, skipping user training, trying to migrate too much data at once, not defining clear success metrics upfront, and failing to get buy-in from all stakeholders before deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "ROI Analysis",
-                         "body":  "Calculating ROI for CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform involves both tangible savings like reduced licensing costs from tool consolidation and productivity gains from streamlined workflows, and intangible benefits like improved team satisfaction and better data-driven decision making. Most teams see positive ROI within 3-6 months of full deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Future Trends",
-                         "body":  "The crm \u0026 sales category continues to evolve rapidly. CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform is positioned to benefit from trends like AI-powered automation, deeper integration ecosystems, and increased focus on security and compliance. Organizations should evaluate how well the platform\u0027s roadmap aligns with their own technology strategy.",
-                         "type":  "text"
-                     }
-                 ]
+  "slug": "crm-migration-checklist",
+  "title": "CRM Migration Checklist Guide: How to Choose the Right CRM & Sales Platform",
+  "description": "Actionable crm migration checklist guidance covering implementation decisions, risk controls, practical tests, and a readiness checklist. Updated October 2026.",
+  "category": "CRM & Sales",
+  "difficulty": "Intermediate",
+  "author": "Sarah Chen",
+  "readingTime": 6,
+  "relatedTools": [
+    "salesforce",
+    "hubspot",
+    "pipedrive"
+  ],
+  "relatedGuides": [
+    "how-to-choose-crm-software",
+    "crm-selection-guide",
+    "crm-pricing-guide"
+  ],
+  "lastUpdated": "2026-10-09",
+  "sections": [
+    {
+      "title": "Define what the new CRM must preserve",
+      "body": "Agree on the business reason for moving: cleaner pipeline data, improved reporting, better automation, reduced administration, or support for a new sales process. Identify the records and relationships that must survive: accounts, contacts, leads, opportunities, activities, notes, attachments, consent fields, ownership, and history. Decide which data is essential, which can be archived, and which should be removed under an approved retention policy before the migration begins.",
+      "type": "text"
+    },
+    {
+      "title": "Audit and clean source data",
+      "body": "Export a representative sample and measure duplicate records, missing owners, invalid email addresses, inconsistent stages, free-text values, and stale records. Define a canonical format for names, countries, currencies, dates, lifecycle stages, and required fields. Decide how duplicates will be resolved and which system is authoritative for each field. Keep a copy of the original export and record every transformation so that errors can be traced and corrected.",
+      "type": "text"
+    },
+    {
+      "title": "Map fields and business rules",
+      "body": "Create a field-mapping sheet that pairs every source field with its target field, transformation, default, validation, and owner. Document picklist conversions, calculated fields, record ownership, parent-child relationships, and automation that fires on create or update. Do not map fields solely because their names look similar. Test how the target CRM handles empty values, historical timestamps, deleted records, and fields that have no direct equivalent.",
+      "type": "text"
+    },
+    {
+      "title": "Inventory integrations and automations",
+      "body": "List email and calendar sync, forms, marketing automation, support tools, billing systems, enrichment, data warehouses, webhooks, and custom API jobs. Identify which integrations read or write each field and how they authenticate. Pause or redirect integrations during migration to prevent duplicate updates and conflicting writes. Rebuild automations one at a time and test them with controlled records before reconnecting live systems.",
+      "type": "text"
+    },
+    {
+      "title": "Run a rehearsal migration",
+      "body": "Load a small but representative sample that includes duplicates, unusual characters, multiple currencies, attachments, and complex relationships. Verify record counts, field values, ownership, activity history, and reporting. Ask real users to complete common tasks such as logging a call, moving an opportunity, finding an account, and generating a forecast. Record defects and repeat the rehearsal after fixes; a successful import message does not prove the data is correct.",
+      "type": "text"
+    },
+    {
+      "title": "Plan cutover and rollback",
+      "body": "Choose a change freeze or a controlled incremental migration and communicate it to sales, marketing, support, and operations. Define the final export time, delta handling, validation totals, who can authorize go-live, and what conditions trigger rollback. Preserve access to the source system in read-only mode until the new CRM is accepted. Avoid allowing users to update both systems without a clear synchronization rule.",
+      "type": "text"
+    },
+    {
+      "title": "Train by role and protect access",
+      "body": "Give sellers, managers, administrators, and operations staff role-specific instructions using the new workflows, not just a feature tour. Review permissions for exports, bulk edits, sensitive fields, and team visibility. Confirm retention, consent, and deletion workflows, and verify that access is removed promptly when users leave. Provide a channel for reporting data errors and assign someone to triage them during the first weeks.",
+      "type": "text"
+    },
+    {
+      "title": "Post-migration acceptance checklist",
+      "body": "Compare source and target record counts, reconcile key totals, validate reports, test integrations, review permissions, and obtain sign-off from the business owners. Monitor duplicate creation, failed syncs, missing activities, and user adoption after launch. Keep a dated migration log and a remediation queue. Do not decommission the source until the agreed acceptance criteria are met and a recoverable archive is available.",
+      "type": "text"
+    }
+  ]
 }
