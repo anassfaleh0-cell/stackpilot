@@ -374,7 +374,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold mb-0.5">Independent & Unbiased</h3>
-                  <p className="text-xs text-muted-foreground">No paid placements. No vendor influence.</p>
+                  <p className="text-xs text-muted-foreground">Paid placements are disclosed separately; payment does not determine editorial ratings or rankings.</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -392,7 +392,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold mb-0.5">Regularly Updated</h3>
-                  <p className="text-xs text-muted-foreground">Content reviewed and refreshed quarterly</p>
+                  <p className="text-xs text-muted-foreground">We update content when material product or pricing changes are verified.</p>
                 </div>
               </div>
             </div>
