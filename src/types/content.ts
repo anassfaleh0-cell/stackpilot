@@ -100,6 +100,8 @@ export interface ComparisonContent {
   winner: string | null
   /** True only when the winner is backed by a documented, auditable comparison. */
   winnerVerified?: boolean
+  /** True only when comparison feature rows have documented, auditable sources. */
+  featuresVerified?: boolean
   features: ComparisonFeature[]
   verdict: string
   faqs: FAQItem[]
