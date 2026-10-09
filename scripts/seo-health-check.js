@@ -144,6 +144,18 @@ function checkContentQuality() {
     { dir: "best", nameField: "title", minWords: 300 },
   ]
 
+  // Exact high-confidence filler patterns seen in generated editorial content.
+  // This is a diagnostic, not a search-engine word-count rule or automatic noindex decision.
+  const genericTemplatePatterns = [
+    /most successful deployments follow a phased approach/i,
+    /this topic is most useful when it is connected to a real decision/i,
+    /choosing the right marketing\s*&\s*seo software/i,
+    /adequate performance for most use cases\./i,
+    /functional organized interface\./i,
+    /written against our published editorial methodology/i,
+    /updated when the underlying content is reviewed/i,
+  ]
+
   for (const ct of contentTypes) {
     const dir = path.join(CONTENT_DIR, ct.dir)
     const files = readDir(dir)
@@ -151,6 +163,8 @@ function checkContentQuality() {
     let noindexCount = 0
     let missingDescription = 0
     let missingFaq = 0
+    let genericTemplateCount = 0
+    const genericTemplateExamples = []
 
     for (const file of files) {
       const data = readJson(path.join(dir, file))
@@ -162,6 +176,13 @@ function checkContentQuality() {
       if (isNoindexed) {
         noindexCount++
         continue
+      }
+
+      const searchableContent = JSON.stringify(data)
+      const matchingGenericPatterns = genericTemplatePatterns.filter((pattern) => pattern.test(searchableContent))
+      if (matchingGenericPatterns.length > 0) {
+        genericTemplateCount++
+        if (genericTemplateExamples.length < 8) genericTemplateExamples.push(slug)
       }
 
       // Count the substantive data that the route actually renders, rather than
@@ -259,6 +280,11 @@ function checkContentQuality() {
     }
     if (missingFaq > 0 && indexed > 0) {
       log("warn", `${ct.dir}: ${missingFaq} pages missing FAQ schema opportunity`)
+    }
+    if (genericTemplateCount > 0) {
+      log("warn", `${ct.dir}: ${genericTemplateCount} indexed pages contain known generic filler phrases; examples: ${genericTemplateExamples.join(", ")}`)
+    } else {
+      log("pass", `${ct.dir}: No known generic filler phrases found`)
     }
   }
 }
