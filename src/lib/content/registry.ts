@@ -238,14 +238,16 @@ function sanitizeList(items: string[] | undefined, max = 5): string[] {
 }
 
 function sanitizeReview(review: ReviewContent): ReviewContent {
+  const description = sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.description, 700)))
+  const safeDescription = description.length >= 50 ? description : `${review.name} is listed in PilotStack’s ${review.category} catalog. Verify current features, pricing, and terms with the vendor.`
   return {
     ...review,
     content: sanitizeSections(review.content).filter((section) => !(section.type === "diagram" && !["pricing-ladder","feature-radar","implementation-flow"].includes(section.body))),
-    description: trimText(review.description, 700),
-    tagline: trimText(review.tagline, 220),
+    description: safeDescription,
+    tagline: sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.tagline, 220))),
     pros: sanitizeList(review.pros),
     cons: sanitizeList(review.cons),
-    features: review.features.map((feature) => ({ ...feature, name: trimText(feature.name, 120), description: trimText(feature.description, 360) })).slice(0, 20),
+    features: review.features.map((feature) => ({ ...feature, name: trimText(feature.name, 120), description: sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(feature.description, 360))) })).slice(0, 20),
     faqs: sanitizeFaqs(review.faqs),
   }
 }
