@@ -18,7 +18,7 @@ import { PaginationNav } from "@/components/ui/pagination-nav"
 
 export const metadata = createMetadata({
   title: "Software Reviews",
-  description: "In-depth, unbiased reviews of the best software tools. Expert analysis, real user feedback, and detailed feature comparisons.",
+  description: "Software reviews covering use cases, feature fit, pricing considerations, and limitations. Numeric ratings are shown only when their provenance is documented.",
   path: "/reviews",
 })
 
@@ -47,7 +47,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: Pro
               In-depth software reviews
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              We organize recorded product information, published pricing, and consistent scoring criteria into detailed reviews. Our methodology explains how ratings are calculated and distinguishes recorded data from facts that have not been independently verified.
+              We organize product information, use-case guidance, pricing considerations, and limitations into detailed reviews. Numeric ratings are shown only when their provenance is documented; other recorded values should be checked against current sources.
             </p>
           </SectionHeader>
         </Container>
@@ -64,7 +64,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: Pro
       <Section>
         <Container>
           {tools.length > 0 ? (
-            <ReviewCardGrid items={pageTools.map(t => ({ slug: t.slug, name: t.name, category: t.category, rating: t.rating, tagline: t.tagline }))} />
+            <ReviewCardGrid items={pageTools.map(t => ({ slug: t.slug, name: t.name, category: t.category, rating: t.ratingVerified === true && typeof t.rating === "number" && Number.isFinite(t.rating) ? t.rating : undefined, tagline: t.tagline }))} />
           ) : (
             <p className="text-center text-muted-foreground py-12">No reviews available yet. Check back soon.</p>
           )}
