@@ -393,7 +393,7 @@ function genGuide(slug, name, cat, idx) {
     category: cat,
     difficulty: idx % 3 === 0 ? "Beginner" : idx % 3 === 1 ? "Intermediate" : "Advanced",
     author: "PilotStack Team",
-    readingTime: 8 + (hash(slug) % 10),
+    readingTime: Math.max(2, Math.ceil(sections.reduce((total, section) => total + section.body.split(/\s+/).length, 0) / 220)),
     relatedTools: [],
     relatedGuides: [],
     lastUpdated: now,
