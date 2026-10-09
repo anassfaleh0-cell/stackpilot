@@ -8,12 +8,12 @@ export interface ReviewContent {
   website?: string
   pricing: PricingTier
   priceRange?: string
-  rating?: number
-  reviewCount?: number
+  rating: number
+  reviewCount: number
   pros: string[]
   cons: string[]
   features: ReviewFeature[]
-  ratings?: CategoryRating[]
+  ratings: CategoryRating[]
   screenshots?: string[]
   logo?: string
   content: ContentSection[]
