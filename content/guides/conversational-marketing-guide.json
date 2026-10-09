@@ -5,7 +5,7 @@
   "category": "Marketing & SEO",
   "difficulty": "Beginner",
   "author": "Emily Nakamura",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "hubspot",
     "intercom",
@@ -56,6 +56,11 @@
     {
       "title": "Go-live checklist",
       "body": "Pilot one use case with a clear success metric, approved knowledge sources, safe fallback, human handoff, and data controls. Review failures and customer feedback before expanding. Keep a named owner for ongoing tuning and regularly retire flows that no longer match customer needs.",
+      "type": "text"
+    },
+    {
+      "title": "Test handoff quality before launch",
+      "body": "Create test conversations for a straightforward question, an ambiguous request, an out-of-scope question, a complaint, and a request to speak to a person. Verify that the bot does not promise unavailable outcomes, collect unnecessary personal data, or keep a customer trapped in automation. Check whether the human agent receives the conversation history and the reason for escalation. Define who reviews failed conversations and how approved answers are updated when policies or products change.",
       "type": "text"
     }
   ]
