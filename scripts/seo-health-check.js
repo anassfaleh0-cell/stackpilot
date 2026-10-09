@@ -154,6 +154,7 @@ function checkContentQuality() {
   // Include only the fields actually shown there so the audit does not call a
   // page thin solely because that copy lives in the linked review record.
   const reviewsBySlug = new Map()
+  const crossCategoryComparisons = []
   const reviewsDir = path.join(CONTENT_DIR, "reviews")
   for (const file of readDir(reviewsDir)) {
     const review = readJson(path.join(reviewsDir, file))
@@ -221,8 +222,8 @@ function checkContentQuality() {
           words += wordCount(faq.question)
           words += wordCount(faq.answer)
         }
-        for (const slug of [data.tool1Slug, data.tool2Slug]) {
-          const review = typeof slug === "string" ? reviewsBySlug.get(slug) : null
+        const linkedReviews = [data.tool1Slug, data.tool2Slug].map((slug) => typeof slug === "string" ? reviewsBySlug.get(slug) : null)
+        for (const review of linkedReviews) {
           if (!review) continue
           words += wordCount(review.name)
           words += wordCount(review.description || review.tagline)
@@ -230,6 +231,17 @@ function checkContentQuality() {
           words += wordCount(review.priceRange || review.pricing)
           for (const value of (review.pros || []).slice(0, 2)) words += wordCount(value)
           for (const value of (review.cons || []).slice(0, 2)) words += wordCount(value)
+        }
+        const [review1, review2] = linkedReviews
+        if (review1?.category && review2?.category && review1.category !== review2.category) {
+          crossCategoryComparisons.push({
+            slug: data.slug,
+            tool1: data.tool1,
+            category1: review1.category,
+            tool2: data.tool2,
+            category2: review2.category,
+            recordedWinner: data.winner || null,
+          })
         }
       }
       if (ct.dir === "alternatives") {
@@ -313,6 +325,10 @@ function checkContentQuality() {
     if (missingFaq > 0 && eligibleRecords > 0) {
       log("warn", ct.dir + ": " + missingFaq + " source records missing a FAQ data opportunity")
     }
+  }
+
+  if (crossCategoryComparisons.length > 0) {
+    log("warn", `comparisons: ${crossCategoryComparisons.length} pair products from different linked-review categories; pages should explain distinct use cases rather than present a universal winner. Samples: ${JSON.stringify(crossCategoryComparisons.slice(0, 10))}`)
   }
 }
 
