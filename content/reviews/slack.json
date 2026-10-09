@@ -199,17 +199,17 @@
     },
     {
       "title": "Real Limitations",
-      "body": "Notification management remains Slack's most persistent user complaint. A 2023 study of 2,000 Slack users found that 53% felt overwhelmed by channel volume, and the average user receives 200+ notifications per 8-hour workday. While Slack offers Do Not Disturb schedules, keyword alerts, and channel-specific muting, the default configuration favors real-time interruption over focused work. Organizations must invest in channel strategy — naming conventions, purpose documentation, and archive policies — to prevent channel sprawl. Video conferencing is another limitation: Slack's native Huddles support screen sharing and up to 50 participants but lack breakout rooms, meeting recording on free tier, virtual backgrounds, and end-to-end encryption that Zoom and Teams provide as baseline features.",
+      "body": "Potential trade-offs include notification overload, too many channels, fragmented information, and dependence on third-party apps for some workflows. These issues can often be reduced with clear channel ownership, notification norms, and a policy for where important decisions are documented. Test whether the workspace remains usable as projects and membership grow.",
       "type": "text"
     },
     {
       "title": "Pricing Explained",
-      "body": "Slack uses per-user monthly pricing with four tiers. Free includes 10 app integrations, 90-day message history, and one-to-one voice calls. Pro at $8.75/user/month (annual) removes integration limits, provides unlimited message history, and adds group Huddles with screen sharing. Business+ at $15/user/month adds SAML/SSO, 99.99% uptime SLA, data export, and mandatory 24-hour support response. Enterprise Grid has custom pricing for organizations exceeding 500 users, adding multi-workspace architecture, Enterprise Key Management, and compliance exports. A hidden cost: organizations using the free tier that exceed 10 integrations face a sudden upgrade requirement, and message history beyond 90 days disappears permanently — not merely hidden — upon downgrading.",
+      "body": "Slack plan prices and entitlements can change by region and billing term. Check current pricing directly with Slack and confirm message and file history, app and workflow limits, guest access, AI features, security controls, support, and renewal terms. Estimate the cost for your actual member count and any integrations that require separate subscriptions.",
       "type": "text"
     },
     {
       "title": "Hidden Costs",
-      "body": "Three hidden costs catch organizations migrating to Slack. App licensing for 10+ integrations at scale: while Slack itself charges per user, many popular integrations (Jira Premium, Salesforce, Zendesk Suite) also require per-user licenses at $10-30/user/month, effectively doubling the per-user cost. Data storage for files shared in channels consumes Slack's allocated storage per workspace (10GB on Free, 1TB on Pro, unlimited on Business+); organizations sharing design files, recorded Clips, or large datasets must manage storage quotas or integrate an external file sync solution. The administrative overhead of channel governance — naming standards, archive policies, access reviews — requires dedicated Slack administration time that scales with workspace size, typically 0.25-0.5 FTE per 1,000 users.",
+      "body": "Potential additional costs include third-party app subscriptions, implementation and administration time, training, migration, and support upgrades. Check whether the tools you connect require separate licenses and include them in the budget. Also account for the ongoing effort to manage channels, permissions, retention, and integration failures.",
       "type": "text"
     },
     {
@@ -239,12 +239,12 @@
     },
     {
       "title": "Security & Compliance",
-      "body": "Slack is SOC 2 Type II, SOC 3, ISO 27001, and FedRAMP authorized for Enterprise Grid. Data in transit uses TLS 1.2+ and data at rest is AES-256 encrypted. Enterprise Grid offers Enterprise Key Management (EKM) for customer-controlled encryption keys via AWS KMS, and supports data residency in US, EU, Japan, Australia, and Canada regions. Slack provides a Business Associate Agreement (BAA) for HIPAA compliance on Business+ and Enterprise plans. For regulated industries, Slack lacks end-to-end encryption by default (EKM provides server-side encryption, not client-side), and compliance exports require manual or API-based extraction rather than automated streaming to SIEM platforms. Data retention policies can be configured at the workspace level, specifying per-channel retention from 1 day to indefinite, but these policies apply retroactively and can cause permanent data loss if misconfigured.",
+      "body": "Review Slack’s current security documentation and contract terms for the plan you intend to use. Confirm identity and access controls, encryption, retention, auditability, data exports, key-management options, and the scope of any compliance statements. Validate regulated or legal-hold use cases with your security and legal teams instead of assuming every control is included in every plan.",
       "type": "text"
     },
     {
       "title": "Performance",
-      "body": "Slack's desktop app consumes 150-350 MB of RAM on macOS depending on workspace count and active channels, with CPU usage spiking to 15-25% during initial load and background indexing. The browser client uses 100-250 MB across Chrome, Firefox, and Safari, with slightly higher CPU during real-time message rendering. Global search returns results within 1-3 seconds for workspaces up to 10 million messages, degrading to 4-6 seconds at 50 million+ messages. Message delivery latency averages 200-500ms across all regions during normal operation, with documented outages averaging 2-3 per year according to Slack's status page archives (99.98% uptime in 2025). The mobile app on iOS and Android opens in 3-5 seconds on recent devices and supports offline message viewing for the last 20,000 messages per workspace.",
+      "body": "Test Slack with your actual workspace size, channel structure, integrations, and devices. Check startup time, search, message loading, notifications, and behavior when several workspaces or apps are open. Performance depends on client version, device resources, network conditions, and configuration, so avoid relying on generic memory or CPU benchmarks.",
       "type": "text"
     },
     {
@@ -264,7 +264,7 @@
     },
     {
       "title": "Common Mistakes",
-      "body": "Five mistakes repeatedly surface from Slack administrators. Over-channeling — creating dedicated channels for every project, resulting in 200+ channels of which 80% are inactive within 30 days. A better approach is starting with 5-8 purpose-defined channels and creating ad-hoc channels only when recurring conversation patterns emerge. Notification neglect — leaving default notification settings active for all channels, causing the average user to receive 40+ interruptions per hour. Every new channel should default to muted with only @mentions breaking through. Forgetting the public archive — organizations that leave deprovisioned employees in workspace directories or fail to rotate API tokens create security exposure; automated SCIM deprovisioning should be configured before the first user leaves. Workflow over-automation — building Workflow Builder automations for processes that occur once per quarter, creating maintenance burden without meaningful productivity gain. A useful threshold: only automate processes that consume 2+ person-hours per week. Integration sprawl — connecting every available app without auditing notification frequency, resulting in channel noise that teams learn to ignore. Each integration should be evaluated after 30 days: if message volume exceeds 50 per day in a single channel, create a dedicated channel or reduce notification verbosity.",
+      "body": "Common rollout mistakes include creating too many channels, leaving ownership unclear, allowing notifications to interrupt focus, installing apps without reviewing permissions, and treating chat as the permanent home for every decision. Start with a small channel taxonomy, assign owners, agree on notification norms, review app permissions, and document important decisions in a durable location.",
       "type": "text"
     },
     {
@@ -274,17 +274,17 @@
     },
     {
       "title": "Alternatives",
-      "body": "Slack's primary competitors address different use-case priorities. Microsoft Teams offers tighter Office 365 integration with native SharePoint document co-editing and Teams Phone for telephony, making it the default for Microsoft-centric organizations at $4-12.50/user/month. Discord provides a consumer-grade communication platform with low-latency voice, screen sharing, and community server features at a lower price point ($3-10/user/month), popular with gaming and creator communities but lacking enterprise compliance certifications. Google Chat offers basic messaging integrated with Google Workspace at no additional cost for existing customers, suitable for organizations that need simple chat without paying for a separate tool. Mattermost provides an open-source, self-hosted alternative with full message audit trails and on-premise deployment for regulated industries that cannot use cloud-hosted Slack. For each alternative, evaluate migration effort: the switching cost from Slack to Teams is moderate (6/10 difficulty), while migrating to Mattermost requires significant infrastructure setup and custom integration rewrites.",
+      "body": "Compare Slack with Microsoft Teams, Google Chat, and other relevant tools based on your existing software stack and collaboration habits. Evaluate search, external collaboration, notifications, administration, security, integrations, support, and total cost. Do not assume one competitor is best for every organization; verify current bundle and plan details directly with each vendor.",
       "type": "text"
     },
     {
       "title": "Competitors",
-      "body": "Microsoft Teams is Slack's primary competitor, leveraging Office 365 bundling to reach 320 million monthly active users. Teams offers superior native document co-editing via SharePoint and integrated telephony through Teams Phone, but its channel structure is less flexible and its app ecosystem is smaller at approximately 1,400 integrations. Google Chat provides basic team messaging included with Google Workspace at no additional cost, suitable for organizations wanting simple chat but lacking Slack's automation depth and integration breadth. Discord has gained traction with developer and gaming communities through low-latency voice and server communities at a lower price point, but lacks enterprise security certifications and compliance features needed by regulated organizations. Mattermost offers an open-source, self-hosted alternative for organizations requiring complete data control with on-premise deployment and full message audit trails, though its integration library is substantially smaller and its interface less polished. Slack maintains competitive advantages in integration ecosystem size (2,600+ vs 1,400 for Teams), search speed and accuracy, and third-party developer platform maturity, while Teams leads in total addressable market due to Office 365 bundling across enterprise customers.",
+      "body": "Microsoft Teams can be relevant for organizations that already depend on Microsoft 365, while Slack may appeal to teams that prioritize channel-based communication and integrations. Compare them using your own workflows and current license quotes, including guest access, retention, security, administration, and any additional app subscriptions.",
       "type": "text"
     },
     {
       "title": "Final Verdict",
-      "body": "Slack earns a 4.5/5 rating and remains the best communication platform for organizations that prioritize integration density, searchability, and asynchronous collaboration across distributed teams. It is not the cheapest option (Teams undercuts on price for Microsoft-heavy stacks) nor the most secure (Mattermost offers true self-hosted control), but it provides the best balance of depth, ecosystem breadth, and ease of use for organizations willing to invest in channel governance and notification hygiene. The platform's continued investment in Canvas, Clips, and Lists signals a strategic shift from pure messaging to a broader collaboration platform — a direction that increases value for existing users without requiring additional tool purchases. Organizations with 25-500 users running 10+ SaaS tools will realize the highest ROI from Slack. Buy it for the integrations, stay for the search, and invest in channel strategy before you invite the first member.",
+      "body": "Slack is worth considering when persistent team messaging, searchable conversations, and integrations are central to how your organization works. It is not automatically the best choice for every team. Pilot the channel structure, notification approach, integrations, external collaboration, security settings, and full cost, then compare the results with alternatives.",
       "type": "text"
     },
     {
@@ -467,5 +467,5 @@
   "learningCurve": "Moderate — expect 1-3 days to become productive",
   "whoShouldUse": "Slack is ideal for small to mid-size teams that need a reliable communication solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
   "whoShouldNotUse": "Slack is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives.",
-  "wordCount": 4795
+  "wordCount": 4011
 }
