@@ -204,11 +204,11 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                   <ul className="space-y-3">
                     <li className="flex items-start gap-2 text-sm">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">1</span>
-                      <span className="text-muted-foreground">Choose <strong>{cmp.tool1}</strong> if you need better {cmp.features.filter(f => f.tool1 && !f.tool2).map(f => f.name.toLowerCase()).slice(0, 2).join(" and ")}</span>
+                      <span className="text-muted-foreground">Choose <strong>{cmp.tool1}</strong> if you need better {cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool1 === true && f.tool2 === false).map(f => f.name.toLowerCase()).slice(0, 2).join(" and ")}</span>
                     </li>
                     <li className="flex items-start gap-2 text-sm">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">2</span>
-                      <span className="text-muted-foreground">Choose <strong>{cmp.tool2}</strong> if {cmp.features.filter(f => f.tool2 && !f.tool1).slice(0, 1).map(f => f.name.toLowerCase() + " is critical for your workflow")}</span>
+                      <span className="text-muted-foreground">Choose <strong>{cmp.tool2}</strong> if {cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool2 === true && f.tool1 === false).slice(0, 1).map(f => f.name.toLowerCase() + " is critical for your workflow")}</span>
                     </li>
                     <li className="flex items-start gap-2 text-sm">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">3</span>
