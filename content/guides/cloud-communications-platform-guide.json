@@ -57,6 +57,16 @@
       "title": "Selection checklist",
       "body": "Choose a platform after testing call quality, routing, integrations, security, retention, migration, and failover. Name owners for emergency procedures, number inventory, and incident response. Review performance and costs after rollout, especially when new regions or communication channels are added.",
       "type": "text"
+    },
+    {
+      "title": "Plan number porting and change management",
+      "body": "Create an inventory of every business number, its current carrier, its owner, the teams that depend on it, and the call flow that must remain available. Confirm porting requirements and timelines with the receiving provider before cancelling the old service. Communicate changes to staff and customers, update directories and printed materials, and test inbound and outbound calling after each cutover. Keep an agreed fallback route until the business owner confirms that critical numbers and queues work as expected.",
+      "type": "text"
+    },
+    {
+      "title": "Define pilot success metrics",
+      "body": "Before the pilot starts, agree on a small set of measurable outcomes: call completion, dropped-call rate, time to connect, meeting join success, ticket volume, user task completion, and support response. Collect a baseline from the current system where possible and test during representative busy periods. Ask participants to report device and network conditions when quality fails. Use the results to decide whether to adjust network configuration, training, licensing, or provider choice instead of relying only on general satisfaction.",
+      "type": "text"
     }
   ]
 }
