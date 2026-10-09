@@ -835,21 +835,26 @@ export function getBest(slug: string): BestContent | null {
   const file = path.join(CONTENT_DIR, "best", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const best = readJson<BestContent>(file)
+  const rawDescription = sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(best.description, 700)))
+  const description = rawDescription.length >= 80
+    ? rawDescription
+    : "Compare " + best.category + " tools using the recorded product details and criteria on this page. Verify current capabilities, pricing, and plan limits with each vendor before purchasing."
   return {
     ...best,
-    description: trimText(best.description, 700),
+    description,
     criteria: sanitizeList(best.criteria, 8),
     picks: best.picks.slice(0, 10).map((p) => {
       const review = getReview(p.toolSlug)
       return {
         ...p,
-        bestFor: trimText(p.bestFor, 360),
+        bestFor: sanitizeUnsupportedClaims(trimText(p.bestFor, 360)),
+        priceRange: sanitizeMalformedPricingText(String(p.priceRange || "Pricing not verified — check the vendor’s current pricing")),
         pros: sanitizeList(review?.pros?.length ? review.pros : p.pros, 5),
         cons: sanitizeList(review?.cons?.length ? review.cons : p.cons, 5),
       }
     }),
-    pricingSummary: trimText(best.pricingSummary, 900),
-    comparisonTable: { ...best.comparisonTable, columns: best.comparisonTable.columns.map((x) => trimText(x, 160)), rows: best.comparisonTable.rows.slice(0, 12).map((row) => row.map((x) => trimText(x, 360))) },
+    pricingSummary: sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(best.pricingSummary, 900))),
+    comparisonTable: { ...best.comparisonTable, columns: best.comparisonTable.columns.map((x) => trimText(x, 160)), rows: best.comparisonTable.rows.slice(0, 12).map((row) => row.map((x) => sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(x, 360))))) },
     faqs: sanitizeFaqs(best.faqs),
   }
 }
