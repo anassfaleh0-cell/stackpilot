@@ -8,6 +8,7 @@ describe("content indexability guards", () => {
     expect(isNoindexed("guides", "not-a-real-guide")).toBe(false)
     expect(isNoindexed("reviews", "asana")).toBe(true)
     expect(isNoindexed("reviews", "linear")).toBe(false)
+    expect(isNoindexed("reviews", "quickbooks")).toBe(false)
     expect(isNoindexed("best", "best-ai-coding-tools")).toBe(true)
     expect(isNoindexed("best", "best-accounting-software")).toBe(false)
   })
@@ -59,7 +60,7 @@ describe("rewritten guide quality floor", () => {
 })
 
 describe("rewritten review quality floor", () => {
-  for (const slug of ["linear", "notion", "clickup"]) {
+  for (const slug of ["linear", "notion", "clickup", "quickbooks", "xero", "freshbooks"]) {
     it(`${slug} review avoids unsupported review-count claims and has substantive guidance`, () => {
       const review = getReview(slug)
       expect(review).not.toBeNull()
