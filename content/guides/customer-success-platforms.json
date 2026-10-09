@@ -1,42 +1,62 @@
 {
   "slug": "customer-success-platforms",
   "title": "Customer Success Platform Guide: How to Choose the Right CS Platform",
-  "description": "Intermediate CRM & Sales guide (~12 min read): how to evaluate and choose the right customer success platform for your team.",
+  "description": "Practical customer success platform guidance with selection criteria, implementation risks, evaluation tests, and a readiness checklist. Updated October 2026.",
   "category": "CRM & Sales",
   "difficulty": "Intermediate",
   "author": "Sarah Chen",
-  "readingTime": 9,
-  "relatedTools": [],
-  "relatedGuides": [],
-  "lastUpdated": "2026-08-11",
+  "readingTime": 6,
+  "relatedTools": [
+    "intercom",
+    "hubspot",
+    "zendesk"
+  ],
+  "relatedGuides": [
+    "customer-data-platform-guide",
+    "how-to-choose-crm-software",
+    "business-intelligence-platform-guide"
+  ],
+  "lastUpdated": "2026-10-09",
   "sections": [
     {
-      "title": "The Customer Success Function",
-      "body": "Customer success exists to ensure customers achieve their goals with a product, which in turn drives retention and expansion. A customer success platform supports that mission by consolidating health data, automating workflows, and giving each account manager a complete view of their book of business."
+      "title": "Define the customer-success workflow",
+      "body": "Start with the outcomes the team is accountable for: onboarding completion, adoption of important features, renewal readiness, support escalation, or expansion opportunities. Map the journey from handoff after sale through onboarding, ongoing value reviews, renewal, and offboarding. Identify the events that tell the team a customer needs help and the actions a success manager can actually take. A platform will not fix unclear ownership between sales, support, and customer success.",
+      "type": "text"
     },
     {
-      "title": "Core Platform Capabilities",
-      "body": "The essential capabilities are health scoring, lifecycle stages, playbooks, and task automation. Many platforms also include in-app guides, digital adoption analytics, and renewal forecasting. Evaluate which capabilities matter for your model: a usage-based product needs different signals than a seat-based one."
+      "title": "Choose health signals carefully",
+      "body": "Create a documented definition of customer health using observable signals such as product usage, unresolved support issues, onboarding milestones, stakeholder engagement, and renewal timing. Separate measured facts from subjective notes and explain how missing data affects the score. Avoid treating one universal score as a prediction of churn. Test whether the signals identify known cases and whether the team can intervene when an account is flagged.",
+      "type": "text"
     },
     {
-      "title": "Selection Criteria",
-      "body": "Compare the platform's ability to ingest product usage data, its CRM integration depth, and how configurable the health score logic is. Check whether playbooks trigger from real events rather than manual reviews, and confirm the reporting layer can show cohort retention without export-and-rebuild work."
+      "title": "Connect customer and product data",
+      "body": "Map the identifiers needed to link CRM accounts, users, product events, support tickets, contracts, and billing. Establish which system is authoritative for account ownership, plan, renewal date, and contact preferences. Test duplicate accounts, subsidiaries, multiple workspaces, and customers who change domains. Limit the data shared across systems to what the workflow requires and document how access and deletion requests propagate.",
+      "type": "text"
     },
     {
-      "title": "Implementation Guide",
-      "body": "Define the health score inputs and weights before configuration, using your own data to validate that the score predicts churn and expansion. Connect product analytics and billing first, then set up lifecycle rules and playbooks. Pilot with one segment of accounts and refine the score against actual outcomes for a quarter."
+      "title": "Evaluate workflows, not dashboards",
+      "body": "Test a real onboarding plan, a risk escalation, a renewal review, and a handoff to support. Verify task ownership, reminders, customer communication history, permissions, and the ability to change a playbook when the process changes. Ask whether managers can see why a health alert fired and whether a user can correct bad data. A dashboard is useful only if it helps the team take a timely and appropriate action.",
+      "type": "text"
     },
     {
-      "title": "Best Practices",
-      "body": "Keep the health score transparent and explainable so CSMs can act on it with confidence. Standardize playbooks for the highest-volume situations, and log every touch in the platform rather than in spreadsheets. Review score calibration quarterly against renewals to prevent drift."
+      "title": "Pilot with a defined customer cohort",
+      "body": "Choose a cohort that represents the customer types the team serves and run the new workflow alongside the current process for a limited period. Measure onboarding completion, time to first value, overdue follow-ups, data completeness, and workload per manager. Use a comparison group or historical baseline carefully; a short pilot cannot prove retention lift by itself. Review false alerts as well as missed risks.",
+      "type": "text"
     },
     {
-      "title": "Common Pitfalls",
-      "body": "The most common mistake is implementing the platform before the success process is defined, which produces automation without direction. Another is relying on a single health metric, which misses mixed signals such as high usage but low engagement with the value-driving feature."
+      "title": "Design playbooks and escalation",
+      "body": "For each trigger, specify the owner, response deadline, permitted action, and condition for escalation. Make sure automated outreach respects consent and customer preferences. Avoid sending customers repetitive or irrelevant messages because multiple triggers fired. Give managers a clear way to pause a playbook, correct a signal, and record why an exception was made.",
+      "type": "text"
     },
     {
-      "title": "ROI Analysis",
-      "body": "Measure ROI through retention and expansion outcomes: net revenue retention, time-to-first-value, and the share of at-risk accounts recovered by playbook actions. Track hours saved on manual health checks, and compare cohort retention before and after platform adoption."
+      "title": "Compare total operating cost",
+      "body": "Include licenses by user or customer volume, implementation, data integration, playbook maintenance, reporting, training, and administration. Clarify how pricing changes as the customer base grows and whether important capabilities require add-ons. Assign ownership for health-score definitions, data quality, renewal workflows, and platform administration. If the team cannot maintain the inputs, an expensive success platform may simply make stale data look authoritative.",
+      "type": "text"
+    },
+    {
+      "title": "Readiness checklist",
+      "body": "Proceed when customer stages are defined, data ownership is clear, key signals can be explained, playbooks have named owners, permissions and consent are tested, and the pilot meets agreed criteria. Document what the platform cannot measure. Review health signals and workflow performance regularly as the product and customer base change.",
+      "type": "text"
     }
   ],
   "faqs": [
