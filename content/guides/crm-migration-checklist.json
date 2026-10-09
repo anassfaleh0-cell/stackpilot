@@ -1,53 +1,72 @@
 {
-    "slug":  "crm-migration-checklist",
-    "title":  "CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform",
-    "description":  "Intermediate CRM \u0026 Sales guide (~14 min read): how to evaluate the right CRM Migration. Choosing the right crm \u0026 sales software starts with.",
-    "category":  "CRM \u0026 Sales",
-    "difficulty":  "Intermediate",
-    "author": "Sarah Chen",
-    "readingTime":  14,
-    "relatedTools":  [
-
-                     ],
-    "relatedGuides":  [
-
-                      ],
-    "lastUpdated":  "2026-07-20",
-    "sections":  [
-                     {
-                         "title":  "Getting Started",
-                         "body":  "Choosing the right crm \u0026 sales software starts with understanding your specific requirements. Before evaluating CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform, take stock of your team size, budget, existing tool stack, and the primary problems you need to solve. This guide walks through the key considerations.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Selection Criteria",
-                         "body":  "When evaluating CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform and other crm \u0026 sales platforms, focus on these criteria: feature completeness relative to your needs, integration compatibility with your existing tools, total cost of ownership including implementation and training, vendor reputation and support quality, and scalability for future growth.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Implementation Guide",
-                         "body":  "Implementing CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform successfully requires planning beyond the technical setup. Start with a clear use case, involve stakeholders early, allocate time for data migration and testing, and plan for team training. Most successful deployments follow a phased approach rather than a big-bang rollout.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Best Practices",
-                         "body":  "Teams that get the most value from CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform share common practices: they invest in initial configuration and customization, establish clear workflows and naming conventions, train all users before full rollout, regularly review usage patterns to optimize settings, and keep the platform updated.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Common Pitfalls",
-                         "body":  "The most common mistakes teams make with CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform include underinvesting in the initial setup, skipping user training, trying to migrate too much data at once, not defining clear success metrics upfront, and failing to get buy-in from all stakeholders before deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "ROI Analysis",
-                         "body":  "Calculating ROI for CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform involves both tangible savings like reduced licensing costs from tool consolidation and productivity gains from streamlined workflows, and intangible benefits like improved team satisfaction and better data-driven decision making. Most teams see positive ROI within 3-6 months of full deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Future Trends",
-                         "body":  "The crm \u0026 sales category continues to evolve rapidly. CRM Migration Checklist Guide: How to Choose the Right CRM \u0026 Sales Platform is positioned to benefit from trends like AI-powered automation, deeper integration ecosystems, and increased focus on security and compliance. Organizations should evaluate how well the platform\u0027s roadmap aligns with their own technology strategy.",
-                         "type":  "text"
-                     }
-                 ]
+  "slug": "crm-migration-checklist",
+  "title": "CRM Migration Checklist: Move Customer Data Without Losing Context",
+  "description": "A step-by-step CRM migration checklist covering discovery, data cleanup, field mapping, integration testing, permissions, cutover, rollback, and post-launch reconciliation.",
+  "category": "CRM & Sales",
+  "difficulty": "Intermediate",
+  "author": "PilotStack Editorial Team",
+  "readingTime": 14,
+  "relatedTools": [
+    "salesforce",
+    "hubspot",
+    "pipedrive",
+    "zoho-crm",
+    "close-crm"
+  ],
+  "relatedGuides": [
+    "crm-selection-guide",
+    "data-governance-guide",
+    "software-evaluation-framework"
+  ],
+  "lastUpdated": "2026-10-09",
+  "sections": [
+    {
+      "title": "Set Scope and Ownership",
+      "type": "text",
+      "body": "Name one migration owner and representatives for sales, marketing, support, data, and security. Document which records will move, which will be archived, and which historical details must remain searchable. Agree on a cutover date, a freeze window for schema changes, and the business workflows that cannot be interrupted. Define acceptance criteria before work begins—for example, required record types migrate, key relationships remain intact, integrations pass tests, and users can complete a standard customer workflow. Make unresolved decisions visible with an owner and deadline."
+    },
+    {
+      "title": "Inventory the Source System",
+      "type": "text",
+      "body": "Export or inspect the current schema, record counts, custom fields, picklists, attachments, notes, activity history, automations, and integrations. Identify fields nobody uses, duplicate representations of the same information, and undocumented formulas. Record the source of truth for each important value. Take a protected backup and verify that it can be restored or read independently of the old CRM. Do not start transforming data until the team knows which records are authoritative and which are stale, duplicated, or legally required to be retained."
+    },
+    {
+      "title": "Clean and Map the Data",
+      "type": "checklist",
+      "body": "Create a field mapping document that describes source, destination, transformation, validation, and owner for each field.",
+      "items": [
+        "Normalize dates, phone numbers, country codes, and picklist values.",
+        "Define duplicate matching rules for contacts and accounts, including shared email addresses.",
+        "Map owners, teams, lifecycle stages, and opportunity stages explicitly.",
+        "Decide how blank values differ from unknown, not applicable, or intentionally removed values.",
+        "Preserve source IDs in a migration reference field where they are needed for reconciliation.",
+        "Record fields that will not migrate and explain where the historical information remains available."
+      ]
+    },
+    {
+      "title": "Run a Small Trial Migration",
+      "type": "text",
+      "body": "Use a representative sample that includes ordinary records, duplicates, long histories, attachments, inactive customers, and edge cases. Import it into a non-production environment if available. Check record counts and compare a sample field by field against the source. Test relationships between accounts, contacts, opportunities, notes, and activities. Ask users to complete real tasks using the migrated data. Fix mapping errors and repeat the trial until the acceptance criteria are met; a successful import job alone does not prove that the information is complete or usable."
+    },
+    {
+      "title": "Rebuild Integrations and Permissions",
+      "type": "text",
+      "body": "Document every system that reads or writes CRM data and test each connection independently. Verify field mapping, sync direction, retry behavior, rate limits, duplicate-event handling, and error alerts. Recreate roles and permissions using least privilege rather than copying broad access from the old system by default. Test as a standard user, manager, administrator, and any guest or service account. Rotate credentials where necessary and confirm that logs do not expose sensitive customer information."
+    },
+    {
+      "title": "Plan Cutover and Rollback",
+      "type": "text",
+      "body": "Write a cutover runbook with the order of operations, responsible people, communication plan, data freeze, final export, import, reconciliation, integration switch, and go/no-go decision. Define objective rollback triggers, such as missing critical records, broken sales workflows, or an integration failure that cannot be resolved within the agreed window. Keep the old system available in read-only mode until the new CRM is accepted and retention requirements are satisfied. Do not delete the source data immediately after the first successful login."
+    },
+    {
+      "title": "Reconcile and Sign Off",
+      "type": "text",
+      "body": "Compare source and destination counts by object type and important status, then inspect samples across each critical workflow. Investigate missing records, changed owners, lost relationships, duplicate creation, invalid dates, and mismatched totals. Reconcile high-value business records separately instead of relying only on aggregate counts. Record accepted exceptions and obtain sign-off from the owners of sales, marketing, support, and security. Keep evidence of the reconciliation so later reporting differences can be traced to the migration."
+    },
+    {
+      "title": "Support the First 30 Days",
+      "type": "text",
+      "body": "Provide short role-specific training, a place to report issues, and a daily review of migration defects during the initial period. Track errors, adoption friction, duplicate rates, integration failures, and the completion of key workflows. Prioritize issues that block customer follow-up or corrupt trusted data. Review permissions and remove temporary migration access. Once the system stabilizes, archive the runbook, mapping, scripts, and decisions so the next system change can reuse the lessons without repeating the same risks."
+    }
+  ]
 }

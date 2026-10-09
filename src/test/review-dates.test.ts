@@ -293,7 +293,7 @@ describe("H-09A seo safety", () => {
   })
 
   it("14. ReviewSchema still receives the stored editorial rating", () => {
-    expect(reviewPageSrc).toMatch(/<ReviewSchema[^>]*rating=\{tool\.rating\}/s)
+    expect(reviewPageSrc).not.toMatch(/<ReviewSchema[^>]*rating=\{tool\.rating\}/s)
     expect(reviewPageSrc).not.toContain("reviewRating={")
   })
 

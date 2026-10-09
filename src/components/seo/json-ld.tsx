@@ -298,7 +298,7 @@ function aggregateRatingNode(ratingValue?: number, reviewCount?: number): Record
   return { "@type": "AggregateRating", ratingValue, bestRating: 5, worstRating: 1, ratingCount: reviewCount }
 }
 
-export function softwareApp({ name, url, description, category, platforms, applicationCategory, operatingSystem, image, rating, reviewCount, offers }: {
+export function softwareApp({ name, url, description, category, platforms, applicationCategory, operatingSystem, image, offers }: {
   name: string
   url: string
   description?: string
@@ -320,8 +320,8 @@ export function softwareApp({ name, url, description, category, platforms, appli
   }
   if (description) node.description = description
   if (image) node.image = { "@type": "ImageObject", url: image }
-  const ar = aggregateRatingNode(rating, reviewCount)
-  if (ar) node.aggregateRating = ar
+  // Legacy profile scores and review counts lack consistent third-party provenance.
+  // Do not publish them as Schema.org aggregateRating until verified source data exists.
   const offer = offerNode(offers)
   if (offer) node.offers = offer
   return node as { "@type": string; name: string; url: string; [key: string]: unknown }
@@ -390,7 +390,7 @@ export function ProductSchema({ name, description, image, brand, aggregateRating
 export function ReviewSchema({ name, description, rating, url, datePublished, body, image, companyInfo }: {
   name: string
   description: string
-  rating: number
+  rating?: number
   url: string
   datePublished?: string
   body?: string
@@ -403,12 +403,14 @@ export function ReviewSchema({ name, description, rating, url, datePublished, bo
     "@id": url + "#review",
     name: `${name} Review`,
     reviewBody: body || description,
-    reviewRating: {
-      "@type": "Rating",
-      ratingValue: rating,
-      bestRating: 5,
-      worstRating: 1,
-    },
+    ...(rating != null ? {
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    } : {}),
     author: organizationRef(),
     datePublished: datePublished || undefined,
     itemReviewed: {

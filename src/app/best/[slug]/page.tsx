@@ -7,6 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 import { truncate, formatDate } from "@/lib/utils"
 import { getBest, getAllBest, getContentTitle, getReview } from "@/lib/content/registry"
 import { getRelatedByCategory } from "@/lib/content/internal-links"
+import { isNoindexed } from "@/lib/noindex"
 import { InternalLinks, LEGACY_RELATED_TYPES, extendedRelatedItems } from "@/components/content/internal-links"
 import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound, permanentRedirect } from "next/navigation"
@@ -51,8 +52,8 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
     notFound()
   }
 
-  const linkedPicks = page.picks.filter((p) => getReview(p.toolSlug) !== null)
-  const reviewHref = (toolSlug: string) => (getReview(toolSlug) ? `/reviews/${toolSlug}` : null)
+  const linkedPicks = page.picks.filter((p) => getReview(p.toolSlug) !== null && !isNoindexed("reviews", p.toolSlug))
+  const reviewHref = (toolSlug: string) => (getReview(toolSlug) && !isNoindexed("reviews", toolSlug) ? `/reviews/${toolSlug}` : null)
   const relatedLinks = getRelatedByCategory(page.category, page.slug, 4)
 
   return (
@@ -74,7 +75,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
           <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-            <p className="text-sm text-muted-foreground">Our top pick from {page.picks.length} leading {page.category.toLowerCase()} tools is <strong>{page.picks[0]?.toolName}</strong> (rating {page.picks[0]?.rating}/5, from {page.picks[0]?.priceRange}). Each tool was assessed across {page.criteria.length} criteria including features, ease of use, value, and performance.</p>
+            <p className="text-sm text-muted-foreground">Our top pick from {page.picks.length} leading {page.category.toLowerCase()} tools is <strong>{page.picks[0]?.toolName}</strong> (PilotStack profile score {page.picks[0]?.rating}/5; verify current pricing with the vendor). The shortlist is organized around the criteria below; scores are editorial indicators, not third-party review averages.</p>
           </div>
 
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
@@ -93,9 +94,9 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
               <li>{page.picks.length} top {page.category.toLowerCase()} tools ranked against our published criteria</li>
               <li>Evaluation criteria: {page.criteria.join(", ")}</li>
-              <li>Top pick: {page.picks[0]?.toolName} ({page.picks[0]?.rating}/5, from {page.picks[0]?.priceRange}) — {page.picks[0]?.bestFor}</li>
-              {page.picks[1] ? <li>Runner-up: {page.picks[1].toolName} ({page.picks[1].rating}/5, from {page.picks[1].priceRange})</li> : null}
-              <li>Pricing ranges from free to enterprise, depending on features and scale</li>
+              <li>Top pick: {page.picks[0]?.toolName} (PilotStack profile score {page.picks[0]?.rating}/5) — {page.picks[0]?.bestFor}</li>
+              {page.picks[1] ? <li>Runner-up: {page.picks[1].toolName} (PilotStack profile score {page.picks[1].rating}/5)</li> : null}
+              <li>Pricing and plan limits change; verify current details on each vendor’s official site</li>
               <li>Each pick includes recorded pros, cons, and best-fit recommendations</li>
               <li>Full comparison table with feature-by-feature breakdown included below</li>
               <li>Updated {formatDate(page.lastUpdated)} — pricing and feature details can change</li>
@@ -143,7 +144,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                           </div>
                           <div className="flex items-center gap-1 text-sm">
                             <Star size={14} className="fill-accent text-accent" />
-                            <span className="font-semibold">{pick.rating}</span>
+                            <span className="font-semibold" aria-label="PilotStack profile score">{pick.rating}</span>
                             <span className="text-muted-foreground">/5</span>
                           </div>
                         </div>

@@ -95,6 +95,11 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
   /our experts?\b/i,
   /we tested\b/i,
   /tested by our team/i,
+  /\b(?:rated|rating|scores?)\s+\d+(?:\.\d+)?\/5\b.{0,100}\b(?:user\s+)?reviews\b/i,
+  /\b\d+(?:\.\d+)?\/5\b.{0,100}\b(?:user\s+)?reviews\b/i,
+  /\b(?:sub-)?\d+(?:\.\d+)?\s?(?:ms|milliseconds)\b/i,
+  /\b\d+(?:,\d{3})*\+?\s+(?:issues|blocks|tasks|users|employees|customers|templates|integrations|shortcuts|connectors|daily meeting participants)\b/i,
+  /\b(?:within|under|in)\s+\d+(?:-\d+)?\s*(?:minutes|hours|days|weeks)\b.{0,100}\b(?:setup|onboarding|migration|proficiency)\b/i,
   /user(s)? consistently report/i,
   /organizations see measurable improvements/i,
   /typical roi payback/i,
@@ -307,7 +312,7 @@ function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: Comparison
   const features1 = Array.isArray(r1?.features) ? r1.features : []
   const features2 = Array.isArray(r2?.features) ? r2.features : []
   const derived: ComparisonFeature[] = [
-    { name: "User Rating", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.rating}/5 across ${r1.reviewCount.toLocaleString()} recorded reviews` : undefined, tool2Detail: r2 ? `${r2.rating}/5 across ${r2.reviewCount.toLocaleString()} recorded reviews` : undefined },
+    { name: "Editorial Profile Score", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.rating}/5 PilotStack profile score; not a third-party review average` : undefined, tool2Detail: r2 ? `${r2.rating}/5 PilotStack profile score; not a third-party review average` : undefined },
     { name: "Pricing", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.pricing}${r1.priceRange ? `: ${r1.priceRange}` : ""}` : undefined, tool2Detail: r2 ? `${r2.pricing}${r2.priceRange ? `: ${r2.priceRange}` : ""}` : undefined },
     { name: "Category & Positioning", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.category}. ${r1.tagline}` : cmp.category, tool2Detail: r2 ? `${r2.category}. ${r2.tagline}` : cmp.secondaryCategories?.[0] || cmp.category },
     { name: "Key Capabilities", tool1: Boolean(r1?.features?.length), tool2: Boolean(r2?.features?.length), tool1Detail: features1.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || undefined, tool2Detail: features2.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || undefined },
@@ -379,6 +384,8 @@ export function getComparison(slug: string): ComparisonContent | null {
   const file = path.join(CONTENT_DIR, "comparisons", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const cmp = readJson<ComparisonContent>(file)
+  // Explicitly unpublished comparisons must never be rendered, linked, or included in the sitemap.
+  if (cmp.published === false) return null
   const baseFeatures = cmp.features.slice(0, 20).map((f) => ({
     ...f,
     name: trimText(f.name, 140),
@@ -406,6 +413,7 @@ export function getAllComparisons(): ComparisonContent[] {
 export function getComparisonsByCategory(category: string): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
     .filter((file) => {
+      const slug = file.replace(/\.json$/, "")
       const raw = readJson<ComparisonContent>(path.join(CONTENT_DIR, "comparisons", file))
       return raw.category === category || raw.secondaryCategories?.includes(category)
     })
@@ -437,49 +445,18 @@ export function getAllGlossaryTerms(): GlossaryContent[] {
     .sort((a, b) => a.term.localeCompare(b.term))
 }
 
-function enrichBlogBody(post: BlogContent): string {
-  const body = String(post.body || "").trim()
-  const words = body.split(/\s+/).filter(Boolean).length
-  if (words >= 850) return body
-
-  const tags = post.tags.filter(Boolean).slice(0, 4).join(", ")
-  const pricing = /pricing|price|cost|budget|roi|spend/i.test(post.title + " " + body)
-  const comparison = /\bvs\b|versus|comparison|compare/i.test(post.title)
-  const focus = pricing
-    ? "total cost, plan limits, usage assumptions, and the implementation effort that sits outside the headline subscription price"
-    : comparison
-      ? "workflow fit, meaningful feature differences, integrations, adoption effort, and the trade-offs behind the headline winner"
-      : "workflow fit, integration requirements, administration, adoption, and the evidence a buyer should check before choosing"
-
-  const sections = [
-    `## What matters when evaluating ${post.category.toLowerCase()} software
-
-This topic is most useful when it is connected to a real decision rather than treated as a feature checklist. For this article, the main evaluation lens should be ${focus}. Start with the job the software needs to perform, identify the steps that are currently slow or manual, and then map those requirements to the products or approaches discussed here. The important question is not whether a platform has a long feature list; it is whether the features reduce meaningful work for the people who will use and administer the product.`,
-    `## Questions to verify before you choose
-
-Use the article as a starting point and verify the details that can change over time. Check the vendor's current pricing and plan limits, the integrations your workflow actually depends on, export or migration options, permissions and administrative controls, and any security or compliance requirements that apply to your organization. Where this article references ${tags || "specific tools"}, treat the recorded information as a comparison aid and confirm time-sensitive facts against the linked primary source before signing a contract.`,
-    `## Practical decision framework
-
-A useful shortlist normally has a clear must-have set, a small group of preferred capabilities, and explicit reasons to reject an option. Define the critical workflow first, test the highest-risk requirement with realistic sample data, estimate the total cost at your expected team size, and document what would still require a workaround. Revisit the decision after rollout: adoption, support burden, integration reliability, and actual usage are stronger signals of fit than a product's marketing claims alone.`,
-    `## Keeping this decision current
-
-Software products change frequently. Recheck pricing, feature availability, integrations, security documentation, and product limits when the buying decision becomes active. The article's publication date and linked sources provide context, while the current vendor documentation should be the final authority for contractual or technical details.`,
-  ]
-  return [body, ...sections].filter(Boolean).join("\n\n")
-}
-
 export function getBlogPost(slug: string): BlogContent | null {
   const file = path.join(CONTENT_DIR, "blog", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const post = readJson<BlogContent>(file)
-  return { ...post, body: enrichBlogBody(post) }
+  return { ...post, body: String(post.body || "").trim() }
 }
 
 export function getAllBlogPosts(): BlogContent[] {
   return readDir(path.join(CONTENT_DIR, "blog"))
-    .map((f) => {
-      const post = readJson<BlogContent>(path.join(CONTENT_DIR, "blog", f))
-      return { ...post, body: enrichBlogBody(post) }
+    .map((file) => {
+      const post = readJson<BlogContent>(path.join(CONTENT_DIR, "blog", file))
+      return { ...post, body: String(post.body || "").trim() }
     })
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
 }
@@ -552,6 +529,7 @@ export function getAlternative(slug: string): AlternativeContent | null {
   const file = path.join(CONTENT_DIR, "alternatives", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const alt = readJson<AlternativeContent>(file)
+  if (alt.published === false) return null
   const alternatives = Array.isArray(alt.alternatives) ? alt.alternatives : []
   const cleaned = {
     ...alt,
@@ -638,6 +616,7 @@ export function getBest(slug: string): BestContent | null {
   const file = path.join(CONTENT_DIR, "best", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const best = readJson<BestContent>(file)
+  if (best.published === false) return null
   return {
     ...best,
     description: trimText(best.description, 700),
@@ -703,8 +682,10 @@ export function searchContent(query: string): {
 } {
   const q = query.toLowerCase()
   const match = (text: string) => text.toLowerCase().includes(q)
+  const reviewResults = getAllReviews().filter((r) => match(r.name) || match(r.description))
+    .sort((a, b) => Number(match(b.name)) - Number(match(a.name)) || b.rating - a.rating)
   return {
-    reviews: getAllReviews().filter((r) => match(r.name) || match(r.description)),
+    reviews: reviewResults,
     comparisons: getAllComparisons().filter((c) => match(c.title) || match(c.description)),
     guides: getAllGuides().filter((g) => match(g.title) || match(g.description)),
     glossary: getAllGlossaryTerms().filter((t) => match(t.term) || match(t.definition)),

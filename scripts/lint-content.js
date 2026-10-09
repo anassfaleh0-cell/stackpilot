@@ -3,6 +3,13 @@ const path = require("path")
 
 const CONTENT_DIRS = ["content/guides", "content/comparisons", "content/reviews", "content/best", "content/blog"]
 const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/
+const NOINDEX_MANIFEST_PATH = path.join(__dirname, "..", "noindex-list.json")
+const noindexManifest = fs.existsSync(NOINDEX_MANIFEST_PATH)
+  ? JSON.parse(fs.readFileSync(NOINDEX_MANIFEST_PATH, "utf-8"))
+  : { directories: {} }
+const noindexSets = Object.fromEntries(
+  Object.entries(noindexManifest.directories || {}).map(([name, entry]) => [name, new Set(entry.noindex || [])])
+)
 
 const DOLLAR_RE = /\$[\d,]+\.?\d*(?:\/\w+)?/g
 
@@ -170,8 +177,7 @@ for (const dir of dirs) {
     const title = data.title || data.term || data.name || ""
     const slug = file.replace(".json", "")
     const dirName = dir.replace("content/", "")
-    const isNoindexed = false
-    const isKept = true
+    const isNoindexed = noindexSets[dirName]?.has(slug) || data.published === false
     let fileErrors = 0
 
     // Lint the actual source payload; runtime sanitization must never hide source defects.
@@ -191,6 +197,11 @@ for (const dir of dirs) {
         console.error("  ERROR: Unsupported/generated-content marker appears " + hits.length + " time(s): " + describeMatches(validationRaw, pattern).map((m) => JSON.stringify(m)).join(" | "))
         fileErrors += hits.length
       }
+    }
+
+    if (isNoindexed) {
+      // Keep suppressed/unpublished records under content lint; suppression is not a quality exemption.
+      console.log(`  INFO: ${dirName}/${slug} is suppressed from public indexing while it remains under editorial review`)
     }
 
     if (checkTitleDuplicates(title, file)) fileErrors++

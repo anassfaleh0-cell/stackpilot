@@ -5,6 +5,7 @@ import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, WebP
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAlternative, getAllAlternatives, getContentTitle, getReview } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 import { formatDate } from "@/lib/utils"
 import { getRelatedByCategory } from "@/lib/content/internal-links"
 import { InternalLinks, LEGACY_RELATED_TYPES, extendedRelatedItems } from "@/components/content/internal-links"
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!alt) return {}
   const shortTitle = alt.title.length > 58 ? alt.title.slice(0, 55) + "..." : alt.title
   const noindexed = isNoindexed("alternatives", slug)
-  return createMetadata({ title: shortTitle, description: `Looking for ${alt.toolName} alternatives? Compare ${(alt.alternatives || []).length} competitors with ratings, pricing context, and practical differences.`, path: `/alternatives/${alt.slug}`, ogType: "article", publishedAt: alt.lastUpdated, updatedAt: alt.lastUpdated, articleSection: alt.category, noIndex: noindexed })
+  return createMetadata({ title: shortTitle, description: `Compare alternatives to ${alt.toolName} by workflow fit, trade-offs, and selection criteria.`, path: `/alternatives/${alt.slug}`, ogType: "article", publishedAt: alt.lastUpdated, updatedAt: alt.lastUpdated, articleSection: alt.category, noIndex: noindexed })
 }
 
 export default async function AlternativePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -40,12 +41,13 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
   if (!alt) notFound()
 
   const relatedLinks = getRelatedByCategory(alt.category, alt.slug, 4)
+  const isReviewIndexable = (toolSlug: string) => Boolean(getReview(toolSlug)) && !isNoindexed("reviews", toolSlug)
 
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Alternatives", href: "/alternatives" }, { name: alt.title, href: `/alternatives/${slug}` }]} />
       <CollectionPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} />
-      <ItemListSchema items={(alt.alternatives || []).map(a => ({ name: a.name, url: `${site.url}/reviews/${a.slug}` }))} url={`${site.url}/alternatives/${slug}`} />
+      <ItemListSchema items={(alt.alternatives || []).filter((a) => isReviewIndexable(a.slug)).map(a => ({ name: a.name, url: `${site.url}/reviews/${a.slug}` }))} url={`${site.url}/alternatives/${slug}`} />
       <WebPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} dateModified={alt.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: (alt.alternatives || []).map((a, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: a.name, url: `${site.url}/reviews/${a.slug}`, category: getReview(a.slug)?.category || alt.category, description: a.description }) })) }} />
       <ArticleSchema
         title={alt.title}
@@ -90,17 +92,18 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                     <GlassCard key={item.slug}>
                       <div className="p-5">
                         <div className="flex items-start justify-between mb-2">
-                          <Link href={`/reviews/${item.slug}`} className="text-lg font-bold hover:text-primary transition-colors">{item.name}</Link>
-                          <div className="flex items-center gap-1 text-sm">
-                            <Star size={14} className="fill-accent text-accent" />
-                            <span className="font-semibold">{item.rating}</span>
-                            <span className="text-muted-foreground">/5</span>
-                          </div>
+                          {isReviewIndexable(item.slug) ? (
+                            <Link href={`/reviews/${item.slug}`} className="text-lg font-bold hover:text-primary transition-colors">{item.name}</Link>
+                          ) : (
+                            <span className="text-lg font-bold">{item.name}</span>
+                          )}
                         </div>
                         <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
-                        <Link href={`/reviews/${item.slug}`} className="inline-flex items-center gap-1 text-sm text-primary hover:underline mt-2">
-                          Read full review <ArrowRight size={12} />
-                        </Link>
+                        {isReviewIndexable(item.slug) ? (
+                          <Link href={`/reviews/${item.slug}`} className="inline-flex items-center gap-1 text-sm text-primary hover:underline mt-2">
+                            Read full review <ArrowRight size={12} />
+                          </Link>
+                        ) : null}
                       </div>
                     </GlassCard>
                   ))}
@@ -165,10 +168,10 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                   <div className="p-4">
                     <h3 className="font-semibold mb-3 text-sm">Quick Comparison</h3>
                     <div className="space-y-2">
-                      {(alt.alternatives || []).slice(0, 5).map((item) => (
+                      {(alt.alternatives || []).filter((item) => isReviewIndexable(item.slug)).slice(0, 5).map((item) => (
                         <Link key={item.slug} href={`/reviews/${item.slug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                           <span>{item.name}</span>
-                          <span className="text-xs font-medium">{item.rating}/5</span>
+                          <span className="text-xs text-muted-foreground">Review available</span>
                         </Link>
                       ))}
                     </div>
