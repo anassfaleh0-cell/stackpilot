@@ -668,6 +668,7 @@ export function getAllBest(): BestContent[] {
 }
 
 export function getHub(slug: string): HubContent | null {
+  if (isNoindexed("hubs", slug)) return null
   const file = path.join(CONTENT_DIR, "hubs", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const hub = readJson<HubContent>(file)
@@ -677,6 +678,7 @@ export function getHub(slug: string): HubContent | null {
 
 export function getAllHubs(): HubContent[] {
   return readDir(path.join(CONTENT_DIR, "hubs"))
+    .filter((file) => !isNoindexed("hubs", file.replace(/\.json$/, "")))
     .map((f) => { const h = readJson<HubContent>(path.join(CONTENT_DIR, "hubs", f)); h.faqs = sanitizeFaqs(h.faqs); return h })
 }
 
