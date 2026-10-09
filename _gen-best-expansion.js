@@ -17,7 +17,9 @@ fs.readdirSync(reviewDir).filter(f => f.endsWith(".json")).forEach(f => {
       category: r.category,
       rating: r.rating,
       priceRange: r.priceRange || "Pricing not verified",
-      tagline: r.tagline || r.description?.substring(0,120) || ""
+      tagline: r.tagline || r.description?.substring(0,120) || "",
+      pros: Array.isArray(r.pros) ? r.pros : [],
+      cons: Array.isArray(r.cons) ? r.cons : []
     })
   } catch(e) {}
 })
@@ -114,15 +116,15 @@ categories.forEach(cat => {
       toolName: t.name,
       rating: t.rating,
       priceRange: t.priceRange,
-      bestFor: i === 0 ? `Best overall for ${aud.toLowerCase()}` : i === 1 ? `Best value for ${aud.toLowerCase()}` : i === 2 ? `Best features for ${aud.toLowerCase()}` : i === 3 ? `Best for growing ${aud.toLowerCase()}` : i === 4 ? `Best for ${aud.toLowerCase()} teams` : `Best for scaling ${aud.toLowerCase()}`,
-      pros: [`Excellent ${strengths[0]} that ${aud.toLowerCase()} teams consistently praise`, `Strong ${strengths[1]} makes it accessible for ${aud.toLowerCase()} users`, `Reliable ${strengths[2]} with regular updates and improvements`, `Positive user reviews across ${t.rating}/5 rating`, `Good integration ecosystem for ${aud.toLowerCase()} workflows`],
-      cons: [`May require initial setup time for ${aud.toLowerCase()} teams`, `Some advanced features may not be needed by all ${aud.toLowerCase()} users`, `Premium pricing could be a consideration for budget-conscious ${aud.toLowerCase()} teams`, `Learning curve for full feature utilization`, `Mobile experience could be improved`]
+      bestFor: t.tagline || "Evaluate fit against your requirements",
+      pros: t.pros.slice(0, 5),
+      cons: t.cons.slice(0, 5)
     }))
 
     const page = {
       slug, title, description: desc, category: cat, criteria: crit,
       picks,
-      pricingSummary: `${cTools[0].name} starts at ${cTools[0].priceRange}, while most ${aud.toLowerCase()}-friendly options offer competitive pricing.`,
+      pricingSummary: `Source-file price data lists ${cTools[0].name} as ${cTools[0].priceRange}. Verify current plan limits, billing terms, and add-on costs on vendor pricing pages before purchase.`,
       comparisonTable: {
         columns: ["Tool", "Rating", "Price From", "Best For", "Key Strength"],
         rows: picks.map(p => [p.toolName, p.rating.toString(), p.priceRange, p.bestFor, strengths[0]])
@@ -131,7 +133,7 @@ categories.forEach(cat => {
         { question: `What is the best ${qual} tool for ${aud.toLowerCase()}?`, answer: `${picks[0].toolName} is the first option in this shortlist, not a universal winner. Validate its current capabilities, price, and limitations against your requirements before choosing it.` },
         { question: `How much does ${qual} software cost for ${aud.toLowerCase()}?`, answer: `${qual} tools for ${aud.toLowerCase()} range from free tiers to enterprise plans. ${picks[0].toolName} starts at ${picks[0].priceRange}, while budget-friendly alternatives starting from lower price points are available.` },
         { question: `What features should ${aud.toLowerCase()} look for in ${qual} software?`, answer: `When evaluating ${qual} tools for ${aud.toLowerCase()}, prioritize ${crit.slice(0,3).join(", ").toLowerCase()}. These factors most directly impact daily productivity and return on investment for ${aud.toLowerCase()} teams.` },
-        { question: `Can ${aud.toLowerCase()} use free ${qual} tools effectively?`, answer: `Yes, several ${qual} platforms offer generous free tiers suitable for ${aud.toLowerCase()}. We recommend testing free versions to evaluate fit before committing to paid plans.` },
+        { question: `Can ${aud.toLowerCase()} use free ${qual} tools effectively?`, answer: `Some platforms may offer free plans or trials, but limits vary and can change. Verify current terms and test whether the free option supports your workflow before relying on it.` },
         { question: `What is the easiest ${qual} tool for ${aud.toLowerCase()} to implement?`, answer: `Implementation effort depends on data migration, permissions, integrations, and workflow complexity. Test these tasks during a trial and ask the vendor to confirm any services or support included in your plan.` },
         { question: `How do I choose between different ${qual} tools for ${aud.toLowerCase()}?`, answer: `Consider your team size, budget, technical expertise, and specific workflow needs. Our comparison table above shows how each top pick stacks up across key criteria.` },
         { question: `Are there ${qual} tools designed specifically for ${aud.toLowerCase()}?`, answer: `Yes, many ${qual} platforms offer features tailored to ${aud.toLowerCase()}. Our reviews detail which tools work best for different types of ${aud.toLowerCase()} teams.` },
@@ -216,21 +218,21 @@ categories.forEach(cat => {
     toolName: t.name,
     rating: t.rating,
     priceRange: t.priceRange,
-    bestFor: i === 0 ? "Best overall" : i === 1 ? "Best value" : i === 2 ? "Best features" : i === 3 ? "Best for teams" : i === 4 ? "Best enterprise" : "Best for beginners",
-    pros: [`Industry-leading ${crit[0].toLowerCase()}`, `Excellent ${crit[1].toLowerCase()} for most users`, `Strong ${crit[2].toLowerCase()} capabilities`, `Positive user feedback with ${t.rating}/5 rating`, `Comprehensive feature set for the category`],
-    cons: [`Premium pricing may not suit all budgets`, `Learning curve for advanced features`, `Some users report occasional performance issues`, `Mobile experience could be enhanced`, `Limited customization in some areas`]
+    bestFor: t.tagline || "Evaluate fit against your requirements",
+    pros: t.pros.slice(0, 5),
+    cons: t.cons.slice(0, 5)
   }))
   
   const page = {
     slug, title, description: desc, category: cat, criteria: crit,
     picks,
-    pricingSummary: `Pricing for ${qual} tools ranges from free to enterprise plans. ${cTools[0].name} starts at ${cTools[0].priceRange}.`,
+    pricingSummary: `Source-file price data lists ${cTools[0].name} as ${cTools[0].priceRange}. Verify current plan limits, billing terms, and add-on costs on vendor pricing pages before purchase.`,
     comparisonTable: {
       columns: ["Tool", "Rating", "Price From", "Best For", "Key Strength"],
       rows: picks.map(p => [p.toolName, p.rating.toString(), p.priceRange, p.bestFor, crit[0]])
     },
     faqs: [
-      { question: `What is the best ${qual} software?`, answer: `Based on our evaluation, ${picks[0].toolName} is the best ${qual} platform with a ${picks[0].rating}/5 rating. It excels across all key criteria.` },
+      { question: `What is the best ${qual} software?`, answer: `Use the comparison table as a starting point, then verify the current feature set, pricing, and limitations of each candidate against your requirements.` },
       { question: `What is the most affordable ${qual} software?`, answer: `Several ${qual} platforms offer competitive pricing. Check our detailed comparison table to find the best value option.` },
       { question: `What features should I look for in ${qual} software?`, answer: `Key features include ${crit.slice(0,4).join(", ").toLowerCase()}. The right tool depends on your team size and requirements.` },
       { question: `Is free ${qual} software good enough?`, answer: `Free tiers can be excellent for individuals and small teams. Our reviews evaluate free options to help you decide when to upgrade.` },
