@@ -29,7 +29,8 @@
     "check:all": "npm run test && npm run build",
     "seo:audit": "node scripts/seo-health-check.js",
     "seo:links": "node scripts/linking-audit.js",
-    "postinstall": "node scripts/copy-og-assets.js"
+    "postinstall": "node scripts/copy-og-assets.js",
+    "audit:editorial-content": "node scripts/audit-editorial-content.js"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
