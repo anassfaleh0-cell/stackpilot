@@ -63,6 +63,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   const review2 = getReview(cmp.tool2Slug)
   const { categoriesDiffer, winnerLabel, hasComparableWinner } = getComparisonDecision({
     winner: cmp.winner,
+    winnerVerified: cmp.winnerVerified === true,
     tool1: cmp.tool1,
     tool1Slug: cmp.tool1Slug,
     tool1Category: review1?.category,
