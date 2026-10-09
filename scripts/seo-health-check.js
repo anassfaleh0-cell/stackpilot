@@ -211,15 +211,24 @@ function checkContentQuality() {
         }
       }
       if (ct.dir === "alternatives") {
-        words += wordCount(data.toolName)
-        for (const item of data.alternatives || []) {
+        words += wordCount(data.toolName || data.title || "")
+        words += wordCount(data.verdict || "")
+        // The alternatives corpus has used both `tools` and `alternatives`
+        // as the list key; count whichever schema the record actually contains.
+        const options = Array.isArray(data.tools) ? data.tools : Array.isArray(data.alternatives) ? data.alternatives : []
+        for (const item of options) {
           words += wordCount(item.name)
           words += wordCount(item.description)
           words += wordCount(item.bestFor)
+          words += wordCount(item.priceRange)
           for (const value of item.pros || []) words += wordCount(value)
           for (const value of item.cons || []) words += wordCount(value)
         }
         for (const value of data.selectionCriteria || []) words += wordCount(value)
+        for (const faq of data.faqs || []) {
+          words += wordCount(faq.question)
+          words += wordCount(faq.answer)
+        }
       }
       if (ct.dir === "glossary") {
         words += wordCount(data.term)
