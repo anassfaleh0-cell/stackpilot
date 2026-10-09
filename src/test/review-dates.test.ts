@@ -299,7 +299,7 @@ describe("H-09A seo safety", () => {
   })
 
   it("14. ReviewSchema receives a rating only when provenance is verified", () => {
-    expect(reviewPageSrc).toMatch(/<ReviewSchema[^>]*rating=\{tool\.ratingVerified === true \? tool\.rating : undefined\}/s)
+    expect(reviewPageSrc).toMatch(/<ReviewSchema[^>]*rating=\{hasEditorialRating \? tool\.rating : undefined\}/s)
     expect(reviewPageSrc).not.toContain("reviewRating={")
   })
 
