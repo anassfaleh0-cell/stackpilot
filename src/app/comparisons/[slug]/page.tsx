@@ -113,10 +113,10 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
               <li>Category: {cmp.category}</li>
               <li>Total features compared: {cmp.features.length}</li>
-              <li>{cmp.tool1} exclusive features: {cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool1 === true && f.tool2 === false).length}</li>
-              <li>{cmp.tool2} exclusive features: {cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool2 === true && f.tool1 === false).length}</li>
-              <li>Shared features: {cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool1 === true && f.tool2 === true).length}</li>
-              <li>{cmp.winner ? `Winner: ${cmp.winner}` : "No clear winner — depends on use case"}</li>
+              <li>{cmp.tool1} criteria with recorded information: {cmp.features.filter(f => f.tool1 && f.tool1 !== "Not recorded").length}</li>
+              <li>{cmp.tool2} criteria with recorded information: {cmp.features.filter(f => f.tool2 && f.tool2 !== "Not recorded").length}</li>
+              <li>Criteria with details for both: {cmp.features.filter(f => f.tool1Detail && f.tool2Detail).length}</li>
+              <li>{cmp.winner ? `Recorded dataset pick: ${cmp.winner}` : "No recorded dataset pick"}</li>
               <li>FAQs answered: {cmp.faqs.length}</li>
               <li>Last updated: {formatDate(cmp.lastUpdated)}</li>
             </ul>
