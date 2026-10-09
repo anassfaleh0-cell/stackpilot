@@ -71,10 +71,15 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
       ? review.rating
       : null
   }
+  const verifiedPickPrice = (pick: (typeof page.picks)[number] | undefined): string | null =>
+    pick?.priceRangeVerified === true && typeof pick.priceRange === "string" && pick.priceRange.trim()
+      ? pick.priceRange
+      : null
   const safeDescription = stripUnverifiedRatingClaims(page.description)
   const safeFaqs = page.faqs.map((faq) => ({ question: stripUnverifiedRatingClaims(faq.question), answer: stripUnverifiedRatingClaims(faq.answer) }))
   const hasUnverifiedPickRatings = page.picks.some((pick) => typeof pick.rating === "number" && verifiedPickRating(pick) === null)
-  const visibleComparisonColumnIndexes = page.comparisonTable.columns.map((column, index) => ({ column, index })).filter(({ column }) => !(hasUnverifiedPickRatings && /rating|score/i.test(column))).map(({ index }) => index)
+  const hasUnverifiedPickPrices = page.picks.some((pick) => Boolean(pick.priceRange?.trim()) && verifiedPickPrice(pick) === null)
+  const visibleComparisonColumnIndexes = page.comparisonTable.columns.map((column, index) => ({ column, index })).filter(({ column }) => !((hasUnverifiedPickRatings && /rating|score/i.test(column)) || (hasUnverifiedPickPrices && /price|pricing/i.test(column)))).map(({ index }) => index)
   const visibleComparisonColumns = visibleComparisonColumnIndexes.map((index) => page.comparisonTable.columns[index])
   const visibleComparisonRows = page.comparisonTable.rows.map((row) => visibleComparisonColumnIndexes.map((index) => stripUnverifiedRatingClaims(String(row[index] ?? ""))))
   const reviewHref = (toolSlug: string) => (getReview(toolSlug) ? `/reviews/${toolSlug}` : null)
@@ -99,7 +104,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
           <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-            <p className="text-sm text-muted-foreground">The first listed option is <strong>{page.picks[0]?.toolName}</strong>{verifiedPickRating(page.picks[0]) !== null ? ` (verified editorial rating ${verifiedPickRating(page.picks[0])}/5)` : ""} (pricing: {page.picks[0]?.priceRange}). Use this shortlist as a starting point, verify current details with the vendor, and compare each option against your workflow.</p>
+            <p className="text-sm text-muted-foreground">The first listed option is <strong>{page.picks[0]?.toolName}</strong>{verifiedPickRating(page.picks[0]) !== null ? ` (verified editorial rating ${verifiedPickRating(page.picks[0])}/5)` : ""} (pricing: {verifiedPickPrice(page.picks[0]) ?? "check current vendor pricing"}). Use this shortlist as a starting point, verify current details with the vendor, and compare each option against your workflow.</p>
           </div>
 
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
@@ -175,10 +180,10 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                           )}
                         </div>
                         <p className="text-sm font-medium text-primary mb-2">{pick.bestFor}</p>
-                        {pick.priceRange && pick.priceRange !== "Not independently verified" ? (
-                          <p className="text-xs text-muted-foreground mb-3">Listed pricing: {pick.priceRange}. Verify current plans, limits, and billing terms with the vendor.</p>
+                        {verifiedPickPrice(pick) !== null ? (
+                          <p className="text-xs text-muted-foreground mb-3">Listed pricing: {verifiedPickPrice(pick)}. Verify current plans, limits, and billing terms with the vendor.</p>
                         ) : (
-                          <p className="text-xs text-muted-foreground mb-3">Pricing not independently verified here; check the vendor's current plans and usage limits.</p>
+                          <p className="text-xs text-muted-foreground mb-3">Pricing is not independently verified for this shortlist; check the vendor&apos;s current plans, regional terms, and usage limits.</p>
                         )}
                         <div className="grid sm:grid-cols-2 gap-2 mb-3">
                           <div>
