@@ -91,9 +91,9 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
   const allReviews = getAllReviews()
 
-  const categoryRatings = Array.isArray(tool.ratings) ? tool.ratings : []
-  const hasEditorialRating = typeof tool.rating === "number" && Number.isFinite(tool.rating)
-  const reviewCount = typeof tool.reviewCount === "number" && Number.isFinite(tool.reviewCount) ? tool.reviewCount : null
+  const hasEditorialRating = tool.ratingVerified === true && typeof tool.rating === "number" && Number.isFinite(tool.rating)
+  const categoryRatings = hasEditorialRating && Array.isArray(tool.ratings) ? tool.ratings : []
+  const reviewCount = tool.reviewCountVerified === true && typeof tool.reviewCount === "number" && Number.isFinite(tool.reviewCount) ? tool.reviewCount : null
   const bestInCategory = allReviews
     .filter((r) => r.category === tool.category && typeof r.rating === "number")
     .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
@@ -107,7 +107,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
         { name: "Reviews", href: "/reviews" },
         { name: tool.name, href: `/reviews/${tool.slug}` },
       ]} />
-      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.contentPublished} body={tool.description} image={tool.logo ? `${site.url}${tool.logo}` : undefined} companyInfo={companyFacts} />
+      <ReviewSchema name={tool.name} description={tool.description} rating={tool.ratingVerified === true ? tool.rating : undefined} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.contentPublished} body={tool.description} image={tool.logo ? `${site.url}${tool.logo}` : undefined} companyInfo={companyFacts} />
       <SoftwareSchema name={tool.name} description={tool.tagline} category={tool.category} brand={tool.name} platforms={entity?.company?.platforms || tool.company?.deployment} url={`${site.url}/reviews/${tool.slug}`} image={tool.logo ? `${site.url}${tool.logo}` : undefined} offers={entity?.pricing?.[0]?.price !== undefined && entity.pricing[0].price !== null ? { price: entity.pricing[0].price, priceCurrency: entity.pricing[0].currency || "USD", url: tool.website || undefined } : undefined} />
       <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.contentModified} />
       <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.contentPublished} updatedAt={tool.contentModified} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={visibleContent.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} keywords={[`${tool.name} review`, `${tool.name} pricing`, `${tool.name} pros and cons`, `${tool.category} software`, `${tool.name} alternatives`]} mentions={[{ name: tool.name, url: tool.website || `${site.url}/reviews/${tool.slug}` }]} />
@@ -475,24 +475,26 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 </GlassCard>
 
                 {/* Rating Breakdown */}
-                <GlassCard>
-                  <div className="p-4">
-                    <h3 className="font-semibold mb-3 text-sm">Rating Breakdown</h3>
-                    <div className="space-y-3">
-                      {categoryRatings.map((item) => (
-                        <div key={item.label}>
-                          <div className="flex justify-between text-xs mb-0.5">
-                            <span className="text-muted-foreground">{item.label}</span>
-                            <span className="font-medium">{formatScore(item.score)}/5</span>
+                {categoryRatings.length > 0 && (
+                  <GlassCard>
+                    <div className="p-4">
+                      <h3 className="font-semibold mb-3 text-sm">Rating Breakdown</h3>
+                      <div className="space-y-3">
+                        {categoryRatings.map((item) => (
+                          <div key={item.label}>
+                            <div className="flex justify-between text-xs mb-0.5">
+                              <span className="text-muted-foreground">{item.label}</span>
+                              <span className="font-medium">{formatScore(item.score)}/5</span>
+                            </div>
+                            <div className="h-1.5 rounded-full bg-muted-bg overflow-hidden">
+                              <div className="h-full rounded-full bg-primary transition-all duration-500" style={{ width: scoreWidth(item.score) }} />
+                            </div>
                           </div>
-                          <div className="h-1.5 rounded-full bg-muted-bg overflow-hidden">
-                            <div className="h-full rounded-full bg-primary transition-all duration-500" style={{ width: scoreWidth(item.score) }} />
-                          </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </GlassCard>
+                  </GlassCard>
+                )}
 
                 {/* Editorial Reviewer */}
                 <EditorialExpert author={tool.author} />
@@ -582,7 +584,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
           <section className="mt-16 mb-8">
             <h2 className="text-lg font-bold tracking-tight mb-3">Sources &amp; Methodology</h2>
             <div className="text-xs text-muted-foreground leading-relaxed space-y-1.5">
-              <p>Review pages focus on product fit, features, pricing considerations, and limitations. Where a score or third-party review count is not supported by a verifiable source, it is omitted rather than estimated. Pricing and feature availability can change; confirm important details with the vendor. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for sourcing and editorial independence.</p>
+              <p>Review pages focus on product fit, features, pricing considerations, and limitations. A numeric score or review count is shown only when its provenance is documented; otherwise it is omitted pending verification. Pricing and feature availability can change, so confirm important details with the vendor. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for sourcing and editorial independence.</p>
               <p>Content updated: {formatDate(tool.contentModified)} · No vendor payment or sponsorship influenced this review · We may earn affiliate commission on purchases made through links on this site.</p>
             </div>
           </section>
