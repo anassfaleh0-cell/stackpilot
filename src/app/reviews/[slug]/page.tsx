@@ -50,6 +50,17 @@ function getVisibleReviewContent(content: ContentSection[]) {
   })
 }
 
+function countVisibleReviewWords(content: ContentSection[]): number {
+  return content.reduce((total, section) => {
+    const bodyWords = section.body.split(/\s+/).filter(Boolean).length
+    const itemWords = (section.items || []).reduce(
+      (count, item) => count + item.split(/\s+/).filter(Boolean).length,
+      0
+    )
+    return total + bodyWords + itemWords
+  }, 0)
+}
+
 export function generateStaticParams() {
   return getAllReviews().map((item) => ({ slug: item.slug }))
 }
@@ -59,7 +70,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const tool = getReview(slug)
   if (!tool) return {}
   const visibleContent = getVisibleReviewContent(tool.content)
-  const wordCount = visibleContent.reduce((a, s) => a + s.body.split(/\s+/).length, 0)
+  const wordCount = countVisibleReviewWords(visibleContent)
   const noindexed = isNoindexed("reviews", slug)
   return createMetadata({
     title: tool.seoTitle || reviewMetaTitle(tool.name),
