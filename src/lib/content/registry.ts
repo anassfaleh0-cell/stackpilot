@@ -819,9 +819,10 @@ export function getAllStatistics(): StatisticContent[] {
 function sanitizeBestDescription(description: string, title: string, category: string, picks: BestContent["picks"]): string {
   const cleaned = sanitizeUnsupportedClaims(sanitizeMalformedPricingText(description)).replace(/\s+/g, " ").trim()
   if (cleaned.length >= 90) return trimText(cleaned, 700)
+  const topic = title.replace(/^best\s+/i, "").replace(/\s+(?:of|for)\s+\d{4}.*$/i, "").trim() || category
   const names = picks.slice(0, 4).map((pick) => pick.toolName).filter(Boolean)
   const shortlist = names.length ? ` Recorded options include ${names.join(", ")}.` : ""
-  return trimText(`Compare ${category.toLowerCase()} software using the recorded selection criteria, product profiles, feature trade-offs, and pricing context. Verify current plans, limits, and prices with each vendor before making a purchase.${shortlist}`, 700)
+  return trimText(`Compare ${topic.toLowerCase()} in the ${category.toLowerCase()} category using recorded selection criteria, product profiles, feature trade-offs, and pricing context. Verify current plans, limits, and prices with each vendor before making a purchase.${shortlist}`, 700)
 }
 
 export function getBest(slug: string): BestContent | null {
