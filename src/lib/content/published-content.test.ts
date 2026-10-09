@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { isNoindexed } from "@/lib/noindex"
-import { getAlternative, getBest, getBlogPost, getComparison, getGuide, getResearch, getReview, getStatistic, getUseCase } from "@/lib/content/registry"
+import { getAlternative, getBest, getBlogPost, getComparison, getGuide, getIndustry, getResearch, getReview, getStatistic, getUseCase } from "@/lib/content/registry"
 
 describe("content indexability guards", () => {
   it("honors the explicit noindex manifest", () => {
@@ -20,6 +20,7 @@ describe("content indexability guards", () => {
     expect(isNoindexed("research", "ai-adoption-report-2026")).toBe(true)
     expect(isNoindexed("statistics", "advertising-software")).toBe(true)
     expect(isNoindexed("use-cases", "best-accounting-for-enterprise")).toBe(true)
+    expect(isNoindexed("industries", "aerospace")).toBe(true)
   })
 
   it("does not expose a comparison explicitly marked unpublished", () => {
@@ -131,5 +132,6 @@ describe("quarantined evidence-sensitive content", () => {
     expect(getResearch("ai-adoption-report-2026")).toBeNull()
     expect(getStatistic("advertising-software")).toBeNull()
     expect(getUseCase("best-accounting-for-enterprise")).toBeNull()
+    expect(getIndustry("aerospace")).toBeNull()
   })
 })
