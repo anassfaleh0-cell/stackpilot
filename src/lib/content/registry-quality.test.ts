@@ -7,6 +7,7 @@ describe("content quality repairs", () => {
     expect(guide).not.toBeNull()
     expect(guide?.sections[0]?.title).toBe("Define the Decision")
     expect(guide?.description).toContain("A practical guide to marketing attribution")
+    expect(guide?.relatedTools?.length).toBeGreaterThan(0)
     expect(guide?.description).not.toContain("Choosing the right marketing & seo software")
     expect(guide?.readingTime).toBeLessThan(8)
   })
