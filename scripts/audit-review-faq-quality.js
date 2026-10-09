@@ -25,8 +25,8 @@ function getFaqItems(data) {
   if (!section) return []
   return section.items.flatMap((raw) => {
     if (typeof raw !== "string") return []
-    const text = raw.trim().replace(/^\\*\\*/, "")
-    const bold = text.match(/^\\*\\*(.+?)\\*\\*\\s*([\\s\\S]+)$/)
+    const text = raw.trim().replace(/^\*\*/, "")
+    const bold = text.match(/^\*\*(.+?)\*\*\s*([\s\S]+)$/)
     if (bold) return [{ question: bold[1].trim(), answer: bold[2].trim() }]
     const end = text.indexOf("? ")
     return end > 0 ? [{ question: text.slice(0, end + 1).trim(), answer: text.slice(end + 2).trim() }] : []
