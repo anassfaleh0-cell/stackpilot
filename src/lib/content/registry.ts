@@ -396,11 +396,19 @@ function repairGenericGuideData(data: Record<string, unknown>, filePath: string)
       type: "text",
     },
   const wordCount = repairedSections.reduce((total, section) => total + String(section.body).split(/\s+/).filter(Boolean).length, 0)
+  const currentRelatedTools = Array.isArray(data.relatedTools) ? data.relatedTools.filter((item): item is string => typeof item === "string") : []
+  const relatedTools = currentRelatedTools.length > 0 ? currentRelatedTools : readDir(path.join(CONTENT_DIR, "reviews"))
+    .map((file) => readJson<ReviewContent>(path.join(CONTENT_DIR, "reviews", file)))
+    .filter((review) => review.category === category && review.slug !== slug)
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 3)
+    .map((review) => review.slug)
   return {
     ...data,
     title: topic + ": Practical " + category + " Guide",
     description: "A practical guide to " + topic.toLowerCase() + " in " + category + ", with evaluation criteria, a workflow test, evidence checks, implementation risks, and total-cost guidance.",
     sections: repairedSections,
+    relatedTools,
     readingTime: Math.max(4, Math.ceil(wordCount / 220)),
     lastUpdated: new Date().toISOString().slice(0, 10),
   }
