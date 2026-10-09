@@ -61,6 +61,7 @@ beforeEach(() => {
   document.getElementById("ga-gtag")?.remove()
   document.getElementById("clarity-dynamic")?.remove()
   document.getElementById("adsense-script")?.remove()
+  document.getElementById("gtm-script")?.remove()
 })
 
 afterEach(() => {
@@ -225,5 +226,44 @@ describe("T-COOKIE-07: consent semantics are unchanged", () => {
       accepted: true,
       prefs: { analytics: true, advertising: false },
     })
+  })
+})
+
+
+describe("T-COOKIE-08: optional scripts wait for consent", () => {
+  it("does not load Google Tag Manager before consent", async () => {
+    render(<CookieConsent />)
+    await expectBannerVisible()
+    expect(document.getElementById("gtm-script")).toBeNull()
+  })
+
+  it("loads Google Tag Manager only when analytics and advertising are both granted", async () => {
+    render(<CookieConsent />)
+    await expectBannerVisible()
+    fireEvent.click(screen.getByRole("button", { name: "Accept All" }))
+    expect(document.getElementById("gtm-script")).not.toBeNull()
+  })
+
+  it("does not load Google Tag Manager for analytics-only consent", async () => {
+    render(<CookieConsent />)
+    await expectBannerVisible()
+    fireEvent.click(screen.getByRole("button", { name: "Customize" }))
+    fireEvent.click(screen.getByRole("checkbox", { name: /Analytics/ }))
+    fireEvent.click(screen.getByRole("button", { name: "Save Preferences" }))
+    expect(document.getElementById("ga-gtag")).not.toBeNull()
+    expect(document.getElementById("clarity-dynamic")).not.toBeNull()
+    expect(document.getElementById("adsense-script")).toBeNull()
+    expect(document.getElementById("gtm-script")).toBeNull()
+  })
+
+  it("lets returning visitors reopen their saved preferences", async () => {
+    localStorage.setItem(KEY, JSON.stringify({ accepted: true, prefs: { analytics: true, advertising: true } }))
+    render(<CookieConsent />)
+    await sleep(100)
+    expect(banner()).toBeNull()
+    window.dispatchEvent(new Event("pilotstack:open-cookie-settings"))
+    expect(await screen.findByRole("button", { name: "Save Preferences" })).toBeInTheDocument()
+    expect(screen.getByRole("checkbox", { name: /Analytics/ })).toBeChecked()
+    expect(screen.getByRole("checkbox", { name: /Advertising/ })).toBeChecked()
   })
 })

@@ -4,7 +4,6 @@ import "./globals.css"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { ThemeProvider } from "@/components/theme-provider"
-import { GTMScript } from "@/components/analytics/gtm"
 import { ClientLayout } from "@/components/layout/client-layout"
 import { OrganizationSchema, WebsiteSchema, SiteNavigationSchema } from "@/components/seo/json-ld"
 import { siteConfig, navLinks } from "@/lib/constants"
@@ -121,17 +120,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
-        <GTMScript />
         <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name}`} href="/rss.xml" />
 
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <span dangerouslySetInnerHTML={{ __html: "<!--email_off-->" }} />
-        <noscript>
-          <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KMQBGRJW"
-            height="0" width="0" style={{ display: "none", visibility: "hidden" }}>
-          </iframe>
-        </noscript>
         <ThemeProvider>
           <a href="#main-content" className="skip-to-content">
             Skip to main content
