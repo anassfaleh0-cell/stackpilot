@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-09T06:43:14.306Z",
+  "generatedAt": "2026-10-09T06:44:12.046Z",
   "summary": {
     "totalFiles": 1940,
-    "totalKeep": 1527,
-    "totalNoindex": 413
+    "totalKeep": 1429,
+    "totalNoindex": 511
   },
   "directories": {
     "reviews": {
@@ -1336,6 +1336,11 @@
     "alternatives": {
       "total": 101,
       "keep": [
+        "clickup-alternatives",
+        "linear-alternatives",
+        "notion-alternatives"
+      ],
+      "noindex": [
         "1password-alternatives",
         "adp-alternatives",
         "affinity-alternatives",
@@ -1351,7 +1356,6 @@
         "canva-alternatives",
         "chatgpt-alternatives",
         "circleci-alternatives",
-        "clickup-alternatives",
         "close-crm-alternatives",
         "copper-crm-alternatives",
         "copy-ai-alternatives",
@@ -1382,7 +1386,6 @@
         "jfrog-alternatives",
         "jira-alternatives",
         "lever-alternatives",
-        "linear-alternatives",
         "mailchimp-alternatives",
         "marketo-alternatives",
         "microsoft-teams-alternatives",
@@ -1391,7 +1394,6 @@
         "monday-com-alternatives",
         "netlify-alternatives",
         "new-relic-alternatives",
-        "notion-alternatives",
         "obsidian-alternatives",
         "okta-alternatives",
         "optimizely-alternatives",
@@ -1437,8 +1439,7 @@
         "zoho-crm-alternatives",
         "zoho-people-alternatives",
         "zoom-alternatives"
-      ],
-      "noindex": []
+      ]
     },
     "best": {
       "total": 196,
