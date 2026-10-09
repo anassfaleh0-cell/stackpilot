@@ -618,8 +618,8 @@ export function getComparison(slug: string): ComparisonContent | null {
     return null
   }
   const cmp = readJson<ComparisonContent>(file)
-  // Explicitly unpublished records must not resolve as public pages, internal-link targets, or sitemap entries.
-  if (cmp.published === false) {
+  // Only the explicit editorial status controls publication; legacy `published` flags are inconsistent across old records.
+  if (cmp.publicationStatus === "draft") {
     comparisonCache.set(slug, null)
     return null
   }
