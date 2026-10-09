@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const noindexed = isNoindexed("comparisons", slug)
 
   return {
-    ...createMetadata({ title: `${cmp.tool1} vs ${cmp.tool2} (2026): Which One Wins?`, description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated, articleSection: cmp.category, readingTime }),
+    ...createMetadata({ title: `${cmp.tool1} vs ${cmp.tool2} (2026): ${cmp.winnerVerified === true ? "Which One Wins?" : "How to Choose"}`, description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated, articleSection: cmp.category, readingTime }),
     robots: noindexed
       ? { index: false, follow: true }
       : { index: true, follow: true },
