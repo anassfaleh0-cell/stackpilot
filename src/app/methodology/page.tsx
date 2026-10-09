@@ -53,7 +53,7 @@ export default function MethodologyPage() {
   const currentYear = new Date().getFullYear()
   return (
     <>
-      <ArticleSchema title="Review Methodology | Evidence, Scoring & Editorial Standards" description="How PilotStack evaluates software, handles sources and corrections, and audits older ratings and review-count figures for verifiable provenance." publishedAt="2026-01-15" author="PilotStack Team" url={`${site.url}/methodology`} keywords={["software review methodology", "scoring rubric", "editorial standards", "review transparency"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
+      <ArticleSchema title="Review Methodology | Evidence, Scoring & Editorial Standards" description="How PilotStack evaluates software, handles sources and corrections, and audits older ratings and review-count figures for verifiable provenance." publishedAt="2026-01-15" updatedAt="2026-10-09" author="PilotStack Team" url={`${site.url}/methodology`} keywords={["software review methodology", "scoring rubric", "editorial standards", "review transparency"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
       <BreadcrumbSchema items={[
         { name: "Home", href: "/" },
         { name: "Review Methodology", href: "/methodology" },
@@ -67,7 +67,7 @@ export default function MethodologyPage() {
             <Badge variant="default" className="mb-4">Our Process</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">How We Review Software</h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Transparency matters. Here is exactly how every page on PilotStack is built, scored, and sourced.
+              Transparency matters. This page explains our evidence standard, current limitations, and how we handle corrections while older records undergo source review.
             </p>
 
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
@@ -147,7 +147,7 @@ export default function MethodologyPage() {
               <h2 className="text-2xl font-bold mt-12 mb-4">Fact-Checking & Corrections</h2>
               <p className="text-muted-foreground mb-4">
                 We prioritize vendor documentation for capabilities and pricing, and independent source pages for external ratings and review counts. A source must be recorded with enough context to check the claim. If the source is missing, stale, or contradictory, we qualify or omit the claim rather than imply it is confirmed.
-                When a correction is made the page&apos;s last-reviewed date is updated. Readers can report errors
+                When a correction is made, we update the page&apos;s review date where relevant. Readers can report errors
                 via our <Link href="/contact" className="text-primary hover:underline">contact form</Link>.
               </p>
 
@@ -176,7 +176,7 @@ export default function MethodologyPage() {
               </p>
 
               <p className="text-xs text-muted-foreground-foreground mt-8">
-                Methodology last updated: July {currentYear}. We review and update this methodology annually or
+                Methodology last updated: October {currentYear}. We review and update this methodology when the evidence standard or site-wide audit process changes, and
                 when industry standards for software reviews evolve.
               </p>
             </div>
