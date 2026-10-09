@@ -494,15 +494,17 @@ function buildReviewSections(review: ReviewContent): ContentSection[] {
   const integrations = Array.isArray(company?.integrations) ? company.integrations.slice(0, 8) : []
   const certifications = Array.isArray(company?.securityCertifications) ? company.securityCertifications.slice(0, 5) : []
   const compliance = Array.isArray(company?.compliance) ? company.compliance.slice(0, 5) : []
-  const targetUsers = Array.isArray(company?.targetUsers)
-    ? company.targetUsers.slice(0, 5)
-    : typeof company?.targetUsers === "string" && company.targetUsers.trim()
-      ? [company.targetUsers.trim()]
+  const rawTargetUsers: unknown = company?.targetUsers
+  const targetUsers = Array.isArray(rawTargetUsers)
+    ? rawTargetUsers.filter((value): value is string => typeof value === "string").slice(0, 5)
+    : typeof rawTargetUsers === "string" && rawTargetUsers.trim()
+      ? [rawTargetUsers.trim()]
       : []
-  const industries = Array.isArray(company?.industries)
-    ? company.industries.slice(0, 5)
-    : typeof company?.industries === "string" && company.industries.trim()
-      ? [company.industries.trim()]
+  const rawIndustries: unknown = company?.industries
+  const industries = Array.isArray(rawIndustries)
+    ? rawIndustries.filter((value): value is string => typeof value === "string").slice(0, 5)
+    : typeof rawIndustries === "string" && rawIndustries.trim()
+      ? [rawIndustries.trim()]
       : []
   const pros = sanitizeList(review.pros, 5)
   const cons = sanitizeList(review.cons, 5)
