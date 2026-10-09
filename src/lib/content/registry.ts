@@ -99,6 +99,9 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
   /organizations see measurable improvements/i,
   /typical roi payback/i,
   /first-year roi/i,
+  /we compared .* with real ecommerce stores/i,
+  /(?:the )?\\d+ that drive the most revenue/i,
+  /drive the most revenue through/i,
 ]
 
 function sanitizeMalformedPricingText(value: string): string {
@@ -813,13 +816,21 @@ export function getAllStatistics(): StatisticContent[] {
     .map((f) => readJson<StatisticContent>(path.join(CONTENT_DIR, "statistics", f)))
 }
 
+function sanitizeBestDescription(description: string, title: string, category: string, picks: BestContent["picks"]): string {
+  const cleaned = sanitizeUnsupportedClaims(sanitizeMalformedPricingText(description)).replace(/\\s+/g, " ").trim()
+  if (cleaned.length >= 90) return trimText(cleaned, 700)
+  const names = picks.slice(0, 4).map((pick) => pick.toolName).filter(Boolean)
+  const shortlist = names.length ? ` Recorded options include ${names.join(", ")}.` : ""
+  return trimText(`Compare ${category.toLowerCase()} software using the recorded selection criteria, product profiles, feature trade-offs, and pricing context. Verify current plans, limits, and prices with each vendor before making a purchase.${shortlist}`, 700)
+}
+
 export function getBest(slug: string): BestContent | null {
   const file = path.join(CONTENT_DIR, "best", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const best = readJson<BestContent>(file)
   return {
     ...best,
-    description: trimText(best.description, 700),
+    description: sanitizeBestDescription(best.description, best.title, best.category, best.picks),
     criteria: sanitizeList(best.criteria, 8),
     picks: best.picks.slice(0, 10).map((p) => {
       const review = getReview(p.toolSlug)
