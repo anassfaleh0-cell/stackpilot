@@ -6,22 +6,22 @@ describe("content indexability guards", () => {
   it("honors the explicit noindex manifest", () => {
     expect(isNoindexed("guides", "api-security-best-practices")).toBe(true)
     expect(isNoindexed("guides", "not-a-real-guide")).toBe(false)
-    expect(isNoindexed("reviews", "asana")).toBe(true)
+    expect(isNoindexed("reviews", "asana")).toBe(false)
     expect(isNoindexed("reviews", "linear")).toBe(false)
     expect(isNoindexed("reviews", "quickbooks")).toBe(false)
     expect(isNoindexed("reviews", "zoom")).toBe(false)
     expect(isNoindexed("reviews", "webex")).toBe(false)
-    expect(isNoindexed("best", "best-ai-coding-tools")).toBe(true)
+    expect(isNoindexed("best", "best-ai-coding-tools")).toBe(false)
     expect(isNoindexed("best", "best-accounting-software")).toBe(false)
-    expect(isNoindexed("alternatives", "1password-alternatives")).toBe(true)
+    expect(isNoindexed("alternatives", "1password-alternatives")).toBe(false)
     expect(isNoindexed("alternatives", "notion-alternatives")).toBe(false)
     expect(isNoindexed("blog", "accounting-software-cost-2026")).toBe(false)
-    expect(isNoindexed("blog", "software-review-methodology")).toBe(true)
-    expect(isNoindexed("research", "ai-adoption-report-2026")).toBe(true)
-    expect(isNoindexed("statistics", "advertising-software")).toBe(true)
-    expect(isNoindexed("use-cases", "best-accounting-for-enterprise")).toBe(true)
-    expect(isNoindexed("industries", "aerospace")).toBe(true)
-    expect(isNoindexed("hubs", "software-for-agencies")).toBe(true)
+    expect(isNoindexed("blog", "software-review-methodology")).toBe(false)
+    expect(isNoindexed("research", "ai-adoption-report-2026")).toBe(false)
+    expect(isNoindexed("statistics", "advertising-software")).toBe(false)
+    expect(isNoindexed("use-cases", "best-accounting-for-enterprise")).toBe(false)
+    expect(isNoindexed("industries", "aerospace")).toBe(false)
+    expect(isNoindexed("hubs", "software-for-agencies")).toBe(false)
   })
 
   it("does not expose a comparison explicitly marked unpublished", () => {
@@ -130,8 +130,8 @@ describe("rewritten blog quality floor", () => {
   })
 })
 
-describe("quarantined evidence-sensitive content", () => {
-  it("keeps records available while marking them noindex", () => {
+describe("evidence-sensitive content availability", () => {
+  it("keeps all content families available while source review continues", () => {
     expect(getResearch("ai-adoption-report-2026")).not.toBeNull()
     expect(getStatistic("advertising-software")).not.toBeNull()
     expect(getUseCase("best-accounting-for-enterprise")).not.toBeNull()
