@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { isNoindexed } from "@/lib/noindex"
-import { getAlternative, getBest, getComparison, getGuide, getReview } from "@/lib/content/registry"
+import { getAlternative, getBest, getBlogPost, getComparison, getGuide, getReview } from "@/lib/content/registry"
 
 describe("content indexability guards", () => {
   it("honors the explicit noindex manifest", () => {
@@ -15,6 +15,8 @@ describe("content indexability guards", () => {
     expect(isNoindexed("best", "best-accounting-software")).toBe(false)
     expect(isNoindexed("alternatives", "1password-alternatives")).toBe(true)
     expect(isNoindexed("alternatives", "notion-alternatives")).toBe(false)
+    expect(isNoindexed("blog", "accounting-software-cost-2026")).toBe(false)
+    expect(isNoindexed("blog", "software-review-methodology")).toBe(true)
   })
 
   it("does not expose a comparison explicitly marked unpublished", () => {
@@ -104,5 +106,19 @@ describe("rewritten alternative-page quality floor", () => {
     const page = getAlternative("notion-alternatives")
     expect(page!.alternatives.map((item) => item.name)).not.toContain("Calendly")
     expect(page!.alternatives.map((item) => item.name)).not.toContain("Todoist")
+  })
+})
+
+describe("rewritten blog quality floor", () => {
+  for (const slug of ["accounting-software-cost-2026", "accounts-payable-automation", "agile-vs-waterfall-software"]) {
+    it(`${slug} has substantive original content without runtime padding`, () => {
+      const post = getBlogPost(slug)
+      expect(post).not.toBeNull()
+      expect(post!.body.split(/\s+/).filter(Boolean).length).toBeGreaterThanOrEqual(700)
+      expect(post!.body).not.toMatch(/This topic is most useful when it is connected to a real decision/)
+    })
+  }
+  it("does not expose unrewritten blog posts through the public registry", () => {
+    expect(getBlogPost("software-review-methodology")).toBeNull()
   })
 })
