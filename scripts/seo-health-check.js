@@ -148,9 +148,9 @@ function checkAdsTxt() {
   }
 }
 
-// ─── 3. Content Quality ─────────────────────────────────────────────────────
+// ─── 4. Content Quality ─────────────────────────────────────────────────────
 function checkContentQuality() {
-  console.log("\n\x1b[1m3. Content Quality (Thin Content Detection)\x1b[0m")
+  console.log("\n\x1b[1m4. Content Quality (Thin Content Detection)\x1b[0m")
 
   const noindexData = readJson(NOINDEX_FILE)
   const noindexSets = {}
@@ -289,9 +289,9 @@ function checkContentQuality() {
   }
 }
 
-// ─── 4. Noindex Management ──────────────────────────────────────────────────
+// ─── 5. Noindex Management ──────────────────────────────────────────────────
 function checkNoindex() {
-  console.log("\n\x1b[1m4. Noindex Management\x1b[0m")
+  console.log("\n\x1b[1m5. Noindex Management\x1b[0m")
 
   const noindexData = readJson(NOINDEX_FILE)
   if (!noindexData) {
@@ -350,9 +350,9 @@ function checkNoindex() {
   }
 }
 
-// ─── 5. Structured Data ─────────────────────────────────────────────────────
+// ─── 6. Structured Data ─────────────────────────────────────────────────────
 function checkStructuredData() {
-  console.log("\n\x1b[1m5. Structured Data Coverage\x1b[0m")
+  console.log("\n\x1b[1m6. Structured Data Coverage\x1b[0m")
 
   const jsonLdPath = path.resolve(process.cwd(), "src/components/seo/json-ld.tsx")
   if (!fs.existsSync(jsonLdPath)) {
@@ -397,9 +397,9 @@ function checkStructuredData() {
   }
 }
 
-// ─── 6. Internal Linking ────────────────────────────────────────────────────
+// ─── 7. Internal Linking ────────────────────────────────────────────────────
 function checkInternalLinks() {
-  console.log("\n\x1b[1m6. Internal Linking Health\x1b[0m")
+  console.log("\n\x1b[1m7. Internal Linking Health\x1b[0m")
 
   const internalLinksPath = path.resolve(process.cwd(), "src/lib/content/internal-links.ts")
   if (!fs.existsSync(internalLinksPath)) {
@@ -445,9 +445,9 @@ function checkInternalLinks() {
   }
 }
 
-// ─── 7. Performance Hints ───────────────────────────────────────────────────
+// ─── 8. Performance Hints ───────────────────────────────────────────────────
 function checkPerformance() {
-  console.log("\n\x1b[1m7. Performance & Crawl Optimization\x1b[0m")
+  console.log("\n\x1b[1m8. Performance & Crawl Optimization\x1b[0m")
 
   const layoutPath = path.resolve(process.cwd(), "src/app/layout.tsx")
   if (!fs.existsSync(layoutPath)) {
@@ -494,9 +494,9 @@ function checkPerformance() {
   }
 }
 
-// ─── 8. E-E-A-T Signals ─────────────────────────────────────────────────────
+// ─── 9. E-E-A-T Signals ─────────────────────────────────────────────────────
 function checkEEAT() {
-  console.log("\n\x1b[1m8. E-E-A-T Signals\x1b[0m")
+  console.log("\n\x1b[1m9. E-E-A-T Signals\x1b[0m")
 
   // Check for author pages
   const authorsDir = path.resolve(process.cwd(), "content/authors")
