@@ -1,11 +1,11 @@
 {
   "slug": "marketing-attribution-guide",
   "title": "Marketing Attribution: A Practical Guide to Choosing and Validating a Model",
-  "description": "A practical framework for defining conversions, comparing attribution models, validating tracking, and reporting marketing performance without overstating what the data proves.",
+  "description": "A practical framework for defining conversions, choosing attribution models, validating tracking, and applying evaluation criteria without overstating what the data proves.",
   "category": "Marketing & SEO",
   "difficulty": "Intermediate",
   "author": "PilotStack Team",
-  "readingTime": 12,
+  "readingTime": 4,
   "relatedTools": [
     "google-analytics",
     "mixpanel",
@@ -28,7 +28,7 @@
     },
     {
       "title": "Audit Measurement Before Comparing Channels",
-      "body": "Create a measurement map with one row per conversion: event name, trigger, destination, deduplication rule, consent requirement, owner, and validation method. Check that a purchase fires once, values and currencies are consistent, form submissions are not counted again on a thank-you-page refresh, and cross-domain journeys are handled intentionally. Document gaps caused by consent choices, browser restrictions, offline sales, ad blockers, or untagged links. If tracking changed mid-period, mark it in the report; a change in recorded conversions may reflect instrumentation rather than demand.",
+      "body": "Create a measurement map with one row per conversion: event name, trigger, destination, deduplication rule, consent requirement, owner, and validation method. Check that a purchase fires once to prevent double-counted conversions, values and currencies are consistent, form submissions are not counted again on a thank-you-page refresh, and cross-domain and cross-device journeys are handled intentionally. Document gaps caused by consent choices, browser restrictions, offline sales, ad blockers, or untagged links. If tracking changed mid-period, mark it in the report; a change in recorded conversions may reflect instrumentation rather than demand.",
       "type": "text"
     },
     {
