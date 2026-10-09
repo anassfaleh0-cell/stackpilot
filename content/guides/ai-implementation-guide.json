@@ -1,55 +1,61 @@
 {
   "slug": "ai-implementation-guide",
-  "title": "AI Implementation: A Practical Guide to Pilots, Risk, and Adoption",
-  "description": "How to select an AI use case, evaluate outputs, protect data, measure value, and roll out AI with human oversight.",
+  "title": "AI Implementation Guide: How to Choose the Right AI & Machine Learning Platform",
+  "description": "Practical ai implementation guidance: decision criteria, implementation steps, risks, evaluation checks, and a usable go/no-go checklist. Updated October 2026.",
   "category": "AI & Machine Learning",
   "difficulty": "Intermediate",
-  "author": "PilotStack Team",
-  "readingTime": 9,
+  "author": "Marcus Rivera",
+  "readingTime": 3,
   "relatedTools": [
     "chatgpt",
     "claude",
-    "gemini",
-    "perplexity"
+    "gemini"
   ],
   "relatedGuides": [
-    "software-evaluation-framework"
+    "ai-risk-management",
+    "how-to-choose-ai-tools",
+    "vendor-risk-assessment"
   ],
   "lastUpdated": "2026-10-09",
   "sections": [
     {
-      "title": "Choose a bounded use case",
-      "body": "Start with a repeated task where the input, expected output, and cost of an error can be described. Examples include drafting a first version of an internal summary, classifying support requests for human review, or finding information in an approved knowledge base. Avoid beginning with an open-ended goal such as 'add AI everywhere.' Record the current process, time spent, failure rate, and the human decision that must remain accountable. Exclude sensitive or regulated data until the legal, security, and vendor terms have been reviewed.",
+      "title": "Define a narrow use case",
+      "body": "Choose one repeatable task with a clear input and a reviewable output, such as classifying support tickets, drafting an internal summary, or extracting fields from approved documents. Record the current time per task, error rate, rework, and who is accountable for the final decision. Avoid starting with a vague goal like 'use AI everywhere'. Do not send confidential, personal, regulated, or customer data to a service until its data-handling terms and your organization's policy have been reviewed.",
       "type": "text"
     },
     {
-      "title": "Create an evaluation set",
-      "body": "Before choosing a model or vendor, assemble representative examples that reflect routine work, edge cases, ambiguous requests, and known failure modes. Have qualified reviewers define what a correct, useful, and unsafe answer looks like. Score factual accuracy, completeness, consistency, latency, and the amount of editing required. Repeat the same evaluation when changing model versions or prompts. A handful of impressive demonstrations is not enough to estimate performance in everyday use.",
+      "title": "Decide whether AI is appropriate",
+      "body": "First compare the proposed AI workflow with a rules-based script, search, a conventional automation, or a process change. AI is most useful when inputs vary and a probabilistic answer can be reviewed; it is a poor fit when the output must be perfectly deterministic and mistakes are hard to detect. Define which errors are tolerable, which require human approval, and which should stop the workflow entirely. If no one can judge whether an output is correct, do not automate the decision yet.",
       "type": "text"
     },
     {
-      "title": "Review data and security boundaries",
-      "body": "Map which data is sent to the service, who can access prompts and outputs, how long records are retained, and whether submitted data may be used for model training. Confirm account-level controls, logging, deletion, regional requirements, and vendor subprocessors. Apply least-privilege access and do not paste credentials, customer secrets, or confidential records into an unapproved tool. For retrieval-based systems, test whether users can retrieve information they are not authorized to see.",
+      "title": "Prepare representative evaluation data",
+      "body": "Build a small test set from realistic examples, including normal cases, ambiguous inputs, edge cases, and examples that should be refused or escalated. Remove or mask sensitive information where possible. Write expected outcomes before testing vendors. Keep the test set separate from prompt tuning so that improvements are not measured only on examples the team has already seen. Record the model, settings, prompt version, date, and scoring method for every run.",
       "type": "text"
     },
     {
-      "title": "Keep humans in the right decisions",
-      "body": "Assign a named reviewer for consequential outputs and define when the system must abstain or escalate. Treat generated content as a proposal, not as evidence. Require source links for research tasks, validate calculations in deterministic tools, and prevent autonomous external actions until permissions and recovery paths have been tested. Give users a simple way to flag wrong answers and capture the correction so evaluation data improves over time.",
+      "title": "Compare models and services fairly",
+      "body": "Test each candidate on the same tasks and score correctness, unsupported claims, instruction following, latency, availability, and cost at expected volume. Also examine retention and training policies, access controls, regional processing, export options, rate limits, and what happens when a provider is unavailable. Do not infer that a model is suitable from a polished demo or a general benchmark. Verify current capabilities and contractual terms in the provider's own documentation.",
       "type": "text"
     },
     {
-      "title": "Pilot against a baseline",
-      "body": "Run the pilot with a small group and compare it with the existing workflow. Measure accepted output rate, correction time, error severity, latency, cost per completed task, and user confidence. Track cases where the model makes a plausible but incorrect claim separately from obvious failures. Set thresholds in advance for expanding, changing, or stopping the experiment. Include operational costs such as prompt maintenance, monitoring, review, and support rather than counting only API usage.",
+      "title": "Design human review and fallbacks",
+      "body": "Specify which outputs can be used automatically, which need a reviewer, and which must be escalated. Make uncertainty visible where the system can estimate it, but do not treat a confidence score as proof of correctness. Provide a way for users to report bad output and recover the original input. If the model or a dependent service fails, the workflow should pause safely or fall back to a documented manual process rather than silently producing fabricated results.",
       "type": "text"
     },
     {
-      "title": "Plan integration and ownership",
-      "body": "Decide where the tool fits in the workflow, how users authenticate, which systems it can read or change, and who handles outages or vendor changes. Start with read-only or draft-only access where possible. Version prompts, evaluation sets, and model settings; maintain a rollback path to the prior workflow. Train users on limitations and data handling, and make the approved use cases easy to find.",
+      "title": "Pilot with measurable acceptance criteria",
+      "body": "Run the system in shadow mode or with a small group before allowing it to change customer-facing or high-impact outcomes. Compare its output with the current process and review a sample of both successes and failures. Set a stop condition in advance, such as a critical privacy incident, a defined error threshold, or costs exceeding the agreed limit. Track the time spent reviewing and correcting output; apparent automation savings disappear if the human verification burden is ignored.",
       "type": "text"
     },
     {
-      "title": "Review value after launch",
-      "body": "After 30, 60, and 90 days, compare actual results with the original baseline. Look for changes in quality and downstream rework, not just number of prompts or generated words. Re-check access controls, retention settings, cost, and model behavior after product updates. Scale only when the use case remains valuable, the failure modes are understood, and the organization can support it. If the measured benefit does not justify the full cost and risk, narrow or retire the implementation.",
+      "title": "Plan governance and operating costs",
+      "body": "Name an owner for the use case, data, prompt or workflow versions, access permissions, incident response, and periodic evaluation. Budget for inference, retrieval, integrations, monitoring, human review, and maintenance—not only the displayed per-token price. Define how users can appeal or correct an outcome and how the organization will retire the system if performance degrades. Re-test after changing the model, prompt, source documents, or connected tools.",
+      "type": "text"
+    },
+    {
+      "title": "Launch decision checklist",
+      "body": "Proceed only when the test set meets the agreed quality threshold, data use is approved, reviewers are trained, fallback behavior works, and expected cost is understood. Publish a short user guide that explains what the system can and cannot do. Review performance after launch using real outcomes, with access limited to people who need it. If the pilot cannot show a measurable improvement over the existing workflow, stop or redesign it rather than expanding because AI adoption is a goal in itself.",
       "type": "text"
     }
   ]

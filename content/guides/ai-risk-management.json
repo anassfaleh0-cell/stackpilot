@@ -1,53 +1,61 @@
 {
   "slug": "ai-risk-management",
-  "title": "AI Risk Management: A Practical Governance and Testing Guide",
-  "description": "A working framework for identifying AI risks, testing failure modes, assigning ownership, and monitoring systems after release.",
+  "title": "AI Risk Management Guide: How to Choose the Right AI & Machine Learning Platform",
+  "description": "Practical ai risk management guidance: decision criteria, implementation steps, risks, evaluation checks, and a usable go/no-go checklist. Updated October 2026.",
   "category": "AI & Machine Learning",
   "difficulty": "Beginner",
-  "author": "PilotStack Team",
-  "readingTime": 9,
+  "author": "Marcus Rivera",
+  "readingTime": 3,
   "relatedTools": [
-    "chatgpt",
-    "claude",
-    "gemini",
-    "okta"
+    "okta",
+    "crowdstrike",
+    "sentinelone"
   ],
-  "relatedGuides": [],
+  "relatedGuides": [
+    "ai-implementation-guide",
+    "data-privacy-compliance",
+    "api-security-best-practices"
+  ],
   "lastUpdated": "2026-10-09",
   "sections": [
     {
-      "title": "Inventory the AI system and its purpose",
-      "body": "Record each AI use case, business owner, vendor, model or service, data sources, users, and actions the system can take. State what the system is allowed to do and what is explicitly out of scope. Risk depends on context: an internal brainstorming assistant has a different impact profile from a tool that influences eligibility, financial decisions, or access to essential services. Do not classify risk from the model name alone; consider the whole workflow and the people affected.",
+      "title": "Create an inventory of AI use",
+      "body": "List AI systems used by employees, embedded in purchased software, or connected to internal data. For each, record the business owner, purpose, users, data types, provider, model or feature, external integrations, and whether output affects customers or consequential decisions. Include unofficial tools and features enabled inside existing subscriptions. An inventory makes risk review concrete and prevents the team from applying one generic control to very different use cases.",
       "type": "text"
     },
     {
-      "title": "Assess impact and likelihood",
-      "body": "For each use case, identify harms from incorrect output, bias, privacy leakage, prompt injection, misuse, service interruption, and over-reliance. Estimate severity and likelihood using a documented scale, and record the evidence behind the rating. Include downstream effects: a small error repeated at scale can be more serious than an isolated visible failure. Prioritize controls for risks that could materially affect people, security, compliance, or business continuity.",
-      "type": "text"
-    },
-    {
-      "title": "Test realistic failure modes",
-      "body": "Build a test set containing normal requests, ambiguous inputs, adversarial instructions, outdated facts, missing data, and attempts to retrieve restricted information. Measure both successful completion and safe refusal. Have domain experts review cases where the right answer is uncertain. Repeat tests after changes to the model, prompts, retrieval sources, integrations, or permissions. Record severity and reproducibility, not just a single pass/fail score.",
+      "title": "Classify risk by impact",
+      "body": "Assess what could happen if the system is wrong, manipulated, unavailable, or exposes data. A drafting assistant for internal brainstorming has a different risk profile from a system that ranks job applicants, approves credit, handles medical information, or can execute production actions. Rate impact, likelihood, exposure, and detectability separately; record the reasoning and the person who accepted any residual risk. Escalate high-impact use cases for legal, security, privacy, and domain review before deployment.",
       "type": "text"
     },
     {
       "title": "Protect data and access",
-      "body": "Minimize the data sent to the system, separate user permissions from model instructions, and apply least privilege to connected tools. Treat retrieved documents and user-provided text as untrusted input. Keep secrets out of prompts, log access appropriately, and verify deletion and retention behavior with the vendor. For retrieval systems, test that access rules are enforced at retrieval time and not merely described in the prompt.",
+      "body": "Map the data sent to the model, retrieved by connectors, stored in logs, and returned to users. Minimize the data collected, restrict access by role, remove secrets from prompts, and verify provider retention, training, deletion, and subprocessors in current contract terms. Test whether one user can retrieve another user's documents through search or retrieval. Keep credentials out of model context and require explicit authorization before AI-generated actions can read, change, or transmit sensitive resources.",
       "type": "text"
     },
     {
-      "title": "Define human oversight and escalation",
-      "body": "Specify which outputs require review, who can override a result, and what happens when confidence is low or the system is unavailable. Reviewers need the time, context, and authority to reject a recommendation. For high-impact uses, preserve a non-AI fallback and provide a clear route to challenge or correct an outcome. Avoid nominal human approval that simply rubber-stamps the model.",
+      "title": "Test misuse and failure cases",
+      "body": "Create tests for prompt injection, malicious documents, data leakage, fabricated citations, biased or inconsistent output, unsafe tool calls, and unexpected inputs. Test the entire application—including retrieval, permissions, logging, and downstream actions—not just the model in isolation. Record the expected safe behavior for each test and retest after model or prompt changes. A red-team exercise is useful only when findings have owners, severity, remediation dates, and evidence that the fix works.",
       "type": "text"
     },
     {
-      "title": "Set release gates and accountability",
-      "body": "Name an accountable owner for each material risk and define release criteria, incident severity levels, response times, and rollback authority. Keep evidence of evaluations, approved configurations, vendor terms, known limitations, and exceptions. Involve legal, privacy, security, accessibility, and domain experts where the use case requires it. A policy is useful only when teams can follow it during ordinary delivery.",
+      "title": "Keep humans accountable",
+      "body": "Define when a person must review output, how that person sees supporting evidence, and how to reject or correct a recommendation. Avoid rubber-stamp approval by giving reviewers enough time, context, and authority to disagree. For decisions that materially affect people, provide a clear escalation or appeal path and retain the records needed to investigate an error. Responsibility remains with the organization deploying the system; a vendor's general assurance is not a substitute for local controls.",
       "type": "text"
     },
     {
-      "title": "Monitor, respond, and reassess",
-      "body": "After release, monitor error reports, output quality, cost, latency, unusual access patterns, and changes in input distribution. Establish a way to pause a risky feature, revert a prompt or model change, notify affected users, and preserve evidence for investigation. Reassess risk when the purpose, data, users, or connected actions change. Governance should be a repeatable operating process, not a one-time checklist.",
+      "title": "Monitor and respond to incidents",
+      "body": "Track quality failures, refusal behavior, data access anomalies, latency, cost spikes, user reports, and changes in usage. Decide in advance who can disable the feature, revoke credentials, switch providers, and notify affected parties. Keep logs proportionate to the risk and avoid retaining sensitive prompts indefinitely without a justified purpose. Exercise the incident plan with a realistic scenario so that a safe shutdown does not depend on one engineer being available.",
+      "type": "text"
+    },
+    {
+      "title": "Document evidence and ownership",
+      "body": "Maintain a risk register that links each identified risk to a control, control owner, evidence, test date, and residual-risk decision. Verify applicable laws and sector rules with qualified counsel rather than relying on a generic checklist. Require vendors to explain relevant data processing, security measures, service boundaries, and change notifications. Reassess when the use case, model, data sources, permissions, user population, or legal environment changes.",
+      "type": "text"
+    },
+    {
+      "title": "Go-live gate",
+      "body": "Do not launch until the system has an approved owner and purpose, data handling is reviewed, high-severity tests are addressed, access and logging are configured, reviewers know their responsibilities, and a rollback or disable path is proven. Set review dates and conditions that trigger reassessment. A practical AI risk program is a continuous cycle of inventory, evaluation, mitigation, monitoring, and learning—not a one-time policy document or a claim that a tool is 'safe' in every context.",
       "type": "text"
     }
   ]

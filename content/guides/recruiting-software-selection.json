@@ -1,53 +1,62 @@
 {
-    "slug":  "recruiting-software-selection",
-    "title":  "Recruiting Software Selection Guide: How to Choose the Right HR \u0026 People Platform",
-    "description":  "Beginner HR \u0026 People guide (~13 min read): how to evaluate the right Recruiting Software. Choosing the right hr \u0026 people software starts with.",
-    "category":  "HR \u0026 People",
-    "difficulty":  "Beginner",
-    "author": "Emily Nakamura",
-    "readingTime":  13,
-    "relatedTools":  [
-
-                     ],
-    "relatedGuides":  [
-
-                      ],
-    "lastUpdated":  "2026-07-20",
-    "sections":  [
-                     {
-                         "title":  "Getting Started",
-                         "body":  "Choosing the right hr \u0026 people software starts with understanding your specific requirements. Before evaluating Recruiting Software Selection Guide: How to Choose the Right HR \u0026 People Platform, take stock of your team size, budget, existing tool stack, and the primary problems you need to solve. This guide walks through the key considerations.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Selection Criteria",
-                         "body":  "When evaluating Recruiting Software Selection Guide: How to Choose the Right HR \u0026 People Platform and other hr \u0026 people platforms, focus on these criteria: feature completeness relative to your needs, integration compatibility with your existing tools, total cost of ownership including implementation and training, vendor reputation and support quality, and scalability for future growth.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Implementation Guide",
-                         "body":  "Implementing Recruiting Software Selection Guide: How to Choose the Right HR \u0026 People Platform successfully requires planning beyond the technical setup. Start with a clear use case, involve stakeholders early, allocate time for data migration and testing, and plan for team training. Most successful deployments follow a phased approach rather than a big-bang rollout.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Best Practices",
-                         "body":  "Teams that get the most value from Recruiting Software Selection Guide: How to Choose the Right HR \u0026 People Platform share common practices: they invest in initial configuration and customization, establish clear workflows and naming conventions, train all users before full rollout, regularly review usage patterns to optimize settings, and keep the platform updated.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Common Pitfalls",
-                         "body":  "The most common mistakes teams make with Recruiting Software Selection Guide: How to Choose the Right HR \u0026 People Platform include underinvesting in the initial setup, skipping user training, trying to migrate too much data at once, not defining clear success metrics upfront, and failing to get buy-in from all stakeholders before deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "ROI Analysis",
-                         "body":  "Calculating ROI for Recruiting Software Selection Guide: How to Choose the Right HR \u0026 People Platform involves both tangible savings like reduced licensing costs from tool consolidation and productivity gains from streamlined workflows, and intangible benefits like improved team satisfaction and better data-driven decision making. Most teams see positive ROI within 3-6 months of full deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Future Trends",
-                         "body":  "The hr \u0026 people category continues to evolve rapidly. Recruiting Software Selection Guide: How to Choose the Right HR \u0026 People Platform is positioned to benefit from trends like AI-powered automation, deeper integration ecosystems, and increased focus on security and compliance. Organizations should evaluate how well the platform\u0027s roadmap aligns with their own technology strategy.",
-                         "type":  "text"
-                     }
-                 ]
+  "slug": "recruiting-software-selection",
+  "title": "Recruiting Software Selection Guide: How to Choose the Right HR & People Platform",
+  "description": "Practical recruiting software selection guidance with workflow mapping, evaluation criteria, risks, and an implementation checklist.",
+  "category": "HR & People",
+  "difficulty": "Beginner",
+  "author": "Emily Nakamura",
+  "readingTime": 2,
+  "relatedTools": [
+    "greenhouse",
+    "lever",
+    "workday"
+  ],
+  "relatedGuides": [
+    "how-to-choose-hr-software",
+    "hr-software-buyers-guide",
+    "employee-onboarding-software-guide"
+  ],
+  "lastUpdated": "2026-10-09",
+  "sections": [
+    {
+      "title": "Map the hiring process",
+      "body": "Document each stage from approved headcount through sourcing, screening, interviews, offer, and handoff to onboarding. Identify where candidates wait, where information is re-entered, and which approvals are required. Define who owns each stage and what a complete handoff looks like. A recruiting system should support a clear hiring process, not simply digitize an inconsistent one.",
+      "type": "text"
+    },
+    {
+      "title": "Define candidate and job data",
+      "body": "Choose the required fields for jobs, candidates, applications, interview feedback, sources, and outcomes. Set rules for duplicate candidates, multiple applications, referrals, and rehires. Define which system owns headcount, compensation bands, and employee records. Keep structured fields limited to what supports a real decision, and avoid collecting sensitive information without a documented need.",
+      "type": "text"
+    },
+    {
+      "title": "Evaluate sourcing and candidate experience",
+      "body": "Test application forms, mobile completion, accessibility, communication templates, scheduling, candidate status updates, and withdrawal handling. Review whether candidates can understand what happens next and contact the organization when needed. Verify career-site integration and source tracking. Candidate experience should be evaluated with realistic applications, not only by how quickly an internal recruiter can move a record.",
+      "type": "text"
+    },
+    {
+      "title": "Structure interviews and decisions",
+      "body": "Test scorecards, role-specific competencies, interviewer permissions, feedback deadlines, and decision logs. Define how the system handles conflicting feedback and changes to an interview plan. Keep evaluation criteria job-related and consistent, and involve qualified HR/legal owners in policies that affect hiring decisions. Avoid treating a numeric score as a substitute for documented evidence and accountable human judgment.",
+      "type": "text"
+    },
+    {
+      "title": "Connect the hiring stack",
+      "body": "Map integration with HRIS, identity, calendar, email, background checks, assessments, job boards, and onboarding. Test failed synchronization, duplicate records, and permissions for external recruiters. Confirm how candidate data is transferred after hire and how records are retained or deleted for unsuccessful applicants. Make the flow between recruiting and HR operations explicit before enabling automation.",
+      "type": "text"
+    },
+    {
+      "title": "Measure process quality",
+      "body": "Track time in stage, candidate drop-off, interviewer feedback completion, offer acceptance, source quality, and recruiter workload. Define the calculation and exclusions for each metric so that teams can compare periods. Interpret time-to-hire alongside role complexity and candidate experience; a faster process is not necessarily better if it produces poor decisions or loses strong candidates.",
+      "type": "text"
+    },
+    {
+      "title": "Check privacy and access controls",
+      "body": "Review who can view candidate profiles, compensation details, interview notes, and diversity information where lawfully collected. Test external recruiter access and offboarding. Verify retention, deletion, export, audit logs, and data-processing terms. Consult qualified HR/legal guidance for jurisdiction-specific requirements and ensure the configuration reflects the policy.",
+      "type": "text"
+    },
+    {
+      "title": "Selection checklist",
+      "body": "Pilot one role from opening approval through onboarding handoff. Verify data quality, candidate communications, interview governance, integration behavior, reporting, and access controls. Choose a platform that fits the team's hiring volume and maintenance capacity. Review workflows after major changes to recruiting strategy, organization structure, or legal requirements.",
+      "type": "text"
+    }
+  ]
 }
