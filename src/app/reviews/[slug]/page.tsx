@@ -91,10 +91,13 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
   const allReviews = getAllReviews()
 
+  const categoryRatings = Array.isArray(tool.ratings) ? tool.ratings : []
+  const hasEditorialRating = typeof tool.rating === "number" && Number.isFinite(tool.rating)
+  const reviewCount = typeof tool.reviewCount === "number" && Number.isFinite(tool.reviewCount) ? tool.reviewCount : null
   const bestInCategory = allReviews
-    .filter((r) => r.category === tool.category)
-    .sort((a, b) => b.rating - a.rating)[0]
-  const isBestInCategory = bestInCategory?.slug === tool.slug
+    .filter((r) => r.category === tool.category && typeof r.rating === "number")
+    .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
+  const isBestInCategory = hasEditorialRating && bestInCategory?.slug === tool.slug
   const isBestValue = tool.pricing === "Freemium" || tool.pricing === "Free" || tool.pricing === "Free Trial"
 
   return (
@@ -141,12 +144,14 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 {isBestValue && (
                   <Badge variant="warning">Best Value</Badge>
                 )}
-                <div className="flex items-center gap-1 text-sm">
-                  <Star size={14} className="fill-accent text-accent" />
-                  <span className="font-semibold">{formatScore(tool.rating)}</span>
-                  <span className="text-muted-foreground">/ 5.0</span>
-                  <span className="text-xs text-muted-foreground">({tool.reviewCount} reviews)</span>
-                </div>
+                {hasEditorialRating && (
+                  <div className="flex items-center gap-1 text-sm">
+                    <Star size={14} className="fill-accent text-accent" />
+                    <span className="font-semibold">{formatScore(tool.rating)}</span>
+                    <span className="text-muted-foreground">/ 5.0</span>
+                    {reviewCount !== null && <span className="text-xs text-muted-foreground">({reviewCount.toLocaleString()} reviews)</span>}
+                  </div>
+                )}
               </div>
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-1">
                 <span className="flex items-center gap-1">
@@ -182,7 +187,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
                 <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
                 <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                  <li>Overall rating: {formatScore(tool.rating)}/5 from {tool.reviewCount.toLocaleString()} reviews</li>
+                  {hasEditorialRating && <li>Editorial rating: {formatScore(tool.rating)}/5{reviewCount !== null ? ` from ${reviewCount.toLocaleString()} recorded reviews` : ""}</li>}
                   <li>Pricing: {tool.priceRange} ({tool.pricing})</li>
                   <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : `${tool.name} excels at ${tool.features.filter(f => f.available).slice(0, 2).map(f => f.name.toLowerCase()).join(" and ")}`}</li>
                   <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `Suitable for most ${tool.category} use cases`}</li>
@@ -192,7 +197,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   ) : (
                     <li>Comparison section below: how {tool.name} sits against other tools</li>
                   )}
-                  <li>Scored across {tool.ratings.length} recorded categories on a 1-5 scale — the overall rating is their mean</li>
+                  {categoryRatings.length > 0 && <li>Editorial rating dimensions: {categoryRatings.map((item) => item.label).join(", ")}</li>}
                 </ul>
               </div>
 
@@ -256,7 +261,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* External reviews / social proof */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-4">Third-Party Reviews</h2>
-                <p className="text-sm text-muted-foreground mb-4">{tool.name} carries a {formatScore(tool.rating)}/5 rating across {tool.reviewCount.toLocaleString()} reviews in the PilotStack dataset. Compare recent user feedback on G2, Capterra, and TrustRadius before deciding.</p>
+                <p className="text-sm text-muted-foreground mb-4">Check current, independent user feedback on G2, Capterra, and TrustRadius before deciding. Third-party review totals and scores change over time and should be verified on the source platforms.</p>
                 <div className="flex flex-wrap gap-3">
                   <a href={`https://www.g2.com/products/${tool.slug}/review`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -277,7 +282,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Rating Overview</h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-                  <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={formatScore(tool.rating)} title="Overall Rating" description={`Mean of ${tool.ratings.length} category ratings`} />
+                  {hasEditorialRating && <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={formatScore(tool.rating)} title="Overall Rating" description={categoryRatings.length > 0 ? `Mean of ${categoryRatings.length} category ratings` : "Editorial score"} />}
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
@@ -296,7 +301,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   } value={`${tool.content.length}`} title="Review Sections" description="In-depth coverage" />
                 </div>
                 <div className="flex justify-center">
-                  <EditorialRatingVisual ratings={tool.ratings} slug={tool.slug} category={tool.category} className="w-full max-w-md" />
+                  {categoryRatings.length > 0 && <EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" />}
                 </div>
               </section>
 
@@ -459,9 +464,13 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                       </svg>
                       <h3 className="font-semibold text-sm">Verdict</h3>
                     </div>
-                    <div className="text-lg font-bold text-primary mb-1">{formatScore(tool.rating)}/5</div>
-                    <ScoreBar score={tool.rating} className="mb-3" />
-                    <p className="text-sm text-muted-foreground">{tool.name} scores {formatScore(tool.rating)}/5 — the mean of {tool.ratings.length} recorded category ratings.</p>
+                    {hasEditorialRating ? (
+                      <>
+                        <div className="text-lg font-bold text-primary mb-1">{formatScore(tool.rating)}/5</div>
+                        <ScoreBar score={tool.rating} className="mb-3" />
+                        <p className="text-sm text-muted-foreground">{categoryRatings.length > 0 ? `Mean of ${categoryRatings.length} editorial rating dimensions.` : "Editorial score; see the review methodology for context."}</p>
+                      </>
+                    ) : <p className="text-sm text-muted-foreground">No independently verified aggregate score is published for this review. Compare the practical criteria and current vendor terms below.</p>}
                   </div>
                 </GlassCard>
 
@@ -470,7 +479,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   <div className="p-4">
                     <h3 className="font-semibold mb-3 text-sm">Rating Breakdown</h3>
                     <div className="space-y-3">
-                      {tool.ratings.map((item) => (
+                      {categoryRatings.map((item) => (
                         <div key={item.label}>
                           <div className="flex justify-between text-xs mb-0.5">
                             <span className="text-muted-foreground">{item.label}</span>
@@ -573,7 +582,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
           <section className="mt-16 mb-8">
             <h2 className="text-lg font-bold tracking-tight mb-3">Sources &amp; Methodology</h2>
             <div className="text-xs text-muted-foreground leading-relaxed space-y-1.5">
-              <p>Each page shows an overall rating plus {tool.ratings.length} recorded category ratings on a 1-5 scale, all drawn from the PilotStack dataset. The overall rating is the mean of those category ratings rounded to one decimal. Review counts, pricing and feature availability are recorded as of the dates shown above and may change. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for how ratings are calculated, what each page is sourced from, and our editorial independence policy.</p>
+              <p>Review pages focus on product fit, features, pricing considerations, and limitations. Where a score or third-party review count is not supported by a verifiable source, it is omitted rather than estimated. Pricing and feature availability can change; confirm important details with the vendor. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for sourcing and editorial independence.</p>
               <p>Content updated: {formatDate(tool.contentModified)} · No vendor payment or sponsorship influenced this review · We may earn affiliate commission on purchases made through links on this site.</p>
             </div>
           </section>
@@ -593,7 +602,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
             </div>
             <div className="mt-4 text-center">
               <p className="text-xs text-muted-foreground">
-                Prices and ratings are approximate and may vary.
+                Pricing, plan limits, and feature availability can change; verify current details with the vendor.
               </p>
             </div>
           </section>
