@@ -6,6 +6,8 @@ describe("content indexability guards", () => {
   it("honors the explicit noindex manifest", () => {
     expect(isNoindexed("guides", "api-security-best-practices")).toBe(true)
     expect(isNoindexed("guides", "not-a-real-guide")).toBe(false)
+    expect(isNoindexed("reviews", "asana")).toBe(true)
+    expect(isNoindexed("reviews", "linear")).toBe(false)
   })
 
   it("does not expose a comparison explicitly marked unpublished", () => {
