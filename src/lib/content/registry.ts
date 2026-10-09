@@ -413,16 +413,31 @@ export function getComparisonsByCategory(category: string): ComparisonContent[] 
     .filter((item): item is ComparisonContent => Boolean(item))
 }
 
+function prepareGuide(guide: GuideContent): GuideContent {
+  const sections = buildGuideSections(guide)
+  const isTemplateDescription = /how to evaluate the right|choosing the right .* software starts with/i.test(guide.description || "")
+  const topic = guide.title.replace(/\\s*[:—-].*$/, "").trim() || guide.category
+  const description = isTemplateDescription
+    ? `${topic}: practical ${guide.category.toLowerCase()} guidance with category-specific checks, implementation risks, and a repeatable pilot checklist. Verify changing product details with primary sources before deciding.`
+    : guide.description
+  return {
+    ...guide,
+    description,
+    sections,
+    readingTime: Math.max(4, Math.ceil(sectionWordCount(sections) / 220)),
+    faqs: sanitizeFaqs(guide.faqs),
+  }
+}
+
 export function getGuide(slug: string): GuideContent | null {
   const file = path.join(CONTENT_DIR, "guides", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  const guide = readJson<GuideContent>(file)
-  return { ...guide, sections: buildGuideSections(guide), faqs: sanitizeFaqs(guide.faqs) }
+  return prepareGuide(readJson<GuideContent>(file))
 }
 
 export function getAllGuides(): GuideContent[] {
   return readDir(path.join(CONTENT_DIR, "guides"))
-    .map((f) => { const g = readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)); return { ...g, sections: buildGuideSections(g), faqs: sanitizeFaqs(g.faqs) } })
+    .map((f) => prepareGuide(readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f))))
 }
 
 export function getGlossaryTerm(slug: string): GlossaryContent | null {
