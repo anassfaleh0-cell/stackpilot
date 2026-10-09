@@ -50,12 +50,13 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   const cmp = getComparison(slug)
   if (!cmp) notFound()
 
-  const t1Score = cmp.features.filter((f) => f.tool1 && !f.tool2).length
-  const t2Score = cmp.features.filter((f) => f.tool2 && !f.tool1).length
-  const tieScore = cmp.features.filter((f) => f.tool1 && f.tool2).length
-  const total = cmp.features.length
-  const t1Pct = Math.round((t1Score / total) * 100)
-  const t2Pct = Math.round((t2Score / total) * 100)
+  // Only boolean availability fields are scoreable. Text values such as "Paid" or "Custom"
+  // are descriptions, not truthy feature wins.
+  const scoredFeatures = cmp.features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean")
+  const t1Score = scoredFeatures.filter((f) => f.tool1 === true).length
+  const t2Score = scoredFeatures.filter((f) => f.tool2 === true).length
+  const t1Pct = scoredFeatures.length ? Math.round((t1Score / scoredFeatures.length) * 100) : null
+  const t2Pct = scoredFeatures.length ? Math.round((t2Score / scoredFeatures.length) * 100) : null
 
   const review1 = getReview(cmp.tool1Slug)
   const review2 = getReview(cmp.tool2Slug)
@@ -149,9 +150,9 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                     </Badge>
                   )}
                   <div className="text-xl font-bold mb-2">{tool.name}</div>
-                  <div className="text-3xl font-bold text-primary mb-1">{tool.score}%</div>
-                  <div className="text-xs text-muted-foreground mb-3">Feature score</div>
-                  <ScoreBar score={tool.score} max={100} className="mb-3" />
+                  <div className="text-3xl font-bold text-primary mb-1">{tool.score === null ? "—" : `${tool.score}%`}</div>
+                  <div className="text-xs text-muted-foreground mb-3">Recorded feature availability</div>
+                  {tool.score !== null && <ScoreBar score={tool.score} max={100} className="mb-3" />}
                   <Link
                     href={`/reviews/${tool.slug}`}
                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-transparent hover:bg-muted-bg h-9 px-4 text-xs font-medium transition-all duration-200 mt-1"
@@ -251,9 +252,9 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                   <div className="mt-4 pt-4 border-t border-border flex items-center gap-2 text-sm">
                     <span className="text-muted-foreground">Migration complexity:</span>
                     <span className="font-medium text-foreground">
-                      {t1Score > t2Score ? `${cmp.tool2} → ${cmp.tool1}` : `${cmp.tool1} → ${cmp.tool2}`}
+                      Migration effort depends on data volume, integrations, and workflow dependencies.
                     </span>
-                    <span className="text-xs text-muted-foreground">— compare migration requirements before switching</span>
+                    <span className="text-xs text-muted-foreground">Check export/import options and run a small migration test before switching.</span>
                   </div>
                 )}
               </div>
