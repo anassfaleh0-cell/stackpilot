@@ -5,7 +5,7 @@
   "category": "HR & People",
   "difficulty": "Intermediate",
   "author": "Emily Nakamura",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "workday",
     "tableau",
@@ -56,6 +56,11 @@
     {
       "title": "Readiness checklist",
       "body": "Proceed when workforce metrics are defined, data owners are known, privacy controls are approved, reports reconcile, and the action process is clear. Pilot with a limited audience and review the interpretation of results before expanding access. Reassess when HR systems, organizational structure, or privacy requirements change.",
+      "type": "text"
+    },
+    {
+      "title": "Validate definitions before comparing teams",
+      "body": "Choose a small set of workforce metrics and write down their exact numerator, denominator, time period, inclusion rules, and data owner. Test the same metric against the source HR system and investigate differences before publishing a dashboard. Review whether leave, contractors, reorganizations, and small groups are handled consistently. Without shared definitions, teams may debate the chart rather than the decision it is supposed to support.",
       "type": "text"
     }
   ]
