@@ -19,6 +19,11 @@ import { isNoindexed } from "@/lib/noindex"
 export const dynamicParams = true
 export const revalidate = 86400
 
+function displayPriceRange(value: string | undefined): string {
+  if (!value || value === "Not independently verified") return "Pricing not independently verified; check the vendor's current plans.";
+  return value.replace(/[“”]/g, " – ").replace(/\s+/g, " ").trim();
+}
+
 export function generateStaticParams() {
   // Keep the full corpus indexable without forcing 2,000+ pages through every production build.
   // Pages are rendered on first request and cached for 24h.
@@ -74,7 +79,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
           <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-            <p className="text-sm text-muted-foreground">The first listed option is <strong>{page.picks[0]?.toolName}</strong> (recorded rating {page.picks[0]?.rating}/5, pricing {page.picks[0]?.priceRange}). Use this shortlist as a starting point, verify current details with the vendor, and compare each option against your workflow.</p>
+            <p className="text-sm text-muted-foreground">The first listed option is <strong>{page.picks[0]?.toolName}</strong> (recorded rating {page.picks[0]?.rating}/5, pricing {displayPriceRange(page.picks[0]?.priceRange)}). Use this shortlist as a starting point, verify current details with the vendor, and compare each option against your workflow.</p>
           </div>
 
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
@@ -93,8 +98,8 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
               <li>{page.picks.length} options organized around the criteria shown on this page</li>
               <li>Evaluation criteria: {page.criteria.join(", ")}</li>
-              <li>Top pick: {page.picks[0]?.toolName} ({page.picks[0]?.rating}/5, from {page.picks[0]?.priceRange}) — {page.picks[0]?.bestFor}</li>
-              {page.picks[1] ? <li>Runner-up: {page.picks[1].toolName} ({page.picks[1].rating}/5, from {page.picks[1].priceRange})</li> : null}
+              <li>Top pick: {page.picks[0]?.toolName} ({page.picks[0]?.rating}/5, from {displayPriceRange(page.picks[0]?.priceRange)}) — {page.picks[0]?.bestFor}</li>
+              {page.picks[1] ? <li>Runner-up: {page.picks[1].toolName} ({page.picks[1].rating}/5, from {displayPriceRange(page.picks[1].priceRange)})</li> : null}
               <li>Pricing ranges from free to enterprise, depending on features and scale</li>
               <li>Each pick includes recorded pros, cons, and best-fit recommendations</li>
               <li>Full comparison table with feature-by-feature breakdown included below</li>
@@ -104,7 +109,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
           <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-8 pb-4 border-b border-border">
             <Badge variant="default">{page.category}</Badge>
-            <span>{page.picks.length} editor-reviewed picks</span>
+            <span>{page.picks.length} listed options</span>
             <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>By {page.author}</span>
             <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>Updated {formatDate(page.lastUpdated)}</span>
             <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we review</a>
@@ -151,7 +156,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                         </div>
                         <p className="text-sm font-medium text-primary mb-2">{pick.bestFor}</p>
                         {pick.priceRange && pick.priceRange !== "Not independently verified" ? (
-                          <p className="text-xs text-muted-foreground mb-3">Listed pricing: {pick.priceRange}. Verify current plans, limits, and billing terms with the vendor.</p>
+                          <p className="text-xs text-muted-foreground mb-3">Listed pricing: {displayPriceRange(pick.priceRange)} Verify current plans, limits, and billing terms with the vendor.</p>
                         ) : (
                           <p className="text-xs text-muted-foreground mb-3">Pricing not independently verified here; check the vendor's current plans and usage limits.</p>
                         )}
