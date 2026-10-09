@@ -4,6 +4,7 @@ import { BreadcrumbSchema, CollectionPageSchema } from "@/components/seo/json-ld
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllAlternatives } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 import { getPagination, parsePageParam } from "@/lib/pagination"
 import { PaginationNav } from "@/components/ui/pagination-nav"
 import Link from "next/link"
@@ -17,7 +18,7 @@ export const metadata = createMetadata({
 
 export default async function AlternativesPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
   const params = await searchParams
-  const allAlternatives = getAllAlternatives()
+  const allAlternatives = getAllAlternatives().filter((item) => !isNoindexed("alternatives", item.slug))
   const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: allAlternatives.length })
   const pageAlternatives = allAlternatives.slice(pagination.start, pagination.end)
   const grouped: Record<string, typeof allAlternatives> = {}
