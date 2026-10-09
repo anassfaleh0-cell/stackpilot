@@ -101,9 +101,9 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <h2 className="text-base font-semibold mb-2">TL;DR</h2>
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
               <li>{cmp.winner ? `${cmp.winner} is the recorded pick in the source dataset, not a universal winner` : `${cmp.tool1} vs ${cmp.tool2}: compare the evidence against your priorities`}</li>
-              <li>{cmp.tool1} leads in {cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool1 === true && f.tool2 === false).map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "several feature areas"}</li>
-              <li>{cmp.tool2} leads in {cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool2 === true && f.tool1 === false).map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "several feature areas"}</li>
-              <li>{cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool1 === true && f.tool2 === true).length} features are shared equally between both tools</li>
+              <li>Recorded information for {cmp.tool1}: {cmp.features.filter(f => f.tool1Detail && f.tool1 !== "Not recorded").map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "see the linked review"}</li>
+              <li>Recorded information for {cmp.tool2}: {cmp.features.filter(f => f.tool2Detail && f.tool2 !== "Not recorded").map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "see the linked review"}</li>
+              <li>{cmp.features.filter(f => f.tool1Detail && f.tool2Detail).length} criteria have details recorded for both tools; this does not mean their capabilities are identical</li>
               <li>Consider your specific workflow needs when choosing between them</li>
             </ul>
           </div>
@@ -175,7 +175,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
               <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
               </svg>
-            } value={cmp.winner || "Tie"} title="Overall Winner" />
+            } value={cmp.winner || "Tie"} title="Recorded Dataset Pick" />
             <InfoCard icon={
               <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
@@ -212,7 +212,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                     </li>
                     <li className="flex items-start gap-2 text-sm">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">3</span>
-                      <span className="text-muted-foreground">{cmp.winner ? `${cmp.winner} wins on overall feature coverage` : "Both tools serve different needs — evaluate based on priority features"}</span>
+                      <span className="text-muted-foreground">{cmp.winner ? `${cmp.winner} is the source dataset pick; verify the underlying evidence before relying on it` : "The source data does not name a winner — evaluate against priority requirements"}</span>
                     </li>
                   </ul>
                 </div>
