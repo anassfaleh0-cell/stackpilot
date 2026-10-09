@@ -50,7 +50,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     .map((b, i) => (isStructural(b) ? -1 : i))
     .filter((i) => i >= 0 && paragraphs[i].length > 80)
   const midPoint = proseIndices.length > 0 ? proseIndices[Math.floor(proseIndices.length / 2)] : Math.floor(paragraphs.length / 2)
-  const pullQuote = (paragraphs[midPoint] || "").replace(/^#{1,6}\\s*/, "").replace(/\\*\\*/g, "").trim().slice(0, 150)
+  const pullQuote = (paragraphs[midPoint] || "").replace(/^#{1,6}\s*/, "").replace(/\*\*/g, "").trim().slice(0, 150)
 
   const renderInline = (text: string, keyBase: string) => {
     const segments = text.split(/\*\*([^*]+)\*\*/g)
