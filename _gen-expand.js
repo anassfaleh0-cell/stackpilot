@@ -2,7 +2,7 @@
 const fs = require("node:fs")
 const path = require("node:path")
 
-const now = "July 20, 2026"
+const now = new Date().toISOString().slice(0, 10)
 
 // Original 38 tools (minimal data for alternatives/best page generation)
 const origTools = [
