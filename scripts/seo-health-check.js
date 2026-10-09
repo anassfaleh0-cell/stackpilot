@@ -197,6 +197,7 @@ function checkContentQuality() {
       let words = wordCount(data.description || "")
       if (data.content) {
         for (const section of data.content) {
+          words += wordCount(section.title)
           words += wordCount(section.body)
           for (const item of section.items || []) words += wordCount(item)
         }
@@ -204,6 +205,7 @@ function checkContentQuality() {
       if (data.body) words += wordCount(data.body)
       if (data.sections) {
         for (const section of data.sections) {
+          words += wordCount(section.title)
           words += wordCount(section.body)
           for (const item of section.items || []) words += wordCount(item)
         }
