@@ -35,7 +35,7 @@ describe("content quality repairs", () => {
     expect(body).not.toContain("Most successful deployments follow a phased approach")
   })
 
-  it("does not claim unsupported hands-on testing in generated best-page content", () => {
+  it("uses clear guide metadata without repetitive SEO title stuffing", () => {
     const guide = getGuide("marketing-attribution-guide")
     expect(guide?.title).toBe("Marketing Attribution: Practical Marketing & SEO Guide")
     expect(guide?.description).toContain("evaluation criteria")
