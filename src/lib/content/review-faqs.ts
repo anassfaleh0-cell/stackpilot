@@ -28,7 +28,6 @@ function isLowValueAnswer(answer: string): boolean {
   if (trimmed.length < 45) return true
   if (BROKEN_CONTENT_PATTERNS.some((pattern) => pattern.test(trimmed))) return true
   if (GENERIC_ANSWER_PATTERNS.some((pattern) => pattern.test(trimmed))) return true
-  if (/\b(?:combines|connect|mapp|functionality)\s*\./i.test(trimmed)) return true
   return false
 }
 
