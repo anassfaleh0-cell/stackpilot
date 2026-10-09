@@ -278,7 +278,6 @@ function readDir(dir: string): string[] {
 }
 
 export function getReview(slug: string): ReviewContent | null {
-  if (isNoindexed("reviews", slug)) return null
   const file = path.join(CONTENT_DIR, "reviews", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   return sanitizeReview(readJson<ReviewContent>(file))
@@ -287,7 +286,6 @@ export function getReview(slug: string): ReviewContent | null {
 export function getAllReviews(): ReviewContent[] {
   return readDir(path.join(CONTENT_DIR, "reviews"))
     .map((f) => sanitizeReview(readJson<ReviewContent>(path.join(CONTENT_DIR, "reviews", f))))
-    .filter((review) => !isNoindexed("reviews", review.slug))
     .sort((a, b) => b.rating - a.rating)
 }
 
@@ -383,21 +381,11 @@ function sanitizeComparisonDescription(description: string, tool1: string, tool2
   return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the recorded overall winner." : "The dataset records no single overall winner.") + " Read the detailed rows and linked reviews before making a decision.", 700)
 }
 export function getComparison(slug: string): ComparisonContent | null {
-  if (isNoindexed("comparisons", slug)) return null
   const file = path.join(CONTENT_DIR, "comparisons", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const cmp = readJson<ComparisonContent>(file)
   // Explicitly unpublished comparisons must never be rendered, linked, or included in the sitemap.
   if (cmp.published === false) return null
-  // Unless an editor explicitly publishes a cross-category comparison, require both source reviews
-  // to be indexable and in the same primary category before deriving public comparison content.
-  if (cmp.published !== true) {
-    const left = getReview(cmp.tool1Slug)
-    const right = getReview(cmp.tool2Slug)
-    if (!left || !right) return null
-    if (isNoindexed("reviews", left.slug) || isNoindexed("reviews", right.slug)) return null
-    if (left.category.trim().toLowerCase() !== right.category.trim().toLowerCase()) return null
-  }
   const baseFeatures = cmp.features.slice(0, 20).map((f) => ({
     ...f,
     name: trimText(f.name, 140),
@@ -417,7 +405,6 @@ export function getComparison(slug: string): ComparisonContent | null {
 }
 export function getAllComparisons(): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
-    .filter((file) => !isNoindexed("comparisons", file.replace(/\.json$/, "")))
     .map((f) => getComparison(f.replace(/\.json$/, "")))
     .filter((x): x is ComparisonContent => Boolean(x))
 }
@@ -427,7 +414,6 @@ export function getComparisonsByCategory(category: string): ComparisonContent[] 
   return readDir(path.join(CONTENT_DIR, "comparisons"))
     .filter((file) => {
       const slug = file.replace(/\.json$/, "")
-      if (isNoindexed("comparisons", slug)) return false
       const raw = readJson<ComparisonContent>(path.join(CONTENT_DIR, "comparisons", file))
       return raw.category === category || raw.secondaryCategories?.includes(category)
     })
@@ -436,7 +422,6 @@ export function getComparisonsByCategory(category: string): ComparisonContent[] 
 }
 
 export function getGuide(slug: string): GuideContent | null {
-  if (isNoindexed("guides", slug)) return null
   const file = path.join(CONTENT_DIR, "guides", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const guide = readJson<GuideContent>(file)
@@ -445,7 +430,6 @@ export function getGuide(slug: string): GuideContent | null {
 
 export function getAllGuides(): GuideContent[] {
   return readDir(path.join(CONTENT_DIR, "guides"))
-    .filter((file) => !isNoindexed("guides", file.replace(/\.json$/, "")))
     .map((f) => { const g = readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)); return { ...g, sections: buildGuideSections(g), faqs: sanitizeFaqs(g.faqs) } })
 }
 
@@ -462,7 +446,6 @@ export function getAllGlossaryTerms(): GlossaryContent[] {
 }
 
 export function getBlogPost(slug: string): BlogContent | null {
-  if (isNoindexed("blog", slug)) return null
   const file = path.join(CONTENT_DIR, "blog", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const post = readJson<BlogContent>(file)
@@ -471,7 +454,6 @@ export function getBlogPost(slug: string): BlogContent | null {
 
 export function getAllBlogPosts(): BlogContent[] {
   return readDir(path.join(CONTENT_DIR, "blog"))
-    .filter((file) => !isNoindexed("blog", file.replace(/\.json$/, "")))
     .map((file) => {
       const post = readJson<BlogContent>(path.join(CONTENT_DIR, "blog", file))
       return { ...post, body: String(post.body || "").trim() }
@@ -544,7 +526,6 @@ function buildAlternativeSections(alt: AlternativeContent): ContentSection[] {
   ]
 }
 export function getAlternative(slug: string): AlternativeContent | null {
-  if (isNoindexed("alternatives", slug)) return null
   const file = path.join(CONTENT_DIR, "alternatives", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const alt = readJson<AlternativeContent>(file)
@@ -564,13 +545,11 @@ export function getAlternative(slug: string): AlternativeContent | null {
 
 export function getAllAlternatives(): AlternativeContent[] {
   return readDir(path.join(CONTENT_DIR, "alternatives"))
-    .filter((file) => !isNoindexed("alternatives", file.replace(/\.json$/, "")))
     .map((f) => getAlternative(f.replace(/\.json$/, "")))
     .filter((x): x is AlternativeContent => Boolean(x))
 }
 
 export function getUseCase(slug: string): UseCaseContent | null {
-  if (isNoindexed("use-cases", slug)) return null
   const file = path.join(CONTENT_DIR, "use-cases", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const useCase = readJson<UseCaseContent>(file)
@@ -587,12 +566,10 @@ export function getUseCase(slug: string): UseCaseContent | null {
 
 export function getAllUseCases(): UseCaseContent[] {
   return readDir(path.join(CONTENT_DIR, "use-cases"))
-    .filter((file) => !isNoindexed("use-cases", file.replace(/\.json$/, "")))
     .map((f) => { const u = readJson<UseCaseContent>(path.join(CONTENT_DIR, "use-cases", f)); return { ...u, faqs: sanitizeFaqs(u.faqs) } })
 }
 
 export function getIndustry(slug: string): IndustryContent | null {
-  if (isNoindexed("industries", slug)) return null
   const file = path.join(CONTENT_DIR, "industries", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const industry = readJson<IndustryContent>(file)
@@ -609,12 +586,10 @@ export function getIndustry(slug: string): IndustryContent | null {
 
 export function getAllIndustries(): IndustryContent[] {
   return readDir(path.join(CONTENT_DIR, "industries"))
-    .filter((file) => !isNoindexed("industries", file.replace(/\.json$/, "")))
     .map((f) => { const i = readJson<IndustryContent>(path.join(CONTENT_DIR, "industries", f)); return { ...i, faqs: sanitizeFaqs(i.faqs) } })
 }
 
 export function getResearch(slug: string): ResearchContent | null {
-  if (isNoindexed("research", slug)) return null
   const file = path.join(CONTENT_DIR, "research", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const research = readJson<ResearchContent>(file)
@@ -623,12 +598,10 @@ export function getResearch(slug: string): ResearchContent | null {
 
 export function getAllResearch(): ResearchContent[] {
   return readDir(path.join(CONTENT_DIR, "research"))
-    .filter((file) => !isNoindexed("research", file.replace(/\.json$/, "")))
     .map((f) => { const r = readJson<ResearchContent>(path.join(CONTENT_DIR, "research", f)); return { ...r, sections: sanitizeSections(r.sections), faqs: sanitizeFaqs(r.faqs) } })
 }
 
 export function getStatistic(slug: string): StatisticContent | null {
-  if (isNoindexed("statistics", slug)) return null
   const file = path.join(CONTENT_DIR, "statistics", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   return readJson<StatisticContent>(file)
@@ -636,12 +609,10 @@ export function getStatistic(slug: string): StatisticContent | null {
 
 export function getAllStatistics(): StatisticContent[] {
   return readDir(path.join(CONTENT_DIR, "statistics"))
-    .filter((file) => !isNoindexed("statistics", file.replace(/\.json$/, "")))
     .map((f) => readJson<StatisticContent>(path.join(CONTENT_DIR, "statistics", f)))
 }
 
 export function getBest(slug: string): BestContent | null {
-  if (isNoindexed("best", slug)) return null
   const file = path.join(CONTENT_DIR, "best", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const best = readJson<BestContent>(file)
@@ -667,13 +638,11 @@ export function getBest(slug: string): BestContent | null {
 
 export function getAllBest(): BestContent[] {
   return readDir(path.join(CONTENT_DIR, "best"))
-    .filter((file) => !isNoindexed("best", file.replace(/\.json$/, "")))
     .map((f) => getBest(f.replace(/\.json$/, "")))
     .filter((x): x is BestContent => Boolean(x))
 }
 
 export function getHub(slug: string): HubContent | null {
-  if (isNoindexed("hubs", slug)) return null
   const file = path.join(CONTENT_DIR, "hubs", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const hub = readJson<HubContent>(file)
@@ -683,7 +652,6 @@ export function getHub(slug: string): HubContent | null {
 
 export function getAllHubs(): HubContent[] {
   return readDir(path.join(CONTENT_DIR, "hubs"))
-    .filter((file) => !isNoindexed("hubs", file.replace(/\.json$/, "")))
     .map((f) => { const h = readJson<HubContent>(path.join(CONTENT_DIR, "hubs", f)); h.faqs = sanitizeFaqs(h.faqs); return h })
 }
 
