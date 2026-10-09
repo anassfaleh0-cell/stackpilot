@@ -1,42 +1,68 @@
 {
   "slug": "data-governance-guide",
-  "title": "Data Governance Guide: How to Choose the Right Governance Framework",
-  "description": "Intermediate Analytics & Data guide (~12 min read): how to evaluate and choose the right data governance framework for your team.",
+  "title": "Data Governance Guide: Ownership, Quality, Access, and Lineage",
+  "description": "A practical data governance guide for assigning data ownership, defining quality rules, controlling access, documenting lineage, and handling retention and change safely.",
   "category": "Analytics & Data",
   "difficulty": "Intermediate",
-  "author": "Marcus Rivera",
+  "author": "PilotStack Editorial Team",
   "readingTime": 10,
-  "relatedTools": [],
-  "relatedGuides": [],
-  "lastUpdated": "2026-08-11",
+  "relatedTools": [
+    "snowflake",
+    "tableau",
+    "power-bi",
+    "google-analytics",
+    "salesforce"
+  ],
+  "relatedGuides": [
+    "business-intelligence-platform-guide",
+    "privacy-analytics-guide",
+    "vendor-risk-assessment"
+  ],
+  "lastUpdated": "2026-10-09",
   "sections": [
     {
-      "title": "What Data Governance Covers",
-      "body": "Data governance is the set of policies, roles, and processes that decide who can use data, what it means, and how it is protected. A governance framework turns those decisions into practice: data owners are named, definitions are documented, and access is controlled and reviewed instead of being granted informally."
+      "title": "Start With High-Value Data Domains",
+      "type": "text",
+      "body": "Data governance works best when it begins with a clear business use rather than a committee that tries to document everything at once. Identify the domains that support important decisions—customers, orders, product usage, finance, employees, or security—and name the systems and teams responsible for them. For each domain, record the decisions that depend on the data, the consequences of an error, and the people who need access. Start with a small scope where ownership and quality can be improved measurably, then expand the pattern."
     },
     {
-      "title": "Governance Frameworks",
-      "body": "Frameworks organize governance around domains: metadata and cataloging, access control, quality, lineage, and privacy compliance. Teams typically adopt a lightweight version first, defining ownership and catalog conventions, then layer on access reviews and quality monitoring as the data estate grows and regulation demands more."
+      "title": "Assign Owners and Stewards",
+      "type": "text",
+      "body": "A data owner is accountable for how a domain is defined and used; a steward maintains definitions, quality rules, and issue handling; a technical custodian operates the systems and controls. One person may hold more than one role in a small organization, but the responsibilities should still be explicit. Create a route for teams to report conflicting definitions, missing records, or questionable access. Decisions about sensitive data should involve the appropriate legal, privacy, security, and business stakeholders rather than being left to an analytics team alone."
     },
     {
-      "title": "Selection Criteria",
-      "body": "Evaluate the catalog's metadata coverage, lineage depth, policy enforcement, and automation. Compare how easily the tooling integrates with the warehouse, pipelines, and BI layer, and whether access requests and reviews can be automated rather than handled through email and spreadsheets."
+      "title": "Define Quality Rules That Can Be Tested",
+      "type": "checklist",
+      "body": "Use measurable rules that can be monitored over time instead of a vague goal to improve data quality.",
+      "items": [
+        "Required fields and allowed values are documented.",
+        "Uniqueness rules define how duplicates are identified and resolved.",
+        "Relationships between records are checked for missing or invalid references.",
+        "Freshness thresholds reflect the decision's real time sensitivity.",
+        "Reconciliation compares important totals with the authoritative source.",
+        "Each failed rule has an owner, severity, and remediation path.",
+        "Exceptions are documented instead of silently excluded from reports."
+      ]
     },
     {
-      "title": "Implementation Guide",
-      "body": "Start with the highest-value domain, such as finance or customer data, and name data owners for the critical datasets. Publish definitions in the catalog before building policy, then enable automated lineage and access reviews. Roll out enforcement gradually, measuring catalog coverage and access request response times."
+      "title": "Document Lineage and Definitions",
+      "type": "text",
+      "body": "For important metrics and datasets, record where the data originates, which transformations change it, where it is stored, and which reports or processes depend on it. Define business terms such as active customer, qualified lead, net revenue, or retained user in language that users can apply consistently. Keep the definition near the data catalogue or reporting layer, and record who approved it. When a pipeline or source changes, update the lineage and identify downstream consumers before deployment. This reduces disputes where two dashboards use the same label for different calculations."
     },
     {
-      "title": "Best Practices",
-      "body": "Make governance a service rather than a gate: owners and analysts should see value in the catalog, not a backlog of approvals. Automate access reviews on a schedule, document decisions when definitions conflict, and tie privacy controls to the same catalog so compliance work is not duplicated."
+      "title": "Control Access and Sensitive Fields",
+      "type": "text",
+      "body": "Classify data by sensitivity and business need, then use least-privilege access, role reviews, and appropriate authentication. Avoid broad access merely because it makes analysis easier. Document retention, deletion, export, and sharing rules, including how test environments are protected. Review service accounts and integrations as carefully as human users. Logs should provide enough information to investigate access without copying sensitive payloads into general-purpose monitoring systems. Requirements vary by jurisdiction and data type, so use qualified privacy and security review where needed."
     },
     {
-      "title": "Common Pitfalls",
-      "body": "The most common failure is creating policy documents that never connect to the tools people use, leaving governance as a paper exercise. Another is over-governing early, which slows analytics and pushes teams to shadow data stores outside the framework."
+      "title": "Create a Change and Incident Process",
+      "type": "text",
+      "body": "Data definitions, schemas, access policies, and pipelines change over time. Define how changes are proposed, reviewed, tested, announced, and rolled back. For critical datasets, use versioned contracts or compatibility checks so downstream systems can detect breaking changes before production. When a quality incident occurs, record the affected datasets and decisions, notify consumers, correct the source where possible, and document the cause. A dashboard that is technically available but known to contain unreliable data should carry a visible warning until the issue is resolved."
     },
     {
-      "title": "ROI Analysis",
-      "body": "Measure time-to-trust for new datasets, access request resolution time, and the share of critical data with documented owners and definitions. Track audit preparation effort and the number of access-related incidents before and after the framework is enforced."
+      "title": "Measure Governance Outcomes",
+      "type": "text",
+      "body": "Track practical indicators such as the percentage of critical datasets with named owners, the number of unresolved high-severity quality issues, freshness compliance, time to resolve data incidents, and completion of access reviews. Do not measure success by the number of catalogue entries alone. Review whether users can find the correct definition, understand its limitations, and request access through a predictable process. Reassess priorities as business decisions, systems, and regulatory requirements change."
     }
   ],
   "faqs": [
