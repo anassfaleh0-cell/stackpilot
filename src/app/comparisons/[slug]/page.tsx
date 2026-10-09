@@ -207,7 +207,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           {/* Feature Comparison */}
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-6">Feature Comparison</h2>
-            <EditorialComparison tool1={cmp.tool1} tool2={cmp.tool2} features={safeFeatures} winner={hasComparableWinner ? winnerLabel : null} category={cmp.category} slug={cmp.slug} />
+            <EditorialComparison tool1={cmp.tool1} tool2={cmp.tool2} features={safeFeatures} featuresVerified={cmp.featuresVerified === true} winner={hasComparableWinner ? winnerLabel : null} category={cmp.category} slug={cmp.slug} />
           </section>
 
           {/* Decision Framework */}
