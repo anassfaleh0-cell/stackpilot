@@ -100,7 +100,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">TL;DR</h2>
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-              <li>{cmp.winner ? `${cmp.winner} wins overall` : `${cmp.tool1} vs ${cmp.tool2}: depends on your priorities`}</li>
+              <li>{cmp.winner ? `${cmp.winner} is the recorded pick in the source dataset, not a universal winner` : `${cmp.tool1} vs ${cmp.tool2}: compare the evidence against your priorities`}</li>
               <li>{cmp.tool1} leads in {cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool1 === true && f.tool2 === false).map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "several feature areas"}</li>
               <li>{cmp.tool2} leads in {cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool2 === true && f.tool1 === false).map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "several feature areas"}</li>
               <li>{cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool1 === true && f.tool2 === true).length} features are shared equally between both tools</li>
