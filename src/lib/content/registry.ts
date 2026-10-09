@@ -95,6 +95,10 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
   /our experts?\b/i,
   /we tested\b/i,
   /tested by our team/i,
+  /\b(?:rated|rating|scores?)\s+\d+(?:\.\d+)?\/5\b.{0,100}\b(?:user\s+)?reviews\b/i,
+  /\b(?:sub-)?\d+(?:\.\d+)?\s?(?:ms|milliseconds)\b/i,
+  /\b\d{1,3}(?:,\d{3})+\+?\s+(?:issues|blocks|tasks|users|employees|customers|templates|integrations|shortcuts|connectors|daily meeting participants)\b/i,
+  /\b(?:within|under|in)\s+\d+(?:-\d+)?\s*(?:minutes|hours|days|weeks)\b.{0,100}\b(?:setup|onboarding|migration|proficiency)\b/i,
   /user(s)? consistently report/i,
   /organizations see measurable improvements/i,
   /typical roi payback/i,
@@ -307,7 +311,7 @@ function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: Comparison
   const features1 = Array.isArray(r1?.features) ? r1.features : []
   const features2 = Array.isArray(r2?.features) ? r2.features : []
   const derived: ComparisonFeature[] = [
-    { name: "User Rating", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.rating}/5 across ${r1.reviewCount.toLocaleString()} recorded reviews` : undefined, tool2Detail: r2 ? `${r2.rating}/5 across ${r2.reviewCount.toLocaleString()} recorded reviews` : undefined },
+    { name: "Editorial Profile Score", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.rating}/5 PilotStack profile score; not a third-party review average` : undefined, tool2Detail: r2 ? `${r2.rating}/5 PilotStack profile score; not a third-party review average` : undefined },
     { name: "Pricing", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.pricing}${r1.priceRange ? `: ${r1.priceRange}` : ""}` : undefined, tool2Detail: r2 ? `${r2.pricing}${r2.priceRange ? `: ${r2.priceRange}` : ""}` : undefined },
     { name: "Category & Positioning", tool1: Boolean(r1), tool2: Boolean(r2), tool1Detail: r1 ? `${r1.category}. ${r1.tagline}` : cmp.category, tool2Detail: r2 ? `${r2.category}. ${r2.tagline}` : cmp.secondaryCategories?.[0] || cmp.category },
     { name: "Key Capabilities", tool1: Boolean(r1?.features?.length), tool2: Boolean(r2?.features?.length), tool1Detail: features1.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || undefined, tool2Detail: features2.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || undefined },
