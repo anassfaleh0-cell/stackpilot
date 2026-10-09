@@ -36,3 +36,9 @@ export function getComparisonDecision(input: ComparisonDecisionInput): Compariso
     hasComparableWinner: Boolean(winnerLabel && !categoriesDiffer),
   }
 }
+
+/** Hide raw feature values unless the comparison has auditable feature-level sources. */
+export function getComparisonFeatureDisplayValue(value: boolean | string, featuresVerified?: boolean): boolean | string {
+  if (featuresVerified !== true) return "Not verified"
+  return typeof value === "string" && !value.trim() ? "Not recorded" : value
+}
