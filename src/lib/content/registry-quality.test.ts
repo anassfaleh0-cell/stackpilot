@@ -5,8 +5,8 @@ describe("content quality repairs", () => {
   it("replaces repetitive generated guide filler with practical buyer guidance", () => {
     const guide = getGuide("marketing-attribution-guide")
     expect(guide).not.toBeNull()
-    expect(guide?.sections[0]?.title).toBe("Define the Decision")
-    expect(guide?.description).toContain("A practical guide to marketing attribution")
+    expect(guide?.sections[0]?.title).toBe("Start With the Decision, Not the Dashboard")
+    expect(guide?.description).toContain("A practical framework for defining conversions")
     expect(guide?.relatedTools?.length).toBeGreaterThan(0)
     expect(guide?.description).not.toContain("Choosing the right marketing & seo software")
     expect(guide?.readingTime).toBeLessThan(8)
@@ -38,7 +38,7 @@ describe("content quality repairs", () => {
 
   it("uses clear guide metadata without repetitive SEO title stuffing", () => {
     const guide = getGuide("marketing-attribution-guide")
-    expect(guide?.title).toBe("Marketing Attribution: Practical Marketing & SEO Guide")
+    expect(guide?.title).toBe("Marketing Attribution: A Practical Guide to Choosing and Validating a Model")
     expect(guide?.description).toContain("evaluation criteria")
   })
 
