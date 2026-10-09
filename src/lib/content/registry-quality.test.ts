@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getBest, getGuide } from "@/lib/content/registry"
+import { getBest, getBlogPost, getGuide } from "@/lib/content/registry"
 
 describe("content quality repairs", () => {
   it("replaces repetitive generated guide filler with practical buyer guidance", () => {
@@ -40,6 +40,14 @@ describe("content quality repairs", () => {
     const guide = getGuide("marketing-attribution-guide")
     expect(guide?.title).toBe("Marketing Attribution: Practical Marketing & SEO Guide")
     expect(guide?.description).toContain("evaluation criteria")
+  })
+
+  it("adds ROI-specific decision guidance instead of repeated generic blog filler", () => {
+    const post = getBlogPost("marketing-automation-roi")
+    expect(post).not.toBeNull()
+    expect(post?.body).toContain("Set a baseline before estimating returns")
+    expect(post?.body).toContain("Treat payback as a hypothesis to test")
+    expect(post?.body).not.toContain("This topic is most useful when it is connected to a real decision")
   })
 
 })
