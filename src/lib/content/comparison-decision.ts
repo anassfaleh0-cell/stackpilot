@@ -1,5 +1,6 @@
 export interface ComparisonDecisionInput {
   winner?: string | null
+  winnerVerified?: boolean
   tool1: string
   tool1Slug: string
   tool1Category?: string | null
@@ -24,7 +25,7 @@ export function getComparisonDecision(input: ComparisonDecisionInput): Compariso
     input.tool2Category &&
     input.tool1Category !== input.tool2Category
   )
-  const winner = input.winner?.trim().toLowerCase()
+  const winner = input.winnerVerified === true ? input.winner?.trim().toLowerCase() : null
   const tool1IsWinner = Boolean(winner && [input.tool1Slug, input.tool1].some((value) => value.toLowerCase() === winner))
   const tool2IsWinner = Boolean(winner && [input.tool2Slug, input.tool2].some((value) => value.toLowerCase() === winner))
   const winnerLabel = tool1IsWinner ? input.tool1 : tool2IsWinner ? input.tool2 : null
