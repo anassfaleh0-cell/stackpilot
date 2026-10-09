@@ -21,7 +21,12 @@ export function EditorialComparison({ tool1, tool2, features, featuresVerified =
   const p = getPalette(category)
   // Only explicit boolean availability values can contribute to a feature score.
   // Text values describe plan tiers or unknowns and must not be treated as truthy wins.
-  const displayFeatures = features.map((feature) => ({\n    ...feature,\n    displayTool1: getComparisonFeatureDisplayValue(feature.tool1, featuresVerified),\n    displayTool2: getComparisonFeatureDisplayValue(feature.tool2, featuresVerified),\n  }))\n  const scoredFeatures = featuresVerified ? features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean") : []
+  const displayFeatures = features.map((feature) => ({
+    ...feature,
+    displayTool1: getComparisonFeatureDisplayValue(feature.tool1, featuresVerified),
+    displayTool2: getComparisonFeatureDisplayValue(feature.tool2, featuresVerified),
+  }))
+  const scoredFeatures = featuresVerified ? features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean") : []
   const t1w = scoredFeatures.filter((f) => f.tool1 === true && f.tool2 === false).length
   const t2w = scoredFeatures.filter((f) => f.tool2 === true && f.tool1 === false).length
   const tie = scoredFeatures.filter((f) => f.tool1 === true && f.tool2 === true).length
