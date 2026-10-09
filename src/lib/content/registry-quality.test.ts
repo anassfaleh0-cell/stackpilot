@@ -6,7 +6,7 @@ describe("content quality repairs", () => {
     const guide = getGuide("marketing-attribution-guide")
     expect(guide).not.toBeNull()
     expect(guide?.sections[0]?.title).toBe("Define the Decision")
-    expect(guide?.description).toContain("Practical buyer's guide")
+    expect(guide?.description).toContain("A practical guide to marketing attribution")
     expect(guide?.description).not.toContain("Choosing the right marketing & seo software")
     expect(guide?.readingTime).toBeLessThan(8)
   })
