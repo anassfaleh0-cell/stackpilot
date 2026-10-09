@@ -13,267 +13,267 @@
       "name": "Free tier availability",
       "tool1": true,
       "tool2": true,
-      "tool1Detail": "Check whether a no-cost option is currently offered for your account type and region, then compare its participant, meeting or messaging, storage, history, and administration limits.",
-      "tool2Detail": "Check whether a no-cost option is currently offered for your account type and region, then compare its participant, meeting or messaging, storage, history, and administration limits."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Check whether a no-cost tier is available for your account and region, then record limits that matter to this workflow.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Check whether a no-cost tier is available for your account and region, then record limits that matter to this workflow."
     },
     {
       "name": "Entry-level pricing",
       "tool1": "Freemium",
       "tool2": "Freemium",
-      "tool1Detail": "Compare the current entry-level plan for the same number of users or hosts and the same billing term. Include features you would otherwise need to buy separately.",
-      "tool2Detail": "Compare the current entry-level plan for the same number of users or hosts and the same billing term. Include features you would otherwise need to buy separately."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Compare the entry plan for the same seat or host count and billing term; include taxes, minimums, and required add-ons.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Compare the entry plan for the same seat or host count and billing term; include taxes, minimums, and required add-ons."
     },
     {
       "name": "Enterprise pricing",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Ask each vendor for a quote covering your required seats, security controls, support, retention, and contract terms. Do not infer enterprise pricing from consumer plan pages.",
-      "tool2Detail": "Ask each vendor for a quote covering your required seats, security controls, support, retention, and contract terms. Do not infer enterprise pricing from consumer plan pages."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Request a quote for the required seats, security controls, retention, support, and contract terms rather than inferring enterprise cost.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Request a quote for the required seats, security controls, retention, support, and contract terms rather than inferring enterprise cost."
     },
     {
       "name": "Annual discount",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Compare annual and monthly billing using the current vendor price pages, and check renewal terms, cancellation rules, taxes, and whether discounts apply only to the first term.",
-      "tool2Detail": "Compare annual and monthly billing using the current vendor price pages, and check renewal terms, cancellation rules, taxes, and whether discounts apply only to the first term."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Compare monthly and annual totals, renewal pricing, cancellation terms, and whether a discount applies only to the first term.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Compare monthly and annual totals, renewal pricing, cancellation terms, and whether a discount applies only to the first term."
     },
     {
       "name": "Free trial duration",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Confirm whether a trial is available for the exact plan and account type, what features it unlocks, and whether payment details or automatic renewal are required.",
-      "tool2Detail": "Confirm whether a trial is available for the exact plan and account type, what features it unlocks, and whether payment details or automatic renewal are required."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Confirm trial eligibility, duration, included capabilities, payment-card requirements, and what happens when the trial ends.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Confirm trial eligibility, duration, included capabilities, payment-card requirements, and what happens when the trial ends."
     },
     {
       "name": "Contract flexibility",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Review monthly versus annual commitments, cancellation windows, renewal clauses, seat changes, and any minimum purchase requirements in the current contract.",
-      "tool2Detail": "Review monthly versus annual commitments, cancellation windows, renewal clauses, seat changes, and any minimum purchase requirements in the current contract."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Review renewal, cancellation, seat changes, minimum purchases, and any annual commitment before selecting a plan.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Review renewal, cancellation, seat changes, minimum purchases, and any annual commitment before selecting a plan."
     },
     {
       "name": "Usage-based scaling",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Check whether cost changes with seats, hosts, usage, add-ons, or storage. Model the expected size and usage over the next year instead of assuming automatic or linear scaling.",
-      "tool2Detail": "Check whether cost changes with seats, hosts, usage, add-ons, or storage. Model the expected size and usage over the next year instead of assuming automatic or linear scaling."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Model cost as users, hosts, usage, storage, and add-ons grow; ask what happens when the team crosses plan limits.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Model cost as users, hosts, usage, storage, and add-ons grow; ask what happens when the team crosses plan limits."
     },
     {
       "name": "User role management",
       "tool1": true,
       "tool2": true,
-      "tool1Detail": "Test how administrators assign roles, restrict sensitive actions, invite external participants, and remove access. Confirm the available roles and controls for the intended plan.",
-      "tool2Detail": "Test how administrators assign roles, restrict sensitive actions, invite external participants, and remove access. Confirm the available roles and controls for the intended plan."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Test how admins assign roles, limit sensitive actions, invite guests, and remove access on the intended plan.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Test how admins assign roles, limit sensitive actions, invite guests, and remove access on the intended plan."
     },
     {
       "name": "Two-factor authentication",
       "tool1": true,
       "tool2": true,
-      "tool1Detail": "Verify supported multi-factor methods and whether enforcement is available for all users or requires an identity provider or higher-tier license.",
-      "tool2Detail": "Verify supported multi-factor methods and whether enforcement is available for all users or requires an identity provider or higher-tier license."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Verify supported multi-factor methods and whether enforcement applies to all users or requires another identity service.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Verify supported multi-factor methods and whether enforcement applies to all users or requires another identity service."
     },
     {
       "name": "Audit logging",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Confirm which events are logged, how long logs are retained, whether they can be exported, and whether access to audit records requires a particular plan.",
-      "tool2Detail": "Confirm which events are logged, how long logs are retained, whether they can be exported, and whether access to audit records requires a particular plan."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Confirm which events are logged, retention duration, export options, and the plan required to access audit records.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Confirm which events are logged, retention duration, export options, and the plan required to access audit records."
     },
     {
       "name": "Mobile app",
       "tool1": true,
       "tool2": true,
-      "tool1Detail": "Test joining, messaging, sharing, notifications, accessibility, and account switching on the devices your team uses. Compare mobile workflows rather than relying on app-store ratings alone.",
-      "tool2Detail": "Test joining, messaging, sharing, notifications, accessibility, and account switching on the devices your team uses. Compare mobile workflows rather than relying on app-store ratings alone."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Test the key workflow on the actual iOS and Android devices used by the team, including notifications and accessibility.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Test the key workflow on the actual iOS and Android devices used by the team, including notifications and accessibility."
     },
     {
       "name": "Search functionality",
       "tool1": true,
       "tool2": true,
-      "tool1Detail": "Test search against real conversations, files, meetings, and older information. Check filters, retention-related limits, permissions, and whether search covers connected tools.",
-      "tool2Detail": "Test search against real conversations, files, meetings, and older information. Check filters, retention-related limits, permissions, and whether search covers connected tools."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Test search using real records and older content; check filters, permissions, retention limits, and connected sources.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Test search using real records and older content; check filters, permissions, retention limits, and connected sources."
     },
     {
       "name": "Template library",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Check whether templates are available for your workflows, who can create or share them, and whether templates can be administered centrally or require an add-on.",
-      "tool2Detail": "Check whether templates are available for your workflows, who can create or share them, and whether templates can be administered centrally or require an add-on."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Check whether the templates your team needs exist, who can maintain them, and whether sharing or administration is restricted by plan.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Check whether the templates your team needs exist, who can maintain them, and whether sharing or administration is restricted by plan."
     },
     {
       "name": "Community ecosystem",
       "tool1": true,
       "tool2": true,
-      "tool1Detail": "Review the current user community, documentation, learning resources, and third-party ecosystem. Consider whether answers are current and relevant to your use case.",
-      "tool2Detail": "Review the current user community, documentation, learning resources, and third-party ecosystem. Consider whether answers are current and relevant to your use case."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Review current official documentation, user forums, learning resources, and integration ecosystem for the workflows you need.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Review current official documentation, user forums, learning resources, and integration ecosystem for the workflows you need."
     },
     {
       "name": "Onboarding experience",
       "tool1": true,
       "tool2": true,
-      "tool1Detail": "Ask new users to complete setup and common tasks without help. Record confusion, required admin steps, and training time for each product.",
-      "tool2Detail": "Ask new users to complete setup and common tasks without help. Record confusion, required admin steps, and training time for each product."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Ask a new user to complete common tasks without help; note required admin steps, confusing screens, and training time.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Ask a new user to complete common tasks without help; note required admin steps, confusing screens, and training time."
     },
     {
       "name": "Multi-language support",
       "tool1": true,
       "tool2": true,
-      "tool1Detail": "Verify interface languages, caption or transcription languages where relevant, localization, and any region-specific limitations for the users who need them.",
-      "tool2Detail": "Verify interface languages, caption or transcription languages where relevant, localization, and any region-specific limitations for the users who need them."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Verify interface language, captions or transcription languages where relevant, and regional limitations for your users.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Verify interface language, captions or transcription languages where relevant, and regional limitations for your users."
     },
     {
       "name": "Custom branding",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Confirm whether branding controls are available for your intended workspace or customer-facing experience, and whether custom domains or other options require a specific plan.",
-      "tool2Detail": "Confirm whether branding controls are available for your intended workspace or customer-facing experience, and whether custom domains or other options require a specific plan."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Confirm whether branding controls are available for your intended workspace or customer-facing experience and which plan includes them.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Confirm whether branding controls are available for your intended workspace or customer-facing experience and which plan includes them."
     },
     {
       "name": "Bulk operations",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Check whether the product supports the bulk actions you need for users, records, files, or settings. Verify limits, permissions, and whether an API or separate tool is required.",
-      "tool2Detail": "Check whether the product supports the bulk actions you need for users, records, files, or settings. Verify limits, permissions, and whether an API or separate tool is required."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Test bulk actions for users, records, or settings and check permission requirements, limits, and whether an API is needed.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Test bulk actions for users, records, or settings and check permission requirements, limits, and whether an API is needed."
     },
     {
       "name": "Data portability",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Confirm what information can be exported, the available formats, which roles may export it, and whether exports include files, history, permissions, recordings, and metadata.",
-      "tool2Detail": "Confirm what information can be exported, the available formats, which roles may export it, and whether exports include files, history, permissions, recordings, and metadata."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Export a representative sample and inspect format, attachments, metadata, permissions, and any limits or fees.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Export a representative sample and inspect format, attachments, metadata, permissions, and any limits or fees."
     },
     {
       "name": "Offline mode",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Test what remains available without a network connection, what is cached locally, and how edits or messages synchronize after reconnecting. Do not assume full offline parity.",
-      "tool2Detail": "Test what remains available without a network connection, what is cached locally, and how edits or messages synchronize after reconnecting. Do not assume full offline parity."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Test what remains available without a connection, what is cached, and how the product behaves when connectivity returns.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Test what remains available without a connection, what is cached, and how the product behaves when connectivity returns."
     },
     {
       "name": "SSO/SAML",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Verify supported identity providers, SSO protocols, provisioning options, and whether enforcement requires a particular plan. Test joiner, mover, and leaver processes.",
-      "tool2Detail": "Verify supported identity providers, SSO protocols, provisioning options, and whether enforcement requires a particular plan. Test joiner, mover, and leaver processes."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Check supported identity providers and protocols, provisioning options, enforcement scope, and license requirements.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Check supported identity providers and protocols, provisioning options, enforcement scope, and license requirements."
     },
     {
       "name": "Encryption at rest",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Review current security documentation for the relevant service and stored data types. Confirm any key-management or customer-managed-key requirements with the vendor.",
-      "tool2Detail": "Review current security documentation for the relevant service and stored data types. Confirm any key-management or customer-managed-key requirements with the vendor."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Review current security documentation for the relevant data types and confirm any key-management options required by policy.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Review current security documentation for the relevant data types and confirm any key-management options required by policy."
     },
     {
       "name": "Encryption in transit",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Check the vendor’s current security documentation for transport protection and supported clients or APIs. Do not infer a specific protocol version without a current source.",
-      "tool2Detail": "Check the vendor’s current security documentation for transport protection and supported clients or APIs. Do not infer a specific protocol version without a current source."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Confirm transport-protection details in current security documentation for the services and clients your team will use.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Confirm transport-protection details in current security documentation for the services and clients your team will use."
     },
     {
       "name": "SOC 2 Type II",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Ask for the current report or official assurance documentation, confirm the scope and period covered, and verify that the relevant service is included.",
-      "tool2Detail": "Ask for the current report or official assurance documentation, confirm the scope and period covered, and verify that the relevant service is included."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Request current assurance documentation and verify scope, reporting period, exceptions, and which service is covered.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Request current assurance documentation and verify scope, reporting period, exceptions, and which service is covered."
     },
     {
       "name": "GDPR compliance",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Review the current data processing agreement, controller/processor roles, subprocessors, data-subject request handling, and transfer terms for your intended use.",
-      "tool2Detail": "Review the current data processing agreement, controller/processor roles, subprocessors, data-subject request handling, and transfer terms for your intended use."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Review the data-processing agreement, controller/processor roles, subprocessors, data-subject request process, and transfer terms.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Review the data-processing agreement, controller/processor roles, subprocessors, data-subject request process, and transfer terms."
     },
     {
       "name": "HIPAA compliance",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "If handling protected health information, verify the exact product, plan, contractual agreement, and configuration with the vendor and your compliance team before use.",
-      "tool2Detail": "If handling protected health information, verify the exact product, plan, contractual agreement, and configuration with the vendor and your compliance team before use."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. If handling protected health information, confirm the exact service and plan, required agreement, and configuration with the vendor.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. If handling protected health information, confirm the exact service and plan, required agreement, and configuration with the vendor."
     },
     {
       "name": "Uptime SLA",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Check whether an uptime commitment applies to the exact service and plan, what exclusions exist, and how service credits and incident communications work.",
-      "tool2Detail": "Check whether an uptime commitment applies to the exact service and plan, what exclusions exist, and how service credits and incident communications work."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Check whether an uptime commitment applies to the selected service and plan, including exclusions, measurement, and remedies.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Check whether an uptime commitment applies to the selected service and plan, including exclusions, measurement, and remedies."
     },
     {
       "name": "Data residency",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Confirm which data types can be stored in which regions, whether the option applies to your plan, and how backups, support data, and connected services are handled.",
-      "tool2Detail": "Confirm which data types can be stored in which regions, whether the option applies to your plan, and how backups, support data, and connected services are handled."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Confirm which data types can reside in which regions, whether the option is included in the plan, and what exceptions apply.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Confirm which data types can reside in which regions, whether the option is included in the plan, and what exceptions apply."
     },
     {
       "name": "Incident response",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Review the vendor’s public incident communications and contractual notification terms. Confirm escalation contacts and how your organization would receive and act on security notices.",
-      "tool2Detail": "Review the vendor’s public incident communications and contractual notification terms. Confirm escalation contacts and how your organization would receive and act on security notices."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Review public incident updates and contractual notification terms; confirm escalation paths and how customer impact is communicated.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Review public incident updates and contractual notification terms; confirm escalation paths and how customer impact is communicated."
     },
     {
       "name": "Vulnerability management",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Review the vendor’s security disclosure process and available assurance documentation. For critical integrations, clarify how vulnerabilities are reported and remediated.",
-      "tool2Detail": "Review the vendor’s security disclosure process and available assurance documentation. For critical integrations, clarify how vulnerabilities are reported and remediated."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Review the security disclosure process, available assurance documents, and how critical issues and patches are communicated.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Review the security disclosure process, available assurance documents, and how critical issues and patches are communicated."
     },
     {
       "name": "API access",
       "tool1": true,
       "tool2": true,
-      "tool1Detail": "Check API availability, authentication, permissions, rate limits, supported objects, and versioning. Prototype the integration against the current documentation before relying on it.",
-      "tool2Detail": "Check API availability, authentication, permissions, rate limits, supported objects, and versioning. Prototype the integration against the current documentation before relying on it."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Check endpoint coverage, authentication, permissions, rate limits, versioning, and whether access requires a specific plan.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Check endpoint coverage, authentication, permissions, rate limits, versioning, and whether access requires a specific plan."
     },
     {
       "name": "Native integrations",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "List the specific apps your team needs and verify the current integration directory. Test data flow, permissions, setup ownership, plan restrictions, and third-party fees.",
-      "tool2Detail": "List the specific apps your team needs and verify the current integration directory. Test data flow, permissions, setup ownership, plan restrictions, and third-party fees."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. List the apps the team needs and verify current integration support, data flow, permissions, and any separate subscription cost.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. List the apps the team needs and verify current integration support, data flow, permissions, and any separate subscription cost."
     },
     {
       "name": "Webhook support",
       "tool1": true,
       "tool2": true,
-      "tool1Detail": "Verify supported event types, delivery and retry behavior, authentication, rate limits, and how failed events can be monitored or replayed.",
-      "tool2Detail": "Verify supported event types, delivery and retry behavior, authentication, rate limits, and how failed events can be monitored or replayed."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Test the needed event types, authentication, delivery retries, rate limits, and recovery from failed deliveries.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Test the needed event types, authentication, delivery retries, rate limits, and recovery from failed deliveries."
     },
     {
       "name": "Auto workflow",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Build a small example of the workflow you need and verify triggers, actions, conditions, usage limits, permissions, and failure notifications on the intended plan.",
-      "tool2Detail": "Build a small example of the workflow you need and verify triggers, actions, conditions, usage limits, permissions, and failure notifications on the intended plan."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Build one representative automation and verify triggers, actions, conditions, usage limits, permissions, and failure handling.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Build one representative automation and verify triggers, actions, conditions, usage limits, permissions, and failure handling."
     },
     {
       "name": "Reporting and analytics",
       "tool1": null,
       "tool2": null,
-      "tool1Detail": "Identify the reports required by managers or administrators and verify their availability, export options, retention, and access controls. Avoid assuming customizable dashboards are included.",
-      "tool2Detail": "Identify the reports required by managers or administrators and verify their availability, export options, retention, and access controls. Avoid assuming customizable dashboards are included."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Identify required admin and team reports, then verify filters, exports, retention, and plan requirements.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Identify required admin and team reports, then verify filters, exports, retention, and plan requirements."
     },
     {
       "name": "Notification system",
       "tool1": true,
       "tool2": true,
-      "tool1Detail": "Test notification controls across desktop and mobile, including mentions, quiet hours, channel or meeting settings, and external notifications. Agree on team norms to prevent alert overload.",
-      "tool2Detail": "Test notification controls across desktop and mobile, including mentions, quiet hours, channel or meeting settings, and external notifications. Agree on team norms to prevent alert overload."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Test notification settings across desktop and mobile, including mentions, quiet hours, channels or DMs, and urgent alerts.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Test notification settings across desktop and mobile, including mentions, quiet hours, channels or DMs, and urgent alerts."
     },
     {
       "name": "Customer support",
       "tool1": true,
       "tool2": true,
-      "tool1Detail": "Compare support coverage, response targets, escalation channels, and whether onboarding or technical support is included in the intended plan or contract.",
-      "tool2Detail": "Compare support coverage, response targets, escalation channels, and whether onboarding or technical support is included in the intended plan or contract."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Confirm support channels, operating hours, response targets, escalation, and whether onboarding or technical support costs extra.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Confirm support channels, operating hours, response targets, escalation, and whether onboarding or technical support costs extra."
     },
     {
       "name": "Training resources",
       "tool1": true,
       "tool2": true,
-      "tool1Detail": "Review current help articles, tutorials, admin documentation, and formal training options. Test whether a new user or administrator can complete common tasks using these resources.",
-      "tool2Detail": "Review current help articles, tutorials, admin documentation, and formal training options. Test whether a new user or administrator can complete common tasks using these resources."
+      "tool1Detail": "For Slack, validate the behavior in your workspace and confirm which plan, app permissions, history settings, or workflow limits apply. Review current user and admin documentation and check whether tutorials or formal training cover the tasks your team needs.",
+      "tool2Detail": "For Microsoft Teams, validate the behavior in your tenant and confirm the Microsoft 365 license, admin policy, and any add-on required. Review current user and admin documentation and check whether tutorials or formal training cover the tasks your team needs."
     },
     {
       "name": "Community support",
