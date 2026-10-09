@@ -278,6 +278,7 @@ function readDir(dir: string): string[] {
 }
 
 export function getReview(slug: string): ReviewContent | null {
+  if (isNoindexed("reviews", slug)) return null
   const file = path.join(CONTENT_DIR, "reviews", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   return sanitizeReview(readJson<ReviewContent>(file))
@@ -382,6 +383,7 @@ function sanitizeComparisonDescription(description: string, tool1: string, tool2
   return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the recorded overall winner." : "The dataset records no single overall winner.") + " Read the detailed rows and linked reviews before making a decision.", 700)
 }
 export function getComparison(slug: string): ComparisonContent | null {
+  if (isNoindexed("comparisons", slug)) return null
   const file = path.join(CONTENT_DIR, "comparisons", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const cmp = readJson<ComparisonContent>(file)
@@ -434,6 +436,7 @@ export function getComparisonsByCategory(category: string): ComparisonContent[] 
 }
 
 export function getGuide(slug: string): GuideContent | null {
+  if (isNoindexed("guides", slug)) return null
   const file = path.join(CONTENT_DIR, "guides", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const guide = readJson<GuideContent>(file)
@@ -541,6 +544,7 @@ function buildAlternativeSections(alt: AlternativeContent): ContentSection[] {
   ]
 }
 export function getAlternative(slug: string): AlternativeContent | null {
+  if (isNoindexed("alternatives", slug)) return null
   const file = path.join(CONTENT_DIR, "alternatives", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const alt = readJson<AlternativeContent>(file)
@@ -637,6 +641,7 @@ export function getAllStatistics(): StatisticContent[] {
 }
 
 export function getBest(slug: string): BestContent | null {
+  if (isNoindexed("best", slug)) return null
   const file = path.join(CONTENT_DIR, "best", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const best = readJson<BestContent>(file)
