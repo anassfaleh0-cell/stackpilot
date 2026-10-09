@@ -167,6 +167,7 @@ function checkContentQuality() {
     let noindexCount = 0
     let missingDescription = 0
     let missingFaq = 0
+    const thinSamples = []
 
     for (const file of files) {
       const data = readJson(path.join(dir, file))
@@ -249,6 +250,11 @@ function checkContentQuality() {
 
       if (words < ct.minWords) {
         thinCount++
+        thinSamples.push({
+          slug,
+          title: String(data[ct.nameField] || slug),
+          sourceWords: words,
+        })
       }
 
       // Check description
@@ -262,19 +268,19 @@ function checkContentQuality() {
       }
     }
 
-    const indexed = files.length - noindexCount
-    if (thinCount > 0 && indexed > 0) {
-      const pct = ((thinCount / indexed) * 100).toFixed(1)
-      log("warn", `${ct.dir}: ${thinCount}/${indexed} indexed pages are thin content (<${ct.minWords} words) [${pct}%]`)
+    const eligibleRecords = files.length - noindexCount
+    if (thinCount > 0 && eligibleRecords > 0) {
+      const pct = ((thinCount / eligibleRecords) * 100).toFixed(1)
+      log("warn", ct.dir + ": " + thinCount + "/" + eligibleRecords + " eligible source records have fewer than " + ct.minWords + " words in audited fields [" + pct + "%]. This is a source-data signal, not a rendered-page word count; runtime-derived copy is not measured. Samples: " + JSON.stringify(thinSamples.slice(0, 8)))
     } else {
-      log("pass", `${ct.dir}: Content depth is adequate (${indexed} indexed pages)`)
+      log("pass", ct.dir + ": Audited source fields meet the configured word threshold (" + eligibleRecords + " eligible records)")
     }
 
-    if (missingDescription > 0 && indexed > 0) {
-      log("warn", `${ct.dir}: ${missingDescription} pages missing adequate description`)
+    if (missingDescription > 0 && eligibleRecords > 0) {
+      log("warn", ct.dir + ": " + missingDescription + " source records missing an adequate description")
     }
-    if (missingFaq > 0 && indexed > 0) {
-      log("warn", `${ct.dir}: ${missingFaq} pages missing FAQ schema opportunity`)
+    if (missingFaq > 0 && eligibleRecords > 0) {
+      log("warn", ct.dir + ": " + missingFaq + " source records missing a FAQ data opportunity")
     }
   }
 }
