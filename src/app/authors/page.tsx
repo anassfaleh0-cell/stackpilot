@@ -20,7 +20,7 @@ const authors = [
     slug: "pilotstack-team",
     name: "PilotStack Team",
     role: "Publication byline",
-    bio: "This is the publication byline used for pages prepared from recorded product information and published scoring rules; it is not an individual biography or a claim of hands-on testing for every product.",
+    bio: "This is the publication byline used for pages prepared from recorded product information and published scoring rules; it is not an individual biography or a claim that every product has been directly tested.",
   },
 ]
 
@@ -37,7 +37,7 @@ export default function AuthorsPage() {
             <Badge variant="default" className="mb-4">Editorial byline</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">About the PilotStack editorial byline</h1>
             <p className="text-lg text-muted-foreground mb-10 max-w-2xl">
-              PilotStack currently publishes under one publication byline. The byline identifies the site responsible for the content; it does not imply that every product has been hands-on tested by a named reviewer.
+              PilotStack currently publishes under one publication byline. The byline identifies the site responsible for the content; it does not imply that every product has been directly tested by a named reviewer.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6">
