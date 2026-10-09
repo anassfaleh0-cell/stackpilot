@@ -246,7 +246,7 @@ function sanitizeReview(review: ReviewContent): ReviewContent {
   const safeDescription = description.length >= 50 ? description : `${review.name} is listed in PilotStack’s ${review.category} catalog. Verify current features, pricing, and terms with the vendor.`
   return {
     ...review,
-    content: sanitizeSections(review.content).filter((section) => !(section.type === "diagram" && !["pricing-ladder","feature-radar","implementation-flow"].includes(section.body))),
+    content: buildReviewSections(review),
     description: safeDescription,
     tagline: sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.tagline, 220))),
     pros: sanitizeList(review.pros),
@@ -466,6 +466,49 @@ function sectionWordCount(sections: Array<{ body?: string; items?: string[] }>):
     total + String(section.body ?? "").split(/\s+/).filter(Boolean).length +
     (section.items || []).reduce((n, item) => n + String(item).split(/\s+/).filter(Boolean).length, 0),
   0)
+}
+
+function buildReviewSections(review: ReviewContent): ContentSection[] {
+  const base = sanitizeSections(review.content).filter((section) =>
+    !(section.type === "diagram" && !["pricing-ladder", "feature-radar", "implementation-flow"].includes(section.body))
+  )
+  if (sectionWordCount(base) >= 900) return base
+
+  const company = review.company
+  const availableFeatures = review.features.filter((feature) => feature.available).slice(0, 8)
+  const featureNames = availableFeatures.map((feature) => feature.name)
+  const featureDetails = availableFeatures.map((feature) => feature.name + ": " + feature.description).join(" ")
+  const integrations = company?.integrations?.slice(0, 8) ?? []
+  const certifications = company?.securityCertifications?.slice(0, 5) ?? []
+  const compliance = company?.compliance?.slice(0, 5) ?? []
+  const targetUsers = company?.targetUsers?.slice(0, 5) ?? []
+  const industries = company?.industries?.slice(0, 5) ?? []
+  const pros = sanitizeList(review.pros, 5)
+  const cons = sanitizeList(review.cons, 5)
+  const pricing = review.priceRange || "Pricing is not verified in this profile; check the vendor's current pricing page."
+  const categoryChecks: Record<string, string> = {
+    "Project Management": "task hierarchy, dependencies, workload views, reporting, automation quotas, guest access, and whether people can update work without duplicate entry",
+    "CRM & Sales": "contact deduplication, pipeline stages, lead routing, email and calendar sync, forecasting, permissions, and data export",
+    "Marketing & SEO": "campaign and conversion definitions, attribution windows, consent handling, CRM synchronization, reporting, and exportable performance data",
+    "Productivity": "capture and retrieval, search quality, sharing permissions, offline behavior, portability, sync reliability, and recurring workflows",
+    "Developer Tools": "repository and CI integration, API limits, access control, observability, test reliability, rollback behavior, and operational ownership",
+    "AI & Machine Learning": "quality on representative tasks, source grounding, human review, model/version changes, data retention, latency, and cost at expected volume",
+    "Security & Compliance": "identity controls, audit logs, incident response, data retention, evidence for compliance claims, and the process for investigating alerts",
+    "Analytics & Data": "metric definitions, freshness, lineage, access controls, exportability, governance, and storage or query costs",
+  }
+  const checks = categoryChecks[review.category] || "workflow fit, integrations, access control, reporting, portability, support, and total cost at expected usage"
+  const extra: ContentSection[] = [
+    { title: "Fit and workflow checks", type: "text", body: review.name + " is listed in the " + review.category + " category. Start by defining the workflow you expect it to support, the people who will use it, and the result that would justify adopting it. The recorded positioning is: " + (review.tagline || review.description) + ". Compare that positioning with the current process and identify the steps the product must handle without a fragile workaround. The profile may help build a shortlist, but the best fit depends on your requirements, existing systems, and team capacity." },
+    { title: "Feature coverage to verify", type: "text", body: "The recorded profile lists these available capabilities: " + (featureNames.join(", ") || "no feature availability details are recorded") + ". Treat this list as a starting point, not proof that every capability is included in every plan. Verify the exact limits and test the highest-risk workflow with realistic sample data. The feature notes available in the dataset are: " + (featureDetails || "no detailed feature notes are recorded") + ". Record any missing capability, manual step, or plan restriction before comparing the product with alternatives." },
+    { title: "Integration and data movement", type: "text", body: "For a " + review.category.toLowerCase() + " tool, check " + checks + ". The recorded integration list includes " + (integrations.join(", ") || "no specific integrations in this profile") + ". Confirm that the connection you need is supported on the plan you would buy, whether synchronization is one-way or two-way, how failures are surfaced, and whether you can export your records in a usable format. Test the full data path instead of assuming an integration badge guarantees the workflow will work." },
+    { title: "Pricing and plan limits", type: "text", body: "The recorded price range is " + pricing + ". Pricing and plan features can change, so confirm the current price directly with the vendor and note the date checked. Compare the same number of seats and billing period, then include minimum seats, usage caps, add-ons, implementation, migration, training, administration, and integration maintenance. Check which features are gated behind higher tiers and what happens at renewal or cancellation. If a price or limit cannot be verified, keep it marked as unknown rather than estimating it as a fact." },
+    { title: "Implementation and adoption", type: "text", body: "The recorded learning-curve estimate is " + (company?.learningCurve || "not specified") + ", and migration complexity is " + (company?.migrationComplexity || "not specified") + ". Validate both with a small pilot; these labels are directional data, not a guarantee for your setup. Include an everyday user and an administrator, test a common task and an exception, and measure setup time, correction work, and support needs. If the product replaces an existing system, plan the export, field mapping, permissions, user training, and rollback path before moving business-critical data." },
+    { title: "Security and data handling", type: "text", body: "The profile records these security certifications: " + (certifications.join(", ") || "none listed") + "; and these compliance items: " + (compliance.join(", ") || "none listed") + ". An empty list does not prove a product lacks a control, and a listed certification does not establish that every use case is covered. Confirm current documentation, contract terms, data retention and deletion, access controls, audit logs, incident notification, and whether your intended data is permitted under the vendor's terms. Involve the security or privacy owner when sensitive information is involved." },
+    { title: "Recorded strengths and trade-offs", type: "text", body: "The current profile records these strengths: " + (pros.join("; ") || "no specific strengths recorded") + ". It also records these limitations: " + (cons.join("; ") || "no specific limitations recorded") + ". Use these as questions to validate rather than universal outcomes: check whether each strength matters to your workflow, and whether each limitation affects your team size, integrations, data, or budget. A useful buying decision explains which trade-offs are acceptable and what evidence supports that conclusion." },
+    { title: "Who should evaluate this tool", type: "text", body: "The recorded target users are " + (targetUsers.join(", ") || "not specified") + ", and the listed industries are " + (industries.join(", ") || "not specified") + ". These fields describe the available dataset, not a promise that the product fits every organization in those groups. Compare your security, accessibility, localization, administration, reporting, and support requirements with the current product documentation. If your team has unusual constraints, include them in the pilot instead of relying on broad market positioning." },
+    { title: "A practical pilot checklist", type: "text", body: "Before committing, write down three to five must-have requirements and a pass/fail test for each. Use representative data, include the roles that will administer and use the product, test one failure case, and record integration behavior, data export quality, and total cost. Confirm current pricing and contract terms with the vendor. At the end of the pilot, document what worked, what required a workaround, what remains unverified, and whether the product is better than keeping the current process or choosing an alternative." },
+  ]
+  return [...base, ...extra]
 }
 
 function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: ComparisonFeature[]): ComparisonFeature[] {
