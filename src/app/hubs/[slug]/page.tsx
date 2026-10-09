@@ -85,7 +85,7 @@ export default async function HubPage({ params }: { params: Promise<{ slug: stri
               )}
 
               {Object.entries(byCategory).map(([category, recs]) => (
-                <section key={category} className="mb-10">
+                <section key={category} id={category.toLowerCase().replace(/\s+/g, "-")} className="mb-10">
                   <h2 className="text-2xl font-bold tracking-tight mb-6">{category}</h2>
                   <div className="space-y-4">
                     {recs.map((rec) => (
