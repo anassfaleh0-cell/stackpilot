@@ -109,6 +109,8 @@ export interface ComparisonContent {
   relatedGuides?: string[]
   relatedPosts?: string[]
   lastUpdated: string
+  /** Explicit editorial state; legacy `published` flags are not authoritative across the corpus. */
+  publicationStatus?: "draft" | "published"
   published?: boolean
 }
 
