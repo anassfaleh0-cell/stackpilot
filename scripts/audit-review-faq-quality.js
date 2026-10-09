@@ -8,7 +8,6 @@ const brokenPatterns = [
   /\bcombines\s*\./i,
   /\bintermittent connect\b/i,
   /\bdependency mapp\b/i,
-  /\b(?:connect|mapp|functionality)\s*\./i,
 ]
 const genericPatterns = [
   /^the best choice depends on your team'?s specific workflow requirements and existing technology stack\.?$/i,
