@@ -224,14 +224,20 @@ describe("H-09A structured data and open graph", () => {
 
 describe("H-09A sitemap", () => {
   it("12. review lastmod uses contentModified", () => {
-    expect(sitemapSrc).toMatch(/lastModified:\s*new Date\(r\.contentModified\)/)
+    expect(sitemapSrc).toMatch(/lastModified:\s*getSitemapLastModified\(r\.contentModified\)/)
     expect(sitemapSrc).not.toContain("r.lastReviewed")
   })
 
-  it("the review entry block is otherwise untouched", () => {
+  it("the review entry block is otherwise untouched and static URLs have no invented lastmod", () => {
     expect(sitemapSrc).toContain('url: `${siteConfig.url}/reviews/${r.slug}`')
     expect(sitemapSrc).toContain("isQuality(r.slug, \"reviews\")")
-    expect(sitemapSrc).toContain("const LISTING_DATE = new Date()")
+    expect(sitemapSrc).not.toContain("const LISTING_DATE = new Date()")
+    expect(sitemapSrc).not.toContain("POLICY_DATE")
+    expect(sitemapSrc).toContain('{ url: siteConfig.url, changeFrequency: "daily", priority: 1.0 }')
+  })
+
+  it("excludes noindexed blog posts from the sitemap", () => {
+    expect(sitemapSrc).toContain('const blogPosts = getAllBlogPosts().filter((p) => isQuality(p.slug, "blog"))')
   })
 })
 
