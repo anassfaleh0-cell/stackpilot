@@ -44,7 +44,7 @@ const staticPages: MetadataRoute.Sitemap = [
   { url: `${siteConfig.url}/sitemap-html`, lastModified: LISTING_DATE, changeFrequency: "weekly", priority: 0.5 },
   { url: `${siteConfig.url}/methodology`, lastModified: new Date(POLICY_DATE), changeFrequency: "monthly", priority: 0.5 },
   { url: `${siteConfig.url}/dmca`, lastModified: new Date(POLICY_DATE), changeFrequency: "yearly", priority: 0.2 },
-  ...editorialLinks.map((l) => ({
+  ...editorialLinks.filter((l) => l.href !== "/dmca").map((l) => ({
     url: `${siteConfig.url}${l.href}`,
     lastModified: new Date(POLICY_DATE),
     changeFrequency: "monthly" as const,
