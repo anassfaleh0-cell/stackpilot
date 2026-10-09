@@ -286,6 +286,7 @@ export function getReview(slug: string): ReviewContent | null {
 export function getAllReviews(): ReviewContent[] {
   return readDir(path.join(CONTENT_DIR, "reviews"))
     .map((f) => sanitizeReview(readJson<ReviewContent>(path.join(CONTENT_DIR, "reviews", f))))
+    .filter((review) => !isNoindexed("reviews", review.slug))
     .sort((a, b) => b.rating - a.rating)
 }
 
@@ -386,6 +387,15 @@ export function getComparison(slug: string): ComparisonContent | null {
   const cmp = readJson<ComparisonContent>(file)
   // Explicitly unpublished comparisons must never be rendered, linked, or included in the sitemap.
   if (cmp.published === false) return null
+  // Unless an editor explicitly publishes a cross-category comparison, require both source reviews
+  // to be indexable and in the same primary category before deriving public comparison content.
+  if (cmp.published !== true) {
+    const left = getReview(cmp.tool1Slug)
+    const right = getReview(cmp.tool2Slug)
+    if (!left || !right) return null
+    if (isNoindexed("reviews", left.slug) || isNoindexed("reviews", right.slug)) return null
+    if (left.category.trim().toLowerCase() !== right.category.trim().toLowerCase()) return null
+  }
   const baseFeatures = cmp.features.slice(0, 20).map((f) => ({
     ...f,
     name: trimText(f.name, 140),
@@ -405,6 +415,7 @@ export function getComparison(slug: string): ComparisonContent | null {
 }
 export function getAllComparisons(): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
+    .filter((file) => !isNoindexed("comparisons", file.replace(/\.json$/, "")))
     .map((f) => getComparison(f.replace(/\.json$/, "")))
     .filter((x): x is ComparisonContent => Boolean(x))
 }
@@ -413,6 +424,8 @@ export function getAllComparisons(): ComparisonContent[] {
 export function getComparisonsByCategory(category: string): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
     .filter((file) => {
+      const slug = file.replace(/\.json$/, "")
+      if (isNoindexed("comparisons", slug)) return false
       const raw = readJson<ComparisonContent>(path.join(CONTENT_DIR, "comparisons", file))
       return raw.category === category || raw.secondaryCategories?.includes(category)
     })
@@ -429,6 +442,7 @@ export function getGuide(slug: string): GuideContent | null {
 
 export function getAllGuides(): GuideContent[] {
   return readDir(path.join(CONTENT_DIR, "guides"))
+    .filter((file) => !isNoindexed("guides", file.replace(/\.json$/, "")))
     .map((f) => { const g = readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)); return { ...g, sections: buildGuideSections(g), faqs: sanitizeFaqs(g.faqs) } })
 }
 
@@ -575,6 +589,7 @@ export function getAlternative(slug: string): AlternativeContent | null {
 
 export function getAllAlternatives(): AlternativeContent[] {
   return readDir(path.join(CONTENT_DIR, "alternatives"))
+    .filter((file) => !isNoindexed("alternatives", file.replace(/\.json$/, "")))
     .map((f) => getAlternative(f.replace(/\.json$/, "")))
     .filter((x): x is AlternativeContent => Boolean(x))
 }
@@ -668,6 +683,7 @@ export function getBest(slug: string): BestContent | null {
 
 export function getAllBest(): BestContent[] {
   return readDir(path.join(CONTENT_DIR, "best"))
+    .filter((file) => !isNoindexed("best", file.replace(/\.json$/, "")))
     .map((f) => getBest(f.replace(/\.json$/, "")))
     .filter((x): x is BestContent => Boolean(x))
 }
