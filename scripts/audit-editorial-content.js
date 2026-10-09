@@ -27,8 +27,22 @@ function collect(value) {
   if (value && typeof value === "object") return Object.values(value).flatMap(collect)
   return []
 }
+const NON_EDITORIAL_KEYS = new Set([
+  "slug", "author", "category", "website", "logo", "pricing", "priceRange", "rating",
+  "reviewCount", "readingTime", "difficulty", "lastUpdated", "publishedAt", "updatedAt",
+  "contentPublished", "contentModified", "relatedTools", "relatedGuides", "relatedSlugs",
+])
+function collectEditorial(value, key = "") {
+  if (NON_EDITORIAL_KEYS.has(key)) return []
+  if (typeof value === "string") return [value]
+  if (Array.isArray(value)) return value.flatMap((item) => collectEditorial(item))
+  if (value && typeof value === "object") {
+    return Object.entries(value).flatMap(([childKey, child]) => collectEditorial(child, childKey))
+  }
+  return []
+}
 function wordCount(data) {
-  return collect(data).join(" ").trim().split(/\s+/).filter(Boolean).length
+  return collectEditorial(data).join(" ").trim().split(/\s+/).filter(Boolean).length
 }
 function filesIn(dir) {
   const abs = path.join(ROOT, "content", dir)
