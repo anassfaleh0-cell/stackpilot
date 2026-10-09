@@ -1,8 +1,8 @@
 // Sprint 19 Phase 2: Money Keywords Expansion — Best Pages for Audiences
 const fs = require("node:fs")
 
-const CONTENT_DIR = "C:/Users/user/Desktop/DEEPSK/content"
-const now = "July 20, 2026"
+const CONTENT_DIR = path.join(__dirname, "content")
+const now = new Date().toISOString().slice(0, 10)
 
 // Load all tools from reviews
 const tools = []
