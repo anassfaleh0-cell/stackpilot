@@ -1,61 +1,53 @@
 {
   "slug": "api-security-best-practices",
-  "title": "API Security Best Practices Guide: How to Choose the Right Security & Compliance Platform",
-  "description": "Actionable api security best practices guidance covering implementation decisions, risk controls, practical tests, and a readiness checklist. Updated October 2026.",
+  "title": "API Security Best Practices: A Practical Threat-Modeling Checklist",
+  "description": "How to protect APIs with clear authorization rules, safe data handling, abuse controls, testing, and incident response.",
   "category": "Security & Compliance",
   "difficulty": "Beginner",
-  "author": "Marcus Rivera",
-  "readingTime": 3,
+  "author": "PilotStack Team",
+  "readingTime": 9,
   "relatedTools": [
-    "auth0",
-    "cloudflare-pages",
-    "sentry"
+    "1password",
+    "okta",
+    "sentry",
+    "cloudflare-pages"
   ],
-  "relatedGuides": [
-    "data-privacy-compliance",
-    "devsecops-implementation",
-    "endpoint-security-solutions-guide"
-  ],
+  "relatedGuides": [],
   "lastUpdated": "2026-10-09",
   "sections": [
     {
-      "title": "Map the API attack surface",
-      "body": "Inventory public and internal APIs, versions, owners, environments, and the data or actions each endpoint exposes. Include GraphQL, webhooks, partner APIs, mobile backends, and legacy routes that may no longer be documented. For each endpoint, record its authentication method, authorization rules, rate limits, and business impact if abused. Use the inventory to identify unowned APIs and endpoints that expose sensitive operations; do not assume that an undocumented route is unused.",
+      "title": "Model assets, actors, and trust boundaries",
+      "body": "List the sensitive data, operations, and business actions exposed by the API. Identify users, service accounts, administrators, third-party clients, and anonymous callers. Draw the boundaries between the public internet, application services, databases, and external providers. For each endpoint, document who may call it, which objects they may access, and which state changes they may perform. This prevents security reviews from stopping at a generic statement that the API uses authentication.",
       "type": "text"
     },
     {
-      "title": "Authenticate callers and authorize every action",
-      "body": "Choose authentication appropriate to the client and threat model, then validate tokens, issuer, audience, expiry, and signature correctly. Authentication only establishes who or what made a request; authorization must still check whether that identity may access the specific object and perform the requested action. Test object-level access with two users and two records to catch insecure direct object references. Avoid trusting client-supplied role names, account IDs, or tenant IDs without server-side checks.",
+      "title": "Enforce object- and action-level authorization",
+      "body": "Authentication establishes identity; authorization determines what that identity can do. Check permissions for each requested object and action on the server, including list, export, update, and delete operations. Do not rely on hidden UI controls or client-supplied role values. Test cross-tenant access with accounts from different tenants and verify that identifiers cannot be used to retrieve another customer's records. Review permission changes and administrative endpoints separately.",
       "type": "text"
     },
     {
-      "title": "Validate input and constrain output",
-      "body": "Define schemas for request bodies, query parameters, headers, and webhook payloads. Reject unexpected fields where practical, cap request size, validate types and ranges, and use parameterized database operations. Encode output for its destination and avoid returning internal stack traces, secrets, or fields the caller does not need. File uploads, filters, sort expressions, and search syntax deserve explicit limits because they often cross into expensive or privileged operations.",
+      "title": "Validate inputs and protect outputs",
+      "body": "Define allowed formats, lengths, ranges, and enumerated values for every input. Use parameterized database operations, safe serialization, and explicit content-type handling. Return only fields the caller needs, and avoid exposing stack traces, internal identifiers, or secrets in error messages. Set request-size limits and timeouts. Treat uploaded files, callback URLs, webhooks, and user-provided URLs as untrusted inputs that may require additional validation and network restrictions.",
       "type": "text"
     },
     {
-      "title": "Protect credentials and secrets",
-      "body": "Store API keys and signing secrets in a managed secret store, rotate them on a schedule appropriate to risk, and make revocation practical. Never commit credentials to source control or place long-lived secrets in browser or mobile bundles. Scope keys to the minimum permissions and environment, separate test and production credentials, and log key usage without recording the secret itself. For webhooks, verify signatures over the exact payload and reject replayed or expired requests when the protocol supports it.",
+      "title": "Manage credentials and sessions safely",
+      "body": "Use established identity libraries and modern token validation rather than hand-written cryptography. Verify issuer, audience, expiration, and signature; rotate credentials and revoke access when staff or integrations change. Store secrets in an appropriate secret manager and never commit them to source control or include them in logs. Scope API keys narrowly, separate production from test credentials, and monitor unusual use. Document the recovery process for a leaked credential.",
       "type": "text"
     },
     {
-      "title": "Limit abuse and denial of service",
-      "body": "Apply per-identity and per-IP rate limits where appropriate, plus quotas for expensive operations and bulk exports. Set timeouts, pagination limits, concurrency ceilings, and request-size caps. Use idempotency keys for retryable operations that could otherwise create duplicate charges or records. Monitor unusual increases in authentication failures, 4xx/5xx rates, expensive queries, and outbound traffic. Ensure a rate limit does not let one tenant exhaust capacity for every other tenant.",
+      "title": "Control abuse and resource exhaustion",
+      "body": "Apply rate limits and quotas according to identity, endpoint sensitivity, and resource cost. Protect expensive search, export, and report endpoints separately from lightweight reads. Consider pagination caps, concurrency limits, request deadlines, and bounded retries. Return clear rate-limit responses and monitor patterns that indicate credential stuffing, scraping, or automated abuse. Limits should protect service stability without blocking legitimate clients unexpectedly.",
       "type": "text"
     },
     {
-      "title": "Test the whole request path",
-      "body": "Add automated tests for missing credentials, expired tokens, cross-tenant access, privilege escalation, malformed input, oversized payloads, repeated requests, and unexpected downstream failures. Include negative tests in CI and run authorized dynamic testing against a staging environment. Check dependency vulnerabilities and configuration drift, but do not treat a clean scanner report as proof that business authorization is correct. Every high-severity finding needs an owner, fix, and regression test.",
+      "title": "Test security continuously",
+      "body": "Include authorization tests, input validation, dependency checks, secret scanning, and negative tests in CI. Use a staging environment to test realistic attack paths without exposing production data. Review API schema changes for newly exposed fields or operations. Keep a process for reporting vulnerabilities and prioritizing fixes by impact. Passing an automated scanner is useful evidence, but it does not prove that business-specific authorization logic is correct.",
       "type": "text"
     },
     {
-      "title": "Log for investigation without leaking data",
-      "body": "Record request IDs, actor or service identity, endpoint, outcome, latency, and relevant security events. Redact authorization headers, passwords, personal data, and secret values. Make logs searchable across gateway, application, and identity systems, restrict access, and set retention according to investigation needs and policy. Create alerts for patterns that indicate abuse, and verify that responders can trace one suspicious request end-to-end.",
-      "type": "text"
-    },
-    {
-      "title": "Release gate and maintenance",
-      "body": "Before release, verify that every sensitive endpoint has an owner, documented authorization, bounded resource use, safe error handling, and tests for denied access. Keep an inventory of deprecated versions and publish a retirement plan. Review permissions and credentials after personnel or vendor changes. Reassess the threat model when endpoints, data types, integrations, or execution privileges change; API security is an ongoing engineering practice, not a one-time scanner run.",
+      "title": "Prepare for incidents and reassessment",
+      "body": "Log security-relevant events without recording sensitive payloads or credentials. Define who investigates suspected abuse, how to revoke keys, how to contain an affected endpoint, and how customers will be notified if required. Preserve enough evidence to reconstruct the event. Reassess the threat model when new integrations, data types, roles, or endpoints are added. Security is an ongoing release requirement, not a one-time configuration.",
       "type": "text"
     }
   ]

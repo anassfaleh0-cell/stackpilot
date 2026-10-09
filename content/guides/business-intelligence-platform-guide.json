@@ -1,61 +1,53 @@
 {
   "slug": "business-intelligence-platform-guide",
-  "title": "Business Intelligence Platform Guide: How to Choose the Right Analytics & Data Platform",
-  "description": "Practical business intelligence platform guidance with selection criteria, implementation risks, evaluation tests, and a readiness checklist. Updated October 2026.",
+  "title": "Business Intelligence Platforms: A Practical Evaluation Guide",
+  "description": "How to compare BI platforms through metric governance, data quality, access control, self-service analysis, and total cost.",
   "category": "Analytics & Data",
   "difficulty": "Beginner",
-  "author": "Marcus Rivera",
-  "readingTime": 3,
+  "author": "PilotStack Team",
+  "readingTime": 9,
   "relatedTools": [
     "tableau",
     "power-bi",
-    "amplitude"
+    "looker",
+    "metabase"
   ],
-  "relatedGuides": [
-    "data-governance-guide",
-    "data-engineering-pipeline-guide",
-    "how-to-choose-analytics-software"
-  ],
+  "relatedGuides": [],
   "lastUpdated": "2026-10-09",
   "sections": [
     {
-      "title": "Start with the decisions people need to make",
-      "body": "List the recurring decisions the BI platform should improve, who makes them, and what data they need. Examples include understanding margin by product, monitoring service levels, or spotting changes in customer retention. For each, define the metric, grain, reporting cadence, and action that follows a threshold. If teams disagree about what a metric means, settle the definition before comparing dashboards; a new visualization tool cannot resolve inconsistent business logic by itself.",
+      "title": "Start with decisions and users",
+      "body": "List the recurring decisions the BI platform must improve, the people making them, and the time frame in which the data must be available. Interview analysts, operational managers, and executives because each group may need different levels of detail. Identify the existing reports that are trusted, those maintained manually, and those that disagree. Define a small set of priority questions and the business action each answer should inform. Buying a visualization tool before resolving these needs often creates more dashboards without improving decisions.",
       "type": "text"
     },
     {
-      "title": "Assess data readiness and ownership",
-      "body": "Map the source systems, refresh schedules, data quality issues, and owners behind the most important reports. Determine whether the platform queries operational systems directly, uses a warehouse, or needs a semantic layer. Test late-arriving data, missing values, changes to source schemas, and differences between finance and operational totals. Document lineage and show report consumers which source and definition each key metric uses.",
+      "title": "Establish metric definitions and data quality",
+      "body": "Create a shared definition for key measures, including numerator, denominator, filters, time zone, refresh frequency, and owner. Check completeness, duplication, freshness, and reconciliation with the source system. Determine where transformations live and how a change to a definition is reviewed. During a pilot, compare the platform's results with a known source report and investigate every material discrepancy. A polished chart is not useful if different departments interpret the same metric differently.",
       "type": "text"
     },
     {
-      "title": "Compare modeling and semantic capabilities",
-      "body": "Evaluate how the tool defines shared metrics, relationships, calculations, row-level security, reusable datasets, and certified reports. Test a realistic multi-table question and see whether two analysts can obtain the same result without duplicating business logic. Check how changes are reviewed and promoted between development and production. A visually impressive chart is less valuable than a model that produces consistent numbers and can be maintained by the team.",
+      "title": "Evaluate data modeling and integration",
+      "body": "Map the required databases, warehouses, spreadsheets, SaaS systems, and refresh schedules. Test connector reliability, incremental refresh, schema changes, joins, and handling of late-arriving data. Confirm whether business logic can be versioned and reviewed, and whether analysts can reuse governed datasets instead of recreating calculations in every report. Evaluate query performance with representative data volumes. If the platform requires a large manual preparation step every week, include that maintenance burden in the comparison.",
       "type": "text"
     },
     {
-      "title": "Check access and sharing behavior",
-      "body": "Test permissions for individual users, groups, external recipients, embedded dashboards, downloads, and exports. Verify row-level security with accounts that should see different records. Review SSO, audit logging, data residency, and retention requirements against current vendor documentation and contracts. If dashboards include personal or commercially sensitive data, confirm that access controls apply to exports and cached results as well as the visible page.",
+      "title": "Design access and governance",
+      "body": "Decide who can view, edit, share, export, and administer each dataset and report. Test row-level and column-level restrictions using accounts that represent real roles. Check audit logs, sharing defaults, external access, data residency, retention, and deletion. Define a certification process for trusted dashboards and a way to retire stale reports. Self-service should make analysis easier without letting sensitive data spread through uncontrolled copies.",
       "type": "text"
     },
     {
-      "title": "Measure usability and performance",
-      "body": "Choose representative reports with realistic row counts, filters, concurrent users, and refresh needs. Measure query time, dashboard load time, failure behavior, and the steps required to answer common follow-up questions. Ask business users to complete tasks without coaching. Track whether people can find a trusted report and understand its limitations; adoption cannot be inferred from page views alone.",
+      "title": "Test self-service and adoption",
+      "body": "Ask a business user to answer a real question without help from the analyst who built the dashboard. Observe whether they can find the right metric, apply filters, understand caveats, and export or share results safely. Measure task success, time to answer, support requests, and the number of conflicting reports created. Provide definitions and explanations near the data. Adoption is not simply the number of accounts provisioned; it is whether users can make correct decisions from the information.",
       "type": "text"
     },
     {
-      "title": "Model total cost of ownership",
-      "body": "Include licenses by creator, analyst, viewer, or capacity; warehouse and query costs; refresh infrastructure; embedded analytics; implementation; training; and administration. Clarify whether usage-based fees change with concurrency, data volume, or scheduled refreshes. Estimate costs for both current use and expected growth. Keep assumptions visible and compare them with the cost of maintaining the existing reporting process.",
+      "title": "Compare cost and performance",
+      "body": "Include licenses by role, viewer limits, data storage, query or refresh usage, embedded analytics, premium connectors, administration, and training. Test typical and peak workloads, including the cost of concurrent queries. Check export formats and whether models or dashboards can be migrated if the contract ends. Compare the cost of the platform with the ongoing analyst effort required to prepare and reconcile data. Use a forecast based on your own usage, not a generic vendor example.",
       "type": "text"
     },
     {
-      "title": "Run a controlled proof of value",
-      "body": "Select one reporting workflow and define acceptance criteria for correctness, freshness, access, speed, and time to maintain. Reconcile the pilot output with an authoritative source and have intended users complete their tasks. Record the data preparation effort as well as dashboard creation time. Do not claim business impact from a dashboard launch alone; measure whether it changes a decision or reduces a documented reporting burden.",
-      "type": "text"
-    },
-    {
-      "title": "Go/no-go checklist",
-      "body": "Proceed when shared metric definitions, source ownership, security, refresh expectations, report maintenance, and costs are understood. Name the owner of the semantic model and the process for changing a metric. Keep a list of certified reports and known limitations. Review unused dashboards and stale data sources periodically so that the platform remains a trusted decision system rather than a larger collection of inconsistent charts.",
+      "title": "Pilot, roll out, and govern",
+      "body": "Select one high-value reporting area with a named business owner and data owner. Agree on acceptance criteria for correctness, freshness, access control, response time, and user task success. Document source lineage, definitions, permissions, and support ownership before expanding. Review dashboard usage and trust after launch, remove duplicate reports, and update definitions through a controlled process. Reassess the platform when data volume, governance requirements, or user needs change.",
       "type": "text"
     }
   ]
