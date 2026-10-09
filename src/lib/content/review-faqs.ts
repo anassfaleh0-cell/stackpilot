@@ -37,7 +37,7 @@ function isLowValueAnswer(answer: string): boolean {
  * FAQ structured data. This is a conservative display filter, not a substitute
  * for editorial fact-checking or vendor-source verification.
  */
-export function getVisibleReviewFaqs(faqs: FAQItem[], limit = 8): FAQItem[] {
+export function getVisibleEditorialFaqs(faqs: FAQItem[], limit = 8): FAQItem[] {
   if (!Array.isArray(faqs) || !Number.isInteger(limit) || limit < 1) return []
 
   const questions = new Set<string>()
