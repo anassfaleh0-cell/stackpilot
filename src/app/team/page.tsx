@@ -5,7 +5,6 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { AuthorAvatar } from "@/components/editorial/author-avatar"
-import Link from "next/link"
 
 export const metadata = createMetadata({
   title: "Who Maintains PilotStack?",
