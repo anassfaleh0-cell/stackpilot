@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getComparisonDecision } from "./comparison-decision"
+import { getComparisonDecision, getComparisonFeatureDisplayValue } from "./comparison-decision"
 
 describe("getComparisonDecision", () => {
   it("maps a slug winner to the human-readable product name", () => {
@@ -66,5 +66,20 @@ describe("getComparisonDecision", () => {
       winnerLabel: null,
       hasComparableWinner: false,
     })
+  })
+})
+
+
+describe("getComparisonFeatureDisplayValue", () => {
+  it("does not present unsupported booleans or plan labels as verified facts", () => {
+    expect(getComparisonFeatureDisplayValue(true, false)).toBe("Not verified")
+    expect(getComparisonFeatureDisplayValue(false, undefined)).toBe("Not verified")
+    expect(getComparisonFeatureDisplayValue("Freemium", false)).toBe("Not verified")
+  })
+
+  it("shows values only when feature-level verification is explicitly true", () => {
+    expect(getComparisonFeatureDisplayValue(true, true)).toBe(true)
+    expect(getComparisonFeatureDisplayValue(false, true)).toBe(false)
+    expect(getComparisonFeatureDisplayValue("Freemium", true)).toBe("Freemium")
   })
 })
