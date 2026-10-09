@@ -39,6 +39,16 @@
       "title": "Compare full cost and plan deployment",
       "body": "Calculate the cost of licenses, numbers, calling minutes, international destinations, toll-free usage, recording storage, hardware, installation, support, and taxes. Confirm contract length, price changes, number-porting fees, and cancellation terms. Pilot the system with a representative group, document the old and new call flows, train administrators, and test porting and fallback procedures. Expand only after call quality, critical routes, emergency procedures, and user acceptance meet agreed criteria.",
       "type": "text"
+    },
+    {
+      "title": "Prepare a number-porting checklist",
+      "body": "Collect the exact service address, account details, current carrier requirements, authorized signatory, number inventory, and any service PIN or letter of authorization required by the providers. Confirm the scheduled port date and the window in which calls could be affected. Do not cancel the existing service before the port is confirmed complete. After the change, test inbound and outbound calls from external networks, caller ID, voicemail, emergency procedures, and all routing branches that customers use.",
+      "type": "text"
+    },
+    {
+      "title": "Set measurable acceptance criteria",
+      "body": "Agree on what success means before the pilot: critical call routes work, users can transfer and retrieve voicemail, call quality meets the team's needs, the CRM integration records the right fields, and administrators can change routing safely. Track call failures, support requests, missed calls, and user adoption during the pilot. Keep the previous system or an agreed fallback available until these checks pass. Use the results to decide whether additional training or a different plan is needed.",
+      "type": "text"
     }
   ]
 }
