@@ -186,6 +186,7 @@ function checkContentQuality() {
     const dir = path.join(CONTENT_DIR, ct.dir)
     const files = readDir(dir)
     let thinCount = 0
+    const thinSlugs = []
     let noindexCount = 0
     let missingDescription = 0
     let missingFaq = 0
@@ -300,6 +301,7 @@ function checkContentQuality() {
 
       if (words < ct.minWords) {
         thinCount++
+        thinSlugs.push(slug)
       }
 
       // Check description
@@ -317,6 +319,7 @@ function checkContentQuality() {
     if (thinCount > 0 && indexed > 0) {
       const pct = ((thinCount / indexed) * 100).toFixed(1)
       log("warn", `${ct.dir}: ${thinCount}/${indexed} indexed pages are thin content (<${ct.minWords} words) [${pct}%]`)
+      log("info", `${ct.dir}: thin-page examples: ${thinSlugs.slice(0, 10).join(", ")}${thinSlugs.length > 10 ? ", …" : ""}`)
     } else {
       log("pass", `${ct.dir}: Content depth is adequate (${indexed} indexed pages)`)
     }
