@@ -388,7 +388,7 @@ function genGuide(slug, name, cat, idx) {
   ]
   return {
     slug,
-    title: `${name} Guide: How to Choose the Right ${cat} Platform`,
+    title: `${topic} Guide: How to Choose the Right ${cat} Platform`,
     description: `A practical buyer's guide to ${topic.toLowerCase()} in the ${cat.toLowerCase()} category, with selection checks, pilot steps, rollout risks, and a total-cost worksheet.`,
     category: cat,
     difficulty: idx % 3 === 0 ? "Beginner" : idx % 3 === 1 ? "Intermediate" : "Advanced",
