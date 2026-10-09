@@ -57,4 +57,13 @@ describe("content quality repairs", () => {
     expect(review?.description).not.toMatch(/we evaluated|hands-on testing|thousands of user reviews/i)
   })
 
+  it("adds product-specific evaluation guidance to a thin review profile", () => {
+    const review = getReview("clickup")
+    expect(review).not.toBeNull()
+    const body = review?.content.map((section) => section.body + " " + (section.items || []).join(" ")).join(" ") ?? ""
+    expect(body.split(/\s+/).filter(Boolean).length).toBeGreaterThanOrEqual(900)
+    expect(body).toContain("The recorded integration list includes")
+    expect(body).toContain("A practical pilot checklist")
+  })
+
 })
