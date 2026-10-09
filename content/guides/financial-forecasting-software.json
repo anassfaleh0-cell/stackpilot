@@ -5,7 +5,7 @@
   "category": "Finance & Accounting",
   "difficulty": "Advanced",
   "author": "Emily Nakamura",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "quickbooks",
     "xero",
@@ -56,6 +56,11 @@
     {
       "title": "Selection checklist",
       "body": "Pilot a forecast that includes real actuals, assumptions, scenario changes, approvals, and reconciliation. Confirm traceability, access, reporting, and ease of updating. Choose a platform that finance and operating teams can maintain. Review forecast quality and assumptions regularly as the business changes.",
+      "type": "text"
+    },
+    {
+      "title": "Validate forecast assumptions against outcomes",
+      "body": "Choose a prior period and recreate the forecast using only information available at that time, then compare it with actual results. Separate volume, price, timing, headcount, and one-off effects so the team can see why the forecast missed. Test whether assumptions have owners and whether scenario changes are logged. Do not judge a forecasting tool only by how attractive its charts look; evaluate whether the team can explain variances and improve decisions without rewriting history.",
       "type": "text"
     }
   ]
