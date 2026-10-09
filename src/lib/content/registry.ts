@@ -101,6 +101,26 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
   /first-year roi/i,
 ]
 
+function sanitizeMalformedPricingText(value: string): string {
+  let text = value
+    // Normalize imported price ranges where punctuation was corrupted.
+    .replace(/(\\$?\\d[\\d,.]*)\\s*[“”]\\s*(?=\\$?\\d)/g, "$1–")
+    .replace(/(\\$[\\d,.]+)\\s*[–-]\\s*(\\$[\\d,.]+)/g, "$1–$2")
+    .replace(/\\b([A-Z][A-Za-z0-9 .&-]+)\\s+from\\.\\s*$/g, "$1 pricing not verified.")
+    .replace(/\\bFree\\s*[“”]\\s*(?=\\$)/gi, "Free–")
+    .replace(/from\\s+\\d+\\s+to\\s+\\d{7,}\\s+per month/gi, "pricing varies by plan")
+    .replace(/\\bdoing \\+\\/month(?: revenue)?\\b/gi, "with order volume and customer value that justify advanced automation")
+    .replace(/\\bthe gold standard\\b/gi, "a commonly considered option")
+    .replace(/\\bsEO\\b/g, "SEO")
+    .replace(/\\b(?:from|starting at|starts at)\\s+\\$?\\/mo\\b/gi, "pricing not verified")
+    .replace(/\\b(?:from|starting at|starts at) pricing not verified\\b/gi, "pricing not verified; check the vendor's current pricing")
+    .replace(/Klaviyo's ROI justifies the cost/gi, "compare the cost with your own store's incremental contribution margin")
+  if (/^\\s*\\/mo\\s*$/i.test(text)) {
+    return "Pricing not verified — check the vendor's current pricing"
+  }
+  return text
+}
+
 function sanitizeUnsupportedClaims(value: string | undefined): string {
   const raw = String(value ?? "").trim()
   if (!raw) return ""
@@ -122,7 +142,7 @@ function sanitizeUnsupportedClaims(value: string | undefined): string {
 }
 
 function sanitizeContentValue(value: unknown): unknown {
-  if (typeof value === "string") return sanitizeUnsupportedClaims(value)
+  if (typeof value === "string") return sanitizeMalformedPricingText(sanitizeUnsupportedClaims(value))
   if (Array.isArray(value)) return value.map(sanitizeContentValue)
   if (value && typeof value === "object") {
     const out: Record<string, unknown> = {}
