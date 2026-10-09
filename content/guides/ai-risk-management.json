@@ -1,53 +1,54 @@
 {
-    "slug":  "ai-risk-management",
-    "title":  "AI Risk Management Guide: How to Choose the Right AI \u0026 Machine Learning Platform",
-    "description":  "Beginner AI \u0026 Machine Learning guide (~8 min read): how to evaluate the right AI Risk Management. Choosing the right ai \u0026 machine learning.",
-    "category":  "AI \u0026 Machine Learning",
-    "difficulty":  "Beginner",
-    "author": "Marcus Rivera",
-    "readingTime":  8,
-    "relatedTools":  [
-
-                     ],
-    "relatedGuides":  [
-
-                      ],
-    "lastUpdated":  "2026-07-20",
-    "sections":  [
-                     {
-                         "title":  "Getting Started",
-                         "body":  "Choosing the right ai \u0026 machine learning software starts with understanding your specific requirements. Before evaluating AI Risk Management Guide: How to Choose the Right AI \u0026 Machine Learning Platform, take stock of your team size, budget, existing tool stack, and the primary problems you need to solve. This guide walks through the key considerations.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Selection Criteria",
-                         "body":  "When evaluating AI Risk Management Guide: How to Choose the Right AI \u0026 Machine Learning Platform and other ai \u0026 machine learning platforms, focus on these criteria: feature completeness relative to your needs, integration compatibility with your existing tools, total cost of ownership including implementation and training, vendor reputation and support quality, and scalability for future growth.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Implementation Guide",
-                         "body":  "Implementing AI Risk Management Guide: How to Choose the Right AI \u0026 Machine Learning Platform successfully requires planning beyond the technical setup. Start with a clear use case, involve stakeholders early, allocate time for data migration and testing, and plan for team training. Most successful deployments follow a phased approach rather than a big-bang rollout.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Best Practices",
-                         "body":  "Teams that get the most value from AI Risk Management Guide: How to Choose the Right AI \u0026 Machine Learning Platform share common practices: they invest in initial configuration and customization, establish clear workflows and naming conventions, train all users before full rollout, regularly review usage patterns to optimize settings, and keep the platform updated.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Common Pitfalls",
-                         "body":  "The most common mistakes teams make with AI Risk Management Guide: How to Choose the Right AI \u0026 Machine Learning Platform include underinvesting in the initial setup, skipping user training, trying to migrate too much data at once, not defining clear success metrics upfront, and failing to get buy-in from all stakeholders before deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "ROI Analysis",
-                         "body":  "Calculating ROI for AI Risk Management Guide: How to Choose the Right AI \u0026 Machine Learning Platform involves both tangible savings like reduced licensing costs from tool consolidation and productivity gains from streamlined workflows, and intangible benefits like improved team satisfaction and better data-driven decision making. Most teams see positive ROI within 3-6 months of full deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Future Trends",
-                         "body":  "The ai \u0026 machine learning category continues to evolve rapidly. AI Risk Management Guide: How to Choose the Right AI \u0026 Machine Learning Platform is positioned to benefit from trends like AI-powered automation, deeper integration ecosystems, and increased focus on security and compliance. Organizations should evaluate how well the platform\u0027s roadmap aligns with their own technology strategy.",
-                         "type":  "text"
-                     }
-                 ]
+  "slug": "ai-risk-management",
+  "title": "AI Risk Management: A Practical Governance and Testing Guide",
+  "description": "A working framework for identifying AI risks, testing failure modes, assigning ownership, and monitoring systems after release.",
+  "category": "AI & Machine Learning",
+  "difficulty": "Beginner",
+  "author": "PilotStack Team",
+  "readingTime": 9,
+  "relatedTools": [
+    "chatgpt",
+    "claude",
+    "gemini",
+    "okta"
+  ],
+  "relatedGuides": [],
+  "lastUpdated": "2026-10-09",
+  "sections": [
+    {
+      "title": "Inventory the AI system and its purpose",
+      "body": "Record each AI use case, business owner, vendor, model or service, data sources, users, and actions the system can take. State what the system is allowed to do and what is explicitly out of scope. Risk depends on context: an internal brainstorming assistant has a different impact profile from a tool that influences eligibility, financial decisions, or access to essential services. Do not classify risk from the model name alone; consider the whole workflow and the people affected.",
+      "type": "text"
+    },
+    {
+      "title": "Assess impact and likelihood",
+      "body": "For each use case, identify harms from incorrect output, bias, privacy leakage, prompt injection, misuse, service interruption, and over-reliance. Estimate severity and likelihood using a documented scale, and record the evidence behind the rating. Include downstream effects: a small error repeated at scale can be more serious than an isolated visible failure. Prioritize controls for risks that could materially affect people, security, compliance, or business continuity.",
+      "type": "text"
+    },
+    {
+      "title": "Test realistic failure modes",
+      "body": "Build a test set containing normal requests, ambiguous inputs, adversarial instructions, outdated facts, missing data, and attempts to retrieve restricted information. Measure both successful completion and safe refusal. Have domain experts review cases where the right answer is uncertain. Repeat tests after changes to the model, prompts, retrieval sources, integrations, or permissions. Record severity and reproducibility, not just a single pass/fail score.",
+      "type": "text"
+    },
+    {
+      "title": "Protect data and access",
+      "body": "Minimize the data sent to the system, separate user permissions from model instructions, and apply least privilege to connected tools. Treat retrieved documents and user-provided text as untrusted input. Keep secrets out of prompts, log access appropriately, and verify deletion and retention behavior with the vendor. For retrieval systems, test that access rules are enforced at retrieval time and not merely described in the prompt.",
+      "type": "text"
+    },
+    {
+      "title": "Define human oversight and escalation",
+      "body": "Specify which outputs require review, who can override a result, and what happens when confidence is low or the system is unavailable. Reviewers need the time, context, and authority to reject a recommendation. For high-impact uses, preserve a non-AI fallback and provide a clear route to challenge or correct an outcome. Avoid nominal human approval that simply rubber-stamps the model.",
+      "type": "text"
+    },
+    {
+      "title": "Set release gates and accountability",
+      "body": "Name an accountable owner for each material risk and define release criteria, incident severity levels, response times, and rollback authority. Keep evidence of evaluations, approved configurations, vendor terms, known limitations, and exceptions. Involve legal, privacy, security, accessibility, and domain experts where the use case requires it. A policy is useful only when teams can follow it during ordinary delivery.",
+      "type": "text"
+    },
+    {
+      "title": "Monitor, respond, and reassess",
+      "body": "After release, monitor error reports, output quality, cost, latency, unusual access patterns, and changes in input distribution. Establish a way to pause a risky feature, revert a prompt or model change, notify affected users, and preserve evidence for investigation. Reassess risk when the purpose, data, users, or connected actions change. Governance should be a repeatable operating process, not a one-time checklist.",
+      "type": "text"
+    }
+  ]
 }
