@@ -6,6 +6,7 @@ import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/compon
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllBlogPosts } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 import { formatDate } from "@/lib/utils"
 import Link from "next/link"
 import { ArrowRight, Clock, User } from "lucide-react"
@@ -22,7 +23,7 @@ export const metadata = createMetadata({
 
 export default async function BlogPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
   const params = await searchParams
-  const posts = getAllBlogPosts()
+  const posts = getAllBlogPosts().filter((post) => !isNoindexed("blog", post.slug))
   const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: posts.length })
   const pagePosts = posts.slice(pagination.start, pagination.end)
   const featured = pagination.page === 1 ? pagePosts[0] : undefined
