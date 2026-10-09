@@ -16,7 +16,7 @@ fs.readdirSync(reviewDir).filter(f => f.endsWith(".json")).forEach(f => {
       name: r.name,
       category: r.category,
       rating: r.rating,
-      priceRange: r.priceRange || "Pricing not verified — check the vendor’s current pricing",
+      priceRange: r.priceRange || "Pricing not verified — check the vendor's current pricing",
       pros: Array.isArray(r.pros) ? r.pros : [],
       cons: Array.isArray(r.cons) ? r.cons : [],
       tagline: r.tagline || r.description?.substring(0,120) || ""
