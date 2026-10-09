@@ -39,6 +39,16 @@
       "title": "Test continuously and prepare for incidents",
       "body": "Include authorization tests for another user's records, another tenant's resources, expired tokens, missing scopes, malformed input, oversized payloads, and rate-limit behavior. Scan dependencies and deployed configurations, and add regression tests for every confirmed vulnerability. Monitor authentication failures, privilege changes, unusual request rates, and repeated validation failures without recording sensitive payloads. Maintain a response plan for token revocation, key rotation, affected-user notification, and forensic log preservation.",
       "type": "text"
+    },
+    {
+      "title": "Apply safe defaults to errors and responses",
+      "body": "Use a consistent error structure with a safe public message and a correlation identifier that support staff can use to find the corresponding internal event. Do not return framework exceptions, SQL details, file paths, access tokens, or environment variables to clients. Set response headers and content types deliberately, and ensure that caches do not store personalized or confidential responses for the wrong user. Review logs and traces for sensitive payloads before enabling broad production collection.",
+      "type": "text"
+    },
+    {
+      "title": "Prioritize remediation by exposure",
+      "body": "Rank API findings by exploitability, data sensitivity, reachable attack surface, and business impact rather than treating every scanner result equally. Assign an owner and due date to each accepted risk, and document compensating controls for issues that cannot be fixed immediately. Re-test the deployed endpoint after a change; a passing unit test alone does not prove the gateway, identity policy, and production configuration are correct. Review the inventory whenever a new service or API version is released.",
+      "type": "text"
     }
   ]
 }
