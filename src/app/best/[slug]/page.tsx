@@ -20,8 +20,13 @@ export const dynamicParams = true
 export const revalidate = 86400
 
 function displayPriceRange(value: string | undefined): string {
-  if (!value || value === "Not independently verified") return "Pricing not independently verified; check the vendor's current plans.";
+  if (!value || value === "Not independently verified" || value === "Verify current pricing with vendor") return "Pricing not independently verified; check the vendor's current plans.";
   return value.replace(/[“”]/g, " – ").replace(/\s+/g, " ").trim();
+}
+
+function displayPricingSummary(value: string): string {
+  if (/\$\s*\d[\d,.]*\s*[“”]\s*\$?\s*\d/.test(value)) return "The stored pricing range is malformed or may be out of date. Check each vendor's current pricing page and compare plan limits, billing terms, and add-on costs before deciding.";
+  return value;
 }
 
 export function generateStaticParams() {
@@ -87,7 +92,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
               <li><strong>#1 pick:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}</li>
               <li>{page.picks.length} listed tools with recorded details; compare them using {page.criteria.length} criteria</li>
-              <li>Pricing: {page.pricingSummary}</li>
+              <li>Pricing: {displayPricingSummary(page.pricingSummary)}</li>
               <li>Each pick includes pros, cons, and a best-fit use case</li>
               <li>Category: {page.category} — updated {formatDate(page.lastUpdated)}</li>
             </ul>
@@ -191,7 +196,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
               <section className="mb-10">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Pricing Summary</h2>
-                <p className="text-muted-foreground leading-relaxed">{page.pricingSummary}</p>
+                <p className="text-muted-foreground leading-relaxed">{displayPricingSummary(page.pricingSummary)}</p>
               </section>
 
               <section className="mb-10 overflow-x-auto">
