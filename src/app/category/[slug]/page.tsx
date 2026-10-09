@@ -161,7 +161,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             <Section>
               <Container>
                 <div className="rounded-xl border border-primary/20 bg-primary-subtle/50 p-6 sm:p-8">
-                  <Badge variant="default" className="mb-3">Best in {category.name} 2026</Badge>
+                  <Badge variant="default" className="mb-3">Highest verified editorial rating in {category.name}</Badge>
                   <h2 className="text-2xl font-bold mb-2">{bestPick.name}</h2>
                   <p className="text-muted-foreground mb-4">{bestPick.tagline}</p>
                   <div className="flex flex-wrap items-center gap-4 text-sm mb-4">
@@ -333,13 +333,13 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             <Container>
               <div className="flex items-center gap-2 mb-6">
                 <Users size={20} className="text-primary" />
-                <h2 className="text-2xl font-bold">Best Software by Use Case</h2>
+                <h2 className="text-2xl font-bold">Software options by use case</h2>
               </div>
               <div className="grid sm:grid-cols-3 gap-4">
                 {smbPick && (
                   <Card className="p-5">
                     <Building2 size={20} className="text-primary mb-2" />
-                    <h3 className="font-semibold text-sm mb-1">Best for SMB</h3>
+                    <h3 className="font-semibold text-sm mb-1">Small-business option</h3>
                     <Link href={`/reviews/${smbPick.slug}`} className="text-primary text-sm font-medium hover:underline">{smbPick.name}</Link>
                     {knowledge?.bestFor.smb && <p className="text-xs text-muted-foreground mt-1">{knowledge.bestFor.smb}</p>}
                   </Card>
@@ -347,7 +347,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                 {enterprisePick && (
                   <Card className="p-5">
                     <Shield size={20} className="text-primary mb-2" />
-                    <h3 className="font-semibold text-sm mb-1">Best for Enterprise</h3>
+                    <h3 className="font-semibold text-sm mb-1">Enterprise option</h3>
                     <Link href={`/comparisons/${enterprisePick.slug}`} className="text-primary text-sm font-medium hover:underline">{enterprisePick.title}</Link>
                     {knowledge?.bestFor.enterprise && <p className="text-xs text-muted-foreground mt-1">{knowledge.bestFor.enterprise}</p>}
                   </Card>
@@ -538,7 +538,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           <div className="sticky top-24 space-y-6">
             {bestPick && (
               <Card className="p-4">
-                <Badge variant="default" className="mb-2">Best Pick</Badge>
+                <Badge variant="default" className="mb-2">Highest verified editorial rating</Badge>
                 <p className="font-semibold text-sm">{bestPick.name}</p>
                 <div className="flex items-center gap-1 text-sm text-accent mt-1">
                   <Star size={12} className="fill-accent" />
