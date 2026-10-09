@@ -167,7 +167,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
-    // Tool pages
+    // Tool pages have no authoritative per-page modification date, so omit lastModified.
     ...toolPages.map((t) => ({
       url: `${siteConfig.url}/tools/${t.slug}`,
       changeFrequency: "monthly" as const,
