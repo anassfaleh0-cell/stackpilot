@@ -103,7 +103,7 @@ export default function PrivacyPage() {
             <p>If we transfer personal data from the EEA to countries not deemed adequate by the European Commission, we rely on Standard Contractual Clauses (SCCs) as the transfer mechanism under GDPR Article 46.</p>
 
             <h2>Changes to This Policy</h2>
-            <p>We will notify subscribers of material changes to this privacy policy via email. The "Last updated" date at the top of this page reflects the most recent revision. Continued use of PilotStack after changes constitutes acceptance of the updated policy.</p>
+            <p>We may notify subscribers of material changes to this privacy policy by email. The "Last updated" date at the top of this page reflects the most recent revision. Where applicable law requires consent for a changed use of personal data, we will request that consent separately; continued use of the site is not treated as consent where the law requires an affirmative choice.</p>
 
             <h2>Contact</h2>
             <p>For privacy-related inquiries or to exercise your data rights, contact us at <strong>privacy@pilotstack.online</strong>. We aim to respond to all requests within 30 days.</p>
