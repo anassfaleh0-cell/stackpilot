@@ -63,7 +63,7 @@ describe("content quality repairs", () => {
     const body = review?.content.map((section) => section.body + " " + (section.items || []).join(" ")).join(" ") ?? ""
     expect(body.split(/\s+/).filter(Boolean).length).toBeGreaterThanOrEqual(900)
     expect(body).toContain("The recorded integration list includes")
-    expect(body).toContain("A practical pilot checklist")
+    expect(review?.content.some((section) => section.title === "A practical pilot checklist")).toBe(true)
   })
 
 })
