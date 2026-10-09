@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { getAllGlossaryTerms } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 import { getPagination, parsePageParam } from "@/lib/pagination"
 import { PaginationNav } from "@/components/ui/pagination-nav"
 import Link from "next/link"
@@ -19,7 +20,7 @@ export const metadata = createMetadata({
 
 export default async function GlossaryPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
   const params = await searchParams
-  const terms = getAllGlossaryTerms()
+  const terms = getAllGlossaryTerms().filter((term) => !isNoindexed("glossary", term.slug))
   const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: terms.length })
   const pageTerms = terms.slice(pagination.start, pagination.end)
 
