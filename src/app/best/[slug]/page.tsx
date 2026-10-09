@@ -80,7 +80,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">TL;DR</h2>
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-              <li><strong>#1 listed option:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}{typeof page.picks[0]?.rating === "number" ? ` Recorded rating: ${page.picks[0].rating}/5.` : ""}</li>
+              <li><strong>#1 listed option:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}{typeof page.picks[0]?.rating === "number" ? ` Recorded rating: ${page.picks[0]?.rating}/5.` : ""}</li>
               <li>{page.picks.length} listed tools with recorded details; compare them using {page.criteria.length} criteria</li>
               <li>Pricing: {page.pricingSummary}</li>
               <li>Each pick includes pros, cons, and a best-fit use case</li>
