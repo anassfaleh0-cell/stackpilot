@@ -53,7 +53,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
 
   // Only boolean availability fields are scoreable. Text values such as "Paid" or "Custom"
   // are descriptions, not truthy feature wins.
-  const scoredFeatures = cmp.features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean")
+  const scoredFeatures = cmp.featuresVerified === true ? cmp.features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean") : []
   const t1Score = scoredFeatures.filter((f) => f.tool1 === true).length
   const t2Score = scoredFeatures.filter((f) => f.tool2 === true).length
   const t1Pct = scoredFeatures.length ? Math.round((t1Score / scoredFeatures.length) * 100) : null
@@ -171,7 +171,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                   )}
                   <div className="text-xl font-bold mb-2">{tool.name}</div>
                   <div className="text-3xl font-bold text-primary mb-1">{tool.score === null ? "—" : `${tool.score}%`}</div>
-                  <div className="text-xs text-muted-foreground mb-3">{tool.score === null ? "No comparable availability data" : `Availability across ${scoredFeatures.length} boolean checks`}</div>
+                  <div className="text-xs text-muted-foreground mb-3">{tool.score === null ? (cmp.featuresVerified === true ? "No comparable availability data" : "Feature-source audit pending") : `Availability across ${scoredFeatures.length} verified boolean checks`}</div>
                   {tool.score !== null && <ScoreBar score={tool.score} max={100} className="mb-3" />}
                   <Link
                     href={`/reviews/${tool.slug}`}
