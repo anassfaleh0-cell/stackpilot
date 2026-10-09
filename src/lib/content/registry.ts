@@ -100,25 +100,25 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
   /typical roi payback/i,
   /first-year roi/i,
   /we compared .* with real ecommerce stores/i,
-  /(?:the )?\\d+ that drive the most revenue/i,
+  /(?:the )?\d+ that drive the most revenue/i,
   /drive the most revenue through/i,
 ]
 
 function sanitizeMalformedPricingText(value: string): string {
   let text = value
     // Normalize imported price ranges where punctuation was corrupted.
-    .replace(/(\\$?\\d[\\d,.]*)\\s*[“”]\\s*(?=\\$?\\d)/g, "$1–")
-    .replace(/(\\$[\\d,.]+)\\s*[–-]\\s*(\\$[\\d,.]+)/g, "$1–$2")
-    .replace(/\\b([A-Z][A-Za-z0-9 .&-]+)\\s+from\\.\\s*$/g, "$1 pricing not verified.")
-    .replace(/\\bFree\\s*[“”]\\s*(?=\\$)/gi, "Free–")
-    .replace(/from\\s+\\d+\\s+to\\s+\\d{7,}\\s+per month/gi, "pricing varies by plan")
-    .replace(/\\bdoing \\+\\/month(?: revenue)?\\b/gi, "with order volume and customer value that justify advanced automation")
-    .replace(/\\bthe gold standard\\b/gi, "a commonly considered option")
-    .replace(/\\bsEO\\b/g, "SEO")
-    .replace(/\\b(?:from|starting at|starts at)\\s+\\$?\\/mo\\b/gi, "pricing not verified")
-    .replace(/\\b(?:from|starting at|starts at) pricing not verified\\b/gi, "pricing not verified; check the vendor's current pricing")
+    .replace(/(\$?\d[\d,.]*)\s*[“”]\s*(?=\$?\d)/g, "$1–")
+    .replace(/(\$[\d,.]+)\s*[–-]\s*(\$[\d,.]+)/g, "$1–$2")
+    .replace(/\b([A-Z][A-Za-z0-9 .&-]+)\s+from\.\s*$/g, "$1 pricing not verified.")
+    .replace(/\bFree\s*[“”]\s*(?=\$)/gi, "Free–")
+    .replace(/from\s+\d+\s+to\s+\d{7,}\s+per month/gi, "pricing varies by plan")
+    .replace(/\bdoing \+\/month(?: revenue)?\b/gi, "with order volume and customer value that justify advanced automation")
+    .replace(/\bthe gold standard\b/gi, "a commonly considered option")
+    .replace(/\bsEO\b/g, "SEO")
+    .replace(/\b(?:from|starting at|starts at)\s+\$?\/mo\b/gi, "pricing not verified")
+    .replace(/\b(?:from|starting at|starts at) pricing not verified\b/gi, "pricing not verified; check the vendor's current pricing")
     .replace(/Klaviyo's ROI justifies the cost/gi, "compare the cost with your own store's incremental contribution margin")
-  if (/^\\s*\\/mo\\s*$/i.test(text)) {
+  if (/^\s*\/mo\s*$/i.test(text)) {
     return "Pricing not verified — check the vendor's current pricing"
   }
   return text
@@ -444,7 +444,7 @@ export function getComparisonsByCategory(category: string): ComparisonContent[] 
 function prepareGuide(guide: GuideContent): GuideContent {
   const sections = buildGuideSections(guide)
   const isTemplateDescription = /how to evaluate the right|choosing the right .* software starts with/i.test(guide.description || "")
-  const topic = guide.title.replace(/\\s*[:—-].*$/, "").trim() || guide.category
+  const topic = guide.title.replace(/\s*[:—-].*$/, "").trim() || guide.category
   const description = isTemplateDescription
     ? `${topic}: practical ${guide.category.toLowerCase()} guidance with category-specific checks, implementation risks, and a repeatable pilot checklist. Verify changing product details with primary sources before deciding.`
     : guide.description
@@ -817,7 +817,7 @@ export function getAllStatistics(): StatisticContent[] {
 }
 
 function sanitizeBestDescription(description: string, title: string, category: string, picks: BestContent["picks"]): string {
-  const cleaned = sanitizeUnsupportedClaims(sanitizeMalformedPricingText(description)).replace(/\\s+/g, " ").trim()
+  const cleaned = sanitizeUnsupportedClaims(sanitizeMalformedPricingText(description)).replace(/\s+/g, " ").trim()
   if (cleaned.length >= 90) return trimText(cleaned, 700)
   const names = picks.slice(0, 4).map((pick) => pick.toolName).filter(Boolean)
   const shortlist = names.length ? ` Recorded options include ${names.join(", ")}.` : ""
