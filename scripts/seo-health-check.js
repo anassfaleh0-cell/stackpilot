@@ -118,7 +118,7 @@ function checkRobots() {
 
   // Source-level checks must not emit an unconditional PASS.
   const aiBots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "PerplexityBot"]
-  const missingAiBotRules = aiBots.filter((bot) => !new RegExp(`userAgent\\s*:\\s*["']${bot}["']`).test(content))
+  const missingAiBotRules = aiBots.filter((bot) => !new RegExp(`userAgent\s*:\s*["']${bot}["']`).test(content))
   if (missingAiBotRules.length > 0) {
     log("warn", `AI crawler user-agent rules are not explicitly declared: ${missingAiBotRules.join(", ")}`)
   } else {
@@ -126,7 +126,7 @@ function checkRobots() {
   }
 
   const privatePaths = ["/api/", "/admin/", "/dashboard", "/search", "/_global-error"]
-  const namedCrawlerRules = [...content.matchAll(/userAgent\\s*:\\s*["']([^"']+)["']([\\s\\S]*?)(?=userAgent\\s*:|sitemap\\s*:|$)/g)]
+  const namedCrawlerRules = [...content.matchAll(/userAgent\s*:\s*["']([^"']+)["']([\s\\S]*?)(?=userAgent\s*:|sitemap\s*:|$)/g)]
     .filter((match) => match[1] !== "*")
   const missingPrivatePathBlocks = namedCrawlerRules
     .filter((match) => privatePaths.some((route) => !match[2].includes(route)))
@@ -175,9 +175,9 @@ function checkContentQuality() {
   const genericTemplatePatterns = [
     /most successful deployments follow a phased approach/i,
     /this topic is most useful when it is connected to a real decision/i,
-    /choosing the right marketing\\s*&\\s*seo software/i,
-    /adequate performance for most use cases\\./i,
-    /functional organized interface\\./i,
+    /choosing the right marketing\s*&\s*seo software/i,
+    /adequate performance for most use cases\./i,
+    /functional organized interface\./i,
     /written against our published editorial methodology/i,
     /updated when the underlying content is reviewed/i,
   ]
