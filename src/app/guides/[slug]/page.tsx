@@ -114,25 +114,22 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-base font-semibold mb-2">TL;DR</h2>
               <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-                <li>Difficulty: {guide.difficulty} — designed for {guide.difficulty === "Beginner" ? "newcomers" : guide.difficulty === "Intermediate" ? "experienced users" : "advanced professionals"}</li>
-                <li>{guide.sections.length} comprehensive sections covering key aspects of {guide.category.toLowerCase()}</li>
-                <li>{guide.readingTime} minute read — estimated time to complete</li>
-                <li>Includes actionable recommendations and practical guidance throughout</li>
+                <li>Difficulty: {guide.difficulty}</li>
+                <li>{guide.readingTime} minute read</li>
+                <li>Guide focus: {guide.sections.slice(0, 3).map((section) => section.title).join(" · ") || guide.category}</li>
                 <li>Last updated: {formatDate(guide.lastUpdated)}</li>
               </ul>
             </div>
 
             <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
-              <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                <li>Category: {guide.category}</li>
-                <li>Reading time: {guide.readingTime} minutes</li>
-                <li>Difficulty level: {guide.difficulty}</li>
-                <li>Total sections: {guide.sections.length}</li>
-                <li>{guide.relatedTools.length > 0 ? `${guide.relatedTools.length} related tools covered` : "Practical guidance for software selection"}</li>
-                {guide.sections.some((s) => s.type === "checklist" || s.type === "table") && <li>Includes checklists and comparison tables</li>}
-                <li>Written against our published editorial methodology</li>
-                <li>Updated when the underlying content is reviewed</li>
+              <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-4">
+                {guide.sections.slice(0, 5).map((section) => (
+                  <li key={section.title}>
+                    <strong>{section.title}:</strong> {truncate(section.body, 180)}
+                  </li>
+                ))}
+                {guide.sections.length === 0 && <li>Use the guide description above to frame the decision before reviewing vendor documentation and testing your workflow.</li>}
               </ul>
             </div>
 
