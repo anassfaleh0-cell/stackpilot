@@ -5,6 +5,11 @@ import { isNoindexed } from "@/lib/noindex"
 
 const CONTENT_DIR = path.resolve(process.cwd(), "content")
 
+// Content is immutable during a build. Cache normalized records because sitemap,
+// internal-link, and comparison generation revisit the same review profiles thousands of times.
+const reviewCache = new Map<string, ReviewContent | null>()
+const comparisonCache = new Map<string, ComparisonContent | null>()
+
 const DIR_FOR_TYPE: Record<string, string> = {
   review: "reviews",
   comparison: "comparisons",
@@ -450,14 +455,22 @@ function readDir(dir: string): string[] {
 }
 
 export function getReview(slug: string): ReviewContent | null {
+  const cached = reviewCache.get(slug)
+  if (cached !== undefined) return cached
   const file = path.join(CONTENT_DIR, "reviews", `${slug}.json`)
-  if (!fs.existsSync(file)) return null
-  return sanitizeReview(readJson<ReviewContent>(file))
+  if (!fs.existsSync(file)) {
+    reviewCache.set(slug, null)
+    return null
+  }
+  const review = sanitizeReview(readJson<ReviewContent>(file))
+  reviewCache.set(slug, review)
+  return review
 }
 
 export function getAllReviews(): ReviewContent[] {
   return readDir(path.join(CONTENT_DIR, "reviews"))
-    .map((f) => sanitizeReview(readJson<ReviewContent>(path.join(CONTENT_DIR, "reviews", f))))
+    .map((file) => getReview(file.replace(/\.json$/, "")))
+    .filter((review): review is ReviewContent => Boolean(review))
     .sort((a, b) => b.rating - a.rating)
 }
 
@@ -595,8 +608,13 @@ function sanitizeComparisonDescription(description: string, tool1: string, tool2
   return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the recorded overall winner." : "The dataset records no single overall winner.") + " Read the detailed rows and linked reviews before making a decision.", 700)
 }
 export function getComparison(slug: string): ComparisonContent | null {
+  const cached = comparisonCache.get(slug)
+  if (cached !== undefined) return cached
   const file = path.join(CONTENT_DIR, "comparisons", `${slug}.json`)
-  if (!fs.existsSync(file)) return null
+  if (!fs.existsSync(file)) {
+    comparisonCache.set(slug, null)
+    return null
+  }
   const cmp = readJson<ComparisonContent>(file)
   const baseFeatures = cmp.features.slice(0, 20).map((f) => ({
     ...f,
@@ -606,7 +624,7 @@ export function getComparison(slug: string): ComparisonContent | null {
   }))
   const features = buildDerivedComparisonFeatures(cmp, baseFeatures)
   const winner = normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2)
-  return {
+  const result: ComparisonContent = {
     ...cmp,
     winner,
     description: sanitizeComparisonDescription(cmp.description, cmp.tool1, cmp.tool2, features, winner),
@@ -614,6 +632,8 @@ export function getComparison(slug: string): ComparisonContent | null {
     features,
     faqs: sanitizeFaqs(cmp.faqs),
   }
+  comparisonCache.set(slug, result)
+  return result
 }
 export function getAllComparisons(): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
