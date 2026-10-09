@@ -10,6 +10,7 @@ import { InternalLinks } from "@/components/content/internal-links"
 import { RelatedReading } from "@/components/content/related-reading"
 import { notFound } from "next/navigation"
 import { isNoindexed } from "@/lib/noindex"
+import { getVisibleEditorialFaqs } from "@/lib/content/review-faqs"
 import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, AlertTriangle, Lightbulb } from "lucide-react"
 import { EditorialHero, GlassCard, InfoCard } from "@/components/dynamic"
@@ -33,6 +34,7 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
   const { slug } = await params
   const uc = getUseCase(slug)
   if (!uc) notFound()
+  const visibleFaqs = getVisibleEditorialFaqs(uc.faqs, 8)
 
   return (
     <>
@@ -41,7 +43,7 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
       <WebPageSchema name={uc.title} description={uc.description} url={`${site.url}/use-cases/${slug}`} dateModified={uc.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: uc.recommendations.map((rec, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}`, category: getReview(rec.toolSlug)?.category || uc.category }) })) }} />
       <ItemListSchema items={uc.recommendations.map(rec => ({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` }))} url={`${site.url}/use-cases/${slug}`} />
       <CollectionPageSchema name={uc.title} description={uc.description} url={`${site.url}/use-cases/${slug}`} />
-      <FAQSchema questions={uc.faqs} path={`/use-cases/${slug}`} />
+      {visibleFaqs.length > 0 && <FAQSchema questions={visibleFaqs} path={`/use-cases/${slug}`} />}
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Use Cases", href: "/use-cases" }, { name: uc.title }]} />
       </Container>
@@ -177,19 +179,21 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
                 </section>
               )}
 
+              {visibleFaqs.length > 0 && (
               <section>
-                <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {uc.faqs.map((faq) => (
-                    <GlassCard key={faq.question}>
-                      <div className="p-4">
-                        <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
-                        <p className="text-sm text-muted-foreground">{faq.answer}</p>
-                      </div>
-                    </GlassCard>
-                  ))}
-                </div>
-              </section>
+                  <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {visibleFaqs.map((faq) => (
+                      <GlassCard key={faq.question}>
+                        <div className="p-4">
+                          <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
+                          <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                        </div>
+                      </GlassCard>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
 
             <aside className="lg:col-span-1">
