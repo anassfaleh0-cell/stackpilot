@@ -9,6 +9,7 @@ import { formatDate } from "@/lib/utils"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { getAllReviews } from "@/lib/content/registry"
+import { getBlogKeyTakeaways } from "@/lib/content/blog-summary"
 import { EditorialHero, EditorialCallout, GlassCard, InfoCard } from "@/components/dynamic"
 import { RelatedContent } from "@/components/content/related-content"
 import { AuthorAvatar } from "@/components/editorial/author-avatar"
@@ -43,6 +44,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   ).slice(0, 3)
 
   const paragraphs = post.body.split("\n\n").filter(Boolean)
+  const keyTakeaways = getBlogKeyTakeaways(post.body)
   const isStructural = (b: string) => b.startsWith("##") || b.startsWith("|")
   const proseIndices = paragraphs
     .map((b, i) => (isStructural(b) ? -1 : i))
@@ -188,33 +190,29 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             <BrandDivider />
 
-            {/* Key Takeaways */}
-            <div className="mt-4 mb-10">
-              <GlassCard>
-                <div className="p-5">
-                  <div className="flex items-center gap-2 mb-4">
-                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
-                    </svg>
-                    <span className="font-semibold text-sm">Key Takeaways</span>
+            {/* Key Takeaways: only show takeaways extracted from the article body */}
+            {keyTakeaways.length > 0 && (
+              <div className="mt-4 mb-10">
+                <GlassCard>
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-4">
+                      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
+                      </svg>
+                      <span className="font-semibold text-sm">Key Takeaways</span>
+                    </div>
+                    <ul className="space-y-3">
+                      {keyTakeaways.map((takeaway, index) => (
+                        <li key={takeaway} className="flex items-start gap-3 text-sm">
+                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">{index + 1}</span>
+                          <span className="text-muted-foreground">{takeaway}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3 text-sm">
-                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">1</span>
-                      <span className="text-muted-foreground">In-depth analysis of {post.category.toLowerCase()} tools and trends</span>
-                    </li>
-                    <li className="flex items-start gap-3 text-sm">
-                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">2</span>
-                      <span className="text-muted-foreground">Practical recommendations for {post.tags.slice(0, 2).join(" and ").toLowerCase()}</span>
-                    </li>
-                    <li className="flex items-start gap-3 text-sm">
-                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">3</span>
-                      <span className="text-muted-foreground">Written and edited by {post.author} under our published methodology</span>
-                    </li>
-                  </ul>
-                </div>
-              </GlassCard>
-            </div>
+                </GlassCard>
+              </div>
+            )}
 
             {/* Related Reviews */}
             {relatedReviews.length > 0 && (
