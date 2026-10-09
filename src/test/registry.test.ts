@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { searchContent } from "@/lib/content/registry"
+import { searchContent, getComparison, getAllComparisons, getAlternative, getBest } from "@/lib/content/registry"
 
 describe("searchContent", () => {
   it("returns results for matching query", () => {
@@ -39,5 +39,21 @@ describe("getAllReviews", () => {
     for (let i = 1; i < reviews.length; i++) {
       expect(reviews[i - 1].rating).toBeGreaterThanOrEqual(reviews[i].rating)
     }
+  })
+})
+
+
+describe("published content visibility", () => {
+  it("does not expose unpublished comparisons", () => {
+    expect(getComparison("1password-vs-appwrite")).toBeNull()
+    expect(getAllComparisons().some((comparison) => comparison.slug === "1password-vs-appwrite")).toBe(false)
+  })
+
+  it("does not expose unpublished alternatives", () => {
+    expect(getAlternative("1password-alternatives")).toBeNull()
+  })
+
+  it("does not expose unpublished best pages", () => {
+    expect(getBest("best-enterprise-analytics")).toBeNull()
   })
 })
