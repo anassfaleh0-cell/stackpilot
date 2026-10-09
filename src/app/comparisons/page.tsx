@@ -56,7 +56,7 @@ export default async function ComparisonsPage({ searchParams }: { searchParams?:
       <Section>
         <Container>
           {comparisons.length > 0 ? (
-            <ComparisonGrid items={pageComparisons.map((c) => ({ slug: c.slug, title: c.title, category: c.category, winner: c.winner, description: c.description }))} />
+            <ComparisonGrid items={pageComparisons.map((c) => ({ slug: c.slug, title: c.title, category: c.category, winner: c.winnerVerified === true ? c.winner : null, description: c.description }))} />
           ) : (
             <p className="text-center text-muted-foreground py-12">No comparisons available yet. Check back soon.</p>
           )}
