@@ -105,6 +105,8 @@ function sanitizeMalformedPricingText(value: string): string {
   let text = value
     // Some imported ranges contain a curly quote instead of a range separator.
     .replace(/(\$?\d[\d,.]*)\s*[“”]\s*(?=\$?\d)/g, "$1–")
+    .replace(/(\$[\d,.]+)\s*[–-]\s*(\$[\d,.]+)/g, "$1–$2")
+    .replace(/\b([A-Z][A-Za-z0-9 .&-]+)\s+from\.\s*$/g, "$1 pricing not verified.")
     .replace(/\bFree\s*[“”]\s*(?=\$)/gi, "Free–")
     // Never publish obviously corrupted generated price ranges as numeric facts.
     .replace(/from\s+\d+\s+to\s+\d{7,}\s+per month/gi, "pricing varies by plan")
