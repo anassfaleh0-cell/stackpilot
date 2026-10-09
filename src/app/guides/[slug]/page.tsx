@@ -18,6 +18,7 @@ import { BrandDivider } from "@/components/brand/patterns"
 import { CheckCircle2, BookOpen, Clock, Layers, Lightbulb, Scale } from "lucide-react"
 import { InFeedAd } from "@/components/ads"
 import { isNoindexed } from "@/lib/noindex"
+import { getVisibleEditorialFaqs } from "@/lib/content/review-faqs"
 import type { GuideContent } from "@/types/content"
 
 /**
@@ -74,7 +75,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   const guide = getGuide(slug)
   if (!guide) notFound()
 
-  const faqs = deriveGuideFaqs(guide)
+  const faqs = getVisibleEditorialFaqs(deriveGuideFaqs(guide), 8)
 
   return (
     <>
@@ -283,11 +284,11 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
               ))}
             </div>
 
-            {guide.faqs && guide.faqs.length > 0 && (
+            {faqs.length > 0 && (
               <section className="mt-12 scroll-mt-24" id="faq">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Frequently Asked Questions</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {guide.faqs.map((faq) => (
+                  {faqs.map((faq) => (
                     <GlassCard key={faq.question}>
                       <div className="p-4">
                         <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
