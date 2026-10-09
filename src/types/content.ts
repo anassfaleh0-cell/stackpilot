@@ -287,7 +287,7 @@ export interface BestContent {
   description: string
   category: string
   criteria: string[]
-  picks: { rank: number; toolSlug: string; toolName: string; rating: number; priceRange: string; bestFor: string; pros: string[]; cons: string[] }[]
+  picks: { rank: number; toolSlug: string; toolName: string; rating: number; ratingVerified?: boolean; priceRange: string; priceRangeVerified?: boolean; bestFor: string; pros: string[]; cons: string[] }[]
   pricingSummary: string
   comparisonTable: { columns: string[]; rows: string[][] }
   faqs: FAQItem[]
