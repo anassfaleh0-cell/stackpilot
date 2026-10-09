@@ -412,7 +412,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                         <GitCompare size={20} className="text-primary shrink-0" />
                         <div>
                           <CardTitle className="text-sm group-hover:text-primary transition-colors">{c.title}</CardTitle>
-                          {c.winner && <p className="text-xs text-success mt-0.5">{c.winner} wins</p>}
+                          {c.winnerVerified === true && c.winner && <p className="text-xs text-muted-foreground mt-0.5">Recorded pick: {c.winner}</p>}
                         </div>
                       </Card>
                     </Link>
