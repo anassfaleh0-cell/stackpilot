@@ -20,7 +20,7 @@ credentials:
   - "Methodology transparent and publicly available"
   - "Editorial and commercial disclosures are provided"
 publishedReviews: 151
-publishedComparisons: 616
+publishedComparisons: 928
 publishedGuides: 100
 lastUpdated: 2026-09-15
 ---
