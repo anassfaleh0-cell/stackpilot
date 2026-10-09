@@ -128,7 +128,7 @@ export default function MethodologyPage() {
                     <tr className="bg-muted-bg border-b border-border">
                       <th className="text-left p-3 font-semibold">Dimension</th>
                       <th className="text-left p-3 font-semibold">What We Measure</th>
-                      <th className="text-center p-3 font-semibold">Weight</th>
+                      <th className="text-center p-3 font-semibold">Evidence Status</th>
                     </tr>
                   </thead>
                   <tbody>
