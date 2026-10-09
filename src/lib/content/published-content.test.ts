@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { isNoindexed } from "@/lib/noindex"
-import { getComparison, getGuide } from "@/lib/content/registry"
+import { getComparison, getGuide, getReview } from "@/lib/content/registry"
 
 describe("content indexability guards", () => {
   it("honors the explicit noindex manifest", () => {
@@ -33,6 +33,12 @@ const rewrittenGuideSlugs = [
   "identity-management-platform-guide",
   "endpoint-security-solutions-guide",
   "devsecops-implementation",
+  "saas-procurement-guide",
+  "cloud-migration-planning",
+  "password-management-enterprise-guide",
+  "team-collaboration-tools-guide",
+  "remote-work-software-stack",
+  "total-cost-ownership-saas",
 ]
 
 describe("rewritten guide quality floor", () => {
@@ -44,6 +50,19 @@ describe("rewritten guide quality floor", () => {
       const words = guide!.sections.reduce((total, section) => total + section.body.split(/\s+/).filter(Boolean).length + (section.items || []).join(" ").split(/\s+/).filter(Boolean).length, 0)
       expect(words).toBeGreaterThanOrEqual(500)
       expect(guide!.relatedTools.length).toBeGreaterThan(0)
+    })
+  }
+})
+
+describe("rewritten review quality floor", () => {
+  for (const slug of ["linear", "notion", "clickup"]) {
+    it(`${slug} review avoids unsupported review-count claims and has substantive guidance`, () => {
+      const review = getReview(slug)
+      expect(review).not.toBeNull()
+      const body = review!.content.map((section) => section.body).join(" ")
+      expect(body.split(/\s+/).filter(Boolean).length).toBeGreaterThanOrEqual(500)
+      expect(body).not.toMatch(/across\s+[\d,]+\s+(?:user\s+)?reviews/i)
+      expect(body).not.toMatch(/sub-100ms|tested for at least two weeks|our expert team evaluated/i)
     })
   }
 })
