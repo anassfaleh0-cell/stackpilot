@@ -5,10 +5,10 @@
   "category": "CRM & Sales",
   "difficulty": "Advanced",
   "author": "Sarah Chen",
-  "readingTime": 11,
+  "readingTime": 3,
   "relatedTools": [],
   "relatedGuides": [],
-  "lastUpdated": "2026-08-11",
+  "lastUpdated": "2026-10-09",
   "sections": [
     {
       "title": "What Sales Engagement Covers",
@@ -37,6 +37,16 @@
     {
       "title": "ROI Analysis",
       "body": "Measure reply rates, meeting bookings per sequence, and cost per meeting across plays. Compare team quota attainment before and after platform adoption, and track how much manual follow-up time automation returns to sellers."
+    },
+    {
+      "title": "Protect deliverability and consent",
+      "body": "Before sending sequences, verify domain authentication, mailbox configuration, suppression lists, unsubscribe handling, bounce processing, and applicable outreach rules for the target regions. Use verified business data and clear opt-out handling rather than maximizing volume. Monitor bounce, complaint, reply, and unsubscribe rates, and pause a sequence when quality deteriorates. Confirm who owns the sender domains and how reputation issues are escalated before expanding to additional mailboxes.",
+      "type": "text"
+    },
+    {
+      "title": "Pilot sequence quality, not volume",
+      "body": "Test a small number of sequences for clearly defined audiences and use messages that reflect the recipient's context. Measure positive replies, qualified meetings, opt-outs, complaints, and CRM data quality—not only opens or total sends. Check how the tool pauses messages after a reply, meeting, or status change and whether manual activity syncs correctly. Review the workflow with sales operations and legal before scaling, and keep a rollback plan for misconfigured automation.",
+      "type": "text"
     }
   ],
   "faqs": [
