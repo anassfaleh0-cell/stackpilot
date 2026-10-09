@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, CollectionPageSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { getAllStatistics } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 import Link from "next/link"
 import { ArrowRight, BarChart3 } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
@@ -21,7 +22,7 @@ export const metadata = createMetadata({
 
 export default async function StatisticsPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
   const params = await searchParams
-  const statCategories = getAllStatistics().map((s) => ({
+  const statCategories = getAllStatistics().filter((s) => !isNoindexed("statistics", s.slug)).map((s) => ({
     title: s.title,
     description: s.description,
     slug: s.slug,
