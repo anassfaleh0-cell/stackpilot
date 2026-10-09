@@ -14,7 +14,7 @@
 import fs from "node:fs"
 import path from "node:path"
 
-const SITE_URL = "https://www.pilotstack.online"
+const SITE_URL = "https://pilotstack.online"
 const CONTENT_DIR = path.resolve(process.cwd(), "content")
 const SRC_DIR = path.resolve(process.cwd(), "src")
 
