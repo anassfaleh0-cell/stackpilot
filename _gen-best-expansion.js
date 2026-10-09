@@ -196,9 +196,10 @@ ${picks.map(p => `
 <p class="text-sm text-muted-foreground">Last updated: ${now}</p>
 </section>
 </article>`,
-      wordCount: countWordsFromHtml(page.body)
+      wordCount: 0
     }
-    fs.writeFileSync(CONTENT_DIR + "/best/" + slug + ".json", JSON.stringify(page, null, 2))
+    page.wordCount = countWordsFromHtml(page.body)
+fs.writeFileSync(CONTENT_DIR + "/best/" + slug + ".json", JSON.stringify(page, null, 2))
     console.log(`  [${++count}] ${title}`)
   })
 })
@@ -278,9 +279,10 @@ categories.forEach(cat => {
 <p class="text-sm text-muted-foreground">Last updated: ${now}</p>
 </section>
 </article>`,
-    wordCount: countWordsFromHtml(page.body)
+    wordCount: 0
   }
-  fs.writeFileSync(CONTENT_DIR + "/best/" + slug + ".json", JSON.stringify(page, null, 2))
+  page.wordCount = countWordsFromHtml(page.body)
+fs.writeFileSync(CONTENT_DIR + "/best/" + slug + ".json", JSON.stringify(page, null, 2))
   console.log(`  [${++count}] ${title} (${slug})`)
 })
 
