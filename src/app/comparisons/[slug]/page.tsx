@@ -101,9 +101,9 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <h2 className="text-base font-semibold mb-2">TL;DR</h2>
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
               <li>{cmp.winner ? `${cmp.winner} wins overall` : `${cmp.tool1} vs ${cmp.tool2}: depends on your priorities`}</li>
-              <li>{cmp.tool1} leads in {cmp.features.filter(f => f.tool1 && !f.tool2).map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "several feature areas"}</li>
-              <li>{cmp.tool2} leads in {cmp.features.filter(f => f.tool2 && !f.tool1).map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "several feature areas"}</li>
-              <li>{cmp.features.filter(f => f.tool1 && f.tool2).length} features are shared equally between both tools</li>
+              <li>{cmp.tool1} leads in {cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool1 === true && f.tool2 === false).map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "several feature areas"}</li>
+              <li>{cmp.tool2} leads in {cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool2 === true && f.tool1 === false).map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "several feature areas"}</li>
+              <li>{cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool1 === true && f.tool2 === true).length} features are shared equally between both tools</li>
               <li>Consider your specific workflow needs when choosing between them</li>
             </ul>
           </div>
@@ -113,9 +113,9 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
               <li>Category: {cmp.category}</li>
               <li>Total features compared: {cmp.features.length}</li>
-              <li>{cmp.tool1} exclusive features: {cmp.features.filter(f => f.tool1 && !f.tool2).length}</li>
-              <li>{cmp.tool2} exclusive features: {cmp.features.filter(f => f.tool2 && !f.tool1).length}</li>
-              <li>Shared features: {cmp.features.filter(f => f.tool1 && f.tool2).length}</li>
+              <li>{cmp.tool1} exclusive features: {cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool1 === true && f.tool2 === false).length}</li>
+              <li>{cmp.tool2} exclusive features: {cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool2 === true && f.tool1 === false).length}</li>
+              <li>Shared features: {cmp.features.filter(f => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean" && f.tool1 === true && f.tool2 === true).length}</li>
               <li>{cmp.winner ? `Winner: ${cmp.winner}` : "No clear winner — depends on use case"}</li>
               <li>FAQs answered: {cmp.faqs.length}</li>
               <li>Last updated: {formatDate(cmp.lastUpdated)}</li>
