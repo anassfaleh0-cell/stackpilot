@@ -25,7 +25,7 @@ const stages = [
   },
   {
     title: "Scoring & Ratings",
-    body: "Numeric ratings are being audited for source provenance, consistent dimensions, and reproducible calculations. A score should be displayed as verified only when the evidence and calculation can be checked. Until that audit is complete, use the written criteria and vendor-confirmed facts rather than assuming that a stored number represents independent user sentiment or hands-on testing.",
+    body: "Numeric ratings are being audited for source provenance, consistent dimensions, and reproducible calculations. A score should be displayed as verified only when the evidence and calculation can be checked. Until that audit is complete, use the written criteria and vendor-confirmed facts rather than assuming that a stored number represents independent user sentiment or observed product outcomes.",
   },
   {
     title: "Consistency & Limits",
