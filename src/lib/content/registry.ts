@@ -110,6 +110,8 @@ function sanitizeMalformedPricingText(value: string): string {
     .replace(/from\s+\d+\s+to\s+\d{7,}\s+per month/gi, "pricing varies by plan")
     .replace(/\bdoing \+\/month revenue\b/gi, "with order volume and customer value that justify advanced automation")
     .replace(/\b(?:from|starting at|starts at)\s+\$?\/mo\b/gi, "pricing not verified")
+    .replace(/\b(?:from|starting at|starts at) pricing not verified\b/gi, "pricing not verified; check the vendor's current pricing")
+    .replace(/Klaviyo's ROI justifies the cost/gi, "compare the cost with your own store's incremental contribution margin")
   if (/^\s*\/mo\s*$/i.test(text)) {
     return "Pricing not verified — check the vendor's current pricing"
   }
