@@ -25,7 +25,7 @@ function normalize(value: string): string {
 
 function isLowValueAnswer(answer: string): boolean {
   const trimmed = answer.trim()
-  if (trimmed.length < 60) return true
+  if (trimmed.length < 45) return true
   if (BROKEN_CONTENT_PATTERNS.some((pattern) => pattern.test(trimmed))) return true
   if (GENERIC_ANSWER_PATTERNS.some((pattern) => pattern.test(trimmed))) return true
   if (/\b(?:combines|connect|mapp|functionality)\s*\./i.test(trimmed)) return true
