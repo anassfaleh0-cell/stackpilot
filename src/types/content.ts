@@ -10,6 +10,10 @@ export interface ReviewContent {
   priceRange?: string
   rating: number
   reviewCount: number
+  /** True only when the editorial score has a documented, auditable source. */
+  ratingVerified?: boolean
+  /** True only when the review-count figure has a documented, auditable source. */
+  reviewCountVerified?: boolean
   pros: string[]
   cons: string[]
   features: ReviewFeature[]
