@@ -11,6 +11,8 @@ import Link from "next/link"
 import { ArrowRight, Clock, User } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
 import { BannerAd } from "@/components/ads"
+import { getPagination, parsePageParam } from "@/lib/pagination"
+import { PaginationNav } from "@/components/ui/pagination-nav"
 
 export const metadata = createMetadata({
   title: "Software Blog — Expert Reviews, Research & Buying Guides",
@@ -18,16 +20,18 @@ export const metadata = createMetadata({
   path: "/blog",
 })
 
-export default function BlogPage() {
+export default async function BlogPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
+  const params = await searchParams
   const posts = getAllBlogPosts()
-
-  const featured = posts[0]
-  const rest = posts.slice(1)
+  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: posts.length })
+  const pagePosts = posts.slice(pagination.start, pagination.end)
+  const featured = pagination.page === 1 ? pagePosts[0] : undefined
+  const rest = pagination.page === 1 ? pagePosts.slice(1) : pagePosts
 
   return (
     <>
       <CollectionPageSchema name="Blog" description="Expert insights, tutorials, and analysis on software tools and technology trends" url={`${site.url}/blog`} />
-      <ItemListSchema items={posts.map(p => ({ name: p.title, url: `${site.url}/blog/${p.slug}` }))} url={`${site.url}/blog`} />
+      <ItemListSchema items={pagePosts.map(p => ({ name: p.title, url: `${site.url}/blog/${p.slug}` }))} url={`${site.url}/blog`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Blog", href: "/blog" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Blog" }]} />
@@ -105,6 +109,7 @@ export default function BlogPage() {
             ))}
           </div>
           ) : null}
+          <PaginationNav basePath="/blog" pagination={pagination} />
         </Container>
       </Section>
     </>

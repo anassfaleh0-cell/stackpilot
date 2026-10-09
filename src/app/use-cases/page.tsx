@@ -4,6 +4,8 @@ import { BreadcrumbSchema, CollectionPageSchema } from "@/components/seo/json-ld
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllUseCases } from "@/lib/content/registry"
+import { getPagination, parsePageParam } from "@/lib/pagination"
+import { PaginationNav } from "@/components/ui/pagination-nav"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { BannerAd } from "@/components/ads"
@@ -14,10 +16,13 @@ export const metadata = createMetadata({
   path: "/use-cases",
 })
 
-export default async function UseCasesPage() {
+export default async function UseCasesPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
+  const params = await searchParams
   const allUseCases = getAllUseCases()
+  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: allUseCases.length })
+  const pageUseCases = allUseCases.slice(pagination.start, pagination.end)
   const grouped: Record<string, typeof allUseCases> = {}
-  allUseCases.forEach((uc) => {
+  pageUseCases.forEach((uc) => {
     if (!grouped[uc.category]) grouped[uc.category] = []
     grouped[uc.category].push(uc)
   })
@@ -33,7 +38,6 @@ export default async function UseCasesPage() {
 
         {/* Ad: After section header */}
         <BannerAd className="mx-auto max-w-[728px] mb-8" />
-        <p className="text-muted-foreground mb-8">Expert-curated recommendations for every use case. Find the right software for your specific needs.</p>
         {Object.entries(grouped).map(([cat, useCases]) => (
           <section key={cat} className="mb-10">
             <h2 className="text-xl font-bold mb-4">{cat}</h2>
@@ -48,6 +52,7 @@ export default async function UseCasesPage() {
             </div>
           </section>
         ))}
+          <PaginationNav basePath="/use-cases" pagination={pagination} />
       </Container>
     </>
   )

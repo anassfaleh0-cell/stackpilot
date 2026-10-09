@@ -49,3 +49,10 @@ export function getPaginationRange(current: number, totalPages: number, delta = 
 
   return range
 }
+
+export function parsePageParam(value: string | string[] | undefined): number {
+  const raw = Array.isArray(value) ? value[0] : value
+  if (!raw || !/^\d+$/.test(raw)) return 1
+  const page = Number(raw)
+  return Number.isSafeInteger(page) && page > 0 ? page : 1
+}

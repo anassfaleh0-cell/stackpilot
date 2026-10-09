@@ -4,6 +4,8 @@ import { BreadcrumbSchema, CollectionPageSchema } from "@/components/seo/json-ld
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllIndustries } from "@/lib/content/registry"
+import { getPagination, parsePageParam } from "@/lib/pagination"
+import { PaginationNav } from "@/components/ui/pagination-nav"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
@@ -13,8 +15,11 @@ export const metadata = createMetadata({
   path: "/industries",
 })
 
-export default async function IndustriesPage() {
+export default async function IndustriesPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
+  const params = await searchParams
   const industries = getAllIndustries()
+  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: industries.length })
+  const pageIndustries = industries.slice(pagination.start, pagination.end)
 
   return (
     <>
@@ -25,7 +30,7 @@ export default async function IndustriesPage() {
         <h1 className="text-3xl font-bold tracking-tight mt-4 mb-2">Software by Industry</h1>
         <p className="text-muted-foreground mb-8">Expert-curated software recommendations tailored to your industry's unique requirements.</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {industries.map((ind) => (
+          {pageIndustries.map((ind) => (
             <Link key={ind.slug} href={`/industries/${ind.slug}`}
               className="flex items-center justify-between p-4 rounded-xl border border-border hover:border-primary/30 hover:bg-muted-bg transition-all group">
               <span className="font-medium text-sm">{ind.title}</span>
@@ -33,6 +38,7 @@ export default async function IndustriesPage() {
             </Link>
           ))}
         </div>
+          <PaginationNav basePath="/industries" pagination={pagination} />
       </Container>
     </>
   )
