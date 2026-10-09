@@ -553,47 +553,32 @@ function normalizeComparisonWinner(value: string | null, tool1: string, tool2: s
 }
 
 function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: string, tool2Slug: string, features: ComparisonFeature[], winner: string | null): string {
-  const exclusive1 = features.filter((f) => Boolean(f.tool1) && !Boolean(f.tool2))
-  const exclusive2 = features.filter((f) => Boolean(f.tool2) && !Boolean(f.tool1))
-  const shared = features.filter((f) => Boolean(f.tool1) && Boolean(f.tool2))
   const review1 = getReview(tool1Slug)
   const review2 = getReview(tool2Slug)
-  const winnerLine = winner
-    ? `${winner} is the recorded winner in this dataset.`
-    : "The dataset does not record a clear overall winner."
-
-  const evidence = (items: ComparisonFeature[], key: "tool1Detail" | "tool2Detail") =>
-    items
-      .slice(0, 5)
-      .map((f) => `${f.name}: ${String(f[key] || "recorded as available.")}`)
-      .join(" ")
-
-  const lead1 = exclusive1.length
-    ? `${tool1} has exclusive coverage for ${exclusive1.slice(0, 5).map((f) => f.name.toLowerCase()).join(", ")}.`
-    : `${tool1} has no exclusive criteria in the recorded feature set.`
-  const lead2 = exclusive2.length
-    ? `${tool2} has exclusive coverage for ${exclusive2.slice(0, 5).map((f) => f.name.toLowerCase()).join(", ")}.`
-    : `${tool2} has no exclusive criteria in the recorded feature set.`
-
-  const pricingContext = [review1, review2].filter(Boolean).map((review) =>
-    `${review!.name} is recorded at ${review!.rating}/5 with ${review!.pricing.toLowerCase()} pricing${review!.priceRange ? ` (${review!.priceRange})` : ""}.`
+  const recordedPick = winner
+    ? `The source dataset marks ${winner} as its recorded pick. That label is not independent proof that it is the better choice for every team.`
+    : "The source dataset does not name one overall pick. Choose based on your requirements and the evidence you verify."
+  const profile = (name: string, review: ReviewContent | null) => {
+    if (!review) return `${name}: PilotStack does not currently have a matching review profile for this comparison.`
+    const capabilities = review.features.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ")
+    return `${name}: the current profile describes it as ${review.tagline || review.description}. Recorded category: ${review.category}. Listed capabilities include ${capabilities || "no specific capabilities in the current dataset"}. Treat these as starting points and verify important requirements with the vendor.`
+  }
+  const rows = features.slice(0, 8).map((f) => {
+    const value = (v: unknown) => typeof v === "boolean" ? (v ? "marked available in the dataset" : "marked unavailable in the dataset") : String(v || "not recorded")
+    return `${f.name}: ${tool1} — ${value(f.tool1)}; ${tool2} — ${value(f.tool2)}.`
+  }).join(" ")
+  const pricing = [review1, review2].filter((review): review is ReviewContent => Boolean(review)).map((review) =>
+    `${review.name} has a recorded rating of ${review.rating}/5 and pricing listed as ${review.pricing}${review.priceRange ? ` (${review.priceRange})` : ""}. Ratings, prices, included limits, and plan availability may change; check the source and current vendor page before purchasing.`
   ).join(" ")
-
-  const featureEvidence1 = evidence(exclusive1, "tool1Detail")
-  const featureEvidence2 = evidence(exclusive2, "tool2Detail")
-  const switching = `Before switching between ${tool1} and ${tool2}, verify the workflows represented by the criteria above, confirm current pricing on the vendor sites, and check export/import support, authentication, integrations, and user migration requirements. Recorded feature coverage is a comparison signal, not proof that one product is better for every team.`
-
-  const profile1 = review1 ? review1.name + ' is recorded at ' + review1.rating + '/5. Its positioning is ' + review1.tagline + '. The profile lists ' + review1.features.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(', ') + ' as available capabilities.' : ''
-  const profile2 = review2 ? review2.name + ' is recorded at ' + review2.rating + '/5. Its positioning is ' + review2.tagline + '. The profile lists ' + review2.features.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(', ') + ' as available capabilities.' : ''
   return [
-    winnerLine,
-    `This comparison covers ${features.length} recorded criteria. ${shared.length} criteria are marked as available for both products, ${exclusive1.length} are exclusive to ${tool1}, and ${exclusive2.length} are exclusive to ${tool2}. The most useful way to read the table is to focus on the criteria that map directly to the workflow you are replacing or improving.`,
-    profile1,
-    profile2,
-    lead1 + (featureEvidence1 ? ` In the recorded detail, ${featureEvidence1}` : '') + ' ' + lead2 + (featureEvidence2 ? ` In the recorded detail, ${featureEvidence2}` : ''),
-    pricingContext,
-    `For the final choice, separate must-have requirements from preferences. A product with more recorded criteria is not automatically the better fit if the additional capabilities are irrelevant to your team. Likewise, a smaller feature footprint can be an advantage when it reduces configuration or training effort.`,
-    switching,
+    `This page compares ${tool1} and ${tool2} using information currently recorded in PilotStack's product profiles. The dataset is a starting point for research, not a substitute for a hands-on trial or vendor confirmation.`,
+    recordedPick,
+    profile(tool1, review1),
+    profile(tool2, review2),
+    `The comparison table records the following details: ${rows}`,
+    pricing,
+    `To make the decision, write down the workflows the software must support and separate mandatory requirements from preferences. Test the same realistic tasks in both products. Check what is included in the exact plan you would buy, whether the integrations cover the actions you need, and how permissions, export, migration, support, and cancellation work. Record any unknown as a question rather than assuming that an undocumented capability exists.`,
+    `Before switching between ${tool1} and ${tool2}, estimate the full cost including seats, add-ons, onboarding, training, administration, and integration maintenance. Confirm data export and recovery options, then choose the product that passes your must-have checks with the least operational friction. Revisit the choice when your workflow, team size, or vendor terms change.`
   ].filter(Boolean).join("\n\n")
 }
 function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
