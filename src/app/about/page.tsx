@@ -7,8 +7,8 @@ import { createMetadata } from "@/lib/metadata"
 import { SocialLinkList } from "@/components/brand/social-icons"
 
 export const metadata = createMetadata({
-  title: "About PilotStack — Our Mission, Team & Editorial Standards",
-  description: "PilotStack helps businesses navigate the software landscape with detailed reviews, practical comparisons, and actionable buying guides.",
+  title: "About PilotStack — Mission & Editorial Standards",
+  description: "Learn how PilotStack organizes recorded software information, publishes scoring criteria, and separates commercial relationships from editorial conclusions.",
   path: "/about",
 })
 
@@ -16,7 +16,7 @@ export default function AboutPage() {
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "About", href: "/about" }]} />
-      <WebPageSchema name="About PilotStack" description="Learn about PilotStack's mission, team, values, and editorial approach." url={`${site.url}/about`} />
+      <WebPageSchema name="About PilotStack" description="Learn about PilotStack's mission, recorded-data approach, and editorial standards." url={`${site.url}/about`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "About" }]} />
       </Container>
@@ -29,7 +29,8 @@ export default function AboutPage() {
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">PilotStack was created to make software research easier to navigate. The site brings reviews, comparisons, guides, and structured product information into one place so readers can evaluate options without having to piece together the basics from many sources.</p>
               <p className="text-muted-foreground mb-4">Software research can be difficult because pricing, features, positioning, and product capabilities change over time. PilotStack focuses on making those decision factors easier to compare, while clearly separating recorded information from editorial guidance.</p>
               <p className="text-muted-foreground mb-4">I built PilotStack to fix that. Every figure on this site is recorded once and reused everywhere it appears, each tool carries nine category scores on a 1-5 scale with the overall rating as their mean, and where we cannot source a fact we leave it off the page instead of asserting it. We publish our methodology so you can check how every conclusion is reached.</p>
-              <p className="text-muted-foreground mb-4">PilotStack may earn revenue from affiliate relationships and other clearly disclosed commercial relationships. Commercial relationships do not determine editorial scores or conclusions. Where a page contains an affiliate relationship, the relationship is disclosed so readers can understand the commercial context.</p>
+              <p className="text-muted-foreground mb-4">PilotStack currently publishes under the “PilotStack Team” byline. This is the publication byline, not a claim that multiple named reviewers have personally tested every product. Scores are calculated from recorded category ratings, and the methodology explains what is recorded versus independently verified.</p>
+              <p className="text-muted-foreground mb-4">PilotStack may earn revenue from clearly disclosed commercial relationships. Those relationships do not determine editorial scores or conclusions, and not every outbound vendor link is an affiliate link.</p>
               <p className="text-muted-foreground mb-4">The same published rules apply to every page: one recorded source per figure, the overall rating as the mean of nine category scores, and no unsourced fact stated as confirmed. We believe that consistency is what makes PilotStack different — and what helps our readers make confident, informed decisions.</p>
               <h2 className="text-2xl font-bold mt-12 mb-4">Our values</h2>
               <div className="grid sm:grid-cols-2 gap-6 mb-12">
@@ -45,11 +46,13 @@ export default function AboutPage() {
                   </div>
                 ))}
               </div>
-              <div className="mt-12 p-6 rounded-xl bg-muted-bg border border-border">
-                <h2 className="text-lg font-bold mb-2">Official Community</h2>
-                <p className="text-sm text-muted-foreground mb-4">Join the PilotStack community:</p>
-                <SocialLinkList />
-              </div>
+              {Object.values(site.links).some((url) => typeof url === "string" && url.startsWith("http")) && (
+                <div className="mt-12 p-6 rounded-xl bg-muted-bg border border-border">
+                  <h2 className="text-lg font-bold mb-2">Official Community</h2>
+                  <p className="text-sm text-muted-foreground mb-4">Follow PilotStack:</p>
+                  <SocialLinkList />
+                </div>
+              )}
               <div className="mt-12 text-center">
                 <a href="/methodology" className="button-press inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-white hover:bg-primary-dark shadow-button h-10 px-6 text-sm font-medium transition-all duration-200">
                   Read our full methodology

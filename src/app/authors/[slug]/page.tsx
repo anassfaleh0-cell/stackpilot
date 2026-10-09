@@ -13,12 +13,6 @@ import { BookOpen, Calendar } from "lucide-react"
 import { getAllReviews, getAllGuides, getAllBlogPosts } from "@/lib/content/registry"
 import { ReviewCardGrid } from "@/components/entity/review-card-grid"
 import { SocialFooterIcons } from "@/components/brand/social-icons"
-import sitemapRoute from "@/app/sitemap"
-
-const sitemapEntries = sitemapRoute()
-const countIn = (segment: string) => sitemapEntries.filter((e) => e.url.includes(segment)).length
-const reviewCount = countIn("/reviews/")
-const comparisonCount = countIn("/comparisons/")
 
 const authorSocial = {
   twitter: site.links.twitter,
@@ -29,11 +23,11 @@ const authorSocial = {
 const authors = {
   "pilotstack-team": {
     name: "PilotStack Team",
-    role: "Editorial Team",
-    bio: "The PilotStack editorial team publishes software reviews, comparisons, guides, and research using the site's published scoring, sourcing, and update policies.",
+    role: "Publication byline",
+    bio: "This is the publication byline used for pages prepared from recorded product information and published scoring rules. It is not an individual biography or a claim that every product was hands-on tested.",
     avatar: null,
     expertise: ["Software research", "Pricing analysis", "Software comparison", "B2B software buying"],
-    credentials: ["Published software reviews and comparisons", "Public methodology and editorial policies"],
+    credentials: ["Public scoring methodology", "Published editorial and sourcing policies"],
     social: { twitter: authorSocial.twitter, github: authorSocial.github, linkedin: authorSocial.linkedin },
     worksFor: "PilotStack",
     knowsAbout: ["Software Reviews", "Software Comparison", "B2B Software", "Market Research"],
@@ -54,7 +48,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!author) return {}
   return createMetadata({
     title: `${author.name} - ${author.role}`,
-    description: `${author.name} is ${author.role} at PilotStack. ${author.bio.slice(0, 150)}`,
+    description: `Profile for ${author.name}, the public publication byline used on PilotStack. ${author.bio.slice(0, 150)}`,
     path: `/authors/${slug}`,
     noIndex: !isPublicAuthor(slug),
   })
@@ -64,6 +58,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
   const { slug } = await params
   const author = authors[slug as keyof typeof authors]
   if (!author) notFound()
+  const hasSocial = Object.values(author.social).some((url) => Boolean(url))
 
   const allReviews = getAllReviews()
   const allGuides = getAllGuides()
@@ -97,7 +92,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
                   ))}
                 </div>
                 <div className="flex items-center gap-3 mt-4">
-                  {Object.entries(author.social).map(([platform, url]) => (
+                  {Object.entries(author.social).filter(([, url]) => Boolean(url)).map(([platform, url]) => (
                     <a key={platform} href={url} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-muted-foreground hover:text-primary transition-colors capitalize">
                       {platform === "twitter" ? "X" : platform} ↗
                     </a>
@@ -110,7 +105,8 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
               {allReviews.length > 0 && (
                 <section>
                   <h2 className="text-xl font-bold mb-4">Reviews by {author.name}</h2>
-                  <ReviewCardGrid items={allReviews.map(r => ({ slug: r.slug, name: r.name, category: r.category, rating: r.rating, tagline: r.tagline }))} />
+                  <ReviewCardGrid items={allReviews.slice(0, 6).map(r => ({ slug: r.slug, name: r.name, category: r.category, rating: r.rating, tagline: r.tagline }))} />
+                  <Link href="/reviews" className="mt-4 inline-flex text-sm font-medium text-primary hover:underline">View all reviews →</Link>
                 </section>
               )}
 
@@ -118,7 +114,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
                 <section>
                   <h2 className="text-xl font-bold mb-4">Guides by {author.name}</h2>
                   <div className="grid sm:grid-cols-2 gap-4">
-                    {allGuides.map((g) => (
+                    {allGuides.slice(0, 6).map((g) => (
                       <Link key={g.slug} href={`/guides/${g.slug}`} className="group card-hover-lift">
                         <Card className="p-4">
                           <div className="flex items-center gap-2 mb-2">
@@ -133,7 +129,8 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
                         </Card>
                       </Link>
                     ))}
-                  </div>
+
+                  <Link href="/guides" className="mt-4 inline-flex text-sm font-medium text-primary hover:underline">View all guides →</Link>                  </div>
                 </section>
               )}
 
@@ -141,7 +138,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
                 <section>
                   <h2 className="text-xl font-bold mb-4">Articles by {author.name}</h2>
                   <div className="grid sm:grid-cols-2 gap-4">
-                    {allPosts.map((p) => (
+                    {allPosts.slice(0, 6).map((p) => (
                       <Link key={p.slug} href={`/blog/${p.slug}`} className="group card-hover-lift">
                         <Card className="p-4">
                           <div className="flex items-center gap-2 mb-2">
@@ -155,7 +152,8 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
                         </Card>
                       </Link>
                     ))}
-                  </div>
+
+                  <Link href="/blog" className="mt-4 inline-flex text-sm font-medium text-primary hover:underline">View all articles →</Link>                  </div>
                 </section>
               )}
 
@@ -163,10 +161,12 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
                 <p className="text-muted-foreground text-sm">No content published yet.</p>
               )}
             </div>
-            <div className="mt-12 p-6 rounded-xl bg-muted-bg border border-border">
-              <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-3">Follow PilotStack</h2>
-              <SocialFooterIcons />
-            </div>
+            {hasSocial && (
+              <div className="mt-12 p-6 rounded-xl bg-muted-bg border border-border">
+                <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-3">Follow PilotStack</h2>
+                <SocialFooterIcons />
+              </div>
+            )}
           </div>
         </Container>
       </Section>

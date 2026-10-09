@@ -10,8 +10,8 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 export const metadata = createMetadata({
-  title: "Our Authors & Editorial Team",
-  description: "PilotStack content is produced by a small, independent team following a published methodology — recorded scoring, transparent sourcing, and no vendor-paid placement.",
+  title: "PilotStack Editorial Byline",
+  description: "Learn what the PilotStack publication byline represents and how software pages are prepared from recorded data and published scoring rules.",
   path: "/authors",
 })
 
@@ -19,8 +19,8 @@ const authors = [
   {
     slug: "pilotstack-team",
     name: "PilotStack Team",
-    role: "Editorial Team",
-    bio: "The PilotStack editorial team maintains software reviews, comparisons, guides, and research using the site's published scoring, sourcing, and update policies.",
+    role: "Publication byline",
+    bio: "This is the publication byline used for pages prepared from recorded product information and published scoring rules; it is not an individual biography or a claim of hands-on testing for every product.",
   },
 ]
 
@@ -34,10 +34,10 @@ export default function AuthorsPage() {
       <Section className="pt-0">
         <Container>
           <div className="max-w-4xl mx-auto">
-            <Badge variant="default" className="mb-4">Our Team</Badge>
-            <h1 className="text-4xl font-bold tracking-tight mb-4">Meet the PilotStack Editorial Team</h1>
+            <Badge variant="default" className="mb-4">Editorial byline</Badge>
+            <h1 className="text-4xl font-bold tracking-tight mb-4">About the PilotStack editorial byline</h1>
             <p className="text-lg text-muted-foreground mb-10 max-w-2xl">
-              Our editorial team publishes coverage across 12 categories. Every page follows the same published scoring and sourcing rules.
+              PilotStack currently publishes under one publication byline. The byline identifies the site responsible for the content; it does not imply that every product has been hands-on tested by a named reviewer.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6">
