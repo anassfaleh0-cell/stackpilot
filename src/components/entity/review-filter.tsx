@@ -12,7 +12,7 @@ interface ReviewFilterProps {
     name: string
     tagline: string
     category: string
-    rating: number
+    rating?: number
     priceRange?: string
     pricing?: string
   }>
@@ -25,11 +25,12 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
   const [priceFilter, setPriceFilter] = useState<string>("all")
   const [showFilters, setShowFilters] = useState(false)
   const [visible, setVisible] = useState(96)
+  const hasVerifiedRatings = reviews.some((r) => typeof r.rating === "number" && Number.isFinite(r.rating))
 
   const filtered = useMemo(() => {
     return reviews.filter((r) => {
       if (searchQuery && !r.name.toLowerCase().includes(searchQuery.toLowerCase()) && !r.tagline.toLowerCase().includes(searchQuery.toLowerCase())) return false
-      if (minRating > 0 && r.rating < minRating) return false
+      if (minRating > 0 && (typeof r.rating !== "number" || r.rating < minRating)) return false
       if (priceFilter === "free" && r.pricing !== "Free" && r.pricing !== "Freemium") return false
       if (priceFilter === "paid" && (r.pricing === "Free" || r.pricing === "Freemium")) return false
       return true
@@ -72,7 +73,7 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
 
       {showFilters && (
         <div className="flex flex-wrap items-center gap-3 mb-4 p-3 rounded-xl border border-border bg-muted-bg/50">
-          <div className="flex items-center gap-2">
+          {hasVerifiedRatings && <div className="flex items-center gap-2">
             <span className="text-xs text-muted-foreground">Min rating:</span>
             {[0, 3, 3.5, 4, 4.5].map((r) => (
               <button
@@ -83,8 +84,8 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
                 {r === 0 ? "Any" : `${r}+`}
               </button>
             ))}
-          </div>
-          <div className="w-px h-5 bg-border" />
+          </div>}
+          {hasVerifiedRatings && <div className="w-px h-5 bg-border" />}
           <div className="flex items-center gap-2">
             <span className="text-xs text-muted-foreground">Pricing:</span>
             {[
@@ -111,10 +112,12 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
               <Card className="h-full flex flex-col">
                 <div className="flex items-start justify-between mb-3">
                   <Badge variant="secondary">{tool.category}</Badge>
-                  <div className="flex items-center gap-1 text-sm font-medium text-accent">
-                    <Star size={14} className="fill-accent text-accent" />
-                    {tool.rating}
-                  </div>
+                  {typeof tool.rating === "number" && Number.isFinite(tool.rating) ? (
+                    <div className="flex items-center gap-1 text-sm font-medium text-accent">
+                      <Star size={14} className="fill-accent text-accent" />
+                      {tool.rating}
+                    </div>
+                  ) : <span className="text-xs text-muted-foreground">Rating not verified</span>}
                 </div>
                 <CardTitle className="group-hover:text-primary transition-colors">{tool.name}</CardTitle>
                 <CardDescription className="mt-1.5">{tool.tagline}</CardDescription>
