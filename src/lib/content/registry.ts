@@ -372,7 +372,12 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
 }
 function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
   const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
-  if (cleaned.length >= 80 && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(cleaned)) return trimText(cleaned, 700)
+  const malformedPricing = /\bfrom\s+Free\s*[–—-]\s*(?:[.,;]|$)/i.test(cleaned)
+    || /\b(?:from|starting at)\s*(?:–|—|-)?\s*[.,;](?:\s|$)/i.test(cleaned)
+  const containsPlaceholder = /\b(?:NaN|undefined|null)\b/i.test(cleaned)
+  if (cleaned.length >= 80 && !malformedPricing && !containsPlaceholder && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(cleaned)) {
+    return trimText(cleaned, 700)
+  }
   return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the recorded overall winner." : "The dataset records no single overall winner.") + " Read the detailed rows and linked reviews before making a decision.", 700)
 }
 export function getComparison(slug: string): ComparisonContent | null {
