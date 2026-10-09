@@ -380,6 +380,21 @@ function repairGenericGuideData(data: Record<string, unknown>, filePath: string)
       type: "text",
     },
   ]
+    {
+      title: "Questions to Ask the Vendor",
+      body: "Ask for a demonstration of the exact workflow you will use, not a generic tour. Confirm which features are included in the quoted plan, what usage limits apply, how permissions and audit logs work, what support response is promised, and how quickly data can be exported. Ask the vendor to identify known limitations and recent material changes. Keep answers in writing, link them to the requirement they address, and distinguish contractual commitments from informal sales statements.",
+      type: "text",
+    },
+    {
+      title: "Acceptance Checklist",
+      body: "Before the pilot, agree on a short pass/fail checklist with the people who will use and maintain the tool. Include successful completion of the main workflow, acceptable error or correction rate, required integrations, access restrictions, export quality, and a realistic cost ceiling. Test at least one failure case and one handoff between roles. If a mandatory check fails, record the gap and its owner rather than averaging it away with a high score elsewhere.",
+      type: "text",
+    },
+    {
+      title: "Review After Launch",
+      body: "Schedule a review after the first few weeks and again after the first full operating cycle. Compare actual usage, time saved, correction work, support requests, and total cost with the baseline recorded before purchase. Ask users which steps remain awkward and whether work has shifted elsewhere instead of disappearing. Keep, change, or retire the tool based on this evidence, and update the evaluation notes so the next renewal or procurement decision starts with real operating experience.",
+      type: "text",
+    },
   const wordCount = repairedSections.reduce((total, section) => total + String(section.body).split(/\s+/).filter(Boolean).length, 0)
   return {
     ...data,
