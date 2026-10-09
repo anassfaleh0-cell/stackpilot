@@ -5,6 +5,7 @@ import { BreadcrumbSchema, BlogPostingSchema, WebPageSchema } from "@/components
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getBlogPost, getContentTitle, isContentAvailable, getAllBlogPosts } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 import { formatDate } from "@/lib/utils"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -29,7 +30,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const post = getBlogPost(slug)
   if (!post) return {}
-  return createMetadata({ title: post.title, description: post.description, path: `/blog/${slug}`, ogType: "article", publishedAt: post.publishedAt, updatedAt: post.updatedAt, articleTags: post.tags, articleSection: post.category })
+  const metadata = createMetadata({ title: post.title, description: post.description, path: `/blog/${slug}`, ogType: "article", publishedAt: post.publishedAt, updatedAt: post.updatedAt, articleTags: post.tags, articleSection: post.category })
+  return isNoindexed("blog", slug) ? { ...metadata, robots: { index: false, follow: true } } : metadata
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
