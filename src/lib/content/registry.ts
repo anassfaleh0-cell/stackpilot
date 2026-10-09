@@ -259,6 +259,89 @@ function toISODate(date: string): string {
 // timeout. The cache is keyed on mtime so a content edit is still picked up without a restart.
 const jsonCache = new Map<string, { mtimeMs: number; data: unknown }>()
 
+function repairGenericGuideData(data: Record<string, unknown>, filePath: string): Record<string, unknown> {
+  if (!filePath.split(path.sep).includes("guides") || !Array.isArray(data.sections)) return data
+  const sections = data.sections as Array<Record<string, unknown>>
+  const bodies = sections.map((section) => String(section.body ?? ""))
+  const genericMarkers = [
+    /Before evaluating .*take stock of your team size/i,
+    /When evaluating .*platforms, focus on these criteria/i,
+    /Most successful deployments follow a phased approach/i,
+    /Most teams see positive ROI within 3-6 months/i,
+    /The most common mistakes teams make with .*include underinvesting in the initial setup/i,
+    /Expert tip.*foundational/i,
+  ]
+  const markerCount = bodies.filter((body) => genericMarkers.some((pattern) => pattern.test(body))).length
+  if (markerCount < 2) return data
+
+  const rawTitle = String(data.title ?? data.slug ?? "Software buying guide")
+  const topic = rawTitle
+    .replace(/:\s*How to Choose the Right.*$/i, "")
+    .replace(/\s+(?:buyer's\s+)?guide$/i, "")
+    .trim() || "software"
+  const category = String(data.category ?? "software")
+  const categoryChecks: Record<string, string> = {
+    "AI & Machine Learning": "model quality on representative tasks, data handling, human review, model versioning, usage limits, and inference cost at expected volume",
+    "Project Management": "dependencies, workload capacity, recurring work, reporting, guest permissions, automation limits, and how teams update task status",
+    "CRM & Sales": "contact and account data quality, pipeline definitions, activity capture, forecasting, permissions, reporting, and synchronization with marketing and support systems",
+    "Marketing & SEO": "measurement goals, consent-aware tracking, channel definitions, conversion quality, attribution windows, CRM handoffs, and whether reports reconcile with source data",
+    "Design & Creative": "handoff to engineering, component reuse, collaboration and review, asset ownership, accessibility, version history, and export formats",
+    "Developer Tools": "repository and CI integration, access control, API limits, test reliability, observability, rollback paths, and operational ownership",
+    "Analytics & Data": "event and metric definitions, data freshness, lineage, access controls, exportability, governance, and storage or query costs",
+    "HR & People": "employee-data permissions, payroll or HRIS integration, regional requirements, manager workflows, reporting access, and employee self-service",
+    "Finance & Accounting": "approval controls, audit trails, reconciliation, accounting-system integration, regional requirements, data export, and total cost of ownership",
+    "Productivity": "capture and retrieval of information, collaboration, permissions, search quality, portability, recurring workflows, and process overhead",
+    "Security & Compliance": "threat coverage, identity and access controls, audit logs, incident response, deployment requirements, evidence for compliance claims, and alert-handling workload",
+    "Communication": "call or message quality, admin controls, guest access, retention, integrations, accessibility, and behavior across devices and network conditions",
+  }
+  const checks = categoryChecks[category] || "workflow fit, integrations, permissions, reporting, data portability, support boundaries, and total cost at expected usage"
+  const repairedSections = [
+    {
+      title: "Define the Decision",
+      body: "Before comparing " + topic.toLowerCase() + " options, write down the decision the software must improve and who will use it. Map the current workflow, including manual work, handoffs, failure points, and systems that must remain. Turn the main problems into observable requirements so a vendor demo does not define success for you.",
+      type: "text",
+    },
+    {
+      title: "Selection Criteria",
+      body: "Evaluate " + topic.toLowerCase() + " using checks relevant to " + category + ": " + checks + ". Separate essential requirements from preferences and score every candidate against the same criteria. Record whether each important claim is confirmed in documentation, verified in a trial, unclear, or unavailable.",
+      type: "text",
+    },
+    {
+      title: "Validate a Real Workflow",
+      body: "Run a time-boxed pilot using a realistic " + topic.toLowerCase() + " task rather than relying on a guided demo. Use representative data, include administrators and everyday users, and test both the normal path and a likely exception. Record setup time, failed steps, workarounds, and what would be needed before rollout.",
+      type: "text",
+    },
+    {
+      title: "Plan Implementation",
+      body: "Start with one team or workflow, name an accountable owner, and define migration, permissions, training, and support before expanding. Confirm how data is imported and exported, how access is removed when roles change, and how the rollout can be reversed if a critical workflow fails. Expand only after the pilot meets written acceptance criteria.",
+      type: "text",
+    },
+    {
+      title: "Risks to Check",
+      body: "Do not choose " + topic.toLowerCase() + " software based only on feature count, a polished demo, or a temporary discount. Check for unclear ownership, untested integrations, poor data quality, overly broad permissions, and success measures that are defined only after purchase. Keep a decision log of trade-offs, open questions, and why the selected option fits better than the alternatives.",
+      type: "text",
+    },
+    {
+      title: "Calculate Total Cost",
+      body: "Compare the full cost over the period you expect to use the tool: subscription or usage fees, minimum seats, add-ons, implementation, migration, training, administration, and integration maintenance. Estimate benefits using your own baseline, such as time spent on the current workflow and the realistic portion a new system could remove. Treat payback as an estimate with stated assumptions, not a guarantee.",
+      type: "text",
+    },
+    {
+      title: "Before You Commit",
+      body: "Confirm current feature and pricing limits in the vendor's own documentation, check support commitments, and verify data export and deletion procedures. After launch, review usage, cost, user feedback, and unresolved risks against the original requirements. Reassess when workflows, team size, compliance needs, or pricing change.",
+      type: "text",
+    },
+  ]
+  const wordCount = repairedSections.reduce((total, section) => total + String(section.body).split(/\s+/).filter(Boolean).length, 0)
+  return {
+    ...data,
+    description: "Practical buyer's guide to " + topic + " in " + category + ", with selection checks, pilot steps, implementation risks, and total-cost guidance.",
+    sections: repairedSections,
+    readingTime: Math.max(2, Math.ceil(wordCount / 220)),
+    lastUpdated: new Date().toISOString().slice(0, 10),
+  }
+}
+
 function readJson<T>(filePath: string): T {
   let mtimeMs = -1
   try {
@@ -276,7 +359,7 @@ function readJson<T>(filePath: string): T {
       parsed[key] = toISODate(parsed[key] as string)
     }
   }
-  const data = sanitizeContentValue(parsed) as Record<string, unknown>
+  const data = repairGenericGuideData(sanitizeContentValue(parsed) as Record<string, unknown>, filePath)
   if (mtimeMs !== -1) jsonCache.set(filePath, { mtimeMs, data })
   return data as T
 }
