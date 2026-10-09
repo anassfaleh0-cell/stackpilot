@@ -5,7 +5,7 @@
   "category": "CRM & Sales",
   "difficulty": "Beginner",
   "author": "Sarah Chen",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "salesforce",
     "hubspot",
@@ -56,6 +56,11 @@
     {
       "title": "Selection checklist",
       "body": "Pilot one revenue workflow end to end and verify data flow, permissions, automation, reporting, and recovery from failure. Choose a platform that supports the operating model without unnecessary complexity. Review the system after changes to go-to-market strategy, product packaging, or customer lifecycle definitions.",
+      "type": "text"
+    },
+    {
+      "title": "Reconcile a metric from source to dashboard",
+      "body": "Pick one operational metric, such as qualified pipeline or lead-to-opportunity conversion, and trace it from the CRM and marketing systems through transformation rules to the dashboard. Check duplicate records, lifecycle-stage changes, ownership changes, and the reporting time zone. Document which system is authoritative when fields disagree. Agree on a shared definition with sales, marketing, and finance before automating the report; otherwise, the platform can make conflicting numbers easier to distribute.",
       "type": "text"
     }
   ]
