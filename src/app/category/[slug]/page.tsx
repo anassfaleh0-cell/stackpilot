@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const catReviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && r.category === category.name)
   return createMetadata({
     title: knowledge?.seoTitle || `Best ${category.name} Software 2026: Reviews & Buying Guide`,
-    description: knowledge?.seoDescription || `Find the best ${category.name.toLowerCase()} software with detailed reviews, pricing comparisons, and buying tips. ${catReviews.length} tools reviewed and rated for 2026.`,
+    description: knowledge?.seoDescription || `Find the best ${category.name.toLowerCase()} software with detailed reviews, pricing comparisons, and buying tips. ${catReviews.length} software profiles for 2026, with current details to verify against vendor sources.`,
     path: `/category/${slug}`,
     articleSection: category.name,
   })
@@ -64,7 +64,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const comparisons = getComparisonsByCategory(category.name).filter((c) => isContentAvailable("comparison", c.slug))
   const posts = getAllBlogPosts().filter((p) => p.category === category.name)
   const glossary = getAllGlossaryTerms().filter((t) => t.category === category.name)
-  const bestPick = [...reviews].sort((a, b) => b.rating - a.rating)[0]
+  const bestPick = [...reviews].filter((r) => r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating)).sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
 
   const buyerJourney = [
     { stage: "awareness", content: [...posts.map((p) => ({ slug: p.slug, name: p.title, type: "blog" })), ...glossary.map((t) => ({ slug: t.slug, name: t.term, type: "glossary" }))] },
@@ -73,7 +73,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
     { stage: "decision", content: reviews.map((r) => ({ slug: r.slug, name: r.name, type: "software" })) },
   ].filter((stage) => stage.content.length > 0)
 
-  const smbPick = [...reviews].filter((r) => r.pricing === "Freemium" || r.pricing === "Free" || r.pricing === "Free Trial").sort((a, b) => b.rating - a.rating)[0]
+  const smbPick = [...reviews].filter((r) => (r.pricing === "Freemium" || r.pricing === "Free" || r.pricing === "Free Trial") && r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating)).sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
   const enterprisePick = comparisons.length > 0 ? comparisons[0] : null
   const aiPick = reviews.find((r) => r.name.toLowerCase().includes("ai") || r.category.toLowerCase().includes("ai"))
   const freePick = reviews.find((r) => r.pricing === "Free" || r.pricing === "Freemium")
@@ -109,7 +109,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             </p>
           ) : (
             <p className="text-lg text-muted-foreground max-w-2xl text-pretty">
-              Our selected picks for the best {category.name.toLowerCase()} tools. Each reviewed and rated by our team.
+              Compare {category.name.toLowerCase()} software by fit, recorded capabilities, pricing terms, and the requirements that matter to your team.
             </p>
           )}
         </Container>
@@ -390,7 +390,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                 <Link href="/reviews" className="text-sm text-primary hover:underline hidden sm:inline-flex items-center gap-1">View all <ArrowRight size={12} /></Link>
               </div>
               {reviews.length > 0 ? (
-                <ReviewFilter reviews={displayedReviews.map(r => ({ slug: r.slug, name: r.name, tagline: r.tagline, category: r.category, rating: r.rating, priceRange: r.priceRange, pricing: r.pricing }))} category={category.name} />
+                <ReviewFilter reviews={displayedReviews.map(r => ({ slug: r.slug, name: r.name, tagline: r.tagline, category: r.category, rating: r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating) ? r.rating : undefined, priceRange: r.priceRange, pricing: r.pricing }))} category={category.name} />
               ) : (
                 <div className="text-center py-16">
                   <p className="text-muted-foreground">No reviews yet in this category. Check back soon.</p>
