@@ -18,8 +18,8 @@ describe("guide content quality", () => {
   it("does not expose incomplete pricing fragments in comparison descriptions", () => {
     const comparison = getComparison("zoom-vs-webex")
     expect(comparison).not.toBeNull()
-    expect(comparison?.description).not.toMatch(/Webex from Free\\s*[–—-]\\s*[.,;]?$/i)
-    expect(comparison?.description).not.toMatch(/\\b(?:NaN|undefined|null)\\b/i)
+    expect(comparison?.description).not.toMatch(/Webex from Free\s*[–—-]\s*[.,;]?$/i)
+    expect(comparison?.description).not.toMatch(/\b(?:NaN|undefined|null)\b/i)
   })
 
   it("uses marketing measurement checks for attribution guidance", () => {
