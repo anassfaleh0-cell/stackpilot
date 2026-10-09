@@ -2,14 +2,14 @@
 
 ## CRITICAL (Must complete before resubmitting)
 
-- [ ] 1. **Real author profiles** — Create 2-3 author pages at `/authors/[slug]` with real names, photos (or illustrated avatars), LinkedIn URLs, and expertise descriptions
+- [ ] 1. **Credible author profiles** — Publish verifiable author/contributor details where real people are available; do not invent names, credentials, photos, or testing experience. Keep the editorial-team profile transparent until individual contributors can be verified.
 - [ ] 2. **About page founder story** — Add a first-person founder narrative ("I started PilotStack because...") with a real name and verifiable identity
-- [ ] 3. **Contact page has real email** — Ensure contact@pilotstack.online forwards to a monitored inbox
+- [ ] 3. **Contact channels work** — Verify `hello@pilotstack.online` and `privacy@pilotstack.online` reach monitored inboxes; the page currently does not advertise `contact@pilotstack.online`.
 - [ ] 4. **Privacy policy updated** — Add mention of Google AdSense specifically, Google's use of cookies for ad serving, and the Data Processing Agreement
-- [ ] 5. **Cookie consent blocks AdSense for EU** — Verify the consent banner properly blocks AdSense script until user accepts advertising cookies
+- [ ] 5. **Google-certified consent management for EEA/UK/Switzerland** — Configure a Google-certified CMP integrated with IAB TCF in AdSense Privacy & messaging when serving personalised ads in these regions. The custom cookie banner alone is not proof of CMP certification. Verify consent signals and script gating in production.
 - [ ] 6. **Affiliate disclosure visible** — Every page with affiliate links shows a clear "Affiliate Disclosure" notice at the top
-- [ ] 7. **No thin content pages** — Every indexed page has 300+ words of unique, valuable content
-- [ ] 8. **No duplicate content** — Each comparison/review page has unique editorial content, not just table data
+- [ ] 7. **No thin content pages** — Review every indexable URL for unique, useful substance and evidence. Word-count thresholds are internal diagnostics, not a Google-mandated minimum.
+- [ ] 8. **No duplicate or templated content** — Each review/comparison needs specific, decision-useful analysis; repeated templates and table-only pages must be improved before being treated as high quality.
 - [ ] 9. **Original images/screenshots** — At least 5 review pages have original screenshots or images of the tools being reviewed
 - [ ] 10. **No auto-generated pages without editorial value** — "Best X" pages have unique editorial intros, not just list data
 
