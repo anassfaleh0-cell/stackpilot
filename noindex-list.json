@@ -1,14 +1,19 @@
 {
-  "generatedAt": "2026-10-09T06:34:23.013Z",
+  "generatedAt": "2026-10-09T06:39:09.036Z",
   "summary": {
     "totalFiles": 1940,
-    "totalKeep": 1864,
-    "totalNoindex": 76
+    "totalKeep": 1716,
+    "totalNoindex": 224
   },
   "directories": {
     "reviews": {
       "total": 151,
       "keep": [
+        "clickup",
+        "linear",
+        "notion"
+      ],
+      "noindex": [
         "1password",
         "activecampaign",
         "acuity",
@@ -33,7 +38,6 @@
         "chatgpt",
         "circleci",
         "claude",
-        "clickup",
         "close-crm",
         "cloudflare-pages",
         "confluence",
@@ -82,7 +86,6 @@
         "kubernetes",
         "lastpass",
         "lever",
-        "linear",
         "logrocket",
         "loom",
         "mailchimp",
@@ -97,7 +100,6 @@
         "n8n",
         "netlify",
         "new-relic",
-        "notion",
         "obsidian",
         "okta",
         "optimizely",
@@ -160,8 +162,7 @@
         "zoho-crm",
         "zoho-people",
         "zoom"
-      ],
-      "noindex": []
+      ]
     },
     "comparisons": {
       "total": 928,
