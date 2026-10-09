@@ -15,6 +15,7 @@ import { Star, ExternalLink, ArrowRight, CheckCircle2 } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { isNoindexed } from "@/lib/noindex"
+import { getVisibleEditorialFaqs } from "@/lib/content/review-faqs"
 
 export const dynamicParams = true
 export const revalidate = 86400
@@ -38,6 +39,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
   const { slug } = await params
   const alt = getAlternative(slug)
   if (!alt) notFound()
+  const visibleFaqs = getVisibleEditorialFaqs(alt.faqs, 8)
 
   const relatedLinks = getRelatedByCategory(alt.category, alt.slug, 4)
 
@@ -63,7 +65,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
         }
         category={alt.category}
       />
-      <FAQSchema questions={alt.faqs} path={`/alternatives/${slug}`} />
+      {visibleFaqs.length > 0 && <FAQSchema questions={visibleFaqs} path={`/alternatives/${slug}`} />}
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Alternatives", href: "/alternatives" }, { name: alt.title }]} />
       </Container>
@@ -144,19 +146,21 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                 </section>
               ))}
 
+              {visibleFaqs.length > 0 && (
               <section id="faq">
-                <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {alt.faqs.map((faq) => (
-                    <GlassCard key={faq.question}>
-                      <div className="p-4">
-                        <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
-                        <p className="text-sm text-muted-foreground">{faq.answer}</p>
-                      </div>
-                    </GlassCard>
-                  ))}
-                </div>
-              </section>
+                  <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {visibleFaqs.map((faq) => (
+                      <GlassCard key={faq.question}>
+                        <div className="p-4">
+                          <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
+                          <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                        </div>
+                      </GlassCard>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
 
             <aside className="lg:col-span-1">
