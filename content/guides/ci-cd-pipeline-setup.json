@@ -39,6 +39,16 @@
       "title": "Measure and improve the pipeline",
       "body": "Track lead time from merge to production, deployment frequency, failed-deployment rate, recovery time, and pipeline duration. Split duration by queueing, dependency installation, tests, and deployment so optimization targets the real bottleneck. Set a baseline before introducing new tools, and review results after several releases. The goal is a repeatable, auditable path to safe delivery—not the largest number of pipeline stages or the fastest build at any cost.",
       "type": "text"
+    },
+    {
+      "title": "Release readiness checklist",
+      "body": "Before enabling automatic production releases, confirm that the default branch is protected, required checks cannot be skipped by ordinary contributors, secrets are scoped to the correct environment, and deployment logs do not expose credentials. Verify that the build artifact can be traced to a commit and that the team knows who can approve or stop a release. Document the rollback command or procedure and rehearse it. A pipeline is not complete until someone other than its original author can operate it during an incident.",
+      "type": "text"
+    },
+    {
+      "title": "Common failure patterns",
+      "body": "Watch for pipelines that pass locally but fail in CI because of unpinned dependencies, environment differences, hidden state, or tests that depend on execution order. Avoid rebuilding a different artifact for production after testing another one in staging. Do not automatically retry every failure: transient network errors may merit a retry, while deterministic test failures need investigation. Keep deployment permissions and branch protection aligned, and review the workflow whenever repository structure, deployment targets, or secret names change.",
+      "type": "text"
     }
   ]
 }
