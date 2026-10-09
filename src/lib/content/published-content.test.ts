@@ -41,7 +41,7 @@ describe("rewritten guide quality floor", () => {
       const guide = getGuide(slug)
       expect(guide).not.toBeNull()
       expect(guide!.sections.length).toBeGreaterThanOrEqual(7)
-      const words = guide!.sections.reduce((total, section) => total + section.body.split(/\\s+/).filter(Boolean).length + (section.items || []).join(" ").split(/\\s+/).filter(Boolean).length, 0)
+      const words = guide!.sections.reduce((total, section) => total + section.body.split(/\s+/).filter(Boolean).length + (section.items || []).join(" ").split(/\s+/).filter(Boolean).length, 0)
       expect(words).toBeGreaterThanOrEqual(500)
       expect(guide!.relatedTools.length).toBeGreaterThan(0)
     })
