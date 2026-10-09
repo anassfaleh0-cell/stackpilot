@@ -5,7 +5,7 @@
   "category": "Security & Compliance",
   "difficulty": "Beginner",
   "author": "Marcus Rivera",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "okta",
     "1password",
@@ -56,6 +56,11 @@
     {
       "title": "Selection checklist",
       "body": "Pilot with representative users and applications. Verify lifecycle automation, authentication, recovery, least privilege, audit evidence, integration failures, and offboarding. Keep an inventory of exceptions and review them regularly. Reassess when the application estate, workforce model, or threat profile changes.",
+      "type": "text"
+    },
+    {
+      "title": "Run an access review and recovery drill",
+      "body": "Test joiner, mover, and leaver scenarios across representative applications, including a contractor whose end date changes and an employee who changes teams. Verify that access is granted only after approval, removed within the required window, and logged with the reason. Simulate a failed directory sync and a lost administrator account to confirm recovery steps. Measure stale accounts, excessive privileges, and time to revoke access instead of judging success by the number of connected applications.",
       "type": "text"
     }
   ]
