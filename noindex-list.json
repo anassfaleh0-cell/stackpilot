@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-08T05:05:00Z",
+  "generatedAt": "2026-10-09T06:28:21.722Z",
   "summary": {
     "totalFiles": 1940,
-    "totalKeep": 1940,
-    "totalNoindex": 0
+    "totalKeep": 1840,
+    "totalNoindex": 100
   },
   "directories": {
     "reviews": {
@@ -1099,7 +1099,8 @@
     },
     "guides": {
       "total": 100,
-      "keep": [
+      "keep": [],
+      "noindex": [
         "accessibility-testing-tools",
         "accounting-software-pricing",
         "agile-transformation-guide",
@@ -1200,8 +1201,7 @@
         "vendor-risk-assessment",
         "web-design-platform-selection",
         "workflow-automation-guide"
-      ],
-      "noindex": []
+      ]
     },
     "glossary": {
       "total": 122,
