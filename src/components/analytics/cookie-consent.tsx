@@ -76,6 +76,18 @@ function injectAdSenseScript() {
   document.head.appendChild(s)
 }
 
+function injectGTMScript() {
+  if (document.getElementById("gtm-script")) return
+  const s = document.createElement("script")
+  s.id = "gtm-script"
+  const dataLayerWindow = window as Window & { dataLayer?: Array<Record<string, unknown>> }
+  dataLayerWindow.dataLayer = dataLayerWindow.dataLayer || []
+  dataLayerWindow.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" })
+  s.async = true
+  s.src = "https://www.googletagmanager.com/gtm.js?id=GTM-KMQBGRJW"
+  document.head.appendChild(s)
+}
+
 function injectScripts(prefs: ConsentPrefs) {
   if (prefs.analytics) {
     injectGAScript()
@@ -83,6 +95,10 @@ function injectScripts(prefs: ConsentPrefs) {
   }
   if (prefs.advertising) {
     injectAdSenseScript()
+  }
+  // GTM can contain third-party tags, so only load the container after both optional categories are granted.
+  if (prefs.analytics && prefs.advertising) {
+    injectGTMScript()
   }
 }
 
@@ -103,6 +119,17 @@ export function CookieConsent() {
       const timer = setTimeout(() => setVisible(true), 1000)
       return () => clearTimeout(timer)
     }
+  }, [])
+
+  useEffect(() => {
+    const openSettings = () => {
+      const stored = getStoredPrefs()
+      setDraft(stored?.prefs ?? ALL_OFF)
+      setCustomizing(true)
+      setVisible(true)
+    }
+    window.addEventListener("pilotstack:open-cookie-settings", openSettings)
+    return () => window.removeEventListener("pilotstack:open-cookie-settings", openSettings)
   }, [])
 
   useEffect(() => {
@@ -128,10 +155,20 @@ export function CookieConsent() {
   }
 
   function handleCustomizeSave() {
+    const previous = getStoredPrefs()
+    const changed = previous && (
+      previous.prefs.analytics !== draft.analytics ||
+      previous.prefs.advertising !== draft.advertising
+    )
     localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({ accepted: true, prefs: draft }))
     updateConsent(draft)
-    injectScripts(draft)
     setVisible(false)
+    if (changed) {
+      // Reload so scripts that were allowed by the old choice cannot continue running after revocation.
+      window.location.reload()
+      return
+    }
+    injectScripts(draft)
   }
 
   if (!visible) return null

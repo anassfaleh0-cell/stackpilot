@@ -47,7 +47,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: Pro
               In-depth software reviews
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Every tool is tested, evaluated, and scored by our expert team. No fluff, no bias — just the information you need to make the right choice.
+              We organize recorded product information, published pricing, and consistent scoring criteria into detailed reviews. Our methodology explains how ratings are calculated and distinguishes recorded data from facts that have not been independently verified.
             </p>
           </SectionHeader>
         </Container>

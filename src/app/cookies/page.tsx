@@ -40,7 +40,7 @@ export default function CookiesPage() {
                           </ul>
 
             <h3>Analytics Cookies</h3>
-            <p>We use analytics tools, including Google Analytics and Microsoft Clarity, to understand how visitors interact with our site. These services may process usage and device information according to their own privacy policies and are loaded only after analytics consent.</p>
+            <p>We use analytics tools, including Google Analytics and Microsoft Clarity, to understand how visitors interact with our site. These services may process usage and device information according to their own privacy policies and are loaded only after analytics consent. Google Tag Manager is loaded only after both analytics and advertising preferences are enabled, so its third-party tags are not requested before those choices are made.</p>
             <ul>
               <li><strong>Google Analytics 4 (GA4):</strong> Collects anonymized page views, session duration, and traffic source data. IP addresses are anonymized. Retention periods depend on the analytics configuration and applicable Google settings. <em>Opt-out available via <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out browser add-on</a>.</em></li>
               <li><strong>Microsoft Clarity:</strong> Provides session-replay and heatmap features to help us understand how users navigate the site. We configure it for analytics use and do not intentionally use it to collect passwords or other sensitive form data. <em>Opt-out available via the <a href="https://privacy.microsoft.com/en-US/privacystatement" target="_blank" rel="noopener">Microsoft Privacy Statement</a>.</em></li>

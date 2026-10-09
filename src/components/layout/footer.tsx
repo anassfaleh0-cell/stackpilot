@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/container"
 import { site, navLinks, categories, editorialLinks } from "@/lib/constants"
 import { SocialFooterIcons } from "@/components/brand/social-icons"
 import { NewsletterSignup } from "@/components/newsletter"
+import { CookieSettingsButton } from "@/components/analytics/cookie-settings-button"
 import { Logo } from "@/components/brand/logo"
 
 const footerLinks = [
@@ -98,6 +99,7 @@ export function Footer() {
           <p className="text-xs text-muted-foreground">
             &copy; 2024-2026 {site.name}. All rights reserved.
           </p>
+          <CookieSettingsButton />
           <p className="text-xs text-muted-foreground text-center sm:text-right">
             Independent reviews and comparisons. We may earn commissions from affiliate links. All reviews follow our <Link href="/methodology" className="underline underline-offset-2 hover:text-foreground">editorial methodology</Link>.
           </p>
