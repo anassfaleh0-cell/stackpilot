@@ -95,7 +95,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const categoryRatings = hasEditorialRating && Array.isArray(tool.ratings) ? tool.ratings : []
   const reviewCount = tool.reviewCountVerified === true && typeof tool.reviewCount === "number" && Number.isFinite(tool.reviewCount) ? tool.reviewCount : null
   const bestInCategory = allReviews
-    .filter((r) => r.category === tool.category && typeof r.rating === "number")
+    .filter((r) => r.category === tool.category && r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating))
     .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
   const isBestInCategory = hasEditorialRating && bestInCategory?.slug === tool.slug
   const isBestValue = tool.pricing === "Freemium" || tool.pricing === "Free" || tool.pricing === "Free Trial"
@@ -127,7 +127,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               subtitle={tool.tagline}
               category={tool.category}
               variant="review"
-              rating={tool.rating}
+              rating={hasEditorialRating ? tool.rating : undefined}
               className="w-full min-h-[200px] sm:min-h-[240px] lg:min-h-[280px]"
             />
           </div>
@@ -563,7 +563,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                           return (
                             <Link key={altSlug} href={`/reviews/${altSlug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                               <span>{alt.name}</span>
-                              <span className="text-xs font-medium">{formatScore(alt.rating)}/5</span>
+                              {alt.ratingVerified === true && typeof alt.rating === "number" && Number.isFinite(alt.rating) ? <span className="text-xs font-medium">{formatScore(alt.rating)}/5</span> : null}
                             </Link>
                           )
                         })}
