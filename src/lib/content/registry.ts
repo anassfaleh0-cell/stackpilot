@@ -682,8 +682,10 @@ export function searchContent(query: string): {
 } {
   const q = query.toLowerCase()
   const match = (text: string) => text.toLowerCase().includes(q)
+  const reviewResults = getAllReviews().filter((r) => match(r.name) || match(r.description))
+    .sort((a, b) => Number(match(b.name)) - Number(match(a.name)) || b.rating - a.rating)
   return {
-    reviews: getAllReviews().filter((r) => match(r.name) || match(r.description)),
+    reviews: reviewResults,
     comparisons: getAllComparisons().filter((c) => match(c.title) || match(c.description)),
     guides: getAllGuides().filter((g) => match(g.title) || match(g.description)),
     glossary: getAllGlossaryTerms().filter((t) => match(t.term) || match(t.definition)),
