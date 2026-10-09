@@ -50,6 +50,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     .map((b, i) => (isStructural(b) ? -1 : i))
     .filter((i) => i >= 0 && paragraphs[i].length > 80)
   const midPoint = proseIndices.length > 0 ? proseIndices[Math.floor(proseIndices.length / 2)] : Math.floor(paragraphs.length / 2)
+  const pullQuote = (paragraphs[midPoint] || "").replace(/^#{1,6}\\s*/, "").replace(/\\*\\*/g, "").trim().slice(0, 150)
 
   const renderInline = (text: string, keyBase: string) => {
     const segments = text.split(/\*\*([^*]+)\*\*/g)
@@ -174,12 +175,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <InFeedAd className="mx-auto max-w-[728px]" />
             </section>
 
-            {/* Pull quote (midpoint callout) */}
-            <div className="my-10">
-              <div className="pull-quote">
-                {(paragraphs[midPoint] || "").replace(/^#{1,6}\s*/, "").replace(/\*\*/g, "").slice(0, 150).trim() || "Key insight from this analysis."}
+            {/* Pull quote only when article prose provides a real excerpt */}
+            {pullQuote.length > 0 && (
+              <div className="my-10">
+                <div className="pull-quote">{pullQuote}</div>
               </div>
-            </div>
+            )}
 
             {/* Second half of content */}
             <div className="mt-6 space-y-5 leading-relaxed text-foreground/85">
