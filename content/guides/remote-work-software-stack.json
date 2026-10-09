@@ -5,7 +5,7 @@
   "category": "Productivity",
   "difficulty": "Advanced",
   "author": "Sarah Chen",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "slack",
     "zoom",
@@ -56,6 +56,11 @@
     {
       "title": "Rollout checklist",
       "body": "Start with a small team and document the tool's purpose, expected behavior, and source-of-truth rule. Test permissions, integrations, search, mobile workflows, and account recovery. Expand when the stack reduces coordination failures without increasing overhead. Revisit the design when team size, time zones, or security needs change.",
+      "type": "text"
+    },
+    {
+      "title": "Test an asynchronous handoff across time zones",
+      "body": "Choose a work item that passes between people in different time zones and follow it through decision-making, documentation, task ownership, and escalation. Verify that the current decision is easy to find, that notifications do not depend on everyone being online at once, and that sensitive documents inherit the right permissions. Measure repeated questions and missed handoffs. A remote stack should reduce context loss rather than add another place where the same update must be copied.",
       "type": "text"
     }
   ]
