@@ -5,7 +5,7 @@
   "category": "Developer Tools",
   "difficulty": "Beginner",
   "author": "Marcus Rivera",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "datadog",
     "sentry",
@@ -56,6 +56,11 @@
     {
       "title": "Readiness checklist",
       "body": "Pilot the full path from alert to resolution, including escalation, communication, runbooks, and follow-up. Confirm that the tool fits the team's coverage model and that incident ownership is explicit. Revisit severity definitions and alert routing after service architecture or on-call responsibilities change.",
+      "type": "text"
+    },
+    {
+      "title": "Run a tabletop exercise with real escalation paths",
+      "body": "Use a recent incident scenario and ask responders to declare severity, assign an incident lead, page the right on-call person, communicate status, record decisions, and close the incident. Include a failed notification and an out-of-hours handoff. Check that alerts link to relevant dashboards and runbooks and that customer-facing updates can be approved quickly. After the exercise, assign owners and due dates to gaps; a tool is useful only when the team can operate it under pressure.",
       "type": "text"
     }
   ]
