@@ -5,6 +5,7 @@ describe("getVisibleReviewFaqs", () => {
   it("removes broken generated fragments and exact generic filler", () => {
     const result = getVisibleReviewFaqs([
       { question: "What is the product best for?", answer: "It is best for block-based editor combines ." },
+      { question: "Does it work offline?", answer: "Offline mode is unreliable for anyone with intermittent connect. This limitation affects teams with spotty coverage." },
       { question: "How do I choose?", answer: "The best choice depends on your team's specific workflow requirements and existing technology stack." },
       { question: "Does it support export?", answer: "The product supports CSV and JSON exports, so teams can move structured records to another system and validate the export before migration." },
     ])
