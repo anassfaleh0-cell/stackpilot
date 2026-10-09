@@ -7,6 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 import { truncate, formatDate } from "@/lib/utils"
 import { getBest, getAllBest, getContentTitle, getReview } from "@/lib/content/registry"
 import { getRelatedByCategory } from "@/lib/content/internal-links"
+import { isNoindexed } from "@/lib/noindex"
 import { InternalLinks, LEGACY_RELATED_TYPES, extendedRelatedItems } from "@/components/content/internal-links"
 import { EnhancedRelatedContent } from "@/components/content/enhanced-related-content"
 import { notFound, permanentRedirect } from "next/navigation"
@@ -51,8 +52,8 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
     notFound()
   }
 
-  const linkedPicks = page.picks.filter((p) => getReview(p.toolSlug) !== null)
-  const reviewHref = (toolSlug: string) => (getReview(toolSlug) ? `/reviews/${toolSlug}` : null)
+  const linkedPicks = page.picks.filter((p) => getReview(p.toolSlug) !== null && !isNoindexed("reviews", p.toolSlug))
+  const reviewHref = (toolSlug: string) => (getReview(toolSlug) && !isNoindexed("reviews", toolSlug) ? `/reviews/${toolSlug}` : null)
   const relatedLinks = getRelatedByCategory(page.category, page.slug, 4)
 
   return (
