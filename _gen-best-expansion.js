@@ -152,8 +152,8 @@ categories.forEach(cat => {
 <p class="mb-3">Use these criteria to compare candidates consistently: ${crit.join(", ").toLowerCase()}. Weight them according to your team’s constraints, and record evidence from current vendor documentation or your own trial.</p>
 </section>
 <section class="mb-10">
-<h2 class="text-2xl font-bold mb-4">How We Chose the Best ${qual} Tools for ${aud}</h2>
-<p class="mb-3">Our evaluation process focused on what ${aud.toLowerCase()} teams need most: ${strengths.join(", ")}. For a practical decision, test the candidate with a representative ${aud.toLowerCase()} workflow and record the result against your acceptance criteria.</p>
+<h2 class="text-2xl font-bold mb-4">How to Evaluate ${qual} Tools for ${aud}</h2>
+<p class="mb-3">Use these priorities as a starting point for your own shortlist: ${strengths.join(", ")}. Test each candidate with a representative ${aud.toLowerCase()} workflow and record the result against written acceptance criteria.</p>
 <p class="mb-3">If third-party reviews matter to your decision, compare recent reviews across more than one independent source and look for recurring themes that match your own use case.</p>
 </section>
 <section class="mb-10">
@@ -181,7 +181,7 @@ ${picks.map(p => `
 </section>
 <section class="mb-10">
 <h2 class="text-2xl font-bold mb-4">Final Verdict</h2>
-<p class="mb-3">For ${aud.toLowerCase()} looking for the best ${qual} software, ${picks[0].toolName} offers the strongest combination of features, value, and usability. Evaluate your specific needs against our detailed comparison to find the perfect fit for your team.</p>
+<p class="mb-3">The best choice depends on which option meets your mandatory requirements, fits the way your team works, and stays within total cost limits. Verify current feature availability and pricing, then pilot the leading candidates before committing.</p>
 <p class="text-sm text-muted-foreground">Last updated: ${now}</p>
 </section>
 </article>`,
@@ -251,11 +251,11 @@ categories.forEach(cat => {
 <section class="mb-10">
 <h2 class="text-2xl font-bold mb-4">Why Trust Our ${qual} Recommendations</h2>
 <p class="mb-3">Use this page as a starting shortlist, then verify product details with official documentation and a trial. Recommendations should be based on your requirements and evidence available for each candidate.</p>
-<p class="mb-3">Each platform was evaluated across ${crit.length} dimensions: ${crit.join(", ").toLowerCase()}. Our methodology ensures comprehensive coverage of what matters most to buyers.</p>
+<p class="mb-3">Use these dimensions to structure a consistent comparison: ${crit.join(", ").toLowerCase()}. Weight them according to your team’s constraints and record evidence from current vendor documentation or your own trial.</p>
 </section>
 <section class="mb-10">
-<h2 class="text-2xl font-bold mb-4">How We Evaluated ${qual} Platforms</h2>
-<p class="mb-3">Each platform was scored across ${crit.length} key dimensions. Compare the same workflow and criteria across products. Record which claims are documented, which were confirmed in your trial, and which remain uncertain.</p>
+<h2 class="text-2xl font-bold mb-4">How to Compare ${qual} Platforms</h2>
+<p class="mb-3">Score each candidate against the same dimensions: ${crit.join(", ").toLowerCase()}. Keep the evidence for each score and mark unverified claims as unknown.</p>
 </section>
 <section class="mb-10">
 <h2 class="text-2xl font-bold mb-4">What to Consider When Choosing ${qual} Software</h2>
