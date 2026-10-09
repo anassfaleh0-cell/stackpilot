@@ -5,7 +5,7 @@
   "category": "Security & Compliance",
   "difficulty": "Intermediate",
   "author": "Marcus Rivera",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "okta",
     "crowdstrike",
@@ -56,6 +56,11 @@
     {
       "title": "Selection checklist",
       "body": "Choose a platform that supports the controls you actually operate, integrates with authoritative systems, and preserves evidence and review history. Verify current framework coverage and plan limits in vendor documentation. Keep named owners for controls and exceptions. Reassess when the framework, infrastructure, or risk profile changes.",
+      "type": "text"
+    },
+    {
+      "title": "Audit rehearsal and evidence sampling",
+      "body": "Before rollout, select a small set of controls and trace each one from the requirement to its owner, evidence source, test result, exception, and remediation record. Include one failed control and one overdue action to confirm that the workflow escalates correctly. Have an independent reviewer reproduce the result from the saved evidence. Record gaps that still require human judgment; automation should make control status more traceable, not imply that every control is effective simply because a workflow completed.",
       "type": "text"
     }
   ]
