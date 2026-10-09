@@ -90,21 +90,21 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
           <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
-            <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-              <li>{page.picks.length} options organized around the criteria shown on this page</li>
-              <li>Evaluation criteria: {page.criteria.join(", ")}</li>
-              <li>Top pick: {page.picks[0]?.toolName} ({page.picks[0]?.rating}/5, from {page.picks[0]?.priceRange}) — {page.picks[0]?.bestFor}</li>
-              {page.picks[1] ? <li>Runner-up: {page.picks[1].toolName} ({page.picks[1].rating}/5, from {page.picks[1].priceRange})</li> : null}
-              <li>Pricing ranges from free to enterprise, depending on features and scale</li>
-              <li>Each pick includes recorded pros, cons, and best-fit recommendations</li>
-              <li>Full comparison table with feature-by-feature breakdown included below</li>
-              <li>Updated {formatDate(page.lastUpdated)} — pricing and feature details can change</li>
+            <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-4">
+              {page.picks.slice(0, 3).map((pick) => (
+                <li key={pick.toolSlug || pick.toolName}>
+                  <strong>{pick.toolName}:</strong> {pick.bestFor} Recorded rating: {pick.rating}/5. Pricing shown: {pick.priceRange}. Verify current plan limits and included features with the vendor.
+                </li>
+              ))}
+              {page.criteria.length > 0 && <li><strong>Compare on:</strong> {page.criteria.join(", ")}.</li>}
+              <li><strong>Selection context:</strong> {page.pricingSummary}</li>
+              <li><strong>Last updated:</strong> {formatDate(page.lastUpdated)}. Prices, availability, and feature limits may change.</li>
             </ul>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-8 pb-4 border-b border-border">
             <Badge variant="default">{page.category}</Badge>
-            <span>{page.picks.length} editor-reviewed picks</span>
+            <span>{page.picks.length} listed options</span>
             <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>By {page.author}</span>
             <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>Updated {formatDate(page.lastUpdated)}</span>
             <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we review</a>
