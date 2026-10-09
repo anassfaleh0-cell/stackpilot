@@ -15,6 +15,7 @@ import { Star, ArrowRight, CheckCircle2, XCircle } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { isNoindexed } from "@/lib/noindex"
+import { getVisibleEditorialFaqs } from "@/lib/content/review-faqs"
 
 export const dynamicParams = true
 export const revalidate = 86400
@@ -52,6 +53,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   }
 
   const linkedPicks = page.picks.filter((p) => getReview(p.toolSlug) !== null)
+  const visibleFaqs = getVisibleEditorialFaqs(page.faqs, 8)
   const reviewHref = (toolSlug: string) => (getReview(toolSlug) ? `/reviews/${toolSlug}` : null)
   const relatedLinks = getRelatedByCategory(page.category, page.slug, 4)
 
@@ -62,7 +64,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
       <CollectionPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} />
       <ItemListSchema items={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} url={`${site.url}/best/${slug}`} />
       <WebPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} dateModified={page.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: linkedPicks.map((p, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}`, category: getReview(p.toolSlug)?.category || page.category}) })) }} />
-      <FAQSchema questions={page.faqs} path={`/best/${slug}`} />
+      {visibleFaqs.length > 0 && <FAQSchema questions={visibleFaqs} path={`/best/${slug}`} />}
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Best Software", href: "/best" }, { name: page.title }]} />
       </Container>
@@ -211,19 +213,21 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                 </table>
               </section>
 
-              <section>
-                <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {page.faqs.map((faq, i) => (
-                    <GlassCard key={i}>
-                      <div className="p-4">
-                        <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
-                        <p className="text-sm text-muted-foreground">{faq.answer}</p>
-                      </div>
-                    </GlassCard>
-                  ))}
-                </div>
-              </section>
+              {visibleFaqs.length > 0 && (
+                <section>
+                  <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {visibleFaqs.map((faq, i) => (
+                      <GlassCard key={faq.question || i}>
+                        <div className="p-4">
+                          <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
+                          <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                        </div>
+                      </GlassCard>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
 
             <aside className="lg:col-span-1">
