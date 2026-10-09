@@ -168,6 +168,11 @@ function checkContentQuality() {
     { dir: "glossary", nameField: "term", minWords: 80 },
     { dir: "alternatives", nameField: "title", minWords: 100 },
     { dir: "best", nameField: "title", minWords: 300 },
+    { dir: "use-cases", nameField: "title", minWords: 250 },
+    { dir: "industries", nameField: "title", minWords: 250 },
+    { dir: "research", nameField: "title", minWords: 400 },
+    { dir: "statistics", nameField: "title", minWords: 150 },
+    { dir: "hubs", nameField: "title", minWords: 250 },
   ]
 
   for (const ct of contentTypes) {
@@ -255,6 +260,35 @@ function checkContentQuality() {
           words += wordCount(faq.question)
           words += wordCount(faq.answer)
         }
+      }
+
+      if (ct.dir === "use-cases") {
+        words += wordCount(data.useCaseDescription || "")
+        words += wordCount(collectText(data.recommendations || []))
+        words += wordCount(collectText(data.selectionCriteria || []))
+        words += wordCount(collectText(data.commonPitfalls || []))
+        words += wordCount(collectText(data.faqs || []))
+      }
+      if (ct.dir === "industries") {
+        words += wordCount(data.industryOverview || "")
+        words += wordCount(collectText(data.softwareNeeds || []))
+        words += wordCount(collectText(data.recommendations || []))
+        words += wordCount(collectText(data.implementationTips || []))
+        words += wordCount(collectText(data.faqs || []))
+      }
+      if (ct.dir === "research") {
+        words += wordCount(collectText(data.keyFindings || []))
+        words += wordCount(collectText(data.methodology || []))
+        words += wordCount(collectText(data.dataSources || []))
+      }
+      if (ct.dir === "statistics") {
+        words += wordCount(collectText(data.stats || []))
+      }
+      if (ct.dir === "hubs") {
+        words += wordCount(collectText(data.challenges || []))
+        words += wordCount(collectText(data.recommendations || []))
+        words += wordCount(collectText(data.comparisonMatrix || []))
+        words += wordCount(collectText(data.faqs || []))
       }
 
       if (words < ct.minWords) {
