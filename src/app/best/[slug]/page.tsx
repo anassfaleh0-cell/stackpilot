@@ -52,6 +52,13 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   }
 
   const linkedPicks = page.picks.filter((p) => getReview(p.toolSlug) !== null)
+  const verifiedPickRating = (pick: (typeof page.picks)[number] | undefined): number | null => {
+    if (!pick?.toolSlug) return null
+    const review = getReview(pick.toolSlug)
+    return review?.ratingVerified === true && typeof review.rating === "number" && Number.isFinite(review.rating)
+      ? review.rating
+      : null
+  }
   const reviewHref = (toolSlug: string) => (getReview(toolSlug) ? `/reviews/${toolSlug}` : null)
   const relatedLinks = getRelatedByCategory(page.category, page.slug, 4)
 
@@ -74,13 +81,13 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
           <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-            <p className="text-sm text-muted-foreground">The first listed option is <strong>{page.picks[0]?.toolName}</strong>{typeof page.picks[0]?.rating === "number" ? ` (recorded rating ${page.picks[0]?.rating}/5)` : ""} (pricing: {page.picks[0]?.priceRange}). Use this shortlist as a starting point, verify current details with the vendor, and compare each option against your workflow.</p>
+            <p className="text-sm text-muted-foreground">The first listed option is <strong>{page.picks[0]?.toolName}</strong>{verifiedPickRating(page.picks[0]) !== null ? ` (verified editorial rating ${verifiedPickRating(page.picks[0])}/5)` : ""} (pricing: {page.picks[0]?.priceRange}). Use this shortlist as a starting point, verify current details with the vendor, and compare each option against your workflow.</p>
           </div>
 
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">TL;DR</h2>
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-              <li><strong>#1 listed option:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}{typeof page.picks[0]?.rating === "number" ? ` Recorded rating: ${page.picks[0]?.rating}/5.` : ""}</li>
+              <li><strong>#1 listed option:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}{verifiedPickRating(page.picks[0]) !== null ? ` Verified editorial rating: ${verifiedPickRating(page.picks[0])}/5.` : ""}</li>
               <li>{page.picks.length} listed tools with recorded details; compare them using {page.criteria.length} criteria</li>
               <li>Pricing: {page.pricingSummary}</li>
               <li>Each pick includes pros, cons, and a best-fit use case</li>
@@ -93,7 +100,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-4">
               {page.picks.slice(0, 3).map((pick) => (
                 <li key={pick.toolSlug || pick.toolName}>
-                  <strong>{pick.toolName}:</strong> {pick.bestFor}{typeof pick.rating === "number" ? ` Recorded rating: ${pick.rating}/5.` : ""} Pricing shown: {pick.priceRange}. Verify current plan limits and included features with the vendor.
+                  <strong>{pick.toolName}:</strong> {pick.bestFor}{verifiedPickRating(pick) !== null ? ` Verified editorial rating: ${verifiedPickRating(pick)}/5.` : ""} Pricing shown: {pick.priceRange}. Verify current plan limits and included features with the vendor.
                 </li>
               ))}
               {page.criteria.length > 0 && <li><strong>Compare on:</strong> {page.criteria.join(", ")}.</li>}
@@ -141,10 +148,10 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                               <span className="text-lg font-bold">{pick.toolName}</span>
                             )}
                           </div>
-                          {typeof pick.rating === "number" && Number.isFinite(pick.rating) && pick.rating > 0 && (
+                          {verifiedPickRating(pick) !== null && (
                             <div className="flex items-center gap-1 text-sm">
                               <Star size={14} className="fill-accent text-accent" />
-                              <span className="font-semibold">{pick.rating}</span>
+                              <span className="font-semibold">{verifiedPickRating(pick)}</span>
                               <span className="text-muted-foreground">/5</span>
                             </div>
                           )}
@@ -235,12 +242,12 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                       {page.picks.slice(0, 5).map((pick) => reviewHref(pick.toolSlug) ? (
                         <Link key={pick.toolSlug} href={`/reviews/${pick.toolSlug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                           <span>{pick.rank}. {pick.toolName}</span>
-                          <span className="text-xs font-medium">{pick.rating}/5</span>
+                          <span className="text-xs font-medium">{verifiedPickRating(pick) !== null ? `${verifiedPickRating(pick)}/5` : "Rating not verified"}</span>
                         </Link>
                       ) : (
                         <div key={pick.toolSlug} className="flex items-center justify-between text-sm text-muted-foreground py-1">
                           <span>{pick.rank}. {pick.toolName}</span>
-                          <span className="text-xs font-medium">{pick.rating}/5</span>
+                          <span className="text-xs font-medium">{verifiedPickRating(pick) !== null ? `${verifiedPickRating(pick)}/5` : "Rating not verified"}</span>
                         </div>
                       ))}
                     </div>
