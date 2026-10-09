@@ -5,7 +5,7 @@
   "category": "HR & People",
   "difficulty": "Intermediate",
   "author": "Emily Nakamura",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "workday",
     "greenhouse",
@@ -56,6 +56,11 @@
     {
       "title": "Go-live checklist",
       "body": "Proceed when the full journey is tested, access rules are approved, integrations work, content is current, and exception handling is clear. Keep a manual fallback for system outages and define who communicates with a new hire. Review the workflow after policy, identity, or organizational changes.",
+      "type": "text"
+    },
+    {
+      "title": "Test day-one readiness end to end",
+      "body": "Run a sample onboarding for a role with realistic equipment, accounts, training, manager tasks, and compliance steps. Verify that access is provisioned only after required approvals, that each task has a named owner, and that failures notify the right team. Test a delayed start date and a changed manager. Confirm how personal documents are stored and who can view them, then measure how often new hires begin with missing access or incomplete required steps.",
       "type": "text"
     }
   ]
