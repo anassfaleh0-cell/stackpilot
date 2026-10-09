@@ -24,7 +24,7 @@ const authors = {
   "pilotstack-team": {
     name: "PilotStack Team",
     role: "Publication byline",
-    bio: "This is the publication byline used for pages prepared from recorded product information and published scoring rules. It is not an individual biography or a claim that every product was hands-on tested.",
+    bio: "This is the publication byline used for pages prepared from recorded product information and published scoring rules. It is not an individual biography or a claim that every product was directly tested.",
     avatar: null,
     expertise: ["Software research", "Pricing analysis", "Software comparison", "B2B software buying"],
     credentials: ["Public scoring methodology", "Published editorial and sourcing policies"],
