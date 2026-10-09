@@ -618,6 +618,11 @@ export function getComparison(slug: string): ComparisonContent | null {
     return null
   }
   const cmp = readJson<ComparisonContent>(file)
+  // Explicitly unpublished records must not resolve as public pages, internal-link targets, or sitemap entries.
+  if (cmp.published === false) {
+    comparisonCache.set(slug, null)
+    return null
+  }
   const baseFeatures = cmp.features.slice(0, 20).map((f) => ({
     ...f,
     name: trimText(f.name, 140),
