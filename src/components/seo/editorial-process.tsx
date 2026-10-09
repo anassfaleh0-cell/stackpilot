@@ -3,10 +3,10 @@ import { GlassCard } from "@/components/dynamic"
 import { CheckCircle2, FileText, Star, Calendar, ListChecks, Shield } from "lucide-react"
 
 const steps = [
-  { icon: <FileText size={14} />, label: "Sources", description: "Each page is assembled from material we hold: our recorded review dataset, vendor documentation, and published pricing pages." },
-  { icon: <Star size={14} />, label: "Scoring", description: "Nine recorded category ratings on a 1-5 scale. The overall score is their mean, rounded to one decimal." },
+  { icon: <FileText size={14} />, label: "Sources", description: "Pages draw on PilotStack’s recorded tool dataset. Vendor documentation is the preferred source for current plan details; fields without a verified source should be treated as unconfirmed." },
+  { icon: <Star size={14} />, label: "Scoring", description: "Recorded category ratings are averaged into the displayed overall score. See the methodology for the calculation and the limits of the underlying data." },
   { icon: <ListChecks size={14} />, label: "Consistency", description: "The same figure is used wherever a tool appears, so ratings and review counts agree across the site." },
-  { icon: <Calendar size={14} />, label: "Dating", description: "Every page shows the date it was last reviewed." },
+  { icon: <Calendar size={14} />, label: "Dating", description: "Pages display the recorded update date; that date does not guarantee every product fact was independently rechecked." },
   { icon: <CheckCircle2 size={14} />, label: "Limits", description: "Facts we cannot source are left off the page or marked unverified rather than stated as confirmed." },
   { icon: <Shield size={14} />, label: "Editorial separation", description: "Commercial relationships do not determine editorial ratings, rankings, or inclusion criteria." },
 ]
@@ -21,7 +21,7 @@ export function EEATProcess({ category }: { category?: string }) {
           How This Page Is Built
         </h3>
         <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-          Every page on PilotStack follows the same published scoring rules, sourcing policy, and independence policy.
+          PilotStack publishes its scoring rules, sourcing limitations, and editorial independence policy so readers can understand how to interpret the recorded data.
         </p>
         <div className="space-y-2.5">
           {steps.map((step, i) => (
