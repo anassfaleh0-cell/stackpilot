@@ -6,8 +6,8 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
-  title: "Affiliate Disclosure",
-  description: "PilotStack's affiliate disclosure explains how we earn commissions through affiliate links while keeping commercial disclosures separate from the published editorial methodology.",
+  title: "Affiliate & Commercial Disclosure",
+  description: "PilotStack explains how any affiliate links are disclosed and how commercial relationships are kept separate from editorial scoring.",
   path: "/affiliate-disclosure",
 })
 
@@ -23,15 +23,15 @@ export default function AffiliateDisclosurePage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Transparency</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Affiliate Disclosure</h1>
-            <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: October 2026</p>
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">
-                PilotStack participates in affiliate marketing programs. This disclosure explains how affiliate relationships work and how we maintain editorial independence.
+                PilotStack may use affiliate links on selected pages. Not every outbound vendor link is an affiliate link, and this page does not imply an active relationship with every vendor we review.
               </p>
 
               <h2>How Affiliate Links Work</h2>
-              <p>When you click on an affiliate link on PilotStack and make a purchase, we may earn a commission at no additional cost to you. These commissions help us maintain and improve our content, pay our team of researchers and writers, and keep our reviews free for all readers.</p>
+              <p>If you click an affiliate link and complete a qualifying action, PilotStack may receive a commission at no additional cost to you. Any commissions support site hosting, maintenance, research, and editorial work.</p>
 
               <h2>Our Commitment to Independence</h2>
               <p>Affiliate relationships are not intended to determine our editorial content:</p>
@@ -40,33 +40,20 @@ export default function AffiliateDisclosurePage() {
                 <li>Our ratings and recommendations are determined solely by our editorial process as described on our <a href="/methodology">Methodology page</a></li>
                 <li>Affiliate relationships do not determine the ratings, rankings, or inclusion criteria described in our published methodology</li>
                 <li>Affiliate and advertising relationships are disclosed separately from editorial guidance</li>
-                <li>We clearly mark affiliate links where they appear in our content</li>
+                <li>We identify affiliate links near the link or in the page disclosure so readers can understand the commercial context</li>
               </ul>
 
               <h2>Where Affiliate Links Appear</h2>
-              <p>Affiliate links may appear in the following contexts:</p>
-              <ul>
-                <li>"Visit Website" buttons on review pages</li>
-                <li>Tool and service recommendations within comparison pages</li>
-                <li>Links to vendor websites in guides and blog posts</li>
-                <li>Product links in our newsletter (where clearly marked)</li>
-              </ul>
-              <p>Not all outbound links on PilotStack are affiliate links. Links to documentation, educational resources, and non-commercial sources are not monetized.</p>
+              <p>Placement varies by page. A regular vendor, documentation, or educational link is not automatically an affiliate link. Treat a link as commission-generating only when it is identified as an affiliate link.</p>
 
               <h2>Affiliate Programs</h2>
-                <p>PilotStack participates in affiliate programs including, but not limited to:</p>
-              <ul>
-                <li>Vendor-specific affiliate programs (HubSpot, Salesforce, Asana, and others we review)</li>
-                <li>Aggregator affiliate networks</li>
-                <li>Platform referral programs</li>
-              </ul>
-              <p>This list may change as we add or remove affiliate partnerships. Our disclosure and editorial methodology apply across affiliate relationships.</p>
+              <p>We name specific affiliate partners only when a relationship is active and used on the site. This disclosure does not imply that PilotStack has a partnership with every vendor reviewed, including examples that may appear in our software coverage.</p>
 
               <h2>No Impact on Pricing</h2>
               <p>Using our affiliate links does not affect the price you pay for any product or service. The commission is paid by the vendor from their marketing budget, not from any customer premium.</p>
 
               <h2>Questions</h2>
-              <p>If you have questions about our affiliate relationships or how they operate, contact us at <strong>disclosures@pilotstack.online</strong>.</p>
+              <p>If you have questions about our affiliate relationships or how they operate, contact us at <strong>hello@pilotstack.online</strong>.</p>
             </div>
           </div>
         </Container>

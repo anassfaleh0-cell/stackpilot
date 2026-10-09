@@ -145,13 +145,13 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   <Star size={14} className="fill-accent text-accent" />
                   <span className="font-semibold">{formatScore(tool.rating)}</span>
                   <span className="text-muted-foreground">/ 5.0</span>
-                  <span className="text-xs text-muted-foreground">({tool.reviewCount} reviews)</span>
+                  <span className="text-xs text-muted-foreground">PilotStack score</span>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-1">
                 <span className="flex items-center gap-1">
                   <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                  Reviewed by {authorHref ? <Link href={authorHref} className="text-primary hover:underline">{tool.author}</Link> : tool.author}
+                  Editorial byline: {authorHref ? <Link href={authorHref} className="text-primary hover:underline">{tool.author}</Link> : tool.author}
                 </span>
                 <span className="flex items-center gap-1">
                   <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
@@ -182,7 +182,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
                 <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
                 <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                  <li>Overall rating: {formatScore(tool.rating)}/5 from {tool.reviewCount.toLocaleString()} reviews</li>
+                  <li>Overall score: {formatScore(tool.rating)}/5, the mean of {tool.ratings.length} recorded category ratings</li>
                   <li>Pricing: {tool.priceRange} ({tool.pricing})</li>
                   <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : `${tool.name} excels at ${tool.features.filter(f => f.available).slice(0, 2).map(f => f.name.toLowerCase()).join(" and ")}`}</li>
                   <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `Suitable for most ${tool.category} use cases`}</li>
@@ -231,12 +231,12 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* CTA */}
               <div className="flex flex-wrap gap-3 mb-12">
                 <a
-                  href={`https://www.google.com/search?q=${encodeURIComponent(tool.name + " official website")}`}
+                  href={tool.website && /^https?:\/\//i.test(tool.website) ? tool.website : `https://www.google.com/search?q=${encodeURIComponent(tool.name + " official website")}`}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-white hover:bg-primary-dark shadow-button hover:shadow-button-hover h-10 px-6 text-sm font-medium transition-all duration-200"
                 >
-                  Visit Website <ExternalLink size={14} />
+                  {tool.website ? "Visit Official Website" : "Find Official Website"} <ExternalLink size={14} />
                 </a>
                 <Link
                   href={`/comparisons`}
@@ -255,20 +255,20 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
               {/* External reviews / social proof */}
               <section className="mb-12">
-                <h2 className="text-2xl font-bold tracking-tight mb-4">Third-Party Reviews</h2>
-                <p className="text-sm text-muted-foreground mb-4">{tool.name} carries a {formatScore(tool.rating)}/5 rating across {tool.reviewCount.toLocaleString()} reviews in the PilotStack dataset. Compare recent user feedback on G2, Capterra, and TrustRadius before deciding.</p>
+                <h2 className="text-2xl font-bold tracking-tight mb-4">Find Third-Party Reviews</h2>
+                <p className="text-sm text-muted-foreground mb-4">PilotStack’s {formatScore(tool.rating)}/5 score is calculated from {tool.ratings.length} recorded category ratings; it is not an aggregate of customer reviews. Use the searches below to find current independent feedback on G2, Capterra, and TrustRadius.</p>
                 <div className="flex flex-wrap gap-3">
-                  <a href={`https://www.g2.com/products/${tool.slug}/review`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent("site:g2.com " + tool.name + " reviews")}`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                    Read G2 reviews
+                    Search G2 reviews
                   </a>
-                  <a href={`https://www.capterra.com/p/${tool.slug}/`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent("site:capterra.com " + tool.name + " reviews")}`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                    Read Capterra reviews
+                    Search Capterra reviews
                   </a>
-                  <a href={`https://www.trustradius.com/products/${tool.slug}/reviews`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent("site:trustradius.com " + tool.name + " reviews")}`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-                    Read TrustRadius reviews
+                    Search TrustRadius reviews
                   </a>
                 </div>
               </section>
@@ -372,7 +372,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   </div>
                   <div className="p-3 rounded-lg bg-card">
                     <div className="font-semibold text-xs mb-1">Budget for setup</div>
-                    <p className="text-muted-foreground text-xs leading-relaxed">Most organizations underestimate implementation time by 2-3x. Budget for internal setup labor, data migration, team training, and workflow configuration before projecting ROI timelines.</p>
+                    <p className="text-muted-foreground text-xs leading-relaxed">Implementation time varies by tool and team. Budget for setup, data migration, training, and workflow configuration before projecting ROI timelines.</p>
                   </div>
                 </div>
                 <p className="text-[11px] text-muted-foreground mt-3">Compiled under our published methodology from a library of {TOTAL_REVIEWS} B2B SaaS reviews across {categories.length} categories.</p>

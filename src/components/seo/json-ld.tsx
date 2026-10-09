@@ -12,6 +12,11 @@ function organizationRef() {
   }
 }
 
+function authorRef(author: string) {
+  if (author === "PilotStack Team" || author === site.name) return organizationRef()
+  return { "@type": "Person", name: author }
+}
+
 function ld<T>(schema: T, key: string) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} key={key} />
 }
@@ -103,7 +108,7 @@ export function ArticleSchema({
     "@id": (url || site.url) + "#article",
     headline: title,
     description,
-    author: { "@type": "Person", name: author },
+    author: authorRef(author),
     publisher: organizationRef(),
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
@@ -142,7 +147,7 @@ export function NewsArticleSchema({
     "@id": (url || site.url) + "#newsarticle",
     headline: title,
     description,
-    author: { "@type": "Person", name: author },
+    author: authorRef(author),
     publisher: organizationRef(),
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
@@ -175,7 +180,7 @@ export function BlogPostingSchema({
     "@id": (url || site.url) + "#blogposting",
     headline: title,
     description,
-    author: { "@type": "Person", name: author },
+    author: authorRef(author),
     publisher: organizationRef(),
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
