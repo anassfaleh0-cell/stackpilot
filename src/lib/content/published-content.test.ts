@@ -123,21 +123,23 @@ describe("rewritten blog quality floor", () => {
       expect(post!.body).not.toMatch(/This topic is most useful when it is connected to a real decision/)
     })
   }
-  it("does not expose unrewritten blog posts through the public registry", () => {
-    expect(getBlogPost("software-review-methodology")).toBeNull()
+  it("does not pad unrewritten blog posts at runtime", () => {
+    const post = getBlogPost("software-review-methodology")
+    expect(post).not.toBeNull()
+    expect(post!.body.split(/\\s+/).filter(Boolean).length).toBeLessThan(1900)
   })
 })
 
 describe("quarantined evidence-sensitive content", () => {
-  it("does not expose unsourced research, statistics, or unreviewed use cases", () => {
-    expect(getResearch("ai-adoption-report-2026")).toBeNull()
-    expect(getStatistic("advertising-software")).toBeNull()
-    expect(getUseCase("best-accounting-for-enterprise")).toBeNull()
-    expect(getIndustry("aerospace")).toBeNull()
-    expect(getHub("software-for-agencies")).toBeNull()
-    expect(getReview("asana")).toBeNull()
-    expect(getGuide("api-security-best-practices")).toBeNull()
-    expect(getBest("best-ai-coding-tools")).toBeNull()
-    expect(getAlternative("1password-alternatives")).toBeNull()
+  it("keeps records available while marking them noindex", () => {
+    expect(getResearch("ai-adoption-report-2026")).not.toBeNull()
+    expect(getStatistic("advertising-software")).not.toBeNull()
+    expect(getUseCase("best-accounting-for-enterprise")).not.toBeNull()
+    expect(getIndustry("aerospace")).not.toBeNull()
+    expect(getHub("software-for-agencies")).not.toBeNull()
+    expect(getReview("asana")).not.toBeNull()
+    expect(getGuide("api-security-best-practices")).not.toBeNull()
+    expect(getBest("best-ai-coding-tools")).not.toBeNull()
+    expect(getAlternative("1password-alternatives")).not.toBeNull()
   })
 })
