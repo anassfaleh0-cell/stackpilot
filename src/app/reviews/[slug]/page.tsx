@@ -20,6 +20,7 @@ import { authorSlugs } from "@/app/authors/[slug]/page"
 import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
 import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
 import { isNoindexed } from "@/lib/noindex"
+import { getVisibleEditorialFaqs } from "@/lib/content/review-faqs"
 import { BannerAd, NativeAd, InFeedAd } from "@/components/ads"
 
 const TOTAL_REVIEWS = getAllReviews().length
@@ -49,6 +50,17 @@ function getVisibleReviewContent(content: ContentSection[]) {
   })
 }
 
+function countVisibleReviewWords(content: ContentSection[]): number {
+  return content.reduce((total, section) => {
+    const bodyWords = section.body.split(/\s+/).filter(Boolean).length
+    const itemWords = (section.items || []).reduce(
+      (count, item) => count + item.split(/\s+/).filter(Boolean).length,
+      0
+    )
+    return total + bodyWords + itemWords
+  }, 0)
+}
+
 export function generateStaticParams() {
   return getAllReviews().map((item) => ({ slug: item.slug }))
 }
@@ -58,7 +70,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const tool = getReview(slug)
   if (!tool) return {}
   const visibleContent = getVisibleReviewContent(tool.content)
-  const wordCount = visibleContent.reduce((a, s) => a + s.body.split(/\s+/).length, 0)
+  const wordCount = countVisibleReviewWords(visibleContent)
   const noindexed = isNoindexed("reviews", slug)
   return createMetadata({
     title: tool.seoTitle || reviewMetaTitle(tool.name),
@@ -83,7 +95,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const entity = getEntity(slug)
   const companyFacts = resolveCompanyFacts(tool, entity)
   const pros = editorialPros(tool.pros)
-  const visibleFaqs = tool.faqs.slice(0, 8)
+  const visibleFaqs = getVisibleEditorialFaqs(tool.faqs, 8)
   const visibleContent = getVisibleReviewContent(tool.content)
 
   const authorSlug = tool.author ? tool.author.trim().toLowerCase().replace(/\s+/g, "-") : ""
@@ -108,7 +120,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
       <SoftwareSchema name={tool.name} description={tool.tagline} category={tool.category} brand={tool.name} platforms={entity?.company?.platforms || tool.company?.deployment} url={`${site.url}/reviews/${tool.slug}`} image={tool.logo ? `${site.url}${tool.logo}` : undefined} offers={entity?.pricing?.[0]?.price !== undefined && entity.pricing[0].price !== null ? { price: entity.pricing[0].price, priceCurrency: entity.pricing[0].currency || "USD", url: tool.website || undefined } : undefined} />
       <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.contentModified} />
       <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.contentPublished} updatedAt={tool.contentModified} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={visibleContent.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} keywords={[`${tool.name} review`, `${tool.name} pricing`, `${tool.name} pros and cons`, `${tool.category} software`, `${tool.name} alternatives`]} mentions={[{ name: tool.name, url: tool.website || `${site.url}/reviews/${tool.slug}` }]} />
-      <FAQSchema questions={visibleFaqs} path={`/reviews/${tool.slug}`} />
+      {visibleFaqs.length > 0 && <FAQSchema questions={visibleFaqs} path={`/reviews/${tool.slug}`} />}
 
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Reviews", href: "/reviews" }, { name: tool.name }]} />
@@ -515,12 +527,12 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 )}
 
                 {/* Section Navigation */}
-                {tool.content.length > 0 && (
+                {visibleContent.length > 0 && (
                   <GlassCard>
                     <div className="p-4">
                       <h3 className="font-semibold mb-3 text-sm">On this page</h3>
                       <nav className="space-y-1.5">
-                        {tool.content.map((section, i) => (
+                        {visibleContent.map((section, i) => (
                           <a
                             key={i}
                             href={`#section-${i}`}
@@ -578,25 +590,27 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
             </div>
           </section>
 
-          {/* FAQ */}
-          <section className="mt-16 mb-16 scroll-mt-24" id="faq">
-            <h2 className="text-2xl font-bold tracking-tight mb-6">Frequently Asked Questions</h2>
-            <div className="grid sm:grid-cols-2 gap-4 max-w-4xl">
-              {visibleFaqs.map((faq) => (
-                <GlassCard key={faq.question}>
-                  <div className="p-4">
-                    <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
-                    <p className="text-sm text-muted-foreground">{faq.answer}</p>
-                  </div>
-                </GlassCard>
-              ))}
-            </div>
-            <div className="mt-4 text-center">
-              <p className="text-xs text-muted-foreground">
-                Prices and ratings are approximate and may vary.
-              </p>
-            </div>
-          </section>
+          {/* FAQ: only render distinct, complete answers that pass the conservative quality filter. */}
+          {visibleFaqs.length > 0 && (
+            <section className="mt-16 mb-16 scroll-mt-24" id="faq">
+              <h2 className="text-2xl font-bold tracking-tight mb-6">Frequently Asked Questions</h2>
+              <div className="grid sm:grid-cols-2 gap-4 max-w-4xl">
+                {visibleFaqs.map((faq) => (
+                  <GlassCard key={faq.question}>
+                    <div className="p-4">
+                      <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
+                      <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                    </div>
+                  </GlassCard>
+                ))}
+              </div>
+              <div className="mt-4 text-center">
+                <p className="text-xs text-muted-foreground">
+                  Prices and ratings are approximate and may vary.
+                </p>
+              </div>
+            </section>
+          )}
 
           {/* Ad: After FAQ section */}
           <section className="mt-16 mb-16">
