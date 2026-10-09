@@ -5,7 +5,7 @@
   "category": "Communication",
   "difficulty": "Intermediate",
   "author": "Emily Nakamura",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "slack",
     "microsoft-teams",
@@ -56,6 +56,11 @@
     {
       "title": "Selection checklist",
       "body": "Run a pilot with one cross-functional workflow. Verify search, permissions, async participation, integrations, and decision capture. Document the tool's role and the source of truth for each record type. Expand only when the team can explain how the setup reduces a specific coordination failure.",
+      "type": "text"
+    },
+    {
+      "title": "Test knowledge retrieval, not just chat",
+      "body": "Use three real tasks: find a decision made last month, locate the latest approved document, and hand a task to a colleague in another time zone. Check whether search surfaces the authoritative version, whether old discussions can be distinguished from current guidance, and whether permissions follow the document. If people must ask a colleague to resend information, record why. Use those findings to tune channel structure, naming, and retention before migrating all team conversations.",
       "type": "text"
     }
   ]
