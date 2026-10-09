@@ -1,8 +1,8 @@
 // Sprint 19 Phase 2: Money Keywords Expansion — Best Pages for Audiences
 const fs = require("node:fs")
 
-const CONTENT_DIR = "C:/Users/user/Desktop/DEEPSK/content"
-const now = "July 20, 2026"
+const CONTENT_DIR = path.join(__dirname, "content")
+const now = new Date().toISOString().slice(0, 10)
 
 // Load all tools from reviews
 const tools = []
@@ -15,7 +15,7 @@ fs.readdirSync(reviewDir).filter(f => f.endsWith(".json")).forEach(f => {
       name: r.name,
       category: r.category,
       rating: r.rating,
-      priceRange: r.priceRange || "$0-99/mo",
+      priceRange: r.priceRange || "Not independently verified",
       tagline: r.tagline || r.description?.substring(0,120) || ""
     })
   } catch(e) {}
@@ -102,7 +102,7 @@ categories.forEach(cat => {
     if (existingBest.has(slug)) { count++; return }
 
     const title = `Best ${cat} Software for ${aud}`
-    const desc = `Find the best ${qual} tools for ${aud.toLowerCase()}. We evaluated the top solutions for ${audienceDesc[aud]} based on pricing, features, and real user reviews.`
+    const desc = `A shortlist of ${qual} tools for ${aud.toLowerCase()}, using the product-profile data currently recorded by PilotStack. Check current vendor documentation, plan limits, and pricing before choosing; this page is not a claim of hands-on testing.`
     const h = hash(slug)
     const strengths = useCaseStrength[aud] || ["core functionality", "value", "usability"]
     const pickCount = Math.min(6, cTools.length)
