@@ -498,8 +498,10 @@ describe("CD-10: methodology and EEAT claims", () => {
 
   it("methodology publishes a checkable scoring rule", () => {
     const src = readSrc("src/app/methodology/page.tsx")
-    expect(src).toContain("mean of those nine scores")
-    expect(src).toContain("publish neither value")
+    expect(src).not.toMatch(/mean of those nine scores/i)
+    expect(src).toContain("Evidence first")
+    expect(src).toContain("scores remain unpublished as verified until source evidence and calculation can be checked")
+    expect(src).toContain("source evidence and calculation can be checked")
   })
 
   it("review pages do not point readers at a testing process they can verify", () => {
