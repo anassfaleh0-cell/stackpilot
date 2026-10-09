@@ -231,9 +231,12 @@ describe("T-COOKIE-07: consent semantics are unchanged", () => {
 
 
 describe("T-COOKIE-08: optional scripts wait for consent", () => {
-  it("does not load Google Tag Manager before consent", async () => {
+  it("does not load optional analytics or advertising scripts before consent", async () => {
     render(<CookieConsent />)
     await expectBannerVisible()
+    expect(document.getElementById("ga-gtag")).toBeNull()
+    expect(document.getElementById("clarity-dynamic")).toBeNull()
+    expect(document.getElementById("adsense-script")).toBeNull()
     expect(document.getElementById("gtm-script")).toBeNull()
   })
 
