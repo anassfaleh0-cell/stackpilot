@@ -392,6 +392,17 @@ export function getAllComparisons(): ComparisonContent[] {
     .filter((x): x is ComparisonContent => Boolean(x))
 }
 
+/** Load only comparisons assigned to a category before building expensive derived narratives. */
+export function getComparisonsByCategory(category: string): ComparisonContent[] {
+  return readDir(path.join(CONTENT_DIR, "comparisons"))
+    .filter((file) => {
+      const raw = readJson<ComparisonContent>(path.join(CONTENT_DIR, "comparisons", file))
+      return raw.category === category || raw.secondaryCategories?.includes(category)
+    })
+    .map((file) => getComparison(file.replace(/\.json$/, "")))
+    .filter((item): item is ComparisonContent => Boolean(item))
+}
+
 export function getGuide(slug: string): GuideContent | null {
   const file = path.join(CONTENT_DIR, "guides", `${slug}.json`)
   if (!fs.existsSync(file)) return null
