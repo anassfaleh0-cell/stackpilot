@@ -39,6 +39,16 @@
       "title": "Control cost and validate operations",
       "body": "Estimate compute, storage, network egress, managed services, backup, observability, support, and licensing under normal and peak load. Configure budgets, alerts, resource tags, and ownership before workloads arrive. After cutover, validate user journeys, performance, access controls, backups, restore tests, monitoring, and support escalation. Compare actual cost and reliability with the baseline after the first billing cycle, then close the migration only when the operational owner accepts the service.",
       "type": "text"
+    },
+    {
+      "title": "Set a migration wave plan",
+      "body": "Group workloads by dependency, business criticality, data sensitivity, and operational readiness. Move low-risk systems first only when doing so validates a reusable process; do not move a foundational identity or network dependency simply because it looks small. Give each wave an owner, entry criteria, test plan, communication plan, rollback trigger, and post-migration review. Track blockers across waves so teams do not discover the same missing firewall rule, certificate, or access approval during every cutover.",
+      "type": "text"
+    },
+    {
+      "title": "Establish ownership after cutover",
+      "body": "A workload is not migrated successfully just because it starts in the new environment. Assign owners for patching, cost review, monitoring, incident response, backup restore tests, access reviews, and vendor escalation. Update architecture diagrams, runbooks, asset inventories, and disaster-recovery documentation. Remove temporary credentials and obsolete infrastructure only after evidence confirms they are no longer needed. Schedule a review after the first operational cycle to compare service quality and spend with the original baseline.",
+      "type": "text"
     }
   ]
 }
