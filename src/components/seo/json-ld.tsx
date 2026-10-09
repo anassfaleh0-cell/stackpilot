@@ -86,7 +86,7 @@ export function ArticleSchema({
 }: {
   title: string
   description: string
-  publishedAt: string
+  publishedAt?: string
   updatedAt?: string
   author: string
   image?: string
@@ -105,9 +105,9 @@ export function ArticleSchema({
     description,
     author: { "@type": "Person", name: author },
     publisher: organizationRef(),
-    datePublished: publishedAt,
-    dateModified: updatedAt || publishedAt,
-    image: { "@type": "ImageObject", url: image || `${site.url}/og.png` },
+    datePublished: publishedAt || undefined,
+    dateModified: updatedAt || publishedAt || undefined,
+    image: { "@type": "ImageObject", url: `${site.url}/og.png` },
     mainEntityOfPage: { "@type": "WebPage", "@id": url || site.url },
     inLanguage: "en-US",
     wordCount: wordCount || undefined,
