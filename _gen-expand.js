@@ -333,7 +333,7 @@ function genBest(slug, name, catSlug, cat, tools) {
 }
 
 function genGuide(slug, name, cat, idx) {
-  const topic = name.replace(/\\s+(?:guide|buyer's guide)$/i, "").trim()
+  const topic = name.replace(/\s+(?:guide|buyer's guide)$/i, "").trim()
   const categoryChecks = {
     "AI & Machine Learning": "model quality on representative tasks, data handling, human review, prompt or model versioning, usage limits, and the cost of inference at expected volume",
     "Project Management": "dependencies, workload capacity, recurring work, reporting, guest permissions, automation limits, and how teams actually update task status",
