@@ -1,53 +1,67 @@
 {
-    "slug":  "learning-management-systems",
-    "title":  "Learning Management Systems Guide: How to Choose the Right HR \u0026 People Platform",
-    "description":  "Intermediate HR \u0026 People guide (~15 min read): how to evaluate the right Learning Management Systems.",
-    "category":  "HR \u0026 People",
-    "difficulty":  "Intermediate",
-    "author": "Emily Nakamura",
-    "readingTime":  15,
-    "relatedTools":  [
-
-                     ],
-    "relatedGuides":  [
-
-                      ],
-    "lastUpdated":  "2026-07-20",
-    "sections":  [
-                     {
-                         "title":  "Getting Started",
-                         "body":  "Choosing the right hr \u0026 people software starts with understanding your specific requirements. Before evaluating Learning Management Systems Guide: How to Choose the Right HR \u0026 People Platform, take stock of your team size, budget, existing tool stack, and the primary problems you need to solve. This guide walks through the key considerations.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Selection Criteria",
-                         "body":  "When evaluating Learning Management Systems Guide: How to Choose the Right HR \u0026 People Platform and other hr \u0026 people platforms, focus on these criteria: feature completeness relative to your needs, integration compatibility with your existing tools, total cost of ownership including implementation and training, vendor reputation and support quality, and scalability for future growth.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Implementation Guide",
-                         "body":  "Implementing Learning Management Systems Guide: How to Choose the Right HR \u0026 People Platform successfully requires planning beyond the technical setup. Start with a clear use case, involve stakeholders early, allocate time for data migration and testing, and plan for team training. Most successful deployments follow a phased approach rather than a big-bang rollout.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Best Practices",
-                         "body":  "Teams that get the most value from Learning Management Systems Guide: How to Choose the Right HR \u0026 People Platform share common practices: they invest in initial configuration and customization, establish clear workflows and naming conventions, train all users before full rollout, regularly review usage patterns to optimize settings, and keep the platform updated.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Common Pitfalls",
-                         "body":  "The most common mistakes teams make with Learning Management Systems Guide: How to Choose the Right HR \u0026 People Platform include underinvesting in the initial setup, skipping user training, trying to migrate too much data at once, not defining clear success metrics upfront, and failing to get buy-in from all stakeholders before deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "ROI Analysis",
-                         "body":  "Calculating ROI for Learning Management Systems Guide: How to Choose the Right HR \u0026 People Platform involves both tangible savings like reduced licensing costs from tool consolidation and productivity gains from streamlined workflows, and intangible benefits like improved team satisfaction and better data-driven decision making. Most teams see positive ROI within 3-6 months of full deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Future Trends",
-                         "body":  "The hr \u0026 people category continues to evolve rapidly. Learning Management Systems Guide: How to Choose the Right HR \u0026 People Platform is positioned to benefit from trends like AI-powered automation, deeper integration ecosystems, and increased focus on security and compliance. Organizations should evaluate how well the platform\u0027s roadmap aligns with their own technology strategy.",
-                         "type":  "text"
-                     }
-                 ]
+  "slug": "learning-management-systems",
+  "title": "Learning Management Systems Guide: How to Choose the Right HR & People Platform",
+  "description": "Practical learning management systems guidance with planning steps, evaluation criteria, risks, and implementation checks.",
+  "category": "HR & People",
+  "difficulty": "Intermediate",
+  "author": "Emily Nakamura",
+  "readingTime": 3,
+  "relatedTools": [
+    "workday",
+    "microsoft-teams",
+    "notion"
+  ],
+  "relatedGuides": [
+    "how-to-choose-hr-software",
+    "hr-software-buyers-guide",
+    "employee-onboarding-software-guide"
+  ],
+  "lastUpdated": "2026-10-09",
+  "sections": [
+    {
+      "title": "Define the learning outcomes",
+      "body": "Decide which learning programs the system must support: employee onboarding, compliance training, customer education, partner enablement, or professional development. For each audience, define the completion or competency outcome and the evidence needed to demonstrate it. A learning management system is not successful merely because it records course views; it should make assignment, completion, assessment, and follow-up reliable.",
+      "type": "text"
+    },
+    {
+      "title": "Map learners and administration",
+      "body": "Inventory learner groups, managers, instructors, external users, languages, time zones, and identity systems. Test enrollment rules, role-based access, course assignments, reminders, accommodations, and what happens when an employee changes role or leaves. If training records are used for compliance or certification, define retention, audit history, and how corrections are approved.",
+      "type": "text"
+    },
+    {
+      "title": "Evaluate content formats and assessments",
+      "body": "Test the formats your programs actually use, such as video, documents, quizzes, live sessions, SCORM or xAPI packages if required, and mobile access. Verify captioning, keyboard navigation, screen-reader behavior, progress saving, and assessment rules. Confirm whether content updates preserve learner history and whether course versions can be distinguished in an audit.",
+      "type": "text"
+    },
+    {
+      "title": "Connect the learning system to work",
+      "body": "Check integration with HRIS, identity provider, collaboration tools, customer portals, and reporting systems. Define which system owns learner identity, manager relationships, and course status. Test duplicate accounts, failed synchronization, and delayed updates. Keep personal data limited to the fields needed for learning administration and review external-user access carefully.",
+      "type": "text"
+    },
+    {
+      "title": "Measure learning, not just completion",
+      "body": "Track assignment completion, time to finish, assessment results, repeat attempts, learner feedback, and whether the training changes a real behavior or process. Completion rates can be misleading when learners click through without understanding the material. For important programs, use a short knowledge check or manager follow-up and document how results will be interpreted.",
+      "type": "text"
+    },
+    {
+      "title": "Check accessibility and localization",
+      "body": "Test course playback, captions, keyboard controls, mobile layouts, translated text, date formats, and support for learners with different abilities. Confirm who owns translated content and how updates propagate across languages. Accessibility is both a user requirement and a maintenance process; a platform feature alone cannot make every uploaded course accessible.",
+      "type": "text"
+    },
+    {
+      "title": "Pilot with a real audience",
+      "body": "Choose one program with representative learners and run enrollment, reminders, course completion, assessment, reporting, and support through end to end. Gather feedback from learners, managers, and administrators. Measure setup effort and ongoing maintenance as well as the learner experience. Confirm that help is available when a user cannot access a course or records do not sync.",
+      "type": "text"
+    },
+    {
+      "title": "Selection checklist",
+      "body": "Proceed when learning outcomes are clear, required content formats work, integrations and access controls are tested, reporting answers the intended questions, and administrators can maintain courses. Verify current pricing by learner count, active users, content volume, and external audience size. Review course quality and access rules regularly after launch.",
+      "type": "text"
+    },
+    {
+      "title": "Validate learning and assessment outcomes",
+      "body": "Choose one required learning path and test enrollment, reminders, accessibility, assessment scoring, completion records, and reporting for both a learner and an administrator. Check whether quiz attempts, accommodations, and course revisions are recorded correctly. Define what competence means beyond completion, such as passing a practical assessment or demonstrating a task. Keep a process for updating or retiring obsolete training so employees are not measured against content that no longer reflects current policy.",
+      "type": "text"
+    }
+  ]
 }

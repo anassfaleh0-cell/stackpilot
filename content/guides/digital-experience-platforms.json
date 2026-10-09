@@ -1,53 +1,67 @@
 {
-    "slug":  "digital-experience-platforms",
-    "title":  "Digital Experience Platforms Guide: How to Choose the Right Marketing \u0026 SEO Platform",
-    "description":  "Intermediate Marketing \u0026 SEO guide (~10 min read): how to evaluate the right Digital Experience Platforms.",
-    "category":  "Marketing \u0026 SEO",
-    "difficulty":  "Intermediate",
-    "author": "Emily Nakamura",
-    "readingTime":  10,
-    "relatedTools":  [
-
-                     ],
-    "relatedGuides":  [
-
-                      ],
-    "lastUpdated":  "2026-07-20",
-    "sections":  [
-                     {
-                         "title":  "Getting Started",
-                         "body":  "Choosing the right marketing \u0026 seo software starts with understanding your specific requirements. Before evaluating Digital Experience Platforms Guide: How to Choose the Right Marketing \u0026 SEO Platform, take stock of your team size, budget, existing tool stack, and the primary problems you need to solve. This guide walks through the key considerations.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Selection Criteria",
-                         "body":  "When evaluating Digital Experience Platforms Guide: How to Choose the Right Marketing \u0026 SEO Platform and other marketing \u0026 seo platforms, focus on these criteria: feature completeness relative to your needs, integration compatibility with your existing tools, total cost of ownership including implementation and training, vendor reputation and support quality, and scalability for future growth.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Implementation Guide",
-                         "body":  "Implementing Digital Experience Platforms Guide: How to Choose the Right Marketing \u0026 SEO Platform successfully requires planning beyond the technical setup. Start with a clear use case, involve stakeholders early, allocate time for data migration and testing, and plan for team training. Most successful deployments follow a phased approach rather than a big-bang rollout.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Best Practices",
-                         "body":  "Teams that get the most value from Digital Experience Platforms Guide: How to Choose the Right Marketing \u0026 SEO Platform share common practices: they invest in initial configuration and customization, establish clear workflows and naming conventions, train all users before full rollout, regularly review usage patterns to optimize settings, and keep the platform updated.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Common Pitfalls",
-                         "body":  "The most common mistakes teams make with Digital Experience Platforms Guide: How to Choose the Right Marketing \u0026 SEO Platform include underinvesting in the initial setup, skipping user training, trying to migrate too much data at once, not defining clear success metrics upfront, and failing to get buy-in from all stakeholders before deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "ROI Analysis",
-                         "body":  "Calculating ROI for Digital Experience Platforms Guide: How to Choose the Right Marketing \u0026 SEO Platform involves both tangible savings like reduced licensing costs from tool consolidation and productivity gains from streamlined workflows, and intangible benefits like improved team satisfaction and better data-driven decision making. Most teams see positive ROI within 3-6 months of full deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Future Trends",
-                         "body":  "The marketing \u0026 seo category continues to evolve rapidly. Digital Experience Platforms Guide: How to Choose the Right Marketing \u0026 SEO Platform is positioned to benefit from trends like AI-powered automation, deeper integration ecosystems, and increased focus on security and compliance. Organizations should evaluate how well the platform\u0027s roadmap aligns with their own technology strategy.",
-                         "type":  "text"
-                     }
-                 ]
+  "slug": "digital-experience-platforms",
+  "title": "Digital Experience Platforms Guide: How to Choose the Right Marketing & SEO Platform",
+  "description": "Practical digital experience platforms guidance with workflow mapping, evaluation criteria, data controls, and a readiness checklist.",
+  "category": "Marketing & SEO",
+  "difficulty": "Intermediate",
+  "author": "Emily Nakamura",
+  "readingTime": 3,
+  "relatedTools": [
+    "salesforce",
+    "hubspot",
+    "webflow"
+  ],
+  "relatedGuides": [
+    "customer-data-platform-guide",
+    "content-strategy-tools",
+    "privacy-analytics-guide"
+  ],
+  "lastUpdated": "2026-10-09",
+  "sections": [
+    {
+      "title": "Define the experience across channels",
+      "body": "List the customer journeys the platform must support: website, authenticated portal, mobile experience, content, commerce, service, or personalization. Map where a customer changes channel and which information must remain consistent. Identify the business outcome and the teams responsible for each stage. A digital experience platform is too broad a category to evaluate without a clear boundary around the use case.",
+      "type": "text"
+    },
+    {
+      "title": "Map content, identity, and data",
+      "body": "Inventory the CMS, customer records, product data, analytics, consent management, commerce, and support systems that contribute to the experience. Decide which system is authoritative for each field and how updates propagate. Test identity resolution, permissions, and content variants with real user roles. Avoid copying customer data across systems when a minimal reference or event is sufficient.",
+      "type": "text"
+    },
+    {
+      "title": "Evaluate content and personalization",
+      "body": "Test content modeling, reusable components, localization, approvals, experimentation, and personalization rules. Verify that users receive the correct experience when data is missing or consent is not granted. Make personalization rules explainable and easy to pause. Avoid using sensitive attributes or inferred traits without a documented purpose and appropriate review.",
+      "type": "text"
+    },
+    {
+      "title": "Check performance and accessibility",
+      "body": "Test key journeys on mobile devices, slow networks, keyboard navigation, screen readers, and translated content. Measure real load behavior and interaction latency rather than relying only on a vendor demo. Check caching, image handling, third-party scripts, and error states. Accessibility and performance must be validated in the actual implementation, not assumed from platform marketing.",
+      "type": "text"
+    },
+    {
+      "title": "Integrate and govern safely",
+      "body": "Test APIs, webhooks, identity federation, analytics, and downstream CRM or commerce sync. Review least-privilege access, audit logs, retention, exports, and vendor support access. Define who can publish content, change targeting rules, or access customer profiles. Document how the experience behaves when a downstream system is unavailable.",
+      "type": "text"
+    },
+    {
+      "title": "Measure the customer journey",
+      "body": "Track task completion, conversion, support contacts, content findability, performance, and user feedback across channels. Define the event and metric semantics before comparing reports. Use controlled experiments when evaluating causal impact from personalization. Avoid claiming that a unified dashboard proves the customer experience is unified; validate whether people can complete the intended task.",
+      "type": "text"
+    },
+    {
+      "title": "Model total cost and operating ownership",
+      "body": "Include licenses, content operations, integration maintenance, data storage, experimentation, personalization, and administration. Verify current pricing and plan limits directly with the vendor. Name owners for the experience architecture, content governance, privacy controls, and incident response. A broad platform can create high maintenance costs if each team builds its own variation.",
+      "type": "text"
+    },
+    {
+      "title": "Selection checklist",
+      "body": "Pilot one complete customer journey and test content updates, identity, consent, performance, accessibility, integrations, and reporting. Choose a platform whose complexity matches the business need and the team's operating capacity. Reassess when channels, customer data, or compliance requirements change.",
+      "type": "text"
+    },
+    {
+      "title": "Plan content migration and rollback",
+      "body": "Inventory page types, assets, redirects, metadata, localization, consent behavior, and personalization rules before moving content. Test a representative group of pages in staging, including pages with forms, embedded media, and accessibility requirements. Compare URLs, canonical tags, metadata, analytics events, and user journeys with the existing site. Keep a redirect map and a rollback plan, and do not retire the old publishing workflow until content owners approve the migrated pages and analytics confirms the expected events.",
+      "type": "text"
+    }
+  ]
 }
