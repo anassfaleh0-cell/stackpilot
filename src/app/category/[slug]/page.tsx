@@ -64,6 +64,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const comparisons = getComparisonsByCategory(category.name).filter((c) => isContentAvailable("comparison", c.slug))
   const posts = getAllBlogPosts().filter((p) => p.category === category.name)
   const glossary = getAllGlossaryTerms().filter((t) => t.category === category.name)
+
+  // Avoid publishing category landings with no meaningful product coverage or editorial content.
+  if (reviews.length + comparisons.length + guides.length + posts.length < 3) notFound()
+
   const bestPick = [...reviews].sort((a, b) => b.rating - a.rating)[0]
 
   const buyerJourney = [
