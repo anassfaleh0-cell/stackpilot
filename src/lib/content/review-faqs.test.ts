@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getVisibleReviewFaqs } from "./review-faqs"
+import { getVisibleEditorialFaqs } from "./review-faqs"
 
 describe("getVisibleReviewFaqs", () => {
   it("removes broken generated fragments and exact generic filler", () => {
