@@ -74,13 +74,13 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
           <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-            <p className="text-sm text-muted-foreground">The first listed option is <strong>{page.picks[0]?.toolName}</strong> (recorded rating {page.picks[0]?.rating}/5, pricing {page.picks[0]?.priceRange}). Use this shortlist as a starting point, verify current details with the vendor, and compare each option against your workflow.</p>
+            <p className="text-sm text-muted-foreground">The first listed option is <strong>{page.picks[0]?.toolName}</strong>{typeof page.picks[0]?.rating === "number" ? ` (recorded rating ${page.picks[0].rating}/5)` : ""} (pricing: {page.picks[0]?.priceRange}). Use this shortlist as a starting point, verify current details with the vendor, and compare each option against your workflow.</p>
           </div>
 
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">TL;DR</h2>
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-              <li><strong>#1 pick:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}</li>
+              <li><strong>#1 listed option:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}{typeof page.picks[0]?.rating === "number" ? ` Recorded rating: ${page.picks[0].rating}/5.` : ""}</li>
               <li>{page.picks.length} listed tools with recorded details; compare them using {page.criteria.length} criteria</li>
               <li>Pricing: {page.pricingSummary}</li>
               <li>Each pick includes pros, cons, and a best-fit use case</li>
@@ -93,7 +93,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-4">
               {page.picks.slice(0, 3).map((pick) => (
                 <li key={pick.toolSlug || pick.toolName}>
-                  <strong>{pick.toolName}:</strong> {pick.bestFor} Recorded rating: {pick.rating}/5. Pricing shown: {pick.priceRange}. Verify current plan limits and included features with the vendor.
+                  <strong>{pick.toolName}:</strong> {pick.bestFor}{typeof pick.rating === "number" ? ` Recorded rating: ${pick.rating}/5.` : ""} Pricing shown: {pick.priceRange}. Verify current plan limits and included features with the vendor.
                 </li>
               ))}
               {page.criteria.length > 0 && <li><strong>Compare on:</strong> {page.criteria.join(", ")}.</li>}
