@@ -24,4 +24,21 @@ describe("content quality repairs", () => {
     expect(page?.picks[0]?.bestFor).not.toContain("+/month")
     expect(page?.pricingSummary).not.toContain("+/month")
   })
+  it("replaces generic marketing attribution filler with actionable validation steps", () => {
+    const guide = getGuide("marketing-attribution-guide")
+    expect(guide).not.toBeNull()
+    const body = guide?.sections.map((section) => section.body).join(" ") ?? ""
+    const words = body.split(/\s+/).filter(Boolean).length
+    expect(words).toBeGreaterThanOrEqual(650)
+    expect(body).toContain("cross-device journeys")
+    expect(body).toContain("double-counted conversions")
+    expect(body).not.toContain("Most successful deployments follow a phased approach")
+  })
+
+  it("does not claim unsupported hands-on testing in generated best-page content", () => {
+    const guide = getGuide("marketing-attribution-guide")
+    expect(guide?.title).toBe("Marketing Attribution: Practical Marketing & SEO Guide")
+    expect(guide?.description).toContain("evaluation criteria")
+  })
+
 })
