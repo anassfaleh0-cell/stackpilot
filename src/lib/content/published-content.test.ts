@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { isNoindexed } from "@/lib/noindex"
-import { getComparison, getGuide, getReview } from "@/lib/content/registry"
+import { getBest, getComparison, getGuide, getReview } from "@/lib/content/registry"
 
 describe("content indexability guards", () => {
   it("honors the explicit noindex manifest", () => {
@@ -8,6 +8,8 @@ describe("content indexability guards", () => {
     expect(isNoindexed("guides", "not-a-real-guide")).toBe(false)
     expect(isNoindexed("reviews", "asana")).toBe(true)
     expect(isNoindexed("reviews", "linear")).toBe(false)
+    expect(isNoindexed("best", "best-ai-coding-tools")).toBe(true)
+    expect(isNoindexed("best", "best-accounting-software")).toBe(false)
   })
 
   it("does not expose a comparison explicitly marked unpublished", () => {
@@ -65,6 +67,19 @@ describe("rewritten review quality floor", () => {
       expect(body.split(/\s+/).filter(Boolean).length).toBeGreaterThanOrEqual(500)
       expect(body).not.toMatch(/across\s+[\d,]+\s+(?:user\s+)?reviews/i)
       expect(body).not.toMatch(/sub-100ms|tested for at least two weeks|our expert team evaluated/i)
+    })
+  }
+})
+
+describe("rewritten best-page quality floor", () => {
+  for (const slug of ["best-accounting-software", "best-agile-project-management"]) {
+    it(`${slug} has specific criteria and actionable vendor trade-offs`, () => {
+      const page = getBest(slug)
+      expect(page).not.toBeNull()
+      expect(page!.criteria.length).toBeGreaterThanOrEqual(5)
+      expect(page!.picks.length).toBeGreaterThanOrEqual(3)
+      expect(page!.faqs.length).toBeGreaterThanOrEqual(5)
+      expect(page!.picks.every((pick) => pick.bestFor.length > 30 && pick.pros.length > 0 && pick.cons.length > 0)).toBe(true)
     })
   }
 })
