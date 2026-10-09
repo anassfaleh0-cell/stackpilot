@@ -4,7 +4,7 @@ import { getComparison } from "@/lib/content/registry"
 
 describe("content indexability guards", () => {
   it("honors the explicit noindex manifest", () => {
-    expect(isNoindexed("guides", "marketing-attribution-guide")).toBe(true)
+    expect(isNoindexed("guides", "api-development-tools-guide")).toBe(true)
     expect(isNoindexed("guides", "not-a-real-guide")).toBe(false)
   })
 
