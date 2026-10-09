@@ -478,11 +478,19 @@ function buildReviewSections(review: ReviewContent): ContentSection[] {
   const availableFeatures = (Array.isArray(review.features) ? review.features : []).filter((feature) => feature.available).slice(0, 8)
   const featureNames = availableFeatures.map((feature) => feature.name)
   const featureDetails = availableFeatures.map((feature) => feature.name + ": " + feature.description).join(" ")
-  const integrations = company?.integrations?.slice(0, 8) ?? []
-  const certifications = company?.securityCertifications?.slice(0, 5) ?? []
-  const compliance = company?.compliance?.slice(0, 5) ?? []
-  const targetUsers = company?.targetUsers?.slice(0, 5) ?? []
-  const industries = company?.industries?.slice(0, 5) ?? []
+  const integrations = Array.isArray(company?.integrations) ? company.integrations.slice(0, 8) : []
+  const certifications = Array.isArray(company?.securityCertifications) ? company.securityCertifications.slice(0, 5) : []
+  const compliance = Array.isArray(company?.compliance) ? company.compliance.slice(0, 5) : []
+  const targetUsers = Array.isArray(company?.targetUsers)
+    ? company.targetUsers.slice(0, 5)
+    : typeof company?.targetUsers === "string" && company.targetUsers.trim()
+      ? [company.targetUsers.trim()]
+      : []
+  const industries = Array.isArray(company?.industries)
+    ? company.industries.slice(0, 5)
+    : typeof company?.industries === "string" && company.industries.trim()
+      ? [company.industries.trim()]
+      : []
   const pros = sanitizeList(review.pros, 5)
   const cons = sanitizeList(review.cons, 5)
   const pricing = review.priceRange || "Pricing is not verified in this profile; check the vendor's current pricing page."
