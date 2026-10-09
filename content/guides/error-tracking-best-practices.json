@@ -5,7 +5,7 @@
   "category": "Developer Tools",
   "difficulty": "Advanced",
   "author": "Marcus Rivera",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "sentry",
     "datadog",
@@ -56,6 +56,11 @@
     {
       "title": "Implementation checklist",
       "body": "Pilot error tracking on one service and verify capture, redaction, grouping, release association, alert routing, and regression testing. Assign ownership for SDKs, alert policies, and data handling. Reassess after architecture changes or when telemetry volume grows.",
+      "type": "text"
+    },
+    {
+      "title": "Tune alert noise before broad rollout",
+      "body": "Review a sample of recent errors and decide which deserve a page, a ticket, a dashboard entry, or no alert. Group duplicates without hiding distinct failures, and verify that release, environment, user impact, and ownership fields are accurate. Test alert routing outside normal business hours and confirm that resolved issues stop generating repeated notifications. Track actionable-alert rate and time to identify the cause so the team can tune thresholds based on evidence rather than simply reducing alert volume.",
       "type": "text"
     }
   ]
