@@ -7,12 +7,12 @@ const now = new Date().toISOString().slice(0, 10)
 
 function countWordsFromHtml(html) {
   return String(html || "")
-    .replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script>/gi, " ")
-    .replace(/<style\\b[^>]*>[\\s\\S]*?<\\/style>/gi, " ")
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/&(?:nbsp|amp|quot|#39|lt|gt);/gi, " ")
     .trim()
-    .split(/\\s+/)
+    .split(/\s+/)
     .filter(Boolean).length
 }
 
