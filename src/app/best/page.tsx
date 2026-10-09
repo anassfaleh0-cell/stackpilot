@@ -6,6 +6,7 @@ import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/compon
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllBest } from "@/lib/content/registry"
+import { isNoindexed } from "@/lib/noindex"
 import { getPagination, parsePageParam } from "@/lib/pagination"
 import { PaginationNav } from "@/components/ui/pagination-nav"
 import Link from "next/link"
@@ -20,7 +21,7 @@ export const metadata = createMetadata({
 
 export default async function BestPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
   const params = await searchParams
-  const pages = getAllBest()
+  const pages = getAllBest().filter((page) => !isNoindexed("best", page.slug))
   const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: pages.length })
   const pageItems = pages.slice(pagination.start, pagination.end)
 
