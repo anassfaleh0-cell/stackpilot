@@ -14,7 +14,7 @@ import { PaginationNav } from "@/components/ui/pagination-nav"
 
 export const metadata = createMetadata({
   title: "Software Comparisons",
-  description: "Side-by-side comparisons of the most popular software tools. See how they stack up across features, pricing, and user satisfaction.",
+  description: "Compare software tools by practical use case, recorded features, pricing considerations, and the criteria your team needs to verify before choosing.",
   path: "/comparisons",
 })
 
@@ -26,7 +26,7 @@ export default async function ComparisonsPage({ searchParams }: { searchParams?:
 
   return (
     <>
-      <CollectionPageSchema name="Software Comparisons" description="Side-by-side comparisons of the most popular software tools" url={`${site.url}/comparisons`} />
+      <CollectionPageSchema name="Software Comparisons" description="Software comparisons focused on use-case fit, feature evidence, and pricing considerations" url={`${site.url}/comparisons`} />
       <ItemListSchema items={pageComparisons.map(c => ({ name: c.title, url: `${site.url}/comparisons/${c.slug}` }))} url={`${site.url}/comparisons`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Comparisons", href: "/comparisons" }]} />
       <Container className="pt-8">
@@ -40,7 +40,7 @@ export default async function ComparisonsPage({ searchParams }: { searchParams?:
             <Badge variant="default" className="mb-4">Comparisons</Badge>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Side-by-side comparisons</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              We pit the most popular tools against each other so you can see exactly how they compare across features, pricing, and user experience.
+              Compare software options side by side using the requirements that matter to your team. Check current features and pricing with each vendor before deciding.
             </p>
           </SectionHeader>
         </Container>
