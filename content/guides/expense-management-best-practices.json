@@ -5,7 +5,7 @@
   "category": "Finance & Accounting",
   "difficulty": "Advanced",
   "author": "Emily Nakamura",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "quickbooks",
     "xero",
@@ -56,6 +56,11 @@
     {
       "title": "Go-live checklist",
       "body": "Pilot a full expense cycle from submission through approval, reimbursement, and reconciliation. Verify access controls, duplicate handling, exports, and exception paths. Keep a manual fallback for outages and define who owns policy changes. Review the workflow after changes to accounting rules, travel policy, or payment providers.",
+      "type": "text"
+    },
+    {
+      "title": "Test policy exceptions and reconciliation",
+      "body": "Use representative expense cases: a normal receipt, a missing receipt, a duplicate claim, a policy exception, a foreign-currency purchase, and a disputed approval. Verify that the system routes each case to the correct reviewer and preserves an audit trail. Reconcile approved expenses to the accounting or payment system and check how reversals and reimbursements are recorded. Keep an explicit exception process for unusual cases instead of allowing staff to bypass the system when a rule does not fit.",
       "type": "text"
     }
   ]
