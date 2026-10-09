@@ -74,7 +74,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
           <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-            <p className="text-sm text-muted-foreground">The first listed option is <strong>{page.picks[0]?.toolName}</strong>{typeof page.picks[0]?.rating === "number" ? ` (recorded rating ${page.picks[0].rating}/5)` : ""} (pricing: {page.picks[0]?.priceRange}). Use this shortlist as a starting point, verify current details with the vendor, and compare each option against your workflow.</p>
+            <p className="text-sm text-muted-foreground">The first listed option is <strong>{page.picks[0]?.toolName}</strong>{typeof page.picks[0]?.rating === "number" ? ` (recorded rating ${page.picks[0]?.rating}/5)` : ""} (pricing: {page.picks[0]?.priceRange}). Use this shortlist as a starting point, verify current details with the vendor, and compare each option against your workflow.</p>
           </div>
 
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
