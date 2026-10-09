@@ -12,7 +12,7 @@ const staleDates = []
 const readingTimeMismatches = []
 const invalidRelatedGuides = []
 const duplicateRelatedGuides = []
-const knownGuideSlugs = new Set(files.map((name) => name.replace(/\\.json$/, "")))
+const knownGuideSlugs = new Set(files.map((name) => name.replace(/\.json$/, "")))
 const count = (value) => typeof value === "string" ? value.replace(/<[^>]*>/g, " ").split(/\s+/).filter(Boolean).length : 0
 const templatePatterns = [
   /choosing the right .* software starts with understanding your specific requirements/i,
