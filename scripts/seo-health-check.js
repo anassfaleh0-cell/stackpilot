@@ -181,9 +181,9 @@ function checkContentQuality() {
         continue
       }
 
-      // Count the substantive data that the route actually renders, rather than
-      // only the short SEO description. Detail routes derive additional narrative
-      // from these fields at render time, so the audit must measure that payload too.
+      // Count audited source fields, not the final rendered page. Some routes
+      // derive additional copy at runtime; this source-level heuristic deliberately
+      // reports its scope so it is not mistaken for a rendered-page word count.
       let words = wordCount(data.description || "")
       if (data.content) {
         for (const section of data.content) {
