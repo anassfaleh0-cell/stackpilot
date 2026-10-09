@@ -60,6 +60,11 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
 
   const review1 = getReview(cmp.tool1Slug)
   const review2 = getReview(cmp.tool2Slug)
+  const categoriesDiffer = Boolean(review1?.category && review2?.category && review1.category !== review2.category)
+  const winnerIsTool1 = cmp.winner === cmp.tool1Slug || cmp.winner === cmp.tool1 || cmp.winner === cmp.tool1.toLowerCase()
+  const winnerIsTool2 = cmp.winner === cmp.tool2Slug || cmp.winner === cmp.tool2 || cmp.winner === cmp.tool2.toLowerCase()
+  const winnerLabel = winnerIsTool1 ? cmp.tool1 : winnerIsTool2 ? cmp.tool2 : null
+  const hasComparableWinner = Boolean(winnerLabel && !categoriesDiffer)
 
   const visibleFaqs = cmp.faqs.slice(0, 8)
 
@@ -109,7 +114,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">TL;DR</h2>
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-              <li>{cmp.winner ? `${cmp.winner} is the recorded pick in the source dataset, not a universal winner` : `${cmp.tool1} vs ${cmp.tool2}: compare the evidence against your priorities`}</li>
+              <li>{hasComparableWinner ? `${winnerLabel} is the recorded pick in the source dataset, not a universal winner` : categoriesDiffer ? `${cmp.tool1} and ${cmp.tool2} belong to different product categories; use their linked reviews to decide whether you need one or both.` : `${cmp.tool1} vs ${cmp.tool2}: compare the evidence against your priorities`}</li>
               <li>Recorded information for {cmp.tool1}: {cmp.features.filter(f => f.tool1Detail && f.tool1 !== "Not recorded").map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "see the linked review"}</li>
               <li>Recorded information for {cmp.tool2}: {cmp.features.filter(f => f.tool2Detail && f.tool2 !== "Not recorded").map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "see the linked review"}</li>
               <li>{cmp.features.filter(f => f.tool1Detail && f.tool2Detail).length} criteria have details recorded for both tools; this does not mean their capabilities are identical</li>
@@ -125,7 +130,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
               <li>{cmp.tool1} criteria with recorded information: {cmp.features.filter(f => f.tool1 && f.tool1 !== "Not recorded").length}</li>
               <li>{cmp.tool2} criteria with recorded information: {cmp.features.filter(f => f.tool2 && f.tool2 !== "Not recorded").length}</li>
               <li>Criteria with details for both: {cmp.features.filter(f => f.tool1Detail && f.tool2Detail).length}</li>
-              <li>{cmp.winner ? `Recorded dataset pick: ${cmp.winner}` : "No recorded dataset pick"}</li>
+              <li>{hasComparableWinner ? `Recorded dataset pick: ${winnerLabel}` : categoriesDiffer ? "Different product categories" : "No comparable winner recorded"}</li>
               <li>FAQs answered: {cmp.faqs.length}</li>
               <li>Last updated: {formatDate(cmp.lastUpdated)}</li>
             </ul>
@@ -148,8 +153,8 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           {/* Tool Compare Cards */}
           <div className="grid sm:grid-cols-2 gap-6 mb-8">
             {[
-              { name: cmp.tool1, slug: cmp.tool1Slug, isWinner: cmp.winner === cmp.tool1, score: t1Pct },
-              { name: cmp.tool2, slug: cmp.tool2Slug, isWinner: cmp.winner === cmp.tool2, score: t2Pct },
+              { name: cmp.tool1, slug: cmp.tool1Slug, isWinner: hasComparableWinner && winnerLabel === cmp.tool1, score: t1Pct },
+              { name: cmp.tool2, slug: cmp.tool2Slug, isWinner: hasComparableWinner && winnerLabel === cmp.tool2, score: t2Pct },
             ].map((tool) => (
               <GlassCard key={tool.name} glow={tool.isWinner}>
                 <div className="p-5 text-center relative">
@@ -184,7 +189,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
               <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
               </svg>
-            } value={cmp.winner || "Tie"} title="Recorded Dataset Pick" />
+            } value={hasComparableWinner ? winnerLabel! : categoriesDiffer ? "Different categories" : "No single winner"} title="Comparison outcome" />
             <InfoCard icon={
               <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
@@ -196,7 +201,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           {/* Feature Comparison */}
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-6">Feature Comparison</h2>
-            <EditorialComparison tool1={cmp.tool1} tool2={cmp.tool2} features={safeFeatures} winner={cmp.winner} category={cmp.category} slug={cmp.slug} />
+            <EditorialComparison tool1={cmp.tool1} tool2={cmp.tool2} features={safeFeatures} winner={hasComparableWinner ? winnerLabel : null} category={cmp.category} slug={cmp.slug} />
           </section>
 
           {/* Decision Framework */}
@@ -221,7 +226,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                     </li>
                     <li className="flex items-start gap-2 text-sm">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">3</span>
-                      <span className="text-muted-foreground">{cmp.winner ? `${cmp.winner} is the source dataset pick; verify the underlying evidence before relying on it` : "The source data does not name a winner — evaluate against priority requirements"}</span>
+                      <span className="text-muted-foreground">{hasComparableWinner ? `${winnerLabel} is the source dataset pick; verify the underlying evidence before relying on it` : categoriesDiffer ? "These products serve different primary categories; compare their separate use cases rather than treating the dataset pick as a head-to-head winner." : "The source data does not name a comparable winner — evaluate against priority requirements"}</span>
                     </li>
                   </ul>
                 </div>
@@ -230,14 +235,16 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
               {/* Bottom line callout */}
               <EditorialCallout type="key" title="Bottom Line" category={cmp.category}>
                 <div className="space-y-2">
-                  <p>{cmp.winner
-                    ? `${cmp.winner} is the recorded winner in the PilotStack comparison dataset. Use the feature rows and linked reviews to confirm whether that result matches your workflow.`
-                    : `The recorded criteria do not produce a single overall winner. Compare the feature rows and linked reviews against your priorities.`
+                  <p>{hasComparableWinner
+                    ? `${winnerLabel} is the recorded winner in the PilotStack comparison dataset. Use the feature rows and linked reviews to confirm whether that result matches your workflow.`
+                    : categoriesDiffer
+                      ? `${cmp.tool1} and ${cmp.tool2} are listed under different product categories in their linked reviews. They may solve different jobs, so compare the requirements you have instead of treating the recorded pick as proof that one replaces the other.`
+                      : `The source data does not support a single verified overall winner. Compare the feature rows and linked reviews against your priorities.`
                   }</p>
                   <div className="pt-2 border-t border-current/10">
                     <span className="text-xs font-medium">Best for: </span>
                     <span className="text-xs opacity-80">
-                      {cmp.winner ? `The recorded winner is ${cmp.winner}; the other option may still be a better fit where its exclusive criteria matter more.` : `Both options have trade-offs; prioritize the criteria most important to your workflow.`}
+                      {hasComparableWinner ? `The recorded pick is ${winnerLabel}; the other option may still be a better fit where its exclusive criteria matter more.` : categoriesDiffer ? `Choose based on whether you need ${review1?.category || cmp.tool1} capabilities, ${review2?.category || cmp.tool2} capabilities, or both.` : `Both options have trade-offs; prioritize the criteria most important to your workflow.`}
                     </span>
                   </div>
                 </div>
@@ -305,11 +312,11 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                 <div className="flex items-center gap-2 mb-3">
                   <CheckCircle2 size={18} className="text-primary" />
                   <p className="text-lg font-semibold">
-                    {cmp.winner ? `Recorded winner: ${cmp.winner === cmp.tool1Slug ? cmp.tool1 : cmp.winner === cmp.tool2Slug ? cmp.tool2 : cmp.winner}` : "How they compare"}
+                    {hasComparableWinner ? `Recorded pick: ${winnerLabel}` : categoriesDiffer ? "Different product categories" : "How they compare"}
                   </p>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={stripDeadContentLinks(cmp.verdict)} /></p>
-                {cmp.winner && (
+                {hasComparableWinner && (
                   <div className="mt-4 pt-4 border-t border-border flex items-center gap-2 text-sm">
                     <span className="text-muted-foreground">Migration complexity:</span>
                     <span className="font-medium text-foreground">
