@@ -7,6 +7,9 @@ const files = fs.existsSync(directory) ? fs.readdirSync(directory).filter((name)
 const issues = []
 const thin = []
 const templateHits = []
+const emptyRelations = []
+const staleDates = []
+const readingTimeMismatches = []
 const count = (value) => typeof value === "string" ? value.replace(/<[^>]*>/g, " ").split(/\s+/).filter(Boolean).length : 0
 const templatePatterns = [
   /choosing the right .* software starts with understanding your specific requirements/i,
@@ -41,6 +44,18 @@ for (const file of files) {
     editorialText.push(section.title, section.body, ...(section.items || []))
   }
   if (words < 500) thin.push({ slug: data.slug, words, lastUpdated: data.lastUpdated || null })
+  if ((!Array.isArray(data.relatedTools) || data.relatedTools.length === 0) &&
+      (!Array.isArray(data.relatedGuides) || data.relatedGuides.length === 0)) {
+    emptyRelations.push({ slug: data.slug, relatedTools: data.relatedTools || [], relatedGuides: data.relatedGuides || [] })
+  }
+  const parsedDate = typeof data.lastUpdated === "string" ? new Date(data.lastUpdated) : null
+  if (!parsedDate || Number.isNaN(parsedDate.getTime()) || parsedDate.getTime() > Date.now() + 86400000 || Date.now() - parsedDate.getTime() > 365 * 86400000) {
+    staleDates.push({ slug: data.slug, lastUpdated: data.lastUpdated || null })
+  }
+  const expectedReadingTime = Math.max(3, Math.ceil(words / 200))
+  if (Number.isFinite(data.readingTime) && data.readingTime !== expectedReadingTime) {
+    readingTimeMismatches.push({ slug: data.slug, stored: data.readingTime, expected: expectedReadingTime, words })
+  }
   const fullText = editorialText.join("\n")
   const hits = templatePatterns.filter((pattern) => pattern.test(fullText)).map((pattern) => pattern.source)
   if (hits.length) templateHits.push({ slug: data.slug, hits })
@@ -51,4 +66,7 @@ console.log("Guide files:", files.length)
 console.log("Schema/JSON errors:", issues.length, JSON.stringify(issues.slice(0, 20)))
 console.log("Guides below 500 audited source words:", thin.length, JSON.stringify(thin.slice(0, 30)))
 console.log("Known template phrase matches:", templateHits.length, JSON.stringify(templateHits.slice(0, 30)))
+console.log("Guides without related tools/guides:", emptyRelations.length, JSON.stringify(emptyRelations.slice(0, 30)))
+console.log("Guides with missing, stale, or malformed lastUpdated dates:", staleDates.length, JSON.stringify(staleDates.slice(0, 30)))
+console.log("Reading-time values needing review:", readingTimeMismatches.length, JSON.stringify(readingTimeMismatches.slice(0, 30)))
 if (issues.length > 0) process.exitCode = 1
