@@ -17,7 +17,7 @@ export const metadata = createMetadata({
 const stages = [
   {
     title: "Selection & Scoping",
-    body: "We select software topics based on practical buyer needs. Review pages discuss product fit, pricing considerations, feature availability, integrations, administration, and limitations. Some older records contain numeric scores or review counts whose source trail is still being audited; those figures should not be treated as independently verified until their provenance is documented. We do not accept payment to include or exclude a tool from our coverage.",
+    body: "We select software topics based on practical buyer needs. Review pages discuss product fit, pricing considerations, feature availability, integrations, administration, and limitations. Some older records contain numeric scores or review counts whose source trail is still being audited; those figures should not be treated as independently verified until their provenance is documented. Commercial placements, where offered, are separate from editorial evaluation; payment does not determine editorial ratings or rankings.",
   },
   {
     title: "Evidence & Sourcing",
@@ -73,7 +73,7 @@ export default function MethodologyPage() {
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                PilotStack evaluates software using practical buyer criteria and vendor documentation. Some older numeric scores and review-count figures are still undergoing a source audit; they should not be treated as verified unless the page provides a checkable source and calculation. We omit unsupported claims as they are identified and do not sell editorial placement in our coverage.
+                PilotStack evaluates software using practical buyer criteria and vendor documentation. Some older numeric scores and review-count figures are still undergoing a source audit; they should not be treated as verified unless the page provides a checkable source and calculation. We omit unsupported claims as they are identified. Paid placements, where offered, are labelled separately and do not determine editorial ratings or rankings.
               </p>
             </div>
 
@@ -84,19 +84,19 @@ export default function MethodologyPage() {
                 <li>Numeric scores and review counts require a documented source and reproducible calculation</li>
                 <li>A displayed update date does not mean every claim was rechecked</li>
                 <li>Unsupported claims are corrected, qualified, or omitted</li>
-                <li>No vendor payments, previews, or influence on ratings or rankings</li>
+                <li>Paid placements, where offered, do not influence editorial ratings or rankings</li>
               </ul>
             </div>
 
             <div className="key-takeaways mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Key Takeaways</h2>
               <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                <li>We cover tools readers actively evaluate — no paid placements</li>
+                <li>Commercial placements are distinguished from editorial recommendations</li>
                 <li>Consistent data is useful, but consistency alone does not prove a claim is sourced</li>
                 <li>Scores are not presented as independent user ratings unless their provenance is documented</li>
                 <li>Certification and company facts with no source should be omitted or labelled unverified</li>
                 <li>Readers can report errors through the contact page</li>
-                <li>Published independence policy: no vendor can pay for placement</li>
+                <li>Vendors cannot pay to change editorial scores or rankings</li>
               </ul>
             </div>
 
