@@ -588,6 +588,7 @@ export function getAllUseCases(): UseCaseContent[] {
 }
 
 export function getIndustry(slug: string): IndustryContent | null {
+  if (isNoindexed("industries", slug)) return null
   const file = path.join(CONTENT_DIR, "industries", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const industry = readJson<IndustryContent>(file)
@@ -604,6 +605,7 @@ export function getIndustry(slug: string): IndustryContent | null {
 
 export function getAllIndustries(): IndustryContent[] {
   return readDir(path.join(CONTENT_DIR, "industries"))
+    .filter((file) => !isNoindexed("industries", file.replace(/\.json$/, "")))
     .map((f) => { const i = readJson<IndustryContent>(path.join(CONTENT_DIR, "industries", f)); return { ...i, faqs: sanitizeFaqs(i.faqs) } })
 }
 
