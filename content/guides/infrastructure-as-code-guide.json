@@ -5,7 +5,7 @@
   "category": "Developer Tools",
   "difficulty": "Intermediate",
   "author": "Marcus Rivera",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "terraform",
     "github",
@@ -56,6 +56,11 @@
     {
       "title": "Production readiness checklist",
       "body": "Proceed when state is protected, changes are reviewed, secrets are managed safely, destructive actions require appropriate approval, drift is monitored, and recovery has been tested. Document module ownership and provider upgrade practices. Reassess the design as the infrastructure estate or compliance requirements grow.",
+      "type": "text"
+    },
+    {
+      "title": "Rehearse a failed change and recovery",
+      "body": "Choose a low-risk environment and test a proposed change through plan review, approval, apply, and post-deployment verification. Confirm that the plan clearly identifies destructive changes and that state locking prevents concurrent writes. Simulate a failed apply and document how the team diagnoses partial changes and restores a known-good configuration. Test secret handling and drift detection as well. Do not assume a successful plan guarantees a safe deployment; provider behavior and runtime dependencies still need validation.",
       "type": "text"
     }
   ]
