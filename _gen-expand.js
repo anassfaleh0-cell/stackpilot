@@ -389,11 +389,11 @@ function genGuide(slug, name, cat, idx) {
   return {
     slug,
     title: `${topic}: Practical ${cat} Guide`,
-    description: `A practical buyer's guide to ${topic.toLowerCase()} in the ${cat.toLowerCase()} category, with selection checks, pilot steps, rollout risks, and a total-cost worksheet.`,
+    description: `A practical guide to ${topic.toLowerCase()} in ${cat}, with evaluation criteria, a workflow test, evidence checks, implementation risks, and total-cost guidance,`,
     category: cat,
     difficulty: idx % 3 === 0 ? "Beginner" : idx % 3 === 1 ? "Intermediate" : "Advanced",
     author: "PilotStack Team",
-    readingTime: Math.max(2, Math.ceil(sections.reduce((total, section) => total + section.body.split(/\s+/).length, 0) / 220)),
+    readingTime: Math.max(4, Math.ceil(sections.reduce((total, section) => total + section.body.split(/\s+/).filter(Boolean).length, 0) / 220)),
     relatedTools: tools.filter((tool) => tool[2] === cat && tool[0] !== slug).slice(0, 3).map((tool) => tool[0]),
     relatedGuides: [],
     lastUpdated: now,
