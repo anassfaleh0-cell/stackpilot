@@ -63,12 +63,6 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
     notFound()
   }
 
-  const safeDescription = stripUnverifiedRatingClaims(page.description)
-  const safeFaqs = page.faqs.map((faq) => ({ question: stripUnverifiedRatingClaims(faq.question), answer: stripUnverifiedRatingClaims(faq.answer) }))
-  const hasUnverifiedPickRatings = page.picks.some((pick) => typeof pick.rating === "number" && verifiedPickRating(pick) === null)
-  const visibleComparisonColumnIndexes = page.comparisonTable.columns.map((column, index) => ({ column, index })).filter(({ column }) => !(hasUnverifiedPickRatings && /rating|score/i.test(column))).map(({ index }) => index)
-  const visibleComparisonColumns = visibleComparisonColumnIndexes.map((index) => page.comparisonTable.columns[index])
-  const visibleComparisonRows = page.comparisonTable.rows.map((row) => visibleComparisonColumnIndexes.map((index) => stripUnverifiedRatingClaims(String(row[index] ?? ""))))
   const linkedPicks = page.picks.filter((p) => getReview(p.toolSlug) !== null)
   const verifiedPickRating = (pick: (typeof page.picks)[number] | undefined): number | null => {
     if (!pick?.toolSlug) return null
@@ -77,6 +71,12 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
       ? review.rating
       : null
   }
+  const safeDescription = stripUnverifiedRatingClaims(page.description)
+  const safeFaqs = page.faqs.map((faq) => ({ question: stripUnverifiedRatingClaims(faq.question), answer: stripUnverifiedRatingClaims(faq.answer) }))
+  const hasUnverifiedPickRatings = page.picks.some((pick) => typeof pick.rating === "number" && verifiedPickRating(pick) === null)
+  const visibleComparisonColumnIndexes = page.comparisonTable.columns.map((column, index) => ({ column, index })).filter(({ column }) => !(hasUnverifiedPickRatings && /rating|score/i.test(column))).map(({ index }) => index)
+  const visibleComparisonColumns = visibleComparisonColumnIndexes.map((index) => page.comparisonTable.columns[index])
+  const visibleComparisonRows = page.comparisonTable.rows.map((row) => visibleComparisonColumnIndexes.map((index) => stripUnverifiedRatingClaims(String(row[index] ?? ""))))
   const reviewHref = (toolSlug: string) => (getReview(toolSlug) ? `/reviews/${toolSlug}` : null)
   const relatedLinks = getRelatedByCategory(page.category, page.slug, 4)
 
