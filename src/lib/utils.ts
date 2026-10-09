@@ -43,5 +43,5 @@ export function truncateDesc(str: string, maxLength: number = 160) {
 }
 
 export function absoluteUrl(path: string) {
-  return `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.pilotstack.online"}${path}`
+  return `${process.env.NEXT_PUBLIC_SITE_URL || "https://pilotstack.online"}${path}`
 }
