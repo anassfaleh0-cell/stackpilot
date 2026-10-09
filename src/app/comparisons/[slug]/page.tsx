@@ -63,6 +63,15 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
 
   const visibleFaqs = cmp.faqs.slice(0, 8)
 
+  // Use the comparison's own recorded feature details for decision guidance.
+  // These are descriptions of the source data, not independent verification or proof of superiority.
+  const tool1Evidence = cmp.features.find((feature) => typeof feature.tool1Detail === "string" && feature.tool1Detail.trim())
+  const tool2Evidence = cmp.features.find((feature) => typeof feature.tool2Detail === "string" && feature.tool2Detail.trim())
+  const conciseEvidence = (value: unknown) => {
+    const text = typeof value === "string" ? value.replace(/\\s+/g, " ").trim() : ""
+    return text.length > 180 ? `${text.slice(0, 177).trimEnd()}…` : text
+  }
+
   const safeFeatures = cmp.features.map((f) => ({
     ...f,
     tool1Detail: f.tool1Detail ? stripDeadContentLinks(f.tool1Detail) : f.tool1Detail,
@@ -204,11 +213,11 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                   <ul className="space-y-3">
                     <li className="flex items-start gap-2 text-sm">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">1</span>
-                      <span className="text-muted-foreground">Choose <strong>{cmp.tool1}</strong> if its documented capabilities, current plan, and workflow fit your mandatory requirements better after a trial.</span>
+                      <span className="text-muted-foreground">{tool1Evidence ? <>Start by checking <strong>{cmp.tool1}</strong> on <strong>{tool1Evidence.name}</strong>: {conciseEvidence(tool1Evidence.tool1Detail)} This is recorded page data; confirm it against the vendor documentation and your plan.</> : <>Review the <strong>{cmp.tool1}</strong> details in the feature table and linked review, then verify any must-have capability with the vendor before choosing.</>}</span>
                     </li>
                     <li className="flex items-start gap-2 text-sm">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">2</span>
-                      <span className="text-muted-foreground">Choose <strong>{cmp.tool2}</strong> if its documented capabilities, current plan, and workflow fit your mandatory requirements better after a trial.</span>
+                      <span className="text-muted-foreground">{tool2Evidence ? <>Start by checking <strong>{cmp.tool2}</strong> on <strong>{tool2Evidence.name}</strong>: {conciseEvidence(tool2Evidence.tool2Detail)} This is recorded page data; confirm it against the vendor documentation and your plan.</> : <>Review the <strong>{cmp.tool2}</strong> details in the feature table and linked review, then verify any must-have capability with the vendor before choosing.</>}</span>
                     </li>
                     <li className="flex items-start gap-2 text-sm">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">3</span>
@@ -252,7 +261,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                   <div className="mt-4 pt-4 border-t border-border flex items-center gap-2 text-sm">
                     <span className="text-muted-foreground">Migration complexity:</span>
                     <span className="font-medium text-foreground">
-                      Migration effort depends on data volume, integrations, and workflow dependencies.
+                      Check the available export/import options, integration dependencies, and data fields before switching; test with a small representative dataset first.
                     </span>
                     <span className="text-xs text-muted-foreground">Check export/import options and run a small migration test before switching.</span>
                   </div>
