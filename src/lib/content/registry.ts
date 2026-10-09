@@ -475,7 +475,7 @@ function buildReviewSections(review: ReviewContent): ContentSection[] {
   if (sectionWordCount(base) >= 900) return base
 
   const company = review.company
-  const availableFeatures = review.features.filter((feature) => feature.available).slice(0, 8)
+  const availableFeatures = (Array.isArray(review.features) ? review.features : []).filter((feature) => feature.available).slice(0, 8)
   const featureNames = availableFeatures.map((feature) => feature.name)
   const featureDetails = availableFeatures.map((feature) => feature.name + ": " + feature.description).join(" ")
   const integrations = company?.integrations?.slice(0, 8) ?? []
