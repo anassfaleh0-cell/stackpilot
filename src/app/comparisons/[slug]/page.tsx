@@ -20,6 +20,7 @@ import { RelatedContent } from "@/components/dynamic-client"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { ScoreBar } from "@/components/brand/patterns"
 import { NativeAd } from "@/components/ads"
+import { getComparisonDecision } from "@/lib/content/comparison-decision"
 
 export const dynamicParams = true
 export const revalidate = 86400
@@ -60,11 +61,15 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
 
   const review1 = getReview(cmp.tool1Slug)
   const review2 = getReview(cmp.tool2Slug)
-  const categoriesDiffer = Boolean(review1?.category && review2?.category && review1.category !== review2.category)
-  const winnerIsTool1 = cmp.winner === cmp.tool1Slug || cmp.winner === cmp.tool1 || cmp.winner === cmp.tool1.toLowerCase()
-  const winnerIsTool2 = cmp.winner === cmp.tool2Slug || cmp.winner === cmp.tool2 || cmp.winner === cmp.tool2.toLowerCase()
-  const winnerLabel = winnerIsTool1 ? cmp.tool1 : winnerIsTool2 ? cmp.tool2 : null
-  const hasComparableWinner = Boolean(winnerLabel && !categoriesDiffer)
+  const { categoriesDiffer, winnerLabel, hasComparableWinner } = getComparisonDecision({
+    winner: cmp.winner,
+    tool1: cmp.tool1,
+    tool1Slug: cmp.tool1Slug,
+    tool1Category: review1?.category,
+    tool2: cmp.tool2,
+    tool2Slug: cmp.tool2Slug,
+    tool2Category: review2?.category,
+  })
 
   const visibleFaqs = cmp.faqs.slice(0, 8)
 
