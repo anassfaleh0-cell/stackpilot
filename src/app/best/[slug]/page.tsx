@@ -16,6 +16,17 @@ import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { isNoindexed } from "@/lib/noindex"
 
+function stripUnverifiedRatingClaims(value: string): string {
+  return value
+    .replace(/\(\s*\d(?:\.\d+)?\s*\/\s*5\s*,\s*from\s+[^)]*\)/gi, "")
+    .replace(/\(\s*\d(?:\.\d+)?\s*\/\s*5\s*\)/gi, "")
+    .replace(/\b(?:recorded\s+)?rating(?:\s+of)?\s*[:\-]?\s*\d(?:\.\d+)?\s*\/\s*5\b/gi, "rating not independently verified")
+    .replace(/\b\d(?:\.\d+)?\s*\/\s*5\b/gi, "rating not independently verified")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+([,.;:])/g, "$1")
+    .trim()
+}
+
 export const dynamicParams = true
 export const revalidate = 86400
 
@@ -30,9 +41,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const page = getBest(slug)
   if (!page) return {}
   const readingTime = Math.max(5, Math.ceil((page.description.split(/\s+/).length + page.picks.reduce((a, p) => a + p.pros.length + p.cons.length, 0) * 20) / 200))
-  const metaDescription = page.description.length < 120
-    ? `${page.description} Compare the listed options using the recorded details, criteria, and pricing context below. Verify current features and plan terms with each vendor.`
-    : page.description
+  const safeDescription = stripUnverifiedRatingClaims(page.description)
+  const metaDescription = safeDescription.length < 120
+    ? `${safeDescription} Compare the listed options using the recorded details and criteria below. Verify current features and plan terms with each vendor.`
+    : safeDescription
   const noindexed = isNoindexed("best", slug)
   return createMetadata({ title: truncate(page.title, 60), description: truncate(metaDescription, 160), path: `/best/${page.slug}`, ogType: "article", publishedAt: page.lastUpdated, updatedAt: page.lastUpdated, articleSection: page.category, readingTime, noIndex: noindexed })
 }
@@ -51,6 +63,12 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
     notFound()
   }
 
+  const safeDescription = stripUnverifiedRatingClaims(page.description)
+  const safeFaqs = page.faqs.map((faq) => ({ question: stripUnverifiedRatingClaims(faq.question), answer: stripUnverifiedRatingClaims(faq.answer) }))
+  const hasUnverifiedPickRatings = page.picks.some((pick) => typeof pick.rating === "number" && verifiedPickRating(pick) === null)
+  const visibleComparisonColumnIndexes = page.comparisonTable.columns.map((column, index) => ({ column, index })).filter(({ column }) => !(hasUnverifiedPickRatings && /rating|score/i.test(column))).map(({ index }) => index)
+  const visibleComparisonColumns = visibleComparisonColumnIndexes.map((index) => page.comparisonTable.columns[index])
+  const visibleComparisonRows = page.comparisonTable.rows.map((row) => visibleComparisonColumnIndexes.map((index) => stripUnverifiedRatingClaims(String(row[index] ?? ""))))
   const linkedPicks = page.picks.filter((p) => getReview(p.toolSlug) !== null)
   const verifiedPickRating = (pick: (typeof page.picks)[number] | undefined): number | null => {
     if (!pick?.toolSlug) return null
@@ -65,18 +83,18 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Best Software", href: "/best" }, { name: page.title, href: `/best/${slug}` }]} />
-      <ArticleSchema title={page.title} description={page.description} publishedAt={page.lastUpdated} updatedAt={page.lastUpdated} author={page.author} url={`${site.url}/best/${slug}`} wordCount={page.description.split(/\s+/).length + page.criteria.join(" ").split(/\s+/).filter(Boolean).length + page.picks.reduce((n, p) => n + p.toolName.split(/\s+/).length + p.bestFor.split(/\s+/).filter(Boolean).length + p.pros.join(" ").split(/\s+/).filter(Boolean).length + p.cons.join(" ").split(/\s+/).filter(Boolean).length, 0) + page.pricingSummary.split(/\s+/).filter(Boolean).length + page.comparisonTable.rows.flat().join(" ").split(/\s+/).filter(Boolean).length + page.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={page.category} keywords={["best " + page.category.toLowerCase(), page.category + " software ranking", "top " + page.category.toLowerCase() + " tools", "software recommendations 2026"].filter(Boolean)} mentions={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} />
-      <CollectionPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} />
+      <ArticleSchema title={page.title} description={safeDescription} publishedAt={page.lastUpdated} updatedAt={page.lastUpdated} author={page.author} url={`${site.url}/best/${slug}`} wordCount={page.description.split(/\s+/).length + page.criteria.join(" ").split(/\s+/).filter(Boolean).length + page.picks.reduce((n, p) => n + p.toolName.split(/\s+/).length + p.bestFor.split(/\s+/).filter(Boolean).length + p.pros.join(" ").split(/\s+/).filter(Boolean).length + p.cons.join(" ").split(/\s+/).filter(Boolean).length, 0) + page.pricingSummary.split(/\s+/).filter(Boolean).length + page.comparisonTable.rows.flat().join(" ").split(/\s+/).filter(Boolean).length + page.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={page.category} keywords={["best " + page.category.toLowerCase(), page.category + " software ranking", "top " + page.category.toLowerCase() + " tools", "software recommendations 2026"].filter(Boolean)} mentions={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} />
+      <CollectionPageSchema name={page.title} description={safeDescription} url={`${site.url}/best/${slug}`} />
       <ItemListSchema items={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} url={`${site.url}/best/${slug}`} />
-      <WebPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} dateModified={page.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: linkedPicks.map((p, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}`, category: getReview(p.toolSlug)?.category || page.category}) })) }} />
-      <FAQSchema questions={page.faqs} path={`/best/${slug}`} />
+      <WebPageSchema name={page.title} description={safeDescription} url={`${site.url}/best/${slug}`} dateModified={page.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: linkedPicks.map((p, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}`, category: getReview(p.toolSlug)?.category || page.category}) })) }} />
+      <FAQSchema questions={safeFaqs} path={`/best/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Best Software", href: "/best" }, { name: page.title }]} />
       </Container>
       <article className="pb-16">
         <Container>
           <div className="mb-8">
-            <EditorialHero slug={page.slug} title={page.title} subtitle={page.description} category={page.category} variant="review" className="w-full min-h-[180px] sm:min-h-[220px]" />
+            <EditorialHero slug={page.slug} title={page.title} subtitle={safeDescription} category={page.category} variant="review" className="w-full min-h-[180px] sm:min-h-[220px]" />
           </div>
 
           <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
@@ -201,13 +219,13 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                 <table className="w-full text-sm border-collapse">
                   <thead>
                     <tr className="border-b border-border">
-                      {page.comparisonTable.columns.map((col, i) => (
+                      {visibleComparisonColumns.map((col, i) => (
                         <th key={i} className="text-left py-3 px-3 font-semibold text-foreground">{col}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
-                    {page.comparisonTable.rows.map((row, i) => (
+                    {visibleComparisonRows.map((row, i) => (
                       <tr key={i} className="border-b border-border/50 hover:bg-accent-subtle/20 transition-colors">
                         {row.map((cell, j) => (
                           <td key={j} className="py-2.5 px-3 text-muted-foreground">{cell}</td>
@@ -221,7 +239,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
               <section>
                 <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {page.faqs.map((faq, i) => (
+                  {safeFaqs.map((faq, i) => (
                     <GlassCard key={i}>
                       <div className="p-4">
                         <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
