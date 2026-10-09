@@ -228,10 +228,12 @@ describe("H-09A sitemap", () => {
     expect(sitemapSrc).not.toContain("r.lastReviewed")
   })
 
-  it("the review entry block is otherwise untouched", () => {
+  it("the review entry block is otherwise untouched and static URLs have no invented lastmod", () => {
     expect(sitemapSrc).toContain('url: `${siteConfig.url}/reviews/${r.slug}`')
     expect(sitemapSrc).toContain("isQuality(r.slug, \"reviews\")")
-    expect(sitemapSrc).toContain("const LISTING_DATE = new Date()")
+    expect(sitemapSrc).not.toContain("const LISTING_DATE = new Date()")
+    expect(sitemapSrc).not.toContain("POLICY_DATE")
+    expect(sitemapSrc).toContain('{ url: siteConfig.url, changeFrequency: "daily", priority: 1.0 }')
   })
 })
 
