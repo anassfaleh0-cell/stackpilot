@@ -2,7 +2,7 @@
 const fs = require("node:fs")
 const path = require("node:path")
 
-const now = "July 20, 2026"
+const now = new Date().toISOString().slice(0, 10)
 
 // Original 38 tools (minimal data for alternatives/best page generation)
 const origTools = [
@@ -333,20 +333,67 @@ function genBest(slug, name, catSlug, cat, tools) {
 }
 
 function genGuide(slug, name, cat, idx) {
-  const topics = ["Getting Started", "Selection Criteria", "Implementation Guide", "Best Practices", "Common Pitfalls", "ROI Analysis", "Future Trends"]
-  const sections = topics.map((t, i) => ({
-    title: t,
-    body: `This section covers ${t.toLowerCase()} for ${name.toLowerCase()} software in the ${cat.toLowerCase()} space. Based on our research and structured product review, we provide actionable advice for making informed decisions.`,
-    type: "text",
-  }))
+  const topic = name.replace(/\s+(?:guide|buyer's guide)$/i, "").trim()
+  const categoryChecks = {
+    "AI & Machine Learning": "model quality on representative tasks, data handling, human review, prompt or model versioning, usage limits, and the cost of inference at expected volume",
+    "Project Management": "dependencies, workload capacity, recurring work, reporting, guest permissions, automation limits, and how teams actually update task status",
+    "CRM & Sales": "contact and account data quality, pipeline definitions, activity capture, forecasting, permissions, reporting, and synchronization with marketing and support systems",
+    "Marketing & SEO": "measurement goals, consent-aware tracking, channel definitions, conversion quality, attribution windows, CRM handoffs, and whether reports can be reconciled with source data",
+    "Design & Creative": "handoff to engineering, component reuse, collaboration and review, asset ownership, accessibility, version history, and export formats",
+    "Developer Tools": "repository and CI integration, access control, API limits, test reliability, observability, rollback paths, and operational ownership",
+    "Analytics & Data": "event and metric definitions, data freshness, lineage, access controls, exportability, governance, and storage or query costs",
+    "HR & People": "employee-data permissions, payroll or HRIS integration, regional requirements, manager workflows, reporting access, and employee self-service",
+    "Finance & Accounting": "approval controls, audit trails, reconciliation, accounting-system integration, tax or regional requirements, data export, and total cost of ownership",
+    "Productivity": "capture and retrieval of information, collaboration, permissions, search quality, portability, recurring workflows, and whether the tool reduces rather than adds process overhead",
+    "Security & Compliance": "threat coverage, identity and access controls, audit logs, incident response, deployment requirements, evidence for compliance claims, and alert-handling workload",
+    "Communication": "call or message quality, admin controls, guest access, retention, integrations, accessibility, and how the tool behaves across devices and network conditions",
+  }
+  const checks = categoryChecks[cat] || "workflow fit, integrations, permissions, reporting, data portability, support boundaries, and total cost at expected usage"
+  const sections = [
+    {
+      title: "Define the Decision",
+      body: `Before comparing ${topic.toLowerCase()} options, write down the decision the software must improve and the people who will use it. Map the current workflow from start to finish, including manual work, handoffs, failure points, and systems that must remain in place. Turn the main pain points into observable requirements so a vendor demo cannot quietly redefine success.`,
+      type: "text",
+    },
+    {
+      title: "Selection Criteria",
+      body: `Use the following category-specific checks when evaluating ${topic.toLowerCase()}: ${checks}. Separate essential requirements from preferences, then score each candidate against the same criteria. For every important claim, record whether it is confirmed in documentation, verified in a trial, unclear, or unavailable.`,
+      type: "text",
+    },
+    {
+      title: "Validate With a Real Workflow",
+      body: `Run a small, time-boxed pilot using a realistic ${topic.toLowerCase()} task rather than a guided demo alone. Use representative data, include the people who will administer and use the tool, and test both the normal path and one likely exception. Record setup time, failed steps, workarounds, and what would be needed before rollout.`,
+      type: "text",
+    },
+    {
+      title: "Plan the Rollout",
+      body: `Start with one team or workflow, name an accountable owner, and define the migration, permission, training, and support plan before expanding. Confirm how existing data will be imported and exported, how access is removed when roles change, and how the team can reverse the rollout if a critical workflow fails. Expand only after the pilot meets the agreed acceptance criteria.`,
+      type: "text",
+    },
+    {
+      title: "Common Failure Modes",
+      body: `Avoid choosing ${topic.toLowerCase()} software based on feature count, a polished demo, or a temporary discount. Other common risks are unclear ownership, untested integrations, weak data cleanup, overly broad permissions, and success measures that are defined only after purchase. Keep a short decision log with trade-offs, unresolved questions, and the reason the selected option fits better than the alternatives.`,
+      type: "text",
+    },
+    {
+      title: "Calculate Total Cost",
+      body: `Compare the full cost over the period you expect to use the tool: subscription or usage fees, minimum seats, add-ons, implementation, migration, training, administration, and the time required to maintain integrations. Estimate benefits using your own baseline—for example, hours spent on the current workflow and the realistic portion a new system could remove. Treat payback as an estimate with assumptions, not a guaranteed result.`,
+      type: "text",
+    },
+    {
+      title: "Review Before Committing",
+      body: `Before signing or renewing, confirm the current feature and pricing limits in the vendor's own documentation, check support and service commitments, and verify data export and deletion procedures. Assign someone to review usage, cost, user feedback, and unresolved risks after launch. Reassess when the workflow, team size, compliance needs, or pricing changes rather than assuming the original choice will remain the best fit.`,
+      type: "text",
+    },
+  ]
   return {
-    slug: `${slug}`,
-    title: `${name} Guide: How to Choose the Right ${cat} Platform`,
-    description: `Comprehensive guide to choosing ${name.toLowerCase()} software. Expert analysis, comparison criteria, and buying advice for the ${cat.toLowerCase()} category.`,
+    slug,
+    title: `${topic} Guide: How to Choose the Right ${cat} Platform`,
+    description: `A practical buyer's guide to ${topic.toLowerCase()} in the ${cat.toLowerCase()} category, with selection checks, pilot steps, rollout risks, and a total-cost worksheet.`,
     category: cat,
     difficulty: idx % 3 === 0 ? "Beginner" : idx % 3 === 1 ? "Intermediate" : "Advanced",
     author: "PilotStack Team",
-    readingTime: 8 + (hash(slug) % 10),
+    readingTime: Math.max(2, Math.ceil(sections.reduce((total, section) => total + section.body.split(/\s+/).length, 0) / 220)),
     relatedTools: [],
     relatedGuides: [],
     lastUpdated: now,
@@ -355,7 +402,7 @@ function genGuide(slug, name, cat, idx) {
 }
 
 // Load existing content
-const contentDir = "C:/Users/user/Desktop/DEEPSK/content"
+const contentDir = path.join(__dirname, "content")
 function loadExisting(dir) {
   const p = path.join(contentDir, dir)
   if (!fs.existsSync(p)) return new Set()
