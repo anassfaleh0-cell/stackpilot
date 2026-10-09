@@ -1,5 +1,8 @@
-import { describe, expect, it } from "vitest"
+import { afterEach, describe, expect, it, vi } from "vitest"
 import { createMetadata } from "@/lib/metadata"
+import { absoluteUrl } from "@/lib/utils"
+
+afterEach(() => vi.unstubAllEnvs())
 
 describe("createMetadata robots directives", () => {
   it("keeps pages followable by default", () => {
@@ -20,5 +23,12 @@ describe("createMetadata robots directives", () => {
     expect(metadata.robots.index).toBe(false)
     expect(metadata.robots.follow).toBe(true)
     expect(metadata.alternates.canonical).toBe("https://pilotstack.online")
+  })
+})
+
+describe("absoluteUrl canonical fallback", () => {
+  it("uses the apex domain when no site URL is configured", () => {
+    vi.stubEnv("NEXT_PUBLIC_SITE_URL", "")
+    expect(absoluteUrl("/guides/example")).toBe("https://pilotstack.online/guides/example")
   })
 })
