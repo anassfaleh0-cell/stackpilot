@@ -1,53 +1,72 @@
 {
-    "slug":  "software-evaluation-framework",
-    "title":  "Software Evaluation Framework Guide: How to Choose the Right Analytics \u0026 Data Platform",
-    "description":  "Intermediate Analytics \u0026 Data guide (~17 min read): how to evaluate the right Software Evaluation Framework.",
-    "category":  "Analytics \u0026 Data",
-    "difficulty":  "Intermediate",
-    "author": "Marcus Rivera",
-    "readingTime":  17,
-    "relatedTools":  [
-
-                     ],
-    "relatedGuides":  [
-
-                      ],
-    "lastUpdated":  "2026-07-20",
-    "sections":  [
-                     {
-                         "title":  "Getting Started",
-                         "body":  "Choosing the right analytics \u0026 data software starts with understanding your specific requirements. Before evaluating Software Evaluation Framework Guide: How to Choose the Right Analytics \u0026 Data Platform, take stock of your team size, budget, existing tool stack, and the primary problems you need to solve. This guide walks through the key considerations.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Selection Criteria",
-                         "body":  "When evaluating Software Evaluation Framework Guide: How to Choose the Right Analytics \u0026 Data Platform and other analytics \u0026 data platforms, focus on these criteria: feature completeness relative to your needs, integration compatibility with your existing tools, total cost of ownership including implementation and training, vendor reputation and support quality, and scalability for future growth.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Implementation Guide",
-                         "body":  "Implementing Software Evaluation Framework Guide: How to Choose the Right Analytics \u0026 Data Platform successfully requires planning beyond the technical setup. Start with a clear use case, involve stakeholders early, allocate time for data migration and testing, and plan for team training. Most successful deployments follow a phased approach rather than a big-bang rollout.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Best Practices",
-                         "body":  "Teams that get the most value from Software Evaluation Framework Guide: How to Choose the Right Analytics \u0026 Data Platform share common practices: they invest in initial configuration and customization, establish clear workflows and naming conventions, train all users before full rollout, regularly review usage patterns to optimize settings, and keep the platform updated.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Common Pitfalls",
-                         "body":  "The most common mistakes teams make with Software Evaluation Framework Guide: How to Choose the Right Analytics \u0026 Data Platform include underinvesting in the initial setup, skipping user training, trying to migrate too much data at once, not defining clear success metrics upfront, and failing to get buy-in from all stakeholders before deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "ROI Analysis",
-                         "body":  "Calculating ROI for Software Evaluation Framework Guide: How to Choose the Right Analytics \u0026 Data Platform involves both tangible savings like reduced licensing costs from tool consolidation and productivity gains from streamlined workflows, and intangible benefits like improved team satisfaction and better data-driven decision making. Most teams see positive ROI within 3-6 months of full deployment.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Future Trends",
-                         "body":  "The analytics \u0026 data category continues to evolve rapidly. Software Evaluation Framework Guide: How to Choose the Right Analytics \u0026 Data Platform is positioned to benefit from trends like AI-powered automation, deeper integration ecosystems, and increased focus on security and compliance. Organizations should evaluate how well the platform\u0027s roadmap aligns with their own technology strategy.",
-                         "type":  "text"
-                     }
-                 ]
+  "slug": "software-evaluation-framework",
+  "title": "Software Evaluation Framework: A Practical Vendor Scorecard",
+  "description": "A reusable software evaluation framework for teams comparing vendors. Build a weighted scorecard, verify requirements in a pilot, assess security and migration risk, calculate total cost, and document a defensible decision.",
+  "category": "Analytics & Data",
+  "difficulty": "Intermediate",
+  "author": "PilotStack Editorial Team",
+  "readingTime": 17,
+  "relatedTools": [
+    "asana",
+    "clickup",
+    "notion",
+    "salesforce",
+    "slack"
+  ],
+  "relatedGuides": [
+    "saas-procurement-guide",
+    "software-cost-analysis",
+    "vendor-risk-assessment"
+  ],
+  "lastUpdated": "2026-10-09",
+  "sections": [
+    {
+      "title": "Write the Problem Statement",
+      "type": "text",
+      "body": "Start by describing the work that needs to improve, not the software category you want to buy. Name the users, current workflow, recurring failure points, systems involved, and consequence of doing nothing. Separate the must-have outcome from features that would merely be convenient. For example, a team may need reliable approval history and exportable records rather than a longer feature list. Record the baseline—time spent, error rate, delays, or support requests—so a pilot can be judged against the current process. If stakeholders cannot agree on the problem or the owner of the outcome, pause vendor demos until that disagreement is resolved."
+    },
+    {
+      "title": "Turn Needs Into Testable Requirements",
+      "type": "checklist",
+      "body": "Use requirements that can be verified rather than vague labels such as easy, powerful, or enterprise-ready.",
+      "items": [
+        "Describe each requirement as a user action and expected result.",
+        "Mark each requirement Must, Should, or Could, and explain why each Must is essential.",
+        "Identify the evidence needed: documentation, a configuration walkthrough, a test, or a contract term.",
+        "Include accessibility, language, mobile, and regional needs where relevant.",
+        "Record dependencies on identity, data storage, integrations, and existing licenses.",
+        "Name the stakeholder who accepts or rejects each requirement."
+      ]
+    },
+    {
+      "title": "Build a Weighted Scorecard",
+      "type": "text",
+      "body": "Choose a small set of criteria that reflect the actual job: workflow fit, usability, integration, administration, security, reporting, portability, support, and total cost are common starting points. Assign weights before scoring vendors so a persuasive demo cannot change the rules after the fact. Weights should total 100 percent. Score each vendor on the same scale and attach evidence to every high-impact score. Use “unknown” when a claim has not been verified; do not silently convert missing evidence into a positive score. Calculate a weighted result only after the Must requirements are checked separately. A high total score should never compensate for a failed legal, security, or operational requirement."
+    },
+    {
+      "title": "Run a Fair Pilot",
+      "type": "text",
+      "body": "Select one representative workflow and define a time-boxed pilot with clear success criteria. Use realistic but appropriately protected data, include an everyday user and an administrator, and test the normal path plus likely exceptions. Keep the same tasks and scoring rubric for each vendor. Record setup time, errors, workarounds, help needed, and the quality of the resulting output. Ask users to complete tasks without vendor coaching after the initial orientation. A demo proves that a feature can be shown; a pilot helps establish whether your team can use it reliably under your own constraints."
+    },
+    {
+      "title": "Assess Risk, Security, and Portability",
+      "type": "text",
+      "body": "Review access controls, authentication, audit logs, data location, retention, deletion, incident communication, subcontractors, and any compliance evidence relevant to your organization. Distinguish a vendor's marketing statement from documentation or contract language that supports it. Map the data the product will receive and the systems it can change. Confirm how you would export your records, preserve attachments and relationships, and revoke access if the contract ends. For critical workflows, ask what happens during an outage and how the team can continue operating. Record unresolved risks with an owner, mitigation, and a decision deadline instead of burying them in meeting notes."
+    },
+    {
+      "title": "Calculate Total Cost of Ownership",
+      "type": "text",
+      "body": "Compare cost over a common period, such as the first year and the expected renewal period. Include subscription or usage fees, minimum seats, add-ons, implementation, migration, training, administration, integration maintenance, and exit costs. Confirm whether quoted prices assume annual billing, a minimum contract, or a specific user tier. Estimate benefits from your own baseline and state the assumptions: hours saved, reduced rework, faster cycle time, or avoided duplicate licenses. Show a conservative case as well as the expected case. Do not use a vendor's ROI claim as your forecast without validating the inputs and the workflow that produces the claimed benefit."
+    },
+    {
+      "title": "Make the Decision Auditable",
+      "type": "text",
+      "body": "Summarize the shortlisted options, the criteria and weights, evidence for important scores, unresolved questions, cost assumptions, and the reason the selected option fits the requirements. Document dissent where stakeholders disagree. If a vendor wins because it is cheaper or easier to deploy rather than more capable, say so plainly. Keep the scorecard and supporting notes so the team can revisit the decision after renewal, a change in team size, or a material product change. This record also helps future buyers avoid repeating the same discovery work."
+    },
+    {
+      "title": "After Purchase: Measure Adoption and Reassess",
+      "type": "text",
+      "body": "Define an owner, a first-month review, and a later checkpoint aligned to the contract. Measure whether the target workflow is actually being used, whether the original problem improved, and whether unexpected costs or workarounds appeared. Review permissions as roles change and remove unused integrations. Compare realized results with the baseline instead of treating license activation as success. If the product does not meet the agreed acceptance criteria, identify whether the gap is configuration, training, product capability, or a mistaken requirement—and make a deliberate decision to remediate, renegotiate, or exit."
+    }
+  ]
 }
