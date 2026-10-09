@@ -5,7 +5,7 @@
   "category": "Marketing & SEO",
   "difficulty": "Intermediate",
   "author": "Emily Nakamura",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "salesforce",
     "hubspot",
@@ -56,6 +56,11 @@
     {
       "title": "Selection checklist",
       "body": "Pilot one complete customer journey and test content updates, identity, consent, performance, accessibility, integrations, and reporting. Choose a platform whose complexity matches the business need and the team's operating capacity. Reassess when channels, customer data, or compliance requirements change.",
+      "type": "text"
+    },
+    {
+      "title": "Plan content migration and rollback",
+      "body": "Inventory page types, assets, redirects, metadata, localization, consent behavior, and personalization rules before moving content. Test a representative group of pages in staging, including pages with forms, embedded media, and accessibility requirements. Compare URLs, canonical tags, metadata, analytics events, and user journeys with the existing site. Keep a redirect map and a rollback plan, and do not retire the old publishing workflow until content owners approve the migrated pages and analytics confirms the expected events.",
       "type": "text"
     }
   ]
