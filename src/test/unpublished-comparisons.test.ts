@@ -8,6 +8,13 @@ const unpublishedComparisons = [
   "1password-vs-auth0",
   "1password-vs-crowdstrike",
   "1password-vs-fathom",
+  "affinity-vs-wix",
+  "dialpad-vs-loom",
+  "adp-vs-airtable",
+  "clickup-vs-gusto",
+  "ahrefs-vs-claude",
+  "copy-ai-vs-heap",
+  "cal-com-vs-discord",
 ]
 
 describe("unpublished comparison records", () => {
