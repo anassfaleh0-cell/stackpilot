@@ -30,12 +30,22 @@ const NOINDEX_ENFORCED = new Set(["review", "comparison", "guide", "best", "alte
  * Use this before emitting an internal link so we never send users or crawlers to
  * unpublished or suppressed content.
  */
+// Link generation can ask about the same candidate from many statically generated
+// pages. Cache this build-time decision to avoid repeatedly parsing and sanitizing the
+// same content file for every internal-link candidate.
+const contentAvailabilityCache = new Map<string, boolean>()
+
 export function isContentAvailable(type: string, slug: string): boolean {
   const dir = DIR_FOR_TYPE[type]
   if (!dir || !slug) return false
-  if (getContentTitle(type, slug) === null) return false
-  if (!NOINDEX_ENFORCED.has(type)) return true
-  return !isNoindexed(dir, slug)
+  const key = `${type}:${slug}`
+  const cached = contentAvailabilityCache.get(key)
+  if (cached !== undefined) return cached
+
+  const available = getContentTitle(type, slug) !== null &&
+    (!NOINDEX_ENFORCED.has(type) || !isNoindexed(dir, slug))
+  contentAvailabilityCache.set(key, available)
+  return available
 }
 
 const DATE_FIELDS = new Set(["lastUpdated", "contentPublished", "contentModified", "publishedAt", "updatedAt", "datePublished", "dateModified"])
@@ -390,6 +400,17 @@ export function getAllComparisons(): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
     .map((f) => getComparison(f.replace(/\.json$/, "")))
     .filter((x): x is ComparisonContent => Boolean(x))
+}
+
+/** Load only comparisons assigned to a category before building expensive derived narratives. */
+export function getComparisonsByCategory(category: string): ComparisonContent[] {
+  return readDir(path.join(CONTENT_DIR, "comparisons"))
+    .filter((file) => {
+      const raw = readJson<ComparisonContent>(path.join(CONTENT_DIR, "comparisons", file))
+      return raw.category === category || raw.secondaryCategories?.includes(category)
+    })
+    .map((file) => getComparison(file.replace(/\.json$/, "")))
+    .filter((item): item is ComparisonContent => Boolean(item))
 }
 
 export function getGuide(slug: string): GuideContent | null {

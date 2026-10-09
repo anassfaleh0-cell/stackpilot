@@ -6,7 +6,7 @@ import { InternalLinks } from "@/components/content/internal-links"
 import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, ArticleSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { site, categories } from "@/lib/constants"
-import { getAllReviews, getAllGuides, getAllComparisons, getAllBlogPosts, getAllGlossaryTerms, isContentAvailable } from "@/lib/content/registry"
+import { getAllReviews, getAllGuides, getComparisonsByCategory, getAllBlogPosts, getAllGlossaryTerms, isContentAvailable } from "@/lib/content/registry"
 import { getCategoryKnowledge } from "@/lib/content/category-knowledge"
 import { isInternalLinkAvailable } from "@/lib/content/link-guard"
 import { ReviewFilter } from "@/components/entity/review-filter"
@@ -61,7 +61,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const knowledge = getCategoryKnowledge(slug)
   const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && r.category === category.name)
   const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug) && g.category === category.name)
-  const comparisons = getAllComparisons().filter((c) => isContentAvailable("comparison", c.slug) && (c.category === category.name || c.secondaryCategories?.includes(category.name)))
+  const comparisons = getComparisonsByCategory(category.name).filter((c) => isContentAvailable("comparison", c.slug))
   const posts = getAllBlogPosts().filter((p) => p.category === category.name)
   const glossary = getAllGlossaryTerms().filter((t) => t.category === category.name)
   const bestPick = [...reviews].sort((a, b) => b.rating - a.rating)[0]
@@ -88,7 +88,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
     <>
       <WebPageSchema name={`Best ${category.name} Software 2026`} description={knowledge?.description || `Best ${category.name.toLowerCase()} software tools`} url={`${site.url}/category/${category.slug}`} />
       <CollectionPageSchema name={category.name} description={`Best ${category.name.toLowerCase()} software tools`} url={`${site.url}/category/${category.slug}`} />
-      {reviews.length > 0 && <ItemListSchema items={reviews.map(r => ({ name: r.name, url: `${site.url}/reviews/${r.slug}` }))} url={`${site.url}/category/${category.slug}`} />}
+      {reviews.length > 0 && <ItemListSchema items={reviews.slice(0, 50).map(r => ({ name: r.name, url: `${site.url}/reviews/${r.slug}` }))} url={`${site.url}/category/${category.slug}`} />}
       {knowledge?.faqs && <FAQSchema questions={knowledge.faqs} path={`/category/${slug}`} />}
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: category.name, href: `/category/${slug}` }]} />
       <Container className="pt-8">

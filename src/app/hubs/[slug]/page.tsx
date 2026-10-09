@@ -164,7 +164,7 @@ export default async function HubPage({ params }: { params: Promise<{ slug: stri
                   <div className="p-4">
                     <h3 className="font-semibold mb-3 text-sm">Top Picks</h3>
                     <div className="space-y-2">
-                      {hub.recommendations.sort((a, b) => b.rating - a.rating).slice(0, 4).map((rec) => (
+                      {[...hub.recommendations].sort((a, b) => b.rating - a.rating).slice(0, 4).map((rec) => (
                         <Link key={rec.toolSlug} href={`/reviews/${rec.toolSlug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                           <span>{rec.toolName}</span>
                           <span className="text-xs font-medium">{rec.rating}/5</span>

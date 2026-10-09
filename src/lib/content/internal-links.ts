@@ -70,6 +70,20 @@ const FAMILY_WEIGHT: Record<RelatedType, number> = {
 
 const FAMILY_COUNT = Object.keys(FAMILY_WEIGHT).length
 
+// Related-content is rendered by hundreds of static pages. Re-reading and re-sanitizing
+// every content family for each page can exceed Next.js's 60-second static-generation
+// timeout. Content is immutable during a production build, so cache the source collections
+// for the lifetime of this build worker.
+const relatedSourceCache = new Map<string, unknown[]>()
+
+function getCachedRelatedSource<T>(key: string, load: () => T[]): T[] {
+  const cached = relatedSourceCache.get(key)
+  if (cached) return cached as T[]
+  const source = load()
+  relatedSourceCache.set(key, source)
+  return source
+}
+
 const RELATED_FIELD_TYPE: Record<string, RelatedType> = {
   relatedGuides: "guide",
   relatedComparisons: "comparison",
@@ -165,18 +179,18 @@ export function getRelatedByCategory(
   excludeSlug: string,
   maxPerType = 4,
 ): RelatedResult {
-  const reviewsRaw = getAllReviews()
-  const comparisonsRaw = getAllComparisons()
-  const guidesRaw = getAllGuides()
-  const bestRaw = getAllBest()
-  const alternativesRaw = getAllAlternatives()
-  const useCasesRaw = getAllUseCases()
-  const hubsRaw = getAllHubs()
-  const industriesRaw = getAllIndustries()
-  const researchRaw = getAllResearch()
-  const statisticsRaw = getAllStatistics()
-  const blogRaw = getAllBlogPosts()
-  const glossaryRaw = getAllGlossaryTerms()
+  const reviewsRaw = getCachedRelatedSource("reviews", getAllReviews)
+  const comparisonsRaw = getCachedRelatedSource("comparisons", getAllComparisons)
+  const guidesRaw = getCachedRelatedSource("guides", getAllGuides)
+  const bestRaw = getCachedRelatedSource("best", getAllBest)
+  const alternativesRaw = getCachedRelatedSource("alternatives", getAllAlternatives)
+  const useCasesRaw = getCachedRelatedSource("use-cases", getAllUseCases)
+  const hubsRaw = getCachedRelatedSource("hubs", getAllHubs)
+  const industriesRaw = getCachedRelatedSource("industries", getAllIndustries)
+  const researchRaw = getCachedRelatedSource("research", getAllResearch)
+  const statisticsRaw = getCachedRelatedSource("statistics", getAllStatistics)
+  const blogRaw = getCachedRelatedSource("blog", getAllBlogPosts)
+  const glossaryRaw = getCachedRelatedSource("glossary", getAllGlossaryTerms)
 
   const categoryIndex = buildCategoryIndex(guidesRaw, comparisonsRaw, blogRaw, glossaryRaw)
 
