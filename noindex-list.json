@@ -1,24 +1,14 @@
 {
-  "generatedAt": "2026-10-09T06:49:04.403Z",
+  "generatedAt": "2026-10-09T06:52:57.234Z",
   "summary": {
     "totalFiles": 1940,
-    "totalKeep": 1090,
-    "totalNoindex": 850
+    "totalKeep": 1940,
+    "totalNoindex": 0
   },
   "directories": {
     "reviews": {
       "total": 151,
       "keep": [
-        "clickup",
-        "freshbooks",
-        "linear",
-        "notion",
-        "quickbooks",
-        "webex",
-        "xero",
-        "zoom"
-      ],
-      "noindex": [
         "1password",
         "activecampaign",
         "acuity",
@@ -43,6 +33,7 @@
         "chatgpt",
         "circleci",
         "claude",
+        "clickup",
         "close-crm",
         "cloudflare-pages",
         "confluence",
@@ -64,6 +55,7 @@
         "figma",
         "firebase",
         "framer",
+        "freshbooks",
         "freshdesk",
         "freshsales",
         "fullstory",
@@ -90,6 +82,7 @@
         "kubernetes",
         "lastpass",
         "lever",
+        "linear",
         "logrocket",
         "loom",
         "mailchimp",
@@ -104,6 +97,7 @@
         "n8n",
         "netlify",
         "new-relic",
+        "notion",
         "obsidian",
         "okta",
         "optimizely",
@@ -116,6 +110,7 @@
         "podman",
         "postman",
         "power-bi",
+        "quickbooks",
         "ringcentral",
         "rippling",
         "roam-research",
@@ -148,6 +143,7 @@
         "vimeo-record",
         "vonage",
         "wave",
+        "webex",
         "webflow",
         "wix",
         "woocommerce",
@@ -155,14 +151,17 @@
         "workday",
         "wrike",
         "writesonic",
+        "xero",
         "zapier",
         "zendesk",
         "zeplin",
         "zoho",
         "zoho-books",
         "zoho-crm",
-        "zoho-people"
-      ]
+        "zoho-people",
+        "zoom"
+      ],
+      "noindex": []
     },
     "comparisons": {
       "total": 928,
@@ -1101,32 +1100,6 @@
     "guides": {
       "total": 100,
       "keep": [
-        "api-development-tools-guide",
-        "application-monitoring-guide",
-        "business-intelligence-platform-guide",
-        "cloud-migration-planning",
-        "crm-migration-checklist",
-        "crm-selection-guide",
-        "data-governance-guide",
-        "devsecops-implementation",
-        "endpoint-security-solutions-guide",
-        "error-tracking-best-practices",
-        "identity-management-platform-guide",
-        "marketing-attribution-guide",
-        "marketing-automation-buyers-guide",
-        "password-management-enterprise-guide",
-        "privacy-analytics-guide",
-        "product-analytics-implementation",
-        "project-management-software-buyers-guide",
-        "remote-work-software-stack",
-        "saas-procurement-guide",
-        "software-cost-analysis",
-        "software-evaluation-framework",
-        "team-collaboration-tools-guide",
-        "total-cost-ownership-saas",
-        "vendor-risk-assessment"
-      ],
-      "noindex": [
         "accessibility-testing-tools",
         "accounting-software-pricing",
         "agile-transformation-guide",
@@ -1134,31 +1107,41 @@
         "ai-risk-management",
         "ai-tool-pricing-guide",
         "analytics-pricing-guide",
+        "api-development-tools-guide",
         "api-security-best-practices",
+        "application-monitoring-guide",
         "building-your-seo-toolkit",
+        "business-intelligence-platform-guide",
         "business-phone-system-buyers-guide",
         "ci-cd-pipeline-setup",
         "cloud-accounting-software-guide",
         "cloud-communications-platform-guide",
+        "cloud-migration-planning",
         "compliance-automation-software",
         "content-strategy-tools",
         "contract-management-software",
         "conversational-marketing-guide",
+        "crm-migration-checklist",
         "crm-pricing-guide",
+        "crm-selection-guide",
         "cross-functional-collaboration",
         "customer-data-platform-guide",
         "customer-success-platforms",
         "data-engineering-pipeline-guide",
+        "data-governance-guide",
         "data-privacy-compliance",
         "design-software-buyers-guide",
         "design-system-implementation",
         "developer-tools-stack-guide",
         "devops-toolchain-guide",
+        "devsecops-implementation",
         "digital-experience-platforms",
         "digital-workplace-transformation",
         "email-marketing-pricing-guide",
         "employee-engagement-platforms",
         "employee-onboarding-software-guide",
+        "endpoint-security-solutions-guide",
+        "error-tracking-best-practices",
         "expense-management-best-practices",
         "feature-management-platforms",
         "finance-software-buyers-guide",
@@ -1178,32 +1161,47 @@
         "hr-analytics-and-reporting",
         "hr-software-buyers-guide",
         "hr-software-pricing-guide",
+        "identity-management-platform-guide",
         "incident-management-tools",
         "infrastructure-as-code-guide",
         "knowledge-base-software",
         "knowledge-management-tools-guide",
         "lead-generation-tools",
         "learning-management-systems",
+        "marketing-attribution-guide",
+        "marketing-automation-buyers-guide",
         "multi-cloud-strategy",
         "no-code-website-builder-guide",
+        "password-management-enterprise-guide",
+        "privacy-analytics-guide",
+        "product-analytics-implementation",
         "project-management-pricing-guide",
+        "project-management-software-buyers-guide",
         "recruiting-software-selection",
         "remote-team-collaboration-guide",
+        "remote-work-software-stack",
         "revenue-operations-platforms",
         "saas-implementation-best-practices",
         "saas-metrics-and-kpis",
+        "saas-procurement-guide",
         "sales-enablement-platforms",
         "sales-engagement-platform-guide",
         "security-software-buyers-guide",
         "social-media-management-guide",
+        "software-cost-analysis",
         "software-evaluation-checklist",
+        "software-evaluation-framework",
         "survey-tool-comparison",
         "sustainability-reporting-software",
         "task-management-systems-comparison",
+        "team-collaboration-tools-guide",
+        "total-cost-ownership-saas",
         "ux-research-tools-guide",
+        "vendor-risk-assessment",
         "web-design-platform-selection",
         "workflow-automation-guide"
-      ]
+      ],
+      "noindex": []
     },
     "glossary": {
       "total": 122,
@@ -1336,11 +1334,6 @@
     "alternatives": {
       "total": 101,
       "keep": [
-        "clickup-alternatives",
-        "linear-alternatives",
-        "notion-alternatives"
-      ],
-      "noindex": [
         "1password-alternatives",
         "adp-alternatives",
         "affinity-alternatives",
@@ -1356,6 +1349,7 @@
         "canva-alternatives",
         "chatgpt-alternatives",
         "circleci-alternatives",
+        "clickup-alternatives",
         "close-crm-alternatives",
         "copper-crm-alternatives",
         "copy-ai-alternatives",
@@ -1386,6 +1380,7 @@
         "jfrog-alternatives",
         "jira-alternatives",
         "lever-alternatives",
+        "linear-alternatives",
         "mailchimp-alternatives",
         "marketo-alternatives",
         "microsoft-teams-alternatives",
@@ -1394,6 +1389,7 @@
         "monday-com-alternatives",
         "netlify-alternatives",
         "new-relic-alternatives",
+        "notion-alternatives",
         "obsidian-alternatives",
         "okta-alternatives",
         "optimizely-alternatives",
@@ -1439,15 +1435,14 @@
         "zoho-crm-alternatives",
         "zoho-people-alternatives",
         "zoom-alternatives"
-      ]
+      ],
+      "noindex": []
     },
     "best": {
       "total": 196,
       "keep": [
         "best-accounting-software",
-        "best-agile-project-management"
-      ],
-      "noindex": [
+        "best-agile-project-management",
         "best-ai-coding-tools",
         "best-ai-image-generators",
         "best-ai-machine-learning-agencies",
@@ -1642,12 +1637,12 @@
         "best-web-design-startups",
         "best-web-design-tools",
         "best-web-design-tools-2026"
-      ]
+      ],
+      "noindex": []
     },
     "use-cases": {
       "total": 49,
-      "keep": [],
-      "noindex": [
+      "keep": [
         "best-accounting-for-enterprise",
         "best-accounting-for-small-business",
         "best-accounting-for-startups",
@@ -1697,12 +1692,12 @@
         "best-seo-for-startups",
         "best-video-for-sales",
         "best-web-design-for-small-business"
-      ]
+      ],
+      "noindex": []
     },
     "industries": {
       "total": 50,
-      "keep": [],
-      "noindex": [
+      "keep": [
         "aerospace",
         "automotive",
         "biotechnology",
@@ -1753,12 +1748,12 @@
         "transportation",
         "travel",
         "veterinary"
-      ]
+      ],
+      "noindex": []
     },
     "research": {
       "total": 32,
-      "keep": [],
-      "noindex": [
+      "keep": [
         "ai-adoption-report-2026",
         "ai-productivity-report-2026",
         "analytics-platform-comparison-2026",
@@ -1791,12 +1786,12 @@
         "security-compliance-costs-2026",
         "software-market-share-2026",
         "video-conferencing-market-2026"
-      ]
+      ],
+      "noindex": []
     },
     "statistics": {
       "total": 104,
-      "keep": [],
-      "noindex": [
+      "keep": [
         "advertising-software",
         "aerospace-software",
         "agriculture-software",
@@ -1901,12 +1896,12 @@
         "video-software",
         "web-software",
         "wellness-software"
-      ]
+      ],
+      "noindex": []
     },
     "hubs": {
       "total": 10,
-      "keep": [],
-      "noindex": [
+      "keep": [
         "software-for-agencies",
         "software-for-ecommerce",
         "software-for-education",
@@ -1917,16 +1912,15 @@
         "software-for-nonprofits",
         "software-for-small-business",
         "software-for-startups"
-      ]
+      ],
+      "noindex": []
     },
     "blog": {
       "total": 97,
       "keep": [
         "accounting-software-cost-2026",
         "accounts-payable-automation",
-        "agile-vs-waterfall-software"
-      ],
-      "noindex": [
+        "agile-vs-waterfall-software",
         "ai-implementation-roi-guide",
         "ai-pricing-models-explained",
         "ai-software-cost-comparison-2026",
@@ -2021,7 +2015,8 @@
         "testing-tools-frameworks",
         "time-tracking-tools",
         "ui-ux-software-pricing"
-      ]
+      ],
+      "noindex": []
     }
   },
   "allFiles": []
