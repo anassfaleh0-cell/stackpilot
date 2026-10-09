@@ -270,38 +270,90 @@ function genReview(tool, idx) {
   }
 }
 
-function genAlt(slug, name, cat, allTools) {
+function genAlt(slug, name, cat, allTools, existingComparisons = new Set(), existingGuides = new Set()) {
+  const profiles = {
+    "asana": "cross-functional project plans, ownership, dependencies, and progress visibility",
+    "linear": "product and engineering issue tracking, cycles, and roadmap coordination",
+    "jira": "configurable issue workflows, engineering delivery, and permission control",
+    "monday-com": "custom boards, status tracking, dashboards, and workflow automation",
+    "clickup": "a broad workspace combining tasks with documents, goals, and multiple views",
+    "trello": "visual Kanban boards and straightforward stage-based work",
+    "airtable": "structured records, linked data, custom fields, and spreadsheet-like workflows",
+    "wrike": "multi-project delivery, approvals, workload visibility, and reporting",
+    "basecamp": "project communication and simpler team coordination",
+    "smartsheet": "grid-based planning, structured tracking, and portfolio reporting",
+    "notion": "connected documentation, lightweight project tracking, and knowledge sharing",
+    "microsoft-teams": "communication workflows tied to an organization's existing collaboration stack",
+  }
+  const categoryChecks = {
+    "AI & Machine Learning": ["output quality on representative tasks", "data handling and retention", "human review and model controls", "usage limits and cost at expected volume"],
+    "Project Management": ["dependencies and recurring work", "cross-project reporting and workload visibility", "guest access and permissions", "automation limits and migration fidelity"],
+    "CRM & Sales": ["contact and account data quality", "pipeline definitions and forecasting", "permissions and reporting", "synchronization with marketing and support"],
+    "Marketing & SEO": ["measurement goals and conversion quality", "coverage for target markets and channels", "reporting exports and integrations", "limits at expected campaign volume"],
+    "Design & Creative": ["handoff and asset ownership", "collaboration and review", "accessibility and version history", "export formats and engineering workflow"],
+    "Developer Tools": ["repository and CI integration", "access control and API limits", "test reliability and observability", "rollback and operational ownership"],
+    "Analytics & Data": ["metric definitions and data freshness", "lineage and access controls", "exportability and governance", "storage and query costs"],
+    "Finance & Accounting": ["approval controls and audit trails", "reconciliation and system integration", "regional requirements", "export and retention"],
+    "Productivity": ["search and retrieval", "collaboration and permissions", "data portability", "whether it reduces process overhead"],
+    "Security & Compliance": ["threat coverage and access controls", "audit logs and incident response", "deployment requirements", "evidence for compliance claims"],
+    "Communication": ["call and message quality", "admin and guest controls", "retention and integrations", "accessibility and device support"],
+  }
+  const checks = categoryChecks[cat] || ["workflow fit", "integration and permission requirements", "data export", "support boundaries and total cost"]
+  const criteria = checks.map((check) => check.charAt(0).toUpperCase() + check.slice(1))
   const others = allTools.filter(t => t[2] === cat && t[0] !== slug).slice(0, 10)
+  const guideByCategory = {
+    "Project Management": "project-management-software-buyers-guide",
+    "Marketing & SEO": "software-evaluation-framework",
+    "Developer Tools": "software-evaluation-framework",
+    "AI & Machine Learning": "software-evaluation-framework",
+    "Productivity": "software-evaluation-framework",
+    "CRM & Sales": "software-evaluation-framework",
+  }
+  const relatedGuides = [guideByCategory[cat], "software-evaluation-framework"]
+    .filter((g, i, a) => g && a.indexOf(g) === i && existingGuides.has(g))
+  const relatedComparisons = others
+    .map(([otherSlug]) => [slug, otherSlug].sort().join("-vs-"))
+    .filter((comparisonSlug) => existingComparisons.has(comparisonSlug))
+    .slice(0, 4)
+  const relatedPosts = cat === "Project Management" && existingGuides.has("migrating-project-management-tools")
+    ? ["migrating-project-management-tools"] : []
   return {
     slug: `${slug}-alternatives`,
-    title: `Best ${name} Alternatives & Competitors 2026`,
-    description: `Comprehensive comparison of the best ${name} alternatives and competitors for ${cat}.`,
+    title: `${name} Alternatives: How to Choose a Better-Fit ${cat} Tool`,
+    description: `Compare alternatives to ${name} by workflow fit, administration, integrations, data portability, and total cost. Validate each shortlist candidate against the same real task before switching.`,
     category: cat,
     toolSlug: slug,
     toolName: name,
-    alternatives: others.map(([os, on]) => ({
-      slug: os, name: on, rating: 4.0 + (hash(os) % 10) / 10,
-      description: `${on} is a leading ${cat.toLowerCase()} platform offering competitive features.`,
+    alternatives: others.map(([os, on, , score]) => ({
+      slug: os,
+      name: on,
+      rating: Number.isFinite(score) ? score : 0,
+      description: `${on} is a candidate to evaluate for ${profiles[os] || `${cat.toLowerCase()} workflows`}. Test the required tasks, limits, integrations, and reporting in your own environment instead of assuming the feature set will match your needs.`,
     })),
     faqs: [
-      { question: `What is the best alternative to ${name}?`, answer: `The best alternative depends on your specific needs. Consider factors like feature set, pricing, integration compatibility, and team size when evaluating options.` },
-      { question: `How much do ${cat.toLowerCase()} alternatives cost?`, answer: `Pricing varies widely from free tiers to enterprise plans ranging from $10-200 per user per month. Most platforms offer tiered pricing based on features and user count.` },
-      { question: `Can I migrate from ${name} to another tool?`, answer: `Yes, most platforms in this space offer data import tools and migration assistance. The complexity depends on data volume and the specific platforms involved.` },
-      { question: `Which ${cat.toLowerCase()} alternative is best for enterprise teams?`, answer: `Enterprise teams should prioritize alternatives with SSO, audit logs, RBAC, dedicated support, and compliance certifications like SOC 2.` },
-      { question: `Is there a free alternative to ${name}?`, answer: `Several platforms in the ${cat.toLowerCase()} space offer free tiers with limited features, suitable for small teams or individual users evaluating options.` },
+      { question: `How should I choose an alternative to ${name}?`, answer: `Start with the specific workflow or limitation that prompted the search. Compare candidates against the same required tasks, permissions, reports, integrations, export needs, and expected user count. Record unknowns rather than treating vendor claims as verified results.` },
+      { question: `How much do ${cat.toLowerCase()} alternatives cost?`, answer: `Costs depend on user count, plan tier, usage limits, add-ons, implementation, and support. Verify current pricing and plan restrictions with each vendor, then compare the annual cost for your actual workflow rather than relying on entry prices.` },
+      { question: `Can I migrate from ${name} to another tool?`, answer: `Migration feasibility depends on the data types and the destination's import support. Test a sample containing active work, owners, dates, comments, attachments, custom fields, and relationships before committing to a full move.` },
+      { question: `What should a team test before switching?`, answer: `Run a time-boxed pilot with a realistic project, everyday users, and one administrator. Measure setup and reporting effort, test a failure or reassignment case, and confirm that the required data can be exported and recovered.` },
+      { question: `How do I compare enterprise requirements?`, answer: `Confirm the exact plan and evidence for single sign-on, role-based permissions, audit logs, data retention, support commitments, and any compliance requirements. Do not assume these controls are included in every plan.` },
+      { question: `Should I replace ${name} all at once?`, answer: `Pilot one team or workflow first. Keep an export of the source data, define acceptance criteria and an owner, and expand only after the pilot meets the criteria and a rollback path is documented.` },
     ],
     sections: [
-      { title: "Overview", body: `${name} is a leading ${cat.toLowerCase()} platform with a strong market presence. Here are the top alternatives worth considering.`, type: "text" },
-      { title: "Selection Criteria", body: "When evaluating alternatives, consider these key factors to find the right fit for your organization.", type: "list", items: ["Feature completeness and roadmap alignment", "Pricing and total cost of ownership", "Integration compatibility with existing stack", "Migration complexity and data portability", "Support quality and community strength"] },
+      { title: "Start With the Switching Trigger", body: `A useful alternative search begins with the problem, not a popularity list. Identify what ${name} is failing to support: a missing workflow, reporting gaps, too much administration, integration friction, collaboration needs, or a change in budget. Ask the people who do the work where they lose time and record the workaround they use today. This keeps the shortlist focused on a measurable improvement rather than a larger feature checklist.`, type: "text" },
+      { title: "Understand the Main Trade-Offs", body: `Alternatives can differ substantially in their working model. Some focus on ${profiles[others[0]?.[0]] || `specific ${cat.toLowerCase()} tasks`}; others may prioritize configurability, reporting, communication, or structured data. More flexibility can mean more setup and governance. A simpler tool can reduce training but may require separate systems for advanced reporting or dependencies. Treat each product's positioning as a hypothesis to test with your own requirements.`, type: "text" },
+      { title: "Use Category-Specific Evaluation Criteria", body: `For ${cat.toLowerCase()} tools, test these areas: ${checks.join("; ")}. Rank each requirement as mandatory, important, or optional. For each candidate, record the evidence source, test result, limitation, and workaround. Keep unavailable or unverified features marked as unknown instead of awarding a score based on an assumption.`, type: "list", items: criteria },
+      { title: "Run a Representative Pilot", body: `Use the same realistic task or project in every shortlisted product. Include the normal path and one exception, such as reassignment, a changed deadline, a failed integration, or a permission boundary. Have everyday users and an administrator complete the workflow. Record setup time, completion effort, reporting quality, errors, manual workarounds, and how easily a new team member could understand the result.`, type: "text" },
+      { title: "Check Migration and Exit Options", body: `Before committing, inventory the data that must move: records, owners, dates, comments, attachments, relationships, custom fields, and archived history. Test a small export/import and compare the result with the source. Confirm whether exports are available without an expensive plan and whether you can remove data or revoke access at the end of a contract. Keep the original system available until owners sign off on the migrated workflow.`, type: "text" },
+      { title: "Compare Total Cost, Not Just Subscription Price", body: `Build a 12-month cost estimate using the plan that includes your required features. Include seats, guests, usage or storage limits, automation, reporting, implementation, migration, training, support, and the time spent maintaining integrations. Verify current terms with vendors because prices and limits change. If a tool saves subscription cost but adds recurring manual work, include that operational cost in the comparison.`, type: "text" },
+      { title: "Decision and Rollout Checklist", body: `Choose the candidate that meets mandatory requirements with the least operational friction. Document why it fits, which trade-offs remain, who owns the rollout, and how success will be measured after the first operating cycle. Do not migrate the whole organization until the pilot passes and the team knows how to export or recover its important data.`, type: "checklist", items: ["The reason for switching is written as a measurable problem.", "Every candidate was tested against the same required workflow.", "Current plan limits and total cost were verified with vendors.", "Sample export/import and access controls were checked.", "A rollout owner, acceptance criteria, and rollback plan are documented."] },
     ],
-    selectionCriteria: ["Feature set", "Pricing", "Integrations", "Support", "Scalability"],
-    relatedComparisons: [],
-    relatedGuides: [],
-    relatedPosts: [],
+    selectionCriteria: criteria,
+    relatedComparisons,
+    relatedGuides,
+    relatedPosts,
     lastUpdated: now,
   }
 }
-
 function genBest(slug, name, catSlug, cat, tools) {
   const catTools = tools.filter(t => t[2] === cat).sort((a, b) => b[3] - a[3]).slice(0, 8)
   const picks = catTools.map(([ts, tn, , ra], idx) => ({
@@ -459,7 +511,7 @@ for (const tool of tools) {
 for (const tool of tools) {
   const [slug, name, cat] = tool
   if (existingAlts.has(`${slug}-alternatives`)) continue
-  const alt = genAlt(slug, name, cat, tools)
+  const alt = genAlt(slug, name, cat, tools, existingComparisons, existingGuides)
   fs.writeFileSync(path.join(contentDir, "alternatives", `${slug}-alternatives.json`), JSON.stringify(alt, null, 2))
   newAlts++
 }
