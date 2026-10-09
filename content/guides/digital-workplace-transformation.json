@@ -5,7 +5,7 @@
   "category": "Productivity",
   "difficulty": "Advanced",
   "author": "Sarah Chen",
-  "readingTime": 2,
+  "readingTime": 3,
   "relatedTools": [
     "microsoft-teams",
     "slack",
@@ -56,6 +56,11 @@
     {
       "title": "Rollout checklist",
       "body": "Pilot one employee journey with real users and verify navigation, search, access, integrations, accessibility, and ownership. Communicate what changes and where support is available. Expand when the pilot improves a defined task without creating more confusion. Revisit the information architecture and tool inventory as the organization evolves.",
+      "type": "text"
+    },
+    {
+      "title": "Pilot around employee tasks",
+      "body": "Select a few common employee tasks, such as finding a policy, requesting access, locating a project decision, and onboarding a new colleague. Measure how long they take and whether users reach the authoritative source without asking a coworker to resend a link. Test with new hires, remote staff, and people using assistive technology. Use failures to improve navigation, permissions, and ownership before introducing more portals or dashboards.",
       "type": "text"
     }
   ]
