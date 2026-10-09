@@ -57,6 +57,16 @@
       "title": "Selection checklist",
       "body": "Choose a provider only after the pilot demonstrates reliable call quality, correct routing, workable administration, required integrations, and acceptable total cost. Document emergency procedures, number ownership, support contacts, and exit options. Reassess when the organization adds regions, call-center workflows, or new recording requirements.",
       "type": "text"
+    },
+    {
+      "title": "Prepare a number-porting checklist",
+      "body": "Collect the exact service address, account details, current carrier requirements, authorized signatory, number inventory, and any service PIN or letter of authorization required by the providers. Confirm the scheduled port date and the window in which calls could be affected. Do not cancel the existing service before the port is confirmed complete. After the change, test inbound and outbound calls from external networks, caller ID, voicemail, emergency procedures, and all routing branches that customers use.",
+      "type": "text"
+    },
+    {
+      "title": "Set measurable acceptance criteria",
+      "body": "Agree on what success means before the pilot: critical call routes work, users can transfer and retrieve voicemail, call quality meets the team's needs, the CRM integration records the right fields, and administrators can change routing safely. Track call failures, support requests, missed calls, and user adoption during the pilot. Keep the previous system or an agreed fallback available until these checks pass. Use the results to decide whether additional training or a different plan is needed.",
+      "type": "text"
     }
   ]
 }
