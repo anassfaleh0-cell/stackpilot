@@ -36,12 +36,12 @@ export function EditorialComparison({ tool1, tool2, features, winner, category, 
         }}>
           <div className="font-semibold text-sm" style={{ color: p.primary }}>{tool1}</div>
           <div className="text-2xl font-bold mt-1" style={{ color: p.primary }}>{total > 0 ? t1w : "—"}</div>
-          <div className="text-xs text-muted">wins</div>
+          <div className="text-xs text-muted">exclusive checks</div>
         </div>
         <div className="rounded-xl p-3" style={{ border: `1px solid ${p.glassBorder}` }}>
           <div className="font-semibold text-muted">Tie</div>
           <div className="text-2xl font-bold mt-1 text-accent">{total > 0 ? tie : "—"}</div>
-          <div className="text-xs text-muted">both</div>
+          <div className="text-xs text-muted">both recorded</div>
         </div>
         <div className="rounded-xl p-3" style={{
           border: `1px solid ${winner === tool2 ? p.primary : p.glassBorder}`,
@@ -49,7 +49,7 @@ export function EditorialComparison({ tool1, tool2, features, winner, category, 
         }}>
           <div className="font-semibold" style={{ color: p.primary }}>{tool2}</div>
           <div className="text-2xl font-bold mt-1" style={{ color: p.primary }}>{total > 0 ? t2w : "—"}</div>
-          <div className="text-xs text-muted">wins</div>
+          <div className="text-xs text-muted">exclusive checks</div>
         </div>
       </div>
       {total > 0 ? (
