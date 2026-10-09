@@ -1,11 +1,11 @@
 import type { FAQItem } from "@/types/content"
 
 const BROKEN_CONTENT_PATTERNS = [
-  /\bcombines\s*\.\s*$/i,
-  /\bintermittent connect\.?\s*$/i,
-  /\bdependency mapp\.?\s*$/i,
+  /\bcombines\s*\./i,
+  /\bintermittent connect\b/i,
+  /\bdependency mapp\b/i,
   /\bfeature superiority rather than absolute feature superiority\b/i,
-  /\bwith minimal training overhead\.?\s*$/i,
+  /\bwith minimal training overhead\.?/i,
 ]
 
 const GENERIC_ANSWER_PATTERNS = [
@@ -28,7 +28,7 @@ function isLowValueAnswer(answer: string): boolean {
   if (trimmed.length < 60) return true
   if (BROKEN_CONTENT_PATTERNS.some((pattern) => pattern.test(trimmed))) return true
   if (GENERIC_ANSWER_PATTERNS.some((pattern) => pattern.test(trimmed))) return true
-  if (/\b(?:combines|connect|mapp|functionality)\s*\.\s*$/i.test(trimmed)) return true
+  if (/\b(?:combines|connect|mapp|functionality)\s*\./i.test(trimmed)) return true
   return false
 }
 
