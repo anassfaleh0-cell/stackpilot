@@ -133,7 +133,7 @@ describe("Phase 5O-B-1: internal link discovery", () => {
   })
 
   it("keeps real records available while rejecting missing routes", { timeout: 60000 }, () => {
-    expect(isContentAvailable("comparison", "1password-vs-appwrite")).toBe(true)
+    expect(isContentAvailable("comparison", "firebase-vs-appwrite")).toBe(true)
     expect(isContentAvailable("best", "best-ai-coding-tools")).toBe(true)
     expect(isContentAvailable("alternative", "1password-alternatives")).toBe(true)
     expect(isContentAvailable("comparison", "definitely-not-a-real-comparison")).toBe(false)
