@@ -102,7 +102,7 @@ categories.forEach(cat => {
     if (existingBest.has(slug)) { count++; return }
 
     const title = `Best ${cat} Software for ${aud}`
-    const desc = `A shortlist of ${qual} tools for ${aud.toLowerCase()}, using the product-profile data currently recorded by PilotStack. Check current vendor documentation, plan limits, and pricing before choosing; this page is not a claim of hands-on testing.`
+    const desc = `A shortlist of ${qual} tools for ${aud.toLowerCase()}, using the product-profile data currently recorded by PilotStack. Check current vendor documentation, plan limits, and pricing before choosing; this page is not a claim of structured product review.`
     const h = hash(slug)
     const strengths = useCaseStrength[aud] || ["core functionality", "value", "usability"]
     const pickCount = Math.min(6, cTools.length)
