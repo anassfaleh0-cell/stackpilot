@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getBest, getBlogPost, getGuide } from "@/lib/content/registry"
+import { getBest, getBlogPost, getGuide, getReview } from "@/lib/content/registry"
 
 describe("content quality repairs", () => {
   it("replaces repetitive generated guide filler with practical buyer guidance", () => {
@@ -48,6 +48,13 @@ describe("content quality repairs", () => {
     expect(post?.body).toContain("Set a baseline before estimating returns")
     expect(post?.body).toContain("Treat payback as a hypothesis to test")
     expect(post?.body).not.toContain("This topic is most useful when it is connected to a real decision")
+  })
+
+  it("does not publish unsupported evaluation claims in review or best-list descriptions", () => {
+    const best = getBest("best-marketing-software")
+    const review = getReview("asana")
+    expect(best?.description).not.toMatch(/we evaluated|hands-on testing|thousands of user reviews/i)
+    expect(review?.description).not.toMatch(/we evaluated|hands-on testing|thousands of user reviews/i)
   })
 
 })
