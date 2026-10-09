@@ -57,6 +57,16 @@
       "title": "Go-live checklist",
       "body": "Pilot one accounting period or a representative subset of transactions. Verify reconciliation, permissions, reports, tax settings, backups, and recovery. Agree on a cutover date, who signs off, and how the team will handle discrepancies. Do not close the old system until opening balances and key reports have been reconciled and the archive is accessible.",
       "type": "text"
+    },
+    {
+      "title": "Prepare a vendor evaluation",
+      "body": "Ask vendors to demonstrate your own representative workflows rather than a polished generic demo. Provide a checklist for entering a bill, reconciling a bank transaction, correcting an invoice, closing a period, and exporting records. Record how many steps each task takes, what permissions are needed, and whether the audit history is understandable. Include the accountant and the person who will maintain the chart of accounts in the evaluation, since a tool that looks simple to a business owner may create extra work during month-end close.",
+      "type": "text"
+    },
+    {
+      "title": "Acceptance criteria for go-live",
+      "body": "Set objective conditions before migration begins: opening balances reconcile, a sample of invoices and bills matches the source, required reports can be produced, user permissions are approved, and backups or exports have been tested. Assign one owner to sign off on each item. Keep a record of known differences and how they will be handled. Schedule the first close with enough support available, and do not decommission the old system until retention obligations are understood and the new workflow has been accepted.",
+      "type": "text"
     }
   ]
 }
