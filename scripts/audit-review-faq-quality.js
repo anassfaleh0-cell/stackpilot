@@ -17,6 +17,21 @@ const genericPatterns = [
   /^teams should assess their needs against free tier limitations before upgrading\.?$/i,
 ]
 const normalize = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim()
+function getFaqItems(data) {
+  if (Array.isArray(data.faqs) && data.faqs.length > 0) return data.faqs
+  const section = Array.isArray(data.sections)
+    ? data.sections.find((item) => item?.type === "list" && /frequently asked/i.test(item.title || "") && Array.isArray(item.items))
+    : null
+  if (!section) return []
+  return section.items.flatMap((raw) => {
+    if (typeof raw !== "string") return []
+    const text = raw.trim().replace(/^\\*\\*/, "")
+    const bold = text.match(/^\\*\\*(.+?)\\*\\*\\s*([\\s\\S]+)$/)
+    if (bold) return [{ question: bold[1].trim(), answer: bold[2].trim() }]
+    const end = text.indexOf("? ")
+    return end > 0 ? [{ question: text.slice(0, end + 1).trim(), answer: text.slice(end + 2).trim() }] : []
+  })
+}
 const files = contentDirs.flatMap((dir) => {
   const folder = path.join(contentRoot, dir)
   return fs.existsSync(folder)
@@ -37,7 +52,7 @@ for (const { dir, name: file } of files) {
   }
   const questions = new Set()
   const answers = new Set()
-  for (const faq of Array.isArray(data.faqs) ? data.faqs : []) {
+  for (const faq of getFaqItems(data)) {
     if (!faq || typeof faq.question !== "string" || typeof faq.answer !== "string") {
       findings.brokenAnswers.push({ file: relativePath, question: String(faq?.question || ""), issue: "missing question or answer" })
       continue
