@@ -7,6 +7,7 @@ import {
 } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
 import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
+import { getSitemapLastModified } from "@/lib/content/sitemap-date"
 
 function isQuality(slug: string, dir: string): boolean {
   return !isNoindexed(dir, slug)
@@ -85,91 +86,90 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Reviews: use contentModified as lastModified
     ...reviews.map((r) => ({
       url: `${siteConfig.url}/reviews/${r.slug}`,
-      lastModified: new Date(r.contentModified),
+      lastModified: getSitemapLastModified(r.contentModified),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     })),
     // Comparisons: use lastUpdated as lastModified
     ...comparisons.map((c) => ({
       url: `${siteConfig.url}/comparisons/${c.slug}`,
-      lastModified: new Date(c.lastUpdated),
+      lastModified: getSitemapLastModified(c.lastUpdated),
       changeFrequency: "weekly" as const,
       priority: 0.7,
     })),
     // Guides: use lastUpdated as lastModified
     ...guides.map((g) => ({
       url: `${siteConfig.url}/guides/${g.slug}`,
-      lastModified: new Date(g.lastUpdated),
+      lastModified: getSitemapLastModified(g.lastUpdated),
       changeFrequency: "weekly" as const,
       priority: 0.7,
     })),
     // Blog: use publishedAt as lastModified
     ...blogPosts.map((p) => ({
       url: `${siteConfig.url}/blog/${p.slug}`,
-      lastModified: new Date(p.publishedAt),
+      lastModified: getSitemapLastModified(p.publishedAt),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
     // Glossary: use lastUpdated if available, otherwise a fixed date
     ...glossary.map((t) => ({
       url: `${siteConfig.url}/glossary/${t.slug}`,
-      lastModified: new Date("lastUpdated" in t ? (t as { lastUpdated?: string }).lastUpdated || POLICY_DATE : POLICY_DATE),
+      lastModified: getSitemapLastModified("lastUpdated" in t ? (t as { lastUpdated?: string }).lastUpdated : undefined),
       changeFrequency: "monthly" as const,
       priority: 0.5,
     })),
     // Alternatives: use lastUpdated if available
     ...alternatives.map((a) => ({
       url: `${siteConfig.url}/alternatives/${a.slug}`,
-      lastModified: new Date("lastUpdated" in a ? (a as { lastUpdated?: string }).lastUpdated || LISTING_DATE : LISTING_DATE),
+      lastModified: getSitemapLastModified("lastUpdated" in a ? (a as { lastUpdated?: string }).lastUpdated : undefined),
       changeFrequency: "weekly" as const,
       priority: 0.7,
     })),
     // Use cases: use lastUpdated if available
     ...useCases.map((u) => ({
       url: `${siteConfig.url}/use-cases/${u.slug}`,
-      lastModified: new Date("lastUpdated" in u ? (u as { lastUpdated?: string }).lastUpdated || LISTING_DATE : LISTING_DATE),
+      lastModified: getSitemapLastModified("lastUpdated" in u ? (u as { lastUpdated?: string }).lastUpdated : undefined),
       changeFrequency: "weekly" as const,
       priority: 0.7,
     })),
     // Industries: use lastUpdated if available
     ...industries.map((i) => ({
       url: `${siteConfig.url}/industries/${i.slug}`,
-      lastModified: new Date("lastUpdated" in i ? (i as { lastUpdated?: string }).lastUpdated || LISTING_DATE : LISTING_DATE),
+      lastModified: getSitemapLastModified("lastUpdated" in i ? (i as { lastUpdated?: string }).lastUpdated : undefined),
       changeFrequency: "weekly" as const,
       priority: 0.7,
     })),
     // Best lists: use lastUpdated if available
     ...best.map((b) => ({
       url: `${siteConfig.url}/best/${b.slug}`,
-      lastModified: new Date("lastUpdated" in b ? (b as { lastUpdated?: string }).lastUpdated || LISTING_DATE : LISTING_DATE),
+      lastModified: getSitemapLastModified("lastUpdated" in b ? (b as { lastUpdated?: string }).lastUpdated : undefined),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     })),
     // Hubs: use lastUpdated if available
     ...hubs.map((h) => ({
       url: `${siteConfig.url}/hubs/${h.slug}`,
-      lastModified: new Date("lastUpdated" in h ? (h as { lastUpdated?: string }).lastUpdated || LISTING_DATE : LISTING_DATE),
+      lastModified: getSitemapLastModified("lastUpdated" in h ? (h as { lastUpdated?: string }).lastUpdated : undefined),
       changeFrequency: "weekly" as const,
       priority: 0.7,
     })),
     // Research: use publishedAt or updatedAt
     ...research.map((r) => ({
       url: `${siteConfig.url}/research/${r.slug}`,
-      lastModified: new Date(r.publishedAt || r.updatedAt || LISTING_DATE),
+      lastModified: getSitemapLastModified(r.publishedAt || r.updatedAt),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
     // Statistics: use lastUpdated if available
     ...statistics.map((s) => ({
       url: `${siteConfig.url}/statistics/${s.slug}`,
-      lastModified: new Date("lastUpdated" in s ? (s as { lastUpdated?: string }).lastUpdated || LISTING_DATE : LISTING_DATE),
+      lastModified: getSitemapLastModified("lastUpdated" in s ? (s as { lastUpdated?: string }).lastUpdated : undefined),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
     // Tool pages
     ...toolPages.map((t) => ({
       url: `${siteConfig.url}/tools/${t.slug}`,
-      lastModified: LISTING_DATE,
       changeFrequency: "monthly" as const,
       priority: 0.5,
     })),
