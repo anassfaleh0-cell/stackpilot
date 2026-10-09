@@ -65,6 +65,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
   const linkedPicks = page.picks.filter((p) => getReview(p.toolSlug) !== null)
   const verifiedPickRating = (pick: (typeof page.picks)[number] | undefined): number | null => {
+    if (pick?.ratingVerified === true && typeof pick.rating === "number" && Number.isFinite(pick.rating)) return pick.rating
     if (!pick?.toolSlug) return null
     const review = getReview(pick.toolSlug)
     return review?.ratingVerified === true && typeof review.rating === "number" && Number.isFinite(review.rating)
