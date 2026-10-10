@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getBest, getBlogPost, getGuide, getReview } from "@/lib/content/registry"
+import { getBest, getBlogPost, getComparison, getGuide, getReview } from "@/lib/content/registry"
 
 describe("content quality repairs", () => {
   it("replaces repetitive generated guide filler with practical buyer guidance", () => {
@@ -24,6 +24,16 @@ describe("content quality repairs", () => {
     const words = renderedText.split(/\s+/).filter(Boolean).length
     expect(guide!.readingTime).toBe(Math.max(3, Math.ceil(words / 200)))
     expect(guide!.readingTime).toBeGreaterThan(10)
+  })
+
+  it("does not publish unverified comparison winners or ratings", () => {
+    const comparison = getComparison("circleci-vs-containerd")
+    expect(comparison).not.toBeNull()
+    expect(comparison?.winnerVerified).not.toBe(true)
+    expect(comparison?.winner).toBeNull()
+    expect(comparison?.description).not.toMatch(/CircleCI is our overall pick|recorded pick/i)
+    expect(comparison?.verdict).toContain("does not name one overall pick")
+    expect(comparison?.verdict).toContain("no independently verified rating")
   })
 
   it("normalizes malformed numeric price ranges", () => {
