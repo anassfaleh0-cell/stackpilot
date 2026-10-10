@@ -133,7 +133,25 @@ function buildBucket<T>(spec: BucketSpec<T>, excludeSlug: string, maxPerType: nu
     candidates.push({ entry, match, item })
   }
   candidates.sort((a, b) => MATCH_WEIGHT[a.match] - MATCH_WEIGHT[b.match] || spec.compare(a.entry, b.entry))
-  return candidates.slice(0, maxPerType).map((c, rank) => ({ item: c.item, match: c.match, rank }))
+
+  // Keep empty-slug index pages stable, but rotate large detail-page buckets so the
+  // same newest four records are not the only ones linked throughout the site.
+  const ordered: typeof candidates = []
+  for (const matchKind of ["direct", "audience", "related"] as const) {
+    const group = candidates.filter((candidate) => candidate.match === matchKind)
+    if (excludeSlug && group.length > maxPerType) {
+      const seed = `${spec.type}:${excludeSlug}:${matchKind}`
+      let hash = 2166136261
+      for (let index = 0; index < seed.length; index++) {
+        hash = Math.imul(hash ^ seed.charCodeAt(index), 16777619)
+      }
+      const offset = (hash >>> 0) % group.length
+      ordered.push(...group.slice(offset), ...group.slice(0, offset))
+    } else {
+      ordered.push(...group)
+    }
+  }
+  return ordered.slice(0, maxPerType).map((c, rank) => ({ item: c.item, match: c.match, rank }))
 }
 
 function hasAudienceMatch(entry: unknown, category: string): boolean {
