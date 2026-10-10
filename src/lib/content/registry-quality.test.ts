@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getBest, getBlogPost, getComparison, getGuide, getReview } from "@/lib/content/registry"
+import { getAllComparisons, getBest, getBlogPost, getComparison, getGuide, getReview } from "@/lib/content/registry"
 
 describe("content quality repairs", () => {
   it("replaces repetitive generated guide filler with practical buyer guidance", () => {
@@ -41,6 +41,19 @@ describe("content quality repairs", () => {
     expect((renderedContent.match(/<a\b/gi) || []).length).toBe(
       (renderedContent.match(/<\/a\s*>/gi) || []).length,
     )
+  })
+
+  it("explains when compared products belong to different categories", () => {
+    const comparison = getAllComparisons().find((candidate) => {
+      const left = getReview(candidate.tool1Slug)
+      const right = getReview(candidate.tool2Slug)
+      if (!left || !right) return false
+      const key = (value: string) => value.toLowerCase().replace(/&/g, " ").replace(/[^a-z0-9]+/g, " ").trim()
+      return key(left.category) !== key(right.category)
+    })
+    expect(comparison).toBeDefined()
+    const normalized = getComparison(comparison!.slug)
+    expect(normalized?.verdict).toContain("These products may address different needs")
   })
 
   it("does not publish unverified comparison winners or ratings", () => {
