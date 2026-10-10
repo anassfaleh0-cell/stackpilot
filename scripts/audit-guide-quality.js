@@ -9,7 +9,6 @@ const thin = []
 const templateHits = []
 const emptyRelations = []
 const staleDates = []
-const readingTimeMismatches = []
 const invalidRelatedGuides = []
 const duplicateRelatedGuides = []
 const knownGuideSlugs = new Set(files.map((name) => name.replace(/\.json$/, "")))
@@ -72,10 +71,8 @@ for (const file of files) {
     editorialText.push(question, answer)
   }
   if (words < 500) thin.push({ slug: data.slug, words, lastUpdated: data.lastUpdated || null })
-  const expectedReadingTime = Math.max(3, Math.ceil(words / 200))
-  if (Number.isFinite(data.readingTime) && data.readingTime !== expectedReadingTime) {
-    readingTimeMismatches.push({ slug: data.slug, stored: data.readingTime, expected: expectedReadingTime, words })
-  }
+  // The registry derives displayed reading time from normalized, rendered sections and FAQs.
+  // The raw JSON value is legacy metadata and is intentionally not treated as the display value.
   const fullText = editorialText.join("\n")
   const hits = templatePatterns.filter((pattern) => pattern.test(fullText)).map((pattern) => pattern.source)
   if (hits.length) templateHits.push({ slug: data.slug, hits })
@@ -90,6 +87,6 @@ console.log("Guides without related tools/guides:", emptyRelations.length, JSON.
 console.log("Invalid/self related-guide references:", invalidRelatedGuides.length, JSON.stringify(invalidRelatedGuides.slice(0, 30)))
 console.log("Duplicate related-guide references:", duplicateRelatedGuides.length, JSON.stringify(duplicateRelatedGuides.slice(0, 30)))
 console.log("Guides with missing, stale, or malformed lastUpdated dates:", staleDates.length, JSON.stringify(staleDates.slice(0, 30)))
-console.log("Reading-time values needing review:", readingTimeMismatches.length, JSON.stringify(readingTimeMismatches.slice(0, 30)))
+console.log("Reading-time display:", "derived from normalized rendered content by the registry; raw JSON metadata is not authoritative.")
 // Broken/self-referencing or duplicate related-guide links are structural defects, not report-only editorial heuristics.
 if (issues.length > 0 || invalidRelatedGuides.length > 0 || duplicateRelatedGuides.length > 0) process.exitCode = 1
