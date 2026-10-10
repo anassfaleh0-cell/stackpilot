@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, FAQSchema, softwareApp, WebPageSchema, ArticleSchema } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getComparison, getContentTitle, getReview, getAllComparisons } from "@/lib/content/registry"
+import { getComparison, getComparisonSeoTitle, getContentTitle, getReview, getAllComparisons } from "@/lib/content/registry"
 import { stripDeadContentLinks } from "@/lib/content/link-guard"
 import { formatDate } from "@/lib/utils"
 import { isNoindexed } from "@/lib/noindex"
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const noindexed = isNoindexed("comparisons", slug)
 
   return {
-    ...createMetadata({ title: `${cmp.tool1} vs ${cmp.tool2} (2026): ${cmp.winnerVerified === true ? "Which One Wins?" : "How to Choose"}`, description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated, articleSection: cmp.category, readingTime }),
+    ...createMetadata({ title: getComparisonSeoTitle(slug, cmp.tool1, cmp.tool2, cmp.winnerVerified === true), description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated, articleSection: cmp.category, readingTime }),
     robots: noindexed
       ? { index: false, follow: true }
       : { index: true, follow: true },
