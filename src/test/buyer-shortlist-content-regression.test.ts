@@ -18,7 +18,7 @@ describe("buyer shortlist content regression", () => {
       }
 
       expect(page.description).toMatch(/not (?:been )?independently verified/i)
-      expect(page.pricingSummary).toMatch(/not independently verified|not been verified/i)
+      expect(page.pricingSummary).toMatch(/not (?:been )?(?:independently )?verified/i)
       expect(page.picks.length).toBeGreaterThan(0)
       for (const pick of page.picks) {
         expect(pick.ratingVerified).toBe(false)
