@@ -26,6 +26,13 @@ describe("content quality repairs", () => {
     expect(guide!.readingTime).toBeGreaterThan(10)
   })
 
+  it("filters known generic filler from normalized review and best-list content", () => {
+    const review = getReview("activecampaign")
+    const best = getBest("best-crm-for-enterprise")
+    expect(JSON.stringify(review)).not.toMatch(/delivers reliable performance with 99\.9% uptime SLA/i)
+    expect(JSON.stringify(best)).not.toMatch(/perfect for freelancers and independent professionals/i)
+  })
+
   it("removes malformed nested anchors from imported review content", () => {
     const review = getReview("activecampaign")
     expect(review).not.toBeNull()
