@@ -82,6 +82,35 @@ describe("content quality repairs", () => {
     expect(normalized?.verdict).toContain("These products may address different needs")
   })
 
+  it("suppresses unverified winners throughout the published comparison corpus", () => {
+    const comparisons = getAllComparisons()
+    expect(comparisons.length).toBeGreaterThan(800)
+    for (const comparison of comparisons) {
+      if (comparison.winnerVerified !== true) {
+        expect(comparison.winner, comparison.slug).toBeNull()
+      } else if (comparison.winner) {
+        const winner = comparison.winner.toLowerCase().trim()
+        expect(
+          [comparison.tool1, comparison.tool2].some((tool) => tool.toLowerCase().trim() === winner),
+          comparison.slug,
+        ).toBe(true)
+      }
+    }
+  })
+
+  it("adds a use-case warning to every published cross-category comparison", () => {
+    const normalizeCategory = (value: string) => value.toLowerCase().replace(/&/g, " ").replace(/[^a-z0-9]+/g, " ").trim()
+    const crossCategory = getAllComparisons().filter((comparison) => {
+      const left = getReview(comparison.tool1Slug)
+      const right = getReview(comparison.tool2Slug)
+      return Boolean(left?.category && right?.category && normalizeCategory(left.category) !== normalizeCategory(right.category))
+    })
+    expect(crossCategory.length).toBeGreaterThan(0)
+    for (const comparison of crossCategory) {
+      expect(comparison.verdict, comparison.slug).toContain("These products may address different needs")
+    }
+  })
+
   it("does not publish unverified comparison winners or ratings", () => {
     const comparison = getComparison("circleci-vs-containerd")
     expect(comparison).not.toBeNull()
