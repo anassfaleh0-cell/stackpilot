@@ -171,6 +171,7 @@ function scoreFile(filePath, dirName, reviewsBySlug = new Map()) {
     alternatives: 100, guides: 500, blog: 300, reviews: 300,
   }
   const minimumWords = minimumWordsByDirectory[dirName] || 150
+  const isDraft = dirName === "comparisons" && data.publicationStatus === "draft"
   const isThin = words < minimumWords && !hasTested
   const isDuplicate = dirName === "comparisons" && sections.length < 3 && words < 200
   const reviewReasons = []
@@ -199,6 +200,8 @@ function scoreFile(filePath, dirName, reviewsBySlug = new Map()) {
     author: data.author || "none",
     lastReviewed: lastReviewed || "unknown",
     sections: sections.length,
+    isDraft,
+    publicationStatus: data.publicationStatus || "published-by-default",
     isThin,
     isDuplicate,
     isCrossCategoryComparison,
@@ -238,9 +241,10 @@ function main() {
       return scoreFile(filePath, dir, reviewsBySlug)
     }).sort((a, b) => b.score - a.score)
 
-    // Keep/noindex decisions remain manual. Surface review candidates instead of
-    // silently reporting every page as "keep" with no triage list.
-    const keepSlugs = scored.map((s) => s.slug)
+    // Keep/noindex decisions remain manual. Explicit comparison drafts are
+    // separated from index-eligible content instead of being counted as keep.
+    const draftSlugs = scored.filter((s) => s.isDraft).map((s) => s.slug)
+    const keepSlugs = scored.filter((s) => !s.isDraft).map((s) => s.slug)
     const noindexSlugs = []
     const reviewSlugs = scored.filter((s) => s.reviewRecommended).map((s) => s.slug)
 
@@ -248,19 +252,26 @@ function main() {
       total: files.length,
       keep: keepSlugs,
       noindex: noindexSlugs,
+      drafts: draftSlugs,
       reviewRecommended: reviewSlugs,
       keepTop,
       stats: {
         avgScore: Math.round(scored.reduce((a, s) => a + s.score, 0) / Math.max(1, scored.length)),
         avgWords: Math.round(scored.reduce((a, s) => a + s.words, 0) / Math.max(1, scored.length)),
-        thinContent: scored.filter((s) => s.isThin).length,
+        thinContent: scored.filter((s) => s.isThin && !s.isDraft).length,
+        drafts: draftSlugs.length,
         reviewRecommended: reviewSlugs.length,
       },
     }
 
-    allFiles.push(...scored.map((s) => ({ ...s, keep: keepSlugs.includes(s.slug) })))
+    allFiles.push(...scored.map((s) => ({
+      ...s,
+      keep: keepSlugs.includes(s.slug),
+      noindex: noindexSlugs.includes(s.slug),
+      draft: s.isDraft,
+    })))
 
-    console.log(`   ✅ Keep/index eligible: ${keepSlugs.length} | 🚫 Auto-noindex: ${noindexSlugs.length} (manual decision only)`)
+    console.log(`   ✅ Keep/index eligible: ${keepSlugs.length} | 🚫 Auto-noindex: ${noindexSlugs.length} (manual decision only) | 📝 Drafts: ${draftSlugs.length}`)
     console.log(`   📊 Avg score: ${results[dir].stats.avgScore} | Avg words: ${results[dir].stats.avgWords}`)
     console.log(`   ⚠️  Thin content: ${results[dir].stats.thinContent} | Editorial review recommended: ${reviewSlugs.length}`)
     if (reviewSlugs.length > 0) console.log(`   🔎 Review samples: ${reviewSlugs.slice(0, 12).join(", ")}`)
@@ -273,7 +284,8 @@ function main() {
     summary: {
       totalFiles: allFiles.length,
       totalKeep: allFiles.filter((f) => f.keep).length,
-      totalNoindex: allFiles.filter((f) => !f.keep).length,
+      totalNoindex: allFiles.filter((f) => f.noindex).length,
+      totalDraft: allFiles.filter((f) => f.draft).length,
       totalReviewRecommended: allFiles.filter((f) => f.reviewRecommended).length,
     },
     directories: results,
@@ -286,6 +298,7 @@ function main() {
   console.log(`   Total files: ${output.summary.totalFiles}`)
   console.log(`   Keep: ${output.summary.totalKeep}`)
   console.log(`   Noindex: ${output.summary.totalNoindex}`)
+  console.log(`   Drafts excluded from index-eligible count: ${output.summary.totalDraft}`)
   console.log(`   Editorial review recommended: ${output.summary.totalReviewRecommended}`)
   console.log("   Note: review recommendations do not change robots directives or indexing eligibility.")
 }
