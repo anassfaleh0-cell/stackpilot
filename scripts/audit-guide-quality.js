@@ -83,4 +83,5 @@ console.log("Invalid/self related-guide references:", invalidRelatedGuides.lengt
 console.log("Duplicate related-guide references:", duplicateRelatedGuides.length, JSON.stringify(duplicateRelatedGuides.slice(0, 30)))
 console.log("Guides with missing, stale, or malformed lastUpdated dates:", staleDates.length, JSON.stringify(staleDates.slice(0, 30)))
 console.log("Reading-time values needing review:", readingTimeMismatches.length, JSON.stringify(readingTimeMismatches.slice(0, 30)))
-if (issues.length > 0) process.exitCode = 1
+// Broken/self-referencing or duplicate related-guide links are structural defects, not report-only editorial heuristics.
+if (issues.length > 0 || invalidRelatedGuides.length > 0 || duplicateRelatedGuides.length > 0) process.exitCode = 1
