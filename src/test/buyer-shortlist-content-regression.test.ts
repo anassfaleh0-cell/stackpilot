@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest"
 import fs from "node:fs"
 import path from "node:path"
 
-const slugs = ["best-project-management-software", "best-password-managers", "best-accounting-software", "best-ai-tools", "best-analytics-software", "best-backend-platforms", "best-collaboration-software", "best-communication-tools", "best-crm-software"]
+const slugs = ["best-project-management-software", "best-password-managers", "best-accounting-software", "best-ai-tools", "best-analytics-software", "best-backend-platforms", "best-collaboration-software", "best-communication-tools", "best-crm-software", "best-marketing-software"]
 
 describe("buyer shortlist content regression", () => {
   it("keeps pricing and ratings transparent and removes template-generated filler", () => {
