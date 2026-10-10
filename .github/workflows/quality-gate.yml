@@ -26,26 +26,6 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Apply dependency security patch once
-        if: github.event_name == 'pull_request' && github.head_ref == 'fix/comparison-copy-audit-wave1'
-        run: |
-          git fetch origin "$GITHUB_HEAD_REF"
-          git checkout -B "$GITHUB_HEAD_REF" "origin/$GITHUB_HEAD_REF"
-          current_next=$(node -p 'require("./package.json").dependencies.next')
-          if [ "$current_next" != "16.4.0" ]; then
-            npm audit fix || true
-            npm install next@16.4.0 eslint-config-next@16.4.0 --save-exact --ignore-scripts --no-audit
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add package.json package-lock.json
-            if ! git diff --cached --quiet; then
-              git commit -m "Patch Next.js and transitive dependency vulnerabilities"
-              git push origin "HEAD:${GITHUB_HEAD_REF}"
-            fi
-          else
-            echo "Next.js dependency patch is already applied."
-          fi
-
       - name: Install dependencies
         run: npm ci
 
