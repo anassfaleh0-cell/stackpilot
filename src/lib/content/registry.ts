@@ -648,7 +648,7 @@ export function getComparison(slug: string): ComparisonContent | null {
     ...cmp,
     winner,
     description: sanitizeComparisonDescription(cmp.description, cmp.tool1, cmp.tool2, features, winner),
-    verdict: buildComparisonNarrative(cmp.tool1, cmp.tool2, cmp.tool1Slug, cmp.tool2Slug, features, winner),
+    verdict: buildComparisonNarrative(cmp.tool1, cmp.tool2, cmp.tool1Slug, cmp.tool2Slug, cmp.featuresVerified === true ? features : [], winner),
     features,
     faqs: sanitizeFaqs(cmp.faqs),
   }
