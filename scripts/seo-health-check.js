@@ -118,7 +118,8 @@ function checkRobots() {
 
   // Source-level checks must not emit an unconditional PASS.
   const aiBots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "PerplexityBot"]
-  const missingAiBotRules = aiBots.filter((bot) => !new RegExp(`userAgent\s*:\s*["']${bot}["']`).test(content))
+  const configuredAiBots = new Set([...content.matchAll(/userAgent\s*:\s*["']([^"']+)["']/g)].map((match) => match[1]))
+  const missingAiBotRules = aiBots.filter((bot) => !configuredAiBots.has(bot))
   if (missingAiBotRules.length > 0) {
     log("warn", `AI crawler user-agent rules are not explicitly declared: ${missingAiBotRules.join(", ")}`)
   } else {
