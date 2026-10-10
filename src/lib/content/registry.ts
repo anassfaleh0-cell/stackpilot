@@ -590,9 +590,15 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
     const value = (v: unknown) => typeof v === "boolean" ? (v ? "marked available in the dataset" : "marked unavailable in the dataset") : String(v || "not recorded")
     return `${f.name}: ${tool1} — ${value(f.tool1)}; ${tool2} — ${value(f.tool2)}.`
   }).join(" ")
-  const pricing = [review1, review2].filter((review): review is ReviewContent => Boolean(review)).map((review) =>
-    `${review.name} has a recorded rating of ${review.rating}/5 and pricing listed as ${review.pricing}${review.priceRange ? ` (${review.priceRange})` : ""}. Ratings, prices, included limits, and plan availability may change; check the source and current vendor page before purchasing.`
-  ).join(" ")
+  const pricing = [review1, review2].filter((review): review is ReviewContent => Boolean(review)).map((review) => {
+    const rating = review.ratingVerified === true
+      ? `a documented rating of ${review.rating}/5`
+      : "no independently verified rating"
+    const price = review.priceRangeVerified === true && review.priceRange
+      ? `pricing recorded as ${review.priceRange}`
+      : "pricing not independently verified"
+    return `${review.name}: ${rating}; ${price}. Confirm the current vendor terms, included limits, billing period, and plan availability before purchasing.`
+  }).join(" ")
   return [
     `This page compares ${tool1} and ${tool2} using information currently recorded in PilotStack's product profiles. The dataset is a starting point for research, not a substitute for a hands-on trial or vendor confirmation.`,
     recordedPick,
@@ -605,9 +611,16 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
   ].filter(Boolean).join("\n\n")
 }
 function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
-  const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
-  if (cleaned.length >= 80 && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(cleaned)) return trimText(cleaned, 700)
-  return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the recorded overall winner." : "The dataset records no single overall winner.") + " Read the detailed rows and linked reviews before making a decision.", 700)
+  const cleaned = sanitizeUnsupportedClaims(description).replace(/\\s+/g, " ").trim()
+  // Winner language is publishable only when the comparison has explicit provenance.
+  const safeDescription = winner
+    ? cleaned
+    : cleaned.split(/(?<=[.!?])\\s+/)
+        .filter((sentence) => !/\\b(?:overall pick|recorded pick|overall winner|our recommendation|recommended for most users|is the winner|wins over|beats|outperforms|edges ahead)\\b/i.test(sentence))
+        .join(" ")
+        .trim()
+  if (safeDescription.length >= 80 && !/are paramount|including advanced\\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(safeDescription)) return trimText(safeDescription, 700)
+  return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the verified recorded overall winner under the stated criteria." : "The dataset records no independently verified overall winner. Check the detailed rows and linked reviews before making a decision."), 700)
 }
 export function getComparison(slug: string): ComparisonContent | null {
   const cached = comparisonCache.get(slug)
@@ -630,7 +643,7 @@ export function getComparison(slug: string): ComparisonContent | null {
     tool2Detail: sanitizeUnsupportedClaims(trimText(f.tool2Detail, 320)),
   }))
   const features = buildDerivedComparisonFeatures(cmp, baseFeatures)
-  const winner = normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2)
+  const winner = cmp.winnerVerified === true ? normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2) : null
   const result: ComparisonContent = {
     ...cmp,
     winner,
