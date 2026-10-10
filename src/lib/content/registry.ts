@@ -82,6 +82,22 @@ const GENERIC_BOILERPLATE_PATTERNS = [
   /this approach enables teams to maximize their software investment/i,
   /organizations see measurable improvements in efficiency and user satisfaction within the first quarter/i,
   /organizations see measurable improvements in efficiency and team productivity/i,
+  /choosing the right .* software starts with understanding your specific requirements/i,
+  /this topic is most useful when it is connected to a real decision/i,
+  /adequate performance for most use cases/i,
+  /functional organized interface/i,
+  /strong performance with fast load times/i,
+  /delivers reliable performance with 99\.9% uptime SLA/i,
+  /delivers reliable performance with solid performance suitable for most business use cases/i,
+  /written against our published editorial methodology/i,
+  /updated when the underlying content is reviewed/i,
+  /positive ROI typically within 3-6 months/i,
+  /most teams start within hours/i,
+  /a teams team uses/i,
+  /updates weekly[^.]*major feature releases quarterly/i,
+  /perfect for freelancers and independent professionals/i,
+  /most successful deployments follow a phased approach/i,
+
 ]
 
 const UNSUPPORTED_CLAIM_PATTERNS = [
@@ -165,8 +181,17 @@ function sanitizeMalformedAnchorMarkup(value: string): string {
   return value
 }
 
+function sanitizeEditorialText(value: string): string {
+  const cleaned = sanitizeUnsupportedClaims(sanitizeMalformedAnchorMarkup(value))
+  return cleaned
+    .split(/(?<=[.!?])\s+/)
+    .filter((sentence) => !GENERIC_BOILERPLATE_PATTERNS.some((pattern) => pattern.test(sentence)))
+    .join(" ")
+    .trim()
+}
+
 function sanitizeContentValue(value: unknown): unknown {
-  if (typeof value === "string") return sanitizeMalformedPricingText(sanitizeUnsupportedClaims(sanitizeMalformedAnchorMarkup(value)))
+  if (typeof value === "string") return sanitizeMalformedPricingText(sanitizeEditorialText(value))
   if (Array.isArray(value)) return value.map(sanitizeContentValue)
   if (value && typeof value === "object") {
     const out: Record<string, unknown> = {}
