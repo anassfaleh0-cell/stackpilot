@@ -126,7 +126,7 @@ function checkRobots() {
   }
 
   const privatePaths = ["/api/", "/admin/", "/dashboard", "/search", "/_global-error"]
-  const namedCrawlerRules = [...content.matchAll(/userAgent\s*:\s*["']([^"']+)["']([\s\\S]*?)(?=userAgent\s*:|sitemap\s*:|$)/g)]
+  const namedCrawlerRules = [...content.matchAll(/userAgent\s*:\s*["']([^"']+)["']([\s\S]*?)(?=userAgent\s*:|sitemap\s*:|$)/g)]
     .filter((match) => match[1] !== "*")
   const missingPrivatePathBlocks = namedCrawlerRules
     .filter((match) => privatePaths.some((route) => !match[2].includes(route)))
