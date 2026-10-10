@@ -56,6 +56,11 @@ const replacements = [
   [/strong customer support/gi, "available support options"],
   [/good mobile experience/gi, "mobile access"],
   [/active user community/gi, "community resources"],
+  [/ActiveCampaign is a marketing & seo platform that helps SMBs and Marketers and Sales Teams achieve better outcomes\. Customer experience automation combining email and CRM\. Our comprehensive 2026 review evaluates features, pricing, security, integrations, and real-world performance\./gi, "ActiveCampaign is an email marketing and automation platform. This editorial overview focuses on practical fit, campaign workflows, automation complexity, CRM needs, and the costs buyers should verify before switching."],
+  [/SMBs and Marketers and Sales Teams/gi, "marketing teams and growing businesses"],
+  [/the central marketing & seo engine powering all ActiveCampaign functionality/gi, "the email marketing and automation workspace; confirm available features against the plan you are considering"],
+  [/ActiveCampaign achieves strong ratings across key evaluation categories including feature completeness, ease of use, customer support, value for money, and performance\./gi, "Compare the product against your own requirements for campaign setup, automation maintenance, reporting, support access, and total cost. Scores on this page should not be treated as independently verified test results."],
+  [/ActiveCampaign delivers reliable performance with 99\.9% uptime SLA and consistent response times under load\./gi, "Check the current service status and contractual uptime commitments directly with ActiveCampaign; performance depends on the service and workload."],
 ]
 
 function apply(content) {
