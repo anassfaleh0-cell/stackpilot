@@ -104,6 +104,12 @@ async function expect404(family: Family, slug: string): Promise<void> {
 }
 
 describe("route families", () => {
+  it("emits unique URLs in the XML sitemap", () => {
+    const urls = sitemap().map((entry) => entry.url)
+    const duplicates = urls.filter((url, index) => urls.indexOf(url) !== index)
+    expect(duplicates).toEqual([])
+  })
+
   it("covers every content directory and every [slug] route", () => {
     const contentDirs = fs
       .readdirSync(CONTENT_ROOT, { withFileTypes: true })
