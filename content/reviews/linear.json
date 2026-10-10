@@ -1,7 +1,7 @@
 {
   "slug": "linear",
   "name": "Linear",
-  "tagline": "Issue tracking and project management for high-performance teams.",
+  "tagline": "Evaluate Linear if your software team wants issue tracking connected to planning and delivery. Test custom workflow needs, permission requirements, reporting, and integration coverage early. Teams that rely on highly customized processes should compare alternatives before migrating.",
   "description": "Linear is a software platform reviewed here through practical use cases, trade-offs, and buyer evaluation questions. Current ratings, review counts, pricing, and vendor commitments are not independently verified; confirm details directly with the vendor before choosing.",
   "seoTitle": "Linear Review 2026: Features, Pricing & Alternatives",
   "seoDescription": "Linear review: practical workflow fit, limitations, implementation questions, and a checklist for validating current pricing and plan details. Ratings and prices are not independently verified.",
@@ -156,176 +156,53 @@
   "content": [
     {
       "title": "Executive Summary",
-      "body": "Linear is an issue-tracking and product-development workspace built around teams, projects, cycles, and a focused issue workflow. It is most relevant to software teams that want engineering work connected to planning and delivery. Fit depends on how well its workflow model matches your existing process; this review does not claim independent speed benchmarks or a verified rating dataset. Trial it with a real backlog, code-hosting integration, and release process before migrating.",
-      "type": "text"
+      "type": "text",
+      "body": "Linear is an issue-tracking and product-planning workspace built around teams, projects, cycles, and issues. It is most relevant to software teams considering a focused way to plan and track delivery. Fit depends on whether its workflow model supports the team’s existing process. Ratings, review counts, prices, and plan entitlements are not independently verified here."
     },
     {
       "title": "TL;DR",
-      "body": "Linear is a strong candidate to evaluate for software teams that want a focused issue tracker and product-planning workflow. Teams that require extensive custom fields, complex permissions, or heavily tailored enterprise processes should test those constraints early. Ratings, review counts, current prices, and performance figures have not been independently verified here.",
-      "type": "text"
+      "type": "text",
+      "body": "Evaluate Linear if your software team wants issue tracking connected to planning and delivery. Test custom workflow needs, permission requirements, reporting, and integration coverage early. Teams that rely on highly customized processes should compare alternatives before migrating."
     },
     {
-      "title": "Rating Overview",
-      "body": "We have not independently verified a current, comparable rating dataset or review-count snapshot for Linear. Evaluate the product with a repeatable test: triage incoming issues, plan a cycle, connect a pull request, change ownership, and report on progress. Compare the friction and visibility with your current tracker before deciding whether a migration is worthwhile.",
-      "type": "text"
+      "title": "Feature Evaluation",
+      "type": "text",
+      "body": "Use a representative backlog to test triage, issue ownership, cycle planning, project status, search, notifications, and connections to source control and chat. Verify that the fields and reports your team depends on can be represented without workarounds. Check how changes to workflow conventions affect day-to-day use."
     },
     {
-      "title": "Company Background",
-      "body": "Linear operates in the project management and team collaboration space, headquartered in San Francisco, California. Founded in 2019, the company has grown to 50+ employees serving 10,000+ customers. Linear has established itself as a significant player in the Project Management category, with a product that linear is a streamlined issue tracking and project management platform designed specifically for software teams that val. The platform has evolved through continuous investment in Issue Tracking, Project Roadmaps, Sprint Planning, reflecting the company's commitment to meeting changing market demands. Primary user demographics include Software Developers and Product Managers teams. The platform serves Project Management, Software Development sectors.",
-      "type": "text"
+      "title": "Who Should Consider It",
+      "type": "text",
+      "body": "Software teams that want issue tracking and product planning in a shared workspace should assess Linear against their delivery process. Teams outside engineering should verify that the model fits their work, and organizations with complex approval or permission needs should test those cases before adoption."
     },
     {
-      "title": "Product Overview",
-      "body": "Linear is a issue tracking and project management for high-performance teams.. The platform provides 18 core features spanning Core, Integrations, Security, Mobile categories. At its foundation, Linear enables organizations to linear is a streamlined issue tracking and project management platform designed specifically for software teams that value speed and efficiency with tools designed for business users. Linear offers API access for custom integrations and supports Cloud deployment. Mobile apps are available for iOS and Android. AI capabilities include AI-powered project suggestions, Smart backlog sorting.",
-      "type": "text"
-    },
-    {
-      "title": "Feature Deep Dive",
-      "body": "Linear's core feature set addresses the primary challenges organizations face in the Project Management space. Issue Tracking: Create, assign, and track issues with rich markdown descriptions and attachments This is particularly valuable for teams that need to move quickly without sacrificing quality control. Project Roadmaps: Visual roadmap views to plan and communicate project timelines The implementation reduces context-switching overhead significantly for daily workflows. Sprint Planning: Cycle-based sprint management with automated progress tracking Organizations that adopt this feature typically see measurable improvements in team efficiency. AI Issue Triage: Automatic issue labeling, prioritization, and assignment using AI Organizations that adopt this feature typically see measurable improvements in team efficiency. Beyond these core capabilities, Linear differentiates itself through polished user experience design and enterprise-grade security infrastructure. The Issue Tracking feature alone addresses a critical workflow need: create, assign, and track issues with rich markdown descriptions and attachments.",
-      "type": "text"
-    },
-    {
-      "title": "User Experience",
-      "body": "Linear delivers a polished and intuitive user interface. New users can typically achieve basic proficiency within hours, with the clean layout reducing the cognitive load of navigating complex workflows. The platform's learning curve is rated as low, meaning most team members can become productive within their first week of use. Common onboarding tasks such as account setup, basic configuration, and first workflow creation are straightforward and well-documented. The mobile experience on iOS and Android mirrors most desktop functionality, allowing users to view and manage core tasks on the go.",
-      "type": "text"
-    },
-    {
-      "title": "Best For",
-      "body": "Linear delivers the most value for software engineering teams of 5-50 people that prioritize speed and developer experience over process configurability. It is ideal for startups and growth-stage technology companies where engineering teams need to move fast and administrative overhead is a liability rather than a requirement. Product engineering teams that work in cycles (sprints) and need tight GitHub or GitLab integration for branch and pull request management benefit from Linear's automatic status synchronization. Teams migrating from Jira due to configuration complexity find Linear's opinionated simplicity liberating — after the initial adjustment period, most engineering teams report higher productivity and lower administrative burden. Organizations conducting AI-powered issue triage at scale benefit from Linear's automated labeling, prioritization, and assignment capabilities that reduce manual backlog grooming time. For engineering teams that value keyboard-driven workflows and fast, fluid interfaces, Linear provides the best experience available.",
-      "type": "text"
-    },
-    {
-      "title": "Worst Fit",
-      "body": "Linear is a poor fit for three scenarios. Organizations requiring extensive customization — custom workflows with 10+ statuses, complex permission schemes with granular field-level controls, or non-engineering issue types like HR requests or legal reviews — will find Linear's data model too rigid. Teams in regulated industries (finance, healthcare, government) that need audit trails with approval gates, mandatory field validation, and separation-of-duties enforcement should use Jira, which provides the compliance infrastructure Linear deliberately omits. Organizations that need built-in time tracking, resource management, or capacity planning tools will need to supplement Linear with separate applications — engineering managers juggling spreadsheets for sprint planning while using Linear for issue tracking create the fragmentation Linear was designed to eliminate. Non-technical teams or enterprise organizations with diverse departmental needs will find Linear's engineering-focused feature set inadequate for marketing, sales, or operations workflows.",
-      "type": "text"
-    },
-    {
-      "title": "Key Features",
-      "body": "Linear prioritizes developer experience through speed: the keyboard-first interface loads issues in under 100ms, the triage workflow ensures nothing falls through the cracks, and the GitHub sync creates bidirectional issue-PR links without third-party middleware.",
-      "type": "list",
-      "items": [
-        "Sub-100ms search across all issues with real-time filtering by status, assignee, label, priority, cycle, and any combination thereof, with zero pagination or loading states even on workspaces with 10,000+ issues.",
-        "Keyboard-first interface with 200+ customizable shortcuts enabling power users to navigate, create, triage, update, and close issues without leaving the keyboard, reducing context-switching overhead significantly.",
-        "AI issue triage automatically assigns labels, sets priority scores, suggests assignees based on team workload, and identifies stale issues needing closure or escalation based on historical patterns.",
-        "GitHub and GitLab integration auto-creates branches from Linear issues, links pull requests to tickets, and transitions issue statuses when PRs are merged — keeping development workflows synchronized without manual updates.",
-        "Cycle analytics track team velocity, cycle time distribution, issue acceptance rates, and throughput trends, providing data for retrospective discussions and sprint planning without separate reporting tools.",
-        "GraphQL API provides comprehensive programmatic access to all Linear data, enabling custom integrations, automation scripts, and reporting tools beyond the built-in capabilities."
-      ]
-    },
-    {
-      "title": "Real Advantages",
-      "body": "Linear's appeal for software teams is its issue-centered workflow: teams can organize work into projects and cycles, connect engineering activity to issues, and use keyboard-driven navigation. Whether that makes the team faster depends on the way it is configured and the size and habits of the workspace. Trial it with a real backlog and compare issue triage, search, status changes, and handoffs with the process you use today; this review does not provide independently measured latency or productivity results.",
-      "type": "text"
-    },
-    {
-      "title": "Real Limitations",
-      "body": "Linear's most significant limitation is its rigid data model and workflow structure. Unlike Jira, which lets organizations define custom statuses, fields, screens, and transitions for any process, Linear provides a fixed set of issue statuses (Triage, Backlog, Todo, In Progress, In Review, Done, Canceled) with limited customization options. Teams with non-standard workflows — such as multi-stage QA processes, legal review gates, or content publication pipelines — cannot model their processes within Linear without workarounds. The absence of built-in time tracking, resource management, and capacity planning tools forces engineering managers to maintain separate spreadsheets or adopt supplementary tools, creating exactly the tool fragmentation that Linear was designed to prevent. The free tier's restriction to 10 users makes evaluation difficult for teams of 11-50 people — they must commit to a paid plan before fully evaluating whether Linear meets their needs. Enterprise features like SAML SSO and audit logs require the Enterprise plan at $16/user/month, making Linear as expensive as Premium Jira for organizations that need these capabilities.",
-      "type": "text"
+      "title": "Limitations to Test",
+      "type": "text",
+      "body": "Test workflow flexibility, custom fields, role permissions, audit needs, reporting, and data export. Migration planning should account for comments, attachments, labels, issue relationships, and history. Confirm which administrative and security controls require a particular plan."
     },
     {
       "title": "Pricing Explained",
-      "body": "Linear's current plan prices, included limits, and billing terms are not independently verified in this review. Check the official pricing page for seat minimums, guest access, issue and project limits, AI features, integrations, SSO, audit logs, and support entitlements. Confirm monthly and annual totals for the actual team size and verify whether the controls your organization needs require a higher tier.",
-      "type": "text"
+      "type": "text",
+      "body": "Current prices, plan limits, and billing terms are not independently verified. Check Linear’s official pricing page and contract for seat rules, guest access, issue or project limits, AI features, integrations, SSO, audit logs, and support entitlements. Compare the full cost for the intended team."
     },
     {
-      "title": "Hidden Costs",
-      "body": "Include migration time, workflow redesign, training, integration maintenance, and any required security or administration tier in the total cost. Test how imported issues, attachments, comments, labels, and project history are preserved. Verify whether external collaborators count as paid seats and whether your existing reporting or automation depends on features unavailable in the intended plan.",
-      "type": "text"
+      "title": "Security & Privacy Checks",
+      "type": "text",
+      "body": "Request current security and privacy documentation, data-processing terms, retention and export details, identity controls, audit events, and incident-response commitments. Verify plan availability and contractual coverage before importing sensitive issue or customer data."
     },
     {
-      "title": "Learning Curve",
-      "body": "Basic proficiency — creating issues, using filters, managing cycles, and understanding the keyboard shortcut system — takes 2-4 hours for most engineers. Intermediate proficiency — mastering 50+ keyboard shortcuts, using the command menu (Cmd+K) for navigation, configuring automation rules, and building custom views — requires 1-2 weeks of regular use. Advanced proficiency — using the GraphQL API for custom tooling, implementing complex automation rules with multiple conditions, designing project structures for large workspaces, and optimizing cycle planning based on analytics — takes 3-6 weeks. Engineers migrating from Jira will experience initial frustration with Linear's limited customization but typically adapt faster than non-technical users. The primary learning challenge is unlearning Jira habits: Linear's cycle model differs from Jira's sprint model (cycles end on calendar dates rather than being manually started/stopped), and the absence of configurable workflows means teams adapt to Linear's process rather than adapting Linear to theirs. Linear's documentation is well-organized with video guides covering each feature set, and the keyboard shortcut reference is available directly within the app via the ? key.",
-      "type": "text"
-    },
-    {
-      "title": "Setup Time",
-      "body": "A Linear workspace for a 10-person engineering team can be operational in 5-10 minutes: sign up, create a team, invite members, and start creating issues. There is no project configuration, scheme design, or workflow setup — Linear's opinionated defaults apply immediately. Importing existing issues from Jira, Asana, GitHub Issues, or Trello through Linear's import tools takes 30-60 minutes for up to 1,000 issues, including field mapping and attachment transfer. Configuring integrations — GitHub or GitLab repository linking, Slack notification routing, and webhook setup — takes 30-45 minutes per integration. Full organizational deployment for 50+ users with Enterprise features (SSO, SCIM, audit logs) and custom automation rules requires 1-2 days of configuration and testing. The fastest setup path among major project management tools is one of Linear's key selling points: there is no phase of 'setting up Jira' where administrators spend weeks configuring schemes before users can work. Teams can start using Linear productively on the same day they sign up, which significantly reduces the adoption friction common with enterprise project management tools.",
-      "type": "text"
-    },
-    {
-      "title": "Migration Difficulty",
-      "body": "Migrating to Linear from another project management tool is moderately difficult, rated 5/10 on average but varying significantly by source platform. Migration from Jira is rated 7/10: Linear's import tool handles basic issue data (title, description, status, assignee, labels), but Jira-specific custom fields, time tracking entries, workflow history, comment timestamps, and plugin-dependent data do not transfer. The workflow redesign from Jira's complex transition model to Linear's linear status flow requires deliberate process simplification. Migration from Asana or Trello is rated 4/10: basic task data transfers cleanly, and the simpler data model of these tools means less data loss during import. Migration from GitHub Issues is rated 3/10: Linear's GitHub-native integration syncs issues bidirectionally, and the import handles labels, milestones, and assignee data completely. In all cases, a 2-week parallel run is recommended where both tools are active, allowing team members to transition at their own pace. The most significant migration challenge is change management: engineering teams accustomed to a specific workflow model need 2-4 weeks to adopt Linear's cycle-based approach. Historical data from the source tool remains accessible but is not integrated into Linear's search or analytics.",
-      "type": "text"
-    },
-    {
-      "title": "Integration Ecosystem",
-      "body": "Linear's integration ecosystem is smaller than Jira's but more focused on engineering workflows. Direct integrations include GitHub (branch creation, PR linking, status sync), GitLab (merge request linking, branch creation), Slack (issue creation from messages, rich notifications with status updates), Figma (embedding designs in issue descriptions), Sentry (error tracking with automatic issue creation), and Raycast (quick issue search and creation from the Mac launcher). Linear's GraphQL API is comprehensive and well-documented, supporting all CRUD operations on issues, projects, cycles, teams, and users. The API's developer experience is notably good — GraphQL allows querying exactly the data needed in a single request, and the schema is self-documenting through GraphiQL. Linear does not offer a native marketplace or app directory for third-party extensions; all integrations beyond the direct partnerships require custom development through the API. Key missing integrations include native CI/CD tool connections beyond GitHub/GitLab (no Jenkins, CircleCI, or GitLab CI pipeline status in issues), native customer support integrations (Intercom, Zendesk), and native testing tool integrations. Organizations needing these capabilities must build custom connections via the API.",
-      "type": "text"
-    },
-    {
-      "title": "Security & Compliance",
-      "body": "This review is not evidence of current certification or compliance status. Request up-to-date security documentation and confirm SSO, user provisioning, audit events, data retention, export, data processing, and incident-response terms against your organization's requirements. Verify availability by plan and get contractual requirements confirmed before migrating sensitive issue or customer data.",
-      "type": "text"
-    },
-    {
-      "title": "Performance",
-      "body": "We have not independently benchmarked Linear's response times, memory use, or availability. During a trial, test search, issue navigation, cycle planning, and large-list filtering on the devices and networks your team actually uses. Measure repeatable tasks, include a realistic backlog, and compare the results with your existing tool rather than relying on unsupported millisecond claims.",
-      "type": "text"
-    },
-    {
-      "title": "Customer Support",
-      "body": "Support channels, response times, and escalation commitments may vary by plan. Check the vendor's current support policy and ask how urgent production-blocking issues are handled. During the trial, test the documentation and support route with a realistic migration or integration question; do not assume an advertised channel includes a guaranteed response SLA.",
-      "type": "text"
-    },
-    {
-      "title": "Real-world Use Cases",
-      "body": "A 30-person SaaS engineering team uses Linear for all issue tracking, cycle planning, and code integration. Each 2-week cycle starts with a planning session where the team uses Linear's cycle view to review backlog priorities, estimate effort, and commit to issues based on historical velocity data from cycle analytics. Throughout the cycle, engineers create branches directly from Linear issues, and when they open PRs in GitHub, Linear automatically links the PR to the issue and transitions it to In Review. When the PR merges, the issue auto-transitions to Done. AI triage handles incoming bug reports from customer support by automatically categorizing, prioritizing, and assigning them to the appropriate team member based on historical assignment patterns. A 10-person startup uses Linear to run their entire product development process: product managers create feature requests as issues with priority scores, the engineering lead uses the roadmap view to plan quarterly initiatives, and individual contributors manage their daily work through the My Issues view filtered by status and cycle. Slack integration lets team members create issues from messages without switching contexts. A 100-person engineering organization uses Linear Enterprise with SAML SSO and audit logs to meet SOC 2 compliance requirements. They run 6 teams, each with separate projects and cycle schedules, coordinated through cross-project roadmap views.",
-      "type": "text"
-    },
-    {
-      "title": "Industry Fit",
-      "body": "Linear is best suited to software developers, engineering managers and product managers. It works well in software companies, product studios, digital agencies and internal platform teams where issue tracking, cycle planning and release coordination sit directly alongside the engineering workflow. It is a weaker fit for teams that only need simple task lists or client-facing project plans — in those cases the cycle and triage model adds structure that goes unused, and a lighter project management tool is easier to adopt.",
-      "type": "text"
-    },
-    {
-      "title": "Common Mistakes",
-      "body": "Five mistakes repeatedly surface from Linear teams. Over-customizing before establishing a baseline — teams that create custom workflows, labels, and project structures during their first week risk building unnecessary complexity before understanding their natural workflow. Start with Linear's defaults for 2-3 cycles and adjust only when a clear process gap emerges. Ignoring keyboard shortcuts — engineers who use mouse-based navigation miss the primary productivity benefit of Linear. Investing 30 minutes learning the 30 most common shortcuts (n, c, e, 1-4, /, ?, ⌘K) pays dividends within the first week, but most new users never open the shortcut reference. Overcommitting cycles — treating Linear cycles as traditional sprint deadlines leads to scope creep and unplanned work. Linear's cycle model works best when teams commit to 60-70% of their capacity and leave buffer for bugs and unplanned work, tracked through the cycle analytics feature. Neglecting AI triage configuration — teams that disable or ignore AI issue triage miss a significant automation benefit. Spend 2-3 cycles training the AI with manual overrides, then enable auto-assignment with human review of automated decisions. Underusing the roadmap view — product managers who manage roadmaps outside Linear (in Notion, spreadsheets, or slide decks) create fragmentation. Linear's roadmap view supports project timelines and dependency tracking that eliminates duplicate status tracking.",
-      "type": "text"
-    },
-    {
-      "title": "Tips from experienced users",
-      "body": "Start with a small team workflow rather than migrating every project at once. Define issue types, ownership, and a few useful saved views; connect the source-control and communication tools the team actually uses; and document when work moves between statuses. Review cycle or project reports after a few weeks and change the workflow only when the data or team feedback shows a problem. Verify current keyboard shortcuts and integration behavior in the product because details can change.",
-      "type": "text"
+      "title": "Implementation Checklist",
+      "type": "text",
+      "body": "Trial Linear with a small team and a realistic backlog. Import a sample, connect the code-hosting integration, recreate one cycle, test reports and permissions, and document data that does not migrate cleanly. Expand only after the team confirms that the workflow fits."
     },
     {
       "title": "Alternatives",
-      "body": "Linear's primary competitors address different needs on the project management spectrum. Jira offers comprehensive workflow customization, compliance features, and the Atlassian ecosystem, making it the right choice for regulated industries and large enterprise organizations at $7.75-15.25/user/month. Jira's flexibility is its strength, but its complexity is the reason most teams consider Linear. Asana provides a more intuitive project management experience for cross-functional teams with timeline views, goals, and workload management at $10.99-24.99/user/month, making it the better choice for organizations where engineering is one department among many. GitHub Projects offers native project management within the GitHub ecosystem for $4/user/month (GitHub Team), making it the most cost-effective and integrated choice for teams already using GitHub for code hosting. Notion combines project management with documentation, wikis, and databases at $8-15/user/month, appealing to teams that prefer all-in-one tools over best-in-class specialization. For each alternative, evaluate the performance cost: Linear's sub-100ms speed is unmatched; Jira and Asana feel sluggish by comparison, and the productivity difference of waiting 2-5 seconds per action accumulates to significant time savings over a year of daily use.",
-      "type": "text"
-    },
-    {
-      "title": "Competitor Analysis",
-      "body": "Linear's closest competitors pull in different directions. Jira offers deeper workflow customization, compliance features and the Atlassian ecosystem, making it the stronger choice for regulated or large enterprise teams — and its complexity is the reason most teams evaluate Linear in the first place. Asana targets cross-functional organizations with timeline views, goals and workload management, where engineering is one department among many. Notion combines project management with documentation, wikis and databases for teams that prefer an all-in-one workspace over a best-in-class tracker. GitHub Projects is the cheapest integrated option for teams already hosting code on GitHub. Linear's own advantage is speed: sub-100ms search and a keyboard-first interface that Jira and Asana do not match, traded against the configurability those tools allow.",
-      "type": "text"
-    },
-    {
-      "title": "Buying Advice",
-      "body": "When evaluating Linear, consider four factors. First, assess feature alignment: 18 available features covering Core, Integrations, Security, Mobile should be mapped against your team's specific workflow requirements. Second, evaluate total cost: Varies with free trial pricing, plus costs for alternatives like asana or monday-com that may offer different value propositions. Third, plan the migration: data migration from existing systems, workflow reconfiguration, and team training typically require 2-6 weeks depending on organizational complexity. Fourth, test with real data: a trial period using actual team workflows reveals integration gaps, performance bottlenecks, and adoption friction that demo environments hide. Linear's 4.8/5 rating suggests it delivers on its core promises, but only testing with your specific use cases will confirm fit.",
-      "type": "text"
+      "type": "text",
+      "body": "Compare Linear with a more customizable engineering tracker and a broader work-management platform. Run the same backlog and cycle-planning tasks in each, then compare configuration effort, reporting, permissions, integration fit, and migration risk."
     },
     {
       "title": "Final Verdict",
-      "body": "Linear deserves consideration when a software team wants issue tracking and product planning in a focused workspace. It may be a weaker fit where extensive workflow customization, complex permission models, or established enterprise reporting are non-negotiable. Treat the shortlist as a starting point: test your real backlog and delivery workflow, confirm current plan details, and compare migration costs before making a decision.",
-      "type": "text"
-    },
-    {
-      "title": "API & Automation",
-      "body": "Linear offers a public API for custom integration development, complemented by built-in automation features such as GitHub Integration, GitLab Integration, Slack Integration. The API enables teams to connect Linear with their existing technology stack. Platform-native automation reduces reliance on third-party middleware like Zapier or Make for common workflow patterns. For organizations with specific integration requirements, the API provides the flexibility to build custom connections that address unique business processes.",
-      "type": "text"
-    },
-    {
-      "title": "Pricing at a Glance",
-      "body": "pricing-ladder",
-      "type": "diagram"
-    },
-    {
-      "title": "Feature Radar",
-      "body": "feature-radar",
-      "type": "diagram"
-    },
-    {
-      "title": "Implementation Flow",
-      "body": "implementation-flow",
-      "type": "diagram"
+      "type": "text",
+      "body": "Linear is worth evaluating for software teams that prefer a focused issue and product-planning workflow. It may be less suitable where deep workflow customization or complex administrative controls are mandatory. Confirm current plan details and test a realistic migration before deciding."
     }
   ],
   "faqs": [
@@ -476,8 +353,8 @@
   },
   "difficulty": "Advanced",
   "learningCurve": "Steep — requires dedicated training time for full proficiency",
-  "whoShouldUse": "Linear is designed for fast-growing startups that need a scalable project management platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Linear may be overwhelming for users who only need basic project management functionality. Its extensive feature set can create unnecessary complexity for simple use cases.",
+  "whoShouldUse": "Software teams that want issue tracking and product planning in a shared workspace should assess Linear against their delivery process. Teams outside engineering should verify that the model fits their work, and organizations with complex approval or permission needs should test those cases before adoption.",
+  "whoShouldNotUse": "Test workflow flexibility, custom fields, role permissions, audit needs, reporting, and data export. Migration planning should account for comments, attachments, labels, issue relationships, and history. Confirm which administrative and security controls require a particular plan.",
   "ratingVerified": false,
   "reviewCountVerified": false,
   "priceRangeVerified": false
