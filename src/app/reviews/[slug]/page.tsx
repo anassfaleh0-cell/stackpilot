@@ -1,4 +1,5 @@
 import type { ContentSection } from "@/types/content"
+import { getVisibleReviewContent } from "@/lib/content/review-quality"
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
@@ -23,33 +24,6 @@ import { isNoindexed } from "@/lib/noindex"
 import { BannerAd, NativeAd, InFeedAd } from "@/components/ads"
 
 const TOTAL_REVIEWS = getAllReviews().length
-
-// Keep review pages focused on substantive, tool-specific sections.
-// These legacy sections duplicate structured fields and were generated at scale.
-const HIDDEN_REVIEW_SECTION_TITLES = new Set([
-  "Rating Overview",
-  "Key Features",
-  "Hidden Costs",
-  "Learning Curve",
-  "Setup Time",
-  "Migration Difficulty",
-  "Industry Fit",
-  "Common Mistakes",
-  "Tips from experienced users",
-  "Buying Advice",
-])
-
-function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false) {
-  return content.filter((section) => {
-    if (!showVerifiedPricing && section.type === "diagram" && section.body === "pricing-ladder") return false
-    if (!showVerifiedPricing && /pricing|plans/i.test(section.title)) return false
-    if (HIDDEN_REVIEW_SECTION_TITLES.has(section.title)) return false
-    if (section.type === "diagram") {
-      return ["pricing-ladder", "feature-radar", "implementation-flow"].includes(section.body)
-    }
-    return true
-  })
-}
 
 export function generateStaticParams() {
   return getAllReviews().map((item) => ({ slug: item.slug }))

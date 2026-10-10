@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest"
+import { getVisibleReviewContent } from "@/lib/content/review-quality"
 import fs from "node:fs"
 import path from "node:path"
 import React from "react"
@@ -551,5 +552,26 @@ describe("CD-14: author claims", () => {
     expect(authors).not.toMatch(/holds a degree/i)
     expect(authors).not.toMatch(/worked as a solutions architect/i)
     expect(authors).not.toMatch(/personally reviews tools/i)
+  })
+})
+
+
+describe("CD-15: generated review boilerplate", () => {
+  it("suppresses generic sections that assert unsupported testing, ratings, security, or performance", () => {
+    const calcom = load("cal-com")
+    const visible = getVisibleReviewContent(calcom.content, false)
+    const titles = new Set(visible.map((section: { title: string }) => section.title))
+    for (const title of ["Company Background", "Product Overview", "User Experience", "Real Advantages", "Performance", "Security & Compliance"]) {
+      expect(titles.has(title)).toBe(false)
+    }
+  })
+
+  it("preserves specific workflow guidance while still respecting pricing verification", () => {
+    const content = [
+      { title: "Workflow example", body: "Create a booking page, connect the calendar, and test routing with two sample events." },
+      { title: "Pricing at a Glance", body: "Pricing details." },
+      { title: "Performance", body: "The product delivers reliable performance with 99.9% uptime SLA and consistent response times under load." },
+    ]
+    expect(getVisibleReviewContent(content, false).map((section) => section.title)).toEqual(["Workflow example"])
   })
 })
