@@ -30,10 +30,12 @@ describe("content quality repairs", () => {
     const comparison = getComparison("circleci-vs-containerd")
     expect(comparison).not.toBeNull()
     expect(comparison?.winnerVerified).not.toBe(true)
+    expect(comparison?.featuresVerified).not.toBe(true)
     expect(comparison?.winner).toBeNull()
     expect(comparison?.description).not.toMatch(/CircleCI is our overall pick|recorded pick/i)
     expect(comparison?.verdict).toContain("does not name one overall pick")
     expect(comparison?.verdict).toContain("no independently verified rating")
+    expect(comparison?.verdict).not.toMatch(/marked available in the dataset|marked unavailable in the dataset/i)
   })
 
   it("normalizes malformed numeric price ranges", () => {
