@@ -397,6 +397,10 @@ export function ReviewSchema({ name, description, rating, url, datePublished, bo
   image?: string
   companyInfo?: { founded?: number; headquarters?: string; employees?: string }
 }) {
+  // A Review without a real rating is incomplete structured data. Do not
+  // invent a score just to satisfy validators; omit the Review node instead.
+  if (typeof rating !== "number" || !Number.isFinite(rating) || rating <= 0 || rating > 5) return null
+
   const schema = clean({
     "@context": ctx,
     "@type": "Review",
