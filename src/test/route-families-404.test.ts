@@ -144,7 +144,7 @@ describe("route families", () => {
   it("keeps every content record represented by an indexable sitemap URL", () => {
     const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
     for (const family of FAMILIES) {
-      for (const record of recordsOf(family.dir)) {
+      for (const record of recordsOf(family.dir ?? "")) {
         if (record.publicationStatus === "draft") continue
         expect(paths.has(`/${family.route}/${record.slug}`), `missing sitemap URL for ${family.route}/${record.slug}`).toBe(true)
       }
@@ -175,7 +175,7 @@ describe("route families", () => {
     const entries = sitemap()
     const origin = new URL(entries[0].url).origin
     const byRoute = new Map<string, Map<string, unknown>>(
-      FAMILIES.map((family) => [family.route, new Map(recordsOf(family.dir).map((record) => [record.slug, record.published]))]),
+      FAMILIES.map((family) => [family.route, new Map(recordsOf(family.dir ?? "").map((record) => [record.slug, record.published]))]),
     )
     const codeSlugs = new Map<string, Set<string>>([
       ["authors", new Set<string>([...PUBLIC_AUTHOR_SLUGS])],
