@@ -8,6 +8,10 @@ const slugs = [
   "best-analytics-platforms-2026",
   "best-communication-tools",
   "best-crm-software",
+  "best-ai-tools",
+  "best-analytics-software",
+  "best-api-management-tools",
+  "best-collaboration-software",
 ]
 
 describe("additional shortlist pricing integrity", () => {
