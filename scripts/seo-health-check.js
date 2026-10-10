@@ -380,6 +380,7 @@ function checkContentQuality() {
 
   if (crossCategoryComparisons.length > 0) {
     log("warn", `comparisons: ${crossCategoryComparisons.length} eligible comparison records pair products from different linked-review categories; rendered pages suppress unverified winner/score claims, but each live pairing still needs editorial relevance review. Samples: ${JSON.stringify(crossCategoryComparisons.slice(0, 10))}`)
+    log("warn", `Full cross-category review list (slug and categories): ${JSON.stringify(crossCategoryComparisons.map(({ slug, category1, category2 }) => ({ slug, category1, category2 })))}`)
   }
   if (draftComparisonsSkipped > 0) {
     log("pass", `comparisons: excluded ${draftComparisonsSkipped} explicit draft records from live SEO checks; they remain in the editorial review audit before publication`)
