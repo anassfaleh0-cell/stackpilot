@@ -23,6 +23,19 @@ import path from "path"
 const CONTENT_DIR = path.resolve(process.cwd(), "content")
 const OUTPUT_FILE = path.resolve(process.cwd(), "noindex-list.json")
 
+function normalizeComparisonCategory(category) {
+  const value = String(category || "").trim().toLowerCase().replace(/\s+/g, " ")
+  const aliases = {
+    "analytics": "analytics-data",
+    "analytics & data": "analytics-data",
+    "hr & payroll": "hr-people",
+    "hr & people": "hr-people",
+    "video communication": "communication",
+    "communication": "communication",
+  }
+  return aliases[value] || value
+}
+
 const DIRECTORIES = [
   { dir: "comparisons", keepTop: 50, label: "Comparisons" },
   { dir: "best", keepTop: 20, label: "Best" },
@@ -91,7 +104,7 @@ function scoreFile(filePath, dirName, reviewsBySlug = new Map()) {
   const allText = [collectEditorialText(data), linkedReviewText].filter(Boolean).join(" ")
   const words = countWords(allText)
   const linkedCategories = linkedReviews.map((review) => review.category).filter(Boolean)
-  const isCrossCategoryComparison = dirName === "comparisons" && linkedCategories.length === 2 && linkedCategories[0] !== linkedCategories[1]
+  const isCrossCategoryComparison = dirName === "comparisons" && linkedCategories.length === 2 && normalizeComparisonCategory(linkedCategories[0]) !== normalizeComparisonCategory(linkedCategories[1])
   if (words >= 600) score += 25
   else if (words >= 300) score += 20
   else if (words >= 100) score += 10
