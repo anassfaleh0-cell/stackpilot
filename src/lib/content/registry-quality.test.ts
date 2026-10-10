@@ -21,7 +21,7 @@ describe("content quality repairs", () => {
 
   it("does not invent a missing monthly price", () => {
     const page = getBest("best-email-marketing-ecommerce")
-    expect(page?.picks[0]?.priceRange).toBe("Pricing not verified — check the vendor's current pricing")
+    expect(page?.picks[0]?.priceRange).toBe("Not independently verified — check current vendor pricing")
     expect(page?.picks[0]?.bestFor).not.toContain("+/month")
     expect(page?.pricingSummary).not.toContain("+/month")
     expect(JSON.stringify(page?.faqs)).not.toContain("+/month")
