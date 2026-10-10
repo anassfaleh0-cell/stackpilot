@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest"
 import fs from "node:fs"
 import path from "node:path"
 
-const slugs = ["best-ai-coding-tools", "best-ai-image-generators", "best-agile-project-management", "best-error-tracking", "best-ai-video-tools"]
+const slugs = ["best-ai-coding-tools", "best-ai-image-generators", "best-agile-project-management", "best-error-tracking", "best-ai-video-tools", "best-ci-cd-tools"]
 
 describe("shortlist content integrity", () => {
   it("does not present unverified prices or ratings as independently confirmed", () => {
