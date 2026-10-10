@@ -76,6 +76,13 @@ function slugs(result: RelatedResult): string[] {
 }
 
 describe("Phase 5O-B-1: internal link discovery", () => {
+  it("normalizes category casing and punctuation when discovering related links", { timeout: 60000 }, () => {
+    const result = getRelatedByCategory("marketing seo", "", 500)
+    expect(result.reviews.length).toBeGreaterThan(0)
+    expect(result.comparisons.length).toBeGreaterThan(0)
+    expect(result.bestPages.map((item) => item.slug)).toContain("best-marketing-seo-enterprise")
+  })
+
   it("discovers the priority use-case targets from their own categories", { timeout: 60000 }, () => {
     expect(getRelatedByCategory("Marketing & SEO", "").useCases.map((u) => u.slug)).toContain("best-seo-for-agencies")
     expect(getRelatedByCategory("HR & People", "").useCases.map((u) => u.slug)).toContain("best-hr-for-small-business")
