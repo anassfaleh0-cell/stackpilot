@@ -102,6 +102,10 @@ jobs:
       - name: Noindex audit review-candidate generation
         run: npm run audit:noindex
 
+      - name: Production endpoint smoke check (diagnostic)
+        run: npm run seo:smoke
+        continue-on-error: true
+
       - name: Unit tests
         run: npm test
 
