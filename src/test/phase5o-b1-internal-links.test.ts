@@ -76,6 +76,20 @@ function slugs(result: RelatedResult): string[] {
 }
 
 describe("Phase 5O-B-1: internal link discovery", () => {
+  it("rotates large related-link buckets so more records receive contextual links", { timeout: 60000 }, () => {
+    const candidates = getAllComparisons().filter((comparison) => comparison.category === "Developer Tools")
+    expect(candidates.length).toBeGreaterThan(4)
+    const discovered = new Set<string>()
+    for (const comparison of candidates.slice(0, 12)) {
+      const related = getRelatedByCategory("Developer Tools", comparison.slug, 4)
+      for (const item of related.comparisons) {
+        expect(item.slug).not.toBe(comparison.slug)
+        discovered.add(item.slug)
+      }
+    }
+    expect(discovered.size).toBeGreaterThan(4)
+  })
+
   it("normalizes category casing and punctuation when discovering related links", { timeout: 60000 }, () => {
     const result = getRelatedByCategory("marketing seo", "", 500)
     expect(result.reviews.length).toBeGreaterThan(0)
