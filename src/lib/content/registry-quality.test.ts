@@ -84,7 +84,7 @@ describe("content quality repairs", () => {
       expect(review?.cons, slug).toHaveLength(3)
       const content = review?.content.map(section => section.body).join(" ") ?? ""
       expect(content).toMatch(/not independently verified/i)
-      expect(JSON.stringify(review?.faqs)).not.toMatch(/\\$\\s?\\d|\\d+\\s?\\/\\s?month|\\d+\\/5|\\d[,.]?\\d*%/i)
+      expect(JSON.stringify(review?.faqs)).not.toMatch(/\$\s?\d|\d+\s?\/\s?month|\d+\/5|\d[,.]?\d*%/i)
     }
   })
 
