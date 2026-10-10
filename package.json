@@ -31,7 +31,8 @@
     "seo:audit": "node scripts/seo-health-check.js",
     "seo:links": "node scripts/linking-audit.js",
     "postinstall": "node scripts/copy-og-assets.js",
-    "audit:noindex": "node scripts/noindex-audit.mjs"
+    "audit:noindex": "node scripts/noindex-audit.mjs",
+    "seo:smoke": "node scripts/production-smoke-check.cjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
