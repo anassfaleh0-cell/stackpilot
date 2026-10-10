@@ -57,5 +57,10 @@
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "baseline-browser-mapping": "^2.11.0",
+    "nanoid": "^3.3.18",
+    "source-map-js": "^1.2.2"
   }
 }
