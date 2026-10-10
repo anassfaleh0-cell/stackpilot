@@ -171,7 +171,7 @@ describe("route families", () => {
     for (const family of ALL_FAMILIES) await expect404(family, UNKNOWN_SLUG)
   })
 
-  it("lists only records that resolve in the sitemap", () => {
+  it("lists only records that resolve in the sitemap", async () => {
     const entries = sitemap()
     const origin = new URL(entries[0].url).origin
     const byRoute = new Map<string, Map<string, unknown>>(
@@ -179,7 +179,7 @@ describe("route families", () => {
     )
     const codeSlugs = new Map<string, Set<string>>([
       ["authors", new Set<string>([...PUBLIC_AUTHOR_SLUGS])],
-      ["tools", new Set<string>((Tools.generateStaticParams?.() ?? []).map((param) => param.slug))],
+      ["tools", new Set<string>((await Tools.generateStaticParams?.() ?? []).map((param) => param.slug))],
     ])
 
     for (const entry of entries) {
