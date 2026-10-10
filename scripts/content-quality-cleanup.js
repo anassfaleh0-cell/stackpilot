@@ -57,7 +57,7 @@ const replacements = [
   [/good mobile experience/gi, "mobile access"],
   [/active user community/gi, "community resources"],
   [/Strong performance with fast load times\./g, "Test performance against representative workloads and expected traffic before choosing a plan."],
-  [/([A-Z][A-Za-z0-9 &'’-]*) delivers reliable performance with 99\.9% uptime SLA and consistent response times under load\./g,
+  [/^(.{1,80}?) delivers reliable performance with 99\.9% uptime SLA and consistent response times under load\./gim,
     (_m, product) => `${product} should be evaluated using its current service-status history and contractual uptime commitments; response times depend on workload and configuration.`],
   [/([A-Z][A-Za-z0-9 &'’-]*) delivers reliable performance with solid performance suitable for most business use cases\./g,
     (_m, product) => `${product} should be tested against the team's workload, integrations, and expected usage before a purchase decision.`],
