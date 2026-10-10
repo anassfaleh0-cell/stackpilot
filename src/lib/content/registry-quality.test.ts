@@ -14,7 +14,7 @@ describe("content quality repairs", () => {
 
   it("normalizes malformed numeric price ranges", () => {
     const page = getBest("best-marketing-software")
-    expect(page?.picks[0]?.priceRange).toBe("$119.95–$499.95/month")
+    expect(page?.picks[0]?.priceRange).toBe("Not independently verified — check current vendor pricing")
     expect(page?.description).not.toContain("1199549995")
     expect(page?.description).toContain("SEO")
   })
