@@ -558,7 +558,7 @@ function checkEEAT() {
     const slugList = registryStart >= 0 && registryOpen >= 0 && registryClose > registryOpen
       ? authorRegistry.slice(registryOpen + 1, registryClose)
       : ""
-    const authorCount = slugList.split(",").filter((entry) => entry.includes(""")).length
+    const authorCount = Math.floor((slugList.split('"').length - 1) / 2)
     if (authorCount > 0) log("pass", `${authorCount} public author profile(s) are configured`)
     else log("warn", "No public author profiles are configured in src/lib/authors.ts")
   } else {
