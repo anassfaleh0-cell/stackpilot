@@ -561,9 +561,10 @@ describe("CD-15: generated review boilerplate", () => {
     const calcom = load("cal-com")
     const visible = getVisibleReviewContent(calcom.content, false)
     const titles = new Set(visible.map((section: { title: string }) => section.title))
-    for (const title of ["Company Background", "Product Overview", "User Experience", "Real Advantages", "Performance", "Security & Compliance"]) {
+    for (const title of ["Company Background", "Product Overview", "User Experience", "Real Advantages", "Security & Compliance"]) {
       expect(titles.has(title)).toBe(false)
     }
+    expect(visible.find((section: { title: string }) => section.title === "Performance")?.body).toContain("service-status history")
   })
 
   it("suppresses additional repeated best-for, scale, and uptime claims in the edited review corpus", () => {
