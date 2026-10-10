@@ -22,9 +22,9 @@ import * as UseCases from "@/app/use-cases/[slug]/page"
 type Props = { params: Promise<{ slug: string }> }
 type PageModule = {
   default: (props: Props) => Promise<unknown>
-  generateStaticParams?: () => { slug: string }[]
+  generateStaticParams?: () => { slug: string }[] | Promise<{ slug: string }[]>
 }
-type Family = { dir: string; route: string; mod: PageModule }
+type Family = { dir?: string; route: string; mod: PageModule }
 
 const FAMILIES: Family[] = [
   { dir: "alternatives", route: "alternatives", mod: Alternatives },
@@ -131,7 +131,7 @@ describe("route families", () => {
     const duplicated: string[] = []
     for (const family of FAMILIES) {
       const seen = new Set<string>()
-      for (const record of recordsOf(family.dir)) {
+      for (const record of recordsOf(family.dir ?? "")) {
         if (record.fieldSlug !== record.slug) mismatched.push(`${family.dir}/${record.file} slug=${record.fieldSlug}`)
         if (seen.has(record.fieldSlug)) duplicated.push(`${family.dir}/${record.fieldSlug}`)
         seen.add(record.fieldSlug)
@@ -163,7 +163,8 @@ describe("route families", () => {
 
   it("renders every author and tool the site ships", async () => {
     for (const slug of PUBLIC_AUTHOR_SLUGS) await expectResolves({ route: "authors", mod: Authors }, slug)
-    for (const param of Tools.generateStaticParams!()) await expectResolves({ route: "tools", mod: Tools }, param.slug)
+    const toolParams = await Tools.generateStaticParams!()
+    for (const param of toolParams) await expectResolves({ route: "tools", mod: Tools }, param.slug)
   })
 
   it("404s unknown slugs in every route family", async () => {
