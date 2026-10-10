@@ -38,6 +38,24 @@ function countWords(text) {
   return text.split(/\s+/).filter(Boolean).length
 }
 
+const NON_EDITORIAL_KEYS = new Set([
+  "slug", "website", "url", "publishedAt", "lastUpdated", "lastReviewed",
+  "author", "category", "winner", "priceRange", "pricing", "rating",
+  "ratings", "reviewCount", "seoTitle", "seoDescription", "image",
+  "imageUrl", "logo", "id", "type", "available", "tool1Slug", "tool2Slug",
+  "tool1", "tool2", "createdAt", "updatedAt",
+])
+
+function collectEditorialText(value, key = "") {
+  if (NON_EDITORIAL_KEYS.has(key)) return ""
+  if (typeof value === "string") return value
+  if (Array.isArray(value)) return value.map((item) => collectEditorialText(item, key)).join(" ")
+  if (value && typeof value === "object") {
+    return Object.entries(value).map(([childKey, child]) => collectEditorialText(child, childKey)).join(" ")
+  }
+  return ""
+}
+
 function scoreFile(filePath, dirName) {
   let raw
   try {
@@ -57,14 +75,9 @@ function scoreFile(filePath, dirName) {
   let score = 0
 
   // 1. Word count (0-25 pts)
-  const allText = [
-    data.description || "",
-    data.tagline || "",
-    data.body || "",
-    data.verdict || "",
-    ...(data.content || []).map((s) => s.body || ""),
-    ...(data.sections || []).map((s) => s.body || ""),
-  ].join(" ")
+  // Count editorial copy across schema variants (features, FAQs, picks, glossary
+  // examples, and comparison details), not just `body`/`sections` fields.
+  const allText = collectEditorialText(data)
   const words = countWords(allText)
   if (words >= 600) score += 25
   else if (words >= 300) score += 20
@@ -105,14 +118,19 @@ function scoreFile(filePath, dirName) {
   }
 
   // 6. Depth (0-10 pts)
-  const sections = data.content || data.sections || []
+  const sections = data.content || data.sections || data.features || data.picks || data.alternatives || []
   if (sections.length >= 10) score += 10
   else if (sections.length >= 5) score += 7
   else if (sections.length >= 3) score += 4
 
-  // Bonus: if noindex-worthy signal
+  // Editorial-review signals only: never automatically apply noindex.
+  // A low score prompts human review; it is not proof that a page is low quality.
   const isThin = words < 150 && !hasTested
-  const isDuplicate = dirName === "comparisons" && sections.length < 3
+  const isDuplicate = dirName === "comparisons" && sections.length < 3 && words < 300
+  const reviewReasons = []
+  if (isThin) reviewReasons.push("very-short-source-content")
+  if (isDuplicate) reviewReasons.push("short-comparison-with-few-sections")
+  if (score < 30) reviewReasons.push("low-source-signal-score")
 
   return {
     slug,
@@ -126,6 +144,8 @@ function scoreFile(filePath, dirName) {
     sections: sections.length,
     isThin,
     isDuplicate,
+    reviewRecommended: reviewReasons.length > 0,
+    reviewReasons,
   }
 }
 
@@ -148,28 +168,32 @@ function main() {
       return scoreFile(filePath, dir)
     }).sort((a, b) => b.score - a.score)
 
-    // Quality is fixed in place; this audit is diagnostic only.
-    // Every existing content page remains eligible for indexing.
+    // Keep/noindex decisions remain manual. Surface review candidates instead of
+    // silently reporting every page as "keep" with no triage list.
     const keepSlugs = scored.map((s) => s.slug)
     const noindexSlugs = []
+    const reviewSlugs = scored.filter((s) => s.reviewRecommended).map((s) => s.slug)
 
     results[dir] = {
       total: files.length,
       keep: keepSlugs,
       noindex: noindexSlugs,
+      reviewRecommended: reviewSlugs,
       keepTop,
       stats: {
-        avgScore: Math.round(scored.reduce((a, s) => a + s.score, 0) / scored.length),
-        avgWords: Math.round(scored.reduce((a, s) => a + s.words, 0) / scored.length),
+        avgScore: Math.round(scored.reduce((a, s) => a + s.score, 0) / Math.max(1, scored.length)),
+        avgWords: Math.round(scored.reduce((a, s) => a + s.words, 0) / Math.max(1, scored.length)),
         thinContent: scored.filter((s) => s.isThin).length,
+        reviewRecommended: reviewSlugs.length,
       },
     }
 
     allFiles.push(...scored.map((s) => ({ ...s, keep: keepSlugs.includes(s.slug) })))
 
-    console.log(`   ✅ Keep: ${keepSlugs.length} | 🚫 Noindex: ${noindexSlugs.length}`)
+    console.log(`   ✅ Keep/index eligible: ${keepSlugs.length} | 🚫 Auto-noindex: ${noindexSlugs.length} (manual decision only)`)
     console.log(`   📊 Avg score: ${results[dir].stats.avgScore} | Avg words: ${results[dir].stats.avgWords}`)
-    console.log(`   ⚠️  Thin content: ${results[dir].stats.thinContent}`)
+    console.log(`   ⚠️  Thin content: ${results[dir].stats.thinContent} | Editorial review recommended: ${reviewSlugs.length}`)
+    if (reviewSlugs.length > 0) console.log(`   🔎 Review samples: ${reviewSlugs.slice(0, 12).join(", ")}`)
     console.log()
   }
 
@@ -180,6 +204,7 @@ function main() {
       totalFiles: allFiles.length,
       totalKeep: allFiles.filter((f) => f.keep).length,
       totalNoindex: allFiles.filter((f) => !f.keep).length,
+      totalReviewRecommended: allFiles.filter((f) => f.reviewRecommended).length,
     },
     directories: results,
     allFiles: allFiles.sort((a, b) => b.score - a.score),
@@ -191,6 +216,8 @@ function main() {
   console.log(`   Total files: ${output.summary.totalFiles}`)
   console.log(`   Keep: ${output.summary.totalKeep}`)
   console.log(`   Noindex: ${output.summary.totalNoindex}`)
+  console.log(`   Editorial review recommended: ${output.summary.totalReviewRecommended}`)
+  console.log("   Note: review recommendations do not change robots directives or indexing eligibility.")
 }
 
 main()
