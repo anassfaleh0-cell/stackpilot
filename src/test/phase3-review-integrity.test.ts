@@ -605,3 +605,30 @@ describe("CD-15: generated review boilerplate", () => {
     expect(getVisibleReviewContent(content, false).map((section) => section.title)).toEqual(["Workflow example"])
   })
 })
+
+
+describe("CD-16: cross-category comparison publication safeguards", () => {
+  it("keeps non-substitutable product comparisons unpublished without a false overall winner", () => {
+    const slugs = [
+      "1password-vs-appwrite",
+      "1password-vs-auth0",
+      "1password-vs-crowdstrike",
+      "1password-vs-fathom",
+      "adp-vs-airtable",
+      "affinity-vs-wix",
+      "ahrefs-vs-claude",
+      "cal-com-vs-discord",
+      "clickup-vs-gusto",
+      "copy-ai-vs-heap",
+      "dialpad-vs-loom",
+    ]
+    for (const slug of slugs) {
+      const file = path.join(process.cwd(), "content", "comparisons", `${slug}.json`)
+      const comparison = JSON.parse(fs.readFileSync(file, "utf8"))
+      expect(comparison.publicationStatus, slug).toBe("draft")
+      expect(comparison.published, slug).toBe(false)
+      expect(comparison.winner, slug).toBe("Depends on use case")
+      expect(comparison.lastUpdated, slug).toBeUndefined()
+    }
+  })
+})
