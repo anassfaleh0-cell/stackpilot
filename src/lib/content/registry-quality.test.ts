@@ -69,4 +69,23 @@ describe("content quality repairs", () => {
     expect(review?.content.some((section) => section.title === "A practical pilot checklist")).toBe(true)
   })
 
+
+  it("suppresses unverified ratings, pricing, and review-count claims on audited reviews", () => {
+    for (const slug of ["asana", "linear", "monday-com", "hubspot"]) {
+      const review = getReview(slug)
+      expect(review, slug).not.toBeNull()
+      expect(review?.ratingVerified, slug).toBe(false)
+      expect(review?.reviewCountVerified, slug).toBe(false)
+      expect(review?.priceRangeVerified, slug).toBe(false)
+      expect(review?.pricing, slug).toBe("Not independently verified")
+      expect(review?.priceRange, slug).toMatch(/not independently verified/i)
+      expect(review?.description, slug).toMatch(/not independently verified/i)
+      expect(review?.pros, slug).toHaveLength(3)
+      expect(review?.cons, slug).toHaveLength(3)
+      const content = review?.content.map(section => section.body).join(" ") ?? ""
+      expect(content).toMatch(/not independently verified/i)
+      expect(JSON.stringify(review?.faqs)).not.toMatch(/\\$\\s?\\d|\\d+\\s?\\/\\s?month|\\d+\\/5|\\d[,.]?\\d*%/i)
+    }
+  })
+
 })
