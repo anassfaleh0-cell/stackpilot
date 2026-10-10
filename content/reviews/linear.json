@@ -216,7 +216,7 @@
     },
     {
       "title": "Real Advantages",
-      "body": "Linear's strongest advantage is raw performance. The application responds to every user interaction in under 100ms — issue creation, status changes, filtering, search queries — which creates a fluid experience that feels more like a native desktop app than a web application. This speed transforms daily workflow: engineers can triage 50+ issues in a morning standup without waiting for page loads, lag, or spinner states. The keyboard-first design is a genuine productivity multiplier for engineers who spend their day in terminal, IDE, and browser — eliminating mouse dependency for project management tasks reduces context-switching overhead. AI issue triage is another differentiator: rather than requiring manual labeling and prioritization, Linear's AI learns team patterns and automatically categorizes incoming issues with surprising accuracy after 2-3 cycles of training data. The GitHub/GitLab integration depth exceeds that of Jira or Asana — creating a branch directly from a Linear issue with the correct naming convention and linking the subsequent PR back to the issue creates a seamless code-to-task pipeline that reduces manual status updates.",
+      "body": "Linear's appeal for software teams is its issue-centered workflow: teams can organize work into projects and cycles, connect engineering activity to issues, and use keyboard-driven navigation. Whether that makes the team faster depends on the way it is configured and the size and habits of the workspace. Trial it with a real backlog and compare issue triage, search, status changes, and handoffs with the process you use today; this review does not provide independently measured latency or productivity results.",
       "type": "text"
     },
     {
@@ -261,12 +261,12 @@
     },
     {
       "title": "Performance",
-      "body": "Linear's performance is the best among all major project management tools, consistently earning 4.9/5 in user ratings. The web application delivers sub-100ms response times for all core operations — issue creation, status changes, filtering, search, and keyboard navigation — even on workspaces with 10,000+ issues and 50+ team members. The application uses optimistic UI updates: when a user changes an issue status, the interface updates immediately and syncs with the server in the background, eliminating the perception of latency. Search across all issues, projects, cycles, and users returns results in under 100ms with real-time filtering as the user types. The desktop application (Electron-based) consumes 100-200 MB of RAM, significantly less than Jira (300-500 MB in browser) or Asana (200-400 MB). The mobile app on iOS and Android opens in 2-3 seconds and provides full issue management capabilities, though the keyboard shortcut system does not translate to touch interfaces. Linear's uptime has been 99.99% since 2023 according to the platform status page, with no documented multi-hour outages. The only performance concern is initial load time for large workspaces with many teams and projects; Linear loads workspace metadata progressively, prioritizing the most recently accessed projects.",
+      "body": "We have not independently benchmarked Linear's response times, memory use, or availability, so this page should not be read as a measured performance ranking. During a trial, test issue creation, filtering, search, project navigation, and mobile use with a representative workspace and network connection. Record slow operations and check the vendor's current status page for incident history instead of relying on unverified uptime or sub-100ms claims.",
       "type": "text"
     },
     {
       "title": "Customer Support",
-      "body": "Linear provides email and in-app chat support across all paid plans. Free plan users have access to community forums and documentation. Team plan users receive email support with 12-24 hour response time during business days. Enterprise plan customers get priority email and chat support with 4-hour response SLA, a dedicated support engineer, and quarterly check-ins. Support quality is rated 4.5/5, reflecting the platform's focus on a responsive, helpful support experience that matches the product's quality. The documentation is clear, concise, and well-organized with written guides and short video tutorials covering every feature. Linear's changelog is actively maintained with monthly product updates, and feature requests are tracked in a public roadmap where users can vote on priorities. One limitation: Linear does not offer phone support at any tier, which may be a concern for organizations that require phone-based escalation for critical production issues. Enterprise users report positive experiences with their dedicated support contacts who provide guidance on workspace configuration, migration planning, and automation rule optimization. The community forum is relatively small compared to Jira's or Asana's but contains high-quality discussions with responses from the Linear team.",
+      "body": "Support channels, response commitments, and escalation options can vary by plan and change over time; this review does not have verified evidence for specific response-time SLAs. Before purchase, confirm the current support routes and contractual commitments for the plan being considered. Test the documentation against a real setup task and ask the vendor how urgent production issues are escalated.",
       "type": "text"
     },
     {
@@ -286,7 +286,7 @@
     },
     {
       "title": "Tips from experienced users",
-      "body": "Power users rely on five strategies. Master the command menu (Cmd+K) — this is Linear's most powerful navigation tool, providing instant access to any command, project, issue, or user by typing 2-3 characters. Every action available through the interface is accessible through the command menu, making it the fastest way to work. Use saved views for recurring workflows — create custom views for 'bugs assigned to me this cycle', 'issues in Review by my team', or 'stale issues with no updates in 2 weeks' and bookmark them for daily use. Configure Slack integration to create issues from messages with @Linear — a slash command in Slack creates a Linear issue from a message thread, capturing context and conversation history automatically. Set up automation rules for common transitions — auto-assign issues based on label (UI bugs → frontend team, API issues → backend team), auto-transition to In Progress when a branch is created, and auto-close issues when linked PRs merge. Use cycle analytics during retrospectives — the cycle time distribution chart and throughput trend data provide objective data for process improvement discussions that replace subjective impressions. Review the changelog monthly; Linear ships updates rapidly, and new features often solve problems teams work around.",
+      "body": "Start with a small team workflow rather than migrating every project at once. Define issue types, ownership, and a few useful saved views; connect the source-control and communication tools the team actually uses; and document when work moves between statuses. Review cycle or project reports after a few weeks and change the workflow only when the data or team feedback shows a problem. Verify current keyboard shortcuts and integration behavior in the product because details can change.",
       "type": "text"
     },
     {
@@ -389,7 +389,7 @@
     },
     {
       "question": "How often does Linear update?",
-      "answer": "Linear updates weekly. The platform ships updates weekly, with major feature releases quarterly. Users are notified of changes through in-app announcements and the platform changelog."
+      "answer": "Check Linear's current changelog for release dates and feature details. We have not independently verified a fixed weekly release cadence or quarterly major-release schedule, so we do not promise a specific frequency here."
     },
     {
       "question": "What customer support does Linear provide?",
