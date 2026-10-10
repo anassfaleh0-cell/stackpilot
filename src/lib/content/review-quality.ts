@@ -22,6 +22,7 @@ const GENERATED_REVIEW_SECTION_PATTERNS = [
   /^.+ achieves strong ratings across key evaluation categories including feature completeness, ease of use, customer support, value for money, and performance\./i,
   /^Founded in \d{4} and headquartered in .+ has grown to serve .+ users with .+ team members\./i,
   /^.+ delivers comprehensive .+ functionality designed to address the most critical needs in the .+ category\./i,
+  /^.+ delivers comprehensive .+ functionality designed for .+\. The platform offers robust security features, comprehensive integration options/i,
   /^We found .+'s interface to be intuitive and well-organized\./i,
   /^.+ is best suited for .+ Organizations that need .+ enterprise-grade reliability will find .+ particularly valuable\./i,
   /^.+ delivers the core functionality expected from a platform in its category, with particular strength in the areas that matter most to its target users\./i,
