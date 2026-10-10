@@ -64,6 +64,10 @@ for (const file of files) {
   if (!parsedDate || Number.isNaN(parsedDate.getTime()) || parsedDate.getTime() > Date.now() + 86400000 || Date.now() - parsedDate.getTime() > 365 * 86400000) {
     staleDates.push({ slug: data.slug, lastUpdated: data.lastUpdated || null })
   }
+  // Include FAQ copy because it is rendered as part of the guide page and contributes to reading time.
+  for (const faq of data.faqs || []) {
+    words += count(faq.question) + count(faq.answer)
+  }
   const expectedReadingTime = Math.max(3, Math.ceil(words / 200))
   if (Number.isFinite(data.readingTime) && data.readingTime !== expectedReadingTime) {
     readingTimeMismatches.push({ slug: data.slug, stored: data.readingTime, expected: expectedReadingTime, words })
