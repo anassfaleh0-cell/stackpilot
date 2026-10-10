@@ -30,9 +30,9 @@ describe("content quality repairs", () => {
     const review = getReview("activecampaign")
     expect(review).not.toBeNull()
     const renderedContent = JSON.stringify(review)
-    expect(renderedContent).not.toMatch(/<a\\b[^>]*>[\\s\\S]*?<a\\b/i)
-    expect((renderedContent.match(/<a\\b/gi) || []).length).toBe(
-      (renderedContent.match(/<\\/a\\s*>/gi) || []).length,
+    expect(renderedContent).not.toMatch(/<a\b[^>]*>[\s\S]*?<a\b/i)
+    expect((renderedContent.match(/<a\b/gi) || []).length).toBe(
+      (renderedContent.match(/<\/a\s*>/gi) || []).length,
     )
   })
 
