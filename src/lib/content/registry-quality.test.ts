@@ -24,6 +24,9 @@ describe("content quality repairs", () => {
     expect(page?.picks[0]?.priceRange).toBe("Pricing not verified — check the vendor's current pricing")
     expect(page?.picks[0]?.bestFor).not.toContain("+/month")
     expect(page?.pricingSummary).not.toContain("+/month")
+    expect(JSON.stringify(page?.faqs)).not.toContain("+/month")
+    expect(JSON.stringify(page?.faqs)).not.toContain("30-40x")
+    expect(page?.picks.every((pick) => pick.priceRange === "Pricing not verified — check the vendor's current pricing")).toBe(true)
   })
   it("replaces generic marketing attribution filler with actionable validation steps", () => {
     const guide = getGuide("marketing-attribution-guide")
