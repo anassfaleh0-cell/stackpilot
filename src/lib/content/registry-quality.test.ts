@@ -26,6 +26,16 @@ describe("content quality repairs", () => {
     expect(guide!.readingTime).toBeGreaterThan(10)
   })
 
+  it("removes malformed nested anchors from imported review content", () => {
+    const review = getReview("activecampaign")
+    expect(review).not.toBeNull()
+    const renderedContent = JSON.stringify(review)
+    expect(renderedContent).not.toMatch(/<a\\b[^>]*>[\\s\\S]*?<a\\b/i)
+    expect((renderedContent.match(/<a\\b/gi) || []).length).toBe(
+      (renderedContent.match(/<\\/a\\s*>/gi) || []).length,
+    )
+  })
+
   it("does not publish unverified comparison winners or ratings", () => {
     const comparison = getComparison("circleci-vs-containerd")
     expect(comparison).not.toBeNull()
