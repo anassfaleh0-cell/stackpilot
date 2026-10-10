@@ -16,6 +16,9 @@ describe("site-wide content indexability policy", () => {
       const type = typeByDir[dir]
       if (!type) continue
       for (const slug of data.keep ?? []) {
+        const filePath = `content/${dir}/${slug}.json`
+        const record = fs.existsSync(filePath) ? JSON.parse(fs.readFileSync(filePath, "utf8")) as { publicationStatus?: string } : null
+        if (record?.publicationStatus === "draft") continue
         expect(getContentTitle(type, slug), dir + "/" + slug).not.toBeNull()
         expect(isNoindexed(dir, slug), dir + "/" + slug).toBe(false)
       }

@@ -54,7 +54,7 @@ export default function HomePage() {
               {" "}with confidence
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10 text-pretty">
-              Detailed reviews, practical comparisons, and useful guides — every review scored against the same published rubric so you can compare tools with more context.
+              Detailed software reviews, practical comparisons, and buying guides. Explore product fit, feature trade-offs, and the questions to verify before choosing a tool.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
@@ -119,10 +119,12 @@ export default function HomePage() {
                 <Card className="h-full flex flex-col">
                   <div className="flex items-start justify-between mb-3">
                     <Badge variant="secondary">{tool.category}</Badge>
-                    <div className="flex items-center gap-1 text-sm font-medium text-accent">
-                      <Star size={14} className="fill-accent text-accent" />
-                      {tool.rating}
-                    </div>
+                    {tool.ratingVerified === true && typeof tool.rating === "number" && Number.isFinite(tool.rating) && (
+                      <div className="flex items-center gap-1 text-sm font-medium text-accent">
+                        <Star size={14} className="fill-accent text-accent" />
+                        {tool.rating}
+                      </div>
+                    )}
                   </div>
                   <CardTitle className="group-hover:text-primary transition-colors">{tool.name}</CardTitle>
                   <CardDescription className="mt-1.5">{tool.tagline}</CardDescription>
@@ -179,7 +181,7 @@ export default function HomePage() {
                   <Card className="h-full flex flex-col">
                     <div className="flex items-start justify-between mb-3">
                       <Badge variant="secondary">{cmp.category}</Badge>
-                      {cmp.winner && (
+                      {cmp.winnerVerified === true && cmp.winner && (
                         <span className="text-xs font-medium text-success flex items-center gap-1">
                           <Shield size={12} /> {cmp.winner} wins
                         </span>
@@ -372,7 +374,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold mb-0.5">Independent & Unbiased</h3>
-                  <p className="text-xs text-muted-foreground">No paid placements. No vendor influence.</p>
+                  <p className="text-xs text-muted-foreground">Paid placements are disclosed separately; payment does not determine editorial ratings or rankings.</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -390,7 +392,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold mb-0.5">Regularly Updated</h3>
-                  <p className="text-xs text-muted-foreground">Content reviewed and refreshed quarterly</p>
+                  <p className="text-xs text-muted-foreground">We update content when material product or pricing changes are verified.</p>
                 </div>
               </div>
             </div>

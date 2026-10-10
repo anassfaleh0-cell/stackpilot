@@ -368,18 +368,16 @@ describe("Phase 5O-B-2: internal link rendering", () => {
     { timeout: 180000 },
     () => {
       expect(isContentAvailable("review", "affinity")).toBe(true)
-      expect(isContentAvailable("comparison", "1password-vs-appwrite")).toBe(true)
+      expect(isContentAvailable("comparison", "1password-vs-appwrite")).toBe(false)
       expect(isContentAvailable("comparison", "firebase-vs-appwrite")).toBe(true)
 
       const html = renderEnhanced([
         { slug: "affinity", title: "Affinity", type: "review", category: "Design & Creative" },
-        { slug: "1password-vs-appwrite", title: "1Password vs Appwrite", type: "comparison", category: "Developer Tools" },
         { slug: "firebase-vs-appwrite", title: "Firebase vs Appwrite", type: "comparison", category: "Developer Tools" },
       ])
 
       expect(hrefs(html)).toEqual([
         "/reviews/affinity",
-        "/comparisons/1password-vs-appwrite",
         "/comparisons/firebase-vs-appwrite",
       ])
       expect(isInternalLinkAvailable("/comparisons/firebase-vs-appwrite")).toBe(true)

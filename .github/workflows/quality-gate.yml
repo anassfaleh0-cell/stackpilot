@@ -26,8 +26,63 @@ jobs:
           node-version: 22
           cache: npm
 
+      - name: Apply production dependency overrides once
+        if: github.event_name == 'pull_request' && github.head_ref == 'fix/comparison-copy-audit-wave1'
+        run: |
+          npm audit --omit=dev --json > /tmp/production-before.json || true
+          before=$(node -p 'JSON.parse(require("fs").readFileSync("/tmp/production-before.json", "utf8")).metadata?.vulnerabilities?.total ?? 0')
+          if [ "$before" -gt 0 ]; then
+            git fetch origin "$GITHUB_HEAD_REF"
+            git checkout -B "$GITHUB_HEAD_REF" "origin/$GITHUB_HEAD_REF"
+            npm install --ignore-scripts --no-audit
+            npm audit --omit=dev --json > /tmp/production-after.json || true
+            after=$(node -p 'JSON.parse(require("fs").readFileSync("/tmp/production-after.json", "utf8")).metadata?.vulnerabilities?.total ?? 0')
+            echo "Production dependency audit findings before=$before after=$after"
+            if [ "$after" -lt "$before" ]; then
+              git config user.name "github-actions[bot]"
+              git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+              git add package.json package-lock.json
+              if ! git diff --cached --quiet; then
+                git commit -m "Patch vulnerable production transitive dependencies"
+                git push origin "HEAD:${GITHUB_HEAD_REF}"
+              fi
+            else
+              echo "No lower-risk production lockfile generated; leaving dependency files unchanged."
+            fi
+          else
+            echo "Production dependencies have no reported audit findings."
+          fi
+
       - name: Install dependencies
         run: npm ci
+
+      - name: Dependency audit summary (non-blocking)
+        run: |
+          npm audit --json > /tmp/npm-audit.json || true
+          npm audit --omit=dev --json > /tmp/npm-audit-production.json || true
+          node <<'NODE'
+          const full = require('/tmp/npm-audit.json')
+          const production = require('/tmp/npm-audit-production.json')
+          const vulnerabilities = Object.entries(full.vulnerabilities || {}).map(([name, item]) => ({
+            name,
+            severity: item.severity,
+            range: item.range,
+            fixAvailable: item.fixAvailable,
+            advisories: (item.via || []).filter((via) => typeof via === 'object').map((via) => ({
+              title: via.title,
+              url: via.url,
+              range: via.range,
+            })),
+          }))
+          console.log(JSON.stringify({
+            fullAudit: full.metadata?.vulnerabilities,
+            productionAudit: production.metadata?.vulnerabilities,
+            affectedPackages: vulnerabilities,
+            productionAffectedPackages: Object.entries(production.vulnerabilities || {}).map(([name, item]) => ({
+              name, severity: item.severity, range: item.range,
+            })),
+          }, null, 2))
+          NODE
 
       - name: Normalize flagged content boilerplate
         run: |
@@ -43,6 +98,9 @@ jobs:
 
       - name: SEO content audit
         run: npm run seo:audit
+
+      - name: Noindex audit review-candidate generation
+        run: npm run audit:noindex
 
       - name: Unit tests
         run: npm test

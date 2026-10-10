@@ -76,6 +76,27 @@ function slugs(result: RelatedResult): string[] {
 }
 
 describe("Phase 5O-B-1: internal link discovery", () => {
+  it("rotates large related-link buckets so more records receive contextual links", { timeout: 60000 }, () => {
+    const candidates = getAllComparisons().filter((comparison) => comparison.category === "Developer Tools")
+    expect(candidates.length).toBeGreaterThan(4)
+    const discovered = new Set<string>()
+    for (const comparison of candidates.slice(0, 12)) {
+      const related = getRelatedByCategory("Developer Tools", comparison.slug, 4)
+      for (const item of related.comparisons) {
+        expect(item.slug).not.toBe(comparison.slug)
+        discovered.add(item.slug)
+      }
+    }
+    expect(discovered.size).toBeGreaterThan(4)
+  })
+
+  it("normalizes category casing and punctuation when discovering related links", { timeout: 60000 }, () => {
+    const result = getRelatedByCategory("marketing seo", "", 500)
+    expect(result.reviews.length).toBeGreaterThan(0)
+    expect(result.comparisons.length).toBeGreaterThan(0)
+    expect(result.bestPages.map((item) => item.slug)).toContain("best-marketing-seo-enterprise")
+  })
+
   it("discovers the priority use-case targets from their own categories", { timeout: 60000 }, () => {
     expect(getRelatedByCategory("Marketing & SEO", "").useCases.map((u) => u.slug)).toContain("best-seo-for-agencies")
     expect(getRelatedByCategory("HR & People", "").useCases.map((u) => u.slug)).toContain("best-hr-for-small-business")
@@ -133,7 +154,7 @@ describe("Phase 5O-B-1: internal link discovery", () => {
   })
 
   it("keeps real records available while rejecting missing routes", { timeout: 60000 }, () => {
-    expect(isContentAvailable("comparison", "1password-vs-appwrite")).toBe(true)
+    expect(isContentAvailable("comparison", "firebase-vs-appwrite")).toBe(true)
     expect(isContentAvailable("best", "best-ai-coding-tools")).toBe(true)
     expect(isContentAvailable("alternative", "1password-alternatives")).toBe(true)
     expect(isContentAvailable("comparison", "definitely-not-a-real-comparison")).toBe(false)

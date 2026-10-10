@@ -30,13 +30,14 @@
     "check:all": "npm run test && npm run build",
     "seo:audit": "node scripts/seo-health-check.js",
     "seo:links": "node scripts/linking-audit.js",
-    "postinstall": "node scripts/copy-og-assets.js"
+    "postinstall": "node scripts/copy-og-assets.js",
+    "audit:noindex": "node scripts/noindex-audit.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.24.0",
-    "next": "16.2.10",
+    "next": "16.4.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "sharp": "^0.35.3",
@@ -52,10 +53,15 @@
     "@types/react-dom": "^19",
     "cross-env": "^10.1.0",
     "eslint": "^9",
-    "eslint-config-next": "16.2.10",
+    "eslint-config-next": "16.4.0",
     "jsdom": "^29.1.1",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "baseline-browser-mapping": "^2.11.0",
+    "nanoid": "^3.3.18",
+    "source-map-js": "^1.2.2"
   }
 }

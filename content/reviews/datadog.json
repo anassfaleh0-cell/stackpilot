@@ -240,7 +240,7 @@
     },
     {
       "title": "Performance",
-      "body": "Datadog delivers reliable performance with 99.9% uptime SLA and consistent response times under load.",
+      "body": "Measure Datadog with representative telemetry volume and the dashboards, queries, and alerts your team uses. Check ingestion delays, query responsiveness, alert delivery, and the cost impact of retention and high-cardinality attributes; this page does not report an independently measured uptime result.",
       "type": "text"
     },
     {
@@ -468,6 +468,6 @@
   "wordCount": 6313,
   "difficulty": "Intermediate",
   "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "Datadog is perfect for freelancers and independent professionals who need an affordable, easy-to-use developer tools tool. Its simplicity and core feature set make it ideal for solo practitioners.",
-  "whoShouldNotUse": "Datadog is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "whoShouldUse": "Engineering, platform, and SRE teams that need to correlate metrics, logs, traces, and alerts across cloud services can evaluate Datadog. Start with the systems and signals you actually operate, then test alert noise, dashboard usefulness, integration coverage, retention needs, and expected ingestion cost.",
+  "whoShouldNotUse": "It may be unnecessarily costly or operationally heavy for a small stack that can be monitored with simpler existing tools. Teams should estimate telemetry volume and retention charges from their own workloads, and verify any uptime commitment in the applicable contract rather than rely on an unverified summary."
 }

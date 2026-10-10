@@ -82,6 +82,25 @@ const GENERIC_BOILERPLATE_PATTERNS = [
   /this approach enables teams to maximize their software investment/i,
   /organizations see measurable improvements in efficiency and user satisfaction within the first quarter/i,
   /organizations see measurable improvements in efficiency and team productivity/i,
+  /choosing the right .* software starts with understanding your specific requirements/i,
+  /this topic is most useful when it is connected to a real decision/i,
+  /adequate performance for most use cases/i,
+  /functional organized interface/i,
+  /strong performance with fast load times/i,
+  /delivers reliable performance with 99\.9% uptime SLA/i,
+  /delivers reliable performance with solid performance suitable for most business use cases/i,
+  /written against our published editorial methodology/i,
+  /updated when the underlying content is reviewed/i,
+  /positive ROI typically within 3-6 months/i,
+  /most teams start within hours/i,
+  /a teams team uses/i,
+  /updates weekly[^.]*major feature releases quarterly/i,
+  /perfect for freelancers and independent professionals/i,
+  /choosing the right marketing\s*&\s*seo software/i,
+  /and \d+\+ more\./i,
+  /workfl(?:$|\s)/i,
+  /most successful deployments follow a phased approach/i,
+
 ]
 
 const UNSUPPORTED_CLAIM_PATTERNS = [
@@ -151,8 +170,31 @@ function sanitizeUnsupportedClaims(value: string | undefined): string {
     .trim()
 }
 
+function sanitizeMalformedAnchorMarkup(value: string): string {
+  const openingCount = (value.match(/<a\b/gi) || []).length
+  if (openingCount === 0) return value
+  const closingCount = (value.match(/<\/a\s*>/gi) || []).length
+  const hasNestedAnchors = /<a\b[^>]*>(?:(?!<\/a\s*>)[\s\S])*<a\b/i.test(value)
+  // Some imported content has nested or unbalanced anchors from automated link insertion.
+  // Keep the readable labels, but remove anchor tags from the affected field so malformed
+  // markup cannot swallow adjacent words or corrupt the rendered review.
+  if (hasNestedAnchors || openingCount !== closingCount) {
+    return value.replace(/<\/?a\b[^>]*>/gi, "")
+  }
+  return value
+}
+
+function sanitizeEditorialText(value: string): string {
+  const cleaned = sanitizeUnsupportedClaims(sanitizeMalformedAnchorMarkup(value))
+  return cleaned
+    .split(/(?<=[.!?])\s+/)
+    .filter((sentence) => !GENERIC_BOILERPLATE_PATTERNS.some((pattern) => pattern.test(sentence)))
+    .join(" ")
+    .trim()
+}
+
 function sanitizeContentValue(value: unknown): unknown {
-  if (typeof value === "string") return sanitizeMalformedPricingText(sanitizeUnsupportedClaims(value))
+  if (typeof value === "string") return sanitizeMalformedPricingText(sanitizeEditorialText(value))
   if (Array.isArray(value)) return value.map(sanitizeContentValue)
   if (value && typeof value === "object") {
     const out: Record<string, unknown> = {}
@@ -578,6 +620,11 @@ function normalizeComparisonWinner(value: string | null, tool1: string, tool2: s
 function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: string, tool2Slug: string, features: ComparisonFeature[], winner: string | null): string {
   const review1 = getReview(tool1Slug)
   const review2 = getReview(tool2Slug)
+  const categoryKey = (value: string) => value.toLowerCase().replace(/&/g, " ").replace(/[^a-z0-9]+/g, " ").trim()
+  const categoriesDiffer = Boolean(review1 && review2 && categoryKey(review1.category) !== categoryKey(review2.category))
+  const categoryContext = categoriesDiffer && review1 && review2
+    ? tool1 + " is categorized as " + review1.category + ", while " + tool2 + " is categorized as " + review2.category + ". These products may address different needs, so compare only overlapping requirements rather than treating this page as a universal ranking."
+    : ""
   const recordedPick = winner
     ? `The source dataset marks ${winner} as its recorded pick. That label is not independent proof that it is the better choice for every team.`
     : "The source dataset does not name one overall pick. Choose based on your requirements and the evidence you verify."
@@ -590,11 +637,18 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
     const value = (v: unknown) => typeof v === "boolean" ? (v ? "marked available in the dataset" : "marked unavailable in the dataset") : String(v || "not recorded")
     return `${f.name}: ${tool1} — ${value(f.tool1)}; ${tool2} — ${value(f.tool2)}.`
   }).join(" ")
-  const pricing = [review1, review2].filter((review): review is ReviewContent => Boolean(review)).map((review) =>
-    `${review.name} has a recorded rating of ${review.rating}/5 and pricing listed as ${review.pricing}${review.priceRange ? ` (${review.priceRange})` : ""}. Ratings, prices, included limits, and plan availability may change; check the source and current vendor page before purchasing.`
-  ).join(" ")
+  const pricing = [review1, review2].filter((review): review is ReviewContent => Boolean(review)).map((review) => {
+    const rating = review.ratingVerified === true
+      ? `a documented rating of ${review.rating}/5`
+      : "no independently verified rating"
+    const price = review.priceRangeVerified === true && review.priceRange
+      ? `pricing recorded as ${review.priceRange}`
+      : "pricing not independently verified"
+    return `${review.name}: ${rating}; ${price}. Confirm the current vendor terms, included limits, billing period, and plan availability before purchasing.`
+  }).join(" ")
   return [
     `This page compares ${tool1} and ${tool2} using information currently recorded in PilotStack's product profiles. The dataset is a starting point for research, not a substitute for a hands-on trial or vendor confirmation.`,
+    categoryContext,
     recordedPick,
     profile(tool1, review1),
     profile(tool2, review2),
@@ -606,9 +660,41 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
 }
 function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
   const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
-  if (cleaned.length >= 80 && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(cleaned)) return trimText(cleaned, 700)
-  return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the recorded overall winner." : "The dataset records no single overall winner.") + " Read the detailed rows and linked reviews before making a decision.", 700)
+  // Winner language is publishable only when the comparison has an explicit audit flag.
+  const safeDescription = cleaned
+    .split(/(?<=[.!?])\s+/)
+    .filter((sentence) => {
+      const unsupportedWinnerClaim = /\b(?:overall pick|recorded pick|overall winner|our recommendation|recommended for most users|is the winner|wins over|beats|outperforms|edges ahead)\b/i.test(sentence)
+      const unverifiedMetricClaim = /(?:[$€£]\s?\d|\b\d+(?:\.\d+)?\s*\/\s*5\b|\b\d+\s*(?:per month|per user|\/mo|\/month)\b)/i.test(sentence)
+      return (winner || !unsupportedWinnerClaim) && !unverifiedMetricClaim
+    })
+    .join(" ")
+    .trim()
+  if (safeDescription.length >= 80 && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(safeDescription)) return trimText(safeDescription, 700)
+  return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the verified recorded overall winner under the stated criteria." : "The dataset records no independently verified overall winner. Check the detailed rows and linked reviews before making a decision."), 700)
 }
+export function getComparisonSeoTitle(slug: string, tool1: string, tool2: string, winnerVerified: boolean): string {
+  const normalizedSlug = slug.toLowerCase()
+  const variant = normalizedSlug.endsWith("-startups")
+    ? " for Startups"
+    : normalizedSlug.endsWith("-for-teams")
+      ? " for Teams"
+      : normalizedSlug.endsWith("-remote")
+        ? " for Remote Teams"
+        : ""
+  return `${tool1} vs ${tool2}${variant} (2026): ${winnerVerified ? "Which One Wins?" : "How to Choose"}`
+}
+
+// These dates were assigned in bulk to comparison records and do not prove that
+// the underlying vendor information was reviewed on that day. Suppress them from
+// page metadata and sitemap lastmod until a source-backed editorial update is recorded.
+const UNVERIFIED_COMPARISON_UPDATE_DATES = new Set(["2026-07-20","2026-07-28","2026-07-23","2026-07-16","2026-07-18","2026-07-01"])
+
+function getVerifiedComparisonLastUpdated(value: unknown): string {
+  if (typeof value !== "string" || !value.trim()) return ""
+  return UNVERIFIED_COMPARISON_UPDATE_DATES.has(value.slice(0, 10)) ? "" : value
+}
+
 export function getComparison(slug: string): ComparisonContent | null {
   const cached = comparisonCache.get(slug)
   if (cached !== undefined) return cached
@@ -618,6 +704,11 @@ export function getComparison(slug: string): ComparisonContent | null {
     return null
   }
   const cmp = readJson<ComparisonContent>(file)
+  // Only the explicit editorial status controls publication; legacy `published` flags are inconsistent across old records.
+  if (cmp.publicationStatus === "draft") {
+    comparisonCache.set(slug, null)
+    return null
+  }
   const baseFeatures = cmp.features.slice(0, 20).map((f) => ({
     ...f,
     name: trimText(f.name, 140),
@@ -625,12 +716,13 @@ export function getComparison(slug: string): ComparisonContent | null {
     tool2Detail: sanitizeUnsupportedClaims(trimText(f.tool2Detail, 320)),
   }))
   const features = buildDerivedComparisonFeatures(cmp, baseFeatures)
-  const winner = normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2)
+  const winner = cmp.winnerVerified === true ? normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2) : null
   const result: ComparisonContent = {
     ...cmp,
+    lastUpdated: getVerifiedComparisonLastUpdated(cmp.lastUpdated),
     winner,
     description: sanitizeComparisonDescription(cmp.description, cmp.tool1, cmp.tool2, features, winner),
-    verdict: buildComparisonNarrative(cmp.tool1, cmp.tool2, cmp.tool1Slug, cmp.tool2Slug, features, winner),
+    verdict: buildComparisonNarrative(cmp.tool1, cmp.tool2, cmp.tool1Slug, cmp.tool2Slug, cmp.featuresVerified === true ? features : [], winner),
     features,
     faqs: sanitizeFaqs(cmp.faqs),
   }
@@ -654,16 +746,35 @@ export function getComparisonsByCategory(category: string): ComparisonContent[] 
     .filter((item): item is ComparisonContent => Boolean(item))
 }
 
+function normalizeGuideForDisplay(guide: GuideContent): GuideContent {
+  const sections = buildGuideSections(guide)
+  const faqs = sanitizeFaqs(guide.faqs)
+  // Reading time must describe the content users actually see after sanitation and
+  // the guide's minimum-content expansion, not stale JSON metadata or raw source text.
+  const renderedText = [
+    guide.title,
+    guide.description,
+    ...sections.flatMap((section) => [section.title, section.body, ...(section.items || [])]),
+    ...faqs.flatMap((faq) => [faq.question, faq.answer]),
+  ].filter((value): value is string => typeof value === "string").join(" ")
+  const wordCount = renderedText.replace(/<[^>]*>/g, " ").split(/\s+/).filter(Boolean).length
+  return {
+    ...guide,
+    readingTime: Math.max(3, Math.ceil(wordCount / 200)),
+    sections,
+    faqs,
+  }
+}
+
 export function getGuide(slug: string): GuideContent | null {
   const file = path.join(CONTENT_DIR, "guides", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  const guide = readJson<GuideContent>(file)
-  return { ...guide, sections: buildGuideSections(guide), faqs: sanitizeFaqs(guide.faqs) }
+  return normalizeGuideForDisplay(readJson<GuideContent>(file))
 }
 
 export function getAllGuides(): GuideContent[] {
   return readDir(path.join(CONTENT_DIR, "guides"))
-    .map((f) => { const g = readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)); return { ...g, sections: buildGuideSections(g), faqs: sanitizeFaqs(g.faqs) } })
+    .map((f) => normalizeGuideForDisplay(readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f))))
 }
 
 export function getGlossaryTerm(slug: string): GlossaryContent | null {

@@ -47,7 +47,7 @@ const toolsData: Record<string, { name: string; description: string; icon: Lucid
   "saas-stack-cost-calculator": {
     kind: "stack",
     name: "SaaS Stack Cost Calculator",
-    description: "Estimate your total monthly and annual software stack cost.",
+    description: "Estimate monthly and annual software spend across your stack, compare categories, and identify duplicate or underused subscriptions before deciding what to consolidate.",
     icon: Layers,
     content: [
       "Add the recurring cost of major software categories to see how much your stack costs each month and year.",

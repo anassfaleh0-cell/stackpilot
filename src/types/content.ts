@@ -10,6 +10,12 @@ export interface ReviewContent {
   priceRange?: string
   rating: number
   reviewCount: number
+  /** True only when the editorial score has a documented, auditable source. */
+  ratingVerified?: boolean
+  /** True only when the review-count figure has a documented, auditable source. */
+  reviewCountVerified?: boolean
+  /** True only when the displayed price range has a documented, auditable source. */
+  priceRangeVerified?: boolean
   pros: string[]
   cons: string[]
   features: ReviewFeature[]
@@ -92,6 +98,10 @@ export interface ComparisonContent {
   tool1Slug: string
   tool2Slug: string
   winner: string | null
+  /** True only when the winner is backed by a documented, auditable comparison. */
+  winnerVerified?: boolean
+  /** True only when comparison feature rows have documented, auditable sources. */
+  featuresVerified?: boolean
   features: ComparisonFeature[]
   verdict: string
   faqs: FAQItem[]
@@ -99,6 +109,8 @@ export interface ComparisonContent {
   relatedGuides?: string[]
   relatedPosts?: string[]
   lastUpdated: string
+  /** Explicit editorial state; legacy `published` flags are not authoritative across the corpus. */
+  publicationStatus?: "draft" | "published"
   published?: boolean
 }
 
@@ -283,7 +295,7 @@ export interface BestContent {
   description: string
   category: string
   criteria: string[]
-  picks: { rank: number; toolSlug: string; toolName: string; rating: number; priceRange: string; bestFor: string; pros: string[]; cons: string[] }[]
+  picks: { rank: number; toolSlug: string; toolName: string; rating: number; ratingVerified?: boolean; priceRange: string; priceRangeVerified?: boolean; bestFor: string; pros: string[]; cons: string[] }[]
   pricingSummary: string
   comparisonTable: { columns: string[]; rows: string[][] }
   faqs: FAQItem[]

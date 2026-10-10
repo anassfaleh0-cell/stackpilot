@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, ArticleSchema, FAQSchema, ItemListSchema, WebPageSchema, softwareApp } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getHub, getAllHubs, getContentTitle } from "@/lib/content/registry"
+import { getHub, getAllHubs, getContentTitle, getReview } from "@/lib/content/registry"
 import { formatDate } from "@/lib/utils"
 import { getRelatedByCategory } from "@/lib/content/internal-links"
 import { InternalLinks, LEGACY_RELATED_TYPES, extendedRelatedItems } from "@/components/content/internal-links"
@@ -46,7 +46,7 @@ export default async function HubPage({ params }: { params: Promise<{ slug: stri
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "By Business Type", href: "/hubs" }, { name: hub.title, href: `/hubs/${slug}` }]} />
       <ArticleSchema title={hub.title} description={hub.description} publishedAt={hub.lastUpdated} updatedAt={hub.lastUpdated} author="PilotStack Team" url={`${site.url}/hubs/${slug}`} category={hub.audience} />
       <ItemListSchema items={hub.recommendations.map(r => ({ name: r.toolName, url: `${site.url}/reviews/${r.toolSlug}` }))} url={`${site.url}/hubs/${slug}`} />
-      <WebPageSchema name={hub.title} description={hub.description} url={`${site.url}/hubs/${slug}`} dateModified={hub.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: hub.recommendations.map((r, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: r.toolName, url: `${site.url}/reviews/${r.toolSlug}`, category: r.category, rating: r.rating }) })) }} />
+      <WebPageSchema name={hub.title} description={hub.description} url={`${site.url}/hubs/${slug}`} dateModified={hub.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: hub.recommendations.map((r, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: r.toolName, url: `${site.url}/reviews/${r.toolSlug}`, category: r.category, rating: getReview(r.toolSlug)?.ratingVerified === true ? getReview(r.toolSlug)?.rating : undefined }) })) }} />
       <FAQSchema questions={hub.faqs} path={`/hubs/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "By Business Type", href: "/hubs" }, { name: hub.title }]} />
@@ -93,11 +93,13 @@ export default async function HubPage({ params }: { params: Promise<{ slug: stri
                         <div className="p-5">
                           <div className="flex items-start justify-between mb-2">
                             <Link href={`/reviews/${rec.toolSlug}`} className="text-lg font-bold hover:text-primary transition-colors">{rec.toolName}</Link>
-                            <div className="flex items-center gap-1 text-sm">
-                              <Star size={14} className="fill-accent text-accent" />
-                              <span className="font-semibold">{rec.rating}</span>
-                              <span className="text-muted-foreground">/5</span>
-                            </div>
+                            {getReview(rec.toolSlug)?.ratingVerified === true && typeof getReview(rec.toolSlug)?.rating === "number" ? (
+                              <div className="flex items-center gap-1 text-sm">
+                                <Star size={14} className="fill-accent text-accent" />
+                                <span className="font-semibold">{getReview(rec.toolSlug)?.rating}</span>
+                                <span className="text-muted-foreground">/5</span>
+                              </div>
+                            ) : <span className="text-xs text-muted-foreground">Rating not verified</span>}
                           </div>
                           <p className="text-sm text-primary mb-1">{rec.bestFor}</p>
                           <Link href={`/reviews/${rec.toolSlug}`} className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
@@ -164,10 +166,16 @@ export default async function HubPage({ params }: { params: Promise<{ slug: stri
                   <div className="p-4">
                     <h3 className="font-semibold mb-3 text-sm">Top Picks</h3>
                     <div className="space-y-2">
-                      {[...hub.recommendations].sort((a, b) => b.rating - a.rating).slice(0, 4).map((rec) => (
+                      {[...hub.recommendations].sort((a, b) => {
+                         const aReview = getReview(a.toolSlug)
+                         const bReview = getReview(b.toolSlug)
+                         const aRating = aReview?.ratingVerified === true && typeof aReview.rating === "number" ? aReview.rating : -1
+                         const bRating = bReview?.ratingVerified === true && typeof bReview.rating === "number" ? bReview.rating : -1
+                         return bRating - aRating
+                       }).slice(0, 4).map((rec) => (
                         <Link key={rec.toolSlug} href={`/reviews/${rec.toolSlug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                           <span>{rec.toolName}</span>
-                          <span className="text-xs font-medium">{rec.rating}/5</span>
+                          <span className="text-xs font-medium">{getReview(rec.toolSlug)?.ratingVerified === true && typeof getReview(rec.toolSlug)?.rating === "number" ? `${getReview(rec.toolSlug)?.rating}/5` : "Rating not verified"}</span>
                         </Link>
                       ))}
                     </div>

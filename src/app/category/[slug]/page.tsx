@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const catReviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && r.category === category.name)
   return createMetadata({
     title: knowledge?.seoTitle || `Best ${category.name} Software 2026: Reviews & Buying Guide`,
-    description: knowledge?.seoDescription || `Find the best ${category.name.toLowerCase()} software with detailed reviews, pricing comparisons, and buying tips. ${catReviews.length} tools reviewed and rated for 2026.`,
+    description: knowledge?.seoDescription || `Find the best ${category.name.toLowerCase()} software with detailed reviews, pricing comparisons, and buying tips. ${catReviews.length} software profiles for 2026, with current details to verify against vendor sources.`,
     path: `/category/${slug}`,
     articleSection: category.name,
   })
@@ -64,7 +64,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const comparisons = getComparisonsByCategory(category.name).filter((c) => isContentAvailable("comparison", c.slug))
   const posts = getAllBlogPosts().filter((p) => p.category === category.name)
   const glossary = getAllGlossaryTerms().filter((t) => t.category === category.name)
-  const bestPick = [...reviews].sort((a, b) => b.rating - a.rating)[0]
+  const bestPick = [...reviews].filter((r) => r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating)).sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
 
   const buyerJourney = [
     { stage: "awareness", content: [...posts.map((p) => ({ slug: p.slug, name: p.title, type: "blog" })), ...glossary.map((t) => ({ slug: t.slug, name: t.term, type: "glossary" }))] },
@@ -73,7 +73,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
     { stage: "decision", content: reviews.map((r) => ({ slug: r.slug, name: r.name, type: "software" })) },
   ].filter((stage) => stage.content.length > 0)
 
-  const smbPick = [...reviews].filter((r) => r.pricing === "Freemium" || r.pricing === "Free" || r.pricing === "Free Trial").sort((a, b) => b.rating - a.rating)[0]
+  const smbPick = [...reviews].filter((r) => (r.pricing === "Freemium" || r.pricing === "Free" || r.pricing === "Free Trial") && r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating)).sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
   const enterprisePick = comparisons.length > 0 ? comparisons[0] : null
   const aiPick = reviews.find((r) => r.name.toLowerCase().includes("ai") || r.category.toLowerCase().includes("ai"))
   const freePick = reviews.find((r) => r.pricing === "Free" || r.pricing === "Freemium")
@@ -109,7 +109,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             </p>
           ) : (
             <p className="text-lg text-muted-foreground max-w-2xl text-pretty">
-              Our selected picks for the best {category.name.toLowerCase()} tools. Each reviewed and rated by our team.
+              Compare {category.name.toLowerCase()} software by fit, recorded capabilities, pricing terms, and the requirements that matter to your team.
             </p>
           )}
         </Container>
@@ -161,7 +161,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             <Section>
               <Container>
                 <div className="rounded-xl border border-primary/20 bg-primary-subtle/50 p-6 sm:p-8">
-                  <Badge variant="default" className="mb-3">Best in {category.name} 2026</Badge>
+                  <Badge variant="default" className="mb-3">Highest verified editorial rating in {category.name}</Badge>
                   <h2 className="text-2xl font-bold mb-2">{bestPick.name}</h2>
                   <p className="text-muted-foreground mb-4">{bestPick.tagline}</p>
                   <div className="flex flex-wrap items-center gap-4 text-sm mb-4">
@@ -333,13 +333,13 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             <Container>
               <div className="flex items-center gap-2 mb-6">
                 <Users size={20} className="text-primary" />
-                <h2 className="text-2xl font-bold">Best Software by Use Case</h2>
+                <h2 className="text-2xl font-bold">Software options by use case</h2>
               </div>
               <div className="grid sm:grid-cols-3 gap-4">
                 {smbPick && (
                   <Card className="p-5">
                     <Building2 size={20} className="text-primary mb-2" />
-                    <h3 className="font-semibold text-sm mb-1">Best for SMB</h3>
+                    <h3 className="font-semibold text-sm mb-1">Small-business option</h3>
                     <Link href={`/reviews/${smbPick.slug}`} className="text-primary text-sm font-medium hover:underline">{smbPick.name}</Link>
                     {knowledge?.bestFor.smb && <p className="text-xs text-muted-foreground mt-1">{knowledge.bestFor.smb}</p>}
                   </Card>
@@ -347,7 +347,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                 {enterprisePick && (
                   <Card className="p-5">
                     <Shield size={20} className="text-primary mb-2" />
-                    <h3 className="font-semibold text-sm mb-1">Best for Enterprise</h3>
+                    <h3 className="font-semibold text-sm mb-1">Enterprise option</h3>
                     <Link href={`/comparisons/${enterprisePick.slug}`} className="text-primary text-sm font-medium hover:underline">{enterprisePick.title}</Link>
                     {knowledge?.bestFor.enterprise && <p className="text-xs text-muted-foreground mt-1">{knowledge.bestFor.enterprise}</p>}
                   </Card>
@@ -390,7 +390,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                 <Link href="/reviews" className="text-sm text-primary hover:underline hidden sm:inline-flex items-center gap-1">View all <ArrowRight size={12} /></Link>
               </div>
               {reviews.length > 0 ? (
-                <ReviewFilter reviews={displayedReviews.map(r => ({ slug: r.slug, name: r.name, tagline: r.tagline, category: r.category, rating: r.rating, priceRange: r.priceRange, pricing: r.pricing }))} category={category.name} />
+                <ReviewFilter reviews={displayedReviews.map(r => ({ slug: r.slug, name: r.name, tagline: r.tagline, category: r.category, rating: r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating) ? r.rating : undefined, priceRange: r.priceRange, pricing: r.pricing }))} category={category.name} />
               ) : (
                 <div className="text-center py-16">
                   <p className="text-muted-foreground">No reviews yet in this category. Check back soon.</p>
@@ -412,7 +412,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                         <GitCompare size={20} className="text-primary shrink-0" />
                         <div>
                           <CardTitle className="text-sm group-hover:text-primary transition-colors">{c.title}</CardTitle>
-                          {c.winner && <p className="text-xs text-success mt-0.5">{c.winner} wins</p>}
+                          {c.winnerVerified === true && c.winner && <p className="text-xs text-muted-foreground mt-0.5">Recorded pick: {c.winner}</p>}
                         </div>
                       </Card>
                     </Link>
@@ -538,7 +538,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           <div className="sticky top-24 space-y-6">
             {bestPick && (
               <Card className="p-4">
-                <Badge variant="default" className="mb-2">Best Pick</Badge>
+                <Badge variant="default" className="mb-2">Highest verified editorial rating</Badge>
                 <p className="font-semibold text-sm">{bestPick.name}</p>
                 <div className="flex items-center gap-1 text-sm text-accent mt-1">
                   <Star size={12} className="fill-accent" />

@@ -240,7 +240,7 @@
     },
     {
       "title": "Performance",
-      "body": "FullStory delivers reliable performance with 99.9% uptime SLA and consistent response times under load.",
+      "body": "Test capture on representative pages and devices, checking the effect on page behavior, event completeness, replay availability, and data volume. Confirm masking and exclusion rules before interpreting a session as representative; this page does not contain an independently measured uptime result.",
       "type": "text"
     },
     {
@@ -465,6 +465,6 @@
   "wordCount": 6256,
   "difficulty": "Beginner",
   "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "FullStory is perfect for freelancers and independent professionals who need an affordable, easy-to-use analytics & data tool. Its simplicity and core feature set make it ideal for solo practitioners.",
-  "whoShouldNotUse": "FullStory may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
+  "whoShouldUse": "Product, UX, and engineering teams that need to investigate user journeys through session replay and behavioral events can evaluate FullStory. Define a few diagnostic questions first, then test search, replay usefulness, privacy masking, event capture, and how findings connect to product fixes.",
+  "whoShouldNotUse": "It may not be appropriate when session replay adds little value, when consent and privacy requirements cannot be met, or when the team lacks a process for reviewing captured sessions. Validate masking, retention, access controls, and sensitive-field handling before enabling capture on production pages."
 }

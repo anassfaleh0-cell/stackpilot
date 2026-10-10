@@ -1,239 +1,244 @@
 {
-    "relatedComparisons":  [
-                               "trello-vs-asana",
-                               "notion-vs-clickup"
-                           ],
-    "pricingSummary":  "All 7 tools offer free tiers suitable for students. Trello, Notion, ClickUp, and Asana have the most generous free plans. Monday.com limits free to 2 seats. Google Tasks and Todoist are fully free but lack collaboration features.",
-    "criteria":  [
-                     "Free tier generosity",
-                     "Group project features",
-                     "Mobile app quality",
-                     "Ease of non-technical users",
-                     "Deadline and reminder systems",
-                     "File sharing capabilities",
-                     "No credit card required"
-                 ],
-    "relatedGuides":  [
-                          "how-to-choose-project-management-software"
-                      ],
-    "title":  "Best Free Project Management Software for Students 2026",
-    "category":  "Project Management",
-    "picks":  [
-                  {
-                      "rank":  1,
-                      "toolName":  "Trello",
-                      "cons":  [
-                                   "No Gantt charts or timeline view",
-                                   "Limited automation on free plan"
-                               ],
-                      "bestFor":  "Visual kanban-style group projects",
-                      "pros":  [
-                                   "Unlimited cards on free tier",
-                                   "Drag-and-drop boards are intuitive",
-                                   "Mobile app works offline"
-                               ],
-                      "priceRange":  "Free",
-                      "rating":  4.4,
-                      "toolSlug":  "trello"
-                  },
-                  {
-                      "rank":  2,
-                      "toolName":  "Notion",
-                      "cons":  [
-                                   "Steeper learning curve than Trello",
-                                   "Can be slow with large databases"
-                               ],
-                      "bestFor":  "Research-heavy group projects",
-                      "pros":  [
-                                   "Unlimited pages and blocks on free plan",
-                                   "Built-in wiki for shared notes",
-                                   "Templates for project tracking"
-                               ],
-                      "priceRange":  "Free",
-                      "rating":  4.7,
-                      "toolSlug":  "notion"
-                  },
-                  {
-                      "rank":  3,
-                      "toolName":  "ClickUp",
-                      "cons":  [
-                                   "Overwhelming for simple projects",
-                                   "Learning curve for non-tech students"
-                               ],
-                      "bestFor":  "Complex group projects with deadlines",
-                      "pros":  [
-                                   "Gantt charts and dependencies on free tier",
-                                   "Built-in docs and whiteboards",
-                                   "Time tracking for group accountability"
-                               ],
-                      "priceRange":  "Free",
-                      "rating":  4.7,
-                      "toolSlug":  "clickup"
-                  },
-                  {
-                      "rank":  4,
-                      "toolName":  "Asana",
-                      "cons":  [
-                                   "Limited to 15 users on free plan",
-                                   "No time tracking or invoicing"
-                               ],
-                      "bestFor":  "Structured group assignments",
-                      "pros":  [
-                                   "Clean task list with due dates",
-                                   "Timeline view for planning",
-                                   "Email notifications for deadlines"
-                               ],
-                      "priceRange":  "Free",
-                      "rating":  4.5,
-                      "toolSlug":  "asana"
-                  },
-                  {
-                      "rank":  5,
-                      "toolName":  "Monday.com",
-                      "cons":  [
-                                   "Free plan limited to 2 seats",
-                                   "Requires paid plan for most features"
-                               ],
-                      "bestFor":  "Project-based courses",
-                      "pros":  [
-                                   "Visual dashboards for progress tracking",
-                                   "Automations for task assignments",
-                                   "Multiple view options"
-                               ],
-                      "priceRange":  "Free",
-                      "rating":  4.3,
-                      "toolSlug":  "monday-com"
-                  },
-                  {
-                      "rank":  6,
-                      "toolName":  "Google Tasks",
-                      "cons":  [
-                                   "No collaboration features",
-                                   "No project views or reporting"
-                               ],
-                      "bestFor":  "Simple individual and pair assignments",
-                      "pros":  [
-                                   "Integrated with Google Workspace",
-                                   "Zero learning curve",
-                                   "Mobile app with reminders"
-                               ],
-                      "priceRange":  "Free",
-                      "rating":  4,
-                      "toolSlug":  "google-tasks"
-                  },
-                  {
-                      "rank":  7,
-                      "toolName":  "Todoist",
-                      "cons":  [
-                                   "Limited collaboration on free plan",
-                                   "No Gantt charts or timeline"
-                               ],
-                      "bestFor":  "Personal task management within group projects",
-                      "pros":  [
-                                   "Natural language input for due dates",
-                                   "Projects and labels for organization",
-                                   "Integrations with Google Calendar"
-                               ],
-                      "priceRange":  "Free",
-                      "rating":  4.3,
-                      "toolSlug":  "todoist"
-                  }
-              ],
-    "comparisonTable":  {
-                            "columns":  [
-                                            "Tool",
-                                            "Free Users",
-                                            "Gantt Charts",
-                                            "Mobile App",
-                                            "File Storage",
-                                            "Best For"
-                                        ],
-                            "rows":  [
-                                         [
-                                             "Trello",
-                                             "Unlimited",
-                                             "No",
-                                             "Yes",
-                                             "10MB/file",
-                                             "Visual kanban"
-                                         ],
-                                         [
-                                             "Notion",
-                                             "Unlimited",
-                                             "No",
-                                             "Yes",
-                                             "5MB/file",
-                                             "Research notes"
-                                         ],
-                                         [
-                                             "ClickUp",
-                                             "Unlimited",
-                                             "Yes",
-                                             "Yes",
-                                             "100MB/file",
-                                             "Complex projects"
-                                         ],
-                                         [
-                                             "Asana",
-                                             "15 users",
-                                             "Yes (Timeline)",
-                                             "Yes",
-                                             "100MB/file",
-                                             "Structured tasks"
-                                         ],
-                                         [
-                                             "Monday.com",
-                                             "2 seats",
-                                             "Yes",
-                                             "Yes",
-                                             "5GB total",
-                                             "Visual tracking"
-                                         ],
-                                         [
-                                             "Google Tasks",
-                                             "Unlimited",
-                                             "No",
-                                             "Yes",
-                                             "Google Drive",
-                                             "Simple to-dos"
-                                         ],
-                                         [
-                                             "Todoist",
-                                             "5 users",
-                                             "No",
-                                             "Yes",
-                                             "N/A",
-                                             "Personal tasks"
-                                         ]
-                                     ]
-                        },
-    "description":  "we compared free PM tools with real student teams. Here are the 7 that handle group projects, assignment tracking, and deadline management without costing a cent.",
-    "slug":  "best-free-project-management-students",
-    "relatedPosts":  [
-
-                     ],
-    "author": "Sarah Chen",
-    "lastUpdated":  "2026-09-08",
-    "faqs":  [
-                 {
-                     "question":  "What is the best free project management tool for student group projects?",
-                     "answer":  "Trello is our top pick for most student group projects. Its free plan includes unlimited cards, boards, and collaborators. The visual kanban interface is intuitive for students who have never used PM software before."
-                 },
-                 {
-                     "question":  "Can students use project management tools for free?",
-                     "answer":  "Yes, all major PM tools offer free tiers. Trello, Notion, ClickUp, and Asana all have generous free plans that support group projects with multiple collaborators, deadline tracking, and file sharing."
-                 },
-                 {
-                     "question":  "What features do students need in project management software?",
-                     "answer":  "Students need: task assignment and tracking, deadline reminders, file sharing for documents, a mobile app for on-the-go access, and zero cost. Advanced features like Gantt charts and time tracking are helpful for complex capstone projects."
-                 },
-                 {
-                     "question":  "How do I manage a group project with 5+ students?",
-                     "answer":  "For groups of 5+, use Trello or ClickUp for visual task tracking, create a board per project phase, assign cards to team members, set due dates, and use comments for async updates. Hold weekly 15-minute check-ins to review progress."
-                 },
-                 {
-                     "question":  "Are these tools safe for student data?",
-                     "answer":  "All listed tools are SOC 2 certified and use encryption. However, avoid storing sensitive personal information. Most tools have privacy policies suitable for educational use. Check your university\u0027s data governance policies before using any cloud tool."
-                 }
-             ]
+  "relatedComparisons": [
+    "trello-vs-asana",
+    "notion-vs-clickup"
+  ],
+  "pricingSummary": "Current free-plan availability, member limits, and included features have not been independently verified. Confirm the official plan details for collaboration, storage, views, attachments, and export before choosing.",
+  "criteria": [
+    "Free tier generosity",
+    "Group project features",
+    "Mobile app quality",
+    "Ease of non-technical users",
+    "Deadline and reminder systems",
+    "File sharing capabilities",
+    "No credit card required"
+  ],
+  "relatedGuides": [
+    "how-to-choose-project-management-software"
+  ],
+  "title": "Best Free Project Management Software for Students 2026",
+  "category": "Project Management",
+  "picks": [
+    {
+      "rank": 1,
+      "toolName": "Trello",
+      "cons": [
+        "No Gantt charts or timeline view",
+        "Limited automation on free plan"
+      ],
+      "bestFor": "Evaluate Trello for student task assignment, deadlines, group collaboration, file sharing, export, and current free-plan limits.",
+      "pros": [
+        "Unlimited cards on free tier",
+        "Drag-and-drop boards are intuitive",
+        "Mobile app works offline"
+      ],
+      "priceRange": "Free-plan status not independently verified — check current plan",
+      "rating": 4.4,
+      "toolSlug": "trello",
+      "ratingVerified": false,
+      "reviewCountVerified": false,
+      "priceRangeVerified": false
+    },
+    {
+      "rank": 2,
+      "toolName": "Notion",
+      "cons": [
+        "Steeper learning curve than Trello",
+        "Can be slow with large databases"
+      ],
+      "bestFor": "Evaluate Notion for student task assignment, deadlines, group collaboration, file sharing, export, and current free-plan limits.",
+      "pros": [
+        "Unlimited pages and blocks on free plan",
+        "Built-in wiki for shared notes",
+        "Templates for project tracking"
+      ],
+      "priceRange": "Free-plan status not independently verified — check current plan",
+      "rating": 4.7,
+      "toolSlug": "notion",
+      "ratingVerified": false,
+      "reviewCountVerified": false,
+      "priceRangeVerified": false
+    },
+    {
+      "rank": 3,
+      "toolName": "ClickUp",
+      "cons": [
+        "Overwhelming for simple projects",
+        "Learning curve for non-tech students"
+      ],
+      "bestFor": "Evaluate ClickUp for student task assignment, deadlines, group collaboration, file sharing, export, and current free-plan limits.",
+      "pros": [
+        "Gantt charts and dependencies on free tier",
+        "Built-in docs and whiteboards",
+        "Time tracking for group accountability"
+      ],
+      "priceRange": "Free-plan status not independently verified — check current plan",
+      "rating": 4.7,
+      "toolSlug": "clickup",
+      "ratingVerified": false,
+      "reviewCountVerified": false,
+      "priceRangeVerified": false
+    },
+    {
+      "rank": 4,
+      "toolName": "Asana",
+      "cons": [
+        "Limited to 15 users on free plan",
+        "No time tracking or invoicing"
+      ],
+      "bestFor": "Evaluate Asana for student task assignment, deadlines, group collaboration, file sharing, export, and current free-plan limits.",
+      "pros": [
+        "Clean task list with due dates",
+        "Timeline view for planning",
+        "Email notifications for deadlines"
+      ],
+      "priceRange": "Free-plan status not independently verified — check current plan",
+      "rating": 4.5,
+      "toolSlug": "asana",
+      "ratingVerified": false,
+      "reviewCountVerified": false,
+      "priceRangeVerified": false
+    },
+    {
+      "rank": 5,
+      "toolName": "Monday.com",
+      "cons": [
+        "Free plan limited to 2 seats",
+        "Requires paid plan for most features"
+      ],
+      "bestFor": "Evaluate Monday.com for student task assignment, deadlines, group collaboration, file sharing, export, and current free-plan limits.",
+      "pros": [
+        "Visual dashboards for progress tracking",
+        "Automations for task assignments",
+        "Multiple view options"
+      ],
+      "priceRange": "Free-plan status not independently verified — check current plan",
+      "rating": 4.3,
+      "toolSlug": "monday-com",
+      "ratingVerified": false,
+      "reviewCountVerified": false,
+      "priceRangeVerified": false
+    },
+    {
+      "rank": 6,
+      "toolName": "Google Tasks",
+      "cons": [
+        "No collaboration features",
+        "No project views or reporting"
+      ],
+      "bestFor": "Evaluate Google Tasks for student task assignment, deadlines, group collaboration, file sharing, export, and current free-plan limits.",
+      "pros": [
+        "Integrated with Google Workspace",
+        "Zero learning curve",
+        "Mobile app with reminders"
+      ],
+      "priceRange": "Free-plan status not independently verified — check current plan",
+      "rating": 4,
+      "toolSlug": "google-tasks",
+      "ratingVerified": false,
+      "reviewCountVerified": false,
+      "priceRangeVerified": false
+    },
+    {
+      "rank": 7,
+      "toolName": "Todoist",
+      "cons": [
+        "Limited collaboration on free plan",
+        "No Gantt charts or timeline"
+      ],
+      "bestFor": "Evaluate Todoist for student task assignment, deadlines, group collaboration, file sharing, export, and current free-plan limits.",
+      "pros": [
+        "Natural language input for due dates",
+        "Projects and labels for organization",
+        "Integrations with Google Calendar"
+      ],
+      "priceRange": "Free-plan status not independently verified — check current plan",
+      "rating": 4.3,
+      "toolSlug": "todoist",
+      "ratingVerified": false,
+      "reviewCountVerified": false,
+      "priceRangeVerified": false
+    }
+  ],
+  "comparisonTable": {
+    "columns": [
+      "Tool",
+      "Rating",
+      "Price",
+      "Evaluation focus"
+    ],
+    "rows": [
+      [
+        "Trello",
+        "Not verified",
+        "Not independently verified",
+        "Evaluate Trello for student task assignment, deadlines, group collaboration, file sharing, export, and current free-plan limits."
+      ],
+      [
+        "Notion",
+        "Not verified",
+        "Not independently verified",
+        "Evaluate Notion for student task assignment, deadlines, group collaboration, file sharing, export, and current free-plan limits."
+      ],
+      [
+        "ClickUp",
+        "Not verified",
+        "Not independently verified",
+        "Evaluate ClickUp for student task assignment, deadlines, group collaboration, file sharing, export, and current free-plan limits."
+      ],
+      [
+        "Asana",
+        "Not verified",
+        "Not independently verified",
+        "Evaluate Asana for student task assignment, deadlines, group collaboration, file sharing, export, and current free-plan limits."
+      ],
+      [
+        "Monday.com",
+        "Not verified",
+        "Not independently verified",
+        "Evaluate Monday.com for student task assignment, deadlines, group collaboration, file sharing, export, and current free-plan limits."
+      ],
+      [
+        "Google Tasks",
+        "Not verified",
+        "Not independently verified",
+        "Evaluate Google Tasks for student task assignment, deadlines, group collaboration, file sharing, export, and current free-plan limits."
+      ],
+      [
+        "Todoist",
+        "Not verified",
+        "Not independently verified",
+        "Evaluate Todoist for student task assignment, deadlines, group collaboration, file sharing, export, and current free-plan limits."
+      ]
+    ]
+  },
+  "description": "A practical guide to project-management tools students can evaluate for group assignments, deadlines, research, and task ownership. Current free-plan availability and limits have not been independently verified; check official plan pages.",
+  "slug": "best-free-project-management-students",
+  "relatedPosts": [],
+  "author": "Sarah Chen",
+  "lastUpdated": "2026-10-10",
+  "faqs": [
+    {
+      "question": "Are these tools completely free?",
+      "answer": "Free-plan availability and limits can change. Verify the current official plan page for member limits, collaboration, storage, views, and export before relying on a feature."
+    },
+    {
+      "question": "Which tool is easiest for a class project?",
+      "answer": "Choose the tool your group can use consistently. Test task assignment, deadlines, comments, file sharing, and a shared overview with a small real project."
+    },
+    {
+      "question": "How should we organize a group assignment?",
+      "answer": "Put the rubric and deadline in a shared place, break the work into owned tasks, add due dates, keep research notes with tasks, and check progress together regularly."
+    },
+    {
+      "question": "What should we do if someone misses a deadline?",
+      "answer": "Make task ownership and dependencies visible, discuss the blocker early, and agree on a revised plan. Avoid relying on reminders alone without clear responsibility."
+    },
+    {
+      "question": "Can we keep our work after the course?",
+      "answer": "Check export options for tasks, notes, attachments, and project data before the course ends. Keep a copy of important work in a location your group is allowed to use."
+    }
+  ],
+  "body": "<article class=\"prose max-w-none\"><h1>Project Management Tools for Students: A Practical Guide</h1><p>Student teams need a simple way to split assignments, track deadlines, share research, and keep everyone aware of the next task. The best choice depends on how many people collaborate, whether the work needs documents or boards, and which devices classmates use.</p><p><strong>Transparency note:</strong> Current free-plan availability, limits, and included features have not been independently verified for this shortlist. Check official plan pages before relying on a feature for a class project.</p><h2>Tools to evaluate</h2><h3>Trello</h3><p>Try a board with lists for upcoming, in progress, and done work. Check task assignment, due dates, comments, file attachments, and whether the free plan covers your group size.</p><h3>Notion</h3><p>Try organizing assignment briefs, meeting notes, sources, and a task database in one workspace. Check sharing permissions, export, and whether the free plan supports your collaborators.</p><h3>ClickUp</h3><p>Try tasks, due dates, dependencies, and a shared project overview. Keep the setup simple and verify current plan limits for members, views, storage, and collaboration.</p><h3>Asana</h3><p>Try assigning work, setting due dates, and viewing the project as a list or timeline. Confirm which views and collaboration features are available on the current free plan.</p><h3>monday.com</h3><p>Test a small project board and check current seat limits, sharing options, and whether your class group fits the plan offered.</p><h3>Google Tasks</h3><p>Evaluate Google Tasks for personal to-do lists and reminders. If the whole group needs shared ownership, comments, or a project overview, test whether another shared workspace is required.</p><h3>Todoist</h3><p>Test task lists, recurring reminders, priorities, and collaboration. Confirm current free-plan limits and whether shared project features meet your group’s needs.</p><h2>A simple student workflow</h2><ol><li>Write the assignment goal, rubric, and deadline in one shared place.</li><li>Break the work into tasks small enough to assign to one owner.</li><li>Add due dates and agree on a short weekly check-in.</li><li>Store research links and meeting decisions with the relevant task.</li><li>Review progress together and adjust workloads before the final deadline.</li><li>Export or copy important notes before the course workspace is closed.</li></ol><h2>Questions before choosing</h2><ul><li>Can every teammate access the project on their device?</li><li>Can the group assign tasks, set deadlines, and see overall progress?</li><li>Are file uploads and collaboration limits sufficient on the current plan?</li><li>Can you export notes and tasks at the end of the course?</li><li>Will the setup stay simple enough that everyone actually uses it?</li></ul><h2>Methodology</h2><p>This guide is a starting point, not a verified ranking of free-plan generosity. Check current plan limits and test the workflow with your actual group before committing.</p></article>",
+  "wordCount": 750
 }

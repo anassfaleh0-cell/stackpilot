@@ -1,269 +1,140 @@
 #!/usr/bin/env node
 /**
- * Internal Linking Audit Script
- * 
- * Run: node scripts/linking-audit.js
- * 
- * Detects:
- * 1. Orphan pages (no internal links pointing to them)
- * 2. Pages with few internal links
- * 3. Broken internal link targets
- * 4. Link distribution by content type
+ * Rendered internal-link audit.
+ *
+ * Reads the live sitemap and crawls rendered HTML instead of inferring links from
+ * raw JSON. The old implementation missed links created by shared React components
+ * and incorrectly reported hundreds of pages as orphaned.
+ *
+ * Run: npm run seo:links
+ * Override target: SITE_URL=https://preview.example.vercel.app npm run seo:links
  */
+const SITE_URL = (process.env.SITE_URL || "https://pilotstack.online").replace(/\/+$/, "")
+const SITE_ORIGIN = new URL(SITE_URL).origin
+const CONCURRENCY = Math.max(1, Math.min(16, Number(process.env.LINK_AUDIT_CONCURRENCY) || 10))
+const REQUEST_TIMEOUT_MS = 20000
 
-import fs from "node:fs"
-import path from "node:path"
-
-const SITE_URL = "https://pilotstack.online"
-const CONTENT_DIR = path.resolve(process.cwd(), "content")
-const SRC_DIR = path.resolve(process.cwd(), "src")
-
-function readJson(filePath) {
-  try {
-    return JSON.parse(fs.readFileSync(filePath, "utf-8"))
-  } catch {
-    return null
-  }
+function normalizePath(pathname) {
+  if (!pathname || pathname === "/") return "/"
+  return decodeURI(pathname).replace(/\/+$/, "")
 }
 
-function readDir(dir) {
-  try {
-    return fs.readdirSync(dir).filter((f) => f.endsWith(".json"))
-  } catch {
-    return []
-  }
+function extractSitemapUrls(xml) {
+  return [...xml.matchAll(/<loc>([\s\S]*?)<\/loc>/gi)]
+    .map((match) => match[1].replace(/&amp;/g, "&").trim())
+    .filter(Boolean)
 }
 
-function readFile(filePath) {
-  try {
-    return fs.readFileSync(filePath, "utf-8")
-  } catch {
-    return ""
+function extractInternalLinks(html, pageUrl) {
+  const paths = new Set()
+  for (const match of html.matchAll(/<a\b[^>]*?href\s*=\s*["']([^"']+)["'][^>]*>/gi)) {
+    const rawHref = match[1].replace(/&amp;/g, "&").trim()
+    if (!rawHref || /^(?:mailto:|tel:|javascript:|data:)/i.test(rawHref)) continue
+    try {
+      const target = new URL(rawHref, pageUrl)
+      if (target.origin !== SITE_ORIGIN || target.pathname.startsWith("/_next/") || target.pathname.startsWith("/api/")) continue
+      if (target.hash && normalizePath(target.pathname) === normalizePath(new URL(pageUrl).pathname) && !target.search) continue
+      paths.add(normalizePath(target.pathname))
+    } catch {
+      // Ignore malformed and non-URL href values; report only verifiable internal URLs.
+    }
   }
+  return paths
 }
 
-// ─── Collect all content URLs ────────────────────────────────────────────────
-function getAllContentUrls() {
-  const urls = new Map()
-  const contentTypes = {
-    reviews: { dir: "reviews", nameField: "name", urlPrefix: "/reviews/" },
-    comparisons: { dir: "comparisons", nameField: "title", urlPrefix: "/comparisons/" },
-    guides: { dir: "guides", nameField: "title", urlPrefix: "/guides/" },
-    blog: { dir: "blog", nameField: "title", urlPrefix: "/blog/" },
-    glossary: { dir: "glossary", nameField: "term", urlPrefix: "/glossary/" },
-    alternatives: { dir: "alternatives", nameField: "title", urlPrefix: "/alternatives/" },
-    "use-cases": { dir: "use-cases", nameField: "title", urlPrefix: "/use-cases/" },
-    industries: { dir: "industries", nameField: "title", urlPrefix: "/industries/" },
-    research: { dir: "research", nameField: "title", urlPrefix: "/research/" },
-    statistics: { dir: "statistics", nameField: "title", urlPrefix: "/statistics/" },
-    best: { dir: "best", nameField: "title", urlPrefix: "/best/" },
-    hubs: { dir: "hubs", nameField: "title", urlPrefix: "/hubs/" },
+async function fetchWithTimeout(url, options = {}) {
+  return fetch(url, {
+    ...options,
+    redirect: "follow",
+    headers: { "user-agent": "PilotStack-InternalLinkAudit/1.0", ...(options.headers || {}) },
+    signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+  })
+}
+
+async function run() {
+  const sitemapResponse = await fetchWithTimeout(`${SITE_URL}/sitemap.xml`)
+  if (!sitemapResponse.ok) throw new Error(`Sitemap request failed: HTTP ${sitemapResponse.status}`)
+  const sitemapUrls = extractSitemapUrls(await sitemapResponse.text())
+    .filter((url) => {
+      try { return new URL(url).origin === SITE_ORIGIN } catch { return false }
+    })
+  const uniqueUrls = [...new Map(sitemapUrls.map((url) => [normalizePath(new URL(url).pathname), url])).values()]
+  if (uniqueUrls.length === 0) throw new Error("Sitemap contained no same-origin URLs")
+
+  const sitemapPaths = new Set(uniqueUrls.map((url) => normalizePath(new URL(url).pathname)))
+  const incoming = new Map([...sitemapPaths].map((pathname) => [pathname, 0]))
+  const nonSitemapTargets = new Set()
+  const failedPages = []
+  let cursor = 0
+  let completed = 0
+
+  async function worker() {
+    while (cursor < uniqueUrls.length) {
+      const url = uniqueUrls[cursor++]
+      try {
+        const response = await fetchWithTimeout(url)
+        if (!response.ok) {
+          failedPages.push({ url, status: response.status })
+          continue
+        }
+        const contentType = response.headers.get("content-type") || ""
+        if (!contentType.includes("text/html")) continue
+        const html = await response.text()
+        for (const pathname of extractInternalLinks(html, url)) {
+          if (incoming.has(pathname)) incoming.set(pathname, incoming.get(pathname) + 1)
+          else if (pathname !== "/rss.xml") nonSitemapTargets.add(pathname)
+        }
+      } catch (error) {
+        failedPages.push({ url, error: error instanceof Error ? error.message : String(error) })
+      }
+      completed++
+      if (completed % 250 === 0) console.log(`Crawled ${completed}/${uniqueUrls.length} sitemap pages`)
+    }
   }
 
-  for (const [type, config] of Object.entries(contentTypes)) {
-    const dir = path.join(CONTENT_DIR, config.dir)
-    const files = readDir(dir)
-    for (const file of files) {
-      const slug = file.replace(".json", "")
-      const data = readJson(path.join(dir, file))
-      if (data) {
-        urls.set(`${config.urlPrefix}${slug}`, {
-          type,
-          slug,
-          title: data[config.nameField] || slug,
-          url: `${config.urlPrefix}${slug}`,
-        })
+  await Promise.all(Array.from({ length: CONCURRENCY }, worker))
+
+  const orphanPages = [...incoming].filter(([, count]) => count === 0).map(([pathname]) => pathname)
+  const weakPages = [...incoming]
+    .filter(([, count]) => count > 0 && count < 3)
+    .sort((left, right) => left[1] - right[1] || left[0].localeCompare(right[0]))
+  const targetPaths = [...nonSitemapTargets]
+  const brokenInternalTargets = []
+  let targetCursor = 0
+  async function targetWorker() {
+    while (targetCursor < targetPaths.length) {
+      const pathname = targetPaths[targetCursor++]
+      try {
+        const response = await fetchWithTimeout(`${SITE_URL}${pathname}`, { method: "HEAD" })
+        if (response.status === 404 || response.status === 410) {
+          brokenInternalTargets.push({ pathname, status: response.status })
+        }
+      } catch (error) {
+        brokenInternalTargets.push({ pathname, error: error instanceof Error ? error.message : String(error) })
       }
     }
   }
+  await Promise.all(Array.from({ length: CONCURRENCY }, targetWorker))
 
-  return urls
+  const byPrefix = {}
+  for (const pathname of sitemapPaths) {
+    const prefix = pathname.split("/")[1] || "home"
+    byPrefix[prefix] = (byPrefix[prefix] || 0) + 1
+  }
+
+  console.log("[internal-link-audit] Rendered HTML crawl; shared component links are included.")
+  console.log("Sitemap URLs:", uniqueUrls.length)
+  console.log("Failed sitemap pages:", failedPages.length, JSON.stringify(failedPages.slice(0, 30)))
+  console.log("Orphan sitemap pages:", orphanPages.length, JSON.stringify(orphanPages.slice(0, 80)))
+  console.log("Pages with only 1-2 incoming links:", weakPages.length, JSON.stringify(weakPages.slice(0, 80)))
+  console.log("Internal targets absent from sitemap:", nonSitemapTargets.size, JSON.stringify([...nonSitemapTargets].sort().slice(0, 80)))
+  console.log("Broken internal targets absent from sitemap:", brokenInternalTargets.length, JSON.stringify(brokenInternalTargets.slice(0, 80)))
+  console.log("Page counts by prefix:", JSON.stringify(byPrefix))
+
+  if (failedPages.length > 0 || brokenInternalTargets.length > 0) process.exitCode = 1
 }
 
-// ─── Collect all internal links from content ─────────────────────────────────
-function collectInternalLinksFromContent(allUrls) {
-  const linkCounts = new Map()
-  const contentTypes = ["reviews", "comparisons", "guides", "blog", "glossary", "alternatives", "use-cases", "industries", "research", "statistics", "best", "hubs"]
-  
-  for (const [url] of allUrls) {
-    linkCounts.set(url, { incoming: 0, outgoing: 0, sources: [] })
-  }
-
-  const urlPatterns = new Map()
-  for (const [url] of allUrls) {
-    const slug = url.split("/").pop()
-    if (slug) urlPatterns.set(slug, url)
-  }
-
-  for (const [url, info] of allUrls) {
-    const contentDir = path.join(CONTENT_DIR, info.type === "reviews" ? "reviews" :
-      info.type === "comparisons" ? "comparisons" :
-      info.type === "guides" ? "guides" :
-      info.type === "blog" ? "blog" :
-      info.type === "glossary" ? "glossary" :
-      info.type === "alternatives" ? "alternatives" :
-      info.type === "use-cases" ? "use-cases" :
-      info.type === "industries" ? "industries" :
-      info.type === "research" ? "research" :
-      info.type === "statistics" ? "statistics" :
-      info.type === "best" ? "best" : "hubs")
-    
-    const data = readJson(path.join(contentDir, `${info.slug}.json`))
-    if (!data) continue
-
-    // Collect all text fields that might contain links
-    const textFields = []
-    if (data.relatedComparisons) textFields.push(...data.relatedComparisons.map(c => `/comparisons/${c}`))
-    if (data.relatedGuides) textFields.push(...data.relatedGuides.map(g => `/guides/${g}`))
-    if (data.relatedPosts) textFields.push(...data.relatedPosts.map(p => `/blog/${p}`))
-    if (data.relatedTools) textFields.push(...data.relatedTools.map(t => `/reviews/${t}`))
-    if (data.alternatives) textFields.push(...data.alternatives.map(a => `/reviews/${a}`))
-    if (data.picks) textFields.push(...data.picks.map(p => `/reviews/${p.toolSlug}`))
-    if (data.recommendations) textFields.push(...data.recommendations.map(r => `/reviews/${r.toolSlug}`))
-
-    for (const targetUrl of textFields) {
-      if (linkCounts.has(targetUrl)) {
-        linkCounts.get(targetUrl).incoming++
-        linkCounts.get(targetUrl).sources.push(url)
-      }
-    }
-
-    linkCounts.get(url).outgoing = textFields.length
-  }
-
-  return linkCounts
-}
-
-// ─── Check component-level linking ───────────────────────────────────────────
-function checkComponentLinks() {
-  console.log("\n\x1b[1m1. Component-Level Internal Linking\x1b[0m")
-
-  const components = [
-    { path: "src/components/content/internal-links.tsx", name: "InternalLinks" },
-    { path: "src/components/seo/breadcrumbs.tsx", name: "Breadcrumbs" },
-    { path: "src/lib/content/entity-graph.ts", name: "EntityGraph" },
-  ]
-
-  for (const comp of components) {
-    const fullPath = path.resolve(process.cwd(), comp.path)
-    if (fs.existsSync(fullPath)) {
-      const content = readFile(fullPath)
-      const linkCount = (content.match(/href[=:]/g) || []).length
-      console.log(`  \x1b[32m✔\x1b[0m ${comp.name} exists (${linkCount} link references)`)
-    } else {
-      console.log(`  \x1b[33m⚠\x1b[0m ${comp.name} not found at ${comp.path}`)
-    }
-  }
-}
-
-// ─── Detect orphan pages ────────────────────────────────────────────────────
-function detectOrphanPages(allUrls, linkCounts) {
-  console.log("\n\x1b[1m2. Orphan Page Detection\x1b[0m")
-
-  const orphans = []
-  for (const [url, info] of allUrls) {
-    const links = linkCounts.get(url)
-    if (links && links.incoming === 0) {
-      orphans.push({ url, title: info.title, type: info.type })
-    }
-  }
-
-  if (orphans.length === 0) {
-    console.log("  \x1b[32m✔\x1b[0m No orphan pages detected")
-  } else {
-    console.log(`  \x1b[33m⚠\x1b[0m ${orphans.length} orphan pages found (no incoming internal links):`)
-    for (const orphan of orphans.slice(0, 10)) {
-      console.log(`    - ${orphan.type}: ${orphan.title} (${orphan.url})`)
-    }
-    if (orphans.length > 10) {
-      console.log(`    ... and ${orphans.length - 10} more`)
-    }
-  }
-
-  return orphans
-}
-
-// ─── Pages with few incoming links ───────────────────────────────────────────
-function findWeakPages(linkCounts) {
-  console.log("\n\x1b[1m3. Weakly Linked Pages (1-2 incoming links)\x1b[0m")
-
-  const weak = []
-  for (const [url, links] of linkCounts) {
-    if (links.incoming > 0 && links.incoming <= 2) {
-      weak.push({ url, incoming: links.incoming })
-    }
-  }
-
-  if (weak.length === 0) {
-    console.log("  \x1b[32m✔\x1b[0m All linked pages have adequate internal links")
-  } else {
-    console.log(`  \x1b[33m⚠\x1b[0m ${weak.length} pages with only 1-2 incoming internal links:`)
-    for (const w of weak.slice(0, 10)) {
-      console.log(`    - ${w.url} (${w.incoming} incoming links)`)
-    }
-    if (weak.length > 10) {
-      console.log(`    ... and ${weak.length - 10} more`)
-    }
-  }
-
-  return weak
-}
-
-// ─── Link distribution by content type ───────────────────────────────────────
-function analyzeLinkDistribution(allUrls, linkCounts) {
-  console.log("\n\x1b[1m4. Link Distribution by Content Type\x1b[0m")
-
-  const distribution = {}
-  for (const [url, info] of allUrls) {
-    if (!distribution[info.type]) {
-      distribution[info.type] = { total: 0, totalIncoming: 0, zeroIncoming: 0 }
-    }
-    distribution[info.type].total++
-    const links = linkCounts.get(url)
-    if (links) {
-      distribution[info.type].totalIncoming += links.incoming
-      if (links.incoming === 0) distribution[info.type].zeroIncoming++
-    }
-  }
-
-  console.log("  Type                | Pages | Avg Incoming | Zero Incoming")
-  console.log("  --------------------|-------|--------------|--------------")
-  for (const [type, stats] of Object.entries(distribution)) {
-    const avg = (stats.totalIncoming / stats.total).toFixed(1)
-    const typeStr = type.padEnd(20)
-    const totalStr = String(stats.total).padStart(5)
-    const avgStr = avg.padStart(12)
-    const zeroStr = String(stats.zeroIncoming).padStart(14)
-    console.log(`  ${typeStr} | ${totalStr} | ${avgStr} | ${zeroStr}`)
-  }
-}
-
-// ─── Main ───────────────────────────────────────────────────────────────────
-function main() {
-  console.log("\n\x1b[1m\x1b[36m╔══════════════════════════════════════════╗")
-  console.log("║   Internal Linking Audit                 ║")
-  console.log("╚══════════════════════════════════════════╝\x1b[0m")
-
-  const allUrls = getAllContentUrls()
-  console.log(`\n  Total content pages: ${allUrls.size}`)
-
-  checkComponentLinks()
-  const linkCounts = collectInternalLinksFromContent(allUrls)
-  const orphans = detectOrphanPages(allUrls, linkCounts)
-  const weak = findWeakPages(linkCounts)
-  analyzeLinkDistribution(allUrls, linkCounts)
-
-  console.log("\n\x1b[1m─── Recommendations ────────────────────────────────────\x1b[0m")
-  if (orphans.length > 0) {
-    console.log(`  1. Add internal links to ${orphans.length} orphan pages from related content`)
-  }
-  if (weak.length > 0) {
-    console.log(`  2. Strengthen ${weak.length} weakly-linked pages with more internal links`)
-  }
-  if (orphans.length === 0 && weak.length === 0) {
-    console.log("  \x1b[32mInternal linking looks healthy!\x1b[0m")
-  }
-  console.log("")
-}
-
-main()
+run().catch((error) => {
+  console.error("[internal-link-audit] Failed:", error instanceof Error ? error.message : error)
+  process.exitCode = 1
+})

@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, FAQSchema, softwareApp, WebPageSchema, ArticleSchema } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getComparison, getContentTitle, getReview, getAllComparisons } from "@/lib/content/registry"
+import { getComparison, getComparisonSeoTitle, getContentTitle, getReview, getAllComparisons } from "@/lib/content/registry"
 import { stripDeadContentLinks } from "@/lib/content/link-guard"
 import { formatDate } from "@/lib/utils"
 import { isNoindexed } from "@/lib/noindex"
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const noindexed = isNoindexed("comparisons", slug)
 
   return {
-    ...createMetadata({ title: `${cmp.tool1} vs ${cmp.tool2} (2026): Which One Wins?`, description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated, articleSection: cmp.category, readingTime }),
+    ...createMetadata({ title: getComparisonSeoTitle(slug, cmp.tool1, cmp.tool2, cmp.winnerVerified === true), description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated, articleSection: cmp.category, readingTime }),
     robots: noindexed
       ? { index: false, follow: true }
       : { index: true, follow: true },
@@ -53,7 +53,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
 
   // Only boolean availability fields are scoreable. Text values such as "Paid" or "Custom"
   // are descriptions, not truthy feature wins.
-  const scoredFeatures = cmp.features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean")
+  const scoredFeatures = cmp.featuresVerified === true ? cmp.features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean") : []
   const t1Score = scoredFeatures.filter((f) => f.tool1 === true).length
   const t2Score = scoredFeatures.filter((f) => f.tool2 === true).length
   const t1Pct = scoredFeatures.length ? Math.round((t1Score / scoredFeatures.length) * 100) : null
@@ -63,6 +63,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   const review2 = getReview(cmp.tool2Slug)
   const { categoriesDiffer, winnerLabel, hasComparableWinner } = getComparisonDecision({
     winner: cmp.winner,
+    winnerVerified: cmp.winnerVerified === true,
     tool1: cmp.tool1,
     tool1Slug: cmp.tool1Slug,
     tool1Category: review1?.category,
@@ -170,7 +171,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                   )}
                   <div className="text-xl font-bold mb-2">{tool.name}</div>
                   <div className="text-3xl font-bold text-primary mb-1">{tool.score === null ? "—" : `${tool.score}%`}</div>
-                  <div className="text-xs text-muted-foreground mb-3">{tool.score === null ? "No comparable availability data" : `Availability across ${scoredFeatures.length} boolean checks`}</div>
+                  <div className="text-xs text-muted-foreground mb-3">{tool.score === null ? (cmp.featuresVerified === true ? "No comparable availability data" : "Feature-source audit pending") : `Availability across ${scoredFeatures.length} verified boolean checks`}</div>
                   {tool.score !== null && <ScoreBar score={tool.score} max={100} className="mb-3" />}
                   <Link
                     href={`/reviews/${tool.slug}`}
@@ -206,7 +207,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           {/* Feature Comparison */}
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-6">Feature Comparison</h2>
-            <EditorialComparison tool1={cmp.tool1} tool2={cmp.tool2} features={safeFeatures} winner={hasComparableWinner ? winnerLabel : null} category={cmp.category} slug={cmp.slug} />
+            <EditorialComparison tool1={cmp.tool1} tool2={cmp.tool2} features={safeFeatures} featuresVerified={cmp.featuresVerified === true} winner={hasComparableWinner ? winnerLabel : null} category={cmp.category} slug={cmp.slug} />
           </section>
 
           {/* Decision Framework */}

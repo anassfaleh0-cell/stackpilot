@@ -38,7 +38,25 @@ function countWords(text) {
   return text.split(/\s+/).filter(Boolean).length
 }
 
-function scoreFile(filePath, dirName) {
+const NON_EDITORIAL_KEYS = new Set([
+  "slug", "website", "url", "publishedAt", "lastUpdated", "lastReviewed",
+  "author", "category", "winner", "priceRange", "pricing", "rating",
+  "ratings", "reviewCount", "seoTitle", "seoDescription", "image",
+  "imageUrl", "logo", "id", "type", "available", "tool1Slug", "tool2Slug",
+  "tool1", "tool2", "createdAt", "updatedAt",
+])
+
+function collectEditorialText(value, key = "") {
+  if (NON_EDITORIAL_KEYS.has(key)) return ""
+  if (typeof value === "string") return value
+  if (Array.isArray(value)) return value.map((item) => collectEditorialText(item, key)).join(" ")
+  if (value && typeof value === "object") {
+    return Object.entries(value).map(([childKey, child]) => collectEditorialText(child, childKey)).join(" ")
+  }
+  return ""
+}
+
+function scoreFile(filePath, dirName, reviewsBySlug = new Map()) {
   let raw
   try {
     raw = fs.readFileSync(filePath, "utf-8")
@@ -57,28 +75,45 @@ function scoreFile(filePath, dirName) {
   let score = 0
 
   // 1. Word count (0-25 pts)
-  const allText = [
-    data.description || "",
-    data.tagline || "",
-    data.body || "",
-    data.verdict || "",
-    ...(data.content || []).map((s) => s.body || ""),
-    ...(data.sections || []).map((s) => s.body || ""),
-  ].join(" ")
+  // Count editorial copy across schema variants, plus the linked review evidence
+  // that the comparison template actually renders for each product.
+  const linkedReviews = dirName === "comparisons"
+    ? [data.tool1Slug, data.tool2Slug].map((linkedSlug) => reviewsBySlug.get(linkedSlug)).filter(Boolean)
+    : []
+  const linkedReviewText = linkedReviews.map((review) => [
+    review.name,
+    review.description || review.tagline,
+    review.category,
+    review.priceRange || review.pricing,
+    ...(review.pros || []).slice(0, 2),
+    ...(review.cons || []).slice(0, 2),
+  ].filter(Boolean).join(" ")).join(" ")
+  const allText = [collectEditorialText(data), linkedReviewText].filter(Boolean).join(" ")
   const words = countWords(allText)
+  const linkedCategories = linkedReviews.map((review) => review.category).filter(Boolean)
+  const isCrossCategoryComparison = dirName === "comparisons" && linkedCategories.length === 2 && linkedCategories[0] !== linkedCategories[1]
   if (words >= 600) score += 25
   else if (words >= 300) score += 20
   else if (words >= 100) score += 10
 
-  // 2. Unique data points (0-20 pts)
+  // 2. Unique data points (0-20 pts). Score by schema rather than assuming
+  // every content type has pricing, ratings, pros/cons, and feature arrays.
   let dataPoints = 0
-  if (data.pricing || data.priceRange) dataPoints++
-  if (data.features && data.features.length > 0) dataPoints++
-  if (data.rating || data.ratings) dataPoints++
-  if (data.pros && data.pros.length > 0) dataPoints++
-  if (data.cons && data.cons.length > 0) dataPoints++
-  if (data.faqs && data.faqs.length > 0) dataPoints++
-  if (data.alternatives && data.alternatives.length > 0) dataPoints++
+  if (dirName === "glossary") {
+    if (data.definition) dataPoints++
+    if (data.extendedDefinition) dataPoints++
+    if (data.examples?.length > 0) dataPoints++
+    if (data.relatedTerms?.length > 0) dataPoints++
+    if (data.references?.length > 0 || data.sources?.length > 0) dataPoints++
+  } else {
+    if (data.pricing || data.priceRange) dataPoints++
+    if (data.features && data.features.length > 0) dataPoints++
+    if (data.rating || data.ratings) dataPoints++
+    if (data.pros && data.pros.length > 0) dataPoints++
+    if (data.cons && data.cons.length > 0) dataPoints++
+    if (data.faqs && data.faqs.length > 0) dataPoints++
+    if (data.alternatives && data.alternatives.length > 0) dataPoints++
+  }
   score += Math.min(20, dataPoints * 3)
 
   // 3. Original content signals (0-20 pts)
@@ -88,7 +123,10 @@ function scoreFile(filePath, dirName) {
     (data.sections || []).some((s) => s.images && s.images.length > 0)
   const hasTested = allText.toLowerCase().includes("tested") || allText.toLowerCase().includes("hands-on") || 
     allText.toLowerCase().includes("we tried") || allText.toLowerCase().includes("our experience")
-  if (hasImages) score += 20
+  if (dirName === "glossary") {
+    if (countWords(data.extendedDefinition || "") >= 80) score += 15
+    else if ((data.examples || []).length > 0 || (data.relatedTerms || []).length > 0) score += 10
+  } else if (hasImages) score += 20
   else if (hasTested) score += 15
 
   // 4. Author field (0-10 pts)
@@ -97,7 +135,7 @@ function scoreFile(filePath, dirName) {
 
   // 5. Freshness (0-15 pts)
   const lastReviewed = data.lastReviewed || data.lastUpdated || data.publishedAt
-  if (lastReviewed) {
+  if (lastReviewed && dirName !== "glossary") {
     const daysSince = Math.floor((Date.now() - new Date(lastReviewed).getTime()) / (1000 * 60 * 60 * 24))
     if (daysSince < 90) score += 15
     else if (daysSince < 180) score += 10
@@ -105,14 +143,38 @@ function scoreFile(filePath, dirName) {
   }
 
   // 6. Depth (0-10 pts)
-  const sections = data.content || data.sections || []
-  if (sections.length >= 10) score += 10
-  else if (sections.length >= 5) score += 7
-  else if (sections.length >= 3) score += 4
+  const sections = data.content || data.sections || data.features || data.picks || data.alternatives || []
+  const depthCount = dirName === "glossary"
+    ? (data.examples || []).length + (data.relatedTerms || []).length
+    : sections.length
+  if (depthCount >= 6) score += 10
+  else if (depthCount >= 3) score += 7
+  else if (depthCount >= 1) score += 4
 
-  // Bonus: if noindex-worthy signal
-  const isThin = words < 150 && !hasTested
-  const isDuplicate = dirName === "comparisons" && sections.length < 3
+  // Editorial-review signals only: never automatically apply noindex.
+  // A low score prompts human review; it is not proof that a page is low quality.
+  const minimumWordsByDirectory = {
+    comparisons: 200, best: 300, glossary: 80, statistics: 100,
+    alternatives: 100, guides: 500, blog: 300, reviews: 300,
+  }
+  const minimumWords = minimumWordsByDirectory[dirName] || 150
+  const isThin = words < minimumWords && !hasTested
+  const isDuplicate = dirName === "comparisons" && sections.length < 3 && words < 200
+  const reviewReasons = []
+  if (isThin) reviewReasons.push("very-short-source-content")
+  if (isDuplicate) reviewReasons.push("short-comparison-with-few-sections")
+  if (isCrossCategoryComparison) reviewReasons.push("cross-category-pairing-needs-editorial-review")
+  // Low generic scores are meaningful only alongside a short source record.
+  // Glossary pages use definition/examples/related-term signals above instead.
+  if (dirName !== "glossary" && score < 30 && words < minimumWords * 1.5) {
+    reviewReasons.push("low-source-signal-score")
+  }
+  if (dirName === "glossary") {
+    if (countWords(data.definition || "") < 10) reviewReasons.push("missing-or-short-definition")
+    if (countWords(data.extendedDefinition || "") < 60 && !(data.examples || []).length) {
+      reviewReasons.push("limited-explanation-without-examples")
+    }
+  }
 
   return {
     slug,
@@ -126,12 +188,27 @@ function scoreFile(filePath, dirName) {
     sections: sections.length,
     isThin,
     isDuplicate,
+    isCrossCategoryComparison,
+    reviewRecommended: reviewReasons.length > 0,
+    reviewReasons,
   }
 }
 
 function main() {
   const results = {}
   const allFiles = []
+  const reviewsBySlug = new Map()
+  const reviewsDir = path.join(CONTENT_DIR, "reviews")
+  if (fs.existsSync(reviewsDir)) {
+    for (const file of fs.readdirSync(reviewsDir).filter((name) => name.endsWith(".json"))) {
+      try {
+        const review = JSON.parse(fs.readFileSync(path.join(reviewsDir, file), "utf-8"))
+        if (typeof review.slug === "string") reviewsBySlug.set(review.slug, review)
+      } catch {
+        // Content lint reports invalid JSON separately; skip unreadable review records here.
+      }
+    }
+  }
 
   for (const { dir, keepTop, label } of DIRECTORIES) {
     const dirPath = path.join(CONTENT_DIR, dir)
@@ -145,31 +222,35 @@ function main() {
 
     const scored = files.map((f) => {
       const filePath = path.join(dirPath, f)
-      return scoreFile(filePath, dir)
+      return scoreFile(filePath, dir, reviewsBySlug)
     }).sort((a, b) => b.score - a.score)
 
-    // Quality is fixed in place; this audit is diagnostic only.
-    // Every existing content page remains eligible for indexing.
+    // Keep/noindex decisions remain manual. Surface review candidates instead of
+    // silently reporting every page as "keep" with no triage list.
     const keepSlugs = scored.map((s) => s.slug)
     const noindexSlugs = []
+    const reviewSlugs = scored.filter((s) => s.reviewRecommended).map((s) => s.slug)
 
     results[dir] = {
       total: files.length,
       keep: keepSlugs,
       noindex: noindexSlugs,
+      reviewRecommended: reviewSlugs,
       keepTop,
       stats: {
-        avgScore: Math.round(scored.reduce((a, s) => a + s.score, 0) / scored.length),
-        avgWords: Math.round(scored.reduce((a, s) => a + s.words, 0) / scored.length),
+        avgScore: Math.round(scored.reduce((a, s) => a + s.score, 0) / Math.max(1, scored.length)),
+        avgWords: Math.round(scored.reduce((a, s) => a + s.words, 0) / Math.max(1, scored.length)),
         thinContent: scored.filter((s) => s.isThin).length,
+        reviewRecommended: reviewSlugs.length,
       },
     }
 
     allFiles.push(...scored.map((s) => ({ ...s, keep: keepSlugs.includes(s.slug) })))
 
-    console.log(`   ✅ Keep: ${keepSlugs.length} | 🚫 Noindex: ${noindexSlugs.length}`)
+    console.log(`   ✅ Keep/index eligible: ${keepSlugs.length} | 🚫 Auto-noindex: ${noindexSlugs.length} (manual decision only)`)
     console.log(`   📊 Avg score: ${results[dir].stats.avgScore} | Avg words: ${results[dir].stats.avgWords}`)
-    console.log(`   ⚠️  Thin content: ${results[dir].stats.thinContent}`)
+    console.log(`   ⚠️  Thin content: ${results[dir].stats.thinContent} | Editorial review recommended: ${reviewSlugs.length}`)
+    if (reviewSlugs.length > 0) console.log(`   🔎 Review samples: ${reviewSlugs.slice(0, 12).join(", ")}`)
     console.log()
   }
 
@@ -180,6 +261,7 @@ function main() {
       totalFiles: allFiles.length,
       totalKeep: allFiles.filter((f) => f.keep).length,
       totalNoindex: allFiles.filter((f) => !f.keep).length,
+      totalReviewRecommended: allFiles.filter((f) => f.reviewRecommended).length,
     },
     directories: results,
     allFiles: allFiles.sort((a, b) => b.score - a.score),
@@ -191,6 +273,8 @@ function main() {
   console.log(`   Total files: ${output.summary.totalFiles}`)
   console.log(`   Keep: ${output.summary.totalKeep}`)
   console.log(`   Noindex: ${output.summary.totalNoindex}`)
+  console.log(`   Editorial review recommended: ${output.summary.totalReviewRecommended}`)
+  console.log("   Note: review recommendations do not change robots directives or indexing eligibility.")
 }
 
 main()

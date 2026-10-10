@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest"
+import { getVisibleReviewContent, getVisibleReviewFaqs } from "@/lib/content/review-quality"
 import fs from "node:fs"
 import path from "node:path"
 import React from "react"
@@ -498,8 +499,10 @@ describe("CD-10: methodology and EEAT claims", () => {
 
   it("methodology publishes a checkable scoring rule", () => {
     const src = readSrc("src/app/methodology/page.tsx")
-    expect(src).toContain("mean of those nine scores")
-    expect(src).toContain("publish neither value")
+    expect(src).not.toMatch(/mean of those nine scores/i)
+    expect(src).toContain("Evidence first")
+    expect(src).toContain("scores remain unpublished as verified until source evidence and calculation can be checked")
+    expect(src).toContain("source evidence and calculation can be checked")
   })
 
   it("review pages do not point readers at a testing process they can verify", () => {
@@ -549,5 +552,84 @@ describe("CD-14: author claims", () => {
     expect(authors).not.toMatch(/holds a degree/i)
     expect(authors).not.toMatch(/worked as a solutions architect/i)
     expect(authors).not.toMatch(/personally reviews tools/i)
+  })
+})
+
+
+describe("CD-15: generated review boilerplate", () => {
+  it("suppresses generic sections that assert unsupported testing, ratings, security, or performance", () => {
+    const calcom = load("cal-com")
+    const visible = getVisibleReviewContent(calcom.content, false)
+    const titles = new Set(visible.map((section: { title: string }) => section.title))
+    for (const title of ["Company Background", "Product Overview", "User Experience", "Real Advantages", "Security & Compliance"]) {
+      expect(titles.has(title)).toBe(false)
+    }
+    expect(visible.find((section: { title: string }) => section.title === "Performance")?.body).toContain("service-status history")
+  })
+
+  it("suppresses additional repeated best-for, scale, and uptime claims in the edited review corpus", () => {
+    const activeCampaign = load("activecampaign")
+    const appwrite = load("appwrite")
+    const activeVisible = getVisibleReviewContent(activeCampaign.content, false)
+    const appwriteVisible = getVisibleReviewContent(appwrite.content, false)
+    expect(activeVisible.some((section: { title: string }) => section.title === "Real-world Use Cases")).toBe(false)
+    expect(activeVisible.some((section: { title: string }) => section.title === "Best For")).toBe(false)
+    expect(activeVisible.some((section: { title: string; body: string }) => section.title === "Real Advantages" && /consistently outperforms competitors/i.test(section.body))).toBe(false)
+    expect(appwriteVisible.some((section: { title: string; body: string }) => section.title === "Performance" && /99\.9% uptime SLA/i.test(section.body))).toBe(false)
+  })
+
+  it("filters generic FAQ claims about compliance, security, and enterprise scale", () => {
+    const activeCampaign = load("activecampaign")
+    const visible = getVisibleReviewFaqs(activeCampaign.faqs)
+    const questions = visible.map((faq: { question: string }) => faq.question)
+    expect(questions).not.toContain("Is ActiveCampaign secure?")
+    expect(questions).not.toContain("Is ActiveCampaign GDPR compliant?")
+    expect(questions).not.toContain("Is ActiveCampaign good for enterprise teams?")
+    expect(visible.length).toBeGreaterThan(0)
+  })
+
+  it("preserves useful FAQ answers that do not use unsupported generated claims", () => {
+    const faqs = [
+      { question: "How can I evaluate this tool?", answer: "Run a small pilot with your actual workflow and verify the plan limits." },
+      { question: "Is Example secure?", answer: "Example maintains SOC 2 Type II certifications. Compliance with GDPR, CCPA is supported for regulated industries." },
+      { question: "Is Example GDPR compliant?", answer: "Yes, Example is GDPR compliant with data processing agreements and data residency options." },
+    ]
+    expect(getVisibleReviewFaqs(faqs).map((faq) => faq.question)).toEqual(["How can I evaluate this tool?"])
+  })
+
+  it("preserves specific workflow guidance while still respecting pricing verification", () => {
+    const content = [
+      { title: "Workflow example", body: "Create a booking page, connect the calendar, and test routing with two sample events." },
+      { title: "Pricing at a Glance", body: "Pricing details." },
+      { title: "Performance", body: "The product delivers reliable performance with 99.9% uptime SLA and consistent response times under load." },
+    ]
+    expect(getVisibleReviewContent(content, false).map((section) => section.title)).toEqual(["Workflow example"])
+  })
+})
+
+
+describe("CD-16: cross-category comparison publication safeguards", () => {
+  it("keeps non-substitutable product comparisons unpublished without a false overall winner", () => {
+    const slugs = [
+      "1password-vs-appwrite",
+      "1password-vs-auth0",
+      "1password-vs-crowdstrike",
+      "1password-vs-fathom",
+      "adp-vs-airtable",
+      "affinity-vs-wix",
+      "ahrefs-vs-claude",
+      "cal-com-vs-discord",
+      "clickup-vs-gusto",
+      "copy-ai-vs-heap",
+      "dialpad-vs-loom",
+    ]
+    for (const slug of slugs) {
+      const file = path.join(process.cwd(), "content", "comparisons", `${slug}.json`)
+      const comparison = JSON.parse(fs.readFileSync(file, "utf8"))
+      expect(comparison.publicationStatus, slug).toBe("draft")
+      expect(comparison.published, slug).toBe(false)
+      expect(comparison.winner, slug).toBe("Depends on use case")
+      expect(comparison.lastUpdated, slug).toBeUndefined()
+    }
   })
 })
