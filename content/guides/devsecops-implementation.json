@@ -55,7 +55,7 @@
     },
     {
       "title": "Implementation checklist",
-      "body": "Pilot the approach on one service, prove the checks run, verify permissions, assign finding owners, and exercise an exception and rollback. Expand only when the team can maintain the controls and respond to results. Review the setup after changes to the stack, threat model, or release process.",
+      "body": "Pilot the approach on one service, prove the checks run, verify permissions, assign finding owners, and exercise an exception and rollback. Expand only when the team can maintain the controls and respond to results. Review the setup after changes to the stack, threat model, or release process. Keep a short evidence log for the pilot: which checks ran, what they detected, who resolved findings, and which exceptions were approved. Track both missed risks and noisy alerts so the team can tune rules without quietly disabling controls. Record the owner and review date for every exception, and make sure the rollback path is tested before expanding to additional services.",
       "type": "text"
     }
   ]
