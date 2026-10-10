@@ -573,8 +573,8 @@ describe("CD-15: generated review boilerplate", () => {
     const appwriteVisible = getVisibleReviewContent(appwrite.content, false)
     expect(activeVisible.some((section: { title: string }) => section.title === "Real-world Use Cases")).toBe(false)
     expect(activeVisible.some((section: { title: string }) => section.title === "Best For")).toBe(false)
-    expect(activeVisible.some((section: { title: string }) => section.title === "Real Advantages" && /consistently outperforms competitors/i.test(section.body))).toBe(false)
-    expect(appwriteVisible.some((section: { title: string }) => section.title === "Performance" && /99\.9% uptime SLA/i.test(section.body))).toBe(false)
+    expect(activeVisible.some((section: { title: string; body: string }) => section.title === "Real Advantages" && /consistently outperforms competitors/i.test(section.body))).toBe(false)
+    expect(appwriteVisible.some((section: { title: string; body: string }) => section.title === "Performance" && /99\.9% uptime SLA/i.test(section.body))).toBe(false)
   })
 
   it("filters generic FAQ claims about compliance, security, and enterprise scale", () => {
