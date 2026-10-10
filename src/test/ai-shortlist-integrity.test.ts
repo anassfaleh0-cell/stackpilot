@@ -29,4 +29,14 @@ describe("shortlist content integrity", () => {
       }
     }
   })
+
+  it("does not imply an unverified overall ranking in shortlist presentation", () => {
+    const template = fs.readFileSync(path.join(process.cwd(), "src/app/best/[slug]/page.tsx"), "utf8")
+    expect(template).toContain("not a verified overall ranking")
+    expect(template).toContain("The list order is not a verified ranking.")
+    expect(template).toContain("Options to Evaluate")
+    expect(template).not.toContain("#1 listed option")
+    expect(template).not.toContain(">Top Picks</h2>")
+    expect(template).not.toContain("{pick.rank}</span>")
+  })
 })
