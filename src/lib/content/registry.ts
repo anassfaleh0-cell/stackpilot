@@ -193,13 +193,38 @@ function sanitizeEditorialText(value: string): string {
     .trim()
 }
 
-function sanitizeContentValue(value: unknown): unknown {
-  if (typeof value === "string") return sanitizeMalformedPricingText(sanitizeEditorialText(value))
-  if (Array.isArray(value)) return value.map(sanitizeContentValue)
+function sanitizeEditorialBody(value: string): string {
+  // Markdown body fields rely on paragraph, heading, list, and table boundaries
+  // for rendering. Sanitize each line, but preserve those structural separators.
+  return sanitizeMalformedAnchorMarkup(value)
+    .split(/\n\s*\n/)
+    .map((block) => {
+      const lines = block.split("\n")
+      const isTableBlock = lines.some((line) => /^\s*\|/.test(line))
+      return lines
+        .map((line) => sanitizeMalformedPricingText(
+          isTableBlock ? sanitizeUnsupportedClaims(line) : sanitizeEditorialText(line)
+        ))
+        .filter(Boolean)
+        .join("\n")
+    })
+    .filter(Boolean)
+    .join("\n\n")
+}
+
+function sanitizeContentValue(value: unknown, fieldName?: string): unknown {
+  if (typeof value === "string") {
+    return fieldName === "body"
+      ? sanitizeEditorialBody(value)
+      : sanitizeMalformedPricingText(sanitizeEditorialText(value))
+  }
+  if (Array.isArray(value)) return value.map((item) => sanitizeContentValue(item))
   if (value && typeof value === "object") {
     const out: Record<string, unknown> = {}
     for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
-      out[key] = key === "author" && typeof child === "string" ? "PilotStack Team" : sanitizeContentValue(child)
+      out[key] = key === "author" && typeof child === "string"
+        ? "PilotStack Team"
+        : sanitizeContentValue(child, key)
     }
     return out
   }
