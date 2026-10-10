@@ -618,7 +618,7 @@ function sanitizeComparisonDescription(description: string, tool1: string, tool2
     : cleaned.split(/(?<=[.!?])\s+/)
         .filter((sentence) =>
           !/\b(?:overall pick|recorded pick|overall winner|our recommendation|recommended for most users|is the winner|wins over|beats|outperforms|edges ahead)\b/i.test(sentence) &&
-          !/(?:[$€£]\\s?\\d|\\b\\d+(?:\\.\\d+)?\\s*\\/\\s*5\\b|\\b\\d+\\s*(?:per month|per user|\\/mo|\\/month)\\b)/i.test(sentence)
+          !/(?:[$€£]\s?\d|\b\d+(?:\.\d+)?\s*\/\s*5\b|\b\d+\s*(?:per month|per user|\/mo|\/month)\b)/i.test(sentence)
         )
         .join(" ")
         .trim()
