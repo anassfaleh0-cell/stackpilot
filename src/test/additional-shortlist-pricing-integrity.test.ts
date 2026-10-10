@@ -25,6 +25,14 @@ const slugs = [
   "best-developer-tools",
   "best-free-accounting",
   "best-budgeting-tools",
+  "best-cloud-erp",
+  "best-cms-platforms",
+  "best-customer-support-software",
+  "best-data-visualization",
+  "best-business-phone-systems",
+  "best-endpoint-security",
+  "best-erp-software",
+  "best-expense-management-software",
 ]
 
 describe("additional shortlist pricing integrity", () => {
