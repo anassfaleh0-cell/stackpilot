@@ -29,7 +29,8 @@
       ],
       "bestFor": "Evaluate deployment previews, framework support, server-side functions, environment handling, observability, and rollback for your application.",
       "ratingVerified": false,
-      "priceRangeVerified": false
+      "priceRangeVerified": false,
+      "reviewCountVerified": false
     },
     {
       "rank": 2,
@@ -48,7 +49,8 @@
       ],
       "bestFor": "Evaluate Postgres capabilities, schema migrations, authentication, row-level security, backups, and expected database workload.",
       "ratingVerified": false,
-      "priceRangeVerified": false
+      "priceRangeVerified": false,
+      "reviewCountVerified": false
     },
     {
       "rank": 3,
@@ -67,7 +69,8 @@
       ],
       "bestFor": "Evaluate static and edge delivery, routing, build workflows, runtime requirements, and how related platform services are billed.",
       "ratingVerified": false,
-      "priceRangeVerified": false
+      "priceRangeVerified": false,
+      "reviewCountVerified": false
     },
     {
       "rank": 4,
@@ -86,7 +89,8 @@
       ],
       "bestFor": "Evaluate build pipelines, preview deployments, routing, functions, logs, and the limits that apply to your expected release cadence.",
       "ratingVerified": false,
-      "priceRangeVerified": false
+      "priceRangeVerified": false,
+      "reviewCountVerified": false
     },
     {
       "rank": 5,
@@ -105,7 +109,8 @@
       ],
       "bestFor": "Evaluate managed application services, authentication, database rules, local emulation, export options, and usage-based costs.",
       "ratingVerified": false,
-      "priceRangeVerified": false
+      "priceRangeVerified": false,
+      "reviewCountVerified": false
     },
     {
       "rank": 6,
@@ -124,7 +129,8 @@
       ],
       "bestFor": "Evaluate its backend services and hosting model, including permissions, backups, upgrade process, observability, and operating responsibilities.",
       "ratingVerified": false,
-      "priceRangeVerified": false
+      "priceRangeVerified": false,
+      "reviewCountVerified": false
     }
   ],
   "pricingSummary": "Current prices, ratings, and plan limits are not independently verified in this entry. Check each vendor's current pricing and product documentation. Estimate total cost using your expected users, transaction or usage volume, integrations, required controls, support, add-ons, and contract term. Confirm limits, overage fees, and cancellation terms before choosing.",
@@ -133,44 +139,44 @@
       "Tool",
       "Rating",
       "Price",
-      "Best For"
+      "Evaluation focus"
     ],
     "rows": [
       [
         "Vercel",
+        "Not verified",
         "Not independently verified",
-        "Not independently verified — check current vendor pricing",
-        "Check current vendor documentation"
+        "Evaluate deployment previews, framework support, server-side functions, environment handling, observability, and rollback for your application."
       ],
       [
         "Supabase",
+        "Not verified",
         "Not independently verified",
-        "Not independently verified — check current vendor pricing",
-        "Check current vendor documentation"
+        "Evaluate Postgres capabilities, schema migrations, authentication, row-level security, backups, and expected database workload."
       ],
       [
         "Cloudflare Pages",
+        "Not verified",
         "Not independently verified",
-        "Not independently verified — check current vendor pricing",
-        "Check current vendor documentation"
+        "Evaluate static and edge delivery, routing, build workflows, runtime requirements, and how related platform services are billed."
       ],
       [
         "Netlify",
+        "Not verified",
         "Not independently verified",
-        "Not independently verified — check current vendor pricing",
-        "Check current vendor documentation"
+        "Evaluate build pipelines, preview deployments, routing, functions, logs, and the limits that apply to your expected release cadence."
       ],
       [
         "Firebase",
+        "Not verified",
         "Not independently verified",
-        "Not independently verified — check current vendor pricing",
-        "Check current vendor documentation"
+        "Evaluate managed application services, authentication, database rules, local emulation, export options, and usage-based costs."
       ],
       [
         "Appwrite",
+        "Not verified",
         "Not independently verified",
-        "Not independently verified — check current vendor pricing",
-        "Check current vendor documentation"
+        "Evaluate its backend services and hosting model, including permissions, backups, upgrade process, observability, and operating responsibilities."
       ]
     ]
   },
