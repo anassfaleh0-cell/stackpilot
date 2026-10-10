@@ -45,11 +45,11 @@ describe("additional shortlist pricing integrity", () => {
         picks: Array<{ priceRange?: string }>
       }
 
-      expect(page.description, slug).toMatch(/not independently verified/i)
-      expect(page.pricingSummary, slug).toMatch(/not independently verified/i)
+      expect(page.description, slug).toMatch(/not (?:been )?independently verified/i)
+      expect(page.pricingSummary, slug).toMatch(/not (?:been )?independently verified/i)
       expect(page.picks.length, slug).toBeGreaterThan(0)
       for (const pick of page.picks) {
-        expect(pick.priceRange, slug).toMatch(/not independently verified/i)
+        expect(pick.priceRange, slug).toMatch(/not (?:been )?independently verified/i)
       }
     }
   })
