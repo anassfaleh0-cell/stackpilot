@@ -151,8 +151,22 @@ function sanitizeUnsupportedClaims(value: string | undefined): string {
     .trim()
 }
 
+function sanitizeMalformedAnchorMarkup(value: string): string {
+  const openingCount = (value.match(/<a\\b/gi) || []).length
+  if (openingCount === 0) return value
+  const closingCount = (value.match(/<\\/a\\s*>/gi) || []).length
+  const hasNestedAnchors = /<a\\b[^>]*>[\\s\\S]*?<a\\b/i.test(value)
+  // Some imported content has nested or unbalanced anchors from automated link insertion.
+  // Keep the readable labels, but remove anchor tags from the affected field so malformed
+  // markup cannot swallow adjacent words or corrupt the rendered review.
+  if (hasNestedAnchors || openingCount !== closingCount) {
+    return value.replace(/<\\/?a\\b[^>]*>/gi, "")
+  }
+  return value
+}
+
 function sanitizeContentValue(value: unknown): unknown {
-  if (typeof value === "string") return sanitizeMalformedPricingText(sanitizeUnsupportedClaims(value))
+  if (typeof value === "string") return sanitizeMalformedPricingText(sanitizeUnsupportedClaims(sanitizeMalformedAnchorMarkup(value)))
   if (Array.isArray(value)) return value.map(sanitizeContentValue)
   if (value && typeof value === "object") {
     const out: Record<string, unknown> = {}
