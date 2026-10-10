@@ -21,6 +21,19 @@ const SITE_URL = "https://pilotstack.online"
 const CONTENT_DIR = path.resolve(process.cwd(), "content")
 const NOINDEX_FILE = path.resolve(process.cwd(), "noindex-list.json")
 
+function normalizeComparisonCategory(category) {
+  const value = String(category || "").trim().toLowerCase().replace(/\s+/g, " ")
+  const aliases = {
+    "analytics": "analytics-data",
+    "analytics & data": "analytics-data",
+    "hr & payroll": "hr-people",
+    "hr & people": "hr-people",
+    "video communication": "communication",
+    "communication": "communication",
+  }
+  return aliases[value] || value
+}
+
 let totalIssues = 0
 let totalWarnings = 0
 let totalPassed = 0
@@ -279,7 +292,7 @@ function checkContentQuality() {
           for (const value of (review.cons || []).slice(0, 2)) words += wordCount(value)
         }
         const [review1, review2] = linkedReviews
-        if (review1?.category && review2?.category && review1.category !== review2.category) {
+        if (review1?.category && review2?.category && normalizeComparisonCategory(review1.category) !== normalizeComparisonCategory(review2.category)) {
           crossCategoryComparisons.push({
             slug: data.slug,
             tool1: data.tool1,
