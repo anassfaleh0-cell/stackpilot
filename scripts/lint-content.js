@@ -227,7 +227,7 @@ for (const dir of dirs) {
     if (dir === "content/blog" && data.body) {
       const pricingWarns = checkPricingFigures(data.body, file, verifiedEntities)
       for (const w of pricingWarns) {
-        console.warn(`  WARNING: [pricing] ${w}`)
+        console.warn(`  WARNING: [pricing] ${fpath}: ${w}`)
       }
     }
 
