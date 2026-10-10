@@ -161,7 +161,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Options to Evaluate</h2>
                 <div className="space-y-6">
                   {page.picks.map((pick) => (
-                    <GlassCard key={pick.toolSlug} glow={pick.rank === 1}>
+                    <GlassCard key={pick.toolSlug}>
                       <div className="p-5">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-3">
