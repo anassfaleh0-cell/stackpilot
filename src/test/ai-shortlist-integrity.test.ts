@@ -12,11 +12,17 @@ describe("shortlist content integrity", () => {
         description: string
         pricingSummary: string
         picks: Array<{ priceRange?: string; bestFor?: string }>
+        comparisonTable?: { rows?: string[][] }
       }
 
       expect(page.description).toMatch(/not independently verified/i)
       expect(page.pricingSummary).toMatch(/not independently verified/i)
       expect(page.picks.length).toBeGreaterThan(0)
+      expect(page.comparisonTable?.rows?.length).toBe(page.picks.length)
+      for (const row of page.comparisonTable?.rows ?? []) {
+        expect(row[1]).toMatch(/not independently verified/i)
+        expect(row[2]).toMatch(/not independently verified/i)
+      }
       for (const pick of page.picks) {
         expect(pick.priceRange).toMatch(/not independently verified/i)
         expect(pick.bestFor).not.toMatch(/is perfect for|is ideal for/i)
