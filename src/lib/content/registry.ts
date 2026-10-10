@@ -670,7 +670,7 @@ function normalizeGuideForDisplay(guide: GuideContent): GuideContent {
     ...sections.flatMap((section) => [section.title, section.body, ...(section.items || [])]),
     ...faqs.flatMap((faq) => [faq.question, faq.answer]),
   ].filter((value): value is string => typeof value === "string").join(" ")
-  const wordCount = renderedText.replace(/<[^>]*>/g, " ").split(/\\s+/).filter(Boolean).length
+  const wordCount = renderedText.replace(/<[^>]*>/g, " ").split(/\s+/).filter(Boolean).length
   return {
     ...guide,
     readingTime: Math.max(3, Math.ceil(wordCount / 200)),
