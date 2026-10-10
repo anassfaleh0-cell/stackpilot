@@ -63,7 +63,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const entries: MetadataRoute.Sitemap = [
     ...staticPages,
-    { url: `${siteConfig.url}/rss.xml`, changeFrequency: "weekly", priority: 0.3 },
     ...PUBLIC_AUTHOR_SLUGS.map((slug) => ({
       url: `${siteConfig.url}/authors/${slug}`,
       changeFrequency: "monthly" as const,

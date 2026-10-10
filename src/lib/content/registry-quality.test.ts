@@ -12,6 +12,20 @@ describe("content quality repairs", () => {
     expect(guide?.readingTime).toBeLessThan(8)
   })
 
+  it("derives guide reading time from the normalized content rendered on the page", () => {
+    const guide = getGuide("accounting-software-pricing")
+    expect(guide).not.toBeNull()
+    const renderedText = [
+      guide!.title,
+      guide!.description,
+      ...guide!.sections.flatMap((section) => [section.title, section.body, ...(section.items || [])]),
+      ...(guide!.faqs || []).flatMap((faq) => [faq.question, faq.answer]),
+    ].join(" ").replace(/<[^>]*>/g, " ")
+    const words = renderedText.split(/\\s+/).filter(Boolean).length
+    expect(guide!.readingTime).toBe(Math.max(3, Math.ceil(words / 200)))
+    expect(guide!.readingTime).toBeGreaterThan(10)
+  })
+
   it("normalizes malformed numeric price ranges", () => {
     const page = getBest("best-marketing-software")
     expect(page?.picks[0]?.priceRange).toBe("Not independently verified — check current vendor pricing")

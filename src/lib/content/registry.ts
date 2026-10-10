@@ -659,16 +659,35 @@ export function getComparisonsByCategory(category: string): ComparisonContent[] 
     .filter((item): item is ComparisonContent => Boolean(item))
 }
 
+function normalizeGuideForDisplay(guide: GuideContent): GuideContent {
+  const sections = buildGuideSections(guide)
+  const faqs = sanitizeFaqs(guide.faqs)
+  // Reading time must describe the content users actually see after sanitation and
+  // the guide's minimum-content expansion, not stale JSON metadata or raw source text.
+  const renderedText = [
+    guide.title,
+    guide.description,
+    ...sections.flatMap((section) => [section.title, section.body, ...(section.items || [])]),
+    ...faqs.flatMap((faq) => [faq.question, faq.answer]),
+  ].filter((value): value is string => typeof value === "string").join(" ")
+  const wordCount = renderedText.replace(/<[^>]*>/g, " ").split(/\\s+/).filter(Boolean).length
+  return {
+    ...guide,
+    readingTime: Math.max(3, Math.ceil(wordCount / 200)),
+    sections,
+    faqs,
+  }
+}
+
 export function getGuide(slug: string): GuideContent | null {
   const file = path.join(CONTENT_DIR, "guides", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  const guide = readJson<GuideContent>(file)
-  return { ...guide, sections: buildGuideSections(guide), faqs: sanitizeFaqs(guide.faqs) }
+  return normalizeGuideForDisplay(readJson<GuideContent>(file))
 }
 
 export function getAllGuides(): GuideContent[] {
   return readDir(path.join(CONTENT_DIR, "guides"))
-    .map((f) => { const g = readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)); return { ...g, sections: buildGuideSections(g), faqs: sanitizeFaqs(g.faqs) } })
+    .map((f) => normalizeGuideForDisplay(readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f))))
 }
 
 export function getGlossaryTerm(slug: string): GlossaryContent | null {
