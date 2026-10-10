@@ -98,6 +98,24 @@ async function run() {
   const weakPages = [...incoming]
     .filter(([, count]) => count > 0 && count < 3)
     .sort((left, right) => left[1] - right[1] || left[0].localeCompare(right[0]))
+  const targetPaths = [...nonSitemapTargets]
+  const brokenInternalTargets = []
+  let targetCursor = 0
+  async function targetWorker() {
+    while (targetCursor < targetPaths.length) {
+      const pathname = targetPaths[targetCursor++]
+      try {
+        const response = await fetchWithTimeout(`${SITE_URL}${pathname}`, { method: "HEAD" })
+        if (response.status === 404 || response.status === 410) {
+          brokenInternalTargets.push({ pathname, status: response.status })
+        }
+      } catch (error) {
+        brokenInternalTargets.push({ pathname, error: error instanceof Error ? error.message : String(error) })
+      }
+    }
+  }
+  await Promise.all(Array.from({ length: CONCURRENCY }, targetWorker))
+
   const byPrefix = {}
   for (const pathname of sitemapPaths) {
     const prefix = pathname.split("/")[1] || "home"
@@ -110,9 +128,10 @@ async function run() {
   console.log("Orphan sitemap pages:", orphanPages.length, JSON.stringify(orphanPages.slice(0, 80)))
   console.log("Pages with only 1-2 incoming links:", weakPages.length, JSON.stringify(weakPages.slice(0, 80)))
   console.log("Internal targets absent from sitemap:", nonSitemapTargets.size, JSON.stringify([...nonSitemapTargets].sort().slice(0, 80)))
+  console.log("Broken internal targets absent from sitemap:", brokenInternalTargets.length, JSON.stringify(brokenInternalTargets.slice(0, 80)))
   console.log("Page counts by prefix:", JSON.stringify(byPrefix))
 
-  if (failedPages.length > 0) process.exitCode = 1
+  if (failedPages.length > 0 || brokenInternalTargets.length > 0) process.exitCode = 1
 }
 
 run().catch((error) => {
