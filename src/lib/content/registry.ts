@@ -690,9 +690,9 @@ export function getComparisonSeoTitle(slug: string, tool1: string, tool2: string
 // page metadata and sitemap lastmod until a source-backed editorial update is recorded.
 const UNVERIFIED_COMPARISON_UPDATE_DATES = new Set(["2026-07-20","2026-07-28","2026-07-23","2026-07-16","2026-07-18","2026-07-01"])
 
-function getVerifiedComparisonLastUpdated(value: unknown): string | undefined {
-  if (typeof value !== "string" || !value.trim()) return undefined
-  return UNVERIFIED_COMPARISON_UPDATE_DATES.has(value.slice(0, 10)) ? undefined : value
+function getVerifiedComparisonLastUpdated(value: unknown): string {
+  if (typeof value !== "string" || !value.trim()) return ""
+  return UNVERIFIED_COMPARISON_UPDATE_DATES.has(value.slice(0, 10)) ? "" : value
 }
 
 export function getComparison(slug: string): ComparisonContent | null {
