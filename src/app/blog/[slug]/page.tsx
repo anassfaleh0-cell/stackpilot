@@ -2,6 +2,7 @@ import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, BlogPostingSchema, WebPageSchema } from "@/components/seo/json-ld"
+import { renderBlogInlineMarkdown } from "@/components/content/blog-inline-markdown"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getBlogPost, getContentTitle, isContentAvailable, getAllBlogPosts } from "@/lib/content/registry"
@@ -52,13 +53,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const midPoint = proseIndices.length > 0 ? proseIndices[Math.floor(proseIndices.length / 2)] : Math.floor(paragraphs.length / 2)
   const pullQuote = (paragraphs[midPoint] || "").replace(/^#{1,6}\s*/, "").replace(/\*\*/g, "").trim().slice(0, 150)
 
-  const renderInline = (text: string, keyBase: string) => {
-    const segments = text.split(/\*\*([^*]+)\*\*/g)
-    return segments.map((segment, i) =>
-      i % 2 === 1 ? <strong key={`${keyBase}-b${i}`}>{segment}</strong> : <span key={`${keyBase}-t${i}`}>{segment}</span>
-    )
-  }
-
   const renderBlock = (block: string, keyBase: string) => {
     const lines = block.split("\n").filter(Boolean)
     const first = lines[0] ?? ""
@@ -86,7 +80,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               {bodyRows.map((row, i) => (
                 <tr key={i} className="border-b border-border/50">
                   {cells(row).map((cell, j) => (
-                    <td key={j} className="py-2.5 px-3 text-muted-foreground">{renderInline(cell, `r${i}c${j}`)}</td>
+                    <td key={j} className="py-2.5 px-3 text-muted-foreground">{renderBlogInlineMarkdown(cell, `r${i}c${j}`)}</td>
                   ))}
                 </tr>
               ))}
@@ -95,7 +89,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
       )
     }
-    return <p key={keyBase}>{renderInline(block, keyBase)}</p>
+    return <p key={keyBase}>{renderBlogInlineMarkdown(block, keyBase)}</p>
   }
 
   return (
