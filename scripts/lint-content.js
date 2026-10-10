@@ -67,9 +67,13 @@ function checkPricingFigures(body, file, verifiedEntities) {
     const windowStart = Math.max(0, pos - 150)
     const windowEnd = Math.min(body.length, pos + 150)
     const context = body.slice(windowStart, windowEnd).toLowerCase()
+    // Dollar amounts in SaaS metrics (ARR, CAC, retention examples) are not vendor prices.
+    // Only flag amounts when the surrounding text indicates a pricing/plan/billing claim.
+    const pricingContext = /\b(pricing|price|subscription|billing|plan|tier|fee|overage|per (?:user|editor|seat)|paid plan|monthly plan|annual plan)\b/i.test(context)
+    if (!pricingContext) continue
     for (const [name, slug] of Object.entries(TOOL_NAMES)) {
       if (context.includes(name) && !verifiedEntities.has(slug)) {
-        warnings.push(`Unverified $ figure near "${name}": ${match[0]}`)
+        warnings.push("Unverified $ figure near \"" + name + "\": " + match[0])
         break
       }
     }
