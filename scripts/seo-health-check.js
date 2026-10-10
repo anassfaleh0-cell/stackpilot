@@ -357,14 +357,14 @@ function checkContentQuality() {
       log("warn", ct.dir + ": " + missingFaq + " source records missing a FAQ data opportunity")
     }
     if (genericTemplateCount > 0) {
-      log("warn", `${ct.dir}: ${genericTemplateCount} indexed pages contain known generic filler phrases; examples: ${genericTemplateExamples.join(", ")}`)
+      log("warn", `${ct.dir}: ${genericTemplateCount} raw source records contain known generic phrase patterns; configured matches are filtered from rendered text by the registry, but source cleanup is still recommended. Examples: ${genericTemplateExamples.join(", ")}`)
     } else {
       log("pass", `${ct.dir}: No known generic filler phrases found`)
     }
   }
 
   if (crossCategoryComparisons.length > 0) {
-    log("warn", `comparisons: ${crossCategoryComparisons.length} pair products from different linked-review categories; pages should explain distinct use cases rather than present a universal winner. Samples: ${JSON.stringify(crossCategoryComparisons.slice(0, 10))}`)
+    log("warn", `comparisons: ${crossCategoryComparisons.length} raw comparison records pair products from different linked-review categories; rendered pages now suppress unverified winner/score claims and explain distinct use cases, but each pairing still needs editorial relevance review. Samples: ${JSON.stringify(crossCategoryComparisons.slice(0, 10))}`)
   }
 }
 
