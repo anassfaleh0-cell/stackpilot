@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!ind) return {}
   const readingTime = Math.max(5, Math.ceil((ind.description.split(/\s+/).length + ind.recommendations.length * 15) / 200))
   const shortTitle = ind.title.length > 58 ? ind.title.slice(0, 55) + "..." : ind.title
-  return createMetadata({ title: shortTitle, description: `Best software for ${ind.industry.toLowerCase()} businesses, with ratings, pricing context, and implementation tips for 2026.`, path: `/industries/${ind.slug}`, ogType: "article", publishedAt: ind.lastUpdated, updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime , noIndex: isNoindexed("industries", ind.slug) })
+  return createMetadata({ title: shortTitle, description: `Best software for ${ind.industry.toLowerCase()} businesses, with ratings, pricing context, and implementation tips for 2026.`, path: `/industries/${ind.slug}`, ogType: "article", updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime , noIndex: isNoindexed("industries", ind.slug) })
 }
 
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -46,7 +46,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Industries", href: "/industries" }, { name: ind.title, href: `/industries/${slug}` }]} />
-      <ArticleSchema title={ind.title} description={ind.description} publishedAt={ind.lastUpdated} updatedAt={ind.lastUpdated} author="PilotStack Team" url={`${site.url}/industries/${slug}`} wordCount={ind.description.split(/\s+/).length + ind.industryOverview.split(/\s+/).filter(Boolean).length + ind.softwareNeeds.join(" ").split(/\s+/).filter(Boolean).length + ind.recommendations.reduce((n, r) => n + r.category.split(/\s+/).length + r.toolName.split(/\s+/).length + r.bestFor.split(/\s+/).filter(Boolean).length, 0) + ind.implementationTips.join(" ").split(/\s+/).filter(Boolean).length + ind.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={ind.industry} />
+      <ArticleSchema title={ind.title} description={ind.description} updatedAt={ind.lastUpdated} author="PilotStack Team" url={`${site.url}/industries/${slug}`} wordCount={ind.description.split(/\s+/).length + ind.industryOverview.split(/\s+/).filter(Boolean).length + ind.softwareNeeds.join(" ").split(/\s+/).filter(Boolean).length + ind.recommendations.reduce((n, r) => n + r.category.split(/\s+/).length + r.toolName.split(/\s+/).length + r.bestFor.split(/\s+/).filter(Boolean).length, 0) + ind.implementationTips.join(" ").split(/\s+/).filter(Boolean).length + ind.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={ind.industry} />
       <WebPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} dateModified={ind.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: ind.recommendations.map((rec, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}`, category: rec.category,  }) })) }} />
       <ItemListSchema items={ind.recommendations.map(rec => ({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` }))} url={`${site.url}/industries/${slug}`} />
       <CollectionPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} />
