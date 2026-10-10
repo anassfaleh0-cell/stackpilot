@@ -23,6 +23,7 @@ const GENERATED_REVIEW_SECTION_PATTERNS = [
   /^Founded in \d{4} and headquartered in .+ has grown to serve .+ users with .+ team members\./i,
   /^.+ delivers comprehensive .+ functionality designed to address the most critical needs in the .+ category\./i,
   /^.+ delivers comprehensive .+ functionality designed for .+\. The platform offers robust security features, comprehensive integration options/i,
+  /^.+ delivers comprehensive .+ functionality designed for .+\. The platform is available via .+ with deployment options including /i,
   /^We found .+'s interface to be intuitive and well-organized\./i,
   /^.+ is best suited for .+ Organizations that need .+ enterprise-grade reliability will find .+ particularly valuable\./i,
   /^.+ delivers the core functionality expected from a platform in its category, with particular strength in the areas that matter most to its target users\./i,
