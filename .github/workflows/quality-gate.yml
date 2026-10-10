@@ -29,6 +29,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Dependency audit summary (non-blocking)
+        run: |
+          npm audit --json > /tmp/npm-audit.json || true
+          node <<'NODE'
+          const report = require('/tmp/npm-audit.json')
+          const vulnerabilities = Object.entries(report.vulnerabilities || {}).map(([name, item]) => ({
+            name,
+            severity: item.severity,
+            range: item.range,
+            fixAvailable: item.fixAvailable,
+            advisories: (item.via || []).filter((via) => typeof via === 'object').map((via) => ({
+              title: via.title,
+              url: via.url,
+              range: via.range,
+            })),
+          }))
+          console.log(JSON.stringify({
+            summary: report.metadata?.vulnerabilities,
+            affectedPackages: vulnerabilities,
+          }, null, 2))
+          NODE
+
       - name: Normalize flagged content boilerplate
         run: |
           node scripts/content-quality-cleanup.js
