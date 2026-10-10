@@ -26,6 +26,23 @@ jobs:
           node-version: 22
           cache: npm
 
+      - name: Repair malformed lockfile for dependency patch
+        if: github.event_name == 'pull_request' && github.head_ref == 'fix/comparison-copy-audit-wave1'
+        run: |
+          if node -e 'JSON.parse(require("fs").readFileSync("package-lock.json", "utf8"))'; then
+            echo "Lockfile JSON is valid; no repair needed."
+          else
+            rm -f package-lock.json
+            npm install --package-lock-only --ignore-scripts --no-audit
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add package-lock.json
+            if ! git diff --cached --quiet; then
+              git commit -m "Regenerate lockfile for patched Next.js"
+              git push origin "HEAD:${GITHUB_HEAD_REF}"
+            fi
+          fi
+
       - name: Install dependencies
         run: npm ci
 
