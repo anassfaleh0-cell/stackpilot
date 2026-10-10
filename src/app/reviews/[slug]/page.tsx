@@ -100,7 +100,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
     .filter((r) => r.category === tool.category && r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating))
     .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
   const isBestInCategory = hasEditorialRating && bestInCategory?.slug === tool.slug
-  const isBestValue = tool.pricing === "Freemium" || tool.pricing === "Free" || tool.pricing === "Free Trial"
+  const isBestValue = tool.priceRangeVerified === true && (tool.pricing === "Freemium" || tool.pricing === "Free" || tool.pricing === "Free Trial")
 
   return (
     <>
