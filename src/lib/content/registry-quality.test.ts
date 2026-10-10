@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getAllComparisons, getBest, getBlogPost, getComparison, getGuide, getReview } from "@/lib/content/registry"
+import { getAllComparisons, getAllGuides, getBest, getBlogPost, getComparison, getGuide, getReview } from "@/lib/content/registry"
 
 describe("content quality repairs", () => {
   it("replaces repetitive generated guide filler with practical buyer guidance", () => {
@@ -12,18 +12,20 @@ describe("content quality repairs", () => {
     expect(guide?.readingTime).toBeLessThan(8)
   })
 
-  it("derives guide reading time from the normalized content rendered on the page", () => {
-    const guide = getGuide("accounting-software-pricing")
-    expect(guide).not.toBeNull()
-    const renderedText = [
-      guide!.title,
-      guide!.description,
-      ...guide!.sections.flatMap((section) => [section.title, section.body, ...(section.items || [])]),
-      ...(guide!.faqs || []).flatMap((faq) => [faq.question, faq.answer]),
-    ].join(" ").replace(/<[^>]*>/g, " ")
-    const words = renderedText.split(/\s+/).filter(Boolean).length
-    expect(guide!.readingTime).toBe(Math.max(3, Math.ceil(words / 200)))
-    expect(guide!.readingTime).toBeGreaterThan(10)
+  it("derives guide reading time from normalized rendered content for every guide", () => {
+    const guides = getAllGuides()
+    expect(guides.length).toBeGreaterThan(0)
+    for (const guide of guides) {
+      const renderedText = [
+        guide.title,
+        guide.description,
+        ...guide.sections.flatMap((section) => [section.title, section.body, ...(section.items || [])]),
+        ...(guide.faqs || []).flatMap((faq) => [faq.question, faq.answer]),
+      ].join(" ").replace(/<[^>]*>/g, " ")
+      const words = renderedText.split(/\s+/).filter(Boolean).length
+      expect(guide.readingTime, guide.slug).toBe(Math.max(3, Math.ceil(words / 200)))
+    }
+    expect(getGuide("accounting-software-pricing")?.readingTime).toBeGreaterThan(10)
   })
 
   it("filters known generic filler from normalized review and best-list content", () => {
