@@ -118,7 +118,7 @@ function checkRobots() {
 
   // Source-level checks must not emit an unconditional PASS.
   const aiBots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "PerplexityBot"]
-  const missingAiBotRules = aiBots.filter((bot) => !new RegExp(`userAgent\s*:\s*["']${bot}["']`).test(content))
+  const missingAiBotRules = aiBots.filter((bot) => !new RegExp(`userAgent\\s*:\\s*["']${bot}["']`).test(content))
   if (missingAiBotRules.length > 0) {
     log("warn", `AI crawler user-agent rules are not explicitly declared: ${missingAiBotRules.join(", ")}`)
   } else {
@@ -126,7 +126,7 @@ function checkRobots() {
   }
 
   const privatePaths = ["/api/", "/admin/", "/dashboard", "/search", "/_global-error"]
-  const namedCrawlerRules = [...content.matchAll(/userAgent\s*:\s*["']([^"']+)["']([\s\\S]*?)(?=userAgent\s*:|sitemap\s*:|$)/g)]
+  const namedCrawlerRules = [...content.matchAll(/userAgent\s*:\s*["']([^"']+)["']([\s\S]*?)(?=userAgent\s*:|sitemap\s*:|$)/g)]
     .filter((match) => match[1] !== "*")
   const missingPrivatePathBlocks = namedCrawlerRules
     .filter((match) => privatePaths.some((route) => !match[2].includes(route)))
