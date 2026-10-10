@@ -17,6 +17,14 @@ const slugs = [
   "best-authentication-platforms",
   "best-backend-platforms",
   "best-bi-tools",
+  "best-crm-software-2026",
+  "best-communication-tools-2026",
+  "best-email-marketing-software",
+  "best-ecommerce-platforms",
+  "best-business-intelligence",
+  "best-developer-tools",
+  "best-free-accounting",
+  "best-budgeting-tools",
 ]
 
 describe("additional shortlist pricing integrity", () => {
