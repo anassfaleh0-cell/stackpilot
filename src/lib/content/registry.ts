@@ -685,6 +685,16 @@ export function getComparisonSeoTitle(slug: string, tool1: string, tool2: string
   return `${tool1} vs ${tool2}${variant} (2026): ${winnerVerified ? "Which One Wins?" : "How to Choose"}`
 }
 
+// These dates were assigned in bulk to comparison records and do not prove that
+// the underlying vendor information was reviewed on that day. Suppress them from
+// page metadata and sitemap lastmod until a source-backed editorial update is recorded.
+const UNVERIFIED_COMPARISON_UPDATE_DATES = new Set(["2026-07-20","2026-07-28","2026-07-23","2026-07-16","2026-07-18","2026-07-01"])
+
+function getVerifiedComparisonLastUpdated(value: unknown): string | undefined {
+  if (typeof value !== "string" || !value.trim()) return undefined
+  return UNVERIFIED_COMPARISON_UPDATE_DATES.has(value.slice(0, 10)) ? undefined : value
+}
+
 export function getComparison(slug: string): ComparisonContent | null {
   const cached = comparisonCache.get(slug)
   if (cached !== undefined) return cached
@@ -709,6 +719,7 @@ export function getComparison(slug: string): ComparisonContent | null {
   const winner = cmp.winnerVerified === true ? normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2) : null
   const result: ComparisonContent = {
     ...cmp,
+    lastUpdated: getVerifiedComparisonLastUpdated(cmp.lastUpdated),
     winner,
     description: sanitizeComparisonDescription(cmp.description, cmp.tool1, cmp.tool2, features, winner),
     verdict: buildComparisonNarrative(cmp.tool1, cmp.tool2, cmp.tool1Slug, cmp.tool2Slug, cmp.featuresVerified === true ? features : [], winner),
