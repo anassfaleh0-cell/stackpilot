@@ -33,6 +33,7 @@ describe("content quality repairs", () => {
     expect(comparison?.featuresVerified).not.toBe(true)
     expect(comparison?.winner).toBeNull()
     expect(comparison?.description).not.toMatch(/CircleCI is our overall pick|recorded pick/i)
+    expect(comparison?.description).not.toMatch(/[$€£]\\s?\\d|\\b\\d+(?:\\.\\d+)?\\s*\\/\\s*5\\b/i)
     expect(comparison?.verdict).toContain("does not name one overall pick")
     expect(comparison?.verdict).toContain("no independently verified rating")
     expect(comparison?.verdict).not.toMatch(/marked available in the dataset|marked unavailable in the dataset/i)
