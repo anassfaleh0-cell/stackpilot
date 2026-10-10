@@ -46,7 +46,6 @@ for (const file of files) {
     for (const item of section.items || []) words += count(item)
     editorialText.push(section.title, section.body, ...(section.items || []))
   }
-  if (words < 500) thin.push({ slug: data.slug, words, lastUpdated: data.lastUpdated || null })
   const relatedGuides = Array.isArray(data.relatedGuides) ? data.relatedGuides : []
   const seenRelatedGuides = new Set()
   for (const relatedSlug of relatedGuides) {
@@ -64,10 +63,15 @@ for (const file of files) {
   if (!parsedDate || Number.isNaN(parsedDate.getTime()) || parsedDate.getTime() > Date.now() + 86400000 || Date.now() - parsedDate.getTime() > 365 * 86400000) {
     staleDates.push({ slug: data.slug, lastUpdated: data.lastUpdated || null })
   }
-  // Include FAQ copy because it is rendered as part of the guide page and contributes to reading time.
+  // FAQs are rendered on the guide page, so include them consistently in
+  // source-word thresholds, reading-time estimates, and template-copy scans.
   for (const faq of data.faqs || []) {
-    words += count(faq.question) + count(faq.answer)
+    const question = typeof faq.question === "string" ? faq.question : ""
+    const answer = typeof faq.answer === "string" ? faq.answer : ""
+    words += count(question) + count(answer)
+    editorialText.push(question, answer)
   }
+  if (words < 500) thin.push({ slug: data.slug, words, lastUpdated: data.lastUpdated || null })
   const expectedReadingTime = Math.max(3, Math.ceil(words / 200))
   if (Number.isFinite(data.readingTime) && data.readingTime !== expectedReadingTime) {
     readingTimeMismatches.push({ slug: data.slug, stored: data.readingTime, expected: expectedReadingTime, words })
