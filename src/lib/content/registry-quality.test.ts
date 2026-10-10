@@ -10,6 +10,14 @@ describe("content quality repairs", () => {
     expect(getBlogPost("ai-tools-2026-guide")?.description.length).toBeGreaterThan(100)
   })
 
+  it("does not expose unverified batch dates as comparison update dates", () => {
+    const unverifiedDates = new Set(["2026-07-20","2026-07-28","2026-07-23","2026-07-16","2026-07-18","2026-07-01"])
+    const exposed = getAllComparisons()
+      .filter((comparison) => unverifiedDates.has(comparison.lastUpdated ?? ""))
+      .map((comparison) => comparison.slug)
+    expect(exposed).toEqual([])
+  })
+
   it("keeps comparison variants distinct in their SEO titles", () => {
     const comparisons = getAllComparisons()
     const titles = comparisons.map((comparison) => getComparisonSeoTitle(
