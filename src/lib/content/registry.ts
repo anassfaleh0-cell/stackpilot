@@ -152,15 +152,15 @@ function sanitizeUnsupportedClaims(value: string | undefined): string {
 }
 
 function sanitizeMalformedAnchorMarkup(value: string): string {
-  const openingCount = (value.match(/<a\\b/gi) || []).length
+  const openingCount = (value.match(/<a\b/gi) || []).length
   if (openingCount === 0) return value
-  const closingCount = (value.match(/<\\/a\\s*>/gi) || []).length
-  const hasNestedAnchors = /<a\\b[^>]*>[\\s\\S]*?<a\\b/i.test(value)
+  const closingCount = (value.match(/<\/a\s*>/gi) || []).length
+  const hasNestedAnchors = /<a\b[^>]*>[\s\S]*?<a\b/i.test(value)
   // Some imported content has nested or unbalanced anchors from automated link insertion.
   // Keep the readable labels, but remove anchor tags from the affected field so malformed
   // markup cannot swallow adjacent words or corrupt the rendered review.
   if (hasNestedAnchors || openingCount !== closingCount) {
-    return value.replace(/<\\/?a\\b[^>]*>/gi, "")
+    return value.replace(/<\/?a\b[^>]*>/gi, "")
   }
   return value
 }
