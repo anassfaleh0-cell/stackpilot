@@ -1,7 +1,23 @@
 import { describe, expect, it } from "vitest"
-import { getAllComparisons, getAllGuides, getBest, getBlogPost, getComparison, getGuide, getReview } from "@/lib/content/registry"
+import { getAllComparisons, getAllGuides, getBest, getBlogPost, getComparison, getComparisonSeoTitle, getGuide, getReview } from "@/lib/content/registry"
 
 describe("content quality repairs", () => {
+  it("keeps comparison variants distinct in their SEO titles", () => {
+    const comparisons = getAllComparisons()
+    const titles = comparisons.map((comparison) => getComparisonSeoTitle(
+      comparison.slug,
+      comparison.tool1,
+      comparison.tool2,
+      comparison.winnerVerified === true,
+    ))
+    const duplicates = titles.filter((title, index) => titles.indexOf(title) !== index)
+    expect(duplicates).toEqual([])
+    expect(getComparisonSeoTitle("hubspot-vs-salesforce-startups", "HubSpot", "Salesforce", false))
+      .toContain("for Startups")
+    expect(getComparisonSeoTitle("slack-vs-microsoft-teams-remote", "Slack", "Microsoft Teams", false))
+      .toContain("for Remote Teams")
+  })
+
   it("replaces repetitive generated guide filler with practical buyer guidance", () => {
     const guide = getGuide("marketing-attribution-guide")
     expect(guide).not.toBeNull()
