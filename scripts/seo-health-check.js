@@ -180,6 +180,13 @@ function checkContentQuality() {
     /functional organized interface\./i,
     /written against our published editorial methodology/i,
     /updated when the underlying content is reviewed/i,
+    /positive ROI typically within 3-6 months/i,
+    /most teams start within hours/i,
+    /a teams team uses/i,
+    /updates weekly[^.]*major feature releases quarterly/i,
+    /perfect for freelancers and independent professionals/i,
+    /and \d+\+ more\./i,
+    /workfl(?:$|\s)/i,
   ]
 
   for (const ct of contentTypes) {
