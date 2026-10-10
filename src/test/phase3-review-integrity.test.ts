@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { getVisibleReviewContent } from "@/lib/content/review-quality"
+import { getVisibleReviewContent, getVisibleReviewFaqs } from "@/lib/content/review-quality"
 import fs from "node:fs"
 import path from "node:path"
 import React from "react"
@@ -575,6 +575,25 @@ describe("CD-15: generated review boilerplate", () => {
     expect(activeVisible.some((section: { title: string }) => section.title === "Best For")).toBe(false)
     expect(activeVisible.some((section: { title: string }) => section.title === "Real Advantages" && /consistently outperforms competitors/i.test(section.body))).toBe(false)
     expect(appwriteVisible.some((section: { title: string }) => section.title === "Performance" && /99\.9% uptime SLA/i.test(section.body))).toBe(false)
+  })
+
+  it("filters generic FAQ claims about compliance, security, and enterprise scale", () => {
+    const activeCampaign = load("activecampaign")
+    const visible = getVisibleReviewFaqs(activeCampaign.faqs)
+    const questions = visible.map((faq: { question: string }) => faq.question)
+    expect(questions).not.toContain("Is ActiveCampaign secure?")
+    expect(questions).not.toContain("Is ActiveCampaign GDPR compliant?")
+    expect(questions).not.toContain("Is ActiveCampaign good for enterprise teams?")
+    expect(visible.length).toBeGreaterThan(0)
+  })
+
+  it("preserves useful FAQ answers that do not use unsupported generated claims", () => {
+    const faqs = [
+      { question: "How can I evaluate this tool?", answer: "Run a small pilot with your actual workflow and verify the plan limits." },
+      { question: "Is Example secure?", answer: "Example maintains SOC 2 Type II certifications. Compliance with GDPR, CCPA is supported for regulated industries." },
+      { question: "Is Example GDPR compliant?", answer: "Yes, Example is GDPR compliant with data processing agreements and data residency options." },
+    ]
+    expect(getVisibleReviewFaqs(faqs).map((faq) => faq.question)).toEqual(["How can I evaluate this tool?"])
   })
 
   it("preserves specific workflow guidance while still respecting pricing verification", () => {
