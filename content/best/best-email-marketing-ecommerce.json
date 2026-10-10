@@ -52,7 +52,6 @@
       "rank": 3,
       "toolName": "Drip",
       "cons": [
-        "No free tier (starts at /mo)",
         "Smaller integration ecosystem"
       ],
       "bestFor": "Direct-to-consumer brands evaluating lifecycle campaigns and store-connected customer journeys.",
@@ -183,24 +182,24 @@
   "lastUpdated": "2026-09-08",
   "faqs": [
     {
-      "question": "What is the best email marketing tool for Shopify stores?",
-      "answer": "Klaviyo is the best for Shopify stores. It has the deepest integration, predictive analytics, and pre-built flows for abandoned carts, winbacks, and product recommendations. It's worth the investment for stores doing +/month."
+      "question": "How should I choose an email marketing tool for a Shopify or ecommerce store?",
+      "answer": "Start with the store platform and confirm the integration supports the events and customer fields you need. Then compare segmentation, automation triggers, consent handling, reporting, deliverability controls, and the cost at your current contact count and sending volume. Test a small workflow before migrating all campaigns."
     },
     {
-      "question": "Can I use email marketing for free?",
-      "answer": "Yes, Omnisend offers 500 free emails/month with abandoned cart flows. Mailchimp offers free for 500 contacts but limits ecommerce features. Brevo offers 300 free emails/day. For serious ecommerce, paid plans (-50/mo) are worth it."
+      "question": "Can I use an ecommerce email marketing tool for free?",
+      "answer": "Some vendors offer free or trial tiers, but eligibility, sending limits, contact limits, automation access, and branding restrictions vary. Check each vendor's current plan details rather than assuming a specific allowance is still available."
     },
     {
-      "question": "How do abandoned cart emails work?",
-      "answer": "Abandoned cart emails trigger when a customer adds items to their cart but doesn't complete checkout. The tool automatically sends 2-3 follow-up emails with the cart contents, typically recovering 5-15% of lost sales."
+      "question": "How do abandoned-cart emails work?",
+      "answer": "A cart-abandonment workflow typically starts when a shopper adds an item but does not complete checkout, subject to the store's tracking setup and consent rules. Before enabling it, test the trigger, suppression rules, timing, product details, and checkout link. Measure incremental results against a suitable baseline instead of assuming a fixed recovery rate."
     },
     {
-      "question": "How much should I spend on email marketing?",
-      "answer": "For stores under /month revenue, -50/month covers most needs. For stores doing -500K/month, budget -500/month. The ROI on email marketing is typically 30-40x the cost."
+      "question": "How much should an online store budget for email marketing?",
+      "answer": "Estimate the cost using your current contact count, expected list growth, sending volume, automation needs, and any SMS or add-on charges. Vendor pricing and plan limits change, so confirm current terms directly. Do not use a generic revenue band or promised ROI as a substitute for your own forecast."
     },
     {
-      "question": "Which tool has the best deliverability?",
-      "answer": "Klaviyo, ActiveCampaign, and Drip consistently achieve 95%+ inbox rates. Mailchimp's deliverability has declined in recent years. All tools improve deliverability with proper list hygiene and authentication (SPF, DKIM, DMARC)."
+      "question": "How can I compare email deliverability between vendors?",
+      "answer": "Do not rely on a universal inbox-rate claim without a dated, comparable methodology. Review authentication support, bounce and complaint reporting, list-management controls, and vendor guidance. Keep SPF, DKIM, and DMARC configured correctly, and monitor results using your own campaigns and recipient domains."
     }
   ]
 }
