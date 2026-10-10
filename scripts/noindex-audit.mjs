@@ -83,15 +83,24 @@ function scoreFile(filePath, dirName) {
   else if (words >= 300) score += 20
   else if (words >= 100) score += 10
 
-  // 2. Unique data points (0-20 pts)
+  // 2. Unique data points (0-20 pts). Score by schema rather than assuming
+  // every content type has pricing, ratings, pros/cons, and feature arrays.
   let dataPoints = 0
-  if (data.pricing || data.priceRange) dataPoints++
-  if (data.features && data.features.length > 0) dataPoints++
-  if (data.rating || data.ratings) dataPoints++
-  if (data.pros && data.pros.length > 0) dataPoints++
-  if (data.cons && data.cons.length > 0) dataPoints++
-  if (data.faqs && data.faqs.length > 0) dataPoints++
-  if (data.alternatives && data.alternatives.length > 0) dataPoints++
+  if (dirName === "glossary") {
+    if (data.definition) dataPoints++
+    if (data.extendedDefinition) dataPoints++
+    if (data.examples?.length > 0) dataPoints++
+    if (data.relatedTerms?.length > 0) dataPoints++
+    if (data.references?.length > 0 || data.sources?.length > 0) dataPoints++
+  } else {
+    if (data.pricing || data.priceRange) dataPoints++
+    if (data.features && data.features.length > 0) dataPoints++
+    if (data.rating || data.ratings) dataPoints++
+    if (data.pros && data.pros.length > 0) dataPoints++
+    if (data.cons && data.cons.length > 0) dataPoints++
+    if (data.faqs && data.faqs.length > 0) dataPoints++
+    if (data.alternatives && data.alternatives.length > 0) dataPoints++
+  }
   score += Math.min(20, dataPoints * 3)
 
   // 3. Original content signals (0-20 pts)
@@ -101,7 +110,10 @@ function scoreFile(filePath, dirName) {
     (data.sections || []).some((s) => s.images && s.images.length > 0)
   const hasTested = allText.toLowerCase().includes("tested") || allText.toLowerCase().includes("hands-on") || 
     allText.toLowerCase().includes("we tried") || allText.toLowerCase().includes("our experience")
-  if (hasImages) score += 20
+  if (dirName === "glossary") {
+    if (countWords(data.extendedDefinition || "") >= 80) score += 15
+    else if ((data.examples || []).length > 0 || (data.relatedTerms || []).length > 0) score += 10
+  } else if (hasImages) score += 20
   else if (hasTested) score += 15
 
   // 4. Author field (0-10 pts)
@@ -110,7 +122,7 @@ function scoreFile(filePath, dirName) {
 
   // 5. Freshness (0-15 pts)
   const lastReviewed = data.lastReviewed || data.lastUpdated || data.publishedAt
-  if (lastReviewed) {
+  if (lastReviewed && dirName !== "glossary") {
     const daysSince = Math.floor((Date.now() - new Date(lastReviewed).getTime()) / (1000 * 60 * 60 * 24))
     if (daysSince < 90) score += 15
     else if (daysSince < 180) score += 10
@@ -119,18 +131,36 @@ function scoreFile(filePath, dirName) {
 
   // 6. Depth (0-10 pts)
   const sections = data.content || data.sections || data.features || data.picks || data.alternatives || []
-  if (sections.length >= 10) score += 10
-  else if (sections.length >= 5) score += 7
-  else if (sections.length >= 3) score += 4
+  const depthCount = dirName === "glossary"
+    ? (data.examples || []).length + (data.relatedTerms || []).length
+    : sections.length
+  if (depthCount >= 6) score += 10
+  else if (depthCount >= 3) score += 7
+  else if (depthCount >= 1) score += 4
 
   // Editorial-review signals only: never automatically apply noindex.
   // A low score prompts human review; it is not proof that a page is low quality.
-  const isThin = words < 150 && !hasTested
-  const isDuplicate = dirName === "comparisons" && sections.length < 3 && words < 300
+  const minimumWordsByDirectory = {
+    comparisons: 200, best: 300, glossary: 80, statistics: 100,
+    alternatives: 100, guides: 500, blog: 300, reviews: 300,
+  }
+  const minimumWords = minimumWordsByDirectory[dirName] || 150
+  const isThin = words < minimumWords && !hasTested
+  const isDuplicate = dirName === "comparisons" && sections.length < 3 && words < 200
   const reviewReasons = []
   if (isThin) reviewReasons.push("very-short-source-content")
   if (isDuplicate) reviewReasons.push("short-comparison-with-few-sections")
-  if (score < 30) reviewReasons.push("low-source-signal-score")
+  // Low generic scores are meaningful only alongside a short source record.
+  // Glossary pages use definition/examples/related-term signals above instead.
+  if (dirName !== "glossary" && score < 30 && words < minimumWords * 1.5) {
+    reviewReasons.push("low-source-signal-score")
+  }
+  if (dirName === "glossary") {
+    if (countWords(data.definition || "") < 10) reviewReasons.push("missing-or-short-definition")
+    if (countWords(data.extendedDefinition || "") < 60 && !(data.examples || []).length) {
+      reviewReasons.push("limited-explanation-without-examples")
+    }
+  }
 
   return {
     slug,
