@@ -38,6 +38,24 @@ function countWords(text) {
   return text.split(/\s+/).filter(Boolean).length
 }
 
+const NON_EDITORIAL_KEYS = new Set([
+  "slug", "website", "url", "publishedAt", "lastUpdated", "lastReviewed",
+  "author", "category", "winner", "priceRange", "pricing", "rating",
+  "ratings", "reviewCount", "seoTitle", "seoDescription", "image",
+  "imageUrl", "logo", "id", "type", "available", "tool1Slug", "tool2Slug",
+  "tool1", "tool2", "createdAt", "updatedAt",
+])
+
+function collectEditorialText(value, key = "") {
+  if (NON_EDITORIAL_KEYS.has(key)) return ""
+  if (typeof value === "string") return value
+  if (Array.isArray(value)) return value.map((item) => collectEditorialText(item, key)).join(" ")
+  if (value && typeof value === "object") {
+    return Object.entries(value).map(([childKey, child]) => collectEditorialText(child, childKey)).join(" ")
+  }
+  return ""
+}
+
 function scoreFile(filePath, dirName) {
   let raw
   try {
@@ -57,14 +75,9 @@ function scoreFile(filePath, dirName) {
   let score = 0
 
   // 1. Word count (0-25 pts)
-  const allText = [
-    data.description || "",
-    data.tagline || "",
-    data.body || "",
-    data.verdict || "",
-    ...(data.content || []).map((s) => s.body || ""),
-    ...(data.sections || []).map((s) => s.body || ""),
-  ].join(" ")
+  // Count editorial copy across schema variants (features, FAQs, picks, glossary
+  // examples, and comparison details), not just `body`/`sections` fields.
+  const allText = collectEditorialText(data)
   const words = countWords(allText)
   if (words >= 600) score += 25
   else if (words >= 300) score += 20
@@ -105,7 +118,7 @@ function scoreFile(filePath, dirName) {
   }
 
   // 6. Depth (0-10 pts)
-  const sections = data.content || data.sections || []
+  const sections = data.content || data.sections || data.features || data.picks || data.alternatives || []
   if (sections.length >= 10) score += 10
   else if (sections.length >= 5) score += 7
   else if (sections.length >= 3) score += 4
