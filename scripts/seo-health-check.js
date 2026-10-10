@@ -166,6 +166,7 @@ function checkContentQuality() {
   // page thin solely because that copy lives in the linked review record.
   const reviewsBySlug = new Map()
   const crossCategoryComparisons = []
+  let draftComparisonsSkipped = 0
   const reviewsDir = path.join(CONTENT_DIR, "reviews")
   for (const file of readDir(reviewsDir)) {
     const review = readJson(path.join(reviewsDir, file))
@@ -217,6 +218,10 @@ function checkContentQuality() {
     for (const file of files) {
       const data = readJson(path.join(dir, file))
       if (!data) continue
+      if (ct.dir === "comparisons" && data.publicationStatus === "draft") {
+        draftComparisonsSkipped++
+        continue
+      }
 
       const slug = file.replace(".json", "")
       const isNoindexed = noindexSets[ct.dir]?.has(slug)
@@ -374,7 +379,10 @@ function checkContentQuality() {
   }
 
   if (crossCategoryComparisons.length > 0) {
-    log("warn", `comparisons: ${crossCategoryComparisons.length} raw comparison records pair products from different linked-review categories; rendered pages now suppress unverified winner/score claims and explain distinct use cases, but each pairing still needs editorial relevance review. Samples: ${JSON.stringify(crossCategoryComparisons.slice(0, 10))}`)
+    log("warn", `comparisons: ${crossCategoryComparisons.length} eligible comparison records pair products from different linked-review categories; rendered pages suppress unverified winner/score claims, but each live pairing still needs editorial relevance review. Samples: ${JSON.stringify(crossCategoryComparisons.slice(0, 10))}`)
+  }
+  if (draftComparisonsSkipped > 0) {
+    log("pass", `comparisons: excluded ${draftComparisonsSkipped} explicit draft records from live SEO checks; they remain in the editorial review audit before publication`)
   }
 }
 
