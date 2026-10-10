@@ -552,8 +552,13 @@ function checkEEAT() {
   const authorRegistryPath = path.resolve(process.cwd(), "src/lib/authors.ts")
   if (fs.existsSync(authorRegistryPath)) {
     const authorRegistry = fs.readFileSync(authorRegistryPath, "utf8")
-    const slugList = authorRegistry.match(/PUBLIC_AUTHOR_SLUGS\\s*=\\s*\\[([\\s\\S]*?)\\]\\s*as const/)
-    const authorCount = slugList ? [...slugList[1].matchAll(/["']([^"']+)["']/g)].length : 0
+    const registryStart = authorRegistry.indexOf("PUBLIC_AUTHOR_SLUGS")
+    const registryOpen = authorRegistry.indexOf("[", registryStart)
+    const registryClose = authorRegistry.indexOf("]", registryOpen)
+    const slugList = registryStart >= 0 && registryOpen >= 0 && registryClose > registryOpen
+      ? authorRegistry.slice(registryOpen + 1, registryClose)
+      : ""
+    const authorCount = slugList.split(",").filter((entry) => entry.includes(""")).length
     if (authorCount > 0) log("pass", `${authorCount} public author profile(s) are configured`)
     else log("warn", "No public author profiles are configured in src/lib/authors.ts")
   } else {
