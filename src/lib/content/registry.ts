@@ -611,15 +611,15 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
   ].filter(Boolean).join("\n\n")
 }
 function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
-  const cleaned = sanitizeUnsupportedClaims(description).replace(/\\s+/g, " ").trim()
+  const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
   // Winner language is publishable only when the comparison has explicit provenance.
   const safeDescription = winner
     ? cleaned
-    : cleaned.split(/(?<=[.!?])\\s+/)
-        .filter((sentence) => !/\\b(?:overall pick|recorded pick|overall winner|our recommendation|recommended for most users|is the winner|wins over|beats|outperforms|edges ahead)\\b/i.test(sentence))
+    : cleaned.split(/(?<=[.!?])\s+/)
+        .filter((sentence) => !/\b(?:overall pick|recorded pick|overall winner|our recommendation|recommended for most users|is the winner|wins over|beats|outperforms|edges ahead)\b/i.test(sentence))
         .join(" ")
         .trim()
-  if (safeDescription.length >= 80 && !/are paramount|including advanced\\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(safeDescription)) return trimText(safeDescription, 700)
+  if (safeDescription.length >= 80 && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(safeDescription)) return trimText(safeDescription, 700)
   return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the verified recorded overall winner under the stated criteria." : "The dataset records no independently verified overall winner. Check the detailed rows and linked reviews before making a decision."), 700)
 }
 export function getComparison(slug: string): ComparisonContent | null {
