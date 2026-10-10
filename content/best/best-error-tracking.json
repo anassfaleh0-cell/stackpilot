@@ -79,34 +79,34 @@
   "comparisonTable": {
     "columns": [
       "Tool",
-      "Rating",
-      "Price",
-      "Best For"
+      "Rating status",
+      "Price status",
+      "Best-fit workflow"
     ],
     "rows": [
       [
         "Datadog",
-        "4.6/5",
-        "$15/host/mo",
-        "Best for datadog is perfect for freelancers and independent professionals who need an affordable, easy-to-use developer tools tool"
+        "Not independently verified",
+        "Not independently verified — check current vendor pricing",
+        "Teams already using Datadog that want to evaluate error tracking alongside their broader observability workflow."
       ],
       [
         "Sentry",
-        "4.5/5",
-        "Free–$26/user/mo",
-        "Best for sentry is best suited for enterprises and power users who need advanced developer tools capabilities"
+        "Not independently verified",
+        "Not independently verified — check current vendor pricing",
+        "Development teams that want exception reporting and debugging context across supported languages and frameworks."
       ],
       [
         "LogRocket",
-        "4.3/5",
-        "Free – $99/mo",
-        "Best for logRocket is ideal for small to mid-size teams that need a reliable developer tools solution without excessive complexity"
+        "Not independently verified",
+        "Not independently verified — check current vendor pricing",
+        "Frontend teams evaluating session replay alongside client-side error investigation and user-session context."
       ],
       [
         "New Relic",
-        "4.2/5",
-        "$0.25/hour",
-        "Best for new Relic is perfect for freelancers and independent professionals who need an affordable, easy-to-use developer tools tool"
+        "Not independently verified",
+        "Not independently verified — check current vendor pricing",
+        "Teams considering application monitoring and error investigation within a broader telemetry platform."
       ]
     ]
   },
