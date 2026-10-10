@@ -2,9 +2,9 @@
   "slug": "linear",
   "name": "Linear",
   "tagline": "Issue tracking and project management for high-performance teams.",
-  "description": "Linear is a streamlined issue tracking and project management platform designed specifically for software teams that value speed and efficiency. With its keyboard-first interface and sophisticated automation engine, Linear helps engineering teams plan, track, and ship software faster while reducing administrative overhead.",
+  "description": "Linear is a software platform reviewed here through practical use cases, trade-offs, and buyer evaluation questions. Current ratings, review counts, pricing, and vendor commitments are not independently verified; confirm details directly with the vendor before choosing.",
   "seoTitle": "Linear Review 2026: Features, Pricing & Alternatives",
-  "seoDescription": "Linear review for 2026 covering project management, issue tracking, workflows, collaboration, pricing, strengths, limitations and alternatives.",
+  "seoDescription": "Linear review: practical workflow fit, limitations, implementation questions, and a checklist for validating current pricing and plan details. Ratings and prices are not independently verified.",
   "category": "Project Management",
   "website": "https://linear.app",
   "pricing": "Free Trial",
@@ -158,17 +158,17 @@
   "content": [
     {
       "title": "Executive Summary",
-      "body": "Linear is the fastest issue tracking and project management platform built specifically for software engineering teams. Its core design philosophy is speed — the web application delivers sub-100ms search across 10,000+ issues, instant filtering by any combination of status, assignee, label, priority, and cycle, and a keyboard-first interface with 200+ shortcuts that lets experienced engineers manage their entire workflow without touching a mouse. Linear was founded in 2019 by ex-Uber engineers and has grown rapidly through word-of-mouth adoption among high-performance engineering teams at companies like Vercel, Mercado Libre, and Podium. The platform uses a cycle-based planning model (similar to sprints but with more flexibility) and provides AI-powered issue triage that automatically categorizes, prioritizes, and assigns incoming work. Linear's simplicity is its defining characteristic — it makes deliberate trade-offs against Jira's configurability, choosing a fast, opinionated experience over unlimited customization. The platform has received over 3,500 user reviews with a 4.8/5 rating, reflecting exceptional satisfaction among its target audience of engineering teams.",
+      "body": "Linear is an issue-tracking and product-development workspace built around teams, projects, cycles, and a focused issue workflow. It is most relevant to software teams that want engineering work connected to planning and delivery. Fit depends on how well its workflow model matches your existing process; this review does not claim independent speed benchmarks or a verified rating dataset. Trial it with a real backlog, code-hosting integration, and release process before migrating.",
       "type": "text"
     },
     {
       "title": "TL;DR",
-      "body": "Linear is a project management platform rated 4.8/5 across 893 user reviews. It is built for software teams that want issue tracking without administrative overhead: sub-100ms search across 10,000+ issues, instant filtering by status, assignee, label, priority and cycle, and 200+ keyboard shortcuts. Category scores are features 4.6/5, ease of use 4.9/5, support 4.5/5, value 4.3/5 and performance 4.9/5. Pricing is per user per month across Free (up to 10 users), Team at $8/user/month billed annually, and Enterprise at $16/user/month. For most software teams Linear is a strong fit, provided you want a fast, opinionated workflow rather than deep configuration.",
+      "body": "Linear is a strong candidate to evaluate for software teams that want a focused issue tracker and product-planning workflow. Teams that require extensive custom fields, complex permissions, or heavily tailored enterprise processes should test those constraints early. Ratings, review counts, current prices, and performance figures have not been independently verified here.",
       "type": "text"
     },
     {
       "title": "Rating Overview",
-      "body": "Linear holds a 4.8/5 overall rating based on 893 user reviews, with individual scores of Features: 4.6/5, Ease of Use: 4.9/5, Support: 4.5/5, Value: 4.3/5, Performance: 4.9/5. The platform's highest scores are in Ease of Use (4.9/5) and Performance (4.9/5). These scores reflect consistent user satisfaction across the platform's core capabilities.",
+      "body": "We have not independently verified a current, comparable rating dataset or review-count snapshot for Linear. Evaluate the product with a repeatable test: triage incoming issues, plan a cycle, connect a pull request, change ownership, and report on progress. Compare the friction and visibility with your current tracker before deciding whether a migration is worthwhile.",
       "type": "text"
     },
     {
@@ -226,12 +226,12 @@
     },
     {
       "title": "Pricing Explained",
-      "body": "Linear uses per-user monthly pricing with three tiers. Free includes up to 10 users, 1 GB attachment storage, and core features with community support. Team plan at $8/user/month (billed annually) removes user and storage limits, adds cycle analytics, GitHub/GitLab integration, and Slack integration. Enterprise plan at $16/user/month adds SAML SSO, SCIM provisioning, advanced audit logs, API rate limit increases, and dedicated support with a 99.95% uptime SLA. All plans include the full set of core features — Linear does not gate issue tracking, search, or filtering behind higher tiers. The pricing model is straightforward with no hidden costs per seat, which is refreshing compared to Jira's tiered feature gating. However, the jump from Team to Enterprise doubles the per-user cost for access to SSO and audit logs, which are table-stakes features for many organizations. Annual billing is required for the published rates; monthly billing is available at approximately 20% higher per-user pricing. Linear does not charge for guest users or read-only viewers, which is advantageous for organizations with external contractors or stakeholders.",
+      "body": "Linear's current plan prices, included limits, and billing terms are not independently verified in this review. Check the official pricing page for seat minimums, guest access, issue and project limits, AI features, integrations, SSO, audit logs, and support entitlements. Confirm monthly and annual totals for the actual team size and verify whether the controls your organization needs require a higher tier.",
       "type": "text"
     },
     {
       "title": "Hidden Costs",
-      "body": "Linear's hidden costs are fewer than most project management tools but still relevant. Attachment storage on the Free plan (1 GB) fills quickly for teams sharing design files, screenshots, and logs; upgrading to Team removes the cap, but organizations with large file storage needs should evaluate whether Linear's attachment handling meets their requirements. Third-party integrations for missing capabilities — time tracking through Toggl or Harvest ($10-20/user/month), resource management through Float or Teamdeck ($6-10/user/month), and reporting through Mode or Metabase (free-$10/user/month) — add incremental costs that close the price gap with more feature-complete tools like Jira. The migration cost from Jira or Asana includes data mapping (issues with custom field values not present in Linear), workflow redesign (Jira's complex transitions simplified to Linear's linear flow), and team training on keyboard shortcuts and cycle-based planning. Most teams report a 4-8 week productivity dip during the transition as engineers adjust to Linear's different workflow model. API usage is rate-limited on Team plans, and organizations building custom integrations at scale may need to upgrade to Enterprise for higher rate limits.",
+      "body": "Include migration time, workflow redesign, training, integration maintenance, and any required security or administration tier in the total cost. Test how imported issues, attachments, comments, labels, and project history are preserved. Verify whether external collaborators count as paid seats and whether your existing reporting or automation depends on features unavailable in the intended plan.",
       "type": "text"
     },
     {
@@ -256,17 +256,17 @@
     },
     {
       "title": "Security & Compliance",
-      "body": "Linear is SOC 2 Type II certified and GDPR compliant. Data in transit uses TLS 1.2+ and data at rest is AES-256 encrypted. Enterprise plan customers get SAML 2.0 SSO with SCIM provisioning, advanced audit logs with 1-year retention, and a 99.95% uptime SLA. Linear stores data on Google Cloud Platform's US-based servers by default, with data residency options for EU customers on Enterprise plans. For compliance requirements: Linear provides a Data Processing Agreement (DPA) for GDPR compliance, supports data export for backup and migration purposes, and offers role-based access controls (admin, member, viewer) with granular permissions for project-level visibility. However, Linear lacks several enterprise compliance features that Jira provides: no HIPAA BAA coverage (making it unsuitable for healthcare software teams handling PHI), no FedRAMP authorization, no end-to-end encryption option for data at rest, no on-premise deployment option, and no field-level audit trails (audit logs track issue and project changes but not individual field edits). Organizations in regulated industries should verify that Linear's compliance posture meets their specific requirements before adoption.",
+      "body": "This review is not evidence of current certification or compliance status. Request up-to-date security documentation and confirm SSO, user provisioning, audit events, data retention, export, data processing, and incident-response terms against your organization's requirements. Verify availability by plan and get contractual requirements confirmed before migrating sensitive issue or customer data.",
       "type": "text"
     },
     {
       "title": "Performance",
-      "body": "We have not independently benchmarked Linear's response times, memory use, or availability, so this page should not be read as a measured performance ranking. During a trial, test issue creation, filtering, search, project navigation, and mobile use with a representative workspace and network connection. Record slow operations and check the vendor's current status page for incident history instead of relying on unverified uptime or sub-100ms claims.",
+      "body": "We have not independently benchmarked Linear's response times, memory use, or availability. During a trial, test search, issue navigation, cycle planning, and large-list filtering on the devices and networks your team actually uses. Measure repeatable tasks, include a realistic backlog, and compare the results with your existing tool rather than relying on unsupported millisecond claims.",
       "type": "text"
     },
     {
       "title": "Customer Support",
-      "body": "Support channels, response commitments, and escalation options can vary by plan and change over time; this review does not have verified evidence for specific response-time SLAs. Before purchase, confirm the current support routes and contractual commitments for the plan being considered. Test the documentation against a real setup task and ask the vendor how urgent production issues are escalated.",
+      "body": "Support channels, response times, and escalation commitments may vary by plan. Check the vendor's current support policy and ask how urgent production-blocking issues are handled. During the trial, test the documentation and support route with a realistic migration or integration question; do not assume an advertised channel includes a guaranteed response SLA.",
       "type": "text"
     },
     {
@@ -306,7 +306,7 @@
     },
     {
       "title": "Final Verdict",
-      "body": "Linear earns a 4.8/5 rating and is the best issue tracking tool available for software engineering teams that prioritize speed, developer experience, and simplicity over process configurability. Its sub-100ms search, keyboard-first design, and deep GitHub/GitLab integration create a workflow that respects engineers' time and attention. AI issue triage and cycle analytics provide genuine automation value that reduces administrative overhead. However, Linear is not the right choice for every organization. Teams that need complex custom workflows, enterprise compliance features (HIPAA, FedRAMP), built-in time tracking, or a tool that serves non-engineering departments should choose Jira or Asana instead. Linear's deliberate limitations are features for its target audience but dealbreakers for organizations with broader needs. For engineering-first teams of 5-50 people that value speed and simplicity, Linear is the clear best choice. The platform's rapid growth and exceptional user satisfaction ratings reflect a product that solved a real problem: project management software had become too complex for the teams it was supposed to serve. Linear proves that less configuration and more speed is a winning formula for high-performance engineering organizations.",
+      "body": "Linear deserves consideration when a software team wants issue tracking and product planning in a focused workspace. It may be a weaker fit where extensive workflow customization, complex permission models, or established enterprise reporting are non-negotiable. Treat the shortlist as a starting point: test your real backlog and delivery workflow, confirm current plan details, and compare migration costs before making a decision.",
       "type": "text"
     },
     {
@@ -424,7 +424,7 @@
     "free-project-management-software"
   ],
   "contentPublished": "2026-07-16",
-  "contentModified": "2026-10-08",
+  "contentModified": "2026-10-10",
   "author": "Sarah Chen",
   "company": {
     "founded": 2019,
@@ -479,5 +479,8 @@
   "difficulty": "Advanced",
   "learningCurve": "Steep — requires dedicated training time for full proficiency",
   "whoShouldUse": "Linear is designed for fast-growing startups that need a scalable project management platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Linear may be overwhelming for users who only need basic project management functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
+  "whoShouldNotUse": "Linear may be overwhelming for users who only need basic project management functionality. Its extensive feature set can create unnecessary complexity for simple use cases.",
+  "ratingVerified": false,
+  "reviewCountVerified": false,
+  "priceRangeVerified": false
 }
