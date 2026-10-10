@@ -39,7 +39,6 @@ const staticPages: MetadataRoute.Sitemap = [
   { url: `${siteConfig.url}/cookies`, changeFrequency: "yearly", priority: 0.2 },
   { url: `${siteConfig.url}/sitemap-html`, changeFrequency: "weekly", priority: 0.5 },
   { url: `${siteConfig.url}/methodology`, changeFrequency: "monthly", priority: 0.5 },
-  { url: `${siteConfig.url}/dmca`, changeFrequency: "yearly", priority: 0.2 },
   ...editorialLinks.map((l) => ({
     url: `${siteConfig.url}${l.href}`,
     changeFrequency: "monthly" as const,
