@@ -51,7 +51,7 @@ const MATCH_WEIGHT: Record<MatchKind, number> = { direct: 0, audience: 1, relate
 function normalizeCategory(value: string): string {
   return value
     .normalize("NFKD")
-    .replace(/[\\u0300-\\u036f]/g, "")
+    .replace(/[\u0300-\u036f]/g, "")
     .replace(/&/g, " ")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, " ")
