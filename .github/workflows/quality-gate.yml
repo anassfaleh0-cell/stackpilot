@@ -99,6 +99,9 @@ jobs:
       - name: SEO content audit
         run: npm run seo:audit
 
+      - name: Noindex audit review-candidate generation
+        run: npm run audit:noindex
+
       - name: Unit tests
         run: npm test
 
