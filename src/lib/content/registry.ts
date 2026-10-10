@@ -612,7 +612,7 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
 }
 function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
   const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
-  // Winner language is publishable only when the comparison has explicit provenance.
+  // Winner language is publishable only when the comparison has an explicit audit flag.
   const safeDescription = winner
     ? cleaned
     : cleaned.split(/(?<=[.!?])\s+/)
