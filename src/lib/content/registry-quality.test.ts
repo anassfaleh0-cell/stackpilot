@@ -1,7 +1,15 @@
 import { describe, expect, it } from "vitest"
-import { getAllComparisons, getAllGuides, getBest, getBlogPost, getComparison, getComparisonSeoTitle, getGuide, getReview } from "@/lib/content/registry"
+import { getAllBest, getAllComparisons, getAllGuides, getBest, getBlogPost, getComparison, getComparisonSeoTitle, getGuide, getReview } from "@/lib/content/registry"
 
 describe("content quality repairs", () => {
+  it("keeps best-list titles distinct and core metadata descriptions useful", () => {
+    const bestTitles = getAllBest().map((page) => page.title)
+    expect(bestTitles.filter((title, index) => bestTitles.indexOf(title) !== index)).toEqual([])
+    expect(getBest("best-video-conferencing-software")?.description.length).toBeGreaterThan(100)
+    expect(getBest("best-web-design-tools-2026")?.description.length).toBeGreaterThan(100)
+    expect(getBlogPost("ai-tools-2026-guide")?.description.length).toBeGreaterThan(100)
+  })
+
   it("keeps comparison variants distinct in their SEO titles", () => {
     const comparisons = getAllComparisons()
     const titles = comparisons.map((comparison) => getComparisonSeoTitle(
