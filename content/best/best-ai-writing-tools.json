@@ -28,7 +28,9 @@
         "Advanced features require higher-tier plans",
         "Implementation may need dedicated resources"
       ],
-      "ratingVerified": false
+      "ratingVerified": false,
+      "reviewCountVerified": false,
+      "priceRangeVerified": false
     },
     {
       "rank": 2,
@@ -46,7 +48,9 @@
         "Advanced features require higher-tier plans",
         "Implementation may need dedicated resources"
       ],
-      "ratingVerified": false
+      "ratingVerified": false,
+      "reviewCountVerified": false,
+      "priceRangeVerified": false
     },
     {
       "rank": 3,
@@ -64,7 +68,9 @@
         "Advanced features require higher-tier plans",
         "Implementation may need dedicated resources"
       ],
-      "ratingVerified": false
+      "ratingVerified": false,
+      "reviewCountVerified": false,
+      "priceRangeVerified": false
     },
     {
       "rank": 4,
@@ -82,7 +88,9 @@
         "Advanced features require higher-tier plans",
         "Implementation may need dedicated resources"
       ],
-      "ratingVerified": false
+      "ratingVerified": false,
+      "reviewCountVerified": false,
+      "priceRangeVerified": false
     },
     {
       "rank": 5,
@@ -100,7 +108,9 @@
         "Advanced features require higher-tier plans",
         "Implementation may need dedicated resources"
       ],
-      "ratingVerified": false
+      "ratingVerified": false,
+      "reviewCountVerified": false,
+      "priceRangeVerified": false
     },
     {
       "rank": 6,
@@ -118,74 +128,55 @@
         "Advanced features require higher-tier plans",
         "Implementation may need dedicated resources"
       ],
-      "ratingVerified": false
+      "ratingVerified": false,
+      "reviewCountVerified": false,
+      "priceRangeVerified": false
     }
   ],
   "pricingSummary": "Current prices, ratings, and plan limits are not independently verified in this entry. Check each vendor's current pricing and product documentation. Estimate total cost using your expected seats, usage or contact volume, feature requirements, add-ons, support, and contract term; confirm limits and cancellation terms before choosing.",
   "comparisonTable": {
     "columns": [
-      "Feature",
-      "ChatGPT",
-      "Claude",
-      "Gemini",
-      "Jasper",
-      "Perplexity",
-      "Microsoft Copilot"
+      "Tool",
+      "Rating",
+      "Price",
+      "Evaluation focus"
     ],
     "rows": [
       [
-        "Rating",
-        "4.7/5",
-        "4.6/5",
-        "4.5/5",
-        "4.4/5",
-        "4.4/5",
-        "4.3/5"
+        "ChatGPT",
+        "Not verified",
+        "Not independently verified",
+        "AI chatbot and content generation platform redefining how we work and create"
       ],
       [
-        "Pricing",
-        "Free – $20/mo",
-        "Free – $20/mo",
-        "Free – $19.99/mo",
-        "$49–$69/mo",
-        "Free – $20/mo Pro",
-        "$30/user/mo"
+        "Claude",
+        "Not verified",
+        "Not independently verified",
+        "Anthropic's AI assistant focused on safety and nuanced reasoning"
       ],
       [
-        "Free Trial",
-        "Yes",
-        "No",
-        "Yes",
-        "No",
-        "No",
-        "No"
+        "Gemini",
+        "Not verified",
+        "Not independently verified",
+        "Google's multimodal AI platform integrated across Workspace"
       ],
       [
-        "API Access",
-        "Yes",
-        "Yes",
-        "Yes",
-        "Limited",
-        "Yes",
-        "Limited"
+        "Jasper",
+        "Not verified",
+        "Not independently verified",
+        "AI content platform built for marketers who need brand-consistent copy at scale"
       ],
       [
-        "Mobile App",
-        "Yes",
-        "No",
-        "Yes",
-        "No",
-        "Yes",
-        "Yes"
+        "Perplexity",
+        "Not verified",
+        "Not independently verified",
+        "AI-powered answer engine with real-time research capabilities"
       ],
       [
-        "Enterprise Grade",
-        "Yes",
-        "Yes",
-        "Yes",
-        "Yes",
-        "Yes",
-        "Yes"
+        "Microsoft Copilot",
+        "Not verified",
+        "Not independently verified",
+        "Microsoft's AI companion integrated across Office 365 and GitHub"
       ]
     ]
   },
