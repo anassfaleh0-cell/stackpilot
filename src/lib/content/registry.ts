@@ -616,7 +616,10 @@ function sanitizeComparisonDescription(description: string, tool1: string, tool2
   const safeDescription = winner
     ? cleaned
     : cleaned.split(/(?<=[.!?])\s+/)
-        .filter((sentence) => !/\b(?:overall pick|recorded pick|overall winner|our recommendation|recommended for most users|is the winner|wins over|beats|outperforms|edges ahead)\b/i.test(sentence))
+        .filter((sentence) =>
+          !/\b(?:overall pick|recorded pick|overall winner|our recommendation|recommended for most users|is the winner|wins over|beats|outperforms|edges ahead)\b/i.test(sentence) &&
+          !/(?:[$€£]\\s?\\d|\\b\\d+(?:\\.\\d+)?\\s*\\/\\s*5\\b|\\b\\d+\\s*(?:per month|per user|\\/mo|\\/month)\\b)/i.test(sentence)
+        )
         .join(" ")
         .trim()
   if (safeDescription.length >= 80 && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(safeDescription)) return trimText(safeDescription, 700)
