@@ -566,6 +566,17 @@ describe("CD-15: generated review boilerplate", () => {
     }
   })
 
+  it("suppresses additional repeated best-for, scale, and uptime claims in the edited review corpus", () => {
+    const activeCampaign = load("activecampaign")
+    const appwrite = load("appwrite")
+    const activeVisible = getVisibleReviewContent(activeCampaign.content, false)
+    const appwriteVisible = getVisibleReviewContent(appwrite.content, false)
+    expect(activeVisible.some((section: { title: string }) => section.title === "Real-world Use Cases")).toBe(false)
+    expect(activeVisible.some((section: { title: string }) => section.title === "Best For")).toBe(false)
+    expect(activeVisible.some((section: { title: string }) => section.title === "Real Advantages" && /consistently outperforms competitors/i.test(section.body))).toBe(false)
+    expect(appwriteVisible.some((section: { title: string }) => section.title === "Performance" && /99\.9% uptime SLA/i.test(section.body))).toBe(false)
+  })
+
   it("preserves specific workflow guidance while still respecting pricing verification", () => {
     const content = [
       { title: "Workflow example", body: "Create a booking page, connect the calendar, and test routing with two sample events." },

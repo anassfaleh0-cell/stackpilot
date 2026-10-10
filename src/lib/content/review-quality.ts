@@ -40,6 +40,11 @@ const GENERATED_REVIEW_SECTION_PATTERNS = [
   /^Basic .+ setup takes 15-30 minutes for individual accounts\. Organization-wide deployment typically requires 1-3 days/i,
   /^Migration to .+ is rated as Low complexity\. Standard import tools and API-based migration make it straightforward for most teams\./i,
   /^.+ integrates with the major platforms in its ecosystem, reducing the friction of adding it to an existing tool stack\./i,
+  /^.+ is best suited for .+\. Organizations that need .+ capabilities with enterprise-grade reliability will find .+ particularly valuable\./i,
+  /^.+ is deployed across multiple scenarios including .+\. Common implementations range from small team deployments to enterprise-wide rollouts serving thousands of users\./i,
+  /^.+ delivers reliable performance with 99\.9% uptime SLA and consistent response times under load\./i,
+  /^.+ delivers reliable performance with 99\.9% uptime SLA/i,
+  /^.+(?:'s|’) primary advantage is .+\. The platform consistently outperforms competitors in reliability and feature depth\./i,
 ]
 
 export function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false): ContentSection[] {
