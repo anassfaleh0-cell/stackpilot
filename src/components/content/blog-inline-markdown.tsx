@@ -6,7 +6,7 @@ import type { ReactNode } from "react"
  * Internal links stay same-origin; external HTTP(S) links open separately.
  */
 export function renderBlogInlineMarkdown(text: string, keyBase: string): ReactNode[] {
-  const tokens = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g)
+  const tokens = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\((?:https?:\/\/[^)]+|\/(?!\/)[^)]+)\))/g)
   return tokens.map((token, index) => {
     const key = `${keyBase}-${index}`
     if (token.startsWith("**") && token.endsWith("**")) {
