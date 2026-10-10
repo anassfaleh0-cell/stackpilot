@@ -96,6 +96,9 @@ const GENERIC_BOILERPLATE_PATTERNS = [
   /a teams team uses/i,
   /updates weekly[^.]*major feature releases quarterly/i,
   /perfect for freelancers and independent professionals/i,
+  /choosing the right marketing\s*&\s*seo software/i,
+  /and \d+\+ more\./i,
+  /workfl(?:$|\s)/i,
   /most successful deployments follow a phased approach/i,
 
 ]
@@ -617,6 +620,11 @@ function normalizeComparisonWinner(value: string | null, tool1: string, tool2: s
 function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: string, tool2Slug: string, features: ComparisonFeature[], winner: string | null): string {
   const review1 = getReview(tool1Slug)
   const review2 = getReview(tool2Slug)
+  const categoryKey = (value: string) => value.toLowerCase().replace(/&/g, " ").replace(/[^a-z0-9]+/g, " ").trim()
+  const categoriesDiffer = Boolean(review1 && review2 && categoryKey(review1.category) !== categoryKey(review2.category))
+  const categoryContext = categoriesDiffer && review1 && review2
+    ? tool1 + " is categorized as " + review1.category + ", while " + tool2 + " is categorized as " + review2.category + ". These products may address different needs, so compare only overlapping requirements rather than treating this page as a universal ranking."
+    : ""
   const recordedPick = winner
     ? `The source dataset marks ${winner} as its recorded pick. That label is not independent proof that it is the better choice for every team.`
     : "The source dataset does not name one overall pick. Choose based on your requirements and the evidence you verify."
@@ -640,6 +648,7 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
   }).join(" ")
   return [
     `This page compares ${tool1} and ${tool2} using information currently recorded in PilotStack's product profiles. The dataset is a starting point for research, not a substitute for a hands-on trial or vendor confirmation.`,
+    categoryContext,
     recordedPick,
     profile(tool1, review1),
     profile(tool2, review2),
