@@ -56,7 +56,7 @@ function collectEditorialText(value, key = "") {
   return ""
 }
 
-function scoreFile(filePath, dirName) {
+function scoreFile(filePath, dirName, reviewsBySlug = new Map()) {
   let raw
   try {
     raw = fs.readFileSync(filePath, "utf-8")
@@ -75,10 +75,23 @@ function scoreFile(filePath, dirName) {
   let score = 0
 
   // 1. Word count (0-25 pts)
-  // Count editorial copy across schema variants (features, FAQs, picks, glossary
-  // examples, and comparison details), not just `body`/`sections` fields.
-  const allText = collectEditorialText(data)
+  // Count editorial copy across schema variants, plus the linked review evidence
+  // that the comparison template actually renders for each product.
+  const linkedReviews = dirName === "comparisons"
+    ? [data.tool1Slug, data.tool2Slug].map((linkedSlug) => reviewsBySlug.get(linkedSlug)).filter(Boolean)
+    : []
+  const linkedReviewText = linkedReviews.map((review) => [
+    review.name,
+    review.description || review.tagline,
+    review.category,
+    review.priceRange || review.pricing,
+    ...(review.pros || []).slice(0, 2),
+    ...(review.cons || []).slice(0, 2),
+  ].filter(Boolean).join(" ")).join(" ")
+  const allText = [collectEditorialText(data), linkedReviewText].filter(Boolean).join(" ")
   const words = countWords(allText)
+  const linkedCategories = linkedReviews.map((review) => review.category).filter(Boolean)
+  const isCrossCategoryComparison = dirName === "comparisons" && linkedCategories.length === 2 && linkedCategories[0] !== linkedCategories[1]
   if (words >= 600) score += 25
   else if (words >= 300) score += 20
   else if (words >= 100) score += 10
@@ -150,6 +163,7 @@ function scoreFile(filePath, dirName) {
   const reviewReasons = []
   if (isThin) reviewReasons.push("very-short-source-content")
   if (isDuplicate) reviewReasons.push("short-comparison-with-few-sections")
+  if (isCrossCategoryComparison) reviewReasons.push("cross-category-pairing-needs-editorial-review")
   // Low generic scores are meaningful only alongside a short source record.
   // Glossary pages use definition/examples/related-term signals above instead.
   if (dirName !== "glossary" && score < 30 && words < minimumWords * 1.5) {
@@ -174,6 +188,7 @@ function scoreFile(filePath, dirName) {
     sections: sections.length,
     isThin,
     isDuplicate,
+    isCrossCategoryComparison,
     reviewRecommended: reviewReasons.length > 0,
     reviewReasons,
   }
@@ -182,6 +197,18 @@ function scoreFile(filePath, dirName) {
 function main() {
   const results = {}
   const allFiles = []
+  const reviewsBySlug = new Map()
+  const reviewsDir = path.join(CONTENT_DIR, "reviews")
+  if (fs.existsSync(reviewsDir)) {
+    for (const file of fs.readdirSync(reviewsDir).filter((name) => name.endsWith(".json"))) {
+      try {
+        const review = JSON.parse(fs.readFileSync(path.join(reviewsDir, file), "utf-8"))
+        if (typeof review.slug === "string") reviewsBySlug.set(review.slug, review)
+      } catch {
+        // Content lint reports invalid JSON separately; skip unreadable review records here.
+      }
+    }
+  }
 
   for (const { dir, keepTop, label } of DIRECTORIES) {
     const dirPath = path.join(CONTENT_DIR, dir)
@@ -195,7 +222,7 @@ function main() {
 
     const scored = files.map((f) => {
       const filePath = path.join(dirPath, f)
-      return scoreFile(filePath, dir)
+      return scoreFile(filePath, dir, reviewsBySlug)
     }).sort((a, b) => b.score - a.score)
 
     // Keep/noindex decisions remain manual. Surface review candidates instead of
