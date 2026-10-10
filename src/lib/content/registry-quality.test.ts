@@ -21,7 +21,7 @@ describe("content quality repairs", () => {
       ...guide!.sections.flatMap((section) => [section.title, section.body, ...(section.items || [])]),
       ...(guide!.faqs || []).flatMap((faq) => [faq.question, faq.answer]),
     ].join(" ").replace(/<[^>]*>/g, " ")
-    const words = renderedText.split(/\\s+/).filter(Boolean).length
+    const words = renderedText.split(/\s+/).filter(Boolean).length
     expect(guide!.readingTime).toBe(Math.max(3, Math.ceil(words / 200)))
     expect(guide!.readingTime).toBeGreaterThan(10)
   })
