@@ -12,6 +12,11 @@ const slugs = [
   "best-analytics-software",
   "best-api-management-tools",
   "best-collaboration-software",
+  "best-accounting-software",
+  "best-api-testing-tools",
+  "best-authentication-platforms",
+  "best-backend-platforms",
+  "best-bi-tools",
 ]
 
 describe("additional shortlist pricing integrity", () => {
