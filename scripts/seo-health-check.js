@@ -128,9 +128,19 @@ function checkRobots() {
   const privatePaths = ["/api/", "/admin/", "/dashboard", "/search", "/_global-error"]
   const namedCrawlerRules = [...content.matchAll(/userAgent\s*:\s*["']([^"']+)["']([\s\S]*?)(?=userAgent\s*:|sitemap\s*:|$)/g)]
     .filter((match) => match[1] !== "*")
-  const missingPrivatePathBlocks = namedCrawlerRules
-    .filter((match) => privatePaths.some((route) => !match[2].includes(route)))
-    .map((match) => match[1])
+  // A shared disallow array is valid when every named rule references it.
+  // Do not report false positives merely because the route strings live once
+  // in a shared constant rather than being repeated inside each rule object.
+  const sharedDisallowList = content.match(/const\s+disallowedPaths\s*=\s*\[([\s\S]*?)\]/)
+  const sharedDisallowListCoversPrivatePaths =
+    Boolean(sharedDisallowList) &&
+    privatePaths.every((route) => sharedDisallowList[1].includes(route)) &&
+    namedCrawlerRules.every((match) => /disallow\s*:\s*disallowedPaths/.test(match[0]))
+  const missingPrivatePathBlocks = sharedDisallowListCoversPrivatePaths
+    ? []
+    : namedCrawlerRules
+        .filter((match) => privatePaths.some((route) => !match[2].includes(route)))
+        .map((match) => match[1])
   if (missingPrivatePathBlocks.length > 0) {
     log("warn", `Named crawler rules do not visibly repeat all private/search path exclusions: ${missingPrivatePathBlocks.join(", ")}; inspect the generated robots.txt rule groups`)
   } else if (namedCrawlerRules.length > 0) {
