@@ -17,7 +17,7 @@ const TOOL_NAMES = {
   salesforce: "salesforce", hubspot: "hubspot",
   chatgpt: "chatgpt", jasper: "jasper", claude: "claude", gemini: "gemini",
   midjourney: "midjourney", vercel: "vercel", stripe: "stripe",
-  slack: "slack", zoom: "zoom"
+  slack: "slack", zoom: "zoom", netlify: "netlify", cloudflare: "cloudflare-pages"
 }
 
 function collectText(value) {
@@ -58,29 +58,90 @@ function getVerifiedEntities() {
   return verified
 }
 
+function splitTableCells(line) {
+  return line.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((cell) => cell.trim())
+}
+
+function getPriceContext(body, position) {
+  const lineStart = body.lastIndexOf("\n", position - 1) + 1
+  const lineEnd = body.indexOf("\n", position)
+  const line = body.slice(lineStart, lineEnd < 0 ? body.length : lineEnd)
+  if (/^\s*\|/.test(line)) {
+    const cells = splitTableCells(line)
+    const relativePosition = position - lineStart
+    let cellIndex = 0
+    let cursor = line.indexOf("|") + 1
+    for (let i = 0; i < cells.length; i++) {
+      const end = line.indexOf("|", cursor)
+      if (relativePosition >= cursor && (end < 0 || relativePosition <= end)) { cellIndex = i; break }
+      if (end < 0) break
+      cursor = end + 1
+    }
+    const priorLines = body.slice(0, lineStart).split("\n").slice(-8).reverse()
+    let headerCells = null
+    for (const prior of priorLines) {
+      if (!prior.trim()) break
+      if (!/^\s*\|/.test(prior)) continue
+      const candidate = splitTableCells(prior)
+      if (candidate.length === cells.length && candidate.some((cell) => /\b(vercel|netlify|cloudflare|figma|asana|monday)\b/i.test(cell))) {
+        headerCells = candidate
+        break
+      }
+    }
+    const vendor = headerCells?.[cellIndex] || ""
+    return { context: ((cells[0] || "") + " " + (cells[cellIndex] || "")).toLowerCase(), vendor: vendor.toLowerCase(), offset: 0 }
+  }
+  const previousBlank = body.lastIndexOf("\n\n", position)
+  const contextStart = previousBlank < 0 ? 0 : previousBlank + 2
+  const nextBlank = body.indexOf("\n\n", position)
+  const contextEnd = nextBlank < 0 ? body.length : nextBlank
+  return { context: body.slice(contextStart, contextEnd).toLowerCase(), vendor: "", offset: position - contextStart }
+}
+
+function findNearestToolName(context, offset) {
+  let best = null
+  let bestDistance = Infinity
+  for (const name of Object.keys(TOOL_NAMES)) {
+    let index = context.indexOf(name)
+    while (index >= 0) {
+      const distance = Math.abs(index - offset)
+      if (distance < bestDistance) { best = name; bestDistance = distance }
+      index = context.indexOf(name, index + name.length)
+    }
+  }
+  return best
+}
+
+function hasOfficialPricingSource(body, name) {
+  const officialUrls = {
+    figma: /(?:https?:\/\/)?(?:www\.)?figma\.com\/pricing/i,
+    vercel: /(?:https?:\/\/)?(?:www\.)?vercel\.com\/pricing/i,
+    netlify: /(?:https?:\/\/)?(?:www\.)?netlify\.com\/pricing/i,
+    monday: /(?:https?:\/\/)?(?:www\.)?monday\.com\/pricing/i,
+    asana: /(?:https?:\/\/)?(?:www\.)?asana\.com\/pricing/i,
+  }
+  const sourcePattern = officialUrls[name]
+  if (!sourcePattern || !sourcePattern.test(body)) return false
+  return /(?:checked|verified)[\s\S]{0,220}(?:October 10, 2026|2026-10-10)/i.test(body)
+}
+
 function checkPricingFigures(body, file, verifiedEntities) {
   const warnings = []
   let match
   DOLLAR_RE.lastIndex = 0
   while ((match = DOLLAR_RE.exec(body)) !== null) {
-    const pos = match.index
-    const windowStart = Math.max(0, pos - 150)
-    const windowEnd = Math.min(body.length, pos + 150)
-    const context = body.slice(windowStart, windowEnd).toLowerCase()
-    // Dollar amounts in SaaS metrics (ARR, CAC, retention examples) are not vendor prices.
-    // Only flag amounts when the surrounding text indicates a pricing/plan/billing claim.
-    const pricingContext = /\b(pricing|price|subscription|billing|plan|tier|fee|overage|per (?:user|editor|seat)|paid plan|monthly plan|annual plan)\b/i.test(context)
+    const { context, vendor, offset } = getPriceContext(body, match.index)
+    const pricingContext = /\b(pricing|price|subscription|billing|plan|tier|fee|overage|per (?:user|editor|seat)|paid plan|monthly plan|annual plan|team features)\b/i.test(context)
     if (!pricingContext) continue
-    for (const [name, slug] of Object.entries(TOOL_NAMES)) {
-      if (context.includes(name) && !verifiedEntities.has(slug)) {
-        warnings.push("Unverified $ figure near \"" + name + "\": " + match[0])
-        break
-      }
+    const vendorName = vendor ? findNearestToolName(vendor, vendor.length) : findNearestToolName(context, offset)
+    if (!vendorName) continue
+    const slug = TOOL_NAMES[vendorName]
+    if (!verifiedEntities.has(slug) && !hasOfficialPricingSource(body, vendorName)) {
+      warnings.push('Unverified $ figure near "' + vendorName + '": ' + match[0])
     }
   }
   return warnings
 }
-
 function stripPunct(w) {
   return w.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
 }
