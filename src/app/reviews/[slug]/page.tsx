@@ -1,5 +1,5 @@
 import type { ContentSection } from "@/types/content"
-import { getVisibleReviewContent } from "@/lib/content/review-quality"
+import { getVisibleReviewContent, getVisibleReviewFaqs } from "@/lib/content/review-quality"
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
@@ -59,7 +59,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const entity = getEntity(slug)
   const companyFacts = resolveCompanyFacts(tool, entity)
   const pros = editorialPros(tool.pros)
-  const visibleFaqs = tool.faqs.slice(0, 8)
+  const visibleFaqs = getVisibleReviewFaqs(tool.faqs).slice(0, 8)
   const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true)
 
   const authorSlug = tool.author ? tool.author.trim().toLowerCase().replace(/\s+/g, "-") : ""
