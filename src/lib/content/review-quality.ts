@@ -1,4 +1,4 @@
-import type { ContentSection } from "@/types/content"
+import type { ContentSection, FAQItem } from "@/types/content"
 
 const HIDDEN_REVIEW_SECTION_TITLES = new Set([
   "Rating Overview",
@@ -56,6 +56,31 @@ export function getVisibleReviewContent(content: ContentSection[], showVerifiedP
     if (section.type === "diagram") {
       return ["pricing-ladder", "feature-radar", "implementation-flow"].includes(section.body)
     }
+    return true
+  })
+}
+
+
+// Hide repeated FAQ templates that assert security certifications, compliance, or
+// enterprise capabilities without a product-specific evidence trail.
+const GENERATED_REVIEW_FAQ_PATTERNS = [
+  /^.+ maintains SOC 2 Type II(?:, ISO 27001|, FedRAMP)? certifications?\./i,
+  /^.+ is GDPR compliant with data processing agreements and data residency options\./i,
+  /^.+ serves enterprise organizations with .+ certifications? and scalable infrastructure\./i,
+  /^.+ offers .+ comprehensive .+ functionality, API access for custom integrations, and enterprise security with SOC 2 Type II\./i,
+  /^.+ offers AI features like .+, comprehensive .+ functionality, API access for custom integrations, and enterprise security with SOC 2 Type II\./i,
+  /^.+ is secure with SOC 2 Type II, ISO 27001, FedRAMP certifications\./i,
+]
+
+export function getVisibleReviewFaqs(faqs: FAQItem[]): FAQItem[] {
+  return faqs.filter((faq) => {
+    const question = faq.question.trim()
+    const answer = faq.answer.trim()
+    if (/^is .+ secure\?$/i.test(question) && /SOC 2 Type II|ISO 27001|FedRAMP|compliance with GDPR|CCPA|HIPAA|PCI DSS/i.test(answer)) return false
+    if (/^is .+ GDPR compliant\?$/i.test(question) && /^yes, .+ is GDPR compliant with data processing agreements and data residency options\./i.test(answer)) return false
+    if (/^is .+ good for enterprise teams\?$/i.test(question) && /serves enterprise organizations with .+ certifications? and scalable infrastructure/i.test(answer)) return false
+    if (/^what are the main features of .+\?$/i.test(question) && /API access for custom integrations, and enterprise security with SOC 2 Type II/i.test(answer)) return false
+    if (GENERATED_REVIEW_FAQ_PATTERNS.some((pattern) => pattern.test(answer))) return false
     return true
   })
 }
