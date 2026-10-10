@@ -255,17 +255,17 @@
     },
     {
       "title": "Performance",
-      "body": "Adequate performance for most use cases.",
+      "body": "Test Hotjar on representative pages and devices, paying attention to recording coverage, script impact, and whether consent settings exclude the sessions you need to understand. Results depend on traffic volume, browser restrictions, sampling, and configuration, so validate collection and page behavior before rolling it out widely.",
       "type": "text"
     },
     {
       "title": "Ease of Use",
-      "body": "Hotjar has a low learning curve with intuitive interface.",
+      "body": "Heatmaps and recordings are quick to explore, but useful analysis depends on choosing the right pages, filtering sessions, and protecting sensitive inputs. Start with a small set of high-value journeys, configure privacy and consent carefully, and agree on what evidence will trigger a design change.",
       "type": "text"
     },
     {
       "title": "User Experience",
-      "body": "Streamlined modern interface.",
+      "body": "Hotjar helps teams observe where visitors hesitate, scroll, or leave, but recordings are qualitative clues rather than proof of why a behavior occurs. Pair findings with analytics and user research, and avoid treating a few sessions as representative of every visitor.",
       "type": "text"
     },
     {
