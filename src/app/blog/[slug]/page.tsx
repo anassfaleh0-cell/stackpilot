@@ -2,6 +2,7 @@ import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, BlogPostingSchema, WebPageSchema } from "@/components/seo/json-ld"
+import { BlogMarkdownBlock } from "@/components/content/blog-markdown-block"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getBlogPost, getContentTitle, isContentAvailable, getAllBlogPosts } from "@/lib/content/registry"
@@ -52,51 +53,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const midPoint = proseIndices.length > 0 ? proseIndices[Math.floor(proseIndices.length / 2)] : Math.floor(paragraphs.length / 2)
   const pullQuote = (paragraphs[midPoint] || "").replace(/^#{1,6}\s*/, "").replace(/\*\*/g, "").trim().slice(0, 150)
 
-  const renderInline = (text: string, keyBase: string) => {
-    const segments = text.split(/\*\*([^*]+)\*\*/g)
-    return segments.map((segment, i) =>
-      i % 2 === 1 ? <strong key={`${keyBase}-b${i}`}>{segment}</strong> : <span key={`${keyBase}-t${i}`}>{segment}</span>
-    )
-  }
 
-  const renderBlock = (block: string, keyBase: string) => {
-    const lines = block.split("\n").filter(Boolean)
-    const first = lines[0] ?? ""
-    if (first.startsWith("### ")) {
-      return <h3 key={keyBase} className="text-lg font-semibold tracking-tight mt-8 mb-3">{first.slice(4)}</h3>
-    }
-    if (first.startsWith("## ")) {
-      return <h2 key={keyBase} className="text-2xl font-bold tracking-tight mt-10 mb-4">{first.slice(3)}</h2>
-    }
-    if (first.startsWith("|") && lines.length >= 2) {
-      const cells = (line: string) => line.replace(/^\||\|$/g, "").split("|").map((c) => c.trim())
-      const header = cells(first)
-      const bodyRows = lines.filter((l) => !/^\|[\s:|-]+\|?$/.test(l)).slice(1)
-      return (
-        <div key={keyBase} className="overflow-x-auto my-6">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="border-b border-border">
-                {header.map((col, j) => (
-                  <th key={j} className="text-left py-2 px-3 font-semibold text-foreground">{col}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {bodyRows.map((row, i) => (
-                <tr key={i} className="border-b border-border/50">
-                  {cells(row).map((cell, j) => (
-                    <td key={j} className="py-2.5 px-3 text-muted-foreground">{renderInline(cell, `r${i}c${j}`)}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )
-    }
-    return <p key={keyBase}>{renderInline(block, keyBase)}</p>
-  }
 
   return (
     <>
@@ -166,7 +123,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {/* First half of content */}
             <div className="space-y-5 leading-relaxed text-foreground/85">
               {paragraphs.slice(0, midPoint).map((paragraph, i) => (
-                <div key={i} className="space-y-5">{renderBlock(paragraph, `a${i}`)}</div>
+                <div key={i} className="space-y-5"><BlogMarkdownBlock block={paragraph} keyBase={`a${i}`} /></div>
               ))}
             </div>
 
@@ -185,7 +142,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {/* Second half of content */}
             <div className="mt-6 space-y-5 leading-relaxed text-foreground/85">
               {paragraphs.slice(midPoint + 1).map((paragraph, i) => (
-                <div key={i} className="space-y-5">{renderBlock(paragraph, `b${i}`)}</div>
+                <div key={i} className="space-y-5"><BlogMarkdownBlock block={paragraph} keyBase={`b${i}`} /></div>
               ))}
             </div>
 
