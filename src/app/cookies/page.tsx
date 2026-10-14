@@ -22,7 +22,7 @@ export default function CookiesPage() {
         <Container>
           <div className="max-w-3xl mx-auto prose prose-slate">
             <h1 className="text-4xl font-bold tracking-tight mb-6">Cookie Policy</h1>
-            <p className="text-muted-foreground"><em>Last updated: July 19, 2026</em></p>
+            <p className="text-muted-foreground"><em>Last updated: October 14, 2026</em></p>
 
             <p>This Cookie Policy explains how PilotStack ("we", "us", "our") uses cookies and similar tracking technologies on our website. It supplements our <a href="/privacy">Privacy Policy</a> and explains what cookies are, why we use them, and how you can control their use.</p>
 
@@ -42,8 +42,8 @@ export default function CookiesPage() {
             <h3>Analytics Cookies</h3>
             <p>We use analytics tools, including Google Analytics and Microsoft Clarity, to understand how visitors interact with our site. These services may process usage and device information according to their own privacy policies and are loaded only after analytics consent. Google Tag Manager is loaded only after both analytics and advertising preferences are enabled, so its third-party tags are not requested before those choices are made.</p>
             <ul>
-              <li><strong>Google Analytics 4 (GA4):</strong> Collects anonymized page views, session duration, and traffic source data. IP addresses are anonymized. Retention periods depend on the analytics configuration and applicable Google settings. <em>Opt-out available via <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out browser add-on</a>.</em></li>
-              <li><strong>Microsoft Clarity:</strong> Provides session-replay and heatmap features to help us understand how users navigate the site. We configure it for analytics use and do not intentionally use it to collect passwords or other sensitive form data. <em>Opt-out available via the <a href="https://privacy.microsoft.com/en-US/privacystatement" target="_blank" rel="noopener">Microsoft Privacy Statement</a>.</em></li>
+              <li><strong>Google Analytics 4 (GA4):</strong> May collect page views, session and traffic-source information, and device/browser signals. IP anonymization and other data controls depend on the service and configuration; we do not promise that every event or identifier is anonymous in every context. Retention periods depend on the analytics configuration and applicable Google settings. <em>Opt-out available via <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics opt-out browser add-on</a>.</em></li>
+              <li><strong>Microsoft Clarity:</strong> May provide session-replay and heatmap insights about site interactions. We should configure masking and exclusion controls to avoid collecting passwords or sensitive form data; the service and configuration may still process interaction and device information. Review the <a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener noreferrer">Microsoft Privacy Statement</a> for provider-level details.</li>
             </ul>
 
             <h3>Third-Party Cookies</h3>
@@ -77,7 +77,7 @@ export default function CookiesPage() {
             </ul>
 
             <h2>Managing Cookies</h2>
-            <p>You can control and manage cookies in several ways:</p>
+            <p>You can control and manage cookies in several ways. To change your saved choices on PilotStack, use the Cookie Settings control when available on the site; you can also clear the site’s stored consent preference in your browser and reload to be asked again.</p>
             <ul>
               <li><strong>Browser settings:</strong> Most browsers let you view, block, or delete cookies. Check your browser&apos;s help documentation for instructions.</li>
               <li><strong>Privacy plugins:</strong> Browser extensions like uBlock Origin, Privacy Badger, or Ghostery can block tracking scripts.</li>
