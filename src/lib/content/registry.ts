@@ -1275,17 +1275,91 @@ export function getAllBest(): BestContent[] {
     .filter((x): x is BestContent => Boolean(x))
 }
 
+function hubFocus(audience: string): { challenges: string[]; questions: string[] } {
+  const key = audience.toLowerCase()
+  if (/health|medical|clinic/.test(key)) return {
+    challenges: ["Protect sensitive patient and staff data with role-based access, clear retention rules, and auditable permissions.", "Confirm interoperability with the clinical, scheduling, billing, and communication systems already in use.", "Separate clinical workflow requirements from general office productivity needs.", "Validate the exact product, plan, region, and contract scope of any compliance claim before handling regulated data."],
+    questions: ["Which data will the tool store, and what controls govern access, retention, export, and deletion?", "Does the vendor offer the required agreements and security documentation for this exact product and plan?", "How will the system exchange data with existing clinical and administrative software?"]
+  }
+  if (/finance|financial|bank|account/.test(key)) return {
+    challenges: ["Maintain accurate records, approval workflows, and traceable changes across financial processes.", "Limit access to sensitive data and document the controls required by the organization's jurisdiction.", "Connect accounting, payments, customer records, and reporting without creating reconciliation gaps.", "Compare the full contract and operating cost rather than relying on a headline plan price."],
+    questions: ["Can transactions and changes be traced to an auditable source?", "Which permissions, exports, retention controls, and integrations are included in the intended plan?", "What fees, implementation work, support tiers, and contract terms affect total cost?"]
+  }
+  if (/agenc/.test(key)) return {
+    challenges: ["Keep client work, approvals, assets, and permissions organized without mixing confidential information between accounts.", "Make project scope, ownership, deadlines, and change requests visible to the team and client.", "Track time, delivery effort, and reporting needs using consistent definitions.", "Integrate project delivery, sales, billing, and communication without creating duplicate manual work."],
+    questions: ["Can the tool separate client workspaces and permissions?", "Can clients review deliverables and approvals without receiving unnecessary access?", "What reporting and export options support billing, project reviews, and handover?"]
+  }
+  if (/education|school|university|learning/.test(key)) return {
+    challenges: ["Support accessible learning and administrative workflows across the devices and systems used by staff and learners.", "Protect student and staff data with appropriate access, retention, and sharing controls.", "Connect learning, communication, identity, and administration systems without unnecessary duplicate records.", "Plan for onboarding, support, accessibility testing, and ongoing administration."],
+    questions: ["Which accessibility requirements and learning-system integrations are supported?", "What student data is stored, who can access it, and how can it be exported or deleted?", "Which support, training, and administrative controls are included in the intended plan?"]
+  }
+  if (/ecommerce|e-commerce|retail|online store/.test(key)) return {
+    challenges: ["Keep product, inventory, order, payment, fulfilment, and customer data consistent across systems.", "Make returns, exceptions, and customer-support workflows visible to the people responsible for resolving them.", "Protect customer information and review permissions across third-party integrations.", "Estimate platform, transaction, fulfilment, integration, and support costs using realistic sales and order assumptions."],
+    questions: ["How are inventory, orders, refunds, and customer records synchronized?", "Which transaction fees, usage caps, integrations, or add-ons affect the total cost?", "Can the business export product, order, and customer data if it changes platforms?"]
+  }
+  if (/nonprofit|non-profit|charit/.test(key)) return {
+    challenges: ["Coordinate donor, member, volunteer, and program information while limiting access to sensitive records.", "Connect fundraising, communications, accounting, and program reporting with minimal duplicate data entry.", "Choose workflows that staff and volunteers can maintain with available training and support.", "Check eligibility rules, renewal terms, and the full cost of any discounted or grant-funded plan."],
+    questions: ["Which data can be exported, and how are permissions and consent managed?", "Do discounts or special plans have eligibility, renewal, or usage conditions?", "Can staff produce the reports required by donors, boards, and regulators?"]
+  }
+  if (/enterprise|large organization/.test(key)) return {
+    challenges: ["Define identity, access, audit, procurement, and data-governance requirements before evaluating vendors.", "Validate integrations, deployment controls, support commitments, and migration effort across business units.", "Separate generally available features from roadmap commitments and plan-specific limitations.", "Compare total cost across seats, usage, support, implementation, and renewal terms."],
+    questions: ["Which controls are available on the quoted plan and in the required region?", "How are identity, audit logs, data retention, and exports managed?", "What service commitments, support response times, and exit terms are contractually documented?"]
+  }
+  if (/freelanc|solo/.test(key)) return {
+    challenges: ["Choose tools that reduce administration instead of adding more systems to maintain.", "Understand free-plan limits, billing terms, and when a paid upgrade becomes necessary.", "Keep client information, files, invoices, and task history organized and exportable.", "Select integrations that match the current workflow without locking important data into one service."],
+    questions: ["Can the core workflow be completed on the current plan?", "What limits or paid add-ons could affect use as the workload grows?", "Can files, contacts, invoices, and project history be exported in a usable format?"]
+  }
+  if (/startup/.test(key)) return {
+    challenges: ["Prioritize tools that solve current workflow problems without imposing unnecessary setup and administration.", "Keep permissions, customer data, and integrations manageable as the team grows.", "Understand usage limits and upgrade triggers before relying on a free or entry-level plan.", "Avoid duplicated systems by defining which tool owns each important record."],
+    questions: ["What is the minimum workflow the tool must support today?", "Which plan limits, integrations, or security controls could become blockers later?", "How difficult would it be to export data or switch tools if the company changes direction?"]
+  }
+  return {
+    challenges: ["Map the core workflow, users, and decision owners before choosing a product.", "Verify data protection, permissions, retention, and export requirements for the intended use.", "Check integration coverage, migration effort, training, and ongoing administration.", "Compare total cost and contract terms using the same assumptions across shortlisted tools."],
+    questions: ["Which workflow must improve, and how will success be measured?", "What evidence supports the vendor's feature, security, and performance claims?", "What is included in the intended plan, and how can data be exported if needs change?"]
+  }
+}
+
+function normalizeHubContent(hub: HubContent): HubContent {
+  if (hub.contentVerified === true) return { ...hub, faqs: sanitizeFaqs(hub.faqs) }
+  const audience = hub.audience || hub.title.replace(/^software for /i, "").trim()
+  const focus = hubFocus(audience)
+  const recommendations = hub.recommendations.slice(0, 12).map((recommendation) => ({
+    ...recommendation,
+    bestFor: `Consider ${recommendation.toolName} for evaluation when your team needs ${recommendation.category.toLowerCase()}. Confirm current capabilities, plan limits, integrations, security terms, and total cost with the vendor before choosing.`,
+  }))
+  return {
+    ...hub,
+    title: `Software for ${audience}: Selection Guide`,
+    description: `A practical guide to choosing software for ${audience.toLowerCase()}, covering workflow fit, integrations, data protection, implementation, and total cost. Verify product-specific claims with current vendor documentation.`,
+    challenges: focus.challenges,
+    recommendations,
+    comparisonMatrix: {
+      columns: ["Selection area", "Product to evaluate", "What to verify"],
+      rows: recommendations.map((recommendation) => [
+        recommendation.category,
+        recommendation.toolName,
+        `Confirm current features, plan limits, integrations, security terms, and data export options for ${audience.toLowerCase()} workflows.`,
+      ]),
+    },
+    faqs: sanitizeFaqs([
+      { question: "How should we shortlist software?", answer: `Start with the workflow, users, required integrations, data requirements, and budget for ${audience.toLowerCase()}. Separate mandatory requirements from preferences, then compare vendors using the same criteria and representative tasks.` },
+      { question: "How can we verify vendor claims?", answer: "Check current vendor documentation for the exact product, plan, region, and feature. For security or compliance claims, request the applicable contract terms and supporting documentation. Treat broad marketing language as unverified until the evidence matches your use case." },
+      { question: "How should we compare total cost?", answer: "Include subscription fees, seats, usage limits, required add-ons, implementation, migration, training, support, taxes, and renewal terms. Record unknowns and obtain a written quote when pricing is not public." },
+    ]),
+    lastUpdated: "2026-10-15",
+    contentVerified: false,
+  }
+}
+
 export function getHub(slug: string): HubContent | null {
   const file = path.join(CONTENT_DIR, "hubs", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  const hub = readJson<HubContent>(file)
-  hub.faqs = sanitizeFaqs(hub.faqs)
-  return hub
+  return normalizeHubContent(readJson<HubContent>(file))
 }
 
 export function getAllHubs(): HubContent[] {
   return readDir(path.join(CONTENT_DIR, "hubs"))
-    .map((f) => { const h = readJson<HubContent>(path.join(CONTENT_DIR, "hubs", f)); h.faqs = sanitizeFaqs(h.faqs); return h })
+    .map((f) => normalizeHubContent(readJson<HubContent>(path.join(CONTENT_DIR, "hubs", f))))
 }
 
 export function getContentTitle(type: string, slug: string): string | null {
