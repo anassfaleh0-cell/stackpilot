@@ -1112,7 +1112,7 @@ function normalizeStatisticContent(record: StatisticContent): StatisticContent {
     ...(record.stats || []),
     ...(record.sections || []).flatMap((section) => section.stats || []),
   ]
-  const hasCompleteSourceAudit = record.sourceAuditComplete === true &&
+  const hasCompleteSourceAudit = record.sourceAuditComplete === true && allStats.length > 0 &&
     allStats.every((stat) => stat.sourceVerified === true && typeof stat.sourceUrl === "string" && /^https?:\/\//i.test(stat.sourceUrl))
   if (hasCompleteSourceAudit) return record
 
