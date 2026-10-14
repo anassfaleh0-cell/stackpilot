@@ -9,7 +9,8 @@ describe("research source provenance", () => {
     for (const report of reports) {
       if (report.sourceAuditComplete === true) continue
 
-      expect(report.title).toContain("Research Guide: Metrics and Evidence")
+      expect(report.title).toContain("Research Guide (")
+      expect(report.title).toContain("Metrics and Evidence")
       expect(report.description).toMatch(/withheld until source verification is complete/i)
       expect(report.dataSources).toEqual([])
       expect(report.keyFindings.length).toBeGreaterThanOrEqual(3)
