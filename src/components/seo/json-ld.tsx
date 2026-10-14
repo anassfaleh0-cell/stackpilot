@@ -170,7 +170,7 @@ export function NewsArticleSchema({
 }
 
 export function BlogPostingSchema({
-  title, description, publishedAt, updatedAt, author, image, url,
+  title, description, publishedAt, updatedAt, author, image, url, wordCount,
 }: {
   title: string
   description: string
@@ -179,6 +179,7 @@ export function BlogPostingSchema({
   author: string
   image?: string
   url?: string
+  wordCount?: number
 }) {
   const schema = clean({
     "@context": ctx,
@@ -193,7 +194,7 @@ export function BlogPostingSchema({
     image: { "@type": "ImageObject", url: image || `${site.url}/og.svg` },
     mainEntityOfPage: { "@type": "WebPage", "@id": url || site.url },
     inLanguage: "en-US",
-    wordCount: description.split(" ").length,
+    wordCount: wordCount || description.split(/\\s+/).filter(Boolean).length,
   })
   return ld(schema, "ld-blogposting")
 }
