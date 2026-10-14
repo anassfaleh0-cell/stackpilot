@@ -281,7 +281,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                         </div>
                         <div>
                           <dt className="text-xs text-muted-foreground">Pricing record</dt>
-                          <dd className="font-medium">{review.priceRange || review.pricing || "Verify with vendor"}</dd>
+                          <dd className="font-medium">{review.priceRangeVerified === true ? (review.priceRange || review.pricing || "See vendor pricing") : "Not independently verified — check vendor pricing"}</dd>
                         </div>
                       </dl>
                       {Array.isArray(review.pros) && review.pros.length > 0 && (
