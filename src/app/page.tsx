@@ -12,7 +12,7 @@ import { BannerAd, NativeAd } from "@/components/ads"
 
 export const metadata = createMetadata({
   title: "Software Reviews & Buying Guides",
-  description: "In-depth software reviews, expert comparisons, and actionable buying guides to help businesses choose, implement, and optimize the right tools for every need.",
+  description: "Software reviews, practical comparisons, and buying guides with transparent criteria, source notes, and limitations.",
   path: "/",
 })
 
@@ -29,8 +29,8 @@ export default function HomePage() {
 
   const stats = [
     { value: `${reviews.length}+`, label: "Software Reviews" },
-    { value: `${comparisons.length}+`, label: "Expert Comparisons" },
-    { value: `${guides.length}+`, label: "Expert Guides" },
+    { value: `${comparisons.length}+`, label: "Comparisons" },
+    { value: `${guides.length}+`, label: "Guides" },
     { value: `${allResearch.length}+`, label: "Research Reports" },
   ]
 
@@ -46,7 +46,7 @@ export default function HomePage() {
         <Container className="relative py-24 sm:py-32 lg:py-40">
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-6 animate-fade-in">
-              <span className="trust-badge">Independent reviews since 2024</span>
+              <span className="trust-badge">Software research & buying guides</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.02] mb-6 text-balance">
               Navigate your{" "}
