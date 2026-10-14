@@ -5,7 +5,7 @@ describe("statistics source provenance", () => {
   it("keeps category pages available as useful guides while withholding unaudited figures", () => {
     const records = getAllStatistics()
     expect(records.length).toBeGreaterThan(100)
-    expect(new Set(records.map((record) => record.title)).toHaveProperty("size", records.length)
+    expect(new Set(records.map((record) => record.title)).size).toBe(records.length)
 
     for (const record of records) {
       if (record.sourceAuditComplete === true) continue
