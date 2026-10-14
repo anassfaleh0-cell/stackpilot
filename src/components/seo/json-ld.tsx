@@ -20,6 +20,17 @@ function clean<T>(obj: T): T {
   return JSON.parse(JSON.stringify(obj, (_, v) => v ?? undefined))
 }
 
+function authorEntity(author: string) {
+  if (author.trim().toLowerCase() === "pilotstack team") {
+    return {
+      "@type": "Organization",
+      name: "PilotStack Team",
+      url: `${site.url}/authors/pilotstack-team`,
+    }
+  }
+  return { "@type": "Person", name: author }
+}
+
 export function OrganizationSchema() {
   const schema = clean({
     "@context": ctx,
@@ -103,7 +114,7 @@ export function ArticleSchema({
     "@id": (url || site.url) + "#article",
     headline: title,
     description,
-    author: { "@type": "Person", name: author },
+    author: authorEntity(author),
     publisher: organizationRef(),
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
