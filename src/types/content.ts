@@ -243,6 +243,7 @@ export interface UseCaseContent {
 
 export interface IndustryContent {
   slug: string
+  contentVerified?: boolean
   title: string
   description: string
   industry: string
