@@ -563,8 +563,10 @@ function buildReviewSections(review: ReviewContent): ContentSection[] {
   )
   if (sectionWordCount(base) >= 900) return base
 
-  const company = review.company
-  const availableFeatures = (Array.isArray(review.features) ? review.features : []).filter((feature) => feature.available).slice(0, 8)
+  const company = review.companyFactsVerified === true ? review.company : undefined
+  const availableFeatures = review.featuresVerified === true
+    ? (Array.isArray(review.features) ? review.features : []).filter((feature) => feature.available).slice(0, 8)
+    : []
   const featureNames = availableFeatures.map((feature) => feature.name)
   const featureDetails = availableFeatures.map((feature) => feature.name + ": " + feature.description).join(" ")
   const integrations = Array.isArray(company?.integrations) ? company.integrations.slice(0, 8) : []
@@ -584,7 +586,9 @@ function buildReviewSections(review: ReviewContent): ContentSection[] {
       : []
   const pros = sanitizeList(review.pros, 5)
   const cons = sanitizeList(review.cons, 5)
-  const pricing = review.priceRange || "Pricing is not verified in this profile; check the vendor's current pricing page."
+  const pricing = review.priceRangeVerified === true && review.priceRange
+    ? review.priceRange
+    : "not independently verified in this profile; check the vendor's current pricing page."
   const categoryChecks: Record<string, string> = {
     "Project Management": "task hierarchy, dependencies, workload views, reporting, automation quotas, guest access, and whether people can update work without duplicate entry",
     "CRM & Sales": "contact deduplication, pipeline stages, lead routing, email and calendar sync, forecasting, permissions, and data export",
