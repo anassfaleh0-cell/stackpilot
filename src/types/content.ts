@@ -266,6 +266,7 @@ export interface ResearchContent {
   sections: ContentSection[]
   methodology: string
   dataSources: { name: string; url: string }[]
+  sourceAuditComplete?: boolean
   publishedAt: string
   updatedAt?: string
   author: string
