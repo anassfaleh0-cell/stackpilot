@@ -1033,24 +1033,63 @@ export function getAllUseCases(): UseCaseContent[] {
     .map((f) => { const u = readJson<UseCaseContent>(path.join(CONTENT_DIR, "use-cases", f)); return { ...u, faqs: sanitizeFaqs(u.faqs) } })
 }
 
+function normalizeIndustryContent(industry: IndustryContent): IndustryContent {
+  if (industry.contentVerified === true) {
+    return {
+      ...industry,
+      faqs: sanitizeFaqs(industry.faqs),
+    }
+  }
+
+  const category = industry.industry || "Industry"
+  const unsafeOverview = /<[^>]+>|solutions evaluated|our comprehensive analysis|we evaluated|we tested|industry-leading analysis/i.test(industry.industryOverview || "")
+  const industryOverview = unsafeOverview
+    ? `${category} teams need software that fits their operational workflows, data requirements, integrations, and budget. Start by mapping the work that must improve, the people who will use the system, and the risks that must be controlled. Then verify product capabilities and plan limits against current vendor documentation rather than relying on broad market claims.`
+    : trimText(industry.industryOverview, 1600)
+
+  const recommendations = industry.recommendations.map((recommendation) => {
+    const riskyClaim = /HIPAA|HITECH|GDPR|FERPA|COPPA|PCI DSS|SOC 2|ISO 27001|certified|compliant|guarantee|top-rated|\\b\\d+(?:\\.\\d+)?%|\\$\\s?\\d/i.test(recommendation.bestFor)
+    return {
+      ...recommendation,
+      bestFor: riskyClaim
+        ? `Consider ${recommendation.toolName} for evaluation when your team needs ${recommendation.category.toLowerCase()}; verify current capabilities, plan limits, integrations, and security terms with the vendor.`
+        : trimText(recommendation.bestFor, 360),
+    }
+  })
+
+  const faqs = sanitizeFaqs(industry.faqs).map((faq) => {
+    const riskyClaim = /HIPAA|HITECH|GDPR|FERPA|COPPA|PCI DSS|SOC 2|ISO 27001|AES-256|TLS 1\\.[23]|certified|compliant|guarantee|\\b\\d+(?:\\.\\d+)?%|\\$\\s?\\d+/i.test(faq.answer)
+    return riskyClaim
+      ? {
+          ...faq,
+          answer: "Requirements depend on the data involved, jurisdiction, exact product, and plan. Confirm current vendor documentation and contract terms, and obtain qualified compliance or legal advice where required before relying on a claim.",
+        }
+      : faq
+  })
+
+  return {
+    ...industry,
+    title: `Software for ${category}: Selection Guide`,
+    description: `A practical software selection guide for ${category.toLowerCase()} teams, covering workflow fit, integrations, data protection, implementation, and total cost. Verify product-specific claims with current vendor documentation.`,
+    industryOverview,
+    softwareNeeds: sanitizeList(industry.softwareNeeds, 10),
+    recommendations,
+    implementationTips: sanitizeList(industry.implementationTips, 10),
+    faqs,
+    lastUpdated: "2026-10-15",
+    contentVerified: false,
+  }
+}
+
 export function getIndustry(slug: string): IndustryContent | null {
   const file = path.join(CONTENT_DIR, "industries", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  const industry = readJson<IndustryContent>(file)
-  return {
-    ...industry,
-    description: trimText(industry.description, 700),
-    industryOverview: trimText(industry.industryOverview, 1600),
-    softwareNeeds: sanitizeList(industry.softwareNeeds, 10),
-    recommendations: industry.recommendations.slice(0, 12).map((x) => ({ ...x, bestFor: trimText(x.bestFor, 360) })),
-    implementationTips: sanitizeList(industry.implementationTips, 10),
-    faqs: sanitizeFaqs(industry.faqs),
-  }
+  return normalizeIndustryContent(readJson<IndustryContent>(file))
 }
 
 export function getAllIndustries(): IndustryContent[] {
   return readDir(path.join(CONTENT_DIR, "industries"))
-    .map((f) => { const i = readJson<IndustryContent>(path.join(CONTENT_DIR, "industries", f)); return { ...i, faqs: sanitizeFaqs(i.faqs) } })
+    .map((f) => normalizeIndustryContent(readJson<IndustryContent>(path.join(CONTENT_DIR, "industries", f))))
 }
 
 function researchFocus(subject: string): { metrics: string; questions: string } {
