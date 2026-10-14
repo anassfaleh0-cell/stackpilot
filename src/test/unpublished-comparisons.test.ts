@@ -54,6 +54,19 @@ const unpublishedComparisons = [
 ]
 
 describe("unpublished comparison records", () => {
+  it("keeps the ActiveCampaign and Adobe Express workflow guide publicly available", () => {
+    const record = JSON.parse(fs.readFileSync("content/comparisons/activecampaign-vs-adobe-express.json", "utf8")) as { published?: boolean; winner?: string | null; winnerVerified?: boolean; featuresVerified?: boolean; lastUpdated?: string }
+    expect(record.published).toBe(true)
+    expect(record.winner).toBeNull()
+    expect(record.winnerVerified).toBe(false)
+    expect(record.featuresVerified).toBe(false)
+    expect(record.lastUpdated).toBe("2026-10-14")
+    expect(getComparison("activecampaign-vs-adobe-express")).not.toBeNull()
+    expect(isContentAvailable("comparison", "activecampaign-vs-adobe-express")).toBe(true)
+    const config = fs.readFileSync(path.join(process.cwd(), "next.config.ts"), "utf8")
+    expect(config).not.toContain('source: "/comparisons/activecampaign-vs-adobe-express"')
+  })
+
   it("keeps rewritten 1Password vs CrowdStrike publicly available and indexable", () => {
     const record = JSON.parse(fs.readFileSync("content/comparisons/1password-vs-crowdstrike.json", "utf8")) as { published?: boolean; publicationStatus?: string; winner?: string | null; winnerVerified?: boolean; featuresVerified?: boolean }
     expect(record.published).toBe(true)
