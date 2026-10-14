@@ -1100,6 +1100,7 @@ function normalizeResearchContent(record: ResearchContent): ResearchContent {
   const subject = record.title
     .replace(/\b20\d{2}\b/g, "")
     .replace(/\s+/g, " ")
+    .trim()
     .replace(/\s+(?:report|benchmarks?|trends|comparison|study)$/i, "")
     .trim() || "Software market"
   const focus = researchFocus(subject)
@@ -1205,6 +1206,7 @@ function normalizeStatisticContent(record: StatisticContent): StatisticContent {
   const subject = record.title
     .replace(/\b20\d{2}\b/g, "")
     .replace(/\s+/g, " ")
+    .trim()
     .replace(/\s+(?:statistics|market data|report|benchmarks?|trends|study)$/i, "")
     .trim() || `${category} Software`
   const focus = statisticResearchFocus(category)
