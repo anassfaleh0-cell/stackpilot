@@ -13,6 +13,7 @@ describe("industry guide content integrity", () => {
       expect(industry.title).toContain("Selection Guide")
       expect(industry.description).toMatch(/Verify product-specific claims/i)
       expect(industry.industryOverview).not.toMatch(/<[^>]+>/)
+      expect(industry.industryOverview).not.toMatch(/\\b\\d+(?:\\.\\d+)?%|\\$\\s?\\d|\\b\\d{2,}\\+?\\s+(?:companies|organizations|vendors|solutions|tools)\\b/i)
       expect(industry.softwareNeeds.length).toBeGreaterThan(0)
       expect(industry.recommendations.length).toBeGreaterThan(0)
 
