@@ -194,7 +194,7 @@ export function BlogPostingSchema({
     image: { "@type": "ImageObject", url: image || `${site.url}/og.svg` },
     mainEntityOfPage: { "@type": "WebPage", "@id": url || site.url },
     inLanguage: "en-US",
-    wordCount: wordCount || description.split(/\\s+/).filter(Boolean).length,
+    wordCount: wordCount || description.split(/\s+/).filter(Boolean).length,
   })
   return ld(schema, "ld-blogposting")
 }
