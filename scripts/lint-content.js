@@ -122,9 +122,17 @@ function hasOfficialPricingSource(body, name) {
   }
   const sourcePattern = officialUrls[name]
   if (!sourcePattern || !sourcePattern.test(body)) return false
-  return /(?:checked|verified)[\s\S]{0,220}(?:October 10, 2026|2026-10-10)/i.test(body)
-}
 
+  // Require a recent verification date next to the official source reference.
+  // A hard-coded calendar date silently makes every source stale over time.
+  const verification = body.match(/(?:checked|verified)[\s\S]{0,220}?((?:\d{4}-\d{2}-\d{2})|(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4})/i)
+  if (!verification) return false
+
+  const date = new Date(verification[1])
+  if (Number.isNaN(date.getTime())) return false
+  const ageDays = (Date.now() - date.getTime()) / (1000 * 60 * 60 * 24)
+  return ageDays >= 0 && ageDays <= 90
+}
 function checkPricingFigures(body, file, verifiedEntities) {
   const warnings = []
   let match
