@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest"
 import { getAllComparisons, getComparison, isContentAvailable } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
 import fs from "node:fs"
+import path from "node:path"
 
 const unpublishedComparisons = [
   "1password-vs-appwrite",
@@ -70,6 +71,18 @@ describe("unpublished comparison records", () => {
     const publicSlugs = new Set(getAllComparisons().map((comparison) => comparison.slug))
     for (const slug of unpublishedComparisons) {
       expect(publicSlugs.has(slug), slug).toBe(false)
+    }
+  })
+
+  it("preserves a permanent product-review redirect for every retired comparison URL", () => {
+    const config = fs.readFileSync(path.join(process.cwd(), "next.config.ts"), "utf8")
+    const redirectBlocks = [...config.matchAll(/source:\s*"([^"]+)"[\s\S]*?destination:\s*"([^"]+)"[\s\S]*?permanent:\s*true/g)]
+    const redirects = new Map(redirectBlocks.map((match) => [match[1], match[2]]))
+
+    for (const slug of unpublishedComparisons) {
+      const source = `/comparisons/${slug}`
+      expect(redirects.has(source), `${source} must redirect instead of becoming a 404`).toBe(true)
+      expect(redirects.get(source), `${source} should point to a relevant product review`).toMatch(/^\/reviews\/[a-z0-9-]+$/)
     }
   })
 })
