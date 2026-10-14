@@ -16,6 +16,12 @@ export interface ReviewContent {
   reviewCountVerified?: boolean
   /** True only when the displayed price range has a documented, auditable source. */
   priceRangeVerified?: boolean
+  /** True only when the feature availability matrix has a documented, auditable source. */
+  featuresVerified?: boolean
+  /** True only when category-level rating breakdowns have documented sources. */
+  ratingsVerified?: boolean
+  /** True only when company profile facts have been checked against current primary sources. */
+  companyFactsVerified?: boolean
   pros: string[]
   cons: string[]
   features: ReviewFeature[]
