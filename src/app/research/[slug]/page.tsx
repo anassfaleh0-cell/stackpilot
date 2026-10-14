@@ -7,6 +7,7 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getResearch, getAllResearch, getContentTitle, isContentAvailable } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
+import Link from "next/link"
 import { ExternalLink, Clock, User, Calendar, CheckCircle2, Lightbulb } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { RelatedContent } from "@/components/dynamic-client"
@@ -28,6 +29,11 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
   const { slug } = await params
   const report = getResearch(slug)
   if (!report) notFound()
+  const allResearch = getAllResearch()
+  const relatedResearch = [
+    ...allResearch.filter((item) => item.slug !== slug && item.category === report.category),
+    ...allResearch.filter((item) => item.slug !== slug && item.category !== report.category),
+  ].filter((item, index, items) => items.findIndex((candidate) => candidate.slug === item.slug) === index).slice(0, 4)
 
   return (
     <>
@@ -201,6 +207,18 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
               </div>
             </aside>
           </div>
+
+          <section className="mt-10 mb-10">
+            <h2 className="text-xl font-bold tracking-tight mb-4">Related research guides</h2>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {relatedResearch.map((item) => (
+                <Link key={item.slug} href={`/research/${item.slug}`} className="rounded-xl border border-border p-4 hover:border-primary/30 hover:bg-muted-bg transition-colors">
+                  <span className="font-medium text-sm">{item.title}</span>
+                  <p className="text-xs text-muted-foreground mt-1">{item.description}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
 
           <RelatedContent
             items={[
