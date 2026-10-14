@@ -58,11 +58,6 @@ const nextConfig: NextConfig = {
       permanent: true,
     },
     {
-      source: "/comparisons/1password-vs-appwrite",
-      destination: "/reviews/appwrite",
-      permanent: true,
-    },
-    {
       source: "/comparisons/1password-vs-crowdstrike",
       destination: "/reviews/crowdstrike",
       permanent: true,
