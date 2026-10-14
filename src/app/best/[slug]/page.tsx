@@ -80,6 +80,9 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   const safeFaqs = page.faqs.map((faq) => ({ question: stripUnverifiedRatingClaims(faq.question), answer: stripUnverifiedRatingClaims(faq.answer) }))
   const hasUnverifiedPickRatings = page.picks.some((pick) => typeof pick.rating === "number" && verifiedPickRating(pick) === null)
   const hasUnverifiedPickPrices = page.picks.some((pick) => Boolean(pick.priceRange?.trim()) && verifiedPickPrice(pick) === null)
+  const safePricingSummary = hasUnverifiedPickPrices
+    ? "Some recorded price figures in this shortlist are not independently verified. Confirm current plan prices, billing periods, limits, and required add-ons directly with each vendor before comparing total cost."
+    : page.pricingSummary
   const visibleComparisonColumnIndexes = page.comparisonTable.columns.map((column, index) => ({ column, index })).filter(({ column }) => !((hasUnverifiedPickRatings && /rating|score/i.test(column)) || (hasUnverifiedPickPrices && /price|pricing/i.test(column)))).map(({ index }) => index)
   const visibleComparisonColumns = visibleComparisonColumnIndexes.map((index) => page.comparisonTable.columns[index])
   const visibleComparisonRows = page.comparisonTable.rows.map((row) => visibleComparisonColumnIndexes.map((index) => stripUnverifiedRatingClaims(String(row[index] ?? ""))))
@@ -113,7 +116,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
               <li><strong>First listed option:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}{verifiedPickRating(page.picks[0]) !== null ? ` Verified editorial rating: ${verifiedPickRating(page.picks[0])}/5.` : ""} The list order is not a verified ranking.</li>
               <li>{page.picks.length} listed tools with recorded details; compare them using {page.criteria.length} criteria</li>
-              <li>Pricing: {page.pricingSummary}</li>
+              <li>Pricing: {safePricingSummary}</li>
               <li>Each pick includes pros, cons, and a best-fit use case</li>
               <li>Category: {page.category} — updated {formatDate(page.lastUpdated)}</li>
             </ul>
@@ -128,7 +131,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                 </li>
               ))}
               {page.criteria.length > 0 && <li><strong>Compare on:</strong> {page.criteria.join(", ")}.</li>}
-              <li><strong>Selection context:</strong> {page.pricingSummary}</li>
+              <li><strong>Selection context:</strong> {safePricingSummary}</li>
               <li><strong>Last updated:</strong> {formatDate(page.lastUpdated)}. Prices, availability, and feature limits may change.</li>
             </ul>
           </div>
@@ -217,7 +220,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
               <section className="mb-10">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Pricing Summary</h2>
-                <p className="text-muted-foreground leading-relaxed">{page.pricingSummary}</p>
+                <p className="text-muted-foreground leading-relaxed">{safePricingSummary}</p>
               </section>
 
               <section className="mb-10 overflow-x-auto">
