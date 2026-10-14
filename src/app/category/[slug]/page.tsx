@@ -166,7 +166,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                   <p className="text-muted-foreground mb-4">{bestPick.tagline}</p>
                   <div className="flex flex-wrap items-center gap-4 text-sm mb-4">
                     <span className="flex items-center gap-1"><Star size={14} className="fill-accent text-accent" /> {bestPick.rating}/5</span>
-                    {bestPick.priceRange && <span className="text-muted-foreground flex items-center gap-1"><DollarSign size={14} />{bestPick.priceRange}</span>}
+                    {bestPick.priceRangeVerified === true && bestPick.priceRange && <span className="text-muted-foreground flex items-center gap-1"><DollarSign size={14} />{bestPick.priceRange}</span>}
                     <span className="text-muted-foreground">{bestPick.pricing}</span>
                   </div>
                   <Link href={`/reviews/${bestPick.slug}`} className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
