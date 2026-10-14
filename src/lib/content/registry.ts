@@ -1052,16 +1052,92 @@ export function getAllIndustries(): IndustryContent[] {
     .map((f) => { const i = readJson<IndustryContent>(path.join(CONTENT_DIR, "industries", f)); return { ...i, faqs: sanitizeFaqs(i.faqs) } })
 }
 
+function researchFocus(subject: string): { metrics: string; questions: string } {
+  const key = subject.toLowerCase()
+  if (/churn|retention|customer success/.test(key)) return {
+    metrics: "Define gross retention, net retention, logo churn, revenue churn, expansion, and cohort windows separately. Check how the source treats downgrades, cancellations, reactivations, and customer segments.",
+    questions: "Which customer cohort is measured? Is churn logo-based or revenue-based? What time window and exclusions apply? Can the result be reproduced from customer-level records?"
+  }
+  if (/cloud|infrastructure|devops|data platform|analytics/.test(key)) return {
+    metrics: "Assess workload, utilization, reliability, data transfer, operating cost, incident recovery, deployment effort, and the integration surface. Performance claims need the workload, environment, and measurement method.",
+    questions: "What workload and region does the estimate cover? Are egress, support, storage, and observability costs included? What controls exist for cost allocation, data export, and incident response?"
+  }
+  if (/crm|sales|marketing|customer experience|advertising/.test(key)) return {
+    metrics: "Assess lead and customer data quality, attribution windows, consent handling, workflow adoption, reporting completeness, and the effort needed to reconcile data across systems. Separate vendor-reported outcomes from independently measured results.",
+    questions: "What population and time period were measured? How are conversions attributed and duplicates handled? Can the result be reconciled with the source analytics or CRM system?"
+  }
+  if (/security|privacy|compliance|identity/.test(key)) return {
+    metrics: "Assess control coverage, incident response, auditability, alert quality, integration coverage, deployment model, and the regulatory scope. Security and compliance claims must name the product, region, plan, and applicable certification.",
+    questions: "Which standard or regulation is covered? Does evidence apply to this product and plan? Can controls and audit logs be exported? What is the process for validating and renewing the claim?"
+  }
+  if (/ai|machine learning|automation/.test(key)) return {
+    metrics: "Assess task-level accuracy, human review time, failure rates, data handling, model versioning, integration reliability, and the cost of successful outputs. Distinguish controlled evaluations from self-reported adoption or productivity claims.",
+    questions: "What task and baseline were used? How were errors measured? Was there a control group? What data is retained or used for training, and where is human approval required?"
+  }
+  return {
+    metrics: "Define the population, geography, period, and outcome before comparing market or adoption claims. For software buyers, also assess workflow fit, implementation effort, integration coverage, security, reliability, and total cost.",
+    questions: "What does the metric count? Who collected it and when? Is the source primary or vendor-sponsored? Can the method be reproduced? Which assumptions would make the figure inapplicable to your organization?"
+  }
+}
+
+function normalizeResearchContent(record: ResearchContent): ResearchContent {
+  const hasCompleteSourceAudit = record.sourceAuditComplete === true &&
+    record.dataSources.length > 0 &&
+    record.dataSources.every((source) => {
+      try {
+        const url = new URL(source.url)
+        return url.protocol === "https:" && url.pathname.split("/").filter(Boolean).length >= 2
+      } catch {
+        return false
+      }
+    })
+  if (hasCompleteSourceAudit) {
+    return { ...record, sections: sanitizeSections(record.sections), faqs: sanitizeFaqs(record.faqs) }
+  }
+
+  const subject = record.title
+    .replace(/\\b20\\d{2}\\b/g, "")
+    .replace(/\\s+/g, " ")
+    .replace(/\\s+(?:report|benchmarks?|trends|comparison|study)$/i, "")
+    .trim() || "Software market"
+  const focus = researchFocus(subject)
+  return {
+    ...record,
+    title: `${subject} Research Guide: Metrics and Evidence`,
+    description: `A practical guide to evaluating ${subject.toLowerCase()}, checking source quality, and using market claims responsibly. Numerical findings are withheld until source verification is complete.`,
+    keyFindings: [
+      `Define the population, geography, time period, and outcome before comparing ${subject.toLowerCase()} claims.`,
+      "Use original reports with accessible methodology; a generic source homepage does not substantiate a specific number.",
+      "For purchasing decisions, prioritize workflow fit, implementation effort, integration coverage, security, and total cost over broad market estimates.",
+    ],
+    sections: [
+      { title: `What to measure in ${subject}`, body: focus.metrics, type: "text" },
+      { title: "Evidence standards for market claims", body: "For each number, record the original report URL, publisher, publication date, geography, sample, definitions, calculation, and limitations. Distinguish measured results from forecasts, vendor surveys, analyst estimates, and opinion. If the original source cannot be found, do not repeat the figure as a verified fact.", type: "text" },
+      { title: "Questions for software buyers", body: focus.questions, type: "text" },
+      { title: "Source status and limitations", body: "Older numeric findings for this topic are undergoing source-provenance review. They are not presented as verified market findings here. The page remains available as a research guide while the underlying claims are checked and direct source links are added. Figures can be restored when the source, scope, date, and verification record are complete.", type: "text" },
+    ],
+    methodology: "This page is currently a research guide while older numeric claims undergo source-provenance review. A future quantitative version must link each material claim to a direct, dated source and explain its sample, definitions, geography, calculation, and limitations.",
+    dataSources: [],
+    sourceAuditComplete: false,
+    faqs: [
+      { question: "Why are numeric findings not shown?", answer: "Older records do not yet have a complete, checkable source trail for each claim. They are withheld until the original evidence and scope can be verified." },
+      { question: "How should I compare market reports?", answer: "Check whether reports measure the same population, geography, time period, and outcome. Do not combine numbers that use different definitions without explaining the difference." },
+      { question: "Can I use these guides to choose software?", answer: "Use them to define requirements and questions to verify. Confirm product features, security terms, plan limits, and pricing with the vendor before purchasing." },
+    ],
+    updatedAt: "2026-10-15",
+    readingTime: 5,
+  }
+}
+
 export function getResearch(slug: string): ResearchContent | null {
   const file = path.join(CONTENT_DIR, "research", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  const research = readJson<ResearchContent>(file)
-  return { ...research, sections: sanitizeSections(research.sections), faqs: sanitizeFaqs(research.faqs) }
+  return normalizeResearchContent(readJson<ResearchContent>(file))
 }
 
 export function getAllResearch(): ResearchContent[] {
   return readDir(path.join(CONTENT_DIR, "research"))
-    .map((f) => { const r = readJson<ResearchContent>(path.join(CONTENT_DIR, "research", f)); return { ...r, sections: sanitizeSections(r.sections), faqs: sanitizeFaqs(r.faqs) } })
+    .map((f) => normalizeResearchContent(readJson<ResearchContent>(path.join(CONTENT_DIR, "research", f))))
 }
 
 function statisticResearchFocus(category: string): { metrics: string; questions: string } {
