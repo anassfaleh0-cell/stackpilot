@@ -52,6 +52,7 @@ const unpublishedComparisons = [
   "copy-ai-vs-mailchimp",
   "evernote-vs-microsoft-teams",
   "heap-vs-mailchimp",
+  "claude-vs-fullstory",
 ]
 
 describe("unpublished comparison records", () => {

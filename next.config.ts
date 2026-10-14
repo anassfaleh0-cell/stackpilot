@@ -242,6 +242,11 @@ const nextConfig: NextConfig = {
       destination: "/reviews/heap",
       permanent: true,
     },
+    {
+      source: "/comparisons/claude-vs-fullstory",
+      destination: "/reviews/claude",
+      permanent: true,
+    },
   ],
   images: {
     formats: ["image/avif", "image/webp"],
