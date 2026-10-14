@@ -1106,7 +1106,7 @@ function normalizeResearchContent(record: ResearchContent): ResearchContent {
   return {
     ...record,
     reportType: "Research guide",
-    title: `${subject} Research Guide: Metrics and Evidence`,
+    title: `${subject} Research Guide (${record.category}): Metrics and Evidence`,
     description: `A practical guide to evaluating ${subject.toLowerCase()}, checking source quality, and using market claims responsibly. Numerical findings are withheld until source verification is complete.`,
     keyFindings: [
       `Define the population, geography, time period, and outcome before comparing ${subject.toLowerCase()} claims.`,
