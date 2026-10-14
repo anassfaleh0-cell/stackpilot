@@ -58,20 +58,19 @@ export function stripUnverifiedPriceClaims(value: string): string {
 }
 
 export function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false, showVerifiedRatings = false): ContentSection[] {
-  const safeContent = showVerifiedPricing
-    ? content
-    : content.map((section) => ({ ...section, body: stripUnverifiedPriceClaims(section.body) }))
-  return safeContent.filter((section) => {
-    if (!showVerifiedPricing && section.type === "diagram" && section.body === "pricing-ladder") return false
-    if (!showVerifiedRatings && section.type === "diagram" && section.body === "feature-radar") return false
-    if (!showVerifiedPricing && /pricing|plans/i.test(section.title)) return false
-    if (HIDDEN_REVIEW_SECTION_TITLES.has(section.title)) return false
-    if (GENERATED_REVIEW_SECTION_PATTERNS.some((pattern) => pattern.test(section.body.trim()))) return false
-    if (section.type === "diagram") {
-      return section.body === "implementation-flow" || (section.body === "pricing-ladder" && showVerifiedPricing) || (section.body === "feature-radar" && showVerifiedRatings)
-    }
-    return true
-  })
+  return content
+    .filter((section) => {
+      if (!showVerifiedPricing && section.type === "diagram" && section.body === "pricing-ladder") return false
+      if (!showVerifiedRatings && section.type === "diagram" && section.body === "feature-radar") return false
+      if (!showVerifiedPricing && /pricing|plans/i.test(section.title)) return false
+      if (HIDDEN_REVIEW_SECTION_TITLES.has(section.title)) return false
+      if (GENERATED_REVIEW_SECTION_PATTERNS.some((pattern) => pattern.test(section.body.trim()))) return false
+      if (section.type === "diagram") {
+        return section.body === "implementation-flow" || (section.body === "pricing-ladder" && showVerifiedPricing) || (section.body === "feature-radar" && showVerifiedRatings)
+      }
+      return true
+    })
+    .map((section) => showVerifiedPricing ? section : ({ ...section, body: stripUnverifiedPriceClaims(section.body) }))
 }
 
 
