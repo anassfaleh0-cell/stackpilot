@@ -10,6 +10,7 @@ const CONTENT_DIR = path.resolve(process.cwd(), "content")
 const reviewCache = new Map<string, ReviewContent | null>()
 const comparisonCache = new Map<string, ComparisonContent | null>()
 let statisticsCache: StatisticContent[] | null = null
+let researchCache: ResearchContent[] | null = null
 
 const DIR_FOR_TYPE: Record<string, string> = {
   review: "reviews",
@@ -1132,14 +1133,18 @@ function normalizeResearchContent(record: ResearchContent): ResearchContent {
 }
 
 export function getResearch(slug: string): ResearchContent | null {
+  const cached = researchCache?.find((record) => record.slug === slug)
+  if (cached) return cached
   const file = path.join(CONTENT_DIR, "research", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   return normalizeResearchContent(readJson<ResearchContent>(file))
 }
 
 export function getAllResearch(): ResearchContent[] {
-  return readDir(path.join(CONTENT_DIR, "research"))
+  if (researchCache) return researchCache
+  researchCache = readDir(path.join(CONTENT_DIR, "research"))
     .map((f) => normalizeResearchContent(readJson<ResearchContent>(path.join(CONTENT_DIR, "research", f))))
+  return researchCache
 }
 
 function statisticResearchFocus(category: string): { metrics: string; questions: string } {
