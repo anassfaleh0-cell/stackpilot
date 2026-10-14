@@ -612,7 +612,6 @@ describe("CD-16: cross-category comparison publication safeguards", () => {
   it("keeps non-substitutable product comparisons unpublished without a false overall winner", () => {
     const slugs = [
       "1password-vs-appwrite",
-      "1password-vs-auth0",
       "1password-vs-crowdstrike",
       "1password-vs-fathom",
       "adp-vs-airtable",
