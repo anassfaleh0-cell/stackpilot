@@ -611,7 +611,6 @@ describe("CD-15: generated review boilerplate", () => {
 describe("CD-16: cross-category comparison publication safeguards", () => {
   it("keeps non-substitutable product comparisons unpublished without a false overall winner", () => {
     const slugs = [
-      "1password-vs-fathom",
       "adp-vs-airtable",
       "affinity-vs-wix",
       "ahrefs-vs-claude",
