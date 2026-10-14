@@ -58,6 +58,61 @@ const nextConfig: NextConfig = {
       permanent: true,
     },
     {
+      source: "/comparisons/1password-vs-appwrite",
+      destination: "/reviews/appwrite",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/1password-vs-auth0",
+      destination: "/reviews/auth0",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/1password-vs-crowdstrike",
+      destination: "/reviews/crowdstrike",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/1password-vs-fathom",
+      destination: "/reviews/fathom",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/affinity-vs-wix",
+      destination: "/reviews/affinity",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/dialpad-vs-loom",
+      destination: "/reviews/dialpad",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/adp-vs-airtable",
+      destination: "/reviews/airtable",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/clickup-vs-gusto",
+      destination: "/reviews/clickup",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/ahrefs-vs-claude",
+      destination: "/reviews/ahrefs",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/copy-ai-vs-heap",
+      destination: "/reviews/copy-ai",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/cal-com-vs-discord",
+      destination: "/reviews/cal-com",
+      permanent: true,
+    },
+    {
       source: "/comparisons/auth0-vs-bitbucket",
       destination: "/reviews/auth0",
       permanent: true,
