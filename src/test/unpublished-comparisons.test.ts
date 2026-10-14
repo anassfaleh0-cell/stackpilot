@@ -5,7 +5,6 @@ import fs from "node:fs"
 import path from "node:path"
 
 const unpublishedComparisons = [
-  "1password-vs-fathom",
   "affinity-vs-wix",
   "dialpad-vs-loom",
   "adp-vs-airtable",
@@ -65,6 +64,20 @@ describe("unpublished comparison records", () => {
     expect(isContentAvailable("comparison", "activecampaign-vs-adobe-express")).toBe(true)
     const config = fs.readFileSync(path.join(process.cwd(), "next.config.ts"), "utf8")
     expect(config).not.toContain('source: "/comparisons/activecampaign-vs-adobe-express"')
+  })
+
+  it("keeps rewritten 1Password vs Fathom Analytics publicly available and indexable", () => {
+    const record = JSON.parse(fs.readFileSync("content/comparisons/1password-vs-fathom.json", "utf8")) as { published?: boolean; publicationStatus?: string; winner?: string | null; winnerVerified?: boolean; featuresVerified?: boolean }
+    expect(record.published).toBe(true)
+    expect(record.publicationStatus).not.toBe("draft")
+    expect(record.tool2).toBe("Fathom Analytics")
+    expect(record.winner).toBeNull()
+    expect(record.winnerVerified).toBe(false)
+    expect(record.featuresVerified).toBe(false)
+    expect(getComparison("1password-vs-fathom")).not.toBeNull()
+    expect(isContentAvailable("comparison", "1password-vs-fathom")).toBe(true)
+    const config = fs.readFileSync(path.join(process.cwd(), "next.config.ts"), "utf8")
+    expect(config).not.toContain('source: "/comparisons/1password-vs-fathom"')
   })
 
   it("keeps rewritten 1Password vs CrowdStrike publicly available and indexable", () => {
