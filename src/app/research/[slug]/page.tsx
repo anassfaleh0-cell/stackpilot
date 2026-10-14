@@ -30,10 +30,16 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
   const report = getResearch(slug)
   if (!report) notFound()
   const allResearch = getAllResearch()
+  const sameCategory = allResearch.filter((item) => item.category === report.category)
+  const following = (items: typeof allResearch, count: number) => {
+    const currentIndex = items.findIndex((item) => item.slug === slug)
+    if (currentIndex < 0 || items.length < 2) return []
+    return Array.from({ length: Math.min(count, items.length - 1) }, (_, index) => items[(currentIndex + index + 1) % items.length])
+  }
   const relatedResearch = [
-    ...allResearch.filter((item) => item.slug !== slug && item.category === report.category),
-    ...allResearch.filter((item) => item.slug !== slug && item.category !== report.category),
-  ].filter((item, index, items) => items.findIndex((candidate) => candidate.slug === item.slug) === index).slice(0, 4)
+    ...following(sameCategory, 2),
+    ...following(allResearch, 4),
+  ].filter((item, index, items) => item.slug !== slug && items.findIndex((candidate) => candidate.slug === item.slug) === index).slice(0, 4)
 
   return (
     <>
