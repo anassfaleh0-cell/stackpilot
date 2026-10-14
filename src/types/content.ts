@@ -311,6 +311,7 @@ export interface BestContent {
 
 export interface HubContent {
   slug: string
+  contentVerified?: boolean
   title: string
   description: string
   audience: string
