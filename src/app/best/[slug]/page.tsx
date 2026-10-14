@@ -142,7 +142,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-4">
               {page.picks.slice(0, 3).map((pick) => (
                 <li key={pick.toolSlug || pick.toolName}>
-                  <strong>{pick.toolName}:</strong> {pick.bestFor}{verifiedPickRating(pick) !== null ? ` Verified editorial rating: ${verifiedPickRating(pick)}/5.` : ""} Pricing: {verifiedPickPrice(pick) ?? "not independently verified in this shortlist"}. Verify current plan limits and included features with the vendor.
+                  <strong>{pick.toolName}:</strong> {safePickText(pick, pick.bestFor)}{verifiedPickRating(pick) !== null ? ` Verified editorial rating: ${verifiedPickRating(pick)}/5.` : ""} Pricing: {verifiedPickPrice(pick) ?? "not independently verified in this shortlist"}. Verify current plan limits and included features with the vendor.
                 </li>
               ))}
               {page.criteria.length > 0 && <li><strong>Compare on:</strong> {page.criteria.join(", ")}.</li>}
@@ -209,7 +209,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                             <p className="text-xs font-semibold text-success mb-1 flex items-center gap-1"><CheckCircle2 size={12} /> Pros</p>
                             <ul className="space-y-1">
                               {pick.pros.map((pro, j) => (
-                                <li key={j} className="text-xs text-muted-foreground flex items-start gap-1"><span className="text-success mt-0.5">•</span>{pro}</li>
+                                <li key={j} className="text-xs text-muted-foreground flex items-start gap-1"><span className="text-success mt-0.5">•</span>{safePickText(pick, pro)}</li>
                               ))}
                             </ul>
                           </div>
@@ -217,7 +217,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                             <p className="text-xs font-semibold text-error mb-1 flex items-center gap-1"><XCircle size={12} /> Cons</p>
                             <ul className="space-y-1">
                               {pick.cons.map((con, j) => (
-                                <li key={j} className="text-xs text-muted-foreground flex items-start gap-1"><span className="text-error mt-0.5">•</span>{con}</li>
+                                <li key={j} className="text-xs text-muted-foreground flex items-start gap-1"><span className="text-error mt-0.5">•</span>{safePickText(pick, con)}</li>
                               ))}
                             </ul>
                           </div>
