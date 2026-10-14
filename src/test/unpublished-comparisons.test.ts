@@ -45,6 +45,13 @@ const unpublishedComparisons = [
   "heap-vs-paddle",
   "convertkit-vs-freshdesk",
   "canva-vs-mailchimp",
+  "acuity-vs-airtable",
+  "asana-vs-cal-com",
+  "basecamp-vs-calendly",
+  "calendly-vs-google-meet",
+  "copy-ai-vs-mailchimp",
+  "evernote-vs-microsoft-teams",
+  "heap-vs-mailchimp",
 ]
 
 describe("unpublished comparison records", () => {

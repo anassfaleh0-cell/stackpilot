@@ -207,6 +207,41 @@ const nextConfig: NextConfig = {
       destination: "/reviews/mailchimp",
       permanent: true,
     },
+    {
+      source: "/comparisons/acuity-vs-airtable",
+      destination: "/reviews/acuity",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/asana-vs-cal-com",
+      destination: "/reviews/asana",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/basecamp-vs-calendly",
+      destination: "/reviews/basecamp",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/calendly-vs-google-meet",
+      destination: "/reviews/calendly",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/copy-ai-vs-mailchimp",
+      destination: "/reviews/copy-ai",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/evernote-vs-microsoft-teams",
+      destination: "/reviews/evernote",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/heap-vs-mailchimp",
+      destination: "/reviews/heap",
+      permanent: true,
+    },
   ],
   images: {
     formats: ["image/avif", "image/webp"],
