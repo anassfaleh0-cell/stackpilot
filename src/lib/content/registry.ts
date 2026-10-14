@@ -1034,20 +1034,22 @@ export function getAllUseCases(): UseCaseContent[] {
 }
 
 function normalizeIndustryContent(industry: IndustryContent): IndustryContent {
-  if (industry.contentVerified === true) {
+  const safeIndustry = { ...industry } as IndustryContent & { body?: string }
+  delete safeIndustry.body
+  if (safeIndustry.contentVerified === true) {
     return {
-      ...industry,
-      faqs: sanitizeFaqs(industry.faqs),
+      ...safeIndustry,
+      faqs: sanitizeFaqs(safeIndustry.faqs),
     }
   }
 
-  const category = industry.industry || "Industry"
-  const unsafeOverview = /<[^>]+>|solutions evaluated|our comprehensive analysis|we evaluated|we tested|industry-leading analysis/i.test(industry.industryOverview || "")
+  const category = safeIndustry.industry || "Industry"
+  const unsafeOverview = /<[^>]+>|solutions evaluated|our comprehensive analysis|we evaluated|we tested|industry-leading analysis/i.test(safeIndustry.industryOverview || "")
   const industryOverview = unsafeOverview
     ? `${category} teams need software that fits their operational workflows, data requirements, integrations, and budget. Start by mapping the work that must improve, the people who will use the system, and the risks that must be controlled. Then verify product capabilities and plan limits against current vendor documentation rather than relying on broad market claims.`
-    : trimText(industry.industryOverview, 1600)
+    : trimText(safeIndustry.industryOverview, 1600)
 
-  const recommendations = industry.recommendations.map((recommendation) => {
+  const recommendations = safeIndustry.recommendations.map((recommendation) => {
     const riskyClaim = /HIPAA|HITECH|GDPR|FERPA|COPPA|PCI DSS|SOC 2|ISO 27001|certified|compliant|guarantee|top-rated|\b\d+(?:\.\d+)?%|\$\s?\d/i.test(recommendation.bestFor)
     return {
       ...recommendation,
@@ -1057,7 +1059,7 @@ function normalizeIndustryContent(industry: IndustryContent): IndustryContent {
     }
   })
 
-  const faqs = sanitizeFaqs(industry.faqs).map((faq) => {
+  const faqs = sanitizeFaqs(safeIndustry.faqs).map((faq) => {
     const riskyClaim = /HIPAA|HITECH|GDPR|FERPA|COPPA|PCI DSS|SOC 2|ISO 27001|AES-256|TLS 1\.[23]|certified|compliant|guarantee|\b\d+(?:\.\d+)?%|\$\s?\d+/i.test(faq.answer)
     return riskyClaim
       ? {
@@ -1072,9 +1074,9 @@ function normalizeIndustryContent(industry: IndustryContent): IndustryContent {
     title: `Software for ${category}: Selection Guide`,
     description: `A practical software selection guide for ${category.toLowerCase()} teams, covering workflow fit, integrations, data protection, implementation, and total cost. Verify product-specific claims with current vendor documentation.`,
     industryOverview,
-    softwareNeeds: sanitizeList(industry.softwareNeeds, 10),
+    softwareNeeds: sanitizeList(safeIndustry.softwareNeeds, 10),
     recommendations,
-    implementationTips: sanitizeList(industry.implementationTips, 10),
+    implementationTips: sanitizeList(safeIndustry.implementationTips, 10),
     faqs,
     lastUpdated: "2026-10-15",
     contentVerified: false,
