@@ -19,6 +19,12 @@ const ROUTES = [
   "/privacy",
   "/terms",
   "/methodology",
+  "/reviews/linear",
+  "/comparisons/square-vs-xero",
+  "/comparisons/zoom-vs-webex",
+  "/category/marketing-seo",
+  "/category/developer-tools",
+  "/use-cases/best-seo-for-agencies",
 ]
 
 let failures = 0
