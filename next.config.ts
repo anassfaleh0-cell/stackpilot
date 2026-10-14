@@ -143,11 +143,6 @@ const nextConfig: NextConfig = {
       permanent: true,
     },
     {
-      source: "/comparisons/activecampaign-vs-adobe-express",
-      destination: "/reviews/activecampaign",
-      permanent: true,
-    },
-    {
       source: "/comparisons/activecampaign-vs-chatgpt",
       destination: "/reviews/activecampaign",
       permanent: true,
