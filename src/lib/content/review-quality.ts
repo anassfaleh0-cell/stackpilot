@@ -49,9 +49,9 @@ const GENERATED_REVIEW_SECTION_PATTERNS = [
 
 export function stripUnverifiedPriceClaims(value: string): string {
   return value
-    .replace(/(?:starting at|starts at|from)?\\s*[$€£]\\s?\\d[\\d,]*(?:\\.\\d+)?(?:\\s*\\/\\s*(?:user|seat|month|year|mo|yr))?/gi, "pricing not independently verified")
-    .replace(/\\s{2,}/g, " ")
-    .replace(/\\s+([,.;:])/g, "$1")
+    .replace(/(?:starting at|starts at|from)?\s*[$€£]\s?\d[\d,]*(?:\.\d+)?(?:\s*\/\s*(?:user|seat|month|year|mo|yr))?/gi, "pricing not independently verified")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+([,.;:])/g, "$1")
     .trim()
 }
 
