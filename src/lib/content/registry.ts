@@ -538,7 +538,14 @@ export function getAllReviews(): ReviewContent[] {
   return readDir(path.join(CONTENT_DIR, "reviews"))
     .map((file) => getReview(file.replace(/\.json$/, "")))
     .filter((review): review is ReviewContent => Boolean(review))
-    .sort((a, b) => b.rating - a.rating)
+    .sort((a, b) => {
+      const aRating = a.ratingVerified === true && typeof a.rating === "number" && Number.isFinite(a.rating) ? a.rating : null
+      const bRating = b.ratingVerified === true && typeof b.rating === "number" && Number.isFinite(b.rating) ? b.rating : null
+      if (aRating === null && bRating !== null) return 1
+      if (aRating !== null && bRating === null) return -1
+      if (aRating !== null && bRating !== null && aRating !== bRating) return bRating - aRating
+      return a.name.localeCompare(b.name)
+    })
 }
 
 function sectionWordCount(sections: Array<{ body?: string; items?: string[] }>): number {
