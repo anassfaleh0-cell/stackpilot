@@ -142,6 +142,76 @@ const nextConfig: NextConfig = {
       destination: "/reviews/convertkit",
       permanent: true,
     },
+    {
+      source: "/comparisons/activecampaign-vs-adobe-express",
+      destination: "/reviews/activecampaign",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/activecampaign-vs-chatgpt",
+      destination: "/reviews/activecampaign",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/activecampaign-vs-fathom",
+      destination: "/reviews/activecampaign",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/adobe-xd-vs-ahrefs",
+      destination: "/reviews/ahrefs",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/ahrefs-vs-copper-crm",
+      destination: "/reviews/copper-crm",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/ahrefs-vs-fullstory",
+      destination: "/reviews/ahrefs",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/bigcommerce-vs-fathom",
+      destination: "/reviews/bigcommerce",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/chatgpt-vs-fathom",
+      destination: "/reviews/chatgpt",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/copilot-vs-google-analytics",
+      destination: "/reviews/copilot",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/convertkit-vs-google-analytics",
+      destination: "/reviews/convertkit",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/freshsales-vs-microsoft-teams",
+      destination: "/reviews/freshsales",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/heap-vs-paddle",
+      destination: "/reviews/paddle",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/convertkit-vs-freshdesk",
+      destination: "/reviews/convertkit",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/canva-vs-mailchimp",
+      destination: "/reviews/mailchimp",
+      permanent: true,
+    },
   ],
   images: {
     formats: ["image/avif", "image/webp"],
