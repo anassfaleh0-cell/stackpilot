@@ -1323,7 +1323,7 @@ function normalizeHubContent(hub: HubContent): HubContent {
   if (hub.contentVerified === true) return { ...hub, faqs: sanitizeFaqs(hub.faqs) }
   const audience = hub.audience || hub.title.replace(/^software for /i, "").trim()
   const focus = hubFocus(audience)
-  const recommendations = hub.recommendations.slice(0, 12).map((recommendation) => ({
+  const recommendations = hub.recommendations.map((recommendation) => ({
     ...recommendation,
     bestFor: `Consider ${recommendation.toolName} for evaluation when your team needs ${recommendation.category.toLowerCase()}. Confirm current capabilities, plan limits, integrations, security terms, and total cost with the vendor before choosing.`,
   }))
