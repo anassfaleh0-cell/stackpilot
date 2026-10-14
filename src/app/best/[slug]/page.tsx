@@ -19,6 +19,8 @@ import { isNoindexed } from "@/lib/noindex"
 function stripUnverifiedPriceClaims(value: string): string {
   return value
     .replace(/(?:starting at|starts at|from)?\s*[$€£]\s?\d[\d,]*(?:\.\d+)?(?:\s*\/\s*(?:user|seat|month|year|mo|yr))?/gi, "pricing not independently verified")
+    .replace(/\b(?:free|freemium|paid|enterprise)\s+(?:plan|tier)\b/gi, "plan availability not independently verified")
+    .replace(/\bfree trial\b/gi, "trial availability not independently verified")
     .replace(/\s{2,}/g, " ")
     .replace(/\s+([,.;:])/g, "$1")
     .trim()
