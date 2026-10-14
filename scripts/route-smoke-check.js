@@ -63,8 +63,20 @@ async function checkRoute(pathname) {
       fail(`${pathname} has no meaningful meta description`)
       return
     }
-    if (!/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>/i.test(body)) {
-      fail(`${pathname} has no canonical link`)
+    const canonicalTag = body.match(/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>/i)?.[0] || ""
+    const canonicalHref = canonicalTag.match(/\bhref=["']([^"']+)["']/i)?.[1]
+    if (!canonicalHref) {
+      fail(`${pathname} has no canonical link with an href`)
+      return
+    }
+    try {
+      const canonicalUrl = new URL(canonicalHref, "https://pilotstack.online")
+      if (canonicalUrl.origin !== "https://pilotstack.online" || canonicalUrl.pathname !== pathname || canonicalUrl.search) {
+        fail(`${pathname} has a non-canonical or mismatched canonical URL: ${canonicalUrl.href}`)
+        return
+      }
+    } catch {
+      fail(`${pathname} has an invalid canonical URL: ${canonicalHref}`)
       return
     }
     const robotsMeta = body.match(/<meta\b(?=[^>]*\bname=["']robots["'])[^>]*>/i)?.[0] || ""
