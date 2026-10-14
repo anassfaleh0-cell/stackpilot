@@ -23,7 +23,7 @@ export default function AdvertisingDisclosurePage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Transparency</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Advertising Disclosure</h1>
-            <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: October 14, 2026</p>
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">
@@ -34,30 +34,30 @@ export default function AdvertisingDisclosurePage() {
               <p>PilotStack may display the following types of advertising:</p>
               <ul>
                 <li><strong>Display advertising:</strong> Banner advertisements placed in designated ad slots. These are clearly marked as advertisements and are not related to editorial content.</li>
-                <li><strong>Sponsored content:</strong> Content produced in partnership with a sponsor. Sponsored content is clearly labeled as "Sponsored" or "Promoted" at the top of the page and is never included in our comparison reviews, rankings, or editorial content sections.</li>
+                <li><strong>Sponsored content:</strong> If we accept a paid content partnership in the future, the page will be clearly labeled as “Sponsored” or “Promoted” before readers engage with it. Paid placement will not be represented as an independent review or silently alter editorial conclusions.</li>
                 <li><strong>Newsletter sponsorships:</strong> Sponsored placements in our email newsletter are clearly marked as sponsorships.</li>
               </ul>
 
               <h2>Separation of Editorial and Advertising</h2>
               <p>We maintain strict separation between editorial and advertising operations:</p>
               <ul>
-                <li>Advertisers and sponsors have no influence over editorial content, ratings, rankings, or product coverage decisions</li>
-                <li>The editorial team does not participate in advertising sales or know which companies are advertising partners when creating content</li>
-                <li>Sponsored content is never presented as editorial content or included in our review, comparison, or guide sections</li>
-                <li>Advertisements are placed in designated slots and are clearly distinguishable from editorial content</li>
+                <li>Advertisers do not buy a favorable rating or control an editorial conclusion.</li>
+                <li>PilotStack is independently operated; commercial relationships are disclosed and should not be treated as evidence that a product is the best choice.</li>
+                <li>Any future sponsored material will be labeled clearly and kept distinct from independent reviews and comparisons.</li>
+                <li>Display advertisements are third-party placements and may vary by visitor, consent choice, device, and available inventory.</li>
               </ul>
 
               <h2>Sponsored Content Standards</h2>
               <p>Sponsored content on PilotStack must meet the following standards:</p>
               <ul>
                 <li>Clearly labeled as "Sponsored" or "Promoted" at the top of the page</li>
-                <li>Produced or reviewed by our editorial team to ensure accuracy</li>
+                <li>Reviewed against the site’s published editorial and disclosure standards before publication</li>
                 <li>Factually accurate and compliant with our editorial standards</li>
                 <li>Never misrepresented as independent editorial content</li>
               </ul>
 
               <h2>Native Advertising</h2>
-              <p>We do not currently use native advertising that mimics the appearance of editorial content. If we introduce native advertising in the future, it will be clearly labeled and distinguishable from editorial content.</p>
+              <p>We aim not to present paid placements as independent editorial recommendations. If a native advertising format is introduced, it must be clearly labeled and visually distinguishable from independent reviews, comparisons, and guides.</p>
 
               <h2>Adherence to Standards</h2>
               <p>PilotStack adheres to the Federal Trade Commission (FTC) guidelines on endorsements and advertising, as well as industry standards set by the Interactive Advertising Bureau (IAB).</p>
