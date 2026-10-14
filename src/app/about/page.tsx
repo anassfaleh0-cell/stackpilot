@@ -7,8 +7,8 @@ import { createMetadata } from "@/lib/metadata"
 import { SocialLinkList } from "@/components/brand/social-icons"
 
 export const metadata = createMetadata({
-  title: "About PilotStack — Our Mission, Team & Editorial Standards",
-  description: "PilotStack helps businesses navigate the software landscape with detailed reviews, practical comparisons, and actionable buying guides.",
+  title: "About PilotStack — Our Mission & Editorial Standards",
+  description: "PilotStack helps people research software with practical comparisons, buyer-focused guides, and transparent notes about evidence and limitations.",
   path: "/about",
 })
 
@@ -26,11 +26,11 @@ export default function AboutPage() {
             <Badge variant="default" className="mb-4">About</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-6">Navigating software shouldn&apos;t be hard</h1>
             <div className="prose prose-slate max-w-none">
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">PilotStack was created to make software research easier to navigate. The site brings reviews, comparisons, guides, and structured product information into one place so readers can evaluate options without having to piece together the basics from many sources.</p>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-6">PilotStack is an independently operated software research publication built to make software research easier to navigate. It brings reviews, comparisons, guides, and structured product information into one place so readers can compare options and identify what they still need to verify with the vendor.</p>
               <p className="text-muted-foreground mb-4">Software research can be difficult because pricing, features, positioning, and product capabilities change over time. PilotStack focuses on making those decision factors easier to compare, while clearly separating recorded information from editorial guidance.</p>
-              <p className="text-muted-foreground mb-4">I built PilotStack to fix that. Every figure on this site is recorded once and reused everywhere it appears, each tool carries nine category scores on a 1-5 scale with the overall rating as their mean, and where we cannot source a fact we leave it off the page instead of asserting it. We publish our methodology so you can check how every conclusion is reached.</p>
+              <p className="text-muted-foreground mb-4">I built PilotStack to make those decisions clearer. Our published methodology sets out the criteria we use and the evidence a claim needs before it should be treated as verified. Some older numeric scores and review-count figures are still undergoing a source audit, so a displayed number should not be assumed to represent independently verified user sentiment unless its source and calculation are documented. We are correcting, qualifying, or removing unsupported claims as the audit identifies them.</p>
               <p className="text-muted-foreground mb-4">PilotStack may earn revenue from affiliate relationships and other clearly disclosed commercial relationships. Commercial relationships do not determine editorial scores or conclusions. Where a page contains an affiliate relationship, the relationship is disclosed so readers can understand the commercial context.</p>
-              <p className="text-muted-foreground mb-4">The same published rules apply to every page: one recorded source per figure, the overall rating as the mean of nine category scores, and no unsourced fact stated as confirmed. We believe that consistency is what makes PilotStack different — and what helps our readers make confident, informed decisions.</p>
+              <p className="text-muted-foreground mb-4">Our goal is to make the evidence behind software decisions easier to inspect. We publish our methodology, distinguish editorial judgment from verified facts where possible, and invite readers to report errors through our contact page. The site is being reviewed to bring older content into line with those standards.</p>
               <h2 className="text-2xl font-bold mt-12 mb-4">Our values</h2>
               <div className="grid sm:grid-cols-2 gap-6 mb-12">
                 {[
