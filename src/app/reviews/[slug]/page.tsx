@@ -68,7 +68,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const allReviews = getAllReviews()
 
   const hasEditorialRating = tool.ratingVerified === true && typeof tool.rating === "number" && Number.isFinite(tool.rating)
-  const categoryRatings = hasEditorialRating && Array.isArray(tool.ratings) ? tool.ratings : []
+  const categoryRatings = tool.ratingsVerified === true && Array.isArray(tool.ratings) ? tool.ratings : []
   const reviewCount = tool.reviewCountVerified === true && typeof tool.reviewCount === "number" && Number.isFinite(tool.reviewCount) ? tool.reviewCount : null
   const bestInCategory = allReviews
     .filter((r) => r.category === tool.category && r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating))
