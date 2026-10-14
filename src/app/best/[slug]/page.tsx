@@ -16,6 +16,14 @@ import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { isNoindexed } from "@/lib/noindex"
 
+function stripUnverifiedPriceClaims(value: string): string {
+  return value
+    .replace(/(?:starting at|starts at|from)?\\s*[$€£]\\s?\\d[\\d,]*(?:\\.\\d+)?(?:\\s*\\/\\s*(?:user|seat|month|year|mo|yr))?/gi, "pricing not independently verified")
+    .replace(/\\s{2,}/g, " ")
+    .replace(/\\s+([,.;:])/g, "$1")
+    .trim()
+}
+
 function stripUnverifiedRatingClaims(value: string): string {
   return value
     .replace(/\(\s*\d(?:\.\d+)?\s*\/\s*5\s*,\s*from\s+[^)]*\)/gi, "")
@@ -41,7 +49,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const page = getBest(slug)
   if (!page) return {}
   const readingTime = Math.max(5, Math.ceil((page.description.split(/\s+/).length + page.picks.reduce((a, p) => a + p.pros.length + p.cons.length, 0) * 20) / 200))
-  const safeDescription = stripUnverifiedRatingClaims(page.description)
+  const safeDescription = stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(page.description))
   const metaDescription = safeDescription.length < 120
     ? `${safeDescription} Compare the listed options using the recorded details and criteria below. Verify current features and plan terms with each vendor.`
     : safeDescription
@@ -77,15 +85,22 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
       ? pick.priceRange
       : null
   const safeDescription = stripUnverifiedRatingClaims(page.description)
-  const safeFaqs = page.faqs.map((faq) => ({ question: stripUnverifiedRatingClaims(faq.question), answer: stripUnverifiedRatingClaims(faq.answer) }))
+  const safeFaqs = page.faqs.map((faq) => ({ question: stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(faq.question)), answer: stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(faq.answer)) }))
   const hasUnverifiedPickRatings = page.picks.some((pick) => typeof pick.rating === "number" && verifiedPickRating(pick) === null)
-  const hasUnverifiedPickPrices = page.picks.some((pick) => Boolean(pick.priceRange?.trim()) && verifiedPickPrice(pick) === null)
+  const hasUnverifiedPickPrices = page.picks.some((pick) => Boolean(pick.priceRange?.trim()) && verifiedPickPrice(pick) === null) || (page.comparisonTable.columns.some((column) => /price|pricing/i.test(column)) && page.picks.some((pick) => verifiedPickPrice(pick) === null))
+  const safePickText = (pick: (typeof page.picks)[number] | undefined, value: string) => {
+    const safeRatingText = stripUnverifiedRatingClaims(value)
+    return verifiedPickPrice(pick) === null ? stripUnverifiedPriceClaims(safeRatingText) : safeRatingText
+  }
   const safePricingSummary = hasUnverifiedPickPrices
     ? "Some recorded price figures in this shortlist are not independently verified. Confirm current plan prices, billing periods, limits, and required add-ons directly with each vendor before comparing total cost."
     : page.pricingSummary
   const visibleComparisonColumnIndexes = page.comparisonTable.columns.map((column, index) => ({ column, index })).filter(({ column }) => !((hasUnverifiedPickRatings && /rating|score/i.test(column)) || (hasUnverifiedPickPrices && /price|pricing/i.test(column)))).map(({ index }) => index)
   const visibleComparisonColumns = visibleComparisonColumnIndexes.map((index) => page.comparisonTable.columns[index])
-  const visibleComparisonRows = page.comparisonTable.rows.map((row) => visibleComparisonColumnIndexes.map((index) => stripUnverifiedRatingClaims(String(row[index] ?? ""))))
+  const visibleComparisonRows = page.comparisonTable.rows.map((row) => visibleComparisonColumnIndexes.map((index) => {
+    const value = stripUnverifiedRatingClaims(String(row[index] ?? ""))
+    return hasUnverifiedPickPrices ? stripUnverifiedPriceClaims(value) : value
+  }))
   const reviewHref = (toolSlug: string) => (getReview(toolSlug) ? `/reviews/${toolSlug}` : null)
   const relatedLinks = getRelatedByCategory(page.category, page.slug, 4)
 
@@ -114,7 +129,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">TL;DR</h2>
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-              <li><strong>First listed option:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}{verifiedPickRating(page.picks[0]) !== null ? ` Verified editorial rating: ${verifiedPickRating(page.picks[0])}/5.` : ""} The list order is not a verified ranking.</li>
+              <li><strong>First listed option:</strong> {page.picks[0]?.toolName} — {safePickText(page.picks[0], page.picks[0]?.bestFor ?? "")}{verifiedPickRating(page.picks[0]) !== null ? ` Verified editorial rating: ${verifiedPickRating(page.picks[0])}/5.` : ""} The list order is not a verified ranking.</li>
               <li>{page.picks.length} listed tools with recorded details; compare them using {page.criteria.length} criteria</li>
               <li>Pricing: {safePricingSummary}</li>
               <li>Each pick includes pros, cons, and a best-fit use case</li>
@@ -183,7 +198,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                             </div>
                           )}
                         </div>
-                        <p className="text-sm font-medium text-primary mb-2">{pick.bestFor}</p>
+                        <p className="text-sm font-medium text-primary mb-2">{safePickText(pick, pick.bestFor)}</p>
                         {verifiedPickPrice(pick) !== null ? (
                           <p className="text-xs text-muted-foreground mb-3">Listed pricing: {verifiedPickPrice(pick)}. Verify current plans, limits, and billing terms with the vendor.</p>
                         ) : (
