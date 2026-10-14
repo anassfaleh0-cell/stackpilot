@@ -1048,7 +1048,7 @@ function normalizeIndustryContent(industry: IndustryContent): IndustryContent {
     : trimText(industry.industryOverview, 1600)
 
   const recommendations = industry.recommendations.map((recommendation) => {
-    const riskyClaim = /HIPAA|HITECH|GDPR|FERPA|COPPA|PCI DSS|SOC 2|ISO 27001|certified|compliant|guarantee|top-rated|\\b\\d+(?:\\.\\d+)?%|\\$\\s?\\d/i.test(recommendation.bestFor)
+    const riskyClaim = /HIPAA|HITECH|GDPR|FERPA|COPPA|PCI DSS|SOC 2|ISO 27001|certified|compliant|guarantee|top-rated|\b\d+(?:\.\d+)?%|\$\s?\d/i.test(recommendation.bestFor)
     return {
       ...recommendation,
       bestFor: riskyClaim
@@ -1058,7 +1058,7 @@ function normalizeIndustryContent(industry: IndustryContent): IndustryContent {
   })
 
   const faqs = sanitizeFaqs(industry.faqs).map((faq) => {
-    const riskyClaim = /HIPAA|HITECH|GDPR|FERPA|COPPA|PCI DSS|SOC 2|ISO 27001|AES-256|TLS 1\\.[23]|certified|compliant|guarantee|\\b\\d+(?:\\.\\d+)?%|\\$\\s?\\d+/i.test(faq.answer)
+    const riskyClaim = /HIPAA|HITECH|GDPR|FERPA|COPPA|PCI DSS|SOC 2|ISO 27001|AES-256|TLS 1\.[23]|certified|compliant|guarantee|\b\d+(?:\.\d+)?%|\$\s?\d+/i.test(faq.answer)
     return riskyClaim
       ? {
           ...faq,
