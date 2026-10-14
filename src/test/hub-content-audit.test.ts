@@ -29,7 +29,7 @@ describe("business hub content integrity", () => {
   it("provides a safe healthcare guide without unsupported compliance guarantees", () => {
     const hub = getHub("software-for-healthcare")
     expect(hub).not.toBeNull()
-    expect(hub?.title).toBe("Software for Healthcare organizations: Selection Guide")
+    expect(hub?.title).toBe("Software for Healthcare: Selection Guide")
     expect(hub?.comparisonMatrix.rows.flat().join(" ")).not.toMatch(/HIPAA-compliant platform|AES-256|TLS 1\.2|SOC 2 Type II/i)
   })
 })
