@@ -1201,14 +1201,19 @@ function normalizeStatisticContent(record: StatisticContent): StatisticContent {
   if (hasCompleteSourceAudit) return record
 
   const category = record.category || "Software"
+  const subject = record.title
+    .replace(/\b20\d{2}\b/g, "")
+    .replace(/\s+/g, " ")
+    .replace(/\s+(?:statistics|market data|report|benchmarks?|trends|study)$/i, "")
+    .trim() || `${category} Software`
   const focus = statisticResearchFocus(category)
   return {
     ...record,
-    title: `${category} Software Market Research Guide`,
-    description: `A practical guide to evaluating ${category.toLowerCase()} software. Numeric market estimates are withheld until each claim has a checkable source and documented verification.`,
+    title: `${subject} Market Research Guide`,
+    description: `A practical guide to evaluating ${subject.toLowerCase()}. Numeric market estimates are withheld until each claim has a checkable source and documented verification.`,
     stats: [],
     sections: [
-      { title: `Metrics to assess in ${category} software`, body: focus.metrics, stats: [] },
+      { title: `Metrics to assess in ${subject}`, body: focus.metrics, stats: [] },
       { title: "How to verify market claims", body: "Before relying on a market-size, adoption, productivity, or return-on-investment claim, confirm the original source, publication date, geography, sample, definitions, and calculation method. A source name alone is not evidence: the link must lead to the report or dataset that supports the exact statement. Treat vendor-sponsored research as context and check its methodology before generalizing the result.", stats: [] },
       { title: "Questions to ask before buying", body: focus.questions, stats: [] },
       { title: "Source status and limitations", body: "Older numeric records for this category are undergoing source-provenance review. They are not displayed as verified statistics here. This guide remains available to help buyers evaluate requirements and source quality while claims are checked and direct links are added. Numeric figures can be restored when the source, scope, date, and verification record are complete.", stats: [] },
