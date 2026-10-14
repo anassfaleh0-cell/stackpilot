@@ -1,3 +1,4 @@
+import { stripUnverifiedPriceClaims } from "./review-quality"
 import type { ReviewContent, ComparisonContent, ComparisonFeature, GuideContent, GlossaryContent, BlogContent, CategoryKnowledge, AlternativeContent, UseCaseContent, IndustryContent, ResearchContent, StatisticContent, BestContent, HubContent, FAQItem, ContentSection } from "@/types/content"
 import fs from "node:fs"
 import path from "node:path"
@@ -316,17 +317,18 @@ function sanitizeList(items: string[] | undefined, max = 5): string[] {
 }
 
 function sanitizeReview(review: ReviewContent): ReviewContent {
-  const description = sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.description, 700)))
+  const safePrice = (value: string) => review.priceRangeVerified === true ? value : stripUnverifiedPriceClaims(value)
+  const description = safePrice(sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.description, 700))))
   const safeDescription = description.length >= 50 ? description : `${review.name} is listed in PilotStack’s ${review.category} catalog. Verify current features, pricing, and terms with the vendor.`
   return {
     ...review,
     content: buildReviewSections(review),
     description: safeDescription,
-    tagline: sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.tagline, 220))),
-    pros: sanitizeList(review.pros),
-    cons: sanitizeList(review.cons),
-    features: review.features.map((feature) => ({ ...feature, name: trimText(feature.name, 120), description: sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(feature.description, 360))) })).slice(0, 20),
-    faqs: sanitizeFaqs(review.faqs),
+    tagline: safePrice(sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.tagline, 220)))),
+    pros: sanitizeList(review.pros).map(safePrice),
+    cons: sanitizeList(review.cons).map(safePrice),
+    features: review.features.map((feature) => ({ ...feature, name: trimText(feature.name, 120), description: safePrice(sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(feature.description, 360)))) })).slice(0, 20),
+    faqs: sanitizeFaqs(review.faqs).map((faq) => ({ question: safePrice(faq.question), answer: safePrice(faq.answer) })),
   }
 }
 
