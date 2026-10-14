@@ -129,6 +129,33 @@ async function main() {
 
   for (const route of ROUTES) await checkRoute(route)
 
+  // Validate every sitemap URL with bounded concurrency, not just top-level routes.
+  try {
+    const { response, body } = await fetchText("/sitemap.xml")
+    if (response.ok) {
+      const urls = [...body.matchAll(/<loc>([^<]+)<\\/loc>/g)].map((match) => match[1].trim())
+      const paths = [...new Set(urls.flatMap((url) => {
+        try {
+          const parsed = new URL(url)
+          return parsed.protocol === "https:" && parsed.hostname === "pilotstack.online" ? [parsed.pathname] : []
+        } catch {
+          return []
+        }
+      }))].filter((pathname) => !ROUTES.includes(pathname))
+      let cursor = 0
+      const workerCount = Math.min(12, paths.length)
+      await Promise.all(Array.from({ length: workerCount }, async () => {
+        while (cursor < paths.length) {
+          const pathname = paths[cursor++]
+          await checkRoute(pathname)
+        }
+      }))
+      pass(`Completed sitemap route crawl for ${paths.length} additional unique paths`)
+    }
+  } catch (error) {
+    fail(`sitemap route crawl failed: ${error instanceof Error ? error.message : String(error)}`)
+  }
+
   console.log(`\nSummary: ${passes} passed, ${failures} failed`)
   if (failures) process.exitCode = 1
 }
