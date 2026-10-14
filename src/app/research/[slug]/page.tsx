@@ -69,7 +69,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
                 <section className="mb-10 p-5 rounded-xl border border-primary/20 bg-primary-subtle/10">
                   <div className="flex items-center gap-2 mb-3">
                     <Lightbulb size={16} className="text-primary" />
-                    <h2 className="text-lg font-bold">Key Findings</h2>
+                    <h2 className="text-lg font-bold">Key Guidance</h2>
                   </div>
                   <ul className="space-y-2">
                     {report.keyFindings.map((finding, i) => (
