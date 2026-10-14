@@ -57,6 +57,91 @@ const nextConfig: NextConfig = {
       destination: "/reviews/calendly",
       permanent: true,
     },
+    {
+      source: "/comparisons/auth0-vs-bitbucket",
+      destination: "/reviews/auth0",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/bitwarden-vs-circleci",
+      destination: "/reviews/bitwarden",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/bitwarden-vs-google-analytics",
+      destination: "/reviews/bitwarden",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/canva-vs-cloudflare-pages",
+      destination: "/reviews/canva",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/cloudflare-pages-vs-crowdstrike",
+      destination: "/reviews/crowdstrike",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/cloudflare-pages-vs-copy-ai",
+      destination: "/reviews/copy-ai",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/freshbooks-vs-greenhouse",
+      destination: "/reviews/freshbooks",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/appwrite-vs-chatgpt",
+      destination: "/reviews/chatgpt",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/bitbucket-vs-claude",
+      destination: "/reviews/claude",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/circleci-vs-copilot",
+      destination: "/reviews/copilot",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/crowdstrike-vs-heap",
+      destination: "/reviews/crowdstrike",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/expensify-vs-fullstory",
+      destination: "/reviews/expensify",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/freshbooks-vs-google-analytics",
+      destination: "/reviews/freshbooks",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/freshdesk-vs-google-meet",
+      destination: "/reviews/freshdesk",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/copper-crm-vs-discord",
+      destination: "/reviews/copper-crm",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/gusto-vs-paddle",
+      destination: "/reviews/gusto",
+      permanent: true,
+    },
+    {
+      source: "/comparisons/convertkit-vs-copilot",
+      destination: "/reviews/convertkit",
+      permanent: true,
+    },
   ],
   images: {
     formats: ["image/avif", "image/webp"],
