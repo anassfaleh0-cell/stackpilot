@@ -27,5 +27,8 @@ describe("privacy and cookie disclosures", () => {
     expect(privacy).not.toContain("These are anonymized and do not identify individual visitors.")
     expect(privacy).toContain("sale or sharing")
     expect(privacy).toContain("turn off advertising consent")
+    expect(cookies).toContain("Last updated: October 14, 2026")
+    expect(cookies).not.toContain("Collects anonymized page views")
+    expect(cookies).toContain("we do not promise that every event or identifier is anonymous")
   })
 })
