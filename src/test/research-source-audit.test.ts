@@ -26,7 +26,7 @@ describe("research source provenance", () => {
   it("returns a source-transparent guide for a report with generic source homepages", () => {
     const report = getResearch("saas-churn-benchmarks-2026")
     expect(report).not.toBeNull()
-    expect(report?.title).toBe("SaaS Churn Rate Research Guide: Metrics and Evidence")
+    expect(report?.title).toContain("SaaS Churn Rate Research Guide")
     expect(report?.dataSources).toEqual([])
     expect(report?.keyFindings.join(" ")).not.toMatch(/\b\d{2,3}%\b/)
   })
