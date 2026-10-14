@@ -47,14 +47,15 @@ const GENERATED_REVIEW_SECTION_PATTERNS = [
   /^.+(?:'s|’) primary advantage is .+\. The platform consistently outperforms competitors in reliability and feature depth\./i,
 ]
 
-export function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false): ContentSection[] {
+export function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false, showVerifiedRatings = false): ContentSection[] {
   return content.filter((section) => {
     if (!showVerifiedPricing && section.type === "diagram" && section.body === "pricing-ladder") return false
+    if (!showVerifiedRatings && section.type === "diagram" && section.body === "feature-radar") return false
     if (!showVerifiedPricing && /pricing|plans/i.test(section.title)) return false
     if (HIDDEN_REVIEW_SECTION_TITLES.has(section.title)) return false
     if (GENERATED_REVIEW_SECTION_PATTERNS.some((pattern) => pattern.test(section.body.trim()))) return false
     if (section.type === "diagram") {
-      return ["pricing-ladder", "feature-radar", "implementation-flow"].includes(section.body)
+      return section.body === "implementation-flow" || (section.body === "pricing-ladder" && showVerifiedPricing) || (section.body === "feature-radar" && showVerifiedRatings)
     }
     return true
   })
