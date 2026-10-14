@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const tool = getReview(slug)
   if (!tool) return {}
-  const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true)
+  const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true)
   const wordCount = visibleContent.reduce((a, s) => a + s.body.split(/\s+/).length, 0)
   const noindexed = isNoindexed("reviews", slug)
   return createMetadata({
@@ -60,7 +60,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const companyFacts = resolveCompanyFacts(tool, entity)
   const pros = editorialPros(tool.pros)
   const visibleFaqs = getVisibleReviewFaqs(tool.faqs).slice(0, 8)
-  const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true)
+  const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true)
 
   const authorSlug = tool.author ? tool.author.trim().toLowerCase().replace(/\s+/g, "-") : ""
   const authorHref = authorSlug && authorSlugs.includes(authorSlug) ? `/authors/${authorSlug}` : null
@@ -165,7 +165,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
                   {hasEditorialRating && <li>Editorial rating: {formatScore(tool.rating)}/5{reviewCount !== null ? ` from ${reviewCount.toLocaleString()} recorded reviews` : ""}</li>}
                   <li>Pricing: {tool.priceRangeVerified === true ? `${tool.priceRange} (${tool.pricing})` : "Current plan and regional pricing must be verified directly with the vendor."}</li>
-                  <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : `${tool.name} excels at ${tool.features.filter(f => f.available).slice(0, 2).map(f => f.name.toLowerCase()).join(" and ")}`}</li>
+                  <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : tool.featuresVerified === true && tool.features.some((feature) => feature.available) ? `Recorded strengths include ${tool.features.filter((feature) => feature.available).slice(0, 2).map((feature) => feature.name.toLowerCase()).join(" and ")}; confirm current availability with the vendor.` : `Evaluate ${tool.name} against your workflow requirements and verify current capabilities with the vendor.`}</li>
                   <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `Suitable for most ${tool.category} use cases`}</li>
                   <li>{entity?.useCases?.primary?.slice(0, 2).join(", ") ? `Common use cases: ${entity.useCases.primary.slice(0, 2).join(", ")}` : `Category: ${tool.category}`}</li>
                   {tool.alternatives.length > 0 ? (
@@ -263,7 +263,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                  } value={`${tool.features.filter((f) => f.available).length}`} title="Available Features" description={`Out of ${tool.features.length} total`} />
+                  } value={tool.featuresVerified === true ? `${tool.features.filter((feature) => feature.available).length}` : "Not verified"} title="Feature Profile" description={tool.featuresVerified === true ? `Out of ${tool.features.length} recorded items` : "Feature availability has not been independently verified"} />
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
@@ -301,7 +301,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   {entity.capabilities && (
                     <section className="mb-12 scroll-mt-24" id="capabilities">
                       <h2 className="text-2xl font-bold tracking-tight mb-6">Capabilities</h2>
-                      <p className="text-muted-foreground text-sm mb-4">Feature capabilities and platform functionality offered by {entity.name}.</p>
+                      <p className="text-muted-foreground text-sm mb-4">Recorded feature information for {entity.name}. Verify current availability, plan limits, and integrations with vendor documentation.</p>
                       <CapabilitiesGrid entity={entity} />
                     </section>
                   )}
@@ -415,13 +415,13 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* Feature Breakdown */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Feature Breakdown</h2>
-                <EditorialFeatureMatrix features={tool.features} slug={tool.slug} category={tool.category} />
+                {tool.featuresVerified === true ? <EditorialFeatureMatrix features={tool.features} slug={tool.slug} category={tool.category} /> : <p className="text-sm text-muted-foreground rounded-xl border border-border bg-muted-bg p-4">The feature profile has not been independently verified. Use the vendor documentation to confirm current availability, plan restrictions, integrations, and regional limitations before relying on a capability.</p>}
               </section>
 
               {entity && (
                 <section className="mb-12 scroll-mt-24" id="alternatives">
                   <h2 className="text-2xl font-bold tracking-tight mb-6">How {tool.name} Compares</h2>
-                  <p className="text-muted-foreground text-sm mb-4">Comparison cards generated from this site&apos;s recorded tool profiles. Ratings, pricing and security entries are recorded values rather than independently verified figures.</p>
+                  <p className="text-muted-foreground text-sm mb-4">Comparison cards use recorded tool profiles. Numeric ratings, pricing, feature availability, and security claims are shown only when their source status is documented; otherwise verify details directly with the vendor.</p>
                   <AutoComparison slug={slug} />
                 </section>
               )}
