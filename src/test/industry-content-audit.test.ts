@@ -18,7 +18,7 @@ describe("industry guide content integrity", () => {
       expect(industry.recommendations.length).toBeGreaterThan(0)
 
       for (const recommendation of industry.recommendations) {
-        expect(recommendation.bestFor).not.toMatch(/HIPAA|HITECH|GDPR|FERPA|COPPA|PCI DSS|SOC 2|ISO 27001|certified|compliant|top-rated|\b\d+(?:\.\d+)?%|\$\s?\d/i)
+        expect(recommendation.bestFor).not.toMatch(/HIPAA|HITECH|GDPR|FERPA|COPPA|PCI DSS|SOC 2|ISO 27001|AES-256|TLS 1\\.[23]|certified|compliant|top-rated|\b\d+(?:\.\d+)?%|\$\s?\d/i)
       }
       for (const faq of industry.faqs) {
         expect(faq.answer).not.toMatch(/AES-256|TLS 1\.[23]|\b\d+(?:\.\d+)?%|\$\s?\d/i)
