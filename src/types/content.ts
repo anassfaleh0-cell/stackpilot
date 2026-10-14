@@ -281,8 +281,9 @@ export interface StatisticContent {
   title: string
   description: string
   category: string
-  stats: { value: string; label: string; source: string; sourceUrl?: string }[]
-  sections: { title: string; stats: { value: string; label: string; source: string; sourceUrl?: string }[]; body?: string }[]
+  stats: { value: string; label: string; source: string; sourceUrl?: string; sourceVerified?: boolean }[]
+  sections: { title: string; stats: { value: string; label: string; source: string; sourceUrl?: string; sourceVerified?: boolean }[]; body?: string }[]
+  sourceAuditComplete?: boolean
   publishedAt: string
   updatedAt?: string
   relatedComparisons?: string[]
