@@ -1063,15 +1063,85 @@ export function getAllResearch(): ResearchContent[] {
     .map((f) => { const r = readJson<ResearchContent>(path.join(CONTENT_DIR, "research", f)); return { ...r, sections: sanitizeSections(r.sections), faqs: sanitizeFaqs(r.faqs) } })
 }
 
+function statisticResearchFocus(category: string): { metrics: string; questions: string } {
+  const key = category.toLowerCase()
+  if (/ai|machine learning|mlops/.test(key)) return {
+    metrics: "Assess task-level accuracy, human review time, data handling, model and prompt versioning, integration reliability, and the cost of successful outputs. Separate controlled evaluations from vendor-reported adoption or productivity claims.",
+    questions: "What tasks will the system perform, what evidence shows it performs them reliably, where is human approval required, what data may be retained or used for training, and how will costs change with usage?"
+  }
+  if (/security|privacy|identity|endpoint|cyber|network/.test(key)) return {
+    metrics: "Assess control coverage, alert quality, response workflow, auditability, deployment model, integration with existing identity and logging systems, and the time required to investigate incidents. Security claims need a precise scope and current evidence.",
+    questions: "Which products, regions, and plans are covered by a certification? What logs and evidence can administrators export? Which integrations are native? What is the escalation path during an incident?"
+  }
+  if (/health|medical|dental|pharma|veterinary|biotech/.test(key)) return {
+    metrics: "Assess workflow fit, data interoperability, access controls, audit trails, uptime commitments, retention, and the regulatory obligations relevant to the exact use case. Distinguish clinical or operational outcomes from vendor marketing claims.",
+    questions: "Which standards and jurisdictions are supported? How is sensitive data protected? Can records be exported? What validation, training, and support are required before deployment?"
+  }
+  if (/finance|fintech|insurance|insurtech|accounting|sales analytics/.test(key)) return {
+    metrics: "Assess reconciliation accuracy, audit trails, integration coverage, reporting latency, permissions, exception handling, and the cost of maintaining data quality. ROI claims should state the baseline, time period, sample, and calculation.",
+    questions: "Can every important figure be traced to a source record? How are exceptions reviewed? Which data exports and controls are available on the intended plan? What fees, usage caps, and implementation work are excluded from the headline price?"
+  }
+  if (/marketing|advertising|customer|crm|sales|public relations|pr software/.test(key)) return {
+    metrics: "Assess attribution coverage, consent and preference handling, lead or customer data quality, campaign-to-revenue reporting, integration reliability, and the effort needed to maintain tracking. Adoption and ROI figures are meaningful only with a defined population and measurement window.",
+    questions: "Which channels and regions are included? Can results be reconciled with the source analytics platform? How are consent, deduplication, and attribution windows handled? Which integrations require a higher plan?"
+  }
+  if (/devops|cloud|data|analytics|web|mobile|open source|automation|saas/.test(key)) return {
+    metrics: "Assess workflow compatibility, deployment and maintenance effort, reliability, integration coverage, access controls, data portability, and total operating cost. For performance claims, document the workload and environment rather than relying on an isolated benchmark.",
+    questions: "What is the supported deployment model? Can data and configuration be exported? Which limits apply to usage, storage, or automation? What is required to migrate away if the tool no longer fits?"
+  }
+  if (/education|edtech|learning/.test(key)) return {
+    metrics: "Assess accessibility, learner and administrator workflows, interoperability, data protection, reporting quality, and the time needed for training and support. Outcome claims should identify the population, comparison method, and period measured.",
+    questions: "Which learning standards and systems are supported? What student or staff data is stored? Can administrators export records? What accessibility and support commitments apply to the intended plan?"
+  }
+  if (/hr|recruit|workforce|human resources/.test(key)) return {
+    metrics: "Assess workflow coverage, permissions, audit trails, integrations with payroll and identity systems, data retention, and the effort needed to maintain records. Hiring or retention claims require a clearly defined cohort and time window.",
+    questions: "Which employee records are stored? Can sensitive fields be restricted? How are records exported or deleted? Which integrations, compliance features, and support levels require a paid tier?"
+  }
+  if (/manufactur|construction|agricultur|energy|logistics|transport|supply chain|maritime|mining|automotive|aerospace|environment|clean.?tech|green.?tech/.test(key)) return {
+    metrics: "Assess fit with operational workflows, asset or inventory visibility, integrations with existing systems, offline or field support, reliability, safety requirements, and implementation effort. Market-size estimates should not be used as a proxy for product suitability.",
+    questions: "Which operational systems can exchange data? What happens during an outage or connectivity loss? What training and migration are required? Which safety, regional, or compliance obligations must the vendor document?"
+  }
+  return {
+    metrics: "Assess the workflow being improved, adoption by the intended users, implementation effort, integration coverage, security, reliability, data portability, and total cost. Any market or ROI estimate should be tied to a defined sample, geography, time period, and source.",
+    questions: "What problem must the tool solve? Which evidence supports the claimed benefit? What does the quoted price exclude? How can data be exported, access removed, and the service replaced if requirements change?"
+  }
+}
+
+function normalizeStatisticContent(record: StatisticContent): StatisticContent {
+  const allStats = [
+    ...(record.stats || []),
+    ...(record.sections || []).flatMap((section) => section.stats || []),
+  ]
+  const hasCompleteSourceAudit = record.sourceAuditComplete === true &&
+    allStats.every((stat) => stat.sourceVerified === true && typeof stat.sourceUrl === "string" && /^https?:\\/\\//i.test(stat.sourceUrl))
+  if (hasCompleteSourceAudit) return record
+
+  const category = record.category || "Software"
+  const focus = statisticResearchFocus(category)
+  return {
+    ...record,
+    title: `${category} Software Market Research Guide`,
+    description: `A practical guide to evaluating ${category.toLowerCase()} software. Numeric market estimates are withheld until each claim has a checkable source and documented verification.`,
+    stats: [],
+    sections: [
+      { title: `Metrics to assess in ${category} software`, body: focus.metrics, stats: [] },
+      { title: "How to verify market claims", body: "Before relying on a market-size, adoption, productivity, or return-on-investment claim, confirm the original source, publication date, geography, sample, definitions, and calculation method. A source name alone is not evidence: the link must lead to the report or dataset that supports the exact statement. Treat vendor-sponsored research as context and check its methodology before generalizing the result.", stats: [] },
+      { title: "Questions to ask before buying", body: focus.questions, stats: [] },
+      { title: "Source status and limitations", body: "Older numeric records for this category are undergoing source-provenance review. They are not displayed as verified statistics here. This guide remains available to help buyers evaluate requirements and source quality while claims are checked and direct links are added. Numeric figures can be restored when the source, scope, date, and verification record are complete.", stats: [] },
+    ],
+    updatedAt: "2026-10-15",
+  }
+}
+
 export function getStatistic(slug: string): StatisticContent | null {
   const file = path.join(CONTENT_DIR, "statistics", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<StatisticContent>(file)
+  return normalizeStatisticContent(readJson<StatisticContent>(file))
 }
 
 export function getAllStatistics(): StatisticContent[] {
   return readDir(path.join(CONTENT_DIR, "statistics"))
-    .map((f) => readJson<StatisticContent>(path.join(CONTENT_DIR, "statistics", f)))
+    .map((f) => normalizeStatisticContent(readJson<StatisticContent>(path.join(CONTENT_DIR, "statistics", f))))
 }
 
 export function getBest(slug: string): BestContent | null {
