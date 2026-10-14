@@ -67,7 +67,7 @@ describe("unpublished comparison records", () => {
   })
 
   it("keeps rewritten 1Password vs Fathom Analytics publicly available and indexable", () => {
-    const record = JSON.parse(fs.readFileSync("content/comparisons/1password-vs-fathom.json", "utf8")) as { published?: boolean; publicationStatus?: string; winner?: string | null; winnerVerified?: boolean; featuresVerified?: boolean }
+    const record = JSON.parse(fs.readFileSync("content/comparisons/1password-vs-fathom.json", "utf8")) as { published?: boolean; publicationStatus?: string; tool2?: string; winner?: string | null; winnerVerified?: boolean; featuresVerified?: boolean }
     expect(record.published).toBe(true)
     expect(record.publicationStatus).not.toBe("draft")
     expect(record.tool2).toBe("Fathom Analytics")
