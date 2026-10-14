@@ -34,12 +34,17 @@ function extractInternalLinks(html, pageUrl) {
       const target = new URL(rawHref, pageUrl)
       if (target.origin !== SITE_ORIGIN || target.pathname.startsWith("/_next/") || target.pathname.startsWith("/api/")) continue
       if (target.hash && normalizePath(target.pathname) === normalizePath(new URL(pageUrl).pathname) && !target.search) continue
-      paths.add(normalizePath(target.pathname))
+      paths.add(`${target.origin}${normalizePath(target.pathname)}${target.search}`)
     } catch {
       // Ignore malformed and non-URL href values; report only verifiable internal URLs.
     }
   }
   return paths
+}
+
+function isPaginationUrl(target) {
+  const page = Number(target.searchParams.get("page"))
+  return target.searchParams.has("page") && Number.isInteger(page) && page > 1 && page <= 100
 }
 
 async function fetchWithTimeout(url, options = {}) {
@@ -64,6 +69,7 @@ async function run() {
   const sitemapPaths = new Set(uniqueUrls.map((url) => normalizePath(new URL(url).pathname)))
   const incoming = new Map([...sitemapPaths].map((pathname) => [pathname, 0]))
   const nonSitemapTargets = new Set()
+  const paginationTargets = new Set()
   const failedPages = []
   let cursor = 0
   let completed = 0
@@ -80,9 +86,15 @@ async function run() {
         const contentType = response.headers.get("content-type") || ""
         if (!contentType.includes("text/html")) continue
         const html = await response.text()
-        for (const pathname of extractInternalLinks(html, url)) {
+        for (const href of extractInternalLinks(html, url)) {
+          const target = new URL(href)
+          const pathname = normalizePath(target.pathname)
           if (incoming.has(pathname)) incoming.set(pathname, incoming.get(pathname) + 1)
-          else if (pathname !== "/rss.xml") nonSitemapTargets.add(pathname)
+          if (isPaginationUrl(target)) {
+            paginationTargets.add(target.href)
+            continue
+          }
+          if (!incoming.has(pathname) && pathname !== "/rss.xml") nonSitemapTargets.add(pathname)
         }
       } catch (error) {
         failedPages.push({ url, error: error instanceof Error ? error.message : String(error) })
@@ -93,6 +105,43 @@ async function run() {
   }
 
   await Promise.all(Array.from({ length: CONCURRENCY }, worker))
+
+  // Pagination URLs are intentionally excluded from the sitemap, but they still
+  // expose links to later pages in each directory. Crawl page=N variants so the
+  // incoming-link audit does not mislabel paginated content as weak or orphaned.
+  const paginationQueue = [...paginationTargets]
+  const visitedPagination = new Set()
+  let paginationCursor = 0
+  async function paginationWorker() {
+    while (paginationCursor < paginationQueue.length) {
+      const url = paginationQueue[paginationCursor++]
+      if (visitedPagination.has(url)) continue
+      visitedPagination.add(url)
+      try {
+        const response = await fetchWithTimeout(url)
+        if (!response.ok) {
+          failedPages.push({ url, status: response.status })
+          continue
+        }
+        const contentType = response.headers.get("content-type") || ""
+        if (!contentType.includes("text/html")) continue
+        const html = await response.text()
+        for (const href of extractInternalLinks(html, url)) {
+          const target = new URL(href)
+          const pathname = normalizePath(target.pathname)
+          if (incoming.has(pathname)) incoming.set(pathname, incoming.get(pathname) + 1)
+          if (isPaginationUrl(target)) {
+            if (!visitedPagination.has(target.href)) paginationQueue.push(target.href)
+            continue
+          }
+          if (!incoming.has(pathname) && pathname !== "/rss.xml") nonSitemapTargets.add(pathname)
+        }
+      } catch (error) {
+        failedPages.push({ url, error: error instanceof Error ? error.message : String(error) })
+      }
+    }
+  }
+  await Promise.all(Array.from({ length: CONCURRENCY }, paginationWorker))
 
   const orphanPages = [...incoming].filter(([, count]) => count === 0).map(([pathname]) => pathname)
   const weakPages = [...incoming]
@@ -124,6 +173,7 @@ async function run() {
 
   console.log("[internal-link-audit] Rendered HTML crawl; shared component links are included.")
   console.log("Sitemap URLs:", uniqueUrls.length)
+  console.log("Pagination pages crawled:", visitedPagination.size)
   console.log("Failed sitemap pages:", failedPages.length, JSON.stringify(failedPages.slice(0, 30)))
   console.log("Orphan sitemap pages:", orphanPages.length, JSON.stringify(orphanPages.slice(0, 80)))
   console.log("Pages with only 1-2 incoming links:", weakPages.length, JSON.stringify(weakPages.slice(0, 80)))
