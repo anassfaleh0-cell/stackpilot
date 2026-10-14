@@ -9,6 +9,7 @@ const CONTENT_DIR = path.resolve(process.cwd(), "content")
 // internal-link, and comparison generation revisit the same review profiles thousands of times.
 const reviewCache = new Map<string, ReviewContent | null>()
 const comparisonCache = new Map<string, ComparisonContent | null>()
+let statisticsCache: StatisticContent[] | null = null
 
 const DIR_FOR_TYPE: Record<string, string> = {
   review: "reviews",
@@ -1134,14 +1135,18 @@ function normalizeStatisticContent(record: StatisticContent): StatisticContent {
 }
 
 export function getStatistic(slug: string): StatisticContent | null {
+  const cached = statisticsCache?.find((record) => record.slug === slug)
+  if (cached) return cached
   const file = path.join(CONTENT_DIR, "statistics", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   return normalizeStatisticContent(readJson<StatisticContent>(file))
 }
 
 export function getAllStatistics(): StatisticContent[] {
-  return readDir(path.join(CONTENT_DIR, "statistics"))
+  if (statisticsCache) return statisticsCache
+  statisticsCache = readDir(path.join(CONTENT_DIR, "statistics"))
     .map((f) => normalizeStatisticContent(readJson<StatisticContent>(path.join(CONTENT_DIR, "statistics", f))))
+  return statisticsCache
 }
 
 export function getBest(slug: string): BestContent | null {
