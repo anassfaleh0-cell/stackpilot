@@ -127,6 +127,18 @@ async function main() {
       if (!body.includes("<urlset") || locations.length === 0) {
         fail("/sitemap.xml is not a non-empty URL sitemap")
       } else {
+        const requiredSitemapPaths = [
+          "/reviews/linear",
+          "/comparisons/square-vs-xero",
+          "/comparisons/zoom-vs-webex",
+          "/category/marketing-seo",
+          "/category/developer-tools",
+          "/use-cases/best-seo-for-agencies",
+        ]
+        const missingRequired = requiredSitemapPaths.filter((pathname) => !locations.includes(`https://pilotstack.online${pathname}`))
+        if (missingRequired.length) fail(`/sitemap.xml is missing known landing routes: ${missingRequired.join(", ")}`)
+        else pass("Known GSC landing routes are included in the sitemap")
+
         const duplicates = locations.filter((url, index) => locations.indexOf(url) !== index)
         const invalid = locations.filter((url) => {
           try {
