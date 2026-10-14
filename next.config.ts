@@ -58,11 +58,6 @@ const nextConfig: NextConfig = {
       permanent: true,
     },
     {
-      source: "/comparisons/1password-vs-fathom",
-      destination: "/reviews/fathom",
-      permanent: true,
-    },
-    {
       source: "/comparisons/affinity-vs-wix",
       destination: "/reviews/affinity",
       permanent: true,
