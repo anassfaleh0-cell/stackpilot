@@ -5,7 +5,6 @@ import fs from "node:fs"
 import path from "node:path"
 
 const unpublishedComparisons = [
-  "1password-vs-crowdstrike",
   "1password-vs-fathom",
   "affinity-vs-wix",
   "dialpad-vs-loom",
@@ -55,6 +54,19 @@ const unpublishedComparisons = [
 ]
 
 describe("unpublished comparison records", () => {
+  it("keeps rewritten 1Password vs CrowdStrike publicly available and indexable", () => {
+    const record = JSON.parse(fs.readFileSync("content/comparisons/1password-vs-crowdstrike.json", "utf8")) as { published?: boolean; publicationStatus?: string; winner?: string | null; winnerVerified?: boolean; featuresVerified?: boolean }
+    expect(record.published).toBe(true)
+    expect(record.publicationStatus).not.toBe("draft")
+    expect(record.winner).toBeNull()
+    expect(record.winnerVerified).toBe(false)
+    expect(record.featuresVerified).toBe(false)
+    expect(getComparison("1password-vs-crowdstrike")).not.toBeNull()
+    expect(isContentAvailable("comparison", "1password-vs-crowdstrike")).toBe(true)
+    const config = fs.readFileSync(path.join(process.cwd(), "next.config.ts"), "utf8")
+    expect(config).not.toContain('source: "/comparisons/1password-vs-crowdstrike"')
+  })
+
   it("keeps rewritten 1Password vs Appwrite publicly available and indexable", () => {
     const record = JSON.parse(fs.readFileSync("content/comparisons/1password-vs-appwrite.json", "utf8")) as { published?: boolean; publicationStatus?: string; winner?: string | null; winnerVerified?: boolean; featuresVerified?: boolean }
     expect(record.published).toBe(true)
