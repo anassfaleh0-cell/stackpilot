@@ -12,6 +12,19 @@ import { ArrowRight, ExternalLink, Code } from "lucide-react"
 import { isNoindexed } from "@/lib/noindex"
 import { InFeedAd } from "@/components/ads"
 
+function statisticTopicGroup(category: string): string {
+  const key = category.toLowerCase()
+  if (/security|privacy|identity|cyber|endpoint|network/.test(key)) return "security"
+  if (/marketing|advertising|sales|crm|customer|public relations|pr software/.test(key)) return "marketing"
+  if (/health|medical|dental|pharma|veterinary|biotech/.test(key)) return "health"
+  if (/finance|fintech|insurance|insurtech|accounting/.test(key)) return "finance"
+  if (/hr|recruit|workforce|human resources/.test(key)) return "people"
+  if (/education|edtech|learning/.test(key)) return "education"
+  if (/manufactur|construction|agricultur|energy|logistics|transport|supply chain|maritime|mining|automotive|aerospace|environment|clean.?tech|green.?tech/.test(key)) return "operations"
+  if (/travel|hospitality|retail|e-commerce|food|fitness|sports|music|media|photography|gaming|wellness/.test(key)) return "consumer"
+  return "technology"
+}
+
 export function generateStaticParams() {
   return getAllStatistics().map((item) => ({ slug: item.slug }))
 }
@@ -37,6 +50,9 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const registry = getStatistic(slug)
   if (!registry) notFound()
+  const relatedGuides = getAllStatistics()
+    .filter((item) => item.slug !== slug && statisticTopicGroup(item.category) === statisticTopicGroup(registry.category))
+    .slice(0, 4)
   const page = {
     title: registry.title,
     description: registry.description,
@@ -55,26 +71,25 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
 
   return (
     <>
-      <ArticleSchema title={page.title} description={page.description} publishedAt={registry?.publishedAt || "2026-01-15"} author="PilotStack Team" url={`${site.url}/statistics/${slug}`} />
+      <ArticleSchema title={page.title} description={page.description} publishedAt={registry.publishedAt} author="PilotStack Team" url={`${site.url}/statistics/${slug}`} />
       <WebPageSchema name={page.title} description={page.description} url={`${site.url}/statistics/${slug}`} />
-      <DatasetSchema name={page.title} description={page.description} url={`${site.url}/statistics/${slug}`} datePublished={registry?.publishedAt || undefined} dateModified={registry?.updatedAt || undefined} keywords={[page.title, "software statistics", "market data"]} />
-      <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Statistics", href: "/statistics" }, { name: page.title, href: `/statistics/${slug}` }]} />
+            <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Statistics", href: "/statistics" }, { name: page.title, href: `/statistics/${slug}` }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Statistics", href: "/statistics" }, { name: page.title }]} />
       </Container>
       <Section className="pt-0">
         <Container>
           <div className="max-w-4xl mx-auto">
-            <Badge variant="default" className="mb-4">Research Data</Badge>
+            <Badge variant="default" className="mb-4">Market Research Guide</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">{page.title}</h1>
             <p className="text-lg text-muted-foreground mb-8 text-pretty">{page.description}</p>
 
             <div className="flex items-center gap-2 text-xs text-muted-foreground mb-6 pb-4 border-b border-border">
               <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>
-              <span>Last updated: {page.lastUpdated}</span>
+              <span>Guide updated: {page.lastUpdated}</span>
               <span className="text-border-light">|</span>
               <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
-              <span>{page.sections.reduce((a, s) => a + s.stats.length, 0)} data points</span>
+              <span>Source audit in progress</span>
             </div>
 
             <div className="mb-6 p-3 rounded-lg bg-primary-subtle/10 border border-primary/20 text-xs text-muted-foreground">
@@ -93,7 +108,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
                       ))}
                     </div>
                   ) : null}
-                  <div className="grid sm:grid-cols-2 gap-4">
+                  {section.stats.length > 0 && <div className="grid sm:grid-cols-2 gap-4">
                     {section.stats.map((stat) => (
                       <div key={stat.label} className="rounded-xl border border-border bg-card p-5 hover:border-primary/20 transition-colors">
                         <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">{stat.value}</div>
@@ -103,7 +118,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
                         </a>
                       </div>
                     ))}
-                  </div>
+                  </div>}
                 </section>
                 {i === Math.floor(page.sections.length / 2) - 1 && page.sections.length >= 3 && (
                   <section className="my-10">
@@ -136,9 +151,21 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
               </pre>
             </div>
 
+            <section className="mt-10 mb-10">
+              <h2 className="text-xl font-bold tracking-tight mb-4">Related market research guides</h2>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {relatedGuides.map((guide) => (
+                  <Link key={guide.slug} href={`/statistics/${guide.slug}`} className="rounded-xl border border-border p-4 hover:border-primary/30 hover:bg-muted-bg transition-colors">
+                    <span className="font-medium text-sm">{guide.title}</span>
+                    <p className="text-xs text-muted-foreground mt-1">{guide.description}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+
             <div className="mt-8 text-center">
               <Link href="/statistics" className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
-                View all statistics <ArrowRight size={12} />
+                View all market research guides <ArrowRight size={12} />
               </Link>
             </div>
           </div>
