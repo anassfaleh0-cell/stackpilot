@@ -63,12 +63,12 @@ async function checkRoute(pathname) {
       fail(`${pathname} has no meaningful meta description`)
       return
     }
-    if (!/<link\b(?=[^>]*\brel=["\']canonical["\'])[^>]*>/i.test(body)) {
+    if (!/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>/i.test(body)) {
       fail(`${pathname} has no canonical link`)
       return
     }
-    const robotsMeta = body.match(/<meta\b(?=[^>]*\bname=["\']robots["\'])[^>]*>/i)?.[0] || ""
-    if (/\bcontent=["\'][^"\']*\bnoindex\b/i.test(robotsMeta)) {
+    const robotsMeta = body.match(/<meta\b(?=[^>]*\bname=["']robots["'])[^>]*>/i)?.[0] || ""
+    if (/\bcontent=["'][^"']*\bnoindex\b/i.test(robotsMeta)) {
       fail(`${pathname} is unexpectedly noindex in the built app`)
       return
     }
