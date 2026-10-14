@@ -1056,7 +1056,7 @@ function normalizeIndustryContent(industry: IndustryContent): IndustryContent {
     : trimText(safeIndustry.industryOverview, 1600)
 
   const recommendations = safeIndustry.recommendations.map((recommendation) => {
-    const riskyClaim = /HIPAA|HITECH|GDPR|FERPA|COPPA|PCI DSS|SOC 2|ISO 27001|certified|compliant|guarantee|top-rated|\b\d+(?:\.\d+)?%|\$\s?\d/i.test(recommendation.bestFor)
+    const riskyClaim = /HIPAA|HITECH|GDPR|FERPA|COPPA|PCI DSS|SOC 2|ISO 27001|AES-256|TLS 1\.[23]|certified|compliant|guarantee|top-rated|\b\d+(?:\.\d+)?%|\$\s?\d/i.test(recommendation.bestFor)
     return {
       ...recommendation,
       bestFor: riskyClaim
