@@ -88,7 +88,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
       : null
   const safeDescription = stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(page.description))
   const safeFaqs = page.faqs.map((faq) => ({ question: stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(faq.question)), answer: stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(faq.answer)) }))
-  const hasUnverifiedPickRatings = page.picks.some((pick) => typeof pick.rating === "number" && verifiedPickRating(pick) === null)
+  const hasUnverifiedPickRatings = page.picks.some((pick) => typeof pick.rating === "number" && verifiedPickRating(pick) === null) || (page.comparisonTable.columns.some((column) => /rating|score/i.test(column)) && page.picks.some((pick) => verifiedPickRating(pick) === null))
   const hasUnverifiedPickPrices = page.picks.some((pick) => Boolean(pick.priceRange?.trim()) && verifiedPickPrice(pick) === null) || (page.comparisonTable.columns.some((column) => /price|pricing/i.test(column)) && page.picks.some((pick) => verifiedPickPrice(pick) === null)) || (/[$€£]\s?\d/.test(page.pricingSummary) && page.picks.some((pick) => verifiedPickPrice(pick) === null))
   const safePickText = (pick: (typeof page.picks)[number] | undefined, value: string) => {
     const safeRatingText = stripUnverifiedRatingClaims(value)
