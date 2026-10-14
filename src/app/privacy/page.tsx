@@ -75,7 +75,7 @@ export default function PrivacyPage() {
             <ul>
               <li><strong>Right to know:</strong> Request disclosure of the categories and specific pieces of personal information we have collected about you.</li>
               <li><strong>Right to delete:</strong> Request deletion of personal information we have collected, subject to certain exceptions.</li>
-              <li><strong>Right to opt out:</strong> Opt out of the sale of your personal information. We do not sell personal information, so no action is needed.</li>
+              <li><strong>Right to opt out of sale or sharing:</strong> We do not sell personal information for money. However, some advertising technology can involve disclosure of online identifiers or browsing activity for cross-context behavioral advertising, which may be treated as “sharing” under California law depending on the circumstances. To opt out of advertising-related processing on this site, open Cookie Settings and turn off advertising consent. You may also contact privacy@pilotstack.online to submit a privacy request.</li>
               <li><strong>Right to non-discrimination:</strong> We will not discriminate against you for exercising any of your CCPA rights.</li>
             </ul>
             <p>To exercise your CCPA rights, contact us at privacy@pilotstack.online. We will verify your identity before processing your request.</p>
