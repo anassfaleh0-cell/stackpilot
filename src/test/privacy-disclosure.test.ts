@@ -25,5 +25,7 @@ describe("privacy and cookie disclosures", () => {
   it("does not describe all analytics data as anonymous without qualification", () => {
     const privacy = fs.readFileSync(path.join(root, "privacy", "page.tsx"), "utf8")
     expect(privacy).not.toContain("These are anonymized and do not identify individual visitors.")
+    expect(privacy).toContain("sale or sharing")
+    expect(privacy).toContain("turn off advertising consent")
   })
 })
