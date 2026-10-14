@@ -133,7 +133,7 @@ async function main() {
   try {
     const { response, body } = await fetchText("/sitemap.xml")
     if (response.ok) {
-      const urls = [...body.matchAll(/<loc>([^<]+)<\\/loc>/g)].map((match) => match[1].trim())
+      const urls = [...body.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1].trim())
       const paths = [...new Set(urls.flatMap((url) => {
         try {
           const parsed = new URL(url)
