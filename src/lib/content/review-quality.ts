@@ -86,8 +86,7 @@ const GENERATED_REVIEW_FAQ_PATTERNS = [
 ]
 
 export function getVisibleReviewFaqs(faqs: FAQItem[], showVerifiedPricing = false): FAQItem[] {
-  const safeFaqs = showVerifiedPricing ? faqs : faqs.map((faq) => ({ question: stripUnverifiedPriceClaims(faq.question), answer: stripUnverifiedPriceClaims(faq.answer) }))
-  return safeFaqs.filter((faq) => {
+  const visibleFaqs = faqs.filter((faq) => {
     const question = faq.question.trim()
     const answer = faq.answer.trim()
     if (/^is .+ secure\?$/i.test(question) && /SOC 2 Type II|ISO 27001|FedRAMP|compliance with GDPR|CCPA|HIPAA|PCI DSS/i.test(answer)) return false
@@ -97,4 +96,5 @@ export function getVisibleReviewFaqs(faqs: FAQItem[], showVerifiedPricing = fals
     if (GENERATED_REVIEW_FAQ_PATTERNS.some((pattern) => pattern.test(answer))) return false
     return true
   })
+  return showVerifiedPricing ? visibleFaqs : visibleFaqs.map((faq) => ({ question: stripUnverifiedPriceClaims(faq.question), answer: stripUnverifiedPriceClaims(faq.answer) }))
 }
