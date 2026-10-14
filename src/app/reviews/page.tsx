@@ -30,7 +30,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: Pro
 
   return (
     <>
-      <CollectionPageSchema name="Software Reviews" description="In-depth, unbiased reviews of the best software tools" url={`${site.url}/reviews`} />
+      <CollectionPageSchema name="Software Reviews" description="Software profiles covering use cases, feature fit, pricing context, sources, and limitations" url={`${site.url}/reviews`} />
       <ItemListSchema items={pageTools.map(t => ({ name: t.name, url: `${site.url}/reviews/${t.slug}` }))} url={`${site.url}/reviews`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Reviews", href: "/reviews" }]} />
       <Container className="pt-8">
