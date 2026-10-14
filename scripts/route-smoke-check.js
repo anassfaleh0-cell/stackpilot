@@ -142,7 +142,7 @@ async function main() {
         } catch {
           return []
         }
-      }))].filter((pathname) => !ROUTES.includes(pathname))
+      }))].filter((pathname) => !ROUTES.includes(pathname) && !/\.(?:xml|txt|json|pdf)$/i.test(pathname))
       let cursor = 0
       const workerCount = Math.min(12, paths.length)
       await Promise.all(Array.from({ length: workerCount }, async () => {
