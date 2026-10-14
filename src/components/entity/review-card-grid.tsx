@@ -8,6 +8,7 @@ export interface ReviewCardItem {
   name: string
   category: string
   rating?: number
+  ratingVerified?: boolean
   tagline: string
   priceRange?: string
 }
@@ -21,7 +22,7 @@ export function ReviewCardGrid({ items }: { items: ReviewCardItem[] }) {
             <Card className="h-full flex flex-col">
               <div className="flex items-start justify-between mb-3">
                 <Badge variant="secondary">{tool.category}</Badge>
-                {typeof tool.rating === "number" && Number.isFinite(tool.rating) && (
+                {tool.ratingVerified === true && typeof tool.rating === "number" && Number.isFinite(tool.rating) && (
                   <div className="flex items-center gap-1 text-sm font-medium text-accent">
                     <Star size={14} className="fill-accent text-accent" />
                     {tool.rating}
