@@ -286,6 +286,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   {entity.company && hasCompanyFacts(companyFacts) && (
                     <section className="mb-12 scroll-mt-24" id="company">
                       <h2 className="text-2xl font-bold tracking-tight mb-6">Company Overview</h2>
+                      <p className="text-muted-foreground text-sm mb-4">These are recorded profile facts, not independently verified claims. Confirm founding, ownership, location, and customer information with current primary sources before relying on them.</p>
                       <EntityOverview entity={entity} facts={companyFacts} />
                     </section>
                   )}
@@ -293,7 +294,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   {entity.security && (
                     <section className="mb-12 scroll-mt-24" id="security">
                       <h2 className="text-2xl font-bold tracking-tight mb-6">Security &amp; Compliance</h2>
-                      <p className="text-muted-foreground text-sm mb-4">Security certifications, compliance standards, and data protection measures for {entity.name}.</p>
+                      <p className="text-muted-foreground text-sm mb-4">Recorded security and compliance information for {entity.name}. Verify the exact product, plan, region, certification scope, and contract terms with current vendor documentation before relying on a claim.</p>
                       <SecurityTable entity={entity} />
                     </section>
                   )}
@@ -309,7 +310,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   {entity.useCases && (
                     <section className="mb-12 scroll-mt-24" id="use-cases">
                       <h2 className="text-2xl font-bold tracking-tight mb-6">Use Cases &amp; Fit</h2>
-                      <p className="text-muted-foreground text-sm mb-4">Who {entity.name} is best suited for, common workflows, and typical team profiles.</p>
+                      <p className="text-muted-foreground text-sm mb-4">Recorded use cases and workflow examples for {entity.name}. Validate fit against your own requirements and current vendor documentation.</p>
                       <UseCasePanel entity={entity} />
                     </section>
                   )}
@@ -317,7 +318,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   {entity.integrations && entity.integrations.length > 0 && (
                     <section className="mb-12 scroll-mt-24" id="integrations">
                       <h2 className="text-2xl font-bold tracking-tight mb-6">Integrations</h2>
-                      <p className="text-muted-foreground text-sm mb-4">{entity.name} integrates with {entity.integrations.length} platforms and services.</p>
+                      <p className="text-muted-foreground text-sm mb-4">The recorded profile lists {entity.integrations.length} integrations for {entity.name}. Confirm that the specific connection, sync direction, and required plan are supported before relying on it.</p>
                       <IntegrationDisplay entity={entity} />
                     </section>
                   )}
