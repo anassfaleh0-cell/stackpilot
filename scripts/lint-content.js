@@ -42,7 +42,7 @@ function getVerifiedEntities() {
           const d = new Date(dateMatch[1])
           const now = new Date()
           const daysDiff = (now - d) / (1000 * 60 * 60 * 24)
-          if (daysDiff <= 90) {
+          if (daysDiff >= 0 && daysDiff <= 90) {
             for (let j = i; j >= Math.max(0, i - 80); j--) {
               const slugMatch = lines[j].match(/slug:\s*['"]([^'"]+)['"]/)
               if (slugMatch) {
