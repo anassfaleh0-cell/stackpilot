@@ -1070,7 +1070,7 @@ function normalizeIndustryContent(industry: IndustryContent): IndustryContent {
   })
 
   return {
-    ...industry,
+    ...safeIndustry,
     title: `Software for ${category}: Selection Guide`,
     description: `A practical software selection guide for ${category.toLowerCase()} teams, covering workflow fit, integrations, data protection, implementation, and total cost. Verify product-specific claims with current vendor documentation.`,
     industryOverview,
