@@ -5,6 +5,7 @@ describe("research source provenance", () => {
   it("keeps research URLs useful without presenting unaudited numeric findings as facts", () => {
     const reports = getAllResearch()
     expect(reports.length).toBeGreaterThan(30)
+    expect(new Set(reports.map((record) => record.title)).toHaveProperty("size", reports.length)
 
     for (const report of reports) {
       if (report.sourceAuditComplete === true) continue
