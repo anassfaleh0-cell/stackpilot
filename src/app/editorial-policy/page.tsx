@@ -24,12 +24,12 @@ export default function EditorialPolicyPage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Editorial Standards</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Editorial Policy</h1>
-            <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: October 14, 2026</p>
 
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                PilotStack separates editorial decisions from commercial relationships. Affiliate and advertising relationships are disclosed where applicable and are not intended to determine ratings, rankings, or content decisions. Every page follows a standardized methodology: one recorded source per figure, nine equally weighted category scores, and any fact we cannot source left off the page rather than asserted. We clearly disclose all affiliate relationships and correct errors transparently.
+                PilotStack aims to separate editorial decisions from commercial relationships and disclose affiliate or advertising relationships where applicable. Our methodology explains the evidence standard, but some older numeric scores and review-count figures are still undergoing source-provenance review. A stored figure is not proof that it has been independently verified; consult the source context on each page and the methodology for current limitations.
               </p>
             </div>
 
@@ -37,8 +37,8 @@ export default function EditorialPolicyPage() {
               <h2 className="text-lg font-semibold mb-2">TL;DR</h2>
               <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
                 <li>Editorial criteria are kept separate from commercial disclosures</li>
-                <li>Every published figure traces to a source we hold, or it is left off the page</li>
-                <li>One recorded source per figure, reused everywhere a tool appears</li>
+                <li>New numeric claims should have a checkable source and context; older records are being audited</li>
+                <li>Documented source records should be reused consistently, but consistency alone does not prove a claim is verified</li>
                 <li>Both strengths and limitations addressed in every review</li>
                 <li>Corrections published promptly and transparently</li>
               </ul>
@@ -50,7 +50,7 @@ export default function EditorialPolicyPage() {
                 <li>Commercial relationships are disclosed separately from editorial criteria</li>
                 <li>Ratings and coverage are based on published editorial criteria</li>
                 <li>Content pages expose publication or update dates where those fields are maintained</li>
-                <li>Content more than 12 months old is flagged for review and potential removal</li>
+                <li>Older content is prioritized for review and improvement; age alone is not a reason to remove a useful page</li>
                 <li>We distinguish factual reporting from analysis and opinion throughout</li>
                 <li>Standardized methodology applied consistently across all reviews</li>
                 <li>Third-party user reviews on G2, Capterra and TrustRadius are linked so readers can check independent feedback directly</li>
@@ -70,7 +70,7 @@ export default function EditorialPolicyPage() {
               <h2>2. Content Standards</h2>
               <p>Every piece of content published on PilotStack must meet the following standards:</p>
               <ul>
-                <li><strong>Accuracy:</strong> All published figures must be tied to a source we hold before publication. When accuracy cannot be confirmed, we leave the figure off the page or mark it unverified rather than assert it.</li>
+                <li><strong>Accuracy:</strong> New numeric claims should be tied to a checkable source, date, and relevant context before being described as verified. Some older records remain under source audit; when a claim cannot be confirmed, we correct it, qualify it, or remove the unsupported claim rather than imply verification.</li>
                 <li><strong>Originality:</strong> Our pages are developed from the sources described in our methodology. Vendor-provided material may inform research, but we aim to add editorial context, comparison, and decision guidance rather than republish it as-is.</li>
                 <li><strong>Comprehensiveness:</strong> Reviews must address both strengths and limitations. We explicitly state who each product is best for and who should consider alternatives.</li>
                 <li><strong>Currency:</strong> Content includes publication or update dates where those fields are maintained, and older material is reviewed as part of ongoing maintenance.</li>
@@ -78,11 +78,11 @@ export default function EditorialPolicyPage() {
               </ul>
 
               <h2>3. Review Standards</h2>
-              <p>All software reviews on PilotStack follow a standardized methodology that includes:</p>
+              <p>Our review framework sets a consistent standard for software research. Some older pages may not yet satisfy every evidence requirement while the source audit continues. The framework includes:</p>
               <ul>
-                <li>One recorded source per figure, reused everywhere a tool appears</li>
-                <li>Nine equally weighted category scores on a 1-5 scale, with the overall rating as their mean</li>
-                <li>Facts we cannot source are omitted or marked unverified, never stated as confirmed</li>
+                <li>Documented source records reused consistently where available; a stored value alone is not evidence of provenance</li>
+                <li>Nine equally weighted category dimensions are the intended scoring framework; numeric scores are verified only when their source and calculation can be checked</li>
+                <li>Unsupported facts should be corrected, qualified, or omitted as identified by ongoing audits</li>
                 <li>Third-party user reviews on G2, Capterra and TrustRadius are linked for readers who want independent feedback</li>
                 <li>Documentation of pricing, feature availability, and setup requirements at the time of review</li>
               </ul>
