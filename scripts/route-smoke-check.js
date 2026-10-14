@@ -25,6 +25,10 @@ const ROUTES = [
   "/category/marketing-seo",
   "/category/developer-tools",
   "/use-cases/best-seo-for-agencies",
+  "/statistics/marketing-software",
+  "/research/saas-churn-benchmarks-2026",
+  "/hubs/software-for-healthcare",
+  "/industries/healthcare",
 ]
 
 let failures = 0
@@ -134,6 +138,10 @@ async function main() {
           "/category/marketing-seo",
           "/category/developer-tools",
           "/use-cases/best-seo-for-agencies",
+          "/statistics/marketing-software",
+          "/research/saas-churn-benchmarks-2026",
+          "/hubs/software-for-healthcare",
+          "/industries/healthcare",
         ]
         const missingRequired = requiredSitemapPaths.filter((pathname) => !locations.includes(`https://pilotstack.online${pathname}`))
         if (missingRequired.length) fail(`/sitemap.xml is missing known landing routes: ${missingRequired.join(", ")}`)
