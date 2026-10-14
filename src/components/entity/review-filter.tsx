@@ -14,6 +14,7 @@ interface ReviewFilterProps {
     category: string
     rating?: number
     priceRange?: string
+    priceRangeVerified?: boolean
     pricing?: string
   }>
   category: string
@@ -26,11 +27,13 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
   const [showFilters, setShowFilters] = useState(false)
   const [visible, setVisible] = useState(96)
   const hasVerifiedRatings = reviews.some((r) => typeof r.rating === "number" && Number.isFinite(r.rating))
+  const hasVerifiedPricing = reviews.some((r) => r.priceRangeVerified === true && typeof r.pricing === "string")
 
   const filtered = useMemo(() => {
     return reviews.filter((r) => {
       if (searchQuery && !r.name.toLowerCase().includes(searchQuery.toLowerCase()) && !r.tagline.toLowerCase().includes(searchQuery.toLowerCase())) return false
       if (minRating > 0 && (typeof r.rating !== "number" || r.rating < minRating)) return false
+      if (priceFilter !== "all" && r.priceRangeVerified !== true) return false
       if (priceFilter === "free" && r.pricing !== "Free" && r.pricing !== "Freemium") return false
       if (priceFilter === "paid" && (r.pricing === "Free" || r.pricing === "Freemium")) return false
       return true
@@ -86,7 +89,7 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
             ))}
           </div>}
           {hasVerifiedRatings && <div className="w-px h-5 bg-border" />}
-          <div className="flex items-center gap-2">
+          {hasVerifiedPricing && <div className="flex items-center gap-2">
             <span className="text-xs text-muted-foreground">Pricing:</span>
             {[
               { value: "all", label: "All" },
@@ -101,7 +104,7 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
                 {opt.label}
               </button>
             ))}
-          </div>
+          </div>}
         </div>
       )}
 
@@ -121,7 +124,7 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
                 </div>
                 <CardTitle className="group-hover:text-primary transition-colors">{tool.name}</CardTitle>
                 <CardDescription className="mt-1.5">{tool.tagline}</CardDescription>
-                {tool.priceRange && <p className="text-xs text-muted-foreground mt-2">{tool.priceRange}</p>}
+                {tool.priceRangeVerified === true && tool.priceRange ? <p className="text-xs text-muted-foreground mt-2">{tool.priceRange}</p> : <p className="text-xs text-muted-foreground mt-2">Pricing not verified</p>}
                 <div className="mt-4 pt-4 border-t border-border flex items-center gap-1 text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors mt-auto">
                   Read review <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
                 </div>
