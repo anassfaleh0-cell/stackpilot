@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Blog", href: "/blog" }, { name: post.title, href: `/blog/${slug}` }]} />
-      <BlogPostingSchema title={post.title} description={post.description} publishedAt={post.publishedAt} updatedAt={post.updatedAt} author={post.author} url={`${site.url}/blog/${post.slug}`} wordCount={post.body.replace(/<[^>]*>/g, " ").split(/\\s+/).filter(Boolean).length} />
+      <BlogPostingSchema title={post.title} description={post.description} publishedAt={post.publishedAt} updatedAt={post.updatedAt} author={post.author} url={`${site.url}/blog/${post.slug}`} wordCount={post.body.replace(/<[^>]*>/g, " ").split(/\s+/).filter(Boolean).length} />
       <WebPageSchema name={post.title} description={post.description} url={`${site.url}/blog/${slug}`} mainEntity={{ "@type": "Thing", name: post.tags[0] || post.category, description: post.description }} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Blog", href: "/blog" }, { name: post.title }]} />
