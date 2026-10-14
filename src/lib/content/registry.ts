@@ -1081,9 +1081,10 @@ function researchFocus(subject: string): { metrics: string; questions: string } 
 }
 
 function normalizeResearchContent(record: ResearchContent): ResearchContent {
+  const sources = record.dataSources || []
   const hasCompleteSourceAudit = record.sourceAuditComplete === true &&
-    record.dataSources.length > 0 &&
-    record.dataSources.every((source) => {
+    sources.length > 0 &&
+    sources.every((source) => {
       try {
         const url = new URL(source.url)
         return url.protocol === "https:" && url.pathname.split("/").filter(Boolean).length >= 2
@@ -1103,6 +1104,7 @@ function normalizeResearchContent(record: ResearchContent): ResearchContent {
   const focus = researchFocus(subject)
   return {
     ...record,
+    reportType: "Research guide",
     title: `${subject} Research Guide: Metrics and Evidence`,
     description: `A practical guide to evaluating ${subject.toLowerCase()}, checking source quality, and using market claims responsibly. Numerical findings are withheld until source verification is complete.`,
     keyFindings: [
