@@ -30,5 +30,16 @@ describe("privacy and cookie disclosures", () => {
     expect(cookies).toContain("Last updated: October 14, 2026")
     expect(cookies).not.toContain("Collects anonymized page views")
     expect(cookies).toContain("we do not promise that every event or identifier is anonymous")
+
+    const about = fs.readFileSync(path.join(root, "about", "page.tsx"), "utf8")
+    const editorial = fs.readFileSync(path.join(root, "editorial-policy", "page.tsx"), "utf8")
+    const advertising = fs.readFileSync(path.join(root, "advertising-disclosure", "page.tsx"), "utf8")
+
+    expect(about).toContain("independently operated")
+    expect(about).toContain("Some older numeric scores and review-count figures are still undergoing a source audit")
+    expect(editorial).toContain("Some older records remain under source audit")
+    expect(editorial).not.toContain("Every published figure traces to a source we hold")
+    expect(advertising).toContain("Last updated: October 14, 2026")
+    expect(advertising).not.toContain("The editorial team does not participate in advertising sales")
   })
 })
