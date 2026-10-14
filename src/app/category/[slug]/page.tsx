@@ -73,10 +73,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
     { stage: "decision", content: reviews.map((r) => ({ slug: r.slug, name: r.name, type: "software" })) },
   ].filter((stage) => stage.content.length > 0)
 
-  const smbPick = [...reviews].filter((r) => (r.pricing === "Freemium" || r.pricing === "Free" || r.pricing === "Free Trial") && r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating)).sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
+  const smbPick = [...reviews].filter((r) => r.priceRangeVerified === true && (r.pricing === "Freemium" || r.pricing === "Free" || r.pricing === "Free Trial") && r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating)).sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
   const enterprisePick = comparisons.length > 0 ? comparisons[0] : null
   const aiPick = reviews.find((r) => r.name.toLowerCase().includes("ai") || r.category.toLowerCase().includes("ai"))
-  const freePick = reviews.find((r) => r.pricing === "Free" || r.pricing === "Freemium")
+  const freePick = reviews.find((r) => r.priceRangeVerified === true && (r.pricing === "Free" || r.pricing === "Freemium"))
   // Keep category pages useful without generating enormous static HTML from the full corpus.
   const displayedReviews = reviews.filter((r) => r.slug !== bestPick?.slug).slice(0, 48)
   const displayedComparisons = comparisons.slice(0, 48)
@@ -390,7 +390,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                 <Link href="/reviews" className="text-sm text-primary hover:underline hidden sm:inline-flex items-center gap-1">View all <ArrowRight size={12} /></Link>
               </div>
               {reviews.length > 0 ? (
-                <ReviewFilter reviews={displayedReviews.map(r => ({ slug: r.slug, name: r.name, tagline: r.tagline, category: r.category, rating: r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating) ? r.rating : undefined, priceRange: r.priceRange, pricing: r.pricing }))} category={category.name} />
+                <ReviewFilter reviews={displayedReviews.map(r => ({ slug: r.slug, name: r.name, tagline: r.tagline, category: r.category, rating: r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating) ? r.rating : undefined, priceRange: r.priceRangeVerified === true ? r.priceRange : undefined, priceRangeVerified: r.priceRangeVerified === true, pricing: r.priceRangeVerified === true ? r.pricing : undefined }))} category={category.name} />
               ) : (
                 <div className="text-center py-16">
                   <p className="text-muted-foreground">No reviews yet in this category. Check back soon.</p>
