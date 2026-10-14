@@ -1113,7 +1113,7 @@ function normalizeStatisticContent(record: StatisticContent): StatisticContent {
     ...(record.sections || []).flatMap((section) => section.stats || []),
   ]
   const hasCompleteSourceAudit = record.sourceAuditComplete === true &&
-    allStats.every((stat) => stat.sourceVerified === true && typeof stat.sourceUrl === "string" && /^https?:\\/\\//i.test(stat.sourceUrl))
+    allStats.every((stat) => stat.sourceVerified === true && typeof stat.sourceUrl === "string" && /^https?:\/\//i.test(stat.sourceUrl))
   if (hasCompleteSourceAudit) return record
 
   const category = record.category || "Software"
