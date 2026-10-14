@@ -11,6 +11,7 @@ export interface ReviewCardItem {
   ratingVerified?: boolean
   tagline: string
   priceRange?: string
+  priceRangeVerified?: boolean
 }
 
 export function ReviewCardGrid({ items }: { items: ReviewCardItem[] }) {
@@ -31,7 +32,7 @@ export function ReviewCardGrid({ items }: { items: ReviewCardItem[] }) {
               </div>
               <CardTitle className="group-hover:text-primary transition-colors">{tool.name}</CardTitle>
               <CardDescription className="mt-1.5">{tool.tagline}</CardDescription>
-              {tool.priceRange && <p className="text-xs text-muted-foreground mt-2">{tool.priceRange}</p>}
+              {tool.priceRangeVerified === true && tool.priceRange && <p className="text-xs text-muted-foreground mt-2">{tool.priceRange}</p>}
               <div className="mt-4 pt-4 border-t border-border flex items-center gap-1 text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors mt-auto">
                 Read review <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
               </div>
