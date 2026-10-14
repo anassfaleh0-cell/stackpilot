@@ -47,8 +47,19 @@ const GENERATED_REVIEW_SECTION_PATTERNS = [
   /^.+(?:'s|’) primary advantage is .+\. The platform consistently outperforms competitors in reliability and feature depth\./i,
 ]
 
+export function stripUnverifiedPriceClaims(value: string): string {
+  return value
+    .replace(/(?:starting at|starts at|from)?\\s*[$€£]\\s?\\d[\\d,]*(?:\\.\\d+)?(?:\\s*\\/\\s*(?:user|seat|month|year|mo|yr))?/gi, "pricing not independently verified")
+    .replace(/\\s{2,}/g, " ")
+    .replace(/\\s+([,.;:])/g, "$1")
+    .trim()
+}
+
 export function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false, showVerifiedRatings = false): ContentSection[] {
-  return content.filter((section) => {
+  const safeContent = showVerifiedPricing
+    ? content
+    : content.map((section) => ({ ...section, body: stripUnverifiedPriceClaims(section.body) }))
+  return safeContent.filter((section) => {
     if (!showVerifiedPricing && section.type === "diagram" && section.body === "pricing-ladder") return false
     if (!showVerifiedRatings && section.type === "diagram" && section.body === "feature-radar") return false
     if (!showVerifiedPricing && /pricing|plans/i.test(section.title)) return false
@@ -73,8 +84,9 @@ const GENERATED_REVIEW_FAQ_PATTERNS = [
   /^.+ is secure with SOC 2 Type II, ISO 27001, FedRAMP certifications\./i,
 ]
 
-export function getVisibleReviewFaqs(faqs: FAQItem[]): FAQItem[] {
-  return faqs.filter((faq) => {
+export function getVisibleReviewFaqs(faqs: FAQItem[], showVerifiedPricing = false): FAQItem[] {
+  const safeFaqs = showVerifiedPricing ? faqs : faqs.map((faq) => ({ question: stripUnverifiedPriceClaims(faq.question), answer: stripUnverifiedPriceClaims(faq.answer) }))
+  return safeFaqs.filter((faq) => {
     const question = faq.question.trim()
     const answer = faq.answer.trim()
     if (/^is .+ secure\?$/i.test(question) && /SOC 2 Type II|ISO 27001|FedRAMP|compliance with GDPR|CCPA|HIPAA|PCI DSS/i.test(answer)) return false
