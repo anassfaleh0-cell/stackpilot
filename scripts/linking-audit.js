@@ -34,6 +34,7 @@ function extractInternalLinks(html, pageUrl) {
       const target = new URL(rawHref, pageUrl)
       if (target.origin !== SITE_ORIGIN || target.pathname.startsWith("/_next/") || target.pathname.startsWith("/api/")) continue
       if (target.hash && normalizePath(target.pathname) === normalizePath(new URL(pageUrl).pathname) && !target.search) continue
+      target.hash = ""
       paths.add(`${target.origin}${normalizePath(target.pathname)}${target.search}`)
     } catch {
       // Ignore malformed and non-URL href values; report only verifiable internal URLs.
