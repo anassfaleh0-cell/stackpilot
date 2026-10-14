@@ -268,7 +268,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                     </svg>
-                  } value={tool.pricing} title="Pricing Model" />
+                  } value={tool.priceRangeVerified === true ? tool.pricing : "Not verified"} title="Pricing Model" />
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <circle cx="12" cy="12" r="10" />
@@ -482,7 +482,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 {(companyFacts.founded || companyFacts.headquarters || companyFacts.customers || companyFacts.employeeCount || companyFacts.pricingModel || (companyFacts.deployment && companyFacts.deployment.length > 0) || companyFacts.apiAvailable !== undefined || companyFacts.migrationComplexity) && (
                   <GlassCard>
                     <div className="p-4">
-                      <h3 className="font-semibold mb-3 text-sm">Company Details</h3>
+                      <h3 className="font-semibold mb-1 text-sm">Recorded Company Details</h3>
+                      <p className="text-[11px] text-muted-foreground mb-3">These profile fields are recorded dataset values, not independently verified facts. Confirm important details with the vendor.</p>
                       <div className="space-y-2 text-xs text-muted-foreground">
                         {companyFacts.founded && <p>Founded: <span className="text-foreground">{companyFacts.founded}</span></p>}
                         {companyFacts.headquarters && <p>HQ: <span className="text-foreground">{companyFacts.headquarters}</span></p>}
