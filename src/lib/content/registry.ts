@@ -1044,7 +1044,7 @@ function normalizeIndustryContent(industry: IndustryContent): IndustryContent {
   }
 
   const category = safeIndustry.industry || "Industry"
-  const unsafeOverview = /<[^>]+>|solutions evaluated|our comprehensive analysis|we evaluated|we tested|industry-leading analysis/i.test(safeIndustry.industryOverview || "")
+  const unsafeOverview = /<[^>]+>|solutions evaluated|our comprehensive analysis|we evaluated|we tested|industry-leading analysis|\b\d+(?:\.\d+)?%|\$\s?\d|\b\d{2,}\+?\s+(?:companies|organizations|vendors|solutions|tools)\b/i.test(safeIndustry.industryOverview || "")
   const industryOverview = unsafeOverview
     ? `${category} teams need software that fits their operational workflows, data requirements, integrations, and budget. Start by mapping the work that must improve, the people who will use the system, and the risks that must be controlled. Then verify product capabilities and plan limits against current vendor documentation rather than relying on broad market claims.`
     : trimText(safeIndustry.industryOverview, 1600)
