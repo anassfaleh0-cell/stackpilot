@@ -50,9 +50,17 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const registry = getStatistic(slug)
   if (!registry) notFound()
-  const relatedGuides = getAllStatistics()
-    .filter((item) => item.slug !== slug && statisticTopicGroup(item.category) === statisticTopicGroup(registry.category))
-    .slice(0, 4)
+  const allGuides = getAllStatistics()
+  const topicGuides = allGuides.filter((item) => statisticTopicGroup(item.category) === statisticTopicGroup(registry.category))
+  const following = (items: typeof allGuides, count: number) => {
+    const currentIndex = items.findIndex((item) => item.slug === slug)
+    if (currentIndex < 0 || items.length < 2) return []
+    return Array.from({ length: Math.min(count, items.length - 1) }, (_, index) => items[(currentIndex + index + 1) % items.length])
+  }
+  const relatedGuides = [
+    ...following(topicGuides, 2),
+    ...following(allGuides, 4),
+  ].filter((item, index, items) => item.slug !== slug && items.findIndex((candidate) => candidate.slug === item.slug) === index).slice(0, 4)
   const page = {
     title: registry.title,
     description: registry.description,
