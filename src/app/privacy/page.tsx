@@ -29,7 +29,7 @@ export default function PrivacyPage() {
             <ul>
               <li><strong>Information you provide:</strong> Name and email address when you subscribe to our newsletter, submit a contact form, or respond to a survey.</li>
               <li><strong>Information collected automatically:</strong> Page visits, referral source, browser type, device type, and approximate geographic region via analytics cookies. We do not collect precise location data or fingerprint your device.</li>
-              <li><strong>Information we do not collect:</strong> We never collect payment information, government IDs, sensitive personal data, or browsing history outside our domain.</li>
+              <li><strong>Information we do not request:</strong> Our forms are not designed to collect payment information, government IDs, or sensitive personal data. Please do not submit this information. If you send it inadvertently, contact us so we can review the request.</li>
             </ul>
 
             <h2>How We Use Your Information</h2>
@@ -53,8 +53,8 @@ export default function PrivacyPage() {
             <h2>Data Retention</h2>
             <p>We retain your personal information only as long as necessary:</p>
             <ul>
-              <li>Newsletter subscriber data is retained until you unsubscribe, at which point it is deleted within 30 days.</li>
-              <li>Contact form submissions are retained for 12 months and then deleted.</li>
+              <li>Newsletter subscriber information is handled by our email service provider while you remain subscribed. Deletion timing after unsubscribe depends on the provider's processing and backup-retention practices.</li>
+              <li>Contact messages are retained only as needed to respond, handle follow-up, and meet applicable recordkeeping obligations. Retention can also depend on the email or support systems used to receive them.</li>
               <li>Analytics retention depends on the service and configuration described in this policy.</li>
             </ul>
 
@@ -84,7 +84,7 @@ export default function PrivacyPage() {
             <p>We implement appropriate technical and organizational measures to protect your personal data, including:</p>
             <ul>
               <li>Encryption in transit is used for site traffic through the hosting and network infrastructure.</li>
-              <li>Encryption at rest for any stored personal data</li>
+              <li><strong>Storage protections:</strong> Data stored by third-party services is subject to the security controls and configuration of those providers. We review their available security documentation and limit access to systems under our control.</li>
               <li>Regular security reviews of our infrastructure and dependencies</li>
               <li>Access controls limiting data access to authorized personnel only</li>
             </ul>
