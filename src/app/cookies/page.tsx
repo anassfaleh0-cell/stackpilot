@@ -22,7 +22,7 @@ export default function CookiesPage() {
         <Container>
           <div className="max-w-3xl mx-auto prose prose-slate">
             <h1 className="text-4xl font-bold tracking-tight mb-6">Cookie Policy</h1>
-            <p className="text-muted-foreground"><em>Last updated: July 19, 2026</em></p>
+            <p className="text-muted-foreground"><em>Last updated: October 15, 2026</em></p>
 
             <p>This Cookie Policy explains how PilotStack ("we", "us", "our") uses cookies and similar tracking technologies on our website. It supplements our <a href="/privacy">Privacy Policy</a> and explains what cookies are, why we use them, and how you can control their use.</p>
 
@@ -33,11 +33,12 @@ export default function CookiesPage() {
             <h2>Cookies We Use</h2>
             <p>We minimize cookie usage to what is strictly necessary for site operation and basic analytics. We use a cookie consent banner that lets you control which categories of cookies are enabled.</p>
 
-            <h3>Essential Cookies</h3>
-            <p>These cookies are necessary for the website to function and cannot be disabled. They are set automatically when you access our site and do not store any personally identifiable information.</p>
+            <h3>Essential Browser Storage</h3>
+            <p>We use browser local storage to remember display and consent choices. These entries are not cookies and can be removed by clearing site data, which may reset your preferences.</p>
             <ul>
-              <li><strong>Theme preference:</strong> Stores your light/dark mode preference in local storage. No expiration — persists until you change your preference or clear site data.</li>
-                          </ul>
+              <li><strong>Theme preference:</strong> Stores your light/dark mode preference in local storage until you change it or clear site data.</li>
+              <li><strong>Consent preferences:</strong> Stores your choices for optional analytics and advertising so the site can apply them on later visits.</li>
+            </ul>
 
             <h3>Analytics Cookies</h3>
             <p>We use analytics tools, including Google Analytics and Microsoft Clarity, to understand how visitors interact with our site. These services may process usage and device information according to their own privacy policies and are loaded only after analytics consent. Google Tag Manager is loaded only after both analytics and advertising preferences are enabled, so its third-party tags are not requested before those choices are made.</p>
@@ -50,7 +51,6 @@ export default function CookiesPage() {
             <p>Some third-party services we use may set their own cookies:</p>
             <ul>
               <li><strong>Google AdSense:</strong> If you consent to advertising cookies, Google AdSense may use cookies to serve personalized ads based on your browsing history. You can opt out via <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a> or <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener">www.aboutads.info</a>.</li>
-              <li><strong>Vercel Analytics:</strong> Edge network analytics — privacy-friendly, cookie-less by default for basic metrics.</li>
               <li><strong>Monetization scripts:</strong> Our ad and affiliate partners may set cookies to track impressions and clicks. These are third-party controlled and their use is governed by their respective privacy policies. Third-party partners may have their own privacy and consent requirements, which are described in their respective policies.</li>
             </ul>
 
