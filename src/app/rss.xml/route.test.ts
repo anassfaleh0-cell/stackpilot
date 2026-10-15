@@ -35,8 +35,8 @@ describe("RSS feed", () => {
       const url = new URL(match[1])
       const [, route, slug] = url.pathname.split("/")
       const type = ROUTE_TYPES[route]
-      expect(type, \`unexpected RSS route: \${url.pathname}\`).toBeDefined()
-      expect(isContentAvailable(type, slug), \`RSS item points to unavailable content: \${url.pathname}\`).toBe(true)
+      if (!type || !slug) throw new Error("unexpected RSS route: " + url.pathname)
+      expect(isContentAvailable(type, slug), "RSS item points to unavailable content: " + url.pathname).toBe(true)
     }
   })
 
