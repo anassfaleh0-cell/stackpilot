@@ -49,7 +49,8 @@ const staticPages: MetadataRoute.Sitemap = [
 export default function sitemap(): MetadataRoute.Sitemap {
   // Derive actual lastModified dates from content for content pages
   const reviews = getAllReviews().filter((r) => isQuality(r.slug, "reviews"))
-  const comparisons = getAllComparisons().filter((c) => isQuality(c.slug, "comparisons"))
+  // Keep retired/draft comparison records out of the sitemap even if an upstream registry changes.
+  const comparisons = getAllComparisons().filter((c) => c.publicationStatus !== "draft" && isQuality(c.slug, "comparisons"))
   const guides = getAllGuides().filter((g) => isQuality(g.slug, "guides"))
   const blogPosts = getAllBlogPosts().filter((p) => isQuality(p.slug, "blog"))
   const glossary = getAllGlossaryTerms().filter((t) => isQuality(t.slug, "glossary"))
