@@ -48,7 +48,7 @@ export default function HomePage() {
         <Container className="relative py-24 sm:py-32 lg:py-40">
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-6 animate-fade-in">
-              <span className="trust-badge">Independent reviews since 2024</span>
+              <span className="trust-badge">Practical software research, clearly explained</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.02] mb-6 text-balance">
               Navigate your{" "}
