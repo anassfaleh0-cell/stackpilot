@@ -40,9 +40,9 @@ export async function POST(request: Request) {
       return Response.redirect(new URL("/?error=invalid-email#newsletter", request.url))
     }
 
-    console.log("[Newsletter] Subscribe:", { email: cleanEmail, ip: ip.replace(/\.\d+$/, ".0") })
-
-    return Response.redirect(new URL("/?subscribed=true#newsletter", request.url))
+    // This endpoint has no mailing-list provider configured. Do not log the address
+    // or imply that a subscription was saved when no subscription system received it.
+    return Response.redirect(new URL("/?error=newsletter-unavailable#newsletter", request.url))
   } catch {
     return Response.redirect(new URL("/?error=server-error#newsletter", request.url))
   }
