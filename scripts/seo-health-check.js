@@ -19,7 +19,6 @@ import path from "node:path"
 
 const SITE_URL = "https://pilotstack.online"
 const CONTENT_DIR = path.resolve(process.cwd(), "content")
-const NOINDEX_FILE = path.resolve(process.cwd(), "noindex-list.json")
 
 let totalIssues = 0
 let totalWarnings = 0
@@ -178,7 +177,6 @@ function checkContentQuality() {
     const dir = path.join(CONTENT_DIR, ct.dir)
     const files = readDir(dir)
     let thinCount = 0
-    let noindexCount = 0
     let missingDescription = 0
     let missingFaq = 0
     let genericTemplateCount = 0
@@ -317,7 +315,7 @@ function checkContentQuality() {
       }
     }
 
-    const eligibleRecords = files.length - noindexCount
+    const eligibleRecords = files.length
     if (thinCount > 0 && eligibleRecords > 0) {
       const pct = ((thinCount / eligibleRecords) * 100).toFixed(1)
       log("warn", ct.dir + ": " + thinCount + "/" + eligibleRecords + " eligible source records have fewer than " + ct.minWords + " words in audited fields [" + pct + "%]. This is a source-data signal, not a rendered-page word count; runtime-derived copy is not measured. Samples: " + JSON.stringify(thinSamples.slice(0, 8)))
