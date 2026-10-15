@@ -183,7 +183,7 @@ for (const dir of dirs) {
       ? Object.fromEntries(Object.entries(data).filter(([key]) => key !== "body"))
       : validationData
     const validationRaw = JSON.stringify(lintData)
-    const malformedLinks = (validationRaw.match(/<a\\b[^>]*<a\\b/gi) || []).length + (validationRaw.match(/href="[^"]*<a\\b/gi) || []).length
+    const malformedLinks = (validationRaw.match(/<a\b[^>]*<a\b/gi) || []).length + (validationRaw.match(/href="[^"]*<a\b/gi) || []).length
     if (malformedLinks > 0) {
       console.error("  ERROR: " + malformedLinks + " malformed nested <a> link pattern(s)")
       fileErrors += malformedLinks
