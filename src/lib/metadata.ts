@@ -43,7 +43,8 @@ export function createMetadata({
   const fullTitle = truncateAtWordBoundary(title, 60)
   const fullDescription = truncateAtWordBoundary(description, 160)
 
-  const follow = noFollow ?? true
+  // `noFollow` is an opt-out flag: only disable link following when explicitly requested.
+  const follow = !noFollow
 
   return {
     title: fullTitle,

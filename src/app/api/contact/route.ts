@@ -86,12 +86,55 @@ export async function POST(request: Request) {
     }
 
     const { name, email, subject, message } = validation.data!
+    const apiKey = process.env.RESEND_API_KEY
+    const from = process.env.CONTACT_FROM_EMAIL
+    const to = process.env.CONTACT_TO_EMAIL || "hello@pilotstack.online"
 
-    console.log("[Contact] Submission:", JSON.stringify({
-      name, email, subject, messageLength: message.length, ip: ip.replace(/\.\d+$/, ".0"),
-    }))
+    // Never report success unless a delivery provider has actually accepted the message.
+    // The page provides a direct email fallback when these optional settings are absent.
+    if (!apiKey || !from) {
+      return new Response(JSON.stringify({
+        error: "Contact form delivery is not configured yet. Please email hello@pilotstack.online directly.",
+      }), {
+        status: 503,
+        headers: {
+          "Content-Type": "application/json",
+          "X-RateLimit-Remaining": String(remaining),
+        },
+      })
+    }
 
-    return new Response(JSON.stringify({ success: true, message: "Message received! We'll get back to you within 48 hours." }), {
+    let delivery: Response
+    try {
+      delivery = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from,
+          to: [to],
+          reply_to: email,
+          subject: `[PilotStack contact] ${subject}`,
+          text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\n${message}`,
+        }),
+      })
+    } catch {
+      return new Response(JSON.stringify({ error: "Message delivery failed. Please email hello@pilotstack.online directly." }), {
+        status: 502,
+        headers: { "Content-Type": "application/json", "X-RateLimit-Remaining": String(remaining) },
+      })
+    }
+
+    if (!delivery.ok) {
+      return new Response(JSON.stringify({ error: "Message delivery failed. Please email hello@pilotstack.online directly." }), {
+        status: 502,
+        headers: { "Content-Type": "application/json", "X-RateLimit-Remaining": String(remaining) },
+      })
+    }
+
+    return new Response(JSON.stringify({ success: true, message: "Message accepted for delivery. We'll reply to your email address." }), {
       status: 200,
       headers: {
         "Content-Type": "application/json",

@@ -4,6 +4,8 @@ import { Container, Section } from "@/components/ui/container"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { categories } from "@/lib/constants"
+import { countByCategory } from "@/lib/category-counts"
+import { NewsletterStatus } from "@/components/pages/newsletter-status"
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms, getAllResearch, isContentAvailable } from "@/lib/content/registry"
 import { ArrowRight, Star, BarChart3, Shield, BookOpen, FileText } from "lucide-react"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
@@ -18,6 +20,7 @@ export const metadata = createMetadata({
 
 export default function HomePage() {
   const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug))
+  const reviewCountByCategory = countByCategory(reviews)
   const comparisons = getAllComparisons()
   const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug))
   const posts = getAllBlogPosts()
@@ -46,7 +49,7 @@ export default function HomePage() {
         <Container className="relative py-24 sm:py-32 lg:py-40">
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-6 animate-fade-in">
-              <span className="trust-badge">Independent reviews since 2024</span>
+              <span className="trust-badge">Practical software research, clearly explained</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.02] mb-6 text-balance">
               Navigate your{" "}
@@ -258,7 +261,7 @@ export default function HomePage() {
               <Link key={cat.slug} href={`/category/${cat.slug}`} className="group card-hover-lift">
                 <Card className="flex items-center justify-between p-4">
                   <span className="font-medium text-sm">{cat.name}</span>
-                  <span className="text-xs text-muted-foreground tabular-nums">{cat.count}</span>
+                  <span className="text-xs text-muted-foreground tabular-nums">{reviewCountByCategory.get(cat.name) ?? 0}</span>
                 </Card>
               </Link>
             ))}
@@ -457,6 +460,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className="mx-auto max-w-md">
+            <NewsletterStatus />
             <form action="/api/newsletter" method="POST" className="flex gap-3">
               <input
                 type="email"

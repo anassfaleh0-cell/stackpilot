@@ -99,7 +99,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
       <section className="relative overflow-hidden border-b border-border">
         <BrandPattern variant="grid" opacity={0.25} className="text-primary" />
         <Container className="relative py-12 sm:py-16">
-          <Badge variant="default" className="mb-4">{category.count} Tools Reviewed</Badge>
+          <Badge variant="default" className="mb-4">{reviews.length} available reviews</Badge>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
             Best {category.name} Software 2026
           </h1>
@@ -109,7 +109,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             </p>
           ) : (
             <p className="text-lg text-muted-foreground max-w-2xl text-pretty">
-              Our selected picks for the best {category.name.toLowerCase()} tools. Each reviewed and rated by our team.
+              Browse {category.name.toLowerCase()} software and compare available product details, pricing, and fit.
             </p>
           )}
         </Container>
