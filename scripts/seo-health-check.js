@@ -142,14 +142,6 @@ function checkRobots() {
 function checkContentQuality() {
   console.log("\n\x1b[1m3. Content Quality (Thin Content Detection)\x1b[0m")
 
-  const noindexData = readJson(NOINDEX_FILE)
-  const noindexSets = {}
-  if (noindexData?.directories) {
-    for (const [dir, data] of Object.entries(noindexData.directories)) {
-      noindexSets[dir] = new Set(data.noindex || [])
-    }
-  }
-
   // Comparison pages render a concise evidence profile from each linked review.
   // Include only the fields actually shown there so the audit does not call a
   // page thin solely because that copy lives in the linked review record.
@@ -198,12 +190,6 @@ function checkContentQuality() {
       if (!data) continue
 
       const slug = file.replace(".json", "")
-      const isNoindexed = noindexSets[ct.dir]?.has(slug)
-
-      if (isNoindexed) {
-        noindexCount++
-        continue
-      }
 
       const searchableContent = JSON.stringify(data)
       const matchingGenericPatterns = genericTemplatePatterns.filter((pattern) => pattern.test(searchableContent))
@@ -361,31 +347,21 @@ function checkContentQuality() {
 function checkNoindex() {
   console.log("\n\x1b[1m4. Noindex Management\x1b[0m")
 
-  const noindexData = readJson(NOINDEX_FILE)
-  if (!noindexData) {
-    log("fail", "noindex-list.json not found or invalid")
+  // The legacy manifest is not the runtime source of truth: isNoindexed() is
+  // intentionally disabled so content is improved in place rather than hidden.
+  // Audit every content record above, and warn if someone reactivates the old
+  // manifest-based behavior without updating this diagnostic.
+  const noindexImplementationPath = path.resolve(process.cwd(), "src/lib/noindex.ts")
+  if (!fs.existsSync(noindexImplementationPath)) {
+    log("fail", "src/lib/noindex.ts not found; cannot verify indexability policy")
     return
   }
 
-  const summary = noindexData.summary
-  if (summary) {
-    const ratio = ((summary.totalNoindex / summary.totalFiles) * 100).toFixed(1)
-    log("info", `Noindex ratio: ${summary.totalNoindex}/${summary.totalFiles} files (${ratio}%)`)
-
-    if (parseFloat(ratio) > 80) {
-      log("warn", `High noindex ratio (${ratio}%) - many pages may not be indexed by search engines`)
-    } else {
-      log("pass", "Noindex ratio is within acceptable range")
-    }
-  }
-
-  // Check each directory
-  for (const [dir, data] of Object.entries(noindexData.directories || {})) {
-    if (data.stats) {
-      if (data.stats.thinContent > 0) {
-        log("warn", `${dir}: ${data.stats.thinContent} thin content pages (avg ${data.stats.avgWords} words)`)
-      }
-    }
+  const implementation = fs.readFileSync(noindexImplementationPath, "utf-8")
+  if (/export function isNoindexed\([^)]*\): boolean\s*\{\s*return false\s*\}/.test(implementation)) {
+    log("pass", "Legacy noindex manifest does not suppress content; all records remain eligible for quality audits")
+  } else {
+    log("warn", "Indexability policy is no longer the expected always-indexable setting; inspect src/lib/noindex.ts and update this audit before using legacy manifest counts")
   }
 }
 
