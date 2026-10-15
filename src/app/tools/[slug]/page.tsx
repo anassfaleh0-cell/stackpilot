@@ -116,7 +116,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
                 ) : (
                   <>
                     <p>When comparing software, create a weighted scorecard based on your specific priorities. List your top 5-7 evaluation criteria, assign weights that reflect their importance (features 25%, pricing 20%, ease of use 20%, support 15%, integrations 10%, security 10%), then rate each tool on a 1-5 scale for each criterion. The weighted total reveals which tool best fits your needs.</p>
-                    <p>Focus your comparison on the features your team will actually use daily, not every feature the vendor offers. Read our <Link href="/guides/how-to-choose-crm-software" className="text-primary hover:underline">software selection guide</Link> for a step-by-step evaluation framework, or browse <Link href="/comparisons" className="text-primary hover:underline">head-to-head comparisons</Link> of specific tools.</p>
+                    <p>Focus your comparison on the features your team will actually use daily, not every feature the vendor offers. Read our <Link href="/methodology" className="text-primary hover:underline">review methodology</Link> for the criteria and evidence standard, or browse <Link href="/comparisons" className="text-primary hover:underline">head-to-head comparisons</Link> of specific tools.</p>
                   </>
                 )}
               </div>
