@@ -178,7 +178,7 @@ for (const dir of dirs) {
     const raw = JSON.stringify(data)
     const validationData = data
     const validationRaw = raw
-    const malformedLinks = (raw.match(/<a href="[^"]*">\s*<a href=/gi) || []).length
+    const malformedLinks = (raw.match(/<a\b[^>]*<a\b/gi) || []).length + (raw.match(/href="[^"]*<a\b/gi) || []).length
     if (malformedLinks > 0) {
       console.error("  ERROR: " + malformedLinks + " malformed nested <a> link pattern(s)")
       fileErrors += malformedLinks
