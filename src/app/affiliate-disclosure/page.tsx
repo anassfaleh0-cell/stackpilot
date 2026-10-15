@@ -23,7 +23,7 @@ export default function AffiliateDisclosurePage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Transparency</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Affiliate Disclosure</h1>
-            <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: October 14, 2026</p>
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">
@@ -31,7 +31,7 @@ export default function AffiliateDisclosurePage() {
               </p>
 
               <h2>How Affiliate Links Work</h2>
-              <p>When you click on an affiliate link on PilotStack and make a purchase, we may earn a commission at no additional cost to you. These commissions help us maintain and improve our content, pay our team of researchers and writers, and keep our reviews free for all readers.</p>
+              <p>When you click on an affiliate link on PilotStack and make a purchase, we may earn a commission at no additional cost to you. These commissions may help support site hosting, operations, research, and content maintenance. Our content remains available to readers without a purchase requirement.</p>
 
               <h2>Our Commitment to Independence</h2>
               <p>Affiliate relationships are not intended to determine our editorial content:</p>
@@ -49,18 +49,17 @@ export default function AffiliateDisclosurePage() {
                 <li>"Visit Website" buttons on review pages</li>
                 <li>Tool and service recommendations within comparison pages</li>
                 <li>Links to vendor websites in guides and blog posts</li>
-                <li>Product links in our newsletter (where clearly marked)</li>
+                <li>Newsletter links, if included in future emails, where clearly marked</li>
               </ul>
               <p>Not all outbound links on PilotStack are affiliate links. Links to documentation, educational resources, and non-commercial sources are not monetized.</p>
 
               <h2>Affiliate Programs</h2>
-                <p>PilotStack participates in affiliate programs including, but not limited to:</p>
+                <p>PilotStack may participate in affiliate programs such as:</p>
               <ul>
-                <li>Vendor-specific affiliate programs (HubSpot, Salesforce, Asana, and others we review)</li>
-                <li>Aggregator affiliate networks</li>
-                <li>Platform referral programs</li>
+                <li>Direct vendor affiliate programs, where an agreement is in place</li>
+                <li>Affiliate networks and platform referral programs</li>
               </ul>
-              <p>This list may change as we add or remove affiliate partnerships. Our disclosure and editorial methodology apply across affiliate relationships.</p>
+              <p>Not every vendor we review has an affiliate relationship with PilotStack. Specific commercial relationships may change over time; we disclose affiliate links where they appear and apply the same editorial criteria regardless of whether a link is monetized.</p>
 
               <h2>No Impact on Pricing</h2>
               <p>Using our affiliate links does not affect the price you pay for any product or service. The commission is paid by the vendor from their marketing budget, not from any customer premium.</p>
