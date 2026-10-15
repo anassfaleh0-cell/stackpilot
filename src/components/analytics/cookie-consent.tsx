@@ -48,11 +48,15 @@ function injectGAScript() {
   s.onload = () => {
     if (typeof window.gtag === "function") {
       window.gtag("js", new Date())
+      // The Analytics component sends the first page view after this event.
+      // Disabling the automatic view here prevents duplicate page-view events.
       window.gtag("config", GA_ID, {
-        send_page_view: true,
+        send_page_view: false,
         anonymize_ip: true,
         link_attribution: true,
       })
+      s.dataset.ready = "true"
+      window.dispatchEvent(new Event("pilotstack:analytics-ready"))
     }
   }
   document.head.appendChild(s)
