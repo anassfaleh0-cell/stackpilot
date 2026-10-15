@@ -77,6 +77,18 @@ const nextConfig: NextConfig = {
       destination: "/best/:slug",
       permanent: true,
     },
+    // Retire legacy individual-author URLs that no longer have matching public
+    // author profiles; consolidate them on the current, transparent editorial team page.
+    {
+      source: "/authors/priya-sharma",
+      destination: "/authors/pilotstack-team",
+      permanent: true,
+    },
+    {
+      source: "/authors/sarah-mitchell",
+      destination: "/authors/pilotstack-team",
+      permanent: true,
+    },
     {
       source: "/reviews/calndly",
       destination: "/reviews/calendly",
