@@ -4,6 +4,7 @@ import { Container, Section } from "@/components/ui/container"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { categories } from "@/lib/constants"
+import { countByCategory } from "@/lib/category-counts"
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms, getAllResearch, isContentAvailable } from "@/lib/content/registry"
 import { ArrowRight, Star, BarChart3, Shield, BookOpen, FileText } from "lucide-react"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
@@ -18,10 +19,7 @@ export const metadata = createMetadata({
 
 export default function HomePage() {
   const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug))
-  const reviewCountByCategory = new Map<string, number>()
-  for (const review of reviews) {
-    reviewCountByCategory.set(review.category, (reviewCountByCategory.get(review.category) ?? 0) + 1)
-  }
+  const reviewCountByCategory = countByCategory(reviews)
   const comparisons = getAllComparisons()
   const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug))
   const posts = getAllBlogPosts()
