@@ -38,7 +38,7 @@ export default function EditorialIndependencePage() {
                   { title: "No Vendor Approval", body: "Vendors do not review or approve our content before publication. Our reviews are written for our readers, not for the companies we evaluate." },
                   { title: "No Paid Editorial Outcomes", body: "Advertisers, sponsors, and affiliate partners do not purchase editorial ratings or rankings. Commercial relationships are disclosed where applicable." },
                   { title: "No Review Copies", body: "Access arrangements can vary by product. Where access, pricing, or promotional relationships could affect how a page is interpreted, relevant context is disclosed." },
-                  { title: "Transparent Disclosure", body: "We clearly disclose all affiliate relationships, sponsored content, and partnerships. Sponsored content is clearly labeled and never included in our comparison reviews." },
+                  { title: "Transparent Disclosure", body: "We disclose affiliate links where they appear. If sponsored content or other paid partnerships are introduced, they will be clearly labeled and kept distinct from independent reviews and comparisons." },
                   { title: "Reader First", body: "Every editorial decision is made with our readers' interests as the primary consideration. If we cannot recommend a product honestly, we say so plainly." },
                 ].map((principle) => (
                   <div key={principle.title} className="p-4 rounded-xl bg-muted-bg">
@@ -60,8 +60,8 @@ export default function EditorialIndependencePage() {
               <h2>Revenue Sources</h2>
               <p>PilotStack may earn revenue from the following sources. The presence or availability of a commercial relationship does not mean every reviewed vendor is a partner:</p>
               <ul>
-                <li><strong>Affiliate commissions:</strong> We earn commissions when readers purchase products through our affiliate links. No editorial influence.</li>
-                <li><strong>Display advertising:</strong> Banner advertisements in designated slots. No editorial influence.</li>
+                <li><strong>Affiliate commissions:</strong> PilotStack may earn commissions when readers purchase products through disclosed affiliate links. These relationships do not entitle partners to favorable ratings or rankings.</li>
+                <li><strong>Display advertising:</strong> Ads may appear in designated placements. Advertisers do not purchase editorial ratings or rankings.</li>
                 <li><strong>Potential sponsored content:</strong> If introduced, paid content will be clearly labeled and kept distinct from independent reviews and comparisons.</li>
                 <li><strong>Potential newsletter sponsorships:</strong> If introduced, sponsored placements will be clearly marked before readers engage with them.</li>
               </ul>
