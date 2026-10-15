@@ -18,6 +18,10 @@ export const metadata = createMetadata({
 
 export default function HomePage() {
   const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug))
+  const reviewCountByCategory = new Map<string, number>()
+  for (const review of reviews) {
+    reviewCountByCategory.set(review.category, (reviewCountByCategory.get(review.category) ?? 0) + 1)
+  }
   const comparisons = getAllComparisons()
   const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug))
   const posts = getAllBlogPosts()
@@ -258,7 +262,7 @@ export default function HomePage() {
               <Link key={cat.slug} href={`/category/${cat.slug}`} className="group card-hover-lift">
                 <Card className="flex items-center justify-between p-4">
                   <span className="font-medium text-sm">{cat.name}</span>
-                  <span className="text-xs text-muted-foreground tabular-nums">{cat.count}</span>
+                  <span className="text-xs text-muted-foreground tabular-nums">{reviewCountByCategory.get(cat.name) ?? 0}</span>
                 </Card>
               </Link>
             ))}
