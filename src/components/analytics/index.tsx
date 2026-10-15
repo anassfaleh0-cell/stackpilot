@@ -19,17 +19,31 @@ export function Analytics() {
   const pathname = usePathname()
 
   useEffect(() => {
-    if (!GA_ID || typeof window.gtag !== "function") return
-    window.gtag("config", GA_ID, {
-      page_path: pathname,
-      page_location: window.location.href,
-      page_title: document.title,
-    })
+    const sendPageView = () => {
+      const script = document.getElementById("ga-gtag")
+      if (!GA_ID || script?.dataset.ready !== "true" || typeof window.gtag !== "function") return
+      window.gtag("config", GA_ID, {
+        page_path: pathname,
+        page_location: window.location.href,
+        page_title: document.title,
+        send_page_view: true,
+      })
+    }
+
+    // Consent-gated script loading may happen after the first render.
+    // Send a page view only when the script is ready, including after consent is granted.
+    sendPageView()
+    window.addEventListener("pilotstack:analytics-ready", sendPageView)
+    return () => window.removeEventListener("pilotstack:analytics-ready", sendPageView)
   }, [pathname])
 
   useEffect(() => {
     if (typeof window === "undefined") return
     const handler = (e: MouseEvent) => {
+      const script = document.getElementById("ga-gtag")
+      // The global gtag stub exists before consent, so check readiness explicitly
+      // to avoid queuing analytics events before the visitor opts in.
+      if (script?.dataset.ready !== "true" || typeof window.gtag !== "function") return
       const target = e.target as HTMLElement
       const link = target.closest("a")
       if (!link?.href) return
