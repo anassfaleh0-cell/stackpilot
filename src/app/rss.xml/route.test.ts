@@ -10,7 +10,11 @@ const ROUTE_TYPES = {
   research: "research",
 } as const
 
-describe("RSS feed", () => {\n  it("prevents literal CDATA terminators from corrupting XML", () => {\n    expect(escapeCdata("before]]>after")).toBe("before]]]]><![CDATA[>after")\n  })\n
+describe("RSS feed", () => {
+  it("prevents literal CDATA terminators from corrupting XML", () => {
+    expect(escapeCdata("before]]>after")).toBe("before]]]]><![CDATA[>after")
+  })
+
   it("returns a cacheable RSS 2.0 document with the expected content type", async () => {
     const response = await GET()
     const xml = await response.text()
