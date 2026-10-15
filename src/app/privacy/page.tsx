@@ -27,8 +27,8 @@ export default function PrivacyPage() {
             <h2>Information We Collect</h2>
             <p>We collect only the information necessary to provide and improve PilotStack:</p>
             <ul>
-              <li><strong>Information you provide:</strong> Name and email address when you subscribe to our newsletter, submit a contact form, or respond to a survey.</li>
-              <li><strong>Information collected automatically:</strong> Page visits, referral source, browser type, device type, and approximate geographic region via analytics cookies. We do not collect precise location data or fingerprint your device.</li>
+              <li><strong>Information you provide:</strong> Name and email address when you subscribe to our newsletter or submit a contact form. Please avoid including sensitive personal information in messages.</li>
+              <li><strong>Information collected automatically:</strong> Depending on your consent choices and enabled services, analytics or advertising providers may process page visits, referral source, browser and device information, online identifiers, and approximate geographic region. PilotStack does not request precise location data from visitors.</li>
               <li><strong>Information we do not request:</strong> Our forms are not designed to collect payment information, government IDs, or sensitive personal data. Please do not submit this information. If you send it inadvertently, contact us so we can review the request.</li>
             </ul>
 
