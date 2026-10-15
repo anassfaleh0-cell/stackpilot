@@ -116,9 +116,38 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               ))}
 
               <section className="mb-10">
+                <h2 className="text-2xl font-bold tracking-tight mb-4">Compare the shortlist</h2>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  Use this shortlist as a starting point, not a universal ranking. Match each product to a specific workflow in {ind.industry}, then verify current capabilities, regional availability, security documentation, integrations, and contract terms with the vendor before purchase.
+                </p>
+                <div className="overflow-x-auto rounded-xl border border-border">
+                  <table className="w-full text-sm">
+                    <thead className="bg-muted/50 text-left">
+                      <tr>
+                        <th scope="col" className="p-3 font-semibold">Product</th>
+                        <th scope="col" className="p-3 font-semibold">Category</th>
+                        <th scope="col" className="p-3 font-semibold">Best-fit use</th>
+                        <th scope="col" className="p-3 font-semibold">Recorded rating</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {ind.recommendations.map((rec) => (
+                        <tr key={rec.toolSlug} className="border-t border-border align-top">
+                          <td className="p-3 font-medium"><Link href={`/reviews/${rec.toolSlug}`} className="text-primary hover:underline">{rec.toolName}</Link></td>
+                          <td className="p-3">{rec.category}</td>
+                          <td className="p-3 text-muted-foreground">{rec.bestFor}</td>
+                          <td className="p-3 whitespace-nowrap">{rec.rating}/5</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section className="mb-10">
                 <h2 className="text-2xl font-bold tracking-tight mb-4">Industry buying checklist</h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  For {ind.industry} teams, the shortlist should be tested against the operational requirements recorded on this page rather than against a generic feature count. Start with {ind.softwareNeeds.slice(0, 3).join(", ") || "the core workflow requirements"} and then compare how each recommended product fits the actual people, processes, data, and integrations involved.
+                  For {ind.industry} teams, prioritize {ind.softwareNeeds.slice(0, 3).join(", ") || "the core workflow requirements"}. Score each shortlisted product against the workflows your team actually runs, required integrations, access controls, data retention, reporting, implementation effort, and support. Record any requirement that needs a workaround and test it before signing a contract.
                 </p>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <GlassCard>
