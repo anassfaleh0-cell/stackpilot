@@ -18,7 +18,7 @@ import { PaginationNav } from "@/components/ui/pagination-nav"
 
 export const metadata = createMetadata({
   title: "Software Reviews",
-  description: "In-depth, unbiased reviews of the best software tools. Expert analysis, real user feedback, and detailed feature comparisons.",
+  description: "Structured software profiles with recorded features, published pricing where available, and consistent criteria to compare options.",
   path: "/reviews",
 })
 
