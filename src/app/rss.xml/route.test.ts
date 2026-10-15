@@ -27,7 +27,7 @@ describe("RSS feed", () => {
   it("only publishes item URLs backed by available content records", async () => {
     const response = await GET()
     const xml = await response.text()
-    const itemLinks = [...xml.matchAll(/<item>[\\s\\S]*?<link>(https?:\\/\\/[^<]+)<\\/link>[\\s\\S]*?<\\/item>/g)]
+    const itemLinks = [...xml.matchAll(/<item>[\s\S]*?<link>(https?:\/\/[^<]+)<\/link>[\s\S]*?<\/item>/g)]
 
     expect(itemLinks.length).toBeGreaterThan(0)
 
