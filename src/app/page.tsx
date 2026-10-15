@@ -5,6 +5,7 @@ import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { categories } from "@/lib/constants"
 import { countByCategory } from "@/lib/category-counts"
+import { NewsletterStatus } from "@/components/pages/newsletter-status"
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms, getAllResearch, isContentAvailable } from "@/lib/content/registry"
 import { ArrowRight, Star, BarChart3, Shield, BookOpen, FileText } from "lucide-react"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
@@ -459,6 +460,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className="mx-auto max-w-md">
+            <NewsletterStatus />
             <form action="/api/newsletter" method="POST" className="flex gap-3">
               <input
                 type="email"
