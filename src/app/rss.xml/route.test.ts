@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { GET } from "@/app/rss.xml/route"
+import { escapeCdata, GET } from "@/app/rss.xml/route"
 import { isContentAvailable } from "@/lib/content/registry"
 
 const ROUTE_TYPES = {
@@ -10,7 +10,7 @@ const ROUTE_TYPES = {
   research: "research",
 } as const
 
-describe("RSS feed", () => {
+describe("RSS feed", () => {\n  it("prevents literal CDATA terminators from corrupting XML", () => {\n    expect(escapeCdata("before]]>after")).toBe("before]]]]><![CDATA[>after")\n  })\n
   it("returns a cacheable RSS 2.0 document with the expected content type", async () => {
     const response = await GET()
     const xml = await response.text()
