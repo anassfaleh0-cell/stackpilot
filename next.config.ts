@@ -60,6 +60,23 @@ const nextConfig: NextConfig = {
       destination: "https://pilotstack.online/:path*",
       permanent: true,
     },
+    // Legacy plural route names surfaced in Search Console. The singular routes
+    // and matching content records exist in this repository.
+    {
+      source: "/blogs/:slug",
+      destination: "/blog/:slug",
+      permanent: true,
+    },
+    {
+      source: "/glossarys/:slug",
+      destination: "/glossary/:slug",
+      permanent: true,
+    },
+    {
+      source: "/bests/:slug",
+      destination: "/best/:slug",
+      permanent: true,
+    },
     {
       source: "/reviews/calndly",
       destination: "/reviews/calendly",
