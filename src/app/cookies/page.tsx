@@ -63,11 +63,11 @@ export default function CookiesPage() {
               <li>Measuring the effectiveness of our content and site structure</li>
               <li>Detecting and preventing technical issues</li>
             </ul>
-            <p>We never use cookie data for:</p>
+            <p>We do not intentionally use cookie data for the following purposes outside the specific services and consent choices described above. Third-party providers may process data under their own terms and configurations:</p>
             <ul>
-              <li>Building user profiles for commercial purposes beyond what AdSense provides with your consent</li>
+              <li>Using analytics cookie data to make eligibility or similarly significant decisions about individual visitors</li>
               <li>Selling or sharing data with data brokers</li>
-              <li>Cross-site tracking or fingerprinting outside of consented advertising</li>
+              <li>Deliberate device fingerprinting by PilotStack</li>
             </ul>
 
             <h2>Cookie Duration</h2>
