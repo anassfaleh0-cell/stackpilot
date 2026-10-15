@@ -109,7 +109,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             </p>
           ) : (
             <p className="text-lg text-muted-foreground max-w-2xl text-pretty">
-              Our selected picks for the best {category.name.toLowerCase()} tools. Each reviewed and rated by our team.
+              Browse {category.name.toLowerCase()} software and compare available product details, pricing, and fit.
             </p>
           )}
         </Container>
