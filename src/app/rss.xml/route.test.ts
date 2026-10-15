@@ -2,13 +2,13 @@ import { describe, expect, it } from "vitest"
 import { GET } from "@/app/rss.xml/route"
 import { isContentAvailable } from "@/lib/content/registry"
 
-const ROUTE_TYPES: Record<string, string> = {
+const ROUTE_TYPES = {
   reviews: "review",
   comparisons: "comparison",
   guides: "guide",
   blog: "blog",
   research: "research",
-}
+} as const
 
 describe("RSS feed", () => {
   it("returns a cacheable RSS 2.0 document with the expected content type", async () => {
