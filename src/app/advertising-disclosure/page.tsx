@@ -35,11 +35,11 @@ export default function AdvertisingDisclosurePage() {
               <ul>
                 <li><strong>Display advertising:</strong> Banner advertisements placed in designated ad slots. These are clearly marked as advertisements and are not related to editorial content.</li>
                 <li><strong>Sponsored content:</strong> If we accept a paid content partnership in the future, the page will be clearly labeled as “Sponsored” or “Promoted” before readers engage with it. Paid placement will not be represented as an independent review or silently alter editorial conclusions.</li>
-                <li><strong>Newsletter sponsorships:</strong> Sponsored placements in our email newsletter are clearly marked as sponsorships.</li>
+                <li><strong>Potential newsletter sponsorships:</strong> If introduced, sponsored placements in email will be clearly marked as sponsorships.</li>
               </ul>
 
               <h2>Separation of Editorial and Advertising</h2>
-              <p>We maintain strict separation between editorial and advertising operations:</p>
+              <p>We apply the published editorial criteria independently of ad placements and disclose commercial relationships where applicable:</p>
               <ul>
                 <li>Advertisers do not buy a favorable rating or control an editorial conclusion.</li>
                 <li>PilotStack is independently operated; commercial relationships are disclosed and should not be treated as evidence that a product is the best choice.</li>
@@ -48,7 +48,7 @@ export default function AdvertisingDisclosurePage() {
               </ul>
 
               <h2>Sponsored Content Standards</h2>
-              <p>Sponsored content on PilotStack must meet the following standards:</p>
+              <p>If sponsored content is introduced, it must meet the following standards:</p>
               <ul>
                 <li>Clearly labeled as "Sponsored" or "Promoted" at the top of the page</li>
                 <li>Reviewed against the site’s published editorial and disclosure standards before publication</li>
