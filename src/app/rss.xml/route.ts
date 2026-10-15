@@ -14,7 +14,7 @@ export async function GET() {
     <item>
       <title>${escapeXml(r.name)} Review (2026): Pricing, Features, Pros &amp; Cons</title>
       <description>${escapeXml(r.description)}</description>
-      <content:encoded><![CDATA[<p>${escapeXml(r.description)}</p><p>Read the full review at ${site.url}/reviews/${r.slug}</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>${escapeHtml(r.description)}</p><p>Read the full review at ${site.url}/reviews/${r.slug}</p>]]></content:encoded>
       <link>${site.url}/reviews/${r.slug}</link>
       <guid isPermaLink="true">${site.url}/reviews/${r.slug}</guid>
       <pubDate>${new Date(r.contentPublished).toUTCString()}</pubDate>
@@ -31,7 +31,7 @@ export async function GET() {
     <item>
       <title>${escapeXml(c.title)}</title>
       <description>${escapeXml(c.description)}</description>
-      <content:encoded><![CDATA[<p>${escapeXml(c.description)}</p><p>Read the full comparison at ${site.url}/comparisons/${c.slug}</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>${escapeHtml(c.description)}</p><p>Read the full comparison at ${site.url}/comparisons/${c.slug}</p>]]></content:encoded>
       <link>${site.url}/comparisons/${c.slug}</link>
       <guid isPermaLink="true">${site.url}/comparisons/${c.slug}</guid>
       <pubDate>${new Date(c.lastUpdated).toUTCString()}</pubDate>
@@ -47,7 +47,7 @@ export async function GET() {
     <item>
       <title>${escapeXml(g.title)}</title>
       <description>${escapeXml(g.description)}</description>
-      <content:encoded><![CDATA[<p>${escapeXml(g.description)}</p><p>Read the full guide at ${site.url}/guides/${g.slug}</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>${escapeHtml(g.description)}</p><p>Read the full guide at ${site.url}/guides/${g.slug}</p>]]></content:encoded>
       <link>${site.url}/guides/${g.slug}</link>
       <guid isPermaLink="true">${site.url}/guides/${g.slug}</guid>
       <pubDate>${new Date(g.lastUpdated).toUTCString()}</pubDate>
@@ -63,7 +63,7 @@ export async function GET() {
     <item>
       <title>${escapeXml(post.title)}</title>
       <description>${escapeXml(post.description)}</description>
-      <content:encoded><![CDATA[<p>${escapeXml(post.description)}</p><p>Read the full article at ${site.url}/blog/${post.slug}</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>${escapeHtml(post.description)}</p><p>Read the full article at ${site.url}/blog/${post.slug}</p>]]></content:encoded>
       <link>${site.url}/blog/${post.slug}</link>
       <guid isPermaLink="true">${site.url}/blog/${post.slug}</guid>
       <pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>
@@ -80,7 +80,7 @@ export async function GET() {
     <item>
       <title>${escapeXml(r.title)}</title>
       <description>${escapeXml(r.description)}</description>
-      <content:encoded><![CDATA[<p>${escapeXml(r.description)}</p><p>Read the full research report at ${site.url}/research/${r.slug}</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>${escapeHtml(r.description)}</p><p>Read the full research report at ${site.url}/research/${r.slug}</p>]]></content:encoded>
       <link>${site.url}/research/${r.slug}</link>
       <guid isPermaLink="true">${site.url}/research/${r.slug}</guid>${pubDate ? `
       <pubDate>${new Date(pubDate).toUTCString()}</pubDate>` : ""}
@@ -125,6 +125,14 @@ export async function GET() {
       "X-Content-Type-Options": "nosniff",
     },
   })
+}
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
 }
 
 function escapeXml(s: string): string {
