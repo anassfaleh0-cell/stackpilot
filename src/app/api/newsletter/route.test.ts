@@ -21,7 +21,7 @@ describe("newsletter signup", () => {
     const response = await POST(request)
     const location = response.headers.get("location")
 
-    expect(response.status).toBe(307)
+    expect(response.status).toBe(302)
     expect(location).toContain("error=newsletter-unavailable")
     expect(location).not.toContain("subscribed=true")
     expect(log).not.toHaveBeenCalled()
