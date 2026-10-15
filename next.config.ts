@@ -277,7 +277,7 @@ const nextConfig: NextConfig = {
       source: "/comparisons/claude-vs-fullstory",
       destination: "/reviews/claude",
       permanent: true,
-    }
+    },
     {
       source: "/reviews/calndly",
       destination: "/reviews/calendly",
