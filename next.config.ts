@@ -52,6 +52,232 @@ const nextConfig: NextConfig = {
   compress: true,
   generateEtags: true,
   redirects: async () => [
+
+    {
+      source: "/comparisons/affinity-vs-wix",
+      destination: "/reviews/affinity",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/dialpad-vs-loom",
+      destination: "/reviews/dialpad",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/adp-vs-airtable",
+      destination: "/reviews/airtable",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/clickup-vs-gusto",
+      destination: "/reviews/clickup",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/ahrefs-vs-claude",
+      destination: "/reviews/ahrefs",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/copy-ai-vs-heap",
+      destination: "/reviews/copy-ai",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/cal-com-vs-discord",
+      destination: "/reviews/cal-com",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/auth0-vs-bitbucket",
+      destination: "/reviews/auth0",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/bitwarden-vs-circleci",
+      destination: "/reviews/bitwarden",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/bitwarden-vs-google-analytics",
+      destination: "/reviews/bitwarden",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/canva-vs-cloudflare-pages",
+      destination: "/reviews/canva",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/cloudflare-pages-vs-crowdstrike",
+      destination: "/reviews/crowdstrike",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/cloudflare-pages-vs-copy-ai",
+      destination: "/reviews/copy-ai",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/freshbooks-vs-greenhouse",
+      destination: "/reviews/freshbooks",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/appwrite-vs-chatgpt",
+      destination: "/reviews/chatgpt",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/bitbucket-vs-claude",
+      destination: "/reviews/claude",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/circleci-vs-copilot",
+      destination: "/reviews/copilot",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/crowdstrike-vs-heap",
+      destination: "/reviews/crowdstrike",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/expensify-vs-fullstory",
+      destination: "/reviews/expensify",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/freshbooks-vs-google-analytics",
+      destination: "/reviews/freshbooks",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/freshdesk-vs-google-meet",
+      destination: "/reviews/freshdesk",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/copper-crm-vs-discord",
+      destination: "/reviews/copper-crm",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/gusto-vs-paddle",
+      destination: "/reviews/gusto",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/convertkit-vs-copilot",
+      destination: "/reviews/convertkit",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/activecampaign-vs-chatgpt",
+      destination: "/reviews/activecampaign",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/activecampaign-vs-fathom",
+      destination: "/reviews/activecampaign",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/adobe-xd-vs-ahrefs",
+      destination: "/reviews/ahrefs",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/ahrefs-vs-copper-crm",
+      destination: "/reviews/copper-crm",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/ahrefs-vs-fullstory",
+      destination: "/reviews/ahrefs",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/bigcommerce-vs-fathom",
+      destination: "/reviews/bigcommerce",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/chatgpt-vs-fathom",
+      destination: "/reviews/chatgpt",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/copilot-vs-google-analytics",
+      destination: "/reviews/copilot",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/convertkit-vs-google-analytics",
+      destination: "/reviews/convertkit",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/freshsales-vs-microsoft-teams",
+      destination: "/reviews/freshsales",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/heap-vs-paddle",
+      destination: "/reviews/paddle",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/convertkit-vs-freshdesk",
+      destination: "/reviews/convertkit",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/canva-vs-mailchimp",
+      destination: "/reviews/mailchimp",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/acuity-vs-airtable",
+      destination: "/reviews/acuity",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/asana-vs-cal-com",
+      destination: "/reviews/asana",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/basecamp-vs-calendly",
+      destination: "/reviews/basecamp",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/calendly-vs-google-meet",
+      destination: "/reviews/calendly",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/copy-ai-vs-mailchimp",
+      destination: "/reviews/copy-ai",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/evernote-vs-microsoft-teams",
+      destination: "/reviews/evernote",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/heap-vs-mailchimp",
+      destination: "/reviews/heap",
+      permanent: true,
+    },,
+    {
+      source: "/comparisons/claude-vs-fullstory",
+      destination: "/reviews/claude",
+      permanent: true,
+    }
     {
       source: "/reviews/calndly",
       destination: "/reviews/calendly",
