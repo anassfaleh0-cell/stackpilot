@@ -89,3 +89,20 @@ jobs:
 
       - name: Production build
         run: npm run build
+
+      - name: Smoke-test built production routes and SEO metadata
+        run: |
+          npm run start -- --hostname 127.0.0.1 > /tmp/pilotstack-next.log 2>&1 &
+          echo $! > /tmp/pilotstack-next.pid
+          for attempt in $(seq 1 60); do
+            if curl --silent --fail http://127.0.0.1:3000/ads.txt > /dev/null; then
+              break
+            fi
+            sleep 2
+          done
+          if ! curl --silent --fail http://127.0.0.1:3000/ads.txt > /dev/null; then
+            cat /tmp/pilotstack-next.log
+            echo "Production server did not become ready"
+            exit 1
+          fi
+          node scripts/route-smoke-check.js
