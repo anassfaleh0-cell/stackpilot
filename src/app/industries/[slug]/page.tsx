@@ -178,7 +178,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                   <ul className="space-y-2">
                     {ind.implementationTips.map((tip, i) => (
                       <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span className="text-success mt-0.5 shrink-0">•</span>
+                        <span aria-hidden="true" className="text-success mt-0.5 mr-2 shrink-0">•</span>
                         <span>{tip}</span>
                       </li>
                     ))}
