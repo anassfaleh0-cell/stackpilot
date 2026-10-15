@@ -1,9 +1,10 @@
 import { Container } from "@/components/ui/container"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
-import { site, categories } from "@/lib/constants"
+import { site, categories, toolPages } from "@/lib/constants"
+import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
 import { createMetadata } from "@/lib/metadata"
-import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, getAllUseCases, getAllIndustries, getAllHubs, getAllBlogPosts, getAllResearch, getAllStatistics } from "@/lib/content/registry"
+import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, getAllUseCases, getAllIndustries, getAllHubs, getAllBlogPosts, getAllResearch, getAllStatistics, getAllGlossaryTerms } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
 import Link from "next/link"
 
@@ -27,6 +28,7 @@ export default function SitemapPage() {
   const blog = getAllBlogPosts().filter(item => !isNoindexed("blog", item.slug))
   const research = getAllResearch().filter(item => !isNoindexed("research", item.slug))
   const statistics = getAllStatistics().filter(item => !isNoindexed("statistics", item.slug))
+  const glossary = getAllGlossaryTerms().filter(item => !isNoindexed("glossary", item.slug))
 
   return (
     <>
@@ -38,7 +40,7 @@ export default function SitemapPage() {
       <article className="pb-16">
         <Container>
           <h1 className="text-3xl font-bold tracking-tight mb-2">Sitemap</h1>
-          <p className="text-muted-foreground mb-10">Browse all {reviews.length + comparisons.length + guides.length + best.length + alternatives.length + useCases.length + industries.length + hubs.length + blog.length + categories.length + 30}+ pages on PilotStack.</p>
+          <p className="text-muted-foreground mb-10">Browse PilotStack reviews, comparisons, guides, glossary terms, research, statistics, practical tools, and key site information.</p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <Section title={`Reviews (${reviews.length})`}>
@@ -115,6 +117,31 @@ export default function SitemapPage() {
               ))}
             </Section>
           </div>
+
+          <Section title={`Glossary (${glossary.length})`}>
+            <Link href="/glossary" className="text-sm text-primary hover:underline block mb-2">All Glossary Terms</Link>
+            <div className="flex flex-wrap gap-2">
+              {glossary.map(term => (
+                <Link key={term.slug} href={`/glossary/${term.slug}`} className="text-sm text-muted-foreground hover:text-primary">{term.term}</Link>
+              ))}
+            </div>
+          </Section>
+
+          <Section title={`Tools (${toolPages.length})`}>
+            <div className="flex flex-wrap gap-2">
+              {toolPages.map(tool => (
+                <Link key={tool.slug} href={`/tools/${tool.slug}`} className="text-sm text-muted-foreground hover:text-primary">{tool.name}</Link>
+              ))}
+            </div>
+          </Section>
+
+          <Section title={`Authors (${PUBLIC_AUTHOR_SLUGS.length})`}>
+            <div className="flex flex-wrap gap-2">
+              {PUBLIC_AUTHOR_SLUGS.map(slug => (
+                <Link key={slug} href={`/authors/${slug}`} className="text-sm text-muted-foreground hover:text-primary">{slug.replace(/-/g, " ")}</Link>
+              ))}
+            </div>
+          </Section>
 
           <Section title={`Categories (${categories.length})`}>
             <div className="flex flex-wrap gap-2">
