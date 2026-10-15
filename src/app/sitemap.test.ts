@@ -17,6 +17,11 @@ describe("XML sitemap integrity", () => {
     }
   })
 
+  it("does not list the RSS feed as an indexable page", () => {
+    const urls = sitemap().map((entry) => new URL(entry.url).pathname)
+    expect(urls).not.toContain("/rss.xml")
+  })
+
   it("does not emit duplicate URLs", () => {
     const urls = sitemap().map((entry) => entry.url)
     expect(new Set(urls).size).toBe(urls.length)
