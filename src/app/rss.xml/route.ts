@@ -5,8 +5,8 @@ export async function GET() {
   const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug)).slice(0, 20)
   const comparisons = getAllComparisons().filter((c) => isContentAvailable("comparison", c.slug)).slice(0, 20)
   const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug)).slice(0, 15)
-  const posts = getAllBlogPosts().slice(0, 15)
-  const research = getAllResearch().slice(0, 10)
+  const posts = getAllBlogPosts().filter((post) => isContentAvailable("blog", post.slug)).slice(0, 15)
+  const research = getAllResearch().filter((report) => isContentAvailable("research", report.slug)).slice(0, 10)
 
   const reviewItems = reviews
     .map(
