@@ -1,4 +1,4 @@
-import type { MetadataRoute } from "next/dist/lib/metadata/types/metadata-interface"
+import type { MetadataRoute } from "next"
 import { siteConfig, categories, toolPages, editorialLinks } from "@/lib/constants"
 import {
   getAllReviews, getAllComparisons, getAllGuides, getAllGlossaryTerms, getAllBlogPosts,
