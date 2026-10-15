@@ -1,7 +1,7 @@
 name: quality-gate
 
 permissions:
-  contents: write
+  contents: read
 
 on:
   push:
@@ -34,7 +34,6 @@ jobs:
           node scripts/content-quality-cleanup.js
           git diff --exit-code -- content _gen-expand.js _gen-comparisons.js _gen-best-expansion.js
 
-
       - name: Content quality lint
         run: npm run lint:content
 
@@ -49,3 +48,20 @@ jobs:
 
       - name: Production build
         run: npm run build
+
+      - name: Smoke-test built production routes and SEO metadata
+        run: |
+          npm run start -- --hostname 127.0.0.1 > /tmp/pilotstack-next.log 2>&1 &
+          echo $! > /tmp/pilotstack-next.pid
+          for attempt in $(seq 1 60); do
+            if curl --silent --fail http://127.0.0.1:3000/ads.txt > /dev/null; then
+              break
+            fi
+            sleep 2
+          done
+          if ! curl --silent --fail http://127.0.0.1:3000/ads.txt > /dev/null; then
+            cat /tmp/pilotstack-next.log
+            echo "Production server did not become ready"
+            exit 1
+          fi
+          node scripts/route-smoke-check.js
