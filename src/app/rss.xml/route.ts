@@ -127,7 +127,12 @@ export async function GET() {
   })
 }
 
-export function escapeCdata(s: string): string {\n  // A literal CDATA terminator would close the section early and corrupt the RSS XML.\n  return s.replace(/]]>/g, "]]]]><![CDATA[>")\n}\n\nfunction escapeHtml(s: string): string {
+export function escapeCdata(s: string): string {
+  // A literal CDATA terminator would close the section early and corrupt the RSS XML.
+  return s.replace(/]]>/g, "]]]]><![CDATA[>")
+}
+
+function escapeHtml(s: string): string {
   return s
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
