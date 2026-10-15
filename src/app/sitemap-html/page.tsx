@@ -17,14 +17,16 @@ export default function SitemapPage() {
   const reviews = getAllReviews().filter(r => !isNoindexed("reviews", r.slug))
   const comparisons = getAllComparisons().filter(c => !isNoindexed("comparisons", c.slug))
   const guides = getAllGuides().filter(g => !isNoindexed("guides", g.slug))
-  const best = getAllBest()
-  const alternatives = getAllAlternatives()
-  const useCases = getAllUseCases()
-  const industries = getAllIndustries()
-  const hubs = getAllHubs()
-  const blog = getAllBlogPosts()
-  const research = getAllResearch()
-  const statistics = getAllStatistics()
+  // Keep the human-readable sitemap aligned with sitemap.xml so it does not
+  // advertise URLs that are intentionally excluded from indexing.
+  const best = getAllBest().filter(item => !isNoindexed("best", item.slug))
+  const alternatives = getAllAlternatives().filter(item => !isNoindexed("alternatives", item.slug))
+  const useCases = getAllUseCases().filter(item => !isNoindexed("use-cases", item.slug))
+  const industries = getAllIndustries().filter(item => !isNoindexed("industries", item.slug))
+  const hubs = getAllHubs().filter(item => !isNoindexed("hubs", item.slug))
+  const blog = getAllBlogPosts().filter(item => !isNoindexed("blog", item.slug))
+  const research = getAllResearch().filter(item => !isNoindexed("research", item.slug))
+  const statistics = getAllStatistics().filter(item => !isNoindexed("statistics", item.slug))
 
   return (
     <>
