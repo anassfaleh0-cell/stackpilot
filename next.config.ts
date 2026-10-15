@@ -53,6 +53,14 @@ const nextConfig: NextConfig = {
   generateEtags: true,
   redirects: async () => [
     {
+      // Consolidate the verified www hostname onto the canonical apex host.
+      // Keep the full path (including nested segments) and query string intact.
+      source: "/:path*",
+      has: [{ type: "host", value: "www.pilotstack.online" }],
+      destination: "https://pilotstack.online/:path*",
+      permanent: true,
+    },
+    {
       source: "/reviews/calndly",
       destination: "/reviews/calendly",
       permanent: true,
