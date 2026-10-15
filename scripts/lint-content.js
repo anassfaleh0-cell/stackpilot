@@ -177,9 +177,10 @@ for (const dir of dirs) {
     // Lint the actual source payload; runtime sanitization must never hide source defects.
     const raw = JSON.stringify(data)
     const validationData = data
-    // Industry pages render structured fields, not the legacy generated HTML body.
-    // Exclude that unused field from markup lint while retaining checks on all rendered content.
-    const lintData = dir === "content/industries" && data && typeof data === "object"
+    // Most content routes render typed fields (for example sections, recommendations, FAQs)
+    // rather than the legacy generated top-level HTML body. Blog articles are the exception.
+    // Lint the rendered/source-of-truth fields so stale, unused generated HTML cannot mask issues.
+    const lintData = dir !== "content/blog" && data && typeof data === "object"
       ? Object.fromEntries(Object.entries(data).filter(([key]) => key !== "body"))
       : validationData
     const validationRaw = JSON.stringify(lintData)
@@ -223,7 +224,7 @@ for (const dir of dirs) {
       fileErrors++
     }
 
-    const primaryText = collectText(data).trim()
+    const primaryText = collectText(lintData).trim()
     if (primaryText.length < 120 && !["content/glossary", "content/statistics"].includes(dir)) {
       console.error("  ERROR: Primary content is too thin (<120 characters)")
       fileErrors++
