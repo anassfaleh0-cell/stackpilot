@@ -22,9 +22,9 @@ import * as UseCases from "@/app/use-cases/[slug]/page"
 type Props = { params: Promise<{ slug: string }> }
 type PageModule = {
   default: (props: Props) => Promise<unknown>
-  generateStaticParams?: () => { slug: string }[]
+  generateStaticParams?: () => { slug: string }[] | Promise<{ slug: string }[]>
 }
-type Family = { dir: string; route: string; mod: PageModule }
+type Family = { dir?: string; route: string; mod: PageModule }
 
 const FAMILIES: Family[] = [
   { dir: "alternatives", route: "alternatives", mod: Alternatives },
@@ -52,7 +52,7 @@ const CONTENT_ROOT = path.join(process.cwd(), "content")
 const APP_ROOT = path.join(process.cwd(), "src", "app")
 const UNKNOWN_SLUG = "no-such-record-on-this-site"
 
-type RecordEntry = { file: string; slug: string; fieldSlug: string; published: unknown }
+type RecordEntry = { file: string; slug: string; fieldSlug: string; published: unknown; publicationStatus: unknown }
 
 function recordsOf(dir: string): RecordEntry[] {
   const folder = path.join(CONTENT_ROOT, dir)
@@ -67,6 +67,7 @@ function recordsOf(dir: string): RecordEntry[] {
         slug: file.replace(/\.json$/, ""),
         fieldSlug: typeof data.slug === "string" ? data.slug : "",
         published: data.published,
+        publicationStatus: data.publicationStatus,
       }
     })
 }
@@ -103,6 +104,12 @@ async function expect404(family: Family, slug: string): Promise<void> {
 }
 
 describe("route families", () => {
+  it("emits unique URLs in the XML sitemap", () => {
+    const urls = sitemap().map((entry) => entry.url)
+    const duplicates = urls.filter((url, index) => urls.indexOf(url) !== index)
+    expect(duplicates).toEqual([])
+  })
+
   it("covers every content directory and every [slug] route", () => {
     const contentDirs = fs
       .readdirSync(CONTENT_ROOT, { withFileTypes: true })
@@ -124,7 +131,7 @@ describe("route families", () => {
     const duplicated: string[] = []
     for (const family of FAMILIES) {
       const seen = new Set<string>()
-      for (const record of recordsOf(family.dir)) {
+      for (const record of recordsOf(family.dir ?? "")) {
         if (record.fieldSlug !== record.slug) mismatched.push(`${family.dir}/${record.file} slug=${record.fieldSlug}`)
         if (seen.has(record.fieldSlug)) duplicated.push(`${family.dir}/${record.fieldSlug}`)
         seen.add(record.fieldSlug)
@@ -137,7 +144,8 @@ describe("route families", () => {
   it("keeps every content record represented by an indexable sitemap URL", () => {
     const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
     for (const family of FAMILIES) {
-      for (const record of recordsOf(family.dir)) {
+      for (const record of recordsOf(family.dir ?? "")) {
+        if (record.publicationStatus === "draft") continue
         expect(paths.has(`/${family.route}/${record.slug}`), `missing sitemap URL for ${family.route}/${record.slug}`).toBe(true)
       }
     }
@@ -155,22 +163,23 @@ describe("route families", () => {
 
   it("renders every author and tool the site ships", async () => {
     for (const slug of PUBLIC_AUTHOR_SLUGS) await expectResolves({ route: "authors", mod: Authors }, slug)
-    for (const param of Tools.generateStaticParams!()) await expectResolves({ route: "tools", mod: Tools }, param.slug)
+    const toolParams = await Tools.generateStaticParams!()
+    for (const param of toolParams) await expectResolves({ route: "tools", mod: Tools }, param.slug)
   })
 
   it("404s unknown slugs in every route family", async () => {
     for (const family of ALL_FAMILIES) await expect404(family, UNKNOWN_SLUG)
   })
 
-  it("lists only records that resolve in the sitemap", () => {
+  it("lists only records that resolve in the sitemap", async () => {
     const entries = sitemap()
     const origin = new URL(entries[0].url).origin
     const byRoute = new Map<string, Map<string, unknown>>(
-      FAMILIES.map((family) => [family.route, new Map(recordsOf(family.dir).map((record) => [record.slug, record.published]))]),
+      FAMILIES.map((family) => [family.route, new Map(recordsOf(family.dir ?? "").map((record) => [record.slug, record.published]))]),
     )
     const codeSlugs = new Map<string, Set<string>>([
       ["authors", new Set<string>([...PUBLIC_AUTHOR_SLUGS])],
-      ["tools", new Set<string>((Tools.generateStaticParams?.() ?? []).map((param) => param.slug))],
+      ["tools", new Set<string>((await Tools.generateStaticParams?.() ?? []).map((param) => param.slug))],
     ])
 
     for (const entry of entries) {

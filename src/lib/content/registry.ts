@@ -1,3 +1,4 @@
+import { stripUnverifiedPriceClaims } from "./review-quality"
 import type { ReviewContent, ComparisonContent, ComparisonFeature, GuideContent, GlossaryContent, BlogContent, CategoryKnowledge, AlternativeContent, UseCaseContent, IndustryContent, ResearchContent, StatisticContent, BestContent, HubContent, FAQItem, ContentSection } from "@/types/content"
 import fs from "node:fs"
 import path from "node:path"
@@ -9,6 +10,8 @@ const CONTENT_DIR = path.resolve(process.cwd(), "content")
 // internal-link, and comparison generation revisit the same review profiles thousands of times.
 const reviewCache = new Map<string, ReviewContent | null>()
 const comparisonCache = new Map<string, ComparisonContent | null>()
+let statisticsCache: StatisticContent[] | null = null
+let researchCache: ResearchContent[] | null = null
 
 const DIR_FOR_TYPE: Record<string, string> = {
   review: "reviews",
@@ -82,6 +85,25 @@ const GENERIC_BOILERPLATE_PATTERNS = [
   /this approach enables teams to maximize their software investment/i,
   /organizations see measurable improvements in efficiency and user satisfaction within the first quarter/i,
   /organizations see measurable improvements in efficiency and team productivity/i,
+  /choosing the right .* software starts with understanding your specific requirements/i,
+  /this topic is most useful when it is connected to a real decision/i,
+  /adequate performance for most use cases/i,
+  /functional organized interface/i,
+  /strong performance with fast load times/i,
+  /delivers reliable performance with 99\.9% uptime SLA/i,
+  /delivers reliable performance with solid performance suitable for most business use cases/i,
+  /written against our published editorial methodology/i,
+  /updated when the underlying content is reviewed/i,
+  /positive ROI typically within 3-6 months/i,
+  /most teams start within hours/i,
+  /a teams team uses/i,
+  /updates weekly[^.]*major feature releases quarterly/i,
+  /perfect for freelancers and independent professionals/i,
+  /choosing the right marketing\s*&\s*seo software/i,
+  /and \d+\+ more\./i,
+  /workfl(?:$|\s)/i,
+  /most successful deployments follow a phased approach/i,
+
 ]
 
 const UNSUPPORTED_CLAIM_PATTERNS = [
@@ -151,13 +173,61 @@ function sanitizeUnsupportedClaims(value: string | undefined): string {
     .trim()
 }
 
-function sanitizeContentValue(value: unknown): unknown {
-  if (typeof value === "string") return sanitizeMalformedPricingText(sanitizeUnsupportedClaims(value))
-  if (Array.isArray(value)) return value.map(sanitizeContentValue)
+function sanitizeMalformedAnchorMarkup(value: string): string {
+  const openingCount = (value.match(/<a\b/gi) || []).length
+  if (openingCount === 0) return value
+  const closingCount = (value.match(/<\/a\s*>/gi) || []).length
+  const hasNestedAnchors = /<a\b[^>]*>(?:(?!<\/a\s*>)[\s\S])*<a\b/i.test(value)
+  // Some imported content has nested or unbalanced anchors from automated link insertion.
+  // Keep the readable labels, but remove anchor tags from the affected field so malformed
+  // markup cannot swallow adjacent words or corrupt the rendered review.
+  if (hasNestedAnchors || openingCount !== closingCount) {
+    return value.replace(/<\/?a\b[^>]*>/gi, "")
+  }
+  return value
+}
+
+function sanitizeEditorialText(value: string): string {
+  const cleaned = sanitizeUnsupportedClaims(sanitizeMalformedAnchorMarkup(value))
+  return cleaned
+    .split(/(?<=[.!?])\s+/)
+    .filter((sentence) => !GENERIC_BOILERPLATE_PATTERNS.some((pattern) => pattern.test(sentence)))
+    .join(" ")
+    .trim()
+}
+
+function sanitizeEditorialBody(value: string): string {
+  // Markdown body fields rely on paragraph, heading, list, and table boundaries
+  // for rendering. Sanitize each line, but preserve those structural separators.
+  return sanitizeMalformedAnchorMarkup(value)
+    .split(/\n\s*\n/)
+    .map((block) => {
+      const lines = block.split("\n")
+      const isTableBlock = lines.some((line) => /^\s*\|/.test(line))
+      return lines
+        .map((line) => sanitizeMalformedPricingText(
+          isTableBlock ? sanitizeUnsupportedClaims(line) : sanitizeEditorialText(line)
+        ))
+        .filter(Boolean)
+        .join("\n")
+    })
+    .filter(Boolean)
+    .join("\n\n")
+}
+
+function sanitizeContentValue(value: unknown, fieldName?: string): unknown {
+  if (typeof value === "string") {
+    return fieldName === "body"
+      ? sanitizeEditorialBody(value)
+      : sanitizeMalformedPricingText(sanitizeEditorialText(value))
+  }
+  if (Array.isArray(value)) return value.map((item) => sanitizeContentValue(item))
   if (value && typeof value === "object") {
     const out: Record<string, unknown> = {}
     for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
-      out[key] = key === "author" && typeof child === "string" ? "PilotStack Team" : sanitizeContentValue(child)
+      out[key] = key === "author" && typeof child === "string"
+        ? "PilotStack Team"
+        : sanitizeContentValue(child, key)
     }
     return out
   }
@@ -247,17 +317,18 @@ function sanitizeList(items: string[] | undefined, max = 5): string[] {
 }
 
 function sanitizeReview(review: ReviewContent): ReviewContent {
-  const description = sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.description, 700)))
+  const safePrice = (value: string) => review.priceRangeVerified === true ? value : stripUnverifiedPriceClaims(value)
+  const description = safePrice(sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.description, 700))))
   const safeDescription = description.length >= 50 ? description : `${review.name} is listed in PilotStack’s ${review.category} catalog. Verify current features, pricing, and terms with the vendor.`
   return {
     ...review,
     content: buildReviewSections(review),
     description: safeDescription,
-    tagline: sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.tagline, 220))),
-    pros: sanitizeList(review.pros),
-    cons: sanitizeList(review.cons),
-    features: review.features.map((feature) => ({ ...feature, name: trimText(feature.name, 120), description: sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(feature.description, 360))) })).slice(0, 20),
-    faqs: sanitizeFaqs(review.faqs),
+    tagline: safePrice(sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.tagline, 220)))),
+    pros: sanitizeList(review.pros).map(safePrice),
+    cons: sanitizeList(review.cons).map(safePrice),
+    features: review.features.map((feature) => ({ ...feature, name: trimText(feature.name, 120), description: safePrice(sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(feature.description, 360)))) })).slice(0, 20),
+    faqs: sanitizeFaqs(review.faqs).map((faq) => ({ question: safePrice(faq.question), answer: safePrice(faq.answer) })),
   }
 }
 
@@ -471,7 +542,14 @@ export function getAllReviews(): ReviewContent[] {
   return readDir(path.join(CONTENT_DIR, "reviews"))
     .map((file) => getReview(file.replace(/\.json$/, "")))
     .filter((review): review is ReviewContent => Boolean(review))
-    .sort((a, b) => b.rating - a.rating)
+    .sort((a, b) => {
+      const aRating = a.ratingVerified === true && typeof a.rating === "number" && Number.isFinite(a.rating) ? a.rating : null
+      const bRating = b.ratingVerified === true && typeof b.rating === "number" && Number.isFinite(b.rating) ? b.rating : null
+      if (aRating === null && bRating !== null) return 1
+      if (aRating !== null && bRating === null) return -1
+      if (aRating !== null && bRating !== null && aRating !== bRating) return bRating - aRating
+      return a.name.localeCompare(b.name)
+    })
 }
 
 function sectionWordCount(sections: Array<{ body?: string; items?: string[] }>): number {
@@ -487,8 +565,10 @@ function buildReviewSections(review: ReviewContent): ContentSection[] {
   )
   if (sectionWordCount(base) >= 900) return base
 
-  const company = review.company
-  const availableFeatures = (Array.isArray(review.features) ? review.features : []).filter((feature) => feature.available).slice(0, 8)
+  const company = review.companyFactsVerified === true ? review.company : undefined
+  const availableFeatures = review.featuresVerified === true
+    ? (Array.isArray(review.features) ? review.features : []).filter((feature) => feature.available).slice(0, 8)
+    : []
   const featureNames = availableFeatures.map((feature) => feature.name)
   const featureDetails = availableFeatures.map((feature) => feature.name + ": " + feature.description).join(" ")
   const integrations = Array.isArray(company?.integrations) ? company.integrations.slice(0, 8) : []
@@ -508,7 +588,9 @@ function buildReviewSections(review: ReviewContent): ContentSection[] {
       : []
   const pros = sanitizeList(review.pros, 5)
   const cons = sanitizeList(review.cons, 5)
-  const pricing = review.priceRange || "Pricing is not verified in this profile; check the vendor's current pricing page."
+  const pricing = review.priceRangeVerified === true && review.priceRange
+    ? review.priceRange
+    : "not independently verified in this profile; check the vendor's current pricing page."
   const categoryChecks: Record<string, string> = {
     "Project Management": "task hierarchy, dependencies, workload views, reporting, automation quotas, guest access, and whether people can update work without duplicate entry",
     "CRM & Sales": "contact deduplication, pipeline stages, lead routing, email and calendar sync, forecasting, permissions, and data export",
@@ -578,6 +660,11 @@ function normalizeComparisonWinner(value: string | null, tool1: string, tool2: s
 function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: string, tool2Slug: string, features: ComparisonFeature[], winner: string | null): string {
   const review1 = getReview(tool1Slug)
   const review2 = getReview(tool2Slug)
+  const categoryKey = (value: string) => value.toLowerCase().replace(/&/g, " ").replace(/[^a-z0-9]+/g, " ").trim()
+  const categoriesDiffer = Boolean(review1 && review2 && categoryKey(review1.category) !== categoryKey(review2.category))
+  const categoryContext = categoriesDiffer && review1 && review2
+    ? tool1 + " is categorized as " + review1.category + ", while " + tool2 + " is categorized as " + review2.category + ". These products may address different needs, so compare only overlapping requirements rather than treating this page as a universal ranking."
+    : ""
   const recordedPick = winner
     ? `The source dataset marks ${winner} as its recorded pick. That label is not independent proof that it is the better choice for every team.`
     : "The source dataset does not name one overall pick. Choose based on your requirements and the evidence you verify."
@@ -590,11 +677,18 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
     const value = (v: unknown) => typeof v === "boolean" ? (v ? "marked available in the dataset" : "marked unavailable in the dataset") : String(v || "not recorded")
     return `${f.name}: ${tool1} — ${value(f.tool1)}; ${tool2} — ${value(f.tool2)}.`
   }).join(" ")
-  const pricing = [review1, review2].filter((review): review is ReviewContent => Boolean(review)).map((review) =>
-    `${review.name} has a recorded rating of ${review.rating}/5 and pricing listed as ${review.pricing}${review.priceRange ? ` (${review.priceRange})` : ""}. Ratings, prices, included limits, and plan availability may change; check the source and current vendor page before purchasing.`
-  ).join(" ")
+  const pricing = [review1, review2].filter((review): review is ReviewContent => Boolean(review)).map((review) => {
+    const rating = review.ratingVerified === true
+      ? `a documented rating of ${review.rating}/5`
+      : "no independently verified rating"
+    const price = review.priceRangeVerified === true && review.priceRange
+      ? `pricing recorded as ${review.priceRange}`
+      : "pricing not independently verified"
+    return `${review.name}: ${rating}; ${price}. Confirm the current vendor terms, included limits, billing period, and plan availability before purchasing.`
+  }).join(" ")
   return [
     `This page compares ${tool1} and ${tool2} using information currently recorded in PilotStack's product profiles. The dataset is a starting point for research, not a substitute for a hands-on trial or vendor confirmation.`,
+    categoryContext,
     recordedPick,
     profile(tool1, review1),
     profile(tool2, review2),
@@ -606,9 +700,41 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
 }
 function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
   const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
-  if (cleaned.length >= 80 && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(cleaned)) return trimText(cleaned, 700)
-  return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the recorded overall winner." : "The dataset records no single overall winner.") + " Read the detailed rows and linked reviews before making a decision.", 700)
+  // Winner language is publishable only when the comparison has an explicit audit flag.
+  const safeDescription = cleaned
+    .split(/(?<=[.!?])\s+/)
+    .filter((sentence) => {
+      const unsupportedWinnerClaim = /\b(?:overall pick|recorded pick|overall winner|our recommendation|recommended for most users|is the winner|wins over|beats|outperforms|edges ahead)\b/i.test(sentence)
+      const unverifiedMetricClaim = /(?:[$€£]\s?\d|\b\d+(?:\.\d+)?\s*\/\s*5\b|\b\d+\s*(?:per month|per user|\/mo|\/month)\b)/i.test(sentence)
+      return (winner || !unsupportedWinnerClaim) && !unverifiedMetricClaim
+    })
+    .join(" ")
+    .trim()
+  if (safeDescription.length >= 80 && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(safeDescription)) return trimText(safeDescription, 700)
+  return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the verified recorded overall winner under the stated criteria." : "The dataset records no independently verified overall winner. Check the detailed rows and linked reviews before making a decision."), 700)
 }
+export function getComparisonSeoTitle(slug: string, tool1: string, tool2: string, winnerVerified: boolean): string {
+  const normalizedSlug = slug.toLowerCase()
+  const variant = normalizedSlug.endsWith("-startups")
+    ? " for Startups"
+    : normalizedSlug.endsWith("-for-teams")
+      ? " for Teams"
+      : normalizedSlug.endsWith("-remote")
+        ? " for Remote Teams"
+        : ""
+  return `${tool1} vs ${tool2}${variant} (2026): ${winnerVerified ? "Which One Wins?" : "How to Choose"}`
+}
+
+// These dates were assigned in bulk to comparison records and do not prove that
+// the underlying vendor information was reviewed on that day. Suppress them from
+// page metadata and sitemap lastmod until a source-backed editorial update is recorded.
+const UNVERIFIED_COMPARISON_UPDATE_DATES = new Set(["2026-07-20","2026-07-28","2026-07-23","2026-07-16","2026-07-18","2026-07-01"])
+
+function getVerifiedComparisonLastUpdated(value: unknown): string {
+  if (typeof value !== "string" || !value.trim()) return ""
+  return UNVERIFIED_COMPARISON_UPDATE_DATES.has(value.slice(0, 10)) ? "" : value
+}
+
 export function getComparison(slug: string): ComparisonContent | null {
   const cached = comparisonCache.get(slug)
   if (cached !== undefined) return cached
@@ -618,6 +744,11 @@ export function getComparison(slug: string): ComparisonContent | null {
     return null
   }
   const cmp = readJson<ComparisonContent>(file)
+  // Only the explicit editorial status controls publication; legacy `published` flags are inconsistent across old records.
+  if (cmp.publicationStatus === "draft") {
+    comparisonCache.set(slug, null)
+    return null
+  }
   const baseFeatures = cmp.features.slice(0, 20).map((f) => ({
     ...f,
     name: trimText(f.name, 140),
@@ -625,12 +756,13 @@ export function getComparison(slug: string): ComparisonContent | null {
     tool2Detail: sanitizeUnsupportedClaims(trimText(f.tool2Detail, 320)),
   }))
   const features = buildDerivedComparisonFeatures(cmp, baseFeatures)
-  const winner = normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2)
+  const winner = cmp.winnerVerified === true ? normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2) : null
   const result: ComparisonContent = {
     ...cmp,
+    lastUpdated: getVerifiedComparisonLastUpdated(cmp.lastUpdated),
     winner,
     description: sanitizeComparisonDescription(cmp.description, cmp.tool1, cmp.tool2, features, winner),
-    verdict: buildComparisonNarrative(cmp.tool1, cmp.tool2, cmp.tool1Slug, cmp.tool2Slug, features, winner),
+    verdict: buildComparisonNarrative(cmp.tool1, cmp.tool2, cmp.tool1Slug, cmp.tool2Slug, cmp.featuresVerified === true ? features : [], winner),
     features,
     faqs: sanitizeFaqs(cmp.faqs),
   }
@@ -654,16 +786,35 @@ export function getComparisonsByCategory(category: string): ComparisonContent[] 
     .filter((item): item is ComparisonContent => Boolean(item))
 }
 
+function normalizeGuideForDisplay(guide: GuideContent): GuideContent {
+  const sections = buildGuideSections(guide)
+  const faqs = sanitizeFaqs(guide.faqs)
+  // Reading time must describe the content users actually see after sanitation and
+  // the guide's minimum-content expansion, not stale JSON metadata or raw source text.
+  const renderedText = [
+    guide.title,
+    guide.description,
+    ...sections.flatMap((section) => [section.title, section.body, ...(section.items || [])]),
+    ...faqs.flatMap((faq) => [faq.question, faq.answer]),
+  ].filter((value): value is string => typeof value === "string").join(" ")
+  const wordCount = renderedText.replace(/<[^>]*>/g, " ").split(/\s+/).filter(Boolean).length
+  return {
+    ...guide,
+    readingTime: Math.max(3, Math.ceil(wordCount / 200)),
+    sections,
+    faqs,
+  }
+}
+
 export function getGuide(slug: string): GuideContent | null {
   const file = path.join(CONTENT_DIR, "guides", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  const guide = readJson<GuideContent>(file)
-  return { ...guide, sections: buildGuideSections(guide), faqs: sanitizeFaqs(guide.faqs) }
+  return normalizeGuideForDisplay(readJson<GuideContent>(file))
 }
 
 export function getAllGuides(): GuideContent[] {
   return readDir(path.join(CONTENT_DIR, "guides"))
-    .map((f) => { const g = readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)); return { ...g, sections: buildGuideSections(g), faqs: sanitizeFaqs(g.faqs) } })
+    .map((f) => normalizeGuideForDisplay(readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f))))
 }
 
 export function getGlossaryTerm(slug: string): GlossaryContent | null {
@@ -888,47 +1039,253 @@ export function getAllUseCases(): UseCaseContent[] {
     .map((f) => { const u = readJson<UseCaseContent>(path.join(CONTENT_DIR, "use-cases", f)); return { ...u, faqs: sanitizeFaqs(u.faqs) } })
 }
 
+function normalizeIndustryContent(industry: IndustryContent): IndustryContent {
+  const safeIndustry = { ...industry } as IndustryContent & { body?: string }
+  delete safeIndustry.body
+  if (safeIndustry.contentVerified === true) {
+    return {
+      ...safeIndustry,
+      faqs: sanitizeFaqs(safeIndustry.faqs),
+    }
+  }
+
+  const category = safeIndustry.industry || "Industry"
+  const unsafeOverview = /<[^>]+>|solutions evaluated|our comprehensive analysis|we evaluated|we tested|industry-leading analysis|\b\d+(?:\.\d+)?%|\$\s?\d|\b\d{2,}\+?\s+(?:companies|organizations|vendors|solutions|tools)\b/i.test(safeIndustry.industryOverview || "")
+  const industryOverview = unsafeOverview
+    ? `${category} teams need software that fits their operational workflows, data requirements, integrations, and budget. Start by mapping the work that must improve, the people who will use the system, and the risks that must be controlled. Then verify product capabilities and plan limits against current vendor documentation rather than relying on broad market claims.`
+    : trimText(safeIndustry.industryOverview, 1600)
+
+  const recommendations = safeIndustry.recommendations.map((recommendation) => {
+    const riskyClaim = /HIPAA|HITECH|GDPR|FERPA|COPPA|PCI DSS|SOC 2|ISO 27001|AES-256|TLS 1\.[23]|certified|compliant|guarantee|top-rated|\b\d+(?:\.\d+)?%|\$\s?\d/i.test(recommendation.bestFor)
+    return {
+      ...recommendation,
+      bestFor: riskyClaim
+        ? `Consider ${recommendation.toolName} for evaluation when your team needs ${recommendation.category.toLowerCase()}; verify current capabilities, plan limits, integrations, and security terms with the vendor.`
+        : trimText(recommendation.bestFor, 360),
+    }
+  })
+
+  const faqs = sanitizeFaqs(safeIndustry.faqs).map((faq) => {
+    const riskyClaim = /HIPAA|HITECH|GDPR|FERPA|COPPA|PCI DSS|SOC 2|ISO 27001|AES-256|TLS 1\.[23]|certified|compliant|guarantee|\b\d+(?:\.\d+)?%|\$\s?\d+/i.test(faq.answer)
+    return riskyClaim
+      ? {
+          ...faq,
+          answer: "Requirements depend on the data involved, jurisdiction, exact product, and plan. Confirm current vendor documentation and contract terms, and obtain qualified compliance or legal advice where required before relying on a claim.",
+        }
+      : faq
+  })
+
+  return {
+    ...safeIndustry,
+    title: `Software for ${category}: Selection Guide`,
+    description: `A practical software selection guide for ${category.toLowerCase()} teams, covering workflow fit, integrations, data protection, implementation, and total cost. Verify product-specific claims with current vendor documentation.`,
+    industryOverview,
+    softwareNeeds: sanitizeList(safeIndustry.softwareNeeds, 10),
+    recommendations,
+    implementationTips: sanitizeList(safeIndustry.implementationTips, 10),
+    faqs,
+    lastUpdated: "2026-10-15",
+    contentVerified: false,
+  }
+}
+
 export function getIndustry(slug: string): IndustryContent | null {
   const file = path.join(CONTENT_DIR, "industries", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  const industry = readJson<IndustryContent>(file)
-  return {
-    ...industry,
-    description: trimText(industry.description, 700),
-    industryOverview: trimText(industry.industryOverview, 1600),
-    softwareNeeds: sanitizeList(industry.softwareNeeds, 10),
-    recommendations: industry.recommendations.slice(0, 12).map((x) => ({ ...x, bestFor: trimText(x.bestFor, 360) })),
-    implementationTips: sanitizeList(industry.implementationTips, 10),
-    faqs: sanitizeFaqs(industry.faqs),
-  }
+  return normalizeIndustryContent(readJson<IndustryContent>(file))
 }
 
 export function getAllIndustries(): IndustryContent[] {
   return readDir(path.join(CONTENT_DIR, "industries"))
-    .map((f) => { const i = readJson<IndustryContent>(path.join(CONTENT_DIR, "industries", f)); return { ...i, faqs: sanitizeFaqs(i.faqs) } })
+    .map((f) => normalizeIndustryContent(readJson<IndustryContent>(path.join(CONTENT_DIR, "industries", f))))
+}
+
+function researchFocus(subject: string): { metrics: string; questions: string } {
+  const key = subject.toLowerCase()
+  if (/churn|retention|customer success/.test(key)) return {
+    metrics: "Define gross retention, net retention, logo churn, revenue churn, expansion, and cohort windows separately. Check how the source treats downgrades, cancellations, reactivations, and customer segments.",
+    questions: "Which customer cohort is measured? Is churn logo-based or revenue-based? What time window and exclusions apply? Can the result be reproduced from customer-level records?"
+  }
+  if (/cloud|infrastructure|devops|data platform|analytics/.test(key)) return {
+    metrics: "Assess workload, utilization, reliability, data transfer, operating cost, incident recovery, deployment effort, and the integration surface. Performance claims need the workload, environment, and measurement method.",
+    questions: "What workload and region does the estimate cover? Are egress, support, storage, and observability costs included? What controls exist for cost allocation, data export, and incident response?"
+  }
+  if (/crm|sales|marketing|customer experience|advertising/.test(key)) return {
+    metrics: "Assess lead and customer data quality, attribution windows, consent handling, workflow adoption, reporting completeness, and the effort needed to reconcile data across systems. Separate vendor-reported outcomes from independently measured results.",
+    questions: "What population and time period were measured? How are conversions attributed and duplicates handled? Can the result be reconciled with the source analytics or CRM system?"
+  }
+  if (/security|privacy|compliance|identity/.test(key)) return {
+    metrics: "Assess control coverage, incident response, auditability, alert quality, integration coverage, deployment model, and the regulatory scope. Security and compliance claims must name the product, region, plan, and applicable certification.",
+    questions: "Which standard or regulation is covered? Does evidence apply to this product and plan? Can controls and audit logs be exported? What is the process for validating and renewing the claim?"
+  }
+  if (/ai|machine learning|automation/.test(key)) return {
+    metrics: "Assess task-level accuracy, human review time, failure rates, data handling, model versioning, integration reliability, and the cost of successful outputs. Distinguish controlled evaluations from self-reported adoption or productivity claims.",
+    questions: "What task and baseline were used? How were errors measured? Was there a control group? What data is retained or used for training, and where is human approval required?"
+  }
+  return {
+    metrics: "Define the population, geography, period, and outcome before comparing market or adoption claims. For software buyers, also assess workflow fit, implementation effort, integration coverage, security, reliability, and total cost.",
+    questions: "What does the metric count? Who collected it and when? Is the source primary or vendor-sponsored? Can the method be reproduced? Which assumptions would make the figure inapplicable to your organization?"
+  }
+}
+
+function normalizeResearchContent(record: ResearchContent): ResearchContent {
+  const sources = record.dataSources || []
+  const hasCompleteSourceAudit = record.sourceAuditComplete === true &&
+    sources.length > 0 &&
+    sources.every((source) => {
+      try {
+        const url = new URL(source.url)
+        return url.protocol === "https:" && url.pathname.split("/").filter(Boolean).length >= 2
+      } catch {
+        return false
+      }
+    })
+  if (hasCompleteSourceAudit) {
+    return { ...record, sections: sanitizeSections(record.sections), faqs: sanitizeFaqs(record.faqs) }
+  }
+
+  const subject = record.title
+    .replace(/\b20\d{2}\b/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\s+(?:report|benchmarks?|trends|comparison|study)$/i, "")
+    .trim() || "Software market"
+  const focus = researchFocus(subject)
+  return {
+    ...record,
+    reportType: "Research guide",
+    title: `${subject} Research Guide (${record.category}): Metrics and Evidence`,
+    description: `A practical guide to evaluating ${subject.toLowerCase()}, checking source quality, and using market claims responsibly. Numerical findings are withheld until source verification is complete.`,
+    keyFindings: [
+      `Define the population, geography, time period, and outcome before comparing ${subject.toLowerCase()} claims.`,
+      "Use original reports with accessible methodology; a generic source homepage does not substantiate a specific number.",
+      "For purchasing decisions, prioritize workflow fit, implementation effort, integration coverage, security, and total cost over broad market estimates.",
+    ],
+    sections: [
+      { title: `What to measure in ${subject}`, body: `${focus.metrics} Choose measures that help answer a concrete question, such as which workflow to improve, what risk to reduce, or which capability to prioritize. Record the baseline and the conditions under which the measure was collected so a later comparison is meaningful.`, type: "text" },
+      { title: "Evidence standards for market claims", body: "For each number, record the original report URL, publisher, publication date, geography, sample, definitions, calculation, and limitations. Distinguish measured results from forecasts, vendor surveys, analyst estimates, and opinion. Check whether the sample represents the population you care about, whether the source has a commercial interest, and whether the claim is reproduced in the original document. If the original source cannot be found, do not repeat the figure as a verified fact.", type: "text" },
+      { title: "How to apply this research", body: "Use market research to frame questions and identify assumptions, not as a substitute for evaluating a specific product. Translate each useful finding into a requirement or a question you can verify: what capability is needed, which users are affected, what evidence would show improvement, and what trade-offs matter. For vendor selection, compare workflow fit, implementation effort, integration coverage, security, data portability, support, and total cost using the same assumptions across candidates.", type: "text" },
+      { title: "Questions for software buyers", body: `${focus.questions} Keep a decision log with the source URL, the date you checked it, the answer received, and any remaining uncertainty. Ask the vendor to distinguish generally available features from roadmap items, and public list prices from quote-specific terms. If a claim materially affects the decision, require evidence before treating it as confirmed.`, type: "text" },
+      { title: "Source status and limitations", body: "Older numeric findings for this topic are undergoing source-provenance review. They are not presented as verified market findings here. The page remains available as a research guide while the underlying claims are checked and direct source links are added. Figures can be restored when the source, scope, date, sample, definitions, calculation, and verification record are complete. Withholding an unsupported number is more useful than presenting a precise estimate that readers cannot reproduce.", type: "text" },
+    ],
+    methodology: "This page is currently a research guide while older numeric claims undergo source-provenance review. A future quantitative version must link each material claim to a direct, dated source and explain its sample, definitions, geography, calculation, and limitations.",
+    dataSources: [],
+    sourceAuditComplete: false,
+    faqs: [
+      { question: "Why are numeric findings not shown?", answer: "Older records do not yet have a complete, checkable source trail for each claim. They are withheld until the original evidence and scope can be verified." },
+      { question: "How should I compare market reports?", answer: "Check whether reports measure the same population, geography, time period, and outcome. Do not combine numbers that use different definitions without explaining the difference." },
+      { question: "Can I use these guides to choose software?", answer: "Use them to define requirements and questions to verify. Confirm product features, security terms, plan limits, and pricing with the vendor before purchasing." },
+    ],
+    updatedAt: "2026-10-15",
+    readingTime: 5,
+  }
 }
 
 export function getResearch(slug: string): ResearchContent | null {
+  const cached = researchCache?.find((record) => record.slug === slug)
+  if (cached) return cached
   const file = path.join(CONTENT_DIR, "research", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  const research = readJson<ResearchContent>(file)
-  return { ...research, sections: sanitizeSections(research.sections), faqs: sanitizeFaqs(research.faqs) }
+  return normalizeResearchContent(readJson<ResearchContent>(file))
 }
 
 export function getAllResearch(): ResearchContent[] {
-  return readDir(path.join(CONTENT_DIR, "research"))
-    .map((f) => { const r = readJson<ResearchContent>(path.join(CONTENT_DIR, "research", f)); return { ...r, sections: sanitizeSections(r.sections), faqs: sanitizeFaqs(r.faqs) } })
+  if (researchCache) return researchCache
+  researchCache = readDir(path.join(CONTENT_DIR, "research"))
+    .map((f) => normalizeResearchContent(readJson<ResearchContent>(path.join(CONTENT_DIR, "research", f))))
+  return researchCache
+}
+
+function statisticResearchFocus(category: string): { metrics: string; questions: string } {
+  const key = category.toLowerCase()
+  if (/ai|machine learning|mlops/.test(key)) return {
+    metrics: "Assess task-level accuracy, human review time, data handling, model and prompt versioning, integration reliability, and the cost of successful outputs. Separate controlled evaluations from vendor-reported adoption or productivity claims.",
+    questions: "What tasks will the system perform, what evidence shows it performs them reliably, where is human approval required, what data may be retained or used for training, and how will costs change with usage?"
+  }
+  if (/security|privacy|identity|endpoint|cyber|network/.test(key)) return {
+    metrics: "Assess control coverage, alert quality, response workflow, auditability, deployment model, integration with existing identity and logging systems, and the time required to investigate incidents. Security claims need a precise scope and current evidence.",
+    questions: "Which products, regions, and plans are covered by a certification? What logs and evidence can administrators export? Which integrations are native? What is the escalation path during an incident?"
+  }
+  if (/health|medical|dental|pharma|veterinary|biotech/.test(key)) return {
+    metrics: "Assess workflow fit, data interoperability, access controls, audit trails, uptime commitments, retention, and the regulatory obligations relevant to the exact use case. Distinguish clinical or operational outcomes from vendor marketing claims.",
+    questions: "Which standards and jurisdictions are supported? How is sensitive data protected? Can records be exported? What validation, training, and support are required before deployment?"
+  }
+  if (/finance|fintech|insurance|insurtech|accounting|sales analytics/.test(key)) return {
+    metrics: "Assess reconciliation accuracy, audit trails, integration coverage, reporting latency, permissions, exception handling, and the cost of maintaining data quality. ROI claims should state the baseline, time period, sample, and calculation.",
+    questions: "Can every important figure be traced to a source record? How are exceptions reviewed? Which data exports and controls are available on the intended plan? What fees, usage caps, and implementation work are excluded from the headline price?"
+  }
+  if (/marketing|advertising|customer|crm|sales|public relations|pr software/.test(key)) return {
+    metrics: "Assess attribution coverage, consent and preference handling, lead or customer data quality, campaign-to-revenue reporting, integration reliability, and the effort needed to maintain tracking. Adoption and ROI figures are meaningful only with a defined population and measurement window.",
+    questions: "Which channels and regions are included? Can results be reconciled with the source analytics platform? How are consent, deduplication, and attribution windows handled? Which integrations require a higher plan?"
+  }
+  if (/devops|cloud|data|analytics|web|mobile|open source|automation|saas/.test(key)) return {
+    metrics: "Assess workflow compatibility, deployment and maintenance effort, reliability, integration coverage, access controls, data portability, and total operating cost. For performance claims, document the workload and environment rather than relying on an isolated benchmark.",
+    questions: "What is the supported deployment model? Can data and configuration be exported? Which limits apply to usage, storage, or automation? What is required to migrate away if the tool no longer fits?"
+  }
+  if (/education|edtech|learning/.test(key)) return {
+    metrics: "Assess accessibility, learner and administrator workflows, interoperability, data protection, reporting quality, and the time needed for training and support. Outcome claims should identify the population, comparison method, and period measured.",
+    questions: "Which learning standards and systems are supported? What student or staff data is stored? Can administrators export records? What accessibility and support commitments apply to the intended plan?"
+  }
+  if (/hr|recruit|workforce|human resources/.test(key)) return {
+    metrics: "Assess workflow coverage, permissions, audit trails, integrations with payroll and identity systems, data retention, and the effort needed to maintain records. Hiring or retention claims require a clearly defined cohort and time window.",
+    questions: "Which employee records are stored? Can sensitive fields be restricted? How are records exported or deleted? Which integrations, compliance features, and support levels require a paid tier?"
+  }
+  if (/manufactur|construction|agricultur|energy|logistics|transport|supply chain|maritime|mining|automotive|aerospace|environment|clean.?tech|green.?tech/.test(key)) return {
+    metrics: "Assess fit with operational workflows, asset or inventory visibility, integrations with existing systems, offline or field support, reliability, safety requirements, and implementation effort. Market-size estimates should not be used as a proxy for product suitability.",
+    questions: "Which operational systems can exchange data? What happens during an outage or connectivity loss? What training and migration are required? Which safety, regional, or compliance obligations must the vendor document?"
+  }
+  return {
+    metrics: "Assess the workflow being improved, adoption by the intended users, implementation effort, integration coverage, security, reliability, data portability, and total cost. Any market or ROI estimate should be tied to a defined sample, geography, time period, and source.",
+    questions: "What problem must the tool solve? Which evidence supports the claimed benefit? What does the quoted price exclude? How can data be exported, access removed, and the service replaced if requirements change?"
+  }
+}
+
+function normalizeStatisticContent(record: StatisticContent): StatisticContent {
+  const allStats = [
+    ...(record.stats || []),
+    ...(record.sections || []).flatMap((section) => section.stats || []),
+  ]
+  const hasCompleteSourceAudit = record.sourceAuditComplete === true && allStats.length > 0 &&
+    allStats.every((stat) => stat.sourceVerified === true && typeof stat.sourceUrl === "string" && /^https?:\/\//i.test(stat.sourceUrl))
+  if (hasCompleteSourceAudit) return record
+
+  const category = record.category || "Software"
+  const subject = record.title
+    .replace(/\b20\d{2}\b/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\s+(?:statistics|market data|report|benchmarks?|trends|study)$/i, "")
+    .trim() || `${category} Software`
+  const focus = statisticResearchFocus(category)
+  return {
+    ...record,
+    title: `${subject} Market Research Guide`,
+    description: `A practical guide to evaluating ${subject.toLowerCase()}. Numeric market estimates are withheld until each claim has a checkable source and documented verification.`,
+    stats: [],
+    sections: [
+      { title: `Metrics to assess in ${subject}`, body: `${focus.metrics} Start by writing down the operational decision this metric should inform. A useful measure needs a clear unit, an owner, a baseline, and a repeatable collection method. Avoid comparing a vendor's best-case result with your organization's average workflow unless the difference is explained.`, stats: [] },
+      { title: "Build a comparable dataset", body: "Choose the population, geography, time window, and definition before collecting figures. Record whether a measure counts vendors, customers, users, revenue, deployments, transactions, or outcomes; these are not interchangeable. Keep raw values and source notes together, record exclusions, and do not mix forecasts with observed results. If two sources define the market differently, report them separately instead of averaging them into a misleading single figure.", stats: [] },
+      { title: "How to verify market claims", body: "Before relying on a market-size, adoption, productivity, or return-on-investment claim, confirm the original source, publication date, geography, sample, definitions, and calculation method. A source name alone is not evidence: the link must lead to the report or dataset that supports the exact statement. Check whether the research was sponsored by a vendor, whether the sample represents your target market, and whether the report discloses its limitations. If the original evidence cannot be opened and checked, do not repeat the number as a fact.", stats: [] },
+      { title: "Questions to ask before buying", body: `${focus.questions} Ask the vendor to demonstrate the workflow using requirements that match your environment. Record what is included in the proposed plan, which integrations require extra work, how data can be exported, and which assumptions affect total cost. Treat a vendor's benchmark as a hypothesis to test rather than a promise that your organization will achieve the same outcome.`, stats: [] },
+      { title: "Source status and limitations", body: "Older numeric records for this category are undergoing source-provenance review. They are not displayed as verified statistics here. This guide remains available to help buyers evaluate requirements and source quality while claims are checked and direct links are added. Numeric figures can be restored when the source, scope, date, sample, definitions, and verification record are complete. A missing statistic is preferable to a precise-looking number that cannot be substantiated.", stats: [] },
+    ],
+    updatedAt: "2026-10-15",
+  }
 }
 
 export function getStatistic(slug: string): StatisticContent | null {
+  const cached = statisticsCache?.find((record) => record.slug === slug)
+  if (cached) return cached
   const file = path.join(CONTENT_DIR, "statistics", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  return readJson<StatisticContent>(file)
+  return normalizeStatisticContent(readJson<StatisticContent>(file))
 }
 
 export function getAllStatistics(): StatisticContent[] {
-  return readDir(path.join(CONTENT_DIR, "statistics"))
-    .map((f) => readJson<StatisticContent>(path.join(CONTENT_DIR, "statistics", f)))
+  if (statisticsCache) return statisticsCache
+  statisticsCache = readDir(path.join(CONTENT_DIR, "statistics"))
+    .map((f) => normalizeStatisticContent(readJson<StatisticContent>(path.join(CONTENT_DIR, "statistics", f))))
+  return statisticsCache
 }
 
 export function getBest(slug: string): BestContent | null {
@@ -965,17 +1322,91 @@ export function getAllBest(): BestContent[] {
     .filter((x): x is BestContent => Boolean(x))
 }
 
+function hubFocus(audience: string): { challenges: string[]; questions: string[] } {
+  const key = audience.toLowerCase()
+  if (/health|medical|clinic/.test(key)) return {
+    challenges: ["Protect sensitive patient and staff data with role-based access, clear retention rules, and auditable permissions.", "Confirm interoperability with the clinical, scheduling, billing, and communication systems already in use.", "Separate clinical workflow requirements from general office productivity needs.", "Validate the exact product, plan, region, and contract scope of any compliance claim before handling regulated data."],
+    questions: ["Which data will the tool store, and what controls govern access, retention, export, and deletion?", "Does the vendor offer the required agreements and security documentation for this exact product and plan?", "How will the system exchange data with existing clinical and administrative software?"]
+  }
+  if (/finance|financial|bank|account/.test(key)) return {
+    challenges: ["Maintain accurate records, approval workflows, and traceable changes across financial processes.", "Limit access to sensitive data and document the controls required by the organization's jurisdiction.", "Connect accounting, payments, customer records, and reporting without creating reconciliation gaps.", "Compare the full contract and operating cost rather than relying on a headline plan price."],
+    questions: ["Can transactions and changes be traced to an auditable source?", "Which permissions, exports, retention controls, and integrations are included in the intended plan?", "What fees, implementation work, support tiers, and contract terms affect total cost?"]
+  }
+  if (/agenc/.test(key)) return {
+    challenges: ["Keep client work, approvals, assets, and permissions organized without mixing confidential information between accounts.", "Make project scope, ownership, deadlines, and change requests visible to the team and client.", "Track time, delivery effort, and reporting needs using consistent definitions.", "Integrate project delivery, sales, billing, and communication without creating duplicate manual work."],
+    questions: ["Can the tool separate client workspaces and permissions?", "Can clients review deliverables and approvals without receiving unnecessary access?", "What reporting and export options support billing, project reviews, and handover?"]
+  }
+  if (/education|school|university|learning/.test(key)) return {
+    challenges: ["Support accessible learning and administrative workflows across the devices and systems used by staff and learners.", "Protect student and staff data with appropriate access, retention, and sharing controls.", "Connect learning, communication, identity, and administration systems without unnecessary duplicate records.", "Plan for onboarding, support, accessibility testing, and ongoing administration."],
+    questions: ["Which accessibility requirements and learning-system integrations are supported?", "What student data is stored, who can access it, and how can it be exported or deleted?", "Which support, training, and administrative controls are included in the intended plan?"]
+  }
+  if (/ecommerce|e-commerce|retail|online store/.test(key)) return {
+    challenges: ["Keep product, inventory, order, payment, fulfilment, and customer data consistent across systems.", "Make returns, exceptions, and customer-support workflows visible to the people responsible for resolving them.", "Protect customer information and review permissions across third-party integrations.", "Estimate platform, transaction, fulfilment, integration, and support costs using realistic sales and order assumptions."],
+    questions: ["How are inventory, orders, refunds, and customer records synchronized?", "Which transaction fees, usage caps, integrations, or add-ons affect the total cost?", "Can the business export product, order, and customer data if it changes platforms?"]
+  }
+  if (/nonprofit|non-profit|charit/.test(key)) return {
+    challenges: ["Coordinate donor, member, volunteer, and program information while limiting access to sensitive records.", "Connect fundraising, communications, accounting, and program reporting with minimal duplicate data entry.", "Choose workflows that staff and volunteers can maintain with available training and support.", "Check eligibility rules, renewal terms, and the full cost of any discounted or grant-funded plan."],
+    questions: ["Which data can be exported, and how are permissions and consent managed?", "Do discounts or special plans have eligibility, renewal, or usage conditions?", "Can staff produce the reports required by donors, boards, and regulators?"]
+  }
+  if (/enterprise|large organization/.test(key)) return {
+    challenges: ["Define identity, access, audit, procurement, and data-governance requirements before evaluating vendors.", "Validate integrations, deployment controls, support commitments, and migration effort across business units.", "Separate generally available features from roadmap commitments and plan-specific limitations.", "Compare total cost across seats, usage, support, implementation, and renewal terms."],
+    questions: ["Which controls are available on the quoted plan and in the required region?", "How are identity, audit logs, data retention, and exports managed?", "What service commitments, support response times, and exit terms are contractually documented?"]
+  }
+  if (/freelanc|solo/.test(key)) return {
+    challenges: ["Choose tools that reduce administration instead of adding more systems to maintain.", "Understand free-plan limits, billing terms, and when a paid upgrade becomes necessary.", "Keep client information, files, invoices, and task history organized and exportable.", "Select integrations that match the current workflow without locking important data into one service."],
+    questions: ["Can the core workflow be completed on the current plan?", "What limits or paid add-ons could affect use as the workload grows?", "Can files, contacts, invoices, and project history be exported in a usable format?"]
+  }
+  if (/startup/.test(key)) return {
+    challenges: ["Prioritize tools that solve current workflow problems without imposing unnecessary setup and administration.", "Keep permissions, customer data, and integrations manageable as the team grows.", "Understand usage limits and upgrade triggers before relying on a free or entry-level plan.", "Avoid duplicated systems by defining which tool owns each important record."],
+    questions: ["What is the minimum workflow the tool must support today?", "Which plan limits, integrations, or security controls could become blockers later?", "How difficult would it be to export data or switch tools if the company changes direction?"]
+  }
+  return {
+    challenges: ["Map the core workflow, users, and decision owners before choosing a product.", "Verify data protection, permissions, retention, and export requirements for the intended use.", "Check integration coverage, migration effort, training, and ongoing administration.", "Compare total cost and contract terms using the same assumptions across shortlisted tools."],
+    questions: ["Which workflow must improve, and how will success be measured?", "What evidence supports the vendor's feature, security, and performance claims?", "What is included in the intended plan, and how can data be exported if needs change?"]
+  }
+}
+
+function normalizeHubContent(hub: HubContent): HubContent {
+  if (hub.contentVerified === true) return { ...hub, faqs: sanitizeFaqs(hub.faqs) }
+  const audience = hub.audience || hub.title.replace(/^software for /i, "").trim()
+  const focus = hubFocus(audience)
+  const recommendations = hub.recommendations.map((recommendation) => ({
+    ...recommendation,
+    bestFor: `Consider ${recommendation.toolName} for evaluation when your team needs ${recommendation.category.toLowerCase()}. Confirm current capabilities, plan limits, integrations, security terms, and total cost with the vendor before choosing.`,
+  }))
+  return {
+    ...hub,
+    title: `Software for ${audience}: Selection Guide`,
+    description: `A practical guide to choosing software for ${audience.toLowerCase()}, covering workflow fit, integrations, data protection, implementation, and total cost. Verify product-specific claims with current vendor documentation.`,
+    challenges: focus.challenges,
+    recommendations,
+    comparisonMatrix: {
+      columns: ["Selection area", "Product to evaluate", "What to verify"],
+      rows: recommendations.map((recommendation) => [
+        recommendation.category,
+        recommendation.toolName,
+        `Confirm current features, plan limits, integrations, security terms, and data export options for ${audience.toLowerCase()} workflows.`,
+      ]),
+    },
+    faqs: sanitizeFaqs([
+      { question: "How should we shortlist software?", answer: `Start with the workflow, users, required integrations, data requirements, and budget for ${audience.toLowerCase()}. Separate mandatory requirements from preferences, then compare vendors using the same criteria and representative tasks.` },
+      { question: "How can we verify vendor claims?", answer: "Check current vendor documentation for the exact product, plan, region, and feature. For security or compliance claims, request the applicable contract terms and supporting documentation. Treat broad marketing language as unverified until the evidence matches your use case." },
+      { question: "How should we compare total cost?", answer: "Include subscription fees, seats, usage limits, required add-ons, implementation, migration, training, support, taxes, and renewal terms. Record unknowns and obtain a written quote when pricing is not public." },
+    ]),
+    lastUpdated: "2026-10-15",
+    contentVerified: false,
+  }
+}
+
 export function getHub(slug: string): HubContent | null {
   const file = path.join(CONTENT_DIR, "hubs", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  const hub = readJson<HubContent>(file)
-  hub.faqs = sanitizeFaqs(hub.faqs)
-  return hub
+  return normalizeHubContent(readJson<HubContent>(file))
 }
 
 export function getAllHubs(): HubContent[] {
   return readDir(path.join(CONTENT_DIR, "hubs"))
-    .map((f) => { const h = readJson<HubContent>(path.join(CONTENT_DIR, "hubs", f)); h.faqs = sanitizeFaqs(h.faqs); return h })
+    .map((f) => normalizeHubContent(readJson<HubContent>(path.join(CONTENT_DIR, "hubs", f))))
 }
 
 export function getContentTitle(type: string, slug: string): string | null {

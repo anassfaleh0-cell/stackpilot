@@ -32,12 +32,25 @@ describe("searchContent", () => {
 })
 
 describe("getAllReviews", () => {
-  it("returns all reviews sorted by rating", async () => {
+  it("sorts verified ratings first without ranking unverified records by unsupported scores", async () => {
     const { getAllReviews } = await import("@/lib/content/registry")
     const reviews = getAllReviews()
     expect(reviews.length).toBeGreaterThanOrEqual(6)
-    for (let i = 1; i < reviews.length; i++) {
-      expect(reviews[i - 1].rating).toBeGreaterThanOrEqual(reviews[i].rating)
+
+    const firstUnverified = reviews.findIndex((review) =>
+      review.ratingVerified !== true || typeof review.rating !== "number" || !Number.isFinite(review.rating)
+    )
+    const verified = reviews.filter((review) =>
+      review.ratingVerified === true && typeof review.rating === "number" && Number.isFinite(review.rating)
+    )
+
+    for (let i = 1; i < verified.length; i++) {
+      expect(verified[i - 1].rating).toBeGreaterThanOrEqual(verified[i].rating)
+    }
+    if (firstUnverified >= 0) {
+      expect(reviews.slice(firstUnverified).every((review) =>
+        review.ratingVerified !== true || typeof review.rating !== "number" || !Number.isFinite(review.rating)
+      )).toBe(true)
     }
   })
 })

@@ -20,6 +20,17 @@ function clean<T>(obj: T): T {
   return JSON.parse(JSON.stringify(obj, (_, v) => v ?? undefined))
 }
 
+function authorEntity(author: string) {
+  if (author.trim().toLowerCase() === "pilotstack team") {
+    return {
+      "@type": "Organization",
+      name: "PilotStack Team",
+      url: `${site.url}/authors/pilotstack-team`,
+    }
+  }
+  return { "@type": "Person", name: author }
+}
+
 export function OrganizationSchema() {
   const schema = clean({
     "@context": ctx,
@@ -103,7 +114,7 @@ export function ArticleSchema({
     "@id": (url || site.url) + "#article",
     headline: title,
     description,
-    author: { "@type": "Person", name: author },
+    author: authorEntity(author),
     publisher: organizationRef(),
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
@@ -142,7 +153,7 @@ export function NewsArticleSchema({
     "@id": (url || site.url) + "#newsarticle",
     headline: title,
     description,
-    author: { "@type": "Person", name: author },
+    author: authorEntity(author),
     publisher: organizationRef(),
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
@@ -159,7 +170,7 @@ export function NewsArticleSchema({
 }
 
 export function BlogPostingSchema({
-  title, description, publishedAt, updatedAt, author, image, url,
+  title, description, publishedAt, updatedAt, author, image, url, wordCount,
 }: {
   title: string
   description: string
@@ -168,6 +179,7 @@ export function BlogPostingSchema({
   author: string
   image?: string
   url?: string
+  wordCount?: number
 }) {
   const schema = clean({
     "@context": ctx,
@@ -175,14 +187,14 @@ export function BlogPostingSchema({
     "@id": (url || site.url) + "#blogposting",
     headline: title,
     description,
-    author: { "@type": "Person", name: author },
+    author: authorEntity(author),
     publisher: organizationRef(),
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
     image: { "@type": "ImageObject", url: image || `${site.url}/og.svg` },
     mainEntityOfPage: { "@type": "WebPage", "@id": url || site.url },
     inLanguage: "en-US",
-    wordCount: description.split(" ").length,
+    wordCount: wordCount || description.split(/\s+/).filter(Boolean).length,
   })
   return ld(schema, "ld-blogposting")
 }
@@ -390,25 +402,29 @@ export function ProductSchema({ name, description, image, brand, aggregateRating
 export function ReviewSchema({ name, description, rating, url, datePublished, body, image, companyInfo }: {
   name: string
   description: string
-  rating: number
+  rating?: number
   url: string
   datePublished?: string
   body?: string
   image?: string
   companyInfo?: { founded?: number; headquarters?: string; employees?: string }
 }) {
+  // A Review without a real rating is incomplete structured data. Do not
+  // invent a score just to satisfy validators; omit the Review node instead.
+  if (typeof rating !== "number" || !Number.isFinite(rating) || rating <= 0 || rating > 5) return null
+
   const schema = clean({
     "@context": ctx,
     "@type": "Review",
     "@id": url + "#review",
     name: `${name} Review`,
     reviewBody: body || description,
-    reviewRating: {
+    ...(typeof rating === "number" && Number.isFinite(rating) && rating > 0 && rating <= 5 ? { reviewRating: {
       "@type": "Rating",
       ratingValue: rating,
       bestRating: 5,
       worstRating: 1,
-    },
+    } } : {}),
     author: organizationRef(),
     datePublished: datePublished || undefined,
     itemReviewed: {

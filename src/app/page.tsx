@@ -12,7 +12,7 @@ import { BannerAd, NativeAd } from "@/components/ads"
 
 export const metadata = createMetadata({
   title: "Software Reviews & Buying Guides",
-  description: "In-depth software reviews, expert comparisons, and actionable buying guides to help businesses choose, implement, and optimize the right tools for every need.",
+  description: "Software reviews, practical comparisons, and buying guides with transparent criteria, source notes, and limitations.",
   path: "/",
 })
 
@@ -29,8 +29,8 @@ export default function HomePage() {
 
   const stats = [
     { value: `${reviews.length}+`, label: "Software Reviews" },
-    { value: `${comparisons.length}+`, label: "Expert Comparisons" },
-    { value: `${guides.length}+`, label: "Expert Guides" },
+    { value: `${comparisons.length}+`, label: "Comparisons" },
+    { value: `${guides.length}+`, label: "Guides" },
     { value: `${allResearch.length}+`, label: "Research Reports" },
   ]
 
@@ -46,7 +46,7 @@ export default function HomePage() {
         <Container className="relative py-24 sm:py-32 lg:py-40">
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-6 animate-fade-in">
-              <span className="trust-badge">Independent reviews since 2024</span>
+              <span className="trust-badge">Software research & buying guides</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.02] mb-6 text-balance">
               Navigate your{" "}
@@ -54,7 +54,7 @@ export default function HomePage() {
               {" "}with confidence
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10 text-pretty">
-              Detailed reviews, practical comparisons, and useful guides — every review scored against the same published rubric so you can compare tools with more context.
+              Detailed software reviews, practical comparisons, and buying guides. Explore product fit, feature trade-offs, and the questions to verify before choosing a tool.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
@@ -119,10 +119,12 @@ export default function HomePage() {
                 <Card className="h-full flex flex-col">
                   <div className="flex items-start justify-between mb-3">
                     <Badge variant="secondary">{tool.category}</Badge>
-                    <div className="flex items-center gap-1 text-sm font-medium text-accent">
-                      <Star size={14} className="fill-accent text-accent" />
-                      {tool.rating}
-                    </div>
+                    {tool.ratingVerified === true && typeof tool.rating === "number" && Number.isFinite(tool.rating) && (
+                      <div className="flex items-center gap-1 text-sm font-medium text-accent">
+                        <Star size={14} className="fill-accent text-accent" />
+                        {tool.rating}
+                      </div>
+                    )}
                   </div>
                   <CardTitle className="group-hover:text-primary transition-colors">{tool.name}</CardTitle>
                   <CardDescription className="mt-1.5">{tool.tagline}</CardDescription>
@@ -179,7 +181,7 @@ export default function HomePage() {
                   <Card className="h-full flex flex-col">
                     <div className="flex items-start justify-between mb-3">
                       <Badge variant="secondary">{cmp.category}</Badge>
-                      {cmp.winner && (
+                      {cmp.winnerVerified === true && cmp.winner && (
                         <span className="text-xs font-medium text-success flex items-center gap-1">
                           <Shield size={12} /> {cmp.winner} wins
                         </span>
@@ -372,7 +374,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold mb-0.5">Independent & Unbiased</h3>
-                  <p className="text-xs text-muted-foreground">No paid placements. No vendor influence.</p>
+                  <p className="text-xs text-muted-foreground">Paid placements are disclosed separately; payment does not determine editorial ratings or rankings.</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -390,7 +392,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold mb-0.5">Regularly Updated</h3>
-                  <p className="text-xs text-muted-foreground">Content reviewed and refreshed quarterly</p>
+                  <p className="text-xs text-muted-foreground">We update content when material product or pricing changes are verified.</p>
                 </div>
               </div>
             </div>

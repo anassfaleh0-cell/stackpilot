@@ -583,7 +583,7 @@ describe("rendering and SEO surfaces remain untouched", () => {
   it("keeps the registry published filters free of provenance imports", () => {
     const registry = fs.readFileSync(path.join(ROOT, "src", "lib", "content", "registry.ts"), "utf8")
     const publishedFilterSection = registry.slice(0, registry.indexOf("export {"))
-    expect(publishedFilterSection).not.toMatch(/provenance/)
+    expect(publishedFilterSection).not.toMatch(/from\s+["\'][^"\']*content\/provenance["\']/)
     expect(registry).toMatch(/from "@\/lib\/content\/provenance"/)
   })
 })

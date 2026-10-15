@@ -10,6 +10,18 @@ export interface ReviewContent {
   priceRange?: string
   rating: number
   reviewCount: number
+  /** True only when the editorial score has a documented, auditable source. */
+  ratingVerified?: boolean
+  /** True only when the review-count figure has a documented, auditable source. */
+  reviewCountVerified?: boolean
+  /** True only when the displayed price range has a documented, auditable source. */
+  priceRangeVerified?: boolean
+  /** True only when the feature availability matrix has a documented, auditable source. */
+  featuresVerified?: boolean
+  /** True only when category-level rating breakdowns have documented sources. */
+  ratingsVerified?: boolean
+  /** True only when company profile facts have been checked against current primary sources. */
+  companyFactsVerified?: boolean
   pros: string[]
   cons: string[]
   features: ReviewFeature[]
@@ -92,6 +104,10 @@ export interface ComparisonContent {
   tool1Slug: string
   tool2Slug: string
   winner: string | null
+  /** True only when the winner is backed by a documented, auditable comparison. */
+  winnerVerified?: boolean
+  /** True only when comparison feature rows have documented, auditable sources. */
+  featuresVerified?: boolean
   features: ComparisonFeature[]
   verdict: string
   faqs: FAQItem[]
@@ -99,6 +115,8 @@ export interface ComparisonContent {
   relatedGuides?: string[]
   relatedPosts?: string[]
   lastUpdated: string
+  /** Explicit editorial state; legacy `published` flags are not authoritative across the corpus. */
+  publicationStatus?: "draft" | "published"
   published?: boolean
 }
 
@@ -231,6 +249,7 @@ export interface UseCaseContent {
 
 export interface IndustryContent {
   slug: string
+  contentVerified?: boolean
   title: string
   description: string
   industry: string
@@ -254,6 +273,7 @@ export interface ResearchContent {
   sections: ContentSection[]
   methodology: string
   dataSources: { name: string; url: string }[]
+  sourceAuditComplete?: boolean
   publishedAt: string
   updatedAt?: string
   author: string
@@ -269,8 +289,9 @@ export interface StatisticContent {
   title: string
   description: string
   category: string
-  stats: { value: string; label: string; source: string; sourceUrl?: string }[]
-  sections: { title: string; stats: { value: string; label: string; source: string; sourceUrl?: string }[]; body?: string }[]
+  stats: { value: string; label: string; source: string; sourceUrl?: string; sourceVerified?: boolean }[]
+  sections: { title: string; stats: { value: string; label: string; source: string; sourceUrl?: string; sourceVerified?: boolean }[]; body?: string }[]
+  sourceAuditComplete?: boolean
   publishedAt: string
   updatedAt?: string
   relatedComparisons?: string[]
@@ -283,7 +304,7 @@ export interface BestContent {
   description: string
   category: string
   criteria: string[]
-  picks: { rank: number; toolSlug: string; toolName: string; rating: number; priceRange: string; bestFor: string; pros: string[]; cons: string[] }[]
+  picks: { rank: number; toolSlug: string; toolName: string; rating: number; ratingVerified?: boolean; priceRange: string; priceRangeVerified?: boolean; bestFor: string; pros: string[]; cons: string[] }[]
   pricingSummary: string
   comparisonTable: { columns: string[]; rows: string[][] }
   faqs: FAQItem[]
@@ -297,6 +318,7 @@ export interface BestContent {
 
 export interface HubContent {
   slug: string
+  contentVerified?: boolean
   title: string
   description: string
   audience: string

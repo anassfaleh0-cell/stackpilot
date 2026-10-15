@@ -21,6 +21,19 @@ const SITE_URL = "https://pilotstack.online"
 const CONTENT_DIR = path.resolve(process.cwd(), "content")
 const NOINDEX_FILE = path.resolve(process.cwd(), "noindex-list.json")
 
+function normalizeComparisonCategory(category) {
+  const value = String(category || "").trim().toLowerCase().replace(/\s+/g, " ")
+  const aliases = {
+    "analytics": "analytics-data",
+    "analytics & data": "analytics-data",
+    "hr & payroll": "hr-people",
+    "hr & people": "hr-people",
+    "video communication": "communication",
+    "communication": "communication",
+  }
+  return aliases[value] || value
+}
+
 let totalIssues = 0
 let totalWarnings = 0
 let totalPassed = 0
@@ -118,7 +131,8 @@ function checkRobots() {
 
   // Source-level checks must not emit an unconditional PASS.
   const aiBots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "PerplexityBot"]
-  const missingAiBotRules = aiBots.filter((bot) => !new RegExp(`userAgent\s*:\s*["']${bot}["']`).test(content))
+  const configuredAiBots = new Set([...content.matchAll(/userAgent\s*:\s*["']([^"']+)["']/g)].map((match) => match[1]))
+  const missingAiBotRules = aiBots.filter((bot) => !configuredAiBots.has(bot))
   if (missingAiBotRules.length > 0) {
     log("warn", `AI crawler user-agent rules are not explicitly declared: ${missingAiBotRules.join(", ")}`)
   } else {
@@ -126,11 +140,21 @@ function checkRobots() {
   }
 
   const privatePaths = ["/api/", "/admin/", "/dashboard", "/search", "/_global-error"]
-  const namedCrawlerRules = [...content.matchAll(/userAgent\s*:\s*["']([^"']+)["']([\s\\S]*?)(?=userAgent\s*:|sitemap\s*:|$)/g)]
+  const namedCrawlerRules = [...content.matchAll(/userAgent\s*:\s*["']([^"']+)["']([\s\S]*?)(?=userAgent\s*:|sitemap\s*:|$)/g)]
     .filter((match) => match[1] !== "*")
-  const missingPrivatePathBlocks = namedCrawlerRules
-    .filter((match) => privatePaths.some((route) => !match[2].includes(route)))
-    .map((match) => match[1])
+  // A shared disallow array is valid when every named rule references it.
+  // Do not report false positives merely because the route strings live once
+  // in a shared constant rather than being repeated inside each rule object.
+  const sharedDisallowList = content.match(/const\s+disallowedPaths\s*=\s*\[([\s\S]*?)\]/)
+  const sharedDisallowListCoversPrivatePaths =
+    Boolean(sharedDisallowList) &&
+    privatePaths.every((route) => sharedDisallowList[1].includes(route)) &&
+    namedCrawlerRules.every((match) => /disallow\s*:\s*disallowedPaths/.test(match[0]))
+  const missingPrivatePathBlocks = sharedDisallowListCoversPrivatePaths
+    ? []
+    : namedCrawlerRules
+        .filter((match) => privatePaths.some((route) => !match[2].includes(route)))
+        .map((match) => match[1])
   if (missingPrivatePathBlocks.length > 0) {
     log("warn", `Named crawler rules do not visibly repeat all private/search path exclusions: ${missingPrivatePathBlocks.join(", ")}; inspect the generated robots.txt rule groups`)
   } else if (namedCrawlerRules.length > 0) {
@@ -155,6 +179,7 @@ function checkContentQuality() {
   // page thin solely because that copy lives in the linked review record.
   const reviewsBySlug = new Map()
   const crossCategoryComparisons = []
+  let draftComparisonsSkipped = 0
   const reviewsDir = path.join(CONTENT_DIR, "reviews")
   for (const file of readDir(reviewsDir)) {
     const review = readJson(path.join(reviewsDir, file))
@@ -178,8 +203,18 @@ function checkContentQuality() {
     /choosing the right marketing\s*&\s*seo software/i,
     /adequate performance for most use cases\./i,
     /functional organized interface\./i,
+    /strong performance with fast load times\./i,
+    /delivers reliable performance with 99\.9% uptime SLA/i,
+    /delivers reliable performance with solid performance suitable for most business use cases/i,
     /written against our published editorial methodology/i,
     /updated when the underlying content is reviewed/i,
+    /positive ROI typically within 3-6 months/i,
+    /most teams start within hours/i,
+    /a teams team uses/i,
+    /updates weekly[^.]*major feature releases quarterly/i,
+    /perfect for freelancers and independent professionals/i,
+    /and \d+\+ more\./i,
+    /workfl(?:$|\s)/i,
   ]
 
   for (const ct of contentTypes) {
@@ -196,6 +231,10 @@ function checkContentQuality() {
     for (const file of files) {
       const data = readJson(path.join(dir, file))
       if (!data) continue
+      if (ct.dir === "comparisons" && data.publicationStatus === "draft") {
+        draftComparisonsSkipped++
+        continue
+      }
 
       const slug = file.replace(".json", "")
       const isNoindexed = noindexSets[ct.dir]?.has(slug)
@@ -253,7 +292,7 @@ function checkContentQuality() {
           for (const value of (review.cons || []).slice(0, 2)) words += wordCount(value)
         }
         const [review1, review2] = linkedReviews
-        if (review1?.category && review2?.category && review1.category !== review2.category) {
+        if (review1?.category && review2?.category && normalizeComparisonCategory(review1.category) !== normalizeComparisonCategory(review2.category)) {
           crossCategoryComparisons.push({
             slug: data.slug,
             tool1: data.tool1,
@@ -346,14 +385,18 @@ function checkContentQuality() {
       log("warn", ct.dir + ": " + missingFaq + " source records missing a FAQ data opportunity")
     }
     if (genericTemplateCount > 0) {
-      log("warn", `${ct.dir}: ${genericTemplateCount} indexed pages contain known generic filler phrases; examples: ${genericTemplateExamples.join(", ")}`)
+      log("warn", `${ct.dir}: ${genericTemplateCount} raw source records contain known generic phrase patterns; configured matches are filtered from rendered text by the registry, but source cleanup is still recommended. Examples: ${genericTemplateExamples.join(", ")}`)
     } else {
       log("pass", `${ct.dir}: No known generic filler phrases found`)
     }
   }
 
   if (crossCategoryComparisons.length > 0) {
-    log("warn", `comparisons: ${crossCategoryComparisons.length} pair products from different linked-review categories; pages should explain distinct use cases rather than present a universal winner. Samples: ${JSON.stringify(crossCategoryComparisons.slice(0, 10))}`)
+    log("warn", `comparisons: ${crossCategoryComparisons.length} eligible comparison records pair products from different linked-review categories; rendered pages suppress unverified winner/score claims, but each live pairing still needs editorial relevance review. Samples: ${JSON.stringify(crossCategoryComparisons.slice(0, 10))}`)
+    log("warn", `Full cross-category review list (slug and categories): ${JSON.stringify(crossCategoryComparisons.map(({ slug, category1, category2 }) => ({ slug, category1, category2 })))}`)
+  }
+  if (draftComparisonsSkipped > 0) {
+    log("pass", `comparisons: excluded ${draftComparisonsSkipped} explicit draft records from live SEO checks; they remain in the editorial review audit before publication`)
   }
 }
 
@@ -537,13 +580,21 @@ function checkPerformance() {
 function checkEEAT() {
   console.log("\n\x1b[1m8. E-E-A-T Signals\x1b[0m")
 
-  // Check for author pages
-  const authorsDir = path.resolve(process.cwd(), "content/authors")
-  if (fs.existsSync(authorsDir)) {
-    const authors = readDir(authorsDir)
-    log("pass", `${authors.length} author profiles exist`)
+  // Public author profiles are defined in the route and slug registry, not content/authors JSON.
+  const authorRegistryPath = path.resolve(process.cwd(), "src/lib/authors.ts")
+  if (fs.existsSync(authorRegistryPath)) {
+    const authorRegistry = fs.readFileSync(authorRegistryPath, "utf8")
+    const registryStart = authorRegistry.indexOf("PUBLIC_AUTHOR_SLUGS")
+    const registryOpen = authorRegistry.indexOf("[", registryStart)
+    const registryClose = authorRegistry.indexOf("]", registryOpen)
+    const slugList = registryStart >= 0 && registryOpen >= 0 && registryClose > registryOpen
+      ? authorRegistry.slice(registryOpen + 1, registryClose)
+      : ""
+    const authorCount = Math.floor((slugList.split('"').length - 1) / 2)
+    if (authorCount > 0) log("pass", `${authorCount} public author profile(s) are configured`)
+    else log("warn", "No public author profiles are configured in src/lib/authors.ts")
   } else {
-    log("warn", "Author profiles directory not found")
+    log("warn", "Author profile registry not found")
   }
 
   // Check for methodology page

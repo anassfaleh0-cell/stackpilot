@@ -22,6 +22,10 @@ const ENV_SLOTS: Record<string, string | undefined> = {
   anchor: process.env.NEXT_PUBLIC_ADSENSE_ANCHOR_SLOT,
 }
 
+function hasConfiguredSlot(format: AdSenseProps["format"], slot?: string) {
+  return Boolean(slot || ENV_SLOTS[format])
+}
+
 export function AdSense({
   format,
   slot,
@@ -86,6 +90,7 @@ export function AdSense({
 }
 
 export function BannerAd({ className = "", style, slot }: { className?: string; style?: React.CSSProperties; slot?: string }) {
+  if (!hasConfiguredSlot("banner", slot)) return null
   return (
     <div className={`ad-container ad-banner ${className}`} style={style}>
       <AdSense format="banner" slot={slot} style={{ minHeight: 90, width: "100%", maxWidth: 728 }} />
@@ -94,6 +99,7 @@ export function BannerAd({ className = "", style, slot }: { className?: string; 
 }
 
 export function NativeAd({ className = "", style, slot }: { className?: string; style?: React.CSSProperties; slot?: string }) {
+  if (!hasConfiguredSlot("native", slot)) return null
   return (
     <div className={`ad-container ad-native ${className}`} style={style}>
       <AdSense format="native" slot={slot} style={{ minHeight: 250, width: "100%", maxWidth: 300 }} />
@@ -102,6 +108,7 @@ export function NativeAd({ className = "", style, slot }: { className?: string; 
 }
 
 export function InFeedAd({ className = "", style, slot }: { className?: string; style?: React.CSSProperties; slot?: string }) {
+  if (!hasConfiguredSlot("in-feed", slot)) return null
   return (
     <div className={`ad-container ad-in-feed ${className}`} style={style}>
       <AdSense format="in-feed" slot={slot} style={{ minHeight: 90, width: "100%", maxWidth: 728 }} />
@@ -110,6 +117,7 @@ export function InFeedAd({ className = "", style, slot }: { className?: string; 
 }
 
 export function AnchorAd({ className = "", slot }: { className?: string; slot?: string }) {
+  if (!hasConfiguredSlot("anchor", slot)) return null
   return (
     <div className={`ad-container ad-anchor ${className}`}>
       <AdSense format="anchor" slot={slot} style={{ display: "block" }} />

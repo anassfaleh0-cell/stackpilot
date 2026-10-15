@@ -1,10 +1,11 @@
 import { describe, expect, it } from "vitest"
-import { getComparisonDecision } from "./comparison-decision"
+import { getComparisonDecision, getComparisonFeatureDisplayValue } from "./comparison-decision"
 
 describe("getComparisonDecision", () => {
   it("maps a slug winner to the human-readable product name", () => {
     expect(getComparisonDecision({
       winner: "1password",
+      winnerVerified: true,
       tool1: "1Password",
       tool1Slug: "1password",
       tool1Category: "Security & Compliance",
@@ -21,6 +22,7 @@ describe("getComparisonDecision", () => {
   it("does not declare a winner across different primary categories", () => {
     expect(getComparisonDecision({
       winner: "1password",
+      winnerVerified: true,
       tool1: "1Password",
       tool1Slug: "1password",
       tool1Category: "Security & Compliance",
@@ -30,6 +32,22 @@ describe("getComparisonDecision", () => {
     })).toEqual({
       categoriesDiffer: true,
       winnerLabel: "1Password",
+      hasComparableWinner: false,
+    })
+  })
+
+  it("does not publish a stored winner without explicit provenance", () => {
+    expect(getComparisonDecision({
+      winner: "alpha",
+      tool1: "Alpha",
+      tool1Slug: "alpha",
+      tool1Category: "Project Management",
+      tool2: "Beta",
+      tool2Slug: "beta",
+      tool2Category: "Project Management",
+    })).toEqual({
+      categoriesDiffer: false,
+      winnerLabel: null,
       hasComparableWinner: false,
     })
   })
@@ -48,5 +66,20 @@ describe("getComparisonDecision", () => {
       winnerLabel: null,
       hasComparableWinner: false,
     })
+  })
+})
+
+
+describe("getComparisonFeatureDisplayValue", () => {
+  it("does not present unsupported booleans or plan labels as verified facts", () => {
+    expect(getComparisonFeatureDisplayValue(true, false)).toBe("Not verified")
+    expect(getComparisonFeatureDisplayValue(false, undefined)).toBe("Not verified")
+    expect(getComparisonFeatureDisplayValue("Freemium", false)).toBe("Not verified")
+  })
+
+  it("shows values only when feature-level verification is explicitly true", () => {
+    expect(getComparisonFeatureDisplayValue(true, true)).toBe(true)
+    expect(getComparisonFeatureDisplayValue(false, true)).toBe(false)
+    expect(getComparisonFeatureDisplayValue("Freemium", true)).toBe("Freemium")
   })
 })

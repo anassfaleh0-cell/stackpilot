@@ -110,7 +110,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
               {allReviews.length > 0 && (
                 <section>
                   <h2 className="text-xl font-bold mb-4">Reviews by {author.name}</h2>
-                  <ReviewCardGrid items={allReviews.map(r => ({ slug: r.slug, name: r.name, category: r.category, rating: r.rating, tagline: r.tagline }))} />
+                  <ReviewCardGrid items={allReviews.map(r => ({ slug: r.slug, name: r.name, category: r.category, rating: r.rating, ratingVerified: r.ratingVerified === true, tagline: r.tagline }))} />
                 </section>
               )}
 

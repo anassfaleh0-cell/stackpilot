@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, ArticleSchema, WebPageSchema, ItemListSchema, softwareApp } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getIndustry, getAllIndustries, getContentTitle } from "@/lib/content/registry"
+import { getIndustry, getAllIndustries, getContentTitle, getReview } from "@/lib/content/registry"
 import { formatDate } from "@/lib/utils"
 import { getRelatedByCategory } from "@/lib/content/internal-links"
 import { InternalLinks, LEGACY_RELATED_TYPES, extendedRelatedItems } from "@/components/content/internal-links"
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!ind) return {}
   const readingTime = Math.max(5, Math.ceil((ind.description.split(/\s+/).length + ind.recommendations.length * 15) / 200))
   const shortTitle = ind.title.length > 58 ? ind.title.slice(0, 55) + "..." : ind.title
-  return createMetadata({ title: shortTitle, description: `Best software for ${ind.industry.toLowerCase()} businesses, with ratings, pricing context, and implementation tips for 2026.`, path: `/industries/${ind.slug}`, ogType: "article", publishedAt: ind.lastUpdated, updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime , noIndex: isNoindexed("industries", ind.slug) })
+  return createMetadata({ title: shortTitle, description: `Software options for ${ind.industry.toLowerCase()} businesses, with use-case fit, pricing considerations, and implementation tips for 2026. Ratings appear only when source provenance is documented.`, path: `/industries/${ind.slug}`, ogType: "article", publishedAt: ind.lastUpdated, updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime , noIndex: isNoindexed("industries", ind.slug) })
 }
 
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -98,11 +98,13 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                         <div className="p-5">
                           <div className="flex items-start justify-between mb-2">
                             <Link href={`/reviews/${rec.toolSlug}`} className="text-lg font-bold hover:text-primary transition-colors">{rec.toolName}</Link>
-                            <div className="flex items-center gap-1 text-sm">
-                              <Star size={14} className="fill-accent text-accent" />
-                              <span className="font-semibold">{rec.rating}</span>
-                              <span className="text-muted-foreground">/5</span>
-                            </div>
+                            {getReview(rec.toolSlug)?.ratingVerified === true && typeof getReview(rec.toolSlug)?.rating === "number" ? (
+                              <div className="flex items-center gap-1 text-sm">
+                                <Star size={14} className="fill-accent text-accent" />
+                                <span className="font-semibold">{getReview(rec.toolSlug)?.rating}</span>
+                                <span className="text-muted-foreground">/5</span>
+                              </div>
+                            ) : <span className="text-xs text-muted-foreground">Rating not verified</span>}
                           </div>
                           <p className="text-sm text-primary mb-1">{rec.bestFor}</p>
                           <Link href={`/reviews/${rec.toolSlug}`} className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
@@ -189,10 +191,16 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                   <div className="p-4">
                     <h3 className="font-semibold mb-3 text-sm">Top Picks</h3>
                     <div className="space-y-2">
-                      {ind.recommendations.sort((a, b) => b.rating - a.rating).slice(0, 4).map((rec) => (
+                      {[...ind.recommendations].sort((a, b) => {
+                         const aReview = getReview(a.toolSlug)
+                         const bReview = getReview(b.toolSlug)
+                         const aRating = aReview?.ratingVerified === true && typeof aReview.rating === "number" ? aReview.rating : -1
+                         const bRating = bReview?.ratingVerified === true && typeof bReview.rating === "number" ? bReview.rating : -1
+                         return bRating - aRating
+                       }).slice(0, 4).map((rec) => (
                         <Link key={rec.toolSlug} href={`/reviews/${rec.toolSlug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                           <span>{rec.toolName}</span>
-                          <span className="text-xs font-medium">{rec.rating}/5</span>
+                          <span className="text-xs font-medium">{getReview(rec.toolSlug)?.ratingVerified === true && typeof getReview(rec.toolSlug)?.rating === "number" ? `${getReview(rec.toolSlug)?.rating}/5` : "Rating not verified"}</span>
                         </Link>
                       ))}
                     </div>

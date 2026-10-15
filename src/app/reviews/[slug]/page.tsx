@@ -1,4 +1,5 @@
 import type { ContentSection } from "@/types/content"
+import { getVisibleReviewContent, getVisibleReviewFaqs } from "@/lib/content/review-quality"
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
@@ -24,31 +25,6 @@ import { BannerAd, NativeAd, InFeedAd } from "@/components/ads"
 
 const TOTAL_REVIEWS = getAllReviews().length
 
-// Keep review pages focused on substantive, tool-specific sections.
-// These legacy sections duplicate structured fields and were generated at scale.
-const HIDDEN_REVIEW_SECTION_TITLES = new Set([
-  "Rating Overview",
-  "Key Features",
-  "Hidden Costs",
-  "Learning Curve",
-  "Setup Time",
-  "Migration Difficulty",
-  "Industry Fit",
-  "Common Mistakes",
-  "Tips from experienced users",
-  "Buying Advice",
-])
-
-function getVisibleReviewContent(content: ContentSection[]) {
-  return content.filter((section) => {
-    if (HIDDEN_REVIEW_SECTION_TITLES.has(section.title)) return false
-    if (section.type === "diagram") {
-      return ["pricing-ladder", "feature-radar", "implementation-flow"].includes(section.body)
-    }
-    return true
-  })
-}
-
 export function generateStaticParams() {
   return getAllReviews().map((item) => ({ slug: item.slug }))
 }
@@ -57,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const tool = getReview(slug)
   if (!tool) return {}
-  const visibleContent = getVisibleReviewContent(tool.content)
+  const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true)
   const wordCount = visibleContent.reduce((a, s) => a + s.body.split(/\s+/).length, 0)
   const noindexed = isNoindexed("reviews", slug)
   return createMetadata({
@@ -83,19 +59,22 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const entity = getEntity(slug)
   const companyFacts = resolveCompanyFacts(tool, entity)
   const pros = editorialPros(tool.pros)
-  const visibleFaqs = tool.faqs.slice(0, 8)
-  const visibleContent = getVisibleReviewContent(tool.content)
+  const visibleFaqs = getVisibleReviewFaqs(tool.faqs, tool.priceRangeVerified === true).slice(0, 8)
+  const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true)
 
   const authorSlug = tool.author ? tool.author.trim().toLowerCase().replace(/\s+/g, "-") : ""
   const authorHref = authorSlug && authorSlugs.includes(authorSlug) ? `/authors/${authorSlug}` : null
 
   const allReviews = getAllReviews()
 
+  const hasEditorialRating = tool.ratingVerified === true && typeof tool.rating === "number" && Number.isFinite(tool.rating)
+  const categoryRatings = tool.ratingsVerified === true && Array.isArray(tool.ratings) ? tool.ratings : []
+  const reviewCount = tool.reviewCountVerified === true && typeof tool.reviewCount === "number" && Number.isFinite(tool.reviewCount) ? tool.reviewCount : null
   const bestInCategory = allReviews
-    .filter((r) => r.category === tool.category)
-    .sort((a, b) => b.rating - a.rating)[0]
-  const isBestInCategory = bestInCategory?.slug === tool.slug
-  const isBestValue = tool.pricing === "Freemium" || tool.pricing === "Free" || tool.pricing === "Free Trial"
+    .filter((r) => r.category === tool.category && r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating))
+    .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
+  const isBestInCategory = hasEditorialRating && bestInCategory?.slug === tool.slug
+  const isBestValue = tool.priceRangeVerified === true && (tool.pricing === "Freemium" || tool.pricing === "Free" || tool.pricing === "Free Trial")
 
   return (
     <>
@@ -104,8 +83,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
         { name: "Reviews", href: "/reviews" },
         { name: tool.name, href: `/reviews/${tool.slug}` },
       ]} />
-      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.contentPublished} body={tool.description} image={tool.logo ? `${site.url}${tool.logo}` : undefined} companyInfo={companyFacts} />
-      <SoftwareSchema name={tool.name} description={tool.tagline} category={tool.category} brand={tool.name} platforms={entity?.company?.platforms || tool.company?.deployment} url={`${site.url}/reviews/${tool.slug}`} image={tool.logo ? `${site.url}${tool.logo}` : undefined} offers={entity?.pricing?.[0]?.price !== undefined && entity.pricing[0].price !== null ? { price: entity.pricing[0].price, priceCurrency: entity.pricing[0].currency || "USD", url: tool.website || undefined } : undefined} />
+      <ReviewSchema name={tool.name} description={tool.description} rating={hasEditorialRating ? tool.rating : undefined} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.contentPublished} body={tool.description} image={tool.logo ? `${site.url}${tool.logo}` : undefined} companyInfo={companyFacts} />
+      <SoftwareSchema name={tool.name} description={tool.tagline} category={tool.category} brand={tool.name} platforms={entity?.company?.platforms || tool.company?.deployment} url={`${site.url}/reviews/${tool.slug}`} image={tool.logo ? `${site.url}${tool.logo}` : undefined} offers={tool.priceRangeVerified === true && entity?.pricing?.[0]?.price !== undefined && entity.pricing[0].price !== null ? { price: entity.pricing[0].price, priceCurrency: entity.pricing[0].currency || "USD", url: tool.website || undefined } : undefined} />
       <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.contentModified} />
       <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.contentPublished} updatedAt={tool.contentModified} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={visibleContent.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} keywords={[`${tool.name} review`, `${tool.name} pricing`, `${tool.name} pros and cons`, `${tool.category} software`, `${tool.name} alternatives`]} mentions={[{ name: tool.name, url: tool.website || `${site.url}/reviews/${tool.slug}` }]} />
       <FAQSchema questions={visibleFaqs} path={`/reviews/${tool.slug}`} />
@@ -124,7 +103,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               subtitle={tool.tagline}
               category={tool.category}
               variant="review"
-              rating={tool.rating}
+              rating={hasEditorialRating ? tool.rating : undefined}
               className="w-full min-h-[200px] sm:min-h-[240px] lg:min-h-[280px]"
             />
           </div>
@@ -141,12 +120,14 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 {isBestValue && (
                   <Badge variant="warning">Best Value</Badge>
                 )}
-                <div className="flex items-center gap-1 text-sm">
-                  <Star size={14} className="fill-accent text-accent" />
-                  <span className="font-semibold">{formatScore(tool.rating)}</span>
-                  <span className="text-muted-foreground">/ 5.0</span>
-                  <span className="text-xs text-muted-foreground">({tool.reviewCount} reviews)</span>
-                </div>
+                {hasEditorialRating && (
+                  <div className="flex items-center gap-1 text-sm">
+                    <Star size={14} className="fill-accent text-accent" />
+                    <span className="font-semibold">{formatScore(tool.rating)}</span>
+                    <span className="text-muted-foreground">/ 5.0</span>
+                    {reviewCount !== null && <span className="text-xs text-muted-foreground">({reviewCount.toLocaleString()} reviews)</span>}
+                  </div>
+                )}
               </div>
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-1">
                 <span className="flex items-center gap-1">
@@ -182,9 +163,9 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
                 <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
                 <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                  <li>Overall rating: {formatScore(tool.rating)}/5 from {tool.reviewCount.toLocaleString()} reviews</li>
-                  <li>Pricing: {tool.priceRange} ({tool.pricing})</li>
-                  <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : `${tool.name} excels at ${tool.features.filter(f => f.available).slice(0, 2).map(f => f.name.toLowerCase()).join(" and ")}`}</li>
+                  {hasEditorialRating && <li>Editorial rating: {formatScore(tool.rating)}/5{reviewCount !== null ? ` from ${reviewCount.toLocaleString()} recorded reviews` : ""}</li>}
+                  <li>Pricing: {tool.priceRangeVerified === true ? `${tool.priceRange} (${tool.pricing})` : "Current plan and regional pricing must be verified directly with the vendor."}</li>
+                  <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : tool.featuresVerified === true && tool.features.some((feature) => feature.available) ? `Recorded strengths include ${tool.features.filter((feature) => feature.available).slice(0, 2).map((feature) => feature.name.toLowerCase()).join(" and ")}; confirm current availability with the vendor.` : `Evaluate ${tool.name} against your workflow requirements and verify current capabilities with the vendor.`}</li>
                   <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `Suitable for most ${tool.category} use cases`}</li>
                   <li>{entity?.useCases?.primary?.slice(0, 2).join(", ") ? `Common use cases: ${entity.useCases.primary.slice(0, 2).join(", ")}` : `Category: ${tool.category}`}</li>
                   {tool.alternatives.length > 0 ? (
@@ -192,7 +173,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   ) : (
                     <li>Comparison section below: how {tool.name} sits against other tools</li>
                   )}
-                  <li>Scored across {tool.ratings.length} recorded categories on a 1-5 scale — the overall rating is their mean</li>
+                  {categoryRatings.length > 0 && <li>Editorial rating dimensions: {categoryRatings.map((item) => item.label).join(", ")}</li>}
                 </ul>
               </div>
 
@@ -256,7 +237,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* External reviews / social proof */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-4">Third-Party Reviews</h2>
-                <p className="text-sm text-muted-foreground mb-4">{tool.name} carries a {formatScore(tool.rating)}/5 rating across {tool.reviewCount.toLocaleString()} reviews in the PilotStack dataset. Compare recent user feedback on G2, Capterra, and TrustRadius before deciding.</p>
+                <p className="text-sm text-muted-foreground mb-4">Check current, independent user feedback on G2, Capterra, and TrustRadius before deciding. Third-party review totals and scores change over time and should be verified on the source platforms.</p>
                 <div className="flex flex-wrap gap-3">
                   <a href={`https://www.g2.com/products/${tool.slug}/review`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -277,17 +258,17 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Rating Overview</h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-                  <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={formatScore(tool.rating)} title="Overall Rating" description={`Mean of ${tool.ratings.length} category ratings`} />
+                  {hasEditorialRating && <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={formatScore(tool.rating)} title="Overall Rating" description={categoryRatings.length > 0 ? `Mean of ${categoryRatings.length} category ratings` : "Editorial score"} />}
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                  } value={`${tool.features.filter((f) => f.available).length}`} title="Available Features" description={`Out of ${tool.features.length} total`} />
+                  } value={tool.featuresVerified === true ? `${tool.features.filter((feature) => feature.available).length}` : "Not verified"} title="Feature Profile" description={tool.featuresVerified === true ? `Out of ${tool.features.length} recorded items` : "Feature availability has not been independently verified"} />
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                     </svg>
-                  } value={tool.pricing} title="Pricing Model" />
+                  } value={tool.priceRangeVerified === true ? tool.pricing : "Not verified"} title="Pricing Model" />
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <circle cx="12" cy="12" r="10" />
@@ -296,7 +277,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   } value={`${tool.content.length}`} title="Review Sections" description="In-depth coverage" />
                 </div>
                 <div className="flex justify-center">
-                  <EditorialRatingVisual ratings={tool.ratings} slug={tool.slug} category={tool.category} className="w-full max-w-md" />
+                  {categoryRatings.length > 0 && <EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" />}
                 </div>
               </section>
 
@@ -305,6 +286,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   {entity.company && hasCompanyFacts(companyFacts) && (
                     <section className="mb-12 scroll-mt-24" id="company">
                       <h2 className="text-2xl font-bold tracking-tight mb-6">Company Overview</h2>
+                      <p className="text-muted-foreground text-sm mb-4">These are recorded profile facts, not independently verified claims. Confirm founding, ownership, location, and customer information with current primary sources before relying on them.</p>
                       <EntityOverview entity={entity} facts={companyFacts} />
                     </section>
                   )}
@@ -312,7 +294,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   {entity.security && (
                     <section className="mb-12 scroll-mt-24" id="security">
                       <h2 className="text-2xl font-bold tracking-tight mb-6">Security &amp; Compliance</h2>
-                      <p className="text-muted-foreground text-sm mb-4">Security certifications, compliance standards, and data protection measures for {entity.name}.</p>
+                      <p className="text-muted-foreground text-sm mb-4">Recorded security and compliance information for {entity.name}. Verify the exact product, plan, region, certification scope, and contract terms with current vendor documentation before relying on a claim.</p>
                       <SecurityTable entity={entity} />
                     </section>
                   )}
@@ -320,7 +302,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   {entity.capabilities && (
                     <section className="mb-12 scroll-mt-24" id="capabilities">
                       <h2 className="text-2xl font-bold tracking-tight mb-6">Capabilities</h2>
-                      <p className="text-muted-foreground text-sm mb-4">Feature capabilities and platform functionality offered by {entity.name}.</p>
+                      <p className="text-muted-foreground text-sm mb-4">Recorded feature information for {entity.name}. Verify current availability, plan limits, and integrations with vendor documentation.</p>
                       <CapabilitiesGrid entity={entity} />
                     </section>
                   )}
@@ -328,7 +310,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   {entity.useCases && (
                     <section className="mb-12 scroll-mt-24" id="use-cases">
                       <h2 className="text-2xl font-bold tracking-tight mb-6">Use Cases &amp; Fit</h2>
-                      <p className="text-muted-foreground text-sm mb-4">Who {entity.name} is best suited for, common workflows, and typical team profiles.</p>
+                      <p className="text-muted-foreground text-sm mb-4">Recorded use cases and workflow examples for {entity.name}. Validate fit against your own requirements and current vendor documentation.</p>
                       <UseCasePanel entity={entity} />
                     </section>
                   )}
@@ -336,12 +318,12 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   {entity.integrations && entity.integrations.length > 0 && (
                     <section className="mb-12 scroll-mt-24" id="integrations">
                       <h2 className="text-2xl font-bold tracking-tight mb-6">Integrations</h2>
-                      <p className="text-muted-foreground text-sm mb-4">{entity.name} integrates with {entity.integrations.length} platforms and services.</p>
+                      <p className="text-muted-foreground text-sm mb-4">The recorded profile lists {entity.integrations.length} integrations for {entity.name}. Confirm that the specific connection, sync direction, and required plan are supported before relying on it.</p>
                       <IntegrationDisplay entity={entity} />
                     </section>
                   )}
 
-                  {entity.pricing && entity.pricing.length > 0 && (
+                  {tool.priceRangeVerified === true && entity.pricing && entity.pricing.length > 0 && (
                     <section className="mb-12 scroll-mt-24" id="pricing-plans">
                       <h2 className="text-2xl font-bold tracking-tight mb-6">Pricing Plans</h2>
                       <p className="text-muted-foreground text-sm mb-4">Detailed pricing breakdown for {entity.name} plans.</p>
@@ -363,8 +345,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     <p className="text-muted-foreground text-xs leading-relaxed">{tool.category === "Developer Tools" ? "Create a sample project with real code to test the platform end-to-end before committing to a team rollout." : tool.category === "CRM & Sales" ? "Import a subset of your actual contacts and deals into the trial — testing with sample data hides the migration pain points." : "Import real data from your current tool rather than starting from scratch in the trial. This reveals migration friction points early."}</p>
                   </div>
                   <div className="p-3 rounded-lg bg-card">
-                    <div className="font-semibold text-xs mb-1">{tool.category === "Developer Tools" ? "Involve your team" : "Test with 3+ team members"}</div>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{tool.category === "Developer Tools" ? "Have at least three engineers from different skill levels use the trial independently. A tool that only your senior dev can configure creates bus-factor risk." : "Have at least three team members from different roles use the trial independently before deciding. The admin experience often differs from the daily user experience."}</p>
+                    <div className="font-semibold text-xs mb-1">{tool.category === "Developer Tools" ? "Involve your team" : "Include the people who will use it"}</div>
+                    <p className="text-muted-foreground text-xs leading-relaxed">{tool.category === "Developer Tools" ? "Have at least three engineers from different skill levels use the trial independently. A tool that only your senior dev can configure creates bus-factor risk." : "Ask people in the roles that will use or administer the tool to test the same workflows independently. The admin experience can differ from the daily user experience."}</p>
                   </div>
                   <div className="p-3 rounded-lg bg-card">
                     <div className="font-semibold text-xs mb-1">Check the exit</div>
@@ -372,7 +354,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   </div>
                   <div className="p-3 rounded-lg bg-card">
                     <div className="font-semibold text-xs mb-1">Budget for setup</div>
-                    <p className="text-muted-foreground text-xs leading-relaxed">Most organizations underestimate implementation time by 2-3x. Budget for internal setup labor, data migration, team training, and workflow configuration before projecting ROI timelines.</p>
+                    <p className="text-muted-foreground text-xs leading-relaxed">Estimate implementation effort before projecting ROI. Include internal setup labor, data migration, team training, workflow configuration, and ongoing administration.</p>
                   </div>
                 </div>
                 <p className="text-[11px] text-muted-foreground mt-3">Compiled under our published methodology from a library of {TOTAL_REVIEWS} B2B SaaS reviews across {categories.length} categories.</p>
@@ -434,13 +416,13 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* Feature Breakdown */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Feature Breakdown</h2>
-                <EditorialFeatureMatrix features={tool.features} slug={tool.slug} category={tool.category} />
+                {tool.featuresVerified === true ? <EditorialFeatureMatrix features={tool.features} slug={tool.slug} category={tool.category} /> : <p className="text-sm text-muted-foreground rounded-xl border border-border bg-muted-bg p-4">The feature profile has not been independently verified. Use the vendor documentation to confirm current availability, plan restrictions, integrations, and regional limitations before relying on a capability.</p>}
               </section>
 
               {entity && (
                 <section className="mb-12 scroll-mt-24" id="alternatives">
                   <h2 className="text-2xl font-bold tracking-tight mb-6">How {tool.name} Compares</h2>
-                  <p className="text-muted-foreground text-sm mb-4">Comparison cards generated from this site&apos;s recorded tool profiles. Ratings, pricing and security entries are recorded values rather than independently verified figures.</p>
+                  <p className="text-muted-foreground text-sm mb-4">Comparison cards use recorded tool profiles. Numeric ratings, pricing, feature availability, and security claims are shown only when their source status is documented; otherwise verify details directly with the vendor.</p>
                   <AutoComparison slug={slug} />
                 </section>
               )}
@@ -459,31 +441,37 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                       </svg>
                       <h3 className="font-semibold text-sm">Verdict</h3>
                     </div>
-                    <div className="text-lg font-bold text-primary mb-1">{formatScore(tool.rating)}/5</div>
-                    <ScoreBar score={tool.rating} className="mb-3" />
-                    <p className="text-sm text-muted-foreground">{tool.name} scores {formatScore(tool.rating)}/5 — the mean of {tool.ratings.length} recorded category ratings.</p>
+                    {hasEditorialRating ? (
+                      <>
+                        <div className="text-lg font-bold text-primary mb-1">{formatScore(tool.rating)}/5</div>
+                        <ScoreBar score={tool.rating} className="mb-3" />
+                        <p className="text-sm text-muted-foreground">{categoryRatings.length > 0 ? `Mean of ${categoryRatings.length} editorial rating dimensions.` : "Editorial score; see the review methodology for context."}</p>
+                      </>
+                    ) : <p className="text-sm text-muted-foreground">No independently verified aggregate score is published for this review. Compare the practical criteria and current vendor terms below.</p>}
                   </div>
                 </GlassCard>
 
                 {/* Rating Breakdown */}
-                <GlassCard>
-                  <div className="p-4">
-                    <h3 className="font-semibold mb-3 text-sm">Rating Breakdown</h3>
-                    <div className="space-y-3">
-                      {tool.ratings.map((item) => (
-                        <div key={item.label}>
-                          <div className="flex justify-between text-xs mb-0.5">
-                            <span className="text-muted-foreground">{item.label}</span>
-                            <span className="font-medium">{formatScore(item.score)}/5</span>
+                {categoryRatings.length > 0 && (
+                  <GlassCard>
+                    <div className="p-4">
+                      <h3 className="font-semibold mb-3 text-sm">Rating Breakdown</h3>
+                      <div className="space-y-3">
+                        {categoryRatings.map((item) => (
+                          <div key={item.label}>
+                            <div className="flex justify-between text-xs mb-0.5">
+                              <span className="text-muted-foreground">{item.label}</span>
+                              <span className="font-medium">{formatScore(item.score)}/5</span>
+                            </div>
+                            <div className="h-1.5 rounded-full bg-muted-bg overflow-hidden">
+                              <div className="h-full rounded-full bg-primary transition-all duration-500" style={{ width: scoreWidth(item.score) }} />
+                            </div>
                           </div>
-                          <div className="h-1.5 rounded-full bg-muted-bg overflow-hidden">
-                            <div className="h-full rounded-full bg-primary transition-all duration-500" style={{ width: scoreWidth(item.score) }} />
-                          </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </GlassCard>
+                  </GlassCard>
+                )}
 
                 {/* Editorial Reviewer */}
                 <EditorialExpert author={tool.author} />
@@ -495,7 +483,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 {(companyFacts.founded || companyFacts.headquarters || companyFacts.customers || companyFacts.employeeCount || companyFacts.pricingModel || (companyFacts.deployment && companyFacts.deployment.length > 0) || companyFacts.apiAvailable !== undefined || companyFacts.migrationComplexity) && (
                   <GlassCard>
                     <div className="p-4">
-                      <h3 className="font-semibold mb-3 text-sm">Company Details</h3>
+                      <h3 className="font-semibold mb-1 text-sm">Recorded Company Details</h3>
+                      <p className="text-[11px] text-muted-foreground mb-3">These profile fields are recorded dataset values, not independently verified facts. Confirm important details with the vendor.</p>
                       <div className="space-y-2 text-xs text-muted-foreground">
                         {companyFacts.founded && <p>Founded: <span className="text-foreground">{companyFacts.founded}</span></p>}
                         {companyFacts.headquarters && <p>HQ: <span className="text-foreground">{companyFacts.headquarters}</span></p>}
@@ -552,7 +541,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                           return (
                             <Link key={altSlug} href={`/reviews/${altSlug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                               <span>{alt.name}</span>
-                              <span className="text-xs font-medium">{formatScore(alt.rating)}/5</span>
+                              {alt.ratingVerified === true && typeof alt.rating === "number" && Number.isFinite(alt.rating) ? <span className="text-xs font-medium">{formatScore(alt.rating)}/5</span> : null}
                             </Link>
                           )
                         })}
@@ -573,7 +562,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
           <section className="mt-16 mb-8">
             <h2 className="text-lg font-bold tracking-tight mb-3">Sources &amp; Methodology</h2>
             <div className="text-xs text-muted-foreground leading-relaxed space-y-1.5">
-              <p>Each page shows an overall rating plus {tool.ratings.length} recorded category ratings on a 1-5 scale, all drawn from the PilotStack dataset. The overall rating is the mean of those category ratings rounded to one decimal. Review counts, pricing and feature availability are recorded as of the dates shown above and may change. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for how ratings are calculated, what each page is sourced from, and our editorial independence policy.</p>
+              <p>Review pages focus on product fit, features, pricing considerations, and limitations. A numeric score or review count is shown only when its provenance is documented; otherwise it is omitted pending verification. Pricing and feature availability can change, so confirm important details with the vendor. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for sourcing and editorial independence.</p>
               <p>Content updated: {formatDate(tool.contentModified)} · No vendor payment or sponsorship influenced this review · We may earn affiliate commission on purchases made through links on this site.</p>
             </div>
           </section>
@@ -593,7 +582,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
             </div>
             <div className="mt-4 text-center">
               <p className="text-xs text-muted-foreground">
-                Prices and ratings are approximate and may vary.
+                Pricing, plan limits, and feature availability can change; verify current details with the vendor.
               </p>
             </div>
           </section>
