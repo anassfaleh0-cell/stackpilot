@@ -40,7 +40,7 @@ export default function PrivacyPage() {
               <li>Analyze aggregate traffic patterns to improve our content and user experience</li>
               <li>Respond to support inquiries and feedback</li>
             </ul>
-            <p>We never sell your personal information to third parties. We never use your data for automated decision-making or profiling beyond aggregate analytics.</p>
+            <p>We do not sell personal information for money. Advertising and analytics providers may process online identifiers and usage data as described below; depending on the provider, configuration, and applicable law, some advertising-related disclosures may be treated as “sharing.” PilotStack does not make decisions about individuals using these data for eligibility or similarly significant effects.</p>
 
             <h2>Cookies and Tracking</h2>
             <p>We use a minimal set of cookies to operate the site. You can manage cookie preferences through your browser settings or our cookie consent banner at any time.</p>
