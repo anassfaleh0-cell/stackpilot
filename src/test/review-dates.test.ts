@@ -335,6 +335,15 @@ describe("H-09A seo safety", () => {
   })
 
 describe("review source transparency", () => {
+  it("labels review-card and hero scores as internal editorial assessments", () => {
+    const cardSrc = read(path.join(ROOT, "src", "components", "entity", "review-card-grid.tsx"))
+    const heroSrc = read(path.join(ROOT, "src", "components", "editorial", "editorial-hero.tsx"))
+    expect(cardSrc).toContain("PilotStack score")
+    expect(cardSrc).toContain("not a third-party user rating")
+    expect(heroSrc).toContain("PilotStack editorial score")
+    expect(heroSrc).toContain("not a third-party user rating")
+  })
+
   it("external review links search for real listings instead of guessing provider URLs", () => {
     expect(reviewPageSrc).toContain('encodeURIComponent("site:g2.com " + tool.name + " reviews")')
     expect(reviewPageSrc).toContain('encodeURIComponent("site:capterra.com " + tool.name + " reviews")')
