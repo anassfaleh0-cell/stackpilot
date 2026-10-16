@@ -258,7 +258,7 @@
     },
     {
       "title": "Performance",
-      "body": "Notion's performance varies significantly by workspace size and complexity. For workspaces under 1,000 blocks, page loads complete in 1-2 seconds and database views render in under 1 second. At 5,000-10,000 blocks, page loads increase to 2-4 seconds and database views with linked relations take 3-5 seconds to render. Workspaces exceeding 10,000 blocks experience noticeable degradation: page loads of 4-8 seconds, input latency of 200-500ms on text entry, and drag-and-drop operations that stutter or fail intermittently. The mobile app (iOS and Android) loads in 3-5 seconds on modern devices and supports offline viewing of recently accessed pages, though offline edits sync unreliably — approximately 15-20% of offline edits fail in our testing and must be manually re-entered. Search on workspaces under 5,000 pages returns results in 2-3 seconds; on workspaces with 20,000+ pages, search latency extends to 6-12 seconds. Notion's uptime is generally reliable (99.95% based on status page data), with occasional brief outages during feature deployments. The platform experienced three significant outages exceeding 1 hour in 2025, all attributed to database infrastructure scaling issues during peak usage hours.",
+      "body": "Notion’s responsiveness can vary with workspace structure, database complexity, network conditions, and device capability. PilotStack has not independently benchmarked page-load times across controlled workspace sizes, so this review does not claim specific speed measurements or block-count thresholds. Test the pages, linked databases, search, and mobile workflows that matter to your team before scaling up.",
       "type": "text"
     },
     {
