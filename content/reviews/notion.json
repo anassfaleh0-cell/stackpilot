@@ -196,7 +196,7 @@
     },
     {
       "title": "Worst Fit",
-      "body": "Notion is a poor fit for three specific scenarios. Organizations that need structured project management with native Gantt/timeline charts, resource leveling, time tracking with billable hours, or earned value management should not choose Notion — its board view is a visual database filter, not a true Kanban system, and its timeline view (added in 2025) lacks dependency mapping and critical path visualization that Asana, Jira, and monday.com provide as baseline features. Teams that work in environments with unreliable internet connectivity will find Notion frustrating: the desktop offline mode is read-only and frequently loses sync, making it unusable for field workers, travelers, or anyone who edits documents on flights or in areas with spotty coverage. Large enterprises with structured content governance requirements — mandatory page templates, enforced metadata schemas, automated content lifecycle policies — will exceed Notion's capabilities. The platform's permission model is page-based rather than role-based, making it difficult to enforce standardized access policies across departments with 500+ users. Organizations with 100+ editors and 10,000+ pages of content consistently report performance degradation that impacts daily usability.",
+      "body": "Notion is a poor fit for three specific scenarios. Organizations that need structured project management with native Gantt/timeline charts, resource leveling, time tracking with billable hours, or earned value management should not choose Notion — its board view is a visual database filter, not a true Kanban system, and its timeline view (added in 2025) lacks dependency mapping and critical path visualization that Asana, Jira, and monday.com provide as baseline features. Teams that work in environments with unreliable internet connectivity will find Notion frustrating: offline availability may be limited, so verify which pages and features are available before relying on Notion without a connection. Large enterprises with structured content governance requirements — mandatory page templates, enforced metadata schemas, automated content lifecycle policies — will exceed Notion's capabilities. The platform's permission model is page-based rather than role-based, making it difficult to enforce standardized access policies across departments with 500+ users. Organizations with 100+ editors and 10,000+ pages of content consistently report performance degradation that impacts daily usability.",
       "type": "text"
     },
     {
@@ -207,7 +207,7 @@
         "Block-based editor with 30+ block types including text, headings, databases, code blocks with syntax highlighting, math equations (LaTeX), embeds (Figma, Google Maps, Twitter, Loom, CodePen), toggle lists, callouts, dividers, and synchronized blocks that mirror content across pages.",
         "Linked databases with six view types (table, board, calendar, gallery, list, timeline) that display the same underlying data in different perspectives, with filter, sort, and search applied per view without affecting the source data.",
         "Database relations and rollups that create relational data structures — a Tasks database can link to a Projects database via a relation property, with rollup columns that display aggregated data like total task count per project or average completion time.",
-        "Templates marketplace with 5,000+ community and official templates spanning startup wikis, hiring pipelines, OKR trackers, content calendars, engineering wikis, student dashboards, and personal finance managers — most installable in one click.",
+        "Templates marketplace with a community and official template gallery spanning startup wikis, hiring pipelines, OKR trackers, content calendars, engineering wikis, student dashboards, and personal finance managers — most installable in one click.",
         "AI Assistant integrated across the workspace for writing and editing, summarization (condense a meeting notes page into a one-paragraph summary), translation, spellcheck, and Q&A that searches across all workspace pages to answer natural language questions."
       ]
     },
@@ -370,7 +370,7 @@
     },
     {
       "question": "What are Notion's limitations?",
-      "answer": "Offline mode on desktop is read-only and frequently loses sync, making it unreliable for field workers, travelers, or anyone with intermittent connect. This limitation affects organizations with specific requirements in these areas. Additionally, No native Gantt/timeline view forces project managers to use the board view as a workaround, which lacks dependency mapp. Understanding these constraints before purchasing helps set realistic expectations."
+      "answer": "Offline mode on desktop is may have limited offline availability, making it unreliable for field workers, travelers, or anyone with intermittent connect. This limitation affects organizations with specific requirements in these areas. Additionally, limited advanced dependency and critical-path planning forces project managers to use the board view as a workaround, which lacks dependency mapp. Understanding these constraints before purchasing helps set realistic expectations."
     },
     {
       "question": "How does Notion compare to asana?",
