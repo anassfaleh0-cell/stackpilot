@@ -337,6 +337,14 @@ describe("review source transparency", () => {
     expect(reviewPageSrc).toContain("Find TrustRadius listing")
   })
 
+
+  it("uses an explicitly internal label for category-leading editorial scores", () => {
+    expect(reviewPageSrc).toContain('Top PilotStack score')
+    expect(reviewPageSrc).not.toContain('Best in Category')
+    expect(reviewPageSrc).not.toContain('Best Value')
+    expect(reviewPageSrc).toContain('internal editorial score; not a third-party user rating')
+  })
+
   it("clearly separates internal editorial scores from third-party ratings", () => {
     expect(reviewPageSrc).toContain("internal editorial score; not a third-party user rating")
     expect(reviewPageSrc).toContain("not verified ratings from G2, Capterra, or TrustRadius")
