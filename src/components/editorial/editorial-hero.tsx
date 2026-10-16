@@ -222,12 +222,18 @@ export function EditorialHero({ slug, title, subtitle, category, variant = "revi
             {title}
           </h1>
           {variant === "review" && rating && (
-            <div className="flex items-center gap-2 mt-3">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill={i < Math.round(rating) ? "var(--accent)" : "var(--border)"} stroke={i < Math.round(rating) ? "var(--accent)" : "var(--border-light)"} strokeWidth="1">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-              ))}
+            <div
+              className="flex flex-wrap items-center gap-2 mt-3"
+              aria-label={`PilotStack editorial score: ${rating} out of 5; not a third-party user rating`}
+            >
+              <span className="text-xs font-medium" style={{ color: p.primary }}>PilotStack editorial score</span>
+              <span className="flex items-center gap-1.5" aria-hidden="true">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill={i < Math.round(rating) ? "var(--accent)" : "var(--border)"} stroke={i < Math.round(rating) ? "var(--accent)" : "var(--border-light)"} strokeWidth="1">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                ))}
+              </span>
               <span className="text-sm font-semibold" style={{ color: p.primary }}>{rating}/5</span>
             </div>
           )}
