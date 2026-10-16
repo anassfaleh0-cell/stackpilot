@@ -214,7 +214,8 @@ describe("H-09A structured data and open graph", () => {
   })
 
   it("Review datePublished uses contentPublished", () => {
-    expect(reviewPageSrc).toMatch(/<ReviewSchema[^>]*datePublished=\{tool\.contentPublished\}/s)
+    expect(reviewPageSrc).not.toContain("<ReviewSchema")
+    expect(reviewPageSrc).toMatch(/<ArticleSchema[^>]*publishedAt=\{tool\.contentPublished\}/s)
   })
 
   it("no structured-data date is sourced from lastReviewed", () => {
