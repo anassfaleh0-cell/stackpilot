@@ -325,6 +325,14 @@ describe("H-09A seo safety", () => {
   })
 })
 
+
+  it("represents the shared PilotStack Team byline as the publication, not a fabricated person", () => {
+    const jsonLdSrc = read(path.join(ROOT, "src", "components", "seo", "json-ld.tsx"))
+    expect(jsonLdSrc).toContain('name.trim().toLowerCase() === "pilotstack team"')
+    expect(jsonLdSrc).toContain('return organizationRef()')
+    expect(jsonLdSrc).toContain('author: authorSchema(author)')
+  })
+
 describe("review source transparency", () => {
   it("external review links search for real listings instead of guessing provider URLs", () => {
     expect(reviewPageSrc).toContain('encodeURIComponent("site:g2.com " + tool.name + " reviews")')
