@@ -338,10 +338,13 @@ describe("review source transparency", () => {
   it("labels review-card and hero scores as internal editorial assessments", () => {
     const cardSrc = read(path.join(ROOT, "src", "components", "entity", "review-card-grid.tsx"))
     const heroSrc = read(path.join(ROOT, "src", "components", "editorial", "editorial-hero.tsx"))
+    const categoryRatingsSrc = read(path.join(ROOT, "src", "components", "editorial", "editorial-rating.tsx"))
     expect(cardSrc).toContain("PilotStack score")
     expect(cardSrc).toContain("not a third-party user rating")
     expect(heroSrc).toContain("PilotStack editorial score")
     expect(heroSrc).toContain("not a third-party user rating")
+    expect(categoryRatingsSrc).toContain("PilotStack editorial category scores")
+    expect(categoryRatingsSrc).toContain("Internal assessments, not third-party user ratings.")
   })
 
   it("external review links search for real listings instead of guessing provider URLs", () => {
