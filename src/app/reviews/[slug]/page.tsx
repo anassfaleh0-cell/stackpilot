@@ -144,7 +144,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   <Star size={14} className="fill-accent text-accent" />
                   <span className="font-semibold">{formatScore(tool.rating)}</span>
                   <span className="text-muted-foreground">/ 5.0</span>
-                  <span className="text-xs text-muted-foreground">(recorded dataset count; not independently verified)</span>
+                  <span className="text-xs text-muted-foreground">(internal editorial score; not a third-party user rating)</span>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-1">
@@ -257,17 +257,17 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 <h2 className="text-2xl font-bold tracking-tight mb-4">External Review Sources</h2>
                 <p className="text-sm text-muted-foreground mb-4">PilotStack's recorded rating and review-count fields are internal dataset values, not verified ratings from G2, Capterra, or TrustRadius. Check the external platforms directly for current user feedback and confirm the product listing before relying on a third-party score.</p>
                 <div className="flex flex-wrap gap-3">
-                  <a href={`https://www.g2.com/products/${tool.slug}/review`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent("site:g2.com " + tool.name + " reviews")}`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                    Read G2 reviews
+                    Find G2 listing
                   </a>
-                  <a href={`https://www.capterra.com/p/${tool.slug}/`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent("site:capterra.com " + tool.name + " reviews")}`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                    Read Capterra reviews
+                    Find Capterra listing
                   </a>
-                  <a href={`https://www.trustradius.com/products/${tool.slug}/reviews`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent("site:trustradius.com " + tool.name + " reviews")}`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-                    Read TrustRadius reviews
+                    Find TrustRadius listing
                   </a>
                 </div>
               </section>
@@ -459,6 +459,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                       <h3 className="font-semibold text-sm">Verdict</h3>
                     </div>
                     <div className="text-lg font-bold text-primary mb-1">{formatScore(tool.rating)}/5</div>
+                    <p className="text-xs text-muted-foreground mb-2">Internal editorial score, not a verified user-review rating.</p>
                     <ScoreBar score={tool.rating} className="mb-3" />
                     <p className="text-sm text-muted-foreground">{tool.name} scores {formatScore(tool.rating)}/5 — the mean of {tool.ratings.length} recorded category ratings.</p>
                   </div>
@@ -467,7 +468,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 {/* Rating Breakdown */}
                 <GlassCard>
                   <div className="p-4">
-                    <h3 className="font-semibold mb-3 text-sm">Rating Breakdown</h3>
+                    <h3 className="font-semibold mb-1 text-sm">Rating Breakdown</h3>
+                    <p className="text-xs text-muted-foreground mb-3">Recorded PilotStack category scores; not third-party ratings.</p>
                     <div className="space-y-3">
                       {tool.ratings.map((item) => (
                         <div key={item.label}>
