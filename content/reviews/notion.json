@@ -181,12 +181,12 @@
     },
     {
       "title": "Feature Deep Dive",
-      "body": "Notion's core feature set addresses the primary challenges organizations face in the Productivity space. Block-Based Editor: Modular content blocks that can be rearranged and transformed into different types This is particularly valuable for teams that need to move quickly without sacrificing quality control. Database Views: Multiple view types including table, board, calendar, gallery, list, and timeline The implementation reduces context-switching overhead significantly for daily workflows. Real-Time Collaboration: Simultaneous editing with presence indicators and version history Organizations that adopt this feature typically see measurable improvements in team efficiency. Comments & Mentions: Inline comments and @mentions to discuss work in context Organizations that adopt this feature typically see measurable improvements in team efficiency. Beyond these core capabilities, Notion differentiates itself through polished user experience design and enterprise-grade security infrastructure. The Block-Based Editor feature alone addresses a critical workflow need: modular content blocks that can be rearranged and transformed into different types.",
+      "body": "Notion’s main building blocks are pages, reusable content blocks, and databases. These can support documentation, meeting notes, knowledge bases, and lightweight project tracking, with different database views presenting the same underlying records. The flexibility is useful, but it also means teams need naming conventions, ownership, and a clear structure to avoid duplicated or difficult-to-find information. Verify current feature availability and plan limits in Notion’s official documentation.",
       "type": "text"
     },
     {
       "title": "User Experience",
-      "body": "Notion delivers a polished and intuitive user interface. New users can typically achieve basic proficiency within hours, with the clean layout reducing the cognitive load of navigating complex workflows. The platform's learning curve is rated as medium, meaning teams should budget 1-3 weeks for full workflow adoption. Initial productivity dips are normal as users transition from previous tools. The mobile experience on iOS and Android mirrors most desktop functionality, allowing users to view and manage core tasks on the go.",
+      "body": "Notion’s block-based editor and nested pages allow users to shape a workspace around their needs. This flexibility can make the first steps approachable, while more complex databases, permissions, and linked workflows may take longer to learn. The experience depends on workspace design and the devices being used. Try a realistic sample workspace before moving important team knowledge into the product.",
       "type": "text"
     },
     {
@@ -238,7 +238,7 @@
     },
     {
       "title": "Setup Time",
-      "body": "A personal workspace for note-taking and task management is operational in 10-15 minutes: create an account, choose a template or start a blank page, and begin typing. A team workspace for 10-30 people with 3-5 core databases (project tracker, meeting notes, documentation wiki, team directory, content calendar) requires 4-8 hours of setup spanning 2-3 days: creating the database schemas with appropriate properties, establishing relations between databases, setting up view configurations per team preference, importing existing content from Google Docs or Confluence, and inviting team members with appropriate permission levels. Organization-wide deployment for 100-500 users requires 2-4 weeks: designing the workspace information architecture (teamspace structure, page hierarchy conventions, database taxonomy), building department-specific templates, configuring SSO and user provisioning, establishing naming conventions and governance policies, training team leads as workspace champions, and running a pilot with one department before full rollout. The most underestimated step is content migration from legacy tools.",
+      "body": "A simple personal workspace can be started with a page or template, while a team rollout involving shared databases, permissions, integrations, and migrated documentation requires more planning. The timeline depends on the amount of existing material and the structure needed. Begin with a small pilot, agree on page ownership and naming conventions, and test search and access permissions before expanding.",
       "type": "text"
     },
     {
