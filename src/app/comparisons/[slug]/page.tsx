@@ -20,7 +20,7 @@ import { RelatedContent } from "@/components/dynamic-client"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { ScoreBar } from "@/components/brand/patterns"
 import { NativeAd } from "@/components/ads"
-import { getComparisonDecision } from "@/lib/content/comparison-decision"
+import { getComparisonDecision, getComparisonDisplayCopy } from "@/lib/content/comparison-decision"
 
 export const dynamicParams = true
 export const revalidate = 86400
@@ -35,11 +35,23 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const cmp = getComparison(slug)
   if (!cmp) return {}
-  const readingTime = Math.max(3, Math.ceil(cmp.description.split(/\s+/).length / 200))
+  const review1 = getReview(cmp.tool1Slug)
+  const review2 = getReview(cmp.tool2Slug)
+  const displayCopy = getComparisonDisplayCopy({
+    tool1: cmp.tool1,
+    tool2: cmp.tool2,
+    tool1Category: review1?.category,
+    tool2Category: review2?.category,
+    winnerVerified: cmp.winnerVerified === true,
+    description: cmp.description,
+    verdict: cmp.verdict,
+  })
+  const sameCategory = Boolean(review1?.category && review2?.category && review1.category === review2.category)
+  const readingTime = Math.max(3, Math.ceil(displayCopy.description.split(/\\s+/).length / 200))
   const noindexed = isNoindexed("comparisons", slug)
 
   return {
-    ...createMetadata({ title: getComparisonSeoTitle(slug, cmp.tool1, cmp.tool2, cmp.winnerVerified === true), description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated, articleSection: cmp.category, readingTime }),
+    ...createMetadata({ title: getComparisonSeoTitle(slug, cmp.tool1, cmp.tool2, cmp.winnerVerified === true && sameCategory), description: displayCopy.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated, articleSection: cmp.category, readingTime }),
     robots: noindexed
       ? { index: false, follow: true }
       : { index: true, follow: true },
@@ -61,6 +73,15 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
 
   const review1 = getReview(cmp.tool1Slug)
   const review2 = getReview(cmp.tool2Slug)
+  const displayCopy = getComparisonDisplayCopy({
+    tool1: cmp.tool1,
+    tool2: cmp.tool2,
+    tool1Category: review1?.category,
+    tool2Category: review2?.category,
+    winnerVerified: cmp.winnerVerified === true,
+    description: cmp.description,
+    verdict: cmp.verdict,
+  })
   const { categoriesDiffer, winnerLabel, hasComparableWinner } = getComparisonDecision({
     winner: cmp.winner,
     winnerVerified: cmp.winnerVerified === true,
@@ -92,8 +113,8 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Comparisons", href: "/comparisons" }, { name: cmp.title, href: `/comparisons/${slug}` }]} />
-      <WebPageSchema name={cmp.title} description={cmp.description} url={`${site.url}/comparisons/${slug}`} dateModified={cmp.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: [{ "@type": "ListItem", position: 1, item: softwareApp({ name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}`, category: review1?.category || cmp.category, description: review1?.tagline }) }, { "@type": "ListItem", position: 2, item: softwareApp({ name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}`, category: review2?.category || cmp.category, description: review2?.tagline }) }] }} />
-      {cmp.lastUpdated ? <ArticleSchema title={cmp.title} description={cmp.description} publishedAt={cmp.lastUpdated} updatedAt={cmp.lastUpdated} author="PilotStack Team" url={`${site.url}/comparisons/${slug}`} wordCount={cmp.description.split(/\s+/).length + String(cmp.verdict || "").split(/\s+/).filter(Boolean).length + cmp.features.reduce((n, f) => n + f.name.split(/\s+/).length + String(f.tool1Detail || "").split(/\s+/).filter(Boolean).length + String(f.tool2Detail || "").split(/\s+/).filter(Boolean).length, 0) + cmp.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={cmp.category} keywords={[`${cmp.tool1} vs ${cmp.tool2}`, `${cmp.tool1} comparison`, `${cmp.tool2} comparison`, cmp.category, "software comparison 2026"]} mentions={[{ name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}` }, { name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}` }]} /> : null}
+      <WebPageSchema name={cmp.title} description={displayCopy.description} url={`${site.url}/comparisons/${slug}`} dateModified={cmp.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: [{ "@type": "ListItem", position: 1, item: softwareApp({ name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}`, category: review1?.category || cmp.category, description: review1?.tagline }) }, { "@type": "ListItem", position: 2, item: softwareApp({ name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}`, category: review2?.category || cmp.category, description: review2?.tagline }) }] }} />
+      {cmp.lastUpdated ? <ArticleSchema title={cmp.title} description={displayCopy.description} publishedAt={cmp.lastUpdated} updatedAt={cmp.lastUpdated} author="PilotStack Team" url={`${site.url}/comparisons/${slug}`} wordCount={displayCopy.description.split(/\s+/).length + String(displayCopy.verdict || "").split(/\s+/).filter(Boolean).length + cmp.features.reduce((n, f) => n + f.name.split(/\s+/).length + String(f.tool1Detail || "").split(/\s+/).filter(Boolean).length + String(f.tool2Detail || "").split(/\s+/).filter(Boolean).length, 0) + cmp.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={cmp.category} keywords={[`${cmp.tool1} vs ${cmp.tool2}`, `${cmp.tool1} comparison`, `${cmp.tool2} comparison`, cmp.category, "software comparison 2026"]} mentions={[{ name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}` }, { name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}` }]} /> : null}
       <FAQSchema questions={visibleFaqs} path={`/comparisons/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Comparisons", href: "/comparisons" }, { name: cmp.title }]} />
@@ -105,7 +126,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <EditorialHero
               slug={cmp.slug}
               title={cmp.title}
-              subtitle={cmp.description}
+              subtitle={displayCopy.description}
               category={cmp.category}
               variant="comparison"
               className="w-full min-h-[200px] sm:min-h-[240px]"
@@ -114,7 +135,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
 
           <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-            <p className="text-sm text-muted-foreground">{cmp.description}</p>
+            <p className="text-sm text-muted-foreground">{displayCopy.description}</p>
           </div>
 
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
@@ -321,7 +342,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                     {hasComparableWinner ? `Recorded pick: ${winnerLabel}` : categoriesDiffer ? "Different product categories" : "How they compare"}
                   </p>
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={stripDeadContentLinks(cmp.verdict)} /></p>
+                <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={stripDeadContentLinks(displayCopy.verdict)} /></p>
                 {hasComparableWinner && (
                   <div className="mt-4 pt-4 border-t border-border flex items-center gap-2 text-sm">
                     <span className="text-muted-foreground">Migration complexity:</span>
