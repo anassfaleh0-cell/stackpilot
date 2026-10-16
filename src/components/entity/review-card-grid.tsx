@@ -21,9 +21,13 @@ export function ReviewCardGrid({ items }: { items: ReviewCardItem[] }) {
             <Card className="h-full flex flex-col">
               <div className="flex items-start justify-between mb-3">
                 <Badge variant="secondary">{tool.category}</Badge>
-                <div className="flex items-center gap-1 text-sm font-medium text-accent">
-                  <Star size={14} className="fill-accent text-accent" />
-                  {tool.rating}
+                <div
+                  className="flex items-center gap-1.5 text-sm font-medium text-accent"
+                  aria-label={`PilotStack editorial score: ${tool.rating} out of 5; not a third-party user rating`}
+                >
+                  <Star size={14} className="fill-accent text-accent" aria-hidden="true" />
+                  <span className="text-xs">PilotStack score</span>
+                  <span>{tool.rating}/5</span>
                 </div>
               </div>
               <CardTitle className="group-hover:text-primary transition-colors">{tool.name}</CardTitle>
