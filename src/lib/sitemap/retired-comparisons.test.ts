@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest"
+import sitemap from "@/app/sitemap"
 import { filterSitemapEntries, isRetiredComparisonSlug, RETIRED_COMPARISON_SLUGS } from "./retired-comparisons"
 
 describe("retired comparison sitemap filtering", () => {
@@ -40,5 +41,15 @@ describe("retired comparison sitemap filtering", () => {
 
   it("rejects malformed sitemap URLs", () => {
     expect(filterSitemapEntries([{ url: "not a URL" }])).toEqual([])
+  })
+})
+
+
+describe("generated sitemap integration", () => {
+  it("excludes every retired comparison URL from the actual sitemap output", () => {
+    const urls = new Set(sitemap().map((entry) => entry.url))
+    for (const slug of RETIRED_COMPARISON_SLUGS) {
+      expect(urls.has(`https://pilotstack.online/comparisons/${slug}`), slug).toBe(false)
+    }
   })
 })
