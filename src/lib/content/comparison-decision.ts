@@ -59,8 +59,8 @@ export interface ComparisonDisplayCopy {
   verdict: string
 }
 
-const UNSUPPORTED_SCORE_OR_PRICE = /\\b\\d(?:\\.\\d)?\\s*\\/\\s*5\\b|[$€£]\\s?\\d|\\b(?:pricing starts|starts at|starting at|from free)\\b/i
-const UNSUPPORTED_WINNER_CLAIM = /\\b(?:our overall pick|overall pick|overall winner|our recommendation|recommended for most|higher user rating|wins overall)\\b/i
+const UNSUPPORTED_SCORE_OR_PRICE = /\b\d(?:\.\d)?\s*\/\s*5\b|[$€£]\s?\d|\b(?:pricing starts|starts at|starting at|from free)\b/i
+const UNSUPPORTED_WINNER_CLAIM = /\b(?:our overall pick|overall pick|overall winner|our recommendation|recommended for most|higher user rating|wins overall)\b/i
 
 /**
  * Prevent unsupported comparison scores, prices, and winner claims from appearing
