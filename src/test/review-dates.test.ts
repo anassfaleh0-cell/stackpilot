@@ -377,7 +377,7 @@ describe("review source transparency", () => {
       const review = JSON.parse(fs.readFileSync(path.join(REVIEWS_DIR, `${slug}.json`), "utf8"))
       expect(review).not.toHaveProperty("reviewCount")
     }
-    expect(tc).toContain("reviewCount?: number")
+    expect(fs.readFileSync(TYPES_FILE, "utf8")).toContain("reviewCount?: number")
   })
 
 })
