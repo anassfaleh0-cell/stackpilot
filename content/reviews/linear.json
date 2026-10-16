@@ -24,35 +24,51 @@
   "features": [
     {
       "name": "Issue Tracking",
-      "description": "Create and organize issues, assign owners, and follow work through the team's configured workflow."
+      "description": "Create and organize issues, assign owners, and follow work through the team's configured workflow.",
+      "available": true,
+      "category": "Core"
     },
     {
       "name": "Projects",
-      "description": "Group related issues into projects where this matches the team's planning model."
+      "description": "Group related issues into projects where this matches the team's planning model.",
+      "available": true,
+      "category": "Planning"
     },
     {
       "name": "Cycles",
-      "description": "Use planning cycles where appropriate, and validate how they map to your team's delivery process."
+      "description": "Use planning cycles where appropriate, and validate how they map to your team's delivery process.",
+      "available": true,
+      "category": "Planning"
     },
     {
       "name": "Views and Filters",
-      "description": "Create focused views of work using supported filters and saved criteria."
+      "description": "Create focused views of work using supported filters and saved criteria.",
+      "available": true,
+      "category": "Workflow"
     },
     {
       "name": "Development Integrations",
-      "description": "Connect code-hosting tools where supported; test issue linking, permissions, and status behavior."
+      "description": "Connect code-hosting tools where supported; test issue linking, permissions, and status behavior.",
+      "available": true,
+      "category": "Integrations"
     },
     {
       "name": "Keyboard Navigation",
-      "description": "Use keyboard shortcuts and command navigation if they fit the team's working style."
+      "description": "Use keyboard shortcuts and command navigation if they fit the team's working style.",
+      "available": true,
+      "category": "Navigation"
     },
     {
       "name": "API",
-      "description": "Review the current developer documentation for supported operations, authentication, and limits before building automation."
+      "description": "Review the current developer documentation for supported operations, authentication, and limits before building automation.",
+      "available": true,
+      "category": "Developer"
     },
     {
       "name": "Import Tools",
-      "description": "Test the available import path with a sample backlog and compare imported fields and relationships with the source."
+      "description": "Test the available import path with a sample backlog and compare imported fields and relationships with the source.",
+      "available": true,
+      "category": "Migration"
     }
   ],
   "ratings": [

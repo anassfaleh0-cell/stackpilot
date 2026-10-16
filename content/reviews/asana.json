@@ -24,35 +24,51 @@
   "features": [
     {
       "name": "Project Views",
-      "description": "Use supported views to organize and inspect project work; confirm which views are included in the plan you are considering."
+      "description": "Use supported views to organize and inspect project work; confirm which views are included in the plan you are considering.",
+      "available": true,
+      "category": "Core"
     },
     {
       "name": "Task Ownership",
-      "description": "Assign responsibility for tasks and clarify who is expected to move work forward."
+      "description": "Assign responsibility for tasks and clarify who is expected to move work forward.",
+      "available": true,
+      "category": "Workflow"
     },
     {
       "name": "Dependencies",
-      "description": "Where available, connect tasks to show sequencing and blockers; test behavior on a representative project."
+      "description": "Where available, connect tasks to show sequencing and blockers; test behavior on a representative project.",
+      "available": true,
+      "category": "Workflow"
     },
     {
       "name": "Custom Fields",
-      "description": "Capture workflow-specific information in structured task fields where supported by the selected plan."
+      "description": "Capture workflow-specific information in structured task fields where supported by the selected plan.",
+      "available": true,
+      "category": "Configuration"
     },
     {
       "name": "Templates",
-      "description": "Reuse project structures for recurring work, while keeping templates aligned with the team's actual process."
+      "description": "Reuse project structures for recurring work, while keeping templates aligned with the team's actual process.",
+      "available": true,
+      "category": "Workflow"
     },
     {
       "name": "Reporting",
-      "description": "Review project status and progress with the reporting options available to your workspace and plan."
+      "description": "Review project status and progress with the reporting options available to your workspace and plan.",
+      "available": true,
+      "category": "Reporting"
     },
     {
       "name": "Automation",
-      "description": "Explore supported rules for routine updates, assignments, or notifications and test them before broad rollout."
+      "description": "Explore supported rules for routine updates, assignments, or notifications and test them before broad rollout.",
+      "available": true,
+      "category": "Automation"
     },
     {
       "name": "Integrations",
-      "description": "Connect external services where supported; verify permissions, actions, and data flow in the official integration directory."
+      "description": "Connect external services where supported; verify permissions, actions, and data flow in the official integration directory.",
+      "available": true,
+      "category": "Integrations"
     }
   ],
   "ratings": [

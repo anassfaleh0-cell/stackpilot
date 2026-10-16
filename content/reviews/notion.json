@@ -22,35 +22,51 @@
   "features": [
     {
       "name": "Pages and Blocks",
-      "description": "Create and arrange content in pages using the editor's supported block types."
+      "description": "Create and arrange content in pages using the editor's supported block types.",
+      "available": true,
+      "category": "Core"
     },
     {
       "name": "Databases",
-      "description": "Store structured records and organize them with the properties and views available in the workspace."
+      "description": "Store structured records and organize them with the properties and views available in the workspace.",
+      "available": true,
+      "category": "Core"
     },
     {
       "name": "Database Views",
-      "description": "Present database records in supported layouts; verify specific view capabilities in current product documentation."
+      "description": "Present database records in supported layouts; verify specific view capabilities in current product documentation.",
+      "available": true,
+      "category": "Core"
     },
     {
       "name": "Templates",
-      "description": "Use templates to standardize recurring pages and workflows while keeping them easy to maintain."
+      "description": "Use templates to standardize recurring pages and workflows while keeping them easy to maintain.",
+      "available": true,
+      "category": "Workflow"
     },
     {
       "name": "Collaboration",
-      "description": "Share pages and collaborate with teammates according to the workspace's current access controls."
+      "description": "Share pages and collaborate with teammates according to the workspace's current access controls.",
+      "available": true,
+      "category": "Collaboration"
     },
     {
       "name": "Search",
-      "description": "Test search with representative pages and databases to ensure teammates can find important information."
+      "description": "Test search with representative pages and databases to ensure teammates can find important information.",
+      "available": true,
+      "category": "Navigation"
     },
     {
       "name": "Integrations and API",
-      "description": "Review current native integrations and API documentation for supported actions, permissions, and limits."
+      "description": "Review current native integrations and API documentation for supported actions, permissions, and limits.",
+      "available": true,
+      "category": "Integrations"
     },
     {
       "name": "Export",
-      "description": "Test the available export formats with representative pages, attachments, and databases before relying on an export for backup or migration."
+      "description": "Test the available export formats with representative pages, attachments, and databases before relying on an export for backup or migration.",
+      "available": true,
+      "category": "Data portability"
     }
   ],
   "ratings": [
