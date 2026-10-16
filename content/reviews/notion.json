@@ -1,8 +1,8 @@
 {
   "slug": "notion",
   "name": "Notion",
-  "tagline": "All-in-one workspace for notes, docs, and project management.",
-  "description": "Notion combines note-taking, documentation, knowledge base management, and project tracking into a single, customizable platform. With its modular block-based editor and comprehensive database functionality, teams can build everything from simple to-do lists to complex project management systems without switching between multiple tools.",
+  "tagline": "Flexible workspace for notes, documentation, and connected databases",
+  "description": "Notion is a flexible workspace built around pages, content blocks, and databases. This review focuses on practical use cases, the trade-offs of customization, and the product details to verify before making it a team’s shared knowledge system.",
   "category": "Productivity",
   "website": "https://notion.so",
   "pricing": "Freemium",
@@ -156,7 +156,7 @@
   "content": [
     {
       "title": "Executive Summary",
-      "body": "Notion is a flexible workspace for notes, documentation, and database-driven organization. It can be useful when a team wants related knowledge and structured information in one place, but it requires conventions and maintenance to stay consistent. PilotStack’s displayed score is an internal editorial assessment, not a verified third-party user rating. Check current plan details and test sharing, export, and permissions before committing.",
+      "body": "Notion is a flexible workspace for notes, documentation, and database-driven organization. It can work well when a team wants related knowledge in one place and is prepared to maintain clear conventions. PilotStack’s score is an internal editorial assessment, not a verified third-party user rating. Confirm current plan details and test sharing, export, and permissions before committing.",
       "type": "text"
     },
     {
@@ -191,17 +191,17 @@
     },
     {
       "title": "Best For",
-      "body": "Notion is best suited for teams that need a flexible, all-in-one workspace where documentation, knowledge management, and lightweight project tracking coexist in the same environment rather than across separate tools. Startups and small teams (2-50 people) benefit most because Notion replaces 3-4 separate subscriptions (Confluence for wikis, Google Docs for documents, a lightweight project tracker, and a note-taking app) with a single platform at lower total cost. Engineering teams use Notion for technical documentation, sprint retrospectives, and API reference wikis with embedded code blocks and GitHub previews. Marketing teams build editorial calendars in database views, maintain campaign playbooks as linked pages, and track content production through Kanban boards. The platform also excels for individuals building a personal knowledge base — its database capabilities support note-taking systems like PARA and Zettelkasten that would require complex folder structures in traditional note-taking apps. Notion's AI assistant (writing suggestions, summarization, Q&A over workspace content) adds value for knowledge-heavy workflows where finding and synthesizing information across hundreds of pages is a regular activity.",
+      "body": "Notion is worth evaluating when a team wants related documentation, notes, and databases in one flexible workspace. Establish clear conventions and ownership so information remains discoverable and current as the workspace grows.",
       "type": "text"
     },
     {
       "title": "Worst Fit",
-      "body": "Notion is a poor fit for three specific scenarios. Organizations that need structured project management with native Gantt/timeline charts, resource leveling, time tracking with billable hours, or earned value management should not choose Notion — its board view is a visual database filter, not a true Kanban system, and its timeline view (added in 2025) lacks dependency mapping and critical path visualization that Asana, Jira, and monday.com provide as baseline features. Teams that work in environments with unreliable internet connectivity will find Notion frustrating: offline availability may be limited, so verify which pages and features are available before relying on Notion without a connection. Large enterprises with structured content governance requirements — mandatory page templates, enforced metadata schemas, automated content lifecycle policies — will exceed Notion's capabilities. The platform's permission model is page-based rather than role-based, making it difficult to enforce standardized access policies across departments with 500+ users. Organizations with 100+ editors and 10,000+ pages of content consistently report performance degradation that impacts daily usability.",
+      "body": "Notion may be less suitable when a team needs specialized project planning controls, strict data-entry workflows, or reporting that depends on features outside its current capabilities. Validate the exact workflow instead of assuming a flexible database can replace every dedicated tool.",
       "type": "text"
     },
     {
       "title": "Key Features",
-      "body": "Notion's block-database architecture means any content type, including text, table, board, calendar, and gallery, is a view of the same underlying data. A project tracker can render as a Kanban board for daily work and as a timeline for quarterly planning.",
+      "body": "Evaluate Notion’s pages, blocks, databases, views, templates, sharing controls, search, and integrations against the information your team needs to maintain. Feature availability can change by plan, so confirm important requirements in current official documentation.",
       "type": "list",
       "items": [
         "Block-based editor with 30+ block types including text, headings, databases, code blocks with syntax highlighting, math equations (LaTeX), embeds (Figma, Google Maps, Twitter, Loom, CodePen), toggle lists, callouts, dividers, and synchronized blocks that mirror content across pages.",
@@ -213,12 +213,12 @@
     },
     {
       "title": "Real Advantages",
-      "body": "Notion's primary advantage is consolidation. A typical team replaces 3-5 separate tools — Google Docs for collaborative writing, Confluence for documentation, Trello for task tracking, a CRM spreadsheet, and a note-taking app — with a single Notion workspace. This consolidation reduces context-switching cost, eliminates the mental overhead of remembering which tool holds which information, and creates a single searchable repository of all institutional knowledge. The database flexibility is a genuine differentiator: unlike Airtable which requires a structured schema upfront, or Excel which lacks views, Notion lets teams start with a simple table and progressively add relations, rollups, formulas, and linked views as their workflow matures. The template marketplace creates network effects — when a startup can install a complete operating system (OKR tracking, hiring pipeline, engineering wiki, meeting notes, company handbook) in under 30 minutes instead of spending weeks building from scratch, the adoption barrier drops dramatically. Notion's AI features are increasingly differentiated, particularly the workspace Q&A capability that lets users ask questions in natural language and get answers synthesized from across all pages.",
+      "body": "Notion can connect documentation, notes, and structured databases in one workspace. This can reduce context switching when the information model is clear, but flexibility is not a substitute for ownership, access rules, and ongoing maintenance.",
       "type": "text"
     },
     {
       "title": "Real Limitations",
-      "body": "Performance at scale is Notion's most persistent challenge. The application is built as a single-page application that loads the entire workspace structure into memory, so workspaces with 10,000+ blocks experience noticeable lag — page loads taking 3-5 seconds, input latency on database views with 1,000+ rows, and stuttering during drag-and-drop reordering. Offline mode is functionally inadequate: the desktop app caches recently viewed pages for read-only access, but any edits made offline are queued and often fail to sync when connectivity resumes, with conflicts silently dropped rather than flagged for user resolution. The lack of native project management tooling — no Gantt/timeline with dependencies, no resource management, no time tracking, no workload view — means Notion cannot serve as a primary project management tool for teams that need these capabilities. Search, while improved, still returns results slowly on large workspaces and does not index the content of embedded files or database cell values with the same depth as dedicated knowledge management tools like Confluence. Notion's API rate limits (3 requests per second per integration) constrain large-scale automation and data synchronization workflows.",
+      "body": "Highly customizable workspaces need consistent structure and governance to avoid duplicated or outdated information. Teams should test navigation, search, permissions, export, and database behavior with realistic content before making Notion the primary home for critical knowledge.",
       "type": "text"
     },
     {
@@ -248,12 +248,12 @@
     },
     {
       "title": "Integration Ecosystem",
-      "body": "Notion can connect with other services through native integrations and external automation tools, but coverage and sync behavior vary. Confirm whether each required connection is one-way or two-way, which fields are supported, and how failures or conflicts are handled. Test the exact workflow and review current rate limits and plan requirements before depending on an integration for critical data.",
+      "body": "Notion connects with external services through native integrations and other automation options, but supported actions and sync behavior vary. Verify each required connection in the current integration directory, including sync direction, permissions, limitations, and failure handling.",
       "type": "text"
     },
     {
       "title": "Security & Compliance",
-      "body": "Notion is SOC 2 Type II and SOC 3 certified, ISO 27001 certified, and GDPR compliant. Data at rest is encrypted with AES-256 and data in transit uses TLS 1.2 or higher. Business and Enterprise plans support SAML-based single sign-on (SSO) with SCIM provisioning for automated user lifecycle management through Okta, Azure AD, OneLogin, and Google Workspace. Enterprise plans include audit logs capturing page views, edits, permission changes, and login events with 90-day retention. Notion offers data residency in US and EU regions for Enterprise customers. Key security gaps compared to enterprise content management competitors: no HIPAA Business Associate Agreement (BAA) — Notion explicitly states it is not HIPAA-compliant, making it unsuitable for healthcare organizations handling protected health information. No FedRAMP authorization, no data classification or DLP controls, and no customer-managed encryption keys. Notion's permission model is page-based with owner/editor/viewer roles that cannot be customized, which creates challenges for organizations that need granular access control (e.g., view-only but allow comments, or edit-only for specific property types). Organizations in regulated industries should evaluate Notion alongside Confluence or SharePoint for compliance-critical documentation needs.",
+      "body": "Review Notion’s current official security documentation for certifications, data handling terms, identity controls, audit capabilities, and plan requirements. Confirm the controls relevant to your organization directly rather than assuming every security feature is included by default.",
       "type": "text"
     },
     {
@@ -268,7 +268,7 @@
     },
     {
       "title": "Real-world Use Cases",
-      "body": "A 30-person startup uses Notion as its single operating system: the Company Home page aggregates links to active projects, a People Directory database with relation links to each person's current projects and recent meeting notes, a Product Roadmap database with board view for stakeholder review and timeline view for engineering planning, a Hiring Pipeline board tracking 20+ active candidates through phone screen, technical interview, onsite, and offer stages with automated Slack notifications at each transition, and a meeting notes template that automatically creates a new page from each weekly all-hands with previous action items pre-populated via database rollup. A 200-person marketing agency manages 40+ active client engagements in a single workspace — each client has a dedicated teamspace with pages for weekly status reports, campaign tracker databases, creative briefs, and asset libraries, with a master dashboard linking to all active client teamspaces and a top-level view of resource utilization across engagements. A university research lab uses Notion as a shared lab notebook where PhD students document experimental protocols, link raw data files from cloud storage, maintain a database of lab equipment calibration schedules, and publish wiki-style documentation of research findings that new lab members can onboard to in under a week.",
+      "body": "Illustrative scenario: a team maintains project documentation, meeting notes, and reference databases in a shared workspace. Test this with representative content, permissions, and search tasks, and assign owners to keep important pages current. This is an example workflow, not a verified customer case study.",
       "type": "text"
     },
     {
@@ -308,7 +308,7 @@
     },
     {
       "title": "API & Automation",
-      "body": "Notion offers a public API for custom integration development, complemented by built-in automation features such as Slack Integration, GitHub Integration, API Access. The API enables teams to connect Notion with their existing technology stack. Platform-native automation reduces reliance on third-party middleware like Zapier or Make for common workflow patterns. For organizations with specific integration requirements, the API provides the flexibility to build custom connections that address unique business processes.",
+      "body": "Notion provides API and integration capabilities, but available endpoints, permissions, and limits can change. Review the current official developer documentation and test the exact database or page operations your workflow needs before relying on automation for important records.",
       "type": "text"
     },
     {
@@ -484,7 +484,7 @@
     "releaseFrequency": "Bi-weekly"
   },
   "difficulty": "Intermediate",
-  "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "Notion is designed for fast-growing startups that need a scalable productivity platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Notion is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "learningCurve": "Depends on workspace structure and the depth of database features used",
+  "whoShouldUse": "Consider Notion if you want documentation, notes, and structured information connected in a flexible workspace. Test search, permissions, databases, export, and content ownership using a realistic sample before adopting it across a team.",
+  "whoShouldNotUse": "Teams that require specialized project controls, strict structured workflows, or advanced operational reporting may need dedicated tools alongside or instead of Notion. People who only need simple notes may prefer a lighter option with less workspace administration."
 }
