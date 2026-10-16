@@ -8,59 +8,11 @@ import {
 import { isNoindexed } from "@/lib/noindex"
 import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
 import { getSitemapLastModified } from "@/lib/content/sitemap-date"
+import { filterSitemapEntries, isRetiredComparisonSlug } from "@/lib/sitemap/retired-comparisons"
 
 function isQuality(slug: string, dir: string): boolean {
   return !isNoindexed(dir, slug)
 }
-
-// These legacy comparison slugs intentionally redirect to primary reviews and must not be advertised as canonical sitemap URLs.
-const retiredComparisonSlugs = new Set([
-  "affinity-vs-wix",
-  "dialpad-vs-loom",
-  "adp-vs-airtable",
-  "clickup-vs-gusto",
-  "ahrefs-vs-claude",
-  "copy-ai-vs-heap",
-  "cal-com-vs-discord",
-  "auth0-vs-bitbucket",
-  "bitwarden-vs-circleci",
-  "bitwarden-vs-google-analytics",
-  "canva-vs-cloudflare-pages",
-  "cloudflare-pages-vs-crowdstrike",
-  "cloudflare-pages-vs-copy-ai",
-  "freshbooks-vs-greenhouse",
-  "appwrite-vs-chatgpt",
-  "bitbucket-vs-claude",
-  "circleci-vs-copilot",
-  "crowdstrike-vs-heap",
-  "expensify-vs-fullstory",
-  "freshbooks-vs-google-analytics",
-  "freshdesk-vs-google-meet",
-  "copper-crm-vs-discord",
-  "gusto-vs-paddle",
-  "convertkit-vs-copilot",
-  "activecampaign-vs-chatgpt",
-  "activecampaign-vs-fathom",
-  "adobe-xd-vs-ahrefs",
-  "ahrefs-vs-copper-crm",
-  "ahrefs-vs-fullstory",
-  "bigcommerce-vs-fathom",
-  "chatgpt-vs-fathom",
-  "copilot-vs-google-analytics",
-  "convertkit-vs-google-analytics",
-  "freshsales-vs-microsoft-teams",
-  "heap-vs-paddle",
-  "convertkit-vs-freshdesk",
-  "canva-vs-mailchimp",
-  "acuity-vs-airtable",
-  "asana-vs-cal-com",
-  "basecamp-vs-calendly",
-  "calendly-vs-google-meet",
-  "copy-ai-vs-mailchimp",
-  "evernote-vs-microsoft-teams",
-  "heap-vs-mailchimp",
-  "claude-vs-fullstory",
-])
 
 const staticPages: MetadataRoute.Sitemap = [
   { url: siteConfig.url, changeFrequency: "daily", priority: 1.0 },
@@ -99,7 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Derive actual lastModified dates from content for content pages
   const reviews = getAllReviews().filter((r) => isQuality(r.slug, "reviews"))
   // Keep retired/draft comparison records out of the sitemap even if an upstream registry changes.
-  const comparisons = getAllComparisons().filter((c) => c.publicationStatus !== "draft" && !retiredComparisonSlugs.has(c.slug) && isQuality(c.slug, "comparisons"))
+  const comparisons = getAllComparisons().filter((c) => c.publicationStatus !== "draft" && !isRetiredComparisonSlug(c.slug) && isQuality(c.slug, "comparisons"))
   const guides = getAllGuides().filter((g) => isQuality(g.slug, "guides"))
   const blogPosts = getAllBlogPosts().filter((p) => isQuality(p.slug, "blog"))
   const glossary = getAllGlossaryTerms().filter((t) => isQuality(t.slug, "glossary"))
@@ -215,20 +167,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ]
 
-  const seen = new Set<string>()
-  return entries.filter((entry) => {
-    // Defense in depth: retired comparison URLs must never leak into the sitemap,
-    // even if a future content loader or editorial link accidentally reintroduces one.
-    let pathname: string
-    try {
-      pathname = new URL(entry.url).pathname
-    } catch {
-      return false
-    }
-    const comparisonSlug = pathname.match(/^\/comparisons\/([^/]+)\/?$/)?.[1]
-    if (comparisonSlug && retiredComparisonSlugs.has(comparisonSlug)) return false
-    if (seen.has(entry.url)) return false
-    seen.add(entry.url)
-    return true
-  })
+  // Defense in depth: filter redirects and duplicate URLs using the tested shared rule.
+  return filterSitemapEntries(entries)
 }
