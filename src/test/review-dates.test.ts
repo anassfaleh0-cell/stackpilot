@@ -298,9 +298,13 @@ describe("H-09A seo safety", () => {
     expect(reviewPageSrc).not.toContain("aggregateRating")
   })
 
-  it("14. ReviewSchema still receives the stored editorial rating", () => {
-    expect(reviewPageSrc).toMatch(/<ReviewSchema[^>]*rating=\{tool\.rating\}/s)
-    expect(reviewPageSrc).not.toContain("reviewRating={")
+  it("14. unverified internal ratings are not emitted as Review structured data", () => {
+    expect(reviewPageSrc).not.toContain("<ReviewSchema")
+    expect(reviewPageSrc).not.toContain("ReviewSchema")
+    expect(reviewPageSrc).toContain("Recorded PilotStack rating")
+    expect(reviewPageSrc).toContain("not independently verified")
+    expect(reviewPageSrc).not.toContain("AggregateRating")
+    expect(reviewPageSrc).not.toContain("aggregateRating")
   })
 
   it("15. every review route is indexable under the current content policy", () => {
