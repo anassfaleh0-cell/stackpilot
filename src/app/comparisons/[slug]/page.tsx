@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     verdict: cmp.verdict,
   })
   const sameCategory = Boolean(review1?.category && review2?.category && review1.category === review2.category)
-  const readingTime = Math.max(3, Math.ceil(displayCopy.description.split(/\\s+/).length / 200))
+  const readingTime = Math.max(3, Math.ceil(displayCopy.description.trim().split(" ").filter(Boolean).length / 200))
   const noindexed = isNoindexed("comparisons", slug)
 
   return {
