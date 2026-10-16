@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!alt) return {}
   const shortTitle = alt.title.length > 58 ? alt.title.slice(0, 55) + "..." : alt.title
   const noindexed = isNoindexed("alternatives", slug)
-  return createMetadata({ title: shortTitle, description: `Looking for ${alt.toolName} alternatives? Compare ${(alt.alternatives || []).length} competitors with ratings, pricing context, and practical differences.`, path: `/alternatives/${alt.slug}`, ogType: "article", publishedAt: alt.lastUpdated, updatedAt: alt.lastUpdated, articleSection: alt.category, noIndex: noindexed })
+  return createMetadata({ title: shortTitle, description: `Looking for ${alt.toolName} alternatives? Compare ${(alt.alternatives || []).length} competitors with ratings, pricing context, and practical differences.`, path: `/alternatives/${alt.slug}`, ogType: "article", updatedAt: alt.lastUpdated, articleSection: alt.category, noIndex: noindexed })
 }
 
 export default async function AlternativePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -50,7 +50,6 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
       <ArticleSchema
         title={alt.title}
         description={alt.description}
-        publishedAt={alt.lastUpdated}
         updatedAt={alt.lastUpdated}
         author="PilotStack Team"
         url={`${site.url}/alternatives/${slug}`}
