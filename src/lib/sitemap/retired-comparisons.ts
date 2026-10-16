@@ -67,7 +67,8 @@ export function filterSitemapEntries<T extends SitemapEntry>(entries: T[]): T[] 
     } catch {
       return false
     }
-    const comparisonSlug = pathname.match(/^\\/comparisons\\/([^/]+)\\/?$/)?.[1]
+    const segments = pathname.split("/").filter(Boolean)
+    const comparisonSlug = segments.length === 2 && segments[0] === "comparisons" ? segments[1] : undefined
     if (comparisonSlug && isRetiredComparisonSlug(comparisonSlug)) return false
     if (seen.has(entry.url)) return false
     seen.add(entry.url)
