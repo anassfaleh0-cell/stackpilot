@@ -302,7 +302,8 @@ describe("H-09A seo safety", () => {
   it("14. unverified internal ratings are not emitted as Review structured data", () => {
     expect(reviewPageSrc).not.toContain("<ReviewSchema")
     expect(reviewPageSrc).not.toContain("ReviewSchema")
-    expect(reviewPageSrc).toContain("Recorded PilotStack rating")
+    expect(reviewPageSrc).toContain("Recorded PilotStack internal editorial score")
+    expect(reviewPageSrc).not.toContain("tool.reviewCount.toLocaleString()")
     expect(reviewPageSrc).toContain("not an independently verified")
     expect(reviewPageSrc).not.toContain("AggregateRating")
     expect(reviewPageSrc).not.toContain("aggregateRating")
@@ -356,6 +357,6 @@ describe("review source transparency", () => {
   it("clearly separates internal editorial scores from third-party ratings", () => {
     expect(reviewPageSrc).toContain("internal editorial score; not a third-party user rating")
     expect(reviewPageSrc).toContain("not verified ratings from G2, Capterra, or TrustRadius")
-    expect(reviewPageSrc).toContain("Recorded PilotStack rating")
+    expect(reviewPageSrc).toContain("Recorded PilotStack internal editorial score")
   })
 })
