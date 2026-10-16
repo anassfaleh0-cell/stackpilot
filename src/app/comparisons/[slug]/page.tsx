@@ -21,6 +21,7 @@ import { EEATProcess } from "@/components/seo/editorial-process"
 import { ScoreBar } from "@/components/brand/patterns"
 import { NativeAd } from "@/components/ads"
 import { getComparisonDecision, getComparisonDisplayCopy } from "@/lib/content/comparison-decision"
+import { stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
 
 export const dynamicParams = true
 export const revalidate = 86400
@@ -100,14 +101,14 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   const tool1Evidence = cmp.features.find((feature) => typeof feature.tool1Detail === "string" && feature.tool1Detail.trim())
   const tool2Evidence = cmp.features.find((feature) => typeof feature.tool2Detail === "string" && feature.tool2Detail.trim())
   const conciseEvidence = (value: unknown) => {
-    const text = typeof value === "string" ? value.replace(/\s+/g, " ").trim() : ""
+    const text = typeof value === "string" ? stripUnverifiedPriceClaims(value.replace(/\s+/g, " ").trim()) : ""
     return text.length > 180 ? `${text.slice(0, 177).trimEnd()}…` : text
   }
 
   const safeFeatures = cmp.features.map((f) => ({
     ...f,
-    tool1Detail: f.tool1Detail ? stripDeadContentLinks(f.tool1Detail) : f.tool1Detail,
-    tool2Detail: f.tool2Detail ? stripDeadContentLinks(f.tool2Detail) : f.tool2Detail,
+    tool1Detail: f.tool1Detail ? stripUnverifiedPriceClaims(stripDeadContentLinks(f.tool1Detail)) : f.tool1Detail,
+    tool2Detail: f.tool2Detail ? stripUnverifiedPriceClaims(stripDeadContentLinks(f.tool2Detail)) : f.tool2Detail,
   }))
 
   return (
