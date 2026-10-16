@@ -324,3 +324,22 @@ describe("H-09A seo safety", () => {
     expect(registrySrc).toContain('"contentModified"')
   })
 })
+
+describe("review source transparency", () => {
+  it("external review links search for real listings instead of guessing provider URLs", () => {
+    expect(reviewPageSrc).toContain('encodeURIComponent("site:g2.com " + tool.name + " reviews")')
+    expect(reviewPageSrc).toContain('encodeURIComponent("site:capterra.com " + tool.name + " reviews")')
+    expect(reviewPageSrc).toContain('encodeURIComponent("site:trustradius.com " + tool.name + " reviews")')
+    expect(reviewPageSrc).not.toContain('www.g2.com/products/${tool.slug}/review')
+    expect(reviewPageSrc).not.toContain('www.capterra.com/p/')
+    expect(reviewPageSrc).toContain("Find G2 listing")
+    expect(reviewPageSrc).toContain("Find Capterra listing")
+    expect(reviewPageSrc).toContain("Find TrustRadius listing")
+  })
+
+  it("clearly separates internal editorial scores from third-party ratings", () => {
+    expect(reviewPageSrc).toContain("internal editorial score; not a third-party user rating")
+    expect(reviewPageSrc).toContain("not verified ratings from G2, Capterra, or TrustRadius")
+    expect(reviewPageSrc).toContain("Recorded PilotStack rating")
+  })
+})
