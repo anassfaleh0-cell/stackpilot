@@ -303,7 +303,7 @@ describe("H-09A seo safety", () => {
     expect(reviewPageSrc).not.toContain("<ReviewSchema")
     expect(reviewPageSrc).not.toContain("ReviewSchema")
     expect(reviewPageSrc).toContain("Recorded PilotStack rating")
-    expect(reviewPageSrc).toContain("not independently verified")
+    expect(reviewPageSrc).toContain("not an independently verified")
     expect(reviewPageSrc).not.toContain("AggregateRating")
     expect(reviewPageSrc).not.toContain("aggregateRating")
   })
