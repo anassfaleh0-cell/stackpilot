@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "fix/adsense-static-adstxt"
+      - "fix/comparison-copy-audit-wave1"
   pull_request:
     branches:
       - master
