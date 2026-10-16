@@ -16,7 +16,7 @@ import { EditorialPricingLadder, EditorialFeatureRadar, EditorialImplementationF
 import { InternalLinks } from "@/components/content/internal-links"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { authorSlugs } from "@/app/authors/[slug]/page"
+import { isPublicAuthor } from "@/lib/authors"
 import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
 import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
 import { isNoindexed } from "@/lib/noindex"
@@ -87,7 +87,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const visibleContent = getVisibleReviewContent(tool.content)
 
   const authorSlug = tool.author ? tool.author.trim().toLowerCase().replace(/\s+/g, "-") : ""
-  const authorHref = authorSlug && authorSlugs.includes(authorSlug) ? `/authors/${authorSlug}` : null
+  const authorHref = authorSlug && isPublicAuthor(authorSlug) ? `/authors/${authorSlug}` : null
 
   const allReviews = getAllReviews()
 
@@ -515,12 +515,12 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 )}
 
                 {/* Section Navigation */}
-                {tool.content.length > 0 && (
+                {visibleContent.length > 0 && (
                   <GlassCard>
                     <div className="p-4">
                       <h3 className="font-semibold mb-3 text-sm">On this page</h3>
                       <nav className="space-y-1.5">
-                        {tool.content.map((section, i) => (
+                        {visibleContent.map((section, i) => (
                           <a
                             key={i}
                             href={`#section-${i}`}
