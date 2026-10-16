@@ -177,7 +177,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
                 <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
                 <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                  <li>Recorded PilotStack rating: {formatScore(tool.rating)}/5; the dataset review count ({tool.reviewCount.toLocaleString()}) is not an independently verified third-party review total.</li>
+                  <li>Recorded PilotStack internal editorial score: {formatScore(tool.rating)}/5. This is not a third-party user rating.</li>
                   <li>Pricing: {tool.priceRange} ({tool.pricing})</li>
                   <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : `${tool.name} excels at ${tool.features.filter(f => f.available).slice(0, 2).map(f => f.name.toLowerCase()).join(" and ")}`}</li>
                   <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `Suitable for most ${tool.category} use cases`}</li>
