@@ -2,6 +2,14 @@ import { site } from "@/lib/constants"
 
 const ctx = "https://schema.org"
 
+function authorSchema(name: string) {
+  // The site's shared editorial byline represents the publication, not a named individual.
+  if (name.trim().toLowerCase() === "pilotstack team" || name.trim().toLowerCase() === site.name.trim().toLowerCase()) {
+    return organizationRef()
+  }
+  return { "@type": "Person", name }
+}
+
 function organizationRef() {
   return {
     "@type": "Organization",
