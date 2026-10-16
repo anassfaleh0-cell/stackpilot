@@ -1,10 +1,19 @@
 import { describe, expect, it } from "vitest"
-import { filterSitemapEntries, isRetiredComparisonSlug } from "./retired-comparisons"
+import { filterSitemapEntries, isRetiredComparisonSlug, RETIRED_COMPARISON_SLUGS } from "./retired-comparisons"
 
 describe("retired comparison sitemap filtering", () => {
   it("recognizes known legacy comparison redirects", () => {
     expect(isRetiredComparisonSlug("activecampaign-vs-chatgpt")).toBe(true)
     expect(isRetiredComparisonSlug("activecampaign-vs-fathom")).toBe(true)
+  })
+
+  it("filters every registered retired slug, not just representative examples", () => {
+    const entries = [...RETIRED_COMPARISON_SLUGS].map((slug) => ({
+      url: `https://pilotstack.online/comparisons/${slug}`,
+      priority: 0.7,
+    }))
+    expect(RETIRED_COMPARISON_SLUGS.size).toBeGreaterThan(0)
+    expect(filterSitemapEntries(entries)).toEqual([])
   })
 
   it("keeps retired comparison redirects out of sitemap entries", () => {
