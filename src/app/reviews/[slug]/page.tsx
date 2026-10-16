@@ -95,7 +95,6 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
     .filter((r) => r.category === tool.category)
     .sort((a, b) => b.rating - a.rating)[0]
   const isBestInCategory = bestInCategory?.slug === tool.slug
-  const isBestValue = tool.pricing === "Freemium" || tool.pricing === "Free" || tool.pricing === "Free Trial"
 
   return (
     <>
@@ -135,10 +134,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="flex flex-wrap items-center gap-3 mb-3">
                 <Badge variant="default">{tool.category}</Badge>
                 {isBestInCategory && (
-                  <Badge variant="success">Best in Category</Badge>
-                )}
-                {isBestValue && (
-                  <Badge variant="warning">Best Value</Badge>
+                  <Badge variant="success">Top PilotStack score</Badge>
                 )}
                 <div className="flex items-center gap-1 text-sm">
                   <Star size={14} className="fill-accent text-accent" />
