@@ -304,7 +304,7 @@ describe("H-09A seo safety", () => {
     expect(reviewPageSrc).not.toContain("ReviewSchema")
     expect(reviewPageSrc).toContain("Recorded PilotStack internal editorial score")
     expect(reviewPageSrc).not.toContain("tool.reviewCount.toLocaleString()")
-    expect(reviewPageSrc).toContain("not an independently verified")
+    expect(reviewPageSrc).toContain("not a third-party user rating")
     expect(reviewPageSrc).not.toContain("AggregateRating")
     expect(reviewPageSrc).not.toContain("aggregateRating")
   })
