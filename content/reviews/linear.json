@@ -12,16 +12,16 @@
   "rating": 4.8,
   "reviewCount": 893,
   "pros": [
-    "Sub-100ms search across 10,000+ issues with instant filtering by status, assignee, label, priority, and cycle — no loading spinners or pagination delays",
-    "Keyboard-first design with 200+ shortcuts lets experienced users manage their entire workflow without touching a mouse, reducing context-switching friction",
-    "Onboarding from signup to active issue creation takes under 5 minutes with a clean interface that surfaces only what is relevant to current work",
+    "Search and filters for status, assignee, label, priority, and cycle help teams navigate issues; actual performance depends on workspace size and network conditions",
+    "Keyboard-first design with a broad set of keyboard shortcuts lets experienced users manage their entire workflow without touching a mouse, reducing context-switching friction",
+    "A focused interface and streamlined issue-creation flow can make initial setup straightforward for software teams",
     "AI-powered triage automatically categorizes incoming issues, suggests assignees based on workload, and identifies stale items that need attention or closure",
     "GitHub and GitLab integration creates branches from issues automatically and links pull requests to tickets, keeping engineering workflows unified without manual status updates"
   ],
   "cons": [
     "Custom fields, workflows, and data models are rigid compared to Jira or Asana, frustrating teams with non-standard processes or regulatory tracking requirements",
     "No built-in time tracking, resource management, or capacity planning, forcing engineering managers to use separate tools or spreadsheets for sprint planning",
-    "Free tier is limited to 10 users and 1 GB of attachment storage, making evaluation impractical for teams larger than a small startup without an immediate upgrade"
+    "Plan limits and included storage can change; review Linear’s current pricing details before choosing a plan"
   ],
   "features": [
     {
@@ -158,12 +158,12 @@
   "content": [
     {
       "title": "Executive Summary",
-      "body": "Linear is the fastest issue tracking and project management platform built specifically for software engineering teams. Its core design philosophy is speed — the web application delivers sub-100ms search across 10,000+ issues, instant filtering by any combination of status, assignee, label, priority, and cycle, and a keyboard-first interface with 200+ shortcuts that lets experienced engineers manage their entire workflow without touching a mouse. Linear was founded in 2019 by ex-Uber engineers and has grown rapidly through word-of-mouth adoption among high-performance engineering teams at companies like Vercel, Mercado Libre, and Podium. The platform uses a cycle-based planning model (similar to sprints but with more flexibility) and provides AI-powered issue triage that automatically categorizes, prioritizes, and assigns incoming work. Linear's simplicity is its defining characteristic — it makes deliberate trade-offs against Jira's configurability, choosing a fast, opinionated experience over unlimited customization. The platform has received over 3,500 user reviews with a 4.8/5 rating, reflecting exceptional satisfaction among its target audience of engineering teams.",
+      "body": "Linear is the fastest issue tracking and project management platform built specifically for software engineering teams. Its core design philosophy is speed — the web application delivers search and filtering across issues, instant filtering by any combination of status, assignee, label, priority, and cycle, and a keyboard-first interface with a broad set of keyboard shortcuts that lets experienced engineers manage their entire workflow without touching a mouse. Linear was founded in 2019 by ex-Uber engineers and has grown rapidly through word-of-mouth adoption among high-performance engineering teams at companies like Vercel, Mercado Libre, and Podium. The platform uses a cycle-based planning model (similar to sprints but with more flexibility) and provides AI-powered issue triage that automatically categorizes, prioritizes, and assigns incoming work. Linear's simplicity is its defining characteristic — it makes deliberate trade-offs against Jira's configurability, choosing a fast, opinionated experience over unlimited customization. Linear is designed for software teams that value a focused issue-tracking workflow; check independent review platforms for current user feedback.",
       "type": "text"
     },
     {
       "title": "TL;DR",
-      "body": "Linear is a project management platform rated 4.8/5 across 893 user reviews. It is built for software teams that want issue tracking without administrative overhead: sub-100ms search across 10,000+ issues, instant filtering by status, assignee, label, priority and cycle, and 200+ keyboard shortcuts. Category scores are features 4.6/5, ease of use 4.9/5, support 4.5/5, value 4.3/5 and performance 4.9/5. Pricing is per user per month across Free (up to 10 users), Team at $8/user/month billed annually, and Enterprise at $16/user/month. For most software teams Linear is a strong fit, provided you want a fast, opinionated workflow rather than deep configuration.",
+      "body": "Linear is a project management platform shown here with a recorded PilotStack editorial score; it is not a verified third-party user rating. It is built for software teams that want issue tracking without administrative overhead: search and filtering across issues, instant filtering by status, assignee, label, priority and cycle, and a broad set of keyboard shortcuts. Category scores are features 4.6/5, ease of use 4.9/5, support 4.5/5, value 4.3/5 and performance 4.9/5. Pricing is per user per month across Free, Team, and Enterprise plans; check Linear’s official pricing page for current prices and limits. For most software teams Linear is a strong fit, provided you want a fast, opinionated workflow rather than deep configuration.",
       "type": "text"
     },
     {
