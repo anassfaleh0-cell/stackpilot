@@ -49,6 +49,11 @@ async function fetchText(pathname) {
     headers: { "user-agent": "PilotStack-Route-Smoke-Check/1.0" },
     signal: AbortSignal.timeout(15000),
   })
+  const finalOrigin = new URL(response.url).origin
+  const expectedOrigin = new URL(BASE_URL).origin
+  if (finalOrigin !== expectedOrigin) {
+    throw new Error(`request escaped smoke-test origin: expected ${expectedOrigin}, received ${finalOrigin}`)
+  }
   return { response, body: await response.text() }
 }
 
