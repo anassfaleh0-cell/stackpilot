@@ -371,4 +371,13 @@ describe("review source transparency", () => {
     expect(reviewPageSrc).toContain("not verified ratings from G2, Capterra, or TrustRadius")
     expect(reviewPageSrc).toContain("Recorded PilotStack internal editorial score")
   })
+
+  it("does not publish unverified third-party review counts for Asana, Linear, or Notion", () => {
+    for (const slug of ["asana", "linear", "notion"]) {
+      const review = JSON.parse(fs.readFileSync(path.join(REVIEWS_DIR, `${slug}.json`), "utf8"))
+      expect(review).not.toHaveProperty("reviewCount")
+    }
+    expect(tc).toContain("reviewCount?: number")
+  })
+
 })
