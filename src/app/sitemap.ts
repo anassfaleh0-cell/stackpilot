@@ -217,6 +217,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const seen = new Set<string>()
   return entries.filter((entry) => {
+    // Defense in depth: retired comparison URLs must never leak into the sitemap,
+    // even if a future content loader or editorial link accidentally reintroduces one.
+    let pathname: string
+    try {
+      pathname = new URL(entry.url).pathname
+    } catch {
+      return false
+    }
+    const comparisonSlug = pathname.match(/^\/comparisons\/([^/]+)\/?$/)?.[1]
+    if (comparisonSlug && retiredComparisonSlugs.has(comparisonSlug)) return false
     if (seen.has(entry.url)) return false
     seen.add(entry.url)
     return true
