@@ -2,9 +2,22 @@ const APP_HOST = "pilotstack.online"
 
 export function proxy(request: Request) {
   const url = new URL(request.url)
-  const host = (request.headers.get("x-forwarded-host") || url.host).split(":")[0]
+  const host = (request.headers.get("x-forwarded-host") || url.host)
+    .split(":")[0]
+    .toLowerCase()
 
-  if (host === APP_HOST || host.startsWith("localhost")) {
+  // Vercel preview deployments must stay on their own hostname so reviewers can
+  // validate branch changes without being redirected to production. This only
+  // applies to preview environments; production still enforces the canonical host.
+  const isVercelPreviewHost =
+    process.env.VERCEL_ENV === "preview" && host.endsWith(".vercel.app")
+
+  if (
+    host === APP_HOST ||
+    host === `www.${APP_HOST}` ||
+    host.startsWith("localhost") ||
+    isVercelPreviewHost
+  ) {
     return undefined
   }
 

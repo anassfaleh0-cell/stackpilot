@@ -177,8 +177,14 @@ for (const dir of dirs) {
     // Lint the actual source payload; runtime sanitization must never hide source defects.
     const raw = JSON.stringify(data)
     const validationData = data
-    const validationRaw = raw
-    const malformedLinks = (raw.match(/<a href="[^"]*">\s*<a href=/gi) || []).length
+    // Most content routes render typed fields (for example sections, recommendations, FAQs)
+    // rather than the legacy generated top-level HTML body. Blog articles are the exception.
+    // Lint the rendered/source-of-truth fields so stale, unused generated HTML cannot mask issues.
+    const lintData = dir !== "content/blog" && data && typeof data === "object"
+      ? Object.fromEntries(Object.entries(data).filter(([key]) => key !== "body"))
+      : validationData
+    const validationRaw = JSON.stringify(lintData)
+    const malformedLinks = (validationRaw.match(/<a\b[^>]*<a\b/gi) || []).length + (validationRaw.match(/href="[^"]*<a\b/gi) || []).length
     if (malformedLinks > 0) {
       console.error("  ERROR: " + malformedLinks + " malformed nested <a> link pattern(s)")
       fileErrors += malformedLinks
@@ -218,7 +224,7 @@ for (const dir of dirs) {
       fileErrors++
     }
 
-    const primaryText = collectText(data).trim()
+    const primaryText = collectText(lintData).trim()
     if (primaryText.length < 120 && !["content/glossary", "content/statistics"].includes(dir)) {
       console.error("  ERROR: Primary content is too thin (<120 characters)")
       fileErrors++

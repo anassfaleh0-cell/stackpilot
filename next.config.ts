@@ -53,6 +53,43 @@ const nextConfig: NextConfig = {
   generateEtags: true,
   redirects: async () => [
     {
+      // Consolidate the verified www hostname onto the canonical apex host.
+      // Keep the full path (including nested segments) and query string intact.
+      source: "/:path*",
+      has: [{ type: "host", value: "www.pilotstack.online" }],
+      destination: "https://pilotstack.online/:path*",
+      permanent: true,
+    },
+    // Legacy plural route names surfaced in Search Console. The singular routes
+    // and matching content records exist in this repository.
+    {
+      source: "/blogs/:slug",
+      destination: "/blog/:slug",
+      permanent: true,
+    },
+    {
+      source: "/glossarys/:slug",
+      destination: "/glossary/:slug",
+      permanent: true,
+    },
+    {
+      source: "/bests/:slug",
+      destination: "/best/:slug",
+      permanent: true,
+    },
+    // Retire legacy individual-author URLs that no longer have matching public
+    // author profiles; consolidate them on the current, transparent editorial team page.
+    {
+      source: "/authors/priya-sharma",
+      destination: "/authors/pilotstack-team",
+      permanent: true,
+    },
+    {
+      source: "/authors/sarah-mitchell",
+      destination: "/authors/pilotstack-team",
+      permanent: true,
+    },
+    {
       source: "/reviews/calndly",
       destination: "/reviews/calendly",
       permanent: true,
