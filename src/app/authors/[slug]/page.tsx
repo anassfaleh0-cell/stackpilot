@@ -13,12 +13,6 @@ import { BookOpen, Calendar } from "lucide-react"
 import { getAllReviews, getAllGuides, getAllBlogPosts } from "@/lib/content/registry"
 import { ReviewCardGrid } from "@/components/entity/review-card-grid"
 import { SocialFooterIcons } from "@/components/brand/social-icons"
-import sitemapRoute from "@/app/sitemap"
-
-const sitemapEntries = sitemapRoute()
-const countIn = (segment: string) => sitemapEntries.filter((e) => e.url.includes(segment)).length
-const reviewCount = countIn("/reviews/")
-const comparisonCount = countIn("/comparisons/")
 
 const authorSocial = {
   twitter: site.links.twitter,
@@ -68,6 +62,11 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
   const allReviews = getAllReviews()
   const allGuides = getAllGuides()
   const allPosts = getAllBlogPosts()
+  // Keep the editorial profile useful and fast: link to the full libraries instead of
+  // rendering hundreds of cards (which made this page exceed 1 MB of HTML).
+  const featuredReviews = allReviews.slice(0, 8)
+  const featuredGuides = allGuides.slice(0, 6)
+  const featuredPosts = allPosts.slice(0, 6)
 
   return (
     <>
@@ -109,16 +108,17 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
             <div className="space-y-10">
               {allReviews.length > 0 && (
                 <section>
-                  <h2 className="text-xl font-bold mb-4">Reviews by {author.name}</h2>
-                  <ReviewCardGrid items={allReviews.map(r => ({ slug: r.slug, name: r.name, category: r.category, rating: r.rating, tagline: r.tagline }))} />
+                  <h2 className="text-xl font-bold mb-4">Latest software reviews from PilotStack</h2>
+                  <ReviewCardGrid items={featuredReviews.map(r => ({ slug: r.slug, name: r.name, category: r.category, rating: r.rating, tagline: r.tagline }))} />
+                  <Link href="/reviews" className="mt-4 inline-flex text-sm font-medium text-primary hover:underline">Browse all software reviews →</Link>
                 </section>
               )}
 
               {allGuides.length > 0 && (
                 <section>
-                  <h2 className="text-xl font-bold mb-4">Guides by {author.name}</h2>
+                  <h2 className="text-xl font-bold mb-4">Selected software buying guides</h2>
                   <div className="grid sm:grid-cols-2 gap-4">
-                    {allGuides.map((g) => (
+                    {featuredGuides.map((g) => (
                       <Link key={g.slug} href={`/guides/${g.slug}`} className="group card-hover-lift">
                         <Card className="p-4">
                           <div className="flex items-center gap-2 mb-2">
@@ -134,14 +134,15 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
                       </Link>
                     ))}
                   </div>
+                  <Link href="/guides" className="mt-4 inline-flex text-sm font-medium text-primary hover:underline">Browse all guides →</Link>
                 </section>
               )}
 
               {allPosts.length > 0 && (
                 <section>
-                  <h2 className="text-xl font-bold mb-4">Articles by {author.name}</h2>
+                  <h2 className="text-xl font-bold mb-4">Selected articles from PilotStack</h2>
                   <div className="grid sm:grid-cols-2 gap-4">
-                    {allPosts.map((p) => (
+                    {featuredPosts.map((p) => (
                       <Link key={p.slug} href={`/blog/${p.slug}`} className="group card-hover-lift">
                         <Card className="p-4">
                           <div className="flex items-center gap-2 mb-2">
@@ -156,6 +157,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
                       </Link>
                     ))}
                   </div>
+                  <Link href="/blog" className="mt-4 inline-flex text-sm font-medium text-primary hover:underline">Browse all articles →</Link>
                 </section>
               )}
 
