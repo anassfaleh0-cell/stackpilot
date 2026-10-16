@@ -231,12 +231,12 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* CTA */}
               <div className="flex flex-wrap gap-3 mb-12">
                 <a
-                  href={`https://www.google.com/search?q=${encodeURIComponent(tool.name + " official website")}`}
+                  href={tool.website && /^https?:\/\//i.test(tool.website) ? tool.website : `https://www.google.com/search?q=${encodeURIComponent(tool.name + " official website")}`}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-white hover:bg-primary-dark shadow-button hover:shadow-button-hover h-10 px-6 text-sm font-medium transition-all duration-200"
                 >
-                  Visit Website <ExternalLink size={14} />
+                  {tool.website && /^https?:\/\//i.test(tool.website) ? "Visit Official Website" : "Find Official Website"} <ExternalLink size={14} />
                 </a>
                 <Link
                   href={`/comparisons`}
