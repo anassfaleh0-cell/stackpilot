@@ -64,8 +64,8 @@ describe("site-wide content quality gate", () => {
       const comparison = getComparison(slug)
       expect(comparison, slug).toBeTruthy()
       expect(comparison!.description, slug).not.toMatch(/\b\d(?:\.\d)?\/5\b/i)
-      expect(comparison!.description, slug).not.toMatch(/[€£$]\\s?\d/i)
-      expect(comparison!.description, slug).not.toMatch(/\b(?:from|starting at|starts at)\\s*(?:free|[€£$])/i)
+      expect(comparison!.description, slug).not.toMatch(/[€£$]\s?\d/i)
+      expect(comparison!.description, slug).not.toMatch(/\b(?:from|starting at|starts at)\s*(?:free|[€£$])/i)
     }
   })
 
