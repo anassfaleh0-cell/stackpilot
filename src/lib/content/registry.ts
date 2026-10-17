@@ -593,9 +593,12 @@ function normalizeComparisonWinner(value: string | null, tool1: string, tool2: s
 function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: string, tool2Slug: string, features: ComparisonFeature[], winner: string | null): string {
   const review1 = getReview(tool1Slug)
   const review2 = getReview(tool2Slug)
-  const recordedPick = winner
-    ? `The source dataset marks ${winner} as its recorded pick. That label is not independent proof that it is the better choice for every team.`
-    : "The source dataset does not name one overall pick. Choose based on your requirements and the evidence you verify."
+  const crossCategory = Boolean(review1?.category && review2?.category && review1.category !== review2.category)
+  const recordedPick = crossCategory
+    ? `These products are listed in different categories (${review1?.category} and ${review2?.category}), so they may solve different problems. Any source-dataset pick is not a universal winner; compare them only where your workflow genuinely overlaps.`
+    : winner
+      ? `The source dataset marks ${winner} as its recorded pick. That label is not independent proof that it is the better choice for every team.`
+      : "The source dataset does not name one overall pick. Choose based on your requirements and the evidence you verify."
   const profile = (name: string, review: ReviewContent | null) => {
     if (!review) return `${name}: PilotStack does not currently have a matching review profile for this comparison.`
     const capabilities = review.features.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ")
@@ -606,7 +609,7 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
     return `${f.name}: ${tool1} — ${value(f.tool1)}; ${tool2} — ${value(f.tool2)}.`
   }).join(" ")
   const pricing = [review1, review2].filter((review): review is ReviewContent => Boolean(review)).map((review) =>
-    `${review.name} has a recorded rating of ${review.rating}/5 and pricing listed as ${review.pricing}${review.priceRange ? ` (${review.priceRange})` : ""}. Ratings, prices, included limits, and plan availability may change; check the source and current vendor page before purchasing.`
+    `${review.name} has pricing listed as ${review.pricing}${review.priceRange ? ` (${review.priceRange})` : ""}. PilotStack does not present the profile's numeric score as a verified third-party average. Prices, included limits, and plan availability may change; confirm current details with the vendor before purchasing.`
   ).join(" ")
   return [
     `This page compares ${tool1} and ${tool2} using information currently recorded in PilotStack's product profiles. The dataset is a starting point for research, not a substitute for a hands-on trial or vendor confirmation.`,
@@ -620,9 +623,9 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
   ].filter(Boolean).join("\n\n")
 }
 function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
-  const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
-  if (cleaned.length >= 80 && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(cleaned)) return trimText(cleaned, 700)
-  return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the recorded overall winner." : "The dataset records no single overall winner.") + " Read the detailed rows and linked reviews before making a decision.", 700)
+  // Legacy descriptions contain unverified numeric scores and blanket winner claims.
+  // Build a transparent summary from the current product names instead of reusing those claims.
+  return trimText(`Compare ${tool1} and ${tool2} using product information currently recorded in PilotStack. This page is a research starting point, not an independent hands-on test. Verify current pricing, plan limits, integrations, security requirements, and feature availability with each vendor before choosing.`, 700)
 }
 export function getComparison(slug: string): ComparisonContent | null {
   const cached = comparisonCache.get(slug)
