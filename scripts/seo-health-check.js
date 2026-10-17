@@ -630,6 +630,23 @@ function checkEEAT() {
   }
 }
 
+// ─── 9. AdSense ads.txt ─────────────────────────────────────────────────────
+function checkAdsTxt() {
+  console.log("\n\x1b[1m9. AdSense ads.txt Validation\x1b[0m")
+  const adsTxtPath = path.resolve(process.cwd(), "public/ads.txt")
+  if (!fs.existsSync(adsTxtPath)) {
+    log("fail", "public/ads.txt is missing; /ads.txt may return 404")
+    return
+  }
+  const lines = fs.readFileSync(adsTxtPath, "utf-8").split(/\r?\n/).map((line) => line.trim()).filter(Boolean)
+  const expected = "google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0"
+  if (lines.some((line) => line.replace(/\s+/g, " ") === expected)) log("pass", "ads.txt contains the expected Google publisher DIRECT declaration")
+  else log("fail", "ads.txt does not contain the exact expected Google publisher declaration")
+  const malformed = lines.filter((line) => /^google\.com\s*,/i.test(line) && !/^google\.com\s*,\s*pub-\d+\s*,\s*DIRECT\s*,\s*[a-f0-9]+\s*$/i.test(line))
+  if (malformed.length) log("warn", `ads.txt contains ${malformed.length} malformed Google declaration(s); review line formatting`)
+  else log("pass", "Google ads.txt declaration formatting looks valid")
+}
+
 // ─── Run All Checks ─────────────────────────────────────────────────────────
 function main() {
   console.log("\x1b[1m\x1b[36m╔══════════════════════════════════════════╗")
@@ -644,6 +661,7 @@ function main() {
   checkInternalLinks()
   checkPerformance()
   checkEEAT()
+  checkAdsTxt()
 
   console.log("\n\x1b[1m─── Summary ────────────────────────────────────────\x1b[0m")
   console.log(`  \x1b[32m✔ ${totalPassed} passed\x1b[0m`)
