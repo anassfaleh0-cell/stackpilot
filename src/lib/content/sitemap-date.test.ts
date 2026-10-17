@@ -17,6 +17,7 @@ describe("sitemap modification dates", () => {
     expect(getSitemapLastModified("2026-02-31")).toBeUndefined()
     expect(getSitemapLastModified("2026-02-31T00:00:00.000Z")).toBeUndefined()
     expect(getSitemapLastModified("2026-04-31T12:30:00Z")).toBeUndefined()
+    expect(getSitemapLastModified("2026-02-31 00:00:00Z")).toBeUndefined()
     expect(getSitemapLastModified("2024-02-29")?.toISOString()).toBe("2024-02-29T00:00:00.000Z")
     expect(getSitemapLastModified("2026-10-09T00:00:00.000Z")?.toISOString()).toBe("2026-10-09T00:00:00.000Z")
   })
