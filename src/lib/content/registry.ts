@@ -9,6 +9,14 @@ const CONTENT_DIR = path.resolve(process.cwd(), "content")
 // internal-link, and comparison generation revisit the same review profiles thousands of times.
 const reviewCache = new Map<string, ReviewContent | null>()
 const comparisonCache = new Map<string, ComparisonContent | null>()
+let reviewSlugLookup: Map<string, string> | null = null
+
+function findReviewSlugByName(name: string): string | undefined {
+  if (!reviewSlugLookup) {
+    reviewSlugLookup = new Map(getAllReviews().map((review) => [review.name.trim().toLowerCase(), review.slug]))
+  }
+  return reviewSlugLookup.get(String(name || "").trim().toLowerCase())
+}
 
 const DIR_FOR_TYPE: Record<string, string> = {
   review: "reviews",
@@ -628,8 +636,8 @@ export function getComparison(slug: string): ComparisonContent | null {
   const resolveToolSlug = (name: string, explicitSlug?: string): string => {
     if (explicitSlug && fs.existsSync(path.join(CONTENT_DIR, "reviews", explicitSlug + ".json"))) return explicitSlug
     const normalizedName = String(name || "").trim().toLowerCase()
-    const matchingReview = getAllReviews().find((review) => review.name.trim().toLowerCase() === normalizedName)
-    if (matchingReview) return matchingReview.slug
+    const matchingSlug = findReviewSlugByName(normalizedName)
+    if (matchingSlug) return matchingSlug
     return normalizedName.replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
   }
   // Older comparison records may omit tool slugs, which breaks their review links.
