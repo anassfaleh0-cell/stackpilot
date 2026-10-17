@@ -130,6 +130,11 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
   /organizations see measurable improvements/i,
   /typical roi payback/i,
   /first-year roi/i,
+  // Remove unsupported precision and scale claims from individual content sentences.
+  /\\bsub-?\\d+(?:\\.\\d+)?\\s*(?:ms|milliseconds?)\\b/i,
+  /\\b\\d[\\d,]*(?:\\.\\d+)?\\+?\\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\\b/i,
+  /\\b(?:zero|no)\\s+(?:loading states?|pagination delays?|downtime)\\b/i,
+  /\\b\\d{1,3}(?:\\.\\d+)?%?\\s+(?:faster|improvement|uptime)\\b/i,
 ]
 
 function sanitizeMalformedPricingText(value: string): string {
@@ -278,12 +283,16 @@ function sanitizeFaqs(faqs: FAQItem[] | undefined): FAQItem[] {
   return cleaned
 }
 
-function sanitizeSections<T extends { title: string; body: string }>(sections: T[] | undefined): T[] {
+function sanitizeSections<T extends { title: string; body: string; items?: string[] }>(sections: T[] | undefined): T[] {
   if (!Array.isArray(sections)) return []
   return sections
     .map((section) => ({
       ...section,
       body: sanitizeUnsupportedClaims(section?.body),
+      // List items are rendered independently of the section body, so sanitize them too.
+      ...(Array.isArray(section.items)
+        ? { items: section.items.map((item) => sanitizeEditorialText(String(item ?? ""))).filter(Boolean) }
+        : {}),
     }))
     .filter((section) => {
       if (!section?.title || !section?.body) return false
