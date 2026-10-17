@@ -15,7 +15,7 @@ export function getSitemapLastModified(value: unknown): Date | undefined {
   // JavaScript normalizes impossible calendar dates such as 2026-02-31.
   // Validate the ISO calendar portion before parsing so bad content cannot
   // produce a misleading sitemap <lastmod> value.
-  const isoDatePrefix = value.match(/^(\d{4}-\d{2}-\d{2})(?:$|T)/)
+  const isoDatePrefix = value.match(/^(\d{4}-\d{2}-\d{2})(?:$|[Tt\s])/)
   if (isoDatePrefix) {
     const calendarDate = new Date(`${isoDatePrefix[1]}T00:00:00.000Z`)
     if (
