@@ -172,7 +172,17 @@ function checkDateFormats(data, file) {
   for (const field of ["lastUpdated", "publishedAt", "updatedAt", "lastReviewed"]) {
     if (!data[field]) continue
     const value = String(data[field])
-    if (/^\d{4}-\d{2}-\d{2}$/.test(value)) continue
+    if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+      const parsedDate = new Date(`${value}T00:00:00.000Z`)
+      if (
+        Number.isNaN(parsedDate.getTime()) ||
+        parsedDate.toISOString().slice(0, 10) !== value
+      ) {
+        console.error(`  ERROR: Invalid calendar date "${field}": "${value}"`)
+        errs++
+      }
+      continue
+    }
     const parsed = new Date(value)
     if (Number.isNaN(parsed.getTime())) {
       console.error(`  ERROR: Invalid date "${field}": "${value}"`)
