@@ -131,10 +131,10 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
   /typical roi payback/i,
   /first-year roi/i,
   // Remove unsupported precision and scale claims from individual content sentences.
-  /\\bsub-?\\d+(?:\\.\\d+)?\\s*(?:ms|milliseconds?)\\b/i,
-  /\\b\\d[\\d,]*(?:\\.\\d+)?\\+?\\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\\b/i,
-  /\\b(?:zero|no)\\s+(?:loading states?|pagination delays?|downtime)\\b/i,
-  /\\b\\d{1,3}(?:\\.\\d+)?%?\\s+(?:faster|improvement|uptime)\\b/i,
+  /\bsub-?\d+(?:\.\d+)?\s*(?:ms|milliseconds?)\b/i,
+  /\b\d[\d,]*(?:\.\d+)?\\+?\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\b/i,
+  /\b(?:zero|no)\s+(?:loading states?|pagination delays?|downtime)\b/i,
+  /\b\d{1,3}(?:\.\d+)?%?\s+(?:faster|improvement|uptime)\b/i,
 ]
 
 function sanitizeMalformedPricingText(value: string): string {
@@ -939,7 +939,7 @@ function buildGuideSections(guide: GuideContent): GuideContent["sections"] {
   const sections = sanitizeSections(guide.sections)
   if (sectionWordCount(sections) >= 900) return sections
 
-  const title = guide.title.replace(/\\s*[:—-].*$/, "").trim() || guide.category
+  const title = guide.title.replace(/\s*[:—-].*$/, "").trim() || guide.category
   const category = String(guide.category || "").toLowerCase()
   const focus = category.includes("ai")
     ? "model behavior on representative examples, data retention and training terms, human review, version changes, latency, and cost at expected usage"
