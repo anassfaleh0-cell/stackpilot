@@ -69,6 +69,7 @@ describe("site-wide content quality gate", () => {
       "The product responds in sub-100ms under normal load.",
       "The vendor supports 10,000+ integrations for every plan.",
       "The vendor serves over 10,000 customers worldwide.",
+      "The plan includes up to 5,000 connectors.",
       "The platform is used by millions of users.",
       "The platform guarantees zero downtime for all customers.",
       "This workflow delivers 40% faster results.",
@@ -79,6 +80,8 @@ describe("site-wide content quality gate", () => {
     }
     expect(sanitizeUnsupportedClaims("Teams can compare available plans before choosing a workflow."))
       .toContain("compare available plans")
+    expect(sanitizeUnsupportedClaims("Compare available plans. The vendor has 99.9% uptime."))
+      .toBe("Compare available plans.")
   })
 
   it("sanitizes unsupported precision and scale claims inside review list items", () => {
