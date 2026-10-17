@@ -30,6 +30,7 @@
     "check:all": "npm run test && npm run build",
     "seo:audit": "node scripts/seo-health-check.js",
     "seo:links": "node scripts/linking-audit.js",
+    "audit:live": "node scripts/audit-live-readiness.js",
     "postinstall": "node scripts/copy-og-assets.js"
   },
   "dependencies": {

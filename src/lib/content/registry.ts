@@ -9,6 +9,14 @@ const CONTENT_DIR = path.resolve(process.cwd(), "content")
 // internal-link, and comparison generation revisit the same review profiles thousands of times.
 const reviewCache = new Map<string, ReviewContent | null>()
 const comparisonCache = new Map<string, ComparisonContent | null>()
+let reviewSlugLookup: Map<string, string> | null = null
+
+function findReviewSlugByName(name: string): string | undefined {
+  if (!reviewSlugLookup) {
+    reviewSlugLookup = new Map(getAllReviews().map((review) => [review.name.trim().toLowerCase(), review.slug]))
+  }
+  return reviewSlugLookup.get(String(name || "").trim().toLowerCase())
+}
 
 const DIR_FOR_TYPE: Record<string, string> = {
   review: "reviews",
@@ -251,6 +259,9 @@ function sanitizeReview(review: ReviewContent): ReviewContent {
   const safeDescription = description.length >= 50 ? description : `${review.name} is listed in PilotStack’s ${review.category} catalog. Verify current features, pricing, and terms with the vendor.`
   return {
     ...review,
+    // Third-party review-count source details are not stored consistently in this corpus.
+    // Suppress imported counts rather than presenting unsupported numbers as verified.
+    reviewCount: 0,
     content: buildReviewSections(review),
     description: safeDescription,
     tagline: sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.tagline, 220))),
@@ -544,6 +555,10 @@ function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: Comparison
     "ease of use", "integration ecosystem", "core features", "user experience",
     "pricing value", "api & integrations", "customer support", "security & compliance",
     "scalability", "mobile app", "analytics & reporting", "api", "security",
+    // Common rows emitted by the legacy comparison generator rather than verified research.
+    "free tier availability", "entry-level pricing", "enterprise pricing", "annual discount",
+    "free trial duration", "contract flexibility", "user rating", "starting price",
+    "best for", "ease of use", "integration ecosystem", "user experience",
   ])
   const looksGenerated = base.length > 0 && base.every((f) => genericNames.has(f.name.toLowerCase().trim()))
   if (!looksGenerated && base.length > 5) return base
@@ -557,7 +572,7 @@ function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: Comparison
   const features1 = Array.isArray(r1?.features) ? r1.features : []
   const features2 = Array.isArray(r2?.features) ? r2.features : []
   const derived: ComparisonFeature[] = [
-    { name: "Recorded rating", tool1: r1 ? `${r1.rating}/5` : "Not recorded", tool2: r2 ? `${r2.rating}/5` : "Not recorded", tool1Detail: r1 ? `${r1.reviewCount.toLocaleString()} reviews recorded in this site's dataset; confirm the source and date before relying on the score.` : undefined, tool2Detail: r2 ? `${r2.reviewCount.toLocaleString()} reviews recorded in this site's dataset; confirm the source and date before relying on the score.` : undefined },
+    { name: "PilotStack editorial rating", tool1: r1 ? `${r1.rating}/5` : "Not recorded", tool2: r2 ? `${r2.rating}/5` : "Not recorded", tool1Detail: r1 ? "Editorial score in PilotStack's dataset; it is not a verified third-party average or a user-review count. Review the methodology and confirm current product details." : undefined, tool2Detail: r2 ? "Editorial score in PilotStack's dataset; it is not a verified third-party average or a user-review count. Review the methodology and confirm current product details." : undefined },
     { name: "Pricing information", tool1: r1 ? `${r1.pricing}${r1.priceRange ? `: ${r1.priceRange}` : ""}` : "Not recorded", tool2: r2 ? `${r2.pricing}${r2.priceRange ? `: ${r2.priceRange}` : ""}` : "Not recorded", tool1Detail: r1 ? "Pricing and plan limits can change; confirm current details on the vendor site." : undefined, tool2Detail: r2 ? "Pricing and plan limits can change; confirm current details on the vendor site." : undefined },
     { name: "Product positioning", tool1: r1 ? r1.category : "Not recorded", tool2: r2 ? r2.category : "Not recorded", tool1Detail: r1?.tagline || undefined, tool2Detail: r2?.tagline || undefined },
     { name: "Capabilities listed in review", tool1: features1.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || "Not recorded", tool2: features2.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || "Not recorded" },
@@ -578,9 +593,12 @@ function normalizeComparisonWinner(value: string | null, tool1: string, tool2: s
 function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: string, tool2Slug: string, features: ComparisonFeature[], winner: string | null): string {
   const review1 = getReview(tool1Slug)
   const review2 = getReview(tool2Slug)
-  const recordedPick = winner
-    ? `The source dataset marks ${winner} as its recorded pick. That label is not independent proof that it is the better choice for every team.`
-    : "The source dataset does not name one overall pick. Choose based on your requirements and the evidence you verify."
+  const crossCategory = Boolean(review1?.category && review2?.category && review1.category !== review2.category)
+  const recordedPick = crossCategory
+    ? `These products are listed in different categories (${review1?.category} and ${review2?.category}), so they may solve different problems. Any source-dataset pick is not a universal winner; compare them only where your workflow genuinely overlaps.`
+    : winner
+      ? `The source dataset marks ${winner} as its recorded pick. That label is not independent proof that it is the better choice for every team.`
+      : "The source dataset does not name one overall pick. Choose based on your requirements and the evidence you verify."
   const profile = (name: string, review: ReviewContent | null) => {
     if (!review) return `${name}: PilotStack does not currently have a matching review profile for this comparison.`
     const capabilities = review.features.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ")
@@ -591,7 +609,7 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
     return `${f.name}: ${tool1} — ${value(f.tool1)}; ${tool2} — ${value(f.tool2)}.`
   }).join(" ")
   const pricing = [review1, review2].filter((review): review is ReviewContent => Boolean(review)).map((review) =>
-    `${review.name} has a recorded rating of ${review.rating}/5 and pricing listed as ${review.pricing}${review.priceRange ? ` (${review.priceRange})` : ""}. Ratings, prices, included limits, and plan availability may change; check the source and current vendor page before purchasing.`
+    `${review.name} has pricing listed as ${review.pricing}${review.priceRange ? ` (${review.priceRange})` : ""}. PilotStack does not present the profile's numeric score as a verified third-party average. Prices, included limits, and plan availability may change; confirm current details with the vendor before purchasing.`
   ).join(" ")
   return [
     `This page compares ${tool1} and ${tool2} using information currently recorded in PilotStack's product profiles. The dataset is a starting point for research, not a substitute for a hands-on trial or vendor confirmation.`,
@@ -605,9 +623,9 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
   ].filter(Boolean).join("\n\n")
 }
 function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
-  const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
-  if (cleaned.length >= 80 && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(cleaned)) return trimText(cleaned, 700)
-  return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the recorded overall winner." : "The dataset records no single overall winner.") + " Read the detailed rows and linked reviews before making a decision.", 700)
+  // Legacy descriptions contain unverified numeric scores and blanket winner claims.
+  // Build a transparent summary from the current product names instead of reusing those claims.
+  return trimText(`Compare ${tool1} and ${tool2} using product information currently recorded in PilotStack. This page is a research starting point, not an independent hands-on test. Verify current pricing, plan limits, integrations, security requirements, and feature availability with each vendor before choosing.`, 700)
 }
 export function getComparison(slug: string): ComparisonContent | null {
   const cached = comparisonCache.get(slug)
@@ -617,7 +635,21 @@ export function getComparison(slug: string): ComparisonContent | null {
     comparisonCache.set(slug, null)
     return null
   }
-  const cmp = readJson<ComparisonContent>(file)
+  const rawComparison = readJson<ComparisonContent>(file)
+  const resolveToolSlug = (name: string, explicitSlug?: string): string => {
+    if (explicitSlug && fs.existsSync(path.join(CONTENT_DIR, "reviews", explicitSlug + ".json"))) return explicitSlug
+    const normalizedName = String(name || "").trim().toLowerCase()
+    const matchingSlug = findReviewSlugByName(normalizedName)
+    if (matchingSlug) return matchingSlug
+    return normalizedName.replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
+  }
+  // Older comparison records may omit tool slugs, which breaks their review links.
+  // Resolve against the actual review corpus before building derived criteria and narrative.
+  const cmp: ComparisonContent = {
+    ...rawComparison,
+    tool1Slug: resolveToolSlug(rawComparison.tool1, rawComparison.tool1Slug),
+    tool2Slug: resolveToolSlug(rawComparison.tool2, rawComparison.tool2Slug),
+  }
   const baseFeatures = cmp.features.slice(0, 20).map((f) => ({
     ...f,
     name: trimText(f.name, 140),
@@ -626,13 +658,27 @@ export function getComparison(slug: string): ComparisonContent | null {
   }))
   const features = buildDerivedComparisonFeatures(cmp, baseFeatures)
   const winner = normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2)
+  const review1 = getReview(cmp.tool1Slug)
+  const review2 = getReview(cmp.tool2Slug)
+  const crossCategory = Boolean(review1?.category && review2?.category && review1.category !== review2.category)
+  const faqs = sanitizeFaqs(cmp.faqs).map((faq) => {
+    const hasUnverifiedScore = /\b\d(?:\.\d)?\s*\/\s*5\b|user reviews?|user rating|higher rating|overall winner|overall pick|rated \d/i.test(faq.answer)
+    if (!hasUnverifiedScore) return faq
+    const context = crossCategory
+      ? `These products are listed in different categories (${review1?.category} and ${review2?.category}), so compare them only if your workflow overlaps both.`
+      : `Compare ${cmp.tool1} and ${cmp.tool2} against the same must-have requirements and realistic tasks.`
+    return {
+      ...faq,
+      answer: `${context} PilotStack's stored numeric scores are editorial dataset values, not verified third-party averages. Confirm current features, plan limits, and pricing with both vendors before deciding.`,
+    }
+  })
   const result: ComparisonContent = {
     ...cmp,
     winner,
     description: sanitizeComparisonDescription(cmp.description, cmp.tool1, cmp.tool2, features, winner),
     verdict: buildComparisonNarrative(cmp.tool1, cmp.tool2, cmp.tool1Slug, cmp.tool2Slug, features, winner),
     features,
-    faqs: sanitizeFaqs(cmp.faqs),
+    faqs,
   }
   comparisonCache.set(slug, result)
   return result
