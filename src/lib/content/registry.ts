@@ -606,8 +606,13 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
 }
 function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
   const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
-  if (cleaned.length >= 80 && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(cleaned)) return trimText(cleaned, 700)
-  return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the recorded overall winner." : "The dataset records no single overall winner.") + " Read the detailed rows and linked reviews before making a decision.", 700)
+  // Generated comparison snippets often present internal editorial scores as if they were
+  // third-party ratings and repeat price ranges without a source or verification date.
+  // Keep those figures out of search snippets; the page itself labels editorial scores and
+  // tells readers to confirm current pricing with the vendor.
+  const containsUnqualifiedScoreOrPrice = /\b\d(?:\.\d)?\/5\b|\b(?:from|starting at|starts at)\s*(?:free|[€£$\d])|\bfree\s*[–-]\s*[€£$\d]|[€£$]\s?\d[\d,.]*(?:\s*[–-]\s*[€£$]?\s?\d[\d,.]*)?\s*(?:\/\s*(?:mo|month|year)|per\s+(?:user|month|year))?/i.test(cleaned)
+  if (cleaned.length >= 80 && !containsUnqualifiedScoreOrPrice && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(cleaned)) return trimText(cleaned, 700)
+  return trimText("Compare " + tool1 + " and " + tool2 + " across recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. Use the detailed comparison and linked product profiles as a starting point, verify current plan details with each vendor, and choose based on your requirements.", 700)
 }
 export function getComparison(slug: string): ComparisonContent | null {
   const cached = comparisonCache.get(slug)
