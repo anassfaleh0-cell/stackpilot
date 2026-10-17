@@ -16,7 +16,12 @@ const REQUEST_TIMEOUT_MS = 20000
 
 function normalizePath(pathname) {
   if (!pathname || pathname === "/") return "/"
-  return decodeURI(pathname).replace(/\/+$/, "")
+  // A malformed percent-escape in one URL must not crash the entire site-wide audit.
+  try {
+    return decodeURI(pathname).replace(/\/+$/, "")
+  } catch {
+    return pathname.replace(/\/+$/, "") || "/"
+  }
 }
 
 function extractSitemapUrls(xml) {
