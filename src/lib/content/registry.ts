@@ -662,7 +662,7 @@ export function getComparison(slug: string): ComparisonContent | null {
   const review2 = getReview(cmp.tool2Slug)
   const crossCategory = Boolean(review1?.category && review2?.category && review1.category !== review2.category)
   const faqs = sanitizeFaqs(cmp.faqs).map((faq) => {
-    const hasUnverifiedScore = /\\b\\d(?:\\.\\d)?\\s*\\/\\s*5\\b|user reviews?|user rating|higher rating|overall winner|overall pick|rated \\d/i.test(faq.answer)
+    const hasUnverifiedScore = /\b\d(?:\.\d)?\s*\/\s*5\b|user reviews?|user rating|higher rating|overall winner|overall pick|rated \d/i.test(faq.answer)
     if (!hasUnverifiedScore) return faq
     const context = crossCategory
       ? `These products are listed in different categories (${review1?.category} and ${review2?.category}), so compare them only if your workflow overlaps both.`
