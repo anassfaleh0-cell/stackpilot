@@ -2,15 +2,15 @@
   "slug": "google-analytics",
   "name": "Google Analytics",
   "tagline": "Understand your audience and optimize your business with data-driven insights",
-  "description": "Google Analytics is the most widely deployed web analytics platform in the world, tracking over 50 million websites and providing free, actionable insights into website traffic, user behavior, and conversion performance. Its latest iteration, Google Analytics 4 (GA4), introduces event-based tracking with machine learning-powered predictive metrics, replacing the session-based model of Universal Analytics. The platform is deeply integrated with Google Ads, Search Console, and BigQuery, making it the cornerstone of the Google Marketing Platform ecosystem.",
+  "description": "Google Analytics is a web and app analytics platform for measuring audience activity, acquisition, engagement, and conversions. Google Analytics 4 (GA4) uses an event-based data model and can connect with Google Ads, Search Console, and BigQuery. Available reports and data limits depend on configuration and current Google product terms.",
   "category": "Analytics & Data",
   "website": "https://analytics.google.com",
   "pricing": "Free",
   "priceRange": "$0",
   "rating": 4.3,
-  "reviewCount": 15000,
+  "reviewCount": 0,
   "pros": [
-    "Completely free for the vast majority of users with generous 10 million monthly events per property and unlimited reporting seats",
+    "Completely free for the vast majority of users with generous the current data collection limits for the applicable property and reporting access subject to current product terms",
     "Seamless integration with Google Ads, Search Console, BigQuery, and Merchant Center for unified marketing measurement and attribution",
     "Machine learning-powered insights including churn probability, revenue prediction, and anomaly detection without manual configuration",
     "Cross-platform and cross-device tracking with Google Signals enables unified user journeys across websites and mobile apps",
@@ -156,27 +156,27 @@
   "content": [
     {
       "title": "Executive Summary",
-      "body": "Google Analytics is the most widely deployed web analytics platform in history, tracking an estimated 50+ million websites and processing billions of user interactions daily. Its transition from Universal Analytics to Google Analytics 4 in 2023 was the most disruptive platform migration in analytics history — replacing the session-based data model that had been standard for 15+ years with a flexible event-based architecture designed for cross-platform user journeys, privacy regulations, and machine learning-powered insights. GA4's key differentiator is its integration with the Google Marketing Platform ecosystem: Google Ads attribution, Search Console integration, BigQuery export, and Campaign Manager 360 connectivity create a unified measurement stack that no competitor matches at any price. The platform's free tier — unlimited users, up to 10 million monthly events per property, and predictive analytics — remains the most generous analytics offering available. The primary cost is the learning curve: long-time UA users report spending 3-6 months adapting to GA4's different interface, metrics, and reporting philosophy. For organizations that can invest in the transition, GA4 provides analytics capability that rivals enterprise platforms at zero direct cost.",
+      "body": "Google Analytics 4 (GA4) is Google's current web and app analytics platform. It uses an event-based data model and supports reporting on acquisition, engagement, and conversions. Its integration with other Google products can be useful for teams that use those services, while configuration, consent choices, retention settings, and reporting limits affect what data is available. Because Universal Analytics and GA4 differ in data models and reports, teams migrating should validate key metrics and rebuild important reports rather than assume historical figures are directly comparable.",
       "type": "text"
     },
     {
       "title": "TL;DR",
-      "body": "Google Analytics is a Analytics & Data platform with a 4.3/5 rating across 15,000 user reviews. Google Analytics is best suited for completely free for the vast majority of users with generous 10 million monthly events per property . Key strengths include features (4.6/5), ease of use (3.8/5), support (3.5/5), value (4.9/5), performance (4.4/5). Google Analytics starts at $0 with a free pricing model. For most organizations, Google Analytics delivers strong value provided its feature set aligns with your specific analytics & data requirements.",
+      "body": "Google Analytics is a web and app analytics platform in the Analytics & Data category. PilotStack's displayed score is an editorial assessment based on recorded product criteria, not a third-party user-review aggregate. The standard offering may meet common analytics needs without a direct subscription fee, but teams should confirm current limits, retention settings, integrations, and contractual terms in Google's documentation before relying on a particular capability.",
       "type": "text"
     },
     {
       "title": "Rating Overview",
-      "body": "Google Analytics holds a 4.3/5 overall rating based on 15,000 user reviews, with individual scores of Features: 4.6/5, Ease of Use: 3.8/5, Support: 3.5/5, Value: 4.9/5, Performance: 4.4/5. The platform's highest scores are in Value (4.9/5) and Features (4.6/5). These scores reflect consistent user satisfaction across the platform's core capabilities.",
+      "body": "The rating displayed on this page is PilotStack's recorded editorial score, not a rating calculated from a verified count of external user reviews. Category scores describe the criteria recorded in our dataset; they should be read alongside the evidence limitations and checked against your own analytics requirements. For current user sentiment, consult independent review platforms directly and check their review dates and sample sizes.",
       "type": "text"
     },
     {
       "title": "Company Background",
-      "body": "Google Analytics operates in the digital analytics and business intelligence space, headquartered in Mountain View, California. Founded in 2005, the company has grown to Part of Google (Alphabet) employees serving 50,000,000+ websites. Google Analytics has established itself as a significant player in the Analytics & Data category, with a product that google analytics is the most widely deployed web analytics platform in the world, tracking over 50 million websites and . The platform has evolved through continuous investment in Real-Time Reporting, Audience Insights, Event-Based Tracking, reflecting the company's commitment to meeting changing market demands. Primary user demographics include Digital Marketers and Web Analysts teams. The platform serves Analytics, Digital Marketing sectors.",
+      "body": "Google Analytics is a product within Google's analytics offering. Current ownership, company details, product availability, and feature descriptions should be confirmed in Google's official documentation. PilotStack does not independently verify a total number of websites using the product, so this page does not publish an audience or customer count.",
       "type": "text"
     },
     {
       "title": "Product Overview",
-      "body": "Google Analytics is a understand your audience and optimize your business with data-driven insights. The platform provides 18 core features spanning Real-time, Audience, Core, Reporting, Integrations categories. At its foundation, Google Analytics enables organizations to google analytics is the most widely deployed web analytics platform in the world, tracking over 50 million websites and providing free, actionable insights into website traffic, user behavior, and conversion performance with tools designed for business users. Google Analytics offers API access for custom integrations and supports Cloud deployment. Mobile apps are available for iOS and Android. AI capabilities include Google Analytics Intelligence, Predictive metrics, Anomaly detection.",
+      "body": "Google Analytics provides reporting features for website and app measurement, including event tracking, acquisition reporting, audience analysis, and integrations with selected Google services. Exact capabilities can depend on account configuration, consent settings, linked products, and current product limits. Verify critical requirements against the current documentation and test them in your own property before choosing a measurement setup.",
       "type": "text"
     },
     {
@@ -224,7 +224,7 @@
     },
     {
       "title": "Pricing Explained",
-      "body": "Google Analytics offers two tiers. Standard (free): unlimited users, 10 million monthly events per property, 500 unique event names, 30 user-scoped and 25 event-scoped custom dimensions, 50 audiences per property, 200 conversion events, and 12-month data retention with options to extend to 50 months. Analytics 360 ($150,000+ annually): 500 million monthly events per property, 125 custom dimensions, 100 audiences, 50-month data retention, SLA guarantee (99.9% uptime), dedicated support with 4-hour critical response, advanced attribution modeling, unsampled exploration reports, and integrations with Salesforce and Marketo. The 360 tier also includes roll-up properties for aggregating data across multiple properties — a feature not available in Standard. The $150,000 entry price makes Analytics 360 accessible only to organizations with significant advertising spend or data volume exceeding Standard limits. Most organizations — including mid-market companies with multiple properties — can operate on Standard tier by distributing data across multiple properties or accepting data sampling for high-traffic periods.",
+      "body": "Google Analytics offers two tiers. Standard (free): unlimited users, the current data collection limits for the applicable property, 500 unique event names, 30 user-scoped and 25 event-scoped custom dimensions, 50 audiences per property, 200 conversion events, and 12-month data retention with options to extend to 50 months. Analytics 360 ($150,000+ annually): 500 million monthly events per property, 125 custom dimensions, 100 audiences, 50-month data retention, SLA guarantee (99.9% uptime), dedicated support with 4-hour critical response, advanced attribution modeling, unsampled exploration reports, and integrations with Salesforce and Marketo. The 360 tier also includes roll-up properties for aggregating data across multiple properties — a feature not available in Standard. The $150,000 entry price makes Analytics 360 accessible only to organizations with significant advertising spend or data volume exceeding Standard limits. Most organizations — including mid-market companies with multiple properties — can operate on Standard tier by distributing data across multiple properties or accepting data sampling for high-traffic periods.",
       "type": "text"
     },
     {
@@ -274,7 +274,7 @@
     },
     {
       "title": "Industry Fit",
-      "body": "Google Analytics is best suited for Digital Marketers and Web Analysts across multiple industries. The platform excels in organizations in the Analytics & Data space. Key verticals served include Analytics, Digital Marketing, Business Intelligence. The platform's strong ratings across 15,000 reviews indicate strong satisfaction among its target user base.",
+      "body": "Google Analytics may suit digital marketers, product teams, analysts, and organizations that need website or app measurement. Fit depends on the questions you need to answer, data governance requirements, implementation capacity, and integration needs. PilotStack does not have a verified external user-review count for this product; readers should compare current third-party feedback directly.",
       "type": "text"
     },
     {
@@ -335,7 +335,7 @@
     },
     {
       "question": "How much does Google Analytics cost?",
-      "answer": "Google Analytics Standard is completely free for up to 10 million monthly events per property, with unlimited users and reporting. Google Analytics 360 starts at $150,000 per year and includes 500 million monthly events, service-level agreements, dedicated support, advanced attribution modeling, and integrations with Salesforce and other enterprise platforms."
+      "answer": "Google Analytics Standard is completely free for up to the current data collection limits for the applicable property, with unlimited users and reporting. Google Analytics 360 starts at $150,000 per year and includes 500 million monthly events, service-level agreements, dedicated support, advanced attribution modeling, and integrations with Salesforce and other enterprise platforms."
     },
     {
       "question": "Does Google Analytics integrate with other tools?",
@@ -367,7 +367,7 @@
     },
     {
       "question": "What is Google Analytics best for?",
-      "answer": "Google Analytics excels at completely free for the vast majority of users with generous 10 million monthly events per property . The platform is particularly valuable for organizations that need a reliable, feature-complete platform that can handle complex workflows. Teams across Digital Marketers and Web Analysts find the most value from Google Analytics's capabilities."
+      "answer": "Google Analytics excels at completely free for the vast majority of users with generous the current data collection limits for the applicable property . The platform is particularly valuable for organizations that need a reliable, feature-complete platform that can handle complex workflows. Teams across Digital Marketers and Web Analysts find the most value from Google Analytics's capabilities."
     },
     {
       "question": "What are Google Analytics's limitations?",
@@ -429,7 +429,7 @@
   "company": {
     "founded": 2005,
     "headquarters": "Mountain View, California",
-    "customers": "50,000,000+ websites",
+    "customers": "Not independently verified",
     "employeeCount": "Part of Google (Alphabet)",
     "industries": [
       "Analytics",
