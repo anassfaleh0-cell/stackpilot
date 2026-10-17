@@ -547,6 +547,10 @@ function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: Comparison
     "ease of use", "integration ecosystem", "core features", "user experience",
     "pricing value", "api & integrations", "customer support", "security & compliance",
     "scalability", "mobile app", "analytics & reporting", "api", "security",
+    // Common rows emitted by the legacy comparison generator rather than verified research.
+    "free tier availability", "entry-level pricing", "enterprise pricing", "annual discount",
+    "free trial duration", "contract flexibility", "user rating", "starting price",
+    "best for", "ease of use", "integration ecosystem", "user experience",
   ])
   const looksGenerated = base.length > 0 && base.every((f) => genericNames.has(f.name.toLowerCase().trim()))
   if (!looksGenerated && base.length > 5) return base
