@@ -68,6 +68,8 @@ describe("site-wide content quality gate", () => {
     const samples = [
       "The product responds in sub-100ms under normal load.",
       "The vendor supports 10,000+ integrations for every plan.",
+      "The vendor serves over 10,000 customers worldwide.",
+      "The platform is used by millions of users.",
       "The platform guarantees zero downtime for all customers.",
       "This workflow delivers 40% faster results.",
       "The vendor has 99.9% uptime.",
