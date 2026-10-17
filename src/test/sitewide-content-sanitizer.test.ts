@@ -62,7 +62,7 @@ describe("site-wide content quality gate", () => {
   it("sanitizes unsupported precision and scale claims inside review list items", () => {
     const suspicious = [
       /\bsub-?\d+(?:\.\d+)?\s*(?:ms|milliseconds?)\b/i,
-      /\b\d[\d,]*(?:\.\d+)?\\+?\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\b/i,
+      /\b\d[\d,]*(?:\.\d+)?\+?\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\b/i,
       /\b(?:zero|no)\s+(?:loading states?|pagination delays?|downtime)\b/i,
       /\b\d{1,3}(?:\.\d+)?%?\s+(?:faster|improvement|uptime)\b/i,
     ]
