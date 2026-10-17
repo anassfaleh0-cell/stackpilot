@@ -42,6 +42,17 @@ describe("retired comparison sitemap filtering", () => {
   it("rejects malformed sitemap URLs", () => {
     expect(filterSitemapEntries([{ url: "not a URL" }])).toEqual([])
   })
+
+  it("deduplicates trailing-slash variants and rejects query or fragment URLs", () => {
+    const entries = [
+      { url: "https://pilotstack.online/reviews/linear", priority: 0.8 },
+      { url: "https://pilotstack.online/reviews/linear/", priority: 0.7 },
+      { url: "https://pilotstack.online/reviews/asana?ref=nav", priority: 0.8 },
+      { url: "https://pilotstack.online/reviews/notion#pricing", priority: 0.8 },
+      { url: "https://pilotstack.online/reviews/asana", priority: 0.8 },
+    ]
+    expect(filterSitemapEntries(entries)).toEqual([entries[0], entries[4]])
+  })
 })
 
 
