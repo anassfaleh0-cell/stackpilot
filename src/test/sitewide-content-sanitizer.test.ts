@@ -22,6 +22,10 @@ const BANNED_CLAIMS = [
   /our testing methodology/i,
   /after researching hundreds of/i,
   /our expert buying advice/i,
+  /\\bsub-?\\d+(?:\\.\\d+)?\\s*(?:ms|milliseconds?)\\b/i,
+  /\\b\\d[\\d,]*(?:\\.\\d+)?\\+?\\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\\b/i,
+  /\\b(?:zero|no)\\s+(?:loading states?|pagination delays?|downtime)\\b/i,
+  /\\b\\d{1,3}(?:\\.\\d+)?%?\\s+(?:faster|improvement|uptime)\\b/i,
 ]
 
 function stringsOf(value: unknown, out: string[] = []): string[] {
