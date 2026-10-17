@@ -259,7 +259,7 @@ function sanitizeReview(review: ReviewContent): ReviewContent {
   const safeDescription = description.length >= 50 ? description : `${review.name} is listed in PilotStack’s ${review.category} catalog. Verify current features, pricing, and terms with the vendor.`
   return {
     ...review,
-    // No third-party review-count provenance is stored consistently in this corpus.
+    // Third-party review-count source details are not stored consistently in this corpus.
     // Suppress imported counts rather than presenting unsupported numbers as verified.
     reviewCount: 0,
     content: buildReviewSections(review),
