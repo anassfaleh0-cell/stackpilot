@@ -158,7 +158,7 @@ function sanitizeMalformedPricingText(value: string): string {
   return text
 }
 
-function sanitizeUnsupportedClaims(value: string | undefined): string {
+export function sanitizeUnsupportedClaims(value: string | undefined): string {
   const raw = String(value ?? "").trim()
   if (!raw) return ""
   const normalized = raw
