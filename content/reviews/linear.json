@@ -10,7 +10,7 @@
   "pricing": "Free Trial",
   "priceRange": "Varies",
   "rating": 4.8,
-  "reviewCount": 893,
+  "reviewCount": 0,
   "pros": [
     "Sub-100ms search across 10,000+ issues with instant filtering by status, assignee, label, priority, and cycle — no loading spinners or pagination delays",
     "Keyboard-first design with 200+ shortcuts lets experienced users manage their entire workflow without touching a mouse, reducing context-switching friction",
@@ -158,7 +158,7 @@
   "content": [
     {
       "title": "Executive Summary",
-      "body": "Linear is the fastest issue tracking and project management platform built specifically for software engineering teams. Its core design philosophy is speed — the web application delivers sub-100ms search across 10,000+ issues, instant filtering by any combination of status, assignee, label, priority, and cycle, and a keyboard-first interface with 200+ shortcuts that lets experienced engineers manage their entire workflow without touching a mouse. Linear was founded in 2019 by ex-Uber engineers and has grown rapidly through word-of-mouth adoption among high-performance engineering teams at companies like Vercel, Mercado Libre, and Podium. The platform uses a cycle-based planning model (similar to sprints but with more flexibility) and provides AI-powered issue triage that automatically categorizes, prioritizes, and assigns incoming work. Linear's simplicity is its defining characteristic — it makes deliberate trade-offs against Jira's configurability, choosing a fast, opinionated experience over unlimited customization. The platform has received over 3,500 user reviews with a 4.8/5 rating, reflecting exceptional satisfaction among its target audience of engineering teams.",
+      "body": "Linear is the fastest issue tracking and project management platform built specifically for software engineering teams. Its core design philosophy is speed — Actual performance depends on device, network, workload, and current product behavior; no independent latency benchmark is claimed. Linear was founded in 2019 by ex-Uber engineers and has grown rapidly through word-of-mouth adoption among high-performance engineering teams at companies like Vercel, Mercado Libre, and Podium. The platform uses a cycle-based planning model (similar to sprints but with more flexibility) and provides AI-powered issue triage that automatically categorizes, prioritizes, and assigns incoming work. Linear's simplicity is its defining characteristic — it makes deliberate trade-offs against Jira's configurability, choosing a fast, opinionated experience over unlimited customization. The platform has received over 3,500 user reviews with a 4.8/5 rating, reflecting exceptional satisfaction among its target audience of engineering teams.",
       "type": "text"
     },
     {
@@ -216,7 +216,7 @@
     },
     {
       "title": "Real Advantages",
-      "body": "Linear's strongest advantage is raw performance. The application responds to every user interaction in under 100ms — issue creation, status changes, filtering, search queries — which creates a fluid experience that feels more like a native desktop app than a web application. This speed transforms daily workflow: engineers can triage 50+ issues in a morning standup without waiting for page loads, lag, or spinner states. The keyboard-first design is a genuine productivity multiplier for engineers who spend their day in terminal, IDE, and browser — eliminating mouse dependency for project management tasks reduces context-switching overhead. AI issue triage is another differentiator: rather than requiring manual labeling and prioritization, Linear's AI learns team patterns and automatically categorizes incoming issues with surprising accuracy after 2-3 cycles of training data. The GitHub/GitLab integration depth exceeds that of Jira or Asana — creating a branch directly from a Linear issue with the correct naming convention and linking the subsequent PR back to the issue creates a seamless code-to-task pipeline that reduces manual status updates.",
+      "body": "Linear's strongest advantage is raw performance. Actual performance depends on device, network, workload, and current product behavior; no independent latency benchmark is claimed. This speed transforms daily workflow: engineers can triage 50+ issues in a morning standup without waiting for page loads, lag, or spinner states. The keyboard-first design is a genuine productivity multiplier for engineers who spend their day in terminal, IDE, and browser — eliminating mouse dependency for project management tasks reduces context-switching overhead. AI issue triage is another differentiator: rather than requiring manual labeling and prioritization, Linear's AI learns team patterns and automatically categorizes incoming issues with surprising accuracy after 2-3 cycles of training data. The GitHub/GitLab integration depth exceeds that of Jira or Asana — creating a branch directly from a Linear issue with the correct naming convention and linking the subsequent PR back to the issue creates a seamless code-to-task pipeline that reduces manual status updates.",
       "type": "text"
     },
     {
@@ -256,12 +256,12 @@
     },
     {
       "title": "Security & Compliance",
-      "body": "Linear is SOC 2 Type II certified and GDPR compliant. Data in transit uses TLS 1.2+ and data at rest is AES-256 encrypted. Enterprise plan customers get SAML 2.0 SSO with SCIM provisioning, advanced audit logs with 1-year retention, and a 99.95% uptime SLA. Linear stores data on Google Cloud Platform's US-based servers by default, with data residency options for EU customers on Enterprise plans. For compliance requirements: Linear provides a Data Processing Agreement (DPA) for GDPR compliance, supports data export for backup and migration purposes, and offers role-based access controls (admin, member, viewer) with granular permissions for project-level visibility. However, Linear lacks several enterprise compliance features that Jira provides: no HIPAA BAA coverage (making it unsuitable for healthcare software teams handling PHI), no FedRAMP authorization, no end-to-end encryption option for data at rest, no on-premise deployment option, and no field-level audit trails (audit logs track issue and project changes but not individual field edits). Organizations in regulated industries should verify that Linear's compliance posture meets their specific requirements before adoption.",
+      "body": "Security certifications, regulatory obligations, encryption options, and contractual terms can vary by product, plan, region, and date. Verify current details in the vendor's official security and compliance documentation and obtain legal or security review for requirements that apply to your organization. This review does not independently certify compliance.",
       "type": "text"
     },
     {
       "title": "Performance",
-      "body": "Linear's performance is the best among all major project management tools, consistently earning 4.9/5 in user ratings. The web application delivers sub-100ms response times for all core operations — issue creation, status changes, filtering, search, and keyboard navigation — even on workspaces with 10,000+ issues and 50+ team members. The application uses optimistic UI updates: when a user changes an issue status, the interface updates immediately and syncs with the server in the background, eliminating the perception of latency. Search across all issues, projects, cycles, and users returns results in under 100ms with real-time filtering as the user types. The desktop application (Electron-based) consumes 100-200 MB of RAM, significantly less than Jira (300-500 MB in browser) or Asana (200-400 MB). The mobile app on iOS and Android opens in 2-3 seconds and provides full issue management capabilities, though the keyboard shortcut system does not translate to touch interfaces. Linear's uptime has been 99.99% since 2023 according to the platform status page, with no documented multi-hour outages. The only performance concern is initial load time for large workspaces with many teams and projects; Linear loads workspace metadata progressively, prioritizing the most recently accessed projects.",
+      "body": "Linear's performance is the best among all major project management tools, consistently earning 4.9/5 in user ratings. Actual performance depends on device, network, workload, and current product behavior; no independent latency benchmark is claimed. The application uses optimistic UI updates: when a user changes an issue status, the interface updates immediately and syncs with the server in the background, eliminating the perception of latency. Actual performance depends on device, network, workload, and current product behavior; no independent latency benchmark is claimed. The desktop application (Electron-based) consumes 100-200 MB of RAM, significantly less than Jira (300-500 MB in browser) or Asana (200-400 MB). The mobile app on iOS and Android opens in 2-3 seconds and provides full issue management capabilities, though the keyboard shortcut system does not translate to touch interfaces. Linear's uptime has been 99.99% since 2023 according to the platform status page, with no documented multi-hour outages. The only performance concern is initial load time for large workspaces with many teams and projects; Linear loads workspace metadata progressively, prioritizing the most recently accessed projects.",
       "type": "text"
     },
     {
@@ -301,7 +301,7 @@
     },
     {
       "title": "Buying Advice",
-      "body": "When evaluating Linear, consider four factors. First, assess feature alignment: 18 available features covering Core, Integrations, Security, Mobile should be mapped against your team's specific workflow requirements. Second, evaluate total cost: Varies with free trial pricing, plus costs for alternatives like asana or monday-com that may offer different value propositions. Third, plan the migration: data migration from existing systems, workflow reconfiguration, and team training typically require 2-6 weeks depending on organizational complexity. Fourth, test with real data: a trial period using actual team workflows reveals integration gaps, performance bottlenecks, and adoption friction that demo environments hide. Linear's 4.8/5 rating suggests it delivers on its core promises, but only testing with your specific use cases will confirm fit.",
+      "body": "When evaluating Linear, consider four factors. First, assess feature alignment: 18 available features covering Core, Integrations, Security, Mobile should be mapped against your team's specific workflow requirements. Second, evaluate total cost: Varies with free trial pricing, plus costs for alternatives like asana or monday-com that may offer different value propositions. Third, plan the migration: data migration from existing systems, workflow reconfiguration, and team training typically require 2-6 weeks depending on organizational complexity. FThis review is based on publicly available product information and editorial analysis; it is not a claim of independent hands-on testing. Linear's 4.8/5 rating suggests it delivers on its core promises, but only testing with your specific use cases will confirm fit.",
       "type": "text"
     },
     {
@@ -353,7 +353,7 @@
     },
     {
       "question": "Is Linear secure?",
-      "answer": "Linear holds SOC 2 Type II certifications. The platform uses GDPR, CCPA compliant data handling practices.  Organizations with specific compliance requirements should review Linear's security documentation before deployment."
+      "answer": "Security certifications, regulatory obligations, encryption options, and contractual terms can vary by product, plan, region, and date. Verify current details in the vendor's official security and compliance documentation and obtain legal or security review for requirements that apply to your organization. This review does not independently certify compliance."
     },
     {
       "question": "What integrations does Linear offer?",
@@ -401,7 +401,7 @@
     },
     {
       "question": "How does Linear handle data privacy?",
-      "answer": "Linear complies with GDPR, CCPA. GDPR compliance ensures data protection for EU users, including data subject access requests and right to deletion. CCPA compliance provides California residents with transparency about data collection and usage. Data processing agreements and privacy policies are available through the platform's trust center."
+      "answer": "Security certifications, regulatory obligations, encryption options, and contractual terms can vary by product, plan, region, and date. Verify current details in the vendor's official security and compliance documentation and obtain legal or security review for requirements that apply to your organization. This review does not independently certify compliance."
     }
   ],
   "alternatives": [
