@@ -239,7 +239,7 @@
     },
     {
       "title": "Security & Compliance",
-      "body": "Security certifications, regulatory obligations, encryption options, and contractual terms can vary by product, plan, region, and date. Verify current details in the vendor's official security and compliance documentation and obtain legal or security review for requirements that apply to your organization. This review does not independently certify compliance.",
+      "body": "Security certifications, regulatory obligations, encryption options, and contractual terms can vary by product, plan, region, and date; verify current details in the vendor's official security and compliance documentation. Data in transit uses TLS 1.2+ and data at rest is AES-256 encrypted. Enterprise Grid offers Enterprise Key Management (EKM) for customer-controlled encryption keys via AWS KMS, and supports data residency in US, EU, Japan, Australia, and Canada regions. Slack provides a Business Associate Agreement (BAA) for HIPAA compliance on Business+ and Enterprise plans. For regulated industries, Slack lacks end-to-end encryption by default (EKM provides server-side encryption, not client-side), and compliance exports require manual or API-based extraction rather than automated streaming to SIEM platforms. Data retention policies can be configured at the workspace level, specifying per-channel retention from 1 day to indefinite, but these policies apply retroactively and can cause permanent data loss if misconfigured.",
       "type": "text"
     },
     {
