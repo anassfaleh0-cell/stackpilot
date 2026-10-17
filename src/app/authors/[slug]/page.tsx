@@ -34,8 +34,6 @@ const authors = {
   },
 }
 
-export const authorSlugs: string[] = Object.keys(authors)
-
 export function generateStaticParams() {
   return Object.keys(authors).map((slug) => ({ slug }))
 }

@@ -2,6 +2,14 @@ import { site } from "@/lib/constants"
 
 const ctx = "https://schema.org"
 
+function authorSchema(name: string) {
+  // The site's shared editorial byline represents the publication, not a named individual.
+  if (name.trim().toLowerCase() === "pilotstack team" || name.trim().toLowerCase() === site.name.trim().toLowerCase()) {
+    return organizationRef()
+  }
+  return { "@type": "Person", name }
+}
+
 function organizationRef() {
   return {
     "@type": "Organization",
@@ -103,7 +111,7 @@ export function ArticleSchema({
     "@id": (url || site.url) + "#article",
     headline: title,
     description,
-    author: { "@type": "Person", name: author },
+    author: authorSchema(author),
     publisher: organizationRef(),
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
@@ -142,7 +150,7 @@ export function NewsArticleSchema({
     "@id": (url || site.url) + "#newsarticle",
     headline: title,
     description,
-    author: { "@type": "Person", name: author },
+    author: authorSchema(author),
     publisher: organizationRef(),
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,
@@ -175,7 +183,7 @@ export function BlogPostingSchema({
     "@id": (url || site.url) + "#blogposting",
     headline: title,
     description,
-    author: { "@type": "Person", name: author },
+    author: authorSchema(author),
     publisher: organizationRef(),
     datePublished: publishedAt,
     dateModified: updatedAt || publishedAt,

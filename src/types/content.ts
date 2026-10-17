@@ -9,7 +9,8 @@ export interface ReviewContent {
   pricing: PricingTier
   priceRange?: string
   rating: number
-  reviewCount: number
+  /** Optional third-party count only when verified and sourced; never invent a count. */
+  reviewCount?: number
   pros: string[]
   cons: string[]
   features: ReviewFeature[]

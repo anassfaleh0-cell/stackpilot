@@ -557,7 +557,7 @@ function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: Comparison
   const features1 = Array.isArray(r1?.features) ? r1.features : []
   const features2 = Array.isArray(r2?.features) ? r2.features : []
   const derived: ComparisonFeature[] = [
-    { name: "Recorded rating", tool1: r1 ? `${r1.rating}/5` : "Not recorded", tool2: r2 ? `${r2.rating}/5` : "Not recorded", tool1Detail: r1 ? `${r1.reviewCount.toLocaleString()} reviews recorded in this site's dataset; confirm the source and date before relying on the score.` : undefined, tool2Detail: r2 ? `${r2.reviewCount.toLocaleString()} reviews recorded in this site's dataset; confirm the source and date before relying on the score.` : undefined },
+    { name: "PilotStack editorial score", tool1: r1 ? `${r1.rating}/5` : "Not recorded", tool2: r2 ? `${r2.rating}/5` : "Not recorded", tool1Detail: r1 ? "Internal PilotStack assessment, not a third-party user rating." : undefined, tool2Detail: r2 ? "Internal PilotStack assessment, not a third-party user rating." : undefined },
     { name: "Pricing information", tool1: r1 ? `${r1.pricing}${r1.priceRange ? `: ${r1.priceRange}` : ""}` : "Not recorded", tool2: r2 ? `${r2.pricing}${r2.priceRange ? `: ${r2.priceRange}` : ""}` : "Not recorded", tool1Detail: r1 ? "Pricing and plan limits can change; confirm current details on the vendor site." : undefined, tool2Detail: r2 ? "Pricing and plan limits can change; confirm current details on the vendor site." : undefined },
     { name: "Product positioning", tool1: r1 ? r1.category : "Not recorded", tool2: r2 ? r2.category : "Not recorded", tool1Detail: r1?.tagline || undefined, tool2Detail: r2?.tagline || undefined },
     { name: "Capabilities listed in review", tool1: features1.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || "Not recorded", tool2: features2.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || "Not recorded" },
@@ -606,8 +606,13 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
 }
 function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
   const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
-  if (cleaned.length >= 80 && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(cleaned)) return trimText(cleaned, 700)
-  return trimText("Compare " + tool1 + " and " + tool2 + " across " + features.length + " recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. " + (winner ? winner + " is the recorded overall winner." : "The dataset records no single overall winner.") + " Read the detailed rows and linked reviews before making a decision.", 700)
+  // Generated comparison snippets often present internal editorial scores as if they were
+  // third-party ratings and repeat price ranges without a source or verification date.
+  // Keep those figures out of search snippets; the page itself labels editorial scores and
+  // tells readers to confirm current pricing with the vendor.
+  const containsUnqualifiedScoreOrPrice = /\b\d(?:\.\d)?\/5\b|\b(?:from|starting at|starts at)\s*(?:free|[€£$\d])|\bfree\s*[–-]\s*[€£$\d]|[€£$]\s?\d[\d,.]*(?:\s*[–-]\s*[€£$]?\s?\d[\d,.]*)?\s*(?:\/\s*(?:mo|month|year)|per\s+(?:user|month|year))?/i.test(cleaned)
+  if (cleaned.length >= 80 && !containsUnqualifiedScoreOrPrice && !/are paramount|including advanced\s*,|verify and compliance|our expert|we (?:evaluated|tested|researched) hundreds/i.test(cleaned)) return trimText(cleaned, 700)
+  return trimText("Compare " + tool1 + " and " + tool2 + " across recorded criteria, including feature availability, pricing considerations, integrations, security, and workflow fit. Use the detailed comparison and linked product profiles as a starting point, verify current plan details with each vendor, and choose based on your requirements.", 700)
 }
 export function getComparison(slug: string): ComparisonContent | null {
   const cached = comparisonCache.get(slug)

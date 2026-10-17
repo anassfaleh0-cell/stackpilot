@@ -19,7 +19,8 @@ export function EditorialRatingVisual({ ratings, slug, category, className = "" 
 
   return (
     <div className={`p-5 rounded-xl ${className}`} style={{ border: `1px solid ${p.glassBorder}`, backgroundColor: p.glassBg }}>
-      <h3 className="font-semibold mb-4 text-sm" style={{ color: p.primary }}>Category Ratings</h3>
+      <h3 className="font-semibold mb-1 text-sm" style={{ color: p.primary }}>PilotStack editorial category scores</h3>
+      <p className="text-xs text-muted-foreground mb-4">Internal assessments, not third-party user ratings.</p>
       <svg
         viewBox="0 0 100 80"
         className="w-full h-auto mb-3"

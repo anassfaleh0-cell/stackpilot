@@ -2,7 +2,7 @@ import type { ContentSection } from "@/types/content"
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
-import { BreadcrumbSchema, SoftwareSchema, ReviewSchema, FAQSchema, WebPageSchema, ArticleSchema } from "@/components/seo/json-ld"
+import { BreadcrumbSchema, SoftwareSchema, FAQSchema, WebPageSchema, ArticleSchema } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getReview, getContentTitle, getAllReviews, getAllComparisons, getAllBest } from "@/lib/content/registry"
@@ -16,7 +16,7 @@ import { EditorialPricingLadder, EditorialFeatureRadar, EditorialImplementationF
 import { InternalLinks } from "@/components/content/internal-links"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { authorSlugs } from "@/app/authors/[slug]/page"
+import { isPublicAuthor } from "@/lib/authors"
 import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
 import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
 import { isNoindexed } from "@/lib/noindex"
@@ -87,7 +87,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const visibleContent = getVisibleReviewContent(tool.content)
 
   const authorSlug = tool.author ? tool.author.trim().toLowerCase().replace(/\s+/g, "-") : ""
-  const authorHref = authorSlug && authorSlugs.includes(authorSlug) ? `/authors/${authorSlug}` : null
+  const authorHref = authorSlug && isPublicAuthor(authorSlug) ? `/authors/${authorSlug}` : null
 
   const allReviews = getAllReviews()
 
@@ -95,7 +95,6 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
     .filter((r) => r.category === tool.category)
     .sort((a, b) => b.rating - a.rating)[0]
   const isBestInCategory = bestInCategory?.slug === tool.slug
-  const isBestValue = tool.pricing === "Freemium" || tool.pricing === "Free" || tool.pricing === "Free Trial"
 
   return (
     <>
@@ -104,7 +103,6 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
         { name: "Reviews", href: "/reviews" },
         { name: tool.name, href: `/reviews/${tool.slug}` },
       ]} />
-      <ReviewSchema name={tool.name} description={tool.description} rating={tool.rating} url={`${site.url}/reviews/${tool.slug}`} datePublished={tool.contentPublished} body={tool.description} image={tool.logo ? `${site.url}${tool.logo}` : undefined} companyInfo={companyFacts} />
       <SoftwareSchema name={tool.name} description={tool.tagline} category={tool.category} brand={tool.name} platforms={entity?.company?.platforms || tool.company?.deployment} url={`${site.url}/reviews/${tool.slug}`} image={tool.logo ? `${site.url}${tool.logo}` : undefined} offers={entity?.pricing?.[0]?.price !== undefined && entity.pricing[0].price !== null ? { price: entity.pricing[0].price, priceCurrency: entity.pricing[0].currency || "USD", url: tool.website || undefined } : undefined} />
       <WebPageSchema name={`${tool.name} Review 2026`} description={tool.description} url={`${site.url}/reviews/${tool.slug}`} dateModified={tool.contentModified} />
       <ArticleSchema title={`${tool.name} Review 2026`} description={tool.description} publishedAt={tool.contentPublished} updatedAt={tool.contentModified} author={tool.author} url={`${site.url}/reviews/${tool.slug}`} wordCount={visibleContent.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={tool.category} keywords={[`${tool.name} review`, `${tool.name} pricing`, `${tool.name} pros and cons`, `${tool.category} software`, `${tool.name} alternatives`]} mentions={[{ name: tool.name, url: tool.website || `${site.url}/reviews/${tool.slug}` }]} />
@@ -136,16 +134,13 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="flex flex-wrap items-center gap-3 mb-3">
                 <Badge variant="default">{tool.category}</Badge>
                 {isBestInCategory && (
-                  <Badge variant="success">Best in Category</Badge>
-                )}
-                {isBestValue && (
-                  <Badge variant="warning">Best Value</Badge>
+                  <Badge variant="success">Top PilotStack score</Badge>
                 )}
                 <div className="flex items-center gap-1 text-sm">
                   <Star size={14} className="fill-accent text-accent" />
                   <span className="font-semibold">{formatScore(tool.rating)}</span>
                   <span className="text-muted-foreground">/ 5.0</span>
-                  <span className="text-xs text-muted-foreground">({tool.reviewCount} reviews)</span>
+                  <span className="text-xs text-muted-foreground">(internal editorial score; not a third-party user rating)</span>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-1">
@@ -182,7 +177,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
                 <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
                 <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                  <li>Overall rating: {formatScore(tool.rating)}/5 from {tool.reviewCount.toLocaleString()} reviews</li>
+                  <li>Recorded PilotStack internal editorial score: {formatScore(tool.rating)}/5. This is not a third-party user rating.</li>
                   <li>Pricing: {tool.priceRange} ({tool.pricing})</li>
                   <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : `${tool.name} excels at ${tool.features.filter(f => f.available).slice(0, 2).map(f => f.name.toLowerCase()).join(" and ")}`}</li>
                   <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `Suitable for most ${tool.category} use cases`}</li>
@@ -231,12 +226,12 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* CTA */}
               <div className="flex flex-wrap gap-3 mb-12">
                 <a
-                  href={`https://www.google.com/search?q=${encodeURIComponent(tool.name + " official website")}`}
+                  href={tool.website && /^https?:\/\//i.test(tool.website) ? tool.website : `https://www.google.com/search?q=${encodeURIComponent(tool.name + " official website")}`}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-white hover:bg-primary-dark shadow-button hover:shadow-button-hover h-10 px-6 text-sm font-medium transition-all duration-200"
                 >
-                  Visit Website <ExternalLink size={14} />
+                  {tool.website && /^https?:\/\//i.test(tool.website) ? "Visit Official Website" : "Find Official Website"} <ExternalLink size={14} />
                 </a>
                 <Link
                   href={`/comparisons`}
@@ -255,20 +250,20 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
               {/* External reviews / social proof */}
               <section className="mb-12">
-                <h2 className="text-2xl font-bold tracking-tight mb-4">Third-Party Reviews</h2>
-                <p className="text-sm text-muted-foreground mb-4">{tool.name} carries a {formatScore(tool.rating)}/5 rating across {tool.reviewCount.toLocaleString()} reviews in the PilotStack dataset. Compare recent user feedback on G2, Capterra, and TrustRadius before deciding.</p>
+                <h2 className="text-2xl font-bold tracking-tight mb-4">External Review Sources</h2>
+                <p className="text-sm text-muted-foreground mb-4">PilotStack's scores are internal editorial assessments, not verified user ratings from G2, Capterra, or TrustRadius. For external user feedback, visit those platforms directly and confirm the product listing before relying on a third-party score.</p>
                 <div className="flex flex-wrap gap-3">
-                  <a href={`https://www.g2.com/products/${tool.slug}/review`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent("site:g2.com " + tool.name + " reviews")}`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                    Read G2 reviews
+                    Find G2 listing
                   </a>
-                  <a href={`https://www.capterra.com/p/${tool.slug}/`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent("site:capterra.com " + tool.name + " reviews")}`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                    Read Capterra reviews
+                    Find Capterra listing
                   </a>
-                  <a href={`https://www.trustradius.com/products/${tool.slug}/reviews`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent("site:trustradius.com " + tool.name + " reviews")}`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-                    Read TrustRadius reviews
+                    Find TrustRadius listing
                   </a>
                 </div>
               </section>
@@ -372,7 +367,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   </div>
                   <div className="p-3 rounded-lg bg-card">
                     <div className="font-semibold text-xs mb-1">Budget for setup</div>
-                    <p className="text-muted-foreground text-xs leading-relaxed">Most organizations underestimate implementation time by 2-3x. Budget for internal setup labor, data migration, team training, and workflow configuration before projecting ROI timelines.</p>
+                    <p className="text-muted-foreground text-xs leading-relaxed">Include internal setup labor, data migration, team training, and workflow configuration in the implementation budget before estimating any return on investment.</p>
                   </div>
                 </div>
                 <p className="text-[11px] text-muted-foreground mt-3">Compiled under our published methodology from a library of {TOTAL_REVIEWS} B2B SaaS reviews across {categories.length} categories.</p>
@@ -460,6 +455,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                       <h3 className="font-semibold text-sm">Verdict</h3>
                     </div>
                     <div className="text-lg font-bold text-primary mb-1">{formatScore(tool.rating)}/5</div>
+                    <p className="text-xs text-muted-foreground mb-2">Internal editorial score, not a verified user-review rating.</p>
                     <ScoreBar score={tool.rating} className="mb-3" />
                     <p className="text-sm text-muted-foreground">{tool.name} scores {formatScore(tool.rating)}/5 — the mean of {tool.ratings.length} recorded category ratings.</p>
                   </div>
@@ -468,7 +464,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 {/* Rating Breakdown */}
                 <GlassCard>
                   <div className="p-4">
-                    <h3 className="font-semibold mb-3 text-sm">Rating Breakdown</h3>
+                    <h3 className="font-semibold mb-1 text-sm">Rating Breakdown</h3>
+                    <p className="text-xs text-muted-foreground mb-3">Recorded PilotStack category scores; not third-party ratings.</p>
                     <div className="space-y-3">
                       {tool.ratings.map((item) => (
                         <div key={item.label}>
@@ -515,12 +512,12 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 )}
 
                 {/* Section Navigation */}
-                {tool.content.length > 0 && (
+                {visibleContent.length > 0 && (
                   <GlassCard>
                     <div className="p-4">
                       <h3 className="font-semibold mb-3 text-sm">On this page</h3>
                       <nav className="space-y-1.5">
-                        {tool.content.map((section, i) => (
+                        {visibleContent.map((section, i) => (
                           <a
                             key={i}
                             href={`#section-${i}`}

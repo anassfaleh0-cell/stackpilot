@@ -63,7 +63,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
       </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "16px", color: "#6B7280" }}>
-        <span>Based on {tool.reviewCount.toLocaleString()} reviews</span>
+        <span>PilotStack editorial score · Internal assessment, not a third-party rating</span>
       </div>
 
       <div style={{ position: "absolute", bottom: "44px", left: "60px", right: "60px", display: "flex", justifyContent: "center", fontSize: "15px", color: "#4B5563", letterSpacing: "0.04em" }}>

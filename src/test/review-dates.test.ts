@@ -214,7 +214,8 @@ describe("H-09A structured data and open graph", () => {
   })
 
   it("Review datePublished uses contentPublished", () => {
-    expect(reviewPageSrc).toMatch(/<ReviewSchema[^>]*datePublished=\{tool\.contentPublished\}/s)
+    expect(reviewPageSrc).not.toContain("<ReviewSchema")
+    expect(reviewPageSrc).toMatch(/<ArticleSchema[^>]*publishedAt=\{tool\.contentPublished\}/s)
   })
 
   it("no structured-data date is sourced from lastReviewed", () => {
@@ -298,9 +299,14 @@ describe("H-09A seo safety", () => {
     expect(reviewPageSrc).not.toContain("aggregateRating")
   })
 
-  it("14. ReviewSchema still receives the stored editorial rating", () => {
-    expect(reviewPageSrc).toMatch(/<ReviewSchema[^>]*rating=\{tool\.rating\}/s)
-    expect(reviewPageSrc).not.toContain("reviewRating={")
+  it("14. unverified internal ratings are not emitted as Review structured data", () => {
+    expect(reviewPageSrc).not.toContain("<ReviewSchema")
+    expect(reviewPageSrc).not.toContain("ReviewSchema")
+    expect(reviewPageSrc).toContain("Recorded PilotStack internal editorial score")
+    expect(reviewPageSrc).not.toContain("tool.reviewCount.toLocaleString()")
+    expect(reviewPageSrc).toContain("not a third-party user rating")
+    expect(reviewPageSrc).not.toContain("AggregateRating")
+    expect(reviewPageSrc).not.toContain("aggregateRating")
   })
 
   it("15. every review route is indexable under the current content policy", () => {
@@ -318,4 +324,60 @@ describe("H-09A seo safety", () => {
     expect(registrySrc).toContain('"contentPublished"')
     expect(registrySrc).toContain('"contentModified"')
   })
+})
+
+
+  it("represents the shared PilotStack Team byline as the publication, not a fabricated person", () => {
+    const jsonLdSrc = read(path.join(ROOT, "src", "components", "seo", "json-ld.tsx"))
+    expect(jsonLdSrc).toContain('name.trim().toLowerCase() === "pilotstack team"')
+    expect(jsonLdSrc).toContain('return organizationRef()')
+    expect(jsonLdSrc).toContain('author: authorSchema(author)')
+  })
+
+describe("review source transparency", () => {
+  it("labels review-card and hero scores as internal editorial assessments", () => {
+    const cardSrc = read(path.join(ROOT, "src", "components", "entity", "review-card-grid.tsx"))
+    const heroSrc = read(path.join(ROOT, "src", "components", "editorial", "editorial-hero.tsx"))
+    const categoryRatingsSrc = read(path.join(ROOT, "src", "components", "editorial", "editorial-rating.tsx"))
+    expect(cardSrc).toContain("PilotStack score")
+    expect(cardSrc).toContain("not a third-party user rating")
+    expect(heroSrc).toContain("PilotStack editorial score")
+    expect(heroSrc).toContain("not a third-party user rating")
+    expect(categoryRatingsSrc).toContain("PilotStack editorial category scores")
+    expect(categoryRatingsSrc).toContain("Internal assessments, not third-party user ratings.")
+  })
+
+  it("external review links search for real listings instead of guessing provider URLs", () => {
+    expect(reviewPageSrc).toContain('encodeURIComponent("site:g2.com " + tool.name + " reviews")')
+    expect(reviewPageSrc).toContain('encodeURIComponent("site:capterra.com " + tool.name + " reviews")')
+    expect(reviewPageSrc).toContain('encodeURIComponent("site:trustradius.com " + tool.name + " reviews")')
+    expect(reviewPageSrc).not.toContain('www.g2.com/products/${tool.slug}/review')
+    expect(reviewPageSrc).not.toContain('www.capterra.com/p/')
+    expect(reviewPageSrc).toContain("Find G2 listing")
+    expect(reviewPageSrc).toContain("Find Capterra listing")
+    expect(reviewPageSrc).toContain("Find TrustRadius listing")
+  })
+
+
+  it("uses an explicitly internal label for category-leading editorial scores", () => {
+    expect(reviewPageSrc).toContain('Top PilotStack score')
+    expect(reviewPageSrc).not.toContain('Best in Category')
+    expect(reviewPageSrc).not.toContain('Best Value')
+    expect(reviewPageSrc).toContain('internal editorial score; not a third-party user rating')
+  })
+
+  it("clearly separates internal editorial scores from third-party ratings", () => {
+    expect(reviewPageSrc).toContain("internal editorial score; not a third-party user rating")
+    expect(reviewPageSrc).toContain("not verified user ratings from G2, Capterra, or TrustRadius")
+    expect(reviewPageSrc).toContain("Recorded PilotStack internal editorial score")
+  })
+
+  it("does not publish unverified third-party review counts for Asana, Linear, or Notion", () => {
+    for (const slug of ["asana", "linear", "notion"]) {
+      const review = JSON.parse(fs.readFileSync(path.join(REVIEWS_DIR, `${slug}.json`), "utf8"))
+      expect(review).not.toHaveProperty("reviewCount")
+    }
+    expect(fs.readFileSync(TYPES_FILE, "utf8")).toContain("reviewCount?: number")
+  })
+
 })
