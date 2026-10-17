@@ -624,7 +624,21 @@ export function getComparison(slug: string): ComparisonContent | null {
     comparisonCache.set(slug, null)
     return null
   }
-  const cmp = readJson<ComparisonContent>(file)
+  const rawComparison = readJson<ComparisonContent>(file)
+  const resolveToolSlug = (name: string, explicitSlug?: string): string => {
+    if (explicitSlug && fs.existsSync(path.join(CONTENT_DIR, "reviews", explicitSlug + ".json"))) return explicitSlug
+    const normalizedName = String(name || "").trim().toLowerCase()
+    const matchingReview = getAllReviews().find((review) => review.name.trim().toLowerCase() === normalizedName)
+    if (matchingReview) return matchingReview.slug
+    return normalizedName.replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
+  }
+  // Older comparison records may omit tool slugs, which breaks their review links.
+  // Resolve against the actual review corpus before building derived criteria and narrative.
+  const cmp: ComparisonContent = {
+    ...rawComparison,
+    tool1Slug: resolveToolSlug(rawComparison.tool1, rawComparison.tool1Slug),
+    tool2Slug: resolveToolSlug(rawComparison.tool2, rawComparison.tool2Slug),
+  }
   const baseFeatures = cmp.features.slice(0, 20).map((f) => ({
     ...f,
     name: trimText(f.name, 140),
