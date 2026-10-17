@@ -658,13 +658,27 @@ export function getComparison(slug: string): ComparisonContent | null {
   }))
   const features = buildDerivedComparisonFeatures(cmp, baseFeatures)
   const winner = normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2)
+  const review1 = getReview(cmp.tool1Slug)
+  const review2 = getReview(cmp.tool2Slug)
+  const crossCategory = Boolean(review1?.category && review2?.category && review1.category !== review2.category)
+  const faqs = sanitizeFaqs(cmp.faqs).map((faq) => {
+    const hasUnverifiedScore = /\\b\\d(?:\\.\\d)?\\s*\\/\\s*5\\b|user reviews?|user rating|higher rating|overall winner|overall pick|rated \\d/i.test(faq.answer)
+    if (!hasUnverifiedScore) return faq
+    const context = crossCategory
+      ? `These products are listed in different categories (${review1?.category} and ${review2?.category}), so compare them only if your workflow overlaps both.`
+      : `Compare ${cmp.tool1} and ${cmp.tool2} against the same must-have requirements and realistic tasks.`
+    return {
+      ...faq,
+      answer: `${context} PilotStack's stored numeric scores are editorial dataset values, not verified third-party averages. Confirm current features, plan limits, and pricing with both vendors before deciding.`,
+    }
+  })
   const result: ComparisonContent = {
     ...cmp,
     winner,
     description: sanitizeComparisonDescription(cmp.description, cmp.tool1, cmp.tool2, features, winner),
     verdict: buildComparisonNarrative(cmp.tool1, cmp.tool2, cmp.tool1Slug, cmp.tool2Slug, features, winner),
     features,
-    faqs: sanitizeFaqs(cmp.faqs),
+    faqs,
   }
   comparisonCache.set(slug, result)
   return result
