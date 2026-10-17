@@ -13,6 +13,14 @@ describe("sitemap modification dates", () => {
     expect(getSitemapLastModified("not-a-date")).toBeUndefined()
   })
 
+  it("rejects impossible ISO calendar dates instead of accepting JavaScript normalization", () => {
+    expect(getSitemapLastModified("2026-02-31")).toBeUndefined()
+    expect(getSitemapLastModified("2026-02-31T00:00:00.000Z")).toBeUndefined()
+    expect(getSitemapLastModified("2026-04-31T12:30:00Z")).toBeUndefined()
+    expect(getSitemapLastModified("2024-02-29")?.toISOString()).toBe("2024-02-29T00:00:00.000Z")
+    expect(getSitemapLastModified("2026-10-09T00:00:00.000Z")?.toISOString()).toBe("2026-10-09T00:00:00.000Z")
+  })
+
   it("rejects invalid Date instances and preserves valid Date instances", () => {
     expect(getSitemapLastModified(new Date(Number.NaN))).toBeUndefined()
     const date = new Date("2026-01-15T00:00:00.000Z")
