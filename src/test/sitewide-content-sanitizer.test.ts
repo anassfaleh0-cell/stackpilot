@@ -59,6 +59,16 @@ describe("site-wide content quality gate", () => {
     expect(offenders).toEqual([])
   })
 
+  it("keeps unqualified internal scores and unverified price ranges out of comparison snippets", () => {
+    for (const slug of ["square-vs-xero", "1password-vs-appwrite", "zoom-vs-webex"]) {
+      const comparison = getComparison(slug)
+      expect(comparison, slug).toBeTruthy()
+      expect(comparison!.description, slug).not.toMatch(/\\b\\d(?:\\.\\d)?\\/5\\b/i)
+      expect(comparison!.description, slug).not.toMatch(/[€£$]\\s?\\d/i)
+      expect(comparison!.description, slug).not.toMatch(/\\b(?:from|starting at|starts at)\\s*(?:free|[€£$])/i)
+    }
+  })
+
   it("keeps substantive content after sanitization", () => {
     for (const [label, value] of cases) {
       expect(value, label).toBeTruthy()
