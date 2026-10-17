@@ -368,7 +368,7 @@ describe("review source transparency", () => {
 
   it("clearly separates internal editorial scores from third-party ratings", () => {
     expect(reviewPageSrc).toContain("internal editorial score; not a third-party user rating")
-    expect(reviewPageSrc).toContain("not verified ratings from G2, Capterra, or TrustRadius")
+    expect(reviewPageSrc).toContain("not verified user ratings from G2, Capterra, or TrustRadius")
     expect(reviewPageSrc).toContain("Recorded PilotStack internal editorial score")
   })
 
