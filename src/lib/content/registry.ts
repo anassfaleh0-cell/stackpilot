@@ -251,6 +251,9 @@ function sanitizeReview(review: ReviewContent): ReviewContent {
   const safeDescription = description.length >= 50 ? description : `${review.name} is listed in PilotStack’s ${review.category} catalog. Verify current features, pricing, and terms with the vendor.`
   return {
     ...review,
+    // No third-party review-count provenance is stored consistently in this corpus.
+    // Suppress imported counts rather than presenting unsupported numbers as verified.
+    reviewCount: 0,
     content: buildReviewSections(review),
     description: safeDescription,
     tagline: sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.tagline, 220))),
@@ -557,7 +560,7 @@ function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: Comparison
   const features1 = Array.isArray(r1?.features) ? r1.features : []
   const features2 = Array.isArray(r2?.features) ? r2.features : []
   const derived: ComparisonFeature[] = [
-    { name: "Recorded rating", tool1: r1 ? `${r1.rating}/5` : "Not recorded", tool2: r2 ? `${r2.rating}/5` : "Not recorded", tool1Detail: r1 ? `${r1.reviewCount.toLocaleString()} reviews recorded in this site's dataset; confirm the source and date before relying on the score.` : undefined, tool2Detail: r2 ? `${r2.reviewCount.toLocaleString()} reviews recorded in this site's dataset; confirm the source and date before relying on the score.` : undefined },
+    { name: "PilotStack editorial rating", tool1: r1 ? `${r1.rating}/5` : "Not recorded", tool2: r2 ? `${r2.rating}/5` : "Not recorded", tool1Detail: r1 ? "Editorial score in PilotStack's dataset; it is not a verified third-party average or a user-review count. Review the methodology and confirm current product details." : undefined, tool2Detail: r2 ? "Editorial score in PilotStack's dataset; it is not a verified third-party average or a user-review count. Review the methodology and confirm current product details." : undefined },
     { name: "Pricing information", tool1: r1 ? `${r1.pricing}${r1.priceRange ? `: ${r1.priceRange}` : ""}` : "Not recorded", tool2: r2 ? `${r2.pricing}${r2.priceRange ? `: ${r2.priceRange}` : ""}` : "Not recorded", tool1Detail: r1 ? "Pricing and plan limits can change; confirm current details on the vendor site." : undefined, tool2Detail: r2 ? "Pricing and plan limits can change; confirm current details on the vendor site." : undefined },
     { name: "Product positioning", tool1: r1 ? r1.category : "Not recorded", tool2: r2 ? r2.category : "Not recorded", tool1Detail: r1?.tagline || undefined, tool2Detail: r2?.tagline || undefined },
     { name: "Capabilities listed in review", tool1: features1.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || "Not recorded", tool2: features2.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || "Not recorded" },
