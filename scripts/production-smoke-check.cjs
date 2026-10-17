@@ -53,9 +53,47 @@ async function main() {
     }
   }
   if (sitemap && !sitemap.error) {
-    report("sitemap XML", /<(?:urlset|sitemapindex)\b/i.test(sitemap.body), "valid sitemap root marker present")
-    report("sitemap same-origin URLs", sitemap.body.includes(SITE_URL), "canonical site origin present")
-    report("sitemap non-empty", (sitemap.body.match(/<loc>/gi) || []).length > 0, "at least one location entry present")
+    const hasRoot = /<(?:urlset|sitemapindex)\b/i.test(sitemap.body)
+    report("sitemap XML", hasRoot, "valid sitemap root marker present")
+
+    const locValues = [...sitemap.body.matchAll(/<loc>\s*([\s\S]*?)\s*<\/loc>/gi)]
+      .map((match) => match[1].replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").trim())
+      .filter(Boolean)
+    report("sitemap non-empty", locValues.length > 0, "at least one location entry present")
+
+    const expectedOrigin = new URL(SITE_URL).origin
+    const invalidLocs = []
+    const offOriginLocs = []
+    const queryOrHashLocs = []
+    for (const value of locValues) {
+      try {
+        const parsed = new URL(value)
+        if (parsed.origin !== expectedOrigin) offOriginLocs.push(value)
+        if (parsed.search || parsed.hash) queryOrHashLocs.push(value)
+      } catch {
+        invalidLocs.push(value)
+      }
+    }
+    report("sitemap absolute URLs", invalidLocs.length === 0, invalidLocs.length ? "invalid <loc> values: " + JSON.stringify(invalidLocs.slice(0, 5)) : "all <loc> values are valid absolute URLs")
+    report("sitemap same-origin URLs", offOriginLocs.length === 0, offOriginLocs.length ? "off-origin URLs: " + JSON.stringify(offOriginLocs.slice(0, 5)) : "all URLs use " + expectedOrigin)
+    report("sitemap canonical URL shape", queryOrHashLocs.length === 0, queryOrHashLocs.length ? "query/hash URLs found: " + JSON.stringify(queryOrHashLocs.slice(0, 5)) : "no query strings or fragments in sitemap locations")
+
+    const normalizedLocs = locValues.map((value) => {
+      try {
+        const parsed = new URL(value)
+        parsed.hash = ""
+        return parsed.href
+      } catch {
+        return value
+      }
+    })
+    const seenLocs = new Set()
+    const duplicates = []
+    for (const value of normalizedLocs) {
+      if (seenLocs.has(value)) duplicates.push(value)
+      seenLocs.add(value)
+    }
+    report("sitemap duplicate URLs", duplicates.length === 0, duplicates.length ? "duplicate locations: " + JSON.stringify([...new Set(duplicates)].slice(0, 5)) : "no duplicate <loc> entries detected")
   }
 
   if (process.exitCode === 1) {
