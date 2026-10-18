@@ -54,8 +54,10 @@ const files = (await walk(contentRoot)).sort();
 const collections = new Map();
 const duplicateSlugs = [];
 const invalidJson = [];
+const invalidRecords = [];
 const missingFields = [];
 const records = [];
+let totalBytes = 0;
 
 for (const file of files) {
   const relativePath = asRelative(file);
@@ -69,6 +71,7 @@ for (const file of files) {
   };
 
   const fileStats = await stat(file);
+  totalBytes += fileStats.size;
   entry.count += 1;
   entry.bytes += fileStats.size;
   collections.set(collection, entry);
@@ -84,7 +87,19 @@ for (const file of files) {
     continue;
   }
 
-  const slug = typeof data.slug === "string" ? data.slug.trim() : "";
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
+    invalidRecords.push({ file: relativePath, reason: "Expected a JSON object at the top level" });
+    continue;
+  }
+
+  const rawSlug = data.slug;
+  const slug = typeof rawSlug === "string" ? rawSlug.trim() : "";
+  if (rawSlug !== undefined && typeof rawSlug !== "string") {
+    invalidRecords.push({ file: relativePath, reason: "Field slug exists but is not a string" });
+  }
+  if (slug && (slug.startsWith("/") || slug.includes("\\") || slug.split("/").some((part) => part === "." || part === ".."))) {
+    invalidRecords.push({ file: relativePath, reason: "Slug contains path syntax; review before import" });
+  }
   if (!slug) {
     entry.missingSlug += 1;
     missingFields.push({ file: relativePath, fields: ["slug"] });
@@ -93,7 +108,7 @@ for (const file of files) {
   const required = (expectedFields[collection] || ["slug"]).filter((field) => field !== "slug");
   const absent = required.filter((field) => {
     const value = data[field];
-    return value === undefined || value === null || value === "";
+    return value === undefined || value === null || (typeof value === "string" && value.trim() === "");
   });
   if (absent.length) {
     missingFields.push({ file: relativePath, fields: absent });
@@ -140,15 +155,17 @@ const summary = {
   contentRoot: "content/",
   totalJsonFiles: files.length,
   parsedRecords: records.length,
-  totalBytes: records.reduce((sum, record) => sum + record.bytes, 0),
+  totalBytes,
   collectionCount: collections.size,
   invalidJsonCount: invalidJson.length,
+  invalidRecordCount: invalidRecords.length,
   missingFieldIssueCount: missingFields.length,
   duplicateSlugCount: duplicateSlugs.length,
   collections: Object.fromEntries(
     [...collections.entries()].sort(([a], [b]) => a.localeCompare(b)),
   ),
   invalidJson,
+  invalidRecords,
   missingFields,
   duplicateSlugs,
   records,
