@@ -13,7 +13,7 @@ try {
   const dir = path.join(root, "content", "comparisons");
   await mkdir(dir, { recursive: true });
   await writeFile(path.join(dir, "bad.json"), JSON.stringify({
-    slug: "square-vs-xero",
+    slug: "square-vs-xero", published: false,
     title: "Square vs Xero",
     description: "Incomplete description, Xero.",
     tool1: "Square", tool2: "Xero", winner: "square",
@@ -36,6 +36,7 @@ try {
   assert.ok(report.counts.template_verdict >= 1);
   assert.ok(report.counts.truncated_description >= 1, JSON.stringify(report.counts));
   assert.ok(report.counts.boolean_only_feature_table >= 1);
+  assert.ok(report.counts.marked_unpublished >= 1);
   process.stdout.write("PASS: comparison integrity audit fixture checks\\n");
 } finally {
   await rm(root, { recursive: true, force: true });
