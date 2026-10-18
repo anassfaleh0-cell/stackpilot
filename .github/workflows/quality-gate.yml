@@ -49,6 +49,12 @@ jobs:
       - name: WordPress migration URL reconciliation regression tests
         run: node scripts/test-reconcile-wordpress-migration-urls.mjs
 
+      - name: Comparison integrity audit heuristic tests
+        run: node scripts/test-audit-comparison-integrity.mjs
+
+      - name: Comparison integrity audit report (read-only)
+        run: node scripts/audit-comparison-integrity.mjs
+
       - name: Unit tests
         run: npm test
 
