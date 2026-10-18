@@ -90,12 +90,12 @@ for (const file of files) {
     missingFields.push({ file: relativePath, fields: ["slug"] });
   }
 
-  const required = expectedFields[collection] || ["slug"];
+  const required = (expectedFields[collection] || ["slug"]).filter((field) => field !== "slug");
   const absent = required.filter((field) => {
     const value = data[field];
     return value === undefined || value === null || value === "";
   });
-  if (absent.length && !(!slug && absent.length === 1 && absent[0] === "slug")) {
+  if (absent.length) {
     missingFields.push({ file: relativePath, fields: absent });
   }
 
