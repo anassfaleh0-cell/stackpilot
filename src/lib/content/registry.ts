@@ -95,9 +95,9 @@ const GENERIC_BOILERPLATE_PATTERNS = [
   // workflow, feature, pricing, and verification guidance from the product profile.
   /most successful deployments follow a phased approach/i,
   /this topic is most useful when it is connected to a real decision/i,
-  /choosing the right marketing\\s*&\\s*seo software/i,
-  /adequate performance for most use cases\\./i,
-  /functional organized interface\\./i,
+  /choosing the right marketing\s*&\s*seo software/i,
+  /adequate performance for most use cases\./i,
+  /functional organized interface\./i,
   /written against our published editorial methodology/i,
   /updated when the underlying content is reviewed/i,
 ]
@@ -837,7 +837,7 @@ function buildGuideSections(guide: GuideContent): GuideContent["sections"] {
   const sections = sanitizeSections(guide.sections)
   if (sectionWordCount(sections) >= 900) return sections
 
-  const title = guide.title.replace(/\\s*[:—-].*$/, "").trim() || guide.category
+  const title = guide.title.replace(/\s*[:—-].*$/, "").trim() || guide.category
   const category = String(guide.category || "").toLowerCase()
   const focus = category.includes("ai")
     ? "model behavior on representative examples, data retention and training terms, human review, version changes, latency, and cost at expected usage"
