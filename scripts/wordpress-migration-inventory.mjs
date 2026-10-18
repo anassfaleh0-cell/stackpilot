@@ -1,0 +1,157 @@
+#!/usr/bin/env node
+/**
+ * Read-only inventory helper for a future PilotStack -> WordPress migration.
+ *
+ * Run from the repository root:
+ *   node scripts/wordpress-migration-inventory.mjs
+ *
+ * Reads content/**/*.json and prints a JSON report to stdout. It does not
+ * modify source files, create WordPress records, or contact any remote service.
+ */
+import { readdir, readFile, stat } from "node:fs/promises";
+import path from "node:path";
+
+const root = process.cwd();
+const contentRoot = path.join(root, "content");
+const expectedFields = {
+  reviews: ["slug", "name", "description"],
+  comparisons: ["slug", "title", "description", "tool1", "tool2"],
+  guides: ["slug", "title", "description"],
+  blog: ["slug", "title", "description"],
+  glossary: ["slug", "title", "description"],
+  alternatives: ["slug"],
+  best: ["slug", "title"],
+  "use-cases": ["slug", "title"],
+  industries: ["slug", "title"],
+  research: ["slug", "title"],
+  statistics: ["slug", "title"],
+  hubs: ["slug", "title"],
+};
+
+async function walk(dir) {
+  let entries;
+  try {
+    entries = await readdir(dir, { withFileTypes: true });
+  } catch (error) {
+    if (error && error.code === "ENOENT") return [];
+    throw error;
+  }
+
+  const found = [];
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) found.push(...(await walk(fullPath)));
+    else if (entry.isFile() && entry.name.endsWith(".json")) found.push(fullPath);
+  }
+  return found;
+}
+
+function asRelative(file) {
+  return path.relative(root, file).split(path.sep).join("/");
+}
+
+const files = (await walk(contentRoot)).sort();
+const collections = new Map();
+const duplicateSlugs = [];
+const invalidJson = [];
+const missingFields = [];
+const records = [];
+
+for (const file of files) {
+  const relativePath = asRelative(file);
+  const parts = relativePath.split("/");
+  const collection = parts[1] || "root";
+  const entry = collections.get(collection) || {
+    count: 0,
+    bytes: 0,
+    missingSlug: 0,
+    duplicateSlugCount: 0,
+  };
+
+  const fileStats = await stat(file);
+  entry.count += 1;
+  entry.bytes += fileStats.size;
+  collections.set(collection, entry);
+
+  let data;
+  try {
+    data = JSON.parse(await readFile(file, "utf8"));
+  } catch (error) {
+    invalidJson.push({
+      file: relativePath,
+      error: error instanceof Error ? error.message : String(error),
+    });
+    continue;
+  }
+
+  const slug = typeof data.slug === "string" ? data.slug.trim() : "";
+  if (!slug) {
+    entry.missingSlug += 1;
+    missingFields.push({ file: relativePath, fields: ["slug"] });
+  }
+
+  const required = expectedFields[collection] || ["slug"];
+  const absent = required.filter((field) => {
+    const value = data[field];
+    return value === undefined || value === null || value === "";
+  });
+  if (absent.length && !(!slug && absent.length === 1 && absent[0] === "slug")) {
+    missingFields.push({ file: relativePath, fields: absent });
+  }
+
+  records.push({
+    collection,
+    slug,
+    sourceFile: relativePath,
+    // This is a proposed path mapping only; it does not guarantee that the
+    // current site publishes every source file at this exact route.
+    proposedPath: slug ? `/${collection}/${slug}` : null,
+    title:
+      typeof data.title === "string"
+        ? data.title
+        : typeof data.name === "string"
+          ? data.name
+          : null,
+    bytes: fileStats.size,
+  });
+}
+
+const seen = new Map();
+for (const record of records) {
+  if (!record.slug) continue;
+  const key = `${record.collection}:${record.slug}`;
+  if (seen.has(key)) {
+    duplicateSlugs.push({
+      collection: record.collection,
+      slug: record.slug,
+      firstFile: seen.get(key),
+      duplicateFile: record.sourceFile,
+    });
+    const entry = collections.get(record.collection);
+    if (entry) entry.duplicateSlugCount += 1;
+  } else {
+    seen.set(key, record.sourceFile);
+  }
+}
+
+const summary = {
+  generatedAt: new Date().toISOString(),
+  mode: "read-only; no remote calls or source mutations",
+  contentRoot: "content/",
+  totalJsonFiles: files.length,
+  parsedRecords: records.length,
+  totalBytes: records.reduce((sum, record) => sum + record.bytes, 0),
+  collectionCount: collections.size,
+  invalidJsonCount: invalidJson.length,
+  missingFieldIssueCount: missingFields.length,
+  duplicateSlugCount: duplicateSlugs.length,
+  collections: Object.fromEntries(
+    [...collections.entries()].sort(([a], [b]) => a.localeCompare(b)),
+  ),
+  invalidJson,
+  missingFields,
+  duplicateSlugs,
+  records,
+};
+
+process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
