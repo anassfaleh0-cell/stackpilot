@@ -23,7 +23,7 @@ try {
   await put("content/reviews/good.json", JSON.stringify({ slug: "good-tool", name: "Good Tool", description: "A valid fixture." }));
   await put("content/reviews/duplicate.json", JSON.stringify({ slug: "good-tool", name: "Another record", description: "Duplicate slug." }));
   await put("content/reviews/unsafe.json", JSON.stringify({ slug: "../outside", name: "Unsafe", description: "Path traversal fixture." }));
-  await put("content/reviews/backslash.json", JSON.stringify({ slug: "bad\\\\slug", name: "Backslash", description: "Backslash path fixture." }));
+  await put("content/reviews/backslash.json", JSON.stringify({ slug: "bad\\slug", name: "Backslash", description: "Backslash path fixture." }));
   await put("content/comparisons/missing-fields.json", JSON.stringify({ slug: "needs-fields", title: "Needs fields", description: " ", tool1: "A" }));
   await put("content/reviews/malformed.json", "{ this is not JSON ");
   await put("content/reviews/array.json", JSON.stringify([{ slug: "not-a-record" }]));
