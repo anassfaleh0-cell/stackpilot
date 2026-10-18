@@ -90,6 +90,16 @@ const GENERIC_BOILERPLATE_PATTERNS = [
   /this approach enables teams to maximize their software investment/i,
   /organizations see measurable improvements in efficiency and user satisfaction within the first quarter/i,
   /organizations see measurable improvements in efficiency and team productivity/i,
+  // Additional known review-corpus filler detected by the SEO audit. These are
+  // removed from rendered review sections; buildReviewSections supplies concrete
+  // workflow, feature, pricing, and verification guidance from the product profile.
+  /most successful deployments follow a phased approach/i,
+  /this topic is most useful when it is connected to a real decision/i,
+  /choosing the right marketing\\s*&\\s*seo software/i,
+  /adequate performance for most use cases\\./i,
+  /functional organized interface\\./i,
+  /written against our published editorial methodology/i,
+  /updated when the underlying content is reviewed/i,
 ]
 
 const UNSUPPORTED_CLAIM_PATTERNS = [
@@ -657,10 +667,12 @@ export function getComparison(slug: string): ComparisonContent | null {
     tool2Detail: sanitizeUnsupportedClaims(trimText(f.tool2Detail, 320)),
   }))
   const features = buildDerivedComparisonFeatures(cmp, baseFeatures)
-  const winner = normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2)
   const review1 = getReview(cmp.tool1Slug)
   const review2 = getReview(cmp.tool2Slug)
   const crossCategory = Boolean(review1?.category && review2?.category && review1.category !== review2.category)
+  // A winner is not meaningful when the products solve different category-level jobs.
+  // Keep the comparison available, but do not expose a misleading winner field in UI/schema.
+  const winner = crossCategory ? null : normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2)
   const faqs = sanitizeFaqs(cmp.faqs).map((faq) => {
     const hasUnverifiedScore = /\b\d(?:\.\d)?\s*\/\s*5\b|user reviews?|user rating|higher rating|overall winner|overall pick|rated \d/i.test(faq.answer)
     if (!hasUnverifiedScore) return faq
