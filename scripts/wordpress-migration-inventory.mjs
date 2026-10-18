@@ -5,7 +5,8 @@
  * Run from the repository root:
  *   node scripts/wordpress-migration-inventory.mjs
  *
- * Reads content/**/*.json and prints a JSON report to stdout. It does not
+ * Reads JSON files recursively under the content directory and prints a JSON report.
+ * It does not
  * modify source files, create WordPress records, or contact any remote service.
  */
 import { readdir, readFile, stat } from "node:fs/promises";
