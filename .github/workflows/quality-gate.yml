@@ -46,6 +46,9 @@ jobs:
       - name: WordPress migration inventory regression tests
         run: node scripts/test-wordpress-migration-inventory.mjs
 
+      - name: WordPress migration URL reconciliation regression tests
+        run: node scripts/test-reconcile-wordpress-migration-urls.mjs
+
       - name: Unit tests
         run: npm test
 
