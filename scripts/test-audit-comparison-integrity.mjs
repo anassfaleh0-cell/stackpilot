@@ -15,7 +15,7 @@ try {
   await writeFile(path.join(dir, "bad.json"), JSON.stringify({
     slug: "square-vs-xero",
     title: "Square vs Xero",
-    description: "Square vs Xero: Square from Free – $79/mo, Xero.",
+    description: "Incomplete description, Xero.",
     tool1: "Square", tool2: "Xero", winner: "square",
     verdict: "After thorough evaluation, Square emerges as our recommendation.",
     features: [{ name: "User Rating", tool1: true, tool2: false }],
@@ -32,11 +32,11 @@ try {
   assert.equal(result.status, 0, result.stderr || "audit script exited non-zero");
   const report = JSON.parse(result.stdout);
   assert.equal(report.filesScanned, 2);
-  assert.ok(report.issueCount >= 3);
+  assert.ok(report.issueCount >= 3, JSON.stringify(report.counts));
   assert.ok(report.counts.template_verdict >= 1);
-  assert.ok(report.counts.truncated_description >= 1);
+  assert.ok(report.counts.truncated_description >= 1, JSON.stringify(report.counts));
   assert.ok(report.counts.boolean_only_feature_table >= 1);
-  process.stdout.write("PASS: comparison integrity audit fixture checks\n");
+  process.stdout.write("PASS: comparison integrity audit fixture checks\\n");
 } finally {
   await rm(root, { recursive: true, force: true });
 }
