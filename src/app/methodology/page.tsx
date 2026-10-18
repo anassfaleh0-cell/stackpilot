@@ -52,7 +52,7 @@ const scoringRubric = [
 export default function MethodologyPage() {
   return (
     <>
-      <ArticleSchema title="Review Methodology | How We Score Software" description="How every PilotStack page is built — the nine recorded category scores behind each rating, where our figures come from, and what we leave out when we cannot source it." publishedAt="2026-01-15" updatedAt="2026-10-18" author="PilotStack Team" url={`${site.url}/methodology`} keywords={["software review methodology", "scoring rubric", "editorial standards", "review transparency"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
+      <ArticleSchema title="Review Methodology | How We Score Software" description="How PilotStack's recorded software scores are calculated, what sources inform our records, and what readers should independently verify." publishedAt="2026-01-15" updatedAt="2026-10-18" author="PilotStack Team" url={`${site.url}/methodology`} keywords={["software review methodology", "scoring rubric", "editorial standards", "review transparency"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
       <BreadcrumbSchema items={[
         { name: "Home", href: "/" },
         { name: "Review Methodology", href: "/methodology" },
@@ -148,7 +148,7 @@ export default function MethodologyPage() {
                 Our pages draw on structured records and public vendor sources. A populated field does not guarantee recent independent verification, and conflicting claims should be qualified or omitted. Certification statuses without supporting evidence should be identified as unverified. Content-update dates describe the record and do not promise a full re-test. Readers can report errors via our <Link href="/contact" className="text-primary hover:underline">contact form</Link>.
               </p>
 
-              <h2 className="text-2xl font-bold mt-12 mb-4">Review Team & Expertise</h2>
+              <h2 className="text-2xl font-bold mt-12 mb-4">Authorship & Evidence Limits</h2>
               <p className="text-muted-foreground mb-4">
                 PilotStack uses author bylines on the site; a byline is not proof of a hands-on test unless the page explicitly describes that test. See our{" "}
                 <Link href="/authors" className="text-primary hover:underline">authors</Link> pages. The published rubric explains how the overall editorial score is calculated. Product records can differ in source coverage and freshness, and the score should be considered alongside the limitations described on the page.
