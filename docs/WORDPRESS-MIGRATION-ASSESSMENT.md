@@ -77,6 +77,10 @@ Build a repeatable, idempotent importer that:
 - Exports a CSV/JSON reconciliation report: source count, destination count, duplicate slugs, missing fields, unresolved relationships, and content hashes.
 - Supports a dry-run mode and never deletes existing records by default.
 
+## Read-only inventory helper
+
+A first read-only helper is available at `scripts/wordpress-migration-inventory.mjs`. From the repository root, run `node scripts/wordpress-migration-inventory.mjs` to print a JSON report of content file counts/sizes, invalid JSON, missing key fields, duplicate slugs, and proposed path mappings. The proposed paths are only a starting point and must be reconciled against the live sitemap; the script does not import content or modify source files. This helper has been added to the migration branch but has not yet been executed in a local checkout, so treat its output as unverified until run and reviewed.
+
 ## Staging acceptance checklist
 
 - [ ] Export and retain a read-only copy of source content and media.
