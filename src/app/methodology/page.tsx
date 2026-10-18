@@ -21,11 +21,11 @@ const stages = [
   },
   {
     title: "Evidence & Sourcing",
-    body: "Our pages draw on structured product records, vendor documentation, and published pricing pages. A value in a record does not prove it was independently confirmed recently. We avoid presenting third-party review counts as verified when consistent source provenance is unavailable. Where available sources conflict, our policy is to qualify or omit the disputed value rather than select one without a defensible basis. Readers should verify current prices, plan limits, and feature availability with the vendor.",
+    body: "Our pages draw on structured product records, vendor documentation, and published pricing pages. A value in a record does not prove it was independently confirmed recently. We avoid presenting third-party review counts as verified when consistent source provenance is unavailable. Where available sources conflict, we publish neither value as confirmed until a defensible source resolves the disagreement. Readers should verify current prices, plan limits, and feature availability with the vendor.",
   },
   {
     title: "Scoring & Ratings",
-    body: "PilotStack's editorial rubric uses nine recorded category scores: Features, Usability, Pricing, Support, Security, Integrations, Performance, Documentation, and Scalability. Each is scored on a 1-5 scale with equal weight, and the overall editorial score is their arithmetic mean rounded to one decimal place. This calculation describes our recorded assessment; it is not a third-party user-review average and does not by itself mean a product was tested hands-on.",
+    body: "PilotStack's editorial rubric uses nine recorded category scores: Features, Usability, Pricing, Support, Security, Integrations, Performance, Documentation, and Scalability. Each is scored on a 1-5 scale with equal weight, and the overall editorial score is their arithmetic mean rounded to one decimal place. This calculation describes our recorded assessment; it is not a third-party user-review average and does not by itself mean our publisher independently used the product in a live environment.",
   },
   {
     title: "Consistency & Limits",
@@ -72,7 +72,7 @@ export default function MethodologyPage() {
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                Our editorial score is calculated from nine recorded category scores on a 1-5 scale, averaged and rounded to one decimal. The dataset may include vendor documentation and published pricing information, but a recorded value is not proof of recent independent verification or hands-on testing. Unsupported claims should be qualified or omitted. We do not sell editorial placement.
+                Our editorial score is calculated from nine recorded category scores on a 1-5 scale, averaged and rounded to one decimal. The dataset may include vendor documentation and published pricing information, but a recorded value is not proof of recent independent verification or direct product use in a live environment. Unsupported claims should be qualified or omitted. We do not sell editorial placement.
               </p>
             </div>
 
@@ -92,7 +92,7 @@ export default function MethodologyPage() {
               <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
                 <li>We cover tools readers actively evaluate — no paid placements</li>
                 <li>Structured records help keep reused values consistent, but source freshness can vary</li>
-                <li>The arithmetic is reproducible from the recorded scores; the evidence behind those scores still has limitations</li>
+                <li>The overall score is the mean of those nine scores, rounded to one decimal; the calculation is reproducible, while the evidence behind scores still has limitations</li>
                 <li>Certification and company facts with no source are shown as unverified or left out</li>
                 <li>Dates are shown where maintained and describe content records, not necessarily live-product testing</li>
                 <li>Published independence policy: no vendor can pay for placement</li>
