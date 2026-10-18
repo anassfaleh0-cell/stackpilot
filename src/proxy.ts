@@ -16,6 +16,9 @@ export function proxy(request: Request) {
     host === APP_HOST ||
     host === `www.${APP_HOST}` ||
     host.startsWith("localhost") ||
+    // The CI route smoke test binds Next.js to 127.0.0.1; keep local requests
+    // local rather than redirecting them to the public production hostname.
+    host === "127.0.0.1" ||
     isVercelPreviewHost
   ) {
     return undefined
