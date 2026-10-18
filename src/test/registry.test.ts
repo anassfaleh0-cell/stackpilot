@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { getComparison, getReview, searchContent } from "@/lib/content/registry"
+import { getAllComparisons, getAllReviews, getComparison, getReview, searchContent } from "@/lib/content/registry"
 
 describe("searchContent", () => {
   it("returns results for matching query", () => {
@@ -45,7 +45,6 @@ describe("getAllReviews", () => {
 
 describe("content quality safeguards", () => {
   it("does not render known generic filler in review sections", () => {
-    const reviewSlugs = ["airtable", "amplitude", "clickup", "confluence", "deel", "hotjar", "intercom", "kubernetes"]
     const filler = [
       /most successful deployments follow a phased approach/i,
       /this topic is most useful when it is connected to a real decision/i,
@@ -55,20 +54,30 @@ describe("content quality safeguards", () => {
       /written against our published editorial methodology/i,
       /updated when the underlying content is reviewed/i,
     ]
-    for (const slug of reviewSlugs) {
-      const review = getReview(slug)
-      if (!review) continue
+    for (const review of getAllReviews()) {
       const renderedText = review.content.map((section) => section.title + " " + section.body).join(" ")
       for (const pattern of filler) expect(renderedText).not.toMatch(pattern)
     }
   })
 
-  it("does not publish a universal winner for cross-category products", () => {
+  it("does not publish universal winners or generic matrices for cross-category products", () => {
     const comparison = getComparison("1password-vs-appwrite")
     expect(comparison).not.toBeNull()
     expect(comparison?.winner).toBeNull()
     expect(comparison?.verdict).toMatch(/different categories/i)
     expect(comparison?.features.map((feature) => feature.name)).toContain("Primary job and positioning")
     expect(comparison?.features.map((feature) => feature.name)).not.toContain("Free trial duration")
+
+    const reviews = new Map(getAllReviews().map((review) => [review.slug, review]))
+    const crossCategory = getAllComparisons().filter((item) => {
+      const left = reviews.get(item.tool1Slug)
+      const right = reviews.get(item.tool2Slug)
+      return Boolean(left?.category && right?.category && left.category !== right.category)
+    })
+    expect(crossCategory.length).toBeGreaterThan(0)
+    for (const item of crossCategory) {
+      expect(item.winner).toBeNull()
+      expect(item.features.map((feature) => feature.name)).toContain("Primary job and positioning")
+    }
   })
 })
