@@ -40,7 +40,7 @@ export default function EditorialPolicyPage() {
                 <li>Every published figure traces to a source we hold, or it is left off the page</li>
                 <li>One recorded source per figure, reused everywhere a tool appears</li>
                 <li>Both strengths and limitations addressed in every review</li>
-                <li>Corrections published promptly and transparently</li>
+                <li>Reported errors are reviewed and corrected transparently when a correction is warranted</li>
               </ul>
             </div>
 
@@ -52,9 +52,9 @@ export default function EditorialPolicyPage() {
                 <li>Content pages expose publication or update dates where those fields are maintained</li>
                 <li>Content more than 12 months old is flagged for review and potential removal</li>
                 <li>We distinguish factual reporting from analysis and opinion throughout</li>
-                <li>Standardized methodology applied consistently across all reviews</li>
+                <li>The published methodology describes the scoring rules; evidence and freshness can vary by product record</li>
                 <li>Third-party user reviews on G2, Capterra and TrustRadius are linked so readers can check independent feedback directly</li>
-                <li>Diverse perspectives considered including accessibility, internationalization, and multi-currency pricing</li>
+                <li>Accessibility, internationalization, and regional pricing are considered where relevant to the product and available evidence</li>
               </ul>
             </div>
 
@@ -78,7 +78,7 @@ export default function EditorialPolicyPage() {
               </ul>
 
               <h2>3. Review Standards</h2>
-              <p>All software reviews on PilotStack follow a standardized methodology that includes:</p>
+              <p>Our published review methodology describes the intended scoring and sourcing approach. The existence of a score does not mean every product has been independently tested or every field recently verified:</p>
               <ul>
                 <li>One recorded source per figure, reused everywhere a tool appears</li>
                 <li>Nine equally weighted category scores on a 1-5 scale, with the overall rating as their mean</li>

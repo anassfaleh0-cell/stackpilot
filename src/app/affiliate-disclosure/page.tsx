@@ -49,7 +49,7 @@ export default function AffiliateDisclosurePage() {
                 <li>"Visit Website" buttons on review pages</li>
                 <li>Tool and service recommendations within comparison pages</li>
                 <li>Links to vendor websites in guides and blog posts</li>
-                <li>Product links in our newsletter (where clearly marked)</li>
+                <li>Other distribution channels, if used, where links are clearly marked</li>
               </ul>
               <p>Not all outbound links on PilotStack are affiliate links. Links to documentation, educational resources, and non-commercial sources are not monetized.</p>
 
@@ -62,7 +62,7 @@ export default function AffiliateDisclosurePage() {
               </ul>
               <p>This list may change as we add or remove affiliate partnerships. Our disclosure and editorial methodology apply across affiliate relationships.</p>
 
-              <h2>No Impact on Pricing</h2>
+              <h2>Pricing and Vendor Terms</h2>
               <p>Using our affiliate links does not affect the price you pay for any product or service. The commission is paid by the vendor from their marketing budget, not from any customer premium.</p>
 
               <h2>Questions</h2>
