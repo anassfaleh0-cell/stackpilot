@@ -145,7 +145,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   <Star size={14} className="fill-accent text-accent" />
                   <span className="font-semibold">{formatScore(tool.rating)}</span>
                   <span className="text-muted-foreground">/ 5.0</span>
-                  <span className="text-xs text-muted-foreground">({tool.reviewCount} reviews)</span>
+                  {tool.reviewCount > 0 && <span className="text-xs text-muted-foreground">({tool.reviewCount.toLocaleString()} reviews)</span>}
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-1">
@@ -182,7 +182,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
                 <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
                 <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                  <li>Overall rating: {formatScore(tool.rating)}/5 from {tool.reviewCount.toLocaleString()} reviews</li>
+                  <li>{tool.reviewCount > 0 ? `Overall rating: ${formatScore(tool.rating)}/5 across ${tool.reviewCount.toLocaleString()} recorded reviews` : `Editorial rating: ${formatScore(tool.rating)}/5; a verified user-review count is not available`}</li>
                   <li>Pricing: {tool.priceRange} ({tool.pricing})</li>
                   <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : `${tool.name} excels at ${tool.features.filter(f => f.available).slice(0, 2).map(f => f.name.toLowerCase()).join(" and ")}`}</li>
                   <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `Suitable for most ${tool.category} use cases`}</li>
@@ -256,7 +256,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* External reviews / social proof */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-4">Third-Party Reviews</h2>
-                <p className="text-sm text-muted-foreground mb-4">{tool.name} carries a {formatScore(tool.rating)}/5 rating across {tool.reviewCount.toLocaleString()} reviews in the PilotStack dataset. Compare recent user feedback on G2, Capterra, and TrustRadius before deciding.</p>
+                <p className="text-sm text-muted-foreground mb-4">{tool.reviewCount > 0 ? `${tool.name} carries a ${formatScore(tool.rating)}/5 rating across ${tool.reviewCount.toLocaleString()} recorded reviews in the PilotStack dataset.` : `${tool.name} has an editorial rating of ${formatScore(tool.rating)}/5; PilotStack does not have a verified user-review count for this product.`} Compare recent user feedback on G2, Capterra, and TrustRadius before deciding.</p>
                 <div className="flex flex-wrap gap-3">
                   <a href={`https://www.g2.com/products/${tool.slug}/review`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>

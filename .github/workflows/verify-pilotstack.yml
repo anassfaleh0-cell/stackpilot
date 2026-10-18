@@ -34,3 +34,5 @@ jobs:
         run: npm test
       - name: Run production build
         run: npm run build
+      - name: Audit public production endpoints (read-only)
+        run: npm run audit:live
