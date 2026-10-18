@@ -89,18 +89,18 @@ export default function EditorialPolicyPage() {
               <p>Full details are available on our <a href="/methodology">Review Methodology</a> page.</p>
 
               <h2>4. Corrections and Updates</h2>
-              <p>When we discover an error in published content, we correct it promptly and transparently. Our <a href="/corrections-policy">Corrections Policy</a> details how errors are classified, corrected, and communicated to readers. We encourage readers to report potential errors via our <a href="/contact">contact form</a>.</p>
+              <p>When a reported error is confirmed, we aim to correct it transparently; timing depends on the issue and supporting evidence. Our <a href="/corrections-policy">Corrections Policy</a> details how errors are classified, corrected, and communicated to readers. We encourage readers to report potential errors via our <a href="/contact">contact form</a>.</p>
 
               <h2>5. Sources and Attribution</h2>
-              <p>We attribute all sources used in our research. When we cite data from third-party studies, analyst reports, or user review platforms, we link to the original source whenever possible. Our published methodology and recorded sources are described on the relevant review and methodology pages.</p>
+              <p>We aim to link to original sources for material claims where those sources are available. Some pages use structured product records and public vendor material; a populated field is not proof of recent independent verification. Readers should use the methodology and page-specific limitations to interpret the evidence.</p>
 
               <h2>6. Diversity and Inclusion</h2>
-              <p>We are committed to representing diverse perspectives in our content. Our tool reviews consider accessibility features, internationalization support, and pricing in multiple currencies and regions. We strive to include products that serve organizations of different sizes, industries, and geographic locations.</p>
+              <p>Where relevant and supported by available information, pages may discuss accessibility, internationalization, regional pricing, and differences in organizational needs. Coverage varies by product and by the evidence available.</p>
 
               <h2>7. Updates to This Policy</h2>
-              <p>This editorial policy may be updated when our practices materially change. The last-updated date reflects the most recent revision. The "Last updated" date reflects the most recent revision.</p>
+              <p>This editorial policy may be updated when our practices materially change. The date shown above reflects the latest revision of this policy, not a claim that every page or product record was rechecked on that date.</p>
 
-              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about this editorial policy, contact us at <strong>editorial@pilotstack.online</strong>.</p>
+              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about this editorial policy, please use our <a href="/contact">contact page</a>.</p>
             </div>
           </div>
         </Container>

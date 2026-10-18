@@ -11,7 +11,7 @@ import { ArrowRight } from "lucide-react"
 
 export const metadata = createMetadata({
   title: "Authors & Editorial Byline",
-  description: "PilotStack uses a publisher byline for its software reviews and guides. The byline is not a claim of a staffed research team or hands-on product testing.",
+  description: "PilotStack uses a publisher byline for its software reviews and guides. The byline is not a claim of a staffed research team or independent live-product trials.",
   path: "/authors",
 })
 
@@ -20,7 +20,7 @@ const authors = [
     slug: "pilotstack-team",
     name: "PilotStack Team",
     role: "Publisher Byline",
-    bio: "This is the publisher byline used on PilotStack content, not a biography of a named individual. Pages draw on structured product records and public sources; the byline does not imply that every product was tested hands-on.",
+    bio: "This is the publisher byline used on PilotStack content, not a biography of a named individual. Pages draw on structured product records and public sources; the byline does not imply that every product was independently trialed in a live environment.",
   },
 ]
 
@@ -63,7 +63,7 @@ export default function AuthorsPage() {
             <div className="mt-10 p-6 rounded-xl bg-muted-bg border border-border">
               <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-2">How we score</h2>
               <p className="text-sm text-muted-foreground">
-                The published methodology explains how the overall editorial score is calculated from nine recorded category scores. Source coverage and freshness can vary by product, and a recorded score is not a third-party user-review average or proof of hands-on testing.{" "}
+                The published methodology explains how the overall editorial score is calculated from nine recorded category scores. Source coverage and freshness can vary by product, and a recorded score is not a third-party user-review average or proof of independent live-product trials.{" "}
                 <Link href="/methodology" className="text-primary hover:underline">Read the full methodology</Link>
               </p>
             </div>
