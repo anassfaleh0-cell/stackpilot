@@ -593,7 +593,7 @@ function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: Comparison
   ]
   return [...(looksGenerated ? [] : base), ...derived].slice(0, 20)
 }
-function buildCrossCategoryFeatures(tool1: string, tool2: string, review1: ReviewContent | null, review2: ReviewContent | null): ComparisonFeature[] {
+function buildCrossCategoryFeatures(review1: ReviewContent | null, review2: ReviewContent | null): ComparisonFeature[] {
   const productValue = (review: ReviewContent | null, value: string) => review ? value : "Not recorded in PilotStack's current profile"
   const capabilities = (review: ReviewContent | null) =>
     review ? review.features.filter((feature) => feature.available).slice(0, 5).map((feature) => feature.name).join(", ") || "No specific capabilities recorded" : "No matching review profile"
@@ -725,7 +725,7 @@ export function getComparison(slug: string): ComparisonContent | null {
   const crossCategory = Boolean(review1?.category && review2?.category && review1.category !== review2.category)
   // Cross-category pages use a contextual fit matrix rather than unrelated feature rows.
   const features = crossCategory
-    ? buildCrossCategoryFeatures(cmp.tool1, cmp.tool2, review1, review2)
+    ? buildCrossCategoryFeatures(review1, review2)
     : buildDerivedComparisonFeatures(cmp, baseFeatures)
   // A winner is not meaningful when the products solve different category-level jobs.
   // Keep the comparison available, but do not expose a misleading winner field in UI/schema.
