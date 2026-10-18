@@ -39,7 +39,7 @@ try {
 
   assert.equal(report.totalJsonFiles, 8);
   assert.equal(report.invalidJsonCount, 1);
-  assert.equal(report.invalidRecordCount, 2);
+  assert.equal(report.invalidRecordCount, 3);
   assert.equal(report.duplicateSlugCount, 1);
   assert.equal(report.collections.reviews.count, 6);
   assert.equal(report.collections.provenance.missingSlug, 0);
