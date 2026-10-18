@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 import { SocialLinkList } from "@/components/brand/social-icons"
 
 export const metadata = createMetadata({
-  title: "About PilotStack — Our Mission, Team & Editorial Standards",
+  title: "About PilotStack — Mission & Editorial Standards",
   description: "PilotStack helps businesses navigate the software landscape with detailed reviews, practical comparisons, and actionable buying guides.",
   path: "/about",
 })
@@ -16,7 +16,7 @@ export default function AboutPage() {
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "About", href: "/about" }]} />
-      <WebPageSchema name="About PilotStack" description="Learn about PilotStack's mission, team, values, and editorial approach." url={`${site.url}/about`} />
+      <WebPageSchema name="About PilotStack" description="Learn about PilotStack's purpose, sourcing approach, editorial scores, and the limits readers should keep in mind." url={`${site.url}/about`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "About" }]} />
       </Container>
@@ -28,16 +28,16 @@ export default function AboutPage() {
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">PilotStack was created to make software research easier to navigate. The site brings reviews, comparisons, guides, and structured product information into one place so readers can evaluate options without having to piece together the basics from many sources.</p>
               <p className="text-muted-foreground mb-4">Software research can be difficult because pricing, features, positioning, and product capabilities change over time. PilotStack focuses on making those decision factors easier to compare, while clearly separating recorded information from editorial guidance.</p>
-              <p className="text-muted-foreground mb-4">I built PilotStack to fix that. Every figure on this site is recorded once and reused everywhere it appears, each tool carries nine category scores on a 1-5 scale with the overall rating as their mean, and where we cannot source a fact we leave it off the page instead of asserting it. We publish our methodology so you can check how every conclusion is reached.</p>
+              <p className="text-muted-foreground mb-4">PilotStack is an independently maintained software research site. It uses structured product records and publicly available material to organize software information and buying considerations. The overall editorial score is calculated from nine recorded category scores, but a stored value is not proof of recent independent verification or hands-on product testing. Our methodology explains the calculation and the evidence limitations.</p>
               <p className="text-muted-foreground mb-4">PilotStack may earn revenue from affiliate relationships and other clearly disclosed commercial relationships. Commercial relationships do not determine editorial scores or conclusions. Where a page contains an affiliate relationship, the relationship is disclosed so readers can understand the commercial context.</p>
-              <p className="text-muted-foreground mb-4">The same published rules apply to every page: one recorded source per figure, the overall rating as the mean of nine category scores, and no unsourced fact stated as confirmed. We believe that consistency is what makes PilotStack different — and what helps our readers make confident, informed decisions.</p>
+              <p className="text-muted-foreground mb-4">Structured records can help keep reused values consistent, but source coverage and freshness vary by product. We aim to qualify or omit claims that cannot be supported, and readers should verify current pricing, features, and contractual terms with vendors before making a decision.</p>
               <h2 className="text-2xl font-bold mt-12 mb-4">Our values</h2>
               <div className="grid sm:grid-cols-2 gap-6 mb-12">
                 {[
                   { title: "Independent", desc: "Commercial relationships are disclosed and are not intended to determine editorial scores or conclusions." },
                   { title: "Evidence-led", desc: "Where ratings are shown, the methodology explains the criteria and calculation used." },
-                  { title: "Transparent", desc: "Our methodology is public. See exactly how we reach every conclusion." },
-                  { title: "Helpful", desc: "Every piece of content should help you make a better decision." },
+                  { title: "Transparent", desc: "Our methodology explains the scoring calculation and its limits." },
+                  { title: "Helpful", desc: "Content should help readers compare relevant trade-offs and identify what to verify." },
                 ].map((v) => (
                   <div key={v.title} className="p-4 rounded-xl bg-muted-bg">
                     <h3 className="font-semibold mb-1">{v.title}</h3>
