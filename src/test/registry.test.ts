@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { getAllComparisons, getAllReviews, getComparison, getReview, searchContent } from "@/lib/content/registry"
+import { getAllComparisons, getAllGuides, getAllReviews, getComparison, getReview, searchContent } from "@/lib/content/registry"
 
 describe("searchContent", () => {
   it("returns results for matching query", () => {
@@ -57,6 +57,16 @@ describe("content quality safeguards", () => {
     for (const review of getAllReviews()) {
       const renderedText = review.content.map((section) => section.title + " " + section.body).join(" ")
       for (const pattern of filler) expect(renderedText).not.toMatch(pattern)
+    }
+  })
+
+  it("calculates guide reading time from the rendered content", () => {
+    for (const guide of getAllGuides()) {
+      const words = guide.sections.reduce((total, section) =>
+        total + String(section.body ?? "").split(/\s+/).filter(Boolean).length +
+        (section.items || []).reduce((count, item) => count + String(item).split(/\s+/).filter(Boolean).length, 0),
+      0)
+      expect(guide.readingTime).toBe(Math.max(1, Math.ceil(words / 220)))
     }
   })
 

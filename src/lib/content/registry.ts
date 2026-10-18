@@ -769,16 +769,23 @@ export function getComparisonsByCategory(category: string): ComparisonContent[] 
     .filter((item): item is ComparisonContent => Boolean(item))
 }
 
+function normalizeGuide(guide: GuideContent): GuideContent {
+  const sections = buildGuideSections(guide)
+  // Reading time must reflect rendered sections, including runtime enrichment,
+  // rather than a stale source-field estimate.
+  const readingTime = Math.max(1, Math.ceil(sectionWordCount(sections) / 220))
+  return { ...guide, sections, readingTime, faqs: sanitizeFaqs(guide.faqs) }
+}
+
 export function getGuide(slug: string): GuideContent | null {
   const file = path.join(CONTENT_DIR, "guides", `${slug}.json`)
   if (!fs.existsSync(file)) return null
-  const guide = readJson<GuideContent>(file)
-  return { ...guide, sections: buildGuideSections(guide), faqs: sanitizeFaqs(guide.faqs) }
+  return normalizeGuide(readJson<GuideContent>(file))
 }
 
 export function getAllGuides(): GuideContent[] {
   return readDir(path.join(CONTENT_DIR, "guides"))
-    .map((f) => { const g = readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f)); return { ...g, sections: buildGuideSections(g), faqs: sanitizeFaqs(g.faqs) } })
+    .map((f) => normalizeGuide(readJson<GuideContent>(path.join(CONTENT_DIR, "guides", f))))
 }
 
 export function getGlossaryTerm(slug: string): GlossaryContent | null {
