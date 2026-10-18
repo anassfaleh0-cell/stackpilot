@@ -29,7 +29,7 @@ const rules = [
   ["template_verdict", /after thorough evaluation|based on the recorded comparison criteria|recorded comparison criteria/i],
   ["self_referential_product_copy", /excels at\s+[A-Z][\w.-]*\s+is a|stronger for\s+[A-Z][\w.-]*\s+is a/i],
   ["generic_faq", /the best choice depends on your team|both platforms offer strong features|check our detailed review for support comparisons/i],
-  ["truncated_description", /(?:,\s*[A-Z][\w.-]*\.)$|(?:from\s+\$?[\d.]+(?:–|-)\$?[\d.]+\s*(?:\/mo)?\s*(?:\+ fees)?[,]?\s*[A-Z][\w.-]*\.)$/i],
+  ["truncated_description", /(?:,\\s*[A-Z][\\w.-]*\\.)(?:\\n|$)|(?:from\\s+\\$?[\\d.]+(?:–|-)\\$?[\\d.]+\\s*(?:\\/mo)?\\s*(?:\\+ fees)?[,]?\\s*[A-Z][\\w.-]*\\.)(?:\\n|$)/i],
   ["placeholder_or_unverified_claim", /our thorough evaluation|our hands-on testing|we tested both tools/i],
 ];
 const files = (await walk(contentRoot)).sort();
