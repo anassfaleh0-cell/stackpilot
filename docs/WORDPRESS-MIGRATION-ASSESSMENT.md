@@ -85,6 +85,23 @@ A fixture-based regression test is available at `scripts/test-wordpress-migratio
 
 A read-only URL reconciliation helper is available at `scripts/reconcile-wordpress-migration-urls.mjs`. After saving the live sitemap URL-set XML and the inventory output to local files, run `node scripts/reconcile-wordpress-migration-urls.mjs --sitemap /path/to/sitemap-urlset.xml --inventory /path/to/inventory.json`. It reports matched candidate paths, candidate paths absent from the sitemap, sitemap paths with no content candidate, duplicate candidate paths, invalid sitemap URLs, and unmapped collections. It intentionally rejects sitemap index files: expand the child sitemaps to URL-set XML first. The result is a review report, not proof that a route is valid or a redirect is safe. Its fixture test is `node scripts/test-reconcile-wordpress-migration-urls.mjs`, also included in CI.
 
+## Live production spot-check (2026-10-18)
+
+Read-only fetches were performed against the live site; these observations are a sample, not a full crawl or an AdSense approval guarantee:
+
+- `/robots.txt` is reachable, allows public crawling, disallows private/search paths, and references `https://pilotstack.online/sitemap.xml`. The extracted raw text showed normal directive formatting.
+- `/ads.txt` returns the expected Google publisher line: `google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0`.
+- `/sitemap.xml` identifies itself as a sitemap containing 1,994 URLs. A URL count does not establish that every listed route returns 200, is canonical/indexable, or offers sufficient unique value.
+- The homepage exposes a canonical URL and `index, follow` metadata. Its sampled comparison cards include mismatched category/tool combinations and incomplete price fragments; these should be checked against the underlying content records before migration.
+- The sampled `/comparisons/square-vs-xero` route rendered and exposed a canonicalizable content page, but the body includes generic placeholder phrasing (for example, “recorded information”), a recorded-data caveat in place of clear evidence, and a confusing comparison row that combines both products' review-count descriptions. This is a content-quality concern for users and search/ad review, not just a WordPress migration concern.
+
+### Required follow-up before any migration
+
+1. Run the local inventory and URL reconciliation tools against a saved, complete sitemap XML and inventory JSON; inspect all unmatched, duplicate, and unmapped paths.
+2. Crawl all sitemap URLs for status, canonical, robots directives, title/description, content length, and internal-link failures. Do not infer the status of all 1,994 URLs from this sample.
+3. Prioritize factual-integrity remediation for comparison cards and records: ensure category compatibility, validate each product's pricing/rating/review-count source and timestamp, remove empty fragments and boilerplate placeholders, and avoid implying first-hand testing without evidence.
+4. Re-run the production build, tests, and representative page audits after fixes; preserve the current URLs and ads.txt line.
+
 ## Staging acceptance checklist
 
 - [ ] Export and retain a read-only copy of source content and media.
