@@ -71,10 +71,9 @@ function asRelative(file) {
 function isSafeSlug(slug) {
   return Boolean(slug) &&
     !slug.startsWith("/") &&
-    !slug.includes("\\\\") &&
+    !slug.includes("\\") &&
     !slug.split("/").some((part) => part === "." || part === "..");
 }
-
 const files = (await walk(contentRoot)).sort();
 const collections = new Map();
 const duplicateSlugs = [];
