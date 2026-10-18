@@ -44,6 +44,14 @@ for (const file of files) {
     issues.push({ file: relative, slug: null, rule: "invalid_record", detail: "Expected a JSON object" });
     continue;
   }
+  if (data.published === false) {
+    issues.push({
+      file: relative,
+      slug: data.slug || null,
+      rule: "marked_unpublished",
+      detail: "Record declares published=false; verify route and sitemap honor this flag before public exposure",
+    });
+  }
   const text = [data.title, data.description, data.verdict, ...(Array.isArray(data.faqs) ? data.faqs.flatMap(x => [x?.question, x?.answer]) : [])]
     .filter(x => typeof x === "string").join("\n");
   for (const [rule, pattern] of rules) {
