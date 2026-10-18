@@ -68,5 +68,7 @@ describe("content quality safeguards", () => {
     expect(comparison).not.toBeNull()
     expect(comparison?.winner).toBeNull()
     expect(comparison?.verdict).toMatch(/different categories/i)
+    expect(comparison?.features.map((feature) => feature.name)).toContain("Primary job and positioning")
+    expect(comparison?.features.map((feature) => feature.name)).not.toContain("Free trial duration")
   })
 })
