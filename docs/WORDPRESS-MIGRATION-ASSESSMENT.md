@@ -85,6 +85,12 @@ A fixture-based regression test is available at `scripts/test-wordpress-migratio
 
 A read-only URL reconciliation helper is available at `scripts/reconcile-wordpress-migration-urls.mjs`. After saving the live sitemap URL-set XML and the inventory output to local files, run `node scripts/reconcile-wordpress-migration-urls.mjs --sitemap /path/to/sitemap-urlset.xml --inventory /path/to/inventory.json`. It reports matched candidate paths, candidate paths absent from the sitemap, sitemap paths with no content candidate, duplicate candidate paths, invalid sitemap URLs, and unmapped collections. It intentionally rejects sitemap index files: expand the child sitemaps to URL-set XML first. The result is a review report, not proof that a route is valid or a redirect is safe. Its fixture test is `node scripts/test-reconcile-wordpress-migration-urls.mjs`, also included in CI.
 
+## Comparison integrity audit helper
+
+A read-only heuristic scanner is available at `scripts/audit-comparison-integrity.mjs`. Run `node scripts/audit-comparison-integrity.mjs` from the repository root to produce a JSON report of suspicious template verdicts, self-referential product copy, generic FAQ text, truncated-looking descriptions, boolean-only feature tables, and winner mappings that do not match either product name. Run `node scripts/test-audit-comparison-integrity.mjs` for fixture regression checks. Both run in CI.
+
+The scanner is deliberately report-only: flags are candidates for human review, not proof of factual error. It does not rewrite or delete records and does not block the build by itself. A sample source record, `content/comparisons/square-vs-xero.json`, contains the kinds of issues the scanner is designed to surface: generic “after thorough evaluation” language, a FAQ assembled from awkward product-description fragments, an apparent incomplete pricing sentence, and a feature table made of boolean values rather than meaningful comparison evidence. Correct records from verified sources rather than replacing one unsupported claim with another.
+
 ## Live production spot-check (2026-10-18)
 
 Read-only fetches were performed against the live site; these observations are a sample, not a full crawl or an AdSense approval guarantee:
