@@ -13,6 +13,24 @@ import path from "node:path";
 
 const root = process.cwd();
 const contentRoot = path.join(root, "content");
+const publicRouteByCollection = {
+  reviews: "reviews",
+  comparisons: "comparisons",
+  guides: "guides",
+  blog: "blog",
+  glossary: "glossary",
+  alternatives: "alternatives",
+  best: "best",
+  "use-cases": "use-cases",
+  industries: "industries",
+  research: "research",
+  statistics: "statistics",
+  hubs: "hubs",
+  categories: "category",
+  // Provenance records are audit metadata, not public landing pages.
+  provenance: null,
+};
+
 const expectedFields = {
   reviews: ["slug", "name", "description"],
   comparisons: ["slug", "title", "description", "tool1", "tool2"],
@@ -120,7 +138,12 @@ for (const file of files) {
     sourceFile: relativePath,
     // This is a proposed path mapping only; it does not guarantee that the
     // current site publishes every source file at this exact route.
-    proposedPath: slug ? `/${collection}/${slug}` : null,
+    // Only collections with a known App Router route receive a candidate URL.
+    // Provenance and unknown collections are deliberately not treated as pages.
+    proposedPath:
+      slug && publicRouteByCollection[collection]
+        ? "/" + publicRouteByCollection[collection] + "/" + slug
+        : null,
     title:
       typeof data.title === "string"
         ? data.title
