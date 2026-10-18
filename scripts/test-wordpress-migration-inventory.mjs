@@ -23,6 +23,7 @@ try {
   await put("content/reviews/good.json", JSON.stringify({ slug: "good-tool", name: "Good Tool", description: "A valid fixture." }));
   await put("content/reviews/duplicate.json", JSON.stringify({ slug: "good-tool", name: "Another record", description: "Duplicate slug." }));
   await put("content/reviews/unsafe.json", JSON.stringify({ slug: "../outside", name: "Unsafe", description: "Path traversal fixture." }));
+  await put("content/reviews/backslash.json", JSON.stringify({ slug: "bad\\\\slug", name: "Backslash", description: "Backslash path fixture." }));
   await put("content/comparisons/missing-fields.json", JSON.stringify({ slug: "needs-fields", title: "Needs fields", description: " ", tool1: "A" }));
   await put("content/reviews/malformed.json", "{ this is not JSON ");
   await put("content/reviews/array.json", JSON.stringify([{ slug: "not-a-record" }]));
@@ -36,16 +37,18 @@ try {
   assert.equal(result.status, 0, result.stderr || "inventory script exited non-zero");
   const report = JSON.parse(result.stdout);
 
-  assert.equal(report.totalJsonFiles, 7);
+  assert.equal(report.totalJsonFiles, 8);
   assert.equal(report.invalidJsonCount, 1);
-  assert.equal(report.invalidRecordCount, 1);
+  assert.equal(report.invalidRecordCount, 2);
   assert.equal(report.duplicateSlugCount, 1);
-  assert.equal(report.collections.reviews.count, 5);
+  assert.equal(report.collections.reviews.count, 6);
   assert.equal(report.collections.provenance.missingSlug, 0);
   assert.ok(report.missingFields.some((item) => item.file.endsWith("missing-fields.json") && item.fields.includes("tool2")));
   assert.ok(report.invalidRecords.some((item) => item.file.endsWith("unsafe.json")));
   const unsafe = report.records.find((item) => item.sourceFile.endsWith("unsafe.json"));
   assert.equal(unsafe.proposedPath, null);
+  const backslash = report.records.find((item) => item.sourceFile.endsWith("backslash.json"));
+  assert.equal(backslash.proposedPath, null);
   assert.ok(report.records.find((item) => item.sourceFile.endsWith("good.json")).proposedPath === "/reviews/good-tool");
 
   process.stdout.write("PASS: inventory script fixture regression checks\n");
