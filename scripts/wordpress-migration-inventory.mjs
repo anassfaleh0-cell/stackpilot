@@ -118,7 +118,7 @@ for (const file of files) {
   if (slug && (slug.startsWith("/") || slug.includes("\\") || slug.split("/").some((part) => part === "." || part === ".."))) {
     invalidRecords.push({ file: relativePath, reason: "Slug contains path syntax; review before import" });
   }
-  if (!slug) {
+  if (!slug && collection !== "provenance") {
     entry.missingSlug += 1;
     missingFields.push({ file: relativePath, fields: ["slug"] });
   }
