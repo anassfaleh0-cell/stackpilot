@@ -43,6 +43,9 @@ jobs:
       - name: SEO content audit
         run: npm run seo:audit
 
+      - name: WordPress migration inventory regression tests
+        run: node scripts/test-wordpress-migration-inventory.mjs
+
       - name: Unit tests
         run: npm test
 
