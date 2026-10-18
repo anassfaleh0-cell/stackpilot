@@ -68,6 +68,13 @@ function asRelative(file) {
   return path.relative(root, file).split(path.sep).join("/");
 }
 
+function isSafeSlug(slug) {
+  return Boolean(slug) &&
+    !slug.startsWith("/") &&
+    !slug.includes("\\\\") &&
+    !slug.split("/").some((part) => part === "." || part === "..");
+}
+
 const files = (await walk(contentRoot)).sort();
 const collections = new Map();
 const duplicateSlugs = [];
@@ -115,7 +122,7 @@ for (const file of files) {
   if (rawSlug !== undefined && typeof rawSlug !== "string") {
     invalidRecords.push({ file: relativePath, reason: "Field slug exists but is not a string" });
   }
-  if (slug && (slug.startsWith("/") || slug.includes("\\") || slug.split("/").some((part) => part === "." || part === ".."))) {
+  if (slug && !isSafeSlug(slug)) {
     invalidRecords.push({ file: relativePath, reason: "Slug contains path syntax; review before import" });
   }
   if (!slug && collection !== "provenance") {
@@ -141,7 +148,7 @@ for (const file of files) {
     // Only collections with a known App Router route receive a candidate URL.
     // Provenance and unknown collections are deliberately not treated as pages.
     proposedPath:
-      slug && publicRouteByCollection[collection]
+      slug && isSafeSlug(slug) && publicRouteByCollection[collection]
         ? "/" + publicRouteByCollection[collection] + "/" + slug
         : null,
     title:
