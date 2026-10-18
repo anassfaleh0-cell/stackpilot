@@ -49,9 +49,9 @@ describe("content quality safeguards", () => {
     const filler = [
       /most successful deployments follow a phased approach/i,
       /this topic is most useful when it is connected to a real decision/i,
-      /choosing the right marketing\\s*&\\s*seo software/i,
-      /adequate performance for most use cases\\./i,
-      /functional organized interface\\./i,
+      /choosing the right marketing\s*&\s*seo software/i,
+      /adequate performance for most use cases\./i,
+      /functional organized interface\./i,
       /written against our published editorial methodology/i,
       /updated when the underlying content is reviewed/i,
     ]
