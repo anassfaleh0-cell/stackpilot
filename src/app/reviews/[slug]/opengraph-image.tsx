@@ -17,10 +17,18 @@ function loadFont(name: string): { name: string; data: ArrayBuffer; weight: 400 
   }
 }
 
-function renderStars(rating: number): string {
-  const full = "★".repeat(Math.floor(rating))
-  const empty = "☆".repeat(5 - Math.floor(rating))
-  return full + empty
+function renderRatingBars(rating: number) {
+  return Array.from({ length: 5 }, (_, index) => (
+    <div
+      key={index}
+      style={{
+        width: "30px",
+        height: "8px",
+        borderRadius: "4px",
+        backgroundColor: index < Math.round(rating) ? "#F0A030" : "#334155",
+      }}
+    />
+  ))
 }
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
@@ -54,16 +62,16 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         <span>{tool.tagline}</span>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "32px" }}>
-        <div style={{ display: "flex", fontSize: "36px", color: "#F0A030", gap: "2px" }}>
-          {renderStars(tool.rating)}
+      <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "24px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+          {renderRatingBars(tool.rating)}
         </div>
         <div style={{ display: "flex", fontSize: "28px", fontWeight: 700, color: "#FFFFFF" }}>{tool.rating}</div>
         <div style={{ display: "flex", fontSize: "18px", color: "#6B7280" }}>/ 5</div>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "16px", color: "#6B7280" }}>
-        <span>Based on {tool.reviewCount.toLocaleString()} reviews</span>
+      <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "16px", color: "#9CA3AF" }}>
+        <span>PilotStack editorial assessment - Not a third-party review average</span>
       </div>
 
       <div style={{ position: "absolute", bottom: "44px", left: "60px", right: "60px", display: "flex", justifyContent: "center", fontSize: "15px", color: "#4B5563", letterSpacing: "0.04em" }}>
