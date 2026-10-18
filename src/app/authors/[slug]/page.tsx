@@ -22,9 +22,9 @@ const authorSocial = {
 
 const authors = {
   "pilotstack-team": {
-    name: "PilotStack Editorial",
+    name: "PilotStack Team",
     role: "Publisher Byline",
-    bio: "This is the publisher byline used for PilotStack content, not a biography of a named individual. Content uses structured product records and public sources; a byline does not imply that every product was tested hands-on.",
+    bio: "PilotStack Team is the publisher byline used for site content, not a biography of named individuals or a claim of multiple staff members. Content uses structured product records and public sources; the byline does not imply independent live-product trials.",
     avatar: null,
     expertise: ["Software comparison methodology", "Structured product records", "Public-source research"],
     credentials: ["Published scoring methodology", "Public editorial and disclosure policies"],
