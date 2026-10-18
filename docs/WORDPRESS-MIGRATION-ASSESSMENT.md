@@ -83,6 +83,8 @@ A first read-only helper is available at `scripts/wordpress-migration-inventory.
 
 A fixture-based regression test is available at `scripts/test-wordpress-migration-inventory.mjs`. Run it from the repository root with `node scripts/test-wordpress-migration-inventory.mjs`. It creates temporary test fixtures and checks duplicate slugs, malformed JSON, non-object records, missing fields, provenance metadata, and unsafe path candidates, then removes the fixtures. Neither the inventory nor the regression test has been executed in a local checkout in this session; run both before relying on their output.
 
+A read-only URL reconciliation helper is available at `scripts/reconcile-wordpress-migration-urls.mjs`. After saving the live sitemap URL-set XML and the inventory output to local files, run `node scripts/reconcile-wordpress-migration-urls.mjs --sitemap /path/to/sitemap-urlset.xml --inventory /path/to/inventory.json`. It reports matched candidate paths, candidate paths absent from the sitemap, sitemap paths with no content candidate, duplicate candidate paths, invalid sitemap URLs, and unmapped collections. It intentionally rejects sitemap index files: expand the child sitemaps to URL-set XML first. The result is a review report, not proof that a route is valid or a redirect is safe. Its fixture test is `node scripts/test-reconcile-wordpress-migration-urls.mjs`, also included in CI.
+
 ## Staging acceptance checklist
 
 - [ ] Export and retain a read-only copy of source content and media.
