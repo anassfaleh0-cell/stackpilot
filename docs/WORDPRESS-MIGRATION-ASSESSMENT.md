@@ -79,7 +79,9 @@ Build a repeatable, idempotent importer that:
 
 ## Read-only inventory helper
 
-A first read-only helper is available at `scripts/wordpress-migration-inventory.mjs`. From the repository root, run `node scripts/wordpress-migration-inventory.mjs` to print a JSON report of content file counts/sizes, invalid JSON, missing key fields, duplicate slugs, and proposed path mappings. The proposed paths are only a starting point and must be reconciled against the live sitemap; the script does not import content or modify source files. This helper has been added to the migration branch but has not yet been executed in a local checkout, so treat its output as unverified until run and reviewed.
+A first read-only helper is available at `scripts/wordpress-migration-inventory.mjs`. From the repository root, run `node scripts/wordpress-migration-inventory.mjs` to print a JSON report of content file counts/sizes, invalid JSON, invalid top-level records, missing key fields, duplicate slugs, and candidate path mappings. Candidate prefixes reflect known App Router route names where applicable; provenance metadata and unknown collections are not assigned public URLs. Unsafe slug syntax is flagged and does not receive a candidate URL. Candidate paths must still be reconciled against the generated sitemap and current routing behavior; the script does not import content or modify source files.
+
+A fixture-based regression test is available at `scripts/test-wordpress-migration-inventory.mjs`. Run it from the repository root with `node scripts/test-wordpress-migration-inventory.mjs`. It creates temporary test fixtures and checks duplicate slugs, malformed JSON, non-object records, missing fields, provenance metadata, and unsafe path candidates, then removes the fixtures. Neither the inventory nor the regression test has been executed in a local checkout in this session; run both before relying on their output.
 
 ## Staging acceptance checklist
 
