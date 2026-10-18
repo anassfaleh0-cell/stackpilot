@@ -593,6 +593,60 @@ function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: Comparison
   ]
   return [...(looksGenerated ? [] : base), ...derived].slice(0, 20)
 }
+function buildCrossCategoryFeatures(tool1: string, tool2: string, review1: ReviewContent | null, review2: ReviewContent | null): ComparisonFeature[] {
+  const productValue = (review: ReviewContent | null, value: string) => review ? value : "Not recorded in PilotStack's current profile"
+  const capabilities = (review: ReviewContent | null) =>
+    review ? review.features.filter((feature) => feature.available).slice(0, 5).map((feature) => feature.name).join(", ") || "No specific capabilities recorded" : "No matching review profile"
+  const integrations = (review: ReviewContent | null) =>
+    review?.company?.integrations?.slice(0, 6).join(", ") || "Not recorded"
+  const security = (review: ReviewContent | null) =>
+    review ? [...(review.company?.securityCertifications || []), ...(review.company?.compliance || [])].slice(0, 6).join(", ") || "Not recorded; ask the vendor" : "No matching review profile"
+  return [
+    {
+      name: "Product category",
+      tool1: productValue(review1, review1?.category || "Not recorded"),
+      tool2: productValue(review2, review2?.category || "Not recorded"),
+      tool1Detail: "Category labels describe the current dataset; confirm the product's intended job in current vendor documentation.",
+      tool2Detail: "Category labels describe the current dataset; confirm the product's intended job in current vendor documentation.",
+    },
+    {
+      name: "Primary job and positioning",
+      tool1: productValue(review1, trimText(review1?.tagline || review1?.description || "", 260)),
+      tool2: productValue(review2, trimText(review2?.tagline || review2?.description || "", 260)),
+      tool1Detail: "Compare only if this job overlaps with the workflow you need to solve.",
+      tool2Detail: "Compare only if this job overlaps with the workflow you need to solve.",
+    },
+    {
+      name: "Capabilities listed in profile",
+      tool1: capabilities(review1),
+      tool2: capabilities(review2),
+      tool1Detail: "Profile data is a starting point, not proof that a capability is included in every plan.",
+      tool2Detail: "Profile data is a starting point, not proof that a capability is included in every plan.",
+    },
+    {
+      name: "Integrations recorded",
+      tool1: integrations(review1),
+      tool2: integrations(review2),
+      tool1Detail: "Verify the exact connector, data direction, and plan limits for your workflow.",
+      tool2Detail: "Verify the exact connector, data direction, and plan limits for your workflow.",
+    },
+    {
+      name: "Pricing context",
+      tool1: productValue(review1, [review1?.pricing, review1?.priceRange].filter(Boolean).join(": ") || "Not recorded"),
+      tool2: productValue(review2, [review2?.pricing, review2?.priceRange].filter(Boolean).join(": ") || "Not recorded"),
+      tool1Detail: "Pricing can change; confirm current terms, usage limits, and total cost with the vendor.",
+      tool2Detail: "Pricing can change; confirm current terms, usage limits, and total cost with the vendor.",
+    },
+    {
+      name: "Security information recorded",
+      tool1: security(review1),
+      tool2: security(review2),
+      tool1Detail: "An empty list is not proof that a control is absent. Request current security and compliance documentation.",
+      tool2Detail: "An empty list is not proof that a control is absent. Request current security and compliance documentation.",
+    },
+  ]
+}
+
 function normalizeComparisonWinner(value: string | null, tool1: string, tool2: string): string | null {
   if (!value) return null
   if (value.toLowerCase() === tool1.toLowerCase()) return tool1
@@ -666,10 +720,13 @@ export function getComparison(slug: string): ComparisonContent | null {
     tool1Detail: sanitizeUnsupportedClaims(trimText(f.tool1Detail, 320)),
     tool2Detail: sanitizeUnsupportedClaims(trimText(f.tool2Detail, 320)),
   }))
-  const features = buildDerivedComparisonFeatures(cmp, baseFeatures)
   const review1 = getReview(cmp.tool1Slug)
   const review2 = getReview(cmp.tool2Slug)
   const crossCategory = Boolean(review1?.category && review2?.category && review1.category !== review2.category)
+  // Cross-category pages use a contextual fit matrix rather than unrelated feature rows.
+  const features = crossCategory
+    ? buildCrossCategoryFeatures(cmp.tool1, cmp.tool2, review1, review2)
+    : buildDerivedComparisonFeatures(cmp, baseFeatures)
   // A winner is not meaningful when the products solve different category-level jobs.
   // Keep the comparison available, but do not expose a misleading winner field in UI/schema.
   const winner = crossCategory ? null : normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2)
