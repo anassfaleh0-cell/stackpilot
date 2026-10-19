@@ -28,6 +28,16 @@ describe("comparison presentation avoids generic boilerplate", () => {
     ])
   })
 
+  it("filters malformed self-referential FAQ copy found in imported records", () => {
+    const result = getSpecificComparisonFaqs([
+      { question: "Which tool is better?", answer: "Square excels at Square is a finance platform, while Xero is stronger for Xero is a cloud accounting platform." },
+      { question: "How much does it cost?", answer: "Square starts at Free – $79/mo while Xero starts at $13–$45/mo. Confirm the current plan prices with each vendor." },
+    ])
+    expect(result).toEqual([
+      { question: "How much does it cost?", answer: "Square starts at Free – $79/mo while Xero starts at $13–$45/mo. Confirm the current plan prices with each vendor." },
+    ])
+  })
+
   it("preserves non-template verdicts", () => {
     const verdict = "Choose A if you need an offline-first workflow; choose B for managed collaboration."
     expect(getComparisonVerdictForDisplay(verdict, false)).toBe(verdict)
