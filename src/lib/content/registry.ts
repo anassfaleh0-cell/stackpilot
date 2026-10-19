@@ -1106,7 +1106,12 @@ export function getAllHubs(): HubContent[] {
 export function getContentTitle(type: string, slug: string): string | null {
   switch (type) {
     case "review": return getReview(slug)?.name ?? null
-    case "comparison": return getComparison(slug)?.title ?? null
+    // Keep legacy detail routes reachable, but suppress unpublished records from generic
+    // internal-link generation and other availability checks.
+    case "comparison": {
+      const comparison = getComparison(slug)
+      return comparison && comparison.published !== false ? comparison.title : null
+    }
     case "guide": return getGuide(slug)?.title ?? null
     case "blog": return getBlogPost(slug)?.title ?? null
     case "glossary": return getGlossaryTerm(slug)?.term ?? null
