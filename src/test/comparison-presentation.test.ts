@@ -1,0 +1,35 @@
+import { describe, expect, it } from "vitest"
+import { getComparisonVerdictForDisplay, getSpecificComparisonFaqs } from "@/lib/content/comparison-presentation"
+
+describe("comparison presentation avoids generic boilerplate", () => {
+  it("replaces a template verdict with a transparent evidence limitation", () => {
+    const result = getComparisonVerdictForDisplay(
+      "After thorough evaluation, Square emerges as our recommendation. We recommend evaluating both tools against your requirements.",
+      false,
+    )
+    expect(result).toContain("does not provide enough product-specific evidence")
+    expect(result).not.toContain("emerges as our recommendation")
+  })
+
+  it("explains category differences without claiming a winner", () => {
+    const result = getComparisonVerdictForDisplay("Based on the recorded comparison criteria, A wins.", true)
+    expect(result).toContain("different categories")
+    expect(result).toContain("does not provide enough product-specific evidence")
+  })
+
+  it("preserves specific FAQs and removes generic template answers", () => {
+    const result = getSpecificComparisonFaqs([
+      { question: "What are the main differences?", answer: "Our comparison table breaks down these differences." },
+      { question: "What does the free plan include?", answer: "The free plan includes two seats and basic reporting." },
+      { question: "Which is better?", answer: "Based on the recorded comparison criteria, both platforms offer strong features." },
+    ])
+    expect(result).toEqual([
+      { question: "What does the free plan include?", answer: "The free plan includes two seats and basic reporting." },
+    ])
+  })
+
+  it("preserves non-template verdicts", () => {
+    const verdict = "Choose A if you need an offline-first workflow; choose B for managed collaboration."
+    expect(getComparisonVerdictForDisplay(verdict, false)).toBe(verdict)
+  })
+})
