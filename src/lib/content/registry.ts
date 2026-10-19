@@ -755,18 +755,21 @@ export function getComparison(slug: string): ComparisonContent | null {
 export function getAllComparisons(): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
     .map((f) => getComparison(f.replace(/\.json$/, "")))
-    .filter((x): x is ComparisonContent => Boolean(x))
+    // Preserve direct URLs for compatibility, but do not promote explicitly unpublished
+    // records in directory pages or the sitemap.
+    .filter((x): x is ComparisonContent => Boolean(x) && x.published !== false)
 }
 
-/** Load only comparisons assigned to a category before building expensive derived narratives. */
+/** Load only published comparisons assigned to a category before building narratives. */
 export function getComparisonsByCategory(category: string): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
     .filter((file) => {
       const raw = readJson<ComparisonContent>(path.join(CONTENT_DIR, "comparisons", file))
-      return raw.category === category || raw.secondaryCategories?.includes(category)
+      return raw.published !== false &&
+        (raw.category === category || raw.secondaryCategories?.includes(category))
     })
     .map((file) => getComparison(file.replace(/\.json$/, "")))
-    .filter((item): item is ComparisonContent => Boolean(item))
+    .filter((item): item is ComparisonContent => Boolean(item) && item.published !== false)
 }
 
 function normalizeGuide(guide: GuideContent): GuideContent {
