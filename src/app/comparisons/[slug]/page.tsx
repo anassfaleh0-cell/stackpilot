@@ -36,7 +36,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const cmp = getComparison(slug)
   if (!cmp) return {}
   const readingTime = Math.max(3, Math.ceil(cmp.description.split(/\s+/).length / 200))
-  const noindexed = isNoindexed("comparisons", slug)
+  // Unpublished records remain reachable for legacy URL stability, but must not be indexed.
+  const noindexed = cmp.published === false || isNoindexed("comparisons", slug)
 
   return {
     ...createMetadata({ title: `${cmp.tool1} vs ${cmp.tool2} (2026): Which One Wins?`, description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated, articleSection: cmp.category, readingTime }),
