@@ -202,7 +202,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 6v6l4 2" />
               </svg>
-            } value={cmp.faqs.length.toString()} title="FAQs Answered" />
+            } value={visibleFaqs.length.toString()} title="Useful FAQs" />
           </div>
 
           {/* Feature Comparison */}
