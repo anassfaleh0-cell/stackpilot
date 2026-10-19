@@ -32,6 +32,7 @@ try {
   assert.equal(result.status, 0, result.stderr || "audit script exited non-zero");
   const report = JSON.parse(result.stdout);
   assert.equal(report.filesScanned, 2);
+  assert.equal(report.publishedFalseCount, 1);
   assert.ok(report.issueCount >= 3, JSON.stringify(report.counts));
   assert.ok(report.counts.template_verdict >= 1);
   assert.ok(report.counts.truncated_description >= 1, JSON.stringify(report.counts));
