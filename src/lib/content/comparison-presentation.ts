@@ -1,7 +1,7 @@
 const TRUNCATED_DESCRIPTION_PATTERNS = [
-  /,\\s*[A-Z][\\w.-]*\\.\\s*$/u,
-  /(?:from\\s+\\$?[\\d,.]+(?:–|-)\\$?[\\d,.]+\\s*(?:\\/mo)?\\s*(?:\\+ fees)?[,]?\\s*[A-Z][\\w.-]*\\.)\\s*$/iu,
-  /(?:\.\\.\\.|…|\\b(?:and|or|with|for|from|including))\\s*$/iu,
+  /,\s*[A-Z][\w.-]*\.\s*$/u,
+  /(?:from\s+\$?[\d,.]+(?:–|-)\$?[\d,.]+\s*(?:\/mo)?\s*(?:\+ fees)?[,]?\s*[A-Z][\w.-]*\.)\s*$/iu,
+  /(?:\.{3}|…|\b(?:and|or|with|for|from|including))\s*$/iu,
 ]
 
 export function getComparisonDescriptionForDisplay(
@@ -9,10 +9,10 @@ export function getComparisonDescriptionForDisplay(
   tool1: string,
   tool2: string,
 ): string {
-  const normalized = description.replace(/\\s+/g, " ").trim()
+  const normalized = description.replace(/\s+/g, " ").trim()
   const looksTruncated = TRUNCATED_DESCRIPTION_PATTERNS.some((pattern) => pattern.test(normalized))
   if (!normalized || looksTruncated) {
-    return `${tool1} vs ${tool2}: Compare their use cases, recorded features, and available plans. Confirm current pricing, plan limits, and integrations with each vendor before choosing.`
+    return tool1 + " vs " + tool2 + ": Compare their use cases, recorded features, and available plans. Confirm current pricing, plan limits, and integrations with each vendor before choosing."
   }
   return normalized
 }
