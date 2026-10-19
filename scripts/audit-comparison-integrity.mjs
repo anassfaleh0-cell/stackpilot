@@ -64,6 +64,20 @@ for (const file of files) {
         !("tool1Detail" in row) && !("tool2Detail" in row))) {
     issues.push({ file: relative, slug: data.slug || null, rule: "boolean_only_feature_table", detail: "Feature rows contain only true/false values without supporting details" });
   }
+  const category = typeof data.category === "string" ? data.category.toLowerCase() : "";
+  const tools = [data.tool1, data.tool2].filter(x => typeof x === "string").map(x => x.toLowerCase());
+  const accountingCategory = /finance|accounting|bookkeeping/.test(category);
+  const ecommerceCategory = /e-commerce|ecommerce|online store|retail platform/.test(category);
+  const ecommerceTool = /shopify|woocommerce|bigcommerce|magento/.test(tools.join(" "));
+  const accountingTool = /xero|quickbooks|freshbooks|sage accounting|wave accounting/.test(tools.join(" "));
+  if ((accountingCategory && ecommerceTool) || (ecommerceCategory && accountingTool)) {
+    issues.push({
+      file: relative,
+      slug: data.slug || null,
+      rule: "possible_category_tool_mismatch",
+      detail: "Category and tool names suggest different product types; human review required",
+    });
+  }
   if (typeof data.tool1 === "string" && typeof data.tool2 === "string" &&
       typeof data.winner === "string" && ![data.tool1, data.tool2].some(name => name.toLowerCase().replace(/[^a-z0-9]/g, "") === data.winner.toLowerCase().replace(/[^a-z0-9]/g, ""))) {
     issues.push({ file: relative, slug: data.slug || null, rule: "winner_not_matching_tool", detail: "Winner slug does not normalize to either tool name; verify mapping" });
