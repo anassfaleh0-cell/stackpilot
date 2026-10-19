@@ -16,6 +16,10 @@ const TEMPLATE_FAQ_PATTERNS = [
   /both offer documentation and support tiers/i,
   /both platforms prioritize user experience/i,
   /our comparison table breaks down these differences/i,
+  /excels at\\s+[A-Z][\\w.-]*\\s+is a\\b/i,
+  /stronger for\\s+[A-Z][\\w.-]*\\s+is a\\b/i,
+  /the best choice depends on your specific needs/i,
+  /specific feature needs may favor one over the other/i,
 ]
 
 export function getComparisonVerdictForDisplay(verdict: string, categoriesDiffer: boolean): string {
