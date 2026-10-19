@@ -53,7 +53,32 @@ jobs:
         run: node scripts/test-audit-comparison-integrity.mjs
 
       - name: Comparison integrity audit report (read-only)
-        run: node scripts/audit-comparison-integrity.mjs
+        run: |
+          node scripts/audit-comparison-integrity.mjs > comparison-integrity-report.json
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          const report = JSON.parse(fs.readFileSync("comparison-integrity-report.json", "utf8"));
+          const summary = [
+            "## Comparison integrity audit (read-only)",
+            "",
+            `- Comparison records scanned: **${report.filesScanned}**`,
+            `- Records marked \`published: false\`: **${report.publishedFalseCount}**`,
+            `- Invalid JSON records: **${report.invalidJsonCount}**`,
+            `- Heuristic flags: **${report.issueCount}**`,
+            "",
+            "Flags are review candidates, not proof of defects. Full report is attached as a workflow artifact."
+          ].join("\\n");
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary + "\\n");
+          console.log(summary);
+          NODE
+
+      - name: Upload comparison integrity audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: comparison-integrity-audit
+          path: comparison-integrity-report.json
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Unit tests
         run: npm test
