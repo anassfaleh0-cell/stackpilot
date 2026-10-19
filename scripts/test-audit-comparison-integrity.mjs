@@ -13,10 +13,10 @@ try {
   const dir = path.join(root, "content", "comparisons");
   await mkdir(dir, { recursive: true });
   await writeFile(path.join(dir, "bad.json"), JSON.stringify({
-    slug: "square-vs-xero", published: false,
+    slug: "shopify-vs-xero", published: false, category: "Finance & Accounting", tool1: "Shopify", tool2: "Xero",
     title: "Square vs Xero",
     description: "Incomplete description, Xero.",
-    tool1: "Square", tool2: "Xero", winner: "square",
+    winner: "Shopify",
     verdict: "After thorough evaluation, Square emerges as our recommendation.",
     features: [{ name: "User Rating", tool1: true, tool2: false }],
     faqs: [{ question: "Which is better?", answer: "Based on the recorded comparison criteria, Square edges ahead." }]
@@ -38,6 +38,7 @@ try {
   assert.ok(report.counts.truncated_description >= 1, JSON.stringify(report.counts));
   assert.ok(report.counts.boolean_only_feature_table >= 1);
   assert.ok(report.counts.marked_unpublished >= 1);
+  assert.ok(report.counts.possible_category_tool_mismatch >= 1, JSON.stringify(report.counts));
   process.stdout.write("PASS: comparison integrity audit fixture checks\\n");
 } finally {
   await rm(root, { recursive: true, force: true });
