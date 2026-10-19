@@ -67,8 +67,8 @@ jobs:
             `- Heuristic flags: **${report.issueCount}**`,
             "",
             "Flags are review candidates, not proof of defects. Full report is attached as a workflow artifact."
-          ].join("\\n");
-          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary + "\\n");
+          ].join("\n");
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary + "\n");
           console.log(summary);
           NODE
 
