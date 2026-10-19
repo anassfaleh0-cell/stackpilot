@@ -17,9 +17,13 @@ export function EditorialComparison({ tool1, tool2, features, winner, category, 
   const seed = slugSeed(slug)
   const rand = seededRandom(seed)
   const p = getPalette(category)
-  // Only explicit boolean availability values can contribute to a feature score.
-  // Text values describe plan tiers or unknowns and must not be treated as truthy wins.
-  const scoredFeatures = features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean")
+  // Boolean flags alone do not substantiate a comparative score; require context for both products.
+  const scoredFeatures = features.filter((f) =>
+    typeof f.tool1 === "boolean" &&
+    typeof f.tool2 === "boolean" &&
+    Boolean(f.tool1Detail?.trim()) &&
+    Boolean(f.tool2Detail?.trim())
+  )
   const t1w = scoredFeatures.filter((f) => f.tool1 === true && f.tool2 === false).length
   const t2w = scoredFeatures.filter((f) => f.tool2 === true && f.tool1 === false).length
   const tie = scoredFeatures.filter((f) => f.tool1 === true && f.tool2 === true).length
