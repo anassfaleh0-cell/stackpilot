@@ -35,6 +35,7 @@ const rules = [
 const files = (await walk(contentRoot)).sort();
 const issues = [];
 const invalidJson = [];
+let publishedFalseCount = 0;
 for (const file of files) {
   const relative = path.relative(root, file).split(path.sep).join("/");
   let data;
@@ -45,6 +46,7 @@ for (const file of files) {
     continue;
   }
   if (data.published === false) {
+    publishedFalseCount += 1;
     issues.push({
       file: relative,
       slug: data.slug || null,
@@ -71,6 +73,7 @@ const counts = Object.fromEntries([...new Set(issues.map(x => x.rule))].sort().m
 const report = {
   mode: "read-only heuristic; flags require human review and do not prove a factual error",
   filesScanned: files.length,
+  publishedFalseCount,
   invalidJsonCount: invalidJson.length,
   issueCount: issues.length,
   counts,
