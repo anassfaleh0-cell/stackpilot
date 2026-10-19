@@ -1,7 +1,23 @@
 import { describe, expect, it } from "vitest"
-import { getComparisonVerdictForDisplay, getSpecificComparisonFaqs } from "@/lib/content/comparison-presentation"
+import { getComparisonDescriptionForDisplay, getComparisonVerdictForDisplay, getSpecificComparisonFaqs } from "@/lib/content/comparison-presentation"
 
 describe("comparison presentation avoids generic boilerplate", () => {
+  it("replaces a clearly truncated description with a cautious useful summary", () => {
+    const result = getComparisonDescriptionForDisplay(
+      "Square vs Xero: Square helps retail teams, Xero is a cloud accounting platform, Xero.",
+      "Square",
+      "Xero",
+    )
+    expect(result).toContain("Compare their use cases")
+    expect(result).toContain("Confirm current pricing")
+    expect(result).not.toContain("cloud accounting platform, Xero.")
+  })
+
+  it("preserves a complete comparison description", () => {
+    const description = "Compare Square and Xero across use cases, recorded features, and available plans."
+    expect(getComparisonDescriptionForDisplay(description, "Square", "Xero")).toBe(description)
+  })
+
   it("replaces a template verdict with a transparent evidence limitation", () => {
     const result = getComparisonVerdictForDisplay(
       "After thorough evaluation, Square emerges as our recommendation. We recommend evaluating both tools against your requirements.",
