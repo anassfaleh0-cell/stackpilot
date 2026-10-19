@@ -21,6 +21,7 @@ import { EEATProcess } from "@/components/seo/editorial-process"
 import { ScoreBar } from "@/components/brand/patterns"
 import { NativeAd } from "@/components/ads"
 import { getComparisonDecision } from "@/lib/content/comparison-decision"
+import { getComparisonVerdictForDisplay, getSpecificComparisonFaqs } from "@/lib/content/comparison-presentation"
 
 export const dynamicParams = true
 export const revalidate = 86400
@@ -71,7 +72,8 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
     tool2Category: review2?.category,
   })
 
-  const visibleFaqs = cmp.faqs.slice(0, 8)
+  // Hide stock FAQ answers that add no product-specific information.
+  const visibleFaqs = getSpecificComparisonFaqs(cmp.faqs).slice(0, 8)
 
   // Use the comparison's own recorded feature details for decision guidance.
   // These are descriptions of the source data, not independent verification or proof of superiority.
@@ -320,7 +322,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                     {hasComparableWinner ? `Recorded pick: ${winnerLabel}` : categoriesDiffer ? "Different product categories" : "How they compare"}
                   </p>
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={stripDeadContentLinks(cmp.verdict)} /></p>
+                <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={stripDeadContentLinks(getComparisonVerdictForDisplay(cmp.verdict, categoriesDiffer))} /></p>
                 {hasComparableWinner && (
                   <div className="mt-4 pt-4 border-t border-border flex items-center gap-2 text-sm">
                     <span className="text-muted-foreground">Migration complexity:</span>
@@ -344,14 +346,18 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           <section>
             <h2 className="text-2xl font-bold tracking-tight mb-6">Frequently Asked Questions</h2>
             <div className="grid sm:grid-cols-2 gap-4 max-w-4xl">
-              {visibleFaqs.map((faq) => (
+              {visibleFaqs.length > 0 ? visibleFaqs.map((faq) => (
                 <GlassCard key={faq.question}>
                   <div className="p-4">
                     <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
                     <p className="text-sm text-muted-foreground"><RichText text={stripDeadContentLinks(faq.answer)} /></p>
                   </div>
                 </GlassCard>
-              ))}
+              )) : (
+                <p className="text-sm text-muted-foreground">
+                  The stored FAQs for this comparison are too generic to be useful. Check the linked product reviews and confirm current details with the vendors before deciding.
+                </p>
+              )}
             </div>
           </section>
 
