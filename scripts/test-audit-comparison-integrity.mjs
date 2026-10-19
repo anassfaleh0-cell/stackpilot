@@ -14,12 +14,12 @@ try {
   await mkdir(dir, { recursive: true });
   await writeFile(path.join(dir, "bad.json"), JSON.stringify({
     slug: "shopify-vs-xero", published: false, category: "Finance & Accounting", tool1: "Shopify", tool2: "Xero",
-    title: "Square vs Xero",
+    title: "Shopify vs Xero",
     description: "Incomplete description, Xero.",
     winner: "Shopify",
-    verdict: "After thorough evaluation, Square emerges as our recommendation.",
+    verdict: "After thorough evaluation, Shopify emerges as our recommendation.",
     features: [{ name: "User Rating", tool1: true, tool2: false }],
-    faqs: [{ question: "Which is better?", answer: "Based on the recorded comparison criteria, Square edges ahead." }]
+    faqs: [{ question: "Which is better?", answer: "Based on the recorded comparison criteria, Shopify edges ahead." }]
   }), "utf8");
   await writeFile(path.join(dir, "good.json"), JSON.stringify({
     slug: "asana-vs-clickup", title: "Asana vs ClickUp",
