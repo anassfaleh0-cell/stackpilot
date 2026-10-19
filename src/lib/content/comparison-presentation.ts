@@ -1,3 +1,5 @@
+import type { FAQItem } from "@/types/content"
+
 const TRUNCATED_DESCRIPTION_PATTERNS = [
   /,\s*[A-Z][\w.-]*\.\s*$/u,
   /(?:from\s+\$?[\d,.]+(?:–|-)\$?[\d,.]+\s*(?:\/mo)?\s*(?:\+ fees)?[,]?\s*[A-Z][\w.-]*\.)\s*$/iu,
@@ -16,8 +18,6 @@ export function getComparisonDescriptionForDisplay(
   }
   return normalized
 }
-
-import type { FAQItem } from "@/types/content"
 
 const TEMPLATE_VERDICT_PATTERNS = [
   /after thorough evaluation/i,
