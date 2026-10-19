@@ -107,7 +107,7 @@ Read-only fetches were performed against the live site; these observations are a
 
 1. Run the local inventory and URL reconciliation tools against a saved, complete sitemap XML and inventory JSON; inspect all unmatched, duplicate, and unmapped paths.
 2. Crawl all sitemap URLs for status, canonical, robots directives, title/description, content length, and internal-link failures. Do not infer the status of all 1,994 URLs from this sample.
-3. Prioritize factual-integrity remediation for comparison cards and records: ensure category compatibility, validate each product's pricing/rating/review-count source and timestamp, remove empty fragments and boilerplate placeholders, and avoid implying first-hand testing without evidence.
+3. Prioritize factual-integrity remediation for comparison cards and records: ensure category compatibility, validate each product's pricing/rating/review-count source and timestamp, remove empty fragments and boilerplate placeholders, and avoid implying first-hand testing without evidence. The read-only `scripts/audit-comparison-integrity.mjs` report now also emits a `publishedFalseCount` for comparison records marked `published: false` and flags likely category/tool-type mismatches for human review. These are triage signals, not proof of defects; do not change route/sitemap publication behavior or bulk-edit records until the affected corpus and intended publishing policy have been measured.
 4. Re-run the production build, tests, and representative page audits after fixes; preserve the current URLs and ads.txt line.
 
 ## Staging acceptance checklist
