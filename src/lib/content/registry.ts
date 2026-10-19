@@ -755,21 +755,18 @@ export function getComparison(slug: string): ComparisonContent | null {
 export function getAllComparisons(): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
     .map((f) => getComparison(f.replace(/\.json$/, "")))
-    // Preserve direct URLs for compatibility, but do not promote explicitly unpublished
-    // records in directory pages or the sitemap.
-    .filter((x): x is ComparisonContent => Boolean(x) && x.published !== false)
+    .filter((x): x is ComparisonContent => Boolean(x))
 }
 
-/** Load only published comparisons assigned to a category before building narratives. */
+/** Load only comparisons assigned to a category before building expensive derived narratives. */
 export function getComparisonsByCategory(category: string): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
     .filter((file) => {
       const raw = readJson<ComparisonContent>(path.join(CONTENT_DIR, "comparisons", file))
-      return raw.published !== false &&
-        (raw.category === category || raw.secondaryCategories?.includes(category))
+      return raw.category === category || raw.secondaryCategories?.includes(category)
     })
     .map((file) => getComparison(file.replace(/\.json$/, "")))
-    .filter((item): item is ComparisonContent => Boolean(item) && item.published !== false)
+    .filter((item): item is ComparisonContent => Boolean(item))
 }
 
 function normalizeGuide(guide: GuideContent): GuideContent {
@@ -1106,12 +1103,7 @@ export function getAllHubs(): HubContent[] {
 export function getContentTitle(type: string, slug: string): string | null {
   switch (type) {
     case "review": return getReview(slug)?.name ?? null
-    // Keep legacy detail routes reachable, but suppress unpublished records from generic
-    // internal-link generation and other availability checks.
-    case "comparison": {
-      const comparison = getComparison(slug)
-      return comparison && comparison.published !== false ? comparison.title : null
-    }
+    case "comparison": return getComparison(slug)?.title ?? null
     case "guide": return getGuide(slug)?.title ?? null
     case "blog": return getBlogPost(slug)?.title ?? null
     case "glossary": return getGlossaryTerm(slug)?.term ?? null
