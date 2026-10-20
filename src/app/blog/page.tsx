@@ -15,8 +15,8 @@ import { getPagination, parsePageParam } from "@/lib/pagination"
 import { PaginationNav } from "@/components/ui/pagination-nav"
 
 export const metadata = createMetadata({
-  title: "Software Blog — Expert Reviews, Research & Buying Guides",
-  description: "Expert insights, hands-on tutorials, and in-depth analysis on software tools, productivity strategies, and technology trends to help your business stay ahead.",
+  title: "Software Blog — Reviews, Research & Buying Guides",
+  description: "Practical articles on software tools, workflows, buying decisions, and technology trends to help teams compare options and verify important details.",
   path: "/blog",
 })
 
@@ -30,7 +30,7 @@ export default async function BlogPage({ searchParams }: { searchParams?: Promis
 
   return (
     <>
-      <CollectionPageSchema name="Blog" description="Expert insights, tutorials, and analysis on software tools and technology trends" url={`${site.url}/blog`} />
+      <CollectionPageSchema name="Blog" description="Articles on software tools, workflows, buying decisions, and technology trends" url={`${site.url}/blog`} />
       <ItemListSchema items={pagePosts.map(p => ({ name: p.title, url: `${site.url}/blog/${p.slug}` }))} url={`${site.url}/blog`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Blog", href: "/blog" }]} />
       <Container className="pt-8">
@@ -44,7 +44,7 @@ export default async function BlogPage({ searchParams }: { searchParams?: Promis
             <Badge variant="default" className="mb-4">Blog</Badge>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Insights &amp; analysis</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Expert perspectives on software tools, productivity strategies, and technology trends.
+              Practical perspectives on software tools, productivity workflows, and technology decisions.
             </p>
           </SectionHeader>
         </Container>
