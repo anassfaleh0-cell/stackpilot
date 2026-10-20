@@ -62,7 +62,7 @@ describe("review score provenance", () => {
     expect(industries).not.toContain("Expert-curated")
     expect(statistics).not.toContain("Verified statistics")
     expect(statistics).not.toContain("updated yearly")
-    expect(statisticsDetail).toContain("does not imply independent verification of every figure")
+    expect(statisticsDetail).toContain("Figures without a direct source link are withheld until they can be checked")
     expect(statisticsDetail).toContain("confirm the exact number, definition, geography, and publication date")
     expect(statisticsDetail).not.toContain("legacyStats")
     expect(statisticsDetail).toContain("Figure not verified")
