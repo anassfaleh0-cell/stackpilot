@@ -15,7 +15,7 @@ export function getComparisonDescriptionForDisplay(
   const looksTruncated = TRUNCATED_DESCRIPTION_PATTERNS.some((pattern) => pattern.test(normalized))
   // Imported descriptions sometimes present a stored dataset label as an editorial
   // recommendation. Do not publish winner claims as metadata without validated evidence.
-  const claimsWinner = /\\b(?:our|the)\\s+(?:overall\\s+)?pick\\b|\\b(?:overall\\s+)?winner\\b|\\bwe recommend\\b|\\b(?:is|as)\\s+(?:our|the)\\s+(?:top\\s+)?choice\\b/i.test(normalized)
+  const claimsWinner = /\b(?:our|the)\s+(?:overall\s+)?pick\b|\b(?:overall\s+)?winner\b|\bwe recommend\b|\b(?:is|as)\s+(?:our|the)\s+(?:top\s+)?choice\b/i.test(normalized)
   if (!normalized || looksTruncated || claimsWinner) {
     return tool1 + " vs " + tool2 + ": Compare their use cases, recorded features, and available plans. Confirm current pricing, plan limits, and integrations with each vendor before choosing."
   }
