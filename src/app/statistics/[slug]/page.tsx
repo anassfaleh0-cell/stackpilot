@@ -36,7 +36,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
     sections: registry.sections.map((s) => ({
       title: s.title,
       body: s.body,
-      stats: s.stats.map((st) => ({ value: st.value, label: st.label, source: st.source, sourceUrl: st.sourceUrl || "#" })),
+      stats: s.stats.map((st) => ({ value: st.value, label: st.label, source: st.source, sourceUrl: typeof st.sourceUrl === "string" ? st.sourceUrl : "" })),
     })),
   } : null
 
@@ -63,12 +63,12 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
               <span>Last updated: {page.lastUpdated}</span>
               <span className="text-border-light">|</span>
               <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
-              <span>{page.sections.reduce((a, s) => a + s.stats.length, 0)} data points</span>
+              <span>{page.sections.reduce((a, s) => a + s.stats.length, 0)} statistic records</span>
             </div>
 
             <div className="mb-6 p-3 rounded-lg bg-primary-subtle/10 border border-primary/20 text-xs text-muted-foreground">
               <span className="font-semibold text-foreground">Source-linked statistics</span>
-              {" — "}Source links provide context and may lead to publisher pages rather than the exact original report. This page does not imply independent verification of every figure; confirm the exact number, definition, geography, and publication date in the original source before relying on it. Last updated {page.lastUpdated}.
+              {" — "}Source links may lead to publisher pages rather than the exact original report. Figures without a direct source link are withheld until they can be checked; confirm the definition, geography, and publication date before relying on a number. Last updated {page.lastUpdated}.
             </div>
 
             {page.sections.map((section, i) => (
@@ -85,11 +85,15 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
                   <div className="grid sm:grid-cols-2 gap-4">
                     {section.stats.map((stat) => (
                       <div key={stat.label} className="rounded-xl border border-border bg-card p-5 hover:border-primary/20 transition-colors">
-                        <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">{stat.value}</div>
+                        {stat.sourceUrl ? <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">{stat.value}</div> : <div className="text-lg font-semibold text-muted-foreground mb-1">Figure not verified</div>}
                         <p className="text-sm text-muted-foreground mb-3">{stat.label}</p>
-                        <a href={stat.sourceUrl} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 text-xs text-primary hover:underline">
-                          Source: {stat.source} <ExternalLink size={10} />
-                        </a>
+                        {stat.sourceUrl ? (
+                          <a href={stat.sourceUrl} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 text-xs text-primary hover:underline">
+                            Source: {stat.source} <ExternalLink size={10} />
+                          </a>
+                        ) : (
+                          <p className="text-xs text-muted-foreground">Source named: {stat.source || "not recorded"}. A direct source link is missing, so the numeric figure is withheld.</p>
+                        )}
                       </div>
                     ))}
                   </div>
