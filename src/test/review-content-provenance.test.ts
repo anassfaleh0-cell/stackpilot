@@ -21,6 +21,32 @@ describe("review content provenance", () => {
     expect(faqs[0].answer).not.toMatch(/\\$29/)
   })
 
+  it("filters generated security/compliance FAQ claims and sanitizes pricing in remaining FAQs", () => {
+    const faqs = getVisibleReviewFaqs([
+      {
+        question: "Is Example secure?",
+        answer: "Example maintains SOC 2 Type II certifications. Check the vendor's current security documentation for details.",
+      },
+      {
+        question: "Is Example GDPR compliant?",
+        answer: "Yes, Example is GDPR compliant with data processing agreements and data residency options.",
+      },
+      {
+        question: "How much does Example cost?",
+        answer: "Plans start at $29/month; confirm current pricing with the vendor.",
+      },
+      {
+        question: "Who should evaluate Example?",
+        answer: "Teams should compare the current feature set against their requirements before choosing.",
+      },
+    ])
+
+    expect(faqs).toHaveLength(2)
+    expect(faqs[0].answer).not.toContain("$29")
+    expect(faqs[0].answer).toContain("pricing not independently verified")
+    expect(faqs[1].answer).toContain("compare the current feature set")
+  })
+
   it("shows diagrams only when the corresponding evidence flag is set", () => {
     const visible = getVisibleReviewContent(diagrams, true, true)
     expect(visible.map((section) => section.body)).toEqual(["pricing-ladder", "feature-radar", "implementation-flow"])
