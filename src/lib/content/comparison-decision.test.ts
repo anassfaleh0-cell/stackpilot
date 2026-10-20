@@ -34,6 +34,22 @@ describe("getComparisonDecision", () => {
     })
   })
 
+  it("does not claim a winner when one linked review has no category evidence", () => {
+    expect(getComparisonDecision({
+      winner: "1password",
+      tool1: "1Password",
+      tool1Slug: "1password",
+      tool1Category: "Security & Compliance",
+      tool2: "Appwrite",
+      tool2Slug: "appwrite",
+      tool2Category: null,
+    })).toEqual({
+      categoriesDiffer: false,
+      winnerLabel: "1Password",
+      hasComparableWinner: false,
+    })
+  })
+
   it("does not accept a winner that does not match either compared product", () => {
     expect(getComparisonDecision({
       winner: "unknown-product",
