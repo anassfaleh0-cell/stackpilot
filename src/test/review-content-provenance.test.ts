@@ -16,9 +16,9 @@ describe("review content provenance", () => {
   it("removes currency claims from visible review copy until pricing is verified", () => {
     expect(stripUnverifiedPriceClaims("Plan starts at $29/month")).toBe("Plan pricing not independently verified")
     const content = getVisibleReviewContent([{ title: "Overview", body: "The plan starts at $29/month." }], false)
-    expect(content[0].body).not.toMatch(/\\$29/)
+    expect(content[0].body).not.toContain("$29")
     const faqs = getVisibleReviewFaqs([{ question: "How much does it cost?", answer: "Pricing starts at $29/month." }], false)
-    expect(faqs[0].answer).not.toMatch(/\\$29/)
+    expect(faqs[0].answer).not.toContain("$29")
   })
 
   it("filters generated security/compliance FAQ claims and sanitizes pricing in remaining FAQs", () => {
