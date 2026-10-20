@@ -64,6 +64,8 @@ describe("review score provenance", () => {
     expect(statistics).not.toContain("updated yearly")
     expect(statisticsDetail).toContain("does not imply independent verification of every figure")
     expect(statisticsDetail).toContain("confirm the exact number, definition, geography, and publication date")
+    expect(statisticsDetail).not.toContain("legacyStats")
+    expect(statisticsDetail).toContain("if (!page) notFound()")
     expect(home).toContain('getAllComparisons().filter((cmp) => isContentAvailable("comparison", cmp.slug))')
     expect(home).toContain('getAllBlogPosts().filter((post) => isContentAvailable("blog", post.slug))')
     expect(home).toContain('getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug))')
