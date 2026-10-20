@@ -29,9 +29,17 @@ export function getComparisonDecision(input: ComparisonDecisionInput): Compariso
   const tool2IsWinner = Boolean(winner && [input.tool2Slug, input.tool2].some((value) => value.toLowerCase() === winner))
   const winnerLabel = tool1IsWinner ? input.tool1 : tool2IsWinner ? input.tool2 : null
 
+  const categoriesComparable = Boolean(
+    input.tool1Category &&
+    input.tool2Category &&
+    input.tool1Category === input.tool2Category
+  )
+
   return {
     categoriesDiffer,
     winnerLabel,
-    hasComparableWinner: Boolean(winnerLabel && !categoriesDiffer),
+    // Missing category evidence must not silently turn a stored winner into a
+    // comparable recommendation. Only allow it when both linked reviews agree.
+    hasComparableWinner: Boolean(winnerLabel && categoriesComparable),
   }
 }
