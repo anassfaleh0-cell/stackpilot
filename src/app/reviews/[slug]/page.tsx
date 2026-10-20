@@ -22,8 +22,6 @@ import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
 import { isNoindexed } from "@/lib/noindex"
 import { BannerAd, NativeAd, InFeedAd } from "@/components/ads"
 
-const TOTAL_REVIEWS = getAllReviews().length
-
 // Keep review pages focused on substantive, tool-specific sections.
 // These legacy sections duplicate structured fields and were generated at scale.
 const HIDDEN_REVIEW_SECTION_TITLES = new Set([
