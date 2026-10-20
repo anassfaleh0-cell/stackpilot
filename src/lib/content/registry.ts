@@ -700,6 +700,12 @@ export function getComparison(slug: string): ComparisonContent | null {
     return null
   }
   const rawComparison = readJson<ComparisonContent>(file)
+  // Unpublished records must not resolve as public pages or enter listings/sitemaps.
+  // Returning null here also makes internal-link availability checks fail closed.
+  if (!rawComparison || rawComparison.published === false) {
+    comparisonCache.set(slug, null)
+    return null
+  }
   const resolveToolSlug = (name: string, explicitSlug?: string): string => {
     if (explicitSlug && fs.existsSync(path.join(CONTENT_DIR, "reviews", explicitSlug + ".json"))) return explicitSlug
     const normalizedName = String(name || "").trim().toLowerCase()
