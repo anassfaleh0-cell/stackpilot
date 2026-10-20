@@ -24,9 +24,10 @@ export function getComparisonDecision(input: ComparisonDecisionInput): Compariso
     input.tool2Category &&
     input.tool1Category !== input.tool2Category
   )
-  const winner = input.winner?.trim().toLowerCase()
-  const tool1IsWinner = Boolean(winner && [input.tool1Slug, input.tool1].some((value) => value.toLowerCase() === winner))
-  const tool2IsWinner = Boolean(winner && [input.tool2Slug, input.tool2].some((value) => value.toLowerCase() === winner))
+  const normalizeProductKey = (value: string) => value.trim().toLowerCase().replace(/[^a-z0-9]/g, "")
+  const winner = input.winner ? normalizeProductKey(input.winner) : ""
+  const tool1IsWinner = Boolean(winner && [input.tool1Slug, input.tool1].some((value) => normalizeProductKey(value) === winner))
+  const tool2IsWinner = Boolean(winner && [input.tool2Slug, input.tool2].some((value) => normalizeProductKey(value) === winner))
   const winnerLabel = tool1IsWinner ? input.tool1 : tool2IsWinner ? input.tool2 : null
 
   const categoriesComparable = Boolean(
