@@ -18,6 +18,8 @@ describe("review score provenance", () => {
     expect(source).not.toContain("({tool.reviewCount.toLocaleString()} reviews)")
     expect(source).not.toContain("const isBestValue = tool.pricing")
     expect(source).not.toContain("<Badge variant=\"warning\">Best Value</Badge>")
+    expect(source).toContain("Highest Editorial Score in Category")
+    expect(source).not.toContain("Best in Category")
   })
   it("keeps commercial and expertise claims consistent with published disclosures", () => {
     const home = fs.readFileSync(HOME_PAGE, "utf8")
@@ -34,6 +36,10 @@ describe("review score provenance", () => {
     expect(reviewsIndex).not.toContain("unbiased reviews of the best software tools")
     expect(methodology).not.toContain("no paid placements")
     expect(methodology).not.toContain("no vendor can pay for placement")
+    expect(home).toContain('getAllComparisons().filter((cmp) => isContentAvailable("comparison", cmp.slug))')
+    expect(home).toContain('getAllBlogPosts().filter((post) => isContentAvailable("blog", post.slug))')
+    expect(home).toContain('getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug))')
+    expect(home).toContain('getAllResearch().filter((item) => isContentAvailable("research", item.slug))')
   })
 
 })
