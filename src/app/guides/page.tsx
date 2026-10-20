@@ -28,7 +28,7 @@ export default async function GuidesPage({ searchParams }: { searchParams?: Prom
 
   return (
     <>
-      <CollectionPageSchema name="Expert Guides" description="Comprehensive software buying guides and implementation tutorials" url={`${site.url}/guides`} />
+      <CollectionPageSchema name="Software Guides" description="Software buying guides, implementation tutorials, and practical decision support" url={`${site.url}/guides`} />
       <ItemListSchema items={pageGuides.map(g => ({ name: g.title, url: `${site.url}/guides/${g.slug}` }))} url={`${site.url}/guides`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Guides", href: "/guides" }]} />
       <Container className="pt-8">
@@ -40,7 +40,7 @@ export default async function GuidesPage({ searchParams }: { searchParams?: Prom
         <Container className="relative py-16 sm:py-20">
           <SectionHeader className="mb-0">
             <Badge variant="default" className="mb-4">Guides</Badge>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Expert guides</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Software guides</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
               Structured, actionable guides to help you make smarter software decisions at every stage.
             </p>
