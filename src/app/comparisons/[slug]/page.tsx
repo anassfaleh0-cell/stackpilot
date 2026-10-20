@@ -70,7 +70,9 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   const review1 = getReview(cmp.tool1Slug)
   const review2 = getReview(cmp.tool2Slug)
   const { categoriesDiffer, winnerLabel, hasComparableWinner } = getComparisonDecision({
-    winner: cmp.winner,
+    // A stored winner is not enough: require at least one feature with recorded,
+    // contextual availability evidence for both products before showing a pick.
+    winner: scoredFeatures.length > 0 ? cmp.winner : null,
     tool1: cmp.tool1,
     tool1Slug: cmp.tool1Slug,
     tool1Category: review1?.category,
