@@ -16,6 +16,8 @@ describe("review score provenance", () => {
     expect(source).toContain("this is PilotStack's assessment, not a third-party review aggregate")
     expect(source).not.toContain("across ${tool.reviewCount.toLocaleString()} recorded reviews")
     expect(source).not.toContain("({tool.reviewCount.toLocaleString()} reviews)")
+    expect(source).not.toContain("const isBestValue = tool.pricing")
+    expect(source).not.toContain("<Badge variant=\"warning\">Best Value</Badge>")
   })
   it("keeps commercial and expertise claims consistent with published disclosures", () => {
     const home = fs.readFileSync(HOME_PAGE, "utf8")
