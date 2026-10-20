@@ -72,7 +72,7 @@ export default function MethodologyPage() {
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                Our editorial score is calculated from nine recorded category scores on a 1-5 scale, averaged and rounded to one decimal. The dataset may include vendor documentation and published pricing information, but a recorded value is not proof of recent independent verification or direct product use in a live environment. Unsupported claims should be qualified or omitted. We do not sell editorial placement.
+                Our editorial score is calculated from nine recorded category scores on a 1-5 scale, averaged and rounded to one decimal. The dataset may include vendor documentation and published pricing information, but a recorded value is not proof of recent independent verification or direct product use in a live environment. Unsupported claims should be qualified or omitted. Paid vendor services, where available, are separate from editorial scores, rankings, and recommendations; payment does not guarantee a favorable assessment.
               </p>
             </div>
 
@@ -83,19 +83,19 @@ export default function MethodologyPage() {
                 <li>Editorial scores may be reused across relevant pages; third-party review counts are not represented as verified averages</li>
                 <li>Publication and content-update dates are shown where maintained; they do not guarantee a full product re-test</li>
                 <li>Unsupported facts should be qualified or omitted rather than stated as confirmed</li>
-                <li>Commercial relationships are disclosed where applicable and do not buy positive scores or placement</li>
+                <li>Commercial relationships are disclosed where applicable and do not buy positive scores or editorial rankings</li>
               </ul>
             </div>
 
             <div className="key-takeaways mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Key Takeaways</h2>
               <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                <li>We cover tools readers actively evaluate — no paid placements</li>
+                <li>Vendor services, where available, are separate from editorial coverage and clearly identified</li>
                 <li>Structured records help keep reused values consistent, but source freshness can vary</li>
                 <li>The overall score is the mean of those nine scores, rounded to one decimal; the calculation is reproducible, while the evidence behind scores still has limitations</li>
                 <li>Certification and company facts with no source are shown as unverified or left out</li>
                 <li>Dates are shown where maintained and describe content records, not necessarily live-product testing</li>
-                <li>Published independence policy: no vendor can pay for placement</li>
+                <li>Vendors cannot buy editorial scores, rankings, or favorable recommendations</li>
               </ul>
             </div>
 
