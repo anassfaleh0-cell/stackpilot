@@ -11,7 +11,7 @@ import { ArrowRight } from "lucide-react"
 
 export const metadata = createMetadata({
   title: "Software Alternatives & Competitors 2026",
-  description: "Comprehensive comparisons of software alternatives across every major category. Find the best tools for your specific needs with expert analysis and side-by-side feature comparisons.",
+  description: "Compare software alternatives across categories using recorded product details, feature notes, and practical trade-offs for your needs.",
   path: "/alternatives",
 })
 
@@ -29,11 +29,11 @@ export default async function AlternativesPage({ searchParams }: { searchParams?
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Alternatives", href: "/alternatives" }]} />
-      <CollectionPageSchema name="Software Alternatives" description="Find the best software alternatives with expert comparisons and feature analysis." url={`${site.url}/alternatives`} />
+      <CollectionPageSchema name="Software Alternatives" description="Software alternatives with recorded product details, feature notes, and practical trade-offs" url={`${site.url}/alternatives`} />
       <Container className="pt-8 pb-16">
         <Breadcrumbs items={[{ name: "Alternatives" }]} />
         <h1 className="text-3xl font-bold tracking-tight mt-4 mb-2">Software Alternatives & Competitors</h1>
-        <p className="text-muted-foreground mb-8">Expert-curated alternatives for every major software category. Find the right tool for your needs.</p>
+        <p className="text-muted-foreground mb-8">Compare alternatives by category and evaluate features, workflow fit, pricing, and trade-offs before choosing.</p>
         {Object.entries(grouped).map(([cat, alts]) => (
           <section key={cat} className="mb-10">
             <h2 className="text-xl font-bold mb-4">{cat}</h2>
