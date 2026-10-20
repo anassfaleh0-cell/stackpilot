@@ -14,7 +14,7 @@ import { BrandPattern } from "@/components/brand/patterns"
 
 export const metadata = createMetadata({
   title: "Best Software Tools by Category",
-  description: "Expert-curated lists of the best software tools across every category. Editor-reviewed, research-backed recommendations for every business need.",
+  description: "Compare software options by category using recorded product details, selection criteria, and practical trade-offs for business buying decisions.",
   path: "/best",
 })
 
@@ -26,7 +26,7 @@ export default async function BestPage({ searchParams }: { searchParams?: Promis
 
   return (
     <>
-      <CollectionPageSchema name="Best Software Tools" description="Editor-reviewed best software recommendations by category" url={`${site.url}/best`} />
+      <CollectionPageSchema name="Best Software Tools" description="Software options by category with recorded product details, selection criteria, and trade-offs" url={`${site.url}/best`} />
       <ItemListSchema items={pageItems.map(p => ({ name: p.title, url: `${site.url}/best/${p.slug}` }))} url={`${site.url}/best`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Best Software", href: "/best" }]} />
       <Container className="pt-8">
@@ -39,7 +39,7 @@ export default async function BestPage({ searchParams }: { searchParams?: Promis
             <Badge variant="default" className="mb-4">Best of the Best</Badge>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Best software by category</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Research-backed, editor-reviewed recommendations for every software category. Updated quarterly.
+              Compare software options by category using recorded product details, selection criteria, and practical trade-offs. Verify current features and pricing with vendors before choosing.
             </p>
           </SectionHeader>
         </Container>
