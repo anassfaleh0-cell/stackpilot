@@ -18,6 +18,17 @@ describe("comparison presentation avoids generic boilerplate", () => {
     expect(getComparisonDescriptionForDisplay(description, "Square", "Xero")).toBe(description)
   })
 
+  it("replaces imported overall-pick claims with a neutral evidence-led description", () => {
+    const result = getComparisonDescriptionForDisplay(
+      "Square vs Xero: Square is our overall pick for Finance & Accounting teams — Square 4.3/5, Xero 4.3/5.",
+      "Square",
+      "Xero",
+    )
+    expect(result).toContain("Compare their use cases")
+    expect(result).toContain("Confirm current pricing")
+    expect(result).not.toContain("overall pick")
+  })
+
   it("replaces a template verdict with a transparent evidence limitation", () => {
     const result = getComparisonVerdictForDisplay(
       "After thorough evaluation, Square emerges as our recommendation. We recommend evaluating both tools against your requirements.",
@@ -75,6 +86,15 @@ describe("comparison presentation avoids generic boilerplate", () => {
     expect(result).toEqual([
       { question: "What does the free plan include?", answer: "The free plan includes two seats and basic reporting for small teams that need a simple starting point." },
     ])
+  })
+
+  it("does not publish an unsupported stored dataset winner as an editorial verdict", () => {
+    const result = getComparisonVerdictForDisplay(
+      "Square is the recorded winner in the PilotStack comparison dataset.",
+      false,
+    )
+    expect(result).toContain("does not provide enough product-specific evidence")
+    expect(result).not.toContain("recorded winner")
   })
 
   it("preserves non-template verdicts", () => {

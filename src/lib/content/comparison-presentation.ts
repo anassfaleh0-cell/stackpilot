@@ -13,7 +13,10 @@ export function getComparisonDescriptionForDisplay(
 ): string {
   const normalized = description.replace(/\s+/g, " ").trim()
   const looksTruncated = TRUNCATED_DESCRIPTION_PATTERNS.some((pattern) => pattern.test(normalized))
-  if (!normalized || looksTruncated) {
+  // Imported descriptions sometimes present a stored dataset label as an editorial
+  // recommendation. Do not publish winner claims as metadata without validated evidence.
+  const claimsWinner = /\b(?:our|the)\s+(?:overall\s+)?pick\b|\b(?:overall\s+)?winner\b|\bwe recommend\b|\b(?:is|as)\s+(?:our|the)\s+(?:top\s+)?choice\b/i.test(normalized)
+  if (!normalized || looksTruncated || claimsWinner) {
     return tool1 + " vs " + tool2 + ": Compare their use cases, recorded features, and available plans. Confirm current pricing, plan limits, and integrations with each vendor before choosing."
   }
   return normalized
@@ -24,6 +27,9 @@ const TEMPLATE_VERDICT_PATTERNS = [
   /emerges as our recommendation/i,
   /based on the recorded comparison criteria/i,
   /we recommend evaluating both tools against your requirements/i,
+  /\b(?:is|was) the recorded (?:pick|winner)\b/i,
+  /\b(?:recorded|source dataset) (?:pick|winner)\s*:/i,
+  /\b(?:is|was) our (?:overall )?pick\b/i,
 ]
 
 const TEMPLATE_FAQ_PATTERNS = [
