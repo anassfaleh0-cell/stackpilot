@@ -374,8 +374,8 @@ export default function HomePage() {
                   <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold mb-0.5">Independent & Unbiased</h3>
-                  <p className="text-xs text-muted-foreground">No paid placements. No vendor influence.</p>
+                  <h3 className="text-sm font-semibold mb-0.5">Editorial Separation</h3>
+                  <p className="text-xs text-muted-foreground">Commercial relationships are disclosed; scores follow our published rubric.</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -453,10 +453,10 @@ export default function HomePage() {
           <div className="mx-auto max-w-xl text-center mb-8">
             <Badge variant="default" className="mb-4">Newsletter</Badge>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-balance">
-              Expert advice, straight to your inbox
+              Practical software insights, straight to your inbox
             </h2>
             <p className="text-muted-foreground text-pretty">
-              Independent research and software reviews, straight to your inbox. No spam, unsubscribe anytime.
+              Software research and reviews to help you compare options. No spam; unsubscribe anytime.
             </p>
           </div>
           <div className="mx-auto max-w-md">
