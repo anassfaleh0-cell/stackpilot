@@ -26,8 +26,11 @@ describe("review content provenance", () => {
       "Starts at €49/month",
       "From £1,200/year",
       "A $29 per seat plan",
+      "USD 29/month",
+      "49 EUR per user",
+      "120 GBP/year",
     ]) {
-      expect(stripUnverifiedPriceClaims(claim)).not.toMatch(/[$€£]\s?\d/)
+      expect(stripUnverifiedPriceClaims(claim)).not.toMatch(/[$€£]\s?\d|\b(?:USD|EUR|GBP)\s?\d|\b\d[\d,]*(?:\.\d+)?\s?(?:USD|EUR|GBP)\b/i)
     }
 
     expect(stripUnverifiedPriceClaims("Includes a free trial")).toContain("trial availability not independently verified")
