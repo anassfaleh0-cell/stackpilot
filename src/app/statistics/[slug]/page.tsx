@@ -12,75 +12,6 @@ import { ArrowRight, ExternalLink, Code } from "lucide-react"
 import { isNoindexed } from "@/lib/noindex"
 import { InFeedAd } from "@/components/ads"
 
-const legacyStats: Record<string, {
-  title: string; description: string; lastUpdated: string;
-  sections: { title: string; body?: string; stats: { value: string; label: string; source: string; sourceUrl: string }[] }[]
-}> = {
-  "crm-software": {
-    title: "CRM Software Statistics 2026",
-    description: "Comprehensive CRM software statistics including market size, adoption rates, ROI data, and usage statistics. All data sourced from verified industry reports.",
-    lastUpdated: "July 2026",
-    sections: [
-      { title: "Market Size & Growth", stats: [
-        { value: "$87.3B", label: "Global CRM market size in 2026", source: "Gartner", sourceUrl: "https://www.gartner.com/en/documents/" },
-        { value: "13.4%", label: "Year-over-year CRM market growth rate", source: "Grand View Research", sourceUrl: "https://www.grandviewresearch.com/" },
-        { value: "$145B", label: "Projected CRM market size by 2030", source: "Statista", sourceUrl: "https://www.statista.com/" },
-        { value: "91%", label: "of companies with 10+ employees use a CRM", source: "Salesforce", sourceUrl: "https://www.salesforce.com/resources/" },
-      ]},
-      { title: "Adoption & Usage", stats: [
-        { value: "74%", label: "of CRM users say it improved customer relationships", source: "Capterra", sourceUrl: "https://www.capterra.com/crm-software/" },
-        { value: "47%", label: "of CRM implementations fail due to low adoption", source: "Gartner", sourceUrl: "https://www.gartner.com/" },
-        { value: "38%", label: "average increase in sales productivity with CRM", source: "Salesforce", sourceUrl: "https://www.salesforce.com/resources/" },
-        { value: "3.5", label: "months average time to full CRM adoption", source: "HubSpot", sourceUrl: "https://www.hubspot.com/resources/" },
-      ]},
-      { title: "ROI & Business Impact", stats: [
-        { value: "245%", label: "average CRM ROI over 3 years", source: "Nucleus Research", sourceUrl: "https://nucleusresearch.com/" },
-        { value: "$8.71", label: "return per dollar spent on CRM", source: "Nucleus Research", sourceUrl: "https://nucleusresearch.com/" },
-        { value: "29%", label: "increase in sales revenue with CRM", source: "Salesforce", sourceUrl: "https://www.salesforce.com/resources/" },
-        { value: "42%", label: "reduction in customer churn with CRM", source: "Invesp", sourceUrl: "https://www.invespcro.com/" },
-      ]},
-    ],
-  },
-  "project-management": {
-    title: "Project Management Software Statistics 2026",
-    description: "Verified statistics on project management software adoption, productivity impact, and market trends with original sources.",
-    lastUpdated: "July 2026",
-    sections: [
-      { title: "Market Size & Growth", stats: [
-        { value: "$9.8B", label: "Global project management software market (2026)", source: "Grand View Research", sourceUrl: "https://www.grandviewresearch.com/" },
-        { value: "10.7%", label: "CAGR projected through 2030", source: "Grand View Research", sourceUrl: "https://www.grandviewresearch.com/" },
-        { value: "77%", label: "of high-performing projects use PM software", source: "PMI", sourceUrl: "https://www.pmi.org/" },
-        { value: "89%", label: "of organizations use at least one PM tool", source: "Capterra", sourceUrl: "https://www.capterra.com/" },
-      ]},
-      { title: "Productivity & Efficiency", stats: [
-        { value: "22%", label: "average increase in project success rate", source: "PMI", sourceUrl: "https://www.pmi.org/" },
-        { value: "28%", label: "reduction in time to deliver projects", source: "McKinsey", sourceUrl: "https://www.mckinsey.com/" },
-        { value: "60%", label: "of teams report better collaboration with PM tools", source: "Asana", sourceUrl: "https://asana.com/resources" },
-        { value: "2.5", label: "hours saved per employee per week", source: "Wrike", sourceUrl: "https://www.wrike.com/" },
-      ]},
-    ],
-  },
-  "ai-software": {
-    title: "AI Software Statistics 2026",
-    description: "The latest AI software adoption statistics, spending trends, and business impact data. Verified from original sources and updated for 2026.",
-    lastUpdated: "July 2026",
-    sections: [
-      { title: "Adoption & Investment", stats: [
-        { value: "72%", label: "of organizations use AI in at least one function", source: "McKinsey", sourceUrl: "https://www.mckinsey.com/" },
-        { value: "$297B", label: "Global AI market size in 2026", source: "Grand View Research", sourceUrl: "https://www.grandviewresearch.com/" },
-        { value: "37%", label: "year-over-year increase in AI investment", source: "IDC", sourceUrl: "https://www.idc.com/" },
-        { value: "54%", label: "of companies report cost reduction from AI", source: "Deloitte", sourceUrl: "https://www.deloitte.com/" },
-      ]},
-      { title: "Business Impact", stats: [
-        { value: "40%", label: "productivity improvement from AI tools", source: "Microsoft", sourceUrl: "https://www.microsoft.com/" },
-        { value: "31%", label: "of companies cite AI as top investment priority", source: "Gartner", sourceUrl: "https://www.gartner.com/" },
-        { value: "63%", label: "of executives expect AI to transform their industry", source: "PwC", sourceUrl: "https://www.pwc.com/" },
-        { value: "5.4x", label: "ROI for AI-powered automation tools", source: "Deloitte", sourceUrl: "https://www.deloitte.com/" },
-      ]},
-    ],
-  },
-}
-
 export function generateStaticParams() {
   return getAllStatistics().map((item) => ({ slug: item.slug }))
 }
@@ -92,15 +23,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const noindexed = isNoindexed("statistics", slug)
     return createMetadata({ title: registry.title, description: registry.description, path: `/statistics/${slug}`, ogType: "article", publishedAt: registry.publishedAt, updatedAt: registry.updatedAt, articleSection: registry.category, noIndex: noindexed })
   }
-  const legacy = legacyStats[slug]
-  if (legacy) return createMetadata({ title: legacy.title, description: legacy.description, path: `/statistics/${slug}`, ogType: "article", publishedAt: legacy.lastUpdated, articleSection: "Research Data" })
   return {}
 }
 
 export default async function StatPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const registry = getStatistic(slug)
-  const legacy = legacyStats[slug]
   const page = registry ? {
     title: registry.title,
     description: registry.description,
@@ -110,7 +38,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
       body: s.body,
       stats: s.stats.map((st) => ({ value: st.value, label: st.label, source: st.source, sourceUrl: st.sourceUrl || "#" })),
     })),
-  } : legacy
+  } : null
 
   if (!page) notFound()
 
