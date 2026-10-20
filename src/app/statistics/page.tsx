@@ -15,7 +15,7 @@ import { PaginationNav } from "@/components/ui/pagination-nav"
 
 export const metadata = createMetadata({
   title: "Software Statistics & Market Data",
-  description: "Verified software statistics, market research, and industry benchmarks. Updated yearly with original sources. Data-driven insights for B2B software buyers.",
+  description: "Software statistics and market data, with source details where available. Check original sources and publication dates before relying on figures.",
   path: "/statistics",
 })
 
@@ -32,7 +32,7 @@ export default async function StatisticsPage({ searchParams }: { searchParams?: 
 
   return (
     <>
-      <CollectionPageSchema name="Software Statistics & Market Data" description="Verified software statistics with original sources" url={`${site.url}/statistics`} />
+      <CollectionPageSchema name="Software Statistics & Market Data" description="Software statistics and market data with source details where available" url={`${site.url}/statistics`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Statistics", href: "/statistics" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Statistics" }]} />
@@ -44,7 +44,7 @@ export default async function StatisticsPage({ searchParams }: { searchParams?: 
             <Badge variant="default" className="mb-4">Research Data</Badge>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Software Statistics & Market Data</h1>
             <p className="text-lg text-muted-foreground text-pretty">
-              Verified statistics, market research, and industry benchmarks for B2B software categories. All data sourced from original research and updated yearly.
+              Software statistics, market data, and industry benchmarks for B2B categories. Check source details and dates to understand the context and freshness of each figure.
             </p>
           </div>
         </Container>
