@@ -53,8 +53,8 @@ export function getSpecificComparisonFaqs(faqs: FAQItem[]): FAQItem[] {
   const useful: FAQItem[] = []
 
   for (const faq of faqs) {
-    const question = typeof faq?.question === "string" ? faq.question.replace(/\\s+/g, " ").trim() : ""
-    const answer = typeof faq?.answer === "string" ? faq.answer.replace(/\\s+/g, " ").trim() : ""
+    const question = typeof faq?.question === "string" ? faq.question.replace(/\s+/g, " ").trim() : ""
+    const answer = typeof faq?.answer === "string" ? faq.answer.replace(/\s+/g, " ").trim() : ""
     const normalizedQuestion = question.toLowerCase()
 
     // Do not expose empty, duplicate, malformed, or boilerplate Q&A in page text/schema.
