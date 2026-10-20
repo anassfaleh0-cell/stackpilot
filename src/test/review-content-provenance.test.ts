@@ -21,6 +21,20 @@ describe("review content provenance", () => {
     expect(faqs[0].answer).not.toContain("$29")
   })
 
+  it("sanitizes unverified prices across currencies and common plan labels", () => {
+    for (const claim of [
+      "Starts at €49/month",
+      "From £1,200/year",
+      "A $29 per seat plan",
+    ]) {
+      expect(stripUnverifiedPriceClaims(claim)).not.toMatch(/[$€£]\s?\d/)
+    }
+
+    expect(stripUnverifiedPriceClaims("Includes a free trial")).toContain("trial availability not independently verified")
+    expect(stripUnverifiedPriceClaims("The free plan is suitable for testing")).toContain("plan availability not independently verified")
+    expect(stripUnverifiedPriceClaims("A freemium tier is available")).toContain("plan availability not independently verified")
+  })
+
   it("filters generated security/compliance FAQ claims and sanitizes pricing in remaining FAQs", () => {
     const faqs = getVisibleReviewFaqs([
       {
