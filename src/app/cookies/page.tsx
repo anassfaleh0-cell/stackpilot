@@ -22,7 +22,7 @@ export default function CookiesPage() {
         <Container>
           <div className="max-w-3xl mx-auto prose prose-slate">
             <h1 className="text-4xl font-bold tracking-tight mb-6">Cookie Policy</h1>
-            <p className="text-muted-foreground"><em>Last updated: October 15, 2026</em></p>
+            <p className="text-muted-foreground"><em>Last updated: October 18, 2026</em></p>
 
             <p>This Cookie Policy explains how PilotStack ("we", "us", "our") uses cookies and similar tracking technologies on our website. It supplements our <a href="/privacy">Privacy Policy</a> and explains what cookies are, why we use them, and how you can control their use.</p>
 
@@ -31,7 +31,7 @@ export default function CookiesPage() {
             <p>Similar technologies include local storage, session storage, and web beacons (small transparent images used to track page views and email opens).</p>
 
             <h2>Cookies We Use</h2>
-            <p>We minimize cookie usage to what is strictly necessary for site operation and basic analytics. We use a cookie consent banner that lets you control which categories of cookies are enabled.</p>
+            <p>We use essential browser storage for site preferences and, only according to the choices saved in the consent banner, optional analytics and advertising scripts. Browser local storage is not itself a cookie.</p>
 
             <h3>Essential Browser Storage</h3>
             <p>We use browser local storage to remember display and consent choices. These entries are not cookies and can be removed by clearing site data, which may reset your preferences.</p>
@@ -72,8 +72,8 @@ export default function CookiesPage() {
 
             <h2>Cookie Duration</h2>
             <ul>
-              <li><strong>Session cookies:</strong> Expire when you close your browser. Used for temporary session management.</li>
-              <li><strong>Persistent cookies:</strong> Remain on your device for a set period or until manually deleted. Retention periods vary by service and configuration.</li>
+              <li><strong>Session cookies:</strong> Some third-party services may use cookies that expire when a browser session ends.</li>
+              <li><strong>Persistent cookies:</strong> Some cookies may remain for a provider-defined period or until deleted. Durations depend on the service and its configuration.</li>
             </ul>
 
             <h2>Managing Cookies</h2>
@@ -81,10 +81,10 @@ export default function CookiesPage() {
             <ul>
               <li><strong>Browser settings:</strong> Most browsers let you view, block, or delete cookies. Check your browser&apos;s help documentation for instructions.</li>
               <li><strong>Privacy plugins:</strong> Browser extensions like uBlock Origin, Privacy Badger, or Ghostery can block tracking scripts.</li>
-              <li><strong>Do Not Track:</strong> Some browsers support the DNT header. We respect DNT signals where technically feasible.</li>
+              <li><strong>Consent choices:</strong> Use the site's cookie settings to change optional analytics and advertising preferences. Browser-level Do Not Track signals are not currently used as a substitute for these consent settings.</li>
               <li><strong>GA4 opt-out:</strong> Install the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out browser add-on</a> to prevent data collection by GA4.</li>
             </ul>
-            <p>Please note that blocking essential cookies may affect site functionality, including theme persistence and basic session management.</p>
+            <p>Please note that clearing or blocking browser storage may prevent the site from remembering your theme or consent choices. Essential site content remains available.</p>
 
             <h2>Updates to This Policy</h2>
             <p>We may update this Cookie Policy from time to time to reflect changes in technology, regulation, or our practices. Material changes will be reflected on this page with an updated date. The "Last updated" date at the top reflects the most recent revision.</p>

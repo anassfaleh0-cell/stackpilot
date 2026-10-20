@@ -22,7 +22,7 @@ export default function PrivacyPage() {
         <Container>
           <div className="max-w-3xl mx-auto prose prose-slate">
             <h1 className="text-4xl font-bold tracking-tight mb-6">Privacy Policy</h1>
-            <p className="text-muted-foreground"><em>Last updated: October 15, 2026</em></p>
+            <p className="text-muted-foreground"><em>Last updated: October 18, 2026</em></p>
 
             <h2>Information We Collect</h2>
             <p>We collect only the information necessary to provide and improve PilotStack:</p>
@@ -76,7 +76,7 @@ export default function PrivacyPage() {
             <ul>
               <li><strong>Right to know:</strong> Request disclosure of the categories and specific pieces of personal information we have collected about you.</li>
               <li><strong>Right to delete:</strong> Request deletion of personal information we have collected, subject to certain exceptions.</li>
-              <li><strong>Right to opt out:</strong> Opt out of the sale of your personal information. We do not sell personal information, so no action is needed.</li>
+              <li><strong>Right to opt out:</strong> Opt out of the sale of your personal information. We do not sell personal information for money. Depending on advertising settings and applicable law, some disclosures for targeted advertising may be treated as sharing. You can decline advertising in our cookie settings and contact us to exercise any applicable opt-out rights.</li>
               <li><strong>Right to non-discrimination:</strong> We will not discriminate against you for exercising any of your CCPA rights.</li>
             </ul>
             <p>To exercise your CCPA rights, contact us at privacy@pilotstack.online. We will verify your identity before processing your request.</p>
@@ -98,16 +98,16 @@ export default function PrivacyPage() {
               <li><strong>Analytics:</strong> Google Analytics and Microsoft Clarity load only after analytics consent. Their processing and retention depend on their own policies and the configured settings.</li>
               <li><strong>Hosting:</strong> Our website is hosted on Vercel&apos;s infrastructure, which provides security and privacy documentation for its infrastructure and processing services.</li>
             </ul>
-            <p>Where required, we use appropriate contractual safeguards with third-party processors and review their published privacy and data-processing terms.</p>
+            <p>Third-party processing and international transfers depend on the service and its configuration. We review provider privacy and data-processing terms, and will provide information about applicable transfer safeguards on request where available.</p>
 
             <h2>International Data Transfers</h2>
-            <p>If we transfer personal data from the EEA to countries not deemed adequate by the European Commission, we rely on Standard Contractual Clauses (SCCs) as the transfer mechanism under GDPR Article 46.</p>
+            <p>Some service providers may process information in countries outside your own. Any international transfer is subject to applicable legal requirements and the relevant provider arrangements. Contact us if you need information about the safeguards applicable to a particular service.</p>
 
             <h2>Changes to This Policy</h2>
-            <p>We will notify subscribers of material changes to this privacy policy via email. The "Last updated" date at the top of this page reflects the most recent revision. Continued use of PilotStack after changes constitutes acceptance of the updated policy.</p>
+            <p>We will publish material policy changes on this page and update the revision date. Where applicable law requires additional notice or consent, we will follow the relevant requirement. The "Last updated" date reflects the most recent revision.</p>
 
             <h2>Contact</h2>
-            <p>For privacy-related inquiries or to exercise your data rights, contact us at <strong>privacy@pilotstack.online</strong>. We aim to respond to all requests within 30 days.</p>
+            <p>For privacy-related inquiries or to exercise your data rights, contact us at <strong>privacy@pilotstack.online</strong>. We aim to respond within the period required by applicable privacy law.</p>
           </div>
         </Container>
       </Section>

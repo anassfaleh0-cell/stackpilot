@@ -23,11 +23,11 @@ const authorSocial = {
 const authors = {
   "pilotstack-team": {
     name: "PilotStack Team",
-    role: "Editorial Team",
-    bio: "The PilotStack editorial team publishes software reviews, comparisons, guides, and research using the site's published scoring, sourcing, and update policies.",
+    role: "Publisher Byline",
+    bio: "PilotStack Team is the publisher byline used for site content, not a biography of named individuals or a claim of multiple staff members. Content uses structured product records and public sources; the byline does not imply independent live-product trials.",
     avatar: null,
-    expertise: ["Software research", "Pricing analysis", "Software comparison", "B2B software buying"],
-    credentials: ["Published software reviews and comparisons", "Public methodology and editorial policies"],
+    expertise: ["Software comparison methodology", "Structured product records", "Public-source research"],
+    credentials: ["Published scoring methodology", "Public editorial and disclosure policies"],
     social: { twitter: authorSocial.twitter, github: authorSocial.github, linkedin: authorSocial.linkedin },
     worksFor: "PilotStack",
     knowsAbout: ["Software Reviews", "Software Comparison", "B2B Software", "Market Research"],
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!author) return {}
   return createMetadata({
     title: `${author.name} - ${author.role}`,
-    description: `${author.name} is ${author.role} at PilotStack. ${author.bio.slice(0, 150)}`,
+    description: `${author.name} is the publisher byline used for PilotStack content. ${author.bio.slice(0, 150)}`,
     path: `/authors/${slug}`,
     noIndex: !isPublicAuthor(slug),
   })

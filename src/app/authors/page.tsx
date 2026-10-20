@@ -10,8 +10,8 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 export const metadata = createMetadata({
-  title: "Our Authors & Editorial Team",
-  description: "PilotStack content is produced by a small, independent team following a published methodology — recorded scoring, transparent sourcing, and no vendor-paid placement.",
+  title: "Authors & Editorial Byline",
+  description: "PilotStack uses a publisher byline for its software reviews and guides. The byline is not a claim of a staffed research team or independent live-product trials.",
   path: "/authors",
 })
 
@@ -19,8 +19,8 @@ const authors = [
   {
     slug: "pilotstack-team",
     name: "PilotStack Team",
-    role: "Editorial Team",
-    bio: "The PilotStack editorial team maintains software reviews, comparisons, guides, and research using the site's published scoring, sourcing, and update policies.",
+    role: "Publisher Byline",
+    bio: "This is the publisher byline used on PilotStack content, not a biography of a named individual. Pages draw on structured product records and public sources; the byline does not imply that every product was independently trialed in a live environment.",
   },
 ]
 
@@ -34,10 +34,10 @@ export default function AuthorsPage() {
       <Section className="pt-0">
         <Container>
           <div className="max-w-4xl mx-auto">
-            <Badge variant="default" className="mb-4">Our Team</Badge>
-            <h1 className="text-4xl font-bold tracking-tight mb-4">Meet the PilotStack Editorial Team</h1>
+            <Badge variant="default" className="mb-4">Editorial Byline</Badge>
+            <h1 className="text-4xl font-bold tracking-tight mb-4">How PilotStack Content Is Attributed</h1>
             <p className="text-lg text-muted-foreground mb-10 max-w-2xl">
-              Our editorial team publishes coverage across 12 categories. Every page follows the same published scoring and sourcing rules.
+              PilotStack uses a publisher byline for content attribution. It should not be read as a staff directory, proof of individual credentials, or a claim that every product has been independently tested.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6">
@@ -63,9 +63,7 @@ export default function AuthorsPage() {
             <div className="mt-10 p-6 rounded-xl bg-muted-bg border border-border">
               <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-2">How we score</h2>
               <p className="text-sm text-muted-foreground">
-                Every page carries nine recorded category scores on a 1-5 scale, with the overall rating as their
-                mean rounded to one decimal. Figures come from one recorded source each, reused everywhere a tool
-                appears, and facts we cannot source are omitted or marked unverified.{" "}
+                The published methodology explains how the overall editorial score is calculated from nine recorded category scores. Source coverage and freshness can vary by product, and a recorded score is not a third-party user-review average or proof of independent live-product trials.{" "}
                 <Link href="/methodology" className="text-primary hover:underline">Read the full methodology</Link>
               </p>
             </div>
