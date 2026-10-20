@@ -69,6 +69,7 @@ describe("review score provenance", () => {
     expect(statisticsDetail).toContain("numeric figure is withheld")
     expect(statisticsDetail).toContain("stat.sourceUrl ? <div")
     expect(statisticsDetail).not.toContain('sourceUrl: st.sourceUrl || "#"')
+    expect(statisticsDetail).toContain("/^https?:\\/\\//i.test(st.sourceUrl)")
     expect(statisticsDetail).toContain("if (!page) notFound()")
     expect(home).toContain('getAllComparisons().filter((cmp) => isContentAvailable("comparison", cmp.slug))')
     expect(home).toContain('getAllBlogPosts().filter((post) => isContentAvailable("blog", post.slug))')
