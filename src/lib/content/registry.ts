@@ -700,6 +700,12 @@ export function getComparison(slug: string): ComparisonContent | null {
     return null
   }
   const rawComparison = readJson<ComparisonContent>(file)
+  // Explicitly unpublished records must not resolve as public pages. Use a strict false check
+  // so legacy records without a `published` field remain available while editorial review continues.
+  if (rawComparison.published === false) {
+    comparisonCache.set(slug, null)
+    return null
+  }
   const resolveToolSlug = (name: string, explicitSlug?: string): string => {
     if (explicitSlug && fs.existsSync(path.join(CONTENT_DIR, "reviews", explicitSlug + ".json"))) return explicitSlug
     const normalizedName = String(name || "").trim().toLowerCase()
