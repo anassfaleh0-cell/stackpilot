@@ -21,6 +21,7 @@ import { EEATProcess } from "@/components/seo/editorial-process"
 import { ScoreBar } from "@/components/brand/patterns"
 import { NativeAd } from "@/components/ads"
 import { getComparisonDecision } from "@/lib/content/comparison-decision"
+import { getComparisonDescriptionForDisplay, getComparisonVerdictForDisplay, getSpecificComparisonFaqs } from "@/lib/content/comparison-presentation"
 
 export const dynamicParams = true
 export const revalidate = 86400
@@ -35,11 +36,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const cmp = getComparison(slug)
   if (!cmp) return {}
-  const readingTime = Math.max(3, Math.ceil(cmp.description.split(/\s+/).length / 200))
+  const displayDescription = getComparisonDescriptionForDisplay(cmp.description, cmp.tool1, cmp.tool2)
+  const readingTime = Math.max(3, Math.ceil(displayDescription.split(/\s+/).length / 200))
   const noindexed = isNoindexed("comparisons", slug)
 
   return {
-    ...createMetadata({ title: `${cmp.tool1} vs ${cmp.tool2} (2026): Which One Wins?`, description: cmp.description, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated, articleSection: cmp.category, readingTime }),
+    ...createMetadata({ title: `${cmp.tool1} vs ${cmp.tool2} (2026): Features, Pricing & Differences`, description: displayDescription, path: `/comparisons/${slug}`, ogType: "article", publishedAt: cmp.lastUpdated, updatedAt: cmp.lastUpdated, articleSection: cmp.category, readingTime }),
     robots: noindexed
       ? { index: false, follow: true }
       : { index: true, follow: true },
@@ -50,10 +52,16 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   const { slug } = await params
   const cmp = getComparison(slug)
   if (!cmp) notFound()
+  const displayDescription = getComparisonDescriptionForDisplay(cmp.description, cmp.tool1, cmp.tool2)
 
-  // Only boolean availability fields are scoreable. Text values such as "Paid" or "Custom"
-  // are descriptions, not truthy feature wins.
-  const scoredFeatures = cmp.features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean")
+  // A true/false pair without details is too weak to support a percentage score.
+  // Score only boolean availability rows that include context for both products.
+  const scoredFeatures = cmp.features.filter((f) =>
+    typeof f.tool1 === "boolean" &&
+    typeof f.tool2 === "boolean" &&
+    Boolean(f.tool1Detail?.trim()) &&
+    Boolean(f.tool2Detail?.trim())
+  )
   const t1Score = scoredFeatures.filter((f) => f.tool1 === true).length
   const t2Score = scoredFeatures.filter((f) => f.tool2 === true).length
   const t1Pct = scoredFeatures.length ? Math.round((t1Score / scoredFeatures.length) * 100) : null
@@ -71,7 +79,9 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
     tool2Category: review2?.category,
   })
 
-  const visibleFaqs = cmp.faqs.slice(0, 8)
+  // Hide stock FAQ answers that add no product-specific information.
+  const visibleFaqs = getSpecificComparisonFaqs(cmp.faqs).slice(0, 8)
+  const displayVerdict = stripDeadContentLinks(getComparisonVerdictForDisplay(cmp.verdict, categoriesDiffer))
 
   // Use the comparison's own recorded feature details for decision guidance.
   // These are descriptions of the source data, not independent verification or proof of superiority.
@@ -91,8 +101,8 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Comparisons", href: "/comparisons" }, { name: cmp.title, href: `/comparisons/${slug}` }]} />
-      <WebPageSchema name={cmp.title} description={cmp.description} url={`${site.url}/comparisons/${slug}`} dateModified={cmp.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: [{ "@type": "ListItem", position: 1, item: softwareApp({ name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}`, category: review1?.category || cmp.category, description: review1?.tagline }) }, { "@type": "ListItem", position: 2, item: softwareApp({ name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}`, category: review2?.category || cmp.category, description: review2?.tagline }) }] }} />
-      <ArticleSchema title={cmp.title} description={cmp.description} publishedAt={cmp.lastUpdated} updatedAt={cmp.lastUpdated} author="PilotStack Team" url={`${site.url}/comparisons/${slug}`} wordCount={cmp.description.split(/\s+/).length + String(cmp.verdict || "").split(/\s+/).filter(Boolean).length + cmp.features.reduce((n, f) => n + f.name.split(/\s+/).length + String(f.tool1Detail || "").split(/\s+/).filter(Boolean).length + String(f.tool2Detail || "").split(/\s+/).filter(Boolean).length, 0) + cmp.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={cmp.category} keywords={[`${cmp.tool1} vs ${cmp.tool2}`, `${cmp.tool1} comparison`, `${cmp.tool2} comparison`, cmp.category, "software comparison 2026"]} mentions={[{ name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}` }, { name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}` }]} />
+      <WebPageSchema name={cmp.title} description={displayDescription} url={`${site.url}/comparisons/${slug}`} dateModified={cmp.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: [{ "@type": "ListItem", position: 1, item: softwareApp({ name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}`, category: review1?.category || cmp.category, description: review1?.tagline }) }, { "@type": "ListItem", position: 2, item: softwareApp({ name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}`, category: review2?.category || cmp.category, description: review2?.tagline }) }] }} />
+      <ArticleSchema title={cmp.title} description={displayDescription} publishedAt={cmp.lastUpdated} updatedAt={cmp.lastUpdated} author="PilotStack Team" url={`${site.url}/comparisons/${slug}`} wordCount={displayDescription.split(/\s+/).length + displayVerdict.split(/\s+/).filter(Boolean).length + cmp.features.reduce((n, f) => n + f.name.split(/\s+/).length + String(f.tool1Detail || "").split(/\s+/).filter(Boolean).length + String(f.tool2Detail || "").split(/\s+/).filter(Boolean).length, 0) + visibleFaqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={cmp.category} keywords={[`${cmp.tool1} vs ${cmp.tool2}`, `${cmp.tool1} comparison`, `${cmp.tool2} comparison`, cmp.category, "software comparison 2026"]} mentions={[{ name: cmp.tool1, url: `${site.url}/reviews/${cmp.tool1Slug}` }, { name: cmp.tool2, url: `${site.url}/reviews/${cmp.tool2Slug}` }]} />
       <FAQSchema questions={visibleFaqs} path={`/comparisons/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Comparisons", href: "/comparisons" }, { name: cmp.title }]} />
@@ -104,7 +114,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <EditorialHero
               slug={cmp.slug}
               title={cmp.title}
-              subtitle={cmp.description}
+              subtitle={displayDescription}
               category={cmp.category}
               variant="comparison"
               className="w-full min-h-[200px] sm:min-h-[240px]"
@@ -113,7 +123,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
 
           <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-            <p className="text-sm text-muted-foreground">{cmp.description}</p>
+            <p className="text-sm text-muted-foreground">{displayDescription}</p>
           </div>
 
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
@@ -136,7 +146,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
               <li>{cmp.tool2} criteria with recorded information: {cmp.features.filter(f => f.tool2 && f.tool2 !== "Not recorded").length}</li>
               <li>Criteria with details for both: {cmp.features.filter(f => f.tool1Detail && f.tool2Detail).length}</li>
               <li>{hasComparableWinner ? `Recorded dataset pick: ${winnerLabel}` : categoriesDiffer ? "Different product categories" : "No comparable winner recorded"}</li>
-              <li>FAQs answered: {cmp.faqs.length}</li>
+              <li>Useful FAQs shown: {visibleFaqs.length}</li>
               <li>Last updated: {formatDate(cmp.lastUpdated)}</li>
             </ul>
           </div>
@@ -170,7 +180,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                   )}
                   <div className="text-xl font-bold mb-2">{tool.name}</div>
                   <div className="text-3xl font-bold text-primary mb-1">{tool.score === null ? "—" : `${tool.score}%`}</div>
-                  <div className="text-xs text-muted-foreground mb-3">{tool.score === null ? "No comparable availability data" : `Availability across ${scoredFeatures.length} boolean checks`}</div>
+                  <div className="text-xs text-muted-foreground mb-3">{tool.score === null ? "No comparable availability data" : `Availability across ${scoredFeatures.length} documented checks`}</div>
                   {tool.score !== null && <ScoreBar score={tool.score} max={100} className="mb-3" />}
                   <Link
                     href={`/reviews/${tool.slug}`}
@@ -200,7 +210,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 6v6l4 2" />
               </svg>
-            } value={cmp.faqs.length.toString()} title="FAQs Answered" />
+            } value={visibleFaqs.length.toString()} title="Useful FAQs" />
           </div>
 
           {/* Feature Comparison */}
@@ -320,7 +330,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                     {hasComparableWinner ? `Recorded pick: ${winnerLabel}` : categoriesDiffer ? "Different product categories" : "How they compare"}
                   </p>
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={stripDeadContentLinks(cmp.verdict)} /></p>
+                <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={displayVerdict} /></p>
                 {hasComparableWinner && (
                   <div className="mt-4 pt-4 border-t border-border flex items-center gap-2 text-sm">
                     <span className="text-muted-foreground">Migration complexity:</span>
@@ -344,14 +354,18 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           <section>
             <h2 className="text-2xl font-bold tracking-tight mb-6">Frequently Asked Questions</h2>
             <div className="grid sm:grid-cols-2 gap-4 max-w-4xl">
-              {visibleFaqs.map((faq) => (
+              {visibleFaqs.length > 0 ? visibleFaqs.map((faq) => (
                 <GlassCard key={faq.question}>
                   <div className="p-4">
                     <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
                     <p className="text-sm text-muted-foreground"><RichText text={stripDeadContentLinks(faq.answer)} /></p>
                   </div>
                 </GlassCard>
-              ))}
+              )) : (
+                <p className="text-sm text-muted-foreground">
+                  The stored FAQs for this comparison are too generic to be useful. Check the linked product reviews and confirm current details with the vendors before deciding.
+                </p>
+              )}
             </div>
           </section>
 
