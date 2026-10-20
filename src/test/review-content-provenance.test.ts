@@ -17,8 +17,14 @@ describe("review content provenance", () => {
     expect(stripUnverifiedPriceClaims("Plan starts at $29/month")).toBe("Plan pricing not independently verified")
     const content = getVisibleReviewContent([{ title: "Overview", body: "The plan starts at $29/month." }], false)
     expect(content[0].body).not.toContain("$29")
-    const faqs = getVisibleReviewFaqs([{ question: "How much does it cost?", answer: "Pricing starts at $29/month." }], false)
+    const faqs = getVisibleReviewFaqs([
+      { question: "How much does it cost?", answer: "Pricing starts at $29/month." },
+      { question: "What is the annual price?", answer: "The annual plan costs 120 GBP/year." },
+      { question: "Is there a per-user rate?", answer: "The vendor lists 49 EUR per user." },
+    ], false)
     expect(faqs[0].answer).not.toContain("$29")
+    expect(faqs[1].answer).not.toContain("120 GBP")
+    expect(faqs[2].answer).not.toContain("49 EUR")
   })
 
   it("sanitizes unverified prices across currencies and common plan labels", () => {
