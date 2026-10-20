@@ -13,6 +13,7 @@ const ALTERNATIVES_PAGE = path.join(process.cwd(), "src", "app", "alternatives",
 const USE_CASES_PAGE = path.join(process.cwd(), "src", "app", "use-cases", "page.tsx")
 const INDUSTRIES_PAGE = path.join(process.cwd(), "src", "app", "industries", "page.tsx")
 const STATISTICS_PAGE = path.join(process.cwd(), "src", "app", "statistics", "page.tsx")
+const STATISTICS_DETAIL_PAGE = path.join(process.cwd(), "src", "app", "statistics", "[slug]", "page.tsx")
 
 describe("review score provenance", () => {
   it("labels PilotStack scores as editorial assessments instead of third-party review aggregates", () => {
@@ -38,6 +39,7 @@ describe("review score provenance", () => {
     const useCases = fs.readFileSync(USE_CASES_PAGE, "utf8")
     const industries = fs.readFileSync(INDUSTRIES_PAGE, "utf8")
     const statistics = fs.readFileSync(STATISTICS_PAGE, "utf8")
+    const statisticsDetail = fs.readFileSync(STATISTICS_DETAIL_PAGE, "utf8")
 
     expect(home).toContain("Commercial relationships are disclosed")
     expect(home).not.toContain("No paid placements. No vendor influence.")
@@ -60,6 +62,8 @@ describe("review score provenance", () => {
     expect(industries).not.toContain("Expert-curated")
     expect(statistics).not.toContain("Verified statistics")
     expect(statistics).not.toContain("updated yearly")
+    expect(statisticsDetail).toContain("does not imply independent verification of every figure")
+    expect(statisticsDetail).toContain("confirm the exact number, definition, geography, and publication date")
     expect(home).toContain('getAllComparisons().filter((cmp) => isContentAvailable("comparison", cmp.slug))')
     expect(home).toContain('getAllBlogPosts().filter((post) => isContentAvailable("blog", post.slug))')
     expect(home).toContain('getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug))')
