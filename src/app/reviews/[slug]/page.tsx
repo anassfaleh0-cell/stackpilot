@@ -133,7 +133,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="flex flex-wrap items-center gap-3 mb-3">
                 <Badge variant="default">{tool.category}</Badge>
                 {isBestInCategory && (
-                  <Badge variant="success">Best in Category</Badge>
+                  <Badge variant="success">Highest Editorial Score in Category</Badge>
                 )}
                 <div className="flex items-center gap-1 text-sm">
                   <Star size={14} className="fill-accent text-accent" />
