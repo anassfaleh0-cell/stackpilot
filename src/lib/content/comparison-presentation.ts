@@ -27,6 +27,9 @@ const TEMPLATE_VERDICT_PATTERNS = [
   /emerges as our recommendation/i,
   /based on the recorded comparison criteria/i,
   /we recommend evaluating both tools against your requirements/i,
+  /\\b(?:is|was) the recorded (?:pick|winner)\\b/i,
+  /\\b(?:recorded|source dataset) (?:pick|winner)\\s*:/i,
+  /\\b(?:is|was) our (?:overall )?pick\\b/i,
 ]
 
 const TEMPLATE_FAQ_PATTERNS = [
