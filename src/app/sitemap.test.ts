@@ -3,6 +3,11 @@ import sitemap from "@/app/sitemap"
 import { siteConfig } from "@/lib/constants"
 
 describe("XML sitemap integrity", () => {
+  it("does not list explicitly unpublished comparison records", () => {
+    const paths = sitemap().map((entry) => new URL(entry.url).pathname)
+    expect(paths).not.toContain("/comparisons/square-vs-xero")
+  })
+
   it("uses only absolute URLs on the canonical site origin", () => {
     const entries = sitemap()
     const origin = new URL(siteConfig.url).origin
