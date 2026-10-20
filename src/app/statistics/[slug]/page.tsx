@@ -118,7 +118,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
 
             <div className="mt-12 p-5 rounded-xl bg-surface-secondary border border-border text-xs text-muted-foreground">
               <p className="font-semibold text-foreground mb-2">Methodology & Data Sources</p>
-              <p className="leading-relaxed">Statistics on this page are compiled from publicly available industry reports, analyst research, and vendor-published data. All sources are linked for verification. Data is updated annually or when new reports are published. PilotStack does not guarantee the accuracy of third-party data. See our <Link href="/methodology" className="text-primary hover:underline">research methodology</Link> for details.</p>
+              <p className="leading-relaxed">Statistics shown here come from stored content records. Source attribution may identify a publisher without linking to the exact report; where a direct source URL is missing, the numeric figure is withheld. Update dates describe the content record and do not guarantee annual re-verification. See our <Link href="/methodology" className="text-primary hover:underline">research methodology</Link> for details.</p>
             </div>
 
             <div className="mt-6 p-5 rounded-xl bg-surface-secondary border border-border text-xs">
