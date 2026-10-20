@@ -9,6 +9,10 @@ const REVIEWS_INDEX = path.join(process.cwd(), "src", "app", "reviews", "page.ts
 const METHODOLOGY_PAGE = path.join(process.cwd(), "src", "app", "methodology", "page.tsx")
 const BLOG_PAGE = path.join(process.cwd(), "src", "app", "blog", "page.tsx")
 const BEST_PAGE = path.join(process.cwd(), "src", "app", "best", "page.tsx")
+const ALTERNATIVES_PAGE = path.join(process.cwd(), "src", "app", "alternatives", "page.tsx")
+const USE_CASES_PAGE = path.join(process.cwd(), "src", "app", "use-cases", "page.tsx")
+const INDUSTRIES_PAGE = path.join(process.cwd(), "src", "app", "industries", "page.tsx")
+const STATISTICS_PAGE = path.join(process.cwd(), "src", "app", "statistics", "page.tsx")
 
 describe("review score provenance", () => {
   it("labels PilotStack scores as editorial assessments instead of third-party review aggregates", () => {
@@ -30,6 +34,10 @@ describe("review score provenance", () => {
     const methodology = fs.readFileSync(METHODOLOGY_PAGE, "utf8")
     const blog = fs.readFileSync(BLOG_PAGE, "utf8")
     const best = fs.readFileSync(BEST_PAGE, "utf8")
+    const alternatives = fs.readFileSync(ALTERNATIVES_PAGE, "utf8")
+    const useCases = fs.readFileSync(USE_CASES_PAGE, "utf8")
+    const industries = fs.readFileSync(INDUSTRIES_PAGE, "utf8")
+    const statistics = fs.readFileSync(STATISTICS_PAGE, "utf8")
 
     expect(home).toContain("Commercial relationships are disclosed")
     expect(home).not.toContain("No paid placements. No vendor influence.")
@@ -46,6 +54,12 @@ describe("review score provenance", () => {
     expect(best).not.toContain("Expert-curated")
     expect(best).not.toContain("research-backed")
     expect(best).not.toContain("Updated quarterly")
+    expect(alternatives).not.toContain("expert-curated")
+    expect(alternatives).not.toContain("expert analysis")
+    expect(useCases).not.toContain("Expert-curated")
+    expect(industries).not.toContain("Expert-curated")
+    expect(statistics).not.toContain("Verified statistics")
+    expect(statistics).not.toContain("updated yearly")
     expect(home).toContain('getAllComparisons().filter((cmp) => isContentAvailable("comparison", cmp.slug))')
     expect(home).toContain('getAllBlogPosts().filter((post) => isContentAvailable("blog", post.slug))')
     expect(home).toContain('getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug))')
