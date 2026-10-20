@@ -49,5 +49,23 @@ export function getComparisonVerdictForDisplay(verdict: string, categoriesDiffer
 }
 
 export function getSpecificComparisonFaqs(faqs: FAQItem[]): FAQItem[] {
-  return faqs.filter((faq) => !TEMPLATE_FAQ_PATTERNS.some((pattern) => pattern.test(faq.answer)))
+  const seenQuestions = new Set<string>()
+  const useful: FAQItem[] = []
+
+  for (const faq of faqs) {
+    const question = typeof faq?.question === "string" ? faq.question.replace(/\\s+/g, " ").trim() : ""
+    const answer = typeof faq?.answer === "string" ? faq.answer.replace(/\\s+/g, " ").trim() : ""
+    const normalizedQuestion = question.toLowerCase()
+
+    // Do not expose empty, duplicate, malformed, or boilerplate Q&A in page text/schema.
+    if (!question || !answer || !question.endsWith("?") || answer.length < 40 || answer.length > 700) continue
+    if (seenQuestions.has(normalizedQuestion)) continue
+    if (TEMPLATE_FAQ_PATTERNS.some((pattern) => pattern.test(question) || pattern.test(answer))) continue
+
+    seenQuestions.add(normalizedQuestion)
+    useful.push({ ...faq, question, answer })
+    if (useful.length >= 8) break
+  }
+
+  return useful
 }
