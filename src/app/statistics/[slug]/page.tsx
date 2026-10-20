@@ -36,7 +36,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
     sections: registry.sections.map((s) => ({
       title: s.title,
       body: s.body,
-      stats: s.stats.map((st) => ({ value: st.value, label: st.label, source: st.source, sourceUrl: typeof st.sourceUrl === "string" ? st.sourceUrl : "" })),
+      stats: s.stats.map((st) => ({ value: st.value, label: st.label, source: st.source, sourceUrl: typeof st.sourceUrl === "string" && /^https?:\/\//i.test(st.sourceUrl) ? st.sourceUrl : "" })),
     })),
   } : null
 
