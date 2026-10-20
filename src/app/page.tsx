@@ -21,11 +21,11 @@ export const metadata = createMetadata({
 export default function HomePage() {
   const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug))
   const reviewCountByCategory = countByCategory(reviews)
-  const comparisons = getAllComparisons()
+  const comparisons = getAllComparisons().filter((cmp) => isContentAvailable("comparison", cmp.slug))
   const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug))
-  const posts = getAllBlogPosts()
-  const glossary = getAllGlossaryTerms()
-  const allResearch = getAllResearch()
+  const posts = getAllBlogPosts().filter((post) => isContentAvailable("blog", post.slug))
+  const glossary = getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug))
+  const allResearch = getAllResearch().filter((item) => isContentAvailable("research", item.slug))
   const research = allResearch
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
     .slice(0, 3)
