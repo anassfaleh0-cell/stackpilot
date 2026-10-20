@@ -21,7 +21,7 @@ import { EEATProcess } from "@/components/seo/editorial-process"
 import { ScoreBar } from "@/components/brand/patterns"
 import { NativeAd } from "@/components/ads"
 import { getComparisonDecision, getComparisonDisplayCopy } from "@/lib/content/comparison-decision"
-import { stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
+import { getVisibleReviewFaqs, stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
 
 export const dynamicParams = true
 export const revalidate = 86400
@@ -94,7 +94,8 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
     tool2Category: review2?.category,
   })
 
-  const visibleFaqs = cmp.faqs.slice(0, 8)
+  // Reuse the review FAQ integrity filter so comparison FAQs do not repeat unverified pricing or templated compliance claims in HTML or FAQ schema.
+  const visibleFaqs = getVisibleReviewFaqs(cmp.faqs, false).slice(0, 8)
 
   // Use the comparison's own recorded feature details for decision guidance.
   // These are descriptions of the source data, not independent verification or proof of superiority.
