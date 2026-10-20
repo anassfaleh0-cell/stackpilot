@@ -12,7 +12,7 @@ import { BannerAd } from "@/components/ads"
 
 export const metadata = createMetadata({
   title: "Software Use Cases & Buyer Guides 2026",
-  description: "Find the best software for your specific use case. Expert-curated recommendations for startups, enterprises, agencies, and more across every software category.",
+  description: "Explore software options for common business use cases, from startup workflows to agency and enterprise needs.",
   path: "/use-cases",
 })
 
@@ -34,7 +34,7 @@ export default async function UseCasesPage({ searchParams }: { searchParams?: Pr
       <Container className="pt-8 pb-16">
         <Breadcrumbs items={[{ name: "Use Cases" }]} />
         <h1 className="text-3xl font-bold tracking-tight mt-4 mb-2">Software Use Cases</h1>
-        <p className="text-muted-foreground mb-8">Expert-curated recommendations for every use case. Find the right software for your specific needs.</p>
+        <p className="text-muted-foreground mb-8">Explore tools for common workflows and compare them against your requirements, budget, and existing systems.</p>
 
         {/* Ad: After section header */}
         <BannerAd className="mx-auto max-w-[728px] mb-8" />
