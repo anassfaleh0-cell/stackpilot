@@ -18,6 +18,22 @@ describe("getComparisonDecision", () => {
     })
   })
 
+  it("normalizes punctuation in stored winner identifiers", () => {
+    expect(getComparisonDecision({
+      winner: "1-password",
+      tool1: "1Password",
+      tool1Slug: "1password",
+      tool1Category: "Security & Compliance",
+      tool2: "Appwrite",
+      tool2Slug: "appwrite",
+      tool2Category: "Security & Compliance",
+    })).toEqual({
+      categoriesDiffer: false,
+      winnerLabel: "1Password",
+      hasComparableWinner: true,
+    })
+  })
+
   it("does not declare a winner across different primary categories", () => {
     expect(getComparisonDecision({
       winner: "1password",
