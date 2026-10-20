@@ -54,6 +54,19 @@ describe("comparison presentation avoids generic boilerplate", () => {
     ])
   })
 
+  it("filters malformed questions, duplicate questions, and empty or oversized answers", () => {
+    const result = getSpecificComparisonFaqs([
+      { question: "What does the free plan include?", answer: "The free plan includes two seats and basic reporting for small teams that need a simple starting point." },
+      { question: "What does the free plan include?", answer: "The free plan includes two seats and basic reporting for small teams that need a simple starting point." },
+      { question: "This is not a question", answer: "A sufficiently detailed answer that should not be published because the question is malformed." },
+      { question: "What is included in the paid plan?", answer: "" },
+      { question: "What is included in enterprise?", answer: "x".repeat(701) },
+    ])
+    expect(result).toEqual([
+      { question: "What does the free plan include?", answer: "The free plan includes two seats and basic reporting for small teams that need a simple starting point." },
+    ])
+  })
+
   it("preserves non-template verdicts", () => {
     const verdict = "Choose A if you need an offline-first workflow; choose B for managed collaboration."
     expect(getComparisonVerdictForDisplay(verdict, false)).toBe(verdict)
