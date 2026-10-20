@@ -14,7 +14,7 @@ import { BannerAd, NativeAd } from "@/components/ads"
 
 export const metadata = createMetadata({
   title: "Software Reviews & Buying Guides",
-  description: "In-depth software reviews, expert comparisons, and actionable buying guides to help businesses choose, implement, and optimize the right tools for every need.",
+  description: "Software reviews, side-by-side comparisons, and practical buying guides to help businesses evaluate tools for their workflows and budgets.",
   path: "/",
 })
 
@@ -32,8 +32,8 @@ export default function HomePage() {
 
   const stats = [
     { value: `${reviews.length}+`, label: "Software Reviews" },
-    { value: `${comparisons.length}+`, label: "Expert Comparisons" },
-    { value: `${guides.length}+`, label: "Expert Guides" },
+    { value: `${comparisons.length}+`, label: "Software Comparisons" },
+    { value: `${guides.length}+`, label: "Buying Guides" },
     { value: `${allResearch.length}+`, label: "Research Reports" },
   ]
 
