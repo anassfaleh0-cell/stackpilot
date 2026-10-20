@@ -88,6 +88,15 @@ describe("comparison presentation avoids generic boilerplate", () => {
     ])
   })
 
+  it("does not publish an unsupported stored dataset winner as an editorial verdict", () => {
+    const result = getComparisonVerdictForDisplay(
+      "Square is the recorded winner in the PilotStack comparison dataset.",
+      false,
+    )
+    expect(result).toContain("does not provide enough product-specific evidence")
+    expect(result).not.toContain("recorded winner")
+  })
+
   it("preserves non-template verdicts", () => {
     const verdict = "Choose A if you need an offline-first workflow; choose B for managed collaboration."
     expect(getComparisonVerdictForDisplay(verdict, false)).toBe(verdict)
