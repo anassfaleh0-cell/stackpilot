@@ -7,6 +7,7 @@ const HOME_PAGE = path.join(process.cwd(), "src", "app", "page.tsx")
 const GUIDES_PAGE = path.join(process.cwd(), "src", "app", "guides", "page.tsx")
 const REVIEWS_INDEX = path.join(process.cwd(), "src", "app", "reviews", "page.tsx")
 const METHODOLOGY_PAGE = path.join(process.cwd(), "src", "app", "methodology", "page.tsx")
+const BLOG_PAGE = path.join(process.cwd(), "src", "app", "blog", "page.tsx")
 
 describe("review score provenance", () => {
   it("labels PilotStack scores as editorial assessments instead of third-party review aggregates", () => {
@@ -26,6 +27,7 @@ describe("review score provenance", () => {
     const guides = fs.readFileSync(GUIDES_PAGE, "utf8")
     const reviewsIndex = fs.readFileSync(REVIEWS_INDEX, "utf8")
     const methodology = fs.readFileSync(METHODOLOGY_PAGE, "utf8")
+    const blog = fs.readFileSync(BLOG_PAGE, "utf8")
 
     expect(home).toContain("Commercial relationships are disclosed")
     expect(home).not.toContain("No paid placements. No vendor influence.")
@@ -36,6 +38,9 @@ describe("review score provenance", () => {
     expect(reviewsIndex).not.toContain("unbiased reviews of the best software tools")
     expect(methodology).not.toContain("no paid placements")
     expect(methodology).not.toContain("no vendor can pay for placement")
+    expect(blog).not.toContain("Expert Reviews")
+    expect(blog).not.toContain("hands-on tutorials")
+    expect(blog).not.toContain("Expert perspectives")
     expect(home).toContain('getAllComparisons().filter((cmp) => isContentAvailable("comparison", cmp.slug))')
     expect(home).toContain('getAllBlogPosts().filter((post) => isContentAvailable("blog", post.slug))')
     expect(home).toContain('getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug))')
