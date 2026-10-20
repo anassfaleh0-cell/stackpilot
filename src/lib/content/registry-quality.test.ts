@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest"
-import { getBest, getBlogPost, getGuide, getReview } from "@/lib/content/registry"
+import { getBest, getBlogPost, getComparison, getGuide, getReview } from "@/lib/content/registry"
 
 describe("content quality repairs", () => {
+  it("does not resolve a comparison explicitly marked unpublished", () => {
+    expect(getComparison("square-vs-xero")).toBeNull()
+  })
+
   it("replaces repetitive generated guide filler with practical buyer guidance", () => {
     const guide = getGuide("marketing-attribution-guide")
     expect(guide).not.toBeNull()
