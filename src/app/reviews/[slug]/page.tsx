@@ -145,7 +145,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   <Star size={14} className="fill-accent text-accent" />
                   <span className="font-semibold">{formatScore(tool.rating)}</span>
                   <span className="text-muted-foreground">/ 5.0</span>
-                  {tool.reviewCount > 0 && <span className="text-xs text-muted-foreground">({tool.reviewCount.toLocaleString()} reviews)</span>}
+                  <span className="text-xs text-muted-foreground">(PilotStack editorial score)</span>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-1">
@@ -182,7 +182,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
                 <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
                 <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                  <li>{tool.reviewCount > 0 ? `Overall rating: ${formatScore(tool.rating)}/5 across ${tool.reviewCount.toLocaleString()} recorded reviews` : `Editorial rating: ${formatScore(tool.rating)}/5; a verified user-review count is not available`}</li>
+                  <li>{`Editorial rating: ${formatScore(tool.rating)}/5; this is PilotStack's assessment, not a third-party review aggregate`}</li>
                   <li>Pricing: {tool.priceRange} ({tool.pricing})</li>
                   <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : `${tool.name} excels at ${tool.features.filter(f => f.available).slice(0, 2).map(f => f.name.toLowerCase()).join(" and ")}`}</li>
                   <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `Suitable for most ${tool.category} use cases`}</li>
