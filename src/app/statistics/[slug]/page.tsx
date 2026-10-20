@@ -140,7 +140,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
 
             <div className="mb-6 p-3 rounded-lg bg-primary-subtle/10 border border-primary/20 text-xs text-muted-foreground">
               <span className="font-semibold text-foreground">Source-linked statistics</span>
-              {" — "}Data compiled from the sources listed on this page. Verify time-sensitive figures against the cited source. Last updated {page.lastUpdated}.
+              {" — "}Source links provide context and may lead to publisher pages rather than the exact original report. This page does not imply independent verification of every figure; confirm the exact number, definition, geography, and publication date in the original source before relying on it. Last updated {page.lastUpdated}.
             </div>
 
             {page.sections.map((section, i) => (
