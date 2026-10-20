@@ -67,6 +67,16 @@ describe("comparison presentation avoids generic boilerplate", () => {
     ])
   })
 
+  it("collapses whitespace before deduplicating and rendering FAQs", () => {
+    const result = getSpecificComparisonFaqs([
+      { question: "  What   does the free plan include?  ", answer: "  The free plan includes two seats   and basic reporting for small teams that need a simple starting point.  " },
+      { question: "What does the free plan include?", answer: "The free plan includes two seats and basic reporting for small teams that need a simple starting point." },
+    ])
+    expect(result).toEqual([
+      { question: "What does the free plan include?", answer: "The free plan includes two seats and basic reporting for small teams that need a simple starting point." },
+    ])
+  })
+
   it("preserves non-template verdicts", () => {
     const verdict = "Choose A if you need an offline-first workflow; choose B for managed collaboration."
     expect(getComparisonVerdictForDisplay(verdict, false)).toBe(verdict)
