@@ -27,9 +27,13 @@ export const dynamicParams = true
 export const revalidate = 86400
 
 export function generateStaticParams() {
-  // Keep the full corpus indexable without forcing 2,000+ pages through every production build.
-  // Pages are rendered on first request and cached for 24h.
-  return []
+  // The comparison renderer reads committed JSON content from the filesystem. A Workers
+  // runtime cannot depend on the repository's content directory being present at request
+  // time, so emit published records at build time instead of relying on on-demand rendering.
+  // Keep sitemap and route generation aligned by using the same registry source.
+  return getAllComparisons()
+    .filter((comparison) => comparison.publicationStatus !== "draft")
+    .map((comparison) => ({ slug: comparison.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
