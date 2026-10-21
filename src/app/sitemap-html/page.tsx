@@ -6,6 +6,7 @@ import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
 import { createMetadata } from "@/lib/metadata"
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, getAllUseCases, getAllIndustries, getAllHubs, getAllBlogPosts, getAllResearch, getAllStatistics, getAllGlossaryTerms } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
+import { isRetiredComparisonSlug } from "@/lib/sitemap/retired-comparisons"
 import Link from "next/link"
 
 export const metadata = createMetadata({
@@ -20,7 +21,7 @@ function isPublished<T extends { slug: string }>(record: T): boolean {
 
 export default function SitemapPage() {
   const reviews = getAllReviews().filter(r => isPublished(r) && !isNoindexed("reviews", r.slug))
-  const comparisons = getAllComparisons().filter(c => isPublished(c) && !isNoindexed("comparisons", c.slug))
+  const comparisons = getAllComparisons().filter(c => isPublished(c) && !isRetiredComparisonSlug(c.slug) && !isNoindexed("comparisons", c.slug))
   const guides = getAllGuides().filter(g => isPublished(g) && !isNoindexed("guides", g.slug))
   const best = getAllBest().filter(isPublished)
   const alternatives = getAllAlternatives().filter(isPublished)
