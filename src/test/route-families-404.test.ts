@@ -141,6 +141,17 @@ describe("route families", () => {
     expect(duplicated).toEqual([])
   })
 
+  it("excludes explicitly drafted content from the sitemap across every content family", () => {
+    const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
+    for (const family of FAMILIES) {
+      for (const record of recordsOf(family.dir ?? "")) {
+        if (record.publicationStatus === "draft") {
+          expect(paths.has(`/${family.route}/${record.slug}`), `draft content must not be listed: ${family.route}/${record.slug}`).toBe(false)
+        }
+      }
+    }
+  })
+
   it("keeps every content record represented by an indexable sitemap URL", () => {
     const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
     for (const family of FAMILIES) {
