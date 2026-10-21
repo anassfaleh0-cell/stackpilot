@@ -771,6 +771,7 @@ export function getAllComparisons(): ComparisonContent[] {
   return readDir(path.join(CONTENT_DIR, "comparisons"))
     .map((f) => getComparison(f.replace(/\.json$/, "")))
     .filter((x): x is ComparisonContent => Boolean(x))
+    .filter((comparison) => !isExplicitlyUnpublished("comparison", comparison.slug))
 }
 
 /** Load only comparisons assigned to a category before building expensive derived narratives. */
