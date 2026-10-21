@@ -157,6 +157,7 @@ export default function SitemapPage() {
               <Link href="/team" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Team</Link>
               <Link href="/contact" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Contact</Link>
               <Link href="/privacy" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Privacy</Link>
+              <Link href="/cookies" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Cookies</Link>
               <Link href="/terms" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Terms</Link>
               <Link href="/editorial-policy" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Editorial Policy</Link>
               <Link href="/affiliate-disclosure" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Affiliate Disclosure</Link>
@@ -166,6 +167,7 @@ export default function SitemapPage() {
               <Link href="/press" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Press</Link>
               <Link href="/statistics" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Statistics</Link>
               <Link href="/research" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Research</Link>
+              <Link href="/sitemap-html" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">HTML Sitemap</Link>
             </div>
           </Section>
           <Section title={`Editorial Resources (${editorialLinks.length})`}>
