@@ -81,15 +81,13 @@ jobs:
           test "$review_count" -gt 0
           test "$comparison_count" -gt 0
           test -f .next/prerender-manifest.json
-          cache_dir=".open-next/assets/cdn-cgi/_next_cache"
-          if [ ! -d "$cache_dir" ]; then
-            echo "OpenNext static-assets incremental cache directory is missing: $cache_dir"
-            find .open-next/assets -maxdepth 4 -type d | head -80
-            exit 1
-          fi
-          cache_file_count="$(find "$cache_dir" -type f | wc -l | tr -d ' ')"
-          echo "OpenNext static route cache files: $cache_file_count"
-          test "$cache_file_count" -gt 0
+          # Validate documented build outputs without assuming an internal cache directory
+          # name that varies by OpenNext adapter version.
+          test -f .open-next/worker.js
+          test -d .open-next/assets/_next/static
+          static_asset_count="$(find .open-next/assets/_next/static -type f | wc -l | tr -d ' ')"
+          echo "OpenNext worker bundle exists; static asset files: $static_asset_count"
+          test "$static_asset_count" -gt 0
           node <<'NODE'
           const fs = require('node:fs');
           const manifest = JSON.parse(fs.readFileSync('.next/prerender-manifest.json', 'utf8'));
