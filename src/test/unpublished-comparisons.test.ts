@@ -87,6 +87,7 @@ describe("rewritten cross-category comparison guides", () => {
       expect(record.winner, slug).toBeNull()
       expect(record.winnerVerified, slug).toBe(false)
       expect(record.featuresVerified, slug).toBe(false)
+      expect(record.decisionGuide, slug).toBe(true)
       expect(getComparison(slug), slug).not.toBeNull()
       expect(isContentAvailable("comparison", slug), slug).toBe(true)
       expect(isNoindexed("comparisons", slug), slug).toBe(false)
