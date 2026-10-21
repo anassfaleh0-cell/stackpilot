@@ -114,7 +114,7 @@ jobs:
 
           curl --silent --show-error --fail "$PREVIEW_URL/sitemap.xml" > /tmp/pilotstack-sitemap.xml
           grep -Fq '<loc>https://pilotstack.online/' /tmp/pilotstack-sitemap.xml
-          if grep -Eiq 'noindex' /tmp/pilotstack-home.html; then
-            echo "Unexpected noindex text in homepage HTML"
+          if grep -Eiq 'name="robots"[^>]*content="[^"]*noindex|content="[^"]*noindex[^"]*"[^>]*name="robots"' /tmp/pilotstack-home.html; then
+            echo "Unexpected noindex directive on homepage"
             exit 1
           fi
