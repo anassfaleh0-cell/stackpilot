@@ -17,7 +17,6 @@ import { EEATProcess } from "@/components/seo/editorial-process"
 import { isNoindexed } from "@/lib/noindex"
 
 export const dynamicParams = true
-export const revalidate = 86400
 
 export function generateStaticParams() {
   // Content is read from committed JSON files. Prerender the corpus so Workers never need

@@ -24,7 +24,6 @@ import { getComparisonDecision, getComparisonDisplayCopy } from "@/lib/content/c
 import { getVisibleReviewFaqs, stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
 
 export const dynamicParams = true
-export const revalidate = 86400
 
 export function generateStaticParams() {
   // The comparison renderer reads committed JSON content from the filesystem. A Workers

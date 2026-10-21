@@ -19,7 +19,6 @@ import { Clock, User, Calendar, Star } from "lucide-react"
 import { InFeedAd } from "@/components/ads"
 
 export const dynamicParams = true
-export const revalidate = 86400
 
 export function generateStaticParams() {
   // Content is read from committed JSON files; prerender the corpus for Workers compatibility.

@@ -38,7 +38,6 @@ function stripUnverifiedRatingClaims(value: string): string {
 }
 
 export const dynamicParams = true
-export const revalidate = 86400
 
 export function generateStaticParams() {
   // Content is read from committed JSON files; prerender the corpus for Workers compatibility.
