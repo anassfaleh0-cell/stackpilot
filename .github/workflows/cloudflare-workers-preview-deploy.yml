@@ -49,7 +49,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p /tmp/pilotstack-cloudflare-tools
-          printf '%s\\n' '{"private":true}' > /tmp/pilotstack-cloudflare-tools/package.json
+          echo '{"private":true}' > /tmp/pilotstack-cloudflare-tools/package.json
           npm install --prefix /tmp/pilotstack-cloudflare-tools --no-save --package-lock=false --legacy-peer-deps @opennextjs/cloudflare@1.20.13 wrangler@4.134.0
           mkdir -p node_modules/@opennextjs
           test ! -e node_modules/@opennextjs/cloudflare
@@ -74,7 +74,7 @@ jobs:
         run: |
           set -euo pipefail
           ./node_modules/.bin/wrangler deploy --config wrangler.jsonc 2>&1 | tee /tmp/pilotstack-cloudflare-deploy.log
-          preview_url="$(grep -Eo 'https://[^[:space:]]+\\.workers\\.dev' /tmp/pilotstack-cloudflare-deploy.log | tail -n 1 || true)"
+          preview_url="$(grep -Eo 'https://[^[:space:]]+[.]workers[.]dev' /tmp/pilotstack-cloudflare-deploy.log | tail -n 1 || true)"
           test -n "$preview_url" || { echo "Could not determine workers.dev URL from deployment output"; exit 1; }
           echo "preview_url=$preview_url" >> "$GITHUB_OUTPUT"
         env:
