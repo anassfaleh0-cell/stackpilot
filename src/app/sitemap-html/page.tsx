@@ -42,7 +42,7 @@ export default function SitemapPage() {
       <article className="pb-16">
         <Container>
           <h1 className="text-3xl font-bold tracking-tight mb-2">Sitemap</h1>
-          <p className="text-muted-foreground mb-10">Browse published software reviews, comparisons, guides, glossary entries, and research pages on PilotStack.</p>
+          <p className="text-muted-foreground mb-10">Browse published reviews, comparisons, guides, glossary entries, tool pages, author profiles, and editorial resources on PilotStack.</p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <Section title={`Reviews (${reviews.length})`}>
