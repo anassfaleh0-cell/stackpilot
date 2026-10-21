@@ -1,0 +1,38 @@
+name: Cloudflare vinext compatibility check
+
+on:
+  push:
+    branches:
+      - check/cloudflare-vinext-compatibility
+    paths:
+      - "src/**"
+      - "content/**"
+      - "next.config.*"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/cloudflare-compatibility.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compatibility:
+    name: Non-production compatibility audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install existing app dependencies
+        run: npm ci
+
+      - name: Check Next.js compatibility with Cloudflare's vinext adapter
+        run: npx --yes vinext check
