@@ -14,8 +14,7 @@ export const metadata = createMetadata({
 })
 
 function isPublished<T extends { slug: string }>(record: T): boolean {
-  const publication = record as T & { publicationStatus?: string; published?: boolean }
-  return publication.publicationStatus !== "draft" && publication.published !== false
+  return (record as T & { publicationStatus?: string }).publicationStatus !== "draft"
 }
 
 export default function SitemapPage() {
