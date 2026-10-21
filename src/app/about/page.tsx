@@ -36,7 +36,7 @@ export default function AboutPage() {
                 {[
                   { title: "Independent", desc: "Commercial relationships are disclosed and are not intended to determine editorial scores or conclusions." },
                   { title: "Evidence-led", desc: "Where ratings are shown, the methodology explains the criteria and calculation used." },
-                  { title: "Transparent", desc: "Our methodology is public. See exactly how we reach every conclusion." },
+                  { title: "Transparent", desc: "Our methodology explains the criteria and evidence standards behind our conclusions, including current verification limits." },
                   { title: "Helpful", desc: "Every piece of content should help you make a better decision." },
                 ].map((v) => (
                   <div key={v.title} className="p-4 rounded-xl bg-muted-bg">
