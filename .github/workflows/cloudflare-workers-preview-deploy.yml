@@ -121,7 +121,16 @@ jobs:
         run: |
           set -euo pipefail
           for path in / /reviews/linear /comparisons/activecampaign-vs-ahrefs /affiliate-disclosure /privacy /contact /robots.txt /sitemap.xml /ads.txt /rss.xml /api/search?q=asana; do
-            code="$(curl --silent --show-error --output /tmp/pilotstack-preview-response.txt --write-out '%{http_code}' "$PREVIEW_URL$path")"
+            # workers.dev can briefly return Cloudflare 1042 while a new version propagates.
+            code="000"
+            for attempt in $(seq 1 10); do
+              code="$(curl --silent --show-error --output /tmp/pilotstack-preview-response.txt --write-out '%{http_code}' "$PREVIEW_URL$path" || true)"
+              if [ "$code" = "200" ]; then
+                break
+              fi
+              echo "Attempt $attempt: HTTP $code for $path; retrying in 3s"
+              sleep 3
+            done
             echo "$code $path"
             if [ "$code" != "200" ]; then
               cat /tmp/pilotstack-preview-response.txt
