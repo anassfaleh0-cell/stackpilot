@@ -54,21 +54,28 @@ jobs:
           set -euo pipefail
           account_id="${CLOUDFLARE_ACCOUNT_ID:-}"
           if [ -z "$account_id" ]; then
-            response="$(curl --silent --show-error --fail \
-              -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
-              -H "Content-Type: application/json" \
-              "https://api.cloudflare.com/client/v4/accounts?per_page=50")"
-            count="$(printf '%s' "$response" | jq '.result | length')"
-            if [ "$count" -ne 1 ]; then
-              echo "Could not safely auto-select a Cloudflare account: token can see $count accounts. Configure repository variable CLOUDFLARE_ACCOUNT_ID."
-              exit 1
+            auth_header="Authorization: Bearer $CLOUDFLARE_API_TOKEN"
+            zone_response="$(curl --silent --show-error \
+              -H "$auth_header" -H "Content-Type: application/json" \
+              "https://api.cloudflare.com/client/v4/zones?name=pilotstack.online&per_page=10")"
+            if printf '%s' "$zone_response" | jq -e '.success == true and (.result | length) == 1' >/dev/null; then
+              account_id="$(printf '%s' "$zone_response" | jq -r '.result[0].account.id')"
+            else
+              account_response="$(curl --silent --show-error \
+                -H "$auth_header" -H "Content-Type: application/json" \
+                "https://api.cloudflare.com/client/v4/accounts?per_page=50")"
+              count="$(printf '%s' "$account_response" | jq -r 'if .success == true then (.result | length) else -1 end')"
+              if [ "$count" -eq 1 ]; then
+                account_id="$(printf '%s' "$account_response" | jq -r '.result[0].id')"
+              else
+                echo "Cannot auto-resolve Cloudflare account ID with this token. Add repository variable CLOUDFLARE_ACCOUNT_ID, or use a token with Zone Read permission for pilotstack.online."
+                exit 1
+              fi
             fi
-            account_id="$(printf '%s' "$response" | jq -r '.result[0].id')"
           fi
           test -n "$account_id" && test "$account_id" != "null"
           echo "CLOUDFLARE_ACCOUNT_ID=$account_id" >> "$GITHUB_ENV"
           echo "Cloudflare account ID resolved (value hidden)."
-
       - name: Install locked project dependencies
         run: npm ci
 
