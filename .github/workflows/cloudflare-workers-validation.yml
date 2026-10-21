@@ -40,7 +40,7 @@ jobs:
         run: npm ci
 
       - name: Install Cloudflare adapter and Wrangler without changing the lockfile
-        run: npm install --no-save --package-lock=false @opennextjs/cloudflare@latest wrangler@latest
+        run: npm install --no-save --package-lock=false --legacy-peer-deps @opennextjs/cloudflare@latest wrangler@latest
 
       - name: Build with OpenNext for Cloudflare Workers
         run: npx opennextjs-cloudflare build
@@ -52,3 +52,33 @@ jobs:
         run: npx wrangler deploy --dry-run
         env:
           CI: "true"
+
+      - name: Start local Cloudflare Workers preview
+        run: |
+          npx opennextjs-cloudflare preview > /tmp/pilotstack-cloudflare-preview.log 2>&1 &
+          echo $! > /tmp/pilotstack-cloudflare-preview.pid
+          for attempt in $(seq 1 90); do
+            if curl --silent --fail http://127.0.0.1:8787/ads.txt > /dev/null; then
+              break
+            fi
+            sleep 2
+          done
+          if ! curl --silent --fail http://127.0.0.1:8787/ads.txt > /dev/null; then
+            cat /tmp/pilotstack-cloudflare-preview.log
+            echo "Cloudflare Workers preview did not become ready"
+            exit 1
+          fi
+
+      - name: Smoke-test Cloudflare SEO and app routes
+        run: |
+          set -euo pipefail
+          for path in / /robots.txt /sitemap.xml /ads.txt /rss.xml /api/search?q=asana; do
+            code=$(curl --silent --show-error --output /tmp/pilotstack-response.txt --write-out "%{http_code}" "http://127.0.0.1:8787$path")
+            echo "$code $path"
+            if [ "$code" != "200" ]; then
+              cat /tmp/pilotstack-cloudflare-preview.log
+              cat /tmp/pilotstack-response.txt
+              exit 1
+            fi
+          done
+          grep -q "google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0" /tmp/pilotstack-response.txt || true
