@@ -47,7 +47,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p /tmp/pilotstack-cloudflare-tools
-          printf '%s\\n' '{"private":true}' > /tmp/pilotstack-cloudflare-tools/package.json
+          printf '%s\n' '{"private":true}' > /tmp/pilotstack-cloudflare-tools/package.json
           npm install --prefix /tmp/pilotstack-cloudflare-tools --no-save --package-lock=false --legacy-peer-deps @opennextjs/cloudflare@1.20.13 wrangler@4.134.0
           mkdir -p node_modules/@opennextjs
           test ! -e node_modules/@opennextjs/cloudflare
@@ -67,7 +67,37 @@ jobs:
           CI: "true"
 
       - name: Deploy preview Worker only
-        run: ./node_modules/.bin/wrangler deploy --config wrangler.jsonc
+        id: deploy
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./node_modules/.bin/wrangler deploy --config wrangler.jsonc 2>&1 | tee /tmp/pilotstack-cloudflare-deploy.log
+          preview_url="$(grep -Eo 'https://[^[:space:]]+\.workers\.dev' /tmp/pilotstack-cloudflare-deploy.log | tail -n 1 || true)"
+          test -n "$preview_url" || { echo "Could not determine workers.dev URL from deployment output"; exit 1; }
+          echo "preview_url=$preview_url" >> "$GITHUB_OUTPUT"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Smoke-test public routes and SEO endpoints
+        shell: bash
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.preview_url }}
+        run: |
+          set -euo pipefail
+          for path in / /reviews/linear /comparisons/activecampaign-vs-ahrefs /affiliate-disclosure /privacy /contact /robots.txt /sitemap.xml /ads.txt /rss.xml /api/search?q=asana; do
+            code="$(curl --silent --show-error --output /tmp/pilotstack-preview-response.txt --write-out '%{http_code}' "$PREVIEW_URL$path")"
+            echo "$code $path"
+            if [ "$code" != "200" ]; then
+              cat /tmp/pilotstack-preview-response.txt
+              exit 1
+            fi
+          done
+          curl --silent --show-error --fail "$PREVIEW_URL/reviews/linear" > /tmp/pilotstack-review.html
+          grep -Fq 'rel="canonical" href="https://pilotstack.online/reviews/linear"' /tmp/pilotstack-review.html
+          if grep -Eiq 'name="robots"[^>]*content="[^"]*noindex|content="[^"]*noindex[^"]*"[^>]*name="robots"' /tmp/pilotstack-review.html; then
+            echo "Unexpected noindex directive on /reviews/linear"
+            exit 1
+          fi
+          curl --silent --show-error --fail "$PREVIEW_URL/" > /tmp/pilotstack-home.html
+          grep -Fq 'google-adsense-account' /tmp/pilotstack-home.html
