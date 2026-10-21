@@ -14,4 +14,12 @@ describe("homepage trust claims", () => {
     expect(homepage).not.toContain("Content reviewed and refreshed quarterly")
     expect(homepage).toContain("We update content when material product or pricing changes are verified.")
   })
+  it("uses a branded homepage title and applies content-availability filters once", () => {
+    expect(homepage).toContain('title: "Software Reviews, Comparisons & Guides | PilotStack"')
+    expect(homepage).not.toMatch(/isContentAvailable\("comparison", cmp\.slug\)\)\.filter/)
+    expect(homepage).not.toMatch(/isContentAvailable\("blog", post\.slug\)\)\.filter/)
+    expect(homepage).not.toMatch(/isContentAvailable\("glossary", term\.slug\)\)\.filter/)
+    expect(homepage).not.toMatch(/isContentAvailable\("research", item\.slug\)\)\.filter/)
+  })
+
 })
