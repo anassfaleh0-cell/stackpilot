@@ -1,0 +1,54 @@
+name: Cloudflare Workers validation
+
+on:
+  push:
+    branches: ["migration/cloudflare-workers-pilotstack"]
+  pull_request:
+    paths:
+      - "src/**"
+      - "content/**"
+      - "public/**"
+      - "next.config.ts"
+      - "open-next.config.ts"
+      - "wrangler.jsonc"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/cloudflare-workers-validation.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-workers-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-dry-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install locked project dependencies
+        run: npm ci
+
+      - name: Install Cloudflare adapter and Wrangler without changing the lockfile
+        run: npm install --no-save --package-lock=false @opennextjs/cloudflare@latest wrangler@latest
+
+      - name: Build with OpenNext for Cloudflare Workers
+        run: npx opennextjs-cloudflare build
+        env:
+          BUILD_TARGET: cloudflare
+          CI: "true"
+
+      - name: Validate Worker bundle without deploying
+        run: npx wrangler deploy --dry-run
+        env:
+          CI: "true"
