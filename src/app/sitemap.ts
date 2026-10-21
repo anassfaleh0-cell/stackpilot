@@ -9,8 +9,9 @@ import { isNoindexed } from "@/lib/noindex"
 import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
 import { getSitemapLastModified } from "@/lib/content/sitemap-date"
 
-function isQuality(slug: string, dir: string): boolean {
-  return !isNoindexed(dir, slug)
+function isQuality(type: string, slug: string, dir: string): boolean {
+  // Keep explicitly unpublished records out of the sitemap as well as internal links.
+  return isContentAvailable(type, slug) && !isNoindexed(dir, slug)
 }
 
 const staticPages: MetadataRoute.Sitemap = [
@@ -49,18 +50,18 @@ const staticPages: MetadataRoute.Sitemap = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Derive actual lastModified dates from content for content pages
-  const reviews = getAllReviews().filter((r) => isQuality(r.slug, "reviews"))
-  const comparisons = getAllComparisons().filter((c) => isQuality(c.slug, "comparisons"))
-  const guides = getAllGuides().filter((g) => isQuality(g.slug, "guides"))
-  const blogPosts = getAllBlogPosts().filter((p) => isQuality(p.slug, "blog"))
-  const glossary = getAllGlossaryTerms().filter((t) => isQuality(t.slug, "glossary"))
-  const alternatives = getAllAlternatives().filter((a) => isQuality(a.slug, "alternatives"))
-  const useCases = getAllUseCases().filter((u) => isQuality(u.slug, "use-cases"))
-  const industries = getAllIndustries().filter((i) => isQuality(i.slug, "industries"))
-  const best = getAllBest().filter((b) => isQuality(b.slug, "best"))
-  const hubs = getAllHubs().filter((h) => isQuality(h.slug, "hubs"))
-  const research = getAllResearch().filter((r) => isQuality(r.slug, "research"))
-  const statistics = getAllStatistics().filter((s) => isQuality(s.slug, "statistics"))
+  const reviews = getAllReviews().filter((r) => isQuality("review", r.slug, "reviews"))
+  const comparisons = getAllComparisons().filter((c) => isQuality("comparison", c.slug, "comparisons"))
+  const guides = getAllGuides().filter((g) => isQuality("guide", g.slug, "guides"))
+  const blogPosts = getAllBlogPosts().filter((p) => isQuality("blog", p.slug, "blog"))
+  const glossary = getAllGlossaryTerms().filter((t) => isQuality("glossary", t.slug, "glossary"))
+  const alternatives = getAllAlternatives().filter((a) => isQuality("alternative", a.slug, "alternatives"))
+  const useCases = getAllUseCases().filter((u) => isQuality("use-case", u.slug, "use-cases"))
+  const industries = getAllIndustries().filter((i) => isQuality("industry", i.slug, "industries"))
+  const best = getAllBest().filter((b) => isQuality("best", b.slug, "best"))
+  const hubs = getAllHubs().filter((h) => isQuality("hub", h.slug, "hubs"))
+  const research = getAllResearch().filter((r) => isQuality("research", r.slug, "research"))
+  const statistics = getAllStatistics().filter((s) => isQuality("statistic", s.slug, "statistics"))
 
   const entries: MetadataRoute.Sitemap = [
     ...staticPages,
