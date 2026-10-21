@@ -22,7 +22,7 @@ export default function CookiesPage() {
         <Container>
           <div className="max-w-3xl mx-auto prose prose-slate">
             <h1 className="text-4xl font-bold tracking-tight mb-6">Cookie Policy</h1>
-            <p className="text-muted-foreground"><em>Last updated: October 14, 2026</em></p>
+            <p className="text-muted-foreground"><em>Last updated: October 21, 2026</em></p>
 
             <p>This Cookie Policy explains how PilotStack ("we", "us", "our") uses cookies and similar tracking technologies on our website. It supplements our <a href="/privacy">Privacy Policy</a> and explains what cookies are, why we use them, and how you can control their use.</p>
 
