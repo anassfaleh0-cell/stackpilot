@@ -22,7 +22,7 @@ export async function GET(request: Request) {
   const match = (text: string) => text.toLowerCase().includes(query)
 
   const searchableContent: SearchResult[] = [
-    ...generatedSearchIndex,
+    ...generatedSearchIndex.map((item) => ({ ...item, type: item.type as SearchResult["type"] })),
     ...categories.map((c) => ({
       title: `${c.name} Software`,
       description: `Browse the best ${c.name.toLowerCase()} tools and software`,
