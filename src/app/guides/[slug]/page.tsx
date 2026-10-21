@@ -59,7 +59,7 @@ export const revalidate = 86400
 export function generateStaticParams() {
   // Content is read from committed JSON files; prerender the corpus for Workers compatibility.
   return getAllGuides()
-    .filter((item) => item.publicationStatus !== "draft")
+    .filter((item) => (item as typeof item & { publicationStatus?: string }).publicationStatus !== "draft")
     .map((item) => ({ slug: item.slug }))
 }
 
