@@ -47,6 +47,7 @@ const csp = [
 ].join("; ")
 
 const nextConfig: NextConfig = {
+  // OpenNext Cloudflare adapts Next.js standalone build output.
   output: "standalone",
   poweredByHeader: false,
   compress: true,

@@ -2,25 +2,19 @@ const APP_HOST = "pilotstack.online"
 
 export function proxy(request: Request) {
   const url = new URL(request.url)
-  const host = (request.headers.get("x-forwarded-host") || url.host)
-    .split(":")[0]
-    .toLowerCase()
+  // Use the host actually requested. On Vercel, x-forwarded-host can reflect
+  // the canonical/custom host even when the caller is testing a deployment URL.
+  // Preferring it would redirect every Preview smoke test to production.
+  const rawHost = request.headers.get("host") || url.host
+  const host = rawHost.startsWith("[")
+    ? rawHost.slice(1, rawHost.indexOf("]")).toLowerCase()
+    : rawHost.split(":")[0].toLowerCase()
+  const isLocalHost = host === "localhost" || host === "127.0.0.1" || host === "::1"
+  const isPreviewHost = host.endsWith(".vercel.app") || host.endsWith(".workers.dev")
 
-  // Vercel preview deployments must stay on their own hostname so reviewers can
-  // validate branch changes without being redirected to production. This only
-  // applies to preview environments; production still enforces the canonical host.
-  const isVercelPreviewHost =
-    process.env.VERCEL_ENV === "preview" && host.endsWith(".vercel.app")
-
-  if (
-    host === APP_HOST ||
-    host === `www.${APP_HOST}` ||
-    host.startsWith("localhost") ||
-    // The CI route smoke test binds Next.js to 127.0.0.1; keep local requests
-    // local rather than redirecting them to the public production hostname.
-    host === "127.0.0.1" ||
-    isVercelPreviewHost
-  ) {
+  // Keep local smoke tests and preview deployments on their own origin.
+  // Only real public hostnames should be redirected to the canonical domain.
+  if (host === APP_HOST || isLocalHost || isPreviewHost) {
     return undefined
   }
 
