@@ -68,18 +68,20 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
     sections: registry.sections.map((section) => ({
       title: section.title,
       body: section.body,
-      stats: section.stats.map((stat) => ({
+      stats: section.stats.filter((stat) => stat.sourceVerified === true && typeof stat.sourceUrl === "string" && /^https?:\/\//i.test(stat.sourceUrl)).map((stat) => ({
         value: stat.value,
         label: stat.label,
         source: stat.source,
-        sourceUrl: stat.sourceUrl || "#",
+        sourceUrl: stat.sourceUrl,
       })),
+
     })),
   }
+  if (!page) notFound()
 
   return (
     <>
-      <ArticleSchema title={page.title} description={page.description} publishedAt={registry.publishedAt} author="PilotStack Team" url={`${site.url}/statistics/${slug}`} />
+      <ArticleSchema title={page.title, description={page.description} publishedAt={registry.publishedAt} author="PilotStack Team" url={`${site.url}/statistics/${slug}`} />
       <WebPageSchema name={page.title} description={page.description} url={`${site.url}/statistics/${slug}`} />
             <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Statistics", href: "/statistics" }, { name: page.title, href: `/statistics/${slug}` }]} />
       <Container className="pt-8">
@@ -102,7 +104,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
 
             <div className="mb-6 p-3 rounded-lg bg-primary-subtle/10 border border-primary/20 text-xs text-muted-foreground">
               <span className="font-semibold text-foreground">Source review status</span>
-              {" — "}Numeric market claims are withheld until their source, scope, date, and verification record can be checked. Last guide update: {page.lastUpdated}.
+              {" — "}Figures without a direct source link are withheld until they can be checked. Numeric market claims require a documented source, scope, date, and verification record. Last guide update: {page.lastUpdated}.
             </div>
 
             {page.sections.map((section, i) => (
@@ -116,17 +118,17 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
                       ))}
                     </div>
                   ) : null}
-                  {section.stats.length > 0 && <div className="grid sm:grid-cols-2 gap-4">
+                  {section.stats.length > 0 ? <div className="grid sm:grid-cols-2 gap-4">
                     {section.stats.map((stat) => (
                       <div key={stat.label} className="rounded-xl border border-border bg-card p-5 hover:border-primary/20 transition-colors">
                         <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">{stat.value}</div>
                         <p className="text-sm text-muted-foreground mb-3">{stat.label}</p>
-                        <a href={stat.sourceUrl} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 text-xs text-primary hover:underline">
+                        {stat.sourceUrl ? <div><a href={stat.sourceUrl} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 text-xs text-primary hover:underline">
                           Source: {stat.source} <ExternalLink size={10} />
-                        </a>
+                        </a></div> : null}
                       </div>
                     ))}
-                  </div>}
+                  </div> : <p className="mb-5 text-sm text-muted-foreground">Figures without a direct source link are withheld until they can be checked.</p>}
                 </section>
                 {i === Math.floor(page.sections.length / 2) - 1 && page.sections.length >= 3 && (
                   <section className="my-10">
