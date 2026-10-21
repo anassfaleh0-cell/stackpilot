@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest"
 import fs from "node:fs"
 import path from "node:path"
+import { isContentAvailable } from "@/lib/content/registry"
 
 const REVIEW_PAGE = path.join(process.cwd(), "src", "app", "reviews", "[slug]", "page.tsx")
 const HOME_PAGE = path.join(process.cwd(), "src", "app", "page.tsx")
@@ -78,6 +79,7 @@ describe("review score provenance", () => {
   })
 
   it("keeps explicitly unpublished content out of internal links and the sitemap", () => {
+    expect(isContentAvailable("comparison", "1password-vs-appwrite")).toBe(false)
     const registry = fs.readFileSync(path.join(process.cwd(), "src", "lib", "content", "registry.ts"), "utf8")
     const sitemap = fs.readFileSync(path.join(process.cwd(), "src", "app", "sitemap.ts"), "utf8")
     const comparisonPage = fs.readFileSync(path.join(process.cwd(), "src", "app", "comparisons", "[slug]", "page.tsx"), "utf8")
