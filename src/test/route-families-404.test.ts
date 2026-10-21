@@ -141,12 +141,13 @@ describe("route families", () => {
     }
   })
 
-  it("covers every XML sitemap URL in the HTML sitemap", () => {
+  it("keeps HTML and XML sitemap URL coverage aligned", () => {
+    const xmlPaths = new Set(sitemap().map(entry => new URL(entry.url).pathname))
     const htmlHrefs = new Set(collectHrefs(SitemapPage()))
-    const missing = sitemap()
-      .map(entry => new URL(entry.url).pathname)
-      .filter(pathname => !htmlHrefs.has(pathname))
-    expect(missing, "every XML sitemap URL should be discoverable from the HTML sitemap").toEqual([])
+    const missingFromHtml = [...xmlPaths].filter(pathname => !htmlHrefs.has(pathname))
+    const extraHtmlLinks = [...htmlHrefs].filter(pathname => pathname.startsWith("/") && !xmlPaths.has(pathname))
+    expect(missingFromHtml, "every XML sitemap URL should be discoverable from the HTML sitemap").toEqual([])
+    expect(extraHtmlLinks, "the HTML sitemap should not link to URLs excluded from the XML sitemap").toEqual([])
   })
 
   it("includes tool pages, public author profiles, and editorial resources in the HTML sitemap", () => {
