@@ -3,7 +3,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, getAllUseCases, getAllIndustries, getAllHubs, getAllBlogPosts, getAllResearch, getAllStatistics } from "@/lib/content/registry"
+import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, getAllUseCases, getAllIndustries, getAllHubs, getAllBlogPosts, getAllResearch, getAllStatistics, getAllGlossaryTerms } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
 import Link from "next/link"
 
@@ -30,6 +30,7 @@ export default function SitemapPage() {
   const blog = getAllBlogPosts().filter(isPublished)
   const research = getAllResearch().filter(isPublished)
   const statistics = getAllStatistics().filter(isPublished)
+  const glossary = getAllGlossaryTerms().filter(g => isPublished(g) && !isNoindexed("glossary", g.slug))
 
   return (
     <>
@@ -41,7 +42,7 @@ export default function SitemapPage() {
       <article className="pb-16">
         <Container>
           <h1 className="text-3xl font-bold tracking-tight mb-2">Sitemap</h1>
-          <p className="text-muted-foreground mb-10">Browse all {reviews.length + comparisons.length + guides.length + best.length + alternatives.length + useCases.length + industries.length + hubs.length + blog.length + categories.length + 30}+ pages on PilotStack.</p>
+          <p className="text-muted-foreground mb-10">Browse published software reviews, comparisons, guides, glossary entries, and research pages on PilotStack.</p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <Section title={`Reviews (${reviews.length})`}>
@@ -55,6 +56,13 @@ export default function SitemapPage() {
               <Link href="/comparisons" className="text-sm text-primary hover:underline block mb-2">All Comparisons</Link>
               {comparisons.map(c => (
                 <Link key={c.slug} href={`/comparisons/${c.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{c.title}</Link>
+              ))}
+            </Section>
+
+            <Section title={`Glossary (${glossary.length})`}>
+              <Link href="/glossary" className="text-sm text-primary hover:underline block mb-2">All Glossary Terms</Link>
+              {glossary.map(g => (
+                <Link key={g.slug} href={`/glossary/${g.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{g.term}</Link>
               ))}
             </Section>
 
@@ -101,7 +109,7 @@ export default function SitemapPage() {
             </Section>
 
             <Section title={`Research & Blog (${blog.length + research.length})`}>
-              <Link href="/blog" className="text-sm text-primary hover:underline block mb-2">All Research</Link>
+              <Link href="/blog" className="text-sm text-primary hover:underline block mb-2">All Blog Posts</Link>
               {blog.map(b => (
                 <Link key={b.slug} href={`/blog/${b.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{b.title}</Link>
               ))}
