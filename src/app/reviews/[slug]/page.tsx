@@ -125,7 +125,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 )}
               </div>
               {hasEditorialRating && (
-                <p className="text-xs text-muted-foreground mb-3">This is PilotStack's assessment, not a third-party review aggregate.</p>
+                <p className="text-xs text-muted-foreground mb-3">Editorial note: this is PilotStack's assessment, not a third-party review aggregate.</p>
               )}
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-1">
                 <span className="flex items-center gap-1">
