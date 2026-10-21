@@ -119,6 +119,13 @@ function hasOfficialPricingSource(body, name) {
     netlify: /(?:https?:\/\/)?(?:www\.)?netlify\.com\/pricing/i,
     monday: /(?:https?:\/\/)?(?:www\.)?monday\.com\/pricing/i,
     asana: /(?:https?:\/\/)?(?:www\.)?asana\.com\/pricing/i,
+    chatgpt: /(?:https?:\/\/)?(?:openai\.com\/chatgpt\/pricing|chatgpt\.com\/pricing)/i,
+    claude: /(?:https?:\/\/)?(?:(?:www\.)?anthropic\.com\/pricing|claude\.com\/pricing)/i,
+    jasper: /(?:https?:\/\/)?(?:www\.)?jasper\.ai\/pricing/i,
+    gemini: /(?:https?:\/\/)?one\.google\.com\/about\/google-ai-plans/i,
+    hubspot: /(?:https?:\/\/)?(?:www\.)?hubspot\.com\/pricing\/(?:sales|marketing)/i,
+    salesforce: /(?:https?:\/\/)?(?:www\.)?salesforce\.com\/sales\/pricing\/?/i,
+    jira: /(?:https?:\/\/)?(?:www\.)?atlassian\.com\/software\/jira\/pricing/i,
   }
   const sourcePattern = officialUrls[name]
   if (!sourcePattern || !sourcePattern.test(body)) return false
