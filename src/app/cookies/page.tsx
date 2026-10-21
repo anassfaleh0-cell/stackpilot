@@ -49,9 +49,9 @@ export default function CookiesPage() {
             <h3>Third-Party Cookies</h3>
             <p>Some third-party services we use may set their own cookies:</p>
             <ul>
-              <li><strong>Google AdSense:</strong> If you consent to advertising cookies, Google AdSense may use cookies to serve personalized ads based on your browsing history. You can opt out via <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a> or <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener">www.aboutads.info</a>.</li>
-              <li><strong>Vercel Analytics:</strong> Edge network analytics — privacy-friendly, cookie-less by default for basic metrics.</li>
-              <li><strong>Monetization scripts:</strong> Our ad and affiliate partners may set cookies to track impressions and clicks. These are third-party controlled and their use is governed by their respective privacy policies. Third-party partners may have their own privacy and consent requirements, which are described in their respective policies.</li>
+              <li><strong>Google AdSense (planned):</strong> We are preparing to use AdSense. If ads are enabled and ad inventory is configured, Google may use cookies or similar technologies to serve and measure ads. The AdSense script is loaded only after advertising consent. Before serving personalized ads in the EEA, UK, or Switzerland, we will configure a Google-certified CMP that supports the IAB Transparency and Consent Framework.</li>
+              
+              <li><strong>Advertising and affiliate integrations:</strong> If we enable an advertising or affiliate service, that provider may process information or set cookies to measure impressions, clicks, or referrals. The relevant provider&apos;s privacy policy and consent requirements will apply.</li>
             </ul>
 
             <h2>How We Use Cookie Data</h2>
