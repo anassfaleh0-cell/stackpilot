@@ -27,7 +27,7 @@ export default function TeamPage() {
             <h1 className="text-4xl font-bold tracking-tight mb-4">Meet the PilotStack Team</h1>
             <p className="text-lg text-muted-foreground text-pretty mb-8">
               PilotStack is maintained by a small editorial team. Editorial roles are published on our{" "}
-              <Link href="/authors">authors</Link> pages, and the process behind every score is public.
+              <Link href="/authors">authors</Link> pages. Our methodology explains the scoring criteria and notes that some older figures are still undergoing source verification.
             </p>
             <Card className="p-6">
               <div className="flex items-center gap-4 mb-4">
