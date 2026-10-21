@@ -145,6 +145,24 @@ jobs:
               exit 1
             fi
           done
+          curl --silent --show-error --fail "$PREVIEW_URL/api/search?q=asana" > /tmp/pilotstack-search.json
+          node <<'NODE'
+          const fs = require('node:fs');
+          const payload = JSON.parse(fs.readFileSync('/tmp/pilotstack-search.json', 'utf8'));
+          if (!Array.isArray(payload.results) || payload.results.length === 0) {
+            console.error('Search endpoint returned no results for a known query.');
+            process.exit(1);
+          }
+          const metricPattern = /\b\d(?:\.\d)?\s*\/\s*5\b|[$€£]\s?\d|\b(?:pricing starts|starts at|starting at|from free)\b/i;
+          const unsafe = payload.results.filter((item) =>
+            item.type === 'comparison' && metricPattern.test(String(item.description || ''))
+          );
+          if (unsafe.length > 0) {
+            console.error('Search index exposes unverified comparison scores/prices:', unsafe.map((item) => item.title));
+            process.exit(1);
+          }
+          console.log('Search endpoint returns results without raw comparison scores or pricing claims.');
+          NODE
           curl --silent --show-error --fail "$PREVIEW_URL/reviews/linear" > /tmp/pilotstack-review.html
           grep -Fq 'rel="canonical" href="https://pilotstack.online/reviews/linear"' /tmp/pilotstack-review.html
           if grep -Eiq 'name="robots"[^>]*content="[^"]*noindex|content="[^"]*noindex[^"]*"[^>]*name="robots"' /tmp/pilotstack-review.html; then
