@@ -75,8 +75,15 @@ describe("content quality safeguards", () => {
     expect(comparison).not.toBeNull()
     expect(comparison?.winner).toBeNull()
     expect(comparison?.verdict).toMatch(/different categories/i)
+    expect(comparison?.description).toContain("Security & Compliance")
+    expect(comparison?.description).toContain("Developer Tools")
+    expect(comparison?.description).not.toMatch(/overall pick|4\.6\/5|4\.2\/5/i)
     expect(comparison?.features.map((feature) => feature.name)).toContain("Primary job and positioning")
     expect(comparison?.features.map((feature) => feature.name)).not.toContain("Free trial duration")
+
+    const sameCategory = getComparison("1password-vs-bitwarden")
+    expect(sameCategory?.description).toContain("Security & Compliance")
+    expect(sameCategory?.description).toContain("recorded criteria")
 
     const reviews = new Map(getAllReviews().map((review) => [review.slug, review]))
     const crossCategory = getAllComparisons().filter((item) => {
