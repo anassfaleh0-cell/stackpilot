@@ -68,7 +68,13 @@ jobs:
           BUILD_TARGET: cloudflare
           CI: "true"
 
-      - name: Assert content routes were generated before deploy
+      - name: Populate prerender cache into Cloudflare static assets
+        run: ./node_modules/.bin/opennextjs-cloudflare populateCache local --config wrangler.jsonc
+        env:
+          BUILD_TARGET: cloudflare
+          CI: "true"
+
+      - name: Assert content routes and populated cache exist before deploy
         shell: bash
         run: |
           set -euo pipefail
@@ -80,13 +86,19 @@ jobs:
           test "$review_count" -gt 0
           test "$comparison_count" -gt 0
           test -f .next/prerender-manifest.json
-          # Validate documented build outputs without assuming an internal cache directory
-          # name that varies by OpenNext adapter version.
+          # Static-assets incremental cache must be populated explicitly before direct Wrangler deploy.
+          # OpenNext's preview command normally does this automatically; this workflow deploys the
+          # Worker directly so run populateCache local first.
           test -f .open-next/worker.js
           test -d .open-next/assets/_next/static
           static_asset_count="$(find .open-next/assets/_next/static -type f | wc -l | tr -d ' ')"
           echo "OpenNext worker bundle exists; static asset files: $static_asset_count"
           test "$static_asset_count" -gt 0
+          cache_dir=".open-next/assets/cdn-cgi/_next_cache"
+          test -d "$cache_dir" || { echo "OpenNext static-assets cache directory is missing after populateCache"; exit 1; }
+          cache_file_count="$(find "$cache_dir" -type f | wc -l | tr -d ' ')"
+          echo "OpenNext prerender cache files: $cache_file_count"
+          test "$cache_file_count" -gt 0
           node <<'NODE'
           const fs = require('node:fs');
           const manifest = JSON.parse(fs.readFileSync('.next/prerender-manifest.json', 'utf8'));
