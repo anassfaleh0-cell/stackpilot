@@ -32,7 +32,7 @@ export function generateStaticParams() {
   // time, so emit published records at build time instead of relying on on-demand rendering.
   // Keep sitemap and route generation aligned by using the same registry source.
   return getAllComparisons()
-    .filter((comparison) => comparison.publicationStatus !== "draft")
+    .filter((comparison) => (comparison as typeof comparison & { publicationStatus?: string }).publicationStatus !== "draft")
     .map((comparison) => ({ slug: comparison.slug }))
 }
 
