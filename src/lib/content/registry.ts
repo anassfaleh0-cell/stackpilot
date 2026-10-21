@@ -335,6 +335,9 @@ function sanitizeReview(review: ReviewContent): ReviewContent {
   const safeDescription = description.length >= 50 ? description : `${review.name} is listed in PilotStack’s ${review.category} catalog. Verify current features, pricing, and terms with the vendor.`
   return {
     ...review,
+    // Imported third-party review counts have no consistent source/provenance in this corpus.
+    // Suppress them rather than presenting unsupported numbers as verified social proof.
+    reviewCount: 0,
     content: buildReviewSections(review),
     description: safeDescription,
     tagline: safePrice(sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.tagline, 220)))),
