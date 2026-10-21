@@ -141,6 +141,14 @@ describe("route families", () => {
     }
   })
 
+  it("covers every XML sitemap URL in the HTML sitemap", () => {
+    const htmlHrefs = new Set(collectHrefs(SitemapPage()))
+    const missing = sitemap()
+      .map(entry => new URL(entry.url).pathname)
+      .filter(pathname => !htmlHrefs.has(pathname))
+    expect(missing, "every XML sitemap URL should be discoverable from the HTML sitemap").toEqual([])
+  })
+
   it("includes tool pages, public author profiles, and editorial resources in the HTML sitemap", () => {
     const hrefs = new Set(collectHrefs(SitemapPage()))
     for (const tool of toolPages) {
