@@ -190,7 +190,7 @@ describe("route families", () => {
     }
   })
 
-  it("pins dynamicParams to false on slug routes with build-time params", () => {
+  it("pins dynamicParams to false on the authors route only", () => {
     const pinned: string[] = []
     const walk = (dir: string) => {
       for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -202,6 +202,6 @@ describe("route families", () => {
       }
     }
     walk(APP_ROOT)
-    expect(pinned.sort()).toEqual(["authors/[slug]/page.tsx", "comparisons/[slug]/page.tsx", "reviews/[slug]/page.tsx"].sort())
+    expect(pinned).toEqual(["authors/[slug]/page.tsx"])
   })
 })
