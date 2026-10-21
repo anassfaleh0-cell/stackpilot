@@ -169,8 +169,8 @@ describe("route families", () => {
     const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
     for (const family of FAMILIES) {
       for (const record of recordsOf(family.dir ?? "")) {
-        if (record.publicationStatus === "draft") {
-          expect(paths.has(`/${family.route}/${record.slug}`), `draft content must not be listed: ${family.route}/${record.slug}`).toBe(false)
+        if (record.publicationStatus === "draft" || record.published === false) {
+          expect(paths.has(`/${family.route}/${record.slug}`), `unpublished content must not be listed: ${family.route}/${record.slug}`).toBe(false)
         }
       }
     }
@@ -180,7 +180,7 @@ describe("route families", () => {
     const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
     for (const family of FAMILIES) {
       for (const record of recordsOf(family.dir ?? "")) {
-        if (record.publicationStatus === "draft") continue
+        if (record.publicationStatus === "draft" || record.published === false) continue
         expect(paths.has(`/${family.route}/${record.slug}`), `missing sitemap URL for ${family.route}/${record.slug}`).toBe(true)
       }
     }
