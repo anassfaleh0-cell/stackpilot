@@ -81,7 +81,7 @@ jobs:
         run: |
           set -euo pipefail
           base="http://127.0.0.1:8787"
-          for path in / /reviews/linear /comparisons/zoom-vs-webex /affiliate-disclosure /privacy /contact /robots.txt /sitemap.xml /ads.txt /rss.xml /api/search?q=asana; do
+          for path in / /reviews/linear /comparisons/activecampaign-vs-ahrefs /affiliate-disclosure /privacy /contact /robots.txt /sitemap.xml /ads.txt /rss.xml /api/search?q=asana; do
             code=$(curl --silent --show-error --output /tmp/pilotstack-response.txt --write-out "%{http_code}" "$base$path")
             echo "$code $path"
             if [ "$code" != "200" ]; then
