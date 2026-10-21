@@ -68,7 +68,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
 
             <div className="mb-6 p-3 rounded-lg bg-primary-subtle/10 border border-primary/20 text-xs text-muted-foreground">
               <span className="font-semibold text-foreground">Source-linked statistics</span>
-              {" — "}Source links may lead to publisher pages rather than the exact original report. Figures without a direct source link are withheld until they can be checked; confirm the definition, geography, and publication date before relying on a number. Last updated {page.lastUpdated}.
+              {" — "}Source links may lead to publisher pages rather than the exact original report. Figures without a direct source link are withheld until they can be checked; confirm the exact number, definition, geography, and publication date before relying on a number. Last updated {page.lastUpdated}.
             </div>
 
             {page.sections.map((section, i) => (
