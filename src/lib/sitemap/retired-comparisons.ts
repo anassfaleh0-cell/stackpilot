@@ -22,7 +22,7 @@ export function filterSitemapEntries<T extends SitemapEntry>(entries: T[]): T[] 
       return false
     }
     if (parsed.search || parsed.hash) return false
-    const pathname = parsed.pathname.length > 1 ? parsed.pathname.replace(/\\/+$/, "") : parsed.pathname
+    const pathname = parsed.pathname.length > 1 ? parsed.pathname.replace(/\/+$/, "") : parsed.pathname
     const segments = pathname.split("/").filter(Boolean)
     const comparisonSlug = segments.length === 2 && segments[0] === "comparisons" ? segments[1] : undefined
     if (comparisonSlug && isRetiredComparisonSlug(comparisonSlug)) return false

@@ -58,50 +58,6 @@ const nextConfig: NextConfig = {
       permanent: true,
     },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   ],
   images: {
     formats: ["image/avif", "image/webp"],
