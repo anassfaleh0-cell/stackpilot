@@ -11,18 +11,18 @@ import { BrandPattern, BrandOrb, BrandDivider } from "@/components/brand/pattern
 import { BannerAd, NativeAd } from "@/components/ads"
 
 export const metadata = createMetadata({
-  title: "Software Reviews & Buying Guides",
+  title: "Software Reviews, Comparisons & Guides | PilotStack",
   description: "Software reviews, practical comparisons, and buying guides with transparent criteria, source notes, and limitations.",
   path: "/",
 })
 
 export default function HomePage() {
   const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug))
-  const comparisons = getAllComparisons().filter((cmp) => isContentAvailable("comparison", cmp.slug)).filter((cmp) => isContentAvailable("comparison", cmp.slug))
+  const comparisons = getAllComparisons().filter((cmp) => isContentAvailable("comparison", cmp.slug))
   const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug))
-  const posts = getAllBlogPosts().filter((post) => isContentAvailable("blog", post.slug)).filter((post) => isContentAvailable("blog", post.slug))
-  const glossary = getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug)).filter((term) => isContentAvailable("glossary", term.slug))
-  const allResearch = getAllResearch().filter((item) => isContentAvailable("research", item.slug)).filter((item) => isContentAvailable("research", item.slug))
+  const posts = getAllBlogPosts().filter((post) => isContentAvailable("blog", post.slug))
+  const glossary = getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug))
+  const allResearch = getAllResearch().filter((item) => isContentAvailable("research", item.slug))
   const research = allResearch
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
     .slice(0, 3)
