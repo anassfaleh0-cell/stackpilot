@@ -250,7 +250,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* External reviews / social proof */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-4">Third-Party Reviews</h2>
-                <p className="text-sm text-muted-foreground mb-4">{tool.reviewCount > 0 ? `${tool.name} carries a ${formatScore(tool.rating)}/5 rating across ${tool.reviewCount.toLocaleString()} recorded reviews in the PilotStack dataset.` : `${tool.name} has an editorial rating of ${formatScore(tool.rating)}/5; PilotStack does not have a verified user-review count for this product.`} Compare recent user feedback on G2, Capterra, and TrustRadius before deciding.</p>
+                <p className="text-sm text-muted-foreground mb-4">{tool.name} has a PilotStack editorial rating of {formatScore(tool.rating)}/5. This is an editorial assessment, not an aggregate of third-party user reviews; compare recent feedback on G2, Capterra, and TrustRadius before deciding.</p>
                 <div className="flex flex-wrap gap-3">
                   <a href={`https://www.g2.com/products/${tool.slug}/review`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
