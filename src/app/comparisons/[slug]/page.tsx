@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, FAQSchema, softwareApp, WebPageSchema, ArticleSchema } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getComparison, getContentTitle, getReview, getAllComparisons } from "@/lib/content/registry"
+import { getComparison, getContentTitle, getReview, getAllComparisons, isContentAvailable } from "@/lib/content/registry"
 import { stripDeadContentLinks } from "@/lib/content/link-guard"
 import { formatDate } from "@/lib/utils"
 import { isNoindexed } from "@/lib/noindex"
@@ -35,7 +35,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const cmp = getComparison(slug)
-  if (!cmp) return {}
+  if (!cmp || !isContentAvailable("comparison", slug)) return {}
   const displayDescription = getComparisonDescriptionForDisplay(cmp.description, cmp.tool1, cmp.tool2)
   const readingTime = Math.max(3, Math.ceil(displayDescription.split(/\s+/).length / 200))
   const noindexed = isNoindexed("comparisons", slug)
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ComparisonPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const cmp = getComparison(slug)
-  if (!cmp) notFound()
+  if (!cmp || !isContentAvailable("comparison", slug)) notFound()
   const displayDescription = getComparisonDescriptionForDisplay(cmp.description, cmp.tool1, cmp.tool2)
 
   // A true/false pair without details is too weak to support a percentage score.
