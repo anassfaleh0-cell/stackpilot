@@ -146,6 +146,19 @@ jobs:
             exit 1
           fi
           grep -Fq 'Linear Review' /tmp/pilotstack-review.html
+          # AdSense/editorial trust guard: never display unsupported third-party review counts.
+          if grep -Eiq '([0-9,]+ reviews|reviews across [0-9,]+|[0-9,]+ user reviews)' /tmp/pilotstack-review.html; then
+            echo "Review page contains a numeric third-party review-count claim; verify that the count has a cited source or suppress it."
+            grep -Eio '.{0,70}([0-9,]+ reviews|reviews across [0-9,]+|[0-9,]+ user reviews).{0,70}' /tmp/pilotstack-review.html | head -10
+            exit 1
+          fi
+          # Catch malformed pricing fragments that harm trust and metadata quality.
+          curl --silent --show-error --fail "$PREVIEW_URL/comparisons/1password-vs-auth0" > /tmp/pilotstack-comparison.html
+          if grep -Eiq '\\$[0-9]+([.][0-9]+)?/mo per[. ]' /tmp/pilotstack-comparison.html; then
+            echo "Comparison page contains a malformed per-user pricing fragment."
+            grep -Eio '.{0,70}\\$[0-9]+([.][0-9]+)?/mo per[. ].{0,70}' /tmp/pilotstack-comparison.html | head -10
+            exit 1
+          fi
           grep -Fq 'https://pilotstack.online/reviews/linear' <(curl --silent --show-error --fail "$PREVIEW_URL/sitemap.xml")
           if grep -Eiq '0\+? Software Reviews|0\+? Comparisons|0\+? Guides' /tmp/pilotstack-home.html; then
             echo "Homepage content counters indicate the content registry is empty"
