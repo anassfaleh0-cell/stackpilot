@@ -174,6 +174,23 @@ describe("route families", () => {
     }
   })
 
+  it("only lists sitemap URLs backed by an App Router page", () => {
+    const missing: string[] = []
+    for (const entry of sitemap()) {
+      const segments = new URL(entry.url).pathname.split("/").filter(Boolean)
+      const staticPage = segments.length
+        ? path.join(APP_ROOT, ...segments, "page.tsx")
+        : path.join(APP_ROOT, "page.tsx")
+      const dynamicPage = segments.length
+        ? path.join(APP_ROOT, ...segments.slice(0, -1), "[slug]", "page.tsx")
+        : staticPage
+      if (!fs.existsSync(staticPage) && !fs.existsSync(dynamicPage)) {
+        missing.push(new URL(entry.url).pathname)
+      }
+    }
+    expect(missing, "sitemap must not advertise missing App Router pages").toEqual([])
+  })
+
   it("emits unique URLs in the XML sitemap", () => {
     const urls = sitemap().map((entry) => entry.url)
     const duplicates = urls.filter((url, index) => urls.indexOf(url) !== index)
