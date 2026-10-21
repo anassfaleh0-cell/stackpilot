@@ -24,4 +24,5 @@
 - Next.js keeps `output: "standalone"`, which OpenNext Cloudflare uses as its build input. The normal Vercel build configuration is otherwise unchanged.
 - `wrangler.jsonc` deliberately names a preview Worker and does not bind the production custom domain.
 - Static export is intentionally not used because this application includes App Router route handlers and server-side functionality.
+- The preview uses OpenNext's read-only `staticAssetsIncrementalCache` for prerendered SSG pages, so content changes are refreshed by a new deployment. Do not configure `REVALIDATION_SECRET` for this static-cache profile; if runtime revalidation becomes a requirement, design and test an R2-backed incremental cache and tag-cache setup separately before production.
 - A successful build is not proof of production readiness. A live preview must be checked in the Cloudflare Workers runtime before any domain change.
