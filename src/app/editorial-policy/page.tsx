@@ -68,13 +68,13 @@ export default function EditorialPolicyPage() {
               <p>We keep commercial disclosures separate from the published editorial criteria. Revenue considerations are not intended to determine coverage decisions, rating determinations, or inclusion or exclusion decisions.</p>
 
               <h2>2. Content Standards</h2>
-              <p>Every piece of content published on PilotStack must meet the following standards:</p>
+              <p>New and updated content is expected to meet the following standards. Some older pages remain under source-provenance review and may not yet meet every evidence requirement:</p>
               <ul>
                 <li><strong>Accuracy:</strong> New numeric claims should be tied to a checkable source, date, and relevant context before being described as verified. Some older records remain under source audit; when a claim cannot be confirmed, we correct it, qualify it, or remove the unsupported claim rather than imply verification.</li>
                 <li><strong>Originality:</strong> Our pages are developed from the sources described in our methodology. Vendor-provided material may inform research, but we aim to add editorial context, comparison, and decision guidance rather than republish it as-is.</li>
                 <li><strong>Comprehensiveness:</strong> Reviews must address both strengths and limitations. We explicitly state who each product is best for and who should consider alternatives.</li>
                 <li><strong>Currency:</strong> Content includes publication or update dates where those fields are maintained, and older material is reviewed as part of ongoing maintenance.</li>
-                <li><strong>Clarity:</strong> We distinguish factual reporting from analysis and opinion. Our scoring methodology is transparent and applied consistently across all reviews.</li>
+                <li><strong>Clarity:</strong> We distinguish factual reporting from analysis and opinion. Our scoring methodology is public; older score records are being audited for consistent application and source provenance.</li>
               </ul>
 
               <h2>3. Review Standards</h2>
