@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest"
 import fs from "node:fs"
 import path from "node:path"
 import sitemap from "@/app/sitemap"
+import robots from "@/app/robots"
 import { siteConfig } from "@/lib/constants"
 import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
 import * as Alternatives from "@/app/alternatives/[slug]/page"
@@ -103,6 +104,16 @@ async function expect404(family: Family, slug: string): Promise<void> {
   }
   throw new Error(`${slug}: route /${family.route}/${slug} rendered a page but must 404`)
 }
+
+describe("robots SEO policy", () => {
+  it("publishes the canonical sitemap and allows crawling of public content", () => {
+    const policy = robots()
+    expect(policy.sitemap).toBe(`${siteConfig.url}/sitemap.xml`)
+    const wildcard = policy.rules.find((rule) => rule.userAgent === "*")
+    expect(wildcard?.allow).toBe("/")
+    expect(wildcard?.disallow).toEqual(expect.arrayContaining(["/api/", "/admin/", "/dashboard", "/search", "/_global-error"]))
+  })
+})
 
 describe("route families", () => {
   it("uses only absolute same-origin canonical sitemap URLs without query strings or fragments", () => {
