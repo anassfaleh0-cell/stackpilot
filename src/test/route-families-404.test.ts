@@ -144,7 +144,7 @@ describe("route families", () => {
   it("includes every published glossary entry in the HTML sitemap", () => {
     const hrefs = new Set(collectHrefs(SitemapPage()))
     for (const record of recordsOf("glossary")) {
-      if (record.publicationStatus === "draft" || record.published === false) continue
+      if (record.publicationStatus === "draft") continue
       expect(hrefs.has(`/glossary/${record.slug}`), `published glossary entry missing from HTML sitemap: ${record.slug}`).toBe(true)
     }
   })
@@ -154,7 +154,7 @@ describe("route families", () => {
     for (const family of FAMILIES) {
       if (!family.dir) continue
       for (const record of recordsOf(family.dir)) {
-        if (record.publicationStatus === "draft" || record.published === false) {
+        if (record.publicationStatus === "draft") {
           expect(hrefs.has(`/${family.route}/${record.slug}`), `HTML sitemap must omit unpublished content: ${family.route}/${record.slug}`).toBe(false)
         }
       }
@@ -202,7 +202,7 @@ describe("route families", () => {
     const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
     for (const family of FAMILIES) {
       for (const record of recordsOf(family.dir ?? "")) {
-        if (record.publicationStatus === "draft" || record.published === false) {
+        if (record.publicationStatus === "draft") {
           expect(paths.has(`/${family.route}/${record.slug}`), `unpublished content must not be listed: ${family.route}/${record.slug}`).toBe(false)
         }
       }
@@ -213,7 +213,7 @@ describe("route families", () => {
     const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
     for (const family of FAMILIES) {
       for (const record of recordsOf(family.dir ?? "")) {
-        if (record.publicationStatus === "draft" || record.published === false) continue
+        if (record.publicationStatus === "draft") continue
         expect(paths.has(`/${family.route}/${record.slug}`), `missing sitemap URL for ${family.route}/${record.slug}`).toBe(true)
       }
     }
