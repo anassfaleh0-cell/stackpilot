@@ -177,7 +177,11 @@ function scoreFile(filePath, dirName, reviewsBySlug = new Map()) {
   const reviewReasons = []
   if (isThin) reviewReasons.push("very-short-source-content")
   if (isDuplicate) reviewReasons.push("short-comparison-with-few-sections")
-  if (isCrossCategoryComparison) reviewReasons.push("cross-category-pairing-needs-editorial-review")
+  // Explicit decision guides explain the different jobs/workflows and should not be
+  // flagged solely because the two products belong to different categories.
+  if (isCrossCategoryComparison && data.decisionGuide !== true) {
+    reviewReasons.push("cross-category-pairing-needs-editorial-review")
+  }
   // Low generic scores are meaningful only alongside a short source record.
   // Glossary pages use definition/examples/related-term signals above instead.
   if (dirName !== "glossary" && score < 30 && words < minimumWords * 1.5) {
