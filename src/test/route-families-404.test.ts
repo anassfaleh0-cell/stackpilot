@@ -122,7 +122,8 @@ describe("robots SEO policy", () => {
   it("publishes the canonical sitemap and allows crawling of public content", () => {
     const policy = robots()
     expect(policy.sitemap).toBe(`${siteConfig.url}/sitemap.xml`)
-    const wildcard = policy.rules.find((rule) => rule.userAgent === "*")
+    const rules = Array.isArray(policy.rules) ? policy.rules : [policy.rules]
+    const wildcard = rules.find((rule) => rule.userAgent === "*")
     expect(wildcard?.allow).toBe("/")
     expect(wildcard?.disallow).toEqual(expect.arrayContaining(["/api/", "/admin/", "/dashboard", "/search", "/_global-error"]))
   })
