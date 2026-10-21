@@ -141,6 +141,14 @@ describe("route families", () => {
     }
   })
 
+  it("includes every published glossary entry in the HTML sitemap", () => {
+    const hrefs = new Set(collectHrefs(SitemapPage()))
+    for (const record of recordsOf("glossary")) {
+      if (record.publicationStatus === "draft" || record.published === false) continue
+      expect(hrefs.has(`/glossary/${record.slug}`), `published glossary entry missing from HTML sitemap: ${record.slug}`).toBe(true)
+    }
+  })
+
   it("does not link unpublished records from the HTML sitemap", () => {
     const hrefs = new Set(collectHrefs(SitemapPage()))
     for (const family of FAMILIES) {
