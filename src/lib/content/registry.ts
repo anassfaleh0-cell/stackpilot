@@ -10,6 +10,8 @@ const CONTENT_DIR = path.resolve(process.cwd(), "content")
 // internal-link, and comparison generation revisit the same review profiles thousands of times.
 const reviewCache = new Map<string, ReviewContent | null>()
 const comparisonCache = new Map<string, ComparisonContent | null>()
+let alternativesCache: AlternativeContent[] | null = null
+let bestCache: BestContent[] | null = null
 let statisticsCache: StatisticContent[] | null = null
 let researchCache: ResearchContent[] | null = null
 
@@ -1025,9 +1027,11 @@ export function getAlternative(slug: string): AlternativeContent | null {
 }
 
 export function getAllAlternatives(): AlternativeContent[] {
-  return readDir(path.join(CONTENT_DIR, "alternatives"))
+  if (alternativesCache) return alternativesCache
+  alternativesCache = readDir(path.join(CONTENT_DIR, "alternatives"))
     .map((f) => getAlternative(f.replace(/\.json$/, "")))
     .filter((x): x is AlternativeContent => Boolean(x))
+  return alternativesCache
 }
 
 export function getUseCase(slug: string): UseCaseContent | null {
@@ -1328,9 +1332,11 @@ export function getBest(slug: string): BestContent | null {
 }
 
 export function getAllBest(): BestContent[] {
-  return readDir(path.join(CONTENT_DIR, "best"))
+  if (bestCache) return bestCache
+  bestCache = readDir(path.join(CONTENT_DIR, "best"))
     .map((f) => getBest(f.replace(/\.json$/, "")))
     .filter((x): x is BestContent => Boolean(x))
+  return bestCache
 }
 
 function hubFocus(audience: string): { challenges: string[]; questions: string[] } {
