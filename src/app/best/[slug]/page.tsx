@@ -105,6 +105,16 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   }))
   const reviewHref = (toolSlug: string) => (getReview(toolSlug) ? `/reviews/${toolSlug}` : null)
   const relatedLinks = getRelatedByCategory(page.category, page.slug, 4)
+  const relatedBestPages = (() => {
+    const sameCategory = getAllBest()
+      .filter((item) => item.category === page.category && !isNoindexed("best", item.slug))
+      .sort((a, b) => a.slug.localeCompare(b.slug))
+    const currentIndex = sameCategory.findIndex((item) => item.slug === page.slug)
+    if (currentIndex < 0 || sameCategory.length < 2) return []
+    return Array.from({ length: Math.min(4, sameCategory.length - 1) }, (_, offset) =>
+      sameCategory[(currentIndex + offset + 1) % sameCategory.length],
+    ).filter((item) => item.slug !== page.slug)
+  })()
 
   return (
     <>
@@ -310,6 +320,20 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             maxItems={6}
             items={extendedRelatedItems(relatedLinks)}
           />
+
+          {relatedBestPages.length > 0 && (
+            <section className="mt-12" aria-labelledby="related-best-pages">
+              <h2 id="related-best-pages" className="text-2xl font-bold tracking-tight mb-5">More {page.category} Buying Guides</h2>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {relatedBestPages.map((related) => (
+                  <Link key={related.slug} href={`/best/${related.slug}`} className="rounded-xl border border-border p-4 hover:border-primary/30 hover:bg-muted-bg transition-colors">
+                    <span className="font-medium text-sm">{related.title}</span>
+                    <p className="text-xs text-muted-foreground mt-1">{related.description}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
 
           {(() => {
             const cat = categories.find(c => c.name === page.category)
