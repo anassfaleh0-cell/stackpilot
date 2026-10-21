@@ -99,7 +99,10 @@ jobs:
             exit 1
           fi
 
-          # Verify important crawler and AdSense files, plus a real non-empty search response.
+          # Verify the rendered AdSense publisher meta and important crawler files.
+          curl --silent --show-error --fail "$base/" > /tmp/pilotstack-home.html
+          grep -Fq 'google-adsense-account' /tmp/pilotstack-home.html
+          grep -Fq 'ca-pub-6523926892521982' /tmp/pilotstack-home.html
           curl --silent --show-error --fail "$base/ads.txt" > /tmp/pilotstack-ads.txt
           grep -q "google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0" /tmp/pilotstack-ads.txt
           curl --silent --show-error --fail "$base/robots.txt" > /tmp/pilotstack-robots.txt
