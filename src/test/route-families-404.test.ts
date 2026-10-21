@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest"
 import fs from "node:fs"
 import path from "node:path"
 import sitemap from "@/app/sitemap"
+import { siteConfig } from "@/lib/constants"
 import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
 import * as Alternatives from "@/app/alternatives/[slug]/page"
 import * as Authors from "@/app/authors/[slug]/page"
@@ -106,7 +107,7 @@ async function expect404(family: Family, slug: string): Promise<void> {
 describe("route families", () => {
   it("uses only absolute same-origin canonical sitemap URLs without query strings or fragments", () => {
     const entries = sitemap()
-    const expectedOrigin = new URL(entries[0]?.url ?? "https://pilotstack.online").origin
+    const expectedOrigin = new URL(siteConfig.url).origin
     for (const entry of entries) {
       const parsed = new URL(entry.url)
       expect(parsed.origin, `sitemap URL must use canonical origin: ${entry.url}`).toBe(expectedOrigin)
