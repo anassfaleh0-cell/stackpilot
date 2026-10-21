@@ -50,6 +50,9 @@ jobs:
           ln -s /tmp/pilotstack-cloudflare-tools/node_modules/.bin/opennextjs-cloudflare node_modules/.bin/opennextjs-cloudflare
           ln -s /tmp/pilotstack-cloudflare-tools/node_modules/.bin/wrangler node_modules/.bin/wrangler
 
+      - name: Generate build-time search index for Workers
+        run: node scripts/generate-search-index.mjs
+
       - name: Build with OpenNext for Cloudflare Workers
         run: ./node_modules/.bin/opennextjs-cloudflare build
         env:
