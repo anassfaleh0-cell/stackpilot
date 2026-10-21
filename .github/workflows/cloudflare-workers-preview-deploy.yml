@@ -164,14 +164,14 @@ jobs:
           const fs = require('node:fs');
           const html = fs.readFileSync('/tmp/pilotstack-review.html', 'utf8');
           const text = html
-            .replace(/<(script|style|svg)\\b[^>]*>[\\s\\S]*?<\\/\\1>/gi, ' ')
+            .replace(/<(script|style|svg)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ')
             .replace(/<[^>]+>/g, ' ')
             .replace(/&nbsp;|&#160;/gi, ' ')
             .replace(/&amp;/gi, '&')
-            .replace(/\\s+/g, ' ');
+            .replace(/\s+/g, ' ');
           const patterns = [
-            /(?:G2|Capterra|TrustRadius)[^.]{0,100}\\b[\\d,]+\\s+(?:reviews|ratings|user reviews)\\b/i,
-            /\\b[\\d,]+\\s+(?:reviews|ratings|user reviews)\\b[^.]{0,100}(?:G2|Capterra|TrustRadius)/i,
+            /(?:G2|Capterra|TrustRadius)[^.]{0,100}\b[\d,]+\s+(?:reviews|ratings|user reviews)\b/i,
+            /\b[\d,]+\s+(?:reviews|ratings|user reviews)\b[^.]{0,100}(?:G2|Capterra|TrustRadius)/i,
           ];
           const match = patterns.map((pattern) => text.match(pattern)).find(Boolean);
           if (match) {
