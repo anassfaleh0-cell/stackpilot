@@ -59,8 +59,21 @@ jobs:
           BUILD_TARGET: cloudflare
           CI: "true"
 
+      - name: Populate and verify prerender cache assets
+        run: |
+          set -euo pipefail
+          ./node_modules/.bin/opennextjs-cloudflare populateCache local --config wrangler.jsonc
+          cache_dir=".open-next/assets/cdn-cgi/_next_cache"
+          test -d "$cache_dir"
+          cache_file_count="$(find "$cache_dir" -type f | wc -l | tr -d ' ')"
+          echo "OpenNext prerender cache files: $cache_file_count"
+          test "$cache_file_count" -gt 0
+        env:
+          BUILD_TARGET: cloudflare
+          CI: "true"
+
       - name: Validate Worker bundle without deploying
-        run: ./node_modules/.bin/wrangler deploy --dry-run
+        run: ./node_modules/.bin/wrangler deploy --dry-run --config wrangler.jsonc
         env:
           CI: "true"
 
