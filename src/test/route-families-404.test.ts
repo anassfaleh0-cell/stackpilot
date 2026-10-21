@@ -104,6 +104,18 @@ async function expect404(family: Family, slug: string): Promise<void> {
 }
 
 describe("route families", () => {
+  it("uses only absolute same-origin canonical sitemap URLs without query strings or fragments", () => {
+    const entries = sitemap()
+    const expectedOrigin = new URL(entries[0]?.url ?? "https://pilotstack.online").origin
+    for (const entry of entries) {
+      const parsed = new URL(entry.url)
+      expect(parsed.origin, `sitemap URL must use canonical origin: ${entry.url}`).toBe(expectedOrigin)
+      expect(parsed.search, `sitemap URL must not contain query params: ${entry.url}`).toBe("")
+      expect(parsed.hash, `sitemap URL must not contain fragments: ${entry.url}`).toBe("")
+      expect(parsed.pathname.startsWith("/"), `sitemap URL must use an absolute path: ${entry.url}`).toBe(true)
+    }
+  })
+
   it("emits unique URLs in the XML sitemap", () => {
     const urls = sitemap().map((entry) => entry.url)
     const duplicates = urls.filter((url, index) => urls.indexOf(url) !== index)
