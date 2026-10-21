@@ -450,36 +450,31 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* ── Newsletter ── */}
+      {/* ── Research CTA (newsletter signup stays hidden until delivery is configured) ── */}
       <Section id="newsletter">
         <Container>
-          <div className="mx-auto max-w-xl text-center mb-8">
-            <Badge variant="default" className="mb-4">Newsletter</Badge>
+          <div className="mx-auto max-w-2xl rounded-2xl border border-border bg-surface-secondary p-8 sm:p-10 text-center">
+            <Badge variant="default" className="mb-4">Stay Informed</Badge>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-balance">
-              Practical software research, straight to your inbox
+              Practical software research, when you need it
             </h2>
-            <p className="text-muted-foreground text-pretty">
-              Independent research and software reviews, straight to your inbox. No spam, unsubscribe anytime.
+            <p className="text-muted-foreground text-pretty max-w-xl mx-auto mb-8">
+              Newsletter subscriptions are temporarily unavailable while delivery is being configured. In the meantime, explore our latest research and software guides directly—no email signup required.
             </p>
-          </div>
-          <div className="mx-auto max-w-md">
-            <form action="/api/newsletter" method="POST" className="flex gap-3">
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                autoComplete="email"
-                aria-label="Email address for newsletter"
-                className="flex-1 min-w-0 h-12 px-4 rounded-xl border border-border bg-background text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-primary transition-all duration-200"
-                required
-              />
-              <button
-                type="submit"
-                className="button-press inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-white hover:bg-primary-dark shadow-button hover:shadow-button-hover h-12 px-6 text-sm font-medium transition-all duration-200 shrink-0"
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/research"
+                className="button-press inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-white hover:bg-primary-dark shadow-button hover:shadow-button-hover h-12 px-8 text-base font-medium transition-all duration-200"
               >
-                Subscribe
-              </button>
-            </form>
+                Browse Research <ArrowRight size={16} />
+              </Link>
+              <Link
+                href="/blog"
+                className="button-press inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-background/80 hover:bg-muted-bg h-12 px-8 text-base font-medium transition-all duration-200"
+              >
+                Read Latest Guides
+              </Link>
+            </div>
           </div>
         </Container>
       </Section>
