@@ -48,6 +48,18 @@ const NOINDEX_ENFORCED = new Set(["review", "comparison", "guide", "best", "alte
 // same content file for every internal-link candidate.
 const contentAvailabilityCache = new Map<string, boolean>()
 
+function isExplicitlyUnpublished(type: string, slug: string): boolean {
+  const dir = DIR_FOR_TYPE[type]
+  if (!dir || !slug) return true
+  try {
+    const file = path.join(CONTENT_DIR, dir, `${slug}.json`)
+    const raw = JSON.parse(fs.readFileSync(file, "utf-8")) as { published?: unknown }
+    return raw.published === false
+  } catch {
+    return false
+  }
+}
+
 export function isContentAvailable(type: string, slug: string): boolean {
   const dir = DIR_FOR_TYPE[type]
   if (!dir || !slug) return false
@@ -55,7 +67,10 @@ export function isContentAvailable(type: string, slug: string): boolean {
   const cached = contentAvailabilityCache.get(key)
   if (cached !== undefined) return cached
 
-  const available = getContentTitle(type, slug) !== null &&
+  // Explicitly unpublished records must not leak into homepage cards, related links,
+  // or other surfaces that rely on this shared availability gate.
+  const available = !isExplicitlyUnpublished(type, slug) &&
+    getContentTitle(type, slug) !== null &&
     (!NOINDEX_ENFORCED.has(type) || !isNoindexed(dir, slug))
   contentAvailabilityCache.set(key, available)
   return available
