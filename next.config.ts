@@ -49,6 +49,18 @@ const csp = [
 const nextConfig: NextConfig = {
   // OpenNext Cloudflare adapts Next.js standalone build output.
   output: "standalone",
+  // The content registry reads committed JSON at runtime. Explicitly trace these
+  // data files into Next's server output so Cloudflare Workers can resolve review,
+  // comparison, guide and sitemap records after deployment.
+  outputFileTracingIncludes: {
+    "/*": [
+      "./content/**/*.json",
+      "./src/lib/entities/**/*.json",
+      "./src/data/**/*.json",
+      "./noindex-list.json",
+      "./public/**/*.json",
+    ],
+  },
   poweredByHeader: false,
   compress: true,
   generateEtags: true,
