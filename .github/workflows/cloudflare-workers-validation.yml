@@ -81,4 +81,6 @@ jobs:
               exit 1
             fi
           done
-          grep -q "google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0" /tmp/pilotstack-response.txt || true
+          curl --silent --show-error --fail http://127.0.0.1:8787/ads.txt | grep -q "google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0"
+          curl --silent --show-error --fail http://127.0.0.1:8787/robots.txt | grep -q "Sitemap: https://pilotstack.online/sitemap.xml"
+          curl --silent --show-error --fail http://127.0.0.1:8787/sitemap.xml | grep -q "https://pilotstack.online/"
