@@ -39,4 +39,16 @@ describe("blog body structure", () => {
     expect(writingTools?.body).toContain("checked October 21, 2026")
   })
 
+  it("discloses hosting-plan commercial-use limits in platform comparisons", () => {
+    const deploymentPlatforms = getBlogPost("frontend-deployment-platforms-comparison")
+    const startupDesign = getBlogPost("best-design-tools-for-startups")
+
+    expect(deploymentPlatforms?.updatedAt).toBe("2026-10-21")
+    expect(deploymentPlatforms?.body).toContain("restricted to non-commercial personal use")
+    expect(deploymentPlatforms?.body).toContain("[official Fair Use Guidelines](https://vercel.com/docs/limits/fair-use-guidelines)")
+    expect(deploymentPlatforms?.body).toContain("commercial usage requires Pro or Enterprise")
+    expect(deploymentPlatforms?.body).not.toContain("Vercel is the clear winner")
+    expect(startupDesign?.updatedAt).toBe("2026-10-21")
+  })
+
 })
