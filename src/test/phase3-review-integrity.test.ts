@@ -609,7 +609,7 @@ describe("CD-15: generated review boilerplate", () => {
 
 
 describe("CD-16: cross-category comparison publication safeguards", () => {
-  it("keeps non-substitutable product comparisons unpublished without a false overall winner", () => {
+  it("keeps non-substitutable product comparisons public as decision guides without false winner claims", () => {
     const slugs = [
       "adp-vs-airtable",
       "affinity-vs-wix",
@@ -622,10 +622,14 @@ describe("CD-16: cross-category comparison publication safeguards", () => {
     for (const slug of slugs) {
       const file = path.join(process.cwd(), "content", "comparisons", `${slug}.json`)
       const comparison = JSON.parse(fs.readFileSync(file, "utf8"))
-      expect(comparison.publicationStatus, slug).toBe("draft")
-      expect(comparison.published, slug).toBe(false)
-      expect(comparison.winner, slug).toBe("Depends on use case")
+      expect(comparison.publicationStatus, slug).not.toBe("draft")
+      expect(comparison.published, slug).toBe(true)
+      expect(comparison.winner, slug).toBeNull()
+      expect(comparison.winnerVerified, slug).toBe(false)
+      expect(comparison.featuresVerified, slug).toBe(false)
       expect(comparison.lastUpdated, slug).toBeUndefined()
+      expect(comparison.features, slug).toHaveLength(4)
+      expect(comparison.faqs, slug).toHaveLength(5)
     }
   })
 })
