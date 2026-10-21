@@ -26,6 +26,10 @@ import { getVisibleReviewFaqs, stripUnverifiedPriceClaims } from "@/lib/content/
 export const dynamicParams = true
 
 export function generateStaticParams() {
+  // Vercel keeps on-demand generation; Cloudflare prerenders committed JSON content because
+  // Workers must not depend on repository filesystem access during request-time route resolution.
+  if (process.env.BUILD_TARGET !== "cloudflare") return []
+
   // The comparison renderer reads committed JSON content from the filesystem. A Workers
   // runtime cannot depend on the repository's content directory being present at request
   // time, so emit published records at build time instead of relying on on-demand rendering.
