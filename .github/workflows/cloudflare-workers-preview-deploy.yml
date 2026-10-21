@@ -1,6 +1,11 @@
 name: Deploy PilotStack Cloudflare preview
 
 on:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/cloudflare-workers-preview-deploy.yml
   workflow_dispatch:
     inputs:
       confirm_preview_only:
@@ -17,7 +22,7 @@ concurrency:
 
 jobs:
   deploy-preview:
-    if: ${{ inputs.confirm_preview_only == 'PREVIEW' }}
+    if: ${{ github.event_name == 'push' || inputs.confirm_preview_only == 'PREVIEW' }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
