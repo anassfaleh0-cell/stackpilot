@@ -27,4 +27,16 @@ describe("blog body structure", () => {
     expect(bestDesign?.body).toContain("checked against [Figma’s official pricing page]")
   })
 
+  it("ties AI subscription prices to official sources and regional terms", () => {
+    const smallBusiness = getBlogPost("ai-tools-for-small-business")
+    const writingTools = getBlogPost("best-ai-writing-tools-2026")
+
+    expect(smallBusiness?.body).toContain("[Anthropic's official pricing page](https://www.anthropic.com/pricing/)")
+    expect(smallBusiness?.body).toContain("checked October 21, 2026")
+    expect(smallBusiness?.body).toContain("Prices, taxes, currency, and availability can vary by region")
+    expect(smallBusiness?.body).toContain("[Jasper's official pricing page](https://www.jasper.ai/pricing)")
+    expect(writingTools?.body).toContain("[Jasper's official pricing page](https://www.jasper.ai/pricing)")
+    expect(writingTools?.body).toContain("checked October 21, 2026")
+  })
+
 })
