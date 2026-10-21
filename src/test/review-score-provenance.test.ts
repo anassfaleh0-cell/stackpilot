@@ -84,6 +84,8 @@ describe("review score provenance", () => {
 
     expect(registry).toContain("raw.published === false")
     expect(registry).toContain("!isExplicitlyUnpublished(type, slug)")
+    expect(registry).toContain('!isExplicitlyUnpublished("comparison", comparison.slug)')
+    expect(registry).toContain("raw.published !== false")
     expect(sitemap).toContain('isQuality("comparison", c.slug, "comparisons")')
     expect(sitemap).toContain("isContentAvailable(type, slug) && !isNoindexed(dir, slug)")
     expect(comparisonPage).toContain('!isContentAvailable("comparison", slug)')
