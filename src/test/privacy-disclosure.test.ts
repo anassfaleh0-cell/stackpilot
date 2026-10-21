@@ -22,13 +22,28 @@ describe("privacy and cookie disclosures", () => {
     expect(consent).toContain("prefs.analytics && prefs.advertising")
   })
 
+  it("describes planned advertising and the unavailable newsletter honestly", () => {
+    const privacy = fs.readFileSync(path.join(root, "privacy", "page.tsx"), "utf8")
+    const cookies = fs.readFileSync(path.join(root, "cookies", "page.tsx"), "utf8")
+
+    expect(privacy).toContain("Google AdSense (planned)")
+    expect(privacy).toContain("Newsletter signup is currently unavailable")
+    expect(privacy).toContain("No mailing-list provider is currently configured")
+    expect(privacy).not.toContain("We use Google AdSense to display advertisements")
+    expect(privacy).not.toContain("We use a third-party email service to send newsletters")
+
+    expect(cookies).toContain("Google AdSense (planned)")
+    expect(cookies).not.toContain("Vercel Analytics")
+    expect(cookies).toContain("Advertising and affiliate integrations")
+  })
+
   it("does not describe all analytics data as anonymous without qualification", () => {
     const privacy = fs.readFileSync(path.join(root, "privacy", "page.tsx"), "utf8")
     const cookies = fs.readFileSync(path.join(root, "cookies", "page.tsx"), "utf8")
     expect(privacy).not.toContain("These are anonymized and do not identify individual visitors.")
     expect(privacy).toContain("sale or sharing")
     expect(privacy).toContain("turn off advertising consent")
-    expect(cookies).toContain("Last updated: October 14, 2026")
+    expect(cookies).toContain("Last updated: October 21, 2026")
     expect(cookies).not.toContain("Collects anonymized page views")
     expect(cookies).toContain("we do not promise that every event or identifier is anonymous")
 
