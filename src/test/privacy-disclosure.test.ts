@@ -37,6 +37,14 @@ describe("privacy and cookie disclosures", () => {
     expect(cookies).toContain("Advertising and affiliate integrations")
   })
 
+  it("does not present a broken contact form when email delivery is unconfigured", () => {
+    const contact = fs.readFileSync(path.join(root, "contact", "page.tsx"), "utf8")
+
+    expect(contact).toContain("process.env.RESEND_API_KEY && process.env.CONTACT_FROM_EMAIL")
+    expect(contact).toContain("The contact form is temporarily unavailable")
+    expect(contact).toContain("Please use the email links below instead.")
+  })
+
   it("does not describe all analytics data as anonymous without qualification", () => {
     const privacy = fs.readFileSync(path.join(root, "privacy", "page.tsx"), "utf8")
     const cookies = fs.readFileSync(path.join(root, "cookies", "page.tsx"), "utf8")
