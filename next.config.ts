@@ -47,7 +47,20 @@ const csp = [
 ].join("; ")
 
 const nextConfig: NextConfig = {
+  // OpenNext Cloudflare adapts Next.js standalone build output.
   output: "standalone",
+  // The content registry reads committed JSON at runtime. Explicitly trace these
+  // data files into Next's server output so Cloudflare Workers can resolve review,
+  // comparison, guide and sitemap records after deployment.
+  outputFileTracingIncludes: {
+    "/*": [
+      "./content/**/*.json",
+      "./src/lib/entities/**/*.json",
+      "./src/data/**/*.json",
+      "./noindex-list.json",
+      "./public/**/*.json",
+    ],
+  },
   poweredByHeader: false,
   compress: true,
   generateEtags: true,
@@ -70,6 +83,18 @@ const nextConfig: NextConfig = {
     {
       source: "/glossarys/:slug",
       destination: "/glossary/:slug",
+      permanent: true,
+    },
+    // GSC surfaced a legacy SEO tools slug whose canonical record is best-seo-tools.
+    // Redirect both singular and plural variants to the real published page.
+    {
+      source: "/best/seo-tools",
+      destination: "/best/best-seo-tools",
+      permanent: true,
+    },
+    {
+      source: "/bests/seo-tools",
+      destination: "/best/best-seo-tools",
       permanent: true,
     },
     {

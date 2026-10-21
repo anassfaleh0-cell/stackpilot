@@ -1,4 +1,4 @@
-import { getAllReviews, getAllComparisons, getAllGuides, getAllGlossaryTerms, getAllBlogPosts, isContentAvailable } from "@/lib/content/registry"
+import generatedSearchIndex from "@/lib/search/generated-index.json"
 import { categories } from "@/lib/constants"
 
 interface SearchResult {
@@ -22,21 +22,7 @@ export async function GET(request: Request) {
   const match = (text: string) => text.toLowerCase().includes(query)
 
   const searchableContent: SearchResult[] = [
-    ...getAllReviews().filter((r) => isContentAvailable("review", r.slug)).map((r) => ({
-      title: r.name, description: r.tagline, url: `/reviews/${r.slug}`, category: r.category, type: "review" as const,
-    })),
-    ...getAllComparisons().filter((c) => isContentAvailable("comparison", c.slug)).map((c) => ({
-      title: c.title, description: c.description, url: `/comparisons/${c.slug}`, category: c.category, type: "comparison" as const,
-    })),
-    ...getAllGuides().filter((g) => isContentAvailable("guide", g.slug)).map((g) => ({
-      title: g.title, description: g.description, url: `/guides/${g.slug}`, category: g.category, type: "guide" as const,
-    })),
-    ...getAllGlossaryTerms().map((t) => ({
-      title: t.term, description: t.definition, url: `/glossary/${t.slug}`, category: t.category, type: "glossary" as const,
-    })),
-    ...getAllBlogPosts().map((p) => ({
-      title: p.title, description: p.description, url: `/blog/${p.slug}`, category: p.category, type: "blog" as const,
-    })),
+    ...generatedSearchIndex.map((item) => ({ ...item, type: item.type as SearchResult["type"] })),
     ...categories.map((c) => ({
       title: `${c.name} Software`,
       description: `Browse the best ${c.name.toLowerCase()} tools and software`,

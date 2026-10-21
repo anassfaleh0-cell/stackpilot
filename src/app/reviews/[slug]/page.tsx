@@ -25,6 +25,10 @@ import { BannerAd, NativeAd, InFeedAd } from "@/components/ads"
 
 const TOTAL_REVIEWS = getAllReviews().length
 
+// Every published slug is rendered at build time; avoid runtime filesystem fallbacks on Workers.
+export const dynamic = "force-static"
+export const dynamicParams = false
+
 export function generateStaticParams() {
   return getAllReviews().map((item) => ({ slug: item.slug }))
 }

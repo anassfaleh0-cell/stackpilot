@@ -23,13 +23,17 @@ import { NativeAd } from "@/components/ads"
 import { getComparisonDecision, getComparisonDisplayCopy } from "@/lib/content/comparison-decision"
 import { getVisibleReviewFaqs, stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
 
-export const dynamicParams = true
-export const revalidate = 86400
+export const dynamic = "force-static"
+// Vercel retains on-demand generation; Cloudflare must only serve build-time routes.
+export const dynamicParams = false
 
 export function generateStaticParams() {
-  // Keep the full corpus indexable without forcing 2,000+ pages through every production build.
-  // Pages are rendered on first request and cached for 24h.
-  return []
+  // Generate every non-draft comparison at build time so dynamicParams=false is safe
+  // on both Cloudflare Workers (no request-time repository filesystem) and Vercel.
+  // Keep sitemap and route generation aligned by using the same registry source.
+  return getAllComparisons()
+    .filter((comparison) => (comparison as typeof comparison & { publicationStatus?: string }).publicationStatus !== "draft")
+    .map((comparison) => ({ slug: comparison.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {

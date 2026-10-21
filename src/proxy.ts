@@ -10,9 +10,11 @@ export function proxy(request: Request) {
     ? rawHost.slice(1, rawHost.indexOf("]")).toLowerCase()
     : rawHost.split(":")[0].toLowerCase()
   const isLocalHost = host === "localhost" || host === "127.0.0.1" || host === "::1"
+  const isPreviewHost = host.endsWith(".vercel.app") || host.endsWith(".workers.dev")
 
-  // Keep local smoke tests and Vercel Preview deployments on their own origin.
-  if (host === APP_HOST || isLocalHost || host.endsWith(".vercel.app")) {
+  // Keep local smoke tests and preview deployments on their own origin.
+  // Only real public hostnames should be redirected to the canonical domain.
+  if (host === APP_HOST || isLocalHost || isPreviewHost) {
     return undefined
   }
 

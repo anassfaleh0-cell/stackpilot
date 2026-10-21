@@ -1,0 +1,136 @@
+name: Cloudflare Workers validation
+
+on:
+  pull_request:
+    paths:
+      - "src/**"
+      - "content/**"
+      - "public/**"
+      - "next.config.ts"
+      - "open-next.config.ts"
+      - "wrangler.jsonc"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/cloudflare-workers-validation.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-workers-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-dry-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install locked project dependencies
+        run: npm ci
+
+      - name: Install Cloudflare tooling in an isolated temporary directory
+        run: |
+          mkdir -p /tmp/pilotstack-cloudflare-tools
+          printf '%s\n' '{"private":true}' > /tmp/pilotstack-cloudflare-tools/package.json
+          npm install --prefix /tmp/pilotstack-cloudflare-tools --no-save --package-lock=false --legacy-peer-deps @opennextjs/cloudflare@1.20.13 wrangler@4.134.0
+          mkdir -p node_modules/@opennextjs
+          test ! -e node_modules/@opennextjs/cloudflare
+          test ! -e node_modules/wrangler
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/@opennextjs/cloudflare node_modules/@opennextjs/cloudflare
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/wrangler node_modules/wrangler
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/.bin/opennextjs-cloudflare node_modules/.bin/opennextjs-cloudflare
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/.bin/wrangler node_modules/.bin/wrangler
+
+      - name: Generate build-time search index for Workers
+        run: node scripts/generate-search-index.mjs
+
+      - name: Build with OpenNext for Cloudflare Workers
+        run: ./node_modules/.bin/opennextjs-cloudflare build
+        env:
+          BUILD_TARGET: cloudflare
+          CI: "true"
+
+      - name: Populate and verify prerender cache assets
+        run: |
+          set -euo pipefail
+          ./node_modules/.bin/opennextjs-cloudflare populateCache local --config wrangler.jsonc
+          cache_dir=".open-next/assets/cdn-cgi/_next_cache"
+          test -d "$cache_dir"
+          cache_file_count="$(find "$cache_dir" -type f | wc -l | tr -d ' ')"
+          echo "OpenNext prerender cache files: $cache_file_count"
+          test "$cache_file_count" -gt 0
+        env:
+          BUILD_TARGET: cloudflare
+          CI: "true"
+
+      - name: Validate Worker bundle without deploying
+        run: ./node_modules/.bin/wrangler deploy --dry-run --config wrangler.jsonc
+        env:
+          CI: "true"
+
+      - name: Start local Cloudflare Workers preview
+        run: |
+          ./node_modules/.bin/opennextjs-cloudflare preview > /tmp/pilotstack-cloudflare-preview.log 2>&1 &
+          echo $! > /tmp/pilotstack-cloudflare-preview.pid
+          for attempt in $(seq 1 90); do
+            if curl --silent --fail http://127.0.0.1:8787/ads.txt > /dev/null; then
+              break
+            fi
+            sleep 2
+          done
+          if ! curl --silent --fail http://127.0.0.1:8787/ads.txt > /dev/null; then
+            cat /tmp/pilotstack-cloudflare-preview.log
+            echo "Cloudflare Workers preview did not become ready"
+            exit 1
+          fi
+
+      - name: Smoke-test Cloudflare routes, SEO metadata, and search payload
+        run: |
+          set -euo pipefail
+          base="http://127.0.0.1:8787"
+          for path in / /reviews/linear /comparisons/activecampaign-vs-ahrefs /affiliate-disclosure /privacy /contact /robots.txt /sitemap.xml /ads.txt /rss.xml /api/search?q=asana; do
+            code=$(curl --silent --show-error --output /tmp/pilotstack-response.txt --write-out "%{http_code}" "$base$path")
+            echo "$code $path"
+            if [ "$code" != "200" ]; then
+              cat /tmp/pilotstack-cloudflare-preview.log
+              cat /tmp/pilotstack-response.txt
+              exit 1
+            fi
+          done
+
+          # Verify that the preview keeps the real canonical hostname and indexability.
+          curl --silent --show-error --fail "$base/reviews/linear" > /tmp/pilotstack-review.html
+          grep -Fq 'rel="canonical" href="https://pilotstack.online/reviews/linear"' /tmp/pilotstack-review.html
+          if grep -Eiq 'name="robots"[^>]*content="[^"]*noindex|content="[^"]*noindex[^"]*"[^>]*name="robots"' /tmp/pilotstack-review.html; then
+            echo "Unexpected noindex directive on /reviews/linear"
+            exit 1
+          fi
+
+          # Verify the rendered AdSense publisher meta and important crawler files.
+          curl --silent --show-error --fail "$base/" > /tmp/pilotstack-home.html
+          grep -Fq 'google-adsense-account' /tmp/pilotstack-home.html
+          grep -Fq 'ca-pub-6523926892521982' /tmp/pilotstack-home.html
+          curl --silent --show-error --fail "$base/ads.txt" > /tmp/pilotstack-ads.txt
+          grep -q "google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0" /tmp/pilotstack-ads.txt
+          curl --silent --show-error --fail "$base/robots.txt" > /tmp/pilotstack-robots.txt
+          grep -q "Sitemap: https://pilotstack.online/sitemap.xml" /tmp/pilotstack-robots.txt
+          curl --silent --show-error --fail "$base/sitemap.xml" > /tmp/pilotstack-sitemap.xml
+          grep -q "https://pilotstack.online/" /tmp/pilotstack-sitemap.xml
+          grep -q "https://pilotstack.online/reviews/linear" /tmp/pilotstack-sitemap.xml
+          curl --silent --show-error --fail "$base/rss.xml" > /tmp/pilotstack-rss.xml
+          grep -q "https://pilotstack.online/" /tmp/pilotstack-rss.xml
+          curl --silent --show-error --fail "$base/api/search?q=asana" > /tmp/pilotstack-search.json
+          node -e 'const fs=require("fs"); const d=JSON.parse(fs.readFileSync("/tmp/pilotstack-search.json","utf8")); if (!Array.isArray(d.results) || d.results.length === 0 || d.query !== "asana") { console.error("Search endpoint returned an unexpected payload", d); process.exit(1); } console.log("Search payload valid:", d.results.length, "results");'
+
+          # Contact API must fail safely when requested with the wrong method.
+          contact_code=$(curl --silent --show-error --output /tmp/pilotstack-contact.txt --write-out "%{http_code}" "$base/api/contact")
+          test "$contact_code" = "405"

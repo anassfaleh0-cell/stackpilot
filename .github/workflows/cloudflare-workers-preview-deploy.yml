@@ -1,0 +1,213 @@
+name: Deploy PilotStack Cloudflare preview
+
+on:
+  # Manual-only: do not deploy a Cloudflare Worker on every branch push.
+  # Preview deployment requires an explicit workflow_dispatch input of PREVIEW.
+  workflow_dispatch:
+    inputs:
+      confirm_preview_only:
+        description: "Type PREVIEW to deploy only the pilotstack-preview Worker (never the production domain)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pilotstack-cloudflare-preview
+  cancel-in-progress: false
+
+jobs:
+  deploy-preview:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.confirm_preview_only == 'PREVIEW' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout reviewed Cloudflare migration candidate
+        uses: actions/checkout@v4
+        with:
+          ref: b822a05045fbd80c8dbb5c4ffadedce45614b5ce
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Verify Cloudflare deployment configuration
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "Missing repository secret CLOUDFLARE_API_TOKEN"; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "Missing repository variable CLOUDFLARE_ACCOUNT_ID"; exit 1; }
+
+      - name: Install locked project dependencies
+        run: npm ci
+
+      - name: Install pinned Cloudflare tooling in an isolated temporary directory
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/pilotstack-cloudflare-tools
+          printf '%s\n' '{"private":true}' > /tmp/pilotstack-cloudflare-tools/package.json
+          npm install --prefix /tmp/pilotstack-cloudflare-tools --no-save --package-lock=false --legacy-peer-deps @opennextjs/cloudflare@1.20.13 wrangler@4.134.0
+          mkdir -p node_modules/@opennextjs
+          test ! -e node_modules/@opennextjs/cloudflare
+          test ! -e node_modules/wrangler
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/@opennextjs/cloudflare node_modules/@opennextjs/cloudflare
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/wrangler node_modules/wrangler
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/.bin/opennextjs-cloudflare node_modules/.bin/opennextjs-cloudflare
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/.bin/wrangler node_modules/.bin/wrangler
+
+      - name: Generate search index
+        run: node scripts/generate-search-index.mjs
+
+      - name: Build for Cloudflare Workers
+        run: ./node_modules/.bin/opennextjs-cloudflare build
+        env:
+          BUILD_TARGET: cloudflare
+          CI: "true"
+
+      - name: Populate prerender cache into Cloudflare static assets
+        run: ./node_modules/.bin/opennextjs-cloudflare populateCache local --config wrangler.jsonc
+        env:
+          BUILD_TARGET: cloudflare
+          CI: "true"
+
+      - name: Assert content routes and populated cache exist before deploy
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f content/reviews/linear.json
+          test -f content/comparisons/activecampaign-vs-ahrefs.json
+          review_count="$(find content/reviews -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
+          comparison_count="$(find content/comparisons -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
+          echo "Checkout content files: reviews=$review_count comparisons=$comparison_count"
+          test "$review_count" -gt 0
+          test "$comparison_count" -gt 0
+          test -f .next/prerender-manifest.json
+          # Static-assets incremental cache must be populated explicitly before direct Wrangler deploy.
+          # OpenNext's preview command normally does this automatically; this workflow deploys the
+          # Worker directly so run populateCache local first.
+          test -f .open-next/worker.js
+          test -d .open-next/assets/_next/static
+          static_asset_count="$(find .open-next/assets/_next/static -type f | wc -l | tr -d ' ')"
+          echo "OpenNext worker bundle exists; static asset files: $static_asset_count"
+          test "$static_asset_count" -gt 0
+          cache_dir=".open-next/assets/cdn-cgi/_next_cache"
+          test -d "$cache_dir" || { echo "OpenNext static-assets cache directory is missing after populateCache"; exit 1; }
+          cache_file_count="$(find "$cache_dir" -type f | wc -l | tr -d ' ')"
+          echo "OpenNext prerender cache files: $cache_file_count"
+          test "$cache_file_count" -gt 0
+          node <<'NODE'
+          const fs = require('node:fs');
+          const manifest = JSON.parse(fs.readFileSync('.next/prerender-manifest.json', 'utf8'));
+          const routes = Object.keys(manifest.routes || {});
+          const expected = ['/reviews/linear', '/comparisons/activecampaign-vs-ahrefs'];
+          for (const route of expected) {
+            const found = routes.includes(route);
+            if (!found) {
+              console.error('Expected content route missing from prerender manifest:', route);
+              console.error('Prerendered route sample:', routes.filter(x => x.startsWith('/reviews/') || x.startsWith('/comparisons/')).slice(0, 20));
+              process.exit(1);
+            }
+          }
+          console.log('Expected review and comparison routes exist in prerender manifest.');
+          NODE
+
+      - name: Deploy preview Worker only
+        id: deploy
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./node_modules/.bin/wrangler deploy --config wrangler.jsonc 2>&1 | tee /tmp/pilotstack-cloudflare-deploy.log
+          preview_url="$(grep -Eo 'https://[^[:space:]]+\.workers\.dev' /tmp/pilotstack-cloudflare-deploy.log | tail -n 1 || true)"
+          test -n "$preview_url" || { echo "Could not determine workers.dev URL from deployment output"; exit 1; }
+          echo "preview_url=$preview_url" >> "$GITHUB_OUTPUT"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Smoke-test public routes and SEO endpoints
+        shell: bash
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.preview_url }}
+        run: |
+          set -euo pipefail
+          for path in / /reviews/linear /comparisons/activecampaign-vs-ahrefs /best/seo-tools /bests/seo-tools /best/best-seo-tools /affiliate-disclosure /privacy /contact /robots.txt /sitemap.xml /ads.txt /rss.xml /api/search?q=asana; do
+            # Follow intentional 308/301 legacy redirects and assert the final destination is healthy.
+            code="$(curl --location --silent --show-error --output /tmp/pilotstack-preview-response.txt --write-out '%{http_code}' "$PREVIEW_URL$path")"
+            echo "$code $path"
+            if [ "$code" != "200" ]; then
+              cat /tmp/pilotstack-preview-response.txt
+              exit 1
+            fi
+          done
+          curl --silent --show-error --fail "$PREVIEW_URL/api/search?q=asana" > /tmp/pilotstack-search.json
+          node <<'NODE'
+          const fs = require('node:fs');
+          const payload = JSON.parse(fs.readFileSync('/tmp/pilotstack-search.json', 'utf8'));
+          if (!Array.isArray(payload.results) || payload.results.length === 0) {
+            console.error('Search endpoint returned no results for a known query.');
+            process.exit(1);
+          }
+          const metricPattern = /\b\d(?:\.\d)?\s*\/\s*5\b|[$€£]\s?\d|\b(?:pricing starts|starts at|starting at|from free)\b/i;
+          const unsafe = payload.results.filter((item) =>
+            item.type === 'comparison' && metricPattern.test(String(item.description || ''))
+          );
+          if (unsafe.length > 0) {
+            console.error('Search index exposes unverified comparison scores/prices:', unsafe.map((item) => item.title));
+            process.exit(1);
+          }
+          console.log('Search endpoint returns results without raw comparison scores or pricing claims.');
+          NODE
+          curl --silent --show-error --fail "$PREVIEW_URL/reviews/linear" > /tmp/pilotstack-review.html
+          grep -Fq 'rel="canonical" href="https://pilotstack.online/reviews/linear"' /tmp/pilotstack-review.html
+          if grep -Eiq 'name="robots"[^>]*content="[^"]*noindex|content="[^"]*noindex[^"]*"[^>]*name="robots"' /tmp/pilotstack-review.html; then
+            echo "Unexpected noindex directive on /reviews/linear"
+            exit 1
+          fi
+          curl --silent --show-error --fail "$PREVIEW_URL/" > /tmp/pilotstack-home.html
+          grep -Fq 'google-adsense-account' /tmp/pilotstack-home.html
+          if grep -Fq 'NEXT_HTTP_ERROR_FALLBACK;404' /tmp/pilotstack-review.html; then
+            echo "Review route contains Next.js 404 fallback payload"
+            exit 1
+          fi
+          grep -Fq 'Linear Review' /tmp/pilotstack-review.html
+          # AdSense/editorial trust guard: inspect rendered text only, not SVG path digits
+          # (for example the "G2 reviews" link icon) or sitewide library counts.
+          node <<'NODE'
+          const fs = require('node:fs');
+          const html = fs.readFileSync('/tmp/pilotstack-review.html', 'utf8');
+          const text = html
+            .replace(/<(script|style|svg)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ')
+            .replace(/<[^>]+>/g, ' ')
+            .replace(/&nbsp;|&#160;/gi, ' ')
+            .replace(/&amp;/gi, '&')
+            .replace(/\s+/g, ' ');
+          const patterns = [
+            /(?:G2|Capterra|TrustRadius)[^.]{0,100}\b[\d,]+\s+(?:reviews|ratings|user reviews)\b/i,
+            /\b[\d,]+\s+(?:reviews|ratings|user reviews)\b[^.]{0,100}(?:G2|Capterra|TrustRadius)/i,
+          ];
+          const match = patterns.map((pattern) => text.match(pattern)).find(Boolean);
+          if (match) {
+            console.error('Review page contains a numeric third-party review-count claim near a source platform; verify/cite it or suppress it.');
+            console.error(match[0]);
+            process.exit(1);
+          }
+          console.log('No unsupported numeric third-party review-count claim found in rendered review text.');
+          NODE
+          # Catch malformed pricing fragments that harm trust and metadata quality.
+          curl --silent --show-error --fail "$PREVIEW_URL/comparisons/1password-vs-auth0" > /tmp/pilotstack-comparison.html
+          if grep -Eiq '\\$[0-9]+([.][0-9]+)?/mo per[. ]' /tmp/pilotstack-comparison.html; then
+            echo "Comparison page contains a malformed per-user pricing fragment."
+            grep -Eio '.{0,70}\\$[0-9]+([.][0-9]+)?/mo per[. ].{0,70}' /tmp/pilotstack-comparison.html | head -10
+            exit 1
+          fi
+          grep -Fq 'https://pilotstack.online/reviews/linear' <(curl --silent --show-error --fail "$PREVIEW_URL/sitemap.xml")
+          if grep -Eiq '0\+? Software Reviews|0\+? Comparisons|0\+? Guides' /tmp/pilotstack-home.html; then
+            echo "Homepage content counters indicate the content registry is empty"
+            exit 1
+          fi
