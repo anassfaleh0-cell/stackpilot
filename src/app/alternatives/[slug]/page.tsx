@@ -20,9 +20,11 @@ export const dynamicParams = true
 export const revalidate = 86400
 
 export function generateStaticParams() {
-  // Keep the full corpus indexable without forcing 2,000+ pages through every production build.
-  // Pages are rendered on first request and cached for 24h.
-  return []
+  // Content is read from committed JSON files. Prerender the corpus so Workers never need
+  // repository filesystem access for on-demand route rendering.
+  return getAllAlternatives()
+    .filter((item) => item.publicationStatus !== "draft")
+    .map((item) => ({ slug: item.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
