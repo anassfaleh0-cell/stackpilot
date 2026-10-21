@@ -14,7 +14,7 @@ export const metadata = createMetadata({
 export default function EditorialPolicyPage() {
   return (
     <>
-      <ArticleSchema title="Editorial Policy | Content Standards & Independence" description="PilotStack's editorial policy — accuracy, independence, and transparency standards for all software research and reviews." publishedAt="2026-01-15" author="PilotStack Team" url={`${site.url}/editorial-policy`} keywords={["editorial policy", "content standards", "editorial independence", "review guidelines", "fact-checking"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
+      <ArticleSchema title="Editorial Policy | Content Standards & Independence" description="PilotStack's editorial policy — accuracy, independence, and transparency standards for all software research and reviews." publishedAt="2026-01-15" updatedAt="2026-10-21" author="PilotStack Team" url={`${site.url}/editorial-policy`} keywords={["editorial policy", "content standards", "editorial independence", "review guidelines", "fact-checking"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Editorial Policy", href: "/editorial-policy" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Editorial Policy" }]} />
@@ -24,7 +24,7 @@ export default function EditorialPolicyPage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Editorial Standards</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Editorial Policy</h1>
-            <p className="text-muted-foreground mb-8">Last updated: October 14, 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: October 21, 2026</p>
 
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
