@@ -47,7 +47,9 @@ const csp = [
 ].join("; ")
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  // OpenNext manages its own output bundle. Keep the existing standalone build for Vercel,
+  // but avoid the standalone export when validating the Cloudflare Workers adapter.
+  output: process.env.BUILD_TARGET === "cloudflare" ? undefined : "standalone",
   poweredByHeader: false,
   compress: true,
   generateEtags: true,
