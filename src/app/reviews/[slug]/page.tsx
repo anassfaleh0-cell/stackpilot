@@ -359,7 +359,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     <p className="text-muted-foreground text-xs leading-relaxed">Estimate implementation effort before projecting ROI. Include internal setup labor, data migration, team training, workflow configuration, and ongoing administration.</p>
                   </div>
                 </div>
-                <p className="text-[11px] text-muted-foreground mt-3">Compiled under our published methodology from a library of {TOTAL_REVIEWS} B2B SaaS reviews across {categories.length} categories.</p>
+                <p className="text-[11px] text-muted-foreground mt-3">Compiled under our published methodology from a library of {allReviews.length} B2B SaaS reviews across {categories.length} categories.</p>
               </section>
 
               {/* Content Sections */}
