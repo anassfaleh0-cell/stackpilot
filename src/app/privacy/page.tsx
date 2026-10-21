@@ -36,7 +36,7 @@ export default function PrivacyPage() {
             <p>We use collected information solely to:</p>
             <ul>
               <li>Deliver the content and services you request</li>
-              <li>Send newsletter emails (only with your explicit consent via double opt-in)</li>
+              <li>If a newsletter is introduced, send messages only after explicit opt-in and any required confirmation; newsletter signup is currently unavailable and no subscription is saved.</li>
               <li>Analyze aggregate traffic patterns to improve our content and user experience</li>
               <li>Respond to support inquiries and feedback</li>
             </ul>
@@ -47,13 +47,13 @@ export default function PrivacyPage() {
             <ul>
               <li><strong>Essential cookies:</strong> Required for site functionality (e.g., session management). No opt-out needed as these are necessary for operation.</li>
               <li><strong>Analytics and experience measurement:</strong> After you consent to analytics, we may load Google Analytics and Microsoft Clarity. These services help us understand page usage and usability; depending on their configuration, they may process device and browser information, interaction events, and session-replay or heatmap data. We do not describe this data as anonymous in every circumstance. You can refuse or withdraw analytics consent using Cookie Settings. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google’s privacy policy</a> and <a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener noreferrer">Microsoft’s privacy statement</a>.</li>
-              <li><strong>Advertising cookies (Google AdSense):</strong> We use Google AdSense to display advertisements on PilotStack. Google AdSense uses cookies to serve ads based on your prior visits to our website or other websites on the internet. Google&apos;s use of advertising cookies enables it and its partners to serve ads based on your visit to our site and/or other sites on the internet. You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>. Alternatively, you can opt out of some third-party vendors&apos; use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a>.</li>
+              <li><strong>Advertising cookies (Google AdSense):</strong> We are preparing to use Google AdSense. If advertising is enabled and an ad slot is configured, Google and its partners may use cookies or similar technologies to serve and measure ads, including personalized ads where permitted. The AdSense script is loaded only after you grant advertising consent. You can manage ad personalization in <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ads Settings</a> or opt out of some third-party vendors&apos; personalized advertising at <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a>. Before serving personalized ads in the EEA, UK, or Switzerland, we will configure a Google-certified CMP that supports the IAB Transparency and Consent Framework, as required by Google&apos;s policy.</li>
             </ul>
 
             <h2>Data Retention</h2>
             <p>We retain your personal information only as long as necessary:</p>
             <ul>
-              <li>Newsletter subscriber information is handled by our email service provider while you remain subscribed. Deletion timing after unsubscribe depends on the provider's processing and backup-retention practices.</li>
+              <li>Newsletter signup is currently unavailable because no mailing-list provider is connected. Submitting the newsletter form does not save an email address or create a subscription. If we enable a provider later, this policy will be updated to describe its retention practices.</li>
               <li>Contact messages are retained only as needed to respond, handle follow-up, and meet applicable recordkeeping obligations. Retention can also depend on the email or support systems used to receive them.</li>
               <li>Analytics retention depends on the service and configuration described in this policy.</li>
             </ul>
@@ -92,8 +92,8 @@ export default function PrivacyPage() {
             <h2>Third-Party Services</h2>
             <p>We use limited third-party services that may process your data under their own privacy frameworks:</p>
             <ul>
-              <li><strong>Google AdSense:</strong> We use Google AdSense to display advertisements. Google may collect data about your visits to our site and other websites to serve personalized ads. Google&apos;s privacy policy is available at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a>. You can control ad personalization in your <a href="https://myaccount.google.com/data-and-privacy" target="_blank" rel="noopener noreferrer">Google Account settings</a>.</li>
-              <li><strong>Newsletter delivery:</strong> We use a third-party email service to send newsletters to subscribers who have opted in. This service acts as a data processor under GDPR Article 28.</li>
+              <li><strong>Google AdSense (planned):</strong> We are preparing AdSense integration, but advertising inventory may not be active until ad slots are configured. If ads are enabled, Google may process information as described in its <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a>. You can control ad personalization in your <a href="https://myaccount.google.com/data-and-privacy" target="_blank" rel="noopener noreferrer">Google Account settings</a>.</li>
+              <li><strong>Newsletter:</strong> No mailing-list provider is currently configured, so we do not store newsletter signup addresses or send newsletters. If a provider is added, we will update this policy before enabling signups.</li>
               <li><strong>Analytics and session measurement:</strong> Google Analytics and Microsoft Clarity may process usage and interaction data after analytics consent. Exact data collection and retention depend on each service’s configuration and current terms.</li>
               <li><strong>Tag management:</strong> Google Tag Manager may load third-party tags only after both analytics and advertising preferences are enabled in our consent interface. Tags configured in that container may have their own data practices, which are governed by the relevant provider’s policies.</li>
               <li><strong>Hosting:</strong> Our website is hosted on Vercel&apos;s infrastructure, which provides security and privacy documentation for its infrastructure and processing services.</li>
@@ -101,10 +101,10 @@ export default function PrivacyPage() {
             <p>Where required, we use appropriate contractual safeguards with third-party processors and review their published privacy and data-processing terms.</p>
 
             <h2>International Data Transfers</h2>
-            <p>If we transfer personal data from the EEA to countries not deemed adequate by the European Commission, we rely on Standard Contractual Clauses (SCCs) as the transfer mechanism under GDPR Article 46.</p>
+            <p>If personal data is transferred internationally, the applicable provider terms and lawful transfer safeguards depend on the service and destination. Contact privacy@pilotstack.online for information about the safeguards relevant to a specific service.</p>
 
             <h2>Changes to This Policy</h2>
-            <p>We will notify subscribers of material changes to this privacy policy via email. The "Last updated" date at the top of this page reflects the most recent revision. Continued use of PilotStack after changes constitutes acceptance of the updated policy.</p>
+            <p>If we operate a newsletter, we will notify subscribers of material changes where appropriate. The "Last updated" date at the top of this page reflects the most recent revision. We encourage visitors to review the policy periodically.</p>
 
             <h2>Contact</h2>
             <p>For privacy-related inquiries or to exercise your data rights, contact us at <strong>privacy@pilotstack.online</strong>. We aim to respond to all requests within 30 days.</p>
