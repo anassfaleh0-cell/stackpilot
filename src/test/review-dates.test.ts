@@ -237,7 +237,7 @@ describe("H-09A sitemap", () => {
   })
 
   it("excludes noindexed blog posts from the sitemap", () => {
-    expect(sitemapSrc).toContain('const blogPosts = getAllBlogPosts().filter((p) => isQuality(p.slug, "blog"))')
+    expect(sitemapSrc).toContain('const blogPosts = getAllBlogPosts().filter((p) => isPublished(p) && isQuality(p.slug, "blog"))')
   })
 })
 
