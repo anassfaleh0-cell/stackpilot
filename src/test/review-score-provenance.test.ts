@@ -77,4 +77,14 @@ describe("review score provenance", () => {
     expect(home).toContain('getAllResearch().filter((item) => isContentAvailable("research", item.slug))')
   })
 
+  it("keeps explicitly unpublished content out of internal links and the sitemap", () => {
+    const registry = fs.readFileSync(path.join(process.cwd(), "src", "lib", "content", "registry.ts"), "utf8")
+    const sitemap = fs.readFileSync(path.join(process.cwd(), "src", "app", "sitemap.ts"), "utf8")
+
+    expect(registry).toContain("raw.published === false")
+    expect(registry).toContain("!isExplicitlyUnpublished(type, slug)")
+    expect(sitemap).toContain('isQuality("comparison", c.slug, "comparisons")')
+    expect(sitemap).toContain("isContentAvailable(type, slug) && !isNoindexed(dir, slug)")
+  })
+
 })
