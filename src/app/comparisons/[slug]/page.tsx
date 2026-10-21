@@ -25,7 +25,7 @@ import { getVisibleReviewFaqs, stripUnverifiedPriceClaims } from "@/lib/content/
 
 export const dynamic = "force-static"
 // Vercel retains on-demand generation; Cloudflare must only serve build-time routes.
-export const dynamicParams = process.env.BUILD_TARGET !== "cloudflare"
+export const dynamicParams = false
 
 export function generateStaticParams() {
   // Vercel keeps on-demand generation; Cloudflare prerenders committed JSON content because
