@@ -18,11 +18,11 @@ export const metadata = createMetadata({
 
 export default function HomePage() {
   const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug))
-  const comparisons = getAllComparisons().filter((cmp) => isContentAvailable("comparison", cmp.slug))
+  const comparisons = getAllComparisons().filter((cmp) => isContentAvailable("comparison", cmp.slug)).filter((cmp) => isContentAvailable("comparison", cmp.slug))
   const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug))
-  const posts = getAllBlogPosts().filter((post) => isContentAvailable("blog", post.slug))
-  const glossary = getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug))
-  const allResearch = getAllResearch().filter((item) => isContentAvailable("research", item.slug))
+  const posts = getAllBlogPosts().filter((post) => isContentAvailable("blog", post.slug)).filter((post) => isContentAvailable("blog", post.slug))
+  const glossary = getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug)).filter((term) => isContentAvailable("glossary", term.slug))
+  const allResearch = getAllResearch().filter((item) => isContentAvailable("research", item.slug)).filter((item) => isContentAvailable("research", item.slug))
   const research = allResearch
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
     .slice(0, 3)
@@ -180,7 +180,7 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="grid sm:grid-cols-2 gap-6">
-              {comparisons.filter((cmp) => isContentAvailable("comparison", cmp.slug)).slice(0, 4).map((cmp) => (
+              {comparisons.slice(0, 4).map((cmp) => (
                 <Link key={cmp.slug} href={`/comparisons/${cmp.slug}`} className="group card-hover-lift">
                   <Card className="h-full flex flex-col">
                     <div className="flex items-start justify-between mb-3">
