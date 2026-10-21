@@ -15,7 +15,8 @@ function isQuality(slug: string, dir: string): boolean {
 }
 
 function isPublished<T extends { slug: string }>(record: T): boolean {
-  return (record as T & { publicationStatus?: string }).publicationStatus !== "draft"
+  const publication = record as T & { publicationStatus?: string; published?: boolean }
+  return publication.publicationStatus !== "draft" && publication.published !== false
 }
 
 const staticPages: MetadataRoute.Sitemap = [
