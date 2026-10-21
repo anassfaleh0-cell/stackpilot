@@ -36,7 +36,7 @@ export default function SitemapPage() {
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Sitemap", href: "/sitemap-html" }]} />
-      <WebPageSchema name="Sitemap — All Pages" description="Complete sitemap of all pages on PilotStack." url={`${site.url}/sitemap-html`} />
+      <WebPageSchema name="HTML Sitemap — Published Content Directory" description="Browse published reviews, comparisons, guides, glossary entries, tool pages, author profiles, and editorial resources on PilotStack." url={`${site.url}/sitemap-html`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Sitemap" }]} />
       </Container>
