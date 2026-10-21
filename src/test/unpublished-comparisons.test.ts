@@ -50,6 +50,29 @@ const rewrittenSlugs = [
   "evernote-vs-microsoft-teams",
   "heap-vs-mailchimp",
   "claude-vs-fullstory",
+  "activecampaign-vs-close-crm",
+  "adobe-express-vs-framer",
+  "adobe-xd-vs-framer",
+  "adobe-xd-vs-webflow",
+  "airtable-vs-notion",
+  "canva-vs-framer",
+  "canva-vs-wordpress",
+  "clickup-vs-evernote",
+  "clickup-vs-microsoft-teams",
+  "clickup-vs-notion-small-teams",
+  "close-crm-vs-dialpad",
+  "confluence-vs-notion",
+  "figma-vs-framer",
+  "framer-vs-sketch",
+  "freshsales-vs-mailchimp",
+  "grafana-vs-tableau",
+  "hubspot-vs-mailchimp",
+  "hubspot-vs-marketo",
+  "notion-vs-clickup",
+  "notion-vs-confluence",
+  "notion-vs-linear",
+  "survey-monkey-vs-typeform",
+  "zendesk-vs-intercom",
 ]
 const previouslyRestoredSlugs = [
   "1password-vs-appwrite",
@@ -77,6 +100,11 @@ describe("rewritten cross-category comparison guides", () => {
       expect(isNoindexed("comparisons", slug), slug).toBe(false)
       expect(config, slug).not.toContain(`source: "/comparisons/${slug}"`)
     }
+  })
+
+  it("does not count explicitly rewritten decision guides as unresolved cross-category warnings", () => {
+    const audit = fs.readFileSync(path.join(process.cwd(), "scripts", "seo-health-check.js"), "utf8")
+    expect(audit).toContain("data.decisionGuide !== true")
   })
 
   it("preserves already-rewritten guides as public and indexable", () => {

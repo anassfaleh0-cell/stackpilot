@@ -292,7 +292,7 @@ function checkContentQuality() {
           for (const value of (review.cons || []).slice(0, 2)) words += wordCount(value)
         }
         const [review1, review2] = linkedReviews
-        if (review1?.category && review2?.category && normalizeComparisonCategory(review1.category) !== normalizeComparisonCategory(review2.category)) {
+        if (data.decisionGuide !== true && review1?.category && review2?.category && normalizeComparisonCategory(review1.category) !== normalizeComparisonCategory(review2.category)) {
           crossCategoryComparisons.push({
             slug: data.slug,
             tool1: data.tool1,
