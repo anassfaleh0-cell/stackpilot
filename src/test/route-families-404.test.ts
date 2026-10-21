@@ -4,7 +4,7 @@ import path from "node:path"
 import sitemap from "@/app/sitemap"
 import SitemapPage from "@/app/sitemap-html/page"
 import robots from "@/app/robots"
-import { siteConfig } from "@/lib/constants"
+import { siteConfig, toolPages, editorialLinks } from "@/lib/constants"
 import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
 import * as Alternatives from "@/app/alternatives/[slug]/page"
 import * as Authors from "@/app/authors/[slug]/page"
@@ -138,6 +138,19 @@ describe("route families", () => {
       expect(parsed.search, `sitemap URL must not contain query params: ${entry.url}`).toBe("")
       expect(parsed.hash, `sitemap URL must not contain fragments: ${entry.url}`).toBe("")
       expect(parsed.pathname.startsWith("/"), `sitemap URL must use an absolute path: ${entry.url}`).toBe(true)
+    }
+  })
+
+  it("includes tool pages, public author profiles, and editorial resources in the HTML sitemap", () => {
+    const hrefs = new Set(collectHrefs(SitemapPage()))
+    for (const tool of toolPages) {
+      expect(hrefs.has(`/tools/${tool.slug}`), `tool page missing from HTML sitemap: ${tool.slug}`).toBe(true)
+    }
+    for (const slug of PUBLIC_AUTHOR_SLUGS) {
+      expect(hrefs.has(`/authors/${slug}`), `author page missing from HTML sitemap: ${slug}`).toBe(true)
+    }
+    for (const link of editorialLinks) {
+      expect(hrefs.has(link.href), `editorial resource missing from HTML sitemap: ${link.href}`).toBe(true)
     }
   })
 
