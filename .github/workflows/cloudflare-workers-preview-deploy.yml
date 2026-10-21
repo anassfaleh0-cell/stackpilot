@@ -37,15 +37,37 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Verify Cloudflare deployment configuration
+      - name: Verify Cloudflare API token
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "Missing repository secret CLOUDFLARE_API_TOKEN"; exit 1; }
+
+      - name: Resolve Cloudflare account ID
         shell: bash
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
-          test -n "$CLOUDFLARE_API_TOKEN" || { echo "Missing repository secret CLOUDFLARE_API_TOKEN"; exit 1; }
-          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "Missing repository variable CLOUDFLARE_ACCOUNT_ID"; exit 1; }
+          account_id="${CLOUDFLARE_ACCOUNT_ID:-}"
+          if [ -z "$account_id" ]; then
+            response="$(curl --silent --show-error --fail \
+              -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+              -H "Content-Type: application/json" \
+              "https://api.cloudflare.com/client/v4/accounts?per_page=50")"
+            count="$(printf '%s' "$response" | jq '.result | length')"
+            if [ "$count" -ne 1 ]; then
+              echo "Could not safely auto-select a Cloudflare account: token can see $count accounts. Configure repository variable CLOUDFLARE_ACCOUNT_ID."
+              exit 1
+            fi
+            account_id="$(printf '%s' "$response" | jq -r '.result[0].id')"
+          fi
+          test -n "$account_id" && test "$account_id" != "null"
+          echo "CLOUDFLARE_ACCOUNT_ID=$account_id" >> "$GITHUB_ENV"
+          echo "Cloudflare account ID resolved (value hidden)."
 
       - name: Install locked project dependencies
         run: npm ci
