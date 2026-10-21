@@ -9,7 +9,7 @@ import Link from "next/link"
 
 export const metadata = createMetadata({
   title: "Our Team — Meet the PilotStack Editorial Team",
-  description: "PilotStack is run by a small, independent team. Every page follows our published methodology: recorded scoring, transparent sourcing, and no vendor-paid placement.",
+  description: "Meet the small team behind PilotStack and read how our editorial methodology, sourcing standards, and ongoing provenance audit guide software research.",
   path: "/team",
 })
 
