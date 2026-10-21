@@ -40,7 +40,7 @@ jobs:
         run: npm ci
 
       - name: Install Cloudflare adapter and Wrangler without changing the lockfile
-        run: npm install --no-save --package-lock=false --legacy-peer-deps @opennextjs/cloudflare@latest wrangler@latest
+        run: npm install --no-save --package-lock=false --legacy-peer-deps @opennextjs/cloudflare@1.20.13 wrangler@4.134.0
 
       - name: Build with OpenNext for Cloudflare Workers
         run: npx opennextjs-cloudflare build
