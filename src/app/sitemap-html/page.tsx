@@ -13,18 +13,23 @@ export const metadata = createMetadata({
   path: "/sitemap-html",
 })
 
+function isPublished<T extends { slug: string }>(record: T): boolean {
+  const publication = record as T & { publicationStatus?: string; published?: boolean }
+  return publication.publicationStatus !== "draft" && publication.published !== false
+}
+
 export default function SitemapPage() {
-  const reviews = getAllReviews().filter(r => !isNoindexed("reviews", r.slug))
-  const comparisons = getAllComparisons().filter(c => !isNoindexed("comparisons", c.slug))
-  const guides = getAllGuides().filter(g => !isNoindexed("guides", g.slug))
-  const best = getAllBest()
-  const alternatives = getAllAlternatives()
-  const useCases = getAllUseCases()
-  const industries = getAllIndustries()
-  const hubs = getAllHubs()
-  const blog = getAllBlogPosts()
-  const research = getAllResearch()
-  const statistics = getAllStatistics()
+  const reviews = getAllReviews().filter(r => isPublished(r) && !isNoindexed("reviews", r.slug))
+  const comparisons = getAllComparisons().filter(c => isPublished(c) && !isNoindexed("comparisons", c.slug))
+  const guides = getAllGuides().filter(g => isPublished(g) && !isNoindexed("guides", g.slug))
+  const best = getAllBest().filter(isPublished)
+  const alternatives = getAllAlternatives().filter(isPublished)
+  const useCases = getAllUseCases().filter(isPublished)
+  const industries = getAllIndustries().filter(isPublished)
+  const hubs = getAllHubs().filter(isPublished)
+  const blog = getAllBlogPosts().filter(isPublished)
+  const research = getAllResearch().filter(isPublished)
+  const statistics = getAllStatistics().filter(isPublished)
 
   return (
     <>
