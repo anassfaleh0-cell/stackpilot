@@ -373,13 +373,11 @@ describe("Phase 5O-B-2: internal link rendering", () => {
 
       const html = renderEnhanced([
         { slug: "affinity", title: "Affinity", type: "review", category: "Design & Creative" },
-        { slug: "1password-vs-appwrite", title: "1Password vs Appwrite", type: "comparison", category: "Developer Tools" },
         { slug: "firebase-vs-appwrite", title: "Firebase vs Appwrite", type: "comparison", category: "Developer Tools" },
       ])
 
       expect(hrefs(html)).toEqual([
         "/reviews/affinity",
-        "/comparisons/1password-vs-appwrite",
         "/comparisons/firebase-vs-appwrite",
       ])
       expect(isInternalLinkAvailable("/comparisons/firebase-vs-appwrite")).toBe(true)

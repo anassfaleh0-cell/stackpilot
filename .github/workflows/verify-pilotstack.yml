@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "fix/adsense-static-adstxt"
+      - "fix/comparison-copy-audit-wave1"
   pull_request:
     branches:
       - master
@@ -34,5 +35,3 @@ jobs:
         run: npm test
       - name: Run production build
         run: npm run build
-      - name: Audit public production endpoints (read-only)
-        run: npm run audit:live

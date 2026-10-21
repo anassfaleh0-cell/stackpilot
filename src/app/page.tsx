@@ -4,8 +4,6 @@ import { Container, Section } from "@/components/ui/container"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { categories } from "@/lib/constants"
-import { countByCategory } from "@/lib/category-counts"
-import { NewsletterStatus } from "@/components/pages/newsletter-status"
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBlogPosts, getAllGlossaryTerms, getAllResearch, isContentAvailable } from "@/lib/content/registry"
 import { ArrowRight, Star, BarChart3, Shield, BookOpen, FileText } from "lucide-react"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
@@ -14,26 +12,25 @@ import { BannerAd, NativeAd } from "@/components/ads"
 
 export const metadata = createMetadata({
   title: "Software Reviews & Buying Guides",
-  description: "Software reviews, side-by-side comparisons, and practical buying guides to help businesses evaluate tools for their workflows and budgets.",
+  description: "Software reviews, practical comparisons, and buying guides with transparent criteria, source notes, and limitations.",
   path: "/",
 })
 
 export default function HomePage() {
   const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug))
-  const reviewCountByCategory = countByCategory(reviews)
-  const comparisons = getAllComparisons().filter((cmp) => isContentAvailable("comparison", cmp.slug))
+  const comparisons = getAllComparisons()
   const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug))
-  const posts = getAllBlogPosts().filter((post) => isContentAvailable("blog", post.slug))
-  const glossary = getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug))
-  const allResearch = getAllResearch().filter((item) => isContentAvailable("research", item.slug))
+  const posts = getAllBlogPosts()
+  const glossary = getAllGlossaryTerms()
+  const allResearch = getAllResearch()
   const research = allResearch
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
     .slice(0, 3)
 
   const stats = [
     { value: `${reviews.length}+`, label: "Software Reviews" },
-    { value: `${comparisons.length}+`, label: "Software Comparisons" },
-    { value: `${guides.length}+`, label: "Buying Guides" },
+    { value: `${comparisons.length}+`, label: "Comparisons" },
+    { value: `${guides.length}+`, label: "Guides" },
     { value: `${allResearch.length}+`, label: "Research Reports" },
   ]
 
@@ -49,7 +46,7 @@ export default function HomePage() {
         <Container className="relative py-24 sm:py-32 lg:py-40">
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-6 animate-fade-in">
-              <span className="trust-badge">Practical software research, clearly explained</span>
+              <span className="trust-badge">Software research & buying guides</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.02] mb-6 text-balance">
               Navigate your{" "}
@@ -57,7 +54,7 @@ export default function HomePage() {
               {" "}with confidence
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10 text-pretty">
-              Detailed reviews, practical comparisons, and useful guides — every review scored against the same published rubric so you can compare tools with more context.
+              Detailed software reviews, practical comparisons, and buying guides. Explore product fit, feature trade-offs, and the questions to verify before choosing a tool.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
@@ -122,10 +119,12 @@ export default function HomePage() {
                 <Card className="h-full flex flex-col">
                   <div className="flex items-start justify-between mb-3">
                     <Badge variant="secondary">{tool.category}</Badge>
-                    <div className="flex items-center gap-1 text-sm font-medium text-accent">
-                      <Star size={14} className="fill-accent text-accent" />
-                      {tool.rating}
-                    </div>
+                    {tool.ratingVerified === true && typeof tool.rating === "number" && Number.isFinite(tool.rating) && (
+                      <div className="flex items-center gap-1 text-sm font-medium text-accent">
+                        <Star size={14} className="fill-accent text-accent" />
+                        {tool.rating}
+                      </div>
+                    )}
                   </div>
                   <CardTitle className="group-hover:text-primary transition-colors">{tool.name}</CardTitle>
                   <CardDescription className="mt-1.5">{tool.tagline}</CardDescription>
@@ -182,7 +181,7 @@ export default function HomePage() {
                   <Card className="h-full flex flex-col">
                     <div className="flex items-start justify-between mb-3">
                       <Badge variant="secondary">{cmp.category}</Badge>
-                      {cmp.winner && (
+                      {cmp.winnerVerified === true && cmp.winner && (
                         <span className="text-xs font-medium text-success flex items-center gap-1">
                           <Shield size={12} /> {cmp.winner} wins
                         </span>
@@ -261,7 +260,7 @@ export default function HomePage() {
               <Link key={cat.slug} href={`/category/${cat.slug}`} className="group card-hover-lift">
                 <Card className="flex items-center justify-between p-4">
                   <span className="font-medium text-sm">{cat.name}</span>
-                  <span className="text-xs text-muted-foreground tabular-nums">{reviewCountByCategory.get(cat.name) ?? 0}</span>
+                  <span className="text-xs text-muted-foreground tabular-nums">{cat.count}</span>
                 </Card>
               </Link>
             ))}
@@ -374,8 +373,8 @@ export default function HomePage() {
                   <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold mb-0.5">Editorial Separation</h3>
-                  <p className="text-xs text-muted-foreground">Commercial relationships are disclosed; scores follow our published rubric.</p>
+                  <h3 className="text-sm font-semibold mb-0.5">Independent & Unbiased</h3>
+                  <p className="text-xs text-muted-foreground">Paid placements are disclosed separately; payment does not determine editorial ratings or rankings.</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -393,7 +392,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold mb-0.5">Regularly Updated</h3>
-                  <p className="text-xs text-muted-foreground">Content reviewed and refreshed quarterly</p>
+                  <p className="text-xs text-muted-foreground">We update content when material product or pricing changes are verified.</p>
                 </div>
               </div>
             </div>
@@ -453,14 +452,13 @@ export default function HomePage() {
           <div className="mx-auto max-w-xl text-center mb-8">
             <Badge variant="default" className="mb-4">Newsletter</Badge>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-balance">
-              Practical software insights, straight to your inbox
+              Expert advice, straight to your inbox
             </h2>
             <p className="text-muted-foreground text-pretty">
-              Software research and reviews to help you compare options. No spam; unsubscribe anytime.
+              Independent research and software reviews, straight to your inbox. No spam, unsubscribe anytime.
             </p>
           </div>
           <div className="mx-auto max-w-md">
-            <NewsletterStatus />
             <form action="/api/newsletter" method="POST" className="flex gap-3">
               <input
                 type="email"

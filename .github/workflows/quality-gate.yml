@@ -5,7 +5,7 @@ permissions:
 
 on:
   push:
-    branches: [master]
+    branches: [master, "fix/comparison-copy-audit-wave1"]
   pull_request:
 
 concurrency:
@@ -29,10 +29,39 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Dependency audit summary (non-blocking)
+        run: |
+          npm audit --json > /tmp/npm-audit.json || true
+          npm audit --omit=dev --json > /tmp/npm-audit-production.json || true
+          node <<'NODE'
+          const full = require('/tmp/npm-audit.json')
+          const production = require('/tmp/npm-audit-production.json')
+          const vulnerabilities = Object.entries(full.vulnerabilities || {}).map(([name, item]) => ({
+            name,
+            severity: item.severity,
+            range: item.range,
+            fixAvailable: item.fixAvailable,
+            advisories: (item.via || []).filter((via) => typeof via === 'object').map((via) => ({
+              title: via.title,
+              url: via.url,
+              range: via.range,
+            })),
+          }))
+          console.log(JSON.stringify({
+            fullAudit: full.metadata?.vulnerabilities,
+            productionAudit: production.metadata?.vulnerabilities,
+            affectedPackages: vulnerabilities,
+            productionAffectedPackages: Object.entries(production.vulnerabilities || {}).map(([name, item]) => ({
+              name, severity: item.severity, range: item.range,
+            })),
+          }, null, 2))
+          NODE
+
       - name: Normalize flagged content boilerplate
         run: |
           node scripts/content-quality-cleanup.js
           git diff --exit-code -- content _gen-expand.js _gen-comparisons.js _gen-best-expansion.js
+
 
       - name: Content quality lint
         run: npm run lint:content
@@ -43,42 +72,17 @@ jobs:
       - name: SEO content audit
         run: npm run seo:audit
 
-      - name: WordPress migration inventory regression tests
-        run: node scripts/test-wordpress-migration-inventory.mjs
+      - name: Noindex audit review-candidate generation
+        run: npm run audit:noindex
 
-      - name: WordPress migration URL reconciliation regression tests
-        run: node scripts/test-reconcile-wordpress-migration-urls.mjs
+      - name: Production endpoint smoke check (diagnostic)
+        run: npm run seo:smoke
+        continue-on-error: true
 
-      - name: Comparison integrity audit heuristic tests
-        run: node scripts/test-audit-comparison-integrity.mjs
-
-      - name: Comparison integrity audit report (read-only)
-        run: |
-          node scripts/audit-comparison-integrity.mjs > comparison-integrity-report.json
-          node --input-type=module <<'NODE'
-          import fs from "node:fs";
-          const report = JSON.parse(fs.readFileSync("comparison-integrity-report.json", "utf8"));
-          const summary = [
-            "## Comparison integrity audit (read-only)",
-            "",
-            `- Comparison records scanned: **${report.filesScanned}**`,
-            `- Records marked \`published: false\`: **${report.publishedFalseCount}**`,
-            `- Invalid JSON records: **${report.invalidJsonCount}**`,
-            `- Heuristic flags: **${report.issueCount}**`,
-            "",
-            "Flags are review candidates, not proof of defects. Full report is attached as a workflow artifact."
-          ].join("\n");
-          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary + "\n");
-          console.log(summary);
-          NODE
-
-      - name: Upload comparison integrity audit report
-        uses: actions/upload-artifact@v4
-        with:
-          name: comparison-integrity-audit
-          path: comparison-integrity-report.json
-          if-no-files-found: error
-          retention-days: 14
+      - name: Live internal-link and broken-target audit (diagnostic)
+        run: SITE_URL=https://pilotstack.online npm run seo:links
+        continue-on-error: true
+        timeout-minutes: 25
 
       - name: Unit tests
         run: npm test

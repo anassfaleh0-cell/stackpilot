@@ -47,7 +47,7 @@ const toolsData: Record<string, { name: string; description: string; icon: Lucid
   "saas-stack-cost-calculator": {
     kind: "stack",
     name: "SaaS Stack Cost Calculator",
-    description: "Estimate your total monthly and annual software stack cost.",
+    description: "Estimate monthly and annual software spend across your stack, compare categories, and identify duplicate or underused subscriptions before deciding what to consolidate.",
     icon: Layers,
     content: [
       "Add the recurring cost of major software categories to see how much your stack costs each month and year.",
@@ -111,16 +111,28 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
                 {slug === "tco-calculator" ? (
                   <>
                     <p>To calculate total cost of ownership, list every cost category: subscription fees, implementation and data migration, training and change management, integration with existing tools, and ongoing administration. Add a 15-20% contingency buffer for unexpected expenses. Multiply monthly per-user costs by your expected user count and contract length. Compare the 1-year and 3-year projections to understand how costs compound. For a detailed breakdown, see our <Link href="/guides/saas-implementation-best-practices" className="text-primary hover:underline">SaaS implementation guide</Link>.</p>
-                    <p>Most organizations underestimate training and adoption costs by 40-60%. Budget at least 20 hours of paid training time per user in the first year, plus ongoing support. Integration costs vary widely: simple API connections may cost $5,000-15,000, while complex enterprise integrations can exceed $100,000.</p>
+                    <p>Training and integration costs depend on the software, deployment model, data migration, and your existing stack. Estimate these costs using vendor quotes and your own internal labor rates; treat generic benchmarks as prompts for questions, not as a substitute for a project-specific estimate.</p>
                   </>
                 ) : (
                   <>
                     <p>When comparing software, create a weighted scorecard based on your specific priorities. List your top 5-7 evaluation criteria, assign weights that reflect their importance (features 25%, pricing 20%, ease of use 20%, support 15%, integrations 10%, security 10%), then rate each tool on a 1-5 scale for each criterion. The weighted total reveals which tool best fits your needs.</p>
-                    <p>Focus your comparison on the features your team will actually use daily, not every feature the vendor offers. Read our <Link href="/guides/how-to-choose-crm-software" className="text-primary hover:underline">software selection guide</Link> for a step-by-step evaluation framework, or browse <Link href="/comparisons" className="text-primary hover:underline">head-to-head comparisons</Link> of specific tools.</p>
+                    <p>Focus your comparison on the features your team will actually use daily, not every feature the vendor offers. Read our <Link href="/methodology" className="text-primary hover:underline">review methodology</Link> for the criteria and evidence standard, or browse <Link href="/comparisons" className="text-primary hover:underline">head-to-head comparisons</Link> of specific tools.</p>
                   </>
                 )}
               </div>
             </div>
+            <section className="mt-8 rounded-xl border border-border bg-muted-bg p-6">
+              <h2 className="text-xl font-bold mb-2">Related free tools</h2>
+              <p className="text-sm text-muted-foreground mb-4">Use another calculator or planning tool to check a different part of your software decision.</p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {toolPages.filter((item) => item.slug !== slug).map((item) => (
+                  <Link key={item.slug} href={`/tools/${item.slug}`} className="rounded-lg border border-border bg-card p-3 hover:border-primary/40 transition-colors">
+                    <span className="font-medium text-sm">{item.name}</span>
+                    <span className="block text-xs text-muted-foreground mt-1">Open tool <ArrowRight size={12} className="inline" /></span>
+                  </Link>
+                ))}
+              </div>
+            </section>
             <div className="flex gap-3 justify-center mt-8">
               <Link href="/reviews" className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-white hover:bg-primary-dark shadow-sm hover:shadow-md h-10 px-6 text-sm font-medium transition-all duration-200">
                 Browse Reviews <ArrowRight size={14} />

@@ -1,58 +1,71 @@
 {
   "slug": "canva-vs-wordpress",
-  "title": "Canva vs WordPress",
-  "description": "Canva vs WordPress: Canva is our overall pick for Design & Creative teams — Canva 4.6/5, WordPress 4/5; Canva from Free – $12.99/mo, WordPress.",
+  "title": "Canva vs WordPress: visual design or content management?",
+  "description": "A decision guide for Canva versus WordPress. Canva focuses on visual design and branded content creation; WordPress focuses on website publishing and content management. Compare the actual job, workflow, and operating requirements rather than assuming a single winner. Check current vendor documentation and plan terms before deciding.",
   "category": "Design & Creative",
   "tool1": "Canva",
   "tool2": "WordPress",
-  "winner": "canva",
+  "winner": null,
   "features": [
     {
-      "name": "User Rating",
-      "tool1": true,
-      "tool2": false
+      "name": "Primary job",
+      "tool1": "visual design and branded content creation",
+      "tool1Detail": "Test templates, brand assets, collaboration, accessible exports, and the formats needed by your publishing channels.",
+      "tool2": "website publishing and content management",
+      "tool2Detail": "Test themes, plugins, editorial roles, hosting, performance, accessibility, backups, and publishing workflow."
     },
     {
-      "name": "Category",
-      "tool1": true,
-      "tool2": true
+      "name": "Best fit",
+      "tool1": "Choose Canva when visual design and branded content creation is the immediate requirement.",
+      "tool1Detail": "Test templates, brand assets, collaboration, accessible exports, and the formats needed by your publishing channels.",
+      "tool2": "Choose WordPress when website publishing and content management is the immediate requirement.",
+      "tool2Detail": "Test themes, plugins, editorial roles, hosting, performance, accessibility, backups, and publishing workflow."
     },
     {
-      "name": "Starting Price",
-      "tool1": true,
-      "tool2": true
+      "name": "Pilot checklist",
+      "tool1": "Test a representative workflow and define measurable success criteria before buying.",
+      "tool1Detail": "For Canva, verify setup effort, permissions, integrations, data handling, and who will maintain the workflow.",
+      "tool2": "Test the complementary workflow with the same decision framework.",
+      "tool2Detail": "For WordPress, verify setup effort, permissions, integrations, data handling, and who will maintain the workflow."
     },
     {
-      "name": "Best For",
-      "tool1": true,
-      "tool2": true
-    },
-    {
-      "name": "Core Strength",
-      "tool1": true,
-      "tool2": true
+      "name": "How they relate",
+      "tool1": "Canva addresses visual design and branded content creation; do not treat it as a replacement for website publishing and content management without a demonstrated overlap.",
+      "tool1Detail": "If both workflows matter, define the handoff and avoid paying twice for the same capability.",
+      "tool2": "WordPress addresses website publishing and content management; do not treat it as a replacement for visual design and branded content creation without a demonstrated overlap.",
+      "tool2Detail": "If both workflows matter, define the handoff and avoid paying twice for the same capability."
     }
   ],
-  "verdict": "Canva (Design & Creative) and WordPress (Web Design) serve different primary purposes. Canva has a higher user rating, but the right choice depends on whether your priority is design & creative or web design capabilities.",
+  "verdict": "There is no verified universal winner between Canva and WordPress: they focus on visual design and branded content creation and website publishing and content management, respectively. Start with the outcome your team needs, then pilot the product that directly supports that outcome. If both jobs are required, assess whether the tools complement one another and define ownership at the handoff. Verify current features, plan limits, total cost, integrations, privacy, permissions, and support before committing.",
   "faqs": [
     {
-      "question": "What is the difference between Canva and WordPress?",
-      "answer": "Canva is a design & creative tool, while WordPress is a web design platform. They serve different primary functions but may overlap in certain areas."
+      "question": "What is the main difference between Canva and WordPress?",
+      "answer": "Canva focuses on visual design and branded content creation; WordPress focuses on website publishing and content management. Compare them by the job you need to complete rather than assuming they are interchangeable."
     },
     {
       "question": "Can Canva replace WordPress?",
-      "answer": "Not directly — they serve different categories. Some organizations use both for different purposes."
+      "answer": "Only if a pilot proves that Canva meets the requirements you currently depend on WordPress to satisfy. Check required outputs, permissions, integrations, and operational controls before switching."
     },
     {
-      "question": "Which has better value, Canva or WordPress?",
-      "answer": "Canva (Free – $12.99/mo) and WordPress (Open Source (Free – $45/mo)) have different pricing. Evaluate based on which category matters more for your workflows."
+      "question": "Can a team use Canva and WordPress together?",
+      "answer": "Potentially, if the team needs both visual design and branded content creation and website publishing and content management. Define which product owns each step, how information moves between them, and who is responsible for access and data quality."
+    },
+    {
+      "question": "How should I compare their costs?",
+      "answer": "Estimate the cost of the specific workflow you need: include seats, usage, integrations, setup, support, and ongoing administration for Canva and WordPress. Verify current vendor pricing and plan limits rather than relying on old figures."
+    },
+    {
+      "question": "What should I test before choosing?",
+      "answer": "For Canva, test whether it handles visual design and branded content creation with acceptable setup and ongoing effort. For WordPress, test whether it handles website publishing and content management. Compare both against written success criteria and review security, privacy, and support requirements."
     }
   ],
-  "lastUpdated": "2026-07-20",
   "tool1Slug": "canva",
   "tool2Slug": "wordpress",
   "secondaryCategories": [
     "Web Design"
   ],
-  "published": false
+  "published": true,
+  "winnerVerified": false,
+  "featuresVerified": false,
+  "decisionGuide": true
 }

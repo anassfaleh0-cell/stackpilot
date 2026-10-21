@@ -23,7 +23,7 @@ export default function AffiliateDisclosurePage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Transparency</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Affiliate Disclosure</h1>
-            <p className="text-muted-foreground mb-8">Last updated: October 18, 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: October 14, 2026</p>
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">
@@ -31,7 +31,7 @@ export default function AffiliateDisclosurePage() {
               </p>
 
               <h2>How Affiliate Links Work</h2>
-              <p>When you click on an affiliate link on PilotStack and make a purchase, we may earn a commission. In many cases this does not add a separate fee, but the vendor controls pricing, discounts, and transaction terms. A commission may help fund site hosting, maintenance, and editorial work.</p>
+              <p>When you click on an affiliate link on PilotStack and make a purchase, we may earn a commission at no additional cost to you. These commissions may help support site hosting, operations, research, and content maintenance. Our content remains available to readers without a purchase requirement.</p>
 
               <h2>Our Commitment to Independence</h2>
               <p>Affiliate relationships are not intended to determine our editorial content:</p>
@@ -40,7 +40,7 @@ export default function AffiliateDisclosurePage() {
                 <li>Our ratings and recommendations are determined solely by our editorial process as described on our <a href="/methodology">Methodology page</a></li>
                 <li>Affiliate relationships do not determine the ratings, rankings, or inclusion criteria described in our published methodology</li>
                 <li>Affiliate and advertising relationships are disclosed separately from editorial guidance</li>
-                <li>We aim to identify monetized links close to where they appear. If you believe a link is not clearly disclosed, please contact us so we can review it</li>
+                <li>We clearly mark affiliate links where they appear in our content</li>
               </ul>
 
               <h2>Where Affiliate Links Appear</h2>
@@ -49,18 +49,23 @@ export default function AffiliateDisclosurePage() {
                 <li>"Visit Website" buttons on review pages</li>
                 <li>Tool and service recommendations within comparison pages</li>
                 <li>Links to vendor websites in guides and blog posts</li>
-                <li>Other distribution channels, if used, where links are clearly marked</li>
+                <li>Newsletter links, if included in future emails, where clearly marked</li>
               </ul>
               <p>Not all outbound links on PilotStack are affiliate links. Links to documentation, educational resources, and non-commercial sources are not monetized.</p>
 
               <h2>Affiliate Programs</h2>
-              <p>Partner and referral arrangements can change over time. This page is not a complete, live register of every current partner. Treat a link as an affiliate link where it is identified as such, and contact us if the disclosure near a link is unclear. We will review reports and correct the page where needed.</p>
+                <p>PilotStack may participate in affiliate programs such as:</p>
+              <ul>
+                <li>Direct vendor affiliate programs, where an agreement is in place</li>
+                <li>Affiliate networks and platform referral programs</li>
+              </ul>
+              <p>Not every vendor we review has an affiliate relationship with PilotStack. Specific commercial relationships may change over time; we disclose affiliate links where they appear and apply the same editorial criteria regardless of whether a link is monetized.</p>
 
-              <h2>Pricing and Vendor Terms</h2>
-              <p>An affiliate link usually does not add a separate fee, but prices, discounts, and transaction terms are controlled by the vendor and may vary. Check the vendor's checkout and terms before purchasing; we do not guarantee that every promotion or price is identical for every visitor.</p>
+              <h2>No Impact on Pricing</h2>
+              <p>Using our affiliate links does not affect the price you pay for any product or service. The commission is paid by the vendor from their marketing budget, not from any customer premium.</p>
 
               <h2>Questions</h2>
-              <p>If you have questions about our affiliate relationships or how they operate, please use our <a href="/contact">contact page</a> and include the page URL and link you are asking about.</p>
+              <p>If you have questions about our affiliate relationships or how they operate, contact us at <strong>disclosures@pilotstack.online</strong>.</p>
             </div>
           </div>
         </Container>

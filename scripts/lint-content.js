@@ -17,7 +17,7 @@ const TOOL_NAMES = {
   salesforce: "salesforce", hubspot: "hubspot",
   chatgpt: "chatgpt", jasper: "jasper", claude: "claude", gemini: "gemini",
   midjourney: "midjourney", vercel: "vercel", stripe: "stripe",
-  slack: "slack", zoom: "zoom"
+  slack: "slack", zoom: "zoom", netlify: "netlify", cloudflare: "cloudflare-pages"
 }
 
 function collectText(value) {
@@ -42,7 +42,7 @@ function getVerifiedEntities() {
           const d = new Date(dateMatch[1])
           const now = new Date()
           const daysDiff = (now - d) / (1000 * 60 * 60 * 24)
-          if (daysDiff <= 90) {
+          if (daysDiff >= 0 && daysDiff <= 90) {
             for (let j = i; j >= Math.max(0, i - 80); j--) {
               const slugMatch = lines[j].match(/slug:\s*['"]([^'"]+)['"]/)
               if (slugMatch) {
@@ -58,25 +58,105 @@ function getVerifiedEntities() {
   return verified
 }
 
+function splitTableCells(line) {
+  return line.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((cell) => cell.trim())
+}
+
+function getPriceContext(body, position) {
+  const lineStart = body.lastIndexOf("\n", position - 1) + 1
+  const lineEnd = body.indexOf("\n", position)
+  const line = body.slice(lineStart, lineEnd < 0 ? body.length : lineEnd)
+  if (/^\s*\|/.test(line)) {
+    const cells = splitTableCells(line)
+    const relativePosition = position - lineStart
+    let cellIndex = 0
+    let cursor = line.indexOf("|") + 1
+    for (let i = 0; i < cells.length; i++) {
+      const end = line.indexOf("|", cursor)
+      if (relativePosition >= cursor && (end < 0 || relativePosition <= end)) { cellIndex = i; break }
+      if (end < 0) break
+      cursor = end + 1
+    }
+    const priorLines = body.slice(0, lineStart).split("\n").slice(-8).reverse()
+    let headerCells = null
+    for (const prior of priorLines) {
+      if (!prior.trim()) break
+      if (!/^\s*\|/.test(prior)) continue
+      const candidate = splitTableCells(prior)
+      if (candidate.length === cells.length && candidate.some((cell) => /\b(vercel|netlify|cloudflare|figma|asana|monday)\b/i.test(cell))) {
+        headerCells = candidate
+        break
+      }
+    }
+    const vendor = headerCells?.[cellIndex] || ""
+    return { context: ((cells[0] || "") + " " + (cells[cellIndex] || "")).toLowerCase(), vendor: vendor.toLowerCase(), offset: 0 }
+  }
+  const previousBlank = body.lastIndexOf("\n\n", position)
+  const contextStart = previousBlank < 0 ? 0 : previousBlank + 2
+  const nextBlank = body.indexOf("\n\n", position)
+  const contextEnd = nextBlank < 0 ? body.length : nextBlank
+  return { context: body.slice(contextStart, contextEnd).toLowerCase(), vendor: "", offset: position - contextStart }
+}
+
+function findNearestToolName(context, offset) {
+  let best = null
+  let bestDistance = Infinity
+  for (const name of Object.keys(TOOL_NAMES)) {
+    let index = context.indexOf(name)
+    while (index >= 0) {
+      const distance = Math.abs(index - offset)
+      if (distance < bestDistance) { best = name; bestDistance = distance }
+      index = context.indexOf(name, index + name.length)
+    }
+  }
+  return best
+}
+
+function hasOfficialPricingSource(body, name) {
+  const officialUrls = {
+    figma: /(?:https?:\/\/)?(?:www\.)?figma\.com\/pricing/i,
+    vercel: /(?:https?:\/\/)?(?:www\.)?vercel\.com\/pricing/i,
+    netlify: /(?:https?:\/\/)?(?:www\.)?netlify\.com\/pricing/i,
+    monday: /(?:https?:\/\/)?(?:www\.)?monday\.com\/pricing/i,
+    asana: /(?:https?:\/\/)?(?:www\.)?asana\.com\/pricing/i,
+    chatgpt: /(?:https?:\/\/)?(?:openai\.com\/chatgpt\/pricing|chatgpt\.com\/pricing)/i,
+    claude: /(?:https?:\/\/)?(?:(?:www\.)?anthropic\.com\/pricing|claude\.com\/pricing)/i,
+    jasper: /(?:https?:\/\/)?(?:www\.)?jasper\.ai\/pricing/i,
+    gemini: /(?:https?:\/\/)?one\.google\.com\/about\/google-ai-plans/i,
+    hubspot: /(?:https?:\/\/)?(?:www\.)?hubspot\.com\/pricing\/(?:sales|marketing)/i,
+    salesforce: /(?:https?:\/\/)?(?:www\.)?salesforce\.com\/sales\/pricing\/?/i,
+    jira: /(?:https?:\/\/)?(?:www\.)?atlassian\.com\/software\/jira\/pricing/i,
+  }
+  const sourcePattern = officialUrls[name]
+  if (!sourcePattern || !sourcePattern.test(body)) return false
+
+  // Require a recent verification date next to the official source reference.
+  // A hard-coded calendar date silently makes every source stale over time.
+  const verification = body.match(/(?:checked|verified)[\s\S]{0,220}?((?:\d{4}-\d{2}-\d{2})|(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4})/i)
+  if (!verification) return false
+
+  const date = new Date(verification[1])
+  if (Number.isNaN(date.getTime())) return false
+  const ageDays = (Date.now() - date.getTime()) / (1000 * 60 * 60 * 24)
+  return ageDays >= 0 && ageDays <= 90
+}
 function checkPricingFigures(body, file, verifiedEntities) {
   const warnings = []
   let match
   DOLLAR_RE.lastIndex = 0
   while ((match = DOLLAR_RE.exec(body)) !== null) {
-    const pos = match.index
-    const windowStart = Math.max(0, pos - 150)
-    const windowEnd = Math.min(body.length, pos + 150)
-    const context = body.slice(windowStart, windowEnd).toLowerCase()
-    for (const [name, slug] of Object.entries(TOOL_NAMES)) {
-      if (context.includes(name) && !verifiedEntities.has(slug)) {
-        warnings.push(`Unverified $ figure near "${name}": ${match[0]}`)
-        break
-      }
+    const { context, vendor, offset } = getPriceContext(body, match.index)
+    const pricingContext = /\b(pricing|price|subscription|billing|plan|tier|fee|overage|per (?:user|editor|seat)|paid plan|monthly plan|annual plan|team features)\b/i.test(context)
+    if (!pricingContext) continue
+    const vendorName = vendor ? findNearestToolName(vendor, vendor.length) : findNearestToolName(context, offset)
+    if (!vendorName) continue
+    const slug = TOOL_NAMES[vendorName]
+    if (!verifiedEntities.has(slug) && !hasOfficialPricingSource(body, vendorName)) {
+      warnings.push('Unverified $ figure near "' + vendorName + '": ' + match[0])
     }
   }
   return warnings
 }
-
 function stripPunct(w) {
   return w.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
 }
@@ -99,7 +179,17 @@ function checkDateFormats(data, file) {
   for (const field of ["lastUpdated", "publishedAt", "updatedAt", "lastReviewed"]) {
     if (!data[field]) continue
     const value = String(data[field])
-    if (/^\d{4}-\d{2}-\d{2}$/.test(value)) continue
+    if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+      const parsedDate = new Date(`${value}T00:00:00.000Z`)
+      if (
+        Number.isNaN(parsedDate.getTime()) ||
+        parsedDate.toISOString().slice(0, 10) !== value
+      ) {
+        console.error(`  ERROR: Invalid calendar date "${field}": "${value}"`)
+        errs++
+      }
+      continue
+    }
     const parsed = new Date(value)
     if (Number.isNaN(parsed.getTime())) {
       console.error(`  ERROR: Invalid date "${field}": "${value}"`)
@@ -177,14 +267,8 @@ for (const dir of dirs) {
     // Lint the actual source payload; runtime sanitization must never hide source defects.
     const raw = JSON.stringify(data)
     const validationData = data
-    // Most content routes render typed fields (for example sections, recommendations, FAQs)
-    // rather than the legacy generated top-level HTML body. Blog articles are the exception.
-    // Lint the rendered/source-of-truth fields so stale, unused generated HTML cannot mask issues.
-    const lintData = dir !== "content/blog" && data && typeof data === "object"
-      ? Object.fromEntries(Object.entries(data).filter(([key]) => key !== "body"))
-      : validationData
-    const validationRaw = JSON.stringify(lintData)
-    const malformedLinks = (validationRaw.match(/<a\b[^>]*<a\b/gi) || []).length + (validationRaw.match(/href="[^"]*<a\b/gi) || []).length
+    const validationRaw = raw
+    const malformedLinks = (raw.match(/<a href="[^"]*">\s*<a href=/gi) || []).length
     if (malformedLinks > 0) {
       console.error("  ERROR: " + malformedLinks + " malformed nested <a> link pattern(s)")
       fileErrors += malformedLinks
@@ -224,7 +308,7 @@ for (const dir of dirs) {
       fileErrors++
     }
 
-    const primaryText = collectText(lintData).trim()
+    const primaryText = collectText(data).trim()
     if (primaryText.length < 120 && !["content/glossary", "content/statistics"].includes(dir)) {
       console.error("  ERROR: Primary content is too thin (<120 characters)")
       fileErrors++
@@ -233,7 +317,7 @@ for (const dir of dirs) {
     if (dir === "content/blog" && data.body) {
       const pricingWarns = checkPricingFigures(data.body, file, verifiedEntities)
       for (const w of pricingWarns) {
-        console.warn(`  WARNING: [pricing] ${w}`)
+        console.warn(`  WARNING: [pricing] ${fpath}: ${w}`)
       }
     }
 

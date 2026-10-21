@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, ArticleSchema, WebPageSchema, ItemListSchema, softwareApp } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getIndustry, getAllIndustries, getContentTitle } from "@/lib/content/registry"
+import { getIndustry, getAllIndustries, getContentTitle, getReview } from "@/lib/content/registry"
 import { formatDate } from "@/lib/utils"
 import { getRelatedByCategory } from "@/lib/content/internal-links"
 import { InternalLinks, LEGACY_RELATED_TYPES, extendedRelatedItems } from "@/components/content/internal-links"
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!ind) return {}
   const readingTime = Math.max(5, Math.ceil((ind.description.split(/\s+/).length + ind.recommendations.length * 15) / 200))
   const shortTitle = ind.title.length > 58 ? ind.title.slice(0, 55) + "..." : ind.title
-  return createMetadata({ title: shortTitle, description: `Best software for ${ind.industry.toLowerCase()} businesses, with ratings, pricing context, and implementation tips for 2026.`, path: `/industries/${ind.slug}`, ogType: "article", publishedAt: ind.lastUpdated, updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime , noIndex: isNoindexed("industries", ind.slug) })
+  return createMetadata({ title: shortTitle, description: `Software options for ${ind.industry.toLowerCase()} businesses, with use-case fit, pricing considerations, and implementation tips for 2026. Ratings appear only when source provenance is documented.`, path: `/industries/${ind.slug}`, ogType: "article", publishedAt: ind.lastUpdated, updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime , noIndex: isNoindexed("industries", ind.slug) })
 }
 
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -98,11 +98,13 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                         <div className="p-5">
                           <div className="flex items-start justify-between mb-2">
                             <Link href={`/reviews/${rec.toolSlug}`} className="text-lg font-bold hover:text-primary transition-colors">{rec.toolName}</Link>
-                            <div className="flex items-center gap-1 text-sm">
-                              <Star size={14} className="fill-accent text-accent" />
-                              <span className="font-semibold">{rec.rating}</span>
-                              <span className="text-muted-foreground">/5</span>
-                            </div>
+                            {getReview(rec.toolSlug)?.ratingVerified === true && typeof getReview(rec.toolSlug)?.rating === "number" ? (
+                              <div className="flex items-center gap-1 text-sm">
+                                <Star size={14} className="fill-accent text-accent" />
+                                <span className="font-semibold">{getReview(rec.toolSlug)?.rating}</span>
+                                <span className="text-muted-foreground">/5</span>
+                              </div>
+                            ) : <span className="text-xs text-muted-foreground">Rating not verified</span>}
                           </div>
                           <p className="text-sm text-primary mb-1">{rec.bestFor}</p>
                           <Link href={`/reviews/${rec.toolSlug}`} className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
@@ -116,38 +118,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               ))}
 
               <section className="mb-10">
-                <h2 className="text-2xl font-bold tracking-tight mb-4">Compare the shortlist</h2>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  Use this shortlist as a starting point, not a universal ranking. Match each product to a specific workflow in {ind.industry}, then verify current capabilities, regional availability, security documentation, integrations, and contract terms with the vendor before purchase.
-                </p>
-                <div className="overflow-x-auto rounded-xl border border-border">
-                  <table className="w-full text-sm">
-                    <thead className="bg-muted/50 text-left">
-                      <tr>
-                        <th scope="col" className="p-3 font-semibold">Product</th>
-                        <th scope="col" className="p-3 font-semibold">Category</th>
-                        <th scope="col" className="p-3 font-semibold">Best-fit use</th>
-                        <th scope="col" className="p-3 font-semibold">Recorded rating</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {ind.recommendations.map((rec) => (
-                        <tr key={rec.toolSlug} className="border-t border-border align-top">
-                          <td className="p-3 font-medium"><Link href={`/reviews/${rec.toolSlug}`} className="text-primary hover:underline">{rec.toolName}</Link></td>
-                          <td className="p-3">{rec.category}</td>
-                          <td className="p-3 text-muted-foreground">{rec.bestFor}</td>
-                          <td className="p-3 whitespace-nowrap">{rec.rating}/5</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </section>
-
-              <section className="mb-10">
                 <h2 className="text-2xl font-bold tracking-tight mb-4">Industry buying checklist</h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  For {ind.industry} teams, prioritize {ind.softwareNeeds.slice(0, 3).join(", ") || "the core workflow requirements"}. Score each shortlisted product against the workflows your team actually runs, required integrations, access controls, data retention, reporting, implementation effort, and support. Record any requirement that needs a workaround and test it before signing a contract.
+                  For {ind.industry} teams, the shortlist should be tested against the operational requirements recorded on this page rather than against a generic feature count. Start with {ind.softwareNeeds.slice(0, 3).join(", ") || "the core workflow requirements"} and then compare how each recommended product fits the actual people, processes, data, and integrations involved.
                 </p>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <GlassCard>
@@ -178,7 +151,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                   <ul className="space-y-2">
                     {ind.implementationTips.map((tip, i) => (
                       <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span aria-hidden="true" className="text-success mt-0.5 mr-2 shrink-0">•</span>
+                        <span className="text-success mt-0.5 shrink-0">•</span>
                         <span>{tip}</span>
                       </li>
                     ))}
@@ -218,10 +191,16 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                   <div className="p-4">
                     <h3 className="font-semibold mb-3 text-sm">Top Picks</h3>
                     <div className="space-y-2">
-                      {ind.recommendations.sort((a, b) => b.rating - a.rating).slice(0, 4).map((rec) => (
+                      {[...ind.recommendations].sort((a, b) => {
+                         const aReview = getReview(a.toolSlug)
+                         const bReview = getReview(b.toolSlug)
+                         const aRating = aReview?.ratingVerified === true && typeof aReview.rating === "number" ? aReview.rating : -1
+                         const bRating = bReview?.ratingVerified === true && typeof bReview.rating === "number" ? bReview.rating : -1
+                         return bRating - aRating
+                       }).slice(0, 4).map((rec) => (
                         <Link key={rec.toolSlug} href={`/reviews/${rec.toolSlug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                           <span>{rec.toolName}</span>
-                          <span className="text-xs font-medium">{rec.rating}/5</span>
+                          <span className="text-xs font-medium">{getReview(rec.toolSlug)?.ratingVerified === true && typeof getReview(rec.toolSlug)?.rating === "number" ? `${getReview(rec.toolSlug)?.rating}/5` : "Rating not verified"}</span>
                         </Link>
                       ))}
                     </div>

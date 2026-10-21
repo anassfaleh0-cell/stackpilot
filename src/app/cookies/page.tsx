@@ -22,7 +22,7 @@ export default function CookiesPage() {
         <Container>
           <div className="max-w-3xl mx-auto prose prose-slate">
             <h1 className="text-4xl font-bold tracking-tight mb-6">Cookie Policy</h1>
-            <p className="text-muted-foreground"><em>Last updated: October 18, 2026</em></p>
+            <p className="text-muted-foreground"><em>Last updated: October 14, 2026</em></p>
 
             <p>This Cookie Policy explains how PilotStack ("we", "us", "our") uses cookies and similar tracking technologies on our website. It supplements our <a href="/privacy">Privacy Policy</a> and explains what cookies are, why we use them, and how you can control their use.</p>
 
@@ -31,26 +31,26 @@ export default function CookiesPage() {
             <p>Similar technologies include local storage, session storage, and web beacons (small transparent images used to track page views and email opens).</p>
 
             <h2>Cookies We Use</h2>
-            <p>We use essential browser storage for site preferences and, only according to the choices saved in the consent banner, optional analytics and advertising scripts. Browser local storage is not itself a cookie.</p>
+            <p>We minimize cookie usage to what is strictly necessary for site operation and basic analytics. We use a cookie consent banner that lets you control which categories of cookies are enabled.</p>
 
-            <h3>Essential Browser Storage</h3>
-            <p>We use browser local storage to remember display and consent choices. These entries are not cookies and can be removed by clearing site data, which may reset your preferences.</p>
+            <h3>Essential Cookies</h3>
+            <p>These cookies are necessary for the website to function and cannot be disabled. They are set automatically when you access our site and do not store any personally identifiable information.</p>
             <ul>
-              <li><strong>Theme preference:</strong> Stores your light/dark mode preference in local storage until you change it or clear site data.</li>
-              <li><strong>Consent preferences:</strong> Stores your choices for optional analytics and advertising so the site can apply them on later visits.</li>
-            </ul>
+              <li><strong>Theme preference:</strong> Stores your light/dark mode preference in local storage. No expiration — persists until you change your preference or clear site data.</li>
+                          </ul>
 
             <h3>Analytics Cookies</h3>
             <p>We use analytics tools, including Google Analytics and Microsoft Clarity, to understand how visitors interact with our site. These services may process usage and device information according to their own privacy policies and are loaded only after analytics consent. Google Tag Manager is loaded only after both analytics and advertising preferences are enabled, so its third-party tags are not requested before those choices are made.</p>
             <ul>
-              <li><strong>Google Analytics 4 (GA4):</strong> Collects anonymized page views, session duration, and traffic source data. IP addresses are anonymized. Retention periods depend on the analytics configuration and applicable Google settings. <em>Opt-out available via <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out browser add-on</a>.</em></li>
-              <li><strong>Microsoft Clarity:</strong> Provides session-replay and heatmap features to help us understand how users navigate the site. We configure it for analytics use and do not intentionally use it to collect passwords or other sensitive form data. <em>Opt-out available via the <a href="https://privacy.microsoft.com/en-US/privacystatement" target="_blank" rel="noopener">Microsoft Privacy Statement</a>.</em></li>
+              <li><strong>Google Analytics 4 (GA4):</strong> May collect page views, session and traffic-source information, and device/browser signals. IP anonymization and other data controls depend on the service and configuration; we do not promise that every event or identifier is anonymous in every context. Retention periods depend on the analytics configuration and applicable Google settings. <em>Opt-out available via <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics opt-out browser add-on</a>.</em></li>
+              <li><strong>Microsoft Clarity:</strong> May provide session-replay and heatmap insights about site interactions. We do not ask visitors to submit passwords or sensitive personal data through our forms. Clarity's collection, masking, and retention behavior depends on provider features and settings, so review the <a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener noreferrer">Microsoft Privacy Statement</a> for provider-level details.</li>
             </ul>
 
             <h3>Third-Party Cookies</h3>
             <p>Some third-party services we use may set their own cookies:</p>
             <ul>
               <li><strong>Google AdSense:</strong> If you consent to advertising cookies, Google AdSense may use cookies to serve personalized ads based on your browsing history. You can opt out via <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a> or <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener">www.aboutads.info</a>.</li>
+              <li><strong>Vercel Analytics:</strong> Edge network analytics — privacy-friendly, cookie-less by default for basic metrics.</li>
               <li><strong>Monetization scripts:</strong> Our ad and affiliate partners may set cookies to track impressions and clicks. These are third-party controlled and their use is governed by their respective privacy policies. Third-party partners may have their own privacy and consent requirements, which are described in their respective policies.</li>
             </ul>
 
@@ -63,28 +63,28 @@ export default function CookiesPage() {
               <li>Measuring the effectiveness of our content and site structure</li>
               <li>Detecting and preventing technical issues</li>
             </ul>
-            <p>We never use cookie data for:</p>
+            <p>We do not intentionally use cookie data for the following purposes outside the specific services and consent choices described above. Third-party providers may process data under their own terms and configurations:</p>
             <ul>
-              <li>Building user profiles for commercial purposes beyond what AdSense provides with your consent</li>
+              <li>Using analytics cookie data to make eligibility or similarly significant decisions about individual visitors</li>
               <li>Selling or sharing data with data brokers</li>
-              <li>Cross-site tracking or fingerprinting outside of consented advertising</li>
+              <li>Deliberate device fingerprinting by PilotStack</li>
             </ul>
 
             <h2>Cookie Duration</h2>
             <ul>
-              <li><strong>Session cookies:</strong> Some third-party services may use cookies that expire when a browser session ends.</li>
-              <li><strong>Persistent cookies:</strong> Some cookies may remain for a provider-defined period or until deleted. Durations depend on the service and its configuration.</li>
+              <li><strong>Session cookies:</strong> Expire when you close your browser. Used for temporary session management.</li>
+              <li><strong>Persistent cookies:</strong> Remain on your device for a set period or until manually deleted. Retention periods vary by service and configuration.</li>
             </ul>
 
             <h2>Managing Cookies</h2>
-            <p>You can control and manage cookies in several ways:</p>
+            <p>You can control and manage cookies in several ways. To change your saved choices on PilotStack, use the Cookie Settings control when available on the site; you can also clear the site’s stored consent preference in your browser and reload to be asked again.</p>
             <ul>
               <li><strong>Browser settings:</strong> Most browsers let you view, block, or delete cookies. Check your browser&apos;s help documentation for instructions.</li>
               <li><strong>Privacy plugins:</strong> Browser extensions like uBlock Origin, Privacy Badger, or Ghostery can block tracking scripts.</li>
-              <li><strong>Consent choices:</strong> Use the site's cookie settings to change optional analytics and advertising preferences. Browser-level Do Not Track signals are not currently used as a substitute for these consent settings.</li>
+              <li><strong>Do Not Track:</strong> Some browsers support the DNT header. We respect DNT signals where technically feasible.</li>
               <li><strong>GA4 opt-out:</strong> Install the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out browser add-on</a> to prevent data collection by GA4.</li>
             </ul>
-            <p>Please note that clearing or blocking browser storage may prevent the site from remembering your theme or consent choices. Essential site content remains available.</p>
+            <p>Please note that blocking essential cookies may affect site functionality, including theme persistence and basic session management.</p>
 
             <h2>Updates to This Policy</h2>
             <p>We may update this Cookie Policy from time to time to reflect changes in technology, regulation, or our practices. Material changes will be reflected on this page with an updated date. The "Last updated" date at the top reflects the most recent revision.</p>

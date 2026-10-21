@@ -1,185 +1,76 @@
 {
   "slug": "saas-pricing-benchmark-2026",
-  "title": "SaaS Pricing Benchmark 2026: Real Starting Prices Across 12 Software Categories",
-  "description": "Original research derived from 151 independently reviewed software tools. The median SaaS starting price is $19.99/mo, 51% of tools use a freemium model, and 41% offer a free tier. Includes category-by-category starting-price benchmarks computed from PilotStack's verified review database.",
+  "title": "SaaS Pricing Benchmark 2026: Data Method, Limits and Buyer Checklist",
+  "description": "How to compare SaaS starting prices responsibly, what a reproducible benchmark needs, and why recorded prices should not be treated as verified without source evidence.",
   "category": "Benchmark",
   "reportType": "Pricing Benchmark",
   "keyFindings": [
-    "The median starting price across 132 monthly-anchorable tools in the corpus is $19.99/mo, with the middle 50% of tools starting between $11/mo and $39/mo",
-    "Freemium is the single most common pricing model: 77 of 151 tools (51%) offer a freemium tier, versus 53 (35%) paid-only and 12 (8%) fully free",
-    "41% of tools with parseable pricing include a free tier, making 'free-first' the dominant entry strategy for most software categories",
-    "The most expensive categories to enter are Marketing & SEO (median starting price $99/mo) and Developer Tools ($29/mo); the cheapest are Security & Compliance ($7/mo) and HR & People ($8/mo)",
-    "10 of 151 tools (6.6%) publish no public pricing at all ('custom only'), concentrated in enterprise-grade HR and payroll platforms",
-    "Per-user pricing is the norm for team tools — 28 of 132 monthly-anchorable tools (21%) bill per user, seat, or device"
+    "A price benchmark is only as reliable as the dated vendor source and plan-level context behind each recorded price.",
+    "The internal review corpus contains structured pricing fields, but a stored value alone does not establish that the price is current or independently verified.",
+    "Monthly starting prices are not directly comparable when products differ by billing term, seats, usage caps, required add-ons, or free-tier eligibility.",
+    "Category medians should be published only after the underlying records, exclusions, and calculations have been independently checked.",
+    "Buyers should verify current prices, plan limits, taxes, and contract terms on the vendor's own pricing page before committing."
   ],
   "sections": [
     {
-      "title": "Why Pricing Benchmarks Matter",
-      "body": "Software buyers face a structural information problem: vendor pricing pages change frequently, comparison sites serve stale data, and there is no industry standard for reporting what software actually costs. Our 2026 SaaS Pricing Drift Report found 7 of 11 independently verified tools had at least one pricing detail commonly misreported elsewhere.\n\nThis benchmark takes a different approach. Instead of aggregating third-party claims, it computes statistics directly from PilotStack's own review database — 151 tools carrying a structured pricing model and a price range recorded at review time. The result is a defensible, reproducible snapshot of where software pricing actually stands in 2026.",
+      "title": "Why price comparisons go wrong",
+      "body": "SaaS pricing pages use different units: per seat, per workspace, per usage volume, annual billing, or quote-based contracts. A headline monthly price can omit minimum seats, onboarding, usage overages, premium support, or mandatory add-ons. A comparison that ignores those differences can be mathematically consistent and still mislead a buyer.",
       "type": "text"
     },
     {
-      "title": "Headline Numbers",
-      "body": "All figures computed from the full review corpus on August 7, 2026.",
+      "title": "Current status of the recorded dataset",
+      "body": "PilotStack has structured pricing fields in its internal review corpus and a reproducible script for summarizing those fields. However, numeric records are still subject to source-provenance review. Until a row has a dated vendor source, matching plan and region, and clear unit of billing, figures from the corpus should be treated as recorded observations rather than independently verified current market prices. This page therefore does not present an unverified category median as a confirmed market benchmark.",
+      "type": "text"
+    },
+    {
+      "title": "What a defensible benchmark records",
+      "body": "For every product, retain the vendor pricing URL, date checked, product and plan name, currency, region, billing interval, unit (seat, workspace, usage, or flat fee), minimum commitment, price range, free-tier conditions, and any mandatory extras. Record exclusions explicitly and preserve the input snapshot so the computation can be reproduced.",
       "type": "list",
       "items": [
-        "Median starting price across 132 monthly-anchorable tools: $19.99/mo (middle 50%: $11–$39/mo)",
-        "Freemium model share: 51% (77 of 151 tools)",
-        "Paid-only model share: 35% (53 tools)",
-        "Free tools share: 8% (12 tools)",
-        "Free tier available somewhere in the price ladder: 41% of parseable tools",
-        "Custom-only (no public pricing): 6.6% (10 tools)",
-        "Per-user, per-seat, or per-device billing: 21% of monthly-anchorable tools",
-        "Average rating across the corpus: 4.33 / 5"
+        "Vendor source URL and date checked",
+        "Plan name, region, currency, and billing interval",
+        "Per-seat, workspace, usage, or flat-rate unit",
+        "Minimum seats, contract length, and required add-ons",
+        "Free-tier limits and eligibility conditions",
+        "Reason for each excluded or unparseable record"
       ]
     },
     {
-      "title": "Starting Price Benchmarks by Category",
-      "body": "Median minimum monthly price for tools in each category with at least 8 reviewed tools and a parseable numeric price range. Small-sample categories (fewer than 8 tools) are listed separately below.",
-      "type": "table",
-      "columns": [
-        "Category",
-        "Tools reviewed",
-        "Median starting price",
-        "Free tier share",
-        "Paid-only tools"
-      ],
-      "rows": [
-        [
-          "Marketing & SEO",
-          "9",
-          "$99/mo",
-          "22%",
-          "6 of 9"
-        ],
-        [
-          "Developer Tools",
-          "23",
-          "$29/mo",
-          "48%",
-          "2 of 23"
-        ],
-        [
-          "CRM & Sales",
-          "12",
-          "$25/mo",
-          "17%",
-          "5 of 12"
-        ],
-        [
-          "Communication",
-          "10",
-          "$21/mo",
-          "50%",
-          "3 of 10"
-        ],
-        [
-          "AI & Machine Learning",
-          "12",
-          "$20/mo",
-          "33%",
-          "3 of 12"
-        ],
-        [
-          "Productivity",
-          "10",
-          "$18/mo",
-          "40%",
-          "2 of 10"
-        ],
-        [
-          "Finance & Accounting",
-          "15",
-          "$17/mo",
-          "13%",
-          "7 of 15"
-        ],
-        [
-          "Project Management",
-          "11",
-          "$15/mo",
-          "55%",
-          "3 of 11"
-        ],
-        [
-          "Analytics & Data",
-          "9",
-          "$12/mo",
-          "11%",
-          "4 of 9"
-        ],
-        [
-          "Design & Creative",
-          "8",
-          "$10/mo",
-          "38%",
-          "3 of 8"
-        ],
-        [
-          "HR & People",
-          "9",
-          "$8/mo",
-          "0%",
-          "8 of 9"
-        ],
-        [
-          "Security & Compliance",
-          "8",
-          "$7/mo",
-          "25%",
-          "5 of 8"
-        ]
-      ]
-    },
-    {
-      "title": "Small-Sample Categories (Fewer Than 8 Tools)",
-      "body": "The following categories have too few reviewed tools for a reliable median and are excluded from the headline table: Web Design (4 tools, 100% free tier), Automation (4 tools, 100% free tier), Video Communication (3 tools, 100% free tier), Analytics (2 tools), HR & Payroll (1 tool), Customer Service (1 tool).",
+      "title": "How to compare total cost",
+      "body": "Start with the same team size and usage assumptions for each candidate. Calculate the recurring subscription, required add-ons, implementation, migration, training, support, and expected overages over the same period. Keep unknown values visible instead of silently estimating them. For quote-based plans, ask the vendor for an itemized quote.",
       "type": "text"
     },
     {
-      "title": "How to Read These Numbers",
-      "body": "The median starting price is the middle value of the minimum price of each tool's public price range — the lowest amount a new customer can pay monthly. Free tiers count as $0 in the free-tier share but are included in the price-ladder analysis. Tools priced only on a per-user basis (e.g., $8–15/mo per user) use their lower bound as the starting price.\n\nThree important caveats: (1) starting price is an entry point, not a total cost — most tools scale with seats, usage, or tiers; (2) these figures describe the tools PilotStack reviews, which skew toward well-known B2B products, not the full market; (3) prices are point-in-time and verified at review time, so re-verify on the vendor's pricing page before budgeting (see the Pricing Drift Report for how often references go stale).",
+      "title": "How to interpret category medians",
+      "body": "A category median describes only the products and records included in its calculation. It is not a universal market price. Small samples, missing prices, different billing units, regional differences, and stale sources can distort the result. Publish sample size, exclusions, date range, distribution, and a link to the calculation method alongside any headline figure.",
       "type": "text"
     },
     {
-      "title": "What Changed vs. 2025 Benchmarks",
-      "body": "This is the first edition of this benchmark using the full 151-tool corpus, so no year-over-year comparison is published yet. The computation script (scripts/compute-pricing-benchmark.js) is reproducible and versioned; re-running it on an updated corpus produces the next edition. Quarterly refresh is planned, at which point drift versus this baseline will be published.",
-      "type": "text"
-    },
-    {
-      "title": "Recommendations for Buyers",
-      "body": "Budget from the category median up, not from the cheapest tool down — a tool starting at half the category median usually makes up the difference in seats, usage caps, or per-user charges.",
+      "title": "Buyer checklist",
+      "body": "Before making a budget or purchase decision, open the vendor's current pricing page, confirm the exact plan and billing unit, check usage and seat limits, verify contract and cancellation terms, and save the date and source. Recheck any figure copied from a review or comparison site. Pricing can change after a page is published.",
       "type": "list",
       "items": [
-        "If a category's median starting price exceeds your budget, prioritize free-tier tools and plan for the first paid tier in month two or three",
-        "Treat 'custom pricing' as a signal: expect procurement effort and annual contracts for the 6.6% of tools that hide pricing",
-        "For team deployments, convert per-user prices into a total seat cost and compare against flat-rate tools with the same feature coverage",
-        "Re-verify any price quoted from a comparison site against the vendor's pricing page — the drift report found 64% of verified tools had at least one commonly misreported pricing detail",
-        "Use the category tables here as a negotiation anchor: a vendor's entry tier should not materially exceed the category median without a clear feature justification"
+        "Confirm price and plan on the vendor's official site",
+        "Compare like-for-like usage and seat assumptions",
+        "Include add-ons, taxes, implementation and support",
+        "Record quote date and renewal terms",
+        "Treat unsourced or conflicting values as unverified"
       ]
     }
   ],
-  "methodology": "All statistics are computed from PilotStack's review corpus: 151 product reviews published at https://www.pilotstack.online/reviews, each containing a structured pricing model field (Paid / Freemium / Free Trial / Free / Open Source / Transaction-based) and a price range field verified at review time. The computation is fully scripted in scripts/compute-pricing-benchmark.js and was run on August 7, 2026. 133 of 151 tools (88%) had a parseable numeric price range; 10 tools (6.6%) were custom-priced only and excluded from price-ladder statistics; 8 tools had unparseable formats. Monthly-anchorable tools (132) are those with a monthly price or a free tier; one-time-purchase tools were excluded from monthly medians. The median starting price uses the lower bound of each tool's price range; per-user prices use their lower bound per user. Category medians are reported only for categories with at least 8 reviewed tools and at least 6 parseable price ranges. All prices are point-in-time as recorded in each review's price range field and should be re-verified on vendor pricing pages before purchasing decisions.",
+  "methodology": "This page documents the required method for producing a pricing benchmark. The repository contains a script that computes summaries from structured review fields, but reproducible arithmetic does not verify the underlying price inputs. No category median is described here as a confirmed market benchmark until each included record has a dated, checkable vendor source and comparable billing context.",
   "dataSources": [
     {
-      "name": "PilotStack Review Database (151 tools)",
-      "url": "https://www.pilotstack.online/reviews"
+      "name": "PilotStack review corpus (recorded fields; source audit in progress)",
+      "url": "https://pilotstack.online/reviews"
     },
     {
-      "name": "PilotStack Evaluation Toolkit",
-      "url": "https://github.com/anassfaleh0-cell/pilotstack-toolkit"
-    },
-    {
-      "name": "PilotStack Research Methodology",
-      "url": "https://www.pilotstack.online/research-methodology"
-    },
-    {
-      "name": "SaaS Pricing Drift Report 2026",
-      "url": "https://www.pilotstack.online/research/saas-pricing-drift-report-2026"
+      "name": "PilotStack review methodology",
+      "url": "https://pilotstack.online/methodology"
     }
   ],
   "publishedAt": "2026-08-07",
-  "updatedAt": "2026-08-07",
+  "updatedAt": "2026-10-15",
   "author": "Emily Nakamura",
   "readingTime": 9,
   "faqs": [

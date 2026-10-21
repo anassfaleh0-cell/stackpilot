@@ -14,8 +14,8 @@ import { getPagination, parsePageParam } from "@/lib/pagination"
 import { PaginationNav } from "@/components/ui/pagination-nav"
 
 export const metadata = createMetadata({
-  title: "Research Reports",
-  description: "Original research reports on software pricing, market trends, and industry benchmarks. Data-driven insights for B2B technology buyers.",
+  title: "Research Guides",
+  description: "Practical guides to evaluating software markets, checking source quality, and applying metrics to buying decisions. Numerical findings are withheld until source verification is complete.",
   path: "/research",
 })
 
@@ -32,7 +32,7 @@ export default async function ResearchPage({ searchParams }: { searchParams?: Pr
       title: r.title,
       description: r.description,
       slug: r.slug,
-      date: formatDate(r.publishedAt),
+      date: formatDate(r.updatedAt || r.publishedAt),
       readTime: r.readingTime ? `${r.readingTime} min` : "",
     }))
     .sort((a, b) => (b.date || "").localeCompare(a.date || ""))
@@ -41,7 +41,7 @@ export default async function ResearchPage({ searchParams }: { searchParams?: Pr
 
   return (
     <>
-      <CollectionPageSchema name="Research Reports" description="Original research reports on software pricing, market trends, and industry benchmarks" url={`${site.url}/research`} />
+      <CollectionPageSchema name="Research Guides" description="Practical guides to evaluating software markets and verifying evidence" url={`${site.url}/research`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Research", href: "/research" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Research" }]} />
@@ -50,10 +50,10 @@ export default async function ResearchPage({ searchParams }: { searchParams?: Pr
         <BrandPattern variant="grid" opacity={0.3} className="text-primary" />
         <Container className="relative py-16 sm:py-20">
           <div className="max-w-3xl mx-auto text-center">
-            <Badge variant="default" className="mb-4">Original Research</Badge>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Research Reports</h1>
+            <Badge variant="default" className="mb-4">Research Guides</Badge>
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Research Guides</h1>
             <p className="text-lg text-muted-foreground text-pretty">
-              Data-driven research reports on software pricing, market trends, and industry benchmarks. Our team analyzes market data to help you make informed decisions.
+              Practical guides explain which metrics matter, how to check the evidence behind market claims, and what software buyers should verify before making decisions. Numerical findings remain withheld until their sources are documented.
             </p>
           </div>
         </Container>

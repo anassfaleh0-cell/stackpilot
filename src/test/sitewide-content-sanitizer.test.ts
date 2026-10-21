@@ -9,6 +9,7 @@ import {
   getResearch,
   getReview,
   getUseCase,
+  sanitizeUnsupportedClaims,
 } from "@/lib/content/registry"
 
 const BANNED_CLAIMS = [
@@ -22,6 +23,10 @@ const BANNED_CLAIMS = [
   /our testing methodology/i,
   /after researching hundreds of/i,
   /our expert buying advice/i,
+  /\bsub-?\d+(?:\.\d+)?\s*(?:ms|milliseconds?)\b/i,
+  /\b\d[\d,]*(?:\.\d+)?\+?\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\b/i,
+  /\b(?:zero|no)\s+(?:loading states?|pagination delays?|downtime)\b/i,
+  /\b\d{1,3}(?:\.\d+)?%?\s+(?:faster|improvement|uptime)\b/i,
 ]
 
 function stringsOf(value: unknown, out: string[] = []): string[] {
@@ -57,6 +62,46 @@ describe("site-wide content quality gate", () => {
       }
     }
     expect(offenders).toEqual([])
+  })
+
+  it("removes unsupported precision and scale claims from sentence-level content", () => {
+    const samples = [
+      "The product responds in sub-100ms under normal load.",
+      "The vendor supports 10,000+ integrations for every plan.",
+      "The vendor serves over 10,000 customers worldwide.",
+      "The plan includes up to 5,000 connectors.",
+      "The platform is used by millions of users.",
+      "The platform guarantees zero downtime for all customers.",
+      "This workflow delivers 40% faster results.",
+      "The vendor has 99.9% uptime.",
+    ]
+    for (const sample of samples) {
+      expect(sanitizeUnsupportedClaims(sample)).toBe("")
+    }
+    expect(sanitizeUnsupportedClaims("Teams can compare available plans before choosing a workflow."))
+      .toContain("compare available plans")
+    expect(sanitizeUnsupportedClaims("Compare available plans. The vendor has 99.9% uptime."))
+      .toBe("Compare available plans.")
+  })
+
+  it("sanitizes unsupported precision and scale claims inside review list items", () => {
+    const suspicious = [
+      /\bsub-?\d+(?:\.\d+)?\s*(?:ms|milliseconds?)\b/i,
+      /\b\d[\d,]*(?:\.\d+)?\+?\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\b/i,
+      /\b(?:over|more than|up to|nearly|almost)\s+\d[\d,]*(?:\.\d+)?\+?\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\b/i,
+      /\b(?:millions|billions) of (?:users|customers|employees|reviews|integrations)\b/i,
+      /\b(?:zero|no)\s+(?:loading states?|pagination delays?|downtime)\b/i,
+      /\b\d{1,3}(?:\.\d+)?%?\s+(?:faster|improvement|uptime)\b/i,
+    ]
+    for (const slug of ["linear", "notion", "asana"]) {
+      const review = getReview(slug)
+      expect(review, slug).toBeTruthy()
+      for (const section of review!.content) {
+        for (const item of section.items ?? []) {
+          for (const pattern of suspicious) expect(item, slug).not.toMatch(pattern)
+        }
+      }
+    }
   })
 
   it("keeps substantive content after sanitization", () => {
