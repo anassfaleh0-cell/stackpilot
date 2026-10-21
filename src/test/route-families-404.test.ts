@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest"
 import fs from "node:fs"
 import path from "node:path"
 import sitemap from "@/app/sitemap"
+import SitemapPage from "@/app/sitemap-html/page"
 import robots from "@/app/robots"
 import { siteConfig } from "@/lib/constants"
 import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
@@ -74,6 +75,18 @@ function recordsOf(dir: string): RecordEntry[] {
     })
 }
 
+function collectHrefs(node: unknown, hrefs: string[] = []): string[] {
+  if (Array.isArray(node)) {
+    for (const child of node) collectHrefs(child, hrefs)
+    return hrefs
+  }
+  if (typeof node !== "object" || node === null) return hrefs
+  const element = node as { props?: { href?: unknown; children?: unknown } }
+  if (typeof element.props?.href === "string") hrefs.push(element.props.href)
+  collectHrefs(element.props?.children, hrefs)
+  return hrefs
+}
+
 function render(family: Family, slug: string): Promise<unknown> {
   return family.mod.default({ params: Promise.resolve({ slug }) })
 }
@@ -125,6 +138,18 @@ describe("route families", () => {
       expect(parsed.search, `sitemap URL must not contain query params: ${entry.url}`).toBe("")
       expect(parsed.hash, `sitemap URL must not contain fragments: ${entry.url}`).toBe("")
       expect(parsed.pathname.startsWith("/"), `sitemap URL must use an absolute path: ${entry.url}`).toBe(true)
+    }
+  })
+
+  it("does not link unpublished records from the HTML sitemap", () => {
+    const hrefs = new Set(collectHrefs(SitemapPage()))
+    for (const family of FAMILIES) {
+      if (!family.dir) continue
+      for (const record of recordsOf(family.dir)) {
+        if (record.publicationStatus === "draft" || record.published === false) {
+          expect(hrefs.has(`/${family.route}/${record.slug}`), `HTML sitemap must omit unpublished content: ${family.route}/${record.slug}`).toBe(false)
+        }
+      }
     }
   })
 
