@@ -1,15 +1,16 @@
 import { Container } from "@/components/ui/container"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
-import { site, categories } from "@/lib/constants"
+import { site, categories, toolPages, editorialLinks } from "@/lib/constants"
+import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
 import { createMetadata } from "@/lib/metadata"
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, getAllUseCases, getAllIndustries, getAllHubs, getAllBlogPosts, getAllResearch, getAllStatistics, getAllGlossaryTerms } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
 import Link from "next/link"
 
 export const metadata = createMetadata({
-  title: "Sitemap — All Pages",
-  description: "Complete sitemap of all pages on PilotStack. Browse reviews, comparisons, guides, best software picks, alternatives, and more.",
+  title: "HTML Sitemap — Published Content Directory",
+  description: "Browse PilotStack’s published software content, tool pages, author profiles, and editorial resources.",
   path: "/sitemap-html",
 })
 
@@ -62,6 +63,20 @@ export default function SitemapPage() {
               <Link href="/glossary" className="text-sm text-primary hover:underline block mb-2">All Glossary Terms</Link>
               {glossary.map(g => (
                 <Link key={g.slug} href={`/glossary/${g.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{g.term}</Link>
+              ))}
+            </Section>
+
+            <Section title={`Tools & Calculators (${toolPages.length})`}>
+              <Link href="/tools" className="text-sm text-primary hover:underline block mb-2">All Tools</Link>
+              {toolPages.map(tool => (
+                <Link key={tool.slug} href={`/tools/${tool.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{tool.name}</Link>
+              ))}
+            </Section>
+
+            <Section title={`Authors (${PUBLIC_AUTHOR_SLUGS.length})`}>
+              <Link href="/authors" className="text-sm text-primary hover:underline block mb-2">All Authors</Link>
+              {PUBLIC_AUTHOR_SLUGS.map(slug => (
+                <Link key={slug} href={`/authors/${slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{slug === "pilotstack-team" ? "PilotStack Team" : slug.replace(/-/g, " ")}</Link>
               ))}
             </Section>
 
@@ -150,6 +165,13 @@ export default function SitemapPage() {
               <Link href="/media-kit" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Media Kit</Link>
               <Link href="/press" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Press</Link>
               <Link href="/statistics" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Statistics</Link>
+          <Section title={`Editorial Resources (${editorialLinks.length})`}>
+            <div className="flex flex-wrap gap-2">
+              {editorialLinks.map(link => (
+                <Link key={link.href} href={link.href} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">{link.label}</Link>
+              ))}
+            </div>
+          </Section>
               <Link href="/research" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Research</Link>
             </div>
           </Section>
