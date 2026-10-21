@@ -23,7 +23,7 @@ import { NativeAd } from "@/components/ads"
 import { getComparisonDecision, getComparisonDisplayCopy } from "@/lib/content/comparison-decision"
 import { getVisibleReviewFaqs, stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
 
-export const dynamicParams = true
+export const dynamicParams = false
 
 export function generateStaticParams() {
   // Vercel keeps on-demand generation; Cloudflare prerenders committed JSON content because
