@@ -14,6 +14,10 @@ function isQuality(slug: string, dir: string): boolean {
   return !isNoindexed(dir, slug)
 }
 
+function isPublished<T extends { slug: string }>(record: T): boolean {
+  return (record as T & { publicationStatus?: string }).publicationStatus !== "draft"
+}
+
 const staticPages: MetadataRoute.Sitemap = [
   { url: siteConfig.url, changeFrequency: "daily", priority: 1.0 },
   { url: `${siteConfig.url}/reviews`, changeFrequency: "daily", priority: 0.9 },
@@ -49,19 +53,19 @@ const staticPages: MetadataRoute.Sitemap = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Derive actual lastModified dates from content for content pages
-  const reviews = getAllReviews().filter((r) => isQuality(r.slug, "reviews"))
+  const reviews = getAllReviews().filter((r) => isPublished(r) && isQuality(r.slug, "reviews"))
   // Keep retired/draft comparison records out of the sitemap even if an upstream registry changes.
-  const comparisons = getAllComparisons().filter((c) => c.publicationStatus !== "draft" && !isRetiredComparisonSlug(c.slug) && isQuality(c.slug, "comparisons"))
-  const guides = getAllGuides().filter((g) => isQuality(g.slug, "guides"))
-  const blogPosts = getAllBlogPosts().filter((p) => isQuality(p.slug, "blog"))
-  const glossary = getAllGlossaryTerms().filter((t) => isQuality(t.slug, "glossary"))
-  const alternatives = getAllAlternatives().filter((a) => isQuality(a.slug, "alternatives"))
-  const useCases = getAllUseCases().filter((u) => isQuality(u.slug, "use-cases"))
-  const industries = getAllIndustries().filter((i) => isQuality(i.slug, "industries"))
-  const best = getAllBest().filter((b) => isQuality(b.slug, "best"))
-  const hubs = getAllHubs().filter((h) => isQuality(h.slug, "hubs"))
-  const research = getAllResearch().filter((r) => isQuality(r.slug, "research"))
-  const statistics = getAllStatistics().filter((s) => isQuality(s.slug, "statistics"))
+  const comparisons = getAllComparisons().filter((c) => isPublished(c) && !isRetiredComparisonSlug(c.slug) && isQuality(c.slug, "comparisons"))
+  const guides = getAllGuides().filter((g) => isPublished(g) && isQuality(g.slug, "guides"))
+  const blogPosts = getAllBlogPosts().filter((p) => isPublished(p) && isQuality(p.slug, "blog"))
+  const glossary = getAllGlossaryTerms().filter((t) => isPublished(t) && isQuality(t.slug, "glossary"))
+  const alternatives = getAllAlternatives().filter((a) => isPublished(a) && isQuality(a.slug, "alternatives"))
+  const useCases = getAllUseCases().filter((u) => isPublished(u) && isQuality(u.slug, "use-cases"))
+  const industries = getAllIndustries().filter((i) => isPublished(i) && isQuality(i.slug, "industries"))
+  const best = getAllBest().filter((b) => isPublished(b) && isQuality(b.slug, "best"))
+  const hubs = getAllHubs().filter((h) => isPublished(h) && isQuality(h.slug, "hubs"))
+  const research = getAllResearch().filter((r) => isPublished(r) && isQuality(r.slug, "research"))
+  const statistics = getAllStatistics().filter((s) => isPublished(s) && isQuality(s.slug, "statistics"))
 
   const entries: MetadataRoute.Sitemap = [
     ...staticPages,
