@@ -73,6 +73,12 @@ const nextConfig: NextConfig = {
       destination: "https://pilotstack.online/:path*",
       permanent: true,
     },
+    // Preserve the former privacy-policy URL as a permanent alias for the current policy page.
+    {
+      source: "/privacy-policy",
+      destination: "/privacy",
+      permanent: true,
+    },
     // Legacy plural route names surfaced in Search Console. The singular routes
     // and matching content records exist in this repository.
     {
