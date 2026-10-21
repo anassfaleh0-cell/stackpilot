@@ -71,7 +71,7 @@ export default function HowWeTestSoftwarePage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Our Process</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">How We Evaluate Software</h1>
-            <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: October 21, 2026</p>
 
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
