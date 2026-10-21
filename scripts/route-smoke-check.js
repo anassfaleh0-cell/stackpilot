@@ -94,6 +94,13 @@ async function checkRoute(pathname) {
       fail(`${pathname} has an invalid canonical URL: ${canonicalHref}`)
       return
     }
+    if (pathname === "/") {
+      const publisherMeta = body.match(/<meta\b(?=[^>]*\bname=["\']google-adsense-account["\'])(?=[^>]*\bcontent=["\']ca-pub-6523926892521982["\'])[^>]*>/i)?.[0]
+      if (!publisherMeta) {
+        fail("/ is missing the AdSense publisher meta tag for ca-pub-6523926892521982")
+        return
+      }
+    }
     const robotsMeta = body.match(/<meta\b(?=[^>]*\bname=["']robots["'])[^>]*>/i)?.[0] || ""
     if (/\bcontent=["'][^"']*\bnoindex\b/i.test(robotsMeta)) {
       fail(`${pathname} is unexpectedly noindex in the built app`)
