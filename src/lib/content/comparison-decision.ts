@@ -38,7 +38,8 @@ export function getComparisonDecision(input: ComparisonDecisionInput): Compariso
 }
 
 /** Hide raw feature values unless the comparison has auditable feature-level sources. */
-export function getComparisonFeatureDisplayValue(value: boolean | string, featuresVerified?: boolean): boolean | string {
+export function getComparisonFeatureDisplayValue(value: boolean | string, featuresVerified?: boolean, decisionGuide = false): boolean | string {
+  if (decisionGuide && typeof value === "string") return value.trim() ? value : "Not recorded"
   if (featuresVerified !== true) return "Not verified"
   return typeof value === "string" && !value.trim() ? "Not recorded" : value
 }
@@ -50,6 +51,7 @@ export interface ComparisonDisplayCopyInput {
   tool1Category?: string | null
   tool2Category?: string | null
   winnerVerified?: boolean
+  decisionGuide?: boolean
   description: string
   verdict: string
 }
@@ -76,6 +78,10 @@ export function getComparisonDisplayCopy(input: ComparisonDisplayCopyInput): Com
   const containsUnsupportedWinner = input.winnerVerified !== true && (
     UNSUPPORTED_WINNER_CLAIM.test(input.description) || UNSUPPORTED_WINNER_CLAIM.test(input.verdict)
   )
+
+  if (input.decisionGuide === true && !containsUnsupportedMetrics && !containsUnsupportedWinner) {
+    return { description: input.description, verdict: input.verdict }
+  }
 
   if (!categoriesDiffer && !containsUnsupportedMetrics && !containsUnsupportedWinner) {
     return { description: input.description, verdict: input.verdict }

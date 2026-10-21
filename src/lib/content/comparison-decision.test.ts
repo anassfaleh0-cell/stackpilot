@@ -82,6 +82,12 @@ describe("getComparisonFeatureDisplayValue", () => {
     expect(getComparisonFeatureDisplayValue(false, true)).toBe(false)
     expect(getComparisonFeatureDisplayValue("Freemium", true)).toBe("Freemium")
   })
+
+  it("shows editorial role labels for decision guides without treating booleans as verified", () => {
+    expect(getComparisonFeatureDisplayValue("AI-assisted drafting", false, true)).toBe("AI-assisted drafting")
+    expect(getComparisonFeatureDisplayValue("   ", false, true)).toBe("Not recorded")
+    expect(getComparisonFeatureDisplayValue(true, false, true)).toBe("Not verified")
+  })
 })
 
 
@@ -104,6 +110,37 @@ describe("getComparisonDisplayCopy", () => {
     expect(copy.description).not.toContain("$12.99")
     expect(copy.verdict).not.toContain("overall winner")
     expect(copy.verdict).not.toContain("4.6/5")
+  })
+
+  it("preserves authored role-based copy for a decision guide across different categories", () => {
+    const copy = getComparisonDisplayCopy({
+      tool1: "ChatGPT",
+      tool2: "Appwrite",
+      tool1Category: "AI & Machine Learning",
+      tool2Category: "Developer Tools",
+      winnerVerified: false,
+      decisionGuide: true,
+      description: "ChatGPT focuses on conversational AI assistance; Appwrite focuses on backend services.",
+      verdict: "Choose based on the workflow you need; there is no universal winner.",
+    })
+
+    expect(copy.description).toContain("ChatGPT focuses on conversational AI assistance")
+    expect(copy.verdict).toContain("there is no universal winner")
+  })
+
+  it("still replaces unsupported metrics in a decision guide", () => {
+    const copy = getComparisonDisplayCopy({
+      tool1: "Alpha",
+      tool2: "Beta",
+      tool1Category: "Category A",
+      tool2Category: "Category B",
+      winnerVerified: false,
+      decisionGuide: true,
+      description: "Alpha scores 4.8/5 and costs $20.",
+      verdict: "Alpha is the overall winner.",
+    })
+    expect(copy.description).not.toContain("4.8/5")
+    expect(copy.verdict).not.toContain("overall winner")
   })
 
   it("preserves neutral copy for same-category comparisons when no unsupported claims exist", () => {

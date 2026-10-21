@@ -9,13 +9,14 @@ interface EditorialComparisonProps {
   tool2: string
   features: ComparisonFeature[]
   featuresVerified?: boolean
+  decisionGuide?: boolean
   winner: string | null
   category: string
   slug: string
   className?: string
 }
 
-export function EditorialComparison({ tool1, tool2, features, featuresVerified = false, winner, category, slug, className = "" }: EditorialComparisonProps) {
+export function EditorialComparison({ tool1, tool2, features, featuresVerified = false, decisionGuide = false, winner, category, slug, className = "" }: EditorialComparisonProps) {
   const seed = slugSeed(slug)
   const rand = seededRandom(seed)
   const p = getPalette(category)
@@ -23,8 +24,8 @@ export function EditorialComparison({ tool1, tool2, features, featuresVerified =
   // Text values describe plan tiers or unknowns and must not be treated as truthy wins.
   const displayFeatures = features.map((feature) => ({
     ...feature,
-    displayTool1: getComparisonFeatureDisplayValue(feature.tool1, featuresVerified),
-    displayTool2: getComparisonFeatureDisplayValue(feature.tool2, featuresVerified),
+    displayTool1: getComparisonFeatureDisplayValue(feature.tool1, featuresVerified, decisionGuide),
+    displayTool2: getComparisonFeatureDisplayValue(feature.tool2, featuresVerified, decisionGuide),
   }))
   const scoredFeatures = featuresVerified ? features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean") : []
   const t1w = scoredFeatures.filter((f) => f.tool1 === true && f.tool2 === false).length
@@ -72,7 +73,7 @@ export function EditorialComparison({ tool1, tool2, features, featuresVerified =
           <rect width="100" height="8" rx="4" fill={`url(#${gradId})`} />
         </svg>
       ) : (
-        <p className="text-xs text-muted-foreground">No scored winner is shown: the rows below describe plan availability and items to verify rather than unsupported feature scores.</p>
+        <p className="text-xs text-muted-foreground">{decisionGuide ? "These rows describe each product’s primary job and practical selection criteria; they are not a verified feature scorecard." : "No scored winner is shown: the rows below describe plan availability and items to verify rather than unsupported feature scores."}</p>
       )}
       <div className="rounded-xl overflow-hidden" style={{ border: `1px solid ${p.glassBorder}` }}>
         <table className="w-full text-sm">

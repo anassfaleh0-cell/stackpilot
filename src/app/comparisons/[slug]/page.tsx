@@ -44,6 +44,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     tool1Category: review1?.category,
     tool2Category: review2?.category,
     winnerVerified: cmp.winnerVerified === true,
+    decisionGuide: cmp.decisionGuide === true,
     description: cmp.description,
     verdict: cmp.verdict,
   })
@@ -80,6 +81,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
     tool1Category: review1?.category,
     tool2Category: review2?.category,
     winnerVerified: cmp.winnerVerified === true,
+    decisionGuide: cmp.decisionGuide === true,
     description: cmp.description,
     verdict: cmp.verdict,
   })
@@ -194,7 +196,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                   )}
                   <div className="text-xl font-bold mb-2">{tool.name}</div>
                   <div className="text-3xl font-bold text-primary mb-1">{tool.score === null ? "—" : `${tool.score}%`}</div>
-                  <div className="text-xs text-muted-foreground mb-3">{tool.score === null ? (cmp.featuresVerified === true ? "No comparable availability data" : "Feature-source audit pending") : `Availability across ${scoredFeatures.length} verified boolean checks`}</div>
+                  <div className="text-xs text-muted-foreground mb-3">{tool.score === null ? (cmp.decisionGuide ? "Workflow guidance; no scored winner" : cmp.featuresVerified === true ? "No comparable availability data" : "Feature-source audit pending") : `Availability across ${scoredFeatures.length} verified boolean checks`}</div>
                   {tool.score !== null && <ScoreBar score={tool.score} max={100} className="mb-3" />}
                   <Link
                     href={`/reviews/${tool.slug}`}
@@ -213,7 +215,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
               <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 3v18h18M7 16l4-8 4 4 4-6" />
               </svg>
-            } value={cmp.features.length.toString()} title="Features Compared" />
+            } value={cmp.features.length.toString()} title={cmp.decisionGuide ? "Decision Criteria" : "Features Compared"} />
             <InfoCard icon={
               <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -230,7 +232,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           {/* Feature Comparison */}
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-6">Feature Comparison</h2>
-            <EditorialComparison tool1={cmp.tool1} tool2={cmp.tool2} features={safeFeatures} featuresVerified={cmp.featuresVerified === true} winner={hasComparableWinner ? winnerLabel : null} category={cmp.category} slug={cmp.slug} />
+            <EditorialComparison tool1={cmp.tool1} tool2={cmp.tool2} features={safeFeatures} featuresVerified={cmp.featuresVerified === true} decisionGuide={cmp.decisionGuide === true} winner={hasComparableWinner ? winnerLabel : null} category={cmp.category} slug={cmp.slug} />
           </section>
 
           {/* Decision Framework */}

@@ -627,6 +627,7 @@ describe("CD-16: cross-category comparison publication safeguards", () => {
       expect(comparison.winner, slug).toBeNull()
       expect(comparison.winnerVerified, slug).toBe(false)
       expect(comparison.featuresVerified, slug).toBe(false)
+      expect(comparison.decisionGuide, slug).toBe(true)
       expect(comparison.lastUpdated, slug).toBeUndefined()
       expect(comparison.features, slug).toHaveLength(4)
       expect(comparison.faqs, slug).toHaveLength(5)

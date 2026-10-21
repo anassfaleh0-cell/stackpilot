@@ -108,6 +108,8 @@ export interface ComparisonContent {
   winnerVerified?: boolean
   /** True only when comparison feature rows have documented, auditable sources. */
   featuresVerified?: boolean
+  /** True when rows are editorial workflow guidance, not a scored feature matrix. */
+  decisionGuide?: boolean
   features: ComparisonFeature[]
   verdict: string
   faqs: FAQItem[]

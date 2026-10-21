@@ -64,12 +64,13 @@ describe("rewritten cross-category comparison guides", () => {
   it("keeps every rewritten guide published, available, indexable, and free of fabricated winner claims", () => {
     for (const slug of rewrittenSlugs) {
       const file = path.join(process.cwd(), "content", "comparisons", `${slug}.json`)
-      const record = JSON.parse(fs.readFileSync(file, "utf8")) as { published?: boolean; publicationStatus?: string; winner?: string | null; winnerVerified?: boolean; featuresVerified?: boolean; lastUpdated?: string }
+      const record = JSON.parse(fs.readFileSync(file, "utf8")) as { published?: boolean; publicationStatus?: string; winner?: string | null; winnerVerified?: boolean; featuresVerified?: boolean; decisionGuide?: boolean; lastUpdated?: string }
       expect(record.published, slug).toBe(true)
       expect(record.publicationStatus, slug).not.toBe("draft")
       expect(record.winner, slug).toBeNull()
       expect(record.winnerVerified, slug).toBe(false)
       expect(record.featuresVerified, slug).toBe(false)
+      expect(record.decisionGuide, slug).toBe(true)
       expect(record.lastUpdated, slug).toBeUndefined()
       expect(getComparison(slug), slug).not.toBeNull()
       expect(isContentAvailable("comparison", slug), slug).toBe(true)
