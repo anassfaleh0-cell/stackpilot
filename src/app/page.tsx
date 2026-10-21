@@ -456,7 +456,7 @@ export default function HomePage() {
           <div className="mx-auto max-w-xl text-center mb-8">
             <Badge variant="default" className="mb-4">Newsletter</Badge>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-balance">
-              Expert advice, straight to your inbox
+              Practical software research, straight to your inbox
             </h2>
             <p className="text-muted-foreground text-pretty">
               Independent research and software reviews, straight to your inbox. No spam, unsubscribe anytime.
