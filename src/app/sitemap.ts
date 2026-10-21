@@ -52,6 +52,8 @@ const staticPages: MetadataRoute.Sitemap = [
   })),
 ]
 
+export const dynamic = "force-static"
+
 export default function sitemap(): MetadataRoute.Sitemap {
   // Derive actual lastModified dates from content for content pages
   const reviews = getAllReviews().filter((r) => isPublished(r) && isQuality(r.slug, "reviews"))
