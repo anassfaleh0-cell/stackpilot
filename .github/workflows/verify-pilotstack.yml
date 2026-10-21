@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - "fix/adsense-static-adstxt"
+      - "fix/adsense-live-readiness-audit"
+      - "adsense-final-audit-2026-10-21-v2"
   pull_request:
     branches:
       - master
