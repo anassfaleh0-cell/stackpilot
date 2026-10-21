@@ -21,7 +21,7 @@
 
 ## Important implementation details
 
-- `BUILD_TARGET=cloudflare` allows OpenNext to control the build output; the default Vercel build retains its existing standalone output setting.
+- Next.js keeps `output: "standalone"`, which OpenNext Cloudflare uses as its build input. The normal Vercel build configuration is otherwise unchanged.
 - `wrangler.jsonc` deliberately names a preview Worker and does not bind the production custom domain.
 - Static export is intentionally not used because this application includes App Router route handlers and server-side functionality.
 - A successful build is not proof of production readiness. A live preview must be checked in the Cloudflare Workers runtime before any domain change.
