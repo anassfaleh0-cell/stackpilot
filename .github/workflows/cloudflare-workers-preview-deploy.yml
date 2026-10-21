@@ -85,13 +85,9 @@ jobs:
           const fs = require('node:fs');
           const manifest = JSON.parse(fs.readFileSync('.next/prerender-manifest.json', 'utf8'));
           const routes = Object.keys(manifest.routes || {});
-          const dynamic = Object.entries(manifest.dynamicRoutes || {});
           const expected = ['/reviews/linear', '/comparisons/activecampaign-vs-ahrefs'];
           for (const route of expected) {
-            const found = routes.includes(route) || dynamic.some(([pattern, info]) =>
-              pattern === (route.startsWith('/reviews/') ? '/reviews/[slug]' : '/comparisons/[slug]') &&
-              Array.isArray(info?.fallback) === false
-            );
+            const found = routes.includes(route);
             if (!found) {
               console.error('Expected content route missing from prerender manifest:', route);
               console.error('Prerendered route sample:', routes.filter(x => x.startsWith('/reviews/') || x.startsWith('/comparisons/')).slice(0, 20));
