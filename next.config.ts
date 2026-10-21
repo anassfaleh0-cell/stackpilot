@@ -85,6 +85,18 @@ const nextConfig: NextConfig = {
       destination: "/glossary/:slug",
       permanent: true,
     },
+    // GSC surfaced a legacy SEO tools slug whose canonical record is best-seo-tools.
+    // Redirect both singular and plural variants to the real published page.
+    {
+      source: "/best/seo-tools",
+      destination: "/best/best-seo-tools",
+      permanent: true,
+    },
+    {
+      source: "/bests/seo-tools",
+      destination: "/best/best-seo-tools",
+      permanent: true,
+    },
     {
       source: "/bests/:slug",
       destination: "/best/:slug",
