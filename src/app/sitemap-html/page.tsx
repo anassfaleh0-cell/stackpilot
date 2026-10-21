@@ -77,7 +77,7 @@ export default function SitemapPage() {
             <Section title={`Authors (${PUBLIC_AUTHOR_SLUGS.length})`}>
               <Link href="/authors" className="text-sm text-primary hover:underline block mb-2">All Authors</Link>
               {PUBLIC_AUTHOR_SLUGS.map(slug => (
-                <Link key={slug} href={`/authors/${slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{slug === "pilotstack-team" ? "PilotStack Team" : slug.replace(/-/g, " ")}</Link>
+                <Link key={slug} href={`/authors/${slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{String(slug) === "pilotstack-team" ? "PilotStack Team" : String(slug).replace(/-/g, " ")}</Link>
               ))}
             </Section>
 
