@@ -1,8 +1,6 @@
 name: Cloudflare Workers validation
 
 on:
-  push:
-    branches: ["migration/cloudflare-workers-pilotstack"]
   pull_request:
     paths:
       - "src/**"
