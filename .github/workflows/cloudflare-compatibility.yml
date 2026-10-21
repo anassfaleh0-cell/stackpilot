@@ -8,6 +8,7 @@ on:
       - "src/**"
       - "content/**"
       - "next.config.*"
+      - "vitest.config.ts"
       - "package.json"
       - "package-lock.json"
       - ".github/workflows/cloudflare-compatibility.yml"
