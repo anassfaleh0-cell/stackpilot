@@ -92,6 +92,10 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+          <p className="mt-5 text-center text-sm text-muted-foreground">
+            Commercial relationships are disclosed in our{" "}
+            <Link href="/affiliate-disclosure" className="underline underline-offset-4 hover:text-primary">affiliate disclosure</Link>; they do not determine editorial assessments.
+          </p>
         </Container>
       </section>
 
