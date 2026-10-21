@@ -10,8 +10,8 @@ import { isRetiredComparisonSlug } from "@/lib/sitemap/retired-comparisons"
 import Link from "next/link"
 
 export const metadata = createMetadata({
-  title: "HTML Sitemap — Published Content Directory",
-  description: "Browse PilotStack’s published software content, tool pages, author profiles, and editorial resources.",
+  title: "HTML Sitemap — Public Content Directory",
+  description: "Browse PilotStack’s public software content, tool pages, author profiles, and editorial resources.",
   path: "/sitemap-html",
 })
 
@@ -36,7 +36,7 @@ export default function SitemapPage() {
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Sitemap", href: "/sitemap-html" }]} />
-      <WebPageSchema name="HTML Sitemap — Published Content Directory" description="Browse published reviews, comparisons, guides, glossary entries, tool pages, author profiles, and editorial resources on PilotStack." url={`${site.url}/sitemap-html`} />
+      <WebPageSchema name="HTML Sitemap — Public Content Directory" description="Browse public reviews, comparisons, guides, glossary entries, tool pages, author profiles, and editorial resources on PilotStack." url={`${site.url}/sitemap-html`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Sitemap" }]} />
       </Container>
