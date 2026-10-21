@@ -23,7 +23,7 @@ export function generateStaticParams() {
   // Content is read from committed JSON files. Prerender the corpus so Workers never need
   // repository filesystem access for on-demand route rendering.
   return getAllAlternatives()
-    .filter((item) => item.publicationStatus !== "draft")
+    .filter((item) => (item as typeof item & { publicationStatus?: string }).publicationStatus !== "draft")
     .map((item) => ({ slug: item.slug }))
 }
 
