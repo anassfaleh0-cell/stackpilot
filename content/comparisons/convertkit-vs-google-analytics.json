@@ -1,59 +1,70 @@
 {
-"publicationStatus": "draft",
   "slug": "convertkit-vs-google-analytics",
-  "title": "ConvertKit vs Google Analytics",
-  "description": "ConvertKit vs Google Analytics: ConvertKit is our overall pick for Marketing & SEO teams — ConvertKit 4.4/5, Google Analytics 4.3/5; ConvertKit.",
+  "title": "ConvertKit vs Google Analytics: Creator email marketing or website traffic analytics?",
+  "description": "A practical decision guide for teams weighing ConvertKit against Google Analytics. ConvertKit focuses on creator email marketing, while Google Analytics focuses on website traffic analytics. Use the workflow criteria below to decide whether you need one, the other, or both; verify current vendor capabilities, terms, and pricing before committing.",
   "category": "Marketing & SEO",
   "tool1": "ConvertKit",
   "tool2": "Google Analytics",
-  "winner": "convertkit",
+  "winner": null,
   "features": [
     {
-      "name": "User Rating",
-      "tool1": true,
-      "tool2": false
+      "name": "Core task",
+      "tool1": "Creator email marketing",
+      "tool1Detail": "Use ConvertKit when the need is managing a creator audience, email campaigns, and subscriber workflows; test segmentation, deliverability, and automation.",
+      "tool2": "Website traffic analytics",
+      "tool2Detail": "Use Google Analytics when the need is measuring website acquisition and visitor events; verify tracking, consent, and reporting requirements."
     },
     {
-      "name": "Category",
-      "tool1": true,
-      "tool2": true
+      "name": "Selection test",
+      "tool1": "Run ConvertKit through a representative task and document results, setup effort, and gaps.",
+      "tool1Detail": "Confirm must-have requirements before evaluating plans or switching tools.",
+      "tool2": "Run Google Analytics through the same decision process.",
+      "tool2Detail": "Check whether it solves the same requirement or a separate one."
     },
     {
-      "name": "Starting Price",
-      "tool1": true,
-      "tool2": true
+      "name": "Operational checks",
+      "tool1": "Verify integrations, permissions, data handling, support, and who will maintain the workflow.",
+      "tool1Detail": "Use vendor documentation and a small pilot; do not infer capabilities from a generic feature checklist.",
+      "tool2": "Verify integrations, permissions, data handling, support, and who will maintain the workflow.",
+      "tool2Detail": "Estimate total cost from current plans and actual usage, not an unverified headline price."
     },
     {
-      "name": "Best For",
-      "tool1": true,
-      "tool2": true
-    },
-    {
-      "name": "Core Strength",
-      "tool1": true,
-      "tool2": true
+      "name": "Relationship",
+      "tool1": "Sending audience communications versus measuring website behavior",
+      "tool1Detail": "Do not treat either product as a universal winner; compare it with the job it is meant to do.",
+      "tool2": "Sending audience communications versus measuring website behavior",
+      "tool2Detail": "If responsibilities are distinct, using both may make sense; confirm the handoff and avoid paying twice for the same capability."
     }
   ],
-  "verdict": "ConvertKit (Marketing & SEO) and Google Analytics (Analytics & Data) serve different primary purposes. ConvertKit has a higher user rating, but the right choice depends on whether your priority is marketing & seo or analytics & data capabilities.",
+  "verdict": "There is no evidence-based universal winner between ConvertKit and Google Analytics because their primary jobs differ. Choose ConvertKit if the need described above matches your workflow; choose Google Analytics if its job is the one you need to solve. If both needs exist, assess whether the tools complement each other and define ownership at the handoff. Pilot the relevant workflow, verify current features and plan limits with each vendor, and compare total cost, integrations, privacy, permissions, and support before buying.",
   "faqs": [
     {
-      "question": "What is the difference between ConvertKit and Google Analytics?",
-      "answer": "ConvertKit is a marketing & seo tool, while Google Analytics is a analytics & data platform. They serve different primary functions but may overlap in certain areas."
+      "question": "What is the main difference between ConvertKit and Google Analytics?",
+      "answer": "ConvertKit focuses on creator email marketing, while Google Analytics focuses on website traffic analytics. Start with the job your team needs to complete rather than comparing them as interchangeable products."
     },
     {
       "question": "Can ConvertKit replace Google Analytics?",
-      "answer": "Not directly — they serve different categories. Some organizations use both for different purposes."
+      "answer": "Not automatically. A replacement only makes sense if ConvertKit demonstrably covers the requirements you currently rely on Google Analytics for. Test the real workflow and confirm missing integrations, controls, or outputs before switching."
     },
     {
-      "question": "Which has better value, ConvertKit or Google Analytics?",
-      "answer": "ConvertKit (Free – $59/mo) and Google Analytics ($0) have different pricing. Evaluate based on which category matters more for your workflows."
+      "question": "Can a team use ConvertKit and Google Analytics together?",
+      "answer": "Potentially, when the team needs both creator email marketing and website traffic analytics. Define which tool owns each step, how information moves between them, and who maintains access and data quality."
+    },
+    {
+      "question": "How should I compare their costs?",
+      "answer": "Check each vendor's current pricing and plan limits, then estimate total cost for the seats, usage, integrations, support, and administration required. Do not rely on stale prices or unverified rating claims."
+    },
+    {
+      "question": "What is the safest way to choose?",
+      "answer": "Write down must-have outcomes, run a small pilot using a representative scenario, check security and privacy requirements, and score the results against those outcomes. Verify vendor claims directly."
     }
   ],
-  "lastUpdated": "2026-07-20",
   "tool1Slug": "convertkit",
   "tool2Slug": "google-analytics",
   "secondaryCategories": [
     "Analytics & Data"
   ],
-  "published": false
+  "published": true,
+  "winnerVerified": false,
+  "featuresVerified": false
 }

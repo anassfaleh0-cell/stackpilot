@@ -1,59 +1,70 @@
 {
-"publicationStatus": "draft",
   "slug": "bigcommerce-vs-fathom",
-  "title": "BigCommerce vs Fathom",
-  "description": "BigCommerce vs Fathom: Fathom is our overall pick for Finance & Accounting teams — BigCommerce 4.1/5, Fathom 4.5/5; BigCommerce from $39 –.",
-  "category": "Finance & Accounting",
+  "title": "BigCommerce vs Fathom: E-commerce Storefront or Website Analytics?",
+  "description": "A practical decision guide for teams weighing BigCommerce against Fathom. BigCommerce focuses on operating an online storefront and its commerce workflow, while Fathom focuses on lightweight website traffic analytics. Use the workflow criteria below to decide whether you need one, the other, or both; verify current vendor capabilities, terms, and pricing before committing.",
+  "category": "E-commerce & Retail",
   "tool1": "BigCommerce",
   "tool2": "Fathom",
-  "winner": "fathom",
+  "winner": null,
   "features": [
     {
-      "name": "User Rating",
-      "tool1": false,
-      "tool2": true
+      "name": "Core task",
+      "tool1": "E-commerce storefront and order operations",
+      "tool1Detail": "Evaluate BigCommerce when the task is operating an online storefront; confirm catalog, checkout, payment, integration, and order-management requirements.",
+      "tool2": "Lightweight website analytics",
+      "tool2Detail": "Evaluate Fathom when the task is understanding website traffic; verify the metrics and reporting needed for store decisions."
     },
     {
-      "name": "Category",
-      "tool1": true,
-      "tool2": true
+      "name": "Selection test",
+      "tool1": "Run a representative product-to-order workflow and document results, setup effort, and gaps.",
+      "tool1Detail": "Confirm must-have commerce requirements before evaluating plans or switching platforms.",
+      "tool2": "Run an analytics review using the questions the store team actually asks.",
+      "tool2Detail": "Confirm that the measurements and reports support decisions without adding unnecessary complexity."
     },
     {
-      "name": "Starting Price",
-      "tool1": true,
-      "tool2": true
+      "name": "Operational checks",
+      "tool1": "Verify integrations, payments, permissions, data handling, support, and who will maintain the storefront.",
+      "tool1Detail": "Use vendor documentation and a small pilot; do not infer capabilities from a generic feature checklist.",
+      "tool2": "Verify analytics definitions, consent/privacy needs, data handling, and reporting.",
+      "tool2Detail": "Estimate total cost from current plans and actual usage, not an unverified headline price."
     },
     {
-      "name": "Best For",
-      "tool1": true,
-      "tool2": true
-    },
-    {
-      "name": "Core Strength",
-      "tool1": true,
-      "tool2": true
+      "name": "Relationship",
+      "tool1": "Running the store is different from measuring how visitors use it.",
+      "tool1Detail": "Do not treat either product as a universal winner; compare it with the job it is meant to do.",
+      "tool2": "Analytics can help inform storefront decisions but does not replace the commerce platform.",
+      "tool2Detail": "If both needs exist, using both may make sense; define ownership and avoid paying twice for the same capability."
     }
   ],
-  "verdict": "BigCommerce (Finance & Accounting) and Fathom (Analytics & Data) serve different primary purposes. Fathom has a higher user rating, but the right choice depends on whether your priority is finance & accounting or analytics & data capabilities.",
+  "verdict": "There is no evidence-based universal winner between BigCommerce and Fathom because their primary jobs differ. Choose BigCommerce if you need to operate an online storefront; choose Fathom if you need lightweight website analytics. If both needs exist, assess whether analytics answers the questions the commerce team needs and define how those insights feed into store decisions. Verify current features, plan limits, fees, privacy requirements, integrations, and support before buying.",
   "faqs": [
     {
-      "question": "What is the difference between BigCommerce and Fathom?",
-      "answer": "BigCommerce is a finance & accounting tool, while Fathom is a analytics & data platform. They serve different primary functions but may overlap in certain areas."
+      "question": "What is the main difference between BigCommerce and Fathom?",
+      "answer": "BigCommerce focuses on operating an e-commerce storefront, while Fathom focuses on lightweight website analytics. Start with the job your team needs to complete rather than comparing them as interchangeable products."
     },
     {
       "question": "Can BigCommerce replace Fathom?",
-      "answer": "Not directly — they serve different categories. Some organizations use both for different purposes."
+      "answer": "Not as a direct substitute for a dedicated analytics workflow. Confirm which measurements are available in your current commerce setup and whether they answer your questions before adding or replacing analytics tools."
     },
     {
-      "question": "Which has better value, BigCommerce or Fathom?",
-      "answer": "BigCommerce ($39 – $399/mo) and Fathom ($14-54/mo) have different pricing. Evaluate based on which category matters more for your workflows."
+      "question": "Can a team use BigCommerce and Fathom together?",
+      "answer": "Potentially. A store team can use a commerce platform to operate the storefront and analytics to understand traffic patterns. Define which reports matter, respect privacy and consent requirements, and make sure the analytics data is actionable."
+    },
+    {
+      "question": "How should I compare their costs?",
+      "answer": "Check each vendor's current pricing and plan limits, then estimate total cost for the commerce features, traffic needs, integrations, support, and administration required. Do not rely on stale prices or unverified rating claims."
+    },
+    {
+      "question": "What is the safest way to choose?",
+      "answer": "Write down must-have outcomes, test the store workflow and analytics questions separately, check security and privacy requirements, and score the results against those outcomes. Verify vendor claims directly."
     }
   ],
-  "lastUpdated": "2026-07-20",
   "tool1Slug": "bigcommerce",
   "tool2Slug": "fathom",
   "secondaryCategories": [
     "Analytics & Data"
   ],
-  "published": false
+  "published": true,
+  "winnerVerified": false,
+  "featuresVerified": false
 }

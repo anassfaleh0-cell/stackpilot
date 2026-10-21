@@ -1,59 +1,70 @@
 {
-"publicationStatus": "draft",
   "slug": "activecampaign-vs-fathom",
-  "title": "ActiveCampaign vs Fathom",
-  "description": "ActiveCampaign vs Fathom: Fathom is our overall pick for Marketing & SEO teams — ActiveCampaign 4.4/5, Fathom 4.5/5; ActiveCampaign from $15 –.",
+  "title": "ActiveCampaign vs Fathom: Marketing automation and customer journeys or lightweight website analytics?",
+  "description": "A practical decision guide for teams weighing ActiveCampaign against Fathom. ActiveCampaign focuses on marketing automation and customer journeys, while Fathom focuses on lightweight website analytics. Use the workflow criteria below to decide whether you need one, the other, or both; verify current vendor capabilities, terms, and pricing before committing.",
   "category": "Marketing & SEO",
   "tool1": "ActiveCampaign",
   "tool2": "Fathom",
-  "winner": "fathom",
+  "winner": null,
   "features": [
     {
-      "name": "User Rating",
-      "tool1": false,
-      "tool2": true
+      "name": "Core task",
+      "tool1": "Marketing automation and customer journeys",
+      "tool1Detail": "Evaluate ActiveCampaign for contact management, email campaigns, and automated follow-up; test audience segmentation, triggers, and campaign reporting.",
+      "tool2": "Lightweight website analytics",
+      "tool2Detail": "Evaluate Fathom for straightforward website traffic measurement; confirm the metrics, privacy/consent approach, and reporting you need."
     },
     {
-      "name": "Category",
-      "tool1": true,
-      "tool2": true
+      "name": "Selection test",
+      "tool1": "Run ActiveCampaign through a representative task and document results, setup effort, and gaps.",
+      "tool1Detail": "Confirm must-have requirements before evaluating plans or switching tools.",
+      "tool2": "Run Fathom through the same decision process.",
+      "tool2Detail": "Check whether it solves the same requirement or a separate one."
     },
     {
-      "name": "Starting Price",
-      "tool1": true,
-      "tool2": true
+      "name": "Operational checks",
+      "tool1": "Verify integrations, permissions, data handling, support, and who will maintain the workflow.",
+      "tool1Detail": "Use vendor documentation and a small pilot; do not infer capabilities from a generic feature checklist.",
+      "tool2": "Verify integrations, permissions, data handling, support, and who will maintain the workflow.",
+      "tool2Detail": "Estimate total cost from current plans and actual usage, not an unverified headline price."
     },
     {
-      "name": "Best For",
-      "tool1": true,
-      "tool2": true
-    },
-    {
-      "name": "Core Strength",
-      "tool1": true,
-      "tool2": true
+      "name": "Relationship",
+      "tool1": "Driving customer communications versus measuring site traffic",
+      "tool1Detail": "Do not treat either product as a universal winner; compare it with the job it is meant to do.",
+      "tool2": "Driving customer communications versus measuring site traffic",
+      "tool2Detail": "If responsibilities are distinct, using both may make sense; confirm the handoff and avoid paying twice for the same capability."
     }
   ],
-  "verdict": "ActiveCampaign (Marketing & SEO) and Fathom (Analytics & Data) serve different primary purposes. Fathom has a higher user rating, but the right choice depends on whether your priority is marketing & seo or analytics & data capabilities.",
+  "verdict": "There is no evidence-based universal winner between ActiveCampaign and Fathom because their primary jobs differ. Choose ActiveCampaign if the need described above matches your workflow; choose Fathom if its job is the one you need to solve. If both needs exist, assess whether the tools complement each other and define ownership at the handoff. Pilot the relevant workflow, verify current features and plan limits with each vendor, and compare total cost, integrations, privacy, permissions, and support before buying.",
   "faqs": [
     {
-      "question": "What is the difference between ActiveCampaign and Fathom?",
-      "answer": "ActiveCampaign is a marketing & seo tool, while Fathom is a analytics & data platform. They serve different primary functions but may overlap in certain areas."
+      "question": "What is the main difference between ActiveCampaign and Fathom?",
+      "answer": "ActiveCampaign focuses on marketing automation and customer journeys, while Fathom focuses on lightweight website analytics. Start with the job your team needs to complete rather than comparing them as interchangeable products."
     },
     {
       "question": "Can ActiveCampaign replace Fathom?",
-      "answer": "Not directly — they serve different categories. Some organizations use both for different purposes."
+      "answer": "Not automatically. A replacement only makes sense if ActiveCampaign demonstrably covers the requirements you currently rely on Fathom for. Test the real workflow and confirm missing integrations, controls, or outputs before switching."
     },
     {
-      "question": "Which has better value, ActiveCampaign or Fathom?",
-      "answer": "ActiveCampaign ($15 – $259/mo) and Fathom ($14-54/mo) have different pricing. Evaluate based on which category matters more for your workflows."
+      "question": "Can a team use ActiveCampaign and Fathom together?",
+      "answer": "Potentially, when the team needs both marketing automation and customer journeys and lightweight website analytics. Define which tool owns each step, how information moves between them, and who maintains access and data quality."
+    },
+    {
+      "question": "How should I compare their costs?",
+      "answer": "Check each vendor's current pricing and plan limits, then estimate total cost for the seats, usage, integrations, support, and administration required. Do not rely on stale prices or unverified rating claims."
+    },
+    {
+      "question": "What is the safest way to choose?",
+      "answer": "Write down must-have outcomes, run a small pilot using a representative scenario, check security and privacy requirements, and score the results against those outcomes. Verify vendor claims directly."
     }
   ],
-  "lastUpdated": "2026-07-20",
   "tool1Slug": "activecampaign",
   "tool2Slug": "fathom",
   "secondaryCategories": [
     "Analytics & Data"
   ],
-  "published": false
+  "published": true,
+  "winnerVerified": false,
+  "featuresVerified": false
 }

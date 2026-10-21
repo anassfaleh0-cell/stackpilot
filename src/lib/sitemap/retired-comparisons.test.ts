@@ -2,32 +2,63 @@ import { describe, expect, it } from "vitest"
 import sitemap from "@/app/sitemap"
 import { filterSitemapEntries, isRetiredComparisonSlug, RETIRED_COMPARISON_SLUGS } from "./retired-comparisons"
 
-describe("retired comparison sitemap filtering", () => {
-  it("recognizes known legacy comparison redirects", () => {
-    expect(isRetiredComparisonSlug("activecampaign-vs-chatgpt")).toBe(true)
-    expect(isRetiredComparisonSlug("activecampaign-vs-fathom")).toBe(true)
+const restoredSlugs = [
+  "affinity-vs-wix",
+  "dialpad-vs-loom",
+  "adp-vs-airtable",
+  "clickup-vs-gusto",
+  "ahrefs-vs-claude",
+  "copy-ai-vs-heap",
+  "cal-com-vs-discord",
+  "auth0-vs-bitbucket",
+  "bitwarden-vs-circleci",
+  "bitwarden-vs-google-analytics",
+  "canva-vs-cloudflare-pages",
+  "cloudflare-pages-vs-crowdstrike",
+  "cloudflare-pages-vs-copy-ai",
+  "freshbooks-vs-greenhouse",
+  "appwrite-vs-chatgpt",
+  "bitbucket-vs-claude",
+  "circleci-vs-copilot",
+  "crowdstrike-vs-heap",
+  "expensify-vs-fullstory",
+  "freshbooks-vs-google-analytics",
+  "freshdesk-vs-google-meet",
+  "copper-crm-vs-discord",
+  "gusto-vs-paddle",
+  "convertkit-vs-copilot",
+  "activecampaign-vs-chatgpt",
+  "activecampaign-vs-fathom",
+  "adobe-xd-vs-ahrefs",
+  "ahrefs-vs-copper-crm",
+  "ahrefs-vs-fullstory",
+  "bigcommerce-vs-fathom",
+  "chatgpt-vs-fathom",
+  "copilot-vs-google-analytics",
+  "convertkit-vs-google-analytics",
+  "freshsales-vs-microsoft-teams",
+  "heap-vs-paddle",
+  "convertkit-vs-freshdesk",
+  "canva-vs-mailchimp",
+  "acuity-vs-airtable",
+  "asana-vs-cal-com",
+  "basecamp-vs-calendly",
+  "calendly-vs-google-meet",
+  "copy-ai-vs-mailchimp",
+  "evernote-vs-microsoft-teams",
+  "heap-vs-mailchimp",
+  "claude-vs-fullstory",
+]
+
+describe("public comparison sitemap integrity", () => {
+  it("does not classify restored guides as retired", () => {
+    expect(RETIRED_COMPARISON_SLUGS.size).toBe(0)
+    for (const slug of restoredSlugs) expect(isRetiredComparisonSlug(slug), slug).toBe(false)
   })
 
-  it("filters every registered retired slug, not just representative examples", () => {
-    const entries = [...RETIRED_COMPARISON_SLUGS].map((slug) => ({
-      url: `https://pilotstack.online/comparisons/${slug}`,
-      priority: 0.7,
-    }))
-    expect(RETIRED_COMPARISON_SLUGS.size).toBeGreaterThan(0)
-    expect(filterSitemapEntries(entries)).toEqual([])
-  })
-
-  it("keeps retired comparison redirects out of sitemap entries", () => {
-    const entries = [
-      { url: "https://pilotstack.online/comparisons/activecampaign-vs-chatgpt", priority: 0.7 },
-      { url: "https://pilotstack.online/comparisons/activecampaign-vs-fathom", priority: 0.7 },
-      { url: "https://pilotstack.online/comparisons/zoom-vs-webex", priority: 0.8 },
-      { url: "https://pilotstack.online/reviews/activecampaign", priority: 0.8 },
-    ]
-    expect(filterSitemapEntries(entries).map((entry) => entry.url)).toEqual([
-      "https://pilotstack.online/comparisons/zoom-vs-webex",
-      "https://pilotstack.online/reviews/activecampaign",
-    ])
+  it("includes all restored comparison guides in the generated sitemap", () => {
+    const urls = new Set(sitemap().map((entry) => entry.url))
+    for (const slug of restoredSlugs) expect(urls.has(`https://pilotstack.online/comparisons/${slug}`), slug).toBe(true)
   })
 
   it("removes duplicate URLs without removing distinct entries", () => {
@@ -52,15 +83,5 @@ describe("retired comparison sitemap filtering", () => {
       { url: "https://pilotstack.online/reviews/asana", priority: 0.8 },
     ]
     expect(filterSitemapEntries(entries)).toEqual([entries[0], entries[4]])
-  })
-})
-
-
-describe("generated sitemap integration", () => {
-  it("excludes every retired comparison URL from the actual sitemap output", () => {
-    const urls = new Set(sitemap().map((entry) => entry.url))
-    for (const slug of RETIRED_COMPARISON_SLUGS) {
-      expect(urls.has(`https://pilotstack.online/comparisons/${slug}`), slug).toBe(false)
-    }
   })
 })

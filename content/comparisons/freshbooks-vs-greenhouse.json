@@ -1,59 +1,70 @@
 {
-"publicationStatus": "draft",
   "slug": "freshbooks-vs-greenhouse",
-  "title": "Greenhouse vs FreshBooks",
-  "description": "Greenhouse vs FreshBooks: FreshBooks is our overall pick for HR & People teams — Greenhouse 4.3/5, FreshBooks 4.4/5; Greenhouse from $150-200/mo,.",
+  "title": "Greenhouse vs FreshBooks: Small-business accounting and invoicing or recruiting and applicant tracking?",
+  "description": "A practical decision guide for teams weighing Greenhouse against FreshBooks. Greenhouse focuses on small-business accounting and invoicing, while FreshBooks focuses on recruiting and applicant tracking. Use the workflow criteria below to decide whether you need one, the other, or both; verify current vendor capabilities, terms, and pricing before committing.",
   "category": "HR & People",
   "tool1": "Greenhouse",
   "tool2": "FreshBooks",
-  "winner": "freshbooks",
+  "winner": null,
   "features": [
     {
-      "name": "User Rating",
-      "tool1": false,
-      "tool2": true
+      "name": "Core task",
+      "tool1": "Small-business accounting and invoicing",
+      "tool1Detail": "Use FreshBooks when the need is invoices, expenses, and accounting workflows for a business; verify tax/accounting fit, payment flows, and export needs.",
+      "tool2": "Recruiting and applicant tracking",
+      "tool2Detail": "Use Greenhouse when the need is structured recruiting, interview coordination, and applicant tracking; verify hiring workflows, permissions, integrations, and reporting."
     },
     {
-      "name": "Category",
-      "tool1": true,
-      "tool2": true
+      "name": "Selection test",
+      "tool1": "Run Greenhouse through a representative task and document results, setup effort, and any gaps.",
+      "tool1Detail": "Confirm must-have requirements before evaluating plans or switching tools.",
+      "tool2": "Run FreshBooks through the same decision process.",
+      "tool2Detail": "Check whether it solves the same requirement or a separate one."
     },
     {
-      "name": "Starting Price",
-      "tool1": true,
-      "tool2": true
+      "name": "Operational checks",
+      "tool1": "Verify integrations, permissions, data handling, support, and who will maintain the workflow.",
+      "tool1Detail": "Use vendor documentation and a small pilot; do not infer capabilities from a generic feature checklist.",
+      "tool2": "Verify integrations, permissions, data handling, support, and who will maintain the workflow.",
+      "tool2Detail": "Estimate total cost from current plans and actual usage, not an unverified headline price."
     },
     {
-      "name": "Best For",
-      "tool1": true,
-      "tool2": true
-    },
-    {
-      "name": "Core Strength",
-      "tool1": true,
-      "tool2": true
+      "name": "Relationship",
+      "tool1": "Managing business finances versus managing hiring",
+      "tool1Detail": "Do not treat either product as a universal winner; compare it with the job it is meant to do.",
+      "tool2": "Managing business finances versus managing hiring",
+      "tool2Detail": "If responsibilities are distinct, using both may make sense; confirm the handoff and avoid paying twice for the same capability."
     }
   ],
-  "verdict": "Greenhouse (HR & People) and FreshBooks (Finance & Accounting) serve different primary purposes. FreshBooks has a higher user rating, but the right choice depends on whether your priority is hr & people or finance & accounting capabilities.",
+  "verdict": "There is no evidence-based universal winner between Greenhouse and FreshBooks because their primary jobs differ. Choose Greenhouse if the need described above matches your workflow; choose FreshBooks if its job is the one you need to solve. If both needs exist, assess whether the tools complement each other and define ownership at the handoff. Pilot the relevant workflow, verify current features and plan limits with each vendor, and compare total cost, integrations, privacy, permissions, and support before buying.",
   "faqs": [
     {
-      "question": "What is the difference between Greenhouse and FreshBooks?",
-      "answer": "Greenhouse is a hr & people tool, while FreshBooks is a finance & accounting platform. They serve different primary functions but may overlap in certain areas."
+      "question": "What is the main difference between Greenhouse and FreshBooks?",
+      "answer": "Greenhouse focuses on small-business accounting and invoicing, while FreshBooks focuses on recruiting and applicant tracking. Start with the job your team needs to complete rather than comparing them as interchangeable products."
     },
     {
       "question": "Can Greenhouse replace FreshBooks?",
-      "answer": "Not directly — they serve different categories. Some organizations use both for different purposes."
+      "answer": "Not automatically. A replacement only makes sense if Greenhouse demonstrably covers the requirements you currently rely on FreshBooks for. Test the real workflow and confirm missing integrations, controls, or outputs before switching."
     },
     {
-      "question": "Which has better value, Greenhouse or FreshBooks?",
-      "answer": "Greenhouse ($150-200/mo) and FreshBooks ($17–$55/mo) have different pricing. Evaluate based on which category matters more for your workflows."
+      "question": "Can a team use Greenhouse and FreshBooks together?",
+      "answer": "Potentially, when the team needs both small-business accounting and invoicing and recruiting and applicant tracking. Define which tool owns each step, how information moves between them, and who maintains access and data quality."
+    },
+    {
+      "question": "How should I compare their costs?",
+      "answer": "Check each vendor's current pricing and plan limits, then estimate total cost for the seats, usage, integrations, support, and administration required. Do not rely on stale prices or unverified rating claims."
+    },
+    {
+      "question": "What is the safest way to choose?",
+      "answer": "Write down must-have outcomes, run a small pilot using a representative scenario, check security and privacy requirements, and score the results against those outcomes. Verify vendor claims directly."
     }
   ],
-  "lastUpdated": "2026-07-20",
   "tool1Slug": "greenhouse",
   "tool2Slug": "freshbooks",
   "secondaryCategories": [
     "Finance & Accounting"
   ],
-  "published": false
+  "published": true,
+  "winnerVerified": false,
+  "featuresVerified": false
 }
