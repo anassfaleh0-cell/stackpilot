@@ -27,7 +27,7 @@ export default function HowWeTestSoftwarePage() {
       steps: [
         "New factual and numeric claims should be tied to a checkable source; some older stored values remain under provenance review and are not treated as verified until checked",
         "Source dates and regional or plan context should be recorded when verified; a page date alone does not establish that every figure was rechecked",
-        "Where two sources we hold disagree, neither value is published",
+        "When sources conflict, we explain the uncertainty or withhold the disputed claim until it can be resolved",
         "Certification and compliance statuses with no source are shown as unverified rather than asserted",
       ],
     },
@@ -45,7 +45,7 @@ export default function HowWeTestSoftwarePage() {
       steps: [
         "Shared records help keep reused claims consistent, but repeated values are not proof of accuracy; source provenance must be checked separately",
         "Category, comparison and related-content pages read from the same recorded values",
-        "Facts we cannot source are omitted instead of being restated in a new form",
+        "Unverified facts are omitted or clearly labeled unverified; they are not repeated as confirmed claims",
       ],
     },
     {
@@ -53,7 +53,7 @@ export default function HowWeTestSoftwarePage() {
       steps: [
         "Some pages display publication or update dates, but a date alone does not prove that every claim was rechecked",
         "Pages are updated when material changes are identified",
-        "Corrections are made in place and the last-reviewed date is updated",
+        "Corrections are made in place, with relevant date fields updated where those fields are maintained",
         "Unsupported claims are corrected, qualified, or omitted while useful page URLs are retained where possible",
       ],
     },
@@ -86,7 +86,7 @@ export default function HowWeTestSoftwarePage() {
                 <li>Five stages: Selection, Evidence &amp; Sourcing, Scoring, Consistency, Publication &amp; Upkeep</li>
                 <li>The rubric defines nine 1-5 evaluation dimensions; older ratings are verified only when their inputs and calculation are auditable</li>
                 <li>Shared values are checked against source records; consistency alone does not establish accuracy</li>
-                <li>Unsourced facts are omitted or shown as unverified — never asserted</li>
+                <li>Unsourced facts are omitted or labeled unverified rather than presented as confirmed</li>
                 <li>Commercial relationships do not determine ratings</li>
               </ul>
             </div>
@@ -96,7 +96,7 @@ export default function HowWeTestSoftwarePage() {
               <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
                 <li>Coverage is guided by reader usefulness and editorial priorities</li>
                 <li>Verified ratings should have a reproducible calculation and documented inputs</li>
-                <li>Conflicting internal sources result in no published value, not a guess</li>
+                <li>Conflicting sources are explained or withheld until the claim can be resolved</li>
                 <li>Certification statuses without a source read as &quot;not verified&quot;</li>
                 <li>A displayed date does not prove every claim was rechecked on that date</li>
                 <li>Corrections are made in place and dated</li>
@@ -131,7 +131,7 @@ export default function HowWeTestSoftwarePage() {
                 <li>We do not sell editorial ratings or placement</li>
                 <li>We do not allow vendors to preview or approve pages before publication</li>
                 <li>We do not describe access arrangements as evidence of editorial quality</li>
-                <li>We do not publish a figure we cannot tie to a source we hold</li>
+                <li>We do not describe a figure as verified unless its source and context can be checked</li>
                 <li>We do not present an unverified certification or company fact as confirmed</li>
               </ul>
 
