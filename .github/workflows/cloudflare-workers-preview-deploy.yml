@@ -103,3 +103,18 @@ jobs:
           fi
           curl --silent --show-error --fail "$PREVIEW_URL/" > /tmp/pilotstack-home.html
           grep -Fq 'google-adsense-account' /tmp/pilotstack-home.html
+          grep -Fq 'pub-6523926892521982' /tmp/pilotstack-home.html
+
+          curl --silent --show-error --fail "$PREVIEW_URL/ads.txt" > /tmp/pilotstack-ads.txt
+          grep -Fqx 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0' /tmp/pilotstack-ads.txt
+
+          curl --silent --show-error --fail "$PREVIEW_URL/robots.txt" > /tmp/pilotstack-robots.txt
+          grep -Fq 'Sitemap: https://pilotstack.online/sitemap.xml' /tmp/pilotstack-robots.txt
+          grep -Fq 'Disallow: /api/' /tmp/pilotstack-robots.txt
+
+          curl --silent --show-error --fail "$PREVIEW_URL/sitemap.xml" > /tmp/pilotstack-sitemap.xml
+          grep -Fq '<loc>https://pilotstack.online/' /tmp/pilotstack-sitemap.xml
+          if grep -Eiq 'noindex' /tmp/pilotstack-home.html; then
+            echo "Unexpected noindex text in homepage HTML"
+            exit 1
+          fi
