@@ -165,14 +165,14 @@ export default function SitemapPage() {
               <Link href="/media-kit" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Media Kit</Link>
               <Link href="/press" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Press</Link>
               <Link href="/statistics" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Statistics</Link>
+              <Link href="/research" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Research</Link>
+            </div>
+          </Section>
           <Section title={`Editorial Resources (${editorialLinks.length})`}>
             <div className="flex flex-wrap gap-2">
               {editorialLinks.map(link => (
                 <Link key={link.href} href={link.href} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">{link.label}</Link>
               ))}
-            </div>
-          </Section>
-              <Link href="/research" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Research</Link>
             </div>
           </Section>
         </Container>
