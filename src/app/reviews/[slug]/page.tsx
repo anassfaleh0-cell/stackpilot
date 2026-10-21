@@ -17,7 +17,7 @@ import { EditorialPricingLadder, EditorialFeatureRadar, EditorialImplementationF
 import { InternalLinks } from "@/components/content/internal-links"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { authorSlugs } from "@/app/authors/[slug]/page"
+import { isPublicAuthor } from "@/lib/authors"
 import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
 import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
 import { isNoindexed } from "@/lib/noindex"
@@ -63,7 +63,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true)
 
   const authorSlug = tool.author ? tool.author.trim().toLowerCase().replace(/\s+/g, "-") : ""
-  const authorHref = authorSlug && authorSlugs.includes(authorSlug) ? `/authors/${authorSlug}` : null
+  const authorHref = authorSlug && isPublicAuthor(authorSlug) ? `/authors/${authorSlug}` : null
 
   const allReviews = getAllReviews()
 
@@ -274,7 +274,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                       <circle cx="12" cy="12" r="10" />
                       <path d="M12 6v6l4 2" />
                     </svg>
-                  } value={`${tool.content.length}`} title="Review Sections" description="In-depth coverage" />
+                  } value={`${visibleContent.length}`} title="Review Sections" description="In-depth coverage" />
                 </div>
                 <div className="flex justify-center">
                   {categoryRatings.length > 0 && <EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" />}
@@ -504,12 +504,12 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 )}
 
                 {/* Section Navigation */}
-                {tool.content.length > 0 && (
+                {visibleContent.length > 0 && (
                   <GlassCard>
                     <div className="p-4">
                       <h3 className="font-semibold mb-3 text-sm">On this page</h3>
                       <nav className="space-y-1.5">
-                        {tool.content.map((section, i) => (
+                        {visibleContent.map((section, i) => (
                           <a
                             key={i}
                             href={`#section-${i}`}

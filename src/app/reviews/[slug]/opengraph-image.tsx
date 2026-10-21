@@ -27,6 +27,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const { slug } = await params
   const tool = getReview(slug)
   if (!tool) return new ImageResponse(<div />, { ...size })
+  const editorialRating = tool.ratingVerified === true && typeof tool.rating === "number" && Number.isFinite(tool.rating) ? tool.rating : null
 
   return new ImageResponse(
     <div
@@ -54,16 +55,22 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         <span>{tool.tagline}</span>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "32px" }}>
-        <div style={{ display: "flex", fontSize: "36px", color: "#F0A030", gap: "2px" }}>
-          {renderStars(tool.rating)}
+      {editorialRating !== null ? (
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "32px" }}>
+          <div style={{ display: "flex", fontSize: "36px", color: "#F0A030", gap: "2px" }}>
+            {renderStars(editorialRating)}
+          </div>
+          <div style={{ display: "flex", fontSize: "28px", fontWeight: 700, color: "#FFFFFF" }}>{editorialRating}</div>
+          <div style={{ display: "flex", fontSize: "18px", color: "#6B7280" }}>/ 5</div>
         </div>
-        <div style={{ display: "flex", fontSize: "28px", fontWeight: 700, color: "#FFFFFF" }}>{tool.rating}</div>
-        <div style={{ display: "flex", fontSize: "18px", color: "#6B7280" }}>/ 5</div>
-      </div>
+      ) : (
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "16px", color: "#9CA3AF", marginBottom: "32px" }}>
+          <span>Rating not independently verified</span>
+        </div>
+      )}
 
       <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "16px", color: "#6B7280" }}>
-        <span>Based on {tool.reviewCount.toLocaleString()} reviews</span>
+        <span>PilotStack editorial score · Internal assessment, not a third-party rating</span>
       </div>
 
       <div style={{ position: "absolute", bottom: "44px", left: "60px", right: "60px", display: "flex", justifyContent: "center", fontSize: "15px", color: "#4B5563", letterSpacing: "0.04em" }}>
