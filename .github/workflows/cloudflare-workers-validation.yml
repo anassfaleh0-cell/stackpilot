@@ -37,23 +37,33 @@ jobs:
       - name: Install locked project dependencies
         run: npm ci
 
-      - name: Install Cloudflare adapter and Wrangler without changing the lockfile
-        run: npm install --no-save --package-lock=false --legacy-peer-deps @opennextjs/cloudflare@1.20.13 wrangler@4.134.0
+      - name: Install Cloudflare tooling in an isolated temporary directory
+        run: |
+          mkdir -p /tmp/pilotstack-cloudflare-tools
+          printf '%s\n' '{"private":true}' > /tmp/pilotstack-cloudflare-tools/package.json
+          npm install --prefix /tmp/pilotstack-cloudflare-tools --no-save --package-lock=false --legacy-peer-deps @opennextjs/cloudflare@1.20.13 wrangler@4.134.0
+          mkdir -p node_modules/@opennextjs
+          test ! -e node_modules/@opennextjs/cloudflare
+          test ! -e node_modules/wrangler
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/@opennextjs/cloudflare node_modules/@opennextjs/cloudflare
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/wrangler node_modules/wrangler
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/.bin/opennextjs-cloudflare node_modules/.bin/opennextjs-cloudflare
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/.bin/wrangler node_modules/.bin/wrangler
 
       - name: Build with OpenNext for Cloudflare Workers
-        run: npx opennextjs-cloudflare build
+        run: ./node_modules/.bin/opennextjs-cloudflare build
         env:
           BUILD_TARGET: cloudflare
           CI: "true"
 
       - name: Validate Worker bundle without deploying
-        run: npx wrangler deploy --dry-run
+        run: ./node_modules/.bin/wrangler deploy --dry-run
         env:
           CI: "true"
 
       - name: Start local Cloudflare Workers preview
         run: |
-          npx opennextjs-cloudflare preview > /tmp/pilotstack-cloudflare-preview.log 2>&1 &
+          ./node_modules/.bin/opennextjs-cloudflare preview > /tmp/pilotstack-cloudflare-preview.log 2>&1 &
           echo $! > /tmp/pilotstack-cloudflare-preview.pid
           for attempt in $(seq 1 90); do
             if curl --silent --fail http://127.0.0.1:8787/ads.txt > /dev/null; then
