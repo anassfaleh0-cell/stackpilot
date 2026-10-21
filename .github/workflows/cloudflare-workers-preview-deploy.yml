@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   deploy-preview:
-    if: ${{ inputs.confirm_preview_only == 'PREVIEW' }}
+    if: ${{ github.event_name == 'push' || inputs.confirm_preview_only == 'PREVIEW' }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
