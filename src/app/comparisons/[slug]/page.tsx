@@ -23,6 +23,7 @@ import { NativeAd } from "@/components/ads"
 import { getComparisonDecision, getComparisonDisplayCopy } from "@/lib/content/comparison-decision"
 import { getVisibleReviewFaqs, stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
 
+export const dynamic = "force-static"
 export const dynamicParams = false
 
 export function generateStaticParams() {
