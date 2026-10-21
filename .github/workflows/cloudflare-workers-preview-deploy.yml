@@ -29,7 +29,7 @@ jobs:
       - name: Checkout reviewed Cloudflare migration candidate
         uses: actions/checkout@v4
         with:
-          ref: 28173dd889b755b28a819fb9e09c10f052a67b42
+          ref: 9357b56e2cf3c9e3bf7f89f525932ee0e2c7be8f
 
       - name: Setup Node
         uses: actions/setup-node@v4
