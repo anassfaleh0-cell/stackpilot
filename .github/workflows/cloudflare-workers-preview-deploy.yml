@@ -69,6 +69,38 @@ jobs:
           BUILD_TARGET: cloudflare
           CI: "true"
 
+      - name: Assert content routes were generated before deploy
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f content/reviews/linear.json
+          test -f content/comparisons/activecampaign-vs-ahrefs.json
+          review_count="$(find content/reviews -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
+          comparison_count="$(find content/comparisons -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
+          echo "Checkout content files: reviews=$review_count comparisons=$comparison_count"
+          test "$review_count" -gt 0
+          test "$comparison_count" -gt 0
+          test -f .next/prerender-manifest.json
+          node <<'NODE'
+          const fs = require('node:fs');
+          const manifest = JSON.parse(fs.readFileSync('.next/prerender-manifest.json', 'utf8'));
+          const routes = Object.keys(manifest.routes || {});
+          const dynamic = Object.entries(manifest.dynamicRoutes || {});
+          const expected = ['/reviews/linear', '/comparisons/activecampaign-vs-ahrefs'];
+          for (const route of expected) {
+            const found = routes.includes(route) || dynamic.some(([pattern, info]) =>
+              pattern === (route.startsWith('/reviews/') ? '/reviews/[slug]' : '/comparisons/[slug]') &&
+              Array.isArray(info?.fallback) === false
+            );
+            if (!found) {
+              console.error('Expected content route missing from prerender manifest:', route);
+              console.error('Prerendered route sample:', routes.filter(x => x.startsWith('/reviews/') || x.startsWith('/comparisons/')).slice(0, 20));
+              process.exit(1);
+            }
+          }
+          console.log('Expected review and comparison routes exist in prerender manifest.');
+          NODE
+
       - name: Deploy preview Worker only
         id: deploy
         shell: bash
@@ -104,3 +136,13 @@ jobs:
           fi
           curl --silent --show-error --fail "$PREVIEW_URL/" > /tmp/pilotstack-home.html
           grep -Fq 'google-adsense-account' /tmp/pilotstack-home.html
+          if grep -Fq 'NEXT_HTTP_ERROR_FALLBACK;404' /tmp/pilotstack-review.html; then
+            echo "Review route contains Next.js 404 fallback payload"
+            exit 1
+          fi
+          grep -Fq 'Linear Review' /tmp/pilotstack-review.html
+          grep -Fq 'https://pilotstack.online/reviews/linear' <(curl --silent --show-error --fail "$PREVIEW_URL/sitemap.xml")
+          if grep -Eiq '0\+? Software Reviews|0\+? Comparisons|0\+? Guides' /tmp/pilotstack-home.html; then
+            echo "Homepage content counters indicate the content registry is empty"
+            exit 1
+          fi
