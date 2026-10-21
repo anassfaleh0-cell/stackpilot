@@ -61,7 +61,7 @@ export default function HowWeTestSoftwarePage() {
 
   return (
     <>
-      <ArticleSchema title="How We Evaluate Software | PilotStack Process" description="PilotStack’s software evaluation criteria, evidence standards, and ongoing source-provenance audit for older ratings and numeric claims." publishedAt="2026-01-15" author="PilotStack Team" url={`${site.url}/how-we-test-software`} keywords={["software review process", "scoring methodology", "editorial standards", "review process"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
+      <ArticleSchema title="How We Evaluate Software | PilotStack Process" description="PilotStack’s software evaluation criteria, evidence standards, and ongoing source-provenance audit for older ratings and numeric claims." publishedAt="2026-01-15" updatedAt="2026-10-21" author="PilotStack Team" url={`${site.url}/how-we-test-software`} keywords={["software review process", "scoring methodology", "editorial standards", "review process"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "How We Evaluate Software", href: "/how-we-test-software" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "How We Evaluate Software" }]} />
