@@ -1,58 +1,71 @@
 {
   "slug": "copper-crm-vs-discord",
-  "title": "Copper CRM vs Discord",
-  "description": "Copper CRM vs Discord: Discord is our overall pick for CRM & Sales teams — Copper CRM 4.1/5, Discord 4.3/5; Copper CRM from $23-69/mo, Discord.",
+  "title": "Copper CRM vs Discord: Customer relationship and sales pipeline management or community chat and voice?",
+  "description": "A decision guide for Copper CRM versus Discord. Copper CRM focuses on customer relationship and sales pipeline management; Discord focuses on community chat and voice. Compare the actual job, workflow, and operating requirements rather than assuming a single winner. Check current vendor documentation and plan terms before deciding.",
   "category": "CRM & Sales",
   "tool1": "Copper CRM",
   "tool2": "Discord",
-  "winner": "discord",
+  "winner": null,
   "features": [
     {
-      "name": "User Rating",
-      "tool1": false,
-      "tool2": true
+      "name": "Primary job",
+      "tool1": "customer relationship and sales pipeline management",
+      "tool1Detail": "Evaluate Copper CRM for organizing contacts, deals, and sales history; test pipeline fit, data quality, and how it fits the team's current work.",
+      "tool2": "community chat and voice",
+      "tool2Detail": "Evaluate Discord for ongoing community or group communication; assess moderation, roles, discoverability, and privacy expectations."
     },
     {
-      "name": "Category",
-      "tool1": true,
-      "tool2": true
+      "name": "Best fit",
+      "tool1": "Choose Copper CRM when customer relationship and sales pipeline management is the immediate requirement.",
+      "tool1Detail": "Evaluate Copper CRM for organizing contacts, deals, and sales history; test pipeline fit, data quality, and how it fits the team's current work.",
+      "tool2": "Choose Discord when community chat and voice is the immediate requirement.",
+      "tool2Detail": "Evaluate Discord for ongoing community or group communication; assess moderation, roles, discoverability, and privacy expectations."
     },
     {
-      "name": "Starting Price",
-      "tool1": true,
-      "tool2": true
+      "name": "Pilot checklist",
+      "tool1": "Test with a representative workflow and define measurable success criteria before buying.",
+      "tool1Detail": "For Copper CRM, verify setup effort, permissions, integrations, data handling, and who will maintain the workflow.",
+      "tool2": "Test with the same decision framework, using a real task rather than a demo alone.",
+      "tool2Detail": "For Discord, verify setup effort, permissions, integrations, data handling, and who will maintain the workflow."
     },
     {
-      "name": "Best For",
-      "tool1": true,
-      "tool2": true
-    },
-    {
-      "name": "Core Strength",
-      "tool1": true,
-      "tool2": true
+      "name": "How they relate",
+      "tool1": "Copper CRM addresses customer relationship and sales pipeline management; it should not be treated as a replacement for community chat and voice without a demonstrated overlap.",
+      "tool1Detail": "If both jobs matter, define the handoff and avoid paying twice for the same capability.",
+      "tool2": "Discord addresses community chat and voice; it should not be treated as a replacement for customer relationship and sales pipeline management without a demonstrated overlap.",
+      "tool2Detail": "If both jobs matter, define the handoff and avoid paying twice for the same capability."
     }
   ],
-  "verdict": "Copper CRM (CRM & Sales) and Discord (Communication) serve different primary purposes. Discord has a higher user rating, but the right choice depends on whether your priority is crm & sales or communication capabilities.",
+  "verdict": "There is no verified universal winner between Copper CRM and Discord: they focus on customer relationship and sales pipeline management and community chat and voice, respectively. Start with the outcome your team needs, then pilot the product that directly supports that outcome. If both jobs are required, assess whether the tools complement one another and define ownership at the handoff. Verify current features, plan limits, total cost, integrations, privacy, permissions, and support before committing.",
   "faqs": [
     {
-      "question": "What is the difference between Copper CRM and Discord?",
-      "answer": "Copper CRM is a crm & sales tool, while Discord is a communication platform. They serve different primary functions but may overlap in certain areas."
+      "question": "What is the main difference between Copper CRM and Discord?",
+      "answer": "Copper CRM focuses on customer relationship and sales pipeline management; Discord focuses on community chat and voice. They should not be compared as interchangeable products unless your required workflow shows a genuine overlap."
     },
     {
       "question": "Can Copper CRM replace Discord?",
-      "answer": "Not directly — they serve different categories. Some organizations use both for different purposes."
+      "answer": "Only if a pilot proves that Copper CRM meets the requirements you currently depend on Discord to satisfy. Check required outputs, permissions, integrations, and operational controls before switching."
     },
     {
-      "question": "Which has better value, Copper CRM or Discord?",
-      "answer": "Copper CRM ($23-69/mo) and Discord (Free – $9.99/mo) have different pricing. Evaluate based on which category matters more for your workflows."
+      "question": "Can a team use Copper CRM and Discord together?",
+      "answer": "Potentially, if the team needs both customer relationship and sales pipeline management and community chat and voice. Define which product owns each step, how information moves between them, and who is responsible for access and data quality."
+    },
+    {
+      "question": "How should I compare their costs?",
+      "answer": "Estimate the cost of the specific workflow you need: include seats, usage, integrations, setup, support, and ongoing administration for Copper CRM and Discord. Verify current vendor pricing and plan limits rather than relying on old figures."
+    },
+    {
+      "question": "What should I test before choosing?",
+      "answer": "For Copper CRM, test whether it handles customer relationship and sales pipeline management with acceptable setup and ongoing effort. For Discord, test whether it handles community chat and voice. Compare both against written success criteria and review security, privacy, and support requirements."
     }
   ],
-  "lastUpdated": "2026-07-20",
   "tool1Slug": "copper-crm",
   "tool2Slug": "discord",
   "secondaryCategories": [
     "Communication"
   ],
-  "published": false
+  "published": true,
+  "winnerVerified": false,
+  "featuresVerified": false,
+  "decisionGuide": true
 }

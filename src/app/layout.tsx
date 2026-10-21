@@ -70,17 +70,14 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.webmanifest",
   verification: {
-    ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
-      ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
-      : {}),
-    ...(process.env.NEXT_PUBLIC_YANDEX_VERIFICATION
-      ? { yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION }
-      : {}),
-    ...(process.env.NEXT_PUBLIC_BING_VERIFICATION
-      ? { other: { "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION } }
-      : {}),
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || "",
+    other: {
+      "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION || "",
+    },
   },
   other: {
+    "google-adsense-account": "ca-pub-6523926892521982",
     "28268a6a251530303d949cd943c51fdd81c045be": "28268a6a251530303d949cd943c51fdd81c045be",
   },
 }

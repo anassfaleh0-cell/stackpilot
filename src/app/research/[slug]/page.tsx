@@ -7,6 +7,7 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getResearch, getAllResearch, getContentTitle, isContentAvailable } from "@/lib/content/registry"
 import { notFound } from "next/navigation"
+import Link from "next/link"
 import { ExternalLink, Clock, User, Calendar, CheckCircle2, Lightbulb } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { RelatedContent } from "@/components/dynamic-client"
@@ -28,6 +29,17 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
   const { slug } = await params
   const report = getResearch(slug)
   if (!report) notFound()
+  const allResearch = getAllResearch()
+  const sameCategory = allResearch.filter((item) => item.category === report.category)
+  const following = (items: typeof allResearch, count: number) => {
+    const currentIndex = items.findIndex((item) => item.slug === slug)
+    if (currentIndex < 0 || items.length < 2) return []
+    return Array.from({ length: Math.min(count, items.length - 1) }, (_, index) => items[(currentIndex + index + 1) % items.length])
+  }
+  const relatedResearch = [
+    ...following(sameCategory, 2),
+    ...following(allResearch, 4),
+  ].filter((item, index, items) => item.slug !== slug && items.findIndex((candidate) => candidate.slug === item.slug) === index).slice(0, 4)
 
   return (
     <>
@@ -63,7 +75,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
                 <section className="mb-10 p-5 rounded-xl border border-primary/20 bg-primary-subtle/10">
                   <div className="flex items-center gap-2 mb-3">
                     <Lightbulb size={16} className="text-primary" />
-                    <h2 className="text-lg font-bold">Key Findings</h2>
+                    <h2 className="text-lg font-bold">Key Guidance</h2>
                   </div>
                   <ul className="space-y-2">
                     {report.keyFindings.map((finding, i) => (
@@ -201,6 +213,18 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
               </div>
             </aside>
           </div>
+
+          <section className="mt-10 mb-10">
+            <h2 className="text-xl font-bold tracking-tight mb-4">Related research guides</h2>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {relatedResearch.map((item) => (
+                <Link key={item.slug} href={`/research/${item.slug}`} className="rounded-xl border border-border p-4 hover:border-primary/30 hover:bg-muted-bg transition-colors">
+                  <span className="font-medium text-sm">{item.title}</span>
+                  <p className="text-xs text-muted-foreground mt-1">{item.description}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
 
           <RelatedContent
             items={[

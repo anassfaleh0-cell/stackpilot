@@ -18,7 +18,7 @@ import { PaginationNav } from "@/components/ui/pagination-nav"
 
 export const metadata = createMetadata({
   title: "Software Reviews",
-  description: "Structured software profiles with recorded features, published pricing where available, and consistent criteria to compare options.",
+  description: "Software reviews covering use cases, feature fit, pricing considerations, and limitations. Numeric ratings are shown only when their provenance is documented.",
   path: "/reviews",
 })
 
@@ -30,7 +30,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: Pro
 
   return (
     <>
-      <CollectionPageSchema name="Software Reviews" description="Software profiles with editorial assessments, recorded features, pricing where available, and alternatives" url={`${site.url}/reviews`} />
+      <CollectionPageSchema name="Software Reviews" description="Software profiles covering use cases, feature fit, pricing context, sources, and limitations" url={`${site.url}/reviews`} />
       <ItemListSchema items={pageTools.map(t => ({ name: t.name, url: `${site.url}/reviews/${t.slug}` }))} url={`${site.url}/reviews`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Reviews", href: "/reviews" }]} />
       <Container className="pt-8">
@@ -47,7 +47,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: Pro
               In-depth software reviews
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              We organize recorded product information, published pricing, and consistent scoring criteria into detailed reviews. Our methodology explains how ratings are calculated and distinguishes recorded data from facts that have not been independently verified.
+              We organize product information, use-case guidance, pricing considerations, and limitations into detailed reviews. Numeric ratings are shown only when their provenance is documented; other recorded values should be checked against current sources.
             </p>
           </SectionHeader>
         </Container>
@@ -64,7 +64,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: Pro
       <Section>
         <Container>
           {tools.length > 0 ? (
-            <ReviewCardGrid items={pageTools.map(t => ({ slug: t.slug, name: t.name, category: t.category, rating: t.rating, tagline: t.tagline }))} />
+            <ReviewCardGrid items={pageTools.map(t => ({ slug: t.slug, name: t.name, category: t.category, rating: t.ratingVerified === true && typeof t.rating === "number" && Number.isFinite(t.rating) ? t.rating : undefined, tagline: t.tagline }))} />
           ) : (
             <p className="text-center text-muted-foreground py-12">No reviews available yet. Check back soon.</p>
           )}

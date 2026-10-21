@@ -12,7 +12,7 @@ import { BrandPattern } from "@/components/brand/patterns"
 
 export const metadata = createMetadata({
   title: "Software by Business Type",
-  description: "Curated software stacks and recommendations tailored to your business type. Find the right tools for startups, agencies, enterprises, and more.",
+  description: "Practical software selection guides for startups, agencies, enterprises, and other organizations, with criteria for workflow fit, integrations, data protection, and total cost.",
   path: "/hubs",
 })
 
@@ -21,7 +21,7 @@ export default function HubsPage() {
 
   return (
     <>
-      <CollectionPageSchema name="Software by Business Type" description="Tailored software recommendations for every business type" url={`${site.url}/hubs`} />
+      <CollectionPageSchema name="Software by Business Type" description="Practical software selection guides by business type" url={`${site.url}/hubs`} />
       <ItemListSchema items={hubs.map(h => ({ name: h.title, url: `${site.url}/hubs/${h.slug}` }))} url={`${site.url}/hubs`} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "By Business Type", href: "/hubs" }]} />
       <Container className="pt-8">
@@ -34,7 +34,7 @@ export default function HubsPage() {
             <Badge variant="default" className="mb-4">Business Hubs</Badge>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Software by business type</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Curated software stacks tailored to your organization type. Find the right tools for your unique challenges.
+              Compare software for your organization using workflow requirements, integrations, data protection, implementation effort, and total cost. Verify product-specific claims with current vendor documentation.
             </p>
           </SectionHeader>
         </Container>
@@ -49,7 +49,7 @@ export default function HubsPage() {
                   <CardTitle className="group-hover:text-primary transition-colors">{hub.title}</CardTitle>
                   <CardDescription className="mt-1.5">{hub.description}</CardDescription>
                   <div className="mt-auto pt-4 border-t border-border">
-                    <span className="text-xs text-muted-foreground">{hub.recommendations.length} software recommendations</span>
+                    <span className="text-xs text-muted-foreground">{hub.recommendations.length} products to evaluate</span>
                   </div>
                 </Card>
               </Link>

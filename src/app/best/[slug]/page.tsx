@@ -16,6 +16,27 @@ import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { isNoindexed } from "@/lib/noindex"
 
+function stripUnverifiedPriceClaims(value: string): string {
+  return value
+    .replace(/(?:starting at|starts at|from)?\s*[$€£]\s?\d[\d,]*(?:\.\d+)?(?:\s*\/\s*(?:user|seat|month|year|mo|yr))?/gi, "pricing not independently verified")
+    .replace(/\b(?:free|freemium|paid|enterprise)\s+(?:plan|tier)\b/gi, "plan availability not independently verified")
+    .replace(/\bfree trial\b/gi, "trial availability not independently verified")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+([,.;:])/g, "$1")
+    .trim()
+}
+
+function stripUnverifiedRatingClaims(value: string): string {
+  return value
+    .replace(/\(\s*\d(?:\.\d+)?\s*\/\s*5\s*,\s*from\s+[^)]*\)/gi, "")
+    .replace(/\(\s*\d(?:\.\d+)?\s*\/\s*5\s*\)/gi, "")
+    .replace(/\b(?:recorded\s+)?rating(?:\s+of)?\s*[:\-]?\s*\d(?:\.\d+)?\s*\/\s*5\b/gi, "rating not independently verified")
+    .replace(/\b\d(?:\.\d+)?\s*\/\s*5\b/gi, "rating not independently verified")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+([,.;:])/g, "$1")
+    .trim()
+}
+
 export const dynamicParams = true
 export const revalidate = 86400
 
@@ -30,9 +51,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const page = getBest(slug)
   if (!page) return {}
   const readingTime = Math.max(5, Math.ceil((page.description.split(/\s+/).length + page.picks.reduce((a, p) => a + p.pros.length + p.cons.length, 0) * 20) / 200))
-  const metaDescription = page.description.length < 120
-    ? `${page.description} Compare the listed options using the recorded details, criteria, and pricing context below. Verify current features and plan terms with each vendor.`
-    : page.description
+  const safeDescription = stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(page.description))
+  const metaDescription = safeDescription.length < 120
+    ? `${safeDescription} Compare the listed options using the recorded details and criteria below. Verify current features and plan terms with each vendor.`
+    : safeDescription
   const noindexed = isNoindexed("best", slug)
   return createMetadata({ title: truncate(page.title, 60), description: truncate(metaDescription, 160), path: `/best/${page.slug}`, ogType: "article", publishedAt: page.lastUpdated, updatedAt: page.lastUpdated, articleSection: page.category, readingTime, noIndex: noindexed })
 }
@@ -52,37 +74,76 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   }
 
   const linkedPicks = page.picks.filter((p) => getReview(p.toolSlug) !== null)
+  const verifiedPickRating = (pick: (typeof page.picks)[number] | undefined): number | null => {
+    if (pick?.ratingVerified === true && typeof pick.rating === "number" && Number.isFinite(pick.rating)) return pick.rating
+    if (!pick?.toolSlug) return null
+    const review = getReview(pick.toolSlug)
+    return review?.ratingVerified === true && typeof review.rating === "number" && Number.isFinite(review.rating)
+      ? review.rating
+      : null
+  }
+  const verifiedPickPrice = (pick: (typeof page.picks)[number] | undefined): string | null =>
+    pick?.priceRangeVerified === true && typeof pick.priceRange === "string" && pick.priceRange.trim()
+      ? pick.priceRange
+      : null
+  const safeDescription = stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(page.description))
+  const safeFaqs = page.faqs.map((faq) => ({ question: stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(faq.question)), answer: stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(faq.answer)) }))
+  const hasUnverifiedPickRatings = page.picks.some((pick) => typeof pick.rating === "number" && verifiedPickRating(pick) === null) || (page.comparisonTable.columns.some((column) => /rating|score/i.test(column)) && page.picks.some((pick) => verifiedPickRating(pick) === null))
+  const hasUnverifiedPickPrices = page.picks.some((pick) => Boolean(pick.priceRange?.trim()) && verifiedPickPrice(pick) === null) || (page.comparisonTable.columns.some((column) => /price|pricing/i.test(column)) && page.picks.some((pick) => verifiedPickPrice(pick) === null)) || (/[$€£]\s?\d/.test(page.pricingSummary) && page.picks.some((pick) => verifiedPickPrice(pick) === null))
+  const safePickText = (pick: (typeof page.picks)[number] | undefined, value: string) => {
+    const safeRatingText = stripUnverifiedRatingClaims(value)
+    return verifiedPickPrice(pick) === null ? stripUnverifiedPriceClaims(safeRatingText) : safeRatingText
+  }
+  const safePricingSummary = hasUnverifiedPickPrices
+    ? "Some recorded price figures in this shortlist are not independently verified. Confirm current plan prices, billing periods, limits, and required add-ons directly with each vendor before comparing total cost."
+    : page.pricingSummary
+  const visibleComparisonColumnIndexes = page.comparisonTable.columns.map((column, index) => ({ column, index })).filter(({ column }) => !((hasUnverifiedPickRatings && /rating|score/i.test(column)) || (hasUnverifiedPickPrices && /price|pricing/i.test(column)))).map(({ index }) => index)
+  const visibleComparisonColumns = visibleComparisonColumnIndexes.map((index) => page.comparisonTable.columns[index])
+  const visibleComparisonRows = page.comparisonTable.rows.map((row) => visibleComparisonColumnIndexes.map((index) => {
+    const value = stripUnverifiedRatingClaims(String(row[index] ?? ""))
+    return hasUnverifiedPickPrices ? stripUnverifiedPriceClaims(value) : value
+  }))
   const reviewHref = (toolSlug: string) => (getReview(toolSlug) ? `/reviews/${toolSlug}` : null)
   const relatedLinks = getRelatedByCategory(page.category, page.slug, 4)
+  const relatedBestPages = (() => {
+    const sameCategory = getAllBest()
+      .filter((item) => item.category === page.category && !isNoindexed("best", item.slug))
+      .sort((a, b) => a.slug.localeCompare(b.slug))
+    const currentIndex = sameCategory.findIndex((item) => item.slug === page.slug)
+    if (currentIndex < 0 || sameCategory.length < 2) return []
+    return Array.from({ length: Math.min(4, sameCategory.length - 1) }, (_, offset) =>
+      sameCategory[(currentIndex + offset + 1) % sameCategory.length],
+    ).filter((item) => item.slug !== page.slug)
+  })()
 
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Best Software", href: "/best" }, { name: page.title, href: `/best/${slug}` }]} />
-      <ArticleSchema title={page.title} description={page.description} publishedAt={page.lastUpdated} updatedAt={page.lastUpdated} author={page.author} url={`${site.url}/best/${slug}`} wordCount={page.description.split(/\s+/).length + page.criteria.join(" ").split(/\s+/).filter(Boolean).length + page.picks.reduce((n, p) => n + p.toolName.split(/\s+/).length + p.bestFor.split(/\s+/).filter(Boolean).length + p.pros.join(" ").split(/\s+/).filter(Boolean).length + p.cons.join(" ").split(/\s+/).filter(Boolean).length, 0) + page.pricingSummary.split(/\s+/).filter(Boolean).length + page.comparisonTable.rows.flat().join(" ").split(/\s+/).filter(Boolean).length + page.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={page.category} keywords={["best " + page.category.toLowerCase(), page.category + " software ranking", "top " + page.category.toLowerCase() + " tools", "software recommendations 2026"].filter(Boolean)} mentions={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} />
-      <CollectionPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} />
+      <ArticleSchema title={page.title} description={safeDescription} publishedAt={page.lastUpdated} updatedAt={page.lastUpdated} author={page.author} url={`${site.url}/best/${slug}`} wordCount={page.description.split(/\s+/).length + page.criteria.join(" ").split(/\s+/).filter(Boolean).length + page.picks.reduce((n, p) => n + p.toolName.split(/\s+/).length + p.bestFor.split(/\s+/).filter(Boolean).length + p.pros.join(" ").split(/\s+/).filter(Boolean).length + p.cons.join(" ").split(/\s+/).filter(Boolean).length, 0) + page.pricingSummary.split(/\s+/).filter(Boolean).length + page.comparisonTable.rows.flat().join(" ").split(/\s+/).filter(Boolean).length + page.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={page.category} keywords={["best " + page.category.toLowerCase(), page.category + " software ranking", "top " + page.category.toLowerCase() + " tools", "software shortlist 2026"].filter(Boolean)} mentions={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} />
+      <CollectionPageSchema name={page.title} description={safeDescription} url={`${site.url}/best/${slug}`} />
       <ItemListSchema items={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} url={`${site.url}/best/${slug}`} />
-      <WebPageSchema name={page.title} description={page.description} url={`${site.url}/best/${slug}`} dateModified={page.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: linkedPicks.map((p, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}`, category: getReview(p.toolSlug)?.category || page.category}) })) }} />
-      <FAQSchema questions={page.faqs} path={`/best/${slug}`} />
+      <WebPageSchema name={page.title} description={safeDescription} url={`${site.url}/best/${slug}`} dateModified={page.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: linkedPicks.map((p, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}`, category: getReview(p.toolSlug)?.category || page.category}) })) }} />
+      <FAQSchema questions={safeFaqs} path={`/best/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Best Software", href: "/best" }, { name: page.title }]} />
       </Container>
       <article className="pb-16">
         <Container>
           <div className="mb-8">
-            <EditorialHero slug={page.slug} title={page.title} subtitle={page.description} category={page.category} variant="review" className="w-full min-h-[180px] sm:min-h-[220px]" />
+            <EditorialHero slug={page.slug} title={page.title} subtitle={safeDescription} category={page.category} variant="review" className="w-full min-h-[180px] sm:min-h-[220px]" />
           </div>
 
           <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-            <p className="text-sm text-muted-foreground">The first listed option is <strong>{page.picks[0]?.toolName}</strong>{typeof page.picks[0]?.rating === "number" ? ` (recorded rating ${page.picks[0]?.rating}/5)` : ""} (pricing: {page.picks[0]?.priceRange}). Use this shortlist as a starting point, verify current details with the vendor, and compare each option against your workflow.</p>
+            <p className="text-sm text-muted-foreground">This page is a shortlist of {page.picks.length} options to evaluate, not a verified overall ranking. Compare each option against your workflow, check current plan limits with the vendor, and use only ratings or prices explicitly marked as verified.</p>
           </div>
 
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">TL;DR</h2>
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-              <li><strong>#1 listed option:</strong> {page.picks[0]?.toolName} — {page.picks[0]?.bestFor}{typeof page.picks[0]?.rating === "number" ? ` Recorded rating: ${page.picks[0]?.rating}/5.` : ""}</li>
+              <li><strong>First listed option:</strong> {page.picks[0]?.toolName} — {safePickText(page.picks[0], page.picks[0]?.bestFor ?? "")}{verifiedPickRating(page.picks[0]) !== null ? ` Verified editorial rating: ${verifiedPickRating(page.picks[0])}/5.` : ""} The list order is not a verified ranking.</li>
               <li>{page.picks.length} listed tools with recorded details; compare them using {page.criteria.length} criteria</li>
-              <li>Pricing: {page.pricingSummary}</li>
+              <li>Pricing: {safePricingSummary}</li>
               <li>Each pick includes pros, cons, and a best-fit use case</li>
               <li>Category: {page.category} — updated {formatDate(page.lastUpdated)}</li>
             </ul>
@@ -93,11 +154,11 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-4">
               {page.picks.slice(0, 3).map((pick) => (
                 <li key={pick.toolSlug || pick.toolName}>
-                  <strong>{pick.toolName}:</strong> {pick.bestFor}{typeof pick.rating === "number" ? ` Recorded rating: ${pick.rating}/5.` : ""} Pricing shown: {pick.priceRange}. Verify current plan limits and included features with the vendor.
+                  <strong>{pick.toolName}:</strong> {safePickText(pick, pick.bestFor)}{verifiedPickRating(pick) !== null ? ` Verified editorial rating: ${verifiedPickRating(pick)}/5.` : ""} Pricing: {verifiedPickPrice(pick) ?? "not independently verified in this shortlist"}. Verify current plan limits and included features with the vendor.
                 </li>
               ))}
               {page.criteria.length > 0 && <li><strong>Compare on:</strong> {page.criteria.join(", ")}.</li>}
-              <li><strong>Selection context:</strong> {page.pricingSummary}</li>
+              <li><strong>Selection context:</strong> {safePricingSummary}</li>
               <li><strong>Last updated:</strong> {formatDate(page.lastUpdated)}. Prices, availability, and feature limits may change.</li>
             </ul>
           </div>
@@ -127,40 +188,40 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
               )}
 
               <section className="mb-10">
-                <h2 className="text-2xl font-bold tracking-tight mb-6">Top Picks</h2>
+                <h2 className="text-2xl font-bold tracking-tight mb-6">Options to Evaluate</h2>
                 <div className="space-y-6">
                   {page.picks.map((pick) => (
-                    <GlassCard key={pick.toolSlug} glow={pick.rank === 1}>
+                    <GlassCard key={pick.toolSlug}>
                       <div className="p-5">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-3">
-                            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white text-sm font-bold shrink-0">{pick.rank}</span>
+                            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white text-xs font-semibold shrink-0">Option</span>
                             {reviewHref(pick.toolSlug) ? (
                               <Link href={`/reviews/${pick.toolSlug}`} className="text-lg font-bold hover:text-primary transition-colors">{pick.toolName}</Link>
                             ) : (
                               <span className="text-lg font-bold">{pick.toolName}</span>
                             )}
                           </div>
-                          {typeof pick.rating === "number" && Number.isFinite(pick.rating) && pick.rating > 0 && (
+                          {verifiedPickRating(pick) !== null && (
                             <div className="flex items-center gap-1 text-sm">
                               <Star size={14} className="fill-accent text-accent" />
-                              <span className="font-semibold">{pick.rating}</span>
+                              <span className="font-semibold">{verifiedPickRating(pick)}</span>
                               <span className="text-muted-foreground">/5</span>
                             </div>
                           )}
                         </div>
-                        <p className="text-sm font-medium text-primary mb-2">{pick.bestFor}</p>
-                        {pick.priceRange && pick.priceRange !== "Not independently verified" ? (
-                          <p className="text-xs text-muted-foreground mb-3">Listed pricing: {pick.priceRange}. Verify current plans, limits, and billing terms with the vendor.</p>
+                        <p className="text-sm font-medium text-primary mb-2">{safePickText(pick, pick.bestFor)}</p>
+                        {verifiedPickPrice(pick) !== null ? (
+                          <p className="text-xs text-muted-foreground mb-3">Listed pricing: {verifiedPickPrice(pick)}. Verify current plans, limits, and billing terms with the vendor.</p>
                         ) : (
-                          <p className="text-xs text-muted-foreground mb-3">Pricing not independently verified here; check the vendor's current plans and usage limits.</p>
+                          <p className="text-xs text-muted-foreground mb-3">Pricing is not independently verified for this shortlist; check the vendor&apos;s current plans, regional terms, and usage limits.</p>
                         )}
                         <div className="grid sm:grid-cols-2 gap-2 mb-3">
                           <div>
                             <p className="text-xs font-semibold text-success mb-1 flex items-center gap-1"><CheckCircle2 size={12} /> Pros</p>
                             <ul className="space-y-1">
                               {pick.pros.map((pro, j) => (
-                                <li key={j} className="text-xs text-muted-foreground flex items-start gap-1"><span className="text-success mt-0.5">•</span>{pro}</li>
+                                <li key={j} className="text-xs text-muted-foreground flex items-start gap-1"><span className="text-success mt-0.5">•</span>{safePickText(pick, pro)}</li>
                               ))}
                             </ul>
                           </div>
@@ -168,7 +229,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                             <p className="text-xs font-semibold text-error mb-1 flex items-center gap-1"><XCircle size={12} /> Cons</p>
                             <ul className="space-y-1">
                               {pick.cons.map((con, j) => (
-                                <li key={j} className="text-xs text-muted-foreground flex items-start gap-1"><span className="text-error mt-0.5">•</span>{con}</li>
+                                <li key={j} className="text-xs text-muted-foreground flex items-start gap-1"><span className="text-error mt-0.5">•</span>{safePickText(pick, con)}</li>
                               ))}
                             </ul>
                           </div>
@@ -186,7 +247,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
               <section className="mb-10">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Pricing Summary</h2>
-                <p className="text-muted-foreground leading-relaxed">{page.pricingSummary}</p>
+                <p className="text-muted-foreground leading-relaxed">{safePricingSummary}</p>
               </section>
 
               <section className="mb-10 overflow-x-auto">
@@ -194,13 +255,13 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                 <table className="w-full text-sm border-collapse">
                   <thead>
                     <tr className="border-b border-border">
-                      {page.comparisonTable.columns.map((col, i) => (
+                      {visibleComparisonColumns.map((col, i) => (
                         <th key={i} className="text-left py-3 px-3 font-semibold text-foreground">{col}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
-                    {page.comparisonTable.rows.map((row, i) => (
+                    {visibleComparisonRows.map((row, i) => (
                       <tr key={i} className="border-b border-border/50 hover:bg-accent-subtle/20 transition-colors">
                         {row.map((cell, j) => (
                           <td key={j} className="py-2.5 px-3 text-muted-foreground">{cell}</td>
@@ -214,7 +275,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
               <section>
                 <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {page.faqs.map((faq, i) => (
+                  {safeFaqs.map((faq, i) => (
                     <GlassCard key={i}>
                       <div className="p-4">
                         <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
@@ -235,12 +296,12 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                       {page.picks.slice(0, 5).map((pick) => reviewHref(pick.toolSlug) ? (
                         <Link key={pick.toolSlug} href={`/reviews/${pick.toolSlug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                           <span>{pick.rank}. {pick.toolName}</span>
-                          <span className="text-xs font-medium">{pick.rating}/5</span>
+                          <span className="text-xs font-medium">{verifiedPickRating(pick) !== null ? `${verifiedPickRating(pick)}/5` : "Rating not verified"}</span>
                         </Link>
                       ) : (
                         <div key={pick.toolSlug} className="flex items-center justify-between text-sm text-muted-foreground py-1">
                           <span>{pick.rank}. {pick.toolName}</span>
-                          <span className="text-xs font-medium">{pick.rating}/5</span>
+                          <span className="text-xs font-medium">{verifiedPickRating(pick) !== null ? `${verifiedPickRating(pick)}/5` : "Rating not verified"}</span>
                         </div>
                       ))}
                     </div>
@@ -259,6 +320,20 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             maxItems={6}
             items={extendedRelatedItems(relatedLinks)}
           />
+
+          {relatedBestPages.length > 0 && (
+            <section className="mt-12" aria-labelledby="related-best-pages">
+              <h2 id="related-best-pages" className="text-2xl font-bold tracking-tight mb-5">More {page.category} Buying Guides</h2>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {relatedBestPages.map((related) => (
+                  <Link key={related.slug} href={`/best/${related.slug}`} className="rounded-xl border border-border p-4 hover:border-primary/30 hover:bg-muted-bg transition-colors">
+                    <span className="font-medium text-sm">{related.title}</span>
+                    <p className="text-xs text-muted-foreground mt-1">{related.description}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
 
           {(() => {
             const cat = categories.find(c => c.name === page.category)

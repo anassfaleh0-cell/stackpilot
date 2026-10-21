@@ -14,6 +14,8 @@ export const metadata = createMetadata({
 })
 
 export default function ContactPage() {
+  const contactFormConfigured = Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_FROM_EMAIL)
+
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Contact", href: "/contact" }]} />
@@ -21,9 +23,20 @@ export default function ContactPage() {
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Contact" }]} />
       </Container>
-      <ToastProvider>
-        <ContactForm />
-      </ToastProvider>
+      {contactFormConfigured ? (
+        <ToastProvider>
+          <ContactForm />
+        </ToastProvider>
+      ) : (
+        <Container className="pt-8">
+          <div className="max-w-xl mx-auto rounded-xl border border-border bg-muted-bg p-6">
+            <h1 className="text-2xl font-bold mb-3">Get in touch</h1>
+            <p className="text-sm text-muted-foreground">
+              The contact form is temporarily unavailable because email delivery is not configured. Messages are not stored or sent through this form right now. Please use the email links below instead.
+            </p>
+          </div>
+        </Container>
+      )}
       <Container className="pb-16 sm:pb-20 lg:pb-24">
         <div className="max-w-2xl mx-auto mt-16 p-6 rounded-xl bg-muted-bg border border-border">
           <h2 className="text-lg font-bold mb-2">Other ways to reach us</h2>

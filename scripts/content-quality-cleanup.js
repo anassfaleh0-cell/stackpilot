@@ -56,6 +56,29 @@ const replacements = [
   [/strong customer support/gi, "available support options"],
   [/good mobile experience/gi, "mobile access"],
   [/active user community/gi, "community resources"],
+  [/Strong performance with fast load times\./g, "Test performance against representative workloads and expected traffic before choosing a plan."],
+  [/^(.{1,80}?) delivers reliable performance with 99\.9% uptime SLA and consistent response times under load\./gim,
+    (_m, product) => `${product} should be evaluated using its current service-status history and contractual uptime commitments; response times depend on workload and configuration.`],
+  [/([A-Z][A-Za-z0-9 &'’-]*) delivers reliable performance with solid performance suitable for most business use cases\./g,
+    (_m, product) => `${product} should be tested against the team's workload, integrations, and expected usage before a purchase decision.`],
+  [/positive ROI typically within 3-6 months/gi, "ROI depends on adoption, implementation cost, and the baseline used to measure outcomes"],
+  [/most teams start within hours/gi, "setup time depends on integrations, data migration, permissions, and training"],
+  [/a teams team uses/gi, "a team uses"],
+  [/updates weekly[^.]*major feature releases quarterly/gi,
+    (match) => match[0][0] === match[0][0].toUpperCase()
+      ? "Release cadence varies; check the vendor's changelog for current updates"
+      : "release cadence varies; check the vendor's changelog for current updates"],
+  [/perfect for freelancers and independent professionals/gi,
+    (match) => match[0][0] === match[0][0].toUpperCase()
+      ? "A possible fit for freelancers who have checked plan limits, invoicing needs, and total cost"
+      : "a possible fit for freelancers who have checked plan limits, invoicing needs, and total cost"],
+  [/and \d+\+ more\./gi, "and additional features."],
+  [/workfl(?=$|\s)/gi, "workflow"],
+  [/ActiveCampaign is a marketing & seo platform that helps SMBs and Marketers and Sales Teams achieve better outcomes\. Customer experience automation combining email and CRM\. Our comprehensive 2026 review evaluates features, pricing, security, integrations, and real-world performance\./gi, "ActiveCampaign is an email marketing and automation platform. This editorial overview focuses on practical fit, campaign workflows, automation complexity, CRM needs, and the costs buyers should verify before switching."],
+  [/SMBs and Marketers and Sales Teams/gi, "marketing teams and growing businesses"],
+  [/the central marketing & seo engine powering all ActiveCampaign functionality/gi, "the email marketing and automation workspace; confirm available features against the plan you are considering"],
+  [/ActiveCampaign achieves strong ratings across key evaluation categories including feature completeness, ease of use, customer support, value for money, and performance\./gi, "Compare the product against your own requirements for campaign setup, automation maintenance, reporting, support access, and total cost. Scores on this page should not be treated as independently verified test results."],
+  [/ActiveCampaign delivers reliable performance with 99\.9% uptime SLA and consistent response times under load\./gi, "Check the current service status and contractual uptime commitments directly with ActiveCampaign; performance depends on the service and workload."],
 ]
 
 function apply(content) {

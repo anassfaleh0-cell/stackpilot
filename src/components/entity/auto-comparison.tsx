@@ -34,11 +34,7 @@ export function AutoComparison({ slug, className = "" }: AutoComparisonProps) {
             <div className="p-5">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-semibold text-sm">{entity.name} vs {alt.name}</h3>
-                {comp.winner && (
-                  <Badge variant={comp.winner === entity.name ? "success" : "secondary"}>
-                    {comp.winner === entity.name ? `${entity.name} leads` : `${alt.name} leads`}
-                  </Badge>
-                )}
+                <Badge variant="secondary">Compare use-case fit</Badge>
               </div>
               <p className="text-xs text-muted-foreground mb-3">{comp.bestFor}</p>
               <div className="grid grid-cols-2 gap-2 mb-3">

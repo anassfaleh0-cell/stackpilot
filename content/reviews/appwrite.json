@@ -240,7 +240,7 @@
     },
     {
       "title": "Performance",
-      "body": "Appwrite delivers reliable performance with 99.9% uptime SLA and consistent response times under load.",
+      "body": "Appwrite should be evaluated using its current service-status history and contractual uptime commitments; response times depend on workload and configuration.",
       "type": "text"
     },
     {
@@ -461,6 +461,6 @@
   "wordCount": 6130,
   "difficulty": "Beginner",
   "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "Appwrite is perfect for freelancers and independent professionals who need an affordable, easy-to-use developer tools tool. Its simplicity and core feature set make it ideal for solo practitioners.",
-  "whoShouldNotUse": "Appwrite may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
+  "whoShouldUse": "Developers building web or mobile applications who want a backend service for authentication, database operations, storage, and server-side functions can evaluate Appwrite against their application architecture. Prototype the required permissions, backups, deployment model, and integration points before moving production data.",
+  "whoShouldNotUse": "It may not fit teams that require a different deployment model, specialized database behavior, or infrastructure controls not confirmed in their chosen Appwrite setup. Validate operational requirements, data portability, and the current plan limits with a realistic proof of concept."
 }

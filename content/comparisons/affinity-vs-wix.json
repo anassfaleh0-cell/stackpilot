@@ -1,58 +1,71 @@
 {
   "slug": "affinity-vs-wix",
-  "title": "Affinity vs Wix",
-  "description": "Affinity vs Wix: Affinity is our overall pick for Design & Creative teams — Affinity 4.6/5, Wix 4.1/5; Affinity from $69.99/one-time, Wix from.",
+  "title": "Affinity vs Wix: Visual design software or website builder?",
+  "description": "A decision guide for Affinity versus Wix. Affinity focuses on visual design software; Wix focuses on website builder. Compare the actual job, workflow, and operating requirements rather than assuming a single winner. Check current vendor documentation and plan terms before deciding.",
   "category": "Design & Creative",
   "tool1": "Affinity",
   "tool2": "Wix",
-  "winner": "affinity",
+  "winner": null,
   "features": [
     {
-      "name": "User Rating",
-      "tool1": true,
-      "tool2": false
+      "name": "Primary job",
+      "tool1": "visual design software",
+      "tool1Detail": "Evaluate Affinity for creating and editing visual assets; verify the specific apps, file formats, and handoff workflow your work requires.",
+      "tool2": "website builder",
+      "tool2Detail": "Evaluate Wix for building and maintaining a website; test editing, forms, commerce needs, accessibility, and export or ownership requirements."
     },
     {
-      "name": "Category",
-      "tool1": true,
-      "tool2": true
+      "name": "Best fit",
+      "tool1": "Choose Affinity when visual design software is the immediate requirement.",
+      "tool1Detail": "Evaluate Affinity for creating and editing visual assets; verify the specific apps, file formats, and handoff workflow your work requires.",
+      "tool2": "Choose Wix when website builder is the immediate requirement.",
+      "tool2Detail": "Evaluate Wix for building and maintaining a website; test editing, forms, commerce needs, accessibility, and export or ownership requirements."
     },
     {
-      "name": "Starting Price",
-      "tool1": true,
-      "tool2": true
+      "name": "Pilot checklist",
+      "tool1": "Test with a representative workflow and define measurable success criteria before buying.",
+      "tool1Detail": "For Affinity, verify setup effort, permissions, integrations, data handling, and who will maintain the workflow.",
+      "tool2": "Test with the same decision framework, using a real task rather than a demo alone.",
+      "tool2Detail": "For Wix, verify setup effort, permissions, integrations, data handling, and who will maintain the workflow."
     },
     {
-      "name": "Best For",
-      "tool1": true,
-      "tool2": true
-    },
-    {
-      "name": "Core Strength",
-      "tool1": true,
-      "tool2": true
+      "name": "How they relate",
+      "tool1": "Affinity addresses visual design software; it should not be treated as a replacement for website builder without a demonstrated overlap.",
+      "tool1Detail": "If both jobs matter, define the handoff and avoid paying twice for the same capability.",
+      "tool2": "Wix addresses website builder; it should not be treated as a replacement for visual design software without a demonstrated overlap.",
+      "tool2Detail": "If both jobs matter, define the handoff and avoid paying twice for the same capability."
     }
   ],
-  "verdict": "Affinity (Design & Creative) and Wix (Web Design) serve different primary purposes. Affinity has a higher user rating, but the right choice depends on whether your priority is design & creative or web design capabilities.",
+  "verdict": "There is no verified universal winner between Affinity and Wix: they focus on visual design software and website builder, respectively. Start with the outcome your team needs, then pilot the product that directly supports that outcome. If both jobs are required, assess whether the tools complement one another and define ownership at the handoff. Verify current features, plan limits, total cost, integrations, privacy, permissions, and support before committing.",
   "faqs": [
     {
-      "question": "What is the difference between Affinity and Wix?",
-      "answer": "Affinity is a design & creative tool, while Wix is a web design platform. They serve different primary functions but may overlap in certain areas."
+      "question": "What is the main difference between Affinity and Wix?",
+      "answer": "Affinity focuses on visual design software; Wix focuses on website builder. They should not be compared as interchangeable products unless your required workflow shows a genuine overlap."
     },
     {
       "question": "Can Affinity replace Wix?",
-      "answer": "Not directly — they serve different categories. Some organizations use both for different purposes."
+      "answer": "Only if a pilot proves that Affinity meets the requirements you currently depend on Wix to satisfy. Check required outputs, permissions, integrations, and operational controls before switching."
     },
     {
-      "question": "Which has better value, Affinity or Wix?",
-      "answer": "Affinity ($69.99/one-time) and Wix (Free – $45/mo) have different pricing. Evaluate based on which category matters more for your workflows."
+      "question": "Can a team use Affinity and Wix together?",
+      "answer": "Potentially, if the team needs both visual design software and website builder. Define which product owns each step, how information moves between them, and who is responsible for access and data quality."
+    },
+    {
+      "question": "How should I compare their costs?",
+      "answer": "Estimate the cost of the specific workflow you need: include seats, usage, integrations, setup, support, and ongoing administration for Affinity and Wix. Verify current vendor pricing and plan limits rather than relying on old figures."
+    },
+    {
+      "question": "What should I test before choosing?",
+      "answer": "For Affinity, test whether it handles visual design software with acceptable setup and ongoing effort. For Wix, test whether it handles website builder. Compare both against written success criteria and review security, privacy, and support requirements."
     }
   ],
-  "lastUpdated": "2026-07-20",
   "tool1Slug": "affinity",
   "tool2Slug": "wix",
   "secondaryCategories": [
     "Web Design"
   ],
-  "published": false
+  "published": true,
+  "winnerVerified": false,
+  "featuresVerified": false,
+  "decisionGuide": true
 }

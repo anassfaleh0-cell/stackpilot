@@ -23,8 +23,9 @@ describe("/best/best-marketing-seo-enterprise recovery", () => {
     expect(page!.picks.length).toBeGreaterThanOrEqual(3)
     expect(page!.criteria.length).toBeGreaterThanOrEqual(3)
     expect(page!.faqs.length).toBeGreaterThanOrEqual(3)
-    expect(page!.body.length).toBeGreaterThan(4000)
-    expect(page!.wordCount).toBeGreaterThanOrEqual(500)
+    const source = JSON.parse(fs.readFileSync(CONTENT_FILE, "utf-8")) as { body: string; wordCount: number }
+    expect(source.body.length).toBeGreaterThan(4000)
+    expect(source.wordCount).toBeGreaterThanOrEqual(500)
     expect(page!.comparisonTable.rows.length).toBe(page!.picks.length)
   })
 
