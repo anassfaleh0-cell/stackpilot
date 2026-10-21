@@ -81,7 +81,7 @@ describe("rewritten cross-category comparison guides", () => {
 
   it("preserves already-rewritten guides as public and indexable", () => {
     for (const slug of previouslyRestoredSlugs) {
-      const record = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "comparisons", `${slug}.json`), "utf8")) as { published?: boolean; publicationStatus?: string; winner?: string | null; winnerVerified?: boolean; featuresVerified?: boolean }
+      const record = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "comparisons", `${slug}.json`), "utf8")) as { published?: boolean; publicationStatus?: string; winner?: string | null; winnerVerified?: boolean; featuresVerified?: boolean; decisionGuide?: boolean }
       expect(record.published, slug).toBe(true)
       expect(record.publicationStatus, slug).not.toBe("draft")
       expect(record.winner, slug).toBeNull()
