@@ -3,7 +3,7 @@ import { siteConfig, categories, toolPages, editorialLinks } from "@/lib/constan
 import {
   getAllReviews, getAllComparisons, getAllGuides, getAllGlossaryTerms, getAllBlogPosts,
   getAllAlternatives, getAllUseCases, getAllIndustries, getAllResearch, getAllStatistics,
-  getAllBest, getAllHubs,
+  getAllBest, getAllHubs, isContentAvailable,
 } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
 import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
