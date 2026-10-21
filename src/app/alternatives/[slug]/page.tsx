@@ -40,6 +40,16 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
   if (!alt) notFound()
 
   const relatedLinks = getRelatedByCategory(alt.category, alt.slug, 4)
+  const relatedAlternativePages = (() => {
+    const sameCategory = getAllAlternatives()
+      .filter((item) => item.category === alt.category && !isNoindexed("alternatives", item.slug))
+      .sort((a, b) => a.slug.localeCompare(b.slug))
+    const currentIndex = sameCategory.findIndex((item) => item.slug === alt.slug)
+    if (currentIndex < 0 || sameCategory.length < 2) return []
+    return Array.from({ length: Math.min(4, sameCategory.length - 1) }, (_, offset) =>
+      sameCategory[(currentIndex + offset + 1) % sameCategory.length],
+    ).filter((item) => item.slug !== alt.slug)
+  })()
 
   return (
     <>
@@ -209,6 +219,20 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
             maxItems={6}
             items={extendedRelatedItems(relatedLinks)}
           />
+
+          {relatedAlternativePages.length > 0 && (
+            <section className="mt-12" aria-labelledby="related-alternative-pages">
+              <h2 id="related-alternative-pages" className="text-2xl font-bold tracking-tight mb-5">More {alt.category} Alternatives</h2>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {relatedAlternativePages.map((related) => (
+                  <Link key={related.slug} href={`/alternatives/${related.slug}`} className="rounded-xl border border-border p-4 hover:border-primary/30 hover:bg-muted-bg transition-colors">
+                    <span className="font-medium text-sm">{related.title}</span>
+                    <p className="text-xs text-muted-foreground mt-1">{related.description}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
         </Container>
       </article>
     </>
