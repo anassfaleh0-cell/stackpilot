@@ -100,11 +100,15 @@ jobs:
           fi
 
           # Verify important crawler and AdSense files, plus a real non-empty search response.
-          curl --silent --show-error --fail "$base/ads.txt" | grep -q "google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0"
-          curl --silent --show-error --fail "$base/robots.txt" | grep -q "Sitemap: https://pilotstack.online/sitemap.xml"
-          curl --silent --show-error --fail "$base/sitemap.xml" | grep -q "https://pilotstack.online/"
-          curl --silent --show-error --fail "$base/sitemap.xml" | grep -q "https://pilotstack.online/reviews/linear"
-          curl --silent --show-error --fail "$base/rss.xml" | grep -q "https://pilotstack.online/"
+          curl --silent --show-error --fail "$base/ads.txt" > /tmp/pilotstack-ads.txt
+          grep -q "google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0" /tmp/pilotstack-ads.txt
+          curl --silent --show-error --fail "$base/robots.txt" > /tmp/pilotstack-robots.txt
+          grep -q "Sitemap: https://pilotstack.online/sitemap.xml" /tmp/pilotstack-robots.txt
+          curl --silent --show-error --fail "$base/sitemap.xml" > /tmp/pilotstack-sitemap.xml
+          grep -q "https://pilotstack.online/" /tmp/pilotstack-sitemap.xml
+          grep -q "https://pilotstack.online/reviews/linear" /tmp/pilotstack-sitemap.xml
+          curl --silent --show-error --fail "$base/rss.xml" > /tmp/pilotstack-rss.xml
+          grep -q "https://pilotstack.online/" /tmp/pilotstack-rss.xml
           curl --silent --show-error --fail "$base/api/search?q=asana" > /tmp/pilotstack-search.json
           node -e 'const fs=require("fs"); const d=JSON.parse(fs.readFileSync("/tmp/pilotstack-search.json","utf8")); if (!Array.isArray(d.results) || d.results.length === 0 || d.query !== "asana") { console.error("Search endpoint returned an unexpected payload", d); process.exit(1); } console.log("Search payload valid:", d.results.length, "results");'
 
