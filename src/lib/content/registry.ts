@@ -686,10 +686,29 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
     `Before switching between ${tool1} and ${tool2}, estimate the full cost including seats, add-ons, onboarding, training, administration, and integration maintenance. Confirm data export and recovery options, then choose the product that passes your must-have checks with the least operational friction. Revisit the choice when your workflow, team size, or vendor terms change.`
   ].filter(Boolean).join("\n\n")
 }
-function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
+function sanitizeComparisonDescription(
+  tool1: string,
+  tool2: string,
+  features: ComparisonFeature[],
+  category1?: string,
+  category2?: string,
+): string {
   // Legacy descriptions contain unverified numeric scores and blanket winner claims.
-  // Build a transparent summary from the current product names instead of reusing those claims.
-  return trimText(`Compare ${tool1} and ${tool2} using product information currently recorded in PilotStack. This page is a research starting point, not an independent hands-on test. Verify current pricing, plan limits, integrations, security requirements, and feature availability with each vendor before choosing.`, 700)
+  // Build a specific, evidence-scoped summary from the current comparison record.
+  const criteria = [...new Set(features.map((feature) => trimText(feature.name, 80)).filter(Boolean))].slice(0, 3)
+  const criteriaText = criteria.length
+    ? ` Recorded criteria include ${criteria.join(", ")}.`
+    : ""
+  const categoriesDiffer = Boolean(category1 && category2 && category1 !== category2)
+  const categoryContext = categoriesDiffer
+    ? ` ${tool1} is listed in ${category1}, while ${tool2} is listed in ${category2}; they may solve different jobs, so assess whether you need one or both.`
+    : category1
+      ? ` Both products are listed in ${category1}; compare the recorded criteria against your own workflow.`
+      : ""
+  return trimText(
+    `Compare ${tool1} and ${tool2} using product information currently recorded in PilotStack.${criteriaText}${categoryContext} This page is a research starting point, not an independent hands-on test. Verify current pricing, plan limits, integrations, security requirements, and feature availability with each vendor before choosing.`,
+    700,
+  )
 }
 export function getComparison(slug: string): ComparisonContent | null {
   const cached = comparisonCache.get(slug)
@@ -744,7 +763,7 @@ export function getComparison(slug: string): ComparisonContent | null {
   const result: ComparisonContent = {
     ...cmp,
     winner,
-    description: sanitizeComparisonDescription(cmp.description, cmp.tool1, cmp.tool2, features, winner),
+    description: sanitizeComparisonDescription(cmp.tool1, cmp.tool2, features, review1?.category, review2?.category),
     verdict: buildComparisonNarrative(cmp.tool1, cmp.tool2, cmp.tool1Slug, cmp.tool2Slug, features, winner),
     features,
     faqs,
