@@ -94,6 +94,44 @@ async function main() {
       seenLocs.add(value)
     }
     report("sitemap duplicate URLs", duplicates.length === 0, duplicates.length ? "duplicate locations: " + JSON.stringify([...new Set(duplicates)].slice(0, 5)) : "no duplicate <loc> entries detected")
+
+    // Optional production crawl: CHECK_SITEMAP_URLS=1 fetches every same-origin
+    // sitemap target with bounded concurrency and reports stale 404/5xx routes.
+    // Keep this opt-in so ordinary smoke checks do not issue thousands of requests.
+    if (process.env.CHECK_SITEMAP_URLS === "1") {
+      const targets = [...new Set(locValues)].filter((value) => {
+        try { return new URL(value).origin === expectedOrigin } catch { return false }
+      })
+      const failures = []
+      let cursor = 0
+      const concurrency = Math.min(8, targets.length)
+      await Promise.all(Array.from({ length: concurrency }, async () => {
+        while (cursor < targets.length) {
+          const index = cursor++
+          const target = targets[index]
+          try {
+            const response = await fetch(target, {
+              redirect: "follow",
+              headers: { "user-agent": "PilotStack-SitemapTargetAudit/1.0" },
+              signal: AbortSignal.timeout(15000),
+            })
+            if (response.status >= 400) {
+              failures.push({ url: target, status: response.status, finalUrl: response.url })
+            }
+            await response.body?.cancel()
+          } catch (error) {
+            failures.push({ url: target, status: "FETCH_ERROR", detail: error instanceof Error ? error.message : String(error) })
+          }
+        }
+      }))
+      report(
+        "sitemap target HTTP status",
+        failures.length === 0,
+        failures.length
+          ? targets.length + " URLs checked; failing URLs: " + JSON.stringify(failures.slice(0, 25))
+          : targets.length + " same-origin URLs returned no 4xx/5xx response"
+      )
+    }
   }
 
   if (process.exitCode === 1) {
