@@ -9,7 +9,7 @@ describe("newsletter signup availability", () => {
     expect(screen.getByText(/newsletter sign-up is temporarily unavailable/i)).toBeInTheDocument()
     expect(screen.getByRole("link", { name: /contact us about updates/i })).toHaveAttribute(
       "href",
-      "mailto:hello@pilotstack.online",
+      "mailto:contact@pilotstack.online",
     )
     expect(screen.queryByRole("textbox")).not.toBeInTheDocument()
     expect(screen.queryByRole("button", { name: /subscribe/i })).not.toBeInTheDocument()
