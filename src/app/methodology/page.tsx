@@ -173,8 +173,7 @@ export default function MethodologyPage() {
               </p>
 
               <p className="text-xs text-muted-foreground-foreground mt-8">
-                Methodology last updated: October {currentYear}. We review and update this methodology when the evidence standard or site-wide audit process changes, and
-                when industry standards for software reviews evolve.
+                Methodology last updated: October 22, 2026. This date records this page revision and does not mean every product claim across the site was rechecked on that date.
               </p>
             </div>
           </div>
