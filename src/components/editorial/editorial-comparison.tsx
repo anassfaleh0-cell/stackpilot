@@ -24,8 +24,8 @@ export function EditorialComparison({ tool1, tool2, features, featuresVerified =
   // Text values describe plan tiers or unknowns and must not be treated as truthy wins.
   const displayFeatures = features.map((feature) => ({
     ...feature,
-    displayTool1: getComparisonFeatureDisplayValue(feature.tool1, featuresVerified, decisionGuide),
-    displayTool2: getComparisonFeatureDisplayValue(feature.tool2, featuresVerified, decisionGuide),
+    displayTool1: getComparisonFeatureDisplayValue(feature.tool1, featuresVerified, decisionGuide, feature.name),
+    displayTool2: getComparisonFeatureDisplayValue(feature.tool2, featuresVerified, decisionGuide, feature.name),
   }))
   const scoredFeatures = featuresVerified ? features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean") : []
   const t1w = scoredFeatures.filter((f) => f.tool1 === true && f.tool2 === false).length
