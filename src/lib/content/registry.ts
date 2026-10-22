@@ -109,6 +109,13 @@ const GENERIC_BOILERPLATE_PATTERNS = [
 ]
 
 const UNSUPPORTED_CLAIM_PATTERNS = [
+  // Remove unsupported numeric product claims and pseudo-research metrics from legacy editorial copy.
+  /\b\d+(?:,\d{3})*(?:\+| percent|%)?\s+(?:apps|members|articles|help articles|templates|customers|users|integrations|pages|workspaces|tools)\b/i,
+  /\b\d(?:\.\d)?\s*\/\s*5\b[^.!?]{0,180}\b(?:rating|rated|score|reviews?|features?|performance|support|ease of use|value)\b/i,
+  /\b(?:rating|rated|score|average rating|user reviews?)\b[^.!?]{0,100}\b\d(?:\.\d)?\s*\/\s*5\b/i,
+  /\b(?:response time|response SLA|respond within|support response|support quality)\b[^.!?]{0,140}\b\d+\s*(?:[-–]\s*\d+)?\s*(?:hours?|minutes?|days?)\b/i,
+  /\b(?:at)?pricing not independently verified\s*[-–:]\s*\$?\s*\d[\d,]*(?:\/user\/month)?/i,
+  /\b(?:best|most flexible|leading|default) choice\b[^.!?]{0,160}\b(?:available|platform|software|workspace)\b/i,
   // Legacy generated content frequently uses precise audience, accuracy, adoption, and market-share figures without citations.
   /\b(?:with\s+)?(?:over|more than|nearly|almost|up to)\s+\d[\d,.]*(?:\s*[-–]\s*\d[\d,.]*)?\s*(?:million|billion|thousand)?\s*(?:subscribers|merchants|downloads|visitors|customers|users|employees|reviews|integrations|transactions)\b/i,
   /\b\d{1,3}(?:\.\d+)?%\s+(?:of\s+)?[^.!?]{0,100}\b(?:prefer|report|match|accuracy|accurately|transactions|accountants|customers|users|teams|businesses|companies)\b/i,
@@ -174,6 +181,7 @@ function sanitizeMalformedPricingText(value: string): string {
     .replace(/\b(?:from|starting at|starts at)\s+\$?\/mo\b/gi, "pricing not verified")
     .replace(/\b(?:from|starting at|starts at) pricing not verified\b/gi, "pricing not verified; check the vendor's current pricing")
     .replace(/Klaviyo's ROI justifies the cost/gi, "compare the cost with your own store's incremental contribution margin")
+    .replace(/(?:at)?pricing not independently verified\s*[-–:]\s*\$?\s*\d[\d,]*(?:\/user\/month)?/gi, "pricing not independently verified")
   if (/^\s*\/mo\s*$/i.test(text)) {
     return "Pricing not verified — check the vendor's current pricing"
   }
@@ -310,7 +318,7 @@ function sanitizeSections<T extends { title: string; body: string; items?: strin
   return sections
     .map((section) => ({
       ...section,
-      body: sanitizeUnsupportedClaims(section?.body),
+      body: sanitizeUnsupportedClaims(sanitizeMalformedPricingText(section?.body)),
       // List items are rendered independently of the section body, so sanitize them too.
       ...(Array.isArray(section.items)
         ? { items: section.items.map((item) => sanitizeEditorialText(String(item ?? ""))).filter(Boolean) }
