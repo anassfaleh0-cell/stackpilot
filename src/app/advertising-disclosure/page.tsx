@@ -63,7 +63,7 @@ export default function AdvertisingDisclosurePage() {
               <p>PilotStack adheres to the Federal Trade Commission (FTC) guidelines on endorsements and advertising, as well as industry standards set by the Interactive Advertising Bureau (IAB).</p>
 
               <h2>Questions</h2>
-              <p>For questions about our advertising practices, contact us at <strong>ads@pilotstack.online</strong>.</p>
+              <p>For questions about our advertising practices, contact us at <strong>contact@pilotstack.online</strong>.</p>
             </div>
           </div>
         </Container>
