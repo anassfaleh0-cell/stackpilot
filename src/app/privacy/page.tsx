@@ -22,7 +22,7 @@ export default function PrivacyPage() {
         <Container>
           <div className="max-w-3xl mx-auto prose prose-slate">
             <h1 className="text-4xl font-bold tracking-tight mb-6">Privacy Policy</h1>
-            <p className="text-muted-foreground"><em>Last updated: October 21, 2026</em></p>
+            <p className="text-muted-foreground"><em>Last updated: October 22, 2026</em></p>
 
             <h2>Information We Collect</h2>
             <p>We collect only the information necessary to provide and improve PilotStack:</p>
@@ -96,7 +96,7 @@ export default function PrivacyPage() {
               <li><strong>Newsletter:</strong> No mailing-list provider is currently configured, so we do not store newsletter signup addresses or send newsletters. If a provider is added, we will update this policy before enabling signups.</li>
               <li><strong>Analytics and session measurement:</strong> Google Analytics and Microsoft Clarity may process usage and interaction data after analytics consent. Exact data collection and retention depend on each service’s configuration and current terms.</li>
               <li><strong>Tag management:</strong> Google Tag Manager may load third-party tags only after both analytics and advertising preferences are enabled in our consent interface. Tags configured in that container may have their own data practices, which are governed by the relevant provider’s policies.</li>
-              <li><strong>Hosting:</strong> Our website is hosted on Vercel&apos;s infrastructure, which provides security and privacy documentation for its infrastructure and processing services.</li>
+              <li><strong>Hosting:</strong> Our website is served through Cloudflare&apos;s infrastructure. Cloudflare may process technical request data to deliver, secure, and operate the site; its processing is subject to Cloudflare&apos;s applicable privacy and service terms.</li>
             </ul>
             <p>Where required, we use appropriate contractual safeguards with third-party processors and review their published privacy and data-processing terms.</p>
 
