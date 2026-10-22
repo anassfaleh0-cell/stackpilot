@@ -61,7 +61,7 @@ export default function FactCheckingPolicyPage() {
 
               <h2>Transparency and Accountability</h2>
               <p>When errors are found, we correct them promptly and transparently. Our <a href="/corrections-policy">Corrections Policy</a> details our approach. We believe that transparent error correction is a core component of editorial integrity.</p>
-              <p>Readers can report potential errors through the channels listed on our Contact page. The on-site form and domain email delivery are still being configured, so response times cannot be guaranteed.</p>
+              <p>Readers can report potential errors by emailing contact@pilotstack.online or using the channels listed on our Contact page. The on-site form is not configured yet; if email delivery fails, use the social channels.</p>
 
               <p className="text-sm text-muted-foreground-foreground mt-8">For questions about our fact-checking process, use the channels listed on our Contact page while domain email delivery is being configured.</p>
             </div>
