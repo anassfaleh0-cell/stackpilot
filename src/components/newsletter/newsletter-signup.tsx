@@ -19,7 +19,7 @@ export function NewsletterSignup({ variant = "inline", className = "" }: Newslet
       <p className={isFooter ? "text-xs text-muted-foreground mb-2" : "text-xs text-muted-foreground mb-3"}>
         Newsletter sign-up is temporarily unavailable. We are not collecting email addresses here yet; please check back later.
       </p>
-      <a href="mailto:hello@pilotstack.online" className="text-xs font-medium text-primary hover:underline">
+      <a href="mailto:contact@pilotstack.online" className="text-xs font-medium text-primary hover:underline">
         Contact us about updates
       </a>
     </div>
