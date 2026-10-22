@@ -41,9 +41,9 @@ describe("privacy and cookie disclosures", () => {
     const contact = fs.readFileSync(path.join(root, "contact", "page.tsx"), "utf8")
 
     expect(contact).toContain("process.env.RESEND_API_KEY && process.env.CONTACT_FROM_EMAIL")
-    expect(contact).toContain("The contact form and email inboxes are not yet configured")
-    expect(contact).toContain("messages sent here or to our domain email addresses may not reach us")
-    expect(contact).not.toContain("mailto:hello@pilotstack.online")
+    expect(contact).toContain("The on-site contact form is not configured yet")
+    expect(contact).toContain("mailto:contact@pilotstack.online")
+    expect(contact).toContain("contact@pilotstack.online")
     expect(contact).not.toContain("mailto:privacy@pilotstack.online")
   })
 
@@ -54,7 +54,7 @@ describe("privacy and cookie disclosures", () => {
     expect(privacy).toContain("Cloudflare&apos;s infrastructure")
     expect(privacy).not.toContain("Vercel&apos;s infrastructure")
     expect(terms).toContain("official social channels linked on our")
-    expect(terms).toContain("domain email inbox is not yet configured")
+    expect(terms).toContain("mailto:contact@pilotstack.online")
     expect(terms).not.toContain("contact us at <strong>legal@pilotstack.online</strong>")
     expect(terms).not.toContain("communicated via email to subscribers")
   })
