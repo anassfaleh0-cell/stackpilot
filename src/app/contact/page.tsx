@@ -48,8 +48,7 @@ export default function ContactPage() {
             <h1 className="mb-3 text-2xl font-bold">Contact PilotStack</h1>
             <p className="mb-4 text-sm text-muted-foreground">
               Send feedback about a review, report a factual error, suggest a
-              topic, or ask about a business inquiry. Our on-site form is
-              temporarily unavailable; please email us directly.
+              topic, or ask about a business inquiry. The on-site contact form is not configured yet; please email us directly.
             </p>
             <a
               className="inline-flex underline underline-offset-4"
