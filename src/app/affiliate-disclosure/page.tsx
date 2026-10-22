@@ -65,7 +65,7 @@ export default function AffiliateDisclosurePage() {
               <p>Using our affiliate links does not affect the price you pay for any product or service. The commission is paid by the vendor from their marketing budget, not from any customer premium.</p>
 
               <h2>Questions</h2>
-              <p>If you have questions about our affiliate relationships or how they operate, contact us at <strong>disclosures@pilotstack.online</strong>.</p>
+              <p>If you have questions about our affiliate relationships or how they operate, contact us at <strong>contact@pilotstack.online</strong>.</p>
             </div>
           </div>
         </Container>
