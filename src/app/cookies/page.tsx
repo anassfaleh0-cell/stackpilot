@@ -90,7 +90,7 @@ export default function CookiesPage() {
             <p>We may update this Cookie Policy from time to time to reflect changes in technology, regulation, or our practices. Material changes will be reflected on this page with an updated date. The "Last updated" date at the top reflects the most recent revision.</p>
 
             <h2>Contact</h2>
-            <p>For questions about this Cookie Policy or our data practices, use the official social channels listed on our <a href="/contact">Contact page</a> while domain email delivery is being configured. Please do not send sensitive personal information through social media.</p>
+            <p>For questions about this Cookie Policy or our data practices, use the official social channels listed on our <a href="/contact">Contact page</a> or email contact@pilotstack.online. Please do not send sensitive personal information through social media.</p>
           </div>
         </Container>
       </Section>
