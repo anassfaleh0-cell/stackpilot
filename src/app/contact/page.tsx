@@ -32,25 +32,16 @@ export default function ContactPage() {
           <div className="max-w-xl mx-auto rounded-xl border border-border bg-muted-bg p-6">
             <h1 className="text-2xl font-bold mb-3">Get in touch</h1>
             <p className="text-sm text-muted-foreground">
-              The contact form is temporarily unavailable because email delivery is not configured. Messages are not stored or sent through this form right now. Please use the email links below instead.
+              The contact form and email inboxes are not yet configured, so messages sent here or to our domain email addresses may not reach us. We are setting up reliable contact delivery. For now, you can follow or message PilotStack through the official social channels below. Please do not send sensitive personal information through social media.
             </p>
           </div>
         </Container>
       )}
       <Container className="pb-16 sm:pb-20 lg:pb-24">
         <div className="max-w-2xl mx-auto mt-16 p-6 rounded-xl bg-muted-bg border border-border">
-          <h2 className="text-lg font-bold mb-2">Other ways to reach us</h2>
+          <h2 className="text-lg font-bold mb-2">Contact availability</h2>
           <p className="text-sm text-muted-foreground mb-4">
-            Prefer email? Write to us directly at{" "}
-            <a href="mailto:hello@pilotstack.online" className="text-primary hover:underline font-medium">
-              hello@pilotstack.online
-            </a>
-          </p>
-          <p className="text-sm text-muted-foreground mb-4">
-            For privacy-related inquiries, contact us at{" "}
-            <a href="mailto:privacy@pilotstack.online" className="text-primary hover:underline font-medium">
-              privacy@pilotstack.online
-            </a>
+            Reliable email delivery is not configured yet. We do not want to imply that messages to our domain email addresses will be received. Please use the official social channels below for non-sensitive feedback while we complete setup.
           </p>
         </div>
         <div className="max-w-2xl mx-auto mt-6 p-6 rounded-xl bg-muted-bg border border-border">
