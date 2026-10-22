@@ -153,7 +153,7 @@ export default function MethodologyPage() {
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Review Team & Expertise</h2>
               <p className="text-muted-foreground mb-4">
-                PilotStack is run by a small, independent team. Editorial roles are listed on our{" "}
+                PilotStack publishes editorial standards for buyer-relevant criteria, source details, and corrections. Author pages identify the bylines used on the site; a byline alone is not proof of hands-on testing or specialist credentials. Editorial roles are listed on our{" "}
                 <Link href="/authors" className="text-primary hover:underline">authors</Link> pages. Our published rules set expectations for buyer-relevant criteria, source details, and corrections. Older score and review-count data is under audit; a value repeated across pages is not independently verified merely because it is consistent.
               </p>
 
