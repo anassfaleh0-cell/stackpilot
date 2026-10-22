@@ -84,104 +84,20 @@
   ],
   "faqs": [
     {
-      "question": "Is Square right for my business?",
-      "answer": "Square is best suited for Small Businesses and Retailers and Restaurants and Freelancers. With a 4.3/5 rating and pricing from Free – $79/mo, it offers competitive value for organizations that need reliable finance & accounting capabilities. We recommend evaluating your specific requirements against Square's feature set using our evaluation checklist."
+      "question": "How should a business evaluate Square?",
+      "answer": "List the sales channels, payment methods, devices, regions, refund rules, and reports the business needs. Test representative transactions and verify current availability and terms with Square before switching."
     },
     {
-      "question": "What is Square used for?",
-      "answer": "Square is a finance & accounting platform that helps Small Businesses and Retailers and Restaurants and Freelancers achieve better outcomes. Point-of-sale and payments platform for small businesses. Organizations use Square for core finance & accounting workflows."
+      "question": "What costs should be checked before choosing Square?",
+      "answer": "Review the current regional fee schedule, transaction mix, subscriptions, hardware, optional services, disputes, refunds, integrations, and the staff time needed for reconciliation. Request written clarification for any cost that depends on the business setup."
     },
     {
-      "question": "How much does Square cost?",
-      "answer": "Square pricing ranges from Free – $79/mo. The platform uses Per-transaction + monthly plans. Annual billing typically provides 15-20% savings. Enterprise plans include additional features, dedicated support, and custom pricing."
+      "question": "Can Square replace inventory or accounting software?",
+      "answer": "Do not assume it can replace a dedicated system. Map the required stock, accounting, and reporting workflows, then confirm which functions are included, which require integrations, and how records synchronize."
     },
     {
-      "question": "Is Square easy to use?",
-      "answer": "Square has a low learning curve. Most users can get started within minutes and reach full proficiency within days. The platform provides onboarding resources including documentation and tutorials."
-    },
-    {
-      "question": "What are the main features of Square?",
-      "answer": "Square offers AI features like Square AI and Inventory forecasting, comprehensive finance & accounting functionality, API access for custom integrations, and enterprise security with PCI DSS Level 1, SOC 2 Type II."
-    },
-    {
-      "question": "How does Square compare to competitors?",
-      "answer": "Square differentiates itself through point-of-sale and payments platform for small businesses. Compared to alternatives, it offers stronger feature depth and enterprise readiness. The right choice depends on your specific requirements and budget."
-    },
-    {
-      "question": "Is Square secure?",
-      "answer": "Square maintains PCI DSS Level 1, SOC 2 Type II certifications. Compliance with GDPR, CCPA is supported for regulated industries. Data encryption, access controls, and audit logging are included."
-    },
-    {
-      "question": "Does Square offer API access?",
-      "answer": "Yes, Square provides comprehensive API access for custom integrations, workflow automation, and data synchronization. Developer documentation and SDKs are available."
-    },
-    {
-      "question": "What integrations does Square support?",
-      "answer": "Square integrates with major platforms through its API and pre-built connectors. Common integrations cover productivity, communication, and analytics tools in the business software ecosystem."
-    },
-    {
-      "question": "Does Square have mobile apps?",
-      "answer": "Yes, Square offers mobile apps for iOS and Android with core functionality accessible on mobile devices."
-    },
-    {
-      "question": "What kind of support does Square offer?",
-      "answer": "Square provides support rated at 3.8/5. Channels include knowledge base, email support, and community forums. Premium tiers add priority response and dedicated account management."
-    },
-    {
-      "question": "Can I try Square before buying?",
-      "answer": "Yes, Square offers a free tier or trial period to evaluate the platform before committing to a paid plan."
-    },
-    {
-      "question": "What is Square's refund policy?",
-      "answer": "Square typically offers a 30-day money-back guarantee on annual plans. Monthly plans can be cancelled at any time. Enterprise contracts may have specific terms negotiated during the sales process."
-    },
-    {
-      "question": "How long does it take to implement Square?",
-      "answer": "Basic implementation takes 15-30 minutes. Full organization-wide deployment with configuration, user provisioning, and security setup typically requires 1-3 days. Enterprise deployments with custom integrations may take 2-4 weeks."
-    },
-    {
-      "question": "Is Square good for enterprise teams?",
-      "answer": "Square serves enterprise organizations with PCI DSS Level 1, SOC 2 Type II certifications and scalable infrastructure. Enterprise buyers should evaluate SSO integration, audit logging, and SLA commitments."
-    },
-    {
-      "question": "Does Square offer SSO?",
-      "answer": "Square supports SSO integration for enterprise deployments. SAML 2.0 and OAuth protocols are supported for integration with major identity providers."
-    },
-    {
-      "question": "Is Square GDPR compliant?",
-      "answer": "Yes, Square is GDPR compliant with data processing agreements and data residency options."
-    },
-    {
-      "question": "Does Square have AI features?",
-      "answer": "Yes, Square includes AI capabilities such as Square AI, Inventory forecasting. These features enhance productivity through intelligent automation and natural language processing."
-    },
-    {
-      "question": "What training does Square provide?",
-      "answer": "Square offers documentation, tutorials, and knowledge base resources. Premium plans include onboarding support and training sessions for team members."
-    },
-    {
-      "question": "How often does Square release updates?",
-      "answer": "Square releases updates on a monthly cadence. The platform maintains a public changelog and communicates major changes in advance."
-    },
-    {
-      "question": "What are Square's competitors?",
-      "answer": "Square competes with other leading finance & accounting platforms. The competitive landscape includes established players and emerging solutions offering different combinations of features, pricing, and target audiences."
-    },
-    {
-      "question": "Can Square integrate with my existing tools?",
-      "answer": "Square offers API-based integration capabilities that connect with most modern business applications. Pre-built connectors are available for common platforms."
-    },
-    {
-      "question": "What is the total cost of ownership for Square?",
-      "answer": "Total cost of ownership includes subscription fees, implementation costs, training expenses, and ongoing administration. A comprehensive TCO analysis should factor in these elements beyond the base subscription price."
-    },
-    {
-      "question": "How do I migrate to Square?",
-      "answer": "Migration to Square is rated as Low complexity. The process involves data export from your current platform, data mapping and transformation, user provisioning, and validation testing. Most migrations complete within 2-6 weeks with proper planning."
-    },
-    {
-      "question": "Is Square worth it?",
-      "answer": "Square delivers strong value for Small Businesses and Retailers and Restaurants and Freelancers. With a 4.3/5 rating and comprehensive finance & accounting features, it represents a solid investment for organizations that need reliable platform capabilities."
+      "question": "What should be tested before migrating?",
+      "answer": "Test a normal sale, a refund, a failed payment, end-of-day reconciliation, staff permissions, and a data export. Reconcile sample results with the current system and keep a rollback path until the pilot passes."
     }
   ],
   "alternatives": [],
@@ -198,7 +114,7 @@
   "company": {},
   "body": "Executive Summary\n\nSquare is best approached as a point-of-sale and payments option to evaluate when a business needs to take payments and manage checkout as part of its daily operations. The right fit depends on where sales happen, which payment methods are required, how stock and customer records are managed, and which accounting or commerce tools must stay in sync. This review does not assign an independent score because a current, reproducible scoring dataset is not available. Treat the profile as a decision framework and verify product details, plan availability, fees, and contract terms with Square before committing.\n\nWho May Find Square Useful\n\nSquare is worth evaluating for retailers, restaurants, mobile sellers, and service businesses that need a payment workflow connected to in-person activity. Start by listing each place a sale can begin: a physical counter, a mobile device, an online storefront, an invoice, or a booking. Confirm that the product and plan you are considering support those channels in your country. If the business operates across several locations or legal entities, test whether staff permissions, reporting, and reconciliation match the way the business is organized.\n\nCheckout and Payment Workflow\n\nMap the full transaction from the moment a customer is ready to pay through authorization, receipt, refund, dispute, and reconciliation. Test the payment methods your customers actually use and verify the supported hardware, devices, currencies, and regions in the official documentation. Include failed payments, partial refunds, cancelled orders, tips where relevant, and end-of-day closeout. Do not assume that a feature shown in a marketing page is included in every plan or supported by every device. Record the result of each test so that requirements are clear before a purchase.\n\nPoint of Sale and Stock Handling\n\nFor a retail or hospitality workflow, test how products, modifiers, taxes, discounts, returns, and stock adjustments are recorded. Check whether the system reflects the business's real catalogue and whether staff can correct mistakes without creating duplicate transactions. If stock is managed elsewhere, test the synchronization path and decide which system is authoritative when quantities conflict. Businesses with complex purchasing, warehouse, or multi-location requirements should validate those workflows with realistic sample data instead of assuming a basic checkout product replaces a dedicated inventory system.\n\nOnline and In-Person Operations\n\nIf sales happen both online and in person, confirm how orders, customer records, refunds, promotions, and inventory are connected. Check what happens when a device is offline, a network request fails, or an order is changed in another system. Test the customer experience on the devices used at the business and verify the available accessibility and receipt options. For service businesses, check how payment collection fits with appointments, deposits, invoices, and cancellations. The goal is to validate the complete process, not just the payment screen.\n\nIntegrations and Data Movement\n\nList every system that must exchange information with Square, including accounting, e-commerce, scheduling, customer management, payroll, and reporting tools. For each connection, identify the records exchanged, the direction of synchronization, the update frequency, and how errors are surfaced. Verify whether an integration is native, provided by a third party, or requires custom development. Before adoption, export a representative sample and check whether transaction identifiers, fees, taxes, refunds, and customer details can be reconciled in the destination system. Keep a manual fallback for critical operations.\n\nCosts and Contract Checks\n\nDo not compare vendors using a single advertised rate. Ask for the current fee schedule that applies to the business's country, payment method, sales channel, hardware, and expected transaction mix. Include transaction fees, subscriptions, devices, optional services, chargebacks, refunds, integration costs, and staff time for reconciliation. Confirm payout timing, dispute procedures, cancellation terms, and any conditions that change the fee. Record the date and source of each price you verify. If a cost is not public or depends on the business profile, mark it unknown and request written confirmation.\n\nAccess, Security, and Compliance\n\nDocument who can access sales records, issue refunds, change prices, export data, or administer devices. Verify the current security documentation and payment-card compliance responsibilities that apply to the exact setup. Do not infer certification scope from a general product statement; request the relevant documentation when compliance matters to the business. Test staff offboarding, lost-device response, account recovery, and the ability to review important actions. Minimize the personal data collected at checkout and make sure retention and export practices match the business's obligations.\n\nSetup and Migration Planning\n\nBefore switching, inventory products, tax rules, staff roles, devices, customer records, open orders, recurring payments, and reports that must remain available. Decide which records will be migrated and which will be archived. Test a small import or parallel workflow first, then reconcile totals against the existing system. Train staff on normal transactions and exceptions such as refunds, voids, and failed payments. Keep access to the previous system until the business has confirmed that day-to-day operations and end-of-period reporting work as expected.\n\nSupport and Operational Fit\n\nAsk how support is reached for the plan and region under consideration, what hours are covered, and how urgent payment or device problems are escalated. Review the vendor's current service status and support documentation rather than relying on a general quality score. Identify who inside the business owns terminals, staff access, catalogue changes, and reconciliation. A payment platform can be technically suitable but operationally difficult if no one is responsible for configuration and exception handling. Include support responsiveness and internal administration time in the final evaluation.\n\nHow to Run a Fair Pilot\n\nChoose representative transactions and write down the expected result before testing. Include a normal sale, a refund, a partial refund if needed, a failed payment, an end-of-day reconciliation, and a data export. Ask a frontline user and the person responsible for accounting to test independently. Track manual steps, error messages, missing data, and how much work is required to correct mistakes. Repeat important tests after changing devices or integrations. A short pilot will not prove every capability, but it can expose blockers before the business moves live transactions.\n\nDecision Summary\n\nSquare may be a sensible shortlist candidate when checkout and payment acceptance are central to the business workflow. It should not be selected on the strength of an unverified rating or a generic feature list. Confirm regional availability, the exact payment fees, hardware compatibility, integration behavior, reporting, data export, security responsibilities, and support terms. Compare it with alternatives using the same transactions and cost assumptions. If a required workflow cannot be demonstrated or a key term remains unclear, record that gap and resolve it before moving business-critical operations.",
   "wordCount": 1083,
-  "difficulty": "Intermediate",
+  "difficulty": "Not independently assessed; validate with a pilot",
   "learningCurve": "Not independently assessed; validate during a pilot",
   "whoShouldUse": "Can be evaluated for checkout and payment workflows that include in-person sales. May suit businesses that want payment activity connected to day-to-day operations. A pilot can expose gaps in refunds, reconciliation, devices, and integrations before launch.",
   "whoShouldNotUse": "Regional availability, payment methods, devices, and plan features need direct verification. Complex inventory, accounting, or multi-location workflows may require additional systems. Transaction fees, subscriptions, hardware, disputes, and integration costs should be assessed together.",
