@@ -9,6 +9,7 @@ import { isNoindexed } from "@/lib/noindex"
 import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
 import { getSitemapLastModified } from "@/lib/content/sitemap-date"
 import { filterSitemapEntries, isRetiredComparisonSlug } from "@/lib/sitemap/retired-comparisons"
+import { REDIRECTED_ALTERNATIVE_SLUGS, REDIRECTED_BEST_SLUGS } from "@/lib/sitemap/redirected-content"
 
 function isQuality(slug: string, dir: string): boolean {
   return !isNoindexed(dir, slug)
@@ -62,10 +63,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const guides = getAllGuides().filter((g) => isPublished(g) && isQuality(g.slug, "guides"))
   const blogPosts = getAllBlogPosts().filter((p) => isPublished(p) && isQuality(p.slug, "blog"))
   const glossary = getAllGlossaryTerms().filter((t) => isPublished(t) && isQuality(t.slug, "glossary"))
-  const alternatives = getAllAlternatives().filter((a) => isPublished(a) && isQuality(a.slug, "alternatives"))
+  const alternatives = getAllAlternatives().filter((a) => isPublished(a) && !REDIRECTED_ALTERNATIVE_SLUGS.has(a.slug) && isQuality(a.slug, "alternatives"))
   const useCases = getAllUseCases().filter((u) => isPublished(u) && isQuality(u.slug, "use-cases"))
   const industries = getAllIndustries().filter((i) => isPublished(i) && isQuality(i.slug, "industries"))
-  const best = getAllBest().filter((b) => isPublished(b) && isQuality(b.slug, "best"))
+  const best = getAllBest().filter((b) => isPublished(b) && !REDIRECTED_BEST_SLUGS.has(b.slug) && isQuality(b.slug, "best"))
   const hubs = getAllHubs().filter((h) => isPublished(h) && isQuality(h.slug, "hubs"))
   const research = getAllResearch().filter((r) => isPublished(r) && isQuality(r.slug, "research"))
   const statistics = getAllStatistics().filter((s) => isPublished(s) && isQuality(s.slug, "statistics"))
