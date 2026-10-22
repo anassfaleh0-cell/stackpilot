@@ -32,13 +32,13 @@ describe("contact form delivery", () => {
 
     expect(response.status).toBe(503)
     expect(body.success).toBeUndefined()
-    expect(body.error).toContain("hello@pilotstack.online")
+    expect(body.error).toContain("contact@pilotstack.online")
   })
 
   it("only reports success after the email provider accepts the message", async () => {
     vi.stubEnv("RESEND_API_KEY", "test-key")
     vi.stubEnv("CONTACT_FROM_EMAIL", "PilotStack <contact@example.com>")
-    vi.stubEnv("CONTACT_TO_EMAIL", "hello@pilotstack.online")
+    vi.stubEnv("CONTACT_TO_EMAIL", "contact@pilotstack.online")
     const fetchMock = vi.fn().mockResolvedValue(new Response("{}", { status: 200 }))
     vi.stubGlobal("fetch", fetchMock)
 
@@ -64,6 +64,6 @@ describe("contact form delivery", () => {
 
     expect(response.status).toBe(502)
     expect(body.success).toBeUndefined()
-    expect(body.error).toContain("email hello@pilotstack.online")
+    expect(body.error).toContain("email contact@pilotstack.online")
   })
 })
