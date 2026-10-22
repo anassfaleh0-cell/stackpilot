@@ -5,7 +5,7 @@ describe("getComparisonDecision", () => {
   it("hides historical rating and review-count values until the comparison data is verified", () => {
     expect(getComparisonFeatureDisplayValue("4.6/5", false, true, "Recorded rating")).toBe("Not independently verified")
     expect(getComparisonFeatureDisplayValue("125 reviews", false, true, "Review count")).toBe("Not independently verified")
-    expect(getComparisonFeatureDisplayValue("4.6/5", true, true, "Recorded rating")).toBe("4.6/5")
+    expect(getComparisonFeatureDisplayValue("4.6/5", true, true, "Recorded rating")).toBe("Not independently verified")
   })
 
   it("maps a slug winner to the human-readable product name", () => {
