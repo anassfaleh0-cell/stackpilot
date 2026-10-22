@@ -1,6 +1,6 @@
 {
   "slug": "software-market-share-2026",
-  "title": "Software Market Share Report 2026",
+  "title": "Software Market Share: Evidence Guide and Buyer Checklist",
   "description": "A practical, evidence-aware guide to evaluating Software Market Share. No proprietary survey results or unsupported market-wide statistics are presented; use the checklist and verify time-sensitive facts at primary sources.",
   "category": "Market Share",
   "reportType": "Evidence Review and Buyer Guide",
@@ -71,13 +71,13 @@
   "dataSources": [
     {
       "name": "OECD Digital Economy",
-      "url": "https://www.oecd.org/digital/",
-      "context": "Background reference for evaluation and governance; not a source for market-size, adoption, or survey statistics."
+      "url": "https://www.oecd.org/en/topics/digital-economy.html",
+      "context": "Background reference for evaluation practice only; no market-wide statistic or survey result is claimed on this page."
     },
     {
-      "name": "NIST Privacy Framework",
-      "url": "https://www.nist.gov/privacy-framework",
-      "context": "Background reference for evaluation and governance; not a source for market-size, adoption, or survey statistics."
+      "name": "US SEC Company Filings",
+      "url": "https://www.sec.gov/edgar/search/",
+      "context": "Background reference for evaluation practice only; no market-wide statistic or survey result is claimed on this page."
     }
   ],
   "publishedAt": "2026-07-18",
@@ -95,5 +95,6 @@
   "relatedPosts": [
     "software-market-share-analysis-2026",
     "top-software-vendors-by-category"
-  ]
+  ],
+  "sourceAuditComplete": true
 }
