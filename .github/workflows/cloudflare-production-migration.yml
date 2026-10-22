@@ -40,7 +40,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p /tmp/pilotstack-cloudflare-tools
-          printf '%s\\n' '{"private":true}' > /tmp/pilotstack-cloudflare-tools/package.json
+          printf '%s\n' '{"private":true}' > /tmp/pilotstack-cloudflare-tools/package.json
           npm install --prefix /tmp/pilotstack-cloudflare-tools --no-save --package-lock=false --legacy-peer-deps @opennextjs/cloudflare@1.20.13 wrangler@4.134.0
           mkdir -p node_modules/@opennextjs
           test ! -e node_modules/@opennextjs/cloudflare
