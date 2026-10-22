@@ -1,85 +1,98 @@
 {
   "slug": "ai-productivity-report-2026",
-  "title": "AI Productivity Impact Report 2026",
-  "description": "AI Productivity Impact Report 2026: how AI-assisted tools change individual and team workflows, where adoption is concentrated, and what buyers should evaluate when investing in productivity platforms.",
+  "title": "AI Productivity in 2026: Evidence, Limits and How to Measure Results",
+  "description": "A source-linked review of recent public evidence on AI at work, why reported task-level gains do not always become organization-wide productivity, and a practical framework for measuring outcomes safely.",
   "category": "Productivity",
-  "reportType": "Productivity Analysis",
+  "reportType": "Evidence Review",
   "keyFindings": [
-    "The productivity segment shows 25% year-over-year growth in 2026",
-    "Enterprise adoption of productivity solutions increased by 42% compared to last year",
-    "79% of organizations report improved outcomes after implementing productivity software",
-    "Small and medium businesses account for 56% of productivity software spending",
-    "AI-powered features are the top consideration for 71% of buyers evaluating productivity platforms",
-    "Cloud-based deployment represents 82% of new productivity software installations",
-    "Integration capabilities influence 80% of purchasing decisions",
-    "productivity software budgets increased by an average of 23% in 2026"
+    "Public evidence suggests that some workers report time savings from AI, but these results are self-reported and should not be treated as guaranteed outcomes for every role or organization.",
+    "The International Labour Organization's May 2026 research brief distinguishes task-level productivity gains from mixed evidence at firm and economy-wide levels.",
+    "Results depend on the task, quality requirements, workflow integration, employee skills, management practices, and the cost of checking or correcting AI output.",
+    "A credible pilot needs a baseline, a comparison task, quality and risk checks, and a record of both time saved and new work created.",
+    "PilotStack did not conduct a proprietary survey for this report; claims are attributed to the linked public sources."
   ],
   "sections": [
     {
-      "title": "What the 2026 Data Shows",
-      "body": "Our research tracks a productivity segment growing 25% year over year, with 79% of organizations reporting improved outcomes after implementing productivity software. Enterprise adoption increased 42% compared to last year, while budgets for productivity software grew by an average of 23%. The pattern points to sustained investment rather than a one-time surge.",
+      "title": "What this report does and does not claim",
+      "body": "This is a synthesis of public research, not a new survey or a representative measurement of all software buyers. Research about AI productivity uses different populations, tasks, methods, and definitions of productivity. Self-reported time savings, controlled task experiments, company-level output, and national productivity statistics are not interchangeable. Any percentage should be read with the original source's population and methodology, not as a promise that a team will achieve the same result.",
       "type": "text"
     },
     {
-      "title": "Where AI Productivity Is Adopted",
-      "body": "Adoption is concentrated in enterprises, where deployments grew 42% year over year, but small and medium businesses now account for 56% of productivity software spending. Cloud-based deployment represents 82% of new installations, and integration capabilities influence 80% of purchasing decisions, indicating buyers favor platforms that fit an existing tool stack over isolated point solutions.",
+      "title": "What recent public evidence says",
+      "body": "The European Commission's Spring 2026 economic forecast discussion reports that many people who use AI for work say it helps them finish tasks faster, while also noting differences between workers and countries. Separately, the International Labour Organization's May 2026 brief, The Aggregation Paradox of AI, reviews evidence that task-level gains do not automatically translate into measurable firm-, sector-, or economy-wide productivity growth. These findings are compatible: a tool can speed up a particular task while the organization sees smaller gains after review, rework, training, integration, and process changes are counted.",
       "type": "text"
     },
     {
-      "title": "Use Cases Driving Impact",
-      "body": "The productivity use cases buyers cite most involve reducing routine work so people can focus on higher-value tasks: drafting and summarizing documents, preparing for and capturing meetings, retrieving knowledge across the organization, and automating repetitive steps inside existing workflows. AI-powered features are the top consideration for 71% of buyers evaluating productivity platforms, which reflects demand for assistance woven into tools people already use rather than separate AI products.",
+      "title": "Where AI assistance may help",
+      "body": "Good pilot candidates are bounded, repeatable tasks where a person can evaluate the output: drafting a first version, summarizing a long document, classifying incoming requests, generating test cases, or searching a defined knowledge base. These are candidate workflows to test, not claims that AI will improve every workflow. Avoid measuring success only by the volume of generated text or code; include correctness, usefulness, rework, and the time needed for human review.",
+      "type": "list",
+      "items": [
+        "Select a task with a clear start, finish, and acceptable output.",
+        "Define the quality bar before testing and have reviewers apply the same rubric with and without AI.",
+        "Record total time, including prompting, checking, editing, escalations, and error correction.",
+        "Use representative cases, including difficult and unusual examples rather than only easy demonstrations.",
+        "Document which data may be entered into the tool and whether the workflow needs human approval."
+      ]
+    },
+    {
+      "title": "Why task-level gains can disappear at scale",
+      "body": "An individual may complete a first draft faster while a team still needs time to verify facts, correct errors, integrate the output into another system, manage access, train staff, and revise existing processes. Benefits may also be offset when usage is low, tasks are poorly matched to the model, output quality varies, or the tool introduces privacy and security risks. The ILO's aggregation-paradox brief examines this gap between micro-level gains and broader productivity outcomes. Organizations should therefore measure the full workflow and not extrapolate a small pilot directly to enterprise-wide savings.",
       "type": "text"
     },
     {
-      "title": "Workflow Outcomes and Measurement",
-      "body": "Teams that report improved outcomes typically define a baseline before rollout and track the same tasks after: time spent on routine work, turnaround time for documents and requests, and adoption of the platform by the broader team. The 79% of organizations reporting improved outcomes aligns with buyers who scope a specific workflow first and measure it, rather than deploying broadly without defined success criteria.",
+      "title": "A practical measurement framework",
+      "body": "Run a limited pilot before purchasing or expanding a platform. Compare a representative set of tasks performed with the existing process and with AI assistance. Keep task difficulty and review standards as similar as possible, and record the date, tool/version, workflow, participant roles, and exclusions. Report median time and quality outcomes where the sample supports them; explain sample size and limitations. Do not describe a before-and-after comparison as causal proof when other changes may explain the difference.",
+      "type": "list",
+      "items": [
+        "Baseline: record current completion time, quality, rework, and escalation rate.",
+        "Treatment: document the AI tool, settings, prompts or workflow, and human-review steps.",
+        "Quality: score factual accuracy, completeness, usefulness, and policy compliance.",
+        "Net impact: subtract review, correction, training, integration, and operating time from time saved.",
+        "Risk: check privacy, security, intellectual property, bias, accessibility, and failure handling.",
+        "Decision: expand only if the result is repeatable, useful, acceptable to users, and worth the total cost."
+      ]
+    },
+    {
+      "title": "Governance and responsible deployment",
+      "body": "Productivity is only one part of the decision. Before deploying a generative AI workflow, identify the data it can access, the consequences of an incorrect output, who is accountable for review, how incidents are reported, and how the system will be evaluated over time. NIST's AI Risk Management Framework and Generative AI Profile provide voluntary guidance for identifying and managing AI risks across design, deployment, and use. Apply controls proportionate to the sensitivity of the data and the impact of the decision; do not place an unreviewed AI output in charge of a high-impact decision.",
       "type": "text"
     },
     {
-      "title": "Key Buying Criteria",
-      "body": "Our survey of 1925 organizations identified the top factors driving productivity software purchases: feature completeness (85%), total cost of ownership (78%), security compliance (72%), integration capabilities (68%), and vendor reputation (55%). Buyers evaluating AI-powered productivity tools should apply the same criteria, with particular attention to how well the platform's AI features integrate with the workflows that consume most of their teams' time.",
-      "type": "text"
-    },
-    {
-      "title": "Recommendations",
-      "body": "Start with one defined workflow, such as meeting documentation or draft review, and pilot the platform on that workflow before committing. Establish the baseline tasks and metrics upfront, involve the teams who will use the tool daily, and require security compliance review as part of the evaluation. Revisit the measurement three months after deployment to decide whether to expand.",
-      "type": "text"
+      "title": "Buyer checklist",
+      "body": "Ask vendors to demonstrate the intended workflow using representative tasks, not only a scripted demo. Confirm what is included in the plan, whether customer data is used for model training, retention and deletion controls, administrative permissions, auditability, export options, service limits, and the cost of required add-ons. Ask for evidence supporting performance claims and distinguish vendor benchmarks from independent research. Record any unanswered questions as risks to resolve before a wider rollout.",
+      "type": "list",
+      "items": [
+        "Can the vendor explain the evaluation method behind its productivity claims?",
+        "Can reviewers inspect sources, outputs, and change history where needed?",
+        "What happens when the model is wrong, unavailable, or produces unsafe output?",
+        "What extra review, integration, training, and governance work will be required?",
+        "Can the organization stop using the tool and export or delete relevant data?"
+      ]
     }
   ],
-  "methodology": "This research is based on a survey of 2875 IT decision-makers, analysis of 153 software vendors, and secondary research from industry analysts. Data was collected in Q1-Q2 2026.",
+  "methodology": "Editorial synthesis of the public sources linked below, reviewed on October 22, 2026. No proprietary PilotStack survey was conducted for this report. Statistics are not pooled because the source populations and methods differ. Interpret every reported result in the context of its original publication; the practical checklists are PilotStack editorial guidance, not measured survey findings.",
   "dataSources": [
     {
-      "name": "Industry Analyst Reports",
-      "url": "https://www.gartner.com/en"
+      "name": "European Commission — AI adoption divide and reported workplace effects (Spring 2026)",
+      "url": "https://economy-finance.ec.europa.eu/economic-forecast-and-surveys/economic-forecasts/spring-2026-economic-forecast-slowdown-growth-energy-shock-drives-inflation/ai-adoption-divide-who-benefits-who-doesnt-and-what-it-means-workers_en"
     },
     {
-      "name": "Vendor Financial Disclosures",
-      "url": "https://www.sec.gov/edgar"
+      "name": "International Labour Organization — The Aggregation Paradox of AI (May 6, 2026)",
+      "url": "https://www.ilo.org/publications/aggregation-paradox-ai-why-do-micro-economic-productivity-gains-ai"
     },
     {
-      "name": "User Review Aggregators",
-      "url": "https://www.trustradius.com/"
+      "name": "NIST — AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
     },
     {
-      "name": "PilotStack Research Survey",
-      "url": "https://www.pilotstack.online/methodology"
-    },
-    {
-      "name": "Public Market Data",
-      "url": "https://www.statista.com/"
-    },
-    {
-      "name": "Regulatory Filings",
-      "url": "https://www.sec.gov/edgar/searchedgar/companysearch.html"
-    },
-    {
-      "name": "Academic Research",
-      "url": "https://scholar.google.com/"
+      "name": "NIST — Artificial Intelligence Risk Management Framework: Generative AI Profile",
+      "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
     }
   ],
   "publishedAt": "2026-07-19",
-  "author": "Sarah Chen",
-  "readingTime": 18,
+  "updatedAt": "2026-10-22",
+  "author": "PilotStack Editorial Team",
+  "readingTime": 8,
   "relatedComparisons": [],
   "relatedGuides": [],
   "relatedPosts": []
