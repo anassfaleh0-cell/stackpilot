@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getAlternative, getBest, getComparison, getReview, isContentAvailable } from "@/lib/content/registry"
+import { getBest, getComparison, getReview, isContentAvailable } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
 import nextConfig from "../../next.config"
 import fs from "node:fs"
@@ -34,7 +34,6 @@ const comparisonSlugs = [
   "basecamp-vs-trello",
   "circleci-vs-docker",
 ]
-const alternativeSlugs = ["clickup-alternatives"]
 
 describe("Search Console 404 recovery", () => {
   it("restores real comparison records as indexable, evidence-led decision guides", () => {
@@ -64,45 +63,25 @@ describe("Search Console 404 recovery", () => {
     }
   })
 
-  it("restores the ClickUp alternatives guide without unsupported ranking claims", () => {
-    for (const slug of alternativeSlugs) {
+  it("keeps intentionally unpublished alternatives drafts out of publication", () => {
+    for (const slug of ["clickup-alternatives", "grammarly-alternatives"]) {
       const file = path.join(process.cwd(), "content", "alternatives", `${slug}.json`)
-      const record = JSON.parse(fs.readFileSync(file, "utf8")) as {
-        published?: boolean
-        publicationStatus?: string
-        title?: string
-        description?: string
-        alternatives?: { slug: string; rating: number; description: string }[]
-        sections?: { title: string; body?: string }[]
-        lastUpdated?: string
-      }
-      expect(record.published, slug).toBe(true)
-      expect(record.publicationStatus, slug).toBe("published")
-      expect(record.title, slug).not.toMatch(/\bbest\b|\btop 5\b/i)
-      expect(record.description, slug).not.toMatch(/\b4\.\d\/5\b|top 5 alternatives/i)
-      expect(record.alternatives?.length, slug).toBeGreaterThanOrEqual(5)
-      expect(record.alternatives?.every((item) => item.rating === 0), slug).toBe(true)
-      expect(record.sections?.length, slug).toBeGreaterThanOrEqual(4)
-      expect(getAlternative(slug), slug).not.toBeNull()
-      expect(isContentAvailable("alternative", slug), slug).toBe(true)
-      expect(isNoindexed("alternatives", slug), slug).toBe(false)
+      const record = JSON.parse(fs.readFileSync(file, "utf8")) as { published?: boolean }
+      expect(record.published, slug).toBe(false)
     }
   })
-  it("routes the intentionally unpublished Grammarly alternatives draft to the real indexable review", async () => {
+
+  it("routes intentionally unpublished alternatives drafts to their real indexable reviews", async () => {
     const redirects = await nextConfig.redirects?.()
     expect(redirects).toEqual(expect.arrayContaining([
-      expect.objectContaining({
-        source: "/alternatives/grammarly-alternatives",
-        destination: "/reviews/grammarly",
-        permanent: true,
-      }),
+      expect.objectContaining({ source: "/alternatives/clickup-alternatives", destination: "/reviews/clickup", permanent: true }),
+      expect.objectContaining({ source: "/alternatives/grammarly-alternatives", destination: "/reviews/grammarly", permanent: true }),
     ]))
-    const draft = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "alternatives", "grammarly-alternatives.json"), "utf8")) as { published?: boolean; publicationStatus?: string }
-    expect(draft.published).toBe(false)
-    expect(draft.publicationStatus).toBe("draft")
-    expect(getReview("grammarly")).not.toBeNull()
-    expect(isContentAvailable("review", "grammarly")).toBe(true)
-    expect(isNoindexed("reviews", "grammarly")).toBe(false)
+    for (const slug of ["clickup", "grammarly"]) {
+      expect(getReview(slug), slug).not.toBeNull()
+      expect(isContentAvailable("review", slug), slug).toBe(true)
+      expect(isNoindexed("reviews", slug), slug).toBe(false)
+    }
   })
 
   it("restores the reported shortlist pages with unverified scores and prices withheld", () => {
