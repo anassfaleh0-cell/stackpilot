@@ -3,6 +3,7 @@ import type { ReviewContent, ComparisonContent, ComparisonFeature, GuideContent,
 import fs from "node:fs"
 import path from "node:path"
 import { isNoindexed } from "@/lib/noindex"
+import { isRetiredComparisonSlug } from "@/lib/sitemap/retired-comparisons"
 
 const CONTENT_DIR = path.resolve(process.cwd(), "content")
 
@@ -774,6 +775,10 @@ function getVerifiedComparisonLastUpdated(value: unknown): string {
 export function getComparison(slug: string): ComparisonContent | null {
   const cached = comparisonCache.get(slug)
   if (cached !== undefined) return cached
+  if (isRetiredComparisonSlug(slug)) {
+    comparisonCache.set(slug, null)
+    return null
+  }
   const file = path.join(CONTENT_DIR, "comparisons", `${slug}.json`)
   if (!fs.existsSync(file)) {
     comparisonCache.set(slug, null)
