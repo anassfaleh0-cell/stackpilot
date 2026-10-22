@@ -27,7 +27,7 @@ export default function PrivacyPage() {
             <h2>Information We Collect</h2>
             <p>We collect only the information necessary to provide and improve PilotStack:</p>
             <ul>
-              <li><strong>Information you provide:</strong> Information you choose to share if you contact us through an available, configured channel. The on-site contact form and domain email inboxes are not yet configured, so messages sent to those addresses may not reach us. For now, use the official social channels linked on our Contact page for non-sensitive feedback. Newsletter signup is currently unavailable and does not save an email address. Please avoid including sensitive personal information in messages.</li>
+              <li><strong>Information you provide:</strong> Information you choose to share if you contact us through an available, configured channel. The on-site contact form is not configured yet. You can email contact@pilotstack.online or use the official social channels linked on our Contact page for non-sensitive feedback. If email delivery fails, use the social channels instead. Newsletter signup is currently unavailable and does not save an email address. Please avoid including sensitive personal information in messages.</li>
               <li><strong>Information collected automatically:</strong> Depending on your consent choices and enabled services, analytics or advertising providers may process page visits, referral source, browser and device information, online identifiers, and approximate geographic region. PilotStack does not request precise location data from visitors.</li>
               <li><strong>Information we do not request:</strong> Our forms are not designed to collect payment information, government IDs, or sensitive personal data. Please do not submit this information. If you share it inadvertently through a channel we can access, avoid sending further sensitive details and use the Contact page's official channels to request follow-up.</li>
             </ul>
@@ -68,7 +68,7 @@ export default function PrivacyPage() {
               <li><strong>Right to data portability:</strong> Request a machine-readable copy of your data to transfer to another service.</li>
               <li><strong>Right to object:</strong> Object to processing of your data for analytics or marketing purposes.</li>
             </ul>
-            <p>To exercise these rights, use the official social channels linked on our Contact page while our email inboxes are being configured. Do not include sensitive information in social messages. We aim to respond within the time required by applicable privacy law.</p>
+            <p>To exercise these rights, email contact@pilotstack.online or use the official social channels linked on our Contact page. Do not include sensitive information in social messages. If email delivery fails, use the social channels. We aim to respond within the time required by applicable privacy law.</p>
 
             <h2>Your Rights (CCPA)</h2>
             <p>If you are a resident of California, you have the following rights under the California Consumer Privacy Act (CCPA):</p>
