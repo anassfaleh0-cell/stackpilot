@@ -13,6 +13,12 @@ describe("review navigation and social metadata integrity", () => {
     expect(page).not.toContain("{tool.content.length > 0 && (")
   })
 
+  it("links the review CTA to the vendor URL rather than a fabricated Google search", () => {
+    const page = read("src/app/reviews/[slug]/page.tsx")
+    expect(page).toContain("href={tool.website || `/reviews/${tool.slug}`}")
+    expect(page).not.toContain("tool.name + \" official website\"")
+  })
+
   it("uses the shared author registry rather than importing an App Router page module", () => {
     const page = read("src/app/reviews/[slug]/page.tsx")
     expect(page).toContain('import { isPublicAuthor } from "@/lib/authors"')
