@@ -42,7 +42,7 @@ describe("privacy and cookie disclosures", () => {
 
     expect(contact).toContain("process.env.RESEND_API_KEY && process.env.CONTACT_FROM_EMAIL")
     expect(contact).toContain("The contact form and email inboxes are not yet configured")
-    expect(contact).toContain("messages sent to our domain email addresses may not reach us")
+    expect(contact).toContain("messages sent to those addresses may not reach us")
     expect(contact).not.toContain("mailto:hello@pilotstack.online")
     expect(contact).not.toContain("mailto:privacy@pilotstack.online")
   })
