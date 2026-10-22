@@ -15,6 +15,7 @@ import { Star, ArrowRight, CheckCircle2, XCircle } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { isNoindexed } from "@/lib/noindex"
+import { REDIRECTED_BEST_SLUGS } from "@/lib/sitemap/redirected-content"
 
 function stripUnverifiedPriceClaims(value: string): string {
   return value
@@ -46,7 +47,7 @@ export function generateStaticParams() {
 
   // Content is read from committed JSON files; prerender the corpus for Workers compatibility.
   return getAllBest()
-    .filter((item) => (item as typeof item & { publicationStatus?: string }).publicationStatus !== "draft")
+    .filter((item) => (item as typeof item & { publicationStatus?: string }).publicationStatus !== "draft" && !REDIRECTED_BEST_SLUGS.has(item.slug))
     .map((item) => ({ slug: item.slug }))
 }
 
