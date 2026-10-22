@@ -89,7 +89,7 @@ export default function EditorialPolicyPage() {
               <p>Full details are available on our <a href="/methodology">Review Methodology</a> page.</p>
 
               <h2>4. Corrections and Updates</h2>
-              <p>When we discover an error in published content, we correct it promptly and transparently. Our <a href="/corrections-policy">Corrections Policy</a> details how errors are classified, corrected, and communicated to readers. We encourage readers to report potential errors via our <a href="/contact">contact form</a>.</p>
+              <p>When we discover an error in published content, we correct it promptly and transparently. Our <a href="/corrections-policy">Corrections Policy</a> details how errors are classified, corrected, and communicated to readers. We encourage readers to report potential errors by emailing <a href="mailto:contact@pilotstack.online">contact@pilotstack.online</a> or using the channels listed on our <a href="/contact">Contact page</a>.</p>
 
               <h2>5. Sources and Attribution</h2>
               <p>We attribute all sources used in our research. When we cite data from third-party studies, analyst reports, or user review platforms, we link to the original source whenever possible. Our published methodology and recorded sources are described on the relevant review and methodology pages.</p>
