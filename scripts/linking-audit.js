@@ -56,7 +56,7 @@ function isPaginationUrl(target) {
 async function fetchWithTimeout(url, options = {}) {
   return fetch(url, {
     ...options,
-    redirect: "follow",
+    redirect: options.redirect ?? "follow",
     headers: { "user-agent": "PilotStack-InternalLinkAudit/1.0", ...(options.headers || {}) },
     signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
   })
@@ -84,7 +84,11 @@ async function run() {
     while (cursor < uniqueUrls.length) {
       const url = uniqueUrls[cursor++]
       try {
-        const response = await fetchWithTimeout(url)
+        const response = await fetchWithTimeout(url, { redirect: "manual" })
+        if (response.status >= 300 && response.status < 400) {
+          failedPages.push({ url, status: response.status, redirect: response.headers.get("location") || "(missing Location)" })
+          continue
+        }
         if (!response.ok) {
           failedPages.push({ url, status: response.status })
           continue
@@ -155,13 +159,20 @@ async function run() {
     .sort((left, right) => left[1] - right[1] || left[0].localeCompare(right[0]))
   const targetPaths = [...nonSitemapTargets]
   const brokenInternalTargets = []
+  const redirectingInternalTargets = []
   let targetCursor = 0
   async function targetWorker() {
     while (targetCursor < targetPaths.length) {
       const pathname = targetPaths[targetCursor++]
       try {
-        const response = await fetchWithTimeout(`${SITE_URL}${pathname}`, { method: "HEAD" })
-        if (response.status === 404 || response.status === 410) {
+        const response = await fetchWithTimeout(`${SITE_URL}${pathname}`, { method: "HEAD", redirect: "manual" })
+        if (response.status >= 300 && response.status < 400) {
+          redirectingInternalTargets.push({
+            pathname,
+            status: response.status,
+            location: response.headers.get("location") || "(missing Location)",
+          })
+        } else if (response.status === 404 || response.status === 410) {
           brokenInternalTargets.push({ pathname, status: response.status })
         }
       } catch (error) {
@@ -185,9 +196,10 @@ async function run() {
   console.log("Pages with only 1-2 incoming links:", weakPages.length, JSON.stringify(weakPages.slice(0, 80)))
   console.log("Internal targets absent from sitemap:", nonSitemapTargets.size, JSON.stringify([...nonSitemapTargets].sort().slice(0, 80)))
   console.log("Broken internal targets absent from sitemap:", brokenInternalTargets.length, JSON.stringify(brokenInternalTargets.slice(0, 80)))
+  console.log("Internal targets that redirect (should link directly to final URL):", redirectingInternalTargets.length, JSON.stringify(redirectingInternalTargets.slice(0, 80)))
   console.log("Page counts by prefix:", JSON.stringify(byPrefix))
 
-  if (failedPages.length > 0 || brokenInternalTargets.length > 0) process.exitCode = 1
+  if (failedPages.length > 0 || brokenInternalTargets.length > 0 || redirectingInternalTargets.length > 0) process.exitCode = 1
 }
 
 run().catch((error) => {
