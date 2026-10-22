@@ -11,8 +11,10 @@
  */
 const SITE_URL = (process.env.SITE_URL || "https://pilotstack.online").replace(/\/+$/, "")
 const SITE_ORIGIN = new URL(SITE_URL).origin
-const CONCURRENCY = Math.max(1, Math.min(16, Number(process.env.LINK_AUDIT_CONCURRENCY) || 10))
+const CONCURRENCY = Math.max(1, Math.min(8, Number(process.env.LINK_AUDIT_CONCURRENCY) || 4))
 const REQUEST_TIMEOUT_MS = 20000
+const MAX_TRANSIENT_RETRIES = 3
+const TRANSIENT_STATUSES = new Set([429, 500, 502, 503, 504])
 
 function normalizePath(pathname) {
   if (!pathname || pathname === "/") return "/"
@@ -54,12 +56,26 @@ function isPaginationUrl(target) {
 }
 
 async function fetchWithTimeout(url, options = {}) {
-  return fetch(url, {
-    ...options,
-    redirect: options.redirect ?? "follow",
-    headers: { "user-agent": "PilotStack-InternalLinkAudit/1.0", ...(options.headers || {}) },
-    signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-  })
+  let lastError
+  for (let attempt = 0; attempt <= MAX_TRANSIENT_RETRIES; attempt++) {
+    try {
+      const response = await fetch(url, {
+        ...options,
+        redirect: options.redirect ?? "follow",
+        headers: { "user-agent": "PilotStack-InternalLinkAudit/1.0", ...(options.headers || {}) },
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+      })
+      if (!TRANSIENT_STATUSES.has(response.status) || attempt === MAX_TRANSIENT_RETRIES) return response
+      // Release the transient response before retrying to avoid holding sockets while the
+      // edge recovers from short bursts of sitemap-crawl traffic.
+      await response.body?.cancel().catch(() => {})
+    } catch (error) {
+      lastError = error
+      if (attempt === MAX_TRANSIENT_RETRIES) throw error
+    }
+    await new Promise((resolve) => setTimeout(resolve, 400 * (2 ** attempt)))
+  }
+  throw lastError ?? new Error(`Request failed after retries: ${url}`)
 }
 
 async function run() {
