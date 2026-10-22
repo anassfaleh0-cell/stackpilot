@@ -45,6 +45,10 @@ const TEMPLATE_FAQ_PATTERNS = [
   /stronger for\s+[A-Z][\w.-]*\s+is a\b/i,
   /the best choice depends on your specific needs/i,
   /specific feature needs may favor one over the other/i,
+  /(?:square|xero|linear|clickup|asana|trello)\s+(?:starts at|is cheaper|scores higher|edges ahead|wins overall)/i,
+  /\b(?:\d+(?:\.\d+)?\/5|\$\s?\d[\d,.]*|€\s?\d[\d,.]*)\b/i,
+  /(?:pricing|price|cost).{0,100}(?:not independently verified|not verified).{0,100}(?:starts at|from free|\$|€)/i,
+  /\bbased on (?:the )?recorded (?:comparison )?criteria.{0,100}\b(?:wins|winner|better|edges ahead)\b/i,
 ]
 export function getComparisonVerdictForDisplay(verdict: string, categoriesDiffer: boolean): string {
   if (!TEMPLATE_VERDICT_PATTERNS.some((pattern) => pattern.test(verdict))) return verdict
@@ -67,6 +71,10 @@ export function getSpecificComparisonFaqs(faqs: FAQItem[]): FAQItem[] {
     if (!question || !answer || !question.endsWith("?") || answer.length < 40 || answer.length > 700) continue
     if (seenQuestions.has(normalizedQuestion)) continue
     if (TEMPLATE_FAQ_PATTERNS.some((pattern) => pattern.test(question) || pattern.test(answer))) continue
+    // FAQ copy must not reintroduce unsupported scores, prices, or winners after the
+    // main comparison has been deliberately rendered without those claims.
+    if (/\b(?:overall winner|scores higher|edges ahead|wins overall|is the better choice)\b/i.test(answer)) continue
+    if (/\b\d+(?:\.\d+)?\s*\/\s*5\b|[$€£]\s?\d[\d,.]*/i.test(answer)) continue
 
     seenQuestions.add(normalizedQuestion)
     useful.push({ ...faq, question, answer })
