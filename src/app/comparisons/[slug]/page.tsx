@@ -21,7 +21,8 @@ import { EEATProcess } from "@/components/seo/editorial-process"
 import { ScoreBar } from "@/components/brand/patterns"
 import { NativeAd } from "@/components/ads"
 import { getComparisonDecision, getComparisonDisplayCopy } from "@/lib/content/comparison-decision"
-import { getVisibleReviewFaqs, stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
+import { stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
+import { getSpecificComparisonFaqs } from "@/lib/content/comparison-presentation"
 
 export const dynamic = "force-static"
 // Vercel retains on-demand generation; Cloudflare must only serve build-time routes.
@@ -101,7 +102,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   })
 
   // Reuse the review FAQ integrity filter so comparison FAQs do not repeat unverified pricing or templated compliance claims in HTML or FAQ schema.
-  const visibleFaqs = getVisibleReviewFaqs(cmp.faqs, false).slice(0, 8)
+  const visibleFaqs = getSpecificComparisonFaqs(cmp.faqs).slice(0, 8)
 
   // Use the comparison's own recorded feature details for decision guidance.
   // These are descriptions of the source data, not independent verification or proof of superiority.
