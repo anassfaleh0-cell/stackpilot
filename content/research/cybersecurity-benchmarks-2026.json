@@ -1,6 +1,6 @@
 {
   "slug": "cybersecurity-benchmarks-2026",
-  "title": "Cybersecurity Benchmark Report 2026",
+  "title": "Cybersecurity: Evidence Guide and Buyer Checklist",
   "description": "A practical, evidence-aware guide to evaluating Cybersecurity. No proprietary survey results or unsupported market-wide statistics are presented; use the checklist and verify time-sensitive product facts at primary sources.",
   "category": "Benchmark",
   "reportType": "Evidence Review and Buyer Guide",
@@ -71,13 +71,13 @@
   "dataSources": [
     {
       "name": "NIST Cybersecurity Framework",
-      "url": "https://www.nist.gov/cyberframework",
-      "context": "Background reference for evaluation and governance; not a source for market-size, adoption, or survey statistics."
+      "url": "https://www.nist.gov/cyberframework/getting-started",
+      "context": "Background reference for evaluation practice only; no market-wide statistic or survey result is claimed on this page."
     },
     {
-      "name": "CISA Secure by Design",
-      "url": "https://www.cisa.gov/securebydesign",
-      "context": "Background reference for evaluation and governance; not a source for market-size, adoption, or survey statistics."
+      "name": "NIST AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "context": "Background reference for evaluation practice only; no market-wide statistic or survey result is claimed on this page."
     }
   ],
   "publishedAt": "2026-07-19",
@@ -85,5 +85,6 @@
   "readingTime": 15,
   "relatedComparisons": [],
   "relatedGuides": [],
-  "relatedPosts": []
+  "relatedPosts": [],
+  "sourceAuditComplete": true
 }
