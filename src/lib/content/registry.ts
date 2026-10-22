@@ -130,15 +130,15 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
   /tested by our team/i,
   /user(s)? consistently report/i,
   // Suppress unsupported security/compliance assertions unless a source is recorded in the page data.
-  /\\b(?:is|are|maintains?|holds?|has|have|achieved?|certified to|certified under)\\b[^.!?]{0,100}\\b(?:SOC ?2(?: Type ?I{1,2})?|ISO ?27001|ISO ?27017|ISO ?27018|FedRAMP|HIPAA|PCI DSS|SOC 3|independently audited|third-party security audit)\\b/i,
+  /\b(?:is|are|maintains?|holds?|has|have|achieved?|certified to|certified under)\b[^.!?]{0,100}\b(?:SOC ?2(?: Type ?I{1,2})?|ISO ?27001|ISO ?27017|ISO ?27018|FedRAMP|HIPAA|PCI DSS|SOC 3|independently audited|third-party security audit)\b/i,
   // Avoid invented customer, adoption, staffing, usage and review-count precision.
-  /\\b(?:serves?|used by|trusted by|adopted by|supports?)\\b[^.!?]{0,100}\\b\\d[\\d,]*(?:\\+| percent|%)?\\s*(?:businesses|organizations|organisations|customers|users|employees|teams|reviews|companies)\\b/i,
-  /\\b(?:founded in|headquartered in|based in)\\s+\\d{4}\\b/i,
+  /\b(?:serves?|used by|trusted by|adopted by|supports?)\b[^.!?]{0,100}\b\d[\d,]*(?:\+| percent|%)?\s*(?:businesses|organizations|organisations|customers|users|employees|teams|reviews|companies)\b/i,
+  /\b(?:founded in|headquartered in|based in)\s+\d{4}\b/i,
   // Do not present illustrative scenarios as real customer case studies without sourcing.
-  /\\b(?:a|one)\\s+\\d{1,6}[- ](?:person|employee|seat|member)[- ](?:company|business|team|firm|organization|organisation)\\b[^.!?]{0,160}\\b(?:uses|deployed|implemented|achieved|saved|reduced|increased)\\b/i,
-  /\\b(?:case study|customer story|real-world case)\\s*#?\\s*\\d+\\b/i,
+  /\b(?:a|one)\s+\d{1,6}[- ](?:person|employee|seat|member)[- ](?:company|business|team|firm|organization|organisation)\b[^.!?]{0,160}\b(?:uses|deployed|implemented|achieved|saved|reduced|increased)\b/i,
+  /\b(?:case study|customer story|real-world case)\s*#?\s*\d+\b/i,
   // Specific response-time, setup-time, migration-time and ROI claims require reproducible evidence.
-  /\\b(?:99\\.9%\\s+uptime|within\\s+\\d+\\s*(?:minutes?|hours?|days?|weeks?)|takes?\\s+\\d+[-–]?\\d*\\s*(?:minutes?|hours?|days?|weeks?)|ROI[^.!?]{0,80}\\d+\\s*%|payback[^.!?]{0,80}\\d+\\s*(?:months?|weeks?))\\b/i,
+  /\b(?:99\.9%\s+uptime|within\s+\d+\s*(?:minutes?|hours?|days?|weeks?)|takes?\s+\d+[-–]?\d*\s*(?:minutes?|hours?|days?|weeks?)|ROI[^.!?]{0,80}\d+\s*%|payback[^.!?]{0,80}\d+\s*(?:months?|weeks?))\b/i,
   /organizations see measurable improvements/i,
   /typical roi payback/i,
   /first-year roi/i,
