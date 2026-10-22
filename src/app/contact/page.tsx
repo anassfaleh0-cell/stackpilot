@@ -32,7 +32,7 @@ export default function ContactPage() {
           <div className="max-w-xl mx-auto rounded-xl border border-border bg-muted-bg p-6">
             <h1 className="text-2xl font-bold mb-3">Get in touch</h1>
             <p className="text-sm text-muted-foreground">
-              The contact form and email inboxes are not yet configured, so messages sent here or to our domain email addresses may not reach us. We are setting up reliable contact delivery. For now, you can follow or message PilotStack through the official social channels below. Please do not send sensitive personal information through social media.
+              Email: contact@pilotstack.online. The on-site contact form is not configured yet. Use the email link below for feedback, corrections, and business inquiries; if your email provider reports a delivery failure, use the official social channels below. Please do not send sensitive personal information through social media.
             </p>
           </div>
         </Container>
@@ -41,11 +41,11 @@ export default function ContactPage() {
         <div className="max-w-2xl mx-auto mt-16 p-6 rounded-xl bg-muted-bg border border-border">
           <h2 className="text-lg font-bold mb-2">Contact availability</h2>
           <p className="text-sm text-muted-foreground mb-4">
-            Reliable email delivery is not configured yet. We do not want to imply that messages to our domain email addresses will be received. Please use the official social channels below for non-sensitive feedback while we complete setup.
+            For feedback, corrections, and business inquiries, email contact@pilotstack.online. The form is not configured yet. If the address does not accept mail, please use the official social channels below for non-sensitive feedback.
           </p>
         </div>
         <div className="max-w-2xl mx-auto mt-6 p-6 rounded-xl bg-muted-bg border border-border">
-          <h2 className="text-lg font-bold mb-2">Official Community</h2>
+          <h2 className="text-lg font-bold mb-2">Email PilotStack</h2>\n          <p className="text-sm text-muted-foreground mb-4"><a className="underline underline-offset-4" href="mailto:contact@pilotstack.online">contact@pilotstack.online</a></p>\n        </div>\n        <div className="max-w-2xl mx-auto mt-6 p-6 rounded-xl bg-muted-bg border border-border">\n          <h2 className="text-lg font-bold mb-2">Official Community</h2>
           <p className="text-sm text-muted-foreground mb-4">Join the PilotStack community:</p>
           <SocialLinkList />
         </div>
