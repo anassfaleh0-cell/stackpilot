@@ -52,7 +52,7 @@ export default function ContactPage() {
             </p>
             <a
               className="inline-flex underline underline-offset-4"
-              href={`mailto:${contactEmail}`}
+              href="mailto:contact@pilotstack.online"
             >
               {contactEmail}
             </a>
