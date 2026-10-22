@@ -88,13 +88,13 @@ export async function POST(request: Request) {
     const { name, email, subject, message } = validation.data!
     const apiKey = process.env.RESEND_API_KEY
     const from = process.env.CONTACT_FROM_EMAIL
-    const to = process.env.CONTACT_TO_EMAIL || "hello@pilotstack.online"
+    const to = process.env.CONTACT_TO_EMAIL || "contact@pilotstack.online"
 
     // Never report success unless a delivery provider has actually accepted the message.
     // The page provides a direct email fallback when these optional settings are absent.
     if (!apiKey || !from) {
       return new Response(JSON.stringify({
-        error: "Contact form delivery is not configured yet. Please email hello@pilotstack.online directly.",
+        error: "Contact form delivery is not configured yet. Please email contact@pilotstack.online directly.",
       }), {
         status: 503,
         headers: {
@@ -121,14 +121,14 @@ export async function POST(request: Request) {
         }),
       })
     } catch {
-      return new Response(JSON.stringify({ error: "Message delivery failed. Please email hello@pilotstack.online directly." }), {
+      return new Response(JSON.stringify({ error: "Message delivery failed. Please email contact@pilotstack.online directly." }), {
         status: 502,
         headers: { "Content-Type": "application/json", "X-RateLimit-Remaining": String(remaining) },
       })
     }
 
     if (!delivery.ok) {
-      return new Response(JSON.stringify({ error: "Message delivery failed. Please email hello@pilotstack.online directly." }), {
+      return new Response(JSON.stringify({ error: "Message delivery failed. Please email contact@pilotstack.online directly." }), {
         status: 502,
         headers: { "Content-Type": "application/json", "X-RateLimit-Remaining": String(remaining) },
       })
