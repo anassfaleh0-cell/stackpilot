@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getAlternative, getComparison, getReview, isContentAvailable } from "@/lib/content/registry"
+import { getAlternative, getBest, getComparison, getReview, isContentAvailable } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
 import nextConfig from "../../next.config"
 import fs from "node:fs"
@@ -101,6 +101,34 @@ describe("Search Console 404 recovery", () => {
     expect(getReview("grammarly")).not.toBeNull()
     expect(isContentAvailable("review", "grammarly")).toBe(true)
     expect(isNoindexed("reviews", "grammarly")).toBe(false)
+  })
+
+  it("restores the reported shortlist pages with unverified scores and prices withheld", () => {
+    const bestSlugs = [
+      "best-marketing-seo-startups",
+      "best-developer-tools-agencies",
+      "best-ai-video-tools",
+      "best-business-intelligence",
+    ]
+    for (const slug of bestSlugs) {
+      const file = path.join(process.cwd(), "content", "best", `${slug}.json`)
+      const record = JSON.parse(fs.readFileSync(file, "utf8")) as {
+        published?: boolean
+        publicationStatus?: string
+        title?: string
+        description?: string
+        picks?: { rating: number; ratingVerified?: boolean; priceRangeVerified?: boolean }[]
+      }
+      expect(record.published, slug).toBe(true)
+      expect(record.publicationStatus, slug).toBe("published")
+      expect(record.title, slug).not.toMatch(/^Best /i)
+      expect(record.description, slug).not.toMatch(/\b\d(?:\.\d)?\/5\b|\$\d/)
+      expect(record.picks?.length, slug).toBeGreaterThan(0)
+      expect(record.picks?.every((pick) => pick.ratingVerified === false && pick.priceRangeVerified === false), slug).toBe(true)
+      expect(getBest(slug), slug).not.toBeNull()
+      expect(isContentAvailable("best", slug), slug).toBe(true)
+      expect(isNoindexed("best", slug), slug).toBe(false)
+    }
   })
 
 })
