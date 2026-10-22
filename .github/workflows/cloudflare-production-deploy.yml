@@ -97,4 +97,21 @@ jobs:
             echo "Legacy placeholder inbox still present on live contact page"
             exit 1
           fi
+          # Verify actual rendered review content, not only HTTP status. A unique query string
+          # avoids accidentally validating a stale cached HTML response after deployment.
+          xero_url="https://pilotstack.online/reviews/xero?__content_check=${GITHUB_SHA}"
+          notion_url="https://pilotstack.online/reviews/notion?__content_check=${GITHUB_SHA}"
+          curl --silent --show-error --fail --location --header 'Cache-Control: no-cache' "$xero_url" -o /tmp/pilotstack-xero.html
+          curl --silent --show-error --fail --location --header 'Cache-Control: no-cache' "$notion_url" -o /tmp/pilotstack-notion.html
+          grep -Fq 'Xero is a cloud accounting product to evaluate' /tmp/pilotstack-xero.html
+          grep -Fq 'Notion combines notes, documentation, knowledge bases' /tmp/pilotstack-notion.html
+          if grep -Eiq 'over 4 million subscribers|160\+ currencies|70-85% of transactions|12-24 hours on the Starter tier' /tmp/pilotstack-xero.html; then
+            echo "Stale or unsupported Xero claims detected in live HTML"
+            exit 1
+          fi
+          if grep -Eiq '100,000,000\+|500,000\+ members|3,000\+ apps|4\.7/5 rating' /tmp/pilotstack-notion.html; then
+            echo "Stale or unsupported Notion claims detected in live HTML"
+            exit 1
+          fi
+          echo "PASS live review content checks: Xero and Notion"
           CHECK_SITEMAP_URLS=1 node scripts/production-smoke-check.cjs
