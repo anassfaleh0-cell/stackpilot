@@ -55,7 +55,7 @@ export default function DMCAPage() {
             <div className="p-4 rounded-xl bg-muted-bg border border-border my-4">
               <p className="text-sm"><strong>Copyright Agent</strong></p>
               <p className="text-sm">PilotStack</p>
-              <p className="text-sm">Email: dmca@pilotstack.online</p>
+              <p className="text-sm">Email: contact@pilotstack.online</p>
               <p className="text-sm">Subject line: DMCA Takedown Request</p>
             </div>
 
@@ -66,7 +66,7 @@ export default function DMCAPage() {
             <p>Content may not be removed if it falls under fair use, commentary, criticism, news reporting, or other exceptions under copyright law. Reviews, comparisons, and editorial content on PilotStack may reference or quote copyrighted material under fair use provisions.</p>
 
             <h2>Contact</h2>
-            <p>For questions about this DMCA policy, contact us at <strong>dmca@pilotstack.online</strong>.</p>
+            <p>For questions about this DMCA policy, contact us at <strong>contact@pilotstack.online</strong>.</p>
           </div>
         </Container>
       </Section>
