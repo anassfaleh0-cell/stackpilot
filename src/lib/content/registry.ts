@@ -135,7 +135,8 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
   /\b(?:serves?|used by|trusted by|adopted by|supports?)\b[^.!?]{0,100}\b\d[\d,]*(?:\+| percent|%)?\s*(?:businesses|organizations|organisations|customers|users|employees|teams|reviews|companies)\b/i,
   /\b(?:founded in|headquartered in|based in)\s+\d{4}\b/i,
   // Do not present illustrative scenarios as real customer case studies without sourcing.
-  /\b(?:a|one)\s+\d{1,6}[- ](?:person|employee|seat|member)[- ](?:company|business|team|firm|organization|organisation)\b[^.!?]{0,160}\b(?:uses|deployed|implemented|achieved|saved|reduced|increased)\b/i,
+  /\b(?:a|one)\s+\d{1,6}[- ](?:person|employee|seat|member)[- ](?:(?:law|accounting|marketing|software|medical|consulting|technology)\s+)?(?:company|business|team|firm|organization|organisation)\b[^.!?]{0,160}\b(?:uses|deployed|implemented|achieved|saved|reduced|increased)\b/i,
+  /\b(?:reduced|increased|saved|cut|improved)\b[^.!?]{0,100}\b\d{1,3}(?:\.\d+)?\s*%/i,
   /\b(?:case study|customer story|real-world case)\s*#?\s*\d+\b/i,
   // Specific response-time, setup-time, migration-time and ROI claims require reproducible evidence.
   /\b(?:99\.9%\s+uptime|within\s+\d+\s*(?:minutes?|hours?|days?|weeks?)|takes?\s+\d+[-–]?\d*\s*(?:minutes?|hours?|days?|weeks?)|ROI[^.!?]{0,80}\d+\s*%|payback[^.!?]{0,80}\d+\s*(?:months?|weeks?))\b/i,
