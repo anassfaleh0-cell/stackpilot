@@ -60,7 +60,11 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const tool = getReview(slug)
   if (!tool) notFound()
 
-  const entity = getEntity(slug)
+  // Entity records contain useful leads but many legacy entries lack page-level verification.
+  // Render entity facts only when the review explicitly marks the underlying profile as verified.
+  const entity = tool.companyFactsVerified === true && tool.featuresVerified === true && tool.priceRangeVerified === true
+    ? getEntity(slug)
+    : null
   const companyFacts = resolveCompanyFacts(tool, entity)
   const pros = editorialPros(tool.pros)
   const visibleFaqs = getVisibleReviewFaqs(tool.faqs, tool.priceRangeVerified === true).slice(0, 8)
