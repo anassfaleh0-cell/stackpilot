@@ -2,7 +2,7 @@
  * Comparison routes consolidated by permanent redirects.
  * Keep old URLs useful while preventing duplicate comparison pages from competing in the sitemap.
  */
-export const RETIRED_COMPARISON_SLUGS = new Set<string>(["quickbooks-vs-xero"])
+export const RETIRED_COMPARISON_SLUGS = new Set<string>()
 
 export function isRetiredComparisonSlug(slug: string): boolean {
   return RETIRED_COMPARISON_SLUGS.has(slug)
