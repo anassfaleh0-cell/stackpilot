@@ -97,7 +97,9 @@ describe("Search Console 404 recovery", () => {
         permanent: true,
       }),
     ]))
-    expect(getAlternative("grammarly-alternatives")).toBeNull()
+    const draft = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "alternatives", "grammarly-alternatives.json"), "utf8")) as { published?: boolean; publicationStatus?: string }
+    expect(draft.published).toBe(false)
+    expect(draft.publicationStatus).toBe("draft")
     expect(getReview("grammarly")).not.toBeNull()
     expect(isContentAvailable("review", "grammarly")).toBe(true)
     expect(isNoindexed("reviews", "grammarly")).toBe(false)
