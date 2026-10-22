@@ -15,6 +15,7 @@ import { Star, ExternalLink, ArrowRight, CheckCircle2 } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { isNoindexed } from "@/lib/noindex"
+import { REDIRECTED_ALTERNATIVE_SLUGS } from "@/lib/sitemap/redirected-content"
 
 export const dynamicParams = true
 
@@ -26,7 +27,7 @@ export function generateStaticParams() {
   // Content is read from committed JSON files. Prerender the corpus so Workers never need
   // repository filesystem access for on-demand route rendering.
   return getAllAlternatives()
-    .filter((item) => (item as typeof item & { publicationStatus?: string }).publicationStatus !== "draft")
+    .filter((item) => (item as typeof item & { publicationStatus?: string }).publicationStatus !== "draft" && !REDIRECTED_ALTERNATIVE_SLUGS.has(item.slug))
     .map((item) => ({ slug: item.slug }))
 }
 
