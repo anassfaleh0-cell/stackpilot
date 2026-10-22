@@ -4,6 +4,11 @@ on:
   workflow_run:
     workflows: ["quality-gate"]
     types: [completed]
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/cloudflare-production-deploy.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -16,16 +21,19 @@ jobs:
   deploy-production:
     name: Build and deploy verified master to Cloudflare
     if: >-
-      github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.head_branch == 'master'
+      (github.event_name == 'push' && github.ref == 'refs/heads/master') ||
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/master') ||
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'master')
     runs-on: ubuntu-latest
     timeout-minutes: 45
     environment: cloudflare-production
     steps:
-      - name: Checkout latest master
+      - name: Checkout verified master commit
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -36,11 +44,19 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Run required content and SEO gates before deploy
+        run: |
+          npm test
+          npm run lint:content
+          npm run audit:guides
+          npm run seo:audit
+          npm run audit:noindex
+
       - name: Install Cloudflare tooling in an isolated temporary directory
         run: |
           set -euo pipefail
           mkdir -p /tmp/pilotstack-cloudflare-tools
-          printf '%s\n' '{"private":true}' > /tmp/pilotstack-cloudflare-tools/package.json
+          printf '%s\\n' '{"private":true}' > /tmp/pilotstack-cloudflare-tools/package.json
           npm install --prefix /tmp/pilotstack-cloudflare-tools --no-save --package-lock=false --legacy-peer-deps @opennextjs/cloudflare@1.20.13 wrangler@4.134.0
           mkdir -p node_modules/@opennextjs
           test ! -e node_modules/@opennextjs/cloudflare
@@ -73,9 +89,13 @@ jobs:
       - name: Verify production endpoints
         run: |
           set -euo pipefail
-          for path in / /ads.txt /robots.txt /sitemap.xml /privacy /methodology; do
+          for path in / /ads.txt /robots.txt /sitemap.xml /privacy /methodology /contact /terms /cookies /editorial-policy /advertising-disclosure /affiliate-disclosure /dmca /fact-checking-policy /corrections-policy; do
             code="$(curl --silent --show-error --location --output /tmp/pilotstack-response --write-out '%{http_code}' "https://pilotstack.online$path")"
             printf '%s %s\\n' "$code" "$path"
             test "$code" = "200"
           done
           curl --silent --show-error --fail https://pilotstack.online/ads.txt | grep -F 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0'
+          if curl --silent --show-error --fail https://pilotstack.online/contact | grep -Fq 'hello@pilotstack.online'; then
+            echo "Legacy placeholder inbox still present on live contact page"
+            exit 1
+          fi
