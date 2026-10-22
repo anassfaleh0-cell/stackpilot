@@ -60,9 +60,7 @@ describe("comparison presentation avoids generic boilerplate", () => {
       { question: "Which tool is better?", answer: "Square excels at Square is a finance platform, while Xero is stronger for Xero is a cloud accounting platform." },
       { question: "How much does it cost?", answer: "Square starts at Free – $79/mo while Xero starts at $13–$45/mo. Confirm the current plan prices with each vendor." },
     ])
-    expect(result).toEqual([
-      { question: "How much does it cost?", answer: "Square starts at Free – $79/mo while Xero starts at $13–$45/mo. Confirm the current plan prices with each vendor." },
-    ])
+    expect(result).toEqual([])
   })
 
   it("filters malformed questions, duplicate questions, and empty or oversized answers", () => {
