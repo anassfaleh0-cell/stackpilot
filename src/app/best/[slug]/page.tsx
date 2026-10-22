@@ -101,7 +101,10 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   const hasUnverifiedPickRatings = page.picks.some((pick) => typeof pick.rating === "number" && verifiedPickRating(pick) === null) || (page.comparisonTable.columns.some((column) => /rating|score/i.test(column)) && page.picks.some((pick) => verifiedPickRating(pick) === null))
   const hasUnverifiedPickPrices = page.picks.some((pick) => Boolean(pick.priceRange?.trim()) && verifiedPickPrice(pick) === null) || (page.comparisonTable.columns.some((column) => /price|pricing/i.test(column)) && page.picks.some((pick) => verifiedPickPrice(pick) === null)) || (/[$€£]\s?\d/.test(page.pricingSummary) && page.picks.some((pick) => verifiedPickPrice(pick) === null))
   const safePickText = (pick: (typeof page.picks)[number] | undefined, value: string) => {
-    const safeRatingText = stripUnverifiedRatingClaims(value)
+    const withoutProductEcho = pick?.toolName && value.toLowerCase().startsWith(`${pick.toolName.toLowerCase()} is best suited for `)
+      ? `Best suited for ${value.slice(pick.toolName.length + " is best suited for ".length)}`
+      : value
+    const safeRatingText = stripUnverifiedRatingClaims(withoutProductEcho)
     return verifiedPickPrice(pick) === null ? stripUnverifiedPriceClaims(safeRatingText) : safeRatingText
   }
   const safePricingSummary = hasUnverifiedPickPrices
