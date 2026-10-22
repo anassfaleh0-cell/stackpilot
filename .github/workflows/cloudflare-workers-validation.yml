@@ -11,7 +11,9 @@ on:
       - "wrangler.jsonc"
       - "package.json"
       - "package-lock.json"
+      - "wrangler.production.jsonc"
       - ".github/workflows/cloudflare-workers-validation.yml"
+      - ".github/workflows/cloudflare-production-migration.yml"
 
 permissions:
   contents: read
@@ -72,8 +74,13 @@ jobs:
           BUILD_TARGET: cloudflare
           CI: "true"
 
-      - name: Validate Worker bundle without deploying
+      - name: Validate preview Worker bundle without deploying
         run: ./node_modules/.bin/wrangler deploy --dry-run --config wrangler.jsonc
+        env:
+          CI: "true"
+
+      - name: Validate production route config without deploying
+        run: ./node_modules/.bin/wrangler deploy --dry-run --config wrangler.production.jsonc
         env:
           CI: "true"
 
