@@ -2,6 +2,12 @@ import { describe, expect, it } from "vitest"
 import { getComparisonDecision, getComparisonDisplayCopy, getComparisonFeatureDisplayValue } from "./comparison-decision"
 
 describe("getComparisonDecision", () => {
+  it("hides historical rating and review-count values until the comparison data is verified", () => {
+    expect(getComparisonFeatureDisplayValue("4.6/5", false, true, "Recorded rating")).toBe("Not independently verified")
+    expect(getComparisonFeatureDisplayValue("125 reviews", false, true, "Review count")).toBe("Not independently verified")
+    expect(getComparisonFeatureDisplayValue("4.6/5", true, true, "Recorded rating")).toBe("4.6/5")
+  })
+
   it("maps a slug winner to the human-readable product name", () => {
     expect(getComparisonDecision({
       winner: "1password",
