@@ -237,7 +237,7 @@ describe("H-09A sitemap", () => {
   })
 
   it("excludes noindexed blog posts from the sitemap", () => {
-    expect(sitemapSrc).toContain('const blogPosts = getAllBlogPosts().filter((p) => isQuality(p.slug, "blog"))')
+    expect(sitemapSrc).toContain('const blogPosts = getAllBlogPosts().filter((p) => isPublished(p) && isQuality(p.slug, "blog"))')
   })
 })
 
@@ -298,8 +298,8 @@ describe("H-09A seo safety", () => {
     expect(reviewPageSrc).not.toContain("aggregateRating")
   })
 
-  it("14. ReviewSchema still receives the stored editorial rating", () => {
-    expect(reviewPageSrc).toMatch(/<ReviewSchema[^>]*rating=\{tool\.rating\}/s)
+  it("14. ReviewSchema receives a rating only when provenance is verified", () => {
+    expect(reviewPageSrc).toMatch(/<ReviewSchema[^>]*rating=\{hasEditorialRating \? tool\.rating : undefined\}/s)
     expect(reviewPageSrc).not.toContain("reviewRating={")
   })
 

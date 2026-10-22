@@ -2,6 +2,10 @@ import { describe, it, expect } from "vitest"
 import fs from "node:fs"
 import path from "node:path"
 import sitemap from "@/app/sitemap"
+import { REDIRECTED_ALTERNATIVE_SLUGS, REDIRECTED_BEST_SLUGS } from "@/lib/sitemap/redirected-content"
+import SitemapPage from "@/app/sitemap-html/page"
+import robots from "@/app/robots"
+import { siteConfig, toolPages, editorialLinks } from "@/lib/constants"
 import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
 import * as Alternatives from "@/app/alternatives/[slug]/page"
 import * as Authors from "@/app/authors/[slug]/page"
@@ -22,9 +26,9 @@ import * as UseCases from "@/app/use-cases/[slug]/page"
 type Props = { params: Promise<{ slug: string }> }
 type PageModule = {
   default: (props: Props) => Promise<unknown>
-  generateStaticParams?: () => { slug: string }[]
+  generateStaticParams?: () => { slug: string }[] | Promise<{ slug: string }[]>
 }
-type Family = { dir: string; route: string; mod: PageModule }
+type Family = { dir?: string; route: string; mod: PageModule }
 
 const FAMILIES: Family[] = [
   { dir: "alternatives", route: "alternatives", mod: Alternatives },
@@ -52,7 +56,7 @@ const CONTENT_ROOT = path.join(process.cwd(), "content")
 const APP_ROOT = path.join(process.cwd(), "src", "app")
 const UNKNOWN_SLUG = "no-such-record-on-this-site"
 
-type RecordEntry = { file: string; slug: string; fieldSlug: string; published: unknown }
+type RecordEntry = { file: string; slug: string; fieldSlug: string; published: unknown; publicationStatus: unknown }
 
 function recordsOf(dir: string): RecordEntry[] {
   const folder = path.join(CONTENT_ROOT, dir)
@@ -67,8 +71,21 @@ function recordsOf(dir: string): RecordEntry[] {
         slug: file.replace(/\.json$/, ""),
         fieldSlug: typeof data.slug === "string" ? data.slug : "",
         published: data.published,
+        publicationStatus: data.publicationStatus,
       }
     })
+}
+
+function collectHrefs(node: unknown, hrefs: string[] = []): string[] {
+  if (Array.isArray(node)) {
+    for (const child of node) collectHrefs(child, hrefs)
+    return hrefs
+  }
+  if (typeof node !== "object" || node === null) return hrefs
+  const element = node as { props?: { href?: unknown; children?: unknown } }
+  if (typeof element.props?.href === "string") hrefs.push(element.props.href)
+  collectHrefs(element.props?.children, hrefs)
+  return hrefs
 }
 
 function render(family: Family, slug: string): Promise<unknown> {
@@ -102,7 +119,95 @@ async function expect404(family: Family, slug: string): Promise<void> {
   throw new Error(`${slug}: route /${family.route}/${slug} rendered a page but must 404`)
 }
 
+describe("robots SEO policy", () => {
+  it("publishes the canonical sitemap and allows crawling of public content", () => {
+    const policy = robots()
+    expect(policy.sitemap).toBe(`${siteConfig.url}/sitemap.xml`)
+    const rules = Array.isArray(policy.rules) ? policy.rules : [policy.rules]
+    const wildcard = rules.find((rule) => rule.userAgent === "*")
+    expect(wildcard?.allow).toBe("/")
+    expect(wildcard?.disallow).toEqual(expect.arrayContaining(["/api/", "/admin/", "/dashboard", "/search", "/_global-error"]))
+  })
+})
+
 describe("route families", () => {
+  it("uses only absolute same-origin canonical sitemap URLs without query strings or fragments", () => {
+    const entries = sitemap()
+    const expectedOrigin = new URL(siteConfig.url).origin
+    for (const entry of entries) {
+      const parsed = new URL(entry.url)
+      expect(parsed.origin, `sitemap URL must use canonical origin: ${entry.url}`).toBe(expectedOrigin)
+      expect(parsed.search, `sitemap URL must not contain query params: ${entry.url}`).toBe("")
+      expect(parsed.hash, `sitemap URL must not contain fragments: ${entry.url}`).toBe("")
+      expect(parsed.pathname.startsWith("/"), `sitemap URL must use an absolute path: ${entry.url}`).toBe(true)
+    }
+  })
+
+  it("keeps HTML and XML sitemap URL coverage aligned", () => {
+    const xmlPaths = new Set(sitemap().map(entry => new URL(entry.url).pathname))
+    const htmlHrefs = new Set(collectHrefs(SitemapPage()))
+    const missingFromHtml = [...xmlPaths].filter(pathname => !htmlHrefs.has(pathname))
+    const extraHtmlLinks = [...htmlHrefs].filter(pathname => pathname.startsWith("/") && !xmlPaths.has(pathname))
+    expect(missingFromHtml, "every XML sitemap URL should be discoverable from the HTML sitemap").toEqual([])
+    expect(extraHtmlLinks, "the HTML sitemap should not link to URLs excluded from the XML sitemap").toEqual([])
+  })
+
+  it("includes tool pages, public author profiles, and editorial resources in the HTML sitemap", () => {
+    const hrefs = new Set(collectHrefs(SitemapPage()))
+    for (const tool of toolPages) {
+      expect(hrefs.has(`/tools/${tool.slug}`), `tool page missing from HTML sitemap: ${tool.slug}`).toBe(true)
+    }
+    for (const slug of PUBLIC_AUTHOR_SLUGS) {
+      expect(hrefs.has(`/authors/${slug}`), `author page missing from HTML sitemap: ${slug}`).toBe(true)
+    }
+    for (const link of editorialLinks) {
+      expect(hrefs.has(link.href), `editorial resource missing from HTML sitemap: ${link.href}`).toBe(true)
+    }
+  })
+
+  it("includes every published glossary entry in the HTML sitemap", () => {
+    const hrefs = new Set(collectHrefs(SitemapPage()))
+    for (const record of recordsOf("glossary")) {
+      if (record.publicationStatus === "draft") continue
+      expect(hrefs.has(`/glossary/${record.slug}`), `published glossary entry missing from HTML sitemap: ${record.slug}`).toBe(true)
+    }
+  })
+
+  it("does not link unpublished records from the HTML sitemap", () => {
+    const hrefs = new Set(collectHrefs(SitemapPage()))
+    for (const family of FAMILIES) {
+      if (!family.dir) continue
+      for (const record of recordsOf(family.dir)) {
+        if (record.publicationStatus === "draft") {
+          expect(hrefs.has(`/${family.route}/${record.slug}`), `HTML sitemap must omit unpublished content: ${family.route}/${record.slug}`).toBe(false)
+        }
+      }
+    }
+  })
+
+  it("only lists sitemap URLs backed by an App Router page", () => {
+    const missing: string[] = []
+    for (const entry of sitemap()) {
+      const segments = new URL(entry.url).pathname.split("/").filter(Boolean)
+      const staticPage = segments.length
+        ? path.join(APP_ROOT, ...segments, "page.tsx")
+        : path.join(APP_ROOT, "page.tsx")
+      const dynamicPage = segments.length
+        ? path.join(APP_ROOT, ...segments.slice(0, -1), "[slug]", "page.tsx")
+        : staticPage
+      if (!fs.existsSync(staticPage) && !fs.existsSync(dynamicPage)) {
+        missing.push(new URL(entry.url).pathname)
+      }
+    }
+    expect(missing, "sitemap must not advertise missing App Router pages").toEqual([])
+  })
+
+  it("emits unique URLs in the XML sitemap", () => {
+    const urls = sitemap().map((entry) => entry.url)
+    const duplicates = urls.filter((url, index) => urls.indexOf(url) !== index)
+    expect(duplicates).toEqual([])
+  })
+
   it("covers every content directory and every [slug] route", () => {
     const contentDirs = fs
       .readdirSync(CONTENT_ROOT, { withFileTypes: true })
@@ -124,7 +229,7 @@ describe("route families", () => {
     const duplicated: string[] = []
     for (const family of FAMILIES) {
       const seen = new Set<string>()
-      for (const record of recordsOf(family.dir)) {
+      for (const record of recordsOf(family.dir ?? "")) {
         if (record.fieldSlug !== record.slug) mismatched.push(`${family.dir}/${record.file} slug=${record.fieldSlug}`)
         if (seen.has(record.fieldSlug)) duplicated.push(`${family.dir}/${record.fieldSlug}`)
         seen.add(record.fieldSlug)
@@ -134,10 +239,24 @@ describe("route families", () => {
     expect(duplicated).toEqual([])
   })
 
+  it("excludes explicitly drafted content from the sitemap across every content family", () => {
+    const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
+    for (const family of FAMILIES) {
+      for (const record of recordsOf(family.dir ?? "")) {
+        if (record.publicationStatus === "draft") {
+          expect(paths.has(`/${family.route}/${record.slug}`), `unpublished content must not be listed: ${family.route}/${record.slug}`).toBe(false)
+        }
+      }
+    }
+  })
+
   it("keeps every content record represented by an indexable sitemap URL", () => {
     const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
     for (const family of FAMILIES) {
-      for (const record of recordsOf(family.dir)) {
+      for (const record of recordsOf(family.dir ?? "")) {
+        if (record.publicationStatus === "draft") continue
+        if (family.route === "alternatives" && REDIRECTED_ALTERNATIVE_SLUGS.has(record.slug)) continue
+        if (family.route === "best" && REDIRECTED_BEST_SLUGS.has(record.slug)) continue
         expect(paths.has(`/${family.route}/${record.slug}`), `missing sitemap URL for ${family.route}/${record.slug}`).toBe(true)
       }
     }
@@ -155,22 +274,23 @@ describe("route families", () => {
 
   it("renders every author and tool the site ships", async () => {
     for (const slug of PUBLIC_AUTHOR_SLUGS) await expectResolves({ route: "authors", mod: Authors }, slug)
-    for (const param of Tools.generateStaticParams!()) await expectResolves({ route: "tools", mod: Tools }, param.slug)
+    const toolParams = await Tools.generateStaticParams!()
+    for (const param of toolParams) await expectResolves({ route: "tools", mod: Tools }, param.slug)
   })
 
   it("404s unknown slugs in every route family", async () => {
     for (const family of ALL_FAMILIES) await expect404(family, UNKNOWN_SLUG)
   })
 
-  it("lists only records that resolve in the sitemap", () => {
+  it("lists only records that resolve in the sitemap", async () => {
     const entries = sitemap()
     const origin = new URL(entries[0].url).origin
     const byRoute = new Map<string, Map<string, unknown>>(
-      FAMILIES.map((family) => [family.route, new Map(recordsOf(family.dir).map((record) => [record.slug, record.published]))]),
+      FAMILIES.map((family) => [family.route, new Map(recordsOf(family.dir ?? "").map((record) => [record.slug, record.published]))]),
     )
     const codeSlugs = new Map<string, Set<string>>([
       ["authors", new Set<string>([...PUBLIC_AUTHOR_SLUGS])],
-      ["tools", new Set<string>((Tools.generateStaticParams?.() ?? []).map((param) => param.slug))],
+      ["tools", new Set<string>((await Tools.generateStaticParams?.() ?? []).map((param) => param.slug))],
     ])
 
     for (const entry of entries) {
@@ -190,7 +310,7 @@ describe("route families", () => {
     }
   })
 
-  it("pins dynamicParams to false on the authors route only", () => {
+  it("pins dynamicParams to false on slug routes with build-time params", () => {
     const pinned: string[] = []
     const walk = (dir: string) => {
       for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -202,6 +322,6 @@ describe("route families", () => {
       }
     }
     walk(APP_ROOT)
-    expect(pinned).toEqual(["authors/[slug]/page.tsx"])
+    expect(pinned.sort()).toEqual(["authors/[slug]/page.tsx", "comparisons/[slug]/page.tsx", "reviews/[slug]/page.tsx"].sort())
   })
 })

@@ -1,0 +1,71 @@
+name: Cloudflare production migration (guarded)
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_production_migration:
+        description: "Type YES_MIGRATE_PILOTSTACK_ONLINE to route pilotstack.online to the Cloudflare Worker"
+        required: true
+        type: string
+        default: "NO"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pilotstack-cloudflare-production
+  cancel-in-progress: false
+
+jobs:
+  deploy-production:
+    name: Build and deploy PilotStack production to Cloudflare
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.confirm_production_migration == 'YES_MIGRATE_PILOTSTACK_ONLINE' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: cloudflare-production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Install Cloudflare tooling in an isolated temporary directory
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/pilotstack-cloudflare-tools
+          printf '%s\n' '{"private":true}' > /tmp/pilotstack-cloudflare-tools/package.json
+          npm install --prefix /tmp/pilotstack-cloudflare-tools --no-save --package-lock=false --legacy-peer-deps @opennextjs/cloudflare@1.20.13 wrangler@4.134.0
+          mkdir -p node_modules/@opennextjs
+          test ! -e node_modules/@opennextjs/cloudflare
+          test ! -e node_modules/wrangler
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/@opennextjs/cloudflare node_modules/@opennextjs/cloudflare
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/wrangler node_modules/wrangler
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/.bin/opennextjs-cloudflare node_modules/.bin/opennextjs-cloudflare
+          ln -s /tmp/pilotstack-cloudflare-tools/node_modules/.bin/wrangler node_modules/.bin/wrangler
+
+      - name: Build Cloudflare Worker
+        run: |
+          node scripts/generate-search-index.mjs
+          ./node_modules/.bin/opennextjs-cloudflare build
+        env:
+          BUILD_TARGET: cloudflare
+          CI: "true"
+
+      - name: Populate prerender cache
+        run: ./node_modules/.bin/opennextjs-cloudflare populateCache local --config wrangler.production.jsonc
+        env:
+          BUILD_TARGET: cloudflare
+          CI: "true"
+
+      - name: Deploy production Worker and route
+        run: ./node_modules/.bin/wrangler deploy --config wrangler.production.jsonc
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

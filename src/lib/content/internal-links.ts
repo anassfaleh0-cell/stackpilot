@@ -48,6 +48,21 @@ type MatchKind = "direct" | "audience" | "related"
 
 const MATCH_WEIGHT: Record<MatchKind, number> = { direct: 0, audience: 1, related: 2 }
 
+function normalizeCategory(value: string): string {
+  return value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/&/g, " ")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+}
+
+function sameCategory(left: string | undefined | null, right: string | undefined | null): boolean {
+  return typeof left === "string" && typeof right === "string" &&
+    normalizeCategory(left) === normalizeCategory(right)
+}
+
 // Merged-ranking weight per family. The five legacy families and the seven newer families
 // are interleaved, so a strong use-case, hub or blog candidate ranks beside the legacy
 // candidates instead of every new family being appended after them. Families are only used
@@ -118,14 +133,32 @@ function buildBucket<T>(spec: BucketSpec<T>, excludeSlug: string, maxPerType: nu
     candidates.push({ entry, match, item })
   }
   candidates.sort((a, b) => MATCH_WEIGHT[a.match] - MATCH_WEIGHT[b.match] || spec.compare(a.entry, b.entry))
-  return candidates.slice(0, maxPerType).map((c, rank) => ({ item: c.item, match: c.match, rank }))
+
+  // Keep empty-slug index pages stable, but rotate large detail-page buckets so the
+  // same newest four records are not the only ones linked throughout the site.
+  const ordered: typeof candidates = []
+  for (const matchKind of ["direct", "audience", "related"] as const) {
+    const group = candidates.filter((candidate) => candidate.match === matchKind)
+    if (excludeSlug && group.length > maxPerType) {
+      const seed = `${spec.type}:${excludeSlug}:${matchKind}`
+      let hash = 2166136261
+      for (let index = 0; index < seed.length; index++) {
+        hash = Math.imul(hash ^ seed.charCodeAt(index), 16777619)
+      }
+      const offset = (hash >>> 0) % group.length
+      ordered.push(...group.slice(offset), ...group.slice(0, offset))
+    } else {
+      ordered.push(...group)
+    }
+  }
+  return ordered.slice(0, maxPerType).map((c, rank) => ({ item: c.item, match: c.match, rank }))
 }
 
 function hasAudienceMatch(entry: unknown, category: string): boolean {
   if (typeof entry !== "object" || entry === null) return false
   const recommendations = (entry as Record<string, unknown>).recommendations
   if (!Array.isArray(recommendations)) return false
-  return recommendations.some((r) => typeof r === "object" && r !== null && (r as Record<string, unknown>).category === category)
+  return recommendations.some((r) => typeof r === "object" && r !== null && sameCategory((r as Record<string, unknown>).category as string | undefined, category))
 }
 
 function hasRelatedMatch(entry: unknown, category: string, index: Map<string, string>): boolean {
@@ -136,7 +169,7 @@ function hasRelatedMatch(entry: unknown, category: string, index: Map<string, st
     if (!Array.isArray(slugs)) continue
     const relatedType = RELATED_FIELD_TYPE[field]
     for (const slug of slugs) {
-      if (typeof slug === "string" && index.get(`${relatedType}:${slug}`) === category) return true
+      if (typeof slug === "string" && sameCategory(index.get(`${relatedType}:${slug}`), category)) return true
     }
   }
   return false
@@ -197,7 +230,7 @@ export function getRelatedByCategory(
   const reviews = buildBucket({
     type: "review",
     source: reviewsRaw,
-    matchOf: (r): MatchKind | null => (r.category === category ? "direct" : null),
+    matchOf: (r): MatchKind | null => (sameCategory(r.category, category) ? "direct" : null),
     toItem: (r) => ({ slug: r.slug, title: r.name, type: "review", category: r.category, rating: r.rating }),
     compare: (a, b) => (b.rating || 0) - (a.rating || 0),
   }, excludeSlug, maxPerType)
@@ -206,7 +239,7 @@ export function getRelatedByCategory(
     type: "comparison",
     source: comparisonsRaw,
     matchOf: (c): MatchKind | null =>
-      c.category === category || c.secondaryCategories?.includes(category) ? "direct" : null,
+      sameCategory(c.category, category) || c.secondaryCategories?.some((candidate) => sameCategory(candidate, category)) ? "direct" : null,
     toItem: (c) => ({ slug: c.slug, title: c.title, type: "comparison", category: c.category }),
     compare: (a, b) => (b.lastUpdated || "").localeCompare(a.lastUpdated || ""),
   }, excludeSlug, maxPerType)
@@ -214,7 +247,7 @@ export function getRelatedByCategory(
   const guides = buildBucket({
     type: "guide",
     source: guidesRaw,
-    matchOf: (g): MatchKind | null => (g.category === category ? "direct" : null),
+    matchOf: (g): MatchKind | null => (sameCategory(g.category, category) ? "direct" : null),
     toItem: (g) => ({ slug: g.slug, title: g.title, type: "guide", category: g.category }),
     compare: (a, b) => (b.lastUpdated || "").localeCompare(a.lastUpdated || ""),
   }, excludeSlug, maxPerType)
@@ -222,7 +255,7 @@ export function getRelatedByCategory(
   const bestPages = buildBucket({
     type: "best",
     source: bestRaw,
-    matchOf: (b): MatchKind | null => (b.category === category ? "direct" : null),
+    matchOf: (b): MatchKind | null => (sameCategory(b.category, category) ? "direct" : null),
     toItem: (b) => ({ slug: b.slug, title: b.title, type: "best", category: b.category }),
     compare: (a, b) => (b.lastUpdated || "").localeCompare(a.lastUpdated || ""),
   }, excludeSlug, maxPerType)
@@ -230,7 +263,7 @@ export function getRelatedByCategory(
   const alternatives = buildBucket({
     type: "alternative",
     source: alternativesRaw,
-    matchOf: (a): MatchKind | null => (a.category === category ? "direct" : null),
+    matchOf: (a): MatchKind | null => (sameCategory(a.category, category) ? "direct" : null),
     toItem: (a) => ({ slug: a.slug, title: a.title, type: "alternative", category: a.category }),
     compare: (a, b) => (b.lastUpdated || "").localeCompare(a.lastUpdated || ""),
   }, excludeSlug, maxPerType)
@@ -239,7 +272,7 @@ export function getRelatedByCategory(
     type: "use-case",
     source: useCasesRaw,
     matchOf: (u) =>
-      u.category === category
+      sameCategory(u.category, category)
         ? "direct"
         : hasAudienceMatch(u, category)
           ? "audience"
@@ -254,7 +287,7 @@ export function getRelatedByCategory(
     type: "hub",
     source: hubsRaw,
     matchOf: (h) =>
-      h.audience === category
+      sameCategory(h.audience, category)
         ? "direct"
         : hasAudienceMatch(h, category)
           ? "audience"
@@ -269,7 +302,7 @@ export function getRelatedByCategory(
     type: "industry",
     source: industriesRaw,
     matchOf: (i) =>
-      i.industry === category
+      sameCategory(i.industry, category)
         ? "direct"
         : hasAudienceMatch(i, category)
           ? "audience"
@@ -284,7 +317,7 @@ export function getRelatedByCategory(
     type: "research",
     source: researchRaw,
     matchOf: (r) =>
-      r.category === category
+      sameCategory(r.category, category)
         ? "direct"
         : hasRelatedMatch(r, category, categoryIndex)
           ? "related"
@@ -297,7 +330,7 @@ export function getRelatedByCategory(
     type: "statistic",
     source: statisticsRaw,
     matchOf: (s) =>
-      s.category === category
+      sameCategory(s.category, category)
         ? "direct"
         : hasRelatedMatch(s, category, categoryIndex)
           ? "related"
@@ -310,7 +343,7 @@ export function getRelatedByCategory(
     type: "blog",
     source: blogRaw,
     matchOf: (p) =>
-      p.category === category
+      sameCategory(p.category, category)
         ? "direct"
         : hasRelatedMatch(p, category, categoryIndex)
           ? "related"
@@ -323,7 +356,7 @@ export function getRelatedByCategory(
     type: "glossary",
     source: glossaryRaw,
     matchOf: (t) =>
-      t.category === category
+      sameCategory(t.category, category)
         ? "direct"
         : hasRelatedMatch(t, category, categoryIndex)
           ? "related"

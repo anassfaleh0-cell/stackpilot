@@ -1,26 +1,17 @@
 import { describe, expect, it } from "vitest"
-import { getComparisonDecision } from "./comparison-decision"
+import { getComparisonDecision, getComparisonDisplayCopy, getComparisonFeatureDisplayValue } from "./comparison-decision"
 
 describe("getComparisonDecision", () => {
+  it("hides historical rating and review-count values until the comparison data is verified", () => {
+    expect(getComparisonFeatureDisplayValue("4.6/5", false, true, "Recorded rating")).toBe("Not independently verified")
+    expect(getComparisonFeatureDisplayValue("125 reviews", false, true, "Review count")).toBe("Not independently verified")
+    expect(getComparisonFeatureDisplayValue("4.6/5", true, true, "Recorded rating")).toBe("Not independently verified")
+  })
+
   it("maps a slug winner to the human-readable product name", () => {
     expect(getComparisonDecision({
       winner: "1password",
-      tool1: "1Password",
-      tool1Slug: "1password",
-      tool1Category: "Security & Compliance",
-      tool2: "Appwrite",
-      tool2Slug: "appwrite",
-      tool2Category: "Security & Compliance",
-    })).toEqual({
-      categoriesDiffer: false,
-      winnerLabel: "1Password",
-      hasComparableWinner: true,
-    })
-  })
-
-  it("normalizes punctuation in stored winner identifiers", () => {
-    expect(getComparisonDecision({
-      winner: "1-password",
+      winnerVerified: true,
       tool1: "1Password",
       tool1Slug: "1password",
       tool1Category: "Security & Compliance",
@@ -37,6 +28,7 @@ describe("getComparisonDecision", () => {
   it("does not declare a winner across different primary categories", () => {
     expect(getComparisonDecision({
       winner: "1password",
+      winnerVerified: true,
       tool1: "1Password",
       tool1Slug: "1password",
       tool1Category: "Security & Compliance",
@@ -50,18 +42,18 @@ describe("getComparisonDecision", () => {
     })
   })
 
-  it("does not claim a winner when one linked review has no category evidence", () => {
+  it("does not publish a stored winner without explicit provenance", () => {
     expect(getComparisonDecision({
-      winner: "1password",
-      tool1: "1Password",
-      tool1Slug: "1password",
-      tool1Category: "Security & Compliance",
-      tool2: "Appwrite",
-      tool2Slug: "appwrite",
-      tool2Category: null,
+      winner: "alpha",
+      tool1: "Alpha",
+      tool1Slug: "alpha",
+      tool1Category: "Project Management",
+      tool2: "Beta",
+      tool2Slug: "beta",
+      tool2Category: "Project Management",
     })).toEqual({
       categoriesDiffer: false,
-      winnerLabel: "1Password",
+      winnerLabel: null,
       hasComparableWinner: false,
     })
   })
@@ -80,5 +72,95 @@ describe("getComparisonDecision", () => {
       winnerLabel: null,
       hasComparableWinner: false,
     })
+  })
+})
+
+
+describe("getComparisonFeatureDisplayValue", () => {
+  it("does not present unsupported booleans or plan labels as verified facts", () => {
+    expect(getComparisonFeatureDisplayValue(true, false)).toBe("Not verified")
+    expect(getComparisonFeatureDisplayValue(false, undefined)).toBe("Not verified")
+    expect(getComparisonFeatureDisplayValue("Freemium", false)).toBe("Not verified")
+  })
+
+  it("shows values only when feature-level verification is explicitly true", () => {
+    expect(getComparisonFeatureDisplayValue(true, true)).toBe(true)
+    expect(getComparisonFeatureDisplayValue(false, true)).toBe(false)
+    expect(getComparisonFeatureDisplayValue("Freemium", true)).toBe("Freemium")
+  })
+
+  it("shows editorial role labels for decision guides without treating booleans as verified", () => {
+    expect(getComparisonFeatureDisplayValue("AI-assisted drafting", false, true)).toBe("AI-assisted drafting")
+    expect(getComparisonFeatureDisplayValue("   ", false, true)).toBe("Not recorded")
+    expect(getComparisonFeatureDisplayValue(true, false, true)).toBe("Not verified")
+  })
+})
+
+
+describe("getComparisonDisplayCopy", () => {
+  it("replaces unsupported winner, rating, and price claims in cross-category copy", () => {
+    const copy = getComparisonDisplayCopy({
+      tool1: "Canva",
+      tool2: "Framer",
+      tool1Category: "Design & Creative",
+      tool2Category: "Web Design",
+      winnerVerified: false,
+      description: "Canva is our overall pick — Canva 4.6/5, Framer 4.3/5; Canva from $12.99/mo.",
+      verdict: "We name Canva as the overall winner. Canva achieves a 4.6/5 rating.",
+    })
+
+    expect(copy.description).toContain("different primary categories")
+    expect(copy.verdict).toContain("different primary categories")
+    expect(copy.description).not.toContain("overall pick")
+    expect(copy.description).not.toContain("4.6/5")
+    expect(copy.description).not.toContain("$12.99")
+    expect(copy.verdict).not.toContain("overall winner")
+    expect(copy.verdict).not.toContain("4.6/5")
+  })
+
+  it("preserves authored role-based copy for a decision guide across different categories", () => {
+    const copy = getComparisonDisplayCopy({
+      tool1: "ChatGPT",
+      tool2: "Appwrite",
+      tool1Category: "AI & Machine Learning",
+      tool2Category: "Developer Tools",
+      winnerVerified: false,
+      decisionGuide: true,
+      description: "ChatGPT focuses on conversational AI assistance; Appwrite focuses on backend services.",
+      verdict: "Choose based on the workflow you need; there is no universal winner.",
+    })
+
+    expect(copy.description).toContain("ChatGPT focuses on conversational AI assistance")
+    expect(copy.verdict).toContain("there is no universal winner")
+  })
+
+  it("still replaces unsupported metrics in a decision guide", () => {
+    const copy = getComparisonDisplayCopy({
+      tool1: "Alpha",
+      tool2: "Beta",
+      tool1Category: "Category A",
+      tool2Category: "Category B",
+      winnerVerified: false,
+      decisionGuide: true,
+      description: "Alpha scores 4.8/5 and costs $20.",
+      verdict: "Alpha is the overall winner.",
+    })
+    expect(copy.description).not.toContain("4.8/5")
+    expect(copy.verdict).not.toContain("overall winner")
+  })
+
+  it("preserves neutral copy for same-category comparisons when no unsupported claims exist", () => {
+    const copy = getComparisonDisplayCopy({
+      tool1: "Linear",
+      tool2: "Jira",
+      tool1Category: "Project Management",
+      tool2Category: "Project Management",
+      winnerVerified: false,
+      description: "Compare workflow flexibility, integrations, and migration effort.",
+      verdict: "Test representative workflows and confirm permissions before switching.",
+    })
+
+    expect(copy.description).toBe("Compare workflow flexibility, integrations, and migration effort.")
+    expect(copy.verdict).toBe("Test representative workflows and confirm permissions before switching.")
   })
 })

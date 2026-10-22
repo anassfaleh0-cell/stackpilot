@@ -224,7 +224,7 @@
     },
     {
       "title": "Integrations",
-      "body": "Integrates with GitHub, GitLab, Slack, Jira, Vercel, Netlify, Linear, Docker, and 2+ more.",
+      "body": "Integrates with GitHub, GitLab, Slack, Jira, Vercel, Netlify, Linear, Docker, and additional features.",
       "type": "text"
     },
     {
@@ -255,7 +255,7 @@
     },
     {
       "title": "Performance",
-      "body": "Strong performance with fast load times.",
+      "body": "Test Sentry with the event volume and tracing configuration expected in production. Review event ingestion delay, alert delivery, search responsiveness, and the effect of sampling on debugging coverage; this page does not provide an independent speed benchmark.",
       "type": "text"
     },
     {
@@ -280,7 +280,7 @@
     },
     {
       "title": "Team Size Fit",
-      "body": "Sentry accommodates teams of all sizes with generous free tier. Best ROI for 5-50 person teams.",
+      "body": "Sentry's fit depends more on application count, event volume, debugging needs, and retention requirements than on headcount alone. Estimate expected events and traces, then check the current plan limits and cost before rolling it out across projects.",
       "type": "text"
     },
     {
@@ -300,7 +300,7 @@
     },
     {
       "title": "Migration Guide",
-      "body": "Migration rated low complexity. Most teams transition within 1-2 weeks. Parallel testing recommended.",
+      "body": "Roll out error monitoring by enabling one service first, confirming source maps and release identifiers, checking data scrubbing, and tuning alert ownership. Compare incoming events with the existing monitoring process before expanding; migration effort depends on instrumentation and framework coverage.",
       "type": "text"
     },
     {
@@ -340,7 +340,7 @@
     },
     {
       "question": "Does Sentry integrate with other tools?",
-      "answer": "Yes, integrates with GitHub, GitLab, Slack, Jira, Vercel. And 5+ more."
+      "answer": "Yes, integrates with GitHub, GitLab, Slack, Jira, Vercel. and additional features."
     },
     {
       "question": "Is Sentry suitable for small teams?",
@@ -384,7 +384,7 @@
     },
     {
       "question": "Is Sentry easy to set up?",
-      "answer": "Yes, most teams start within hours."
+      "answer": "Setup depends on the framework, release pipeline, source maps, and privacy requirements. Test a controlled error from capture through alert and resolution before estimating the effort for all services."
     },
     {
       "question": "How often does Sentry update?",
@@ -404,7 +404,7 @@
     },
     {
       "question": "What ROI can teams expect?",
-      "answer": "Positive ROI typically within 3-6 months from improved developer tools workflows."
+      "answer": "Measure whether Sentry reduces time to detect and diagnose incidents in your own workflow. Compare a baseline with a pilot using time-to-triage, alert usefulness, and repeated-error rates; we do not have evidence to promise a fixed ROI timeframe."
     },
     {
       "question": "What platforms does Sentry support?",
@@ -479,6 +479,6 @@
   },
   "difficulty": "Advanced",
   "learningCurve": "Steep — requires dedicated training time for full proficiency",
-  "whoShouldUse": "Sentry is best suited for enterprises and power users who need advanced developer tools capabilities. Teams with dedicated IT support will get the most from its extensive feature set.",
-  "whoShouldNotUse": "Sentry may be overwhelming for users who only need basic developer tools functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
+  "whoShouldUse": "Software teams that need to investigate application errors, trace failures, and understand releases can evaluate Sentry. Test it with representative exceptions, source maps, deployment markers, and alert rules, then assess whether the captured context helps engineers resolve issues without excessive noise.",
+  "whoShouldNotUse": "It may be unnecessary for a small or stable application that already has sufficient error reporting. Teams should validate framework coverage, event-volume limits, data scrubbing, retention, and alert routing before sending production telemetry."
 }

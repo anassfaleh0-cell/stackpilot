@@ -49,6 +49,11 @@ async function fetchText(pathname) {
     headers: { "user-agent": "PilotStack-Route-Smoke-Check/1.0" },
     signal: AbortSignal.timeout(15000),
   })
+  const finalOrigin = new URL(response.url).origin
+  const expectedOrigin = new URL(BASE_URL).origin
+  if (finalOrigin !== expectedOrigin) {
+    throw new Error(`request escaped smoke-test origin: expected ${expectedOrigin}, received ${finalOrigin}`)
+  }
   return { response, body: await response.text() }
 }
 
@@ -88,6 +93,13 @@ async function checkRoute(pathname) {
     } catch {
       fail(`${pathname} has an invalid canonical URL: ${canonicalHref}`)
       return
+    }
+    if (pathname === "/") {
+      const publisherMeta = body.match(/<meta\b(?=[^>]*\bname=["\']google-adsense-account["\'])(?=[^>]*\bcontent=["\']ca-pub-6523926892521982["\'])[^>]*>/i)?.[0]
+      if (!publisherMeta) {
+        fail("/ is missing the AdSense publisher meta tag for ca-pub-6523926892521982")
+        return
+      }
     }
     const robotsMeta = body.match(/<meta\b(?=[^>]*\bname=["']robots["'])[^>]*>/i)?.[0] || ""
     if (/\bcontent=["'][^"']*\bnoindex\b/i.test(robotsMeta)) {

@@ -1,4 +1,4 @@
-import type { MetadataRoute } from "next"
+import type { MetadataRoute } from "next/dist/lib/metadata/types/metadata-interface"
 import { siteConfig, categories, toolPages, editorialLinks } from "@/lib/constants"
 import {
   getAllReviews, getAllComparisons, getAllGuides, getAllGlossaryTerms, getAllBlogPosts,
@@ -8,9 +8,15 @@ import {
 import { isNoindexed } from "@/lib/noindex"
 import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
 import { getSitemapLastModified } from "@/lib/content/sitemap-date"
+import { filterSitemapEntries, isRetiredComparisonSlug } from "@/lib/sitemap/retired-comparisons"
+import { REDIRECTED_ALTERNATIVE_SLUGS, REDIRECTED_BEST_SLUGS } from "@/lib/sitemap/redirected-content"
 
 function isQuality(slug: string, dir: string): boolean {
   return !isNoindexed(dir, slug)
+}
+
+function isPublished<T extends { slug: string }>(record: T): boolean {
+  return (record as T & { publicationStatus?: string }).publicationStatus !== "draft"
 }
 
 const staticPages: MetadataRoute.Sitemap = [
@@ -33,13 +39,13 @@ const staticPages: MetadataRoute.Sitemap = [
   { url: `${siteConfig.url}/contact`, changeFrequency: "monthly", priority: 0.3 },
   { url: `${siteConfig.url}/privacy`, changeFrequency: "yearly", priority: 0.2 },
   { url: `${siteConfig.url}/terms`, changeFrequency: "yearly", priority: 0.2 },
+  { url: `${siteConfig.url}/dmca`, changeFrequency: "yearly", priority: 0.2 },
   { url: `${siteConfig.url}/press`, changeFrequency: "monthly", priority: 0.4 },
   { url: `${siteConfig.url}/brand-assets`, changeFrequency: "monthly", priority: 0.3 },
   { url: `${siteConfig.url}/media-kit`, changeFrequency: "monthly", priority: 0.3 },
   { url: `${siteConfig.url}/cookies`, changeFrequency: "yearly", priority: 0.2 },
   { url: `${siteConfig.url}/sitemap-html`, changeFrequency: "weekly", priority: 0.5 },
   { url: `${siteConfig.url}/methodology`, changeFrequency: "monthly", priority: 0.5 },
-  { url: `${siteConfig.url}/dmca`, changeFrequency: "yearly", priority: 0.2 },
   ...editorialLinks.map((l) => ({
     url: `${siteConfig.url}${l.href}`,
     changeFrequency: "monthly" as const,
@@ -47,20 +53,23 @@ const staticPages: MetadataRoute.Sitemap = [
   })),
 ]
 
+export const dynamic = "force-static"
+
 export default function sitemap(): MetadataRoute.Sitemap {
   // Derive actual lastModified dates from content for content pages
-  const reviews = getAllReviews().filter((r) => isQuality(r.slug, "reviews"))
-  const comparisons = getAllComparisons().filter((c) => isQuality(c.slug, "comparisons"))
-  const guides = getAllGuides().filter((g) => isQuality(g.slug, "guides"))
-  const blogPosts = getAllBlogPosts().filter((p) => isQuality(p.slug, "blog"))
-  const glossary = getAllGlossaryTerms().filter((t) => isQuality(t.slug, "glossary"))
-  const alternatives = getAllAlternatives().filter((a) => isQuality(a.slug, "alternatives"))
-  const useCases = getAllUseCases().filter((u) => isQuality(u.slug, "use-cases"))
-  const industries = getAllIndustries().filter((i) => isQuality(i.slug, "industries"))
-  const best = getAllBest().filter((b) => isQuality(b.slug, "best"))
-  const hubs = getAllHubs().filter((h) => isQuality(h.slug, "hubs"))
-  const research = getAllResearch().filter((r) => isQuality(r.slug, "research"))
-  const statistics = getAllStatistics().filter((s) => isQuality(s.slug, "statistics"))
+  const reviews = getAllReviews().filter((r) => isPublished(r) && isQuality(r.slug, "reviews"))
+  // Keep retired/draft comparison records out of the sitemap even if an upstream registry changes.
+  const comparisons = getAllComparisons().filter((c) => isPublished(c) && !isRetiredComparisonSlug(c.slug) && isQuality(c.slug, "comparisons"))
+  const guides = getAllGuides().filter((g) => isPublished(g) && isQuality(g.slug, "guides"))
+  const blogPosts = getAllBlogPosts().filter((p) => isPublished(p) && isQuality(p.slug, "blog"))
+  const glossary = getAllGlossaryTerms().filter((t) => isPublished(t) && isQuality(t.slug, "glossary"))
+  const alternatives = getAllAlternatives().filter((a) => isPublished(a) && !REDIRECTED_ALTERNATIVE_SLUGS.has(a.slug) && isQuality(a.slug, "alternatives"))
+  const useCases = getAllUseCases().filter((u) => isPublished(u) && isQuality(u.slug, "use-cases"))
+  const industries = getAllIndustries().filter((i) => isPublished(i) && isQuality(i.slug, "industries"))
+  const best = getAllBest().filter((b) => isPublished(b) && !REDIRECTED_BEST_SLUGS.has(b.slug) && isQuality(b.slug, "best"))
+  const hubs = getAllHubs().filter((h) => isPublished(h) && isQuality(h.slug, "hubs"))
+  const research = getAllResearch().filter((r) => isPublished(r) && isQuality(r.slug, "research"))
+  const statistics = getAllStatistics().filter((s) => isPublished(s) && isQuality(s.slug, "statistics"))
 
   const entries: MetadataRoute.Sitemap = [
     ...staticPages,
@@ -166,10 +175,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ]
 
-  const seen = new Set<string>()
-  return entries.filter((entry) => {
-    if (seen.has(entry.url)) return false
-    seen.add(entry.url)
-    return true
-  })
+  // Defense in depth: filter redirects and duplicate URLs using the tested shared rule.
+  return filterSitemapEntries(entries)
 }

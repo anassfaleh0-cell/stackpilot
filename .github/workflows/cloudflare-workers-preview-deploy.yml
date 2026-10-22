@@ -26,7 +26,7 @@ jobs:
       - name: Checkout reviewed Cloudflare migration candidate
         uses: actions/checkout@v4
         with:
-          ref: 384864a405e85e4d3bb36db5a1f27f58f4dd08fb
+          ref: ${{ github.sha }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -136,7 +136,7 @@ jobs:
           PREVIEW_URL: ${{ steps.deploy.outputs.preview_url }}
         run: |
           set -euo pipefail
-          for path in / /reviews/linear /comparisons/activecampaign-vs-ahrefs /best/seo-tools /bests/seo-tools /best/best-seo-tools /affiliate-disclosure /privacy /contact /robots.txt /sitemap.xml /ads.txt /rss.xml /api/search?q=asana; do
+          for path in / /reviews/linear /comparisons/activecampaign-vs-ahrefs /best/seo-tools /bests /bests/seo-tools /blogs /blogs/best-seo-tools-for-agencies /glossarys /glossarys/agile /best/best-seo-tools /affiliate-disclosure /privacy-policy /privacy /cookies /terms /contact /robots.txt /sitemap.xml /ads.txt /rss.xml /api/search?q=asana; do
             # Follow intentional 308/301 legacy redirects and assert the final destination is healthy.
             code="$(curl --location --silent --show-error --output /tmp/pilotstack-preview-response.txt --write-out '%{http_code}' "$PREVIEW_URL$path")"
             echo "$code $path"
@@ -163,6 +163,20 @@ jobs:
           }
           console.log('Search endpoint returns results without raw comparison scores or pricing claims.');
           NODE
+          # Verify the exact AdSense seller declaration and sitemap scale, not just HTTP 200.
+          curl --silent --show-error --fail "$PREVIEW_URL/ads.txt" > /tmp/pilotstack-ads.txt
+          grep -Fxq 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0' /tmp/pilotstack-ads.txt
+          curl --silent --show-error --fail "$PREVIEW_URL/sitemap.xml" > /tmp/pilotstack-sitemap.xml
+          grep -Fq '<loc>https://pilotstack.online/reviews/linear</loc>' /tmp/pilotstack-sitemap.xml
+          sitemap_url_count="$(grep -o '<loc>' /tmp/pilotstack-sitemap.xml | wc -l | tr -d ' ')"
+          echo "Sitemap URL entries: $sitemap_url_count"
+          test "$sitemap_url_count" -gt 1000 || { echo "Sitemap unexpectedly contains too few URLs"; exit 1; }
+          curl --silent --show-error --fail "$PREVIEW_URL/privacy" > /tmp/pilotstack-privacy.html
+          grep -Fq 'rel="canonical" href="https://pilotstack.online/privacy"' /tmp/pilotstack-privacy.html
+          if grep -Eiq 'name="robots"[^>]*content="[^"]*noindex|content="[^"]*noindex[^"]*"[^>]*name="robots"' /tmp/pilotstack-privacy.html; then
+            echo "Unexpected noindex directive on /privacy"
+            exit 1
+          fi
           curl --silent --show-error --fail "$PREVIEW_URL/reviews/linear" > /tmp/pilotstack-review.html
           grep -Fq 'rel="canonical" href="https://pilotstack.online/reviews/linear"' /tmp/pilotstack-review.html
           if grep -Eiq 'name="robots"[^>]*content="[^"]*noindex|content="[^"]*noindex[^"]*"[^>]*name="robots"' /tmp/pilotstack-review.html; then
@@ -206,7 +220,7 @@ jobs:
             grep -Eio '.{0,70}\\$[0-9]+([.][0-9]+)?/mo per[. ].{0,70}' /tmp/pilotstack-comparison.html | head -10
             exit 1
           fi
-          grep -Fq 'https://pilotstack.online/reviews/linear' <(curl --silent --show-error --fail "$PREVIEW_URL/sitemap.xml")
+          grep -Fq '<loc>https://pilotstack.online/reviews/linear</loc>' /tmp/pilotstack-sitemap.xml
           if grep -Eiq '0\+? Software Reviews|0\+? Comparisons|0\+? Guides' /tmp/pilotstack-home.html; then
             echo "Homepage content counters indicate the content registry is empty"
             exit 1

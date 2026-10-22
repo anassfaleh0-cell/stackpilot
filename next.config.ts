@@ -47,7 +47,20 @@ const csp = [
 ].join("; ")
 
 const nextConfig: NextConfig = {
+  // OpenNext Cloudflare adapts Next.js standalone build output.
   output: "standalone",
+  // The content registry reads committed JSON at runtime. Explicitly trace these
+  // data files into Next's server output so Cloudflare Workers can resolve review,
+  // comparison, guide and sitemap records after deployment.
+  outputFileTracingIncludes: {
+    "/*": [
+      "./content/**/*.json",
+      "./src/lib/entities/**/*.json",
+      "./src/data/**/*.json",
+      "./noindex-list.json",
+      "./public/**/*.json",
+    ],
+  },
   poweredByHeader: false,
   compress: true,
   generateEtags: true,
@@ -60,11 +73,28 @@ const nextConfig: NextConfig = {
       destination: "https://pilotstack.online/:path*",
       permanent: true,
     },
+    // Preserve the former privacy-policy URL as a permanent alias for the current policy page.
+    {
+      source: "/privacy-policy",
+      destination: "/privacy",
+      permanent: true,
+    },
     // Legacy plural route names surfaced in Search Console. The singular routes
     // and matching content records exist in this repository.
     {
+      // Legacy collection roots and nested paths both need permanent redirects.
+      source: "/blogs",
+      destination: "/blog",
+      permanent: true,
+    },
+    {
       source: "/blogs/:slug",
       destination: "/blog/:slug",
+      permanent: true,
+    },
+    {
+      source: "/glossarys",
+      destination: "/glossary",
       permanent: true,
     },
     {
@@ -73,12 +103,58 @@ const nextConfig: NextConfig = {
       permanent: true,
     },
     {
+      source: "/bests",
+      destination: "/best",
+      permanent: true,
+    },
+    // GSC surfaced a legacy SEO tools slug whose canonical record is best-seo-tools.
+    // Redirect both singular and plural variants to the real published page.
+    {
+      source: "/best/seo-tools",
+      destination: "/best/best-seo-tools",
+      permanent: true,
+    },
+    {
+      source: "/bests/seo-tools",
+      destination: "/best/best-seo-tools",
+      permanent: true,
+    },
+    // The legacy startup productivity shortlist is intentionally unpublished because its scores,
+    // prices, and methodology claims are unverified. Consolidate it on the live productivity guide.
+    {
+      source: "/best/best-productivity-startups",
+      destination: "/best/best-productivity-tools",
+      permanent: true,
+    },
+    {
+      source: "/bests/best-productivity-startups",
+      destination: "/best/best-productivity-tools",
+      permanent: true,
+    },
+    {
       source: "/bests/:slug",
       destination: "/best/:slug",
       permanent: true,
     },
+    // Consolidate the intentionally unpublished, unverified Grammarly alternatives draft
+    // onto the real, published Grammarly review rather than serving a dead-end 404.
+    {
+      source: "/alternatives/clickup-alternatives",
+      destination: "/reviews/clickup",
+      permanent: true,
+    },
+    {
+      source: "/alternatives/grammarly-alternatives",
+      destination: "/reviews/grammarly",
+      permanent: true,
+    },
     // Retire legacy individual-author URLs that no longer have matching public
     // author profiles; consolidate them on the current, transparent editorial team page.
+    {
+      source: "/authors/sarah-chen",
+      destination: "/authors/pilotstack-team",
+      permanent: true,
+    },
     {
       source: "/authors/priya-sharma",
       destination: "/authors/pilotstack-team",

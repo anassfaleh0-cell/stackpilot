@@ -19,6 +19,20 @@ import path from "node:path"
 
 const SITE_URL = "https://pilotstack.online"
 const CONTENT_DIR = path.resolve(process.cwd(), "content")
+const NOINDEX_FILE = path.resolve(process.cwd(), "noindex-list.json")
+
+function normalizeComparisonCategory(category) {
+  const value = String(category || "").trim().toLowerCase().replace(/\s+/g, " ")
+  const aliases = {
+    "analytics": "analytics-data",
+    "analytics & data": "analytics-data",
+    "hr & payroll": "hr-people",
+    "hr & people": "hr-people",
+    "video communication": "communication",
+    "communication": "communication",
+  }
+  return aliases[value] || value
+}
 
 let totalIssues = 0
 let totalWarnings = 0
@@ -117,7 +131,8 @@ function checkRobots() {
 
   // Source-level checks must not emit an unconditional PASS.
   const aiBots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "PerplexityBot"]
-  const missingAiBotRules = aiBots.filter((bot) => !new RegExp(`userAgent\\s*:\\s*["']${bot}["']`).test(content))
+  const configuredAiBots = new Set([...content.matchAll(/userAgent\s*:\s*["']([^"']+)["']/g)].map((match) => match[1]))
+  const missingAiBotRules = aiBots.filter((bot) => !configuredAiBots.has(bot))
   if (missingAiBotRules.length > 0) {
     log("warn", `AI crawler user-agent rules are not explicitly declared: ${missingAiBotRules.join(", ")}`)
   } else {
@@ -127,9 +142,19 @@ function checkRobots() {
   const privatePaths = ["/api/", "/admin/", "/dashboard", "/search", "/_global-error"]
   const namedCrawlerRules = [...content.matchAll(/userAgent\s*:\s*["']([^"']+)["']([\s\S]*?)(?=userAgent\s*:|sitemap\s*:|$)/g)]
     .filter((match) => match[1] !== "*")
-  const missingPrivatePathBlocks = namedCrawlerRules
-    .filter((match) => privatePaths.some((route) => !match[2].includes(route)))
-    .map((match) => match[1])
+  // A shared disallow array is valid when every named rule references it.
+  // Do not report false positives merely because the route strings live once
+  // in a shared constant rather than being repeated inside each rule object.
+  const sharedDisallowList = content.match(/const\s+disallowedPaths\s*=\s*\[([\s\S]*?)\]/)
+  const sharedDisallowListCoversPrivatePaths =
+    Boolean(sharedDisallowList) &&
+    privatePaths.every((route) => sharedDisallowList[1].includes(route)) &&
+    namedCrawlerRules.every((match) => /disallow\s*:\s*disallowedPaths/.test(match[0]))
+  const missingPrivatePathBlocks = sharedDisallowListCoversPrivatePaths
+    ? []
+    : namedCrawlerRules
+        .filter((match) => privatePaths.some((route) => !match[2].includes(route)))
+        .map((match) => match[1])
   if (missingPrivatePathBlocks.length > 0) {
     log("warn", `Named crawler rules do not visibly repeat all private/search path exclusions: ${missingPrivatePathBlocks.join(", ")}; inspect the generated robots.txt rule groups`)
   } else if (namedCrawlerRules.length > 0) {
@@ -141,11 +166,20 @@ function checkRobots() {
 function checkContentQuality() {
   console.log("\n\x1b[1m3. Content Quality (Thin Content Detection)\x1b[0m")
 
+  const noindexData = readJson(NOINDEX_FILE)
+  const noindexSets = {}
+  if (noindexData?.directories) {
+    for (const [dir, data] of Object.entries(noindexData.directories)) {
+      noindexSets[dir] = new Set(data.noindex || [])
+    }
+  }
+
   // Comparison pages render a concise evidence profile from each linked review.
   // Include only the fields actually shown there so the audit does not call a
   // page thin solely because that copy lives in the linked review record.
   const reviewsBySlug = new Map()
   const crossCategoryComparisons = []
+  let draftComparisonsSkipped = 0
   const reviewsDir = path.join(CONTENT_DIR, "reviews")
   for (const file of readDir(reviewsDir)) {
     const review = readJson(path.join(reviewsDir, file))
@@ -169,14 +203,25 @@ function checkContentQuality() {
     /choosing the right marketing\s*&\s*seo software/i,
     /adequate performance for most use cases\./i,
     /functional organized interface\./i,
+    /strong performance with fast load times\./i,
+    /delivers reliable performance with 99\.9% uptime SLA/i,
+    /delivers reliable performance with solid performance suitable for most business use cases/i,
     /written against our published editorial methodology/i,
     /updated when the underlying content is reviewed/i,
+    /positive ROI typically within 3-6 months/i,
+    /most teams start within hours/i,
+    /a teams team uses/i,
+    /updates weekly[^.]*major feature releases quarterly/i,
+    /perfect for freelancers and independent professionals/i,
+    /and \d+\+ more\./i,
+    /workfl(?:$|\s)/i,
   ]
 
   for (const ct of contentTypes) {
     const dir = path.join(CONTENT_DIR, ct.dir)
     const files = readDir(dir)
     let thinCount = 0
+    let noindexCount = 0
     let missingDescription = 0
     let missingFaq = 0
     let genericTemplateCount = 0
@@ -186,8 +231,18 @@ function checkContentQuality() {
     for (const file of files) {
       const data = readJson(path.join(dir, file))
       if (!data) continue
+      if (ct.dir === "comparisons" && data.publicationStatus === "draft") {
+        draftComparisonsSkipped++
+        continue
+      }
 
       const slug = file.replace(".json", "")
+      const isNoindexed = noindexSets[ct.dir]?.has(slug)
+
+      if (isNoindexed) {
+        noindexCount++
+        continue
+      }
 
       const searchableContent = JSON.stringify(data)
       const matchingGenericPatterns = genericTemplatePatterns.filter((pattern) => pattern.test(searchableContent))
@@ -237,7 +292,7 @@ function checkContentQuality() {
           for (const value of (review.cons || []).slice(0, 2)) words += wordCount(value)
         }
         const [review1, review2] = linkedReviews
-        if (review1?.category && review2?.category && review1.category !== review2.category) {
+        if (data.decisionGuide !== true && review1?.category && review2?.category && normalizeComparisonCategory(review1.category) !== normalizeComparisonCategory(review2.category)) {
           crossCategoryComparisons.push({
             slug: data.slug,
             tool1: data.tool1,
@@ -315,7 +370,7 @@ function checkContentQuality() {
       }
     }
 
-    const eligibleRecords = files.length
+    const eligibleRecords = files.length - noindexCount
     if (thinCount > 0 && eligibleRecords > 0) {
       const pct = ((thinCount / eligibleRecords) * 100).toFixed(1)
       log("warn", ct.dir + ": " + thinCount + "/" + eligibleRecords + " eligible source records have fewer than " + ct.minWords + " words in audited fields [" + pct + "%]. This is a source-data signal, not a rendered-page word count; runtime-derived copy is not measured. Samples: " + JSON.stringify(thinSamples.slice(0, 8)))
@@ -330,14 +385,18 @@ function checkContentQuality() {
       log("warn", ct.dir + ": " + missingFaq + " source records missing a FAQ data opportunity")
     }
     if (genericTemplateCount > 0) {
-      log("warn", `${ct.dir}: ${genericTemplateCount} indexed pages contain known generic filler phrases; examples: ${genericTemplateExamples.join(", ")}`)
+      log("warn", `${ct.dir}: ${genericTemplateCount} raw source records contain known generic phrase patterns; configured matches are filtered from rendered text by the registry, but source cleanup is still recommended. Examples: ${genericTemplateExamples.join(", ")}`)
     } else {
       log("pass", `${ct.dir}: No known generic filler phrases found`)
     }
   }
 
   if (crossCategoryComparisons.length > 0) {
-    log("warn", `comparisons: ${crossCategoryComparisons.length} pair products from different linked-review categories; pages should explain distinct use cases rather than present a universal winner. Samples: ${JSON.stringify(crossCategoryComparisons.slice(0, 10))}`)
+    log("warn", `comparisons: ${crossCategoryComparisons.length} eligible comparison records pair products from different linked-review categories; rendered pages suppress unverified winner/score claims, but each live pairing still needs editorial relevance review. Samples: ${JSON.stringify(crossCategoryComparisons.slice(0, 10))}`)
+    log("warn", `Full cross-category review list (slug and categories): ${JSON.stringify(crossCategoryComparisons.map(({ slug, category1, category2 }) => ({ slug, category1, category2 })))}`)
+  }
+  if (draftComparisonsSkipped > 0) {
+    log("pass", `comparisons: excluded ${draftComparisonsSkipped} explicit draft records from live SEO checks; they remain in the editorial review audit before publication`)
   }
 }
 
@@ -345,21 +404,31 @@ function checkContentQuality() {
 function checkNoindex() {
   console.log("\n\x1b[1m4. Noindex Management\x1b[0m")
 
-  // The legacy manifest is not the runtime source of truth: isNoindexed() is
-  // intentionally disabled so content is improved in place rather than hidden.
-  // Audit every content record above, and warn if someone reactivates the old
-  // manifest-based behavior without updating this diagnostic.
-  const noindexImplementationPath = path.resolve(process.cwd(), "src/lib/noindex.ts")
-  if (!fs.existsSync(noindexImplementationPath)) {
-    log("fail", "src/lib/noindex.ts not found; cannot verify indexability policy")
+  const noindexData = readJson(NOINDEX_FILE)
+  if (!noindexData) {
+    log("fail", "noindex-list.json not found or invalid")
     return
   }
 
-  const implementation = fs.readFileSync(noindexImplementationPath, "utf-8")
-  if (/export function isNoindexed\([^)]*\): boolean\s*\{\s*return false\s*\}/.test(implementation)) {
-    log("pass", "Legacy noindex manifest does not suppress content; all records remain eligible for quality audits")
-  } else {
-    log("warn", "Indexability policy is no longer the expected always-indexable setting; inspect src/lib/noindex.ts and update this audit before using legacy manifest counts")
+  const summary = noindexData.summary
+  if (summary) {
+    const ratio = ((summary.totalNoindex / summary.totalFiles) * 100).toFixed(1)
+    log("info", `Noindex ratio: ${summary.totalNoindex}/${summary.totalFiles} files (${ratio}%)`)
+
+    if (parseFloat(ratio) > 80) {
+      log("warn", `High noindex ratio (${ratio}%) - many pages may not be indexed by search engines`)
+    } else {
+      log("pass", "Noindex ratio is within acceptable range")
+    }
+  }
+
+  // Check each directory
+  for (const [dir, data] of Object.entries(noindexData.directories || {})) {
+    if (data.stats) {
+      if (data.stats.thinContent > 0) {
+        log("warn", `${dir}: ${data.stats.thinContent} thin content pages (avg ${data.stats.avgWords} words)`)
+      }
+    }
   }
 }
 
@@ -511,13 +580,21 @@ function checkPerformance() {
 function checkEEAT() {
   console.log("\n\x1b[1m8. E-E-A-T Signals\x1b[0m")
 
-  // Check for author pages
-  const authorsDir = path.resolve(process.cwd(), "content/authors")
-  if (fs.existsSync(authorsDir)) {
-    const authors = readDir(authorsDir)
-    log("pass", `${authors.length} author profiles exist`)
+  // Public author profiles are defined in the route and slug registry, not content/authors JSON.
+  const authorRegistryPath = path.resolve(process.cwd(), "src/lib/authors.ts")
+  if (fs.existsSync(authorRegistryPath)) {
+    const authorRegistry = fs.readFileSync(authorRegistryPath, "utf8")
+    const registryStart = authorRegistry.indexOf("PUBLIC_AUTHOR_SLUGS")
+    const registryOpen = authorRegistry.indexOf("[", registryStart)
+    const registryClose = authorRegistry.indexOf("]", registryOpen)
+    const slugList = registryStart >= 0 && registryOpen >= 0 && registryClose > registryOpen
+      ? authorRegistry.slice(registryOpen + 1, registryClose)
+      : ""
+    const authorCount = Math.floor((slugList.split('"').length - 1) / 2)
+    if (authorCount > 0) log("pass", `${authorCount} public author profile(s) are configured`)
+    else log("warn", "No public author profiles are configured in src/lib/authors.ts")
   } else {
-    log("warn", "Author profiles directory not found")
+    log("warn", "Author profile registry not found")
   }
 
   // Check for methodology page
@@ -553,6 +630,23 @@ function checkEEAT() {
   }
 }
 
+// ─── 9. AdSense ads.txt ─────────────────────────────────────────────────────
+function checkAdsTxt() {
+  console.log("\n\x1b[1m9. AdSense ads.txt Validation\x1b[0m")
+  const adsTxtPath = path.resolve(process.cwd(), "public/ads.txt")
+  if (!fs.existsSync(adsTxtPath)) {
+    log("fail", "public/ads.txt is missing; /ads.txt may return 404")
+    return
+  }
+  const lines = fs.readFileSync(adsTxtPath, "utf-8").split(/\r?\n/).map((line) => line.trim()).filter(Boolean)
+  const expected = "google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0"
+  if (lines.some((line) => line.replace(/\s+/g, " ") === expected)) log("pass", "ads.txt contains the expected Google publisher DIRECT declaration")
+  else log("fail", "ads.txt does not contain the exact expected Google publisher declaration")
+  const malformed = lines.filter((line) => /^google\.com\s*,/i.test(line) && !/^google\.com\s*,\s*pub-\d+\s*,\s*DIRECT\s*,\s*[a-f0-9]+\s*$/i.test(line))
+  if (malformed.length) log("warn", `ads.txt contains ${malformed.length} malformed Google declaration(s); review line formatting`)
+  else log("pass", "Google ads.txt declaration formatting looks valid")
+}
+
 // ─── Run All Checks ─────────────────────────────────────────────────────────
 function main() {
   console.log("\x1b[1m\x1b[36m╔══════════════════════════════════════════╗")
@@ -567,6 +661,7 @@ function main() {
   checkInternalLinks()
   checkPerformance()
   checkEEAT()
+  checkAdsTxt()
 
   console.log("\n\x1b[1m─── Summary ────────────────────────────────────────\x1b[0m")
   console.log(`  \x1b[32m✔ ${totalPassed} passed\x1b[0m`)

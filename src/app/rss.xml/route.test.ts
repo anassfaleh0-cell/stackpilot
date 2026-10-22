@@ -38,7 +38,9 @@ describe("RSS feed", () => {
     for (const match of itemLinks) {
       const url = new URL(match[1])
       const [, route, slug] = url.pathname.split("/")
-      const type = ROUTE_TYPES[route]
+      const type = Object.prototype.hasOwnProperty.call(ROUTE_TYPES, route)
+        ? ROUTE_TYPES[route as keyof typeof ROUTE_TYPES]
+        : undefined
       if (!type || !slug) throw new Error("unexpected RSS route: " + url.pathname)
       expect(isContentAvailable(type, slug), "RSS item points to unavailable content: " + url.pathname).toBe(true)
     }

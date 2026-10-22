@@ -23,27 +23,38 @@ export async function POST(request: Request) {
   }
 
   try {
-    const formData = await request.formData()
-    const email = formData.get("email")
+    const isJson = request.headers.get("content-type")?.includes("application/json") ?? false
+    const body = isJson ? await request.json() : null
+    const formData = isJson ? null : await request.formData()
+    const email = isJson
+      ? (body && typeof body === "object" ? (body as { email?: unknown }).email : null)
+      : formData?.get("email")
 
     if (!email || typeof email !== "string" || !email.trim()) {
+      if (isJson) return Response.json({ error: "Please enter a valid email address." }, { status: 400 })
       return Response.redirect(new URL("/?error=missing-email#newsletter", request.url))
     }
 
     const cleanEmail = email.trim().toLowerCase()
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail) || cleanEmail.length > 254) {
+      if (isJson) return Response.json({ error: "Please enter a valid email address." }, { status: 400 })
       return Response.redirect(new URL("/?error=invalid-email#newsletter", request.url))
     }
 
-    if (cleanEmail.length > 254) {
-      return Response.redirect(new URL("/?error=invalid-email#newsletter", request.url))
+    // No mailing-list provider is configured. Never report success or imply that
+    // the address was saved. JSON clients receive a real error instead of a redirect
+    // that fetch() could follow and mistake for a successful subscription.
+    if (isJson) {
+      return Response.json({
+        error: "Newsletter signup is not configured yet, so no subscription was saved. Please check back later.",
+      }, { status: 503 })
     }
-
-    // This endpoint has no mailing-list provider configured. Do not log the address
-    // or imply that a subscription was saved when no subscription system received it.
     return Response.redirect(new URL("/?error=newsletter-unavailable#newsletter", request.url))
   } catch {
+    if (request.headers.get("content-type")?.includes("application/json")) {
+      return Response.json({ error: "Invalid request. Please try again." }, { status: 400 })
+    }
     return Response.redirect(new URL("/?error=server-error#newsletter", request.url))
   }
 }

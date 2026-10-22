@@ -15,7 +15,7 @@ function walk(dir: string, out: string[] = []): string[] {
   return out
 }
 
-function source(): string {
+function source(): Array<{ file: string; text: string }> {
   return SCANNED.flatMap((dir) => walk(dir))
     .filter((file) => !file.includes(`${path.sep}test${path.sep}`))
     .map((file) => ({ file, text: fs.readFileSync(file, "utf8") }))

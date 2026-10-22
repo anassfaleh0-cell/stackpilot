@@ -2,6 +2,7 @@ import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, BlogPostingSchema, WebPageSchema } from "@/components/seo/json-ld"
+import { BlogMarkdownBlock } from "@/components/content/blog-markdown-block"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getBlogPost, getContentTitle, isContentAvailable, getAllBlogPosts } from "@/lib/content/registry"
@@ -18,12 +19,16 @@ import { Clock, User, Calendar, Star } from "lucide-react"
 import { InFeedAd } from "@/components/ads"
 
 export const dynamicParams = true
-export const revalidate = 86400
 
 export function generateStaticParams() {
-  // Keep the full corpus indexable without forcing 2,000+ pages through every production build.
-  // Pages are rendered on first request and cached for 24h.
-  return []
+  // Vercel keeps on-demand generation; Cloudflare prerenders committed JSON content because
+  // Workers must not depend on repository filesystem access during request-time route resolution.
+  if (process.env.BUILD_TARGET !== "cloudflare") return []
+
+  // Content is read from committed JSON files; prerender the corpus for Workers compatibility.
+  return getAllBlogPosts()
+    .filter((item) => (item as typeof item & { publicationStatus?: string }).publicationStatus !== "draft")
+    .map((item) => ({ slug: item.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -52,56 +57,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const midPoint = proseIndices.length > 0 ? proseIndices[Math.floor(proseIndices.length / 2)] : Math.floor(paragraphs.length / 2)
   const pullQuote = (paragraphs[midPoint] || "").replace(/^#{1,6}\s*/, "").replace(/\*\*/g, "").trim().slice(0, 150)
 
-  const renderInline = (text: string, keyBase: string) => {
-    const segments = text.split(/\*\*([^*]+)\*\*/g)
-    return segments.map((segment, i) =>
-      i % 2 === 1 ? <strong key={`${keyBase}-b${i}`}>{segment}</strong> : <span key={`${keyBase}-t${i}`}>{segment}</span>
-    )
-  }
 
-  const renderBlock = (block: string, keyBase: string) => {
-    const lines = block.split("\n").filter(Boolean)
-    const first = lines[0] ?? ""
-    if (first.startsWith("### ")) {
-      return <h3 key={keyBase} className="text-lg font-semibold tracking-tight mt-8 mb-3">{first.slice(4)}</h3>
-    }
-    if (first.startsWith("## ")) {
-      return <h2 key={keyBase} className="text-2xl font-bold tracking-tight mt-10 mb-4">{first.slice(3)}</h2>
-    }
-    if (first.startsWith("|") && lines.length >= 2) {
-      const cells = (line: string) => line.replace(/^\||\|$/g, "").split("|").map((c) => c.trim())
-      const header = cells(first)
-      const bodyRows = lines.filter((l) => !/^\|[\s:|-]+\|?$/.test(l)).slice(1)
-      return (
-        <div key={keyBase} className="overflow-x-auto my-6">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="border-b border-border">
-                {header.map((col, j) => (
-                  <th key={j} className="text-left py-2 px-3 font-semibold text-foreground">{col}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {bodyRows.map((row, i) => (
-                <tr key={i} className="border-b border-border/50">
-                  {cells(row).map((cell, j) => (
-                    <td key={j} className="py-2.5 px-3 text-muted-foreground">{renderInline(cell, `r${i}c${j}`)}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )
-    }
-    return <p key={keyBase}>{renderInline(block, keyBase)}</p>
-  }
 
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Blog", href: "/blog" }, { name: post.title, href: `/blog/${slug}` }]} />
-      <BlogPostingSchema title={post.title} description={post.description} publishedAt={post.publishedAt} updatedAt={post.updatedAt} author={post.author} url={`${site.url}/blog/${post.slug}`} />
+      <BlogPostingSchema title={post.title} description={post.description} publishedAt={post.publishedAt} updatedAt={post.updatedAt} author={post.author} url={`${site.url}/blog/${post.slug}`} wordCount={post.body.replace(/<[^>]*>/g, " ").split(/\s+/).filter(Boolean).length} />
       <WebPageSchema name={post.title} description={post.description} url={`${site.url}/blog/${slug}`} mainEntity={{ "@type": "Thing", name: post.tags[0] || post.category, description: post.description }} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Blog", href: "/blog" }, { name: post.title }]} />
@@ -166,7 +127,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {/* First half of content */}
             <div className="space-y-5 leading-relaxed text-foreground/85">
               {paragraphs.slice(0, midPoint).map((paragraph, i) => (
-                <div key={i} className="space-y-5">{renderBlock(paragraph, `a${i}`)}</div>
+                <div key={i} className="space-y-5"><BlogMarkdownBlock block={paragraph} keyBase={`a${i}`} /></div>
               ))}
             </div>
 
@@ -185,7 +146,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {/* Second half of content */}
             <div className="mt-6 space-y-5 leading-relaxed text-foreground/85">
               {paragraphs.slice(midPoint + 1).map((paragraph, i) => (
-                <div key={i} className="space-y-5">{renderBlock(paragraph, `b${i}`)}</div>
+                <div key={i} className="space-y-5"><BlogMarkdownBlock block={paragraph} keyBase={`b${i}`} /></div>
               ))}
             </div>
 

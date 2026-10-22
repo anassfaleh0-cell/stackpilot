@@ -1,58 +1,71 @@
 {
   "slug": "convertkit-vs-freshdesk",
-  "title": "Freshdesk vs ConvertKit",
-  "description": "Freshdesk vs ConvertKit: ConvertKit is our overall pick for CRM & Sales teams — Freshdesk 4.3/5, ConvertKit 4.4/5; Freshdesk from Free –.",
+  "title": "Freshdesk vs ConvertKit: Customer support ticketing or creator email marketing?",
+  "description": "A decision guide for Freshdesk versus ConvertKit. Freshdesk focuses on customer support ticketing; ConvertKit focuses on creator email marketing. Compare the actual job, workflow, and operating requirements rather than assuming a single winner. Check current vendor documentation and plan terms before deciding.",
   "category": "CRM & Sales",
   "tool1": "Freshdesk",
   "tool2": "ConvertKit",
-  "winner": "convertkit",
+  "winner": null,
   "features": [
     {
-      "name": "User Rating",
-      "tool1": false,
-      "tool2": true
+      "name": "Primary job",
+      "tool1": "customer support ticketing",
+      "tool1Detail": "Evaluate Freshdesk to track customer requests and assign ownership; test ticket routing, service workflows, knowledge-base needs, and reporting.",
+      "tool2": "creator email marketing",
+      "tool2Detail": "Evaluate ConvertKit for audience email campaigns and subscriber workflows; test segmentation, deliverability, and automation against a real campaign."
     },
     {
-      "name": "Category",
-      "tool1": true,
-      "tool2": true
+      "name": "Best fit",
+      "tool1": "Choose Freshdesk when customer support ticketing is the immediate requirement.",
+      "tool1Detail": "Evaluate Freshdesk to track customer requests and assign ownership; test ticket routing, service workflows, knowledge-base needs, and reporting.",
+      "tool2": "Choose ConvertKit when creator email marketing is the immediate requirement.",
+      "tool2Detail": "Evaluate ConvertKit for audience email campaigns and subscriber workflows; test segmentation, deliverability, and automation against a real campaign."
     },
     {
-      "name": "Starting Price",
-      "tool1": true,
-      "tool2": true
+      "name": "Pilot checklist",
+      "tool1": "Test with a representative workflow and define measurable success criteria before buying.",
+      "tool1Detail": "For Freshdesk, verify setup effort, permissions, integrations, data handling, and who will maintain the workflow.",
+      "tool2": "Test with the same decision framework, using a real task rather than a demo alone.",
+      "tool2Detail": "For ConvertKit, verify setup effort, permissions, integrations, data handling, and who will maintain the workflow."
     },
     {
-      "name": "Best For",
-      "tool1": true,
-      "tool2": true
-    },
-    {
-      "name": "Core Strength",
-      "tool1": true,
-      "tool2": true
+      "name": "How they relate",
+      "tool1": "Freshdesk addresses customer support ticketing; it should not be treated as a replacement for creator email marketing without a demonstrated overlap.",
+      "tool1Detail": "If both jobs matter, define the handoff and avoid paying twice for the same capability.",
+      "tool2": "ConvertKit addresses creator email marketing; it should not be treated as a replacement for customer support ticketing without a demonstrated overlap.",
+      "tool2Detail": "If both jobs matter, define the handoff and avoid paying twice for the same capability."
     }
   ],
-  "verdict": "Freshdesk (CRM & Sales) and ConvertKit (Marketing & SEO) serve different primary purposes. ConvertKit has a higher user rating, but the right choice depends on whether your priority is crm & sales or marketing & seo capabilities.",
+  "verdict": "There is no verified universal winner between Freshdesk and ConvertKit: they focus on customer support ticketing and creator email marketing, respectively. Start with the outcome your team needs, then pilot the product that directly supports that outcome. If both jobs are required, assess whether the tools complement one another and define ownership at the handoff. Verify current features, plan limits, total cost, integrations, privacy, permissions, and support before committing.",
   "faqs": [
     {
-      "question": "What is the difference between Freshdesk and ConvertKit?",
-      "answer": "Freshdesk is a crm & sales tool, while ConvertKit is a marketing & seo platform. They serve different primary functions but may overlap in certain areas."
+      "question": "What is the main difference between Freshdesk and ConvertKit?",
+      "answer": "Freshdesk focuses on customer support ticketing; ConvertKit focuses on creator email marketing. They should not be compared as interchangeable products unless your required workflow shows a genuine overlap."
     },
     {
       "question": "Can Freshdesk replace ConvertKit?",
-      "answer": "Not directly — they serve different categories. Some organizations use both for different purposes."
+      "answer": "Only if a pilot proves that Freshdesk meets the requirements you currently depend on ConvertKit to satisfy. Check required outputs, permissions, integrations, and operational controls before switching."
     },
     {
-      "question": "Which has better value, Freshdesk or ConvertKit?",
-      "answer": "Freshdesk (Free – $35/agent/mo) and ConvertKit (Free – $59/mo) have different pricing. Evaluate based on which category matters more for your workflows."
+      "question": "Can a team use Freshdesk and ConvertKit together?",
+      "answer": "Potentially, if the team needs both customer support ticketing and creator email marketing. Define which product owns each step, how information moves between them, and who is responsible for access and data quality."
+    },
+    {
+      "question": "How should I compare their costs?",
+      "answer": "Estimate the cost of the specific workflow you need: include seats, usage, integrations, setup, support, and ongoing administration for Freshdesk and ConvertKit. Verify current vendor pricing and plan limits rather than relying on old figures."
+    },
+    {
+      "question": "What should I test before choosing?",
+      "answer": "For Freshdesk, test whether it handles customer support ticketing with acceptable setup and ongoing effort. For ConvertKit, test whether it handles creator email marketing. Compare both against written success criteria and review security, privacy, and support requirements."
     }
   ],
-  "lastUpdated": "2026-07-20",
   "tool1Slug": "freshdesk",
   "tool2Slug": "convertkit",
   "secondaryCategories": [
     "Marketing & SEO"
   ],
-  "published": false
+  "published": true,
+  "winnerVerified": false,
+  "featuresVerified": false,
+  "decisionGuide": true
 }

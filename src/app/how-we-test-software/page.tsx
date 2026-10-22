@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "How We Evaluate Software | PilotStack Process",
-  description: "How PilotStack pages are produced: which sources we draw from, the nine recorded category scores behind each rating, what we omit when a fact has no source, and how we stay independent.",
+  description: "PilotStack explains its software evaluation criteria, evidence standards, and ongoing audit of older ratings and numeric claims so readers can judge what is verified.",
   path: "/how-we-test-software",
 })
 
@@ -25,43 +25,43 @@ export default function HowWeTestSoftwarePage() {
     {
       phase: "Evidence & Sourcing",
       steps: [
-        "Every figure on a page comes from a source we hold: our recorded dataset, vendor documentation, or a published pricing page",
-        "Review counts, ratings and pricing are recorded as of the review date shown on the page",
-        "Where two sources we hold disagree, neither value is published",
+        "New factual and numeric claims should be tied to a checkable source; some older stored values remain under provenance review and are not treated as verified until checked",
+        "Source dates and regional or plan context should be recorded when verified; a page date alone does not establish that every figure was rechecked",
+        "When sources conflict, we explain the uncertainty or withhold the disputed claim until it can be resolved",
         "Certification and compliance statuses with no source are shown as unverified rather than asserted",
       ],
     },
     {
       phase: "Scoring",
       steps: [
-        "Nine equally weighted category scores on a 1-5 scale: Features, Usability, Pricing, Support, Security, Integrations, Performance, Documentation, Scalability",
-        "The overall rating is the mean of those nine scores, rounded to one decimal",
-        "The calculation is published and checkable on any review page",
+        "The published rubric defines nine 1-5 evaluation dimensions; older stored category scores are being audited before they are described as verified",
+        "Where a rating is verified, its calculation should be reproducible from the documented category values and rounding rule",
+        "The methodology describes the intended calculation; not every legacy rating currently has a complete, auditable source trail",
         "Ratings are based on the published scoring criteria rather than commercial placement",
       ],
     },
     {
       phase: "Consistency",
       steps: [
-        "A tool's rating, review count and category scores are held once and reused everywhere that tool appears",
+        "Shared records help keep reused claims consistent, but repeated values are not proof of accuracy; source provenance must be checked separately",
         "Category, comparison and related-content pages read from the same recorded values",
-        "Facts we cannot source are omitted instead of being restated in a new form",
+        "Unverified facts are omitted or clearly labeled unverified; they are not repeated as confirmed claims",
       ],
     },
     {
       phase: "Publication & Upkeep",
       steps: [
-        "Every page carries a last-reviewed date",
+        "Some pages display publication or update dates, but a date alone does not prove that every claim was rechecked",
         "Pages are updated when material changes are identified",
-        "Corrections are made in place and the last-reviewed date is updated",
-        "Pages with unsupported recorded figures are corrected or, where appropriate, removed",
+        "Corrections are made in place, with relevant date fields updated where those fields are maintained",
+        "Unsupported claims are corrected, qualified, or omitted while useful page URLs are retained where possible",
       ],
     },
   ]
 
   return (
     <>
-      <ArticleSchema title="How We Evaluate Software | PilotStack Process" description="How every PilotStack page is produced — the sources behind each figure, the nine recorded category scores behind each rating, and what we leave out when a fact has no source." publishedAt="2026-01-15" author="PilotStack Team" url={`${site.url}/how-we-test-software`} keywords={["software review process", "scoring methodology", "editorial standards", "review process"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
+      <ArticleSchema title="How We Evaluate Software | PilotStack Process" description="PilotStack’s software evaluation criteria, evidence standards, and ongoing source-provenance audit for older ratings and numeric claims." publishedAt="2026-01-15" updatedAt="2026-10-21" author="PilotStack Team" url={`${site.url}/how-we-test-software`} keywords={["software review process", "scoring methodology", "editorial standards", "review process"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "How We Evaluate Software", href: "/how-we-test-software" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "How We Evaluate Software" }]} />
@@ -71,12 +71,12 @@ export default function HowWeTestSoftwarePage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Our Process</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">How We Evaluate Software</h1>
-            <p className="text-muted-foreground mb-8">Last updated: July 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: October 21, 2026</p>
 
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                Every PilotStack page runs through five stages: selection, sourcing, scoring, consistency, and upkeep. Each tool carries nine recorded category scores on a 1-5 scale, and the overall rating on a page is their mean rounded to one decimal. Figures come from sources we hold; facts without a source are omitted or marked unverified. Commercial relationships are disclosed where applicable and are not intended to determine coverage.
+                Our published process covers selection, sourcing, scoring, consistency, and upkeep. The rubric defines nine evaluation dimensions, but some older scores and numeric claims are still undergoing source-provenance review. A stored value or page date is not proof of verification. Unsupported claims are qualified or omitted, and commercial relationships are disclosed where applicable.
               </p>
             </div>
 
@@ -84,9 +84,9 @@ export default function HowWeTestSoftwarePage() {
               <h2 className="text-lg font-semibold mb-2">TL;DR</h2>
               <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
                 <li>Five stages: Selection, Evidence &amp; Sourcing, Scoring, Consistency, Publication &amp; Upkeep</li>
-                <li>Nine equally weighted category scores on a 1-5 scale; overall is their mean</li>
-                <li>One recorded source per figure, reused everywhere a tool appears</li>
-                <li>Unsourced facts are omitted or shown as unverified — never asserted</li>
+                <li>The rubric defines nine 1-5 evaluation dimensions; older ratings are verified only when their inputs and calculation are auditable</li>
+                <li>Shared values are checked against source records; consistency alone does not establish accuracy</li>
+                <li>Unsourced facts are omitted or labeled unverified rather than presented as confirmed</li>
                 <li>Commercial relationships do not determine ratings</li>
               </ul>
             </div>
@@ -95,10 +95,10 @@ export default function HowWeTestSoftwarePage() {
               <h2 className="text-lg font-semibold mb-2">Key Takeaways</h2>
               <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
                 <li>Coverage is guided by reader usefulness and editorial priorities</li>
-                <li>Ratings are arithmetic you can check on any review page</li>
-                <li>Conflicting internal sources result in no published value, not a guess</li>
+                <li>Verified ratings should have a reproducible calculation and documented inputs</li>
+                <li>Conflicting sources are explained or withheld until the claim can be resolved</li>
                 <li>Certification statuses without a source read as &quot;not verified&quot;</li>
-                <li>Last-reviewed date visible on every page</li>
+                <li>A displayed date does not prove every claim was rechecked on that date</li>
                 <li>Corrections are made in place and dated</li>
               </ul>
             </div>
@@ -131,7 +131,7 @@ export default function HowWeTestSoftwarePage() {
                 <li>We do not sell editorial ratings or placement</li>
                 <li>We do not allow vendors to preview or approve pages before publication</li>
                 <li>We do not describe access arrangements as evidence of editorial quality</li>
-                <li>We do not publish a figure we cannot tie to a source we hold</li>
+                <li>We do not describe a figure as verified unless its source and context can be checked</li>
                 <li>We do not present an unverified certification or company fact as confirmed</li>
               </ul>
 

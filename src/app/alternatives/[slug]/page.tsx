@@ -15,14 +15,20 @@ import { Star, ExternalLink, ArrowRight, CheckCircle2 } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { isNoindexed } from "@/lib/noindex"
+import { REDIRECTED_ALTERNATIVE_SLUGS } from "@/lib/sitemap/redirected-content"
 
 export const dynamicParams = true
-export const revalidate = 86400
 
 export function generateStaticParams() {
-  // Keep the full corpus indexable without forcing 2,000+ pages through every production build.
-  // Pages are rendered on first request and cached for 24h.
-  return []
+  // Vercel keeps on-demand generation; Cloudflare prerenders committed JSON content because
+  // Workers must not depend on repository filesystem access during request-time route resolution.
+  if (process.env.BUILD_TARGET !== "cloudflare") return []
+
+  // Content is read from committed JSON files. Prerender the corpus so Workers never need
+  // repository filesystem access for on-demand route rendering.
+  return getAllAlternatives()
+    .filter((item) => (item as typeof item & { publicationStatus?: string }).publicationStatus !== "draft" && !REDIRECTED_ALTERNATIVE_SLUGS.has(item.slug))
+    .map((item) => ({ slug: item.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -31,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!alt) return {}
   const shortTitle = alt.title.length > 58 ? alt.title.slice(0, 55) + "..." : alt.title
   const noindexed = isNoindexed("alternatives", slug)
-  return createMetadata({ title: shortTitle, description: `Looking for ${alt.toolName} alternatives? Compare ${(alt.alternatives || []).length} competitors with ratings, pricing context, and practical differences.`, path: `/alternatives/${alt.slug}`, ogType: "article", publishedAt: alt.lastUpdated, updatedAt: alt.lastUpdated, articleSection: alt.category, noIndex: noindexed })
+  return createMetadata({ title: shortTitle, description: `Looking for ${alt.toolName} alternatives? Compare ${(alt.alternatives || []).length} competitors by use case, practical differences, and current vendor terms. Ratings appear only when source provenance is documented.`, path: `/alternatives/${alt.slug}`, ogType: "article", publishedAt: alt.lastUpdated, updatedAt: alt.lastUpdated, articleSection: alt.category, noIndex: noindexed })
 }
 
 export default async function AlternativePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -40,6 +46,16 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
   if (!alt) notFound()
 
   const relatedLinks = getRelatedByCategory(alt.category, alt.slug, 4)
+  const relatedAlternativePages = (() => {
+    const sameCategory = getAllAlternatives()
+      .filter((item) => item.category === alt.category && !isNoindexed("alternatives", item.slug))
+      .sort((a, b) => a.slug.localeCompare(b.slug))
+    const currentIndex = sameCategory.findIndex((item) => item.slug === alt.slug)
+    if (currentIndex < 0 || sameCategory.length < 2) return []
+    return Array.from({ length: Math.min(4, sameCategory.length - 1) }, (_, offset) =>
+      sameCategory[(currentIndex + offset + 1) % sameCategory.length],
+    ).filter((item) => item.slug !== alt.slug)
+  })()
 
   return (
     <>
@@ -91,11 +107,13 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                       <div className="p-5">
                         <div className="flex items-start justify-between mb-2">
                           <Link href={`/reviews/${item.slug}`} className="text-lg font-bold hover:text-primary transition-colors">{item.name}</Link>
-                          <div className="flex items-center gap-1 text-sm">
-                            <Star size={14} className="fill-accent text-accent" />
-                            <span className="font-semibold">{item.rating}</span>
-                            <span className="text-muted-foreground">/5</span>
-                          </div>
+                          {getReview(item.slug)?.ratingVerified === true && typeof getReview(item.slug)?.rating === "number" ? (
+                            <div className="flex items-center gap-1 text-sm">
+                              <Star size={14} className="fill-accent text-accent" />
+                              <span className="font-semibold">{getReview(item.slug)?.rating}</span>
+                              <span className="text-muted-foreground">/5</span>
+                            </div>
+                          ) : <span className="text-xs text-muted-foreground">Rating not verified</span>}
                         </div>
                         <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
                         <Link href={`/reviews/${item.slug}`} className="inline-flex items-center gap-1 text-sm text-primary hover:underline mt-2">
@@ -168,7 +186,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                       {(alt.alternatives || []).slice(0, 5).map((item) => (
                         <Link key={item.slug} href={`/reviews/${item.slug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                           <span>{item.name}</span>
-                          <span className="text-xs font-medium">{item.rating}/5</span>
+                          <span className="text-xs font-medium">{getReview(item.slug)?.ratingVerified === true && typeof getReview(item.slug)?.rating === "number" ? `${getReview(item.slug)?.rating}/5` : "Rating not verified"}</span>
                         </Link>
                       ))}
                     </div>
@@ -207,6 +225,20 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
             maxItems={6}
             items={extendedRelatedItems(relatedLinks)}
           />
+
+          {relatedAlternativePages.length > 0 && (
+            <section className="mt-12" aria-labelledby="related-alternative-pages">
+              <h2 id="related-alternative-pages" className="text-2xl font-bold tracking-tight mb-5">More {alt.category} Alternatives</h2>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {relatedAlternativePages.map((related) => (
+                  <Link key={related.slug} href={`/alternatives/${related.slug}`} className="rounded-xl border border-border p-4 hover:border-primary/30 hover:bg-muted-bg transition-colors">
+                    <span className="font-medium text-sm">{related.title}</span>
+                    <p className="text-xs text-muted-foreground mt-1">{related.description}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
         </Container>
       </article>
     </>

@@ -7,9 +7,11 @@ export interface ReviewCardItem {
   slug: string
   name: string
   category: string
-  rating: number
+  rating?: number
+  ratingVerified?: boolean
   tagline: string
   priceRange?: string
+  priceRangeVerified?: boolean
 }
 
 export function ReviewCardGrid({ items }: { items: ReviewCardItem[] }) {
@@ -21,14 +23,16 @@ export function ReviewCardGrid({ items }: { items: ReviewCardItem[] }) {
             <Card className="h-full flex flex-col">
               <div className="flex items-start justify-between mb-3">
                 <Badge variant="secondary">{tool.category}</Badge>
-                <div className="flex items-center gap-1 text-sm font-medium text-accent">
-                  <Star size={14} className="fill-accent text-accent" />
-                  {tool.rating}
-                </div>
+                {tool.ratingVerified === true && typeof tool.rating === "number" && Number.isFinite(tool.rating) && (
+                  <div className="flex items-center gap-1 text-sm font-medium text-accent">
+                    <Star size={14} className="fill-accent text-accent" />
+                    {tool.rating}
+                  </div>
+                )}
               </div>
               <CardTitle className="group-hover:text-primary transition-colors">{tool.name}</CardTitle>
               <CardDescription className="mt-1.5">{tool.tagline}</CardDescription>
-              {tool.priceRange && <p className="text-xs text-muted-foreground mt-2">{tool.priceRange}</p>}
+              {tool.priceRangeVerified === true && tool.priceRange && <p className="text-xs text-muted-foreground mt-2">{tool.priceRange}</p>}
               <div className="mt-4 pt-4 border-t border-border flex items-center gap-1 text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors mt-auto">
                 Read review <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
               </div>
