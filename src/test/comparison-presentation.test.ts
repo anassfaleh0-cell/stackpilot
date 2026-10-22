@@ -97,6 +97,17 @@ describe("comparison presentation avoids generic boilerplate", () => {
     expect(result).not.toContain("recorded winner")
   })
 
+  it("filters contradictory unsupported winners and numeric ratings from comparison FAQs", () => {
+    const result = getSpecificComparisonFaqs([
+      { question: "Which tool is better, Square or Xero?", answer: "Based on the recorded comparison criteria, Square edges ahead with a 4.3/5 rating. Square excels at retail, while Xero is stronger for accounting." },
+      { question: "How much does Square cost?", answer: "Square starts at Free while Xero pricing not independently verified. Confirm current pricing with each vendor before choosing." },
+      { question: "Can I use both tools together?", answer: "You can evaluate whether the two products work together by confirming their current integrations, export options, and the tasks your team needs to complete before choosing a workflow." },
+    ])
+    expect(result).toEqual([
+      { question: "Can I use both tools together?", answer: "You can evaluate whether the two products work together by confirming their current integrations, export options, and the tasks your team needs to complete before choosing a workflow." },
+    ])
+  })
+
   it("preserves non-template verdicts", () => {
     const verdict = "Choose A if you need an offline-first workflow; choose B for managed collaboration."
     expect(getComparisonVerdictForDisplay(verdict, false)).toBe(verdict)
