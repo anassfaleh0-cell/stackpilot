@@ -73,6 +73,18 @@ const nextConfig: NextConfig = {
       destination: "https://pilotstack.online/:path*",
       permanent: true,
     },
+    // Normalize legacy singular content routes to their current canonical collections.
+    { source: "/review/:slug", destination: "/reviews/:slug", permanent: true },
+    { source: "/comparison/:slug", destination: "/comparisons/:slug", permanent: true },
+    { source: "/guide/:slug", destination: "/guides/:slug", permanent: true },
+    { source: "/alternative/:slug", destination: "/alternatives/:slug", permanent: true },
+    { source: "/industry/:slug", destination: "/industries/:slug", permanent: true },
+    { source: "/use-case/:slug", destination: "/use-cases/:slug", permanent: true },
+    { source: "/hub/:slug", destination: "/hubs/:slug", permanent: true },
+    { source: "/statistic/:slug", destination: "/statistics/:slug", permanent: true },
+    { source: "/tool/:slug", destination: "/tools/:slug", permanent: true },
+    // Keep the duplicate reverse-order comparison URL useful without competing with the canonical page.
+    { source: "/comparisons/quickbooks-vs-xero", destination: "/comparisons/xero-vs-quickbooks", permanent: true },
     // Preserve the former privacy-policy URL as a permanent alias for the current policy page.
     {
       source: "/privacy-policy",
