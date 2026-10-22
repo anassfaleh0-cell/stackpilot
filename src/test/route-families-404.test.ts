@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest"
 import fs from "node:fs"
 import path from "node:path"
 import sitemap from "@/app/sitemap"
+import { REDIRECTED_ALTERNATIVE_SLUGS, REDIRECTED_BEST_SLUGS } from "@/lib/sitemap/redirected-content"
 import SitemapPage from "@/app/sitemap-html/page"
 import robots from "@/app/robots"
 import { siteConfig, toolPages, editorialLinks } from "@/lib/constants"
@@ -254,6 +255,8 @@ describe("route families", () => {
     for (const family of FAMILIES) {
       for (const record of recordsOf(family.dir ?? "")) {
         if (record.publicationStatus === "draft") continue
+        if (family.route === "alternatives" && REDIRECTED_ALTERNATIVE_SLUGS.has(record.slug)) continue
+        if (family.route === "best" && REDIRECTED_BEST_SLUGS.has(record.slug)) continue
         expect(paths.has(`/${family.route}/${record.slug}`), `missing sitemap URL for ${family.route}/${record.slug}`).toBe(true)
       }
     }
