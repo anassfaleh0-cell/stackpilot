@@ -45,7 +45,11 @@ export default function ContactPage() {
           </p>
         </div>
         <div className="max-w-2xl mx-auto mt-6 p-6 rounded-xl bg-muted-bg border border-border">
-          <h2 className="text-lg font-bold mb-2">Email PilotStack</h2>\n          <p className="text-sm text-muted-foreground mb-4"><a className="underline underline-offset-4" href="mailto:contact@pilotstack.online">contact@pilotstack.online</a></p>\n        </div>\n        <div className="max-w-2xl mx-auto mt-6 p-6 rounded-xl bg-muted-bg border border-border">\n          <h2 className="text-lg font-bold mb-2">Official Community</h2>
+          <h2 className="text-lg font-bold mb-2">Email PilotStack</h2>
+          <p className="text-sm text-muted-foreground mb-4"><a className="underline underline-offset-4" href="mailto:contact@pilotstack.online">contact@pilotstack.online</a></p>
+        </div>
+        <div className="max-w-2xl mx-auto mt-6 p-6 rounded-xl bg-muted-bg border border-border">
+          <h2 className="text-lg font-bold mb-2">Official Community</h2>
           <p className="text-sm text-muted-foreground mb-4">Join the PilotStack community:</p>
           <SocialLinkList />
         </div>
