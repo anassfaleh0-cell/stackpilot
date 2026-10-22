@@ -45,6 +45,11 @@ const GENERATED_REVIEW_SECTION_PATTERNS = [
   /^.+ delivers reliable performance with 99\.9% uptime SLA and consistent response times under load\./i,
   /^.+ delivers reliable performance with 99\.9% uptime SLA/i,
   /^.+(?:'s|’) primary advantage is .+\. The platform consistently outperforms competitors in reliability and feature depth\./i,
+  /^The recorded profile lists these available capabilities: no feature availability details are recorded\./i,
+  /^The recorded integration list includes no specific integrations in this profile\./i,
+  /^The recorded target users are not specified, and the listed industries are not specified\./i,
+  /^The profile records these security certifications: none listed; and these compliance items: none listed\./i,
+  /^The current profile records these strengths: .+\. It also records these limitations:/i,
 ]
 
 export function stripUnverifiedPriceClaims(value: string): string {
@@ -85,6 +90,11 @@ const GENERATED_REVIEW_FAQ_PATTERNS = [
   /^.+ offers .+ comprehensive .+ functionality, API access for custom integrations, and enterprise security with SOC 2 Type II\./i,
   /^.+ offers AI features like .+, comprehensive .+ functionality, API access for custom integrations, and enterprise security with SOC 2 Type II\./i,
   /^.+ is secure with SOC 2 Type II, ISO 27001, FedRAMP certifications\./i,
+  /^Feature availability and limits can change by plan and over time\. Verify the current vendor documentation for your use case, then test the workflow in a trial or pilot before committing\.?$/i,
+  /^.+ complies with GDPR, CCPA\./i,
+  /^.+ has a low learning curve\. Most teams can complete initial setup and basic configuration within a few hours/i,
+  /^.+ integrates with .+ and \d+\+ other platforms\..*Integration setup typically takes 15-30 minutes per connection\./i,
+  /^.+ offers significant customization options\. Teams can configure settings, views, and notifications to suit their preferences\./i,
 ]
 
 export function getVisibleReviewFaqs(faqs: FAQItem[], showVerifiedPricing = false): FAQItem[] {
