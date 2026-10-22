@@ -119,6 +119,18 @@ const nextConfig: NextConfig = {
       destination: "/best/best-seo-tools",
       permanent: true,
     },
+    // The legacy startup productivity shortlist is intentionally unpublished because its scores,
+    // prices, and methodology claims are unverified. Consolidate it on the live productivity guide.
+    {
+      source: "/best/best-productivity-startups",
+      destination: "/best/best-productivity-tools",
+      permanent: true,
+    },
+    {
+      source: "/bests/best-productivity-startups",
+      destination: "/best/best-productivity-tools",
+      permanent: true,
+    },
     {
       source: "/bests/:slug",
       destination: "/best/:slug",
