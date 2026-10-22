@@ -98,7 +98,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
                     ))}
                   </div>
                 </section>
-                {i === Math.floor(page.sections.length / 2) - 1 && page.sections.length >= 3 && (
+                {registry?.sourceAuditComplete === true && page.sections.some((section) => section.stats.length > 0) && i === Math.floor(page.sections.length / 2) - 1 && page.sections.length >= 3 && (
                   <section className="my-10">
                     <InFeedAd className="mx-auto max-w-[728px]" />
                   </section>
