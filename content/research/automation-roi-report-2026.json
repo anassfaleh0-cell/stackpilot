@@ -1,80 +1,83 @@
 {
   "slug": "automation-roi-report-2026",
-  "title": "Automation ROI Report 2026",
-  "description": "Automation ROI Report 2026: how organizations model the costs and savings of automation software, what payback patterns look like, and how to measure return on investment after deployment.",
+  "title": "Automation ROI: Evidence Guide and Buyer Checklist",
+  "description": "A practical, evidence-aware guide to evaluating Automation ROI. No proprietary survey results or unsupported market-wide statistics are presented; use the checklist and verify time-sensitive product facts at primary sources.",
   "category": "Productivity",
-  "reportType": "Productivity Analysis",
+  "reportType": "Evidence Review and Buyer Guide",
   "keyFindings": [
-    "The productivity segment shows 20% year-over-year growth in 2026",
-    "Enterprise adoption of productivity solutions increased by 43% compared to last year",
-    "74% of organizations report improved outcomes after implementing productivity software",
-    "Small and medium businesses account for 43% of productivity software spending",
-    "AI-powered features are the top consideration for 65% of buyers evaluating productivity platforms",
-    "Cloud-based deployment represents 72% of new productivity software installations",
-    "Integration capabilities influence 66% of purchasing decisions",
-    "productivity software budgets increased by an average of 27% in 2026"
+    "This page is a practical evidence review of Automation ROI; it does not claim a proprietary survey or verified market-wide percentage.",
+    "Compare options against a defined workflow and requirements rather than headline feature counts.",
+    "Current pricing, plan limits, integrations, and security controls must be verified against dated primary documentation.",
+    "Measure the baseline and the result using explicit definitions; separate observed results from estimates.",
+    "Treat unsupported market-size, adoption, ROI, or market-share claims as unverified until the underlying data can be reproduced."
   ],
   "sections": [
     {
-      "title": "The ROI Question for Automation",
-      "body": "Automation purchases are held to a higher standard of proof than most software investments, because the pitch is explicitly about cost and time savings. In our research, 74% of organizations report improved outcomes after implementing productivity software, and budgets for these platforms grew by an average of 27% in 2026. The gap between the two numbers shows why ROI discipline matters: investment is rising, so the savings case must be modeled and verified, not assumed.",
-      "type": "text"
+      "title": "Scope and evidence limits",
+      "type": "text",
+      "body": "This page helps readers evaluate Automation ROI without treating unsupported market estimates as facts. No primary survey dataset or reproducible market-wide dataset is supplied with this page, so it does not present proprietary survey findings, adoption percentages, market shares, or guaranteed ROI. Product capabilities and prices change; verify decision-critical details in current primary documentation."
     },
     {
-      "title": "Building the Cost Model",
-      "body": "A defensible cost model includes license and subscription fees, implementation and configuration effort, training time for the teams involved, and ongoing maintenance and administration. The average enterprise in our research spends $500,000-2,000,000 annually on productivity solutions, with mid-market companies investing $50,000-500,000. Even at the lower end, the cost of a mis-scoped rollout can erase years of expected savings, so the model should be built before any vendor negotiation.",
-      "type": "text"
+      "title": "Define the decision first",
+      "type": "text",
+      "body": "Map the manual workflow and count normal cases, exceptions, rework, and hand-offs. Automation is a good candidate when inputs are sufficiently consistent and a human can review uncertain or high-impact outcomes."
     },
     {
-      "title": "Modeling Time and Cost Savings",
-      "body": "Savings models typically estimate the hours each automated workflow removes from employees' weeks, multiplied by a fully loaded labor rate, plus secondary benefits such as fewer errors and faster cycle times. The credible models in our research share three traits: they count only hours that genuinely return to productive work, they exclude one-time transition savings, and they include the maintenance effort the automation itself introduces. Enterprise adoption of productivity solutions increased 43% year over year in our data, and organizations that model savings this way are better positioned to decide which workflows justify automation.",
-      "type": "text"
+      "title": "Build a comparable shortlist",
+      "type": "list",
+      "body": "Use the same requirements for every option in Automation ROI. Separate essential requirements from preferences, and record the evidence for each comparison.",
+      "items": [
+        "Document the workflow and the people who use it",
+        "List required capabilities, integrations, data inputs, and outputs",
+        "Check limits and exceptions on the exact plan",
+        "Record evidence links and the date each fact was checked",
+        "Mark missing or conflicting information as unknown rather than guessing"
+      ]
     },
     {
-      "title": "Measuring After Deployment",
-      "body": "Post-deployment measurement should compare against a baseline captured before rollout: task completion time, error rates, and the share of the workflow that remains manual. Integration capabilities influence 66% of purchasing decisions in our research, and teams that measure ROI typically also track how many adjacent workflows can reuse the same automation investments. Review the measurement at quarterly milestones and treat the first cycle as calibration rather than the final verdict.",
-      "type": "text"
+      "title": "Evidence and source quality",
+      "type": "text",
+      "body": "For each material claim, record the source URL, date checked, applicable plan or population, measurement definition, and any exclusions. Distinguish vendor statements from independently measured outcomes. If the evidence cannot be reproduced, label the claim as unverified rather than converting it into a benchmark."
     },
     {
-      "title": "Key Buying Criteria",
-      "body": "Our survey of 1167 organizations identified the top factors driving productivity software purchases: feature completeness (85%), total cost of ownership (78%), security compliance (72%), integration capabilities (68%), and vendor reputation (55%). For automation specifically, total cost of ownership should include the setup and governance effort, and AI-powered features were the top consideration for 65% of buyers evaluating productivity platforms, so evaluate where automation intelligence reduces ongoing maintenance.",
-      "type": "text"
+      "title": "Total cost and implementation",
+      "type": "text",
+      "body": "Estimate total cost using implementation hours, subscription and usage fees, integration, monitoring, exception handling, maintenance, training, and the cost of failures. Show the assumptions in the calculation and run conservative, expected, and optimistic scenarios without presenting them as observed industry averages."
     },
     {
-      "title": "Recommendations",
-      "body": "Build the cost and savings model before shortlisting vendors, and require the baseline measurement to be defined at the same time. Pilot on one measurable workflow, instrument the metrics during the pilot, and compare against the baseline at the first quarterly review. Expand only the workflows that cleared the model, and retire automation that does not beat its cost case.",
-      "type": "text"
+      "title": "Security, privacy, and operational fit",
+      "type": "text",
+      "body": "Review permissions, data retention, export and deletion, audit logs, vendor subprocessors, incident handling, accessibility, and applicable legal obligations. Confirm these details in current product documentation and contract terms rather than assuming every plan includes the same controls."
+    },
+    {
+      "title": "Pilot, measure, and decide",
+      "type": "text",
+      "body": "Run the automation beside the existing process first. Compare completion time, error rate, exception rate, and human review effort on the same sample of work. Define a rollback path and an owner for failures before expanding."
+    },
+    {
+      "title": "Buyer checklist",
+      "type": "list",
+      "body": "Before committing to a Automation ROI solution, confirm that the shortlist is supported by evidence and that the team can operate the choice over time.",
+      "items": [
+        "Test the highest-risk requirement with realistic data",
+        "Confirm ownership, support, export, and exit paths",
+        "Record baseline metrics and success criteria before the pilot",
+        "Review accessibility and user feedback",
+        "Recheck vendor documentation before purchase and at renewal"
+      ]
     }
   ],
-  "methodology": "This research is based on a survey of 2455 IT decision-makers, analysis of 157 software vendors, and secondary research from industry analysts. Data was collected in Q1-Q2 2026.",
+  "methodology": "Editorial method: this is a practical buyer guide, not a primary research study. No proprietary survey was conducted for this page and no market-wide benchmark is claimed. Recommendations are based on general evaluation practice; readers should verify current product facts directly with vendors and record the source, date, plan, region, and limitations.",
   "dataSources": [
     {
-      "name": "Industry Analyst Reports",
-      "url": "https://www.gartner.com/en"
+      "name": "NIST AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "context": "Background reference for evaluation practice only; no market-wide statistic or survey result is claimed on this page."
     },
     {
-      "name": "Vendor Financial Disclosures",
-      "url": "https://www.sec.gov/edgar"
-    },
-    {
-      "name": "User Review Aggregators",
-      "url": "https://www.trustradius.com/"
-    },
-    {
-      "name": "PilotStack Research Survey",
-      "url": "https://www.pilotstack.online/methodology"
-    },
-    {
-      "name": "Public Market Data",
-      "url": "https://www.statista.com/"
-    },
-    {
-      "name": "Regulatory Filings",
-      "url": "https://www.sec.gov/edgar/searchedgar/companysearch.html"
-    },
-    {
-      "name": "Academic Research",
-      "url": "https://scholar.google.com/"
+      "name": "ILO AI and productivity research",
+      "url": "https://www.ilo.org/publications/aggregation-paradox-ai-why-do-micro-economic-productivity-gains-ai",
+      "context": "Background reference for evaluation practice only; no market-wide statistic or survey result is claimed on this page."
     }
   ],
   "publishedAt": "2026-07-19",
@@ -82,5 +85,6 @@
   "readingTime": 12,
   "relatedComparisons": [],
   "relatedGuides": [],
-  "relatedPosts": []
+  "relatedPosts": [],
+  "sourceAuditComplete": true
 }

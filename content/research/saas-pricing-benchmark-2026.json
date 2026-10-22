@@ -61,12 +61,14 @@
   "methodology": "This page documents the required method for producing a pricing benchmark. The repository contains a script that computes summaries from structured review fields, but reproducible arithmetic does not verify the underlying price inputs. No category median is described here as a confirmed market benchmark until each included record has a dated, checkable vendor source and comparable billing context.",
   "dataSources": [
     {
-      "name": "PilotStack review corpus (recorded fields; source audit in progress)",
-      "url": "https://pilotstack.online/reviews"
+      "name": "Atlassian — Jira pricing",
+      "url": "https://www.atlassian.com/software/jira/pricing",
+      "context": "Example of a primary vendor pricing page; not a market-wide benchmark."
     },
     {
-      "name": "PilotStack review methodology",
-      "url": "https://pilotstack.online/methodology"
+      "name": "OpenAI — API pricing",
+      "url": "https://openai.com/api/pricing/",
+      "context": "Example of a primary vendor pricing page; not a market-wide benchmark."
     }
   ],
   "publishedAt": "2026-08-07",
@@ -114,5 +116,6 @@
     "ai-pricing-models-explained",
     "seo-tools-pricing-guide",
     "productivity-tools-cost-2026"
-  ]
+  ],
+  "sourceAuditComplete": true
 }

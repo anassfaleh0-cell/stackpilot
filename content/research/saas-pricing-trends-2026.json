@@ -61,23 +61,18 @@
   "dataSources": [
     {
       "name": "Atlassian — Jira pricing",
-      "url": "https://www.atlassian.com/software/jira/pricing"
-    },
-    {
-      "name": "Slack — Plans and pricing",
-      "url": "https://slack.com/pricing"
-    },
-    {
-      "name": "Cloudflare — Plans",
-      "url": "https://www.cloudflare.com/plans/"
+      "url": "https://www.atlassian.com/software/jira/pricing",
+      "context": "Example of a primary vendor pricing page; not a market-wide benchmark."
     },
     {
       "name": "OpenAI — API pricing",
-      "url": "https://openai.com/api/pricing/"
+      "url": "https://openai.com/api/pricing/",
+      "context": "Example of a primary vendor pricing page; not a market-wide benchmark."
     },
     {
-      "name": "AWS — Pricing",
-      "url": "https://aws.amazon.com/pricing/"
+      "name": "OECD Digital Economy",
+      "url": "https://www.oecd.org/en/topics/digital-economy.html",
+      "context": "Background reference only; not a source for any market-wide SaaS pricing statistic."
     }
   ],
   "publishedAt": "2026-07-19",
@@ -86,5 +81,6 @@
   "readingTime": 6,
   "relatedComparisons": [],
   "relatedGuides": [],
-  "relatedPosts": []
+  "relatedPosts": [],
+  "sourceAuditComplete": true
 }

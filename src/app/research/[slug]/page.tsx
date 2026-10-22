@@ -65,8 +65,17 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
           </div>
 
           <div className="mb-6 p-3 rounded-lg bg-primary-subtle/10 border border-primary/20 text-xs text-muted-foreground">
-            <span className="font-semibold text-foreground">Research compiled by PilotStack</span>
-            {" — "}Source-linked research with a published methodology. Verify time-sensitive figures against the cited source.
+            {report.sourceAuditComplete === true ? (
+              <>
+                <span className="font-semibold text-foreground">Evidence-aware buyer guide</span>
+                {" — "}The linked sources provide background for the checklist. This page does not present proprietary survey results or unsupported market-wide statistics.
+              </>
+            ) : (
+              <>
+                <span className="font-semibold text-foreground">Research source audit in progress</span>
+                {" — "}Numeric findings are withheld until the original source, scope, and method can be checked.
+              </>
+            )}
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">

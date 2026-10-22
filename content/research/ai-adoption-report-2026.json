@@ -61,11 +61,13 @@
   "dataSources": [
     {
       "name": "OECD — Understanding the macroeconomic effects of artificial intelligence",
-      "url": "https://www.oecd.org/en/topics/policy-issues/productivity-and-long-term-growth/understanding-macro-effects-of-ai.html"
+      "url": "https://www.oecd.org/en/topics/policy-issues/productivity-and-long-term-growth/understanding-macro-effects-of-ai.html",
+      "context": "Background evidence reference for AI adoption, productivity, and governance; this page does not claim an unsupported market-wide survey statistic."
     },
     {
       "name": "NIST — AI Risk Management Framework",
-      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "context": "Background evidence reference for AI adoption, productivity, and governance; this page does not claim an unsupported market-wide survey statistic."
     }
   ],
   "publishedAt": "2026-07-19",
@@ -74,5 +76,6 @@
   "readingTime": 6,
   "relatedComparisons": [],
   "relatedGuides": [],
-  "relatedPosts": []
+  "relatedPosts": [],
+  "sourceAuditComplete": true
 }

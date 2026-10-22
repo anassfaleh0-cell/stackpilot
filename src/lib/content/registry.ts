@@ -1160,7 +1160,12 @@ function normalizeResearchContent(record: ResearchContent): ResearchContent {
       }
     })
   if (hasCompleteSourceAudit) {
-    return { ...record, sections: sanitizeSections(record.sections), faqs: sanitizeFaqs(record.faqs) }
+    return {
+      ...record,
+      author: "PilotStack Editorial Team",
+      sections: sanitizeSections(record.sections),
+      faqs: sanitizeFaqs(record.faqs),
+    }
   }
 
   const subject = record.title

@@ -63,52 +63,19 @@
   "methodology": "Pricing drift should be measured from dated, source-linked comparisons of third-party claims against official vendor pricing. This page intentionally avoids publishing specific discrepancy counts or current prices that cannot be substantiated from the available source trail.",
   "dataSources": [
     {
-      "name": "Figma Pricing Page",
-      "url": "https://www.figma.com/pricing"
+      "name": "Atlassian — Jira pricing",
+      "url": "https://www.atlassian.com/software/jira/pricing",
+      "context": "Primary vendor source for checking current plan terms."
     },
     {
-      "name": "Jira Pricing Page (Atlassian)",
-      "url": "https://www.atlassian.com/software/jira/pricing"
+      "name": "OpenAI — API pricing",
+      "url": "https://openai.com/api/pricing/",
+      "context": "Primary vendor source for checking current usage pricing."
     },
     {
-      "name": "Salesforce Pricing Page",
-      "url": "https://www.salesforce.com/pricing"
-    },
-    {
-      "name": "HubSpot Pricing Page",
-      "url": "https://www.hubspot.com/pricing"
-    },
-    {
-      "name": "ChatGPT Pricing Page (OpenAI)",
-      "url": "https://chatgpt.com/pricing"
-    },
-    {
-      "name": "Jasper Pricing Page",
-      "url": "https://www.jasper.ai/pricing"
-    },
-    {
-      "name": "Ahrefs Pricing Page",
-      "url": "https://ahrefs.com/pricing"
-    },
-    {
-      "name": "SEMrush Pricing Page",
-      "url": "https://www.semrush.com/pricing"
-    },
-    {
-      "name": "Monday.com Pricing Page",
-      "url": "https://monday.com/pricing"
-    },
-    {
-      "name": "Claude Pricing Page (Anthropic)",
-      "url": "https://claude.ai/pricing"
-    },
-    {
-      "name": "Gemini Pricing Page (Google)",
-      "url": "https://gemini.google.com/pricing"
-    },
-    {
-      "name": "PilotStack Entity Data System",
-      "url": "https://www.pilotstack.online/research-methodology"
+      "name": "NIST AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "context": "Background reference for documenting risk and governance; not a source for SaaS pricing."
     }
   ],
   "publishedAt": "2026-07-27",
@@ -131,5 +98,6 @@
     "hr-software-cost-2026",
     "accounting-software-cost-2026"
   ],
-  "updatedAt": "2026-10-15"
+  "updatedAt": "2026-10-15",
+  "sourceAuditComplete": true
 }
