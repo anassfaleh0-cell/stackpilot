@@ -82,7 +82,7 @@ jobs:
       - name: Live internal-link and broken-target audit (diagnostic)
         run: SITE_URL=https://pilotstack.online npm run seo:links
         continue-on-error: true
-        timeout-minutes: 25
+        timeout-minutes: 3
 
       - name: Unit tests
         run: npm test
