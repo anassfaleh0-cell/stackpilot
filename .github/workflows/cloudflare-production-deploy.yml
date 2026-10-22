@@ -56,7 +56,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p /tmp/pilotstack-cloudflare-tools
-          printf '%s\\n' '{"private":true}' > /tmp/pilotstack-cloudflare-tools/package.json
+          printf '%s\n' '{"private":true}' > /tmp/pilotstack-cloudflare-tools/package.json
           npm install --prefix /tmp/pilotstack-cloudflare-tools --no-save --package-lock=false --legacy-peer-deps @opennextjs/cloudflare@1.20.13 wrangler@4.134.0
           mkdir -p node_modules/@opennextjs
           test ! -e node_modules/@opennextjs/cloudflare
@@ -91,7 +91,7 @@ jobs:
           set -euo pipefail
           for path in / /ads.txt /robots.txt /sitemap.xml /privacy /methodology /contact /terms /cookies /editorial-policy /advertising-disclosure /affiliate-disclosure /dmca /fact-checking-policy /corrections-policy; do
             code="$(curl --silent --show-error --location --output /tmp/pilotstack-response --write-out '%{http_code}' "https://pilotstack.online$path")"
-            printf '%s %s\\n' "$code" "$path"
+            printf '%s %s\n' "$code" "$path"
             test "$code" = "200"
           done
           curl --silent --show-error --fail https://pilotstack.online/ads.txt | grep -F 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0'
