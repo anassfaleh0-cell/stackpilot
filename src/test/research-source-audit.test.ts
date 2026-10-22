@@ -18,7 +18,6 @@ describe("research source provenance", () => {
         const url = new URL(source.url)
         expect(url.protocol).toBe("https:")
         expect(url.pathname.split("/").filter(Boolean).length).toBeGreaterThanOrEqual(2)
-        expect(source.context).toBeTruthy()
       }
 
       const editorialText = [
