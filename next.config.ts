@@ -127,6 +127,11 @@ const nextConfig: NextConfig = {
     // Retire legacy individual-author URLs that no longer have matching public
     // author profiles; consolidate them on the current, transparent editorial team page.
     {
+      source: "/authors/sarah-chen",
+      destination: "/authors/pilotstack-team",
+      permanent: true,
+    },
+    {
       source: "/authors/priya-sharma",
       destination: "/authors/pilotstack-team",
       permanent: true,
