@@ -47,6 +47,18 @@ describe("privacy and cookie disclosures", () => {
     expect(contact).not.toContain("mailto:privacy@pilotstack.online")
   })
 
+  it("keeps hosting and legal contact disclosures aligned with the actual Cloudflare setup", () => {
+    const privacy = fs.readFileSync(path.join(root, "privacy", "page.tsx"), "utf8")
+    const terms = fs.readFileSync(path.join(root, "terms", "page.tsx"), "utf8")
+
+    expect(privacy).toContain("Cloudflare&apos;s infrastructure")
+    expect(privacy).not.toContain("Vercel&apos;s infrastructure")
+    expect(terms).toContain("official social channels linked on our")
+    expect(terms).toContain("domain email inbox is not yet configured")
+    expect(terms).not.toContain("contact us at <strong>legal@pilotstack.online</strong>")
+    expect(terms).not.toContain("communicated via email to subscribers")
+  })
+
   it("does not describe all analytics data as anonymous without qualification", () => {
     const privacy = fs.readFileSync(path.join(root, "privacy", "page.tsx"), "utf8")
     const cookies = fs.readFileSync(path.join(root, "cookies", "page.tsx"), "utf8")
