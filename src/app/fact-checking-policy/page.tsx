@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Fact-Checking Policy",
-  description: "PilotStack's fact-checking process ensures every review, comparison, and guide meets rigorous accuracy standards before publication.",
+  description: "PilotStack's fact-checking policy explains our source standards, verification process, and ongoing review of older content.",
   path: "/fact-checking-policy",
 })
 
