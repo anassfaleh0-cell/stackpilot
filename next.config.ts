@@ -82,13 +82,29 @@ const nextConfig: NextConfig = {
     // Legacy plural route names surfaced in Search Console. The singular routes
     // and matching content records exist in this repository.
     {
+      // Legacy collection roots and nested paths both need permanent redirects.
+      source: "/blogs",
+      destination: "/blog",
+      permanent: true,
+    },
+    {
       source: "/blogs/:slug",
       destination: "/blog/:slug",
       permanent: true,
     },
     {
+      source: "/glossarys",
+      destination: "/glossary",
+      permanent: true,
+    },
+    {
       source: "/glossarys/:slug",
       destination: "/glossary/:slug",
+      permanent: true,
+    },
+    {
+      source: "/bests",
+      destination: "/best",
       permanent: true,
     },
     // GSC surfaced a legacy SEO tools slug whose canonical record is best-seo-tools.
