@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest"
-import { getAlternative, getComparison, isContentAvailable } from "@/lib/content/registry"
+import { getAlternative, getComparison, getReview, isContentAvailable } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
+import nextConfig from "../../next.config"
 import fs from "node:fs"
 import path from "node:path"
 
@@ -11,7 +12,7 @@ const comparisonSlugs = [
   "appwrite-vs-bitbucket",
   "logrocket-vs-podman",
 ]
-const alternativeSlugs = ["clickup-alternatives", "grammarly-alternatives"]
+const alternativeSlugs = ["clickup-alternatives"]
 
 describe("Search Console 404 recovery", () => {
   it("restores real comparison records as indexable, evidence-led decision guides", () => {
@@ -41,7 +42,7 @@ describe("Search Console 404 recovery", () => {
     }
   })
 
-  it("restores requested alternatives pages without unsupported ranking claims", () => {
+  it("restores the ClickUp alternatives guide without unsupported ranking claims", () => {
     for (const slug of alternativeSlugs) {
       const file = path.join(process.cwd(), "content", "alternatives", `${slug}.json`)
       const record = JSON.parse(fs.readFileSync(file, "utf8")) as {
@@ -65,4 +66,19 @@ describe("Search Console 404 recovery", () => {
       expect(isNoindexed("alternatives", slug), slug).toBe(false)
     }
   })
+  it("routes the intentionally unpublished Grammarly alternatives draft to the real indexable review", async () => {
+    const redirects = await nextConfig.redirects?.()
+    expect(redirects).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        source: "/alternatives/grammarly-alternatives",
+        destination: "/reviews/grammarly",
+        permanent: true,
+      }),
+    ]))
+    expect(getAlternative("grammarly-alternatives")).toBeNull()
+    expect(getReview("grammarly")).not.toBeNull()
+    expect(isContentAvailable("review", "grammarly")).toBe(true)
+    expect(isNoindexed("reviews", "grammarly")).toBe(false)
+  })
+
 })
