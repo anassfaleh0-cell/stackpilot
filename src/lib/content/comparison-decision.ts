@@ -39,8 +39,9 @@ export function getComparisonDecision(input: ComparisonDecisionInput): Compariso
 
 /** Hide raw feature values unless the comparison has auditable feature-level sources. */
 export function getComparisonFeatureDisplayValue(value: boolean | string, featuresVerified?: boolean, decisionGuide = false, featureName = ""): boolean | string {
-  // Historical review totals and ratings must not look like independently verified facts.
-  if (/\b(rating|review count|reviews)\b/i.test(featureName) && featuresVerified !== true) return "Not independently verified"
+  // Feature verification does not verify third-party ratings or review totals. These stay hidden
+  // until a separate rating-provenance flag exists for comparison records.
+  if (/\b(rating|review count|reviews)\b/i.test(featureName)) return "Not independently verified"
   if (decisionGuide && typeof value === "string") return value.trim() ? value : "Not recorded"
   if (featuresVerified !== true) return "Not verified"
   return typeof value === "string" && !value.trim() ? "Not recorded" : value
