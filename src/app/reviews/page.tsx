@@ -13,8 +13,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { BrandPattern, BrandDivider } from "@/components/brand/patterns"
 import { BannerAd } from "@/components/ads"
-import { getPagination, parsePageParam } from "@/lib/pagination"
-import { PaginationNav } from "@/components/ui/pagination-nav"
+import { getPagination } from "@/lib/pagination"
 
 export const metadata = createMetadata({
   title: "Software Reviews",
@@ -22,10 +21,11 @@ export const metadata = createMetadata({
   path: "/reviews",
 })
 
-export default async function ReviewsPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
-  const params = await searchParams
+export const dynamic = "force-static"
+
+export default function ReviewsPage() {
   const tools = getAllReviews().filter((t) => !isNoindexed("reviews", t.slug))
-  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: tools.length })
+  const pagination = getPagination({ page: 1, perPage: 24, total: tools.length })
   const pageTools = tools.slice(pagination.start, pagination.end)
 
   return (
@@ -68,7 +68,6 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: Pro
           ) : (
             <p className="text-center text-muted-foreground py-12">No reviews available yet. Check back soon.</p>
           )}
-          <PaginationNav basePath="/reviews" pagination={pagination} />
         </Container>
       </Section>
 

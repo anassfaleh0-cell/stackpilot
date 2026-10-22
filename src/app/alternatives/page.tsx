@@ -4,8 +4,7 @@ import { BreadcrumbSchema, CollectionPageSchema } from "@/components/seo/json-ld
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllAlternatives } from "@/lib/content/registry"
-import { getPagination, parsePageParam } from "@/lib/pagination"
-import { PaginationNav } from "@/components/ui/pagination-nav"
+import { getPagination } from "@/lib/pagination"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
@@ -15,10 +14,11 @@ export const metadata = createMetadata({
   path: "/alternatives",
 })
 
-export default async function AlternativesPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
-  const params = await searchParams
+export const dynamic = "force-static"
+
+export default function AlternativesPage() {
   const allAlternatives = getAllAlternatives()
-  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: allAlternatives.length })
+  const pagination = getPagination({ page: 1, perPage: 24, total: allAlternatives.length })
   const pageAlternatives = allAlternatives.slice(pagination.start, pagination.end)
   const grouped: Record<string, typeof allAlternatives> = {}
   pageAlternatives.forEach((alt) => {
@@ -48,7 +48,6 @@ export default async function AlternativesPage({ searchParams }: { searchParams?
             </div>
           </section>
         ))}
-          <PaginationNav basePath="/alternatives" pagination={pagination} />
       </Container>
     </>
   )

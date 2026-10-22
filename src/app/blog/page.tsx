@@ -11,8 +11,7 @@ import Link from "next/link"
 import { ArrowRight, Clock, User } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
 import { BannerAd } from "@/components/ads"
-import { getPagination, parsePageParam } from "@/lib/pagination"
-import { PaginationNav } from "@/components/ui/pagination-nav"
+import { getPagination } from "@/lib/pagination"
 
 export const metadata = createMetadata({
   title: "Software Blog — Reviews, Research & Buying Guides",
@@ -20,10 +19,11 @@ export const metadata = createMetadata({
   path: "/blog",
 })
 
-export default async function BlogPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
-  const params = await searchParams
+export const dynamic = "force-static"
+
+export default function BlogPage() {
   const posts = getAllBlogPosts()
-  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: posts.length })
+  const pagination = getPagination({ page: 1, perPage: 24, total: posts.length })
   const pagePosts = posts.slice(pagination.start, pagination.end)
   const featured = pagination.page === 1 ? pagePosts[0] : undefined
   const rest = pagination.page === 1 ? pagePosts.slice(1) : pagePosts
@@ -109,7 +109,6 @@ export default async function BlogPage({ searchParams }: { searchParams?: Promis
             ))}
           </div>
           ) : null}
-          <PaginationNav basePath="/blog" pagination={pagination} />
         </Container>
       </Section>
     </>

@@ -11,8 +11,7 @@ import Link from "next/link"
 import { ArrowRight, Clock, Layers } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
 import { BannerAd } from "@/components/ads"
-import { getPagination, parsePageParam } from "@/lib/pagination"
-import { PaginationNav } from "@/components/ui/pagination-nav"
+import { getPagination } from "@/lib/pagination"
 
 export const metadata = createMetadata({
   title: "Software Guides",
@@ -20,10 +19,11 @@ export const metadata = createMetadata({
   path: "/guides",
 })
 
-export default async function GuidesPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
-  const params = await searchParams
+export const dynamic = "force-static"
+
+export default function GuidesPage() {
   const guides = getAllGuides().filter((g) => !isNoindexed("guides", g.slug))
-  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: guides.length })
+  const pagination = getPagination({ page: 1, perPage: 24, total: guides.length })
   const pageGuides = guides.slice(pagination.start, pagination.end)
 
   return (
@@ -85,7 +85,6 @@ export default async function GuidesPage({ searchParams }: { searchParams?: Prom
           ) : (
             <p className="text-center text-muted-foreground py-12">No guides available yet. Check back soon.</p>
           )}
-          <PaginationNav basePath="/guides" pagination={pagination} />
         </Container>
       </Section>
     </>

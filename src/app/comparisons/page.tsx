@@ -9,8 +9,7 @@ import { isNoindexed } from "@/lib/noindex"
 import { ComparisonGrid } from "@/components/entity/comparison-grid"
 import { BrandPattern } from "@/components/brand/patterns"
 import { BannerAd } from "@/components/ads"
-import { getPagination, parsePageParam } from "@/lib/pagination"
-import { PaginationNav } from "@/components/ui/pagination-nav"
+import { getPagination } from "@/lib/pagination"
 
 export const metadata = createMetadata({
   title: "Software Comparisons",
@@ -18,10 +17,11 @@ export const metadata = createMetadata({
   path: "/comparisons",
 })
 
-export default async function ComparisonsPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
-  const params = await searchParams
+export const dynamic = "force-static"
+
+export default function ComparisonsPage() {
   const comparisons = getAllComparisons().filter((c) => !isNoindexed("comparisons", c.slug))
-  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: comparisons.length })
+  const pagination = getPagination({ page: 1, perPage: 24, total: comparisons.length })
   const pageComparisons = comparisons.slice(pagination.start, pagination.end)
 
   return (
@@ -60,7 +60,6 @@ export default async function ComparisonsPage({ searchParams }: { searchParams?:
           ) : (
             <p className="text-center text-muted-foreground py-12">No comparisons available yet. Check back soon.</p>
           )}
-          <PaginationNav basePath="/comparisons" pagination={pagination} />
         </Container>
       </Section>
     </>

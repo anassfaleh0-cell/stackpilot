@@ -10,8 +10,7 @@ import { ArrowRight, FileText } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
 import { site } from "@/lib/constants"
 import { BannerAd } from "@/components/ads"
-import { getPagination, parsePageParam } from "@/lib/pagination"
-import { PaginationNav } from "@/components/ui/pagination-nav"
+import { getPagination } from "@/lib/pagination"
 
 export const metadata = createMetadata({
   title: "Research Guides",
@@ -25,8 +24,9 @@ function formatDate(iso?: string) {
   return d.toLocaleDateString("en-US", { month: "long", year: "numeric" })
 }
 
-export default async function ResearchPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
-  const params = await searchParams
+export const dynamic = "force-static"
+
+export default function ResearchPage() {
   const reports = getAllResearch()
     .map((r) => ({
       title: r.title,
@@ -36,7 +36,7 @@ export default async function ResearchPage({ searchParams }: { searchParams?: Pr
       readTime: r.readingTime ? `${r.readingTime} min` : "",
     }))
     .sort((a, b) => (b.date || "").localeCompare(a.date || ""))
-  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: reports.length })
+  const pagination = getPagination({ page: 1, perPage: 24, total: reports.length })
   const pageReports = reports.slice(pagination.start, pagination.end)
 
   return (
@@ -91,7 +91,6 @@ export default async function ResearchPage({ searchParams }: { searchParams?: Pr
               </div>
             )}
           </div>
-          <PaginationNav basePath="/research" pagination={pagination} />
         </Container>
       </Section>
     </>

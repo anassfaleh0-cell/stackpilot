@@ -6,8 +6,7 @@ import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/compon
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllBest } from "@/lib/content/registry"
-import { getPagination, parsePageParam } from "@/lib/pagination"
-import { PaginationNav } from "@/components/ui/pagination-nav"
+import { getPagination } from "@/lib/pagination"
 import Link from "next/link"
 import { Star } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
@@ -18,10 +17,11 @@ export const metadata = createMetadata({
   path: "/best",
 })
 
-export default async function BestPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
-  const params = await searchParams
+export const dynamic = "force-static"
+
+export default function BestPage() {
   const pages = getAllBest()
-  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: pages.length })
+  const pagination = getPagination({ page: 1, perPage: 24, total: pages.length })
   const pageItems = pages.slice(pagination.start, pagination.end)
 
   return (
@@ -66,7 +66,6 @@ export default async function BestPage({ searchParams }: { searchParams?: Promis
           ) : (
             <p className="text-center text-muted-foreground py-12">No pages available yet.</p>
           )}
-          <PaginationNav basePath="/best" pagination={pagination} />
         </Container>
       </Section>
     </>

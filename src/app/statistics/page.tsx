@@ -10,8 +10,7 @@ import { ArrowRight, BarChart3 } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
 import { site } from "@/lib/constants"
 import { BannerAd } from "@/components/ads"
-import { getPagination, parsePageParam } from "@/lib/pagination"
-import { PaginationNav } from "@/components/ui/pagination-nav"
+import { getPagination } from "@/lib/pagination"
 
 export const metadata = createMetadata({
   title: "Software Market Research Guides",
@@ -19,15 +18,16 @@ export const metadata = createMetadata({
   path: "/statistics",
 })
 
-export default async function StatisticsPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
-  const params = await searchParams
+export const dynamic = "force-static"
+
+export default function StatisticsPage() {
   const statCategories = getAllStatistics().map((s) => ({
     title: s.title,
     description: s.description,
     slug: s.slug,
     count: s.stats ? s.stats.length : 0,
   }))
-  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: statCategories.length })
+  const pagination = getPagination({ page: 1, perPage: 24, total: statCategories.length })
   const pageStatCategories = statCategories.slice(pagination.start, pagination.end)
 
   return (
@@ -76,7 +76,6 @@ export default async function StatisticsPage({ searchParams }: { searchParams?: 
               </Link>
             ))}
           </div>
-          <PaginationNav basePath="/statistics" pagination={pagination} />
         </Container>
       </Section>
     </>

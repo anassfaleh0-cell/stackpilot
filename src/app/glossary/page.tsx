@@ -5,8 +5,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { getAllGlossaryTerms } from "@/lib/content/registry"
-import { getPagination, parsePageParam } from "@/lib/pagination"
-import { PaginationNav } from "@/components/ui/pagination-nav"
+import { getPagination } from "@/lib/pagination"
 import Link from "next/link"
 import { Book } from "lucide-react"
 import { BannerAd } from "@/components/ads"
@@ -17,10 +16,11 @@ export const metadata = createMetadata({
   path: "/glossary",
 })
 
-export default async function GlossaryPage({ searchParams }: { searchParams?: Promise<{ page?: string | string[] }> }) {
-  const params = await searchParams
+export const dynamic = "force-static"
+
+export default function GlossaryPage() {
   const terms = getAllGlossaryTerms()
-  const pagination = getPagination({ page: parsePageParam(params?.page), perPage: 24, total: terms.length })
+  const pagination = getPagination({ page: 1, perPage: 24, total: terms.length })
   const pageTerms = terms.slice(pagination.start, pagination.end)
 
   return (
@@ -57,7 +57,6 @@ export default async function GlossaryPage({ searchParams }: { searchParams?: Pr
               </Link>
             ))}
           </div>
-          <PaginationNav basePath="/glossary" pagination={pagination} />
         </Container>
       </Section>
     </>
