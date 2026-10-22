@@ -18,8 +18,8 @@ export function NewsletterStatus() {
   return (
     <p role="status" className="mb-4 rounded-lg border border-border bg-muted-bg p-3 text-sm text-muted-foreground">
       Newsletter signup is not configured yet, so no subscription was saved. For now, please email{" "}
-      <a href="mailto:hello@pilotstack.online" className="font-medium text-primary hover:underline">
-        hello@pilotstack.online
+      <a href="mailto:contact@pilotstack.online" className="font-medium text-primary hover:underline">
+        contact@pilotstack.online
       </a>{" "}
       if you would like to ask about updates.
     </p>
