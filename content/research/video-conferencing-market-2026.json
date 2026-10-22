@@ -65,14 +65,14 @@
   "methodology": "Editorial method: practical buyer guidance only. No proprietary survey was conducted and no market-share or adoption benchmark is claimed. Readers should verify current plan details and security statements on the vendor's official documentation.",
   "dataSources": [
     {
-      "name": "NIST Privacy Framework",
-      "url": "https://www.nist.gov/privacy-framework",
-      "context": "Background reference for privacy governance; not a source for market-share or adoption statistics."
+      "name": "W3C Web Content Accessibility Guidelines",
+      "url": "https://www.w3.org/WAI/standards-guidelines/wcag/",
+      "context": "Accessibility reference for evaluating meeting participation; not a source for market statistics."
     },
     {
-      "name": "W3C Web Accessibility Initiative",
-      "url": "https://www.w3.org/WAI/",
-      "context": "Accessibility reference for evaluating meeting participation; not a source for market statistics."
+      "name": "NIST Privacy Engineering",
+      "url": "https://www.nist.gov/itl/applied-cybersecurity/privacy-engineering",
+      "context": "Background reference for privacy governance; not a source for market-share or adoption statistics."
     }
   ],
   "publishedAt": "2026-07-19",
@@ -80,5 +80,6 @@
   "readingTime": 23,
   "relatedComparisons": [],
   "relatedGuides": [],
-  "relatedPosts": []
+  "relatedPosts": [],
+  "sourceAuditComplete": true
 }
