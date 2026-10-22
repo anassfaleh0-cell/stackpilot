@@ -63,7 +63,7 @@ export default function TermsPage() {
             <p>We reserve the right to terminate or suspend access to our Service immediately, without prior notice, for conduct that we believe violates these Terms of Service or is harmful to other users, third parties, or the Service itself.</p>
 
             <h2>Changes to Terms</h2>
-            <p>We reserve the right to modify these terms at any time. Material changes will be communicated via email to subscribers and by posting a notice on the website. Changes are effective 30 days after posting for existing users and immediately for new users. Your continued use of the Service after the effective date constitutes acceptance of the updated terms.</p>
+            <p>We reserve the right to modify these terms at any time. Material changes will be communicated by posting a notice on the website and updating the date at the top of this page. Changes take effect when posted unless applicable law requires otherwise. Your continued use of the Service after the effective date constitutes acceptance of the updated terms.</p>
 
             <h2>Contact</h2>
             <p>For questions about these Terms of Service, use the official social channels linked on our <a href="/contact">Contact page</a>. Our domain email inbox is not yet configured, so messages sent to legal@pilotstack.online may not reach us. Please do not send sensitive personal information through social media.</p>
