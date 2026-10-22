@@ -329,7 +329,9 @@ function sanitizeList(items: string[] | undefined, max = 5): string[] {
   if (!Array.isArray(items)) return []
   const seen = new Set<string>()
   return items
-    .map((item) => trimText(String(item ?? ""), 360))
+    // Sanitize list items as carefully as paragraphs: legacy pros/cons often contain
+    // unsupported ratings, percentages, adoption counts, certification claims, and setup-time promises.
+    .map((item) => sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(String(item ?? ""), 360))))
     .filter((item) => item.length >= 12 && !GENERIC_LIST_ITEM_PATTERNS.some((pattern) => pattern.test(item)))
     .filter((item) => {
       const key = item.toLowerCase()
