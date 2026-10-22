@@ -109,6 +109,13 @@ const GENERIC_BOILERPLATE_PATTERNS = [
 ]
 
 const UNSUPPORTED_CLAIM_PATTERNS = [
+  // Legacy generated content frequently uses precise audience, accuracy, adoption, and market-share figures without citations.
+  /\b(?:with\s+)?(?:over|more than|nearly|almost|up to)\s+\d[\d,.]*(?:\s*[-–]\s*\d[\d,.]*)?\s*(?:million|billion|thousand)?\s*(?:subscribers|merchants|downloads|visitors|customers|users|employees|reviews|integrations|transactions)\b/i,
+  /\b\d{1,3}(?:\.\d+)?%\s+(?:of\s+)?[^.!?]{0,100}\b(?:prefer|report|match|accuracy|accurately|transactions|accountants|customers|users|teams|businesses|companies)\b/i,
+  /\b(?:matches?|correctly matching|accuracy of|match rate of)\s*\d{1,3}(?:[-–]\d{1,3})?%\b/i,
+  /\b(?:market leader|largest ecosystem|unmatched by|outperforms competitors|default choice)\b/i,
+  /\b(?:response times? average|average response time|responds? within)\s*\d+[-–]?\d*\s*(?:minutes?|hours?|days?)\b/i,
+  /\b(?:dashboard|page|report|invoice|transaction|sync|load)\s+(?:loads?|completes?|updates?)\s+(?:in|within|under)\s*\d+(?:[-–]\d+)?\s*(?:seconds?|milliseconds?|minutes?|hours?)\b/i,
   /\bwe (?:evaluated|tested|reviewed|researched|compared)\b/i,
   /\b(?:our|the) evaluation process\b/i,
   /\b(?:tested|evaluated) in real[- ]world\b/i,
