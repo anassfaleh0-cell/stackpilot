@@ -84,7 +84,6 @@ const nextConfig: NextConfig = {
     { source: "/statistic/:slug", destination: "/statistics/:slug", permanent: true },
     { source: "/tool/:slug", destination: "/tools/:slug", permanent: true },
     // Keep the duplicate reverse-order comparison URL useful without competing with the canonical page.
-    { source: "/comparisons/quickbooks-vs-xero", destination: "/comparisons/xero-vs-quickbooks", permanent: true },
     // Preserve the former privacy-policy URL as a permanent alias for the current policy page.
     {
       source: "/privacy-policy",
