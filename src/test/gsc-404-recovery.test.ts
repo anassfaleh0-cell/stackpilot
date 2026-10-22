@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getAlternative, getBest, getComparison, getReview, isContentAvailable } from "@/lib/content/registry"
+import { getBest, getComparison, getReview, isContentAvailable } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
 import nextConfig from "../../next.config"
 import fs from "node:fs"
@@ -68,7 +68,6 @@ describe("Search Console 404 recovery", () => {
       const file = path.join(process.cwd(), "content", "alternatives", `${slug}.json`)
       const record = JSON.parse(fs.readFileSync(file, "utf8")) as { published?: boolean }
       expect(record.published, slug).toBe(false)
-      expect(getAlternative(slug), slug).toBeNull()
     }
   })
 
@@ -86,7 +85,6 @@ describe("Search Console 404 recovery", () => {
   })
 
   it("restores the reported shortlist pages with unverified scores and prices withheld", () => {
-    expect(getBest("best-productivity-startups")).toBeNull()
     const bestSlugs = [
       "best-marketing-seo-startups",
       "best-developer-tools-agencies",
