@@ -100,7 +100,7 @@ export default function EditorialPolicyPage() {
               <h2>7. Updates to This Policy</h2>
               <p>This editorial policy may be updated when our practices materially change. The last-updated date reflects the most recent revision. The "Last updated" date reflects the most recent revision.</p>
 
-              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about this editorial policy, contact us at <strong>editorial@pilotstack.online</strong>.</p>
+              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about this editorial policy, contact us at <strong>contact@pilotstack.online</strong>.</p>
             </div>
           </div>
         </Container>
