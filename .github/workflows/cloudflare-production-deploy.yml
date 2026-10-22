@@ -97,3 +97,4 @@ jobs:
             echo "Legacy placeholder inbox still present on live contact page"
             exit 1
           fi
+          CHECK_SITEMAP_URLS=1 node scripts/production-smoke-check.cjs
