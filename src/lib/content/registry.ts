@@ -1016,7 +1016,7 @@ export function getAlternative(slug: string): AlternativeContent | null {
   const file = path.join(CONTENT_DIR, "alternatives", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const alt = readJson<AlternativeContent>(file)
-  if (alt.published === false || (alt as AlternativeContent & { publicationStatus?: string }).publicationStatus === "draft") return null
+  if ((alt as AlternativeContent & { publicationStatus?: string }).publicationStatus === "draft") return null
   const alternatives = Array.isArray(alt.alternatives) ? alt.alternatives : []
   const cleaned = {
     ...alt,
@@ -1311,7 +1311,7 @@ export function getBest(slug: string): BestContent | null {
   const file = path.join(CONTENT_DIR, "best", `${slug}.json`)
   if (!fs.existsSync(file)) return null
   const best = readJson<BestContent>(file)
-  if (best.published === false || (best as BestContent & { publicationStatus?: string }).publicationStatus === "draft") return null
+  if ((best as BestContent & { publicationStatus?: string }).publicationStatus === "draft") return null
   const rawDescription = sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(best.description, 700)))
   const description = rawDescription.length >= 80
     ? rawDescription
