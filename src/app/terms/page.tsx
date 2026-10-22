@@ -22,7 +22,7 @@ export default function TermsPage() {
         <Container>
           <div className="max-w-3xl mx-auto prose prose-slate">
             <h1 className="text-4xl font-bold tracking-tight mb-6">Terms of Service</h1>
-            <p className="text-muted-foreground"><em>Last updated: July 16, 2026</em></p>
+            <p className="text-muted-foreground"><em>Last updated: October 22, 2026</em></p>
 
             <h2>Acceptance of Terms</h2>
             <p>By accessing or using PilotStack ("the Service", "we", "us", "our"), you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use our website. Continued use after any modifications constitutes acceptance of the updated terms.</p>
@@ -66,7 +66,7 @@ export default function TermsPage() {
             <p>We reserve the right to modify these terms at any time. Material changes will be communicated via email to subscribers and by posting a notice on the website. Changes are effective 30 days after posting for existing users and immediately for new users. Your continued use of the Service after the effective date constitutes acceptance of the updated terms.</p>
 
             <h2>Contact</h2>
-            <p>For questions about these Terms of Service, contact us at <strong>legal@pilotstack.online</strong>.</p>
+            <p>For questions about these Terms of Service, use the official social channels linked on our <a href="/contact">Contact page</a>. Our domain email inbox is not yet configured, so messages sent to legal@pilotstack.online may not reach us. Please do not send sensitive personal information through social media.</p>
           </div>
         </Container>
       </Section>
