@@ -136,7 +136,7 @@ jobs:
           PREVIEW_URL: ${{ steps.deploy.outputs.preview_url }}
         run: |
           set -euo pipefail
-          for path in / /reviews/linear /comparisons/activecampaign-vs-ahrefs /best/seo-tools /bests/seo-tools /best/best-seo-tools /affiliate-disclosure /privacy-policy /privacy /cookies /terms /contact /robots.txt /sitemap.xml /ads.txt /rss.xml /api/search?q=asana; do
+          for path in / /reviews/linear /comparisons/activecampaign-vs-ahrefs /best/seo-tools /bests /bests/seo-tools /blogs /blogs/sample-legacy-slug /glossarys /glossarys/sample-legacy-slug /best/best-seo-tools /affiliate-disclosure /privacy-policy /privacy /cookies /terms /contact /robots.txt /sitemap.xml /ads.txt /rss.xml /api/search?q=asana; do
             # Follow intentional 308/301 legacy redirects and assert the final destination is healthy.
             code="$(curl --location --silent --show-error --output /tmp/pilotstack-preview-response.txt --write-out '%{http_code}' "$PREVIEW_URL$path")"
             echo "$code $path"
