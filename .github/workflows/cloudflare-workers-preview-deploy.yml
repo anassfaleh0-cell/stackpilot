@@ -220,7 +220,7 @@ jobs:
             grep -Eio '.{0,70}\\$[0-9]+([.][0-9]+)?/mo per[. ].{0,70}' /tmp/pilotstack-comparison.html | head -10
             exit 1
           fi
-          grep -Fq 'https://pilotstack.online/reviews/linear' <(curl --silent --show-error --fail "$PREVIEW_URL/sitemap.xml")
+          grep -Fq '<loc>https://pilotstack.online/reviews/linear</loc>' /tmp/pilotstack-sitemap.xml
           if grep -Eiq '0\+? Software Reviews|0\+? Comparisons|0\+? Guides' /tmp/pilotstack-home.html; then
             echo "Homepage content counters indicate the content registry is empty"
             exit 1
