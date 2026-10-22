@@ -2,6 +2,19 @@ name: Cloudflare Workers preview deploy
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - fix/pilotstack-ready-snapshot-2026-10-21
+    paths:
+      - "src/**"
+      - "content/**"
+      - "public/**"
+      - "next.config.ts"
+      - "open-next.config.ts"
+      - "wrangler.jsonc"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/cloudflare-preview-deploy.yml"
 
 permissions:
   contents: read
