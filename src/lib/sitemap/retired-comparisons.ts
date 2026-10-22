@@ -3,7 +3,9 @@
  * Keep the set available for future intentional retirements, but do not suppress
  * indexable comparison guides merely because they cross product categories.
  */
-export const RETIRED_COMPARISON_SLUGS = new Set<string>()
+// The reverse-order QuickBooks vs Xero URL duplicates the canonical Xero vs QuickBooks guide.
+ // Preserve the old URL with a permanent redirect while keeping only one comparison in the sitemap.
+ export const RETIRED_COMPARISON_SLUGS = new Set<string>(["quickbooks-vs-xero"])
 
 export function isRetiredComparisonSlug(slug: string): boolean {
   return RETIRED_COMPARISON_SLUGS.has(slug)
