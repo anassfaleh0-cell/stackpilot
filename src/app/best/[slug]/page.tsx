@@ -57,9 +57,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!page) return {}
   const readingTime = Math.max(5, Math.ceil((page.description.split(/\s+/).length + page.picks.reduce((a, p) => a + p.pros.length + p.cons.length, 0) * 20) / 200))
   const safeDescription = stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(page.description))
-  const metaDescription = safeDescription.length < 120
-    ? `${safeDescription} Compare the listed options using the recorded details and criteria below. Verify current features and plan terms with each vendor.`
-    : safeDescription
+  const hasUnverifiedPickData = page.picks.some((pick) => pick.ratingVerified !== true || pick.priceRangeVerified !== true)
+  // Do not turn unverified ratings/prices into a search-result ranking claim.
+  // Keep the snippet useful without naming a "leader" when the underlying data is not verified.
+  const metaDescription = hasUnverifiedPickData
+    ? `${page.title}. Compare the listed options against your workflow, feature requirements, integrations, and budget. Verify current features and plan terms directly with each vendor before choosing.`
+    : safeDescription.length < 120
+      ? `${safeDescription} Compare the listed options using the recorded details and criteria below. Verify current features and plan terms with each vendor.`
+      : safeDescription
   const noindexed = isNoindexed("best", slug)
   return createMetadata({ title: truncate(page.title, 60), description: truncate(metaDescription, 160), path: `/best/${page.slug}`, ogType: "article", publishedAt: page.lastUpdated, updatedAt: page.lastUpdated, articleSection: page.category, readingTime, noIndex: noindexed })
 }
