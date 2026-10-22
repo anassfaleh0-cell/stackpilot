@@ -1,0 +1,67 @@
+name: PilotStack AdSense readiness audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - "src/**"
+      - "public/**"
+      - "scripts/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/cloudflare-production-migration.yml"
+      - ".github/workflows/pilotstack-adsense-readiness.yml"
+  workflow_run:
+    workflows: ["Cloudflare production migration (guarded)"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pilotstack-adsense-readiness
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    name: Run code, content and live endpoint checks
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'master')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout current master
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Unit and component tests
+        run: npm test
+
+      - name: Content lint
+        run: npm run lint:content
+
+      - name: Guide quality audit
+        run: npm run audit:guides
+
+      - name: Noindex configuration audit
+        run: npm run audit:noindex
+
+      - name: SEO health audit
+        run: npm run seo:audit
+
+      - name: Production endpoint smoke check
+        run: npm run seo:smoke
+        env:
+          SITE_URL: https://pilotstack.online
