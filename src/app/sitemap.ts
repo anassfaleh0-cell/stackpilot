@@ -29,7 +29,6 @@ const staticPages: MetadataRoute.Sitemap = [
   { url: `${siteConfig.url}/tools`, changeFrequency: "weekly", priority: 0.7 },
   { url: `${siteConfig.url}/statistics`, changeFrequency: "weekly", priority: 0.8 },
   { url: `${siteConfig.url}/research`, changeFrequency: "weekly", priority: 0.7 },
-  { url: `${siteConfig.url}/research/saas-pricing-benchmark-2026`, changeFrequency: "monthly", priority: 0.6 },
   { url: `${siteConfig.url}/alternatives`, changeFrequency: "weekly", priority: 0.7 },
   { url: `${siteConfig.url}/use-cases`, changeFrequency: "weekly", priority: 0.7 },
   { url: `${siteConfig.url}/industries`, changeFrequency: "weekly", priority: 0.7 },
