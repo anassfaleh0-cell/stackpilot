@@ -105,6 +105,7 @@ function Dropdown({ item, pathname }: { item: (typeof navConfig)[number]; pathna
             ? "text-primary bg-primary-subtle"
             : "text-muted-foreground hover:text-foreground hover:bg-muted-bg"
         )}
+        aria-haspopup="true"
         aria-expanded={open}
         aria-controls={panelId}
       >

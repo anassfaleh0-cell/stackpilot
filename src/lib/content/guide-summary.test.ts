@@ -28,4 +28,16 @@ describe("guide key takeaways", () => {
     expect(getGuideKeyTakeaways([], 5)).toEqual([])
     expect(getGuideKeyTakeaways([{ title: "No limit", body: "Content." }], 0)).toEqual([])
   })
+
+  it("uses list and table content when a section has no prose body", () => {
+    const takeaways = getGuideKeyTakeaways([
+      { title: "Checklist", body: "", items: ["Confirm export access", "Test role permissions"] },
+      { title: "Cost comparison", body: "", columns: ["Plan", "Annual cost"], rows: [["Basic", "$120"], ["Pro", "$240"]] },
+    ])
+
+    expect(takeaways).toEqual([
+      { title: "Checklist", summary: "Confirm export access Test role permissions" },
+      { title: "Cost comparison", summary: "Plan Annual cost Basic $120 Pro $240" },
+    ])
+  })
 })

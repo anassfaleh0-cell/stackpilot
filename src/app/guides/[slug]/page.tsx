@@ -11,11 +11,12 @@ import { InternalLinks } from "@/components/content/internal-links"
 import { RelatedReading } from "@/components/content/related-reading"
 import { notFound } from "next/navigation"
 import Link from "next/link"
+import { Fragment } from "react"
 import { EditorialHero, EditorialSectionIllustration, GlassCard, InfoCard } from "@/components/dynamic"
 import { EditorialProcess, RelatedContent } from "@/components/dynamic-client"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { BrandDivider } from "@/components/brand/patterns"
-import { CheckCircle2, BookOpen, Clock, Layers, Lightbulb, Scale } from "lucide-react"
+import { CheckCircle2, BookOpen, Clock, Layers, Scale } from "lucide-react"
 import { InFeedAd } from "@/components/ads"
 import { isNoindexed } from "@/lib/noindex"
 import { getGuideKeyTakeaways } from "@/lib/content/guide-summary"
@@ -71,7 +72,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const guide = getGuide(slug)
   if (!guide) return {}
   const seoDesc = truncate(guide.description, 160)
-  return createMetadata({ title: truncate(guide.title, 60), description: seoDesc, path: `/guides/${slug}`, ogType: "article", publishedAt: guide.lastUpdated, updatedAt: guide.lastUpdated, articleSection: guide.category, readingTime: guide.readingTime, noIndex: isNoindexed("guides", slug) })
+  return createMetadata({ title: truncate(guide.title, 60), description: seoDesc, path: `/guides/${slug}`, ogType: "article", updatedAt: guide.lastUpdated, articleSection: guide.category, readingTime: guide.readingTime, noIndex: isNoindexed("guides", slug) })
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -81,12 +82,23 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
 
   const faqs = deriveGuideFaqs(guide)
   const keyTakeaways = getGuideKeyTakeaways(guide.sections)
+  const isHowToGuide = /^(how to|step[- ]by[- ]step)\b/i.test(guide.title.trim())
 
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Guides", href: "/guides" }, { name: guide.title, href: `/guides/${slug}` }]} />
-      <HowToSchema name={guide.title} description={guide.description} steps={guide.sections.map((s) => ({ name: s.title, text: s.body }))} />
-      <ArticleSchema title={guide.title} description={guide.description} publishedAt={guide.lastUpdated} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={guide.sections.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={guide.category} keywords={[guide.category, "software guide", guide.title, "buying guide", "software selection"].filter(Boolean)} mentions={guide.relatedTools.length > 0 ? guide.relatedTools.map(t => ({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` })) : undefined} />
+      {isHowToGuide && (
+      <HowToSchema
+        name={guide.title}
+        description={guide.description}
+        url={`${site.url}/guides/${slug}`}
+        steps={guide.sections.map((section) => ({
+          name: section.title,
+          text: [section.body, ...(section.items ?? []), ...(section.columns ?? []), ...((section.rows ?? []).flat())].filter(Boolean).join(" "),
+        }))}
+      />
+      )}
+      <ArticleSchema title={guide.title} description={guide.description} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={[guide.title, guide.description, ...guide.sections.flatMap((section) => [section.title, section.body, ...(section.items ?? []), ...(section.columns ?? []), ...((section.rows ?? []).flat())]), ...faqs.flatMap((faq) => [faq.question, faq.answer])].join(" ").trim().split(/\s+/).filter(Boolean).length} category={guide.category} keywords={[guide.category, "software guide", guide.title, "buying guide", "software selection"].filter(Boolean)} mentions={guide.relatedTools.length > 0 ? guide.relatedTools.map(t => ({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` })) : undefined} />
       <FAQSchema
         questions={
           faqs
@@ -110,11 +122,6 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                 variant="guide"
                 className="w-full min-h-[180px] sm:min-h-[220px]"
               />
-            </div>
-
-            <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
-              <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-              <p className="text-sm text-muted-foreground">{guide.description}</p>
             </div>
 
             <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
@@ -192,7 +199,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             {/* Content sections with timeline */}
             <div className="space-y-12 mt-4">
               {guide.sections.map((section, i) => (
-                <>
+                <Fragment key={`${guide.slug}-${i}`}>
                   {i === 2 && guide.sections.length >= 4 && (
                     <section className="scroll-mt-24" id="ad-in-feed">
                       <InFeedAd className="mx-auto max-w-[728px]" />
@@ -207,9 +214,9 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                   {section.type === "list" && section.items ? (
                     <>
                       {section.body && (
-                        <p className="text-muted-foreground leading-relaxed mb-4 pl-11">{section.body}</p>
+                        <p className="text-muted-foreground leading-relaxed mb-4 pl-0 sm:pl-11">{section.body}</p>
                       )}
-                      <div className="space-y-3 pl-11">
+                      <div className="space-y-3 pl-0 sm:pl-11">
                         {section.items.map((item, j) => (
                           <div key={j} className="flex items-start gap-3 text-sm">
                             <CheckCircle2 size={16} className="text-success shrink-0 mt-0.5" />
@@ -219,7 +226,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                       </div>
                     </>
                   ) : section.type === "checklist" && (section.body || (section.items?.length ?? 0) > 0) ? (
-                    <div className="space-y-3 pl-11">
+                    <div className="space-y-3 pl-0 sm:pl-11">
                       {section.items && section.items.length > 0 ? (
                         <>
                           {section.body && (
@@ -242,7 +249,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                       )}
                     </div>
                   ) : section.type === "table" && section.columns && section.rows ? (
-                    <div className="overflow-x-auto pl-11">
+                    <div className="overflow-x-auto pl-0 sm:pl-11">
                       <table className="w-full text-sm border-collapse">
                         <thead>
                           <tr className="border-b border-border">
@@ -263,26 +270,12 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                       </table>
                     </div>
                   ) : (
-                    <p className="text-muted-foreground leading-relaxed pl-11">{section.body}</p>
+                    <p className="text-muted-foreground leading-relaxed pl-0 sm:pl-11">{section.body}</p>
                   )}
 
-                  {/* Practical tip every 3 sections */}
-                  {i % 3 === 2 && (
-                    <div className="mt-6 ml-11 rounded-xl border border-accent/20 bg-accent-subtle/30 p-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Lightbulb size={14} className="text-accent" />
-                        <span className="text-xs font-semibold text-accent">Practical tip</span>
-                      </div>
-                      <p className="text-sm text-foreground">
-                        {section.items
-                          ? `When working through "${section.title}", focus on the areas most relevant to your specific use case.`
-                          : `This section is foundational — take time to understand it before moving forward.`
-                        }
-                      </p>
-                    </div>
-                  )}
+                  {/* Avoid injecting generic tips; keep guidance specific to the reviewed guide content. */}
                 </section>
-                </>
+                </Fragment>
               ))}
             </div>
 
@@ -319,7 +312,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                           <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0">{i + 1}</span>
                           <span className="font-medium text-xs">{s.title}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground leading-relaxed ml-7">{s.body.slice(0, 100).trim()}...</p>
+                        <p className="text-xs text-muted-foreground leading-relaxed ml-7">{[s.body, ...(s.items ?? []), ...(s.columns ?? []), ...((s.rows ?? []).flat())].filter(Boolean).join(" ").slice(0, 100).trim()}{[s.body, ...(s.items ?? []), ...(s.columns ?? []), ...((s.rows ?? []).flat())].filter(Boolean).join(" ").length > 100 ? "…" : ""}</p>
                       </div>
                     ))}
                   </div>
@@ -361,15 +354,20 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             <InternalLinks category={guide.category} excludeSlug={guide.slug} />
 
             {(() => {
-              const cat = categories.find(c => c.name === guide.category)
-              if (!cat) return null
+              const relatedCategoryNames = new Set(
+                guide.relatedTools
+                  .map((slug) => getReview(slug)?.category)
+                  .filter((name): name is string => Boolean(name) && name !== guide.category)
+              )
+              const relatedCategories = categories.filter((category) => relatedCategoryNames.has(category.name))
+              if (relatedCategories.length === 0) return null
               return (
                 <section className="mt-16">
                   <h2 className="text-2xl font-bold tracking-tight mb-6">Related Categories</h2>
                   <div className="flex flex-wrap gap-2">
-                    {categories.filter(c => c.name !== guide.category).slice(0, 6).map(c => (
-                      <Link key={c.slug} href={`/category/${c.slug}`} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
-                        {c.name}
+                    {relatedCategories.slice(0, 6).map((category) => (
+                      <Link key={category.slug} href={`/category/${category.slug}`} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
+                        {category.name}
                       </Link>
                     ))}
                   </div>

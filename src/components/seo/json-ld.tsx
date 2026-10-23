@@ -97,7 +97,7 @@ export function ArticleSchema({
 }: {
   title: string
   description: string
-  publishedAt: string
+  publishedAt?: string
   updatedAt?: string
   author: string
   image?: string
@@ -116,8 +116,8 @@ export function ArticleSchema({
     description,
     author: authorEntity(author),
     publisher: organizationRef(),
-    datePublished: publishedAt,
-    dateModified: updatedAt || publishedAt,
+    datePublished: publishedAt || undefined,
+    dateModified: updatedAt || publishedAt || undefined,
     image: { "@type": "ImageObject", url: image || `${site.url}/og.png` },
     mainEntityOfPage: { "@type": "WebPage", "@id": url || site.url },
     inLanguage: "en-US",
@@ -494,11 +494,11 @@ export function ItemListSchema({ items, url }: { items: { name: string; url: str
   return ld(schema, "ld-item-list")
 }
 
-export function HowToSchema({ name, description, steps }: { name: string; description: string; steps: { name: string; text: string }[] }) {
+export function HowToSchema({ name, description, steps, url }: { name: string; description: string; steps: { name: string; text: string }[]; url?: string }) {
   const schema = clean({
     "@context": ctx,
     "@type": "HowTo",
-    "@id": `${site.url}/#howto`,
+    "@id": `${url || site.url}#howto`,
     name,
     description,
     step: steps.map((s, i) => ({
