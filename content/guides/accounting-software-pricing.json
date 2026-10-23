@@ -4,7 +4,7 @@
   "description": "A practical framework for comparing accounting software subscriptions, user limits, payroll and payment add-ons, migration costs, and the features a business actually needs. Verify current plan prices with each vendor before budgeting.",
   "category": "Finance & Accounting",
   "difficulty": "Intermediate",
-  "readingTime": 8,
+  "readingTime": 11,
   "sections": [
     {
       "title": "Start with the pricing model",
@@ -70,6 +70,46 @@
       "title": "Reconcile the quote with real workflows",
       "body": "Before approving a quote, map each required workflow to the exact plan or add-on in writing. For example, confirm whether bank reconciliation, approval routing, multiple currencies, inventory, accountant access, and required exports are included. Ask the vendor to identify any limits that could trigger an upgrade as the business grows. Keep the quote, pricing page, and support response together with the decision record. If a requirement is still uncertain, run a short trial using a representative transaction set before importing all records.",
       "type": "text"
+    },
+    {
+      "title": "Map each required workflow to a plan",
+      "type": "text",
+      "body": "Write the accounting workflows your business must complete each month: sales invoicing, supplier bills, bank reconciliation, expense claims, payroll, inventory, project costing, tax reporting, and management accounts. For each workflow, name the person who performs it, the records they need, the report or control that proves it was completed, and the frequency. Then check whether the plan supports that exact workflow in your country. This avoids buying a tier because it lists a broad feature name when the practical requirement—such as multi-currency reconciliation, approval routing, or consolidated reporting—may have separate limits. Mark requirements as confirmed, excluded, paid add-on, or still unknown. Ask the vendor to clarify unknowns in writing before comparing totals."
+    },
+    {
+      "title": "Separate subscription fees from operating costs",
+      "type": "text",
+      "body": "The recurring license is only one part of the cost. Create separate lines for the subscription, additional users, extra entities, payment processing, payroll, transaction overages, implementation, migration, training, support, and integrations. Keep one-time costs separate from recurring fees and identify who will perform the work. Internal time is still a cost even when a team member does not send an invoice for it. If the accounting package replaces another tool, include the old subscription only for the period when both systems must remain active. Do not count speculative savings as guaranteed; record the current process and estimate the change only after a pilot demonstrates how much work is actually removed."
+    },
+    {
+      "title": "Use one consistent cost-model worksheet",
+      "type": "text",
+      "body": "For each vendor, record the same inputs in the same units: number of full users, limited users, entities, monthly transactions, payroll employees, currencies, bank connections, storage needs, and required add-ons. Calculate the cost over a twelve-month period, then note any one-time setup and migration expenses separately. Include the vendor's official pricing URL, the date checked, currency, billing term, introductory discount, renewal amount, and quote expiration. If a price is available only through sales, enter “quote required” rather than filling the cell with an estimate. Add a column for evidence status so a confirmed fee cannot be confused with an assumption. Revisit the model whenever a vendor changes its plan structure or your business changes materially."
+    },
+    {
+      "title": "Test multi-entity and accountant access",
+      "type": "text",
+      "body": "Businesses with subsidiaries, multiple legal entities, external accountants, or separate brands should test these needs early. Ask how the vendor counts each company file, entity, workspace, accountant, and read-only user. Confirm whether reports can consolidate the records you need and whether intercompany transactions, currencies, tax settings, and access permissions are supported in the intended edition. If an accounting practice manages multiple clients, compare the practice or accountant product with the standard business product instead of assuming they share the same seat rules. Use sample data to verify that each user sees only the correct entity and that reports can be exported for review. These details can change both the subscription tier and the implementation effort."
+    },
+    {
+      "title": "Budget for data migration and reconciliation",
+      "type": "text",
+      "body": "Before switching systems, list the records that must move: chart of accounts, opening balances, customers, suppliers, invoices, bills, payments, tax codes, bank transactions, attachments, and historical reports. Export a representative sample and test it in a trial or staging workspace. Check not only whether records appear, but also whether totals reconcile, links between documents are preserved, dates and currencies are correct, and audit history remains available. Decide how much historical detail needs to be online and what can be retained in a secure archive. Agree on a cutover date, reconciliation owner, backup process, and rollback plan. The vendor's migration assistance may be included, limited, or billed separately, so confirm scope before treating it as free."
+    },
+    {
+      "title": "Review controls, security, and audit needs",
+      "type": "text",
+      "body": "Accounting data often includes payroll, supplier bank details, customer information, and sensitive financial records. Check roles and permissions, approval steps, audit logs, export controls, backups, recovery procedures, retention, and account deletion. Ask who can change the chart of accounts, edit a reconciled transaction, approve payments, or invite an external accountant. Verify the current security and data-processing documentation for the exact service and plan; do not assume a certification, region, or control applies to every edition. If your business has regulatory, contractual, or data-residency requirements, involve the responsible professional before uploading production data. Include the time needed to administer these controls in the total-cost model."
+    },
+    {
+      "title": "Check the quote, contract, and renewal rules",
+      "type": "text",
+      "body": "A vendor quote should identify the product and edition, seat and entity counts, add-ons, billing interval, currency, taxes, onboarding services, support level, discount period, renewal price, and contract term. Check automatic renewal, cancellation notice, price-change provisions, minimum commitments, and what happens to your records after termination. Ask whether increasing users or transaction volume triggers a plan change and whether downgrading removes access to reports or history. Keep a copy of the quote and the source pages with the decision record. If the quote is incomplete, mark the missing amounts as unresolved and do not present the resulting total as final. The lowest first-term price is not necessarily the lowest cost over the period you expect to use the system."
+    },
+    {
+      "title": "Model growth and cash-flow scenarios",
+      "type": "text",
+      "body": "Prepare at least three scenarios using your own business assumptions: current operations, a realistic expected year, and a higher-growth case. Vary users, legal entities, invoices, payroll employees, transaction volume, currencies, and add-ons only where those inputs affect the vendor's billing model. For each scenario, show recurring fees, one-time implementation, migration overlap, and renewal costs separately. If annual billing reduces the stated subscription but requires a large upfront payment, compare the savings with the cash-flow commitment and refund conditions. Include a note about which assumptions came from your business records and which limits came from the vendor. Do not invent a growth forecast to make one product appear cheaper; use ranges and update them when actual usage changes."
     }
   ],
   "author": "Emily Nakamura",
