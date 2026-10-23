@@ -101,6 +101,41 @@
     {
       "title": "Decision framework",
       "body": "Run a short pilot with representative users. Ask them to complete the same daily tasks in each candidate and record completion time, confusion, missing capabilities, and support needs. Evaluate export and recovery before migrating production information. Choose the smallest system that meets the requirements reliably; avoid recreating every legacy process if the process itself can be simplified."
+    },
+    {
+      "title": "Match the alternative to the content model",
+      "body": "If the workspace is mostly long-form documentation, prioritize search, page history, access control, and reliable linking. If it is mostly structured records, test relations, filtered views, bulk editing, and exports. If it is a personal knowledge base, test backlinks, offline access, and file ownership. If the problem is task execution, focus on ownership, due dates, dependencies, and recurring work. A candidate should be judged against the data model the team actually uses.",
+      "type": "text"
+    },
+    {
+      "title": "Test the hardest migration cases",
+      "body": "Do not test only a simple page. Include a database with relations, a page with attachments, a template, nested pages, comments, and content shared with external guests. Export or import a small sample and check the result manually. Record lost relationships, changed formatting, missing files, and permissions that need to be recreated. Use this test to estimate the real migration effort before committing.",
+      "type": "text"
+    },
+    {
+      "title": "Plan adoption and ownership",
+      "body": "Name the person who owns workspace structure, access requests, templates, and cleanup. Decide which content belongs in the knowledge base and which belongs in a task or project tool. Create a small set of naming and archiving conventions, provide task-based onboarding, and schedule a review after the pilot. Without clear ownership, any flexible workspace can become difficult to search and maintain.",
+      "type": "text"
+    },
+    {
+      "title": "Use a fair shortlist scorecard",
+      "body": "Agree on must-have requirements before demos and score candidates on the same scale. Useful dimensions include search, content structure, collaboration, permissions, exportability, integrations, accessibility, and total cost. Record evidence and mark untested features as unknown. Do not allow a high score on optional features to compensate for a failure in data portability or access control. Keep the scorecard with the migration notes so the decision can be revisited.",
+      "type": "text"
+    },
+    {
+      "title": "Compare accessibility and everyday friction",
+      "body": "Have representative users complete common tasks without coaching: find an old decision, create a page or record, share it with the right people, update a task, and export their work. Include keyboard-only navigation and other accessibility needs that matter to the team. Record the steps, confusion, and workarounds rather than asking only whether people like the interface. A tool that is technically capable but difficult to use consistently may reduce adoption and leave information scattered across multiple systems.",
+      "type": "text"
+    },
+    {
+      "title": "Make the switch reversible",
+      "body": "Keep an untouched export of the source workspace and define how the team can recover a page, attachment, or database if migration fails. Decide how long the old workspace remains available, who can edit it during the transition, and when the team will stop creating new content there. Reconcile counts and sample important relationships before final cutover. A reversible pilot lowers risk and lets the team compare the new workflow with the old one using real tasks.",
+      "type": "text"
+    },
+    {
+      "title": "Write a transition plan before selecting",
+      "body": "Set the pilot scope, success criteria, migration owner, user communications, support plan, and rollback condition before moving content. Decide which old pages should be archived rather than migrated, how links will be redirected or updated, and how users will find the new source of truth. At the end of the pilot, compare observed results with the original requirements and document the reason for proceeding, extending the pilot, or staying with the current tool.",
+      "type": "text"
     }
   ],
   "selectionCriteria": [
