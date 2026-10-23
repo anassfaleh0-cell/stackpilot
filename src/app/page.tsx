@@ -459,7 +459,7 @@ export default function HomePage() {
               Practical software research, when you need it
             </h2>
             <p className="text-muted-foreground text-pretty max-w-xl mx-auto mb-8">
-              Newsletter subscriptions are temporarily unavailable while delivery is being configured. In the meantime, explore our latest research and software guides directly—no email signup required.
+              Explore recent research reports and practical guides on software pricing, evaluation criteria, and implementation trade-offs. Each piece explains its scope, sources, and limitations to help you make a better-informed decision.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
