@@ -91,7 +91,7 @@ export default function MethodologyPage() {
             <div className="key-takeaways mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Key Takeaways</h2>
               <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                <li>Commercial placements are distinguished from editorial recommendations</li>
+                <li>Affiliate and advertising relationships are disclosed separately from editorial recommendations</li>
                 <li>Consistent data is useful, but consistency alone does not prove a claim is sourced</li>
                 <li>Scores are not presented as independent user ratings unless their provenance is documented</li>
                 <li>Certification and company facts with no source should be omitted or labelled unverified</li>
