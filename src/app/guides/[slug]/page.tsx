@@ -11,6 +11,7 @@ import { InternalLinks } from "@/components/content/internal-links"
 import { RelatedReading } from "@/components/content/related-reading"
 import { notFound } from "next/navigation"
 import Link from "next/link"
+import { Fragment } from "react"
 import { EditorialHero, EditorialSectionIllustration, GlassCard, InfoCard } from "@/components/dynamic"
 import { EditorialProcess, RelatedContent } from "@/components/dynamic-client"
 import { EEATProcess } from "@/components/seo/editorial-process"
@@ -194,7 +195,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             {/* Content sections with timeline */}
             <div className="space-y-12 mt-4">
               {guide.sections.map((section, i) => (
-                <>
+                <Fragment key={`${guide.slug}-${i}`}>
                   {i === 2 && guide.sections.length >= 4 && (
                     <section className="scroll-mt-24" id="ad-in-feed">
                       <InFeedAd className="mx-auto max-w-[728px]" />
@@ -270,7 +271,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
 
                   {/* Do not inject generic tips: advice must come from the guide's reviewed source content. */}
                 </section>
-                </>
+                </Fragment>
               ))}
             </div>
 
