@@ -70,5 +70,18 @@
   "relatedComparisons": [
     "notion-vs-linear"
   ],
-  "faqs": []
+  "faqs": [
+    {
+      "question": "How many software vendors should we evaluate?",
+      "answer": "Start with a shortlist that can plausibly meet the must-have requirements. Evaluate every finalist against the same scenarios and evidence standard; adding vendors is useful only if it changes the decision or reveals a meaningful alternative."
+    },
+    {
+      "question": "Should we use a weighted scorecard?",
+      "answer": "A scorecard helps make trade-offs explicit, but it should not override mandatory requirements. Set weights before demos, record evidence for each score, and mark untested or unclear claims as unknown rather than guessing."
+    },
+    {
+      "question": "What should we test during a software trial?",
+      "answer": "Test representative daily workflows, exceptions, permissions, integrations, reporting, data export, accessibility, recovery, and support. Use a small pilot with clear acceptance criteria and avoid uploading sensitive production data before security checks."
+    }
+  ]
 }
