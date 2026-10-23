@@ -72,7 +72,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const guide = getGuide(slug)
   if (!guide) return {}
   const seoDesc = truncate(guide.description, 160)
-  return createMetadata({ title: truncate(guide.title, 60), description: seoDesc, path: `/guides/${slug}`, ogType: "article", publishedAt: guide.lastUpdated, updatedAt: guide.lastUpdated, articleSection: guide.category, readingTime: guide.readingTime, noIndex: isNoindexed("guides", slug) })
+  return createMetadata({ title: truncate(guide.title, 60), description: seoDesc, path: `/guides/${slug}`, ogType: "article", updatedAt: guide.lastUpdated, articleSection: guide.category, readingTime: guide.readingTime, noIndex: isNoindexed("guides", slug) })
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -95,7 +95,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           text: [section.body, ...(section.items ?? []), ...(section.columns ?? []), ...((section.rows ?? []).flat())].filter(Boolean).join(" "),
         }))}
       />
-      <ArticleSchema title={guide.title} description={guide.description} publishedAt={guide.lastUpdated} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={[guide.title, guide.description, ...guide.sections.flatMap((section) => [section.title, section.body, ...(section.items ?? []), ...(section.columns ?? []), ...((section.rows ?? []).flat())]), ...faqs.flatMap((faq) => [faq.question, faq.answer])].join(" ").trim().split(/\s+/).filter(Boolean).length} category={guide.category} keywords={[guide.category, "software guide", guide.title, "buying guide", "software selection"].filter(Boolean)} mentions={guide.relatedTools.length > 0 ? guide.relatedTools.map(t => ({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` })) : undefined} />
+      <ArticleSchema title={guide.title} description={guide.description} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={[guide.title, guide.description, ...guide.sections.flatMap((section) => [section.title, section.body, ...(section.items ?? []), ...(section.columns ?? []), ...((section.rows ?? []).flat())]), ...faqs.flatMap((faq) => [faq.question, faq.answer])].join(" ").trim().split(/\s+/).filter(Boolean).length} category={guide.category} keywords={[guide.category, "software guide", guide.title, "buying guide", "software selection"].filter(Boolean)} mentions={guide.relatedTools.length > 0 ? guide.relatedTools.map(t => ({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` })) : undefined} />
       <FAQSchema
         questions={
           faqs
