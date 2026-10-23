@@ -30,9 +30,9 @@ jobs:
       - name: Update patched Next.js and lockfile
         run: |
           npm install --save-exact next@16.4.3 eslint-config-next@16.4.2
-          npm audit fix
+          npm audit --json > /tmp/full-audit.json || true
           npm audit --omit=dev --json > /tmp/production-audit.json || true
-          node -e "const a=require('/tmp/production-audit.json'); console.log('Production audit:', JSON.stringify(a.metadata?.vulnerabilities || {}))"
+          node -e "const full=require('/tmp/full-audit.json'); const prod=require('/tmp/production-audit.json'); console.log('Full dependency audit:', JSON.stringify(full.metadata?.vulnerabilities || {})); console.log('Production dependency audit:', JSON.stringify(prod.metadata?.vulnerabilities || {}))"
 
       - name: Remove temporary workflow and commit lockfile
         run: |
