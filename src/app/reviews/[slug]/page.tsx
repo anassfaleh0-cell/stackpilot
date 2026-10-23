@@ -67,7 +67,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
     : null
   const companyFacts = resolveCompanyFacts(tool, entity)
   const pros = editorialPros(tool.pros)
-  const visibleFaqs = getVisibleReviewFaqs(tool.faqs, tool.priceRangeVerified === true).slice(0, 8)
+  const visibleFaqs = getVisibleReviewFaqs(tool.faqs, tool.priceRangeVerified === true, tool.featuresVerified === true).slice(0, 8)
   const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true)
 
   const authorSlug = tool.author ? tool.author.trim().toLowerCase().replace(/\s+/g, "-") : ""

@@ -83,4 +83,13 @@ describe("review content provenance", () => {
     expect(getVisibleReviewContent(sections).map((section) => section.title)).toEqual(["Feature Evaluation"])
   })
 
+  it("hides product-specific capability FAQs until feature provenance is verified", () => {
+    const faqs = [
+      { question: "Does Linear integrate with GitHub?", answer: "Yes, Linear offers deep GitHub integration that allows teams to link issues to branches, pull requests, and commits." },
+      { question: "What are the main features of Linear?", answer: "Linear supports issue tracking, project planning, and custom workflows." },
+      { question: "Who should evaluate Linear?", answer: "Teams should compare the workflow against their requirements before choosing." },
+    ]
+    expect(getVisibleReviewFaqs(faqs).map((faq) => faq.question)).toEqual(["Who should evaluate Linear?"])
+  })
+
 })

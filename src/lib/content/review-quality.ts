@@ -116,12 +116,15 @@ const GENERATED_REVIEW_FAQ_PATTERNS = [
   /^.+ has a low learning curve\. Most teams can complete initial setup and basic configuration within a few hours/i,
   /^.+ integrates with .+ and \d+\+ other platforms\..*Integration setup typically takes 15-30 minutes per connection\./i,
   /^.+ offers significant customization options\. Teams can configure settings, views, and notifications to suit their preferences\./i,
+  /^Yes, .+ offers deep .+ integration that allows teams to link issues to branches, pull requests, and commits\./i,
+  /^.+ is available on Cloud platforms\. Mobile apps are available for iOS and Android\./i,
 ]
 
-export function getVisibleReviewFaqs(faqs: FAQItem[], showVerifiedPricing = false): FAQItem[] {
+export function getVisibleReviewFaqs(faqs: FAQItem[], showVerifiedPricing = false, showVerifiedFeatures = false): FAQItem[] {
   const visibleFaqs = faqs.filter((faq) => {
     const question = faq.question.trim()
     const answer = faq.answer.trim()
+    if (!showVerifiedFeatures && /\b(?:integrat(?:e|es|ion)|features?|support for|supports?|available on|mobile apps?|API access|security certifications?|compliance|SSO|data residency|deployment options)\b/i.test(question)) return false
     if (/^is .+ secure\?$/i.test(question) && /SOC 2 Type II|ISO 27001|FedRAMP|compliance with GDPR|CCPA|HIPAA|PCI DSS/i.test(answer)) return false
     if (/^is .+ GDPR compliant\?$/i.test(question) && /^yes, .+ is GDPR compliant with data processing agreements and data residency options\./i.test(answer)) return false
     if (/^is .+ good for enterprise teams\?$/i.test(question) && /serves enterprise organizations with .+ certifications? and scalable infrastructure/i.test(answer)) return false
