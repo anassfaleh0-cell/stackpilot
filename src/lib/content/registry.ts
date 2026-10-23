@@ -375,7 +375,7 @@ function sanitizeReview(review: ReviewContent): ReviewContent {
     reviewCount: 0,
     rating: review.ratingVerified === true && typeof review.rating === "number" && Number.isFinite(review.rating) ? review.rating : 0,
     ratings: review.ratingVerified === true && Array.isArray(review.ratings) ? review.ratings : [],
-    pricing: review.priceRangeVerified === true ? review.pricing : "Not verified",
+    pricing: review.priceRangeVerified === true ? review.pricing : "Not independently verified",
     priceRange: review.priceRangeVerified === true && review.priceRange ? safePrice(review.priceRange) : undefined,
     company: review.companyFactsVerified === true ? review.company : undefined,
     content: buildReviewSections(review),
