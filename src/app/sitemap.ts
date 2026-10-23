@@ -160,6 +160,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
+    // Keep this source-audited benchmark explicitly discoverable while legacy research
+    // registry/sitemap parity is validated. The shared filter deduplicates it if already present.
+    {
+      url: `${siteConfig.url}/research/saas-pricing-benchmark-2026`,
+      lastModified: getSitemapLastModified("2026-10-15"),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
     // Statistics: use lastUpdated if available
     ...statistics.map((s) => ({
       url: `${siteConfig.url}/statistics/${s.slug}`,
