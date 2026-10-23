@@ -121,6 +121,16 @@
       "title": "Use a fair shortlist scorecard",
       "body": "Agree on must-have requirements before demos and score candidates on the same scale. Useful dimensions include search, content structure, collaboration, permissions, exportability, integrations, accessibility, and total cost. Record evidence and mark untested features as unknown. Do not allow a high score on optional features to compensate for a failure in data portability or access control. Keep the scorecard with the migration notes so the decision can be revisited.",
       "type": "text"
+    },
+    {
+      "title": "Compare accessibility and everyday friction",
+      "body": "Have representative users complete common tasks without coaching: find an old decision, create a page or record, share it with the right people, update a task, and export their work. Include keyboard-only navigation and other accessibility needs that matter to the team. Record the steps, confusion, and workarounds rather than asking only whether people like the interface. A tool that is technically capable but difficult to use consistently may reduce adoption and leave information scattered across multiple systems.",
+      "type": "text"
+    },
+    {
+      "title": "Make the switch reversible",
+      "body": "Keep an untouched export of the source workspace and define how the team can recover a page, attachment, or database if migration fails. Decide how long the old workspace remains available, who can edit it during the transition, and when the team will stop creating new content there. Reconcile counts and sample important relationships before final cutover. A reversible pilot lowers risk and lets the team compare the new workflow with the old one using real tasks.",
+      "type": "text"
     }
   ],
   "selectionCriteria": [
