@@ -1,5 +1,6 @@
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, getAllUseCases, getAllHubs, getAllIndustries, getAllResearch, getAllStatistics, getAllBlogPosts, getAllGlossaryTerms, isContentAvailable } from "./registry"
 import type { ReviewContent, ComparisonContent, GuideContent, BestContent, AlternativeContent } from "@/types/content"
+import { REDIRECTED_ALTERNATIVE_SLUGS, REDIRECTED_BEST_SLUGS } from "@/lib/sitemap/redirected-content"
 
 export type RelatedType =
   | "review"
@@ -215,8 +216,8 @@ export function getRelatedByCategory(
   const reviewsRaw = getCachedRelatedSource("reviews", getAllReviews)
   const comparisonsRaw = getCachedRelatedSource("comparisons", getAllComparisons)
   const guidesRaw = getCachedRelatedSource("guides", getAllGuides)
-  const bestRaw = getCachedRelatedSource("best", getAllBest)
-  const alternativesRaw = getCachedRelatedSource("alternatives", getAllAlternatives)
+  const bestRaw = getCachedRelatedSource("best", () => getAllBest().filter((item) => !REDIRECTED_BEST_SLUGS.has(item.slug)))
+  const alternativesRaw = getCachedRelatedSource("alternatives", () => getAllAlternatives().filter((item) => !REDIRECTED_ALTERNATIVE_SLUGS.has(item.slug)))
   const useCasesRaw = getCachedRelatedSource("use-cases", getAllUseCases)
   const hubsRaw = getCachedRelatedSource("hubs", getAllHubs)
   const industriesRaw = getCachedRelatedSource("industries", getAllIndustries)
