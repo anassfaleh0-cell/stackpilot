@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { X, Menu } from "lucide-react"
-import { navConfig, categories } from "@/lib/constants"
+import { navConfig, categories, secondaryNavLinks } from "@/lib/constants"
 import { useState, useEffect, useCallback, useRef } from "react"
 import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
@@ -165,6 +165,28 @@ export function MobileNav() {
                   tabIndex={open ? 0 : -1}
                 >
                   {cat.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <hr className="section-divider my-4" />
+          <p className="px-3 pb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">About PilotStack</p>
+          <ul className="space-y-1">
+            {secondaryNavLinks.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  className={cn(
+                    "block rounded-lg px-3 py-2.5 text-sm transition-colors",
+                    isActive(item.href)
+                      ? "bg-primary-subtle text-primary font-medium"
+                      : "text-muted-foreground hover:bg-muted-bg hover:text-foreground"
+                  )}
+                  tabIndex={open ? 0 : -1}
+                >
+                  {item.label}
                 </Link>
               </li>
             ))}
