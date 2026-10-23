@@ -67,5 +67,18 @@
   "relatedPosts": [
     "password-managers-comparison"
   ],
-  "faqs": []
+  "faqs": [
+    {
+      "question": "Does buying security software make a business compliant?",
+      "answer": "No. Compliance depends on the organization's controls, processes, scope, evidence, and obligations. Verify the vendor's current documentation and contract terms, then assess how the product fits your own requirements."
+    },
+    {
+      "question": "How do we compare security products fairly?",
+      "answer": "Define the specific risk and control you need, then test candidates against the same environment and scenarios. Compare evidence, alert quality, administration, integrations, operational effort, total cost, and exit options."
+    },
+    {
+      "question": "What should be checked before deployment?",
+      "answer": "Confirm data handling, permissions, MFA or SSO, logging, incident notifications, backup and recovery, supported environments, ownership of alerts, and how configurations and records can be exported at contract end."
+    }
+  ]
 }
