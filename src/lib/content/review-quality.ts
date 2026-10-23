@@ -73,6 +73,20 @@ const GENERATED_REVIEW_SECTION_PATTERNS = [
   /^The current profile records these strengths: .+\. It also records these limitations:/i,
 ]
 
+export function isPricingPlaceholder(value: unknown): boolean {
+  const text = typeof value === "string" ? value.trim() : ""
+  if (!text) return true
+  return /^(?:not independently verified(?:\\b.*)?|not verified|check (?:the )?official pricing|pricing (?:is )?not recorded|not recorded|unknown|n\\/?a|none)$/i.test(text)
+}
+
+export function getReviewPricingSummary(priceRange?: string, pricing?: string, verified = false): string {
+  const model = isPricingPlaceholder(pricing) ? "" : String(pricing).trim()
+  const range = isPricingPlaceholder(priceRange) ? "" : String(priceRange).trim()
+  const value = model && range ? `${model}: ${range}` : model || range
+  if (!value) return "Current pricing is not independently verified; confirm plans and regional terms with the vendor."
+  return verified ? value : `${value} (recorded; not independently verified; confirm current terms with the vendor)`
+}
+
 export function stripUnverifiedPriceClaims(value: string): string {
   const raw = String(value ?? "").trim()
   if (!raw) return ""
