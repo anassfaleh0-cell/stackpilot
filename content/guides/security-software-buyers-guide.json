@@ -85,6 +85,11 @@
       "title": "Define success before rollout",
       "body": "Choose a small set of measures that reflect the risk the tool is intended to reduce, such as coverage of required devices, time to investigate a priority alert, number of unowned alerts, or success of a recovery test. Record the baseline and measurement method before deployment. Review results after the pilot and again after configuration changes. Do not use a vendor's headline detection or prevention statistic as a substitute for evidence from your own environment.",
       "type": "text"
+    },
+    {
+      "title": "Document residual risk",
+      "body": "No product removes every risk. Record the threats or control gaps that remain after deployment, who accepts them, what compensating controls exist, and when the decision will be reviewed. Escalate any risk that exceeds the organization's tolerance before rollout rather than assuming that a purchase itself closes the gap.",
+      "type": "text"
     }
   ],
   "lastUpdated": "2026-10-23",
