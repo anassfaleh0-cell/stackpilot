@@ -50,6 +50,41 @@
       "title": "Make and document the decision",
       "body": "Summarize which requirements passed, which remain unknown, the total expected cost, the main trade-offs, implementation risks, and why the selected product fits better than the alternatives. Name an accountable owner and define what would trigger a re-evaluation. Preserve the scorecard and source links so the decision can be revisited when needs or vendor terms change.",
       "type": "text"
+    },
+    {
+      "title": "Set measurable acceptance criteria",
+      "body": "For each must-have requirement, write a test that can be observed and repeated. Define the expected result, test data, responsible tester, pass/fail threshold, and evidence to save. Include negative tests such as whether a user without permission can view a restricted record. Agree on criteria before vendor demos so the team does not change the scoring rules to favor a preferred product.",
+      "type": "text"
+    },
+    {
+      "title": "Check operational readiness",
+      "body": "Confirm who will administer the product after launch, how users request access, who reviews permissions, how changes are approved, and where incidents are reported. Estimate the ongoing work required to maintain integrations, clean data, manage templates, and answer user questions. A tool that scores well in a demo may still be a poor fit if the organization lacks the time or skills to operate it.",
+      "type": "text"
+    },
+    {
+      "title": "Record evidence and revisit the choice",
+      "body": "Keep vendor documentation links, dates checked, screenshots or notes from tests, open questions, cost assumptions, and the decision rationale in one place. Separate confirmed facts from vendor statements and internal assumptions. Assign an owner to recheck the decision before renewal or after major product, pricing, security, or business changes. This record helps prevent a new evaluation from repeating the same work.",
+      "type": "text"
+    },
+    {
+      "title": "Use a decision meeting, not a demo vote",
+      "body": "After testing, hold a short review with the people who own the requirements. Start with mandatory pass/fail criteria, then discuss evidence for the remaining scores and unresolved risks. Ask each stakeholder to identify one strength, one limitation, and one assumption that could change the decision. Record dissent rather than averaging it away. Agree on the decision owner, implementation dependencies, fallback plan, and conditions that would justify reconsidering the choice.",
+      "type": "text"
+    },
+    {
+      "title": "Keep the scope proportionate",
+      "body": "A small team buying a low-risk tool may need a lightweight checklist and a short trial; software handling sensitive data or critical operations needs deeper security, legal, and resilience review. Match the evaluation effort to the impact of failure, amount of data involved, integration complexity, and switching cost. The goal is a defensible decision, not paperwork for its own sake.",
+      "type": "text"
+    },
+    {
+      "title": "What to do when evidence is missing",
+      "body": "If the vendor cannot demonstrate a requirement, record it as unknown rather than awarding a pass. Decide whether the requirement is essential enough to stop procurement, whether a written contractual commitment would resolve it, or whether a different product should be tested. Keep the open question and its owner visible until it is resolved.",
+      "type": "text"
+    },
+    {
+      "title": "Confirm ownership after launch",
+      "body": "Name a person to monitor renewals, vendor changes, access reviews, and user feedback so the evaluation remains useful after procurement.",
+      "type": "text"
     }
   ],
   "author": "Sarah Chen",
