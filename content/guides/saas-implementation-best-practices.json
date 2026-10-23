@@ -55,6 +55,21 @@
       "title": "Plan ongoing administration and exit",
       "body": "Assign responsibility for user access, configuration changes, integrations, renewal dates, vendor reviews, and periodic data exports. Document how to revoke access, recover from a service outage, and export or delete data when switching products. Schedule a post-launch review to compare results with the baseline and decide which improvements are justified by evidence.",
       "type": "text"
+    },
+    {
+      "title": "Create a cutover checklist",
+      "body": "List the final data export, import completion, reconciliation checks, permission review, integration tests, user communications, support coverage, and rollback decision owner. Specify who gives the go/no-go approval and what conditions stop the launch. Keep the source system read-only or otherwise recoverable until the data owner confirms the new system is complete and users can perform critical work.",
+      "type": "text"
+    },
+    {
+      "title": "Handle change requests deliberately",
+      "body": "During implementation, new feature requests can expand scope and delay launch. Record each request, the problem it solves, the users affected, the cost or risk, and whether it is required for the initial release. Separate launch blockers from improvements that can wait. Review scope changes with the business owner and preserve a clear record of why a request was accepted or deferred.",
+      "type": "text"
+    },
+    {
+      "title": "Review outcomes after launch",
+      "body": "Schedule follow-up reviews after users have had time to complete real work. Compare the agreed measures with the baseline, review recurring support issues, check permission and integration health, and confirm data quality. Assign each problem an owner and due date. Keep a short improvement backlog and avoid adding automation until the underlying process and data are stable.",
+      "type": "text"
     }
   ],
   "author": "Marcus Rivera",
