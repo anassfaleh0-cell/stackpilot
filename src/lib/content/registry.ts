@@ -365,15 +365,21 @@ function sanitizeReview(review: ReviewContent): ReviewContent {
   const safeDescription = description.length >= 50 ? description : `${review.name} is listed in PilotStack’s ${review.category} catalog. Verify current features, pricing, and terms with the vendor.`
   return {
     ...review,
-    // Imported third-party review counts have no consistent source/provenance in this corpus.
-    // Suppress them rather than presenting unsupported numbers as verified social proof.
+    // Do not expose imported social proof, prices, or feature matrices without explicit source verification.
     reviewCount: 0,
+    rating: review.ratingVerified === true && typeof review.rating === "number" && Number.isFinite(review.rating) ? review.rating : undefined,
+    ratings: review.ratingVerified === true && Array.isArray(review.ratings) ? review.ratings : [],
+    pricing: review.priceRangeVerified === true ? safePrice(review.pricing) : "Verify current plan and pricing details with the vendor.",
+    priceRange: review.priceRangeVerified === true ? safePrice(review.priceRange) : "Not independently verified",
+    company: review.companyFactsVerified === true ? review.company : undefined,
     content: buildReviewSections(review),
     description: safeDescription,
     tagline: safePrice(sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.tagline, 220)))),
     pros: sanitizeList(review.pros).map(safePrice),
     cons: sanitizeList(review.cons).map(safePrice),
-    features: review.features.map((feature) => ({ ...feature, name: trimText(feature.name, 120), description: safePrice(sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(feature.description, 360)))) })).slice(0, 20),
+    features: review.featuresVerified === true
+      ? review.features.map((feature) => ({ ...feature, name: trimText(feature.name, 120), description: safePrice(sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(feature.description, 360)))) })).slice(0, 20)
+      : [],
     faqs: sanitizeFaqs(review.faqs).map((faq) => ({ question: safePrice(faq.question), answer: safePrice(faq.answer) })),
   }
 }
