@@ -75,6 +75,11 @@
       "title": "Keep the scope proportionate",
       "body": "A small team buying a low-risk tool may need a lightweight checklist and a short trial; software handling sensitive data or critical operations needs deeper security, legal, and resilience review. Match the evaluation effort to the impact of failure, amount of data involved, integration complexity, and switching cost. The goal is a defensible decision, not paperwork for its own sake.",
       "type": "text"
+    },
+    {
+      "title": "What to do when evidence is missing",
+      "body": "If the vendor cannot demonstrate a requirement, record it as unknown rather than awarding a pass. Decide whether the requirement is essential enough to stop procurement, whether a written contractual commitment would resolve it, or whether a different product should be tested. Keep the open question and its owner visible until it is resolved.",
+      "type": "text"
     }
   ],
   "author": "Sarah Chen",
