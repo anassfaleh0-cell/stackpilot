@@ -90,6 +90,11 @@
       "title": "Document residual risk",
       "body": "No product removes every risk. Record the threats or control gaps that remain after deployment, who accepts them, what compensating controls exist, and when the decision will be reviewed. Escalate any risk that exceeds the organization's tolerance before rollout rather than assuming that a purchase itself closes the gap.",
       "type": "text"
+    },
+    {
+      "title": "Reassess after material changes",
+      "body": "Repeat the relevant checks after a major product update, new integration, incident, acquisition, or change in the data the tool processes.",
+      "type": "text"
     }
   ],
   "lastUpdated": "2026-10-23",
