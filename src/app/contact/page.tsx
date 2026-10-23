@@ -3,8 +3,6 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { ContactForm } from "@/components/pages/contact-form"
-import { ToastProvider } from "@/components/ui/toast"
 import { SocialLinkList } from "@/components/brand/social-icons"
 
 const contactEmail = "contact@pilotstack.online"
@@ -17,10 +15,6 @@ export const metadata = createMetadata({
 })
 
 export default function ContactPage() {
-  const contactFormConfigured = Boolean(
-    process.env.RESEND_API_KEY && process.env.CONTACT_FROM_EMAIL,
-  )
-
   return (
     <>
       <BreadcrumbSchema
@@ -38,27 +32,21 @@ export default function ContactPage() {
         <Breadcrumbs items={[{ name: "Contact" }]} />
       </Container>
 
-      {contactFormConfigured ? (
-        <ToastProvider>
-          <ContactForm />
-        </ToastProvider>
-      ) : (
-        <Container className="pt-8">
-          <div className="mx-auto max-w-2xl rounded-xl border border-border bg-muted-bg p-6">
-            <h1 className="mb-3 text-2xl font-bold">Contact PilotStack</h1>
-            <p className="mb-4 text-sm text-muted-foreground">
-              Send feedback about a review, report a factual error, suggest a
-              topic, or ask about a business inquiry. The on-site contact form is not configured yet; please email us directly.
-            </p>
-            <a
-              className="inline-flex underline underline-offset-4"
-              href="mailto:contact@pilotstack.online"
-            >
-              {contactEmail}
-            </a>
-          </div>
-        </Container>
-      )}
+      <Container className="pt-8">
+        <div className="mx-auto max-w-2xl rounded-xl border border-border bg-muted-bg p-6">
+          <h1 className="mb-3 text-2xl font-bold">Contact PilotStack</h1>
+          <p className="mb-4 text-sm text-muted-foreground">
+            Send feedback about a review, report a factual error, suggest a
+            topic, or ask about a business inquiry. Email is the official contact channel.
+          </p>
+          <a
+            className="inline-flex underline underline-offset-4"
+            href="mailto:contact@pilotstack.online"
+          >
+            {contactEmail}
+          </a>
+        </div>
+      </Container>
 
       <Container className="pb-16 sm:pb-20 lg:pb-24">
         <div className="mx-auto mt-8 max-w-2xl rounded-xl border border-border bg-muted-bg p-6">
