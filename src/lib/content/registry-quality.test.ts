@@ -1,7 +1,24 @@
 import { describe, expect, it } from "vitest"
-import { getAllBest, getAllComparisons, getAllGuides, getBest, getBlogPost, getComparison, getComparisonSeoTitle, getGuide, getReview } from "@/lib/content/registry"
+import { getAllBest, getAllComparisons, getAllGuides, getBest, getBlogPost, getComparison, getComparisonSeoTitle, getGuide, getReview, getResearch } from "@/lib/content/registry"
 
 describe("content quality repairs", () => {
+  it("preserves the reviewed SaaS pricing methodology guide without inventing benchmark findings", () => {
+    const report = getResearch("saas-pricing-benchmark-2026")
+    expect(report).not.toBeNull()
+    expect(report?.title).toBe("SaaS Pricing Benchmark 2026: Method, Limits and Buyer Checklist")
+    expect(report?.author).toBe("PilotStack Editorial Team")
+    expect(report?.sourceAuditComplete).toBe(false)
+    expect(report?.faqs?.[0]?.answer).toContain("does not publish a verified market-wide average or median")
+    expect(JSON.stringify(report)).not.toMatch(/51% of tools use a freemium model|median SaaS starting price is \$19\.99/i)
+    const words = [
+      report!.title, report!.description, report!.methodology,
+      ...report!.keyFindings,
+      ...report!.sections.flatMap((section) => [section.title, section.body || "", ...(section.items || [])]),
+      ...(report!.faqs || []).flatMap((faq) => [faq.question, faq.answer]),
+    ].join(" ").split(/\s+/).filter(Boolean).length
+    expect(report?.readingTime).toBe(Math.max(3, Math.ceil(words / 200)))
+  })
+
   it("keeps best-list titles distinct and core metadata descriptions useful", () => {
     const bestTitles = getAllBest().map((page) => page.title)
     expect(bestTitles.filter((title, index) => bestTitles.indexOf(title) !== index)).toEqual([])
