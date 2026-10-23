@@ -17,7 +17,7 @@ export const metadata = createMetadata({
 const stages = [
   {
     title: "Selection & Scoping",
-    body: "We select software topics based on practical buyer needs. Review pages discuss product fit, pricing considerations, feature availability, integrations, administration, and limitations. Numeric scores and review counts are treated as verified only when their source trail and calculation are documented; a stored value alone does not establish independent user sentiment. Commercial placements, where offered, are separate from editorial evaluation; payment does not determine editorial ratings or rankings.",
+    body: "We select software topics based on practical buyer needs. Review pages discuss product fit, pricing considerations, feature availability, integrations, administration, and limitations. Numeric scores and review counts are treated as verified only when their source trail and calculation are documented; a stored value alone does not establish independent user sentiment. PilotStack does not currently sell paid editorial placement. Affiliate links and advertising may support the publication, but they do not determine editorial ratings or rankings.",
   },
   {
     title: "Evidence & Sourcing",
@@ -73,7 +73,7 @@ export default function MethodologyPage() {
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                PilotStack evaluates software using practical buyer criteria and vendor documentation. Numeric scores and review-count figures are treated as verified only when the page provides a checkable source and calculation. Unsupported or unverified claims should be qualified or omitted. Paid placements, where offered, are labelled separately and do not determine editorial ratings or rankings.
+                PilotStack evaluates software using practical buyer criteria and vendor documentation. Numeric scores and review-count figures are treated as verified only when the page provides a checkable source and calculation. Unsupported or unverified claims should be qualified or omitted. PilotStack does not currently sell paid editorial placements. Affiliate commissions and advertising do not determine editorial scores or rankings.
               </p>
             </div>
 
@@ -84,14 +84,14 @@ export default function MethodologyPage() {
                 <li>Numeric scores and review counts require a documented source and reproducible calculation</li>
                 <li>A displayed update date does not mean every claim was rechecked</li>
                 <li>Unsupported claims are corrected, qualified, or omitted</li>
-                <li>Paid placements, where offered, do not influence editorial ratings or rankings</li>
+                <li>Affiliate commissions and advertising do not determine editorial ratings or rankings</li>
               </ul>
             </div>
 
             <div className="key-takeaways mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Key Takeaways</h2>
               <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                <li>Commercial placements are distinguished from editorial recommendations</li>
+                <li>Affiliate and advertising relationships are disclosed separately from editorial recommendations</li>
                 <li>Consistent data is useful, but consistency alone does not prove a claim is sourced</li>
                 <li>Scores are not presented as independent user ratings unless their provenance is documented</li>
                 <li>Certification and company facts with no source should be omitted or labelled unverified</li>
@@ -159,7 +159,7 @@ export default function MethodologyPage() {
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Editorial Independence</h2>
               <p className="text-muted-foreground mb-4">
-                PilotStack keeps editorial decisions separate from commercial relationships. Affiliate relationships and other commercial arrangements are disclosed where applicable. Paid promotional material, if present, is kept distinct from editorial reviews and comparisons. Our methodology describes the recorded sources and criteria used for editorial pages.
+                PilotStack keeps editorial decisions separate from commercial relationships. Affiliate relationships and other commercial arrangements are disclosed where applicable. PilotStack does not currently sell paid editorial placement. If sponsorship or promotional content is introduced in future, it will be clearly labelled and kept separate from editorial reviews and comparisons. Our methodology describes the recorded sources and criteria used for editorial pages.
               </p>
               <p className="text-muted-foreground mb-4">
                 PilotStack may earn referral fees when readers click affiliate links and make purchases. These

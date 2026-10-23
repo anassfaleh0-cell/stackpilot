@@ -1,7 +1,7 @@
 {
   "slug": "notion-vs-clickup",
-  "title": "Notion vs ClickUp: team workspace or project execution?",
-  "description": "A decision guide for Notion versus ClickUp. Notion focuses on documents, internal wiki, and flexible team workspace; ClickUp focuses on task and project execution with work tracking. Compare the actual job, workflow, and operating requirements rather than assuming a single winner. Check current vendor documentation and plan terms before deciding.",
+  "title": "Notion vs ClickUp: Knowledge Workspace or Project Management?",
+  "description": "Compare Notion and ClickUp by the work your team needs to manage: documentation and shared knowledge, task ownership, project tracking, reporting, permissions, and total cost. Use a small pilot and verify current plan limits before choosing; this is buyer guidance, not a hands-on benchmark.",
   "category": "Productivity",
   "tool1": "Notion",
   "tool2": "ClickUp",
@@ -13,42 +13,42 @@
   "features": [
     {
       "name": "Primary job",
-      "tool1": "documents, internal wiki, and flexible team workspace",
-      "tool1Detail": "Test knowledge organization, permissions, search, databases, templates, and how easily the team maintains shared documentation.",
-      "tool2": "task and project execution with work tracking",
-      "tool2Detail": "Test task ownership, statuses, deadlines, project views, automations, reporting, and the effort needed to maintain the workspace."
+      "tool1": "Use a real team wiki, project brief, and decision log to test how Notion handles linked pages, structured databases, search, ownership, and ongoing content maintenance. Check whether the workspace stays navigable as it grows.",
+      "tool1Detail": "Use a real team wiki, project brief, and decision log to test how Notion handles linked pages, structured databases, search, ownership, and ongoing content maintenance. Check whether the workspace stays navigable as it grows.",
+      "tool2": "Build a representative project in ClickUp with owners, statuses, deadlines, dependencies, and views. Check whether the team can see work in progress and next actions without excessive configuration.",
+      "tool2Detail": "Build a representative project in ClickUp with owners, statuses, deadlines, dependencies, and views. Check whether the team can see work in progress and next actions without excessive configuration."
     },
     {
       "name": "Best fit",
-      "tool1": "Choose Notion when documents, internal wiki, and flexible team workspace is the immediate requirement.",
-      "tool1Detail": "Test knowledge organization, permissions, search, databases, templates, and how easily the team maintains shared documentation.",
-      "tool2": "Choose ClickUp when task and project execution with work tracking is the immediate requirement.",
-      "tool2Detail": "Test task ownership, statuses, deadlines, project views, automations, reporting, and the effort needed to maintain the workspace."
+      "tool1": "Notion is worth testing first when the main problem is scattered documentation, internal knowledge, reusable templates, or information that needs links between pages and structured databases. Test project tracking separately if it is also a core requirement.",
+      "tool1Detail": "Notion is worth testing first when the main problem is scattered documentation, internal knowledge, reusable templates, or information that needs links between pages and structured databases. Test project tracking separately if it is also a core requirement.",
+      "tool2": "ClickUp is worth testing first when the main problem is coordinating tasks, deadlines, dependencies, and project reporting. Test whether its document and knowledge features cover your needs before deciding whether a separate wiki is still required.",
+      "tool2Detail": "ClickUp is worth testing first when the main problem is coordinating tasks, deadlines, dependencies, and project reporting. Test whether its document and knowledge features cover your needs before deciding whether a separate wiki is still required."
     },
     {
       "name": "Pilot checklist",
-      "tool1": "Test a representative workflow and define measurable success criteria before buying.",
-      "tool1Detail": "For Notion, verify setup effort, permissions, integrations, data handling, and who will maintain the workflow.",
-      "tool2": "Test the complementary workflow with the same decision framework.",
-      "tool2Detail": "For ClickUp, verify setup effort, permissions, integrations, data handling, and who will maintain the workflow."
+      "tool1": "Pilot a documentation workflow: publish a brief, connect it to a project database, assign an owner, update a decision, and retrieve it later using search. Record setup time, permission issues, and how much maintenance the structure needs.",
+      "tool1Detail": "Pilot a documentation workflow: publish a brief, connect it to a project database, assign an owner, update a decision, and retrieve it later using search. Record setup time, permission issues, and how much maintenance the structure needs.",
+      "tool2": "Pilot an execution workflow: create a project, assign tasks, set dependencies, change priorities, produce a status report, and onboard a guest. Record setup effort, reporting gaps, and which required controls depend on the chosen plan.",
+      "tool2Detail": "Pilot an execution workflow: create a project, assign tasks, set dependencies, change priorities, produce a status report, and onboard a guest. Record setup effort, reporting gaps, and which required controls depend on the chosen plan."
     },
     {
       "name": "How they relate",
-      "tool1": "Notion addresses documents, internal wiki, and flexible team workspace; do not treat it as a replacement for task and project execution with work tracking without a demonstrated overlap.",
-      "tool1Detail": "If both workflows matter, define the handoff and avoid paying twice for the same capability.",
-      "tool2": "ClickUp addresses task and project execution with work tracking; do not treat it as a replacement for documents, internal wiki, and flexible team workspace without a demonstrated overlap.",
-      "tool2Detail": "If both workflows matter, define the handoff and avoid paying twice for the same capability."
+      "tool1": "If documentation is the system of record, define where tasks live and how readers find their status. Avoid duplicating the same project facts across pages and external tools without an owner for updates.",
+      "tool1Detail": "If documentation is the system of record, define where tasks live and how readers find their status. Avoid duplicating the same project facts across pages and external tools without an owner for updates.",
+      "tool2": "If project execution is the system of record, decide where durable documentation and decisions live. Test links, permissions, search, and the process for keeping documents aligned with the current project state.",
+      "tool2Detail": "If project execution is the system of record, decide where durable documentation and decisions live. Test links, permissions, search, and the process for keeping documents aligned with the current project state."
     }
   ],
-  "verdict": "There is no verified universal winner between Notion and ClickUp: they focus on documents, internal wiki, and flexible team workspace and task and project execution with work tracking, respectively. Start with the outcome your team needs, then pilot the product that directly supports that outcome. If both jobs are required, assess whether the tools complement one another and define ownership at the handoff. Verify current features, plan limits, total cost, integrations, privacy, permissions, and support before committing.",
+  "verdict": "Notion and ClickUp overlap, but they are not interchangeable by default. Notion is a stronger starting hypothesis when the priority is connected documentation and shared knowledge; ClickUp is a stronger starting hypothesis when the priority is coordinating task execution and project status. These are product-positioning hypotheses, not a verified ranking. Pilot the primary workflow in each tool, check where you need a second system, and compare plan limits, permissions, integrations, administration, migration effort, and total cost.",
   "faqs": [
     {
       "question": "What is the main difference between Notion and ClickUp?",
-      "answer": "Notion focuses on documents, internal wiki, and flexible team workspace; ClickUp focuses on task and project execution with work tracking. Compare them by the job you need to complete rather than assuming they are interchangeable."
+      "answer": "Notion centers on pages, databases, and shared knowledge, while ClickUp centers on tasks and project execution with configurable work views. Both can overlap, so compare them using the workflow your team actually needs rather than treating category labels as proof."
     },
     {
       "question": "Can Notion replace ClickUp?",
-      "answer": "Only if a pilot proves that Notion meets the requirements you currently depend on ClickUp to satisfy. Check required outputs, permissions, integrations, and operational controls before switching."
+      "answer": "Only after a pilot shows the replacement covers your must-have workflow, permissions, reporting, integrations, exports, and administration. Test actual work and migration, not just a feature list."
     },
     {
       "question": "Can a team use Notion and ClickUp together?",
@@ -56,7 +56,7 @@
     },
     {
       "question": "How should I compare their costs?",
-      "answer": "Estimate the cost of the specific workflow you need: include seats, usage, integrations, setup, support, and ongoing administration for Notion and ClickUp. Verify current vendor pricing and plan limits rather than relying on old figures."
+      "answer": "Calculate annual cost for the same seat count and billing term, including required plans, add-ons, integrations, migration, training, and ongoing administration. Check Notion's and ClickUp's official pricing and plan documentation immediately before deciding."
     },
     {
       "question": "What should I test before choosing?",

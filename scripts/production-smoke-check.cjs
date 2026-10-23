@@ -36,7 +36,7 @@ async function fetchText(pathname) {
 }
 
 async function main() {
-  const paths = ["/", "/ads.txt", "/robots.txt", "/sitemap.xml", "/contact", "/reviews/linear", "/statistics/dataprivacy-software"]
+  const paths = ["/", "/ads.txt", "/robots.txt", "/sitemap.xml", "/contact", "/reviews/linear", "/statistics/dataprivacy-software", "/guides/how-to-choose-ai-writing-software", "/research/saas-pricing-benchmark-2026"]
   const results = await Promise.all(paths.map(async (pathname) => {
     try {
       const result = await fetchText(pathname)
@@ -56,10 +56,15 @@ async function main() {
   const contact = byPath.get("/contact")
   const linear = byPath.get("/reviews/linear")
   const statistics = byPath.get("/statistics/dataprivacy-software")
+  const aiWritingGuide = byPath.get("/guides/how-to-choose-ai-writing-software")
+  const pricingResearch = byPath.get("/research/saas-pricing-benchmark-2026")
 
   if (contact && !contact.error) {
-    const emailOnly = contact.body.includes("contact@pilotstack.online") &&
-      !/Official Community|Facebook|LinkedIn|Pinterest|Newsletter sign-up is temporarily unavailable|YouTube Reviews|Follow PilotStack/i.test(contact.body)
+    // Scope this check to the page's main content. Shared navigation/footer links
+    // can legitimately mention social channels without making them contact methods.
+    const contactMain = contact.body.match(/<main\b[\s\S]*?<\/main>/i)?.[0] || contact.body
+    const emailOnly = contactMain.includes("contact@pilotstack.online") &&
+      !/Official Community|Facebook|LinkedIn|Pinterest|Newsletter sign-up is temporarily unavailable|YouTube Reviews|Follow PilotStack/i.test(contactMain)
     report("email-only contact page", emailOnly, "contact email is present; obsolete social/newsletter placeholders are absent")
   }
   if (linear && !linear.error) {
@@ -69,6 +74,18 @@ async function main() {
     report("review capability claims", noUnsupportedFaq, "unverified integration/platform FAQs are not rendered")
     report("review scoring disclosure", honestScoring, "unverified aggregate-score claims are not rendered")
   }
+  if (aiWritingGuide && !aiWritingGuide.error) {
+    const usefulGuide = aiWritingGuide.body.includes("Build a representative test set") &&
+      aiWritingGuide.body.includes("Review privacy, ownership, and security terms") &&
+      !/Something went wrong|landscape of content creation has been fundamentally transformed|\$20\/month \(Plus\)/i.test(aiWritingGuide.body)
+    report("AI writing guide quality", usefulGuide, "decision framework is rendered and stale/generated claims are absent")
+  }
+  if (pricingResearch && !pricingResearch.error) {
+    const transparentResearch = pricingResearch.body.includes("does not publish a verified market-wide average or median") &&
+      !/median SaaS starting price is \$19\.99|51% of tools use a freemium model|Real Starting Prices Across 12 Software Categories/i.test(pricingResearch.body)
+    report("SaaS pricing research provenance", transparentResearch, "unverified market-wide claims are absent and methodology caveat is visible")
+  }
+
   if (statistics && !statistics.error) {
     const noUnsourcedNarrativeFigures = !/\$50B\+|26%|4,874\+|27,500 products|8M-professional base/i.test(statistics.body)
     report("statistics narrative provenance", noUnsourcedNarrativeFigures, "unaudited narrative figures are withheld from rendered statistics pages")

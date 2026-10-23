@@ -61,7 +61,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ slug:
             <span className="flex items-center gap-1"><User size={12} />{report.author}</span>
             <span className="flex items-center gap-1"><Calendar size={12} />{report.publishedAt}</span>
             <span className="flex items-center gap-1"><Clock size={12} />{report.readingTime} min read</span>
-            <a href="/research-methodology" className="hover:text-primary transition-colors underline underline-offset-2">Methodology</a>
+            <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">Methodology</a>
           </div>
 
           <div className="mb-6 p-3 rounded-lg bg-primary-subtle/10 border border-primary/20 text-xs text-muted-foreground">

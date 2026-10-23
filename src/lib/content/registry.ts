@@ -260,11 +260,16 @@ function sanitizeEditorialBody(value: string): string {
 
 function sanitizeContentValue(value: unknown, fieldName?: string): unknown {
   if (typeof value === "string") {
+    // Identifiers and headings are not prose claims. Running the claim-removal
+    // patterns on them can erase valid slugs/titles such as "SaaS Pricing Benchmark 2026".
+    if (["title", "slug", "name", "term", "category", "reportType", "url", "href", "relatedGuides", "relatedComparisons", "relatedPosts", "relatedTools", "relatedUseCases", "relatedIndustries", "relatedHubs", "toolSlug", "tool1Slug", "tool2Slug"].includes(fieldName || "")) {
+      return sanitizeMalformedAnchorMarkup(value).trim()
+    }
     return fieldName === "body"
       ? sanitizeEditorialBody(value)
       : sanitizeMalformedPricingText(sanitizeEditorialText(value))
   }
-  if (Array.isArray(value)) return value.map((item) => sanitizeContentValue(item))
+  if (Array.isArray(value)) return value.map((item) => sanitizeContentValue(item, fieldName))
   if (value && typeof value === "object") {
     const out: Record<string, unknown> = {}
     for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
@@ -375,8 +380,8 @@ function sanitizeReview(review: ReviewContent): ReviewContent {
     reviewCount: 0,
     rating: review.ratingVerified === true && typeof review.rating === "number" && Number.isFinite(review.rating) ? review.rating : 0,
     ratings: review.ratingVerified === true && Array.isArray(review.ratings) ? review.ratings : [],
-    pricing: review.priceRangeVerified === true ? review.pricing : "Not verified",
-    priceRange: review.priceRangeVerified === true && review.priceRange ? safePrice(review.priceRange) : undefined,
+    pricing: review.priceRangeVerified === true ? review.pricing : ("Not independently verified" as ReviewContent["pricing"]),
+    priceRange: review.priceRangeVerified === true && review.priceRange ? safePrice(review.priceRange) : (review.priceRange || "Not independently verified — check current vendor pricing"),
     company: review.companyFactsVerified === true ? review.company : undefined,
     content: buildReviewSections(review),
     description: safeDescription,
@@ -1195,6 +1200,23 @@ function researchFocus(subject: string): { metrics: string; questions: string } 
 
 function normalizeResearchContent(record: ResearchContent): ResearchContent {
   const sources = record.dataSources || []
+  if (record.editorialGuideReviewed === true) {
+    const reviewed: ResearchContent = {
+      ...record,
+      author: "PilotStack Editorial Team",
+      updatedAt: record.updatedAt || "2026-10-23",
+      sections: sanitizeSections(record.sections),
+      faqs: sanitizeFaqs(record.faqs),
+    }
+    const wordSource = [
+      reviewed.title, reviewed.description, reviewed.methodology,
+      ...reviewed.keyFindings,
+      ...reviewed.sections.flatMap((section) => [section.title, section.body || "", ...(section.items || []), ...(section.columns || []), ...(section.rows || []).flat()]),
+      ...(reviewed.faqs || []).flatMap((faq) => [faq.question, faq.answer]),
+    ].join(" ").replace(/<[^>]*>/g, " ")
+    const wordCount = wordSource.split(/\s+/).filter(Boolean).length
+    return { ...reviewed, readingTime: Math.max(3, Math.ceil(wordCount / 200)) }
+  }
   const hasCompleteSourceAudit = record.sourceAuditComplete === true &&
     sources.length > 0 &&
     sources.every((source) => {

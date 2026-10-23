@@ -104,7 +104,7 @@ jobs:
         run: |
           set -euo pipefail
           base="http://127.0.0.1:8787"
-          for path in / /reviews/linear /comparisons/activecampaign-vs-ahrefs /affiliate-disclosure /privacy /contact /robots.txt /sitemap.xml /ads.txt /rss.xml /api/search?q=asana; do
+          for path in / /reviews/linear /comparisons/activecampaign-vs-ahrefs /affiliate-disclosure /privacy /contact /guides/how-to-choose-ai-writing-software /research/saas-pricing-benchmark-2026 /robots.txt /sitemap.xml /ads.txt /rss.xml /api/search?q=asana; do
             code=$(curl --silent --show-error --output /tmp/pilotstack-response.txt --write-out "%{http_code}" "$base$path")
             echo "$code $path"
             if [ "$code" != "200" ]; then
@@ -137,6 +137,19 @@ jobs:
           grep -q "https://pilotstack.online/" /tmp/pilotstack-rss.xml
           curl --silent --show-error --fail "$base/api/search?q=asana" > /tmp/pilotstack-search.json
           node -e 'const fs=require("fs"); const d=JSON.parse(fs.readFileSync("/tmp/pilotstack-search.json","utf8")); if (!Array.isArray(d.results) || d.results.length === 0 || d.query !== "asana") { console.error("Search endpoint returned an unexpected payload", d); process.exit(1); } console.log("Search payload valid:", d.results.length, "results");'
+
+          curl --silent --show-error --fail "$base/guides/how-to-choose-ai-writing-software" > /tmp/pilotstack-ai-writing-guide.html
+          grep -Fq 'Build a representative test set' /tmp/pilotstack-ai-writing-guide.html
+          if grep -Eiq 'Something went wrong|landscape of content creation has been fundamentally transformed' /tmp/pilotstack-ai-writing-guide.html; then
+            echo "AI writing guide rendered an error or stale boilerplate"
+            exit 1
+          fi
+          curl --silent --show-error --fail "$base/research/saas-pricing-benchmark-2026" > /tmp/pilotstack-pricing-research.html
+          grep -Fq 'does not publish a verified market-wide average or median' /tmp/pilotstack-pricing-research.html
+          if grep -Eiq '51% of tools use a freemium model|median SaaS starting price is \$19\.99' /tmp/pilotstack-pricing-research.html; then
+            echo "Pricing research page rendered unsupported market-wide claims"
+            exit 1
+          fi
 
           # Contact API must fail safely when requested with the wrong method.
           contact_code=$(curl --silent --show-error --output /tmp/pilotstack-contact.txt --write-out "%{http_code}" "$base/api/contact")

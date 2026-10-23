@@ -276,6 +276,7 @@ export interface ResearchContent {
   methodology: string
   dataSources: { name: string; url: string }[]
   sourceAuditComplete?: boolean
+  editorialGuideReviewed?: boolean
   publishedAt: string
   updatedAt?: string
   author: string
