@@ -1,6 +1,15 @@
 import { describe, expect, it } from "vitest"
 import {
   getAlternative,
+  getAllAlternatives,
+  getAllBest,
+  getAllBlogPosts,
+  getAllComparisons,
+  getAllGuides,
+  getAllHubs,
+  getAllIndustries,
+  getAllReviews,
+  getAllUseCases,
   getBest,
   getBlogPost,
   getComparison,
@@ -24,9 +33,12 @@ const BANNED_CLAIMS = [
   /after researching hundreds of/i,
   /our expert buying advice/i,
   /\bsub-?\d+(?:\.\d+)?\s*(?:ms|milliseconds?)\b/i,
-  /\b\d[\d,]*(?:\.\d+)?\+?\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\b/i,
+  /\b(?!0\b)\d[\d,]*(?:\.\d+)?\+?\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\b/i,
   /\b(?:zero|no)\s+(?:loading states?|pagination delays?|downtime)\b/i,
   /\b\d{1,3}(?:\.\d+)?%?\s+(?:faster|improvement|uptime)\b/i,
+  /\b(?:the\s+)?(?:largest|biggest|most comprehensive|most accurate|most frequently updated|industry[- ]leading|world['’]s leading|number one|#1)\b[^.!?]{0,140}\b(?:index|database|platform|tool|software|ecosystem|coverage|provider|market|solution)\b/i,
+  /\btrusted by\b[^.!?]{0,120}\b(?:worldwide|millions|leading companies|top brands)\b/i,
+  /\bgo[- ]to tool\b/i,
 ]
 
 function stringsOf(value: unknown, out: string[] = []): string[] {
@@ -50,6 +62,29 @@ describe("site-wide content quality gate", () => {
     ["best/best-project-management-software", getBest("best-project-management-software")],
     ["blog/software-selection", getBlogPost("ai-implementation-roi-guide")],
   ] as const
+
+  it("checks unsupported first-hand, scale, and superlative claims across the normalized editorial corpus", () => {
+    const corpus = [
+      ...getAllReviews(),
+      ...getAllComparisons(),
+      ...getAllGuides(),
+      ...getAllAlternatives(),
+      ...getAllUseCases(),
+      ...getAllIndustries(),
+      ...getAllBest(),
+      ...getAllBlogPosts(),
+      ...getAllHubs(),
+    ]
+    const offenders: string[] = []
+    for (const value of corpus) {
+      for (const text of stringsOf(value)) {
+        for (const pattern of BANNED_CLAIMS) {
+          if (pattern.test(text)) offenders.push(String((value as { slug?: string }).slug ?? "unknown") + " :: " + pattern + " :: " + text.slice(0, 120))
+        }
+      }
+    }
+    expect(offenders).toEqual([])
+  })
 
   it("does not expose unsupported first-hand or expert-testing claims", () => {
     const offenders: string[] = []
@@ -76,6 +111,11 @@ describe("site-wide content quality gate", () => {
       "The vendor has 99.9% uptime.",
       "Watchtower monitors 100,000+ known breach databases and alerts users.",
       "Even if 1Password's servers are breached, encrypted vault data remains unreadable.",
+      "GPT-5 model delivers near-instant responses with vastly improved reasoning, creativity, and accuracy over previous versions.",
+      "Free tier is limited to GPT-3.5 and has strict daily usage caps, making it frustrating for heavy users.",
+      "Enterprise-grade reliability with SOC 2 Type II certification.",
+      "Ahrefs boasts the largest live backlink index in the industry, making it the go-to tool for link building.",
+      "SEMrush is the most comprehensive all-in-one digital marketing platform trusted by leading companies worldwide.",
     ]
     for (const sample of samples) {
       expect(sanitizeUnsupportedClaims(sample)).toBe("")
@@ -89,7 +129,7 @@ describe("site-wide content quality gate", () => {
   it("sanitizes unsupported precision and scale claims inside review list items", () => {
     const suspicious = [
       /\bsub-?\d+(?:\.\d+)?\s*(?:ms|milliseconds?)\b/i,
-      /\b\d[\d,]*(?:\.\d+)?\+?\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\b/i,
+      /\b(?!0\b)\d[\d,]*(?:\.\d+)?\+?\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\b/i,
       /\b(?:over|more than|up to|nearly|almost)\s+\d[\d,]*(?:\.\d+)?\+?\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\b/i,
       /\b(?:millions|billions) of (?:users|customers|employees|reviews|integrations)\b/i,
       /\b(?:zero|no)\s+(?:loading states?|pagination delays?|downtime)\b/i,

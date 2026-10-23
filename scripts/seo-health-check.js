@@ -67,8 +67,17 @@ function readDir(dir) {
   }
 }
 
-function stripHtml(text) {
-  return (text || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
+function stripHtml(value) {
+  const source = typeof value === "string"
+    ? value
+    : value == null
+      ? ""
+      : Array.isArray(value)
+        ? value.map(stripHtml).join(" ")
+        : typeof value === "object"
+          ? Object.values(value).map(stripHtml).join(" ")
+          : String(value)
+  return source.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
 }
 
 function wordCount(text) {

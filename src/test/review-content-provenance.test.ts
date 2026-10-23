@@ -14,7 +14,7 @@ describe("review content provenance", () => {
   })
 
   it("removes currency claims from visible review copy until pricing is verified", () => {
-    expect(stripUnverifiedPriceClaims("Plan starts at $29/month")).toBe("Plan pricing not independently verified")
+    expect(stripUnverifiedPriceClaims("Plan starts at $29/month")).toBe("Check the vendor's official pricing page for current plan and trial terms.")
     const content = getVisibleReviewContent([{ title: "Overview", body: "The plan starts at $29/month." }], false)
     expect(content[0].body).not.toContain("$29")
     const faqs = getVisibleReviewFaqs([
@@ -39,9 +39,9 @@ describe("review content provenance", () => {
       expect(stripUnverifiedPriceClaims(claim)).not.toMatch(/[$€£]\s?\d|\b(?:USD|EUR|GBP)\s?\d|\b\d[\d,]*(?:\.\d+)?\s?(?:USD|EUR|GBP)\b/i)
     }
 
-    expect(stripUnverifiedPriceClaims("Includes a free trial")).toContain("trial availability not independently verified")
-    expect(stripUnverifiedPriceClaims("The free plan is suitable for testing")).toContain("plan availability not independently verified")
-    expect(stripUnverifiedPriceClaims("A freemium tier is available")).toContain("plan availability not independently verified")
+    expect(stripUnverifiedPriceClaims("Includes a free trial")).toContain("official pricing page")
+    expect(stripUnverifiedPriceClaims("The free plan is suitable for testing")).toContain("official pricing page")
+    expect(stripUnverifiedPriceClaims("A freemium tier is available")).toContain("official pricing page")
   })
 
   it("filters generated security/compliance FAQ claims and sanitizes pricing in remaining FAQs", () => {
@@ -66,7 +66,7 @@ describe("review content provenance", () => {
 
     expect(faqs).toHaveLength(2)
     expect(faqs[0].answer).not.toContain("$29")
-    expect(faqs[0].answer).toContain("pricing not independently verified")
+    expect(faqs[0].answer).toContain("official pricing page")
     expect(faqs[1].answer).toContain("compare the current feature set")
   })
 

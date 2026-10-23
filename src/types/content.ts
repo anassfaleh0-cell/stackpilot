@@ -223,7 +223,7 @@ export interface AlternativeContent {
   toolName: string
   alternatives: { slug: string; name: string; rating: number; description: string }[]
   sections: ContentSection[]
-  selectionCriteria: string[]
+  selectionCriteria: (string | { factor: string; importance: "Critical" | "High" | "Medium"; description: string })[]
   faqs: FAQItem[]
   relatedComparisons: string[]
   relatedGuides?: string[]
