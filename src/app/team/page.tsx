@@ -8,7 +8,7 @@ import { AuthorAvatar } from "@/components/editorial/author-avatar"
 import Link from "next/link"
 
 export const metadata = createMetadata({
-  title: "Our Team — Meet the PilotStack Editorial Team",
+  title: "Publisher & Editorial Process | PilotStack",
   description: "Learn how PilotStack is independently operated, how its publisher byline works, and how its software research handles sources and evidence limitations.",
   path: "/team",
 })
@@ -23,8 +23,8 @@ export default function TeamPage() {
       <Section className="pt-0">
         <Container>
           <div className="max-w-3xl mx-auto">
-            <Badge variant="default" className="mb-4">Our People</Badge>
-            <h1 className="text-4xl font-bold tracking-tight mb-4">Meet the PilotStack Team</h1>
+            <Badge variant="default" className="mb-4">About the Publisher</Badge>
+            <h1 className="text-4xl font-bold tracking-tight mb-4">PilotStack Publisher & Editorial Process</h1>
             <p className="text-lg text-muted-foreground text-pretty mb-8">
               PilotStack is independently operated and uses a publisher byline rather than presenting this page as a staffed research department. Content attribution is explained on our{" "}
               <Link href="/authors">authors</Link> page. Our methodology explains the scoring criteria and makes clear that a stored figure is verified only when its source and calculation can be checked.
