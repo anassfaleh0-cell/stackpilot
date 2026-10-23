@@ -97,7 +97,7 @@ function Dropdown({ item, pathname }: { item: (typeof navConfig)[number]; pathna
         type="button"
         onClick={() => {
           cancelClose()
-          setOpen((current) => !current)
+          setOpen(true)
         }}
         onKeyDown={(event) => {
           if (event.key === "ArrowDown") {
