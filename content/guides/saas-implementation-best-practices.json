@@ -75,5 +75,18 @@
     "software-evaluation-checklist",
     "how-to-choose-project-management-software"
   ],
-  "faqs": []
+  "faqs": [
+    {
+      "question": "Who should own a SaaS implementation?",
+      "answer": "Name a business owner accountable for outcomes and an implementation lead responsible for coordination. Assign separate owners for data, security, integrations, training, and support so decisions and unresolved issues have clear accountability."
+    },
+    {
+      "question": "How can we reduce data migration risk?",
+      "answer": "Inventory and clean the source data, document field mappings, test a representative import, reconcile totals and permissions, and retain a recoverable source export. Obtain data-owner approval before cutover."
+    },
+    {
+      "question": "How do we measure whether implementation succeeded?",
+      "answer": "Compare a small set of defined measures with a pre-launch baseline, such as completion time, error rate, duplicate entry, or user-reported friction. Define each metric and review it after launch; logins alone do not prove business value."
+    }
+  ]
 }
