@@ -72,6 +72,9 @@ jobs:
       - name: SEO content audit
         run: npm run seo:audit
 
+      - name: Comparison content integrity audit (report-only)
+        run: npm run audit:comparisons
+
       - name: Noindex audit review-candidate generation
         run: npm run audit:noindex
 
