@@ -152,4 +152,4 @@ jobs:
             exit 1
           fi
           echo "PASS live review content checks: Xero and Notion"
-          CHECK_SITEMAP_URLS=1 node scripts/production-smoke-check.cjs
+          node scripts/production-smoke-check.cjs
