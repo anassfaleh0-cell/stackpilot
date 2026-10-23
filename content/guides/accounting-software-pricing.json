@@ -65,6 +65,11 @@
       "title": "Document the decision",
       "body": "Keep a small decision record containing the business requirements, vendor pricing URLs and dates checked, plan names, confirmed limits, estimated annual cost, unresolved questions, and reasons for rejecting alternatives. Have the person responsible for accounting validate reports, tax workflows, and reconciliation before signing. Revisit the estimate before renewal or after a material change in users, entities, transaction volume, or country requirements.",
       "type": "text"
+    },
+    {
+      "title": "Reconcile the quote with real workflows",
+      "body": "Before approving a quote, map each required workflow to the exact plan or add-on in writing. For example, confirm whether bank reconciliation, approval routing, multiple currencies, inventory, accountant access, and required exports are included. Ask the vendor to identify any limits that could trigger an upgrade as the business grows. Keep the quote, pricing page, and support response together with the decision record. If a requirement is still uncertain, run a short trial using a representative transaction set before importing all records.",
+      "type": "text"
     }
   ],
   "author": "Emily Nakamura",
