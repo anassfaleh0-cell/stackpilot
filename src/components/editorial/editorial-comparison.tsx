@@ -27,7 +27,7 @@ export function EditorialComparison({ tool1, tool2, features, featuresVerified =
     displayTool1: getComparisonFeatureDisplayValue(feature.tool1, featuresVerified, decisionGuide, feature.name),
     displayTool2: getComparisonFeatureDisplayValue(feature.tool2, featuresVerified, decisionGuide, feature.name),
   }))
-  const scoredFeatures = featuresVerified ? features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean") : []
+  const scoredFeatures = features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean")
   const t1w = scoredFeatures.filter((f) => f.tool1 === true && f.tool2 === false).length
   const t2w = scoredFeatures.filter((f) => f.tool2 === true && f.tool1 === false).length
   const tie = scoredFeatures.filter((f) => f.tool1 === true && f.tool2 === true).length
@@ -61,7 +61,7 @@ export function EditorialComparison({ tool1, tool2, features, featuresVerified =
         </div>
       </div>
       {total > 0 ? (
-        <svg viewBox="0 0 100 8" className="w-full h-auto" role="img" aria-label="Feature comparison bar">
+        <><p className="text-xs text-muted-foreground">{featuresVerified ? "Recorded boolean availability checks; this is not a measure of overall product quality." : "Scores below are calculated from recorded boolean fields. Source verification is pending; treat the figures as provisional, not as confirmed product differences."}</p><svg viewBox="0 0 100 8" className="w-full h-auto" role="img" aria-label="Feature comparison bar">
           <defs>
             <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset={`${(t1w / total) * 100}%`} stopColor={p.primary} stopOpacity="0.6" />
@@ -71,7 +71,7 @@ export function EditorialComparison({ tool1, tool2, features, featuresVerified =
             </linearGradient>
           </defs>
           <rect width="100" height="8" rx="4" fill={`url(#${gradId})`} />
-        </svg>
+        </svg></>
       ) : (
         <p className="text-xs text-muted-foreground">{decisionGuide ? "These rows describe each product’s primary job and practical selection criteria; they are not a verified feature scorecard." : "No scored winner is shown: the rows below describe plan availability and items to verify rather than unsupported feature scores."}</p>
       )}
