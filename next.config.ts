@@ -130,6 +130,22 @@ const nextConfig: NextConfig = {
       destination: "/best/best-seo-tools",
       permanent: true,
     },
+    {
+      // Preserve legacy links to the project-management shortlist and buyer playbook after their canonical content routes changed.
+      source: "/best/project-management-software",
+      destination: "/best/best-project-management-software",
+      permanent: true,
+    },
+    {
+      source: "/guides/software-evaluation-playbook-2026",
+      destination: "/blog/software-evaluation-playbook-2026",
+      permanent: true,
+    },
+    {
+      source: "/guides/software-evaluation-playbook",
+      destination: "/blog/software-evaluation-playbook-2026",
+      permanent: true,
+    },
     // The legacy startup productivity shortlist is intentionally unpublished because its scores,
     // prices, and methodology claims are unverified. Consolidate it on the live productivity guide.
     {

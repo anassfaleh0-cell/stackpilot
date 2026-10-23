@@ -74,6 +74,8 @@ describe("site-wide content quality gate", () => {
       "The platform guarantees zero downtime for all customers.",
       "This workflow delivers 40% faster results.",
       "The vendor has 99.9% uptime.",
+      "Watchtower monitors 100,000+ known breach databases and alerts users.",
+      "Even if 1Password's servers are breached, encrypted vault data remains unreadable.",
     ]
     for (const sample of samples) {
       expect(sanitizeUnsupportedClaims(sample)).toBe("")
