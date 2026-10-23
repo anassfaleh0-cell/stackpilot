@@ -97,6 +97,23 @@
       "body": "Use a transparent baseline. Record the current cost and time required for the task, including preparation, review, correction, and handoffs. During the pilot, measure the same steps with the AI tool. Distinguish time saved from time shifted to checking, prompt maintenance, or exception handling. If output quality falls below the agreed standard, count the correction effort rather than treating the generated draft as finished work.\n\nA simple estimate is: net monthly value = measured monthly cost avoided − new recurring fees − additional operating and review costs. If you cannot verify a cost reduction, label it as a scenario rather than a result. Use low, expected, and high workload assumptions to show how sensitive the estimate is to volume and adoption. Avoid generic claims that an AI product will save a fixed percentage or produce a specific ROI for every business.\n\nDefine a review date after rollout. Compare actual usage, invoice, output acceptance, and user adoption with the pilot assumptions. If costs rise or quality falls, change limits, route simpler tasks to lower-cost options where appropriate, or reconsider the plan. The point of the calculation is to support a decision that can be checked later, not to promise a return."
     },
     {
+      "title": "Buyer checklist before committing",
+      "type": "checklist",
+      "body": "Complete this checklist before buying an AI tool or moving from a trial to a paid plan.",
+      "items": [
+        "Write down the workflow, users, required quality, data sensitivity, and expected monthly workload.",
+        "Record the official pricing URL and the date the price and plan details were checked.",
+        "Confirm billing period, regional price, taxes, minimum seats, renewal terms, cancellation, and refund rules.",
+        "Separate consumer subscription costs from API usage and team or enterprise contracts.",
+        "Estimate normal and peak usage, including overages, retries, integrations, and other add-ons.",
+        "Measure output quality and human correction time using representative tasks.",
+        "Review data handling, access controls, retention, export, and contractual terms relevant to the use case.",
+        "Set usage alerts or spending limits where the provider supports them.",
+        "Keep assumptions and unknowns visible; do not treat hypothetical savings as guaranteed ROI.",
+        "Schedule a post-purchase review to compare actual cost and results with the pilot."
+      ]
+    },
+    {
       "title": "Frequently asked questions",
       "type": "list",
       "body": "These answers are a starting point for comparing offers. Check the current vendor terms for your region and intended use.",
