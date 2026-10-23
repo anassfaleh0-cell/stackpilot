@@ -80,6 +80,11 @@
       "title": "Prepare support for the first weeks",
       "body": "Before launch, publish the support channel, escalation path, known limitations, and a simple way to report problems. Review incoming questions frequently during the initial rollout and distinguish training gaps from product defects or process problems. Share fixes with all affected users and update documentation when the workflow changes. Keep an owner assigned to unresolved issues so early feedback does not disappear after the implementation team moves on.",
       "type": "text"
+    },
+    {
+      "title": "Reconcile migrated data before cutover",
+      "body": "Choose a sample that includes ordinary records, edge cases, archived items, attachments, and records with different permission levels. Compare record counts, key fields, relationships, timestamps, and totals where the workflow depends on them. Have the data owner review exceptions and sign off on known gaps. If a migration tool transforms values, document the mapping and verify the result after import. Do not treat a successful import command as proof that the business data is complete or correct.",
+      "type": "text"
     }
   ],
   "author": "Marcus Rivera",
