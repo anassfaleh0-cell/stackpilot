@@ -1,8 +1,8 @@
 {
   "slug": "activecampaign",
   "name": "ActiveCampaign",
-  "tagline": "Email marketing and automation workflows; confirm the features available in the plan you are considering.",
-  "description": "ActiveCampaign is an email marketing and automation platform. This editorial overview focuses on practical fit, campaign workflows, automation complexity, CRM needs, and the costs buyers should verify before switching.",
+  "tagline": "Email marketing and automation for customer lifecycle workflows",
+  "description": "ActiveCampaign is an email marketing and automation platform with CRM-related capabilities. This buyer guide focuses on campaign workflows, automation maintenance, segmentation, reporting, integrations, consent, and total cost. PilotStack does not publish a numeric score, third-party review count, exact current price, company metrics, or certification claim for this profile because a current, auditable source trail is not recorded here.",
   "category": "Marketing & SEO",
   "website": "https://activecampaign.com",
   "pricing": "Check vendor",
@@ -11,269 +11,115 @@
   "reviewCount": null,
   "pros": [
     "Email campaigns and automation can be evaluated together in one workflow; test segmentation, triggers, reporting, and maintenance using representative campaigns.",
-    "CRM-related capabilities may be useful when marketing and sales teams share lead and customer context; verify the exact functions and plan requirements.",
-    "Integration fit depends on the tools and data flows your team actually uses; test synchronization, permissions, errors, and duplicate handling."
+    "CRM-related capabilities may help when marketing and sales teams share lead and customer context; verify the exact functions and plan requirements.",
+    "Integration fit can be assessed using the tools and data flows your team actually uses; test synchronization, permissions, error handling, and duplicate records."
   ],
   "cons": [
     "Complex automation can become difficult to maintain without naming conventions, ownership, testing, and documentation.",
     "Total cost and included features depend on contacts, seats, usage, and selected plan; confirm current terms with the vendor.",
-    "Marketing consent, data retention, deliverability, and CRM synchronization need configuration and ongoing oversight; do not assume the software alone guarantees compliance or results."
+    "Marketing consent, data retention, deliverability, and CRM synchronization require configuration and oversight; the software alone does not guarantee compliance or campaign results."
   ],
   "features": [
     {
-      "name": "ActiveCampaign Core Platform",
-      "description": "the email marketing and automation workspace; confirm available features against the plan you are considering",
-      "available": true,
-      "category": "Core"
+      "name": "Email campaign creation",
+      "description": "Build a representative campaign with your real audience segments, suppression rules, message variants, and conversion goal. Verify preview behavior, unsubscribe handling, link tracking, and reporting before using a live audience.",
+      "available": null,
+      "category": "Email Marketing"
     },
     {
-      "name": "AI Assistant",
-      "description": "ActiveCampaign AI for intelligent workflow automation",
-      "available": true,
-      "category": "AI"
+      "name": "Marketing automation",
+      "description": "Map one lifecycle workflow with entry conditions, delays, branching, exit rules, and a clear owner. Test duplicates, missing data, contact re-entry, changes to consent, and failure recovery in a safe test environment.",
+      "available": null,
+      "category": "Automation"
     },
     {
-      "name": "API Access",
-      "description": "RESTful API for custom integrations and data access",
-      "available": true,
-      "category": "Integrations"
+      "name": "Segmentation and contact data",
+      "description": "Use a representative sample to test how lists, tags, fields, segments, and consent status interact. Confirm how imports and synchronization handle duplicates, invalid values, and unsubscribed contacts.",
+      "available": null,
+      "category": "Data Management"
     },
     {
-      "name": "Mobile App",
-      "description": "Native apps for iOS and Android",
-      "available": true,
-      "category": "Mobile"
+      "name": "CRM and sales hand-off",
+      "description": "If sales features are in scope, test how a qualified lead moves to the sales team, how ownership is assigned, and how activity history is synchronized. Confirm which capabilities require a particular plan or add-on.",
+      "available": null,
+      "category": "CRM"
     },
     {
-      "name": "Single Sign-On",
-      "description": "Enterprise SSO with SAML 2.0 and OAuth support",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Data Encryption",
-      "description": "AES-256 encryption for data at rest and TLS 1.3 in transit",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Audit Logging",
-      "description": "Detailed audit trails tracking user actions and configuration changes",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Role-Based Access Control",
-      "description": "Granular permission management for teams and organizations",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "Reporting Dashboard",
-      "description": "Custom analytics and reporting with real-time data",
-      "available": true,
+      "name": "Reporting and attribution",
+      "description": "Choose a campaign goal and document the events or conversions needed to measure it. Verify attribution definitions, report filters, data freshness, export options, and any external analytics dependencies.",
+      "available": null,
       "category": "Analytics"
     },
     {
-      "name": "Third-party Integrations",
-      "description": "Connect with popular business tools and platforms",
-      "available": true,
-      "category": "Integrations"
+      "name": "Integrations and API",
+      "description": "List required calendar, CRM, commerce, analytics, and data tools. Verify each current integration against vendor documentation and test permissions, field mapping, sync direction, rate limits, and failure handling.",
+      "available": null,
+      "category": "Integration"
     },
     {
-      "name": "Workflow Automation",
-      "description": "Automate repetitive tasks with no-code workflow builder",
-      "available": true,
-      "category": "Productivity"
+      "name": "Privacy and deliverability",
+      "description": "Review current data-processing terms and consent requirements for your regions. Test unsubscribe and suppression flows, access controls, retention, sender authentication, and bounce handling before a production send.",
+      "available": null,
+      "category": "Privacy"
     },
     {
-      "name": "Team Collaboration",
-      "description": "Real-time collaboration features for team workflows",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Template Library",
-      "description": "Pre-built templates for common use cases and workflows",
-      "available": true,
-      "category": "Productivity"
-    },
-    {
-      "name": "Search Functionality",
-      "description": "Full-text search across all content with filters",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Export Capabilities",
-      "description": "Data export in multiple formats for portability",
-      "available": true,
-      "category": "Core"
+      "name": "Pricing and implementation",
+      "description": "Current prices, contact thresholds, seat rules, add-ons, and contract terms are not independently verified in this profile. Request a current quote for your contact volume and required features, then include migration, training, integration, and ongoing administration in the cost model.",
+      "available": null,
+      "category": "Pricing"
     }
   ],
   "ratings": [],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "This review evaluates ActiveCampaign across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your marketing & seo needs.",
-      "type": "text"
+      "title": "Summary",
+      "type": "text",
+      "body": "ActiveCampaign is an email marketing and automation platform with CRM-related capabilities. It may be worth evaluating when a team needs recurring campaigns, segmented audiences, and lifecycle workflows. This page does not claim an independently measured rating, third-party review count, current price, company metrics, or verified certification status; those details require a current source trail."
     },
     {
-      "title": "TL;DR",
-      "body": "ActiveCampaign earns a 4.4/5 rating. Best for teams that need reliable marketing & seo capabilities with strong feature coverage. Pricing starts at Current pricing not independently verified; check vendor terms.. Key strengths include Email marketing and automation workflows; confirm the features available in the plan you are considering. Consider ActiveCampaign if you prioritize SMBs and Marketers requirements.",
-      "type": "text"
+      "title": "Who should evaluate it",
+      "type": "text",
+      "body": "Consider a pilot if your team sends recurring email campaigns and needs to coordinate segmentation, automated follow-ups, and reporting. Before adopting a broader platform, write down which jobs must be handled in email marketing, which belong in a CRM, and which can remain in existing systems. If your needs are occasional newsletters or simple broadcasts, compare the operating overhead of a full automation setup with simpler alternatives."
     },
     {
-      "title": "Rating Overview",
-      "body": "Compare the product against your own requirements for campaign setup, automation maintenance, reporting, support access, and total cost. Scores on this page should not be treated as independently verified test results.",
-      "type": "text"
+      "title": "A representative campaign test",
+      "type": "text",
+      "body": "Build a test campaign for a defined audience and goal. Check list inclusion and suppression rules, personalization, mobile rendering, links, unsubscribe behavior, test sends, and reporting. Have someone other than the builder review the campaign before launch. Record errors and setup time so the pilot reflects the actual work required, not just the interface shown in a demo."
     },
     {
-      "title": "Company Background",
-      "body": "Founded in 2003 and headquartered in Chicago, IL, ActiveCampaign has grown to serve 180,000+ customers with 1,000+ team members. The company operates in the Marketing, CRM, Automation sectors, serving SMBs, Marketers, Sales Teams.",
-      "type": "text"
+      "title": "Automation complexity and maintenance",
+      "type": "text",
+      "body": "Start with one lifecycle workflow and document its entry conditions, branches, delays, exit criteria, and owner. Test duplicate entries, missing fields, contact re-entry, changes in consent, and hand-off failures. Use clear names and periodic reviews to prevent old branches or abandoned automations from continuing to run unnoticed. Measure ongoing maintenance as well as initial setup."
     },
     {
-      "title": "Product Overview",
-      "body": "ActiveCampaign delivers comprehensive marketing & seo functionality designed for marketing teams and growing businesses. The platform is available via Per-month subscription by contact count with deployment options including Cloud and Mobile.",
-      "type": "text"
+      "title": "Segmentation, CRM, and data quality",
+      "type": "text",
+      "body": "Use a representative contact sample to test imports, duplicates, tags, fields, segmentation, and synchronization with any CRM in scope. Confirm how unsubscribes and consent status propagate across systems. If sales teams will use CRM-related capabilities, test lead assignment, activity history, ownership changes, and the exact features available under the intended plan."
     },
     {
-      "title": "Feature Deep Dive",
-      "body": "ActiveCampaign's core feature set is designed to address the most critical needs in the marketing & seo category. The platform offers advanced AI capabilities including ActiveCampaign AI, Predictive sending, Content generation, along with robust security features, comprehensive integration options, and enterprise-grade administration controls. Each feature category is evaluated below with specific attention to real-world usability and performance.",
-      "type": "text"
+      "title": "Reporting, integrations, and deliverability",
+      "type": "text",
+      "body": "Define the conversion or business outcome you need to measure before evaluating reports. Verify what the platform records, how attribution is defined, how quickly reports update, and what can be exported. Test every required integration with realistic data and review sender authentication, bounce handling, unsubscribe flows, and suppression lists before sending to a live audience."
     },
     {
-      "title": "User Experience",
-      "body": "We found ActiveCampaign's interface to be intuitive and well-organized. Common tasks are easy to discover and execute, while more advanced functionality is accessible without cluttering the primary workflow.",
-      "type": "text"
+      "title": "Privacy and compliance checks",
+      "type": "text",
+      "body": "Marketing compliance depends on your audience locations, lawful basis, consent records, message type, configuration, and internal processes. Review current vendor terms for data processing, retention, access, deletion, and subprocessors. Ask the responsible privacy or legal owner to validate the intended workflow; do not assume that using a marketing platform automatically makes a campaign compliant."
     },
     {
-      "title": "Best For",
-      "body": "ActiveCampaign is best suited for SMBs, Marketers, Sales Teams. Organizations that need marketing & seo capabilities with enterprise-grade reliability will find ActiveCampaign particularly valuable.",
-      "type": "text"
+      "title": "Pricing and total cost",
+      "type": "text",
+      "body": "Current pricing, contact thresholds, seat rules, plan entitlements, and add-on costs are not independently verified in this profile. Check ActiveCampaign's official pricing information and request a written quote for the exact contact volume and features you need. Include migration, training, integration work, deliverability operations, and ongoing automation maintenance when comparing alternatives."
     },
     {
-      "title": "Worst Fit",
-      "body": "ActiveCampaign may not be ideal for organizations with niche requirements that fall outside its core competency or teams that need lightweight alternatives.",
-      "type": "text"
+      "title": "Alternatives and decision rule",
+      "type": "text",
+      "body": "Compare ActiveCampaign with email-focused platforms and CRM or marketing suites that match your actual requirements. Use the same audience sample, campaign, automation, integration, and reporting tasks for each option. Prefer the tool that meets your must-haves with the least operational overhead and the clearest cost; do not rely on an unsupported score or a generic feature count."
     },
     {
-      "title": "Key Features",
-      "body": "ActiveCampaign delivers the core functionality expected from a platform in its category, with particular strength in the areas that matter most to its target users. The feature set is comprehensive without feeling bloated.",
-      "type": "list",
-      "items": [
-        "AI-powered capabilities: ActiveCampaign AI, Predictive sending, Content generation",
-        "Comprehensive API access for custom integrations and workflow automation",
-        "Mobile apps for iOS and Android with full feature support",
-        "Enterprise security with SOC 2 Type II, ISO 27001 certifications",
-        "Compliance support for GDPR, CCPA, CAN-SPAM"
-      ]
-    },
-    {
-      "title": "Real Advantages",
-      "body": "ActiveCampaign's primary advantage is Email marketing and automation workflows; confirm the features available in the plan you are considering. The platform consistently outperforms competitors in reliability and feature depth. The AI features including ActiveCampaign AI provide meaningful productivity improvements.",
-      "type": "text"
-    },
-    {
-      "title": "Real Limitations",
-      "body": "ActiveCampaign has limitations that buyers should consider. Support quality is rated at 4.0/5, which meets industry standards. ",
-      "type": "text"
-    },
-    {
-      "title": "Pricing Explained",
-      "body": "ActiveCampaign uses Per-month subscription by contact count. Pricing ranges from Current pricing not independently verified; check vendor terms.. Enterprise plans include SOC 2 Type II, ISO 27001 compliance certifications and dedicated support.",
-      "type": "text"
-    },
-    {
-      "title": "Hidden Costs",
-      "body": "Beyond subscription fees, organizations should budget for implementation consulting, team training, data migration, and potential integration development costs. Annual billing typically saves 15-20% versus monthly.",
-      "type": "text"
-    },
-    {
-      "title": "Learning Curve",
-      "body": "ActiveCampaign's learning curve is rated as Medium. Basic proficiency requires 1-2 days, with advanced features taking 1-2 weeks to master.",
-      "type": "text"
-    },
-    {
-      "title": "Setup Time",
-      "body": "Basic ActiveCampaign setup takes 15-30 minutes for individual accounts. Organization-wide deployment typically requires 1-3 days for configuration, user provisioning, and security policy setup.",
-      "type": "text"
-    },
-    {
-      "title": "Migration Difficulty",
-      "body": "Migration to ActiveCampaign is rated as Medium complexity. Planning and data mapping are essential. Most migrations complete within 2-4 weeks.",
-      "type": "text"
-    },
-    {
-      "title": "Integration Ecosystem",
-      "body": "ActiveCampaign integrates with the major platforms in its ecosystem, reducing the friction of adding it to an existing tool stack. The API provides additional flexibility for custom workflows.",
-      "type": "text"
-    },
-    {
-      "title": "Security & Compliance",
-      "body": "Security features in ActiveCampaign meet industry standards with encryption, access controls, and compliance certifications appropriate for its target market.",
-      "type": "text"
-    },
-    {
-      "title": "Performance",
-      "body": "Check the current service status and contractual uptime commitments directly with ActiveCampaign; performance depends on the service and workload.",
-      "type": "text"
-    },
-    {
-      "title": "Customer Support",
-      "body": "ActiveCampaign provides support through knowledge base, email, community forums. Premium tiers include dedicated account management and priority response. Support quality is rated at 4.0/5.",
-      "type": "text"
-    },
-    {
-      "title": "Real-world Use Cases",
-      "body": "ActiveCampaign is deployed across multiple scenarios including SMBs, Marketers, Sales Teams. Common implementations range from small team deployments to enterprise-wide rollouts serving thousands of users.",
-      "type": "text"
-    },
-    {
-      "title": "Industry Fit",
-      "body": "ActiveCampaign serves Marketing, CRM, Automation industries effectively.  ",
-      "type": "text"
-    },
-    {
-      "title": "Common Mistakes",
-      "body": "Common mistakes when evaluating ActiveCampaign include underestimating training needs, overlooking API limitations, failing to test integration scenarios, and not involving end users in the evaluation process. Use our evaluation checklist to avoid these pitfalls.",
-      "type": "text"
-    },
-    {
-      "title": "Tips from experienced users",
-      "body": "Experienced ActiveCampaign users recommend starting with a pilot deployment, leveraging community resources for best practices, configuring security settings before user onboarding, and regularly reviewing usage analytics to optimize license allocation.",
-      "type": "text"
-    },
-    {
-      "title": "Alternatives",
-      "body": "ActiveCampaign competes with leading platforms in the marketing & seo space. Teams should evaluate alternatives based on feature requirements, budget constraints, and existing technology stack compatibility.",
-      "type": "text"
-    },
-    {
-      "title": "Competitor Analysis",
-      "body": "In the competitive marketing & seo landscape, ActiveCampaign differentiates itself through Email marketing and automation workflows; confirm the features available in the plan you are considering. Key competitors offer varying strengths in pricing, feature depth, and ecosystem integration.",
-      "type": "text"
-    },
-    {
-      "title": "Buying Advice",
-      "body": "When evaluating ActiveCampaign, prioritize your must-have features, set realistic budget parameters including implementation expenses, test with your real workflows, and involve key stakeholders in the decision process.",
-      "type": "text"
-    },
-    {
-      "title": "Final Verdict",
-      "body": "ActiveCampaign earns a 4.4/5 rating and is recommended for SMBs and Marketers. The platform delivers exceptional value in the marketing & seo category with strengths in Email marketing and automation workflows; confirm the features available in the plan you are considering.",
-      "type": "text"
-    },
-    {
-      "title": "Pricing at a Glance",
-      "body": "ActiveCampaign pricing: Current pricing not independently verified; check vendor terms.. Per-month subscription by contact count.",
-      "type": "diagram"
-    },
-    {
-      "title": "Feature Radar",
-      "body": "ActiveCampaign scores: Features 4.6, Ease of Use 4.3, Support 4, Value 4.1, Performance 4.3.",
-      "type": "diagram"
+      "title": "Evidence and limitations",
+      "type": "text",
+      "body": "PilotStack has not documented a controlled hands-on benchmark or an auditable current source trail for this profile's numeric rating, third-party review count, exact price, company metrics, certification status, or feature-by-feature availability. Those claims are therefore omitted or left for direct vendor verification. This page is practical buyer guidance, not a claim of independent user sentiment or verified performance outcomes."
     }
   ],
   "faqs": [
