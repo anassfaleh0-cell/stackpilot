@@ -89,6 +89,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       <HowToSchema
         name={guide.title}
         description={guide.description}
+        url={`${site.url}/guides/${slug}`}
         steps={guide.sections.map((section) => ({
           name: section.title,
           text: [section.body, ...(section.items ?? []), ...(section.columns ?? []), ...((section.rows ?? []).flat())].filter(Boolean).join(" "),
