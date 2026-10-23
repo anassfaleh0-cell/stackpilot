@@ -9,9 +9,22 @@ function report(name, ok, detail) {
   if (!ok) process.exitCode = 1
 }
 
+async function fetchWithRetry(url, options, attempts = 4) {
+  let lastResponse
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    lastResponse = await fetch(url, options)
+    if (lastResponse.status !== 429 && lastResponse.status < 500) return lastResponse
+    if (attempt < attempts) {
+      await lastResponse.body?.cancel()
+      await new Promise((resolve) => setTimeout(resolve, attempt * 1500))
+    }
+  }
+  return lastResponse
+}
+
 async function fetchText(pathname) {
   const url = SITE_URL + pathname
-  const response = await fetch(url, {
+  const response = await fetchWithRetry(url, {
     redirect: "follow",
     headers: { "user-agent": "PilotStack-ProductionSmokeCheck/1.0" },
     signal: AbortSignal.timeout(15000),
@@ -104,13 +117,13 @@ async function main() {
       })
       const failures = []
       let cursor = 0
-      const concurrency = Math.min(8, targets.length)
+      const concurrency = Math.min(4, targets.length)
       await Promise.all(Array.from({ length: concurrency }, async () => {
         while (cursor < targets.length) {
           const index = cursor++
           const target = targets[index]
           try {
-            const response = await fetch(target, {
+            const response = await fetchWithRetry(target, {
               redirect: "follow",
               headers: { "user-agent": "PilotStack-SitemapTargetAudit/1.0" },
               signal: AbortSignal.timeout(15000),
