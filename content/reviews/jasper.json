@@ -1,134 +1,60 @@
 {
   "slug": "jasper",
   "name": "Jasper",
-  "tagline": "AI content platform built for marketers who need brand-consistent copy at scale",
-  "description": "Jasper is an AI content creation platform specifically designed for marketing teams and businesses that need high-quality, on-brand written content at scale. Unlike general-purpose AI chatbots, Jasper specializes in marketing copy with built-in brand voice customization, SEO optimization tools, and team collaboration features. It offers templates for blog posts, ad copy, email sequences, social media content, and more.",
+  "tagline": "AI-assisted marketing content workflows with brand guidance",
+  "description": "Jasper is an AI-assisted content platform aimed at marketing teams. It can help draft and adapt marketing copy, but generated material still needs factual review, brand review, and editorial editing before publication. Buyers should test it with their own briefs and brand assets, and confirm current plan features, data handling, usage limits, and pricing directly with Jasper.",
   "category": "AI & Machine Learning",
   "website": "https://www.jasper.ai",
-  "pricing": "Paid",
-  "priceRange": "$69/mo (Pro) – custom (Business)",
-  "rating": 4.4,
-  "reviewCount": 8500,
+  "pricing": "Check vendor",
+  "priceRange": "Current pricing and plan limits should be verified on Jasper's official website before purchase.",
+  "rating": null,
+  "reviewCount": null,
   "pros": [
-    "Brand Voice feature lets you upload existing content and train the AI to match your exact tone, style, and terminology across all outputs",
-    "Over 50+ pre-built templates for specific content types including blog posts, Google Ads, Facebook ads, emails, and product descriptions",
-    "Boss Mode workflow enables advanced commands and multi-step content generation without switching between modes or interfaces",
-    "Built-in SEO and plagiarism checks ensure content is both search-engine optimized and original before publication",
-    "Team collaboration with shared brand guidelines, campaign folders, and content approval workflows keeps output consistent across contributors"
+    "Brand guidance can help teams keep terminology and tone more consistent across drafts; test the result against a real brand brief rather than assuming exact voice replication.",
+    "AI-assisted drafting can speed up first drafts for campaign assets, subject lines, and other marketing copy when the brief is specific.",
+    "A shared workspace may help teams organize content work; confirm the current collaboration, review, and permission features included in the plan."
   ],
   "cons": [
-    "Word count limits on the Pro plan (25,000 words/month) feel restrictive for teams producing daily content at scale; Business plan required for unlimited words",
-    "Output quality degrades noticeably for long-form content exceeding 1,500 words, requiring significant human editing",
-    "No true free tier limits testing and evaluation before committing to a paid subscription"
+    "Generated copy can include unsupported claims or generic wording and requires human fact-checking, editing, and legal or compliance review where relevant.",
+    "Value depends on content volume, the amount of editing needed, and whether the platform's current workflow fits the team's existing tools.",
+    "Current prices, usage limits, integrations, security controls, and contract terms can change; verify them directly before committing."
   ],
   "features": [
     {
-      "name": "Blog Post Writer",
-      "description": "Generates SEO-optimized blog posts from titles, keywords, or outlines with adjustable tone and length controls",
-      "available": true,
+      "name": "Marketing copy drafting",
+      "description": "Evaluate how well Jasper drafts a specific asset from your brief, audience, offer, and constraints. Check factual accuracy, tone, revision effort, and whether the output needs substantial rewriting.",
+      "available": null,
       "category": "Content Creation"
     },
     {
-      "name": "Ad Copy Generator",
-      "description": "Creates Google, Facebook, and LinkedIn ad variants with headline and description options for A/B testing campaigns",
-      "available": true,
-      "category": "Content Creation"
-    },
-    {
-      "name": "Email Writer",
-      "description": "Drafts marketing emails, newsletters, and drip sequences with subject line suggestions and personalization tokens",
-      "available": true,
-      "category": "Content Creation"
-    },
-    {
-      "name": "Social Media Content",
-      "description": "Produces platform-optimized posts for Twitter, LinkedIn, Instagram, and Facebook with hashtag recommendations",
-      "available": true,
-      "category": "Content Creation"
-    },
-    {
-      "name": "Brand Voice",
-      "description": "Trains the AI on your existing brand materials to replicate your unique voice, vocabulary, and style across all content",
-      "available": true,
+      "name": "Brand voice and style guidance",
+      "description": "If the current plan supports brand voice or style guidance, test it against approved examples and prohibited claims. Compare outputs across several asset types and have an editor score consistency.",
+      "available": null,
       "category": "Branding"
     },
     {
-      "name": "Campaigns",
-      "description": "Organizes related content into campaigns with shared settings, brand voice, and output folders for streamlined production",
-      "available": true,
+      "name": "Campaign content workflows",
+      "description": "Test whether the current workspace helps your team organize related campaign assets and revise them without losing context. Confirm the feature scope and plan requirements with Jasper.",
+      "available": null,
       "category": "Workflow"
     },
     {
-      "name": "SEO Mode",
-      "description": "Integrates target keywords naturally into content and provides real-time SEO scoring against search engine ranking factors",
-      "available": true,
-      "category": "SEO"
-    },
-    {
-      "name": "Plagiarism Checker",
-      "description": "Scans generated content against billions of web pages to ensure originality before publishing or submission",
-      "available": true,
-      "category": "Quality"
-    },
-    {
-      "name": "Content Templates",
-      "description": "Access to 50+ pre-designed templates for specific content formats from press releases to product descriptions",
-      "available": true,
-      "category": "Content Creation"
-    },
-    {
-      "name": "Chrome Extension",
-      "description": "Browser extension that brings Jasper's writing capabilities directly into web apps like Gmail, Google Docs, and Notion",
-      "available": true,
-      "category": "Integration"
-    },
-    {
-      "name": "Zapier Integration",
-      "description": "Connects Jasper to over 3,000 apps via Zapier for automated content workflows and cross-platform publishing",
-      "available": true,
-      "category": "Integration"
-    },
-    {
-      "name": "Grammarly Integration",
-      "description": "Pairs with Grammarly for real-time grammar, spelling, and style corrections on generated content before export",
-      "available": true,
-      "category": "Integration"
-    },
-    {
-      "name": "Surfer SEO Integration",
-      "description": "Deep integration with Surfer SEO for data-driven keyword targeting, NLP terms, and content structure recommendations",
-      "available": true,
-      "category": "Integration"
-    },
-    {
-      "name": "Team Collaboration",
-      "description": "Multi-user workspace with role-based permissions, shared brand guidelines, and content review workflows",
-      "available": true,
+      "name": "Team review and permissions",
+      "description": "If multiple people will work in the platform, verify roles, review steps, sharing, access removal, and the availability of each control on the intended subscription.",
+      "available": null,
       "category": "Team"
     },
     {
-      "name": "Document Sharing",
-      "description": "Generate shareable links for drafts that allow stakeholders to view and comment without a Jasper account",
-      "available": true,
-      "category": "Team"
+      "name": "Integrations and export",
+      "description": "List the exact publishing, analytics, document, or marketing systems your team needs. Verify each integration with official documentation and test field mapping, access scopes, and export behavior before migrating work.",
+      "available": null,
+      "category": "Integration"
     },
     {
-      "name": "API Access",
-      "description": "REST API for developers to integrate Jasper's content generation directly into custom applications and pipelines",
-      "available": true,
-      "category": "Developer"
-    },
-    {
-      "name": "Analytics Dashboard",
-      "description": "Tracks content output volume, team usage, word counts, and campaign performance metrics across your workspace",
-      "available": true,
-      "category": "Analytics"
-    },
-    {
-      "name": "Mobile Access",
-      "description": "Mobile-optimized web interface allows content creation, editing, and review from smartphones and tablets",
-      "available": true,
-      "category": "Platform"
+      "name": "Data handling and governance",
+      "description": "Before using customer, campaign, or confidential material, review the current privacy terms, retention options, training/data-use policy, security documentation, and contractual controls with your organization.",
+      "available": null,
+      "category": "Security"
     }
   ],
   "ratings": [
@@ -363,7 +289,7 @@
     },
     {
       "question": "Is Jasper good for small businesses?",
-      "answer": "Yes, Jasper is suitable for small businesses. The paid pricing model scales with team size, making it cost-effective for growing organizations. Small businesses benefit from rapid deployment and intuitive interfaces that characterize modern SaaS platforms."
+      "answer": "Fit depends on output quality for your briefs, the editing required, workflow integrations, governance needs, and total cost. Pilot representative tasks and compare them with your existing process before deciding."
     },
     {
       "question": "What is Jasper best for?",
@@ -403,7 +329,7 @@
     },
     {
       "question": "Does Jasper offer a free version?",
-      "answer": "Jasper offers a paid pricing model. While there may not be a permanent free tier, most plans offer a trial period for evaluation purposes. Teams should assess their needs against free tier limitations before upgrading."
+      "answer": "Trial and free-access terms can change. Check Jasper's official site for current eligibility, duration, required payment details, and what happens when access ends."
     },
     {
       "question": "How does Jasper handle data privacy?",
@@ -480,5 +406,7 @@
   "difficulty": "Intermediate",
   "learningCurve": "Moderate — expect 1-3 days to become productive",
   "whoShouldUse": "Jasper is designed for fast-growing startups that need a scalable ai & machine learning platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Jasper is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "whoShouldNotUse": "Jasper is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives.",
+  "verdict": "Jasper may be worth evaluating when a marketing team needs AI-assisted drafting and reusable brand guidance in a shared workflow. This page does not present an independently measured rating or a hands-on benchmark. Run a controlled pilot using several real briefs, compare the output with your current process, record editing time and factual errors, and calculate the total cost using current vendor terms. Do not publish generated claims without human review.",
+  "lastUpdated": "2026-10-23"
 }
