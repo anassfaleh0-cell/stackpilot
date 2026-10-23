@@ -262,14 +262,14 @@ function sanitizeContentValue(value: unknown, fieldName?: string): unknown {
   if (typeof value === "string") {
     // Identifiers and headings are not prose claims. Running the claim-removal
     // patterns on them can erase valid slugs/titles such as "SaaS Pricing Benchmark 2026".
-    if (["title", "slug", "name", "term", "category", "reportType"].includes(fieldName || "")) {
+    if (["title", "slug", "name", "term", "category", "reportType", "url", "href", "relatedGuides", "relatedComparisons", "relatedPosts", "relatedTools", "relatedUseCases", "relatedIndustries", "relatedHubs", "toolSlug", "tool1Slug", "tool2Slug"].includes(fieldName || "")) {
       return sanitizeMalformedAnchorMarkup(value).trim()
     }
     return fieldName === "body"
       ? sanitizeEditorialBody(value)
       : sanitizeMalformedPricingText(sanitizeEditorialText(value))
   }
-  if (Array.isArray(value)) return value.map((item) => sanitizeContentValue(item))
+  if (Array.isArray(value)) return value.map((item) => sanitizeContentValue(item, fieldName))
   if (value && typeof value === "object") {
     const out: Record<string, unknown> = {}
     for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
