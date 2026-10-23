@@ -373,10 +373,10 @@ function sanitizeReview(review: ReviewContent): ReviewContent {
     ...review,
     // Do not expose imported social proof, prices, or feature matrices without explicit source verification.
     reviewCount: 0,
-    rating: review.ratingVerified === true && typeof review.rating === "number" && Number.isFinite(review.rating) ? review.rating : undefined,
+    rating: review.ratingVerified === true && typeof review.rating === "number" && Number.isFinite(review.rating) ? review.rating : 0,
     ratings: review.ratingVerified === true && Array.isArray(review.ratings) ? review.ratings : [],
-    pricing: review.priceRangeVerified === true ? safePrice(review.pricing) : "Verify current plan and pricing details with the vendor.",
-    priceRange: review.priceRangeVerified === true ? safePrice(review.priceRange) : "Not independently verified",
+    pricing: review.priceRangeVerified === true ? review.pricing : "Not verified",
+    priceRange: review.priceRangeVerified === true && review.priceRange ? safePrice(review.priceRange) : undefined,
     company: review.companyFactsVerified === true ? review.company : undefined,
     content: buildReviewSections(review),
     description: safeDescription,
