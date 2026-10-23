@@ -612,9 +612,18 @@ function sectionWordCount(sections: Array<{ body?: string; items?: string[] }>):
 }
 
 function buildReviewSections(review: ReviewContent): ContentSection[] {
-  const base = sanitizeSections(review.content).filter((section) =>
-    !(section.type === "diagram" && !["pricing-ladder", "feature-radar", "implementation-flow"].includes(section.body))
-  )
+  const base = sanitizeSections(review.content)
+    .filter((section) =>
+      !(section.type === "diagram" && !["pricing-ladder", "feature-radar", "implementation-flow"].includes(section.body))
+    )
+    .map((section) => ({
+      ...section,
+      body: review.priceRangeVerified === true ? section.body : stripUnverifiedPriceClaims(section.body),
+      ...(Array.isArray(section.items) && review.priceRangeVerified !== true
+        ? { items: section.items.map((item) => stripUnverifiedPriceClaims(item)).filter(Boolean) }
+        : {}),
+    }))
+    .filter((section) => section.body.trim().length > 0)
   if (sectionWordCount(base) >= 900) return base
 
   const company = review.companyFactsVerified === true ? review.company : undefined
