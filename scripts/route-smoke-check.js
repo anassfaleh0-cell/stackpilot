@@ -10,6 +10,7 @@ const ROUTES = [
   "/reviews",
   "/comparisons",
   "/guides",
+  "/guides/how-to-choose-ai-writing-software",
   "/blog",
   "/glossary",
   "/tools",
@@ -27,6 +28,7 @@ const ROUTES = [
   "/use-cases/best-seo-for-agencies",
   "/statistics/marketing-software",
   "/research/saas-churn-benchmarks-2026",
+  "/research/saas-pricing-benchmark-2026",
   "/hubs/software-for-healthcare",
   "/industries/healthcare",
 ]
@@ -101,6 +103,16 @@ async function checkRoute(pathname) {
         return
       }
     }
+    if (pathname === "/guides/how-to-choose-ai-writing-software" &&
+        (!body.includes("Build a representative test set") || /Something went wrong|landscape of content creation has been fundamentally transformed/i.test(body))) {
+      fail("/guides/how-to-choose-ai-writing-software does not render the reviewed decision guide")
+      return
+    }
+    if (pathname === "/research/saas-pricing-benchmark-2026" &&
+        (!body.includes("does not publish a verified market-wide average or median") || /51% of tools use a freemium model|median SaaS starting price is \\$19\\.99/i.test(body))) {
+      fail("/research/saas-pricing-benchmark-2026 is missing the transparent pricing-methodology content")
+      return
+    }
     const robotsMeta = body.match(/<meta\b(?=[^>]*\bname=["']robots["'])[^>]*>/i)?.[0] || ""
     if (/\bcontent=["'][^"']*\bnoindex\b/i.test(robotsMeta)) {
       fail(`${pathname} is unexpectedly noindex in the built app`)
@@ -152,6 +164,7 @@ async function main() {
           "/use-cases/best-seo-for-agencies",
           "/statistics/marketing-software",
           "/research/saas-churn-benchmarks-2026",
+          "/research/saas-pricing-benchmark-2026",
           "/hubs/software-for-healthcare",
           "/industries/healthcare",
         ]
