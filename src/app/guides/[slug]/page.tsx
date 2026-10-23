@@ -119,11 +119,6 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
               />
             </div>
 
-            <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
-              <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-              <p className="text-sm text-muted-foreground">{guide.description}</p>
-            </div>
-
             <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-base font-semibold mb-2">TL;DR</h2>
               <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
@@ -312,7 +307,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                           <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0">{i + 1}</span>
                           <span className="font-medium text-xs">{s.title}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground leading-relaxed ml-7">{s.body.slice(0, 100).trim()}...</p>
+                        <p className="text-xs text-muted-foreground leading-relaxed ml-7">{[s.body, ...(s.items ?? [])].filter(Boolean).join(" ").slice(0, 100).trim()}{[s.body, ...(s.items ?? [])].filter(Boolean).join(" ").length > 100 ? "…" : ""}</p>
                       </div>
                     ))}
                   </div>
