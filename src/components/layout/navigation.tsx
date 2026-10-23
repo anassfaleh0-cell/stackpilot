@@ -99,6 +99,16 @@ function Dropdown({ item, pathname }: { item: (typeof navConfig)[number]; pathna
           cancelClose()
           setOpen(true)
         }}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowDown") {
+            event.preventDefault()
+            cancelClose()
+            setOpen(true)
+            requestAnimationFrame(() => {
+              ref.current?.querySelector<HTMLAnchorElement>("[data-dropdown-link]")?.focus()
+            })
+          }
+        }}
         className={cn(
           "flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 rounded-lg",
           isActive(item.href)
@@ -126,6 +136,7 @@ function Dropdown({ item, pathname }: { item: (typeof navConfig)[number]; pathna
           <Link
             key={child.href}
             href={child.href}
+            data-dropdown-link
             onClick={() => setOpen(false)}
             className={cn(
               "block px-4 py-2.5 text-sm transition-colors",
