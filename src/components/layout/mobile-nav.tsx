@@ -72,7 +72,7 @@ export function MobileNav() {
       <button
         ref={buttonRef}
         onClick={() => setOpen(!open)}
-        className="relative z-50 flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"
+        className="relative z-50 flex h-11 w-11 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         aria-controls="mobile-menu"
