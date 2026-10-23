@@ -81,7 +81,7 @@ export function stripUnverifiedPriceClaims(value: string): string {
   const safeSentences = sentences.filter((sentence) => !priceOrPlanClaim.test(sentence))
   if (safeSentences.length) return safeSentences.join(" ").replace(/\s{2,}/g, " ").trim()
   if (!priceOrPlanClaim.test(raw)) return raw
-  if (/\bfree trial\b/i.test(raw)) return "Trial availability not independently verified"
+  if (/\bfree trial\b/i.test(raw)) return "trial availability not independently verified"
   if (/\b(?:free|freemium|paid|enterprise)\s+(?:plan|tier)\b/i.test(raw)) return "Plan availability not independently verified"
   return "Plan pricing not independently verified"
 }
