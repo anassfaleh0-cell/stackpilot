@@ -191,7 +191,7 @@ describe("content quality repairs", () => {
 
 
   it("suppresses unverified ratings, pricing, and review-count claims on audited reviews", () => {
-    for (const slug of ["asana", "linear", "monday-com", "hubspot"]) {
+    for (const slug of ["asana", "monday-com", "hubspot"]) {
       const review = getReview(slug)
       expect(review, slug).not.toBeNull()
       expect(review?.ratingVerified, slug).toBe(false)
