@@ -60,8 +60,6 @@ export function isContentAvailable(type: string, slug: string): boolean {
 
 const DATE_FIELDS = new Set(["lastUpdated", "contentPublished", "contentModified", "publishedAt", "updatedAt", "datePublished", "dateModified"])
 
-const GENERIC_REVIEW_SECTION_TITLES = new Set(["Rating Overview","Key Features","Hidden Costs","Learning Curve","Setup Time","Migration Difficulty","Industry Fit","Common Mistakes","Tips from experienced users","Buying Advice"])
-
 const GENERIC_BOILERPLATE_PATTERNS = [
   /our expert team evaluated/i,
   /our methodology combines hands-on product testing/i,
