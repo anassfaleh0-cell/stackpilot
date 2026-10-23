@@ -306,9 +306,9 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                   <div className="p-4">
                     <h3 className="font-semibold mb-3 text-sm">Top Picks</h3>
                     <div className="space-y-2">
-                      {page.picks.slice(0, 5).map((pick) => reviewHref(pick.toolSlug) ? (
+                      {page.picks.slice(0, 5).map((pick, index) => reviewHref(pick.toolSlug) ? (
                         <Link key={pick.toolSlug} href={`/reviews/${pick.toolSlug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
-                          <span>{pick.rank}. {pick.toolName}</span>
+                          <span>Option {index + 1}: {pick.toolName}</span>
                           <span className="text-xs font-medium">{verifiedPickRating(pick) !== null ? `${verifiedPickRating(pick)}/5` : "Rating not verified"}</span>
                         </Link>
                       ) : (
