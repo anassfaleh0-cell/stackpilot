@@ -91,6 +91,10 @@
       "title": "Keep a record of the trial",
       "type": "text",
       "body": "Save test cases, screenshots where appropriate, user feedback, source links, and unresolved questions. This record helps the team explain the decision and repeat the evaluation if pricing or requirements change."
+    },
+    {
+      "title": "Data model and workflow conventions",
+      "body": "Before rollout, agree on how teams use statuses, labels, projects, cycles, priorities, and ownership. Test whether the same conventions work for bug triage, roadmap work, support escalations, and cross-team dependencies. Document where teams may customize the workflow and where shared definitions are required for reliable reporting. Without these conventions, teams can create inconsistent data that makes dashboards difficult to interpret."
     }
   ],
   "faqs": [
