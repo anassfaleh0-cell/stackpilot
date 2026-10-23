@@ -130,6 +130,7 @@ export default function SitemapPage() {
                 <Link key={b.slug} href={`/blog/${b.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{b.title}</Link>
               ))}
               <Link href="/research" className="text-sm text-primary hover:underline block mb-2 mt-4">Research Reports</Link>
+               <Link href="/research/saas-pricing-benchmark-2026" className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">SaaS Pricing Benchmark: Data Method and Buyer Checklist</Link>
               {research.map(r => (
                 <Link key={r.slug} href={`/research/${r.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{r.title}</Link>
               ))}
