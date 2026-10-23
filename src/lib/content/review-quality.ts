@@ -117,16 +117,22 @@ const GENERATED_REVIEW_FAQ_PATTERNS = [
 ]
 
 export function getVisibleReviewFaqs(faqs: FAQItem[], showVerifiedPricing = false, showVerifiedFeatures = false): FAQItem[] {
-  const visibleFaqs = faqs.filter((faq) => {
-    const question = faq.question.trim()
-    const answer = faq.answer.trim()
-    if (!showVerifiedFeatures && /\b(?:integrat(?:e|es|ion)|features?|support for|supports?|available on|mobile apps?|API access|security certifications?|compliance|SSO|data residency|deployment options)\b/i.test(question)) return false
-    if (/^is .+ secure\?$/i.test(question) && /SOC 2 Type II|ISO 27001|FedRAMP|compliance with GDPR|CCPA|HIPAA|PCI DSS/i.test(answer)) return false
-    if (/^is .+ GDPR compliant\?$/i.test(question) && /^yes, .+ is GDPR compliant with data processing agreements and data residency options\./i.test(answer)) return false
-    if (/^is .+ good for enterprise teams\?$/i.test(question) && /serves enterprise organizations with .+ certifications? and scalable infrastructure/i.test(answer)) return false
-    if (/^what are the main features of .+\?$/i.test(question) && /API access for custom integrations, and enterprise security with SOC 2 Type II/i.test(answer)) return false
-    if (GENERATED_REVIEW_FAQ_PATTERNS.some((pattern) => pattern.test(answer))) return false
-    return true
-  })
-  return showVerifiedPricing ? visibleFaqs : visibleFaqs.map((faq) => ({ question: stripUnverifiedPriceClaims(faq.question), answer: stripUnverifiedPriceClaims(faq.answer) }))
+  // Preserve useful Q&A rather than dropping whole answers. Unverified capability,
+  // security, compliance, and pricing statements remain visible with clear provenance.
+  return faqs
+    .filter((faq) => typeof faq?.question === "string" && faq.question.trim() && typeof faq?.answer === "string" && faq.answer.trim())
+    .map((faq) => {
+      let question = faq.question.trim()
+      let answer = faq.answer.trim()
+      const hasFeatureOrTrustClaim = /\b(?:SOC 2|ISO 27001|FedRAMP|GDPR|CCPA|HIPAA|PCI DSS|SSO|data residency|API access|integrations?|mobile apps?|deployment options|security certifications?|compliance)\b/i.test(question + " " + answer)
+        || GENERATED_REVIEW_FAQ_PATTERNS.some((pattern) => pattern.test(answer))
+      if (!showVerifiedFeatures && hasFeatureOrTrustClaim && !/not independently verified|verification pending/i.test(answer)) {
+        answer += " (stored profile claim; not independently verified—check the vendor's current documentation)"
+      }
+      if (!showVerifiedPricing) {
+        question = stripUnverifiedPriceClaims(question)
+        answer = stripUnverifiedPriceClaims(answer)
+      }
+      return { ...faq, question, answer }
+    })
 }
