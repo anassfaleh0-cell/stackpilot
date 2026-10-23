@@ -86,42 +86,41 @@ export function EditorialComparison({ tool1, tool2, features, featuresVerified =
           </thead>
           <tbody>
             {displayFeatures.map((f, i) => (
-              <tr key={f.name} className={i < features.length - 1 ? "" : ""} style={{ borderBottom: i < features.length - 1 ? `1px solid ${p.glassBorder}` : undefined }}>
-                <td className="p-3">
+              <tr key={f.name} style={{ borderBottom: i < features.length - 1 ? `1px solid ${p.glassBorder}` : undefined }}>
+                <td className="p-3 align-top">
                   <div className="font-medium">{f.name}</div>
-                  {(f.tool1Detail || f.tool2Detail) && (
-                    <div className="text-[11px] text-muted-foreground mt-0.5 leading-tight">
-                      {f.tool1Detail && f.tool2Detail && <RichText text={`${f.tool1Detail} · ${f.tool2Detail}`} />}
-                      {f.tool1Detail && !f.tool2Detail && <RichText text={f.tool1Detail} />}
-                      {!f.tool1Detail && f.tool2Detail && <RichText text={f.tool2Detail} />}
-                    </div>
-                  )}
                 </td>
-                <td className="text-center p-3">
-                  {typeof f.displayTool1 === "boolean" ? (
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={f.displayTool1 ? p.primary : "var(--error)"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mx-auto">
-                      {f.displayTool1 ? (
-                        <><circle cx="12" cy="12" r="10" /><polyline points="16 8 10 16 8 12" /></>
-                      ) : (
-                        <><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></>
-                      )}
-                    </svg>
-                  ) : (
-                    <span className="text-xs font-medium px-2 py-0.5 rounded-full" style={{ color: p.primary, backgroundColor: p.glassBg }}>{f.displayTool1}</span>
-                  )}
+                <td className="p-3 align-top">
+                  <div className="flex justify-center">
+                    {typeof f.displayTool1 === "boolean" ? (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={f.displayTool1 ? p.primary : "var(--error)"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        {f.displayTool1 ? (
+                          <><circle cx="12" cy="12" r="10" /><polyline points="16 8 10 16 8 12" /></>
+                        ) : (
+                          <><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></>
+                        )}
+                      </svg>
+                    ) : (
+                      <span className="text-xs font-medium px-2 py-0.5 rounded-full" style={{ color: p.primary, backgroundColor: p.glassBg }}>{f.displayTool1}</span>
+                    )}
+                  </div>
+                  {f.tool1Detail && <div className="mt-2 text-left text-[11px] leading-relaxed text-muted-foreground"><RichText text={f.tool1Detail} /></div>}
                 </td>
-                <td className="text-center p-3">
-                  {typeof f.displayTool2 === "boolean" ? (
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={f.displayTool2 ? p.primary : "var(--error)"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mx-auto">
-                      {f.displayTool2 ? (
-                        <><circle cx="12" cy="12" r="10" /><polyline points="16 8 10 16 8 12" /></>
-                      ) : (
-                        <><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></>
-                      )}
-                    </svg>
-                  ) : (
-                    <span className="text-xs font-medium px-2 py-0.5 rounded-full" style={{ color: p.primary, backgroundColor: p.glassBg }}>{f.displayTool2}</span>
-                  )}
+                <td className="p-3 align-top">
+                  <div className="flex justify-center">
+                    {typeof f.displayTool2 === "boolean" ? (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={f.displayTool2 ? p.primary : "var(--error)"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        {f.displayTool2 ? (
+                          <><circle cx="12" cy="12" r="10" /><polyline points="16 8 10 16 8 12" /></>
+                        ) : (
+                          <><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></>
+                        )}
+                      </svg>
+                    ) : (
+                      <span className="text-xs font-medium px-2 py-0.5 rounded-full" style={{ color: p.primary, backgroundColor: p.glassBg }}>{f.displayTool2}</span>
+                    )}
+                  </div>
+                  {f.tool2Detail && <div className="mt-2 text-left text-[11px] leading-relaxed text-muted-foreground"><RichText text={f.tool2Detail} /></div>}
                 </td>
               </tr>
             ))}

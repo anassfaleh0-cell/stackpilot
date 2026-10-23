@@ -1,5 +1,5 @@
 import type { ContentSection } from "@/types/content"
-import { getVisibleReviewContent, getVisibleReviewFaqs } from "@/lib/content/review-quality"
+import { getReviewPricingSummary, getVisibleReviewContent, getVisibleReviewFaqs, isPricingPlaceholder } from "@/lib/content/review-quality"
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
@@ -18,7 +18,7 @@ import { InternalLinks } from "@/components/content/internal-links"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { isPublicAuthor } from "@/lib/authors"
-import { Star, ExternalLink, ChevronRight, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
+import { Star, ExternalLink, ChevronRight, ArrowRight } from "lucide-react"
 import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
 import { isNoindexed } from "@/lib/noindex"
 import { BannerAd, NativeAd, InFeedAd } from "@/components/ads"
@@ -69,6 +69,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const pros = editorialPros(tool.pros)
   const visibleFaqs = getVisibleReviewFaqs(tool.faqs, tool.priceRangeVerified === true, tool.featuresVerified === true).slice(0, 8)
   const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true)
+  const pricingSummary = getReviewPricingSummary(tool.priceRange, tool.pricing, tool.priceRangeVerified === true)
+  const pricingModelLabel = isPricingPlaceholder(tool.pricing) ? "Not verified" : tool.pricing || "Not recorded"
 
   const authorSlug = tool.author ? tool.author.trim().toLowerCase().replace(/\s+/g, "-") : ""
   const authorHref = authorSlug && isPublicAuthor(authorSlug) ? `/authors/${authorSlug}` : null
@@ -155,23 +157,11 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 <p className="text-sm text-muted-foreground">{tool.tagline}</p>
               </div>
 
-              <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
-                <h2 className="text-base font-semibold mb-2">TL;DR</h2>
-                <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-                  {pros.slice(0, 3).map((pro, i) => (
-                    <li key={i}>{pro}</li>
-                  ))}
-                  {tool.cons.slice(0, 2).map((con, i) => (
-                    <li key={`c${i}`}>{con}</li>
-                  ))}
-                </ul>
-              </div>
-
               <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
                 <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
                 <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
                   {hasStoredEditorialRating && <li>Editorial rating: {formatScore(tool.rating)}/5 (PilotStack editorial score; {hasEditorialRating ? "verified editorial record" : "stored value, verification pending"}; not a third-party review aggregate).</li>}
-                  <li>Pricing: {tool.priceRange || tool.pricing ? `${tool.priceRange || "Price range not recorded"} (${tool.pricing || "pricing model not recorded"})${tool.priceRangeVerified === true ? "" : " — recorded values; verification pending, confirm current terms with the vendor"}` : "Pricing details are not recorded in this profile; confirm current plan and regional pricing with the vendor."}</li>
+                  <li>Pricing: {pricingSummary}</li>
                   <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : tool.featuresVerified === true && tool.features.some((feature) => feature.available) ? `Recorded strengths include ${tool.features.filter((feature) => feature.available).slice(0, 2).map((feature) => feature.name.toLowerCase()).join(" and ")}; confirm current availability with the vendor.` : `Evaluate ${tool.name} against your workflow requirements and verify current capabilities with the vendor.`}</li>
                   <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `No limitations are recorded in this profile; verify your requirements and the vendor's current documentation before deciding.`}</li>
                   <li>{entity?.useCases?.primary?.slice(0, 2).join(", ") ? `Common use cases: ${entity.useCases.primary.slice(0, 2).join(", ")}` : `Category: ${tool.category}`}</li>
@@ -182,38 +172,6 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   )}
                   {categoryRatings.length > 0 && <li>Editorial rating dimensions: {categoryRatings.map((item) => item.label).join(", ")}</li>}
                 </ul>
-              </div>
-
-              {/* Decision Summary — Who Should Buy */}
-              <div className="grid sm:grid-cols-2 gap-4 mb-10">
-                <div className="rounded-xl border border-success/20 bg-success-subtle/40 p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <CheckCircle2 size={16} className="text-success" />
-                    <span className="font-semibold text-sm text-success">Who should buy</span>
-                  </div>
-                  <ul className="space-y-2">
-                    {pros.slice(0, 3).map((pro, i) => (
-                      <li key={i} className="text-sm text-foreground flex items-start gap-2">
-                        <span className="text-success mt-0.5 shrink-0">•</span>
-                        <span>{pro}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="rounded-xl border border-error/20 bg-error-subtle/40 p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <XCircle size={16} className="text-error" />
-                    <span className="font-semibold text-sm text-error">Who should avoid</span>
-                  </div>
-                  <ul className="space-y-2">
-                    {tool.cons.slice(0, 3).map((con, i) => (
-                      <li key={i} className="text-sm text-foreground flex items-start gap-2">
-                        <span className="text-error mt-0.5 shrink-0">•</span>
-                        <span>{con}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               </div>
 
               {/* CTA */}
@@ -264,7 +222,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* Rating Overview */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Rating Overview</h2>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
                   {hasStoredEditorialRating && <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={formatScore(tool.rating)} title="Overall Rating" description={hasEditorialRating ? "Verified PilotStack editorial score" : "Stored PilotStack score; verification pending"} />}
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -275,13 +233,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                     </svg>
-                  } value={tool.pricing || "Not recorded"} title="Pricing Model" description={tool.priceRangeVerified === true ? "Pricing record verified" : "Recorded pricing model; verification pending"} />
-                  <InfoCard icon={
-                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M12 6v6l4 2" />
-                    </svg>
-                  } value={`${visibleContent.length}`} title="Review Sections" description="In-depth coverage" />
+                  } value={pricingModelLabel} title="Pricing Model" description={tool.priceRangeVerified === true ? "Pricing model and displayed terms are marked verified" : "Current plan terms and price are not independently verified"} />
                 </div>
                 <div className="flex justify-center">
                   {categoryRatings.length > 0 && <div className="w-full"><p className="text-xs text-muted-foreground mb-2">{tool.ratingsVerified === true ? "Recorded editorial rating dimensions." : "Stored rating dimensions; verification pending. These are not third-party ratings."}</p><EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" /></div>}

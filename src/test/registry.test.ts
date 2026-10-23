@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { searchContent } from "@/lib/content/registry"
+import { getComparison, searchContent } from "@/lib/content/registry"
 
 describe("searchContent", () => {
   it("returns results for matching query", () => {
@@ -52,5 +52,22 @@ describe("getAllReviews", () => {
         review.ratingVerified !== true || typeof review.rating !== "number" || !Number.isFinite(review.rating)
       )).toBe(true)
     }
+  })
+})
+
+
+describe("comparison normalization", () => {
+  it("preserves authored decision criteria instead of appending synthetic placeholder rows", () => {
+    const comparison = getComparison("square-vs-xero")
+    expect(comparison).not.toBeNull()
+    expect(comparison?.features.map((feature) => feature.name)).toEqual([
+      "Primary use",
+      "Workflow fit",
+      "Operations and risk",
+      "Cost and decision",
+    ])
+    expect(comparison?.features.some((feature) => feature.name === "Recorded rating")).toBe(false)
+    expect(comparison?.features.some((feature) => feature.name === "Pricing information")).toBe(false)
+    expect(comparison?.features.some((feature) => String(feature.tool1).includes("0/5") || String(feature.tool2).includes("0/5"))).toBe(false)
   })
 })

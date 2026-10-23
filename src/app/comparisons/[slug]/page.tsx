@@ -14,14 +14,14 @@ import { RichText } from "@/components/content/rich-text"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowRight, CheckCircle2, Target } from "lucide-react"
-import { EditorialHero, EditorialCallout, GlassCard, InfoCard } from "@/components/dynamic"
+import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EditorialComparison } from "@/components/editorial/editorial-comparison"
 import { RelatedContent } from "@/components/dynamic-client"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { ScoreBar } from "@/components/brand/patterns"
 import { NativeAd } from "@/components/ads"
 import { getComparisonDecision, getComparisonDisplayCopy } from "@/lib/content/comparison-decision"
-import { stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
+import { getReviewPricingSummary, stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
 import { getSpecificComparisonFaqs } from "@/lib/content/comparison-presentation"
 
 export const dynamic = "force-static"
@@ -152,17 +152,6 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <p className="text-sm text-muted-foreground">{displayCopy.description}</p>
           </div>
 
-          <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
-            <h2 className="text-base font-semibold mb-2">TL;DR</h2>
-            <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-              <li>{hasComparableWinner ? `${winnerLabel} is the recorded pick in the source dataset, not a universal winner` : categoriesDiffer ? `${cmp.tool1} and ${cmp.tool2} belong to different product categories; use their linked reviews to decide whether you need one or both.` : `${cmp.tool1} vs ${cmp.tool2}: compare the evidence against your priorities`}</li>
-              <li>Recorded information for {cmp.tool1}: {cmp.features.filter(f => f.tool1Detail && f.tool1 !== "Not recorded").map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "see the linked review"}</li>
-              <li>Recorded information for {cmp.tool2}: {cmp.features.filter(f => f.tool2Detail && f.tool2 !== "Not recorded").map(f => f.name.toLowerCase()).slice(0, 2).join(", ") || "see the linked review"}</li>
-              <li>{cmp.features.filter(f => f.tool1Detail && f.tool2Detail).length} criteria have details recorded for both tools; this does not mean their capabilities are identical</li>
-              <li>Consider your specific workflow needs when choosing between them</li>
-            </ul>
-          </div>
-
           <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
             <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
@@ -192,7 +181,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           </div>
 
           {/* Tool Compare Cards */}
-          <div className="grid sm:grid-cols-2 gap-6 mb-8">
+          {(t1Pct !== null || t2Pct !== null) && <div className="grid sm:grid-cols-2 gap-6 mb-8">
             {[
               { name: cmp.tool1, slug: cmp.tool1Slug, isWinner: hasComparableWinner && winnerLabel === cmp.tool1, score: t1Pct },
               { name: cmp.tool2, slug: cmp.tool2Slug, isWinner: hasComparableWinner && winnerLabel === cmp.tool2, score: t2Pct },
@@ -217,27 +206,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                 </div>
               </GlassCard>
             ))}
-          </div>
-
-          {/* Quick Stats */}
-          <div className="grid sm:grid-cols-3 gap-3 mb-10">
-            <InfoCard icon={
-              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 3v18h18M7 16l4-8 4 4 4-6" />
-              </svg>
-            } value={cmp.features.length.toString()} title={cmp.decisionGuide ? "Decision Criteria" : "Features Compared"} />
-            <InfoCard icon={
-              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-              </svg>
-            } value={hasComparableWinner ? winnerLabel! : categoriesDiffer ? "Different categories" : "No single winner"} title="Comparison outcome" />
-            <InfoCard icon={
-              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 6v6l4 2" />
-              </svg>
-            } value={cmp.faqs.length.toString()} title="FAQs Answered" />
-          </div>
+          </div>}
 
           {/* Feature Comparison */}
           <section className="mb-12">
@@ -248,7 +217,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           {/* Decision Framework */}
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-6">Decision Framework</h2>
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid gap-6">
               {/* How to choose */}
               <GlassCard>
                 <div className="p-5">
@@ -273,23 +242,6 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                 </div>
               </GlassCard>
 
-              {/* Bottom line callout */}
-              <EditorialCallout type="key" title="Bottom Line" category={cmp.category}>
-                <div className="space-y-2">
-                  <p>{hasComparableWinner
-                    ? `${winnerLabel} is the recorded winner in the PilotStack comparison dataset. Use the feature rows and linked reviews to confirm whether that result matches your workflow.`
-                    : categoriesDiffer
-                      ? `${cmp.tool1} and ${cmp.tool2} are listed under different product categories in their linked reviews. They may solve different jobs, so compare the requirements you have instead of treating the recorded pick as proof that one replaces the other.`
-                      : `The source data does not support a single verified overall winner. Compare the feature rows and linked reviews against your priorities.`
-                  }</p>
-                  <div className="pt-2 border-t border-current/10">
-                    <span className="text-xs font-medium">Best for: </span>
-                    <span className="text-xs opacity-80">
-                      {hasComparableWinner ? `The recorded pick is ${winnerLabel}; the other option may still be a better fit where its exclusive criteria matter more.` : categoriesDiffer ? `Choose based on whether you need ${review1?.category || cmp.tool1} capabilities, ${review2?.category || cmp.tool2} capabilities, or both.` : `Both options have trade-offs; prioritize the criteria most important to your workflow.`}
-                    </span>
-                  </div>
-                </div>
-              </EditorialCallout>
             </div>
           </section>
 
@@ -316,7 +268,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                         </div>
                         <div>
                           <dt className="text-xs text-muted-foreground">Pricing record</dt>
-                          <dd className="font-medium">{review.priceRangeVerified === true ? (review.priceRange || review.pricing || "See vendor pricing") : "Not independently verified — check vendor pricing"}</dd>
+                          <dd className="font-medium">{getReviewPricingSummary(review.priceRange, review.pricing, review.priceRangeVerified === true)}</dd>
                         </div>
                       </dl>
                       {Array.isArray(review.pros) && review.pros.length > 0 && (
