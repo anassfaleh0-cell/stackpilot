@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest"
+import { REDIRECTED_ALTERNATIVE_SLUGS, REDIRECTED_BEST_SLUGS } from "@/lib/sitemap/redirected-content"
 import {
   getRelatedByCategory,
   getHref,
@@ -258,4 +259,12 @@ describe("Phase 5O-B-1: internal link discovery", () => {
     expect(useCase.useCases.map((i) => i.slug)).not.toContain("best-seo-for-agencies")
     expect(useCase.related.map((i) => getHref(i))).not.toContain("/use-cases/best-seo-for-agencies")
   })
+  it("never emits related links to content consolidated by permanent redirects", { timeout: 60000 }, () => {
+    for (const category of CATEGORIES) {
+      const result = getRelatedByCategory(category, "", 500)
+      expect(result.alternatives.map((item) => item.slug).filter((slug) => REDIRECTED_ALTERNATIVE_SLUGS.has(slug))).toEqual([])
+      expect(result.bestPages.map((item) => item.slug).filter((slug) => REDIRECTED_BEST_SLUGS.has(slug))).toEqual([])
+    }
+  })
+
 })
