@@ -27,7 +27,7 @@ export default function TeamPage() {
             <h1 className="text-4xl font-bold tracking-tight mb-4">PilotStack Publisher & Editorial Process</h1>
             <p className="text-lg text-muted-foreground text-pretty mb-8">
               PilotStack is independently operated and uses a publisher byline rather than presenting this page as a staffed research department. Content attribution is explained on our{" "}
-              <Link href="/authors">authors</Link> page. Our methodology explains the scoring criteria and makes clear that a stored figure is verified only when its source and calculation can be checked.
+              <Link href="/authors">authors</Link> page. Our methodology explains the scoring criteria and makes clear that a stored figure is verified only after source verification confirms its provenance and calculation can be checked.
             </p>
             <Card className="p-6">
               <div className="flex items-center gap-4 mb-4">
