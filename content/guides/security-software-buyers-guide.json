@@ -60,6 +60,41 @@
       "title": "Use a risk-based decision checklist",
       "body": "For each candidate, document the risk addressed, required control, evidence reviewed, gaps, operational owner, estimated total cost, implementation dependencies, and exit plan. Record unverified vendor claims as open questions. Choose the tool that closes a prioritized gap and can be operated reliably, then schedule a review to confirm the control continues to work.",
       "type": "text"
+    },
+    {
+      "title": "Map alerts to a response owner",
+      "body": "For every alert type that matters, name the person or team who receives it, the conditions that require escalation, the expected response process, and how closure is recorded. Test alert routing with a safe simulation. If the organization cannot investigate a signal, decide whether to tune it, route it to a managed provider, or select a simpler control. Unowned alerts create noise rather than dependable protection.",
+      "type": "text"
+    },
+    {
+      "title": "Review procurement and incident terms",
+      "body": "Read the vendor's security addendum, data-processing terms, incident notification commitment, subprocessors, retention policy, and support escalation path. Ask how the vendor notifies customers of a material incident and what evidence will be available for internal review. Confirm contract language and product documentation agree; a marketing statement alone is not sufficient proof of a contractual commitment.",
+      "type": "text"
+    },
+    {
+      "title": "Plan an exit and recovery test",
+      "body": "Before rollout, identify how to export configurations, logs, policies, and audit records, and how long the export remains available after cancellation. Test account recovery and the documented response to a vendor outage. Maintain independent backups and procedures for critical systems. Record the owner, test date, result, and follow-up actions so that resilience is checked rather than assumed.",
+      "type": "text"
+    },
+    {
+      "title": "Distinguish product evidence from compliance claims",
+      "body": "When a vendor claims a certification or compliance alignment, ask for the current report or certificate, its scope, the covered product and service, the issuing body, and the relevant dates. Confirm whether subcontractors or regional deployments are included. A certification for one part of a company does not automatically cover every feature or customer configuration. Map the evidence to your own control requirements and keep any remaining gap documented for the security owner.",
+      "type": "text"
+    },
+    {
+      "title": "Define success before rollout",
+      "body": "Choose a small set of measures that reflect the risk the tool is intended to reduce, such as coverage of required devices, time to investigate a priority alert, number of unowned alerts, or success of a recovery test. Record the baseline and measurement method before deployment. Review results after the pilot and again after configuration changes. Do not use a vendor's headline detection or prevention statistic as a substitute for evidence from your own environment.",
+      "type": "text"
+    },
+    {
+      "title": "Document residual risk",
+      "body": "No product removes every risk. Record the threats or control gaps that remain after deployment, who accepts them, what compensating controls exist, and when the decision will be reviewed. Escalate any risk that exceeds the organization's tolerance before rollout rather than assuming that a purchase itself closes the gap.",
+      "type": "text"
+    },
+    {
+      "title": "Reassess after material changes",
+      "body": "Repeat the relevant checks after a major product update, new integration, incident, acquisition, or change in the data the tool processes.",
+      "type": "text"
     }
   ],
   "lastUpdated": "2026-10-23",
