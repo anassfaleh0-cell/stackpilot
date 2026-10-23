@@ -222,7 +222,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* Rating Overview */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Rating Overview</h2>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
                   {hasStoredEditorialRating && <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={formatScore(tool.rating)} title="Overall Rating" description={hasEditorialRating ? "Verified PilotStack editorial score" : "Stored PilotStack score; verification pending"} />}
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -234,11 +234,6 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                       <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                     </svg>
                   } value={pricingModelLabel} title="Pricing Model" description={tool.priceRangeVerified === true ? "Pricing model and displayed terms are marked verified" : "Current plan terms and price are not independently verified"} />
-                  <InfoCard icon={
-                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M12 6v6l4 2" />
-                    </svg>
                 </div>
                 <div className="flex justify-center">
                   {categoryRatings.length > 0 && <div className="w-full"><p className="text-xs text-muted-foreground mb-2">{tool.ratingsVerified === true ? "Recorded editorial rating dimensions." : "Stored rating dimensions; verification pending. These are not third-party ratings."}</p><EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" /></div>}
