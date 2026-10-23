@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getVisibleReviewContent, getVisibleReviewFaqs, stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
+import { getReviewPricingSummary, getVisibleReviewContent, getVisibleReviewFaqs, isPricingPlaceholder, stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
 
 describe("review content provenance", () => {
   const diagrams = [
@@ -7,6 +7,18 @@ describe("review content provenance", () => {
     { title: "Feature radar", body: "feature-radar", type: "diagram" as const },
     { title: "Implementation flow", body: "implementation-flow", type: "diagram" as const },
   ]
+
+
+  it("formats pricing placeholders once and preserves real recorded values with provenance", () => {
+    expect(isPricingPlaceholder("Not independently verified — check official pricing")).toBe(true)
+    expect(isPricingPlaceholder("Not independently verified")).toBe(true)
+    expect(isPricingPlaceholder("Paid")).toBe(false)
+    expect(getReviewPricingSummary("Not independently verified — check official pricing", "Not independently verified", false))
+      .toBe("Current pricing is not independently verified; confirm plans and regional terms with the vendor.")
+    expect(getReviewPricingSummary("$29/month", "Paid", false))
+      .toBe("Paid: $29/month (recorded; not independently verified; confirm current terms with the vendor)")
+    expect(getReviewPricingSummary("$29/month", "Paid", true)).toBe("Paid: $29/month")
+  })
 
   it("hides pricing and rating diagrams until their provenance is verified", () => {
     const visible = getVisibleReviewContent(diagrams, false, false)
