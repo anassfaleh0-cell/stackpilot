@@ -313,7 +313,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                         </Link>
                       ) : (
                         <div key={pick.toolSlug} className="flex items-center justify-between text-sm text-muted-foreground py-1">
-                          <span>{pick.rank}. {pick.toolName}</span>
+                          <span>Option {index + 1}: {pick.toolName}</span>
                           <span className="text-xs font-medium">{verifiedPickRating(pick) !== null ? `${verifiedPickRating(pick)}/5` : "Rating not verified"}</span>
                         </div>
                       ))}
