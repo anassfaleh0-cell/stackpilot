@@ -273,21 +273,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                     <p className="text-muted-foreground leading-relaxed pl-11">{section.body}</p>
                   )}
 
-                  {/* Practical tip every 3 sections */}
-                  {i % 3 === 2 && (
-                    <div className="mt-6 ml-11 rounded-xl border border-accent/20 bg-accent-subtle/30 p-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Lightbulb size={14} className="text-accent" />
-                        <span className="text-xs font-semibold text-accent">Practical tip</span>
-                      </div>
-                      <p className="text-sm text-foreground">
-                        {section.items
-                          ? `When working through "${section.title}", focus on the areas most relevant to your specific use case.`
-                          : `This section is foundational — take time to understand it before moving forward.`
-                        }
-                      </p>
-                    </div>
-                  )}
+                  {/* Do not inject generic tips: advice must come from the guide's reviewed source content. */}
                 </section>
                 </>
               ))}
@@ -368,15 +354,20 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             <InternalLinks category={guide.category} excludeSlug={guide.slug} />
 
             {(() => {
-              const cat = categories.find(c => c.name === guide.category)
-              if (!cat) return null
+              const relatedCategoryNames = new Set(
+                guide.relatedTools
+                  .map((slug) => getReview(slug)?.category)
+                  .filter((name): name is string => Boolean(name) && name !== guide.category)
+              )
+              const relatedCategories = categories.filter((category) => relatedCategoryNames.has(category.name))
+              if (relatedCategories.length === 0) return null
               return (
                 <section className="mt-16">
                   <h2 className="text-2xl font-bold tracking-tight mb-6">Related Categories</h2>
                   <div className="flex flex-wrap gap-2">
-                    {categories.filter(c => c.name !== guide.category).slice(0, 6).map(c => (
-                      <Link key={c.slug} href={`/category/${c.slug}`} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
-                        {c.name}
+                    {relatedCategories.slice(0, 6).map((category) => (
+                      <Link key={category.slug} href={`/category/${category.slug}`} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
+                        {category.name}
                       </Link>
                     ))}
                   </div>
