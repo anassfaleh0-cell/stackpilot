@@ -113,8 +113,13 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
     return text.length > 180 ? `${text.slice(0, 177).trimEnd()}…` : text
   }
 
+  // Apply the same unverified-price guard to the visible comparison cells, not just
+  // their explanatory detail text. Otherwise an imported raw value such as "$23-75/mo"
+  // can leak into a page even when the surrounding copy correctly says pricing is unverified.
   const safeFeatures = cmp.features.map((f) => ({
     ...f,
+    tool1: typeof f.tool1 === "string" ? stripUnverifiedPriceClaims(f.tool1) : f.tool1,
+    tool2: typeof f.tool2 === "string" ? stripUnverifiedPriceClaims(f.tool2) : f.tool2,
     tool1Detail: f.tool1Detail ? stripUnverifiedPriceClaims(stripDeadContentLinks(f.tool1Detail)) : f.tool1Detail,
     tool2Detail: f.tool2Detail ? stripUnverifiedPriceClaims(stripDeadContentLinks(f.tool2Detail)) : f.tool2Detail,
   }))
