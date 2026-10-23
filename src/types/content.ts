@@ -340,7 +340,7 @@ export interface Subcategory {
   description: string
 }
 
-export type PricingTier = "Free" | "Freemium" | "Paid" | "Free Trial" | "Contact for Pricing"
+export type PricingTier = "Free" | "Freemium" | "Paid" | "Free Trial" | "Contact for Pricing" | "Not verified"
 
 export interface EntityLink {
   slug: string
