@@ -172,7 +172,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   {hasEditorialRating && <li>Editorial rating: {formatScore(tool.rating)}/5 (PilotStack editorial score; this is PilotStack's assessment, not a third-party review aggregate).</li>}
                   <li>Pricing: {tool.priceRangeVerified === true ? `${tool.priceRange} (${tool.pricing})` : "Current plan and regional pricing must be verified directly with the vendor."}</li>
                   <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : tool.featuresVerified === true && tool.features.some((feature) => feature.available) ? `Recorded strengths include ${tool.features.filter((feature) => feature.available).slice(0, 2).map((feature) => feature.name.toLowerCase()).join(" and ")}; confirm current availability with the vendor.` : `Evaluate ${tool.name} against your workflow requirements and verify current capabilities with the vendor.`}</li>
-                  <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `Suitable for most ${tool.category} use cases`}</li>
+                  <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `No limitations are recorded in this profile; verify your requirements and the vendor's current documentation before deciding.`}</li>
                   <li>{entity?.useCases?.primary?.slice(0, 2).join(", ") ? `Common use cases: ${entity.useCases.primary.slice(0, 2).join(", ")}` : `Category: ${tool.category}`}</li>
                   {tool.alternatives.length > 0 ? (
                     <li>Alternatives: {tool.alternatives.slice(0, 3).map((altSlug) => allReviews.find((r) => r.slug === altSlug)?.name).filter(Boolean).join(", ")}</li>
@@ -363,7 +363,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     <p className="text-muted-foreground text-xs leading-relaxed">Estimate implementation effort before projecting ROI. Include internal setup labor, data migration, team training, workflow configuration, and ongoing administration.</p>
                   </div>
                 </div>
-                <p className="text-[11px] text-muted-foreground mt-3">Compiled under our published methodology from a library of {allReviews.length} B2B SaaS reviews across {categories.length} categories.</p>
+                <p className="text-[11px] text-muted-foreground mt-3">This profile is a starting point for evaluation. Check the supporting details on this page and confirm current capabilities, limits, and pricing with the vendor before making a decision.</p>
               </section>
 
               {/* Content Sections */}
