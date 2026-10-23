@@ -65,6 +65,16 @@
       "title": "Record evidence and revisit the choice",
       "body": "Keep vendor documentation links, dates checked, screenshots or notes from tests, open questions, cost assumptions, and the decision rationale in one place. Separate confirmed facts from vendor statements and internal assumptions. Assign an owner to recheck the decision before renewal or after major product, pricing, security, or business changes. This record helps prevent a new evaluation from repeating the same work.",
       "type": "text"
+    },
+    {
+      "title": "Use a decision meeting, not a demo vote",
+      "body": "After testing, hold a short review with the people who own the requirements. Start with mandatory pass/fail criteria, then discuss evidence for the remaining scores and unresolved risks. Ask each stakeholder to identify one strength, one limitation, and one assumption that could change the decision. Record dissent rather than averaging it away. Agree on the decision owner, implementation dependencies, fallback plan, and conditions that would justify reconsidering the choice.",
+      "type": "text"
+    },
+    {
+      "title": "Keep the scope proportionate",
+      "body": "A small team buying a low-risk tool may need a lightweight checklist and a short trial; software handling sensitive data or critical operations needs deeper security, legal, and resilience review. Match the evaluation effort to the impact of failure, amount of data involved, integration complexity, and switching cost. The goal is a defensible decision, not paperwork for its own sake.",
+      "type": "text"
     }
   ],
   "author": "Sarah Chen",
