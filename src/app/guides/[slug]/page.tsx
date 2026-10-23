@@ -15,7 +15,7 @@ import { EditorialHero, EditorialSectionIllustration, GlassCard, InfoCard } from
 import { EditorialProcess, RelatedContent } from "@/components/dynamic-client"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { BrandDivider } from "@/components/brand/patterns"
-import { CheckCircle2, BookOpen, Clock, Layers, Lightbulb, Scale } from "lucide-react"
+import { CheckCircle2, BookOpen, Clock, Layers, Scale } from "lucide-react"
 import { InFeedAd } from "@/components/ads"
 import { isNoindexed } from "@/lib/noindex"
 import { getGuideKeyTakeaways } from "@/lib/content/guide-summary"
