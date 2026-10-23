@@ -44,9 +44,12 @@ describe("review content provenance", () => {
       expect(stripUnverifiedPriceClaims(claim)).not.toMatch(/[$€£]\s?\d|\b(?:USD|EUR|GBP)\s?\d|\b\d[\d,]*(?:\.\d+)?\s?(?:USD|EUR|GBP)\b/i)
     }
 
-    expect(stripUnverifiedPriceClaims("Includes a free trial")).toContain("trial availability not independently verified")
-    expect(stripUnverifiedPriceClaims("The free plan is suitable for testing")).toContain("plan availability not independently verified")
-    expect(stripUnverifiedPriceClaims("A freemium tier is available")).toContain("plan availability not independently verified")
+    expect(stripUnverifiedPriceClaims("Includes a free trial")).toContain("Includes a free trial")
+    expect(stripUnverifiedPriceClaims("Includes a free trial")).toContain("not independently verified")
+    expect(stripUnverifiedPriceClaims("The free plan is suitable for testing")).toContain("The free plan is suitable for testing")
+    expect(stripUnverifiedPriceClaims("The free plan is suitable for testing")).toContain("not independently verified")
+    expect(stripUnverifiedPriceClaims("A freemium tier is available")).toContain("A freemium tier is available")
+    expect(stripUnverifiedPriceClaims("A freemium tier is available")).toContain("not independently verified")
   })
 
   it("filters generated security/compliance FAQ claims and sanitizes pricing in remaining FAQs", () => {
@@ -71,7 +74,6 @@ describe("review content provenance", () => {
 
     expect(faqs).toHaveLength(2)
     expect(faqs[0].answer).toContain("$29")
-    expect(faqs[0].answer).toContain("not independently verified")
     expect(faqs[0].answer).toContain("not independently verified")
     expect(faqs[1].answer).toContain("compare the current feature set")
   })
