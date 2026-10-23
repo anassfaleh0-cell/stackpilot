@@ -133,6 +133,10 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
   /\b\d{1,3}(?:\.\d+)?%\s+(?:of\s+)?[^.!?]{0,100}\b(?:prefer|report|match|accuracy|accurately|transactions|accountants|customers|users|teams|businesses|companies)\b/i,
   /\b(?:matches?|correctly matching|accuracy of|match rate of)\s*\d{1,3}(?:[-–]\d{1,3})?%\b/i,
   /\b(?:market leader|largest ecosystem|unmatched by|outperforms competitors|default choice)\b/i,
+  // Uncited superlatives and social-proof phrases are marketing claims, not neutral product facts.
+  /\b(?:the\s+)?(?:largest|biggest|most comprehensive|most accurate|most frequently updated|industry[- ]leading|world['’]s leading|number one|#1)\b[^.!?]{0,140}\b(?:index|database|platform|tool|software|ecosystem|coverage|provider|market|solution)\b/i,
+  /\btrusted by\b[^.!?]{0,120}\b(?:worldwide|millions|leading companies|top brands)\b/i,
+  /\bgo[- ]to tool\b/i,
   /\b(?:response times? average|average response time|responds? within)\s*\d+[-–]?\d*\s*(?:minutes?|hours?|days?)\b/i,
   /\b(?:dashboard|page|report|invoice|transaction|sync|load)\s+(?:loads?|completes?|updates?)\s+(?:in|within|under)\s*\d+(?:[-–]\d+)?\s*(?:seconds?|milliseconds?|minutes?|hours?)\b/i,
   /\bwe (?:evaluated|tested|reviewed|researched|compared)\b/i,
