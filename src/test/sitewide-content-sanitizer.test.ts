@@ -76,6 +76,9 @@ describe("site-wide content quality gate", () => {
       "The vendor has 99.9% uptime.",
       "Watchtower monitors 100,000+ known breach databases and alerts users.",
       "Even if 1Password's servers are breached, encrypted vault data remains unreadable.",
+      "GPT-5 model delivers near-instant responses with vastly improved reasoning, creativity, and accuracy over previous versions.",
+      "Free tier is limited to GPT-3.5 and has strict daily usage caps, making it frustrating for heavy users.",
+      "Enterprise-grade reliability with SOC 2 Type II certification.",
     ]
     for (const sample of samples) {
       expect(sanitizeUnsupportedClaims(sample)).toBe("")
