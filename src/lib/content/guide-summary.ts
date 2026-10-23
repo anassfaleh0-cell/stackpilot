@@ -8,14 +8,14 @@ export interface GuideKeyTakeaway {
 
 /** Build article-specific takeaways from actual section prose or list items, never template claims. */
 export function getGuideKeyTakeaways(
-  sections: Pick<GuideSection, "title" | "body" | "items">[],
+  sections: Pick<GuideSection, "title" | "body" | "items" | "columns" | "rows">[],
   limit = 5,
 ): GuideKeyTakeaway[] {
   if (!Array.isArray(sections) || limit < 1) return []
   return sections
     .map((section) => ({
       title: section.title,
-      sourceText: [section.body, ...(section.items ?? [])].filter(Boolean).join(" ").trim(),
+      sourceText: [section.body, ...(section.items ?? []), ...(section.columns ?? []), ...((section.rows ?? []).flat())].filter(Boolean).join(" ").trim(),
     }))
     .filter((section) => section.title.trim() && section.sourceText.length > 0)
     .slice(0, limit)
