@@ -23,7 +23,9 @@ async function fetchWithRetry(url, options, attempts = 4) {
 }
 
 async function fetchText(pathname) {
-  const url = SITE_URL + pathname
+  const parsedUrl = new URL(SITE_URL + pathname)
+  parsedUrl.searchParams.set("__content_check", process.env.GITHUB_SHA || String(Date.now()))
+  const url = parsedUrl.toString()
   const response = await fetchWithRetry(url, {
     redirect: "follow",
     headers: { "user-agent": "PilotStack-ProductionSmokeCheck/1.0" },
@@ -34,7 +36,7 @@ async function fetchText(pathname) {
 }
 
 async function main() {
-  const paths = ["/", "/ads.txt", "/robots.txt", "/sitemap.xml"]
+  const paths = ["/", "/ads.txt", "/robots.txt", "/sitemap.xml", "/contact", "/reviews/linear", "/statistics/dataprivacy-software"]
   const results = await Promise.all(paths.map(async (pathname) => {
     try {
       const result = await fetchText(pathname)
@@ -51,6 +53,26 @@ async function main() {
   const ads = byPath.get("/ads.txt")
   const robots = byPath.get("/robots.txt")
   const sitemap = byPath.get("/sitemap.xml")
+  const contact = byPath.get("/contact")
+  const linear = byPath.get("/reviews/linear")
+  const statistics = byPath.get("/statistics/dataprivacy-software")
+
+  if (contact && !contact.error) {
+    const emailOnly = contact.body.includes("contact@pilotstack.online") &&
+      !/Official Community|Facebook|LinkedIn|Pinterest|Newsletter sign-up is temporarily unavailable|YouTube Reviews|Follow PilotStack/i.test(contact.body)
+    report("email-only contact page", emailOnly, "contact email is present; obsolete social/newsletter placeholders are absent")
+  }
+  if (linear && !linear.error) {
+    const noUnsupportedFaq = !/Yes, Linear offers deep GitHub integration|What platforms does Linear support\?/i.test(linear.body)
+    const honestScoring = linear.body.includes("An aggregate score is shown only when the underlying category ratings and calculation can be verified") &&
+      !linear.body.includes("The displayed overall score is calculated from the recorded category ratings")
+    report("review capability claims", noUnsupportedFaq, "unverified integration/platform FAQs are not rendered")
+    report("review scoring disclosure", honestScoring, "unverified aggregate-score claims are not rendered")
+  }
+  if (statistics && !statistics.error) {
+    const noUnsourcedNarrativeFigures = !/\$50B\+|26%|4,874\+|27,500 products|8M-professional base/i.test(statistics.body)
+    report("statistics narrative provenance", noUnsourcedNarrativeFigures, "unaudited narrative figures are withheld from rendered statistics pages")
+  }
 
   if (home && !home.error) {
     report("AdSense publisher meta", home.body.includes("ca-pub-" + PUBLISHER_ID), "homepage must advertise the same publisher ID as ads.txt")

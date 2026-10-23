@@ -14,6 +14,7 @@ const SITE_ORIGIN = new URL(SITE_URL).origin
 const CONCURRENCY = Math.max(1, Math.min(4, Number(process.env.LINK_AUDIT_CONCURRENCY) || 2))
 const REQUEST_TIMEOUT_MS = 25000
 const MAX_TRANSIENT_RETRIES = 5
+const CACHE_BUSTER = process.env.LINK_AUDIT_CACHE_BUSTER || String(Date.now())
 const TRANSIENT_STATUSES = new Set([429, 500, 502, 503, 504])
 
 function normalizePath(pathname) {
@@ -57,9 +58,11 @@ function isPaginationUrl(target) {
 
 async function fetchWithTimeout(url, options = {}) {
   let lastError
+  const requestUrl = new URL(url)
+  if (requestUrl.origin === SITE_ORIGIN) requestUrl.searchParams.set("__link_audit", CACHE_BUSTER)
   for (let attempt = 0; attempt <= MAX_TRANSIENT_RETRIES; attempt++) {
     try {
-      const response = await fetch(url, {
+      const response = await fetch(requestUrl.toString(), {
         ...options,
         redirect: options.redirect ?? "follow",
         headers: { "user-agent": "PilotStack-InternalLinkAudit/1.0", ...(options.headers || {}) },

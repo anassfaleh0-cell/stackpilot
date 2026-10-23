@@ -51,4 +51,13 @@ describe("review navigation and social metadata integrity", () => {
     expect(editorialProcess).not.toContain("The displayed overall score is calculated from the recorded category ratings")
   })
 
+  it("cache-busts live audits and verifies updated contact/review/statistics content", () => {
+    const linkAudit = read("scripts/linking-audit.js")
+    const smokeCheck = read("scripts/production-smoke-check.cjs")
+    expect(linkAudit).toContain("__link_audit")
+    expect(smokeCheck).toContain("__content_check")
+    expect(smokeCheck).toContain("email-only contact page")
+    expect(smokeCheck).toContain("statistics narrative provenance")
+  })
+
 })
