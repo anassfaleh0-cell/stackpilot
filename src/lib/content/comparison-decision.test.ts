@@ -94,7 +94,8 @@ describe("getComparisonFeatureDisplayValue", () => {
     expect(getComparisonFeatureDisplayValue("AI-assisted drafting", false, true)).toContain("AI-assisted drafting")
     expect(getComparisonFeatureDisplayValue("AI-assisted drafting", false, true)).toContain("not independently verified")
     expect(getComparisonFeatureDisplayValue("   ", false, true)).toBe("Not recorded")
-    expect(getComparisonFeatureDisplayValue(true, false, true)).toBe("Not verified")
+    expect(getComparisonFeatureDisplayValue(true, false, true)).toContain("Yes")
+    expect(getComparisonFeatureDisplayValue(true, false, true)).toContain("not independently verified")
   })
 })
 
