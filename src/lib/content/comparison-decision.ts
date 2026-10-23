@@ -41,8 +41,11 @@ export function getComparisonDecision(input: ComparisonDecisionInput): Compariso
 export function getComparisonFeatureDisplayValue(value: boolean | string, featuresVerified?: boolean, decisionGuide = false, featureName = ""): boolean | string {
   void featureName
   if (typeof value === "string" && !value.trim()) return "Not recorded"
+  // Decision-guide text is usually authored evaluation guidance, not a factual product claim.
+  // Keep instructions readable, but retain provenance labels on explicit rating/count/pricing rows.
   if (decisionGuide && typeof value === "string") {
-    return featuresVerified === true ? value : `${value} (recorded; not independently verified)`
+    const isRecordedMetric = /\b(?:rating|review count|pricing information|price range)\b/i.test(featureName)
+    return featuresVerified === true || !isRecordedMetric ? value : `${value} (recorded; not independently verified)`
   }
   if (featuresVerified === true) return value
   const label = typeof value === "boolean" ? (value ? "Yes" : "No") : value
