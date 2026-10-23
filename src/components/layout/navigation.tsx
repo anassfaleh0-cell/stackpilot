@@ -97,7 +97,7 @@ function Dropdown({ item, pathname }: { item: (typeof navConfig)[number]; pathna
         type="button"
         onClick={() => {
           cancelClose()
-          setOpen((current) => !current)
+          setOpen(true)
         }}
         className={cn(
           "flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 rounded-lg",
