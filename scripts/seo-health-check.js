@@ -68,7 +68,7 @@ function readDir(dir) {
 }
 
 function stripHtml(text) {
-  return (text || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
+  return String(text ?? "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
 }
 
 function wordCount(text) {
