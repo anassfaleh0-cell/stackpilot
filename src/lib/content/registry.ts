@@ -795,16 +795,35 @@ export function getComparison(slug: string): ComparisonContent | null {
     comparisonCache.set(slug, null)
     return null
   }
-  const baseFeatures = cmp.features.slice(0, 20).map((f) => ({
-    ...f,
-    name: trimText(f.name, 140),
-    tool1Detail: sanitizeUnsupportedClaims(trimText(f.tool1Detail, 320)),
-    tool2Detail: sanitizeUnsupportedClaims(trimText(f.tool2Detail, 320)),
-  }))
+  const rawFeatures = cmp.features.slice(0, 20)
+  // Boolean-only rows without supporting detail are not sufficient evidence for scored head-to-head claims.
+  const hasUnverifiedBooleanOnlyFeatures = rawFeatures.length > 0 && rawFeatures.every((f) =>
+    typeof f.tool1 === "boolean" &&
+    typeof f.tool2 === "boolean" &&
+    !String(f.tool1Detail ?? "").trim() &&
+    !String(f.tool2Detail ?? "").trim()
+  )
+  const baseFeatures = rawFeatures.map((f) => {
+    const safe = {
+      ...f,
+      name: trimText(f.name, 140),
+      tool1Detail: sanitizeUnsupportedClaims(trimText(f.tool1Detail, 320)),
+      tool2Detail: sanitizeUnsupportedClaims(trimText(f.tool2Detail, 320)),
+    }
+    if (!hasUnverifiedBooleanOnlyFeatures) return safe
+    const detail = (tool: string, value: boolean) =>
+      "The stored record marks this criterion as " + (value ? "available" : "unavailable") + " for " + tool + ". This status has not been independently verified; confirm current feature availability and plan restrictions with the vendor."
+    return {
+      ...safe,
+      tool1Detail: safe.tool1Detail || detail(cmp.tool1, Boolean(f.tool1)),
+      tool2Detail: safe.tool2Detail || detail(cmp.tool2, Boolean(f.tool2)),
+    }
+  })
   const features = buildDerivedComparisonFeatures(cmp, baseFeatures)
   const winner = cmp.winnerVerified === true ? normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2) : null
   const result: ComparisonContent = {
     ...cmp,
+    featuresVerified: cmp.featuresVerified === true && !hasUnverifiedBooleanOnlyFeatures,
     lastUpdated: getVerifiedComparisonLastUpdated(cmp.lastUpdated),
     winner,
     description: sanitizeComparisonDescription(cmp.description, cmp.tool1, cmp.tool2, features, winner),

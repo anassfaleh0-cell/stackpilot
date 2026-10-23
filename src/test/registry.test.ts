@@ -31,6 +31,18 @@ describe("searchContent", () => {
   })
 })
 
+describe("comparison source integrity", () => {
+  it("does not score boolean-only comparison rows without supporting detail", async () => {
+    const { getComparison } = await import("@/lib/content/registry")
+    const comparison = getComparison("1password-vs-bitwarden")
+    expect(comparison).not.toBeNull()
+    expect(comparison!.featuresVerified).toBe(false)
+    expect(comparison!.features.some((feature) =>
+      /not been independently verified/i.test(feature.tool1Detail || "") ||
+      /not been independently verified/i.test(feature.tool2Detail || "")
+    )).toBe(true)
+  })
+})
 describe("getAllReviews", () => {
   it("sorts verified ratings first without ranking unverified records by unsupported scores", async () => {
     const { getAllReviews } = await import("@/lib/content/registry")

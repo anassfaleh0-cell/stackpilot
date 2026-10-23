@@ -102,7 +102,12 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   })
 
   // Reuse the review FAQ integrity filter so comparison FAQs do not repeat unverified pricing or templated compliance claims in HTML or FAQ schema.
-  const visibleFaqs = getSpecificComparisonFaqs(cmp.faqs).slice(0, 8)
+  const visibleFaqs = getSpecificComparisonFaqs(cmp.faqs, {
+    tool1: cmp.tool1,
+    tool2: cmp.tool2,
+    tool1Category: review1?.category,
+    tool2Category: review2?.category,
+  }).slice(0, 8)
 
   // Use the comparison's own recorded feature details for decision guidance.
   // These are descriptions of the source data, not independent verification or proof of superiority.
