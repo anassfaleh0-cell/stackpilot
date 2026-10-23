@@ -1,11 +1,11 @@
 name: Cloudflare production deploy (after quality gate)
 
 on:
+  # Deploy only after the quality gate succeeds. A simultaneous push trigger caused
+  # duplicate production deployments and endpoint probes, which can trip Cloudflare rate limits.
   workflow_run:
     workflows: ["quality-gate"]
     types: [completed]
-  push:
-    branches: [master]
   workflow_dispatch:
 
 permissions:
@@ -87,12 +87,24 @@ jobs:
       - name: Verify production endpoints
         run: |
           set -euo pipefail
+          fetch_status() {
+            local url="$1" output="$2" code attempt
+            for attempt in 1 2 3 4 5; do
+              code="$(curl --silent --show-error --location --output "$output" --write-out '%{http_code}' --connect-timeout 15 --max-time 45 "$url" || true)"
+              if [ "$code" = "200" ]; then printf '%s' "$code"; return 0; fi
+              if [ "$code" != "429" ] && [ "${code:-000}" != "000" ]; then printf '%s' "$code"; return 0; fi
+              sleep $((attempt * 5))
+            done
+            printf '%s' "${code:-000}"
+            return 0
+          }
           for path in / /ads.txt /robots.txt /sitemap.xml /privacy /methodology /contact /terms /cookies /editorial-policy /advertising-disclosure /affiliate-disclosure /dmca /fact-checking-policy /corrections-policy; do
-            code="$(curl --silent --show-error --location --output /tmp/pilotstack-response --write-out '%{http_code}' "https://pilotstack.online$path")"
+            code="$(fetch_status "https://pilotstack.online$path" /tmp/pilotstack-response)"
             printf '%s %s\n' "$code" "$path"
             test "$code" = "200"
+            sleep 1
           done
-          curl --silent --show-error --fail https://pilotstack.online/ads.txt | grep -F 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0'
+          grep -F 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0' /tmp/pilotstack-response >/dev/null || curl --silent --show-error --fail --retry 4 --retry-all-errors --retry-delay 5 https://pilotstack.online/ads.txt | grep -F 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0'
           if curl --silent --show-error --fail https://pilotstack.online/contact | grep -Fq 'hello@pilotstack.online'; then
             echo "Legacy placeholder inbox still present on live contact page"
             exit 1
