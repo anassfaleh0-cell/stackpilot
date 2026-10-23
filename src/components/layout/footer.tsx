@@ -2,7 +2,6 @@ import Link from "next/link"
 import { Container } from "@/components/ui/container"
 import { site, navLinks, categories, editorialLinks } from "@/lib/constants"
 import { SocialFooterIcons } from "@/components/brand/social-icons"
-import { NewsletterSignup } from "@/components/newsletter"
 import { CookieSettingsButton } from "@/components/analytics/cookie-settings-button"
 import { Logo } from "@/components/brand/logo"
 
@@ -69,8 +68,8 @@ export function Footer() {
             <p className="text-sm text-muted-foreground max-w-xs leading-relaxed text-pretty">
               {site.description}
             </p>
-            <div className="mt-4">
-              <NewsletterSignup variant="footer" />
+            <div className="mt-4 max-w-xs text-sm text-muted-foreground">
+              Questions or corrections? <Link href="/contact" className="underline underline-offset-2 hover:text-foreground">Contact the PilotStack team</Link>.
             </div>
             <div className="mt-4">
               <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">Follow PilotStack</h2>
