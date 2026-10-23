@@ -41,7 +41,7 @@ export default function ContactPage() {
             </p>
             <a
               className="inline-flex min-h-11 items-center rounded-lg bg-primary px-5 text-sm font-semibold text-white underline-offset-4 hover:bg-primary-dark hover:underline"
-              href={`mailto:${contactEmail}?subject=PilotStack%20feedback`}
+              href="mailto:contact@pilotstack.online?subject=PilotStack%20feedback"
             >
               Email {contactEmail}
             </a>
