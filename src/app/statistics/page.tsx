@@ -10,7 +10,6 @@ import { ArrowRight, BarChart3 } from "lucide-react"
 import { BrandPattern } from "@/components/brand/patterns"
 import { site } from "@/lib/constants"
 import { BannerAd } from "@/components/ads"
-import { getPagination } from "@/lib/pagination"
 
 export const metadata = createMetadata({
   title: "Software Market Research Guides",
@@ -27,8 +26,6 @@ export default function StatisticsPage() {
     slug: s.slug,
     count: s.stats ? s.stats.length : 0,
   }))
-  const pagination = getPagination({ page: 1, perPage: 24, total: statCategories.length })
-  const pageStatCategories = statCategories.slice(pagination.start, pagination.end)
 
   return (
     <>
@@ -60,7 +57,7 @@ export default function StatisticsPage() {
       <Section>
         <Container>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {pageStatCategories.map((cat) => (
+            {statCategories.map((cat) => (
               <Link key={cat.slug} href={`/statistics/${cat.slug}`} className="group card-hover">
                 <Card className="h-full flex flex-col">
                   <div className="flex items-center gap-2 mb-3">
