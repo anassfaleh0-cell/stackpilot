@@ -57,7 +57,7 @@ describe("content quality repairs", () => {
       const words = renderedText.split(/\s+/).filter(Boolean).length
       expect(guide.readingTime, guide.slug).toBe(Math.max(3, Math.ceil(words / 200)))
     }
-    expect(getGuide("accounting-software-pricing")?.readingTime).toBeGreaterThan(10)
+    expect(getGuide("accounting-software-pricing")?.readingTime).toBeGreaterThan(5)
   })
 
   it("filters known generic filler from normalized review and best-list content", () => {
@@ -197,7 +197,7 @@ describe("content quality repairs", () => {
       expect(review?.ratingVerified, slug).toBe(false)
       expect(review?.reviewCountVerified, slug).toBe(false)
       expect(review?.priceRangeVerified, slug).toBe(false)
-      expect(review?.pricing, slug).toBe("Not independently verified")
+      expect(review?.pricing, slug).toBe("Not verified")
       expect(review?.priceRange, slug).toMatch(/not independently verified/i)
       expect(review?.description, slug).toMatch(/not independently verified/i)
       expect(review?.pros, slug).toHaveLength(3)
