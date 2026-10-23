@@ -27,7 +27,7 @@ export default function PrivacyPage() {
             <h2>Information We Collect</h2>
             <p>We collect only the information necessary to provide and improve PilotStack:</p>
             <ul>
-              <li><strong>Information you provide:</strong> Information you choose to share if you contact us through an available, configured channel. The on-site contact form is not configured yet. You can email contact@pilotstack.online or use the official social channels linked on our Contact page for non-sensitive feedback. Newsletter signup is currently unavailable and does not save an email address. Please avoid including sensitive personal information in messages.</li>
+              <li><strong>Information you provide:</strong> If you contact us, you may email contact@pilotstack.online. Please avoid including sensitive personal information in messages.</li>
               <li><strong>Information collected automatically:</strong> Depending on your consent choices and enabled services, analytics or advertising providers may process page visits, referral source, browser and device information, online identifiers, and approximate geographic region. PilotStack does not request precise location data from visitors.</li>
               <li><strong>Information we do not request:</strong> Our forms are not designed to collect payment information, government IDs, or sensitive personal data. Please do not submit this information. If you share it inadvertently through a channel we can access, avoid sending further sensitive details and use the Contact page's official channels to request follow-up.</li>
             </ul>
@@ -36,7 +36,6 @@ export default function PrivacyPage() {
             <p>We use collected information solely to:</p>
             <ul>
               <li>Deliver the content and services you request</li>
-              <li>If a newsletter is introduced, send messages only after explicit opt-in and any required confirmation; newsletter signup is currently unavailable and no subscription is saved.</li>
               <li>Analyze aggregate traffic patterns to improve our content and user experience</li>
               <li>Respond to support inquiries and feedback</li>
             </ul>
@@ -53,7 +52,7 @@ export default function PrivacyPage() {
             <h2>Data Retention</h2>
             <p>We retain your personal information only as long as necessary:</p>
             <ul>
-              <li>Newsletter signup is currently unavailable because no mailing-list provider is connected. Submitting the newsletter form does not save an email address or create a subscription. If we enable a provider later, this policy will be updated to describe its retention practices.</li>
+              <li>PilotStack does not currently offer newsletter subscriptions and does not collect newsletter signup addresses.</li>
               <li>If we receive a message through an available channel, we retain it only as needed to respond, handle follow-up, and meet applicable recordkeeping obligations. Retention depends on the channel and systems actually used.</li>
               <li>Analytics retention depends on the service and configuration described in this policy.</li>
             </ul>
@@ -68,17 +67,17 @@ export default function PrivacyPage() {
               <li><strong>Right to data portability:</strong> Request a machine-readable copy of your data to transfer to another service.</li>
               <li><strong>Right to object:</strong> Object to processing of your data for analytics or marketing purposes.</li>
             </ul>
-            <p>To exercise these rights, email contact@pilotstack.online or use the official social channels linked on our Contact page. Do not include sensitive information in social messages. If email delivery fails, use the social channels. We aim to respond within the time required by applicable privacy law.</p>
+            <p>To exercise these rights, email contact@pilotstack.online. We aim to respond within the time required by applicable privacy law.</p>
 
             <h2>Your Rights (CCPA)</h2>
             <p>If you are a resident of California, you have the following rights under the California Consumer Privacy Act (CCPA):</p>
             <ul>
               <li><strong>Right to know:</strong> Request disclosure of the categories and specific pieces of personal information we have collected about you.</li>
               <li><strong>Right to delete:</strong> Request deletion of personal information we have collected, subject to certain exceptions.</li>
-              <li><strong>Right to opt out of sale or sharing:</strong> We do not sell personal information for money. However, some advertising technology can involve disclosure of online identifiers or browsing activity for cross-context behavioral advertising, which may be treated as “sharing” under California law depending on the circumstances. To opt out of advertising-related processing on this site, open Cookie Settings and turn off advertising consent. You may also submit a privacy request through the official social channels linked on our Contact page or email contact@pilotstack.online. Do not include sensitive information in social messages.</li>
+              <li><strong>Right to opt out of sale or sharing:</strong> We do not sell personal information for money. However, some advertising technology can involve disclosure of online identifiers or browsing activity for cross-context behavioral advertising, which may be treated as “sharing” under California law depending on the circumstances. To opt out of advertising-related processing on this site, open Cookie Settings and turn off advertising consent. You may submit a privacy request by emailing contact@pilotstack.online.</li>
               <li><strong>Right to non-discrimination:</strong> We will not discriminate against you for exercising any of your CCPA rights.</li>
             </ul>
-            <p>To exercise your CCPA rights, submit a request through the official social channels linked on our Contact page or email contact@pilotstack.online. We will take reasonable steps to verify your identity before processing a request; do not send sensitive identity documents through social media.</p>
+            <p>To exercise your CCPA rights, email contact@pilotstack.online. We will take reasonable steps to verify your identity before processing a request; please do not send identity documents unless we explain a secure and necessary process.</p>
 
             <h2>Data Security</h2>
             <p>We implement appropriate technical and organizational measures to protect your personal data, including:</p>
@@ -101,13 +100,13 @@ export default function PrivacyPage() {
             <p>Where required, we use appropriate contractual safeguards with third-party processors and review their published privacy and data-processing terms.</p>
 
             <h2>International Data Transfers</h2>
-            <p>If personal data is transferred internationally, the applicable provider terms and lawful transfer safeguards depend on the service and destination. Use the official social channels linked on our Contact page to request information about safeguards relevant to a specific service or email contact@pilotstack.online.</p>
+            <p>If personal data is transferred internationally, the applicable provider terms and lawful transfer safeguards depend on the service and destination. For questions about safeguards relevant to a specific service, email contact@pilotstack.online.</p>
 
             <h2>Changes to This Policy</h2>
             <p>If we operate a newsletter, we will notify subscribers of material changes where appropriate. The "Last updated" date at the top of this page reflects the most recent revision. We encourage visitors to review the policy periodically.</p>
 
             <h2>Contact</h2>
-            <p>For privacy-related inquiries or to exercise your data rights, use the official social channels linked on our Contact page or email contact@pilotstack.online. Please do not include sensitive personal information in social messages. We aim to respond to requests within 30 days.</p>
+            <p>For privacy-related inquiries or to exercise your data rights, email contact@pilotstack.online. We aim to respond within the time required by applicable privacy law.</p>
           </div>
         </Container>
       </Section>

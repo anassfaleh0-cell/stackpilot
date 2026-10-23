@@ -5,7 +5,6 @@ import { MobileNav } from "./mobile-nav"
 import { ThemeToggle } from "./theme-toggle"
 import { site } from "@/lib/constants"
 import { Search } from "lucide-react"
-import { SocialHeaderIcons } from "@/components/brand/social-icons"
 import { Logo } from "@/components/brand/logo"
 
 export function Header() {
@@ -24,7 +23,6 @@ export function Header() {
         </div>
         <div className="flex items-center gap-1">
           <ThemeToggle />
-          <SocialHeaderIcons />
           <Link
             href="/search"
             className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted-bg transition-all duration-200"

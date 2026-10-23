@@ -1,5 +1,3 @@
-import { Mail } from "lucide-react"
-
 interface NewsletterSignupProps {
   variant?: "inline" | "footer" | "exit"
   className?: string
@@ -10,17 +8,14 @@ export function NewsletterSignup({ variant = "inline", className = "" }: Newslet
 
   return (
     <div className={`${isFooter ? "" : "rounded-xl border border-border bg-card p-5"} ${className}`.trim()}>
-      <div className="flex items-center gap-2 mb-2">
-        <Mail size={16} className="text-primary" />
-        <h3 className={isFooter ? "font-semibold mb-2 text-sm" : "font-semibold text-sm"}>
-          {isFooter ? "Stay informed" : "Newsletter updates"}
-        </h3>
-      </div>
+      <h3 className={isFooter ? "font-semibold mb-2 text-sm" : "font-semibold text-sm mb-2"}>
+        {isFooter ? "Questions or corrections?" : "Contact PilotStack"}
+      </h3>
       <p className={isFooter ? "text-xs text-muted-foreground mb-2" : "text-xs text-muted-foreground mb-3"}>
-        Newsletter sign-up is temporarily unavailable. We are not collecting email addresses here yet; please check back later.
+        For questions about software research, factual corrections, or business inquiries, email our team.
       </p>
       <a href="mailto:contact@pilotstack.online" className="text-xs font-medium text-primary hover:underline">
-        Contact us about updates
+        contact@pilotstack.online
       </a>
     </div>
   )

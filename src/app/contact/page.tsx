@@ -3,7 +3,6 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { SocialLinkList } from "@/components/brand/social-icons"
 
 const contactEmail = "contact@pilotstack.online"
 
@@ -61,14 +60,6 @@ export default function ContactPage() {
             Please do not include passwords, payment details, or other sensitive
             personal information in your message.
           </p>
-        </div>
-        <div className="mx-auto mt-6 max-w-2xl rounded-xl border border-border bg-muted-bg p-6">
-          <h2 className="mb-2 text-lg font-bold">Official Community</h2>
-          <p className="mb-4 text-sm text-muted-foreground">
-            For public, non-sensitive questions, you can also find PilotStack
-            through our official social channels.
-          </p>
-          <SocialLinkList />
         </div>
       </Container>
     </>

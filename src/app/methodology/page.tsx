@@ -9,7 +9,7 @@ import Link from "next/link"
 
 export const metadata = createMetadata({
   title: "Review Methodology | Evidence, Scoring & Editorial Standards",
-  description: "How PilotStack evaluates software, handles sources and corrections, and audits older ratings and review-count figures for verifiable provenance.",
+  description: "How PilotStack evaluates software using buyer-focused criteria, source checks, reproducible scoring, and transparent corrections.",
   path: "/methodology",
   ogType: "article",
 })
@@ -17,7 +17,7 @@ export const metadata = createMetadata({
 const stages = [
   {
     title: "Selection & Scoping",
-    body: "We select software topics based on practical buyer needs. Review pages discuss product fit, pricing considerations, feature availability, integrations, administration, and limitations. Some older records contain numeric scores or review counts whose source trail is still being audited; those figures should not be treated as independently verified until their provenance is documented. Commercial placements, where offered, are separate from editorial evaluation; payment does not determine editorial ratings or rankings.",
+    body: "We select software topics based on practical buyer needs. Review pages discuss product fit, pricing considerations, feature availability, integrations, administration, and limitations. Numeric scores and review counts are treated as verified only when their source trail and calculation are documented; a stored value alone does not establish independent user sentiment. Commercial placements, where offered, are separate from editorial evaluation; payment does not determine editorial ratings or rankings.",
   },
   {
     title: "Evidence & Sourcing",
@@ -25,7 +25,7 @@ const stages = [
   },
   {
     title: "Scoring & Ratings",
-    body: "Numeric ratings are being audited for source provenance, consistent dimensions, and reproducible calculations. A score should be displayed as verified only when the evidence and calculation can be checked. Until that audit is complete, use the written criteria and vendor-confirmed facts rather than assuming that a stored number represents independent user sentiment or observed product outcomes.",
+    body: "Numeric ratings are presented as verified only when source provenance, consistent dimensions, and reproducible calculations are documented. A score should be displayed as verified only when the evidence and calculation can be checked. Where provenance is unavailable, the figure is qualified or omitted rather than presented as independent user sentiment or an observed product outcome.",
   },
   {
     title: "Consistency & Limits",
@@ -73,7 +73,7 @@ export default function MethodologyPage() {
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                PilotStack evaluates software using practical buyer criteria and vendor documentation. Some older numeric scores and review-count figures are still undergoing a source audit; they should not be treated as verified unless the page provides a checkable source and calculation. We omit unsupported claims as they are identified. Paid placements, where offered, are labelled separately and do not determine editorial ratings or rankings.
+                PilotStack evaluates software using practical buyer criteria and vendor documentation. Numeric scores and review-count figures are treated as verified only when the page provides a checkable source and calculation. Unsupported or unverified claims should be qualified or omitted. Paid placements, where offered, are labelled separately and do not determine editorial ratings or rankings.
               </p>
             </div>
 
@@ -154,7 +154,7 @@ export default function MethodologyPage() {
               <h2 className="text-2xl font-bold mt-12 mb-4">Editorial Standards & Byline</h2>
               <p className="text-muted-foreground mb-4">
                 PilotStack publishes editorial standards for buyer-relevant criteria, source details, and corrections. Author pages identify the bylines used on the site; a byline alone does not establish that a product was tested directly or that the author has specialist credentials. Editorial roles are listed on our{" "}
-                <Link href="/authors" className="text-primary hover:underline">authors</Link> pages. Our published rules set expectations for buyer-relevant criteria, source details, and corrections. Older score and review-count data is under audit; a value repeated across pages is not independently verified merely because it is consistent.
+                <Link href="/authors" className="text-primary hover:underline">authors</Link> pages. Our published rules set expectations for buyer-relevant criteria, source details, and corrections. Scores and review counts are not independently verified merely because a value is repeated across pages; the source and calculation must be checkable.
               </p>
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Editorial Independence</h2>

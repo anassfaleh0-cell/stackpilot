@@ -4,7 +4,6 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { SocialLinkList } from "@/components/brand/social-icons"
 
 export const metadata = createMetadata({
   title: "About PilotStack — Our Mission & Editorial Standards",
@@ -28,15 +27,15 @@ export default function AboutPage() {
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">PilotStack is an independently operated software research publication built to make software research easier to navigate. It brings reviews, comparisons, guides, and structured product information into one place so readers can compare options and identify what they still need to verify with the vendor.</p>
               <p className="text-muted-foreground mb-4">Software research can be difficult because pricing, features, positioning, and product capabilities change over time. PilotStack focuses on making those decision factors easier to compare, while clearly separating recorded information from editorial guidance.</p>
-              <p className="text-muted-foreground mb-4">I built PilotStack to make those decisions clearer. Our published methodology sets out the criteria we use and the evidence a claim needs before it should be treated as verified. Some older numeric scores and review-count figures are still undergoing a source audit, so a displayed number should not be assumed to represent independently verified user sentiment unless its source and calculation are documented. We are correcting, qualifying, or removing unsupported claims as the audit identifies them.</p>
+              <p className="text-muted-foreground mb-4">I built PilotStack to make those decisions clearer. Our editorial process prioritizes buyer-relevant criteria, source transparency, and clear limitations. We distinguish vendor-confirmed facts from editorial interpretation, and we treat numeric scores or review counts as verified only when their source and calculation can be checked.</p>
               <p className="text-muted-foreground mb-4">PilotStack may earn revenue from affiliate relationships and other clearly disclosed commercial relationships. Commercial relationships do not determine editorial scores or conclusions. Where a page contains an affiliate relationship, the relationship is disclosed so readers can understand the commercial context.</p>
-              <p className="text-muted-foreground mb-4">Our goal is to make the evidence behind software decisions easier to inspect. We publish our methodology, distinguish editorial judgment from verified facts where possible, and invite readers to report errors through our contact page. The site is being reviewed to bring older content into line with those standards.</p>
+              <p className="text-muted-foreground mb-4">Our goal is to make the evidence behind software decisions easier to inspect. We publish our methodology, explain the criteria behind our editorial assessments, and invite readers to report factual errors by emailing contact@pilotstack.online.</p>
               <h2 className="text-2xl font-bold mt-12 mb-4">Our values</h2>
               <div className="grid sm:grid-cols-2 gap-6 mb-12">
                 {[
                   { title: "Independent", desc: "Commercial relationships are disclosed and are not intended to determine editorial scores or conclusions." },
                   { title: "Evidence-led", desc: "Where ratings are shown, the methodology explains the criteria and calculation used." },
-                  { title: "Transparent", desc: "Our methodology explains the criteria and evidence standards behind our conclusions, including current verification limits." },
+                  { title: "Transparent", desc: "Our methodology explains the criteria and evidence standards behind our conclusions, including the distinction between verified facts and editorial assessment." },
                   { title: "Helpful", desc: "Every piece of content should help you make a better decision." },
                 ].map((v) => (
                   <div key={v.title} className="p-4 rounded-xl bg-muted-bg">
@@ -44,11 +43,6 @@ export default function AboutPage() {
                     <p className="text-sm text-muted-foreground">{v.desc}</p>
                   </div>
                 ))}
-              </div>
-              <div className="mt-12 p-6 rounded-xl bg-muted-bg border border-border">
-                <h2 className="text-lg font-bold mb-2">Official Community</h2>
-                <p className="text-sm text-muted-foreground mb-4">Join the PilotStack community:</p>
-                <SocialLinkList />
               </div>
               <div className="mt-12 text-center">
                 <a href="/methodology" className="button-press inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-white hover:bg-primary-dark shadow-button h-10 px-6 text-sm font-medium transition-all duration-200">
