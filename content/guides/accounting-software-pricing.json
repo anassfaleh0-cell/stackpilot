@@ -50,6 +50,21 @@
       "title": "Where to verify current prices",
       "type": "text",
       "body": "Use the accounting vendor's official pricing page and plan documentation as the primary source, then confirm region-specific availability and taxes with sales or support if needed. Record the date and URL beside every price you use. Prices, included limits, promotions, and payment fees change; this guide intentionally avoids publishing unverified dollar amounts. Recheck all figures immediately before purchasing."
+    },
+    {
+      "title": "Model three realistic scenarios",
+      "body": "Build a low, expected, and high scenario using the business's own volume. Vary the number of paid users, legal entities, invoices, transactions, payroll employees, and integrations where these affect cost. Keep assumptions visible and calculate each scenario using the same billing period. If a vendor will not confirm a material limit, mark the amount as unknown and request written clarification rather than inventing a fee. This makes the budget useful when headcount or sales volume changes.",
+      "type": "text"
+    },
+    {
+      "title": "Check contracts and renewal conditions",
+      "body": "Before purchase, review minimum term, automatic renewal, cancellation notice, price-change clauses, data retention after cancellation, support commitments, and any charges for exporting or closing an account. Confirm whether discounts expire and whether the renewal price is stated in the order form. If an accountant or implementation partner is involved, clarify which work is included in the subscription and which is billed separately.",
+      "type": "text"
+    },
+    {
+      "title": "Document the decision",
+      "body": "Keep a small decision record containing the business requirements, vendor pricing URLs and dates checked, plan names, confirmed limits, estimated annual cost, unresolved questions, and reasons for rejecting alternatives. Have the person responsible for accounting validate reports, tax workflows, and reconciliation before signing. Revisit the estimate before renewal or after a material change in users, entities, transaction volume, or country requirements.",
+      "type": "text"
     }
   ],
   "author": "Emily Nakamura",
