@@ -53,7 +53,7 @@ export default function MethodologyPage() {
   const currentYear = new Date().getFullYear()
   return (
     <>
-      <ArticleSchema title="Review Methodology | Evidence, Scoring & Editorial Standards" description="How PilotStack evaluates software, handles sources and corrections, and audits older ratings and review-count figures for verifiable provenance." publishedAt="2026-01-15" updatedAt="2026-10-23" author="PilotStack Team" url={`${site.url}/methodology`} keywords={["software review methodology", "scoring rubric", "editorial standards", "review transparency"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
+      <ArticleSchema title="Review Methodology | Evidence, Scoring & Editorial Standards" description="How PilotStack evaluates software, documents sources, applies scoring criteria, and handles corrections and evidence limitations." publishedAt="2026-01-15" updatedAt="2026-10-23" author="PilotStack Team" url={`${site.url}/methodology`} keywords={["software review methodology", "scoring rubric", "editorial standards", "review transparency"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
       <BreadcrumbSchema items={[
         { name: "Home", href: "/" },
         { name: "Review Methodology", href: "/methodology" },

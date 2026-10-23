@@ -35,7 +35,7 @@ export default function FactCheckingPolicyPage() {
               <ul>
                 <li><strong>Pricing verification:</strong> Pricing data is recorded from the vendor&apos;s official pricing page, together with the date it was read.</li>
                 <li><strong>Feature claims:</strong> Feature availability is recorded from vendor documentation. Where we cannot confirm availability, the claim is left off the page.</li>
-                <li><strong>Statistical claims:</strong> Statistics and numerical claims should have a checkable source and context. Some older numeric scores and review counts remain under source-provenance audit.</li>
+                <li><strong>Statistical claims:</strong> Statistics and numerical claims should have a checkable source and context. Numeric scores and review counts are treated as verified only when their source, context, and calculation can be checked; unsupported figures are qualified or omitted.</li>
                 <li><strong>Quotes and attributions:</strong> Quotes from individuals, publications, or studies are verified against the original source.</li>
                 <li><strong>Links and references:</strong> Links are checked through automated and manual audits where feasible; availability can change, and not every existing link has been individually reverified.</li>
               </ul>
@@ -61,9 +61,9 @@ export default function FactCheckingPolicyPage() {
 
               <h2>Transparency and Accountability</h2>
               <p>When errors are found, we correct them promptly and transparently. Our <a href="/corrections-policy">Corrections Policy</a> details our approach. We believe that transparent error correction is a core component of editorial integrity.</p>
-              <p>Readers can report potential errors by emailing contact@pilotstack.online or using the channels listed on our Contact page. The on-site contact form is not configured yet.</p>
+              <p>Readers can report potential errors by emailing contact@pilotstack.online.</p>
 
-              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about our fact-checking process, email contact@pilotstack.online or use the official channels listed on our Contact page.</p>
+              <p className="text-sm text-muted-foreground-foreground mt-8">For questions about our fact-checking process, email contact@pilotstack.online.</p>
             </div>
           </div>
         </Container>
