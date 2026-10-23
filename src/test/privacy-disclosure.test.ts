@@ -40,10 +40,11 @@ describe("privacy and cookie disclosures", () => {
   it("does not present a broken contact form when email delivery is unconfigured", () => {
     const contact = fs.readFileSync(path.join(root, "contact", "page.tsx"), "utf8")
 
-    expect(contact).toContain("process.env.RESEND_API_KEY && process.env.CONTACT_FROM_EMAIL")
-    expect(contact).toContain("The on-site contact form is not configured yet")
+    expect(contact).not.toContain("process.env.RESEND_API_KEY")
+    expect(contact).not.toContain("The on-site contact form is not configured yet")
     expect(contact).toContain("mailto:contact@pilotstack.online")
     expect(contact).toContain("contact@pilotstack.online")
+    expect(contact).toContain("Contact PilotStack")
   })
 
   it("keeps hosting and legal contact disclosures aligned with the actual Cloudflare setup", () => {
