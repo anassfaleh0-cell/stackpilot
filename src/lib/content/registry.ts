@@ -1,4 +1,4 @@
-import { stripUnverifiedPriceClaims } from "./review-quality"
+import { getReviewPricingSummary, stripUnverifiedPriceClaims } from "./review-quality"
 import type { ReviewContent, ComparisonContent, ComparisonFeature, GuideContent, GlossaryContent, BlogContent, CategoryKnowledge, AlternativeContent, UseCaseContent, IndustryContent, ResearchContent, StatisticContent, BestContent, HubContent, FAQItem, ContentSection } from "@/types/content"
 import fs from "node:fs"
 import path from "node:path"
@@ -696,7 +696,9 @@ function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: Comparison
     "scalability", "mobile app", "analytics & reporting", "api", "security",
   ])
   const looksGenerated = base.length > 0 && base.every((f) => genericNames.has(f.name.toLowerCase().trim()))
-  if (!looksGenerated && base.length > 5) return base
+  // Preserve authored decision criteria and feature rows. Only replace obviously generic
+  // placeholder matrices or empty records; do not append synthetic rows to short, authored comparisons.
+  if (!looksGenerated && base.length > 0) return base
 
   const integrations1 = Array.isArray(r1?.company?.integrations) ? r1.company.integrations : []
   const integrations2 = Array.isArray(r2?.company?.integrations) ? r2.company.integrations : []
@@ -706,9 +708,26 @@ function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: Comparison
   const compliance2 = Array.isArray(r2?.company?.compliance) ? r2.company.compliance : []
   const features1 = Array.isArray(r1?.features) ? r1.features : []
   const features2 = Array.isArray(r2?.features) ? r2.features : []
+  const ratingRecord = (review: ReviewContent | null) => {
+    if (!review) return { value: "Not recorded", detail: undefined as string | undefined }
+    const hasRating = Number.isFinite(review.rating) && review.rating > 0
+    const hasReviewCount = Number.isFinite(review.reviewCount) && review.reviewCount > 0
+    return {
+      value: hasRating
+        ? `${review.rating}/5${review.ratingVerified === true ? "" : " (recorded; not independently verified)"}`
+        : "No rating recorded",
+      detail: hasReviewCount
+        ? `${review.reviewCount.toLocaleString()} review count recorded in PilotStack's dataset; verify the source and date before relying on it.`
+        : "No review count is recorded in PilotStack's dataset.",
+    }
+  }
+  const rating1 = ratingRecord(r1)
+  const rating2 = ratingRecord(r2)
+  const pricing1 = r1 ? getReviewPricingSummary(r1.priceRange, r1.pricing, r1.priceRangeVerified === true) : "Not recorded"
+  const pricing2 = r2 ? getReviewPricingSummary(r2.priceRange, r2.pricing, r2.priceRangeVerified === true) : "Not recorded"
   const derived: ComparisonFeature[] = [
-    { name: "Recorded rating", tool1: r1 ? `${r1.rating}/5` : "Not recorded", tool2: r2 ? `${r2.rating}/5` : "Not recorded", tool1Detail: r1 ? `${r1.reviewCount.toLocaleString()} reviews recorded in this site's dataset; confirm the source and date before relying on the score.` : undefined, tool2Detail: r2 ? `${r2.reviewCount.toLocaleString()} reviews recorded in this site's dataset; confirm the source and date before relying on the score.` : undefined },
-    { name: "Pricing information", tool1: r1 ? `${r1.pricing}${r1.priceRange ? `: ${r1.priceRange}` : ""}` : "Not recorded", tool2: r2 ? `${r2.pricing}${r2.priceRange ? `: ${r2.priceRange}` : ""}` : "Not recorded", tool1Detail: r1 ? "Pricing and plan limits can change; confirm current details on the vendor site." : undefined, tool2Detail: r2 ? "Pricing and plan limits can change; confirm current details on the vendor site." : undefined },
+    { name: "Recorded rating", tool1: rating1.value, tool2: rating2.value, tool1Detail: rating1.detail, tool2Detail: rating2.detail },
+    { name: "Pricing information", tool1: pricing1, tool2: pricing2, tool1Detail: r1 ? "Confirm current plans, included limits, and regional pricing with the vendor." : undefined, tool2Detail: r2 ? "Confirm current plans, included limits, and regional pricing with the vendor." : undefined },
     { name: "Product positioning", tool1: r1 ? r1.category : "Not recorded", tool2: r2 ? r2.category : "Not recorded", tool1Detail: r1?.tagline || undefined, tool2Detail: r2?.tagline || undefined },
     { name: "Capabilities listed in review", tool1: features1.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || "Not recorded", tool2: features2.filter((f) => f.available).slice(0, 5).map((f) => f.name).join(", ") || "Not recorded" },
     { name: "Integrations recorded", tool1: integrations1.slice(0, 6).join(", ") || "Not recorded", tool2: integrations2.slice(0, 6).join(", ") || "Not recorded", tool1Detail: integrations1.length ? "Check the vendor's current integration documentation for scope and plan limits." : undefined, tool2Detail: integrations2.length ? "Check the vendor's current integration documentation for scope and plan limits." : undefined },
