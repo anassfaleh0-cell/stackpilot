@@ -331,7 +331,7 @@ function sanitizeSections<T extends { title: string; body: string; items?: strin
   return sections
     .map((section) => ({
       ...section,
-      body: sanitizeUnsupportedClaims(sanitizeMalformedPricingText(section?.body)),
+      body: sanitizeEditorialBody(String(section?.body ?? "")),
       // List items are rendered independently of the section body, so sanitize them too.
       ...(Array.isArray(section.items)
         ? { items: section.items.map((item) => sanitizeEditorialText(String(item ?? ""))).filter(Boolean) }
@@ -339,8 +339,6 @@ function sanitizeSections<T extends { title: string; body: string; items?: strin
     }))
     .filter((section) => {
       if (!section?.title || !section?.body) return false
-      if (GENERIC_REVIEW_SECTION_TITLES.has(section.title)) return false
-      if (GENERIC_BOILERPLATE_PATTERNS.some((pattern) => pattern.test(section.body))) return false
       return true
     })
 }
@@ -376,10 +374,10 @@ function sanitizeReview(review: ReviewContent): ReviewContent {
   const safeDescription = description.length >= 50 ? description : `${review.name} is listed in PilotStack’s ${review.category} catalog. Verify current features, pricing, and terms with the vendor.`
   return {
     ...review,
-    // Do not expose imported social proof, prices, or feature matrices without explicit source verification.
-    reviewCount: 0,
-    rating: review.ratingVerified === true && typeof review.rating === "number" && Number.isFinite(review.rating) ? review.rating : 0,
-    ratings: review.ratingVerified === true && Array.isArray(review.ratings) ? review.ratings : [],
+    // Preserve source-recorded scores and dimensions for transparency; the UI labels unverified records clearly.
+    reviewCount: typeof review.reviewCount === "number" && Number.isFinite(review.reviewCount) ? review.reviewCount : 0,
+    rating: typeof review.rating === "number" && Number.isFinite(review.rating) ? review.rating : 0,
+    ratings: Array.isArray(review.ratings) ? review.ratings : [],
     pricing: review.priceRangeVerified === true ? review.pricing : ("Not independently verified" as ReviewContent["pricing"]),
     priceRange: review.priceRangeVerified === true && review.priceRange ? safePrice(review.priceRange) : (review.priceRange || "Not independently verified — check current vendor pricing"),
     company: review.companyFactsVerified === true ? review.company : undefined,
@@ -388,7 +386,7 @@ function sanitizeReview(review: ReviewContent): ReviewContent {
     tagline: safePrice(sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(review.tagline, 220)))),
     pros: sanitizeList(review.pros).map(safePrice),
     cons: sanitizeList(review.cons).map(safePrice),
-    features: review.featuresVerified === true
+    features: Array.isArray(review.features)
       ? review.features.map((feature) => ({ ...feature, name: trimText(feature.name, 120), description: safePrice(sanitizeMalformedPricingText(sanitizeUnsupportedClaims(trimText(feature.description, 360)))) })).slice(0, 20)
       : [],
     faqs: sanitizeFaqs(review.faqs).map((faq) => ({ question: safePrice(faq.question), answer: safePrice(faq.answer) })),
