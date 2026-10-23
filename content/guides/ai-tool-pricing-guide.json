@@ -45,6 +45,10 @@
     {
       "title": "Before approving a purchase",
       "body": "Ask the vendor to confirm any material uncertainty in writing, especially usage caps, data processing, cancellation, export, renewal increases, and required features. Keep a copy of the order form and the source pages used for the decision. Revisit the model before renewal or after a major change in user count, workload, model choice, or product terms. This guide intentionally avoids unverified numeric prices and quotas because the correct figures depend on the current vendor terms and the exact plan."
+    },
+    {
+      "title": "Control costs after rollout",
+      "body": "Assign an owner to review usage and billing after launch. Set budget alerts where available, review unusually high consumption, and record which workflows generate value. Establish a process for changing models or providers only after a small quality and cost test. Keep prompts, model settings, and evaluation examples versioned so a change in output quality can be detected. If costs are higher than expected, check for repeated retries, unnecessarily long context, duplicate processing, and tasks that do not need an AI model at all."
     }
   ],
   "author": "Marcus Rivera",
