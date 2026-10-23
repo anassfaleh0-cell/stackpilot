@@ -312,7 +312,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                           <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0">{i + 1}</span>
                           <span className="font-medium text-xs">{s.title}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground leading-relaxed ml-7">{[s.body, ...(s.items ?? [])].filter(Boolean).join(" ").slice(0, 100).trim()}{[s.body, ...(s.items ?? [])].filter(Boolean).join(" ").length > 100 ? "…" : ""}</p>
+                        <p className="text-xs text-muted-foreground leading-relaxed ml-7">{[s.body, ...(s.items ?? []), ...(s.columns ?? []), ...((s.rows ?? []).flat())].filter(Boolean).join(" ").slice(0, 100).trim()}{[s.body, ...(s.items ?? []), ...(s.columns ?? []), ...((s.rows ?? []).flat())].filter(Boolean).join(" ").length > 100 ? "…" : ""}</p>
                       </div>
                     ))}
                   </div>
