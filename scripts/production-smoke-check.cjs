@@ -60,7 +60,7 @@ async function main() {
   if (contact && !contact.error) {
     // Scope this check to the page's main content. Shared navigation/footer links
     // can legitimately mention social channels without making them contact methods.
-    const contactMain = contact.body.match(/<main\\b[\\s\\S]*?<\\/main>/i)?.[0] || contact.body
+    const contactMain = contact.body.match(/<main\b[\s\S]*?<\/main>/i)?.[0] || contact.body
     const emailOnly = contactMain.includes("contact@pilotstack.online") &&
       !/Official Community|Facebook|LinkedIn|Pinterest|Newsletter sign-up is temporarily unavailable|YouTube Reviews|Follow PilotStack/i.test(contactMain)
     report("email-only contact page", emailOnly, "contact email is present; obsolete social/newsletter placeholders are absent")
