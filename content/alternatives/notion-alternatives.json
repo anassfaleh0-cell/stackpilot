@@ -131,6 +131,11 @@
       "title": "Make the switch reversible",
       "body": "Keep an untouched export of the source workspace and define how the team can recover a page, attachment, or database if migration fails. Decide how long the old workspace remains available, who can edit it during the transition, and when the team will stop creating new content there. Reconcile counts and sample important relationships before final cutover. A reversible pilot lowers risk and lets the team compare the new workflow with the old one using real tasks.",
       "type": "text"
+    },
+    {
+      "title": "Write a transition plan before selecting",
+      "body": "Set the pilot scope, success criteria, migration owner, user communications, support plan, and rollback condition before moving content. Decide which old pages should be archived rather than migrated, how links will be redirected or updated, and how users will find the new source of truth. At the end of the pilot, compare observed results with the original requirements and document the reason for proceeding, extending the pilot, or staying with the current tool.",
+      "type": "text"
     }
   ],
   "selectionCriteria": [
