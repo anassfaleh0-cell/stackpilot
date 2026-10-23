@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { sanitizeUnsupportedClaims } from "@/lib/content/registry"
+import { getSafeStatisticNarrative } from "@/lib/content/statistic-narrative"
 
 describe("unsupported editorial claim suppression", () => {
   it("removes unsupported certification and audit assertions", () => {
@@ -25,4 +26,18 @@ describe("unsupported editorial claim suppression", () => {
     expect(result).not.toMatch(/400-person law firm|reduced admin time by 30%/i)
     expect(result).toMatch(/Buyers should validate expected outcomes/i)
   })
+  it("replaces unaudited statistics narratives instead of publishing unsupported figures", () => {
+    const original = "The market is $50B+ and growing 26% year over year, with 4,874+ adopting organizations."
+    const safe = getSafeStatisticNarrative("Market Size", "Data Privacy", original, false)
+
+    expect(safe).not.toMatch(/\$50B|26%|4,874\+/)
+    expect(safe).toMatch(/Data Privacy software/i)
+    expect(safe).toMatch(/geography, currency, and publication date/i)
+  })
+
+  it("preserves the original narrative only when its source audit is complete", () => {
+    const original = "Verified source-backed market definition."
+    expect(getSafeStatisticNarrative("Market Size", "Data Privacy", original, true)).toBe(original)
+  })
+
 })

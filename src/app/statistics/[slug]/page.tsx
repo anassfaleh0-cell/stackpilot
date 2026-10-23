@@ -6,6 +6,7 @@ import { BreadcrumbSchema, ArticleSchema, WebPageSchema, DatasetSchema } from "@
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getStatistic, getAllStatistics } from "@/lib/content/registry"
+import { getSafeStatisticNarrative } from "@/lib/content/statistic-narrative"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowRight, ExternalLink, Code } from "lucide-react"
@@ -77,7 +78,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
                   <h2 className="text-2xl font-bold tracking-tight mb-6">{section.title}</h2>
                   {section.body ? (
                     <div className="mb-5 text-sm text-muted-foreground leading-relaxed space-y-3">
-                      {section.body.split(/\n+/).filter(Boolean).map((para, idx) => (
+                      {getSafeStatisticNarrative(section.title, registry?.category || "software", section.body, registry?.sourceAuditComplete === true).split(/\n+/).filter(Boolean).map((para, idx) => (
                         <p key={idx}>{para}</p>
                       ))}
                     </div>
