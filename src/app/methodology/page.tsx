@@ -148,7 +148,7 @@ export default function MethodologyPage() {
               <p className="text-muted-foreground mb-4">
                 We prioritize vendor documentation for capabilities and pricing, and independent source pages for external ratings and review counts. A source must be recorded with enough context to check the claim. If the source is missing, stale, or contradictory, we qualify or omit the claim rather than imply it is confirmed.
                 When a correction is made, we update the page&apos;s review date where relevant. Readers can report errors
-                via our <Link href="/contact" className="text-primary hover:underline">contact form</Link>.
+                via our <Link href="/contact" className="text-primary hover:underline">Contact page</Link>.
               </p>
 
               <h2 className="text-2xl font-bold mt-12 mb-4">Editorial Standards & Byline</h2>
