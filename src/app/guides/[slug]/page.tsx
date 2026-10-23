@@ -85,8 +85,15 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Guides", href: "/guides" }, { name: guide.title, href: `/guides/${slug}` }]} />
-      <HowToSchema name={guide.title} description={guide.description} steps={guide.sections.map((s) => ({ name: s.title, text: s.body }))} />
-      <ArticleSchema title={guide.title} description={guide.description} publishedAt={guide.lastUpdated} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={guide.sections.reduce((a, s) => a + s.body.split(/\s+/).length, 0)} category={guide.category} keywords={[guide.category, "software guide", guide.title, "buying guide", "software selection"].filter(Boolean)} mentions={guide.relatedTools.length > 0 ? guide.relatedTools.map(t => ({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` })) : undefined} />
+      <HowToSchema
+        name={guide.title}
+        description={guide.description}
+        steps={guide.sections.map((section) => ({
+          name: section.title,
+          text: [section.body, ...(section.items ?? [])].filter(Boolean).join(" "),
+        }))}
+      />
+      <ArticleSchema title={guide.title} description={guide.description} publishedAt={guide.lastUpdated} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={[guide.title, guide.description, ...guide.sections.flatMap((section) => [section.title, section.body, ...(section.items ?? [])]), ...faqs.flatMap((faq) => [faq.question, faq.answer])].join(" ").trim().split(/\s+/).filter(Boolean).length} category={guide.category} keywords={[guide.category, "software guide", guide.title, "buying guide", "software selection"].filter(Boolean)} mentions={guide.relatedTools.length > 0 ? guide.relatedTools.map(t => ({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` })) : undefined} />
       <FAQSchema
         questions={
           faqs
