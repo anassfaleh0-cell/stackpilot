@@ -44,7 +44,7 @@ export function getComparisonFeatureDisplayValue(value: boolean | string, featur
   // Decision-guide text is usually authored evaluation guidance, not a factual product claim.
   // Keep instructions readable, but retain provenance labels on explicit rating/count/pricing rows.
   if (decisionGuide && typeof value === "string") {
-    const isRecordedMetric = /\\b(?:rating|review count|pricing information|price range)\\b/i.test(featureName)
+    const isRecordedMetric = /\b(?:rating|review count|pricing information|price range)\b/i.test(featureName)
     return featuresVerified === true || !isRecordedMetric ? value : `${value} (recorded; not independently verified)`
   }
   if (featuresVerified === true) return value
