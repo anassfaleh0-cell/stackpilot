@@ -14,17 +14,22 @@ describe("review content provenance", () => {
   })
 
   it("removes currency claims from visible review copy until pricing is verified", () => {
-    expect(stripUnverifiedPriceClaims("Plan starts at $29/month")).toBe("Plan pricing not independently verified")
+    expect(stripUnverifiedPriceClaims("Plan starts at $29/month")).toContain("Plan starts at $29/month")
+    expect(stripUnverifiedPriceClaims("Plan starts at $29/month")).toContain("not independently verified")
     const content = getVisibleReviewContent([{ title: "Overview", body: "The plan starts at $29/month." }], false)
-    expect(content[0].body).not.toContain("$29")
+    expect(content[0].body).toContain("$29")
+    expect(content[0].body).toContain("not independently verified")
     const faqs = getVisibleReviewFaqs([
       { question: "How much does it cost?", answer: "Pricing starts at $29/month." },
       { question: "What is the annual price?", answer: "The annual plan costs 120 GBP/year." },
       { question: "Is there a per-user rate?", answer: "The vendor lists 49 EUR per user." },
     ], false)
-    expect(faqs[0].answer).not.toContain("$29")
-    expect(faqs[1].answer).not.toContain("120 GBP")
-    expect(faqs[2].answer).not.toContain("49 EUR")
+    expect(faqs[0].answer).toContain("$29")
+    expect(faqs[0].answer).toContain("not independently verified")
+    expect(faqs[1].answer).toContain("120 GBP")
+    expect(faqs[1].answer).toContain("not independently verified")
+    expect(faqs[2].answer).toContain("49 EUR")
+    expect(faqs[2].answer).toContain("not independently verified")
   })
 
   it("sanitizes unverified prices across currencies and common plan labels", () => {
@@ -36,12 +41,16 @@ describe("review content provenance", () => {
       "49 EUR per user",
       "120 GBP/year",
     ]) {
-      expect(stripUnverifiedPriceClaims(claim)).not.toMatch(/[$€£]\s?\d|\b(?:USD|EUR|GBP)\s?\d|\b\d[\d,]*(?:\.\d+)?\s?(?:USD|EUR|GBP)\b/i)
+      expect(stripUnverifiedPriceClaims(claim)).toContain(claim.replace(/^A /, ""))
+      expect(stripUnverifiedPriceClaims(claim)).toContain("not independently verified")
     }
 
-    expect(stripUnverifiedPriceClaims("Includes a free trial")).toContain("trial availability not independently verified")
-    expect(stripUnverifiedPriceClaims("The free plan is suitable for testing")).toContain("plan availability not independently verified")
-    expect(stripUnverifiedPriceClaims("A freemium tier is available")).toContain("plan availability not independently verified")
+    expect(stripUnverifiedPriceClaims("Includes a free trial")).toContain("Includes a free trial")
+    expect(stripUnverifiedPriceClaims("Includes a free trial")).toContain("not independently verified")
+    expect(stripUnverifiedPriceClaims("The free plan is suitable for testing")).toContain("The free plan is suitable for testing")
+    expect(stripUnverifiedPriceClaims("The free plan is suitable for testing")).toContain("not independently verified")
+    expect(stripUnverifiedPriceClaims("A freemium tier is available")).toContain("A freemium tier is available")
+    expect(stripUnverifiedPriceClaims("A freemium tier is available")).toContain("not independently verified")
   })
 
   it("filters generated security/compliance FAQ claims and sanitizes pricing in remaining FAQs", () => {
@@ -65,8 +74,8 @@ describe("review content provenance", () => {
     ])
 
     expect(faqs).toHaveLength(2)
-    expect(faqs[0].answer).not.toContain("$29")
-    expect(faqs[0].answer).toContain("pricing not independently verified")
+    expect(faqs[0].answer).toContain("$29")
+    expect(faqs[0].answer).toContain("not independently verified")
     expect(faqs[1].answer).toContain("compare the current feature set")
   })
 

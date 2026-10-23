@@ -2,10 +2,11 @@ import { describe, expect, it } from "vitest"
 import { getComparisonDecision, getComparisonDisplayCopy, getComparisonFeatureDisplayValue } from "./comparison-decision"
 
 describe("getComparisonDecision", () => {
-  it("hides historical rating and review-count values until the comparison data is verified", () => {
-    expect(getComparisonFeatureDisplayValue("4.6/5", false, true, "Recorded rating")).toBe("Not independently verified")
-    expect(getComparisonFeatureDisplayValue("125 reviews", false, true, "Review count")).toBe("Not independently verified")
-    expect(getComparisonFeatureDisplayValue("4.6/5", true, true, "Recorded rating")).toBe("Not independently verified")
+  it("preserves historical rating and review-count values while labeling their provenance", () => {
+    expect(getComparisonFeatureDisplayValue("4.6/5", false, true, "Recorded rating")).toContain("4.6/5")
+    expect(getComparisonFeatureDisplayValue("125 reviews", false, true, "Review count")).toContain("125 reviews")
+    expect(getComparisonFeatureDisplayValue("4.6/5", false, true, "Recorded rating")).toContain("not independently verified")
+    expect(getComparisonFeatureDisplayValue("4.6/5", true, true, "Recorded rating")).toBe("4.6/5")
   })
 
   it("maps a slug winner to the human-readable product name", () => {
@@ -78,9 +79,9 @@ describe("getComparisonDecision", () => {
 
 describe("getComparisonFeatureDisplayValue", () => {
   it("does not present unsupported booleans or plan labels as verified facts", () => {
-    expect(getComparisonFeatureDisplayValue(true, false)).toBe("Not verified")
-    expect(getComparisonFeatureDisplayValue(false, undefined)).toBe("Not verified")
-    expect(getComparisonFeatureDisplayValue("Freemium", false)).toBe("Not verified")
+    expect(getComparisonFeatureDisplayValue(true, false)).toContain("Yes")
+    expect(getComparisonFeatureDisplayValue(false, undefined)).toContain("No")
+    expect(getComparisonFeatureDisplayValue("Freemium", false)).toContain("Freemium")
   })
 
   it("shows values only when feature-level verification is explicitly true", () => {
@@ -90,9 +91,11 @@ describe("getComparisonFeatureDisplayValue", () => {
   })
 
   it("shows editorial role labels for decision guides without treating booleans as verified", () => {
-    expect(getComparisonFeatureDisplayValue("AI-assisted drafting", false, true)).toBe("AI-assisted drafting")
+    expect(getComparisonFeatureDisplayValue("AI-assisted drafting", false, true)).toContain("AI-assisted drafting")
+    expect(getComparisonFeatureDisplayValue("AI-assisted drafting", false, true)).toContain("not independently verified")
     expect(getComparisonFeatureDisplayValue("   ", false, true)).toBe("Not recorded")
-    expect(getComparisonFeatureDisplayValue(true, false, true)).toBe("Not verified")
+    expect(getComparisonFeatureDisplayValue(true, false, true)).toContain("Yes")
+    expect(getComparisonFeatureDisplayValue(true, false, true)).toContain("not independently verified")
   })
 })
 

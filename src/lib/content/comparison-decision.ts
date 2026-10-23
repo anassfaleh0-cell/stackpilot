@@ -37,14 +37,16 @@ export function getComparisonDecision(input: ComparisonDecisionInput): Compariso
   }
 }
 
-/** Hide raw feature values unless the comparison has auditable feature-level sources. */
+/** Preserve stored comparison values while identifying data that has not been independently verified. */
 export function getComparisonFeatureDisplayValue(value: boolean | string, featuresVerified?: boolean, decisionGuide = false, featureName = ""): boolean | string {
-  // Feature verification does not verify third-party ratings or review totals. These stay hidden
-  // until a separate rating-provenance flag exists for comparison records.
-  if (/\b(rating|review count|reviews)\b/i.test(featureName)) return "Not independently verified"
-  if (decisionGuide && typeof value === "string") return value.trim() ? value : "Not recorded"
-  if (featuresVerified !== true) return "Not verified"
-  return typeof value === "string" && !value.trim() ? "Not recorded" : value
+  void featureName
+  if (typeof value === "string" && !value.trim()) return "Not recorded"
+  if (decisionGuide && typeof value === "string") {
+    return featuresVerified === true ? value : `${value} (recorded; not independently verified)`
+  }
+  if (featuresVerified === true) return value
+  const label = typeof value === "boolean" ? (value ? "Yes" : "No") : value
+  return `${label} (recorded; not independently verified)`
 }
 
 

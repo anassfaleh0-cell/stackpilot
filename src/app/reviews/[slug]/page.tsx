@@ -75,8 +75,9 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
   const allReviews = getAllReviews()
 
-  const hasEditorialRating = tool.ratingVerified === true && typeof tool.rating === "number" && Number.isFinite(tool.rating)
-  const categoryRatings = tool.ratingsVerified === true && Array.isArray(tool.ratings) ? tool.ratings : []
+  const hasStoredEditorialRating = typeof tool.rating === "number" && Number.isFinite(tool.rating) && tool.rating > 0
+  const hasEditorialRating = tool.ratingVerified === true && hasStoredEditorialRating
+  const categoryRatings = Array.isArray(tool.ratings) ? tool.ratings : []
   const bestInCategory = allReviews
     .filter((r) => r.category === tool.category && r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating))
     .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
@@ -123,17 +124,17 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 {isBestInCategory && (
                   <Badge variant="success">Highest Editorial Score in Category</Badge>
                 )}
-                {hasEditorialRating && (
+                {hasStoredEditorialRating && (
                   <div className="flex items-center gap-1 text-sm">
                     <Star size={14} className="fill-accent text-accent" />
                     <span className="font-semibold">{formatScore(tool.rating)}</span>
                     <span className="text-muted-foreground">/ 5.0</span>
-                    <span className="text-xs text-muted-foreground">(PilotStack editorial score)</span>
+                    <span className="text-xs text-muted-foreground">{hasEditorialRating ? "(PilotStack editorial score)" : "(stored score; verification pending)"}</span>
                   </div>
                 )}
               </div>
-              {hasEditorialRating && (
-                <p className="text-xs text-muted-foreground mb-3">Editorial note: this is PilotStack's assessment, not a third-party review aggregate.</p>
+              {hasStoredEditorialRating && (
+                <p className="text-xs text-muted-foreground mb-3">This is a PilotStack editorial score; this is PilotStack's assessment, not a third-party review aggregate. {hasEditorialRating ? "The score has been verified against the site's current editorial record." : "The stored score is shown for transparency but has not been independently revalidated; use the criteria and methodology below before relying on it."}</p>
               )}
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-1">
                 <span className="flex items-center gap-1">
@@ -169,8 +170,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
                 <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
                 <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                  {hasEditorialRating && <li>Editorial rating: {formatScore(tool.rating)}/5 (PilotStack editorial score; this is PilotStack's assessment, not a third-party review aggregate).</li>}
-                  <li>Pricing: {tool.priceRangeVerified === true ? `${tool.priceRange} (${tool.pricing})` : "Current plan and regional pricing must be verified directly with the vendor."}</li>
+                  {hasStoredEditorialRating && <li>Editorial rating: {formatScore(tool.rating)}/5 (PilotStack editorial score; {hasEditorialRating ? "verified editorial record" : "stored value, verification pending"}; not a third-party review aggregate).</li>}
+                  <li>Pricing: {tool.priceRange || tool.pricing ? `${tool.priceRange || "Price range not recorded"} (${tool.pricing || "pricing model not recorded"})${tool.priceRangeVerified === true ? "" : " — recorded values; verification pending, confirm current terms with the vendor"}` : "Pricing details are not recorded in this profile; confirm current plan and regional pricing with the vendor."}</li>
                   <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : tool.featuresVerified === true && tool.features.some((feature) => feature.available) ? `Recorded strengths include ${tool.features.filter((feature) => feature.available).slice(0, 2).map((feature) => feature.name.toLowerCase()).join(" and ")}; confirm current availability with the vendor.` : `Evaluate ${tool.name} against your workflow requirements and verify current capabilities with the vendor.`}</li>
                   <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `No limitations are recorded in this profile; verify your requirements and the vendor's current documentation before deciding.`}</li>
                   <li>{entity?.useCases?.primary?.slice(0, 2).join(", ") ? `Common use cases: ${entity.useCases.primary.slice(0, 2).join(", ")}` : `Category: ${tool.category}`}</li>
@@ -264,7 +265,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Rating Overview</h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-                  {hasEditorialRating && <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={formatScore(tool.rating)} title="Overall Rating" description="PilotStack editorial score" />}
+                  {hasStoredEditorialRating && <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={formatScore(tool.rating)} title="Overall Rating" description={hasEditorialRating ? "Verified PilotStack editorial score" : "Stored PilotStack score; verification pending"} />}
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
@@ -274,7 +275,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                     </svg>
-                  } value={tool.priceRangeVerified === true ? tool.pricing : "Not verified"} title="Pricing Model" />
+                  } value={tool.pricing || "Not recorded"} title="Pricing Model" description={tool.priceRangeVerified === true ? "Pricing record verified" : "Recorded pricing model; verification pending"} />
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <circle cx="12" cy="12" r="10" />
@@ -283,7 +284,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   } value={`${visibleContent.length}`} title="Review Sections" description="In-depth coverage" />
                 </div>
                 <div className="flex justify-center">
-                  {categoryRatings.length > 0 && <EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" />}
+                  {categoryRatings.length > 0 && <div className="w-full"><p className="text-xs text-muted-foreground mb-2">{tool.ratingsVerified === true ? "Recorded editorial rating dimensions." : "Stored rating dimensions; verification pending. These are not third-party ratings."}</p><EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" /></div>}
                 </div>
               </section>
 
@@ -422,7 +423,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* Feature Breakdown */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Feature Breakdown</h2>
-                {tool.featuresVerified === true ? <EditorialFeatureMatrix features={tool.features} slug={tool.slug} category={tool.category} /> : <p className="text-sm text-muted-foreground rounded-xl border border-border bg-muted-bg p-4">The feature profile has not been independently verified. Use the vendor documentation to confirm current availability, plan restrictions, integrations, and regional limitations before relying on a capability.</p>}
+                <p className="text-sm text-muted-foreground mb-3">{tool.featuresVerified === true ? "Feature profile marked verified in the editorial record." : "Recorded feature information is shown below for transparency; it has not been independently verified. Confirm availability, plan restrictions, integrations, and regional limitations with the vendor."}</p><EditorialFeatureMatrix features={tool.features} slug={tool.slug} category={tool.category} />
               </section>
 
               {entity && (
