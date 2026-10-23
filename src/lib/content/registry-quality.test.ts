@@ -51,6 +51,15 @@ describe("content quality repairs", () => {
       .toContain("for Remote Teams")
   })
 
+  it("keeps the AI writing guide decision-focused and free of stale feature or price claims", () => {
+    const guide = getGuide("how-to-choose-ai-writing-software")
+    expect(guide).not.toBeNull()
+    expect(guide?.title).toBe("How to Choose AI Writing Software: A Practical Evaluation Guide")
+    expect(guide?.sections.map((section) => section.title)).toContain("Build a representative test set")
+    expect(JSON.stringify(guide)).not.toMatch(/GPT-4 Turbo|\$20\/month \(Plus\)|landscape of content creation has been fundamentally transformed/i)
+    expect(guide?.faqs?.length).toBeGreaterThanOrEqual(4)
+  })
+
   it("replaces repetitive generated guide filler with practical buyer guidance", () => {
     const guide = getGuide("marketing-attribution-guide")
     expect(guide).not.toBeNull()
