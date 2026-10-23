@@ -74,4 +74,13 @@ describe("review content provenance", () => {
     const visible = getVisibleReviewContent(diagrams, true, true)
     expect(visible.map((section) => section.body)).toEqual(["pricing-ladder", "feature-radar", "implementation-flow"])
   })
+  it("does not render duplicate top-level Quick Answer or TL;DR sections in the body", () => {
+    const sections = [
+      { title: "Quick Answer", body: "Repeated quick answer", type: "text" as const },
+      { title: "TL;DR", body: "Repeated summary", type: "text" as const },
+      { title: "Feature Evaluation", body: "Specific evaluation guidance", type: "text" as const },
+    ]
+    expect(getVisibleReviewContent(sections).map((section) => section.title)).toEqual(["Feature Evaluation"])
+  })
+
 })

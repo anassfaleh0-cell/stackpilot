@@ -1,6 +1,8 @@
 import type { ContentSection, FAQItem } from "@/types/content"
 
 const HIDDEN_REVIEW_SECTION_TITLES = new Set([
+  "Quick Answer",
+  "TL;DR",
   "Rating Overview",
   "Key Features",
   "Hidden Costs",
