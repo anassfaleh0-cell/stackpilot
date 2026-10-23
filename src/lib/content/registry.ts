@@ -111,7 +111,7 @@ const GENERIC_BOILERPLATE_PATTERNS = [
 const UNSUPPORTED_CLAIM_PATTERNS = [
   // Remove unsupported numeric product claims and pseudo-research metrics from legacy editorial copy.
   // The corpus does not consistently retain primary-source citations for these figures, so keep the claim out rather than laundering it into a placeholder.
-  /\b\d{1,3}(?:\.\d+)?\s*%(?:\s|[.,;:!?]|$)/i,
+  /\b\d[\d,]*(?:\.\d+)?\s*%(?:\s|[.,;:!?]|$)/i,
   /\b\d[\d,]*(?:\.\d+)?\s*(?:million|billion|thousand)\b/i,
   /\b\d[\d,]*(?:\.\d+)?\s+(?:weekly active users|monthly active users|customers|employees|downloads|integrations|templates|workflows|companies|organizations|teams)\b/i,
   /\b(?:saves?|reduc(?:es|ed|ing)|improv(?:es|ed|ing)|increas(?:es|ed|ing))\b[^.!?]{0,120}\b\d[\d,.]*(?:%|\s+hours?|\s+minutes?|\s+seconds?)\b/i,
