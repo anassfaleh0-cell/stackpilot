@@ -79,6 +79,8 @@ describe("site-wide content quality gate", () => {
       "GPT-5 model delivers near-instant responses with vastly improved reasoning, creativity, and accuracy over previous versions.",
       "Free tier is limited to GPT-3.5 and has strict daily usage caps, making it frustrating for heavy users.",
       "Enterprise-grade reliability with SOC 2 Type II certification.",
+      "Ahrefs boasts the largest live backlink index in the industry, making it the go-to tool for link building.",
+      "SEMrush is the most comprehensive all-in-one digital marketing platform trusted by leading companies worldwide.",
     ]
     for (const sample of samples) {
       expect(sanitizeUnsupportedClaims(sample)).toBe("")
