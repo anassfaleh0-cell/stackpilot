@@ -378,7 +378,7 @@ function sanitizeReview(review: ReviewContent): ReviewContent {
     reviewCount: typeof review.reviewCount === "number" && Number.isFinite(review.reviewCount) ? review.reviewCount : 0,
     rating: typeof review.rating === "number" && Number.isFinite(review.rating) ? review.rating : 0,
     ratings: Array.isArray(review.ratings) ? review.ratings : [],
-    pricing: review.priceRangeVerified === true ? review.pricing : ("Not independently verified" as ReviewContent["pricing"]),
+    pricing: review.priceRangeVerified === true ? review.pricing : safePrice(String(review.pricing ?? "Pricing model not recorded")) as ReviewContent["pricing"],
     priceRange: review.priceRangeVerified === true && review.priceRange ? safePrice(review.priceRange) : (review.priceRange || "Not independently verified — check current vendor pricing"),
     company: review.companyFactsVerified === true ? review.company : undefined,
     content: buildReviewSections(review),
