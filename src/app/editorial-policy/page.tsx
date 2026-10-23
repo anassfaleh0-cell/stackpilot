@@ -37,7 +37,7 @@ export default function EditorialPolicyPage() {
               <h2 className="text-lg font-semibold mb-2">TL;DR</h2>
               <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
                 <li>Editorial criteria are kept separate from commercial disclosures</li>
-                <li>New numeric claims should have a checkable source and context; older records are being audited</li>
+                <li>Numeric claims are described as verified only when their source, date, context, and calculation can be checked; otherwise they are qualified or omitted</li>
                 <li>Documented source records should be reused consistently, but consistency alone does not prove a claim is verified</li>
                 <li>Both strengths and limitations addressed in every review</li>
                 <li>Corrections published promptly and transparently</li>
@@ -74,7 +74,7 @@ export default function EditorialPolicyPage() {
                 <li><strong>Originality:</strong> Our pages are developed from the sources described in our methodology. Vendor-provided material may inform research, but we aim to add editorial context, comparison, and decision guidance rather than republish it as-is.</li>
                 <li><strong>Comprehensiveness:</strong> Reviews must address both strengths and limitations. We explicitly state who each product is best for and who should consider alternatives.</li>
                 <li><strong>Currency:</strong> Content includes publication or update dates where those fields are maintained, and older material is reviewed as part of ongoing maintenance.</li>
-                <li><strong>Clarity:</strong> We distinguish factual reporting from analysis and opinion. Our scoring methodology is public; older score records are being audited for consistent application and source provenance.</li>
+                <li><strong>Clarity:</strong> We distinguish factual reporting from analysis and opinion. Our scoring methodology is public; a historical score is not presented as verified unless its inputs and calculation can be checked.</li>
               </ul>
 
               <h2>3. Review Standards</h2>
@@ -82,7 +82,7 @@ export default function EditorialPolicyPage() {
               <ul>
                 <li>Documented source records reused consistently where available; a stored value alone is not evidence of provenance</li>
                 <li>Nine equally weighted category dimensions are the intended scoring framework; numeric scores are verified only when their source and calculation can be checked</li>
-                <li>Unsupported facts should be corrected, qualified, or omitted as identified by ongoing audits</li>
+                <li>Unsupported facts are corrected, qualified, or omitted when identified</li>
                 <li>Third-party user reviews on G2, Capterra and TrustRadius are linked for readers who want independent feedback</li>
                 <li>Documentation of pricing, feature availability, and setup requirements at the time of review</li>
               </ul>
@@ -98,7 +98,7 @@ export default function EditorialPolicyPage() {
               <p>We are committed to representing diverse perspectives in our content. Our tool reviews consider accessibility features, internationalization support, and pricing in multiple currencies and regions. We strive to include products that serve organizations of different sizes, industries, and geographic locations.</p>
 
               <h2>7. Updates to This Policy</h2>
-              <p>This editorial policy may be updated when our practices materially change. The last-updated date reflects the most recent revision. The "Last updated" date reflects the most recent revision.</p>
+              <p>This editorial policy may be updated when our practices materially change. The last-updated date reflects the most recent revision.</p>
 
               <p className="text-sm text-muted-foreground-foreground mt-8">For questions about this editorial policy, contact us at <strong>contact@pilotstack.online</strong>.</p>
             </div>

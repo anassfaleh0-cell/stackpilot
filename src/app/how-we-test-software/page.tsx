@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "How We Evaluate Software | PilotStack Process",
-  description: "PilotStack explains its software evaluation criteria, evidence standards, and ongoing audit of older ratings and numeric claims so readers can judge what is verified.",
+  description: "PilotStack explains its software evaluation criteria, evidence standards, reproducible scoring, and how source verification is handled.",
   path: "/how-we-test-software",
 })
 
@@ -34,7 +34,7 @@ export default function HowWeTestSoftwarePage() {
     {
       phase: "Scoring",
       steps: [
-        "The published rubric defines nine 1-5 evaluation dimensions; older stored category scores are being audited before they are described as verified",
+        "The published rubric defines nine 1-5 evaluation dimensions; a stored category score is described as verified only when its inputs and calculation can be checked",
         "Where a rating is verified, its calculation should be reproducible from the documented category values and rounding rule",
         "The methodology describes the intended calculation; not every legacy rating currently has a complete, auditable source trail",
         "Ratings are based on the published scoring criteria rather than commercial placement",

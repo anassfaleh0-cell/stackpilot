@@ -23,7 +23,7 @@ export default function CorrectionsPolicyPage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Transparency</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Corrections Policy</h1>
-            <p className="text-muted-foreground mb-8">Last updated: October 22, 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: October 23, 2026</p>
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">

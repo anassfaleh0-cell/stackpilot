@@ -23,11 +23,11 @@ export default function FactCheckingPolicyPage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Accuracy Standards</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Fact-Checking Policy</h1>
-            <p className="text-muted-foreground mb-8">Last updated: October 22, 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: October 23, 2026</p>
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">
-                Accuracy is essential to trust. PilotStack aims to check important product and pricing claims against available sources, but coverage is not yet complete across the entire archive. Older records are being audited for source provenance, and this policy describes the standard we are working to apply consistently.
+                Accuracy is essential to trust. Product and pricing claims are described as verified only when supporting sources and relevant context can be checked. Where evidence is missing or conflicting, we qualify the claim, direct readers to the vendor or original source, or omit the unsupported detail. A historical page date does not mean every claim on that page was rechecked on that date.
               </p>
 
               <h2>Pre-Publication Fact-Checking</h2>
