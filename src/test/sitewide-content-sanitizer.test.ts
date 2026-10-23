@@ -10,7 +10,6 @@ import {
   getAllIndustries,
   getAllReviews,
   getAllUseCases,
-  getAlternative,
   getBest,
   getBlogPost,
   getComparison,
@@ -37,6 +36,9 @@ const BANNED_CLAIMS = [
   /\b\d[\d,]*(?:\.\d+)?\+?\s+(?:users|customers|employees|reviews|templates|integrations|shortcuts|connectors|blocks|content types)\b/i,
   /\b(?:zero|no)\s+(?:loading states?|pagination delays?|downtime)\b/i,
   /\b\d{1,3}(?:\.\d+)?%?\s+(?:faster|improvement|uptime)\b/i,
+  /\b(?:the\s+)?(?:largest|biggest|most comprehensive|most accurate|most frequently updated|industry[- ]leading|world['’]s leading|number one|#1)\b[^.!?]{0,140}\b(?:index|database|platform|tool|software|ecosystem|coverage|provider|market|solution)\b/i,
+  /\btrusted by\b[^.!?]{0,120}\b(?:worldwide|millions|leading companies|top brands)\b/i,
+  /\bgo[- ]to tool\b/i,
 ]
 
 function stringsOf(value: unknown, out: string[] = []): string[] {
