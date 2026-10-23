@@ -52,7 +52,7 @@ const META_DESCRIPTION_MAX = 160
 const META_TITLE_YEAR = "2026"
 
 export function reviewMetaTitle(name: string): string {
-  return `${name} Review (${META_TITLE_YEAR}): Pricing, Pros and Cons`
+  return `${name} Review (${META_TITLE_YEAR}): Pros, Cons & Buyer Guide`
 }
 
 export function reviewMetaDescription(name: string, tagline: string, category: string): string {
@@ -60,6 +60,6 @@ export function reviewMetaDescription(name: string, tagline: string, category: s
   if (core.length >= 90) return truncateAtWordBoundary(core, META_DESCRIPTION_MAX)
   const categoryBase = String(category).trim().replace(/\s*tools$/i, "").trim()
   const place = categoryBase ? `${categoryBase.toLowerCase()} tools` : "software tools"
-  const tail = ` Pricing, pros, cons, and where ${name} sits among ${place}.`
+  const tail = ` Fit, trade-offs, and questions to verify before choosing among ${place}.`
   return truncateAtWordBoundary(`${core}${tail}`, META_DESCRIPTION_MAX)
 }
