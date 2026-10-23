@@ -1,125 +1,119 @@
 {
-    "slug":  "software-evaluation-checklist",
-    "title":  "The Ultimate Software Evaluation Checklist",
-    "description":  "Beginner Productivity guide (~13 min read): how to evaluate the right Ultimate Software Evaluation. The most common reason software evaluations.",
-    "category":  "Productivity",
-    "difficulty":  "Beginner",
-    "readingTime":  13,
-    "sections":  [
-                     {
-                         "title":  "Prepare Your Evaluation Foundation",
-                         "body":  "The most common reason software evaluations fail is starting with tools instead of problems. Before researching any product, document your current state: what process are you trying to improve, who is involved at each step, what data flows through the system, and how you measure success today. Interview stakeholders from every department that will touch the software — including the people who will use it daily, not just the managers who will approve the budget. Capture not just feature requests (I need X) but the underlying job to be done (I need X because Y takes 4 hours per week manually). This distinction reveals whether you need a new tool at all, or just better training on your existing one. Estimate your baseline: how many hours per week does the current process consume across all involved team members? This baseline becomes your ROI target for the new tool.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Build Your Weighted Scoring Matrix",
-                         "body":  "A weighted scoring matrix prevents you from choosing a tool because it has one impressive feature while ignoring critical gaps. List every requirement from your stakeholder interviews, group them into categories, and assign a weight to each category totaling 100%. Then score each candidate tool against every category. Use this framework as a template, modifying categories and weights for your specific evaluation context.",
-                         "type":  "table",
-                         "columns":  [
-                                         "Evaluation Category",
-                                         "Weight",
-                                         "What to Assess"
-                                     ],
-                         "rows":  [
-                                      [
-                                          "Core Functionality",
-                                          "25%",
-                                          "Does the tool handle your primary use case completely? Test with real data, not vendor demos — edge cases reveal gaps that demos hide"
-                                      ],
-                                      [
-                                          "Integration Fit",
-                                          "20%",
-                                          "Does it connect natively with your existing stack? Count the number of manual data transfers your team will still need after implementation"
-                                      ],
-                                      [
-                                          "User Experience \u0026 Adoption",
-                                          "20%",
-                                          "Can a non-technical team member perform their core task within 5 minutes without training? Test this with actual users from each team"
-                                      ],
-                                      [
-                                          "Reliability \u0026 Performance",
-                                          "15%",
-                                          "Check vendor status page, independent uptime monitoring, and user reviews about speed and availability. Request SLA documentation for paid tiers"
-                                      ],
-                                      [
-                                          "Support \u0026 Training",
-                                          "10%",
-                                          "What support channels are available at your tier? Response times? Self-service knowledge base quality? Onboarding resources?"
-                                      ],
-                                      [
-                                          "Total Cost of Ownership",
-                                          "10%",
-                                          "Calculate 3-year cost including licensing, training, implementation, integrations, and any anticipated user growth. Include migration costs if replacing an existing tool"
-                                      ]
-                                  ]
-                     },
-                     {
-                         "title":  "Prepare for Vendor Demos",
-                         "body":  "A vendor demo is a sales presentation, not an evaluation. Take control by sending your requirements and a specific scenario script in advance. Ask vendors to walk through your real workflow rather than their standard demo. Prepare a kick-the-tires list: create a task/record/deal with complex fields, test search across 1000+ items, try to break the workflow with unusual edge cases, and ask to see error states and empty states — not just the happy path. Record the demo for your evaluation team members who could not attend. After each demo, have each stakeholder independently score the tool against your matrix before any group discussion to avoid anchoring bias from the most vocal team member.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Run a Structured Trial",
-                         "body":  "A trial should be a structured evaluation, not just signing up for a free account. Define a 2-week evaluation period with specific milestones: Day 1-3: Admin configuration and data import. Day 4-7: Pilot group of 3-5 power users works through real projects. Day 8-10: All evaluators complete a structured feedback form covering each category in your scoring matrix. Day 11-14: Score consolidation and decision meeting. During the trial, track: time to complete core tasks, number of clicks per common action, how often users had to leave the tool to check another system, and any data that could not be imported or migrated. The tool that scores highest across all evaluators — not the one with the most features or the lowest price — is the right choice.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Total Cost of Ownership Calculation",
-                         "body":  "The license cost is only 40-60% of total software ownership cost. Calculate the full picture: licensing (monthly fee × users × 36 months), implementation (setup fees, data migration effort, configuration hours), training (vendor training costs plus internal hours spent on onboarding), integration (Zapier subscriptions, API development, middleware costs), administration (ongoing user management, permission updates, customizations), and migration costs if switching from another tool (data export, transformation, import, and parallel running period). For most SaaS tools, realistic 3-year TCO ranges from $200-500 per user for entry-level tools, $500-1,500 per user for mid-market platforms, and $1,500-5,000+ per user for enterprise solutions with implementation services.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Post-Launch Success Metrics",
-                         "body":  "Define what success looks like before you deploy. Track these metrics for the first 90 days after launch: adoption rate (weekly active users / total licensed users — target \u003e80% by day 60), time-to-value (days from launch until the tool saved its first hour of team time — target \u003c14 days), data quality (percentage of records with complete required fields — target \u003e90% by day 30), and user satisfaction (survey score 1-5 — target \u003e4.0 by day 90). If adoption lags below 60% at day 30, conduct quick feedback sessions — the most common causes are: the tool does not integrate with a critical workflow, data entry is too time-consuming, or team members did not receive role-specific training. Address these issues immediately rather than hoping they self-correct.",
-                         "type":  "text"
-                     },
-                     {
-                         "title":  "Common Evaluation Mistakes",
-                         "body":  "Teams that end up disappointed with their software purchase often share these patterns. Review this list before making your final decision.",
-                         "type":  "list",
-                         "items":  [
-                                       "Selecting a tool during a free trial when no real work pressure exists — the tool feels fine with 10 test records but becomes frustrating with 10,000 real records and 20 concurrent users",
-                                       "Letting one department dominate the decision — a tool selected by engineering for engineering needs may be unusable for marketing, sales, and support teams who also need it",
-                                       "Confusing feature count with quality — a tool with 500 features often has five good ones and 495 mediocre ones, while a focused tool with 50 excellent features may deliver more value",
-                                       "Skipping the exit strategy — always confirm you can export all your data (including attachments, comments, and history) before signing, because switching costs are the real vendor lock-in",
-                                       "Neglecting to test mobile — even for desk workers, the mobile experience matters during travel, site visits, and after-hours check-ins, and many SaaS mobile apps lack core functionality",
-                                       "Overvaluing \u0027AI features\u0027 in current evaluations — AI capabilities in SaaS tools are evolving rapidly and should not be the primary selection criterion; focus on core functionality that works today"
-                                   ]
-                     },
-                     {
-                         "title":  "Final Decision Checklist",
-                         "body":  "Before signing a contract or committing to an annual plan, confirm all of the following.",
-                         "type":  "list",
-                         "items":  [
-                                       "Have at least 3 team members from different roles tested the tool with real data for a minimum of 3 days?",
-                                       "Does the tool integrate with your 3 most critical existing tools without requiring a paid middleware layer?",
-                                       "Has the vendor demonstrated handling your specific edge cases (data volume, permission complexity, custom workflows)?",
-                                       "Can you export all your data, including attachments and comments, without vendor assistance?",
-                                       "What is the 3-year total cost of ownership including licensing, implementation, training, and administration?",
-                                       "Does the contract have a 30-day termination clause or are you locked into an annual commitment?",
-                                       "Does the vendor provide SOC 2 reports, penetration test results, or independent security certifications?",
-                                       "Have you checked recent user reviews on G2, Capterra, or TrustRadius specifically for companies your size?",
-                                       "What is the average response time for support tickets at your planned tier level?",
-                                       "Does the vendor offer a dedicated onboarding specialist or implementation manager for your plan tier?"
-                                   ]
-                     }
-                 ],
-    "author": "Sarah Chen",
-    "lastUpdated":  "2026-07-16",
-    "relatedTools":  [
-                         "asana",
-                         "linear",
-                         "notion"
-                     ],
-    "relatedGuides":  [
-                          "saas-implementation-best-practices",
-                          "crm-selection-guide"
-                      ],
-    "relatedPosts":  [
-                         "software-review-methodology",
-                         "saas-pricing-report-2026"
-                     ],
-    "relatedComparisons":  [
-                               "notion-vs-linear"
-                           ]
+  "slug": "software-evaluation-checklist",
+  "title": "Software Evaluation Checklist: A Practical Buyer’s Guide",
+  "description": "A step-by-step checklist for defining requirements, running comparable product pilots, estimating total cost, checking security and portability, and documenting a defensible software decision.",
+  "category": "Productivity",
+  "difficulty": "Beginner",
+  "readingTime": 13,
+  "sections": [
+    {
+      "title": "Define the problem before comparing products",
+      "type": "text",
+      "body": "Start with the work that needs to improve, not with a vendor feature list. Document the current workflow, who performs each step, where delays or errors occur, what data is involved, and what a successful outcome would look like. Ask daily users and process owners to contribute. Separate mandatory requirements from preferences, and write down what evidence would show that a requirement is met. If the current process can be improved through configuration or training, include that option rather than assuming a new purchase is necessary."
+    },
+    {
+      "title": "Build a scoring matrix that can be explained",
+      "type": "table",
+      "body": "Use weights only after stakeholders agree on what matters. The percentages below are an example structure, not an industry benchmark; change them to match the risk and purpose of your purchase.",
+      "columns": [
+        "Criterion",
+        "Example weight",
+        "Evidence to collect"
+      ],
+      "rows": [
+        [
+          "Core workflow fit",
+          "30%",
+          "Run representative tasks and record pass/fail results, workarounds, and missing capabilities."
+        ],
+        [
+          "Security and governance",
+          "20%",
+          "Review current vendor documentation, required access controls, retention terms, and contractual commitments."
+        ],
+        [
+          "Integration and portability",
+          "15%",
+          "Test the exact connectors and export/import behavior needed by your stack."
+        ],
+        [
+          "Usability and adoption",
+          "15%",
+          "Ask intended users to complete common tasks and record friction without coaching."
+        ],
+        [
+          "Total cost of ownership",
+          "15%",
+          "Calculate license, usage, add-ons, setup, training, administration, migration, and exit costs."
+        ],
+        [
+          "Support and operational risk",
+          "5%",
+          "Verify support channels and contractual service commitments relevant to the chosen plan."
+        ]
+      ]
+    },
+    {
+      "title": "Write test cases before vendor demos",
+      "type": "text",
+      "body": "Prepare a short scenario script using representative data and realistic edge cases. Ask each vendor or pilot account to demonstrate the same workflow: create or import a record, apply the permissions you need, search for it, change its status, trigger a notification or automation, build a report, and export the result. Record what was demonstrated, what was only promised, what required a higher plan, and what could not be tested. A polished demo is not evidence that the product fits your workflow."
+    },
+    {
+      "title": "Run a controlled pilot",
+      "type": "checklist",
+      "body": "Keep the pilot small enough to manage but representative enough to reveal problems.",
+      "items": [
+        "Choose a fixed set of tasks and define acceptance criteria before testing.",
+        "Use the same inputs and user roles across all candidate products.",
+        "Include normal cases, exceptions, permission boundaries, and data-export tests.",
+        "Record completion time, errors, workarounds, support requests, and user feedback.",
+        "Confirm which features are included in the actual plan being evaluated.",
+        "Document any vendor statement that still needs written confirmation.",
+        "Do not move sensitive or production data into a trial until its data terms are approved."
+      ]
+    },
+    {
+      "title": "Calculate total cost of ownership",
+      "type": "text",
+      "body": "Compare the same period and scope for each candidate. Include seats, usage or storage, required add-ons, onboarding, configuration, integration work, training, administration, support, taxes, renewal terms, and migration or exit costs. For usage-based products, estimate both normal and peak demand and include overages. Keep list prices separate from a quote and record the country, currency, billing term, and date checked. Avoid presenting hypothetical productivity savings as guaranteed ROI; measure the baseline and pilot outcome first."
+    },
+    {
+      "title": "Review security, privacy, and contractual fit",
+      "type": "text",
+      "body": "Use the vendor's current security and privacy documents and your organization's requirements. Check identity and access management, role permissions, audit events, retention and deletion, data processing, data residency if required, incident response, backups, and export. Confirm whether the required controls apply to the plan and contract you are considering. Do not infer a certification, legal compliance, or uptime guarantee from a marketing page; obtain the applicable evidence and written terms."
+    },
+    {
+      "title": "Plan migration and exit before committing",
+      "type": "text",
+      "body": "Export a representative sample and test it outside the source product. Check records, relationships, formulas, attachments, comments, permissions, history, and internal links. Identify what needs manual rebuilding, who owns the migration, and how users will be trained. Confirm how data can be exported and deleted at contract end, and whether any proprietary workflow or integration would make switching unusually expensive. Keep a rollback plan until the new workflow is stable."
+    },
+    {
+      "title": "Make the decision and record the evidence",
+      "type": "text",
+      "body": "Summarize which mandatory requirements passed, which failed, which remain unknown, and what the unknowns would cost or risk. Show the total cost assumptions and the trade-offs behind the recommendation. Document the selected plan, contract terms, owners, implementation dependencies, and review date. A defensible decision is not necessarily the product with the highest total score; a single critical security, migration, or workflow failure can outweigh advantages elsewhere."
+    },
+    {
+      "title": "Post-launch review",
+      "type": "text",
+      "body": "After rollout, compare actual adoption, operating effort, support needs, usage, and invoices with the pilot assumptions. Ask users where workarounds persist and track whether the original problem improved. Revisit the decision if costs, requirements, product terms, or risk change. This review makes the evaluation reusable for future renewals and prevents an initial purchase from becoming an unchecked long-term commitment."
+    }
+  ],
+  "author": "Sarah Chen",
+  "lastUpdated": "2026-10-23",
+  "relatedTools": [
+    "asana",
+    "linear",
+    "notion"
+  ],
+  "relatedGuides": [
+    "saas-implementation-best-practices",
+    "crm-selection-guide"
+  ],
+  "relatedPosts": [
+    "software-review-methodology",
+    "saas-pricing-report-2026"
+  ],
+  "relatedComparisons": [
+    "notion-vs-linear"
+  ]
 }

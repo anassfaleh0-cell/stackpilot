@@ -1,7 +1,7 @@
 {
   "slug": "asana-vs-clickup",
   "title": "Asana vs ClickUp",
-  "description": "Asana vs ClickUp for 2026: compare free-plan limits, project views, automations, reporting, admin controls, and listed pricing. Neither is a universal winner; choose based on your workflow and the plan limits you need.",
+  "description": "Asana vs ClickUp: compare project planning, views, automations, reporting, documentation, permissions, and total cost. This guide does not claim independent product benchmarking or a universal winner; verify current plan details and test both products against the same workflow.",
   "category": "Project Management",
   "tool1": "Asana",
   "tool2": "ClickUp",
@@ -10,108 +10,112 @@
   "winner": null,
   "features": [
     {
-      "name": "Free plan team size",
-      "tool1": "Personal: up to 2 users",
-      "tool2": "Free Forever: unlimited members",
-      "tool1Detail": "Asana's Personal plan is aimed at one or two people. Confirm the current limits on the official pricing page: https://asana.com/pricing",
-      "tool2Detail": "ClickUp lists unlimited free-plan members, with feature and storage limits. Official pricing: https://clickup.com/pricing"
+      "name": "Core project workflow",
+      "tool1": "Structured tasks, projects, and team coordination",
+      "tool2": "Tasks, projects, and a broader configurable workspace",
+      "tool1Detail": "Start with the workflow your team uses today. Check whether projects, task ownership, dependencies, status updates, and recurring work can be represented without manual workarounds. Official product and plan details: https://asana.com/pricing",
+      "tool2Detail": "Test how tasks, spaces, folders, lists, and project templates fit the team's working model. The breadth of configuration may help some teams but can add setup choices. Verify current capabilities: https://clickup.com/pricing"
     },
     {
-      "name": "Core project views",
-      "tool1": "List, board, calendar",
-      "tool2": "List, board, calendar",
-      "tool1Detail": "Asana lists list, board, and calendar views on Personal. Timeline/Gantt availability depends on the paid plan.",
-      "tool2Detail": "ClickUp lists list, board, and calendar views on Free Forever. Some view limits apply on the free plan; verify the current plan matrix."
-    },
-    {
-      "name": "Timeline and Gantt planning",
-      "tool1": "Starter and above",
-      "tool2": "Gantt available with plan limits",
-      "tool1Detail": "Asana's pricing page lists Timeline and Gantt views on Starter and higher plans.",
-      "tool2Detail": "ClickUp's view availability table lists Gantt on Free Forever with usage limits and unlimited Gantt charts on paid Unlimited and higher plans. Details: https://help.clickup.com/hc/en-us/articles/32274881672599-Views-feature-availability-and-limits"
+      "name": "Views and planning",
+      "tool1": "Check list, board, calendar, timeline, and Gantt needs against the intended plan",
+      "tool2": "Check list, board, calendar, timeline, and Gantt needs against the intended plan",
+      "tool1Detail": "Do not assume every view is included at every tier. Verify the current plan matrix and test dependencies, date changes, and workload planning with a real project.",
+      "tool2Detail": "View availability and usage limits may depend on the plan. Check ClickUp's current view availability documentation: https://help.clickup.com/hc/en-us/articles/32274881672599-Views-feature-availability-and-limits"
     },
     {
       "name": "Automation",
-      "tool1": "Starter: unlimited automations listed",
-      "tool2": "Plan-specific execution quotas",
-      "tool1Detail": "Asana lists unlimited automations on Starter. Confirm any plan conditions and current terms at https://asana.com/pricing.",
-      "tool2Detail": "ClickUp lists plan-specific automation quotas; the pricing page shows 100 executions on Free Forever, 1,000 on Unlimited, and 5,000 per month on Business. Verify current quotas at https://clickup.com/pricing."
+      "tool1": "Verify rule types, execution limits, and plan requirements",
+      "tool2": "Verify rule types, execution limits, and plan requirements",
+      "tool1Detail": "List the triggers and actions you actually need, then confirm any plan limits, usage caps, and restrictions on the official pricing page.",
+      "tool2Detail": "Test the same automation scenarios and check current execution quotas, integrations, and plan restrictions before estimating cost."
     },
     {
-      "name": "Reporting dashboards",
-      "tool1": "Starter and above; broader portfolio reporting on Advanced+",
-      "tool2": "Advanced dashboards on Business",
-      "tool1Detail": "Asana lists reporting dashboards on Starter and portfolio-level capabilities on Advanced. Check whether the reporting scope matches your team's needs.",
-      "tool2Detail": "ClickUp lists unlimited dashboards with advanced cards on Business. Check dashboard limits and included cards for the plan you would buy."
+      "name": "Reporting and dashboards",
+      "tool1": "Evaluate project and portfolio reporting required by the team",
+      "tool2": "Evaluate dashboard cards, reporting limits, and portfolio needs required by the team",
+      "tool1Detail": "Use a real status report and confirm which reporting features are included in the intended plan. Do not infer portfolio capability from a general feature label.",
+      "tool2Detail": "Build the dashboard the team actually needs and confirm card limits, sharing, and portfolio features on the intended plan."
     },
     {
       "name": "Goals and portfolio management",
-      "tool1": "Advanced and above",
-      "tool2": "Included in Unlimited and higher plans",
-      "tool1Detail": "Asana lists goals and unlimited portfolios on Advanced. Verify plan availability on the official pricing page.",
-      "tool2Detail": "ClickUp's pricing page lists Goals and Portfolio Management on Unlimited and higher plans. Confirm details for your workspace before purchase."
+      "tool1": "Verify goals, portfolio views, and cross-project reporting",
+      "tool2": "Verify goals, portfolio views, and cross-project reporting",
+      "tool1Detail": "Confirm availability and limitations directly with Asana's current plan matrix and test the reporting hierarchy needed by your team.",
+      "tool2Detail": "Confirm availability and limitations directly with ClickUp's current plan matrix and test the reporting hierarchy needed by your team."
     },
     {
-      "name": "Custom fields",
-      "tool1": "Custom fields on Starter+",
-      "tool2": "Basic manager on Free; unlimited on Unlimited+",
-      "tool1Detail": "Asana lists custom fields on Starter and above. Check field and reporting needs for your project templates.",
-      "tool2Detail": "ClickUp lists a basic custom-field manager on Free Forever and unlimited custom fields on Unlimited. Verify current limits at https://clickup.com/pricing."
+      "name": "Custom fields and forms",
+      "tool1": "Check custom fields, intake forms, and reporting on those fields",
+      "tool2": "Check custom fields, intake forms, and reporting on those fields",
+      "tool1Detail": "Create a sample intake process and verify field types, conditional logic, permissions, and reporting in the plan being considered.",
+      "tool2Detail": "Create the same intake process and verify field limits, form behavior, permissions, and reporting in the plan being considered."
     },
     {
-      "name": "Collaborative documentation",
-      "tool1": "Project notes and attachments",
-      "tool2": "Collaborative Docs on Free Forever",
-      "tool1Detail": "Asana supports project notes and file attachments; evaluate whether that is enough or whether your team needs a separate knowledge base.",
-      "tool2Detail": "ClickUp lists Collaborative Docs on Free Forever. Test permissions, document structure, export, and whether it can replace your existing documentation workflow."
+      "name": "Documentation",
+      "tool1": "Check whether project notes and attachments meet the team's needs",
+      "tool2": "Check whether collaborative Docs meet the team's needs",
+      "tool1Detail": "If documentation is central, test page structure, linking, access control, search, and export; a project-management tool may not replace a dedicated knowledge base.",
+      "tool2Detail": "Test collaborative Docs with real permissions and content. Verify export, document limits, and whether your existing knowledge base can be replaced without losing structure."
     },
     {
       "name": "Integrations",
-      "tool1": "100+ free integrations listed",
-      "tool2": "Unlimited integrations listed on Unlimited+",
-      "tool1Detail": "Asana lists 100+ free integrations on its project-management pages. Test the exact integrations and actions you rely on.",
-      "tool2Detail": "ClickUp lists unlimited integrations on Unlimited and higher plans. Confirm whether any connector or automation has separate usage limits."
+      "tool1": "Verify the exact connectors and actions your workflow requires",
+      "tool2": "Verify the exact connectors and actions your workflow requires",
+      "tool1Detail": "A headline integration count does not guarantee the connector or action you need. Test authentication, sync direction, field mapping, and any automation limits.",
+      "tool2Detail": "A headline integration count does not guarantee the connector or action you need. Test authentication, sync direction, field mapping, and any automation limits."
     },
     {
-      "name": "Enterprise identity and governance",
-      "tool1": "SAML SSO and SCIM on Enterprise",
-      "tool2": "SAML SSO, SCIM, audit log and governance on Enterprise",
-      "tool1Detail": "Asana's pricing page lists SAML authentication and user provisioning on Enterprise. Confirm security and compliance requirements directly with the vendor.",
-      "tool2Detail": "ClickUp's pricing page lists SAML SSO, SCIM provisioning, audit log, session management, and governance features on Enterprise. Confirm requirements and contract terms directly with the vendor."
+      "name": "Administration and security",
+      "tool1": "Confirm identity, provisioning, audit, retention, and access controls by plan",
+      "tool2": "Confirm identity, provisioning, audit, retention, and access controls by plan",
+      "tool1Detail": "For business-critical use, verify the exact controls, contractual commitments, and plan requirements directly with Asana; do not infer compliance from general marketing language.",
+      "tool2Detail": "For business-critical use, verify the exact controls, contractual commitments, and plan requirements directly with ClickUp; do not infer compliance from general marketing language."
     },
     {
-      "name": "Listed public pricing",
-      "tool1": "Starter $10.99/user/month billed annually; Advanced $24.99 billed annually or $30.49 monthly",
-      "tool2": "Unlimited $7/user/month billed annually or $10 monthly; Business $12 annually or $19 monthly",
-      "tool1Detail": "Prices shown on Asana's official pricing page when checked on 2026-10-09. Plans and promotions can change: https://asana.com/pricing",
-      "tool2Detail": "Prices shown on ClickUp's official pricing page when checked on 2026-10-09. Plans and promotions can change: https://clickup.com/pricing"
+      "name": "Migration and portability",
+      "tool1": "Test export/import fidelity, attachments, comments, relationships, and history",
+      "tool2": "Test export/import fidelity, attachments, comments, relationships, and history",
+      "tool1Detail": "Export a representative sample and check what transfers, what must be rebuilt, and whether the export is usable outside the platform.",
+      "tool2Detail": "Export a representative sample and check what transfers, what must be rebuilt, and whether the export is usable outside the platform."
+    },
+    {
+      "name": "Total cost of ownership",
+      "tool1": "Calculate current seat pricing plus required features, add-ons, taxes, and admin effort",
+      "tool2": "Calculate current seat pricing plus required features, add-ons, taxes, and admin effort",
+      "tool1Detail": "Prices and packaging can change by country, currency, billing term, and plan. Verify the quote at https://asana.com/pricing on purchase day and calculate cost for the exact seat count.",
+      "tool2Detail": "Prices and packaging can change by country, currency, billing term, and plan. Verify the quote at https://clickup.com/pricing on purchase day and calculate cost for the exact seat count."
     }
   ],
-  "verdict": "Choose by the work your team must complete, not by a generic winner. Asana's listed plan structure makes it worth evaluating when you need a structured project workflow and portfolio capabilities at the appropriate tier. ClickUp is worth evaluating when a broader workspace with collaborative docs and multiple views is attractive, but check the limits attached to each plan. The public pricing pages show different price points and feature packaging; they are not a like-for-like quote. Run the same pilot tasks in both products, verify every required feature in the intended plan, and calculate the full annual cost before deciding.",
+  "verdict": "There is no defensible universal winner without knowing the workflow and the plan requirements. Evaluate Asana if the team prefers a structured project-management approach and needs to validate its reporting hierarchy. Evaluate ClickUp if a configurable workspace that combines tasks and documentation is attractive. These are starting hypotheses, not independently tested conclusions. Run the same realistic pilot in both products, verify each required feature in the exact plan, and compare implementation effort, adoption, export behavior, administration, and total annual cost.",
   "faqs": [
     {
       "question": "Is Asana or ClickUp cheaper?",
-      "answer": "The official pricing pages checked on 2026-10-09 list Asana Starter at $10.99 per user/month billed annually and Advanced at $24.99 billed annually ($30.49 monthly). ClickUp lists Unlimited at $7 billed annually ($10 monthly) and Business at $12 billed annually ($19 monthly). Compare the specific features, seats, and billing terms you need; verify current pricing before buying. Sources: https://asana.com/pricing and https://clickup.com/pricing"
+      "answer": "A fair comparison needs the current quote for your country, billing term, seat count, and required features. Prices and packaging can change; check https://asana.com/pricing and https://clickup.com/pricing on the day you plan to buy. Include add-ons, taxes, and administration effort."
     },
     {
       "question": "Which free plan is better for a small team?",
-      "answer": "Asana Personal is positioned for one or two people and includes core list, board, and calendar views. ClickUp Free Forever lists unlimited members, but it has limits such as storage and some view or automation usage. If the team has more than two people, compare ClickUp's free limits with the paid features you would need in Asana. Source details: https://asana.com/pricing and https://clickup.com/pricing"
+      "answer": "Do not decide from member limits alone. Test the number of users, storage, views, automation, integrations, guest access, and reporting your team needs, then verify the current limits on each official plan page."
     },
     {
       "question": "Do both tools support timelines and dependencies?",
-      "answer": "Both products offer project-planning capabilities, but availability and limits vary by plan. Asana lists Timeline/Gantt views on Starter and higher plans. ClickUp lists Gantt views with usage limits on Free Forever and unlimited Gantt charts on paid Unlimited and higher plans. Confirm the current plan matrix and test a real dependency workflow. Sources: https://asana.com/pricing and https://help.clickup.com/hc/en-us/articles/32274881672599-Views-feature-availability-and-limits"
+      "answer": "Both products provide project-planning capabilities, but the availability and limits of specific views or dependency features can vary by plan. Confirm the current plan documentation and test a real schedule before committing."
     },
     {
       "question": "Which is better for portfolio reporting?",
-      "answer": "Do not decide from the product name alone. Asana lists goals and portfolios on Advanced and above, while ClickUp lists Goals and Portfolio Management on Unlimited and higher plans. Test whether the portfolio view, roll-up fields, permissions, and reports match the questions your managers need to answer. Verify the exact current plan inclusions with each vendor."
+      "answer": "That depends on the reporting hierarchy and the plan. Build the same cross-project report in both products and verify that the required goals, portfolio, dashboard, and export features are included."
     },
     {
       "question": "How should a team choose between them?",
-      "answer": "Create a pilot with the same project, dependency, recurring task, intake form, report, and guest-permission scenario in both tools. Record setup time, task-update effort, automation behavior, export quality, and the annual cost at your real seat count. Choose the product that passes your must-have requirements with less operational friction."
+      "answer": "Run the same pilot in each: create a project, assign dependencies, set up a recurring task, automate an intake flow, build a report, invite a guest, and export a sample. Record setup effort, usability, limits, and total cost."
     },
     {
       "question": "Where can I verify current features and prices?",
-      "answer": "Use the vendors' official pricing pages and plan documentation before purchase: Asana https://asana.com/pricing; ClickUp https://clickup.com/pricing; ClickUp view limits https://help.clickup.com/hc/en-us/articles/32274881672599-Views-feature-availability-and-limits. This comparison records what those pages listed when checked on 2026-10-09; features and prices can change."
+      "answer": "Use Asana's official pricing page at https://asana.com/pricing, ClickUp's at https://clickup.com/pricing, and ClickUp's current view availability documentation at https://help.clickup.com/hc/en-us/articles/32274881672599-Views-feature-availability-and-limits. Check details again before purchase."
+    },
+    {
+      "question": "Did PilotStack independently test both products?",
+      "answer": "This entry does not claim an independently conducted hands-on benchmark. It provides a structured comparison checklist and directs readers to official product documentation; readers should run their own representative pilot."
     }
   ],
   "relatedComparisons": [
@@ -127,5 +131,5 @@
     "best-project-management-software-2026",
     "saas-metrics-guide"
   ],
-  "lastUpdated": "2026-10-09"
+  "lastUpdated": "2026-10-23"
 }

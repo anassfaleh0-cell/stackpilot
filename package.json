@@ -34,7 +34,8 @@
     "audit:noindex": "node scripts/noindex-audit.mjs",
     "seo:smoke": "node scripts/production-smoke-check.cjs",
     "prebuild": "node scripts/generate-search-index.mjs",
-    "pretest": "node scripts/generate-search-index.mjs"
+    "pretest": "node scripts/generate-search-index.mjs",
+    "audit:comparisons": "node scripts/audit-comparison-integrity.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

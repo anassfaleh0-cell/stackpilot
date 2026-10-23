@@ -58,7 +58,14 @@ export function getComparisonVerdictForDisplay(verdict: string, categoriesDiffer
   return "The stored verdict uses generic wording and does not provide enough product-specific evidence to justify an overall winner. Treat the feature rows as starting points, and verify capabilities, plan limits, integrations, and current pricing with each vendor."
 }
 
-export function getSpecificComparisonFaqs(faqs: FAQItem[]): FAQItem[] {
+export interface ComparisonFaqContext {
+  tool1: string
+  tool2: string
+  tool1Category?: string | null
+  tool2Category?: string | null
+}
+
+export function getSpecificComparisonFaqs(faqs: FAQItem[], context?: ComparisonFaqContext): FAQItem[] {
   const seenQuestions = new Set<string>()
   const useful: FAQItem[] = []
 
@@ -66,20 +73,37 @@ export function getSpecificComparisonFaqs(faqs: FAQItem[]): FAQItem[] {
     const question = typeof faq?.question === "string" ? faq.question.replace(/\s+/g, " ").trim() : ""
     const answer = typeof faq?.answer === "string" ? faq.answer.replace(/\s+/g, " ").trim() : ""
     const normalizedQuestion = question.toLowerCase()
-
-    // Do not expose empty, duplicate, malformed, or boilerplate Q&A in page text/schema.
     if (!question || !answer || !question.endsWith("?") || answer.length < 40 || answer.length > 700) continue
     if (seenQuestions.has(normalizedQuestion)) continue
     if (TEMPLATE_FAQ_PATTERNS.some((pattern) => pattern.test(question) || pattern.test(answer))) continue
-    // FAQ copy must not reintroduce unsupported scores, prices, or winners after the
-    // main comparison has been deliberately rendered without those claims.
     if (/\b(?:overall winner|scores higher|edges ahead|wins overall|is the better choice)\b/i.test(answer)) continue
     if (/\b\d+(?:\.\d+)?\s*\/\s*5\b|[$€£]\s?\d[\d,.]*/i.test(answer)) continue
-
     seenQuestions.add(normalizedQuestion)
     useful.push({ ...faq, question, answer })
     if (useful.length >= 8) break
   }
 
+  // If imported FAQs are all boilerplate, provide a small, evidence-safe decision guide.
+  if (context && useful.length < 3) {
+    const tool1 = context.tool1.trim()
+    const tool2 = context.tool2.trim()
+    const category1 = context.tool1Category?.trim()
+    const category2 = context.tool2Category?.trim()
+    const categoriesDiffer = Boolean(category1 && category2 && category1.toLowerCase() !== category2.toLowerCase())
+    const fallback: FAQItem[] = [
+      { question: "What is the main difference between " + tool1 + " and " + tool2 + "?", answer: categoriesDiffer
+        ? "The linked review data categorizes " + tool1 + " as " + category1 + " and " + tool2 + " as " + category2 + ". They may address different jobs, so compare overlapping requirements rather than treating them as direct substitutes."
+        : "Compare " + tool1 + " and " + tool2 + " against the work you need to complete. Verify capabilities, integrations, permissions, and plan limits instead of assuming a generic feature table proves one product is better." },
+      { question: "Can " + tool1 + " replace " + tool2 + "?", answer: "Only treat " + tool1 + " as a replacement if a controlled pilot shows it covers the tasks, data flows, integrations, permissions, and export needs you rely on in " + tool2 + ". Test a representative workflow in both products and record gaps before migrating." },
+      { question: "How should I choose between " + tool1 + " and " + tool2 + "?", answer: "List mandatory requirements, then run the same representative tasks in both products. Compare accepted results, correction effort, accessibility, administration, migration, support, and total cost. Verify important capabilities with current vendor documentation." },
+      { question: "Are pricing and feature limits for " + tool1 + " and " + tool2 + " current?", answer: "Do not treat this comparison as a live quote or proof of feature availability. Check official vendor pages and contract terms for current prices, plan limits, integrations, region, renewal, and cancellation before buying." },
+    ]
+    for (const faq of fallback) {
+      if (useful.length >= 3) break
+      if (seenQuestions.has(faq.question.toLowerCase())) continue
+      seenQuestions.add(faq.question.toLowerCase())
+      useful.push(faq)
+    }
+  }
   return useful
 }

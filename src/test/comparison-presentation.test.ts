@@ -44,6 +44,16 @@ describe("comparison presentation avoids generic boilerplate", () => {
     expect(result).toContain("does not provide enough product-specific evidence")
   })
 
+  it("adds evidence-safe product-specific FAQs when imported FAQs are all generic", () => {
+    const result = getSpecificComparisonFaqs(
+      [{ question: "Which is better?", answer: "Both platforms offer strong features and the best choice depends on your team." }],
+      { tool1: "Linear", tool2: "Jira", tool1Category: "Project Management", tool2Category: "Project Management" },
+    )
+    expect(result.length).toBe(3)
+    expect(result[0].question).toContain("Linear")
+    expect(result[0].question).toContain("Jira")
+    expect(result.every((faq) => !/winner|scores higher|\d+\/5|\$\d/i.test(faq.answer))).toBe(true)
+  })
   it("preserves specific FAQs and removes generic template answers", () => {
     const result = getSpecificComparisonFaqs([
       { question: "What are the main differences?", answer: "Our comparison table breaks down these differences." },
