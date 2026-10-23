@@ -1209,7 +1209,7 @@ function normalizeResearchContent(record: ResearchContent): ResearchContent {
       ...reviewed.sections.flatMap((section) => [section.title, section.body || "", ...(section.items || []), ...(section.columns || []), ...(section.rows || []).flat()]),
       ...(reviewed.faqs || []).flatMap((faq) => [faq.question, faq.answer]),
     ].join(" ").replace(/<[^>]*>/g, " ")
-    const wordCount = wordSource.split(/\\s+/).filter(Boolean).length
+    const wordCount = wordSource.split(/\s+/).filter(Boolean).length
     return { ...reviewed, readingTime: Math.max(3, Math.ceil(wordCount / 200)) }
   }
   const hasCompleteSourceAudit = record.sourceAuditComplete === true &&
