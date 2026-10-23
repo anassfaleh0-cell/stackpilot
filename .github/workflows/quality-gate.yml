@@ -102,15 +102,6 @@ jobs:
           fi
           node scripts/route-smoke-check.js
 
-      - name: Live internal-link and broken-target audit (diagnostic, bounded)
-        run: |
-          set +e
-          timeout 90s env SITE_URL=https://pilotstack.online npm run seo:links
-          status=$?
-          if [ "$status" -eq 124 ]; then
-            echo "Diagnostic link audit exceeded 90 seconds; recorded as non-blocking."
-            exit 0
-          fi
-          exit 0
-        continue-on-error: true
-        timeout-minutes: 2
+      - name: Live internal-link and broken-target audit
+        run: timeout 300s env SITE_URL=https://pilotstack.online npm run seo:links
+        timeout-minutes: 6
