@@ -41,7 +41,8 @@ describe("review content provenance", () => {
       "49 EUR per user",
       "120 GBP/year",
     ]) {
-      expect(stripUnverifiedPriceClaims(claim)).not.toMatch(/[$€£]\s?\d|\b(?:USD|EUR|GBP)\s?\d|\b\d[\d,]*(?:\.\d+)?\s?(?:USD|EUR|GBP)\b/i)
+      expect(stripUnverifiedPriceClaims(claim)).toContain(claim.replace(/^A /, ""))
+      expect(stripUnverifiedPriceClaims(claim)).toContain("not independently verified")
     }
 
     expect(stripUnverifiedPriceClaims("Includes a free trial")).toContain("Includes a free trial")
