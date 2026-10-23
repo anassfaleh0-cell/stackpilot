@@ -66,6 +66,21 @@
       "title": "Evidence and limitations",
       "type": "text",
       "body": "PilotStack has not independently collected a user survey or run a controlled product benchmark for this profile. Numeric ratings, review totals, exact pricing, company statistics, and the complete feature matrix are therefore not presented as verified. Use Linear's official documentation for current details and validate important workflows in your own environment before adopting the product."
+    },
+    {
+      "title": "Decision criteria for product managers",
+      "type": "text",
+      "body": "Product managers should test whether prioritization, roadmaps, milestones, and stakeholder updates stay connected without creating duplicate sources of truth. Confirm which views can be shared with executives or other departments, how roadmap commitments relate to actual issue status, and whether reports can answer the questions leaders ask. If teams require a portfolio view across multiple products, test that specific workflow and its plan requirements rather than assuming a project list is sufficient."
+    },
+    {
+      "title": "Decision criteria for engineering leads",
+      "type": "text",
+      "body": "Engineering leads should validate triage, ownership, dependencies, cycle planning, incident handling, and the connection between issues and code changes. Test the path from incoming bug to assigned work, review, release, and closure. Check whether permissions and notifications create useful accountability without generating noise. For teams with service-level commitments or audit requirements, confirm how records are retained, exported, and reviewed."
+    },
+    {
+      "title": "Adoption and ongoing ownership",
+      "type": "text",
+      "body": "Before rollout, decide who owns workspace configuration, naming conventions, status changes, integrations, and onboarding. Document a small set of team conventions so each group does not create incompatible workflows. After launch, review examples of stalled or duplicated work and ask users where the process adds friction. If the tool does not improve the agreed measures, adjust configuration or reconsider the fit rather than assuming adoption will improve automatically."
     }
   ],
   "faqs": [
