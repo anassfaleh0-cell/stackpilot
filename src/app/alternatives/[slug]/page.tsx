@@ -17,6 +17,41 @@ import { EEATProcess } from "@/components/seo/editorial-process"
 import { isNoindexed } from "@/lib/noindex"
 import { REDIRECTED_ALTERNATIVE_SLUGS } from "@/lib/sitemap/redirected-content"
 
+import type { FAQItem } from "@/types/content"
+
+function isBoilerplateAlternativeCopy(value: string): boolean {
+  return /leading .* platform offering competitive features|strong market presence\. here are the top alternatives worth considering|when evaluating alternatives, consider these key factors|each offers different strengths depending on your needs|several alternatives offer competitive pricing|most alternatives offer import tools and migration support|implementation difficulty varies|user reviews on g2 and capterra provide valuable insights/i.test(value)
+}
+
+function alternativeDescription(item: { slug: string; description: string }): string {
+  const review = getReview(item.slug)
+  if (review && isBoilerplateAlternativeCopy(item.description)) {
+    return review.description
+  }
+  return item.description
+}
+
+function buildDecisionFaqs(toolName: string, category: string, toolDescription: string): FAQItem[] {
+  return [
+    {
+      question: `When should I consider an alternative to ${toolName}?`,
+      answer: `Start with the workflow gap you need to solve. ${toolDescription} Compare shortlisted products against that specific need instead of assuming a higher rating or a longer feature list means a better fit.`,
+    },
+    {
+      question: `How should I compare ${toolName} alternatives?`,
+      answer: `Write down the tasks the team needs to complete, the integrations it depends on, the number and type of users, administration needs, accessibility requirements, and the total cost at expected usage. For ${category.toLowerCase()} tools, test the same representative workflow in each shortlisted product.`,
+    },
+    {
+      question: `What should I verify before switching from ${toolName}?`,
+      answer: `Check current vendor pricing and plan limits, data export and migration options, permissions, integrations, support terms, security documentation, and any contract or renewal conditions. Confirm these details directly with each vendor before moving production work.`,
+    },
+    {
+      question: `Are ratings on this alternatives page verified?`,
+      answer: "A rating is displayed as verified only when its source and calculation can be checked. Where that evidence is unavailable, compare the published criteria and confirm current product details directly with the vendor.",
+    },
+  ]
+}
+
 export const dynamicParams = true
 
 export function generateStaticParams() {
@@ -37,7 +72,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!alt) return {}
   const shortTitle = alt.title.length > 58 ? alt.title.slice(0, 55) + "..." : alt.title
   const noindexed = isNoindexed("alternatives", slug)
-  return createMetadata({ title: shortTitle, description: `Looking for ${alt.toolName} alternatives? Compare ${(alt.alternatives || []).length} competitors by use case, practical differences, and current vendor terms. Ratings appear only when source provenance is documented.`, path: `/alternatives/${alt.slug}`, ogType: "article", publishedAt: alt.lastUpdated, updatedAt: alt.lastUpdated, articleSection: alt.category, noIndex: noindexed })
+  return createMetadata({ title: shortTitle, description: `Compare ${(alt.alternatives || []).length} alternatives to ${alt.toolName} by workflow fit, integrations, migration needs, and current vendor terms. Verify capabilities and pricing directly with vendors.`, path: `/alternatives/${alt.slug}`, ogType: "article", publishedAt: alt.lastUpdated, updatedAt: alt.lastUpdated, articleSection: alt.category, noIndex: noindexed })
 }
 
 export default async function AlternativePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -45,6 +80,32 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
   const alt = getAlternative(slug)
   if (!alt) notFound()
 
+  const originalToolReview = getReview(alt.toolSlug)
+  const pageDescription = `Compare ${(alt.alternatives || []).length} alternatives to ${alt.toolName} by workflow fit, feature requirements, integrations, migration needs, and current vendor terms. Ratings and prices are shown as verified only when supporting evidence can be checked.`
+  const visibleAlternatives = (alt.alternatives || [])
+    .filter((item) => Boolean(getReview(item.slug)))
+    .map((item) => ({ ...item, description: alternativeDescription(item) }))
+  const authoredFaqs = (alt.faqs || []).filter((faq) => !isBoilerplateAlternativeCopy(faq.answer) && !isBoilerplateAlternativeCopy(faq.question))
+  const visibleFaqs = authoredFaqs.length >= 3
+    ? authoredFaqs
+    : buildDecisionFaqs(alt.toolName, alt.category, originalToolReview?.description || `${alt.toolName} is listed in the ${alt.category.toLowerCase()} category. Check the vendor's current product documentation for its exact capabilities.`)
+  const visibleSections = (alt.sections || []).map((section) => {
+    if (isBoilerplateAlternativeCopy(section.body) && /overview/i.test(section.title)) {
+      return {
+        ...section,
+        body: originalToolReview
+          ? `${originalToolReview.description} This shortlist is a starting point: compare each candidate against the workflow you need to replace, required integrations, migration effort, and current plan limits.`
+          : `Use this shortlist to compare ${alt.toolName} alternatives against the workflow you need to support, required integrations, migration effort, and current plan limits. Confirm product-specific details with the vendors.`,
+      }
+    }
+    if (isBoilerplateAlternativeCopy(section.body)) {
+      return {
+        ...section,
+        body: `For ${alt.toolName}, apply these criteria to the actual tasks and constraints your team has. Record the vendor source and date for material claims, and mark any detail that cannot be confirmed as unverified.`,
+      }
+    }
+    return section
+  })
   const relatedLinks = getRelatedByCategory(alt.category, alt.slug, 4)
   const relatedAlternativePages = (() => {
     const sameCategory = getAllAlternatives()
@@ -60,9 +121,9 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Alternatives", href: "/alternatives" }, { name: alt.title, href: `/alternatives/${slug}` }]} />
-      <CollectionPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} />
-      <ItemListSchema items={(alt.alternatives || []).map(a => ({ name: a.name, url: `${site.url}/reviews/${a.slug}` }))} url={`${site.url}/alternatives/${slug}`} />
-      <WebPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} dateModified={alt.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: (alt.alternatives || []).map((a, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: a.name, url: `${site.url}/reviews/${a.slug}`, category: getReview(a.slug)?.category || alt.category, description: a.description }) })) }} />
+      <CollectionPageSchema name={alt.title} description={pageDescription} url={`${site.url}/alternatives/${slug}`} />
+      <ItemListSchema items={visibleAlternatives.map(a => ({ name: a.name, url: `${site.url}/reviews/${a.slug}` }))} url={`${site.url}/alternatives/${slug}`} />
+      <WebPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} dateModified={alt.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: visibleAlternatives.map((a, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: a.name, url: `${site.url}/reviews/${a.slug}`, category: getReview(a.slug)?.category || alt.category, description: a.description }) })) }} />
       <ArticleSchema
         title={alt.title}
         description={alt.description}
@@ -79,19 +140,19 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
         }
         category={alt.category}
       />
-      <FAQSchema questions={alt.faqs} path={`/alternatives/${slug}`} />
+      <FAQSchema questions={visibleFaqs} path={`/alternatives/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Alternatives", href: "/alternatives" }, { name: alt.title }]} />
       </Container>
       <article className="pb-16">
         <Container>
           <div className="mb-8">
-            <EditorialHero slug={alt.slug} title={alt.title} subtitle={alt.description} category={alt.category} variant="guide" className="w-full min-h-[180px] sm:min-h-[220px]" />
+            <EditorialHero slug={alt.slug} title={alt.title} subtitle={pageDescription} category={alt.category} variant="guide" className="w-full min-h-[180px] sm:min-h-[220px]" />
           </div>
 
           <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-8 pb-4 border-b border-border">
             <Badge variant="default">{alt.category}</Badge>
-            <span>Based on {(alt.alternatives || []).length} alternatives</span>
+            <span>Based on {visibleAlternatives.length} alternatives</span>
             <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>Compiled by PilotStack Team</span>
             <span className="flex items-center gap-1"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /></svg>Updated {formatDate(alt.lastUpdated)}</span>
             <a href="/methodology" className="hover:text-primary transition-colors underline underline-offset-2">How we compare</a>
@@ -102,7 +163,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
               <section id="top-alternatives" className="mb-10">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Top Alternatives to {alt.toolName}</h2>
                 <div className="space-y-4">
-                  {(alt.alternatives || []).map((item) => (
+                  {visibleAlternatives.map((item) => (
                     <GlassCard key={item.slug}>
                       <div className="p-5">
                         <div className="flex items-start justify-between mb-2">
@@ -141,7 +202,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                 </section>
               )}
 
-              {(alt.sections || []).map((section, i) => (
+              {visibleSections.map((section, i) => (
                 <section key={i} className="mb-10">
                   <h2 className="text-2xl font-bold tracking-tight mb-4">{section.title}</h2>
                   {section.type === "list" && section.items ? (
@@ -165,7 +226,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
               <section id="faq">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {alt.faqs.map((faq) => (
+                  {visibleFaqs.map((faq) => (
                     <GlassCard key={faq.question}>
                       <div className="p-4">
                         <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
@@ -183,7 +244,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                   <div className="p-4">
                     <h3 className="font-semibold mb-3 text-sm">Quick Comparison</h3>
                     <div className="space-y-2">
-                      {(alt.alternatives || []).slice(0, 5).map((item) => (
+                      {visibleAlternatives.slice(0, 5).map((item) => (
                         <Link key={item.slug} href={`/reviews/${item.slug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                           <span>{item.name}</span>
                           <span className="text-xs font-medium">{getReview(item.slug)?.ratingVerified === true && typeof getReview(item.slug)?.rating === "number" ? `${getReview(item.slug)?.rating}/5` : "Rating not verified"}</span>
