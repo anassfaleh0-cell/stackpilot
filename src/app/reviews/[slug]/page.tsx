@@ -486,11 +486,11 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 <EEATProcess category={tool.category} />
 
                 {/* Company Info */}
-                {(companyFacts.founded || companyFacts.headquarters || companyFacts.customers || companyFacts.employeeCount || companyFacts.pricingModel || (companyFacts.deployment && companyFacts.deployment.length > 0) || companyFacts.apiAvailable !== undefined || companyFacts.migrationComplexity) && (
+                {tool.companyFactsVerified === true && (companyFacts.founded || companyFacts.headquarters || companyFacts.customers || companyFacts.employeeCount || companyFacts.pricingModel || (companyFacts.deployment && companyFacts.deployment.length > 0) || companyFacts.apiAvailable !== undefined || companyFacts.migrationComplexity) && (
                   <GlassCard>
                     <div className="p-4">
                       <h3 className="font-semibold mb-1 text-sm">Recorded Company Details</h3>
-                      <p className="text-[11px] text-muted-foreground mb-3">These profile fields are recorded dataset values, not independently verified facts. Confirm important details with the vendor.</p>
+                      <p className="text-[11px] text-muted-foreground mb-3">Company details are included only when the profile's verification status is recorded as complete. Confirm current details with the vendor before relying on them.</p>
                       <div className="space-y-2 text-xs text-muted-foreground">
                         {companyFacts.founded && <p>Founded: <span className="text-foreground">{companyFacts.founded}</span></p>}
                         {companyFacts.headquarters && <p>HQ: <span className="text-foreground">{companyFacts.headquarters}</span></p>}
