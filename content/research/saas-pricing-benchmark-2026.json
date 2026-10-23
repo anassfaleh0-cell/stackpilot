@@ -78,23 +78,23 @@
   "faqs": [
     {
       "question": "What is the average starting price of SaaS software in 2026?",
-      "answer": "Based on 132 tools with monthly pricing in PilotStack's review corpus, the median starting price is $19.99/mo. The middle 50% of tools start between $11/mo and $39/mo."
+      "answer": "This page does not publish a verified market-wide average or median. The internal review corpus contains pricing fields, but each included value needs a dated vendor source, comparable billing unit, plan context, and regional scope before it can support a market estimate. Check the vendor's current pricing page for an actual purchase decision."
     },
     {
-      "question": "What percentage of SaaS tools offer a free tier?",
-      "answer": "41% of tools with parseable pricing in the corpus include a free tier, and 51% of all tools use a freemium pricing model. Free tiers are most common in Project Management (55%), Communication (50%), and Developer Tools (48%)."
+      "question": "How can I tell whether a SaaS product has a free tier?",
+      "answer": "Check the vendor's official pricing page and terms for eligibility, seat or usage limits, feature restrictions, trial length, and whether payment details are required. A free trial and a continuing free plan are different offers, so they should not be counted together."
     },
     {
       "question": "Which software categories are the most expensive?",
-      "answer": "Marketing & SEO tools have the highest median starting price at $99/mo, followed by Developer Tools at $29/mo and CRM & Sales at $25/mo. The cheapest categories are Security & Compliance ($7/mo) and HR & People ($8/mo)."
+      "answer": "This page does not rank categories by price because the underlying records have not been independently validated as a comparable, current market sample. To compare categories responsibly, use the same date range, currency, region, billing interval, team size, and minimum plan requirements."
     },
     {
       "question": "How many SaaS tools hide their pricing?",
-      "answer": "6.6% of tools in the corpus (10 of 151) publish no public pricing at all and require contacting sales. This is concentrated in enterprise-grade HR and payroll platforms."
+      "answer": "No verified market-wide percentage is published here. A defensible estimate would need a defined product sample and date, a documented rule for quote-only pricing, and a source check for every included product."
     },
     {
-      "question": "How are these pricing benchmarks computed?",
-      "answer": "Statistics are computed directly from PilotStack's review database via a versioned, reproducible script (scripts/compute-pricing-benchmark.js). Each reviewed tool contributes its verified pricing model and price range; the median starting price uses the lower bound of each tool's monthly price range. Category medians include only categories with at least 8 reviewed tools."
+      "question": "How should a pricing benchmark be computed?",
+      "answer": "Record the vendor pricing URL and date checked, plan, region, currency, billing interval, unit, minimum commitment, free-tier conditions, and mandatory extras for each product. Publish the sample size, exclusions, missing-data rules, calculation code, and limitations. Reproducible arithmetic does not independently verify the source values."
     }
   ],
   "relatedComparisons": [
