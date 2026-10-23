@@ -284,7 +284,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   } value={`${visibleContent.length}`} title="Review Sections" description="In-depth coverage" />
                 </div>
                 <div className="flex justify-center">
-                  {categoryRatings.length > 0 && <EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" />}
+                  {categoryRatings.length > 0 && <div className="w-full"><p className="text-xs text-muted-foreground mb-2">{tool.ratingsVerified === true ? "Recorded editorial rating dimensions." : "Stored rating dimensions; verification pending. These are not third-party ratings."}</p><EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" /></div>}
                 </div>
               </section>
 
@@ -423,7 +423,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* Feature Breakdown */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Feature Breakdown</h2>
-                {tool.featuresVerified === true ? <EditorialFeatureMatrix features={tool.features} slug={tool.slug} category={tool.category} /> : <p className="text-sm text-muted-foreground rounded-xl border border-border bg-muted-bg p-4">The feature profile has not been independently verified. Use the vendor documentation to confirm current availability, plan restrictions, integrations, and regional limitations before relying on a capability.</p>}
+                <p className="text-sm text-muted-foreground mb-3">{tool.featuresVerified === true ? "Feature profile marked verified in the editorial record." : "Recorded feature information is shown below for transparency; it has not been independently verified. Confirm availability, plan restrictions, integrations, and regional limitations with the vendor."}</p><EditorialFeatureMatrix features={tool.features} slug={tool.slug} category={tool.category} />
               </section>
 
               {entity && (
