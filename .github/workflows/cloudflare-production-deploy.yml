@@ -84,6 +84,31 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+      - name: Purge stale Cloudflare edge cache after deployment
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          zone_response="$(curl --silent --show-error --fail --retry 3 --retry-all-errors --retry-delay 3 \
+            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            --header "Content-Type: application/json" \
+            "https://api.cloudflare.com/client/v4/zones?name=pilotstack.online&status=active")"
+          zone_id="$(printf '%s' "$zone_response" | jq -r '.result[0].id // empty')"
+          if [ -z "$zone_id" ]; then
+            echo "Could not resolve Cloudflare zone ID; refusing to claim cache purge succeeded."
+            printf '%s' "$zone_response" | jq -c '{success,errors}'
+            exit 1
+          fi
+          purge_response="$(curl --silent --show-error --fail --retry 3 --retry-all-errors --retry-delay 3 \
+            --request POST \
+            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            --header "Content-Type: application/json" \
+            --data '{"purge_everything":true}' \
+            "https://api.cloudflare.com/client/v4/zones/$zone_id/purge_cache")"
+          printf '%s' "$purge_response" | jq -e '.success == true' >/dev/null
+          echo "PASS Cloudflare edge cache purge confirmed"
+          sleep 5
+
       - name: Verify production endpoints
         run: |
           set -euo pipefail
