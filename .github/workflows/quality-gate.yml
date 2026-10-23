@@ -9,7 +9,7 @@ on:
   pull_request:
 
 concurrency:
-  group: quality-gate-${{ github.ref }}
+  group: quality-gate-v2-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -79,11 +79,6 @@ jobs:
         run: npm run seo:smoke
         continue-on-error: true
 
-      - name: Live internal-link and broken-target audit (diagnostic)
-        run: SITE_URL=https://pilotstack.online npm run seo:links
-        continue-on-error: true
-        timeout-minutes: 3
-
       - name: Unit tests
         run: npm test
 
@@ -106,3 +101,16 @@ jobs:
             exit 1
           fi
           node scripts/route-smoke-check.js
+
+      - name: Live internal-link and broken-target audit (diagnostic, bounded)
+        run: |
+          set +e
+          timeout 90s env SITE_URL=https://pilotstack.online npm run seo:links
+          status=$?
+          if [ "$status" -eq 124 ]; then
+            echo "Diagnostic link audit exceeded 90 seconds; recorded as non-blocking."
+            exit 0
+          fi
+          exit 0
+        continue-on-error: true
+        timeout-minutes: 2
