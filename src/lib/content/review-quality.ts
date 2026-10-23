@@ -76,11 +76,11 @@ const GENERATED_REVIEW_SECTION_PATTERNS = [
 export function stripUnverifiedPriceClaims(value: string): string {
   const raw = String(value ?? "").trim()
   if (!raw) return ""
-  const priceOrPlanClaim = /(?:starting at|starts at|from)?\\s*[$€£]\\s?\\d[\\d,]*(?:\\.\\d+)?(?:\\s*\\/\\s*(?:user|seat|month|year|mo|yr))?|\\b(?:USD|EUR|GBP)\\s?\\d[\\d,]*(?:\\.\\d+)?(?:\\s*\\/\\s*(?:user|seat|month|year|mo|yr))?|\\b\\d[\\d,]*(?:\\.\\d+)?\\s?(?:USD|EUR|GBP)\\b(?:\\s*\\/\\s*(?:user|seat|month|year|mo|yr))?|\\b(?:free|freemium|paid|enterprise)\\s+(?:plan|tier)\\b|\\bfree trial\\b/i
-  const sentences = raw.split(/(?<=[.!?])\\s+|\\n+/).map((sentence) => sentence.trim()).filter(Boolean)
+  const priceOrPlanClaim = /(?:starting at|starts at|from)?\s*[$€£]\s?\d[\d,]*(?:\.\d+)?(?:\s*\/\s*(?:user|seat|month|year|mo|yr))?|\b(?:USD|EUR|GBP)\s?\d[\d,]*(?:\.\d+)?(?:\s*\/\s*(?:user|seat|month|year|mo|yr))?|\b\d[\d,]*(?:\.\d+)?\s?(?:USD|EUR|GBP)\b(?:\s*\/\s*(?:user|seat|month|year|mo|yr))?|\b(?:free|freemium|paid|enterprise)\s+(?:plan|tier)\b|\bfree trial\b/i
+  const sentences = raw.split(/(?<=[.!?])\s+|\n+/).map((sentence) => sentence.trim()).filter(Boolean)
   return sentences.map((sentence) => priceOrPlanClaim.test(sentence) && !/not independently verified|verification pending/i.test(sentence)
     ? sentence + " (recorded value; not independently verified—confirm current terms with the vendor)"
-    : sentence).join(" ").replace(/\\s{2,}/g, " ").trim()
+    : sentence).join(" ").replace(/\s{2,}/g, " ").trim()
 }
 export function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false, showVerifiedRatings = false): ContentSection[] {
   return content
