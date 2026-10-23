@@ -4,7 +4,7 @@ import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { site, categories, toolPages, editorialLinks } from "@/lib/constants"
 import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
 import { createMetadata } from "@/lib/metadata"
-import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, getAllUseCases, getAllIndustries, getAllHubs, getAllBlogPosts, getAllResearch, getResearch, getAllStatistics, getAllGlossaryTerms } from "@/lib/content/registry"
+import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, getAllUseCases, getAllIndustries, getAllHubs, getAllBlogPosts, getAllResearch, getAllStatistics, getAllGlossaryTerms } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
 import { isRetiredComparisonSlug } from "@/lib/sitemap/retired-comparisons"
 import { REDIRECTED_ALTERNATIVE_SLUGS, REDIRECTED_BEST_SLUGS } from "@/lib/sitemap/redirected-content"
@@ -31,12 +31,6 @@ export default function SitemapPage() {
   const hubs = getAllHubs().filter(isPublished)
   const blog = getAllBlogPosts().filter(isPublished)
   const research = getAllResearch().filter(isPublished)
-  // Keep the source-audited pricing benchmark discoverable even if the bulk research
-  // registry omits it during normalization; the XML sitemap carries the same fallback.
-  const pricingBenchmark = getResearch("saas-pricing-benchmark-2026")
-  if (pricingBenchmark && isPublished(pricingBenchmark) && !research.some((item) => item.slug === pricingBenchmark.slug)) {
-    research.push(pricingBenchmark)
-  }
   const statistics = getAllStatistics().filter(isPublished)
   const glossary = getAllGlossaryTerms().filter(g => isPublished(g) && !isNoindexed("glossary", g.slug))
 
@@ -136,6 +130,9 @@ export default function SitemapPage() {
                 <Link key={b.slug} href={`/blog/${b.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{b.title}</Link>
               ))}
               <Link href="/research" className="text-sm text-primary hover:underline block mb-2 mt-4">Research Reports</Link>
+              {!research.some((r) => r.slug === "saas-pricing-benchmark-2026") && (
+                <Link href="/research/saas-pricing-benchmark-2026" className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">SaaS Pricing Benchmark 2026</Link>
+              )}
               {research.map(r => (
                 <Link key={r.slug} href={`/research/${r.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{r.title}</Link>
               ))}
