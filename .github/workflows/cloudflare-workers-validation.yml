@@ -146,7 +146,7 @@ jobs:
           fi
           curl --silent --show-error --fail "$base/research/saas-pricing-benchmark-2026" > /tmp/pilotstack-pricing-research.html
           grep -Fq 'does not publish a verified market-wide average or median' /tmp/pilotstack-pricing-research.html
-          if grep -Eiq '51% of tools use a freemium model|median SaaS starting price is \\$19\\.99' /tmp/pilotstack-pricing-research.html; then
+          if grep -Eiq '51% of tools use a freemium model|median SaaS starting price is \$19\.99' /tmp/pilotstack-pricing-research.html; then
             echo "Pricing research page rendered unsupported market-wide claims"
             exit 1
           fi
