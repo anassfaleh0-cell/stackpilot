@@ -210,9 +210,9 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                   {section.type === "list" && section.items ? (
                     <>
                       {section.body && (
-                        <p className="text-muted-foreground leading-relaxed mb-4 pl-11">{section.body}</p>
+                        <p className="text-muted-foreground leading-relaxed mb-4 pl-0 sm:pl-11">{section.body}</p>
                       )}
-                      <div className="space-y-3 pl-11">
+                      <div className="space-y-3 pl-0 sm:pl-11">
                         {section.items.map((item, j) => (
                           <div key={j} className="flex items-start gap-3 text-sm">
                             <CheckCircle2 size={16} className="text-success shrink-0 mt-0.5" />
@@ -222,7 +222,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                       </div>
                     </>
                   ) : section.type === "checklist" && (section.body || (section.items?.length ?? 0) > 0) ? (
-                    <div className="space-y-3 pl-11">
+                    <div className="space-y-3 pl-0 sm:pl-11">
                       {section.items && section.items.length > 0 ? (
                         <>
                           {section.body && (
@@ -245,7 +245,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                       )}
                     </div>
                   ) : section.type === "table" && section.columns && section.rows ? (
-                    <div className="overflow-x-auto pl-11">
+                    <div className="overflow-x-auto pl-0 sm:pl-11">
                       <table className="w-full text-sm border-collapse">
                         <thead>
                           <tr className="border-b border-border">
@@ -266,7 +266,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                       </table>
                     </div>
                   ) : (
-                    <p className="text-muted-foreground leading-relaxed pl-11">{section.body}</p>
+                    <p className="text-muted-foreground leading-relaxed pl-0 sm:pl-11">{section.body}</p>
                   )}
 
                   {/* Avoid injecting generic tips; keep guidance specific to the reviewed guide content. */}
