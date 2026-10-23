@@ -12,6 +12,7 @@ describe("review content provenance", () => {
   it("formats pricing placeholders once and preserves real recorded values with provenance", () => {
     expect(isPricingPlaceholder("Not independently verified — check official pricing")).toBe(true)
     expect(isPricingPlaceholder("Not independently verified")).toBe(true)
+    expect(isPricingPlaceholder("Verify current terms directly with the vendor")).toBe(true)
     expect(isPricingPlaceholder("Paid")).toBe(false)
     expect(getReviewPricingSummary("Not independently verified — check official pricing", "Not independently verified", false))
       .toBe("Current pricing is not independently verified; confirm plans and regional terms with the vendor.")
