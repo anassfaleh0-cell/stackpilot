@@ -109,7 +109,7 @@ async function checkRoute(pathname) {
       return
     }
     if (pathname === "/research/saas-pricing-benchmark-2026" &&
-        (!body.includes("does not publish a verified market-wide average or median") || /51% of tools use a freemium model|median SaaS starting price is \\$19\\.99/i.test(body))) {
+        (!body.includes("does not publish a verified market-wide average or median") || /51% of tools use a freemium model|median SaaS starting price is \$19\.99/i.test(body))) {
       fail("/research/saas-pricing-benchmark-2026 is missing the transparent pricing-methodology content")
       return
     }
