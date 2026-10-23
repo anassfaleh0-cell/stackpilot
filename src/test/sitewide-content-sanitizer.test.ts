@@ -1,6 +1,16 @@
 import { describe, expect, it } from "vitest"
 import {
   getAlternative,
+  getAllAlternatives,
+  getAllBest,
+  getAllBlogPosts,
+  getAllComparisons,
+  getAllGuides,
+  getAllHubs,
+  getAllIndustries,
+  getAllReviews,
+  getAllUseCases,
+  getAlternative,
   getBest,
   getBlogPost,
   getComparison,
@@ -50,6 +60,29 @@ describe("site-wide content quality gate", () => {
     ["best/best-project-management-software", getBest("best-project-management-software")],
     ["blog/software-selection", getBlogPost("ai-implementation-roi-guide")],
   ] as const
+
+  it("checks unsupported first-hand, scale, and superlative claims across the normalized editorial corpus", () => {
+    const corpus = [
+      ...getAllReviews(),
+      ...getAllComparisons(),
+      ...getAllGuides(),
+      ...getAllAlternatives(),
+      ...getAllUseCases(),
+      ...getAllIndustries(),
+      ...getAllBest(),
+      ...getAllBlogPosts(),
+      ...getAllHubs(),
+    ]
+    const offenders: string[] = []
+    for (const value of corpus) {
+      for (const text of stringsOf(value)) {
+        for (const pattern of BANNED_CLAIMS) {
+          if (pattern.test(text)) offenders.push(String((value as { slug?: string }).slug ?? "unknown") + " :: " + pattern + " :: " + text.slice(0, 120))
+        }
+      }
+    }
+    expect(offenders).toEqual([])
+  })
 
   it("does not expose unsupported first-hand or expert-testing claims", () => {
     const offenders: string[] = []
