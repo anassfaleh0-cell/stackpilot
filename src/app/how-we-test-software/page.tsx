@@ -25,7 +25,7 @@ export default function HowWeTestSoftwarePage() {
     {
       phase: "Evidence & Sourcing",
       steps: [
-        "New factual and numeric claims should be tied to a checkable source; some older stored values remain under provenance review and are not treated as verified until checked",
+        "Factual and numeric claims are treated as verified only when they are tied to a checkable source and relevant context; a stored value alone is not proof of verification",
         "Source dates and regional or plan context should be recorded when verified; a page date alone does not establish that every figure was rechecked",
         "When sources conflict, we explain the uncertainty or withhold the disputed claim until it can be resolved",
         "Certification and compliance statuses with no source are shown as unverified rather than asserted",
@@ -61,7 +61,7 @@ export default function HowWeTestSoftwarePage() {
 
   return (
     <>
-      <ArticleSchema title="How We Evaluate Software | PilotStack Process" description="PilotStack’s software evaluation criteria, evidence standards, and ongoing source-provenance audit for older ratings and numeric claims." publishedAt="2026-01-15" updatedAt="2026-10-21" author="PilotStack Team" url={`${site.url}/how-we-test-software`} keywords={["software review process", "scoring methodology", "editorial standards", "review process"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
+      <ArticleSchema title="How We Evaluate Software | PilotStack Process" description="PilotStack’s software evaluation criteria, evidence standards, reproducible scoring, and approach to source verification." publishedAt="2026-01-15" updatedAt="2026-10-23" author="PilotStack Team" url={`${site.url}/how-we-test-software`} keywords={["software review process", "scoring methodology", "editorial standards", "review process"]} mentions={[{ name: "G2", url: "https://www.g2.com" }, { name: "Capterra", url: "https://www.capterra.com" }, { name: "TrustRadius", url: "https://www.trustradius.com" }]} />
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "How We Evaluate Software", href: "/how-we-test-software" }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "How We Evaluate Software" }]} />
@@ -71,12 +71,12 @@ export default function HowWeTestSoftwarePage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Our Process</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">How We Evaluate Software</h1>
-            <p className="text-muted-foreground mb-8">Last updated: October 21, 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: October 23, 2026</p>
 
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                Our published process covers selection, sourcing, scoring, consistency, and upkeep. The rubric defines nine evaluation dimensions, but some older scores and numeric claims are still undergoing source-provenance review. A stored value or page date is not proof of verification. Unsupported claims are qualified or omitted, and commercial relationships are disclosed where applicable.
+                Our published process covers selection, sourcing, scoring, consistency, and upkeep. The rubric defines nine evaluation dimensions. A stored value or page date is not proof of verification: numeric claims require a checkable source and calculation, and unsupported claims are qualified or omitted. Commercial relationships are disclosed where applicable.
               </p>
             </div>
 

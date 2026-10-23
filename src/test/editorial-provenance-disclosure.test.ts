@@ -7,18 +7,18 @@ function readPage(relativePath: string): string {
 }
 
 describe("editorial provenance disclosures", () => {
-  it("explains the ongoing audit of legacy ratings and numeric claims", () => {
+  it("explains source provenance and evidence limits for numeric claims", () => {
     const methodology = readPage("src/app/methodology/page.tsx")
     const evaluationProcess = readPage("src/app/how-we-test-software/page.tsx")
     const about = readPage("src/app/about/page.tsx")
     const team = readPage("src/app/team/page.tsx")
     const policy = readPage("src/app/editorial-policy/page.tsx")
 
-    expect(methodology).toMatch(/source audit|undergoing a source audit|under audit/i)
-    expect(evaluationProcess).toMatch(/source-provenance review|provenance review/i)
-    expect(about).toMatch(/source audit/i)
+    expect(methodology).toMatch(/source and calculation can be checked|source provenance/i)
+    expect(evaluationProcess).toMatch(/checkable source|source verification|provenance/i)
+    expect(about).toMatch(/source and calculation can be checked|source provenance/i)
     expect(team).toMatch(/source verification|source-provenance/i)
-    expect(policy).toMatch(/source-provenance review|source audit/i)
+    expect(policy).toMatch(/source provenance and calculation can be checked|checkable source/i)
   })
 
   it("avoids blanket claims that every legacy score is already verified", () => {

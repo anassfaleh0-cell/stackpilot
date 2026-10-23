@@ -2,12 +2,12 @@ import { render, screen } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
 import { NewsletterSignup } from "@/components/newsletter/newsletter-signup"
 
-describe("newsletter signup availability", () => {
+describe("contact CTA used in place of an inactive newsletter", () => {
   it("does not collect email addresses while no mailing-list provider is configured", () => {
     render(<NewsletterSignup />)
 
-    expect(screen.getByText(/newsletter sign-up is temporarily unavailable/i)).toBeInTheDocument()
-    expect(screen.getByRole("link", { name: /contact us about updates/i })).toHaveAttribute(
+    expect(screen.getByRole("heading", { name: "Contact PilotStack" })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: "contact@pilotstack.online" })).toHaveAttribute(
       "href",
       "mailto:contact@pilotstack.online",
     )
@@ -18,8 +18,8 @@ describe("newsletter signup availability", () => {
   it("keeps the footer variant honest and compact", () => {
     render(<NewsletterSignup variant="footer" />)
 
-    expect(screen.getByRole("heading", { name: "Stay informed" })).toBeInTheDocument()
-    expect(screen.getByText(/we are not collecting email addresses here yet/i)).toBeInTheDocument()
+    expect(screen.getByRole("heading", { name: "Questions or corrections?" })).toBeInTheDocument()
+    expect(screen.getByText(/email our team/i)).toBeInTheDocument()
     expect(screen.queryByRole("textbox")).not.toBeInTheDocument()
   })
 })

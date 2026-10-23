@@ -22,12 +22,12 @@ describe("privacy and cookie disclosures", () => {
     expect(consent).toContain("prefs.analytics && prefs.advertising")
   })
 
-  it("describes planned advertising and the unavailable newsletter honestly", () => {
+  it("describes planned advertising and the newsletter status accurately", () => {
     const privacy = fs.readFileSync(path.join(root, "privacy", "page.tsx"), "utf8")
     const cookies = fs.readFileSync(path.join(root, "cookies", "page.tsx"), "utf8")
 
     expect(privacy).toContain("Google AdSense (planned)")
-    expect(privacy).toContain("Newsletter signup is currently unavailable")
+    expect(privacy).toContain("PilotStack does not currently offer newsletter subscriptions")
     expect(privacy).toContain("No mailing-list provider is currently configured")
     expect(privacy).not.toContain("We use Google AdSense to display advertisements")
     expect(privacy).not.toContain("We use a third-party email service to send newsletters")
@@ -53,7 +53,7 @@ describe("privacy and cookie disclosures", () => {
 
     expect(privacy).toContain("Cloudflare&apos;s infrastructure")
     expect(privacy).not.toContain("Vercel&apos;s infrastructure")
-    expect(terms).toContain("official social channels linked on our")
+    expect(terms).not.toContain("official social channels linked on our")
     expect(terms).toContain("mailto:contact@pilotstack.online")
     expect(terms).not.toContain("communicated via email to subscribers")
   })
@@ -73,8 +73,8 @@ describe("privacy and cookie disclosures", () => {
     const advertising = fs.readFileSync(path.join(root, "advertising-disclosure", "page.tsx"), "utf8")
 
     expect(about).toContain("independently operated")
-    expect(about).toContain("Some older numeric scores and review-count figures are still undergoing a source audit")
-    expect(editorial).toContain("Some older records remain under source audit")
+    expect(about).toContain("source and calculation can be checked")
+    expect(editorial).toContain("source provenance and calculation can be checked")
     expect(editorial).not.toContain("Every published figure traces to a source we hold")
     expect(advertising).toContain("Last updated: October 14, 2026")
     expect(advertising).not.toContain("The editorial team does not participate in advertising sales")

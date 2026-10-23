@@ -24,12 +24,12 @@ export default function EditorialPolicyPage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Editorial Standards</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Editorial Policy</h1>
-            <p className="text-muted-foreground mb-8">Last updated: October 21, 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: October 23, 2026</p>
 
             <div className="quick-answer mb-8 p-4 bg-muted-bg rounded-xl border border-border">
               <h2 className="text-lg font-semibold mb-2">Quick Answer</h2>
               <p className="text-sm text-muted-foreground">
-                PilotStack aims to separate editorial decisions from commercial relationships and disclose affiliate or advertising relationships where applicable. Our methodology explains the evidence standard, but some older numeric scores and review-count figures are still undergoing source-provenance review. A stored figure is not proof that it has been independently verified; consult the source context on each page and the methodology for current limitations.
+                PilotStack separates editorial decisions from commercial relationships and discloses affiliate or advertising relationships where applicable. Numeric scores and review-count figures are presented as verified only when their source provenance and calculation can be checked. A stored figure alone is not proof of independent verification; each page should make its evidence and limitations clear.
               </p>
             </div>
 
@@ -68,9 +68,9 @@ export default function EditorialPolicyPage() {
               <p>We keep commercial disclosures separate from the published editorial criteria. Revenue considerations are not intended to determine coverage decisions, rating determinations, or inclusion or exclusion decisions.</p>
 
               <h2>2. Content Standards</h2>
-              <p>New and updated content is expected to meet the following standards. Some older pages remain under source-provenance review and may not yet meet every evidence requirement:</p>
+              <p>All published content is expected to meet the following standards. Where evidence cannot be checked, claims are qualified or omitted rather than presented as verified:</p>
               <ul>
-                <li><strong>Accuracy:</strong> New numeric claims should be tied to a checkable source, date, and relevant context before being described as verified. Some older records remain under source audit; when a claim cannot be confirmed, we correct it, qualify it, or remove the unsupported claim rather than imply verification.</li>
+                <li><strong>Accuracy:</strong> Numeric claims should be tied to a checkable source, date, and relevant context before being described as verified. When a claim cannot be confirmed, we correct it, qualify it, or remove it rather than imply verification.</li>
                 <li><strong>Originality:</strong> Our pages are developed from the sources described in our methodology. Vendor-provided material may inform research, but we aim to add editorial context, comparison, and decision guidance rather than republish it as-is.</li>
                 <li><strong>Comprehensiveness:</strong> Reviews must address both strengths and limitations. We explicitly state who each product is best for and who should consider alternatives.</li>
                 <li><strong>Currency:</strong> Content includes publication or update dates where those fields are maintained, and older material is reviewed as part of ongoing maintenance.</li>
@@ -78,7 +78,7 @@ export default function EditorialPolicyPage() {
               </ul>
 
               <h2>3. Review Standards</h2>
-              <p>Our review framework sets a consistent standard for software research. Some older pages may not yet satisfy every evidence requirement while the source audit continues. The framework includes:</p>
+              <p>Our review framework sets a consistent standard for software research. It explains the evidence expected for each evaluation dimension and how limitations should be disclosed. The framework includes:</p>
               <ul>
                 <li>Documented source records reused consistently where available; a stored value alone is not evidence of provenance</li>
                 <li>Nine equally weighted category dimensions are the intended scoring framework; numeric scores are verified only when their source and calculation can be checked</li>

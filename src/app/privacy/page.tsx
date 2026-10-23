@@ -29,7 +29,7 @@ export default function PrivacyPage() {
             <ul>
               <li><strong>Information you provide:</strong> If you contact us, you may email contact@pilotstack.online. Please avoid including sensitive personal information in messages.</li>
               <li><strong>Information collected automatically:</strong> Depending on your consent choices and enabled services, analytics or advertising providers may process page visits, referral source, browser and device information, online identifiers, and approximate geographic region. PilotStack does not request precise location data from visitors.</li>
-              <li><strong>Information we do not request:</strong> Our forms are not designed to collect payment information, government IDs, or sensitive personal data. Please do not submit this information. If you share it inadvertently through a channel we can access, avoid sending further sensitive details and use the Contact page's official channels to request follow-up.</li>
+              <li><strong>Information we do not request:</strong> Our forms are not designed to collect payment information, government IDs, or sensitive personal data. Please do not submit this information. If you share it inadvertently through a channel we can access, avoid sending further sensitive details and email contact@pilotstack.online to request follow-up.</li>
             </ul>
 
             <h2>How We Use Your Information</h2>
