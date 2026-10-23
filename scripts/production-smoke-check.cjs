@@ -64,7 +64,7 @@ async function main() {
   }
   if (linear && !linear.error) {
     const noUnsupportedFaq = !/Yes, Linear offers deep GitHub integration|What platforms does Linear support\?/i.test(linear.body)
-    const honestScoring = linear.body.includes("An aggregate score is shown only when the underlying category ratings and calculation can be verified") &&
+    const honestScoring = linear.body.includes("No independently verified aggregate score is published for this review") &&
       !linear.body.includes("The displayed overall score is calculated from the recorded category ratings")
     report("review capability claims", noUnsupportedFaq, "unverified integration/platform FAQs are not rendered")
     report("review scoring disclosure", honestScoring, "unverified aggregate-score claims are not rendered")
