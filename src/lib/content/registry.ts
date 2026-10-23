@@ -260,6 +260,11 @@ function sanitizeEditorialBody(value: string): string {
 
 function sanitizeContentValue(value: unknown, fieldName?: string): unknown {
   if (typeof value === "string") {
+    // Identifiers and headings are not prose claims. Running the claim-removal
+    // patterns on them can erase valid slugs/titles such as "SaaS Pricing Benchmark 2026".
+    if (["title", "slug", "name", "term", "category", "reportType"].includes(fieldName || "")) {
+      return sanitizeMalformedAnchorMarkup(value).trim()
+    }
     return fieldName === "body"
       ? sanitizeEditorialBody(value)
       : sanitizeMalformedPricingText(sanitizeEditorialText(value))
