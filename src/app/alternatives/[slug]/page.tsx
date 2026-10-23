@@ -190,14 +190,21 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                 <section id="how-to-choose" className="mb-10">
                   <h2 className="text-2xl font-bold tracking-tight mb-6">How to Choose</h2>
                   <div className="space-y-3">
-                    {(alt.selectionCriteria || []).map((criteria, i) => (
-                      <div key={i} className="flex items-start gap-3 p-4 rounded-xl border border-border">
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">{i + 1}</span>
-                        <div>
-                          <p className="font-medium text-sm">{criteria}</p>
+                    {(alt.selectionCriteria || []).map((criteria, i) => {
+                      const structured = typeof criteria === "string" ? null : criteria
+                      return (
+                        <div key={i} className="flex items-start gap-3 p-4 rounded-xl border border-border">
+                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">{i + 1}</span>
+                          <div className="min-w-0">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <p className="font-medium text-sm">{structured?.factor ?? criteria}</p>
+                              {structured?.importance && <Badge variant={structured.importance === "Critical" ? "default" : "secondary"}>{structured.importance} priority</Badge>}
+                            </div>
+                            {structured?.description && <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{structured.description}</p>}
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      )
+                    })}
                   </div>
                 </section>
               )}
