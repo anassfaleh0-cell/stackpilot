@@ -96,6 +96,9 @@ export default function HomePage() {
             Commercial relationships are disclosed in our{" "}
             <Link href="/affiliate-disclosure" className="underline underline-offset-4 hover:text-primary">affiliate disclosure</Link>; they do not determine editorial assessments.
           </p>
+          <p className="mt-3 text-center text-sm text-muted-foreground">
+            Catalog counts describe coverage, not proof that every listing has been independently tested. Each profile should distinguish supported facts from details readers need to confirm with the vendor.
+          </p>
         </Container>
       </section>
 
