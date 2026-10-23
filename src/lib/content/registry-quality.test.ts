@@ -201,7 +201,6 @@ describe("content quality repairs", () => {
       expect(review?.priceRange, slug).toBeUndefined()
       expect(review?.description, slug).toMatch(/not independently verified/i)
       expect(review?.pros, slug).toHaveLength(3)
-      expect(review?.cons, slug).toHaveLength(expect.any(Number))
       expect(review?.cons?.length ?? 0, slug).toBeGreaterThanOrEqual(3)
       const content = review?.content.map(section => section.body).join(" ") ?? ""
       expect(`${review?.description} ${JSON.stringify(review?.faqs)}`).toMatch(/not independently verified/i)
