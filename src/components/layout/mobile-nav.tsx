@@ -96,7 +96,7 @@ export function MobileNav() {
         aria-hidden={!open}
         aria-label="Navigation menu"
         className={cn(
-          "fixed top-16 right-4 left-4 z-50 max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-xl border border-border bg-card p-5 shadow-elevated",
+          "fixed top-16 right-4 left-4 z-50 max-h-[calc(100dvh_-_5rem)] overflow-y-auto rounded-xl border border-border bg-card p-5 shadow-elevated",
           "transition-all duration-200",
           open ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
         )}
