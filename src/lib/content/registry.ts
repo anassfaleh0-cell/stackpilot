@@ -970,7 +970,7 @@ function sanitizeAlternativeTitle(title: string, toolName: string, count: number
 function sanitizeAlternativeDescription(description: string, toolName: string, count: number): string {
   const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
   if (cleaned.length >= 90 && !/save\s*\+|\+\/year|\btested\b/i.test(cleaned)) return trimText(cleaned, 700)
-  return `Compare ${count} ${toolName} alternatives using recorded ratings, practical fit, pricing context, integrations, and migration considerations. Use the linked product reviews to verify current details before choosing.`
+  return `Compare ${count} ${toolName} alternatives by workflow fit, information structure, collaboration, integrations, portability, and total cost. Confirm current capabilities and commercial terms with official vendor documentation before choosing.`
 }
 function buildGuideSections(guide: GuideContent): GuideContent["sections"] {
   const sections = sanitizeSections(guide.sections)
@@ -1023,23 +1023,18 @@ function buildAlternativeSections(alt: AlternativeContent): ContentSection[] {
   if (sectionWordCount(sections) >= 900) return sections
   const alternatives = Array.isArray(alt.alternatives) ? alt.alternatives : []
   const criteria = Array.isArray(alt.selectionCriteria) ? alt.selectionCriteria : []
-  const enriched = alternatives.slice(0, 8).map((item) => {
-    const review = getReview(item.slug)
-    if (!review) return item
-    const capabilities = review.features.filter((f) => f.available).slice(0, 4).map((f) => f.name).join(", ")
-    const fit = review.tagline || review.description
-    return {
-      ...item,
-      description: sanitizeUnsupportedClaims(`${review.name} is a ${review.category.toLowerCase()} option. ${fit} Recorded strengths include ${capabilities || "the capabilities listed in its review"}.`),
-    }
+  const shortlist = alternatives.slice(0, 8).map((item) => {
+    const description = sanitizeUnsupportedClaims(trimText(item.description || "Review the vendor's current documentation and test the workflow before choosing.", 420))
+    const verifiedRating = (item as typeof item & { ratingVerified?: boolean }).ratingVerified === true &&
+      typeof item.rating === "number" && Number.isFinite(item.rating)
+    return `${item.name}${verifiedRating ? ` (${item.rating}/5, verified source required)` : ""}: ${description}`
   })
-  const shortlist = enriched.map((item) => `${item.name} (${item.rating}/5): ${sanitizeUnsupportedClaims(item.description)}`)
   return [
     ...sections,
-    { title: `What to look for beyond ${alt.toolName}`, body: `A useful alternative solves the reason you are considering a change. For ${alt.toolName}, compare the shortlist against the workflow you need to replace, the integrations your team already depends on, administration effort, and total cost at your expected usage. The recorded ratings are comparison signals rather than universal rankings.`, type: "text" },
-    { title: "Shortlist and fit", body: `The alternatives recorded on this page provide a practical starting point. Read each description next to its rating and then open the linked product review before making a final choice.`, type: "list", items: shortlist },
-    { title: "Migration checks", body: `Before switching, document the data that must move, integrations that must remain operational, authentication and user-provisioning requirements, reporting continuity, and training effort. Run a representative proof-of-concept before a full migration when the data is business-critical.`, type: "text" },
-    { title: "Decision checklist", body: "Use the recorded criteria as the common scorecard for the final options.", type: "list", items: criteria.slice(0, 8).length ? criteria.slice(0, 8) : ["Core workflow fit", "Pricing and total cost of ownership", "Integrations and data portability", "Administration and adoption", "Migration effort and support"] },
+    { title: `What to look for beyond ${alt.toolName}`, body: `A useful alternative should solve the specific reason you are considering a change. For ${alt.toolName}, compare the shortlist against the workflow you need to replace, the integrations your team depends on, administration effort, information portability, and total cost at expected usage. This page does not imply that unverified ratings or feature claims have been independently validated.`, type: "text" },
+    { title: "Shortlist and fit", body: "Use these options as candidates to evaluate, not as a universal ranking. Verify current capabilities and terms from official sources and test the workflow with representative data before making a decision.", type: "list", items: shortlist },
+    { title: "Migration checks", body: "Before switching, document the data that must move, integrations that must remain operational, authentication and user-provisioning requirements, reporting continuity, and training effort. Export a representative sample and check whether attachments, links, comments, and metadata survive. Keep the source system available until the new workflow has been validated.", type: "text" },
+    { title: "Decision checklist", body: "Use a consistent scorecard for every candidate and mark untested claims as unknown.", type: "list", items: criteria.slice(0, 8).length ? criteria.slice(0, 8) : ["Core workflow fit", "Pricing and total cost of ownership", "Integrations and data portability", "Administration and adoption", "Migration effort and support"] },
   ]
 }
 export function getAlternative(slug: string): AlternativeContent | null {
