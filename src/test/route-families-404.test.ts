@@ -146,9 +146,9 @@ describe("route families", () => {
   it("keeps HTML and XML sitemap URL coverage aligned", () => {
     const xmlPaths = new Set(sitemap().map(entry => new URL(entry.url).pathname))
     const htmlHrefs = new Set(collectHrefs(SitemapPage()))
+    const canonicalPath = (pathname: string) => pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname
     const canonicalHtmlPaths = new Set([...htmlHrefs].map(canonicalPath))
     const missingFromHtml = [...xmlPaths].map(canonicalPath).filter(pathname => !canonicalHtmlPaths.has(pathname))
-    const canonicalPath = (pathname: string) => pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname
     const canonicalXmlPaths = new Set([...xmlPaths].map(canonicalPath))
     const extraHtmlLinks = [...htmlHrefs].map(canonicalPath).filter(pathname => pathname.startsWith("/") && !canonicalXmlPaths.has(pathname))
     expect(missingFromHtml, "every XML sitemap URL should be discoverable from the HTML sitemap").toEqual([])
