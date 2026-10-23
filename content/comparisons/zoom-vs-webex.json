@@ -10,277 +10,81 @@
   "winner": "Depends on use case",
   "features": [
     {
-      "name": "Free tier availability",
-      "tool1": true,
-      "tool2": true,
-      "tool1Detail": "Create a test meeting in Zoom using the account and region you expect to use. Record participant limits, meeting duration, recording options, and any host restrictions shown in the current plan terms.",
-      "tool2Detail": "Create the same test in Webex. Record participant limits, meeting duration, recording options, and any host restrictions shown for the exact service and region."
+      "name": "Meetings and participant experience",
+      "tool1": "Evaluate Zoom Meetings for the organization's typical calls",
+      "tool2": "Evaluate Webex Meetings for the same calls",
+      "tool1Detail": "Host a recurring internal meeting and a larger external meeting. Test joining from browser and mobile, screen sharing, captions, waiting-room or lobby controls, host hand-off, and recording. Record friction for both hosts and attendees and confirm limits on the plan you would buy.",
+      "tool2Detail": "Run the identical internal and external meeting scenarios in Webex. Test browser/mobile joining, sharing, captions, lobby controls, host hand-off, and recording. Compare attendee friction and the plan-specific limits rather than relying on a general feature checklist."
     },
     {
-      "name": "Entry-level pricing",
-      "tool1": "Freemium",
-      "tool2": "Freemium",
-      "tool1Detail": "Do not treat a free option as a paid entry-level price. Open Zoom's current official pricing page, identify the exact Meetings, Phone, Webinars, or Rooms product, and compare the same seat count and billing term.",
-      "tool2Detail": "Identify the specific Webex service first, then use Cisco's current official pricing or quote process. Compare equivalent seats, billing terms, taxes, and required add-ons rather than assuming product tiers are interchangeable."
+      "name": "Calling, webinars, and room devices",
+      "tool1": "Treat Phone, Webinars, and Rooms as separate scope items",
+      "tool2": "Treat Webex Calling, Events/Webinars, and room devices as separate scope items",
+      "tool1Detail": "If you need telephony, large events, or conference-room hardware, verify each product separately. Request a quote that names required regions, numbers, capacity, hardware, support, and add-ons; do not infer that a Meetings subscription includes these services.",
+      "tool2Detail": "If you need telephony, large events, or conference-room hardware, verify the exact Webex service separately. Request equivalent written scope for regions, numbers, capacity, devices, support, and add-ons; don't compare a suite quote with a Meetings-only plan."
     },
     {
-      "name": "Enterprise pricing",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "Enterprise cost depends on products, seats, security controls, support, and contract terms. Request a quote for the required scope and document which items are included versus separately licensed.",
-      "tool2Detail": "Request a Cisco/Webex quote for the same seats, compliance requirements, support level, and contract duration. Ask for line items for add-ons and any minimum commitments."
+      "name": "Administration and access",
+      "tool1": "Test the account and admin controls needed by your organization",
+      "tool2": "Test Control Hub and the admin controls for the selected Webex services",
+      "tool1Detail": "Use a test account to invite a user, assign a role, restrict a setting, change a license, and remove access. Confirm which controls are included in the intended subscription and whether your identity provider is required.",
+      "tool2Detail": "Use a test account to assign a role, change a license, restrict a setting, and remove access in the relevant Webex administration surface. Confirm service-specific controls and any identity-provider or subscription dependencies."
     },
     {
-      "name": "Annual discount",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "Compare the current monthly and annual total for the same Zoom product and seat count. Check renewal terms, cancellation rules, taxes, and whether promotional pricing changes after the first term.",
-      "tool2Detail": "Compare the current Webex quote or published annual and monthly terms for the same scope. Confirm renewal, cancellation, taxes, and any minimum commitment in writing."
+      "name": "Security and compliance evidence",
+      "tool1": "Validate security controls against your actual requirements",
+      "tool2": "Validate security controls against your actual requirements",
+      "tool1Detail": "Ask the vendor for current documentation relevant to your use case: authentication, encryption, audit events, retention, data location, incident response, and any required contractual or regulatory commitments. Do not infer compliance from a feature label alone.",
+      "tool2Detail": "Request current Cisco/Webex documentation for authentication, encryption, audit events, retention, data location, incident response, and required contractual commitments. Check the exact product and subscription; do not assume all services share the same controls."
     },
     {
-      "name": "Free trial duration",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "Check Zoom's current trial eligibility for the specific product. Record duration, features included, payment details required, and what happens when the trial ends; do not assume one product's trial applies to another.",
-      "tool2Detail": "Check Cisco's current trial or evaluation terms for the exact Webex service. Record eligibility, duration, feature scope, payment requirements, and what happens when the evaluation ends."
+      "name": "Integrations and API",
+      "tool1": "Test required integrations in the real workflow",
+      "tool2": "Test required integrations in the real workflow",
+      "tool1Detail": "List your must-have calendar, identity, messaging, CRM, phone, and recording integrations. For each, test the exact events, fields, permissions, and failure behavior; confirm whether the connection is native, third-party, or separately licensed.",
+      "tool2Detail": "Use the same integration list and test actual data flow, permissions, event coverage, and failure behavior. Confirm whether a required integration depends on Webex service, a Cisco product, a third-party connector, or a separate license."
     },
     {
-      "name": "Contract flexibility",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "Review Zoom's current order form for renewal, cancellation, seat reductions, minimum purchases, and annual commitments. Treat the signed terms as authoritative.",
-      "tool2Detail": "Review Cisco's quote and order form for renewal, cancellation, seat changes, minimums, and commitment length. Confirm terms with the reseller or vendor before purchase."
+      "name": "Recording, transcripts, and search",
+      "tool1": "Test how recordings and transcripts are captured, stored, and found",
+      "tool2": "Test how recordings and transcripts are captured, stored, and found",
+      "tool1Detail": "Run a meeting with consent and retention rules appropriate to your organization. Verify recording availability, transcript accuracy, storage location, access permissions, export, retention, and whether search or AI features require another plan.",
+      "tool2Detail": "Run the same recording and transcript scenario. Verify availability for the selected Webex service, transcript quality, storage, access, export, retention, and any plan or configuration dependencies for search or AI-assisted features."
     },
     {
-      "name": "Usage-based scaling",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "Model cost at today's host count and at a realistic growth scenario. Include webinar capacity, phone usage, storage, rooms, support, and any plan thresholds that may trigger a higher tier.",
-      "tool2Detail": "Model the same growth scenarios for the specific Webex services in scope. Include calling, meetings, events, devices, storage, support, and any thresholds or add-ons shown in the quote."
+      "name": "Reliability and support",
+      "tool1": "Check incident history and the support commitment for your plan",
+      "tool2": "Check incident history and the support commitment for your plan",
+      "tool1Detail": "Review the vendor's current service status and contractual uptime/support commitments. Test your escalation path and confirm support hours, severity definitions, response targets, and any paid support tier before rollout.",
+      "tool2Detail": "Review Cisco's current service status and the uptime/support commitments in your quote. Confirm support hours, severity definitions, response targets, and escalation path for the exact services you plan to deploy."
     },
     {
-      "name": "User role management",
-      "tool1": true,
-      "tool2": true,
-      "tool1Detail": "Test the actual admin console: invite a user, assign a role, restrict a setting, and remove access. Confirm which controls require an administrator or higher subscription tier.",
-      "tool2Detail": "Test the actual Webex Control Hub and relevant service settings: assign roles, restrict an action, invite a user, and revoke access. Verify plan and identity-provider dependencies."
+      "name": "Accessibility and language",
+      "tool1": "Test accessibility and language needs with representative users",
+      "tool2": "Test accessibility and language needs with representative users",
+      "tool1Detail": "Have users who rely on captions, keyboard navigation, screen readers, or translated interfaces complete common tasks. Check the current supported-language and accessibility documentation for the relevant clients and services.",
+      "tool2Detail": "Repeat the same tests with representative Webex clients and services. Verify current language coverage, caption behavior, keyboard navigation, and accessibility documentation rather than assuming feature parity across platforms."
     },
     {
-      "name": "Two-factor authentication",
-      "tool1": true,
-      "tool2": true,
-      "tool1Detail": "Confirm supported multi-factor methods and whether enforcement can be required for every user on the plan. If your organization uses SSO, test the identity provider's policy rather than assuming the same control exists in every Zoom account.",
-      "tool2Detail": "Confirm supported multi-factor methods and enforcement scope for the Webex account and identity setup. If SSO is required, validate the exact Cisco identity and subscription configuration with official documentation."
+      "name": "Cost and contract",
+      "tool1": "Build a like-for-like total-cost model from current vendor terms",
+      "tool2": "Build a like-for-like total-cost model from current vendor terms",
+      "tool1Detail": "Use Zoom's official pricing and a written quote for the exact products needed. Include seats, calling or event capacity, room hardware, storage, support, taxes, renewal terms, and implementation; compare equivalent billing periods.",
+      "tool2Detail": "Use Cisco's official pricing or a written Webex quote for the same products and requirements. Include seats, calling or event capacity, room hardware, storage, support, taxes, renewal terms, and implementation; compare equivalent billing periods."
     },
     {
-      "name": "Audit logging",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Confirm which events are logged, retention duration, export options, and the plan required to access audit records.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Confirm which events are logged, retention duration, export options, and the plan required to access audit records."
+      "name": "Migration and portability",
+      "tool1": "Test export and retention before committing",
+      "tool2": "Test export and retention before committing",
+      "tool1Detail": "Export representative meeting settings, recordings, transcripts, user information, and reports where available. Confirm format, retention, ownership, and what must be preserved outside the service before migration or contract end.",
+      "tool2Detail": "Run the same export and retention checks for Webex. Confirm which records can be exported, in what format, who can retrieve them, and whether retention or legal-hold requirements need separate configuration."
     },
     {
-      "name": "Mobile app",
-      "tool1": true,
-      "tool2": true,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Test the key workflow on the actual iOS and Android devices used by the team, including notifications and accessibility.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Test the key workflow on the actual iOS and Android devices used by the team, including notifications and accessibility."
-    },
-    {
-      "name": "Search functionality",
-      "tool1": true,
-      "tool2": true,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Test search using real records and older content; check filters, permissions, retention limits, and connected sources.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Test search using real records and older content; check filters, permissions, retention limits, and connected sources."
-    },
-    {
-      "name": "Template library",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Check whether the templates your team needs exist, who can maintain them, and whether sharing or administration is restricted by plan.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Check whether the templates your team needs exist, who can maintain them, and whether sharing or administration is restricted by plan."
-    },
-    {
-      "name": "Community ecosystem",
-      "tool1": true,
-      "tool2": true,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Review current official documentation, user forums, learning resources, and integration ecosystem for the workflows you need.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Review current official documentation, user forums, learning resources, and integration ecosystem for the workflows you need."
-    },
-    {
-      "name": "Onboarding experience",
-      "tool1": true,
-      "tool2": true,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Ask a new user to complete common tasks without help; note required admin steps, confusing screens, and training time.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Ask a new user to complete common tasks without help; note required admin steps, confusing screens, and training time."
-    },
-    {
-      "name": "Multi-language support",
-      "tool1": true,
-      "tool2": true,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Verify interface language, captions or transcription languages where relevant, and regional limitations for your users.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Verify interface language, captions or transcription languages where relevant, and regional limitations for your users."
-    },
-    {
-      "name": "Custom branding",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Confirm whether branding controls are available for your intended workspace or customer-facing experience and which plan includes them.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Confirm whether branding controls are available for your intended workspace or customer-facing experience and which plan includes them."
-    },
-    {
-      "name": "Bulk operations",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Test bulk actions for users, records, or settings and check permission requirements, limits, and whether an API is needed.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Test bulk actions for users, records, or settings and check permission requirements, limits, and whether an API is needed."
-    },
-    {
-      "name": "Data portability",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Export a representative sample and inspect format, attachments, metadata, permissions, and any limits or fees.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Export a representative sample and inspect format, attachments, metadata, permissions, and any limits or fees."
-    },
-    {
-      "name": "Offline mode",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Test what remains available without a connection, what is cached, and how the product behaves when connectivity returns.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Test what remains available without a connection, what is cached, and how the product behaves when connectivity returns."
-    },
-    {
-      "name": "SSO/SAML",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Check supported identity providers and protocols, provisioning options, enforcement scope, and license requirements.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Check supported identity providers and protocols, provisioning options, enforcement scope, and license requirements."
-    },
-    {
-      "name": "Encryption at rest",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Review current security documentation for the relevant data types and confirm any key-management options required by policy.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Review current security documentation for the relevant data types and confirm any key-management options required by policy."
-    },
-    {
-      "name": "Encryption in transit",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Confirm transport-protection details in current security documentation for the services and clients your team will use.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Confirm transport-protection details in current security documentation for the services and clients your team will use."
-    },
-    {
-      "name": "SOC 2 Type II",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Request current assurance documentation and verify scope, reporting period, exceptions, and which service is covered.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Request current assurance documentation and verify scope, reporting period, exceptions, and which service is covered."
-    },
-    {
-      "name": "GDPR compliance",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Review the data-processing agreement, controller/processor roles, subprocessors, data-subject request process, and transfer terms.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Review the data-processing agreement, controller/processor roles, subprocessors, data-subject request process, and transfer terms."
-    },
-    {
-      "name": "HIPAA compliance",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. If handling protected health information, confirm the exact service and plan, required agreement, and configuration with the vendor.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. If handling protected health information, confirm the exact service and plan, required agreement, and configuration with the vendor."
-    },
-    {
-      "name": "Uptime SLA",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Check whether an uptime commitment applies to the selected service and plan, including exclusions, measurement, and remedies.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Check whether an uptime commitment applies to the selected service and plan, including exclusions, measurement, and remedies."
-    },
-    {
-      "name": "Data residency",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Confirm which data types can reside in which regions, whether the option is included in the plan, and what exceptions apply.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Confirm which data types can reside in which regions, whether the option is included in the plan, and what exceptions apply."
-    },
-    {
-      "name": "Incident response",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Review public incident updates and contractual notification terms; confirm escalation paths and how customer impact is communicated.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Review public incident updates and contractual notification terms; confirm escalation paths and how customer impact is communicated."
-    },
-    {
-      "name": "Vulnerability management",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Review the security disclosure process, available assurance documents, and how critical issues and patches are communicated.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Review the security disclosure process, available assurance documents, and how critical issues and patches are communicated."
-    },
-    {
-      "name": "API access",
-      "tool1": true,
-      "tool2": true,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Check endpoint coverage, authentication, permissions, rate limits, versioning, and whether access requires a specific plan.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Check endpoint coverage, authentication, permissions, rate limits, versioning, and whether access requires a specific plan."
-    },
-    {
-      "name": "Native integrations",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. List the apps the team needs and verify current integration support, data flow, permissions, and any separate subscription cost.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. List the apps the team needs and verify current integration support, data flow, permissions, and any separate subscription cost."
-    },
-    {
-      "name": "Webhook support",
-      "tool1": true,
-      "tool2": true,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Test the needed event types, authentication, delivery retries, rate limits, and recovery from failed deliveries.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Test the needed event types, authentication, delivery retries, rate limits, and recovery from failed deliveries."
-    },
-    {
-      "name": "Auto workflow",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Build one representative automation and verify triggers, actions, conditions, usage limits, permissions, and failure handling.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Build one representative automation and verify triggers, actions, conditions, usage limits, permissions, and failure handling."
-    },
-    {
-      "name": "Reporting and analytics",
-      "tool1": null,
-      "tool2": null,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Identify required admin and team reports, then verify filters, exports, retention, and plan requirements.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Identify required admin and team reports, then verify filters, exports, retention, and plan requirements."
-    },
-    {
-      "name": "Notification system",
-      "tool1": true,
-      "tool2": true,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Test notification settings across desktop and mobile, including mentions, quiet hours, channels or DMs, and urgent alerts.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Test notification settings across desktop and mobile, including mentions, quiet hours, channels or DMs, and urgent alerts."
-    },
-    {
-      "name": "Customer support",
-      "tool1": true,
-      "tool2": true,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Confirm support channels, operating hours, response targets, escalation, and whether onboarding or technical support costs extra.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Confirm support channels, operating hours, response targets, escalation, and whether onboarding or technical support costs extra."
-    },
-    {
-      "name": "Training resources",
-      "tool1": true,
-      "tool2": true,
-      "tool1Detail": "For Zoom, test this in the relevant host or admin account and confirm whether the selected Meetings, Phone, Webinars, or Rooms product is in scope. Review current user and admin documentation and check whether tutorials or formal training cover the tasks your team needs.",
-      "tool2Detail": "For Webex, confirm the exact Webex service and subscription involved, then test both an administrator task and a normal-user task. Review current user and admin documentation and check whether tutorials or formal training cover the tasks your team needs."
-    },
-    {
-      "name": "Community support",
-      "tool1": true,
-      "tool2": true,
-      "tool1Detail": "Review the vendor's official documentation, user forums, and current learning resources for the product and plan. Treat community answers as supplemental, and verify critical guidance against official documentation. For Zoom, confirm available support channels and any plan-specific limits before purchase.",
-      "tool2Detail": "Review the vendor's official documentation, user forums, and current learning resources for the product and plan. Treat community answers as supplemental, and verify critical guidance against official documentation. For Webex, confirm available support channels and any plan-specific limits before purchase."
+      "name": "Decision and pilot plan",
+      "tool1": "Score Zoom against pre-agreed pass/fail requirements",
+      "tool2": "Score Webex against the same pre-agreed pass/fail requirements",
+      "tool1Detail": "Before the trial, define must-haves, test tasks, user roles, pass/fail criteria, and who records evidence. Mark unknowns as unknown, and separate demonstrated capabilities from vendor promises or features that require a different product.",
+      "tool2Detail": "Use the same written criteria and sample workflows for Webex. Compare outcomes, friction, security evidence, and total cost using the same scope; do not award a win based on a longer feature list or a single polished demo."
     }
   ],
   "verdict": "Zoom and Webex cover overlapping collaboration needs, but a useful decision depends on the exact products being compared: meetings, calling, webinars/events, room devices, or a broader enterprise collaboration suite. Pilot the same meeting and administration scenarios in both services, check security and retention requirements with the responsible administrator, and compare written quotes for equivalent users and add-ons. This page is decision guidance, not a claim of independent hands-on testing or a universal winner.",
@@ -400,5 +204,7 @@
     "remote-work-stack"
   ],
   "lastUpdated": "2026-10-23",
-  "wordCount": 4486
+  "wordCount": 4486,
+  "winnerVerified": false,
+  "featuresVerified": false
 }
