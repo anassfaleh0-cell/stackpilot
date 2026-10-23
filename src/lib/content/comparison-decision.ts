@@ -39,6 +39,7 @@ export function getComparisonDecision(input: ComparisonDecisionInput): Compariso
 
 /** Preserve stored comparison values while identifying data that has not been independently verified. */
 export function getComparisonFeatureDisplayValue(value: boolean | string, featuresVerified?: boolean, decisionGuide = false, featureName = ""): boolean | string {
+  void featureName
   if (typeof value === "string" && !value.trim()) return "Not recorded"
   if (decisionGuide && typeof value === "string") {
     return featuresVerified === true ? value : `${value} (recorded; not independently verified)`
