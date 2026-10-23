@@ -107,7 +107,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Blog: use publishedAt as lastModified
     ...blogPosts.map((p) => ({
       url: `${siteConfig.url}/blog/${p.slug}`,
-      lastModified: getSitemapLastModified(p.publishedAt),
+      // Prefer a real editorial update date; retain publication date for older records.
+      lastModified: getSitemapLastModified(p.updatedAt || p.publishedAt),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
