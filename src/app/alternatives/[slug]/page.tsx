@@ -19,6 +19,19 @@ import { REDIRECTED_ALTERNATIVE_SLUGS } from "@/lib/sitemap/redirected-content"
 
 import type { FAQItem } from "@/types/content"
 
+function selectionCriteriaText(criteria: unknown): string {
+  if (typeof criteria === "string") return criteria
+  if (criteria && typeof criteria === "object") {
+    const item = criteria as { factor?: unknown; importance?: unknown; description?: unknown }
+    const factor = typeof item.factor === "string" ? item.factor : ""
+    const importance = typeof item.importance === "string" ? item.importance : ""
+    const description = typeof item.description === "string" ? item.description : ""
+    const label = [factor, importance ? `Importance: ${importance}` : ""].filter(Boolean).join(" — ")
+    return [label, description].filter(Boolean).join(": ")
+  }
+  return String(criteria ?? "")
+}
+
 function isBoilerplateAlternativeCopy(value: string): boolean {
   return /leading .* platform offering competitive features|strong market presence\. here are the top alternatives worth considering|when evaluating alternatives, consider these key factors|each offers different strengths depending on your needs|common reasons include pricing, feature gaps|several alternatives offer competitive pricing|yes, some alternatives offer free tiers|check our detailed comparison for a complete pricing breakdown|most alternatives offer import tools and migration support|implementation difficulty varies|user reviews on g2 and capterra provide valuable insights|the analysis uses recorded data from real user experiences/i.test(value)
 }
@@ -194,7 +207,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                       <div key={i} className="flex items-start gap-3 p-4 rounded-xl border border-border">
                         <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">{i + 1}</span>
                         <div>
-                          <p className="font-medium text-sm">{criteria}</p>
+                          <p className="font-medium text-sm">{selectionCriteriaText(criteria)}</p>
                         </div>
                       </div>
                     ))}
