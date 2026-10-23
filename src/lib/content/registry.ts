@@ -1219,16 +1219,29 @@ function normalizeResearchContent(record: ResearchContent): ResearchContent {
         return false
       }
     })
+  const titleFromSlug = record.slug
+    .split("-")
+    .filter(Boolean)
+    .map((part) => part.length <= 3 ? part.toUpperCase() : part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ")
+  const safeTitle = typeof record.title === "string" && record.title.trim().length >= 4
+    ? record.title.trim()
+    : `${titleFromSlug || "Software"} Research Guide`
+
   if (hasCompleteSourceAudit) {
     return {
       ...record,
+      title: safeTitle,
+      description: typeof record.description === "string" && record.description.trim().length >= 40
+        ? record.description.trim()
+        : `An evidence-aware research guide to ${titleFromSlug.toLowerCase() || "software"} with source links and practical evaluation criteria.`,
       author: "PilotStack Editorial Team",
       sections: sanitizeSections(record.sections),
       faqs: sanitizeFaqs(record.faqs),
     }
   }
 
-  const subject = record.title
+  const subject = safeTitle
     .replace(/\b20\d{2}\b/g, "")
     .replace(/\s+/g, " ")
     .trim()
