@@ -8,11 +8,20 @@ describe("research source provenance", () => {
     expect(new Set(reports.map((record) => record.title)).size).toBe(reports.length)
 
     for (const report of reports) {
-      expect(report.sourceAuditComplete).toBe(true)
-      expect(report.dataSources.length).toBeGreaterThan(0)
       expect(report.keyFindings.length).toBeGreaterThanOrEqual(3)
       expect(report.sections.length).toBeGreaterThanOrEqual(3)
       expect(report.methodology.length).toBeGreaterThan(80)
+
+      if (report.editorialGuideReviewed === true) {
+        // This guide has been editorially reviewed, but its example vendor links
+        // do not substantiate market-wide pricing statistics. Keep the distinction explicit.
+        expect(report.sourceAuditComplete).toBe(false)
+        expect(report.dataSources.length).toBeGreaterThan(0)
+        expect(report.faqs?.some((faq) => /does not publish a verified market-wide average or median/i.test(faq.answer))).toBe(true)
+      } else {
+        expect(report.sourceAuditComplete).toBe(true)
+        expect(report.dataSources.length).toBeGreaterThan(0)
+      }
 
       for (const source of report.dataSources) {
         const url = new URL(source.url)
