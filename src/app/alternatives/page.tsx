@@ -4,6 +4,7 @@ import { BreadcrumbSchema, CollectionPageSchema } from "@/components/seo/json-ld
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllAlternatives } from "@/lib/content/registry"
+import { REDIRECTED_ALTERNATIVE_SLUGS } from "@/lib/sitemap/redirected-content"
 import { getPagination } from "@/lib/pagination"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
@@ -17,7 +18,7 @@ export const metadata = createMetadata({
 export const dynamic = "force-static"
 
 export default function AlternativesPage() {
-  const allAlternatives = getAllAlternatives()
+  const allAlternatives = getAllAlternatives().filter((item) => !REDIRECTED_ALTERNATIVE_SLUGS.has(item.slug))
   const pagination = getPagination({ page: 1, perPage: 24, total: allAlternatives.length })
   const pageAlternatives = allAlternatives.slice(pagination.start, pagination.end)
   const grouped: Record<string, typeof allAlternatives> = {}

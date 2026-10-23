@@ -6,6 +6,7 @@ import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/compon
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllBest } from "@/lib/content/registry"
+import { REDIRECTED_BEST_SLUGS } from "@/lib/sitemap/redirected-content"
 import { getPagination } from "@/lib/pagination"
 import Link from "next/link"
 import { Star } from "lucide-react"
@@ -20,7 +21,7 @@ export const metadata = createMetadata({
 export const dynamic = "force-static"
 
 export default function BestPage() {
-  const pages = getAllBest()
+  const pages = getAllBest().filter((item) => !REDIRECTED_BEST_SLUGS.has(item.slug))
   const pagination = getPagination({ page: 1, perPage: 24, total: pages.length })
   const pageItems = pages.slice(pagination.start, pagination.end)
 

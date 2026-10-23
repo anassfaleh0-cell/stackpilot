@@ -120,7 +120,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   const relatedLinks = getRelatedByCategory(page.category, page.slug, 4)
   const relatedBestPages = (() => {
     const sameCategory = getAllBest()
-      .filter((item) => item.category === page.category && !isNoindexed("best", item.slug))
+      .filter((item) => item.category === page.category && !isNoindexed("best", item.slug) && !REDIRECTED_BEST_SLUGS.has(item.slug))
       .sort((a, b) => a.slug.localeCompare(b.slug))
     const currentIndex = sameCategory.findIndex((item) => item.slug === page.slug)
     if (currentIndex < 0 || sameCategory.length < 2) return []

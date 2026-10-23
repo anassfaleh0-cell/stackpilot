@@ -48,7 +48,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
   const relatedLinks = getRelatedByCategory(alt.category, alt.slug, 4)
   const relatedAlternativePages = (() => {
     const sameCategory = getAllAlternatives()
-      .filter((item) => item.category === alt.category && !isNoindexed("alternatives", item.slug))
+      .filter((item) => item.category === alt.category && !isNoindexed("alternatives", item.slug) && !REDIRECTED_ALTERNATIVE_SLUGS.has(item.slug))
       .sort((a, b) => a.slug.localeCompare(b.slug))
     const currentIndex = sameCategory.findIndex((item) => item.slug === alt.slug)
     if (currentIndex < 0 || sameCategory.length < 2) return []

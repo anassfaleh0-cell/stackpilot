@@ -32,4 +32,16 @@ describe("review navigation and social metadata integrity", () => {
     expect(image).toContain("PilotStack editorial score · Internal assessment, not a third-party rating")
     expect(image).toContain("Rating not independently verified")
   })
+  it("excludes permanently redirected legacy slugs from listing and related cards", () => {
+    const alternativesIndex = read("src/app/alternatives/page.tsx")
+    const bestIndex = read("src/app/best/page.tsx")
+    const alternativesDetail = read("src/app/alternatives/[slug]/page.tsx")
+    const bestDetail = read("src/app/best/[slug]/page.tsx")
+
+    expect(alternativesIndex).toContain("REDIRECTED_ALTERNATIVE_SLUGS.has(item.slug)")
+    expect(bestIndex).toContain("REDIRECTED_BEST_SLUGS.has(item.slug)")
+    expect(alternativesDetail).toContain("!REDIRECTED_ALTERNATIVE_SLUGS.has(item.slug)")
+    expect(bestDetail).toContain("!REDIRECTED_BEST_SLUGS.has(item.slug)")
+  })
+
 })
