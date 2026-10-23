@@ -9,7 +9,7 @@ import Link from "next/link"
 
 export const metadata = createMetadata({
   title: "Our Team — Meet the PilotStack Editorial Team",
-  description: "Meet the small team behind PilotStack and read how our editorial methodology, sourcing standards, and ongoing provenance audit guide software research.",
+  description: "Learn how PilotStack is independently operated, how its publisher byline works, and how its software research handles sources and evidence limitations.",
   path: "/team",
 })
 
@@ -26,8 +26,8 @@ export default function TeamPage() {
             <Badge variant="default" className="mb-4">Our People</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Meet the PilotStack Team</h1>
             <p className="text-lg text-muted-foreground text-pretty mb-8">
-              PilotStack is maintained by a small editorial team. Editorial roles are published on our{" "}
-              <Link href="/authors">authors</Link> pages. Our methodology explains the scoring criteria and notes that some older figures are still undergoing source verification.
+              PilotStack is independently operated and uses a publisher byline rather than presenting this page as a staffed research department. Content attribution is explained on our{" "}
+              <Link href="/authors">authors</Link> page. Our methodology explains the scoring criteria and makes clear that a stored figure is verified only when its source and calculation can be checked.
             </p>
             <Card className="p-6">
               <div className="flex items-center gap-4 mb-4">

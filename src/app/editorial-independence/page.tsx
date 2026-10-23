@@ -23,7 +23,7 @@ export default function EditorialIndependencePage() {
           <div className="max-w-3xl mx-auto">
             <Badge variant="default" className="mb-4">Our Commitment</Badge>
             <h1 className="text-4xl font-bold tracking-tight mb-4">Editorial Independence</h1>
-            <p className="text-muted-foreground mb-8">Last updated: October 14, 2026</p>
+            <p className="text-muted-foreground mb-8">Last updated: October 23, 2026</p>
 
             <div className="prose prose-slate max-w-none">
               <p className="text-lg text-muted-foreground mb-6">
@@ -68,9 +68,9 @@ export default function EditorialIndependencePage() {
               <p>Commercial relationships are intended to remain separate from editorial scoring and conclusions. Our full <a href="/affiliate-disclosure">Affiliate Disclosure</a> and <a href="/advertising-disclosure">Advertising Disclosure</a> provide detailed information.</p>
 
               <h2>Accountability</h2>
-              <p>We welcome scrutiny of our editorial independence. If you believe any content on PilotStack has been influenced by commercial relationships, please report it immediately to <strong>editorial@pilotstack.online</strong>. We review reported concerns and correct the record when warranted.</p>
+              <p>We welcome scrutiny of our editorial independence. If you believe any content on PilotStack has been influenced by commercial relationships, please report it by emailing <strong>contact@pilotstack.online</strong>. We review reported concerns and correct the record when warranted.</p>
 
-              <p className="text-sm text-muted-foreground mt-8">For questions about editorial independence, contact <strong>editorial@pilotstack.online</strong>.</p>
+              <p className="text-sm text-muted-foreground mt-8">For questions about editorial independence, contact <strong>contact@pilotstack.online</strong>.</p>
             </div>
           </div>
         </Container>

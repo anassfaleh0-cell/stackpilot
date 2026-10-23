@@ -63,7 +63,7 @@ export default function AuthorsPage() {
             <div className="mt-10 p-6 rounded-xl bg-muted-bg border border-border">
               <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-2">How we score</h2>
               <p className="text-sm text-muted-foreground">
-                The published methodology explains how the overall editorial score is calculated from nine recorded category scores. Source coverage and freshness can vary by product, and a recorded score is not a third-party user-review average or proof of independent live-product trials.{" "}
+                The published rubric describes nine editorial rating dimensions. A score is shown as verified only when its inputs and calculation can be checked; recorded values are not third-party user-review averages or proof of independent live-product trials.{" "}
                 <Link href="/methodology" className="text-primary hover:underline">Read the full methodology</Link>
               </p>
             </div>
