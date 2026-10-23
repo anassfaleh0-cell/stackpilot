@@ -204,17 +204,17 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 <h2 className="text-2xl font-bold tracking-tight mb-4">Third-Party Reviews</h2>
                 <p className="text-sm text-muted-foreground mb-4">Check current, independent user feedback on G2, Capterra, and TrustRadius before deciding. Third-party review totals and scores change over time and should be verified on the source platforms.</p>
                 <div className="flex flex-wrap gap-3">
-                  <a href={`https://www.g2.com/products/${tool.slug}/review`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent(`site:g2.com/products ${tool.name} reviews`)}`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                    Read G2 reviews
+                    Find G2 reviews
                   </a>
-                  <a href={`https://www.capterra.com/p/${tool.slug}/`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent(`site:capterra.com ${tool.name} reviews`)}`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                    Read Capterra reviews
+                    Find Capterra reviews
                   </a>
-                  <a href={`https://www.trustradius.com/products/${tool.slug}/reviews`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
+                  <a href={`https://www.google.com/search?q=${encodeURIComponent(`site:trustradius.com ${tool.name} reviews`)}`} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card hover:bg-muted-bg h-8 px-3 text-xs font-medium transition-colors">
                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-                    Read TrustRadius reviews
+                    Find TrustRadius reviews
                   </a>
                 </div>
               </section>
