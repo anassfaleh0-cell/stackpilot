@@ -20,7 +20,7 @@ import { REDIRECTED_ALTERNATIVE_SLUGS } from "@/lib/sitemap/redirected-content"
 import type { FAQItem } from "@/types/content"
 
 function isBoilerplateAlternativeCopy(value: string): boolean {
-  return /leading .* platform offering competitive features|strong market presence\. here are the top alternatives worth considering|when evaluating alternatives, consider these key factors|each offers different strengths depending on your needs|several alternatives offer competitive pricing|most alternatives offer import tools and migration support|implementation difficulty varies|user reviews on g2 and capterra provide valuable insights/i.test(value)
+  return /leading .* platform offering competitive features|strong market presence\. here are the top alternatives worth considering|when evaluating alternatives, consider these key factors|each offers different strengths depending on your needs|common reasons include pricing, feature gaps|several alternatives offer competitive pricing|yes, some alternatives offer free tiers|check our detailed comparison for a complete pricing breakdown|most alternatives offer import tools and migration support|implementation difficulty varies|user reviews on g2 and capterra provide valuable insights|the analysis uses recorded data from real user experiences/i.test(value)
 }
 
 function alternativeDescription(item: { slug: string; description: string }): string {
@@ -123,20 +123,20 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Alternatives", href: "/alternatives" }, { name: alt.title, href: `/alternatives/${slug}` }]} />
       <CollectionPageSchema name={alt.title} description={pageDescription} url={`${site.url}/alternatives/${slug}`} />
       <ItemListSchema items={visibleAlternatives.map(a => ({ name: a.name, url: `${site.url}/reviews/${a.slug}` }))} url={`${site.url}/alternatives/${slug}`} />
-      <WebPageSchema name={alt.title} description={alt.description} url={`${site.url}/alternatives/${slug}`} dateModified={alt.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: visibleAlternatives.map((a, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: a.name, url: `${site.url}/reviews/${a.slug}`, category: getReview(a.slug)?.category || alt.category, description: a.description }) })) }} />
+      <WebPageSchema name={alt.title} description={pageDescription} url={`${site.url}/alternatives/${slug}`} dateModified={alt.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: visibleAlternatives.map((a, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: a.name, url: `${site.url}/reviews/${a.slug}`, category: getReview(a.slug)?.category || alt.category, description: a.description }) })) }} />
       <ArticleSchema
         title={alt.title}
-        description={alt.description}
+        description={pageDescription}
         publishedAt={alt.lastUpdated}
         updatedAt={alt.lastUpdated}
         author="PilotStack Team"
         url={`${site.url}/alternatives/${slug}`}
         wordCount={
-          alt.description.split(/\s+/).length +
-          (alt.alternatives || []).reduce((n, x) => n + x.description.split(/\s+/).length, 0) +
+          pageDescription.split(/\s+/).length +
+          visibleAlternatives.reduce((n, x) => n + x.description.split(/\s+/).length, 0) +
           (alt.selectionCriteria || []).join(" ").split(/\s+/).filter(Boolean).length +
-          (alt.sections || []).reduce((n, x) => n + String(x.body || "").split(/\s+/).length + (x.items || []).join(" ").split(/\s+/).filter(Boolean).length, 0) +
-          (alt.faqs || []).reduce((n, x) => n + x.question.split(/\s+/).length + x.answer.split(/\s+/).length, 0)
+          visibleSections.reduce((n, x) => n + String(x.body || "").split(/\s+/).length + (x.items || []).join(" ").split(/\s+/).filter(Boolean).length, 0) +
+          visibleFaqs.reduce((n, x) => n + x.question.split(/\s+/).length + x.answer.split(/\s+/).length, 0)
         }
         category={alt.category}
       />
