@@ -55,6 +55,31 @@
       "title": "Plan ongoing administration and exit",
       "body": "Assign responsibility for user access, configuration changes, integrations, renewal dates, vendor reviews, and periodic data exports. Document how to revoke access, recover from a service outage, and export or delete data when switching products. Schedule a post-launch review to compare results with the baseline and decide which improvements are justified by evidence.",
       "type": "text"
+    },
+    {
+      "title": "Create a cutover checklist",
+      "body": "List the final data export, import completion, reconciliation checks, permission review, integration tests, user communications, support coverage, and rollback decision owner. Specify who gives the go/no-go approval and what conditions stop the launch. Keep the source system read-only or otherwise recoverable until the data owner confirms the new system is complete and users can perform critical work.",
+      "type": "text"
+    },
+    {
+      "title": "Handle change requests deliberately",
+      "body": "During implementation, new feature requests can expand scope and delay launch. Record each request, the problem it solves, the users affected, the cost or risk, and whether it is required for the initial release. Separate launch blockers from improvements that can wait. Review scope changes with the business owner and preserve a clear record of why a request was accepted or deferred.",
+      "type": "text"
+    },
+    {
+      "title": "Review outcomes after launch",
+      "body": "Schedule follow-up reviews after users have had time to complete real work. Compare the agreed measures with the baseline, review recurring support issues, check permission and integration health, and confirm data quality. Assign each problem an owner and due date. Keep a short improvement backlog and avoid adding automation until the underlying process and data are stable.",
+      "type": "text"
+    },
+    {
+      "title": "Keep a decision and configuration log",
+      "body": "Record material choices about roles, fields, statuses, automation, integrations, and data mapping, including who approved each choice and why. Store configuration exports or screenshots where practical and note the version or date. This log helps diagnose unexpected behavior, onboard a new administrator, and reproduce the setup in a test environment. Avoid storing passwords or API secrets in the log; use the organization's approved secret-management process.",
+      "type": "text"
+    },
+    {
+      "title": "Prepare support for the first weeks",
+      "body": "Before launch, publish the support channel, escalation path, known limitations, and a simple way to report problems. Review incoming questions frequently during the initial rollout and distinguish training gaps from product defects or process problems. Share fixes with all affected users and update documentation when the workflow changes. Keep an owner assigned to unresolved issues so early feedback does not disappear after the implementation team moves on.",
+      "type": "text"
     }
   ],
   "author": "Marcus Rivera",
