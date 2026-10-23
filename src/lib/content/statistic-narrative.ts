@@ -10,7 +10,7 @@ export function getSafeStatisticNarrative(
   if (/market size/i.test(sectionTitle)) {
     return [
       `No market-size figure is published here as verified for ${subject} software. Estimates can differ because one report may count software subscriptions while another includes advertising spend, services, implementation, or adjacent categories.`,
-      "Before comparing a number, record the publisher, report title, publication date, geography, currency, forecast period, and the exact market definition. Prefer the original report over a secondary article that repeats a number without its methodology.",
+      "Before comparing a number, record the geography, currency, and publication date, alongside the publisher, report title, forecast period, and exact market definition. Prefer the original report over a secondary article that repeats a number without its methodology.",
       "For a buying decision, treat market size as context rather than proof that a product will fit. Translate the category into the actual capabilities, buyer segment, and use case your team needs."
     ].join("\n")
   }
