@@ -80,9 +80,11 @@ export function stripUnverifiedPriceClaims(value: string): string {
   const sentences = raw.split(/(?<=[.!?])\s+|\n+/).map((sentence) => sentence.trim()).filter(Boolean)
   const safeSentences = sentences.filter((sentence) => !priceOrPlanClaim.test(sentence))
   if (safeSentences.length) return safeSentences.join(" ").replace(/\s{2,}/g, " ").trim()
-  return priceOrPlanClaim.test(raw) ? "Check the vendor's official pricing page for current plan and trial terms." : raw
+  if (!priceOrPlanClaim.test(raw)) return raw
+  if (/\bfree trial\b/i.test(raw)) return "Trial availability not independently verified"
+  if (/\b(?:free|freemium|paid|enterprise)\s+(?:plan|tier)\b/i.test(raw)) return "Plan availability not independently verified"
+  return "Plan pricing not independently verified"
 }
-
 export function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false, showVerifiedRatings = false): ContentSection[] {
   return content
     .filter((section) => {
