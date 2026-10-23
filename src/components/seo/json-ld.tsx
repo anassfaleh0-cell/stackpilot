@@ -494,11 +494,11 @@ export function ItemListSchema({ items, url }: { items: { name: string; url: str
   return ld(schema, "ld-item-list")
 }
 
-export function HowToSchema({ name, description, steps }: { name: string; description: string; steps: { name: string; text: string }[] }) {
+export function HowToSchema({ name, description, steps, url }: { name: string; description: string; steps: { name: string; text: string }[]; url?: string }) {
   const schema = clean({
     "@context": ctx,
     "@type": "HowTo",
-    "@id": `${site.url}/#howto`,
+    "@id": `${url || site.url}#howto`,
     name,
     description,
     step: steps.map((s, i) => ({
