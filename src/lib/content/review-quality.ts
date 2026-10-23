@@ -86,6 +86,8 @@ export function stripUnverifiedPriceClaims(value: string): string {
 export function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false, showVerifiedRatings = false): ContentSection[] {
   // Keep recorded sections and scores visible. Provenance is handled by the page UI;
   // price claims are annotated rather than silently removed.
+  void showVerifiedPricing
+  void showVerifiedRatings
   return content
     .filter((section) => section.type !== "diagram" || ["implementation-flow", "pricing-ladder", "feature-radar"].includes(section.body))
     .map((section) => ({
