@@ -1065,7 +1065,11 @@ function buildAlternativeSections(alt: AlternativeContent): ContentSection[] {
     { title: `What to look for beyond ${alt.toolName}`, body: `A useful alternative should solve the specific reason you are considering a change. For ${alt.toolName}, compare the shortlist against the workflow you need to replace, the integrations your team depends on, administration effort, information portability, and total cost at expected usage. This page does not imply that unverified ratings or feature claims have been independently validated.`, type: "text" },
     { title: "Shortlist and fit", body: "Use these options as candidates to evaluate, not as a universal ranking. Verify current capabilities and terms from official sources and test the workflow with representative data before making a decision.", type: "list", items: shortlist },
     { title: "Migration checks", body: "Before switching, document the data that must move, integrations that must remain operational, authentication and user-provisioning requirements, reporting continuity, and training effort. Export a representative sample and check whether attachments, links, comments, and metadata survive. Keep the source system available until the new workflow has been validated.", type: "text" },
-    { title: "Decision checklist", body: "Use a consistent scorecard for every candidate and mark untested claims as unknown.", type: "list", items: criteria.slice(0, 8).length ? criteria.slice(0, 8) : ["Core workflow fit", "Pricing and total cost of ownership", "Integrations and data portability", "Administration and adoption", "Migration effort and support"] },
+    { title: "Decision checklist", body: "Use a consistent scorecard for every candidate and mark untested claims as unknown.", type: "list", items: criteria.slice(0, 8).length
+      ? criteria.slice(0, 8).map((criterion) => typeof criterion === "string"
+          ? criterion
+          : `${criterion.factor} (${criterion.importance} priority): ${criterion.description}`)
+      : ["Core workflow fit", "Pricing and total cost of ownership", "Integrations and data portability", "Administration and adoption", "Migration effort and support"] },
   ]
 }
 export function getAlternative(slug: string): AlternativeContent | null {
