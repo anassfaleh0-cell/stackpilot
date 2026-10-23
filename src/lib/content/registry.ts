@@ -1195,6 +1195,23 @@ function researchFocus(subject: string): { metrics: string; questions: string } 
 
 function normalizeResearchContent(record: ResearchContent): ResearchContent {
   const sources = record.dataSources || []
+  if (record.editorialGuideReviewed === true) {
+    const reviewed: ResearchContent = {
+      ...record,
+      author: "PilotStack Editorial Team",
+      updatedAt: record.updatedAt || "2026-10-23",
+      sections: sanitizeSections(record.sections),
+      faqs: sanitizeFaqs(record.faqs),
+    }
+    const wordSource = [
+      reviewed.title, reviewed.description, reviewed.methodology,
+      ...reviewed.keyFindings,
+      ...reviewed.sections.flatMap((section) => [section.title, section.body || "", ...(section.items || []), ...(section.columns || []), ...(section.rows || []).flat()]),
+      ...(reviewed.faqs || []).flatMap((faq) => [faq.question, faq.answer]),
+    ].join(" ").replace(/<[^>]*>/g, " ")
+    const wordCount = wordSource.split(/\\s+/).filter(Boolean).length
+    return { ...reviewed, readingTime: Math.max(3, Math.ceil(wordCount / 200)) }
+  }
   const hasCompleteSourceAudit = record.sourceAuditComplete === true &&
     sources.length > 0 &&
     sources.every((source) => {
