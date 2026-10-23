@@ -110,6 +110,12 @@ const GENERIC_BOILERPLATE_PATTERNS = [
 
 const UNSUPPORTED_CLAIM_PATTERNS = [
   // Remove unsupported numeric product claims and pseudo-research metrics from legacy editorial copy.
+  // The corpus does not consistently retain primary-source citations for these figures, so keep the claim out rather than laundering it into a placeholder.
+  /\b\d{1,3}(?:\.\d+)?\s*%(?:\s|[.,;:!?]|$)/i,
+  /\b\d[\d,]*(?:\.\d+)?\s*(?:million|billion|thousand)\b/i,
+  /\b\d[\d,]*(?:\.\d+)?\s+(?:weekly active users|monthly active users|customers|employees|downloads|integrations|templates|workflows|companies|organizations|teams)\b/i,
+  /\b(?:saves?|reduc(?:es|ed|ing)|improv(?:es|ed|ing)|increas(?:es|ed|ing))\b[^.!?]{0,120}\b\d[\d,.]*(?:%|\s+hours?|\s+minutes?|\s+seconds?)\b/i,
+  /\b(?:MMLU|USMLE|LSAT|benchmark|accuracy|hallucination rate)\b[^.!?]{0,120}\b\d/i,
   /\b\d+(?:,\d{3})*(?:\+| percent|%)?\s+(?:apps|members|articles|help articles|templates|customers|users|integrations|pages|workspaces|tools)\b/i,
   /\b\d(?:\.\d)?\s*\/\s*5\b[^.!?]{0,180}\b(?:rating|rated|score|reviews?|features?|performance|support|ease of use|value)\b/i,
   /\b(?:rating|rated|score|average rating|user reviews?)\b[^.!?]{0,100}\b\d(?:\.\d)?\s*\/\s*5\b/i,
