@@ -153,3 +153,7 @@ jobs:
           fi
           echo "PASS live review content checks: Xero and Notion"
           node scripts/production-smoke-check.cjs
+
+      - name: Verify live internal links and broken targets after deployment
+        timeout-minutes: 12
+        run: timeout 600s env SITE_URL=https://pilotstack.online npm run seo:links

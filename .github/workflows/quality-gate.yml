@@ -102,6 +102,6 @@ jobs:
           fi
           node scripts/route-smoke-check.js
 
-      - name: Live internal-link and broken-target audit
-        run: timeout 300s env SITE_URL=https://pilotstack.online npm run seo:links
+      # Live link audit runs after deployment. Before deployment, pilotstack.online can
+      # still serve the previous commit, so making it a blocking gate creates a circular dependency.
         timeout-minutes: 6
