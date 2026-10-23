@@ -76,7 +76,7 @@ const GENERATED_REVIEW_SECTION_PATTERNS = [
 export function isPricingPlaceholder(value: unknown): boolean {
   const text = typeof value === "string" ? value.trim() : ""
   if (!text) return true
-  return /^(?:not independently verified(?:\\b.*)?|not verified|check (?:the )?official pricing|pricing (?:is )?not recorded|not recorded|unknown|n\\/?a|none)$/i.test(text)
+  return /^(?:not independently verified(?:\b.*)?|not verified|check (?:the )?official pricing|pricing (?:is )?not recorded|not recorded|unknown|n\/?a|none)$/i.test(text)
 }
 
 export function getReviewPricingSummary(priceRange?: string, pricing?: string, verified = false): string {
