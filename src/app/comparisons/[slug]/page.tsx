@@ -72,7 +72,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
 
   // Only boolean availability fields are scoreable. Text values such as "Paid" or "Custom"
   // are descriptions, not truthy feature wins.
-  const scoredFeatures = cmp.featuresVerified === true ? cmp.features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean") : []
+  const scoredFeatures = cmp.features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean")
   const t1Score = scoredFeatures.filter((f) => f.tool1 === true).length
   const t2Score = scoredFeatures.filter((f) => f.tool2 === true).length
   const t1Pct = scoredFeatures.length ? Math.round((t1Score / scoredFeatures.length) * 100) : null
@@ -206,8 +206,8 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                   )}
                   <div className="text-xl font-bold mb-2">{tool.name}</div>
                   <div className="text-3xl font-bold text-primary mb-1">{tool.score === null ? "—" : `${tool.score}%`}</div>
-                  <div className="text-xs text-muted-foreground mb-3">{tool.score === null ? (cmp.decisionGuide ? "Workflow guidance; no scored winner" : cmp.featuresVerified === true ? "No comparable availability data" : "Feature-source audit pending") : `Availability across ${scoredFeatures.length} verified boolean checks`}</div>
-                  {tool.score !== null && <ScoreBar score={tool.score} max={100} className="mb-3" />}
+                  <div className="text-xs text-muted-foreground mb-3">{tool.score === null ? (cmp.decisionGuide ? "Workflow guidance; no scored winner" : "No comparable availability data") : cmp.featuresVerified === true ? `Availability across ${scoredFeatures.length} verified boolean checks` : `Recorded availability across ${scoredFeatures.length} boolean checks; verification pending`}</div>
+                  {tool.score !== null && <><ScoreBar score={tool.score} max={100} className="mb-3" /><p className="text-xs text-muted-foreground">This is a calculation from recorded comparison fields, not a product-quality rating. {cmp.featuresVerified === true ? "Source status is marked verified." : "Underlying values are not independently verified."}</p></>}
                   <Link
                     href={`/reviews/${tool.slug}`}
                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-transparent hover:bg-muted-bg h-9 px-4 text-xs font-medium transition-all duration-200 mt-1"
