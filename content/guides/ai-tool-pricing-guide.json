@@ -49,6 +49,10 @@
     {
       "title": "Control costs after rollout",
       "body": "Assign an owner to review usage and billing after launch. Set budget alerts where available, review unusually high consumption, and record which workflows generate value. Establish a process for changing models or providers only after a small quality and cost test. Keep prompts, model settings, and evaluation examples versioned so a change in output quality can be detected. If costs are higher than expected, check for repeated retries, unnecessarily long context, duplicate processing, and tasks that do not need an AI model at all."
+    },
+    {
+      "title": "Account for model and vendor changes",
+      "body": "The lowest-cost option today may not remain the lowest-cost option after model updates, plan changes, or shifts in usage. Keep a small, representative evaluation set and rerun it when changing models or providers. Compare output quality, latency, error correction, and total spend on the same tasks. Review official release notes and pricing terms before changing production workflows, and keep a fallback option for tasks that must continue if a capability or quota changes."
     }
   ],
   "author": "Marcus Rivera",
