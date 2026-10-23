@@ -61,7 +61,8 @@ jobs:
       - name: SEO health audit
         run: npm run seo:audit
 
-      - name: Production endpoint smoke check
+      - name: Pre-deploy live endpoint smoke check (diagnostic; post-deploy workflow is authoritative)
+        continue-on-error: true
         run: npm run seo:smoke
         env:
           SITE_URL: https://pilotstack.online
