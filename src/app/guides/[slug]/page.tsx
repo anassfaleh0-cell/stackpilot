@@ -82,10 +82,12 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
 
   const faqs = deriveGuideFaqs(guide)
   const keyTakeaways = getGuideKeyTakeaways(guide.sections)
+  const isHowToGuide = /^(how to|step[- ]by[- ]step)\b/i.test(guide.title.trim())
 
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Guides", href: "/guides" }, { name: guide.title, href: `/guides/${slug}` }]} />
+      {isHowToGuide && (
       <HowToSchema
         name={guide.title}
         description={guide.description}
@@ -95,6 +97,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           text: [section.body, ...(section.items ?? []), ...(section.columns ?? []), ...((section.rows ?? []).flat())].filter(Boolean).join(" "),
         }))}
       />
+      )}
       <ArticleSchema title={guide.title} description={guide.description} updatedAt={guide.lastUpdated} author={guide.author} url={`${site.url}/guides/${slug}`} wordCount={[guide.title, guide.description, ...guide.sections.flatMap((section) => [section.title, section.body, ...(section.items ?? []), ...(section.columns ?? []), ...((section.rows ?? []).flat())]), ...faqs.flatMap((faq) => [faq.question, faq.answer])].join(" ").trim().split(/\s+/).filter(Boolean).length} category={guide.category} keywords={[guide.category, "software guide", guide.title, "buying guide", "software selection"].filter(Boolean)} mentions={guide.relatedTools.length > 0 ? guide.relatedTools.map(t => ({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}` })) : undefined} />
       <FAQSchema
         questions={
