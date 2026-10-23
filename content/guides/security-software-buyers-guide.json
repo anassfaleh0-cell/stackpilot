@@ -75,6 +75,16 @@
       "title": "Plan an exit and recovery test",
       "body": "Before rollout, identify how to export configurations, logs, policies, and audit records, and how long the export remains available after cancellation. Test account recovery and the documented response to a vendor outage. Maintain independent backups and procedures for critical systems. Record the owner, test date, result, and follow-up actions so that resilience is checked rather than assumed.",
       "type": "text"
+    },
+    {
+      "title": "Distinguish product evidence from compliance claims",
+      "body": "When a vendor claims a certification or compliance alignment, ask for the current report or certificate, its scope, the covered product and service, the issuing body, and the relevant dates. Confirm whether subcontractors or regional deployments are included. A certification for one part of a company does not automatically cover every feature or customer configuration. Map the evidence to your own control requirements and keep any remaining gap documented for the security owner.",
+      "type": "text"
+    },
+    {
+      "title": "Define success before rollout",
+      "body": "Choose a small set of measures that reflect the risk the tool is intended to reduce, such as coverage of required devices, time to investigate a priority alert, number of unowned alerts, or success of a recovery test. Record the baseline and measurement method before deployment. Review results after the pilot and again after configuration changes. Do not use a vendor's headline detection or prevention statistic as a substitute for evidence from your own environment.",
+      "type": "text"
     }
   ],
   "lastUpdated": "2026-10-23",
