@@ -134,7 +134,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 )}
               </div>
               {hasStoredEditorialRating && (
-                <p className="text-xs text-muted-foreground mb-3">This is a PilotStack editorial score, not a third-party review aggregate. {hasEditorialRating ? "The score has been verified against the site's current editorial record." : "The stored score is shown for transparency but has not been independently revalidated; use the criteria and methodology below before relying on it."}</p>
+                <p className="text-xs text-muted-foreground mb-3">This is a PilotStack editorial score; this is PilotStack's assessment, not a third-party review aggregate. {hasEditorialRating ? "The score has been verified against the site's current editorial record." : "The stored score is shown for transparency but has not been independently revalidated; use the criteria and methodology below before relying on it."}</p>
               )}
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-1">
                 <span className="flex items-center gap-1">
