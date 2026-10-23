@@ -11,9 +11,9 @@
  */
 const SITE_URL = (process.env.SITE_URL || "https://pilotstack.online").replace(/\/+$/, "")
 const SITE_ORIGIN = new URL(SITE_URL).origin
-const CONCURRENCY = Math.max(1, Math.min(8, Number(process.env.LINK_AUDIT_CONCURRENCY) || 4))
-const REQUEST_TIMEOUT_MS = 20000
-const MAX_TRANSIENT_RETRIES = 3
+const CONCURRENCY = Math.max(1, Math.min(4, Number(process.env.LINK_AUDIT_CONCURRENCY) || 2))
+const REQUEST_TIMEOUT_MS = 25000
+const MAX_TRANSIENT_RETRIES = 5
 const TRANSIENT_STATUSES = new Set([429, 500, 502, 503, 504])
 
 function normalizePath(pathname) {
@@ -73,7 +73,7 @@ async function fetchWithTimeout(url, options = {}) {
       lastError = error
       if (attempt === MAX_TRANSIENT_RETRIES) throw error
     }
-    await new Promise((resolve) => setTimeout(resolve, 400 * (2 ** attempt)))
+    await new Promise((resolve) => setTimeout(resolve, 800 * (2 ** attempt)))
   }
   throw lastError ?? new Error(`Request failed after retries: ${url}`)
 }
