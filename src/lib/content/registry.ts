@@ -119,6 +119,12 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
   /\b\d+(?:,\d{3})*(?:\+| percent|%)?\s+(?:apps|members|articles|help articles|templates|customers|users|integrations|pages|workspaces|tools)\b/i,
   /\b\d(?:\.\d)?\s*\/\s*5\b[^.!?]{0,180}\b(?:rating|rated|score|reviews?|features?|performance|support|ease of use|value)\b/i,
   /\b(?:rating|rated|score|average rating|user reviews?)\b[^.!?]{0,100}\b\d(?:\.\d)?\s*\/\s*5\b/i,
+  // Suppress version-specific AI capability and plan-limit claims when the page has no
+  // source-backed claim record. Model names alone are fine; unsupported performance or
+  // entitlement promises are not.
+  /\b(?:GPT-\d+(?:\.\d+)?|DALL[- ]?E\s*\d(?:\.\d+)?|Claude\s+\d(?:\.\d+)?(?:\s+[A-Za-z]+)?|Gemini\s+\d(?:\.\d+)?)[^.!?]{0,180}\b(?:delivers?|provides?|offers?|has|features?|with)\b[^.!?]{0,140}\b(?:near[- ]instant|vastly improved|improved reasoning|improved accuracy|higher accuracy|more accurate|faster|strict daily usage caps?|unlimited|guaranteed)\b/i,
+  /\b(?:free tier|free plan)\b[^.!?]{0,120}\b(?:limited to|includes only|restricted to|caps? at)\b[^.!?]{0,100}\b(?:GPT|Claude|Gemini|model|daily usage|requests? per day|messages? per day)\b/i,
+  /\b(?:enterprise[- ]grade|bank[- ]grade)\s+(?:security|reliability|protection|compliance)\b[^.!?]{0,100}\b(?:SOC ?2|ISO ?27001|HIPAA|FedRAMP|PCI DSS|certification|certified|guaranteed)\b/i,
   /\b(?:response time|response SLA|respond within|support response|support quality)\b[^.!?]{0,140}\b\d+\s*(?:[-–]\s*\d+)?\s*(?:hours?|minutes?|days?)\b/i,
   /\b(?:at)?pricing not independently verified\s*[-–:]\s*\$?\s*\d[\d,]*(?:\/user\/month)?/i,
   /\b(?:best|most flexible|leading|default) choice\b[^.!?]{0,160}\b(?:available|platform|software|workspace)\b/i,
