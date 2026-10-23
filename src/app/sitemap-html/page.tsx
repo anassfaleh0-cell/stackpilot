@@ -30,7 +30,7 @@ export default function SitemapPage() {
   const industries = getAllIndustries().filter(isPublished)
   const hubs = getAllHubs().filter(isPublished)
   const blog = getAllBlogPosts().filter(isPublished)
-  const research = getAllResearch().filter(isPublished)
+  const research = getAllResearch().filter(r => isPublished(r) && typeof r.slug === "string" && r.slug.trim().length > 0)
   const statistics = getAllStatistics().filter(isPublished)
   const glossary = getAllGlossaryTerms().filter(g => isPublished(g) && !isNoindexed("glossary", g.slug))
 
