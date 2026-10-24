@@ -51,6 +51,21 @@
       "title": "Implementation checklist",
       "body": "Assign an owner to the measurement plan, maintain a change log, test after site releases, audit access periodically and document key reports. Export the configuration and event definitions so another analyst can maintain the implementation.",
       "type": "text"
+    },
+    {
+      "title": "Example measurement plan",
+      "body": "For a lead-generation site, define `form_start`, `form_submit` and a confirmed success event, along with source/medium and page context where appropriate. Specify how duplicate submissions, internal traffic and test environments are handled. Keep a data dictionary with event meaning, owner and release date so analysts do not reinterpret the same event differently.",
+      "type": "text"
+    },
+    {
+      "title": "Troubleshooting checklist",
+      "body": "If a conversion count changes unexpectedly, check tag firing, consent state, event names, filters, cross-domain settings, attribution windows and the date range before concluding that business performance changed. Compare a controlled test journey with the collected data and document the exact configuration version. Avoid sending emails, phone numbers or other sensitive values in event parameters.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Keep the measurement plan, access list, retention choices, data-sharing settings and key report definitions in one place. Assign an owner for tracking changes and a review after material site releases. The platform is useful only when the organization can explain how data was collected and reproduce the report used for a decision.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -153,5 +168,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 220
+  "wordCount": 378
 }
