@@ -21,6 +21,13 @@ describe("editorial provenance disclosures", () => {
     expect(policy).toMatch(/source provenance and calculation can be checked|checkable source/i)
   })
 
+  it("does not render stored numeric scores unless the review marks them verified", () => {
+    const reviewPage = readPage("src/app/reviews/[slug]/page.tsx")
+
+    expect(reviewPage).toContain('const hasEditorialRating = tool.ratingVerified === true && typeof tool.rating === "number"')
+    expect(reviewPage).toContain('const categoryRatings = tool.ratingsVerified === true && Array.isArray(tool.ratings) ? tool.ratings : []')
+  })
+
   it("avoids blanket claims that every legacy score is already verified", () => {
     const evaluationProcess = readPage("src/app/how-we-test-software/page.tsx")
     const team = readPage("src/app/team/page.tsx")
