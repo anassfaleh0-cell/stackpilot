@@ -13,16 +13,16 @@ const totalUrls = sitemapEntries.length
 
 export const metadata = createMetadata({
   title: "Media Kit — PilotStack Brand Assets & Press Guidelines",
-  description: "Comprehensive media kit for PilotStack — company fact sheet, editorial statistics, leadership information, and media resources for journalists and analysts.",
+  description: "PilotStack fact sheet, editorial scope, brand resources, and contact information for journalists and analysts.",
   path: "/media-kit",
 })
 
 const stats = [
-  { value: String(totalUrls), label: "Published pages" },
-    { value: String(countIn("/reviews/")), label: "In-depth tool reviews" },
+  { value: String(totalUrls), label: "URLs listed in sitemap" },
+  { value: String(countIn("/reviews/")), label: "Review URLs in sitemap" },
   { value: "12", label: "Software categories" },
-  { value: String(countIn("/comparisons/")), label: "Published comparisons" },
-  ]
+  { value: String(countIn("/comparisons/")), label: "Comparison URLs in sitemap" },
+]
 
 const milestones = [
   { year: "2026", event: "Expanded coverage across reviews, comparisons, guides, research, and software categories" },
@@ -37,10 +37,11 @@ export default function MediaKitPage() {
         <Breadcrumbs items={[{ name: "Media Kit", href: "/media-kit" }]} />
         <div className="max-w-3xl mx-auto mt-8">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Media Kit</h1>
-          <p className="text-lg text-muted-foreground mb-10">Fact sheet, statistics, and resources for journalists and industry analysts covering PilotStack.</p>
+          <p className="text-lg text-muted-foreground mb-10">Fact sheet, editorial scope, and resources for journalists and industry analysts covering PilotStack.</p>
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4">Fact Sheet</h2>
+            <p className="text-sm text-muted-foreground mb-4">Counts below are generated from the current sitemap. They describe listed URLs, not independently audited article quality or readership.</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {stats.map((s) => (
                 <div key={s.label} className="p-4 rounded-xl border border-border text-center">
@@ -53,19 +54,19 @@ export default function MediaKitPage() {
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4">About PilotStack</h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is a software review and research platform that helps businesses evaluate software purchasing options. The platform publishes reviews, comparisons, guides, and research across a broad set of software categories.</p>
-            <p className="text-muted-foreground leading-relaxed mb-4">Unlike aggregate review sites, PilotStack records every figure once and reuses it everywhere a tool appears, so ratings and review counts agree across the site. The site is maintained by a small editorial team following a published methodology — editorial roles are listed on our <Link href="/authors" className="text-primary hover:underline">authors page</Link>, and the full scoring process is public on our <Link href="/methodology" className="text-primary hover:underline">methodology page</Link>.</p>
-            <p className="text-muted-foreground leading-relaxed">Commercial relationships are disclosed where applicable. Editorial scores and conclusions are based on the published methodology and are not intended to be determined by commercial relationships.</p>
+            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is a software review and research publication that helps businesses evaluate software purchasing options. The platform publishes reviews, comparisons, guides, and research across a broad set of software categories.</p>
+            <p className="text-muted-foreground leading-relaxed mb-4">The site combines product information, recorded profile data, and editorial decision frameworks. These are different kinds of evidence: some stored prices, ratings, feature flags, and review counts have not been independently revalidated. Where data is provisional, pages should identify that status and readers should confirm current terms and capabilities with the vendor. Editorial roles are listed on our <Link href="/authors" className="text-primary hover:underline">authors page</Link>, and the scoring approach is described on our <Link href="/methodology" className="text-primary hover:underline">methodology page</Link>.</p>
+            <p className="text-muted-foreground leading-relaxed">Commercial relationships are disclosed where applicable. Editorial conclusions should be assessed against the evidence and limitations stated on each page, not treated as third-party review aggregates.</p>
           </section>
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4">Editorial Standards</h2>
             <div className="space-y-3">
               {[
-                { title: "Independent Coverage", desc: "No vendor can pay for placement, ratings, or coverage. Scores are never adjusted for commercial relationship." },
-                { title: "Standardized Methodology", desc: "Every page follows the same published scoring and sourcing rules, applied consistently across categories." },
-                { title: "Transparent Criteria", desc: "Nine recorded category scores on a 1-5 scale, each equally weighted, with the overall rating as their mean." },
-                { title: "Regular Updates", desc: "Pages are revisited when pricing, features, or product positioning change materially, and carry a last-reviewed date." },
+                { title: "Editorial Independence", desc: "Commercial relationships should be disclosed and must not determine editorial conclusions or recorded scores." },
+                { title: "Evidence Status", desc: "Vendor-confirmed information, stored data, and editorial interpretation should be distinguished. Unverified records should not be presented as confirmed facts." },
+                { title: "Transparent Criteria", desc: "The methodology explains the intended evaluation dimensions and weighting. Individual page data may be incomplete or awaiting verification; check the page-level disclosure." },
+                { title: "Corrections and Updates", desc: "Readers can report inaccuracies and request corrections through the contact page. A displayed update date does not by itself mean every underlying figure has been rechecked." },
               ].map((s) => (
                 <div key={s.title} className="p-4 rounded-xl border border-border">
                   <div className="font-medium text-sm mb-1">{s.title}</div>
@@ -77,7 +78,7 @@ export default function MediaKitPage() {
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4">Team</h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is run by a small, independent team. Every page follows our published methodology: nine recorded category scores on a 1-5 scale with the overall rating as their mean, one recorded source per figure, and no unsourced fact stated as confirmed. Editorial roles are listed on our <Link href="/authors" className="text-primary hover:underline">authors page</Link>.</p>
+            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is maintained by a small editorial team. Public author profiles describe editorial roles and the site’s stated standards. Readers should consult the methodology and the evidence-status notes on individual reviews and comparisons before relying on a score or product claim.</p>
             <div className="mt-4 text-sm">
               <Link href="/methodology" className="text-primary hover:underline">Read our full methodology →</Link>
             </div>
@@ -106,10 +107,10 @@ export default function MediaKitPage() {
 
           <section className="p-6 rounded-xl bg-muted-bg border border-border">
             <h2 className="text-lg font-bold mb-2 flex items-center gap-2"><Mail size={18} /> Media Contact</h2>
-            <p className="text-sm text-muted-foreground mb-3">For press inquiries, interview requests, or partnership discussions:</p>
+            <p className="text-sm text-muted-foreground mb-3">For press inquiries, interview requests, corrections, or partnership discussions:</p>
             <Link href="/contact" className="text-primary hover:underline font-medium text-sm">Contact our team →</Link>
             <div className="mt-4 flex gap-2">
-              <Link href="/press" className="text-sm text-primary hover:underline flex items-center gap-1"><ExternalLink size={12} /> Brand Assets & Press Kit</Link>
+              <Link href="/press" className="text-sm text-primary hover:underline flex items-center gap-1"><ExternalLink size={12} /> Brand Assets & Press Resources</Link>
             </div>
           </section>
         </div>

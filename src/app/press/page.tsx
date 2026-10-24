@@ -11,7 +11,7 @@ const publishedPages = sitemapRoute().length
 
 export const metadata = createMetadata({
   title: "Press & Media — PilotStack News, Logos & Interviews",
-  description: "Press kit, media assets, brand guidelines, and editorial resources for journalists, analysts, and partners covering PilotStack.",
+  description: "Press resources, brand assets, editorial policies, and contact information for journalists, analysts, and partners covering PilotStack.",
   path: "/press",
 })
 
@@ -27,30 +27,31 @@ const brandAssets = [
   { name: "Apple Touch Icon", url: "/apple-touch-icon.png", desc: "iOS home screen icon" },
 ]
 
-const pressMentions = [
-  { outlet: "PilotStack Blog", title: "Latest Research & Reports", url: "/blog", date: "2026" },
-  { outlet: "PilotStack Reviews", title: "Software Review Library", url: "/reviews", date: "2026" },
+const siteResources = [
+  { outlet: "PilotStack", title: "Research & Reports", url: "/blog" },
+  { outlet: "PilotStack", title: "Software Review Library", url: "/reviews" },
+  { outlet: "PilotStack", title: "Editorial Methodology", url: "/methodology" },
 ]
 
 export default function PressPage() {
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Press & Media", href: "/press" }]} />
-      <WebPageSchema name="Press & Media" description="Press kit and media resources for PilotStack." url={`${site.url}/press`} />
+      <WebPageSchema name="Press & Media" description="Press resources and brand assets for PilotStack." url={`${site.url}/press`} />
       <Container className="pt-8 pb-20">
         <Breadcrumbs items={[{ name: "Press & Media", href: "/press" }]} />
         <div className="max-w-3xl mx-auto mt-8">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Press &amp; Media</h1>
-          <p className="text-lg text-muted-foreground mb-10">Resources for journalists, analysts, and partners covering PilotStack&apos;s software reviews, research, and industry analysis.</p>
+          <p className="text-lg text-muted-foreground mb-10">Resources for journalists, analysts, and partners covering PilotStack’s software reviews, research, and editorial standards.</p>
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center gap-2"><Newspaper size={20} /> About PilotStack</h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is an independent software review and research platform. We publish in-depth coverage of B2B SaaS tools across 12 categories, helping businesses make informed software purchasing decisions. Our small, independent team follows a published methodology in which every figure is recorded once, sourced, and reused across the site before ratings and comparisons go live.</p>
-            <div className="grid sm:grid-cols-3 gap-4 text-sm">
-              <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">{publishedPages}</div><div className="text-muted-foreground">Published pages</div></div>
-              <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">1.1M+</div><div className="text-muted-foreground">Words of research</div></div>
+            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is an independently operated software research publication. We publish reviews, comparisons, and buying resources across 12 software categories. Some product fields in the underlying dataset are provisional or unverified; each page’s evidence-status notes should be read before relying on a recorded rating, review count, feature, or price.</p>
+            <div className="grid sm:grid-cols-2 gap-4 text-sm">
+              <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">{publishedPages}</div><div className="text-muted-foreground">URLs listed in sitemap</div></div>
               <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">12</div><div className="text-muted-foreground">Software categories</div></div>
             </div>
+            <p className="text-xs text-muted-foreground mt-3">The URL count is generated from the sitemap and is not a measure of readership, independent validation, or editorial depth.</p>
           </section>
 
           <section className="mb-12">
@@ -74,7 +75,7 @@ export default function PressPage() {
                 { title: "Review Methodology", desc: "How we score and rate software", href: "/methodology" },
                 { title: "Research Methodology", desc: "Our research approach", href: "/research-methodology" },
                 { title: "Fact-Checking Policy", desc: "Accuracy and verification", href: "/fact-checking-policy" },
-                { title: "Editorial Independence", desc: "No paid placements policy", href: "/editorial-independence" },
+                { title: "Editorial Independence", desc: "Commercial independence policy", href: "/editorial-independence" },
                 { title: "How We Evaluate Software", desc: "Our evaluation process", href: "/how-we-test-software" },
               ].map((r) => (
                 <Link key={r.title} href={r.href} className="flex items-center gap-3 p-4 rounded-xl border border-border hover:bg-muted-bg transition-colors group">
@@ -88,20 +89,20 @@ export default function PressPage() {
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center gap-2"><Users size={20} /> Contact</h2>
-            <p className="text-muted-foreground mb-4">For press inquiries, partnership opportunities, or media interview requests:</p>
-            <div className="p-4 rounded-xl border border-border"><a href="/contact" className="text-primary hover:underline font-medium">Contact our press team →</a></div>
+            <p className="text-muted-foreground mb-4">For press inquiries, corrections, partnership opportunities, or media interview requests:</p>
+            <div className="p-4 rounded-xl border border-border"><Link href="/contact" className="text-primary hover:underline font-medium">Contact PilotStack →</Link></div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center gap-2"><Newspaper size={20} /> Press Mentions</h2>
+            <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center gap-2"><Newspaper size={20} /> PilotStack Resources</h2>
             <div className="space-y-3">
-              {pressMentions.map((m) => (
-                <a key={m.title} href={m.url} className="flex items-center justify-between p-4 rounded-xl border border-border hover:bg-muted-bg transition-colors group">
-                  <div><div className="font-medium text-sm group-hover:text-primary transition-colors">{m.title}</div><div className="text-xs text-muted-foreground">{m.outlet} · {m.date}</div></div>
+              {siteResources.map((resource) => (
+                <Link key={resource.title} href={resource.url} className="flex items-center justify-between p-4 rounded-xl border border-border hover:bg-muted-bg transition-colors group">
+                  <div><div className="font-medium text-sm group-hover:text-primary transition-colors">{resource.title}</div><div className="text-xs text-muted-foreground">{resource.outlet}</div></div>
                   <ExternalLink size={14} className="text-muted-foreground shrink-0" />
-                </a>
+                </Link>
               ))}
-            </div>
+          </div>
           </section>
         </div>
       </Container>
