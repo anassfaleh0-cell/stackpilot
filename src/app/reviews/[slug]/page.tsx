@@ -77,10 +77,10 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
   const allReviews = getAllReviews()
 
-  // Never render numeric editorial ratings unless the page records verification; preserve unverified source data for later audit, but do not publish it as a score.
-  const hasEditorialRating = tool.ratingVerified === true && typeof tool.rating === "number" && Number.isFinite(tool.rating) && tool.rating > 0
-  const hasStoredEditorialRating = hasEditorialRating
-  const categoryRatings = tool.ratingsVerified === true && Array.isArray(tool.ratings) ? tool.ratings : []
+  // Preserve stored editorial scores visibly with an explicit pending-verification label; only verified scores feed structured data and category rankings.
+  const hasStoredEditorialRating = typeof tool.rating === "number" && Number.isFinite(tool.rating) && tool.rating > 0
+  const hasEditorialRating = tool.ratingVerified === true && hasStoredEditorialRating
+  const categoryRatings = Array.isArray(tool.ratings) ? tool.ratings.filter((item) => typeof item.score === "number" && Number.isFinite(item.score) && item.score > 0) : []
   const bestInCategory = allReviews
     .filter((r) => r.category === tool.category && r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating))
     .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
@@ -224,7 +224,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Rating Overview</h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
-                  {hasStoredEditorialRating && <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={formatScore(tool.rating)} title="Overall Rating" description={hasEditorialRating ? "Verified PilotStack editorial score" : "Stored PilotStack score; verification pending"} />}
+                  {hasStoredEditorialRating && <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={formatScore(tool.rating)} title="Overall Rating" description={hasEditorialRating ? "Verified PilotStack editorial score" : "Stored editorial score; provisional until evidence is audited"} />}
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
@@ -237,7 +237,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   } value={pricingModelLabel} title="Pricing Model" description={tool.priceRangeVerified === true ? "Pricing model and displayed terms are marked verified" : "Current plan terms and price are not independently verified"} />
                 </div>
                 <div className="flex justify-center">
-                  {categoryRatings.length > 0 && <div className="w-full"><p className="text-xs text-muted-foreground mb-2">{tool.ratingsVerified === true ? "Recorded editorial rating dimensions." : "Stored rating dimensions; verification pending. These are not third-party ratings."}</p><EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" /></div>}
+                  {categoryRatings.length > 0 && <div className="w-full"><p className="text-xs text-muted-foreground mb-2">{tool.ratingsVerified === true ? "PilotStack editorial dimensions; verification status recorded." : "Provisional stored editorial dimensions; evidence audit pending. These are not third-party user ratings."}</p><EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" /></div>}
                 </div>
               </section>
 
@@ -405,9 +405,9 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                       <>
                         <div className="text-lg font-bold text-primary mb-1">{formatScore(tool.rating)}/5</div>
                         <ScoreBar score={tool.rating} className="mb-3" />
-                        <p className="text-sm text-muted-foreground">{categoryRatings.length > 0 ? `Mean of ${categoryRatings.length} editorial rating dimensions.` : "Editorial score; see the review methodology for context."}</p>
+                        <p className="text-sm text-muted-foreground">{hasEditorialRating ? (categoryRatings.length > 0 ? `Mean of ${categoryRatings.length} verified editorial rating dimensions.` : "Verified editorial score; see the review methodology for context.") : "Provisional stored editorial score; evidence and calculation are pending audit. Do not treat it as a third-party rating."}</p>
                       </>
-                    ) : <p className="text-sm text-muted-foreground">No independently verified aggregate score is published for this review. Compare the practical criteria and current vendor terms below.</p>}
+                    ) : <p className="text-sm text-muted-foreground">No numeric editorial score has been recorded for this review yet. The score and category breakdown need an evidence-backed assessment; compare the practical criteria and current vendor terms below.</p>}
                   </div>
                 </GlassCard>
 
