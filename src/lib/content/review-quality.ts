@@ -76,6 +76,7 @@ export function getReviewPricingSummary(priceRange?: string, pricing?: string, v
   const range = isPricingPlaceholder(priceRange) ? "" : String(priceRange).trim()
   const value = model && range ? `${model}: ${range}` : model || range
   if (!value) return "Current pricing is not independently verified; confirm plans and regional terms with the vendor."
+  if (!verified && /[$€£]\s?\d|\b(?:USD|EUR|GBP)\s?\d|\b\d[\d,]*(?:\.\d+)?\s?(?:USD|EUR|GBP)\b/i.test(value)) return "Current pricing is not independently verified; confirm plans and regional terms with the vendor."
   return verified ? value : `${value} (recorded; not independently verified; confirm current terms with the vendor)`
 }
 
@@ -86,20 +87,32 @@ export function stripUnverifiedPriceClaims(value: string): string {
   // This avoids treating unrelated figures such as acquisition values or historical dates as SaaS pricing.
   const currencyAmount = /[$€£]\s?\d[\d,]*(?:\.\d+)?|\b(?:USD|EUR|GBP)\s?\d[\d,]*(?:\.\d+)?|\b\d[\d,]*(?:\.\d+)?\s?(?:USD|EUR|GBP)\b/i
   const planPhrase = /\b(?:free|freemium|paid|enterprise)\s+(?:plan|tier)\b|\bfree trial\b/i
-  const pricingContext = /\b(?:price|pricing|costs?|plan|tier|subscription|billing|from|per (?:user|seat|editor)|starts? at|starting at|monthly|annually|annual|renewal|fee|licen[cs]e|pay(?:s|ment)?|budget)\b/i
-  const hasUnverifiedPricing = (sentence: string) =>
-    (currencyAmount.test(sentence) && (pricingContext.test(sentence) || sentence.trim().length <= 32) || planPhrase.test(sentence)) &&
-    !/not independently verified|verification pending/i.test(sentence)
-  // Collapse legacy inline caveats, then add one clear caveat per content field instead of
-  // repeating the same warning after every price-bearing sentence.
-  const caveatPattern = /\s*\(recorded value; not independently verified[—-]confirm current terms with the vendor\)/gi
-  const normalizedRaw = raw.replace(caveatPattern, "").trim()
-  const sentences = normalizedRaw.split(/(?<=[.!?])\s+|\n+/).map((sentence) => sentence.trim()).filter(Boolean)
-  const needsCaveat = sentences.some(hasUnverifiedPricing)
-  const text = sentences.join(" ").replace(/\s{2,}/g, " ").trim()
-  if (!needsCaveat) return text
-  return text + " (Pricing and plan details in this text are recorded but not independently verified; confirm current terms with the vendor.)"
+  const pricingContext = /\b(?:price|pricing|costs?|plan|tier|subscription|billing|from|per (?:user|seat|editor)|starts? at|starting at|monthly|annually|annual|renewal|fee|licen[cs]e|pay(?:s|ment)?|budget)\b|\/(?:user\/)?month\b|\/year\b|\/seat\b/i
+  // Do not repeat unsourced numeric prices to readers. Replace the entire price-bearing
+  // sentence with an actionable verification instruction while preserving unrelated sentences.
+  const priceSentences = raw
+    .replace(/\s*\(recorded value; not independently verified[—-]confirm current terms with the vendor\)/gi, "")
+    .split(/(?<=[.!?])\s+|\n+/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean)
+  const alreadyCaveated = (sentence: string) => /not independently verified|verification pending/i.test(sentence)
+  const hasUnverifiedPrice = (sentence: string) =>
+    currencyAmount.test(sentence) && (pricingContext.test(sentence) || sentence.trim().length <= 32)
+  const hasUnverifiedPlan = (sentence: string) => planPhrase.test(sentence) && !alreadyCaveated(sentence)
+  const replacedPriceSentence = priceSentences.some(hasUnverifiedPrice)
+  const normalized = priceSentences.map((sentence) =>
+    hasUnverifiedPrice(sentence)
+      ? "Current pricing and plan entitlements are not independently verified; confirm current terms with the vendor."
+      : sentence
+  )
+  const unique = [...new Set(normalized)]
+  const text = unique.join(" ").replace(/\s{2,}/g, " ").trim()
+  if (!replacedPriceSentence && priceSentences.some(hasUnverifiedPlan)) {
+    return text + " (Pricing and plan details are not independently verified; confirm current terms with the vendor.)"
+  }
+  return text
 }
+
 function replacementForUnverifiedSection(title: string, productName = "this product"): string {
   const normalized = title.toLowerCase()
   if (/pricing|plans|cost|hidden costs/.test(normalized)) {

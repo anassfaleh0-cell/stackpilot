@@ -198,6 +198,12 @@ const nextConfig: NextConfig = {
       destination: "/reviews/calendly",
       permanent: true,
     },
+    {
+      // Recover legacy links to the prior Acuity Scheduling slug and consolidate on the published canonical review.
+      source: "/reviews/acuity-scheduling",
+      destination: "/reviews/acuity",
+      permanent: true,
+    },
   ],
   images: {
     formats: ["image/avif", "image/webp"],

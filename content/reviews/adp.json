@@ -104,6 +104,31 @@
       "title": "Decision record",
       "body": "Save the exact product and service scope, supported jurisdictions, responsibilities, service commitments, implementation timeline and data-export terms. Track unresolved requirements and obtain written answers before signature. Review the operating process after the first cycles and update the runbook.",
       "type": "text"
+    },
+    {
+      "title": "HR and payroll workflow fit",
+      "body": "ADP is a broad product family, so buyers should first identify the exact payroll, HR, benefits, timekeeping, or workforce-management service under consideration. Requirements differ by country, employee type, pay schedule, and business size. Map a representative employee lifecycle from onboarding through a payroll change and termination, then verify that the quoted service supports every required step in the target jurisdiction. Do not assume features described for one ADP product or region apply to another.",
+      "type": "text"
+    },
+    {
+      "title": "Payroll controls and exception handling",
+      "body": "Use a controlled test scenario to verify pay-period setup, employee changes, time data, approvals, deductions, corrections, and payroll reporting. Identify who reviews exceptions and how the organization documents approval before funds are released. Confirm supported payment methods, tax filing responsibilities, local statutory requirements, and cutoff times directly with the vendor and relevant professional advisers. A demonstration with sample data is not sufficient evidence that a configuration meets the employer's obligations.",
+      "type": "text"
+    },
+    {
+      "title": "Employee data, permissions, and auditability",
+      "body": "HR and payroll systems hold sensitive personal and financial records. Define access by role and test whether managers, HR staff, payroll administrators, and employees can see only the information appropriate to them. Review data retention, export, deletion, audit history, incident handling, and the contract's privacy terms. Validate the controls against the organization's actual regulatory obligations; this review is not a compliance certification or security audit.",
+      "type": "text"
+    },
+    {
+      "title": "Implementation and migration planning",
+      "body": "Inventory employee records, pay codes, leave balances, time clocks, benefits, historical payroll reports, and integrations before migration. Assign owners to each data field and reconcile a parallel test payroll before switching the live process. Document who approves the final result, how discrepancies are escalated, and how the organization would revert if the first production run is incorrect. Implementation effort depends on product scope, jurisdiction, data quality, and existing systems.",
+      "type": "text"
+    },
+    {
+      "title": "Commercial evaluation and decision",
+      "body": "Current ADP prices, contract commitments, service scope, and implementation fees are not independently verified here. Request a written quote for the exact legal entities, employee count, countries, payroll frequency, support level, and required modules. Compare total cost and operational responsibilities with at least one alternative using the same requirements. No numeric editorial score is published until a documented assessment with current evidence is available.",
+      "type": "text"
     }
   ],
   "faqs": [
