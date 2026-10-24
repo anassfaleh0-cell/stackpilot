@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardTitle, CardDescription } from "@/components/ui/card"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { InternalLinks } from "@/components/content/internal-links"
+import { MobileSectionNav } from "@/components/content/mobile-section-nav"
 import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, ArticleSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { site, categories } from "@/lib/constants"
@@ -115,6 +116,22 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         </Container>
       </section>
 
+      <Container className="pt-4 lg:hidden">
+        <MobileSectionNav
+          label="Explore this category"
+          items={[
+            ...(knowledge?.marketOverview ? [{ href: "#market-overview", label: "Market overview" }] : []),
+            ...(displayedBuyerJourney.length > 0 ? [{ href: "#buyer-journey", label: "Buying journey" }] : []),
+            ...(knowledge?.buyerConsiderations && knowledge.buyerConsiderations.length > 0 ? [{ href: "#considerations", label: "What to consider" }] : []),
+            ...(knowledge?.commonMistakes && knowledge.commonMistakes.length > 0 ? [{ href: "#mistakes", label: "Common mistakes" }] : []),
+            { href: "#reviews", label: "Reviews" },
+            ...(comparisons.length > 0 ? [{ href: "#comparisons", label: "Comparisons" }] : []),
+            ...(guides.length > 0 ? [{ href: "#guides", label: "Guides" }] : []),
+            ...(knowledge?.faqs && knowledge.faqs.length > 0 ? [{ href: "#faq", label: "FAQs" }] : []),
+          ]}
+        />
+      </Container>
+
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8">
         {/* Main Content */}
         <div>
@@ -149,7 +166,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
               <Container>
                 <div className="flex items-center gap-2 mb-4">
                   <TrendingUp size={20} className="text-primary" />
-                  <h2 className="text-2xl font-bold">Market Overview</h2>
+                  <h2 id="market-overview" className="scroll-mt-24 text-2xl font-bold">Market Overview</h2>
                 </div>
                 <p className="text-muted-foreground leading-relaxed text-pretty">{knowledge.marketOverview}</p>
               </Container>
@@ -230,7 +247,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
               <Container>
                 <div className="flex items-center gap-2 mb-6">
                   <Search size={20} className="text-primary" />
-                  <h2 className="text-2xl font-bold">Your Buying Journey</h2>
+                  <h2 id="buyer-journey" className="scroll-mt-24 text-2xl font-bold">Your Buying Journey</h2>
                 </div>
                 <div className="space-y-4">
                   {displayedBuyerJourney.map((stage) => (
@@ -268,7 +285,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
               <Container>
                 <div className="flex items-center gap-2 mb-6">
                   <CheckCircle2 size={20} className="text-primary" />
-                  <h2 className="text-2xl font-bold">What to Consider Before Buying</h2>
+                  <h2 id="considerations" className="scroll-mt-24 text-2xl font-bold">What to Consider Before Buying</h2>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {knowledge.buyerConsiderations.map((item, i) => (
@@ -287,7 +304,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
               <Container>
                 <div className="flex items-center gap-2 mb-6">
                   <AlertTriangle size={20} className="text-warning" />
-                  <h2 className="text-2xl font-bold">Common Buying Mistakes</h2>
+                  <h2 id="mistakes" className="scroll-mt-24 text-2xl font-bold">Common Buying Mistakes</h2>
                 </div>
                 <div className="space-y-3">
                   {knowledge.commonMistakes.map((mistake, i) => (
@@ -384,7 +401,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             <Container>
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h2 className="text-2xl font-bold">All {category.name} Reviews</h2>
+                  <h2 id="reviews" className="scroll-mt-24 text-2xl font-bold">All {category.name} Reviews</h2>
                   <p className="text-sm text-muted-foreground mt-1">{reviews.length} tools reviewed · showing the most relevant {Math.min(reviews.length, 48)}</p>
                 </div>
                 <Link href="/reviews" className="text-sm text-primary hover:underline hidden sm:inline-flex items-center gap-1">View all <ArrowRight size={12} /></Link>
@@ -403,7 +420,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           {comparisons.length > 0 && (
             <Section>
               <Container>
-                <h2 className="text-2xl font-bold mb-6">{category.name} Comparisons</h2>
+                <h2 id="comparisons" className="scroll-mt-24 text-2xl font-bold mb-6">{category.name} Comparisons</h2>
                 {comparisons.length > 48 && <p className="text-sm text-muted-foreground -mt-4 mb-4">Showing 48 featured comparisons from {comparisons.length} available comparisons.</p>}
                 <div className="grid sm:grid-cols-2 gap-4">
                   {displayedComparisons.map((c) => (
@@ -426,7 +443,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           {guides.length > 0 && (
             <Section>
               <Container>
-                <h2 className="text-2xl font-bold mb-6">{category.name} Buying Guides</h2>
+                <h2 id="guides" className="scroll-mt-24 text-2xl font-bold mb-6">{category.name} Buying Guides</h2>
                 {guides.length > 24 && <p className="text-sm text-muted-foreground -mt-4 mb-4">Showing 24 featured guides from {guides.length} available guides.</p>}
                 <div className="grid sm:grid-cols-2 gap-6">
                   {displayedGuides.map(g => (
@@ -513,7 +530,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
               <Container>
                 <div className="flex items-center gap-2 mb-6">
                   <HelpCircle size={20} className="text-primary" />
-                  <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
+                  <h2 id="faq" className="scroll-mt-24 text-2xl font-bold">Frequently Asked Questions</h2>
                 </div>
                 <div className="space-y-3 max-w-3xl">
                   {knowledge.faqs.map((faq, i) => (
