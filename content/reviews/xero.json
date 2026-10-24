@@ -47,6 +47,21 @@
       "title": "Cost and governance",
       "body": "Request current pricing for the exact users, entities, currencies and required integrations. Include payment fees, migration, training, support and accountant access. Review permissions, audit history, backups, export and renewal terms before committing.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Process a sample invoice, bill, payment, bank reconciliation and month-end report. Reconcile the totals to an independently checked sample and record every manual adjustment. Ask the accountant to confirm that the reports and export formats support the business's actual close process.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and migration",
+      "body": "Test duplicate transactions, a refund, an unmatched bank item, a changed tax code and a failed integration. Validate opening balances and historical transaction mapping before a full migration. Keep the old records available until the finance owner signs off.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document local tax and reporting needs, entities, currencies, users, bank connections, integrations, accountant access, backup and export requirements. Request current written pricing for the exact setup. Include training, payment fees, migration and ongoing reconciliation in the total cost.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -91,7 +106,7 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 180,
+  "wordCount": 298,
   "rating": null,
   "reviewCountVerified": false
 }
