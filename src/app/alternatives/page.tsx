@@ -16,8 +16,12 @@ export const metadata = createMetadata({
 
 export const dynamic = "force-static"
 
+function isPublished<T extends { slug: string }>(record: T): boolean {
+  return (record as T & { publicationStatus?: string }).publicationStatus !== "draft"
+}
+
 export default function AlternativesPage() {
-  const allAlternatives = getAllAlternatives().filter((item) => !REDIRECTED_ALTERNATIVE_SLUGS.has(item.slug))
+  const allAlternatives = getAllAlternatives().filter((item) => isPublished(item) && !REDIRECTED_ALTERNATIVE_SLUGS.has(item.slug))
   // Keep every published alternative discoverable from this static index page.
   const pageAlternatives = allAlternatives
   const grouped: Record<string, typeof allAlternatives> = {}
