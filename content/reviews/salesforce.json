@@ -46,6 +46,21 @@
       "title": "Implementation and cost",
       "body": "Request a scoped proposal that separates licenses, implementation, integration, training, support and ongoing administration. Confirm renewal, cancellation and data export terms in writing; current prices and plan limits are not independently verified here.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Use a small but representative pipeline with duplicate contacts, reassigned ownership, a stalled opportunity and a close handoff. Verify that reports remain consistent after changes and that users can find the right record without a workaround. Have an administrator and an everyday seller both evaluate the experience.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and governance",
+      "body": "Test an integration retry, a field validation failure, a user who changes teams and an automation that should not fire twice. Document who can change the workflow and how configuration is tested before release. Keep data-quality ownership separate from one-time implementation work.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Save the scope of products, editions, seats, implementation assumptions, integration ownership, support and renewal terms. List features that were demonstrated versus only described. Revisit the decision if the organization cannot maintain the configuration or the system of record becomes unclear.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -159,5 +174,5 @@
   "companyFactsVerified": false,
   "reviewCountVerified": false,
   "featuresVerified": false,
-  "wordCount": 167
+  "wordCount": 296
 }
