@@ -90,7 +90,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
     description: cmp.description,
     verdict: cmp.verdict,
   })
-  const { categoriesDiffer, winnerLabel, hasComparableWinner } = getComparisonDecision({
+  const { categoriesDiffer, winnerLabel, provisionalWinnerLabel, hasComparableWinner } = getComparisonDecision({
     winner: cmp.winner,
     winnerVerified: cmp.winnerVerified === true,
     tool1: cmp.tool1,
@@ -236,7 +236,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                     </li>
                     <li className="flex items-start gap-2 text-sm">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">3</span>
-                      <span className="text-muted-foreground">{hasComparableWinner ? `${winnerLabel} is the source dataset pick; verify the underlying evidence before relying on it` : categoriesDiffer ? "These products serve different primary categories; compare their separate use cases rather than treating the dataset pick as a head-to-head winner." : "The source data does not name a comparable winner — evaluate against priority requirements"}</span>
+                      <span className="text-muted-foreground">{hasComparableWinner ? `${winnerLabel} is the recorded pick. Review the supporting criteria and verify current evidence before relying on it.` : provisionalWinnerLabel ? `${provisionalWinnerLabel} is a provisional dataset pick, not an independently verified winner. Check the underlying criteria and your workflow before deciding.` : categoriesDiffer ? "These products serve different primary categories; compare their separate use cases rather than treating the dataset pick as a head-to-head winner." : "The source data does not name a comparable winner — evaluate against priority requirements"}</span>
                     </li>
                   </ul>
                 </div>
@@ -305,7 +305,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                 <div className="flex items-center gap-2 mb-3">
                   <CheckCircle2 size={18} className="text-primary" />
                   <p className="text-lg font-semibold">
-                    {hasComparableWinner ? `Recorded pick: ${winnerLabel}` : categoriesDiffer ? "Different product categories" : "How they compare"}
+                    {hasComparableWinner ? `Verified recorded pick: ${winnerLabel}` : provisionalWinnerLabel ? `Provisional pick (verification pending): ${provisionalWinnerLabel}` : categoriesDiffer ? "Different product categories" : "How they compare"}
                   </p>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={stripDeadContentLinks(displayCopy.verdict)} /></p>
