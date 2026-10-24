@@ -2,7 +2,7 @@
   "slug": "freshbooks",
   "name": "FreshBooks",
   "tagline": "Accounting and invoicing software to evaluate for service businesses and client billing.",
-  "description": "FreshBooks is accounting and invoicing software to evaluate for service businesses that bill clients and track expenses. Fit depends on local tax requirements, reconciliation, project billing, accountant access and integration needs; verify current plan limits and terms.",
+  "description": "FreshBooks supports invoicing and accounting workflows for service businesses; current plan details and independent ratings are not verified here.",
   "category": "Finance & Accounting",
   "website": "https://freshbooks.com",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "A representative invoice and payment workflow can test day-to-day fit.",
     "Expense and client workflows should be tested alongside the accounting handoff.",
-    "Export and accountant access are important checks before migration."
+    "Export and accountant access are important checks before migration.",
+    "A sample invoice and reconciliation can validate daily accounting fit.",
+    "Accountant access and export can be tested before migration."
   ],
   "cons": [
     "Confirm jurisdiction and tax support for the business.",
     "Verify which features are included in the exact plan.",
     "Payment fees, integrations and migration can add to the total cost."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Invoicing and transactions",
+      "available": false,
+      "description": "FreshBooks: evaluate invoicing and transactions with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Reconciliation",
+      "available": false,
+      "description": "FreshBooks: evaluate reconciliation with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Reporting",
+      "available": false,
+      "description": "FreshBooks: evaluate reporting with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Tax and jurisdiction",
+      "available": false,
+      "description": "FreshBooks: evaluate tax and jurisdiction with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Access and audit",
+      "available": false,
+      "description": "FreshBooks: evaluate access and audit with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Integrations",
+      "available": false,
+      "description": "FreshBooks: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Data migration",
+      "available": false,
+      "description": "FreshBooks: evaluate data migration with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Export and recovery",
+      "available": false,
+      "description": "FreshBooks: evaluate export and recovery with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -66,19 +109,23 @@
   "faqs": [
     {
       "question": "Who should evaluate FreshBooks?",
-      "answer": "Evaluate FreshBooks when its primary workflow matches a documented requirement. Run a representative pilot and verify current capabilities and limits directly with the vendor."
+      "answer": "Evaluate FreshBooks when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Are prices and ratings independently verified here?",
-      "answer": "No. This review does not present an independently verified price or third-party rating. Check official documentation and obtain a dated quote."
+      "question": "How should a team test FreshBooks?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "What should a pilot include?",
-      "answer": "Test the main workflow, a failure case, permissions, integrations, export and offboarding. Record pass, partial pass, fail or unknown and assign an owner to every unresolved requirement."
+      "question": "Which limitations should be checked in FreshBooks?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "How should total cost be compared?",
-      "answer": "Include licenses, usage, implementation, migration, training, integrations, support, internal administration and renewal terms—not only the headline subscription."
+      "question": "Are FreshBooks prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting FreshBooks?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [
