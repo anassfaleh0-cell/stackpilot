@@ -82,11 +82,23 @@ export function getReviewPricingSummary(priceRange?: string, pricing?: string, v
 export function stripUnverifiedPriceClaims(value: string): string {
   const raw = String(value ?? "").trim()
   if (!raw) return ""
-  const priceOrPlanClaim = /(?:starting at|starts at|from)?\s*[$€£]\s?\d[\d,]*(?:\.\d+)?(?:\s*\/\s*(?:user|seat|month|year|mo|yr))?|\b(?:USD|EUR|GBP)\s?\d[\d,]*(?:\.\d+)?(?:\s*\/\s*(?:user|seat|month|year|mo|yr))?|\b\d[\d,]*(?:\.\d+)?\s?(?:USD|EUR|GBP)\b(?:\s*\/\s*(?:user|seat|month|year|mo|yr))?|\b(?:free|freemium|paid|enterprise)\s+(?:plan|tier)\b|\bfree trial\b/i
-  const sentences = raw.split(/(?<=[.!?])\s+|\n+/).map((sentence) => sentence.trim()).filter(Boolean)
-  return sentences.map((sentence) => priceOrPlanClaim.test(sentence) && !/not independently verified|verification pending/i.test(sentence)
-    ? sentence + " (recorded value; not independently verified—confirm current terms with the vendor)"
-    : sentence).join(" ").replace(/\s{2,}/g, " ").trim()
+  // Only flag currency amounts when the sentence is actually discussing commercial terms.
+  // This avoids treating unrelated figures such as acquisition values or historical dates as SaaS pricing.
+  const currencyAmount = /[$€£]\s?\d[\d,]*(?:\.\d+)?|\b(?:USD|EUR|GBP)\s?\d[\d,]*(?:\.\d+)?|\b\d[\d,]*(?:\.\d+)?\s?(?:USD|EUR|GBP)\b/i
+  const planPhrase = /\b(?:free|freemium|paid|enterprise)\s+(?:plan|tier)\b|\bfree trial\b/i
+  const pricingContext = /\b(?:price|pricing|costs?|plan|tier|subscription|billing|from|per (?:user|seat|editor)|starts? at|starting at|monthly|annually|annual|renewal|fee|licen[cs]e|pay(?:s|ment)?|budget)\b/i
+  const hasUnverifiedPricing = (sentence: string) =>
+    (currencyAmount.test(sentence) && (pricingContext.test(sentence) || sentence.trim().length <= 32) || planPhrase.test(sentence)) &&
+    !/not independently verified|verification pending/i.test(sentence)
+  // Collapse legacy inline caveats, then add one clear caveat per content field instead of
+  // repeating the same warning after every price-bearing sentence.
+  const caveatPattern = /\s*\(recorded value; not independently verified[—-]confirm current terms with the vendor\)/gi
+  const normalizedRaw = raw.replace(caveatPattern, "").trim()
+  const sentences = normalizedRaw.split(/(?<=[.!?])\s+|\n+/).map((sentence) => sentence.trim()).filter(Boolean)
+  const needsCaveat = sentences.some(hasUnverifiedPricing)
+  const text = sentences.join(" ").replace(/\s{2,}/g, " ").trim()
+  if (!needsCaveat) return text
+  return text + " (Pricing and plan details in this text are recorded but not independently verified; confirm current terms with the vendor.)"
 }
 function replacementForUnverifiedSection(title: string, productName = "this product"): string {
   const normalized = title.toLowerCase()
