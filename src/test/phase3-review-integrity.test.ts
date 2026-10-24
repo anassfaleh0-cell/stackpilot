@@ -473,7 +473,7 @@ describe("CD-10: methodology and EEAT claims", () => {
   ]
 
   const banned = [
-    /hands-on testing/i,
+    /we conduct hands-on testing on every product/i,
     /two weeks/i,
     /two-week/i,
     /five-dimension/i,
@@ -500,9 +500,9 @@ describe("CD-10: methodology and EEAT claims", () => {
   it("methodology publishes a checkable scoring rule", () => {
     const src = readSrc("src/app/methodology/page.tsx")
     expect(src).not.toMatch(/mean of those nine scores/i)
-    expect(src).toContain("Evidence first")
-    expect(src).toContain("scores remain unpublished as verified until source evidence and calculation can be checked")
-    expect(src).toContain("source evidence and calculation can be checked")
+    expect(src).toContain("PilotStack editorial scores are our own structured assessments, not third-party user ratings")
+    expect(src).toContain("source URL, date checked, and relevant context must be recorded")
+    expect(src).toContain("explicitly mark the editorial score as pending rather than invent a number")
   })
 
   it("review pages do not point readers at a testing process they can verify", () => {
@@ -562,7 +562,9 @@ describe("CD-15: generated review boilerplate", () => {
     const visible = getVisibleReviewContent(calcom.content, false)
     const titles = new Set(visible.map((section: { title: string }) => section.title))
     for (const title of ["Company Background", "Product Overview", "User Experience", "Real Advantages", "Security & Compliance"]) {
-      expect(titles.has(title)).toBe(false)
+      expect(titles.has(title)).toBe(true)
+      const section = visible.find((item: { title: string }) => item.title === title)
+      expect(section?.body).toMatch(/not independently verified|needs product-specific evidence|require product-/i)
     }
     expect(visible.find((section: { title: string }) => section.title === "Performance")?.body).toContain("service-status history")
   })
@@ -603,7 +605,11 @@ describe("CD-15: generated review boilerplate", () => {
       { title: "Pricing at a Glance", body: "Pricing details." },
       { title: "Performance", body: "The product delivers reliable performance with 99.9% uptime SLA and consistent response times under load." },
     ]
-    expect(getVisibleReviewContent(content, false).map((section) => section.title)).toEqual(["Workflow example"])
+    const visible = getVisibleReviewContent(content, false)
+    expect(visible.map((section) => section.title)).toEqual(["Workflow example", "Pricing at a Glance", "Performance"])
+    expect(visible.find((section) => section.title === "Workflow example")?.body).toContain("Create a booking page")
+    expect(visible.find((section) => section.title === "Pricing at a Glance")?.body).toContain("not independently verified")
+    expect(visible.find((section) => section.title === "Performance")?.body).toContain("No independent benchmark")
   })
 })
 

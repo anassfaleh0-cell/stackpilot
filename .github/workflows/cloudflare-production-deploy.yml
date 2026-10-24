@@ -147,7 +147,7 @@ jobs:
           notion_url="https://pilotstack.online/reviews/notion?__content_check=${GITHUB_SHA}"
           curl --silent --show-error --fail --location --header 'Cache-Control: no-cache' "$xero_url" -o /tmp/pilotstack-xero.html
           curl --silent --show-error --fail --location --header 'Cache-Control: no-cache' "$notion_url" -o /tmp/pilotstack-notion.html
-          grep -Fq 'Xero is a cloud accounting product to evaluate' /tmp/pilotstack-xero.html
+          grep -Fq 'Cloud accounting to evaluate for bookkeeping' /tmp/pilotstack-xero.html
           grep -Fq 'Notion combines notes, documentation, knowledge bases' /tmp/pilotstack-notion.html
           if grep -Eiq 'over 4 million subscribers|160\+ currencies|70-85% of transactions|12-24 hours on the Starter tier' /tmp/pilotstack-xero.html; then
             echo "Stale or unsupported Xero claims detected in live HTML"

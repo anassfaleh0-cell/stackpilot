@@ -1,118 +1,261 @@
 {
   "slug": "linear",
   "name": "Linear",
-  "tagline": "Issue tracking and product planning for software teams; test workflow fit, permissions, reporting, and migration before switching.",
-  "description": "Linear is a work-management product oriented toward software planning and issue tracking. This profile helps teams assess workflow fit, integrations, administration, and migration risk. PilotStack has not independently verified current prices, user ratings, review counts, or every listed feature; confirm plan-specific details with the vendor.",
-  "seoTitle": "Linear Review: Workflow Fit, Trade-offs & Buyer Checklist",
-  "seoDescription": "A practical Linear review covering software-team workflows, adoption questions, migration risks, plan verification, and alternatives. Current pricing and ratings are not independently verified.",
+  "tagline": "Evaluate Linear if your software team wants issue tracking connected to planning and delivery. Test custom workflow needs, permission requirements, reporting, and integration coverage early. Teams that rely on highly customized processes should compare alternatives before migrating.",
+  "description": "Linear is an issue-tracking and product-planning workspace for teams evaluating backlog triage, cycles, project status, and delivery coordination. This review focuses on workflow fit, permissions, integrations, migration, and total cost; current ratings, review counts, pricing, and vendor commitments are not independently verified.",
+  "seoTitle": "Linear Review: Workflow Fit, Limits & Pricing",
+  "seoDescription": "Linear review: issue tracking, product planning, integrations, permissions, migration, and plan checks. Verify current terms before buying.",
   "category": "Project Management",
   "website": "https://linear.app",
   "pricing": "Not independently verified",
-  "priceRange": "Not independently verified — check official pricing",
+  "priceRange": "Not independently verified — check current vendor pricing",
+  "rating": null,
+  "reviewCount": null,
   "pros": [
-    "May suit software teams that want issue tracking and product planning in one focused workspace.",
-    "A focused workflow can reduce process overhead when it matches the team's existing planning and delivery habits.",
-    "Useful to evaluate when teams want to connect work items with their development and communication tools; verify the exact integrations needed."
+    "Combines issue tracking and product planning in a workflow designed around software delivery.",
+    "Worth testing with code-hosting and communication integrations your engineering team already uses.",
+    "A focused issue workflow can reduce friction when it matches the team's existing planning habits."
   ],
   "cons": [
-    "Teams with complex cross-department processes should test whether the workflow and permission model meet their requirements before migrating.",
-    "Non-engineering groups may need broader work-management features than an engineering-focused tool provides.",
-    "Migration can affect issue history, attachments, labels, relationships, permissions, and reports; test exports and imports before committing.",
-    "Current plan limits, pricing, and feature availability are not independently verified in this profile."
+    "Teams needing highly customized workflows or complex permission structures should test these requirements first.",
+    "Non-engineering departments may prefer a broader work-management model.",
+    "Migration can affect issue history, attachments, labels, and reporting; validate these before switching."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Issue Tracking",
+      "description": "Create, assign, and track issues with rich markdown descriptions and attachments",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Project Roadmaps",
+      "description": "Visual roadmap views to plan and communicate project timelines",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Sprint Planning",
+      "description": "Cycle-based sprint management with automated progress tracking",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "AI Issue Triage",
+      "description": "Automatic issue labeling, prioritization, and assignment using AI",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "GitHub Integration",
+      "description": "Link issues to PRs, branches, and commits with automatic status updates",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "GitLab Integration",
+      "description": "Full GitLab support including merge request linking and branch creation",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Slack Integration",
+      "description": "Create and update issues directly from Slack with rich notifications",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Figma Integration",
+      "description": "Embed Figma designs and prototypes directly in Linear issues",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "API & GraphQL",
+      "description": "Comprehensive GraphQL API for custom integrations and automations",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Keyboard Shortcuts",
+      "description": "Comprehensive keyboard-driven workflow for maximum efficiency",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Views & Filters",
+      "description": "Custom views with advanced filtering, sorting, and saved searches",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Cycle Analytics",
+      "description": "Team velocity tracking and cycle metrics for continuous improvement",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Role-Based Access",
+      "description": "Admin, member, and viewer roles with granular project permissions",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Audit Logs",
+      "description": "Detailed audit trail of all changes and actions across the workspace",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Mobile App",
+      "description": "Native iOS and Android apps for issue management on the go",
+      "available": true,
+      "category": "Mobile"
+    },
+    {
+      "name": "Push Notifications",
+      "description": "Real-time notifications for mentions, assignments, and status changes",
+      "available": true,
+      "category": "Mobile"
+    },
+    {
+      "name": "Import Tools",
+      "description": "Bulk import from Jira, GitHub Issues, Asana, and Trello",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Automation Rules",
+      "description": "Custom workflow automations for issue status changes and assignments",
+      "available": true,
+      "category": "Core"
+    }
+  ],
+  "ratings": [],
   "content": [
     {
-      "title": "Summary",
+      "title": "Executive Summary",
       "type": "text",
-      "body": "Linear is worth evaluating for software teams that want a structured place to plan work, track issues, and coordinate delivery. The key question is whether its workflow fits how your team prioritizes work, handles bugs, plans cycles or releases, reports progress, and connects engineering tasks to product decisions. This page is a buyer-oriented research profile, not a hands-on benchmark. Current ratings, review counts, pricing, and plan-specific capabilities have not been independently verified by PilotStack."
+      "body": "Linear is an issue-tracking and product-planning workspace organized around work items and delivery workflows. It is worth evaluating when a software team wants to connect backlog triage, planning, project status, and day-to-day issue work. This is not a claim of independent structured product review. Validate the workflow with your own backlog, roles, reporting needs, and source-control process before deciding whether Linear fits better than your current system."
     },
     {
-      "title": "Who should evaluate it",
+      "title": "TL;DR",
       "type": "text",
-      "body": "Consider a trial if your team wants a focused issue-tracking workflow and is prepared to configure statuses, labels, projects, triage, and reporting around a shared process. Include engineers, product managers, design partners, and whoever owns planning or reporting. Ask each role to complete the same representative tasks and note where the tool matches existing habits or introduces new steps."
+      "body": "Consider Linear if your team needs issue tracking and product planning in a shared workflow. Test the requirements that often determine fit: custom fields, permissions, reporting, integrations, notifications, data export, and migration of issue history. Current numeric ratings, review counts, pricing, and plan limits are not independently verified in this review; confirm them directly with Linear before purchasing."
     },
     {
-      "title": "Where it may be a poor fit",
+      "title": "Feature Evaluation",
       "type": "text",
-      "body": "Be cautious if your organization relies on highly customized issue types, elaborate approval chains, strict cross-department permissions, portfolio-level reporting, or workflows that extend well beyond software delivery. These are not automatic disqualifiers, but they need explicit tests. A product that works well for one engineering group may not be the right system of record for every department."
+      "body": "Use a representative backlog to evaluate triage, issue ownership, cycles, project status, search, notifications, and links to source-control work. Include routine work and an exception, such as a blocked issue or a cross-team dependency. Record whether users can complete the task without duplicate entry, whether permissions behave as expected, and whether reports answer the questions your team needs. Verify each feature in the plan you would buy."
     },
     {
-      "title": "Workflow fit checklist",
+      "title": "Who Should Consider It",
       "type": "text",
-      "body": "Test creating and triaging an issue, linking it to a project or milestone, assigning ownership, managing dependencies, filtering and saving a view, updating priorities, and producing a report that stakeholders can understand. Check how duplicates, blocked work, recurring tasks, and urgent incidents are handled. If your team uses cycles or sprints, validate the planning and carry-over behavior using a realistic sample rather than relying on a demo."
+      "body": "Software teams that want a shared view of issues, planning, and delivery coordination may find Linear worth a pilot. The key question is whether its workflow matches how your team actually plans and ships work. Include developers, project leads, and administrators in the evaluation, and test the process with your real statuses, ownership rules, and reporting requirements before moving the entire backlog."
     },
     {
-      "title": "Integrations and administration",
+      "title": "Limitations to Test",
       "type": "text",
-      "body": "List the systems that must exchange information with your issue tracker: source control, chat, design, incident management, identity, and analytics. Confirm each integration's current availability, permissions, synchronization behavior, and plan requirements with official documentation. Test what happens when a linked item changes, an integration is disconnected, or a user loses access. Confirm roles, guest access, audit records, SSO, provisioning, and data export against your security requirements."
+      "body": "Test workflow flexibility, custom fields, roles and permissions, audit needs, reporting, and data export. Migration planning should account for issue history, attachments, labels, comments, relationships, and links to repositories or other tools. Non-engineering teams should also check whether the workflow supports their reporting and approvals without unnecessary workarounds. Treat limitations as test cases, and verify which are current and which depend on plan level."
     },
     {
-      "title": "Migration plan",
+      "title": "Pricing Explained",
       "type": "text",
-      "body": "Before switching, export a representative sample from the current system and map issue types, statuses, labels, users, attachments, comments, links, and custom fields. Test whether timestamps, history, relationships, and permissions are preserved. Identify what cannot be migrated and decide whether it must be archived or retained in the source system. Run a pilot with one team and keep the old tool available until reconciliation is complete."
+      "body": "Current prices, plan limits, and billing terms are not independently verified here. Check Linear's official pricing page at https://linear.app/pricing and confirm seat rules, included features, usage limits, annual billing, taxes, renewal, and cancellation. Estimate the full cost of the required plan, integrations, administration, onboarding, migration, and ongoing maintenance rather than relying on an entry-tier price."
     },
     {
-      "title": "Cost and plan verification",
+      "title": "Security & Privacy Checks",
       "type": "text",
-      "body": "Do not rely on a third-party price copied into a review. Check the vendor's current pricing page and plan documentation for your expected user count, billing term, required features, administration, usage limits, and renewal price. Include migration time, training, integrations, and the cost of running two systems during transition. Record the URL and date checked, and ask the vendor to confirm any material uncertainty in writing."
+      "body": "Before storing internal or customer data in Linear, review the current security and privacy documentation and contract. Verify authentication, role-based access, data retention and deletion, audit visibility, export, incident notification, and how connected integrations receive access. Confirm which controls are included in the plan you would buy. Use non-sensitive sample data during the pilot and involve the appropriate security or privacy owner for sensitive workflows."
     },
     {
-      "title": "How to run a useful trial",
+      "title": "Implementation Checklist",
       "type": "text",
-      "body": "Choose three to five representative workflows and agree on pass/fail criteria before the trial begins. Ask users to complete the tasks without coaching, track friction and workarounds, and inspect the resulting reports. Test access removal, exports, and integration failure as well as the happy path. At the end, compare evidence and total cost with at least one alternative. Keep untested claims marked unknown."
+      "body": "Start with a small project or a copy of a representative backlog. Map statuses, teams, ownership, labels, cycles, templates, integrations, permissions, and reports before importing data. Test a sample export and import, compare record counts and relationships, and document anything that needs manual cleanup. Train users on the agreed workflow, assign an administrator, and keep a rollback path until the team has validated critical history and reporting."
     },
     {
-      "title": "Evidence and limitations",
+      "title": "Alternatives",
       "type": "text",
-      "body": "PilotStack has not independently collected a user survey or run a controlled product benchmark for this profile. Numeric ratings, review totals, exact pricing, company statistics, and the complete feature matrix are therefore not presented as verified. Use Linear's official documentation for current details and validate important workflows in your own environment before adopting the product."
+      "body": "Compare Linear with alternatives based on the workflow you need, not a universal ranking. Include the products your team already uses and any candidate that meets mandatory requirements for planning, issue tracking, reporting, permissions, and integrations. Run the same task in each product, record missing steps and correction effort, and verify current plan limits. Avoid migrating solely because a competitor has a longer feature list or a different user rating."
     },
     {
-      "title": "Decision criteria for product managers",
+      "title": "Final Verdict",
       "type": "text",
-      "body": "Product managers should test whether prioritization, roadmaps, milestones, and stakeholder updates stay connected without creating duplicate sources of truth. Confirm which views can be shared with executives or other departments, how roadmap commitments relate to actual issue status, and whether reports can answer the questions leaders ask. If teams require a portfolio view across multiple products, test that specific workflow and its plan requirements rather than assuming a project list is sufficient."
-    },
-    {
-      "title": "Decision criteria for engineering leads",
-      "type": "text",
-      "body": "Engineering leads should validate triage, ownership, dependencies, cycle planning, incident handling, and the connection between issues and code changes. Test the path from incoming bug to assigned work, review, release, and closure. Check whether permissions and notifications create useful accountability without generating noise. For teams with service-level commitments or audit requirements, confirm how records are retained, exported, and reviewed."
-    },
-    {
-      "title": "Adoption and ongoing ownership",
-      "type": "text",
-      "body": "Before rollout, decide who owns workspace configuration, naming conventions, status changes, integrations, and onboarding. Document a small set of team conventions so each group does not create incompatible workflows. After launch, review examples of stalled or duplicated work and ask users where the process adds friction. If the tool does not improve the agreed measures, adjust configuration or reconsider the fit rather than assuming adoption will improve automatically."
-    },
-    {
-      "title": "Before you commit",
-      "type": "text",
-      "body": "Document the exact plan, integrations, security controls, migration assumptions, and renewal cost used in your decision. Confirm important unknowns with vendor documentation or support. A short evidence-based pilot is more reliable than a generic score or a feature list that has not been tested by your team."
-    },
-    {
-      "title": "Keep a record of the trial",
-      "type": "text",
-      "body": "Save test cases, screenshots where appropriate, user feedback, source links, and unresolved questions. This record helps the team explain the decision and repeat the evaluation if pricing or requirements change."
-    },
-    {
-      "title": "Data model and workflow conventions",
-      "body": "Before rollout, agree on how teams use statuses, labels, projects, cycles, priorities, and ownership. Test whether the same conventions work for bug triage, roadmap work, support escalations, and cross-team dependencies. Document where teams may customize the workflow and where shared definitions are required for reliable reporting. Without these conventions, teams can create inconsistent data that makes dashboards difficult to interpret."
+      "body": "Linear is worth shortlisting when issue tracking and product planning are central to a software team's workflow. The decision should depend on a pilot that validates backlog operations, reporting, permissions, integrations, export, and total cost. No independent numeric rating or current price is asserted here. If a mandatory workflow requires repeated workarounds, compare alternatives before migrating critical data."
     }
   ],
   "faqs": [
     {
-      "question": "Is Linear suitable for non-engineering teams?",
-      "answer": "It depends on how those teams plan and report work. Test their everyday workflows, permissions, and reporting needs alongside the engineering use case before standardizing on one system."
+      "question": "What is Linear best used for?",
+      "answer": "Evaluate Linear using a representative task from your workflow. Check whether the output meets your quality bar, how much correction is required, which plan features are available, and whether privacy, integrations, and export meet your requirements."
     },
     {
-      "question": "What should we check before migrating to Linear?",
-      "answer": "Test export and import of issues, comments, attachments, labels, relationships, custom fields, timestamps, and permissions. Keep a source-system backup and reconcile a representative sample before full migration."
+      "question": "How much does Linear cost?",
+      "answer": "Current Linear pricing and plan limits are not independently verified here. Check https://linear.app/pricing and confirm seat rules, included features, billing period, renewal, and cancellation before budgeting."
     },
     {
-      "question": "Are Linear's current price and rating verified here?",
-      "answer": "No. PilotStack has not independently verified a current price, rating, or review count for this profile. Confirm current plan details and independent user feedback directly from their sources."
+      "question": "Does Linear integrate with GitHub?",
+      "answer": "Verify the current integration and platform documentation for Linear, then test the exact workflow, permissions, data sync, and failure handling in a trial. Do not assume that an integration name guarantees the behavior your team needs."
     },
     {
-      "question": "How can we evaluate Linear against alternatives?",
-      "answer": "Use the same tasks, team roles, data sample, integration needs, and scoring criteria for every candidate. Record what was tested, total cost, migration effort, and unresolved gaps."
+      "question": "Is Linear suitable for large teams?",
+      "answer": "Feature availability and limits can change by plan and over time. Verify the current vendor documentation for your use case, then test the workflow in a trial or pilot before committing."
+    },
+    {
+      "question": "What platforms does Linear support?",
+      "answer": "Verify the current integration and platform documentation for Linear, then test the exact workflow, permissions, data sync, and failure handling in a trial. Do not assume that an integration name guarantees the behavior your team needs."
+    },
+    {
+      "question": "Is Linear secure?",
+      "answer": "Review Linear's current security and privacy documentation and contract. Confirm access controls, data retention, deletion, audit visibility, export, and the scope of any certification for the specific plan and use case."
+    },
+    {
+      "question": "What integrations does Linear offer?",
+      "answer": "Verify the current integration and platform documentation for Linear, then test the exact workflow, permissions, data sync, and failure handling in a trial. Do not assume that an integration name guarantees the behavior your team needs."
+    },
+    {
+      "question": "Is Linear good for small businesses?",
+      "answer": "Evaluate Linear using a representative task from your workflow. Check whether the output meets your quality bar, how much correction is required, which plan features are available, and whether privacy, integrations, and export meet your requirements."
+    },
+    {
+      "question": "What are Linear's limitations?",
+      "answer": "Feature availability and limits can change by plan and over time. Verify the current vendor documentation for your use case, then test the workflow in a trial or pilot before committing."
+    },
+    {
+      "question": "How does Linear compare to asana?",
+      "answer": "Compare Linear with alternatives using the same task, inputs, quality bar, integrations, data controls, and cost assumptions. Verify important features with current vendor documentation and treat the decision as specific to your requirements rather than a universal ranking."
+    },
+    {
+      "question": "Does Linear support team collaboration?",
+      "answer": "Verify the current integration and platform documentation for Linear, then test the exact workflow, permissions, data sync, and failure handling in a trial. Do not assume that an integration name guarantees the behavior your team needs."
+    },
+    {
+      "question": "Can I customize Linear?",
+      "answer": "Linear offers significant customization options. Teams can configure settings, views, and notifications to suit their preferences. The API provides additional flexibility for organizations that need deeper customization through custom development."
+    },
+    {
+      "question": "Is Linear easy to set up?",
+      "answer": "Evaluate Linear using a representative task from your workflow. Check whether the output meets your quality bar, how much correction is required, which plan features are available, and whether privacy, integrations, and export meet your requirements."
+    },
+    {
+      "question": "Does Linear work offline?",
+      "answer": "Linear is primarily a cloud-based platform that requires internet connectivity for full functionality. Some features may be accessible offline through mobile apps, but core workflows require an active internet connection. "
+    },
+    {
+      "question": "How often does Linear update?",
+      "answer": "Check Linear's current changelog for release dates and feature details. We have not independently verified a fixed weekly release cadence or quarterly major-release schedule, so we do not promise a specific frequency here."
+    },
+    {
+      "question": "What customer support does Linear provide?",
+      "answer": "Verify the current integration and platform documentation for Linear, then test the exact workflow, permissions, data sync, and failure handling in a trial. Do not assume that an integration name guarantees the behavior your team needs."
+    },
+    {
+      "question": "Does Linear offer a free version?",
+      "answer": "Current pricing and plan entitlements are not independently verified in this review. Check Linear's official pricing page and confirm billing frequency, seat or usage limits, included features, add-ons, regional terms, and cancellation conditions for your intended use."
+    },
+    {
+      "question": "How does Linear handle data privacy?",
+      "answer": "Review the current official security and privacy documentation for Linear. Verify retention, deletion, access controls, auditability, data-use terms, and the scope of any certification or compliance commitment for the specific product and plan you intend to use."
     }
   ],
   "alternatives": [
@@ -136,7 +279,7 @@
   ],
   "contentPublished": "2026-07-16",
   "contentModified": "2026-10-23",
-  "author": "PilotStack Editorial Team",
+  "author": "Sarah Chen",
   "company": {
     "founded": 2019,
     "headquarters": "San Francisco, California",
@@ -194,6 +337,7 @@
   "ratingVerified": false,
   "reviewCountVerified": false,
   "priceRangeVerified": false,
+  "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false
 }

@@ -72,7 +72,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
 
   // Only boolean availability fields are scoreable. Text values such as "Paid" or "Custom"
   // are descriptions, not truthy feature wins.
-  const scoredFeatures = cmp.features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean")
+  const scoredFeatures = cmp.featuresVerified === true ? cmp.features.filter((f) => typeof f.tool1 === "boolean" && typeof f.tool2 === "boolean") : []
   const t1Score = scoredFeatures.filter((f) => f.tool1 === true).length
   const t2Score = scoredFeatures.filter((f) => f.tool2 === true).length
   const t1Pct = scoredFeatures.length ? Math.round((t1Score / scoredFeatures.length) * 100) : null
@@ -90,7 +90,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
     description: cmp.description,
     verdict: cmp.verdict,
   })
-  const { categoriesDiffer, winnerLabel, hasComparableWinner } = getComparisonDecision({
+  const { categoriesDiffer, winnerLabel, provisionalWinnerLabel, hasComparableWinner } = getComparisonDecision({
     winner: cmp.winner,
     winnerVerified: cmp.winnerVerified === true,
     tool1: cmp.tool1,
@@ -100,6 +100,10 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
     tool2Slug: cmp.tool2Slug,
     tool2Category: review2?.category,
   })
+  // A verified feature-coverage leader is narrower than an overall product-quality winner.
+  const featureCoverageLeader = cmp.featuresVerified === true && !categoriesDiffer && t1Pct !== null && t2Pct !== null && t1Pct !== t2Pct
+    ? (t1Pct > t2Pct ? cmp.tool1 : cmp.tool2)
+    : null
 
   // Reuse the review FAQ integrity filter so comparison FAQs do not repeat unverified pricing or templated compliance claims in HTML or FAQ schema.
   const visibleFaqs = getSpecificComparisonFaqs(cmp.faqs).slice(0, 8)
@@ -183,14 +187,14 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           {/* Tool Compare Cards */}
           {(t1Pct !== null || t2Pct !== null) && <div className="grid sm:grid-cols-2 gap-6 mb-8">
             {[
-              { name: cmp.tool1, slug: cmp.tool1Slug, isWinner: hasComparableWinner && winnerLabel === cmp.tool1, score: t1Pct },
-              { name: cmp.tool2, slug: cmp.tool2Slug, isWinner: hasComparableWinner && winnerLabel === cmp.tool2, score: t2Pct },
+              { name: cmp.tool1, slug: cmp.tool1Slug, isWinner: (hasComparableWinner && winnerLabel === cmp.tool1) || provisionalWinnerLabel === cmp.tool1 || featureCoverageLeader === cmp.tool1, score: t1Pct },
+              { name: cmp.tool2, slug: cmp.tool2Slug, isWinner: (hasComparableWinner && winnerLabel === cmp.tool2) || provisionalWinnerLabel === cmp.tool2 || featureCoverageLeader === cmp.tool2, score: t2Pct },
             ].map((tool) => (
               <GlassCard key={tool.name} glow={tool.isWinner}>
                 <div className="p-5 text-center relative">
                   {tool.isWinner && (
                     <Badge variant="warning" className="absolute -top-2.5 right-3">
-                      Recorded pick
+                      {hasComparableWinner ? "Verified pick" : provisionalWinnerLabel === tool.name ? "Provisional pick · verify evidence" : featureCoverageLeader === tool.name ? "Feature coverage leader" : "Pick"}
                     </Badge>
                   )}
                   <div className="text-xl font-bold mb-2">{tool.name}</div>
@@ -236,7 +240,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                     </li>
                     <li className="flex items-start gap-2 text-sm">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">3</span>
-                      <span className="text-muted-foreground">{hasComparableWinner ? `${winnerLabel} is the source dataset pick; verify the underlying evidence before relying on it` : categoriesDiffer ? "These products serve different primary categories; compare their separate use cases rather than treating the dataset pick as a head-to-head winner." : "The source data does not name a comparable winner — evaluate against priority requirements"}</span>
+                      <span className="text-muted-foreground">{hasComparableWinner ? `${winnerLabel} is the recorded pick. Review the supporting criteria and verify current evidence before relying on it.` : provisionalWinnerLabel ? `${provisionalWinnerLabel} is a provisional dataset pick, not an independently verified winner. Check the underlying criteria and your workflow before deciding.` : featureCoverageLeader ? `${featureCoverageLeader} has the higher count of available items across ${scoredFeatures.length} verified boolean feature checks. This is a feature-coverage result, not an overall product-quality rating.` : categoriesDiffer ? "These products serve different primary categories; compare their separate use cases rather than treating the dataset pick as a head-to-head winner." : "The source data does not name a comparable winner — evaluate against priority requirements"}</span>
                     </li>
                   </ul>
                 </div>
@@ -305,10 +309,27 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                 <div className="flex items-center gap-2 mb-3">
                   <CheckCircle2 size={18} className="text-primary" />
                   <p className="text-lg font-semibold">
-                    {hasComparableWinner ? `Recorded pick: ${winnerLabel}` : categoriesDiffer ? "Different product categories" : "How they compare"}
+                    {hasComparableWinner ? `Verified recorded pick: ${winnerLabel}` : provisionalWinnerLabel ? `Provisional pick (verification pending): ${provisionalWinnerLabel}` : featureCoverageLeader ? `Feature coverage leader: ${featureCoverageLeader}` : categoriesDiffer ? "Different product categories" : "How they compare"}
                   </p>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={stripDeadContentLinks(displayCopy.verdict)} /></p>
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-lg border border-border p-4">
+                    <h3 className="text-sm font-semibold mb-2">Choose {cmp.tool1} if…</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {tool1Evidence ? conciseEvidence(tool1Evidence.tool1Detail || tool1Evidence.tool1) : `Your must-have workflow and requirements are better served by ${cmp.tool1}. Validate the relevant capabilities in current official documentation and a short pilot.`}
+                    </p>
+                    <Link href={`/reviews/${cmp.tool1Slug}`} className="inline-flex mt-3 text-xs font-medium text-primary hover:underline">Read {cmp.tool1} review <ArrowRight size={12} className="ml-1" /></Link>
+                  </div>
+                  <div className="rounded-lg border border-border p-4">
+                    <h3 className="text-sm font-semibold mb-2">Choose {cmp.tool2} if…</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {tool2Evidence ? conciseEvidence(tool2Evidence.tool2Detail || tool2Evidence.tool2) : `Your must-have workflow and requirements are better served by ${cmp.tool2}. Validate the relevant capabilities in current official documentation and a short pilot.`}
+                    </p>
+                    <Link href={`/reviews/${cmp.tool2Slug}`} className="inline-flex mt-3 text-xs font-medium text-primary hover:underline">Read {cmp.tool2} review <ArrowRight size={12} className="ml-1" /></Link>
+                  </div>
+                </div>
+                <p className="mt-4 text-xs text-muted-foreground">These are conditional fit recommendations, not a fabricated universal winner. The winner label above is verified only when the comparison evidence record is marked verified.</p>
                 {hasComparableWinner && (
                   <div className="mt-4 pt-4 border-t border-border flex items-center gap-2 text-sm">
                     <span className="text-muted-foreground">Migration complexity:</span>

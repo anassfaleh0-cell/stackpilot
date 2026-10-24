@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const tool = getReview(slug)
   if (!tool) return {}
-  const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true)
+  const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true, tool.name)
   const wordCount = visibleContent.reduce((a, s) => a + s.body.split(/\s+/).length, 0)
   const noindexed = isNoindexed("reviews", slug)
   return createMetadata({
@@ -68,7 +68,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const companyFacts = resolveCompanyFacts(tool, entity)
   const pros = editorialPros(tool.pros)
   const visibleFaqs = getVisibleReviewFaqs(tool.faqs, tool.priceRangeVerified === true, tool.featuresVerified === true).slice(0, 8)
-  const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true)
+  const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true, tool.name)
   const pricingSummary = getReviewPricingSummary(tool.priceRange, tool.pricing, tool.priceRangeVerified === true)
   const pricingModelLabel = isPricingPlaceholder(tool.pricing) ? "Not verified" : tool.pricing || "Not recorded"
 
@@ -77,14 +77,33 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
   const allReviews = getAllReviews()
 
+  // Preserve stored editorial scores visibly with an explicit pending-verification label; only verified scores feed structured data and category rankings.
   const hasStoredEditorialRating = typeof tool.rating === "number" && Number.isFinite(tool.rating) && tool.rating > 0
   const hasEditorialRating = tool.ratingVerified === true && hasStoredEditorialRating
-  const categoryRatings = Array.isArray(tool.ratings) ? tool.ratings : []
+  const categoryRatings = Array.isArray(tool.ratings) ? tool.ratings.filter((item) => typeof item.score === "number" && Number.isFinite(item.score) && item.score > 0) : []
   const bestInCategory = allReviews
     .filter((r) => r.category === tool.category && r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating))
     .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
   const isBestInCategory = hasEditorialRating && bestInCategory?.slug === tool.slug
 
+  const primaryPro = tool.pros.find((item) => typeof item === "string" && item.trim())
+  const primaryCon = tool.cons.find((item) => typeof item === "string" && item.trim())
+  const defaultScoreDimensions = [
+    { label: "Core capabilities", weight: "20%" },
+    { label: "Ease of use", weight: "15%" },
+    { label: "Value for money", weight: "15%" },
+    { label: "Support", weight: "10%" },
+    { label: "Security and privacy", weight: "10%" },
+    { label: "Integrations", weight: "10%" },
+    { label: "Reliability and performance", weight: "10%" },
+    { label: "Documentation", weight: "5%" },
+    { label: "Scalability", weight: "5%" },
+  ]
+  const reviewVerdict = [
+    primaryPro ? `Consider ${tool.name} when this strength matters to your workflow: ${primaryPro.replace(/\s+/g, " ").trim()}` : `Evaluate ${tool.name} against your required workflows and must-have capabilities before shortlisting it.`,
+    primaryCon ? `Main trade-off to validate: ${primaryCon.replace(/\s+/g, " ").trim()}` : `Confirm the limitations, support terms, and plan restrictions that matter to your team before adopting it.`,
+    `Final decision: test one representative task, check current official documentation and pricing, and compare total cost with at least one realistic alternative. ${hasEditorialRating ? "The editorial score is verified against the recorded methodology." : hasStoredEditorialRating ? "Any legacy numeric score is provisional until its evidence and calculation are audited." : "No numeric product score is asserted until an evidence-backed assessment is recorded."}`,
+  ].join(" ")
   return (
     <>
       <BreadcrumbSchema items={[
@@ -223,7 +242,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Rating Overview</h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
-                  {hasStoredEditorialRating && <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={formatScore(tool.rating)} title="Overall Rating" description={hasEditorialRating ? "Verified PilotStack editorial score" : "Stored PilotStack score; verification pending"} />}
+                  <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={hasStoredEditorialRating ? `${formatScore(tool.rating)}/5` : "Pending"} title="Editorial Score" description={hasEditorialRating ? "Verified PilotStack editorial assessment" : hasStoredEditorialRating ? "Provisional stored score; evidence audit pending" : "Assessment not yet recorded; no number is invented"} />
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
@@ -236,7 +255,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   } value={pricingModelLabel} title="Pricing Model" description={tool.priceRangeVerified === true ? "Pricing model and displayed terms are marked verified" : "Current plan terms and price are not independently verified"} />
                 </div>
                 <div className="flex justify-center">
-                  {categoryRatings.length > 0 && <div className="w-full"><p className="text-xs text-muted-foreground mb-2">{tool.ratingsVerified === true ? "Recorded editorial rating dimensions." : "Stored rating dimensions; verification pending. These are not third-party ratings."}</p><EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" /></div>}
+                  {categoryRatings.length > 0 ? <div className="w-full"><p className="text-xs text-muted-foreground mb-2">{tool.ratingsVerified === true ? "PilotStack editorial dimensions; verification status recorded." : "Provisional stored editorial dimensions; evidence audit pending. These are not third-party user ratings."}</p><EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" /></div> : <p className="text-sm text-muted-foreground">No category rating dimensions recorded yet. Add evidence-backed category scores using the published rubric; do not fill gaps with guessed numbers.</p>}
                 </div>
               </section>
 
@@ -398,39 +417,57 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                         <path d="M9 12l2 2 4-4" />
                         <circle cx="12" cy="12" r="10" />
                       </svg>
-                      <h3 className="font-semibold text-sm">Verdict</h3>
+                      <h3 className="font-semibold text-sm">Editorial Verdict</h3>
                     </div>
-                    {hasEditorialRating ? (
+                    {hasStoredEditorialRating ? (
                       <>
                         <div className="text-lg font-bold text-primary mb-1">{formatScore(tool.rating)}/5</div>
                         <ScoreBar score={tool.rating} className="mb-3" />
-                        <p className="text-sm text-muted-foreground">{categoryRatings.length > 0 ? `Mean of ${categoryRatings.length} editorial rating dimensions.` : "Editorial score; see the review methodology for context."}</p>
+                        <p className="text-xs text-muted-foreground mb-3">{hasEditorialRating ? "Verified PilotStack editorial score." : "Legacy PilotStack editorial score; evidence and calculation are pending audit. It is not a third-party user rating."}</p>
                       </>
-                    ) : <p className="text-sm text-muted-foreground">No independently verified aggregate score is published for this review. Compare the practical criteria and current vendor terms below.</p>}
+                    ) : (
+                      <p className="text-xs text-muted-foreground mb-3">Numeric editorial score: not yet evidence-scored. We do not invent a number when the underlying assessment is missing.</p>
+                    )}
+                    <p className="text-sm text-muted-foreground leading-relaxed">{reviewVerdict}</p>
+                    <Link href="/methodology" className="inline-flex mt-3 text-xs font-medium text-primary hover:underline">How scores are assessed <ArrowRight size={12} className="ml-1" /></Link>
                   </div>
                 </GlassCard>
 
-                {/* Rating Breakdown */}
-                {categoryRatings.length > 0 && (
-                  <GlassCard>
-                    <div className="p-4">
-                      <h3 className="font-semibold mb-3 text-sm">Rating Breakdown</h3>
-                      <div className="space-y-3">
-                        {categoryRatings.map((item) => (
-                          <div key={item.label}>
-                            <div className="flex justify-between text-xs mb-0.5">
-                              <span className="text-muted-foreground">{item.label}</span>
-                              <span className="font-medium">{formatScore(item.score)}/5</span>
+                                {/* Complete scorecard: existing marks stay visible with provenance; missing marks remain explicit rather than guessed. */}
+                <GlassCard>
+                  <div className="p-4">
+                    <h3 className="font-semibold mb-2 text-sm">Editorial Scorecard</h3>
+                    <p className="text-xs text-muted-foreground mb-4">Rubric weights total 100%. Any recorded dimension is labelled according to its verification status; missing dimensions are not assigned invented numbers.</p>
+                    <div className="space-y-3">
+                      {defaultScoreDimensions.map((dimension) => {
+                        const aliases: Record<string, string[]> = {
+                          "Core capabilities": ["features", "core capabilities"],
+                          "Ease of use": ["ease of use", "usability"],
+                          "Value for money": ["value", "value for money", "pricing"],
+                          "Support": ["support", "customer support"],
+                          "Security and privacy": ["security", "security and privacy", "privacy"],
+                          "Integrations": ["integrations", "integration"],
+                          "Reliability and performance": ["performance", "reliability", "reliability and performance"],
+                          "Documentation": ["documentation", "learning resources"],
+                          "Scalability": ["scalability", "enterprise readiness"],
+                        }
+                        const recorded = categoryRatings.find((item) => (aliases[dimension.label] || [dimension.label.toLowerCase()]).includes(item.label.toLowerCase()))
+                        return (
+                          <div key={dimension.label}>
+                            <div className="flex items-center justify-between gap-3 text-xs mb-1">
+                              <span className="text-foreground">{dimension.label}</span>
+                              <span className="text-muted-foreground">{recorded ? `${formatScore(recorded.score)}/5 · ${dimension.weight} weight · ${tool.ratingsVerified === true ? "verified" : "provisional"}` : `${dimension.weight} · Not assessed`}</span>
                             </div>
                             <div className="h-1.5 rounded-full bg-muted-bg overflow-hidden">
-                              <div className="h-full rounded-full bg-primary transition-all duration-500" style={{ width: scoreWidth(item.score) }} />
+                              <div className={recorded ? "h-full rounded-full bg-primary" : "h-full rounded-full bg-muted-foreground/25"} style={{ width: recorded ? scoreWidth(recorded.score) : dimension.weight }} />
                             </div>
                           </div>
-                        ))}
-                      </div>
+                        )
+                      })}
                     </div>
-                  </GlassCard>
-                )}
+                    <Link href="/methodology" className="inline-flex mt-4 text-xs font-medium text-primary hover:underline">Read the scoring methodology <ArrowRight size={12} className="ml-1" /></Link>
+                  </div>
+                </GlassCard>
 
                 {/* Editorial Reviewer */}
                 <EditorialExpert author={tool.author} />

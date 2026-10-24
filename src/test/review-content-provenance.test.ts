@@ -21,9 +21,12 @@ describe("review content provenance", () => {
     expect(getReviewPricingSummary("$29/month", "Paid", true)).toBe("Paid: $29/month")
   })
 
-  it("hides pricing and rating diagrams until their provenance is verified", () => {
+  it("keeps unverified pricing and feature diagrams useful as text guidance", () => {
     const visible = getVisibleReviewContent(diagrams, false, false)
-    expect(visible.map((section) => section.body)).toEqual(["implementation-flow"])
+    expect(visible.map((section) => section.type)).toEqual(["text", "text", "diagram"])
+    expect(visible[0].body).toContain("not independently verified")
+    expect(visible[1].body).toContain("not a verified guarantee")
+    expect(visible[2].body).toBe("implementation-flow")
   })
 
   it("removes currency claims from visible review copy until pricing is verified", () => {

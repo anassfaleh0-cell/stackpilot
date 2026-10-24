@@ -82,7 +82,7 @@ export function MobileNav() {
 
       {open && (
         <div
-          className="absolute inset-x-0 top-0 h-[100dvh] z-40 bg-black/20 backdrop-blur-sm animate-fade-in"
+          className="absolute inset-x-0 top-0 h-screen h-[100dvh] z-40 bg-black/20 backdrop-blur-sm animate-fade-in"
           onClick={() => setOpen(false)}
           aria-hidden="true"
         />

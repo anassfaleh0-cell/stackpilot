@@ -92,6 +92,12 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
       ? review.rating
       : null
   }
+  const storedPickRating = (pick: (typeof page.picks)[number] | undefined): number | null => {
+    if (typeof pick?.rating === "number" && Number.isFinite(pick.rating) && pick.rating > 0) return pick.rating
+    if (!pick?.toolSlug) return null
+    const review = getReview(pick.toolSlug)
+    return typeof review?.rating === "number" && Number.isFinite(review.rating) && review.rating > 0 ? review.rating : null
+  }
   const verifiedPickPrice = (pick: (typeof page.picks)[number] | undefined): string | null =>
     pick?.priceRangeVerified === true && typeof pick.priceRange === "string" && pick.priceRange.trim()
       ? pick.priceRange
@@ -148,13 +154,13 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
           <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-            <p className="text-sm text-muted-foreground">This page is a shortlist of {page.picks.length} options to evaluate, not a verified overall ranking. Compare each option against your workflow, check current plan limits with the vendor, and use only ratings or prices explicitly marked as verified.</p>
+            <p className="text-sm text-muted-foreground">This page compares {page.picks.length} options using recorded editorial scores where available. Scores marked provisional still need evidence review and must not be treated as third-party ratings. The list order is not a verified overall ranking. Compare workflow fit and confirm current plan terms directly with each vendor.</p>
           </div>
 
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">TL;DR</h2>
             <ul className="space-y-1.5 text-sm text-muted-foreground list-disc pl-4">
-              <li><strong>First listed option:</strong> {page.picks[0]?.toolName} — {safePickText(page.picks[0], page.picks[0]?.bestFor ?? "")}{verifiedPickRating(page.picks[0]) !== null ? ` Verified editorial rating: ${verifiedPickRating(page.picks[0])}/5.` : ""} The list order is not a verified ranking.</li>
+              <li><strong>First listed option:</strong> {page.picks[0]?.toolName} — {safePickText(page.picks[0], page.picks[0]?.bestFor ?? "")}{storedPickRating(page.picks[0]) !== null ? ` ${verifiedPickRating(page.picks[0]) !== null ? "Verified" : "Provisional stored"} editorial score: ${storedPickRating(page.picks[0])}/5.` : " Editorial score pending evidence-backed assessment."} The list order is not a verified ranking.</li>
               <li>{page.picks.length} listed tools with recorded details; compare them using {page.criteria.length} criteria</li>
               <li>Pricing: {safePricingSummary}</li>
               <li>Each pick includes pros, cons, and a best-fit use case</li>
@@ -167,7 +173,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-4">
               {page.picks.slice(0, 3).map((pick) => (
                 <li key={pick.toolSlug || pick.toolName}>
-                  <strong>{pick.toolName}:</strong> {safePickText(pick, pick.bestFor)}{verifiedPickRating(pick) !== null ? ` Verified editorial rating: ${verifiedPickRating(pick)}/5.` : ""} Pricing: {verifiedPickPrice(pick) ?? "not independently verified in this shortlist"}. Verify current plan limits and included features with the vendor.
+                  <strong>{pick.toolName}:</strong> {safePickText(pick, pick.bestFor)}{storedPickRating(pick) !== null ? ` ${verifiedPickRating(pick) !== null ? "Verified" : "Provisional stored"} editorial score: ${storedPickRating(pick)}/5.` : " Editorial score pending evidence-backed assessment."} Pricing: {verifiedPickPrice(pick) ?? "not independently verified in this shortlist"}. Verify current plan limits and included features with the vendor.
                 </li>
               ))}
               {page.criteria.length > 0 && <li><strong>Compare on:</strong> {page.criteria.join(", ")}.</li>}
@@ -215,15 +221,14 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                               <span className="text-lg font-bold">{pick.toolName}</span>
                             )}
                           </div>
-                          {verifiedPickRating(pick) !== null && (
-                            <div className="flex items-center gap-1 text-sm">
-                              <Star size={14} className="fill-accent text-accent" />
-                              <span className="font-semibold">{verifiedPickRating(pick)}</span>
-                              <span className="text-muted-foreground">/5</span>
-                            </div>
-                          )}
+                          <div className="flex items-center gap-1 text-sm" aria-label={verifiedPickRating(pick) !== null ? "Verified editorial score" : storedPickRating(pick) !== null ? "Provisional stored editorial score" : "Editorial score pending assessment"}>
+                            <Star size={14} className="fill-accent text-accent" />
+                            {storedPickRating(pick) !== null ? (
+                              <><span className="font-semibold">{storedPickRating(pick)}</span><span className="text-muted-foreground">/5</span><span className="text-[10px] text-muted-foreground">{verifiedPickRating(pick) !== null ? "verified" : "provisional"}</span></>
+                            ) : <span className="text-xs text-muted-foreground">Score pending</span>}
+                          </div>
                         </div>
-                        <p className="text-sm font-medium text-primary mb-2">{safePickText(pick, pick.bestFor)}</p>
+                        <p className="text-sm font-medium text-primary mb-2"><span className="font-semibold">Best fit:</span> {safePickText(pick, pick.bestFor)}</p>
                         {verifiedPickPrice(pick) !== null ? (
                           <p className="text-xs text-muted-foreground mb-3">Listed pricing: {verifiedPickPrice(pick)}. Verify current plans, limits, and billing terms with the vendor.</p>
                         ) : (
@@ -304,16 +309,16 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
               <div className="sticky-sidebar space-y-6">
                 <GlassCard>
                   <div className="p-4">
-                    <h3 className="font-semibold mb-3 text-sm">Top Picks</h3>
+                    <h3 className="font-semibold mb-3 text-sm">Options to evaluate</h3>
                     <div className="space-y-2">
-                      {page.picks.slice(0, 5).map((pick) => reviewHref(pick.toolSlug) ? (
+                      {page.picks.slice(0, 5).map((pick, index) => reviewHref(pick.toolSlug) ? (
                         <Link key={pick.toolSlug} href={`/reviews/${pick.toolSlug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
-                          <span>{pick.rank}. {pick.toolName}</span>
+                          <span>Option {index + 1}: {pick.toolName}</span>
                           <span className="text-xs font-medium">{verifiedPickRating(pick) !== null ? `${verifiedPickRating(pick)}/5` : "Rating not verified"}</span>
                         </Link>
                       ) : (
                         <div key={pick.toolSlug} className="flex items-center justify-between text-sm text-muted-foreground py-1">
-                          <span>{pick.rank}. {pick.toolName}</span>
+                          <span>Option {index + 1}: {pick.toolName}</span>
                           <span className="text-xs font-medium">{verifiedPickRating(pick) !== null ? `${verifiedPickRating(pick)}/5` : "Rating not verified"}</span>
                         </div>
                       ))}
