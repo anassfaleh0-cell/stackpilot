@@ -14,7 +14,7 @@ describe("/best/best-marketing-seo-enterprise recovery", () => {
     const page = getBest(SLUG)
     expect(page).not.toBeNull()
     expect(page!.slug).toBe(SLUG)
-    expect(page!.title).toBe("Best Enterprise SEO Software 2026: Top Platforms Compared")
+    expect(page!.title).toBe("Enterprise SEO Software: Compare Ahrefs, Semrush & Moz")
     expect(page!.category).toBe("Marketing & SEO")
   })
 
