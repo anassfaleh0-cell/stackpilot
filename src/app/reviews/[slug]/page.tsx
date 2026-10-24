@@ -67,7 +67,32 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
     : null
   const companyFacts = resolveCompanyFacts(tool, entity)
   const pros = editorialPros(tool.pros)
-  const visibleFaqs = getVisibleReviewFaqs(tool.faqs, tool.priceRangeVerified === true, tool.featuresVerified === true).slice(0, 8)
+  const filteredReviewFaqs = getVisibleReviewFaqs(tool.faqs, tool.priceRangeVerified === true, tool.featuresVerified === true).slice(0, 8)
+  // Never render an empty FAQ section after unsupported source questions are filtered out.
+  const visibleFaqs = filteredReviewFaqs.length > 0 ? filteredReviewFaqs : [
+    {
+      question: `How should a team evaluate ${tool.name}?`,
+      answer: `Start with one representative task from your actual workflow. Check the required capabilities, permissions, integrations, export options, and the effort needed to maintain the workflow. Record what you can confirm in a trial and what still needs vendor confirmation.`,
+    },
+    {
+      question: `Is ${tool.name} pricing verified on this page?`,
+      answer: tool.priceRangeVerified === true
+        ? `This profile marks its pricing record as verified, but plan terms can change. Confirm current prices, limits, billing terms, and regional availability with ${tool.name}'s official documentation before purchasing.`
+        : `Current pricing and plan entitlements are not independently verified here. Check ${tool.name}'s official pricing page for current plans, usage limits, billing terms, and regional availability.`,
+    },
+    {
+      question: `What limitations should buyers check for ${tool.name}?`,
+      answer: tool.cons.length > 0
+        ? `Review the recorded limitations above, then test whether they affect your use case. Also check support boundaries, data portability, permissions, and what happens when an integration or workflow fails.`
+        : `No limitation list is recorded for this profile. That does not mean there are no limitations; test your required workflow and verify support boundaries, plan restrictions, permissions, and data portability before adopting it.`,
+    },
+    {
+      question: `Does PilotStack provide a verified score for ${tool.name}?`,
+      answer: tool.ratingVerified === true && typeof tool.rating === "number"
+        ? `The stored editorial score is marked verified in the current record. Review the published methodology and evidence notes before treating it as decisive for your own requirements.`
+        : `A verified evidence-backed score is not currently recorded for this profile. Any legacy stored value is provisional; compare the rubric and your own workflow results rather than treating it as a third-party user rating.`,
+    },
+  ]
   const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true, tool.name)
   const pricingSummary = getReviewPricingSummary(tool.priceRange, tool.pricing, tool.priceRangeVerified === true)
   const pricingModelLabel = isPricingPlaceholder(tool.pricing) ? "Not verified" : tool.pricing || "Not recorded"
