@@ -1,0 +1,133 @@
+{
+  "slug": "clockify",
+  "name": "Clockify",
+  "seoTitle": "Clockify Review (2026): Workflows, Limitations & Buyer Checklist",
+  "seoDescription": "A practical Clockify review focused on time-entry accuracy, project and client setup, approval routines, reporting, exports, and verification of current plan limits.",
+  "tagline": "A time-tracking product to evaluate for timesheets, project hours, reporting, and billable-work review.",
+  "description": "A practical Clockify review focused on time-entry accuracy, project and client setup, approval routines, reporting, exports, and verification of current plan limits.",
+  "category": "Time Tracking",
+  "website": "https://clockify.me/",
+  "pricing": "Not independently verified",
+  "priceRange": "Not independently verified",
+  "rating": null,
+  "reviewCount": null,
+  "ratingVerified": false,
+  "reviewCountVerified": false,
+  "ratings": [],
+  "ratingsVerified": false,
+  "priceRangeVerified": false,
+  "featuresVerified": false,
+  "companyFactsVerified": false,
+  "pros": [
+    "A time-entry pilot can reveal whether the team records work consistently and with enough context for useful reports.",
+    "Project and client grouping can make it easier to review effort against planned work when the data is maintained.",
+    "Exporting a sample period allows the team to check whether records fit its existing reporting process."
+  ],
+  "cons": [
+    "Time reports are only as reliable as the team's habits, project structure, and correction process.",
+    "Current feature availability, usage limits, and pricing are not independently verified in this review.",
+    "Time tracking can feel intrusive if the team has not agreed on purpose, access, and reporting expectations."
+  ],
+  "features": [
+    {
+      "name": "Timer and manual entry",
+      "description": "Test starting, stopping, editing, and adding a time entry against a real task.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Projects and clients",
+      "description": "Verify whether the intended project and client structure supports the reports the team needs.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Timesheet review",
+      "description": "Test how a manager identifies incomplete entries and handles corrections.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Reports and export",
+      "description": "Export a sample period and reconcile totals with the team's current records.",
+      "available": true,
+      "category": "Core"
+    }
+  ],
+  "content": [
+    {
+      "title": "Timer and time-entry accuracy",
+      "body": "Use a representative work week to test both timer-based entry and manual correction. Define the minimum useful detail for each entry—project, task, note, and billable status where relevant—without forcing people to write long descriptions for routine work. Check how overlapping timers, forgotten stops, edits, and late entries are handled. A good setup makes corrections visible and keeps the resulting data understandable.",
+      "type": "text"
+    },
+    {
+      "title": "Project, client, and task structure",
+      "body": "Create a small set of projects that reflects the team's actual work, including one internal project and one client-facing project if applicable. Decide who can create new projects, rename tasks, and close completed work. Avoid creating dozens of labels before the team has established a reporting need. Consistent names matter because slightly different project labels can fragment the same work across reports.",
+      "type": "text"
+    },
+    {
+      "title": "Timesheet review and team habits",
+      "body": "Test the end-of-week review process with a sample of complete, incomplete, and corrected entries. Determine who checks missing time, how disagreements are resolved, and when a timesheet is considered final. Explain to staff why the data is collected and who can see it. Tracking without a clear purpose can erode trust; the process should support planning and invoicing rather than simply accumulate activity records.",
+      "type": "text"
+    },
+    {
+      "title": "Reporting and export",
+      "body": "Choose one operational question, such as which projects used the most effort or whether a client engagement stayed within its planned hours. Build the report, export a representative date range, and compare totals with the source entries. Verify time zone, rounding, grouping, and the treatment of edited entries. If the report is used for invoicing or payroll, reconcile it carefully before treating it as authoritative.",
+      "type": "text"
+    },
+    {
+      "title": "Privacy, access, and integrations",
+      "body": "Map who needs to view individual time entries, team totals, client reports, or administration settings. Test role permissions and the effect of removing a user from a project. Confirm any integrations required by the existing project or accounting workflow on the exact plan. Review the vendor's current privacy and data-handling documentation before collecting data that the team considers sensitive.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing and implementation checklist",
+      "body": "Current Clockify pricing and plan limits are not independently verified here. Confirm the official pricing page for users, projects, reporting, approvals, integrations, and administration. Pilot with a small group for one complete reporting period and measure missing entries, correction effort, report usefulness, and time spent maintaining the system. No numeric editorial rating is published until a documented assessment is recorded.",
+      "type": "text"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the best way to test Clockify?",
+      "answer": "Run a small pilot across a real work week, then check timer corrections, missing entries, project grouping, and whether reports answer a real planning or billing question."
+    },
+    {
+      "question": "Are Clockify's current plan limits verified here?",
+      "answer": "No. Check the vendor's current pricing and feature documentation for the exact user count, approval needs, reports, and integrations."
+    },
+    {
+      "question": "Will time-tracking reports be accurate automatically?",
+      "answer": "No. Accuracy depends on consistent entry habits, clear project names, correction rules, and a review process."
+    },
+    {
+      "question": "Does PilotStack have a verified Clockify rating?",
+      "answer": "No verified aggregate rating or third-party review count is recorded on this page, so we do not invent a numeric score."
+    }
+  ],
+  "relatedComparisons": [],
+  "relatedGuides": [],
+  "relatedPosts": [],
+  "alternatives": [],
+  "author": "PilotStack Editorial Team",
+  "contentPublished": "2026-10-24",
+  "contentModified": "2026-10-24",
+  "company": {
+    "industries": [
+      "Time Tracking"
+    ],
+    "targetUsers": [
+      "Teams that need to understand where work time goes and want to test a repeatable timesheet process across projects or clients."
+    ],
+    "pricingModel": "Not independently verified",
+    "deployment": [
+      "Cloud"
+    ],
+    "apiAvailable": null,
+    "learningCurve": "Evaluate with a representative workflow",
+    "migrationComplexity": "Depends on existing tools"
+  },
+  "difficulty": "Beginner to intermediate",
+  "learningCurve": "Evaluate with a representative workflow",
+  "whoShouldUse": "Teams that need to understand where work time goes and want to test a repeatable timesheet process across projects or clients.",
+  "whoShouldNotUse": "Organizations that need payroll, billing, or compliance workflows without first confirming regional support and the exact product configuration."
+}
