@@ -84,6 +84,34 @@
       "title": "Pricing and decision checklist",
       "body": "Current Klaviyo prices, channel limits, and plan entitlements are not independently verified here. Check the official pricing page for the expected contact count, sending volume, required channels, automation, data features, support, and billing cadence. Estimate cost using realistic store volume and include the effort needed to maintain customer data and campaign content. No numeric editorial score or third-party review aggregate is asserted without an auditable source.",
       "type": "text"
+    },
+    {
+      "title": "Catalog and profile mapping",
+      "type": "text",
+      "body": "Review the fields and events that connect the store catalog, customer profile, and campaign logic. Test a new customer, a returning customer, and a customer whose order is refunded or changed. Check how missing attributes and duplicate events affect the segment. Clear field definitions help the marketing team understand why a person entered a journey and make it easier to troubleshoot unexpected messages."
+    },
+    {
+      "title": "Quality assurance before sending",
+      "type": "text",
+      "body": "Use a controlled test profile for every branch of the journey. Check subject lines, personalization fallbacks, mobile rendering, links, and the page a customer reaches after clicking. Confirm that a customer who has already completed the intended action exits the flow. Keep the test checklist with the journey so future edits receive the same review."
+    },
+    {
+      "title": "Pilot scorecard",
+      "type": "text",
+      "body": "Record event accuracy, manual fixes, audience mistakes, campaign outcomes, opt-out signals, and the effort needed to maintain segments. Compare with the current workflow using the same campaign goal. If the team cannot explain how a profile entered the journey or how to stop a message, do not expand the automation until the rules are clearer."
+    },
+    {
+      "title": "Implementation checklist",
+      "type": "list",
+      "body": "Before enabling a live journey:",
+      "items": [
+        "Validate catalog and customer event fields.",
+        "Test audience inclusion and exclusions.",
+        "Verify channel-specific consent.",
+        "Test all message branches and exits.",
+        "Assign a journey owner and pause process.",
+        "Confirm current plan limits and channel terms."
+      ]
     }
   ],
   "faqs": [
