@@ -46,8 +46,14 @@ export function RelatedContent({ items, title = "Related Resources", maxItems = 
   )
 }
 
+const REVIEW_SLUG_ALIASES: Record<string, string> = {
+  // Keep legacy product-name slugs from creating internal links to a nonexistent page.
+  "acuity-scheduling": "acuity",
+}
+
 function RelatedCard({ item }: { item: RelatedItem }) {
-  const href = `/${ROUTE_FOR_TYPE[item.type] ?? `${item.type}s`}/${item.slug}`
+  const slug = item.type === "review" ? (REVIEW_SLUG_ALIASES[item.slug] || item.slug) : item.slug
+  const href = `/${ROUTE_FOR_TYPE[item.type] ?? `${item.type}s`}/${slug}`
 
   return (
     <Link href={href} className="group">
@@ -56,7 +62,7 @@ function RelatedCard({ item }: { item: RelatedItem }) {
           <Badge variant="secondary" className="text-xs capitalize">{item.type}</Badge>
         </div>
         <CardTitle className="text-sm group-hover:text-primary transition-colors capitalize">
-          {item.title || item.slug.replace(/-/g, " ")}
+          {item.title || slug.replace(/-/g, " ")}
         </CardTitle>
         <div className="mt-2 flex items-center text-xs text-primary gap-1">
           Read more <ArrowRight size={12} />
