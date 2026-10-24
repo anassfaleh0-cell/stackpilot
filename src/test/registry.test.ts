@@ -85,3 +85,17 @@ describe("comparison normalization", () => {
     expect(comparison?.features.some((feature) => String(feature.tool1).includes("0/5") || String(feature.tool2).includes("0/5"))).toBe(false)
   })
 })
+
+describe("evidence-safe comparison records", () => {
+  it("does not publish a winner or score for the GitHub vs SourceForge decision guide", () => {
+    const comparison = getComparison("github-vs-sourceforge")
+    expect(comparison).not.toBeNull()
+    expect(comparison?.winner).toBeNull()
+    expect(comparison?.winnerVerified).toBe(false)
+    expect(comparison?.featuresVerified).toBe(true)
+    expect(comparison?.features).toHaveLength(8)
+    expect(comparison?.description).not.toMatch(/4\.7\/5|3\.5\/5|\$19\.25/)
+    expect(comparison?.verdict).not.toMatch(/overall winner|outperforms|4\.7\/5|3\.5\/5/)
+  })
+})
+
