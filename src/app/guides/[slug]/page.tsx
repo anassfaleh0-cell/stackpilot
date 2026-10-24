@@ -106,7 +106,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         }
         path={`/guides/${slug}`}
       />
-      <WebPageSchema name={guide.title} description={guide.description} url={`${site.url}/guides/${slug}`} dateModified={guide.lastUpdated} mainEntity={guide.relatedTools.length > 0 ? { "@type": "ItemList", itemListElement: guide.relatedTools.map((t, i) => ({ "@type": "ListItem", position: i + 1, item: (() => { const rv = getReview(t); return softwareApp({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}`, category: rv?.category || guide.category, description: rv?.tagline, rating: rv?.rating, reviewCount: rv?.reviewCount }) })() })) } : undefined} />
+      <WebPageSchema name={guide.title} description={guide.description} url={`${site.url}/guides/${slug}`} dateModified={guide.lastUpdated} mainEntity={guide.relatedTools.length > 0 ? { "@type": "ItemList", itemListElement: guide.relatedTools.map((t, i) => ({ "@type": "ListItem", position: i + 1, item: (() => { const rv = getReview(t); return softwareApp({ name: getContentTitle("review", t) || t, url: `${site.url}/reviews/${t}`, category: rv?.category || guide.category, description: rv?.tagline, rating: rv?.ratingVerified === true ? rv.rating : undefined, reviewCount: rv?.reviewCountVerified === true ? rv.reviewCount : undefined }) })() })) } : undefined} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Guides", href: "/guides" }, { name: guide.title }]} />
       </Container>
