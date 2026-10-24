@@ -84,6 +84,34 @@
       "title": "Pricing and implementation checklist",
       "body": "Current Clockify pricing and plan limits are not independently verified here. Confirm the official pricing page for users, projects, reporting, approvals, integrations, and administration. Pilot with a small group for one complete reporting period and measure missing entries, correction effort, report usefulness, and time spent maintaining the system. No numeric editorial rating is published until a documented assessment is recorded.",
       "type": "text"
+    },
+    {
+      "title": "Adoption and team expectations",
+      "type": "text",
+      "body": "Explain why time is being recorded, who can view the results, and how entries may be corrected. Start with a small group and a short reporting period rather than requiring everyone to change habits at once. Ask users where entry takes too long or where project names are unclear. A consistent and transparent process usually produces more useful data than adding extra fields or reminders."
+    },
+    {
+      "title": "Common failure cases",
+      "type": "text",
+      "body": "Include forgotten timers, work across two projects, late corrections, and a project that has been closed. Check whether the resulting record is easy to understand and whether the team can repair an error without losing context. Document how to handle missing time and how a reviewer confirms the final period. These cases reveal whether the workflow is resilient enough for routine use."
+    },
+    {
+      "title": "Pilot scorecard",
+      "type": "text",
+      "body": "Measure missing entries, time spent correcting records, report preparation effort, and whether the reports answer real project questions. Compare one complete period with the team's existing process. If users still keep duplicate spreadsheets or cannot explain the project totals, simplify the structure or test an alternative. Verify current plan features before adopting approvals, exports, or integrations."
+    },
+    {
+      "title": "Implementation checklist",
+      "type": "list",
+      "body": "Before rollout, confirm the basics.",
+      "items": [
+        "Agree on project and task naming.",
+        "Define minimum entry detail and correction rules.",
+        "Test timer and manual entry.",
+        "Reconcile a sample export.",
+        "Explain report access and intended use.",
+        "Verify current plan limits and integrations."
+      ]
     }
   ],
   "faqs": [
