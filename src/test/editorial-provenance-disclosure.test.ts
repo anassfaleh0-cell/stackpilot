@@ -21,11 +21,14 @@ describe("editorial provenance disclosures", () => {
     expect(policy).toMatch(/source provenance and calculation can be checked|checkable source/i)
   })
 
-  it("does not render stored numeric scores unless the review marks them verified", () => {
+  it("labels stored scores as provisional and keeps them out of verified-only ranking/schema logic", () => {
     const reviewPage = readPage("src/app/reviews/[slug]/page.tsx")
 
     expect(reviewPage).toContain('const hasEditorialRating = tool.ratingVerified === true && typeof tool.rating === "number"')
-    expect(reviewPage).toContain('const categoryRatings = tool.ratingsVerified === true && Array.isArray(tool.ratings) ? tool.ratings : []')
+    expect(reviewPage).toContain('const categoryRatings = Array.isArray(tool.ratings) ? tool.ratings.filter((item) => typeof item.score === "number" && Number.isFinite(item.score) && item.score > 0) : []')
+    expect(reviewPage).toContain('title="Editorial Score"')
+    expect(reviewPage).toContain('"Assessment not yet recorded; no number is invented"')
+    expect(reviewPage).toContain('"Provisional stored score; evidence audit pending"')
   })
 
   it("avoids blanket claims that every legacy score is already verified", () => {
