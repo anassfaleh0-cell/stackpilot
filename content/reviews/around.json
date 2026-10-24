@@ -84,6 +84,34 @@
       "title": "Historical rating and pricing status",
       "body": "No current price, current plan, or active user-rating aggregate is published here because the standalone product is discontinued and an auditable current source trail is not available. The review preserves product history and replacement criteria rather than inventing a live rating or pretending that the old service can still be purchased. The appropriate decision for new deployments is to evaluate an active alternative.",
       "type": "text"
+    },
+    {
+      "title": "Replacement requirements",
+      "type": "text",
+      "body": "Write down which historical Around workflows mattered most: spontaneous calls, a compact video interface, quick screen sharing, or easy access from a shared workspace. Separate essential requirements from preferences that were specific to the retired product. Use that list to compare active services rather than searching for an exact clone of an interface that is no longer supported."
+    },
+    {
+      "title": "Link and account cleanup",
+      "type": "text",
+      "body": "Audit internal meeting templates, onboarding documents, calendar descriptions, and team playbooks for links to the old service. Replace each with a currently supported meeting path and test it from a normal user account. Confirm whether any needed records or recordings were preserved before shutdown; do not assume an old link still works. Avoid unofficial downloads or mirrors of the retired app."
+    },
+    {
+      "title": "Historical evaluation checklist",
+      "type": "text",
+      "body": "For teams documenting a past deployment, record the former use case, which workflows must be replaced, and any known data-retention questions. For a new deployment, compare active candidates on joining a call, screen sharing, calendar behavior, recording, accessibility, administration, and support. No numeric score is published for the discontinued service because current availability and pricing do not apply."
+    },
+    {
+      "title": "Migration checklist",
+      "type": "list",
+      "body": "Use this checklist when retiring an old Around workflow.",
+      "items": [
+        "Find old meeting links and templates.",
+        "Choose an active replacement and test a real call.",
+        "Update onboarding and calendar instructions.",
+        "Confirm any required records were preserved.",
+        "Review the replacement's access and recording controls.",
+        "Tell users when the old workflow should no longer be used."
+      ]
     }
   ],
   "faqs": [
