@@ -46,6 +46,21 @@
       "title": "Operations and cost",
       "body": "Estimate registry storage, compute, logging, networking, orchestration and engineering time. Document image update cadence, release tags, rollback and incident ownership. Validate the full deployment path in the target platform before moving a production service.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "A developer should be able to build and run the same version from a clean checkout using documented commands. Test the image in CI and in the target runtime, and confirm configuration is injected securely at runtime. Record build reproducibility, startup behavior and how quickly a patched image can be released.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and recovery",
+      "body": "Test a missing environment variable, an unavailable dependency, an image with a known vulnerable package and a failed health check. Verify the service fails safely, logs are useful and rollback restores the prior image. Document who owns base-image updates and how exceptions expire.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document image ownership, base image policy, registry access, scan gates, runtime privileges, persistent data, deployment platform and recovery process. Compare the ongoing operations effort with a managed runtime where appropriate. Containerization is a packaging choice, not a complete production architecture.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -146,5 +161,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 201
+  "wordCount": 335
 }
