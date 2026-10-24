@@ -1,18 +1,18 @@
 {
   "slug": "churn-rate",
   "term": "Churn Rate",
-  "definition": "The percentage of customers who stop using a product or service over a given time period.",
-  "extendedDefinition": "Churn rate is a critical health metric for subscription businesses because losing customers directly impacts recurring revenue. It is typically calculated monthly or annually by dividing the number of lost customers by the total customer count at the start of the period. High churn often signals product-market fit issues, poor customer experience, or ineffective onboarding. Reducing churn by even a few percentage points can dramatically improve profitability. For buyers, churn and retention metrics reveal vendor health: strong renewal rates and expansion revenue indicate products that improve for customers, while high churn signals value erosion. Reviewing cohort behavior identifies the root causes worth fixing, whether onboarding friction or feature gaps.",
+  "definition": "The percentage of customers or recurring revenue lost during a defined period, usually measured monthly or annually.",
+  "extendedDefinition": "Churn rate measures how much of a customer base or recurring-revenue base leaves over a period. Customer churn and revenue churn are related but not interchangeable: losing a small account and losing a large enterprise account have different financial effects. For a simple monthly customer-churn calculation, divide customers lost during the month by customers at the start of the month, then multiply by 100; define how you treat reactivations, pauses, and new customers before comparing results. For software buyers, vendor churn claims need context such as customer segment, contract length, cohort age, and whether the figure is logo churn or revenue churn. A single percentage without a time window or methodology is not enough to compare vendors.",
   "category": "Analytics & Data",
   "examples": [
-    "Monthly churn",
-    "Annual churn",
-    "Revenue churn"
+    "A subscription app starts April with 2,000 paying customers and loses 60 of them by month-end; simple customer churn is 3% (60 ÷ 2,000).",
+    "A SaaS company loses one large enterprise account worth $8,000 in monthly recurring revenue and several small accounts; revenue churn highlights the financial impact that customer count alone misses.",
+    "A buyer comparing vendor retention claims asks whether the published figure is monthly or annual, which customer cohort it covers, and whether expansion revenue offsets cancellations."
   ],
   "relatedTerms": [
     "clv",
     "kpi",
     "saas"
   ],
-  "description": "Churn rate measures the percentage of customers who stop using a product during a given period. Learn how to calculate, reduce, and manage customer churn."
+  "description": "Churn rate measures the share of customers or recurring revenue lost during a defined period. Learn the calculation, common variants, and what to verify before comparing subscription businesses."
 }
