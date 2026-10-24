@@ -38,9 +38,13 @@ const REVIEW_SLUG_ALIASES: Record<string, string> = {
 }
 
 function resolveItem(item: RelatedItem): RelatedItem | null {
+  if (!ROUTE_FOR_TYPE[item.type]) return null
   const slug = item.type === "review" ? (REVIEW_SLUG_ALIASES[item.slug] || item.slug) : item.slug
-  if (!ROUTE_FOR_TYPE[item.type] || !isContentAvailable(item.type, slug)) return null
-  return { ...item, slug, title: getContentTitle(item.type, slug) || item.title }
+  // Category landing pages are a separate route family, not records in the content registry.
+  if (item.type === "category") return { ...item, slug }
+  const registryType = item.type === "statistics" ? "statistic" : item.type
+  if (!isContentAvailable(registryType, slug)) return null
+  return { ...item, slug, title: getContentTitle(registryType, slug) || item.title }
 }
 
 export function RelatedContent({ items, title = "Related Resources", maxItems = 3 }: RelatedContentProps) {
