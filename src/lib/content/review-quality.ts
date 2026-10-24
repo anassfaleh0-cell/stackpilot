@@ -88,7 +88,7 @@ export function stripUnverifiedPriceClaims(value: string): string {
   const planPhrase = /\b(?:free|freemium|paid|enterprise)\s+(?:plan|tier)\b|\bfree trial\b/i
   const pricingContext = /\b(?:price|pricing|costs?|plan|tier|subscription|billing|from|per (?:user|seat|editor)|starts? at|starting at|monthly|annually|annual|renewal|fee|licen[cs]e|pay(?:s|ment)?|budget)\b/i
   const hasUnverifiedPricing = (sentence: string) =>
-    (currencyAmount.test(sentence) && pricingContext.test(sentence) || planPhrase.test(sentence)) &&
+    (currencyAmount.test(sentence) && (pricingContext.test(sentence) || sentence.trim().length <= 32) || planPhrase.test(sentence)) &&
     !/not independently verified|verification pending/i.test(sentence)
   // Collapse legacy inline caveats, then add one clear caveat per content field instead of
   // repeating the same warning after every price-bearing sentence.
