@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { getComparison, searchContent } from "@/lib/content/registry"
+import { getComparison, getReview, searchContent } from "@/lib/content/registry"
 
 describe("searchContent", () => {
   it("returns results for matching query", () => {
@@ -55,6 +55,20 @@ describe("getAllReviews", () => {
   })
 })
 
+
+describe("unsupported review metrics", () => {
+  it("does not render unsourced latency, adoption, or compliance claims from legacy review records", () => {
+    const review = getReview("supabase")
+    expect(review).not.toBeNull()
+    const renderedText = JSON.stringify({
+      pros: review?.pros,
+      cons: review?.cons,
+      content: review?.content,
+      faqs: review?.faqs,
+    })
+    expect(renderedText).not.toMatch(/40\+ native extensions|20\+ OAuth providers|100ms latency|500ms-2s|Documentation trails rapid releases by 2-3 months|complies with GDPR and CCPA/i)
+  })
+})
 
 describe("comparison normalization", () => {
   it("preserves authored decision criteria instead of appending synthetic placeholder rows", () => {
