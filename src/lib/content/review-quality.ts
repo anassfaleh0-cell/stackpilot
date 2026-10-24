@@ -76,7 +76,7 @@ export function getReviewPricingSummary(priceRange?: string, pricing?: string, v
   const range = isPricingPlaceholder(priceRange) ? "" : String(priceRange).trim()
   const value = model && range ? `${model}: ${range}` : model || range
   if (!value) return "Current pricing is not independently verified; confirm plans and regional terms with the vendor."
-  if (!verified && /[$€£]\s?\d/i.test(value)) return "Current pricing is not independently verified; confirm plans and regional terms with the vendor."
+  if (!verified && /[$€£]\s?\d|\b(?:USD|EUR|GBP)\s?\d|\b\d[\d,]*(?:\.\d+)?\s?(?:USD|EUR|GBP)\b/i.test(value)) return "Current pricing is not independently verified; confirm plans and regional terms with the vendor."
   return verified ? value : `${value} (recorded; not independently verified; confirm current terms with the vendor)`
 }
 
