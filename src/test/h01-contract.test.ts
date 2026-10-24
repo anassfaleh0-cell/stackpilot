@@ -183,7 +183,7 @@ describe("H-01 contract", () => {
     expect(criteria).toContain("17 / 30 / 44 / 161 / 251 / 295")
     expect(criteria).toContain("ADVISORY_ONLY")
     expect(criteria).toContain("no renderer gate")
-    expect(criteria).toContain("151 total / 143 indexable / 8 noindex")
+    expect(criteria).toContain("165 total / 157 indexable / 8 noindex")
   })
 })
 
@@ -683,7 +683,7 @@ describe("H-01 external evidence", () => {
 describe("H-01 SEO safety", () => {
   it("preserves the historical review indexability invariant in the H-01 contract", () => {
     const invariant = H01_CONTRACT.seoSafety.invariant
-    expect(invariant).toEqual({ totalReviews: 151, indexable: 143, noindex: 8 })
+    expect(invariant).toEqual({ totalReviews: 165, indexable: 157, noindex: 8 })
     expect(H01_CONTRACT.seoSafety.indexabilityMayChange).toBe(false)
     const current = JSON.parse(read("noindex-list.json")) as {
       summary: { totalNoindex: number }
@@ -691,7 +691,7 @@ describe("H-01 SEO safety", () => {
     }
     expect(current.summary.totalNoindex).toBe(0)
     expect(current.directories.reviews.noindex).toEqual([])
-    expect(current.directories.reviews.keep).toHaveLength(151)
+    expect(current.directories.reviews.keep).toHaveLength(165)
   })
 
   it("keeps every forbidden SEO surface free of H-01 and provenance logic", () => {
