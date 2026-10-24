@@ -96,7 +96,7 @@ function replacementForUnverifiedSection(title: string, productName = "this prod
   if (/security|privacy|compliance/.test(normalized)) {
     return `Security and compliance claims for ${productName} require product-, plan-, and region-specific evidence. Review current vendor trust documentation, data-processing terms, access controls, data retention, deletion/export options, and the scope and date of any independent audit before adoption.`
   }
-  if (/performance|reliability|uptime|setup time|migration/.test(normalized)) {
+  if (/performance|reliability|uptime|setup time|implementation|adoption|rollout|migration/.test(normalized)) {
     return `No independent benchmark or implementation timing is asserted for ${productName} here. Test a representative workload or dataset, record a baseline, measure task completion time and errors, and document migration dependencies and rollback options before making a commitment.`
   }
   if (/support|documentation|learning curve/.test(normalized)) {
@@ -105,7 +105,16 @@ function replacementForUnverifiedSection(title: string, productName = "this prod
   if (/feature|integration|capabilit/.test(normalized)) {
     return `Treat the recorded capability notes for ${productName} as a checklist, not a verified guarantee. Confirm each must-have feature, integration, permission, export path, and plan restriction in current official documentation, then test it in your own workflow.`
   }
-  return `This section needs product-specific evidence before its legacy claims can be treated as verified. For ${productName}, check current official documentation, test the workflow with representative data, and record the source and date for each material conclusion.`
+  if (/strength|trade-off|\\bpros\\b|\\bcons\\b|limitation/.test(normalized)) {
+    return `Treat any listed strength of ${productName} as a hypothesis to test, not an independently verified finding. Choose two representative tasks, compare completion time and manual work with your current process, then record blockers, workarounds, failure cases, and ongoing administration. A useful trade-off statement should identify who benefits, what constraint appears, and the evidence behind that conclusion.`
+  }
+  if (/who should|fit|workflow|industry|target user|use case/.test(normalized)) {
+    return `Assess ${productName} against the team's actual workflow rather than a broad industry label. Name the primary user, administrator, must-have task, required integrations, data-access rules, and measurable success condition. Run the same scenario with representative data and include an exception case before deciding whether the product fits.`
+  }
+  if (/decision|buying|pilot|checklist|evaluation/.test(normalized)) {
+    return `Use this ${title.toLowerCase()} section to create a short acceptance plan for ${productName}: list the required outcome, the test input, the expected result, the person responsible, and pass/fail criteria. Record unknowns separately, confirm plan limits with the vendor, and keep a rollback option until the team signs off.`
+  }
+  return `For ${productName}, evaluate “${title}” against a documented requirement rather than assuming a generic claim is true. These claims are not independently verified yet. Define a representative task, the expected outcome, the source needed to verify the claim, and a failure case. Mark results as pass, partial pass, fail, or unknown, and record the test date so readers can distinguish verified findings from items still to check.`
 }
 
 export function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false, showVerifiedRatings = false, productName = "this product"): ContentSection[] {
