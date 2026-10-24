@@ -42,4 +42,31 @@ describe("editorial provenance disclosures", () => {
     expect(team).not.toContain("the process behind every score is public")
     expect(about).not.toContain("See exactly how we reach every conclusion")
   })
+  
+  it("does not retain unsupported numeric review claims in audited high-traffic entries", () => {
+    const slugs = ["chatgpt", "claude", "gemini", "linear", "notion", "perplexity"]
+    for (const slug of slugs) {
+      const page = JSON.parse(readPage(`content/reviews/${slug}.json`)) as {
+        rating?: number
+        reviewCount?: number
+        ratings?: Array<{ score?: number }>
+        ratingVerified?: boolean
+        reviewCountVerified?: boolean
+        ratingsVerified?: boolean
+        priceRange?: string
+        priceRangeVerified?: boolean
+        company?: Record<string, unknown>
+        companyFactsVerified?: boolean
+      }
+
+      if (page.ratingVerified === false) expect(page.rating ?? 0).toBe(0)
+      if (page.reviewCountVerified === false) expect(page.reviewCount ?? 0).toBe(0)
+      if (page.ratingsVerified === false) expect(page.ratings ?? []).toHaveLength(0)
+      if (page.priceRangeVerified === false && page.priceRange) {
+        expect(page.priceRange).toMatch(/not independently verified/i)
+      }
+      if (page.companyFactsVerified === false) expect(Object.keys(page.company ?? {})).toHaveLength(0)
+    }
+  })
+
 })
