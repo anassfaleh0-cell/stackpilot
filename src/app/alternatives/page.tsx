@@ -5,8 +5,6 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllAlternatives } from "@/lib/content/registry"
 import { REDIRECTED_ALTERNATIVE_SLUGS } from "@/lib/sitemap/redirected-content"
-import { getPagination } from "@/lib/pagination"
-import { PaginationNav } from "@/components/ui/pagination-nav"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
@@ -20,8 +18,8 @@ export const dynamic = "force-static"
 
 export default function AlternativesPage() {
   const allAlternatives = getAllAlternatives().filter((item) => !REDIRECTED_ALTERNATIVE_SLUGS.has(item.slug))
-  const pagination = getPagination({ page: 1, perPage: 24, total: allAlternatives.length })
-  const pageAlternatives = allAlternatives.slice(pagination.start, pagination.end)
+  // Keep every published alternative discoverable from this static index page.
+  const pageAlternatives = allAlternatives
   const grouped: Record<string, typeof allAlternatives> = {}
   pageAlternatives.forEach((alt) => {
     if (!grouped[alt.category]) grouped[alt.category] = []
@@ -50,8 +48,6 @@ export default function AlternativesPage() {
             </div>
           </section>
         ))}
-        <PaginationNav basePath="/alternatives" pagination={pagination} />
-
         <section className="mt-14 max-w-4xl border-t border-border pt-8">
           <h2 className="text-2xl font-bold tracking-tight mb-3">How to compare software alternatives</h2>
           <p className="text-muted-foreground leading-relaxed mb-4">Start with the job the current product performs and the reason you are considering a change. A lower subscription price may not reduce total cost if migration, retraining, integration work, or lost functionality creates additional effort. Compare alternatives against the same requirements rather than relying on a universal ranking.</p>
