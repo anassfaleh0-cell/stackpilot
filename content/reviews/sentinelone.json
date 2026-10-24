@@ -1,112 +1,71 @@
 {
   "slug": "sentinelone",
   "name": "SentinelOne",
-  "tagline": "AI-powered endpoint protection and cybersecurity platform.",
-  "description": "SentinelOne puts detection and response on the endpoint agent itself, with behavioral analysis, autonomous action, and attack rollback.",
+  "tagline": "Endpoint security platform to evaluate for detection, response, fleet management and incident investigation; verify edition-specific capabilities before purchase.",
+  "description": "A buyer-oriented SentinelOne profile for teams assessing endpoint protection and response. Current pricing, ratings, review counts, feature availability and contract terms have not been independently verified by PilotStack; confirm them in current vendor documentation and a scoped quote.",
   "category": "Security & Compliance",
   "website": "https://sentinelone.com",
-  "pricing": "Paid",
-  "priceRange": "$5-8/device/mo",
-  "rating": 4.2,
-  "reviewCount": 1820,
+  "pricing": "Not independently verified",
+  "priceRange": "Not independently verified — request current pricing from the vendor",
   "pros": [
-    "Detection and response decisions are made on the agent itself, so the endpoint acts on what it observes rather than waiting on a console decision.",
-    "Rollback reverses changes an attack made to a host, which shortens the cleanup work after a ransomware-style event.",
-    "The recorded band of $5-8/device/mo sits below CrowdStrike's band in the same dataset, at a rating of 4.2 against 4.4.",
-    "Activity history is retained with the endpoint, so a record exists to replay when reconstructing how an incident unfolded.",
-    "Response behavior is set centrally and applied across enrolled agents, so one policy change reaches the whole fleet."
+    "Relevant to evaluate when endpoint detection and response, centralized policy management, and investigation workflows are requirements.",
+    "Potentially useful for organizations that need endpoint visibility and response controls across managed devices; confirm the exact coverage and edition.",
+    "Can be assessed alongside the organization's identity, SIEM, ticketing, and incident-response workflow."
   ],
   "cons": [
-    "Autonomous action is the default posture: the agent can terminate a process and quarantine a file without an operator approving it first.",
-    "Per-device licensing bills every enrolled machine, and this file records the product as paid with no free tier in the pricing field.",
-    "An agent cannot see activity on machines it was never installed on, so servers, network gear, and unmanaged devices stay outside its view."
+    "Endpoint protection only covers assets that are in scope and properly enrolled; validate coverage for servers, remote devices, operating systems and unmanaged endpoints.",
+    "Automated containment or remediation can disrupt legitimate work; test response policies and rollback behavior in a controlled environment.",
+    "Licensing, retention, add-ons, support levels and feature availability may vary by package and contract; no current price is verified here.",
+    "Security buyers should review deployment effort, alert quality, telemetry retention, integrations, data handling and incident-response responsibilities before choosing."
   ],
   "features": [
     {
       "name": "On-agent behavioral detection",
-      "description": "Process behavior is scored on the endpoint by the agent itself, which is where the detection decision is made.",
+      "description": "Verify this capability in the current SentinelOne documentation and the exact product edition being evaluated. PilotStack has not independently validated this feature claim or its availability across plans.",
       "available": true,
       "category": "Security"
     },
     {
       "name": "Ransomware rollback",
-      "description": "Changes made during a detected attack are reversed on the host so affected files return to their prior state.",
+      "description": "Verify this capability in the current SentinelOne documentation and the exact product edition being evaluated. PilotStack has not independently validated this feature claim or its availability across plans.",
       "available": true,
       "category": "Automation"
     },
     {
       "name": "Local activity history",
-      "description": "Process, file, and connection records are kept with the endpoint, giving responders a sequence to replay during an investigation.",
+      "description": "Verify this capability in the current SentinelOne documentation and the exact product edition being evaluated. PilotStack has not independently validated this feature claim or its availability across plans.",
       "available": true,
       "category": "Reporting"
     },
     {
       "name": "Central policy distribution",
-      "description": "Response behavior, scan schedules, and exclusion lists are defined centrally and pushed to every enrolled agent.",
+      "description": "Verify this capability in the current SentinelOne documentation and the exact product edition being evaluated. PilotStack has not independently validated this feature claim or its availability across plans.",
       "available": true,
       "category": "Core"
     },
     {
       "name": "Quarantine and process kill",
-      "description": "When detection confidence crosses the policy threshold, the agent stops the process and isolates the file without an operator step.",
+      "description": "Verify this capability in the current SentinelOne documentation and the exact product edition being evaluated. PilotStack has not independently validated this feature claim or its availability across plans.",
       "available": true,
       "category": "Security"
     },
     {
       "name": "Per-group response modes",
-      "description": "Different groups of machines can be assigned different response settings, so some act immediately while others wait for review.",
+      "description": "Verify this capability in the current SentinelOne documentation and the exact product edition being evaluated. PilotStack has not independently validated this feature claim or its availability across plans.",
       "available": true,
       "category": "Usability"
     },
     {
       "name": "Cloud console for the fleet",
-      "description": "Agents report to a hosted console where enrollment, policy, and alerts for the entire estate are managed in one place.",
+      "description": "Verify this capability in the current SentinelOne documentation and the exact product edition being evaluated. PilotStack has not independently validated this feature claim or its availability across plans.",
       "available": true,
       "category": "Core"
     },
     {
       "name": "Offline agent operation",
-      "description": "An agent that loses its console link keeps enforcing the policy it holds and reconciles once the connection returns.",
+      "description": "Verify this capability in the current SentinelOne documentation and the exact product edition being evaluated. PilotStack has not independently validated this feature claim or its availability across plans.",
       "available": true,
       "category": "Usability"
-    }
-  ],
-  "ratings": [
-    {
-      "label": "Features",
-      "score": 4.3
-    },
-    {
-      "label": "Usability",
-      "score": 4.4
-    },
-    {
-      "label": "Pricing",
-      "score": 4.1000000000000005
-    },
-    {
-      "label": "Support",
-      "score": 4.2
-    },
-    {
-      "label": "Security",
-      "score": 4.5
-    },
-    {
-      "label": "Integrations",
-      "score": 4
-    },
-    {
-      "label": "Performance",
-      "score": 4.3
-    },
-    {
-      "label": "Documentation",
-      "score": 4.2
-    },
-    {
-      "label": "Scalability",
-      "score": 4
     }
   ],
   "content": [
