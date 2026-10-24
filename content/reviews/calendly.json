@@ -104,6 +104,26 @@
       "title": "Decision record",
       "body": "Record required event types, hosts, routing rules, calendar providers, reminders, payments, privacy needs and plan-specific limits. Confirm current terms and cost with the vendor. Keep a manual fallback for booking changes if an integration becomes unavailable.",
       "type": "text"
+    },
+    {
+      "title": "Scheduling workflow test",
+      "type": "text",
+      "body": "Calendly should be tested against the actual meeting process, not only the booking page design. Set up a routine appointment and an exception such as a reschedule, a buffer period, or a meeting that needs more than one host. Check how working hours, minimum notice, calendar conflicts, cancellations, and reminders behave. Confirm current availability of each required setting in the plan being considered."
+    },
+    {
+      "title": "Calendar and time-zone behavior",
+      "type": "text",
+      "body": "Use calendars from the environment where the team will work. Verify time-zone conversion, availability updates, conferencing links, and what happens when a host becomes unavailable. Test the complete sequence from booking to confirmation and cancellation so the invitee receives clear and consistent information. Record any manual intervention needed; a tool that still requires frequent correction may not save much time."
+    },
+    {
+      "title": "Team setup and administration",
+      "type": "text",
+      "body": "Decide who owns shared event types, who can edit booking rules, and how the team keeps meeting descriptions and intake questions consistent. Test the workflow with at least two hosts and a shared calendar. Review access options and the vendor's current privacy and data-handling documentation before adding appointment details that should not be widely visible. Do not assume that every team control is included in every subscription."
+    },
+    {
+      "title": "Pricing and alternatives checklist",
+      "type": "text",
+      "body": "Current Calendly prices and plan limits are not independently verified in this review. Confirm the official pricing page for team routing, event types, integrations, reminders, payments, and billing terms. Compare the annual total with any calendar or booking tools already available to the team. If the process is simple and internal, a calendar's built-in appointment feature may be enough; if it requires resource scheduling or complex intake, test a specialist tool using the same scenario. No numeric editorial score is asserted until the evidence-backed assessment is recorded."
     }
   ],
   "faqs": [
