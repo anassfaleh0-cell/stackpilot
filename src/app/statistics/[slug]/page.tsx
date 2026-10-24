@@ -13,6 +13,11 @@ import { ArrowRight, ExternalLink, Code } from "lucide-react"
 import { isNoindexed } from "@/lib/noindex"
 import { InFeedAd } from "@/components/ads"
 
+function statisticDescription(title: string, category?: string): string {
+  const subject = category?.trim() || "software"
+  return `${title} is a source-checking guide for ${subject} software research. Verify original reports, market definitions, reporting periods, and survey populations before relying on figures. Numeric values are shown only when source provenance is documented.`
+}
+
 export function generateStaticParams() {
   return getAllStatistics().map((item) => ({ slug: item.slug }))
 }
@@ -22,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const registry = getStatistic(slug)
   if (registry) {
     const noindexed = isNoindexed("statistics", slug)
-    return createMetadata({ title: registry.title, description: registry.description, path: `/statistics/${slug}`, ogType: "article", publishedAt: registry.publishedAt, updatedAt: registry.updatedAt, articleSection: registry.category, noIndex: noindexed })
+    return createMetadata({ title: registry.title, description: statisticDescription(registry.title, registry.category), path: `/statistics/${slug}`, ogType: "article", publishedAt: registry.publishedAt, updatedAt: registry.updatedAt, articleSection: registry.category, noIndex: noindexed })
   }
   return {}
 }
@@ -32,7 +37,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
   const registry = getStatistic(slug)
   const page = registry ? {
     title: registry.title,
-    description: registry.description,
+    description: statisticDescription(registry.title, registry.category),
     lastUpdated: registry.updatedAt || registry.publishedAt,
     sections: registry.sections.map((s) => ({
       title: s.title,
@@ -42,6 +47,20 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
   } : null
 
   if (!page) notFound()
+
+  const ignoredTerms = new Set(["software", "market", "statistics", "guide", "guides", "2026", "data", "industry", "industries", "business", "businesses", "report", "reports"])
+  const toTerms = (value: string) => new Set(value.toLowerCase().split(/[^a-z0-9]+/).filter((term) => term.length > 3 && !ignoredTerms.has(term)))
+  const currentTerms = toTerms(`${slug} ${page.title} ${page.description} ${registry?.category || ""}`)
+  const relatedStatistics = getAllStatistics()
+    .filter((item) => item.slug !== slug)
+    .map((item) => {
+      const candidateTerms = toTerms(`${item.slug} ${item.title} ${item.description} ${item.category || ""}`)
+      const overlap = [...currentTerms].filter((term) => candidateTerms.has(term)).length
+      const sameCategory = Boolean(registry?.category && item.category && registry.category.toLowerCase() === item.category.toLowerCase())
+      return { item, score: overlap * 3 + (sameCategory ? 5 : 0) }
+    })
+    .sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title))
+    .slice(0, 4)
 
   return (
     <>
@@ -84,19 +103,25 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
                     </div>
                   ) : null}
                   <div className="grid sm:grid-cols-2 gap-4">
-                    {section.stats.map((stat) => (
-                      <div key={stat.label} className="rounded-xl border border-border bg-card p-5 hover:border-primary/20 transition-colors">
-                        {stat.sourceUrl ? <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">{stat.value}</div> : <div className="text-lg font-semibold text-muted-foreground mb-1">Figure not verified</div>}
-                        <p className="text-sm text-muted-foreground mb-3">{stat.label}</p>
-                        {stat.sourceUrl ? (
-                          <a href={stat.sourceUrl} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 text-xs text-primary hover:underline">
-                            Source: {stat.source} <ExternalLink size={10} />
-                          </a>
-                        ) : (
-                          <p className="text-xs text-muted-foreground">Source named: {stat.source || "not recorded"}. A direct source link is missing, so the numeric figure is withheld.</p>
-                        )}
-                      </div>
-                    ))}
+                    {section.stats.map((stat) => {
+                      const sourceVerified = registry?.sourceAuditComplete === true && Boolean(stat.sourceUrl)
+                      return (
+                        <div key={stat.label} className="rounded-xl border border-border bg-card p-5 hover:border-primary/20 transition-colors">
+                          {sourceVerified ? <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">{stat.value}</div> : <div className="text-lg font-semibold text-muted-foreground mb-1">Figure not verified</div>}
+                          <p className="text-sm text-muted-foreground mb-3">{stat.label}</p>
+                          {sourceVerified && stat.sourceUrl ? (
+                            <a href={stat.sourceUrl} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 text-xs text-primary hover:underline">
+                              Source: {stat.source} <ExternalLink size={10} />
+                            </a>
+                          ) : (
+                            <div className="text-xs text-muted-foreground space-y-2">
+                              <p>Source named: {stat.source || "not recorded"}. The numeric value remains unverified until the original report or dataset is checked.</p>
+                              {stat.sourceUrl ? <a href={stat.sourceUrl} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 text-primary hover:underline">Open publisher source <ExternalLink size={10} /></a> : null}
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
                   </div>
                 </section>
                 {registry?.sourceAuditComplete === true && page.sections.some((section) => section.stats.length > 0) && i === Math.floor(page.sections.length / 2) - 1 && page.sections.length >= 3 && (
@@ -121,6 +146,20 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
               <p className="font-semibold text-foreground mb-2">Methodology & Data Sources</p>
               <p className="leading-relaxed">Statistics shown here come from stored content records. Source attribution may identify a publisher without linking to the exact report; where a direct source URL is missing, the numeric figure is withheld. Update dates describe the content record and do not guarantee annual re-verification. See our <Link href="/methodology" className="text-primary hover:underline">research methodology</Link> for details.</p>
             </div>
+
+            <section className="mt-12 mb-10" aria-labelledby="related-market-research">
+              <h2 id="related-market-research" className="text-xl font-bold tracking-tight mb-3">Related market research</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">Explore adjacent research topics and compare definitions carefully. Check the original report, geography, population, and reporting period before using figures in a business decision.</p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {relatedStatistics.map(({ item }) => (
+                  <Link key={item.slug} href={`/statistics/${item.slug}`} className="rounded-lg border border-border p-4 hover:border-primary/30 transition-colors">
+                    <span className="block text-sm font-semibold text-foreground mb-1">{item.title}</span>
+                    <span className="block text-xs text-muted-foreground leading-relaxed">{item.category || "Market research"}</span>
+                  </Link>
+                ))}
+              </div>
+              <p className="text-xs text-muted-foreground mt-3">Browse the <Link href="/statistics" className="text-primary hover:underline">full research guide directory</Link> for other categories.</p>
+            </section>
 
             <div className="mt-6 p-5 rounded-xl bg-surface-secondary border border-border text-xs">
               <p className="font-semibold text-foreground mb-3 flex items-center gap-1.5"><Code size={14} /> Embed this page</p>

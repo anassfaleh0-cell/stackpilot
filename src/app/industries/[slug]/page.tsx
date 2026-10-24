@@ -16,6 +16,10 @@ import { Star, ArrowRight, CheckCircle2, Lightbulb } from "lucide-react"
 import { EditorialHero, GlassCard, InfoCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 
+function industryDescription(industry: string): string {
+  return `A practical software selection guide for ${industry} organizations. Compare operational workflows, data protection, integrations, implementation effort, and total cost; verify current product capabilities and pricing with vendors.`
+}
+
 export function generateStaticParams() {
   return getAllIndustries().map((item) => ({ slug: item.slug }))
 }
@@ -24,15 +28,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const ind = getIndustry(slug)
   if (!ind) return {}
-  const readingTime = Math.max(5, Math.ceil((ind.description.split(/\s+/).length + ind.recommendations.length * 15) / 200))
+  const description = industryDescription(ind.industry)
+  const readingTime = Math.max(5, Math.ceil((description.split(/\s+/).length + ind.recommendations.length * 15) / 200))
   const shortTitle = ind.title.length > 58 ? ind.title.slice(0, 55) + "..." : ind.title
-  return createMetadata({ title: shortTitle, description: `Software options for ${ind.industry.toLowerCase()} businesses, with use-case fit, pricing considerations, and implementation tips for 2026. Ratings appear only when source provenance is documented.`, path: `/industries/${ind.slug}`, ogType: "article", publishedAt: ind.lastUpdated, updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime , noIndex: isNoindexed("industries", ind.slug) })
+  return createMetadata({ title: shortTitle, description, path: `/industries/${ind.slug}`, ogType: "article", publishedAt: ind.lastUpdated, updatedAt: ind.lastUpdated, articleSection: ind.industry, readingTime , noIndex: isNoindexed("industries", ind.slug) })
 }
 
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const ind = getIndustry(slug)
   if (!ind) notFound()
+
+  const description = industryDescription(ind.industry)
 
   // Group recommendations by category
   const byCategory: Record<string, typeof ind.recommendations> = {}
@@ -46,10 +53,10 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Industries", href: "/industries" }, { name: ind.title, href: `/industries/${slug}` }]} />
-      <ArticleSchema title={ind.title} description={ind.description} publishedAt={ind.lastUpdated} updatedAt={ind.lastUpdated} author="PilotStack Team" url={`${site.url}/industries/${slug}`} wordCount={ind.description.split(/\s+/).length + ind.industryOverview.split(/\s+/).filter(Boolean).length + ind.softwareNeeds.join(" ").split(/\s+/).filter(Boolean).length + ind.recommendations.reduce((n, r) => n + r.category.split(/\s+/).length + r.toolName.split(/\s+/).length + r.bestFor.split(/\s+/).filter(Boolean).length, 0) + ind.implementationTips.join(" ").split(/\s+/).filter(Boolean).length + ind.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={ind.industry} />
-      <WebPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} dateModified={ind.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: ind.recommendations.map((rec, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}`, category: rec.category,  }) })) }} />
+      <ArticleSchema title={ind.title} description={description} publishedAt={ind.lastUpdated} updatedAt={ind.lastUpdated} author="PilotStack Team" url={`${site.url}/industries/${slug}`} wordCount={description.split(/\s+/).length + ind.industryOverview.split(/\s+/).filter(Boolean).length + ind.softwareNeeds.join(" ").split(/\s+/).filter(Boolean).length + ind.recommendations.reduce((n, r) => n + r.category.split(/\s+/).length + r.toolName.split(/\s+/).length + r.bestFor.split(/\s+/).filter(Boolean).length, 0) + ind.implementationTips.join(" ").split(/\s+/).filter(Boolean).length + ind.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={ind.industry} />
+      <WebPageSchema name={ind.title} description={description} url={`${site.url}/industries/${slug}`} dateModified={ind.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: ind.recommendations.map((rec, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}`, category: rec.category,  }) })) }} />
       <ItemListSchema items={ind.recommendations.map(rec => ({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` }))} url={`${site.url}/industries/${slug}`} />
-      <CollectionPageSchema name={ind.title} description={ind.description} url={`${site.url}/industries/${slug}`} />
+      <CollectionPageSchema name={ind.title} description={description} url={`${site.url}/industries/${slug}`} />
       <FAQSchema questions={ind.faqs} path={`/industries/${slug}`} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Industries", href: "/industries" }, { name: ind.title }]} />
@@ -57,7 +64,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       <article className="pb-16">
         <Container>
           <div className="mb-8">
-            <EditorialHero slug={ind.slug} title={ind.title} subtitle={ind.description} category="Business" variant="guide" className="w-full min-h-[180px] sm:min-h-[220px]" />
+            <EditorialHero slug={ind.slug} title={ind.title} subtitle={description} category="Business" variant="guide" className="w-full min-h-[180px] sm:min-h-[220px]" />
           </div>
 
           <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-8 pb-4 border-b border-border">
