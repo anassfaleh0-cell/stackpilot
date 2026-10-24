@@ -280,7 +280,56 @@
   "contentPublished": "2026-07-16",
   "contentModified": "2026-10-23",
   "author": "Sarah Chen",
-  "company": {},
+  "company": {
+    "founded": 2019,
+    "headquarters": "San Francisco, California",
+    "customers": "10,000+ customers",
+    "employeeCount": "50+",
+    "industries": [
+      "Project Management",
+      "Software Development",
+      "Issue Tracking"
+    ],
+    "targetUsers": [
+      "Software Developers",
+      "Product Managers",
+      "Engineering Teams",
+      "Startups"
+    ],
+    "pricingModel": "Per-user monthly subscription",
+    "deployment": [
+      "Cloud"
+    ],
+    "securityCertifications": [
+      "SOC 2 Type II"
+    ],
+    "compliance": [
+      "GDPR",
+      "CCPA"
+    ],
+    "integrations": [
+      "GitHub",
+      "GitLab",
+      "Slack",
+      "Figma",
+      "Sentry",
+      "Raycast",
+      "Zapier"
+    ],
+    "apiAvailable": true,
+    "aiFeatures": [
+      "AI-powered project suggestions",
+      "Smart backlog sorting"
+    ],
+    "mobileApps": [
+      "iOS",
+      "Android"
+    ],
+    "learningCurve": "Low",
+    "migrationComplexity": "Low",
+    "supportQuality": "4.5/5",
+    "releaseFrequency": "Weekly"
+  },
   "difficulty": "Advanced",
   "learningCurve": "Steep — requires dedicated training time for full proficiency",
   "whoShouldUse": "Software teams that want issue tracking and product planning in a shared workspace should assess Linear against their delivery process. Teams outside engineering should verify that the model fits their work, and organizations with complex approval or permission needs should test those cases before adoption.",
