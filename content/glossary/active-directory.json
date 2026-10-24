@@ -4,10 +4,14 @@
   "definition": "A directory service by Microsoft for managing users, groups, and permissions across a Windows domain network.",
   "extendedDefinition": "Active Directory is Microsoft's directory service for managing users, groups, and permissions across Windows domain networks, and it remains the identity backbone of most enterprise IT environments. For software buyers, Active Directory interoperability matters because identity is the gateway to every other system: products that integrate with existing directory infrastructure reduce provisioning effort, enforce consistent access policy, and simplify onboarding and offboarding. Relevant integration points include single sign-on, group-based permission mapping, and automated user synchronization. Many contemporary platforms support broader identity standards like SAML or SCIM alongside directory integration, bridging legacy and cloud environments. Buyers should confirm how the product handles directory changes, such as user departures, and whether deprovisioning is automated. Poor identity integration creates risk: orphaned accounts, inconsistent permissions, and manual administrative burden that scales with headcount.",
   "category": "Security & Compliance",
-  "examples": [],
+  "examples": [
+    "A company connects a SaaS app to its directory so employees receive the right access when hired and lose it when they leave.",
+    "An IT team tests whether directory group changes update the SaaS application's roles without a separate manual account change.",
+    "A buyer confirms whether single sign-on, provisioning and deprovisioning are included in the exact plan."
+  ],
   "relatedTerms": [
     "sso",
     "encryption"
   ],
-  "description": "Active Directory. A directory service by Microsoft for managing users, groups, and permissions across a Windows domain network."
+  "description": "Active Directory in software buying: identity integration, user provisioning, access groups and secure onboarding/offboarding."
 }
