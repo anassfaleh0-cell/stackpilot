@@ -67,6 +67,20 @@ export default function AuthorsPage() {
                 <Link href="/methodology" className="text-primary hover:underline">Read the full methodology</Link>
               </p>
             </div>
+            <section className="mt-8 space-y-6">
+              <div>
+                <h2 className="text-xl font-bold mb-2">Sources and evidence limits</h2>
+                <p className="text-sm leading-relaxed text-muted-foreground">Software features, prices and plan terms change. Where a current primary source or reproducible calculation is not available, the page should state that limitation rather than imply a verified fact. Readers should confirm important purchase, security and compliance details directly with the vendor before relying on them.</p>
+              </div>
+              <div>
+                <h2 className="text-xl font-bold mb-2">Updates and corrections</h2>
+                <p className="text-sm leading-relaxed text-muted-foreground">If you find a factual issue, send the page URL, the exact statement and a reliable supporting source through our <Link href="/contact" className="text-primary hover:underline">contact page</Link>. Corrections are reviewed for evidence and context; a report does not guarantee that a claim will be changed in a particular way.</p>
+              </div>
+              <div>
+                <h2 className="text-xl font-bold mb-2">Editorial and commercial transparency</h2>
+                <p className="text-sm leading-relaxed text-muted-foreground">Affiliate links or advertising may support the publication, but commercial relationships should not be treated as evidence that a product is best. See the <Link href="/editorial-policy" className="text-primary hover:underline">editorial policy</Link> and <Link href="/affiliate-disclosure" className="text-primary hover:underline">affiliate disclosure</Link> for more detail.</p>
+              </div>
+            </section>
           </div>
         </Container>
       </Section>
