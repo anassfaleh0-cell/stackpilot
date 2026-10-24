@@ -107,6 +107,14 @@ const GENERIC_BOILERPLATE_PATTERNS = [
 ]
 
 const UNSUPPORTED_CLAIM_PATTERNS = [
+  // Imported legacy records contain precise product metrics without a source URL or
+  // collection date. Remove these claims from rendered prose rather than implying
+  // the values were independently tested or verified.
+  /\b(?:latency|response time|response times|throughput|load time|setup time|migration time)\b[^.!?]{0,140}\b\d+(?:[.,]\d+)?\s*(?:ms|milliseconds?|seconds?|minutes?|hours?|days?)\b/i,
+  /\b\d+(?:[.,]\d+)?\s*(?:ms|milliseconds?|seconds?)\b[^.!?]{0,100}\b(?:latency|response time|load time|throughput)\b/i,
+  /\b\d[\d,]*(?:\.\d+)?\+?\s+(?:native extensions|OAuth providers|concurrent channels|registered developers|monthly active users|app connectors|API requests|projects)\b/i,
+  /\b(?:documentation|docs)\s+(?:trails?|lags?)\b[^.!?]{0,100}\b\d+(?:[-–]\d+)?\s*(?:months?|weeks?)\b/i,
+  /\b(?:complies with|compliant with|compliance with)\b[^.!?]{0,100}\b(?:GDPR|CCPA|HIPAA|SOC ?2|ISO ?27001|PCI DSS|FedRAMP)\b/i,
   // Remove unsupported numeric product claims and pseudo-research metrics from legacy editorial copy.
   // The corpus does not consistently retain primary-source citations for these figures, so keep the claim out rather than laundering it into a placeholder.
   /\b\d[\d,]*(?:\.\d+)?\s*%(?:\s|[.,;:!?]|$)/i,
@@ -802,13 +810,21 @@ function sanitizeComparisonDescription(description: string, tool1: string, tool2
 }
 export function getComparisonSeoTitle(slug: string, tool1: string, tool2: string, winnerVerified: boolean): string {
   const normalizedSlug = slug.toLowerCase()
-  const variant = normalizedSlug.endsWith("-startups")
-    ? " for Startups"
-    : normalizedSlug.endsWith("-for-teams")
-      ? " for Teams"
-      : normalizedSlug.endsWith("-remote")
-        ? " for Remote Teams"
-        : ""
+  const distinctLegacyVariants: Record<string, string> = {
+    "close-crm-vs-zoho-crm": ": CRM Workflow Fit",
+    "outreach-io-vs-zoho": ": Engagement Workflow Fit",
+    "pipedrive-vs-zoho": ": Pipeline Setup Guide",
+    "salesloft-vs-zoho": ": Sales Engagement Fit",
+    "zendesk-vs-zoho": ": Support vs Sales CRM",
+  }
+  const variant = distinctLegacyVariants[normalizedSlug] ??
+    (normalizedSlug.endsWith("-startups")
+      ? " for Startups"
+      : normalizedSlug.endsWith("-for-teams")
+        ? " for Teams"
+        : normalizedSlug.endsWith("-remote")
+          ? " for Remote Teams"
+          : "")
   return `${tool1} vs ${tool2}${variant} (2026): ${winnerVerified ? "Which One Wins?" : "How to Choose"}`
 }
 
