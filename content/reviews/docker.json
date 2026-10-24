@@ -104,6 +104,31 @@
       "title": "Decision record",
       "body": "Document image ownership, base image policy, registry access, scan gates, runtime privileges, persistent data, deployment platform and recovery process. Compare the ongoing operations effort with a managed runtime where appropriate. Containerization is a packaging choice, not a complete production architecture.",
       "type": "text"
+    },
+    {
+      "title": "Container workflow and deployment fit",
+      "body": "Docker should be assessed as part of the team's software delivery process, including how images are built, stored, scanned, distributed, and run. Use a representative application with its real dependencies and configuration. Document how developers build locally, how CI creates an artifact, and how that artifact moves through test and production environments. Distinguish the container tooling from the hosting platform and orchestration layer; a successful local container does not by itself establish production readiness.",
+      "type": "text"
+    },
+    {
+      "title": "Image quality and reproducibility",
+      "body": "Create an image from a documented build process and rebuild it from a clean checkout. Verify base-image provenance, dependency pinning, image size, build cache behavior, non-root execution, and whether secrets are excluded from layers and build context. Scan dependencies using the organization's approved tools and decide how vulnerabilities are triaged. Reproducibility matters because teams need to explain exactly what artifact was tested and what artifact was deployed.",
+      "type": "text"
+    },
+    {
+      "title": "Security and operational controls",
+      "body": "Review the current container security guidance for image signing or provenance, registry access, secret handling, runtime permissions, network exposure, and update cadence. Test a deliberate failure such as a missing environment variable or unavailable dependency and document how the service recovers. Keep runtime privileges minimal and avoid baking credentials into images. Production controls should be validated against the chosen hosting and orchestration environment, not inferred from the fact that an application starts in a container.",
+      "type": "text"
+    },
+    {
+      "title": "Developer experience and team standards",
+      "body": "Agree on conventions for Dockerfiles, compose configurations, local test data, ports, health checks, logs, and environment variables. Test the setup on a clean developer machine and in CI so the workflow does not depend on an individual's cached files. Record common troubleshooting steps and identify which tools need separate installation or permissions. The goal is a repeatable development and release process rather than a single successful demo.",
+      "type": "text"
+    },
+    {
+      "title": "Decision checklist",
+      "body": "Before standardizing on Docker, verify that the team can build and run the same application consistently, inspect image provenance, update vulnerable dependencies, manage secrets safely, and roll back a deployment. Confirm which responsibilities belong to the container tooling and which belong to the production platform. No numeric editorial score is published until a documented, evidence-backed assessment is recorded.",
+      "type": "text"
     }
   ],
   "faqs": [
