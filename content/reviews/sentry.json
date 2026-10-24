@@ -2,7 +2,7 @@
   "slug": "sentry",
   "name": "Sentry",
   "tagline": "Error and application monitoring to evaluate for debugging, alerting and release health.",
-  "description": "Sentry is an error-monitoring and application diagnostics tool to evaluate for capturing failures, grouping issues and connecting errors to releases. Fit depends on instrumentation, privacy filtering, alert routing, retention and the team's incident workflow.",
+  "description": "Sentry supports error monitoring and application diagnostics; current plan details and independent ratings are not verified here.",
   "category": "Developer Tools",
   "website": "https://sentry.io",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "A controlled failure can test issue capture and debugging context end to end.",
     "Release and environment metadata can help distinguish regressions from existing errors.",
-    "Alert routing can be tested against the team's actual on-call process."
+    "Alert routing can be tested against the team's actual on-call process.",
+    "A controlled error can test issue capture and release context.",
+    "Privacy scrubbing and alert routing can be validated before production use."
   ],
   "cons": [
     "Instrumentation and event filtering need maintenance as applications change.",
     "Sensitive data can leak through events if scrubbing is not configured.",
     "Event volume and retention can affect cost; verify current plan limits."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Core development workflow",
+      "available": false,
+      "description": "Sentry: evaluate core development workflow with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Access and permissions",
+      "available": false,
+      "description": "Sentry: evaluate access and permissions with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "CI or runtime fit",
+      "available": false,
+      "description": "Sentry: evaluate ci or runtime fit with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Security controls",
+      "available": false,
+      "description": "Sentry: evaluate security controls with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Failure handling",
+      "available": false,
+      "description": "Sentry: evaluate failure handling with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Monitoring",
+      "available": false,
+      "description": "Sentry: evaluate monitoring with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Integrations",
+      "available": false,
+      "description": "Sentry: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Export and portability",
+      "available": false,
+      "description": "Sentry: evaluate export and portability with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -66,19 +109,23 @@
   "faqs": [
     {
       "question": "Who should evaluate Sentry?",
-      "answer": "Evaluate Sentry when its primary workflow matches a documented requirement. Run a representative pilot and verify current capabilities, limits and contract terms directly with the vendor."
+      "answer": "Evaluate Sentry when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Are prices and ratings independently verified here?",
-      "answer": "No. This review does not present an independently verified price or third-party rating. Check current official documentation and obtain a dated quote."
+      "question": "How should a team test Sentry?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "What should a pilot include?",
-      "answer": "Test the main workflow, one failure case, permissions, integrations, export and offboarding. Record pass, partial pass, fail or unknown and assign an owner to every unresolved requirement."
+      "question": "Which limitations should be checked in Sentry?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "How should total cost be compared?",
-      "answer": "Include licenses, usage, implementation, migration, training, integrations, support, internal administration and renewal terms—not only the headline subscription."
+      "question": "Are Sentry prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting Sentry?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [],
