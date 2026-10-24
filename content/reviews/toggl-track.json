@@ -84,6 +84,34 @@
       "title": "Pricing and decision checklist",
       "body": "Current Toggl Track prices, plan limits, and feature entitlements are not independently verified here. Check the official pricing page for seats, reporting, project budgets, integrations, and administration. Pilot for a full reporting period and measure missing entries, correction effort, report usefulness, and ongoing maintenance. No numeric editorial score or third-party review aggregate is asserted without evidence.",
       "type": "text"
+    },
+    {
+      "title": "Team rollout and habits",
+      "type": "text",
+      "body": "Start with a small group and a limited project structure. Agree on how tasks are named, when a timer is started, and what context is needed in a time entry. Ask users to report where the process feels confusing and remove fields that do not help a decision. A simple and consistent habit usually creates better reports than a complicated taxonomy."
+    },
+    {
+      "title": "Reporting hand-off",
+      "type": "text",
+      "body": "If time data is used in project reviews or client reporting, test the complete export path with a sample period. Check date ranges, project labels, rounding, edited entries, and the format expected by the recipient. Keep the source records available until totals reconcile. If another system receives the data, test how missing fields or failed exports are surfaced."
+    },
+    {
+      "title": "Pilot scorecard",
+      "type": "text",
+      "body": "Measure missing entries, corrections, report preparation effort, and whether the data supports a real planning or client question. Compare with the existing workflow using the same project period. If people keep a second spreadsheet or reports need manual reconstruction, simplify the structure or evaluate a different approach."
+    },
+    {
+      "title": "Implementation checklist",
+      "type": "list",
+      "body": "Before adopting broadly:",
+      "items": [
+        "Set consistent project and task names.",
+        "Define entry and correction rules.",
+        "Test timer and manual entry.",
+        "Reconcile a sample report and export.",
+        "Explain access and data use.",
+        "Confirm current plan features and limits."
+      ]
     }
   ],
   "faqs": [
