@@ -1,60 +1,86 @@
 {
   "slug": "auth0-vs-fullstory",
-  "title": "Auth0 vs FullStory",
-  "description": "Auth0 vs FullStory: Auth0 is our overall pick for Security & Compliance teams — Auth0 4.4/5, FullStory 4.2/5; Auth0 from $23-75/mo, FullStory.",
+  "title": "Auth0 vs FullStory: Identity Management vs Digital Experience Analytics",
+  "description": "A practical decision guide to Auth0 and FullStory. Auth0 focuses on authentication and identity workflows for applications; FullStory focuses on understanding user interactions and digital product experiences. Compare each product against its intended workflow instead of relying on unsupported star ratings or a universal winner. Verify current features, availability, and terms with the vendors.",
   "category": "Security & Compliance",
   "tool1": "Auth0",
   "tool2": "FullStory",
-  "winner": "auth0",
+  "winner": null,
   "features": [
     {
-      "name": "User Rating",
-      "tool1": true,
-      "tool2": false
+      "name": "Primary job",
+      "tool1": "Authentication and identity management",
+      "tool2": "Digital experience analytics and interaction investigation",
+      "tool1Detail": "For Auth0, assess authentication and identity management against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For FullStory, assess digital experience analytics and interaction investigation against your real requirements and record any gaps during a representative pilot."
     },
     {
-      "name": "Category",
-      "tool1": true,
-      "tool2": true
+      "name": "Main users",
+      "tool1": "Application engineers, security, and identity administrators",
+      "tool2": "Product, UX, analytics, and customer-experience teams",
+      "tool1Detail": "For Auth0, assess application engineers, security, and identity administrators against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For FullStory, assess product, ux, analytics, and customer-experience teams against your real requirements and record any gaps during a representative pilot."
     },
     {
-      "name": "Starting Price",
-      "tool1": true,
-      "tool2": true
+      "name": "Key evaluation",
+      "tool1": "Sign-in flows, identity providers, account recovery, access controls",
+      "tool2": "Journey analysis, session investigation, event context, and useful insights",
+      "tool1Detail": "For Auth0, assess sign-in flows, identity providers, account recovery, access controls against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For FullStory, assess journey analysis, session investigation, event context, and useful insights against your real requirements and record any gaps during a representative pilot."
     },
     {
-      "name": "Best For",
-      "tool1": true,
-      "tool2": true
+      "name": "Privacy and governance",
+      "tool1": "Assess identity data, access policies, audit needs, and applicable requirements",
+      "tool2": "Assess captured data, masking, consent, retention, permissions, and privacy controls",
+      "tool1Detail": "For Auth0, assess assess identity data, access policies, audit needs, and applicable requirements against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For FullStory, assess assess captured data, masking, consent, retention, permissions, and privacy controls against your real requirements and record any gaps during a representative pilot."
     },
     {
-      "name": "Core Strength",
-      "tool1": true,
-      "tool2": true
+      "name": "Implementation",
+      "tool1": "Test login, logout, recovery, and failure paths in a staging environment",
+      "tool2": "Test key journeys and verify data collection behaves as intended",
+      "tool1Detail": "For Auth0, assess test login, logout, recovery, and failure paths in a staging environment against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For FullStory, assess test key journeys and verify data collection behaves as intended against your real requirements and record any gaps during a representative pilot."
+    },
+    {
+      "name": "Cost comparison",
+      "tool1": "Verify current usage model, user scope, features, and contract terms",
+      "tool2": "Verify current usage model, retention, seats, features, and contract terms",
+      "tool1Detail": "For Auth0, assess verify current usage model, user scope, features, and contract terms against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For FullStory, assess verify current usage model, retention, seats, features, and contract terms against your real requirements and record any gaps during a representative pilot."
     }
   ],
-  "verdict": "Auth0 (Security & Compliance) and FullStory (Analytics & Data) serve different primary purposes. Auth0 has a higher user rating, but the right choice depends on whether your priority is security & compliance or analytics & data capabilities.",
+  "verdict": "Authentication and digital-experience analytics have different purposes. An application may use an identity platform to control access and an analytics product to understand how users interact with the interface, subject to privacy and consent requirements. Compare current vendor terms, implementation effort, privacy/security requirements, integrations, data portability, and ongoing ownership before purchasing. This page does not claim an independently conducted benchmark or establish a universal winner.",
   "faqs": [
     {
-      "question": "What is the difference between Auth0 and FullStory?",
-      "answer": "Auth0 is a security & compliance tool, while FullStory is a analytics & data platform. They serve different primary functions but may overlap in certain areas."
+      "question": "What is the main difference between Auth0 and FullStory?",
+      "answer": "Auth0 focuses on authentication and identity workflows for applications; FullStory focuses on understanding user interactions and digital product experiences. They are evaluated against different core workflows, so begin with the outcome your team needs."
     },
     {
       "question": "Can Auth0 replace FullStory?",
-      "answer": "Not directly — they serve different categories. Some organizations use both for different purposes."
+      "answer": "Do not assume so. List the capabilities and controls you currently rely on in FullStory, then test whether Auth0 can meet each requirement without creating operational or governance gaps."
     },
     {
-      "question": "Which has better value, Auth0 or FullStory?",
-      "answer": "Auth0 ($23-75/mo) and FullStory ($99/mo) have different pricing. Evaluate based on which category matters more for your workflows."
+      "question": "Can a team use Auth0 and FullStory together?",
+      "answer": "Potentially, if both workflows are needed. Define which product owns each step, what information should be shared, who controls access, and how errors or changes are handled."
+    },
+    {
+      "question": "How should I compare the costs?",
+      "answer": "Compare current vendor quotes for your actual scope, including seats or usage, required features, implementation, integrations, training, support, renewals, and staff time."
+    },
+    {
+      "question": "What should I test before deciding?",
+      "answer": "Use a representative task and realistic data. Record completion time, missing capabilities, administration effort, permissions, export options, and whether each product supports the workflow it is intended to serve."
     }
   ],
-  "lastUpdated": "2026-07-20",
+  "lastUpdated": "2026-10-24",
   "tool1Slug": "auth0",
   "tool2Slug": "fullstory",
   "secondaryCategories": [
     "Analytics & Data"
   ],
-  "published": false,
-  "publicationStatus": "draft",
-  "editorialReviewNote": "Temporarily withheld from publication because the paired products are not clear direct alternatives. Review search intent, category mapping, unique comparison evidence, and winner claims before republishing."
+  "published": true,
+  "winnerVerified": false,
+  "featuresVerified": false,
+  "decisionGuide": true
 }
