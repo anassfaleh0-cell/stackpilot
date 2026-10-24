@@ -109,6 +109,26 @@
       "title": "Decision record",
       "body": "Document the workflow owner, project templates, custom fields, permission model, automation rules and reporting definitions. Keep a list of configuration changes and review unused fields periodically. This prevents a successful initial setup from gradually becoming an unmaintainable collection of special cases.",
       "type": "text"
+    },
+    {
+      "title": "Issue workflow and team fit",
+      "body": "Jira should be evaluated using the issue types and workflow states the team actually needs. Map a real request from intake through triage, assignment, review, release, and closure. Confirm which fields are required, who can change workflow rules, and how a user discovers the next action. Avoid copying a complex workflow from another organization without checking whether each status and custom field improves a real decision.",
+      "type": "text"
+    },
+    {
+      "title": "Backlog planning and reporting",
+      "body": "Use a representative backlog with priorities, dependencies, and work spanning more than one team. Ask a lead to identify blocked work, explain the current release risk, and produce the report used in a planning meeting. Verify that filters and dashboards reflect the underlying issue data and that users know who maintains the fields. If development work is linked to repositories or CI, test the full trace from issue to change and release rather than relying on a connection badge.",
+      "type": "text"
+    },
+    {
+      "title": "Migration and operating cost",
+      "body": "Inventory issue types, custom fields, workflows, filters, dashboards, automations, and integrations before migrating. Test a small import and verify links, ownership, history, and attachments. Estimate the ongoing effort to maintain custom fields and automation rules, not only the initial migration. Current Jira pricing and plan limits are not independently verified here; confirm the official terms for user tiers, automation, storage, administration, and the features the team requires.",
+      "type": "text"
+    },
+    {
+      "title": "Pilot scorecard and verdict",
+      "body": "Run a short pilot with a routine issue, a blocked issue, a release task, and a reporting request. Record time to find the next action, number of manual updates, visibility of blockers, and administrative effort. Compare the results with the team's current system and a realistic alternative. No numeric editorial score is published until a documented assessment with current evidence is available.",
+      "type": "text"
     }
   ],
   "faqs": [
