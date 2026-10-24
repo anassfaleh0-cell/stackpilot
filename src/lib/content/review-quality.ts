@@ -118,8 +118,11 @@ export function getVisibleReviewContent(content: ContentSection[], showVerifiedP
       if (section.type === "diagram" && section.body === "feature-radar" && !showVerifiedRatings) {
         return { ...section, type: "text" as const, body: replacementForUnverifiedSection(section.title, productName), items: section.items }
       }
-      const generatedClaim = GENERATED_REVIEW_SECTION_PATTERNS.some((pattern) => pattern.test(section.body.trim()))
-      const body = generatedClaim
+      const trimmedBody = section.body.trim()
+      const genericPricingPlaceholder = /^(?:pricing details(?: at a glance)?|pricing information|current pricing|plans and pricing)\.?$/i.test(trimmedBody)
+      const unverifiedPricingPlaceholder = !showVerifiedPricing && /pricing|plans|cost|hidden costs/i.test(section.title) && genericPricingPlaceholder
+      const generatedClaim = GENERATED_REVIEW_SECTION_PATTERNS.some((pattern) => pattern.test(trimmedBody))
+      const body = unverifiedPricingPlaceholder || generatedClaim
         ? replacementForUnverifiedSection(section.title, productName)
         : (showVerifiedPricing ? section.body : stripUnverifiedPriceClaims(section.body))
       const items = section.items?.map((item) =>
