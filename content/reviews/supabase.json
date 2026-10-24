@@ -46,6 +46,21 @@
       "title": "Security and cost",
       "body": "Review access policies, logging, retention, backup frequency, admin roles and key rotation. Model database, storage, bandwidth, compute and support using expected and peak usage, then confirm current plan limits directly.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Use a realistic user role matrix and test create, read, update and delete operations for each role. Include a denied request, a schema change and a restore from backup. Record latency, query errors and setup work, and confirm that the same access policy is enforced from every client path.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and recovery",
+      "body": "Test a migration that fails halfway, a missing environment variable, expired credentials and a database restore. Verify that secrets remain server-side and that access policies prevent cross-user reads. Document the owner for schema migrations, backup checks and incident response.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document data ownership, access rules, region, backup and restore objectives, expected usage, integration dependencies and exit steps. Confirm current quotas and plan terms directly. Reassess as workload grows and include operational ownership in the cost estimate.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -143,5 +158,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 178
+  "wordCount": 302
 }
