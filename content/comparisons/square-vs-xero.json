@@ -1,65 +1,73 @@
 {
   "slug": "square-vs-xero",
-  "title": "Square vs Xero: practical decision guide",
-  "description": "Compare Square and Xero by intended use, workflow fit, integrations, administration, security, and total cost. PilotStack does not declare a universal winner without verified, current evidence; check official vendor documentation and plan terms before deciding.",
+  "title": "Square vs Xero: Payments and Point of Sale vs Cloud Accounting",
+  "description": "Square and Xero serve different parts of a small business's financial workflow. Square is generally evaluated for checkout and payment operations; Xero for bookkeeping and financial reporting. They are not direct substitutes by default and may be used together. Compare workflow fit, operational risks, current regional availability, integrations, reconciliation, data ownership, and total cost. Confirm current capabilities and terms with each vendor.",
   "category": "Finance & Accounting",
   "tool1": "Square",
   "tool2": "Xero",
+  "tool1Slug": "square",
+  "tool2Slug": "xero",
   "winner": null,
   "features": [
     {
       "name": "Primary use",
-      "tool1": "Assess Square against the core task your team needs to complete.",
-      "tool1Detail": "Document the required workflow, users, inputs, outputs, and constraints for Square; confirm current capabilities in official documentation.",
-      "tool2": "Assess Xero against the same core task.",
-      "tool2Detail": "Document the required workflow, users, inputs, outputs, and constraints for Xero; confirm current capabilities in official documentation."
+      "tool1": "Evaluate checkout, payment acceptance, refunds, and point-of-sale operations.",
+      "tool2": "Evaluate bookkeeping, invoices, bills, bank reconciliation, and financial reporting.",
+      "tool1Detail": "Use a representative sales workflow and verify which products and services are available in your country.",
+      "tool2Detail": "Use a representative accounting period and confirm that the workflow fits your accountant's requirements."
     },
     {
       "name": "Workflow fit",
-      "tool1": "Test whether Square fits your existing process and handoffs.",
-      "tool1Detail": "Run a representative task with realistic data and written acceptance criteria.",
-      "tool2": "Test whether Xero fits your existing process and handoffs.",
-      "tool2Detail": "Run the same representative task with the same criteria so the evaluation is comparable."
+      "tool1": "Test checkout, receipts, refunds, disputes, end-of-day close, and transaction exports.",
+      "tool2": "Test invoices, supplier bills, bank transactions, reconciliation, and period-end reporting.",
+      "tool1Detail": "Record what is handled inside Square and what must be passed to another system.",
+      "tool2Detail": "Record which records are entered directly and which arrive from payment, sales, or banking integrations."
     },
     {
       "name": "Operations and risk",
-      "tool1": "Verify Square's access controls, data handling, support, and administration requirements.",
-      "tool1Detail": "Use vendor documentation and your own security/privacy requirements; do not assume features are included in every plan.",
-      "tool2": "Verify Xero's access controls, data handling, support, and administration requirements.",
-      "tool2Detail": "Use vendor documentation and your own security/privacy requirements; do not assume features are included in every plan."
+      "tool1": "Verify payment availability, supported methods, hardware, currencies, permissions, refunds, payout timing, and local requirements.",
+      "tool2": "Verify country-specific accounting features, tax treatment, currencies, permissions, data export, and reporting requirements.",
+      "tool1Detail": "Reconcile sales totals, refunds, fees, payouts, and settlement timing against bank deposits. Do not assume every payment feature is available in every region.",
+      "tool2Detail": "Test how payment records flow into accounting, how duplicates and failed syncs are handled, and whether the workflow meets local accounting needs."
     },
     {
       "name": "Cost and decision",
-      "tool1": "Calculate Square's total cost for your actual seats, usage, integrations, and support needs.",
-      "tool1Detail": "Check current official pricing and plan limits before comparing.",
-      "tool2": "Calculate Xero's total cost for your actual seats, usage, integrations, and support needs.",
-      "tool2Detail": "Check current official pricing and plan limits before comparing."
+      "tool1": "Calculate transaction fees, hardware, subscriptions, disputes, integrations, and operational support.",
+      "tool2": "Calculate subscription tiers, add-ons, integrations, migration, training, and administration.",
+      "tool1Detail": "Use current vendor terms and realistic transaction volume; do not compare only headline fees.",
+      "tool2Detail": "Use current plan terms and the exact number of entities, users, currencies, and workflows required."
     }
   ],
-  "verdict": "There is no verified universal winner between Square and Xero in this guide. Start with the job to be done, test both products against the same representative workflow, and record the results against written criteria. Confirm current features, plan limits, integrations, privacy, access controls, support, migration, and total cost using official vendor sources before committing. If the products serve different primary purposes, treat them as potentially complementary rather than interchangeable.",
+  "verdict": "Choose based on the primary job. If the immediate need is accepting payments and running checkout, evaluate Square first. If the need is maintaining accounting records and producing financial reports, evaluate Xero first. If both workflows matter, test the handoff from sales and payment settlements into the accounting ledger. Reconcile a representative period, document which system owns each record, and compare current fees, plan limits, regional availability, exports, and integration costs. This guide does not establish a universal winner or a verified price comparison.",
   "faqs": [
     {
       "question": "What is the main difference between Square and Xero?",
-      "answer": "Compare the actual workflows and outcomes each product supports for your team. Verify current capabilities with the vendors rather than relying on unsourced ratings or old feature claims."
+      "answer": "Square is commonly evaluated for payment acceptance and point-of-sale operations; Xero is commonly evaluated for bookkeeping and financial reporting. Compare the workflows you need rather than assuming they are substitutes."
     },
     {
-      "question": "Which is better, Square or Xero?",
-      "answer": "The better fit depends on your requirements. Pilot both against the same written criteria and select the product that meets the critical needs with acceptable cost and operational risk."
+      "question": "Can Square replace Xero?",
+      "answer": "Not by default. List the accounting records, reporting, reconciliation, and compliance workflows you rely on, then verify whether your required processes are supported before replacing an accounting system."
     },
     {
-      "question": "How should I compare pricing?",
-      "answer": "Use current official pricing and include seats, usage, required tiers, integrations, implementation, support, and ongoing administration. Do not rely on old prices shown in third-party summaries."
+      "question": "Can Square and Xero be used together?",
+      "answer": "Potentially, depending on regional availability and current integration support. Test how sales, refunds, fees, payouts, taxes, and transaction identifiers transfer, and define how duplicate or failed syncs will be reconciled."
     },
     {
-      "question": "What should I verify before switching?",
-      "answer": "Check data export and migration, access controls, integrations, retention, support, contract terms, and any workflow that must not be interrupted."
+      "question": "How should I compare their costs?",
+      "answer": "Use current vendor terms for your country and business model. Include transaction fees, hardware, subscriptions, add-ons, integration charges, migration, training, support, and staff time for reconciliation."
+    },
+    {
+      "question": "What should I test before choosing?",
+      "answer": "Use a sample week or month of transactions. Test sales, refunds, fees, payout timing, bank reconciliation, tax handling, reporting, data export, user permissions, and how errors or duplicate transactions are resolved."
     }
   ],
-  "tool1Slug": "square",
-  "tool2Slug": "xero",
   "published": true,
+  "publicationStatus": "published",
+  "secondaryCategories": [
+    "Payments",
+    "Point of Sale"
+  ],
   "winnerVerified": false,
   "featuresVerified": false,
-  "decisionGuide": true,
-  "publicationStatus": "published"
+  "decisionGuide": true
 }
