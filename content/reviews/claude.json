@@ -2,7 +2,7 @@
   "slug": "claude",
   "name": "Claude",
   "tagline": "An AI assistant to evaluate for writing, analysis, coding and document-based workflows.",
-  "description": "Claude is an AI assistant to evaluate for specific writing, analysis, coding or document tasks. Results depend on the task, context, model and plan; verify important claims, protect confidential information and measure editing effort rather than relying on a generic score.",
+  "description": "Claude is an AI assistant for writing and analysis workflows; current plan details and independent ratings are not verified here.",
   "category": "AI & Research",
   "website": "https://claude.ai",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "A controlled task set can compare output quality and editing effort against the team's current process.",
     "Long-document or multi-step workflows can be evaluated using representative material.",
-    "A review rubric can expose factual errors and missing caveats before adoption."
+    "A review rubric can expose factual errors and missing caveats before adoption.",
+    "A fixed task set can measure factual accuracy and editing effort.",
+    "A human-review rubric can expose uncertainty and unsupported output."
   ],
   "cons": [
     "Generated output can be wrong, incomplete or overconfident even when well written.",
     "Data handling and retention terms should be checked before using confidential inputs.",
     "Capabilities, limits and availability can change by model and plan."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Task and prompt workflow",
+      "available": false,
+      "description": "Claude: evaluate task and prompt workflow with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Source and factual checks",
+      "available": false,
+      "description": "Claude: evaluate source and factual checks with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Context handling",
+      "available": false,
+      "description": "Claude: evaluate context handling with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Output consistency",
+      "available": false,
+      "description": "Claude: evaluate output consistency with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Privacy and retention",
+      "available": false,
+      "description": "Claude: evaluate privacy and retention with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Human review",
+      "available": false,
+      "description": "Claude: evaluate human review with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Integrations",
+      "available": false,
+      "description": "Claude: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Usage and administration",
+      "available": false,
+      "description": "Claude: evaluate usage and administration with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -66,19 +109,23 @@
   "faqs": [
     {
       "question": "Who should evaluate Claude?",
-      "answer": "Evaluate Claude when its primary workflow matches a documented requirement. Run a representative pilot and verify current capabilities and limits directly with the vendor."
+      "answer": "Evaluate Claude when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Are prices and ratings independently verified here?",
-      "answer": "No. This review does not present an independently verified price or third-party rating. Check official documentation and obtain a dated quote."
+      "question": "How should a team test Claude?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "What should a pilot include?",
-      "answer": "Test the main workflow, a failure case, permissions, integrations, export and offboarding. Record pass, partial pass, fail or unknown and assign an owner to every unresolved requirement."
+      "question": "Which limitations should be checked in Claude?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "How should total cost be compared?",
-      "answer": "Include licenses, usage, implementation, migration, training, integrations, support, internal administration and renewal terms—not only the headline subscription."
+      "question": "Are Claude prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting Claude?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [],
