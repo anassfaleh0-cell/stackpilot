@@ -86,6 +86,13 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
     .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
   const isBestInCategory = hasEditorialRating && bestInCategory?.slug === tool.slug
 
+  const primaryPro = tool.pros.find((item) => typeof item === "string" && item.trim())
+  const primaryCon = tool.cons.find((item) => typeof item === "string" && item.trim())
+  const reviewVerdict = [
+    primaryPro ? `Consider ${tool.name} when this strength matters to your workflow: ${primaryPro.replace(/\\s+/g, " ").trim()}` : `Evaluate ${tool.name} against your required workflows and must-have capabilities before shortlisting it.`,
+    primaryCon ? `Main trade-off to validate: ${primaryCon.replace(/\\s+/g, " ").trim()}` : `Confirm the limitations, support terms, and plan restrictions that matter to your team before adopting it.`,
+    `Final decision: test one representative task, check current official documentation and pricing, and compare total cost with at least one realistic alternative. ${hasEditorialRating ? "The editorial score is verified against the recorded methodology." : hasStoredEditorialRating ? "Any legacy numeric score is provisional until its evidence and calculation are audited." : "No numeric product score is asserted until an evidence-backed assessment is recorded."}`,
+  ].join(" ")
   return (
     <>
       <BreadcrumbSchema items={[
