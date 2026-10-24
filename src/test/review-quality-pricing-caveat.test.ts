@@ -19,6 +19,14 @@ describe("unverified pricing caveats", () => {
     expect(result).not.toContain("Pricing and plan details")
   })
 
+  it("removes an exact price even when old copy already carries a caveat", () => {
+    const result = stripUnverifiedPriceClaims(
+      "Pro starts at $12.99/month; this price is not independently verified."
+    )
+    expect(result).not.toContain("$12.99")
+    expect(result).toContain("Current pricing and plan entitlements are not independently verified")
+  })
+
   it("does not add a second caveat when pricing is already marked for verification", () => {
     const result = stripUnverifiedPriceClaims(
       "Pricing is not independently verified; confirm current pricing with the vendor."
