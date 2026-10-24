@@ -299,7 +299,7 @@ describe("H-02 decision B consequences", () => {
     const current = readJson<NoindexList>("noindex-list.json")
     expect(current.directories.reviews.noindex).toEqual([])
     expect(current.directories.alternatives.noindex).toEqual([])
-    expect(current.directories.reviews.keep).toHaveLength(151)
+    expect(current.directories.reviews.keep).toHaveLength(165)
   })
 
   it("does not populate the review alternatives array", () => {
