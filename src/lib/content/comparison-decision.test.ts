@@ -100,6 +100,14 @@ describe("getComparisonDecision", () => {
 
 
 describe("getComparisonFeatureDisplayValue", () => {
+  it("renders null and empty imported values as missing evidence, never the literal null", () => {
+    expect(getComparisonFeatureDisplayValue(null)).toBe("Not confirmed — verify with the vendor")
+    expect(getComparisonFeatureDisplayValue(undefined)).toBe("Not confirmed — verify with the vendor")
+    expect(getComparisonFeatureDisplayValue("null")).toBe("Not confirmed — verify with the vendor")
+    expect(getComparisonFeatureDisplayValue("undefined")).toBe("Not confirmed — verify with the vendor")
+    expect(getComparisonFeatureDisplayValue("")).toBe("Not confirmed — verify with the vendor")
+  })
+
   it("does not present unsupported booleans or plan labels as verified facts", () => {
     expect(getComparisonFeatureDisplayValue(true, false)).toContain("Yes")
     expect(getComparisonFeatureDisplayValue(false, undefined)).toContain("No")
