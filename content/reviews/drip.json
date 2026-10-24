@@ -1,0 +1,133 @@
+{
+  "slug": "drip",
+  "name": "Drip",
+  "seoTitle": "Drip Review (2026): Workflows, Limitations & Buyer Checklist",
+  "seoDescription": "A practical Drip review covering ecommerce audience data, campaign planning, automated journeys, consent, measurement, integration testing, and current plan verification.",
+  "tagline": "An ecommerce-focused marketing automation product to evaluate for customer segments and repeatable lifecycle messaging.",
+  "description": "A practical Drip review covering ecommerce audience data, campaign planning, automated journeys, consent, measurement, integration testing, and current plan verification.",
+  "category": "Marketing Automation",
+  "website": "https://www.drip.com/",
+  "pricing": "Not independently verified",
+  "priceRange": "Not independently verified",
+  "rating": null,
+  "reviewCount": null,
+  "ratingVerified": false,
+  "reviewCountVerified": false,
+  "ratings": [],
+  "ratingsVerified": false,
+  "priceRangeVerified": false,
+  "featuresVerified": false,
+  "companyFactsVerified": false,
+  "pros": [
+    "Lifecycle campaigns can be evaluated against real customer journeys instead of relying on generic campaign templates.",
+    "A controlled test helps expose gaps in product, order, or customer event data before automation goes live.",
+    "Segment and journey ownership can improve consistency when the team documents its rules."
+  ],
+  "cons": [
+    "Automation quality depends on clean customer data, accurate events, and carefully tested entry and exit rules.",
+    "Current product capabilities, pricing, and channel limits are not independently verified in this review.",
+    "Poorly designed lifecycle messaging can over-contact customers or trigger messages at the wrong time."
+  ],
+  "features": [
+    {
+      "name": "Customer segmentation",
+      "description": "Test whether the intended audience can be defined from reliable, permissioned customer attributes.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Lifecycle automation",
+      "description": "Prototype one journey and verify entry rules, timing, exits, and duplicate-entry behavior.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Campaign measurement",
+      "description": "Check that links and outcome events are tracked consistently across the intended workflow.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Store data integration",
+      "description": "Verify the exact ecommerce connector and event fields needed by the business.",
+      "available": true,
+      "category": "Core"
+    }
+  ],
+  "content": [
+    {
+      "title": "Lifecycle marketing use cases",
+      "body": "Start with one customer journey that has a clear business purpose, such as a welcome series or a post-purchase follow-up. Define the customer action that starts the journey, what should stop it, and how the team will judge whether the message helped. Keep the first version small so it is easy to inspect and pause. A campaign should be tied to a customer need rather than sent merely because an automation tool makes it possible.",
+      "type": "text"
+    },
+    {
+      "title": "Customer data and event quality",
+      "body": "List the customer and order events that the journey depends on. Test a new customer, a returning customer, a refunded order, and a customer who opts out. Confirm that each event arrives once, contains the expected fields, and is handled correctly when data is missing or delayed. If the journey relies on unreliable event names or duplicate records, fix the source before adding more automation.",
+      "type": "text"
+    },
+    {
+      "title": "Segmentation, consent, and message timing",
+      "body": "Document how segments are defined, which contacts may be messaged, how opt-outs are respected, and how often a customer should receive messages. Test the segment using known sample records before enabling a live campaign. Set exclusions for people who have already completed the intended action or who should not receive the message. Make sure a journey can be paused safely if the store feed or campaign logic changes.",
+      "type": "text"
+    },
+    {
+      "title": "Testing and measurement",
+      "body": "Preview messages and test links, rendering, personalization fallbacks, and mobile layout. Run a controlled test that covers the main branches in the journey and check what happens when a customer takes a different action than expected. Measure a small set of outcomes connected to the goal, such as completed registration or repeat purchase, and compare with a relevant baseline. Avoid treating open rates or unsourced industry benchmarks as proof of success.",
+      "type": "text"
+    },
+    {
+      "title": "Integration and operational ownership",
+      "body": "Verify the current connector for the store, customer data source, or analytics system the team uses. Test field mapping, event timing, duplicate handling, permissions, and error visibility with a sample record. Assign an owner to each live journey and record who can edit, pause, or retire it. Keep a change log for important triggers and message rules so that later updates do not silently change the customer experience.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing and decision checklist",
+      "body": "Current Drip pricing, plan entitlements, and usage limits are not independently verified here. Check the vendor's current terms for contact or sending limits, integrations, automation features, support, and billing cadence. Estimate cost at the business's expected contact volume and include the time needed to maintain data quality and campaign content. No numeric editorial rating or third-party review count is asserted without a source-backed record.",
+      "type": "text"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What should a retailer test first in Drip?",
+      "answer": "Test one customer journey from the original event through segmentation, message delivery, exit rules, and outcome measurement."
+    },
+    {
+      "question": "Are Drip prices verified in this review?",
+      "answer": "No. Confirm current pricing, contact or sending limits, and feature availability directly with the vendor."
+    },
+    {
+      "question": "Why does event quality matter for automation?",
+      "answer": "Incorrect, late, or duplicated customer events can trigger the wrong message or repeat a journey. Test real edge cases before launch."
+    },
+    {
+      "question": "Does this page provide a verified Drip rating?",
+      "answer": "No independent aggregate rating or review count is recorded, so this page does not invent a numeric score."
+    }
+  ],
+  "relatedComparisons": [],
+  "relatedGuides": [],
+  "relatedPosts": [],
+  "alternatives": [],
+  "author": "PilotStack Editorial Team",
+  "contentPublished": "2026-10-24",
+  "contentModified": "2026-10-24",
+  "company": {
+    "industries": [
+      "Marketing Automation"
+    ],
+    "targetUsers": [
+      "Online retailers assessing lifecycle email marketing and automated customer communication around meaningful customer actions."
+    ],
+    "pricingModel": "Not independently verified",
+    "deployment": [
+      "Cloud"
+    ],
+    "apiAvailable": null,
+    "learningCurve": "Evaluate with a representative workflow",
+    "migrationComplexity": "Depends on existing tools"
+  },
+  "difficulty": "Beginner to intermediate",
+  "learningCurve": "Evaluate with a representative workflow",
+  "whoShouldUse": "Online retailers assessing lifecycle email marketing and automated customer communication around meaningful customer actions.",
+  "whoShouldNotUse": "Teams that cannot validate data quality, consent, event tracking, or the current availability of required channels before sending messages."
+}
