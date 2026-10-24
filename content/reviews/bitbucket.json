@@ -104,6 +104,31 @@
       "title": "Decision record",
       "body": "Document branch protections, workspace ownership, CI requirements, deployment permissions, migration gaps, artifact handling and support needs. Confirm current product limits directly. Choose the platform that supports the team's security and collaboration model with the least avoidable maintenance.",
       "type": "text"
+    },
+    {
+      "title": "Repository workflow fit",
+      "body": "Bitbucket should be evaluated in the context of the team's existing source-control workflow, not as an isolated feature checklist. Start with a representative repository and document how developers create branches, open pull requests, request reviews, run checks, and merge changes. Confirm current support for the team's repository host, identity provider, permission model, and required integrations in official documentation. Do not assume that a workflow available in another Atlassian product is automatically included in every Bitbucket plan.",
+      "type": "text"
+    },
+    {
+      "title": "Pull requests and review quality",
+      "body": "Use a real change that touches more than one file to test reviewers, required approvals, merge restrictions, comments, and the visibility of failing checks. Confirm whether the controls can prevent an unreviewed or failing change from merging under the organization's chosen configuration. Test how a developer discovers the next action after a review request or failed build. A useful repository process should make responsibility and risk visible without relying on people to remember an undocumented convention.",
+      "type": "text"
+    },
+    {
+      "title": "CI/CD and developer feedback",
+      "body": "If pipelines or external CI are part of the workflow, measure the time from pushing a change to receiving an actionable result. Validate secrets handling, environment separation, permissions, artifact retention, concurrency limits, and how failed deployments are rolled back. Check current usage quotas and billing details with the vendor before estimating build cost. Use a harmless test project first; never paste production secrets into an experiment or a public issue.",
+      "type": "text"
+    },
+    {
+      "title": "Access, auditability, and migration",
+      "body": "Inventory repository administrators, deploy keys, app passwords or tokens, service accounts, and external collaborators before migration. Test least-privilege access, offboarding, backup/export, and recovery of a deleted branch or repository using the supported procedures. If the organization depends on linked issue tracking or identity management, test the entire path rather than checking only that a connection can be created. Security and compliance requirements must be verified against the current product documentation and contract.",
+      "type": "text"
+    },
+    {
+      "title": "Buyer checklist and verdict",
+      "body": "Before choosing Bitbucket, verify repository limits, required review controls, CI capacity, integration behavior, migration effort, and the exit path for code and metadata. Run a pilot with both a routine pull request and a failed-build scenario. Compare developer friction and administration effort against the team's current source-control platform. No numeric editorial score is recorded here until the review has an evidence-backed scorecard; this is not a third-party rating study.",
+      "type": "text"
     }
   ],
   "faqs": [
