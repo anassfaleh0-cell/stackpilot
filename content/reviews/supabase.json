@@ -2,7 +2,7 @@
   "slug": "supabase",
   "name": "Supabase",
   "tagline": "A backend platform to evaluate for database, authentication, storage and application data workflows.",
-  "description": "Supabase is a backend platform to evaluate for applications that need database-backed services and related developer workflows. Fit depends on data access rules, deployment model, backup and recovery, usage, integrations and operational ownership; verify current limits and terms.",
+  "description": "Supabase provides backend services for application data workflows; current plan details and independent ratings are not verified here.",
   "category": "Developer Tools",
   "website": "https://supabase.com",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "A small proof of concept can test database and application integration together.",
     "Access policies and data model can be validated with realistic user roles.",
-    "Backup, export and migration can be tested before production adoption."
+    "Backup, export and migration can be tested before production adoption.",
+    "A realistic user-role test can validate data-access rules.",
+    "Backup restoration and export should be tested before production adoption."
   ],
   "cons": [
     "Database security depends on correctly designed and tested access policies.",
     "Usage, storage, compute and egress may affect cost as the application grows.",
     "A managed backend still requires backup, monitoring and incident ownership."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Core development workflow",
+      "available": false,
+      "description": "Supabase: evaluate core development workflow with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Access and permissions",
+      "available": false,
+      "description": "Supabase: evaluate access and permissions with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "CI or runtime fit",
+      "available": false,
+      "description": "Supabase: evaluate ci or runtime fit with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Security controls",
+      "available": false,
+      "description": "Supabase: evaluate security controls with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Failure handling",
+      "available": false,
+      "description": "Supabase: evaluate failure handling with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Monitoring",
+      "available": false,
+      "description": "Supabase: evaluate monitoring with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Integrations",
+      "available": false,
+      "description": "Supabase: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Export and portability",
+      "available": false,
+      "description": "Supabase: evaluate export and portability with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -66,19 +109,23 @@
   "faqs": [
     {
       "question": "Who should evaluate Supabase?",
-      "answer": "Evaluate Supabase when its primary workflow matches a documented requirement. Run a representative pilot and verify current capabilities, limits and contract terms directly with the vendor."
+      "answer": "Evaluate Supabase when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Are prices and ratings independently verified here?",
-      "answer": "No. This review does not present an independently verified price or third-party rating. Check current official documentation and obtain a dated quote."
+      "question": "How should a team test Supabase?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "What should a pilot include?",
-      "answer": "Test the main workflow, one failure case, permissions, integrations, export and offboarding. Record pass, partial pass, fail or unknown and assign an owner to every unresolved requirement."
+      "question": "Which limitations should be checked in Supabase?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "How should total cost be compared?",
-      "answer": "Include licenses, usage, implementation, migration, training, integrations, support, internal administration and renewal terms—not only the headline subscription."
+      "question": "Are Supabase prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting Supabase?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [
