@@ -46,6 +46,21 @@
       "title": "Migration and cost",
       "body": "Export a sample audience and verify field mapping, tags, consent, suppression and engagement history. Request a dated quote based on the expected billable audience, sending volume, seats and required automation. Include template recreation, integration and migration effort.",
       "type": "text"
+    },
+    {
+      "title": "Deliverability test",
+      "body": "Send a controlled test to the mailboxes and devices used by the audience. Check authentication, link tracking, rendering, unsubscribe handling, bounce processing and suppression rules. Compare the intended audience with the actual send audience before a campaign is released.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and governance",
+      "body": "Test a missing personalization field, an unsubscribed contact, a bounced address and a contact whose consent source is unknown. Confirm the platform prevents an inappropriate send and preserves the suppression state. Assign an owner for list hygiene and permission changes.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document audience sources, consent rules, sending volume, automation needs, integration dependencies and current plan limits. Compare the time spent preparing, reviewing and reporting a campaign with the team's current process. Recheck vendor terms before renewal and after major audience growth.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -145,5 +160,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 187
+  "wordCount": 306
 }
