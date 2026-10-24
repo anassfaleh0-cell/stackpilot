@@ -120,6 +120,13 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   // Apply the same unverified-price guard to the visible comparison cells, not just
   // their explanatory detail text. Otherwise an imported raw value such as "$23-75/mo"
   // can leak into a page even when the surrounding copy correctly says pricing is unverified.
+  const hasRecordedValue = (value: unknown): boolean => {
+    if (value === null || value === undefined) return false
+    if (typeof value !== "string") return true
+    const normalized = value.trim()
+    return normalized.length > 0 && !/^(?:not recorded|not confirmed|unknown|n\/a|na|null|undefined|—|-|tbd)$/i.test(normalized)
+  }
+
   const safeFeatures = cmp.features.map((f) => ({
     ...f,
     tool1: typeof f.tool1 === "string" ? stripUnverifiedPriceClaims(f.tool1) : f.tool1,
@@ -161,9 +168,9 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
               <li>Category: {cmp.category}</li>
               <li>Total features compared: {cmp.features.length}</li>
-              <li>{cmp.tool1} criteria with recorded information: {cmp.features.filter(f => f.tool1 && f.tool1 !== "Not recorded").length}</li>
-              <li>{cmp.tool2} criteria with recorded information: {cmp.features.filter(f => f.tool2 && f.tool2 !== "Not recorded").length}</li>
-              <li>Criteria with details for both: {cmp.features.filter(f => f.tool1Detail && f.tool2Detail).length}</li>
+              <li>{cmp.tool1} criteria with recorded information: {cmp.features.filter(f => hasRecordedValue(f.tool1)).length}</li>
+              <li>{cmp.tool2} criteria with recorded information: {cmp.features.filter(f => hasRecordedValue(f.tool2)).length}</li>
+              <li>Criteria with details for both: {cmp.features.filter(f => hasRecordedValue(f.tool1Detail) && hasRecordedValue(f.tool2Detail)).length}</li>
               <li>{hasComparableWinner ? `Recorded dataset pick: ${winnerLabel}` : categoriesDiffer ? "Different product categories" : cmp.decisionGuide ? "Verdict: depends on use case; see Decision Framework" : "No comparable winner recorded"}</li>
               <li>FAQs answered: {visibleFaqs.length}</li>
               {cmp.lastUpdated ? <li>Last updated: {formatDate(cmp.lastUpdated)}</li> : null}
