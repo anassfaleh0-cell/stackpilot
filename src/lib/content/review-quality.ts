@@ -96,7 +96,7 @@ export function stripUnverifiedPriceClaims(value: string): string {
     .filter(Boolean)
   const alreadyCaveated = (sentence: string) => /not independently verified|verification pending/i.test(sentence)
   const hasUnverifiedPrice = (sentence: string) =>
-    currencyAmount.test(sentence) && (pricingContext.test(sentence) || sentence.trim().length <= 32) && !alreadyCaveated(sentence)
+    currencyAmount.test(sentence) && (pricingContext.test(sentence) || sentence.trim().length <= 32)
   const hasUnverifiedPlan = (sentence: string) => planPhrase.test(sentence) && !alreadyCaveated(sentence)
   const replacedPriceSentence = priceSentences.some(hasUnverifiedPrice)
   const normalized = priceSentences.map((sentence) =>
