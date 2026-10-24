@@ -1,0 +1,134 @@
+{
+  "slug": "harvest",
+  "name": "Harvest",
+  "seoTitle": "Harvest Review (2026): Time Tracking & Project Workflow",
+  "seoDescription": "A practical Harvest review covering time entry, project budgets, team review, reports, and verification of current features and terms.",
+  "tagline": "A time-tracking and project-workflow product to evaluate for services teams.",
+  "description": "A practical Harvest review covering time entry, project budgets, team review, reports, and verification of current features and terms.",
+  "category": "Time Tracking & Project Work",
+  "website": "https://www.getharvest.com/",
+  "pricing": "Not independently verified",
+  "priceRange": "Not independently verified",
+  "rating": null,
+  "reviewCount": null,
+  "ratingVerified": false,
+  "reviewCountVerified": false,
+  "ratings": [],
+  "ratingsVerified": false,
+  "priceRangeVerified": false,
+  "featuresVerified": false,
+  "companyFactsVerified": false,
+  "pros": [
+    "A small pilot can show whether the team records project effort consistently.",
+    "A clear project structure can make reports easier to understand and review.",
+    "Testing the full workflow exposes gaps before the team changes its process."
+  ],
+  "cons": [
+    "Reports depend on accurate entries and consistent project naming.",
+    "Current plan limits and features are not independently verified in this review.",
+    "The team still needs an agreed process for corrections and reporting."
+  ],
+  "features": [
+    {
+      "name": "Time entry",
+      "description": "Test timer and manual entry using a representative project.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Project review",
+      "description": "Verify that the project structure supports the reports the team needs.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Team timesheet review",
+      "description": "Test how missing or incorrect entries are found and corrected.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Reports and exports",
+      "description": "Export a sample period and compare it with source records.",
+      "available": true,
+      "category": "Core"
+    }
+  ],
+  "content": [
+    {
+      "title": "Time tracking workflow",
+      "type": "text",
+      "body": "Choose one active project and test how team members start, stop, edit, and describe time entries. Agree on the minimum detail needed to make records useful without making routine work burdensome. Include late entries and corrections so the pilot reflects normal conditions. A timer is useful only when the resulting record can be explained and used by the people planning the work."
+    },
+    {
+      "title": "Project structure and ownership",
+      "type": "text",
+      "body": "Create a small set of projects and tasks that reflect the team's real work. Decide who can create new projects, how names are standardized, and when completed work is archived. Ask someone who did not configure the workspace to find the current project status and explain where effort went. This reveals whether the structure is understandable to ordinary users or only to the administrator."
+    },
+    {
+      "title": "Timesheet review and corrections",
+      "type": "text",
+      "body": "Run a weekly review with examples of complete, missing, and corrected entries. Agree who checks incomplete records, how corrections are requested, and when a period is considered final. Keep the process transparent so people understand how their entries are used. A review routine should improve data quality without requiring the team to reconstruct every workday from memory."
+    },
+    {
+      "title": "Reports and hand-off",
+      "type": "text",
+      "body": "Choose one operational question, such as which projects used the most effort or whether a task took longer than expected. Build a report, export a representative period, and compare the totals with source entries. Check date ranges, rounding, grouping, and how corrections appear. If the data is handed to another system, test the complete path with a sample before relying on it."
+    },
+    {
+      "title": "Access and integrations",
+      "type": "text",
+      "body": "List the people who need to enter time, review projects, manage settings, or export reports. Test the current access controls with representative roles and confirm who can edit existing records. If the team depends on an integration, verify current availability and field mapping on the chosen plan. Keep an owner for each connection and document how errors will be found and corrected."
+    },
+    {
+      "title": "Pricing and decision checklist",
+      "type": "text",
+      "body": "Current Harvest prices and plan entitlements are not independently verified here. Check the official terms for the team size, project setup, reports, integrations, and support required. Pilot the workflow through one complete reporting period and measure missing entries, correction effort, report usefulness, and maintenance time. No numeric editorial score is published until an evidence-backed assessment is recorded."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What should I test first in Harvest?",
+      "answer": "Use one real project to test time entry, corrections, project grouping, and whether the final report answers a useful question."
+    },
+    {
+      "question": "Are Harvest prices verified here?",
+      "answer": "No. Confirm current pricing and feature availability directly with the vendor."
+    },
+    {
+      "question": "How can I check report accuracy?",
+      "answer": "Export a representative period and reconcile it against the source time entries, including corrections and date ranges."
+    },
+    {
+      "question": "Does PilotStack publish a verified Harvest rating?",
+      "answer": "No independently verified aggregate rating or third-party review count is recorded on this page."
+    }
+  ],
+  "relatedComparisons": [],
+  "relatedGuides": [],
+  "relatedPosts": [],
+  "alternatives": [],
+  "author": "PilotStack Editorial Team",
+  "contentPublished": "2026-10-24",
+  "contentModified": "2026-10-24",
+  "company": {
+    "industries": [
+      "Time Tracking"
+    ],
+    "targetUsers": [
+      "Service teams",
+      "Project leads"
+    ],
+    "pricingModel": "Not independently verified",
+    "deployment": [
+      "Cloud"
+    ],
+    "apiAvailable": null,
+    "learningCurve": "Evaluate with a representative workflow",
+    "migrationComplexity": "Depends on existing tools"
+  },
+  "difficulty": "Beginner to intermediate",
+  "learningCurve": "Evaluate with a representative workflow",
+  "whoShouldUse": "Teams that need a consistent way to record project effort and review time.",
+  "whoShouldNotUse": "Teams requiring specialized controls that have not been confirmed in the current product documentation."
+}
