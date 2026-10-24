@@ -46,6 +46,21 @@
       "title": "Migration and exit",
       "body": "Before switching production, test domain ownership, TLS, redirects, headers, analytics, ads.txt, robots.txt, sitemap and all key routes. Preserve the current deployment until acceptance checks pass. Document how to export build configuration, redirect rules and environment settings if the team later moves.",
       "type": "text"
+    },
+    {
+      "title": "Deployment acceptance checklist",
+      "body": "Test a clean build, a preview deployment, the production promotion path, a rollback and a not-found route. Verify redirects, canonical metadata, robots.txt, sitemap, ads.txt, cache headers and key API or server routes. Record the exact deployment identifier and confirm that the production domain serves the intended version after cache invalidation.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases to test",
+      "body": "Use a deliberately failing build, a missing environment variable and an invalid route. Confirm that a bad preview cannot replace production and that rollback restores a known-good release. Test secret separation between preview and production and confirm logs do not expose tokens or private user data.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document the production owner, domain routing, framework adapter, build command, runtime requirements, cache behavior, usage limits and recovery steps. Confirm the platform's current plan and technical support for the exact application. Keep an export of redirects and environment configuration for continuity if the deployment architecture changes.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -141,5 +156,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 209
+  "wordCount": 351
 }
