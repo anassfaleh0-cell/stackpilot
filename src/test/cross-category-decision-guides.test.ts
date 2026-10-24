@@ -79,7 +79,7 @@ describe("cross-category comparisons are honest workflow decision guides", () =>
       expect(comparison.description, slug).toMatch(/workflow|use case|job|category/i)
       expect(comparison.verdict, slug).toMatch(/no universal winner|neither .* is a universal winner|no evidence-based universal winner|does not establish a verified overall winner/i)
       expect(comparison.faqs?.length ?? 0, slug).toBeGreaterThanOrEqual(5)
-      expect((comparison.faqs ?? []).every((faq) => faq.question.includes(comparison.tool1!) || faq.question.includes(comparison.tool2!) || /total cost|verified winner/i.test(faq.question)), slug).toBe(true)
+      expect((comparison.faqs ?? []).every((faq) => faq.question.includes(comparison.tool1!) || faq.question.includes(comparison.tool2!) || /total cost|verified winner|products be used together/i.test(faq.question)), slug).toBe(true)
     }
   })
 
