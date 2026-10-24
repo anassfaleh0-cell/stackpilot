@@ -375,7 +375,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               {/* Feature Breakdown */}
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Feature Breakdown</h2>
-                <p className="text-sm text-muted-foreground mb-3">{tool.featuresVerified === true ? "Feature profile marked verified in the editorial record." : "Recorded feature information is shown below for transparency; it has not been independently verified. Confirm availability, plan restrictions, integrations, and regional limitations with the vendor."}</p><EditorialFeatureMatrix features={tool.features} slug={tool.slug} category={tool.category} />
+                <p className="text-sm text-muted-foreground mb-3">{tool.featuresVerified === true ? "Feature profile marked verified in the editorial record." : "Recorded feature information is shown below for transparency; it has not been independently verified. Confirm availability, plan restrictions, integrations, and regional limitations with the vendor."}</p><EditorialFeatureMatrix features={tool.features} slug={tool.slug} category={tool.category} verified={tool.featuresVerified === true} />
               </section>
 
               {entity && (
