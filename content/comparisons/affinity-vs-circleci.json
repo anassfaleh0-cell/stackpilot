@@ -11,43 +11,43 @@
       "name": "Primary job",
       "tool1": "Create and edit visual/design assets",
       "tool2": "Automate software builds, tests, and delivery steps",
-      "tool1Detail": "Identify the specific creative tasks, supported file formats, collaboration needs, and compatibility with your existing asset workflow. Verify current product editions, licensing, and platform support.",
-      "tool2Detail": "Map your source repositories, build/test jobs, security requirements, concurrency needs, and failure-debugging workflow. Validate current configuration options, usage limits, and plan terms."
+      "tool1Detail": "Evaluation note for Affinity: Create and edit visual/design assets. Verify the requirement against current product documentation and test it in a representative workflow.",
+      "tool2Detail": "Evaluation note for CircleCI: Automate software builds, tests, and delivery steps. Verify the requirement against current product documentation and test it in a representative workflow."
     },
     {
       "name": "Main users",
       "tool1": "Designers and creative teams",
       "tool2": "Developers, QA, and platform/DevOps teams",
-      "tool1Detail": "Identify the specific creative tasks, supported file formats, collaboration needs, and compatibility with your existing asset workflow. Verify current product editions, licensing, and platform support.",
-      "tool2Detail": "Map your source repositories, build/test jobs, security requirements, concurrency needs, and failure-debugging workflow. Validate current configuration options, usage limits, and plan terms."
+      "tool1Detail": "Evaluation note for Affinity: Designers and creative teams. Verify the requirement against current product documentation and test it in a representative workflow.",
+      "tool2Detail": "Evaluation note for CircleCI: Developers, QA, and platform/DevOps teams. Verify the requirement against current product documentation and test it in a representative workflow."
     },
     {
       "name": "Key evaluation",
       "tool1": "File compatibility, editing workflow, asset portability, and licensing",
       "tool2": "Pipeline configuration, test reliability, integrations, secrets, and diagnostics",
-      "tool1Detail": "Identify the specific creative tasks, supported file formats, collaboration needs, and compatibility with your existing asset workflow. Verify current product editions, licensing, and platform support.",
-      "tool2Detail": "Map your source repositories, build/test jobs, security requirements, concurrency needs, and failure-debugging workflow. Validate current configuration options, usage limits, and plan terms."
+      "tool1Detail": "Evaluation note for Affinity: File compatibility, editing workflow, asset portability, and licensing. Verify the requirement against current product documentation and test it in a representative workflow.",
+      "tool2Detail": "Evaluation note for CircleCI: Pipeline configuration, test reliability, integrations, secrets, and diagnostics. Verify the requirement against current product documentation and test it in a representative workflow."
     },
     {
       "name": "Pilot",
       "tool1": "Edit representative files and export them into the team's real workflow",
       "tool2": "Run representative builds/tests and inspect failures and runtime resource needs",
-      "tool1Detail": "Identify the specific creative tasks, supported file formats, collaboration needs, and compatibility with your existing asset workflow. Verify current product editions, licensing, and platform support.",
-      "tool2Detail": "Map your source repositories, build/test jobs, security requirements, concurrency needs, and failure-debugging workflow. Validate current configuration options, usage limits, and plan terms."
+      "tool1Detail": "Evaluation note for Affinity: Edit representative files and export them into the team's real workflow. Verify the requirement against current product documentation and test it in a representative workflow.",
+      "tool2Detail": "Evaluation note for CircleCI: Run representative builds/tests and inspect failures and runtime resource needs. Verify the requirement against current product documentation and test it in a representative workflow."
     },
     {
       "name": "Cost comparison",
       "tool1": "Check current license model, included apps, and commercial terms",
       "tool2": "Check usage/concurrency limits, seats, included minutes, and add-ons",
-      "tool1Detail": "Identify the specific creative tasks, supported file formats, collaboration needs, and compatibility with your existing asset workflow. Verify current product editions, licensing, and platform support.",
-      "tool2Detail": "Map your source repositories, build/test jobs, security requirements, concurrency needs, and failure-debugging workflow. Validate current configuration options, usage limits, and plan terms."
+      "tool1Detail": "Evaluation note for Affinity: Check current license model, included apps, and commercial terms. Verify the requirement against current product documentation and test it in a representative workflow.",
+      "tool2Detail": "Evaluation note for CircleCI: Check usage/concurrency limits, seats, included minutes, and add-ons. Verify the requirement against current product documentation and test it in a representative workflow."
     },
     {
       "name": "Relationship",
       "tool1": "Does not automate source-code build/test pipelines",
       "tool2": "Does not replace visual asset creation and editing",
-      "tool1Detail": "Identify the specific creative tasks, supported file formats, collaboration needs, and compatibility with your existing asset workflow. Verify current product editions, licensing, and platform support.",
-      "tool2Detail": "Map your source repositories, build/test jobs, security requirements, concurrency needs, and failure-debugging workflow. Validate current configuration options, usage limits, and plan terms."
+      "tool1Detail": "Evaluation note for Affinity: Does not automate source-code build/test pipelines. Verify the requirement against current product documentation and test it in a representative workflow.",
+      "tool2Detail": "Evaluation note for CircleCI: Does not replace visual asset creation and editing. Verify the requirement against current product documentation and test it in a representative workflow."
     }
   ],
   "verdict": "Creative asset production and continuous integration solve different problems. Comparing them by star ratings or declaring a universal winner is not meaningful; compare each against the workflow it is designed to support. Evaluate Affinity for the creative output your team needs and CircleCI for automating builds and tests. If both design assets and software delivery are part of your process, define the handoff and ownership between creative and engineering teams. Current feature availability, pricing, plan limits, security terms, and integrations have not been independently benchmarked in this comparison; verify requirements with the vendors before purchasing.",
