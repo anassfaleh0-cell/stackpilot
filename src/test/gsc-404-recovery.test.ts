@@ -63,6 +63,22 @@ describe("Search Console 404 recovery", () => {
     }
   })
 
+  it("restores missing review routes with substantive indexable content", () => {
+    const slugs = ["brevo", "clockify", "drip", "google-tasks", "harvest", "klaviyo", "luma", "omnisend", "around", "postermywall", "timely", "toggl-track", "trackingtime", "visme"]
+    for (const slug of slugs) {
+      const review = getReview(slug)
+      expect(review, slug).not.toBeNull()
+      expect(isContentAvailable("review", slug), slug).toBe(true)
+      expect(isNoindexed("reviews", slug), slug).toBe(false)
+      expect(review?.rating, slug).toBeNull()
+      expect(review?.reviewCount, slug).toBeNull()
+      expect(review?.priceRangeVerified, slug).toBe(false)
+      expect(review?.content?.length ?? 0, slug).toBeGreaterThanOrEqual(8)
+      expect(review?.faqs?.length ?? 0, slug).toBeGreaterThanOrEqual(4)
+      expect((review?.relatedGuides ?? []).every((guide) => isContentAvailable("guide", guide)), slug).toBe(true)
+    }
+  })
+
   it("keeps intentionally unpublished alternatives drafts out of publication", () => {
     for (const slug of ["clickup-alternatives", "grammarly-alternatives"]) {
       const file = path.join(process.cwd(), "content", "alternatives", `${slug}.json`)
