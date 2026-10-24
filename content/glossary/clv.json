@@ -1,18 +1,18 @@
 {
   "slug": "clv",
   "term": "Customer Lifetime Value",
-  "definition": "The total revenue a business can expect from a single customer over the entire relationship.",
-  "extendedDefinition": "CLV helps companies determine how much they should invest in acquiring and retaining each customer. It is calculated by multiplying average purchase value, purchase frequency, and average customer lifespan. SaaS businesses monitor CLV closely because high CLV relative to customer acquisition cost signals a healthy, sustainable model. Increasing CLV through upsells, better support, and product improvements is a primary growth strategy. For software buyers, CLV provides a lens on vendor behavior: durable revenue models fund support and product investment, while weak retention explains aggressive pricing and churn. Evaluating vendors through their retention and expansion data separates sustainable platforms from acquisition-driven ones and justifies investment in retention measurement itself.",
+  "definition": "Customer lifetime value (CLV or LTV) estimates the value a customer contributes over the full relationship with a business.",
+  "extendedDefinition": "CLV estimates the economic value of a customer relationship, but the calculation depends on the business model and the inputs available. A simple revenue-based estimate multiplies average revenue per customer by the expected relationship length; a margin-based model also accounts for the cost of serving that customer. Teams should state whether the estimate uses revenue or gross profit, which cohort it covers, and how refunds, discounts, expansion, and churn are treated. Comparing CLV with customer acquisition cost can help evaluate acquisition efficiency, but the time horizon and assumptions must match. For software selection, verify that analytics tools expose cohort retention and revenue data needed to update the estimate rather than relying on a static lifetime assumption.",
   "category": "Analytics & Data",
   "examples": [
-    "Average revenue per user (ARPU)",
-    "Subscription length",
-    "Expansion revenue"
+    "A subscription business with $50 average monthly revenue per account and an estimated 18-month relationship calculates a simple revenue-based CLV of $900 before costs.",
+    "A finance team calculates margin-based CLV separately for small-business and enterprise customers because support and implementation costs differ.",
+    "A growth team compares acquisition cost and cohort-based CLV over the same 12-month window before increasing paid acquisition spend."
   ],
   "relatedTerms": [
     "kpi",
     "churn-rate",
     "saas"
   ],
-  "description": "Customer Lifetime Value (CLV) predicts the total revenue a business can expect from a single customer account. Learn how to calculate and optimize CLV."
+  "description": "Customer lifetime value estimates the revenue or profit a customer contributes over time. Learn common calculation methods, assumptions, and how CLV relates to acquisition cost and retention."
 }
