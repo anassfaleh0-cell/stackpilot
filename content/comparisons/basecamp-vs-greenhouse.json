@@ -1,60 +1,86 @@
 {
   "slug": "basecamp-vs-greenhouse",
-  "title": "Greenhouse vs Basecamp",
-  "description": "Greenhouse vs Basecamp: Greenhouse is our overall pick for HR & People teams — Greenhouse 4.3/5, Basecamp 4.1/5; Greenhouse from $150-200/mo,.",
-  "category": "HR & People",
-  "tool1": "Greenhouse",
-  "tool2": "Basecamp",
-  "winner": "greenhouse",
+  "title": "Basecamp vs Greenhouse: Project Coordination vs Recruiting Operations",
+  "description": "A practical decision guide to Basecamp and Greenhouse. Basecamp focuses on project coordination and shared team workspaces; Greenhouse focuses on recruiting and applicant tracking workflows. Compare each product against its intended workflow instead of relying on unsupported star ratings or a universal winner. Verify current features, availability, and terms with the vendors.",
+  "category": "Project Management",
+  "tool1": "Basecamp",
+  "tool2": "Greenhouse",
+  "winner": null,
   "features": [
     {
-      "name": "User Rating",
-      "tool1": true,
-      "tool2": false
+      "name": "Primary job",
+      "tool1": "Coordinate projects, tasks, updates, and shared work",
+      "tool2": "Manage recruiting stages, candidates, and interview workflows",
+      "tool1Detail": "For Basecamp, assess coordinate projects, tasks, updates, and shared work against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For Greenhouse, assess manage recruiting stages, candidates, and interview workflows against your real requirements and record any gaps during a representative pilot."
     },
     {
-      "name": "Category",
-      "tool1": true,
-      "tool2": true
+      "name": "Main users",
+      "tool1": "Project owners and cross-functional teams",
+      "tool2": "Recruiters, hiring managers, interviewers, and HR",
+      "tool1Detail": "For Basecamp, assess project owners and cross-functional teams against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For Greenhouse, assess recruiters, hiring managers, interviewers, and hr against your real requirements and record any gaps during a representative pilot."
     },
     {
-      "name": "Starting Price",
-      "tool1": true,
-      "tool2": true
+      "name": "Key evaluation",
+      "tool1": "Task ownership, timelines, shared files, and project reporting",
+      "tool2": "Candidate records, interview plans, scorecards, permissions, and hiring reports",
+      "tool1Detail": "For Basecamp, assess task ownership, timelines, shared files, and project reporting against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For Greenhouse, assess candidate records, interview plans, scorecards, permissions, and hiring reports against your real requirements and record any gaps during a representative pilot."
     },
     {
-      "name": "Best For",
-      "tool1": true,
-      "tool2": true
+      "name": "Data governance",
+      "tool1": "Assess guest access, confidential project content, and retention",
+      "tool2": "Assess candidate-data access, retention, consent, and hiring-process controls",
+      "tool1Detail": "For Basecamp, assess assess guest access, confidential project content, and retention against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For Greenhouse, assess assess candidate-data access, retention, consent, and hiring-process controls against your real requirements and record any gaps during a representative pilot."
     },
     {
-      "name": "Core Strength",
-      "tool1": true,
-      "tool2": true
+      "name": "Implementation",
+      "tool1": "Pilot one real project and define roles and reporting",
+      "tool2": "Test a representative requisition from application through decision and handoff",
+      "tool1Detail": "For Basecamp, assess pilot one real project and define roles and reporting against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For Greenhouse, assess test a representative requisition from application through decision and handoff against your real requirements and record any gaps during a representative pilot."
+    },
+    {
+      "name": "Cost comparison",
+      "tool1": "Verify current collaboration plan and required seats",
+      "tool2": "Verify current recruiting product scope, user needs, integrations, and contract terms",
+      "tool1Detail": "For Basecamp, assess verify current collaboration plan and required seats against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For Greenhouse, assess verify current recruiting product scope, user needs, integrations, and contract terms against your real requirements and record any gaps during a representative pilot."
     }
   ],
-  "verdict": "Greenhouse (HR & People) and Basecamp (Project Management) serve different primary purposes. Greenhouse has a higher user rating, but the right choice depends on whether your priority is hr & people or project management capabilities.",
+  "verdict": "Project coordination and applicant tracking are not direct alternatives. Recruiting may include projects and coordination, but hiring teams usually need purpose-built candidate and interview workflows; general project tools should not be assumed to replace them. Compare current vendor terms, implementation effort, privacy/security requirements, integrations, data portability, and ongoing ownership before purchasing. This page does not claim an independently conducted benchmark or establish a universal winner.",
   "faqs": [
     {
-      "question": "What is the difference between Greenhouse and Basecamp?",
-      "answer": "Greenhouse is a hr & people tool, while Basecamp is a project management platform. They serve different primary functions but may overlap in certain areas."
+      "question": "What is the main difference between Basecamp and Greenhouse?",
+      "answer": "Basecamp focuses on project coordination and shared team workspaces; Greenhouse focuses on recruiting and applicant tracking workflows. They are evaluated against different core workflows, so begin with the outcome your team needs."
     },
     {
-      "question": "Can Greenhouse replace Basecamp?",
-      "answer": "Not directly — they serve different categories. Some organizations use both for different purposes."
+      "question": "Can Basecamp replace Greenhouse?",
+      "answer": "Do not assume so. List the capabilities and controls you currently rely on in Greenhouse, then test whether Basecamp can meet each requirement without creating operational or governance gaps."
     },
     {
-      "question": "Which has better value, Greenhouse or Basecamp?",
-      "answer": "Greenhouse ($150-200/mo) and Basecamp ($15/user/mo) have different pricing. Evaluate based on which category matters more for your workflows."
+      "question": "Can a team use Basecamp and Greenhouse together?",
+      "answer": "Potentially, if both workflows are needed. Define which product owns each step, what information should be shared, who controls access, and how errors or changes are handled."
+    },
+    {
+      "question": "How should I compare the costs?",
+      "answer": "Compare current vendor quotes for your actual scope, including seats or usage, required features, implementation, integrations, training, support, renewals, and staff time."
+    },
+    {
+      "question": "What should I test before deciding?",
+      "answer": "Use a representative task and realistic data. Record completion time, missing capabilities, administration effort, permissions, export options, and whether each product supports the workflow it is intended to serve."
     }
   ],
-  "lastUpdated": "2026-07-20",
-  "tool1Slug": "greenhouse",
-  "tool2Slug": "basecamp",
+  "lastUpdated": "2026-10-24",
+  "tool1Slug": "basecamp",
+  "tool2Slug": "greenhouse",
   "secondaryCategories": [
-    "Project Management"
+    "HR & People"
   ],
-  "published": false,
-  "publicationStatus": "draft",
-  "editorialReviewNote": "Temporarily withheld from publication because the paired products are not clear direct alternatives. Review search intent, category mapping, unique comparison evidence, and winner claims before republishing."
+  "published": true,
+  "winnerVerified": false,
+  "featuresVerified": false,
+  "decisionGuide": true
 }
