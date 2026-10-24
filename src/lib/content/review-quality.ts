@@ -86,7 +86,7 @@ export function stripUnverifiedPriceClaims(value: string): string {
   // This avoids treating unrelated figures such as acquisition values or historical dates as SaaS pricing.
   const currencyAmount = /[$€£]\s?\d[\d,]*(?:\.\d+)?|\b(?:USD|EUR|GBP)\s?\d[\d,]*(?:\.\d+)?|\b\d[\d,]*(?:\.\d+)?\s?(?:USD|EUR|GBP)\b/i
   const planPhrase = /\b(?:free|freemium|paid|enterprise)\s+(?:plan|tier)\b|\bfree trial\b/i
-  const pricingContext = /\b(?:price|pricing|cost|plan|tier|subscription|billing|per (?:user|seat|editor)|starts? at|starting at|monthly|annually|annual|renewal|fee|licen[cs]e|pay(?:s|ment)?|budget)\b/i
+  const pricingContext = /\b(?:price|pricing|costs?|plan|tier|subscription|billing|from|per (?:user|seat|editor)|starts? at|starting at|monthly|annually|annual|renewal|fee|licen[cs]e|pay(?:s|ment)?|budget)\b/i
   const hasUnverifiedPricing = (sentence: string) =>
     (currencyAmount.test(sentence) && pricingContext.test(sentence) || planPhrase.test(sentence)) &&
     !/not independently verified|verification pending/i.test(sentence)
