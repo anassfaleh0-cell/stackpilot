@@ -172,6 +172,40 @@ async function run() {
   }
   await Promise.all(Array.from({ length: CONCURRENCY }, paginationWorker))
 
+  // A page can still return a transient 5xx after its per-request retries when the
+  // edge is busy serving a large sitemap crawl. Retry transient failures once more
+  // after the crawl has finished, when request pressure is lower, before failing CI.
+  const recoveredTransientPages = []
+  for (const failed of [...failedPages]) {
+    if (!TRANSIENT_STATUSES.has(failed.status) && !failed.error) continue
+    try {
+      const response = await fetchWithTimeout(failed.url, { redirect: "manual" })
+      if (!response.ok) {
+        failed.status = response.status
+        continue
+      }
+      const failedIndex = failedPages.indexOf(failed)
+      if (failedIndex >= 0) failedPages.splice(failedIndex, 1)
+      recoveredTransientPages.push(failed.url)
+      const contentType = response.headers.get("content-type") || ""
+      if (!contentType.includes("text/html")) continue
+      const html = await response.text()
+      for (const href of extractInternalLinks(html, failed.url)) {
+        const target = new URL(href)
+        const pathname = normalizePath(target.pathname)
+        if (incoming.has(pathname)) incoming.set(pathname, incoming.get(pathname) + 1)
+        if (isPaginationUrl(target)) {
+          if (!paginationTargets.has(target.href)) paginationTargets.add(target.href)
+          continue
+        }
+        if (!incoming.has(pathname) && pathname !== "/rss.xml") nonSitemapTargets.add(pathname)
+      }
+    } catch (error) {
+      failed.error = error instanceof Error ? error.message : String(error)
+    }
+  }
+  console.log("Recovered transient sitemap pages after crawl:", recoveredTransientPages.length, JSON.stringify(recoveredTransientPages.slice(0, 20)))
+
   const orphanPages = [...incoming].filter(([, count]) => count === 0).map(([pathname]) => pathname)
   const weakPages = [...incoming]
     .filter(([, count]) => count > 0 && count < 3)
