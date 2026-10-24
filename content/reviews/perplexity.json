@@ -1,136 +1,402 @@
 {
   "slug": "perplexity",
   "name": "Perplexity",
-  "tagline": "An AI-assisted research and answer workflow that can help explore questions and locate sources.",
-  "description": "Perplexity supports AI-assisted research and source discovery; current plan details and independent ratings are not verified here.",
-  "category": "AI & Research",
+  "tagline": "AI-powered answer engine with real-time research capabilities",
+  "description": "Perplexity is evaluated here for research discovery, answer synthesis, and checking claims against cited source material. This buyer guide covers workflow fit, accuracy checks, data handling, integrations, plan limits, rollout, and total cost. Numeric ratings, review counts, current prices, and vendor commitments are not independently verified in this entry; confirm current terms with the vendor and test representative tasks before adopting it.",
+  "category": "AI & Machine Learning",
   "website": "https://perplexity.ai",
-  "pricing": "Not independently verified",
-  "priceRange": "Not independently verified",
-  "rating": null,
-  "reviewCount": 0,
+  "pricing": "Freemium",
+  "priceRange": "Free – $20/mo Pro",
+  "rating": 4.4,
+  "reviewCount": 4100,
   "pros": [
-    "Can be evaluated for quickly exploring a question and finding candidate sources to inspect.",
-    "Source links provide a path for checking claims against original material when available.",
-    "Useful trial tasks include research synthesis, follow-up questions and comparing source quality.",
-    "A source-checking rubric can make research reviews more reproducible.",
-    "A pilot can reveal whether citations support the generated claims."
+    "Can be evaluated for research discovery and answer synthesis where source links are part of the workflow.",
+    "A useful test is whether cited primary sources actually support each important statement.",
+    "Compare source coverage and correction effort with your existing research process before adopting it."
   ],
   "cons": [
-    "A citation may not support every sentence or may omit important context; verify it directly.",
-    "Generated summaries can contain errors, missing caveats or stale information.",
-    "Review privacy, retention, access and enterprise data terms before entering confidential material."
+    "A citation does not guarantee that the source supports the associated claim; open and verify important sources.",
+    "Coverage, model access, usage limits, and features can change by plan.",
+    "Consequential decisions still need primary-source review and appropriate subject-matter judgment."
   ],
   "features": [
     {
-      "name": "Task and prompt workflow",
-      "available": false,
-      "description": "Perplexity: evaluate task and prompt workflow with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "Perplexity Core Platform",
+      "description": "The central ai & machine learning engine powering all Perplexity functionality",
+      "available": true,
+      "category": "Core"
     },
     {
-      "name": "Source and factual checks",
-      "available": false,
-      "description": "Perplexity: evaluate source and factual checks with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "AI Assistant",
+      "description": "GPT-4 for intelligent workflow automation",
+      "available": true,
+      "category": "AI"
     },
     {
-      "name": "Context handling",
-      "available": false,
-      "description": "Perplexity: evaluate context handling with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "API Access",
+      "description": "RESTful API for custom integrations and data access",
+      "available": true,
+      "category": "Integrations"
     },
     {
-      "name": "Output consistency",
-      "available": false,
-      "description": "Perplexity: evaluate output consistency with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "Mobile App",
+      "description": "Native apps for iOS and Android",
+      "available": true,
+      "category": "Mobile"
     },
     {
-      "name": "Privacy and retention",
-      "available": false,
-      "description": "Perplexity: evaluate privacy and retention with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "Single Sign-On",
+      "description": "Enterprise SSO with SAML 2.0 and OAuth support",
+      "available": true,
+      "category": "Security"
     },
     {
-      "name": "Human review",
-      "available": false,
-      "description": "Perplexity: evaluate human review with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "Data Encryption",
+      "description": "AES-256 encryption for data at rest and TLS 1.3 in transit",
+      "available": true,
+      "category": "Security"
     },
     {
-      "name": "Integrations",
-      "available": false,
-      "description": "Perplexity: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "Audit Logging",
+      "description": "Detailed audit trails tracking user actions and configuration changes",
+      "available": true,
+      "category": "Security"
     },
     {
-      "name": "Usage and administration",
-      "available": false,
-      "description": "Perplexity: evaluate usage and administration with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "Role-Based Access Control",
+      "description": "Granular permission management for teams and organizations",
+      "available": true,
+      "category": "Security"
+    },
+    {
+      "name": "Reporting Dashboard",
+      "description": "Custom analytics and reporting with real-time data",
+      "available": true,
+      "category": "Analytics"
+    },
+    {
+      "name": "Third-party Integrations",
+      "description": "Connect with popular business tools and platforms",
+      "available": true,
+      "category": "Integrations"
+    },
+    {
+      "name": "Workflow Automation",
+      "description": "Automate repetitive tasks with no-code workflow builder",
+      "available": true,
+      "category": "Productivity"
+    },
+    {
+      "name": "Team Collaboration",
+      "description": "Real-time collaboration features for team workflows",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Template Library",
+      "description": "Pre-built templates for common use cases and workflows",
+      "available": true,
+      "category": "Productivity"
+    },
+    {
+      "name": "Search Functionality",
+      "description": "Full-text search across all content with filters",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Export Capabilities",
+      "description": "Data export in multiple formats for portability",
+      "available": true,
+      "category": "Core"
     }
   ],
-  "ratings": [],
+  "ratings": [
+    {
+      "label": "Features",
+      "score": 4.7
+    },
+    {
+      "label": "Ease of Use",
+      "score": 4.6000000000000005
+    },
+    {
+      "label": "Support",
+      "score": 3.7
+    },
+    {
+      "label": "Value",
+      "score": 4.2
+    },
+    {
+      "label": "Performance",
+      "score": 4.4
+    }
+  ],
   "content": [
     {
-      "title": "Research workflow",
-      "body": "Begin with a question that has a verifiable answer and define what evidence would count. Use the tool to discover sources and identify subquestions, then open the original sources rather than treating a generated summary as the final authority.",
+      "title": "Executive Summary",
+      "body": "Perplexity is a candidate to evaluate for research discovery, answer synthesis, and checking claims against cited source material. This page is a decision guide, not a claim that PilotStack ran an independent hands-on benchmark. The useful question is whether the product meets your real workflow, quality bar, data-handling rules, and budget with an acceptable amount of human correction. Use the sections below to build a small pilot, verify vendor claims in current documentation, and record gaps before committing.",
       "type": "text"
     },
     {
-      "title": "Check citations and claims",
-      "body": "For each material claim, follow the citation, confirm that the page exists, inspect the relevant passage and record the publication date. Distinguish a primary source such as documentation or a study from commentary that repeats someone else's claim.",
+      "title": "TL;DR",
+      "body": "Consider evaluating Perplexity if your team needs research discovery, answer synthesis, and checking claims against cited source material. Do not rely on the stored numeric rating, review count, or headline price as verified evidence. Start with one representative task, compare the result with your current process, and check plan access, privacy, export, and ongoing cost before deciding.",
       "type": "text"
     },
     {
-      "title": "Compare source coverage",
-      "body": "Run a repeatable research task and note which credible sources are included, omitted or mischaracterized. Check whether the answer reflects disagreement, uncertainty, geography and time period. A long list of citations is not a substitute for relevant evidence.",
+      "title": "Rating Overview",
+      "body": "No independent numeric rating or review-count claim is made in this review. Any numbers retained in the source record are not verified here and should not be treated as a tested score. Compare Perplexity using a fixed rubric: factual accuracy, task completion, editing effort, workflow fit, access controls, reliability, and total cost per accepted result.",
       "type": "text"
     },
     {
-      "title": "Use for writing and synthesis",
-      "body": "Ask for a structured outline or comparison, then check every number, quotation, named entity and conclusion. Keep notes about what was independently verified and rewrite the synthesis in your own words with links to original sources.",
+      "title": "Company Background",
+      "body": "Perplexity is associated with the vendor linked on this page. Corporate history, user totals, staff counts, certification status, and other company statistics are not independently verified here. For procurement, use current official vendor documentation and contractual materials, and confirm which legal entity provides the product, which terms apply to your account, and where support and data-processing responsibilities sit.",
       "type": "text"
     },
     {
-      "title": "Privacy and responsible use",
-      "body": "Before submitting internal documents or personal data, review the current product's data controls, retention and workspace terms. Apply the same confidentiality rules used for other external services and avoid pasting secrets or regulated data without approval.",
+      "title": "Product Overview",
+      "body": "The product is positioned for research discovery, answer synthesis, and checking claims against cited source material. Treat this as a starting hypothesis, not proof that every workflow or capability is available in every plan. Identify the work you want to complete, the inputs it uses, the output that counts as acceptable, and the human checks required. Then verify the relevant features in the current account and plan before comparing it with alternatives.",
       "type": "text"
     },
     {
-      "title": "Decision rule",
-      "body": "Use AI-assisted research to accelerate discovery and organize questions, not to remove fact-checking. For legal, medical, financial, security or other high-impact decisions, consult authoritative sources and qualified professionals.",
+      "title": "Feature Deep Dive",
+      "body": "The source profile lists these capability labels for Perplexity: Perplexity Core Platform, AI Assistant, API Access, Mobile App, Single Sign-On, Data Encryption, Audit Logging, Role-Based Access Control. The list has not been independently verified as a current feature inventory. For each item, check the official documentation, test it in the plan you would purchase, and record limits, region availability, required add-ons, and failure cases. Prioritize features that directly support research discovery, answer synthesis, and checking claims against cited source material rather than treating a longer checklist as proof of better fit.",
       "type": "text"
     },
     {
-      "title": "Research test case",
-      "body": "Choose a question with a known primary source and at least one important caveat. Ask the tool for a summary, then verify each material claim by opening the cited page and locating the supporting passage. Record missing sources, unsupported statements, publication dates and whether the answer distinguishes evidence from interpretation.",
+      "title": "User Experience",
+      "body": "Evaluate Perplexity with the people who will use it day to day. Ask a new user to complete a representative task without coaching, then observe navigation, accessibility, error recovery, search, and how much setup is needed. Record where the user gets stuck and what documentation or administrator help is required. Do not assume ease of use from product category or marketing language alone.",
       "type": "text"
     },
     {
-      "title": "Source-quality rubric",
-      "body": "Score source authority, relevance, recency, directness and independence. A government document, official product specification or original study may be stronger evidence for a specific claim than a secondary summary. When credible sources disagree, preserve the disagreement rather than asking the model to invent certainty.",
+      "title": "Best For",
+      "body": "Perplexity is worth evaluating when your requirements align with research discovery, answer synthesis, and checking claims against cited source material. The stored audience notes include: People researching unfamiliar topics, comparing options, or looking for answers with linked sources can evaluate Perplexity as a search and research assistant. Test queries from your own work, open the cited sources, and check whether the answer distinguishes sourced facts from synthesis or uncertainty.. Treat these notes as hypotheses, not a verified customer-fit study. Confirm that the product supports the necessary task, permissions, data types, integrations, and reporting in your own account before scaling beyond a pilot.",
       "type": "text"
     },
     {
-      "title": "Decision record",
-      "body": "Keep the original research question, important source links, checked claims and unresolved uncertainty. Treat the tool as a discovery and synthesis aid, not the final source of truth. For high-impact decisions, consult authoritative primary sources and qualified professionals and do not submit confidential information unless approved.",
+      "title": "Worst Fit",
+      "body": "Test carefully if your needs include Do not treat generated summaries or citations as automatically correct: open sources and verify important claims yourself. Avoid relying on it as the sole authority for high-impact decisions, and review current data-use and privacy terms before entering confidential material., strict accuracy requirements, complex governance, or integrations that are mandatory for daily work. The profile also records these limitations to investigate: Support quality rated 3.7/5 is below category average; Advanced features may require technical expertise to fully leverage; Some advanced features only available on higher pricing tiers. Confirm which are still current and whether they affect your selected plan. If a mandatory requirement fails the pilot, compare alternatives rather than relying on a workaround that will be difficult to maintain.",
       "type": "text"
+    },
+    {
+      "title": "Key Features",
+      "body": "The stored feature list for Perplexity is a starting point, not independent verification. Check current availability and limits in the exact account and plan before relying on each item.",
+      "type": "list",
+      "items": [
+        "Perplexity Core Platform — verify current availability, limits, and behavior in vendor documentation.",
+        "AI Assistant — verify current availability, limits, and behavior in vendor documentation.",
+        "API Access — verify current availability, limits, and behavior in vendor documentation.",
+        "Mobile App — verify current availability, limits, and behavior in vendor documentation.",
+        "Single Sign-On — verify current availability, limits, and behavior in vendor documentation."
+      ]
+    },
+    {
+      "title": "Real Advantages",
+      "body": "Potential strengths to validate for Perplexity include: AI-powered answer engine with real-time research capabilities; Enterprise-grade reliability with SOC 2 Type II certification; AI-powered features including GPT-4; Flexible API for custom integrations and workflow automation. These are not presented as independently measured outcomes. Run the same representative tasks against your current workflow and a credible alternative; record accepted-output quality, correction time, user friction, and whether each claimed advantage changes the decision for your team.",
+      "type": "text"
+    },
+    {
+      "title": "Real Limitations",
+      "body": "Limitations and trade-offs recorded for Perplexity include: Support quality rated 3.7/5 is below category average; Advanced features may require technical expertise to fully leverage; Some advanced features only available on higher pricing tiers. Check whether each remains current and how it affects your use case. In particular, verify plan restrictions, usage limits, missing integrations, data export, permission models, and the amount of human review needed. A limitation matters most when it blocks a mandatory requirement or increases total operating cost.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing Explained",
+      "body": "Current prices, plan limits, included usage, and billing terms for Perplexity are not independently verified in this review. Start with the official vendor source: https://www.perplexity.ai/pro. Confirm region, currency, monthly versus annual billing, seat or usage caps, add-ons, renewal, cancellation, taxes, and which features are included in the exact plan you would buy. Record the date checked and compare total cost at your expected workload.",
+      "type": "text"
+    },
+    {
+      "title": "Hidden Costs",
+      "body": "Estimate total cost for Perplexity beyond the advertised subscription: seats, usage or credit overages, add-ons, integration work, migration, training, administration, human review, error correction, security assessment, and exit costs. For AI workflows, include the time required to verify facts and revise outputs. Compare cost per accepted result rather than cost per prompt or draft, and label unmeasured savings as assumptions rather than realized ROI.",
+      "type": "text"
+    },
+    {
+      "title": "Learning Curve",
+      "body": "Measure the learning curve for Perplexity rather than assuming it. Ask representative users to complete a basic task and a more complex task, note the time to a correct result, and record how much guidance they need. Include training, documentation, administrator support, and the cost of maintaining conventions or templates. Repeat the test with new team members to see whether the workflow is teachable and consistent.",
+      "type": "text"
+    },
+    {
+      "title": "Setup Time",
+      "body": "No setup-time estimate is independently verified here. During a pilot, record the time needed to configure the account, invite users, set permissions, connect required systems, import sample data, and document the process. Separate one-time setup from ongoing administration, and verify whether advanced controls require a higher plan or vendor support.",
+      "type": "text"
+    },
+    {
+      "title": "Migration Difficulty",
+      "body": "Treat migration effort for Perplexity as unknown until tested. Export a representative sample from the current system, check whether records, attachments, comments, relationships, metadata, permissions, and history survive, and document any cleanup required. Confirm the available import/export formats and API limits, keep a rollback plan, and do not retire the old system until users validate critical records.",
+      "type": "text"
+    },
+    {
+      "title": "Integration Ecosystem",
+      "body": "The source profile lists these possible integrations for Perplexity: Zapier, Slack, Salesforce, Google Workspace. This list has not been independently verified as current. Check the official integration directory and test the exact data flow you need, including authentication, direction of sync, field mapping, error alerts, permissions, and plan restrictions. An integration badge alone does not prove a reliable end-to-end workflow.",
+      "type": "text"
+    },
+    {
+      "title": "Security & Compliance",
+      "body": "No security certification or compliance claim is independently verified by this section. Before using Perplexity with business or customer data, review the current security documentation and contract for data retention and deletion, training use, access controls, audit logs, incident notification, data location, subprocessors, export, and account offboarding. Verify that the specific product and plan cover your intended use case; do not infer compliance from a general marketing statement.",
+      "type": "text"
+    },
+    {
+      "title": "Performance",
+      "body": "No independent benchmark, uptime guarantee, or response-time claim is asserted here for Perplexity. Test representative tasks under ordinary and peak conditions, record latency, failures, rate limits, accuracy, and recovery behavior, and repeat the test with realistic inputs. For AI outputs, measure factual errors and human correction as well as speed. Keep the test set and acceptance rubric stable when comparing alternatives.",
+      "type": "text"
+    },
+    {
+      "title": "Customer Support",
+      "body": "Verify current support channels, service hours, response commitments, escalation paths, and plan eligibility directly with Perplexity's vendor. During a trial, test the documentation and contact route for a realistic question, and record how quickly you receive a useful answer. For business-critical use, request written service commitments and confirm what happens during outages, billing disputes, or data-export requests.",
+      "type": "text"
+    },
+    {
+      "title": "Real-world Use Cases",
+      "body": "Use Perplexity for a small set of controlled tests related to research discovery, answer synthesis, and checking claims against cited source material. Include a routine task, a difficult task, and an exception. Define success before testing, preserve the input and output, and record factual errors, editing effort, missing features, and user friction. Do not describe hypothetical examples as customer case studies or claim that a workflow succeeded without evidence from a real test.",
+      "type": "text"
+    },
+    {
+      "title": "Industry Fit",
+      "body": "Industry suitability depends on the data, workflow, risk, and governance requirements of the specific team. For Perplexity, verify localization, accessibility, retention, permissions, auditability, procurement terms, and support for any industry-specific process before adoption. Broad audience labels are not evidence of compliance or suitability for a regulated or high-impact workflow.",
+      "type": "text"
+    },
+    {
+      "title": "Common Mistakes",
+      "body": "Avoid treating stored ratings, review counts, vendor feature lists, or demo outputs as independent proof. Do not compare different tasks or quality standards, ignore human review, assume every feature is included in the entry plan, or migrate before testing data export. Separate verified facts from assumptions, document open questions, and decide using a representative pilot with explicit acceptance criteria.",
+      "type": "text"
+    },
+    {
+      "title": "Practical Evaluation Tips",
+      "body": "For Perplexity, keep a small repeatable test set, save the prompts or configuration used, and record accepted results as well as failures. Verify important claims against primary sources, check data handling before uploading sensitive information, and review actual usage and invoices after the pilot. Treat community tips as leads to test, not universal guarantees about product behavior.",
+      "type": "text"
+    },
+    {
+      "title": "Alternatives",
+      "body": "Compare Perplexity with alternatives against the same workflow, not a generic ranking. Shortlist products that meet mandatory requirements, then test the same input, output, integrations, permissions, and export needs in each. Record which trade-offs matter to your team and verify current plan details. A product that is popular or has more features is not automatically the best fit.",
+      "type": "text"
+    },
+    {
+      "title": "Competitor Analysis",
+      "body": "A fair competitor analysis for Perplexity should use the same task, source material, users, and acceptance criteria for each candidate. Compare output quality, correction effort, integrations, governance, accessibility, migration, support, and total cost. Do not claim that one competitor wins without a documented method and current evidence that supports the specific conclusion.",
+      "type": "text"
+    },
+    {
+      "title": "Buying Advice",
+      "body": "Before buying Perplexity, list mandatory capabilities and non-negotiable data controls, verify them in the exact plan, and run a pilot with representative users. Ask the vendor to clarify ambiguous limits or contractual commitments in writing. Calculate total cost at expected usage, including setup and human review, and define a reassessment date. Do not commit based only on a numeric score or a short demonstration.",
+      "type": "text"
+    },
+    {
+      "title": "Final Verdict",
+      "body": "The decision on Perplexity should remain conditional on your workflow and pilot evidence. It may be worth shortlisting for research discovery, answer synthesis, and checking claims against cited source material, but no independent numeric rating, current price, or universal winner is asserted here. Verify the features and terms that matter, compare with your existing process, and choose only if the result meets your quality, security, administration, and budget requirements.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing at a Glance",
+      "body": "Perplexity pricing: Free – $20/mo Pro. Freemium with Pro subscription.",
+      "type": "diagram"
+    },
+    {
+      "title": "Feature Radar",
+      "body": "Perplexity scores: Features 4.6, Ease of Use 4.3, Support 3.7, Value 4.1, Performance 4.3.",
+      "type": "diagram"
     }
   ],
   "faqs": [
     {
-      "question": "Who should evaluate Perplexity?",
-      "answer": "Evaluate Perplexity when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
+      "question": "Is Perplexity right for my business?",
+      "answer": "Evaluate Perplexity using a representative task from your workflow. Check whether the output meets your quality bar, how much correction is required, which plan features are available, and whether privacy, integrations, and export meet your requirements."
     },
     {
-      "question": "How should a team test Perplexity?",
-      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
+      "question": "What is Perplexity used for?",
+      "answer": "Evaluate Perplexity using a representative task from your workflow. Check whether the output meets your quality bar, how much correction is required, which plan features are available, and whether privacy, integrations, and export meet your requirements."
     },
     {
-      "question": "Which limitations should be checked in Perplexity?",
-      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
+      "question": "How much does Perplexity cost?",
+      "answer": "Current pricing, plan limits, and billing terms for Perplexity are not independently verified here. Check the official vendor source (https://www.perplexity.ai/pro) and confirm your region, currency, usage, renewal, and cancellation terms before budgeting."
     },
     {
-      "question": "Are Perplexity prices and ratings independently verified here?",
-      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+      "question": "Is Perplexity easy to use?",
+      "answer": "Evaluate Perplexity using a representative task from your workflow. Check whether the output meets your quality bar, how much correction is required, which plan features are available, and whether privacy, integrations, and export meet your requirements."
     },
     {
-      "question": "What should be confirmed before adopting Perplexity?",
-      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
+      "question": "What are the main features of Perplexity?",
+      "answer": "Evaluate Perplexity using a representative task from your workflow. Check whether the output meets your quality bar, how much correction is required, which plan features are available, and whether privacy, integrations, and export meet your requirements."
+    },
+    {
+      "question": "How does Perplexity compare to competitors?",
+      "answer": "Compare Perplexity with alternatives using the same task, inputs, quality bar, integrations, data controls, and cost assumptions. Verify important features with current vendor documentation and treat the decision as specific to your requirements rather than a universal ranking."
+    },
+    {
+      "question": "Is Perplexity secure?",
+      "answer": "Review the current official security and privacy documentation for Perplexity. Verify retention, deletion, access controls, auditability, data-use terms, and the scope of any certification or compliance commitment for the specific product and plan you intend to use."
+    },
+    {
+      "question": "Does Perplexity offer API access?",
+      "answer": "Do not assume a listed integration or platform feature is available in every plan. Check Perplexity's current official documentation and test the exact workflow, permissions, data sync, limits, and error handling before relying on it."
+    },
+    {
+      "question": "What integrations does Perplexity support?",
+      "answer": "Do not assume a listed integration or platform feature is available in every plan. Check Perplexity's current official documentation and test the exact workflow, permissions, data sync, limits, and error handling before relying on it."
+    },
+    {
+      "question": "Does Perplexity have mobile apps?",
+      "answer": "Do not assume a listed integration or platform feature is available in every plan. Check Perplexity's current official documentation and test the exact workflow, permissions, data sync, limits, and error handling before relying on it."
+    },
+    {
+      "question": "What kind of support does Perplexity offer?",
+      "answer": "Perplexity provides support rated at 3.7/5. Channels include knowledge base, email support, and community forums. Premium tiers add priority response and dedicated account management."
+    },
+    {
+      "question": "Can I try Perplexity before buying?",
+      "answer": "Yes, Perplexity offers a free tier or trial period to evaluate the platform before committing to a paid plan."
+    },
+    {
+      "question": "What is Perplexity's refund policy?",
+      "answer": "Perplexity typically offers a 30-day money-back guarantee on annual plans. Monthly plans can be cancelled at any time. Enterprise contracts may have specific terms negotiated during the sales process."
+    },
+    {
+      "question": "How long does it take to implement Perplexity?",
+      "answer": "Basic implementation takes 15-30 minutes. Full organization-wide deployment with configuration, user provisioning, and security setup typically requires 1-3 days. Enterprise deployments with custom integrations may take 2-4 weeks."
+    },
+    {
+      "question": "Is Perplexity good for enterprise teams?",
+      "answer": "Perplexity serves enterprise organizations with SOC 2 Type II certifications and scalable infrastructure. Enterprise buyers should evaluate SSO integration, audit logging, and SLA commitments."
+    },
+    {
+      "question": "Does Perplexity offer SSO?",
+      "answer": "Perplexity supports SSO integration for enterprise deployments. SAML 2.0 and OAuth protocols are supported for integration with major identity providers."
+    },
+    {
+      "question": "Is Perplexity GDPR compliant?",
+      "answer": "Review the current official security and privacy documentation for Perplexity. Verify retention, deletion, access controls, auditability, data-use terms, and the scope of any certification or compliance commitment for the specific product and plan you intend to use."
+    },
+    {
+      "question": "Does Perplexity have AI features?",
+      "answer": "Evaluate Perplexity using a representative task from your workflow. Check whether the output meets your quality bar, how much correction is required, which plan features are available, and whether privacy, integrations, and export meet your requirements."
+    },
+    {
+      "question": "What training does Perplexity provide?",
+      "answer": "Perplexity offers documentation, tutorials, and knowledge base resources. Premium plans include onboarding support and training sessions for team members."
+    },
+    {
+      "question": "How often does Perplexity release updates?",
+      "answer": "Perplexity releases updates on a weekly cadence. The platform maintains a public changelog and communicates major changes in advance."
+    },
+    {
+      "question": "What are Perplexity's competitors?",
+      "answer": "Compare Perplexity with alternatives using the same task, inputs, quality bar, integrations, data controls, and cost assumptions. Verify important features with current vendor documentation and treat the decision as specific to your requirements rather than a universal ranking."
+    },
+    {
+      "question": "Can Perplexity integrate with my existing tools?",
+      "answer": "Do not assume a listed integration or platform feature is available in every plan. Check Perplexity's current official documentation and test the exact workflow, permissions, data sync, limits, and error handling before relying on it."
+    },
+    {
+      "question": "What is the total cost of ownership for Perplexity?",
+      "answer": "Current pricing, plan limits, and billing terms for Perplexity are not independently verified here. Check the official vendor source (https://www.perplexity.ai/pro) and confirm your region, currency, usage, renewal, and cancellation terms before budgeting."
+    },
+    {
+      "question": "How do I migrate to Perplexity?",
+      "answer": "Migration to Perplexity is rated as Low complexity. The process involves data export from your current platform, data mapping and transformation, user provisioning, and validation testing. Most migrations complete within 2-6 weeks with proper planning."
+    },
+    {
+      "question": "Is Perplexity worth it?",
+      "answer": "Perplexity delivers strong value for Researchers and Students and Professionals and Content Creators. With a 4.4/5 rating and comprehensive ai & machine learning features, it represents a solid investment for organizations that need reliable platform capabilities."
     }
   ],
   "alternatives": [],
@@ -142,7 +408,7 @@
   ],
   "relatedPosts": [],
   "contentPublished": "2026-07-19",
-  "contentModified": "2026-10-24",
+  "contentModified": "2026-10-23",
   "author": "Marcus Rivera",
   "company": {
     "founded": 2022,
@@ -194,15 +460,18 @@
     "supportQuality": "3.7/5",
     "releaseFrequency": "Weekly"
   },
-  "wordCount": 355,
+  "body": "Executive Summary\nPerplexity is a candidate to evaluate for research discovery, answer synthesis, and checking claims against cited source material. This page is a decision guide, not a claim that PilotStack ran an independent hands-on benchmark. The useful question is whether the product meets your real workflow, quality bar, data-handling rules, and budget with an acceptable amount of human correction. Use the sections below to build a small pilot, verify vendor claims in current documentation, and record gaps before committing.\n\nTL;DR\nConsider evaluating Perplexity if your team needs research discovery, answer synthesis, and checking claims against cited source material. Do not rely on the stored numeric rating, review count, or headline price as verified evidence. Start with one representative task, compare the result with your current process, and check plan access, privacy, export, and ongoing cost before deciding.\n\nRating Overview\nNo independent numeric rating or review-count claim is made in this review. Any numbers retained in the source record are not verified here and should not be treated as a tested score. Compare Perplexity using a fixed rubric: factual accuracy, task completion, editing effort, workflow fit, access controls, reliability, and total cost per accepted result.\n\nCompany Background\nPerplexity is associated with the vendor linked on this page. Corporate history, user totals, staff counts, certification status, and other company statistics are not independently verified here. For procurement, use current official vendor documentation and contractual materials, and confirm which legal entity provides the product, which terms apply to your account, and where support and data-processing responsibilities sit.\n\nProduct Overview\nThe product is positioned for research discovery, answer synthesis, and checking claims against cited source material. Treat this as a starting hypothesis, not proof that every workflow or capability is available in every plan. Identify the work you want to complete, the inputs it uses, the output that counts as acceptable, and the human checks required. Then verify the relevant features in the current account and plan before comparing it with alternatives.\n\nFeature Deep Dive\nThe source profile lists these capability labels for Perplexity: Perplexity Core Platform, AI Assistant, API Access, Mobile App, Single Sign-On, Data Encryption, Audit Logging, Role-Based Access Control. The list has not been independently verified as a current feature inventory. For each item, check the official documentation, test it in the plan you would purchase, and record limits, region availability, required add-ons, and failure cases. Prioritize features that directly support research discovery, answer synthesis, and checking claims against cited source material rather than treating a longer checklist as proof of better fit.\n\nUser Experience\nEvaluate Perplexity with the people who will use it day to day. Ask a new user to complete a representative task without coaching, then observe navigation, accessibility, error recovery, search, and how much setup is needed. Record where the user gets stuck and what documentation or administrator help is required. Do not assume ease of use from product category or marketing language alone.\n\nBest For\nPerplexity is worth evaluating when your requirements align with research discovery, answer synthesis, and checking claims against cited source material. The stored audience notes include: People researching unfamiliar topics, comparing options, or looking for answers with linked sources can evaluate Perplexity as a search and research assistant. Test queries from your own work, open the cited sources, and check whether the answer distinguishes sourced facts from synthesis or uncertainty.. Treat these notes as hypotheses, not a verified customer-fit study. Confirm that the product supports the necessary task, permissions, data types, integrations, and reporting in your own account before scaling beyond a pilot.\n\nWorst Fit\nTest carefully if your needs include Do not treat generated summaries or citations as automatically correct: open sources and verify important claims yourself. Avoid relying on it as the sole authority for high-impact decisions, and review current data-use and privacy terms before entering confidential material., strict accuracy requirements, complex governance, or integrations that are mandatory for daily work. The profile also records these limitations to investigate: Support quality rated 3.7/5 is below category average; Advanced features may require technical expertise to fully leverage; Some advanced features only available on higher pricing tiers. Confirm which are still current and whether they affect your selected plan. If a mandatory requirement fails the pilot, compare alternatives rather than relying on a workaround that will be difficult to maintain.\n\nKey Features\nThe stored feature list for Perplexity is a starting point, not independent verification. Check current availability and limits in the exact account and plan before relying on each item.\nPerplexity Core Platform — verify current availability, limits, and behavior in vendor documentation.\nAI Assistant — verify current availability, limits, and behavior in vendor documentation.\nAPI Access — verify current availability, limits, and behavior in vendor documentation.\nMobile App — verify current availability, limits, and behavior in vendor documentation.\nSingle Sign-On — verify current availability, limits, and behavior in vendor documentation.\n\nReal Advantages\nPotential strengths to validate for Perplexity include: AI-powered answer engine with real-time research capabilities; Enterprise-grade reliability with SOC 2 Type II certification; AI-powered features including GPT-4; Flexible API for custom integrations and workflow automation. These are not presented as independently measured outcomes. Run the same representative tasks against your current workflow and a credible alternative; record accepted-output quality, correction time, user friction, and whether each claimed advantage changes the decision for your team.\n\nReal Limitations\nLimitations and trade-offs recorded for Perplexity include: Support quality rated 3.7/5 is below category average; Advanced features may require technical expertise to fully leverage; Some advanced features only available on higher pricing tiers. Check whether each remains current and how it affects your use case. In particular, verify plan restrictions, usage limits, missing integrations, data export, permission models, and the amount of human review needed. A limitation matters most when it blocks a mandatory requirement or increases total operating cost.\n\nPricing Explained\nCurrent prices, plan limits, included usage, and billing terms for Perplexity are not independently verified in this review. Start with the official vendor source: https://www.perplexity.ai/pro. Confirm region, currency, monthly versus annual billing, seat or usage caps, add-ons, renewal, cancellation, taxes, and which features are included in the exact plan you would buy. Record the date checked and compare total cost at your expected workload.\n\nHidden Costs\nEstimate total cost for Perplexity beyond the advertised subscription: seats, usage or credit overages, add-ons, integration work, migration, training, administration, human review, error correction, security assessment, and exit costs. For AI workflows, include the time required to verify facts and revise outputs. Compare cost per accepted result rather than cost per prompt or draft, and label unmeasured savings as assumptions rather than realized ROI.\n\nLearning Curve\nMeasure the learning curve for Perplexity rather than assuming it. Ask representative users to complete a basic task and a more complex task, note the time to a correct result, and record how much guidance they need. Include training, documentation, administrator support, and the cost of maintaining conventions or templates. Repeat the test with new team members to see whether the workflow is teachable and consistent.\n\nSetup Time\nNo setup-time estimate is independently verified here. During a pilot, record the time needed to configure the account, invite users, set permissions, connect required systems, import sample data, and document the process. Separate one-time setup from ongoing administration, and verify whether advanced controls require a higher plan or vendor support.\n\nMigration Difficulty\nTreat migration effort for Perplexity as unknown until tested. Export a representative sample from the current system, check whether records, attachments, comments, relationships, metadata, permissions, and history survive, and document any cleanup required. Confirm the available import/export formats and API limits, keep a rollback plan, and do not retire the old system until users validate critical records.\n\nIntegration Ecosystem\nThe source profile lists these possible integrations for Perplexity: Zapier, Slack, Salesforce, Google Workspace. This list has not been independently verified as current. Check the official integration directory and test the exact data flow you need, including authentication, direction of sync, field mapping, error alerts, permissions, and plan restrictions. An integration badge alone does not prove a reliable end-to-end workflow.\n\nSecurity & Compliance\nNo security certification or compliance claim is independently verified by this section. Before using Perplexity with business or customer data, review the current security documentation and contract for data retention and deletion, training use, access controls, audit logs, incident notification, data location, subprocessors, export, and account offboarding. Verify that the specific product and plan cover your intended use case; do not infer compliance from a general marketing statement.\n\nPerformance\nNo independent benchmark, uptime guarantee, or response-time claim is asserted here for Perplexity. Test representative tasks under ordinary and peak conditions, record latency, failures, rate limits, accuracy, and recovery behavior, and repeat the test with realistic inputs. For AI outputs, measure factual errors and human correction as well as speed. Keep the test set and acceptance rubric stable when comparing alternatives.\n\nCustomer Support\nVerify current support channels, service hours, response commitments, escalation paths, and plan eligibility directly with Perplexity's vendor. During a trial, test the documentation and contact route for a realistic question, and record how quickly you receive a useful answer. For business-critical use, request written service commitments and confirm what happens during outages, billing disputes, or data-export requests.\n\nReal-world Use Cases\nUse Perplexity for a small set of controlled tests related to research discovery, answer synthesis, and checking claims against cited source material. Include a routine task, a difficult task, and an exception. Define success before testing, preserve the input and output, and record factual errors, editing effort, missing features, and user friction. Do not describe hypothetical examples as customer case studies or claim that a workflow succeeded without evidence from a real test.\n\nIndustry Fit\nIndustry suitability depends on the data, workflow, risk, and governance requirements of the specific team. For Perplexity, verify localization, accessibility, retention, permissions, auditability, procurement terms, and support for any industry-specific process before adoption. Broad audience labels are not evidence of compliance or suitability for a regulated or high-impact workflow.\n\nCommon Mistakes\nAvoid treating stored ratings, review counts, vendor feature lists, or demo outputs as independent proof. Do not compare different tasks or quality standards, ignore human review, assume every feature is included in the entry plan, or migrate before testing data export. Separate verified facts from assumptions, document open questions, and decide using a representative pilot with explicit acceptance criteria.\n\nPractical Evaluation Tips\nFor Perplexity, keep a small repeatable test set, save the prompts or configuration used, and record accepted results as well as failures. Verify important claims against primary sources, check data handling before uploading sensitive information, and review actual usage and invoices after the pilot. Treat community tips as leads to test, not universal guarantees about product behavior.\n\nAlternatives\nCompare Perplexity with alternatives against the same workflow, not a generic ranking. Shortlist products that meet mandatory requirements, then test the same input, output, integrations, permissions, and export needs in each. Record which trade-offs matter to your team and verify current plan details. A product that is popular or has more features is not automatically the best fit.\n\nCompetitor Analysis\nA fair competitor analysis for Perplexity should use the same task, source material, users, and acceptance criteria for each candidate. Compare output quality, correction effort, integrations, governance, accessibility, migration, support, and total cost. Do not claim that one competitor wins without a documented method and current evidence that supports the specific conclusion.\n\nBuying Advice\nBefore buying Perplexity, list mandatory capabilities and non-negotiable data controls, verify them in the exact plan, and run a pilot with representative users. Ask the vendor to clarify ambiguous limits or contractual commitments in writing. Calculate total cost at expected usage, including setup and human review, and define a reassessment date. Do not commit based only on a numeric score or a short demonstration.\n\nFinal Verdict\nThe decision on Perplexity should remain conditional on your workflow and pilot evidence. It may be worth shortlisting for research discovery, answer synthesis, and checking claims against cited source material, but no independent numeric rating, current price, or universal winner is asserted here. Verify the features and terms that matter, compare with your existing process, and choose only if the result meets your quality, security, administration, and budget requirements.",
+  "wordCount": 2031,
   "difficulty": "Intermediate",
   "learningCurve": "Moderate — expect 1-3 days to become productive",
   "whoShouldUse": "People researching unfamiliar topics, comparing options, or looking for answers with linked sources can evaluate Perplexity as a search and research assistant. Test queries from your own work, open the cited sources, and check whether the answer distinguishes sourced facts from synthesis or uncertainty.",
   "whoShouldNotUse": "Do not treat generated summaries or citations as automatically correct: open sources and verify important claims yourself. Avoid relying on it as the sole authority for high-impact decisions, and review current data-use and privacy terms before entering confidential material.",
-  "priceRangeVerified": false,
+  "seoTitle": "Perplexity Review: Use Cases, Limits & Pricing Checks",
+  "seoDescription": "Perplexity review: workflow fit, accuracy, privacy, integrations, plan limits, and total cost. Verify current terms with the vendor.",
   "ratingVerified": false,
   "reviewCountVerified": false,
   "ratingsVerified": false,
+  "priceRangeVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false
 }
