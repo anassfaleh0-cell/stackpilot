@@ -810,15 +810,21 @@ function sanitizeComparisonDescription(description: string, tool1: string, tool2
 }
 export function getComparisonSeoTitle(slug: string, tool1: string, tool2: string, winnerVerified: boolean): string {
   const normalizedSlug = slug.toLowerCase()
-  const variant = normalizedSlug === "close-crm-vs-zoho-crm"
-    ? ": CRM Workflow Fit"
-    : normalizedSlug.endsWith("-startups")
+  const distinctLegacyVariants: Record<string, string> = {
+    "close-crm-vs-zoho-crm": ": CRM Workflow Fit",
+    "outreach-io-vs-zoho": ": Engagement Workflow Fit",
+    "pipedrive-vs-zoho": ": Pipeline Setup Guide",
+    "salesloft-vs-zoho": ": Sales Engagement Fit",
+    "zendesk-vs-zoho": ": Support vs Sales CRM",
+  }
+  const variant = distinctLegacyVariants[normalizedSlug] ??
+    (normalizedSlug.endsWith("-startups")
       ? " for Startups"
       : normalizedSlug.endsWith("-for-teams")
         ? " for Teams"
         : normalizedSlug.endsWith("-remote")
           ? " for Remote Teams"
-          : ""
+          : "")
   return `${tool1} vs ${tool2}${variant} (2026): ${winnerVerified ? "Which One Wins?" : "How to Choose"}`
 }
 
