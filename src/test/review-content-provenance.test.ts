@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest"
+import fs from "node:fs"
+import path from "node:path"
 import { getReviewPricingSummary, getVisibleReviewContent, getVisibleReviewFaqs, isPricingPlaceholder, stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
 
 describe("review content provenance", () => {
@@ -65,6 +67,14 @@ describe("review content provenance", () => {
     expect(stripUnverifiedPriceClaims("The free plan is suitable for testing")).toContain("not independently verified")
     expect(stripUnverifiedPriceClaims("A freemium tier is available")).toContain("A freemium tier is available")
     expect(stripUnverifiedPriceClaims("A freemium tier is available")).toContain("not independently verified")
+  })
+
+
+  it("provides useful review FAQs when filtering removes every stored FAQ", () => {
+    const reviewPage = fs.readFileSync(path.join(process.cwd(), "src", "app", "reviews", "[slug]", "page.tsx"), "utf8")
+    expect(reviewPage).toContain("const visibleFaqs = filteredReviewFaqs.length > 0 ? filteredReviewFaqs")
+    expect(reviewPage).toContain("How should a team evaluate")
+    expect(reviewPage).toContain("A verified evidence-backed score is not currently recorded")
   })
 
   it("filters generated security/compliance FAQ claims and sanitizes pricing in remaining FAQs", () => {
