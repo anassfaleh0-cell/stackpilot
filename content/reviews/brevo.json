@@ -1,0 +1,133 @@
+{
+  "slug": "brevo",
+  "name": "Brevo",
+  "seoTitle": "Brevo Review (2026): Workflows, Limitations & Buyer Checklist",
+  "seoDescription": "A practical Brevo review covering campaign planning, contact consent, segmentation, automation, transactional messaging, integrations, and how to verify current plan limits.",
+  "tagline": "A marketing platform to evaluate for email campaigns, automation, and customer communication workflows.",
+  "description": "A practical Brevo review covering campaign planning, contact consent, segmentation, automation, transactional messaging, integrations, and how to verify current plan limits.",
+  "category": "Marketing & CRM",
+  "website": "https://www.brevo.com/",
+  "pricing": "Not independently verified",
+  "priceRange": "Not independently verified",
+  "rating": null,
+  "reviewCount": null,
+  "ratingVerified": false,
+  "reviewCountVerified": false,
+  "ratings": [],
+  "ratingsVerified": false,
+  "priceRangeVerified": false,
+  "featuresVerified": false,
+  "companyFactsVerified": false,
+  "pros": [
+    "Campaign planning and contact segmentation can be evaluated against real audience groups and consent rules.",
+    "A single workspace may reduce hand-offs between campaign, automation, and customer-message workflows when the required channels are available on the selected plan.",
+    "A small pilot makes it possible to measure delivery, engagement, and list hygiene before committing."
+  ],
+  "cons": [
+    "Current plan entitlements, channel availability, and usage limits are not independently verified in this review.",
+    "Email performance depends on list quality, consent, sending configuration, and the content itself—not just the platform.",
+    "Complex automation needs documented ownership and testing to avoid sending the wrong message to the wrong segment."
+  ],
+  "features": [
+    {
+      "name": "Email campaign workflow",
+      "description": "Draft, preview, segment, schedule, and review a campaign using a controlled test audience.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Contact segmentation",
+      "description": "Test whether the segments your team actually needs can be defined and maintained without manual exports.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Automation journey",
+      "description": "Prototype one welcome or follow-up journey and verify triggers, exits, and failure handling.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Transactional messaging",
+      "description": "Confirm whether the intended account and plan support the exact transactional channel and delivery setup required.",
+      "available": true,
+      "category": "Core"
+    }
+  ],
+  "content": [
+    {
+      "title": "Campaign planning and review",
+      "body": "Evaluate Brevo using one real campaign brief rather than a sample template. Define the audience, purpose, consent basis, message, send window, approval owner, and success metric before creating the campaign. Preview the message on mobile and desktop, test links and tracking, and send to an internal test list first. Record how many manual steps remain and whether a reviewer can clearly see what will be sent and to whom.",
+      "type": "text"
+    },
+    {
+      "title": "Contact quality, consent, and segmentation",
+      "body": "List the contact sources used by the organization and document how permission, opt-outs, suppression, and duplicate records are handled. Test a representative segment with known test contacts and verify that excluded contacts stay excluded. Avoid importing an entire database before the rules are clear. A platform cannot make an unpermissioned or stale list safe by itself; list governance and responsible sending practices remain the team's job.",
+      "type": "text"
+    },
+    {
+      "title": "Automation and transactional workflows",
+      "body": "Build one low-risk journey, such as a welcome message or an internal test sequence. Check the entry trigger, waiting periods, exits, repeat-entry behavior, and what happens if a contact changes segment mid-journey. If transactional messages are important, separately verify the exact sending method, authentication requirements, event payload, retries, and monitoring. Do not assume that a feature available in one account tier is included in another.",
+      "type": "text"
+    },
+    {
+      "title": "Measurement and deliverability",
+      "body": "Choose a small set of metrics that match the campaign goal, such as successful delivery, click-through activity, qualified responses, or completed registrations. Review bounce and complaint signals alongside engagement; a high open figure alone is not proof of business value. Confirm how tracking parameters are applied and whether the analytics destination receives the events needed for reporting. Compare the result with the same campaign's prior baseline, not an unsourced industry average.",
+      "type": "text"
+    },
+    {
+      "title": "Integrations and operational ownership",
+      "body": "List the systems that must pass contact, order, lead, or event data into the marketing workflow. Test one complete data path with a test record and verify field mapping, duplicate handling, permissions, error reporting, and how the connection can be disconnected. Give automation rules an owner and write down how the team pauses a campaign if the data feed becomes unreliable.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing and purchase checklist",
+      "body": "Current Brevo prices, channel entitlements, sending limits, and billing terms are not independently verified here. Check the official pricing page for the exact region, contact volume, email volume, user access, automation needs, and any separate channel or usage limits. Compare the annual cost using the team's actual workload and include setup, list cleanup, template maintenance, and reporting time. The numeric editorial rating remains unrecorded until an evidence-backed assessment is completed.",
+      "type": "text"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What should I test first in Brevo?",
+      "answer": "Run one controlled campaign from audience selection through preview, test send, approval, and reporting. Verify consent and suppression behavior before using a real contact list."
+    },
+    {
+      "question": "Are Brevo prices and channel limits verified here?",
+      "answer": "No. Confirm current regional pricing, usage limits, and channel availability on Brevo's official site for the exact account and plan."
+    },
+    {
+      "question": "How do I evaluate automation quality?",
+      "answer": "Test one journey with known contacts and check entry rules, exits, delays, duplicate entry, and how the workflow behaves when a contact changes segment."
+    },
+    {
+      "question": "Does PilotStack publish a verified Brevo rating?",
+      "answer": "No independently verified aggregate rating or third-party review count is recorded for this page, so no numeric score is invented."
+    }
+  ],
+  "relatedComparisons": [],
+  "relatedGuides": [],
+  "relatedPosts": [],
+  "alternatives": [],
+  "author": "PilotStack Editorial Team",
+  "contentPublished": "2026-10-24",
+  "contentModified": "2026-10-24",
+  "company": {
+    "industries": [
+      "Marketing & CRM"
+    ],
+    "targetUsers": [
+      "Teams evaluating email marketing and customer communication workflows that need clear contact governance, repeatable campaigns, and measurable results."
+    ],
+    "pricingModel": "Not independently verified",
+    "deployment": [
+      "Cloud"
+    ],
+    "apiAvailable": null,
+    "learningCurve": "Evaluate with a representative workflow",
+    "migrationComplexity": "Depends on existing tools"
+  },
+  "difficulty": "Beginner to intermediate",
+  "learningCurve": "Evaluate with a representative workflow",
+  "whoShouldUse": "Teams evaluating email marketing and customer communication workflows that need clear contact governance, repeatable campaigns, and measurable results.",
+  "whoShouldNotUse": "Teams that need a fully verified enterprise marketing stack before a documented trial, or whose required channels and regional terms have not been confirmed."
+}
