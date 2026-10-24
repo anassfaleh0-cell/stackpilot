@@ -104,6 +104,31 @@
       "title": "Decision record",
       "body": "Document regional availability, payment and shipping requirements, integrations, catalog complexity, performance, operational ownership and exit options. Ask for a dated quote including apps, theme work, migration and support. Verify tax and payment behavior for the target markets.",
       "type": "text"
+    },
+    {
+      "title": "Store and catalog fit",
+      "body": "BigCommerce should be assessed against the actual catalog, checkout, shipping, tax, and merchandising rules the business needs. Build a small representative store using several product types, variants, and at least one awkward edge case such as a product with unusual shipping or pricing rules. Verify current support for those requirements in official documentation and on the plan being considered. A platform that works for a simple demonstration may still require apps, custom code, or a different operating process for the live catalog.",
+      "type": "text"
+    },
+    {
+      "title": "Checkout, payments, and operations",
+      "body": "Test the customer journey from product discovery through checkout, confirmation, fulfillment, refund, and support. Confirm payment-provider availability in the target market, supported currencies, shipping integrations, tax handling, abandoned-checkout workflows, and what the store owner can reconcile without manual exports. Never treat a payment logo or integration listing as proof that a provider is available for a particular country, account, or business category; validate eligibility directly.",
+      "type": "text"
+    },
+    {
+      "title": "Content, SEO, and storefront control",
+      "body": "Inspect product URLs, canonical behavior, metadata, structured product data, redirects, image handling, page speed, and mobile checkout on a staging store. Check which design changes can be made in the theme editor and which require developer involvement. For a migration, create a URL map and test redirects for high-value product and category pages before changing DNS. Keep a rollback plan and compare organic landing-page traffic and conversion tracking after launch.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing and total cost of ownership",
+      "body": "Current BigCommerce pricing, sales thresholds, payment-related terms, and plan limits are not independently verified here. Confirm the official quote and contract, including any sales-volume thresholds, add-ons, theme costs, app subscriptions, implementation work, and payment-provider charges. Estimate cost at the business's expected order volume and include the cost of maintaining custom integrations. Recheck the terms before renewal rather than assuming today's packaging remains unchanged.",
+      "type": "text"
+    },
+    {
+      "title": "Launch checklist and decision",
+      "body": "Before committing, test catalog import, inventory sync, tax and shipping rules, checkout on mobile, refund handling, analytics events, customer data export, and support escalation. Ask the team to complete a routine order and a failed-payment or return scenario using documented steps. BigCommerce is a candidate only if those workflows work within acceptable cost and maintenance effort. No numeric score is published until an evidence-backed editorial assessment is recorded.",
+      "type": "text"
     }
   ],
   "faqs": [
