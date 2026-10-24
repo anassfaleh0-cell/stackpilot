@@ -104,6 +104,31 @@
       "title": "Decision record",
       "body": "Document space structure, content owners, permission groups, templates, search expectations, migration scope and export needs. Compare the time required to keep information current with the benefit of making it discoverable. Confirm current plan controls before storing sensitive information.",
       "type": "text"
+    },
+    {
+      "title": "Knowledge-base fit and information architecture",
+      "body": "Confluence is worth evaluating when teams need a shared place for decisions, procedures, project notes, and durable reference material. Start with the information people repeatedly ask for today and define an owner for each important page or space. Test whether readers can find a current answer using the navigation, search, labels, and page hierarchy that your organization plans to use. A large knowledge base without ownership and review routines quickly becomes a collection of contradictory documents rather than a reliable source of truth.",
+      "type": "text"
+    },
+    {
+      "title": "Page lifecycle and content maintenance",
+      "body": "Choose several documents with different lifecycles: a frequently updated runbook, a project decision, and a policy that requires periodic review. Test edit permissions, comments, version history, page ownership, archiving, and how outdated content is identified. Agree on what makes a page authoritative and how superseded instructions are marked. A successful rollout should make it easier to identify the current approved answer, not simply increase the number of pages created.",
+      "type": "text"
+    },
+    {
+      "title": "Collaboration and connected workflows",
+      "body": "If teams use Confluence alongside issue tracking or chat, test the full path from a discussion or task to a documented decision and back again. Confirm which integrations, automation rules, permissions, and cross-product features are available on the actual plans. Check what happens when a user can access a linked issue but not the source page. Do not assume shared vendor branding guarantees identical permissions or feature availability across separate subscriptions.",
+      "type": "text"
+    },
+    {
+      "title": "Security, access, and governance",
+      "body": "Map public, internal, confidential, and restricted information before creating spaces. Test guest access, external sharing, group membership, search visibility, export, retention, and offboarding with a non-administrator account. Review the current vendor security and privacy documentation and contractual terms for the organization's requirements. Avoid storing sensitive records until the intended permissions and data-handling controls have been checked in the live configuration.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing and adoption checklist",
+      "body": "Current Confluence pricing and plan limits are not independently verified here. Check the official pricing page for user tiers, storage, automation, guest permissions, administration, and the features needed by the team. Pilot with a small group and measure search success, stale-page rate, repeat questions, and time to publish a useful page. No numeric editorial score is asserted until an evidence-backed scorecard is recorded.",
+      "type": "text"
     }
   ],
   "faqs": [
