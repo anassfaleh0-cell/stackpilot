@@ -46,6 +46,21 @@
       "title": "Total cost and transition",
       "body": "Request a dated quote for the exact workforce, jurisdictions, modules, implementation and support needs. Include data cleanup, parallel payroll, training and internal time. Keep the previous system available until reconciled results are approved.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Before a live rollout, reconcile a controlled parallel payroll run for normal pay and exceptions. Confirm employee changes reach the right downstream systems, reports match approved calculations and the responsible support contact can explain discrepancies. Record sign-off from the payroll owner.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and recovery",
+      "body": "Test a late timecard, corrected bank details, terminated employee and failed integration using controlled records. Document escalation, correction and reprocessing steps. Keep a calendar for payroll deadlines and ensure the team knows who can authorize a rerun.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Save the exact product and service scope, supported jurisdictions, responsibilities, service commitments, implementation timeline and data-export terms. Track unresolved requirements and obtain written answers before signature. Review the operating process after the first cycles and update the runbook.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -148,5 +163,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 176
+  "wordCount": 292
 }
