@@ -110,11 +110,11 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
   // Imported legacy records contain precise product metrics without a source URL or
   // collection date. Remove these claims from rendered prose rather than implying
   // the values were independently tested or verified.
-  /\\b(?:latency|response time|response times|throughput|load time|setup time|migration time)\\b[^.!?]{0,140}\\b\\d+(?:[.,]\\d+)?\\s*(?:ms|milliseconds?|seconds?|minutes?|hours?|days?)\\b/i,
-  /\\b\\d+(?:[.,]\\d+)?\\s*(?:ms|milliseconds?|seconds?)\\b[^.!?]{0,100}\\b(?:latency|response time|load time|throughput)\\b/i,
-  /\\b\\d[\\d,]*(?:\\.\\d+)?\\+?\\s+(?:native extensions|OAuth providers|concurrent channels|registered developers|monthly active users|app connectors|API requests|projects)\\b/i,
-  /\\b(?:documentation|docs)\\s+(?:trails?|lags?)\\b[^.!?]{0,100}\\b\\d+(?:[-–]\\d+)?\\s*(?:months?|weeks?)\\b/i,
-  /\\b(?:complies with|compliant with|compliance with)\\b[^.!?]{0,100}\\b(?:GDPR|CCPA|HIPAA|SOC ?2|ISO ?27001|PCI DSS|FedRAMP)\\b/i,
+  /\b(?:latency|response time|response times|throughput|load time|setup time|migration time)\\b[^.!?]{0,140}\\b\\d+(?:[.,]\\d+)?\\s*(?:ms|milliseconds?|seconds?|minutes?|hours?|days?)\\b/i,
+  /\b\\d+(?:[.,]\\d+)?\\s*(?:ms|milliseconds?|seconds?)\\b[^.!?]{0,100}\\b(?:latency|response time|load time|throughput)\\b/i,
+  /\b\\d[\\d,]*(?:\\.\\d+)?\\+?\\s+(?:native extensions|OAuth providers|concurrent channels|registered developers|monthly active users|app connectors|API requests|projects)\\b/i,
+  /\b(?:documentation|docs)\\s+(?:trails?|lags?)\\b[^.!?]{0,100}\\b\\d+(?:[-–]\\d+)?\\s*(?:months?|weeks?)\\b/i,
+  /\b(?:complies with|compliant with|compliance with)\\b[^.!?]{0,100}\\b(?:GDPR|CCPA|HIPAA|SOC ?2|ISO ?27001|PCI DSS|FedRAMP)\\b/i,
   // Remove unsupported numeric product claims and pseudo-research metrics from legacy editorial copy.
   // The corpus does not consistently retain primary-source citations for these figures, so keep the claim out rather than laundering it into a placeholder.
   /\b\d[\d,]*(?:\.\d+)?\s*%(?:\s|[.,;:!?]|$)/i,
