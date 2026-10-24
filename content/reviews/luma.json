@@ -1,0 +1,133 @@
+{
+  "slug": "luma",
+  "name": "Luma",
+  "seoTitle": "Luma Review (2026): Workflows, Limitations & Buyer Checklist",
+  "seoDescription": "A practical Luma review focused on event pages, registration flow, attendee communication, host workflows, data export, and verification of current ticketing and plan features. This page refers to lu.ma event tools, not Luma AI.",
+  "tagline": "An event-hosting and registration platform to evaluate for invitations, attendee communication, and event operations.",
+  "description": "A practical Luma review focused on event pages, registration flow, attendee communication, host workflows, data export, and verification of current ticketing and plan features. This page refers to lu.ma event tools, not Luma AI.",
+  "category": "Event Management",
+  "website": "https://lu.ma/",
+  "pricing": "Not independently verified",
+  "priceRange": "Not independently verified",
+  "rating": null,
+  "reviewCount": null,
+  "ratingVerified": false,
+  "reviewCountVerified": false,
+  "ratings": [],
+  "ratingsVerified": false,
+  "priceRangeVerified": false,
+  "featuresVerified": false,
+  "companyFactsVerified": false,
+  "pros": [
+    "A single event pilot can reveal whether the registration and attendee workflow is easy for both hosts and guests.",
+    "Testing the attendee journey exposes friction in invitations, confirmation, changes, and follow-up.",
+    "A small event makes it easier to verify what information can be exported and who can access it."
+  ],
+  "cons": [
+    "Current ticketing, payment, guest-management, and plan features are not independently verified in this review.",
+    "Large or complex events may need more advanced venue, staffing, or access-control workflows.",
+    "The host still needs a clear process for attendee updates, cancellations, and event-day issues."
+  ],
+  "features": [
+    {
+      "name": "Event page and registration",
+      "description": "Test the attendee journey from invitation to completed registration.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Attendee communication",
+      "description": "Verify the current confirmation and update options for the event.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Guest management",
+      "description": "Check how hosts review registrations, changes, and attendee lists.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Export and follow-up",
+      "description": "Confirm the data fields and export options needed after the event.",
+      "available": true,
+      "category": "Core"
+    }
+  ],
+  "content": [
+    {
+      "title": "Event setup and attendee journey",
+      "body": "Create a test event that mirrors the actual format: a community meetup, online session, workshop, or ticketed gathering. Walk through the page as an attendee on desktop and mobile. Check how the event purpose, schedule, location or access instructions, and registration requirements are presented. The host should be able to explain the next step without sending a separate message to every guest.",
+      "type": "text"
+    },
+    {
+      "title": "Registration rules and capacity",
+      "body": "Test the registration form with ordinary and edge-case attendees, including someone who changes their response or needs updated information. Verify the current controls for capacity, waitlists, ticket types, or approval if the event requires them. Do not assume a feature exists because another event platform offers it. Record what happens when the event fills up, changes time, or is canceled.",
+      "type": "text"
+    },
+    {
+      "title": "Host operations and communication",
+      "body": "Define who owns the event page, who can edit details, and how updates reach registered attendees. Test confirmation messages and a late change using test accounts. Prepare a short runbook for event-day questions, late registrations, and attendee corrections. A smooth registration flow is only one part of the work; hosts also need a reliable way to communicate changes and close out the event.",
+      "type": "text"
+    },
+    {
+      "title": "Data, privacy, and follow-up",
+      "body": "Review which attendee fields are collected and whether each field is necessary for the event. Test who can access the list, how a host exports the records, and what happens after the event. If the event involves confidential information or special consent requirements, verify the current vendor terms and controls before collecting it. Plan how attendee information will be used for follow-up and honor the permissions provided during registration.",
+      "type": "text"
+    },
+    {
+      "title": "Payments and integration checks",
+      "body": "If the event involves paid tickets or connected systems, verify the current payment flow, refund behavior, receipts, supported regions, and data hand-off. Run a small test transaction only when the account and test environment support it. Check the official documentation for current integrations and fees; do not rely on a generic feature list to infer the exact payment or ticketing workflow available to your event.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing and adoption checklist",
+      "body": "Current Luma pricing, ticketing terms, and plan entitlements are not independently verified here. Check the official site for event limits, payment-related charges, host collaboration, guest management, and data export. Pilot with a representative event and measure registration completion, manual corrections, attendee questions, and follow-up effort. No numeric editorial score is asserted until a documented assessment is recorded.",
+      "type": "text"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Which Luma product does this review cover?",
+      "answer": "This page covers the event-hosting and registration platform at lu.ma, not Luma AI products."
+    },
+    {
+      "question": "Are Luma's current ticketing and pricing terms verified here?",
+      "answer": "No. Confirm current event features, payment terms, and plan details on the official site before committing."
+    },
+    {
+      "question": "What should I test before hosting a real event?",
+      "answer": "Test the attendee flow, capacity rules, updates, host permissions, exports, and the process for changes or cancellations."
+    },
+    {
+      "question": "Does PilotStack publish a verified Luma rating?",
+      "answer": "No independently verified aggregate rating or third-party review count is recorded on this page."
+    }
+  ],
+  "relatedComparisons": [],
+  "relatedGuides": [],
+  "relatedPosts": [],
+  "alternatives": [],
+  "author": "PilotStack Editorial Team",
+  "contentPublished": "2026-10-24",
+  "contentModified": "2026-10-24",
+  "company": {
+    "industries": [
+      "Event Management"
+    ],
+    "targetUsers": [
+      "Community organizers and teams evaluating a lightweight workflow for event pages, registrations, and attendee communication."
+    ],
+    "pricingModel": "Not independently verified",
+    "deployment": [
+      "Cloud"
+    ],
+    "apiAvailable": null,
+    "learningCurve": "Evaluate with a representative workflow",
+    "migrationComplexity": "Depends on existing tools"
+  },
+  "difficulty": "Beginner to intermediate",
+  "learningCurve": "Evaluate with a representative workflow",
+  "whoShouldUse": "Community organizers and teams evaluating a lightweight workflow for event pages, registrations, and attendee communication.",
+  "whoShouldNotUse": "Organizations that require complex venue operations, enterprise ticketing controls, or specific payment and compliance features without verifying them first."
+}
