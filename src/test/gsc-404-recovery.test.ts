@@ -71,6 +71,19 @@ describe("Search Console 404 recovery", () => {
     }
   })
 
+  it("keeps legacy feature URLs on canonical review routes", async () => {
+    const redirects = await nextConfig.redirects?.()
+    expect(redirects).toEqual(expect.arrayContaining([
+      expect.objectContaining({ source: "/reviews/acuity-scheduling", destination: "/reviews/acuity", permanent: true }),
+      expect.objectContaining({ source: "/reviews/affinity-designer", destination: "/reviews/affinity", permanent: true }),
+      expect.objectContaining({ source: "/reviews/quickbooks-self-employed", destination: "/reviews/quickbooks", permanent: true }),
+      expect.objectContaining({ source: "/reviews/slack-huddles", destination: "/reviews/slack", permanent: true }),
+    ]))
+    const file = path.join(process.cwd(), "content", "comparisons", "acuity-vs-obsidian.json")
+    const record = JSON.parse(fs.readFileSync(file, "utf8")) as { tool1Slug?: string }
+    expect(record.tool1Slug).toBe("acuity")
+  })
+
   it("routes intentionally unpublished alternatives drafts to their real indexable reviews", async () => {
     const redirects = await nextConfig.redirects?.()
     expect(redirects).toEqual(expect.arrayContaining([
