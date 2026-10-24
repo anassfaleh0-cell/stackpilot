@@ -313,6 +313,23 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                   </p>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={stripDeadContentLinks(displayCopy.verdict)} /></p>
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-lg border border-border p-4">
+                    <h3 className="text-sm font-semibold mb-2">Choose {cmp.tool1} if…</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {tool1Evidence ? conciseEvidence(tool1Evidence.tool1Detail || tool1Evidence.tool1) : `Your must-have workflow and requirements are better served by ${cmp.tool1}. Validate the relevant capabilities in current official documentation and a short pilot.`}
+                    </p>
+                    <Link href={`/reviews/${cmp.tool1Slug}`} className="inline-flex mt-3 text-xs font-medium text-primary hover:underline">Read {cmp.tool1} review <ArrowRight size={12} className="ml-1" /></Link>
+                  </div>
+                  <div className="rounded-lg border border-border p-4">
+                    <h3 className="text-sm font-semibold mb-2">Choose {cmp.tool2} if…</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {tool2Evidence ? conciseEvidence(tool2Evidence.tool2Detail || tool2Evidence.tool2) : `Your must-have workflow and requirements are better served by ${cmp.tool2}. Validate the relevant capabilities in current official documentation and a short pilot.`}
+                    </p>
+                    <Link href={`/reviews/${cmp.tool2Slug}`} className="inline-flex mt-3 text-xs font-medium text-primary hover:underline">Read {cmp.tool2} review <ArrowRight size={12} className="ml-1" /></Link>
+                  </div>
+                </div>
+                <p className="mt-4 text-xs text-muted-foreground">These are conditional fit recommendations, not a fabricated universal winner. The winner label above is verified only when the comparison evidence record is marked verified.</p>
                 {hasComparableWinner && (
                   <div className="mt-4 pt-4 border-t border-border flex items-center gap-2 text-sm">
                     <span className="text-muted-foreground">Migration complexity:</span>
