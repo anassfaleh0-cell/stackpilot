@@ -237,7 +237,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   } value={pricingModelLabel} title="Pricing Model" description={tool.priceRangeVerified === true ? "Pricing model and displayed terms are marked verified" : "Current plan terms and price are not independently verified"} />
                 </div>
                 <div className="flex justify-center">
-                  {categoryRatings.length > 0 && <div className="w-full"><p className="text-xs text-muted-foreground mb-2">{tool.ratingsVerified === true ? "PilotStack editorial dimensions; verification status recorded." : "Provisional stored editorial dimensions; evidence audit pending. These are not third-party user ratings."}</p><EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" /></div>}
+                  {categoryRatings.length > 0 ? <div className="w-full"><p className="text-xs text-muted-foreground mb-2">{tool.ratingsVerified === true ? "PilotStack editorial dimensions; verification status recorded." : "Provisional stored editorial dimensions; evidence audit pending. These are not third-party user ratings."}</p><EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" /></div> : <p className="text-sm text-muted-foreground">No category rating dimensions recorded yet. Add evidence-backed category scores using the published rubric; do not fill gaps with guessed numbers.</p>}
                 </div>
               </section>
 
