@@ -58,6 +58,19 @@ export default function HubsPage() {
           ) : (
             <p className="text-center text-muted-foreground py-12">No hubs available yet.</p>
           )}
+          <section className="mt-14 max-w-4xl mx-auto border-t border-border pt-8">
+            <h2 className="text-2xl font-bold tracking-tight mb-3">Choose software for the way your organization works</h2>
+            <p className="text-muted-foreground leading-relaxed mb-4">Company size is only a starting point. A startup may need stronger access controls than a larger team, while an agency may prioritize client workspaces and reporting. Use the business-type guides to identify requirements, then verify each product against your own workflows.</p>
+            <h3 className="text-lg font-semibold mb-2">Questions to answer before shortlisting</h3>
+            <ul className="list-disc pl-6 space-y-2 text-muted-foreground mb-5">
+              <li>Who will use the software, who administers it, and which permissions are required?</li>
+              <li>Which systems must integrate, and what data needs to move between them?</li>
+              <li>What are the security, privacy, retention and audit requirements for your industry?</li>
+              <li>How much setup, migration, training and ongoing administration can the team support?</li>
+              <li>What is the total cost at today's size and at the expected size over the next one to three years?</li>
+            </ul>
+            <p className="text-muted-foreground leading-relaxed">Treat each recommendation as a candidate for evaluation rather than an automatic endorsement. Features, pricing and regulatory obligations vary by plan, region and contract; check current vendor documentation and test important workflows before committing.</p>
+          </section>
         </Container>
       </Section>
     </>
