@@ -76,13 +76,6 @@ const nextConfig: NextConfig = {
     // Normalize legacy singular content routes to their current canonical collections.
     { source: "/review/:slug", destination: "/reviews/:slug", permanent: true },
     { source: "/comparison/:slug", destination: "/comparisons/:slug", permanent: true },
-    // Legacy comparison URLs now point to live canonical decision guides. Preserve
-    // the historical paths so external links and old Search Console discoveries do not end at 404.
-    { source: "/comparisons/close-crm-vs-zoho-crm", destination: "/comparisons/close-crm-vs-zoho", permanent: true },
-    { source: "/comparisons/outreach-io-vs-zoho", destination: "/comparisons/outreach-io-vs-zoho-crm", permanent: true },
-    { source: "/comparisons/pipedrive-vs-zoho", destination: "/comparisons/pipedrive-vs-zoho-crm", permanent: true },
-    { source: "/comparisons/salesloft-vs-zoho", destination: "/comparisons/salesloft-vs-zoho-crm", permanent: true },
-    { source: "/comparisons/zendesk-vs-zoho", destination: "/comparisons/zendesk-vs-zoho-crm", permanent: true },
     { source: "/rss.xml/feed", destination: "/rss.xml", permanent: true },
     { source: "/guide/:slug", destination: "/guides/:slug", permanent: true },
     { source: "/alternative/:slug", destination: "/alternatives/:slug", permanent: true },
