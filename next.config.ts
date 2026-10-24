@@ -204,6 +204,22 @@ const nextConfig: NextConfig = {
       destination: "/reviews/acuity",
       permanent: true,
     },
+    {
+      // These legacy slugs refer to products or features already covered by canonical review pages.
+      source: "/reviews/affinity-designer",
+      destination: "/reviews/affinity",
+      permanent: true,
+    },
+    {
+      source: "/reviews/quickbooks-self-employed",
+      destination: "/reviews/quickbooks",
+      permanent: true,
+    },
+    {
+      source: "/reviews/slack-huddles",
+      destination: "/reviews/slack",
+      permanent: true,
+    },
   ],
   images: {
     formats: ["image/avif", "image/webp"],
