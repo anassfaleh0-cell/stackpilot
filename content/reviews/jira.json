@@ -2,7 +2,7 @@
   "slug": "jira",
   "name": "Jira",
   "tagline": "Issue tracking and configurable work management for teams coordinating software delivery and related workflows.",
-  "description": "Jira is a configurable issue and work-tracking platform commonly evaluated for software delivery, service workflows and cross-team coordination. The right fit depends on how much workflow structure the team needs and how much administration it can sustain; this review does not present unverified scores or customer counts.",
+  "description": "Jira supports issue tracking and configurable work workflows; current plan details and independent ratings are not verified here.",
   "category": "Project Management",
   "website": "https://www.atlassian.com/software/jira",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "Issue types, workflow states and ownership can be mapped to a team's delivery process.",
     "Backlogs, boards and filters are useful evaluation areas for sprint or flow-based work.",
-    "The wider Atlassian ecosystem may matter where documentation, code and service workflows already live."
+    "The wider Atlassian ecosystem may matter where documentation, code and service workflows already live.",
+    "A representative backlog can test ownership, dependencies and reporting.",
+    "Configuration ownership can be documented before a broad rollout."
   ],
   "cons": [
     "Over-customization can make workflows difficult to understand and maintain.",
     "Permission schemes, notifications and fields need governance to avoid clutter.",
     "Verify which capabilities and integrations are available in the exact product and plan."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Task and issue workflow",
+      "available": false,
+      "description": "Jira: evaluate task and issue workflow with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Ownership and dependencies",
+      "available": false,
+      "description": "Jira: evaluate ownership and dependencies with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Boards and planning",
+      "available": false,
+      "description": "Jira: evaluate boards and planning with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Reporting and dashboards",
+      "available": false,
+      "description": "Jira: evaluate reporting and dashboards with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Permissions and guests",
+      "available": false,
+      "description": "Jira: evaluate permissions and guests with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Automation rules",
+      "available": false,
+      "description": "Jira: evaluate automation rules with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Integrations",
+      "available": false,
+      "description": "Jira: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Export and administration",
+      "available": false,
+      "description": "Jira: evaluate export and administration with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -71,19 +114,23 @@
   "faqs": [
     {
       "question": "Who should evaluate Jira?",
-      "answer": "Evaluate Jira only if the workflow described in this review matches a real requirement. Test it with representative work and verify current capabilities, plan limits and data terms directly with the vendor."
+      "answer": "Evaluate Jira when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Is Jira the best option for everyone?",
-      "answer": "No single product is best for every team. Compare alternatives using the same requirements, tasks, constraints and acceptance criteria."
+      "question": "How should a team test Jira?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "Are current pricing and ratings independently verified here?",
-      "answer": "No. This review does not publish an independently verified rating or current price. Check official vendor information for current plans, limits and terms before purchasing."
+      "question": "Which limitations should be checked in Jira?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "What should be checked before adopting it?",
-      "answer": "Test the core workflow, access controls, integrations, export and offboarding. Include setup, training, administration and ongoing review in the total cost."
+      "question": "Are Jira prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting Jira?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [
