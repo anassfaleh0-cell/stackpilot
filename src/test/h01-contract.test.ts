@@ -458,8 +458,8 @@ describe("H-01 rating detector", () => {
       expect(dropped).toBe(pros.filter(pro => isRatingRestatement(pro)).length)
       matched += dropped
     }
-    // One unsupported rating restatement was removed during the GSC content remediation.
-    expect(matched).toBe(10)
+    // Unsupported rating restatements were removed during the review-content remediation.
+    expect(matched).toBe(9)
   })
 
   it("keeps the rating renderer free of the H-01 contract", () => {
