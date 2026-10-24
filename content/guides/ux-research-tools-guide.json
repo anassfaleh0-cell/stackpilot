@@ -5,14 +5,14 @@
   "category": "Design & Creative",
   "difficulty": "Beginner",
   "author": "Emily Nakamura",
-  "readingTime": 3,
+  "readingTime": 4,
   "relatedTools": [],
   "relatedGuides": [
     "survey-tool-comparison",
     "accessibility-testing-tools",
     "software-evaluation-framework"
   ],
-  "lastUpdated": "2026-10-09",
+  "lastUpdated": "2026-10-24",
   "sections": [
     {
       "title": "Match the tool to the research method",
@@ -52,6 +52,21 @@
     {
       "title": "Pilot with a complete study",
       "body": "Run one study from recruitment through analysis and stakeholder handoff. Measure setup time, participant completion, recording failure, time spent synthesizing, ease of evidence review, and the quality of the final decision. Ask a researcher and a stakeholder to retrieve the same finding independently. Choose the tool that supports the research methods, privacy controls, and evidence traceability the team needs, not simply the most polished demo.",
+      "type": "text"
+    },
+    {
+      "title": "Study brief template",
+      "body": "Before opening a trial, write a one-page study brief: decision to inform, research method, target participant profile, recruitment criteria, sample rationale, tasks or questions, consent wording, accessibility needs, data collected, retention period and the person authorized to approve findings. This prevents the team from selecting a platform based only on a polished demo. Keep a copy of the brief with the study record so that later researchers understand the context and limitations.",
+      "type": "text"
+    },
+    {
+      "title": "Evaluate analysis quality",
+      "body": "Take the same small set of interview notes or usability observations through each candidate workflow. Ask a researcher to code themes, link evidence to findings, distinguish direct observations from interpretations and retrieve a quote or clip later. Check how disagreement is resolved and whether findings can be traced back to source material. A tool should support analysis discipline rather than automatically turning a few observations into overconfident conclusions.",
+      "type": "text"
+    },
+    {
+      "title": "Acceptance criteria",
+      "body": "Define pass/fail criteria for consent, participant experience, data export, accessibility, collaboration and retention before the pilot. Record setup time, researcher effort, participant friction and any manual steps. If the platform stores recordings or transcripts, test deletion and access removal using a dummy study before uploading sensitive participant data.",
       "type": "text"
     }
   ]

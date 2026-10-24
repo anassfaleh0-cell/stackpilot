@@ -12,7 +12,7 @@
     "accessibility-testing-tools",
     "software-evaluation-framework"
   ],
-  "lastUpdated": "2026-10-09",
+  "lastUpdated": "2026-10-24",
   "sections": [
     {
       "title": "Define the research question",
@@ -52,6 +52,21 @@
     {
       "title": "Run a representative pilot",
       "body": "Use a short pilot that includes branching, a mobile respondent, an accessibility check, an export, and the intended analysis workflow. Measure completion time, abandonment, invalid responses, export effort, and the time required to prepare a report. Record limitations and decide which are acceptable before purchasing. After launch, review data quality and participant feedback, then update templates and governance so the next survey starts from a tested standard.",
+      "type": "text"
+    },
+    {
+      "title": "Sample-quality checklist",
+      "body": "Define who is eligible to respond, how participants will be recruited, how duplicate responses are handled and what makes a response invalid. Test attention checks carefully so they do not unfairly exclude legitimate respondents. Record recruitment source and response-rate definitions; a large number of answers does not automatically make a sample representative.",
+      "type": "text"
+    },
+    {
+      "title": "Test the respondent experience",
+      "body": "Complete the survey on mobile, with keyboard navigation and a screen reader where practical. Test branching, required questions, save-and-return behavior, translated wording and error messages. Measure how long the survey takes and remove questions that do not inform a decision. Long or confusing forms can reduce completion and distort the sample.",
+      "type": "text"
+    },
+    {
+      "title": "Analysis and handoff",
+      "body": "Export a pilot dataset and confirm that question IDs, labels, missing values, timestamps and branch logic remain understandable. Verify that the analysis can be reproduced outside the survey platform and that personal data can be removed when required. Document the analysis plan before reviewing results to reduce selective interpretation.",
       "type": "text"
     }
   ]

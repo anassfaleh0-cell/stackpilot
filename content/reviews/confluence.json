@@ -1,414 +1,131 @@
 {
   "slug": "confluence",
   "name": "Confluence",
-  "tagline": "Team collaboration and knowledge management hub",
-  "description": "Create, share, and organize team knowledge with connected documentation",
-  "category": "Project Management",
+  "tagline": "A team knowledge and documentation workspace to evaluate for durable, searchable operational knowledge.",
+  "description": "Confluence supports team documentation and shared knowledge; current plan details and independent ratings are not verified here.",
+  "category": "Productivity",
   "website": "https://www.atlassian.com/software/confluence",
-  "pricing": "Freemium",
-  "priceRange": "Free–$11/user/mo",
-  "rating": 4.1,
-  "reviewCount": 32400,
+  "pricing": "Not independently verified",
+  "priceRange": "Not independently verified",
+  "rating": null,
+  "reviewCount": 0,
   "pros": [
-    "Deep Jira integration linking documentation to developer workflows",
-    "Whiteboards with action items converting into Jira tickets",
-    "300+ templates for engineering, product, and business documentation",
-    "Spaces with granular permissions for org-wide knowledge management",
-    "Confluence AI summarizing pages and suggesting related content"
+    "Structured spaces and pages can give teams a shared place for decisions and procedures.",
+    "A realistic search task can test whether employees can find trusted information.",
+    "Templates and ownership rules can support repeatable documentation.",
+    "A search test can reveal whether staff find trusted current information.",
+    "Page ownership and review dates can reduce stale instructions."
   ],
   "cons": [
-    "Search effectiveness declines significantly across 5,000+ pages",
-    "Page editor feels dated versus Notion's block-based system",
-    "Self-hosted Data Center pricing exceeds $40K/year for 500 users"
+    "Documentation becomes stale without clear owners and review dates.",
+    "Permissions and external sharing require careful governance.",
+    "Migration and export need to preserve links, attachments and page context."
   ],
   "features": [
     {
-      "name": "Pages",
-      "description": "Rich text with inline comments",
-      "available": true,
-      "category": "Core"
+      "name": "Core workflow",
+      "available": false,
+      "description": "Confluence: evaluate core workflow with a representative workflow; availability is not recorded as verified in this profile."
     },
     {
-      "name": "Spaces",
-      "description": "Organized content workspaces",
-      "available": true,
-      "category": "Core"
+      "name": "Collaboration",
+      "available": false,
+      "description": "Confluence: evaluate collaboration with a representative workflow; availability is not recorded as verified in this profile."
     },
     {
-      "name": "Whiteboards",
-      "description": "Visual collaboration with Jira sync",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Templates",
-      "description": "300+ pre-built document types",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Databases",
-      "description": "Structured table content",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Blogs",
-      "description": "Team news and updates",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Analytics",
-      "description": "Page views and engagement",
-      "available": true,
-      "category": "Analytics"
+      "name": "Search and retrieval",
+      "available": false,
+      "description": "Confluence: evaluate search and retrieval with a representative workflow; availability is not recorded as verified in this profile."
     },
     {
       "name": "Permissions",
-      "description": "Space and page-level access",
-      "available": true,
-      "category": "Security"
+      "available": false,
+      "description": "Confluence: evaluate permissions with a representative workflow; availability is not recorded as verified in this profile."
     },
     {
-      "name": "AI",
-      "description": "Page summaries and content generation",
-      "available": true,
-      "category": "AI"
+      "name": "Calendar or task sync",
+      "available": false,
+      "description": "Confluence: evaluate calendar or task sync with a representative workflow; availability is not recorded as verified in this profile."
     },
     {
-      "name": "Smart Links",
-      "description": "Rich previews for 500+ integrations",
-      "available": true,
-      "category": "Core"
+      "name": "Automation",
+      "available": false,
+      "description": "Confluence: evaluate automation with a representative workflow; availability is not recorded as verified in this profile."
     },
     {
-      "name": "Macros",
-      "description": "Dynamic content widgets",
-      "available": true,
-      "category": "Core"
+      "name": "Data export",
+      "available": false,
+      "description": "Confluence: evaluate data export with a representative workflow; availability is not recorded as verified in this profile."
     },
     {
-      "name": "Labels",
-      "description": "Taxonomy and content tagging",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Version History",
-      "description": "Track page changes",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Comments",
-      "description": "Inline and page-level discussion",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Search",
-      "description": "Global and space-scoped search",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Atlassian Intelligence",
-      "description": "AI across Confluence and Jira",
-      "available": true,
-      "category": "AI"
-    },
-    {
-      "name": "API",
-      "description": "RESTful and GraphQL",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Migration Tools",
-      "description": "Cloud and on-prem import",
-      "available": true,
-      "category": "Advanced"
+      "name": "Administration",
+      "available": false,
+      "description": "Confluence: evaluate administration with a representative workflow; availability is not recorded as verified in this profile."
     }
   ],
-  "ratings": [
-    {
-      "label": "Ease of Use",
-      "score": 3.8
-    },
-    {
-      "label": "Features",
-      "score": 4.2
-    },
-    {
-      "label": "Performance",
-      "score": 4
-    },
-    {
-      "label": "Support",
-      "score": 3.7
-    },
-    {
-      "label": "Value",
-      "score": 4
-    }
-  ],
+  "ratings": [],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "Create, share, and organize team knowledge with connected documentation Confluence earns a 4.1/5 rating from 32,400 user reviews.",
+      "title": "Information architecture",
+      "body": "Create a small set of spaces based on the audience and purpose, not the org chart alone. Define page templates, naming conventions, labels and ownership. Test whether a new teammate can find a policy, a project decision and a runbook without asking an expert.",
       "type": "text"
     },
     {
-      "title": "TL;DR",
-      "body": "Confluence is a leading project management platform rated 4.1/5 across 32,400 reviews. Pricing starts at Free–$11/user/mo. Best for Engineering Teams and Product Teams.",
+      "title": "Search and content lifecycle",
+      "body": "Run realistic searches using the words staff actually use. Check duplicate pages, stale instructions and conflicting answers. Assign an owner and review date to important pages and define how superseded content is marked without breaking useful references.",
       "type": "text"
     },
     {
-      "title": "Rating Overview",
-      "body": "Confluence scores 4.1/5 overall with ease of use (3.8/5), features (4.2/5), performance (4/5), support (3.7/5), value (4/5).",
+      "title": "Permissions and collaboration",
+      "body": "Test editing, comments, restricted pages and guest access using accounts from different roles. Confirm that sensitive HR, customer or security documents are not visible to unintended groups. Review account offboarding and external-sharing settings.",
       "type": "text"
     },
     {
-      "title": "Quick Verdict",
-      "body": "Confluence earns a 4.1/5 rating recommended for Engineering Teams and Product Teams. Delivers solid functionality with functional design.",
+      "title": "Integration and migration",
+      "body": "Test links and context with the tools used for tasks, code, service requests and chat. Export a sample space with attachments and verify how links, page history and permissions translate. Document what cannot be migrated automatically.",
       "type": "text"
     },
     {
-      "title": "Company Background",
-      "body": "Confluence was founded in 2004 in San Francisco, USA, serving 100K+ teams customers with 5,000+ employees.",
+      "title": "Adoption and total cost",
+      "body": "Measure whether the workspace reduces repeated questions and makes decisions easier to retrieve. Include page cleanup, migration, templates, training, administration and plan-specific permissions in the cost model. Verify current product limits directly.",
       "type": "text"
     },
     {
-      "title": "Product Overview",
-      "body": "Confluence is a team collaboration and knowledge management hub. Provides 18 features across Core, Analytics, Security, AI, Integrations, Advanced categories. Self-hosted available. Mobile on iOS and Android. API available.",
+      "title": "Pilot acceptance criteria",
+      "body": "Ask a new employee to find the current onboarding steps, a project decision and an operational runbook. Measure whether they find the right page without guidance and whether the page identifies an owner and review date. Record duplicate or contradictory pages that need cleanup.",
       "type": "text"
     },
     {
-      "title": "Key Features",
-      "body": "Essential project management features:",
-      "type": "list",
-      "items": [
-        "Pages: Rich text with inline comments.",
-        "Spaces: Organized content workspaces.",
-        "Whiteboards: Visual collaboration with Jira sync.",
-        "Templates: 300+ pre-built document types.",
-        "Databases: Structured table content.",
-        "Blogs: Team news and updates."
-      ]
-    },
-    {
-      "title": "Feature Deep Dive",
-      "body": "Pages. Rich text with inline comments. Spaces. Organized content workspaces. Whiteboards. Visual collaboration with Jira sync.",
+      "title": "Failure cases and governance",
+      "body": "Test a restricted page, an external guest, a former employee and a page that has been superseded. Confirm access and link behavior. Decide who reviews critical documentation and how old instructions are marked so users do not follow stale processes.",
       "type": "text"
     },
     {
-      "title": "AI Features",
-      "body": "Confluence AI includes AI content suggestions, Smart search, AI page summaries.",
+      "title": "Decision record",
+      "body": "Document space structure, content owners, permission groups, templates, search expectations, migration scope and export needs. Compare the time required to keep information current with the benefit of making it discoverable. Confirm current plan controls before storing sensitive information.",
       "type": "text"
-    },
-    {
-      "title": "API & Automation",
-      "body": "Confluence provides a comprehensive API for custom integration and workflow automation.",
-      "type": "text"
-    },
-    {
-      "title": "Security",
-      "body": "Confluence holds SOC 2 Type II, ISO 27001, GDPR, HIPAA, FedRAMP certifications with TLS 1.2+ and AES-256 encryption.",
-      "type": "text"
-    },
-    {
-      "title": "Compliance",
-      "body": "Confluence complies with GDPR, CCPA, HIPAA, SOC 2 regulations.",
-      "type": "text"
-    },
-    {
-      "title": "Integrations",
-      "body": "Integrates with Jira, Slack, Trello, GitHub, Google Drive, Microsoft Teams, Figjam, Draw.io, and additional features.",
-      "type": "text"
-    },
-    {
-      "title": "Pricing",
-      "body": "Confluence uses freemium with per-user premium. Free tier available. Plans from Free–$11/user/mo.",
-      "type": "text"
-    },
-    {
-      "title": "Pros",
-      "body": "Confluence advantages:",
-      "type": "list",
-      "items": [
-        "Deep Jira integration linking documentation to developer workflows",
-        "Whiteboards with action items converting into Jira tickets",
-        "300+ templates for engineering, product, and business documentation",
-        "Spaces with granular permissions for org-wide knowledge management"
-      ]
-    },
-    {
-      "title": "Cons",
-      "body": "Considerations:",
-      "type": "list",
-      "items": [
-        "Search effectiveness declines significantly across 5,000+ pages",
-        "Page editor feels dated versus Notion's block-based system",
-        "Self-hosted Data Center pricing exceeds $40K/year for 500 users"
-      ]
-    },
-    {
-      "title": "Performance",
-      "body": "Test Confluence with the page volume, macros, attachments, permissions, and search patterns your team actually uses. Large spaces and complex page structures can make information harder to find, so evaluate search relevance and page load behavior using representative content before migrating a whole knowledge base.",
-      "type": "text"
-    },
-    {
-      "title": "Ease of Use",
-      "body": "Basic page editing is straightforward, but a useful Confluence space needs clear page templates, ownership, permissions, and an information architecture. Start with a small set of spaces and page templates, and assign owners to review stale or duplicated documentation.",
-      "type": "text"
-    },
-    {
-      "title": "User Experience",
-      "body": "Confluence works best when people can predict where information belongs and trust search results. Use a consistent page hierarchy, meaningful titles, labels where helpful, and links to source-of-truth documents; periodically test whether new team members can find key policies without asking a colleague.",
-      "type": "text"
-    },
-    {
-      "title": "Customer Support",
-      "body": "Support rated 3.7/5 via email and knowledge base.",
-      "type": "text"
-    },
-    {
-      "title": "Industry Fit",
-      "body": "Best for Knowledge Management and Collaboration with Engineering Teams and Product Teams teams.",
-      "type": "text"
-    },
-    {
-      "title": "Team Size Fit",
-      "body": "Confluence accommodates teams of all sizes with generous free tier. Best ROI for 5-50 person teams.",
-      "type": "text"
-    },
-    {
-      "title": "Real Use Cases",
-      "body": "A engineering teams team uses Confluence to streamline project management workflows and improve team productivity.",
-      "type": "text"
-    },
-    {
-      "title": "Competitor Analysis",
-      "body": "Confluence competes with notion, monday-com, asana. Primary differentiators: core functionality and pricing.",
-      "type": "text"
-    },
-    {
-      "title": "Alternatives",
-      "body": "Consider notion, monday-com, asana based on specific team requirements.",
-      "type": "text"
-    },
-    {
-      "title": "Migration Guide",
-      "body": "Migration rated moderate complexity. Budget 2-4 weeks for full transition. Parallel testing recommended.",
-      "type": "text"
-    },
-    {
-      "title": "Buying Advice",
-      "body": "Evaluate: feature alignment, total cost at Free–$11/user/mo, migration effort (2-4 weeks), and real-data trial.",
-      "type": "text"
-    },
-    {
-      "title": "Final Verdict",
-      "body": "Confluence earns 4.1/5. Solid option for most teams. Recommended for teams prioritizing project management.",
-      "type": "text"
-    },
-    {
-      "title": "Pricing at a Glance",
-      "body": "pricing-ladder",
-      "type": "diagram"
-    },
-    {
-      "title": "Feature Radar",
-      "body": "feature-radar",
-      "type": "diagram"
-    },
-    {
-      "title": "Implementation Flow",
-      "body": "implementation-flow",
-      "type": "diagram"
     }
   ],
   "faqs": [
     {
-      "question": "What is Confluence best used for?",
-      "answer": "Confluence is best used for create, share, and organize team knowledge with connected documentation."
+      "question": "Who should evaluate Confluence?",
+      "answer": "Evaluate Confluence when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "How much does Confluence cost?",
-      "answer": "Confluence uses freemium with per-user premium starting at Free–$11/user/mo. Free tier available."
+      "question": "How should a team test Confluence?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "Does Confluence integrate with other tools?",
-      "answer": "Yes, integrates with Jira, Slack, Trello, GitHub, Google Drive. and additional features."
+      "question": "Which limitations should be checked in Confluence?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "Is Confluence suitable for small teams?",
-      "answer": "Yes, with a generous free tier. Freemium with per-user premium scales with team growth."
+      "question": "Are Confluence prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
     },
     {
-      "question": "How does Confluence pricing work?",
-      "answer": "Confluence uses freemium with per-user premium from Free–$11/user/mo, with free tier available."
-    },
-    {
-      "question": "Is Confluence secure?",
-      "answer": "Yes, holds SOC 2 Type II, ISO 27001, GDPR, HIPAA, FedRAMP certifications with encryption."
-    },
-    {
-      "question": "What integrations does Confluence offer?",
-      "answer": "Integrates with Jira, Slack, Trello, GitHub, Google Drive, Microsoft Teams, and more. API available."
-    },
-    {
-      "question": "Is Confluence good for small businesses?",
-      "answer": "Yes, with free tier. Freemium with per-user premium scales with business size."
-    },
-    {
-      "question": "What are Confluence's main advantages?",
-      "answer": "Deep Jira integration linking documentation to developer wor and Whiteboards with action items converting into Jira tickets."
-    },
-    {
-      "question": "What are Confluence's limitations?",
-      "answer": "Search effectiveness declines significantly across 5,000+ pages and Page editor feels dated versus Notion's block-based system."
-    },
-    {
-      "question": "How does Confluence compare to notion?",
-      "answer": "Confluence differentiates through pricing and performance."
-    },
-    {
-      "question": "Does Confluence support team collaboration?",
-      "answer": "Yes, includes collaboration features for team workflows."
-    },
-    {
-      "question": "Can I customize Confluence?",
-      "answer": "Yes, via API, custom fields, and templates."
-    },
-    {
-      "question": "Is Confluence easy to set up?",
-      "answer": "Setup takes a few days with documentation support."
-    },
-    {
-      "question": "How often does Confluence update?",
-      "answer": "Updates monthly."
-    },
-    {
-      "question": "What support does Confluence provide?",
-      "answer": "Support rated 3.7/5. Email and knowledge base."
-    },
-    {
-      "question": "Does Confluence offer a free version?",
-      "answer": "Yes, with core features."
-    },
-    {
-      "question": "How does Confluence handle data privacy?",
-      "answer": "Complies with GDPR, CCPA, HIPAA, SOC 2 regulations."
-    },
-    {
-      "question": "What ROI can teams expect?",
-      "answer": "ROI depends on adoption, implementation cost, and the baseline used to measure outcomes from improved project management workflows."
-    },
-    {
-      "question": "What platforms does Confluence support?",
-      "answer": "Available on Cloud, Self-hosted. Mobile on iOS and Android."
+      "question": "What should be confirmed before adopting Confluence?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [
@@ -422,7 +139,7 @@
   ],
   "relatedPosts": [],
   "contentPublished": "2026-07-19",
-  "contentModified": "2026-09-21",
+  "contentModified": "2026-10-24",
   "author": "Sarah Chen",
   "company": {
     "founded": 2004,
@@ -487,5 +204,12 @@
   "difficulty": "Advanced",
   "learningCurve": "Steep — requires dedicated training time for full proficiency",
   "whoShouldUse": "Confluence is ideal for small to mid-size teams that need a reliable project management solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
-  "whoShouldNotUse": "Confluence may be overwhelming for users who only need basic project management functionality. Its extensive feature set can create unnecessary complexity for simple use cases."
+  "whoShouldNotUse": "Confluence may be overwhelming for users who only need basic project management functionality. Its extensive feature set can create unnecessary complexity for simple use cases.",
+  "priceRangeVerified": false,
+  "ratingVerified": false,
+  "reviewCountVerified": false,
+  "ratingsVerified": false,
+  "featuresVerified": false,
+  "companyFactsVerified": false,
+  "wordCount": 304
 }

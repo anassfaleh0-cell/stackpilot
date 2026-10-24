@@ -5,14 +5,14 @@
   "category": "Analytics & Data",
   "difficulty": "Advanced",
   "author": "Marcus Rivera",
-  "readingTime": 3,
+  "readingTime": 4,
   "relatedTools": [],
   "relatedGuides": [
     "compliance-automation-software",
     "financial-forecasting-software",
     "software-evaluation-framework"
   ],
-  "lastUpdated": "2026-10-09",
+  "lastUpdated": "2026-10-24",
   "sections": [
     {
       "title": "Define the reporting boundary",
@@ -52,6 +52,21 @@
     {
       "title": "Pilot a complete reporting cycle",
       "body": "Run one reporting period for a defined business unit and trace several metrics from source evidence to final disclosure. Measure missing-data rate, manual adjustments, time spent collecting evidence, review exceptions, and reconciliation differences. Ask finance, operations, procurement, and sustainability owners to sign off on the process. Expand only when the team can reproduce calculations, explain assumptions, and export the evidence needed for review or assurance.",
+      "type": "text"
+    },
+    {
+      "title": "Build a traceable data model",
+      "body": "For each metric, record its definition, unit, reporting boundary, period, source system, owner, calculation method, emission factor or conversion reference, approval status and revision history. Keep source evidence linked to the final figure so a reviewer can reproduce the calculation. If a vendor demo cannot show how a number is traced back to source records, treat that as a material gap rather than a cosmetic limitation.",
+      "type": "text"
+    },
+    {
+      "title": "Test a difficult reporting case",
+      "body": "Use a sample that includes missing supplier data, an updated invoice, a unit conversion and a restated prior-period value. Check how the system flags missing evidence, documents assumptions, prevents double counting and preserves approvals. A simple happy-path demo does not show whether the platform can handle the exceptions that create audit risk.",
+      "type": "text"
+    },
+    {
+      "title": "Governance and acceptance",
+      "body": "Assign owners for data collection, factor updates, review and sign-off. Define who may change calculations, how overrides are justified and how reporting-period changes are documented. Before adoption, test export of the underlying data and evidence, not just the finished report, and confirm the organization can retain records if it changes vendors.",
       "type": "text"
     }
   ]

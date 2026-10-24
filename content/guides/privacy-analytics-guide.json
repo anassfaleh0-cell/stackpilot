@@ -5,7 +5,7 @@
   "category": "Analytics & Data",
   "difficulty": "Advanced",
   "author": "Marcus Rivera",
-  "readingTime": 3,
+  "readingTime": 4,
   "relatedTools": [
     "matomo",
     "plausible",
@@ -16,7 +16,7 @@
     "data-governance-guide",
     "customer-data-platform-guide"
   ],
-  "lastUpdated": "2026-10-09",
+  "lastUpdated": "2026-10-24",
   "sections": [
     {
       "title": "Define the measurement need",
@@ -56,6 +56,21 @@
     {
       "title": "Selection checklist",
       "body": "Choose a tool whose data practices, reporting, hosting model, integrations, and retention controls fit the stated use case. Document what is collected, why, who can access it, and when it is deleted. Review tags and event definitions whenever the site, consent design, or business purpose changes.",
+      "type": "text"
+    },
+    {
+      "title": "Map data before choosing a vendor",
+      "body": "Create a data inventory showing each event, identifier, parameter, collection trigger, destination, retention period and business purpose. Mark fields that could contain personal or sensitive information. Decide which measurements can be aggregated or collected without persistent identifiers. Use the inventory to compare vendors and prevent the analytics implementation from collecting more data than the business needs.",
+      "type": "text"
+    },
+    {
+      "title": "Test consent and deletion behavior",
+      "body": "Use controlled test cases for consent granted, denied and withdrawn. Verify whether tags fire, whether identifiers persist and how the choice affects reports. Test deletion requests and retention settings with dummy data. Record the observed behavior and configuration version; a vendor statement alone does not prove the implementation behaves correctly on your site.",
+      "type": "text"
+    },
+    {
+      "title": "Privacy-first acceptance checklist",
+      "body": "Require documented event definitions, least-privilege access, a retention policy, export and deletion procedures, owner assignments and a process for reviewing new tracking. Check the relevant legal requirements with qualified counsel. The goal is not to label a tool universally compliant, but to show that the chosen configuration meets the organization's documented needs.",
       "type": "text"
     }
   ]

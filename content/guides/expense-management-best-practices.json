@@ -5,7 +5,7 @@
   "category": "Finance & Accounting",
   "difficulty": "Advanced",
   "author": "Emily Nakamura",
-  "readingTime": 3,
+  "readingTime": 4,
   "relatedTools": [
     "quickbooks",
     "xero",
@@ -16,7 +16,7 @@
     "finance-software-buyers-guide",
     "software-cost-analysis"
   ],
-  "lastUpdated": "2026-10-09",
+  "lastUpdated": "2026-10-24",
   "sections": [
     {
       "title": "Define the expense policy before automation",
@@ -61,6 +61,21 @@
     {
       "title": "Test policy exceptions and reconciliation",
       "body": "Use representative expense cases: a normal receipt, a missing receipt, a duplicate claim, a policy exception, a foreign-currency purchase, and a disputed approval. Verify that the system routes each case to the correct reviewer and preserves an audit trail. Reconcile approved expenses to the accounting or payment system and check how reversals and reimbursements are recorded. Keep an explicit exception process for unusual cases instead of allowing staff to bypass the system when a rule does not fit.",
+      "type": "text"
+    },
+    {
+      "title": "Test a complete expense cycle",
+      "body": "Use a sample expense from submission through receipt capture, policy validation, manager approval, finance review, reimbursement and ledger export. Include a missing receipt, duplicate submission, split transaction, foreign currency and a disputed expense. Confirm the system explains why a claim was flagged and preserves the approver's decision.",
+      "type": "text"
+    },
+    {
+      "title": "Define controls before automation",
+      "body": "Separate who submits, approves, pays and reconciles expenses. Set thresholds and exception paths based on written policy, not convenience. Review whether administrators can change a policy and approve a claim under the same identity. Keep a log of policy changes and define a process for exceptions that need a human decision.",
+      "type": "text"
+    },
+    {
+      "title": "Measure outcomes",
+      "body": "Measure median submission-to-reimbursement time, percentage of claims needing correction, duplicate or policy exceptions, reconciliation effort and employee support requests. Establish a baseline before rollout and compare the same type of claims afterward. Do not claim savings without recording the period, sample and process changes that may explain the result.",
       "type": "text"
     }
   ]

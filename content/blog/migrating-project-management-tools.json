@@ -1,15 +1,42 @@
 {
   "slug": "migrating-project-management-tools",
-  "title": "Migrating Project Management Tools: A Step-by-Step Guide",
-  "description": "A practical guide to planning and executing a smooth migration between project management platforms, from data export to team adoption.",
+  "title": "How to Migrate Project Management Tools Without Losing Work",
+  "description": "A practical migration runbook covering inventory, field mapping, export validation, pilot migration, cutover, permissions, automation and rollback when moving project management platforms.",
   "category": "Project Management",
-  "tags": ["migration", "project management", "data export", "change management", "adoption"],
-  "body": "Migrating between project management platforms is a complex process that, when done poorly, can result in lost data, disrupted workflows, and reduced team productivity. When done correctly, it can unlock new capabilities and improve team efficiency. This guide covers the complete migration lifecycle from planning to post-migration optimization.\n\n## Phase 1: Migration Planning\n\nBefore any data moves, create a detailed migration plan. Inventory your current workspace structure including projects, boards, tasks, custom fields, templates, and automation rules. Document which data is essential to migrate and what can be archived. Define your new workspace structure in the target platform, taking the opportunity to improve on workflows that were constrained by the previous tool.\n\nEstablish a migration timeline that minimizes disruption. Consider a phased approach where you migrate one team or department at a time, learn from each phase, and apply improvements before the next wave.\n\n## Phase 2: Data Export and Cleanup\n\nExport data from your existing platform in a standardized format. Most PM tools support CSV, JSON, or direct API exports. Before migrating, clean up stale data: archive completed projects, close inactive tasks, and remove duplicate records. This is also the right time to standardize naming conventions and field structures that will carry forward into the new system.\n\n## Phase 3: Import and Validation\n\nImport your cleaned data into the new platform using its import tools or API. After import, validate data integrity by comparing record counts, checking that task assignments are preserved, and verifying that custom field values transferred correctly. Run test workflows with a small group to identify any configuration issues before the full team migration.\n\n## Phase 4: Configuration and Integration Setup\n\nConfigure the new platform to match your team's established workflows. Set up automation rules, notification preferences, and integration connections with other tools in your stack. Configure permission schemes and user roles. If your new platform supports API-based integrations, establish connections with your CRM, communication tools, and development platforms.\n\n## Phase 5: Training and Go-Live\n\nProvide role-specific training for the new platform. Focus on workflows that differ significantly from the previous tool. Plan a go-live date and communicate it clearly to all stakeholders. Consider a parallel run period where both systems remain accessible so team members can reference old data while learning the new platform.\n\n## Phase 6: Post-Migration Optimization\n\nAfter migration, monitor adoption metrics and gather feedback. Identify workflows that are causing friction and adjust your configuration accordingly. Most teams need several weeks to reach full productivity on a new platform, so plan for an iterative optimization period after go-live.",
+  "tags": [
+    "project management migration",
+    "data export",
+    "workflow migration",
+    "change management",
+    "project tools"
+  ],
+  "body": "# How to Migrate Project Management Tools Without Losing Work\n\nA project-management migration is successful when teams can continue their work, important history remains accessible and the new system supports the decisions the old one supported. Copying task titles is not enough: dependencies, comments, files, permissions, recurring work, automation and reporting can all be lost or changed.\n\n## Phase 1: Inventory the current workspace\n\nList projects, boards, spaces, tasks, statuses, custom fields, labels, users, teams, milestones, dependencies, recurring tasks, templates, automations, dashboards, comments and attachments. Identify archived work and decide what must be migrated versus retained in a read-only archive. Assign an owner to every important workspace.\n\nFor each data type, record the source location, approximate volume, business owner, retention requirement and target destination. Check whether the current tool supports export of the data you need; do not assume an export contains every relationship or attachment.\n\n## Phase 2: Define the target model\n\nMap source statuses to target statuses and document how priorities, owners, dates, tags and custom fields translate. Decide how users who do not exist in the new system will be represented. Identify unsupported fields and relationships, then choose a documented alternative rather than silently dropping them.\n\nMap the process before configuring the target. If the old workspace has dozens of statuses or custom fields that nobody uses, use the migration to simplify deliberately—but record the change and obtain approval from the workflow owner.\n\n## Phase 3: Export and validate a sample\n\nExport one representative project with tasks, dependencies, comments and attachments. Compare the source and target counts and inspect records manually. Check date zones, rich text, links, assignees, status mapping, duplicate tasks and file permissions. Open a sample of attachments rather than trusting that a filename exists.\n\nCreate a reconciliation sheet with expected and actual counts for each data type. Any mismatch needs an owner and resolution before the full migration.\n\n## Phase 4: Pilot with real users\n\nChoose a small team and a project with normal complexity, not just the easiest example. Ask users to create and update tasks, change status, attach a file, search old work, receive notifications and run their key report. Record friction and compare results with the acceptance criteria.\n\nTest automation rules explicitly. Some rules cannot be exported or behave differently in the target platform. Disable risky notifications during the pilot and confirm that migration-created changes do not trigger duplicate messages or unintended actions.\n\n## Phase 5: Plan cutover and rollback\n\nSet a freeze window or define a final delta-sync procedure so that changes made during migration are not lost. Tell users when to stop editing the old system and when the new one becomes authoritative. Keep the old workspace available in a controlled read-only state until the business owner signs off.\n\nDefine rollback triggers before cutover: missing critical records, broken access, failed integrations, incorrect ownership or inability to run a required workflow. Record how to return to the old system and how changes made after cutover will be reconciled if rollback is needed.\n\n## Phase 6: Verify permissions, integrations and reporting\n\nCheck access with accounts from each role: project owner, contributor, guest, manager and administrator. Confirm external collaborators cannot see unrelated client or confidential work. Reconnect calendar, chat, source control, documentation and reporting integrations one at a time. Validate the reports used in planning and leadership reviews against the old system.\n\n## Phase 7: Train, support and close the migration\n\nProvide short role-specific instructions and a place to report issues. Monitor adoption, failed automations, search problems and duplicate work during the first weeks. Capture recurring questions and improve templates. Do not declare the migration complete until the business owner accepts the reconciliation report and the rollback window is closed.\n\n## Migration acceptance checklist\n\n- Critical projects and tasks reconcile to expected counts.\n- Dependencies, dates, assignees, comments and attachments are checked.\n- Roles and guest access match the approved permissions model.\n- Required integrations and automations pass representative tests.\n- Key dashboards and reports produce expected results.\n- Users know the cutover date and where to get support.\n- The source system and rollback plan remain available until sign-off.\n\n## Bottom line\n\nTreat migration as a controlled data and process change, not a bulk import. Inventory first, pilot with realistic work, reconcile counts and relationships, define rollback and get explicit acceptance before retiring the old workflow.",
   "author": "Sarah Chen",
   "publishedAt": "2026-07-22",
-  "readingTime": 8,
-  "relatedPosts": ["how-to-implement-pm-software", "project-management-tools-comparison-2026", "enterprise-project-management-solutions"],
-  "relatedGuides": ["project-management-software-buyers-guide", "how-to-choose-project-management-software", "saas-implementation-best-practices"],
-  "relatedComparisons": ["asana-vs-jira", "clickup-vs-jira", "jira-vs-monday-com"],
-  "relatedGlossary": ["data-migration", "onboarding", "integration", "export-data", "api", "rest-api", "webhook", "csv"]
+  "readingTime": 4,
+  "relatedPosts": [
+    "how-to-implement-pm-software",
+    "project-management-tools-comparison-2026",
+    "enterprise-project-management-solutions"
+  ],
+  "relatedGuides": [
+    "project-management-software-buyers-guide",
+    "how-to-choose-project-management-software",
+    "saas-implementation-best-practices"
+  ],
+  "relatedComparisons": [
+    "asana-vs-jira",
+    "clickup-vs-jira",
+    "jira-vs-monday-com"
+  ],
+  "relatedGlossary": [
+    "data-migration",
+    "onboarding",
+    "integration",
+    "export-data",
+    "api",
+    "rest-api",
+    "webhook",
+    "csv"
+  ]
 }

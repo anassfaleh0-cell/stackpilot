@@ -5,7 +5,7 @@
   "category": "Security & Compliance",
   "difficulty": "Beginner",
   "author": "Marcus Rivera",
-  "readingTime": 3,
+  "readingTime": 4,
   "relatedTools": [
     "okta",
     "1password",
@@ -16,7 +16,7 @@
     "password-management-enterprise-guide",
     "vendor-risk-assessment"
   ],
-  "lastUpdated": "2026-10-09",
+  "lastUpdated": "2026-10-24",
   "sections": [
     {
       "title": "Map identities and access paths",
@@ -61,6 +61,21 @@
     {
       "title": "Run an access review and recovery drill",
       "body": "Test joiner, mover, and leaver scenarios across representative applications, including a contractor whose end date changes and an employee who changes teams. Verify that access is granted only after approval, removed within the required window, and logged with the reason. Simulate a failed directory sync and a lost administrator account to confirm recovery steps. Measure stale accounts, excessive privileges, and time to revoke access instead of judging success by the number of connected applications.",
+      "type": "text"
+    },
+    {
+      "title": "Failure and recovery test plan",
+      "body": "Test at least five failure cases: an employee changes roles, a contractor leaves, an administrator loses access, an integration stops provisioning and an emergency account is used. For each case, record the expected control, observed behavior, alert or audit record, recovery owner and maximum acceptable time to resolution. Include both successful access and access that should be denied.",
+      "type": "text"
+    },
+    {
+      "title": "Measure access hygiene",
+      "body": "Track stale accounts, orphaned service identities, access-review completion, provisioning failures, time to revoke access and privileged exceptions past their expiry. Define the population and reporting period for each measure so teams do not confuse a falling count with improved control if the scope changed.",
+      "type": "text"
+    },
+    {
+      "title": "Rollout checklist",
+      "body": "Inventory applications and identity sources, decide which system owns each attribute, pilot a high-value workflow, test rollback and emergency access, train application owners and schedule periodic reviews. Do not migrate every application at once; prioritize systems by business impact and access risk.",
       "type": "text"
     }
   ]

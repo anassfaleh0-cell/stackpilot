@@ -1,389 +1,133 @@
 {
   "slug": "zoom",
   "name": "Zoom",
-  "tagline": "Video-first communication platform with reliable large meetings, webinars, and cloud phone capabilities",
-  "description": "Zoom offers video meetings and related collaboration products, including team chat, phone, webinars, and conference-room options. This review focuses on practical fit, plan considerations, administration, integrations, privacy, and rollout trade-offs. Capabilities and limits vary by product, plan, and region; verify current details in Zoom’s official documentation before purchasing.",
-  "category": "Communication",
+  "tagline": "Video meetings and related collaboration workflows for distributed teams and external participants.",
+  "description": "Zoom provides video meetings and related collaboration workflows; current plan details and independent ratings are not verified here.",
+  "category": "Communication & Collaboration",
   "website": "https://zoom.us",
-  "pricing": "Freemium",
-  "priceRange": "Pricing varies by plan and region; verify current terms with the vendor.",
+  "pricing": "Not independently verified",
+  "priceRange": "Not independently verified",
   "pros": [
-    "Video meetings, screen sharing, participant controls, and calendar integrations cover common internal and customer-facing meeting workflows.",
-    "Related products for webinars, phone service, rooms, and events can be useful when a team wants to evaluate more than meetings alone.",
-    "Guest joining and host controls can be assessed directly in a short pilot with the devices and networks the team uses.",
-    "Integration options may help connect meetings to scheduling, identity, and collaboration systems already in use.",
-    "The range of meeting and administration options can support different team sizes, provided the selected plan includes the required capabilities."
+    "A real meeting trial can test guest joining, screen sharing, recording and host controls.",
+    "Relevant for teams that coordinate internal meetings, customer calls or scheduled online sessions.",
+    "Administrative and integration needs can be checked before a broad rollout.",
+    "An external guest test can reveal friction in joining and follow-up.",
+    "Accessibility, recording and host controls can be checked before rollout."
   ],
   "cons": [
-    "Feature access, participant limits, recording, AI capabilities, and administration controls vary by plan and product; confirm entitlements before comparing prices.",
-    "Adding phone, webinar, room, event, or advanced administration capabilities may increase total cost beyond the core meeting subscription.",
-    "Organizations with strict security, accessibility, retention, or data-location requirements need to verify the exact product configuration and contract terms.",
-    "Using several overlapping communication products can add user training and administration work if the team does not define which tool owns each workflow."
+    "Different products and plan levels can have different capabilities and limits; verify the exact offer.",
+    "Recording, transcription and participant data need retention and consent policies.",
+    "A meeting platform alone may not replace persistent project communication or document workflows."
   ],
   "features": [
     {
-      "name": "HD Video Conferencing",
-      "description": "Up to 1080p video with adaptive bitrate streaming, screen sharing, virtual backgrounds, and touch-up appearance",
-      "available": true,
-      "category": "Core"
+      "name": "Meeting or message workflow",
+      "available": false,
+      "description": "Zoom: evaluate meeting or message workflow with a representative workflow; availability is not recorded as verified in this profile."
     },
     {
-      "name": "Large Meetings",
-      "description": "Support for up to 1,000 video participants (Pro) and 10,000 view-only participants (Enterprise) with gallery, speaker, and immersive view layouts",
-      "available": true,
-      "category": "Core"
+      "name": "Guest access",
+      "available": false,
+      "description": "Zoom: evaluate guest access with a representative workflow; availability is not recorded as verified in this profile."
     },
     {
-      "name": "Breakout Rooms",
-      "description": "Split meeting participants into separate smaller groups with independent audio and video, timed sessions, and broadcast announcements",
-      "available": true,
-      "category": "Collaboration"
+      "name": "Calendar and integrations",
+      "available": false,
+      "description": "Zoom: evaluate calendar and integrations with a representative workflow; availability is not recorded as verified in this profile."
     },
     {
-      "name": "Team Chat",
-      "description": "Persistent team messaging with channels, direct messages, file sharing, and message threading integrated with meeting scheduling",
-      "available": true,
-      "category": "Communication"
+      "name": "Search and retrieval",
+      "available": false,
+      "description": "Zoom: evaluate search and retrieval with a representative workflow; availability is not recorded as verified in this profile."
     },
     {
-      "name": "Zoom Phone",
-      "description": "Cloud phone system with local numbers in 70+ countries, call routing, auto attendant, voicemail transcription, and SMS",
-      "available": true,
-      "category": "Phone"
+      "name": "Recording or retention",
+      "available": false,
+      "description": "Zoom: evaluate recording or retention with a representative workflow; availability is not recorded as verified in this profile."
     },
     {
-      "name": "Webinars",
-      "description": "Large-scale broadcast meetings with registration pages, attendee reporting, Q&A moderation, polling, and panelist management",
-      "available": true,
-      "category": "Events"
+      "name": "Access controls",
+      "available": false,
+      "description": "Zoom: evaluate access controls with a representative workflow; availability is not recorded as verified in this profile."
     },
     {
-      "name": "Zoom Events",
-      "description": "Multi-session virtual event platform with ticketing, exhibitor booths, networking lounges, and on-demand replay",
-      "available": true,
-      "category": "Events"
+      "name": "Notifications",
+      "available": false,
+      "description": "Zoom: evaluate notifications with a representative workflow; availability is not recorded as verified in this profile."
     },
     {
-      "name": "Meeting Recording",
-      "description": "Cloud or local recording with auto-transcription, searchable transcripts, and shareable recording links",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "AI Companion",
-      "description": "AI-generated meeting summaries, action item extraction, chat compose suggestions, and smart recording highlights",
-      "available": true,
-      "category": "AI"
-    },
-    {
-      "name": "Zoom Rooms",
-      "description": "Conference room software with calendar integration, wireless screen sharing, room booking, and digital signage",
-      "available": true,
-      "category": "Hardware"
-    },
-    {
-      "name": "Closed Captioning",
-      "description": "Real-time captions generated by AI or human captioners, with language translation support for multilingual meetings",
-      "available": true,
-      "category": "Accessibility"
-    },
-    {
-      "name": "Polls & Quizzes",
-      "description": "In-meeting polling with multiple question types, quiz mode for training sessions, and results reporting",
-      "available": true,
-      "category": "Engagement"
-    },
-    {
-      "name": "Whiteboard",
-      "description": "Persistent collaborative whiteboard with sticky notes, shapes, drawing tools, and template library accessible before, during, and after meetings",
-      "available": true,
-      "category": "Collaboration"
-    },
-    {
-      "name": "End-to-End Encryption",
-      "description": "256-bit AES-GCM end-to-end encryption for meetings with up to 200 participants, enabled via toggle at meeting creation",
-      "available": true,
-      "category": "Security"
-    },
-    {
-      "name": "App Integrations",
-      "description": "Zoom App Marketplace with 2,000+ integrations including Slack, Microsoft 365, Google Workspace, Salesforce, and HubSpot",
-      "available": true,
-      "category": "Integrations"
-    },
-    {
-      "name": "Contact Center",
-      "description": "Omnichannel contact center platform with voice, chat, email, social messaging, and AI-powered agent assistance",
-      "available": true,
-      "category": "Customer Service"
-    },
-    {
-      "name": "Scheduling and Calendar",
-      "description": "Outlook, Google Calendar, and iCal integration with one-click meeting scheduling, calendar status, and alternative time suggestions",
-      "available": true,
-      "category": "Core"
-    },
-    {
-      "name": "Analytics & Reports",
-      "description": "Dashboard showing meeting usage, participant counts, duration trends, adoption metrics, and room utilization",
-      "available": true,
-      "category": "Admin"
+      "name": "Export and administration",
+      "available": false,
+      "description": "Zoom: evaluate export and administration with a representative workflow; availability is not recorded as verified in this profile."
     }
   ],
   "content": [
     {
-      "title": "Executive Summary",
-      "body": "Zoom is a video-meeting product with related collaboration services. It can be a fit when a team values straightforward meeting access, screen sharing, webinar workflows, and connections to its existing calendar and communication tools. Evaluate it against your actual needs: participant limits, meeting length, recording and transcription, identity controls, accessibility, integrations, and support. Verify current product entitlements and security terms with Zoom rather than relying on broad market-leadership or certification claims.",
+      "title": "Meeting workflow",
+      "body": "Test the full meeting lifecycle: schedule, invite internal and external participants, join from desktop and mobile, share a screen, hand off host controls, end the meeting and retrieve follow-up materials. Include a guest who has not used the product before.",
       "type": "text"
     },
     {
-      "title": "TL;DR",
-      "body": "Consider Zoom when video meetings are a core workflow and your users need a familiar way to join, share content, and manage participants. Before choosing a plan, test a normal meeting, a larger meeting, an external guest, a recording, and a low-bandwidth connection. Confirm current limits, add-ons, billing terms, privacy settings, and required integrations against Zoom’s official documentation.",
+      "title": "Reliability and participant experience",
+      "body": "Run a realistic call with the network conditions and devices the team uses. Test audio recovery, screen sharing, captions, dial-in or mobile participation where required, and what participants see when a host disconnects.",
       "type": "text"
     },
     {
-      "title": "Rating Overview",
-      "body": "The overall and category scores shown on this page are PilotStack editorial ratings, not independent performance benchmarks or a substitute for a product trial. Use them as prompts for evaluation: test the meeting tasks your team performs, ask representative users to rate the experience, and compare vendors with the same criteria and plan assumptions.",
+      "title": "Administration and security",
+      "body": "Review waiting rooms, passcodes, host permissions, external access, recording controls, identity settings and account offboarding. Confirm current settings and contract terms with the vendor rather than assuming every control exists in every plan.",
       "type": "text"
     },
     {
-      "title": "Company Background",
-      "body": "Zoom is a communications software provider whose product range extends beyond video meetings. Company size and brand recognition do not determine whether a particular subscription meets your requirements. For procurement, verify the contracting entity, support terms, product availability in your region, security documentation, and any applicable data-processing terms directly with Zoom.",
+      "title": "Accessibility and records",
+      "body": "Test keyboard navigation, captions, transcripts and the usability of recordings. Define who may record, how participants are notified, where recordings are stored and when they are deleted. Verify export and retention options.",
       "type": "text"
     },
     {
-      "title": "Product Overview",
-      "body": "Zoom is a video-first communication platform with reliable large meetings, webinars, and cloud phone capabilities. The platform provides 18 core features spanning Core, Collaboration, Communication, Phone, Events, AI, Hardware, Accessibility, Engagement, Security, Integrations, Customer Service, Admin categories. At its foundation, Zoom enables organizations to zoom is a video communication platform that provides hd video conferencing, team chat, cloud phone, and webinar capabilities in a single application with tools designed for business users. Zoom offers API access for custom integrations and supports Cloud and On-premises (Zoom Rooms) deployment. Mobile apps are available for iOS and Android. AI capabilities include Zoom AI Companion, AI meeting summary, AI chat compose.",
+      "title": "Integrations and handoffs",
+      "body": "Check calendar scheduling, identity management, chat, webinar or phone workflows only if the team needs them. Test the exact integration and document how meeting notes, recordings and action items move into the team's system of record.",
       "type": "text"
     },
     {
-      "title": "Feature Deep Dive",
-      "body": "Evaluate the features relevant to your workflows rather than counting features alone. Test joining and hosting meetings, screen sharing, captions, recording, participant controls, webinars, phone service, messaging, and room hardware only if you need them. Confirm whether each capability is included in your proposed plan, requires an add-on, or depends on a separate Zoom product.",
+      "title": "Decision framework",
+      "body": "Choose based on the participant experience, administration and follow-up process. If the main problem is asynchronous decisions or searchable project knowledge, evaluate a complementary tool rather than expecting meetings to solve that problem alone.",
       "type": "text"
     },
     {
-      "title": "User Experience",
-      "body": "Evaluate the experience with representative users rather than assuming the interface will suit every team. Ask a host to schedule a meeting, invite an external guest, share a screen, enable captions, manage participants, and find a recording. Repeat key tasks on mobile and in a browser where supported. Record confusing steps, accessibility barriers, and any tasks that require paid features or administrator help.",
+      "title": "Meeting pilot checklist",
+      "body": "Run an internal meeting and an external customer call using the devices and network conditions participants normally use. Test guest joining, screen sharing, captions, recording controls, host handoff and recovery after a participant disconnects. Ask attendees to report friction and verify that follow-up materials are accessible only to intended viewers.",
       "type": "text"
     },
     {
-      "title": "Best For",
-      "body": "Zoom may suit teams that regularly host video meetings, need a simple guest-joining experience, or run webinars and hybrid meetings. It can also be considered by organizations that want to connect meetings with calendars and other business tools. Validate the fit through a pilot with your users, devices, and security requirements.",
+      "title": "Failure cases and governance",
+      "body": "Test a host who loses connectivity, an unauthorized guest, a recording that should not be shared and a participant who needs captions. Define who may record, where recordings are stored, who can retrieve them and when they are deleted. Ensure that meeting links and recordings do not become uncontrolled access paths to confidential information.",
       "type": "text"
     },
     {
-      "title": "Worst Fit",
-      "body": "Zoom may be a poor fit when your must-have workflows are not included in the selected plan, when your organization requires specific data-location or administrative controls that cannot be confirmed, or when you need persistent channel-based collaboration more than meetings. Teams with strict browser-only or low-bandwidth requirements should test those scenarios before choosing.",
+      "title": "Decision record",
+      "body": "Record required meeting types, expected participant volume, accessibility needs, calendar and identity integrations, retention policy and support expectations. Verify plan-specific capabilities in official documentation. Review the choice after a pilot based on reliability, participant experience, administration and follow-up—not only whether the meeting started.",
       "type": "text"
-    },
-    {
-      "title": "Key Features",
-      "body": "Potentially relevant capabilities include video meetings, screen sharing, participant management, breakout rooms, recording, captions, webinars, messaging, phone service, and integrations. Availability and limits vary by product and plan. Build a checklist of the features you actually need and verify each item in current documentation or a trial before budgeting.",
-      "type": "list",
-      "items": [
-        "HD video with adaptive bitrate streaming maintains call quality down to 1.5 Mbps bandwidth, automatically downgrading resolution before dropping frames, supporting up to 1080p on supported plans and devices with stable connections above 3.8 Mbps.",
-        "AI Companion automatically generates meeting summaries with timestamped action items and assigned owners, compose suggestions for chat responses, smart recording chapters, and highlights that let absent team members catch up in 2-3 minutes instead of watching full recordings.",
-        "Breakout rooms support up to 50 separate groups with independent audio and video, timed sessions with pre-assignment capability, countdown warnings, and the ability to broadcast messages to all rooms simultaneously, making it the strongest breakout implementation among video conferencing platforms.",
-        "Zoom Phone provides a cloud PBX replacement with local DID numbers in 70+ countries, auto attendant with configurable menus, call queues with skills-based routing, voicemail with AI transcription, and SMS/MMS capabilities, all managed within the Zoom desktop client alongside video meetings.",
-        "End-to-end encryption (E2EE) using 256-bit AES-GCM is available for up to 200 participants per meeting, with cryptographic verification codes that participants can compare verbally or through out-of-band channels, though it requires manual enablement per meeting rather than being the default."
-      ]
-    },
-    {
-      "title": "Real Advantages",
-      "body": "Zoom’s practical strengths may include a familiar meeting workflow and a range of related meeting and communication products. Whether these strengths matter depends on your use case. Test guest access, host controls, accessibility, calendar integration, and performance on the devices and networks your team uses instead of relying on general claims of industry-leading quality.",
-      "type": "text"
-    },
-    {
-      "title": "Real Limitations",
-      "body": "Potential trade-offs include plan-specific limits, paid add-ons, administration effort, and overlap with tools your team already uses. Meeting quality depends on networks and devices, while advanced security, recording, webinar, phone, or analytics needs may affect the plan you require. Validate these costs and constraints in a pilot.",
-      "type": "text"
-    },
-    {
-      "title": "Pricing Explained",
-      "body": "Prices and plan inclusions change over time and may vary by region and billing term. Verify current pricing directly with Zoom and confirm the billing unit, annual commitment, taxes, seat minimums, meeting limits, recording storage, AI features, webinars, phone service, and support entitlements. Request a written quote for enterprise needs.",
-      "type": "text"
-    },
-    {
-      "title": "Hidden Costs",
-      "body": "Include implementation and administration time, user training, device upgrades, recording storage, phone or event services, integration work, support upgrades, and any tools that remain alongside Zoom. Estimate costs using your expected number of hosts and users, then compare vendors using the same assumptions and current quotes.",
-      "type": "text"
-    },
-    {
-      "title": "Learning Curve",
-      "body": "The learning curve depends on the user’s role and the tasks they need to perform. Test a representative user journey: schedule a meeting, invite an external guest, join from a browser or mobile device, share content, manage participants, use captions, and locate a recording. Use the pilot to identify training gaps rather than assuming one fixed learning time applies to every team.",
-      "type": "text"
-    },
-    {
-      "title": "Setup Time",
-      "body": "Setup effort varies with the number of users and the organization’s requirements. A basic account and test meeting may take little preparation, while organization-wide rollout can require identity setup, security policies, device checks, calendar integrations, training, and procurement approvals. Build a checklist, assign owners, and test with a small group before scheduling the wider launch.",
-      "type": "text"
-    },
-    {
-      "title": "Migration Difficulty",
-      "body": "Migration effort depends on which workflows currently rely on your existing platform. Inventory scheduled meetings, calendar integrations, recurring links, recordings, chat history, phone numbers, room devices, identity settings, and retention policies. Identify which items can be transferred, which need manual replacement, and which depend on a separate product or license. Pilot with one team before changing organization-wide defaults, and keep a rollback plan for critical meetings.",
-      "type": "text"
-    },
-    {
-      "title": "Integration Ecosystem",
-      "body": "Start with the integrations your team actually uses. Check the current Zoom App Marketplace and developer documentation for calendar and scheduling tools, identity providers, CRM systems, collaboration apps, and learning platforms. Confirm whether each connection is supported by Zoom itself or a third party, whether it requires a paid plan, what permissions it requests, and how meeting data is shared. For custom integrations, review API scopes, rate limits, webhook behavior, error handling, and ongoing maintenance before estimating development effort.",
-      "type": "text"
-    },
-    {
-      "title": "Security & Compliance",
-      "body": "Review Zoom’s current security documentation and contract terms for the exact product and plan you intend to use. Check authentication, waiting-room and participant controls, encryption modes, recording access, retention, audit capabilities, data handling, regional options, and any compliance obligations. Confirm the scope and applicability of each security or compliance statement with your internal security team.",
-      "type": "text"
-    },
-    {
-      "title": "Performance",
-      "body": "Test call quality using representative devices and networks, including Wi-Fi, mobile connections, screen sharing, external guests, and participants in different regions. Record audio clarity, video stability, reconnection behavior, latency as experienced by users, and accessibility. Avoid treating a single demonstration or an unqualified benchmark as a guarantee of real-world performance.",
-      "type": "text"
-    },
-    {
-      "title": "Customer Support",
-      "body": "Support options and response commitments depend on the plan and contract. Confirm operating hours, supported channels, response targets, escalation routes, and coverage for critical incidents before purchasing. For business-critical meetings, review the actual service commitments rather than relying on a general support score.",
-      "type": "text"
-    },
-    {
-      "title": "Real-world Use Cases",
-      "body": "Run a pilot based on your real scenarios, such as weekly internal meetings, customer calls, training sessions, webinars, or hybrid rooms. For each scenario, define success criteria for join success, audio and video quality, accessibility, administration, recording, and user satisfaction. Use the results to compare alternatives fairly.",
-      "type": "text"
-    },
-    {
-      "title": "Industry Fit",
-      "body": "Industry labels do not establish suitability on their own. Organizations with regulatory, procurement, accessibility, or data-residency requirements should map those obligations to the exact Zoom product, configuration, contract, and region. Confirm the current documentation and contractual terms with the vendor and your internal compliance stakeholders.",
-      "type": "text"
-    },
-    {
-      "title": "Common Mistakes",
-      "body": "Common rollout mistakes include leaving meeting access too open, overlooking recording and retention settings, failing to test guest access, assuming every feature is included in the chosen plan, and neglecting accessibility or low-bandwidth scenarios. Review account and meeting defaults, document who can record or share, test the controls with a pilot group, and communicate expectations before wider adoption.",
-      "type": "text"
-    },
-    {
-      "title": "Tips from experienced users",
-      "body": "Practical administration tips: test the join experience as an external guest; set participant and recording controls before inviting users; confirm captions and accessibility settings; review who can start recordings and where they are stored; and document how users report meeting issues. Test calendar integrations and room equipment with the accounts and devices that will actually be used. Revisit licenses after the pilot so seats and add-ons match real usage.",
-      "type": "text"
-    },
-    {
-      "title": "Alternatives",
-      "body": "Zoom should be compared with communication tools based on the work you need to support, not broad claims about which product is faster or cheaper. Microsoft Teams may fit organizations that already use Microsoft 365 for identity, calendars, files, and collaboration. Google Meet may suit teams that work primarily in Google Workspace and prefer browser-based meetings. Cisco Webex may be relevant when calling, meeting-room devices, or existing Cisco services are important. Check current official pricing, bundle inclusions, participant limits, recording options, administration, security controls, and support for the exact plans available in your region. Pilot the same meetings and guest workflows in each shortlisted product, then compare total cost and user experience.",
-      "type": "text"
-    },
-    {
-      "title": "Competitor Analysis",
-      "body": "Compare Zoom with Microsoft Teams, Google Meet, Webex, or other relevant options using the same tasks and plan assumptions. Evaluate guest experience, meeting quality, administration, accessibility, recording and AI entitlements, integrations, security, support, and total cost. Treat editorial ratings as a starting point, not proof that one product wins every scenario.",
-      "type": "text"
-    },
-    {
-      "title": "Buying Advice",
-      "body": "Before buying, document required meeting types, typical and peak participant counts, expected host seats, recording and accessibility needs, integrations, security controls, data-handling terms, and support requirements. Pilot the shortlisted plans with representative users, record any blockers, and confirm current plan entitlements and renewal terms in writing.",
-      "type": "text"
-    },
-    {
-      "title": "Final Verdict",
-      "body": "Zoom is worth shortlisting if video meetings are central to your workflows and a pilot confirms the user experience, required controls, integrations, and total cost. It is not automatically the best choice for every team. Compare it with alternatives against your must-have requirements and choose the option that meets them with acceptable operational effort.",
-      "type": "text"
-    },
-    {
-      "title": "API & Automation",
-      "body": "Teams considering automation should start with the workflow they need to connect, then check Zoom’s current developer documentation for supported endpoints, authentication, rate limits, event subscriptions, and plan requirements. Test permissions and failure handling in a non-production account before syncing meeting data or changing user settings. Do not assume that an API endpoint, integration, or automation is included in every subscription.",
-      "type": "text"
-    },
-    {
-      "title": "Pricing at a Glance",
-      "body": "Pricing summary: check Zoom’s official pricing information for current regional prices and included features. Confirm billing unit, contract term, participant limits, recording and AI entitlements, add-ons, taxes, renewal terms, and any minimum seat commitments before purchasing.",
-      "type": "diagram"
-    },
-    {
-      "title": "Feature Radar",
-      "body": "The feature, ease-of-use, support, value, and performance scores on this page are editorial indicators. Interpret them alongside your own trial results, current vendor documentation, and requirements checklist; they are not independently verified technical benchmarks.",
-      "type": "diagram"
-    },
-    {
-      "title": "Implementation Flow",
-      "body": "1. List required meeting, webinar, phone, recording, accessibility, security, and integration workflows. 2. Map each requirement to the exact product and plan. 3. Pilot with representative hosts, attendees, external guests, devices, and networks. 4. Record join success, audio/video quality, usability, administration effort, and total cost. 5. Review security, retention, and support terms with the responsible teams. 6. Roll out in stages, train users, and reassess licenses after real usage is visible.",
-      "type": "diagram"
     }
   ],
   "faqs": [
     {
-      "question": "What is Zoom best used for?",
-      "answer": "Zoom is commonly used for video meetings, webinars, and virtual collaboration. Depending on the product and plan, teams may also use Zoom for phone service, messaging, events, and conference-room setups. Identify your required workflows and verify the relevant participant limits and entitlements before choosing a plan."
+      "question": "Who should evaluate Zoom?",
+      "answer": "Evaluate Zoom when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "How much does Zoom cost?",
-      "answer": "Zoom offers free and paid plans, but prices, billing terms, participant limits, and included features can change. Check Zoom’s current pricing page for your region and product, and confirm whether the price is per host, user, month, or year. Include any required add-ons, taxes, and minimum seat commitments in your budget."
+      "question": "How should a team test Zoom?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "Does Zoom integrate with other tools?",
-      "answer": "Zoom offers integrations and developer options, but availability and setup vary by app, plan, and configuration. Check the current Zoom App Marketplace and developer documentation for the exact calendar, collaboration, CRM, or workflow integration you need, including required permissions and licensing."
+      "question": "Which limitations should be checked in Zoom?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "Is Zoom secure?",
-      "answer": "Review Zoom’s current security and privacy documentation against your organization’s requirements. Confirm encryption options, authentication and access controls, retention settings, audit capabilities, data-location terms, and any compliance scope relevant to your plan. Do not assume that a broad certification or product statement automatically covers every configuration or use case."
+      "question": "Are Zoom prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
     },
     {
-      "question": "What platforms does Zoom support?",
-      "answer": "Zoom supports desktop, mobile, and browser-based meeting workflows, with capabilities varying by device, operating system, and product. Test the tasks your team needs—joining, sharing, captions, host controls, and recordings—on the actual devices and browsers your users will use."
-    },
-    {
-      "question": "How does Zoom pricing work?",
-      "answer": "Zoom plan structures and prices may vary by product, billing term, and region. Compare the current plan details directly with Zoom and confirm billing units, renewal terms, included features, participant limits, add-ons, and any minimum purchase requirements before committing."
-    },
-    {
-      "question": "What integrations does Zoom offer?",
-      "answer": "Check the Zoom App Marketplace and current developer documentation for the integrations you rely on. Verify whether each connection is a native integration, third-party app, or custom API project, and confirm plan requirements, permissions, data access, and maintenance responsibilities."
-    },
-    {
-      "question": "Is Zoom good for small businesses?",
-      "answer": "Zoom may suit small businesses that need straightforward video meetings and can work within the limits of the selected plan. Evaluate expected meeting length, participant counts, administration, accessibility, security, integrations, and total cost rather than assuming the free plan will cover every workflow."
-    },
-    {
-      "question": "What is Zoom best for?",
-      "answer": "Zoom is worth testing when video meetings are central to your work and users value a straightforward join experience. Performance varies with network conditions, devices, settings, and participant locations, so compare it with alternatives using the same real-world test rather than relying on broad superiority claims."
-    },
-    {
-      "question": "What are Zoom's limitations?",
-      "answer": "Potential limitations include plan-specific meeting limits, the need for paid add-ons for some workflows, and administration or integration work during rollout. Check current limits and security settings for the plan you intend to use, and test longer meetings and external-guest workflows before migrating a team."
-    },
-    {
-      "question": "How does Zoom compare to slack?",
-      "answer": "Zoom and Slack serve different primary workflows: Zoom is centered on meetings and related communication products, while Slack focuses on persistent channel-based messaging and integrations. Compare them based on the jobs your team needs to perform; some organizations may use both rather than treating them as direct substitutes."
-    },
-    {
-      "question": "Does Zoom support team collaboration?",
-      "answer": "Zoom provides meeting features such as screen sharing and breakout rooms, while collaboration features outside meetings depend on the products and plans enabled. Verify whether messaging, file sharing, phone, and document workflows meet your needs before replacing a separate collaboration tool."
-    },
-    {
-      "question": "Can I customize Zoom?",
-      "answer": "Customization can include account and meeting settings, administrative policies, supported integrations, and API-based development. The available options depend on the product and plan. Test the exact setting or integration you need and review its permission and maintenance requirements before building a workflow around it."
-    },
-    {
-      "question": "Is Zoom easy to set up?",
-      "answer": "Setup effort depends on account structure, identity settings, meeting policies, integrations, devices, and user training. Estimate the rollout from a checklist, test with a small group, and include security review and support preparation before setting a launch date."
-    },
-    {
-      "question": "Does Zoom work offline?",
-      "answer": "Zoom’s core meeting experience requires an internet connection. Some local files or previously downloaded materials may remain accessible offline, but do not assume that live meetings, cloud services, or synchronized workflows will work without connectivity."
-    },
-    {
-      "question": "How often does Zoom update?",
-      "answer": "Update timing can vary by application, platform, and release channel. Check Zoom’s current release notes and update guidance for the clients and services your organization uses rather than relying on a fixed monthly schedule."
-    },
-    {
-      "question": "What customer support does Zoom provide?",
-      "answer": "Support channels and response commitments depend on the plan and contract. Before purchase, confirm available channels, operating hours, response targets, escalation paths, and whether critical-incident support is included for your account."
-    },
-    {
-      "question": "Does Zoom offer a free version?",
-      "answer": "Zoom offers a free plan for some meeting workflows, subject to current limits and feature restrictions. Confirm the latest terms for your region and intended use, and compare them with your expected meeting duration, participant count, administration, and storage needs."
-    },
-    {
-      "question": "How does Zoom handle data privacy?",
-      "answer": "Review Zoom’s current privacy notice, data processing terms, and product-specific documentation. Check what information is collected, retention and deletion options, administrator controls, subprocessors, and any regional or contractual requirements that apply to your organization."
-    },
-    {
-      "question": "What is the ROI of Zoom?",
-      "answer": "Estimate ROI using your own baseline: time spent scheduling and joining meetings, travel or event costs avoided, support effort, adoption, and any licenses or tools replaced. Calculate the full subscription and rollout cost, then measure outcomes during a pilot; results vary by organization and should not be assumed in advance."
+      "question": "What should be confirmed before adopting Zoom?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [
@@ -397,7 +141,7 @@
     "best-remote-communication-tools"
   ],
   "contentPublished": "2026-07-17",
-  "contentModified": "2026-10-09",
+  "contentModified": "2026-10-24",
   "author": "Emily Nakamura",
   "relatedComparisons": [
     "slack-vs-microsoft-teams"
@@ -468,31 +212,14 @@
   "learningCurve": "Minimal — most users can get started within an hour",
   "whoShouldUse": "Zoom is designed for fast-growing startups that need a scalable communication platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
   "whoShouldNotUse": "Zoom may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale.",
-  "wordCount": 3234,
-  "rating": 4.5,
-  "reviewCount": 45000,
-  "ratings": [
-    {
-      "label": "Ease of Use",
-      "score": 4.8
-    },
-    {
-      "label": "Performance",
-      "score": 4.7
-    },
-    {
-      "label": "Features",
-      "score": 4.6
-    },
-    {
-      "label": "Value",
-      "score": 4.4
-    },
-    {
-      "label": "Support",
-      "score": 4.1
-    }
-  ],
+  "wordCount": 355,
+  "rating": null,
+  "reviewCount": 0,
+  "ratings": [],
   "ratingVerified": false,
-  "reviewCountVerified": false
+  "reviewCountVerified": false,
+  "priceRangeVerified": false,
+  "ratingsVerified": false,
+  "featuresVerified": false,
+  "companyFactsVerified": false
 }

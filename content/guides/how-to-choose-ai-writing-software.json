@@ -4,9 +4,9 @@
   "description": "A step-by-step framework for testing AI writing tools against real tasks, fact-checking needs, brand voice, privacy requirements, and total cost before you commit.",
   "category": "AI & Machine Learning",
   "difficulty": "Beginner",
-  "readingTime": 25,
+  "readingTime": 4,
   "author": "PilotStack Editorial Team",
-  "lastUpdated": "2026-10-23",
+  "lastUpdated": "2026-10-24",
   "relatedTools": [
     "chatgpt",
     "jasper"
@@ -87,6 +87,21 @@
       "title": "Make the decision and keep it current",
       "type": "text",
       "body": "Use a weighted scorecard only after critical requirements are met. A tool that fails privacy or accuracy requirements should not win because it scores well on convenience. Document the strongest use case, known limitations, fallback process, owner, and conditions that would trigger a re-evaluation. Recheck plan terms and product capabilities when the purchase becomes active because AI features, limits, and pricing can change. Keep a human accountable for final publication, and make it easy for staff to report incorrect or unsafe output."
+    },
+    {
+      "title": "Use a repeatable evaluation worksheet",
+      "body": "For every candidate, record the same prompt, source material, expected output, factual checks, editing time, brand requirements, privacy terms, export needs and plan limits. Score each requirement pass, partial pass, fail or unknown, and attach the evidence. Avoid giving a tool credit for a feature that appears in a marketing page but was not available in the tested plan.",
+      "type": "text"
+    },
+    {
+      "title": "Run a blind editorial review",
+      "body": "Where practical, remove product names from the outputs and ask reviewers to score clarity, accuracy, voice, structure and usefulness using a shared rubric. Record the number and severity of factual errors and the amount of editing needed. Include tasks that require saying “I don't know” or preserving uncertainty; confident but unsupported copy should count as a failure.",
+      "type": "text"
+    },
+    {
+      "title": "Adoption and governance",
+      "body": "Define who owns prompts, source material, final approval, sensitive-data review and the process for correcting published errors. Confirm terms for uploaded content, retention, training use, ownership and account deletion. Start with a bounded pilot and re-test whenever the model, product plan or workflow changes.",
+      "type": "text"
     }
   ],
   "faqs": [

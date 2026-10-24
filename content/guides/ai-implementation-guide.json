@@ -5,7 +5,7 @@
   "category": "AI & Machine Learning",
   "difficulty": "Intermediate",
   "author": "PilotStack Team",
-  "readingTime": 9,
+  "readingTime": 4,
   "relatedTools": [
     "chatgpt",
     "claude",
@@ -15,7 +15,7 @@
   "relatedGuides": [
     "software-evaluation-framework"
   ],
-  "lastUpdated": "2026-10-09",
+  "lastUpdated": "2026-10-24",
   "sections": [
     {
       "title": "Choose a bounded use case",
@@ -50,6 +50,21 @@
     {
       "title": "Review value after launch",
       "body": "After 30, 60, and 90 days, compare actual results with the original baseline. Look for changes in quality and downstream rework, not just number of prompts or generated words. Re-check access controls, retention settings, cost, and model behavior after product updates. Scale only when the use case remains valuable, the failure modes are understood, and the organization can support it. If the measured benefit does not justify the full cost and risk, narrow or retire the implementation.",
+      "type": "text"
+    },
+    {
+      "title": "Example pilot scorecard",
+      "body": "Score each output against a pre-defined rubric: factual correctness, completeness, relevance, tone, format, harmful or prohibited content and need for human correction. Use both routine and difficult examples, including edge cases. Keep the original input, output, reviewer decision and reason for failure so the team can reproduce problems after a model or prompt change.",
+      "type": "text"
+    },
+    {
+      "title": "Human review and escalation",
+      "body": "Specify which outputs may be used directly, which require review and which must never be automated. Give reviewers a clear way to flag uncertainty and route high-impact cases to a qualified person. Test the escalation path, not just the happy path, and make sure staff understand that a fluent answer is not proof of correctness.",
+      "type": "text"
+    },
+    {
+      "title": "Monitor after launch",
+      "body": "Track quality failures, override rates, user complaints, latency, usage cost and incidents. Review a sample of outputs on a schedule and after changes to prompts, data sources, models or integrations. Define a rollback owner and criteria for disabling the feature if performance falls below the agreed threshold.",
       "type": "text"
     }
   ]

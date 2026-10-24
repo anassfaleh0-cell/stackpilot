@@ -1,76 +1,53 @@
 {
   "slug": "saas-pricing-drift-report-2026",
-  "title": "SaaS Pricing Drift Report 2026: A Method for Verifying Prices",
-  "description": "A transparent method for checking whether published SaaS prices are current. Document official vendor evidence, capture dates, plan scope, billing terms and uncertainty; do not treat unverified price examples as confirmed findings.",
+  "title": "SaaS Pricing Drift: A Verification Framework for Buyers",
+  "description": "A transparent method for checking whether published SaaS prices are current. This is a verification framework, not a completed market-wide price audit; claims without dated primary evidence remain unverified.",
   "category": "Pricing",
-  "reportType": "Pricing Accuracy Investigation",
+  "reportType": "methodology",
   "keyFindings": [
-    "Pricing details can become stale when vendors rename plans, change limits, alter billing terms, or discontinue tiers.",
-    "A pricing discrepancy should be counted only when the published claim, current vendor source, date checked, and relevant plan are documented.",
-    "Small per-seat differences can materially change total cost for large teams, so compare the same seat count and billing period.",
-    "A price claim without a current source should be marked unverified rather than repeated as fact.",
-    "A reliable pricing audit needs a reproducible sample, transparent inclusion rules, source links, and dated evidence."
+    "Pricing comparisons are only meaningful when product, plan, region, currency, billing cadence and usage unit match.",
+    "A discrepancy requires a preserved published claim and a current official vendor source checked on a recorded date.",
+    "A headline subscription amount may omit seats, usage limits, onboarding, integrations, support or renewal terms.",
+    "Unverified or quote-only prices should be labeled as such rather than converted into a numeric estimate.",
+    "A reproducible audit needs source links, capture dates, inclusion rules, exclusions and a calculation method."
   ],
   "sections": [
     {
       "title": "Why pricing drift matters",
-      "body": "Buyers often rely on comparison pages when shortlisting software. If a page shows a discontinued plan, misses a new tier, or confuses monthly and annual billing, the shortlist and budget can be wrong. The risk is larger when prices vary by seat count, region, usage, or contract length.",
-      "type": "text"
+      "body": "A comparison can mislead buyers if it repeats a discontinued plan, confuses monthly and annual billing or omits a required add-on. The risk is especially high when vendors price by seats, usage, region or negotiated contract. This report does not claim that a market-wide sample has been completed; it explains how to verify a claim before publishing it."
     },
     {
-      "title": "Evidence standard for this report",
-      "body": "A defensible discrepancy requires two preserved records: the exact third-party claim and the current official vendor source checked on a stated date. The comparison must use the same product, plan, currency, region, billing interval, and unit. Historical notes without a retrievable source are leads for further checking, not independently verified findings. This report does not present previously recorded discrepancy counts or individual price changes as confirmed until that evidence is available.",
-      "type": "text"
+      "title": "Evidence standard",
+      "body": "Record the exact third-party claim and the official vendor source checked on a stated date. Match the product, plan, currency, country, billing interval, unit and included limits. Preserve a source snapshot where permitted. If the official source is unavailable or the vendor uses quote-only pricing, mark the value unverified rather than guessing."
     },
     {
-      "title": "Common patterns to investigate",
-      "body": "The following are audit patterns to check, not claims that a particular vendor currently has a specific price error.",
-      "type": "list",
-      "items": [
-        "A discontinued plan is still presented as available to new customers",
-        "A new entry tier is missing from an older comparison",
-        "Annual-billing prices are presented as monthly prices without explanation",
-        "Per-seat pricing is compared with flat-rate pricing",
-        "Feature availability is attributed to the wrong plan",
-        "A regional price or currency is presented as universal",
-        "Usage caps, minimum seats, or mandatory add-ons are omitted"
-      ]
+      "title": "Patterns to investigate",
+      "body": "Common audit targets include annual-versus-monthly price differences, minimum seat commitments, included usage, add-on fees, changed plan names, regional differences, promotional offers and renewal uplifts. These are patterns to check, not claims that a particular vendor currently has an error. Keep observations separate from conclusions until the evidence is comparable."
     },
     {
-      "title": "How to run a pricing verification",
-      "body": "Open the official pricing page and the third-party page. Capture the URL, date, plan name, currency, region, billing term, unit, minimum commitment, and limits. If the official page does not disclose the price, request an itemized quote or mark the price as quote-based. Do not infer a number from snippets or another aggregator.",
-      "type": "list",
-      "items": [
-        "Record the third-party claim verbatim and link to it",
-        "Capture the official vendor source and date checked",
-        "Confirm plan, region, currency and billing period match",
-        "Calculate the difference using the same unit",
-        "Keep screenshots or archived evidence where permitted",
-        "Update every internal page that repeats the claim"
-      ]
+      "title": "Repeatable verification procedure",
+      "body": "For each claim, save the page URL, access date, product and plan, region, currency, billing term, user or usage unit, included features and any stated exclusions. Ask the vendor for a dated quote if a required detail is missing. Have a second reviewer confirm the comparison before publishing a numeric discrepancy."
     },
     {
-      "title": "Calculate the buyer impact",
-      "body": "Convert both prices to the same basis. For per-seat pricing, multiply the difference by the actual seat count and billing periods. Include required add-ons and usage overages separately. State the assumptions so readers can reproduce the calculation. Do not extrapolate one customer's quote to all customers.",
-      "type": "text"
+      "title": "Calculate buyer impact",
+      "body": "Normalize the figures to the same billing period and unit. For a per-seat difference, multiply by the actual seat count and number of billing periods, then list add-ons and usage charges separately. State assumptions and do not extrapolate a negotiated quote to all customers. If the plan scope differs, report the comparison as not like-for-like."
     },
     {
       "title": "Limitations and updates",
-      "body": "SaaS prices change frequently and can be personalized by region, contract, or negotiation. A single observation does not establish an industry-wide pattern. Any future quantitative findings should include the sample, date window, source links, exclusions, and calculation method. Until those records are published, this page is a verification framework rather than a claim that a specific number of vendors is currently mispriced.",
-      "type": "text"
+      "body": "Prices can vary by contract, region, promotions and negotiated terms. One observation does not establish an industry-wide trend. A future quantitative report should publish the sample frame, observation dates, source links, inclusion rules, exclusions and calculation code. Until that evidence exists, this page remains a methodology guide and does not claim a completed pricing-drift measurement."
     }
   ],
-  "methodology": "This report is a verification framework, not a claim that every vendor price has been independently audited. For each price claim, record the official vendor URL, date accessed, country or currency, billing cadence, plan name, included seats or usage, add-ons and any qualification or quote-only status. Preserve a source snapshot where permitted. Mark unavailable, quote-only or unverified data explicitly. Do not infer a historical price change without comparable dated primary evidence.",
+  "methodology": "No market-wide vendor-price sample is claimed as completed. For each future audited observation, record the exact third-party claim, current official vendor URL, date accessed, region, currency, plan, billing cadence, usage unit, included features and exclusions. Mark quote-only or unavailable values unverified. Only calculate a discrepancy when the two observations are comparable and reproducible.",
   "dataSources": [
     {
       "name": "Atlassian — Jira pricing",
       "url": "https://www.atlassian.com/software/jira/pricing",
-      "context": "Primary vendor source for checking current plan terms."
+      "context": "Primary vendor source for checking current plan terms; this page has not been used to claim a market-wide price audit."
     },
     {
       "name": "OpenAI — API pricing",
       "url": "https://openai.com/api/pricing/",
-      "context": "Primary vendor source for checking current usage pricing."
+      "context": "Primary vendor source for checking current usage pricing; this page has not been used to claim a market-wide price audit."
     },
     {
       "name": "NIST AI Risk Management Framework",
@@ -80,7 +57,7 @@
   ],
   "publishedAt": "2026-07-27",
   "author": "Emily Nakamura",
-  "readingTime": 16,
+  "readingTime": 5,
   "relatedComparisons": [
     "salesforce-vs-hubspot",
     "asana-vs-monday-com",
@@ -103,16 +80,24 @@
   "editorialGuideReviewed": true,
   "faqs": [
     {
-      "question": "Does this report publish a verified market-wide SaaS pricing average or median?",
-      "answer": "No. This report does not publish a verified market-wide average or median. It provides a repeatable method for checking vendor pricing, and any future market-wide statistic would require a defined sample, dated primary evidence, and a reproducible calculation."
+      "question": "Does this report prove that SaaS prices have increased?",
+      "answer": "No. It is a verification framework, not a completed market-wide study. Quantitative claims require a documented sample and comparable dated primary sources."
     },
     {
-      "question": "How should a buyer verify a specific SaaS price?",
-      "answer": "Check the current official vendor page or request a written quote, then record the product, plan, region, currency, billing cadence, seat or usage limits, date checked, and any required add-ons."
+      "question": "What counts as evidence of a price change?",
+      "answer": "A dated prior claim and a current official vendor source for the same product, plan, region, currency, billing term and unit. If those do not match, the difference may not represent a true price change."
     },
     {
-      "question": "Are the example sources proof that a particular vendor changed its price?",
-      "answer": "No. The linked vendor pages are sources to consult during an audit, not proof of a historical price change. A confirmed change needs comparable dated evidence for the same plan and billing basis."
+      "question": "What if the vendor does not publish a price?",
+      "answer": "Mark the price quote-based or unverified and request a written quote. Do not invent a number or infer one from an unrelated plan."
+    },
+    {
+      "question": "How often should a pricing page be reviewed?",
+      "answer": "Set a review cadence based on how frequently the category changes and recheck before publishing a specific price. Record the date and source for every claim."
+    },
+    {
+      "question": "Does this report publish a verified market-wide average or median?",
+      "answer": "This methodology page does not publish a verified market-wide average or median. It explains how to verify individual price claims and what evidence is required before calculating a defensible aggregate."
     }
   ]
 }
