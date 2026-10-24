@@ -1,60 +1,86 @@
 {
   "slug": "bamboohr-vs-expensify",
-  "title": "BambooHR vs Expensify",
-  "description": "BambooHR vs Expensify: BambooHR is our overall pick for HR & People teams — BambooHR 4.3/5, Expensify 4.2/5; BambooHR from Custom, Expensify from.",
+  "title": "BambooHR vs Expensify: HR Administration vs Expense Management",
+  "description": "A practical decision guide to BambooHR and Expensify. BambooHR focuses on employee records and HR processes; Expensify focuses on business expense reporting and reimbursement workflows. Compare each product against its intended workflow instead of relying on unsupported star ratings or a universal winner. Verify current features, availability, and terms with the vendors.",
   "category": "HR & People",
   "tool1": "BambooHR",
   "tool2": "Expensify",
-  "winner": "bamboohr",
+  "winner": null,
   "features": [
     {
-      "name": "User Rating",
-      "tool1": true,
-      "tool2": false
+      "name": "Primary job",
+      "tool1": "Employee records and HR processes",
+      "tool2": "Expense capture, policy review, approval, and reimbursement",
+      "tool1Detail": "For BambooHR, assess employee records and hr processes against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For Expensify, assess expense capture, policy review, approval, and reimbursement against your real requirements and record any gaps during a representative pilot."
     },
     {
-      "name": "Category",
-      "tool1": true,
-      "tool2": true
+      "name": "Main users",
+      "tool1": "HR, people operations, managers, and employees",
+      "tool2": "Employees, approvers, finance, and accounting",
+      "tool1Detail": "For BambooHR, assess hr, people operations, managers, and employees against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For Expensify, assess employees, approvers, finance, and accounting against your real requirements and record any gaps during a representative pilot."
     },
     {
-      "name": "Starting Price",
-      "tool1": true,
-      "tool2": true
+      "name": "Key evaluation",
+      "tool1": "Employee lifecycle, permissions, reporting, regional needs",
+      "tool2": "Receipt workflows, policy rules, approval routing, reimbursement, accounting export",
+      "tool1Detail": "For BambooHR, assess employee lifecycle, permissions, reporting, regional needs against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For Expensify, assess receipt workflows, policy rules, approval routing, reimbursement, accounting export against your real requirements and record any gaps during a representative pilot."
     },
     {
-      "name": "Best For",
-      "tool1": true,
-      "tool2": true
+      "name": "Controls",
+      "tool1": "Review access to sensitive employee records and retention rules",
+      "tool2": "Review spending controls, audit trails, receipt requirements, and financial permissions",
+      "tool1Detail": "For BambooHR, assess review access to sensitive employee records and retention rules against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For Expensify, assess review spending controls, audit trails, receipt requirements, and financial permissions against your real requirements and record any gaps during a representative pilot."
     },
     {
-      "name": "Core Strength",
-      "tool1": true,
-      "tool2": true
+      "name": "Implementation",
+      "tool1": "Validate employee-data migration and onboarding/offboarding steps",
+      "tool2": "Test sample expenses, approvals, reimbursements, and accounting handoff",
+      "tool1Detail": "For BambooHR, assess validate employee-data migration and onboarding/offboarding steps against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For Expensify, assess test sample expenses, approvals, reimbursements, and accounting handoff against your real requirements and record any gaps during a representative pilot."
+    },
+    {
+      "name": "Cost comparison",
+      "tool1": "Verify employee scope, modules, and service terms",
+      "tool2": "Verify current user/card plans, limits, add-ons, and billing terms",
+      "tool1Detail": "For BambooHR, assess verify employee scope, modules, and service terms against your real requirements and record any gaps during a representative pilot.",
+      "tool2Detail": "For Expensify, assess verify current user/card plans, limits, add-ons, and billing terms against your real requirements and record any gaps during a representative pilot."
     }
   ],
-  "verdict": "BambooHR (HR & People) and Expensify (Finance & Accounting) serve different primary purposes. BambooHR has a higher user rating, but the right choice depends on whether your priority is hr & people or finance & accounting capabilities.",
+  "verdict": "HR administration and expense management are distinct workflows. Some employee or organizational information may be shared, but the tools should be evaluated against separate requirements and data ownership. Compare current vendor terms, implementation effort, privacy/security requirements, integrations, data portability, and ongoing ownership before purchasing. This page does not claim an independently conducted benchmark or establish a universal winner.",
   "faqs": [
     {
-      "question": "What is the difference between BambooHR and Expensify?",
-      "answer": "BambooHR is a hr & people tool, while Expensify is a finance & accounting platform. They serve different primary functions but may overlap in certain areas."
+      "question": "What is the main difference between BambooHR and Expensify?",
+      "answer": "BambooHR focuses on employee records and HR processes; Expensify focuses on business expense reporting and reimbursement workflows. They are evaluated against different core workflows, so begin with the outcome your team needs."
     },
     {
       "question": "Can BambooHR replace Expensify?",
-      "answer": "Not directly — they serve different categories. Some organizations use both for different purposes."
+      "answer": "Do not assume so. List the capabilities and controls you currently rely on in Expensify, then test whether BambooHR can meet each requirement without creating operational or governance gaps."
     },
     {
-      "question": "Which has better value, BambooHR or Expensify?",
-      "answer": "BambooHR (Custom) and Expensify ($5-9/mo) have different pricing. Evaluate based on which category matters more for your workflows."
+      "question": "Can a team use BambooHR and Expensify together?",
+      "answer": "Potentially, if both workflows are needed. Define which product owns each step, what information should be shared, who controls access, and how errors or changes are handled."
+    },
+    {
+      "question": "How should I compare the costs?",
+      "answer": "Compare current vendor quotes for your actual scope, including seats or usage, required features, implementation, integrations, training, support, renewals, and staff time."
+    },
+    {
+      "question": "What should I test before deciding?",
+      "answer": "Use a representative task and realistic data. Record completion time, missing capabilities, administration effort, permissions, export options, and whether each product supports the workflow it is intended to serve."
     }
   ],
-  "lastUpdated": "2026-07-20",
+  "lastUpdated": "2026-10-24",
   "tool1Slug": "bamboohr",
   "tool2Slug": "expensify",
   "secondaryCategories": [
     "Finance & Accounting"
   ],
-  "published": false,
-  "publicationStatus": "draft",
-  "editorialReviewNote": "Temporarily withheld from publication because the paired products are not clear direct alternatives. Review search intent, category mapping, unique comparison evidence, and winner claims before republishing."
+  "published": true,
+  "winnerVerified": false,
+  "featuresVerified": false,
+  "decisionGuide": true
 }
