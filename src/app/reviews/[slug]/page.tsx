@@ -100,8 +100,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
     { label: "Scalability", weight: "5%" },
   ]
   const reviewVerdict = [
-    primaryPro ? `Consider ${tool.name} when this strength matters to your workflow: ${primaryPro.replace(/\\s+/g, " ").trim()}` : `Evaluate ${tool.name} against your required workflows and must-have capabilities before shortlisting it.`,
-    primaryCon ? `Main trade-off to validate: ${primaryCon.replace(/\\s+/g, " ").trim()}` : `Confirm the limitations, support terms, and plan restrictions that matter to your team before adopting it.`,
+    primaryPro ? `Consider ${tool.name} when this strength matters to your workflow: ${primaryPro.replace(/\s+/g, " ").trim()}` : `Evaluate ${tool.name} against your required workflows and must-have capabilities before shortlisting it.`,
+    primaryCon ? `Main trade-off to validate: ${primaryCon.replace(/\s+/g, " ").trim()}` : `Confirm the limitations, support terms, and plan restrictions that matter to your team before adopting it.`,
     `Final decision: test one representative task, check current official documentation and pricing, and compare total cost with at least one realistic alternative. ${hasEditorialRating ? "The editorial score is verified against the recorded methodology." : hasStoredEditorialRating ? "Any legacy numeric score is provisional until its evidence and calculation are audited." : "No numeric product score is asserted until an evidence-backed assessment is recorded."}`,
   ].join(" ")
   return (
@@ -456,7 +456,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                           <div key={dimension.label}>
                             <div className="flex items-center justify-between gap-3 text-xs mb-1">
                               <span className="text-foreground">{dimension.label}</span>
-                              <span className="text-muted-foreground">{recorded ? `${formatScore(recorded.score)}/5 · ${tool.ratingsVerified === true ? "verified" : "provisional"}` : `${dimension.weight} · Not assessed`}</span>
+                              <span className="text-muted-foreground">{recorded ? `${formatScore(recorded.score)}/5 · ${dimension.weight} weight · ${tool.ratingsVerified === true ? "verified" : "provisional"}` : `${dimension.weight} · Not assessed`}</span>
                             </div>
                             <div className="h-1.5 rounded-full bg-muted-bg overflow-hidden">
                               <div className={recorded ? "h-full rounded-full bg-primary" : "h-full rounded-full bg-muted-foreground/25"} style={{ width: recorded ? scoreWidth(recorded.score) : dimension.weight }} />
