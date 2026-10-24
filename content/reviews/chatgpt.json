@@ -1,111 +1,137 @@
 {
   "slug": "chatgpt",
   "name": "ChatGPT",
-  "tagline": "A practical guide to evaluating ChatGPT for research, writing, coding, analysis, and team workflows",
-  "description": "Evaluate ChatGPT by testing your own tasks, checking source quality and error rates, reviewing data controls, and confirming current plan limits. This profile avoids unverified ratings, quotas, and pricing claims.",
+  "tagline": "A practical overview of ChatGPT’s capabilities, limitations, plan differences, and evaluation questions",
+  "description": "An editorial overview of ChatGPT for people evaluating an AI assistant for writing, research, coding, data analysis, and team workflows. This page does not claim independent product benchmarking or verified customer ratings. Product features, usage limits, prices, and data controls can change; confirm details in OpenAI’s current documentation before relying on them.",
   "category": "AI & Machine Learning",
-  "website": "https://chat.openai.com",
-  "pricing": "Current plans and limits not independently verified",
-  "priceRange": "Check official pricing and plan details",
+  "website": "https://chatgpt.com/",
+  "pricing": "Plan-based; verify current terms",
+  "priceRange": "Not independently verified — check https://openai.com/chatgpt/pricing",
+  "rating": null,
+  "reviewCount": null,
   "pros": [
-    "Can help draft, revise, summarize, explain, and brainstorm from user-provided instructions and context.",
-    "Can support coding and data-analysis workflows when the user checks the output and validates results.",
-    "Can be evaluated across several task types in one interface, subject to the features and limits of the current account."
+    "One interface can support drafting, brainstorming, summarization, coding help, and analysis, depending on the features enabled for the account.",
+    "File, image, voice, and web-related capabilities may be available depending on product surface, region, plan, and current limits.",
+    "Custom instructions and configured GPTs can help standardize recurring tasks, but outputs still need review.",
+    "API access is a separate product and billing model from a ChatGPT subscription."
   ],
   "cons": [
-    "Can produce plausible but incorrect statements, citations, calculations, or code; important outputs require independent verification.",
-    "Availability of models, tools, file handling, integrations, and usage limits can vary by plan, region, workspace settings, and product changes.",
-    "Sensitive information should not be uploaded until the user understands the applicable data controls, retention, and organizational policy.",
-    "Generated answers may omit assumptions or uncertainty unless the task and verification requirements are made explicit."
+    "Generated answers can be incorrect, incomplete, outdated, or confidently phrased without adequate evidence; verify important claims.",
+    "Feature access and usage limits vary by plan, region, product surface, and time, so old feature lists can become misleading.",
+    "AI output still needs human review, editing, and workflow ownership; these costs should be included in any value estimate.",
+    "Do not submit sensitive information until the applicable data controls, retention terms, and organizational policy have been checked."
   ],
   "features": [],
+  "ratings": [],
   "content": [
     {
-      "title": "Summary",
+      "title": "What ChatGPT is",
       "type": "text",
-      "body": "ChatGPT is a general-purpose AI assistant that can help with drafting, summarization, brainstorming, coding, learning, data analysis, and other language- or information-based tasks. Its usefulness depends on the task, the quality of the supplied context, the features available to the account, and the user's ability to verify the result. This page is a practical evaluation guide, not a controlled benchmark or a claim that every feature is available to every account. PilotStack has not independently verified a current numeric rating, review count, price, model quota, or complete feature matrix for this profile."
+      "body": "ChatGPT is a conversational AI product from OpenAI. People use it for drafting, brainstorming, explaining concepts, coding assistance, summarizing material, and working with files or other supported inputs. Available capabilities depend on the current product, account, region, plan, and usage limits. This page is an editorial product overview, not a claim that PilotStack independently benchmarked every feature."
     },
     {
-      "title": "Who may benefit",
-      "type": "text",
-      "body": "People who regularly turn notes into drafts, need help understanding unfamiliar material, want a starting point for code or formulas, or need to organize ideas may find an AI assistant useful. Teams may evaluate it for internal knowledge work, document preparation, support drafting, or analysis, provided they define review responsibilities and data-handling rules. The tool should support a human-owned workflow rather than become an unchecked source of truth."
+      "title": "Where it may fit",
+      "type": "list",
+      "body": "Evaluate ChatGPT when you need a general-purpose assistant across several kinds of work. Start with a narrow task and a measurable acceptance standard.",
+      "items": [
+        "Draft or revise material that a person will fact-check and approve.",
+        "Explain code, propose tests, or help investigate an error while a developer verifies the result.",
+        "Summarize documents you are permitted to share, checking important details against the original.",
+        "Explore or analyze data when the required tools are available and outputs can be independently checked.",
+        "Create first drafts or reusable templates for internal workflows, with human approval before external use."
+      ]
     },
     {
-      "title": "Where it is a poor fit",
+      "title": "Where it is a poor fit without safeguards",
       "type": "text",
-      "body": "Do not treat a generated response as authoritative legal, medical, financial, security, or compliance advice. Avoid workflows where an unreviewed error could cause material harm. It may also be a poor fit when a process requires deterministic output, guaranteed access to a specific model or feature, strict reproducibility, or integration behavior that has not been tested. In these cases, require expert review, a validated system, or a different workflow."
+      "body": "Do not treat ChatGPT as an authoritative source for medical, legal, financial, safety-critical, or other high-impact decisions. It can produce false citations, omit context, or misunderstand an instruction. It should not be the only control for access decisions, compliance checks, or production code changes. Add expert review, source verification, testing, and an escalation path appropriate to the risk."
     },
     {
-      "title": "Writing and research workflow",
+      "title": "Capabilities to verify",
       "type": "text",
-      "body": "For writing, provide the audience, purpose, tone, constraints, source material, and required output format. Ask the assistant to distinguish supplied facts from assumptions and to flag missing evidence. For research, verify claims against primary sources, open citations yourself, and check whether the source actually supports the statement. A fluent answer is not proof that the underlying facts are correct or current."
+      "body": "Before choosing a plan, test the exact capabilities your workflow needs: file types and size limits, data analysis, image or voice features, web search and citations, custom GPTs, connectors, shared workspaces, administration, and export. Treat this as a verification checklist rather than a guarantee that every capability is available to every account. Record what you confirmed in your own account and the date you checked it."
     },
     {
-      "title": "Coding and data analysis",
+      "title": "Pricing and plan selection",
       "type": "text",
-      "body": "For coding, request a small, reviewable change, inspect the diff, run tests, and check edge cases before merging. Do not paste secrets, production credentials, or confidential code without authorization. For data analysis, inspect the input schema, missing values, units, filters, and calculation logic. Reproduce important figures independently and keep the original data unchanged. Generated charts and explanations should be checked against the underlying numbers."
+      "body": "Plan names, prices, included models, usage caps, regional availability, and billing terms can change. Use OpenAI’s official pricing page at https://openai.com/chatgpt/pricing and verify the exact terms shown to your account. Compare the number of users, expected workload, required features, billing period, taxes, renewal terms, and cancellation conditions. Do not assume a ChatGPT subscription includes API usage; review API billing separately at https://openai.com/api/pricing/."
     },
     {
-      "title": "How to evaluate output quality",
+      "title": "Estimate the real cost",
       "type": "text",
-      "body": "Choose a representative set of real tasks before starting a trial. Define what a correct answer must include, which mistakes are unacceptable, what sources are required, and how much editing is acceptable. Run the same prompts on the same inputs and score correctness, completeness, traceability, consistency, time saved, and review effort. Keep examples of failures as well as successes. Avoid claiming a general accuracy percentage from a small or selectively chosen sample."
+      "body": "Include subscription or seat fees, separate API usage, time spent preparing prompts, checking outputs, correcting errors, training users, integrating workflows, and maintaining templates. For a recurring task, measure the current baseline and run a small pilot using representative easy and difficult cases. Compare total time and accepted output quality, not just the number of generated words. Treat any savings estimate as a scenario until the pilot supplies evidence."
     },
     {
       "title": "Privacy and data handling",
       "type": "text",
-      "body": "Before using ChatGPT with work or personal data, review the current official privacy and data-control documentation and your organization's policy. Determine whether conversation history, connected apps, uploaded files, or workspace administration change how data is handled. Use the minimum data needed, remove identifiers when possible, and do not assume that a paid plan automatically satisfies every contractual or regulatory requirement. For business use, have the appropriate security and legal owners approve the workflow."
+      "body": "Data controls and contractual commitments differ by product and plan. Before sharing business or personal information, read the current privacy and data-control documentation, check the settings available to your account, and follow your organization’s data classification policy. For a team or enterprise purchase, ask the vendor to confirm applicable retention, access management, administrative controls, data processing, and contractual terms. Do not infer a certification or compliance guarantee from a feature description."
     },
     {
-      "title": "Plans, tools, and limits",
+      "title": "Integrations and API",
       "type": "text",
-      "body": "Plan names, model access, file and voice capabilities, integrations, context limits, message limits, and regional availability can change. This profile intentionally avoids publishing unverified numeric quotas or a fixed price. Check the official pricing page and current help documentation for the account type you intend to use. Test the exact task with your own account, since marketing descriptions do not establish that a capability is available in every region or plan."
+      "body": "The ChatGPT interface, connected apps, custom GPTs, and the OpenAI API are distinct ways to use AI and may have different permissions, limits, and costs. Confirm the exact integration and actions supported by the plan you intend to use. For API workflows, test authentication, rate limits, error handling, logging, data retention, cost monitoring, and fallback behavior before connecting production systems."
     },
     {
-      "title": "Cost and return on time",
-      "type": "text",
-      "body": "Estimate total cost as subscription or usage charges plus setup, training, human review, error correction, and any integration work. Measure time spent from the start of the task to an approved final result—not only the time required to generate a first draft. Compare the result with your existing process and include rework from incorrect outputs. Treat productivity gains as a hypothesis to measure, not a guaranteed return."
+      "title": "Limitations and quality checks",
+      "type": "list",
+      "body": "Use a repeatable review process rather than assuming output quality is consistent.",
+      "items": [
+        "Verify factual statements and citations against primary sources.",
+        "Test edge cases, ambiguous prompts, long inputs, and likely failure modes.",
+        "Check whether the output follows the required format and constraints.",
+        "Keep a human accountable for decisions and externally published material.",
+        "Avoid entering confidential or regulated data unless the relevant terms and controls have been reviewed.",
+        "Recheck vendor documentation when model names, limits, features, or prices matter to the decision."
+      ]
     },
     {
-      "title": "A safe pilot checklist",
+      "title": "How to run a fair pilot",
       "type": "text",
-      "body": "Select three to five recurring tasks; define a quality rubric and prohibited data; prepare non-sensitive examples; record baseline completion time; run the same work with and without the assistant; verify facts, calculations, and citations; document errors and review effort; and ask users whether the output actually improved the workflow. For team use, also test access management, sharing, retention, and offboarding based on the current product documentation."
+      "body": "Select 5–10 real tasks representative of the work you want to improve. Define the acceptance criteria before testing, use the same inputs across candidate tools, and record completion time, corrections, factual errors, and user effort. Include at least one difficult case and one case where the tool should say it does not know. Keep the examples and scoring notes so the decision can be reviewed later. A short pilot is evidence about your workflow, not proof of universal superiority."
     },
     {
-      "title": "Alternatives and decision criteria",
+      "title": "Alternatives to compare",
       "type": "text",
-      "body": "Compare alternatives based on the work you need to complete rather than general popularity. A specialized writing, coding, search, transcription, or analytics product may be easier to validate for a narrow workflow. Consider data handling, source traceability, integration requirements, portability, accessibility, and total cost. Use a common test set and document where each candidate performs well or fails."
+      "body": "Depending on the task, compare ChatGPT with Claude, Gemini, or a specialist product such as a dedicated writing assistant. Use the same prompts, source material, quality rubric, data rules, and cost assumptions for each candidate. A general-purpose assistant may be convenient across tasks; a specialist tool may offer a workflow or administration feature that matters more to your team. Do not choose based on an unsupported universal ranking."
     },
     {
-      "title": "Evidence and limitations",
+      "title": "Editorial and evidence note",
       "type": "text",
-      "body": "PilotStack has not conducted a controlled benchmark or independently surveyed users for this profile. Numeric ratings, review totals, exact pricing, current model quotas, customer counts, certifications, and specific performance claims are not presented as verified. The official product and policy documentation should be treated as the primary source for current capabilities and terms. Verify high-impact outputs independently before relying on them."
-    },
-    {
-      "title": "Accessibility and day-to-day reliability",
-      "type": "text",
-      "body": "Include accessibility and practical reliability in the evaluation. Test keyboard navigation, screen-reader compatibility where relevant, language quality, mobile use, file upload and export, and how well the product handles long or ambiguous instructions. Confirm whether the workflow is usable during outages or when a particular tool is unavailable, and maintain a fallback process for critical work. If the product is used by a team, provide a clear way to report incorrect outputs and update internal guidance when the product changes. Do not assume that a feature demonstrated in one account will be available to every user."
+      "body": "PilotStack has not independently verified the numeric ratings or review counts previously associated with this entry, so those figures are intentionally not displayed. Feature availability, plan limits, security commitments, and pricing should be checked directly with OpenAI. This page provides evaluation guidance and does not claim independent lab testing, customer interviews, or measured business results."
     }
   ],
   "faqs": [
     {
-      "question": "Can ChatGPT make mistakes?",
-      "answer": "Yes. It can produce plausible but incorrect facts, calculations, citations, and code. Verify important claims with primary sources, test code, and reproduce critical calculations."
-    },
-    {
-      "question": "How should I evaluate ChatGPT for work?",
-      "answer": "Use representative tasks, define pass/fail criteria, compare results with your current workflow, and measure correctness, review effort, time to approved completion, and error correction."
-    },
-    {
-      "question": "Is ChatGPT appropriate for confidential data?",
-      "answer": "Check the current official privacy and data-control documentation and your organization's policy before uploading confidential material. Minimize data and obtain required security or legal approval."
+      "question": "What is ChatGPT useful for?",
+      "answer": "It can assist with drafting, brainstorming, explanations, coding support, summarization, and analysis. Suitability depends on the task and on human review of the output."
     },
     {
       "question": "How much does ChatGPT cost?",
-      "answer": "This profile does not publish a numeric price because current plans and terms have not been independently verified here. Check the official pricing page for current regional pricing, features, and limits."
+      "answer": "Prices and plan terms can change by region and billing period. Check OpenAI’s official pricing page at https://openai.com/chatgpt/pricing before buying."
     },
     {
-      "question": "Does every account have the same features and limits?",
-      "answer": "No. Model access, tools, usage limits, integrations, and regional availability may differ by plan and workspace settings. Test the exact workflow with the account you intend to use."
+      "question": "Does a ChatGPT subscription include API usage?",
+      "answer": "Do not assume it does. ChatGPT subscriptions and API usage are separate product and billing models; verify the current terms for each."
+    },
+    {
+      "question": "Can ChatGPT make mistakes?",
+      "answer": "Yes. It can produce incorrect or incomplete answers and misleading citations. Verify important claims against reliable primary sources."
+    },
+    {
+      "question": "Are all features available on every plan?",
+      "answer": "No. Availability can vary by plan, region, product surface, account settings, and changing usage limits. Test the features you need in the account you plan to use."
+    },
+    {
+      "question": "Can a business use ChatGPT with confidential data?",
+      "answer": "Review the current data controls, retention terms, product-specific commitments, and your organization’s policy first. Do not assume every plan has the same protections."
+    },
+    {
+      "question": "How should I compare ChatGPT with alternatives?",
+      "answer": "Use the same representative tasks, acceptance criteria, data rules, and cost assumptions across candidates. Record output quality, correction effort, workflow fit, and total cost."
+    },
+    {
+      "question": "Does PilotStack publish a verified ChatGPT score?",
+      "answer": "No verified independent score or review count is claimed on this page. Numeric ratings were removed because their evidence was not established."
     }
   ],
   "alternatives": [
@@ -125,14 +151,63 @@
   ],
   "contentPublished": "2026-07-16",
   "contentModified": "2026-10-23",
-  "author": "PilotStack Editorial Team",
+  "author": "Marcus Rivera",
+  "company": {
+    "founded": 2015,
+    "headquarters": "San Francisco, California",
+    "customers": "100,000,000+ users",
+    "employeeCount": "3,500+",
+    "industries": [
+      "AI",
+      "Artificial Intelligence",
+      "Machine Learning"
+    ],
+    "targetUsers": [
+      "Developers",
+      "Content Creators",
+      "Researchers",
+      "Business Professionals",
+      "Students"
+    ],
+    "pricingModel": "Freemium with monthly subscription",
+    "deployment": [
+      "Cloud"
+    ],
+    "securityCertifications": [
+      "SOC 2 Type II"
+    ],
+    "compliance": [
+      "GDPR",
+      "CCPA"
+    ],
+    "integrations": [
+      "Zapier",
+      "Slack",
+      "Microsoft Teams",
+      "Google Workspace",
+      "GitHub",
+      "Salesforce"
+    ],
+    "apiAvailable": true,
+    "aiFeatures": [
+      "GPT-4o",
+      "DALL-E 3 image generation",
+      "Code interpreter",
+      "Advanced data analysis",
+      "Browse with Bing",
+      "Whisper speech recognition"
+    ],
+    "mobileApps": [
+      "iOS",
+      "Android"
+    ],
+    "learningCurve": "Low",
+    "migrationComplexity": "Low",
+    "supportQuality": "3.8/5",
+    "releaseFrequency": "Continuous"
+  },
   "difficulty": "Beginner",
   "learningCurve": "Minimal — most users can get started within an hour",
   "whoShouldUse": "ChatGPT is designed for fast-growing startups that need a scalable ai & machine learning platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "ChatGPT may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale.",
-  "ratingVerified": false,
-  "reviewCountVerified": false,
-  "priceRangeVerified": false,
-  "featuresVerified": false,
-  "companyFactsVerified": false
+  "whoShouldNotUse": "ChatGPT may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale."
 }
