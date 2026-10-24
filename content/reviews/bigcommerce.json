@@ -46,6 +46,21 @@
       "title": "Total cost and fit",
       "body": "Include the platform plan, payment processing, apps, theme work, integrations, migration, training, support and ongoing merchandising. Ask for a dated quote and validate the full order workflow before choosing.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Run a sample product through catalog setup, mobile browsing, cart, checkout, payment, fulfillment, cancellation and refund. Verify that order and inventory state remain consistent in connected systems. Record any required app, custom code or manual step.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and migration",
+      "body": "Test a failed payment, an out-of-stock item, a duplicate webhook and a product with several variants. Export a sample of catalog and order data and verify that the business can read it independently. Keep the existing storefront available until critical order flows pass.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document regional availability, payment and shipping requirements, integrations, catalog complexity, performance, operational ownership and exit options. Ask for a dated quote including apps, theme work, migration and support. Verify tax and payment behavior for the target markets.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -125,7 +140,7 @@
     "supportQuality": "3.9/5",
     "releaseFrequency": "Monthly"
   },
-  "wordCount": 171,
+  "wordCount": 287,
   "difficulty": "Intermediate",
   "learningCurve": "Moderate — expect 1-3 days to become productive",
   "whoShouldUse": "BigCommerce is best suited for enterprises and power users who need advanced finance & accounting capabilities. Teams with dedicated IT support will get the most from its extensive feature set.",
