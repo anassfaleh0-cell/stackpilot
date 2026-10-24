@@ -1,202 +1,69 @@
 {
   "slug": "salesforce",
   "name": "Salesforce",
-  "tagline": "Configurable CRM workflows, customer records, and business applications",
-  "description": "Salesforce provides CRM and related business applications that organizations can configure for sales, service, marketing, analytics, and other workflows. This buyer guide focuses on process fit, data governance, customization, integrations, implementation effort, and total cost. Numeric scores, third-party review counts, current prices, market-share claims, customer counts, and feature entitlements are not independently verified in this profile.",
+  "tagline": "A configurable CRM platform to evaluate for customer processes, reporting and cross-team workflows.",
+  "description": "Salesforce is a CRM platform to evaluate when customer processes require structured records, automation and cross-team reporting. The fit depends on the products and edition selected, data governance, implementation capacity and integration needs; current prices and ratings are not verified here.",
   "category": "CRM & Sales",
   "website": "https://salesforce.com",
   "pricing": "Not independently verified",
-  "priceRange": "Current pricing not independently verified; check official vendor terms.",
+  "priceRange": "Not independently verified",
   "rating": null,
-  "reviewCount": null,
+  "reviewCount": 0,
   "pros": [
-    "A configurable CRM can bring customer records and process handoffs into a shared system when ownership and data definitions are clear.",
-    "Workflow automation and reporting can be evaluated against specific operational requirements rather than generic feature lists.",
-    "The platform's flexibility may support different departments, but only when configuration, governance, and ongoing administration are resourced."
+    "A documented sales workflow can be mapped to records, stages and ownership rules.",
+    "Complex reporting and automation requirements can be tested before a wider rollout.",
+    "A pilot helps reveal data governance and implementation work."
   ],
   "cons": [
-    "Implementation, customization, integrations, migration, training, and ongoing administration can materially increase total cost.",
-    "Complex configuration needs governance and skilled ownership; otherwise fields, automations, permissions, and reports can become difficult to maintain.",
-    "Product and edition packaging changes; verify the exact capabilities, security commitments, and contract terms before relying on them."
+    "Configuration and ongoing administration can be substantial for complex deployments.",
+    "Different products and editions should not be treated as interchangeable.",
+    "Migration, integration and renewal scope need written confirmation."
   ],
-  "features": [
-    {
-      "name": "Data model and CRM workflow",
-      "description": "Map the records, stages, ownership rules, and handoffs your team actually uses. Build a small test workflow and check whether standard objects cover the need before adding custom fields or objects.",
-      "available": null,
-      "category": "Buyer Evaluation"
-    },
-    {
-      "name": "Customization and administration",
-      "description": "Test the proposed configuration with an administrator and a frontline user. Record which changes require specialist skills, code, managed packages, or governance review, and define who will own the configuration over time.",
-      "available": null,
-      "category": "Buyer Evaluation"
-    },
-    {
-      "name": "Sales and service workflows",
-      "description": "Use sample records to test lead or case assignment, queues, approvals, escalations, activity history, and reporting. Confirm which capabilities belong to the exact products and editions under consideration.",
-      "available": null,
-      "category": "Buyer Evaluation"
-    },
-    {
-      "name": "Automation and AI features",
-      "description": "Identify each proposed automation or AI use case, its data inputs, human review step, failure behavior, and required subscription. Test with representative data and do not assume that a named feature is included in every edition.",
-      "available": null,
-      "category": "Buyer Evaluation"
-    },
-    {
-      "name": "Integrations and migration",
-      "description": "Inventory source systems, record volumes, attachments, history, identity rules, and required integrations. Test a representative migration and reconciliation before scheduling a full cutover; plan for duplicates, rollback, and data ownership.",
-      "available": null,
-      "category": "Buyer Evaluation"
-    },
-    {
-      "name": "Security and governance",
-      "description": "Verify identity controls, roles, permission sets, audit history, retention, export, data residency, and contractual commitments against current vendor documentation. Certification or compliance suitability must be confirmed for the exact service and configuration.",
-      "available": null,
-      "category": "Buyer Evaluation"
-    },
-    {
-      "name": "Implementation and adoption",
-      "description": "Estimate configuration, data cleanup, integration, training, testing, support, and change-management work. Define a named owner for each workstream and pilot with real users before rolling out to every department.",
-      "available": null,
-      "category": "Buyer Evaluation"
-    },
-    {
-      "name": "Pricing and total cost",
-      "description": "Current prices and edition entitlements are not independently verified in this profile. Obtain a written quote for required clouds, seats, add-ons, storage, support, implementation, and contract terms. Include specialist administration and ongoing customization in the cost model.",
-      "available": null,
-      "category": "Buyer Evaluation"
-    }
-  ],
+  "features": [],
   "ratings": [],
   "content": [
     {
-      "title": "Summary",
-      "type": "text",
-      "body": "Salesforce provides CRM and related business applications that organizations can configure for sales, service, marketing, analytics, and other workflows. This buyer guide focuses on process fit, data governance, customization, integrations, implementation effort, and total cost. Numeric scores, third-party review counts, current prices, market-share claims, customer counts, and feature entitlements are not independently verified in this profile."
+      "title": "Define the customer process",
+      "body": "Map the process from lead or enquiry through qualification, opportunity, close and handoff. Include renewals or service if required. Decide which system owns each record and which fields are mandatory before configuring the CRM.",
+      "type": "text"
     },
     {
-      "title": "Who should evaluate it",
-      "type": "text",
-      "body": "Consider Salesforce if multiple teams need shared customer records and structured workflows across sales, service, or other business functions. Start with the process and data model, not the feature catalog. Smaller teams with simple pipelines should compare implementation and administration overhead with lighter CRM options."
+      "title": "Configuration and governance",
+      "body": "Test a small set of record types, stages, permissions and automations. Assign owners for changes and establish a review process for fields and rules. Over-customization can create maintenance work and confusing user experiences.",
+      "type": "text"
     },
     {
-      "title": "Run a representative pilot",
-      "type": "text",
-      "body": "Select one real workflow and a representative sample of records. Test record creation, ownership, handoffs, permissions, reporting, integrations, and error recovery with both an administrator and a frontline user. Document what works without customization, what requires specialist effort, and what must be validated before rollout."
+      "title": "Data quality and reporting",
+      "body": "Import a controlled sample and test deduplication, ownership, required fields and history. Build the forecast or pipeline report the business actually uses and document definitions. Check that reports remain consistent after a stage or ownership change.",
+      "type": "text"
     },
     {
-      "title": "Workflow and data quality",
-      "type": "text",
-      "body": "Define data ownership, naming conventions, required fields, access rules, retention, and duplicate handling before importing records. Test integrations and automations with missing values and failure scenarios. Establish who can change the schema or publish reports, and how changes will be reviewed and rolled back."
+      "title": "Integration and access",
+      "body": "List the systems that must exchange customer, product, billing or support data. Test failed syncs and duplicate updates. Review role permissions, audit history, export and offboarding before loading sensitive customer information.",
+      "type": "text"
     },
     {
-      "title": "Implementation and adoption",
-      "type": "text",
-      "body": "Plan for discovery, data cleanup, configuration, integrations, testing, training, and change management. Estimate internal and external specialist time, not only subscription cost. Pilot with representative users and agree on success criteria before expanding the system to additional teams."
-    },
-    {
-      "title": "Security, privacy, and governance",
-      "type": "text",
-      "body": "Verify authentication, roles, permissions, audit history, retention, export, data residency, and contractual terms for the exact products and configuration. Ask the vendor for current evidence relevant to your requirements and have the responsible security or privacy owner review it. Do not assume a certification or feature applies to every edition."
-    },
-    {
-      "title": "Pricing and total cost",
-      "type": "text",
-      "body": "Current pricing and edition entitlements are not independently verified in this profile. Obtain a written quote for required products, seats, add-ons, storage, support, implementation, and contract terms. Include specialist administration, customization, integrations, and ongoing training in the total-cost comparison."
-    },
-    {
-      "title": "Alternatives and decision rule",
-      "type": "text",
-      "body": "Compare Salesforce with alternatives using the same records, workflow, permission model, integrations, and reporting requirements. Prefer the system that meets must-have requirements with acceptable implementation risk and sustainable operating cost. A long feature list is not a substitute for a working pilot."
-    },
-    {
-      "title": "Evidence and limitations",
-      "type": "text",
-      "body": "PilotStack has not documented a controlled benchmark or a current auditable source trail for this profile's numeric rating, third-party review count, exact current price, market-share or customer-count claims, and every feature entitlement. These are omitted or left for direct vendor verification. This page is buyer guidance, not a claim of independent user sentiment or verified outcomes."
+      "title": "Implementation and cost",
+      "body": "Request a scoped proposal that separates licenses, implementation, integration, training, support and ongoing administration. Confirm renewal, cancellation and data export terms in writing; current prices and plan limits are not independently verified here.",
+      "type": "text"
     }
   ],
   "faqs": [
     {
-      "question": "What is Salesforce best used for?",
-      "answer": "Salesforce is best used for managing complex B2B sales cycles with multiple stakeholders, approval chains, and territory routing. It also excels as a central customer service platform with omnichannel case management, knowledge bases, and AI-powered deflection. Organizations with dedicated CRM teams who need deep customization, custom objects, and integration with legacy enterprise systems will get the most from the platform."
+      "question": "Who should evaluate Salesforce?",
+      "answer": "Evaluate Salesforce when its primary workflow matches a documented requirement. Run a representative pilot and verify current capabilities, limits and contract terms directly with the vendor."
     },
     {
-      "question": "How much does Salesforce cost?",
-      "answer": "Sales Cloud pricing starts at $25 per user per month for the Starter plan (basic CRM) and scales to $300+ per user per month for the Unlimited plan with premium AI and analytics. Service Cloud starts similarly at $25/user/month. Marketing Cloud is priced separately starting around $400/month flat plus per-contact fees. Enterprise and Unlimited tiers require annual contracts and are typically negotiated with sales representatives."
+      "question": "Are prices and ratings independently verified here?",
+      "answer": "No. This review does not present an independently verified price or third-party rating. Check current official documentation and obtain a dated quote."
     },
     {
-      "question": "Does Salesforce integrate with other tools?",
-      "answer": "Salesforce integrates with thousands of business applications through the AppExchange marketplace. Native integrations include Outlook, Gmail, Slack, DocuSign, QuickBooks, Mailchimp, and LinkedIn Sales Navigator. MuleSoft provides enterprise-grade integration with SAP, Oracle, and legacy on-premise databases. The open API platform means virtually any modern SaaS tool has a pre-built Salesforce connector."
+      "question": "What should a pilot include?",
+      "answer": "Test the main workflow, one failure case, permissions, integrations, export and offboarding. Record pass, partial pass, fail or unknown and assign an owner to every unresolved requirement."
     },
     {
-      "question": "Is Salesforce suitable for small teams?",
-      "answer": "Generally no — the complexity, cost, and administrative overhead make Salesforce a poor fit for small teams. The Starter plan at $25/user/month is affordable but still requires setup effort. Micro-businesses and startups are better served by HubSpot's free CRM, Pipedrive, or Freshsales, which offer intuitive interfaces and faster time-to-value without dedicated admin staff."
-    },
-    {
-      "question": "How long does implementation take and what are the training costs?",
-      "answer": "A basic Salesforce deployment for 25 users takes 4-8 weeks with a certified partner. Mid-market deployments (100-500 users) require 3-6 months. Enterprise deployments can take 6-18 months. Training costs range from $500-1,500 per user for formal programs. Trailhead, Salesforce's free learning platform, offers 1,500+ modules for self-paced training, though structured programs with manager accountability achieve significantly higher completion rates than self-directed learning."
-    },
-    {
-      "question": "What are AppExchange apps and do I need them?",
-      "answer": "The AppExchange is Salesforce's marketplace with 5,000+ pre-built applications and components that extend native functionality. Popular apps include DocuSign (e-signatures), Conga (document generation), Mailchimp (email marketing), and LinkedIn Sales Navigator (social selling). Most organizations install 5-15 AppExchange apps to address gaps in standard Salesforce functionality. Apps are rated, reviewed, and security-reviewed by Salesforce, reducing integration risk compared to custom development."
-    },
-    {
-      "question": "What are the data storage limits in Salesforce?",
-      "answer": "Salesforce allocates 10 GB of data storage per org for Enterprise edition, plus 100 MB per user license. File storage (attachments, documents, images) starts at 12 GB per org plus 2 GB per user. Additional storage can be purchased in bundles starting at $500/year for 1 GB of data storage or $10/month per GB of file storage. Exceeding limits can block record creation, so monitoring storage usage through the Setup storage dashboard is essential."
-    },
-    {
-      "question": "What are the API call limits?",
-      "answer": "Salesforce enforces daily API call limits based on edition: Professional (15,000 per user per day), Enterprise (100,000 per 24-hour period for the entire org), and Unlimited (1,000,000 per 24-hour period). Exceeding limits results in API throttling or temporary blocks. Organizations with heavy integration workloads should monitor API usage via the API Usage dashboard and consider purchasing additional API call bundles if needed."
-    },
-    {
-      "question": "What are sandbox environments used for?",
-      "answer": "Sandboxes are isolated copies of your Salesforce org used for development, testing, and training. Developer sandboxes (free, 200 MB) work for individual development. Developer Pro ($2,500/year, 1 GB) supports team development. Partial Copy sandboxes ($5,000/year, 5 GB with sample data) are used for integration testing. Full sandboxes ($20,000/year, full data copy) replicate production for performance testing and user acceptance testing. Sandboxes are essential for safe configuration and custom development without risking production data."
-    },
-    {
-      "question": "How do permission sets work?",
-      "answer": "Permission sets extend a user's functional access beyond their profile without changing the profile itself. For example, a Sales Rep profile grants standard opportunity editing, while a \"Discount Authority\" permission set adds the ability to apply discounts above 15%. Permission sets can be assigned to multiple users and combined, allowing flexible access control without creating dozens of profiles. Permission set groups bundle multiple permission sets for role-based assignment efficiency."
-    },
-    {
-      "question": "Can I build workflow automation without coding?",
-      "answer": "Yes — Salesforce Flow provides a drag-and-drop automation builder for creating complex workflows without Apex code. Flows can automate lead assignment, email alerts, field updates, record creation, approval requests, and integration callouts. Flow templates cover common patterns like account scoring, case escalation, and opportunity stage transitions. Approximately 80% of common automation requirements can be met with declarative tools, leaving complex logic for Apex development."
-    },
-    {
-      "question": "What is Einstein AI and how does it work?",
-      "answer": "Einstein AI is Salesforce's embedded artificial intelligence layer that analyzes your org's data to deliver predictions and recommendations. Key features include predictive lead scoring (ranks leads by conversion likelihood), opportunity insights (identifies deals at risk of stalling), activity capture (automatically logs emails and meetings), and email sentiment analysis. Einstein is trained on each customer's unique data — no external data leaves the org. It is included in Unlimited edition or available as an add-on for Enterprise."
-    },
-    {
-      "question": "Can I use Salesforce offline on the mobile app?",
-      "answer": "Yes — the Salesforce mobile app supports offline access for recently viewed records, including accounts, contacts, leads, opportunities, and cases. Users can view, edit, and create records offline, with changes syncing automatically when connectivity is restored. Offline file access and approval actions are also supported. Admins configure which objects and fields are available offline through mobile security policies. The offline cache stores approximately 2,000 records per device."
-    },
-    {
-      "question": "What reporting and dashboard capabilities are included?",
-      "answer": "Salesforce offers four report formats: tabular (simple lists), summary (grouped with subtotals), matrix (cross-tabulation), and joined (multi-object reports). Reports can be scheduled, filtered with relative date ranges, and exported to Excel or CSV. Dashboards display up to 20 components each with chart types including bar, line, pie, funnel, and gauge. Dynamic dashboards show data based on the viewing user's role. Einstein Analytics (Tableau CRM) extends reporting with AI-powered insights, natural language queries, and data volumes up to 10 billion rows."
-    },
-    {
-      "question": "How does Salesforce forecasting work?",
-      "answer": "Salesforce forecasting aggregates opportunity amounts by owner, role hierarchy, and time period to project future revenue. Forecast categories include Commit (deals the rep is confident will close) and Best Case (deals with high probability). Managers can adjust forecasts at each level, and forecast roll-ups follow the role hierarchy. Forecast accuracy reports compare projected versus actual closed revenue. Einstein Forecasting uses AI to predict close probabilities based on historical patterns, achieving reported accuracy of 85-92% in mature implementations."
-    },
-    {
-      "question": "How does lead scoring work in Salesforce?",
-      "answer": "Salesforce offers two lead scoring approaches. Einstein Lead Scoring automatically analyzes historical conversion data to identify patterns and assigns a 0-100 score to every lead — no manual rules required. Standard lead scoring allows admins to configure point-based rules (e.g., +10 points for title contains \"VP\", +5 points for industry = Technology). Scores appear on lead records and can trigger automated actions like assignment to senior reps when scores exceed thresholds."
-    },
-    {
-      "question": "How does email integration and calendar sync work?",
-      "answer": "Salesforce integrates with Outlook (Windows and Mac) and Gmail through the Salesforce Inbox and Email Connection tools. Emails and calendar events sync bidirectionally, with emails automatically linked to the associated contact and opportunity records. Email tracking logs opens and clicks, and templates enable one-click responses. Calendar sync ensures meetings appear on Salesforce activity timelines. The Einstein Activity Capture tool automatically logs emails and events without requiring users to manually BCC Salesforce or install plugins."
-    },
-    {
-      "question": "Does Salesforce integrate with social media?",
-      "answer": "Yes — Social Studio (part of Marketing Cloud) monitors and manages social media engagement across Facebook, X/Twitter, LinkedIn, Instagram, and YouTube. It enables social listening, publishing, and engagement tracking. Service Cloud can create cases from social media mentions and posts. LinkedIn Sales Navigator integrates directly with Sales Cloud, displaying LinkedIn profile data and relationship information on lead and contact records. Social media engagement metrics can be tracked in campaign reports."
-    },
-    {
-      "question": "Can I create a partner portal or customer community?",
-      "answer": "Yes — Salesforce Experience Cloud (formerly Community Cloud) enables branded portals for partners, customers, and employees. Partner portals provide deal registration, lead distribution, co-branded materials, and performance dashboards. Customer communities offer self-service knowledge bases, case submission, and peer discussion forums. Communities integrate with the core CRM data model, so community activity feeds into account and contact records. Experience Cloud starts at $5,000/month per community."
-    },
-    {
-      "question": "How do I export data from Salesforce and what are the contract terms?",
-      "answer": "Data can be exported through the Data Export Service (weekly or monthly automated exports of all objects), the built-in Reports export (Excel or CSV), or third-party tools like Dataloader.io and DemandTools. Enterprise and Unlimited editions include weekly automated exports. Salesforce contracts are annual with automatic renewal clauses. Contract terms include 30-day cancellation windows typically 60-90 days before renewal date. Early termination fees may apply. Price escalations of 3-5% at renewal are standard but negotiable for multi-year commitments."
+      "question": "How should total cost be compared?",
+      "answer": "Include licenses, usage, implementation, migration, training, integrations, support, internal administration and renewal terms—not only the headline subscription."
     }
   ],
   "alternatives": [
@@ -214,7 +81,7 @@
     "saas-pricing-report-2026"
   ],
   "contentPublished": "2026-07-16",
-  "contentModified": "2026-09-21",
+  "contentModified": "2026-10-24",
   "author": "Sarah Chen",
   "company": {
     "founded": 1999,
@@ -290,5 +157,7 @@
   "ratingsVerified": false,
   "priceRangeVerified": false,
   "companyFactsVerified": false,
-  "reviewCountVerified": false
+  "reviewCountVerified": false,
+  "featuresVerified": false,
+  "wordCount": 167
 }
