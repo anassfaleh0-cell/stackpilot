@@ -2,7 +2,7 @@
   "slug": "confluence",
   "name": "Confluence",
   "tagline": "A team knowledge and documentation workspace to evaluate for durable, searchable operational knowledge.",
-  "description": "Confluence is a team documentation workspace to evaluate for shared knowledge, project context and internal procedures. Fit depends on information architecture, permissions, search, integrations, content lifecycle and how the team keeps documentation current.",
+  "description": "Confluence supports team documentation and shared knowledge; current plan details and independent ratings are not verified here.",
   "category": "Productivity",
   "website": "https://www.atlassian.com/software/confluence",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "Structured spaces and pages can give teams a shared place for decisions and procedures.",
     "A realistic search task can test whether employees can find trusted information.",
-    "Templates and ownership rules can support repeatable documentation."
+    "Templates and ownership rules can support repeatable documentation.",
+    "A search test can reveal whether staff find trusted current information.",
+    "Page ownership and review dates can reduce stale instructions."
   ],
   "cons": [
     "Documentation becomes stale without clear owners and review dates.",
     "Permissions and external sharing require careful governance.",
     "Migration and export need to preserve links, attachments and page context."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Core workflow",
+      "available": false,
+      "description": "Confluence: evaluate core workflow with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Collaboration",
+      "available": false,
+      "description": "Confluence: evaluate collaboration with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Search and retrieval",
+      "available": false,
+      "description": "Confluence: evaluate search and retrieval with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Permissions",
+      "available": false,
+      "description": "Confluence: evaluate permissions with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Calendar or task sync",
+      "available": false,
+      "description": "Confluence: evaluate calendar or task sync with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Automation",
+      "available": false,
+      "description": "Confluence: evaluate automation with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Data export",
+      "available": false,
+      "description": "Confluence: evaluate data export with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Administration",
+      "available": false,
+      "description": "Confluence: evaluate administration with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -66,19 +109,23 @@
   "faqs": [
     {
       "question": "Who should evaluate Confluence?",
-      "answer": "Evaluate Confluence when its primary workflow matches a documented requirement. Run a representative pilot and verify current capabilities, limits and contract terms directly with the vendor."
+      "answer": "Evaluate Confluence when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Are prices and ratings independently verified here?",
-      "answer": "No. This review does not present an independently verified price or third-party rating. Check current official documentation and obtain a dated quote."
+      "question": "How should a team test Confluence?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "What should a pilot include?",
-      "answer": "Test the main workflow, one failure case, permissions, integrations, export and offboarding. Record pass, partial pass, fail or unknown and assign an owner to every unresolved requirement."
+      "question": "Which limitations should be checked in Confluence?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "How should total cost be compared?",
-      "answer": "Include licenses, usage, implementation, migration, training, integrations, support, internal administration and renewal terms—not only the headline subscription."
+      "question": "Are Confluence prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting Confluence?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [
