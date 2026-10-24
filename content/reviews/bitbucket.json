@@ -2,7 +2,7 @@
   "slug": "bitbucket",
   "name": "Bitbucket",
   "tagline": "Git repository hosting and code collaboration to evaluate within a team's development workflow.",
-  "description": "Bitbucket is a Git collaboration platform to evaluate for repository hosting, code review and CI/CD workflows. Fit depends on the team's branching model, access controls, integrations, pipeline requirements and operational governance; current plan limits should be verified directly.",
+  "description": "Bitbucket supports Git repository collaboration and code review; current plan details and independent ratings are not verified here.",
   "category": "Developer Tools",
   "website": "https://bitbucket.org",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "A repository pilot can validate pull-request and branch-protection workflows.",
     "Code ownership and review rules can be made explicit in the team's process.",
-    "Integration behavior can be tested before moving production repositories."
+    "Integration behavior can be tested before moving production repositories.",
+    "A sample repository migration can expose missing metadata before cutover.",
+    "A deliberately failing build can test branch protection and release safety."
   ],
   "cons": [
     "Repository hosting alone does not replace deployment, artifact or observability design.",
     "Permissions and branch rules require careful configuration.",
     "Migration must preserve repository history, references and access rules."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Core development workflow",
+      "available": false,
+      "description": "Bitbucket: evaluate core development workflow with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Access and permissions",
+      "available": false,
+      "description": "Bitbucket: evaluate access and permissions with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "CI or runtime fit",
+      "available": false,
+      "description": "Bitbucket: evaluate ci or runtime fit with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Security controls",
+      "available": false,
+      "description": "Bitbucket: evaluate security controls with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Failure handling",
+      "available": false,
+      "description": "Bitbucket: evaluate failure handling with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Monitoring",
+      "available": false,
+      "description": "Bitbucket: evaluate monitoring with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Integrations",
+      "available": false,
+      "description": "Bitbucket: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Export and portability",
+      "available": false,
+      "description": "Bitbucket: evaluate export and portability with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -66,19 +109,23 @@
   "faqs": [
     {
       "question": "Who should evaluate Bitbucket?",
-      "answer": "Evaluate Bitbucket when its primary workflow matches a documented requirement. Run a representative pilot and verify current capabilities, limits and contract terms directly with the vendor."
+      "answer": "Evaluate Bitbucket when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Are prices and ratings independently verified here?",
-      "answer": "No. This review does not present an independently verified price or third-party rating. Check current official documentation and obtain a dated quote."
+      "question": "How should a team test Bitbucket?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "What should a pilot include?",
-      "answer": "Test the main workflow, one failure case, permissions, integrations, export and offboarding. Record pass, partial pass, fail or unknown and assign an owner to every unresolved requirement."
+      "question": "Which limitations should be checked in Bitbucket?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "How should total cost be compared?",
-      "answer": "Include licenses, usage, implementation, migration, training, integrations, support, internal administration and renewal terms—not only the headline subscription."
+      "question": "Are Bitbucket prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting Bitbucket?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [],
