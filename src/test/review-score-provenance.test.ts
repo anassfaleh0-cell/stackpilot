@@ -78,5 +78,14 @@ describe("review score provenance", () => {
     expect(home).toContain('getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug))')
     expect(home).toContain('getAllResearch().filter((item) => isContentAvailable("research", item.slug))')
   })
+  it("does not render missing score dimensions as partially filled score bars", () => {
+    const source = fs.readFileSync(REVIEW_PAGE, "utf8")
+
+    // The rubric weight is metadata, not a score. An unassessed dimension must stay visually empty.
+    expect(source).toContain('recorded ? scoreWidth(recorded.score) : "0%"')
+    expect(source).toContain('${dimension.weight} · Not assessed')
+    expect(source).not.toContain('recorded ? scoreWidth(recorded.score) : dimension.weight')
+  })
+
 
 })

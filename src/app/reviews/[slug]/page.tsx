@@ -459,7 +459,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                               <span className="text-muted-foreground">{recorded ? `${formatScore(recorded.score)}/5 · ${dimension.weight} weight · ${tool.ratingsVerified === true ? "verified" : "provisional"}` : `${dimension.weight} · Not assessed`}</span>
                             </div>
                             <div className="h-1.5 rounded-full bg-muted-bg overflow-hidden">
-                              <div className={recorded ? "h-full rounded-full bg-primary" : "h-full rounded-full bg-muted-foreground/25"} style={{ width: recorded ? scoreWidth(recorded.score) : dimension.weight }} />
+                              <div className={recorded ? "h-full rounded-full bg-primary" : "h-full rounded-full bg-muted-foreground/25"} style={{ width: recorded ? scoreWidth(recorded.score) : "0%" }} />
                             </div>
                           </div>
                         )
