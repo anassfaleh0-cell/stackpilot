@@ -2,7 +2,7 @@
   "slug": "sourceforge",
   "name": "SourceForge",
   "tagline": "A software discovery and project-hosting resource to evaluate for open-source research and distribution needs.",
-  "description": "SourceForge is a software discovery and project-hosting resource to evaluate when researching or distributing software projects. Fit depends on the project's distribution model, release workflow, user trust, analytics, access control and current platform terms; verify available services directly.",
+  "description": "SourceForge supports software discovery and project distribution workflows; current service details and ratings are not verified here.",
   "category": "Developer Tools",
   "website": "https://sourceforge.net",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "A project can test the release and download workflow with a representative artifact.",
     "Project metadata and release notes should be reviewed for clarity and discoverability.",
-    "A distribution trial can reveal what information users need before downloading."
+    "A distribution trial can reveal what information users need before downloading.",
+    "A test release can validate artifact discoverability and release information.",
+    "Integrity checks and project ownership can be documented before distribution."
   ],
   "cons": [
     "Confirm which hosting and distribution services are currently offered for the intended project.",
     "Distribution analytics should not be treated as proof of adoption without careful definitions.",
     "The team still needs its own release signing, security and provenance process."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Core development workflow",
+      "available": false,
+      "description": "SourceForge: evaluate core development workflow with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Access and permissions",
+      "available": false,
+      "description": "SourceForge: evaluate access and permissions with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "CI or runtime fit",
+      "available": false,
+      "description": "SourceForge: evaluate ci or runtime fit with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Security controls",
+      "available": false,
+      "description": "SourceForge: evaluate security controls with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Failure handling",
+      "available": false,
+      "description": "SourceForge: evaluate failure handling with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Monitoring",
+      "available": false,
+      "description": "SourceForge: evaluate monitoring with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Integrations",
+      "available": false,
+      "description": "SourceForge: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Export and portability",
+      "available": false,
+      "description": "SourceForge: evaluate export and portability with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -66,19 +109,23 @@
   "faqs": [
     {
       "question": "Who should evaluate SourceForge?",
-      "answer": "Evaluate SourceForge when its primary workflow matches a documented requirement. Run a representative pilot and verify current capabilities and limits directly with the vendor."
+      "answer": "Evaluate SourceForge when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Are prices and ratings independently verified here?",
-      "answer": "No. This review does not present an independently verified price or third-party rating. Check official documentation and obtain a dated quote."
+      "question": "How should a team test SourceForge?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "What should a pilot include?",
-      "answer": "Test the main workflow, a failure case, permissions, integrations, export and offboarding. Record pass, partial pass, fail or unknown and assign an owner to every unresolved requirement."
+      "question": "Which limitations should be checked in SourceForge?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "How should total cost be compared?",
-      "answer": "Include licenses, usage, implementation, migration, training, integrations, support, internal administration and renewal terms—not only the headline subscription."
+      "question": "Are SourceForge prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting SourceForge?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [],
