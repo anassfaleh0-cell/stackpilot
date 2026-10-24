@@ -7,7 +7,7 @@
   "tool2": "Writesonic",
   "tool1Slug": "claude",
   "tool2Slug": "writesonic",
-  "winner": "",
+  "winner": null,
   "features": [
     {
       "name": "Primary job to evaluate",
@@ -70,5 +70,8 @@
     }
   ],
   "lastUpdated": "2026-10-24",
-  "published": true
+  "published": true,
+  "winnerVerified": false,
+  "featuresVerified": false,
+  "decisionGuide": true
 }
