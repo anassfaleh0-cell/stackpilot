@@ -2,6 +2,13 @@ import { describe, expect, it } from "vitest"
 import { getAllBest, getAllComparisons, getAllGuides, getBest, getBlogPost, getComparison, getComparisonSeoTitle, getGuide, getReview, getResearch } from "@/lib/content/registry"
 
 describe("content quality repairs", () => {
+  it("removes unsupported product-scale and performance numbers when copy inserts descriptive words", () => {
+    const cleaned = sanitizeUnsupportedClaims(
+      "The library includes 250,000+ searchable, professionally designed templates. A team can create 50+ social media graphics per week. Common content tasks are 5-10x faster with this tool. Storage is capped at 5GB."
+    )
+    expect(cleaned).not.toMatch(/250,000|50\\+ social media graphics|5-10x|5GB/i)
+  })
+
   it("preserves the reviewed SaaS pricing methodology guide without inventing benchmark findings", () => {
     const report = getResearch("saas-pricing-benchmark-2026")
     expect(report).not.toBeNull()
