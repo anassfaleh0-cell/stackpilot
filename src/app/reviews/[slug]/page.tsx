@@ -406,19 +406,23 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                         <path d="M9 12l2 2 4-4" />
                         <circle cx="12" cy="12" r="10" />
                       </svg>
-                      <h3 className="font-semibold text-sm">Verdict</h3>
+                      <h3 className="font-semibold text-sm">Editorial Verdict</h3>
                     </div>
                     {hasStoredEditorialRating ? (
                       <>
                         <div className="text-lg font-bold text-primary mb-1">{formatScore(tool.rating)}/5</div>
                         <ScoreBar score={tool.rating} className="mb-3" />
-                        <p className="text-sm text-muted-foreground">{hasEditorialRating ? (categoryRatings.length > 0 ? `Mean of ${categoryRatings.length} verified editorial rating dimensions.` : "Verified editorial score; see the review methodology for context.") : "Provisional stored editorial score; evidence and calculation are pending audit. Do not treat it as a third-party rating."}</p>
+                        <p className="text-xs text-muted-foreground mb-3">{hasEditorialRating ? "Verified PilotStack editorial score." : "Legacy PilotStack editorial score; evidence and calculation are pending audit. It is not a third-party user rating."}</p>
                       </>
-                    ) : <p className="text-sm text-muted-foreground">No numeric editorial score has been recorded for this review yet. The score and category breakdown need an evidence-backed assessment; compare the practical criteria and current vendor terms below.</p>}
+                    ) : (
+                      <p className="text-xs text-muted-foreground mb-3">Numeric editorial score: not yet evidence-scored. We do not invent a number when the underlying assessment is missing.</p>
+                    )}
+                    <p className="text-sm text-muted-foreground leading-relaxed">{reviewVerdict}</p>
+                    <Link href="/methodology" className="inline-flex mt-3 text-xs font-medium text-primary hover:underline">How scores are assessed <ArrowRight size={12} className="ml-1" /></Link>
                   </div>
                 </GlassCard>
 
-                {/* Rating Breakdown */}
+                                {/* Rating Breakdown */}
                 {categoryRatings.length > 0 ? (
                   <GlassCard>
                     <div className="p-4">
