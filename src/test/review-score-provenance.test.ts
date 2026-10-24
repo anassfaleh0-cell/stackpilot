@@ -78,6 +78,15 @@ describe("review score provenance", () => {
     expect(home).toContain('getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug))')
     expect(home).toContain('getAllResearch().filter((item) => isContentAvailable("research", item.slug))')
   })
+  it("does not leak unverified rating or pricing claims into related best-guide cards", () => {
+    const bestDetail = fs.readFileSync(path.join(process.cwd(), "src", "app", "best", "[slug]", "page.tsx"), "utf8")
+
+    expect(bestDetail).toContain("const hasUnverifiedRatings = related.picks.some((pick) => pick.ratingVerified !== true)")
+    expect(bestDetail).toContain("const hasUnverifiedPricing = related.picks.some((pick) => pick.priceRangeVerified !== true)")
+    expect(bestDetail).toContain("Ratings and pricing are not independently verified")
+    expect(bestDetail).toContain("stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(related.description))")
+  })
+
   it("does not render missing score dimensions as partially filled score bars", () => {
     const source = fs.readFileSync(REVIEW_PAGE, "utf8")
 
