@@ -84,6 +84,34 @@
       "title": "Decision checklist",
       "body": "Current Google Tasks capabilities and account-specific limits are not independently verified here. Confirm the official product documentation and test capture, due dates, recurring tasks, calendar behavior, access, and export using the intended account. Choose it when the simple workflow meets the need; choose a dedicated project-management product when dependencies, team governance, or portfolio reporting are essential. No numeric editorial score is asserted without a documented assessment.",
       "type": "text"
+    },
+    {
+      "title": "When to move beyond a lightweight task list",
+      "type": "text",
+      "body": "A simple task list may be enough for personal follow-up, but watch for signs that the team needs a different system: unclear ownership, repeated duplicate tasks, dependencies that are hard to track, or reports that require manual reconstruction. Write down the missing requirement before choosing another product. A more complex tool is justified when it solves a real coordination problem, not merely because it offers more settings."
+    },
+    {
+      "title": "Account and device testing",
+      "type": "text",
+      "body": "Test the workflow in the account and on the devices the team will actually use. Confirm how tasks are captured, edited, found later, and handled when dates change. Check whether organization policies affect access or sharing. Keep a sample set of tasks and repeat the same test on desktop and mobile so that the team knows where behavior differs before relying on it."
+    },
+    {
+      "title": "Pilot scorecard",
+      "type": "text",
+      "body": "After one busy week, ask whether users can find the next action quickly, whether due dates are reliable, and whether tasks stay current without extra administration. Count duplicate entries and tasks that lost their owner or context. If the team needs multi-step dependencies or cross-project reporting, document those gaps and compare a dedicated project tool."
+    },
+    {
+      "title": "Implementation checklist",
+      "type": "list",
+      "body": "Keep the initial setup small.",
+      "items": [
+        "Choose a few clear lists or categories.",
+        "Agree on how tasks are named and completed.",
+        "Test dates, recurrence, and notifications.",
+        "Review the workflow on desktop and mobile.",
+        "Identify requirements the lightweight model cannot meet.",
+        "Verify current account behavior in official documentation."
+      ]
     }
   ],
   "faqs": [
