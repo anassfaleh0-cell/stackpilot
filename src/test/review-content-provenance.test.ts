@@ -85,6 +85,14 @@ describe("review content provenance", () => {
     expect(reviewPage).toContain("A verified evidence-backed score is not currently recorded")
   })
 
+  it("provides decision-focused comparison FAQs when source FAQs are empty or filtered", () => {
+    const comparisonPage = fs.readFileSync(path.join(process.cwd(), "src", "app", "comparisons", "[slug]", "page.tsx"), "utf8")
+    expect(comparisonPage).toContain("const visibleFaqs = filteredComparisonFaqs.length > 0 ? filteredComparisonFaqs")
+    expect(comparisonPage).toContain("Is there a verified winner between")
+    expect(comparisonPage).toContain("This page does not have an independently verified overall winner")
+    expect(comparisonPage).toContain("Run a small pilot")
+  })
+
   it("filters generated security/compliance FAQ claims and sanitizes pricing in remaining FAQs", () => {
     const faqs = getVisibleReviewFaqs([
       {
