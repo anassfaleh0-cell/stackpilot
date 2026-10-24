@@ -2,7 +2,7 @@
   "slug": "sketch",
   "name": "Sketch",
   "tagline": "A macOS-oriented interface design tool for teams that need reusable components and design handoff.",
-  "description": "Sketch is an interface-design application to evaluate when a team primarily works on macOS and needs artboards, reusable components, prototyping and developer handoff. Collaboration, licensing and platform fit should be checked against the current product edition; this page does not publish an independently verified rating or price.",
+  "description": "Sketch is a macOS-oriented interface design tool; current plan details and independent ratings are not verified here.",
   "category": "Design & Creative",
   "website": "https://sketch.com",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "May fit interface teams that prefer a native macOS design workflow.",
     "Reusable components and shared libraries are relevant evaluation areas for design systems.",
-    "A real handoff test can reveal whether exports and developer specs fit the existing stack."
+    "A real handoff test can reveal whether exports and developer specs fit the existing stack.",
+    "A small component library can reveal how reusable design patterns behave in practice.",
+    "Developer handoff and file portability can be tested with an actual project."
   ],
   "cons": [
     "A macOS-centered workflow may not fit teams that need identical editing access across operating systems.",
     "Verify current collaboration, licensing, cloud and guest-access terms.",
     "Do not assume a design file will transfer losslessly to another tool; test exports before migration."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Core design workflow",
+      "available": false,
+      "description": "Sketch: evaluate core design workflow with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Components and libraries",
+      "available": false,
+      "description": "Sketch: evaluate components and libraries with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Collaboration and review",
+      "available": false,
+      "description": "Sketch: evaluate collaboration and review with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Export and handoff",
+      "available": false,
+      "description": "Sketch: evaluate export and handoff with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Platform support",
+      "available": false,
+      "description": "Sketch: evaluate platform support with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Version history",
+      "available": false,
+      "description": "Sketch: evaluate version history with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Access controls",
+      "available": false,
+      "description": "Sketch: evaluate access controls with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Data portability",
+      "available": false,
+      "description": "Sketch: evaluate data portability with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -71,19 +114,23 @@
   "faqs": [
     {
       "question": "Who should evaluate Sketch?",
-      "answer": "Evaluate Sketch only if the workflow described in this review matches a real requirement. Test it with representative work and verify current capabilities, plan limits and data terms directly with the vendor."
+      "answer": "Evaluate Sketch when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Is Sketch the best option for everyone?",
-      "answer": "No single product is best for every team. Compare alternatives using the same requirements, tasks, constraints and acceptance criteria."
+      "question": "How should a team test Sketch?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "Are current pricing and ratings independently verified here?",
-      "answer": "No. This review does not publish an independently verified rating or current price. Check official vendor information for current plans, limits and terms before purchasing."
+      "question": "Which limitations should be checked in Sketch?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "What should be checked before adopting it?",
-      "answer": "Test the core workflow, access controls, integrations, export and offboarding. Include setup, training, administration and ongoing review in the total cost."
+      "question": "Are Sketch prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting Sketch?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [
