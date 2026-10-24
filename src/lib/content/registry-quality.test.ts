@@ -35,6 +35,24 @@ describe("content quality repairs", () => {
     expect(exposed).toEqual([])
   })
 
+  it("restores legacy Zoho comparison URLs as distinct decision guides without unsupported winners or scores", () => {
+    for (const slug of [
+      "close-crm-vs-zoho-crm",
+      "outreach-io-vs-zoho",
+      "pipedrive-vs-zoho",
+      "salesloft-vs-zoho",
+      "zendesk-vs-zoho",
+    ]) {
+      const comparison = getComparison(slug)
+      expect(comparison, slug).not.toBeNull()
+      expect(comparison?.decisionGuide, slug).toBe(true)
+      expect(comparison?.winner, slug).toBeNull()
+      expect(comparison?.features.length, slug).toBeGreaterThanOrEqual(5)
+      expect(comparison?.faqs.length, slug).toBeGreaterThanOrEqual(4)
+      expect(JSON.stringify(comparison), slug).not.toMatch(/our overall pick|emerges as our recommendation|\\d(?:\\.\\d)?\\s*\\/\\s*5/i)
+    }
+  })
+
   it("keeps comparison variants distinct in their SEO titles", () => {
     const comparisons = getAllComparisons()
     const titles = comparisons.map((comparison) => getComparisonSeoTitle(
