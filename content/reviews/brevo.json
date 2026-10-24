@@ -84,6 +84,34 @@
       "title": "Pricing and purchase checklist",
       "body": "Current Brevo prices, channel entitlements, sending limits, and billing terms are not independently verified here. Check the official pricing page for the exact region, contact volume, email volume, user access, automation needs, and any separate channel or usage limits. Compare the annual cost using the team's actual workload and include setup, list cleanup, template maintenance, and reporting time. The numeric editorial rating remains unrecorded until an evidence-backed assessment is completed.",
       "type": "text"
+    },
+    {
+      "title": "Campaign operations and approvals",
+      "type": "text",
+      "body": "Define who owns the audience, who reviews the message, and who is allowed to schedule a campaign. Keep a test list separate from live contacts and document how the team pauses a campaign if an import or automation behaves unexpectedly. Review the message links and landing page immediately before launch. A short checklist reduces avoidable errors when several people contribute to the same campaign."
+    },
+    {
+      "title": "Data hand-off and troubleshooting",
+      "type": "text",
+      "body": "Test one complete path from a contact or event source into the intended audience, then confirm that changes and opt-outs are reflected correctly. Write down how the team spots missing fields, duplicate contacts, failed events, or a broken connection. Make sure someone owns each integration and knows how to pause dependent campaigns while a problem is investigated."
+    },
+    {
+      "title": "Pilot scorecard",
+      "type": "text",
+      "body": "During the pilot, record setup time, manual corrections, successful delivery, meaningful clicks or completions, opt-out signals, and the effort required to maintain the audience. Compare results with a relevant baseline and note any part of the process that still needs a spreadsheet or manual workaround. Adopt only if the workflow meets the team's requirements and the current plan has been verified."
+    },
+    {
+      "title": "Implementation checklist",
+      "type": "list",
+      "body": "Use this checklist before rollout.",
+      "items": [
+        "Define the campaign goal and audience rules.",
+        "Test opt-outs and suppression with known contacts.",
+        "Preview and test-send every message.",
+        "Verify links, tracking, and the landing page.",
+        "Assign an owner to every automation and integration.",
+        "Confirm current pricing, limits, and account terms."
+      ]
     }
   ],
   "faqs": [
