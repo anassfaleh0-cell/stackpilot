@@ -228,7 +228,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                             ) : <span className="text-xs text-muted-foreground">Score pending</span>}
                           </div>
                         </div>
-                        <p className="text-sm font-medium text-primary mb-2">{safePickText(pick, pick.bestFor)}</p>
+                        <p className="text-sm font-medium text-primary mb-2"><span className="font-semibold">Best fit:</span> {safePickText(pick, pick.bestFor)}</p>
                         {verifiedPickPrice(pick) !== null ? (
                           <p className="text-xs text-muted-foreground mb-3">Listed pricing: {verifiedPickPrice(pick)}. Verify current plans, limits, and billing terms with the vendor.</p>
                         ) : (
@@ -318,7 +318,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                         </Link>
                       ) : (
                         <div key={pick.toolSlug} className="flex items-center justify-between text-sm text-muted-foreground py-1">
-                          <span>{pick.rank}. {pick.toolName}</span>
+                          <span>Option {index + 1}: {pick.toolName}</span>
                           <span className="text-xs font-medium">{verifiedPickRating(pick) !== null ? `${verifiedPickRating(pick)}/5` : "Rating not verified"}</span>
                         </div>
                       ))}
