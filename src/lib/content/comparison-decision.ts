@@ -46,8 +46,12 @@ export function getComparisonDecision(input: ComparisonDecisionInput): Compariso
 const HAS_PROVENANCE_NOTE = /\b(?:recorded;\s*not independently verified|not independently verified|verification pending|source verification is pending|underlying values are not independently verified)\b/i
 
 /** Preserve stored comparison values while identifying data that has not been independently verified. */
-export function getComparisonFeatureDisplayValue(value: boolean | string, featuresVerified?: boolean, decisionGuide = false, featureName = ""): boolean | string {
-  if (typeof value === "string" && !value.trim()) return "Not recorded"
+export function getComparisonFeatureDisplayValue(value: boolean | string | null | undefined, featuresVerified?: boolean, decisionGuide = false, featureName = ""): boolean | string {
+  // Nulls in imported comparison records mean that no reliable value was supplied.
+  // Never stringify them as the literal word "null" or imply the missing value is verified.
+  if (value == null || (typeof value === "string" && (!value.trim() || /^(?:null|undefined|n\/a|not recorded)$/i.test(value.trim())))) {
+    return "Not confirmed — verify with the vendor"
+  }
   // Do not stack a second generic disclaimer onto a source value that already has
   // a clear provenance note. This used to produce duplicate phrases in table cells.
   const alreadyDisclosed = typeof value === "string" && HAS_PROVENANCE_NOTE.test(value)
