@@ -60,7 +60,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
       return { item, score: overlap * 3 + (sameCategory ? 5 : 0) }
     })
     .sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title))
-    .slice(0, 4)
+    .slice(0, 8)
 
   return (
     <>
