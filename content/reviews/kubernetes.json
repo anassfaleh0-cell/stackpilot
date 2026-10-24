@@ -2,7 +2,7 @@
   "slug": "kubernetes",
   "name": "Kubernetes",
   "tagline": "Container orchestration to evaluate when teams need controlled deployment, scheduling and operations at scale.",
-  "description": "Kubernetes is a container orchestration platform to evaluate when workloads require coordinated deployment, scheduling, scaling and recovery. It adds operational complexity, so suitability depends on workload needs, team expertise, security and the managed service or cluster model selected.",
+  "description": "Kubernetes orchestrates container workloads; current operating requirements and independent ratings are not verified here.",
   "category": "Developer Tools",
   "website": "https://kubernetes.io",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "Declarative deployment and scheduling can support repeatable operations for suitable workloads.",
     "Health checks and rollout controls can be tested against known failure cases.",
-    "A well-defined platform model can standardize deployment across services."
+    "A well-defined platform model can standardize deployment across services.",
+    "A failure drill can test rollout, health checks and rollback.",
+    "A managed-runtime comparison can clarify whether orchestration is justified."
   ],
   "cons": [
     "Cluster operations, upgrades, networking and permissions require specialist ownership.",
     "For simple workloads, orchestration may add more complexity than value.",
     "Costs include engineering time and observability, not just cluster resources."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Core development workflow",
+      "available": false,
+      "description": "Kubernetes: evaluate core development workflow with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Access and permissions",
+      "available": false,
+      "description": "Kubernetes: evaluate access and permissions with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "CI or runtime fit",
+      "available": false,
+      "description": "Kubernetes: evaluate ci or runtime fit with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Security controls",
+      "available": false,
+      "description": "Kubernetes: evaluate security controls with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Failure handling",
+      "available": false,
+      "description": "Kubernetes: evaluate failure handling with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Monitoring",
+      "available": false,
+      "description": "Kubernetes: evaluate monitoring with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Integrations",
+      "available": false,
+      "description": "Kubernetes: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Export and portability",
+      "available": false,
+      "description": "Kubernetes: evaluate export and portability with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -66,19 +109,23 @@
   "faqs": [
     {
       "question": "Who should evaluate Kubernetes?",
-      "answer": "Evaluate Kubernetes when its primary workflow matches a documented requirement. Run a representative pilot and verify current capabilities, limits and contract terms directly with the vendor."
+      "answer": "Evaluate Kubernetes when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Are prices and ratings independently verified here?",
-      "answer": "No. This review does not present an independently verified price or third-party rating. Check current official documentation and obtain a dated quote."
+      "question": "How should a team test Kubernetes?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "What should a pilot include?",
-      "answer": "Test the main workflow, one failure case, permissions, integrations, export and offboarding. Record pass, partial pass, fail or unknown and assign an owner to every unresolved requirement."
+      "question": "Which limitations should be checked in Kubernetes?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "How should total cost be compared?",
-      "answer": "Include licenses, usage, implementation, migration, training, integrations, support, internal administration and renewal terms—not only the headline subscription."
+      "question": "Are Kubernetes prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting Kubernetes?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [],
