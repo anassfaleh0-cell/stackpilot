@@ -46,6 +46,21 @@
       "title": "Implementation and total cost",
       "body": "Estimate migration, data cleanup, integrations, policy setup, training, payroll parallel runs, support and internal administration. Ask for a dated quote covering all required modules and headcount assumptions, including renewal and exit terms. Prices and plan limits are not independently verified here.",
       "type": "text"
+    },
+    {
+      "title": "Implementation acceptance checklist",
+      "body": "Test a hire, role change, leave event and termination across every connected system that should receive the change. Compare the source employee record with downstream identity, payroll or finance records. Record failed syncs, duplicate records, approval steps and the owner responsible for resolving an exception.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases to test",
+      "body": "Test a missing required field, a terminated employee with active access, a payroll correction and a disconnected integration. Confirm that the workflow pauses or alerts rather than silently producing inconsistent data. Run sensitive tests with dummy records and keep a documented rollback path.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Record jurisdictions, worker types, modules, data owners, integration responsibilities, access controls, implementation scope and support commitments. Obtain written confirmation for any required feature or service. Revisit the operating model after the pilot and assign ongoing owners for employee-data quality and access reviews.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -148,5 +163,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 213
+  "wordCount": 343
 }
