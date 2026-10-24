@@ -2,7 +2,7 @@
   "slug": "mixpanel",
   "name": "Mixpanel",
   "tagline": "Product analytics to evaluate for event funnels, cohorts, retention and feature adoption.",
-  "description": "Mixpanel is a product analytics platform to evaluate for event-based questions such as funnels, cohorts, retention and feature adoption. Value depends on event design, data quality, privacy, access and the team's ability to interpret results; verify current limits directly.",
+  "description": "Mixpanel supports event-based product analytics; current plan details and independent ratings are not verified here.",
   "category": "Analytics & Data",
   "website": "https://mixpanel.com",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "A representative event funnel can test whether product questions are answerable.",
     "Cohort and retention workflows can be assessed with the team's own event definitions.",
-    "Export and governance should be part of the trial, not an afterthought."
+    "Export and governance should be part of the trial, not an afterthought.",
+    "A controlled funnel can test whether product questions are answerable.",
+    "An event dictionary can make reporting more reproducible."
   ],
   "cons": [
     "Poor event naming and inconsistent instrumentation create misleading reports.",
     "Usage, retention and seat limits need current plan verification.",
     "Analytics correlations do not by themselves prove causation."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Event instrumentation",
+      "available": false,
+      "description": "Mixpanel: evaluate event instrumentation with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Funnels and reports",
+      "available": false,
+      "description": "Mixpanel: evaluate funnels and reports with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Data quality",
+      "available": false,
+      "description": "Mixpanel: evaluate data quality with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Identity and attribution",
+      "available": false,
+      "description": "Mixpanel: evaluate identity and attribution with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Privacy and consent",
+      "available": false,
+      "description": "Mixpanel: evaluate privacy and consent with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Integrations",
+      "available": false,
+      "description": "Mixpanel: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Exports and retention",
+      "available": false,
+      "description": "Mixpanel: evaluate exports and retention with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Usage and administration",
+      "available": false,
+      "description": "Mixpanel: evaluate usage and administration with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -66,19 +109,23 @@
   "faqs": [
     {
       "question": "Who should evaluate Mixpanel?",
-      "answer": "Evaluate Mixpanel when its primary workflow matches a documented requirement. Run a representative pilot and verify current capabilities and limits directly with the vendor."
+      "answer": "Evaluate Mixpanel when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Are prices and ratings independently verified here?",
-      "answer": "No. This review does not present an independently verified price or third-party rating. Check official documentation and obtain a dated quote."
+      "question": "How should a team test Mixpanel?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "What should a pilot include?",
-      "answer": "Test the main workflow, a failure case, permissions, integrations, export and offboarding. Record pass, partial pass, fail or unknown and assign an owner to every unresolved requirement."
+      "question": "Which limitations should be checked in Mixpanel?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "How should total cost be compared?",
-      "answer": "Include licenses, usage, implementation, migration, training, integrations, support, internal administration and renewal terms—not only the headline subscription."
+      "question": "Are Mixpanel prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting Mixpanel?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [
