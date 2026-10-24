@@ -82,43 +82,43 @@
     },
     {
       "name": "Slack Integration",
-      "description": "Receive Figma notifications and preview designs directly in Slack",
+      "description": "Check current integration documentation for supported Slack workflows and any workspace or plan requirements.",
       "available": true,
       "category": "Integrations"
     },
     {
       "name": "Jira Integration",
-      "description": "Link Figma designs to Jira issues with inline previews",
+      "description": "Verify the current Jira connection and supported design-linking workflow before depending on it.",
       "available": true,
       "category": "Integrations"
     },
     {
       "name": "GitHub Integration",
-      "description": "Embed Figma files in GitHub pull requests and issues",
+      "description": "Check current documentation for supported GitHub embeds, links, or developer workflows; do not assume every action is available.",
       "available": true,
       "category": "Integrations"
     },
     {
       "name": "Audit Logs",
-      "description": "Track design file access, edits, and sharing activities",
+      "description": "If audit logging is a requirement, verify the current plan, event coverage, retention, and export options with the vendor.",
       "available": true,
       "category": "Security"
     },
     {
       "name": "Single Sign-On",
-      "description": "SAML-based SSO for Enterprise accounts with SCIM provisioning",
+      "description": "If SSO or automated provisioning is required, verify supported identity providers and plan eligibility in current documentation.",
       "available": true,
       "category": "Security"
     },
     {
       "name": "Mobile App",
-      "description": "View, comment, and present designs on iOS and Android devices",
+      "description": "Check the current mobile app capabilities for the specific viewing, commenting, presentation, or editing task you need.",
       "available": true,
       "category": "Mobile"
     },
     {
       "name": "Offline Mode",
-      "description": "Cache files for offline viewing with sync on reconnection",
+      "description": "Do not assume full offline editing; verify the current offline behavior with a representative file before relying on it.",
       "available": true,
       "category": "Mobile"
     },
@@ -130,7 +130,7 @@
     },
     {
       "name": "Design Tokens",
-      "description": "Export design decisions as platform-agnostic token files",
+      "description": "Verify the current export workflow and supported formats for the design-token process your team uses.",
       "available": true,
       "category": "Core"
     }
@@ -315,75 +315,75 @@
   "faqs": [
     {
       "question": "What is Figma best used for?",
-      "answer": "Figma is best used for UI/UX design, interface prototyping, and design system management. It excels at collaborative design work where multiple team members need to contribute to the same files simultaneously. Its developer handoff features also make it an excellent bridge between design and engineering teams."
+      "answer": "Figma is most useful for interface design, reusable UI components, interactive prototypes, and collaborative design review. It is a stronger candidate when designers, product managers, and developers need to review the same artifact. Test a real project and handoff before deciding whether it fits your process."
     },
     {
       "question": "How much does Figma cost?",
-      "answer": "Figma offers a free Starter plan with unlimited files and up to 3 projects. The Professional plan is $12/month per editor and adds unlimited projects, version history, and custom templates. Organization ($45/month per editor) and Enterprise ($75/month per editor) plans add design system analytics, branching, and advanced security features."
+      "answer": "Current Figma prices and plan limits are not independently verified in this review. Check the official pricing page for current billing, editor-seat rules, collaboration limits, administrative controls, and support terms. Estimate the total cost for your actual team, including add-ons, migration, training, and design-system maintenance."
     },
     {
       "question": "Does Figma work offline?",
-      "answer": "Figma has limited offline capabilities. While you can view previously opened files in a cached state, editing requires an internet connection. Figma's desktop app provides better offline support than the browser version, but the platform is fundamentally designed for cloud-based, real-time collaboration."
+      "answer": "Figma is designed around a cloud workflow, so do not assume that full editing is available without internet access. Test the exact offline behavior your team needs with the current desktop and browser experiences, and choose another workflow if reliable offline editing is mandatory."
     },
     {
       "question": "Is Figma suitable for large design teams?",
-      "answer": "Yes, Figma is well-suited for large design teams, especially with its Organization and Enterprise plans. These plans include shared design system libraries, branching and merging workflows, analytics dashboards, and advanced permission controls that help large teams maintain consistency and scale their design operations."
+      "answer": "Figma can be evaluated by larger design teams, but suitability depends on plan entitlements, permissions, library governance, file complexity, and the team's design process. Pilot a representative project with several roles and verify the current administrative controls before rollout."
     },
     {
       "question": "What platforms does Figma support?",
-      "answer": "Figma is available on Cloud platforms. Mobile apps are available for iOS and Android. The platform is accessible through modern web browsers with no additional software required for core functionality."
+      "answer": "Figma's core design experience is browser-based, with additional desktop and mobile experiences. The capabilities available on each device may differ. Check current official documentation and test the exact editing, review, and presentation tasks your team needs on its supported devices."
     },
     {
       "question": "Is Figma secure?",
-      "answer": "Figma holds SOC 2 Type II, ISO 27001 certifications. The platform uses GDPR, CCPA, HIPAA compliant data handling practices. Organizations with specific compliance requirements should review Figma's security documentation before deployment."
+      "answer": "Security suitability depends on the plan, configuration, contract, and data being handled. Review Figma's current security documentation, applicable certifications and their scope, data-processing terms, access controls, retention and deletion settings, and incident commitments. Do not assume a certification covers every feature or workflow."
     },
     {
       "question": "What integrations does Figma offer?",
-      "answer": "Figma integrates with Slack, Jira, Notion, GitHub, GitLab and 3+ other platforms. The platform also offers a public API for building custom integrations. Integration setup typically takes 15-30 minutes per connection."
+      "answer": "Figma can connect with other tools through supported integrations, links, plugins, and APIs, but availability and behavior can change. Check the current integration directory and API documentation, then test the exact handoff or automation your team needs, including permission scopes and data handling."
     },
     {
       "question": "Is Figma good for small businesses?",
-      "answer": "Yes, Figma is suitable for small businesses, with a free tier that provides core functionality without upfront investment. The freemium pricing model scales with team size, making it cost-effective for growing organizations. Small businesses benefit from rapid deployment and intuitive interfaces that characterize modern SaaS platforms."
+      "answer": "Figma may suit a small business that designs digital interfaces or prototypes collaboratively. Start with a real task and check current plan limits, seat requirements, sharing controls, and export needs. A free or low-cost option should not be assumed to cover every team workflow."
     },
     {
       "question": "What are Figma's limitations?",
-      "answer": "Offline mode is limited to the desktop app with frequent reconnection requirements, making it unreliable for flights or areas with spotty connectivity. This limitation affects organizations with specific requirements in these areas. Additionally, Performance degrades noticeably on files exceeding 100 artboards or 500+ embedded images, requiring page splitting for l. Understanding these constraints before purchasing helps set realistic expectations."
+      "answer": "Potential limitations include reliance on a cloud workflow, learning the component and auto-layout model, keeping shared libraries organized, and verifying export or integration requirements. Test connectivity, file complexity, font handling, permissions, and migration with a representative project before adopting it."
     },
     {
       "question": "How does Figma compare to canva?",
-      "answer": "Figma differs from canva in several ways. Figma offers stronger feature depth and a more intuitive interface, while canva may provide better pricing flexibility or specialized functionality. The best choice depends on your team's specific workflow requirements and existing technology stack."
+      "answer": "Figma and Canva serve overlapping but different workflows. Compare them using your actual deliverable: interface design and reusable components versus quick visual content and templates. Test collaboration, prototype needs, export formats, brand controls, accessibility, and current plan limits; do not rely on a universal winner."
     },
     {
       "question": "Does Figma support team collaboration?",
-      "answer": "Yes, Figma includes Vector Editing, Auto Layout, Component System features designed for group workflows. Teams can co-edit designs, leave feedback, and manage version history together. These features make Figma suitable for teams of most sizes."
+      "answer": "Figma supports collaborative design workflows through shared files, review, and reusable design assets. The exact editing, commenting, versioning, and administration options can depend on settings and plan. Invite the people who will use the product and test a full review cycle before rollout."
     },
     {
       "question": "Can I customize Figma?",
-      "answer": "Figma offers significant customization options. Teams can configure settings, views, and notifications to suit their preferences. The API provides additional flexibility for organizations that need deeper customization through custom development."
+      "answer": "Customization may include reusable components, variants, shared libraries, plugins, and API-based workflows. Confirm which options are supported for your workspace and plan, and review permissions before enabling third-party plugins or custom integrations. Pilot any automation with non-sensitive data first."
     },
     {
       "question": "Is Figma easy to set up?",
-      "answer": "Figma has a medium learning curve. Most teams can complete initial setup and basic configuration within a few hours. Full adoption across the team typically takes 1-3 weeks as users become familiar with advanced features. Figma provides documentation, onboarding resources, and setup tutorials to facilitate the process."
+      "answer": "Setup effort depends on whether you are working alone or configuring a shared team workspace. List the required projects, permissions, libraries, fonts, integrations, and handoff rules, then pilot them with actual contributors. Do not assume a generic setup time predicts your team's rollout."
     },
     {
       "question": "How often does Figma update?",
-      "answer": "Figma updates weekly. The platform ships release cadence varies; check the vendor's changelog for current updates. Users are notified of changes through in-app announcements and the platform changelog."
+      "answer": "Product release cadence can change. Check Figma's official release notes and announcements for current updates, and test changes that affect shared libraries, plugins, or handoff before changing a critical team workflow."
     },
     {
       "question": "What customer support does Figma provide?",
-      "answer": "Support options can vary by plan and region. Check the vendor's current support page for eligible channels and response commitments, then test the help process with a real account or workflow issue before rollout."
+      "answer": "Support channels and response commitments may vary by plan, region, and contract. Review the current support terms and escalation route for the plan you intend to use. For business-critical work, confirm commitments in writing rather than assuming all customers receive the same level of support."
     },
     {
       "question": "Does Figma offer a free version?",
-      "answer": "Figma offers a freemium pricing model. The free tier provides core functionality with limitations on users, features, or storage. Teams should assess their needs against free tier limitations before upgrading."
+      "answer": "Figma has offered a free entry option, but current limits and eligibility can change. Check the official pricing page for the current free tier, editor or project limits, collaboration features, and upgrade triggers before building a team workflow around it."
     },
     {
       "question": "How does Figma handle data privacy?",
-      "answer": "Figma complies with GDPR, CCPA, HIPAA. GDPR compliance ensures data protection for EU users, including data subject access requests and right to deletion. CCPA compliance provides California residents with transparency about data collection and usage. Data processing agreements and privacy policies are available through the platform's trust center."
+      "answer": "For privacy review, read Figma's current privacy notice, data-processing terms, retention and deletion controls, subprocessors, and regional commitments. Confirm the scope of any compliance claims with the vendor and your own legal or security team, especially if files contain personal or confidential information."
     },
     {
       "question": "What is the ROI of Figma?",
-      "answer": "ROI from Figma typically comes from improved team efficiency and reduced tool fragmentation. Most organizations report positive ROI within 3-6 months of adoption."
+      "answer": "Figma's financial return depends on the team's baseline, adoption, existing tools, and the value of reduced rework or coordination. Estimate ROI using your own pilot: record review cycles, handoff questions, duplicate work, migration and training time, and subscription costs. This review does not claim a typical payback period or independently measured ROI."
     }
   ],
   "alternatives": [
