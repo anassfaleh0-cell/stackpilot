@@ -433,48 +433,41 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   </div>
                 </GlassCard>
 
-                                {/* Rating Breakdown */}
-                {categoryRatings.length > 0 ? (
-                  <GlassCard>
-                    <div className="p-4">
-                      <h3 className="font-semibold mb-3 text-sm">Rating Breakdown</h3>
-                      <div className="space-y-3">
-                        {categoryRatings.map((item) => (
-                          <div key={item.label}>
-                            <div className="flex justify-between text-xs mb-0.5">
-                              <span className="text-muted-foreground">{item.label}</span>
-                              <span className="font-medium">{formatScore(item.score)}/5</span>
-                            </div>
-                            <div className="h-1.5 rounded-full bg-muted-bg overflow-hidden">
-                              <div className="h-full rounded-full bg-primary transition-all duration-500" style={{ width: scoreWidth(item.score) }} />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </GlassCard>
-                ) : (
-                  <GlassCard>
-                    <div className="p-4">
-                      <h3 className="font-semibold mb-2 text-sm">Editorial Scorecard</h3>
-                      <p className="text-xs text-muted-foreground mb-4">The same published rubric is used for every product. Numeric marks stay unassigned until supporting evidence is recorded; this keeps missing assessments visible without inventing scores.</p>
-                      <div className="space-y-3">
-                        {defaultScoreDimensions.map((dimension) => (
+                                {/* Complete scorecard: existing marks stay visible with provenance; missing marks remain explicit rather than guessed. */}
+                <GlassCard>
+                  <div className="p-4">
+                    <h3 className="font-semibold mb-2 text-sm">Editorial Scorecard</h3>
+                    <p className="text-xs text-muted-foreground mb-4">Rubric weights total 100%. Any recorded dimension is labelled according to its verification status; missing dimensions are not assigned invented numbers.</p>
+                    <div className="space-y-3">
+                      {defaultScoreDimensions.map((dimension) => {
+                        const aliases: Record<string, string[]> = {
+                          "Core capabilities": ["features", "core capabilities"],
+                          "Ease of use": ["ease of use", "usability"],
+                          "Value for money": ["value", "value for money", "pricing"],
+                          "Support": ["support", "customer support"],
+                          "Security and privacy": ["security", "security and privacy", "privacy"],
+                          "Integrations": ["integrations", "integration"],
+                          "Reliability and performance": ["performance", "reliability", "reliability and performance"],
+                          "Documentation": ["documentation", "learning resources"],
+                          "Scalability": ["scalability", "enterprise readiness"],
+                        }
+                        const recorded = categoryRatings.find((item) => (aliases[dimension.label] || [dimension.label.toLowerCase()]).includes(item.label.toLowerCase()))
+                        return (
                           <div key={dimension.label}>
                             <div className="flex items-center justify-between gap-3 text-xs mb-1">
                               <span className="text-foreground">{dimension.label}</span>
-                              <span className="text-muted-foreground">{dimension.weight} · Not assessed</span>
+                              <span className="text-muted-foreground">{recorded ? `${formatScore(recorded.score)}/5 · ${tool.ratingsVerified === true ? "verified" : "provisional"}` : `${dimension.weight} · Not assessed`}</span>
                             </div>
                             <div className="h-1.5 rounded-full bg-muted-bg overflow-hidden">
-                              <div className="h-full rounded-full bg-muted-foreground/25" style={{ width: dimension.weight }} />
+                              <div className={recorded ? "h-full rounded-full bg-primary" : "h-full rounded-full bg-muted-foreground/25"} style={{ width: recorded ? scoreWidth(recorded.score) : dimension.weight }} />
                             </div>
                           </div>
-                        ))}
-                      </div>
-                      <Link href="/methodology" className="inline-flex mt-4 text-xs font-medium text-primary hover:underline">Read the scoring methodology <ArrowRight size={12} className="ml-1" /></Link>
+                        )
+                      })}
                     </div>
-                  </GlassCard>
-                )}
+                    <Link href="/methodology" className="inline-flex mt-4 text-xs font-medium text-primary hover:underline">Read the scoring methodology <ArrowRight size={12} className="ml-1" /></Link>
+                  </div>
+                </GlassCard>
 
                 {/* Editorial Reviewer */}
                 <EditorialExpert author={tool.author} />
