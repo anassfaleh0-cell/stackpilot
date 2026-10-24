@@ -2,7 +2,7 @@
   "slug": "calendly",
   "name": "Calendly",
   "tagline": "Appointment scheduling to evaluate for availability, booking rules, reminders and calendar handoffs.",
-  "description": "Calendly is a scheduling tool to evaluate for sharing availability and coordinating appointments. Fit depends on booking rules, calendar integrations, team scheduling, routing, payments and the privacy of invitee data; verify current product and plan details.",
+  "description": "Calendly supports appointment booking and calendar coordination; current plan details and independent ratings are not verified here.",
   "category": "Productivity",
   "website": "https://calendly.com",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "A real booking test can validate the experience for both host and invitee.",
     "Calendar conflict handling and rescheduling are critical evaluation areas.",
-    "Team routing and reminders can be tested before a wider rollout."
+    "Team routing and reminders can be tested before a wider rollout.",
+    "A real booking test can validate time zones and conflict handling.",
+    "Rescheduling and guest access can be tested before rollout."
   ],
   "cons": [
     "Advanced routing or team workflows may require specific plans or configuration.",
     "Calendar permissions and time-zone behavior need careful testing.",
     "Booking data and reminders should follow the organization's privacy and retention practices."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Core workflow",
+      "available": false,
+      "description": "Calendly: evaluate core workflow with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Collaboration",
+      "available": false,
+      "description": "Calendly: evaluate collaboration with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Search and retrieval",
+      "available": false,
+      "description": "Calendly: evaluate search and retrieval with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Permissions",
+      "available": false,
+      "description": "Calendly: evaluate permissions with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Calendar or task sync",
+      "available": false,
+      "description": "Calendly: evaluate calendar or task sync with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Automation",
+      "available": false,
+      "description": "Calendly: evaluate automation with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Data export",
+      "available": false,
+      "description": "Calendly: evaluate data export with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Administration",
+      "available": false,
+      "description": "Calendly: evaluate administration with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -66,19 +109,23 @@
   "faqs": [
     {
       "question": "Who should evaluate Calendly?",
-      "answer": "Evaluate Calendly when its primary workflow matches a documented requirement. Run a representative pilot and verify current capabilities and limits directly with the vendor."
+      "answer": "Evaluate Calendly when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Are prices and ratings independently verified here?",
-      "answer": "No. This review does not present an independently verified price or third-party rating. Check official documentation and obtain a dated quote."
+      "question": "How should a team test Calendly?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "What should a pilot include?",
-      "answer": "Test the main workflow, a failure case, permissions, integrations, export and offboarding. Record pass, partial pass, fail or unknown and assign an owner to every unresolved requirement."
+      "question": "Which limitations should be checked in Calendly?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "How should total cost be compared?",
-      "answer": "Include licenses, usage, implementation, migration, training, integrations, support, internal administration and renewal terms—not only the headline subscription."
+      "question": "Are Calendly prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting Calendly?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [],
