@@ -154,7 +154,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
           <div className="quick-answer mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
-            <p className="text-sm text-muted-foreground">This page is a shortlist of {page.picks.length} options to evaluate, not a verified overall ranking. Compare each option against your workflow, check current plan limits with the vendor, and use only ratings or prices explicitly marked as verified.</p>
+            <p className="text-sm text-muted-foreground">This page compares {page.picks.length} options using recorded editorial scores where available. Scores marked provisional still need evidence review and must not be treated as third-party ratings or a verified overall ranking. Compare workflow fit and confirm current plan terms directly with each vendor.</p>
           </div>
 
           <div className="tl-dr mb-6 p-4 bg-muted-bg rounded-xl border border-border">
