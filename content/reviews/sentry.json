@@ -46,6 +46,21 @@
       "title": "Cost and operations",
       "body": "Estimate event volume, tracing or profiling usage if applicable, retention and user seats. Check current quotas and overage behavior directly. Include instrumentation upkeep and alert ownership in the total operating cost.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Trigger a known application error in a staging release and confirm the issue includes the relevant stack trace, release identifier and actionable context. Resolve the issue, then trigger it again to check regression behavior. Verify that alerts reach the responsible person and can be silenced or reassigned correctly.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and privacy",
+      "body": "Test an event containing a dummy token or email address and verify that scrubbing works before data is retained. Check duplicate issue grouping, alert storms and a broken source-map upload. Document which event data is collected and who can access it.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Record event-volume assumptions, retention needs, alert routing, privacy filters, source-map workflow, incident owner and current plan limits. Include the cost of maintaining instrumentation and triaging noise. Review the setup after major releases and when event volume changes.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -142,5 +157,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 181
+  "wordCount": 307
 }
