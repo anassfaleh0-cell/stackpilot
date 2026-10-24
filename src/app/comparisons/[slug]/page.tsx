@@ -106,7 +106,32 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
     : null
 
   // Reuse the review FAQ integrity filter so comparison FAQs do not repeat unverified pricing or templated compliance claims in HTML or FAQ schema.
-  const visibleFaqs = getSpecificComparisonFaqs(cmp.faqs).slice(0, 8)
+  const filteredComparisonFaqs = getSpecificComparisonFaqs(cmp.faqs).slice(0, 8)
+  // Filtering can remove every legacy FAQ; keep the section useful without inventing product facts.
+  const visibleFaqs = filteredComparisonFaqs.length > 0 ? filteredComparisonFaqs : [
+    {
+      question: `How should you choose between ${cmp.tool1} and ${cmp.tool2}?`,
+      answer: `Define the job you need done, list mandatory requirements, and test both options against the same representative workflow. Confirm any must-have feature in current vendor documentation and record trade-offs rather than assuming either product is universally better.`,
+    },
+    {
+      question: `Is there a verified winner between ${cmp.tool1} and ${cmp.tool2}?`,
+      answer: cmp.winnerVerified === true
+        ? `The source record marks a winner, but review the stated criteria and confirm that they match your requirements before relying on that conclusion.`
+        : `This page does not have an independently verified overall winner. Choose based on the workflow, requirements, evidence, and constraints that matter to your team.`,
+    },
+    {
+      question: `How should you compare the total cost of ${cmp.tool1} and ${cmp.tool2}?`,
+      answer: `Check each vendor's current official pricing, required plan tier, seat minimums, usage limits, add-ons, implementation, migration, and renewal terms. Compare the same usage scenario and keep unverified prices out of the calculation.`,
+    },
+    {
+      question: `Can ${cmp.tool1} and ${cmp.tool2} be used together?`,
+      answer: `That depends on your workflow and the integrations currently supported by each vendor. Verify native integrations, API or export options, permissions, sync direction, and failure handling before designing a combined process.`,
+    },
+    {
+      question: `What should you test before selecting either product?`,
+      answer: `Run a small pilot with representative data, everyday users, and one likely exception or failure case. Record setup effort, workarounds, output quality, admin overhead, and any unresolved vendor questions.`,
+    },
+  ]
 
   // Use the comparison's own recorded feature details for decision guidance.
   // These are descriptions of the source data, not independent verification or proof of superiority.
