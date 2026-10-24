@@ -2,7 +2,7 @@
   "slug": "slack",
   "name": "Slack",
   "tagline": "A team messaging workspace to evaluate for channel organization, search, integrations and communication governance.",
-  "description": "Slack is a team messaging workspace to evaluate for real-time coordination and connections between work tools. Fit depends on channel structure, search and retention needs, external collaboration, notifications, security controls and how decisions are documented outside chat.",
+  "description": "Slack supports team messaging and work-tool coordination; current plan details and independent ratings are not verified here.",
   "category": "Communication & Collaboration",
   "website": "https://slack.com",
   "pricing": "Not independently verified",
@@ -10,14 +10,57 @@
   "pros": [
     "Channels can organize conversations around teams, projects or operational topics.",
     "Search and integrations can be tested against the team's recurring questions and handoffs.",
-    "A documented channel policy can reduce fragmented communication."
+    "A documented channel policy can reduce fragmented communication.",
+    "A channel policy can help make communication easier to retrieve.",
+    "Integration tests can reveal notification noise and access issues."
   ],
   "cons": [
     "Important decisions can become hard to find when chat is treated as the only record.",
     "Notifications and channel sprawl can reduce focus without governance.",
     "Retention, guest access, exports and compliance controls need plan-specific verification."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Meeting or message workflow",
+      "available": false,
+      "description": "Slack: evaluate meeting or message workflow with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Guest access",
+      "available": false,
+      "description": "Slack: evaluate guest access with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Calendar and integrations",
+      "available": false,
+      "description": "Slack: evaluate calendar and integrations with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Search and retrieval",
+      "available": false,
+      "description": "Slack: evaluate search and retrieval with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Recording or retention",
+      "available": false,
+      "description": "Slack: evaluate recording or retention with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Access controls",
+      "available": false,
+      "description": "Slack: evaluate access controls with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Notifications",
+      "available": false,
+      "description": "Slack: evaluate notifications with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Export and administration",
+      "available": false,
+      "description": "Slack: evaluate export and administration with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "content": [
     {
       "title": "Channel and communication design",
@@ -63,19 +106,23 @@
   "faqs": [
     {
       "question": "Who should evaluate Slack?",
-      "answer": "Evaluate Slack when its primary workflow matches a documented requirement. Run a representative pilot and verify current capabilities, limits and contract terms directly with the vendor."
+      "answer": "Evaluate Slack when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Are prices and ratings independently verified here?",
-      "answer": "No. This review does not present an independently verified price or third-party rating. Check current official documentation and obtain a dated quote."
+      "question": "How should a team test Slack?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "What should a pilot include?",
-      "answer": "Test the main workflow, one failure case, permissions, integrations, export and offboarding. Record pass, partial pass, fail or unknown and assign an owner to every unresolved requirement."
+      "question": "Which limitations should be checked in Slack?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "How should total cost be compared?",
-      "answer": "Include licenses, usage, implementation, migration, training, integrations, support, internal administration and renewal terms—not only the headline subscription."
+      "question": "Are Slack prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting Slack?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [
