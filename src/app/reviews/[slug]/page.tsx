@@ -77,9 +77,10 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
   const allReviews = getAllReviews()
 
-  const hasStoredEditorialRating = typeof tool.rating === "number" && Number.isFinite(tool.rating) && tool.rating > 0
-  const hasEditorialRating = tool.ratingVerified === true && hasStoredEditorialRating
-  const categoryRatings = Array.isArray(tool.ratings) ? tool.ratings : []
+  // Never render numeric editorial ratings unless the page records verification; preserve unverified source data for later audit, but do not publish it as a score.
+  const hasEditorialRating = tool.ratingVerified === true && typeof tool.rating === "number" && Number.isFinite(tool.rating) && tool.rating > 0
+  const hasStoredEditorialRating = hasEditorialRating
+  const categoryRatings = tool.ratingsVerified === true && Array.isArray(tool.ratings) ? tool.ratings : []
   const bestInCategory = allReviews
     .filter((r) => r.category === tool.category && r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating))
     .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
