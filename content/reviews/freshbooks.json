@@ -46,6 +46,21 @@
       "title": "Cost and fit",
       "body": "Request a dated quote covering users, invoices, payment processing, integrations, support and migration. Include internal administration and renewal terms. Current prices and independent ratings are not verified in this review.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Process a sample invoice, partial payment, expense, refund and bank reconciliation. Confirm that the accountant can trace each item and that reports agree with the underlying records. Test a recurring invoice or project workflow if it is central to the business.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and migration",
+      "body": "Test a duplicate bank transaction, a missing receipt, a changed client address and a correction to an issued invoice. Export a sample of contacts and transactions, then validate opening balances with the accountant before a full migration.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document jurisdiction and tax requirements, users, invoice volume, accountant access, payment processing, integrations and data-export needs. Request current written pricing and include payment fees, setup, migration and support. Assign a finance owner for reconciliation and close.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -144,5 +159,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 194
+  "wordCount": 308
 }
