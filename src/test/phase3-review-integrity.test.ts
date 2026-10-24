@@ -562,9 +562,11 @@ describe("CD-15: generated review boilerplate", () => {
     const visible = getVisibleReviewContent(calcom.content, false)
     const titles = new Set(visible.map((section: { title: string }) => section.title))
     for (const title of ["Company Background", "Product Overview", "User Experience", "Real Advantages", "Security & Compliance"]) {
-      expect(titles.has(title)).toBe(false)
+      expect(titles.has(title)).toBe(true)
+      const section = visible.find((item: { title: string }) => item.title === title)
+      expect(section?.body).toMatch(/not independently verified|needs product-specific evidence|require product-/i)
     }
-    expect(visible.find((section: { title: string }) => section.title === "Performance")?.body).toContain("service-status history")
+    expect(visible.find((section: { title: string }) => section.title === "Performance")?.body).toContain("No independent benchmark")
   })
 
   it("suppresses additional repeated best-for, scale, and uptime claims in the edited review corpus", () => {
@@ -603,7 +605,11 @@ describe("CD-15: generated review boilerplate", () => {
       { title: "Pricing at a Glance", body: "Pricing details." },
       { title: "Performance", body: "The product delivers reliable performance with 99.9% uptime SLA and consistent response times under load." },
     ]
-    expect(getVisibleReviewContent(content, false).map((section) => section.title)).toEqual(["Workflow example"])
+    const visible = getVisibleReviewContent(content, false)
+    expect(visible.map((section) => section.title)).toEqual(["Workflow example", "Pricing at a Glance", "Performance"])
+    expect(visible.find((section) => section.title === "Workflow example")?.body).toContain("Create a booking page")
+    expect(visible.find((section) => section.title === "Pricing at a Glance")?.body).toContain("not independently verified")
+    expect(visible.find((section) => section.title === "Performance")?.body).toContain("No independent benchmark")
   })
 })
 
