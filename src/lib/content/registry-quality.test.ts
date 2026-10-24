@@ -4,9 +4,10 @@ import { getAllBest, getAllComparisons, getAllGuides, getBest, getBlogPost, getC
 describe("content quality repairs", () => {
   it("removes unsupported product-scale and performance numbers when copy inserts descriptive words", () => {
     const cleaned = sanitizeUnsupportedClaims(
-      "The library includes 250,000+ searchable, professionally designed templates. A team can create 50+ social media graphics per week. Common content tasks are 5-10x faster with this tool. Storage is capped at 5GB."
+      "The library includes 250,000+ searchable, professionally designed templates. A team can create 50+ social media graphics per week. Common content tasks are 5-10x faster with this tool. Storage is capped at 5GB. Compare task management platforms including Things 3, evaluating features and workflows."
     )
     expect(cleaned).not.toMatch(/250,000|50\+ social media graphics|5-10x|5GB/i)
+    expect(cleaned).toContain("Things 3, evaluating features and workflows")
   })
 
   it("preserves the reviewed SaaS pricing methodology guide without inventing benchmark findings", () => {
