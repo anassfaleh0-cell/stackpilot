@@ -1,13 +1,17 @@
 {
   "slug": "templates",
   "term": "Templates",
-  "definition": "Pre-designed frameworks or layouts that users can customize to quickly create documents, projects, or workflows.",
-  "extendedDefinition": "Templates are pre-built frameworks or layouts that users fill in rather than start from scratch, covering documents, projects, campaigns, code, and entire workflows. They accelerate common tasks, enforce consistency, and encode established best practices into repeatable structures. For software buyers, the quality and breadth of templates is a meaningful evaluation signal: rich libraries reduce time-to-value, while sparse libraries shift configuration work to the customer. Good templates are customizable, versioned, and shareable across teams, so improvements made by one group spread to others. In project management tools, templates standardize onboarding, planning, and reporting across many initiatives. Teams should review templates for fit with their actual process rather than adopt them blindly, since a template that bakes in a mismatched workflow can institutionalize inefficiency.",
+  "definition": "Templates are reusable starting points for documents, projects, campaigns, or workflows that teams can adapt instead of building from scratch.",
+  "extendedDefinition": "Templates package a repeatable structure into a reusable format. They can save setup time and make work more consistent, but their value depends on how closely they match the team's real process and how easy they are to adapt. When evaluating software, look for editable fields, ownership, version history, permissions, and the ability to share or standardize approved templates. A large template gallery is not automatically useful if examples are outdated or cannot be changed. Pilot a template with a real task, measure setup time, and make sure it does not force unnecessary steps into the workflow.",
   "category": "Productivity",
-  "examples": [],
+  "examples": [
+    "A project manager creates a launch template with owners, milestones, risk checks, and approval steps, then reuses it for each product release.",
+    "A sales team standardizes proposal documents with approved pricing language and required legal sections, reducing inconsistent versions.",
+    "An agency adapts a client-onboarding template for each new account and removes steps that do not apply instead of following it blindly."
+  ],
   "relatedTerms": [
     "workflow-automation",
     "onboarding"
   ],
-  "description": "Templates. Pre-designed frameworks or layouts that users can customize to quickly create documents, projects, or workflows."
+  "description": "Templates provide reusable structures for common work. Learn how to judge template quality, customization, governance, and whether a template genuinely saves time."
 }
