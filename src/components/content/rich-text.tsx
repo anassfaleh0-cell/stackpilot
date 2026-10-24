@@ -3,6 +3,11 @@ import type { ReactNode } from "react"
 
 const ANCHOR_RE = /<a href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g
 
+const INTERNAL_HREF_ALIASES: Record<string, string> = {
+  // Legacy product-name link: point directly to the existing canonical review.
+  "/reviews/acuity-scheduling": "/reviews/acuity",
+}
+
 interface RichTextProps {
   text: string
   className?: string
@@ -18,7 +23,8 @@ function renderSegments(text: string, baseKey: number): ReactNode[] {
     if (match.index > lastIndex) {
       parts.push(text.slice(lastIndex, match.index))
     }
-    const href = match[1]
+    const originalHref = match[1]
+    const href = INTERNAL_HREF_ALIASES[originalHref] || originalHref
     const label = match[2]
     const children = label.includes("<a ") ? renderSegments(label, key) : label
     if (href.startsWith("http")) {
