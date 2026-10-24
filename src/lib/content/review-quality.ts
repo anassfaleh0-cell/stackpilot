@@ -96,7 +96,7 @@ function replacementForUnverifiedSection(title: string, productName = "this prod
   if (/security|privacy|compliance/.test(normalized)) {
     return `Security and compliance claims for ${productName} require product-, plan-, and region-specific evidence. Review current vendor trust documentation, data-processing terms, access controls, data retention, deletion/export options, and the scope and date of any independent audit before adoption.`
   }
-  if (/performance|reliability|uptime|setup time|migration/.test(normalized)) {
+  if (/performance|reliability|uptime|setup time|implementation|adoption|rollout|migration/.test(normalized)) {
     return `No independent benchmark or implementation timing is asserted for ${productName} here. Test a representative workload or dataset, record a baseline, measure task completion time and errors, and document migration dependencies and rollback options before making a commitment.`
   }
   if (/support|documentation|learning curve/.test(normalized)) {
