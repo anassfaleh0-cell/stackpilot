@@ -46,6 +46,21 @@
       "title": "Privacy and cost",
       "body": "Review access controls, data retention, export, deletion and whether sensitive values are excluded from events. Estimate event volume and required seats, then confirm current quotas and prices directly. Include SDK maintenance and data-quality work in total cost.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Instrument a controlled onboarding journey and verify event counts against a known test population. Build a funnel and a retention report with written definitions. Ask another analyst to reproduce the report from the event dictionary and record any ambiguity in the event names or filters.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and interpretation",
+      "body": "Test duplicate events, missing properties, anonymous-to-known identity changes and a renamed event. Verify that the change does not silently break historical comparisons. Keep a record of metric definitions and avoid treating a correlation between product usage and retention as proof of causation.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document event ownership, identity rules, consent and privacy controls, retention, export, usage assumptions and plan limits. Compare the effort needed to maintain instrumentation with the decisions the reports support. Revisit the event taxonomy after major product changes.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -145,5 +160,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 196
+  "wordCount": 320
 }
