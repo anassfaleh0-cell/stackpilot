@@ -1,90 +1,101 @@
 {
   "slug": "software-evaluation-checklist",
-  "title": "Software Evaluation Checklist: A Practical Buying Framework",
-  "description": "A step-by-step process for defining requirements, testing vendor workflows, comparing total cost, validating security, and documenting a software purchase decision.",
-  "category": "Software Buying",
+  "title": "Software Evaluation Checklist: A Practical Buyer’s Guide",
+  "description": "A step-by-step checklist for defining requirements, running comparable product pilots, estimating total cost, checking security and portability, and documenting a defensible software decision.",
+  "category": "Productivity",
   "difficulty": "Beginner",
-  "readingTime": 8,
+  "readingTime": 13,
   "sections": [
     {
-      "title": "Define the problem before shopping",
-      "body": "Write down the business problem in observable terms. Record the current workflow, who performs it, where delays or errors occur, what systems are involved, and what must improve. Separate the required outcome from a preferred feature: for example, “reduce duplicate data entry” is a need, while “must have a specific dashboard” may only be one possible solution. Establish a baseline so the team can judge whether the new tool helped.",
-      "type": "text"
+      "title": "Define the problem before comparing products",
+      "type": "text",
+      "body": "Start with the work that needs to improve, not with a vendor feature list. Document the current workflow, who performs each step, where delays or errors occur, what data is involved, and what a successful outcome would look like. Ask daily users and process owners to contribute. Separate mandatory requirements from preferences, and write down what evidence would show that a requirement is met. If the current process can be improved through configuration or training, include that option rather than assuming a new purchase is necessary."
     },
     {
-      "title": "Identify stakeholders and constraints",
-      "body": "Include the people who will use the product daily, the person who owns the budget, IT or security reviewers, data owners, and anyone responsible for reporting or compliance. Document constraints such as required regions, languages, accessibility, mobile use, data residency, SSO, retention, export, procurement terms, and the date by which a decision is needed. Assign one owner to resolve conflicting requirements.",
-      "type": "text"
+      "title": "Build a scoring matrix that can be explained",
+      "type": "table",
+      "body": "Use weights only after stakeholders agree on what matters. The percentages below are an example structure, not an industry benchmark; change them to match the risk and purpose of your purchase.",
+      "columns": [
+        "Criterion",
+        "Example weight",
+        "Evidence to collect"
+      ],
+      "rows": [
+        [
+          "Core workflow fit",
+          "30%",
+          "Run representative tasks and record pass/fail results, workarounds, and missing capabilities."
+        ],
+        [
+          "Security and governance",
+          "20%",
+          "Review current vendor documentation, required access controls, retention terms, and contractual commitments."
+        ],
+        [
+          "Integration and portability",
+          "15%",
+          "Test the exact connectors and export/import behavior needed by your stack."
+        ],
+        [
+          "Usability and adoption",
+          "15%",
+          "Ask intended users to complete common tasks and record friction without coaching."
+        ],
+        [
+          "Total cost of ownership",
+          "15%",
+          "Calculate license, usage, add-ons, setup, training, administration, migration, and exit costs."
+        ],
+        [
+          "Support and operational risk",
+          "5%",
+          "Verify support channels and contractual service commitments relevant to the chosen plan."
+        ]
+      ]
     },
     {
-      "title": "Separate must-haves from preferences",
-      "body": "Create a short list of non-negotiable requirements and a separate list of preferences. For each requirement, define a pass/fail test and the evidence needed. Avoid long wish lists that treat every feature as equally important. If a requirement is a legal, security, or operational constraint, do not let a high score on unrelated features compensate for failing it.",
-      "type": "text"
+      "title": "Write test cases before vendor demos",
+      "type": "text",
+      "body": "Prepare a short scenario script using representative data and realistic edge cases. Ask each vendor or pilot account to demonstrate the same workflow: create or import a record, apply the permissions you need, search for it, change its status, trigger a notification or automation, build a report, and export the result. Record what was demonstrated, what was only promised, what required a higher plan, and what could not be tested. A polished demo is not evidence that the product fits your workflow."
     },
     {
-      "title": "Build a weighted scorecard carefully",
-      "body": "Choose evaluation dimensions relevant to the use case: workflow fit, usability, integrations, administration, security, reporting, support, portability, and cost. Agree on weights before vendor demos. Use a consistent scale with written definitions, such as 0 for absent, 1 for substantial gap, 2 for partial fit, and 3 for meets requirement. Record evidence beside each score and label untested answers as unknown rather than awarding points.",
-      "type": "text"
+      "title": "Run a controlled pilot",
+      "type": "checklist",
+      "body": "Keep the pilot small enough to manage but representative enough to reveal problems.",
+      "items": [
+        "Choose a fixed set of tasks and define acceptance criteria before testing.",
+        "Use the same inputs and user roles across all candidate products.",
+        "Include normal cases, exceptions, permission boundaries, and data-export tests.",
+        "Record completion time, errors, workarounds, support requests, and user feedback.",
+        "Confirm which features are included in the actual plan being evaluated.",
+        "Document any vendor statement that still needs written confirmation.",
+        "Do not move sensitive or production data into a trial until its data terms are approved."
+      ]
     },
     {
-      "title": "Run vendor demos using the same tasks",
-      "body": "Send each vendor the same realistic scenario and ask them to complete it live. Include normal work, an exception, permission changes, reporting, and export. Ask to see the actual plan or tier that would be purchased. Separate a demonstrated capability from a roadmap promise, a slide, or an integration that requires extra payment.",
-      "type": "text"
+      "title": "Calculate total cost of ownership",
+      "type": "text",
+      "body": "Compare the same period and scope for each candidate. Include seats, usage or storage, required add-ons, onboarding, configuration, integration work, training, administration, support, taxes, renewal terms, and migration or exit costs. For usage-based products, estimate both normal and peak demand and include overages. Keep list prices separate from a quote and record the country, currency, billing term, and date checked. Avoid presenting hypothetical productivity savings as guaranteed ROI; measure the baseline and pilot outcome first."
     },
     {
-      "title": "Run a bounded pilot",
-      "body": "Select a small group that represents different roles and skill levels. Use representative data, a fixed test window, and a list of tasks. Test setup, daily use, collaboration, notifications, mobile or accessibility needs, failure recovery, and support response. Capture defects and user feedback in a shared log. Do not upload sensitive production data until security and contractual checks are complete.",
-      "type": "text"
+      "title": "Review security, privacy, and contractual fit",
+      "type": "text",
+      "body": "Use the vendor's current security and privacy documents and your organization's requirements. Check identity and access management, role permissions, audit events, retention and deletion, data processing, data residency if required, incident response, backups, and export. Confirm whether the required controls apply to the plan and contract you are considering. Do not infer a certification, legal compliance, or uptime guarantee from a marketing page; obtain the applicable evidence and written terms."
     },
     {
-      "title": "Calculate total cost and contract risk",
-      "body": "Estimate subscription, additional users, add-ons, implementation, migration, training, support, usage fees, taxes, renewal increases, and the internal time needed to operate the tool. Review auto-renewal, minimum terms, cancellation, data export, deletion, service availability, support commitments, and price-change clauses. Compare the same time horizon and billing terms for every vendor.",
-      "type": "text"
+      "title": "Plan migration and exit before committing",
+      "type": "text",
+      "body": "Export a representative sample and test it outside the source product. Check records, relationships, formulas, attachments, comments, permissions, history, and internal links. Identify what needs manual rebuilding, who owns the migration, and how users will be trained. Confirm how data can be exported and deleted at contract end, and whether any proprietary workflow or integration would make switching unusually expensive. Keep a rollback plan until the new workflow is stable."
     },
     {
-      "title": "Review security, privacy, and portability",
-      "body": "Confirm the data types stored, access model, MFA/SSO options, audit trail, encryption documentation, subprocessors, retention and deletion, incident notification, backup, and export formats. Ask for current evidence from the vendor instead of inferring certification from marketing language. Test how an account is disabled and how data can be retrieved if the contract ends.",
-      "type": "text"
+      "title": "Make the decision and record the evidence",
+      "type": "text",
+      "body": "Summarize which mandatory requirements passed, which failed, which remain unknown, and what the unknowns would cost or risk. Show the total cost assumptions and the trade-offs behind the recommendation. Document the selected plan, contract terms, owners, implementation dependencies, and review date. A defensible decision is not necessarily the product with the highest total score; a single critical security, migration, or workflow failure can outweigh advantages elsewhere."
     },
     {
-      "title": "Make and document the decision",
-      "body": "Summarize which requirements passed, which remain unknown, the total expected cost, the main trade-offs, implementation risks, and why the selected product fits better than the alternatives. Name an accountable owner and define what would trigger a re-evaluation. Preserve the scorecard and source links so the decision can be revisited when needs or vendor terms change.",
-      "type": "text"
-    },
-    {
-      "title": "Set measurable acceptance criteria",
-      "body": "For each must-have requirement, write a test that can be observed and repeated. Define the expected result, test data, responsible tester, pass/fail threshold, and evidence to save. Include negative tests such as whether a user without permission can view a restricted record. Agree on criteria before vendor demos so the team does not change the scoring rules to favor a preferred product.",
-      "type": "text"
-    },
-    {
-      "title": "Check operational readiness",
-      "body": "Confirm who will administer the product after launch, how users request access, who reviews permissions, how changes are approved, and where incidents are reported. Estimate the ongoing work required to maintain integrations, clean data, manage templates, and answer user questions. A tool that scores well in a demo may still be a poor fit if the organization lacks the time or skills to operate it.",
-      "type": "text"
-    },
-    {
-      "title": "Record evidence and revisit the choice",
-      "body": "Keep vendor documentation links, dates checked, screenshots or notes from tests, open questions, cost assumptions, and the decision rationale in one place. Separate confirmed facts from vendor statements and internal assumptions. Assign an owner to recheck the decision before renewal or after major product, pricing, security, or business changes. This record helps prevent a new evaluation from repeating the same work.",
-      "type": "text"
-    },
-    {
-      "title": "Use a decision meeting, not a demo vote",
-      "body": "After testing, hold a short review with the people who own the requirements. Start with mandatory pass/fail criteria, then discuss evidence for the remaining scores and unresolved risks. Ask each stakeholder to identify one strength, one limitation, and one assumption that could change the decision. Record dissent rather than averaging it away. Agree on the decision owner, implementation dependencies, fallback plan, and conditions that would justify reconsidering the choice.",
-      "type": "text"
-    },
-    {
-      "title": "Keep the scope proportionate",
-      "body": "A small team buying a low-risk tool may need a lightweight checklist and a short trial; software handling sensitive data or critical operations needs deeper security, legal, and resilience review. Match the evaluation effort to the impact of failure, amount of data involved, integration complexity, and switching cost. The goal is a defensible decision, not paperwork for its own sake.",
-      "type": "text"
-    },
-    {
-      "title": "What to do when evidence is missing",
-      "body": "If the vendor cannot demonstrate a requirement, record it as unknown rather than awarding a pass. Decide whether the requirement is essential enough to stop procurement, whether a written contractual commitment would resolve it, or whether a different product should be tested. Keep the open question and its owner visible until it is resolved.",
-      "type": "text"
-    },
-    {
-      "title": "Confirm ownership after launch",
-      "body": "Name a person to monitor renewals, vendor changes, access reviews, and user feedback so the evaluation remains useful after procurement.",
-      "type": "text"
+      "title": "Post-launch review",
+      "type": "text",
+      "body": "After rollout, compare actual adoption, operating effort, support needs, usage, and invoices with the pilot assumptions. Ask users where workarounds persist and track whether the original problem improved. Revisit the decision if costs, requirements, product terms, or risk change. This review makes the evaluation reusable for future renewals and prevents an initial purchase from becoming an unchecked long-term commitment."
     }
   ],
   "author": "Sarah Chen",
@@ -104,19 +115,5 @@
   ],
   "relatedComparisons": [
     "notion-vs-linear"
-  ],
-  "faqs": [
-    {
-      "question": "How many software vendors should we evaluate?",
-      "answer": "Start with a shortlist that can plausibly meet the must-have requirements. Evaluate every finalist against the same scenarios and evidence standard; adding vendors is useful only if it changes the decision or reveals a meaningful alternative."
-    },
-    {
-      "question": "Should we use a weighted scorecard?",
-      "answer": "A scorecard helps make trade-offs explicit, but it should not override mandatory requirements. Set weights before demos, record evidence for each score, and mark untested or unclear claims as unknown rather than guessing."
-    },
-    {
-      "question": "What should we test during a software trial?",
-      "answer": "Test representative daily workflows, exceptions, permissions, integrations, reporting, data export, accessibility, recovery, and support. Use a small pilot with clear acceptance criteria and avoid uploading sensitive production data before security checks."
-    }
   ]
 }
