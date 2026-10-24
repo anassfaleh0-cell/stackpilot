@@ -49,7 +49,7 @@ describe("content quality repairs", () => {
       expect(comparison?.winner, slug).toBeNull()
       expect(comparison?.features.length, slug).toBeGreaterThanOrEqual(5)
       expect(comparison?.faqs.length, slug).toBeGreaterThanOrEqual(4)
-      expect(JSON.stringify(comparison), slug).not.toMatch(/our overall pick|emerges as our recommendation|\\d(?:\\.\\d)?\\s*\\/\\s*5/i)
+      expect(JSON.stringify(comparison), slug).not.toMatch(/our overall pick|emerges as our recommendation|\d(?:\.\d)?\s*\/\s*5/i)
     }
   })
 
