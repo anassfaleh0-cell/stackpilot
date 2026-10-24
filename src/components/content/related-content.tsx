@@ -2,7 +2,6 @@ import Link from "next/link"
 import { Card, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight } from "lucide-react"
-import { isContentAvailable, getContentTitle } from "@/lib/content/registry"
 
 interface RelatedItem {
   slug: string
@@ -32,30 +31,14 @@ const ROUTE_FOR_TYPE: Record<string, string> = {
   category: "category",
 }
 
-const REVIEW_SLUG_ALIASES: Record<string, string> = {
-  // This legacy product-name slug has no page of its own; use the existing canonical review.
-  "acuity-scheduling": "acuity",
-}
-
-function resolveItem(item: RelatedItem): RelatedItem | null {
-  if (!ROUTE_FOR_TYPE[item.type]) return null
-  const slug = item.type === "review" ? (REVIEW_SLUG_ALIASES[item.slug] || item.slug) : item.slug
-  // Category landing pages are a separate route family, not records in the content registry.
-  if (item.type === "category") return { ...item, slug }
-  const registryType = item.type === "statistics" ? "statistic" : item.type
-  if (!isContentAvailable(registryType, slug)) return null
-  return { ...item, slug, title: getContentTitle(registryType, slug) || item.title }
-}
-
 export function RelatedContent({ items, title = "Related Resources", maxItems = 3 }: RelatedContentProps) {
-  const availableItems = items.map(resolveItem).filter((item): item is RelatedItem => item !== null).slice(0, maxItems)
-  if (!availableItems.length) return null
+  if (!items.length) return null
 
   return (
     <section className="mt-16 pt-8 border-t border-border">
       <h2 className="text-2xl font-bold mb-6">{title}</h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {availableItems.map((item) => (
+        {items.slice(0, maxItems).map((item) => (
           <RelatedCard key={`${item.type}-${item.slug}`} item={item} />
         ))}
       </div>
