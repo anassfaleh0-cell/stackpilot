@@ -46,6 +46,21 @@
       "title": "Adoption and total cost",
       "body": "Measure whether the workspace reduces repeated questions and makes decisions easier to retrieve. Include page cleanup, migration, templates, training, administration and plan-specific permissions in the cost model. Verify current product limits directly.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Ask a new employee to find the current onboarding steps, a project decision and an operational runbook. Measure whether they find the right page without guidance and whether the page identifies an owner and review date. Record duplicate or contradictory pages that need cleanup.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and governance",
+      "body": "Test a restricted page, an external guest, a former employee and a page that has been superseded. Confirm access and link behavior. Decide who reviews critical documentation and how old instructions are marked so users do not follow stale processes.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document space structure, content owners, permission groups, templates, search expectations, migration scope and export needs. Compare the time required to keep information current with the benefit of making it discoverable. Confirm current plan controls before storing sensitive information.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -149,5 +164,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 182
+  "wordCount": 304
 }
