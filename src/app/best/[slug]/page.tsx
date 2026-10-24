@@ -350,12 +350,19 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
             <section className="mt-12" aria-labelledby="related-best-pages">
               <h2 id="related-best-pages" className="text-2xl font-bold tracking-tight mb-5">More {page.category} Buying Guides</h2>
               <div className="grid gap-3 sm:grid-cols-2">
-                {relatedBestPages.map((related) => (
-                  <Link key={related.slug} href={`/best/${related.slug}`} className="rounded-xl border border-border p-4 hover:border-primary/30 hover:bg-muted-bg transition-colors">
-                    <span className="font-medium text-sm">{related.title}</span>
-                    <p className="text-xs text-muted-foreground mt-1">{related.description}</p>
-                  </Link>
-                ))}
+                {relatedBestPages.map((related) => {
+                  const hasUnverifiedRatings = related.picks.some((pick) => pick.ratingVerified !== true)
+                  const hasUnverifiedPricing = related.picks.some((pick) => pick.priceRangeVerified !== true)
+                  const relatedDescription = hasUnverifiedRatings || hasUnverifiedPricing
+                    ? `A practical guide to evaluating ${related.category.toLowerCase()} tools by workflow fit, requirements, integrations, and total cost. Ratings and pricing are not independently verified; compare current vendor terms and test representative workflows.`
+                    : stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(related.description))
+                  return (
+                    <Link key={related.slug} href={`/best/${related.slug}`} className="rounded-xl border border-border p-4 hover:border-primary/30 hover:bg-muted-bg transition-colors">
+                      <span className="font-medium text-sm">{related.title}</span>
+                      <p className="text-xs text-muted-foreground mt-1">{relatedDescription}</p>
+                    </Link>
+                  )
+                })}
               </div>
             </section>
           )}
