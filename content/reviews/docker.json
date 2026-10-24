@@ -2,7 +2,7 @@
   "slug": "docker",
   "name": "Docker",
   "tagline": "Container tooling to package applications and make development and deployment environments more reproducible.",
-  "description": "Docker tooling can help teams package applications and dependencies into containers for repeatable development, testing and delivery. Production fit depends on image security, registries, runtime, orchestration, networking, storage and operational ownership; verify each part of the stack separately.",
+  "description": "Docker packages applications into containers for repeatable environments; current plan details and independent ratings are not verified here.",
   "category": "Developer Tools",
   "website": "https://docker.com",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "Container images can make dependencies and runtime assumptions more reproducible.",
     "A consistent image can support local development, CI and deployment workflows.",
-    "Image scanning and versioned releases can be included in a documented delivery process."
+    "Image scanning and versioned releases can be included in a documented delivery process.",
+    "A clean build can test reproducibility across developer and CI environments.",
+    "Image scanning and rollback can be included in the release checklist."
   ],
   "cons": [
     "Containers do not by themselves provide production orchestration, monitoring or recovery.",
     "Images require ongoing patching, secret hygiene and supply-chain review.",
     "Networking, persistent storage and runtime differences must be tested in the target environment."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Core development workflow",
+      "available": false,
+      "description": "Docker: evaluate core development workflow with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Access and permissions",
+      "available": false,
+      "description": "Docker: evaluate access and permissions with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "CI or runtime fit",
+      "available": false,
+      "description": "Docker: evaluate ci or runtime fit with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Security controls",
+      "available": false,
+      "description": "Docker: evaluate security controls with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Failure handling",
+      "available": false,
+      "description": "Docker: evaluate failure handling with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Monitoring",
+      "available": false,
+      "description": "Docker: evaluate monitoring with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Integrations",
+      "available": false,
+      "description": "Docker: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Export and portability",
+      "available": false,
+      "description": "Docker: evaluate export and portability with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -66,19 +109,23 @@
   "faqs": [
     {
       "question": "Who should evaluate Docker?",
-      "answer": "Evaluate Docker when the workflow described in this review matches a real requirement. Test it with representative work and verify current capabilities and plan limits directly with the vendor."
+      "answer": "Evaluate Docker when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Is Docker the right fit for every team?",
-      "answer": "No. Fit depends on the workflow, team skills, region, existing tools and controls required. Compare alternatives against the same written criteria."
+      "question": "How should a team test Docker?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "Are pricing and ratings independently verified here?",
-      "answer": "No. Current prices, plan limits and independent rating datasets are not verified in this review. Check official documentation and request a dated quote before purchase."
+      "question": "Which limitations should be checked in Docker?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "What should be checked before adoption?",
-      "answer": "Test the core workflow, failure cases, permissions, integrations, export and offboarding. Include implementation, training, administration and renewal terms in the total-cost estimate."
+      "question": "Are Docker prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting Docker?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [
