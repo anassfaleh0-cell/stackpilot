@@ -45,7 +45,7 @@ describe("getComparisonDecision", () => {
     })
   })
 
-  it("does not publish a stored winner without explicit provenance", () => {
+  it("labels a stored winner provisional when explicit provenance is absent", () => {
     expect(getComparisonDecision({
       winner: "alpha",
       tool1: "Alpha",
