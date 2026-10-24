@@ -46,6 +46,21 @@
       "title": "Cost and stack fit",
       "body": "Compare repository seats, build minutes, storage, integrations, support and any adjacent products required. Ask for current limits in writing and include maintenance effort in the total cost.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Migrate a sample repository and have a developer open a change from a clean environment. Confirm branch rules, required checks, review ownership and the release path. Verify that the target team can reproduce the build and identify which metadata was not carried over.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and governance",
+      "body": "Test a failed CI check, an expired secret, a contributor losing access and a rollback. Confirm that production credentials cannot be accessed from untrusted pull requests and that a release cannot bypass required checks. Review audit and repository ownership after staff changes.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document branch protections, workspace ownership, CI requirements, deployment permissions, migration gaps, artifact handling and support needs. Confirm current product limits directly. Choose the platform that supports the team's security and collaboration model with the least avoidable maintenance.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -127,7 +142,7 @@
     "supportQuality": "3.7/5",
     "releaseFrequency": "Bi-weekly"
   },
-  "wordCount": 164,
+  "wordCount": 286,
   "difficulty": "Advanced",
   "learningCurve": "Steep — requires dedicated training time for full proficiency",
   "whoShouldUse": "Bitbucket is designed for fast-growing startups that need a scalable developer tools platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
