@@ -70,6 +70,14 @@ describe("review content provenance", () => {
   })
 
 
+  it("does not render empty Pros or Cons panels when a review has no recorded items", () => {
+    const component = fs.readFileSync(path.join(process.cwd(), "src", "components", "editorial", "editorial-pros-cons.tsx"), "utf8")
+    expect(component).toContain("pros.length > 0 ?")
+    expect(component).toContain("cons.length > 0 ?")
+    expect(component).toContain("No evidence-backed strengths are recorded")
+    expect(component).toContain("No specific limitations are recorded")
+  })
+
   it("provides useful review FAQs when filtering removes every stored FAQ", () => {
     const reviewPage = fs.readFileSync(path.join(process.cwd(), "src", "app", "reviews", "[slug]", "page.tsx"), "utf8")
     expect(reviewPage).toContain("const visibleFaqs = filteredReviewFaqs.length > 0 ? filteredReviewFaqs")
