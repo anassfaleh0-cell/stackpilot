@@ -5,14 +5,14 @@
   "extendedDefinition": "Open-source software is developed collaboratively by communities of developers who contribute code, fix bugs, and review each other's work. Licensing models like MIT, GPL, and Apache define how the software can be used, modified, and redistributed. Many modern SaaS platforms are built on open-source foundations such as Linux, PostgreSQL, and React. The open-source model promotes transparency, security through collective auditing, and rapid innovation. Buyers should evaluate license terms, project governance, and maintainer activity before adoption, since abandoned projects become security and maintenance liabilities. Managed distributions and commercial support vendors provide accountability while preserving the flexibility that open source offers. Total cost analysis should include patching, training, and the skills needed to operate the software safely.",
   "category": "Developer Tools",
   "examples": [
-    "Linux",
-    "PostgreSQL",
-    "React"
+    "A developer reviews a project's license to confirm whether its code can be modified and redistributed inside a commercial product.",
+    "An operations team chooses a managed PostgreSQL service so it can use open-source database technology while outsourcing routine infrastructure maintenance.",
+    "Before adopting a self-hosted open-source tool, a security lead checks release activity, vulnerability disclosures, maintainer coverage, and the team's patching capacity."
   ],
   "relatedTerms": [
     "api",
     "saas",
     "freemium"
   ],
-  "description": "Open-source software has source code that anyone can inspect, modify, and enhance. Learn how open-source tools drive innovation in the software industry."
+  "description": "Open-source software makes source code available under a license that defines how it can be used, modified, and redistributed. Learn how to assess licensing, maintenance, security, and operating costs."
 }
