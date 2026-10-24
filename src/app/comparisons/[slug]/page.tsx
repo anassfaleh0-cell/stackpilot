@@ -100,6 +100,10 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
     tool2Slug: cmp.tool2Slug,
     tool2Category: review2?.category,
   })
+  // A verified feature-coverage leader is narrower than an overall product-quality winner.
+  const featureCoverageLeader = cmp.featuresVerified === true && !categoriesDiffer && t1Pct !== null && t2Pct !== null && t1Pct !== t2Pct
+    ? (t1Pct > t2Pct ? cmp.tool1 : cmp.tool2)
+    : null
 
   // Reuse the review FAQ integrity filter so comparison FAQs do not repeat unverified pricing or templated compliance claims in HTML or FAQ schema.
   const visibleFaqs = getSpecificComparisonFaqs(cmp.faqs).slice(0, 8)
@@ -183,14 +187,14 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           {/* Tool Compare Cards */}
           {(t1Pct !== null || t2Pct !== null) && <div className="grid sm:grid-cols-2 gap-6 mb-8">
             {[
-              { name: cmp.tool1, slug: cmp.tool1Slug, isWinner: (hasComparableWinner && winnerLabel === cmp.tool1) || provisionalWinnerLabel === cmp.tool1, score: t1Pct },
-              { name: cmp.tool2, slug: cmp.tool2Slug, isWinner: (hasComparableWinner && winnerLabel === cmp.tool2) || provisionalWinnerLabel === cmp.tool2, score: t2Pct },
+              { name: cmp.tool1, slug: cmp.tool1Slug, isWinner: (hasComparableWinner && winnerLabel === cmp.tool1) || provisionalWinnerLabel === cmp.tool1 || featureCoverageLeader === cmp.tool1, score: t1Pct },
+              { name: cmp.tool2, slug: cmp.tool2Slug, isWinner: (hasComparableWinner && winnerLabel === cmp.tool2) || provisionalWinnerLabel === cmp.tool2 || featureCoverageLeader === cmp.tool2, score: t2Pct },
             ].map((tool) => (
               <GlassCard key={tool.name} glow={tool.isWinner}>
                 <div className="p-5 text-center relative">
                   {tool.isWinner && (
                     <Badge variant="warning" className="absolute -top-2.5 right-3">
-                      {hasComparableWinner ? "Verified pick" : "Provisional pick · verify evidence"}
+                      {hasComparableWinner ? "Verified pick" : provisionalWinnerLabel === tool.name ? "Provisional pick · verify evidence" : featureCoverageLeader === tool.name ? "Feature coverage leader" : "Pick"}
                     </Badge>
                   )}
                   <div className="text-xl font-bold mb-2">{tool.name}</div>
@@ -236,7 +240,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                     </li>
                     <li className="flex items-start gap-2 text-sm">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-subtle text-primary text-xs font-bold shrink-0 mt-0.5">3</span>
-                      <span className="text-muted-foreground">{hasComparableWinner ? `${winnerLabel} is the recorded pick. Review the supporting criteria and verify current evidence before relying on it.` : provisionalWinnerLabel ? `${provisionalWinnerLabel} is a provisional dataset pick, not an independently verified winner. Check the underlying criteria and your workflow before deciding.` : categoriesDiffer ? "These products serve different primary categories; compare their separate use cases rather than treating the dataset pick as a head-to-head winner." : "The source data does not name a comparable winner — evaluate against priority requirements"}</span>
+                      <span className="text-muted-foreground">{hasComparableWinner ? `${winnerLabel} is the recorded pick. Review the supporting criteria and verify current evidence before relying on it.` : provisionalWinnerLabel ? `${provisionalWinnerLabel} is a provisional dataset pick, not an independently verified winner. Check the underlying criteria and your workflow before deciding.` : featureCoverageLeader ? `${featureCoverageLeader} has the higher count of available items across ${scoredFeatures.length} verified boolean feature checks. This is a feature-coverage result, not an overall product-quality rating.` : categoriesDiffer ? "These products serve different primary categories; compare their separate use cases rather than treating the dataset pick as a head-to-head winner." : "The source data does not name a comparable winner — evaluate against priority requirements"}</span>
                     </li>
                   </ul>
                 </div>
@@ -305,7 +309,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                 <div className="flex items-center gap-2 mb-3">
                   <CheckCircle2 size={18} className="text-primary" />
                   <p className="text-lg font-semibold">
-                    {hasComparableWinner ? `Verified recorded pick: ${winnerLabel}` : provisionalWinnerLabel ? `Provisional pick (verification pending): ${provisionalWinnerLabel}` : categoriesDiffer ? "Different product categories" : "How they compare"}
+                    {hasComparableWinner ? `Verified recorded pick: ${winnerLabel}` : provisionalWinnerLabel ? `Provisional pick (verification pending): ${provisionalWinnerLabel}` : featureCoverageLeader ? `Feature coverage leader: ${featureCoverageLeader}` : categoriesDiffer ? "Different product categories" : "How they compare"}
                   </p>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed"><RichText text={stripDeadContentLinks(displayCopy.verdict)} /></p>
