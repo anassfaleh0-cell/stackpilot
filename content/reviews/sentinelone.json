@@ -2,21 +2,22 @@
   "slug": "sentinelone",
   "name": "SentinelOne",
   "tagline": "Endpoint security platform to evaluate for detection, response, fleet management and incident investigation; verify edition-specific capabilities before purchase.",
-  "description": "A buyer-oriented SentinelOne profile for teams assessing endpoint protection and response. Current pricing, ratings, review counts, feature availability and contract terms have not been independently verified by PilotStack; confirm them in current vendor documentation and a scoped quote.",
+  "description": "SentinelOne helps teams evaluate endpoint protection and response. Pricing, ratings, and feature availability are not independently verified.",
   "category": "Security & Compliance",
   "website": "https://sentinelone.com",
   "pricing": "Not independently verified",
   "priceRange": "Not independently verified — request current pricing from the vendor",
   "pros": [
-    "Relevant to evaluate when endpoint detection and response, centralized policy management, and investigation workflows are requirements.",
-    "Potentially useful for organizations that need endpoint visibility and response controls across managed devices; confirm the exact coverage and edition.",
-    "Can be assessed alongside the organization's identity, SIEM, ticketing, and incident-response workflow."
+    "Designed around endpoint detection and response workflows; evaluate whether available controls match your incident procedures.",
+    "Centralized policy and fleet management may suit teams responsible for many managed endpoints; validate the deployment model.",
+    "Can be evaluated alongside identity, SIEM, ticketing, and incident-response workflows through a scoped integration review.",
+    "Endpoint controls give teams a concrete way to test detection, containment, and recovery in a safe lab scenario.",
+    "Product scope can be checked against a defined device inventory and required operating systems before rollout."
   ],
   "cons": [
-    "Endpoint protection only covers assets that are in scope and properly enrolled; validate coverage for servers, remote devices, operating systems and unmanaged endpoints.",
-    "Automated containment or remediation can disrupt legitimate work; test response policies and rollback behavior in a controlled environment.",
-    "Licensing, retention, add-ons, support levels and feature availability may vary by package and contract; no current price is verified here.",
-    "Security buyers should review deployment effort, alert quality, telemetry retention, integrations, data handling and incident-response responsibilities before choosing."
+    "Coverage depends on supported operating systems and successful agent deployment; verify scope and gaps across all asset types.",
+    "Automated containment or remediation can interrupt legitimate work; test policies and recovery procedures in a controlled environment.",
+    "Current pricing, feature availability, certifications, support levels, and contract terms are not independently verified here; request current documentation and a scoped quote."
   ],
   "features": [
     {
@@ -171,5 +172,8 @@
   "learningCurve": "Enrollment and policy rollout are straightforward; deciding how autonomous each response mode should be takes real deliberation.",
   "whoShouldUse": "Teams that want the endpoint to act on detections without waiting for an analyst, and that can plan an agent rollout across every machine they need covered, with a policy review completed before autonomy is turned up.",
   "whoShouldNotUse": "Organizations that require a human approval step before any response action, environments with devices that cannot host an agent, or buyers whose need is employee sign-in rather than machine protection.",
-  "featuresVerified": false
+  "featuresVerified": false,
+  "rating": null,
+  "reviewCount": null,
+  "ratings": []
 }
