@@ -51,6 +51,21 @@
       "title": "Who should evaluate it",
       "body": "Include Sketch when the design team is primarily on macOS and values its current native workflow. Compare it with browser-based collaborative tools if cross-platform editing, external-client access or live collaboration is mandatory.",
       "type": "text"
+    },
+    {
+      "title": "A practical pilot",
+      "body": "Choose a real screen from an active product and recreate it with the components the team uses most often. Ask a second designer to make a revision and a developer to consume the exported assets. Record setup time, missing handoff details, collaboration friction and any plugin dependency. Use the result to compare the workflow with the team's existing process rather than judging from a feature tour.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases to test",
+      "body": "Test a missing font, a renamed component, a conflicting edit, a restricted file and a project handoff to someone who was not involved in setup. Check whether the team can recover the approved version and identify the owner of each change. These cases reveal whether the tool fits a multi-person design process, not just an individual designer's canvas.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document the supported operating systems, required integrations, licensing assumptions, collaboration limits and export formats. Record which details were confirmed in current vendor documentation and which were observed in the pilot. Revisit the decision when the team changes its platform mix or the product's collaboration and licensing model changes.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -140,5 +155,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 206
+  "wordCount": 378
 }
