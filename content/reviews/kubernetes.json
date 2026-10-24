@@ -46,6 +46,21 @@
       "title": "Operational readiness",
       "body": "Document cluster ownership, supported versions, backup and restore, capacity planning, deployment approvals and incident escalation. Start with a limited workload and prove the operating model before migrating additional services.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Deploy one service through the intended pipeline, trigger a rollout, simulate a failed readiness check and roll back. Confirm that an on-call engineer can identify the failing component and restore service using the runbook. Record the work required for upgrades and day-two maintenance.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and recovery",
+      "body": "Test unavailable dependencies, a pod restart, a node disruption, exhausted resource limits and a bad configuration. Verify alert routing, safe termination and recovery. Confirm that secrets and service accounts use least privilege and that cluster access is reviewed.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document cluster ownership, supported versions, upgrade cadence, recovery objectives, resource policy, networking, observability and staffing. Compare the operating cost with a simpler managed runtime. Do not adopt Kubernetes unless the workload and team justify the added complexity.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -141,5 +156,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 172
+  "wordCount": 290
 }
