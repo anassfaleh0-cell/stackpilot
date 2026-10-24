@@ -88,6 +88,17 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
   const primaryPro = tool.pros.find((item) => typeof item === "string" && item.trim())
   const primaryCon = tool.cons.find((item) => typeof item === "string" && item.trim())
+  const defaultScoreDimensions = [
+    { label: "Core capabilities", weight: "20%" },
+    { label: "Ease of use", weight: "15%" },
+    { label: "Value for money", weight: "15%" },
+    { label: "Support", weight: "10%" },
+    { label: "Security and privacy", weight: "10%" },
+    { label: "Integrations", weight: "10%" },
+    { label: "Reliability and performance", weight: "10%" },
+    { label: "Documentation", weight: "5%" },
+    { label: "Scalability", weight: "5%" },
+  ]
   const reviewVerdict = [
     primaryPro ? `Consider ${tool.name} when this strength matters to your workflow: ${primaryPro.replace(/\\s+/g, " ").trim()}` : `Evaluate ${tool.name} against your required workflows and must-have capabilities before shortlisting it.`,
     primaryCon ? `Main trade-off to validate: ${primaryCon.replace(/\\s+/g, " ").trim()}` : `Confirm the limitations, support terms, and plan restrictions that matter to your team before adopting it.`,
@@ -445,8 +456,22 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 ) : (
                   <GlassCard>
                     <div className="p-4">
-                      <h3 className="font-semibold mb-2 text-sm">Rating Breakdown</h3>
-                      <p className="text-sm text-muted-foreground">Category scores are pending an evidence-backed assessment. No category numbers are fabricated; score this review against the published methodology before adding a numeric breakdown.</p>
+                      <h3 className="font-semibold mb-2 text-sm">Editorial Scorecard</h3>
+                      <p className="text-xs text-muted-foreground mb-4">The same published rubric is used for every product. Numeric marks stay unassigned until supporting evidence is recorded; this keeps missing assessments visible without inventing scores.</p>
+                      <div className="space-y-3">
+                        {defaultScoreDimensions.map((dimension) => (
+                          <div key={dimension.label}>
+                            <div className="flex items-center justify-between gap-3 text-xs mb-1">
+                              <span className="text-foreground">{dimension.label}</span>
+                              <span className="text-muted-foreground">{dimension.weight} · Not assessed</span>
+                            </div>
+                            <div className="h-1.5 rounded-full bg-muted-bg overflow-hidden">
+                              <div className="h-full rounded-full bg-muted-foreground/25" style={{ width: dimension.weight }} />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <Link href="/methodology" className="inline-flex mt-4 text-xs font-medium text-primary hover:underline">Read the scoring methodology <ArrowRight size={12} className="ml-1" /></Link>
                     </div>
                   </GlassCard>
                 )}
