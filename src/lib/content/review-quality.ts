@@ -109,23 +109,23 @@ function replacementForUnverifiedSection(title: string, productName = "this prod
   return `This section needs product-specific evidence before its legacy claims can be treated as verified. For ${productName}, check current official documentation, test the workflow with representative data, and record the source and date for each material conclusion.`
 }
 
-export function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false, showVerifiedRatings = false): ContentSection[] {
+export function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false, showVerifiedRatings = false, productName = "this product"): ContentSection[] {
   return content
     .filter((section) => !HIDDEN_REVIEW_SECTION_TITLES.has(section.title))
     .map((section) => {
       if (section.type === "diagram" && section.body === "pricing-ladder" && !showVerifiedPricing) {
-        return { ...section, type: "text" as const, body: replacementForUnverifiedSection(section.title), items: section.items }
+        return { ...section, type: "text" as const, body: replacementForUnverifiedSection(section.title, productName), items: section.items }
       }
       if (section.type === "diagram" && section.body === "feature-radar" && !showVerifiedRatings) {
-        return { ...section, type: "text" as const, body: replacementForUnverifiedSection(section.title), items: section.items }
+        return { ...section, type: "text" as const, body: replacementForUnverifiedSection(section.title, productName), items: section.items }
       }
       const generatedClaim = GENERATED_REVIEW_SECTION_PATTERNS.some((pattern) => pattern.test(section.body.trim()))
       const body = generatedClaim
-        ? replacementForUnverifiedSection(section.title)
+        ? replacementForUnverifiedSection(section.title, productName)
         : (showVerifiedPricing ? section.body : stripUnverifiedPriceClaims(section.body))
       const items = section.items?.map((item) =>
         GENERATED_REVIEW_SECTION_PATTERNS.some((pattern) => pattern.test(item.trim()))
-          ? replacementForUnverifiedSection(section.title)
+          ? replacementForUnverifiedSection(section.title, productName)
           : (showVerifiedPricing ? item : stripUnverifiedPriceClaims(item))
       )
       return { ...section, body, items }
