@@ -1,0 +1,133 @@
+{
+  "slug": "timely",
+  "name": "Timely",
+  "seoTitle": "Timely Review (2026): Workflow Fit & Buyer Checklist",
+  "seoDescription": "A practical Timely review covering time capture, project context, review and correction routines, reporting, privacy expectations, and verification of current plan features.",
+  "tagline": "A time-tracking workflow to evaluate for accurate records, project review, and reduced manual timesheet effort.",
+  "description": "A practical Timely review covering time capture, project context, review and correction routines, reporting, privacy expectations, and verification of current plan features.",
+  "category": "Time Tracking",
+  "website": "https://timelyapp.com/",
+  "pricing": "Not independently verified",
+  "priceRange": "Not independently verified",
+  "rating": null,
+  "reviewCount": null,
+  "ratingVerified": false,
+  "reviewCountVerified": false,
+  "ratings": [],
+  "ratingsVerified": false,
+  "priceRangeVerified": false,
+  "featuresVerified": false,
+  "companyFactsVerified": false,
+  "pros": [
+    "A structured pilot can show whether time records include enough context for planning and project review.",
+    "Review and correction routines can improve trust when users understand the purpose and visibility of recorded data.",
+    "A sample export makes it possible to check whether reports fit the team's existing workflow."
+  ],
+  "cons": [
+    "Time data may be incomplete or misclassified unless the team agrees on a review and correction routine.",
+    "Current automation, privacy, pricing, and plan entitlements are not independently verified here.",
+    "Teams should confirm the data collection model and access controls before adopting automated time capture."
+  ],
+  "features": [
+    {
+      "name": "Time capture",
+      "description": "Test how recorded time is reviewed, corrected, and associated with a project.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Project context",
+      "description": "Verify whether the team can connect time records to the tasks and clients it needs.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Review and approval",
+      "description": "Check how users and managers identify incomplete or misclassified records.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Reporting and export",
+      "description": "Reconcile a sample report against source records and the intended business question.",
+      "available": true,
+      "category": "Core"
+    }
+  ],
+  "content": [
+    {
+      "title": "Time capture and transparency",
+      "body": "Start with a small pilot and explain why the organization wants to understand time use. Define who can view individual records, how entries can be corrected, and which reports will be used for planning. Test a normal work day, a meeting-heavy day, and work that spans several projects. Automated capture can reduce manual effort, but the resulting record still needs context and a fair review process.",
+      "type": "text"
+    },
+    {
+      "title": "Project context and classification",
+      "body": "Decide how the team will associate time with clients, projects, tasks, and internal work. Use a small set of categories that people can apply consistently. Test ambiguous cases, such as switching projects mid-task or correcting an entry after the day ends. If records cannot be assigned clearly, the report may show activity without explaining what the team actually worked on.",
+      "type": "text"
+    },
+    {
+      "title": "Review and correction workflow",
+      "body": "Run a weekly review with sample records that are complete, incomplete, and misclassified. Check whether users can correct entries and whether reviewers can understand what changed. Agree when the period is considered final and how late corrections are handled. The goal is to create a reliable operational record, not to treat every automated observation as an unquestionable fact.",
+      "type": "text"
+    },
+    {
+      "title": "Privacy and team trust",
+      "body": "Before enabling automated capture, review the vendor's current explanation of what data is collected, when it is collected, and how it is displayed to users and administrators. Test the actual settings available to the account. Explain the intended use of the data to the team and avoid collecting more than the workflow needs. If the organization has employee monitoring policies, confirm that the setup follows them before expanding the pilot.",
+      "type": "text"
+    },
+    {
+      "title": "Reporting and data hand-off",
+      "body": "Choose a question the team needs to answer, such as where project effort is going or which work requires better estimates. Export a representative period and compare the totals with the underlying records. Verify time zones, rounding, grouping, and the treatment of corrected entries. If the report feeds another system, test the full hand-off with a sample before relying on it.",
+      "type": "text"
+    },
+    {
+      "title": "Pricing and decision checklist",
+      "body": "Current Timely prices, plan limits, and automated capture details are not independently verified here. Confirm the official terms for team size, projects, reports, data retention, integrations, and administration. Pilot for a complete reporting period and measure correction effort, data usefulness, user trust, and ongoing administration. No numeric editorial score is asserted until a documented assessment is completed.",
+      "type": "text"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What should a team test first in Timely?",
+      "answer": "Run a small time-tracking pilot, then review classification, corrections, report usefulness, and how users understand the collection process."
+    },
+    {
+      "question": "Are Timely's current pricing and privacy terms verified here?",
+      "answer": "No. Check the vendor's current documentation and plan terms for your account and region."
+    },
+    {
+      "question": "How can a team build trust in time records?",
+      "answer": "Explain the purpose, define access, allow corrections, and use records for agreed operational questions rather than unexplained surveillance."
+    },
+    {
+      "question": "Does PilotStack publish a verified Timely rating?",
+      "answer": "No independently verified aggregate rating or third-party review count is recorded on this page."
+    }
+  ],
+  "relatedComparisons": [],
+  "relatedGuides": [],
+  "relatedPosts": [],
+  "alternatives": [],
+  "author": "PilotStack Editorial Team",
+  "contentPublished": "2026-10-24",
+  "contentModified": "2026-10-24",
+  "company": {
+    "industries": [
+      "Time Tracking"
+    ],
+    "targetUsers": [
+      "Teams that want to test a consistent process for understanding time spent across projects and client work."
+    ],
+    "pricingModel": "Not independently verified",
+    "deployment": [
+      "Cloud"
+    ],
+    "apiAvailable": null,
+    "learningCurve": "Evaluate with a representative workflow",
+    "migrationComplexity": "Depends on existing tools"
+  },
+  "difficulty": "Beginner to intermediate",
+  "learningCurve": "Evaluate with a representative workflow",
+  "whoShouldUse": "Teams that want to test a consistent process for understanding time spent across projects and client work.",
+  "whoShouldNotUse": "Organizations that need payroll or compliance-ready records without confirming the exact supported workflow and approval process."
+}
