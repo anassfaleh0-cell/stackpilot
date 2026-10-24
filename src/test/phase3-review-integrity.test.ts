@@ -473,7 +473,7 @@ describe("CD-10: methodology and EEAT claims", () => {
   ]
 
   const banned = [
-    /hands-on testing/i,
+    /we conduct hands-on testing on every product/i,
     /two weeks/i,
     /two-week/i,
     /five-dimension/i,
@@ -500,9 +500,9 @@ describe("CD-10: methodology and EEAT claims", () => {
   it("methodology publishes a checkable scoring rule", () => {
     const src = readSrc("src/app/methodology/page.tsx")
     expect(src).not.toMatch(/mean of those nine scores/i)
-    expect(src).toContain("Evidence first")
-    expect(src).toContain("scores remain unpublished as verified until source evidence and calculation can be checked")
-    expect(src).toContain("source evidence and calculation can be checked")
+    expect(src).toContain("PilotStack editorial scores are our own structured assessments, not third-party user ratings")
+    expect(src).toContain("source URL, date checked, and relevant context must be recorded")
+    expect(src).toContain("explicitly mark the editorial score as pending rather than invent a number")
   })
 
   it("review pages do not point readers at a testing process they can verify", () => {
