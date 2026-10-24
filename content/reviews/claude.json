@@ -46,6 +46,21 @@
       "title": "Cost and rollout",
       "body": "Estimate seats or usage, integration work, review time and failure handling. Pilot with a bounded group and measure quality, adoption and cost against a baseline. Verify current model availability, usage limits and plan terms directly.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Build a small evaluation set from real tasks and include both routine and difficult examples. Have reviewers score correctness, completeness, source fidelity, tone and editing time using the same rubric. Keep the input and model output version so results can be compared after product changes.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and human review",
+      "body": "Include conflicting source passages, missing context, an ambiguous instruction and a question that cannot be answered from the provided material. Check whether the assistant preserves uncertainty rather than inventing a fact. Define which outputs need human approval before publication or action.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document approved use cases, prohibited data, prompt ownership, review rules, retention and the process for correcting errors. Estimate usage and review costs with realistic volume. Verify current product and plan terms directly and re-run the evaluation after significant model or workflow changes.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -127,7 +142,7 @@
     "supportQuality": "4.0/5",
     "releaseFrequency": "Bi-weekly"
   },
-  "wordCount": 195,
+  "wordCount": 323,
   "difficulty": "Beginner",
   "learningCurve": "Minimal — most users can get started within an hour",
   "whoShouldUse": "Writers, analysts, developers, and teams can evaluate Claude for drafting, summarizing long material, exploring ideas, and assisting with code or document workflows. Use representative prompts and check factual accuracy, source traceability, context handling, and how well outputs fit the team's review process.",
