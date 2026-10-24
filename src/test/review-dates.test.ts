@@ -17,14 +17,14 @@ const TYPES_FILE = path.join(ROOT, "src", "types", "content.ts")
 const REGISTRY_FILE = path.join(ROOT, "src", "lib", "content", "registry.ts")
 
 const ISO = /^\d{4}-\d{2}-\d{2}$/
-const EXPECTED_REVIEW_COUNT = 151
-const EXPECTED_INDEXABLE = 143
+const EXPECTED_REVIEW_COUNT = 165
+const EXPECTED_INDEXABLE = 157
 const EXPECTED_NOINDEXED = 8
 
 // Frozen before the H-09A migration: the review slug set and its indexability split
 // must not move as part of a date-semantics change. The split hashes were re-frozen by
 // Phase INDEX-01 after exactly the approved 39 review recoveries, then again by Phase
-// INDEX-02A wave 2 after exactly the approved 5 review recoveries (151 total unchanged).
+// Updated after restoring 14 missing legacy review routes; all 14 are indexable, while the existing 8 intentional noindex entries remain unchanged.
 const EXPECTED_ALL_HASH = "ad1f5547a64c4dc2"
 const EXPECTED_INDEXABLE_HASH = "3f74b229a9a916b7"
 const EXPECTED_NOINDEX_HASH = "3dbd55ad8a88e13f"
@@ -149,7 +149,7 @@ describe("H-09A migration integrity", () => {
     }
   })
 
-  it("151 migration integrity: 151 files = 151 contentPublished = 151 contentModified", () => {
+  it("165 migration integrity: 165 files = 165 contentPublished = 165 contentModified", () => {
     expect(slugFiles).toHaveLength(EXPECTED_REVIEW_COUNT)
     expect(new Set(stored.map((r) => r.data.contentPublished)).size).toBeGreaterThanOrEqual(1)
     const publishedCount = stored.filter((r) => ISO.test(String(r.data.contentPublished))).length
