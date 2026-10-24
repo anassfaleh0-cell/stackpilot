@@ -2,15 +2,7 @@
  * Comparison routes consolidated by permanent redirects.
  * Keep old URLs useful while preventing duplicate comparison pages from competing in the sitemap.
  */
-export const RETIRED_COMPARISON_SLUGS = new Set<string>([
-  // Legacy Zoho comparison slugs redirect to these canonical, evidence-based guides.
-  // Keep the redirects for old links, but never submit redirecting source URLs in the sitemap.
-  "close-crm-vs-zoho-crm",
-  "outreach-io-vs-zoho",
-  "pipedrive-vs-zoho",
-  "salesloft-vs-zoho",
-  "zendesk-vs-zoho",
-])
+export const RETIRED_COMPARISON_SLUGS = new Set<string>()
 
 export function isRetiredComparisonSlug(slug: string): boolean {
   return RETIRED_COMPARISON_SLUGS.has(slug)
