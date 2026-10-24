@@ -104,6 +104,26 @@
       "title": "Decision record",
       "body": "Document jurisdiction and tax requirements, users, invoice volume, accountant access, payment processing, integrations and data-export needs. Request current written pricing and include payment fees, setup, migration and support. Assign a finance owner for reconciliation and close.",
       "type": "text"
+    },
+    {
+      "title": "Invoice workflow evaluation",
+      "type": "text",
+      "body": "Evaluate FreshBooks with the invoice process the business uses every week. Create a sample customer, prepare an invoice with the usual line items, send it through the normal approval step, and record what happens after a payment or correction. Check the document layout, numbering, reminders, and the amount of manual editing required. Confirm that the available fields and workflow match the business's region and the account tier before moving live records."
+    },
+    {
+      "title": "Expense records and monthly review",
+      "type": "text",
+      "body": "Choose a small set of representative expense records and test how the team adds notes, attaches receipts, categorizes items, and finds incomplete entries. Review the available reports against a sample period and confirm that totals can be exported in a format the bookkeeper or accountant can use. Test the process for correcting a mistake so that the change is understandable later, rather than relying on memory or a separate spreadsheet."
+    },
+    {
+      "title": "Setup and record migration",
+      "type": "text",
+      "body": "Before migrating, list the customer records, open invoices, historical documents, account balances, recurring items, and integrations that the business needs to preserve. Test the import and export process with a small sample, then reconcile the result with the source system. Keep the old system available until the team has checked the imported records and can retrieve a complete copy of the data if the migration needs to be reversed."
+    },
+    {
+      "title": "Pricing and adoption decision",
+      "type": "text",
+      "body": "Current FreshBooks pricing and plan entitlements are not independently verified in this review. Check the official pricing page for billing cadence, included users, client limits, integrations, and any usage-related charges. Compare the annual cost with the team's actual number of customers and invoices, and include the effort needed to maintain the process. The numeric editorial score remains pending until an evidence-backed assessment is recorded; no guessed score or third-party review aggregate is substituted."
     }
   ],
   "faqs": [
