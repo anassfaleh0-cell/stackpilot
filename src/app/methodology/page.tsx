@@ -25,7 +25,7 @@ const stages = [
   },
   {
     title: "Scoring & Ratings",
-    body: "Numeric ratings are presented as verified only when source provenance, consistent dimensions, and reproducible calculations are documented. A score should be displayed as verified only when the evidence and calculation can be checked. Where provenance is unavailable, the figure is qualified or omitted rather than presented as independent user sentiment or an observed product outcome.",
+    body: "PilotStack editorial scores are our own structured assessments, not third-party user ratings. They must use the published weighted rubric, cite current evidence for the dimensions scored, state the review date, and disclose whether hands-on testing was performed. Third-party ratings and review counts are separate fields and require a direct source, date checked, and actual count. We do not turn marketing claims into test results or imply that a product was hands-on tested when it was not. If evidence coverage is insufficient, we publish the review analysis and explicitly mark the editorial score as pending rather than invent a number.",
   },
   {
     title: "Consistency & Limits",
@@ -38,15 +38,15 @@ const stages = [
 ]
 
 const scoringRubric = [
-  { dimension: "Features", what: "Confirm the capability in current vendor documentation and the plan being evaluated", weight: "Evidence first" },
-  { dimension: "Usability", what: "Assess workflow fit with a representative task and clear acceptance criteria", weight: "Evidence first" },
-  { dimension: "Pricing", what: "Check current regional pricing, billing terms, limits, and add-on costs", weight: "Evidence first" },
-  { dimension: "Support", what: "Verify support channels, response commitments, and plan eligibility", weight: "Evidence first" },
-  { dimension: "Security", what: "Check published controls, certifications, and scope directly with the vendor", weight: "Evidence first" },
-  { dimension: "Integrations", what: "Verify required integrations and their plan or configuration limits", weight: "Evidence first" },
-  { dimension: "Performance", what: "Use dated, reproducible evidence; do not infer performance from marketing copy", weight: "Evidence first" },
-  { dimension: "Documentation", what: "Check current documentation coverage for the workflows you need", weight: "Evidence first" },
-  { dimension: "Scalability", what: "Validate limits, administration, and cost at expected usage levels", weight: "Evidence first" },
+  { dimension: "Features", what: "Breadth and depth of documented capabilities relevant to the target use case", weight: "20%" },
+  { dimension: "Usability", what: "Workflow clarity and task fit; hands-on testing must be explicitly identified when performed", weight: "15%" },
+  { dimension: "Pricing", what: "Value at the stated plan, regional price, limits, billing terms, and add-on costs", weight: "15%" },
+  { dimension: "Support", what: "Documented support channels, response commitments, and plan eligibility", weight: "10%" },
+  { dimension: "Security", what: "Published controls, certifications, and scope; no inference from generic claims", weight: "10%" },
+  { dimension: "Integrations", what: "Verified integrations and their plan, direction, and configuration limits", weight: "10%" },
+  { dimension: "Performance", what: "Dated reproducible evidence; marketing claims alone do not qualify", weight: "10%" },
+  { dimension: "Documentation", what: "Coverage and clarity of current technical and help documentation", weight: "5%" },
+  { dimension: "Scalability", what: "Documented limits, administration, governance, and expected total cost", weight: "5%" },
 ]
 
 export default function MethodologyPage() {
@@ -93,7 +93,7 @@ export default function MethodologyPage() {
               <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
                 <li>Affiliate and advertising relationships are disclosed separately from editorial recommendations</li>
                 <li>Consistent data is useful, but consistency alone does not prove a claim is sourced</li>
-                <li>Scores are not presented as independent user ratings unless their provenance is documented</li>
+                <li>Editorial scores are separate from external user ratings; both require clear provenance</li>
                 <li>Certification and company facts with no source should be omitted or labelled unverified</li>
                 <li>Readers can report errors through the contact page</li>
                 <li>Vendors cannot pay to change editorial scores or rankings</li>
@@ -119,7 +119,7 @@ export default function MethodologyPage() {
 
               <h2 className="text-2xl font-bold mt-12 mb-6">Scoring Rubric</h2>
               <p className="text-muted-foreground mb-4">
-                The following dimensions are useful prompts for evaluating software. They are not a claim that every product has a verified numeric score; scores remain unpublished as verified until source evidence and calculation can be checked:
+                Editorial scoring uses the weighted dimensions below (weights total 100%). Each dimension is scored from 1 to 5 against recorded evidence; the weighted sum is converted to a score out of 5. A numeric editorial score is published only after the assessment is complete and its date, evidence, and testing status are recorded. This is separate from third-party user ratings and review counts.
               </p>
               <div className="overflow-x-auto">
               <div className="border border-border rounded-xl overflow-hidden mb-8 min-w-[300px]">
@@ -128,7 +128,7 @@ export default function MethodologyPage() {
                     <tr className="bg-muted-bg border-b border-border">
                       <th className="text-left p-3 font-semibold">Dimension</th>
                       <th className="text-left p-3 font-semibold">What We Measure</th>
-                      <th className="text-center p-3 font-semibold">Evidence Status</th>
+                      <th className="text-center p-3 font-semibold">Weight</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -173,7 +173,7 @@ export default function MethodologyPage() {
               </p>
 
               <p className="text-xs text-muted-foreground mt-8">
-                Methodology last updated: October 23, 2026. This date records this page revision and does not mean every product claim across the site was rechecked on that date.
+                Methodology last updated: October 24, 2026. This date records this page revision and does not mean every product claim across the site was rechecked on that date.
               </p>
             </div>
           </div>
