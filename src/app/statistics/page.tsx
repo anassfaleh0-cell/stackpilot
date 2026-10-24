@@ -41,7 +41,7 @@ export default function StatisticsPage() {
             <Badge variant="default" className="mb-4">Market Research Guides</Badge>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Software Market Research Guides</h1>
             <p className="text-lg text-muted-foreground text-pretty">
-              Explore practical guides for evaluating software categories, choosing meaningful metrics, and checking market claims against original sources. Numeric estimates are withheld until their supporting evidence is documented.
+              Explore practical guides for evaluating software categories, choosing meaningful metrics, and checking market claims against original sources. Numeric estimates are withheld until their supporting evidence is documented. A record count is not a count of independently verified figures; each topic page explains its source-verification status.
             </p>
           </div>
         </Container>
@@ -62,7 +62,7 @@ export default function StatisticsPage() {
                 <Card className="h-full flex flex-col">
                   <div className="flex items-center gap-2 mb-3">
                     <BarChart3 size={16} className="text-primary" />
-                    <span className="text-xs text-muted-foreground">{cat.count > 0 ? `${cat.count} source-verified data points` : "Source audit in progress"}</span>
+                    <span className="text-xs text-muted-foreground">{cat.count > 0 ? `${cat.count} recorded metrics; source verification varies` : "Source audit in progress"}</span>
                   </div>
                   <CardTitle className="group-hover:text-primary transition-colors">{cat.title}</CardTitle>
                   <CardDescription className="mt-1.5">{cat.description}</CardDescription>
