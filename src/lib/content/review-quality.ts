@@ -5,7 +5,6 @@ const HIDDEN_REVIEW_SECTION_TITLES = new Set([
   "Quick Answer",
   "TL;DR",
   "Rating Overview",
-  "Key Features",
 ])
 
 // These patterns identify stock copy that asserts tests, ratings, customer counts,
