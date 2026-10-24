@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Card, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight } from "lucide-react"
+import { isContentAvailable, getContentTitle } from "@/lib/content/registry"
 
 interface RelatedItem {
   slug: string
@@ -31,14 +32,26 @@ const ROUTE_FOR_TYPE: Record<string, string> = {
   category: "category",
 }
 
+const REVIEW_SLUG_ALIASES: Record<string, string> = {
+  // This legacy product-name slug has no page of its own; use the existing canonical review.
+  "acuity-scheduling": "acuity",
+}
+
+function resolveItem(item: RelatedItem): RelatedItem | null {
+  const slug = item.type === "review" ? (REVIEW_SLUG_ALIASES[item.slug] || item.slug) : item.slug
+  if (!ROUTE_FOR_TYPE[item.type] || !isContentAvailable(item.type, slug)) return null
+  return { ...item, slug, title: getContentTitle(item.type, slug) || item.title }
+}
+
 export function RelatedContent({ items, title = "Related Resources", maxItems = 3 }: RelatedContentProps) {
-  if (!items.length) return null
+  const availableItems = items.map(resolveItem).filter((item): item is RelatedItem => item !== null).slice(0, maxItems)
+  if (!availableItems.length) return null
 
   return (
     <section className="mt-16 pt-8 border-t border-border">
       <h2 className="text-2xl font-bold mb-6">{title}</h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.slice(0, maxItems).map((item) => (
+        {availableItems.map((item) => (
           <RelatedCard key={`${item.type}-${item.slug}`} item={item} />
         ))}
       </div>
