@@ -1,8 +1,8 @@
 {
   "slug": "synthesia",
   "name": "Synthesia",
-  "tagline": "An AI avatar video workflow for scripted explainers, training and internal communications.",
-  "description": "Synthesia is an AI avatar video platform to evaluate for scripted training, explainers and internal communication. Fit depends on voice and language quality, editing control, disclosure requirements, accessibility, privacy and the audience; current pricing and independent ratings are not verified here.",
+  "tagline": "An AI avatar video workflow to evaluate for scripted training, explainers and internal communications.",
+  "description": "Synthesia is an AI avatar video tool for scripted training and explainers; current prices and independent ratings are not independently verified here.",
   "category": "Video & Content Creation",
   "website": "https://synthesia.io",
   "pricing": "Not independently verified",
@@ -10,80 +10,93 @@
   "rating": null,
   "reviewCount": 0,
   "pros": [
-    "A scripted pilot can test whether avatar narration fits a repeatable training or explainer format.",
-    "Template-based scenes may help standardize recurring communications when the output meets quality needs.",
-    "Localization and caption workflows are useful areas to test with actual audience languages."
+    "Can be evaluated for repeatable scripted training or explainer videos where a presenter-style format fits the audience.",
+    "A controlled script test can reveal pronunciation, pacing, scene and caption issues before production.",
+    "Localization, caption review and template consistency are useful areas to test for recurring communications.",
+    "An approval checklist can help keep generated video aligned with the source script and brand requirements.",
+    "A pilot can compare production and revision effort with a screen recording or human-presenter video."
   ],
   "cons": [
-    "Avatar presentation may be inappropriate for sensitive, personal or trust-critical messages.",
-    "Pronunciation, visual realism, gestures and brand fit need human review before publication.",
-    "Verify rights, consent, retention and commercial-use terms for voices, avatars and uploaded material."
+    "Avatar presentation may not suit sensitive messages, interviews or content that depends on genuine human interaction.",
+    "Pronunciation, translation, gestures and factual accuracy require human review before publication.",
+    "Verify rights, consent, retention, data handling and commercial-use terms for voices, avatars and uploaded material."
   ],
   "features": [],
   "ratings": [],
   "content": [
     {
-      "title": "What the workflow produces",
-      "body": "The basic workflow is to prepare a script, select a presenter or avatar, arrange scenes and generate a narrated video. It is most useful to evaluate for repeatable scripted material; it should not be assumed to replace filming, animation, expert demonstration or authentic human communication in every context.",
+      "title": "What Synthesia does",
+      "body": "Synthesia is an AI avatar video platform to evaluate for scripted training, explainers and internal communication. The workflow generally starts with a script, a presenter or avatar choice, scenes and a generated video. This is a different production model from filming a real person or recording a software demonstration. Decide which format best serves the audience before comparing tools.",
+      "type": "text"
+    },
+    {
+      "title": "Where Synthesia may fit",
+      "body": "Synthesia may be worth evaluating when the organization produces repeatable explainers, onboarding modules or internal training from approved scripts. Start with one short video and a clear learning objective. Check whether viewers understand the content, whether the presenter style is appropriate and whether the result can be maintained when instructions change.",
       "type": "text"
     },
     {
       "title": "Script and scene quality",
-      "body": "Use a short script containing product terminology, names, numbers and a call to action. Check pronunciation, pacing, emphasis, transitions and whether the visual scenes support the message. Record the number of corrections needed before the video is publishable.",
+      "body": "Use a script containing names, product terminology, numbers and a call to action. Review pronunciation, pacing, emphasis, transitions and whether the visuals support the spoken message. Have a subject-matter expert verify every factual statement and compare the generated video with the approved source script. Record the number of edits required before publication.",
       "type": "text"
     },
     {
       "title": "Localization and accessibility",
-      "body": "Test the actual target languages rather than relying on a language list. Have a fluent reviewer check pronunciation and translation, then verify captions, transcript quality, contrast and reading speed. Confirm whether translated versions preserve the meaning and regulatory wording of the source.",
+      "body": "Test the actual target languages rather than relying on a language list. Ask a fluent reviewer to check pronunciation, idiom and meaning, then inspect captions and transcripts for accuracy. Confirm that text remains readable on mobile, that the pace allows comprehension and that the video works for viewers who rely on captions. Document any language or accessibility limitation.",
       "type": "text"
     },
     {
       "title": "Brand and editorial review",
-      "body": "Create a review checklist for factual accuracy, brand voice, visual consistency and disclosure of synthetic presenters where appropriate. Keep script versions and approval records, and require a human owner to sign off before publication.",
+      "body": "Create a checklist for factual accuracy, tone, visual consistency, disclosures and approval ownership. Keep the source script and generated version together so reviewers can identify changes. If a product feature or policy changes, identify every affected video and assign an owner to correct or retire outdated material. Do not publish generated claims without a human sign-off.",
       "type": "text"
     },
     {
       "title": "Privacy, consent and rights",
-      "body": "Review the vendor's current terms for uploaded scripts, recordings, custom avatars, voice likenesses, training data, retention and deletion. Obtain appropriate consent and usage rights for any real person's likeness or voice, and avoid uploading confidential data without authorization.",
+      "body": "Review the current vendor terms for uploaded scripts, recordings, custom avatars, voice likenesses, data retention, training use and deletion. Obtain appropriate permission for a real person's likeness or voice and confirm commercial-use rights for any included assets. Avoid uploading confidential customer or employee information unless the organization's policy and contract allow it.",
       "type": "text"
     },
     {
-      "title": "Where it may not fit",
-      "body": "Consider another format for emotionally sensitive messages, interviews, complex physical demonstrations or content where the audience expects a real subject-matter expert on camera. Compare the total production effort against a human recording, screen capture or conventional animation.",
+      "title": "When another format may be better",
+      "body": "Consider a human presenter for sensitive announcements, interviews or situations where authenticity and personal trust matter. Use screen capture when the audience needs to see a real interface or exact sequence of actions. Conventional animation may be clearer for abstract or highly technical processes. Compare formats using the same learning goal and audience, not production speed alone.",
       "type": "text"
     },
     {
-      "title": "Pilot acceptance criteria",
-      "body": "Produce a short training video using approved source material and a script containing product terminology, dates and numbers. Have a subject-matter expert review factual accuracy and a target-language reviewer check pronunciation and captions. Record revision time, visual issues, mispronunciations and whether viewers can complete the intended task after watching.",
-      "type": "text"
+      "title": "Synthesia: Practical pilot checklist",
+      "body": "For the pilot, record the approved script, target audience, required languages, reviewer names, caption standard, disclosure decision and success criteria. Produce a short video, review it for factual and visual errors, and ask a small audience to complete a task or answer a comprehension question. Track revision time and unresolved issues. Treat untested capabilities as unknown and verify current plan-specific limits with the vendor.",
+      "type": "list",
+      "items": [
+        "Use approved source material and a named content owner.",
+        "Check pronunciation, facts, captions and visual consistency.",
+        "Record consent and asset rights where a real likeness or voice is used.",
+        "Verify privacy, retention and export terms for the exact plan.",
+        "Require human approval before public or consequential use."
+      ]
     },
     {
-      "title": "Failure cases and disclosure",
-      "body": "Test a script change after scenes are generated, a mispronounced name, an outdated instruction and a request to remove a published video. Decide how synthetic-presenter use is disclosed where appropriate and how approvals are retained. Never use a real person's likeness or voice without appropriate rights and consent.",
-      "type": "text"
-    },
-    {
-      "title": "Decision record",
-      "body": "Document approved use cases, prohibited content, data-handling terms, reviewer responsibilities, language requirements and the process for correcting published errors. Compare the effort with a human recording, screen capture or animation for the same brief. Reassess when the audience or subject matter requires a more personal or demonstrative format.",
+      "title": "Synthesia: Decision and rollout",
+      "body": "Before adopting Synthesia, document approved use cases, prohibited content, data-handling terms, language requirements and the process for correcting published videos. Compare the effort with a human recording, screen capture or animation for the same brief. Start with a limited pilot, assign an owner for the template and approval process, and reassess when the audience or subject matter changes.",
       "type": "text"
     }
   ],
   "faqs": [
     {
       "question": "Who should evaluate Synthesia?",
-      "answer": "Evaluate Synthesia only if the workflow described in this review matches a real requirement. Test it with representative work and verify current capabilities, plan limits and data terms directly with the vendor."
+      "answer": "Evaluate Synthesia when repeatable scripted training or explainers are a real need. Test a representative script and confirm the audience understands the result before committing."
     },
     {
-      "question": "Is Synthesia the best option for everyone?",
-      "answer": "No single product is best for every team. Compare alternatives using the same requirements, tasks, constraints and acceptance criteria."
+      "question": "How should I test Synthesia video quality?",
+      "answer": "Use a script with names, numbers and product terms. Review pronunciation, pacing, scene transitions, captions and factual accuracy, then record the revisions required before publication."
     },
     {
-      "question": "Are current pricing and ratings independently verified here?",
-      "answer": "No. This review does not publish an independently verified rating or current price. Check official vendor information for current plans, limits and terms before purchasing."
+      "question": "Can Synthesia replace every video format?",
+      "answer": "No. A human presenter, screen recording or conventional animation may be better for sensitive communication, real interface demonstrations or content where personal authenticity matters."
     },
     {
-      "question": "What should be checked before adopting it?",
-      "answer": "Test the core workflow, access controls, integrations, export and offboarding. Include setup, training, administration and ongoing review in the total cost."
+      "question": "Are Synthesia pricing and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and request a dated quote for the intended use."
+    },
+    {
+      "question": "What should a team check before adopting Synthesia?",
+      "answer": "Review consent and likeness rights, data retention, training use, privacy, localization, captions, approval ownership and the process for correcting or retiring outdated videos."
     }
   ],
   "relatedComparisons": [],
@@ -119,5 +132,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 382
+  "wordCount": 507
 }
