@@ -224,7 +224,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Rating Overview</h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
-                  {hasStoredEditorialRating && <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={formatScore(tool.rating)} title="Overall Rating" description={hasEditorialRating ? "Verified PilotStack editorial score" : "Stored editorial score; provisional until evidence is audited"} />}
+                  <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={hasStoredEditorialRating ? `${formatScore(tool.rating)}/5` : "Pending"} title="Editorial Score" description={hasEditorialRating ? "Verified PilotStack editorial assessment" : hasStoredEditorialRating ? "Provisional stored score; evidence audit pending" : "Assessment not yet recorded; no number is invented"} />
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
@@ -401,7 +401,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                       </svg>
                       <h3 className="font-semibold text-sm">Verdict</h3>
                     </div>
-                    {hasEditorialRating ? (
+                    {hasStoredEditorialRating ? (
                       <>
                         <div className="text-lg font-bold text-primary mb-1">{formatScore(tool.rating)}/5</div>
                         <ScoreBar score={tool.rating} className="mb-3" />
@@ -412,7 +412,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 </GlassCard>
 
                 {/* Rating Breakdown */}
-                {categoryRatings.length > 0 && (
+                {categoryRatings.length > 0 ? (
                   <GlassCard>
                     <div className="p-4">
                       <h3 className="font-semibold mb-3 text-sm">Rating Breakdown</h3>
@@ -429,6 +429,13 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                           </div>
                         ))}
                       </div>
+                    </div>
+                  </GlassCard>
+                ) : (
+                  <GlassCard>
+                    <div className="p-4">
+                      <h3 className="font-semibold mb-2 text-sm">Rating Breakdown</h3>
+                      <p className="text-sm text-muted-foreground">Category scores are pending an evidence-backed assessment. No category numbers are fabricated; score this review against the published methodology before adding a numeric breakdown.</p>
                     </div>
                   </GlassCard>
                 )}
