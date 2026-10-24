@@ -84,6 +84,34 @@
       "title": "Pricing and adoption checklist",
       "body": "Current Omnisend pricing, channel terms, and plan limits are not independently verified here. Check the official pricing page for contact volume, sending limits, channel availability, automation, support, and billing cadence. Pilot one journey and measure manual corrections, message relevance, reporting quality, and ongoing maintenance effort. No numeric editorial rating is asserted without an evidence-backed scorecard.",
       "type": "text"
+    },
+    {
+      "title": "Channel coordination",
+      "type": "text",
+      "body": "If the campaign uses more than one channel, document which message goes first, what causes the next step, and how a customer's preference or opt-out changes the sequence. Test the flow with a sample customer who should receive each step and one who should be excluded. Do not assume that permission for email automatically covers SMS or another channel."
+    },
+    {
+      "title": "Error handling and campaign pauses",
+      "type": "text",
+      "body": "Test what happens when a store event is missing, duplicated, or arrives late. Decide who is notified, who can pause a journey, and how the team confirms a fix before restarting it. Keep the segment and trigger rules documented. A reliable marketing workflow should make failures visible rather than silently sending a message based on incomplete data."
+    },
+    {
+      "title": "Pilot scorecard",
+      "type": "text",
+      "body": "Track event accuracy, audience correctness, manual corrections, campaign outcomes, opt-out signals, and time spent maintaining the workflow. Compare with the same business goal in the current system. If the team cannot explain why a contact received a message or how to stop a journey, simplify the rules before expanding to more campaigns."
+    },
+    {
+      "title": "Implementation checklist",
+      "type": "list",
+      "body": "Use a controlled launch plan.",
+      "items": [
+        "Validate store events and customer fields.",
+        "Test channel-specific consent and opt-outs.",
+        "Check every branch and exclusion rule.",
+        "Verify links, tracking, and landing pages.",
+        "Assign owners and a pause procedure.",
+        "Confirm current channel limits and pricing."
+      ]
     }
   ],
   "faqs": [
