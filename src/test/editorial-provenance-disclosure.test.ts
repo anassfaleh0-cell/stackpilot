@@ -14,7 +14,7 @@ describe("editorial provenance disclosures", () => {
     const team = readPage("src/app/team/page.tsx")
     const policy = readPage("src/app/editorial-policy/page.tsx")
 
-    expect(methodology).toMatch(/source and calculation can be checked|source provenance/i)
+    expect(methodology).toMatch(/source URL, date checked, and relevant context must be recorded|source provenance/i)
     expect(evaluationProcess).toMatch(/checkable source|source verification|provenance/i)
     expect(about).toMatch(/source and calculation can be checked|source provenance/i)
     expect(team).toMatch(/source verification|source-provenance/i)
