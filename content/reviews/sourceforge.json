@@ -46,6 +46,21 @@
       "title": "Decision and alternatives",
       "body": "Compare the workflow with the project's source-control host, package registry and direct release distribution. Consider discoverability, artifact integrity, support, analytics and migration. Confirm current platform capabilities and terms before depending on them.",
       "type": "text"
+    },
+    {
+      "title": "Release acceptance checklist",
+      "body": "For a pilot release, publish a versioned artifact with a clear changelog, license, supported platform list and integrity information. Ask a user who is not part of the project to find the official release and verify the file. Record whether project information is complete and whether the release process is repeatable.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and governance",
+      "body": "Test a withdrawn release, a compromised maintainer account and a correction to an outdated download link. Confirm who can publish or remove artifacts and how users are informed. Keep source control and release signing under the project's control rather than relying only on a directory listing.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document the purpose of the platform, current services needed, project ownership, release process, analytics definitions and exit plan. Compare it with the existing repository host and package distribution channels. Verify current service availability and terms before making it a critical dependency.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -115,7 +130,7 @@
     "supportQuality": "3.0/5",
     "releaseFrequency": "Monthly"
   },
-  "wordCount": 175,
+  "wordCount": 313,
   "difficulty": "Beginner",
   "learningCurve": "Minimal — most users can get started within an hour",
   "whoShouldUse": "SourceForge is ideal for small to mid-size teams that need a reliable developer tools solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
