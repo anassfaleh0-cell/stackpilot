@@ -71,55 +71,56 @@
   ],
   "content": [
     {
-      "title": "Detection that runs on the endpoint itself",
-      "body": "This SentinelOne profile is intended to help buyers evaluate an endpoint-protection option, not to claim that PilotStack independently tested the product. The current repository does not contain a complete, independently verified source trail for every plan, feature, or deployment detail. Start by defining which devices must be covered, which operating systems are in scope, who responds to alerts, and what evidence your security team needs. Then ask SentinelOne for documentation that maps those requirements to the exact edition under consideration.",
+      "title": "Define the endpoint-protection requirements",
+      "body": "This SentinelOne profile is intended to help buyers evaluate an endpoint-protection option, not to claim that PilotStack independently tested the product. The current repository does not contain a complete, independently verified source trail for every plan, feature, or deployment detail. Start by defining which devices must be covered, which operating systems are in scope, who responds to alerts, and what evidence your security team needs. Ask SentinelOne for documentation that maps those requirements to the exact edition under consideration.",
       "type": "text"
     },
     {
-      "title": "Behavioral analysis instead of matching alone",
-      "body": "Behavioral detection is a capability buyers may want to assess when evaluating SentinelOne, but the label alone does not establish what a particular package includes or how it behaves. Request current technical documentation for supported operating systems, detection coverage, policy controls, telemetry, and the handling of unknown or suspicious activity. In a proof of concept, agree on safe test cases with the vendor and your security team, record expected outcomes, and distinguish documented capabilities from results observed in your own environment.",
+      "title": "Verify detection capabilities by edition",
+      "body": "Detection labels do not establish what a SentinelOne package includes or how it behaves in a particular environment. Request current technical documentation for supported operating systems, detection coverage, policy controls, telemetry, and the handling of unknown or suspicious activity. For a proof of concept, agree on safe test cases with the vendor and your security team, record expected outcomes, and distinguish written product claims from results observed in your own environment. Confirm which capabilities require a specific edition or add-on.",
       "type": "text"
     },
     {
-      "title": "Autonomous response and rollback",
-      "body": "Response automation and rollback can materially affect incident handling, so buyers should verify these claims before relying on them in a SentinelOne deployment. Ask which response actions are available in the quoted edition, what permissions and policies they require, whether human approval can be configured, and which recovery actions are supported. Test the proposed policy in an isolated lab with benign scenarios and a recovery plan. Do not assume that a capability name guarantees the same behavior across plans, operating systems, or contract terms.",
+      "title": "Validate response automation and recovery",
+      "body": "Response automation and recovery can materially affect incident handling, so buyers should verify these claims before relying on them in a SentinelOne deployment. Ask which response actions are available in the quoted edition, what permissions and policies they require, whether human approval can be configured, and which recovery actions are supported. Test the proposed policy in an isolated lab with benign scenarios and a recovery plan. Do not assume that a capability name guarantees the same behavior across plans, operating systems, or contract terms.",
       "type": "text"
     },
     {
-      "title": "What the agent keeps on the host",
-      "body": "For SentinelOne, build an explicit device inventory before estimating coverage: workstations, servers, remote endpoints, virtual machines, and any devices that cannot run an agent may have different requirements. Ask the vendor for the current supported-platform matrix and identify exclusions in writing. Also verify which event details are collected, how long they are retained, how administrators can export them, and whether those settings differ by plan. This is a buyer checklist, not a statement that every listed capability has been verified for this product.",
+      "title": "Check telemetry and host data handling",
+      "body": "For SentinelOne, verify which endpoint events are collected, whether process or file history is available, how long records are retained, and how administrators can export them. Ask whether retention and telemetry depth differ by plan, region, or configuration. Also clarify who can access endpoint data, which administrative actions are logged, and how deletion works at contract end. The checklist below lists questions to ask; it is not a statement that these data types or retention behaviors have been independently confirmed.",
       "type": "list",
       "items": [
-        "A process tree showing parent and child relationships for each execution",
-        "File operations and the paths they touched, in sequence",
-        "Connection attempts observed while processes ran",
-        "Configuration and persistence changes made over time",
-        "A local history that survives a loss of the console link"
+        "Which endpoint event types and investigation details are collected in the proposed edition?",
+        "What are the default and configurable retention periods, and are they plan-dependent?",
+        "Can administrators export the relevant records in a usable format, and are fees or limits involved?",
+        "Which roles can view endpoint telemetry, and are access and policy changes logged?",
+        "What deletion, backup, and retention rules apply when the contract ends?"
       ]
     },
     {
-      "title": "Where an agent-based product cannot see",
+      "title": "Confirm deployment and connectivity behavior",
       "body": "Before selecting SentinelOne, clarify how the proposed service is administered and what happens during loss of connectivity or a management-console outage. Ask which policies remain effective locally, which actions require the service, how policy changes are distributed, and how alerts are reconciled when connectivity returns. Confirm tenant roles, audit logs, data location, retention, incident escalation, and recovery responsibilities in current documentation. Record answers against the specific edition and contract; do not infer operational guarantees from general marketing language.",
       "type": "text"
     },
     {
-      "title": "The price band, with a disagreement in the record",
+      "title": "Treat pricing as unverified until quoted",
       "body": "PilotStack does not independently verify a current SentinelOne price in this profile. Older records contain conflicting price ranges, so this page deliberately does not repeat a dollar amount as current or authoritative. Request an itemized quote for the relevant product edition, endpoint count, contract length, support level, retention requirements, and any add-ons. Compare the quote on the same unit and billing period as alternatives, and include deployment, training, monitoring, and renewal terms in the total-cost estimate.",
       "type": "text"
     },
     {
-      "title": "SentinelOne next to CrowdStrike",
+      "title": "Compare SentinelOne with relevant alternatives",
       "body": "When comparing SentinelOne with CrowdStrike or another endpoint-security provider, compare equivalent use cases rather than copied star ratings or broad claims. Use the same device inventory, operating-system mix, detection scenarios, response policy, retention period, support requirements, and contract assumptions for each vendor. PilotStack has not independently verified the historic ratings or price entries in its records, so they should not decide the outcome. Document the evidence supplied by each vendor and any proof-of-concept results your own team can reproduce.",
       "type": "text"
     },
     {
-      "title": "Agent footprint and certification status",
-      "body": "SentinelOne is worth evaluating when endpoint protection and incident response are explicit requirements, but suitability depends on the team's environment and operating model. Before shortlisting it, define the devices in scope, required integrations, acceptable automation, analyst capacity, data-handling constraints, and budget ceiling. It may be a poor fit if the vendor cannot document a required operating system, response control, retention term, or contractual commitment. Make the decision from a scoped demonstration, written terms, and a recorded gap analysis rather than an unverified score.",
+      "title": "Verify certifications and contractual controls",
+      "body": "Do not infer certification or compliance status from a vendor's product category or from the absence of a record in this repository. For SentinelOne, request current attestations and confirm their scope, issuing body, coverage period, and the services or regions included. Also review data processing terms, subprocessors, retention, incident notification, support commitments, and customer responsibilities. If a certification or contract requirement is mandatory, treat missing documentation as an unresolved procurement question rather than assuming the requirement is met or failed.",
       "type": "text"
     },
     {
-      "title": "Who this agent suits",
-      "type": "text"
+      "title": "Who should evaluate SentinelOne",
+      "type": "text",
+      "body": "SentinelOne is worth evaluating when endpoint protection and incident response are explicit requirements, but suitability depends on the team's environment and operating model. Before shortlisting it, define the devices in scope, required integrations, acceptable automation, analyst capacity, data-handling constraints, and budget ceiling. It may be a poor fit if the vendor cannot document a required operating system, response control, retention term, or contractual commitment. Make the decision from a scoped demonstration, written terms, and a recorded gap analysis rather than an unverified score."
     }
   ],
   "faqs": [
