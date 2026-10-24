@@ -8,6 +8,7 @@ import { truncate, formatDate } from "@/lib/utils"
 import { getGuide, getContentTitle, getReview } from "@/lib/content/registry"
 import { getAllGuides } from "@/lib/content/registry"
 import { InternalLinks } from "@/components/content/internal-links"
+import { MobileSectionNav } from "@/components/content/mobile-section-nav"
 import { RelatedReading } from "@/components/content/related-reading"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -159,6 +160,14 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                 <Layers size={12} /> {guide.sections.length} sections
               </span>
             </div>
+
+            <MobileSectionNav
+              label="Jump to a guide section"
+              items={[
+                ...guide.sections.map((section, index) => ({ href: `#section-${index}`, label: `${index + 1}. ${section.title}` })),
+                ...(guide.faqs && guide.faqs.length > 0 ? [{ href: "#faq", label: "FAQs" }] : []),
+              ]}
+            />
 
             {/* Author & metadata */}
             <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-6">
