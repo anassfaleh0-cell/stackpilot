@@ -2,7 +2,7 @@
   "slug": "google-analytics",
   "name": "Google Analytics",
   "tagline": "A web and app analytics platform for measuring events, acquisition, engagement and conversions.",
-  "description": "Google Analytics can help teams measure acquisition, engagement and conversion events across web and app experiences. This review focuses on measurement design, consent, data quality and reporting workflow rather than unverified claims about market share, user counts or performance.",
+  "description": "Google Analytics supports web and app measurement; current plan details and independent ratings are not verified here.",
   "category": "Analytics & Data",
   "website": "https://analytics.google.com",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "Event-based measurement can support analysis of user journeys when configured consistently.",
     "Useful evaluation areas include acquisition reports, conversion events and integrations with a team's existing analytics stack.",
-    "A documented event taxonomy makes reporting easier to maintain and audit."
+    "A documented event taxonomy makes reporting easier to maintain and audit.",
+    "A documented event taxonomy can make reports more consistent across teams.",
+    "A controlled test journey can reveal tracking gaps before decisions rely on the data."
   ],
   "cons": [
     "Implementation quality strongly affects the usefulness of reports; default reports cannot fix poor event design.",
     "Consent, retention, identity and data-sharing settings require deliberate review.",
     "Sampling, attribution models and report definitions can complicate comparisons; document assumptions."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Event instrumentation",
+      "available": false,
+      "description": "Google Analytics: evaluate event instrumentation with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Funnels and reports",
+      "available": false,
+      "description": "Google Analytics: evaluate funnels and reports with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Data quality",
+      "available": false,
+      "description": "Google Analytics: evaluate data quality with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Identity and attribution",
+      "available": false,
+      "description": "Google Analytics: evaluate identity and attribution with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Privacy and consent",
+      "available": false,
+      "description": "Google Analytics: evaluate privacy and consent with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Integrations",
+      "available": false,
+      "description": "Google Analytics: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Exports and retention",
+      "available": false,
+      "description": "Google Analytics: evaluate exports and retention with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Usage and administration",
+      "available": false,
+      "description": "Google Analytics: evaluate usage and administration with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -71,19 +114,23 @@
   "faqs": [
     {
       "question": "Who should evaluate Google Analytics?",
-      "answer": "Evaluate Google Analytics only if the workflow described in this review matches a real requirement. Test it with representative work and verify current capabilities, plan limits and data terms directly with the vendor."
+      "answer": "Evaluate Google Analytics when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Is Google Analytics the best option for everyone?",
-      "answer": "No single product is best for every team. Compare alternatives using the same requirements, tasks, constraints and acceptance criteria."
+      "question": "How should a team test Google Analytics?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "Are current pricing and ratings independently verified here?",
-      "answer": "No. This review does not publish an independently verified rating or current price. Check official vendor information for current plans, limits and terms before purchasing."
+      "question": "Which limitations should be checked in Google Analytics?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "What should be checked before adopting it?",
-      "answer": "Test the core workflow, access controls, integrations, export and offboarding. Include setup, training, administration and ongoing review in the total cost."
+      "question": "Are Google Analytics prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting Google Analytics?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [
