@@ -46,6 +46,21 @@
       "title": "Total cost and acceptance",
       "body": "Compare the number of hosts, event types, routing requirements, integrations and support. Ask for current plan limits and a dated quote. Acceptance should include no double booking, correct time zones, reliable rescheduling and an export or record-retention plan.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Book a test appointment across two time zones, reschedule it, cancel it and check the calendar after each change. Verify buffers, minimum notice, reminders and the invitee experience on mobile. Confirm that the workflow prevents double booking under the team's actual calendar setup.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and privacy",
+      "body": "Test a disconnected calendar, a full day, an invitee who changes time zones and a booking that should require approval. Check intake-form data, payment handling if used and deletion of test records. Make sure reminders and guest details go only to intended recipients.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Record required event types, hosts, routing rules, calendar providers, reminders, payments, privacy needs and plan-specific limits. Confirm current terms and cost with the vendor. Keep a manual fallback for booking changes if an integration becomes unavailable.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -142,5 +157,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 183
+  "wordCount": 305
 }
