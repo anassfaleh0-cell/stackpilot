@@ -84,6 +84,34 @@
       "title": "Pricing and decision checklist",
       "body": "Current TrackingTime pricing and plan limits are not independently verified here. Check the official pricing page for seats, projects, reporting, integrations, administration, and any usage limits. Run a pilot through one full reporting cycle and compare time to capture, correction effort, report quality, and ongoing maintenance. No numeric editorial rating is asserted without a source-backed assessment.",
       "type": "text"
+    },
+    {
+      "title": "Workflow complexity and ownership",
+      "type": "text",
+      "body": "Use a project that contains tasks, owners, and a few dependencies to see whether the structure stays understandable as work changes. Decide who can create tasks, update categories, and close completed work. If the team needs a large number of custom fields to explain ordinary work, simplify the setup. The workflow should make the next action and accountable owner clear."
+    },
+    {
+      "title": "Reporting hand-off and continuity",
+      "type": "text",
+      "body": "Export a representative reporting period and compare it with source entries. Check date ranges, grouping, task names, and how corrected records appear. If the data feeds another system, test the mapping and failure behavior with a sample record. Keep a clear owner for each connection and document how the team will recover from a failed export or changed field."
+    },
+    {
+      "title": "Pilot scorecard",
+      "type": "text",
+      "body": "Record time to capture work, number of incomplete or misclassified entries, effort spent correcting data, and whether reports answer the team's actual questions. Ask a new user to find overdue work and explain the project status. Use the findings to decide whether the combined task and time workflow is simpler than the current tools."
+    },
+    {
+      "title": "Implementation checklist",
+      "type": "list",
+      "body": "Before rollout:",
+      "items": [
+        "Agree on a small project taxonomy.",
+        "Define who owns tasks and categories.",
+        "Test corrections and period close.",
+        "Reconcile exports and reports.",
+        "Verify integration fields and permissions.",
+        "Measure maintenance effort after a full cycle."
+      ]
     }
   ],
   "faqs": [
