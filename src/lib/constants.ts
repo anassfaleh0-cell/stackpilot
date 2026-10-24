@@ -77,6 +77,7 @@ export const categories = [
   { name: "Analytics & Data", slug: "analytics-data", count: 49 },
   { name: "HR & People", slug: "hr-people", count: 40 },
   { name: "Finance & Accounting", slug: "finance-accounting", count: 106 },
+  { name: "E-commerce & Retail", slug: "ecommerce-retail", count: 4 },
   { name: "Productivity", slug: "productivity", count: 51 },
   { name: "Security & Compliance", slug: "security-compliance", count: 28 },
   { name: "Communication", slug: "communication", count: 46 },
