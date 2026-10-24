@@ -123,7 +123,7 @@ describe("getComparisonFeatureDisplayValue", () => {
   it("shows editorial role labels for decision guides without treating booleans as verified", () => {
     expect(getComparisonFeatureDisplayValue("AI-assisted drafting", false, true)).toBe("AI-assisted drafting")
     expect(getComparisonFeatureDisplayValue("AI-assisted drafting", false, true)).not.toContain("not independently verified")
-    expect(getComparisonFeatureDisplayValue("   ", false, true)).toBe("Not recorded")
+    expect(getComparisonFeatureDisplayValue("   ", false, true)).toBe("Not confirmed — verify with the vendor")
     expect(getComparisonFeatureDisplayValue(true, false, true)).toContain("Yes")
     expect(getComparisonFeatureDisplayValue(true, false, true)).toContain("not independently verified")
   })
