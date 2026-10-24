@@ -51,6 +51,21 @@
       "title": "Decision rule",
       "body": "Use AI-assisted research to accelerate discovery and organize questions, not to remove fact-checking. For legal, medical, financial, security or other high-impact decisions, consult authoritative sources and qualified professionals.",
       "type": "text"
+    },
+    {
+      "title": "Research test case",
+      "body": "Choose a question with a known primary source and at least one important caveat. Ask the tool for a summary, then verify each material claim by opening the cited page and locating the supporting passage. Record missing sources, unsupported statements, publication dates and whether the answer distinguishes evidence from interpretation.",
+      "type": "text"
+    },
+    {
+      "title": "Source-quality rubric",
+      "body": "Score source authority, relevance, recency, directness and independence. A government document, official product specification or original study may be stronger evidence for a specific claim than a secondary summary. When credible sources disagree, preserve the disagreement rather than asking the model to invent certainty.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Keep the original research question, important source links, checked claims and unresolved uncertainty. Treat the tool as a discovery and synthesis aid, not the final source of truth. For high-impact decisions, consult authoritative primary sources and qualified professionals and do not submit confidential information unless approved.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -132,7 +147,7 @@
     "supportQuality": "3.7/5",
     "releaseFrequency": "Weekly"
   },
-  "wordCount": 215,
+  "wordCount": 355,
   "difficulty": "Intermediate",
   "learningCurve": "Moderate — expect 1-3 days to become productive",
   "whoShouldUse": "People researching unfamiliar topics, comparing options, or looking for answers with linked sources can evaluate Perplexity as a search and research assistant. Test queries from your own work, open the cited sources, and check whether the answer distinguishes sourced facts from synthesis or uncertainty.",
