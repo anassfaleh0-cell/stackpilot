@@ -566,7 +566,7 @@ describe("CD-15: generated review boilerplate", () => {
       const section = visible.find((item: { title: string }) => item.title === title)
       expect(section?.body).toMatch(/not independently verified|needs product-specific evidence|require product-/i)
     }
-    expect(visible.find((section: { title: string }) => section.title === "Performance")?.body).toContain("No independent benchmark")
+    expect(visible.find((section: { title: string }) => section.title === "Performance")?.body).toContain("service-status history")
   })
 
   it("suppresses additional repeated best-for, scale, and uptime claims in the edited review corpus", () => {
