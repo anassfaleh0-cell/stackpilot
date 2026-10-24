@@ -1,18 +1,11 @@
 import type { ContentSection, FAQItem } from "@/types/content"
 
 const HIDDEN_REVIEW_SECTION_TITLES = new Set([
+  // These are rendered in the page template already; keep all substantive review sections.
   "Quick Answer",
   "TL;DR",
   "Rating Overview",
   "Key Features",
-  "Hidden Costs",
-  "Learning Curve",
-  "Setup Time",
-  "Migration Difficulty",
-  "Industry Fit",
-  "Common Mistakes",
-  "Tips from experienced users",
-  "Buying Advice",
 ])
 
 // These patterns identify stock copy that asserts tests, ratings, customer counts,
@@ -96,22 +89,48 @@ export function stripUnverifiedPriceClaims(value: string): string {
     ? sentence + " (recorded value; not independently verified—confirm current terms with the vendor)"
     : sentence).join(" ").replace(/\s{2,}/g, " ").trim()
 }
-export function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false, showVerifiedRatings = false): ContentSection[] {
-  return content
-    .filter((section) => {
-      if (!showVerifiedPricing && section.type === "diagram" && section.body === "pricing-ladder") return false
-      if (!showVerifiedRatings && section.type === "diagram" && section.body === "feature-radar") return false
-      if (!showVerifiedPricing && /pricing|plans/i.test(section.title)) return false
-      if (HIDDEN_REVIEW_SECTION_TITLES.has(section.title)) return false
-      if (GENERATED_REVIEW_SECTION_PATTERNS.some((pattern) => pattern.test(section.body.trim()))) return false
-      if (section.type === "diagram") {
-        return section.body === "implementation-flow" || (section.body === "pricing-ladder" && showVerifiedPricing) || (section.body === "feature-radar" && showVerifiedRatings)
-      }
-      return true
-    })
-    .map((section) => ({ ...section, body: section.type === "diagram" ? section.body : (showVerifiedPricing ? section.body : stripUnverifiedPriceClaims(section.body)) }))
+function replacementForUnverifiedSection(title: string, productName = "this product"): string {
+  const normalized = title.toLowerCase()
+  if (/pricing|plans|cost|hidden costs/.test(normalized)) {
+    return `Pricing details for ${productName} are not independently verified in this review. Check the current official pricing page and confirm included features, billing cadence, usage limits, add-ons, taxes, renewal terms, and regional availability before comparing total cost.`
+  }
+  if (/security|privacy|compliance/.test(normalized)) {
+    return `Security and compliance claims for ${productName} require product-, plan-, and region-specific evidence. Review current vendor trust documentation, data-processing terms, access controls, data retention, deletion/export options, and the scope and date of any independent audit before adoption.`
+  }
+  if (/performance|reliability|uptime|setup time|migration/.test(normalized)) {
+    return `No independent benchmark or implementation timing is asserted for ${productName} here. Test a representative workload or dataset, record a baseline, measure task completion time and errors, and document migration dependencies and rollback options before making a commitment.`
+  }
+  if (/support|documentation|learning curve/.test(normalized)) {
+    return `Support and onboarding quality have not been independently measured for ${productName}. Confirm available support channels, response commitments, service hours, documentation coverage, training resources, and escalation terms for the plan you would actually purchase.`
+  }
+  if (/feature|integration|capabilit/.test(normalized)) {
+    return `Treat the recorded capability notes for ${productName} as a checklist, not a verified guarantee. Confirm each must-have feature, integration, permission, export path, and plan restriction in current official documentation, then test it in your own workflow.`
+  }
+  return `This section needs product-specific evidence before its legacy claims can be treated as verified. For ${productName}, check current official documentation, test the workflow with representative data, and record the source and date for each material conclusion.`
 }
 
+export function getVisibleReviewContent(content: ContentSection[], showVerifiedPricing = false, showVerifiedRatings = false): ContentSection[] {
+  return content
+    .filter((section) => !HIDDEN_REVIEW_SECTION_TITLES.has(section.title))
+    .map((section) => {
+      if (section.type === "diagram" && section.body === "pricing-ladder" && !showVerifiedPricing) {
+        return { ...section, type: "text" as const, body: replacementForUnverifiedSection(section.title), items: section.items }
+      }
+      if (section.type === "diagram" && section.body === "feature-radar" && !showVerifiedRatings) {
+        return { ...section, type: "text" as const, body: replacementForUnverifiedSection(section.title), items: section.items }
+      }
+      const generatedClaim = GENERATED_REVIEW_SECTION_PATTERNS.some((pattern) => pattern.test(section.body.trim()))
+      const body = generatedClaim
+        ? replacementForUnverifiedSection(section.title)
+        : (showVerifiedPricing ? section.body : stripUnverifiedPriceClaims(section.body))
+      const items = section.items?.map((item) =>
+        GENERATED_REVIEW_SECTION_PATTERNS.some((pattern) => pattern.test(item.trim()))
+          ? replacementForUnverifiedSection(section.title)
+          : (showVerifiedPricing ? item : stripUnverifiedPriceClaims(item))
+      )
+      return { ...section, body, items }
+    })
+}
 
 // Hide repeated FAQ templates that assert security certifications, compliance, or
 // enterprise capabilities without a product-specific evidence trail.
