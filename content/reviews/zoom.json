@@ -48,6 +48,21 @@
       "title": "Decision framework",
       "body": "Choose based on the participant experience, administration and follow-up process. If the main problem is asynchronous decisions or searchable project knowledge, evaluate a complementary tool rather than expecting meetings to solve that problem alone.",
       "type": "text"
+    },
+    {
+      "title": "Meeting pilot checklist",
+      "body": "Run an internal meeting and an external customer call using the devices and network conditions participants normally use. Test guest joining, screen sharing, captions, recording controls, host handoff and recovery after a participant disconnects. Ask attendees to report friction and verify that follow-up materials are accessible only to intended viewers.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and governance",
+      "body": "Test a host who loses connectivity, an unauthorized guest, a recording that should not be shared and a participant who needs captions. Define who may record, where recordings are stored, who can retrieve them and when they are deleted. Ensure that meeting links and recordings do not become uncontrolled access paths to confidential information.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Record required meeting types, expected participant volume, accessibility needs, calendar and identity integrations, retention policy and support expectations. Verify plan-specific capabilities in official documentation. Review the choice after a pilot based on reliability, participant experience, administration and follow-up—not only whether the meeting started.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -150,7 +165,7 @@
   "learningCurve": "Minimal — most users can get started within an hour",
   "whoShouldUse": "Zoom is designed for fast-growing startups that need a scalable communication platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
   "whoShouldNotUse": "Zoom may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale.",
-  "wordCount": 208,
+  "wordCount": 355,
   "rating": null,
   "reviewCount": 0,
   "ratings": [],
