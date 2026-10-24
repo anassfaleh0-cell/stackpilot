@@ -5,7 +5,6 @@ import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getAllAlternatives } from "@/lib/content/registry"
 import { REDIRECTED_ALTERNATIVE_SLUGS } from "@/lib/sitemap/redirected-content"
-import { getPagination } from "@/lib/pagination"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
@@ -17,10 +16,14 @@ export const metadata = createMetadata({
 
 export const dynamic = "force-static"
 
+function isPublished<T extends { slug: string }>(record: T): boolean {
+  return (record as T & { publicationStatus?: string }).publicationStatus !== "draft"
+}
+
 export default function AlternativesPage() {
-  const allAlternatives = getAllAlternatives().filter((item) => !REDIRECTED_ALTERNATIVE_SLUGS.has(item.slug))
-  const pagination = getPagination({ page: 1, perPage: 24, total: allAlternatives.length })
-  const pageAlternatives = allAlternatives.slice(pagination.start, pagination.end)
+  const allAlternatives = getAllAlternatives().filter((item) => isPublished(item) && !REDIRECTED_ALTERNATIVE_SLUGS.has(item.slug))
+  // Keep every published alternative discoverable from this static index page.
+  const pageAlternatives = allAlternatives
   const grouped: Record<string, typeof allAlternatives> = {}
   pageAlternatives.forEach((alt) => {
     if (!grouped[alt.category]) grouped[alt.category] = []
@@ -49,6 +52,20 @@ export default function AlternativesPage() {
             </div>
           </section>
         ))}
+        <section className="mt-14 max-w-4xl border-t border-border pt-8">
+          <h2 className="text-2xl font-bold tracking-tight mb-3">How to compare software alternatives</h2>
+          <p className="text-muted-foreground leading-relaxed mb-4">Start with the job the current product performs and the reason you are considering a change. A lower subscription price may not reduce total cost if migration, retraining, integration work, or lost functionality creates additional effort. Compare alternatives against the same requirements rather than relying on a universal ranking.</p>
+          <h3 className="text-lg font-semibold mb-2">Use a consistent evaluation checklist</h3>
+          <ul className="list-disc pl-6 space-y-2 text-muted-foreground mb-5">
+            <li>List must-have workflows, users, permissions and integrations before shortlisting products.</li>
+            <li>Verify current plan limits, data export, support terms and security documentation with the vendor.</li>
+            <li>Run representative tasks in a trial or demo and record gaps, workarounds and administration effort.</li>
+            <li>Estimate total cost, including implementation, migration, training, add-ons and contract renewal.</li>
+            <li>Keep an exit plan: test whether records, attachments and audit history can be exported before switching.</li>
+          </ul>
+          <h3 className="text-lg font-semibold mb-2">Read product claims carefully</h3>
+          <p className="text-muted-foreground leading-relaxed">Pricing, features and availability can change by plan, region and contract. Treat third-party ratings as one input, not proof that a product fits your workflow. Where a page identifies an evidence limitation, confirm the relevant detail using current primary documentation before making a purchase decision.</p>
+        </section>
       </Container>
     </>
   )

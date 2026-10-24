@@ -1,12 +1,16 @@
 {
   "slug": "white-label",
   "term": "White-Label",
-  "definition": "A product or service produced by one company that is rebranded and sold by another company as their own.",
-  "extendedDefinition": "A product or service produced by one company that is rebranded and sold by another company as their own. White-label software lets resellers and agencies present third-party platforms under their own brand, complete with custom logos, domains, and packaging. The model suits businesses that want to offer software capability without building it, from agencies delivering client portals to platforms embedding finance or payment modules. For buyers reselling white-label products, the critical questions are control and dependency: how much of the experience can be rebranded, what happens to branding during outages or contract changes, and how roadmap decisions are made. Service levels, pricing per end customer, and data ownership should be reviewed as carefully as with a direct contract, because the reseller carries the customer relationship. White-label arrangements raise due diligence stakes: the reseller must verify the underlying vendor's security, stability, and longevity, since their own reputation now rides on it.",
+  "definition": "A white-label product is made by one provider and rebranded by another business for resale or delivery under its own brand.",
+  "extendedDefinition": "White-label arrangements let a reseller offer an existing service without building the underlying technology. The reseller may customize logos, domains, client portals, and packaging, but the degree of control varies by provider. Before committing, confirm which parts can be branded, whether the provider's identity appears in emails or support flows, how customer data is handled, and who owns the customer relationship. Review reseller pricing, minimum commitments, support responsibilities, service-level terms, and the process for moving customers if the provider changes its offer or closes. Since the reseller's reputation depends on another company, security, continuity, and exit provisions are essential due-diligence items.",
   "category": "Productivity",
-  "examples": [],
+  "examples": [
+    "A marketing agency offers a branded reporting portal to clients but checks whether report emails and login pages also support its own domain.",
+    "A software reseller compares per-client fees, minimum monthly commitments, and support obligations before including a white-label tool in its package.",
+    "A consultancy asks how client records can be exported and transferred if the underlying provider ends the white-label program."
+  ],
   "relatedTerms": [
     "customization"
   ],
-  "description": "White-Label. A product or service produced by one company that is rebranded and sold by another company as their own."
+  "description": "White-label software lets a business resell or deliver a provider's product under its own brand. Learn what to verify about branding controls, reseller economics, support, data, and exit rights."
 }

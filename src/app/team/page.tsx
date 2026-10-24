@@ -46,6 +46,20 @@ export default function TeamPage() {
                 Read our full methodology →
               </Link>
             </Card>
+            <section className="mt-8 space-y-6">
+              <div>
+                <h2 className="text-xl font-bold mb-2">How content is prepared</h2>
+                <p className="text-sm leading-relaxed text-muted-foreground">PilotStack organizes software research into reviews, comparisons, buying guides and workflow resources. These formats serve different purposes: a review describes what a buyer should investigate about one product; a comparison tests the differences relevant to a specific decision; and a guide explains a repeatable evaluation process. The presence of a page does not mean every feature, price or rating has been independently tested.</p>
+              </div>
+              <div>
+                <h2 className="text-xl font-bold mb-2">Evidence and corrections</h2>
+                <p className="text-sm leading-relaxed text-muted-foreground">Where current primary evidence is unavailable, product-specific details should be treated as unverified rather than assumed to be current. Readers and vendors can report an exact claim and provide a public source through the <Link href="/contact" className="text-primary hover:underline">contact page</Link>. Reports are reviewed for relevance and evidence; corrections may update the text, date or stated limitation.</p>
+              </div>
+              <div>
+                <h2 className="text-xl font-bold mb-2">Commercial relationships</h2>
+                <p className="text-sm leading-relaxed text-muted-foreground">PilotStack may earn commissions from qualifying affiliate links and may display advertising. Such commercial relationships should be disclosed and should not be presented as evidence that a product is objectively best. Review the <Link href="/affiliate-disclosure" className="text-primary hover:underline">affiliate disclosure</Link> and <Link href="/editorial-policy" className="text-primary hover:underline">editorial policy</Link> for additional context.</p>
+              </div>
+            </section>
           </div>
         </Container>
       </Section>

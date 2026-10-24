@@ -172,7 +172,7 @@ export default function MethodologyPage() {
                 correction requests and publish clarifications when warranted.
               </p>
 
-              <p className="text-xs text-muted-foreground-foreground mt-8">
+              <p className="text-xs text-muted-foreground mt-8">
                 Methodology last updated: October 23, 2026. This date records this page revision and does not mean every product claim across the site was rechecked on that date.
               </p>
             </div>

@@ -1,7 +1,7 @@
 {
   "slug": "saas-pricing-drift-report-2026",
-  "title": "SaaS Pricing Drift Report 2026: How to Verify Published Prices",
-  "description": "A practical guide to finding stale SaaS prices, documenting vendor evidence, and comparing plan costs without relying on unsupported claims.",
+  "title": "SaaS Pricing Drift Report 2026: A Method for Verifying Prices",
+  "description": "A transparent method for checking whether published SaaS prices are current. Document official vendor evidence, capture dates, plan scope, billing terms and uncertainty; do not treat unverified price examples as confirmed findings.",
   "category": "Pricing",
   "reportType": "Pricing Accuracy Investigation",
   "keyFindings": [
@@ -60,7 +60,7 @@
       "type": "text"
     }
   ],
-  "methodology": "Pricing drift should be measured from dated, source-linked comparisons of third-party claims against official vendor pricing. This page intentionally avoids publishing specific discrepancy counts or current prices that cannot be substantiated from the available source trail.",
+  "methodology": "This report is a verification framework, not a claim that every vendor price has been independently audited. For each price claim, record the official vendor URL, date accessed, country or currency, billing cadence, plan name, included seats or usage, add-ons and any qualification or quote-only status. Preserve a source snapshot where permitted. Mark unavailable, quote-only or unverified data explicitly. Do not infer a historical price change without comparable dated primary evidence.",
   "dataSources": [
     {
       "name": "Atlassian — Jira pricing",
@@ -98,6 +98,21 @@
     "hr-software-cost-2026",
     "accounting-software-cost-2026"
   ],
-  "updatedAt": "2026-10-15",
-  "sourceAuditComplete": true
+  "updatedAt": "2026-10-24",
+  "sourceAuditComplete": false,
+  "editorialGuideReviewed": true,
+  "faqs": [
+    {
+      "question": "Does this report publish a verified market-wide SaaS pricing average or median?",
+      "answer": "No. This report does not publish a verified market-wide average or median. It provides a repeatable method for checking vendor pricing, and any future market-wide statistic would require a defined sample, dated primary evidence, and a reproducible calculation."
+    },
+    {
+      "question": "How should a buyer verify a specific SaaS price?",
+      "answer": "Check the current official vendor page or request a written quote, then record the product, plan, region, currency, billing cadence, seat or usage limits, date checked, and any required add-ons."
+    },
+    {
+      "question": "Are the example sources proof that a particular vendor changed its price?",
+      "answer": "No. The linked vendor pages are sources to consult during an audit, not proof of a historical price change. A confirmed change needs comparable dated evidence for the same plan and billing basis."
+    }
+  ]
 }

@@ -15,6 +15,8 @@ const toolsData: Record<string, { name: string; description: string; icon: Lucid
     content: [
       "Our TCO (Total Cost of Ownership) Calculator helps you estimate the true cost of adopting a new software tool. Beyond the subscription price, factor in implementation costs, training time, integration expenses, and ongoing maintenance.",
       "To get started, enter your expected number of users, the monthly subscription cost per user, and estimated implementation hours. The calculator will provide a comprehensive 1-year and 3-year total cost projection.",
+      "Include costs that are easy to overlook: migration, admin time, premium support, required integrations, usage overages, taxes, and renewal changes. Keep one-time costs separate from recurring costs so the multi-year estimate does not accidentally count the same expense twice.",
+      "Run at least a low, expected, and high scenario for seats and usage. Treat results as estimates based on your inputs, not a quote or a guarantee; verify plan limits and contractual charges with the vendor."
     ],
   },
   "software-comparison": {
@@ -22,6 +24,8 @@ const toolsData: Record<string, { name: string; description: string; icon: Lucid
     content: [
       "Our Software Comparison Matrix helps you evaluate multiple tools side by side across the criteria that matter most to your business. Score each tool on features, pricing, ease of use, support, and integrations.",
       "Simply add the tools you're considering, rate them across our standardized criteria, and the matrix will automatically calculate weighted scores to help you identify the best option.",
+      "Define mandatory requirements before assigning weighted scores. A missing security control, required integration, or essential workflow should be treated as a blocker rather than offset by high marks in unrelated categories.",
+      "For every score, record the evidence behind it: a test result, vendor document, quote, or an unresolved question. Use identical tasks and assumptions for each product; the resulting score organizes judgment but is not an objective benchmark."
     ],
   },
   "roi-calculator": {
@@ -32,6 +36,8 @@ const toolsData: Record<string, { name: string; description: string; icon: Lucid
     content: [
       "Estimate whether a software investment can pay for itself by comparing annual software cost with the value of time saved and other measurable benefits.",
       "Use conservative assumptions. The result is an estimate, not a guarantee, and should be compared with your actual business case.",
+      "Separate cash savings from capacity released. Hours saved create financial value only when the time can be redeployed, reduces paid overtime, avoids hiring, or produces another measurable benefit.",
+      "Include implementation, migration, training, ongoing administration and renewal costs. Run conservative and optimistic scenarios, and avoid counting the same benefit in more than one category."
     ],
   },
   "software-scorecard": {
@@ -42,6 +48,8 @@ const toolsData: Record<string, { name: string; description: string; icon: Lucid
     content: [
       "Turn subjective software research into a repeatable scorecard. Rate features, price, ease of use, integrations, and support from 1 to 5.",
       "Use the same criteria for every vendor so the result reflects fit rather than marketing claims.",
+      "Set weights before scoring and explain why each requirement matters. Keep mandatory needs as pass/fail checks so a high total cannot hide a critical gap.",
+      "Attach evidence to each rating and mark unknowns as unverified rather than guessing. Revisit the score when a trial, vendor answer or quote changes the evidence."
     ],
   },
   "saas-stack-cost-calculator": {
@@ -52,6 +60,8 @@ const toolsData: Record<string, { name: string; description: string; icon: Lucid
     content: [
       "Add the recurring cost of major software categories to see how much your stack costs each month and year.",
       "Use the total to identify overlapping subscriptions, unused tools, and areas where consolidation may reduce spend.",
+      "Normalize billing periods before comparing: convert annual subscriptions to a monthly equivalent, separate one-time implementation costs, and include seat growth, taxes, usage charges and add-ons where known.",
+      "Do not remove a tool based on cost overlap alone. Check integrations, data ownership, security requirements and the operational cost of migrating workflows before consolidating subscriptions."
     ],
   },
   "software-pricing-calculator": {
@@ -62,6 +72,8 @@ const toolsData: Record<string, { name: string; description: string; icon: Lucid
     content: [
       "Estimate what a software plan could cost at your expected seat count instead of relying only on the advertised starting price.",
       "Add recurring or annual extras to get a more realistic budget estimate.",
+      "Check how the vendor bills guests, inactive users, contact counts, storage, API calls, premium support and overages. A starting price may not represent the tier that includes the features your workflow requires.",
+      "Compare monthly and annual billing using the same period and seat assumptions. Verify current plan limits, taxes, renewal terms and cancellation conditions directly with the vendor before purchase."
     ],
   },
 }

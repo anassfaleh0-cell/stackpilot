@@ -39,6 +39,19 @@ export default async function IndustriesPage({ searchParams }: { searchParams?: 
           ))}
         </div>
           <PaginationNav basePath="/industries" pagination={pagination} />
+          <section className="mt-14 max-w-4xl mx-auto border-t border-border pt-8">
+            <h2 className="text-2xl font-bold tracking-tight mb-3">Evaluate software against industry workflows</h2>
+            <p className="text-muted-foreground leading-relaxed mb-4">Industry labels can help build a shortlist, but they do not prove that a product meets a particular organization's operational or regulatory requirements. Start with the process the team needs to support, the data it handles, and the systems it already uses.</p>
+            <h3 className="text-lg font-semibold mb-2">A practical selection checklist</h3>
+            <ul className="list-disc pl-6 space-y-2 text-muted-foreground mb-5">
+              <li>Map the end-to-end workflow, including approvals, exceptions and handoffs between teams.</li>
+              <li>Verify integrations, import/export options and ownership of records when a contract ends.</li>
+              <li>Review permissions, audit trails, retention, data location and vendor security documentation.</li>
+              <li>Test the product with representative tasks and users instead of relying only on a sales demonstration.</li>
+              <li>Estimate implementation, migration, training, support and ongoing administration alongside subscription cost.</li>
+            </ul>
+            <p className="text-muted-foreground leading-relaxed">Requirements differ by country, organization and use case. Treat the guides as a starting point, verify current product capabilities with primary vendor sources, and obtain appropriate professional advice when legal or regulatory obligations apply.</p>
+          </section>
       </Container>
     </>
   )

@@ -86,6 +86,19 @@ export default function ToolsPage() {
               </Link>
             ))}
           </div>
+          <section className="mt-14 max-w-4xl mx-auto border-t border-border pt-8">
+            <h2 className="text-2xl font-bold tracking-tight mb-3">How to use these software decision tools</h2>
+            <p className="text-muted-foreground leading-relaxed mb-4">Use the calculators and scorecards to make assumptions explicit before comparing vendors. Results are planning estimates based on the inputs you provide; they are not vendor quotes, financial advice, or a guarantee of realized savings.</p>
+            <h3 className="text-lg font-semibold mb-2">Make comparisons consistent</h3>
+            <ul className="list-disc pl-6 space-y-2 text-muted-foreground mb-5">
+              <li>Use the same number of users, billing period, usage volume and implementation horizon for every option.</li>
+              <li>Include onboarding, migration, training, integrations, support, taxes and expected add-ons where applicable.</li>
+              <li>Record which assumptions come from a current vendor quote and which are your own estimates.</li>
+              <li>Revisit the inputs when seat count, usage or requirements change; small changes can affect a multi-year estimate.</li>
+            </ul>
+            <h3 className="text-lg font-semibold mb-2">Verify before committing</h3>
+            <p className="text-muted-foreground leading-relaxed">Confirm plan limits, contract terms, security requirements and export options directly with each vendor. A weighted score can organize a decision, but it should not override a critical requirement such as a missing integration, unsuitable data handling, or a mandatory workflow that the product cannot support.</p>
+          </section>
         </Container>
       </Section>
     </>

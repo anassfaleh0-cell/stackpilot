@@ -4,10 +4,14 @@
   "definition": "The practice of collecting, storing, organizing, and maintaining data to ensure accuracy, accessibility, and security.",
   "extendedDefinition": "Data management is the discipline of collecting, storing, organizing, and maintaining data so that it stays accurate, accessible, secure, and usable over time. It spans databases, warehousing, governance, quality controls, and lifecycle policies such as retention and deletion. Poor data management compounds into real costs: duplicated records, stale customer information, and unreliable analytics undermine every downstream decision. Buyers evaluating data-related software should consider how the product enforces quality at the point of entry, how it handles duplicates and merges, and whether it provides lineage that traces data from source to report. Successful programs assign ownership for data domains and treat data quality as an operational metric rather than an IT project. As organizations adopt AI-assisted features, well-managed data becomes even more valuable, since model output is only as trustworthy as the data underneath it.",
   "category": "Analytics & Data",
-  "examples": [],
+  "examples": [
+    "A team assigns an owner to customer fields and documents which system is authoritative when records conflict.",
+    "An administrator checks how duplicates, incomplete values and retention rules are handled before importing a new dataset.",
+    "A buyer reviews access controls, audit history and export options as part of a data-management evaluation."
+  ],
   "relatedTerms": [
     "data-export",
     "compliance"
   ],
-  "description": "Data Management. The practice of collecting, storing, organizing, and maintaining data to ensure accuracy, accessibility, and security."
+  "description": "Data management covers data quality, ownership, storage, access, retention and lifecycle practices across software systems."
 }
