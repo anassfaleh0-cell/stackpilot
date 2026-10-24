@@ -2,7 +2,7 @@
   "slug": "bigcommerce",
   "name": "BigCommerce",
   "tagline": "An e-commerce platform to evaluate for catalog, checkout, integrations and multi-channel operations.",
-  "description": "BigCommerce is an e-commerce platform to evaluate for managing a product catalog, storefront and commerce operations. Fit depends on catalog complexity, checkout, payment options, integrations, regional requirements, migration and the business's operational model.",
+  "description": "BigCommerce supports e-commerce storefront and order workflows; current plan details and independent ratings are not verified here.",
   "category": "E-commerce",
   "website": "https://bigcommerce.com",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "A representative storefront test can reveal catalog and checkout fit.",
     "Integration and export requirements can be tested before a migration.",
-    "The platform should be assessed against real order, refund and inventory workflows."
+    "The platform should be assessed against real order, refund and inventory workflows.",
+    "A sample catalog and order can test the full purchase workflow.",
+    "Data export and integration behavior can be validated before migration."
   ],
   "cons": [
     "Payment, tax, shipping and regional availability need direct verification.",
     "Complex catalogs and integrations can increase implementation effort.",
     "Total cost includes applications, transaction services and maintenance beyond the storefront license."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Catalog and checkout",
+      "available": false,
+      "description": "BigCommerce: evaluate catalog and checkout with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Payment methods",
+      "available": false,
+      "description": "BigCommerce: evaluate payment methods with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Fees and settlement",
+      "available": false,
+      "description": "BigCommerce: evaluate fees and settlement with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Refunds and disputes",
+      "available": false,
+      "description": "BigCommerce: evaluate refunds and disputes with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Regional support",
+      "available": false,
+      "description": "BigCommerce: evaluate regional support with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Integrations",
+      "available": false,
+      "description": "BigCommerce: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Inventory and orders",
+      "available": false,
+      "description": "BigCommerce: evaluate inventory and orders with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Export and administration",
+      "available": false,
+      "description": "BigCommerce: evaluate export and administration with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -66,19 +109,23 @@
   "faqs": [
     {
       "question": "Who should evaluate BigCommerce?",
-      "answer": "Evaluate BigCommerce when its primary workflow matches a documented requirement. Run a representative pilot and verify current capabilities, limits and contract terms directly with the vendor."
+      "answer": "Evaluate BigCommerce when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Are prices and ratings independently verified here?",
-      "answer": "No. This review does not present an independently verified price or third-party rating. Check current official documentation and obtain a dated quote."
+      "question": "How should a team test BigCommerce?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "What should a pilot include?",
-      "answer": "Test the main workflow, one failure case, permissions, integrations, export and offboarding. Record pass, partial pass, fail or unknown and assign an owner to every unresolved requirement."
+      "question": "Which limitations should be checked in BigCommerce?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "How should total cost be compared?",
-      "answer": "Include licenses, usage, implementation, migration, training, integrations, support, internal administration and renewal terms—not only the headline subscription."
+      "question": "Are BigCommerce prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting BigCommerce?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [],
