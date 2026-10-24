@@ -99,5 +99,20 @@
     "accounting-software-cost-2026"
   ],
   "updatedAt": "2026-10-24",
-  "sourceAuditComplete": false
+  "sourceAuditComplete": false,
+  "editorialGuideReviewed": true,
+  "faqs": [
+    {
+      "question": "Does this report publish a verified market-wide SaaS pricing average or median?",
+      "answer": "No. This report does not publish a verified market-wide average or median. It provides a repeatable method for checking vendor pricing, and any future market-wide statistic would require a defined sample, dated primary evidence, and a reproducible calculation."
+    },
+    {
+      "question": "How should a buyer verify a specific SaaS price?",
+      "answer": "Check the current official vendor page or request a written quote, then record the product, plan, region, currency, billing cadence, seat or usage limits, date checked, and any required add-ons."
+    },
+    {
+      "question": "Are the example sources proof that a particular vendor changed its price?",
+      "answer": "No. The linked vendor pages are sources to consult during an audit, not proof of a historical price change. A confirmed change needs comparable dated evidence for the same plan and billing basis."
+    }
+  ]
 }
