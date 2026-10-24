@@ -39,9 +39,21 @@
   ],
   "methodology": "No market-wide vendor-price sample is claimed as completed. For each future audited observation, record the exact third-party claim, current official vendor URL, date accessed, region, currency, plan, billing cadence, usage unit, included features and exclusions. Mark quote-only or unavailable values unverified. Only calculate a discrepancy when the two observations are comparable and reproducible.",
   "dataSources": [
-    "Official vendor pricing pages and product documentation (to be recorded per observation)",
-    "Dated vendor quotes where public prices are unavailable (retain scope and region)",
-    "Published comparison claims under review (record exact URL and capture date)"
+    {
+      "name": "Atlassian — Jira pricing",
+      "url": "https://www.atlassian.com/software/jira/pricing",
+      "context": "Primary vendor source for checking current plan terms; this page has not been used to claim a market-wide price audit."
+    },
+    {
+      "name": "OpenAI — API pricing",
+      "url": "https://openai.com/api/pricing/",
+      "context": "Primary vendor source for checking current usage pricing; this page has not been used to claim a market-wide price audit."
+    },
+    {
+      "name": "NIST AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "context": "Background reference for documenting risk and governance; not a source for SaaS pricing."
+    }
   ],
   "publishedAt": "2026-07-27",
   "author": "Emily Nakamura",
