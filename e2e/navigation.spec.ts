@@ -256,4 +256,24 @@ test.describe("Mobile navigation", () => {
     await expect(menu.getByRole("link", { name: "Reviews", exact: true })).toBeVisible()
     await expect(page.locator("#mobile-menu")).toHaveCount(1)
   })
+  
+  test("Guides and category links navigate correctly on mobile and close the menu", async ({ page }) => {
+    await gotoHome(page)
+    const openMenu = page.getByRole("button", { name: "Open menu" })
+    await openMenu.tap()
+    const menu = page.locator("#mobile-menu")
+    await expect(menu.getByRole("link", { name: "Guides", exact: true })).toBeVisible()
+    await menu.getByRole("link", { name: "Guides", exact: true }).tap()
+    await page.waitForURL("**/guides")
+    await expect(page).toHaveURL(/\\/guides$/)
+    await expect(menu).toHaveAttribute("aria-hidden", "true")
+
+    await openMenu.tap()
+    await expect(menu.getByRole("link", { name: "AI & Machine Learning", exact: true })).toBeVisible()
+    await menu.getByRole("link", { name: "AI & Machine Learning", exact: true }).tap()
+    await page.waitForURL("**/category/ai-ml")
+    await expect(page).toHaveURL(/\\/category\\/ai-ml$/)
+    await expect(menu).toHaveAttribute("aria-hidden", "true")
+  })
+
 })
