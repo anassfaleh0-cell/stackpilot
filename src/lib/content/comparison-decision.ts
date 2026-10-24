@@ -12,6 +12,7 @@ export interface ComparisonDecisionInput {
 export interface ComparisonDecision {
   categoriesDiffer: boolean
   winnerLabel: string | null
+  provisionalWinnerLabel: string | null
   hasComparableWinner: boolean
 }
 
@@ -25,14 +26,19 @@ export function getComparisonDecision(input: ComparisonDecisionInput): Compariso
     input.tool2Category &&
     input.tool1Category !== input.tool2Category
   )
-  const winner = input.winnerVerified === true ? input.winner?.trim().toLowerCase() : null
-  const tool1IsWinner = Boolean(winner && [input.tool1Slug, input.tool1].some((value) => value.toLowerCase() === winner))
-  const tool2IsWinner = Boolean(winner && [input.tool2Slug, input.tool2].some((value) => value.toLowerCase() === winner))
-  const winnerLabel = tool1IsWinner ? input.tool1 : tool2IsWinner ? input.tool2 : null
+  const storedWinner = input.winner?.trim().toLowerCase() || null
+  const tool1IsWinner = Boolean(storedWinner && [input.tool1Slug, input.tool1].some((value) => value.toLowerCase() === storedWinner))
+  const tool2IsWinner = Boolean(storedWinner && [input.tool2Slug, input.tool2].some((value) => value.toLowerCase() === storedWinner))
+  const storedWinnerLabel = tool1IsWinner ? input.tool1 : tool2IsWinner ? input.tool2 : null
+  const winnerLabel = input.winnerVerified === true ? storedWinnerLabel : null
+  // Keep an existing dataset pick visible as provisional guidance when it maps to
+  // one of the compared products, but never upgrade it to a verified winner.
+  const provisionalWinnerLabel = input.winnerVerified !== true && !categoriesDiffer ? storedWinnerLabel : null
 
   return {
     categoriesDiffer,
     winnerLabel,
+    provisionalWinnerLabel,
     hasComparableWinner: Boolean(winnerLabel && !categoriesDiffer),
   }
 }
