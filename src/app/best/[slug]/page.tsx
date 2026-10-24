@@ -221,11 +221,18 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                               <span className="text-lg font-bold">{pick.toolName}</span>
                             )}
                           </div>
-                          <div className="flex items-center gap-1 text-sm" aria-label={verifiedPickRating(pick) !== null ? "Verified editorial score" : storedPickRating(pick) !== null ? "Provisional stored editorial score" : "Editorial score pending assessment"}>
-                            <Star size={14} className="fill-accent text-accent" />
+                          <div className="flex flex-col items-end gap-1 text-sm" aria-label={verifiedPickRating(pick) !== null ? "Verified editorial score" : storedPickRating(pick) !== null ? "Unverified stored value, not a validated rating" : "Editorial score pending assessment"}>
+                            {verifiedPickRating(pick) !== null && <Star size={14} className="fill-accent text-accent" aria-hidden="true" />}
                             {storedPickRating(pick) !== null ? (
-                              <><span className="font-semibold">{storedPickRating(pick)}</span><span className="text-muted-foreground">/5</span><span className="text-[10px] text-muted-foreground">{verifiedPickRating(pick) !== null ? "verified" : "provisional"}</span></>
-                            ) : <span className="text-xs text-muted-foreground">Score pending</span>}
+                              <>
+                                <span className="font-semibold">{storedPickRating(pick)}/5</span>
+                                {verifiedPickRating(pick) !== null ? (
+                                  <span className="text-[10px] text-muted-foreground">Verified editorial score</span>
+                                ) : (
+                                  <span className="max-w-[190px] text-right text-[10px] leading-snug text-amber-700 dark:text-amber-300">Unverified stored value — not a validated rating</span>
+                                )}
+                              </>
+                            ) : <span className="text-xs text-muted-foreground">Score pending evidence-backed assessment</span>}
                           </div>
                         </div>
                         <p className="text-sm font-medium text-primary mb-2"><span className="font-semibold">Best fit:</span> {safePickText(pick, pick.bestFor)}</p>

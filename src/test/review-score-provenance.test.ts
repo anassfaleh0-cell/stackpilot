@@ -78,6 +78,16 @@ describe("review score provenance", () => {
     expect(home).toContain('getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug))')
     expect(home).toContain('getAllResearch().filter((item) => isContentAvailable("research", item.slug))')
   })
+  it("keeps stored best-of scores visible but clearly labels unverified values as not validated ratings", () => {
+    const bestDetail = fs.readFileSync(path.join(process.cwd(), "src", "app", "best", "[slug]", "page.tsx"), "utf8")
+
+    expect(bestDetail).toContain("Unverified stored value — not a validated rating")
+    expect(bestDetail).toContain("Unverified stored value, not a validated rating")
+    expect(bestDetail).toContain("{storedPickRating(pick)}/5")
+    expect(bestDetail).toContain('verifiedPickRating(pick) !== null && <Star')
+    expect(bestDetail).not.toContain('className="fill-accent text-accent" />\n                            {storedPickRating')
+  })
+
   it("does not render missing score dimensions as partially filled score bars", () => {
     const source = fs.readFileSync(REVIEW_PAGE, "utf8")
 
