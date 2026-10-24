@@ -11,43 +11,43 @@
       "name": "Primary job",
       "tool1": "Design exploration and interface prototyping",
       "tool2": "Git repository and code-review collaboration",
-      "tool1Detail": "Evaluate design files, interactive prototypes, handoff needs, and whether your existing team still depends on this product. Verify Adobe XD's current availability and support status before starting a new workflow.",
-      "tool2Detail": "Evaluate repository hosting, pull-request review, access controls, and how the service fits your development workflow. Confirm current plan capabilities and integrations with official documentation."
+      "tool1Detail": "Evaluation note for Adobe XD: Design exploration and interface prototyping. Verify the requirement against current product documentation and test it in a representative workflow.",
+      "tool2Detail": "Evaluation note for Bitbucket: Git repository and code-review collaboration. Verify the requirement against current product documentation and test it in a representative workflow."
     },
     {
       "name": "Main users",
       "tool1": "Designers, product teams, and stakeholders",
       "tool2": "Developers and engineering teams",
-      "tool1Detail": "Evaluate design files, interactive prototypes, handoff needs, and whether your existing team still depends on this product. Verify Adobe XD's current availability and support status before starting a new workflow.",
-      "tool2Detail": "Evaluate repository hosting, pull-request review, access controls, and how the service fits your development workflow. Confirm current plan capabilities and integrations with official documentation."
+      "tool1Detail": "Evaluation note for Adobe XD: Designers, product teams, and stakeholders. Verify the requirement against current product documentation and test it in a representative workflow.",
+      "tool2Detail": "Evaluation note for Bitbucket: Developers and engineering teams. Verify the requirement against current product documentation and test it in a representative workflow."
     },
     {
       "name": "Key evaluation",
       "tool1": "Prototype fidelity, handoff, design-system fit, and file access",
       "tool2": "Branching, pull requests, permissions, integrations, and audit needs",
-      "tool1Detail": "Evaluate design files, interactive prototypes, handoff needs, and whether your existing team still depends on this product. Verify Adobe XD's current availability and support status before starting a new workflow.",
-      "tool2Detail": "Evaluate repository hosting, pull-request review, access controls, and how the service fits your development workflow. Confirm current plan capabilities and integrations with official documentation."
+      "tool1Detail": "Evaluation note for Adobe XD: Prototype fidelity, handoff, design-system fit, and file access. Verify the requirement against current product documentation and test it in a representative workflow.",
+      "tool2Detail": "Evaluation note for Bitbucket: Branching, pull requests, permissions, integrations, and audit needs. Verify the requirement against current product documentation and test it in a representative workflow."
     },
     {
       "name": "Operational risks",
       "tool1": "Check product availability, file portability, and continued support",
       "tool2": "Check repository migration, access policy, and team workflow fit",
-      "tool1Detail": "Evaluate design files, interactive prototypes, handoff needs, and whether your existing team still depends on this product. Verify Adobe XD's current availability and support status before starting a new workflow.",
-      "tool2Detail": "Evaluate repository hosting, pull-request review, access controls, and how the service fits your development workflow. Confirm current plan capabilities and integrations with official documentation."
+      "tool1Detail": "Evaluation note for Adobe XD: Check product availability, file portability, and continued support. Verify the requirement against current product documentation and test it in a representative workflow.",
+      "tool2Detail": "Evaluation note for Bitbucket: Check repository migration, access policy, and team workflow fit. Verify the requirement against current product documentation and test it in a representative workflow."
     },
     {
       "name": "Cost comparison",
       "tool1": "Verify current availability and any required replacement-tool costs",
       "tool2": "Verify current plan, seats, limits, and billing terms",
-      "tool1Detail": "Evaluate design files, interactive prototypes, handoff needs, and whether your existing team still depends on this product. Verify Adobe XD's current availability and support status before starting a new workflow.",
-      "tool2Detail": "Evaluate repository hosting, pull-request review, access controls, and how the service fits your development workflow. Confirm current plan capabilities and integrations with official documentation."
+      "tool1Detail": "Evaluation note for Adobe XD: Verify current availability and any required replacement-tool costs. Verify the requirement against current product documentation and test it in a representative workflow.",
+      "tool2Detail": "Evaluation note for Bitbucket: Verify current plan, seats, limits, and billing terms. Verify the requirement against current product documentation and test it in a representative workflow."
     },
     {
       "name": "Relationship",
       "tool1": "Does not replace source control for application code",
       "tool2": "Does not replace interface design and prototyping",
-      "tool1Detail": "Evaluate design files, interactive prototypes, handoff needs, and whether your existing team still depends on this product. Verify Adobe XD's current availability and support status before starting a new workflow.",
-      "tool2Detail": "Evaluate repository hosting, pull-request review, access controls, and how the service fits your development workflow. Confirm current plan capabilities and integrations with official documentation."
+      "tool1Detail": "Evaluation note for Adobe XD: Does not replace source control for application code. Verify the requirement against current product documentation and test it in a representative workflow.",
+      "tool2Detail": "Evaluation note for Bitbucket: Does not replace interface design and prototyping. Verify the requirement against current product documentation and test it in a representative workflow."
     }
   ],
   "verdict": "These products serve different stages of digital product work rather than acting as direct substitutes. A design team may create and validate interface concepts while developers use source-control workflows to implement and review the code. If the task is interface design and prototyping, assess a current design tool and verify Adobe XD's present support status. If the task is source-code collaboration, assess Bitbucket against your repository, review, and governance requirements. A team may need both types of workflow. Current feature availability, pricing, plan limits, security terms, and integrations have not been independently benchmarked in this comparison; verify requirements with the vendors before purchasing.",
