@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const tool = getReview(slug)
   if (!tool) return {}
-  const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true)
+  const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true, tool.name)
   const wordCount = visibleContent.reduce((a, s) => a + s.body.split(/\s+/).length, 0)
   const noindexed = isNoindexed("reviews", slug)
   return createMetadata({
@@ -68,7 +68,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const companyFacts = resolveCompanyFacts(tool, entity)
   const pros = editorialPros(tool.pros)
   const visibleFaqs = getVisibleReviewFaqs(tool.faqs, tool.priceRangeVerified === true, tool.featuresVerified === true).slice(0, 8)
-  const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true)
+  const visibleContent = getVisibleReviewContent(tool.content, tool.priceRangeVerified === true, tool.ratingsVerified === true, tool.name)
   const pricingSummary = getReviewPricingSummary(tool.priceRange, tool.pricing, tool.priceRangeVerified === true)
   const pricingModelLabel = isPricingPlaceholder(tool.pricing) ? "Not verified" : tool.pricing || "Not recorded"
 
