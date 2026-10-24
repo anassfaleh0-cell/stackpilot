@@ -179,7 +179,7 @@ const UNSUPPORTED_CLAIM_PATTERNS = [
   /\b(?:zero|no)\s+(?:loading states?|pagination delays?|downtime)\b/i,
   /\b\d{1,3}(?:\.\d+)?%?\s+(?:faster|improvement|uptime)\b/i,
   // Catch product-scale claims when generated copy inserts adjectives between the number and noun.
-  /\b(?!(?:19|20)\d{2}\b)\d[\d,]*(?:\.\d+)?\+?\s+[^.!?]{0,55}\b(?:templates|integrations|users|customers|members|employees|apps|workflows|features|formats|connectors|articles|downloads)\b/i,
+  /\b(?!(?:19|20)\d{2}\b)\d[\d,]*(?:\.\d+)?\+?\s+(?:(?:searchable,?\s+|professionally designed\s+|pre-built\s+|premium\s+|free\s+|stock\s+|available\s+|built-in\s+|ready-to-use\s+|enterprise-grade\s+)){0,4}(?:templates|integrations|users|customers|members|employees|apps|workflows|features|formats|connectors|articles|downloads)\b/i,
   /\b\d[\d,]*\+?\s*(?:million|billion|thousand)\b/i,
   /\b\d+(?:\.\d+)?\s*(?:GB|TB|MB)\b/i,
   /\b\d+(?:[-–]\d+)?[- ]day\b[^.!?]{0,90}\b(?:history|storage|retention|trial|version|versions|backup|access)\b/i,
