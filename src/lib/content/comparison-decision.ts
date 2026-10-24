@@ -37,17 +37,21 @@ export function getComparisonDecision(input: ComparisonDecisionInput): Compariso
   }
 }
 
+const HAS_PROVENANCE_NOTE = /\b(?:recorded;\s*not independently verified|not independently verified|verification pending|source verification is pending|underlying values are not independently verified)\b/i
+
 /** Preserve stored comparison values while identifying data that has not been independently verified. */
 export function getComparisonFeatureDisplayValue(value: boolean | string, featuresVerified?: boolean, decisionGuide = false, featureName = ""): boolean | string {
-  void featureName
   if (typeof value === "string" && !value.trim()) return "Not recorded"
+  // Do not stack a second generic disclaimer onto a source value that already has
+  // a clear provenance note. This used to produce duplicate phrases in table cells.
+  const alreadyDisclosed = typeof value === "string" && HAS_PROVENANCE_NOTE.test(value)
   // Decision-guide text is usually authored evaluation guidance, not a factual product claim.
   // Keep instructions readable, but retain provenance labels on explicit rating/count/pricing rows.
   if (decisionGuide && typeof value === "string") {
     const isRecordedMetric = /\b(?:rating|review count|pricing information|price range)\b/i.test(featureName)
-    return featuresVerified === true || !isRecordedMetric ? value : `${value} (recorded; not independently verified)`
+    return featuresVerified === true || !isRecordedMetric || alreadyDisclosed ? value : `${value} (recorded; not independently verified)`
   }
-  if (featuresVerified === true) return value
+  if (featuresVerified === true || alreadyDisclosed) return value
   const label = typeof value === "boolean" ? (value ? "Yes" : "No") : value
   return `${label} (recorded; not independently verified)`
 }
