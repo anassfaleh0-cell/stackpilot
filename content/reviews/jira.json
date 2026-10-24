@@ -51,6 +51,21 @@
       "title": "Who should evaluate alternatives",
       "body": "Jira may suit teams that need structured issue workflows and can maintain the configuration. Teams seeking minimal setup should compare the administrative burden and user experience against a simpler board or task manager using the same real project.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Require a new team member to create an issue, find related work, update status, add a dependency and locate the release report without help. Confirm that required fields support the process and that notifications are useful. Record completion time, confusing steps and the amount of manual status reporting that remains.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases to test",
+      "body": "Try a blocked issue, a user who loses project access, a broken automation and a release that needs to be rolled back. Confirm that the team can see the problem, identify an owner and restore the expected state. Review whether permissions or workflow rules can be changed only by the appropriate administrators.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document the workflow owner, project templates, custom fields, permission model, automation rules and reporting definitions. Keep a list of configuration changes and review unused fields periodically. This prevents a successful initial setup from gradually becoming an unmaintainable collection of special cases.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -158,5 +173,5 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 220
+  "wordCount": 363
 }
