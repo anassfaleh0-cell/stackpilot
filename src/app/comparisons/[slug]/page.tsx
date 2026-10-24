@@ -183,14 +183,14 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           {/* Tool Compare Cards */}
           {(t1Pct !== null || t2Pct !== null) && <div className="grid sm:grid-cols-2 gap-6 mb-8">
             {[
-              { name: cmp.tool1, slug: cmp.tool1Slug, isWinner: hasComparableWinner && winnerLabel === cmp.tool1, score: t1Pct },
-              { name: cmp.tool2, slug: cmp.tool2Slug, isWinner: hasComparableWinner && winnerLabel === cmp.tool2, score: t2Pct },
+              { name: cmp.tool1, slug: cmp.tool1Slug, isWinner: (hasComparableWinner && winnerLabel === cmp.tool1) || provisionalWinnerLabel === cmp.tool1, score: t1Pct },
+              { name: cmp.tool2, slug: cmp.tool2Slug, isWinner: (hasComparableWinner && winnerLabel === cmp.tool2) || provisionalWinnerLabel === cmp.tool2, score: t2Pct },
             ].map((tool) => (
               <GlassCard key={tool.name} glow={tool.isWinner}>
                 <div className="p-5 text-center relative">
                   {tool.isWinner && (
                     <Badge variant="warning" className="absolute -top-2.5 right-3">
-                      Recorded pick
+                      {hasComparableWinner ? "Verified pick" : "Provisional pick · verify evidence"}
                     </Badge>
                   )}
                   <div className="text-xl font-bold mb-2">{tool.name}</div>
