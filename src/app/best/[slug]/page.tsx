@@ -103,7 +103,28 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
       ? pick.priceRange
       : null
   const safeDescription = stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(page.description))
-  const safeFaqs = page.faqs.map((faq) => ({ question: stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(faq.question)), answer: stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(faq.answer)) }))
+  const sanitizedBestFaqs = page.faqs
+    .map((faq) => ({ question: stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(faq.question)).trim(), answer: stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(faq.answer)).trim() }))
+    .filter((faq) => faq.question.length > 0 && faq.answer.length > 0)
+  // A shortlist must not render an empty FAQ heading after unsafe or blank source FAQs are filtered.
+  const safeFaqs = sanitizedBestFaqs.length > 0 ? sanitizedBestFaqs : [
+    {
+      question: `How should you evaluate options in ${page.title}?`,
+      answer: `Use the criteria on this page to shortlist tools, then test the same representative workflow in each candidate. Verify required features, integrations, permissions, export options, and adoption effort with current vendor documentation and a trial.`,
+    },
+    {
+      question: `Are the ratings in this ${page.category.toLowerCase()} shortlist verified?`,
+      answer: `Treat each rating according to its visible verification label. A stored number is not proof of an independently validated assessment; review the methodology and evidence before relying on any score.`,
+    },
+    {
+      question: `How should you compare current prices?`,
+      answer: `Confirm each vendor's current official plan terms, billing period, seat minimums, usage limits, add-ons, implementation, and renewal terms. Compare the same usage scenario and do not treat unverified stored figures as current prices.`,
+    },
+    {
+      question: `Does the first listed tool always win?`,
+      answer: `No. The list order is not a universal recommendation unless the page provides verified criteria and evidence. Choose the product that meets your mandatory requirements with acceptable cost, operational risk, and user adoption effort.`,
+    },
+  ]
   const hasUnverifiedPickRatings = page.picks.some((pick) => typeof pick.rating === "number" && verifiedPickRating(pick) === null) || (page.comparisonTable.columns.some((column) => /rating|score/i.test(column)) && page.picks.some((pick) => verifiedPickRating(pick) === null))
   const hasUnverifiedPickPrices = page.picks.some((pick) => Boolean(pick.priceRange?.trim()) && verifiedPickPrice(pick) === null) || (page.comparisonTable.columns.some((column) => /price|pricing/i.test(column)) && page.picks.some((pick) => verifiedPickPrice(pick) === null)) || (/[$€£]\s?\d/.test(page.pricingSummary) && page.picks.some((pick) => verifiedPickPrice(pick) === null))
   const safePickText = (pick: (typeof page.picks)[number] | undefined, value: string) => {
