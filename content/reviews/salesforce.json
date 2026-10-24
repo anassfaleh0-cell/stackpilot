@@ -2,7 +2,7 @@
   "slug": "salesforce",
   "name": "Salesforce",
   "tagline": "A configurable CRM platform to evaluate for customer processes, reporting and cross-team workflows.",
-  "description": "Salesforce is a CRM platform to evaluate when customer processes require structured records, automation and cross-team reporting. The fit depends on the products and edition selected, data governance, implementation capacity and integration needs; current prices and ratings are not verified here.",
+  "description": "Salesforce supports configurable CRM workflows; current product scope and independent ratings are not verified here.",
   "category": "CRM & Sales",
   "website": "https://salesforce.com",
   "pricing": "Not independently verified",
@@ -12,14 +12,57 @@
   "pros": [
     "A documented sales workflow can be mapped to records, stages and ownership rules.",
     "Complex reporting and automation requirements can be tested before a wider rollout.",
-    "A pilot helps reveal data governance and implementation work."
+    "A pilot helps reveal data governance and implementation work.",
+    "A small pipeline pilot can test ownership, reporting and handoffs.",
+    "A documented governance model can reduce long-term configuration drift."
   ],
   "cons": [
     "Configuration and ongoing administration can be substantial for complex deployments.",
     "Different products and editions should not be treated as interchangeable.",
     "Migration, integration and renewal scope need written confirmation."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Contact and deal workflow",
+      "available": false,
+      "description": "Salesforce: evaluate contact and deal workflow with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Pipeline stages",
+      "available": false,
+      "description": "Salesforce: evaluate pipeline stages with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Data quality",
+      "available": false,
+      "description": "Salesforce: evaluate data quality with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Automation and routing",
+      "available": false,
+      "description": "Salesforce: evaluate automation and routing with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Reporting and forecasting",
+      "available": false,
+      "description": "Salesforce: evaluate reporting and forecasting with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Permissions",
+      "available": false,
+      "description": "Salesforce: evaluate permissions with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Integrations",
+      "available": false,
+      "description": "Salesforce: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
+    },
+    {
+      "name": "Export and governance",
+      "available": false,
+      "description": "Salesforce: evaluate export and governance with a representative workflow; availability is not recorded as verified in this profile."
+    }
+  ],
   "ratings": [],
   "content": [
     {
@@ -66,19 +109,23 @@
   "faqs": [
     {
       "question": "Who should evaluate Salesforce?",
-      "answer": "Evaluate Salesforce when its primary workflow matches a documented requirement. Run a representative pilot and verify current capabilities, limits and contract terms directly with the vendor."
+      "answer": "Evaluate Salesforce when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
     },
     {
-      "question": "Are prices and ratings independently verified here?",
-      "answer": "No. This review does not present an independently verified price or third-party rating. Check current official documentation and obtain a dated quote."
+      "question": "How should a team test Salesforce?",
+      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
     },
     {
-      "question": "What should a pilot include?",
-      "answer": "Test the main workflow, one failure case, permissions, integrations, export and offboarding. Record pass, partial pass, fail or unknown and assign an owner to every unresolved requirement."
+      "question": "Which limitations should be checked in Salesforce?",
+      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
     },
     {
-      "question": "How should total cost be compared?",
-      "answer": "Include licenses, usage, implementation, migration, training, integrations, support, internal administration and renewal terms—not only the headline subscription."
+      "question": "Are Salesforce prices and ratings independently verified here?",
+      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+    },
+    {
+      "question": "What should be confirmed before adopting Salesforce?",
+      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
     }
   ],
   "alternatives": [
