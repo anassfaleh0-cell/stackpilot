@@ -1,17 +1,17 @@
 {
   "slug": "kpi",
   "term": "KPI",
-  "definition": "Key Performance Indicator — a measurable value that tracks progress toward a business objective.",
-  "extendedDefinition": "KPIs translate abstract goals like \"improve customer satisfaction\" into concrete, trackable metrics. Common SaaS KPIs include monthly recurring revenue (MRR), customer acquisition cost (CAC), and net promoter score (NPS). Teams use dashboards to monitor KPIs in real time and make data-driven decisions. Choosing the right KPIs ensures everyone is aligned on what success looks like. Buyers should define the metrics a tool must move before purchase, then review them quarterly after launch to confirm the promised value materializes. Leading indicators like activation and usage often predict retention better than trailing revenue numbers. Review cadence matters as well: monthly tracking catches drift early, while annual reviews arrive too late to steer spending and staffing decisions.",
+  "definition": "A key performance indicator (KPI) is a measurable value used to assess progress toward a specific business objective.",
+  "extendedDefinition": "A KPI connects a business objective to a metric that can be reviewed over a defined period. A useful KPI has a clear formula, data source, owner, target, and review cadence; a number without those definitions can be misleading. Teams should distinguish leading indicators, which may signal future outcomes, from lagging indicators that report what already happened. When choosing analytics or reporting software, confirm that the tool can calculate the metric consistently, explain filters and attribution, and let the intended users act on the result. Avoid tracking dozens of metrics without a decision attached to each one.",
   "category": "Analytics & Data",
   "examples": [
-    "Monthly Recurring Revenue",
-    "Customer Acquisition Cost",
-    "Net Promoter Score"
+    "A support team sets a target to resolve 80% of tickets within one business day and tracks the percentage weekly.",
+    "A SaaS business monitors monthly recurring revenue alongside trial-to-paid conversion to understand both current revenue and the pipeline feeding it.",
+    "A product team tracks activation within seven days of signup as a leading indicator, then checks whether activated users retain better after 30 and 90 days."
   ],
   "relatedTerms": [
     "clv",
     "churn-rate"
   ],
-  "description": "A Key Performance Indicator (KPI) is a measurable value that tracks progress toward business objectives. Learn how to define and use KPIs effectively."
+  "description": "A KPI is a defined metric tied to a business goal. Learn how to set measurable targets, choose useful leading and lagging indicators, and verify that reporting tools calculate them consistently."
 }
