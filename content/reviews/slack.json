@@ -43,6 +43,21 @@
       "title": "Adoption and cost",
       "body": "Set expectations for response time, urgent escalation, channel creation and documenting decisions. Compare the required seats, external collaborators, retention and administration. Verify current plan limits directly and measure whether communication improves rather than simply increasing message volume.",
       "type": "text"
+    },
+    {
+      "title": "Pilot acceptance criteria",
+      "body": "Run a real project conversation with decisions, files, a support escalation and an integration notification. Ask a colleague to find the final decision later and verify it is linked from the durable project record. Record notification noise and the number of duplicate updates across tools.",
+      "type": "text"
+    },
+    {
+      "title": "Failure cases and governance",
+      "body": "Test external guest access, a private channel, a departing employee and an integration that posts sensitive data to the wrong channel. Confirm access removal and alert routing. Define which decisions must be recorded outside chat and how urgent incidents are escalated.",
+      "type": "text"
+    },
+    {
+      "title": "Decision record",
+      "body": "Document channel naming, owners, response expectations, retention, guest access, integration rules and plan-specific controls. Measure whether the workspace reduces coordination friction and repeated questions. Confirm current terms and export options before treating chat history as a business record.",
+      "type": "text"
     }
   ],
   "faqs": [
@@ -145,7 +160,7 @@
   "learningCurve": "Moderate — expect 1-3 days to become productive",
   "whoShouldUse": "Slack is ideal for small to mid-size teams that need a reliable communication solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
   "whoShouldNotUse": "Slack is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives.",
-  "wordCount": 185,
+  "wordCount": 309,
   "rating": null,
   "reviewCount": 0,
   "ratings": [],
