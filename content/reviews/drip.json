@@ -84,6 +84,34 @@
       "title": "Pricing and decision checklist",
       "body": "Current Drip pricing, plan entitlements, and usage limits are not independently verified here. Check the vendor's current terms for contact or sending limits, integrations, automation features, support, and billing cadence. Estimate cost at the business's expected contact volume and include the time needed to maintain data quality and campaign content. No numeric editorial rating or third-party review count is asserted without a source-backed record.",
       "type": "text"
+    },
+    {
+      "title": "Content operations and ownership",
+      "type": "text",
+      "body": "Create a small calendar for the messages in the pilot and assign an owner to the copy, audience rules, and landing page. Review links and personalization before every send. Record why each message exists and when it should stop. Without clear ownership, automations can keep sending outdated offers or messages after the customer journey has changed."
+    },
+    {
+      "title": "Pause and recovery procedure",
+      "type": "text",
+      "body": "Test how the team pauses a journey when a store event fails, a segment is wrong, or a message contains an error. Decide who can pause it, how customers already in the flow are handled, and how the team confirms the fix before resuming. Keep the trigger logic and exclusions documented so that a later edit does not silently change the customer experience."
+    },
+    {
+      "title": "Pilot scorecard",
+      "type": "text",
+      "body": "Track the accuracy of incoming events, the number of manual fixes, whether the intended audience enters the journey, and the outcome tied to the campaign goal. Compare against a useful baseline rather than an unsourced industry average. If the data feed or consent rules are unreliable, pause rollout and repair those foundations before adding more journeys."
+    },
+    {
+      "title": "Implementation checklist",
+      "type": "list",
+      "body": "Use a controlled launch plan.",
+      "items": [
+        "Validate store events and field mapping.",
+        "Test one journey with sample customers.",
+        "Check consent and channel-specific opt-outs.",
+        "Preview every branch and message.",
+        "Assign an owner and pause procedure.",
+        "Verify current limits and pricing with the vendor."
+      ]
     }
   ],
   "faqs": [
