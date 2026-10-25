@@ -2,8 +2,6 @@ import { describe, expect, it } from "vitest"
 import sitemap from "@/app/sitemap"
 import { siteConfig } from "@/lib/constants"
 import { REDIRECTED_ALTERNATIVE_SLUGS, REDIRECTED_BEST_SLUGS, REDIRECTED_GUIDE_SLUGS, REDIRECTED_REVIEW_SLUGS } from "@/lib/sitemap/redirected-content"
-import fs from "node:fs"
-import path from "node:path"
 
 describe("XML sitemap integrity", () => {
   it("uses only absolute URLs on the canonical site origin", () => {
