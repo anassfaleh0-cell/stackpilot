@@ -5,6 +5,4 @@
  */
 export const REDIRECTED_ALTERNATIVE_SLUGS = new Set<string>()
 
-export const REDIRECTED_BEST_SLUGS = new Set([
-  "best-productivity-startups",
-])
+export const REDIRECTED_BEST_SLUGS = new Set<string>()
