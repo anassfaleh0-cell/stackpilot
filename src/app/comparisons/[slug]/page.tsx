@@ -222,12 +222,12 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
               <div className="rounded-lg bg-muted-bg p-4">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">{cmp.tool1} editorial rating</p>
                 <p className="text-xl font-bold">{typeof review1?.rating === "number" && Number.isFinite(review1.rating) && review1.rating > 0 ? `${review1.rating.toFixed(1)}/5` : "Not recorded"}</p>
-                <p className="text-xs text-muted-foreground mt-1">{review1?.ratingVerified === true ? "Linked review rating marked verified." : "Stored rating is provisional until its evidence and calculation are audited."}</p>
+                <p className="text-xs text-muted-foreground mt-1">{typeof review1?.rating === "number" && Number.isFinite(review1.rating) && review1.rating > 0 ? review1.ratingVerified === true ? "Linked review rating is marked verified." : "Stored rating is provisional until its evidence and calculation are audited." : "No numeric rating is recorded in the linked review; no rating is inferred."}</p>
               </div>
               <div className="rounded-lg bg-muted-bg p-4">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">{cmp.tool2} editorial rating</p>
                 <p className="text-xl font-bold">{typeof review2?.rating === "number" && Number.isFinite(review2.rating) && review2.rating > 0 ? `${review2.rating.toFixed(1)}/5` : "Not recorded"}</p>
-                <p className="text-xs text-muted-foreground mt-1">{review2?.ratingVerified === true ? "Linked review rating marked verified." : "Stored rating is provisional until its evidence and calculation are audited."}</p>
+                <p className="text-xs text-muted-foreground mt-1">{typeof review2?.rating === "number" && Number.isFinite(review2.rating) && review2.rating > 0 ? review2.ratingVerified === true ? "Linked review rating is marked verified." : "Stored rating is provisional until its evidence and calculation are audited." : "No numeric rating is recorded in the linked review; no rating is inferred."}</p>
               </div>
             </div>
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Winner</p>
