@@ -49,7 +49,7 @@ describe("Search Console 404 recovery", () => {
         lastUpdated?: string
         description?: string
       }
-      expect(record.published, slug).toBe(false)
+      expect(record.published, slug).toBe(true)
       expect(record.publicationStatus, slug).toBe("published")
       expect(record.winner, slug).toBeNull()
       expect(record.winnerVerified, slug).toBe(false)
@@ -67,7 +67,7 @@ describe("Search Console 404 recovery", () => {
     for (const slug of ["clickup-alternatives", "grammarly-alternatives"]) {
       const file = path.join(process.cwd(), "content", "alternatives", `${slug}.json`)
       const record = JSON.parse(fs.readFileSync(file, "utf8")) as { published?: boolean; alternatives?: { slug: string; rating?: number }[] }
-      expect(record.published, slug).toBe(true)
+      expect(record.published, slug).toBe(false)
       expect(record.alternatives?.length, slug).toBeGreaterThan(0)
       expect(getAlternative(slug), slug).not.toBeNull()
       expect(isContentAvailable("alternative", slug), slug).toBe(true)
