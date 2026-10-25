@@ -9,6 +9,7 @@ const thin = []
 const templateHits = []
 const emptyRelations = []
 const staleDates = []
+const brokenDescriptions = []
 const invalidRelatedGuides = []
 const duplicateRelatedGuides = []
 const knownGuideSlugs = new Set(files.map((name) => name.replace(/\.json$/, "")))
@@ -44,6 +45,12 @@ for (const file of files) {
     words += count(section.title) + count(section.body)
     for (const item of section.items || []) words += count(item)
     editorialText.push(section.title, section.body, ...(section.items || []))
+  }
+  // Report obvious mid-sentence truncation in snippets. This remains report-only
+  // until the existing corpus is audited and corrected, so it cannot block builds.
+  const description = data.description.trim()
+  if (/[,:;][.!?…]*$/.test(description) || /\\b(?:and|or|with|of|to|for|by|in|from|as|at|the|a|an|that|which)[.!?…]*$/i.test(description)) {
+    brokenDescriptions.push({ slug: data.slug, description })
   }
   const relatedGuides = Array.isArray(data.relatedGuides) ? data.relatedGuides : []
   const seenRelatedGuides = new Set()
@@ -87,6 +94,7 @@ console.log("Guides without related tools/guides:", emptyRelations.length, JSON.
 console.log("Invalid/self related-guide references:", invalidRelatedGuides.length, JSON.stringify(invalidRelatedGuides.slice(0, 30)))
 console.log("Duplicate related-guide references:", duplicateRelatedGuides.length, JSON.stringify(duplicateRelatedGuides.slice(0, 30)))
 console.log("Guides with missing, stale, or malformed lastUpdated dates:", staleDates.length, JSON.stringify(staleDates.slice(0, 30)))
+console.log("Guides with likely truncated descriptions (report-only):", brokenDescriptions.length, JSON.stringify(brokenDescriptions.slice(0, 100)))
 console.log("Reading-time display:", "derived from normalized rendered content by the registry; raw JSON metadata is not authoritative.")
 // Broken/self-referencing or duplicate related-guide links are structural defects, not report-only editorial heuristics.
 if (issues.length > 0 || invalidRelatedGuides.length > 0 || duplicateRelatedGuides.length > 0) process.exitCode = 1
