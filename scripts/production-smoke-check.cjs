@@ -69,11 +69,18 @@ async function main() {
   }
   if (linear && !linear.error) {
     const noUnsupportedFaq = !/Yes, Linear offers deep GitHub integration|What platforms does Linear support\?/i.test(linear.body)
-    const honestScoring = linear.body.includes("Assessment not yet recorded; no number is invented") &&
-      linear.body.includes("No category rating dimensions recorded yet") &&
+    const hasReviewScorecard = linear.body.includes("Review Claim, Rating &amp; Verdict") &&
+      linear.body.includes("Editorial Score")
+    const normalizedLinearBody = linear.body.toLowerCase()
+    const hasHonestScoreDisclosure =
+      normalizedLinearBody.includes("stored score preserved for transparency; its evidence and calculation still need verification") ||
+      normalizedLinearBody.includes("assessment not yet recorded; no number is invented") ||
+      normalizedLinearBody.includes("pending evidence audit")
+    const noUnsupportedAggregateClaim =
       !linear.body.includes("The displayed overall score is calculated from the recorded category ratings")
+    const honestScoring = hasReviewScorecard && hasHonestScoreDisclosure && noUnsupportedAggregateClaim
     report("review capability claims", noUnsupportedFaq, "unverified integration/platform FAQs are not rendered")
-    report("review scoring disclosure", honestScoring, "unverified aggregate-score claims are not rendered")
+    report("review scoring disclosure", honestScoring, "scorecard is rendered, any legacy score is labelled provisional or missing, and unsupported aggregate-score claims are absent")
   }
   if (aiWritingGuide && !aiWritingGuide.error) {
     const usefulGuide = aiWritingGuide.body.includes("Build a representative test set") &&
