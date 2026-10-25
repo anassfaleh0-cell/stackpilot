@@ -17,9 +17,10 @@ function isQuality(slug: string, dir: string): boolean {
 
 function isPublished<T extends { slug: string }>(record: T): boolean {
   const status = record as T & { publicationStatus?: string; published?: boolean }
-  // A legacy record can explicitly opt out with published:false without carrying
-  // publicationStatus:"draft". Do not advertise those URLs in the XML sitemap.
-  return status.publicationStatus !== "draft" && status.published !== false
+  // publicationStatus is the authoritative publication flag. The legacy
+  // published boolean is inconsistent across older content records and must not
+  // silently remove otherwise-public pages from search discovery.
+  return status.publicationStatus !== "draft"
 }
 
 const staticPages: MetadataRoute.Sitemap = [
