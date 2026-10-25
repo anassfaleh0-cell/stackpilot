@@ -49,6 +49,26 @@ async function main() {
   }))
 
   const byPath = new Map(results.map((result) => [result.pathname, result]))
+
+  // The Search Console export contains both www and apex URLs. Verify that the
+  // legacy host consolidates to the configured canonical origin while preserving path/query.
+  try {
+    const legacyUrl = "https://www.pilotstack.online/use-cases/best-seo-for-agencies?canonical-smoke=1"
+    const legacyResponse = await fetchWithRetry(legacyUrl, {
+      redirect: "follow",
+      headers: { "user-agent": "PilotStack-ProductionSmokeCheck/1.0" },
+      signal: AbortSignal.timeout(15000),
+    })
+    const finalUrl = new URL(legacyResponse.url)
+    const canonicalOrigin = new URL("https://pilotstack.online").origin
+    const hostConsolidated = finalUrl.origin === canonicalOrigin &&
+      finalUrl.pathname === "/use-cases/best-seo-for-agencies" &&
+      finalUrl.searchParams.get("canonical-smoke") === "1"
+    report("www host consolidation", hostConsolidated, "HTTP " + legacyResponse.status + " → " + finalUrl.href)
+    await legacyResponse.body?.cancel()
+  } catch (error) {
+    report("www host consolidation", false, error instanceof Error ? error.message : String(error))
+  }
   const home = byPath.get("/")
   const ads = byPath.get("/ads.txt")
   const robots = byPath.get("/robots.txt")
@@ -99,6 +119,37 @@ async function main() {
   if (statistics && !statistics.error) {
     const noUnsourcedNarrativeFigures = !/\$50B\+|26%|4,874\+|27,500 products|8M-professional base/i.test(statistics.body)
     report("statistics narrative provenance", noUnsourcedNarrativeFigures, "unaudited narrative figures are withheld from rendered statistics pages")
+  }
+
+  // Validate rendered canonical tags against the configured canonical origin.
+  // HTTP 200 alone is insufficient when Google sees duplicate host/path variants.
+  const canonicalTargets = [
+    [home, "/"],
+    [contact, "/contact"],
+    [linear, "/reviews/linear"],
+    [aiWritingGuide, "/guides/how-to-choose-ai-writing-software"],
+    [pricingResearch, "/research/saas-pricing-benchmark-2026"],
+  ]
+  for (const [page, expectedPath] of canonicalTargets) {
+    if (!page || page.error) continue
+    const canonicalTag = [...page.body.matchAll(/<link\b[^>]*>/gi)]
+      .map((match) => match[0])
+      .find((tag) => /\brel=["']canonical["']/i.test(tag))
+    const canonicalHref = canonicalTag?.match(/\bhref=["']([^"']+)["']/i)?.[1]
+    let canonicalOk = false
+    let canonicalDetail = "canonical link tag missing"
+    if (canonicalHref) {
+      try {
+        const canonicalUrl = new URL(canonicalHref, SITE_URL)
+        canonicalOk = canonicalUrl.origin === new URL(SITE_URL).origin &&
+          canonicalUrl.pathname.replace(/\/$/, "") === expectedPath.replace(/\/$/, "") &&
+          !canonicalUrl.search && !canonicalUrl.hash
+        canonicalDetail = canonicalUrl.href
+      } catch {
+        canonicalDetail = "canonical href is not a valid URL: " + canonicalHref
+      }
+    }
+    report("canonical " + expectedPath, canonicalOk, canonicalDetail)
   }
 
   if (home && !home.error) {
