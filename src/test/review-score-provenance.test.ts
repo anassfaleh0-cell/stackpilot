@@ -152,6 +152,34 @@ describe("review score provenance", () => {
     expect(source).toContain("review2.rating > 0 && review2.rating <= 5")
     expect(source).toContain("Feature-coverage score: not verified / not available")
     expect(source).toContain("Use-case dependent: compare must-have workflows, integrations, permissions, and total cost before choosing.")
+    expect(source).toContain("How to interpret comparison scores")
+    expect(source).toContain("Feature-coverage percentages count only rows with recorded boolean values for both products.")
+    expect(source).toContain("A winner is verified only when this comparison's record explicitly marks it verified.")
+  })
+
+  it("resolves sitemap indexes before auditing page HTTP statuses", () => {
+    const smoke = fs.readFileSync(path.join(process.cwd(), "scripts", "production-smoke-check.cjs"), "utf8")
+
+    expect(smoke).toContain("const sitemapQueue = [{ url: cleanUrl(sitemap.finalUrl || SITE_URL + \"/sitemap.xml\"), body: sitemap.body }]")
+    expect(smoke).toContain("if (/<sitemapindex\\b/i.test(xml))")
+    expect(smoke).toContain("else if (/<urlset\\b/i.test(xml))")
+    expect(smoke).toContain("pageUrlsChecked: targets.length")
+    expect(smoke).toContain("const maxSitemaps = 200")
+    expect(smoke).toContain("const maxPages = 15000")
+    expect(smoke).toContain("if (process.env.AUDIT_OUTPUT_FILE)")
+    expect(smoke).toContain("pageFailures,")
+    const workflow = fs.readFileSync(path.join(process.cwd(), ".github", "workflows", "pilotstack-sitemap-route-audit.yml"), "utf8")
+    expect(workflow).toContain("AUDIT_OUTPUT_FILE: sitemap-route-audit-report.json")
+    expect(workflow).toContain("actions/upload-artifact@v4")
+    expect(workflow).toContain("name: pilotstack-sitemap-route-audit-${{ github.run_id }}")
+  })
+
+  it("accepts the actual published legacy score provenance disclosure in the production smoke check", () => {
+    const smoke = fs.readFileSync(path.join(process.cwd(), "scripts", "production-smoke-check.cjs"), "utf8")
+
+    expect(smoke).toContain('normalizedLinearBody.includes("retained for transparency, but remains provisional")')
+    expect(smoke).toContain('normalizedLinearBody.includes("no source-linked rationale or reproducible score breakdown recorded in this profile")')
+    expect(smoke).toContain('accepted provenance disclosure=" + hasHonestScoreDisclosure')
   })
 
 })

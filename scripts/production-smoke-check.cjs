@@ -74,13 +74,15 @@ async function main() {
     const normalizedLinearBody = linear.body.toLowerCase()
     const hasHonestScoreDisclosure =
       normalizedLinearBody.includes("stored score preserved for transparency; its evidence and calculation still need verification") ||
+      normalizedLinearBody.includes("retained for transparency, but remains provisional") ||
+      normalizedLinearBody.includes("no source-linked rationale or reproducible score breakdown recorded in this profile") ||
       normalizedLinearBody.includes("assessment not yet recorded; no number is invented") ||
       normalizedLinearBody.includes("pending evidence audit")
     const noUnsupportedAggregateClaim =
       !linear.body.includes("The displayed overall score is calculated from the recorded category ratings")
     const honestScoring = hasReviewScorecard && hasHonestScoreDisclosure && noUnsupportedAggregateClaim
     report("review capability claims", noUnsupportedFaq, "unverified integration/platform FAQs are not rendered")
-    report("review scoring disclosure", honestScoring, "scorecard is rendered, any legacy score is labelled provisional or missing, and unsupported aggregate-score claims are absent")
+    report("review scoring disclosure", honestScoring, "scorecard=" + hasReviewScorecard + ", accepted provenance disclosure=" + hasHonestScoreDisclosure + ", unsupported aggregate claim absent=" + noUnsupportedAggregateClaim)
   }
   if (aiWritingGuide && !aiWritingGuide.error) {
     const usefulGuide = aiWritingGuide.body.includes("Build a representative test set") &&
@@ -155,41 +157,115 @@ async function main() {
     }
     report("sitemap duplicate URLs", duplicates.length === 0, duplicates.length ? "duplicate locations: " + JSON.stringify([...new Set(duplicates)].slice(0, 5)) : "no duplicate <loc> entries detected")
 
-    // Optional production crawl: CHECK_SITEMAP_URLS=1 fetches every same-origin
-    // sitemap target with bounded concurrency and reports stale 404/5xx routes.
-    // Keep this opt-in so ordinary smoke checks do not issue thousands of requests.
+    // Optional full production crawl. Resolve sitemap indexes recursively before
+    // checking page URLs; otherwise a sitemap-index URLset would only test XML files.
+    // This stays opt-in because the site has thousands of URLs.
     if (process.env.CHECK_SITEMAP_URLS === "1") {
-      const targets = [...new Set(locValues)].filter((value) => {
-        try { return new URL(value).origin === expectedOrigin } catch { return false }
-      })
-      const failures = []
+      const parseLocs = (xml) => [...xml.matchAll(/<loc>\s*([\s\S]*?)\s*<\/loc>/gi)]
+        .map((match) => match[1].replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").trim())
+        .filter(Boolean)
+      const cleanUrl = (value) => {
+        const parsed = new URL(value)
+        parsed.searchParams.delete("__content_check")
+        return parsed.href
+      }
+      const sitemapQueue = [{ url: cleanUrl(sitemap.finalUrl || SITE_URL + "/sitemap.xml"), body: sitemap.body }]
+      const visitedSitemaps = new Set()
+      const pageTargets = new Set()
+      const sitemapFailures = []
+      const maxSitemaps = 200
+      const maxPages = 15000
+      while (sitemapQueue.length > 0 && visitedSitemaps.size < maxSitemaps && pageTargets.size < maxPages) {
+        const current = sitemapQueue.shift()
+        if (!current || visitedSitemaps.has(current.url)) continue
+        visitedSitemaps.add(current.url)
+        let xml = current.body
+        if (typeof xml !== "string") {
+          try {
+            const response = await fetchWithRetry(current.url, {
+              redirect: "follow",
+              headers: { "user-agent": "PilotStack-SitemapTargetAudit/1.0" },
+              signal: AbortSignal.timeout(15000),
+            })
+            if (!response.ok) {
+              sitemapFailures.push({ url: current.url, status: response.status, type: "sitemap" })
+              await response.body?.cancel()
+              continue
+            }
+            xml = await response.text()
+          } catch (error) {
+            sitemapFailures.push({ url: current.url, status: "FETCH_ERROR", type: "sitemap", detail: error instanceof Error ? error.message : String(error) })
+            continue
+          }
+        }
+        const children = parseLocs(xml)
+        if (/<sitemapindex\b/i.test(xml)) {
+          for (const child of children) {
+            try {
+              const parsed = new URL(child)
+              if (parsed.origin === expectedOrigin) sitemapQueue.push({ url: cleanUrl(child) })
+            } catch {}
+          }
+        } else if (/<urlset\b/i.test(xml)) {
+          for (const target of children) {
+            if (pageTargets.size >= maxPages) break
+            try {
+              const parsed = new URL(target)
+              if (parsed.origin === expectedOrigin) pageTargets.add(cleanUrl(target))
+            } catch {}
+          }
+        } else {
+          sitemapFailures.push({ url: current.url, status: "INVALID_SITEMAP_XML", type: "sitemap" })
+        }
+      }
+      const targets = [...pageTargets]
+      const pageFailures = []
       let cursor = 0
       const concurrency = Math.min(4, targets.length)
       await Promise.all(Array.from({ length: concurrency }, async () => {
         while (cursor < targets.length) {
-          const index = cursor++
-          const target = targets[index]
+          const target = targets[cursor++]
           try {
             const response = await fetchWithRetry(target, {
               redirect: "follow",
               headers: { "user-agent": "PilotStack-SitemapTargetAudit/1.0" },
               signal: AbortSignal.timeout(15000),
             })
-            if (response.status >= 400) {
-              failures.push({ url: target, status: response.status, finalUrl: response.url })
-            }
+            if (response.status >= 400) pageFailures.push({ url: target, status: response.status, finalUrl: response.url })
             await response.body?.cancel()
           } catch (error) {
-            failures.push({ url: target, status: "FETCH_ERROR", detail: error instanceof Error ? error.message : String(error) })
+            pageFailures.push({ url: target, status: "FETCH_ERROR", detail: error instanceof Error ? error.message : String(error) })
           }
         }
       }))
+      const limitReached = sitemapQueue.length > 0 || pageTargets.size >= maxPages
+      const allFailures = [...sitemapFailures, ...pageFailures]
+      if (process.env.AUDIT_OUTPUT_FILE) {
+        await require("node:fs/promises").writeFile(
+          process.env.AUDIT_OUTPUT_FILE,
+          JSON.stringify({
+            site: SITE_URL,
+            checkedAt: new Date().toISOString(),
+            sitemapFilesChecked: visitedSitemaps.size,
+            pageUrlsChecked: targets.length,
+            sitemapFailures,
+            pageFailures,
+            limitReached,
+          }, null, 2) + "\n",
+          "utf8"
+        )
+      }
       report(
         "sitemap target HTTP status",
-        failures.length === 0,
-        failures.length
-          ? targets.length + " URLs checked; failing URLs: " + JSON.stringify(failures.slice(0, 25))
-          : targets.length + " same-origin URLs returned no 4xx/5xx response"
+        allFailures.length === 0 && !limitReached && targets.length > 0,
+        JSON.stringify({
+          sitemapFilesChecked: visitedSitemaps.size,
+          pageUrlsChecked: targets.length,
+          sitemapFailures: sitemapFailures.length,
+          pageFailures: pageFailures.length,
+          limitReached,
+          sampleFailures: allFailures.slice(0, 25),
+        })
       )
     }
   }

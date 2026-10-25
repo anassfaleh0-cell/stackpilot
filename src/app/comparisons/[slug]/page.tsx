@@ -216,6 +216,15 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <span className="ml-auto text-[11px]">Editorial comparison · Based on recorded page data</span>
           </div>
 
+          <section aria-label="How to interpret comparison scores" className="mb-6 rounded-xl border border-border bg-muted-bg p-4">
+            <h2 className="text-sm font-semibold mb-2">How to interpret these scores</h2>
+            <ul className="list-disc pl-5 space-y-1 text-xs text-muted-foreground">
+              <li>Editorial ratings are PilotStack assessments, not third-party review aggregates. A stored rating remains provisional until its source evidence and calculation are audited.</li>
+              <li>Feature-coverage percentages count only rows with recorded boolean values for both products. They describe those checks, not overall product quality.</li>
+              <li>A winner is verified only when this comparison's record explicitly marks it verified. Otherwise, treat the recorded pick as provisional or choose based on your own use case.</li>
+            </ul>
+          </section>
+
           <section aria-labelledby="comparison-verdict" className="mb-8 rounded-xl border border-border bg-card p-5">
             <h2 id="comparison-verdict" className="text-lg font-bold tracking-tight mb-3">Ratings, Scores, Winner &amp; Verdict</h2>
             <div className="grid gap-3 sm:grid-cols-2 mb-4">
