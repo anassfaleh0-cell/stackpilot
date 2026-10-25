@@ -26,7 +26,7 @@ const reviewBySlug = new Map(reviews.map(({ data }) => [data.slug, data]))
 const findings = []
 const summary = {
   reviews: { total: reviews.length, missingClaim: 0, missingRating: 0, invalidRating: 0, unverifiedStoredRating: 0, missingProsOrCons: 0 },
-  comparisons: { total: comparisons.length, missingDescription: 0, missingVerdict: 0, missingFeatureRows: 0, missingToolLinks: 0, invalidWinner: 0, missingWinner: 0, useCaseFallback: 0, winnerNeedsEvidence: 0, linkedReviewRatingGaps: 0, unverifiedFeatureScore: 0 },
+  comparisons: { total: comparisons.length, missingDescription: 0, missingVerdict: 0, missingFeatureRows: 0, missingToolLinks: 0, invalidWinner: 0, missingWinner: 0, useCaseFallback: 0, winnerNeedsEvidence: 0, linkedReviewRatingGaps: 0, unverifiedFeatureScore: 0, copyQualityFlags: 0 },
 }
 
 function add(type, slug, issue, detail = "") {
@@ -105,6 +105,26 @@ for (const { file, data } of comparisons) {
   if (data.featuresVerified !== true) {
     summary.comparisons.unverifiedFeatureScore++
     add("comparison", slug, "feature-score-not-verified", "UI must label coverage as unavailable/provisional, never as product quality")
+  }
+
+  // Editorial diagnostics only: never rewrite, hide, or delete source content.
+  const copyFields = [
+    data.description,
+    data.verdict,
+    ...(Array.isArray(data.faqs) ? data.faqs.flatMap((faq) => [faq.question, faq.answer]) : []),
+  ].filter((value) => typeof value === "string" && value.trim())
+  const suspiciousCopyPatterns = [
+    { issue: "broken-sentence-fragment", pattern: /\b(?:our|the)\s+provides?\s+(?:detailed|a|an|comprehensive)\b/i, detail: "check for a missing subject or link label in this sentence" },
+    { issue: "unsupported-precise-discount", pattern: /\b(?:saves?|discount(?:s|ed)?)\s+(?:up to )?\d{1,2}\s*%|\b\d{1,2}\s*%\s+(?:discount|cheaper|less)\b/i, detail: "verify the exact percentage and its scope against a current vendor source" },
+    { issue: "unsupported-exact-timeline", pattern: /\b(?:within|in|takes?)\s+\d+\s*(?:-|–|to)\s*\d+\s*(?:days?|weeks?|months?)\b/i, detail: "treat exact implementation/migration timelines as estimates unless supported by evidence" },
+  ]
+  for (const copy of copyFields) {
+    for (const rule of suspiciousCopyPatterns) {
+      if (rule.pattern.test(copy)) {
+        summary.comparisons.copyQualityFlags++
+        add("comparison", slug, rule.issue, rule.detail)
+      }
+    }
   }
 }
 
