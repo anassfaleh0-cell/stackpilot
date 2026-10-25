@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getBest, getComparison, getReview, isContentAvailable } from "@/lib/content/registry"
+import { getAlternative, getBest, getComparison, getReview, isContentAvailable } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
 import nextConfig from "../../next.config"
 import fs from "node:fs"
@@ -63,11 +63,15 @@ describe("Search Console 404 recovery", () => {
     }
   })
 
-  it("keeps intentionally unpublished alternatives drafts out of publication", () => {
+  it("publishes repaired ClickUp and Grammarly alternatives with explicit rating status", () => {
     for (const slug of ["clickup-alternatives", "grammarly-alternatives"]) {
       const file = path.join(process.cwd(), "content", "alternatives", `${slug}.json`)
-      const record = JSON.parse(fs.readFileSync(file, "utf8")) as { published?: boolean }
-      expect(record.published, slug).toBe(false)
+      const record = JSON.parse(fs.readFileSync(file, "utf8")) as { published?: boolean; alternatives?: { slug: string; rating?: number }[] }
+      expect(record.published, slug).toBe(true)
+      expect(record.alternatives?.length, slug).toBeGreaterThan(0)
+      expect(getAlternative(slug), slug).not.toBeNull()
+      expect(isContentAvailable("alternative", slug), slug).toBe(true)
+      expect(isNoindexed("alternatives", slug), slug).toBe(false)
     }
   })
 
@@ -84,17 +88,23 @@ describe("Search Console 404 recovery", () => {
     expect(record.tool1Slug).toBe("acuity")
   })
 
-  it("routes intentionally unpublished alternatives drafts to their real indexable reviews", async () => {
+  it("keeps repaired alternatives URLs canonical and redirects only the legacy Slack alias", async () => {
     const redirects = await nextConfig.redirects?.()
     expect(redirects).toEqual(expect.arrayContaining([
+      expect.objectContaining({ source: "/alternatives/free-alternatives-to-slack", destination: "/alternatives/slack-alternatives", permanent: true }),
+    ]))
+    expect(redirects).not.toEqual(expect.arrayContaining([
       expect.objectContaining({ source: "/alternatives/clickup-alternatives", destination: "/reviews/clickup", permanent: true }),
       expect.objectContaining({ source: "/alternatives/grammarly-alternatives", destination: "/reviews/grammarly", permanent: true }),
+      expect.objectContaining({ source: "/best/best-productivity-startups", destination: "/best/best-productivity-tools", permanent: true }),
     ]))
-    for (const slug of ["clickup", "grammarly"]) {
-      expect(getReview(slug), slug).not.toBeNull()
-      expect(isContentAvailable("review", slug), slug).toBe(true)
-      expect(isNoindexed("reviews", slug), slug).toBe(false)
+    for (const slug of ["clickup-alternatives", "grammarly-alternatives"]) {
+      expect(getAlternative(slug), slug).not.toBeNull()
+      expect(isContentAvailable("alternative", slug), slug).toBe(true)
+      expect(isNoindexed("alternatives", slug), slug).toBe(false)
     }
+    expect(getBest("best-productivity-startups")).not.toBeNull()
+    expect(isContentAvailable("best", "best-productivity-startups")).toBe(true)
   })
 
   it("restores the reported shortlist pages with unverified scores and prices withheld", () => {
@@ -103,6 +113,7 @@ describe("Search Console 404 recovery", () => {
       "best-developer-tools-agencies",
       "best-ai-video-tools",
       "best-business-intelligence",
+      "best-productivity-startups",
     ]
     for (const slug of bestSlugs) {
       const file = path.join(process.cwd(), "content", "best", `${slug}.json`)
