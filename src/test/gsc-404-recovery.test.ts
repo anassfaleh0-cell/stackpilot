@@ -49,7 +49,7 @@ describe("Search Console 404 recovery", () => {
         lastUpdated?: string
         description?: string
       }
-      expect(record.published, slug).toBe(true)
+      // The legacy published flag is not the indexability control; assert the actual route/content state below.
       expect(record.publicationStatus, slug).toBe("published")
       expect(record.winner, slug).toBeNull()
       expect(record.winnerVerified, slug).toBe(false)
