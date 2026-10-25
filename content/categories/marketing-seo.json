@@ -8,7 +8,7 @@
   "marketOverview": "The category is fragmented across all-in-one marketing suites and specialist products for SEO research, technical crawling, email, social publishing, content operations, analytics, and automation. Product capabilities overlap, but data coverage, integrations, usability, reporting, and usage limits differ. Start by identifying the problem that is currently costing the team time or limiting results. Then decide whether one broader platform can handle it well or whether a focused specialist is needed. Treat vendor market-share claims and industry growth estimates cautiously unless the source, publication date, methodology, and definition of the market are available. For product selection, a short hands-on pilot using your own workflows is more actionable than an unsourced market-size estimate.",
   "buyerConsiderations": [
     "Define the primary job first: keyword research, competitor analysis, backlink review, technical auditing, content optimization, campaign automation, or measurement.",
-    "For SEO platforms, test the same domains and keyword groups for coverage, freshness, exports, technical crawl behavior, and actionable prioritization.",
+    "For SEO platforms, test the same domains and keyword groups for coverage, freshness, location/device settings, exports, crawl limits and reproducibility; compare third-party estimates with first-party Search Console data without treating them as interchangeable.",
     "For marketing automation, validate segmentation, triggers, deliverability controls, consent handling, CRM synchronization, and reporting using a real campaign workflow.",
     "For analytics, define event and conversion rules and reconcile results with trusted first-party records before making budget decisions.",
     "Confirm integrations, API limits, user permissions, auditability, data portability, and security requirements with the people who will operate the tool.",
@@ -27,7 +27,7 @@
     {
       "factor": "SEO research and optimization",
       "importance": "Critical",
-      "description": "Keyword research, competitor analysis, backlink intelligence, technical auditing, content optimization, and rank tracking determine how useful an SEO platform is for ongoing search work."
+      "description": "Evaluate keyword, competitor and backlink coverage; technical crawl behavior; location/device settings; update frequency; exportability; and whether findings can be reproduced on the same sites and keyword sets."
     },
     {
       "factor": "Marketing automation and workflows",
