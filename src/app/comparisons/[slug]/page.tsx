@@ -223,7 +223,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
               <li>{cmp.tool1} criteria with recorded information: {cmp.features.filter(f => hasRecordedValue(f.tool1)).length}</li>
               <li>{cmp.tool2} criteria with recorded information: {cmp.features.filter(f => hasRecordedValue(f.tool2)).length}</li>
               <li>Criteria with details for both: {cmp.features.filter(f => hasRecordedValue(f.tool1Detail) && hasRecordedValue(f.tool2Detail)).length}</li>
-              <li>{hasComparableWinner ? `Recorded dataset pick: ${winnerLabel}` : categoriesDiffer ? "Different product categories" : cmp.decisionGuide ? "Verdict: depends on use case; see Decision Framework" : "No comparable winner recorded"}</li>
+              <li>{hasComparableWinner ? `Verified recorded pick: ${winnerLabel}` : provisionalWinnerLabel ? `Provisional recorded pick (evidence pending): ${provisionalWinnerLabel}` : categoriesDiffer ? "Different product categories; no cross-category overall winner" : cmp.decisionGuide ? "Verdict: depends on use case; see Decision Framework" : "No comparable winner recorded"}</li>
               <li>FAQs answered: {visibleFaqs.length}</li>
               {cmp.lastUpdated ? <li>Last updated: {formatDate(cmp.lastUpdated)}</li> : null}
             </ul>
@@ -266,7 +266,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                 <p className="text-xs text-muted-foreground mt-1">{typeof review2?.rating === "number" && Number.isFinite(review2.rating) && review2.rating > 0 && review2.rating <= 5 ? review2.ratingVerified === true ? "Linked review rating is marked verified." : "Stored rating is provisional until its evidence and calculation are audited." : "No numeric rating is recorded in the linked review; no rating is inferred."}</p>
               </div>
             </div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Winner</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Winner status</p>
             <p className="text-sm mb-3">{hasComparableWinner ? `Verified recorded winner: ${winnerLabel}. Review the criteria below to confirm they match your requirements.` : provisionalWinnerLabel ? `Provisional recorded pick: ${provisionalWinnerLabel}. This is not independently verified and should not be treated as a proven overall winner.` : featureCoverageLeader ? `Feature-coverage leader: ${featureCoverageLeader}. This describes only the verified boolean feature checks, not overall product quality.` : "Use-case dependent — the available evidence does not establish an evidence-backed universal winner."}</p>
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Verdict</p>
             <p className="text-sm leading-relaxed">{displayCopy.verdict || "Use-case dependent: compare must-have workflows, integrations, permissions, and total cost before choosing."}</p>
