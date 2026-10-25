@@ -1,4 +1,5 @@
 import { isContentAvailable } from "@/lib/content/registry"
+import { getReadableLinkFallbackLabel } from "@/lib/content/link-label"
 
 const ROUTE_TYPE: Record<string, string> = {
   reviews: "review",
@@ -32,6 +33,6 @@ export function stripDeadContentLinks(html: string): string {
     if (seg.length !== 2) return full
     const type = ROUTE_TYPE[seg[0]]
     if (!type) return full
-    return isContentAvailable(type, seg[1]) ? full : label
+    return isContentAvailable(type, seg[1]) ? full : label.trim() ? label : getReadableLinkFallbackLabel(href)
   })
 }
