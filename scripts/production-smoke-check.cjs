@@ -161,7 +161,7 @@ async function main() {
     // checking page URLs; otherwise a sitemap-index URLset would only test XML files.
     // This stays opt-in because the site has thousands of URLs.
     if (process.env.CHECK_SITEMAP_URLS === "1") {
-      const parseLocs = (xml) => [...xml.matchAll(/<loc>\\s*([\\s\\S]*?)\\s*<\\/loc>/gi)]
+      const parseLocs = (xml) => [...xml.matchAll(/<loc>\s*([\s\S]*?)\s*<\/loc>/gi)]
         .map((match) => match[1].replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").trim())
         .filter(Boolean)
       const cleanUrl = (value) => {
@@ -199,14 +199,14 @@ async function main() {
           }
         }
         const children = parseLocs(xml)
-        if (/<sitemapindex\\b/i.test(xml)) {
+        if (/<sitemapindex\b/i.test(xml)) {
           for (const child of children) {
             try {
               const parsed = new URL(child)
               if (parsed.origin === expectedOrigin) sitemapQueue.push({ url: cleanUrl(child) })
             } catch {}
           }
-        } else if (/<urlset\\b/i.test(xml)) {
+        } else if (/<urlset\b/i.test(xml)) {
           for (const target of children) {
             try {
               const parsed = new URL(target)
