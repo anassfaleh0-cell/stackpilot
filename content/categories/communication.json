@@ -15,12 +15,12 @@
     "Model total cost across users, hosts, add-ons, phone features, storage and required integrations"
   ],
   "commonMistakes": [
-    "Adopting multiple overlapping communication tools that fragment conversations across platforms, forcing team members to check several tools to find information and stay connected with different groups",
-    "Over-relying on real-time communication and instant notifications, creating constant interruptions that fragment focus time and reduce individual productivity despite increasing apparent responsiveness",
-    "Implementing communication tools without establishing usage norms and channel structure, leading to chaotic, disorganized communication where important information is lost in noisy channels",
-    "Choosing enterprise communication platforms based on consumer familiarity rather than organizational needs, selecting tools optimized for personal use that lack the security, compliance, and administration features businesses require",
-    "Neglecting to integrate communication with business workflows, keeping communication siloed from the work systems it should be connected to and losing valuable context that flows through conversations",
-    "Failing to manage the communication technology stack holistically, allowing each department to adopt different tools that create barriers to cross-functional communication and collaboration"
+    "Adding another chat or meeting tool without defining where decisions and durable documentation belong.",
+    "Assuming call quality, recording, guest access, and retention work the same across plans and devices.",
+    "Leaving notification defaults unchanged until staff are overwhelmed by interruptions.",
+    "Ignoring external collaboration controls, meeting links, recording permissions, and retention settings.",
+    "Comparing per-user pricing without checking guest rules, webinar limits, storage, and add-ons.",
+    "Migrating conversations without deciding which history must be retained and how it will be searched."
   ],
   "decisionFactors": [
     {
@@ -55,9 +55,9 @@
     }
   ],
   "buyerJourney": {
-    "awareness": "Organizations typically begin evaluating new communication platforms when they face specific challenges: internal communication across a growing or distributed team becomes fragmented across email and chat tools, the organization is adopting new ways of working like hybrid or remote, or the current platform lacks features needed for scale. The COVID-19 pandemic triggered the largest-scale communication platform evaluation in history, with organizations rapidly adopting tools to support remote work. Initial discovery often comes through employee recommendations from previous roles, technology industry news, or partnership with another platform they already use (Teams with Office 365, Slack with Salesforce). Free trials and freemium versions are heavily used for initial evaluation, with many organizations starting with free versions before committing to paid plans.",
-    "consideration": "During evaluation, organizations typically run 2-3 platforms in parallel for 2-4 weeks, involving a cross-section of teams in the trial. Key evaluation activities include testing call and video quality in various network conditions, assessing the integration setup with existing tools, evaluating the mobile experience, and testing administrative controls. IT teams assess deployment complexity, integration with identity management, and security compliance. Department heads evaluate whether the platform improves cross-team communication and reduces email volume. Reference calls with IT leaders at similar organizations validate vendor capabilities and support quality. The evaluation often involves a pilot with a specific department or use case before broader rollout decisions are made.",
-    "decision": "The final decision typically involves IT leadership, department heads, and executive sponsors. Organizations that already use Microsoft 365 often choose Microsoft Teams for integration and cost efficiency. Organizations prioritizing developer-friendly integrations and channel-based communication often choose Slack. Video-first organizations may choose Zoom for its superior meeting experience. The decision considers total cost of ownership including licensing, deployment, training, and ongoing administration. Implementation typically involves a phased rollout with communication and training plans, establishing channel naming conventions and usage guidelines, integrating with key business systems, and providing support resources. Success is measured by adoption rates, reduction in internal email volume, improvements in cross-team communication, and employee satisfaction with communication tools."
+    "awareness": "Identify the communication problem—team chat, meetings, asynchronous updates, customer support, or cross-company collaboration—and define the channels that must remain searchable. Clarify external guest access, retention, compliance, and accessibility needs.",
+    "consideration": "Test common workflows including meetings, screen sharing, search, notifications, mobile use, guest invitations, integrations, and recovery after a missed message or call. Review recording and retention controls, administrative visibility, usage limits, and costs for the intended deployment.",
+    "decision": "Choose the product that improves communication without fragmenting important decisions across too many channels. Pilot with a representative team, document channel and meeting conventions, test data export and retention settings, and review adoption before broad rollout."
   },
   "pricingOverview": "Communication software ranges from free plans to enterprise contracts. Compare the actual cost of users or hosts, meeting and phone features, storage, administration, integrations and usage limits. Bundled suites can also change the economics when your organization already pays for Microsoft 365 or Google Workspace.",
   "bestFor": {
