@@ -172,13 +172,13 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
       const sharesTool = [candidate.tool1Slug, candidate.tool2Slug].some((tool) =>
         tool === cmp.tool1Slug || tool === cmp.tool2Slug
       )
-      return sharesTool || candidate.category === cmp.category
+      return sharesTool || Boolean(cmp.category && candidate.category === cmp.category)
     })
     .map((candidate) => {
       const sharesTool = [candidate.tool1Slug, candidate.tool2Slug].some((tool) =>
         tool === cmp.tool1Slug || tool === cmp.tool2Slug
       )
-      return { slug: candidate.slug, score: (sharesTool ? 100 : 0) + (candidate.category === cmp.category ? 10 : 0) }
+      return { slug: candidate.slug, score: (sharesTool ? 100 : 0) + (Boolean(cmp.category && candidate.category === cmp.category) ? 10 : 0) }
     })
     .sort((a, b) => b.score - a.score || a.slug.localeCompare(b.slug))
     .map((candidate) => candidate.slug)
