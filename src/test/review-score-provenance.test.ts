@@ -128,7 +128,7 @@ describe("review score provenance", () => {
   it("always surfaces review score status and uses only valid five-point ratings", () => {
     const source = fs.readFileSync(REVIEW_PAGE, "utf8")
 
-    expect(source).toContain("Review Claim, Rating & Verdict")
+    expect(source).toContain("Review Claim, Rating &amp; Verdict")
     expect(source).toContain("Pending evidence audit")
     expect(source).toContain("No numeric score is available in the record")
     expect(source).toContain("tool.rating > 0 && tool.rating <= 5")
