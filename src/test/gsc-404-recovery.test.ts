@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest"
 import { getBest, getComparison, getReview, isContentAvailable } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
+import sitemap from "@/app/sitemap"
+import { siteConfig } from "@/lib/constants"
 import nextConfig from "../../next.config"
 import fs from "node:fs"
 import path from "node:path"
@@ -60,6 +62,19 @@ describe("Search Console 404 recovery", () => {
       expect(getComparison(slug), slug).not.toBeNull()
       expect(isContentAvailable("comparison", slug), slug).toBe(true)
       expect(isNoindexed("comparisons", slug), slug).toBe(false)
+    }
+  })
+
+  it("includes every restored GSC comparison URL in the canonical XML sitemap", () => {
+    const canonicalOrigin = new URL(siteConfig.url).origin
+    const sitemapPaths = new Set(sitemap().map((entry) => {
+      const url = new URL(entry.url)
+      expect(url.origin, entry.url).toBe(canonicalOrigin)
+      return url.pathname
+    }))
+
+    for (const slug of comparisonSlugs) {
+      expect(sitemapPaths.has(`/comparisons/${slug}`), slug).toBe(true)
     }
   })
 
