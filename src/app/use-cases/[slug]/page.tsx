@@ -25,8 +25,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const uc = getUseCase(slug)
   if (!uc) return {}
   const readingTime = Math.max(5, Math.ceil((uc.description.split(/\s+/).length + uc.recommendations.length * 20) / 200))
-  const shortTitle = uc.title.length > 58 ? uc.title.slice(0, 55) + "..." : uc.title
-  return createMetadata({ title: shortTitle, description: truncate(uc.description, 160), path: `/use-cases/${uc.slug}`, ogType: "article", publishedAt: uc.lastUpdated, updatedAt: uc.lastUpdated, articleSection: uc.category, readingTime , noIndex: isNoindexed("use-cases", uc.slug) })
+  // Pass complete source copy to createMetadata so its word-boundary truncation controls snippets.
+  // Pre-slicing here could cut titles or descriptions mid-word before the shared helper runs.
+  return createMetadata({ title: uc.title, description: uc.description, path: `/use-cases/${uc.slug}`, ogType: "article", publishedAt: uc.lastUpdated, updatedAt: uc.lastUpdated, articleSection: uc.category, readingTime, noIndex: isNoindexed("use-cases", uc.slug) })
 }
 
 export default async function UseCasePage({ params }: { params: Promise<{ slug: string }> }) {
