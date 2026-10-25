@@ -114,9 +114,9 @@ for (const { file, data } of comparisons) {
     ...(Array.isArray(data.faqs) ? data.faqs.flatMap((faq) => [faq.question, faq.answer]) : []),
   ].filter((value) => typeof value === "string" && value.trim())
   const suspiciousCopyPatterns = [
-    { issue: "broken-sentence-fragment", pattern: /\\b(?:our|the)\\s+provides?\\s+(?:detailed|a|an|comprehensive)\\b/i, detail: "check for a missing subject or link label in this sentence" },
-    { issue: "unsupported-precise-discount", pattern: /\\b(?:saves?|discount(?:s|ed)?)\\s+(?:up to )?\\d{1,2}\\s*%|\\b\\d{1,2}\\s*%\\s+(?:discount|cheaper|less)\\b/i, detail: "verify the exact percentage and its scope against a current vendor source" },
-    { issue: "unsupported-exact-timeline", pattern: /\\b(?:within|in|takes?)\\s+\\d+\\s*(?:-|–|to)\\s*\\d+\\s*(?:days?|weeks?|months?)\\b/i, detail: "treat exact implementation/migration timelines as estimates unless supported by evidence" },
+    { issue: "broken-sentence-fragment", pattern: /\b(?:our|the)\s+provides?\s+(?:detailed|a|an|comprehensive)\b/i, detail: "check for a missing subject or link label in this sentence" },
+    { issue: "unsupported-precise-discount", pattern: /\b(?:saves?|discount(?:s|ed)?)\s+(?:up to )?\d{1,2}\s*%|\b\d{1,2}\s*%\s+(?:discount|cheaper|less)\b/i, detail: "verify the exact percentage and its scope against a current vendor source" },
+    { issue: "unsupported-exact-timeline", pattern: /\b(?:within|in|takes?)\s+\d+\s*(?:-|–|to)\s*\d+\s*(?:days?|weeks?|months?)\b/i, detail: "treat exact implementation/migration timelines as estimates unless supported by evidence" },
   ]
   for (const copy of copyFields) {
     for (const rule of suspiciousCopyPatterns) {
