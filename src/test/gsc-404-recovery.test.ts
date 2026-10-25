@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest"
-import { getBest, getComparison, getReview, isContentAvailable } from "@/lib/content/registry"
+import { getAllComparisons, getBest, getComparison, getReview, isContentAvailable } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
+import sitemap from "@/app/sitemap"
+import { siteConfig } from "@/lib/constants"
+import { isRetiredComparisonSlug } from "@/lib/sitemap/retired-comparisons"
 import nextConfig from "../../next.config"
 import fs from "node:fs"
 import path from "node:path"
@@ -60,6 +63,36 @@ describe("Search Console 404 recovery", () => {
       expect(getComparison(slug), slug).not.toBeNull()
       expect(isContentAvailable("comparison", slug), slug).toBe(true)
       expect(isNoindexed("comparisons", slug), slug).toBe(false)
+    }
+  })
+
+  it("includes every restored GSC comparison URL in the canonical XML sitemap", () => {
+    const canonicalOrigin = new URL(siteConfig.url).origin
+    const sitemapPaths = new Set(sitemap().map((entry) => {
+      const url = new URL(entry.url)
+      expect(url.origin, entry.url).toBe(canonicalOrigin)
+      return url.pathname
+    }))
+
+    for (const slug of comparisonSlugs) {
+      expect(sitemapPaths.has(`/comparisons/${slug}`), slug).toBe(true)
+    }
+  })
+
+  it("keeps every published, indexable comparison discoverable in the XML sitemap", () => {
+    const canonicalOrigin = new URL(siteConfig.url).origin
+    const sitemapPaths = new Set(sitemap().map((entry) => {
+      const url = new URL(entry.url)
+      expect(url.origin, entry.url).toBe(canonicalOrigin)
+      return url.pathname
+    }))
+
+    const indexableComparisons = getAllComparisons().filter((comparison) =>
+      !isNoindexed("comparisons", comparison.slug) && !isRetiredComparisonSlug(comparison.slug)
+    )
+    expect(indexableComparisons.length).toBeGreaterThan(0)
+    for (const comparison of indexableComparisons) {
+      expect(sitemapPaths.has(`/comparisons/${comparison.slug}`), comparison.slug).toBe(true)
     }
   })
 
