@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { getReadableLinkFallbackLabel } from "@/lib/content/link-label"
 import type { ReactNode } from "react"
 
 const ANCHOR_RE = /<a href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g
@@ -25,7 +26,7 @@ function renderSegments(text: string, baseKey: number): ReactNode[] {
     }
     const originalHref = match[1]
     const href = INTERNAL_HREF_ALIASES[originalHref] || originalHref
-    const label = match[2]
+    const label = match[2].trim() ? match[2] : getReadableLinkFallbackLabel(originalHref)
     const children = label.includes("<a ") ? renderSegments(label, key) : label
     if (href.startsWith("http")) {
       parts.push(
