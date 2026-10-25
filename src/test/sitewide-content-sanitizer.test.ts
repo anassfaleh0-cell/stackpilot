@@ -109,6 +109,13 @@ describe("site-wide content quality gate", () => {
   })
 
 
+  it("renders fallback guidance for empty alternative section bodies and skips empty list markup", () => {
+    const alternativePage = fs.readFileSync(path.join(process.cwd(), "src", "app", "alternatives", "[slug]", "page.tsx"), "utf8")
+
+    expect(alternativePage).toContain("if (!section.body.trim())")
+    expect(alternativePage).toContain("evaluate this area against your actual tasks and constraints")
+    expect(alternativePage).toContain('section.type === "list" && section.items?.length ?')
+  })
   it("renders useful guidance instead of empty list, table, or body-only guide sections", () => {
     const guidePage = fs.readFileSync(path.join(process.cwd(), "src", "app", "guides", "[slug]", "page.tsx"), "utf8")
 
