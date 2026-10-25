@@ -152,6 +152,9 @@ describe("review score provenance", () => {
     expect(source).toContain("review2.rating > 0 && review2.rating <= 5")
     expect(source).toContain("Feature-coverage score: not verified / not available")
     expect(source).toContain("Use-case dependent: compare must-have workflows, integrations, permissions, and total cost before choosing.")
+    expect(source).toContain("How to interpret comparison scores")
+    expect(source).toContain("Feature-coverage percentages count only rows with recorded boolean values for both products.")
+    expect(source).toContain("A winner is verified only when this comparison's record explicitly marks it verified.")
   })
 
 })
