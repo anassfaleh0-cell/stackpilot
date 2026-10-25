@@ -136,6 +136,14 @@ describe("review score provenance", () => {
     expect(source).toContain("const reviewVerdict = [")
   })
 
+  it("explains missing provenance for preserved provisional legacy scores", () => {
+    const source = fs.readFileSync(REVIEW_PAGE, "utf8")
+
+    expect(source).toContain("Score provenance: this legacy stored editorial value has no source-linked rationale or reproducible score breakdown recorded in this profile.")
+    expect(source).toContain("retained for transparency, but remains provisional")
+    expect(source).toContain("should not be treated as independently verified or directly comparable to verified ratings")
+  })
+
   it("always surfaces comparison ratings, feature-score status, winner status and a non-empty verdict", () => {
     const source = fs.readFileSync(path.join(process.cwd(), "src", "app", "comparisons", "[slug]", "page.tsx"), "utf8")
 
