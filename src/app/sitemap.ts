@@ -9,7 +9,7 @@ import { isNoindexed } from "@/lib/noindex"
 import { PUBLIC_AUTHOR_SLUGS } from "@/lib/authors"
 import { getSitemapLastModified } from "@/lib/content/sitemap-date"
 import { filterSitemapEntries, isRetiredComparisonSlug } from "@/lib/sitemap/retired-comparisons"
-import { REDIRECTED_ALTERNATIVE_SLUGS, REDIRECTED_BEST_SLUGS } from "@/lib/sitemap/redirected-content"
+import { REDIRECTED_ALTERNATIVE_SLUGS, REDIRECTED_BEST_SLUGS, REDIRECTED_GUIDE_SLUGS, REDIRECTED_REVIEW_SLUGS } from "@/lib/sitemap/redirected-content"
 
 function isQuality(slug: string, dir: string): boolean {
   return !isNoindexed(dir, slug)
@@ -60,10 +60,10 @@ export const dynamic = "force-static"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Derive actual lastModified dates from content for content pages
-  const reviews = getAllReviews().filter((r) => isPublished(r) && isQuality(r.slug, "reviews"))
+  const reviews = getAllReviews().filter((r) => isPublished(r) && !REDIRECTED_REVIEW_SLUGS.has(r.slug) && isQuality(r.slug, "reviews"))
   // Keep retired/draft comparison records out of the sitemap even if an upstream registry changes.
   const comparisons = getAllComparisons().filter((c) => isPublished(c) && !isRetiredComparisonSlug(c.slug) && isQuality(c.slug, "comparisons"))
-  const guides = getAllGuides().filter((g) => isPublished(g) && isQuality(g.slug, "guides"))
+  const guides = getAllGuides().filter((g) => isPublished(g) && !REDIRECTED_GUIDE_SLUGS.has(g.slug) && isQuality(g.slug, "guides"))
   const blogPosts = getAllBlogPosts().filter((p) => isPublished(p) && isQuality(p.slug, "blog"))
   const glossary = getAllGlossaryTerms().filter((t) => isPublished(t) && isQuality(t.slug, "glossary"))
   const alternatives = getAllAlternatives().filter((a) => isPublished(a) && !REDIRECTED_ALTERNATIVE_SLUGS.has(a.slug) && isQuality(a.slug, "alternatives"))
