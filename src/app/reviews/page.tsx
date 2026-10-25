@@ -17,7 +17,7 @@ import { getPagination } from "@/lib/pagination"
 
 export const metadata = createMetadata({
   title: "Software Reviews",
-  description: "Software reviews covering use cases, feature fit, pricing considerations, and limitations. Numeric ratings are shown only when their provenance is documented.",
+  description: "Software reviews with editorial scores clearly marked as verified or provisional, plus feature fit, pricing context, and limitations.",
   path: "/reviews",
 })
 
@@ -47,7 +47,7 @@ export default function ReviewsPage() {
               In-depth software reviews
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              We organize product information, use-case guidance, pricing considerations, and limitations into detailed reviews. Numeric ratings are shown only when their provenance is documented; other recorded values should be checked against current sources.
+              We organize product information, use-case guidance, pricing considerations, and limitations into detailed reviews. Stored editorial scores remain visible with their verification status; provisional values are not third-party ratings and should be checked against current sources.
             </p>
           </SectionHeader>
         </Container>
@@ -64,7 +64,14 @@ export default function ReviewsPage() {
       <Section>
         <Container>
           {tools.length > 0 ? (
-            <ReviewCardGrid items={pageTools.map(t => ({ slug: t.slug, name: t.name, category: t.category, rating: t.ratingVerified === true && typeof t.rating === "number" && Number.isFinite(t.rating) ? t.rating : undefined, tagline: t.tagline }))} />
+            <ReviewCardGrid items={pageTools.map(t => ({
+              slug: t.slug,
+              name: t.name,
+              category: t.category,
+              rating: typeof t.rating === "number" && Number.isFinite(t.rating) && t.rating > 0 && t.rating <= 5 ? t.rating : undefined,
+              ratingVerified: t.ratingVerified === true,
+              tagline: t.tagline,
+            }))} />
           ) : (
             <p className="text-center text-muted-foreground py-12">No reviews available yet. Check back soon.</p>
           )}
