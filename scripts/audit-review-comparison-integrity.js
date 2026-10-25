@@ -66,11 +66,11 @@ for (const { file, data } of comparisons) {
 
   // Report risky search-snippet claims without mutating stored scores or winners.
   const snippet = String(data.description || "")
-  const hasUnverifiedRatingClaim = /\\b\\d(?:\\.\\d)?\\s*\\/\\s*5\\b/i.test(snippet) &&
+  const hasUnverifiedRatingClaim = /\b\d(?:\.\d)?\s*\/\s*5\b/i.test(snippet) &&
     ((tool1 && tool1.ratingVerified !== true) || (tool2 && tool2.ratingVerified !== true))
-  const hasUnverifiedOverallPick = /\\b(overall pick|best overall|clear winner)\\b/i.test(snippet) &&
+  const hasUnverifiedOverallPick = /\b(overall pick|best overall|clear winner)\b/i.test(snippet) &&
     data.winnerVerified !== true
-  const hasIncompletePriceFragment = /\\b(?:from|starting at)\\s*(?:[.;,]|$)/i.test(snippet)
+  const hasIncompletePriceFragment = /\b(?:from|starting at)\s*(?:[.;,]|$)/i.test(snippet)
   if (hasUnverifiedRatingClaim || hasUnverifiedOverallPick || hasIncompletePriceFragment) {
     summary.comparisons.riskySnippetClaims++
     add("comparison", slug, "snippet-claim-needs-audit", [
