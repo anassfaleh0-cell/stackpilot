@@ -105,7 +105,14 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   // Preserve stored editorial scores visibly with an explicit pending-verification label; only verified scores feed structured data and category rankings.
   const hasStoredEditorialRating = typeof tool.rating === "number" && Number.isFinite(tool.rating) && tool.rating > 0 && tool.rating <= 5
   const hasEditorialRating = tool.ratingVerified === true && hasStoredEditorialRating
-  const categoryRatings = Array.isArray(tool.ratings) ? tool.ratings.filter((item) => typeof item.score === "number" && Number.isFinite(item.score) && item.score > 0) : []
+  const rawCategoryRatings = Array.isArray(tool.ratings) ? tool.ratings : []
+  // Keep source values intact, but never plot dimension scores outside the published 1–5 scale.
+  const categoryRatings = rawCategoryRatings.filter((item) =>
+    item && typeof item.score === "number" && Number.isFinite(item.score) && item.score > 0 && item.score <= 5
+  )
+  const invalidCategoryRatings = rawCategoryRatings.filter((item) =>
+    !item || typeof item.score !== "number" || !Number.isFinite(item.score) || item.score <= 0 || item.score > 5
+  )
   const bestInCategory = allReviews
     .filter((r) => r.category === tool.category && r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating))
     .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
@@ -364,8 +371,13 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                   } value={pricingModelLabel} title="Pricing Model" description={tool.priceRangeVerified === true ? "Pricing model and displayed terms are marked verified" : "Current plan terms and price are not independently verified"} />
                 </div>
                 <div className="flex justify-center">
-                  {categoryRatings.length > 0 ? <div className="w-full"><p className="text-xs text-muted-foreground mb-2">{tool.ratingsVerified === true ? "PilotStack editorial dimensions; verification status recorded." : "Provisional stored editorial dimensions; evidence audit pending. These are not third-party user ratings."}</p><EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" /></div> : <p className="text-sm text-muted-foreground">No category rating dimensions recorded yet. Add evidence-backed category scores using the published rubric; do not fill gaps with guessed numbers.</p>}
+                  {categoryRatings.length > 0 ? <div className="w-full"><p className="text-xs text-muted-foreground mb-2">{tool.ratingsVerified === true ? "PilotStack editorial dimensions; verification status recorded." : "Provisional stored editorial dimensions; evidence audit pending. These are not third-party user ratings."}</p><EditorialRatingVisual ratings={categoryRatings} slug={tool.slug} category={tool.category} className="w-full max-w-md" /></div> : <p className="text-sm text-muted-foreground">No valid category rating dimensions are available for the chart. Add evidence-backed category scores using the published rubric; do not fill gaps with guessed numbers.</p>}
                 </div>
+                {invalidCategoryRatings.length > 0 && (
+                  <p className="mt-3 text-xs text-muted-foreground" role="note">
+                    {invalidCategoryRatings.length} stored rating dimension{invalidCategoryRatings.length === 1 ? " has" : "s have"} a missing or out-of-range score and {invalidCategoryRatings.length === 1 ? "is" : "are"} excluded from this chart until audited. The original source record is preserved; no replacement score is invented.
+                  </p>
+                )}
               </section>
 
               {entity && (
