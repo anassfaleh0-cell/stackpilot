@@ -15,12 +15,12 @@
     "Review permission management and security features including granular role-based access control, guest access, audit logs, and compliance certifications relevant to your industry"
   ],
   "commonMistakes": [
-    "Over-customizing the platform with too many fields, statuses, and workflows, creating complexity that overwhelms team members and reduces adoption",
-    "Implementing project management software without clear processes and governance, leading to inconsistent usage and the tool becoming an abandoned digital graveyard",
-    "Choosing a tool that matches one team's methodology but doesn't fit the broader organization, creating silos between teams using different platforms",
-    "Neglecting training and change management, assuming the platform is intuitive enough that teams will adopt it organically without dedicated onboarding and support",
-    "Using project management software primarily for tracking individual tasks rather than managing dependencies, critical paths, and resource constraints that determine project outcomes",
-    "Failing to establish clear adoption metrics and usage guidelines, leaving no way to measure whether the tool is actually improving project delivery or just adding overhead"
+    "Recreating every legacy process before proving the tool makes the work easier.",
+    "Using too many statuses, custom fields, and dashboards that teams cannot keep current.",
+    "Comparing prices without accounting for guests, automation runs, views, storage, and admin features.",
+    "Failing to test dependencies, recurring tasks, notifications, and cross-team permissions.",
+    "Treating a populated board as proof that ownership, priorities, and due dates are accurate.",
+    "Migrating projects without preserving owners, attachments, relationships, and archive history."
   ],
   "decisionFactors": [
     {
@@ -65,9 +65,9 @@
     }
   ],
   "buyerJourney": {
-    "awareness": "Teams typically begin searching for project management software when they outgrow spreadsheets, email chains, and ad-hoc coordination methods. Common triggers include missed deadlines, confusion about task ownership, duplicated work, and difficulty reporting status to stakeholders. Initial research involves reading comparison articles on sites like G2, Capterra, and PCMag, checking peer recommendations in professional communities like Reddit and LinkedIn, and exploring the free tiers of popular platforms. The buyer often starts by evaluating tools individually, signing up for free trials, and testing with a small team on a single project.",
-    "consideration": "After narrowing to 2-4 candidates, the evaluation deepens to include more team members and real project data. Teams typically run a pilot on a live project for 2-4 weeks, assessing how the platform handles their specific workflows, whether it reduces administrative overhead, and how team members respond to the interface. During this phase, administrators evaluate setup complexity, migration from existing tools, and customization options. Decision-makers focus on pricing at scale and the availability of features required by the broader organization, such as resource management, portfolio views, and executive reporting. Integration testing with existing tools is a key milestone, as poor integrations can create more problems than the project management tool solves.",
-    "decision": "The final decision typically involves a mix of project managers, team leads, and IT stakeholders. Key factors include the platform's ability to scale across the organization, total cost of ownership based on projected team growth, and the vendor's product roadmap and stability. Reference calls with similar organizations help validate the vendor's enterprise capabilities, customer support quality, and uptime track record. The winning platform is usually deployed in phases, starting with a pilot team, expanding to a department, and then rolling out organization-wide with dedicated training, template creation, and process documentation."
+    "awareness": "Map the work the team actually manages: tasks, dependencies, approvals, capacity, recurring operations, or cross-team portfolios. Define the reporting questions and decide which processes should remain lightweight instead of reproducing every existing meeting in software.",
+    "consideration": "Run one representative project through intake, assignment, dependencies, status changes, notifications, reporting, and handoff. Test permissions, recurring work, imports/exports, integrations, mobile use, and plan limits at the team's expected size.",
+    "decision": "Choose the product that makes ownership and next actions clearer with the least ongoing administration. Pilot with one team, agree on a small set of status definitions, measure adoption and missed handoffs, and confirm data export before migrating all projects."
   },
   "pricingOverview": "Project management software pricing varies significantly by target market and feature set. Lightweight task management tools like Trello and Todoist offer free plans with paid upgrades starting at $5-$12 per user per month for premium features. Mid-market platforms like Asana and Monday.com range from $10-$30 per user per month for their business tiers, with annual billing discounts of 15-20%. Enterprise platforms like Smartsheet and Microsoft Project start at $25-$55 per user per month, rising to $100+ per user per month for portfolio management and resource planning capabilities. Jira offers free plans for up to 10 users with paid plans starting at $8.15 per user per month for standard features. Most platforms offer significant discounts for annual commitments and multi-year contracts. Hidden costs to consider include per-seat minimums, charges for guest collaborators or viewers, premium support tiers, and implementation and training services. Open-source options like OpenProject and Taiga offer free self-hosted versions but require infrastructure and IT support to maintain.",
   "bestFor": {
