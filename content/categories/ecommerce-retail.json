@@ -15,12 +15,12 @@
     "Test product, order, customer, and content exports before committing to a platform or migration."
   ],
   "commonMistakes": [
-    "Choosing a platform based on a theme demo without testing the full checkout and fulfillment workflow.",
-    "Comparing subscription prices while ignoring payment processing, extensions, hosting, development, and maintenance.",
+    "Choosing from a theme demo without testing checkout, payment failures, refunds, and fulfillment.",
+    "Comparing subscription prices while ignoring processing fees, extensions, hosting, development, and maintenance.",
     "Assuming tax, shipping, payment, or marketplace features work identically in every country.",
-    "Installing many extensions without reviewing overlap, compatibility, renewal cost, and maintenance ownership.",
-    "Migrating products and orders without validating data mapping, URL redirects, customer records, and order history.",
-    "Treating a fast storefront launch as proof that the setup will remain maintainable as catalog and order complexity grows."
+    "Installing extensions without checking compatibility, renewal cost, overlap, and maintenance ownership.",
+    "Migrating products and orders without validating field mapping, URL redirects, customer records, and history.",
+    "Treating a fast launch as proof the store will remain maintainable as catalog and order complexity grows."
   ],
   "decisionFactors": [
     {
@@ -55,9 +55,9 @@
     }
   ],
   "buyerJourney": {
-    "awareness": "Businesses usually evaluate ecommerce software when launching a store, replacing a difficult setup, expanding into new markets, or connecting online sales with inventory and fulfillment. Define the operational problem and customer journey before comparing platforms.",
-    "consideration": "Build a test catalog and run the same purchase scenarios in each candidate. Include discounts, shipping, tax, refunds, payment failures, inventory changes, mobile checkout, integrations, and data exports. Ask who will maintain the system and verify current plan limits and fees in official documentation.",
-    "decision": "Choose the option that meets mandatory customer, operational, regional, and technical requirements at an acceptable total cost. Record the evidence behind the decision, plan a reversible pilot where possible, and test migration and rollback steps before moving live orders."
+    "awareness": "Businesses evaluate commerce software when launching a store, replacing a difficult setup, entering new markets, or connecting online sales with inventory and fulfillment. Define the customer journey and operational bottleneck before comparing storefront features.",
+    "consideration": "Run the same representative catalog and purchase scenarios through each candidate: variants, discounts, shipping, taxes, refunds, payment failures, inventory changes, mobile checkout, integrations, and data exports. Verify country support, current fees, plan limits, and maintenance responsibilities.",
+    "decision": "Choose the platform that meets mandatory customer, regional, operational, and technical requirements at an acceptable total cost. Record evidence behind the decision, pilot a reversible workflow, and test migration and rollback before moving live orders."
   },
   "pricingOverview": "Ecommerce costs may include a platform subscription or hosting, payment processing, themes, extensions, transaction fees, shipping and tax services, development, maintenance, and support. Compare current pricing for your country, expected order volume, catalog, and required integrations; the headline subscription alone is not a total-cost estimate.",
   "bestFor": {
