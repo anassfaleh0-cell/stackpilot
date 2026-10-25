@@ -44,12 +44,12 @@ export function EditorialComparison({ tool1, tool2, features, featuresVerified =
         }}>
           <div className="font-semibold text-sm" style={{ color: p.primary }}>{tool1}</div>
           <div className="text-2xl font-bold mt-1" style={{ color: p.primary }}>{total > 0 ? t1w : "—"}</div>
-          <div className="text-xs text-muted">exclusive checks</div>
+          <div className="text-xs text-muted">{featuresVerified ? "verified exclusive checks" : "provisional exclusive checks"}</div>
         </div>
         <div className="rounded-xl p-3" style={{ border: `1px solid ${p.glassBorder}` }}>
           <div className="font-semibold text-muted">Tie</div>
           <div className="text-2xl font-bold mt-1 text-accent">{total > 0 ? tie : "—"}</div>
-          <div className="text-xs text-muted">both recorded</div>
+          <div className="text-xs text-muted">{featuresVerified ? "both recorded" : "both recorded · provisional"}</div>
         </div>
         <div className="rounded-xl p-3" style={{
           border: `1px solid ${winner === tool2 ? p.primary : p.glassBorder}`,
@@ -61,7 +61,7 @@ export function EditorialComparison({ tool1, tool2, features, featuresVerified =
         </div>
       </div>
       {total > 0 ? (
-        <><p className="text-xs text-muted-foreground">{featuresVerified ? "Recorded boolean availability checks; this is not a measure of overall product quality." : "Scores below are calculated from recorded boolean fields. Source verification is pending; treat the figures as provisional, not as confirmed product differences."}</p><svg viewBox="0 0 100 8" className="w-full h-auto" role="img" aria-label="Feature comparison bar">
+        <><p className="text-xs text-muted-foreground">{featuresVerified ? "Recorded boolean availability checks; this is not a measure of overall product quality." : "Scores below are calculated from recorded boolean fields. Source verification is pending; treat the figures as provisional, not as confirmed product differences."}</p><svg viewBox="0 0 100 8" className="w-full h-auto" role="img" aria-label={`Feature comparison bar; ${featuresVerified ? "verified" : "provisional, source verification pending"}`} >
           <defs>
             <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset={`${(t1w / total) * 100}%`} stopColor={p.primary} stopOpacity="0.6" />
