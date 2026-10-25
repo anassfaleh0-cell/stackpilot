@@ -393,7 +393,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     <>
                       <EditorialSectionIllustration slug={tool.slug} category={tool.category} index={i} />
                       <h2 className="text-2xl font-bold tracking-tight mb-4">{section.title}</h2>
-                      {section.type === "list" && section.items ? (
+                      {section.type === "list" && section.items?.length ? (
                         <>
                           <p className="text-muted-foreground leading-relaxed mb-4">{section.body}</p>
                           <ul className="space-y-2">
