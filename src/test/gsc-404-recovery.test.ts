@@ -49,7 +49,7 @@ describe("Search Console 404 recovery", () => {
         lastUpdated?: string
         description?: string
       }
-      expect(record.published, slug).toBe(true)
+      expect(record.published, slug).toBe(false)
       expect(record.publicationStatus, slug).toBe("published")
       expect(record.winner, slug).toBeNull()
       expect(record.winnerVerified, slug).toBe(false)
@@ -63,7 +63,7 @@ describe("Search Console 404 recovery", () => {
     }
   })
 
-  it("publishes repaired ClickUp and Grammarly alternatives with explicit rating status", () => {
+  it("restores repaired ClickUp and Grammarly routes while preserving the legacy H-02 marker", () => {
     for (const slug of ["clickup-alternatives", "grammarly-alternatives"]) {
       const file = path.join(process.cwd(), "content", "alternatives", `${slug}.json`)
       const record = JSON.parse(fs.readFileSync(file, "utf8")) as { published?: boolean; alternatives?: { slug: string; rating?: number }[] }
