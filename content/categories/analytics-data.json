@@ -7,7 +7,7 @@
   "longDescription": "Analytics and data tools cover collection, transformation, storage, business intelligence, experimentation, governance, and machine-learning workflows. A team building dashboards has different needs from one operating a data warehouse or streaming pipeline. Define the decisions the data should support, the source systems involved, expected freshness, access rules, and who owns data quality. Test a representative dataset from ingestion through reporting, including lineage, permissions, export, failure recovery, and the cost of compute and storage at realistic usage.",
   "marketOverview": "This category includes business intelligence, data warehouses, integration and transformation, observability, governance, and analytics infrastructure. Market reports often group these segments differently, making headline totals difficult to compare. Buyers should focus on the workload: supported connectors, query performance on representative data, semantic consistency, governance, portability, and the skills needed to operate the system. Reconcile product claims with a proof of concept and verify current pricing units, retention, and service limits with the vendor.",
   "buyerConsiderations": [
-    "Match the platform to your data sources, workloads and required reporting or analytics use cases",
+    "Map each required decision to source systems, event definitions, refresh frequency, data owner and acceptable latency before choosing a platform.",
     "Evaluate query performance, concurrency and scalability against current and expected data volume",
     "Review governance, permissions, security, lineage and compliance requirements before deployment",
     "Check self-service analytics and usability for business users as well as technical teams",
@@ -18,7 +18,7 @@
   ],
   "commonMistakes": [
     "Comparing dashboards before agreeing on metric definitions, source-of-truth systems, and ownership.",
-    "Assuming connectors deliver complete or real-time data without checking refresh schedules, field coverage, and failure behavior.",
+    "Assuming a listed connector guarantees complete fields, real-time freshness or automatic recovery without testing its documented limits and failure behavior.",
     "Ignoring query, storage, retention, and seat limits when estimating the cost of production workloads.",
     "Giving broad access to sensitive datasets without testing role-based permissions and audit logs.",
     "Building reports that cannot be exported, reproduced, or maintained when the original author leaves.",
@@ -33,7 +33,7 @@
     {
       "factor": "Data connectivity and integration",
       "importance": "Critical",
-      "description": "Confirm the platform connects reliably to the databases, warehouses, applications and data sources your team already uses."
+      "description": "Test the exact connectors and source schemas you need, including field coverage, refresh schedules, permissions, API quotas, failure alerts and recovery behavior; a listed connector does not guarantee every field or real-time delivery."
     },
     {
       "factor": "Performance and scalability",
