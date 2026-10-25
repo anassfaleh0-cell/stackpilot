@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest"
 import React from "react"
+import fs from "node:fs"
+import path from "node:path"
 import { renderToStaticMarkup } from "react-dom/server"
 import { ReviewCardGrid } from "@/components/entity/review-card-grid"
 
@@ -39,5 +41,13 @@ describe("ReviewCardGrid editorial scores", () => {
 
     expect(html).not.toContain("6/5")
     expect(html).not.toContain("Provisional")
+  })
+
+  it("passes valid stored scores and verification state from review records to cards", () => {
+    const source = fs.readFileSync(path.join(process.cwd(), "src", "app", "reviews", "page.tsx"), "utf8")
+
+    expect(source).toContain("rating: typeof t.rating === \"number\"")
+    expect(source).toContain("ratingVerified: t.ratingVerified === true")
+    expect(source).toContain("provisional values are not third-party ratings")
   })
 })
