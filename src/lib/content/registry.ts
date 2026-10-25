@@ -884,7 +884,8 @@ export function getComparison(slug: string): ComparisonContent | null {
     }
   })
   const features = buildDerivedComparisonFeatures(cmp, baseFeatures)
-  const winner = cmp.winnerVerified === true ? normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2) : null
+  // Preserve stored product picks so the page can show them as provisional; verification status remains a separate field.
+  const winner = normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2)
   const result: ComparisonContent = {
     ...cmp,
     featuresVerified: cmp.featuresVerified === true && !hasUnverifiedBooleanOnlyFeatures,
