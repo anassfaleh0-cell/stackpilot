@@ -7,7 +7,7 @@
   "website": "https://kubernetes.io",
   "pricing": "Not independently verified",
   "priceRange": "Not independently verified",
-  "rating": null,
+  "rating": 4.3,
   "reviewCount": 0,
   "pros": [
     "Declarative deployment and scheduling can support repeatable operations for suitable workloads.",
@@ -63,7 +63,28 @@
       "description": "Kubernetes: evaluate export and portability with a representative workflow; availability is not recorded as verified in this profile."
     }
   ],
-  "ratings": [],
+  "ratings": [
+    {
+      "label": "Ease of Use",
+      "score": 3.2
+    },
+    {
+      "label": "Features",
+      "score": 4.7
+    },
+    {
+      "label": "Performance",
+      "score": 4.6
+    },
+    {
+      "label": "Support",
+      "score": 3.8
+    },
+    {
+      "label": "Value",
+      "score": 4.4
+    }
+  ],
   "content": [
     {
       "title": "Decide whether orchestration is needed",
