@@ -2,26 +2,28 @@
   "slug": "stripe",
   "name": "Stripe",
   "tagline": "Developer-first payment infrastructure that lets businesses accept, manage, and optimize online transactions globally",
-  "description": "Stripe is a payment processing platform that provides the technical infrastructure for internet commerce. Instead of building payment systems from scratch, businesses integrate Stripe's APIs to accept payments, manage subscriptions, handle payouts, and prevent fraud across 135+ currencies and 40+ countries. Stripe's differentiating advantage is its developer experience — its API-first design, comprehensive documentation, and client libraries in 10+ languages make it the default choice for technology companies. The platform processes hundreds of billions of dollars annually and serves businesses from one-person startups to publicly traded enterprises.",
+  "description": "Stripe provides payment infrastructure for online businesses, including APIs and products for accepting payments and managing related workflows. This review focuses on integration fit, supported payment methods and regions, recurring billing or marketplace needs where applicable, fraud and disputes, settlement, developer effort, and total cost. Verify current availability and fees directly with Stripe.",
   "seoTitle": "Stripe Review 2026: Pricing, Fees & Verdict",
   "seoDescription": "Hands-on Stripe review covering payment APIs, subscription billing and fraud tools, plus Stripe fees, supported currencies, integrations and alternatives.",
   "category": "Finance & Accounting",
   "website": "https://stripe.com",
   "pricing": "Transaction-based",
-  "priceRange": "2.9% + $0.30 per transaction",
+  "priceRange": "Fees and product availability vary by country, payment method, transaction type, and contract; verify current official pricing",
   "rating": 4.7,
-  "reviewCount": 18000,
+  "reviewCount": null,
   "pros": [
-    "API-first design with client libraries in Python, Ruby, Node.js, PHP, Java, Go, .NET, and Swift, enabling full payment workflow integration in hours rather than weeks compared to traditional processors",
-    "Unified API handles 135+ currencies, 40+ payment methods (credit cards, Apple Pay, Google Pay, SEPA, iDEAL, Alipay, WeChat Pay), and local acquiring in 40+ countries from a single integration",
-    "Stripe Radar uses machine learning trained on Stripe's network-wide transaction data to block fraud in real-time with 99.9% availability and configurable rules that require no ML expertise to tune",
-    "Subscription management with Stripe Billing automates proration, dunning, invoicing, and Smart Retries that recover 30-50% of failed recurring payments by retrying at optimal times based on card network data",
-    "Stripe Connect enables marketplace and platform businesses to onboard sub-merchants, split payments, handle KYC/identity verification, and manage payouts to thousands of sellers with a single integration"
+    "Developer APIs and documentation can support customized payment workflows",
+    "Product options may cover payments, recurring billing, and marketplace use cases depending on eligibility",
+    "Integration flexibility can suit teams that need control over checkout and payment operations",
+    "Payment and risk tools can be evaluated against the merchant's actual transaction profile",
+    "A pilot can test how well reporting, refunds, disputes, and settlement fit existing operations"
   ],
   "cons": [
-    "Standard transaction fee of 2.9% + $0.30 per card charge is premium pricing compared to PayPal's 2.59% or Adyen's interchange-plus model, with no volume discounts until processing exceeds $1 million annually",
-    "Account holds and reserve requirements can be imposed without warning on high-risk businesses (crowdfunding, travel bookings, subscription boxes), freezing 10-25% of funds for 90-180 days with limited appeals process",
-    "Customer support for standard accounts is email-only with 24-48 hour response times and no phone support for accounts processing under $1 million per month, creating frustration during time-sensitive payment disputes"
+    "Implementation and ongoing maintenance can require engineering expertise",
+    "Product availability and payment methods vary by country and merchant eligibility",
+    "Fees depend on payment method, country, currency, and product; fixed headline rates may not apply",
+    "Disputes, reserves, holds, and risk reviews can affect settlement and cash flow",
+    "Advanced products and additional services may add costs and operational complexity"
   ],
   "features": [
     {
@@ -158,22 +160,22 @@
   "content": [
     {
       "title": "Executive Summary",
-      "body": "Stripe is the dominant payment infrastructure platform for internet businesses, processing hundreds of billions of dollars in annual transaction volume across 135+ currencies and 40+ countries. Its API-first architecture set the industry standard for developer experience — a payments integration that traditionally took weeks with legacy processors can be deployed in hours using Stripe's client libraries in Python, Ruby, Node.js, PHP, Java, Go, .NET, and Swift. The platform has expanded far beyond payment acceptance into a comprehensive financial services stack: Stripe Billing for subscription management and Smart Retries that recover 30-50% of failed recurring payments, Stripe Connect for marketplace payment splitting with automated KYC verification, Stripe Tax for multi-jurisdiction tax calculation across 12,000+ tax regimes, Stripe Treasury for embedded banking services, and Stripe Atlas for company formation. Stripe operates on a transparent per-transaction pricing model (2.9% + $0.30 for standard card charges) with no monthly fees, setup costs, or minimum processing requirements, which makes it accessible to startups while serving publicly traded enterprises. The company is privately valued at $50+ billion and serves millions of businesses from one-person shops to Fortune 500 enterprises.",
+      "body": "Stripe provides payment infrastructure for online businesses. Evaluate its fit against the payment methods and countries you need, integration complexity, settlement and dispute workflows, fraud controls, recurring billing or marketplace requirements, and total cost. Current availability and contract terms must be verified directly with Stripe.",
       "type": "text"
     },
     {
       "title": "TL;DR",
-      "body": "Stripe is a payment processing platform rated 4.7/5 across 18,000 user reviews. It is API-first, with client libraries in Python, Ruby, Node.js, PHP, Java, Go, .NET and Swift, so developers can accept payments, run subscriptions, issue payouts and trigger fraud checks without building that infrastructure themselves. Category scores are features 4.8/5, ease of use 4.5/5, support 3.8/5, value 4.3/5 and performance 4.9/5. Pricing is transaction-based: 2.9% + $0.30 per successful card transaction as the standard rate, with no monthly fee, setup cost or minimum processing requirement. For most online businesses Stripe is a strong fit, provided the team has developer resource to integrate it — support is the weakest area of the platform at 3.8/5.",
+      "body": "Stripe may fit teams that need developer-oriented payment integration and the specific payment products available to their business. Test a complete payment lifecycle and verify local eligibility, payment methods, fees, disputes, settlement, and support terms. The stored 4.7/5 score is provisional editorial scoring, not a verified third-party average.",
       "type": "text"
     },
     {
       "title": "Rating Overview",
-      "body": "Stripe holds a 4.7/5 overall rating based on 18,000 user reviews, with individual scores of Features: 4.8/5, Ease of Use: 4.5/5, Support: 3.8/5, Value: 4.3/5, Performance: 4.9/5. The platform's highest scores are in Performance (4.9/5) and Features (4.8/5). These scores reflect consistent user satisfaction across the platform's core capabilities.",
+      "body": "The stored PilotStack score is an editorial assessment and has not been independently recalculated from a verified review dataset. It should not be interpreted as a verified average from external user reviews.",
       "type": "text"
     },
     {
       "title": "Company Background",
-      "body": "Stripe operates in the financial technology and accounting software space, headquartered in San Francisco, California. Founded in 2010, the company has grown to 8,000+ employees serving 3,000,000+ businesses. Stripe has established itself as a significant player in the Finance & Accounting category, with a product that stripe is a payment processing platform that provides the technical infrastructure for internet commerce. instead of bui. The platform has evolved through continuous investment in Payments API, Subscriptions & Billing, Connect Platform, reflecting the company's commitment to meeting changing market demands. Primary user demographics include Developers and E-commerce Businesses teams. The platform serves Payments, Fintech sectors.",
+      "body": "Stripe provides financial technology infrastructure and payment services. Current processing volumes, customer counts, supported-country totals, employee figures, and company statistics are not independently verified in this review; consult current official company information for details.",
       "type": "text"
     },
     {
@@ -183,22 +185,22 @@
     },
     {
       "title": "Feature Deep Dive",
-      "body": "Stripe's core feature set addresses the primary challenges organizations face in the Finance & Accounting space. Payments API: Accept credit/debit cards, digital wallets, and local payment methods through a single API with 40+ method support Subscriptions & Billing: Recurring billing with proration, metered billing, coupons, dunning management, and Smart Retries for failed payments Connect Platform: Marketplace payment infrastructure with sub-merchant onboarding, payment splitting, and instant payouts via Stripe Treasury Radar Fraud Prevention: ML-based fraud detection with customizable rules, 3D Secure authentication, and dispute management automation Beyond these core capabilities, Stripe differentiates itself through polished user experience design and enterprise-grade security infrastructure. The Payments API feature alone addresses a critical workflow need: accept credit/debit cards, digital wallets, and local payment methods through a single api with 40+ method support.",
+      "body": "Evaluate the specific Stripe products required for your workflow, such as payment acceptance, recurring billing, marketplace payouts, or fraud and dispute tools. Availability and implementation details vary by country, business model, and product. Confirm current documentation, limits, and contractual terms before relying on a capability.",
       "type": "text"
     },
     {
       "title": "User Experience",
-      "body": "Stripe delivers a polished and intuitive user interface. New users can typically achieve basic proficiency within hours, with the clean layout reducing the cognitive load of navigating complex workflows. The platform's learning curve is rated as medium, meaning teams should budget 1-3 weeks for full workflow adoption. Initial productivity dips are normal as users transition from previous tools. The mobile experience on iOS and Android mirrors most desktop functionality, allowing users to view and manage core tasks on the go.",
+      "body": "Developer experience depends on the team's stack, documentation needs, test environment, integration complexity, and operational monitoring. Prototype the intended payment flow, test failure states and webhook retries, and record the engineering effort required to maintain it.",
       "type": "text"
     },
     {
       "title": "Best For",
-      "body": "Stripe is the optimal payment processor for three business categories. SaaS and subscription businesses benefit from Stripe Billing's automated dunning — emails sent on a configurable schedule after failed payment attempts — combined with Smart Retries that analyze card network response codes to determine optimal retry timing, recovering 30-50% of recurring revenue that would otherwise be lost to involuntary churn. E-commerce businesses selling internationally gain instant access to 40+ local payment methods (iDEAL in Netherlands, Bancontact in Belgium, Alipay in China, SEPA in EU) through a single integration, eliminating the need for separate local payment processor relationships per market. Marketplace and platform businesses building two-sided networks use Stripe Connect to onboard sellers across 40+ countries with automated Know Your Customer (KYC) verification, split payments between platform and seller in real time, hold funds in escrow, and facilitate instant payouts via debit cards — capabilities that would require 6-12 months of development effort to build internally. Startups in their first 12 months particularly benefit from Stripe's instant account activation, transparent pricing without volume minimums, and the ability to accept payments with a single API call.",
+      "body": "Stripe may suit online businesses that need programmable payment workflows and have the engineering capacity to integrate and maintain them. Fit depends on merchant eligibility, country coverage, payment methods, settlement requirements, and the product mix required.",
       "type": "text"
     },
     {
       "title": "Worst Fit",
-      "body": "Stripe is a poor fit for four scenarios. Businesses in high-risk categories — CBD, vaping products, adult content, firearms and ammunition, debt collection, credit repair, and certain financial services — face frequent account freezes, reserve requirements of 10-25% of funds held for 90-180 days, and permanent account termination with limited appeals process. These businesses should seek specialized high-risk processors that understand their industry's regulatory landscape and underwriting requirements. Non-technical founders and small businesses without development resources will find Stripe's API-first approach intimidating — while Stripe offers Payment Links and Checkout as no-code options, these are limited in customization, and any change beyond basic payment acceptance requires developer involvement. Organizations processing over $5 million annually should negotiate custom pricing with Stripe or evaluate interchange-plus processors like Adyen that pass through card network fees at cost, which typically results in 15-30% lower effective rates at that volume. Businesses that primarily accept in-person payments — retail stores, restaurants, service providers — will find Square's integrated hardware-software ecosystem more natural, with card readers that pair instantly, point-of-sale software built for specific verticals, and same-day settlement that Stripe Terminal does not match in ease of use.",
+      "body": "Stripe may not fit businesses that cannot use its services in their region or industry, need payment methods it does not support for their account, or prefer a simpler provider-managed setup. Verify eligibility and terms before investing in an integration.",
       "type": "text"
     },
     {
@@ -225,7 +227,7 @@
     },
     {
       "title": "Pricing Explained",
-      "body": "Stripe uses transparent per-transaction pricing with no monthly fees, setup costs, or minimum processing requirements. Standard card charges cost 2.9% + $0.30 per successful transaction. International cards incur an additional 1.5% fee. ACH direct debit is 0.8% capped at $5. Instant card payouts cost 1% (minimum $0.50). Stripe Billing adds 0.5% of recurring revenue for subscription management. Radar fraud protection costs $0.02 per transaction for the standard tier and $0.05 for the advanced tier with custom machine learning models. Stripe Connect for marketplaces charges 0.25% + $0.25 per transaction for payment routing plus account fees. Stripe Tax costs 0.4% of the transaction amount for automatic tax calculation. A critical pricing nuance: Stripe does not offer volume discounts until processing exceeds $1 million annually, and even then discounts are negotiated individually rather than automatically applied. Businesses processing consistent cross-border transactions should note that the 1.5% international card fee plus standard processing means a cross-border sale can cost 4.4% + $0.30, significantly eroding margins on high-volume, low-margin international sales.",
+      "body": "Stripe fees vary by country, payment method, currency, product, and contract. Check current official pricing for your account and estimate costs from your expected domestic and international mix, refunds, disputes, recurring billing, and any additional products.",
       "type": "text"
     },
     {
@@ -265,7 +267,7 @@
     },
     {
       "title": "Customer Support",
-      "body": "Stripe support tiers are determined by processing volume. Standard accounts receive email-only support through the dashboard with 24-48 hour response time for non-critical issues. Accounts processing over $1 million annually receive priority email support with 12-hour response time. Accounts over $10 million annually receive a dedicated account manager, phone support during business hours, and quarterly business reviews. Stripe Enterprise ($100M+ annual processing) includes 24/7 phone support with 1-hour critical severity response, dedicated solutions engineer, and custom SLA. Support quality is the lowest-rated aspect of Stripe across review platforms (3.8/5), with consistent complaints about response delays during time-sensitive chargeback disputes, lack of phone support for mid-market accounts, and templated responses that do not address specific business context. Stripe's documentation and developer resources are exceptional: comprehensive API reference, step-by-step integration guides for every product, 100+ code examples in multiple languages, a community forum with 50,000+ threads moderated by Stripe engineers, in-person workshops (Stripe Sessions conference, local meetups), and Stripe Press publishing technical books on payments and financial systems. The knowledge base covers 500+ topics, and the Stripe Community forum typically provides answers within 2-4 hours from other developers and Stripe staff.",
+      "body": "Verify the support channels, response commitments, and escalation options available for your account and contract. Test how you would get help with a failed payment integration, account review, or time-sensitive dispute before launch.",
       "type": "text"
     },
     {
@@ -305,7 +307,7 @@
     },
     {
       "title": "Final Verdict",
-      "body": "Stripe earns a 4.7/5 rating as the best payment infrastructure platform for internet businesses, with unmatched developer experience, the broadest payment method support, and a financial services platform that extends well beyond basic payment processing into tax, banking, identity, and revenue automation. It is not the cheapest option (high-volume businesses will pay less with interchange-plus processors like Adyen), not the best for high-risk industries (specialized processors are more stable), and not the most accessible for non-technical founders (Square and PayPal offer simpler paths to first payment). For SaaS companies, subscription businesses, e-commerce merchants with international customers, and marketplace platforms, Stripe provides the fastest path to a production payments system with ongoing cost that is competitive for businesses processing under $5 million annually. The platform's support quality is the primary concern — businesses processing over $10 million annually should negotiate Enterprise terms with dedicated support to avoid the frustration of email-only support during payment disputes. Buy Stripe for the API experience and product breadth; negotiate pricing at $1 million annual volume; invest in test mode integration testing with all relevant test card numbers before processing your first live transaction.",
+      "body": "Stripe is worth evaluating when its available payment products match your business model and your team can support the integration. Run a production-like pilot, test errors and recovery, verify current regional fees and eligibility, and compare alternatives using the same transaction assumptions.",
       "type": "text"
     },
     {
@@ -315,7 +317,7 @@
     },
     {
       "title": "Pricing at a Glance",
-      "body": "pricing-ladder",
+      "body": "Stripe fees vary by country, payment method, currency, product, and contract. Check current official pricing for your account and estimate costs from your expected domestic and international mix, refunds, disputes, recurring billing, and any additional products.",
       "type": "diagram"
     },
     {
@@ -336,7 +338,7 @@
     },
     {
       "question": "How much does Stripe cost?",
-      "answer": "Stripe charges 2.9% + $0.30 per successful card charge for standard payments. International cards cost an additional 1.5%. ACH direct debit is 0.8% capped at $5. Instant payouts cost 1% ($0.50 minimum). Stripe Billing costs 0.5% of recurring revenue. Radar for Fraud Prevention costs $0.02 per transaction for the standard tier. There are no monthly fees, setup fees, or minimum processing requirements. Volume discounts require negotiation above $1 million annually."
+      "answer": "Fees vary by country, payment method, currency, product, and contract. Check Stripe's current official pricing for your account and model the full transaction mix, refunds, disputes, and any additional services."
     },
     {
       "question": "Does Stripe integrate with other tools?",
@@ -486,5 +488,12 @@
   "difficulty": "Intermediate",
   "learningCurve": "Moderate — expect 1-3 days to become productive",
   "whoShouldUse": "Stripe is designed for fast-growing startups that need a scalable finance & accounting platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "Stripe is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives."
+  "whoShouldNotUse": "Stripe is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives.",
+  "ratingVerified": false,
+  "ratingsVerified": false,
+  "reviewCountVerified": false,
+  "priceRangeVerified": false,
+  "featuresVerified": false,
+  "companyFactsVerified": false,
+  "scoreBasis": "The stored 4.7/5 score is a provisional PilotStack editorial score, not a verified third-party review average. The underlying scoring evidence has not completed an independent audit."
 }
