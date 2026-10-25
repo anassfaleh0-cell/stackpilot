@@ -16,7 +16,8 @@ export function EditorialProsCons({ pros, cons, className = "" }: EditorialProsC
             </svg>
             <h3 className="font-semibold text-success text-sm">Pros</h3>
           </div>
-          <ul className="space-y-2.5">
+          {pros.length > 0 ? (
+            <ul className="space-y-2.5">
             {pros.map((pro, i) => (
               <li key={i} className="flex items-start gap-2.5 text-sm text-foreground">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0" aria-hidden="true">
@@ -26,7 +27,10 @@ export function EditorialProsCons({ pros, cons, className = "" }: EditorialProsC
                 <span>{pro}</span>
               </li>
             ))}
-          </ul>
+            </ul>
+          ) : (
+            <p className="text-sm leading-relaxed text-muted-foreground">No evidence-backed strengths are recorded for this profile yet. Check the capabilities that matter to your workflow in current vendor documentation or a representative trial.</p>
+          )}
         </div>
       </div>
       <div className="rounded-xl overflow-hidden relative border border-error-subtle bg-error-subtle/50">
@@ -37,7 +41,8 @@ export function EditorialProsCons({ pros, cons, className = "" }: EditorialProsC
             </svg>
             <h3 className="font-semibold text-error text-sm">Cons</h3>
           </div>
-          <ul className="space-y-2.5">
+          {cons.length > 0 ? (
+            <ul className="space-y-2.5">
             {cons.map((con, i) => (
               <li key={i} className="flex items-start gap-2.5 text-sm text-foreground">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--error)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0" aria-hidden="true">
@@ -47,7 +52,10 @@ export function EditorialProsCons({ pros, cons, className = "" }: EditorialProsC
                 <span>{con}</span>
               </li>
             ))}
-          </ul>
+            </ul>
+          ) : (
+            <p className="text-sm leading-relaxed text-muted-foreground">No specific limitations are recorded for this profile yet. This does not mean there are none; test plan restrictions, data portability, support boundaries, permissions, and failure handling before adopting the product.</p>
+          )}
         </div>
       </div>
     </div>

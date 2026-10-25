@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest"
+import fs from "node:fs"
+import path from "node:path"
 import { getReviewPricingSummary, getVisibleReviewContent, getVisibleReviewFaqs, isPricingPlaceholder, stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
 
 describe("review content provenance", () => {
@@ -65,6 +67,30 @@ describe("review content provenance", () => {
     expect(stripUnverifiedPriceClaims("The free plan is suitable for testing")).toContain("not independently verified")
     expect(stripUnverifiedPriceClaims("A freemium tier is available")).toContain("A freemium tier is available")
     expect(stripUnverifiedPriceClaims("A freemium tier is available")).toContain("not independently verified")
+  })
+
+
+  it("does not render empty Pros or Cons panels when a review has no recorded items", () => {
+    const component = fs.readFileSync(path.join(process.cwd(), "src", "components", "editorial", "editorial-pros-cons.tsx"), "utf8")
+    expect(component).toContain("pros.length > 0 ?")
+    expect(component).toContain("cons.length > 0 ?")
+    expect(component).toContain("No evidence-backed strengths are recorded")
+    expect(component).toContain("No specific limitations are recorded")
+  })
+
+  it("provides useful review FAQs when filtering removes every stored FAQ", () => {
+    const reviewPage = fs.readFileSync(path.join(process.cwd(), "src", "app", "reviews", "[slug]", "page.tsx"), "utf8")
+    expect(reviewPage).toContain("const visibleFaqs = filteredReviewFaqs.length > 0 ? filteredReviewFaqs")
+    expect(reviewPage).toContain("How should a team evaluate")
+    expect(reviewPage).toContain("A verified evidence-backed score is not currently recorded")
+  })
+
+  it("provides decision-focused comparison FAQs when source FAQs are empty or filtered", () => {
+    const comparisonPage = fs.readFileSync(path.join(process.cwd(), "src", "app", "comparisons", "[slug]", "page.tsx"), "utf8")
+    expect(comparisonPage).toContain("const visibleFaqs = filteredComparisonFaqs.length > 0 ? filteredComparisonFaqs")
+    expect(comparisonPage).toContain("Is there a verified winner between")
+    expect(comparisonPage).toContain("This page does not have an independently verified overall winner")
+    expect(comparisonPage).toContain("Run a small pilot")
   })
 
   it("filters generated security/compliance FAQ claims and sanitizes pricing in remaining FAQs", () => {
