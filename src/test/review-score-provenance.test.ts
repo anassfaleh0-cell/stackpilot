@@ -125,4 +125,24 @@ describe("review score provenance", () => {
   })
 
 
+  it("always surfaces review score status and uses only valid five-point ratings", () => {
+    const source = fs.readFileSync(REVIEW_PAGE, "utf8")
+
+    expect(source).toContain("Review Claim, Rating & Verdict")
+    expect(source).toContain("Pending evidence audit")
+    expect(source).toContain("No numeric score is available in the record")
+    expect(source).toContain("tool.rating > 0 && tool.rating <= 5")
+    expect(source).toContain("const reviewVerdict = [")
+  })
+
+  it("always surfaces comparison ratings, feature-score status, winner status and a non-empty verdict", () => {
+    const source = fs.readFileSync(path.join(process.cwd(), "src", "app", "comparisons", "[slug]", "page.tsx"), "utf8")
+
+    expect(source).toContain("Ratings, Scores, Winner &amp; Verdict")
+    expect(source).toContain("review1.rating > 0 && review1.rating <= 5")
+    expect(source).toContain("review2.rating > 0 && review2.rating <= 5")
+    expect(source).toContain("Feature-coverage score: not verified / not available")
+    expect(source).toContain("Use-case dependent: compare must-have workflows, integrations, permissions, and total cost before choosing.")
+  })
+
 })
