@@ -1,7 +1,7 @@
 /**
- * Content URLs intentionally consolidated by permanent redirects.
- * These source URLs must not appear in the XML sitemap because their canonical
- * destination is a different, existing page.
+ * Content slugs intentionally consolidated by permanent redirects.
+ * Keep a slug here only while a matching permanent redirect is active and its
+ * canonical destination is a different, existing page.
  */
 export const REDIRECTED_ALTERNATIVE_SLUGS = new Set<string>()
 
