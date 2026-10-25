@@ -103,7 +103,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const allReviews = getAllReviews()
 
   // Preserve stored editorial scores visibly with an explicit pending-verification label; only verified scores feed structured data and category rankings.
-  const hasStoredEditorialRating = typeof tool.rating === "number" && Number.isFinite(tool.rating) && tool.rating > 0
+  const hasStoredEditorialRating = typeof tool.rating === "number" && Number.isFinite(tool.rating) && tool.rating > 0 && tool.rating <= 5
   const hasEditorialRating = tool.ratingVerified === true && hasStoredEditorialRating
   const categoryRatings = Array.isArray(tool.ratings) ? tool.ratings.filter((item) => typeof item.score === "number" && Number.isFinite(item.score) && item.score > 0) : []
   const bestInCategory = allReviews
