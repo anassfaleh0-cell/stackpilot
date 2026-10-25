@@ -157,6 +157,17 @@ describe("review score provenance", () => {
     expect(source).toContain("A winner is verified only when this comparison's record explicitly marks it verified.")
   })
 
+  it("resolves sitemap indexes before auditing page HTTP statuses", () => {
+    const smoke = fs.readFileSync(path.join(process.cwd(), "scripts", "production-smoke-check.cjs"), "utf8")
+
+    expect(smoke).toContain("const sitemapQueue = [{ url: cleanUrl(sitemap.finalUrl || SITE_URL + \"/sitemap.xml\"), body: sitemap.body }]")
+    expect(smoke).toContain("if (/<sitemapindex\\b/i.test(xml))")
+    expect(smoke).toContain("else if (/<urlset\\b/i.test(xml))")
+    expect(smoke).toContain("pageUrlsChecked: targets.length")
+    expect(smoke).toContain("const maxSitemaps = 200")
+    expect(smoke).toContain("const maxPages = 15000")
+  })
+
   it("accepts the actual published legacy score provenance disclosure in the production smoke check", () => {
     const smoke = fs.readFileSync(path.join(process.cwd(), "scripts", "production-smoke-check.cjs"), "utf8")
 
