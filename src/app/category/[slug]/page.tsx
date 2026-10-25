@@ -64,8 +64,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && categoryMatches(r.category, category.name))
   const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug) && categoryMatches(g.category, category.name))
   const comparisons = getAllComparisons().filter((c) => categoryMatches(c.category, category.name) && isContentAvailable("comparison", c.slug))
-  const posts = getAllBlogPosts().filter((p) => categoryMatches(p.category, category.name))
-  const glossary = getAllGlossaryTerms().filter((t) => categoryMatches(t.category, category.name))
+  const posts = getAllBlogPosts().filter((p) => isContentAvailable("blog", p.slug) && categoryMatches(p.category, category.name))
+  const glossary = getAllGlossaryTerms().filter((t) => isContentAvailable("glossary", t.slug) && categoryMatches(t.category, category.name))
   const bestPick = [...reviews].filter((r) => r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating)).sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
 
   const buyerJourney = [
