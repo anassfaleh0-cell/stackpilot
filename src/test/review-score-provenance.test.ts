@@ -157,4 +157,11 @@ describe("review score provenance", () => {
     expect(source).toContain("A winner is verified only when this comparison's record explicitly marks it verified.")
   })
 
+  it("accepts the actual published legacy score provenance disclosure in the production smoke check", () => {
+    const smoke = fs.readFileSync(path.join(process.cwd(), "scripts", "production-smoke-check.cjs"), "utf8")
+
+    expect(smoke).toContain('normalizedLinearBody.includes("retained for transparency, but remains provisional")')
+    expect(smoke).toContain('normalizedLinearBody.includes("no source-linked rationale or reproducible score breakdown recorded in this profile")')
+  })
+
 })
