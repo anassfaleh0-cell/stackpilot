@@ -3,6 +3,7 @@ import { getAllComparisons, getBest, getComparison, getReview, isContentAvailabl
 import { isNoindexed } from "@/lib/noindex"
 import sitemap from "@/app/sitemap"
 import { siteConfig } from "@/lib/constants"
+import { isRetiredComparisonSlug } from "@/lib/sitemap/retired-comparisons"
 import nextConfig from "../../next.config"
 import fs from "node:fs"
 import path from "node:path"
@@ -87,7 +88,7 @@ describe("Search Console 404 recovery", () => {
     }))
 
     const indexableComparisons = getAllComparisons().filter((comparison) =>
-      !isNoindexed("comparisons", comparison.slug)
+      !isNoindexed("comparisons", comparison.slug) && !isRetiredComparisonSlug(comparison.slug)
     )
     expect(indexableComparisons.length).toBeGreaterThan(0)
     for (const comparison of indexableComparisons) {
