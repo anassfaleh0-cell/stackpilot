@@ -49,6 +49,26 @@ async function main() {
   }))
 
   const byPath = new Map(results.map((result) => [result.pathname, result]))
+
+  // The Search Console export contains both www and apex URLs. Verify that the
+  // legacy host consolidates to the configured canonical origin while preserving path/query.
+  try {
+    const legacyUrl = "https://www.pilotstack.online/use-cases/best-seo-for-agencies?canonical-smoke=1"
+    const legacyResponse = await fetchWithRetry(legacyUrl, {
+      redirect: "follow",
+      headers: { "user-agent": "PilotStack-ProductionSmokeCheck/1.0" },
+      signal: AbortSignal.timeout(15000),
+    })
+    const finalUrl = new URL(legacyResponse.url)
+    const canonicalOrigin = new URL("https://pilotstack.online").origin
+    const hostConsolidated = finalUrl.origin === canonicalOrigin &&
+      finalUrl.pathname === "/use-cases/best-seo-for-agencies" &&
+      finalUrl.searchParams.get("canonical-smoke") === "1"
+    report("www host consolidation", hostConsolidated, "HTTP " + legacyResponse.status + " → " + finalUrl.href)
+    await legacyResponse.body?.cancel()
+  } catch (error) {
+    report("www host consolidation", false, error instanceof Error ? error.message : String(error))
+  }
   const home = byPath.get("/")
   const ads = byPath.get("/ads.txt")
   const robots = byPath.get("/robots.txt")
