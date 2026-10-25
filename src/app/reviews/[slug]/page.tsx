@@ -129,6 +129,72 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
     primaryCon ? `Main trade-off to validate: ${primaryCon.replace(/\s+/g, " ").trim()}` : `Confirm the limitations, support terms, and plan restrictions that matter to your team before adopting it.`,
     `Final decision: test one representative task, check current official documentation and pricing, and compare total cost with at least one realistic alternative. ${hasEditorialRating ? "The editorial score is verified against the recorded methodology." : hasStoredEditorialRating ? "Any legacy numeric score is provisional until its evidence and calculation are audited." : "No numeric product score is asserted until an evidence-backed assessment is recorded."}`,
   ].join(" ")
+  const pilotGuidanceByCategory: Record<string, { firstTitle: string; firstBody: string; secondTitle: string; secondBody: string; thirdBody: string; fourthBody: string }> = {
+    "Marketing & SEO": {
+      firstTitle: "Run a repeatable SEO task",
+      firstBody: "Use the same domain, country, device, and keyword set to test research, crawling, and reporting. Record the date and settings so results can be compared fairly with another tool.",
+      secondTitle: "Check data against first-party sources",
+      secondBody: "Compare a sample of search-performance findings with Google Search Console and site analytics where available. Treat vendor traffic, volume, and difficulty metrics as estimates, not exact Google measurements.",
+      thirdBody: "Test whether reports can be exported with the fields, filters, and history your workflow needs. Verify project, keyword, crawl, API, and seat limits on the exact plan before committing.",
+      fourthBody: "Include setup, recurring reporting, data cleanup, training, and any required add-ons. Confirm what can be exported if you cancel, and do not treat estimated traffic gains as guaranteed ROI.",
+    },
+    "Analytics & Data": {
+      firstTitle: "Validate one important metric",
+      firstBody: "Choose a metric with a known definition and compare the tool's output against an existing trusted report. Record filters, time zone, freshness, attribution, and any differences before judging accuracy.",
+      secondTitle: "Trace data from source to report",
+      secondBody: "Test ingestion, transformations, access permissions, refresh failures, lineage, and exports using a representative dataset. Check how missing or late data is surfaced instead of assuming a dashboard is complete.",
+      thirdBody: "Test the recurring dashboard or query the team actually needs. Confirm row, event, storage, query, connector, and retention limits plus the ability to export data in a reusable format.",
+      fourthBody: "Estimate implementation, storage, query usage, connector maintenance, and analyst time. Agree on metric ownership and a rollback path before moving business-critical reporting.",
+    },
+    "AI & Machine Learning": {
+      firstTitle: "Test representative prompts or tasks",
+      firstBody: "Create a small evaluation set from real, non-sensitive work. Score correctness, source grounding, consistency, and failure severity, and keep examples of both successful and incorrect outputs.",
+      secondTitle: "Check human review and data handling",
+      secondBody: "Verify what data is retained, used for training, shared, or available to administrators. Test escalation and human approval for consequential outputs; do not rely on a general model label as proof of quality.",
+      thirdBody: "Measure quality and latency at expected usage, then check rate limits, model/version changes, context limits, logging, and output export. Confirm the required controls on the intended plan.",
+      fourthBody: "Include inference or subscription cost, evaluation, monitoring, human review, integration work, and fallback behavior. Keep a test set so quality regressions can be detected after product or model updates.",
+    },
+    "Project Management": {
+      firstTitle: "Run a real project through the workflow",
+      firstBody: "Model one active project with tasks, dependencies, owners, due dates, recurring work, and a blocked task. Check whether the team can maintain it without duplicate updates or manual workarounds.",
+      secondTitle: "Test team and stakeholder permissions",
+      secondBody: "Have an everyday contributor, project lead, and external stakeholder try the same workflow. Verify notifications, guest access, workload views, automation limits, and what each role can export or edit.",
+      thirdBody: "Confirm project, seat, automation, storage, guest, reporting, and integration limits on the plan you would purchase. Test importing and exporting representative records before migrating all work.",
+      fourthBody: "Include onboarding, workspace administration, migration cleanup, automation maintenance, and the cost of seats that occasional collaborators may need. Define an exit plan before rollout.",
+    },
+    "CRM & Sales": {
+      firstTitle: "Test a representative sales pipeline",
+      firstBody: "Use a small, permission-safe sample of contacts and deals to test deduplication, lead routing, stage changes, follow-ups, and forecasting. Track where users need manual correction.",
+      secondTitle: "Verify sync and access rules",
+      secondBody: "Check email/calendar sync, field mapping, ownership, role permissions, audit history, and export behavior. Test how failed syncs and duplicate records are surfaced before importing the full database.",
+      thirdBody: "Confirm contact, seat, automation, reporting, API, storage, and support limits on the intended plan. Verify which integrations and forecast/reporting features require a higher tier.",
+      fourthBody: "Budget for data cleanup, field mapping, migration, user training, integrations, and ongoing administration. Confirm you can export contacts, activities, and deal history in a usable format.",
+    },
+    "Developer Tools": {
+      firstTitle: "Test a real repository or service",
+      firstBody: "Use a representative codebase or development workflow to test setup, permissions, CI integration, debugging, observability, and recovery from a failed change before rolling it out.",
+      secondTitle: "Include different engineering roles",
+      secondBody: "Ask a contributor and an administrator to test setup, daily use, access controls, and troubleshooting. Verify API limits, audit logs, secrets handling, and how the team rolls back a faulty configuration.",
+      thirdBody: "Confirm repository, build, execution, storage, API, seat, and retention limits on the exact plan. Check integrations and export options rather than relying on a marketing feature list.",
+      fourthBody: "Include migration, CI minutes or compute, monitoring, maintenance, training, and incident response. Document ownership and a rollback route before connecting production systems.",
+    },
+    "Security & Compliance": {
+      firstTitle: "Test a realistic control scenario",
+      firstBody: "Evaluate a defined use case such as access review, alert triage, or audit evidence collection. Record detection gaps, false positives, investigation steps, and who must respond.",
+      secondTitle: "Verify evidence and responsibility",
+      secondBody: "Check current vendor documentation, contractual scope, data residency, retention, incident notification, audit logs, and access controls. A listed certification does not automatically cover every product, plan, or use case.",
+      thirdBody: "Test role separation, log export, retention, alert routing, and integration behavior. Confirm the exact edition and region covered by each required control with the vendor.",
+      fourthBody: "Include implementation, policy work, alert triage, evidence collection, renewals, and staff training. Assign an owner for each control and preserve a documented exit and incident-response process.",
+    },
+  }
+  const pilotGuidance = pilotGuidanceByCategory[tool.category] || {
+    firstTitle: "Test a real workflow",
+    firstBody: "Choose a common task and an exception case from your team's actual work. Record setup effort, output quality, manual corrections, and any workaround required to finish the task.",
+    secondTitle: "Involve users and an administrator",
+    secondBody: "Have the people who will use and manage the product test the same workflow. Check permissions, integrations, failure handling, accessibility, and whether each role can complete its work without unnecessary friction.",
+    thirdBody: "Verify the required capabilities, integrations, usage limits, data export, support boundaries, and plan restrictions directly with the vendor. Test the exact edition you expect to buy.",
+    fourthBody: "Include migration, setup, training, ongoing administration, add-ons, and renewal terms. Record the acceptance criteria and exit path before moving business-critical work.",
+  }
   return (
     <>
       <BreadcrumbSchema items={[
@@ -362,20 +428,20 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 </div>
                 <div className="grid sm:grid-cols-2 gap-3 text-sm">
                   <div className="p-3 rounded-lg bg-card">
-                    <div className="font-semibold text-xs mb-1">{tool.category === "Developer Tools" ? "Start with a trial project" : tool.category === "CRM & Sales" ? "Map your pipeline first" : "Use a trial with real data"}</div>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{tool.category === "Developer Tools" ? "Create a sample project with real code to test the platform end-to-end before committing to a team rollout." : tool.category === "CRM & Sales" ? "Import a subset of your actual contacts and deals into the trial — testing with sample data hides the migration pain points." : "Import real data from your current tool rather than starting from scratch in the trial. This reveals migration friction points early."}</p>
+                    <div className="font-semibold text-xs mb-1">{pilotGuidance.firstTitle}</div>
+                    <p className="text-muted-foreground text-xs leading-relaxed">{pilotGuidance.firstBody}</p>
                   </div>
                   <div className="p-3 rounded-lg bg-card">
-                    <div className="font-semibold text-xs mb-1">{tool.category === "Developer Tools" ? "Involve your team" : "Include the people who will use it"}</div>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{tool.category === "Developer Tools" ? "Have at least three engineers from different skill levels use the trial independently. A tool that only your senior dev can configure creates bus-factor risk." : "Ask people in the roles that will use or administer the tool to test the same workflows independently. The admin experience can differ from the daily user experience."}</p>
+                    <div className="font-semibold text-xs mb-1">{pilotGuidance.secondTitle}</div>
+                    <p className="text-muted-foreground text-xs leading-relaxed">{pilotGuidance.secondBody}</p>
                   </div>
                   <div className="p-3 rounded-lg bg-card">
                     <div className="font-semibold text-xs mb-1">Check the exit</div>
-                    <p className="text-muted-foreground text-xs leading-relaxed">Review the data export capabilities before committing. Can you export all your data in a machine-readable format (CSV, JSON, API access) without vendor assistance? Lock-in is a real cost.</p>
+                    <p className="text-muted-foreground text-xs leading-relaxed">{pilotGuidance.thirdBody}</p>
                   </div>
                   <div className="p-3 rounded-lg bg-card">
                     <div className="font-semibold text-xs mb-1">Budget for setup</div>
-                    <p className="text-muted-foreground text-xs leading-relaxed">Estimate implementation effort before projecting ROI. Include internal setup labor, data migration, team training, workflow configuration, and ongoing administration.</p>
+                    <p className="text-muted-foreground text-xs leading-relaxed">{pilotGuidance.fourthBody}</p>
                   </div>
                 </div>
                 <p className="text-[11px] text-muted-foreground mt-3">This profile is a starting point for evaluation. Check the supporting details on this page and confirm current capabilities, limits, and pricing with the vendor before making a decision.</p>
