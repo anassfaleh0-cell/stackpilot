@@ -61,11 +61,11 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   if (!category) notFound()
 
   const knowledge = getCategoryKnowledge(slug)
-  const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && r.category === category.name)
+  const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && categoryMatches(r.category, category.name))
   const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug) && categoryMatches(g.category, category.name))
   const comparisons = getAllComparisons().filter((c) => categoryMatches(c.category, category.name) && isContentAvailable("comparison", c.slug))
-  const posts = getAllBlogPosts().filter((p) => categoryMatches(p.category, category.name))
-  const glossary = getAllGlossaryTerms().filter((t) => categoryMatches(t.category, category.name))
+  const posts = getAllBlogPosts().filter((p) => isContentAvailable("blog", p.slug) && categoryMatches(p.category, category.name))
+  const glossary = getAllGlossaryTerms().filter((t) => isContentAvailable("glossary", t.slug) && categoryMatches(t.category, category.name))
   const bestPick = [...reviews].filter((r) => r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating)).sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
 
   const buyerJourney = [
@@ -364,16 +364,15 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                 )}
                 {enterprisePick && (
                   <Card className="p-5">
-                    <Shield size={20} className="text-primary mb-2" />
-                    <h3 className="font-semibold text-sm mb-1">Enterprise option</h3>
+                    <GitCompare size={20} className="text-primary mb-2" />
+                    <h3 className="font-semibold text-sm mb-1">Comparison to read</h3>
                     <Link href={`/comparisons/${enterprisePick.slug}`} className="text-primary text-sm font-medium hover:underline">{enterprisePick.title}</Link>
-                    {knowledge?.bestFor.enterprise && <p className="text-xs text-muted-foreground mt-1">{knowledge.bestFor.enterprise}</p>}
                   </Card>
                 )}
                 {freePick && (
                   <Card className="p-5">
                     <DollarSign size={20} className="text-success mb-2" />
-                    <h3 className="font-semibold text-sm mb-1">Best Free Tool</h3>
+                    <h3 className="font-semibold text-sm mb-1">Free-plan option</h3>
                     <Link href={`/reviews/${freePick.slug}`} className="text-primary text-sm font-medium hover:underline">{freePick.name}</Link>
                     {knowledge?.bestFor.free && <p className="text-xs text-muted-foreground mt-1">{knowledge.bestFor.free}</p>}
                   </Card>
