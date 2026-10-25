@@ -57,7 +57,7 @@ export function EditorialComparison({ tool1, tool2, features, featuresVerified =
         }}>
           <div className="font-semibold" style={{ color: p.primary }}>{tool2}</div>
           <div className="text-2xl font-bold mt-1" style={{ color: p.primary }}>{total > 0 ? t2w : "—"}</div>
-          <div className="text-xs text-muted">exclusive checks</div>
+          <div className="text-xs text-muted">{featuresVerified ? "verified exclusive checks" : "provisional exclusive checks"}</div>
         </div>
       </div>
       {total > 0 ? (
