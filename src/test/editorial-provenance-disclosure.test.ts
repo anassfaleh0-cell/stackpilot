@@ -26,7 +26,10 @@ describe("editorial provenance disclosures", () => {
 
     expect(reviewPage).toContain('const hasStoredEditorialRating = typeof tool.rating === "number" && Number.isFinite(tool.rating) && tool.rating > 0')
     expect(reviewPage).toContain('const hasEditorialRating = tool.ratingVerified === true && hasStoredEditorialRating')
-    expect(reviewPage).toContain('const categoryRatings = Array.isArray(tool.ratings) ? tool.ratings.filter((item) => typeof item.score === "number" && Number.isFinite(item.score) && item.score > 0) : []')
+    expect(reviewPage).toContain("const rawCategoryRatings = Array.isArray(tool.ratings) ? tool.ratings : []")
+    expect(reviewPage).toContain("item.score > 0 && item.score <= 5")
+    expect(reviewPage).toContain("const invalidCategoryRatings = rawCategoryRatings.filter")
+    expect(reviewPage).toContain("The original source record is preserved; no replacement score is invented.")
     expect(reviewPage).toContain('title="Editorial Score"')
     expect(reviewPage).toContain('"Assessment not yet recorded; no number is invented"')
     expect(reviewPage).toContain('"Provisional stored score; evidence audit pending"')
