@@ -119,6 +119,24 @@ describe("review content provenance", () => {
     expect(faqs[1].answer).toContain("compare the current feature set")
   })
 
+  it("removes unsupported diagram sections and supplies content instead of rendering blank review sections", () => {
+    const visible = getVisibleReviewContent([
+      { title: "Unsupported chart", body: "unknown-chart", type: "diagram" },
+      { title: "Missing section copy", body: "   ", type: "text" },
+      { title: "Empty list section", body: " ", type: "list", items: [] },
+      { title: "Useful list", body: "Checklist context", type: "list", items: ["  ", "Verify the workflow"] },
+    ], true, true, "Example")
+
+    expect(visible.map((section) => section.title)).toEqual([
+      "Missing section copy",
+      "Empty list section",
+      "Useful list",
+    ])
+    expect(visible.every((section) => section.body.trim().length > 0)).toBe(true)
+    expect(visible[1].items).toEqual([])
+    expect(visible[2].items).toEqual(["Verify the workflow"])
+  })
+
   it("shows diagrams only when the corresponding evidence flag is set", () => {
     const visible = getVisibleReviewContent(diagrams, true, true)
     expect(visible.map((section) => section.body)).toEqual(["pricing-ladder", "feature-radar", "implementation-flow"])

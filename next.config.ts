@@ -138,6 +138,12 @@ const nextConfig: NextConfig = {
       permanent: true,
     },
     {
+      // Recover the legacy agency-focused SEO guide URL on the closest published shortlist.
+      source: "/guides/best-seo-for-agencies",
+      destination: "/best/best-marketing-seo-agencies",
+      permanent: true,
+    },
+    {
       source: "/guides/software-evaluation-playbook-2026",
       destination: "/blog/software-evaluation-playbook-2026",
       permanent: true,

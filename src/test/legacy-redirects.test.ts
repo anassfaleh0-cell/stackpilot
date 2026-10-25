@@ -11,6 +11,7 @@ describe("legacy SEO redirects", () => {
       expect.objectContaining({ source: "/glossarys/:slug", destination: "/glossary/:slug", permanent: true }),
       expect.objectContaining({ source: "/bests", destination: "/best", permanent: true }),
       expect.objectContaining({ source: "/best/project-management-software", destination: "/best/best-project-management-software", permanent: true }),
+      expect.objectContaining({ source: "/guides/best-seo-for-agencies", destination: "/best/best-marketing-seo-agencies", permanent: true }),
       expect.objectContaining({ source: "/guides/software-evaluation-playbook-2026", destination: "/blog/software-evaluation-playbook-2026", permanent: true }),
       expect.objectContaining({ source: "/guides/software-evaluation-playbook", destination: "/blog/software-evaluation-playbook-2026", permanent: true }),
       expect.objectContaining({ source: "/bests/:slug", destination: "/best/:slug", permanent: true }),

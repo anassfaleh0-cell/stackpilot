@@ -158,13 +158,26 @@ export function getVisibleReviewContent(content: ContentSection[], showVerifiedP
       const generatedClaim = GENERATED_REVIEW_SECTION_PATTERNS.some((pattern) => pattern.test(trimmedBody))
       const body = unverifiedPricingPlaceholder || generatedClaim
         ? replacementForUnverifiedSection(section.title, productName)
-        : (showVerifiedPricing ? section.body : stripUnverifiedPriceClaims(section.body))
-      const items = section.items?.map((item) =>
-        GENERATED_REVIEW_SECTION_PATTERNS.some((pattern) => pattern.test(item.trim()))
+        : !trimmedBody
           ? replacementForUnverifiedSection(section.title, productName)
-          : (showVerifiedPricing ? item : stripUnverifiedPriceClaims(item))
-      )
+          : (showVerifiedPricing ? section.body : stripUnverifiedPriceClaims(section.body))
+      const items = section.items
+        ?.map((item) => item.trim())
+        .filter(Boolean)
+        .map((item) =>
+          GENERATED_REVIEW_SECTION_PATTERNS.some((pattern) => pattern.test(item))
+            ? replacementForUnverifiedSection(section.title, productName)
+            : (showVerifiedPricing ? item : stripUnverifiedPriceClaims(item))
+        )
       return { ...section, body, items }
+    })
+    // A template must not create an empty <section> for an unknown diagram or empty source data.
+    .filter((section) => {
+      if (section.type === "diagram") {
+        return ["pricing-ladder", "feature-radar", "implementation-flow"].includes(section.body)
+      }
+      return section.title.trim().length > 0 &&
+        (section.body.trim().length > 0 || Boolean(section.items?.some((item) => item.trim().length > 0)))
     })
 }
 
