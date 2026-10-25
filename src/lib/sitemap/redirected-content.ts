@@ -10,4 +10,19 @@ export const REDIRECTED_ALTERNATIVE_SLUGS = new Set([
 
 export const REDIRECTED_BEST_SLUGS = new Set([
   "best-productivity-startups",
+  "project-management-software",
+])
+
+export const REDIRECTED_GUIDE_SLUGS = new Set([
+  "best-seo-for-agencies",
+  "software-evaluation-playbook-2026",
+  "software-evaluation-playbook",
+])
+
+export const REDIRECTED_REVIEW_SLUGS = new Set([
+  "calndly",
+  "acuity-scheduling",
+  "affinity-designer",
+  "quickbooks-self-employed",
+  "slack-huddles",
 ])
