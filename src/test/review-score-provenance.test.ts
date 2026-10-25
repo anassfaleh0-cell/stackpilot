@@ -88,6 +88,24 @@ describe("review score provenance", () => {
     expect(bestDetail).not.toContain('className="fill-accent text-accent" />\n                            {storedPickRating')
   })
 
+  it("does not leak unverified rating or pricing claims into related best-guide cards", () => {
+    const bestDetail = fs.readFileSync(path.join(process.cwd(), "src", "app", "best", "[slug]", "page.tsx"), "utf8")
+
+    expect(bestDetail).toContain("const hasUnverifiedRatings = related.picks.some((pick) => pick.ratingVerified !== true)")
+    expect(bestDetail).toContain("const hasUnverifiedPricing = related.picks.some((pick) => pick.priceRangeVerified !== true)")
+    expect(bestDetail).toContain("Ratings and pricing are not independently verified")
+    expect(bestDetail).toContain("stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(related.description))")
+  })
+
+  it("keeps best-of FAQ sections non-empty after unsafe or blank questions are filtered", () => {
+    const bestDetail = fs.readFileSync(path.join(process.cwd(), "src", "app", "best", "[slug]", "page.tsx"), "utf8")
+
+    expect(bestDetail).toContain("const sanitizedBestFaqs = page.faqs")
+    expect(bestDetail).toContain(".filter((faq) => faq.question.length > 0 && faq.answer.length > 0)")
+    expect(bestDetail).toContain("const safeFaqs = sanitizedBestFaqs.length > 0 ? sanitizedBestFaqs")
+    expect(bestDetail).toContain("Treat each rating according to its visible verification label")
+  })
+
   it("does not render missing score dimensions as partially filled score bars", () => {
     const source = fs.readFileSync(REVIEW_PAGE, "utf8")
 
