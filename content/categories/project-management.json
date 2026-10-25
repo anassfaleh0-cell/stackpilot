@@ -6,11 +6,11 @@
   "marketOverview": "This category combines products with different assumptions about work: agile issue trackers, visual boards, structured project plans, portfolios, and flexible workspaces. Published market estimates often use different definitions, so they should not be treated as directly comparable without reviewing the source methodology. Compare vendors using the same sample project and roles. Record setup effort, reporting quality, integration gaps, administration overhead, and full costs for the seats and features you actually need.",
   "buyerConsiderations": [
     "Determine the project management methodology or methodologies your teams use and ensure the platform supports them natively rather than forcing your team to adapt to the tool's approach",
-    "Evaluate collaboration features carefully including real-time editing, threaded comments, @mentions, file sharing, and the ability to collaborate with external stakeholders like clients and contractors",
-    "Assess scalability from small teams to organization-wide deployment, considering how the platform handles portfolio management, cross-project dependencies, and resource allocation across multiple teams",
-    "Review integration capabilities with your existing tool stack including email, calendar, file storage (Google Drive, Dropbox), communication tools (Slack, Teams), and development tools (GitHub, GitLab)",
-    "Examine reporting and dashboard capabilities to ensure stakeholders at all levels can get the visibility they need, from individual task status to executive portfolio overviews",
-    "Consider automation capabilities including rule-based triggers, template creation, workflow automation, and AI-powered suggestions to reduce manual overhead and improve consistency",
+    "Run a representative project through planning, assignment, review, and delivery; test dependencies, recurring work, approvals, blocked tasks, and external collaborators rather than judging collaboration from a feature checklist",
+    "Model the expected team and portfolio size, then verify cross-project dependencies, resource capacity, guest access, permission inheritance, and reporting limits on the exact plan being considered",
+    "Test the exact integrations your workflow depends on, including field mapping, sync direction, update latency, permissions, API limits, failure alerts, and recovery from duplicate or missed updates",
+    "Validate reports against a known sample of real projects; check whether status, workload, time, and portfolio metrics use definitions stakeholders understand and whether exports preserve filters and underlying detail",
+    "Test automations against edge cases such as reassignment, overdue dates, duplicate triggers, permission changes, and failed actions; verify run limits, audit history, and who can maintain rules",
     "Evaluate mobile app quality for teams that work in the field or need to update task status on the go, ensuring parity between mobile and desktop functionality",
     "Review permission management and security features including granular role-based access control, guest access, audit logs, and compliance certifications relevant to your industry"
   ],
@@ -26,7 +26,7 @@
     {
       "factor": "Methodology support and flexibility",
       "importance": "Critical",
-      "description": "The platform must support your team's preferred workflow, whether that's Scrum sprints, Kanban continuous flow, Waterfall phases, or a custom hybrid approach that combines elements of multiple methodologies"
+      "description": "Validate the team's actual workflow with a pilot board or project: status transitions, dependencies, approvals, recurring tasks, backlog handling, and reporting should work without excessive custom fields or manual workarounds."
     },
     {
       "factor": "Ease of use and onboarding time",
@@ -36,7 +36,7 @@
     {
       "factor": "Integration ecosystem",
       "importance": "High",
-      "description": "Native integrations with communication tools, file storage, developer tools, and CRM platforms eliminate context switching and ensure project information flows freely across systems"
+      "description": "Test each must-have integration with representative records and permissions; confirm supported fields, sync direction, refresh behavior, rate limits, error handling, and whether the integration is included in your plan."
     },
     {
       "factor": "Reporting and visibility",

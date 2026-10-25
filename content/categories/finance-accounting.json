@@ -7,10 +7,10 @@
   "buyerConsiderations": [
     "Evaluate the depth of core accounting functionality including general ledger, accounts payable, accounts receivable, fixed asset management, inventory accounting, and multi-currency support for any international operations",
     "Assess the platform's ability to handle your specific business model and revenue recognition requirements including cash vs. accrual accounting, subscription billing, project-based billing, retail point-of-sale, or manufacturing cost accounting",
-    "Review financial reporting and compliance capabilities including GAAP and IFRS financial statements, customizable reports, consolidated reporting for multi-entity organizations, and automated tax form generation",
-    "Consider integration with your banking and payment systems including automated bank feeds, payment processing, merchant services, payroll, and any industry-specific financial systems you rely on",
+    "Confirm which accounting standards, tax forms, e-invoicing rules, and statutory reports are supported for each legal entity and jurisdiction; verify local availability with the provider and your accountant rather than assuming broad compliance labels guarantee coverage",
+    "Test the exact bank, payment processor, payroll, and tax integrations in your country; check supported account types, feed refresh frequency, reconciliation matching, fees, reauthorization handling, and how failed imports are surfaced",
     "Examine automation features including bank reconciliation, invoice matching and approval workflows, expense report processing, recurring journal entries, and automated revenue recognition schedules",
-    "Evaluate scalability including transaction volume limits, number of entities supported, user access controls, and the ability to add advanced capabilities like budgeting, forecasting, and financial planning as the organization grows",
+    "Model monthly transaction volume, legal entities, currencies, users, and approval steps at current and expected scale; check plan limits, consolidation support, export options, and upgrade costs before migration",
     "Review the ecosystem of accountants, bookkeepers, and advisors familiar with the platform, as this affects your ability to find support and hire financial talent who can work in your system",
     "Check security and compliance certifications including SOC 1 and SOC 2 reporting, data encryption, role-based access controls, audit trails, and certifications relevant to your industry"
   ],
@@ -26,7 +26,7 @@
     {
       "factor": "Core accounting functionality completeness",
       "importance": "Critical",
-      "description": "The platform must handle all essential accounting functions including GL, AP, AR, bank reconciliation, financial reporting, and tax preparation with the depth required by your accounting standards and business complexity"
+      "description": "Run a sample month-end close with representative invoices, credit notes, bank transactions, accruals, reconciliation exceptions, and financial statements; have a qualified accountant confirm the outputs for your jurisdiction."
     },
     {
       "factor": "Business model and industry fit",
@@ -46,7 +46,7 @@
     {
       "factor": "Integration with banking and payments",
       "importance": "High",
-      "description": "Direct bank feeds, automated payment processing, and integration with payment gateways, payroll services, and tax filing services reduce manual data entry and improve cash flow visibility"
+      "description": "Verify that each required bank and service is supported in your region and for your account type; test refresh delays, field mapping, duplicate prevention, fees, and recovery after an authorization or sync failure."
     },
     {
       "factor": "Scalability and multi-entity support",

@@ -9,11 +9,11 @@
     "Match the tool to your main workflow: tasks, notes, documents, collaboration, time management, automation or an all-in-one workspace",
     "Check collaboration, sharing, permissions and team workspace features if multiple people will use the product",
     "Evaluate ease of use, onboarding and daily workflow fit so the tool improves productivity instead of adding process overhead",
-    "Check integrations with email, calendar, cloud storage, communication, project management and other core systems",
+    "Test the specific email, calendar, storage, communication, and project integrations your team uses; verify sync direction, conflict handling, permissions, latency, and whether the connector requires a paid tier",
     "Compare search, organization and information retrieval features, especially when the tool becomes a central knowledge workspace",
-    "Review cross-platform support, sync reliability and offline access across the devices your team actually uses",
+    "Test the same workflow on the actual desktop, mobile, and browser combinations your team uses, including offline edits, conflict resolution, notification settings, accessibility needs, and recovery after reconnecting",
     "Compare pricing at your expected team size and usage limits, including seats, storage, automation, AI features and premium add-ons",
-    "Check data export, privacy, security and administration requirements before making the tool a long-term system of record"
+    "Before storing business-critical information, test a full export and re-import path, inspect permissions and audit controls, confirm retention/deletion behavior, and identify any proprietary formats or paid-plan restrictions"
   ],
   "commonMistakes": [
     "Adopting multiple overlapping productivity tools for the same purpose, creating fragmentation where tasks, notes, and documents are scattered across platforms with no single source of truth",
@@ -42,7 +42,7 @@
     {
       "factor": "Integrations and automation",
       "importance": "High",
-      "description": "Connections to email, calendars, storage, communication and project tools reduce duplicate work and manual handoffs."
+      "description": "Test required integrations using realistic records and permissions; confirm supported fields, sync direction, update delays, conflict handling, limits, and the process for recovering failed or duplicate updates."
     },
     {
       "factor": "Search, organization and retrieval",
