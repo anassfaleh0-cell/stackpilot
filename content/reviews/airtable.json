@@ -8,7 +8,7 @@
   "pricing": "Freemium",
   "priceRange": "Free–$45/user/mo",
   "rating": 4.4,
-  "reviewCount": 28500,
+  "reviewCount": 0,
   "pros": [
     "Flexible spreadsheet-database hybrid adaptable to any workflow",
     "1,000+ pre-built templates eliminating blank-slate setup",
@@ -310,7 +310,7 @@
     },
     {
       "title": "Final Verdict",
-      "body": "Airtable earns 4.4/5. Strong choice for Teams and Creatives. Recommended for teams prioritizing project management.",
+      "body": "Airtable is worth piloting when a team needs a configurable operational workspace and its data relationships, permissions and automations remain manageable. Before purchase, model a representative workflow, test access with different roles, measure automation limits, export the data and price the required collaborators and advanced features. The stored 4.4/5 score is a provisional PilotStack editorial assessment, not a verified customer-rating average.",
       "type": "text"
     },
     {
@@ -480,7 +480,10 @@
   },
   "difficulty": "Beginner",
   "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "Airtable is ideal for small to mid-size teams that need a reliable project management solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
-  "whoShouldNotUse": "Airtable may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale.",
-  "scoreBasis": "Score provenance: this is a stored PilotStack editorial score, not a third-party review average. The score and category dimensions are retained for transparency but have not yet completed an evidence-and-calculation audit; treat them as provisional and verify current capabilities against the vendor's official documentation before relying on the rating."
+  "whoShouldUse": "Teams that need configurable tables, linked records, forms, views and lightweight workflow automation can evaluate Airtable for operational tracking, content pipelines, inventory lists or project coordination. Test the real data model, permission boundaries, automation limits, reporting and export before treating it as a database or project-management system of record.",
+  "whoShouldNotUse": "Airtable may not fit workloads that require a traditional relational database with strict transaction guarantees, complex backend logic, extensive offline operation or controls unavailable on the proposed plan. Teams with sensitive data or complex governance needs should verify permissions, auditability, retention, integrations and contract terms against their requirements.",
+  "scoreBasis": "Stored PilotStack editorial score (4.4/5), not a third-party review average. This provisional score reflects Airtable's configurable tables, linked records, views and workflow use cases, balanced against the need to validate data-model complexity, permissions, automation limits, scale and total plan cost. Category scores are editorial hypotheses, not measured benchmark results.",
+  "ratingVerified": false,
+  "reviewCountVerified": false,
+  "companyFactsVerified": false
 }
