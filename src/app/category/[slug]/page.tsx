@@ -364,16 +364,15 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                 )}
                 {enterprisePick && (
                   <Card className="p-5">
-                    <Shield size={20} className="text-primary mb-2" />
-                    <h3 className="font-semibold text-sm mb-1">Enterprise option</h3>
+                    <GitCompare size={20} className="text-primary mb-2" />
+                    <h3 className="font-semibold text-sm mb-1">Comparison to read</h3>
                     <Link href={`/comparisons/${enterprisePick.slug}`} className="text-primary text-sm font-medium hover:underline">{enterprisePick.title}</Link>
-                    {knowledge?.bestFor.enterprise && <p className="text-xs text-muted-foreground mt-1">{knowledge.bestFor.enterprise}</p>}
                   </Card>
                 )}
                 {freePick && (
                   <Card className="p-5">
                     <DollarSign size={20} className="text-success mb-2" />
-                    <h3 className="font-semibold text-sm mb-1">Best Free Tool</h3>
+                    <h3 className="font-semibold text-sm mb-1">Free-plan option</h3>
                     <Link href={`/reviews/${freePick.slug}`} className="text-primary text-sm font-medium hover:underline">{freePick.name}</Link>
                     {knowledge?.bestFor.free && <p className="text-xs text-muted-foreground mt-1">{knowledge.bestFor.free}</p>}
                   </Card>
