@@ -265,19 +265,27 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                         <div className="grid sm:grid-cols-2 gap-2 mb-3">
                           <div>
                             <p className="text-xs font-semibold text-success mb-1 flex items-center gap-1"><CheckCircle2 size={12} /> Pros</p>
-                            <ul className="space-y-1">
-                              {pick.pros.map((pro, j) => (
-                                <li key={j} className="text-xs text-muted-foreground flex items-start gap-1"><span className="text-success mt-0.5">•</span>{safePickText(pick, pro)}</li>
-                              ))}
-                            </ul>
+                            {pick.pros.length > 0 ? (
+                              <ul className="space-y-1">
+                                {pick.pros.map((pro, j) => (
+                                  <li key={j} className="text-xs text-muted-foreground flex items-start gap-1"><span className="text-success mt-0.5">•</span>{safePickText(pick, pro)}</li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p className="text-xs leading-relaxed text-muted-foreground">No evidence-backed strengths are recorded for {pick.toolName} in this shortlist yet. Test the workflow against the selection criteria before treating it as a benefit.</p>
+                            )}
                           </div>
                           <div>
                             <p className="text-xs font-semibold text-error mb-1 flex items-center gap-1"><XCircle size={12} /> Cons</p>
-                            <ul className="space-y-1">
-                              {pick.cons.map((con, j) => (
-                                <li key={j} className="text-xs text-muted-foreground flex items-start gap-1"><span className="text-error mt-0.5">•</span>{safePickText(pick, con)}</li>
-                              ))}
-                            </ul>
+                            {pick.cons.length > 0 ? (
+                              <ul className="space-y-1">
+                                {pick.cons.map((con, j) => (
+                                  <li key={j} className="text-xs text-muted-foreground flex items-start gap-1"><span className="text-error mt-0.5">•</span>{safePickText(pick, con)}</li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p className="text-xs leading-relaxed text-muted-foreground">No specific limitations are recorded for {pick.toolName} in this shortlist yet. Check plan restrictions, data portability, support boundaries, and failure handling before adoption.</p>
+                            )}
                           </div>
                         </div>
                         {reviewHref(pick.toolSlug) && (
