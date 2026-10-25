@@ -26,7 +26,7 @@ const reviewBySlug = new Map(reviews.map(({ data }) => [data.slug, data]))
 const findings = []
 const summary = {
   reviews: { total: reviews.length, missingClaim: 0, missingRating: 0, invalidRating: 0, unverifiedStoredRating: 0, missingProsOrCons: 0 },
-  comparisons: { total: comparisons.length, missingDescription: 0, missingVerdict: 0, missingFeatureRows: 0, missingToolLinks: 0, invalidWinner: 0, winnerNeedsEvidence: 0, linkedReviewRatingGaps: 0, unverifiedFeatureScore: 0 },
+  comparisons: { total: comparisons.length, missingDescription: 0, missingVerdict: 0, missingFeatureRows: 0, missingToolLinks: 0, invalidWinner: 0, missingWinner: 0, winnerNeedsEvidence: 0, linkedReviewRatingGaps: 0, unverifiedFeatureScore: 0 },
 }
 
 function add(type, slug, issue, detail = "") {
@@ -75,7 +75,10 @@ for (const { file, data } of comparisons) {
     summary.comparisons.missingToolLinks++
     add("comparison", slug, "linked-review-missing", [!tool1 ? data.tool1Slug || "tool1Slug missing" : "", !tool2 ? data.tool2Slug || "tool2Slug missing" : ""].filter(Boolean).join(", "))
   }
-  if (data.winner != null && data.winner !== "") {
+  if (!nonEmpty(data.winner)) {
+    summary.comparisons.missingWinner++
+    add("comparison", slug, "missing-winner", "record a provisional product pick or an explicit use-case-dependent verdict")
+  } else {
     const normalizedWinner = String(data.winner).trim().toLowerCase()
     const noUniversalWinner = new Set(["depends on use case", "use-case dependent", "no universal winner", "no single winner", "none", "n/a", "not applicable"])
     if (!noUniversalWinner.has(normalizedWinner)) {
@@ -116,7 +119,8 @@ const structuralIssues = new Set([
   "missing-description",
   "missing-verdict",
   "missing-feature-rows",
-  "missing-tool-links",
+  "linked-review-missing",
+  "missing-winner",
   "winner-does-not-match-compared-tools",
 ])
 const criticalFindings = findings.filter((item) => structuralIssues.has(item.issue))
