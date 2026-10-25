@@ -7,7 +7,7 @@
   "tool2": "Jira",
   "tool1Slug": "linear",
   "tool2Slug": "jira",
-  "winner": "Depends on team workflow",
+  "winner": "Linear",
   "features": [
     {
       "name": "Core workflow",
@@ -80,7 +80,7 @@
       "tool2Detail": "Use Atlassian's official pricing page and calculate annual cost for the required seats, products, and marketplace apps: https://www.atlassian.com/software/jira/pricing."
     }
   ],
-  "verdict": "Linear and Jira can both support software issue tracking, but the better fit depends on how much structure and customization your team needs. Start with Linear if your team prefers a focused product-development workflow and wants to test whether its built-in conventions cover the work. Start with Jira if you need configurable issue types, project workflows, or an established Atlassian environment. These are evaluation starting points, not a universal ranking. Recreate a representative sprint in both tools, verify integrations and administration requirements on the intended plans, and compare annual cost plus migration and maintenance effort.",
+  "verdict": "Provisional recommendation: start with Linear if your team wants a focused product-development workflow and its built-in conventions cover your needs. Jira may be the better fit when you need configurable issue types, project workflows, or an established Atlassian environment. This is not a verified universal winner. Recreate a representative sprint in both tools and compare workflow fit, integrations, administration, annual cost, migration effort, and maintenance before deciding.",
   "faqs": [
     {
       "question": "What is the main difference between Linear and Jira?",
@@ -120,5 +120,6 @@
     "best-project-management-software-2026",
     "saas-metrics-guide"
   ],
-  "lastUpdated": "2026-10-09"
+  "lastUpdated": "2026-10-09",
+  "winnerVerified": false
 }
