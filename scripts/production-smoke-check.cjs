@@ -208,6 +208,7 @@ async function main() {
           }
         } else if (/<urlset\b/i.test(xml)) {
           for (const target of children) {
+            if (pageTargets.size >= maxPages) break
             try {
               const parsed = new URL(target)
               if (parsed.origin === expectedOrigin) pageTargets.add(cleanUrl(target))
@@ -237,7 +238,7 @@ async function main() {
           }
         }
       }))
-      const limitReached = sitemapQueue.length > 0 || visitedSitemaps.size >= maxSitemaps || pageTargets.size >= maxPages
+      const limitReached = sitemapQueue.length > 0 || pageTargets.size >= maxPages
       const allFailures = [...sitemapFailures, ...pageFailures]
       report(
         "sitemap target HTTP status",
