@@ -17,12 +17,12 @@
     "Assess extensibility for custom workflows, automation, APIs and future analytics needs"
   ],
   "commonMistakes": [
-    "Building analytics infrastructure without understanding the specific business questions to answer, resulting in data platforms that collect everything but deliver insights relevant to strategic decisions",
-    "Underinvesting in data quality and governance, creating environments where different teams produce conflicting metrics and nobody trusts the data enough to make important decisions",
-    "Choosing a BI tool based on visualization aesthetics rather than data connectivity and analytical horsepower, creating beautiful dashboards that can't answer deeper analytical questions",
-    "Centralizing all analytics through a single team bottleneck, creating long backlogs for basic reports and preventing business users from doing self-service data exploration",
-    "Neglecting data pipeline monitoring and alerting, resulting in undetected data quality issues, broken pipelines, and stale data in dashboards that erode trust in the analytics platform",
-    "Scaling data infrastructure without considering data lifecycle management, incurring escalating storage costs for data that is rarely accessed while missing opportunities to derive value from historical data"
+    "Comparing dashboards before agreeing on metric definitions, source-of-truth systems, and ownership.",
+    "Assuming connectors deliver complete or real-time data without checking refresh schedules, field coverage, and failure behavior.",
+    "Ignoring query, storage, retention, and seat limits when estimating the cost of production workloads.",
+    "Giving broad access to sensitive datasets without testing role-based permissions and audit logs.",
+    "Building reports that cannot be exported, reproduced, or maintained when the original author leaves.",
+    "Treating correlation or a visual trend as proof of causation without validating the underlying data."
   ],
   "decisionFactors": [
     {
@@ -57,9 +57,9 @@
     }
   ],
   "buyerJourney": {
-    "awareness": "Organizations typically begin evaluating analytics and data platforms when they face specific data challenges: business leaders lack visibility into key performance metrics, data analysts spend most of their time wrangling data rather than analyzing it, different departments report conflicting numbers, or the organization is growing beyond the capabilities of spreadsheets. Initial research includes reading industry analyst reports, evaluating open-source options, and exploring cloud providers' data platform offerings. Peer recommendations at industry events and in professional communities significantly influence initial vendor consideration. Many organizations start with BI tools like Tableau or Power BI connected to existing databases before realizing they need more comprehensive infrastructure for data management.",
-    "consideration": "During evaluation, data and analytics teams conduct proof-of-concept projects with 2-4 platforms, using representative datasets and use cases. Technical evaluation focuses on data loading speed, query performance, integration complexity, and the learning curve for both data engineers and business users. Data governance features are evaluated by security and compliance teams. Business stakeholders participate in dashboard reviews to assess whether the platform can answer their key questions intuitively. Total cost of ownership analysis includes infrastructure costs, licensing, implementation services, and the opportunity cost of team training and migration from existing tools.",
-    "decision": "The final decision balances technical performance, business usability, and total cost of ownership. Organizations consider the platform's ability to grow with the organization, the vendor's product roadmap, and the strength of the partner ecosystem. Implementation typically begins with a specific use case or department, establishing best practices and demonstrating ROI before broader rollout. Data migration from legacy systems is carefully planned, with data validation and reconciliation processes to ensure trust in the new platform. Success is measured by metrics like time-to-insight, the percentage of data-driven decisions, and the reduction in time spent on data preparation."
+    "awareness": "Teams usually start evaluating analytics software when they cannot trust a metric, join data across systems, or answer a recurring business question quickly. Define the decision to improve, the people who will use the output, and the authoritative source for each key metric before choosing a platform.",
+    "consideration": "Use a representative dataset and test ingestion, transformation, data freshness, access controls, lineage, dashboard usability, exports, and failure handling. Compare the same questions and data across shortlisted tools, and verify connector limits, retention, query costs, and governance requirements in current vendor documentation.",
+    "decision": "Choose the option that produces reproducible answers with manageable operating effort. Document metric definitions, ownership, access, refresh expectations, and recovery procedures; pilot on a bounded use case and confirm that results reconcile with trusted source records before expanding."
   },
   "pricingOverview": "Analytics and data software uses different pricing models depending on the category. BI tools may charge per user, while data platforms often use consumption-based pricing. Compare seats, compute, storage, usage limits, data movement, support and implementation costs against your expected workload.",
   "bestFor": {

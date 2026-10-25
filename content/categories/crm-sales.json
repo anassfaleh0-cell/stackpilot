@@ -15,12 +15,12 @@
     "Check for AI and intelligence features including lead scoring, sentiment analysis on communications, deal risk alerts, conversation intelligence, and automated forecasting that can improve sales team productivity"
   ],
   "commonMistakes": [
-    "Purchasing a CRM without a clear data strategy, leading to a system filled with duplicate, incomplete, and outdated records that undermines trust and usage across the organization",
-    "Over-customizing the CRM during implementation before understanding how the sales team actually works, creating a complex system that slows down reps rather than accelerating their workflow",
-    "Implementing CRM without executive sponsorship and usage mandates, resulting in low adoption rates that leave the CRM incomplete and unreliable as a single source of truth",
-    "Choosing a CRM based on features rather than user experience, forcing sales reps to spend more time on data entry than selling and leading to shadow systems in spreadsheets",
-    "Neglecting ongoing data hygiene and maintenance, allowing the CRM to degrade over time with stale contacts, closed-lost deals without reasons, and outdated opportunity values",
-    "Failing to integrate CRM with marketing automation and customer success platforms, creating data silos that prevent a unified view of the customer lifecycle and handoff issues between departments"
+    "Migrating contacts without deduplicating records or mapping field ownership and history.",
+    "Automating a poorly defined sales process and making inconsistent data harder to correct.",
+    "Comparing seat prices while overlooking contact tiers, add-ons, onboarding, API limits, and support.",
+    "Failing to test lead routing, permissions, audit history, and handoffs between sales and service teams.",
+    "Using pipeline dashboards before teams agree on stage definitions and qualification criteria.",
+    "Leaving data exports, retention, and offboarding procedures until after signing a contract."
   ],
   "decisionFactors": [
     {
@@ -65,9 +65,9 @@
     }
   ],
   "buyerJourney": {
-    "awareness": "Organizations typically start evaluating CRM solutions when they experience specific pain points: leads falling through the cracks, sales reps maintaining duplicate spreadsheets, leadership lacking visibility into the pipeline, or inconsistent sales processes across the team. Initial research begins with broad searches comparing top CRM platforms, reading analyst reports from Gartner and Forrester, and checking user reviews on G2 and TrustRadius. Many buyers start with free or freemium CRM versions from HubSpot, Zoho, or Freshsales, using them to understand CRM functionality before evaluating more sophisticated platforms. Peer recommendations and industry-specific case studies play a significant role in initial vendor shortlisting.",
-    "consideration": "During evaluation, organizations typically invite 3-4 vendors for demonstrations, providing a detailed sales process walkthrough to see how each platform handles their specific workflows. Hands-on trials with real data allow sales operations teams and select power users to assess usability, data import quality, and customization capabilities. Reference calls with similar companies help validate vendor claims about scalability, support quality, and ROI. Technical evaluations cover integration requirements, data migration planning, security reviews, and compliance verification. Implementation partners are often evaluated during this phase, particularly for complex enterprise deployments.",
-    "decision": "The final decision balances functionality, user experience, and total cost of ownership. Organizations consider deployment timeline, data migration complexity, change management requirements, and the vendor's long-term product direction. Pricing negotiations typically center on per-user costs for different license types (full users, sales-only, read-only), implementation fees, and annual contract terms. The chosen vendor is expected to provide a detailed implementation plan with clear milestones, success metrics, and ongoing support structure. Many organizations start with a phased rollout, beginning with a pilot team or region before expanding globally."
+    "awareness": "Define the sales process from lead capture through qualification, opportunity stages, handoff, renewal, and reporting. Identify which records are authoritative, which teams own them, and where manual updates or missed follow-ups currently cause problems.",
+    "consideration": "Test a realistic pipeline with duplicate records, imports, lead routing, permissions, activity logging, email/calendar integrations, forecasting, and reporting. Verify automation limits, data export, API access, consent handling, and total cost at the expected seat and contact volume.",
+    "decision": "Choose the CRM that supports the team's actual process without forcing unnecessary complexity. Pilot with a representative group, agree on required fields and stage definitions, validate migration and rollback, and review adoption and data quality before a full rollout."
   },
   "pricingOverview": "CRM pricing ranges from free to several hundred dollars per user per month depending on features and scale. Free CRM tiers from HubSpot, Zoho, Freshsales, and Bitrix24 offer basic contact management and pipeline tracking suitable for solopreneurs and very small teams. Entry-level paid plans range from $9-$25 per user per month for essential features including email integration, basic automation, and standard reports. Mid-market plans cost $30-$80 per user per month and add advanced features like workflow automation, AI-powered insights, multiple pipelines, and custom reporting. Enterprise CRM plans from Salesforce, Microsoft Dynamics, and Oracle range from $100-$300+ per user per month, including advanced AI, analytics, extensive customization, dedicated support, and premium security features. Implementation costs for enterprise CRM deployments can range from $20,000 to $500,000+ depending on complexity, customization, and data migration needs. Hidden costs include integration development, training programs, ongoing administration, and the opportunity cost of low adoption.",
   "bestFor": {

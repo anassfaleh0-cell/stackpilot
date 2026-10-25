@@ -15,12 +15,12 @@
     "Consider the availability of pre-trained models, model marketplaces, and transfer learning capabilities that can significantly reduce time-to-value for common use cases"
   ],
   "commonMistakes": [
-    "Starting with AI without a clear business problem, leading to solutions in search of a problem and wasted investment in models that never get deployed",
-    "Underestimating data quality requirements and the effort needed for data preparation, labeling, and feature engineering, which typically accounts for 80% of ML project time",
-    "Neglecting model monitoring and governance in production, resulting in silent model degradation as data distributions shift over time",
-    "Over-relying on AutoML without understanding model limitations, interpretability, or bias, leading to deployment of models that make unreliable or unfair decisions",
-    "Failing to involve domain experts and end users in the model development process, producing technically sound models that solve the wrong problem or don't fit into existing workflows",
-    "Ignoring the total cost of ownership including ongoing compute costs for training and inference, data storage, and the team needed to maintain production ML systems"
+    "Choosing a model from a polished demo instead of testing representative tasks and edge cases.",
+    "Reporting benchmark scores without checking whether the benchmark matches the team's real workload.",
+    "Ignoring inference, storage, evaluation, monitoring, and human-review costs when comparing plan prices.",
+    "Sending confidential or personal data to a service before reviewing retention, training, and access terms.",
+    "Deploying generated outputs without evaluation, traceability, or an escalation path for errors.",
+    "Assuming a model update will preserve output quality without regression testing."
   ],
   "decisionFactors": [
     {
@@ -65,9 +65,9 @@
     }
   ],
   "buyerJourney": {
-    "awareness": "Organizations typically begin exploring AI/ML platforms when they identify a specific business challenge that could benefit from predictive or generative capabilities, such as reducing customer churn, automating document processing, or personalizing recommendations. Initial research often starts with broad searches around AI use cases in their industry, leading them to vendor comparison content, industry reports from Gartner and Forrester, and case studies from similar companies. Many buyers first encounter AI platforms through cloud provider marketplaces, tech conference keynotes, or industry-specific AI applications that highlight concrete ROI stories.",
-    "consideration": "During evaluation, buyers typically narrow their options to 3-5 platforms and begin hands-on trials using representative datasets and use cases. This phase involves deep technical evaluation by data science and engineering teams, who assess model performance, development workflow, deployment options, and integration requirements. Organizations often run proof-of-concept projects on 1-2 platforms, comparing metrics like model accuracy, training time, inference latency, and cost per prediction. Security and compliance teams conduct thorough reviews of data handling, access controls, and regulatory alignment. Buyer references and case studies from similar organizations play a critical role in validating vendor claims.",
-    "decision": "The final decision balances technical fit, total cost of ownership, and strategic alignment. Organizations consider whether the platform locks them into a single cloud provider, the flexibility to use open-source models alongside proprietary ones, and the vendor's roadmap for emerging capabilities like generative AI and multi-modal models. Pricing negotiations often focus on commit tiers, volume discounts for inference compute, and inclusion of training costs. The chosen platform typically undergoes a pilot deployment with a single use case before organization-wide rollout, with success measured against clearly defined KPIs including model accuracy, time-to-deployment, and business impact metrics."
+    "awareness": "Start with a concrete task and a measurable baseline: quality, latency, cost per task, human review time, and the consequences of an incorrect output. Decide which inputs may be shared with a vendor and which decisions must remain under human control.",
+    "consideration": "Run the same representative and edge-case prompts or datasets across candidates. Measure factual accuracy, consistency, refusal behavior, latency, token or usage cost, privacy controls, integration effort, monitoring, and how well outputs fit the existing workflow.",
+    "decision": "Select the smallest system that meets the quality and risk threshold at sustainable cost. Keep human review for consequential outputs, document known failure modes, test version changes, and establish monitoring and rollback before production rollout."
   },
   "pricingOverview": "AI/ML platform pricing varies widely by deployment model and usage patterns. Cloud-based ML platforms like AWS SageMaker, Azure Machine Learning, and Google Vertex AI charge for compute hours (training and inference), data storage, and API calls, with typical costs ranging from $0.10 to $5 per hour for training compute and $0.01 to $0.10 per 1,000 inference requests. SaaS AutoML platforms like DataRobot and H2O.ai often use subscription pricing starting at $5,000-$50,000 per year based on data volume, number of models, and user seats. API-based AI services like OpenAI, Anthropic, and Google's foundation model APIs charge per token or per API call, with GPT-4 class models costing approximately $0.03-$0.06 per 1,000 input tokens and $0.06-$0.12 per 1,000 output tokens. Open-source frameworks like TensorFlow, PyTorch, and scikit-learn are free but require infrastructure costs for compute and storage. Enterprise ML platforms with full MLOps capabilities and on-premises deployment options can cost $100,000-$500,000+ annually. Most platforms offer free tiers with limited compute or API calls for evaluation.",
   "bestFor": {

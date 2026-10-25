@@ -16,12 +16,12 @@
     "Run a time-boxed pilot with written success criteria and a clear owner; do not choose solely from vendor demos or feature-list length."
   ],
   "commonMistakes": [
-    "Investing in marketing software without a documented strategy, leading to disparate tools used for isolated activities rather than a coordinated marketing engine driving measurable business outcomes",
-    "Focusing on lead volume over lead quality, optimizing campaigns for form fills and downloads rather than qualified pipeline and revenue, resulting in high marketing-sourced lead counts but low conversion rates",
-    "Neglecting SEO fundamentals in favor of shortcuts and black-hat tactics, pursuing quick ranking gains through keyword stuffing, link farms, or duplicate content that ultimately results in penalties",
-    "Failing to properly configure tracking and attribution, relying on last-click attribution models that undervalue top-of-funnel activities and overvalue closing channels, masking the true impact of marketing programs",
-    "Using marketing automation to send too many generic emails, leading to list fatigue, high unsubscribe rates, and spam complaints that damage sender reputation and email deliverability",
-    "Implementing complex marketing technology stacks without proper integration and data hygiene, creating fragmented customer views and inconsistent messaging across channels"
+    "Buying an all-in-one suite before identifying the workflow or decision that needs improvement.",
+    "Treating third-party traffic estimates or vendor market-share claims as first-party performance data.",
+    "Comparing feature lists without testing coverage, freshness, export quality, and integration behavior.",
+    "Using attribution reports before validating event definitions, consent handling, and conversion tracking.",
+    "Ignoring seat, contact, tracked-keyword, crawl, API, and retention limits in total-cost calculations.",
+    "Scaling automation or outreach without reviewing deliverability, consent, data quality, and monitoring."
   ],
   "decisionFactors": [
     {
@@ -56,9 +56,9 @@
     }
   ],
   "buyerJourney": {
-    "awareness": "Marketers typically begin searching for new tools when they identify specific gaps in their current stack: struggling to scale personalized email campaigns, lack of visibility into which channels drive revenue, inability to track SEO performance effectively, or growing marketing spend without clear attribution. Initial research involves reading industry blogs like Moz, Search Engine Journal, and Marketing Land, checking peer recommendations in marketing communities, and exploring comparison content on G2 and Capterra. Many buyers start with free tools like Google Analytics, Google Search Console, and Mailchimp's free tier, using them to understand basic functionality before evaluating more comprehensive platforms.",
-    "consideration": "During evaluation, marketing teams create detailed requirements documents mapping their current workflows and pain points against vendor capabilities. Shortlisted vendors provide product demonstrations focused on specific use cases relevant to the buyer's industry and business model. Free trials are extensively tested with real marketing campaigns, CRM data, and target audiences. The evaluation team typically includes marketing operations, content marketers, SEO specialists, and analytics stakeholders. Integration testing is a critical milestone, particularly the quality of CRM sync, the depth of analytics data available, and the ability to connect with advertising platforms. Evaluation criteria are weighted based on the maturity and sophistication of the marketing organization.",
-    "decision": "The final decision is driven by a blend of functional fit, user experience, and total cost of ownership. Marketing leaders consider the platform's ability to grow with the organization, the vendor's product roadmap, and the quality of customer support. Pricing negotiations often center on contact tiers, feature packages, and implementation support. Many organizations start with a single use case or department, proving ROI before expanding the platform's role across the entire marketing operation. Success metrics include improvements in lead-to-revenue conversion rates, cost per lead, email engagement rates, and organic traffic growth."
+    "awareness": "Teams typically evaluate marketing and SEO software when they need clearer search visibility, technical diagnostics, campaign operations, lead workflows, or trustworthy attribution. Define the business question and first-party data source before comparing vendor dashboards or estimated market data.",
+    "consideration": "Test shortlisted tools on the same domains, keyword groups, campaigns, or CRM workflow. Compare coverage, freshness, export quality, integrations, data definitions, permissions, usage limits, and total cost; verify current plan details in official vendor documentation.",
+    "decision": "Select the smallest stack that reliably answers the required questions and fits the team's workflow. Record success criteria, reconcile important metrics with Search Console, analytics, CRM, or campaign records where applicable, and review results after a time-boxed pilot."
   },
   "pricingOverview": "Marketing and SEO software ranges from free tools and entry-level plans to enterprise platforms with custom pricing. Compare the cost at your actual usage level: seats, contacts, tracked keywords, projects, automation volume, reporting, integrations, and support can materially change total cost.",
   "bestFor": {
