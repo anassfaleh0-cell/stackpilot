@@ -101,8 +101,11 @@ jobs:
             zone_id="$(printf '%s' "$zone_response" | jq -r '.result[0].id // empty' 2>/dev/null || true)"
           fi
           if [ -z "$zone_id" ]; then
-            echo "::warning::Cloudflare cache purge could not resolve the zone. Set the CLOUDFLARE_ZONE_ID secret and grant Zone Cache Purge permissions. Post-deploy checks use unique query strings to verify the deployed HTML."
-            exit 0
+            # This zone ID is a non-secret identifier for pilotstack.online. Use it only
+            # after the configured secret and API lookup both fail, so a Zone:Read scope
+            # is not required just to attempt the separately authorized cache purge.
+            zone_id="815a67bf4ddf51f3c4e1508d15176071"
+            echo "::notice::Using the configured PilotStack zone ID fallback for cache purge."
           fi
           purge_response="$(curl --silent --show-error --retry 2 --retry-all-errors --retry-delay 2 \
             --request POST \
