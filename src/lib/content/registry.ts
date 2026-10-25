@@ -696,7 +696,26 @@ function buildReviewSections(review: ReviewContent): ContentSection[] {
     { title: "Who should evaluate this tool", type: "text", body: "The recorded target users are " + (targetUsers.join(", ") || "not specified") + ", and the listed industries are " + (industries.join(", ") || "not specified") + ". These fields describe the available dataset, not a promise that the product fits every organization in those groups. Compare your security, accessibility, localization, administration, reporting, and support requirements with the current product documentation. If your team has unusual constraints, include them in the pilot instead of relying on broad market positioning." },
     { title: "A practical pilot checklist", type: "text", body: "Before committing, write down three to five must-have requirements and a pass/fail test for each. Use representative data, include the roles that will administer and use the product, test one failure case, and record integration behavior, data export quality, and total cost. Confirm current pricing and contract terms with the vendor. At the end of the pilot, document what worked, what required a workaround, what remains unverified, and whether the product is better than keeping the current process or choosing an alternative." },
   ]
-  return [...base, ...extra]
+  // The review template already renders dedicated rating, pros/cons, pricing, and
+  // buying-guidance blocks. Add generated sections only where authored content does
+  // not already cover the same topic; keep every authored section untouched.
+  const coveredByTitle: Array<{ generatedTitle: string; authoredTitle: RegExp }> = [
+    { generatedTitle: "Fit and workflow checks", authoredTitle: /workflow|decision|pilot|checklist|who should|fit/i },
+    { generatedTitle: "Feature coverage to verify", authoredTitle: /feature|capabilit/i },
+    { generatedTitle: "Integration and data movement", authoredTitle: /integrat|data movement|data flow/i },
+    { generatedTitle: "Pricing and plan limits", authoredTitle: /pricing|cost|plan limit/i },
+    { generatedTitle: "Implementation and adoption", authoredTitle: /implementation|adoption|migration|setup/i },
+    { generatedTitle: "Security and data handling", authoredTitle: /security|privacy|compliance|data handling/i },
+    { generatedTitle: "Who should evaluate this tool", authoredTitle: /who should|target user|industry|audience/i },
+    { generatedTitle: "A practical pilot checklist", authoredTitle: /pilot|acceptance criteria|decision checklist/i },
+  ]
+  const uniqueExtra = extra.filter((section) => {
+    // Pros and cons are already rendered as a dedicated component above the body.
+    if (section.title === "Recorded strengths and trade-offs") return false
+    const topic = coveredByTitle.find((item) => item.generatedTitle === section.title)
+    return !topic || !base.some((authored) => topic.authoredTitle.test(authored.title))
+  })
+  return [...base, ...uniqueExtra]
 }
 
 function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: ComparisonFeature[]): ComparisonFeature[] {
