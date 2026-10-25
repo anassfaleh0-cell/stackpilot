@@ -101,6 +101,37 @@ async function main() {
     report("statistics narrative provenance", noUnsourcedNarrativeFigures, "unaudited narrative figures are withheld from rendered statistics pages")
   }
 
+  // Validate rendered canonical tags against the configured canonical origin.
+  // HTTP 200 alone is insufficient when Google sees duplicate host/path variants.
+  const canonicalTargets = [
+    [home, "/"],
+    [contact, "/contact"],
+    [linear, "/reviews/linear"],
+    [aiWritingGuide, "/guides/how-to-choose-ai-writing-software"],
+    [pricingResearch, "/research/saas-pricing-benchmark-2026"],
+  ]
+  for (const [page, expectedPath] of canonicalTargets) {
+    if (!page || page.error) continue
+    const canonicalTag = [...page.body.matchAll(/<link\\b[^>]*>/gi)]
+      .map((match) => match[0])
+      .find((tag) => /\\brel=["']canonical["']/i.test(tag))
+    const canonicalHref = canonicalTag?.match(/\\bhref=["']([^"']+)["']/i)?.[1]
+    let canonicalOk = false
+    let canonicalDetail = "canonical link tag missing"
+    if (canonicalHref) {
+      try {
+        const canonicalUrl = new URL(canonicalHref, SITE_URL)
+        canonicalOk = canonicalUrl.origin === new URL(SITE_URL).origin &&
+          canonicalUrl.pathname.replace(/\\/$/, "") === expectedPath.replace(/\\/$/, "") &&
+          !canonicalUrl.search && !canonicalUrl.hash
+        canonicalDetail = canonicalUrl.href
+      } catch {
+        canonicalDetail = "canonical href is not a valid URL: " + canonicalHref
+      }
+    }
+    report("canonical " + expectedPath, canonicalOk, canonicalDetail)
+  }
+
   if (home && !home.error) {
     report("AdSense publisher meta", home.body.includes("ca-pub-" + PUBLISHER_ID), "homepage must advertise the same publisher ID as ads.txt")
   }
