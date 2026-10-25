@@ -191,6 +191,24 @@ function compareRecency<T extends { slug: string }>(a: T, b: T): number {
   return byDate !== 0 ? byDate : a.slug.localeCompare(b.slug)
 }
 
+const PRIORITY_USE_CASES_BY_CATEGORY: Record<string, string[]> = {
+  [normalizeCategory("Marketing & SEO")]: ["best-seo-for-agencies"],
+  [normalizeCategory("HR & People")]: ["best-hr-for-small-business"],
+  [normalizeCategory("CRM & Sales")]: ["best-crm-for-small-business"],
+}
+
+function compareUseCaseRecency(category: string, a: { slug: string; lastUpdated?: string }, b: { slug: string; lastUpdated?: string }): number {
+  const priority = PRIORITY_USE_CASES_BY_CATEGORY[normalizeCategory(category)] ?? []
+  const aRank = priority.indexOf(a.slug)
+  const bRank = priority.indexOf(b.slug)
+  if (aRank !== bRank) {
+    if (aRank === -1) return 1
+    if (bRank === -1) return -1
+    return aRank - bRank
+  }
+  return compareRecency(a, b)
+}
+
 function buildCategoryIndex(
   guides: { slug: string; category: string }[],
   comparisons: { slug: string; category: string }[],
@@ -281,7 +299,7 @@ export function getRelatedByCategory(
             ? "related"
             : null,
     toItem: (u) => ({ slug: u.slug, title: u.title, type: "use-case", category: u.category }),
-    compare: compareRecency,
+    compare: (a, b) => compareUseCaseRecency(category, a, b),
   }, excludeSlug, maxPerType)
 
   const hubs = buildBucket({
