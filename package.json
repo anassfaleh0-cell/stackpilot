@@ -25,7 +25,7 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "check:links": "npx linkinator http://localhost:3000 --recurse --skip 'mailto:|tel:|linkedin.com'",
-    "lint:content": "node scripts/lint-content.js",
+    "lint:content": "node scripts/lint-content.js && node scripts/audit-review-comparison-integrity.js",
     "audit:guides": "node scripts/audit-guide-quality.js",
     "check:all": "npm run test && npm run build",
     "seo:audit": "node scripts/seo-health-check.js",
