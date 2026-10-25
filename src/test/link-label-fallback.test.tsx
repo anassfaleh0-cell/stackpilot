@@ -7,8 +7,8 @@ import { getReadableLinkFallbackLabel } from "@/lib/content/link-label"
 
 describe("empty internal-link labels", () => {
   it("derives readable labels from internal route slugs", () => {
-    expect(getReadableLinkFallbackLabel("/reviews/notion-vs-confluence")).toBe("Notion vs confluence")
-    expect(getReadableLinkFallbackLabel("/guides/crm_migration_checklist?ref=internal")).toBe("Crm migration checklist")
+    expect(getReadableLinkFallbackLabel("/reviews/notion-vs-confluence")).toBe("Notion vs Confluence")
+    expect(getReadableLinkFallbackLabel("/guides/crm_migration_checklist?ref=internal")).toBe("CRM Migration Checklist")
     expect(getReadableLinkFallbackLabel("/")).toBe("Related content")
   })
 
