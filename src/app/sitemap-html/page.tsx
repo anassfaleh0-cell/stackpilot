@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/metadata"
 import { getAllReviews, getAllComparisons, getAllGuides, getAllBest, getAllAlternatives, getAllUseCases, getAllIndustries, getAllHubs, getAllBlogPosts, getAllResearch, getAllStatistics, getAllGlossaryTerms } from "@/lib/content/registry"
 import { isNoindexed } from "@/lib/noindex"
 import { isRetiredComparisonSlug } from "@/lib/sitemap/retired-comparisons"
-import { REDIRECTED_ALTERNATIVE_SLUGS, REDIRECTED_BEST_SLUGS } from "@/lib/sitemap/redirected-content"
+import { REDIRECTED_ALTERNATIVE_SLUGS, REDIRECTED_BEST_SLUGS, REDIRECTED_GUIDE_SLUGS, REDIRECTED_REVIEW_SLUGS } from "@/lib/sitemap/redirected-content"
 import Link from "next/link"
 
 export const metadata = createMetadata({
@@ -21,9 +21,9 @@ function isPublished<T extends { slug: string }>(record: T): boolean {
 }
 
 export default function SitemapPage() {
-  const reviews = getAllReviews().filter(r => isPublished(r) && !isNoindexed("reviews", r.slug))
+  const reviews = getAllReviews().filter(r => isPublished(r) && !REDIRECTED_REVIEW_SLUGS.has(r.slug) && !isNoindexed("reviews", r.slug))
   const comparisons = getAllComparisons().filter(c => isPublished(c) && !isRetiredComparisonSlug(c.slug) && !isNoindexed("comparisons", c.slug))
-  const guides = getAllGuides().filter(g => isPublished(g) && !isNoindexed("guides", g.slug))
+  const guides = getAllGuides().filter(g => isPublished(g) && !REDIRECTED_GUIDE_SLUGS.has(g.slug) && !isNoindexed("guides", g.slug))
   const best = getAllBest().filter(b => isPublished(b) && !REDIRECTED_BEST_SLUGS.has(b.slug))
   const alternatives = getAllAlternatives().filter(a => isPublished(a) && !REDIRECTED_ALTERNATIVE_SLUGS.has(a.slug))
   const useCases = getAllUseCases().filter(isPublished)
