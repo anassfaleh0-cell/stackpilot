@@ -5,7 +5,7 @@ import { BreadcrumbSchema, CollectionPageSchema, FAQSchema, ArticleSchema, WebPa
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import { getUseCase, getAllUseCases, getReview } from "@/lib/content/registry"
-import { truncate, formatDate } from "@/lib/utils"
+import { formatDate } from "@/lib/utils"
 import { InternalLinks } from "@/components/content/internal-links"
 import { RelatedReading } from "@/components/content/related-reading"
 import { notFound } from "next/navigation"
