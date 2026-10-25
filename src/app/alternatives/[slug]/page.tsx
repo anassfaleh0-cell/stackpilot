@@ -103,6 +103,12 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
     ? authoredFaqs
     : buildDecisionFaqs(alt.toolName, alt.category, originalToolReview?.description || `${alt.toolName} is listed in the ${alt.category.toLowerCase()} category. Check the vendor's current product documentation for its exact capabilities.`)
   const visibleSections = (alt.sections || []).map((section) => {
+    if (!section.body.trim()) {
+      return {
+        ...section,
+        body: `For ${alt.toolName}, evaluate this area against your actual tasks and constraints. Record the vendor source and date for material claims, test a representative workflow, and mark any detail that cannot be confirmed as unverified.`,
+      }
+    }
     if (isBoilerplateAlternativeCopy(section.body) && /overview/i.test(section.title)) {
       return {
         ...section,
@@ -218,7 +224,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
               {visibleSections.map((section, i) => (
                 <section key={i} className="mb-10">
                   <h2 className="text-2xl font-bold tracking-tight mb-4">{section.title}</h2>
-                  {section.type === "list" && section.items ? (
+                  {section.type === "list" && section.items?.length ? (
                     <>
                       <p className="text-muted-foreground leading-relaxed mb-4">{section.body}</p>
                       <ul className="space-y-2">
