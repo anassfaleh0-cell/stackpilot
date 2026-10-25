@@ -72,8 +72,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const guide = getGuide(slug)
   if (!guide) return {}
-  const seoDesc = truncate(guide.description, 160)
-  return createMetadata({ title: truncate(guide.title, 60), description: seoDesc, path: `/guides/${slug}`, ogType: "article", updatedAt: guide.lastUpdated, articleSection: guide.category, readingTime: guide.readingTime, noIndex: isNoindexed("guides", slug) })
+  // Let the shared metadata helper truncate at word boundaries; avoid pre-cutting source copy.
+  return createMetadata({ title: guide.title, description: guide.description, path: `/guides/${slug}`, ogType: "article", updatedAt: guide.lastUpdated, articleSection: guide.category, readingTime: guide.readingTime, noIndex: isNoindexed("guides", slug) })
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
