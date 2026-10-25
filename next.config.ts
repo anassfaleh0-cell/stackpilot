@@ -79,6 +79,7 @@ const nextConfig: NextConfig = {
     { source: "/rss.xml/feed", destination: "/rss.xml", permanent: true },
     { source: "/guide/:slug", destination: "/guides/:slug", permanent: true },
     { source: "/alternative/:slug", destination: "/alternatives/:slug", permanent: true },
+    { source: "/alternatives/free-alternatives-to-slack", destination: "/alternatives/slack-alternatives", permanent: true },
     { source: "/industry/:slug", destination: "/industries/:slug", permanent: true },
     { source: "/use-case/:slug", destination: "/use-cases/:slug", permanent: true },
     { source: "/hub/:slug", destination: "/hubs/:slug", permanent: true },
@@ -153,33 +154,9 @@ const nextConfig: NextConfig = {
       destination: "/blog/software-evaluation-playbook-2026",
       permanent: true,
     },
-    // The legacy startup productivity shortlist is intentionally unpublished because its scores,
-    // prices, and methodology claims are unverified. Consolidate it on the live productivity guide.
-    {
-      source: "/best/best-productivity-startups",
-      destination: "/best/best-productivity-tools",
-      permanent: true,
-    },
-    {
-      source: "/bests/best-productivity-startups",
-      destination: "/best/best-productivity-tools",
-      permanent: true,
-    },
     {
       source: "/bests/:slug",
       destination: "/best/:slug",
-      permanent: true,
-    },
-    // Consolidate the intentionally unpublished, unverified Grammarly alternatives draft
-    // onto the real, published Grammarly review rather than serving a dead-end 404.
-    {
-      source: "/alternatives/clickup-alternatives",
-      destination: "/reviews/clickup",
-      permanent: true,
-    },
-    {
-      source: "/alternatives/grammarly-alternatives",
-      destination: "/reviews/grammarly",
       permanent: true,
     },
     // Retire legacy individual-author URLs that no longer have matching public

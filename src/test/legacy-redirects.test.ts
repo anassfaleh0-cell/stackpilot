@@ -15,8 +15,7 @@ describe("legacy SEO redirects", () => {
       expect.objectContaining({ source: "/guides/software-evaluation-playbook-2026", destination: "/blog/software-evaluation-playbook-2026", permanent: true }),
       expect.objectContaining({ source: "/guides/software-evaluation-playbook", destination: "/blog/software-evaluation-playbook-2026", permanent: true }),
       expect.objectContaining({ source: "/bests/:slug", destination: "/best/:slug", permanent: true }),
-      expect.objectContaining({ source: "/best/best-productivity-startups", destination: "/best/best-productivity-tools", permanent: true }),
-      expect.objectContaining({ source: "/bests/best-productivity-startups", destination: "/best/best-productivity-tools", permanent: true }),
+      expect.objectContaining({ source: "/alternatives/free-alternatives-to-slack", destination: "/alternatives/slack-alternatives", permanent: true }),
       expect.objectContaining({ source: "/authors/sarah-chen", destination: "/authors/pilotstack-team", permanent: true }),
     ]))
   })
