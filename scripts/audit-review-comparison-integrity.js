@@ -103,6 +103,9 @@ for (const { file, data } of comparisons) {
   }
 }
 
+const missingWinnerRecords = findings.filter((item) => item.issue === "missing-winner")
+console.log(`Comparisons missing a stored winner (${missingWinnerRecords.length}):`)
+for (const item of missingWinnerRecords) console.log(item.slug)
 console.log("PilotStack review/comparison integrity audit (report-only; no source data changed)")
 console.log(JSON.stringify(summary, null, 2))
 console.log("\nFindings (first 300):")
