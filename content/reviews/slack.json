@@ -110,7 +110,7 @@
     },
     {
       "question": "Does PilotStack publish a verified rating for Slack?",
-      "answer": "This page does not publish an independently verified aggregate rating or third-party review count because a current, auditable source trail is not recorded for those figures. We do not present an invented score as customer sentiment. Use the practical criteria in this review to assess fit."
+      "answer": "This page does not publish an independently verified third-party aggregate rating or review count. Legacy PilotStack editorial score: 4.5/5. This stored score and its category dimensions are retained provisionally for transparency; their evidence and calculation still need revalidation. This is not a third-party review average. Use the practical criteria in this review to assess fit."
     },
     {
       "question": "How much does Slack cost?",
@@ -212,9 +212,30 @@
   "whoShouldUse": "Slack is ideal for small to mid-size teams that need a reliable communication solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
   "whoShouldNotUse": "Slack is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives.",
   "wordCount": 309,
-  "rating": null,
+  "rating": 4.5,
   "reviewCount": null,
-  "ratings": [],
+  "ratings": [
+    {
+      "label": "Features",
+      "score": 4.6
+    },
+    {
+      "label": "Ease of Use",
+      "score": 4.5
+    },
+    {
+      "label": "Support",
+      "score": 4.1
+    },
+    {
+      "label": "Value",
+      "score": 4
+    },
+    {
+      "label": "Performance",
+      "score": 4.5
+    }
+  ],
   "ratingVerified": false,
   "reviewCountVerified": false,
   "priceRangeVerified": false,
