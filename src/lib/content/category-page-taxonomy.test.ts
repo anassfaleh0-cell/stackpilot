@@ -11,6 +11,8 @@ describe("category page taxonomy regression", () => {
     expect(source).toContain('categoryMatches(c.category, category.name)')
     expect(source).toContain('categoryMatches(p.category, category.name)')
     expect(source).toContain('categoryMatches(t.category, category.name)')
+    expect(source).toContain('isContentAvailable("blog", p.slug)')
+    expect(source).toContain('isContentAvailable("glossary", t.slug)')
     expect(source).toContain("Comparison to read")
     expect(source).not.toContain(">Enterprise option</h3>")
     expect(source).toContain("Free-plan option")
