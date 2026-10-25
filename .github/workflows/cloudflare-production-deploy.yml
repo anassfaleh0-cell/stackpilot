@@ -156,8 +156,8 @@ jobs:
           curl --silent --show-error --fail --location --header 'Cache-Control: no-cache' "$xero_url" -o /tmp/pilotstack-xero.html
           curl --silent --show-error --fail --location --header 'Cache-Control: no-cache' "$notion_url" -o /tmp/pilotstack-notion.html
           curl --silent --show-error --fail --location --header 'Cache-Control: no-cache' "$chatgpt_url" -o /tmp/pilotstack-chatgpt.html
-          grep -Fq 'Cloud accounting to evaluate for bookkeeping' /tmp/pilotstack-xero.html
-          grep -Fq 'Notion is evaluated here for documentation, knowledge bases' /tmp/pilotstack-notion.html
+          grep -Fq 'Create a customer invoice, record a supplier bill' /tmp/pilotstack-xero.html
+          grep -Fq 'Notion is a candidate to evaluate for documentation, knowledge bases' /tmp/pilotstack-notion.html
           grep -Fq 'An editorial overview of ChatGPT' /tmp/pilotstack-chatgpt.html
           if grep -Eiq 'over 4 million subscribers|160\+ currencies|70-85% of transactions|12-24 hours on the Starter tier' /tmp/pilotstack-xero.html; then
             echo "Stale or unsupported Xero claims detected in live HTML"
