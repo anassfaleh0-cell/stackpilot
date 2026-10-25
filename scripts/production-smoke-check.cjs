@@ -82,7 +82,7 @@ async function main() {
       !linear.body.includes("The displayed overall score is calculated from the recorded category ratings")
     const honestScoring = hasReviewScorecard && hasHonestScoreDisclosure && noUnsupportedAggregateClaim
     report("review capability claims", noUnsupportedFaq, "unverified integration/platform FAQs are not rendered")
-    report("review scoring disclosure", honestScoring, "scorecard is rendered, any legacy score is labelled provisional or missing, and unsupported aggregate-score claims are absent")
+    report("review scoring disclosure", honestScoring, "scorecard=" + hasReviewScorecard + ", accepted provenance disclosure=" + hasHonestScoreDisclosure + ", unsupported aggregate claim absent=" + noUnsupportedAggregateClaim)
   }
   if (aiWritingGuide && !aiWritingGuide.error) {
     const usefulGuide = aiWritingGuide.body.includes("Build a representative test set") &&
