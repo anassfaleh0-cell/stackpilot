@@ -60,12 +60,31 @@
     }
   ],
   "selectionCriteria": [
-    "Confirm country, employer legal-entity eligibility, employee locations, and supported payroll jurisdictions before comparing feature lists.",
-    "Validate payroll tax filing, benefits administration, and employment-compliance workflows with official vendor documentation or qualified local advisers.",
-    "Compare employee records, onboarding, time off, document handling, self-service, reporting, and permission controls against real tasks.",
-    "Check integrations with accounting, identity, scheduling, benefits, and existing business systems; test the data flow where possible.",
-    "Request a quote for current headcount and expected growth, including base fees, per-employee costs, payroll, benefits, time tracking, onboarding, implementation, and support.",
-    "Treat editorial ratings as directional selection aids; verify product capabilities, current plans, and support commitments before purchase."
+    {
+      "factor": "Jurisdiction and worker eligibility",
+      "importance": "Critical",
+      "description": "Confirm country, employer legal-entity eligibility, employee locations, and supported payroll jurisdictions before comparing feature lists."
+    },
+    {
+      "factor": "Payroll and compliance workflows",
+      "importance": "Critical",
+      "description": "Validate payroll tax filing, benefits administration, and employment-compliance workflows with official vendor documentation or qualified local advisers."
+    },
+    {
+      "factor": "Core HR workflows and self-service",
+      "importance": "Critical",
+      "description": "Compare employee records, onboarding, time off, document handling, self-service, reporting, and permission controls against real tasks."
+    },
+    {
+      "factor": "Integrations and data portability",
+      "importance": "High",
+      "description": "Check integrations with accounting, identity, scheduling, benefits, and existing business systems; test the data flow where possible."
+    },
+    {
+      "factor": "Total cost and support",
+      "importance": "High",
+      "description": "Request a quote for current headcount and expected growth, including base fees, per-employee costs, payroll, benefits, time tracking, onboarding, implementation, and support."
+    }
   ],
   "commonPitfalls": [
     "Choosing on headline price alone and discovering add-on costs for benefits administration, time tracking, or additional users after the platform is already in use",
