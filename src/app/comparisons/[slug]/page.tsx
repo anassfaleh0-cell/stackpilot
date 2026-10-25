@@ -216,8 +216,28 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <span className="ml-auto text-[11px]">Editorial comparison · Based on recorded page data</span>
           </div>
 
+          <section aria-labelledby="comparison-verdict" className="mb-8 rounded-xl border border-border bg-card p-5">
+            <h2 id="comparison-verdict" className="text-lg font-bold tracking-tight mb-3">Ratings, Scores, Winner &amp; Verdict</h2>
+            <div className="grid gap-3 sm:grid-cols-2 mb-4">
+              <div className="rounded-lg bg-muted-bg p-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">{cmp.tool1} editorial rating</p>
+                <p className="text-xl font-bold">{typeof review1?.rating === "number" && Number.isFinite(review1.rating) && review1.rating > 0 ? `${review1.rating.toFixed(1)}/5` : "Not recorded"}</p>
+                <p className="text-xs text-muted-foreground mt-1">{review1?.ratingVerified === true ? "Linked review rating marked verified." : "Stored rating is provisional until its evidence and calculation are audited."}</p>
+              </div>
+              <div className="rounded-lg bg-muted-bg p-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">{cmp.tool2} editorial rating</p>
+                <p className="text-xl font-bold">{typeof review2?.rating === "number" && Number.isFinite(review2.rating) && review2.rating > 0 ? `${review2.rating.toFixed(1)}/5` : "Not recorded"}</p>
+                <p className="text-xs text-muted-foreground mt-1">{review2?.ratingVerified === true ? "Linked review rating marked verified." : "Stored rating is provisional until its evidence and calculation are audited."}</p>
+              </div>
+            </div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Winner</p>
+            <p className="text-sm mb-3">{hasComparableWinner ? `Verified recorded winner: ${winnerLabel}. Review the criteria below to confirm they match your requirements.` : provisionalWinnerLabel ? `Provisional recorded pick: ${provisionalWinnerLabel}. This is not independently verified and should not be treated as a proven overall winner.` : featureCoverageLeader ? `Feature-coverage leader: ${featureCoverageLeader}. This describes only the verified boolean feature checks, not overall product quality.` : "Use-case dependent — the available evidence does not establish an evidence-backed universal winner."}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Verdict</p>
+            <p className="text-sm leading-relaxed">{displayCopy.verdict}</p>
+          </section>
+
           {/* Tool Compare Cards */}
-          {(t1Pct !== null || t2Pct !== null) && <div className="grid sm:grid-cols-2 gap-6 mb-8">
+          <div className="grid sm:grid-cols-2 gap-6 mb-8">
             {[
               { name: cmp.tool1, slug: cmp.tool1Slug, isWinner: (hasComparableWinner && winnerLabel === cmp.tool1) || provisionalWinnerLabel === cmp.tool1 || featureCoverageLeader === cmp.tool1, score: t1Pct },
               { name: cmp.tool2, slug: cmp.tool2Slug, isWinner: (hasComparableWinner && winnerLabel === cmp.tool2) || provisionalWinnerLabel === cmp.tool2 || featureCoverageLeader === cmp.tool2, score: t2Pct },
@@ -231,7 +251,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                   )}
                   <div className="text-xl font-bold mb-2">{tool.name}</div>
                   <div className="text-3xl font-bold text-primary mb-1">{tool.score === null ? "—" : `${tool.score}%`}</div>
-                  <div className="text-xs text-muted-foreground mb-3">{tool.score === null ? (cmp.decisionGuide ? "Workflow guidance; no scored winner" : "No comparable availability data") : cmp.featuresVerified === true ? `Availability across ${scoredFeatures.length} verified boolean checks` : `Recorded availability across ${scoredFeatures.length} boolean checks; verification pending`}</div>
+                  <div className="text-xs text-muted-foreground mb-3">{tool.score === null ? "Feature-coverage score: not verified / not available" : cmp.featuresVerified === true ? `Feature-coverage score from ${scoredFeatures.length} verified boolean checks` : `Recorded feature-coverage score from ${scoredFeatures.length} checks; verification pending`}</div>
                   {tool.score !== null && <><ScoreBar score={tool.score} max={100} className="mb-3" /><p className="text-xs text-muted-foreground">This is a calculation from recorded comparison fields, not a product-quality rating. {cmp.featuresVerified === true ? "Source status is marked verified." : "Underlying values are not independently verified."}</p></>}
                   <Link
                     href={`/reviews/${tool.slug}`}
