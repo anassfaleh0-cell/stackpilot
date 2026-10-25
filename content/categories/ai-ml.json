@@ -7,17 +7,17 @@
   "buyerConsiderations": [
     "Evaluate whether the platform supports the full ML lifecycle including data preparation, model training, evaluation, deployment, monitoring, and retraining rather than point solutions that only address one phase",
     "Assess the level of abstraction and required ML expertise: no-code platforms enable business users but may lack flexibility, while code-first platforms offer maximum control but require specialized data science talent",
-    "Verify support for your preferred ML frameworks (TensorFlow, PyTorch, scikit-learn, etc.) and the ability to use custom algorithms or bring your own models",
-    "Examine MLOps capabilities including experiment tracking, model versioning, A/B testing, automated retraining pipelines, and drift monitoring for production models",
-    "Review data governance and security features including data encryption at rest and in transit, role-based access control, audit logging, and compliance with regulations like GDPR, HIPAA, and SOC 2",
-    "Evaluate scalability and cost predictability: understand how pricing scales with training compute, inference requests, data storage, and number of models in production",
+    "Run a small proof of concept with your actual framework versions, model artifacts, data format, dependency constraints, and target runtime; verify exportability and whether custom models need a particular serving format.",
+    "Test experiment lineage from dataset and code version through model artifact and deployment; verify rollback, reproducible evaluation, drift alert ownership, and whether retraining requires manual approval or extra services.",
+    "Verify data retention and deletion, whether prompts or inputs may be used for provider training, region and subprocessor choices, role scope, audit-log access, and the exact compliance scope for your deployment.",
+    "Estimate cost from a representative workload: training runs, idle resources, inference volume and latency targets, storage, logs, evaluation, and human review; test quotas, autoscaling behavior, and spend alerts before production.",
     "Check for pre-built integrations with your existing data infrastructure including data warehouses, data lakes, ETL pipelines, and business intelligence tools",
     "Consider the availability of pre-trained models, model marketplaces, and transfer learning capabilities that can significantly reduce time-to-value for common use cases"
   ],
   "commonMistakes": [
     "Choosing a model from a polished demo instead of testing representative tasks and edge cases.",
     "Reporting benchmark scores without checking whether the benchmark matches the team's real workload.",
-    "Ignoring inference, storage, evaluation, monitoring, and human-review costs when comparing plan prices.",
+    "Estimate total cost using expected training frequency, production traffic, data retention, evaluation, monitoring, support, and human review; rerun the estimate at peak load and after a model change.",
     "Sending confidential or personal data to a service before reviewing retention, training, and access terms.",
     "Deploying generated outputs without evaluation, traceability, or an escalation path for errors.",
     "Assuming a model update will preserve output quality without regression testing."
@@ -26,7 +26,7 @@
     {
       "factor": "Model development and training capabilities",
       "importance": "Critical",
-      "description": "The platform should support the full range of model development from automated ML for simple use cases to custom model architectures for complex problems, with appropriate tools for each skill level"
+      "description": "Evaluate with a held-out dataset and a defined baseline for the real task; document quality, latency, robustness, reproducibility, failure cases, and human-review needs before choosing a model-development workflow."
     },
     {
       "factor": "Deployment and MLOps infrastructure",
