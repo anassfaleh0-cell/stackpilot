@@ -77,14 +77,17 @@ for (const { file, data } of comparisons) {
   }
   if (data.winner != null && data.winner !== "") {
     const normalizedWinner = String(data.winner).trim().toLowerCase()
-    const matchesTool1 = [data.tool1, data.tool1Slug].some((value) => nonEmpty(value) && value.toLowerCase() === normalizedWinner)
-    const matchesTool2 = [data.tool2, data.tool2Slug].some((value) => nonEmpty(value) && value.toLowerCase() === normalizedWinner)
-    if (!matchesTool1 && !matchesTool2) {
-      summary.comparisons.invalidWinner++
-      add("comparison", slug, "winner-does-not-match-compared-tools", String(data.winner))
-    } else if (data.winnerVerified !== true) {
-      summary.comparisons.winnerNeedsEvidence++
-      add("comparison", slug, "winner-evidence-pending", String(data.winner))
+    const noUniversalWinner = new Set(["depends on use case", "use-case dependent", "no universal winner", "no single winner", "none", "n/a", "not applicable"])
+    if (!noUniversalWinner.has(normalizedWinner)) {
+      const matchesTool1 = [data.tool1, data.tool1Slug].some((value) => nonEmpty(value) && value.toLowerCase() === normalizedWinner)
+      const matchesTool2 = [data.tool2, data.tool2Slug].some((value) => nonEmpty(value) && value.toLowerCase() === normalizedWinner)
+      if (!matchesTool1 && !matchesTool2) {
+        summary.comparisons.invalidWinner++
+        add("comparison", slug, "winner-does-not-match-compared-tools", String(data.winner))
+      } else if (data.winnerVerified !== true) {
+        summary.comparisons.winnerNeedsEvidence++
+        add("comparison", slug, "winner-evidence-pending", String(data.winner))
+      }
     }
   }
   if (tool1 && (!validRating(tool1.rating) || tool1.ratingVerified !== true) || tool2 && (!validRating(tool2.rating) || tool2.ratingVerified !== true)) {
