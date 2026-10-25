@@ -216,5 +216,6 @@
   "difficulty": "Advanced",
   "learningCurve": "Sign-in basics are quick; designing authorization rules in the login pipeline is where the work accumulates.",
   "whoShouldUse": "Product teams shipping customer-facing web or mobile applications that need hosted registration, login, and password recovery without building credential handling themselves, plus teams whose business customers must arrive through a corporate identity provider.",
-  "whoShouldNotUse": "Organizations looking for employee single sign-on, directory-backed joiner and leaver workflows, or device-level access control. Auth0's customer-login model does not cover a workforce directory, and this product installs nothing on a device."
+  "whoShouldNotUse": "Organizations looking for employee single sign-on, directory-backed joiner and leaver workflows, or device-level access control. Auth0's customer-login model does not cover a workforce directory, and this product installs nothing on a device.",
+  "scoreBasis": "Score provenance: this is a stored PilotStack editorial score, not a third-party review average. The score and category dimensions are retained for transparency but have not yet completed an evidence-and-calculation audit; treat them as provisional and verify current capabilities against the vendor's official documentation before relying on the rating."
 }
