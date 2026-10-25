@@ -221,19 +221,19 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <div className="grid gap-3 sm:grid-cols-2 mb-4">
               <div className="rounded-lg bg-muted-bg p-4">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">{cmp.tool1} editorial rating</p>
-                <p className="text-xl font-bold">{typeof review1?.rating === "number" && Number.isFinite(review1.rating) && review1.rating > 0 ? `${review1.rating.toFixed(1)}/5` : "Not recorded"}</p>
-                <p className="text-xs text-muted-foreground mt-1">{typeof review1?.rating === "number" && Number.isFinite(review1.rating) && review1.rating > 0 ? review1.ratingVerified === true ? "Linked review rating is marked verified." : "Stored rating is provisional until its evidence and calculation are audited." : "No numeric rating is recorded in the linked review; no rating is inferred."}</p>
+                <p className="text-xl font-bold">{typeof review1?.rating === "number" && Number.isFinite(review1.rating) && review1.rating > 0 && review1.rating <= 5 ? `${review1.rating.toFixed(1)}/5` : "Not recorded"}</p>
+                <p className="text-xs text-muted-foreground mt-1">{typeof review1?.rating === "number" && Number.isFinite(review1.rating) && review1.rating > 0 && review1.rating <= 5 ? review1.ratingVerified === true ? "Linked review rating is marked verified." : "Stored rating is provisional until its evidence and calculation are audited." : "No numeric rating is recorded in the linked review; no rating is inferred."}</p>
               </div>
               <div className="rounded-lg bg-muted-bg p-4">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">{cmp.tool2} editorial rating</p>
-                <p className="text-xl font-bold">{typeof review2?.rating === "number" && Number.isFinite(review2.rating) && review2.rating > 0 ? `${review2.rating.toFixed(1)}/5` : "Not recorded"}</p>
-                <p className="text-xs text-muted-foreground mt-1">{typeof review2?.rating === "number" && Number.isFinite(review2.rating) && review2.rating > 0 ? review2.ratingVerified === true ? "Linked review rating is marked verified." : "Stored rating is provisional until its evidence and calculation are audited." : "No numeric rating is recorded in the linked review; no rating is inferred."}</p>
+                <p className="text-xl font-bold">{typeof review2?.rating === "number" && Number.isFinite(review2.rating) && review2.rating > 0 && review2.rating <= 5 ? `${review2.rating.toFixed(1)}/5` : "Not recorded"}</p>
+                <p className="text-xs text-muted-foreground mt-1">{typeof review2?.rating === "number" && Number.isFinite(review2.rating) && review2.rating > 0 && review2.rating <= 5 ? review2.ratingVerified === true ? "Linked review rating is marked verified." : "Stored rating is provisional until its evidence and calculation are audited." : "No numeric rating is recorded in the linked review; no rating is inferred."}</p>
               </div>
             </div>
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Winner</p>
             <p className="text-sm mb-3">{hasComparableWinner ? `Verified recorded winner: ${winnerLabel}. Review the criteria below to confirm they match your requirements.` : provisionalWinnerLabel ? `Provisional recorded pick: ${provisionalWinnerLabel}. This is not independently verified and should not be treated as a proven overall winner.` : featureCoverageLeader ? `Feature-coverage leader: ${featureCoverageLeader}. This describes only the verified boolean feature checks, not overall product quality.` : "Use-case dependent — the available evidence does not establish an evidence-backed universal winner."}</p>
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Verdict</p>
-            <p className="text-sm leading-relaxed">{displayCopy.verdict}</p>
+            <p className="text-sm leading-relaxed">{displayCopy.verdict || "Use-case dependent: compare must-have workflows, integrations, permissions, and total cost before choosing."}</p>
           </section>
 
           {/* Tool Compare Cards */}
