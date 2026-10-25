@@ -122,7 +122,7 @@ async function main() {
       try {
         const canonicalUrl = new URL(canonicalHref, SITE_URL)
         canonicalOk = canonicalUrl.origin === new URL(SITE_URL).origin &&
-          canonicalUrl.pathname.replace(/\\/$/, "") === expectedPath.replace(/\\/$/, "") &&
+          canonicalUrl.pathname.replace(/\/$/, "") === expectedPath.replace(/\/$/, "") &&
           !canonicalUrl.search && !canonicalUrl.hash
         canonicalDetail = canonicalUrl.href
       } catch {
