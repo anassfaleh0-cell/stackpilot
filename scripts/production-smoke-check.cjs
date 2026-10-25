@@ -74,6 +74,8 @@ async function main() {
     const normalizedLinearBody = linear.body.toLowerCase()
     const hasHonestScoreDisclosure =
       normalizedLinearBody.includes("stored score preserved for transparency; its evidence and calculation still need verification") ||
+      normalizedLinearBody.includes("retained for transparency, but remains provisional") ||
+      normalizedLinearBody.includes("no source-linked rationale or reproducible score breakdown recorded in this profile") ||
       normalizedLinearBody.includes("assessment not yet recorded; no number is invented") ||
       normalizedLinearBody.includes("pending evidence audit")
     const noUnsupportedAggregateClaim =
