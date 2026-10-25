@@ -112,10 +112,10 @@ async function main() {
   ]
   for (const [page, expectedPath] of canonicalTargets) {
     if (!page || page.error) continue
-    const canonicalTag = [...page.body.matchAll(/<link\\b[^>]*>/gi)]
+    const canonicalTag = [...page.body.matchAll(/<link\b[^>]*>/gi)]
       .map((match) => match[0])
-      .find((tag) => /\\brel=["']canonical["']/i.test(tag))
-    const canonicalHref = canonicalTag?.match(/\\bhref=["']([^"']+)["']/i)?.[1]
+      .find((tag) => /\brel=["']canonical["']/i.test(tag))
+    const canonicalHref = canonicalTag?.match(/\bhref=["']([^"']+)["']/i)?.[1]
     let canonicalOk = false
     let canonicalDetail = "canonical link tag missing"
     if (canonicalHref) {
