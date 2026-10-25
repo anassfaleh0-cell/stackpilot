@@ -79,6 +79,7 @@ const nextConfig: NextConfig = {
     { source: "/rss.xml/feed", destination: "/rss.xml", permanent: true },
     { source: "/guide/:slug", destination: "/guides/:slug", permanent: true },
     { source: "/alternative/:slug", destination: "/alternatives/:slug", permanent: true },
+    { source: "/alternatives/free-alternatives-to-slack", destination: "/alternatives/slack-alternatives", permanent: true },
     { source: "/industry/:slug", destination: "/industries/:slug", permanent: true },
     { source: "/use-case/:slug", destination: "/use-cases/:slug", permanent: true },
     { source: "/hub/:slug", destination: "/hubs/:slug", permanent: true },
