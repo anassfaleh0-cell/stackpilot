@@ -245,67 +245,67 @@ class LinkBuilder {
   }
 
   review(slug, text) {
-    if (!ALL_SLUGS.$1.has(slug)) return text
+    if (!ALL_SLUGS.reviews.has(slug)) return text
     if (!this._track(`/reviews/${slug}`, text)) return text
     return link(text, `/reviews/${slug}`)
   }
 
   comparison(slug, text) {
-    if (!ALL_SLUGS.$1.has(slug)) return text
+    if (!ALL_SLUGS.comparisons.has(slug)) return text
     if (!this._track(`/comparisons/${slug}`, text)) return text
     return link(text, `/comparisons/${slug}`)
   }
 
   guide(slug, text) {
-    if (!ALL_SLUGS.$1.has(slug)) return text
+    if (!ALL_SLUGS.guides.has(slug)) return text
     if (!this._track(`/guides/${slug}`, text)) return text
     return link(text, `/guides/${slug}`)
   }
 
   blog(slug, text) {
-    if (!ALL_SLUGS.$1.has(slug)) return text
+    if (!ALL_SLUGS.blog.has(slug)) return text
     if (!this._track(`/blog/${slug}`, text)) return text
     return link(text, `/blog/${slug}`)
   }
 
   best(slug, text) {
-    if (!ALL_SLUGS.$1.has(slug)) return text
+    if (!ALL_SLUGS.best.has(slug)) return text
     if (!this._track(`/best/${slug}`, text)) return text
     return link(text, `/best/${slug}`)
   }
 
   glossary(slug, text) {
-    if (!ALL_SLUGS.$1.has(slug)) return text
+    if (!ALL_SLUGS.glossary.has(slug)) return text
     if (!this._track(`/glossary/${slug}`, text)) return text
     return link(text, `/glossary/${slug}`)
   }
 
   industry(slug, text) {
-    if (!ALL_SLUGS.$1.has(slug)) return text
+    if (!ALL_SLUGS.industries.has(slug)) return text
     if (!this._track(`/industries/${slug}`, text)) return text
     return link(text, `/industries/${slug}`)
   }
 
   useCase(slug, text) {
-    if (!ALL_SLUGS.$1.has(slug)) return text
+    if (!ALL_SLUGS.useCases.has(slug)) return text
     if (!this._track(`/use-cases/${slug}`, text)) return text
     return link(text, `/use-cases/${slug}`)
   }
 
   research(slug, text) {
-    if (!ALL_SLUGS.$1.has(slug)) return text
+    if (!ALL_SLUGS.research.has(slug)) return text
     if (!this._track(`/research/${slug}`, text)) return text
     return link(text, `/research/${slug}`)
   }
 
   stats(slug, text) {
-    if (!ALL_SLUGS.$1.has(slug)) return text
+    if (!ALL_SLUGS.statistics.has(slug)) return text
     if (!this._track(`/statistics/${slug}`, text)) return text
     return link(text, `/statistics/${slug}`)
   }
 
   alternative(slug, text) {
-    if (!ALL_SLUGS.$1.has(slug)) return text
+    if (!ALL_SLUGS.alternatives.has(slug)) return text
     if (!this._track(`/alternatives/${slug}`, text)) return text
     return link(text, `/alternatives/${slug}`)
   }
