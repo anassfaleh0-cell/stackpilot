@@ -7,7 +7,8 @@ import { MobileSectionNav } from "@/components/content/mobile-section-nav"
 import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, ArticleSchema, WebPageSchema } from "@/components/seo/json-ld"
 import { createMetadata } from "@/lib/metadata"
 import { site, categories } from "@/lib/constants"
-import { getAllReviews, getAllGuides, getComparisonsByCategory, getAllBlogPosts, getAllGlossaryTerms, isContentAvailable } from "@/lib/content/registry"
+import { getAllReviews, getAllGuides, getAllComparisons, getAllBlogPosts, getAllGlossaryTerms, isContentAvailable } from "@/lib/content/registry"
+import { categoryMatches } from "@/lib/content/category-match"
 import { getCategoryKnowledge } from "@/lib/content/category-knowledge"
 import { isInternalLinkAvailable } from "@/lib/content/link-guard"
 import { ReviewFilter } from "@/components/entity/review-filter"
@@ -45,7 +46,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const category = categories.find((c) => c.slug === slug)
   if (!category) return {}
   const knowledge = getCategoryKnowledge(slug)
-  const catReviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && r.category === category.name)
+  const catReviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && categoryMatches(r.category, category.name))
   return createMetadata({
     title: knowledge?.seoTitle || `Best ${category.name} Software 2026: Reviews & Buying Guide`,
     description: knowledge?.seoDescription || `Find the best ${category.name.toLowerCase()} software with detailed reviews, pricing comparisons, and buying tips. ${catReviews.length} software profiles for 2026, with current details to verify against vendor sources.`,
@@ -61,10 +62,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
   const knowledge = getCategoryKnowledge(slug)
   const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && r.category === category.name)
-  const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug) && g.category === category.name)
-  const comparisons = getComparisonsByCategory(category.name).filter((c) => isContentAvailable("comparison", c.slug))
-  const posts = getAllBlogPosts().filter((p) => p.category === category.name)
-  const glossary = getAllGlossaryTerms().filter((t) => t.category === category.name)
+  const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug) && categoryMatches(g.category, category.name))
+  const comparisons = getAllComparisons().filter((c) => categoryMatches(c.category, category.name) && isContentAvailable("comparison", c.slug))
+  const posts = getAllBlogPosts().filter((p) => categoryMatches(p.category, category.name))
+  const glossary = getAllGlossaryTerms().filter((t) => categoryMatches(t.category, category.name))
   const bestPick = [...reviews].filter((r) => r.ratingVerified === true && typeof r.rating === "number" && Number.isFinite(r.rating)).sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))[0]
 
   const buyerJourney = [
