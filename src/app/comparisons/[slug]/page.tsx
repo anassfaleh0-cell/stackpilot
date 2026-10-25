@@ -461,7 +461,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           <RelatedReading
             title="Related Comparisons & Guides"
             excludeSlug={cmp.slug}
-            comparisons={cmp.relatedComparisons}
+            comparisons={relatedComparisonSlugs}
             guides={cmp.relatedGuides}
             posts={cmp.relatedPosts}
           />
