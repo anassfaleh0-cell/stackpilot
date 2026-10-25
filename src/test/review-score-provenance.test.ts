@@ -162,6 +162,7 @@ describe("review score provenance", () => {
 
     expect(smoke).toContain('normalizedLinearBody.includes("retained for transparency, but remains provisional")')
     expect(smoke).toContain('normalizedLinearBody.includes("no source-linked rationale or reproducible score breakdown recorded in this profile")')
+    expect(smoke).toContain('"accepted provenance disclosure=" + hasHonestScoreDisclosure')
   })
 
 })
