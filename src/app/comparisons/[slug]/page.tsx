@@ -262,7 +262,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
                 </div>
               </GlassCard>
             ))}
-          </div>}
+          </div>
 
           {/* Feature Comparison */}
           <section className="mb-12">
