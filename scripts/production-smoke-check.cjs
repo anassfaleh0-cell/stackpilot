@@ -240,6 +240,21 @@ async function main() {
       }))
       const limitReached = sitemapQueue.length > 0 || pageTargets.size >= maxPages
       const allFailures = [...sitemapFailures, ...pageFailures]
+      if (process.env.AUDIT_OUTPUT_FILE) {
+        await require("node:fs/promises").writeFile(
+          process.env.AUDIT_OUTPUT_FILE,
+          JSON.stringify({
+            site: SITE_URL,
+            checkedAt: new Date().toISOString(),
+            sitemapFilesChecked: visitedSitemaps.size,
+            pageUrlsChecked: targets.length,
+            sitemapFailures,
+            pageFailures,
+            limitReached,
+          }, null, 2) + "\\n",
+          "utf8"
+        )
+      }
       report(
         "sitemap target HTTP status",
         allFailures.length === 0 && !limitReached && targets.length > 0,
