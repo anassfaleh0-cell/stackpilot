@@ -7,7 +7,7 @@
   "website": "https://rippling.com",
   "pricing": "Not independently verified",
   "priceRange": "Not independently verified",
-  "rating": null,
+  "rating": 4.1,
   "reviewCount": 0,
   "pros": [
     "A connected workflow may reduce repeated employee-data entry when systems are configured correctly.",
@@ -63,7 +63,28 @@
       "description": "Rippling: evaluate export and recovery with a representative workflow; availability is not recorded as verified in this profile."
     }
   ],
-  "ratings": [],
+  "ratings": [
+    {
+      "label": "Feature coverage",
+      "score": 4.6
+    },
+    {
+      "label": "Workflow automation",
+      "score": 4.5
+    },
+    {
+      "label": "Integration breadth",
+      "score": 4.5
+    },
+    {
+      "label": "Implementation simplicity",
+      "score": 3.4
+    },
+    {
+      "label": "Cost transparency",
+      "score": 3.5
+    }
+  ],
   "content": [
     {
       "title": "Map the employee lifecycle",
@@ -87,7 +108,7 @@
     },
     {
       "title": "Implementation and total cost",
-      "body": "Estimate migration, data cleanup, integrations, policy setup, training, payroll parallel runs, support and internal administration. Ask for a dated quote covering all required modules and headcount assumptions, including renewal and exit terms. Prices and plan limits are not independently verified here.",
+      "body": "Estimate migration, data cleanup, integrations, policy setup, training, payroll parallel runs, support and internal administration. Ask for a dated quote covering all required modules and headcount assumptions, including renewal and exit terms. Prices and plan limits are not independently verified here.\n\nA provisional 4.1/5 editorial fit score is recorded to avoid leaving the review unrated. It is not a customer rating or measured benchmark. The score reflects publicly documented breadth across HR, workforce workflows and integrations, balanced against implementation complexity and unresolved module-by-module pricing and jurisdiction requirements. Category scores are provisional and should be revised after a scoped demo, written quote and jurisdiction-specific compliance review. Official references: Rippling HR (https://www.rippling.com/products/hr), integrations (https://www.rippling.com/platform/integrations), and product ecosystem (https://www.rippling.com/en-IE/products).",
       "type": "text"
     },
     {
@@ -210,5 +231,6 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 343
+  "wordCount": 343,
+  "scoreBasis": "Provisional PilotStack editorial assessment (4.1/5), not a customer-review average or a benchmark. It reflects the documented breadth of HR, payroll, workforce, IT/identity and integration workflows, balanced against modular purchasing, implementation effort and the need to confirm jurisdiction, module availability and quoted total cost. Dimension scores are provisional hypotheses; validate them with a scoped demo, written quote and jurisdiction-specific requirements. Official capability references: https://www.rippling.com/products/hr ; https://www.rippling.com/platform/integrations ; https://www.rippling.com/en-IE/products"
 }
