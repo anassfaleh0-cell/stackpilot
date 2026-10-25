@@ -14,7 +14,7 @@ describe("empty internal-link labels", () => {
 
   it("keeps sentence text readable when stripping a dead link with no label", () => {
     expect(stripDeadContentLinks('Choose <a href="/reviews/not-a-real-review"></a> before buying.'))
-      .toBe("Choose Not a real review before buying.")
+      .toBe("Choose Not A Real Review before buying.")
   })
 
   it("gives live empty-label anchors visible text and an accessible name", () => {
