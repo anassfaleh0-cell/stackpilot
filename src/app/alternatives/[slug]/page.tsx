@@ -83,9 +83,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const alt = getAlternative(slug)
   if (!alt) return {}
-  const shortTitle = alt.title.length > 58 ? alt.title.slice(0, 55) + "..." : alt.title
   const noindexed = isNoindexed("alternatives", slug)
-  return createMetadata({ title: shortTitle, description: `Compare ${(alt.alternatives || []).length} alternatives to ${alt.toolName} by workflow fit, integrations, migration needs, and current vendor terms. Verify capabilities and pricing directly with vendors.`, path: `/alternatives/${alt.slug}`, ogType: "article", publishedAt: alt.lastUpdated, updatedAt: alt.lastUpdated, articleSection: alt.category, noIndex: noindexed })
+  // The shared helper owns title truncation so long titles are not cut mid-word.
+  return createMetadata({ title: alt.title, description: `Compare ${(alt.alternatives || []).length} alternatives to ${alt.toolName} by workflow fit, integrations, migration needs, and current vendor terms. Verify capabilities and pricing directly with vendors.`, path: `/alternatives/${alt.slug}`, ogType: "article", publishedAt: alt.lastUpdated, updatedAt: alt.lastUpdated, articleSection: alt.category, noIndex: noindexed })
 }
 
 export default async function AlternativePage({ params }: { params: Promise<{ slug: string }> }) {

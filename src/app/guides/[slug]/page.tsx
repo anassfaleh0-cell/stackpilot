@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, HowToSchema, WebPageSchema, ArticleSchema, FAQSchema, softwareApp } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { truncate, formatDate } from "@/lib/utils"
+import { formatDate } from "@/lib/utils"
 import { getGuide, getContentTitle, getReview } from "@/lib/content/registry"
 import { getAllGuides } from "@/lib/content/registry"
 import { InternalLinks } from "@/components/content/internal-links"
@@ -72,8 +72,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const guide = getGuide(slug)
   if (!guide) return {}
-  const seoDesc = truncate(guide.description, 160)
-  return createMetadata({ title: truncate(guide.title, 60), description: seoDesc, path: `/guides/${slug}`, ogType: "article", updatedAt: guide.lastUpdated, articleSection: guide.category, readingTime: guide.readingTime, noIndex: isNoindexed("guides", slug) })
+  // Let the shared metadata helper truncate at word boundaries; avoid pre-cutting source copy.
+  return createMetadata({ title: guide.title, description: guide.description, path: `/guides/${slug}`, ogType: "article", updatedAt: guide.lastUpdated, articleSection: guide.category, readingTime: guide.readingTime, noIndex: isNoindexed("guides", slug) })
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
