@@ -108,12 +108,24 @@ for (const item of findings.slice(0, 300)) {
 }
 if (findings.length > 300) console.log(`... ${findings.length - 300} additional findings omitted from console output`)
 console.log(`\nTotal findings: ${findings.length}`)
-const criticalFindings = findings.filter((item) => item.issue === "invalid-rating" || item.issue === "winner-does-not-match-compared-tools")
-console.log(`\nCritical integrity findings (${criticalFindings.length}):`)
+const structuralIssues = new Set([
+  "missing-claim",
+  "missing-rating",
+  "invalid-rating",
+  "pros-cons-incomplete",
+  "missing-description",
+  "missing-verdict",
+  "missing-feature-rows",
+  "missing-tool-links",
+  "winner-does-not-match-compared-tools",
+])
+const criticalFindings = findings.filter((item) => structuralIssues.has(item.issue))
+console.log(`Structural integrity findings (${criticalFindings.length}):`)
 for (const item of criticalFindings) {
   console.log([item.type, item.slug, item.issue, item.detail].filter(Boolean).join(" | "))
 }
 console.log("This report intentionally does not delete pages or replace missing values with invented scores.")
-if (process.argv.includes("--strict") && summary.reviews.invalidRating + summary.comparisons.invalidWinner > 0) {
+console.log("Evidence-pending scores and picks remain visible as provisional; --strict enforces required fields and valid winner labels.")
+if (process.argv.includes("--strict") && criticalFindings.length > 0) {
   process.exitCode = 1
 }
