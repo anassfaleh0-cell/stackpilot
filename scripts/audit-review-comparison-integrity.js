@@ -115,6 +115,7 @@ for (const { file, data } of comparisons) {
   ].filter((value) => typeof value === "string" && value.trim())
   const suspiciousCopyPatterns = [
     { issue: "broken-sentence-fragment", pattern: /\b(?:our|the)\s+provides?\s+(?:detailed|a|an|comprehensive)\b/i, detail: "check for a missing subject or link label in this sentence" },
+    { issue: "missing-template-placeholder", pattern: /,\s*(?:are paramount|including advanced\s*,|and options are critical requirements|verify\s+and compliance|without considering\s*-|ignoring\s+and support quality)\b/i, detail: "a generated internal-link label may be empty; supply readable fallback text instead of leaving a sentence gap" },
     { issue: "unsupported-precise-discount", pattern: /\b(?:saves?|discount(?:s|ed)?)\s+(?:up to )?\d{1,2}\s*%|\b\d{1,2}\s*%\s+(?:discount|cheaper|less)\b/i, detail: "verify the exact percentage and its scope against a current vendor source" },
     { issue: "unsupported-exact-timeline", pattern: /\b(?:within|in|takes?)\s+\d+\s*(?:-|–|to)\s*\d+\s*(?:days?|weeks?|months?)\b/i, detail: "treat exact implementation/migration timelines as estimates unless supported by evidence" },
   ]
