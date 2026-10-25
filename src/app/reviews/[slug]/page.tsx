@@ -201,6 +201,23 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 <p className="text-sm text-muted-foreground">{tool.tagline}</p>
               </div>
 
+              <section aria-labelledby="review-claim-verdict" className="mb-6 rounded-xl border border-border bg-card p-5">
+                <h2 id="review-claim-verdict" className="text-lg font-bold tracking-tight mb-4">Review Claim, Rating &amp; Verdict</h2>
+                <div className="grid gap-3 sm:grid-cols-2 mb-4">
+                  <div className="rounded-lg bg-muted-bg p-4">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Editorial rating / score</p>
+                    <p className="text-2xl font-bold">{hasStoredEditorialRating ? `${formatScore(tool.rating)}/5` : "Pending evidence audit"}</p>
+                    <p className="text-xs text-muted-foreground mt-2">{hasEditorialRating ? "Recorded PilotStack editorial rating marked verified; this is not a third-party user-review average." : hasStoredEditorialRating ? "Stored score preserved for transparency; its evidence and calculation still need verification." : "No numeric score is available in the record. A number is not invented to fill the gap."}</p>
+                  </div>
+                  <div className="rounded-lg bg-muted-bg p-4">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Review claim</p>
+                    <p className="text-sm leading-relaxed">{tool.tagline}</p>
+                  </div>
+                </div>
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Verdict</p>
+                <p className="text-sm leading-relaxed">{reviewVerdict}</p>
+              </section>
+
               <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
                 <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
                 <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
