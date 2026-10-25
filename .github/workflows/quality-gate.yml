@@ -66,6 +66,9 @@ jobs:
       - name: Content quality lint
         run: npm run lint:content
 
+      - name: Use-case content integrity audit
+        run: npm run audit:use-cases
+
       - name: Run guide quality audit
         run: npm run audit:guides
 
