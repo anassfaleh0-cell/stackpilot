@@ -13,6 +13,7 @@ interface ReviewFilterProps {
     tagline: string
     category: string
     rating?: number
+    ratingVerified?: boolean
     priceRange?: string
     priceRangeVerified?: boolean
     pricing?: string
@@ -26,7 +27,8 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
   const [priceFilter, setPriceFilter] = useState<string>("all")
   const [showFilters, setShowFilters] = useState(false)
   const [visible, setVisible] = useState(96)
-  const hasVerifiedRatings = reviews.some((r) => typeof r.rating === "number" && Number.isFinite(r.rating))
+  const hasStoredRatings = reviews.some((r) => typeof r.rating === "number" && Number.isFinite(r.rating) && r.rating > 0 && r.rating <= 5)
+  const hasProvisionalRatings = reviews.some((r) => typeof r.rating === "number" && Number.isFinite(r.rating) && r.rating > 0 && r.rating <= 5 && r.ratingVerified !== true)
   const hasVerifiedPricing = reviews.some((r) => r.priceRangeVerified === true && typeof r.pricing === "string")
 
   const filtered = useMemo(() => {
@@ -76,8 +78,8 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
 
       {showFilters && (
         <div className="flex flex-wrap items-center gap-3 mb-4 p-3 rounded-xl border border-border bg-muted-bg/50">
-          {hasVerifiedRatings && <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground">Min rating:</span>
+          {hasStoredRatings && <div className="flex items-center gap-2">
+            <span className="text-xs text-muted-foreground">Min editorial score:</span>
             {[0, 3, 3.5, 4, 4.5].map((r) => (
               <button
                 key={r}
@@ -87,8 +89,9 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
                 {r === 0 ? "Any" : `${r}+`}
               </button>
             ))}
+            {hasProvisionalRatings && <span className="text-xs text-muted-foreground">Includes provisional stored scores</span>}
           </div>}
-          {hasVerifiedRatings && <div className="w-px h-5 bg-border" />}
+          {hasStoredRatings && <div className="w-px h-5 bg-border" />}
           {hasVerifiedPricing && <div className="flex items-center gap-2">
             <span className="text-xs text-muted-foreground">Pricing:</span>
             {[
@@ -113,14 +116,14 @@ export function ReviewFilter({ reviews, category }: ReviewFilterProps) {
           {shown.map((tool) => (
             <Link key={tool.slug} href={`/reviews/${tool.slug}`} className="group card-hover">
               <Card className="h-full flex flex-col">
-                <div className="flex items-start justify-between mb-3">
+                <div className="flex items-start justify-between mb-3 gap-2">
                   <Badge variant="secondary">{tool.category}</Badge>
-                  {typeof tool.rating === "number" && Number.isFinite(tool.rating) ? (
-                    <div className="flex items-center gap-1 text-sm font-medium text-accent">
-                      <Star size={14} className="fill-accent text-accent" />
-                      {tool.rating}
+                  {typeof tool.rating === "number" && Number.isFinite(tool.rating) && tool.rating > 0 && tool.rating <= 5 ? (
+                    <div className="flex flex-col items-end gap-0.5 text-sm font-medium text-accent" aria-label={`PilotStack editorial score ${tool.rating} out of 5, ${tool.ratingVerified === true ? "verified" : "provisional; evidence pending"}`}>
+                      <span className="flex items-center gap-1"><Star size={14} className="fill-accent text-accent" />{tool.rating}/5</span>
+                      {tool.ratingVerified !== true && <span className="text-[10px] leading-tight font-normal text-muted-foreground">Provisional</span>}
                     </div>
-                  ) : <span className="text-xs text-muted-foreground">Rating not verified</span>}
+                  ) : <span className="text-xs text-muted-foreground">Score not recorded</span>}
                 </div>
                 <CardTitle className="group-hover:text-primary transition-colors">{tool.name}</CardTitle>
                 <CardDescription className="mt-1.5">{tool.tagline}</CardDescription>
