@@ -97,6 +97,15 @@ describe("review score provenance", () => {
     expect(bestDetail).toContain("stripUnverifiedPriceClaims(stripUnverifiedRatingClaims(related.description))")
   })
 
+  it("does not render empty Pros or Cons lists in best-of option cards", () => {
+    const bestDetail = fs.readFileSync(path.join(process.cwd(), "src", "app", "best", "[slug]", "page.tsx"), "utf8")
+
+    expect(bestDetail).toContain("pick.pros.length > 0 ?")
+    expect(bestDetail).toContain("pick.cons.length > 0 ?")
+    expect(bestDetail).toContain("No evidence-backed strengths are recorded for {pick.toolName}")
+    expect(bestDetail).toContain("No specific limitations are recorded for {pick.toolName}")
+  })
+
   it("keeps best-of FAQ sections non-empty after unsafe or blank questions are filtered", () => {
     const bestDetail = fs.readFileSync(path.join(process.cwd(), "src", "app", "best", "[slug]", "page.tsx"), "utf8")
 
