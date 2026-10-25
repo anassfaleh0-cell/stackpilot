@@ -251,7 +251,7 @@ async function main() {
             sitemapFailures,
             pageFailures,
             limitReached,
-          }, null, 2) + "\\n",
+          }, null, 2) + "\n",
           "utf8"
         )
       }
