@@ -160,6 +160,33 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
     tool2Detail: f.tool2Detail ? stripUnverifiedPriceClaims(stripDeadContentLinks(f.tool2Detail)) : f.tool2Detail,
   }))
 
+  // Strengthen discovery for long-tail comparisons: explicit editorial links remain valid,
+  // while related pages sharing either tool are linked even when legacy JSON lacks relatedComparisons.
+  // Fall back to same-category comparisons only after same-tool matches; never include drafts,
+  // noindexed pages, or the current page. Existing winner/score/rating fields are untouched.
+  const dynamicRelatedComparisons = getAllComparisons()
+    .filter((candidate) => {
+      if (candidate.slug === cmp.slug) return false
+      if ((candidate as typeof candidate & { publicationStatus?: string }).publicationStatus === "draft") return false
+      if (isNoindexed("comparisons", candidate.slug)) return false
+      const sharesTool = [candidate.tool1Slug, candidate.tool2Slug].some((tool) =>
+        tool === cmp.tool1Slug || tool === cmp.tool2Slug
+      )
+      return sharesTool || candidate.category === cmp.category
+    })
+    .map((candidate) => {
+      const sharesTool = [candidate.tool1Slug, candidate.tool2Slug].some((tool) =>
+        tool === cmp.tool1Slug || tool === cmp.tool2Slug
+      )
+      return { slug: candidate.slug, score: (sharesTool ? 100 : 0) + (candidate.category === cmp.category ? 10 : 0) }
+    })
+    .sort((a, b) => b.score - a.score || a.slug.localeCompare(b.slug))
+    .map((candidate) => candidate.slug)
+  const relatedComparisonSlugs = [...new Set([
+    ...dynamicRelatedComparisons,
+    ...(Array.isArray(cmp.relatedComparisons) ? cmp.relatedComparisons : []),
+  ])].filter((relatedSlug) => relatedSlug !== cmp.slug)
+
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Comparisons", href: "/comparisons" }, { name: cmp.title, href: `/comparisons/${slug}` }]} />
