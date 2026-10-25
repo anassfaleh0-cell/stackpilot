@@ -15,12 +15,12 @@
     "Assess scalability as the organization grows including support for geographic expansion, acquisitions, and changing workforce composition (full-time, part-time, contract, remote, global)"
   ],
   "commonMistakes": [
-    "Selecting HR software without involving HR operations, payroll, benefits, and legal stakeholders, leading to solutions that miss critical compliance and operational requirements",
-    "Underestimating the complexity of data migration from legacy HR systems, resulting in data quality issues, missing history, and payroll errors that damage employee trust",
-    "Choosing separate best-in-class tools for recruiting, performance, payroll, and learning without considering integration complexity, leading to fragmented employee data and manual reconciliation",
-    "Implementing new HR systems during peak cycles like open enrollment or year-end processing, creating unnecessary risk and disruption to critical business operations",
-    "Neglecting change management and employee training, resulting in low adoption of self-service features and continued reliance on HR staff for routine transactions",
-    "Over-customizing the platform during implementation, creating upgrade challenges and preventing the organization from benefiting from vendor best practices and future product improvements"
+    "Choosing an HR system without checking country-specific labor, privacy, and record-retention requirements.",
+    "Giving managers or vendors access to sensitive employee data beyond their responsibilities.",
+    "Migrating employee records without validating history, permissions, and document attachments.",
+    "Underestimating module, implementation, employee-count, payroll, and integration charges.",
+    "Automating approvals without defining exception handling and responsibility for decisions.",
+    "Failing to test offboarding, data export, and retention or deletion processes."
   ],
   "decisionFactors": [
     {
@@ -65,9 +65,9 @@
     }
   ],
   "buyerJourney": {
-    "awareness": "Organizations typically begin searching for HR software when they outgrow spreadsheets and basic tools, when regulatory compliance becomes too complex to manage manually, or when employee headcount reaches a scale where manual processes become inefficient. Common triggers include payroll errors, difficulty tracking employee information, manual onboarding and offboarding processes, and lack of visibility into workforce metrics. Initial research involves reading analyst reports from Gartner and Forrester, checking user reviews on G2 and TrustRadius, and consulting with peers in HR professional networks like SHRM. HR leaders often evaluate case studies from companies of similar size and industry. Many organizations begin with point solutions for their most pressing pain point, such as payroll or recruiting, before considering integrated platforms.",
-    "consideration": "During evaluation, HR teams develop detailed requirements based on current processes, pain points, and future needs. Shortlisted vendors participate in demonstrations configured to the organization's specific requirements. Hands-on trials involve HR team members testing real workflows like processing payroll, running compliance reports, and managing recruiting pipelines. Data migration from existing systems is carefully planned and tested. Reference calls with HR leaders at similar organizations validate vendor capabilities, implementation experiences, and support quality. Legal and compliance teams review vendor security practices, data processing agreements, and compliance certifications. Implementation partners are often identified and evaluated during this phase.",
-    "decision": "The final decision involves HR, finance, IT, legal, and executive stakeholders. Key decision factors include functional fit with current and future needs, total cost of ownership including implementation and ongoing operational costs, vendor stability and roadmap, and the quality of implementation support. Implementation planning includes data migration strategy, integration requirements, change management approach, training plan, and go-live timeline with careful consideration of payroll cycle dependencies and blackout periods. Most organizations implement in phases, starting with core HR and payroll before adding talent management features, learning, and advanced analytics."
+    "awareness": "Define the employee lifecycle and applicable local requirements: hiring, onboarding, time off, records, performance, payroll handoff, and offboarding. Decide which system owns each record and who may access sensitive employee information.",
+    "consideration": "Test a realistic employee journey with role-based permissions, approvals, document retention, reporting, integrations, and data export. Verify country-specific support, localization, security controls, retention rules, and costs for employees, modules, and implementation.",
+    "decision": "Choose the tool that reduces administrative friction while supporting privacy and clear accountability. Pilot with a limited group, validate access and migration, document retention and deletion procedures, and involve qualified HR or legal specialists for jurisdiction-specific obligations."
   },
   "pricingOverview": "HR software pricing varies by target market and feature breadth. Small business HR platforms like Gusto, BambooHR, and Rippling typically charge $6-$15 per employee per month for core HR, payroll, and benefits administration, with additional fees of $40-$150 per month for base platform access. Mid-market platforms like Paylocity and Paycom range from $10-$30 per employee per month for comprehensive features. Enterprise HCM clouds from Workday, SAP SuccessFactors, and Oracle HCM Cloud typically cost $15-$30 per employee per month but require minimum employee counts and implementation fees of $100,000-$500,000+. Recruiting-specific tools like Greenhouse and Lever range from $5,000-$50,000+ annually. Performance management platforms like Lattice and 15Five cost $4-$14 per user per month. Learning management systems like Cornerstone and Docebo range from $4-$20 per user per month. Implementation costs for enterprise HR systems can range from $200,000 to $2,000,000+ depending on complexity and customization.",
   "bestFor": {
