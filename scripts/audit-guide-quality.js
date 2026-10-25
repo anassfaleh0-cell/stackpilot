@@ -49,7 +49,7 @@ for (const file of files) {
   // Report obvious mid-sentence truncation in snippets. This remains report-only
   // until the existing corpus is audited and corrected, so it cannot block builds.
   const description = data.description.trim()
-  if (/[,:;][.!?…]*$/.test(description) || /\\b(?:and|or|with|of|to|for|by|in|from|as|at|the|a|an|that|which)[.!?…]*$/i.test(description)) {
+  if (/[,:;][.!?…]*$/.test(description) || /\b(?:and|or|with|of|to|for|by|in|from|as|at|the|a|an|that|which)[.!?…]*$/i.test(description)) {
     brokenDescriptions.push({ slug: data.slug, description })
   }
   const relatedGuides = Array.isArray(data.relatedGuides) ? data.relatedGuides : []
