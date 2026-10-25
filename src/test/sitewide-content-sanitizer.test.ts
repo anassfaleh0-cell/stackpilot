@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest"
+import fs from "node:fs"
+import path from "node:path"
 import {
   getAlternative,
   getBest,
@@ -104,6 +106,16 @@ describe("site-wide content quality gate", () => {
         }
       }
     }
+  })
+
+
+  it("renders useful guidance instead of empty list, table, or body-only guide sections", () => {
+    const guidePage = fs.readFileSync(path.join(process.cwd(), "src", "app", "guides", "[slug]", "page.tsx"), "utf8")
+
+    expect(guidePage).toContain('section.type === "list" && section.items && section.items.length > 0')
+    expect(guidePage).toContain('section.columns.length > 0 && section.rows && section.rows.length > 0')
+    expect(guidePage).toContain('section.body?.trim() || `Use this section to evaluate')
+    expect(guidePage).toContain('record what is confirmed, limited, or still unknown')
   })
 
   it("keeps substantive content after sanitization", () => {

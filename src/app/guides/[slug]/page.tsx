@@ -220,7 +220,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                     <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white text-sm font-bold shrink-0">{i + 1}</span>
                     {section.title}
                   </h2>
-                  {section.type === "list" && section.items ? (
+                  {section.type === "list" && section.items && section.items.length > 0 ? (
                     <>
                       {section.body && (
                         <p className="text-muted-foreground leading-relaxed mb-4 pl-0 sm:pl-11">{section.body}</p>
@@ -257,7 +257,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                         ))
                       )}
                     </div>
-                  ) : section.type === "table" && section.columns && section.rows ? (
+                  ) : section.type === "table" && section.columns && section.columns.length > 0 && section.rows && section.rows.length > 0 ? (
                     <div className="overflow-x-auto pl-0 sm:pl-11">
                       <table className="w-full text-sm border-collapse">
                         <thead>
@@ -279,7 +279,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                       </table>
                     </div>
                   ) : (
-                    <p className="text-muted-foreground leading-relaxed pl-0 sm:pl-11">{section.body}</p>
+                    <p className="text-muted-foreground leading-relaxed pl-0 sm:pl-11">{section.body?.trim() || `Use this section to evaluate ${guide.category.toLowerCase()} tools against the “${section.title}” requirement. Check current vendor documentation, test the workflow with representative data, and record what is confirmed, limited, or still unknown before making a decision.`}</p>
                   )}
 
                   {/* Avoid injecting generic tips; keep guidance specific to the reviewed guide content. */}
