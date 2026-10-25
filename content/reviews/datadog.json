@@ -469,5 +469,6 @@
   "difficulty": "Intermediate",
   "learningCurve": "Moderate — expect 1-3 days to become productive",
   "whoShouldUse": "Engineering, platform, and SRE teams that need to correlate metrics, logs, traces, and alerts across cloud services can evaluate Datadog. Start with the systems and signals you actually operate, then test alert noise, dashboard usefulness, integration coverage, retention needs, and expected ingestion cost.",
-  "whoShouldNotUse": "It may be unnecessarily costly or operationally heavy for a small stack that can be monitored with simpler existing tools. Teams should estimate telemetry volume and retention charges from their own workloads, and verify any uptime commitment in the applicable contract rather than rely on an unverified summary."
+  "whoShouldNotUse": "It may be unnecessarily costly or operationally heavy for a small stack that can be monitored with simpler existing tools. Teams should estimate telemetry volume and retention charges from their own workloads, and verify any uptime commitment in the applicable contract rather than rely on an unverified summary.",
+  "scoreBasis": "Score provenance: this is a stored PilotStack editorial score, not a third-party review average. The score and category dimensions are retained for transparency but have not yet completed an evidence-and-calculation audit; treat them as provisional and verify current capabilities against the vendor's official documentation before relying on the rating."
 }

@@ -466,5 +466,6 @@
   "difficulty": "Beginner",
   "learningCurve": "Minimal — most users can get started within an hour",
   "whoShouldUse": "Product, UX, and engineering teams that need to investigate user journeys through session replay and behavioral events can evaluate FullStory. Define a few diagnostic questions first, then test search, replay usefulness, privacy masking, event capture, and how findings connect to product fixes.",
-  "whoShouldNotUse": "It may not be appropriate when session replay adds little value, when consent and privacy requirements cannot be met, or when the team lacks a process for reviewing captured sessions. Validate masking, retention, access controls, and sensitive-field handling before enabling capture on production pages."
+  "whoShouldNotUse": "It may not be appropriate when session replay adds little value, when consent and privacy requirements cannot be met, or when the team lacks a process for reviewing captured sessions. Validate masking, retention, access controls, and sensitive-field handling before enabling capture on production pages.",
+  "scoreBasis": "Fullstory's retained PilotStack rating should be treated as provisional until its scoring rationale and source evidence are audited. It does not represent an external average; confirm current analytics, session replay, privacy controls, and plan availability in Fullstory's official materials."
 }

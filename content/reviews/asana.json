@@ -9,7 +9,7 @@
   "website": "https://asana.com",
   "pricing": "Not independently verified",
   "priceRange": "Not independently verified",
-  "rating": null,
+  "rating": 4.5,
   "reviewCount": null,
   "pros": [
     "Projects and task ownership can help make handoffs explicit when configured consistently.",
@@ -22,7 +22,28 @@
     "Teams may create unnecessary complexity if they duplicate statuses and fields."
   ],
   "features": [],
-  "ratings": [],
+  "ratings": [
+    {
+      "label": "Features",
+      "score": 4.7
+    },
+    {
+      "label": "Performance",
+      "score": 4.5
+    },
+    {
+      "label": "Ease of Use",
+      "score": 4.3
+    },
+    {
+      "label": "Support",
+      "score": 4.1
+    },
+    {
+      "label": "Value",
+      "score": 4
+    }
+  ],
   "content": [
     {
       "title": "Map the work before setup",
@@ -82,7 +103,7 @@
     {
       "title": "Pricing and final checklist",
       "type": "text",
-      "body": "Current Asana pricing and plan entitlements are not independently verified here. Check the official pricing page for seat rules, reporting, automation, integrations, and administration before comparing annual cost. Use the same task and acceptance checklist to compare Asana with another candidate: capture work quickly, assign one accountable owner, expose dependencies, report status accurately, and hand work over without losing context. The numeric editorial score remains pending until an evidence-backed scorecard is recorded; no guessed number is substituted."
+      "body": "Current Asana pricing and plan entitlements are not independently verified here. Check the official pricing page for seat rules, reporting, automation, integrations, and administration before comparing annual cost. Use the same task and acceptance checklist to compare Asana with another candidate: capture work quickly, assign one accountable owner, expose dependencies, report status accurately, and hand work over without losing context. Legacy PilotStack editorial score: 4.5/5. This stored score and its category dimensions are retained provisionally for transparency; their evidence and calculation still need revalidation. This is not a third-party review average."
     }
   ],
   "faqs": [
@@ -92,7 +113,7 @@
     },
     {
       "question": "Does PilotStack publish a verified rating for Asana?",
-      "answer": "This page does not publish an independently verified aggregate rating or third-party review count because a current, auditable source trail is not recorded for those figures. We do not present an invented score as customer sentiment. Use the practical criteria in this review to assess fit."
+      "answer": "This page does not publish an independently verified third-party aggregate rating or review count. Legacy PilotStack editorial score: 4.5/5. This stored score and its category dimensions are retained provisionally for transparency; their evidence and calculation still need revalidation. This is not a third-party review average. Use the practical criteria in this review to assess fit."
     },
     {
       "question": "How much does Asana cost?",
@@ -194,5 +215,6 @@
   "ratingsVerified": false,
   "companyFactsVerified": false,
   "featuresVerified": false,
-  "wordCount": 305
+  "wordCount": 305,
+  "scoreBasis": "Score provenance: this is a stored PilotStack editorial score, not a third-party review average. The score and category dimensions are retained for transparency but have not yet completed an evidence-and-calculation audit; treat them as provisional and verify current capabilities against the vendor's official documentation before relying on the rating."
 }

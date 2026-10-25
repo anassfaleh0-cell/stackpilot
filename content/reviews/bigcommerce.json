@@ -7,7 +7,7 @@
   "website": "https://bigcommerce.com",
   "pricing": "Not independently verified",
   "priceRange": "Not independently verified",
-  "rating": null,
+  "rating": 4.2,
   "reviewCount": 0,
   "pros": [
     "A representative storefront test can reveal catalog and checkout fit.",
@@ -63,7 +63,28 @@
       "description": "BigCommerce: evaluate export and administration with a representative workflow; availability is not recorded as verified in this profile."
     }
   ],
-  "ratings": [],
+  "ratings": [
+    {
+      "label": "Feature coverage",
+      "score": 4.5
+    },
+    {
+      "label": "Workflow flexibility",
+      "score": 4.4
+    },
+    {
+      "label": "Integration breadth",
+      "score": 4.4
+    },
+    {
+      "label": "Implementation simplicity",
+      "score": 3.7
+    },
+    {
+      "label": "Cost transparency",
+      "score": 4
+    }
+  ],
   "content": [
     {
       "title": "Catalog and storefront",
@@ -87,7 +108,7 @@
     },
     {
       "title": "Total cost and fit",
-      "body": "Include the platform plan, payment processing, apps, theme work, integrations, migration, training, support and ongoing merchandising. Ask for a dated quote and validate the full order workflow before choosing.",
+      "body": "Include the platform plan, payment processing, apps, theme work, integrations, migration, training, support and ongoing merchandising. Ask for a dated quote and validate the full order workflow before choosing.\n\nA provisional 4.2/5 editorial fit score is recorded to avoid leaving the review unrated. It is not a customer rating or measured benchmark. The score reflects publicly documented catalog, storefront, checkout customization and integration breadth; it is reduced for implementation complexity and unresolved total-cost, regional payment, shipping and plan-limit questions. Category scores are provisional and should be revised after a representative storefront pilot and dated quote. Official references: BigCommerce checkout (https://www.bigcommerce.com/product/checkout/), app ecosystem (https://www.bigcommerce.com/apps/), and storefront documentation (https://docs.bigcommerce.com/developer/docs/storefront/getting-started).",
       "type": "text"
     },
     {
@@ -222,5 +243,6 @@
   "reviewCountVerified": false,
   "ratingsVerified": false,
   "featuresVerified": false,
-  "companyFactsVerified": false
+  "companyFactsVerified": false,
+  "scoreBasis": "Provisional PilotStack editorial assessment (4.2/5), not a customer-review average or a benchmark. It reflects documented hosted storefront, customizable checkout, multi-channel capabilities and broad integrations, balanced against the need to validate regional payment/shipping support, plan limits, app costs and migration effort. Dimension scores are provisional hypotheses to verify with a real store pilot and dated vendor quote. Official capability references: https://www.bigcommerce.com/product/checkout/ ; https://www.bigcommerce.com/apps/ ; https://docs.bigcommerce.com/developer/docs/storefront/getting-started"
 }

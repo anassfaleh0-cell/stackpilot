@@ -9,6 +9,8 @@ export interface ReviewContent {
   pricing: PricingTier
   priceRange?: string
   rating: number
+  /** Concise, source-linked explanation for a provisional editorial score. */
+  scoreBasis?: string
   reviewCount: number
   /** True only when the editorial score has a documented, auditable source. */
   ratingVerified?: boolean

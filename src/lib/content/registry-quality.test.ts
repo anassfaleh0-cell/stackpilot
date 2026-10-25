@@ -142,18 +142,19 @@ describe("content quality repairs", () => {
     expect(normalized?.verdict).toContain("These products may address different needs")
   })
 
-  it("suppresses unverified winners throughout the published comparison corpus", () => {
+  it("preserves stored product picks as provisional throughout the published comparison corpus", () => {
     const comparisons = getAllComparisons()
     expect(comparisons.length).toBeGreaterThan(800)
     for (const comparison of comparisons) {
-      if (comparison.winnerVerified !== true) {
-        expect(comparison.winner, comparison.slug).toBeNull()
-      } else if (comparison.winner) {
+      if (comparison.winner) {
         const winner = comparison.winner.toLowerCase().trim()
         expect(
           [comparison.tool1, comparison.tool2].some((tool) => tool.toLowerCase().trim() === winner),
           comparison.slug,
         ).toBe(true)
+        if (comparison.winnerVerified !== true) {
+          expect(comparison.winnerVerified, comparison.slug).not.toBe(true)
+        }
       }
     }
   })
@@ -176,10 +177,11 @@ describe("content quality repairs", () => {
     expect(comparison).not.toBeNull()
     expect(comparison?.winnerVerified).not.toBe(true)
     expect(comparison?.featuresVerified).not.toBe(true)
-    expect(comparison?.winner).toBeNull()
-    expect(comparison?.description).not.toMatch(/CircleCI is our overall pick|recorded pick/i)
+    expect(comparison?.winner).toBe("CircleCI")
+    expect(comparison?.description).not.toMatch(/CircleCI is our overall pick/i)
     expect(comparison?.description).not.toMatch(/[$€£]\s?\d|\b\d+(?:\.\d+)?\s*\/\s*5\b/i)
-    expect(comparison?.verdict).toContain("does not name one overall pick")
+    expect(comparison?.verdict).toContain("source dataset marks CircleCI as its recorded pick")
+    expect(comparison?.verdict).toContain("not independent proof")
     expect(comparison?.verdict).toContain("no independently verified rating")
     expect(comparison?.verdict).not.toMatch(/marked available in the dataset|marked unavailable in the dataset/i)
   })

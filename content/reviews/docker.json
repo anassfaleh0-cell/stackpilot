@@ -7,7 +7,7 @@
   "website": "https://docker.com",
   "pricing": "Not independently verified",
   "priceRange": "Not independently verified",
-  "rating": null,
+  "rating": 4.6,
   "reviewCount": 0,
   "pros": [
     "Container images can make dependencies and runtime assumptions more reproducible.",
@@ -63,7 +63,28 @@
       "description": "Docker: evaluate export and portability with a representative workflow; availability is not recorded as verified in this profile."
     }
   ],
-  "ratings": [],
+  "ratings": [
+    {
+      "label": "Performance",
+      "score": 4.8
+    },
+    {
+      "label": "Features",
+      "score": 4.7
+    },
+    {
+      "label": "Value",
+      "score": 4.5
+    },
+    {
+      "label": "Ease of Use",
+      "score": 4.3
+    },
+    {
+      "label": "Support",
+      "score": 4
+    }
+  ],
   "content": [
     {
       "title": "Build a reproducible image",
@@ -233,5 +254,6 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "wordCount": 335
+  "wordCount": 335,
+  "scoreBasis": "Docker's retained PilotStack score has not completed a criteria-by-criteria evidence audit. It is not a third-party review average; validate current plan boundaries, deployment options, and product behavior against Docker's official documentation before relying on it."
 }

@@ -21,6 +21,7 @@ describe("review score provenance", () => {
 
     expect(source).toContain("(PilotStack editorial score)")
     expect(source).toContain("this is PilotStack's assessment, not a third-party review aggregate")
+    expect(source).toContain("tool.scoreBasis")
     expect(source).not.toContain("across ${tool.reviewCount.toLocaleString()} recorded reviews")
     expect(source).not.toContain("({tool.reviewCount.toLocaleString()} reviews)")
     expect(source).not.toContain("const isBestValue = tool.pricing")
@@ -124,5 +125,25 @@ describe("review score provenance", () => {
     expect(source).not.toContain('recorded ? scoreWidth(recorded.score) : dimension.weight')
   })
 
+
+  it("always surfaces review score status and uses only valid five-point ratings", () => {
+    const source = fs.readFileSync(REVIEW_PAGE, "utf8")
+
+    expect(source).toContain("Review Claim, Rating &amp; Verdict")
+    expect(source).toContain("Pending evidence audit")
+    expect(source).toContain("No numeric score is available in the record")
+    expect(source).toContain("tool.rating > 0 && tool.rating <= 5")
+    expect(source).toContain("const reviewVerdict = [")
+  })
+
+  it("always surfaces comparison ratings, feature-score status, winner status and a non-empty verdict", () => {
+    const source = fs.readFileSync(path.join(process.cwd(), "src", "app", "comparisons", "[slug]", "page.tsx"), "utf8")
+
+    expect(source).toContain("Ratings, Scores, Winner &amp; Verdict")
+    expect(source).toContain("review1.rating > 0 && review1.rating <= 5")
+    expect(source).toContain("review2.rating > 0 && review2.rating <= 5")
+    expect(source).toContain("Feature-coverage score: not verified / not available")
+    expect(source).toContain("Use-case dependent: compare must-have workflows, integrations, permissions, and total cost before choosing.")
+  })
 
 })

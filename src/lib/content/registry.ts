@@ -768,7 +768,7 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
     ? tool1 + " is categorized as " + review1.category + ", while " + tool2 + " is categorized as " + review2.category + ". These products may address different needs, so compare only overlapping requirements rather than treating this page as a universal ranking."
     : ""
   const recordedPick = winner
-    ? `The source dataset marks ${winner} as its recorded pick. That label is not independent proof that it is the better choice for every team.`
+    ? `The source dataset marks ${winner} as its recorded pick. That label is not independent proof that it is the better choice for every team and does not establish a verified overall winner.`
     : "The source dataset does not name one overall pick. Choose based on your requirements and the evidence you verify."
   const profile = (name: string, review: ReviewContent | null) => {
     if (!review) return `${name}: PilotStack does not currently have a matching review profile for this comparison.`
@@ -884,7 +884,8 @@ export function getComparison(slug: string): ComparisonContent | null {
     }
   })
   const features = buildDerivedComparisonFeatures(cmp, baseFeatures)
-  const winner = cmp.winnerVerified === true ? normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2) : null
+  // Preserve stored product picks so the page can show them as provisional; verification status remains a separate field.
+  const winner = normalizeComparisonWinner(cmp.winner, cmp.tool1, cmp.tool2)
   const result: ComparisonContent = {
     ...cmp,
     featuresVerified: cmp.featuresVerified === true && !hasUnverifiedBooleanOnlyFeatures,

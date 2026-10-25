@@ -211,5 +211,6 @@
   "difficulty": "Intermediate",
   "learningCurve": "Moderate — the jobs-and-workflows model reads quickly; parameterization, caching, and resource classes take longer to master",
   "whoShouldUse": "Teams with an existing code host that want a separate build layer, control over executor size and caching, and the discipline to track credit usage against a budget.",
-  "whoShouldNotUse": "Groups expecting repositories, pipelines, and deployments in one product, and teams that cannot forecast usage-based build costs without monitoring them."
+  "whoShouldNotUse": "Groups expecting repositories, pipelines, and deployments in one product, and teams that cannot forecast usage-based build costs without monitoring them.",
+  "scoreBasis": "CircleCI's saved PilotStack score is awaiting an evidence and methodology check. It represents neither a third-party rating nor a completed current-product review; consult CircleCI's official documentation."
 }
