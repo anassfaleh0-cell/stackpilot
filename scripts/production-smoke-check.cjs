@@ -289,6 +289,52 @@ async function main() {
           }
         }
       }))
+      // A single 5xx can be a transient Worker/origin response or a stale edge-cached error.
+      // Recheck only failed URLs with a cache-busting query before treating them as persistent failures.
+      const initialPageFailures = [...pageFailures]
+      const recoveredPageFailures = []
+      const persistentPageFailures = []
+      for (const failure of initialPageFailures) {
+        if (!failure.url) {
+          persistentPageFailures.push(failure)
+          continue
+        }
+        const retryUrl = new URL(failure.url)
+        retryUrl.searchParams.set("__route_audit", process.env.GITHUB_SHA || String(Date.now()))
+        try {
+          const response = await fetchWithRetry(retryUrl.toString(), {
+            redirect: "follow",
+            headers: {
+              "user-agent": "PilotStack-SitemapTargetAudit/1.0",
+              "cache-control": "no-cache",
+              pragma: "no-cache",
+            },
+            signal: AbortSignal.timeout(15000),
+          }, 3)
+          if (response.status < 400) {
+            recoveredPageFailures.push({
+              url: failure.url,
+              initialStatus: failure.status,
+              recheckStatus: response.status,
+              finalUrl: response.url,
+            })
+          } else {
+            persistentPageFailures.push({
+              ...failure,
+              recheckStatus: response.status,
+              recheckFinalUrl: response.url,
+            })
+          }
+          await response.body?.cancel()
+        } catch (error) {
+          persistentPageFailures.push({
+            ...failure,
+            recheckStatus: "FETCH_ERROR",
+            recheckDetail: error instanceof Error ? error.message : String(error),
+          })
+        }
+      }
+      pageFailures.splice(0, pageFailures.length, ...persistentPageFailures)
       const limitReached = sitemapQueue.length > 0 || pageTargets.size >= maxPages
       const allFailures = [...sitemapFailures, ...pageFailures]
       if (process.env.AUDIT_OUTPUT_FILE) {
@@ -301,6 +347,7 @@ async function main() {
             pageUrlsChecked: targets.length,
             sitemapFailures,
             pageFailures,
+            recoveredPageFailures,
             limitReached,
           }, null, 2) + "\n",
           "utf8"
@@ -314,7 +361,9 @@ async function main() {
           pageUrlsChecked: targets.length,
           sitemapFailures: sitemapFailures.length,
           pageFailures: pageFailures.length,
+          transientPageFailuresRecovered: recoveredPageFailures.length,
           limitReached,
+          sampleRecovered: recoveredPageFailures.slice(0, 10),
           sampleFailures: allFailures.slice(0, 25),
         })
       )
