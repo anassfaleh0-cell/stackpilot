@@ -26,7 +26,7 @@ const reviewBySlug = new Map(reviews.map(({ data }) => [data.slug, data]))
 const findings = []
 const summary = {
   reviews: { total: reviews.length, missingClaim: 0, missingRating: 0, invalidRating: 0, unverifiedStoredRating: 0, missingProsOrCons: 0 },
-  comparisons: { total: comparisons.length, missingDescription: 0, missingVerdict: 0, missingFeatureRows: 0, missingToolLinks: 0, invalidWinner: 0, missingWinner: 0, useCaseFallback: 0, winnerNeedsEvidence: 0, linkedReviewRatingGaps: 0, unverifiedFeatureScore: 0, copyQualityFlags: 0 },
+  comparisons: { total: comparisons.length, missingDescription: 0, riskySnippetClaims: 0, missingVerdict: 0, missingFeatureRows: 0, missingToolLinks: 0, invalidWinner: 0, missingWinner: 0, useCaseFallback: 0, winnerNeedsEvidence: 0, linkedReviewRatingGaps: 0, unverifiedFeatureScore: 0, copyQualityFlags: 0 },
 }
 
 function add(type, slug, issue, detail = "") {
@@ -62,6 +62,21 @@ for (const { file, data } of comparisons) {
   if (!nonEmpty(data.description)) {
     summary.comparisons.missingDescription++
     add("comparison", slug, "missing-description")
+  }
+  // Report risky search-snippet claims without mutating stored scores or winners.
+  const snippet = String(data.description || "")
+  const hasUnverifiedRatingClaim = /\b\d(?:\.\d)?\s*\/\s*5\b/i.test(snippet) &&
+    ((tool1 && tool1.ratingVerified !== true) || (tool2 && tool2.ratingVerified !== true))
+  const hasUnverifiedOverallPick = /\b(overall pick|best overall|clear winner)\b/i.test(snippet) &&
+    data.winnerVerified !== true
+  const hasIncompletePriceFragment = /\b(?:from|starting at)\s*(?:[.;,]|$)/i.test(snippet)
+  if (hasUnverifiedRatingClaim || hasUnverifiedOverallPick || hasIncompletePriceFragment) {
+    summary.comparisons.riskySnippetClaims++
+    add("comparison", slug, "snippet-claim-needs-audit", [
+      hasUnverifiedRatingClaim ? "numerical rating without verified linked review scores" : "",
+      hasUnverifiedOverallPick ? "overall-pick language without verified winner evidence" : "",
+      hasIncompletePriceFragment ? "incomplete pricing fragment" : "",
+    ].filter(Boolean).join("; "))
   }
   if (!nonEmpty(data.verdict)) {
     summary.comparisons.missingVerdict++
