@@ -46,35 +46,15 @@ describe("XML sitemap integrity", () => {
     expect(new Set(urls).size).toBe(urls.length)
   })
 
-  it("omits records explicitly marked published:false from content sitemap routes", () => {
-    const routeByDirectory: Record<string, string> = {
-      reviews: "reviews",
-      comparisons: "comparisons",
-      guides: "guides",
-      blog: "blog",
-      glossary: "glossary",
-      alternatives: "alternatives",
-      "use-cases": "use-cases",
-      industries: "industries",
-      best: "best",
-      hubs: "hubs",
-      research: "research",
-      statistics: "statistics",
-    }
-    const sitemapPaths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
-
-    for (const [directory, route] of Object.entries(routeByDirectory)) {
-      const folder = path.join(process.cwd(), "content", directory)
-      if (!fs.existsSync(folder)) continue
-      for (const filename of fs.readdirSync(folder).filter((name) => name.endsWith(".json"))) {
-        const record = JSON.parse(fs.readFileSync(path.join(folder, filename), "utf8")) as {
-          slug?: string
-          published?: boolean
-        }
-        if (record.published !== false) continue
-        const slug = record.slug || filename.replace(/\\.json$/, "")
-        expect(sitemapPaths.has(`/${route}/${slug}`), `${route}/${slug}`).toBe(false)
-      }
+  it("does not use legacy published booleans to silently suppress public content routes", () => {
+    const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
+    const legacyPublicExamples = [
+      "/alternatives/1password-alternatives",
+      "/alternatives/slack-alternatives",
+      "/best/best-ai-machine-learning-agencies",
+    ]
+    for (const route of legacyPublicExamples) {
+      expect(paths.has(route), `${route} must remain discoverable while its content is repaired in place`).toBe(true)
     }
   })
 
