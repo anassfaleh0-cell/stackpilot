@@ -211,5 +211,6 @@
   "difficulty": "Intermediate",
   "learningCurve": "Moderate — the jobs-and-workflows model reads quickly; parameterization, caching, and resource classes take longer to master",
   "whoShouldUse": "Teams with an existing code host that want a separate build layer, control over executor size and caching, and the discipline to track credit usage against a budget.",
-  "whoShouldNotUse": "Groups expecting repositories, pipelines, and deployments in one product, and teams that cannot forecast usage-based build costs without monitoring them."
+  "whoShouldNotUse": "Groups expecting repositories, pipelines, and deployments in one product, and teams that cannot forecast usage-based build costs without monitoring them.",
+  "scoreBasis": "Score provenance: this is a stored PilotStack editorial score, not a third-party review average. The score and category dimensions are retained for transparency but have not yet completed an evidence-and-calculation audit; treat them as provisional and verify current capabilities against the vendor's official documentation before relying on the rating."
 }
