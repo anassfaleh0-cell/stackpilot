@@ -108,7 +108,7 @@
     },
     {
       "title": "Total cost and fit",
-      "body": "Include the platform plan, payment processing, apps, theme work, integrations, migration, training, support and ongoing merchandising. Ask for a dated quote and validate the full order workflow before choosing.\n\nA provisional 4.2/5 editorial fit score is recorded to avoid leaving the review unrated. It is not a customer rating or measured benchmark. The score reflects publicly documented catalog, storefront, checkout customization and integration breadth; it is reduced for implementation complexity and unresolved total-cost, regional payment, shipping and plan-limit questions. Category scores are provisional and should be revised after a representative storefront pilot and dated quote. Official references: BigCommerce checkout (https://www.bigcommerce.com/product/checkout/), app ecosystem (https://www.bigcommerce.com/apps/), and storefront documentation (https://docs.bigcommerce.com/developer/docs/storefront/getting-started).",
+      "body": "Include the platform plan, payment processing, apps, theme work, integrations, migration, training, support and ongoing merchandising. Ask for a dated quote and validate the full order workflow before choosing.\n\nThe stored 4.2/5 score is a provisional PilotStack editorial assessment, not a customer rating or measured benchmark. The score reflects publicly documented catalog, storefront, checkout customization and integration breadth; it is reduced for implementation complexity and unresolved total-cost, regional payment, shipping and plan-limit questions. Category scores are provisional and should be revised after a representative storefront pilot and dated quote. Official references: BigCommerce checkout (https://www.bigcommerce.com/product/checkout/), app ecosystem (https://www.bigcommerce.com/apps/), and storefront documentation (https://docs.bigcommerce.com/developer/docs/storefront/getting-started).",
       "type": "text"
     },
     {
@@ -148,7 +148,7 @@
     },
     {
       "title": "Launch checklist and decision",
-      "body": "Before committing, test catalog import, inventory sync, tax and shipping rules, checkout on mobile, refund handling, analytics events, customer data export, and support escalation. Ask the team to complete a routine order and a failed-payment or return scenario using documented steps. BigCommerce is a candidate only if those workflows work within acceptable cost and maintenance effort. No numeric score is published until an evidence-backed editorial assessment is recorded.",
+      "body": "Before committing, test catalog import, inventory sync, tax and shipping rules, mobile checkout, refund handling, analytics events, data export and support escalation. BigCommerce remains a candidate only if these workflows pass in the intended region and a dated quote covers the required plan, apps, integration work and support. The stored 4.2/5 score is a provisional PilotStack editorial assessment, not a customer-review average or measured benchmark; category scores are hypotheses pending a documented pilot. Do not treat the score as independently verified.",
       "type": "text"
     }
   ],
@@ -176,7 +176,8 @@
   ],
   "alternatives": [],
   "relatedGuides": [
-    "how-to-choose-accounting-software"
+    "software-evaluation-checklist",
+    "saas-implementation-best-practices"
   ],
   "relatedComparisons": [
     "shopify-vs-bigcommerce"
@@ -236,13 +237,13 @@
   "wordCount": 287,
   "difficulty": "Intermediate",
   "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "BigCommerce is best suited for enterprises and power users who need advanced finance & accounting capabilities. Teams with dedicated IT support will get the most from its extensive feature set.",
-  "whoShouldNotUse": "BigCommerce is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives.",
+  "whoShouldUse": "Retail and ecommerce teams evaluating a hosted storefront should test BigCommerce with their real catalog, variants, checkout, shipping and tax rules, payment providers, order integrations, and expected sales volume. It may be a fit when the required storefront and integration workflows pass a pilot and the total cost is acceptable.",
+  "whoShouldNotUse": "It may be a poor fit for teams whose required payment providers or shipping workflows are unavailable in their target market, whose catalog needs unsupported custom behavior, or whose budget cannot cover the platform plan plus apps, implementation and ongoing maintenance. Confirm the exact plan and contract before deciding.",
   "priceRangeVerified": false,
   "ratingVerified": false,
   "reviewCountVerified": false,
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "scoreBasis": "Provisional PilotStack editorial assessment (4.2/5), not a customer-review average or a benchmark. It reflects documented hosted storefront, customizable checkout, multi-channel capabilities and broad integrations, balanced against the need to validate regional payment/shipping support, plan limits, app costs and migration effort. Dimension scores are provisional hypotheses to verify with a real store pilot and dated vendor quote. Official capability references: https://www.bigcommerce.com/product/checkout/ ; https://www.bigcommerce.com/apps/ ; https://docs.bigcommerce.com/developer/docs/storefront/getting-started"
+  "scoreBasis": "Provisional PilotStack editorial assessment (4.2/5), not a customer-review average or measured benchmark. It is a hypothesis based on the product's ecommerce storefront positioning and should be validated with a representative catalog, checkout, payment, shipping, integration and migration pilot. Current plans, limits, prices, regional eligibility and third-party ratings are not independently verified in this profile. Official starting points: https://www.bigcommerce.com/product/checkout/ ; https://www.bigcommerce.com/apps/ ; https://docs.bigcommerce.com/developer/docs/storefront/getting-started"
 }
