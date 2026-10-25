@@ -138,10 +138,16 @@ jobs:
             sleep 1
           done
           grep -F 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0' /tmp/pilotstack-response >/dev/null || curl --silent --show-error --fail --retry 4 --retry-all-errors --retry-delay 5 https://pilotstack.online/ads.txt | grep -F 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0'
-          if curl --silent --show-error --fail https://pilotstack.online/contact | grep -Fq 'hello@pilotstack.online'; then
-            echo "Legacy placeholder inbox still present on live contact page"
+          contact_html="$(curl --silent --show-error --fail --retry 3 --retry-all-errors --retry-delay 2 https://pilotstack.online/contact)"
+          printf '%s' "$contact_html" | grep -Fq 'contact@pilotstack.online' || {
+            echo "Configured contact inbox missing from live contact page"
+            exit 1
+          }
+          if printf '%s' "$contact_html" | grep -Eiq 'hello@pilotstack\.online|newsletter@pilotstack\.online|support@pilotstack\.online'; then
+            echo "Legacy or placeholder inbox still present on live contact page"
             exit 1
           fi
+          echo "PASS live contact page uses only the configured contact inbox"
           # Verify actual rendered review content, not only HTTP status. A unique query string
           # avoids accidentally validating a stale cached HTML response after deployment.
           xero_url="https://pilotstack.online/reviews/xero?__content_check=${GITHUB_SHA}"
