@@ -61,7 +61,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   if (!category) notFound()
 
   const knowledge = getCategoryKnowledge(slug)
-  const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && r.category === category.name)
+  const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && categoryMatches(r.category, category.name))
   const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug) && categoryMatches(g.category, category.name))
   const comparisons = getAllComparisons().filter((c) => categoryMatches(c.category, category.name) && isContentAvailable("comparison", c.slug))
   const posts = getAllBlogPosts().filter((p) => categoryMatches(p.category, category.name))
