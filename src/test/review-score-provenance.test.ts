@@ -166,6 +166,12 @@ describe("review score provenance", () => {
     expect(smoke).toContain("pageUrlsChecked: targets.length")
     expect(smoke).toContain("const maxSitemaps = 200")
     expect(smoke).toContain("const maxPages = 15000")
+    expect(smoke).toContain("if (process.env.AUDIT_OUTPUT_FILE)")
+    expect(smoke).toContain("pageFailures,")
+    const workflow = fs.readFileSync(path.join(process.cwd(), ".github", "workflows", "pilotstack-sitemap-route-audit.yml"), "utf8")
+    expect(workflow).toContain("AUDIT_OUTPUT_FILE: sitemap-route-audit-report.json")
+    expect(workflow).toContain("actions/upload-artifact@v4")
+    expect(workflow).toContain("name: pilotstack-sitemap-route-audit-${{ github.run_id }}")
   })
 
   it("accepts the actual published legacy score provenance disclosure in the production smoke check", () => {
