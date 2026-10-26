@@ -1,69 +1,79 @@
 {
   "slug": "airtable-vs-confluence",
-  "title": "Airtable vs Confluence",
-  "description": "A workflow-fit guide to Airtable and Confluence. The product profiles place them in Project Management and Productivity, respectively, so this is not a like-for-like feature ranking. Compare project execution, ownership, deadlines, and status with documentation, decisions, and searchable team knowledge. Decide whether one tool or an integrated pair best fits the actual workflow.",
+  "title": "Airtable vs Confluence: Structured Workflows vs Team Knowledge",
+  "description": "Airtable and Confluence can support different kinds of team work. Compare structured records, tracking, and operational workflows with documentation, decisions, and searchable knowledge; choose the job that needs solving rather than relying on an unverified feature winner.",
   "category": "Project Management",
   "tool1": "Airtable",
   "tool2": "Confluence",
-  "winner": "airtable",
+  "winner": null,
   "features": [
     {
-      "name": "User Rating",
-      "tool1": true,
-      "tool2": false
+      "name": "Primary job",
+      "tool1": "Structured records and workflow tracking",
+      "tool1Detail": "Test linked records, status fields, ownership, views, forms, and automations using a real operational process.",
+      "tool2": "Documentation and team knowledge",
+      "tool2Detail": "Test how the team creates, organizes, searches, reviews, and maintains project documentation, decisions, and shared knowledge."
     },
     {
-      "name": "Starting Price",
-      "tool1": true,
-      "tool2": true
+      "name": "Information structure",
+      "tool1": "Records, fields, and relationships",
+      "tool1Detail": "Check data consistency, linked records, validation, permissions, and whether the structure supports reporting without manual workarounds.",
+      "tool2": "Pages, spaces, and connected documentation",
+      "tool2Detail": "Check information architecture, page ownership, search, access control, and how users find the current source of truth."
     },
     {
-      "name": "Best For",
-      "tool1": true,
-      "tool2": true
+      "name": "Collaboration and ownership",
+      "tool1": "Workflow owners and task status",
+      "tool1Detail": "Test assignments, handoffs, views, notifications, and how overdue or blocked work is surfaced.",
+      "tool2": "Document authorship and review",
+      "tool2Detail": "Test collaborative editing, review practices, decision records, page maintenance, and knowledge handoffs."
     },
     {
-      "name": "Ease of Use",
-      "tool1": true,
-      "tool2": true
+      "name": "Integrations and governance",
+      "tool1": "Operational data and automation",
+      "tool1Detail": "Verify required connectors, sync behavior, access, automation limits, and how failed updates are detected and recovered.",
+      "tool2": "Knowledge access and project context",
+      "tool2Detail": "Verify integrations, permissions, search behavior, retention needs, and how documentation connects to the team's work tools."
     },
     {
-      "name": "Integration Ecosystem",
-      "tool1": true,
-      "tool2": true
+      "name": "Pricing and total cost",
+      "tool1": "Seats, usage, automation, and administration",
+      "tool1Detail": "Confirm current plan terms and include setup, maintenance, governance, and migration costs.",
+      "tool2": "Seats, plan limits, and knowledge administration",
+      "tool2Detail": "Confirm current plan terms and include content migration, permissions design, training, and ongoing knowledge maintenance."
     }
   ],
-  "verdict": "Neither Airtable nor Confluence is a universal winner because the product profiles cover different work needs. Identify the primary friction, test a real workflow from start to finish, and confirm permissions, search, reporting, integrations, and total cost. If the products are complementary, check whether they connect cleanly without duplicate records or extra administration.",
+  "verdict": "Neither Airtable nor Confluence is a universal winner because the products support different work needs. Evaluate Airtable for structured records and operational workflow tracking; evaluate Confluence for documentation and searchable team knowledge. They may complement each other if the team defines clear ownership and tests integrations. The legacy winner and feature rows are not verified evidence, so this page is a workflow decision guide rather than a numeric benchmark.",
   "faqs": [
     {
       "question": "Are Airtable and Confluence direct substitutes?",
-      "answer": "Not necessarily. Their profiles list different primary categories (Project Management and Productivity). Compare the actual job each must do; they may be alternatives for a narrow workflow or complementary products."
+      "answer": "Not universally. Airtable is often evaluated for structured records and workflows, while Confluence is often evaluated for documentation and team knowledge. Compare the exact job your team needs."
     },
     {
       "question": "When should I evaluate Airtable?",
-      "answer": "Evaluate Airtable when its primary role in Project Management matches your must-have workflow. Test the relevant tasks and verify current capabilities, plan limits, permissions, and terms with the vendor."
+      "answer": "Evaluate Airtable when linked records, status tracking, workflow ownership, and structured operational data are central requirements."
     },
     {
       "question": "When should I evaluate Confluence?",
-      "answer": "Evaluate Confluence when its primary role in Productivity matches your requirement. Confirm it handles the workflow end to end, including handoffs, reporting, access controls, and data export."
+      "answer": "Evaluate Confluence when documentation, shared decisions, searchable knowledge, and ongoing page maintenance are central requirements."
     },
     {
-      "question": "Can the products be used together?",
-      "answer": "Possibly, if they cover different steps. Verify current integration documentation, the data exchanged, sync frequency, permissions, error handling, and any connector fees before relying on a connection."
+      "question": "Can Airtable and Confluence be used together?",
+      "answer": "Potentially. Define which system owns each record or document, then verify the integration, permissions, synchronization, failure handling, and ongoing administration."
     },
     {
       "question": "How should I compare total cost?",
-      "answer": "Include seats, usage limits, add-ons, transaction fees where applicable, implementation, training, administration, integration maintenance, and switching costs—not just advertised starting prices."
+      "answer": "Include seats, usage limits, add-ons, implementation, training, integration maintenance, governance, and migration rather than relying only on advertised starting prices."
     },
     {
       "question": "Does this page name a verified winner?",
-      "answer": "No. This is a workflow decision guide, not an independently verified head-to-head score. The stored winner and feature rows are not verified; test your requirements and confirm current details with each vendor."
+      "answer": "No. The old winner and feature-score rows are not independently verified. Use the workflow criteria and test both products against written requirements."
     }
   ],
-  "lastUpdated": "2026-07-20",
+  "lastUpdated": "2026-10-26",
   "tool1Slug": "airtable",
   "tool2Slug": "confluence",
-  "published": false,
+  "published": true,
   "decisionGuide": true,
   "winnerVerified": false,
   "featuresVerified": false
