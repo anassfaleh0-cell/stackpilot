@@ -77,6 +77,7 @@ describe("getComparisonDecision", () => {
       tool2Category: "Project Management",
     })).toEqual({
       categoriesDiffer: false,
+      categoriesComparable: true,
       winnerLabel: null,
       provisionalWinnerLabel: "Alpha",
       hasComparableWinner: false,
@@ -112,6 +113,7 @@ describe("getComparisonDecision", () => {
       tool2Category: "Project Management",
     })).toEqual({
       categoriesDiffer: false,
+      categoriesComparable: true,
       winnerLabel: null,
       provisionalWinnerLabel: null,
       hasComparableWinner: false,
