@@ -97,9 +97,11 @@ export function getComparisonDisplayCopy(input: ComparisonDisplayCopyInput): Com
   const category1 = input.tool1Category?.trim()
   const category2 = input.tool2Category?.trim()
   const categoriesDiffer = Boolean(category1 && category2 && category1 !== category2)
+  const categoriesComparable = Boolean(category1 && category2 && category1 === category2)
+  const winnerVerifiedForComparison = input.winnerVerified === true && categoriesComparable
   const containsUnsupportedMetrics = UNSUPPORTED_SCORE_OR_PRICE.test(input.description) ||
     UNSUPPORTED_SCORE_OR_PRICE.test(input.verdict)
-  const containsUnsupportedWinner = input.winnerVerified !== true && (
+  const containsUnsupportedWinner = !winnerVerifiedForComparison && (
     UNSUPPORTED_WINNER_CLAIM.test(input.description) || UNSUPPORTED_WINNER_CLAIM.test(input.verdict)
   )
 
