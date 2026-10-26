@@ -8,6 +8,7 @@ export interface ComparisonGridItem {
   title: string
   category: string
   winner?: string | null
+  winnerStatus?: "verified" | "provisional" | "recorded"
   description: string
 }
 
@@ -22,7 +23,11 @@ export function ComparisonGrid({ items }: { items: ComparisonGridItem[] }) {
                 <Badge variant="secondary">{cmp.category}</Badge>
                 {cmp.winner ? (
                   <span className="text-xs font-medium text-success flex items-center gap-1">
-                    <Shield size={12} /> {cmp.winner} wins
+                    <Shield size={12} /> {cmp.winnerStatus === "verified"
+                      ? `${cmp.winner} wins`
+                      : cmp.winnerStatus === "provisional"
+                        ? `${cmp.winner} · provisional pick`
+                        : `${cmp.winner} · recorded pick, verify category fit`}
                   </span>
                 ) : (
                   <Crosshair size={16} className="text-muted-foreground" />

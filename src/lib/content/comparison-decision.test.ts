@@ -21,6 +21,7 @@ describe("getComparisonDecision", () => {
       tool2Category: "Security & Compliance",
     })).toEqual({
       categoriesDiffer: false,
+      categoriesComparable: true,
       winnerLabel: "1Password",
       provisionalWinnerLabel: null,
       hasComparableWinner: true,
@@ -39,6 +40,7 @@ describe("getComparisonDecision", () => {
       tool2Category: "Developer Tools",
     })).toEqual({
       categoriesDiffer: true,
+      categoriesComparable: false,
       winnerLabel: "1Password",
       provisionalWinnerLabel: null,
       hasComparableWinner: false,
@@ -56,6 +58,7 @@ describe("getComparisonDecision", () => {
       tool2Category: "Project Management",
     })).toEqual({
       categoriesDiffer: false,
+      categoriesComparable: true,
       winnerLabel: null,
       provisionalWinnerLabel: "Alpha",
       hasComparableWinner: false,
@@ -74,8 +77,27 @@ describe("getComparisonDecision", () => {
       tool2Category: "Project Management",
     })).toEqual({
       categoriesDiffer: false,
+      categoriesComparable: true,
       winnerLabel: null,
       provisionalWinnerLabel: "Alpha",
+      hasComparableWinner: false,
+    })
+  })
+
+  it("does not treat missing category data as proof that a stored winner is comparable", () => {
+    expect(getComparisonDecision({
+      winner: "alpha",
+      winnerVerified: true,
+      tool1: "Alpha",
+      tool1Slug: "alpha",
+      tool1Category: "Project Management",
+      tool2: "Beta",
+      tool2Slug: "beta",
+    })).toEqual({
+      categoriesDiffer: false,
+      categoriesComparable: false,
+      winnerLabel: "Alpha",
+      provisionalWinnerLabel: null,
       hasComparableWinner: false,
     })
   })
@@ -91,6 +113,7 @@ describe("getComparisonDecision", () => {
       tool2Category: "Project Management",
     })).toEqual({
       categoriesDiffer: false,
+      categoriesComparable: true,
       winnerLabel: null,
       provisionalWinnerLabel: null,
       hasComparableWinner: false,
@@ -180,6 +203,20 @@ describe("getComparisonDisplayCopy", () => {
     })
     expect(copy.description).not.toContain("4.8/5")
     expect(copy.verdict).not.toContain("overall winner")
+  })
+
+  it("does not trust a verified winner flag when category evidence is missing", () => {
+    const copy = getComparisonDisplayCopy({
+      tool1: "Alpha",
+      tool2: "Beta",
+      tool1Category: "Project Management",
+      winnerVerified: true,
+      description: "Alpha is the overall winner for every team.",
+      verdict: "Alpha wins overall.",
+    })
+    expect(copy.description).not.toContain("overall winner")
+    expect(copy.verdict).not.toContain("wins overall")
+    expect(copy.verdict).toContain("does not establish an auditable overall winner")
   })
 
   it("preserves neutral copy for same-category comparisons when no unsupported claims exist", () => {
