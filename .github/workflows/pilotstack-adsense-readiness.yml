@@ -66,3 +66,4 @@ jobs:
         run: npm run seo:smoke
         env:
           SITE_URL: https://pilotstack.online
+          ALLOW_LIVE_AUDIT: "1"
