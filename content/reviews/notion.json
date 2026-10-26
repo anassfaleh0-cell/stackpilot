@@ -20,7 +20,68 @@
     "Project management requirements such as dependencies, advanced reporting, or specialized planning may need additional tools or a different product.",
     "Plan limits for collaboration, history, uploads, permissions, AI, and administration can affect the total cost; verify current entitlements before migrating critical content."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Docs and collaborative pages",
+      "description": "Create shared documents and notes with blocks, comments, and collaborative editing; test the publishing and access settings you need. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Documentation"
+    },
+    {
+      "name": "Databases and properties",
+      "description": "Organize structured records and connect information using database properties and relations. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Database views",
+      "description": "Evaluate table, board/Kanban, calendar, and timeline-style views against your real workflow. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Planning"
+    },
+    {
+      "name": "Wikis and teamspaces",
+      "description": "Organize team knowledge into owned areas and test how people find current, approved information. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Knowledge management"
+    },
+    {
+      "name": "Tasks and project tracking",
+      "description": "Track owners, status, dates, subtasks, and dependencies where supported; validate complexity before replacing a dedicated PM tool. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Planning"
+    },
+    {
+      "name": "Forms and request intake",
+      "description": "Collect structured submissions into workspace databases and confirm the workflow meets intake requirements. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Workflow"
+    },
+    {
+      "name": "Charts and dashboards",
+      "description": "Build visual summaries from workspace data and verify that the numbers match source records. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Automations",
+      "description": "Evaluate database automations and triggers for repetitive work; confirm current plan and usage limits. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Search and connected information",
+      "description": "Test workspace search and any connected-source search entitlements against the information your team needs. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Search"
+    },
+    {
+      "name": "Imports, exports, and integrations",
+      "description": "Run a small migration/export test and validate field fidelity, attachments, permissions, and connected tools. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Integrations"
+    }
+  ],
   "content": [
     {
       "title": "Executive Summary",
