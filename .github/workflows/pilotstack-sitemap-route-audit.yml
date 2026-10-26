@@ -38,6 +38,8 @@ jobs:
         env:
           SITE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.site_url || 'https://pilotstack.online' }}
           CHECK_SITEMAP_URLS: "1"
+          # This dedicated, throttled audit is explicitly allowed to crawl the production sitemap.
+          ALLOW_LIVE_AUDIT: "1"
           GITHUB_SHA: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
           AUDIT_OUTPUT_FILE: sitemap-route-audit-report.json
         run: node scripts/production-smoke-check.cjs
