@@ -5,7 +5,7 @@ permissions:
 
 on:
   push:
-    branches: [master, "fix/comparison-copy-audit-wave1", "fix/throttle-live-seo-audits"]
+    branches: [master, "fix/comparison-copy-audit-wave1"]
   pull_request:
 
 concurrency:
