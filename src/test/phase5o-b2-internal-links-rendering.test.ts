@@ -1,4 +1,6 @@
 import { describe, it, expect } from "vitest"
+import fs from "node:fs"
+import path from "node:path"
 import React from "react"
 import { renderToStaticMarkup } from "react-dom/server"
 import {
@@ -150,6 +152,15 @@ function pickPage<T extends { slug: string }>(
 }
 
 describe("Phase 5O-B-2: internal link rendering", () => {
+  it("labels stored but unverified review scores as provisional in related cards", () => {
+    const source = fs.readFileSync(path.join(process.cwd(), "src", "components", "content", "internal-links.tsx"), "utf8")
+    const registry = fs.readFileSync(path.join(process.cwd(), "src", "lib", "content", "internal-links.ts"), "utf8")
+
+    expect(registry).toContain("ratingVerified: r.ratingVerified === true")
+    expect(source).toContain('item.type === "review" && item.ratingVerified !== true')
+    expect(source).toContain(">provisional</span>")
+  })
+
   it(
     "renders the five legacy sections with their existing labels",
     { timeout: 180000 },
