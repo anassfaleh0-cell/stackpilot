@@ -103,9 +103,20 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
   const allReviews = getAllReviews()
 
   // Preserve stored editorial scores visibly with an explicit pending-verification label; only verified scores feed structured data and category rankings.
-  const hasStoredEditorialRating = typeof tool.rating === "number" && Number.isFinite(tool.rating) && tool.rating > 0 && tool.rating <= 5
-  const hasEditorialRating = tool.ratingVerified === true && hasStoredEditorialRating
   const rawCategoryRatings = Array.isArray(tool.ratings) ? tool.ratings : []
+  const validCategoryScores = rawCategoryRatings
+    .map((item) => item?.score)
+    .filter((score): score is number => typeof score === "number" && Number.isFinite(score) && score > 0 && score <= 5)
+  // Restore a visible editorial score when a legacy review has dimension ratings but its
+  // top-level rating field is missing. This is a transparent arithmetic mean, never a user rating.
+  const validTopLevelRating = typeof tool.rating === "number" && Number.isFinite(tool.rating) && tool.rating > 0 && tool.rating <= 5
+    ? tool.rating
+    : null
+  const displayEditorialRating = validTopLevelRating ?? (validCategoryScores.length
+    ? Math.round((validCategoryScores.reduce((sum, score) => sum + score, 0) / validCategoryScores.length) * 10) / 10
+    : null)
+  const hasStoredEditorialRating = displayEditorialRating !== null
+  const hasEditorialRating = tool.ratingVerified === true && validTopLevelRating !== null
   // Keep source values intact, but never plot dimension scores outside the published 1–5 scale.
   const categoryRatings = rawCategoryRatings.filter((item) =>
     item && typeof item.score === "number" && Number.isFinite(item.score) && item.score > 0 && item.score <= 5
@@ -246,7 +257,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 {hasStoredEditorialRating && (
                   <div className="flex items-center gap-1 text-sm">
                     <Star size={14} className="fill-accent text-accent" />
-                    <span className="font-semibold">{formatScore(tool.rating)}</span>
+                    <span className="font-semibold">{formatScore(displayEditorialRating)}</span>
                     <span className="text-muted-foreground">/ 5.0</span>
                     <span className="text-xs text-muted-foreground">{hasEditorialRating ? "(PilotStack editorial score)" : "(stored score; verification pending)"}</span>
                   </div>
@@ -279,7 +290,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 <div className="grid gap-3 sm:grid-cols-2 mb-4">
                   <div className="rounded-lg bg-muted-bg p-4">
                     <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Editorial rating / score</p>
-                    <p className="text-2xl font-bold">{hasStoredEditorialRating ? `${formatScore(tool.rating)}/5` : "Pending evidence audit"}</p>
+                    <p className="text-2xl font-bold">{hasStoredEditorialRating ? `${formatScore(displayEditorialRating)}/5` : "Pending evidence audit"}</p>
                     <p className="text-xs text-muted-foreground mt-2">{hasEditorialRating ? "Recorded PilotStack editorial rating marked verified; this is not a third-party user-review average." : hasStoredEditorialRating ? "Stored score preserved for transparency; its evidence and calculation still need verification." : "No numeric score is available in the record. A number is not invented to fill the gap."}</p>
                     {tool.scoreBasis ? <p className="text-xs leading-relaxed text-muted-foreground mt-2">{tool.scoreBasis}</p> : hasStoredEditorialRating && !hasEditorialRating ? <p className="text-xs leading-relaxed text-muted-foreground mt-2">Score provenance: this legacy stored editorial value has no source-linked rationale or reproducible score breakdown recorded in this profile. It is retained for transparency, but remains provisional and should not be treated as independently verified or directly comparable to verified ratings.</p> : null}
                   </div>
@@ -295,7 +306,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
                 <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
                 <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
-                  {hasStoredEditorialRating && <li>Editorial rating: {formatScore(tool.rating)}/5 (PilotStack editorial score; {hasEditorialRating ? "verified editorial record" : "stored value, verification pending"}; not a third-party review aggregate).</li>}
+                  {hasStoredEditorialRating && <li>Editorial rating: {formatScore(displayEditorialRating)}/5 (PilotStack editorial score; {hasEditorialRating ? "verified editorial record" : "stored value, verification pending"}; not a third-party review aggregate).</li>}
                   <li>Pricing: {pricingSummary}</li>
                   <li>Best for: {pros[0]?.toLowerCase().startsWith("best") ? pros[0] : tool.featuresVerified === true && tool.features.some((feature) => feature.available) ? `Recorded strengths include ${tool.features.filter((feature) => feature.available).slice(0, 2).map((feature) => feature.name.toLowerCase()).join(" and ")}; confirm current availability with the vendor.` : `Evaluate ${tool.name} against your workflow requirements and verify current capabilities with the vendor.`}</li>
                   <li>{tool.cons.length > 0 ? `Consider alternatives if: ${tool.cons[0]}` : `No limitations are recorded in this profile; verify your requirements and the vendor's current documentation before deciding.`}</li>
@@ -358,7 +369,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Rating Overview</h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
-                  <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={hasStoredEditorialRating ? `${formatScore(tool.rating)}/5` : "Pending"} title="Editorial Score" description={hasEditorialRating ? "Verified PilotStack editorial assessment" : hasStoredEditorialRating ? "Provisional stored score; evidence audit pending" : "Assessment not yet recorded; no number is invented"} />
+                  <InfoCard icon={<Star size={16} fill="var(--primary)" stroke="var(--primary)" />} value={hasStoredEditorialRating ? `${formatScore(displayEditorialRating)}/5` : "Pending"} title="Editorial Score" description={hasEditorialRating ? "Verified PilotStack editorial assessment" : hasStoredEditorialRating ? "Provisional stored score; evidence audit pending" : "Assessment not yet recorded; no number is invented"} />
                   <InfoCard icon={
                     <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
@@ -542,7 +553,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     </div>
                     {hasStoredEditorialRating ? (
                       <>
-                        <div className="text-lg font-bold text-primary mb-1">{formatScore(tool.rating)}/5</div>
+                        <div className="text-lg font-bold text-primary mb-1">{formatScore(displayEditorialRating)}/5</div>
                         <ScoreBar score={tool.rating} className="mb-3" />
                         <p className="text-xs text-muted-foreground mb-3">{hasEditorialRating ? "Verified PilotStack editorial score." : "Legacy PilotStack editorial score; evidence and calculation are pending audit. It is not a third-party user rating."}</p>
                       </>
