@@ -244,7 +244,7 @@ async function main() {
           try {
             const response = await fetchWithRetry(current.url, {
               redirect: "follow",
-              headers: { "user-agent": "PilotStack-SitemapTargetAudit/1.0" },
+              headers: { "user-agent": "PilotStack-ProductionSmokeCheck/1.0" },
               signal: AbortSignal.timeout(15000),
             })
             if (!response.ok) {
@@ -288,7 +288,7 @@ async function main() {
           try {
             const response = await fetchWithRetry(target, {
               redirect: "follow",
-              headers: { "user-agent": "PilotStack-SitemapTargetAudit/1.0" },
+              headers: { "user-agent": "PilotStack-ProductionSmokeCheck/1.0" },
               signal: AbortSignal.timeout(15000),
             })
             if (response.status >= 400) pageFailures.push({ url: target, status: response.status, finalUrl: response.url })
@@ -304,7 +304,9 @@ async function main() {
       const recoveredPageFailures = []
       const persistentPageFailures = []
       for (const failure of initialPageFailures) {
-        if (!failure.url) {
+        if (!failure.url || !(failure.status === 408 || failure.status === 429 || (typeof failure.status === "number" && failure.status >= 500))) {
+          // Do not retry stable client errors (especially 403/404) with cache-busting
+          // query strings. That creates needless Worker work and can hide the real cause.
           persistentPageFailures.push(failure)
           continue
         }
@@ -314,7 +316,7 @@ async function main() {
           const response = await fetchWithRetry(retryUrl.toString(), {
             redirect: "follow",
             headers: {
-              "user-agent": "PilotStack-SitemapTargetAudit/1.0",
+              "user-agent": "PilotStack-ProductionSmokeCheck/1.0",
               "cache-control": "no-cache",
               pragma: "no-cache",
             },
