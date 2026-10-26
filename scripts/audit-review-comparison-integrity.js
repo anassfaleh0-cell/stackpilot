@@ -76,7 +76,7 @@ for (const { file, data } of reviews) {
     add("review", slug, "score-copy-contradiction", "a stored editorial score exists but the copy says no numeric score is published; explain the score's provisional provenance instead")
   }
 
-  const numericMetrics = /\b\d[\d,]*(?:\.\d+)?\s*(?:reviews|users|customers|employees|integrations|templates)\b/gi
+  const numericMetrics = /\b\d[\d,]*(?:\.\d+)?\s*(?:reviews|users|customers|employees|integrations|templates)\b/i
   const metricFlags = sectionTexts.filter((section) => numericMetrics.test(section.text))
   numericMetrics.lastIndex = 0
   if (metricFlags.length && data.reviewCountVerified !== true && data.ratingVerified !== true) {
