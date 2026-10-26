@@ -4,7 +4,8 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema } from "@/components/seo/json-ld"
 import { site } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getAllComparisons } from "@/lib/content/registry"
+import { getAllComparisons, getReview } from "@/lib/content/registry"
+import { getComparisonDecision } from "@/lib/content/comparison-decision"
 import { isNoindexed } from "@/lib/noindex"
 import { ComparisonGrid } from "@/components/entity/comparison-grid"
 import { BrandPattern } from "@/components/brand/patterns"
@@ -56,7 +57,37 @@ export default function ComparisonsPage() {
       <Section>
         <Container>
           {comparisons.length > 0 ? (
-            <ComparisonGrid items={pageComparisons.map((c) => ({ slug: c.slug, title: c.title, category: c.category, winner: c.winnerVerified === true ? c.winner : null, description: c.description }))} />
+            <ComparisonGrid items={pageComparisons.map((c) => {
+              const review1 = getReview(c.tool1Slug)
+              const review2 = getReview(c.tool2Slug)
+              const decision = getComparisonDecision({
+                winner: c.winner,
+                winnerVerified: c.winnerVerified === true,
+                tool1: c.tool1,
+                tool1Slug: c.tool1Slug,
+                tool1Category: review1?.category,
+                tool2: c.tool2,
+                tool2Slug: c.tool2Slug,
+                tool2Category: review2?.category,
+              })
+              const storedWinner = c.winner?.trim().toLowerCase()
+              const recordedWinner = storedWinner === c.tool1Slug.toLowerCase() || storedWinner === c.tool1.toLowerCase()
+                ? c.tool1
+                : storedWinner === c.tool2Slug.toLowerCase() || storedWinner === c.tool2.toLowerCase()
+                  ? c.tool2
+                  : null
+              const winner = decision.hasComparableWinner
+                ? decision.winnerLabel
+                : decision.provisionalWinnerLabel || (!decision.categoriesComparable ? recordedWinner : null)
+              const winnerStatus = decision.hasComparableWinner
+                ? "verified" as const
+                : decision.provisionalWinnerLabel
+                  ? "provisional" as const
+                  : !decision.categoriesComparable && recordedWinner
+                    ? "recorded" as const
+                    : undefined
+              return { slug: c.slug, title: c.title, category: c.category, winner, winnerStatus, description: c.description }
+            })} />
           ) : (
             <p className="text-center text-muted-foreground py-12">No comparisons available yet. Check back soon.</p>
           )}
