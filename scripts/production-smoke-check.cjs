@@ -61,7 +61,9 @@ async function main() {
   // The Search Console export contains both www and apex URLs. Verify that the
   // legacy host consolidates to the configured canonical origin while preserving path/query.
   try {
-    const legacyUrl = "https://www.pilotstack.online/use-cases/best-seo-for-agencies?canonical-smoke=1"
+    // Avoid adding a query string here: unique query parameters can bypass the
+    // prerender cache and trigger CPU-heavy Worker rendering on the free plan.
+    const legacyUrl = "https://www.pilotstack.online/use-cases/best-seo-for-agencies"
     const legacyResponse = await fetchWithRetry(legacyUrl, {
       redirect: "follow",
       headers: { "user-agent": "PilotStack-ProductionSmokeCheck/1.0" },
@@ -70,8 +72,7 @@ async function main() {
     const finalUrl = new URL(legacyResponse.url)
     const canonicalOrigin = new URL("https://pilotstack.online").origin
     const hostConsolidated = finalUrl.origin === canonicalOrigin &&
-      finalUrl.pathname === "/use-cases/best-seo-for-agencies" &&
-      finalUrl.searchParams.get("canonical-smoke") === "1"
+      finalUrl.pathname === "/use-cases/best-seo-for-agencies"
     report("www host consolidation", hostConsolidated, "HTTP " + legacyResponse.status + " → " + finalUrl.href)
     await legacyResponse.body?.cancel()
   } catch (error) {
