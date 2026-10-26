@@ -224,6 +224,7 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
             comparisons={uc.relatedComparisons}
             guides={uc.relatedGuides}
             posts={uc.relatedPosts}
+            bestPages={uc.relatedBest}
           />
         </Container>
       </article>
