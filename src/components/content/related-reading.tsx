@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { getContentTitle, isContentAvailable } from "@/lib/content/registry"
-import { BookOpen, GitCompare, FileText, Star, ArrowRight } from "lucide-react"
+import { BookOpen, GitCompare, FileText, Star, ArrowRight, Award } from "lucide-react"
 
 export interface RelatedReadingProps {
   /** Related tool review slugs */
@@ -11,6 +11,8 @@ export interface RelatedReadingProps {
   guides?: string[]
   /** Related research/article slugs */
   posts?: string[]
+  /** Related best-software shortlist slugs */
+  bestPages?: string[]
   /** Slugs that must never link to themselves (the current page) */
   excludeSlug?: string
   title?: string
@@ -38,12 +40,14 @@ export function RelatedReading({
   comparisons,
   guides,
   posts,
+  bestPages,
   excludeSlug,
   title = "Related Reading",
 }: RelatedReadingProps) {
   const groups: Group[] = [
     { label: "Reviews", icon: <Star size={12} />, items: resolve("review", reviews || [], "reviews", excludeSlug) },
     { label: "Comparisons", icon: <GitCompare size={12} />, items: resolve("comparison", comparisons || [], "comparisons", excludeSlug) },
+    { label: "Best Software", icon: <Award size={12} />, items: resolve("best", bestPages || [], "best", excludeSlug) },
     { label: "Guides", icon: <BookOpen size={12} />, items: resolve("guide", guides || [], "guides", excludeSlug) },
     { label: "Research", icon: <FileText size={12} />, items: resolve("blog", posts || [], "blog", excludeSlug) },
   ].filter((g) => g.items.length > 0)
