@@ -34,13 +34,6 @@
       "tool1Detail": "Verify integrations with accounting, time tracking, benefits, and identity systems that your process requires.",
       "tool2": "Workflow and reporting connections",
       "tool2Detail": "Verify required connectors, sync direction, failure handling, and whether the workflow needs a separate system of record."
-    },
-    {
-      "name": "Pricing and total cost",
-      "tool1": "Service scope and HR/payroll terms",
-      "tool1Detail": "Request current regional terms and include implementation, support, compliance, and ongoing administration.",
-      "tool2": "Seats, usage, automation, and administration",
-      "tool2Detail": "Confirm current plan limits and include setup, governance, integrations, and maintenance."
     }
   ],
   "verdict": "There is no universal winner because ADP and Airtable address different jobs. Evaluate ADP when payroll and HR administration is required; evaluate Airtable when structured workflow tracking is required. If both jobs matter, define the system of record and data handoff. Verify current features, plan limits, total cost, integrations, privacy, permissions, and support before committing.",
@@ -74,6 +67,5 @@
   "published": true,
   "winnerVerified": false,
   "featuresVerified": false,
-  "decisionGuide": true,
-  "lastUpdated": "2026-10-26"
+  "decisionGuide": true
 }
