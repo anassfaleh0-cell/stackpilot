@@ -6,16 +6,16 @@
   "marketOverview": "The CRM category spans contact databases, sales pipelines, revenue operations, customer engagement, and broader customer platforms. Vendor market-share figures vary by segment and methodology, so a single headline market number rarely helps a buyer choose. Evaluate the fit of the actual workflow: how quickly reps can update records, whether forecasts can be audited, how data moves between systems, and how much customization requires specialist support. Validate pricing at the expected contact, seat, automation, and storage levels.",
   "buyerConsiderations": [
     "Evaluate the depth of contact and account management including relationship mapping, hierarchy management, duplicate detection, data enrichment, and the ability to capture activities automatically from email, calendar, and phone systems",
-    "Assess pipeline management and forecasting capabilities including customizable deal stages, probability-based forecasting, weighted pipeline analysis, and AI-assisted predictive forecasting that learns from historical close rates",
+    "Test pipeline stages against real deals and agreed qualification rules; compare forecast output with a known historical period, and verify how stale deals, missing close dates, split ownership, and changed probabilities affect totals",
     "Review automation capabilities for sales workflows including lead assignment rules, follow-up reminders, sequence automation, quote-to-order processes, and approval workflows for discounts and special terms",
-    "Examine integration breadth with your marketing automation platform, customer service tools, accounting software, communication tools, and any industry-specific applications your team relies on",
+    "Test the exact CRM integrations your team depends on using sample contacts, accounts, and deals; confirm field mapping, sync direction, duplicate handling, permissions, rate limits, failure alerts, and recovery",
     "Consider the quality of mobile access for field sales teams, including offline mode, mobile lead capture, GPS-based check-ins, and the ability to log calls and emails from mobile devices",
     "Evaluate reporting and analytics depth including custom report builders, real-time dashboards, funnel analysis, win/loss analysis, sales velocity tracking, and the ability to create executive summaries",
-    "Review data migration and onboarding support, understanding the effort required to clean and import existing data from spreadsheets, legacy CRMs, and other data sources",
+    "Run a small migration rehearsal before importing everything: map fields, preserve owners and activity history, identify duplicates, verify relationships and consent fields, and compare record counts and sample records after import",
     "Check for AI and intelligence features including lead scoring, sentiment analysis on communications, deal risk alerts, conversation intelligence, and automated forecasting that can improve sales team productivity"
   ],
   "commonMistakes": [
-    "Migrating contacts without deduplicating records or mapping field ownership and history.",
+    "Rehearse a representative import and export, reconcile record counts and relationships, and verify ownership, activity history, consent fields, duplicates, and rollback before the full migration.",
     "Automating a poorly defined sales process and making inconsistent data harder to correct.",
     "Comparing seat prices while overlooking contact tiers, add-ons, onboarding, API limits, and support.",
     "Failing to test lead routing, permissions, audit history, and handoffs between sales and service teams.",
@@ -41,7 +41,7 @@
     {
       "factor": "Reporting and forecasting capabilities",
       "importance": "High",
-      "description": "Accurate forecasting is a primary business driver for CRM investment; evaluate the platform's ability to generate reliable forecasts from pipeline data, historical trends, and AI predictions"
+      "description": "Validate forecast accuracy against historical periods and your own stage definitions; inspect assumptions, missing-data behavior, permissions, and whether forecast changes can be explained and audited."
     },
     {
       "factor": "Data quality and enrichment features",

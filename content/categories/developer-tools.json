@@ -7,9 +7,9 @@
   "buyerConsiderations": [
     "Evaluate the integration between development, testing, deployment, and monitoring tools to minimize context switching and ensure seamless workflow from code commit to production observation",
     "Assess the learning curve and developer experience for your team's skill level, considering that tools requiring significant ramp-up time may face adoption resistance or create inconsistent usage patterns",
-    "Review security features including dependency scanning, secrets detection, SAST/DAST integration, supply chain security, and compliance with industry standards like SOC 2 and FedRAMP",
+    "Verify which security checks run in your actual repository and pipeline, which languages and artifact types are covered, how findings are triaged, and whether audit evidence matches your required scope; certifications do not prove every configuration is compliant.",
     "Consider scalability and performance as your codebase grows, number of developers expands, and deployment frequency increases, particularly for CI/CD pipelines and testing infrastructure",
-    "Verify compatibility with your existing technology stack including programming languages, frameworks, cloud providers, and infrastructure configurations to avoid integration challenges",
+    "Run a proof of concept against the actual languages, repository size, runner environment, deployment target, and permission model; measure feedback time and failure recovery instead of relying only on the vendor's supported-platform list.",
     "Evaluate the strength of the community and ecosystem including available plugins, extensions, templates, documentation quality, community support forums, and third-party integrations",
     "Examine pricing models including per-developer vs. per-usage pricing, free tiers for small teams, open-source project grants, and how costs scale with team growth and feature adoption",
     "Consider the vendor's track record of stability, uptime, and product evolution, as developer tools become deeply embedded in workflows and migrations are costly and disruptive"
@@ -18,7 +18,7 @@
     "Selecting tools based on feature count without validating compatibility with the existing stack.",
     "Testing only the happy path and skipping permission failures, flaky jobs, and recovery scenarios.",
     "Ignoring usage-based charges, build minutes, storage, observability ingestion, and retention limits.",
-    "Granting broad repository or production access instead of using least-privilege permissions.",
+    "Start with least-privilege scopes, short-lived credentials where supported, protected environments, and separate read/build/deploy roles; verify access logs and revoke the test integration cleanly.",
     "Adopting a tool without a clear owner, maintenance plan, or exit path for configuration and data.",
     "Treating a successful demo as evidence of production reliability without monitoring and rollback tests."
   ],
@@ -41,7 +41,7 @@
     {
       "factor": "Scalability and performance",
       "importance": "High",
-      "description": "CI/CD pipeline speed, IDE responsiveness with large codebases, and monitoring platform performance at scale directly affect developer productivity and the ability to move fast as the organization grows"
+      "description": "Benchmark a representative workload from a clean baseline; compare median and slow-run latency, cache behavior, flaky-job rate, concurrency limits, and recovery after a failed run at expected team scale."
     },
     {
       "factor": "Ecosystem and extensibility",

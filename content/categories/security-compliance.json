@@ -6,11 +6,11 @@
   "marketOverview": "The security category contains specialized markets with different buyers, control objectives, and deployment models. Published market estimates can combine software, managed services, and consulting, which makes comparisons unreliable unless the scope is explicit. Compare tools against a defined control gap and realistic operating workflow. Assess detection coverage, false positives, integration depth, response actions, audit evidence, data residency, and total ownership cost. Treat vendor claims as inputs to validation rather than proof that a control is effective in your environment.",
   "buyerConsiderations": [
     "Match coverage to your actual attack surface across identity, endpoints, cloud, applications, email and data",
-    "Evaluate detection, investigation and response workflows, including alert quality and automation",
+    "Run controlled scenarios relevant to your environment and measure alert precision, investigation context, time to triage, response permissions, escalation, and recovery; verify that automated actions have safe approval and rollback paths.",
     "Check integrations with identity providers, SIEM, ticketing, cloud platforms and existing security controls",
-    "Verify support for the compliance frameworks and evidence workflows your organization actually needs",
+    "Map each required control to the product capability, evidence owner, collection frequency, retention period, and auditor-facing export; confirm scope and contract terms rather than treating a framework logo as proof of compliance.",
     "Review deployment, administration and tuning requirements against available security resources",
-    "Assess access controls, audit logs, encryption, data retention and data residency requirements",
+    "Verify exact data locations, subprocessors, retention/deletion behavior, encryption key options, role granularity, audit-log export and access review workflow for the plan and deployment you would actually use.",
     "Compare reporting and risk visibility for security teams, executives, auditors and other stakeholders",
     "Model total cost including licenses, implementation, integrations, staffing and ongoing operations"
   ],
@@ -20,7 +20,7 @@
     "Over-relying on technology solutions while underinvesting in security culture, training, and processes, creating a false sense of security from tools that are misconfigured or ignored",
     "Taking an all-or-nothing approach to compliance, implementing controls checkbox-style without understanding the underlying security objectives, creating compliance without actual security improvement",
     "Neglecting cloud security and identity management while focusing on traditional endpoint and network security, leaving the largest and fastest-growing attack surface inadequately protected",
-    "Failing to test security controls regularly through penetration testing, tabletop exercises, and simulated attacks, discovering too late that theoretical controls don't work in practice"
+    "Exercise detection and response with approved, controlled scenarios; document expected alerts, escalation owners, containment steps, evidence capture, recovery, and follow-up actions, then retest gaps rather than relying on configuration status alone."
   ],
   "decisionFactors": [
     {

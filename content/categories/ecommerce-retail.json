@@ -6,8 +6,8 @@
   "marketOverview": "The category includes hosted storefront platforms, open-source commerce systems, marketplaces, point-of-sale tools, inventory systems, payment services, and extensions connecting these workflows. Product boundaries overlap, so a storefront platform should not be treated as a complete retail operating system by default. Businesses should verify country availability, tax and shipping support, payment fees, inventory behavior, data export options, and integration costs against their own requirements. This overview avoids market-size estimates because category boundaries and published estimates vary by source.",
   "buyerConsiderations": [
     "Map the customer journey from product discovery through checkout, payment, fulfillment, returns, and support.",
-    "Test a representative catalog with variants, bulk updates, inventory rules, search, and required product attributes.",
-    "Verify payment methods, processing fees, tax behavior, shipping options, and country availability for your business location.",
+    "Use a representative catalog sample including variants, bundles, out-of-stock items, sale prices, regional attributes, and bulk edits; verify stock consistency across every connected sales channel.",
+    "Test payment authorization, declined payments, refunds, chargebacks, shipping rates, and tax calculation with the payment methods and destinations you actually serve; confirm regional availability and provider fees in writing.",
     "List required integrations for accounting, fulfillment, customer support, marketing, analytics, inventory, and point of sale.",
     "Decide who owns hosting, updates, backups, security monitoring, incident response, and technical maintenance.",
     "Compare mobile usability and page performance on representative product and checkout pages.",
@@ -19,14 +19,14 @@
     "Comparing subscription prices while ignoring processing fees, extensions, hosting, development, and maintenance.",
     "Assuming tax, shipping, payment, or marketplace features work identically in every country.",
     "Installing extensions without checking compatibility, renewal cost, overlap, and maintenance ownership.",
-    "Migrating products and orders without validating field mapping, URL redirects, customer records, and history.",
+    "Rehearse migration with a representative sample, reconcile product and order counts, validate customer/order relationships and key fields, test redirects for important URLs, and keep a rollback/export plan.",
     "Treating a fast launch as proof the store will remain maintainable as catalog and order complexity grows."
   ],
   "decisionFactors": [
     {
       "factor": "Storefront and checkout fit",
       "importance": "Critical",
-      "description": "Test the actual customer journey, payment options, shipping rules, taxes, returns, and mobile checkout for the markets you serve."
+      "description": "Complete test orders on mobile and desktop for each key market, including failed payment, discount, tax, shipping, cancellation, refund, and return cases; record where manual intervention is required."
     },
     {
       "factor": "Catalog and inventory",
