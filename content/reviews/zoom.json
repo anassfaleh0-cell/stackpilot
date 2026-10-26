@@ -2,11 +2,11 @@
   "slug": "zoom",
   "name": "Zoom",
   "tagline": "Video meetings and related collaboration workflows for distributed teams and external participants.",
-  "description": "Zoom provides video meetings and related collaboration workflows; current plan details and independent ratings are not verified here.",
+  "description": "Zoom review focused on meeting workflows, guest experience, administration, accessibility, recording governance, integrations, and practical buyer checks. The stored PilotStack editorial score is provisional; current pricing and plan limits are not independently verified.",
   "category": "Communication & Collaboration",
   "website": "https://zoom.us",
   "pricing": "Not independently verified",
-  "priceRange": "Not independently verified — check current vendor pricing",
+  "priceRange": "Not independently verified — confirm current plans, meeting limits, add-ons, billing terms and regional availability with Zoom.",
   "pros": [
     "A real meeting trial can test guest joining, screen sharing, recording and host controls.",
     "Relevant for teams that coordinate internal meetings, customer calls or scheduled online sessions.",
@@ -62,6 +62,11 @@
     }
   ],
   "content": [
+    {
+      "title": "Rating Overview",
+      "body": "Stored PilotStack editorial score: 4.5/5 (provisional; not a verified third-party review average). The underlying evidence and category-score calculations have not completed an independent audit. Use it as an editorial starting point only and test meeting reliability, guest joining, accessibility, administration and follow-up workflows in your own environment.",
+      "type": "text"
+    },
     {
       "title": "Meeting workflow",
       "body": "Test the full meeting lifecycle: schedule, invite internal and external participants, join from desktop and mobile, share a screen, hand off host controls, end the meeting and retrieve follow-up materials. Include a guest who has not used the product before.",
@@ -242,5 +247,6 @@
   "priceRangeVerified": false,
   "ratingsVerified": false,
   "featuresVerified": false,
-  "companyFactsVerified": false
+  "companyFactsVerified": false,
+  "scoreBasis": "The stored 4.5/5 value is a provisional PilotStack editorial score, not a verified third-party review average or measured benchmark. The score's evidence and category calculations have not completed an independent audit. Evaluate Zoom with representative internal and external meetings, accessibility needs, administration, retention requirements and current plan documentation."
 }
