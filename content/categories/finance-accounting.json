@@ -31,12 +31,12 @@
     {
       "factor": "Business model and industry fit",
       "importance": "Critical",
-      "description": "Specific business models require specific features: subscription businesses need recurring billing and revenue recognition, project-based businesses need job costing, retailers need inventory and POS integration, manufacturers need COGS tracking"
+      "description": "Test the accounting model against the actual business: recurring revenue and contract changes, project costing, inventory movements, refunds, foreign-currency transactions, and intercompany entries should reconcile to expected ledger and reporting outputs."
     },
     {
       "factor": "Reporting and financial intelligence",
       "importance": "High",
-      "description": "Robust financial reporting, customizable dashboards, drill-down capabilities, and the ability to create ad-hoc reports are essential for financial analysis, board reporting, and strategic decision-making"
+      "description": "Reconcile profit-and-loss, balance-sheet, cash-flow, tax, and management reports against a known sample period; verify drill-down, period locking, correction history, export fidelity, and the basis used for each report."
     },
     {
       "factor": "Automation and efficiency features",
@@ -69,7 +69,7 @@
     "consideration": "Test representative transactions, imports, bank feeds, tax rules, permissions, audit trails, corrections, and period-end reporting. Verify supported countries and currencies, accountant access, data exports, integrations, retention, and the full cost at expected transaction and user volume.",
     "decision": "Choose the system that meets compliance and reconciliation needs with a clear control model. Pilot on a limited entity or period, reconcile outputs against existing records, confirm backup and export procedures, and obtain qualified accounting advice for jurisdiction-specific tax or reporting questions."
   },
-  "pricingOverview": "Accounting software pricing varies widely by market segment. Small business platforms like QuickBooks, Xero, and FreshBooks range from $15-$70 per month for basic plans to $100-$250+ per month for advanced features including inventory, project profitability, and multi-currency support. Mid-market platforms like Sage Intacct and NetSuite start at $500-$1,500+ per month with implementation fees starting at $25,000-$100,000+. Enterprise ERP financial systems from SAP and Oracle typically cost $100,000-$1,000,000+ annually including licensing, maintenance, and implementation services. Spend management platforms like Brex and Ramp offer free core expense management with revenue from interchange fees on corporate card transactions. Accounts payable automation tools like Bill.com and Tipalti charge $20-$100+ per user per month plus transaction fees. Payroll processing is typically priced at $20-$50 per month base fee plus $4-$10 per employee per month. Most cloud platforms offer 30-day free trials. Annual billing typically provides 10-20% discounts.",
+  "pricingOverview": "Finance and accounting pricing varies by country, product edition, billing term, transaction volume, number of entities, payroll needs, and included support. Vendor prices and free-trial terms change, and some providers quote only after assessing requirements. Verify current prices and country availability on official vendor pages, then calculate total cost for paid users, entities, invoices, bank feeds, payroll, payment processing, e-invoicing, currency conversion, integrations, data migration, support, and implementation. Confirm whether advertised prices exclude taxes or require annual billing, minimum seats, or add-ons. For enterprise systems, include implementation, configuration, training, ongoing administration, and upgrade costs rather than comparing subscription fees alone. Treat any starting price as indicative until the vendor confirms the exact plan and jurisdiction.",
   "bestFor": {
     "smb": "Cloud-based accounting platforms like QuickBooks Online, Xero, and FreshBooks that offer affordable monthly pricing, easy setup, bank feeds, and integration with a wide ecosystem of small business tools and advisors",
     "enterprise": "Enterprise financial management platforms like NetSuite, Sage Intacct, SAP S/4HANA, and Oracle E-Business Suite that provide multi-entity consolidation, advanced revenue recognition, extensive reporting, and global compliance capabilities",
