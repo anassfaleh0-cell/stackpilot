@@ -21,7 +21,68 @@
     "Automation, reporting and administration requirements need plan-specific verification.",
     "Teams may create unnecessary complexity if they duplicate statuses and fields."
   ],
-  "features": [],
+  "features": [
+    {
+      "name": "Tasks and subtasks",
+      "description": "Assign work, set owners and due dates, and break larger work into smaller steps. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Core"
+    },
+    {
+      "name": "Project views",
+      "description": "Evaluate list, board, calendar, timeline/Gantt, and table views against the team's planning workflow. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Planning"
+    },
+    {
+      "name": "Custom fields",
+      "description": "Capture consistent project-specific details and use them to sort, filter, or report on work. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Planning"
+    },
+    {
+      "name": "Task dependencies",
+      "description": "Map blocked and dependent work, then test how schedule changes affect the project plan. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Planning"
+    },
+    {
+      "name": "Forms and request intake",
+      "description": "Collect structured requests that can feed into project work; verify form options on the intended plan. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Workflow"
+    },
+    {
+      "name": "Rules and workflow automation",
+      "description": "Test automation for routine assignment, field updates, and triage; confirm plan limits before rollout. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Automation"
+    },
+    {
+      "name": "Goals and portfolios",
+      "description": "Connect project work to higher-level objectives and monitor multiple projects where supported. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Dashboards and status updates",
+      "description": "Review reporting views and stakeholder updates using real project data. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Reporting"
+    },
+    {
+      "name": "Workload and resource planning",
+      "description": "Assess workload visibility and capacity planning for teams that need to rebalance assignments. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Resource management"
+    },
+    {
+      "name": "Integrations and mobile apps",
+      "description": "Check the specific integrations and mobile workflows the team depends on, including permissions and sync behavior. Feature availability and plan restrictions can change; verify current vendor documentation before purchase.",
+      "available": true,
+      "category": "Integrations"
+    }
+  ],
   "ratings": [
     {
       "label": "Features",
