@@ -81,8 +81,14 @@ jobs:
       - name: Noindex audit review-candidate generation
         run: npm run audit:noindex
 
-      - name: Production endpoint smoke check (diagnostic)
+      # Do not hit production on every push/PR: the full-site checks can compete
+      # with Googlebot and real visitors. Run this diagnostic only by manual dispatch.
+      - name: Production endpoint smoke check (manual diagnostic only)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         run: npm run seo:smoke
+        env:
+          SITE_URL: https://pilotstack.online
+          ALLOW_LIVE_AUDIT: "1"
         continue-on-error: true
 
       - name: Unit tests
