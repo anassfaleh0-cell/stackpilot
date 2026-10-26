@@ -25,7 +25,7 @@ const comparisons = readRecords(COMPARISONS_DIR)
 const reviewBySlug = new Map(reviews.map(({ data }) => [data.slug, data]))
 const findings = []
 const summary = {
-  reviews: { total: reviews.length, missingClaim: 0, missingRating: 0, invalidRating: 0, unverifiedStoredRating: 0, missingProsOrCons: 0 },
+  reviews: { total: reviews.length, missingClaim: 0, missingRating: 0, invalidRating: 0, unverifiedStoredRating: 0, missingProsOrCons: 0, unverifiedPriceClaims: 0, unsupportedMetricClaims: 0, scoreCopyContradictions: 0, emptyContentSections: 0 },
   comparisons: { total: comparisons.length, missingDescription: 0, riskySnippetClaims: 0, missingVerdict: 0, missingFeatureRows: 0, missingToolLinks: 0, invalidWinner: 0, missingWinner: 0, useCaseFallback: 0, winnerNeedsEvidence: 0, linkedReviewRatingGaps: 0, unverifiedFeatureScore: 0, copyQualityFlags: 0 },
 }
 
@@ -52,6 +52,57 @@ for (const { file, data } of reviews) {
   if (!Array.isArray(data.pros) || data.pros.length === 0 || !Array.isArray(data.cons) || data.cons.length === 0) {
     summary.reviews.missingProsOrCons++
     add("review", slug, "pros-cons-incomplete", "preserve existing text and add specific, supportable trade-offs")
+  }
+
+  // Source-content diagnostics are report-only: they flag review copy for editorial
+  // verification without deleting sections, changing ratings, or suppressing useful detail.
+  const sections = Array.isArray(data.content) ? data.content : []
+  const sectionTexts = sections.map((section) => ({
+    title: String(section.title || ""),
+    text: [section.body, ...(Array.isArray(section.items) ? section.items : [])]
+      .filter((value) => typeof value === "string")
+      .join(" "),
+  }))
+  const allReviewCopy = [
+    data.description,
+    data.tagline,
+    ...sectionTexts.map((section) => section.text),
+    ...(Array.isArray(data.faqs) ? data.faqs.flatMap((faq) => [faq.question, faq.answer]) : []),
+  ].filter((value) => typeof value === "string").join(" ")
+
+  if (validRating(data.rating) && data.ratingVerified !== true &&
+      /(?:does not|doesn't|do not|don't) publish (?:a )?(?:numeric )?(?:score|rating)|no numeric (?:score|rating) (?:is )?published/i.test(allReviewCopy)) {
+    summary.reviews.scoreCopyContradictions++
+    add("review", slug, "score-copy-contradiction", "a stored editorial score exists but the copy says no numeric score is published; explain the score's provisional provenance instead")
+  }
+
+  const numericMetrics = /\b\d[\d,]*(?:\.\d+)?\s*(?:reviews|users|customers|employees|integrations|templates)\b/i
+  const metricFlags = sectionTexts.filter((section) => numericMetrics.test(section.text))
+  numericMetrics.lastIndex = 0
+  if (metricFlags.length && data.reviewCountVerified !== true && data.ratingVerified !== true) {
+    summary.reviews.unsupportedMetricClaims += metricFlags.length
+    for (const section of metricFlags.slice(0, 3)) {
+      add("review", slug, "numeric-metric-needs-source", `section "${section.title}" contains a numeric review/customer/product metric that should have a dated source or a clear caveat`)
+    }
+  }
+
+  const priceAmount = /[$€£]\s?\d[\d,]*(?:\.\d+)?|\b(?:USD|EUR|GBP)\s?\d[\d,]*(?:\.\d+)?|\b\d[\d,]*(?:\.\d+)?\s?(?:USD|EUR|GBP)\b/i
+  const priceContext = /\b(?:price|pricing|costs?|plan|tier|subscription|billing|from|per (?:user|seat|editor)|starts? at|starting at|monthly|annually|annual|renewal|fee|licen[cs]e|pay(?:s|ment)?|budget)\b|\/(?:user\/)?month\b|\/year\b|\/seat\b/i
+  const unverifiedPriceSections = sectionTexts.filter((section) => priceAmount.test(section.text) && priceContext.test(section.text))
+  if (unverifiedPriceSections.length && data.priceRangeVerified !== true) {
+    summary.reviews.unverifiedPriceClaims += unverifiedPriceSections.length
+    for (const section of unverifiedPriceSections.slice(0, 3)) {
+      add("review", slug, "price-claim-needs-source", `section "${section.title}" contains a price-bearing claim but the review does not mark pricing as independently verified`)
+    }
+  }
+
+  for (const section of sections) {
+    const hasBody = typeof section.body === "string" && section.body.trim().length > 0
+    const hasItems = Array.isArray(section.items) && section.items.some((item) => typeof item === "string" && item.trim().length > 0)
+    if (nonEmpty(section.title) && !hasBody && !hasItems) {
+      summary.reviews.emptyContentSections++
+      add("review", slug, "empty-content-section", `section "${section.title}" has no visible body or list items`)
+    }
   }
 }
 
