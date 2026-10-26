@@ -1,70 +1,87 @@
 {
   "slug": "woocommerce-vs-xero",
-  "title": "WooCommerce vs Xero",
-  "description": "A workflow-fit guide to WooCommerce and Xero, which serve different parts of an online business. WooCommerce is listed in E-commerce; Xero is listed in Finance & Accounting. An e-commerce storefront and an accounting or finance tool are not interchangeable. Compare the job you need covered, the data that must move between systems, integrations, fees, reconciliation, and whether the products should complement each other.",
+  "title": "WooCommerce vs Xero: Storefront vs Accounting",
+  "description": "WooCommerce and Xero serve different parts of an online business. Compare storefront and order management with bookkeeping, invoicing, reconciliation, and reporting, then decide whether you need one tool or an integration between both.",
   "category": "Finance & Accounting",
   "tool1": "WooCommerce",
   "tool2": "Xero",
-  "winner": "xero",
+  "winner": null,
+  "winnerVerified": false,
+  "featuresVerified": false,
   "features": [
     {
-      "name": "User Rating",
-      "tool1": false,
-      "tool2": true
+      "name": "Primary role",
+      "tool1": "E-commerce storefront and order workflows",
+      "tool1Detail": "Evaluate product listings, cart and checkout, order management, payment extensions, and how the store fits your existing website and hosting.",
+      "tool2": "Accounting and financial management",
+      "tool2Detail": "Evaluate bookkeeping, invoicing, bank reconciliation, financial reports, and the accounting workflows required in your country."
     },
     {
-      "name": "Starting Price",
-      "tool1": true,
-      "tool2": true
+      "name": "Core users",
+      "tool1": "Store owners and e-commerce teams",
+      "tool1Detail": "Test the purchase journey from product discovery through checkout, fulfillment hand-off, refunds, and customer communications.",
+      "tool2": "Business owners, bookkeepers, and finance teams",
+      "tool2Detail": "Test invoice creation, transaction categorization, reconciliation, tax workflows, and month-end reporting with representative records."
     },
     {
-      "name": "Best For",
-      "tool1": true,
-      "tool2": true
+      "name": "Payments and transactions",
+      "tool1": "Online order and payment flow",
+      "tool1Detail": "Confirm supported payment gateways, checkout requirements, refunds, taxes, and any gateway or extension charges for your market.",
+      "tool2": "Recording and reconciling financial transactions",
+      "tool2Detail": "Confirm how bank feeds, payment processors, fees, refunds, and settlement timing are represented in the accounting workflow."
     },
     {
-      "name": "Ease of Use",
-      "tool1": true,
-      "tool2": true
+      "name": "Reporting",
+      "tool1": "Store, product, and order performance",
+      "tool1Detail": "Identify the sales, inventory, customer, and order reports needed; some capabilities may depend on extensions or external analytics.",
+      "tool2": "Financial position and accounting reports",
+      "tool2Detail": "Identify the profit-and-loss, balance-sheet, cash-flow, tax, and reconciliation reports needed and verify local availability."
     },
     {
-      "name": "Integration Ecosystem",
-      "tool1": true,
-      "tool2": true
+      "name": "Integration and data flow",
+      "tool1": "Source of storefront and order data",
+      "tool1Detail": "Map the order, refund, tax, discount, and payment fields that must reach accounting; test duplicate handling and failed sync recovery.",
+      "tool2": "Destination for accounting records",
+      "tool2Detail": "Verify the connector's current support, sync direction and frequency, account mapping, permissions, error logs, and connector fees before relying on it."
+    },
+    {
+      "name": "Pricing and total cost",
+      "tool1": "Hosting, extensions, payment processing, and maintenance",
+      "tool1Detail": "WooCommerce core software availability does not mean a complete store has zero cost. Budget for hosting, domain, extensions, payment processing, backups, security, and maintenance as applicable.",
+      "tool2": "Plan, users, add-ons, and local terms",
+      "tool2Detail": "Check current Xero plans and regional terms directly. Include required users, add-ons, implementation, accountant access, and migration costs; no current price is asserted here."
     }
   ],
-  "verdict": "There is no universal winner between WooCommerce and Xero: they address different jobs in the commerce-to-finance workflow. Identify whether the missing capability is storefront and order management, bookkeeping, invoicing, reconciliation, financial reporting, or payment processing. Choose the product that covers the primary job, and if both are needed, verify integration coverage, fees, data export, reconciliation, and failure handling before connecting them.",
+  "verdict": "There is no universal winner because WooCommerce and Xero do different jobs. Choose WooCommerce when the requirement is running an online storefront and managing orders; choose Xero when the requirement is accounting and financial reporting. Many online businesses may need both, connected through an integration that is tested for order totals, fees, refunds, taxes, reconciliation, and failure recovery. This page is a workflow decision guide, not an independently measured head-to-head score; no verified winner or feature-score claim is made.",
   "faqs": [
     {
       "question": "Are WooCommerce and Xero direct substitutes?",
-      "answer": "Not necessarily. Their profiles list different primary categories (E-commerce and Finance & Accounting). Compare the actual job each must do; they may be alternatives for a narrow workflow or complementary products."
+      "answer": "No, not for their core jobs. WooCommerce supports online storefront and order workflows, while Xero is accounting software. A business may use one or both depending on its operating model."
     },
     {
-      "question": "When should I evaluate WooCommerce?",
-      "answer": "Evaluate WooCommerce when its primary role in E-commerce matches your must-have workflow. Test the relevant tasks and verify current capabilities, plan limits, permissions, and terms with the vendor."
+      "question": "When should I choose WooCommerce?",
+      "answer": "Evaluate WooCommerce when you need to publish products, accept online orders, configure checkout, and manage storefront workflows. Test payment, tax, shipping, refunds, accessibility, and the ongoing costs of hosting and extensions."
     },
     {
-      "question": "When should I evaluate Xero?",
-      "answer": "Evaluate Xero when its primary role in Finance & Accounting matches your requirement. Confirm it handles the workflow end to end, including handoffs, reporting, access controls, and data export."
+      "question": "When should I choose Xero?",
+      "answer": "Evaluate Xero when you need bookkeeping, invoicing, reconciliation, and financial reporting. Confirm that its current plan and local features cover your tax, reporting, bank, and accountant workflows."
     },
     {
-      "question": "Can the products be used together?",
-      "answer": "Possibly, if they cover different steps. Verify current integration documentation, the data exchanged, sync frequency, permissions, error handling, and any connector fees before relying on a connection."
+      "question": "Can WooCommerce and Xero work together?",
+      "answer": "They may be connected through supported integrations, but compatibility and capabilities depend on the connector and configuration. Test order totals, discounts, taxes, fees, refunds, duplicate prevention, sync failures, permissions, and reconciliation before production use."
     },
     {
-      "question": "How should I compare total cost?",
-      "answer": "Include seats, usage limits, add-ons, processing or transaction fees, implementation, training, administration, integration maintenance, and switching costs—not just advertised starting prices."
+      "question": "How should I compare their costs?",
+      "answer": "Do not compare headline prices for products with different purposes. Calculate the complete cost of your storefront and accounting workflows, including hosting, extensions, payment fees, plans, connector fees, implementation, support, and ongoing maintenance."
     },
     {
       "question": "Does this page name a verified winner?",
-      "answer": "No. This is a workflow decision guide, not an independently verified head-to-head score. The stored winner and feature rows are not verified; test your requirements and confirm current details with each vendor."
+      "answer": "No. The products serve different purposes, and the stored legacy winner and Boolean feature flags were not verified comparative evidence. This page presents qualitative decision criteria rather than a numerical benchmark."
     }
   ],
-  "lastUpdated": "2026-07-20",
+  "lastUpdated": "2026-10-26",
   "tool1Slug": "woocommerce",
   "tool2Slug": "xero",
-  "published": false,
-  "decisionGuide": true,
-  "winnerVerified": false,
-  "featuresVerified": false
+  "published": true,
+  "decisionGuide": true
 }
