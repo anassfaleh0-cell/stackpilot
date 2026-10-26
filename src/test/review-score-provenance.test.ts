@@ -134,6 +134,8 @@ describe("review score provenance", () => {
     expect(source).toContain("No numeric score is available in the record")
     expect(source).toContain("tool.rating > 0 && tool.rating <= 5")
     expect(source).toContain("const reviewVerdict = [")
+    expect(source).toContain("<ScoreBar score={displayEditorialRating ?? 0} className=\"mb-3\" />")
+    expect(source).not.toContain("<ScoreBar score={tool.rating} className=\"mb-3\" />")
   })
 
   it("explains missing provenance for preserved provisional legacy scores", () => {

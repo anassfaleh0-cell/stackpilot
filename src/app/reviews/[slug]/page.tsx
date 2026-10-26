@@ -554,7 +554,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                     {hasStoredEditorialRating ? (
                       <>
                         <div className="text-lg font-bold text-primary mb-1">{formatScore(displayEditorialRating)}/5</div>
-                        <ScoreBar score={tool.rating} className="mb-3" />
+                        <ScoreBar score={displayEditorialRating ?? 0} className="mb-3" />
                         <p className="text-xs text-muted-foreground mb-3">{hasEditorialRating ? "Verified PilotStack editorial score." : "Legacy PilotStack editorial score; evidence and calculation are pending audit. It is not a third-party user rating."}</p>
                       </>
                     ) : (
