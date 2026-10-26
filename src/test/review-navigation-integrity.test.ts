@@ -46,7 +46,7 @@ describe("review navigation and social metadata integrity", () => {
 
   it("does not describe unverified aggregate scores as published calculations", () => {
     const editorialProcess = read("src/components/seo/editorial-process.tsx")
-    expect(editorialProcess).toContain("An aggregate score is shown only when the underlying category ratings and calculation can be verified")
+    expect(editorialProcess).toContain("An aggregate score is described as verified only when its underlying category ratings, evidence, and calculation can be checked")
     expect(editorialProcess).toContain("consistency does not itself mean a rating or review count has been independently verified")
     expect(editorialProcess).not.toContain("The displayed overall score is calculated from the recorded category ratings")
   })
