@@ -690,7 +690,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
           <section className="mt-16 mb-8">
             <h2 className="text-lg font-bold tracking-tight mb-3">Sources &amp; Methodology</h2>
             <div className="text-xs text-muted-foreground leading-relaxed space-y-1.5">
-              <p>Review pages focus on product fit, features, pricing considerations, and limitations. A numeric score or review count is shown only when its provenance is documented; otherwise it is omitted pending verification. Pricing and feature availability can change, so confirm important details with the vendor. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for sourcing and editorial independence.</p>
+              <p>Review pages focus on product fit, features, pricing considerations, and limitations. A score is labelled verified only when its evidence and calculation can be checked. Legacy stored editorial scores may remain visible for transparency, but are labelled provisional pending audit and are not third-party review aggregates. Review counts are shown only when their provenance is documented. Pricing and feature availability can change, so confirm important details with the vendor. See our <a href="/methodology" className="text-primary hover:underline">full methodology</a> for sourcing and editorial independence.</p>
               <p>Content updated: {formatDate(tool.contentModified)} · No vendor payment or sponsorship influenced this review · We may earn affiliate commission on purchases made through links on this site.</p>
             </div>
           </section>
