@@ -248,6 +248,7 @@ export interface UseCaseContent {
   relatedComparisons: string[]
   relatedGuides?: string[]
   relatedPosts?: string[]
+  relatedBest?: string[]
   lastUpdated: string
 }
 
