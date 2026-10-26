@@ -21,7 +21,7 @@ if (IS_LIVE_PRODUCTION && process.env.ALLOW_LIVE_AUDIT !== "1") {
 const CONCURRENCY = IS_LIVE_PRODUCTION ? 1 : Math.max(1, Math.min(4, Number(process.env.LINK_AUDIT_CONCURRENCY) || 2))
 const REQUEST_TIMEOUT_MS = 25000
 const MAX_TRANSIENT_RETRIES = IS_LIVE_PRODUCTION ? 0 : 2
-const LIVE_REQUEST_DELAY_MS = IS_LIVE_PRODUCTION ? Math.max(250, Number(process.env.LIVE_AUDIT_DELAY_MS) || 250) : 0
+const LIVE_REQUEST_DELAY_MS = IS_LIVE_PRODUCTION ? Math.max(1000, Number(process.env.LIVE_AUDIT_DELAY_MS) || 1000) : 0
 const CACHE_BUSTER = process.env.LINK_AUDIT_CACHE_BUSTER || String(Date.now())
 const TRANSIENT_STATUSES = new Set([429, 500, 502, 503, 504])
 
@@ -67,7 +67,11 @@ function isPaginationUrl(target) {
 async function fetchWithTimeout(url, options = {}) {
   let lastError
   const requestUrl = new URL(url)
-  if (requestUrl.origin === SITE_ORIGIN) requestUrl.searchParams.set("__link_audit", CACHE_BUSTER)
+  // Unique query strings bypass prerender/edge cache and can force expensive SSR.
+  // Never add them to live production requests.
+  if (requestUrl.origin === SITE_ORIGIN && !IS_LIVE_PRODUCTION) {
+    requestUrl.searchParams.set("__link_audit", CACHE_BUSTER)
+  }
   for (let attempt = 0; attempt <= MAX_TRANSIENT_RETRIES; attempt++) {
     try {
       if (LIVE_REQUEST_DELAY_MS) await new Promise((resolve) => setTimeout(resolve, LIVE_REQUEST_DELAY_MS))
