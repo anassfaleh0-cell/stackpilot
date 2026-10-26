@@ -11,6 +11,7 @@ export interface ComparisonDecisionInput {
 
 export interface ComparisonDecision {
   categoriesDiffer: boolean
+  categoriesComparable: boolean
   winnerLabel: string | null
   provisionalWinnerLabel: string | null
   hasComparableWinner: boolean
@@ -21,11 +22,11 @@ export interface ComparisonDecision {
  * the same primary category and the winner maps to one of the compared tools.
  */
 export function getComparisonDecision(input: ComparisonDecisionInput): ComparisonDecision {
-  const categoriesDiffer = Boolean(
-    input.tool1Category &&
-    input.tool2Category &&
-    input.tool1Category !== input.tool2Category
-  )
+  const tool1Category = input.tool1Category?.trim()
+  const tool2Category = input.tool2Category?.trim()
+  const categoriesDiffer = Boolean(tool1Category && tool2Category && tool1Category !== tool2Category)
+  // Missing category data is not evidence that the products are comparable.
+  const categoriesComparable = Boolean(tool1Category && tool2Category && tool1Category === tool2Category)
   const storedWinner = input.winner?.trim().toLowerCase() || null
   const tool1IsWinner = Boolean(storedWinner && [input.tool1Slug, input.tool1].some((value) => value.toLowerCase() === storedWinner))
   const tool2IsWinner = Boolean(storedWinner && [input.tool2Slug, input.tool2].some((value) => value.toLowerCase() === storedWinner))
@@ -33,13 +34,14 @@ export function getComparisonDecision(input: ComparisonDecisionInput): Compariso
   const winnerLabel = input.winnerVerified === true ? storedWinnerLabel : null
   // Keep an existing dataset pick visible as provisional guidance when it maps to
   // one of the compared products, but never upgrade it to a verified winner.
-  const provisionalWinnerLabel = input.winnerVerified !== true && !categoriesDiffer ? storedWinnerLabel : null
+  const provisionalWinnerLabel = input.winnerVerified !== true && categoriesComparable ? storedWinnerLabel : null
 
   return {
     categoriesDiffer,
+    categoriesComparable,
     winnerLabel,
     provisionalWinnerLabel,
-    hasComparableWinner: Boolean(winnerLabel && !categoriesDiffer),
+    hasComparableWinner: Boolean(winnerLabel && categoriesComparable),
   }
 }
 
