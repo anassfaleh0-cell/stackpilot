@@ -81,9 +81,8 @@ jobs:
       - name: Noindex audit review-candidate generation
         run: npm run audit:noindex
 
-      - name: Production endpoint smoke check (diagnostic)
-        run: npm run seo:smoke
-        continue-on-error: true
+      # Live production checks are opt-in and must not run on every push/PR.
+
 
       - name: Unit tests
         run: npm test
