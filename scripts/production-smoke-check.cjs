@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 
-const SITE_URL = (process.env.SITE_URL || "https://pilotstack.online").replace(/\/+$/, "")
+const SITE_URL = (process.env.SITE_URL || "http://127.0.0.1:3000").replace(/\/+$/, "")
+const IS_LIVE_PRODUCTION = ["pilotstack.online", "www.pilotstack.online"].includes(new URL(SITE_URL).hostname)
+if (IS_LIVE_PRODUCTION && process.env.ALLOW_LIVE_AUDIT !== "1") {
+  console.error("Refusing production smoke checks without ALLOW_LIVE_AUDIT=1. Run against the local build or a preview URL.")
+  process.exit(2)
+}
 const PUBLISHER_ID = "6523926892521982"
 const ADS_RECORD = "google.com, pub-" + PUBLISHER_ID + ", DIRECT, f08c47fec0942fa0"
 
