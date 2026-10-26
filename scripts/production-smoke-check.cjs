@@ -14,7 +14,7 @@ function report(name, ok, detail) {
   if (!ok) process.exitCode = 1
 }
 
-async function fetchWithRetry(url, options, attempts = 4) {
+async function fetchWithRetry(url, options, attempts = IS_LIVE_PRODUCTION ? 1 : 4) {
   let lastResponse
   for (let attempt = 1; attempt <= attempts; attempt++) {
     lastResponse = await fetch(url, options)
@@ -28,9 +28,9 @@ async function fetchWithRetry(url, options, attempts = 4) {
 }
 
 async function fetchText(pathname) {
-  const parsedUrl = new URL(SITE_URL + pathname)
-  parsedUrl.searchParams.set("__content_check", process.env.GITHUB_SHA || String(Date.now()))
-  const url = parsedUrl.toString()
+  // Cache-busting forces Next/OpenNext to render the route in the Worker. On the
+  // free Workers plan that can exceed the 10 ms CPU limit; smoke-test canonical URLs.
+  const url = new URL(SITE_URL + pathname).toString()
   const response = await fetchWithRetry(url, {
     redirect: "follow",
     headers: { "user-agent": "PilotStack-ProductionSmokeCheck/1.0" },
@@ -42,16 +42,19 @@ async function fetchText(pathname) {
 
 async function main() {
   const paths = ["/", "/ads.txt", "/robots.txt", "/sitemap.xml", "/contact", "/reviews/linear", "/statistics/dataprivacy-software", "/guides/how-to-choose-ai-writing-software", "/research/saas-pricing-benchmark-2026"]
-  const results = await Promise.all(paths.map(async (pathname) => {
+  const results = []
+  // Keep production probes sequential to avoid creating a burst of Worker invocations.
+  for (const pathname of paths) {
     try {
       const result = await fetchText(pathname)
       report(pathname, result.status >= 200 && result.status < 300, "HTTP " + result.status + " (" + result.finalUrl + ")")
-      return { pathname, ...result }
+      results.push({ pathname, ...result })
     } catch (error) {
       report(pathname, false, error instanceof Error ? error.message : String(error))
-      return { pathname, error }
+      results.push({ pathname, error })
     }
-  }))
+    if (IS_LIVE_PRODUCTION) await new Promise((resolve) => setTimeout(resolve, 1000))
+  }
 
   const byPath = new Map(results.map((result) => [result.pathname, result]))
 
