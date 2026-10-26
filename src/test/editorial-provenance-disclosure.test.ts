@@ -24,9 +24,12 @@ describe("editorial provenance disclosures", () => {
   it("labels stored scores as provisional and keeps them out of verified-only ranking/schema logic", () => {
     const reviewPage = readPage("src/app/reviews/[slug]/page.tsx")
 
-    expect(reviewPage).toContain('const hasStoredEditorialRating = typeof tool.rating === "number" && Number.isFinite(tool.rating) && tool.rating > 0')
-    expect(reviewPage).toContain('const hasEditorialRating = tool.ratingVerified === true && hasStoredEditorialRating')
     expect(reviewPage).toContain("const rawCategoryRatings = Array.isArray(tool.ratings) ? tool.ratings : []")
+    expect(reviewPage).toContain("const validCategoryScores = rawCategoryRatings")
+    expect(reviewPage).toContain("const validTopLevelRating = typeof tool.rating === \"number\"")
+    expect(reviewPage).toContain("const displayEditorialRating = validTopLevelRating ??")
+    expect(reviewPage).toContain("const hasStoredEditorialRating = displayEditorialRating !== null")
+    expect(reviewPage).toContain("const hasEditorialRating = tool.ratingVerified === true && validTopLevelRating !== null")
     expect(reviewPage).toContain("item.score > 0 && item.score <= 5")
     expect(reviewPage).toContain("const invalidCategoryRatings = rawCategoryRatings.filter")
     expect(reviewPage).toContain("The original source record is preserved; no replacement score is invented.")
