@@ -170,7 +170,9 @@ jobs:
             exit 1
           fi
           echo "PASS live review content checks: Xero and Notion"
-          node scripts/production-smoke-check.cjs
+          # production-smoke-check.cjs intentionally defaults to localhost and is for local runs;
+          # the live production endpoints above are already checked here. Do not invoke the local-only
+          # smoke script in this deployment job, where no localhost server is running.
 
       - name: Verify live internal links and broken targets after deployment
         timeout-minutes: 12
