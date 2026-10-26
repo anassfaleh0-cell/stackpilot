@@ -31,7 +31,7 @@
     {
       "factor": "Ease of use and onboarding time",
       "importance": "Critical",
-      "description": "Intuitive interfaces reduce adoption friction and training costs; look for platforms that new team members can become productive with in hours rather than weeks, particularly for organizations with high turnover"
+      "description": "Have representative users complete the same onboarding and daily tasks; record time to first useful project, error rates, training needs, keyboard and screen-reader accessibility, and whether routine administration requires specialist support."
     },
     {
       "factor": "Integration ecosystem",
@@ -41,7 +41,7 @@
     {
       "factor": "Reporting and visibility",
       "importance": "High",
-      "description": "Real-time dashboards, portfolio views, resource utilization reports, status reports, and custom report builders provide the transparency needed for data-driven project decisions"
+      "description": "Validate dashboards against a known project sample; check metric definitions, stale-data indicators, drill-down to source tasks, export fidelity, time-zone behavior, and whether stakeholders can reproduce the reported status."
     },
     {
       "factor": "Pricing and value for team size",
@@ -69,7 +69,7 @@
     "consideration": "Run one representative project through intake, assignment, dependencies, status changes, notifications, reporting, and handoff. Test permissions, recurring work, imports/exports, integrations, mobile use, and plan limits at the team's expected size.",
     "decision": "Choose the product that makes ownership and next actions clearer with the least ongoing administration. Pilot with one team, agree on a small set of status definitions, measure adoption and missed handoffs, and confirm data export before migrating all projects."
   },
-  "pricingOverview": "Project management software pricing varies significantly by target market and feature set. Lightweight task management tools like Trello and Todoist offer free plans with paid upgrades starting at $5-$12 per user per month for premium features. Mid-market platforms like Asana and Monday.com range from $10-$30 per user per month for their business tiers, with annual billing discounts of 15-20%. Enterprise platforms like Smartsheet and Microsoft Project start at $25-$55 per user per month, rising to $100+ per user per month for portfolio management and resource planning capabilities. Jira offers free plans for up to 10 users with paid plans starting at $8.15 per user per month for standard features. Most platforms offer significant discounts for annual commitments and multi-year contracts. Hidden costs to consider include per-seat minimums, charges for guest collaborators or viewers, premium support tiers, and implementation and training services. Open-source options like OpenProject and Taiga offer free self-hosted versions but require infrastructure and IT support to maintain.",
+  "pricingOverview": "Project-management pricing changes by vendor, region, billing term, product edition, and team size, so the figures shown on third-party pages can become stale. Before choosing, verify current prices and eligibility on each vendor's official pricing page and calculate the total for the exact number of paid seats, guests, viewers, portfolios, automation runs, storage, integrations, support, and annual-commitment requirements. Confirm whether a free tier is still offered and which features or limits apply. For self-hosted or open-source options, include hosting, backups, upgrades, security maintenance, and administrator time. Treat advertised starting prices as a shortlist aid, not as a like-for-like quote; record the date and plan assumptions used for any comparison.",
   "bestFor": {
     "smb": "Freemium tools like Trello, Asana, and Notion that offer robust free tiers for small teams, with affordable upgrades as the business grows and needs more advanced features",
     "enterprise": "Comprehensive platforms like Jira, Smartsheet, and Microsoft Project that provide portfolio management, resource planning, enterprise-grade security, and dedicated support for large-scale deployments",
