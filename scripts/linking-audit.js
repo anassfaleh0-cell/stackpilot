@@ -9,11 +9,19 @@
  * Run: npm run seo:links
  * Override target: SITE_URL=https://preview.example.vercel.app npm run seo:links
  */
-const SITE_URL = (process.env.SITE_URL || "https://pilotstack.online").replace(/\/+$/, "")
+// Never crawl production by default: a full rendered audit can request thousands of
+// URLs and retry transient 5xx responses. Local/build-time checks are the safe default.
+const SITE_URL = (process.env.SITE_URL || "http://127.0.0.1:3000").replace(/\/+$/, "")
 const SITE_ORIGIN = new URL(SITE_URL).origin
-const CONCURRENCY = Math.max(1, Math.min(4, Number(process.env.LINK_AUDIT_CONCURRENCY) || 2))
+const IS_LIVE_PRODUCTION = ["pilotstack.online", "www.pilotstack.online"].includes(new URL(SITE_URL).hostname)
+if (IS_LIVE_PRODUCTION && process.env.ALLOW_LIVE_AUDIT !== "1") {
+  console.error("Refusing to crawl production without ALLOW_LIVE_AUDIT=1. Prefer a local build or preview URL.")
+  process.exit(2)
+}
+const CONCURRENCY = IS_LIVE_PRODUCTION ? 1 : Math.max(1, Math.min(4, Number(process.env.LINK_AUDIT_CONCURRENCY) || 2))
 const REQUEST_TIMEOUT_MS = 25000
-const MAX_TRANSIENT_RETRIES = 5
+const MAX_TRANSIENT_RETRIES = IS_LIVE_PRODUCTION ? 0 : 2
+const LIVE_REQUEST_DELAY_MS = IS_LIVE_PRODUCTION ? Math.max(250, Number(process.env.LIVE_AUDIT_DELAY_MS) || 250) : 0
 const CACHE_BUSTER = process.env.LINK_AUDIT_CACHE_BUSTER || String(Date.now())
 const TRANSIENT_STATUSES = new Set([429, 500, 502, 503, 504])
 
@@ -62,6 +70,7 @@ async function fetchWithTimeout(url, options = {}) {
   if (requestUrl.origin === SITE_ORIGIN) requestUrl.searchParams.set("__link_audit", CACHE_BUSTER)
   for (let attempt = 0; attempt <= MAX_TRANSIENT_RETRIES; attempt++) {
     try {
+      if (LIVE_REQUEST_DELAY_MS) await new Promise((resolve) => setTimeout(resolve, LIVE_REQUEST_DELAY_MS))
       const response = await fetch(requestUrl.toString(), {
         ...options,
         redirect: options.redirect ?? "follow",
