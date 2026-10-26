@@ -76,7 +76,7 @@ for (const { file, data } of reviews) {
     add("review", slug, "score-copy-contradiction", "a stored editorial score exists but the copy says no numeric score is published; explain the score's provisional provenance instead")
   }
 
-  const numericMetrics = /\\b\\d[\\d,]*(?:\\.\\d+)?\\s*(?:reviews|users|customers|employees|integrations|templates)\\b/gi
+  const numericMetrics = /\b\d[\d,]*(?:\.\d+)?\s*(?:reviews|users|customers|employees|integrations|templates)\b/gi
   const metricFlags = sectionTexts.filter((section) => numericMetrics.test(section.text))
   numericMetrics.lastIndex = 0
   if (metricFlags.length && data.reviewCountVerified !== true && data.ratingVerified !== true) {
@@ -86,8 +86,8 @@ for (const { file, data } of reviews) {
     }
   }
 
-  const priceAmount = /[$€£]\\s?\\d[\\d,]*(?:\\.\\d+)?|\\b(?:USD|EUR|GBP)\\s?\\d[\\d,]*(?:\\.\\d+)?|\\b\\d[\\d,]*(?:\\.\\d+)?\\s?(?:USD|EUR|GBP)\\b/i
-  const priceContext = /\\b(?:price|pricing|costs?|plan|tier|subscription|billing|from|per (?:user|seat|editor)|starts? at|starting at|monthly|annually|annual|renewal|fee|licen[cs]e|pay(?:s|ment)?|budget)\\b|\\/(?:user\\/)?month\\b|\\/year\\b|\\/seat\\b/i
+  const priceAmount = /[$€£]\s?\d[\d,]*(?:\.\d+)?|\b(?:USD|EUR|GBP)\s?\d[\d,]*(?:\.\d+)?|\b\d[\d,]*(?:\.\d+)?\s?(?:USD|EUR|GBP)\b/i
+  const priceContext = /\b(?:price|pricing|costs?|plan|tier|subscription|billing|from|per (?:user|seat|editor)|starts? at|starting at|monthly|annually|annual|renewal|fee|licen[cs]e|pay(?:s|ment)?|budget)\b|\/(?:user\/)?month\b|\/year\b|\/seat\b/i
   const unverifiedPriceSections = sectionTexts.filter((section) => priceAmount.test(section.text) && priceContext.test(section.text))
   if (unverifiedPriceSections.length && data.priceRangeVerified !== true) {
     summary.reviews.unverifiedPriceClaims += unverifiedPriceSections.length
