@@ -205,6 +205,20 @@ describe("getComparisonDisplayCopy", () => {
     expect(copy.verdict).not.toContain("overall winner")
   })
 
+  it("does not trust a verified winner flag when category evidence is missing", () => {
+    const copy = getComparisonDisplayCopy({
+      tool1: "Alpha",
+      tool2: "Beta",
+      tool1Category: "Project Management",
+      winnerVerified: true,
+      description: "Alpha is the overall winner for every team.",
+      verdict: "Alpha wins overall.",
+    })
+    expect(copy.description).not.toContain("overall winner")
+    expect(copy.verdict).not.toContain("wins overall")
+    expect(copy.verdict).toContain("does not establish an auditable overall winner")
+  })
+
   it("preserves neutral copy for same-category comparisons when no unsupported claims exist", () => {
     const copy = getComparisonDisplayCopy({
       tool1: "Linear",
