@@ -821,6 +821,23 @@ function buildComparisonNarrative(tool1: string, tool2: string, tool1Slug: strin
     `Before switching between ${tool1} and ${tool2}, estimate the full cost including seats, add-ons, onboarding, training, administration, and integration maintenance. Confirm data export and recovery options, then choose the product that passes your must-have checks with the least operational friction. Revisit the choice when your workflow, team size, or vendor terms change.`
   ].filter(Boolean).join("\n\n")
 }
+/**
+ * Keep a comparison's original, product-specific editorial conclusion where a
+ * reviewed decision guide contains a coherent buyer trade-off. The generic
+ * generated narrative is a fallback for unsupported bulk-imported records,
+ * not a replacement for authored reasoning.
+ */
+function selectComparisonVerdict(cmp: ComparisonContent, fallback: string): string {
+  const authored = sanitizeUnsupportedClaims(String(cmp.verdict || "")).trim()
+  if (cmp.decisionGuide !== true || authored.length < 180) return fallback
+  const namesPresent = [cmp.tool1, cmp.tool2].every((name) =>
+    authored.toLocaleLowerCase("en-US").includes(name.toLocaleLowerCase("en-US"))
+  )
+  const unsafe = /(?:we (?:personally |independently )?(?:tested|benchmarked|evaluated) (?:each|both)|guaranteed winner|\b\d+(?:\.\d+)?\s*\/\s*5|[$€£]\s?\d+(?:[.,]\d+)?)/i.test(authored)
+  if (!namesPresent || unsafe) return fallback
+  return authored
+}
+
 function sanitizeComparisonDescription(description: string, tool1: string, tool2: string, features: ComparisonFeature[], winner: string | null): string {
   const cleaned = sanitizeUnsupportedClaims(description).replace(/\s+/g, " ").trim()
   // Winner language is publishable only when the comparison has an explicit audit flag.
@@ -913,7 +930,7 @@ export function getComparison(slug: string): ComparisonContent | null {
     lastUpdated: getVerifiedComparisonLastUpdated(cmp.lastUpdated),
     winner,
     description: sanitizeComparisonDescription(cmp.description, cmp.tool1, cmp.tool2, features, winner),
-    verdict: buildComparisonNarrative(cmp.tool1, cmp.tool2, cmp.tool1Slug, cmp.tool2Slug, cmp.featuresVerified === true ? features : [], winner),
+    verdict: selectComparisonVerdict(cmp, buildComparisonNarrative(cmp.tool1, cmp.tool2, cmp.tool1Slug, cmp.tool2Slug, cmp.featuresVerified === true ? features : [], winner)),
     features,
     faqs: sanitizeFaqs(cmp.faqs),
   }
