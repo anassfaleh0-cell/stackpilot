@@ -107,7 +107,7 @@ describe("rewritten cross-category comparison guides", () => {
     expect(audit).toContain("data.decisionGuide !== true")
   })
 
-  it("preserves already-rewritten guides as public and indexable", () => {
+  it("preserves previously restored guide routes while respecting editorial triage", () => {
     for (const slug of previouslyRestoredSlugs) {
       const record = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "comparisons", `${slug}.json`), "utf8")) as { published?: boolean; publicationStatus?: string; winner?: string | null; winnerVerified?: boolean; featuresVerified?: boolean; decisionGuide?: boolean }
       expect(record.published, slug).toBe(true)
@@ -117,8 +117,11 @@ describe("rewritten cross-category comparison guides", () => {
       expect(record.featuresVerified, slug).toBe(false)
       expect(record.decisionGuide, slug).toBe(true)
       expect(getComparison(slug), slug).not.toBeNull()
-      expect(isContentAvailable("comparison", slug), slug).toBe(true)
-      expect(isNoindexed("comparisons", slug), slug).toBe(false)
+      // A published route can remain accessible while a mismatched buying
+      // comparison is intentionally excluded from search and internal links.
+      const triaged = slug === "1password-vs-appwrite" || slug === "1password-vs-crowdstrike"
+      expect(isContentAvailable("comparison", slug), slug).toBe(!triaged)
+      expect(isNoindexed("comparisons", slug), slug).toBe(triaged)
       expect(config, slug).not.toContain(`source: "/comparisons/${slug}"`)
     }
   })
