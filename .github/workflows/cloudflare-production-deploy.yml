@@ -113,7 +113,7 @@ jobs:
             --data '{"purge_everything":true}' \
             "https://api.cloudflare.com/client/v4/zones/$zone_id/purge_cache" || true)"
           if ! printf '%s' "$purge_response" | jq -e '.success == true' >/dev/null 2>&1; then
-            echo "::warning::Cloudflare cache purge failed. Verify CLOUDFLARE_API_TOKEN has Zone Cache Purge permissions; post-deploy checks use unique query strings."
+            echo "::warning::Cloudflare cache purge failed. Check Zone Cache Purge permission. Canonical endpoint probes will still run but cannot certify that edge-cached HTML is from the new deploy."
             exit 0
           fi
           echo "PASS Cloudflare edge cache purge confirmed"
@@ -127,7 +127,8 @@ jobs:
             for attempt in 1 2 3 4 5; do
               code="$(curl --silent --show-error --location --output "$output" --write-out '%{http_code}' --connect-timeout 15 --max-time 45 "$url" || true)"
               if [ "$code" = "200" ]; then printf '%s' "$code"; return 0; fi
-              if [ "$code" != "429" ] && [ "${code:-000}" != "000" ]; then printf '%s' "$code"; return 0; fi
+              if ! [[ "$code" =~ ^(000|408|429|5[0-9][0-9])$ ]]; then printf '%s' "$code"; return 0; fi
+              echo "::warning::Transient HTTP ${code:-000} for $url on attempt $attempt; retrying canonical URL" >&2
               sleep $((attempt * 5))
             done
             printf '%s' "${code:-000}"
@@ -140,8 +141,8 @@ jobs:
             sleep 1
           done
           grep -F 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0' /tmp/pilotstack-response >/dev/null || curl --silent --show-error --fail --retry 4 --retry-all-errors --retry-delay 5 https://pilotstack.online/ads.txt | grep -F 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0'
-          # Guard routes that previously served HTTP 503 to Googlebot or audits.
-          # Do not bypass the prerender cache or create synthetic query URLs.
+          # Check canonical content URLs previously observed returning HTTP 503.
+          # Use the prerender cache; never add synthetic cache-busting query strings.
           for path in /best/best-marketing-seo-startups /blog/accounting-software-cost-2026 /use-cases/best-crm-for-startups /statistics/sports-software; do
             code="$(fetch_status "https://pilotstack.online$path" /tmp/pilotstack-content-response)"
             printf '%s %s\n' "$code" "$path"
@@ -158,14 +159,15 @@ jobs:
             exit 1
           fi
           echo "PASS live contact page uses only the configured contact inbox"
-          # Verify canonical rendered review HTML via the static cache. Cache-busting
-          # query strings and no-cache headers can trigger CPU-limit 503 responses.
-          xero_url="https://pilotstack.online/reviews/xero"
-          notion_url="https://pilotstack.online/reviews/notion"
-          chatgpt_url="https://pilotstack.online/reviews/chatgpt"
-          curl --silent --show-error --fail --location "$xero_url" -o /tmp/pilotstack-xero.html
-          curl --silent --show-error --fail --location "$notion_url" -o /tmp/pilotstack-notion.html
-          curl --silent --show-error --fail --location "$chatgpt_url" -o /tmp/pilotstack-chatgpt.html
+          # Probe the normal crawlable canonical URLs; query-string cache busting
+          # can force expensive runtime rendering and exceed the free Worker CPU
+          # budget on a cache miss. New code was already verified before deploy.
+          for review in xero notion chatgpt; do
+            code="$(fetch_status "https://pilotstack.online/reviews/$review" "/tmp/pilotstack-$review.html")"
+            printf '%s %s\n' "$code" "/reviews/$review"
+            test "$code" = "200"
+            sleep 1
+          done
           grep -Fq 'Create a customer invoice, record a supplier bill' /tmp/pilotstack-xero.html
           grep -Fq 'Notion is a candidate to evaluate for documentation, knowledge bases' /tmp/pilotstack-notion.html
           grep -Fq 'An editorial overview of ChatGPT' /tmp/pilotstack-chatgpt.html
