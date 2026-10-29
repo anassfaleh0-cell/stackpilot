@@ -203,7 +203,14 @@ export function getVisibleReviewFaqs(faqs: FAQItem[], showVerifiedPricing = fals
   const visibleFaqs = faqs.filter((faq) => {
     const question = faq.question.trim()
     const answer = faq.answer.trim()
-    if (!showVerifiedFeatures && /\b(?:integrat(?:e|es|ion)|features?|support for|supports?|available on|mobile apps?|API access|security certifications?|compliance|SSO|data residency|deployment options)\b/i.test(question)) return false
+    const sourceBackedAndQualified =
+      /https?:\/\/[^\s)]+/i.test(answer) &&
+      /\b(?:vendor|official|source|reference|check|confirm|verify|test|plan|availability)\b/i.test(answer)
+    // Legacy source-free feature assertions may be misleading. But do not hide
+    // a vendor-cited FAQ that explains its limits and asks buyers to verify them.
+    if (!showVerifiedFeatures &&
+      /\b(?:integrat(?:e|es|ion)|features?|support for|supports?|available on|mobile apps?|API access|security certifications?|compliance|SSO|data residency|deployment options)\b/i.test(question) &&
+      !sourceBackedAndQualified) return false
     if (/^is .+ secure\?$/i.test(question) && /SOC 2 Type II|ISO 27001|FedRAMP|compliance with GDPR|CCPA|HIPAA|PCI DSS/i.test(answer)) return false
     if (/^is .+ GDPR compliant\?$/i.test(question) && /^yes, .+ is GDPR compliant with data processing agreements and data residency options\./i.test(answer)) return false
     if (/^is .+ good for enterprise teams\?$/i.test(question) && /serves enterprise organizations with .+ certifications? and scalable infrastructure/i.test(answer)) return false
