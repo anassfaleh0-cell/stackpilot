@@ -50,6 +50,11 @@ jobs:
           ln -s /tmp/pilotstack-cloudflare-tools/node_modules/.bin/opennextjs-cloudflare node_modules/.bin/opennextjs-cloudflare
           ln -s /tmp/pilotstack-cloudflare-tools/node_modules/.bin/wrangler node_modules/.bin/wrangler
 
+      - name: Verify SEO smoke script syntax and editorial renderer
+        run: |
+          node --check scripts/production-smoke-check.cjs
+          npx vitest run src/components/content/editorial-article-body.test.tsx
+
       - name: Build Cloudflare Worker
         run: |
           node scripts/generate-search-index.mjs
