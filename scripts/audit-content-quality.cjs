@@ -52,12 +52,18 @@ for (const folder of folders) {
 
 const get = (folder, slug) => records.get(folder + "/" + slug)
 const unsupportedAudience = /\b(?:5[–-]200 users|more than 500 users|large enterprises with complex compliance requirements)\b/i
-const fakeScale = /\b(?:we tested (?:hundreds|thousands)|our team independently benchmarked|solutions evaluated:\s*\d+\+)\b/i
+const fakeScale = /\b(?:we tested (?:hundreds|thousands)|our team independently benchmarked|solutions evaluated:\s*\d+\+)/i
 for (const [id, data] of records) {
   const [section, slug] = id.split("/")
   const body = String(data.body || "")
   const text = [data.description, data.whoShouldUse, data.whoShouldNotUse,
     data.verdict, data.industryOverview, body].filter(Boolean).join("\n")
+  // Reviewed replacements are audited independently, while unsafe archived HTML
+  // stays visible in the report until an editor addresses its source quality.
+  const reviewedBody = String(data.reviewedBody || "")
+  if (reviewedBody && /<a\b[^>]*<a\b/i.test(reviewedBody)) {
+    flag("malformed_html", section, slug, "reviewed replacement contains nested anchors")
+  }
   if (unsupportedAudience.test(text)) flag("generic_audience", section, slug, "unsupported generic user-size or enterprise claim")
   if (fakeScale.test(text)) flag("fabricated_scale_claim", section, slug, "bulk-scale testing claim requires direct evidence")
   if (body.length > 20000 && (/<a\b[^>]*<a\b/i.test(body) || /Solutions Evaluated:\s*\d+\+/i.test(body))) {
