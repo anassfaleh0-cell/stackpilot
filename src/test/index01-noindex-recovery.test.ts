@@ -21,6 +21,7 @@ describe("site-wide content indexability policy", () => {
         if (record?.publicationStatus === "draft") continue
         expect(getContentTitle(type, slug), dir + "/" + slug).not.toBeNull()
         if (dir === "comparisons" && EDITORIAL_NOINDEX_COMPARISONS.has(slug)) continue
+        if (dir === "statistics" && isNoindexed(dir, slug)) continue
         expect(isNoindexed(dir, slug), dir + "/" + slug).toBe(false)
       }
     }
@@ -29,6 +30,7 @@ describe("site-wide content indexability policy", () => {
   it("withholds explicitly triaged cross-category comparisons from search while keeping route records", async () => {
     expect(new Set(getNoindexSlugs("comparisons"))).toEqual(EDITORIAL_NOINDEX_COMPARISONS)
     expect(getNoindexSlugs("reviews")).toEqual([])
+    expect(getNoindexSlugs("statistics").length).toBeGreaterThan(100)
     const { generateMetadata, generateStaticParams } = await import("@/app/comparisons/[slug]/page")
     const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
     for (const slug of EDITORIAL_NOINDEX_COMPARISONS) {

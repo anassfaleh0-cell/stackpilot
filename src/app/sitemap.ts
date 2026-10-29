@@ -31,7 +31,7 @@ const staticPages: MetadataRoute.Sitemap = [
   { url: `${siteConfig.url}/blog`, changeFrequency: "weekly", priority: 0.7 },
   { url: `${siteConfig.url}/glossary`, changeFrequency: "weekly", priority: 0.6 },
   { url: `${siteConfig.url}/tools`, changeFrequency: "weekly", priority: 0.7 },
-  { url: `${siteConfig.url}/statistics`, changeFrequency: "weekly", priority: 0.8 },
+  // Statistics directory is noindex until source-linked datasets are ready.
   { url: `${siteConfig.url}/research`, changeFrequency: "weekly", priority: 0.7 },
   { url: `${siteConfig.url}/alternatives`, changeFrequency: "weekly", priority: 0.7 },
   { url: `${siteConfig.url}/use-cases`, changeFrequency: "weekly", priority: 0.7 },

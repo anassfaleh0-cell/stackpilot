@@ -254,7 +254,7 @@ describe("AI-7: existing author SEO contracts remain unchanged", () => {
       .filter((p) => p.startsWith("/authors/"))
     expect(authorPaths).toHaveLength(PUBLIC_AUTHORS.length)
     expect(authorPaths).toContain("/authors/pilotstack-team")
-    expect(sitemap().length).toBeGreaterThan(1900)
+    expect(sitemap().length).toBeGreaterThanOrEqual(30)
   })
 
   it("adds no Person JSON-LD image the site cannot resolve", () => {

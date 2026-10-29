@@ -31,7 +31,7 @@ export default function SitemapPage() {
   const hubs = getAllHubs().filter(isPublished)
   const blog = getAllBlogPosts().filter(isPublished)
   const research = getAllResearch().filter(r => isPublished(r) && typeof r.slug === "string" && r.slug.trim().length > 0)
-  const statistics = getAllStatistics().filter(isPublished)
+  const statistics = getAllStatistics().filter(s => isPublished(s) && !isNoindexed("statistics", s.slug))
   const glossary = getAllGlossaryTerms().filter(g => isPublished(g) && !isNoindexed("glossary", g.slug))
 
   return (
@@ -136,12 +136,13 @@ export default function SitemapPage() {
               ))}
             </Section>
 
-            <Section title={`Statistics (${statistics.length})`}>
-              <Link href="/statistics" className="text-sm text-primary hover:underline block mb-2">All Statistics</Link>
-              {statistics.map(s => (
-                <Link key={s.slug} href={`/statistics/${s.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{s.title}</Link>
-              ))}
-            </Section>
+            {statistics.length > 0 && (
+              <Section title={`Statistics (${statistics.length})`}>
+                {statistics.map(s => (
+                  <Link key={s.slug} href={`/statistics/${s.slug}`} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-0.5">{s.title}</Link>
+                ))}
+              </Section>
+            )}
           </div>
 
           <Section title={`Categories (${categories.length})`}>
@@ -168,7 +169,7 @@ export default function SitemapPage() {
               <Link href="/brand-assets" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Brand Assets</Link>
               <Link href="/media-kit" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Media Kit</Link>
               <Link href="/press" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Press</Link>
-              <Link href="/statistics" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Statistics</Link>
+              {statistics.length > 0 && <Link href="/statistics" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Statistics</Link>}
               <Link href="/research" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">Research</Link>
               <Link href="/sitemap-html" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary transition-colors">HTML Sitemap</Link>
             </div>

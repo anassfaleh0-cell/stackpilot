@@ -27,11 +27,20 @@ const ROUTES = [
   "/category/developer-tools",
   "/use-cases/best-seo-for-agencies",
   "/statistics/marketing-software",
+  "/statistics",
   "/research/saas-churn-benchmarks-2026",
   "/research/saas-pricing-benchmark-2026",
   "/hubs/software-for-healthcare",
   "/industries/healthcare",
 ]
+
+// Deliberately retain direct access to source-unaudited statistical guides,
+// but confirm the response requests noindex and the XML sitemap excludes it.
+// The source audit tests enforce the evidence rules for all 104 records.
+const EXPECTED_NOINDEX_ROUTES = new Set([
+  "/statistics",
+  "/statistics/marketing-software",
+])
 
 let failures = 0
 let passes = 0
@@ -114,11 +123,13 @@ async function checkRoute(pathname) {
       return
     }
     const robotsMeta = body.match(/<meta\b(?=[^>]*\bname=["']robots["'])[^>]*>/i)?.[0] || ""
-    if (/\bcontent=["'][^"']*\bnoindex\b/i.test(robotsMeta)) {
-      fail(`${pathname} is unexpectedly noindex in the built app`)
+    const isNoindexed = /\bcontent=["'][^"']*\bnoindex\b/i.test(robotsMeta)
+    const shouldNoindex = EXPECTED_NOINDEX_ROUTES.has(pathname)
+    if (isNoindexed !== shouldNoindex) {
+      fail(`${pathname} robots mismatch: expected noindex=${shouldNoindex} received noindex=${isNoindexed}`)
       return
     }
-    pass(`${pathname} HTTP ${response.status}, title/description/canonical present`)
+    pass(`${pathname} HTTP ${response.status}, title/description/canonical present, noindex=${isNoindexed}`)
   } catch (error) {
     fail(`${pathname} request failed: ${error instanceof Error ? error.message : String(error)}`)
   }
@@ -162,7 +173,6 @@ async function main() {
           "/category/marketing-seo",
           "/category/developer-tools",
           "/use-cases/best-seo-for-agencies",
-          "/statistics/marketing-software",
           "/research/saas-churn-benchmarks-2026",
           "/research/saas-pricing-benchmark-2026",
           "/hubs/software-for-healthcare",
@@ -171,6 +181,9 @@ async function main() {
         const missingRequired = requiredSitemapPaths.filter((pathname) => !locations.includes(`https://pilotstack.online${pathname}`))
         if (missingRequired.length) fail(`/sitemap.xml is missing known landing routes: ${missingRequired.join(", ")}`)
         else pass("Known GSC landing routes are included in the sitemap")
+        const ineligible = [...EXPECTED_NOINDEX_ROUTES].filter((pathname) => locations.includes(`https://pilotstack.online${pathname}`))
+        if (ineligible.length) fail(`/sitemap.xml includes intentionally noindexed routes: ${ineligible.join(", ")}`)
+        else pass("Noindex source-audit routes are absent from the XML sitemap")
 
         const duplicates = locations.filter((url, index) => locations.indexOf(url) !== index)
         const invalid = locations.filter((url) => {

@@ -15,7 +15,6 @@ import {
   getAllBest,
   getAllAlternatives,
   getAllGlossaryTerms,
-  getAllStatistics,
 } from "@/lib/content/registry"
 
 const NEW_TYPES: RelatedType[] = ["use-case", "hub", "industry", "research", "statistic", "blog", "glossary"]
@@ -104,7 +103,7 @@ describe("Phase 5O-B-1: internal link discovery", () => {
     expect(getRelatedByCategory("CRM & Sales", "").useCases.map((u) => u.slug)).toContain("best-crm-for-small-business")
   })
 
-  it("discovers every new content family through an existing semantic relationship", { timeout: 60000 }, () => {
+  it("discovers related, indexable content without promoting unaudited statistics", { timeout: 60000 }, () => {
     const marketing = getRelatedByCategory("Marketing & SEO", "")
     expect(marketing.useCases.length).toBeGreaterThan(0)
     expect(marketing.hubs.map((h) => h.slug)).toContain("software-for-agencies")
@@ -112,7 +111,7 @@ describe("Phase 5O-B-1: internal link discovery", () => {
 
     expect(getRelatedByCategory("HR & People", "").industries.length).toBeGreaterThan(0)
     expect(getRelatedByCategory("Productivity", "").research.map((r) => r.slug)).toContain("ai-productivity-report-2026")
-    expect(getRelatedByCategory("Communication", "").statistics.map((s) => s.slug)).toContain("communication-software")
+    expect(getRelatedByCategory("Communication", "").statistics).toEqual([])
     expect(getRelatedByCategory("Developer Tools", "").glossaryTerms.map((g) => g.slug)).toContain("api")
   })
 
@@ -124,7 +123,6 @@ describe("Phase 5O-B-1: internal link discovery", () => {
       best: getAllBest,
       alternative: getAllAlternatives,
       glossary: getAllGlossaryTerms,
-      statistic: getAllStatistics,
     }
     const fixtures = [
       { type: "review", category: "Design & Creative", slug: "affinity", keep: "figma" },
@@ -133,7 +131,6 @@ describe("Phase 5O-B-1: internal link discovery", () => {
       { type: "best", category: "Marketing & SEO", slug: "best-marketing-software", keep: "best-marketing-seo-enterprise" },
       { type: "alternative", category: "HR & People", slug: "gusto-alternatives", keep: "bamboohr-alternatives" },
       { type: "glossary", category: "Developer Tools", slug: "devops", keep: "api" },
-      { type: "statistic", category: "Data Engineering", slug: "dataengineering-software", keep: "" },
     ] as const
 
     for (const fixture of fixtures) {
@@ -145,13 +142,11 @@ describe("Phase 5O-B-1: internal link discovery", () => {
       expect(slugs(result), `${fixture.slug} should remain discoverable`).toContain(fixture.slug)
       expect(result.related.map((entry) => getHref(entry)), `${getHref(item)} should remain linkable when selected`).toContain(getHref(item))
 
-      if (fixture.keep !== "") {
-        expect(slugs(result), `indexable sibling ${fixture.keep} should still be returned`).toContain(fixture.keep)
-      }
+      expect(slugs(result), `indexable sibling ${fixture.keep} should still be returned`).toContain(fixture.keep)
     }
 
-    expect(isContentAvailable("statistic", "aerospace-software")).toBe(true)
-    expect(getRelatedByCategory("Aerospace", "", 500).statistics.map((s) => s.slug)).toContain("aerospace-software")
+    expect(isContentAvailable("statistic", "aerospace-software")).toBe(false)
+    expect(getRelatedByCategory("Aerospace", "", 500).statistics).toEqual([])
   })
 
   it("keeps real records available while rejecting missing routes", { timeout: 60000 }, () => {

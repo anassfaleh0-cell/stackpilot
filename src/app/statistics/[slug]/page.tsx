@@ -47,6 +47,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
   } : null
 
   if (!page) notFound()
+  const datasetVerified = registry?.sourceAuditComplete === true && !isNoindexed("statistics", slug)
 
   const ignoredTerms = new Set(["software", "market", "statistics", "guide", "guides", "2026", "data", "industry", "industries", "business", "businesses", "report", "reports"])
   const toTerms = (value: string) => new Set(value.toLowerCase().split(/[^a-z0-9]+/).filter((term) => term.length > 3 && !ignoredTerms.has(term)))
@@ -65,8 +66,10 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
   return (
     <>
       <ArticleSchema title={page.title} description={page.description} publishedAt={registry?.publishedAt || "2026-01-15"} author="PilotStack Team" url={`${site.url}/statistics/${slug}`} />
-      <WebPageSchema name={page.title} description={page.description} url={`${site.url}/statistics/${slug}`} mainEntity={{ "@type": "Dataset", name: page.title, description: page.description }} />
-      <DatasetSchema name={page.title} description={page.description} url={`${site.url}/statistics/${slug}`} datePublished={registry?.publishedAt || undefined} dateModified={registry?.updatedAt || undefined} keywords={[page.title, "software statistics", "market data"]} />
+      <WebPageSchema name={page.title} description={page.description} url={`${site.url}/statistics/${slug}`} mainEntity={datasetVerified ? { "@type": "Dataset", name: page.title, description: page.description } : undefined} />
+      {datasetVerified && (
+        <DatasetSchema name={page.title} description={page.description} url={`${site.url}/statistics/${slug}`} datePublished={registry?.publishedAt || undefined} dateModified={registry?.updatedAt || undefined} keywords={[page.title, "software statistics", "market data"]} />
+      )}
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Statistics", href: "/statistics" }, { name: page.title, href: `/statistics/${slug}` }]} />
       <Container className="pt-8">
         <Breadcrumbs items={[{ name: "Statistics", href: "/statistics" }, { name: page.title }]} />
@@ -87,7 +90,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
             </div>
 
             <div className="mb-6 p-3 rounded-lg bg-primary-subtle/10 border border-primary/20 text-xs text-muted-foreground">
-              <span className="font-semibold text-foreground">Source-linked statistics</span>
+              <span className="font-semibold text-foreground">Source verification status</span>
               {" — "}Source links may lead to publisher pages rather than the exact original report. Figures without a direct source link are withheld until they can be checked; confirm the exact number, definition, geography, and publication date before relying on a number. Last updated {page.lastUpdated}.
             </div>
 
@@ -97,14 +100,14 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
                   <h2 className="text-2xl font-bold tracking-tight mb-6">{section.title}</h2>
                   {section.body ? (
                     <div className="mb-5 text-sm text-muted-foreground leading-relaxed space-y-3">
-                      {getSafeStatisticNarrative(section.title, registry?.category || "software", section.body, registry?.sourceAuditComplete === true).split(/\n+/).filter(Boolean).map((para, idx) => (
+                      {getSafeStatisticNarrative(section.title, registry?.category || "software", section.body, datasetVerified).split(/\n+/).filter(Boolean).map((para, idx) => (
                         <p key={idx}>{para}</p>
                       ))}
                     </div>
                   ) : null}
                   <div className="grid sm:grid-cols-2 gap-4">
                     {section.stats.map((stat) => {
-                      const sourceVerified = registry?.sourceAuditComplete === true && Boolean(stat.sourceUrl)
+                      const sourceVerified = datasetVerified && Boolean(stat.sourceUrl)
                       return (
                         <div key={stat.label} className="rounded-xl border border-border bg-card p-5 hover:border-primary/20 transition-colors">
                           {sourceVerified ? <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">{stat.value}</div> : <div className="text-lg font-semibold text-muted-foreground mb-1">Figure not verified</div>}
@@ -115,7 +118,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
                             </a>
                           ) : (
                             <div className="text-xs text-muted-foreground space-y-2">
-                              <p>Source named: {stat.source || "not recorded"}. The numeric value remains unverified until the original report or dataset is checked.</p>
+                              <p>Recorded attribution: {stat.source || "not recorded"}. This source has not been independently corroborated; the numeric value remains withheld.</p>
                               {stat.sourceUrl ? <a href={stat.sourceUrl} target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 text-primary hover:underline">Open publisher source <ExternalLink size={10} /></a> : null}
                             </div>
                           )}
@@ -124,7 +127,7 @@ export default async function StatPage({ params }: { params: Promise<{ slug: str
                     })}
                   </div>
                 </section>
-                {registry?.sourceAuditComplete === true && page.sections.some((section) => section.stats.length > 0) && i === Math.floor(page.sections.length / 2) - 1 && page.sections.length >= 3 && (
+                {datasetVerified && page.sections.some((section) => section.stats.length > 0) && i === Math.floor(page.sections.length / 2) - 1 && page.sections.length >= 3 && (
                   <section className="my-10">
                     <InFeedAd className="mx-auto max-w-[728px]" />
                   </section>

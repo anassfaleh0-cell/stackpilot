@@ -25,7 +25,6 @@ import {
   getAllAlternatives,
   getAllUseCases,
   getAllResearch,
-  getAllStatistics,
   getAllBlogPosts,
   getAllGlossaryTerms,
 } from "@/lib/content/registry"
@@ -177,7 +176,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
   )
 
   it(
-    "renders each of the seven newly discovered families as its own section",
+    "renders eligible extended families without the unaudited statistics section",
     { timeout: 180000 },
     () => {
       const marketing = renderInternal({ category: "Marketing & SEO", excludeSlug: "" })
@@ -186,7 +185,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
       expect(headings(marketing)).toEqual(
         expect.arrayContaining(["Use Cases", "Hubs", "Industries", "Research", "Blog Posts", "Glossary Terms"])
       )
-      expect(headings(communication)).toContain("Statistics")
+      expect(headings(communication)).not.toContain("Statistics")
 
       expect(hrefs(marketing)).toEqual(
         expect.arrayContaining([
@@ -195,9 +194,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
           "/glossary/ab-testing",
         ])
       )
-      expect(hrefs(communication)).toEqual(
-        expect.arrayContaining(["/statistics/communication-software"])
-      )
+      expect(hrefs(communication)).not.toContain("/statistics/communication-software")
     }
   )
 
@@ -272,7 +269,6 @@ describe("Phase 5O-B-2: internal link rendering", () => {
         { category: "Marketing & SEO", href: "/best/best-marketing-software", type: "best", slug: "best-marketing-software" },
         { category: "HR & People", href: "/alternatives/gusto-alternatives", type: "alternative", slug: "gusto-alternatives" },
         { category: "Developer Tools", href: "/glossary/devops", type: "glossary", slug: "devops" },
-        { category: "Data Engineering", href: "/statistics/dataengineering-software", type: "statistic", slug: "dataengineering-software" },
       ]
 
       for (const fixture of fixtures) {
@@ -404,14 +400,13 @@ describe("Phase 5O-B-2: internal link rendering", () => {
         { ...available("hub", getAllHubs(), "Agencies"), title: "Hub Item" },
         { ...available("industry", getAllIndustries(), "Education"), title: "Industry Item" },
         { ...available("research", getAllResearch(), "Analytics & Data"), title: "Research Item" },
-        { ...available("statistic", getAllStatistics(), "Communication"), title: "Statistic Item" },
         { ...available("blog", getAllBlogPosts(), "Marketing & SEO"), title: "Blog Item" },
         { ...available("glossary", getAllGlossaryTerms(), "Developer Tools"), title: "Glossary Item" },
       ]
 
       const html = renderEnhanced(items, 12)
 
-      for (const label of ["Use Case", "Hub", "Industry", "Research", "Statistics", "Article", "Glossary"]) {
+      for (const label of ["Use Case", "Hub", "Industry", "Research", "Article", "Glossary"]) {
         expect(html, "missing label " + label).toContain(">" + label + "<")
       }
       for (const raw of ["use-case", "glossary", "statistic"]) {

@@ -44,13 +44,73 @@ export const EDITORIAL_NOINDEX_COMPARISONS = new Set([
   "square-vs-zoho-books",
 ])
 
+
+// A market-statistics page is search-ready only after a source audit with
+// checkable per-figure URLs and dates. An unverified number must not become an
+// indexable Dataset simply because its raw JSON contains a publisher name.
+const statisticEvidenceCache = new Map<string, boolean>()
+
+export function hasCompleteStatisticEvidence(slug: string): boolean {
+  if (!/^[a-z0-9-]+$/.test(slug)) return false
+  const cached = statisticEvidenceCache.get(slug)
+  if (cached !== undefined) return cached
+
+  let verified = false
+  try {
+    const file = path.join(process.cwd(), "content", "statistics", slug + ".json")
+    const raw = JSON.parse(fs.readFileSync(file, "utf8")) as {
+      sourceAuditComplete?: boolean
+      sections?: Array<{ stats?: Array<{ sourceUrl?: unknown; sourceCheckedAt?: unknown; checkedOn?: unknown }> }>
+    }
+    const allFigures = (raw.sections ?? []).flatMap((section) =>
+      Array.isArray(section.stats) ? section.stats : []
+    )
+    const isValidSource = (value: unknown): boolean => {
+      if (typeof value !== "string") return false
+      try {
+        const url = new URL(value)
+        return url.protocol === "https:" && Boolean(url.hostname)
+      } catch {
+        return false
+      }
+    }
+    const isValidDate = (value: unknown): boolean =>
+      typeof value === "string" && /^\\d{4}-\\d{2}-\\d{2}$/.test(value) &&
+      !Number.isNaN(new Date(value + "T00:00:00Z").getTime()) &&
+      new Date(value + "T00:00:00Z").toISOString().slice(0, 10) === value
+
+    verified = raw.sourceAuditComplete === true &&
+      allFigures.length >= 1 &&
+      allFigures.every((figure) =>
+        isValidSource(figure.sourceUrl) &&
+        isValidDate(figure.sourceCheckedAt ?? figure.checkedOn)
+      )
+  } catch {
+    verified = false
+  }
+  statisticEvidenceCache.set(slug, verified)
+  return verified
+}
+
 export function isNoindexed(dir: string, slug: string): boolean {
+  if (dir === "statistics") return !hasCompleteStatisticEvidence(slug)
   return dir === "comparisons" && EDITORIAL_NOINDEX_COMPARISONS.has(slug)
 }
 
 export function getNoindexSlugs(dir: string): string[] {
-  // Report exactly the policy applied by isNoindexed, not the legacy manifest.
-  return dir === "comparisons" ? Array.from(EDITORIAL_NOINDEX_COMPARISONS) : []
+  // Report the real rendered metadata policy, not the older quality manifest.
+  if (dir === "comparisons") return Array.from(EDITORIAL_NOINDEX_COMPARISONS)
+  if (dir === "statistics") {
+    try {
+      return fs.readdirSync(path.join(process.cwd(), "content", "statistics"))
+        .filter((filename) => filename.endsWith(".json"))
+        .map((filename) => filename.slice(0, -5))
+        .filter((slug) => isNoindexed("statistics", slug))
+    } catch {
+      return []
+    }
+  }
+  return []
 }
 
 export function getKeepSlugs(dir: string): string[] {
