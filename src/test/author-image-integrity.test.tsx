@@ -237,7 +237,7 @@ describe("AI-7: existing author SEO contracts remain unchanged", () => {
       expect(meta.title).toContain(expectedName)
       expect(meta.description).toContain(expectedName)
       expect(meta.alternates?.canonical).toMatch(new RegExp(`/authors/${slug}$`))
-      expect(meta.openGraph?.images?.[0]?.url).toMatch(/\/og\.svg$/)
+      expect(meta.openGraph?.images?.[0]?.url).toMatch(/\/og\.png$/)
     }
   })
 
