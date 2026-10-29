@@ -52,8 +52,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const knowledge = getCategoryKnowledge(slug)
   const catReviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug) && categoryMatches(r.category, category.name))
   return createMetadata({
-    title: knowledge?.seoTitle || `Best ${category.name} Software 2026: Reviews & Buying Guide`,
-    description: knowledge?.seoDescription || `Find the best ${category.name.toLowerCase()} software with detailed reviews, pricing comparisons, and buying tips. ${catReviews.length} software profiles for 2026, with current details to verify against vendor sources.`,
+    title: knowledge?.seoTitle || `${category.name} Software 2026: Reviews & Buying Guide`,
+    description: knowledge?.seoDescription || `Explore ${catReviews.length} ${category.name.toLowerCase()} software research profiles, buying criteria, comparisons and guides. Verify current feature, pricing and plan information with each vendor.`,
     path: `/category/${slug}`,
     articleSection: category.name,
   })
@@ -92,8 +92,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
-      <WebPageSchema name={`Best ${category.name} Software 2026`} description={knowledge?.description || `Best ${category.name.toLowerCase()} software tools`} url={`${site.url}/category/${category.slug}`} />
-      <CollectionPageSchema name={category.name} description={`Best ${category.name.toLowerCase()} software tools`} url={`${site.url}/category/${category.slug}`} />
+      <WebPageSchema name={`${category.name} Software Research and Buyer Guide`} description={knowledge?.description || `Buyer guidance for ${category.name.toLowerCase()} software`} url={`${site.url}/category/${category.slug}`} />
+      <CollectionPageSchema name={category.name} description={`Research and compare ${category.name.toLowerCase()} software by workflow`} url={`${site.url}/category/${category.slug}`} />
       {reviews.length > 0 && <ItemListSchema items={reviews.slice(0, 50).map(r => ({ name: r.name, url: `${site.url}/reviews/${r.slug}` }))} url={`${site.url}/category/${category.slug}`} />}
       {knowledge?.faqs && <FAQSchema questions={knowledge.faqs} path={`/category/${slug}`} />}
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: category.name, href: `/category/${slug}` }]} />
@@ -105,9 +105,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
       <section className="relative overflow-hidden border-b border-border">
         <BrandPattern variant="grid" opacity={0.25} className="text-primary" />
         <Container className="relative py-12 sm:py-16">
-          <Badge variant="default" className="mb-4">{reviews.length} Tools Reviewed</Badge>
+          <Badge variant="default" className="mb-4">{reviews.length} Software research profiles</Badge>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-            Best {category.name} Software 2026
+            {category.name} Software 2026: Reviews &amp; Buying Guide
           </h1>
           {knowledge?.longDescription ? (
             <p className="text-lg text-muted-foreground max-w-3xl text-pretty leading-relaxed">
