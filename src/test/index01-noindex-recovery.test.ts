@@ -36,6 +36,10 @@ describe("site-wide content indexability policy", () => {
       const metadata = await generateMetadata({ params: Promise.resolve({ slug }) })
       expect((metadata as { robots?: { index?: boolean } }).robots).toMatchObject({ index: false })
     }
+    // Square can be meaningfully compared with payments platforms; do not
+    // suppress these just because the legacy category labels differ.
+    expect(isNoindexed("comparisons", "stripe-vs-square")).toBe(false)
+    expect(isNoindexed("comparisons", "paddle-vs-square")).toBe(false)
     expect(isNoindexed("comparisons", "1password-vs-bitwarden")).toBe(false)
     expect(paths.has("/comparisons/1password-vs-bitwarden")).toBe(true)
   })
