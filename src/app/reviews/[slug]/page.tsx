@@ -1,6 +1,7 @@
 import type { ContentSection } from "@/types/content"
 import { getReviewPricingSummary, getVisibleReviewContent, getVisibleReviewFaqs, isPricingPlaceholder } from "@/lib/content/review-quality"
 import { Container } from "@/components/ui/container"
+import { RichText } from "@/components/content/rich-text"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, SoftwareSchema, ReviewSchema, FAQSchema, WebPageSchema, ArticleSchema } from "@/components/seo/json-ld"
@@ -503,20 +504,20 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                       <h2 className="text-2xl font-bold tracking-tight mb-4">{section.title}</h2>
                       {section.type === "list" && section.items?.length ? (
                         <>
-                          <p className="text-muted-foreground leading-relaxed mb-4">{section.body}</p>
+                          <p className="text-muted-foreground leading-relaxed mb-4"><RichText text={section.body} /></p>
                           <ul className="space-y-2">
                             {section.items.map((item, j) => (
                               <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
                                 <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0">
                                   <polyline points="20 6 9 17 4 12" />
                                 </svg>
-                                <span>{item}</span>
+                                <span><RichText text={item} /></span>
                               </li>
                             ))}
                           </ul>
                         </>
                       ) : (
-                        <p className="text-muted-foreground leading-relaxed">{section.body}</p>
+                        <p className="text-muted-foreground leading-relaxed"><RichText text={section.body} /></p>
                       )}
                     </>
                   )}
