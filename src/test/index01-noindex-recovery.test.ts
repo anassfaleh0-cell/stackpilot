@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest"
 import fs from "node:fs"
-import { isNoindexed, EDITORIAL_NOINDEX_COMPARISONS } from "@/lib/noindex"
+import { isNoindexed, getNoindexSlugs, EDITORIAL_NOINDEX_COMPARISONS } from "@/lib/noindex"
 import { getContentTitle } from "@/lib/content/registry"
 import sitemap from "@/app/sitemap"
 import { metadata as searchMetadata } from "@/app/search/page"
@@ -27,6 +27,8 @@ describe("site-wide content indexability policy", () => {
   })
 
   it("withholds explicitly triaged cross-category comparisons from search while keeping route records", async () => {
+    expect(new Set(getNoindexSlugs("comparisons"))).toEqual(EDITORIAL_NOINDEX_COMPARISONS)
+    expect(getNoindexSlugs("reviews")).toEqual([])
     const { generateMetadata, generateStaticParams } = await import("@/app/comparisons/[slug]/page")
     const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
     for (const slug of EDITORIAL_NOINDEX_COMPARISONS) {
