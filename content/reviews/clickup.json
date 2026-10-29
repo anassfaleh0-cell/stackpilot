@@ -2,7 +2,7 @@
   "slug": "clickup",
   "name": "ClickUp",
   "tagline": "A configurable workspace for tasks, projects, docs, and reporting; evaluate the fit with a real team workflow.",
-  "description": "ClickUp is a configurable work-management workspace for tasks, project views, docs, dashboards, and automation. This review helps buyers assess workflow fit, setup effort, permissions, integrations, data portability, and total cost. The stored editorial score is provisional—not a third-party review average—and current feature availability, pricing, ratings, and review counts are not independently verified here. Confirm plan limits and vendor commitments in official documentation.",
+  "description": "ClickUp combines tasks, workspaces, project views, Docs, and dashboards in a configurable work-management hierarchy. This review examines hierarchy decisions, permissions by role and plan, automations, adoption effort, integrations, and export risk. Pricing and legacy editorial scores remain provisional until the evidence is audited.",
   "category": "Project Management",
   "website": "https://clickup.com",
   "pricing": "Not independently verified",
@@ -152,6 +152,11 @@
     }
   ],
   "content": [
+    {
+      "title": "ClickUp Workspace Hierarchy and Permissions: Current Vendor Documentation",
+      "body": "ClickUp's official hierarchy describes Workspaces, Spaces, Folders, Lists, tasks and Docs. Its permissions guide explains that available controls depend on role, location and paid plan; for example, Enterprise adds some Space-level permission controls. These are vendor-documented capabilities, not evidence PilotStack ran a controlled hands-on benchmark. Verify the current plan relevant to your team and test access using accounts with different roles. Sources: https://help.clickup.com/hc/en-us/articles/13856392825367-Intro-to-the-Hierarchy and https://help.clickup.com/hc/en-us/articles/6309221065495-Permissions-in-detail.",
+      "type": "text"
+    },
     {
       "title": "Executive Summary",
       "type": "text",
@@ -320,7 +325,7 @@
     "remote-work-stack"
   ],
   "contentPublished": "2026-07-19",
-  "contentModified": "2026-10-25",
+  "contentModified": "2026-10-29",
   "author": "Sarah Chen",
   "company": {
     "founded": 2017,
@@ -379,8 +384,8 @@
   },
   "difficulty": "Beginner",
   "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "ClickUp is designed for fast-growing startups that need a scalable project management platform. Its generous free tier and flexible pricing make it accessible for early-stage companies.",
-  "whoShouldNotUse": "ClickUp may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale.",
+  "whoShouldUse": "Teams managing varied project workflows should evaluate ClickUp when they need Spaces, Folders and Lists to organize tasks, with Docs and dashboards alongside execution. Test one cross-team project and define who can change task structures, manage guests, and maintain reporting.",
+  "whoShouldNotUse": "Teams that want a very simple task list should measure the administration cost of a customizable hierarchy before adopting ClickUp. Organizations with strict client isolation should test private spaces, guest permissions, audit needs and current plan limits; do not assume every control is in every tier.",
   "ratingVerified": false,
   "reviewCountVerified": false,
   "priceRangeVerified": false,
@@ -388,5 +393,6 @@
   "ratingsVerified": false,
   "companyFactsVerified": false,
   "scoreBasis": "Score provenance: this is a stored PilotStack editorial score, not a third-party review average. The score and category dimensions are retained for transparency but have not yet completed an evidence-and-calculation audit; treat them as provisional and verify current capabilities against the vendor's official documentation before relying on the rating.",
-  "featuresVerified": false
+  "featuresVerified": false,
+  "seoDescription": "ClickUp combines tasks, workspaces, project views, Docs, and dashboards in a configurable work-management hierarchy. This review examines hierarchy decisions,"
 }
