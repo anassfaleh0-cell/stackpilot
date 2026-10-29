@@ -50,8 +50,10 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
     "best-accounting-for-startups",
     "best-analytics-for-enterprise",
     "best-automation-for-business",
+    "best-seo-for-startups",
+    "best-marketing-for-enterprise",
   ])
-  const editorialBody = reviewedUseCaseSlugs.has(slug) ? uc.body : undefined
+  const editorialBody = reviewedUseCaseSlugs.has(slug) ? (uc.reviewedBody || uc.body) : undefined
 
   return (
     <>
