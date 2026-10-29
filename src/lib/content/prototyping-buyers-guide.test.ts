@@ -6,7 +6,7 @@ describe("prototyping buyer guide editorial integrity", () => {
     expect(guide.picks.map((pick) => pick.toolName)).toEqual([
       "Figma", "Zeplin", "InVision", "Sketch", "Adobe XD",
     ])
-    expect(guide.picks.map((pick) => pick.rating)).toEqual([4.8, 4.3, 4.2, 4.5, 4.2])
+    expect(guide.picks.map((pick) => pick.rating)).toEqual([4.8, 4.3, 4.2, 4.1, 4])
   })
 
   it("does not recommend discontinued InVision services for new projects", () => {
