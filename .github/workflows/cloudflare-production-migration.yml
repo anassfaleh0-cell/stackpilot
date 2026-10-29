@@ -54,7 +54,7 @@ jobs:
         run: |
           node --check scripts/production-smoke-check.cjs
           node --check scripts/audit-content-quality.cjs
-          npx vitest run src/components/content/editorial-article-body.test.tsx src/lib/content/related-comparisons.test.ts src/lib/content/priority-seo-integrity.test.ts src/lib/content/comparison-verdict-integrity.test.ts src/lib/content/industry-content-integrity.test.ts src/lib/content/priority-buyer-integrity.test.ts
+          npx vitest run src/components/content/rich-text.test.tsx src/lib/content/review-quality.test.ts src/components/content/editorial-article-body.test.tsx src/lib/content/related-comparisons.test.ts src/lib/content/priority-seo-integrity.test.ts src/lib/content/comparison-verdict-integrity.test.ts src/lib/content/industry-content-integrity.test.ts src/lib/content/priority-buyer-integrity.test.ts
 
       - name: Audit committed content records without removing any pages
         run: node scripts/audit-content-quality.cjs --json "$RUNNER_TEMP/pilotstack-content-quality.json"
