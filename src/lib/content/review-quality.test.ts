@@ -1,5 +1,34 @@
 import { describe, expect, it } from "vitest"
-import { getVisibleReviewContent } from "@/lib/content/review-quality"
+import { getVisibleReviewContent, getVisibleReviewFaqs } from "@/lib/content/review-quality"
+
+describe("sourced review FAQ visibility", () => {
+  it("retains a vendor-cited, qualified feature answer when the feature matrix is provisional", () => {
+    const sourceFaq = {
+      question: "Does Jotform support conditional form questions?",
+      answer: "Jotform documents conditional fields. Test your logic before launch. Official source: https://www.jotform.com/help/57-smart-forms-conditional-logic-for-online-forms/.",
+    }
+    const visible = getVisibleReviewFaqs([sourceFaq], false, false)
+    expect(visible).toHaveLength(1)
+    expect(visible[0].answer).toContain("Official source")
+  })
+
+  it("keeps source-free feature promises hidden when the claims are not independently verified", () => {
+    const unsupported = {
+      question: "Does ExampleTool support SSO?",
+      answer: "Yes, every plan includes enterprise-grade SSO and universal security compliance without any limitations.",
+    }
+    expect(getVisibleReviewFaqs([unsupported], false, false)).toHaveLength(0)
+  })
+
+  it("retains a general buyer question that transparently requests confirmation", () => {
+    const buyerQuestion = {
+      question: "What should a Jotform user test before launch?",
+      answer: "Test form quotas, stored submissions, upload limits, notification routing and exports for the intended plan.",
+    }
+    expect(getVisibleReviewFaqs([buyerQuestion], false, false)).toHaveLength(1)
+  })
+})
+
 
 describe("review section fallback quality", () => {
   const unsupportedLegacyClaim =
