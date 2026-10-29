@@ -10,12 +10,18 @@ describe("industry and software review editorial integrity", () => {
     expect(recruiting?.lastUpdated).toBe("2026-10-24")
   })
 
-  it("does not publish broken bulk-generated industry HTML or invent a revision date", () => {
+  it("renders substantive reviewed industry guidance without serving broken legacy HTML", () => {
     const consulting = getIndustry("consulting")
-    expect(consulting?.body).toBeUndefined()
-    expect(consulting?.title).toContain("Consulting Software")
-    expect(consulting?.description).toContain("Client and engagement")
-    expect(consulting?.lastUpdated).toBe("2026-08-11")
+    const marketing = getIndustry("marketing")
+    const legal = getIndustry("legal")
+    expect(consulting?.body).toContain("consulting engagement lifecycle")
+    expect(consulting?.body).not.toContain("Solutions Evaluated: 50+")
+    expect(marketing?.body).toContain("marketing tool stack")
+    expect(marketing?.body).not.toContain("Solutions Evaluated: 50+")
+    expect(consulting?.title).toContain("Engagement Delivery")
+    expect(consulting?.lastUpdated).toBe("2026-10-29")
+    // Legal legacy source remains in JSON, but cannot appear as malformed HTML.
+    expect(legal?.body).toBeUndefined()
   })
 
   it.each([
