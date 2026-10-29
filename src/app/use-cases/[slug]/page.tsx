@@ -15,6 +15,7 @@ import { Star, ArrowRight, CheckCircle2, AlertTriangle, Lightbulb } from "lucide
 import { EditorialHero, GlassCard, InfoCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { InFeedAd } from "@/components/ads"
+import { EditorialArticleBody } from "@/components/content/editorial-article-body"
 
 // Published content is built ahead of time so Workers never render JSON-backed pages on demand.
 export const dynamic = "force-static"
@@ -38,11 +39,14 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
   const { slug } = await params
   const uc = getUseCase(slug)
   if (!uc) notFound()
+  // The agency SEO guide has editor-reviewed long-form material in its source
+  // record that was previously omitted from the rendered page.
+  const editorialBody = slug === "best-seo-for-agencies" ? uc.body : undefined
 
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Use Cases", href: "/use-cases" }, { name: uc.title, href: `/use-cases/${slug}` }]} />
-      <ArticleSchema title={uc.title} description={uc.description} publishedAt={uc.lastUpdated} updatedAt={uc.lastUpdated} author="PilotStack Team" url={`${site.url}/use-cases/${slug}`} wordCount={uc.description.split(/\s+/).length + uc.useCaseDescription.split(/\s+/).filter(Boolean).length + uc.recommendations.reduce((n, r) => n + r.toolName.split(/\s+/).length + r.bestFor.split(/\s+/).filter(Boolean).length + r.keyFeatures.join(" ").split(/\s+/).filter(Boolean).length, 0) + uc.selectionCriteria.reduce((n, r) => n + String(r.factor ?? "").split(/\s+/).filter(Boolean).length + String(r.description ?? "").split(/\s+/).filter(Boolean).length, 0) + uc.commonPitfalls.join(" ").split(/\s+/).filter(Boolean).length + uc.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={uc.category} />
+      <ArticleSchema title={uc.title} description={uc.description} publishedAt={uc.lastUpdated} updatedAt={uc.lastUpdated} author="PilotStack Team" url={`${site.url}/use-cases/${slug}`} wordCount={uc.description.split(/\s+/).length + uc.useCaseDescription.split(/\s+/).filter(Boolean).length + uc.recommendations.reduce((n, r) => n + r.toolName.split(/\s+/).length + r.bestFor.split(/\s+/).filter(Boolean).length + r.keyFeatures.join(" ").split(/\s+/).filter(Boolean).length, 0) + uc.selectionCriteria.reduce((n, r) => n + String(r.factor ?? "").split(/\s+/).filter(Boolean).length + String(r.description ?? "").split(/\s+/).filter(Boolean).length, 0) + uc.commonPitfalls.join(" ").split(/\s+/).filter(Boolean).length + uc.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0) + (editorialBody ? editorialBody.replace(/<[^>]*>/g, " ").split(/\s+/).filter(Boolean).length : 0)} category={uc.category} />
       <WebPageSchema name={uc.title} description={uc.description} url={`${site.url}/use-cases/${slug}`} dateModified={uc.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: uc.recommendations.map((rec, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}`, category: getReview(rec.toolSlug)?.category || uc.category }) })) }} />
       <ItemListSchema items={uc.recommendations.map(rec => ({ name: rec.toolName, url: `${site.url}/reviews/${rec.toolSlug}` }))} url={`${site.url}/use-cases/${slug}`} />
       <CollectionPageSchema name={uc.title} description={uc.description} url={`${site.url}/use-cases/${slug}`} />
@@ -183,6 +187,8 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
                   </ul>
                 </section>
               )}
+
+              <EditorialArticleBody html={editorialBody} />
 
               <section>
                 <h2 className="text-2xl font-bold tracking-tight mb-6">FAQs</h2>
