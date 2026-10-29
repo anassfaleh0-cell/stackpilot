@@ -4,6 +4,14 @@ import fs from "node:fs"
 const workflow = fs.readFileSync(".github/workflows/cloudflare-production-deploy.yml", "utf8")
 
 describe("Cloudflare post-deployment validation", () => {
+  it("rechecks sitemap fetch errors without concealing real HTTP 403/404 responses", () => {
+    const smokeCheck = fs.readFileSync("scripts/production-smoke-check.cjs", "utf8")
+    expect(smokeCheck).toContain('failure.status === "FETCH_ERROR"')
+    expect(smokeCheck).toContain('attempt === 1 ? options : { ...options, signal: AbortSignal.timeout(15000) }')
+    expect(smokeCheck).toContain("Do not retry stable 403/404 responses")
+  })
+
+
   it("checks ordinary canonical review URLs without bypassing prerender cache", () => {
     expect(workflow).toContain("for review in xero notion chatgpt; do")
     expect(workflow).toContain('fetch_status "https://pilotstack.online/reviews/$review"')
