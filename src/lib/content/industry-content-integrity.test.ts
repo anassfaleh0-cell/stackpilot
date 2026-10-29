@@ -28,6 +28,7 @@ describe("industry and software review editorial integrity", () => {
     const review = getReview(slug)
     expect(review?.rating).toBeGreaterThan(0)
     expect(review?.content.some((part) => part.body.includes(primarySource))).toBe(true)
-    expect(review?.whoShouldUse).not.toMatch(/(?:5-200|more than 500 users|fast-growing startups)/i)
+    const audience = (review as (typeof review & { whoShouldUse?: string }) | null)?.whoShouldUse || ""
+    expect(audience).not.toMatch(/(?:5-200|more than 500 users|fast-growing startups)/i)
   })
 })
