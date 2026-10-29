@@ -1,3 +1,4 @@
+import { isNoindexed } from "@/lib/noindex"
 import { describe, it, expect } from "vitest"
 import fs from "node:fs"
 import path from "node:path"
@@ -250,11 +251,12 @@ describe("route families", () => {
     }
   })
 
-  it("keeps every content record represented by an indexable sitemap URL", () => {
+  it("keeps every indexable content record represented by a sitemap URL", () => {
     const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
     for (const family of FAMILIES) {
       for (const record of recordsOf(family.dir ?? "")) {
         if (record.publicationStatus === "draft") continue
+        if (isNoindexed(family.route, record.slug)) continue
         if (family.route === "alternatives" && REDIRECTED_ALTERNATIVE_SLUGS.has(record.slug)) continue
         if (family.route === "best" && REDIRECTED_BEST_SLUGS.has(record.slug)) continue
         if (family.route === "guides" && REDIRECTED_GUIDE_SLUGS.has(record.slug)) continue

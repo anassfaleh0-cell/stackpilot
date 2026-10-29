@@ -281,7 +281,8 @@ async function main() {
       const targets = [...pageTargets]
       const pageFailures = []
       let cursor = 0
-      const concurrency = Math.min(4, targets.length)
+      // Keep production crawl pressure low on the free Worker plan.
+      const concurrency = Math.min(IS_LIVE_PRODUCTION ? 2 : 4, targets.length)
       await Promise.all(Array.from({ length: concurrency }, async () => {
         while (cursor < targets.length) {
           const target = targets[cursor++]
@@ -296,30 +297,27 @@ async function main() {
           } catch (error) {
             pageFailures.push({ url: target, status: "FETCH_ERROR", detail: error instanceof Error ? error.message : String(error) })
           }
+          // Do not create a burst of thousands of parallel cache misses.
+          if (IS_LIVE_PRODUCTION) await new Promise((resolve) => setTimeout(resolve, 250))
         }
       }))
-      // A single 5xx can be a transient Worker/origin response or a stale edge-cached error.
-      // Recheck only failed URLs with a cache-busting query before treating them as persistent failures.
+      // Treat 5xx as real until the canonical URL succeeds after a brief cooldown.
+      // Avoid query-string cache busting: it bypasses prerendered cache entries and
+      // can trigger CPU-heavy Worker rendering on the free plan.
       const initialPageFailures = [...pageFailures]
       const recoveredPageFailures = []
       const persistentPageFailures = []
       for (const failure of initialPageFailures) {
         if (!failure.url || !(failure.status === 408 || failure.status === 429 || (typeof failure.status === "number" && failure.status >= 500))) {
-          // Do not retry stable client errors (especially 403/404) with cache-busting
-          // query strings. That creates needless Worker work and can hide the real cause.
+          // Do not retry stable 403/404 responses: they indicate a distinct issue.
           persistentPageFailures.push(failure)
           continue
         }
-        const retryUrl = new URL(failure.url)
-        retryUrl.searchParams.set("__route_audit", process.env.GITHUB_SHA || String(Date.now()))
         try {
-          const response = await fetchWithRetry(retryUrl.toString(), {
+          if (IS_LIVE_PRODUCTION) await new Promise((resolve) => setTimeout(resolve, 2500))
+          const response = await fetchWithRetry(failure.url, {
             redirect: "follow",
-            headers: {
-              "user-agent": "PilotStack-ProductionSmokeCheck/1.0",
-              "cache-control": "no-cache",
-              pragma: "no-cache",
-            },
+            headers: { "user-agent": "PilotStack-ProductionSmokeCheck/1.0" },
             signal: AbortSignal.timeout(15000),
           }, 3)
           if (response.status < 400) {

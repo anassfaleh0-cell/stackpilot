@@ -18,7 +18,27 @@ export const metadata = createMetadata({
 
 export default function HomePage() {
   const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug))
+  // Feature editorially relevant product pages, not alphabetical catalog entries.
+  // Missing or unpublished records are skipped rather than linked.
+  const featuredReviewSlugs = [
+    "linear", "figma", "notion", "github", "1password", "chatgpt",
+  ] as const
+  const featuredReviews = featuredReviewSlugs
+    .map((slug) => reviews.find((review) => review.slug === slug))
+    .filter((review): review is (typeof reviews)[number] => Boolean(review))
   const comparisons = getAllComparisons().filter((cmp) => isContentAvailable("comparison", cmp.slug))
+  // Feature genuinely comparable products rather than the first alphabetical
+  // records. Only feature published, accessible comparison routes; a missing
+  // curated record simply reduces this section instead of inventing a link.
+  const featuredComparisonSlugs = [
+    "1password-vs-bitwarden",
+    "asana-vs-clickup",
+    "figma-vs-sketch",
+    "github-vs-sourceforge",
+  ] as const
+  const featuredComparisons = featuredComparisonSlugs
+    .map((slug) => comparisons.find((comparison) => comparison.slug === slug))
+    .filter((comparison): comparison is (typeof comparisons)[number] => Boolean(comparison))
   const guides = getAllGuides().filter((g) => isContentAvailable("guide", g.slug))
   const posts = getAllBlogPosts().filter((post) => isContentAvailable("blog", post.slug))
   const glossary = getAllGlossaryTerms().filter((term) => isContentAvailable("glossary", term.slug))
@@ -127,7 +147,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {reviews.slice(0, 6).map((tool, i) => (
+            {featuredReviews.map((tool, i) => (
               <Link key={tool.slug} href={`/reviews/${tool.slug}`} className="group card-hover-lift" style={{ animationDelay: `${i * 60}ms` }}>
                 <Card className="h-full flex flex-col">
                   <div className="flex items-start justify-between mb-3">
@@ -170,7 +190,7 @@ export default function HomePage() {
       <BrandDivider />
 
       {/* ── Trending Comparisons ── */}
-      {comparisons.length > 0 && (
+      {featuredComparisons.length > 0 && (
         <Section className="py-0 sm:py-0 lg:py-0">
           <Container>
             <div className="flex items-end justify-between mb-12">
@@ -189,7 +209,7 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="grid sm:grid-cols-2 gap-6">
-              {comparisons.slice(0, 4).map((cmp) => (
+              {featuredComparisons.map((cmp) => (
                 <Link key={cmp.slug} href={`/comparisons/${cmp.slug}`} className="group card-hover-lift">
                   <Card className="h-full flex flex-col">
                     <div className="flex items-start justify-between mb-3">

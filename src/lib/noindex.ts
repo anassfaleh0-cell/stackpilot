@@ -26,10 +26,17 @@ function loadNoindexList(dir: string): Set<string> {
   return set
 }
 
-// Indexability is intentionally not driven by the legacy quality manifest.
-// Content quality must be improved in place rather than hidden from search.
-export function isNoindexed(_dir: string, _slug: string): boolean {
-  return false
+// Editorially triaged, unrelated head-to-head pages are retained for direct
+// access and revision, but must not be advertised as indexable buying advice.
+// Do NOT apply this rule indiscriminately to the legacy manifest: that inventory
+// has not been reviewed URL by URL against Search Console performance data.
+export const EDITORIAL_NOINDEX_COMPARISONS = new Set([
+  "1password-vs-appwrite", // password manager vs application backend
+  "1password-vs-crowdstrike", // password manager vs endpoint security
+])
+
+export function isNoindexed(dir: string, slug: string): boolean {
+  return dir === "comparisons" && EDITORIAL_NOINDEX_COMPARISONS.has(slug)
 }
 
 export function getNoindexSlugs(dir: string): string[] {
