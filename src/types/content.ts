@@ -258,6 +258,8 @@ export interface IndustryContent {
   slug: string
   /** Visible only for specifically reviewed, structurally valid source bodies. */
   body?: string
+  /** Clean authored article; legacy source body remains archived and unchanged. */
+  reviewedBody?: string
   contentVerified?: boolean
   title: string
   description: string
