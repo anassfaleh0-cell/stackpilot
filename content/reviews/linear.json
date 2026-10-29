@@ -2,7 +2,7 @@
   "slug": "linear",
   "name": "Linear",
   "tagline": "Evaluate Linear if your software team wants issue tracking connected to planning and delivery. Test custom workflow needs, permission requirements, reporting, and integration coverage early. Teams that rely on highly customized processes should compare alternatives before migrating.",
-  "description": "Linear is an issue-tracking and product-planning workspace for teams evaluating backlog triage, cycles, project status, and delivery coordination. This review focuses on workflow fit, permissions, integrations, migration, and total cost. The stored rating is provisional; feature availability, current pricing, review counts, and vendor commitments have not been independently verified and should be checked against current vendor documentation.",
+  "description": "Linear is a software issue-tracking and product-planning workspace combining issues, team cycles, projects and initiatives. This review evaluates how teams organize delivery, link projects to objectives, handle permissions and migrations, and maintain planning cadence. The recorded PilotStack editorial score remains provisional, not a verified user-review average.",
   "seoTitle": "Linear Review: Workflow Fit, Limits & Pricing",
   "seoDescription": "Linear review: issue tracking, product planning, integrations, permissions, migration, and plan checks. Verify current terms before buying.",
   "category": "Project Management",
@@ -155,6 +155,16 @@
   ],
   "content": [
     {
+      "title": "How Linear connects cycles, projects and initiatives",
+      "type": "text",
+      "body": "Linear documents cycles as a repeating, time-boxed planning period for team issues; cycles are not automatically tied to software releases. Projects group issues around a deliverable or planned outcome and can be shared by multiple teams. Initiatives group projects around broader objectives, helping organizations distinguish near-term execution from longer-term planning. A useful pilot should test these three levels with a real team workflow rather than assuming every team needs all of them. Official references: <a href=\"https://linear.app/docs/use-cycles\">Linear cycles</a>, <a href=\"https://linear.app/docs/projects\">Linear projects</a>, and <a href=\"https://linear.app/docs/initiatives\">Linear initiatives</a>."
+    },
+    {
+      "title": "A concrete Linear evaluation: one release cycle",
+      "type": "text",
+      "body": "Create a small set of representative issues with owners, priorities and acceptance criteria. Assign a subset to a cycle, link them to a project, and track a dependency or delayed issue. Confirm how completed, unfinished and moved work appears in reports. Add a project update and check what a team outside engineering can understand about progress. For a multi-team effort, test whether a project and initiative provide the right visibility without exposing private-team work. Record the configuration effort, integration needs and unresolved permission or export requirements before making a buying decision."
+    },
+    {
       "title": "Executive Summary",
       "type": "text",
       "body": "Linear is an issue-tracking and product-planning workspace organized around work items and delivery workflows. It is worth evaluating when a software team wants to connect backlog triage, planning, project status, and day-to-day issue work. This is not a claim of independent structured product review. Validate the workflow with your own backlog, roles, reporting needs, and source-control process before deciding whether Linear fits better than your current system."
@@ -206,6 +216,10 @@
     }
   ],
   "faqs": [
+    {
+      "question": "Are Linear cycles the same as software releases?",
+      "answer": "No. Linear documents cycles as repeating, time-boxed planning periods for team issues, and notes that cycles are not tied to releases. Check the current team configuration and how unfinished issues roll forward. Official source: https://linear.app/docs/use-cycles."
+    },
     {
       "question": "What is Linear best used for?",
       "answer": "Evaluate Linear using a representative task from your workflow. Check whether the output meets your quality bar, how much correction is required, which plan features are available, and whether privacy, integrations, and export meet your requirements."
@@ -299,7 +313,7 @@
     "free-project-management-software"
   ],
   "contentPublished": "2026-07-16",
-  "contentModified": "2026-10-23",
+  "contentModified": "2026-10-29",
   "author": "PilotStack Team",
   "company": {
     "founded": 2019,
@@ -353,8 +367,8 @@
   },
   "difficulty": "Advanced",
   "learningCurve": "Steep — requires dedicated training time for full proficiency",
-  "whoShouldUse": "Software teams that want issue tracking and product planning in a shared workspace should assess Linear against their delivery process. Teams outside engineering should verify that the model fits their work, and organizations with complex approval or permission needs should test those cases before adoption.",
-  "whoShouldNotUse": "Test workflow flexibility, custom fields, role permissions, audit needs, reporting, and data export. Migration planning should account for comments, attachments, labels, issue relationships, and history. Confirm which administrative and security controls require a particular plan.",
+  "whoShouldUse": "Engineering and product teams should evaluate Linear when their delivery workflow relies on tracked issues, team cycles and projects with clear outcomes. Test backlog intake, work in progress, a cross-team project and project-level reporting. Verify current plan entitlements and access rights for guests or private teams.",
+  "whoShouldNotUse": "Teams that require deeply customized non-engineering business processes should confirm whether Linear's issue, project and initiative model supports the required approvals. Organizations with complex privacy, security, migration, export or reporting requirements should test those explicitly rather than relying on a generic enterprise-fit claim.",
   "ratingVerified": false,
   "reviewCountVerified": false,
   "priceRangeVerified": false,
