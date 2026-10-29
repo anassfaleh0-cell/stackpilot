@@ -238,6 +238,53 @@ export default function HomePage() {
 
       <BrandDivider />
 
+      {/* Curated SEO buyer path: connect the proven agency and enterprise intent pages.
+          These distinct resources cover selection, deeper testing, and procurement. */}
+      <Section className="py-0 sm:py-0 lg:py-0">
+        <Container>
+          <div className="mb-8">
+            <Badge variant="default" className="mb-4">Marketing &amp; SEO</Badge>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Choosing SEO software for your team</h2>
+            <p className="mt-3 max-w-3xl text-sm text-muted-foreground leading-relaxed">
+              Start with the buying scenario that matches your team. Our agency shortlist covers multi-client workflows;
+              the enterprise guide focuses on markets, permissions and reporting; the testing playbook helps you compare
+              candidates with repeatable tasks. These are evaluation guides, not independently verified universal rankings.
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            <Link href="/use-cases/best-seo-for-agencies" className="group block h-full">
+              <Card className="h-full">
+                <h3 className="font-semibold group-hover:text-primary transition-colors">SEO software for agencies</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  Compare Ahrefs, Semrush and Moz on client reporting, research, technical audits and workload limits.
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">Read agency guide <ArrowRight size={14} /></span>
+              </Card>
+            </Link>
+            <Link href="/best/best-marketing-seo-enterprise" className="group block h-full">
+              <Card className="h-full">
+                <h3 className="font-semibold group-hover:text-primary transition-colors">Enterprise SEO buyer guide</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  Evaluate data coverage, technical crawl requirements, governance, multi-market reporting and total cost.
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">Read enterprise guide <ArrowRight size={14} /></span>
+              </Card>
+            </Link>
+            <Link href="/blog/best-seo-tools-for-agencies" className="group block h-full">
+              <Card className="h-full">
+                <h3 className="font-semibold group-hover:text-primary transition-colors">Two-week tool testing workflow</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  Run the same client tasks across vendors, record findings and compare realistic plan terms.
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">Read testing workflow <ArrowRight size={14} /></span>
+              </Card>
+            </Link>
+          </div>
+        </Container>
+      </Section>
+
+      <BrandDivider />
+
       {/* ── Buying Guides ── */}
       {guides.length > 0 && (
         <Section className="py-0 sm:py-0 lg:py-0">
