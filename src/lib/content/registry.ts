@@ -1209,8 +1209,14 @@ function normalizeIndustryContent(industry: IndustryContent): IndustryContent {
   const safeIndustry = { ...industry }
   // Legacy industry HTML includes broken nested links and unsupported volume
   // claims. Only specifically reviewed source articles should be restored.
-  const approvedIndustryBodies = new Set(["recruiting"])
-  if (!approvedIndustryBodies.has(safeIndustry.slug)) delete safeIndustry.body
+  const approvedIndustryBodies = new Set(["recruiting", "consulting", "marketing", "legal"])
+  if (approvedIndustryBodies.has(safeIndustry.slug) && typeof safeIndustry.reviewedBody === "string" && safeIndustry.reviewedBody.trim()) {
+    safeIndustry.body = safeIndustry.reviewedBody
+  } else if (safeIndustry.slug !== "recruiting") {
+    // Preserve legacy HTML in committed JSON for revision; do not expose its
+    // broken links or unsupported "50+ solutions tested" claims to readers.
+    delete safeIndustry.body
+  }
   if (safeIndustry.contentVerified === true) {
     return {
       ...safeIndustry,
