@@ -3,9 +3,9 @@ import type { ComparisonContent } from "@/types/content"
 type CategoryLookup = (slug: string) => string | undefined
 
 /**
- * Recommend only genuine head-to-head alternatives that share a product with
- * the current page. Two products in a broad catalog category alone are not
- * evidence that the buyer could substitute one for the other.
+ * Recommend only editorially cross-linked head-to-head alternatives that share
+ * a product with the current page. Two products in a broad catalog category
+ * alone are not evidence that the buyer could substitute one for the other.
  *
  * Keep all source records available; this filters only contextual links.
  */
@@ -14,10 +14,12 @@ export function getRelevantComparisonSlugs(
   candidates: ComparisonContent[],
   categoryFor: CategoryLookup,
   limit = 6,
+  editorialSlugs: string[] = [],
 ): string[] {
-  const curated = new Set(current.relatedComparisons || [])
+  const curated = new Set([...(current.relatedComparisons || []), ...editorialSlugs])
   const output = candidates
     .filter((candidate) => {
+      if (!curated.has(candidate.slug)) return false
       if (candidate.slug === current.slug) return false
       if ((candidate as ComparisonContent & { publicationStatus?: string }).publicationStatus === "draft") return false
       if (candidate.tool1Slug === current.tool1Slug && candidate.tool2Slug === current.tool2Slug) return false
