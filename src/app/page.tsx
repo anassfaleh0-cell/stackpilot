@@ -18,6 +18,14 @@ export const metadata = createMetadata({
 
 export default function HomePage() {
   const reviews = getAllReviews().filter((r) => isContentAvailable("review", r.slug))
+  // Feature editorially relevant product pages, not alphabetical catalog entries.
+  // Missing or unpublished records are skipped rather than linked.
+  const featuredReviewSlugs = [
+    "linear", "figma", "notion", "github", "1password", "chatgpt",
+  ] as const
+  const featuredReviews = featuredReviewSlugs
+    .map((slug) => reviews.find((review) => review.slug === slug))
+    .filter((review): review is (typeof reviews)[number] => Boolean(review))
   const comparisons = getAllComparisons().filter((cmp) => isContentAvailable("comparison", cmp.slug))
   // Feature genuinely comparable products rather than the first alphabetical
   // records. Only feature published, accessible comparison routes; a missing
@@ -139,7 +147,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {reviews.slice(0, 6).map((tool, i) => (
+            {featuredReviews.map((tool, i) => (
               <Link key={tool.slug} href={`/reviews/${tool.slug}`} className="group card-hover-lift" style={{ animationDelay: `${i * 60}ms` }}>
                 <Card className="h-full flex flex-col">
                   <div className="flex items-start justify-between mb-3">
