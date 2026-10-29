@@ -24,10 +24,8 @@ describe("getRelevantComparisonSlugs", () => {
       comparison("docker-vs-kubernetes", "docker", "kubernetes"),
       comparison("github-vs-gitlab", "github", "gitlab"),
     ]
-    expect(getRelevantComparisonSlugs(current, candidates, categoryFor)).toEqual([
-      "github-vs-gitlab",
-      "github-vs-bitbucket",
-    ])
+    expect(getRelevantComparisonSlugs(current, candidates, categoryFor)).toEqual(["github-vs-gitlab"])
+    expect(getRelevantComparisonSlugs(current, candidates, categoryFor, 6, ["github-vs-bitbucket"])).toEqual(["github-vs-gitlab", "github-vs-bitbucket"])
   })
 
   it("never recommends unrelated, mismatched, reversed or draft pairs", () => {
@@ -37,9 +35,7 @@ describe("getRelevantComparisonSlugs", () => {
       comparison("sourceforge-vs-github", "sourceforge", "github"),
       { ...comparison("github-vs-bitbucket", "github", "bitbucket"), publicationStatus: "draft" },
     ]
-    expect(getRelevantComparisonSlugs(current, candidates as ComparisonContent[], categoryFor)).toEqual([
-      "github-vs-appwrite",
-    ])
+    expect(getRelevantComparisonSlugs(current, candidates as ComparisonContent[], categoryFor)).toEqual([])
   })
 
   it("respects the visible-related-links limit", () => {
