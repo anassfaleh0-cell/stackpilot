@@ -24,7 +24,7 @@
   "features": [
     {
       "name": "JotForm Core Platform",
-      "description": "The central productivity engine powering all JotForm functionality",
+      "description": "Jotform offers online form creation and submission workflows; confirm exact plan limits, submission storage and access controls. Source: https://www.jotform.com/help/408-understanding-your-account-usage-and-limits/",
       "available": true,
       "category": "Core"
     },
@@ -48,31 +48,31 @@
     },
     {
       "name": "Single Sign-On",
-      "description": "Enterprise SSO with SAML 2.0 and OAuth support",
+      "description": "Identity and enterprise authentication options must be confirmed for the intended Jotform account and plan. Specific protocols and access eligibility were not independently verified in this review.",
       "available": true,
       "category": "Security"
     },
     {
       "name": "Data Encryption",
-      "description": "AES-256 encryption for data at rest and TLS 1.3 in transit",
+      "description": "Confirm documented encryption in transit and at rest, handling of sensitive form fields, data region, retention and contract scope with the vendor. Specific TLS and AES versions are not independently verified here.",
       "available": true,
       "category": "Security"
     },
     {
       "name": "Audit Logging",
-      "description": "Detailed audit trails tracking user actions and configuration changes",
+      "description": "Confirm which audit logs, account actions and access reports are available on the intended plan; the scope is not independently verified here.",
       "available": true,
       "category": "Security"
     },
     {
       "name": "Role-Based Access Control",
-      "description": "Granular permission management for teams and organizations",
+      "description": "Test team roles, submission permissions, sharing, offboarding and workspace access on the intended Jotform account and plan.",
       "available": true,
       "category": "Security"
     },
     {
       "name": "Reporting Dashboard",
-      "description": "Custom analytics and reporting with real-time data",
+      "description": "Evaluate submission reporting and export quality using a realistic dataset; available views, freshness and analytics limits have not been independently verified.",
       "available": true,
       "category": "Analytics"
     },
