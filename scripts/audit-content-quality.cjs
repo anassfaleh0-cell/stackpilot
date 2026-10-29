@@ -21,7 +21,8 @@ const folders = [
 const priority = { broken_json: 1, malformed_html: 1, empty_comparison: 1,
   cross_category_comparison: 2, generic_audience: 2, fabricated_scale_claim: 1,
   thin_source: 2, missing_verdict: 2, score_provenance: 3,
-  bulk_generated_body: 2, missing_source_links: 3, broken_internal_reference: 2 }
+  bulk_generated_body: 2, missing_source_links: 3, broken_internal_reference: 2,
+  repetitive_review_sections: 2, missing_vendor_evidence: 3 }
 
 const records = new Map()
 const findings = []
@@ -121,6 +122,18 @@ for (const [id, data] of records) {
     flag("malformed_html", section, slug, "nested/broken anchor source")
   }
   if (section === "reviews") {
+    const sections = Array.isArray(data.content) ? data.content : []
+    const bodies = sections.map((item) => String(item.body || ""))
+    const genericOpening = /(?:Start by defining the workflow you expect it to support|Verify the exact limits and test the highest-risk workflow|Use representative data, include the roles that will administer|The recorded profile lists these available capabilities)/i
+    const repeated = bodies.filter((body) => genericOpening.test(body)).length
+    if (repeated >= 3) {
+      flag("repetitive_review_sections", section, slug, repeated + " source sections contain repeated generic evaluation boilerplate")
+    }
+    const vendorEvidence = sections.some((item) =>
+      /https?:\/\/(?:www\.)?[a-z0-9.-]+\.[a-z]{2,}\b/i.test(String(item.body || "")))
+    if (!vendorEvidence) {
+      flag("missing_vendor_evidence", section, slug, "no source-linked vendor documentation found in original editorial sections")
+    }
     const authoredWords = (data.content || []).reduce((n, item) =>
       n + words(item.body) + (item.items || []).reduce((v, x) => v + words(x), 0), 0)
     if (authoredWords < 160) flag("thin_source", section, slug, "original review sections under 160 words (before runtime filler)")
