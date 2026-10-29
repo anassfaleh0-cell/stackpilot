@@ -28,19 +28,19 @@
   "features": [
     {
       "name": "Payments API",
-      "description": "Accept credit/debit cards, digital wallets, and local payment methods through a single API with 40+ method support",
+      "description": "Stripe documents online payment flows using Checkout and custom integrations. Supported payment methods, countries, currencies and eligibility vary. Source: https://docs.stripe.com/payments",
       "available": true,
       "category": "Core"
     },
     {
       "name": "Subscriptions & Billing",
-      "description": "Recurring billing with proration, metered billing, coupons, dunning management, and Smart Retries for failed payments",
+      "description": "Stripe Billing manages recurring invoices and subscription states. Verify payment retries, failed invoices, customer access, webhooks, plan limits and product eligibility. Source: https://docs.stripe.com/billing/subscriptions/overview",
       "available": true,
       "category": "Core"
     },
     {
       "name": "Connect Platform",
-      "description": "Marketplace payment infrastructure with sub-merchant onboarding, payment splitting, and instant payouts via Stripe Treasury",
+      "description": "Stripe Connect supports platform and marketplace payment flows with connected accounts, onboarding and payouts; the chosen charge model and local eligibility determine what is possible. Source: https://docs.stripe.com/connect",
       "available": true,
       "category": "Platform"
     },
@@ -76,7 +76,7 @@
     },
     {
       "name": "Tax",
-      "description": "Automated sales tax calculation and collection across US states, EU VAT, and international tax jurisdictions",
+      "description": "Stripe Tax offers tax-related services, but registration, collection, filings and product support vary by jurisdiction and integration. Verify responsibility and region before relying on automation. Source: https://docs.stripe.com/tax",
       "available": true,
       "category": "Compliance"
     },
@@ -94,7 +94,7 @@
     },
     {
       "name": "Treasury",
-      "description": "Banking-as-a-service API for holding funds, making transfers, and issuing cards through Stripe's banking partners",
+      "description": "Financial-account capabilities have product-, country- and eligibility-specific requirements. Do not assume holding funds, transfers or card issuing are bundled with a standard Stripe payments account. Verify the relevant product documentation.",
       "available": true,
       "category": "Platform"
     },
