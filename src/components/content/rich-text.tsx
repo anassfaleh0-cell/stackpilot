@@ -28,18 +28,21 @@ function renderSegments(text: string, baseKey: number): ReactNode[] {
     const href = INTERNAL_HREF_ALIASES[originalHref] || originalHref
     const label = match[2].trim() ? match[2] : getReadableLinkFallbackLabel(originalHref)
     const children = label.includes("<a ") ? renderSegments(label, key) : label
-    if (href.startsWith("http")) {
+    if (/^https?:\\/\\//i.test(href)) {
       parts.push(
         <a key={key++} href={href} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-primary transition-colors">
           {children}
         </a>
       )
-    } else {
+    } else if (href.startsWith("/") && !href.startsWith("//")) {
       parts.push(
         <Link key={key++} href={href} className="underline underline-offset-2 hover:text-primary transition-colors">
           {children}
         </Link>
       )
+    } else {
+      // Do not turn unsafe, ambiguous or unsupported schemes into navigation.
+      parts.push(<span key={key++}>{children}</span>)
     }
     lastIndex = match.index + match[0].length
   }
