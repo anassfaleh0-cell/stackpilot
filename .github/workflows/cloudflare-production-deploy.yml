@@ -141,6 +141,14 @@ jobs:
             sleep 1
           done
           grep -F 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0' /tmp/pilotstack-response >/dev/null || curl --silent --show-error --fail --retry 4 --retry-all-errors --retry-delay 5 https://pilotstack.online/ads.txt | grep -F 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0'
+          # Check canonical content URLs previously observed returning HTTP 503.
+          # Use the prerender cache; never add synthetic cache-busting query strings.
+          for path in /best/best-marketing-seo-startups /blog/accounting-software-cost-2026 /use-cases/best-crm-for-startups /statistics/sports-software; do
+            code="$(fetch_status "https://pilotstack.online$path" /tmp/pilotstack-content-response)"
+            printf '%s %s\n' "$code" "$path"
+            test "$code" = "200"
+            sleep 1
+          done
           contact_html="$(curl --silent --show-error --fail --retry 3 --retry-all-errors --retry-delay 2 https://pilotstack.online/contact)"
           printf '%s' "$contact_html" | grep -Fq 'contact@pilotstack.online' || {
             echo "Configured contact inbox missing from live contact page"

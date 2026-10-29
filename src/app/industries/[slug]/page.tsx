@@ -20,6 +20,10 @@ function industryDescription(industry: string): string {
   return `A practical software selection guide for ${industry} organizations. Compare operational workflows, data protection, integrations, implementation effort, and total cost; verify current product capabilities and pricing with vendors.`
 }
 
+// Published content is built ahead of time so Workers never render JSON-backed pages on demand.
+export const dynamic = "force-static"
+export const dynamicParams = false
+
 export function generateStaticParams() {
   return getAllIndustries().map((item) => ({ slug: item.slug }))
 }

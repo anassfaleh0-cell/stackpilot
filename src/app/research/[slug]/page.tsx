@@ -14,6 +14,10 @@ import { RelatedContent } from "@/components/dynamic-client"
 import { InFeedAd } from "@/components/ads"
 import { isNoindexed } from "@/lib/noindex"
 
+// All published slugs must be built ahead of time for reliable, CPU-safe crawling.
+export const dynamic = "force-static"
+export const dynamicParams = false
+
 export function generateStaticParams() {
   return getAllResearch().map((item) => ({ slug: item.slug }))
 }

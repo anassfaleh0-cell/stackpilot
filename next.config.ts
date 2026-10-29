@@ -73,6 +73,11 @@ const nextConfig: NextConfig = {
       destination: "https://pilotstack.online/:path*",
       permanent: true,
     },
+    // Preserve legacy best-list aliases without on-demand Worker rendering.
+    // Each destination is a verified published shortlist; legacy URLs are not in the sitemap.
+    { source: "/best/best-crm-sales-small-business", destination: "/best/best-crm-for-small-business", permanent: true },
+    { source: "/best/best-enterprise-analytics", destination: "/best/best-analytics-software", permanent: true },
+    { source: "/best/best-project-management-small-business", destination: "/best/best-project-management-software", permanent: true },
     // Normalize legacy singular content routes to their current canonical collections.
     { source: "/review/:slug", destination: "/reviews/:slug", permanent: true },
     { source: "/comparison/:slug", destination: "/comparisons/:slug", permanent: true },

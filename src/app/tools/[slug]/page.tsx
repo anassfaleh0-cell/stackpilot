@@ -78,6 +78,10 @@ const toolsData: Record<string, { name: string; description: string; icon: Lucid
   },
 }
 
+// All published slugs must be built ahead of time for reliable, CPU-safe crawling.
+export const dynamic = "force-static"
+export const dynamicParams = false
+
 export function generateStaticParams() {
   return toolPages.map((t) => ({ slug: t.slug }))
 }
