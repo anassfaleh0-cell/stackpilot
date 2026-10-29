@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest"
 import fs from "node:fs"
-import { isNoindexed } from "@/lib/noindex"
+import { isNoindexed, EDITORIAL_NOINDEX_COMPARISONS } from "@/lib/noindex"
 import { getContentTitle } from "@/lib/content/registry"
 import sitemap from "@/app/sitemap"
 import { metadata as searchMetadata } from "@/app/search/page"
@@ -20,9 +20,24 @@ describe("site-wide content indexability policy", () => {
         const record = fs.existsSync(filePath) ? JSON.parse(fs.readFileSync(filePath, "utf8")) as { publicationStatus?: string } : null
         if (record?.publicationStatus === "draft") continue
         expect(getContentTitle(type, slug), dir + "/" + slug).not.toBeNull()
+        if (dir === "comparisons" && EDITORIAL_NOINDEX_COMPARISONS.has(slug)) continue
         expect(isNoindexed(dir, slug), dir + "/" + slug).toBe(false)
       }
     }
+  })
+
+  it("withholds explicitly triaged cross-category comparisons from search while keeping route records", async () => {
+    const { generateMetadata, generateStaticParams } = await import("@/app/comparisons/[slug]/page")
+    const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
+    for (const slug of EDITORIAL_NOINDEX_COMPARISONS) {
+      expect(isNoindexed("comparisons", slug)).toBe(true)
+      expect(generateStaticParams()).toContainEqual({ slug })
+      expect(paths.has(`/comparisons/${slug}`), slug).toBe(false)
+      const metadata = await generateMetadata({ params: Promise.resolve({ slug }) })
+      expect((metadata as { robots?: { index?: boolean } }).robots).toMatchObject({ index: false })
+    }
+    expect(isNoindexed("comparisons", "1password-vs-bitwarden")).toBe(false)
+    expect(paths.has("/comparisons/1password-vs-bitwarden")).toBe(true)
   })
 
   it("keeps real content discoverable in the sitemap", () => {
