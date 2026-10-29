@@ -162,6 +162,13 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
           return `${stored}/5 (${verifiedPickRating(pick) !== null ? "verified" : "provisional"})`
         }
         const recordedValue = String(cell ?? "").trim()
+        const numericLegacyRating = recordedValue.match(/^([0-5](?:\.\d+)?)\s*(?:\/\s*5)?$/)
+        if (numericLegacyRating) {
+          const numericScore = Number(numericLegacyRating[1])
+          return numericScore > 0 && numericScore <= 5
+            ? `${numericScore}/5 (provisional; evidence pending)`
+            : "Not assessed"
+        }
         // Keep descriptive evaluation notes if no numeric score is recorded.
         return recordedValue && !/^not\s+(?:verified|recorded|available)$/i.test(recordedValue)
           ? stripUnverifiedRatingClaims(recordedValue)
