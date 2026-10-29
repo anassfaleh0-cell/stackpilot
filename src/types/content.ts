@@ -236,8 +236,10 @@ export interface AlternativeContent {
 
 export interface UseCaseContent {
   slug: string
-  /** Optional editor-reviewed long-form guide stored with the use-case record. */
+  /** Optional legacy long-form guide stored with the use-case record. */
   body?: string
+  /** Reviewed replacement analysis; original body remains preserved in source. */
+  reviewedBody?: string
   title: string
   description: string
   category: string
