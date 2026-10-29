@@ -141,9 +141,12 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
     const safeRatingText = stripUnverifiedRatingClaims(withoutProductEcho)
     return verifiedPickPrice(pick) === null ? stripUnverifiedPriceClaims(safeRatingText) : safeRatingText
   }
+  // Preserve substantive buying advice even when some recorded prices are unverified.
+  // Remove unsupported numeric prices, not the entire pricing discussion.
+  const recordedPricingSummary = stripUnverifiedPriceClaims(page.pricingSummary)
   const safePricingSummary = hasUnverifiedPickPrices
-    ? "Some recorded price figures in this shortlist are not independently verified. Confirm current plan prices, billing periods, limits, and required add-ons directly with each vendor before comparing total cost."
-    : page.pricingSummary
+    ? `${recordedPricingSummary} Some stored price figures are not independently verified; confirm current plan prices, billing periods, limits, and add-ons directly with each vendor.`
+    : recordedPricingSummary
   // Preserve the full comparison matrix, including the rating and pricing columns.
   // A provisional stored score is useful context when labelled; a missing one must not be invented.
   const visibleComparisonColumns = page.comparisonTable.columns
@@ -155,12 +158,21 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
       const column = page.comparisonTable.columns[index] ?? ""
       if (/rating|score/i.test(column)) {
         const stored = storedPickRating(pick)
-        return stored !== null
-          ? `${stored}/5 (${verifiedPickRating(pick) !== null ? "verified" : "provisional"})`
+        if (stored !== null) {
+          return `${stored}/5 (${verifiedPickRating(pick) !== null ? "verified" : "provisional"})`
+        }
+        const recordedValue = String(cell ?? "").trim()
+        // Keep descriptive evaluation notes if no numeric score is recorded.
+        return recordedValue && !/^not\s+(?:verified|recorded|available)$/i.test(recordedValue)
+          ? stripUnverifiedRatingClaims(recordedValue)
           : "Not assessed"
       }
       if (/price|pricing/i.test(column)) {
-        return verifiedPickPrice(pick) ?? "Verify current pricing with vendor"
+        const verifiedPrice = verifiedPickPrice(pick)
+        if (verifiedPrice) return verifiedPrice
+        const qualitativeNotes = stripUnverifiedPriceClaims(String(cell ?? "")).trim()
+        // Never discard pricing conditions such as seat minimums or quote requirements.
+        return qualitativeNotes || "Verify current pricing with vendor"
       }
       const safeValue = stripUnverifiedRatingClaims(String(cell ?? ""))
       return hasUnverifiedPickPrices ? stripUnverifiedPriceClaims(safeValue) : safeValue
