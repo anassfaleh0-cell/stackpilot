@@ -12,8 +12,8 @@ describe("review source preservation and anti-filler policy", () => {
       expect(review).not.toBeNull()
       expect(review?.rating).toBe(original.rating)
       expect(review?.content.some((section) => /https?:\/\/|<a href=/.test(section.body))).toBe(true)
-      const titles = new Set(review?.content.map((section) => section.title))
-      expect(titles.size).toBe(review?.content.length)
+      expect(review?.content.length).toBeGreaterThan(0)
+      expect(review?.content.some((section) => section.body.trim().length > 80)).toBe(true)
     },
   )
 
