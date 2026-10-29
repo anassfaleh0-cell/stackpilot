@@ -48,6 +48,8 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
     "best-hr-for-small-business",
     "best-crm-for-small-business",
     "best-accounting-for-startups",
+    "best-analytics-for-enterprise",
+    "best-automation-for-business",
   ])
   const editorialBody = reviewedUseCaseSlugs.has(slug) ? uc.body : undefined
 
