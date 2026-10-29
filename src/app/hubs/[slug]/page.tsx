@@ -16,6 +16,10 @@ import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { isNoindexed } from "@/lib/noindex"
 
+// All published slugs must be built ahead of time for reliable, CPU-safe crawling.
+export const dynamic = "force-static"
+export const dynamicParams = false
+
 export function generateStaticParams() {
   return getAllHubs().map((item) => ({ slug: item.slug }))
 }
