@@ -10,12 +10,11 @@ import { EditorialHero, EditorialConcept, EditorialCallout, GlassCard, InfoCard,
 import { RelatedContent } from "@/components/content/related-content"
 import { isNoindexed } from "@/lib/noindex"
 
-export const dynamicParams = true
+export const dynamic = "force-static"
+export const dynamicParams = false
 
 export function generateStaticParams() {
-  // Vercel keeps on-demand generation; Cloudflare prerenders committed JSON content because
-  // Workers must not depend on repository filesystem access during request-time route resolution.
-  if (process.env.BUILD_TARGET !== "cloudflare") return []
+  // Prerender committed content to avoid runtime JSON lookups on Cloudflare Workers.
 
   // Content is read from committed JSON files; prerender the corpus for Workers compatibility.
   return getAllGlossaryTerms()
