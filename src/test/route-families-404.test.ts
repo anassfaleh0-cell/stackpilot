@@ -326,6 +326,6 @@ describe("route families", () => {
       }
     }
     walk(APP_ROOT)
-    expect(pinned.sort()).toEqual(["authors", "comparisons", "reviews", "alternatives", "best", "blog", "guides", "industries", "statistics", "use-cases"].map((family) => `${family}/[slug]/page.tsx`).sort())
+    expect(pinned.sort()).toEqual(["alternatives", "authors", "best", "blog", "category", "comparisons", "glossary", "guides", "hubs", "industries", "research", "reviews", "statistics", "tools", "use-cases"].map((family) => `${family}/[slug]/page.tsx`).sort())
   })
 })
