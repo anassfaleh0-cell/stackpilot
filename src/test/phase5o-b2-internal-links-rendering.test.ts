@@ -379,7 +379,7 @@ describe("Phase 5O-B-2: internal link rendering", () => {
     { timeout: 180000 },
     () => {
       expect(isContentAvailable("review", "affinity")).toBe(true)
-      expect(isContentAvailable("comparison", "1password-vs-appwrite")).toBe(true)
+      expect(isContentAvailable("comparison", "1password-vs-appwrite")).toBe(false)
       expect(isContentAvailable("comparison", "firebase-vs-appwrite")).toBe(true)
 
       const html = renderEnhanced([
