@@ -17,7 +17,16 @@ function report(name, ok, detail) {
 async function fetchWithRetry(url, options, attempts = IS_LIVE_PRODUCTION ? 1 : 4) {
   let lastResponse
   for (let attempt = 1; attempt <= attempts; attempt++) {
-    lastResponse = await fetch(url, options)
+    try {
+      // A temporary network error or one timed-out request should not mark a
+      // canonical sitemap route permanently broken without a fresh attempt.
+      const attemptOptions = attempt === 1 ? options : { ...options, signal: AbortSignal.timeout(15000) }
+      lastResponse = await fetch(url, attemptOptions)
+    } catch (error) {
+      if (attempt === attempts) throw error
+      await new Promise((resolve) => setTimeout(resolve, attempt * 1500))
+      continue
+    }
     if (lastResponse.status !== 429 && lastResponse.status < 500) return lastResponse
     if (attempt < attempts) {
       await lastResponse.body?.cancel()
@@ -308,7 +317,7 @@ async function main() {
       const recoveredPageFailures = []
       const persistentPageFailures = []
       for (const failure of initialPageFailures) {
-        if (!failure.url || !(failure.status === 408 || failure.status === 429 || (typeof failure.status === "number" && failure.status >= 500))) {
+        if (!failure.url || !(failure.status === "FETCH_ERROR" || failure.status === 408 || failure.status === 429 || (typeof failure.status === "number" && failure.status >= 500))) {
           // Do not retry stable 403/404 responses: they indicate a distinct issue.
           persistentPageFailures.push(failure)
           continue
