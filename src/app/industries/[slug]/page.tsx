@@ -41,7 +41,8 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
   if (!ind) notFound()
 
   const description = ind.description
-  const editorialBody = ind.slug === "recruiting" ? ind.body : undefined
+  // The registry exposes only explicitly reviewed industry bodies.
+  const editorialBody = ind.body
 
   // Group recommendations by category
   const byCategory: Record<string, typeof ind.recommendations> = {}
