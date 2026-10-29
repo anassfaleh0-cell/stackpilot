@@ -314,6 +314,8 @@ export interface BestContent {
   slug: string
   /** Optional long-form editorial HTML; rendered only after content review. */
   body?: string
+  /** Audited replacement for legacy HTML; original source body remains preserved. */
+  reviewedBody?: string
   title: string
   description: string
   category: string
