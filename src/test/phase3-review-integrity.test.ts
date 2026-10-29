@@ -130,7 +130,7 @@ describe("CD-5 / CD-6: review metadata", () => {
 
   it("builds a distinct meta description from real facts", () => {
     expect(new Set(cases.map((c) => c.description)).size).toBe(COHORT.length)
-    for (const c of cases) expect(c.description.length).toBeLessThanOrEqual(160)
+    for (const c of cases) expect(c.description.length).toBeLessThanOrEqual(155)
   })
 
   it("runs descriptions through createMetadata without re-truncating them", () => {
@@ -143,7 +143,7 @@ describe("CD-5 / CD-6: review metadata", () => {
     for (const { description, meta } of rendered) {
       expect(String(meta.title)).not.toContain("…")
       expect(String(meta.title).length).toBeLessThanOrEqual(70)
-      expect(String(meta.description).length).toBeLessThanOrEqual(160)
+      expect(String(meta.description).length).toBeLessThanOrEqual(155)
       expect(meta.description).toBe(description)
       expect(String(meta.description)).not.toContain("PilotStack")
     }

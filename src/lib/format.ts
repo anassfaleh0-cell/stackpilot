@@ -48,7 +48,7 @@ export function editorialPros(pros: string[]): string[] {
   return pros.filter((pro) => !isRatingRestatement(pro))
 }
 
-const META_DESCRIPTION_MAX = 160
+const META_DESCRIPTION_MAX = 155
 const META_TITLE_YEAR = "2026"
 
 export function reviewMetaTitle(name: string): string {
