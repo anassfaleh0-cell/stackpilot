@@ -717,7 +717,16 @@ function buildReviewSections(review: ReviewContent): ContentSection[] {
     const topic = coveredByTitle.find((item) => item.generatedTitle === section.title)
     return !topic || !base.some((authored) => topic.authoredTitle.test(authored.title))
   })
-  return [...base, ...uniqueExtra]
+  // Do not inflate thin source reviews into 900-word pseudo-editorial articles.
+  // The audit flags missing original evidence; only add concise buyer guidance
+  // where the source itself offers little practical evaluation material.
+  // Keep all original authored sections, existing scores and feature records.
+  const priorityTopics = ["A practical pilot checklist", "Pricing and plan limits", "Integration and data movement"]
+  const extraGuidance = priorityTopics
+    .map((title) => uniqueExtra.find((section) => section.title === title))
+    .filter((section): section is ContentSection => Boolean(section))
+    .slice(0, base.length > 0 ? 2 : 3)
+  return [...base, ...extraGuidance]
 }
 
 function buildDerivedComparisonFeatures(cmp: ComparisonContent, base: ComparisonFeature[]): ComparisonFeature[] {
