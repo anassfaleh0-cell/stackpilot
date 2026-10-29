@@ -2,7 +2,7 @@
   "slug": "moz",
   "name": "Moz",
   "tagline": "SEO software for link building, keyword research, and site audits",
-  "description": "Moz is a marketing & seo platform that helps SEO Professionals and Marketers and Agencies and Enterprises achieve better outcomes. SEO software for link building, keyword research, and site audits. Our comprehensive 2026 review evaluates features, pricing, security, integrations, and real-world performance.",
+  "description": "Moz Pro offers SEO research workflows including Keyword Explorer, Link Explorer, campaign keyword tracking and site crawling. This review focuses on keyword-data coverage, backlink index limitations, crawl access, reporting and plan quotas. Its recorded editorial score is provisional; current capabilities, pricing and usage limits must be checked with Moz.",
   "category": "Marketing & SEO",
   "website": "https://moz.com",
   "pricing": "Paid",
@@ -10,16 +10,16 @@
   "rating": 4.3,
   "reviewCount": 8500,
   "pros": [
-    "SEO software for link building, keyword research, and",
-    "Enterprise-grade reliability with SOC 2 Type II certification",
-    "AI-powered features including Moz AI",
-    "Flexible API for custom integrations and workflow automation",
-    "Full-featured mobile apps for iOS and Android"
+    "Keyword Explorer can support keyword discovery and research on a defined market and topic set, subject to available datasets.",
+    "Rank-tracking campaigns let teams monitor selected keywords by location and compare tracked performance over time.",
+    "Link Explorer helps investigate referring domains and linking pages; results depend on Moz crawler coverage.",
+    "Campaign crawl and issue discovery can be assessed against a controlled test website and known technical problems."
   ],
   "cons": [
-    "Support quality rated 3.8/5 is below category average",
-    "Advanced features may require technical expertise to fully leverage",
-    "Some advanced features only available on higher pricing tiers"
+    "Keyword datasets and countries differ across research views, so verify the geographic coverage your clients require.",
+    "Link Explorer cannot guarantee discovery of every backlink; blocked or uncrawled referring pages may be missing.",
+    "Campaign keywords and weekly crawl allowances are plan-specific and must be checked before budgeting.",
+    "Stored PilotStack scores are provisional editorial assessments, not verified external user review averages."
   ],
   "features": [
     {
@@ -136,6 +136,16 @@
     }
   ],
   "content": [
+    {
+      "title": "Moz Pro research data: what the vendor documents",
+      "type": "text",
+      "body": "Moz's help documentation identifies Keyword Explorer for keyword and domain research, Link Explorer for backlink investigation, and Moz Pro campaigns for tracked keywords, site crawling and visibility monitoring. Moz also documents separate campaign quotas for keyword tracking and weekly pages crawled. These are product descriptions, not evidence PilotStack independently validated every Moz metric or plan. References: <a href=\"https://moz.com/help\">Moz Help Hub</a>, <a href=\"https://dc8hdnsmzapvm.cloudfront.net/help/moz-pro/getting-started/campaign-setup\">campaign setup guide</a>, and <a href=\"https://dc8hdnsmzapvm.cloudfront.net/help/link-explorer/getting-started/overview\">Link Explorer overview</a>."
+    },
+    {
+      "title": "How to validate Moz's keyword and backlink coverage",
+      "type": "text",
+      "body": "Use a fixed group of relevant client domains, 20-30 representative keywords, and at least two target markets. Check which datasets and locations each Moz report covers and compare useful outputs, not just the number of suggestions returned. Test a few known backlinks and technical crawl issues; record missing links, denied crawls and differences from first-party data. Moz documents that its link index relies on Dotbot crawling and can miss links on uncrawled or blocked pages. Confirm whether current campaign quotas cover the intended portfolio before buying. Vendor evidence: <a href=\"https://dc8hdnsmzapvm.cloudfront.net/help/keyword-explorer/explore-by-site/ranking-keywords\">ranking keywords guide</a> and <a href=\"https://dc8hdnsmzapvm.cloudfront.net/help/link-explorer/link-building/moz-isnt-finding-your-links\">link-index troubleshooting</a>."
+    },
     {
       "title": "Executive Summary",
       "body": "This review evaluates Moz across feature depth, user experience, pricing value, and integration quality to help you determine if it fits your marketing & seo needs.",
@@ -301,104 +311,20 @@
   ],
   "faqs": [
     {
-      "question": "Is Moz right for my business?",
-      "answer": "Moz is best suited for SEO Professionals and Marketers and Agencies and Enterprises. With a 4.3/5 rating and pricing from $99 – $599/mo, it offers competitive value for organizations that need reliable marketing & seo capabilities. We recommend evaluating your specific requirements against Moz's feature set using our evaluation checklist."
+      "question": "Is Domain Authority a Google metric?",
+      "answer": "No. Domain Authority is a proprietary Moz metric describing estimated ranking potential based on link-related signals; Google does not publish Domain Authority as one of its own scores. Use it only as one comparative research input, not as proof of a site's Google rankings. Source: https://dc8hdnsmzapvm.cloudfront.net/help/link-explorer/getting-started/overview."
     },
     {
-      "question": "What is Moz used for?",
-      "answer": "Moz is a marketing & seo platform that helps SEO Professionals and Marketers and Agencies and Enterprises achieve better outcomes. SEO software for link building, keyword research, and site audits. Organizations use Moz for core marketing & seo workflows."
+      "question": "Why might Moz not show a backlink I know exists?",
+      "answer": "Moz explains that its Dotbot crawler may not have discovered or crawled a linking page, or it may be blocked. Link-index updates do not mean every link is immediately found. Verify a backlink directly from the source page before concluding it was removed. Source: https://dc8hdnsmzapvm.cloudfront.net/help/link-explorer/link-building/moz-isnt-finding-your-links."
     },
     {
-      "question": "How much does Moz cost?",
-      "answer": "Moz pricing ranges from $99 – $599/mo. The platform uses Monthly subscription by tier. Annual billing typically provides 15-20% savings. Enterprise plans include additional features, dedicated support, and custom pricing."
+      "question": "Does Moz Pro track every country and keyword automatically?",
+      "answer": "Not necessarily. Moz documents dataset and country limits for some keyword research views, while tracked campaigns have their own locations and keyword allowances. Confirm coverage for your actual search markets and product tier. Source: https://dc8hdnsmzapvm.cloudfront.net/help/keyword-explorer/explore-by-site/ranking-keywords."
     },
     {
-      "question": "Is Moz easy to use?",
-      "answer": "Moz has a medium learning curve. Teams should plan for dedicated training time to fully leverage the platform's capabilities. The platform provides onboarding resources including documentation and tutorials."
-    },
-    {
-      "question": "What are the main features of Moz?",
-      "answer": "Moz offers AI features like Moz AI and Keyword suggestions, comprehensive marketing & seo functionality, API access for custom integrations, and enterprise security with SOC 2 Type II."
-    },
-    {
-      "question": "How does Moz compare to competitors?",
-      "answer": "Moz differentiates itself through seo software for link building, keyword research, and site audits. Compared to alternatives, it offers stronger feature depth and enterprise readiness. The right choice depends on your specific requirements and budget."
-    },
-    {
-      "question": "Is Moz secure?",
-      "answer": "Moz maintains SOC 2 Type II certifications. Compliance with GDPR, CCPA is supported for regulated industries. Data encryption, access controls, and audit logging are included."
-    },
-    {
-      "question": "Does Moz offer API access?",
-      "answer": "Yes, Moz provides comprehensive API access for custom integrations, workflow automation, and data synchronization. Developer documentation and SDKs are available."
-    },
-    {
-      "question": "What integrations does Moz support?",
-      "answer": "Moz integrates with major platforms through its API and pre-built connectors. Common integrations cover productivity, communication, and analytics tools in the business software ecosystem."
-    },
-    {
-      "question": "Does Moz have mobile apps?",
-      "answer": "Yes, Moz offers mobile apps for iOS and Android with core functionality accessible on mobile devices."
-    },
-    {
-      "question": "What kind of support does Moz offer?",
-      "answer": "Moz provides support rated at 3.8/5. Channels include knowledge base, email support, and community forums. Premium tiers add priority response and dedicated account management."
-    },
-    {
-      "question": "Can I try Moz before buying?",
-      "answer": "Moz offers demo access and trial options through their sales team."
-    },
-    {
-      "question": "What is Moz's refund policy?",
-      "answer": "Moz typically offers a 30-day money-back guarantee on annual plans. Monthly plans can be cancelled at any time. Enterprise contracts may have specific terms negotiated during the sales process."
-    },
-    {
-      "question": "How long does it take to implement Moz?",
-      "answer": "Basic implementation takes 15-30 minutes. Full organization-wide deployment with configuration, user provisioning, and security setup typically requires 1-3 days. Enterprise deployments with custom integrations may take 2-4 weeks."
-    },
-    {
-      "question": "Is Moz good for enterprise teams?",
-      "answer": "Moz serves enterprise organizations with SOC 2 Type II certifications and scalable infrastructure. Enterprise buyers should evaluate SSO integration, audit logging, and SLA commitments."
-    },
-    {
-      "question": "Does Moz offer SSO?",
-      "answer": "Moz supports SSO integration for enterprise deployments. SAML 2.0 and OAuth protocols are supported for integration with major identity providers."
-    },
-    {
-      "question": "Is Moz GDPR compliant?",
-      "answer": "Yes, Moz is GDPR compliant with data processing agreements and data residency options."
-    },
-    {
-      "question": "Does Moz have AI features?",
-      "answer": "Yes, Moz includes AI capabilities such as Moz AI, Keyword suggestions. These features enhance productivity through intelligent automation and natural language processing."
-    },
-    {
-      "question": "What training does Moz provide?",
-      "answer": "Moz offers documentation, tutorials, and knowledge base resources. Premium plans include onboarding support and training sessions for team members."
-    },
-    {
-      "question": "How often does Moz release updates?",
-      "answer": "Moz releases updates on a monthly cadence. The platform maintains a public changelog and communicates major changes in advance."
-    },
-    {
-      "question": "What are Moz's competitors?",
-      "answer": "Moz competes with other leading marketing & seo platforms. The competitive landscape includes established players and emerging solutions offering different combinations of features, pricing, and target audiences."
-    },
-    {
-      "question": "Can Moz integrate with my existing tools?",
-      "answer": "Moz offers API-based integration capabilities that connect with most modern business applications. Pre-built connectors are available for common platforms."
-    },
-    {
-      "question": "What is the total cost of ownership for Moz?",
-      "answer": "Total cost of ownership includes subscription fees, implementation costs, training expenses, and ongoing administration. A comprehensive TCO analysis should factor in these elements beyond the base subscription price."
-    },
-    {
-      "question": "How do I migrate to Moz?",
-      "answer": "Migration to Moz is rated as Low complexity. The process involves data export from your current platform, data mapping and transformation, user provisioning, and validation testing. Most migrations complete within 2-6 weeks with proper planning."
-    },
-    {
-      "question": "Is Moz worth it?",
-      "answer": "Moz delivers strong value for SEO Professionals and Marketers and Agencies and Enterprises. With a 4.3/5 rating and comprehensive marketing & seo features, it represents a solid investment for organizations that need reliable platform capabilities."
+      "question": "How should an agency compare Moz against another SEO platform?",
+      "answer": "Choose consistent domains, keyword groups, locations and technical audit tasks; test exports, research usefulness, rank tracking, crawl coverage and reporting effort, then compare verified plan allowances and total cost. Do not use an unsupported editorial number as a universal winner."
     }
   ],
   "alternatives": [],
@@ -411,7 +337,7 @@
   ],
   "relatedPosts": [],
   "contentPublished": "2026-07-19",
-  "contentModified": "2026-09-30",
+  "contentModified": "2026-10-29",
   "author": "Emily Nakamura",
   "company": {
     "founded": 2004,
@@ -464,7 +390,7 @@
   "wordCount": 6240,
   "difficulty": "Beginner",
   "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "Moz is ideal for small to mid-size teams that need a reliable marketing & seo solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
-  "whoShouldNotUse": "Moz may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale.",
+  "whoShouldUse": "SEO specialists and agencies evaluating keyword research, ranking campaigns, site crawl workflows and link analysis should compare Moz Pro against their own domains, markets and deliverables. Test the exact tracked keywords and reporting needs rather than treating Domain Authority as a Google ranking metric.",
+  "whoShouldNotUse": "Teams needing broad country or language coverage should first verify which Moz keyword datasets, rank tracking locations and exports are available. A third-party link index may miss links because of discovery, crawlability or timing, so buyers should not treat it as a complete first-party backlink record. Check campaign quotas, crawl limits and current plans.",
   "scoreBasis": "Moz's saved PilotStack score is an unverified editorial record whose calculation and source evidence still need review. Do not read it as an external review average; confirm current SEO metrics, keyword limits, and plan inclusions through Moz's official product information."
 }
