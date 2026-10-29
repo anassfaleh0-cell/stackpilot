@@ -25,6 +25,15 @@ describe("RichText", () => {
     expect(html).not.toContain('href="//')
   })
 
+  it("links bare vendor citations in FAQs while retaining sentence punctuation", () => {
+    const html = renderToStaticMarkup(
+      <RichText text={"Official reference: https://docs.stripe.com/connect. Verify regional eligibility."} />,
+    )
+    expect(html).toContain('href="https://docs.stripe.com/connect"')
+    expect(html).toContain("https://docs.stripe.com/connect</a>.")
+    expect(html).toContain(" Verify regional eligibility.")
+  })
+
   it("retains the plain text around a source link", () => {
     const html = renderToStaticMarkup(
       <RichText text={'Verify <a href="https://www.jotform.com/help/408-understanding-your-account-usage-and-limits/">current form limits</a> before publishing.'} />,
