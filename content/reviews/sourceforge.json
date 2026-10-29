@@ -10,57 +10,59 @@
   "rating": 3.5,
   "reviewCount": 0,
   "pros": [
-    "A project can test the release and download workflow with a representative artifact.",
-    "Project metadata and release notes should be reviewed for clarity and discoverability.",
-    "A distribution trial can reveal what information users need before downloading.",
-    "A test release can validate artifact discoverability and release information.",
-    "Integrity checks and project ownership can be documented before distribution."
+    "Managed global mirror network supports distribution of open-source release downloads; test mirror behavior with a real artifact.",
+    "Download statistics by time, platform and region help maintainers understand where and how releases are obtained.",
+    "Project directory listings, forums, issue trackers and code hosting can bring release documentation and community resources together.",
+    "Git, Mercurial and Subversion hosting options are documented by SourceForge."
   ],
   "cons": [
-    "Confirm which hosting and distribution services are currently offered for the intended project.",
-    "Distribution analytics should not be treated as proof of adoption without careful definitions.",
-    "The team still needs its own release signing, security and provenance process."
+    "Not every team needs a dedicated software-discovery and download directory alongside its existing development platform.",
+    "Plan-specific permissions, automation integration, release ownership and migration paths need validation with your actual project.",
+    "Published feature lists do not establish that SourceForge will match every GitHub or GitLab pull-request and CI/CD workflow.",
+    "This review has a provisional stored editorial score, not a verified external user-rating aggregate."
   ],
   "features": [
     {
-      "name": "Core development workflow",
-      "available": false,
-      "description": "SourceForge: evaluate core development workflow with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "Git, Mercurial and Subversion hosting",
+      "available": true,
+      "category": "Code Hosting",
+      "description": "Vendor documentation lists hosted Git, Mercurial (hg), and Subversion (svn) repositories, code browsing and commit history. Source: https://sourceforge.net/create/"
     },
     {
-      "name": "Access and permissions",
-      "available": false,
-      "description": "SourceForge: evaluate access and permissions with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "Release download distribution",
+      "available": true,
+      "category": "Release Management",
+      "description": "SourceForge documents an open-source download distribution service with a managed global mirror network and automatic platform detection. Source: https://sourceforge.net/create/"
     },
     {
-      "name": "CI or runtime fit",
-      "available": false,
-      "description": "SourceForge: evaluate ci or runtime fit with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "Download statistics",
+      "available": true,
+      "category": "Analytics",
+      "description": "Vendor documentation lists download statistics by time, platform and region. Reporting fit and individual project data quality require testing. Source: https://sourceforge.net/create/"
     },
     {
-      "name": "Security controls",
-      "available": false,
-      "description": "SourceForge: evaluate security controls with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "Open Source Directory",
+      "available": true,
+      "category": "Discovery",
+      "description": "SourceForge lists public directory categorization by topic, license and platform, with project pages supporting screenshots and videos. Source: https://sourceforge.net/create/"
     },
     {
-      "name": "Failure handling",
-      "available": false,
-      "description": "SourceForge: evaluate failure handling with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "Project tickets and milestones",
+      "available": true,
+      "category": "Project Operations",
+      "description": "Vendor documentation describes ticket trackers with milestones, labels, custom fields, advanced search and threaded discussion. Source: https://sourceforge.net/create/"
     },
     {
-      "name": "Monitoring",
-      "available": false,
-      "description": "SourceForge: evaluate monitoring with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "Forums and community discussion",
+      "available": true,
+      "category": "Community",
+      "description": "Vendor documentation describes project forums, email and RSS subscriptions, project blogs and moderation controls. Source: https://sourceforge.net/create/"
     },
     {
-      "name": "Integrations",
-      "available": false,
-      "description": "SourceForge: evaluate integrations with a representative workflow; availability is not recorded as verified in this profile."
-    },
-    {
-      "name": "Export and portability",
-      "available": false,
-      "description": "SourceForge: evaluate export and portability with a representative workflow; availability is not recorded as verified in this profile."
+      "name": "Project documentation wiki",
+      "available": true,
+      "category": "Documentation",
+      "description": "SourceForge describes wiki support for Markdown, attachments, code snippets and artifact linking. Source: https://sourceforge.net/create/"
     }
   ],
   "ratings": [
@@ -134,24 +136,24 @@
   ],
   "faqs": [
     {
-      "question": "Who should evaluate SourceForge?",
-      "answer": "Evaluate SourceForge when its primary workflow matches a documented requirement. Test a representative task and verify current capabilities and limits directly with the vendor."
+      "question": "Does SourceForge provide a release mirror network?",
+      "answer": "SourceForge's official project feature overview describes a managed worldwide download mirror network. Confirm actual delivery, file integrity and user experience with a test release. Source: https://sourceforge.net/create/."
     },
     {
-      "question": "How should a team test SourceForge?",
-      "answer": "Use the same real input, expected outcome and acceptance criteria each time. Record pass, partial pass, fail or unknown, including setup time, manual work and failure handling."
+      "question": "Can SourceForge show download statistics?",
+      "answer": "Its official overview describes download reports by time, platform and region. Check the report fields and export options in your own project before relying on them. Source: https://sourceforge.net/create/."
     },
     {
-      "question": "Which limitations should be checked in SourceForge?",
-      "answer": "Check the exact plan, integrations, permissions, export, data retention, recovery and ongoing administration. Treat untested or undocumented capabilities as unknown until confirmed."
+      "question": "Which code repositories does SourceForge support?",
+      "answer": "The vendor lists Git, Mercurial (hg), and Subversion (svn) repository hosting. Use a pilot to confirm access roles, repository administration and migration requirements. Source: https://sourceforge.net/create/."
     },
     {
-      "question": "Are SourceForge prices and ratings independently verified here?",
-      "answer": "No. Current prices, plan limits and independent ratings are not verified in this review. Check official documentation and obtain a dated quote before purchase."
+      "question": "Is SourceForge a direct replacement for GitHub?",
+      "answer": "Not automatically. SourceForge combines code hosting, open-source discovery and file distribution. Evaluate the specific code review, automation, governance and release workflows your team needs."
     },
     {
-      "question": "What should be confirmed before adopting SourceForge?",
-      "answer": "Confirm the core workflow, access controls, integrations, data export, account offboarding, support responsibilities and renewal terms. Assign an owner for the implementation and ongoing review."
+      "question": "Is the 3.5/5 editorial rating verified?",
+      "answer": "No. The legacy stored score is preserved and visibly marked provisional. It is not a verified user-review aggregate or a reproducible scored test."
     }
   ],
   "alternatives": [],
@@ -212,7 +214,7 @@
   "ratingVerified": false,
   "reviewCountVerified": false,
   "ratingsVerified": false,
-  "featuresVerified": false,
+  "featuresVerified": true,
   "companyFactsVerified": false,
   "scoreBasis": "Legacy stored editorial assessment: 3.5/5 (provisional). The record does not include a reproducible criterion-by-criterion score calculation; treat the number as an editorial reference, not a verified user-review average.",
   "seoTitle": "SourceForge Review: Project Hosting, Downloads & Alternatives",
