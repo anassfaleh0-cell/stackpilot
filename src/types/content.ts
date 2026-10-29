@@ -256,6 +256,8 @@ export interface UseCaseContent {
 
 export interface IndustryContent {
   slug: string
+  /** Visible only for specifically reviewed, structurally valid source bodies. */
+  body?: string
   contentVerified?: boolean
   title: string
   description: string
