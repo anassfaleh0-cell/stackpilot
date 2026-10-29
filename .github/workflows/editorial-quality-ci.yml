@@ -48,7 +48,8 @@ jobs:
             src/lib/content/priority-seo-integrity.test.ts \
             src/lib/content/comparison-verdict-integrity.test.ts \
             src/lib/content/industry-content-integrity.test.ts \
-            src/lib/content/priority-buyer-integrity.test.ts
+            src/lib/content/priority-buyer-integrity.test.ts \
+            src/lib/content/review-editorial-integrity.test.ts
 
       - name: Audit the whole content corpus without changing any page
         run: node scripts/audit-content-quality.cjs --json "$RUNNER_TEMP/pilotstack-content-quality.json"
