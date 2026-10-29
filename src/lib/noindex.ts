@@ -49,7 +49,8 @@ export function isNoindexed(dir: string, slug: string): boolean {
 }
 
 export function getNoindexSlugs(dir: string): string[] {
-  return Array.from(loadNoindexList(dir))
+  // Report exactly the policy applied by isNoindexed, not the legacy manifest.
+  return dir === "comparisons" ? Array.from(EDITORIAL_NOINDEX_COMPARISONS) : []
 }
 
 export function getKeepSlugs(dir: string): string[] {
