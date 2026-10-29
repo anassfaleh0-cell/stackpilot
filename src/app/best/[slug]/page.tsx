@@ -125,7 +125,6 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
       answer: `No. The list order is not a universal recommendation unless the page provides verified criteria and evidence. Choose the product that meets your mandatory requirements with acceptable cost, operational risk, and user adoption effort.`,
     },
   ]
-  const hasUnverifiedPickRatings = page.picks.some((pick) => typeof pick.rating === "number" && verifiedPickRating(pick) === null) || (page.comparisonTable.columns.some((column) => /rating|score/i.test(column)) && page.picks.some((pick) => verifiedPickRating(pick) === null))
   const hasUnverifiedPickPrices = page.picks.some((pick) => Boolean(pick.priceRange?.trim()) && verifiedPickPrice(pick) === null) || (page.comparisonTable.columns.some((column) => /price|pricing/i.test(column)) && page.picks.some((pick) => verifiedPickPrice(pick) === null)) || (/[$€£]\s?\d/.test(page.pricingSummary) && page.picks.some((pick) => verifiedPickPrice(pick) === null))
   const safePickText = (pick: (typeof page.picks)[number] | undefined, value: string) => {
     const withoutProductEcho = pick?.toolName && value.toLowerCase().startsWith(`${pick.toolName.toLowerCase()} is best suited for `)
@@ -137,12 +136,28 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   const safePricingSummary = hasUnverifiedPickPrices
     ? "Some recorded price figures in this shortlist are not independently verified. Confirm current plan prices, billing periods, limits, and required add-ons directly with each vendor before comparing total cost."
     : page.pricingSummary
-  const visibleComparisonColumnIndexes = page.comparisonTable.columns.map((column, index) => ({ column, index })).filter(({ column }) => !((hasUnverifiedPickRatings && /rating|score/i.test(column)) || (hasUnverifiedPickPrices && /price|pricing/i.test(column)))).map(({ index }) => index)
-  const visibleComparisonColumns = visibleComparisonColumnIndexes.map((index) => page.comparisonTable.columns[index])
-  const visibleComparisonRows = page.comparisonTable.rows.map((row) => visibleComparisonColumnIndexes.map((index) => {
-    const value = stripUnverifiedRatingClaims(String(row[index] ?? ""))
-    return hasUnverifiedPickPrices ? stripUnverifiedPriceClaims(value) : value
-  }))
+  // Preserve the full comparison matrix, including the rating and pricing columns.
+  // A provisional stored score is useful context when labelled; a missing one must not be invented.
+  const visibleComparisonColumns = page.comparisonTable.columns
+  const visibleComparisonRows = page.comparisonTable.rows.map((row) => {
+    const pick = page.picks.find((candidate) =>
+      candidate.toolName.trim().toLowerCase() === String(row[0] ?? "").trim().toLowerCase(),
+    )
+    return row.map((cell, index) => {
+      const column = page.comparisonTable.columns[index] ?? ""
+      if (/rating|score/i.test(column)) {
+        const stored = storedPickRating(pick)
+        return stored !== null
+          ? `${stored}/5 (${verifiedPickRating(pick) !== null ? "verified" : "provisional"})`
+          : "Not assessed"
+      }
+      if (/price|pricing/i.test(column)) {
+        return verifiedPickPrice(pick) ?? "Verify current pricing with vendor"
+      }
+      const safeValue = stripUnverifiedRatingClaims(String(cell ?? ""))
+      return hasUnverifiedPickPrices ? stripUnverifiedPriceClaims(safeValue) : safeValue
+    })
+  })
   const reviewHref = (toolSlug: string) => (getReview(toolSlug) ? `/reviews/${toolSlug}` : null)
   const relatedLinks = getRelatedByCategory(page.category, page.slug, 4)
   const relatedBestPages = (() => {
@@ -350,12 +365,12 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                       {page.picks.slice(0, 5).map((pick, index) => reviewHref(pick.toolSlug) ? (
                         <Link key={pick.toolSlug} href={`/reviews/${pick.toolSlug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                           <span>Option {index + 1}: {pick.toolName}</span>
-                          <span className="text-xs font-medium">{verifiedPickRating(pick) !== null ? `${verifiedPickRating(pick)}/5` : "Rating not verified"}</span>
+                          <span className="text-xs font-medium">{storedPickRating(pick) !== null ? `${storedPickRating(pick)}/5 (${verifiedPickRating(pick) !== null ? "verified" : "provisional"})` : "Not assessed"}</span>
                         </Link>
                       ) : (
                         <div key={pick.toolSlug} className="flex items-center justify-between text-sm text-muted-foreground py-1">
                           <span>Option {index + 1}: {pick.toolName}</span>
-                          <span className="text-xs font-medium">{verifiedPickRating(pick) !== null ? `${verifiedPickRating(pick)}/5` : "Rating not verified"}</span>
+                          <span className="text-xs font-medium">{storedPickRating(pick) !== null ? `${storedPickRating(pick)}/5 (${verifiedPickRating(pick) !== null ? "verified" : "provisional"})` : "Not assessed"}</span>
                         </div>
                       ))}
                     </div>
