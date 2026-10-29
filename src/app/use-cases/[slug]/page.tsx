@@ -41,7 +41,15 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
   if (!uc) notFound()
   // The agency SEO guide has editor-reviewed long-form material in its source
   // record that was previously omitted from the rendered page.
-  const editorialBody = slug === "best-seo-for-agencies" ? uc.body : undefined
+  // Long-form analysis is enabled only after the underlying article has been
+  // reviewed for product intent, markup integrity, and unsupported claims.
+  const reviewedUseCaseSlugs = new Set([
+    "best-seo-for-agencies",
+    "best-hr-for-small-business",
+    "best-crm-for-small-business",
+    "best-accounting-for-startups",
+  ])
+  const editorialBody = reviewedUseCaseSlugs.has(slug) ? uc.body : undefined
 
   return (
     <>
