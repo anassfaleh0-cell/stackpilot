@@ -51,6 +51,7 @@ function SectionCard({ item }: { item: RelatedItem }) {
         <div className="flex items-center gap-1 text-xs shrink-0">
           <Star size={11} className="fill-accent text-accent" />
           <span className="font-medium">{item.rating}</span>
+          {item.type === "review" && item.ratingVerified !== true && <span className="text-[10px] text-muted-foreground">provisional</span>}
         </div>
       )}
       <ArrowRight size={14} className="shrink-0 text-muted-foreground group-hover:text-primary transition-colors" />

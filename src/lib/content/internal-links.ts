@@ -22,6 +22,7 @@ export interface RelatedItem {
   type: RelatedType
   category: string
   rating?: number
+  ratingVerified?: boolean
 }
 
 export interface RelatedResult {
@@ -250,7 +251,7 @@ export function getRelatedByCategory(
     type: "review",
     source: reviewsRaw,
     matchOf: (r): MatchKind | null => (sameCategory(r.category, category) ? "direct" : null),
-    toItem: (r) => ({ slug: r.slug, title: r.name, type: "review", category: r.category, rating: r.rating }),
+    toItem: (r) => ({ slug: r.slug, title: r.name, type: "review", category: r.category, rating: r.rating, ratingVerified: r.ratingVerified === true }),
     compare: (a, b) => (b.rating || 0) - (a.rating || 0),
   }, excludeSlug, maxPerType)
 
