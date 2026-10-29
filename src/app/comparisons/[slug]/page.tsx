@@ -161,13 +161,24 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
     tool2Detail: f.tool2Detail ? stripUnverifiedPriceClaims(stripDeadContentLinks(f.tool2Detail)) : f.tool2Detail,
   }))
 
-  // Build contextual links from actual product overlap and compatible tool types.
-  // A broad category match by itself can link unrelated software types.
+  // Consult only curated editorial references rather than scanning every
+  // comparison on every pre-rendered page. This also avoids spurious links
+  // between products that happen to occupy the same broad catalog category.
+  const editorialRelatedSlugs = [...new Set([
+    ...(cmp.relatedComparisons || []),
+    ...(review1?.relatedComparisons || []),
+    ...(review2?.relatedComparisons || []),
+  ])]
+  const curatedRelatedCandidates = editorialRelatedSlugs
+    .map((relatedSlug) => getComparison(relatedSlug))
+    .filter((candidate): candidate is NonNullable<typeof candidate> => Boolean(candidate))
+    .filter((candidate) => !isNoindexed("comparisons", candidate.slug))
   const relatedComparisonSlugs = getRelevantComparisonSlugs(
     cmp,
-    getAllComparisons().filter((candidate) => !isNoindexed("comparisons", candidate.slug)),
+    curatedRelatedCandidates,
     (toolSlug) => getReview(toolSlug)?.category,
     6,
+    editorialRelatedSlugs,
   )
 
   return (
