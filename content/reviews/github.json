@@ -2,7 +2,7 @@
   "slug": "github",
   "name": "GitHub",
   "tagline": "The home for all developers: host, review, and ship code at scale",
-  "description": "GitHub is the world's largest code hosting and collaboration platform, hosting over 200 million repositories and serving more than 100 million developers worldwide. Built on Git version control, it provides a complete development workflow environment including pull requests, code review, CI/CD through GitHub Actions, project management, and package hosting. Its acquisition by Microsoft in 2018 accelerated enterprise adoption while maintaining strong community roots in open-source software development.",
+  "description": "GitHub hosts Git repositories and supports pull requests, code review, issue tracking, development automation through GitHub Actions, and project collaboration. This review focuses on repository governance, CI/CD workflows, permissions, integrations, and operational trade-offs; legacy scores require evidence audit.",
   "category": "Developer Tools",
   "website": "https://github.com",
   "pricing": "Freemium",
@@ -154,6 +154,11 @@
     }
   ],
   "content": [
+    {
+      "title": "GitHub Repository Collaboration and Actions",
+      "body": "GitHub's official documentation describes repositories, pull requests for proposing and reviewing changes, and GitHub Actions workflows for build, test and deployment. Actions can use hosted or self-hosted runners, but runner availability, limits and permissions depend on the chosen environment and plan. These are documented capabilities, not PilotStack hands-on test findings. Vendor sources: https://docs.github.com/en/get-started/start-your-journey/what-is-github and https://docs.github.com/en/actions/get-started/understand-github-actions.",
+      "type": "text"
+    },
     {
       "title": "Executive Summary",
       "body": "GitHub is the largest code hosting platform in the world, hosting over 200 million repositories and serving more than 100 million developers. Built on Git version control, it has evolved from a simple repository host into a comprehensive software development platform encompassing CI/CD (GitHub Actions), package management (GitHub Packages), static site hosting (Pages), AI-assisted coding (Copilot), project management (Projects), and community collaboration (Discussions, Issues). Its acquisition by Microsoft in 2018 for $7.5 billion accelerated enterprise feature development including SAML/SSO, audit logging, and compliance certifications, while the platform maintained its position as the default destination for open-source software with 90%+ of all open-source projects. GitHub's social coding features — starring repositories, forking projects, and contributing via pull requests — created a network effect that competing platforms like GitLab and Bitbucket have not replicated. For individual developers, startups, and enterprises alike, GitHub serves as the central hub where code is stored, reviewed, tested, and shipped.",
@@ -426,7 +431,7 @@
     "saas-pricing-report-2026"
   ],
   "contentPublished": "2026-07-16",
-  "contentModified": "2026-09-30",
+  "contentModified": "2026-10-29",
   "author": "Marcus Rivera",
   "company": {
     "founded": 2008,
@@ -490,7 +495,8 @@
   },
   "difficulty": "Beginner",
   "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "GitHub is best suited for enterprises and power users who need advanced developer tools capabilities. Teams with dedicated IT support will get the most from its extensive feature set.",
-  "whoShouldNotUse": "GitHub may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale.",
-  "scoreBasis": "GitHub's stored score remains visible as historical PilotStack editorial data, not as a verified third-party average. Its weighting and supporting evidence still need audit; confirm current repository, CI, security, and collaboration capabilities in GitHub's official docs."
+  "whoShouldUse": "Teams using Git for application development or open-source collaboration should evaluate GitHub when pull requests, code review, repository issues and Actions-based automation fit the delivery process. Pilot code ownership, branch protection, deployment permissions and workflow reliability on the exact plan.",
+  "whoShouldNotUse": "Teams with self-hosted, data-residency, specialized approval, or very high CI workload requirements should check current platform and plan controls before standardizing. A repository host does not replace a complete security, deployment or software-supply-chain policy.",
+  "scoreBasis": "GitHub's stored score remains visible as historical PilotStack editorial data, not as a verified third-party average. Its weighting and supporting evidence still need audit; confirm current repository, CI, security, and collaboration capabilities in GitHub's official docs.",
+  "seoDescription": "GitHub hosts Git repositories and supports pull requests, code review, issue tracking, development automation through GitHub Actions, and project collaboratio"
 }
