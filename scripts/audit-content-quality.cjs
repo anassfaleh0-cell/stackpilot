@@ -16,12 +16,12 @@ const root = path.resolve(__dirname, "..", "content")
 const folders = [
   "reviews", "comparisons", "guides", "best", "use-cases",
   "industries", "alternatives", "blog", "research", "statistics",
-  "glossary", "hubs",
+  "glossary", "hubs", "categories",
 ]
 const priority = { broken_json: 1, malformed_html: 1, empty_comparison: 1,
   cross_category_comparison: 2, generic_audience: 2, fabricated_scale_claim: 1,
   thin_source: 2, missing_verdict: 2, score_provenance: 3,
-  bulk_generated_body: 2, missing_source_links: 3 }
+  bulk_generated_body: 2, missing_source_links: 3, broken_internal_reference: 2 }
 
 const records = new Map()
 const findings = []
@@ -51,10 +51,58 @@ for (const folder of folders) {
 }
 
 const get = (folder, slug) => records.get(folder + "/" + slug)
+// Source-only reference check; this does not claim a live 404. Some historical
+// slugs may be intentionally redirected and must be reviewed before editing.
+const linkFolders = new Set(folders)
+const relatedFields = {
+  relatedComparisons: "comparisons", relatedGuides: "guides",
+  relatedPosts: "blog", relatedBest: "best", relatedUseCases: "use-cases",
+  relatedReviews: "reviews", relatedIndustries: "industries",
+}
+function auditReferences(section, slug, record) {
+  const seen = new Set()
+  let flagsForRecord = 0
+  const warn = (ref, target) => {
+    if (flagsForRecord >= 8 || seen.has(target)) return
+    seen.add(target)
+    flagsForRecord++
+    flag("broken_internal_reference", section, slug, ref + " refers to source record " + target + " (check redirects before changing)")
+  }
+  const check = (raw, context) => {
+    if (typeof raw !== "string") return
+    const match = raw.match(/^\/(reviews|comparisons|guides|blog|best|use-cases|industries|alternatives|hubs|research|statistics|glossary|category)\/([a-z0-9][a-z0-9-]*)(?:[?#].*)?$/i)
+    if (!match) return
+    const dir = match[1] === "category" ? "categories" : match[1]
+    const target = dir + "/" + match[2].toLowerCase()
+    if (linkFolders.has(dir) && !records.has(target)) warn(context, target)
+  }
+  for (const [field, dir] of Object.entries(relatedFields)) {
+    for (const targetSlug of Array.isArray(record[field]) ? record[field] : []) {
+      if (typeof targetSlug === "string" && !records.has(dir + "/" + targetSlug)) {
+        warn(field, dir + "/" + targetSlug)
+      }
+    }
+  }
+  for (const link of Array.isArray(record.internalLinks) ? record.internalLinks : []) check(link.href, "internalLinks")
+  // Audited article bodies and ordinary smaller legacy bodies may contain
+  // first-party article links. Skip huge already-flagged malformed legacy HTML.
+  const fragments = [
+    String(record.reviewedBody || ""),
+    String(record.body || "").length <= 20000 ? String(record.body || "") : "",
+    ...(Array.isArray(record.content) ? record.content.slice(0, 40).map(x => String(x?.body || "")) : []),
+  ]
+  for (const fragment of fragments) {
+    for (const anchor of fragment.matchAll(/href\s*=\s*["'](\/[^"']+)["']/gi)) check(anchor[1], "article link")
+    // Markdown links in blog posts need the same check.
+    for (const link of fragment.matchAll(/\]\((\/[a-z0-9/-]+)\)/gi)) check(link[1], "markdown link")
+  }
+}
+
 const unsupportedAudience = /\b(?:5[–-]200 users|more than 500 users|large enterprises with complex compliance requirements)\b/i
 const fakeScale = /\b(?:we tested (?:hundreds|thousands)|our team independently benchmarked|solutions evaluated:\s*\d+\+)/i
 for (const [id, data] of records) {
   const [section, slug] = id.split("/")
+  auditReferences(section, slug, data)
   const body = String(data.body || "")
   const text = [data.description, data.whoShouldUse, data.whoShouldNotUse,
     data.verdict, data.industryOverview, body].filter(Boolean).join("\n")
