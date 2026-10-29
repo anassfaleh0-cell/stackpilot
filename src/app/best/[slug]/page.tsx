@@ -14,6 +14,7 @@ import Link from "next/link"
 import { Star, ArrowRight, CheckCircle2, XCircle } from "lucide-react"
 import { EditorialHero, GlassCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
+import { EditorialArticleBody } from "@/components/content/editorial-article-body"
 import { isNoindexed } from "@/lib/noindex"
 import { REDIRECTED_BEST_SLUGS } from "@/lib/sitemap/redirected-content"
 
@@ -160,6 +161,12 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   })
   const reviewHref = (toolSlug: string) => (getReview(toolSlug) ? `/reviews/${toolSlug}` : null)
   const relatedLinks = getRelatedByCategory(page.category, page.slug, 4)
+  // Restore substantive editorial research only where the stored body was reviewed.
+  // Do not surface unaudited legacy HTML across the entire catalog indiscriminately.
+  const editorialBody = ["best-marketing-seo-enterprise", "best-prototyping-tools"].includes(page.slug)
+    ? page.body
+    : undefined
+
   const relatedBestPages = (() => {
     const sameCategory = getAllBest()
       .filter((item) => item.category === page.category && !isNoindexed("best", item.slug) && !REDIRECTED_BEST_SLUGS.has(item.slug))
@@ -174,7 +181,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Best Software", href: "/best" }, { name: page.title, href: `/best/${slug}` }]} />
-      <ArticleSchema title={page.title} description={safeDescription} publishedAt={page.lastUpdated} updatedAt={page.lastUpdated} author={page.author} url={`${site.url}/best/${slug}`} wordCount={page.description.split(/\s+/).length + page.criteria.join(" ").split(/\s+/).filter(Boolean).length + page.picks.reduce((n, p) => n + p.toolName.split(/\s+/).length + p.bestFor.split(/\s+/).filter(Boolean).length + p.pros.join(" ").split(/\s+/).filter(Boolean).length + p.cons.join(" ").split(/\s+/).filter(Boolean).length, 0) + page.pricingSummary.split(/\s+/).filter(Boolean).length + page.comparisonTable.rows.flat().join(" ").split(/\s+/).filter(Boolean).length + page.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0)} category={page.category} keywords={["best " + page.category.toLowerCase(), page.category + " software ranking", "top " + page.category.toLowerCase() + " tools", "software shortlist 2026"].filter(Boolean)} mentions={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} />
+      <ArticleSchema title={page.title} description={safeDescription} publishedAt={page.lastUpdated} updatedAt={page.lastUpdated} author={page.author} url={`${site.url}/best/${slug}`} wordCount={page.description.split(/\s+/).length + page.criteria.join(" ").split(/\s+/).filter(Boolean).length + page.picks.reduce((n, p) => n + p.toolName.split(/\s+/).length + p.bestFor.split(/\s+/).filter(Boolean).length + p.pros.join(" ").split(/\s+/).filter(Boolean).length + p.cons.join(" ").split(/\s+/).filter(Boolean).length, 0) + page.pricingSummary.split(/\s+/).filter(Boolean).length + page.comparisonTable.rows.flat().join(" ").split(/\s+/).filter(Boolean).length + page.faqs.reduce((n, q) => n + q.question.split(/\s+/).length + q.answer.split(/\s+/).filter(Boolean).length, 0) + (editorialBody ? editorialBody.replace(/<[^>]*>/g, " ").split(/\s+/).filter(Boolean).length : 0)} category={page.category} keywords={["best " + page.category.toLowerCase(), page.category + " software ranking", "top " + page.category.toLowerCase() + " tools", "software shortlist 2026"].filter(Boolean)} mentions={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} />
       <CollectionPageSchema name={page.title} description={safeDescription} url={`${site.url}/best/${slug}`} />
       <ItemListSchema items={linkedPicks.map(p => ({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}` }))} url={`${site.url}/best/${slug}`} />
       <WebPageSchema name={page.title} description={safeDescription} url={`${site.url}/best/${slug}`} dateModified={page.lastUpdated} mainEntity={{ "@type": "ItemList", itemListElement: linkedPicks.map((p, i) => ({ "@type": "ListItem", position: i + 1, item: softwareApp({ name: p.toolName, url: `${site.url}/reviews/${p.toolSlug}`, category: getReview(p.toolSlug)?.category || page.category}) })) }} />
@@ -318,6 +325,8 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Pricing Summary</h2>
                 <p className="text-muted-foreground leading-relaxed">{safePricingSummary}</p>
               </section>
+
+              <EditorialArticleBody html={editorialBody} />
 
               <section className="mb-10 overflow-x-auto">
                 <h2 className="text-2xl font-bold tracking-tight mb-6">Comparison Table</h2>
