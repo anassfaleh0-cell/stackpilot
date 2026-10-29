@@ -222,7 +222,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
               <li>Total features compared: {cmp.features.length}</li>
               <li>{cmp.tool1} criteria with recorded information: {cmp.features.filter(f => hasRecordedValue(f.tool1)).length}</li>
               <li>{cmp.tool2} criteria with recorded information: {cmp.features.filter(f => hasRecordedValue(f.tool2)).length}</li>
-              <li>Criteria with details for both: {cmp.features.filter(f => hasRecordedValue(f.tool1Detail) && hasRecordedValue(f.tool2Detail)).length}</li>
+              <li>Criteria with recorded values for both: {safeFeatures.filter(f => hasRecordedValue(f.tool1) && hasRecordedValue(f.tool2)).length}</li>
               <li>{hasComparableWinner ? `Verified recorded pick: ${winnerLabel}` : provisionalWinnerLabel ? `Provisional recorded pick (evidence pending): ${provisionalWinnerLabel}` : categoriesDiffer ? "Different product categories; no cross-category overall winner" : cmp.decisionGuide ? "Verdict: depends on use case; see Decision Framework" : "No comparable winner recorded"}</li>
               <li>FAQs answered: {visibleFaqs.length}</li>
               {cmp.lastUpdated ? <li>Last updated: {formatDate(cmp.lastUpdated)}</li> : null}
