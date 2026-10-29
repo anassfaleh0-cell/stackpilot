@@ -9,6 +9,29 @@ const INTERNAL_HREF_ALIASES: Record<string, string> = {
   "/reviews/acuity-scheduling": "/reviews/acuity",
 }
 
+// Review FAQs sometimes cite a source as a bare URL. Make the citation usable
+// without interpreting arbitrary HTML or accepting unsafe URL schemes.
+function renderPlainSegment(value: string, seed: number): ReactNode[] {
+  const nodes: ReactNode[] = []
+  const urlRe = /https?:\/\/[^\s<>"']+/gi
+  let cursor = 0
+  for (const match of value.matchAll(urlRe)) {
+    const start = match.index
+    if (start > cursor) nodes.push(value.slice(cursor, start))
+    const url = match[0].replace(/[.,;:!?)]*$/, "")
+    if (url) {
+      nodes.push(
+        <a key={"plain-" + seed + "-" + start} href={url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-primary transition-colors">
+          {url}
+        </a>,
+      )
+      cursor = start + url.length
+    }
+  }
+  if (cursor < value.length) nodes.push(value.slice(cursor))
+  return nodes
+}
+
 interface RichTextProps {
   text: string
   className?: string
@@ -22,7 +45,7 @@ function renderSegments(text: string, baseKey: number): ReactNode[] {
   const re = new RegExp(ANCHOR_RE.source, "g")
   while ((match = re.exec(text)) !== null) {
     if (match.index > lastIndex) {
-      parts.push(text.slice(lastIndex, match.index))
+      parts.push(...renderPlainSegment(text.slice(lastIndex, match.index), key))
     }
     const originalHref = match[1]
     const href = INTERNAL_HREF_ALIASES[originalHref] || originalHref
@@ -47,7 +70,7 @@ function renderSegments(text: string, baseKey: number): ReactNode[] {
     lastIndex = match.index + match[0].length
   }
   if (lastIndex < text.length) {
-    parts.push(text.slice(lastIndex))
+    parts.push(...renderPlainSegment(text.slice(lastIndex), key))
   }
   return parts
 }
