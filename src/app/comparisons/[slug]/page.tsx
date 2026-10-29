@@ -23,6 +23,7 @@ import { NativeAd } from "@/components/ads"
 import { getComparisonDecision, getComparisonDisplayCopy } from "@/lib/content/comparison-decision"
 import { getReviewPricingSummary, stripUnverifiedPriceClaims } from "@/lib/content/review-quality"
 import { getSpecificComparisonFaqs } from "@/lib/content/comparison-presentation"
+import { getRelevantComparisonSlugs } from "@/lib/content/related-comparisons"
 
 export const dynamic = "force-static"
 // Vercel retains on-demand generation; Cloudflare must only serve build-time routes.
@@ -160,32 +161,14 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
     tool2Detail: f.tool2Detail ? stripUnverifiedPriceClaims(stripDeadContentLinks(f.tool2Detail)) : f.tool2Detail,
   }))
 
-  // Strengthen discovery for long-tail comparisons: explicit editorial links remain valid,
-  // while related pages sharing either tool are linked even when legacy JSON lacks relatedComparisons.
-  // Fall back to same-category comparisons only after same-tool matches; never include drafts,
-  // noindexed pages, or the current page. Existing winner/score/rating fields are untouched.
-  const dynamicRelatedComparisons = getAllComparisons()
-    .filter((candidate) => {
-      if (candidate.slug === cmp.slug) return false
-      if ((candidate as typeof candidate & { publicationStatus?: string }).publicationStatus === "draft") return false
-      if (isNoindexed("comparisons", candidate.slug)) return false
-      const sharesTool = [candidate.tool1Slug, candidate.tool2Slug].some((tool) =>
-        tool === cmp.tool1Slug || tool === cmp.tool2Slug
-      )
-      return sharesTool || Boolean(cmp.category && candidate.category === cmp.category)
-    })
-    .map((candidate) => {
-      const sharesTool = [candidate.tool1Slug, candidate.tool2Slug].some((tool) =>
-        tool === cmp.tool1Slug || tool === cmp.tool2Slug
-      )
-      return { slug: candidate.slug, score: (sharesTool ? 100 : 0) + (Boolean(cmp.category && candidate.category === cmp.category) ? 10 : 0) }
-    })
-    .sort((a, b) => b.score - a.score || a.slug.localeCompare(b.slug))
-    .map((candidate) => candidate.slug)
-  const relatedComparisonSlugs = [...new Set([
-    ...dynamicRelatedComparisons,
-    ...(Array.isArray(cmp.relatedComparisons) ? cmp.relatedComparisons : []),
-  ])].filter((relatedSlug) => relatedSlug !== cmp.slug)
+  // Build contextual links from actual product overlap and compatible tool types.
+  // A broad category match by itself can link unrelated software types.
+  const relatedComparisonSlugs = getRelevantComparisonSlugs(
+    cmp,
+    getAllComparisons().filter((candidate) => !isNoindexed("comparisons", candidate.slug)),
+    (toolSlug) => getReview(toolSlug)?.category,
+    6,
+  )
 
   return (
     <>
@@ -467,15 +450,16 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           />
 
           {(() => {
-            const cat = categories.find(c => c.name === cmp.category)
-            if (!cat) return null
+            const relatedCategoryNames = new Set([cmp.category, review1?.category, review2?.category].filter(Boolean))
+            const relevantCategories = categories.filter((category) => relatedCategoryNames.has(category.name))
+            if (relevantCategories.length === 0) return null
             return (
               <section className="mt-16">
-                <h2 className="text-2xl font-bold tracking-tight mb-6">Related Categories</h2>
+                <h2 className="text-2xl font-bold tracking-tight mb-6">Relevant Software Categories</h2>
                 <div className="flex flex-wrap gap-2">
-                  {categories.filter(c => c.name !== cmp.category).slice(0, 6).map(c => (
-                    <Link key={c.slug} href={`/category/${c.slug}`} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
-                      {c.name}
+                  {relevantCategories.map((category) => (
+                    <Link key={category.slug} href={`/category/${category.slug}`} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
+                      {category.name}
                     </Link>
                   ))}
                 </div>
