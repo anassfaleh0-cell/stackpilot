@@ -84,11 +84,11 @@
   "faqs": [
     {
       "question": "What is the difference between CRM and sales engagement platforms?",
-      "answer": "CRM platforms serve as the system of record for customer data, managing contacts, accounts, deals, and the sales pipeline. They answer the question 'what is happening' in the sales process. Sales engagement platforms like Outreach and SalesLoft focus on automating outbound communication sequences, tracking email opens and clicks, and managing sales call activities. They answer the question 'how to execute' on sales activities. The two are complementary, with many organizations using both a CRM (system of record) and a sales engagement platform (system of action) integrated together. Modern CRMs like HubSpot and Salesforce are increasingly adding native sales engagement features."
+      "answer": "A CRM is primarily a system of record for accounts, contacts, leads and deals. Sales-engagement products focus on outreach execution, sequences and activities. Some vendors offer both, but included capabilities vary by product and plan. Test the exact contact and deal data flow, synchronization rules, activity ownership, opt-out handling and reporting; a ticketing helpdesk such as Freshdesk serves support requests rather than replacing sales CRM pipelines."
     },
     {
       "question": "How do I increase CRM adoption among my sales team?",
-      "answer": "CRM adoption starts with choosing a platform that your sales team actually wants to use. Involve reps in the selection process, prioritize user experience, and minimize mandatory data entry. Automate as much data capture as possible through email and calendar integration, automatic activity logging, and call recording. Show reps how the CRM helps them sell more effectively rather than just serving management's reporting needs. Provide personal dashboards that give reps visibility into their own performance. Assign a CRM champion within the sales team who can provide peer support. Finally, hold managers accountable for CRM usage in their teams, making it a core part of sales reviews and pipeline meetings."
+      "answer": "Start by mapping the few fields and activities that reps genuinely need. Invite everyday users to test contact lookup, lead assignment, follow-up, stage updates, notes and activity capture on real sample data. Track time spent entering data, overdue tasks and stale opportunities; configure automation only after defining the data rules. Assign an administrator and revisit adoption after a complete sales cycle."
     },
     {
       "question": "What is pipeline management and why does it matter?",
@@ -96,7 +96,7 @@
     },
     {
       "question": "Should I choose a general CRM or an industry-specific solution?",
-      "answer": "General CRM platforms like Salesforce and HubSpot offer maximum flexibility through customization and extensive app marketplaces, making them suitable for most businesses. Industry-specific CRMs provide pre-built functionality tailored to particular verticals, reducing implementation time and incorporating industry best practices. Real estate CRMs include property and listing management, financial services CRMs have compliance features and suitability tracking, and manufacturing CRMs often include distributor management and quoting for complex products. Choose an industry-specific CRM if your industry has unique workflows that general CRMs handle poorly. Choose a general CRM if you value the flexibility to customize, want access to a broader ecosystem, or need to support multiple business lines."
+      "answer": "General CRMs offer configurable objects and integrations, while specialized products may fit particular workflows such as property management, professional services or regulated processes. Neither choice is automatically better. Test mandatory records, jurisdiction-specific constraints, security permissions, reporting, integration needs and exports using the same representative scenario and current plan documentation."
     },
     {
       "question": "How is AI transforming CRM and sales software?",
