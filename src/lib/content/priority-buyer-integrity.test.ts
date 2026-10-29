@@ -56,6 +56,26 @@ describe("priority buying guides retain editorial integrity", () => {
       faq.question.includes("applicant tracking")).answer).toContain("jurisdiction")
   })
 
+  it("does not advertise discontinued Integromat as a separate current tool", () => {
+    const automation = read("use-cases", "best-automation-for-business")
+    const legacy = automation.recommendations.find((pick: AnyRecord) => pick.toolSlug === "integromat")
+    expect(legacy).toBeDefined()
+    expect(legacy.bestFor).toContain("shut down")
+    expect(automation.faqs[0].answer).toContain("September 30, 2023")
+    expect(automation.body).toContain("make.com/end-of-integromat")
+    expect(automation.selectionCriteria.some((item: AnyRecord) =>
+      item.factor === "Failure handling and recovery")).toBe(true)
+  })
+
+  it("preserves analytics selections while separating product, web and BI use cases", () => {
+    const analytics = read("best", "best-enterprise-analytics")
+    expect(analytics.picks.length).toBeGreaterThanOrEqual(8)
+    expect(analytics.reviewedBody).toContain("Business intelligence and reporting")
+    expect(analytics.reviewedBody).toContain("Digital-experience diagnostics")
+    expect(analytics.reviewedBody).toContain("learn.microsoft.com/en-us/power-bi/desktop-rls")
+    expect(analytics.criteria.length).toBeGreaterThanOrEqual(6)
+  })
+
   it("retains Stripe's provisional score and documents eligible payment flows", () => {
     const review = read("reviews", "stripe")
     expect(review.rating).toBe(4.7)
