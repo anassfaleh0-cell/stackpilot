@@ -38,12 +38,12 @@ function stripUnverifiedRatingClaims(value: string): string {
     .trim()
 }
 
-export const dynamicParams = true
+export const dynamic = "force-static"
+export const dynamicParams = false
 
 export function generateStaticParams() {
-  // Vercel keeps on-demand generation; Cloudflare prerenders committed JSON content because
-  // Workers must not depend on repository filesystem access during request-time route resolution.
-  if (process.env.BUILD_TARGET !== "cloudflare") return []
+  // Pre-render the complete published route inventory; Cloudflare Workers must
+  // never fall back to filesystem-backed on-demand route rendering.
 
   // Content is read from committed JSON files; prerender the corpus for Workers compatibility.
   return getAllBest()
