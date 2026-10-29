@@ -142,9 +142,7 @@ describe("Phase 5O-B-1: internal link discovery", () => {
       expect(slugs(result), `${fixture.slug} should remain discoverable`).toContain(fixture.slug)
       expect(result.related.map((entry) => getHref(entry)), `${getHref(item)} should remain linkable when selected`).toContain(getHref(item))
 
-      if (fixture.keep !== "") {
-        expect(slugs(result), `indexable sibling ${fixture.keep} should still be returned`).toContain(fixture.keep)
-      }
+      expect(slugs(result), `indexable sibling ${fixture.keep} should still be returned`).toContain(fixture.keep)
     }
 
     expect(isContentAvailable("statistic", "aerospace-software")).toBe(false)
