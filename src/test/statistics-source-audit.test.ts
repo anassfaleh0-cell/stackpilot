@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest"
+import fs from "node:fs"
 import { getAllStatistics, getStatistic } from "@/lib/content/registry"
 import { getNoindexSlugs, hasCompleteStatisticEvidence, isNoindexed } from "@/lib/noindex"
 import sitemap from "@/app/sitemap"
@@ -25,7 +26,6 @@ describe("statistics source provenance", () => {
   })
 
   it("does not emit Dataset rich-result schema until the evidence audit passes", () => {
-    const fs = require("node:fs") as typeof import("node:fs")
     const source = fs.readFileSync("src/app/statistics/[slug]/page.tsx", "utf8")
     expect(source).toContain("datasetVerified && (")
     expect(source).toContain("<DatasetSchema")
