@@ -132,6 +132,12 @@ describe("robots SEO policy", () => {
 })
 
 describe("route families", () => {
+  it("does not advertise permanent best-page redirects as indexable sitemap URLs", () => {
+    const paths = new Set(sitemap().map((entry) => new URL(entry.url).pathname))
+    for (const slug of REDIRECTED_BEST_SLUGS) {
+      expect(paths.has(`/best/${slug}`), `redirect alias /best/${slug} must not be a sitemap URL`).toBe(false)
+    }
+  })
   it("uses only absolute same-origin canonical sitemap URLs without query strings or fragments", () => {
     const entries = sitemap()
     const expectedOrigin = new URL(siteConfig.url).origin
