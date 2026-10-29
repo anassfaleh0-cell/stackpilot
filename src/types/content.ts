@@ -306,6 +306,8 @@ export interface StatisticContent {
 
 export interface BestContent {
   slug: string
+  /** Optional long-form editorial HTML; rendered only after content review. */
+  body?: string
   title: string
   description: string
   category: string
