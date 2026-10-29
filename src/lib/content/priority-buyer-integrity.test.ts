@@ -36,6 +36,26 @@ describe("priority buying guides retain editorial integrity", () => {
     expect(review.whoShouldUse).not.toMatch(/enterprises and power users/i)
   })
 
+  it("keeps SEO category links connected to relevant buyer resources", () => {
+    const seo = read("categories", "marketing-seo")
+    const links = new Set(seo.internalLinks.map((link: AnyRecord) => link.href))
+    expect(links.has("/comparisons/ahrefs-vs-moz")).toBe(true)
+    expect(links.has("/use-cases/best-seo-for-agencies")).toBe(true)
+    expect(links.has("/best/best-marketing-seo-enterprise")).toBe(true)
+    expect(links.has("/blog/best-seo-tools-for-agencies")).toBe(true)
+  })
+
+  it("distinguishes CRM and HR buyer needs without claiming universal fit", () => {
+    const crm = read("categories", "crm-sales")
+    const hr = read("categories", "hr-people")
+    expect(crm.faqs.find((faq: AnyRecord) =>
+      faq.question.includes("sales engagement")).answer).toContain("Freshdesk")
+    expect(hr.faqs.find((faq: AnyRecord) =>
+      faq.question.includes("AI being used")).answer).toContain("human oversight")
+    expect(hr.faqs.find((faq: AnyRecord) =>
+      faq.question.includes("applicant tracking")).answer).toContain("jurisdiction")
+  })
+
   it("retains Stripe's provisional score and documents eligible payment flows", () => {
     const review = read("reviews", "stripe")
     expect(review.rating).toBe(4.7)
