@@ -53,7 +53,7 @@ jobs:
       - name: Verify SEO smoke script syntax and editorial renderer
         run: |
           node --check scripts/production-smoke-check.cjs
-          npx vitest run src/components/content/editorial-article-body.test.tsx src/lib/content/related-comparisons.test.ts
+          npx vitest run src/components/content/editorial-article-body.test.tsx src/lib/content/related-comparisons.test.ts src/lib/content/priority-seo-integrity.test.ts
 
       - name: Build Cloudflare Worker
         run: |
