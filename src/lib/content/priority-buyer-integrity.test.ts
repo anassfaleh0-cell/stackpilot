@@ -76,6 +76,22 @@ describe("priority buying guides retain editorial integrity", () => {
     expect(analytics.criteria.length).toBeGreaterThanOrEqual(6)
   })
 
+  it("keeps the Linear provisional rating and source-backed planning guidance", () => {
+    const linear = read("reviews", "linear")
+    expect(linear.rating).toBe(4.8)
+    expect(linear.ratingVerified).toBe(false)
+    expect(linear.content.some((section: AnyRecord) => section.body.includes("linear.app/docs/use-cycles"))).toBe(true)
+    expect(linear.content.some((section: AnyRecord) => section.body.includes("linear.app/docs/initiatives"))).toBe(true)
+  })
+
+  it("preserves Moz's stored score while replacing unsupported ranking claims with vendor documentation", () => {
+    const moz = read("reviews", "moz")
+    expect(moz.rating).toBe(4.3)
+    expect(moz.content.some((section: AnyRecord) => section.body.includes("moz.com/help"))).toBe(true)
+    expect(moz.pros.some((statement: string) => /SOC 2|ISO 27001/i.test(statement))).toBe(false)
+    expect(moz.faqs.some((faq: AnyRecord) => faq.question === "Is Domain Authority a Google metric?")).toBe(true)
+  })
+
   it("retains Stripe's provisional score and documents eligible payment flows", () => {
     const review = read("reviews", "stripe")
     expect(review.rating).toBe(4.7)
