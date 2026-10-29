@@ -22,6 +22,7 @@ const VETTED_LONG_FORM_BEST_SLUGS = new Set([
   "best-marketing-seo-enterprise",
   "best-prototyping-tools",
   "best-remote-work-tools",
+  "best-crm-sales-small-business",
 ])
 
 function stripUnverifiedPriceClaims(value: string): string {
@@ -191,7 +192,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   // Restore substantive editorial research only where the stored body was reviewed.
   // Do not surface unaudited legacy HTML across the entire catalog indiscriminately.
   const editorialBody = VETTED_LONG_FORM_BEST_SLUGS.has(page.slug)
-    ? page.body
+    ? (page.reviewedBody || page.body)
     : undefined
 
   const relatedBestPages = (() => {
