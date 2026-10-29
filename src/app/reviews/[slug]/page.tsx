@@ -705,7 +705,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 <GlassCard key={faq.question}>
                   <div className="p-4">
                     <h3 className="font-semibold mb-2 text-sm">{faq.question}</h3>
-                    <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                    <p className="text-sm text-muted-foreground"><RichText text={faq.answer} /></p>
                   </div>
                 </GlassCard>
               ))}
