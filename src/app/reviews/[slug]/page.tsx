@@ -23,7 +23,8 @@ import { ScoreBar, TrustBadge } from "@/components/brand/patterns"
 import { isNoindexed } from "@/lib/noindex"
 import { BannerAd, NativeAd, InFeedAd } from "@/components/ads"
 
-const TOTAL_REVIEWS = getAllReviews().length
+// Avoid reading the entire review corpus as a module-load side effect in the Worker.
+// The list is queried only when static routes or visible navigation need it.
 
 // Every published slug is rendered at build time; avoid runtime filesystem fallbacks on Workers.
 export const dynamic = "force-static"
