@@ -2,7 +2,7 @@
   "slug": "sourceforge",
   "name": "SourceForge",
   "tagline": "A software discovery and project-hosting resource to evaluate for open-source research and distribution needs.",
-  "description": "SourceForge supports software discovery and project distribution workflows; current service details and ratings are not verified here.",
+  "description": "SourceForge supports open-source project hosting, software discovery, release distribution and download statistics. This review examines where its distribution workflow fits, how to validate an actual release, and when a collaborative development platform may be preferable.",
   "category": "Developer Tools",
   "website": "https://sourceforge.net",
   "pricing": "Not independently verified",
@@ -87,6 +87,11 @@
   ],
   "content": [
     {
+      "title": "Capabilities documented by SourceForge",
+      "body": "SourceForge's official project feature overview describes open-source project hosting, software-directory discovery, a managed download mirror network, and download statistics over time, by platform and by region. SourceForge also describes Git, Mercurial and Subversion repository options. These are vendor-described capabilities, not evidence that PilotStack independently tested every service. See https://sourceforge.net/create/ and confirm the current project and usage terms.",
+      "type": "text"
+    },
+    {
       "title": "Project and release needs",
       "body": "Define whether the goal is to discover software, host project information or distribute release artifacts. Test a sample project page, release notes, version history and download flow. Verify current platform terms and the exact service availability for the project.",
       "type": "text"
@@ -158,8 +163,8 @@
   ],
   "relatedPosts": [],
   "contentPublished": "2026-07-19",
-  "contentModified": "2026-10-24",
-  "author": "Marcus Rivera",
+  "contentModified": "2026-10-29",
+  "author": "PilotStack Team",
   "company": {
     "founded": 1999,
     "headquarters": "San Francisco, CA",
@@ -201,12 +206,15 @@
   "wordCount": 313,
   "difficulty": "Beginner",
   "learningCurve": "Minimal — most users can get started within an hour",
-  "whoShouldUse": "SourceForge is ideal for small to mid-size teams that need a reliable developer tools solution without excessive complexity. It works well for organizations with 5-200 users who prioritize ease of use and quick deployment.",
-  "whoShouldNotUse": "SourceForge may not be suitable for large enterprises with complex compliance requirements or teams needing extensive customization options. Organizations with more than 500 users may find the pricing less competitive at scale.",
+  "whoShouldUse": "SourceForge is worth evaluating for maintainers who publish open-source releases, want a public project directory listing, or need to understand download activity by time, operating system or region. Test the published release and download experience before adopting it as a primary distribution channel.",
+  "whoShouldNotUse": "Teams that primarily need a tightly integrated pull-request, code-review and CI/CD workflow should compare GitHub, GitLab or their existing repository platform first. SourceForge's hosting and distribution strengths do not automatically replace every development workflow; confirm integrations, maintainers' permissions and project migration needs.",
   "priceRangeVerified": false,
   "ratingVerified": false,
   "reviewCountVerified": false,
   "ratingsVerified": false,
   "featuresVerified": false,
-  "companyFactsVerified": false
+  "companyFactsVerified": false,
+  "scoreBasis": "Legacy stored editorial assessment: 3.5/5 (provisional). The record does not include a reproducible criterion-by-criterion score calculation; treat the number as an editorial reference, not a verified user-review average.",
+  "seoTitle": "SourceForge Review: Project Hosting, Downloads & Alternatives",
+  "seoDescription": "SourceForge review for open-source project hosting, release downloads, mirrors and analytics. Compare its distribution workflow with GitHub and verify current terms."
 }
