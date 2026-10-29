@@ -303,7 +303,8 @@ async function main() {
       const pageFailures = []
       let cursor = 0
       // Keep production crawl pressure low on the free Worker plan.
-      const concurrency = Math.min(IS_LIVE_PRODUCTION ? 2 : 4, targets.length)
+      // Production crawl has no time pressure: minimize concurrent cold Worker requests.
+      const concurrency = Math.min(IS_LIVE_PRODUCTION ? 1 : 4, targets.length)
       await Promise.all(Array.from({ length: concurrency }, async () => {
         while (cursor < targets.length) {
           const target = targets[cursor++]
@@ -319,7 +320,7 @@ async function main() {
             pageFailures.push({ url: target, status: "FETCH_ERROR", detail: error instanceof Error ? error.message : String(error) })
           }
           // Do not create a burst of thousands of parallel cache misses.
-          if (IS_LIVE_PRODUCTION) await new Promise((resolve) => setTimeout(resolve, 250))
+          if (IS_LIVE_PRODUCTION) await new Promise((resolve) => setTimeout(resolve, 1000))
         }
       }))
       // Treat 5xx as real until the canonical URL succeeds after a brief cooldown.
