@@ -4,7 +4,9 @@ export function truncateAtWordBoundary(text: string, maxLen: number): string {
   if (text.length <= maxLen) return text
   const truncated = text.slice(0, maxLen)
   const lastSpace = truncated.lastIndexOf(" ")
-  return (lastSpace > 0 ? truncated.slice(0, lastSpace) : truncated) + "…"
+  // A truncation marker can itself exceed the declared character limit and
+  // looks like unfinished copy in search results. Do not manufacture one.
+  return (lastSpace > 0 ? truncated.slice(0, lastSpace) : truncated).trimEnd()
 }
 
 export function createMetadata({
@@ -37,11 +39,13 @@ export function createMetadata({
   readingTime?: number
 }) {
   const url = path ? `${site.url}${path}` : site.url
-  const imageUrl = ogImage || `${site.url}/og.svg`
+  // Social preview crawlers expect raster assets. Keep the verified public PNG
+  // as the fallback until individual pages have their own image.
+  const imageUrl = ogImage || `${site.url}/og.png`
   const isArticle = ogType === "article"
 
   const fullTitle = truncateAtWordBoundary(title, 60)
-  const fullDescription = truncateAtWordBoundary(description, 160)
+  const fullDescription = truncateAtWordBoundary(description, 155)
 
   // `noFollow` is an opt-out flag: only disable link following when explicitly requested.
   const follow = !noFollow
@@ -64,8 +68,6 @@ export function createMetadata({
     },
     twitter: {
       card: "summary_large_image" as const,
-      site: "@pilotstack",
-      creator: "@pilotstack",
       title: fullTitle,
       description: fullDescription,
       images: [imageUrl],
