@@ -53,6 +53,7 @@ jobs:
       - name: Verify SEO smoke script syntax and editorial renderer
         run: |
           node --check scripts/production-smoke-check.cjs
+          node --check scripts/audit-content-quality.cjs
           npx vitest run src/components/content/editorial-article-body.test.tsx src/lib/content/related-comparisons.test.ts src/lib/content/priority-seo-integrity.test.ts src/lib/content/comparison-verdict-integrity.test.ts src/lib/content/industry-content-integrity.test.ts src/lib/content/priority-buyer-integrity.test.ts
 
       - name: Audit committed content records without removing any pages
