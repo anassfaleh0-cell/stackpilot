@@ -2,7 +2,7 @@
   "slug": "jotform",
   "name": "JotForm",
   "tagline": "Form builder with 10,000+ templates and no-code logic",
-  "description": "JotForm is a productivity platform that helps SMBs and Educators and Marketers and HR Teams achieve better outcomes. Form builder with 10,000+ templates and no-code logic. Our comprehensive 2026 review evaluates features, pricing, security, integrations, and real-world performance.",
+  "description": "Jotform is a no-code form and submission-workflow platform. This review evaluates conditional logic, submission limits, access to collected data, spam protection, integrations and payment-form requirements. Validate the current plan and usage caps before launch; its stored PilotStack editorial score is provisional.",
   "category": "Productivity",
   "website": "https://jotform.com",
   "pricing": "Freemium",
@@ -10,16 +10,16 @@
   "rating": 4.2,
   "reviewCount": 9500,
   "pros": [
-    "Form builder with 10,000+ templates and no-code logic",
-    "Enterprise-grade reliability with SOC 2 Type II certification",
-    "AI-powered features including JotForm AI",
-    "Flexible API for custom integrations and workflow automation",
-    "Full-featured mobile apps for iOS and Android"
+    "Vendor-documented conditional rules can show or hide fields, route recipients, skip pages and update calculated values.",
+    "Submission caps and expiration dates can be configured for registrations and limited-response forms.",
+    "Templates and integrations can reduce setup work for common application and request workflows, subject to current plan limits.",
+    "Anti-spam options include a captcha field; verify how each mechanism performs for your actual audience."
   ],
   "cons": [
-    "Support quality rated 3.9/5 is below category average",
-    "Advanced features may require technical expertise to fully leverage",
-    "Some advanced features only available on higher pricing tiers"
+    "Monthly submissions, form views, payment submissions, upload space and stored submissions can have different usage limits.",
+    "Conditional logic requires testing for conflicting rules, skipped questions and correct notification recipients.",
+    "Some sensitive-data, permission and integration needs may require additional configuration or may not match the selected plan.",
+    "Historical PilotStack category scores and support-quality figures are not independent user-rating averages."
   ],
   "features": [
     {
@@ -136,6 +136,11 @@
     }
   ],
   "content": [
+    {
+      "title": "Conditional logic and limits: what Jotform documents",
+      "body": "Jotform's official help center describes conditions to show or hide questions, calculate values, change notification recipients, and skip pages. Its limits documentation distinguishes monthly submissions, form views, payment submissions and account storage; these are not interchangeable usage counts. For events or registration cutoffs, the Form Status settings can stop submissions at a specified limit or date. These are vendor-described workflows, not a claim that PilotStack independently executed them. Sources: <a href=\"https://www.jotform.com/help/57-smart-forms-conditional-logic-for-online-forms/\">conditional logic reference</a>, <a href=\"https://www.jotform.com/help/408-understanding-your-account-usage-and-limits/\">account usage reference</a>, and <a href=\"https://www.jotform.com/help/137-How-to-Limit-Submissions-in-a-Form/\">response limits reference</a>.",
+      "type": "text"
+    },
     {
       "title": "Executive Summary",
       "body": "Jotform is a no-code online form and workflow platform for creating forms, collecting submissions, automating follow-up tasks, and connecting data to other business tools.",
@@ -301,24 +306,20 @@
   ],
   "faqs": [
     {
-      "question": "What is Jotform used for?",
-      "answer": "Jotform is used to build online forms, surveys, registration flows, applications, payment forms, and submission-based workflows without custom development."
+      "question": "Does Jotform support conditional form questions?",
+      "answer": "Jotform documents conditions for showing or hiding fields, calculating values, skipping pages and routing notification recipients. Configure the exact conditions and test contradictory answers before publishing. Official source: https://www.jotform.com/help/57-smart-forms-conditional-logic-for-online-forms/."
     },
     {
-      "question": "Is Jotform free?",
-      "answer": "Jotform offers a free tier. Paid plans add higher limits and additional capabilities, so compare current limits with expected forms, submissions, storage, and integrations."
+      "question": "Which Jotform usage limits should a team check?",
+      "answer": "Confirm submissions, monthly form views, payment submissions, upload space, stored submissions and active-form limits for the intended plan; some are recurring monthly caps while others are storage limits. Check the current Account Usage page and official plan documentation."
     },
     {
-      "question": "Who should use Jotform?",
-      "answer": "Jotform is well suited to SMBs, operations teams, marketers, educators, HR teams, and event organizers that need flexible forms and workflow automation."
+      "question": "How can Jotform forms stop accepting submissions?",
+      "answer": "Form Status settings can disable a form at a submission limit, a specified date, or when either condition is reached. Check timezone behavior and the disabled-form message in your own test. Source: https://www.jotform.com/help/137-How-to-Limit-Submissions-in-a-Form/."
     },
     {
-      "question": "What are the main Jotform alternatives?",
-      "answer": "Common alternatives include Typeform, Google Forms, Microsoft Forms, and Formstack. The best choice depends on design, ecosystem, workflow complexity, and budget."
-    },
-    {
-      "question": "What should I check before buying Jotform?",
-      "answer": "Test real forms and integrations, then verify submission limits, storage, payment requirements, collaboration, branding, permissions, and compliance requirements on the plan you would use."
+      "question": "Is PilotStack's Jotform rating a verified user average?",
+      "answer": "No. The stored editorial score is preserved as provisional while its underlying evidence and calculation are audited. Do not interpret it as a third-party review aggregate or a hands-on reliability benchmark."
     }
   ],
   "alternatives": [],
@@ -330,7 +331,7 @@
   ],
   "relatedPosts": [],
   "contentPublished": "2026-07-19",
-  "contentModified": "2026-10-08",
+  "contentModified": "2026-10-29",
   "author": "Sarah Chen",
   "company": {
     "founded": 2006,
@@ -386,9 +387,9 @@
   "wordCount": 6221,
   "difficulty": "Intermediate",
   "learningCurve": "Moderate — expect 1-3 days to become productive",
-  "whoShouldUse": "JotForm is best suited for enterprises and power users who need advanced productivity capabilities. Teams with dedicated IT support will get the most from its extensive feature set.",
-  "whoShouldNotUse": "JotForm is less ideal for small teams on tight budgets, as its advanced features come at a premium price point. Freelancers may find more cost-effective alternatives.",
+  "whoShouldUse": "Operations, recruiting, education, events and small-business teams can evaluate Jotform for applications, registrations, surveys, internal requests, and approval or payment forms. Pilot a real workflow with conditional fields, notifications, ownership and submission exports before moving live records.",
+  "whoShouldNotUse": "Teams building highly customized application backends should test whether form submissions, workflow rules and integrations cover their needs. Projects collecting sensitive data should review the exact vendor terms, storage locations, access controls and retention settings. High-volume forms must account for submission, view, upload, payment and storage quotas by plan.",
   "seoTitle": "Jotform Review 2026: Features, Pricing & Alternatives",
-  "seoDescription": "Jotform review for 2026 covering form building, templates, workflows, integrations, security, pricing, strengths, limitations and alternatives.",
+  "seoDescription": "Jotform review: conditional logic, form limits, submission workflows, payment forms, spam controls, integrations and export checks. Provisional score explained.",
   "scoreBasis": "Jotform's displayed PilotStack score remains provisional: its weighting and supporting sources have not been fully reviewed. It is not an external review average; verify current form limits, integrations, payment features, and plan restrictions using Jotform's official documentation."
 }
