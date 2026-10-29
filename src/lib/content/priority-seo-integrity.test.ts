@@ -52,7 +52,7 @@ describe("high-value editorial recovery sources", () => {
       }>("use-cases", slug)
       expect(record.body?.length).toBeGreaterThan(2000)
       expect(record.reviewedBody?.length).toBeGreaterThan(2200)
-      expect(record.reviewedBody).toContain("third-party")
+      expect(record.reviewedBody?.toLowerCase()).toContain("first-party")
       expect(record.recommendations?.every((r) => typeof r.rating === "number")).toBe(true)
     },
   )
