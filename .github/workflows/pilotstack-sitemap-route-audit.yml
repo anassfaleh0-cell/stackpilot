@@ -1,5 +1,9 @@
 name: PilotStack full sitemap route audit
 
+# Heavy production crawls are manually opted in. Automatically running a 2k-page
+# crawl after each deploy can create recurrent Worker CPU 503s during SEO recovery.
+# Lightweight deploy smoke checks remain automatic in cloudflare-production-deploy.
+
 on:
   workflow_dispatch:
     inputs:
@@ -8,39 +12,34 @@ on:
         required: true
         default: "https://pilotstack.online"
         type: string
-  workflow_run:
-    workflows: ["Cloudflare production deploy (after quality gate)"]
-    types: [completed]
-    branches: [master]
 
 permissions:
   contents: read
 
 concurrency:
   group: pilotstack-sitemap-audit
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   audit:
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
       - name: Checkout deployed revision
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+          ref: master
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Audit every same-origin page URL in nested sitemaps
         env:
-          SITE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.site_url || 'https://pilotstack.online' }}
+          SITE_URL: ${{ inputs.site_url }}
           CHECK_SITEMAP_URLS: "1"
           # This dedicated, throttled audit is explicitly allowed to crawl the production sitemap.
           ALLOW_LIVE_AUDIT: "1"
-          GITHUB_SHA: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+          GITHUB_SHA: ${{ github.sha }}
           AUDIT_OUTPUT_FILE: sitemap-route-audit-report.json
         run: node scripts/production-smoke-check.cjs
       - name: Upload complete route audit report
