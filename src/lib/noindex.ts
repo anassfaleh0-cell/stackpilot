@@ -33,6 +33,15 @@ function loadNoindexList(dir: string): Set<string> {
 export const EDITORIAL_NOINDEX_COMPARISONS = new Set([
   "1password-vs-appwrite", // password manager vs application backend
   "1password-vs-crowdstrike", // password manager vs endpoint security
+  // Buyer intent is accounting/expense management or integration, not a
+  // head-to-head alternative to Square's payments/commerce platform.
+  "expensify-vs-square",
+  "freshbooks-vs-square",
+  "quickbooks-vs-square",
+  "sage-intacct-vs-square",
+  "sage-vs-square",
+  "square-vs-wave",
+  "square-vs-zoho-books",
 ])
 
 export function isNoindexed(dir: string, slug: string): boolean {
@@ -40,7 +49,8 @@ export function isNoindexed(dir: string, slug: string): boolean {
 }
 
 export function getNoindexSlugs(dir: string): string[] {
-  return Array.from(loadNoindexList(dir))
+  // Report exactly the policy applied by isNoindexed, not the legacy manifest.
+  return dir === "comparisons" ? Array.from(EDITORIAL_NOINDEX_COMPARISONS) : []
 }
 
 export function getKeepSlugs(dir: string): string[] {
