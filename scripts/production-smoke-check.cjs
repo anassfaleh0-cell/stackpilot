@@ -170,6 +170,18 @@ async function main() {
     report("canonical " + expectedPath, canonicalOk, canonicalDetail)
   }
 
+  // Guard against accidental site-wide noindex regressions in deployed HTML.
+  // Scope the check to the document head to avoid matching quoted example markup.
+  for (const [page, pathname] of [[home, "/"], [contact, "/contact"], [linear, "/reviews/linear"], [aiWritingGuide, "/guides/how-to-choose-ai-writing-software"]]) {
+    if (!page || page.error || page.status !== 200) continue
+    const head = page.body.split(/<\\/head>/i)[0]
+    const robotsMetaTags = [...head.matchAll(/<meta\\b[^>]*>/gi)]
+      .map((match) => match[0])
+      .filter((tag) => /\\bname=["'](?:robots|googlebot)["']/i.test(tag))
+    const noindexMeta = robotsMetaTags.some((tag) => /\\bcontent=["'][^"']*\\bnoindex\\b/i.test(tag))
+    report("indexability " + pathname, !noindexMeta, noindexMeta ? "unexpected noindex meta in document head" : "no noindex robots meta")
+  }
+
   if (home && !home.error) {
     report("AdSense publisher meta", home.body.includes("ca-pub-" + PUBLISHER_ID), "homepage must advertise the same publisher ID as ads.txt")
   }
