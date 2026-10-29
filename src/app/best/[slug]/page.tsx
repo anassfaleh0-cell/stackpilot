@@ -23,6 +23,7 @@ const VETTED_LONG_FORM_BEST_SLUGS = new Set([
   "best-prototyping-tools",
   "best-remote-work-tools",
   "best-crm-sales-small-business",
+  "best-enterprise-analytics",
 ])
 
 function stripUnverifiedPriceClaims(value: string): string {
