@@ -89,7 +89,7 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
                             <td className="py-2.5 px-3 font-medium">
                               <Link href={`/reviews/${rec.toolSlug}`} className="hover:text-primary transition-colors">{rec.toolName}</Link>
                             </td>
-                            <td className="py-2.5 px-3 text-muted-foreground">{review?.ratingVerified === true && typeof review.rating === "number" && Number.isFinite(review.rating) ? `${review.rating}/5` : "Rating not verified"}</td>
+                            <td className="py-2.5 px-3 text-muted-foreground">{typeof review?.rating === "number" && Number.isFinite(review.rating) ? `${review.rating}/5${review.ratingVerified === true ? " (verified)" : " (provisional)"}` : "Not assessed"}</td>
                             <td className="py-2.5 px-3 text-muted-foreground">{rec.bestFor}</td>
                             <td className="py-2.5 px-3 text-muted-foreground">
                               {review?.priceRangeVerified === true && review.priceRange ? `${review.priceRange} (${review.pricing})` : "Verify current pricing with vendor"}
@@ -104,7 +104,7 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
                   </table>
                 </div>
                 <p className="text-xs text-muted-foreground mt-2">
-                  Ratings and pricing are shown only when source provenance is documented; otherwise verify current details and plan terms directly with the vendor.
+                  Stored editorial ratings are displayed with verified or provisional status; they are not third-party user averages. Verify current pricing and plan terms with the vendor.
                 </p>
               </section>
 
@@ -116,13 +116,13 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
                       <div className="p-5">
                         <div className="flex items-start justify-between mb-2">
                           <Link href={`/reviews/${rec.toolSlug}`} className="text-lg font-bold hover:text-primary transition-colors">{rec.toolName}</Link>
-                          {getReview(rec.toolSlug)?.ratingVerified === true && typeof getReview(rec.toolSlug)?.rating === "number" ? (
+                          {typeof getReview(rec.toolSlug)?.rating === "number" ? (
                             <div className="flex items-center gap-1 text-sm">
                               <Star size={14} className="fill-accent text-accent" />
                               <span className="font-semibold">{getReview(rec.toolSlug)?.rating}</span>
-                              <span className="text-muted-foreground">/5</span>
+                              <span className="text-muted-foreground">/5 {getReview(rec.toolSlug)?.ratingVerified === true ? "(verified)" : "(provisional)"}</span>
                             </div>
-                          ) : <span className="text-xs text-muted-foreground">Rating not verified</span>}
+                          ) : <span className="text-xs text-muted-foreground">Not assessed</span>}
                         </div>
                         <p className="text-sm font-medium text-primary mb-2">{rec.bestFor}</p>
                         <ul className="space-y-1 mb-3">
@@ -208,7 +208,7 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
                       {uc.recommendations.slice(0, 4).map((rec) => (
                         <Link key={rec.toolSlug} href={`/reviews/${rec.toolSlug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                           <span>{rec.toolName}</span>
-                          <span className="text-xs font-medium">{getReview(rec.toolSlug)?.ratingVerified === true && typeof getReview(rec.toolSlug)?.rating === "number" ? `${getReview(rec.toolSlug)?.rating}/5` : "Rating not verified"}</span>
+                          <span className="text-xs font-medium">{typeof getReview(rec.toolSlug)?.rating === "number" ? `${getReview(rec.toolSlug)?.rating}/5${getReview(rec.toolSlug)?.ratingVerified === true ? " (verified)" : " (provisional)"}` : "Not assessed"}</span>
                         </Link>
                       ))}
                     </div>
