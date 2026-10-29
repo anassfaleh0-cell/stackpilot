@@ -16,6 +16,10 @@ import { EditorialHero, GlassCard, InfoCard } from "@/components/dynamic"
 import { EEATProcess } from "@/components/seo/editorial-process"
 import { InFeedAd } from "@/components/ads"
 
+// Published content is built ahead of time so Workers never render JSON-backed pages on demand.
+export const dynamic = "force-static"
+export const dynamicParams = false
+
 export function generateStaticParams() {
   return getAllUseCases().map((item) => ({ slug: item.slug }))
 }
