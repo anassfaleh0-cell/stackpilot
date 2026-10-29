@@ -44,6 +44,19 @@ describe("high-value editorial recovery sources", () => {
     },
   )
 
+  it.each(["best-seo-for-startups", "best-marketing-for-enterprise"])(
+    "publishes reviewed buyer guidance while preserving the original use-case article for %s",
+    (slug) => {
+      const record = sourceRecord<{
+        body?: string; reviewedBody?: string; recommendations?: Array<{ rating?: number }>;
+      }>("use-cases", slug)
+      expect(record.body?.length).toBeGreaterThan(2000)
+      expect(record.reviewedBody?.length).toBeGreaterThan(2200)
+      expect(record.reviewedBody).toContain("third-party")
+      expect(record.recommendations?.every((r) => typeof r.rating === "number")).toBe(true)
+    },
+  )
+
   it("keeps SourceForge's provisional score while linking specific verified feature evidence", () => {
     const review = sourceRecord<{
       rating?: number; ratingVerified?: boolean; featuresVerified?: boolean;
