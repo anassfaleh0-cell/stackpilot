@@ -152,10 +152,15 @@ export default function HomePage() {
                 <Card className="h-full flex flex-col">
                   <div className="flex items-start justify-between mb-3">
                     <Badge variant="secondary">{tool.category}</Badge>
-                    {tool.ratingVerified === true && typeof tool.rating === "number" && Number.isFinite(tool.rating) && (
-                      <div className="flex items-center gap-1 text-sm font-medium text-accent">
-                        <Star size={14} className="fill-accent text-accent" />
-                        {tool.rating}
+                    {typeof tool.rating === "number" && Number.isFinite(tool.rating) && (
+                      <div className="flex flex-col items-end gap-0.5">
+                        <div className="flex items-center gap-1 text-sm font-medium text-accent">
+                          <Star size={14} className="fill-accent text-accent" aria-hidden="true" />
+                          {tool.rating}/5
+                        </div>
+                        <span className="text-[10px] text-muted-foreground">
+                          {tool.ratingVerified === true ? "Verified editorial score" : "Provisional editorial score"}
+                        </span>
                       </div>
                     )}
                   </div>
@@ -214,9 +219,10 @@ export default function HomePage() {
                   <Card className="h-full flex flex-col">
                     <div className="flex items-start justify-between mb-3">
                       <Badge variant="secondary">{cmp.category}</Badge>
-                      {cmp.winnerVerified === true && cmp.winner && (
-                        <span className="text-xs font-medium text-success flex items-center gap-1">
-                          <Shield size={12} /> {cmp.winner} wins
+                      {cmp.winner && (
+                        <span className={`text-xs font-medium flex items-center gap-1 ${cmp.winnerVerified === true ? "text-success" : "text-muted-foreground"}`}>
+                          <Shield size={12} aria-hidden="true" />
+                          {cmp.winnerVerified === true ? `${cmp.winner} wins` : `Provisional pick: ${cmp.winner}`}
                         </span>
                       )}
                     </div>
