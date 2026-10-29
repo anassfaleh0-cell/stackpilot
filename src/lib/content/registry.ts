@@ -1206,8 +1206,11 @@ export function getAllUseCases(): UseCaseContent[] {
 }
 
 function normalizeIndustryContent(industry: IndustryContent): IndustryContent {
-  const safeIndustry = { ...industry } as IndustryContent & { body?: string }
-  delete safeIndustry.body
+  const safeIndustry = { ...industry }
+  // Legacy industry HTML includes broken nested links and unsupported volume
+  // claims. Only specifically reviewed source articles should be restored.
+  const approvedIndustryBodies = new Set(["recruiting"])
+  if (!approvedIndustryBodies.has(safeIndustry.slug)) delete safeIndustry.body
   if (safeIndustry.contentVerified === true) {
     return {
       ...safeIndustry,
@@ -1241,16 +1244,29 @@ function normalizeIndustryContent(industry: IndustryContent): IndustryContent {
       : faq
   })
 
+  // Keep specific, reviewable editorial titles and descriptions where possible.
+  // Avoid "Best" rankings on unsourced directories without deleting the source.
+  const sourceTitle = String(safeIndustry.title || "").trim()
+  const safeTitle = /^best (?:software|tools) for /i.test(sourceTitle) || /^best software for /i.test(sourceTitle)
+    ? `${category} Software: Workflow and Buying Guide`
+    : sourceTitle.length >= 20 ? sourceTitle : `${category} Software: Workflow and Buying Guide`
+  const sourceDescription = String(safeIndustry.description || "").trim()
+  const safeDescription = sourceDescription.length >= 90 &&
+    !/\b(?:best|top-rated|leading|guaranteed|HIPAA-compliant|solutions evaluated|our experts)\b/i.test(sourceDescription)
+    ? sourceDescription
+    : `Compare software for ${category} needs: ${safeIndustry.softwareNeeds.slice(0, 2).join("; ").replace(/[.!?]+$/g, "")}. Test capabilities, integrations, privacy controls and costs with vendors.`
+
   return {
     ...safeIndustry,
-    title: `Software for ${category}: Selection Guide`,
-    description: `A practical software selection guide for ${category.toLowerCase()} teams, covering workflow fit, integrations, data protection, implementation, and total cost. Verify product-specific claims with current vendor documentation.`,
+    title: safeTitle,
+    description: safeDescription,
     industryOverview,
     softwareNeeds: sanitizeList(safeIndustry.softwareNeeds, 10),
     recommendations,
     implementationTips: sanitizeList(safeIndustry.implementationTips, 10),
     faqs,
-    lastUpdated: "2026-10-15",
+    // Keep the source record date; do not assign a synthetic editorial update.
+    lastUpdated: safeIndustry.lastUpdated,
     contentVerified: false,
   }
 }
