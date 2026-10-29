@@ -18,6 +18,10 @@ function statisticDescription(title: string, category?: string): string {
   return `${title} is a source-checking guide for ${subject} software research. Verify original reports, market definitions, reporting periods, and survey populations before relying on figures. Numeric values are shown only when source provenance is documented.`
 }
 
+// Published content is built ahead of time so Workers never render JSON-backed pages on demand.
+export const dynamic = "force-static"
+export const dynamicParams = false
+
 export function generateStaticParams() {
   return getAllStatistics().map((item) => ({ slug: item.slug }))
 }
