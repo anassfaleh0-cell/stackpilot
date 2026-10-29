@@ -1,0 +1,62 @@
+name: PilotStack editorial quality (test only)
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - "content/**"
+      - "src/**"
+      - "scripts/audit-content-quality.cjs"
+      - ".github/workflows/editorial-quality-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: editorial-quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-editorial-quality:
+    name: Content safety, review integrity and link rendering
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Verify read-only content audit syntax
+        run: node --check scripts/audit-content-quality.cjs
+
+      - name: Test source links, reviews, comparisons and buyer guides
+        run: |
+          npx vitest run \
+            src/components/content/rich-text.test.tsx \
+            src/lib/content/review-quality.test.ts \
+            src/components/content/editorial-article-body.test.tsx \
+            src/lib/content/related-comparisons.test.ts \
+            src/lib/content/priority-seo-integrity.test.ts \
+            src/lib/content/comparison-verdict-integrity.test.ts \
+            src/lib/content/industry-content-integrity.test.ts \
+            src/lib/content/priority-buyer-integrity.test.ts
+
+      - name: Audit the whole content corpus without changing any page
+        run: node scripts/audit-content-quality.cjs --json "$RUNNER_TEMP/pilotstack-content-quality.json"
+
+      - name: Upload quality backlog
+        uses: actions/upload-artifact@v4
+        with:
+          name: pilotstack-content-quality
+          path: ${{ runner.temp }}/pilotstack-content-quality.json
+          retention-days: 7
+          if-no-files-found: warn
