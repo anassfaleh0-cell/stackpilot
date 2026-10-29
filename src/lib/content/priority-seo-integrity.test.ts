@@ -30,6 +30,20 @@ describe("high-value editorial recovery sources", () => {
     expect(enterprise.body).toMatch(/technical/i)
   })
 
+  it.each(["best-remote-work-tools", "best-prototyping-tools"])(
+    "retains practical criteria and article text in %s",
+    (slug) => {
+      const guide = sourceRecord<{
+        body?: string; criteria?: string[]; comparisonTable?: { columns: string[]; rows: string[][] };
+      }>("best", slug)
+      expect(guide.criteria?.length).toBeGreaterThanOrEqual(6)
+      expect(guide.criteria?.every((criterion) => criterion.length >= 60)).toBe(true)
+      expect(String(guide.body).replace(/<[^>]*>/g, " ").split(/\s+/).filter(Boolean).length).toBeGreaterThan(350)
+      expect(guide.comparisonTable?.columns).toContain("Rating")
+      expect(guide.comparisonTable?.rows.length).toBeGreaterThanOrEqual(5)
+    },
+  )
+
   it("keeps SourceForge's provisional score while linking specific verified feature evidence", () => {
     const review = sourceRecord<{
       rating?: number; ratingVerified?: boolean; featuresVerified?: boolean;
