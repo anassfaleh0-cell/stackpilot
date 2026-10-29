@@ -37,6 +37,10 @@ const ROUTE_FOR_TYPE: Record<string, string> = {
   category: "category",
 }
 
+// All published slugs must be built ahead of time for reliable, CPU-safe crawling.
+export const dynamic = "force-static"
+export const dynamicParams = false
+
 export async function generateStaticParams() {
   return categories.map((cat) => ({ slug: cat.slug }))
 }
