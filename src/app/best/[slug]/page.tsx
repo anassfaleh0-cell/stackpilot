@@ -18,6 +18,11 @@ import { EditorialArticleBody } from "@/components/content/editorial-article-bod
 import { isNoindexed } from "@/lib/noindex"
 import { REDIRECTED_BEST_SLUGS } from "@/lib/sitemap/redirected-content"
 
+const VETTED_LONG_FORM_BEST_SLUGS = new Set([
+  "best-marketing-seo-enterprise",
+  "best-prototyping-tools",
+])
+
 function stripUnverifiedPriceClaims(value: string): string {
   return value
     .replace(/(?:starting at|starts at|from)?\s*[$€£]\s?\d[\d,]*(?:\.\d+)?(?:\s*\/\s*(?:user|seat|month|year|mo|yr))?/gi, "pricing not independently verified")
@@ -61,9 +66,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const hasUnverifiedPickData = page.picks.some((pick) => pick.ratingVerified !== true || pick.priceRangeVerified !== true)
   // Do not turn unverified ratings/prices into a search-result ranking claim.
   // Keep the snippet useful without naming a "leader" when the underlying data is not verified.
-  const metaDescription = hasUnverifiedPickData
-    ? `${page.title}. Compare the listed options against your workflow, feature requirements, integrations, and budget. Verify current features and plan terms directly with each vendor before choosing.`
-    : safeDescription.length < 120
+  const metaDescription = VETTED_LONG_FORM_BEST_SLUGS.has(slug)
+    ? safeDescription
+    : hasUnverifiedPickData
+      ? `${page.title}. Compare the listed options against your workflow, feature requirements, integrations, and budget. Verify current features and plan terms directly with each vendor before choosing.`
+      : safeDescription.length < 120
       ? `${safeDescription} Compare the listed options using the recorded details and criteria below. Verify current features and plan terms with each vendor.`
       : safeDescription
   const noindexed = isNoindexed("best", slug)
@@ -163,7 +170,7 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
   const relatedLinks = getRelatedByCategory(page.category, page.slug, 4)
   // Restore substantive editorial research only where the stored body was reviewed.
   // Do not surface unaudited legacy HTML across the entire catalog indiscriminately.
-  const editorialBody = ["best-marketing-seo-enterprise", "best-prototyping-tools"].includes(page.slug)
+  const editorialBody = VETTED_LONG_FORM_BEST_SLUGS.has(page.slug)
     ? page.body
     : undefined
 
