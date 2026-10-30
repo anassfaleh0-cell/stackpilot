@@ -69,7 +69,7 @@ describe("metadata helpers", () => {
     const title = "Marketing & SEO Software: Compare Tools by Workflow | PilotStack"
     const shortened = truncateAtWordBoundary(title, 60)
     expect(shortened).toBe("Marketing & SEO Software: Compare Tools by Workflow")
-    expect(shortened).not.toMatch(/[|:;,\\-–—]$/)
+    expect(shortened).not.toMatch(/[|:;,–—-]$/)
   })
 
   it("truncates long metadata at a word boundary", () => {

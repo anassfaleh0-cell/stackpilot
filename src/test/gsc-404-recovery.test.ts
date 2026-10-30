@@ -96,8 +96,8 @@ describe("Search Console 404 recovery", () => {
     }
   })
 
-  it("keeps intentionally unpublished alternatives drafts out of publication", () => {
-    for (const slug of ["clickup-alternatives", "grammarly-alternatives"]) {
+  it("keeps the still-unverified Grammarly alternatives draft out of publication", () => {
+    for (const slug of ["grammarly-alternatives"]) {
       const file = path.join(process.cwd(), "content", "alternatives", `${slug}.json`)
       const record = JSON.parse(fs.readFileSync(file, "utf8")) as { published?: boolean }
       expect(record.published, slug).toBe(false)
@@ -117,10 +117,35 @@ describe("Search Console 404 recovery", () => {
     expect(record.tool1Slug).toBe("acuity")
   })
 
+  it("restores the ClickUp alternatives guide as a unique indexable buyer resource", async () => {
+    const sourceFile = path.join(process.cwd(), "content", "alternatives", "clickup-alternatives.json")
+    const source = JSON.parse(fs.readFileSync(sourceFile, "utf8")) as {
+      published: boolean
+      publicationStatus: string
+      alternatives: { slug: string; description: string }[]
+      sections: { title: string; body: string }[]
+      faqs: { answer: string }[]
+    }
+    expect(source.published).toBe(true)
+    expect(source.publicationStatus).toBe("published")
+    expect(source.alternatives).toHaveLength(5)
+    expect(source.alternatives.every((alternative) =>
+      getReview(alternative.slug) !== null &&
+      alternative.description.length > 100 &&
+      !/leading project management platform offering competitive features/i.test(alternative.description)
+    )).toBe(true)
+    expect(source.sections.length).toBeGreaterThanOrEqual(5)
+    expect(source.faqs.length).toBeGreaterThanOrEqual(5)
+    expect(isContentAvailable("alternative", "clickup-alternatives")).toBe(true)
+    expect(isNoindexed("alternatives", "clickup-alternatives")).toBe(false)
+    expect(sitemap().some((entry) => new URL(entry.url).pathname === "/alternatives/clickup-alternatives")).toBe(true)
+    const redirects = await nextConfig.redirects?.()
+    expect(redirects).not.toContainEqual(expect.objectContaining({ source: "/alternatives/clickup-alternatives" }))
+  })
+
   it("routes intentionally unpublished alternatives drafts to their real indexable reviews", async () => {
     const redirects = await nextConfig.redirects?.()
     expect(redirects).toEqual(expect.arrayContaining([
-      expect.objectContaining({ source: "/alternatives/clickup-alternatives", destination: "/reviews/clickup", permanent: true }),
       expect.objectContaining({ source: "/alternatives/grammarly-alternatives", destination: "/reviews/grammarly", permanent: true }),
     ]))
     for (const slug of ["clickup", "grammarly"]) {
