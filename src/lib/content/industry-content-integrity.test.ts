@@ -20,8 +20,25 @@ describe("industry and software review editorial integrity", () => {
     expect(marketing?.body).not.toContain("Solutions Evaluated: 50+")
     expect(consulting?.title).toContain("Engagement Delivery")
     expect(consulting?.lastUpdated).toBe("2026-10-29")
-    // Legal legacy source remains in JSON, but cannot appear as malformed HTML.
-    expect(legal?.body).toBeUndefined()
+    // Legal retains the archived legacy JSON while serving a reviewed buyer guide.
+    expect(legal?.body).toContain("matter lifecycle")
+    expect(legal?.body).not.toContain("Solutions Evaluated: 50+")
+  })
+
+  it.each([
+    ["healthcare", "clinical systems"],
+    ["finance", "financial workflow"],
+    ["education", "learning and administration"],
+    ["construction", "estimate to final cost"],
+    ["retail", "order-to-cash"],
+    ["legal", "matter lifecycle"],
+  ])("serves sector-specific reviewed %s guide while preserving stored scores", (slug, phrase) => {
+    const record = getIndustry(slug)
+    expect(record?.body?.toLowerCase()).toContain(phrase)
+    expect(record?.body).not.toContain("Solutions Evaluated: 50+")
+    expect(record?.recommendations.length).toBeGreaterThanOrEqual(4)
+    expect(record?.recommendations.every((r) => typeof r.rating === "number" && r.rating > 0)).toBe(true)
+    expect(record?.lastUpdated).toBe("2026-10-30")
   })
 
   it.each([
