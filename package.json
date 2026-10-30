@@ -37,7 +37,8 @@
     "prebuild": "node scripts/generate-search-index.mjs",
     "pretest": "node scripts/generate-search-index.mjs",
     "audit:use-cases": "node scripts/audit-use-case-content-integrity.js",
-    "audit:entire-content": "node scripts/audit-entire-content-quality.cjs"
+    "audit:entire-content": "node scripts/audit-entire-content-quality.cjs",
+    "audit:editorial-risk": "node scripts/audit-editorial-risk.cjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
