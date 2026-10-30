@@ -25,7 +25,7 @@ const stages = [
   },
   {
     title: "Scoring & Ratings",
-    body: "PilotStack editorial scores are our own structured assessments, not third-party user ratings. They must use the published weighted rubric, cite current evidence for the dimensions scored, state the review date, and disclose whether hands-on testing was performed. Third-party ratings and review counts are separate fields and require a direct source, date checked, and actual count. We do not turn marketing claims into test results or imply that a product was hands-on tested when it was not. If evidence coverage is insufficient, we publish the review analysis and explicitly mark the editorial score as pending rather than invent a number.",
+    body: "PilotStack editorial scores are our own structured assessments, not third-party user ratings. They must use the published weighted rubric, cite current evidence for the dimensions scored, state the review date, and disclose whether hands-on testing was performed. Third-party ratings and review counts are separate fields and require a direct source, date checked, and actual count. We do not turn marketing claims into test results or imply that a product was hands-on tested when it was not. When the evidence trail is incomplete, older stored numerical editorial scores may remain visible with a provisional label; they are not independently verified or presented as measured hands-on test results. New score claims should not be invented without the required evidence.",
   },
   {
     title: "Consistency & Limits",
@@ -119,7 +119,7 @@ export default function MethodologyPage() {
 
               <h2 className="text-2xl font-bold mt-12 mb-6">Scoring Rubric</h2>
               <p className="text-muted-foreground mb-4">
-                Editorial scoring uses the weighted dimensions below (weights total 100%). Each dimension is scored from 1 to 5 against recorded evidence; the weighted sum is converted to a score out of 5. A numeric editorial score is published only after the assessment is complete and its date, evidence, and testing status are recorded. This is separate from third-party user ratings and review counts.
+                Editorial scoring uses the weighted dimensions below (weights total 100%). Each dimension is scored from 1 to 5 against recorded evidence; the weighted sum is converted to a score out of 5. The published rubric describes how a fully verified assessment should be calculated. Legacy stored numerical scores with incomplete supporting evidence may still appear as provisional on some pages; they do not establish that the rubric has been re-executed or hands-on testing performed. Scores are separate from third-party user ratings and review counts.
               </p>
               <div className="overflow-x-auto">
               <div className="border border-border rounded-xl overflow-hidden mb-8 min-w-[300px]">
