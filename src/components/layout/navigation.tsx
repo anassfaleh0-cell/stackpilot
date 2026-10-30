@@ -97,8 +97,7 @@ function Dropdown({ item, pathname }: { item: (typeof navConfig)[number]; pathna
         type="button"
         onClick={() => {
           cancelClose()
-          // Toggle on keyboard/touch click; pointer hover still opens the menu.
-          setOpen((wasOpen) => !wasOpen)
+          setOpen(true)
         }}
         onKeyDown={(event) => {
           if (event.key === "ArrowDown") {
