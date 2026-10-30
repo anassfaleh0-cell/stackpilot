@@ -36,7 +36,8 @@
     "seo:smoke": "node scripts/production-smoke-check.cjs",
     "prebuild": "node scripts/generate-search-index.mjs",
     "pretest": "node scripts/generate-search-index.mjs",
-    "audit:use-cases": "node scripts/audit-use-case-content-integrity.js"
+    "audit:use-cases": "node scripts/audit-use-case-content-integrity.js",
+    "audit:entire-content": "node scripts/audit-entire-content-quality.cjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
