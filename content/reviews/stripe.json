@@ -190,7 +190,7 @@
     },
     {
       "title": "Product Overview",
-      "body": "Stripe is a developer-first payment infrastructure that lets businesses accept, manage, and optimize online transactions globally. The platform provides 18 core features spanning Core, Platform, Risk, Omnichannel, Compliance, Business, Impact, Analytics, Finance, Developer, Integrations categories. At its foundation, Stripe enables organizations to stripe is a payment processing platform that provides the technical infrastructure for internet commerce with tools designed for business users. Stripe offers API access for custom integrations and supports Cloud deployment. Mobile apps are available for iOS and Android. AI capabilities include Stripe Radar AI fraud detection, AI-driven revenue optimization, Stripe Sigma.",
+      "body": "Stripe provides payment infrastructure for organizations that need online checkout, payment-method handling, subscriptions or eligible platform and marketplace flows. Core product choices include hosted Checkout and custom payment integrations, Billing for subscription lifecycles and Connect for connected-account models. These products have different implementation, pricing, geographic and eligibility requirements; they are not automatically bundled. The buyer should map its actual payment flow, supported countries, settlement needs, disputes, reporting and engineering resources before adopting a product. Official references: https://docs.stripe.com/payments, https://docs.stripe.com/billing/subscriptions/overview and https://docs.stripe.com/connect.",
       "type": "text"
     },
     {
@@ -215,7 +215,7 @@
     },
     {
       "title": "Key Features",
-      "body": "Stripe's payment infrastructure is the foundation, but its moat is the layer above: Stripe Billing handles subscription lifecycles with proration and dunning, Stripe Connect manages marketplace payouts with KYC compliance, and Stripe Radar blocks fraud across millions of merchants.",
+      "body": "Stripe's product selection spans payment collection, recurring billing, platform payments and fraud and dispute tooling. Checkout can reduce the need to build a payment page from scratch; Billing addresses subscription and invoice events; Connect supports eligible platforms with connected accounts; and risk products support additional fraud controls. Exact features, fees and availability vary by product, account and region. Validate capabilities through test transactions and current documentation rather than assuming that enabling one product provides every adjacent service. Sources: https://docs.stripe.com/payments and https://stripe.com/pricing.",
       "type": "list",
       "items": [
         "Stripe Billing provides a complete subscription management system including plan configuration, trial management, prorated upgrades/downgrades, metered billing, coupon application, dunning email automation, and Smart Retries that analyze card network decline codes to retry at optimal times.",
@@ -292,7 +292,7 @@
     },
     {
       "title": "Common Mistakes",
-      "body": "Five mistakes repeatedly emerge from Stripe integration audits. Testing with the same card numbers throughout development — using only the default 4242 test card means the team never validates handling of edge cases like 3D Secure authentication (requires specific test card numbers from Stripe's test card documentation), card declines for insufficient funds (4000000000009995), or expired cards (4000000000000069). Always test with every test card number that matches your payment method scenarios. Ignoring idempotency is the second most common error: without idempotency keys on API requests, network retries during timeouts can create duplicate charges that require manual refunds and customer communication. Third, mishandling webhook idempotency: Stripe delivers webhooks at least once, and identical events may be sent multiple times during infrastructure issues. Every webhook handler must check for duplicate event processing using the event ID. Fourth, using live mode API keys in client-side code — secret keys exposed in browser-side JavaScript or mobile app source code allow anyone to read and modify your Stripe account. Test keys start with sk_test_, live keys start with sk_live_, and production environments should use restricted keys whenever possible. Fifth, underestimating dispute management: businesses that ignore the dispute process or fail to respond within Stripe's 7-day evidence submission window lose 100% of disputed amounts plus the $15 fee.",
+      "body": "Several integration mistakes deserve a dedicated acceptance test. Do not treat a browser redirect to a success page as proof that an order has been paid; confirm the relevant payment or invoice state and test delayed events. Handle webhook signature verification and repeated or out-of-order delivery so the same event cannot fulfill an order twice. Keep secret API keys on the server with least-privilege access, and never ship them in browser assets. In test mode, exercise authentication-required payments, insufficient funds, refunds, disputes and network failures using official test scenarios. Confirm the evidence and response timeline for a disputed payment from the actual dispute notice rather than assuming a universal deadline. For recurring billing, test renewal failures, changes to subscription status and customer access. Use https://docs.stripe.com/ for current integration guidance.",
       "type": "text"
     },
     {
@@ -384,8 +384,8 @@
   "company": {
     "founded": 2010,
     "headquarters": "San Francisco, California",
-    "customers": "3,000,000+ businesses",
-    "employeeCount": "8,000+",
+    "customers": "Not independently verified",
+    "employeeCount": "Not independently verified",
     "industries": [
       "Payments",
       "Fintech",
@@ -436,8 +436,8 @@
     ],
     "learningCurve": "Medium",
     "migrationComplexity": "Medium",
-    "supportQuality": "4.1/5",
-    "releaseFrequency": "Weekly"
+    "supportQuality": "Not independently verified",
+    "releaseFrequency": "Not independently verified"
   },
   "difficulty": "Intermediate",
   "learningCurve": "Moderate — expect 1-3 days to become productive",
