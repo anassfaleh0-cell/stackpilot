@@ -182,7 +182,7 @@
     },
     {
       "title": "Key Features",
-      "body": "BambooHR's core value is not feature breadth but data cohesion. Employee records, time-off requests, performance reviews, and compensation data all live in one system without the integration tax of connecting separate HR tools.",
+      "body": "BambooHR combines employee records and HR workflow tools that may include time-off administration, onboarding, reporting and people-management products. The practical value is how consistently information moves between the tasks your organization needs. Check the exact package and add-ons before treating a capability as included; see https://www.bamboohr.com/pricing/.",
       "type": "list",
       "items": [
         "Employee records provide a centralized database with custom fields, document storage, org charts, and employment history tracking across the full tenure from hire to termination.",
@@ -194,7 +194,7 @@
     },
     {
       "title": "Feature Deep Dive",
-      "body": "Three features define BambooHR's core value. The HR Information System centralizes employee records into a searchable database with custom fields, document attachments, org charts, and full employment history from hire to termination. HR teams track compensation changes, job title progressions, department transfers, and training certifications in a single record with role-based access controls. The Applicant Tracking System manages the full recruiting lifecycle: job posting to free and premium boards, candidate pipeline management with Kanban-style stages, interview scheduling with calendar sync, structured interview scorecards, offer letter generation with e-signatures, and onboarding task assignment triggered upon offer acceptance. A typical workflow posts a job, candidates move through screening and interview stages, interviewers submit scorecard feedback, and the selected candidate receives a digital offer letter flowing directly into onboarding checklists. The Performance Management module supports customizable review cycles with self-evaluations, manager assessments, goal tracking, and peer recognition, with review frequency, rating scales, and question sets configured per department.",
+      "body": "For the employee record system, test creating a new employee, attaching a document, changing a job role and restricting compensation details to authorized users. For hiring and onboarding, use a sample vacancy and test candidate stages, approvals, offer steps and conversion to an employee record, confirming that each feature is part of your package. For performance management, model a review cycle and assess manager and employee permissions, reminders and exports. Use the official plan comparison for current feature availability: https://www.bamboohr.com/pricing/. A successful pilot should demonstrate the exact workflow without assuming unsupported job-board, API or advanced scoring capabilities.",
       "type": "text"
     },
     {
@@ -274,7 +274,7 @@
     },
     {
       "title": "Common Mistakes",
-      "body": "Four mistakes frequently cited by BambooHR customers. Underinvesting in data migration ” organizations that rush employee record import without cleaning legacy data end up with incorrect hire dates, missing emergency contacts, and stale compensation histories that require months of retroactive corrections. The rule: budget 2-3 weeks for data audit and cleanup before the first CSV import, not after. Skipping permission configuration ” deploying BambooHR with default permissions means every manager can see compensation data for their entire department and every employee can access org-wide directory information; reviewing and restricting permission levels before go-live prevents privacy incidents. Not configuring time-off policy rules properly ” incorrectly set accrual frequencies (annual vs quarterly vs monthly), carryover maximums, or proration rules for mid-year hires result in employees accruing incorrect PTO balances that require manual adjustment and erode trust in the system. Treating BambooHR as a full HR department ” the platform handles records, time-off, and hiring well, but organizations that expect it to replace performance management consulting, compensation strategy, and employee relations expertise find its limitations frustrating. BambooHR is a tool, not a replacement for HR expertise.",
+      "body": "Common procurement and implementation risks include importing inconsistent employee records, treating defaults as approved access policies, misconfiguring leave accrual rules and expecting software to replace HR judgment. Audit fields and leave balances before import, then use sample accounts to verify who can see compensation, personal details and historical records. Document each leave rule and test an employee joining partway through the year, a policy change and carryover into a new year. In onboarding and offboarding, identify which steps remain manual or depend on external providers. Finally, involve HR, payroll, finance, security and an employee representative in sign-off. This checklist reflects general implementation risks; it is not a quantified BambooHR customer-failure study.",
       "type": "text"
     },
     {
