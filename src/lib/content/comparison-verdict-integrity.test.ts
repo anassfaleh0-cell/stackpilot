@@ -14,7 +14,8 @@ describe("comparison verdict integrity", () => {
     const cmp = getComparison("asana-vs-clickup")
     expect(cmp?.verdict).toContain("Asana")
     expect(cmp?.verdict).toContain("ClickUp")
-    expect(cmp?.verdict).toContain("structured project-management approach")
+    expect(cmp?.verdict).toContain("coordinating work across projects")
+    expect(cmp?.verdict).toContain("tasks and working documents")
   })
 
   it("does not manufacture a verified winner for mismatched software categories", () => {

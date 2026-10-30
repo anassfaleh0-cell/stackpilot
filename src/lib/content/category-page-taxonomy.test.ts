@@ -8,7 +8,7 @@ describe("category page taxonomy regression", () => {
     expect(source).toContain('isContentAvailable("review", r.slug) && categoryMatches(r.category, category.name)')
     expect(source).not.toContain('isContentAvailable("review", r.slug) && r.category === category.name')
     expect(source).toContain('categoryMatches(g.category, category.name)')
-    expect(source).toContain('categoryMatches(c.category, category.name)')
+    expect(source).toContain('getComparisonsByCategory(category.name)')
     expect(source).toContain('categoryMatches(p.category, category.name)')
     expect(source).toContain('categoryMatches(t.category, category.name)')
     expect(source).toContain('isContentAvailable("blog", p.slug)')

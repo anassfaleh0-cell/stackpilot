@@ -5,7 +5,9 @@ import { getRelevantComparisonSlugs } from "./related-comparisons"
 function comparison(slug: string, left: string, right: string, category = "Developer Tools"): ComparisonContent {
   return {
     slug, tool1Slug: left, tool2Slug: right, category, relatedComparisons: [],
-  } as ComparisonContent
+    title: `${left} vs ${right}`, description: "Test comparison", tool1: left, tool2: right,
+    winner: null, features: [], verdict: "Test decision", faqs: [], lastUpdated: "2026-10-30",
+  }
 }
 
 describe("getRelevantComparisonSlugs", () => {

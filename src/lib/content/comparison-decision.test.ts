@@ -234,3 +234,20 @@ describe("getComparisonDisplayCopy", () => {
     expect(copy.verdict).toBe("Test representative workflows and confirm permissions before switching.")
   })
 })
+
+describe("negated winner disclosures", () => {
+  const input = {
+    tool1: "Asana", tool2: "ClickUp",
+    tool1Category: "Project Management", tool2Category: "Project Management",
+    decisionGuide: true, winnerVerified: false,
+    description: "Compare approval workflows and shared documents.",
+  }
+  it("preserves a specific conclusion that disclaims an overall winner", () => {
+    const verdict = "There is no universal overall winner. Asana suits project oversight; ClickUp suits shared task documents."
+    expect(getComparisonDisplayCopy({ ...input, verdict }).verdict).toBe(verdict)
+  })
+  it("still rejects a positive winner claim after a negative clause", () => {
+    const verdict = "There is no universal overall winner. Asana wins overall."
+    expect(getComparisonDisplayCopy({ ...input, verdict }).verdict).not.toBe(verdict)
+  })
+})

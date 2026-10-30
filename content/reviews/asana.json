@@ -277,5 +277,23 @@
   "companyFactsVerified": false,
   "featuresVerified": false,
   "wordCount": 305,
-  "scoreBasis": "Score provenance: this is a stored PilotStack editorial score, not a third-party review average. The score and category dimensions are retained for transparency but have not yet completed an evidence-and-calculation audit; treat them as provisional and verify current capabilities against the vendor's official documentation before relying on the rating."
+  "scoreBasis": "Score provenance: this is a stored PilotStack editorial score, not a third-party review average. The score and category dimensions are retained for transparency but have not yet completed an evidence-and-calculation audit; treat them as provisional and verify current capabilities against the vendor's official documentation before relying on the rating.",
+  "sourceEvidence": {
+    "checkedAt": "2026-10-30",
+    "summary": "Asana suits teams organizing delivery across projects. Plan selection changes when work moves from an individual project to portfolio oversight.",
+    "facts": [
+      {
+        "statement": "Personal supports two users. Starter includes Timeline, Gantt, forms, custom fields and reporting dashboards.",
+        "sourceUrl": "https://asana.com/pricing",
+        "sourceLabel": "Asana plan comparison"
+      },
+      {
+        "statement": "Advanced adds portfolios, goals, approvals and proofing; SAML and SCIM are Enterprise features.",
+        "sourceUrl": "https://asana.com/pricing",
+        "sourceLabel": "Asana feature tiers"
+      }
+    ],
+    "buyerImplication": "For an intake-to-delivery workflow, first model who submits requests, who approves them and who needs visibility across projects. Do not price a portfolio reporting requirement using the entry tier. For a client-facing project, test guest permissions with a non-sensitive sample before inviting customers. Keep the acceptance criteria specific: one owner, one deadline, one approval and one report that a manager can act on.",
+    "limitation": "Scope: a review of vendor documentation, not a hands-on performance test. These findings do not verify the legacy numerical score. Plans can change; confirm the quote and regional terms before purchase."
+  }
 }

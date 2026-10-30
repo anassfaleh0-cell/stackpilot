@@ -1,4 +1,13 @@
+export interface SourceEvidence {
+  checkedAt: string
+  summary: string
+  facts: { statement: string; sourceUrl: string; sourceLabel: string }[]
+  buyerImplication: string
+  limitation: string
+}
+
 export interface ReviewContent {
+  sourceEvidence?: SourceEvidence
   slug: string
   name: string
   tagline: string
@@ -96,6 +105,7 @@ export interface FAQItem {
 }
 
 export interface ComparisonContent {
+  sourceEvidence?: SourceEvidence
   slug: string
   title: string
   description: string

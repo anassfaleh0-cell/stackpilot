@@ -268,3 +268,17 @@ describe("Phase 5O-B-1: internal link discovery", () => {
   })
 
 })
+
+
+it("keeps review comparison links about that product and comparable categories", () => {
+  const result = getRelatedByCategory("Project Management", "linear", 20)
+  const comparisons = new Map(getAllComparisons().map((item) => [item.slug, item]))
+  const reviews = new Map(getAllReviews().map((item) => [item.slug, item]))
+  expect(result.comparisons.length).toBeGreaterThan(0)
+  for (const item of result.comparisons) {
+    const comparison = comparisons.get(item.slug)!
+    expect([comparison.tool1Slug, comparison.tool2Slug]).toContain("linear")
+    expect(reviews.get(comparison.tool1Slug)?.category).toBe(reviews.get(comparison.tool2Slug)?.category)
+  }
+  expect(result.comparisons.some((item) => item.slug === "basecamp-vs-greenhouse")).toBe(false)
+})

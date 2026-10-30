@@ -37,7 +37,7 @@ export function getRelevantComparisonSlugs(
     })
     .map((candidate) => ({
       slug: candidate.slug,
-      relevance: (curated.has(candidate.slug) ? 100 : 0) +
+      relevance: ((current.relatedComparisons || []).includes(candidate.slug) ? 200 : 100) +
         (candidate.category === current.category ? 20 : 0) +
         (candidate.tool1Slug === current.tool1Slug || candidate.tool2Slug === current.tool1Slug ? 4 : 0) +
         (candidate.tool1Slug === current.tool2Slug || candidate.tool2Slug === current.tool2Slug ? 4 : 0),
