@@ -19,6 +19,7 @@ import { isNoindexed } from "@/lib/noindex"
 import { REDIRECTED_BEST_SLUGS } from "@/lib/sitemap/redirected-content"
 
 const VETTED_LONG_FORM_BEST_SLUGS = new Set([
+  "best-seo-tools", // Editorial replacement body verified for safe, evidence-aware rendering.
   "best-marketing-seo-enterprise",
   "best-prototyping-tools",
   "best-remote-work-tools",
