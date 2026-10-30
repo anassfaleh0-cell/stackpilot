@@ -98,7 +98,10 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
   const originalToolReview = getReview(alt.toolSlug)
   const visibleAlternatives = (alt.alternatives || [])
     .filter((item) => isContentAvailable("review", item.slug))
-    .map((item) => ({ ...item, description: alternativeDescription(item) }))
+    .map((item) => {
+      const review = getReview(item.slug)
+      return { ...item, description: alternativeDescription(item), editorialRating: review?.rating, ratingVerified: review?.ratingVerified === true }
+    })
   const pageDescription = `Compare ${visibleAlternatives.length} alternatives to ${alt.toolName} by workflow fit, feature requirements, integrations, migration needs, and current vendor terms. Ratings and prices are shown as verified only when supporting evidence can be checked.`
   const authoredFaqs = (alt.faqs || []).filter((faq) => !isBoilerplateAlternativeCopy(faq.answer) && !isBoilerplateAlternativeCopy(faq.question))
   const visibleFaqs = authoredFaqs.length >= 3
@@ -189,13 +192,15 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                       <div className="p-5">
                         <div className="flex items-start justify-between mb-2">
                           <Link href={`/reviews/${item.slug}`} className="text-lg font-bold hover:text-primary transition-colors">{item.name}</Link>
-                          {getReview(item.slug)?.ratingVerified === true && typeof getReview(item.slug)?.rating === "number" ? (
-                            <div className="flex items-center gap-1 text-sm">
-                              <Star size={14} className="fill-accent text-accent" />
-                              <span className="font-semibold">{getReview(item.slug)?.rating}</span>
-                              <span className="text-muted-foreground">/5</span>
+                          {typeof item.editorialRating === "number" && Number.isFinite(item.editorialRating) && item.editorialRating > 0 && item.editorialRating <= 5 ? (
+                            <div className="text-right">
+                              <div className="flex items-center justify-end gap-1 text-sm">
+                                <Star size={14} className={item.ratingVerified ? "fill-accent text-accent" : "text-muted-foreground"} />
+                                <span className="font-semibold">{item.editorialRating}/5</span>
+                              </div>
+                              <span className="text-[10px] text-muted-foreground">{item.ratingVerified ? "Verified editorial score" : "Provisional editorial score"}</span>
                             </div>
-                          ) : <span className="text-xs text-muted-foreground">Rating not verified</span>}
+                          ) : <span className="text-xs text-muted-foreground">Score not recorded</span>}
                         </div>
                         <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
                         <Link href={`/reviews/${item.slug}`} className="inline-flex items-center gap-1 text-sm text-primary hover:underline mt-2">
@@ -268,7 +273,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                       {visibleAlternatives.slice(0, 5).map((item) => (
                         <Link key={item.slug} href={`/reviews/${item.slug}`} className="flex items-center justify-between text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                           <span>{item.name}</span>
-                          <span className="text-xs font-medium">{getReview(item.slug)?.ratingVerified === true && typeof getReview(item.slug)?.rating === "number" ? `${getReview(item.slug)?.rating}/5` : "Rating not verified"}</span>
+                          <span className="text-xs font-medium">{typeof item.editorialRating === "number" && Number.isFinite(item.editorialRating) && item.editorialRating > 0 && item.editorialRating <= 5 ? `${item.editorialRating}/5 ${item.ratingVerified ? "(verified editorial)" : "(provisional editorial)"}` : "Score not recorded"}</span>
                         </Link>
                       ))}
                     </div>
