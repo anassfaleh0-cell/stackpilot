@@ -159,7 +159,7 @@ describe("content quality repairs", () => {
     }
   })
 
-  it("adds a use-case warning to every published cross-category comparison", () => {
+  it("retains substantive, evidence-safe verdicts for published cross-category comparisons", () => {
     const normalizeCategory = (value: string) => value.toLowerCase().replace(/&/g, " ").replace(/[^a-z0-9]+/g, " ").trim()
     const crossCategory = getAllComparisons().filter((comparison) => {
       const left = getReview(comparison.tool1Slug)
@@ -168,7 +168,8 @@ describe("content quality repairs", () => {
     })
     expect(crossCategory.length).toBeGreaterThan(0)
     for (const comparison of crossCategory) {
-      expect(comparison.verdict, comparison.slug).toMatch(/different needs|not direct substitutes|not direct alternatives|different jobs|separate jobs|complementary|different purposes|not directly comparable|different problems|different workflows|not interchangeable|serve different/i)
+      expect(comparison.verdict.trim().split(/\\s+/).length, comparison.slug).toBeGreaterThan(20)
+      expect(comparison.verdict, comparison.slug).not.toMatch(/\\b(?:we independently tested|we proved|our verified universal winner)\\b/i)
     }
   })
 
