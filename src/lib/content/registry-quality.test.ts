@@ -168,8 +168,8 @@ describe("content quality repairs", () => {
     })
     expect(crossCategory.length).toBeGreaterThan(0)
     for (const comparison of crossCategory) {
-      expect(comparison.verdict.trim().split(/\\s+/).length, comparison.slug).toBeGreaterThan(20)
-      expect(comparison.verdict, comparison.slug).not.toMatch(/\\b(?:we independently tested|we proved|our verified universal winner)\\b/i)
+      expect(comparison.verdict.trim().split(/\s+/).length, comparison.slug).toBeGreaterThan(20)
+      expect(comparison.verdict, comparison.slug).not.toMatch(/\b(?:we independently tested|we proved|our verified universal winner)\b/i)
     }
   })
 
