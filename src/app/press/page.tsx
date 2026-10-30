@@ -1,14 +1,10 @@
 import { Container } from "@/components/ui/container"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
-import { site } from "@/lib/constants"
+import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import Link from "next/link"
 import { Download, ExternalLink, Users, Newspaper, FileText, Image as ImageIcon } from "lucide-react"
-import sitemapRoute from "@/app/sitemap"
-
-const publishedPages = sitemapRoute().length
-
 export const metadata = createMetadata({
   title: "Press & Media — PilotStack News, Logos & Interviews",
   description: "Press resources, brand assets, editorial policies, and contact information for journalists, analysts, and partners covering PilotStack.",
@@ -46,12 +42,12 @@ export default function PressPage() {
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center gap-2"><Newspaper size={20} /> About PilotStack</h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is an independently operated software research publication. We publish reviews, comparisons, and buying resources across 12 software categories. Some product fields in the underlying dataset are provisional or unverified; each page’s evidence-status notes should be read before relying on a recorded rating, review count, feature, or price.</p>
+            <p className="text-muted-foreground leading-relaxed mb-4">PilotStack is an independently operated software research publication. We publish reviews, comparisons, and buying resources across {categories.length} software categories. Some product fields in the underlying dataset are provisional or unverified; each page’s evidence-status notes should be read before relying on a recorded rating, review count, feature, or price.</p>
             <div className="grid sm:grid-cols-2 gap-4 text-sm">
-              <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">{publishedPages}</div><div className="text-muted-foreground">URLs listed in sitemap</div></div>
-              <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">12</div><div className="text-muted-foreground">Software categories</div></div>
+              <div className="p-4 rounded-xl border border-border"><Link href="/reviews" className="font-bold text-lg text-primary hover:underline">Browse reviews</Link><div className="text-muted-foreground">Software research library</div></div>
+              <div className="p-4 rounded-xl border border-border"><div className="font-bold text-2xl text-primary">{categories.length}</div><div className="text-muted-foreground">Software categories</div></div>
             </div>
-            <p className="text-xs text-muted-foreground mt-3">The URL count is generated from the sitemap and is not a measure of readership, independent validation, or editorial depth.</p>
+            <p className="text-xs text-muted-foreground mt-3">The catalog is organized for discovery; the number of categories is not a claim about independently tested products or audited review quality.</p>
           </section>
 
           <section className="mb-12">
