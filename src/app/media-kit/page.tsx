@@ -1,16 +1,10 @@
 import { Container } from "@/components/ui/container"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld"
-import { site } from "@/lib/constants"
+import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
 import Link from "next/link"
 import { ExternalLink, Mail } from "lucide-react"
-import sitemapRoute from "@/app/sitemap"
-
-const sitemapEntries = sitemapRoute()
-const countIn = (segment: string) => sitemapEntries.filter((e) => e.url.includes(segment)).length
-const totalUrls = sitemapEntries.length
-
 export const metadata = createMetadata({
   title: "Media Kit — PilotStack Brand Assets & Press Guidelines",
   description: "PilotStack fact sheet, editorial scope, brand resources, and contact information for journalists and analysts.",
@@ -18,10 +12,10 @@ export const metadata = createMetadata({
 })
 
 const stats = [
-  { value: String(totalUrls), label: "URLs listed in sitemap" },
-  { value: String(countIn("/reviews/")), label: "Review URLs in sitemap" },
-  { value: "12", label: "Software categories" },
-  { value: String(countIn("/comparisons/")), label: "Comparison URLs in sitemap" },
+  { value: String(categories.length), label: "Software categories" },
+  { value: "Reviews", label: "Product profiles" },
+  { value: "Comparisons", label: "Head-to-head buyer guides" },
+  { value: "Guides", label: "Workflow resources" },
 ]
 
 const milestones = [
@@ -41,7 +35,7 @@ export default function MediaKitPage() {
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold tracking-tight mb-4">Fact Sheet</h2>
-            <p className="text-sm text-muted-foreground mb-4">Counts below are generated from the current sitemap. They describe listed URLs, not independently audited article quality or readership.</p>
+            <p className="text-sm text-muted-foreground mb-4">This fact sheet describes PilotStack's public coverage areas. Category totals are derived from navigation data; no claim is made about audited reviews, independently tested products, or audience size.</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {stats.map((s) => (
                 <div key={s.label} className="p-4 rounded-xl border border-border text-center">
