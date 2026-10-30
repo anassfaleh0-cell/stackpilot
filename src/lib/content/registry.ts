@@ -911,7 +911,9 @@ export function getComparison(slug: string): ComparisonContent | null {
     comparisonCache.set(slug, null)
     return null
   }
-  const rawFeatures = cmp.features.slice(0, 20)
+  // Some older JSON records omit features entirely; never let one malformed record
+  // abort static generation for the entire comparison catalog.
+  const rawFeatures = Array.isArray(cmp.features) ? cmp.features.slice(0, 20) : []
   // Boolean-only rows without supporting detail are not sufficient evidence for scored head-to-head claims.
   const hasUnverifiedBooleanOnlyFeatures = rawFeatures.length > 0 && rawFeatures.every((f) =>
     typeof f.tool1 === "boolean" &&
