@@ -7,6 +7,7 @@ on:
       - "content/**"
       - "src/**"
       - "scripts/audit-content-quality.cjs"
+      - "scripts/adsense-readiness-check.cjs"
       - ".github/workflows/editorial-quality-ci.yml"
   workflow_dispatch:
 
@@ -37,6 +38,7 @@ jobs:
 
       - name: Verify read-only content audit syntax
         run: node --check scripts/audit-content-quality.cjs
+          node --check scripts/adsense-readiness-check.cjs
 
       - name: Test source links, reviews, comparisons and buyer guides
         run: |
@@ -53,6 +55,9 @@ jobs:
 
       - name: Audit the whole content corpus without changing any page
         run: node scripts/audit-content-quality.cjs --json "$RUNNER_TEMP/pilotstack-content-quality.json"
+
+      - name: Verify AdSense source-level prerequisites
+        run: node scripts/adsense-readiness-check.cjs
 
       - name: Upload quality backlog
         uses: actions/upload-artifact@v4
