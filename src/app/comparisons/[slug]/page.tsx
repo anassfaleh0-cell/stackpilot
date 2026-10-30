@@ -1,3 +1,4 @@
+import { SourceEvidencePanel } from "@/components/content/source-evidence"
 import { Container } from "@/components/ui/container"
 import { Badge } from "@/components/ui/badge"
 import { Breadcrumbs } from "@/components/seo/breadcrumbs"
@@ -209,7 +210,9 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <p className="text-sm text-muted-foreground">{displayCopy.description}</p>
           </div>
 
-          <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
+          <SourceEvidencePanel evidence={cmp.sourceEvidence} />
+
+              <div className="key-takeaways mb-6 p-4 bg-muted-bg rounded-xl border border-border">
             <h2 className="text-base font-semibold mb-2">Key Takeaways</h2>
             <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
               <li>Category: {cmp.category}</li>

@@ -51,7 +51,7 @@ function renderSegments(text: string, baseKey: number): ReactNode[] {
     const href = INTERNAL_HREF_ALIASES[originalHref] || originalHref
     const label = match[2].trim() ? match[2] : getReadableLinkFallbackLabel(originalHref)
     const children = label.includes("<a ") ? renderSegments(label, key) : label
-    if (/^https?:\\/\\//i.test(href)) {
+    if (/^https?:\/\//i.test(href)) {
       parts.push(
         <a key={key++} href={href} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-primary transition-colors">
           {children}

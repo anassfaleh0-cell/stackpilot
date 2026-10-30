@@ -255,11 +255,21 @@ export function getRelatedByCategory(
     compare: (a, b) => (b.rating || 0) - (a.rating || 0),
   }, excludeSlug, maxPerType)
 
+  const reviewBySlug = new Map(reviewsRaw.map((review) => [review.slug, review]))
+  const currentReview = reviewBySlug.get(excludeSlug)
   const comparisons = buildBucket({
     type: "comparison",
     source: comparisonsRaw,
-    matchOf: (c): MatchKind | null =>
-      sameCategory(c.category, category) || c.secondaryCategories?.some((candidate) => sameCategory(candidate, category)) ? "direct" : null,
+    matchOf: (c): MatchKind | null => {
+      if (!currentReview) return sameCategory(c.category, category) || c.secondaryCategories?.some((candidate) => sameCategory(candidate, category)) ? "direct" : null
+      const first = reviewBySlug.get(c.tool1Slug)
+      const second = reviewBySlug.get(c.tool2Slug)
+      // A broad category tag alone does not establish a useful comparison.
+      if (!first || !second || !sameCategory(first.category, second.category)) return null
+      if (!sameCategory(first.category, category)) return null
+      if (currentReview && c.tool1Slug !== currentReview.slug && c.tool2Slug !== currentReview.slug) return null
+      return "direct"
+    },
     toItem: (c) => ({ slug: c.slug, title: c.title, type: "comparison", category: c.category }),
     compare: (a, b) => (b.lastUpdated || "").localeCompare(a.lastUpdated || ""),
   }, excludeSlug, maxPerType)

@@ -88,6 +88,14 @@ export interface ComparisonDisplayCopy {
 const UNSUPPORTED_SCORE_OR_PRICE = /\b\d(?:\.\d)?\s*\/\s*5\b|[$€£]\s?\d|\b(?:pricing starts|starts at|starting at|from free)\b/i
 const UNSUPPORTED_WINNER_CLAIM = /\b(?:our overall pick|overall pick|overall winner|our recommendation|recommended for most|higher user rating|wins overall)\b/i
 
+/** Negated winner language discloses a limitation; it is not an endorsement.
+ * Strip only the narrow negative clause so a later positive claim is still checked.
+ */
+export function hasUnsupportedWinnerClaim(value: string): boolean {
+  const claims = value.replace(/\b(?:no|not an?|without an?|does not (?:establish|name|declare)(?: an?)?)\s+(?:(?:verified|universal|auditable|evidence-backed)\s+)*(?:overall winner|overall pick|our recommendation)\b/gi, "")
+  return UNSUPPORTED_WINNER_CLAIM.test(claims)
+}
+
 /**
  * Prevent unsupported comparison scores, prices, and winner claims from appearing
  * in page copy, metadata, or structured data. Cross-category pairs use role-based
@@ -102,7 +110,7 @@ export function getComparisonDisplayCopy(input: ComparisonDisplayCopyInput): Com
   const containsUnsupportedMetrics = UNSUPPORTED_SCORE_OR_PRICE.test(input.description) ||
     UNSUPPORTED_SCORE_OR_PRICE.test(input.verdict)
   const containsUnsupportedWinner = !winnerVerifiedForComparison && (
-    UNSUPPORTED_WINNER_CLAIM.test(input.description) || UNSUPPORTED_WINNER_CLAIM.test(input.verdict)
+    hasUnsupportedWinnerClaim(input.description) || hasUnsupportedWinnerClaim(input.verdict)
   )
 
   if (input.decisionGuide === true && !containsUnsupportedMetrics && !containsUnsupportedWinner) {

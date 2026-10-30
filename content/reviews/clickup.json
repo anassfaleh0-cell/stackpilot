@@ -394,5 +394,23 @@
   "companyFactsVerified": false,
   "scoreBasis": "Score provenance: this is a stored PilotStack editorial score, not a third-party review average. The score and category dimensions are retained for transparency but have not yet completed an evidence-and-calculation audit; treat them as provisional and verify current capabilities against the vendor's official documentation before relying on the rating.",
   "featuresVerified": false,
-  "seoDescription": "ClickUp combines tasks, workspaces, project views, Docs, and dashboards in a configurable work-management hierarchy. This review examines hierarchy decisions,"
+  "seoDescription": "ClickUp combines tasks, workspaces, project views, Docs, and dashboards in a configurable work-management hierarchy. This review examines hierarchy decisions,",
+  "sourceEvidence": {
+    "checkedAt": "2026-10-30",
+    "summary": "ClickUp combines project work with documentation. Its plan limits matter when many users create files or recurring automations.",
+    "facts": [
+      {
+        "statement": "Free Forever lists unlimited members, collaborative Docs and 60 MB storage.",
+        "sourceUrl": "https://clickup.com/pricing",
+        "sourceLabel": "ClickUp plan comparison"
+      },
+      {
+        "statement": "Core lists 1,000 automations per month; Business lists 10,000. Advanced SSO, SCIM and SAML appear under Enterprise.",
+        "sourceUrl": "https://clickup.com/pricing",
+        "sourceLabel": "ClickUp automation and identity tiers"
+      }
+    ],
+    "buyerImplication": "A free workspace may fit lightweight coordination but a file-heavy process needs a storage budget before rollout. Estimate automations from events, not headcount: recurring updates and integrations can create multiple actions for one task. Assign one workspace administrator to define fields and statuses; otherwise consolidation can shift the burden from switching apps to maintaining configuration.",
+    "limitation": "Scope: a review of vendor documentation, not a hands-on performance test. These findings do not verify the legacy numerical score. Plans can change; confirm the quote and regional terms before purchase."
+  }
 }

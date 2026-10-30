@@ -849,6 +849,11 @@ function selectComparisonVerdict(cmp: ComparisonContent, fallback: string): stri
   )
   const unsafe = /(?:we (?:personally |independently )?(?:tested|benchmarked|evaluated) (?:each|both)|guaranteed winner|\b\d+(?:\.\d+)?\s*\/\s*5|[$€£]\s?\d+(?:[.,]\d+)?)/i.test(authored)
   if (!namesPresent || unsafe) return fallback
+  const left = getReview(cmp.tool1Slug)
+  const right = getReview(cmp.tool2Slug)
+  if (left?.category && right?.category && left.category !== right.category && !authored.includes("These products may address different needs")) {
+    return `These products may address different needs: ${left.category} and ${right.category}. ${authored}`
+  }
   return authored
 }
 

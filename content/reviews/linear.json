@@ -375,5 +375,23 @@
   "ratingsVerified": false,
   "featuresVerified": false,
   "companyFactsVerified": false,
-  "scoreBasis": "Stored PilotStack editorial score (4.8/5), not a third-party review average. It remains a provisional editorial assessment rather than a measured benchmark. Evaluate the current product against issue intake, prioritization, cycles or milestones, cross-team visibility, integrations, permissions, reporting, data export and the plan needed by the actual team."
+  "scoreBasis": "Stored PilotStack editorial score (4.8/5), not a third-party review average. It remains a provisional editorial assessment rather than a measured benchmark. Evaluate the current product against issue intake, prioritization, cycles or milestones, cross-team visibility, integrations, permissions, reporting, data export and the plan needed by the actual team.",
+  "sourceEvidence": {
+    "checkedAt": "2026-10-30",
+    "summary": "Linear is most relevant when engineering delivery is the main workflow. The first purchasing decision is whether team boundaries, private access or identity management require a paid tier.",
+    "facts": [
+      {
+        "statement": "Free includes two teams and 250 issues; Basic lists five teams and unlimited issues.",
+        "sourceUrl": "https://linear.app/pricing",
+        "sourceLabel": "Linear plan comparison"
+      },
+      {
+        "statement": "Business adds private teams and guests. SAML and SCIM appear under Enterprise.",
+        "sourceUrl": "https://linear.app/pricing",
+        "sourceLabel": "Linear administration tiers"
+      }
+    ],
+    "buyerImplication": "A small product group can start by mapping its real teams and issue backlog to these limits. An agency should resolve client isolation before importing live customer work. A company requiring centralized employee provisioning should obtain the Enterprise quote before comparing seat costs. These are separate buying constraints: a larger issue allowance does not solve a permissions requirement.",
+    "limitation": "Scope: a review of vendor documentation, not a hands-on performance test. These findings do not verify the legacy numerical score. Plans can change; confirm the quote and regional terms before purchase."
+  }
 }

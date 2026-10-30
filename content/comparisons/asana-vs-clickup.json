@@ -1,7 +1,7 @@
 {
   "slug": "asana-vs-clickup",
   "title": "Asana vs ClickUp",
-  "description": "Asana vs ClickUp: compare project planning, views, automations, reporting, documentation, permissions, and total cost. This guide does not claim independent product benchmarking or a universal winner; verify current plan details and test both products against the same workflow.",
+  "description": "Asana vs ClickUp: choose between cross-project coordination and a workspace combining tasks and documents. Compare intake, approvals, reporting, storage and automation limits.",
   "category": "Project Management",
   "tool1": "Asana",
   "tool2": "ClickUp",
@@ -87,7 +87,7 @@
       "tool2Detail": "Prices and packaging can change by country, currency, billing term, and plan. Verify the quote at https://clickup.com/pricing on purchase day and calculate cost for the exact seat count."
     }
   ],
-  "verdict": "There is no universal winner without knowing the team's workflow and plan requirements. Asana may be a better starting point for teams that prefer a structured project-management approach; ClickUp may suit teams that want a more configurable workspace combining tasks and documentation. These are decision hypotheses, not independently tested conclusions. Run the same pilot in both products, verify every required feature on the exact plan, and compare adoption, administration, export behavior, and total annual cost.",
+  "verdict": "Choose Asana when your main problem is coordinating work across projects and managing approvals. Choose ClickUp when keeping tasks and working documents in one workspace is the priority and someone can own its configuration. For either choice, budget for the tier that covers the actual bottleneck: portfolio oversight, document storage, automation volume or identity management. This is an editorial fit recommendation based on documentation, not a hands-on speed or usability benchmark.",
   "faqs": [
     {
       "question": "Is Asana or ClickUp cheaper?",
@@ -143,7 +143,25 @@
     "best-project-management-software-2026",
     "saas-metrics-guide"
   ],
-  "lastUpdated": "2026-10-24",
+  "lastUpdated": "2026-10-30",
   "decisionGuide": true,
-  "winnerVerified": false
+  "winnerVerified": false,
+  "sourceEvidence": {
+    "checkedAt": "2026-10-30",
+    "summary": "Use-case picks: Asana for project oversight and approvals; ClickUp for teams organizing tasks alongside shared documents. These recommendations follow the documented workflow differences below.",
+    "facts": [
+      {
+        "statement": "Asana places portfolios and approvals in Advanced; its Personal plan supports two users.",
+        "sourceUrl": "https://asana.com/pricing",
+        "sourceLabel": "Asana official plans"
+      },
+      {
+        "statement": "ClickUp includes collaborative Docs and unlimited members in Free Forever, with a 60 MB storage limit.",
+        "sourceUrl": "https://clickup.com/pricing",
+        "sourceLabel": "ClickUp official plans"
+      }
+    ],
+    "buyerImplication": "For a three-person team, a free-seat comparison favors ClickUp, but file-heavy work may still require an upgrade. For a manager overseeing several projects, compare the reporting and approval workflow before comparing subscription totals. In a trial, create the same client request, attach a document, assign a reviewer, move the deadline and produce a status report. Record any manual reconciliation and which paid tier each step requires. The better fit is the one that covers the whole workflow within the budget, not the one with more checked feature boxes.",
+    "limitation": "Documentation review only. This does not validate the legacy ratings or establish a universal winner. Verify current plan terms before buying."
+  }
 }

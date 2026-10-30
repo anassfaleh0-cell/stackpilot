@@ -1,3 +1,4 @@
+import { SourceEvidencePanel } from "@/components/content/source-evidence"
 import type { ContentSection } from "@/types/content"
 import { getReviewPricingSummary, getVisibleReviewContent, getVisibleReviewFaqs, isPricingPlaceholder } from "@/lib/content/review-quality"
 import { Container } from "@/components/ui/container"
@@ -286,6 +287,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
                 <h2 className="text-base font-semibold mb-2">Quick Answer</h2>
                 <p className="text-sm text-muted-foreground">{tool.tagline}</p>
               </div>
+
+              <SourceEvidencePanel evidence={tool.sourceEvidence} />
 
               <section aria-labelledby="review-claim-verdict" className="mb-6 rounded-xl border border-border bg-card p-5">
                 <h2 id="review-claim-verdict" className="text-lg font-bold tracking-tight mb-4">Review Claim, Rating &amp; Verdict</h2>

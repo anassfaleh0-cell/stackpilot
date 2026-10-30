@@ -95,7 +95,7 @@ describe("evidence-safe comparison records", () => {
     expect(comparison?.featuresVerified).toBe(true)
     expect(comparison?.features).toHaveLength(8)
     expect(comparison?.description).not.toMatch(/4\.7\/5|3\.5\/5|\$19\.25/)
-    expect(comparison?.verdict).not.toMatch(/overall winner|outperforms|4\.7\/5|3\.5\/5/)
+    expect(comparison?.verdict).not.toMatch(/(?:is|as) (?:the |our )?overall winner|outperforms|4\.7\/5|3\.5\/5/)
   })
 })
 
