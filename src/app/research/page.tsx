@@ -59,12 +59,14 @@ export default function ResearchPage() {
         </Container>
       </section>
 
-      {/* Ad: After section header */}
-      <Section>
-        <Container>
-          <BannerAd className="mx-auto max-w-[728px]" />
-        </Container>
-      </Section>
+      {/* Avoid an empty ad-only section before an ad slot has been configured. */}
+      {process.env.NEXT_PUBLIC_ADSENSE_BANNER_SLOT ? (
+        <Section>
+          <Container>
+            <BannerAd className="mx-auto max-w-[728px]" />
+          </Container>
+        </Section>
+      ) : null}
 
       <Section>
         <Container>
@@ -81,13 +83,13 @@ export default function ResearchPage() {
                   <div className="mt-auto pt-4 flex items-center gap-1 text-xs font-medium text-muted-foreground">
                     <span>{report.readTime} read</span>
                     <span className="text-border-light mx-1">·</span>
-                    <span className="group-hover:text-primary transition-colors">Read report <ArrowRight size={12} /></span>
+                    <span className="group-hover:text-primary transition-colors">Read guide <ArrowRight size={12} /></span>
                   </div>
                 </Card>
               </Link>
             )) : (
               <div className="col-span-full text-center py-12">
-                <p className="text-muted-foreground">Research reports are being published. Check back soon.</p>
+                <p className="text-muted-foreground">No research guides are currently listed. Explore our buying guides for practical evaluation workflows.</p>
               </div>
             )}
           </div>
