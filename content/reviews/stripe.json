@@ -357,6 +357,22 @@
     {
       "question": "Does Stripe Connect automatically remove platform compliance duties?",
       "answer": "No. Connect can support onboarding, accounts, charges and payouts for platforms, but account verification, payment flow design, tax and regulatory obligations depend on the business model and regions. Confirm responsibilities using Stripe documentation and qualified advice."
+    },
+    {
+      "question": "How should I estimate Stripe processing fees?",
+      "answer": "Start with the pricing table for your account country and the payment methods you actually accept. Model domestic and international cards, currency conversion, disputes, refunds and any optional products separately. Reconcile the estimate with an account-specific quote and the current official pricing page: https://stripe.com/pricing."
+    },
+    {
+      "question": "Is a successful Checkout redirect proof that payment completed?",
+      "answer": "No. Your application must confirm the relevant payment or invoice status through the supported events and APIs, and it should handle missing or delayed webhooks. Test retries, authentication-required payments and idempotent fulfillment before launching. Reference: https://docs.stripe.com/payments."
+    },
+    {
+      "question": "What should I verify before migrating subscriptions?",
+      "answer": "Map customer identifiers, existing payment methods, billing intervals, trial ends, tax handling, cancellations and open invoices. Check whether saved credentials can be migrated under approved procedures. Run a small test cutover and reconcile renewal outcomes before moving all customers."
+    },
+    {
+      "question": "Can Stripe support international marketplaces?",
+      "answer": "Stripe Connect supports platform and marketplace payment models in eligible countries, but connected-account onboarding, charge types, payouts and platform obligations depend on location and product configuration. Confirm your legal entity and seller locations against current documentation: https://docs.stripe.com/connect."
     }
   ],
   "alternatives": [
