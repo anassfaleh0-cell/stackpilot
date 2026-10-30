@@ -22,7 +22,8 @@ const priority = { broken_json: 1, malformed_html: 1, empty_comparison: 1,
   cross_category_comparison: 2, generic_audience: 2, fabricated_scale_claim: 1,
   thin_source: 2, missing_verdict: 2, score_provenance: 3,
   bulk_generated_body: 2, missing_source_links: 3, broken_internal_reference: 2,
-  repetitive_review_sections: 2, missing_vendor_evidence: 3 }
+  repetitive_review_sections: 2, missing_vendor_evidence: 3,
+  fabricated_comparison_benchmark: 1, unverified_comparison_price: 2 }
 
 const records = new Map()
 const findings = []
@@ -141,6 +142,14 @@ for (const [id, data] of records) {
       flag("score_provenance", section, slug, "provisional rating lacks a score provenance note")
     }
   } else if (section === "comparisons") {
+    const verdict = String(data.verdict || "")
+    const description = String(data.description || "")
+    if (/after evaluating both platforms across dozens of criteria|our verdict is based on analysis of .+ user reviews across multiple platforms|our experts? independently evaluated|we name .+ as the overall winner/i.test(verdict + " " + description)) {
+      flag("fabricated_comparison_benchmark", section, slug, "source claims comparative testing or quantified evaluation without a documented reproducible method")
+    }
+    if (/\b(?:2\.9%\s*\+\s*\$0\.[0-9]+|\d+(?:\.\d+)?%\s+uptime\s+SLA|annual billing typically reduces costs by \d+)/i.test(verdict)) {
+      flag("unverified_comparison_price", section, slug, "source includes a time-sensitive commercial or SLA figure requiring a current, plan-specific primary source")
+    }
     const features = Array.isArray(data.features) ? data.features : []
     if (features.length === 0 || features.every((r) =>
       !String(r.tool1Detail || "").trim() && !String(r.tool2Detail || "").trim() &&
