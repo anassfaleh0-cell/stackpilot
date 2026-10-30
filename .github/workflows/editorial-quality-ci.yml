@@ -37,7 +37,8 @@ jobs:
         run: npm ci
 
       - name: Verify read-only content audit syntax
-        run: node --check scripts/audit-content-quality.cjs
+        run: |
+          node --check scripts/audit-content-quality.cjs
           node --check scripts/adsense-readiness-check.cjs
 
       - name: Test source links, reviews, comparisons and buyer guides
