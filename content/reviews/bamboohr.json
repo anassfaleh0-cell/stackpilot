@@ -264,12 +264,12 @@
     },
     {
       "title": "Real-world Use Cases",
-      "body": "A 150-person professional services firm uses BambooHR to manage employee records, PTO tracking across five departments with different accrual policies, and a high-volume recruiting pipeline that processes 40-60 candidates per open position through the ATS ” reducing their HR administrative overhead from 1.5 FTE to 0.5 FTE within 6 months. A 400-person retail chain with hourly employees across 15 locations uses BambooHR's time tracking module for punch clock integration, automated overtime calculations, and time-off request management with manager approval chains that account for shift coverage requirements. A 75-person SaaS startup onboarding 5-8 new hires per month uses BambooHR's automated onboarding checklists with role-based task assignments, document collection with e-signatures, and 30/60/90-day milestone tracking ” reducing new hire ramp time from 4 weeks to 2.5 weeks. A nonprofit with 200 employees across three states uses BambooHR's custom reporting to generate grant compliance reports showing employee demographics, compensation distribution, and turnover rates ” reports that previously required 8-10 hours of manual spreadsheet work per quarter.",
+      "body": "Illustrative professional-services scenario: A company with several departments needs consistent employee profiles, different leave policies and management approval paths. Its evaluation should use sample employees from each policy group, verify permission boundaries and test whether reports reconcile to source records. Illustrative retail scenario: A team with shift-based workers wants time-off administration alongside an external scheduling or payroll system. The pilot must check data flow, overtime responsibility and handoff errors; no native payroll or scheduling capability should be assumed without documentation. Illustrative nonprofit scenario: An organization needs reports for staffing, grant allocation and employment records. Test whether required fields, exports and user permissions are available. These are hypothetical workflows, not measured customer outcomes.",
       "type": "text"
     },
     {
       "title": "Real-world Use Cases",
-      "body": "Additional practical scenarios demonstrate BambooHR's versatility. Startup Scenario (25 employees): A seed-stage tech startup using Google Sheets for HR and Slack for time-off tracking adopts BambooHR Core. Within two weeks, they have centralized employee records, automated PTO requests with manager approvals, and a company directory. HR admin workload drops from 8 hours to 2 hours per week. Agency Scenario (60 employees): A digital marketing agency uses BambooHR Pro with custom unlimited PTO, sabbatical leave, and conference day policies per department. The ATS manages 15-20 concurrent job openings with candidate pipelines, reducing average time-to-fill from 45 to 30 days. Enterprise Division Scenario (800 employees, 4 states): A manufacturing company's US division uses BambooHR as the system of record, feeding new hire and termination data to an ERP via API integration. Custom reports track diversity metrics, turnover by location, and compensation benchmarks for quarterly board reporting. HR Team Scenario: A three-person HR department managing 200 employees distributes workload across records and on/offboarding, recruiting and performance reviews, and compliance reporting from shared data. Finance Scenario (120 employees): A financial services firm uses BambooHR's audit-ready reporting for regulatory compliance, tracking employee certifications, licensing renewals, and mandatory training completion with automated expiration alerts.",
+      "body": "Illustrative startup scenario: A small team moving away from spreadsheets can trial employee records, leave requests and onboarding, recording actual administrative effort before claiming a saving. Illustrative agency scenario: An agency with frequent hiring can test applicant stages, interview permissions, onboarding checklists and manager notifications. Illustrative multi-location scenario: An organization with separate departments should test organizational structure, permission boundaries, employee transfers and regional payroll integrations. Illustrative HR/finance scenario: HR and finance teams can verify a shared employee-data handoff and reconcile compensation changes before exporting them into payroll. These examples are planning scenarios; the actual feasibility, service availability and price depend on the selected BambooHR package and connected providers.",
       "type": "text"
     },
     {
@@ -316,83 +316,83 @@
   "faqs": [
     {
       "question": "What is BambooHR best used for?",
-      "answer": "BambooHR is best used as a central HRIS for small and medium businesses that need to manage employee records, time-off, hiring, and reporting in one place. It excels at replacing disconnected spreadsheets and email-based processes with a clean, integrated system that empowers both HR teams and employees."
+      "answer": "BambooHR is worth evaluating as a central employee-record system for organizations that need time-off, hiring, onboarding and reporting workflows. The best fit depends on the package selected and the workflows you can demonstrate in a trial. Test manager permissions, leave rules and payroll handoffs with representative accounts."
     },
     {
       "question": "How much does BambooHR cost?",
-      "answer": "BambooHR does not publish fixed pricing publicly. Pricing is per employee per month and typically starts around .25 per employee per month for the Core plan. The Pro plan adds features like performance management, time tracking, and advanced reporting at a higher per-employee rate. Most organizations receive a custom quote after a demo, and annual contracts are standard."
+      "answer": "BambooHR publishes current package information for Core, Pro and Elite. Its pricing page describes per-employee billing for organizations above 25 employees and a monthly flat-rate approach for smaller organizations, with volume discounts. Request a current written quote showing all modules, taxes, implementation and renewal terms. Source: https://www.bamboohr.com/pricing/."
     },
     {
       "question": "Does BambooHR integrate with other tools?",
-      "answer": "Yes, BambooHR integrates with over 100 third-party applications including payroll providers (Gusto, ADP, QuickBooks), productivity tools (Slack, Google Workspace, Microsoft 365), recruiting platforms (LinkedIn, ZipRecruiter), and learning management systems. It also offers a public API for custom integrations."
+      "answer": "BambooHR describes an integration partner ecosystem and offers integration options. Check the current marketplace for each required payroll, identity or reporting system. Validate which data fields sync, direction of sync, update frequency, error handling, permissions and commercial terms; availability does not imply a complete automated workflow."
     },
     {
       "question": "Is BambooHR suitable for small teams?",
-      "answer": "Absolutely. BambooHR is designed specifically with small and medium businesses in mind. Teams with as few as 25 employees can benefit from its centralized employee database and automated time-off tracking. The intuitive interface means small teams without dedicated HR staff can manage people operations effectively without extensive training."
+      "answer": "Potentially. A smaller team may benefit from centralized records and leave approvals, but evaluate the total cost, data setup effort and level of administration required. Check BambooHR's current flat-rate pricing conditions for teams of 25 or fewer employees, and make sure the chosen package contains the functions you need."
     },
     {
       "question": "Does BambooHR integrate with payroll providers?",
-      "answer": "Yes, BambooHR integrates with major payroll providers including Gusto, ADP, QuickBooks, and Paychex. Employee data — new hires, terminations, and compensation changes — syncs automatically to your payroll system, eliminating duplicate data entry. BambooHR also offers native payroll processing for US-based companies on the Pro plan."
+      "answer": "Payroll and benefits integrations depend on country, partner and product selection. Confirm the exact payroll provider, field mapping, hire and termination updates, compensation approvals, errors and reconciliation in a pilot. Do not assume every integration automatically syncs every employee-data field."
     },
     {
       "question": "Does BambooHR include time tracking?",
-      "answer": "Yes, BambooHR's Pro plan includes built-in time tracking with a web-based time clock, timesheet entry, overtime calculations, and PTO balance integration. Hourly employees can clock in and out from the web or mobile app, and timesheets flow into payroll processing. Time tracking is available as an add-on for Core plan customers."
+      "answer": "Time-tracking availability and limitations depend on the selected package and associated products. Consult the current package matrix or written quote, then test timesheet entry, approvals, overtime rules, exports and payroll handoffs for your jurisdiction. Source: https://www.bamboohr.com/pricing/."
     },
     {
       "question": "How transparent is BambooHR's pricing?",
-      "answer": "BambooHR does not publicly list pricing. Every organization receives a custom quote after a product demo. Core plan pricing typically starts around .25 per employee per month, and Pro plans range from  to  per employee per month depending on features and headcount. Annual contracts are standard with a 15-20% premium for month-to-month billing."
+      "answer": "BambooHR currently publishes package pricing information on its official website, along with a request-quote option. Confirm headcount pricing, monthly versus longer terms, any add-on charges and renewal conditions in writing. Avoid relying on older prices or estimates copied from reviews. Source: https://www.bamboohr.com/pricing/."
     },
     {
       "question": "What employee self-service features are available?",
-      "answer": "Employees can update personal information and direct deposit, view pay stubs and tax forms, request time off, access the company directory and org charts, complete onboarding tasks and compliance training, and view their performance review history — all without involving HR, handling an estimated 70% of common HR requests."
+      "answer": "Self-service functionality can include workflows such as employee information access and leave requests. Test the specific actions your staff need, with the correct permissions and on the devices they will use. Confirm the features included in your plan and any country-specific payroll or document access requirements."
     },
     {
       "question": "Does BambooHR have a mobile app?",
-      "answer": "Yes, BambooHR offers native iOS and Android apps. Employees can request time off, approve or deny requests, access the company directory, receive push notifications for approvals and announcements, and view their schedule. The app is rated 4.3 out of 5 on both app stores."
+      "answer": "BambooHR offers mobile experiences, but specific functionality can differ across roles, packages and platforms. Test leave requests, approvals, employee-directory access and notifications on your employees' devices. Verify current app support directly with BambooHR rather than relying on an undated app-store rating."
     },
     {
       "question": "How effective is BambooHR's ATS for recruiting?",
-      "answer": "BambooHR's ATS covers the full recruiting lifecycle: job posting to free and premium boards, candidate pipeline management, interview scheduling with calendar sync, structured scorecards, offer letter generation with e-signatures, and onboarding task assignment. It suits companies hiring 20-100 employees per year but lacks AI candidate matching and automated sourcing."
+      "answer": "Evaluate the applicant-tracking workflow from requisition to candidate stages, interviews, offers and onboarding. Check user permissions, external job-board connections, e-signature needs, reporting and the exact package requirements. Fit depends on hiring volume and workflow complexity; no time-to-hire improvement is independently measured here."
     },
     {
       "question": "Does BambooHR support performance reviews?",
-      "answer": "Yes, the Pro plan includes customizable performance review cycles with self-evaluations, manager assessments, goal tracking, and peer recognition. Review frequency, rating scales, and question sets are configurable per department. However, it lacks 360-degree feedback and continuous feedback prompts found in dedicated performance management platforms."
+      "answer": "BambooHR lists performance-management functionality in its package offerings, but the exact capabilities and tier requirements should be checked in the current plan matrix. Test your review cycle, manager input, goal tracking, employee visibility and export needs with sample accounts. Source: https://www.bamboohr.com/pricing/."
     },
     {
       "question": "Does BambooHR support e-signatures?",
-      "answer": "Yes, BambooHR includes built-in e-signature functionality for offer letters, onboarding documents, performance review acknowledgments, and policy acknowledgments. Documents signed through BambooHR are legally binding under the ESIGN Act and stored securely in the employee's document repository. No third-party e-signature tool is required."
+      "answer": "Document-signing options should be evaluated with the specific onboarding and HR workflows you need. Confirm feature availability, identity verification, retention and audit-trail requirements with the vendor. Legal enforceability of electronic signatures depends on jurisdiction and circumstances; seek appropriate legal guidance."
     },
     {
       "question": "Does BambooHR offer API access?",
-      "answer": "Yes, BambooHR provides a RESTful API with endpoints for employee data, time-off, hiring, reporting, and files. The API uses key-based authentication and supports standard CRUD operations. Rate limits apply at 1,000 requests per hour for standard plans. API access is included in all plans."
+      "answer": "BambooHR provides integration and API options for connecting HR data with other systems. Ask for the current API documentation, eligible endpoints, authentication, limits and contract conditions. Verify that the necessary records can be accessed securely and that failures are logged and reconciled."
     },
     {
       "question": "What reporting capabilities does BambooHR offer?",
-      "answer": "BambooHR offers 50+ pre-built report templates plus a custom report builder with drag-and-drop fields. Reports cover turnover rates, headcount trends, compensation distribution, time-off usage, diversity metrics, and hire and termination analysis. Reports can be scheduled for delivery or exported to CSV or PDF."
+      "answer": "BambooHR describes HR data and reporting features, including custom reporting in its published package matrix. Test a headcount change report, a leave-balance report and an export with authorized data. Verify fields, permissions, filtering, scheduling and any package restrictions rather than relying on an unverified template count."
     },
     {
       "question": "Is BambooHR SOC 2 and GDPR compliant?",
-      "answer": "Yes, BambooHR is SOC 2 Type II certified with annual audits. It is GDPR compliant with a Data Processing Agreement available for EU customers. The platform uses AES-256 encryption at rest and TLS 1.2+ in transit. BambooHR is not ISO 27001, HIPAA, or PCI DSS certified."
+      "answer": "Request current security reports and contracts for the BambooHR products you will use. Ask specifically about independent assurance, encryption, access controls, data location, retention, subprocessors and EU data-processing terms as applicable. A vendor's security claim does not automatically establish your organization's legal compliance."
     },
     {
       "question": "Can I export my data from BambooHR?",
-      "answer": "Yes, you can export all employee data, time-off records, and reports to CSV, PDF, or Excel format through the reporting module. Full data export is available via the API for automated backups. BambooHR provides a data export service upon contract termination at no additional cost."
+      "answer": "Confirm which records, attachments, historical entries and reports can be exported through the product or API under your package. Test a representative export and check the file formats, auditability and retention terms. Do not assume all employee data or termination assistance is available without conditions or fees."
     },
     {
       "question": "How does BambooHR's onboarding workflow work?",
-      "answer": "When a candidate accepts an offer, BambooHR automatically triggers onboarding tasks: e-sign documents, complete tax forms, set up direct deposit, review company policies, and enroll in benefits. HR configures role-specific checklists with task assignments and due dates. New hires access a personalized portal before their start date."
+      "answer": "An onboarding pilot should test creating a new employee, assigning tasks, applying role-based permissions, collecting required documents and tracking completion. Check what is included in your selected package and how onboarding hands off to payroll and identity systems."
     },
     {
       "question": "Does BambooHR support offboarding?",
-      "answer": "Yes, BambooHR provides structured offboarding checklists covering equipment return, final paycheck processing, benefit termination, account deactivation, and exit interview administration. Offboarding workflows can be customized per role and department. Exit surveys capture feedback that feeds into retention analytics reports."
+      "answer": "Ask BambooHR to demonstrate offboarding and termination workflows for your package, then test record retention, account deactivation handoffs, benefits or payroll updates, document exports and access revocation. The system should support your documented process; it does not replace legal or HR review."
     },
     {
       "question": "Can I create custom fields in BambooHR?",
-      "answer": "Yes, BambooHR supports custom fields of several types: text, date, dropdown, number, currency, and yes or no. Custom fields can be added to employee records, job requisitions, and performance reviews. However, calculated fields and multi-level cascading dropdowns are not supported."
+      "answer": "BambooHR offers employee-data configuration options, but accepted field types, formulas, permissions and integration behavior should be verified for the current plan. Create representative fields in a test environment and check reporting, import and export behavior before migrating all employee records."
     },
     {
       "question": "What integrations does BambooHR support?",
-      "answer": "BambooHR integrates with 100+ applications including payroll (Gusto, ADP, QuickBooks, Paychex), productivity (Slack, Google Workspace, Microsoft 365), recruiting (LinkedIn, ZipRecruiter, Indeed), learning management, benefits administration, and SSO providers (Okta, OneLogin). The REST API enables custom integrations with proprietary tools."
+      "answer": "Check the current vendor marketplace for the precise payroll, productivity, identity and benefits tools in your stack. A listed partner does not guarantee a native or complete integration. Validate sync direction, data fields, security, retry behavior, support ownership and any third-party charges."
     }
   ],
   "alternatives": [
@@ -416,8 +416,8 @@
   "company": {
     "founded": 2008,
     "headquarters": "Lindon, Utah",
-    "customers": "30,000+ customers",
-    "employeeCount": "1,000+",
+    "customers": "Not independently verified",
+    "employeeCount": "Not independently verified",
     "industries": [
       "HR",
       "Human Resources",
@@ -460,10 +460,10 @@
       "iOS",
       "Android"
     ],
-    "learningCurve": "Low",
+    "learningCurve": "Depends on role and configured workflows",
     "migrationComplexity": "Medium",
-    "supportQuality": "4.3/5",
-    "releaseFrequency": "Monthly"
+    "supportQuality": "Not independently verified",
+    "releaseFrequency": "Not independently verified"
   },
   "difficulty": "Advanced",
   "learningCurve": "Steep — requires dedicated training time for full proficiency",
