@@ -119,7 +119,7 @@ export default function MethodologyPage() {
 
               <h2 className="text-2xl font-bold mt-12 mb-6">Scoring Rubric</h2>
               <p className="text-muted-foreground mb-4">
-                Editorial scoring uses the weighted dimensions below (weights total 100%). Each dimension is scored from 1 to 5 against recorded evidence; the weighted sum is converted to a score out of 5. The published rubric describes how a fully verified assessment should be calculated. Legacy stored numerical scores with incomplete supporting evidence may still appear as provisional on some pages; they do not establish that the rubric has been re-executed or hands-on testing performed. Scores are separate from third-party user ratings and review counts.
+                Editorial scoring uses the weighted dimensions below (weights total 100%). Each dimension is scored from 1 to 5 against recorded evidence; the weighted sum is converted to a score out of 5. The published rubric describes how a fully verified assessment should be calculated. For new assessments without supportable inputs, we explicitly mark the editorial score as pending rather than invent a number. Legacy stored numerical scores with incomplete supporting evidence may still appear as provisional on some pages; they do not establish that the rubric has been re-executed or hands-on testing performed. Scores are separate from third-party user ratings and review counts.
               </p>
               <div className="overflow-x-auto">
               <div className="border border-border rounded-xl overflow-hidden mb-8 min-w-[300px]">

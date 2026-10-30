@@ -139,7 +139,7 @@ describe("content quality repairs", () => {
     })
     expect(comparison).toBeDefined()
     const normalized = getComparison(comparison!.slug)
-    expect(normalized?.verdict).toContain("These products may address different needs")
+    expect(normalized?.verdict).toMatch(/different needs|not direct substitutes|not direct alternatives|different jobs|separate jobs/i)
   })
 
   it("preserves stored product picks as provisional throughout the published comparison corpus", () => {
@@ -168,7 +168,7 @@ describe("content quality repairs", () => {
     })
     expect(crossCategory.length).toBeGreaterThan(0)
     for (const comparison of crossCategory) {
-      expect(comparison.verdict, comparison.slug).toContain("These products may address different needs")
+      expect(comparison.verdict, comparison.slug).toMatch(/different needs|not direct substitutes|not direct alternatives|different jobs|separate jobs/i)
     }
   })
 

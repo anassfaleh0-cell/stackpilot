@@ -67,7 +67,7 @@ export default function AboutPage() {
 
               <h2 className="text-2xl font-bold mt-10 mb-4">Editorial scoring and updates</h2>
               <p className="text-muted-foreground mb-4">
-                Where an editorial score is published, it represents PilotStack's assessment under the stated methodology; it is not the same as a third-party customer-review average. Readers can consult our <a href="/methodology">scoring methodology</a> for the criteria and interpretation. We do not treat a missing value as a zero score or as proof that a product lacks a capability.
+                Where an editorial score is published, it represents PilotStack's assessment under the stated methodology; it is not the same as a third-party customer-review average. Readers can consult our <a href="/methodology">scoring methodology</a> for the criteria and interpretation. We do not treat a missing value as a zero score or as proof that a product lacks a capability. A rating is treated as verified only when its source and calculation can be checked; otherwise any stored number stays clearly provisional.
               </p>
               <p className="text-muted-foreground mb-4">
                 Software products evolve. We review material changes when reliable information is available and identify details that require fresh confirmation. A page's presence on the site is not a promise that every data point has been independently tested on the date of reading. If you find a factual error, outdated claim, broken reference, or unclear distinction between evidence and opinion, please contact us with the page URL and supporting context so it can be assessed.
