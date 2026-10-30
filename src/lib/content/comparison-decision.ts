@@ -99,27 +99,36 @@ export function getComparisonDisplayCopy(input: ComparisonDisplayCopyInput): Com
   const categoriesDiffer = Boolean(category1 && category2 && category1 !== category2)
   const categoriesComparable = Boolean(category1 && category2 && category1 === category2)
   const winnerVerifiedForComparison = input.winnerVerified === true && categoriesComparable
-  const containsUnsupportedMetrics = UNSUPPORTED_SCORE_OR_PRICE.test(input.description) ||
-    UNSUPPORTED_SCORE_OR_PRICE.test(input.verdict)
-  const containsUnsupportedWinner = !winnerVerifiedForComparison && (
-    UNSUPPORTED_WINNER_CLAIM.test(input.description) || UNSUPPORTED_WINNER_CLAIM.test(input.verdict)
-  )
+  // A phrase denying an overall winner must not be mistaken for a positive
+  // unsupported endorsement. Compare each field independently: an unsupported
+  // verdict must never erase a valid, product-specific meta description.
+  const negatedWinner = /\\b(?:does not (?:name|identify|establish|claim|verify)|did not (?:name|identify|establish)|no|not an?|without naming an?)\\s+(?:(?:an?|the|independently|auditable|verified|universal)\\s+)*overall winner\\b/gi
+  const hasUnsupportedWinner = (value: string) =>
+    !winnerVerifiedForComparison && UNSUPPORTED_WINNER_CLAIM.test(value.replace(negatedWinner, ""))
 
-  if (input.decisionGuide === true && !containsUnsupportedMetrics && !containsUnsupportedWinner) {
+  const unsafeDescription = UNSUPPORTED_SCORE_OR_PRICE.test(input.description) || hasUnsupportedWinner(input.description)
+  const unsafeVerdict = UNSUPPORTED_SCORE_OR_PRICE.test(input.verdict) || hasUnsupportedWinner(input.verdict)
+  if (input.decisionGuide === true && !unsafeDescription && !unsafeVerdict) {
+    return { description: input.description, verdict: input.verdict }
+  }
+  if (!categoriesDiffer && !unsafeDescription && !unsafeVerdict) {
     return { description: input.description, verdict: input.verdict }
   }
 
-  if (!categoriesDiffer && !containsUnsupportedMetrics && !containsUnsupportedWinner) {
-    return { description: input.description, verdict: input.verdict }
-  }
-
-  const description = categoriesDiffer
+  const fallbackDescription = categoriesDiffer
     ? `${input.tool1} (${category1}) and ${input.tool2} (${category2}) serve different primary categories. Compare their roles, overlapping workflows, integrations, plan limits, and total cost to decide whether one tool meets your needs or whether they complement each other.`
     : `Compare ${input.tool1} and ${input.tool2} against your workflow, integration requirements, plan limits, and total cost. Confirm current capabilities and pricing directly with each vendor before choosing.`
 
-  const verdict = categoriesDiffer
+  const fallbackVerdict = categoriesDiffer
     ? `These products serve different primary categories: ${input.tool1} focuses on ${category1}, while ${input.tool2} focuses on ${category2}. Treat them as alternatives only if your workflow overlaps. Confirm current capabilities, integrations, security requirements, plan limits, and total cost directly with each vendor before deciding.`
     : `The available record does not establish an auditable overall winner or independently verified scores and pricing. Compare both tools against your must-have workflows, integrations, permissions, data migration needs, support expectations, and total cost. Test representative tasks before committing.`
 
-  return { description, verdict }
+  if (categoriesDiffer) {
+    // Do not publish a dubious direct head-to-head answer for unrelated tools.
+    return { description: fallbackDescription, verdict: fallbackVerdict }
+  }
+  return {
+    description: unsafeDescription ? fallbackDescription : input.description,
+    verdict: unsafeVerdict ? fallbackVerdict : input.verdict,
+  }
 }

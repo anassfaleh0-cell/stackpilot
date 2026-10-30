@@ -219,6 +219,34 @@ describe("getComparisonDisplayCopy", () => {
     expect(copy.verdict).toContain("does not establish an auditable overall winner")
   })
 
+  it("keeps distinct factual descriptions and negated-winner editorial verdicts", () => {
+    const copy = getComparisonDisplayCopy({
+      tool1: "GitHub",
+      tool2: "SourceForge",
+      tool1Category: "Developer Tools",
+      tool2Category: "Developer Tools",
+      description: "GitHub and SourceForge differ in code collaboration, release distribution, and open-source discovery.",
+      verdict: "GitHub favors code reviews; SourceForge prioritizes release downloads. This comparison does not name an overall winner.",
+    })
+    expect(copy.description).toContain("release distribution")
+    expect(copy.verdict).toContain("code reviews")
+    expect(copy.verdict).toContain("does not name an overall winner")
+  })
+
+  it("never erases a safe product-specific description because a verdict contains an unsafe winner", () => {
+    const copy = getComparisonDisplayCopy({
+      tool1: "Alpha",
+      tool2: "Beta",
+      tool1Category: "Project Management",
+      tool2Category: "Project Management",
+      description: "Compare Alpha board permissions with Beta issue-tracking and approval workflows.",
+      verdict: "Alpha is our overall pick at $19/mo.",
+    })
+    expect(copy.description).toContain("Alpha board permissions")
+    expect(copy.verdict).not.toContain("$19")
+    expect(copy.verdict).not.toContain("overall pick")
+  })
+
   it("preserves neutral copy for same-category comparisons when no unsupported claims exist", () => {
     const copy = getComparisonDisplayCopy({
       tool1: "Linear",
