@@ -1,25 +1,27 @@
 {
   "slug": "airtable",
   "name": "Airtable",
-  "tagline": "Spreadsheet-database hybrid for flexible workflow management",
-  "description": "Combines spreadsheet simplicity with relational database power for teams",
+  "tagline": "Relational work management with configurable views and interfaces",
+  "description": "Airtable combines linked records, configurable views, interfaces, forms and automations in a relational workspace. This review examines schema design, collaboration, access permissions, record/API limits, exports and billable-editor costs. The retained PilotStack 4.4/5 editorial score is provisional and is not a verified customer-rating average.",
   "category": "Project Management",
   "website": "https://airtable.com",
   "pricing": "Freemium",
-  "priceRange": "Free–$45/user/mo",
+  "priceRange": "Free; Team $20/editor/month or Business $45/editor/month billed annually (US published list, checked October 30, 2026); Enterprise quoted",
   "rating": 4.4,
   "reviewCount": 0,
   "pros": [
-    "Flexible spreadsheet-database hybrid adaptable to any workflow",
-    "1,000+ pre-built templates eliminating blank-slate setup",
-    "Rich field types (linked records, attachments, formulas, barcodes)",
-    "Interfaces for no-code app-like views without developer help",
-    "Sync with external data sources for live bi-directional updates"
+    "Tables, linked records, lookups and filters can support related operational datasets.",
+    "Views let different users work with the same data as a grid, calendar, board or another supported format.",
+    "Forms and interfaces can simplify data entry without exposing every underlying table.",
+    "Documented automation and API features can reduce repeat manual work when configured and monitored.",
+    "Public pricing and usage-limit documentation supports realistic procurement estimates."
   ],
   "cons": [
-    "1,000 record limit per base on free plan (500K records max on paid plans)",
-    "Formula language less powerful than Excel or Google Sheets",
-    "Complex relational data modeling requires training investment"
+    "Relational modeling, permissions and automation require ongoing governance.",
+    "Record, storage, automation and API quotas vary by plan.",
+    "Seats with edit permissions may be billable, so collaborator roles change annual costs.",
+    "Complex linked-record imports, exports or integrations need a staged migration test.",
+    "Simple task-first workflows may be easier to maintain in a more opinionated project app."
   ],
   "features": [
     {
@@ -156,101 +158,104 @@
   "content": [
     {
       "title": "Executive Summary",
-      "body": "Combines spreadsheet simplicity with relational database power for teams Airtable earns a 4.4/5 rating from 28,500 user reviews.",
+      "body": "Airtable is a structured-data workspace rather than just another task list. Teams can model related records in tables and expose them through views, forms and interfaces. Its value depends on keeping a reliable data model and controlling who can edit it. Start by testing your own information architecture, access roles and reporting workflow. This is a product-fit assessment, not a claim that every feature, price or performance metric has been independently benchmarked.",
       "type": "text"
     },
     {
       "title": "TL;DR",
-      "body": "Airtable is a leading project management platform rated 4.4/5 across 28,500 reviews. Pricing starts at Free–$45/user/mo. Best for Teams and Creatives.",
+      "body": "Shortlist Airtable when your work depends on linked operational records and several teams need different ways to use that data. Pilot an actual base with linked records, a filtered view, form submissions, permissions and one automation failure. Price the number of billable editors and estimate administration time. The stored 4.4/5 editorial score is provisional, not an independently revalidated customer-rating average.",
       "type": "text"
     },
     {
       "title": "Rating Overview",
-      "body": "Airtable scores 4.4/5 overall with ease of use (4.3/5), features (4.5/5), performance (4.2/5), support (3.9/5), value (4.4/5).",
+      "body": "The historic PilotStack 4.4/5 score is an editorial assessment retained for transparency. Its component scores and supporting evidence have not completed a reproducible scoring audit. Treat this as provisional, not as a verified third-party review aggregate or objective winner claim. The documented criteria and the user's own real-workflow test should guide adoption.",
       "type": "text"
     },
     {
       "title": "Quick Verdict",
-      "body": "Airtable earns a 4.4/5 rating recommended for Teams and Creatives. Delivers strong feature depth with intuitive interface.",
+      "body": "Airtable is worth evaluating when linked records, multiple views and role-specific interfaces solve a recurring operational problem. It may add unnecessary administration for simple task lists, but can provide a more flexible data model than a basic board. Favor a measured pilot over a star-rating contest. Verify record limits, collaborator permissions, automation reliability, export capabilities and renewal cost.",
       "type": "text"
     },
     {
       "title": "Company Background",
-      "body": "Airtable was founded in 2012 in San Francisco, USA, serving 300,000+ customers with 1,200+ employees.",
+      "body": "Airtable develops hosted software for organizing relational records, work interfaces and workflow automation. Unverified employee counts, customer totals and company-scale claims are not evidence of product suitability. Consult https://airtable.com and its current help center at https://support.airtable.com for vendor product documentation and commercial terms.",
       "type": "text"
     },
     {
       "title": "Product Overview",
-      "body": "Airtable is a spreadsheet-database hybrid for flexible workflow management. Provides 18 features across Core, Advanced, Automation, Integrations, Security, Mobile categories. Mobile on iOS and Android. API available.",
+      "body": "A base contains tables of records and typed fields; related records can be linked across tables. Airtable documents multiple views of the same data, including grid, calendar, kanban, gallery, list and timeline-style layouts, with plan-specific restrictions where applicable. Build a small base representing your real workflow, then compare filtered views, record relationships, user roles and the reports managers require. Official views reference: https://support.airtable.com/articles/5189551686-getting-started-with-airtable-views",
       "type": "text"
     },
     {
       "title": "Key Features",
-      "body": "Essential project management features:",
+      "body": "Evaluate linked-record relationships, lookup and rollup fields, filtered views, forms, interfaces, automation quotas, API access, exports and permission roles as separate requirements. The vendor notes that adding a linked-record field does not automatically match existing records; import and automation logic still must be validated. Source: https://support.airtable.com/articles/3370222027-linking-records-in-airtable",
       "type": "list",
       "items": [
-        "Spreadsheet View: Familiar grid with rich field types.",
-        "Kanban View: Drag-and-drop workflow stages.",
-        "Gallery View: Visual card layouts.",
-        "Calendar View: Date-based timeline.",
-        "Form View: Custom data entry forms.",
-        "Linked Records: Relational cross-base connections."
+        "Filtered views of a shared table, including grid, calendar and kanban where available.",
+        "Linked records with lookup and rollup relationships.",
+        "Forms, interfaces and permission-controlled collaboration.",
+        "Automations with monitored triggers and actions.",
+        "APIs, exports and documented usage limits.",
+        "Plan-specific collaborator permissions and billing."
       ]
     },
     {
       "title": "Feature Deep Dive",
-      "body": "Spreadsheet View. Familiar grid with rich field types. Kanban View. Drag-and-drop workflow stages. Gallery View. Visual card layouts.",
+      "body": "Create three related tables, such as Clients, Projects and Deliverables. Link a project to its client, show that relationship in a filtered view, and build a simple submission form. Next, add a role-specific interface for a reviewer, intentionally change a linked record and test a missing relationship. This reveals whether permissions and underlying data remain consistent, which is more useful than an unverified feature count.",
       "type": "text"
     },
     {
       "title": "AI Features",
-      "body": "Airtable AI includes AI field suggestions, Smart categorization, Copilot.",
+      "body": "AI-assisted features and usage credits change with product packaging. Do not assume a particular model or workflow is available on every plan. For any proposed classification or summarization feature, test representative records, manually review mistakes, confirm data-handling rules and check the plan's current credit or usage allowance. Keep AI outputs separate from authoritative fields until a reviewer validates them.",
       "type": "text"
     },
     {
       "title": "API & Automation",
-      "body": "Airtable provides a comprehensive API for custom integration and workflow automation.",
+      "body": "Airtable documents automations that can create, update and link records. Pilot duplicate submissions, missing records, failed actions and retry behavior before depending on automation in production. Check per-plan API-call budgets and rate limits and document what happens when a sync is interrupted. Source: https://support.airtable.com/articles/3669392397-getting-started-with-airtable-automations and usage limits: https://support.airtable.com/articles/9157745778-airtable-workspace-settings-overview",
       "type": "text"
     },
     {
       "title": "Security",
-      "body": "Airtable holds SOC 2 Type II, ISO 27001, GDPR certifications with TLS 1.2+ and AES-256 encryption.",
+      "body": "Test what owners, editors, commenters and external collaborators can actually see and change. Review sharing links, admin rights, integrations and record-level access for the planned configuration. Security assurance, encryption and compliance documentation should be requested from Airtable for the specific contract and deployment; this review does not make unverified certification guarantees.",
       "type": "text"
     },
     {
       "title": "Compliance",
-      "body": "Airtable complies with GDPR, CCPA, SOC 2 regulations.",
+      "body": "Suitability for regulated or personal data depends on the fields stored, access design, jurisdiction and the vendor agreement. Request current documentation for data processing, access controls, retention, deletion and incident procedures. Do not interpret a generic GDPR, CCPA, SOC 2 or ISO label as proof that every use case and configuration meets your obligations.",
       "type": "text"
     },
     {
       "title": "Integrations",
-      "body": "Integrates with Slack, Google Drive, Jira, Zapier, Salesforce, HubSpot, Notion, Asana, and additional features.",
+      "body": "Define a source of truth before connecting Airtable to CRM, analytics, project or storage tools. In a test, check field mapping, duplicate records, missing permissions, stale data, sync direction and error handling. An integration listing does not establish that every required field or two-way workflow is supported; verify the exact connector and APIs used.",
       "type": "text"
     },
     {
       "title": "Pricing",
-      "body": "Airtable uses freemium with per-user premium. Free tier available. Plans from Free–$45/user/mo.",
+      "body": "On October 30, 2026, Airtable's published US list described a Free plan, Team at $20 per editor per month billed annually, Business at $45 per editor per month billed annually, and Enterprise Scale by quote. According to the official pricing FAQ, certain collaborators with edit access are billable; read-only users, share links and form submissions are not billed on Team or Business under the documented terms. Validate current region, billing cycle, collaborator roles and any custom contract. Source: https://airtable.com/pricing",
       "type": "text"
     },
     {
       "title": "Pros",
-      "body": "Airtable advantages:",
+      "body": "The main appeal is data flexibility: a shared record model can power different views, linked relationships, forms and interfaces. Automation can connect routine steps when its failure modes are understood. Evaluate these strengths with representative data; they do not prove Airtable universally outperforms project-management competitors.",
       "type": "list",
       "items": [
-        "Flexible spreadsheet-database hybrid adaptable to any workflow",
-        "1,000+ pre-built templates eliminating blank-slate setup",
-        "Rich field types (linked records, attachments, formulas, barcodes)",
-        "Interfaces for no-code app-like views without developer help"
+        "Tables, linked records, lookups and filters can support related operational datasets.",
+        "Views let different users work with the same data as a grid, calendar, board or another supported format.",
+        "Forms and interfaces can simplify data entry without exposing every underlying table.",
+        "Documented automation and API features can reduce repeat manual work when configured and monitored.",
+        "Public pricing and usage-limit documentation supports realistic procurement estimates."
       ]
     },
     {
       "title": "Cons",
-      "body": "Considerations:",
+      "body": "The main risk is complexity. A poorly designed schema, unclear ownership, broad sharing rights and silently failing automations can make the system difficult to trust. Official workspace documentation lists record and API allowances by plan; these should be modeled against actual usage before migration. Source: https://support.airtable.com/articles/9157745778-airtable-workspace-settings-overview",
       "type": "list",
       "items": [
-        "1,000 record limit per base on free plan (500K records max on paid plans)",
-        "Formula language less powerful than Excel or Google Sheets",
-        "Complex relational data modeling requires training investment"
+        "Relational modeling, permissions and automation require ongoing governance.",
+        "Record, storage, automation and API quotas vary by plan.",
+        "Seats with edit permissions may be billable, so collaborator roles change annual costs.",
+        "Complex linked-record imports, exports or integrations need a staged migration test.",
+        "Simple task-first workflows may be easier to maintain in a more opinionated project app."
       ]
     },
     {
@@ -270,42 +275,42 @@
     },
     {
       "title": "Customer Support",
-      "body": "Support rated 3.9/5 via email and knowledge base.",
+      "body": "Support channels, response commitments and eligibility are contract-specific. Avoid relying on an unsourced historical support score. Ask the vendor a real configuration or integration question during trial, record the resolution time and verify whether the intended paid tier includes the escalation path your operations team needs.",
       "type": "text"
     },
     {
       "title": "Industry Fit",
-      "body": "Best for Project Management and Database with Teams and Creatives teams.",
+      "body": "Airtable can be relevant to editorial planning, creative operations, inventory, client onboarding and project pipelines where linked records are useful. These are candidate workflows rather than verified customer case-study outcomes. Validate the requirements and governance model with actual users and domain-specific sample records.",
       "type": "text"
     },
     {
       "title": "Team Size Fit",
-      "body": "Airtable accommodates teams of all sizes with generous free tier. Best ROI for 5-50 person teams.",
+      "body": "Seat count alone is not sufficient for a recommendation. Forecast billable editors, viewers, form submitters, records, attachments, automation runs and API calls, then map each to current plan limits. A small team with highly linked data may need more governance than a larger team using a simple shared list.",
       "type": "text"
     },
     {
       "title": "Real Use Cases",
-      "body": "a team uses Airtable to streamline project management workflows and improve team productivity.",
+      "body": "For an editorial workflow, connect Articles, Authors, Campaigns and Approvals tables. Filter a calendar to published material, create an intake form and test that a reviewer sees only permitted records. For client onboarding, connect Accounts, Contacts and Tasks; test duplicate imports and an automation retry. These are repeatable evaluation scenarios, not claims about measured savings.",
       "type": "text"
     },
     {
       "title": "Competitor Analysis",
-      "body": "Airtable competes with notion, asana, monday-com. Primary differentiators: feature depth and ease of use.",
+      "body": "Airtable emphasizes structured relational records, whereas ClickUp and Asana are centered on project and task execution. Notion may better suit documentation tied to light databases, and Smartsheet merits testing for sheet-led portfolio governance. Compare one real workflow and reporting task in each candidate rather than ranking unrelated features or copying provisional scores.",
       "type": "text"
     },
     {
       "title": "Alternatives",
-      "body": "Consider notion, asana, monday-com based on specific team requirements.",
+      "body": "Choose a task-first platform when structured record relationships provide little value. Evaluate ClickUp or Asana for task coordination, Notion for documentation-led operations and Smartsheet for sheet-based governance. Compare permissions, relationships, reporting and a complete data export across the shortlist; neither product is a guaranteed universal winner.",
       "type": "text"
     },
     {
       "title": "Migration Guide",
-      "body": "Migration rated low complexity. Most teams transition within 1-2 weeks. Parallel testing recommended.",
+      "body": "Export a realistic base containing linked records, views, formulas, attachments, automations and multiple collaborator roles. Reconcile record totals and relationships after import, audit changed field types, confirm permissions and test downstream reports. Keep a rollback copy until a real reporting cycle works and data owners approve the new system.",
       "type": "text"
     },
     {
       "title": "Buying Advice",
-      "body": "Evaluate: feature alignment, total cost at Free–$45/user/mo, migration effort (1-2 weeks), and real-data trial.",
+      "body": "Agree on mandatory requirements and weighted criteria before trial. Score data-model fit, access controls, reporting, automation reliability, integrations, exportability, team adoption and full-year cost. Mark unknown features as evidence-needed, not as passes. Use current vendor plan documentation and test outcomes; the stored PilotStack rating remains provisional.",
       "type": "text"
     },
     {
@@ -332,83 +337,35 @@
   "faqs": [
     {
       "question": "What is Airtable best used for?",
-      "answer": "Airtable is best used for combines spreadsheet simplicity with relational database power for teams."
+      "answer": "Airtable suits workflows built around related records, forms, multiple views and role-specific interfaces. It can help manage editorial calendars, approvals, operations requests and structured project data when the schema is governed. A simpler task board may be preferable if record relationships add little value."
     },
     {
-      "question": "How much does Airtable cost?",
-      "answer": "Airtable uses freemium with per-user premium starting at Free–$45/user/mo. Free tier available."
+      "question": "What does Airtable cost for editors and viewers?",
+      "answer": "Airtable's published US list checked October 30, 2026 describes Free, Team at $20 per editor per month billed annually and Business at $45 per editor per month billed annually, with Enterprise by quote. Certain editing access is billable, while read-only users, share links and form submissions are not billed under its Team/Business rules. Verify your current contract: https://airtable.com/pricing"
     },
     {
-      "question": "Does Airtable integrate with other tools?",
-      "answer": "Yes, integrates with Slack, Google Drive, Jira, Zapier, Salesforce. and additional features."
+      "question": "What record and API limits apply?",
+      "answer": "Limits vary by plan. Airtable's official workspace settings documentation lists Free at 1,000 records per base and higher allowances for paid plans, with separate attachment and API-call budgets. Count real records and expected integrations before selecting a plan: https://support.airtable.com/articles/9157745778-airtable-workspace-settings-overview"
     },
     {
-      "question": "Is Airtable suitable for small teams?",
-      "answer": "Yes, with a generous free tier. Freemium with per-user premium scales with team growth."
+      "question": "Can Airtable link records across tables?",
+      "answer": "Yes. Airtable documents linked-record fields, lookups and rollups. Adding a linked field creates the relationship structure but does not automatically match all old records; the team must populate links and test automation mapping. See https://support.airtable.com/articles/3370222027-linking-records-in-airtable"
     },
     {
-      "question": "How does Airtable pricing work?",
-      "answer": "Airtable uses freemium with per-user premium from Free–$45/user/mo, with free tier available."
+      "question": "Is Airtable a direct replacement for ClickUp?",
+      "answer": "Only for overlapping workflows. Airtable focuses on relational records and customizable views; ClickUp centers on tasks and project work. Recreate one representative project, review process and weekly report in both before switching. Check exportability, permissions, effort and total cost."
     },
     {
-      "question": "Is Airtable secure?",
-      "answer": "Yes, holds SOC 2 Type II, ISO 27001, GDPR certifications with encryption."
+      "question": "Are the 4.4/5 score and customer review counts verified?",
+      "answer": "The stored 4.4/5 PilotStack editorial score is provisional and is not an audited third-party customer-rating aggregate. A current independently verified review count is not presented. Judge claims against primary vendor sources and repeatable workflow tests."
     },
     {
-      "question": "What integrations does Airtable offer?",
-      "answer": "Integrates with Slack, Google Drive, Jira, Zapier, Salesforce, HubSpot, and more. API available."
+      "question": "How can we migrate data to or from Airtable?",
+      "answer": "Use representative linked records, custom fields, formulas, comments, attachments, automations and permission groups in a test export and import. Reconcile record counts and relationships, document any lost fields, test rollback and validate a reporting cycle before retiring the source system."
     },
     {
-      "question": "Is Airtable good for small businesses?",
-      "answer": "Yes, with free tier. Freemium with per-user premium scales with business size."
-    },
-    {
-      "question": "What are Airtable's main advantages?",
-      "answer": "Flexible spreadsheet-database hybrid adaptable to any workflow and 1,000+ pre-built templates eliminating blank-slate setup."
-    },
-    {
-      "question": "What are Airtable's limitations?",
-      "answer": "1,000 record limit per base on free plan (500K records max on paid plans) and Formula language less powerful than Excel or Google Sheets."
-    },
-    {
-      "question": "How does Airtable compare to notion?",
-      "answer": "Airtable differentiates through feature depth and usability."
-    },
-    {
-      "question": "Does Airtable support team collaboration?",
-      "answer": "Yes, includes collaboration features for team workflows."
-    },
-    {
-      "question": "Can I customize Airtable?",
-      "answer": "Yes, via API, custom fields, and templates."
-    },
-    {
-      "question": "Is Airtable easy to set up?",
-      "answer": "Yes, setup time depends on integrations, data migration, permissions, and training."
-    },
-    {
-      "question": "How often does Airtable update?",
-      "answer": "Updates bi-weekly."
-    },
-    {
-      "question": "What support does Airtable provide?",
-      "answer": "Support rated 3.9/5. Email and knowledge base."
-    },
-    {
-      "question": "Does Airtable offer a free version?",
-      "answer": "Yes, with core features."
-    },
-    {
-      "question": "How does Airtable handle data privacy?",
-      "answer": "Complies with GDPR, CCPA, SOC 2 regulations."
-    },
-    {
-      "question": "What ROI can teams expect?",
-      "answer": "ROI depends on adoption, implementation cost, and the baseline used to measure outcomes from improved project management workflows."
-    },
-    {
-      "question": "What platforms does Airtable support?",
-      "answer": "Available on Cloud. Mobile on iOS and Android."
+      "question": "Can Airtable be used for regulated data?",
+      "answer": "Only after your security and legal team checks the actual data categories, sharing setup, jurisdiction, vendor contract, retention obligations and current security evidence. A general vendor certification or privacy statement is not a substitute for a requirement-specific review."
     }
   ],
   "alternatives": [
@@ -420,8 +377,8 @@
   "relatedGuides": [],
   "relatedPosts": [],
   "contentPublished": "2026-07-19",
-  "contentModified": "2026-09-21",
-  "author": "Sarah Chen",
+  "contentModified": "2026-10-30",
+  "author": "PilotStack Team",
   "company": {
     "founded": 2012,
     "headquarters": "San Francisco, USA",
@@ -482,8 +439,9 @@
   "learningCurve": "Minimal — most users can get started within an hour",
   "whoShouldUse": "Teams that need configurable tables, linked records, forms, views and lightweight workflow automation can evaluate Airtable for operational tracking, content pipelines, inventory lists or project coordination. Test the real data model, permission boundaries, automation limits, reporting and export before treating it as a database or project-management system of record.",
   "whoShouldNotUse": "Airtable may not fit workloads that require a traditional relational database with strict transaction guarantees, complex backend logic, extensive offline operation or controls unavailable on the proposed plan. Teams with sensitive data or complex governance needs should verify permissions, auditability, retention, integrations and contract terms against their requirements.",
-  "scoreBasis": "Stored PilotStack editorial score (4.4/5), not a third-party review average. This provisional score reflects Airtable's configurable tables, linked records, views and workflow use cases, balanced against the need to validate data-model complexity, permissions, automation limits, scale and total plan cost. Category scores are editorial hypotheses, not measured benchmark results.",
+  "scoreBasis": "Stored 4.4/5 PilotStack editorial assessment, not a verified third-party rating. Its source evidence and weighted rubric have not completed an independent calculation audit. The score remains visible as a provisional editorial hypothesis, not a tested market-wide conclusion.",
   "ratingVerified": false,
   "reviewCountVerified": false,
-  "companyFactsVerified": false
+  "companyFactsVerified": false,
+  "priceRangeVerified": true
 }
