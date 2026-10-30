@@ -16,7 +16,7 @@ function renderPlainSegment(value: string, seed: number): ReactNode[] {
   const urlRe = /https?:\/\/[^\s<>"']+/gi
   let cursor = 0
   for (const match of value.matchAll(urlRe)) {
-    const start = match.index
+    const start = match.index ?? cursor
     if (start > cursor) nodes.push(value.slice(cursor, start))
     const url = match[0].replace(/[.,;:!?)]*$/, "")
     if (url) {
