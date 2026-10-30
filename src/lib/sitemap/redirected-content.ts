@@ -4,7 +4,6 @@
  * destination is a different, existing page.
  */
 export const REDIRECTED_ALTERNATIVE_SLUGS = new Set([
-  "clickup-alternatives",
   "grammarly-alternatives",
 ])
 

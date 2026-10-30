@@ -6,7 +6,10 @@ export function truncateAtWordBoundary(text: string, maxLen: number): string {
   const lastSpace = truncated.lastIndexOf(" ")
   // A truncation marker can itself exceed the declared character limit and
   // looks like unfinished copy in search results. Do not manufacture one.
-  return (lastSpace > 0 ? truncated.slice(0, lastSpace) : truncated).trimEnd()
+  // Avoid dangling separators such as " |" or " —" after cutting a site-name suffix.
+  return (lastSpace > 0 ? truncated.slice(0, lastSpace) : truncated)
+    .trimEnd()
+    .replace(/[\s|:;,\-–—]+$/u, "")
 }
 
 export function createMetadata({

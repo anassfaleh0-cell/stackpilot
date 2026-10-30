@@ -65,6 +65,13 @@ describe("metadata helpers", () => {
     expect(metadata.description).not.toMatch(/…|\\.\\.\\.$/)
   })
 
+  it("removes dangling site separators from truncated SEO titles", () => {
+    const title = "Marketing & SEO Software: Compare Tools by Workflow | PilotStack"
+    const shortened = truncateAtWordBoundary(title, 60)
+    expect(shortened).toBe("Marketing & SEO Software: Compare Tools by Workflow")
+    expect(shortened).not.toMatch(/[|:;,\\-–—]$/)
+  })
+
   it("truncates long metadata at a word boundary", () => {
     expect(truncateAtWordBoundary("A short title", 20)).toBe("A short title")
     expect(truncateAtWordBoundary("A practical software comparison guide", 24)).toBe("A practical software")

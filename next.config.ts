@@ -178,11 +178,6 @@ const nextConfig: NextConfig = {
     // Consolidate the intentionally unpublished, unverified Grammarly alternatives draft
     // onto the real, published Grammarly review rather than serving a dead-end 404.
     {
-      source: "/alternatives/clickup-alternatives",
-      destination: "/reviews/clickup",
-      permanent: true,
-    },
-    {
       source: "/alternatives/grammarly-alternatives",
       destination: "/reviews/grammarly",
       permanent: true,
