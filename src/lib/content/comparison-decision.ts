@@ -102,7 +102,7 @@ export function getComparisonDisplayCopy(input: ComparisonDisplayCopyInput): Com
   // A phrase denying an overall winner must not be mistaken for a positive
   // unsupported endorsement. Compare each field independently: an unsupported
   // verdict must never erase a valid, product-specific meta description.
-  const negatedWinner = /\\b(?:does not (?:name|identify|establish|claim|verify)|did not (?:name|identify|establish)|no|not an?|without naming an?)\\s+(?:(?:an?|the|independently|auditable|verified|universal)\\s+)*overall winner\\b/gi
+  const negatedWinner = /\b(?:does not (?:name|identify|establish|claim|verify)|did not (?:name|identify|establish)|no|not an?|without naming an?)\s+(?:(?:an?|the|independently|auditable|verified|universal)\s+)*overall winner\b/gi
   const hasUnsupportedWinner = (value: string) =>
     !winnerVerifiedForComparison && UNSUPPORTED_WINNER_CLAIM.test(value.replace(negatedWinner, ""))
 
