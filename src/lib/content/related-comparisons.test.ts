@@ -5,7 +5,9 @@ import { getRelevantComparisonSlugs } from "./related-comparisons"
 function comparison(slug: string, left: string, right: string, category = "Developer Tools"): ComparisonContent {
   return {
     slug, tool1Slug: left, tool2Slug: right, category, relatedComparisons: [],
-  } as ComparisonContent
+  // The recommender reads only these identifiers; this fixture intentionally omits
+  // presentation fields that the actual registry supplies for published records.
+  } as unknown as ComparisonContent
 }
 
 describe("getRelevantComparisonSlugs", () => {
