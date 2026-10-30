@@ -11,6 +11,8 @@ const CONTENT_DIR = path.resolve(process.cwd(), "content")
 // internal-link, and comparison generation revisit the same review profiles thousands of times.
 const reviewCache = new Map<string, ReviewContent | null>()
 const comparisonCache = new Map<string, ComparisonContent | null>()
+let allReviewsCache: ReviewContent[] | null = null
+let allComparisonsCache: ComparisonContent[] | null = null
 let alternativesCache: AlternativeContent[] | null = null
 let bestCache: BestContent[] | null = null
 let statisticsCache: StatisticContent[] | null = null
@@ -614,7 +616,8 @@ export function getReview(slug: string): ReviewContent | null {
 }
 
 export function getAllReviews(): ReviewContent[] {
-  return readDir(path.join(CONTENT_DIR, "reviews"))
+  if (allReviewsCache) return allReviewsCache
+  allReviewsCache = readDir(path.join(CONTENT_DIR, "reviews"))
     .map((file) => getReview(file.replace(/\.json$/, "")))
     .filter((review): review is ReviewContent => Boolean(review))
     .sort((a, b) => {
@@ -625,6 +628,7 @@ export function getAllReviews(): ReviewContent[] {
       if (aRating !== null && bRating !== null && aRating !== bRating) return bRating - aRating
       return a.name.localeCompare(b.name)
     })
+  return allReviewsCache
 }
 
 function sectionWordCount(sections: Array<{ body?: string; items?: string[] }>): number {
@@ -948,9 +952,11 @@ export function getComparison(slug: string): ComparisonContent | null {
   return result
 }
 export function getAllComparisons(): ComparisonContent[] {
-  return readDir(path.join(CONTENT_DIR, "comparisons"))
+  if (allComparisonsCache) return allComparisonsCache
+  allComparisonsCache = readDir(path.join(CONTENT_DIR, "comparisons"))
     .map((f) => getComparison(f.replace(/\.json$/, "")))
     .filter((x): x is ComparisonContent => Boolean(x))
+  return allComparisonsCache
 }
 
 /** Load only comparisons assigned to a category before building expensive derived narratives. */
