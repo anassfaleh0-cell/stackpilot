@@ -16,7 +16,9 @@ export function getRelevantComparisonSlugs(
   limit = 6,
   editorialSlugs: string[] = [],
 ): string[] {
-  const curated = new Set([...(current.relatedComparisons || []), ...editorialSlugs])
+  const articleCurated = new Set(current.relatedComparisons || [])
+  const editorialCurated = new Set(editorialSlugs)
+  const curated = new Set([...articleCurated, ...editorialCurated])
   const output = candidates
     .filter((candidate) => {
       if (!curated.has(candidate.slug)) return false
@@ -37,7 +39,10 @@ export function getRelevantComparisonSlugs(
     })
     .map((candidate) => ({
       slug: candidate.slug,
-      relevance: (curated.has(candidate.slug) ? 100 : 0) +
+      // An explicit link selected for this article should outrank a secondary
+      // editorial suggestion; both outrank uncurated category matches.
+      relevance: (articleCurated.has(candidate.slug) ? 200 : 0) +
+        (editorialCurated.has(candidate.slug) ? 100 : 0) +
         (candidate.category === current.category ? 20 : 0) +
         (candidate.tool1Slug === current.tool1Slug || candidate.tool2Slug === current.tool1Slug ? 4 : 0) +
         (candidate.tool1Slug === current.tool2Slug || candidate.tool2Slug === current.tool2Slug ? 4 : 0),
