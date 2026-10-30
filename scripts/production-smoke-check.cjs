@@ -50,7 +50,7 @@ async function fetchText(pathname) {
 }
 
 async function main() {
-  const paths = ["/", "/ads.txt", "/robots.txt", "/sitemap.xml", "/contact", "/reviews/linear", "/statistics/dataprivacy-software", "/guides/how-to-choose-ai-writing-software", "/research/saas-pricing-benchmark-2026"]
+  const paths = ["/", "/ads.txt", "/robots.txt", "/sitemap.xml", "/contact", "/reviews/linear", "/statistics/dataprivacy-software", "/guides/how-to-choose-ai-writing-software", "/research/saas-pricing-benchmark-2026", "/comparisons/stripe-vs-paddle", "/industries/legal"]
   const results = []
   // Keep production probes sequential to avoid creating a burst of Worker invocations.
   for (const pathname of paths) {
@@ -96,7 +96,27 @@ async function main() {
   const statistics = byPath.get("/statistics/dataprivacy-software")
   const aiWritingGuide = byPath.get("/guides/how-to-choose-ai-writing-software")
   const pricingResearch = byPath.get("/research/saas-pricing-benchmark-2026")
+  const stripePaddle = byPath.get("/comparisons/stripe-vs-paddle")
+  const legal = byPath.get("/industries/legal")
 
+  if (stripePaddle && !stripePaddle.error) {
+    const text = stripePaddle.body.toLowerCase()
+    const accuratePaymentComparison =
+      text.includes("stripe managed payments") &&
+      text.includes("paddle") &&
+      text.includes("merchant of record") &&
+      !text.includes("after evaluating both platforms across dozens of criteria")
+    report("payment comparison evidence", accuratePaymentComparison,
+      "Stripe Managed Payments and Paddle MoR distinction is visible; fabricated benchmark absent")
+  }
+  if (legal && !legal.error) {
+    const text = legal.body.toLowerCase()
+    const accurateLegalGuide = text.includes("matter lifecycle") &&
+      text.includes("trust-account") &&
+      !text.includes("solutions evaluated: 50+")
+    report("legal industry editorial guide", accurateLegalGuide,
+      "matter-specific evaluation is rendered without legacy fabricated scale claims")
+  }
   if (contact && !contact.error) {
     // Scope this check to the page's main content. Shared navigation/footer links
     // can legitimately mention social channels without making them contact methods.
