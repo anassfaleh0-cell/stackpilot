@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs"
 import { BreadcrumbSchema, CollectionPageSchema, ItemListSchema, FAQSchema, WebPageSchema, ArticleSchema, softwareApp } from "@/components/seo/json-ld"
 import { site, categories } from "@/lib/constants"
 import { createMetadata } from "@/lib/metadata"
-import { getAlternative, getAllAlternatives, getContentTitle, getReview } from "@/lib/content/registry"
+import { getAlternative, getAllAlternatives, getContentTitle, getReview, isContentAvailable } from "@/lib/content/registry"
 import { formatDate } from "@/lib/utils"
 import { getRelatedByCategory } from "@/lib/content/internal-links"
 import { InternalLinks, LEGACY_RELATED_TYPES, extendedRelatedItems } from "@/components/content/internal-links"
@@ -84,8 +84,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const alt = getAlternative(slug)
   if (!alt) return {}
   const noindexed = isNoindexed("alternatives", slug)
+  // Count only actual publicly available review targets, not stale imported references.
+  const availableCount = (alt.alternatives || []).filter((item) => isContentAvailable("review", item.slug)).length
   // The shared helper owns title truncation so long titles are not cut mid-word.
-  return createMetadata({ title: alt.title, description: `Compare ${(alt.alternatives || []).length} alternatives to ${alt.toolName} by workflow fit, integrations, migration needs, and current vendor terms. Verify capabilities and pricing directly with vendors.`, path: `/alternatives/${alt.slug}`, ogType: "article", publishedAt: alt.lastUpdated, updatedAt: alt.lastUpdated, articleSection: alt.category, noIndex: noindexed })
+  return createMetadata({ title: alt.title, description: `Compare ${availableCount} alternatives to ${alt.toolName} by workflow fit, integrations, migration needs, and current vendor terms. Verify capabilities and pricing directly with vendors.`, path: `/alternatives/${alt.slug}`, ogType: "article", publishedAt: alt.lastUpdated, updatedAt: alt.lastUpdated, articleSection: alt.category, noIndex: noindexed })
 }
 
 export default async function AlternativePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -94,10 +96,10 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
   if (!alt) notFound()
 
   const originalToolReview = getReview(alt.toolSlug)
-  const pageDescription = `Compare ${(alt.alternatives || []).length} alternatives to ${alt.toolName} by workflow fit, feature requirements, integrations, migration needs, and current vendor terms. Ratings and prices are shown as verified only when supporting evidence can be checked.`
   const visibleAlternatives = (alt.alternatives || [])
-    .filter((item) => Boolean(getReview(item.slug)))
+    .filter((item) => isContentAvailable("review", item.slug))
     .map((item) => ({ ...item, description: alternativeDescription(item) }))
+  const pageDescription = `Compare ${visibleAlternatives.length} alternatives to ${alt.toolName} by workflow fit, feature requirements, integrations, migration needs, and current vendor terms. Ratings and prices are shown as verified only when supporting evidence can be checked.`
   const authoredFaqs = (alt.faqs || []).filter((faq) => !isBoilerplateAlternativeCopy(faq.answer) && !isBoilerplateAlternativeCopy(faq.question))
   const visibleFaqs = authoredFaqs.length >= 3
     ? authoredFaqs
@@ -128,7 +130,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
   const relatedLinks = getRelatedByCategory(alt.category, alt.slug, 4)
   const relatedAlternativePages = (() => {
     const sameCategory = getAllAlternatives()
-      .filter((item) => item.category === alt.category && !isNoindexed("alternatives", item.slug) && !REDIRECTED_ALTERNATIVE_SLUGS.has(item.slug))
+      .filter((item) => item.category === alt.category && isContentAvailable("alternative", item.slug) && !REDIRECTED_ALTERNATIVE_SLUGS.has(item.slug))
       .sort((a, b) => a.slug.localeCompare(b.slug))
     const currentIndex = sameCategory.findIndex((item) => item.slug === alt.slug)
     if (currentIndex < 0 || sameCategory.length < 2) return []
@@ -284,7 +286,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
                   </div>
                 </GlassCard>
 
-                {alt.toolSlug && (
+                {alt.toolSlug && isContentAvailable("review", alt.toolSlug) && (
                   <GlassCard>
                     <div className="p-4">
                       <h3 className="font-semibold mb-2 text-sm">Original Tool</h3>
