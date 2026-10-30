@@ -97,15 +97,26 @@ export default async function BestPage({ params }: { params: Promise<{ slug: str
 
   const linkedPicks = page.picks.filter((p) => getReview(p.toolSlug) !== null)
   const verifiedPickRating = (pick: (typeof page.picks)[number] | undefined): number | null => {
-    if (pick?.ratingVerified === true && typeof pick.rating === "number" && Number.isFinite(pick.rating)) return pick.rating
+    const value = typeof pick?.rating === "number" && Number.isFinite(pick.rating) && pick.rating > 0 && pick.rating <= 5
+      ? pick.rating
+      : null
+    if (value !== null && pick?.ratingVerified === true) return value
     if (!pick?.toolSlug) return null
     const review = getReview(pick.toolSlug)
-    return review?.ratingVerified === true && typeof review.rating === "number" && Number.isFinite(review.rating)
-      ? review.rating
-      : null
+    const independentlyVerifiedReviewScore = review?.ratingVerified === true &&
+      typeof review.rating === "number" && Number.isFinite(review.rating) &&
+      review.rating > 0 && review.rating <= 5
+      ? review.rating : null
+    // A provisional shortlist value cannot inherit a review's verified label if
+    // the two numbers differ. Preserve both records without mislabelling either.
+    if (value !== null) {
+      return independentlyVerifiedReviewScore !== null && Math.abs(value - independentlyVerifiedReviewScore) < 0.001
+        ? value : null
+    }
+    return independentlyVerifiedReviewScore
   }
   const storedPickRating = (pick: (typeof page.picks)[number] | undefined): number | null => {
-    if (typeof pick?.rating === "number" && Number.isFinite(pick.rating) && pick.rating > 0) return pick.rating
+    if (typeof pick?.rating === "number" && Number.isFinite(pick.rating) && pick.rating > 0 && pick.rating <= 5) return pick.rating
     if (!pick?.toolSlug) return null
     const review = getReview(pick.toolSlug)
     return typeof review?.rating === "number" && Number.isFinite(review.rating) && review.rating > 0 ? review.rating : null

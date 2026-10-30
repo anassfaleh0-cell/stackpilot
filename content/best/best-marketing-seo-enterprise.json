@@ -110,6 +110,14 @@
     {
       "question": "How should a buying team run a pilot?",
       "answer": "Use the same target sites, keyword set, reporting tasks, access roles, and acceptance criteria for every vendor. Include at least one technical audit and one recurring reporting cycle, record analyst effort and data gaps, and ask stakeholders to score results before procurement."
+    },
+    {
+      "question": "What should procurement verify about enterprise permissions and API access?",
+      "answer": "Do not assume API access, single sign-on, audit logs, role controls, or export allowances are the same across vendors or plans. Ask each shortlisted supplier for a written matrix covering the exact contract tier, service accounts, data export rights, administrator roles, account deprovisioning, and API usage limits. Ahrefs publishes plan-specific details at https://ahrefs.com/pricing/; Semrush explains its separately scoped enterprise solutions and tailored quote process at https://www.semrush.com/semrush-questions/. Moz requirements should be confirmed with the vendor directly. These links are sources to check, not proof that a feature is included in your quote."
+    },
+    {
+      "question": "How can an SEO lead tell whether a report is actionable?",
+      "answer": "Select one technical issue, one falling query group, and one new content opportunity from a known site. For each candidate platform, ask an analyst to identify the supporting URL-level evidence, create a reproducible ticket, export the required fields, and show a non-specialist what decision follows. Log task completion, manual spreadsheet cleanup, missing fields, and time spent. Compare the outputs to your own Search Console and crawl logs where applicable; vendor traffic estimates are not a substitute for first-party results."
     }
   ],
   "lastUpdated": "2026-10-26",
