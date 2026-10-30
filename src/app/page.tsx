@@ -57,7 +57,7 @@ export default function HomePage() {
     { value: `${reviews.length}+`, label: "Software Reviews" },
     { value: `${comparisons.length}+`, label: "Comparisons" },
     { value: `${guides.length}+`, label: "Guides" },
-    { value: `${allResearch.length}+`, label: "Research Reports" },
+    { value: `${allResearch.length}+`, label: "Research Guides" },
   ]
 
   return (
@@ -100,12 +100,14 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Ad: Below hero banner */}
-      <section className="border-b border-border">
-        <Container className="py-8">
-          <BannerAd className="mx-auto max-w-[728px]" />
-        </Container>
-      </section>
+      {/* Do not reserve a blank ad block while no AdSense slot is configured. */}
+      {process.env.NEXT_PUBLIC_ADSENSE_BANNER_SLOT ? (
+        <section className="border-b border-border">
+          <Container className="py-8">
+            <BannerAd className="mx-auto max-w-[728px]" />
+          </Container>
+        </section>
+      ) : null}
 
       {/* ── Trust Stats ── */}
       <section className="border-b border-border">
@@ -135,7 +137,7 @@ export default function HomePage() {
             <div>
               <Badge variant="default" className="mb-4">Featured Reviews</Badge>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-balance">
-                Curated software picks
+                Featured software reviews
               </h2>
             </div>
             <Link
@@ -185,12 +187,14 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* Ad: Between reviews and guides */}
-      <section className="border-b border-border">
-        <Container className="py-8">
-          <NativeAd className="mx-auto max-w-[300px]" />
-        </Container>
-      </section>
+      {/* Keep the editorial homepage free of empty ad whitespace before approval. */}
+      {process.env.NEXT_PUBLIC_ADSENSE_NATIVE_SLOT ? (
+        <section className="border-b border-border">
+          <Container className="py-8">
+            <NativeAd className="mx-auto max-w-[300px]" />
+          </Container>
+        </section>
+      ) : null}
 
       <BrandDivider />
 
@@ -404,9 +408,9 @@ export default function HomePage() {
           <Container>
             <div className="flex items-end justify-between mb-12">
               <div>
-                <Badge variant="default" className="mb-4">Original Research</Badge>
+                <Badge variant="default" className="mb-4">Research & Buyer Guides</Badge>
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-balance">
-                  Data-driven research
+                  Evidence-led buying research
                 </h2>
               </div>
               <Link
