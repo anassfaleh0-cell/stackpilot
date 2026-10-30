@@ -10,6 +10,10 @@ import { isRetiredComparisonSlug } from "@/lib/sitemap/retired-comparisons"
 import { REDIRECTED_ALTERNATIVE_SLUGS, REDIRECTED_BEST_SLUGS, REDIRECTED_GUIDE_SLUGS, REDIRECTED_REVIEW_SLUGS } from "@/lib/sitemap/redirected-content"
 import Link from "next/link"
 
+// The public HTML sitemap is large; build it once rather than recalculate
+// every content record on each Worker request.
+export const dynamic = "force-static"
+
 export const metadata = createMetadata({
   title: "HTML Sitemap — Public Content Directory",
   description: "Browse PilotStack’s public software content, tool pages, author profiles, and editorial resources.",
