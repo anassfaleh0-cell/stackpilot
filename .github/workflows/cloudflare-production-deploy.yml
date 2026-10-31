@@ -143,7 +143,7 @@ jobs:
           grep -F 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0' /tmp/pilotstack-response >/dev/null || curl --silent --show-error --fail --retry 4 --retry-all-errors --retry-delay 5 https://pilotstack.online/ads.txt | grep -F 'google.com, pub-6523926892521982, DIRECT, f08c47fec0942fa0'
           # Check canonical content URLs previously observed returning HTTP 503.
           # Use the prerender cache; never add synthetic cache-busting query strings.
-          for path in /best/best-marketing-seo-startups /blog/accounting-software-cost-2026 /use-cases/best-crm-for-startups /statistics/sports-software; do
+          for path in /best/best-marketing-seo-startups /blog/accounting-software-cost-2026 /use-cases/best-crm-for-startups /statistics/sports-software /comparisons/shopify-vs-bigcommerce /best/best-video-conferencing; do
             code="$(fetch_status "https://pilotstack.online$path" /tmp/pilotstack-content-response)"
             printf '%s %s\n' "$code" "$path"
             test "$code" = "200"
@@ -180,6 +180,14 @@ jobs:
             exit 1
           fi
           echo "PASS live review content checks: Xero and Notion"
+          # Worker-native response caching avoids expensive Next.js execution on repeat
+          # GET/HEAD requests. Log cache policy on public static routes for diagnostics.
+          for path in /reviews/airtable /comparisons/shopify-vs-bigcommerce /best/best-video-conferencing; do
+            echo "Cache diagnostics for $path"
+            curl --silent --show-error --location --head --max-time 25 "https://pilotstack.online$path" |
+              grep -Ei '^(HTTP/|cache-control:|cdn-cache-control:|cf-cache-status:|age:|vary:|content-type:)' || true
+          done
+
           # production-smoke-check.cjs intentionally defaults to localhost and is for local runs;
           # the live production endpoints above are already checked here. Do not invoke the local-only
           # smoke script in this deployment job, where no localhost server is running.
